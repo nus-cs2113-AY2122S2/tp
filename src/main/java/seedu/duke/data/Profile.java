@@ -9,7 +9,9 @@ public class Profile {
     private int activityCount;
 
     public Profile() {
-        
+        this.sessionList = new ArrayList<>();
+        sessionIdTracker = 0;
+        activityCount = 0;
     }
 
     public ArrayList<Session> getSessionList() {
