@@ -1,7 +1,7 @@
 # About us
 
 Display |   Name   | Github Profile | Portfolio 
---------| Sean Ho|[Github](https://github.com/SeanHoWB) | [Portfolio](docs/team/seanho.md)
+--------| Sean Ho Wen Bin|[Github](https://github.com/SeanHoWB) | [Portfolio](docs/team/seanho.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | Don Joe  | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
