@@ -15,7 +15,7 @@ public class Duke {
         new Duke().run();
     }
 
-    /** Sets up the required objects */
+    /** Sets up the required objects for application.   */
     public Duke() {
         ui = new TextUI();
         profile = new Profile();
