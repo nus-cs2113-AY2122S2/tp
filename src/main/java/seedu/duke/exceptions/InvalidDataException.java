@@ -6,8 +6,8 @@ package seedu.duke.exceptions;
  * @author Saurav
  */
 public class InvalidDataException extends Exception {
-    private String message;
-    private Throwable cause;
+    private final String message;
+    private final Throwable cause;
 
     /**
      * Constructor that includes a message and an exception.
