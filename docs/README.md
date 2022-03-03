@@ -1,4 +1,4 @@
-# Duke
+# IHospital
 
 {Give product intro here}
 
