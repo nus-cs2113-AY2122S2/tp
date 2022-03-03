@@ -2,7 +2,7 @@
 
 Display |   Name   | Github Profile | Portfolio 
 --------|:--------:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+![](https://avatars.githubusercontent.com/u/95752177?s=400&v=4) | Yan Tianai | [Github](https://github.com/TianaiYan) | [Portfolio](docs/team/johndoe.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
 ![](https://avatars.githubusercontent.com/u/69451253?s=400&v=4) | Musfirah Wani | [Github](https://github.com/Musfirahe0556596) | [Portfolio](docs/team/johndoe.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | Emily Sim | [Github](https://github.com/emilysim00) | [Portfolio](docs/team/emily.md)
