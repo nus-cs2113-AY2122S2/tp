@@ -20,4 +20,14 @@ public class InvalidDataException extends Exception {
         this.message = message;
         this.cause = cause;
     }
+
+    /**
+     * Constructor that includes a message only.
+     * Use this when no exception needs to be stored inside this one.
+     * @param message a String with a descriptive message.
+     */
+    public InvalidDataException(String message) {
+        this.message = message;
+        this.cause = null;
+    }
 }
