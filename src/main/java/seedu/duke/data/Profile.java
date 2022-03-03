@@ -3,7 +3,7 @@ package seedu.duke.data;
 import java.util.ArrayList;
 
 /**
- * Represents a Profile for the SplitLah application
+ * Represents a Profile for the SplitLah application.
  */
 public class Profile {
     private ArrayList<Session> sessionList;
@@ -37,16 +37,14 @@ public class Profile {
 
     /**
      * Updates the new sessionIdTracker.
-     *
-     * Assumption: when this function is called,
-     * a new session object is created without errors.
+     * Assumption: A new session object is created without errors.
      */
     public void updateSessionIdTracker() {
         this.sessionIdTracker += 1;
     }
 
     /**
-     * Returns a new activity id for activity object to be created
+     * Returns a new activity id for activity object to be created.
      * @return The new activity id as int.
      */
     public int getNewActivityIdTracker() {
@@ -55,9 +53,7 @@ public class Profile {
 
     /**
      * Updates the new activityIdTracker.
-     *
-     * Assumption: when this function is called,
-     * a new activity object is created without errors.
+     * Assumption: A new activity object is created without errors.
      */
     public void updateActivityIdTracker() {
         this.activityIdTracker += 1;
