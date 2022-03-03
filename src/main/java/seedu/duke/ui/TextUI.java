@@ -16,6 +16,11 @@ public class TextUI {
         this.out = out;
     }
 
+    public TextUI() {
+        in = new Scanner(System.in);
+        out = new PrintStream(System.out);
+    }
+
     public void printlnMessage(String message) {
         out.println(message);
     }
