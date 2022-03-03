@@ -8,7 +8,7 @@ public class Session {
     private String sessionName;
     private int sessionId;
     private LocalDate dateCreated;
-    private ArrayList<Activity> activityList;
-    private ArrayList<Person> personList;
-    private Group group;
+    // private ArrayList<Activity> activityList;
+    // private ArrayList<Person> personList;
+    // private Group group;
 }
