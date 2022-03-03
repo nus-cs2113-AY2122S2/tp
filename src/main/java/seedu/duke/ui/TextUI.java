@@ -17,4 +17,8 @@ public class TextUI {
         out.println(message);
     }
 
+    public String readNextLine() {
+        return in.nextLine();
+    }
+
 }
