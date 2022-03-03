@@ -13,4 +13,8 @@ public class TextUI {
         this.out = out;
     }
 
+    public void printlnMessage(String message) {
+        out.println(message);
+    }
+
 }
