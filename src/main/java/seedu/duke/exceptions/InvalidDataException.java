@@ -13,7 +13,7 @@ public class InvalidDataException extends Exception {
      * Constructor that includes a message and an exception.
      * Use this to store another exception (such as a Java exception) inside this exception to access it later.
      *
-     * @param message a String with a descriptive message.
+     * @param message A descriptive message of the error as a string.
      * @param cause   a Throwable to be stored in this exception.
      */
     public InvalidDataException(String message, Throwable cause) {
