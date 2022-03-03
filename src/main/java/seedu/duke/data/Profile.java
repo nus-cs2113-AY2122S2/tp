@@ -7,4 +7,9 @@ public class Profile {
     private ArrayList<Session> sessionList;
     private int sessionIdTracker;
     private int activityCount;
+
+    public Profile() {
+        
+    }
+
 }
