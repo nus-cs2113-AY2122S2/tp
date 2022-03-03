@@ -33,14 +33,14 @@ public class TextUI {
 
     public void printWelcome() {
         printDivider();
-        out.println("_____       _ _ _   _       _     ");
-        out.println("/  ___|     | (_) | | |     | |    ");
-        out.println("\\ `--. _ __ | |_| |_| | __ _| |__ ");
-        out.println(" `--. \\ '_ \\| | | __| |/ _` | '_ \\ ");
+        out.println("_____       _ _ _   _       _");
+        out.println("/  ___|     | (_) | | |     | |");
+        out.println("\\ `--. _ __ | |_| |_| | __ _| |__");
+        out.println(" `--. \\ '_ \\| | | __| |/ _` | '_ \\");
         out.println("/\\__/ / |_) | | | |_| | (_| | | | |");
         out.println("\\____/| .__/|_|_|\\__|_|\\__,_|_| |_|");
-        out.println("      | |                          ");
-        out.println("      |_|                          ");
+        out.println("      | |");
+        out.println("      |_|");
         out.println("Welcome to Splitlah!");
         printDivider();
     }
@@ -51,14 +51,14 @@ public class TextUI {
 
     public void printFarewell() {
         printDivider();
-        out.println("_____       _ _ _   _       _     ");
-        out.println("/  ___|     | (_) | | |     | |    ");
-        out.println("\\ `--. _ __ | |_| |_| | __ _| |__ ");
-        out.println(" `--. \\ '_ \\| | | __| |/ _` | '_ \\ ");
+        out.println("_____       _ _ _   _       _");
+        out.println("/  ___|     | (_) | | |     | |");
+        out.println("\\ `--. _ __ | |_| |_| | __ _| |__");
+        out.println(" `--. \\ '_ \\| | | __| |/ _` | '_ \\");
         out.println("/\\__/ / |_) | | | |_| | (_| | | | |");
         out.println("\\____/| .__/|_|_|\\__|_|\\__,_|_| |_|");
-        out.println("      | |                          ");
-        out.println("      |_|                          ");
+        out.println("      | |");
+        out.println("      |_|");
         out.println("Goodbye!");
         printDivider();
     }

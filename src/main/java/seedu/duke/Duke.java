@@ -1,21 +1,49 @@
 package seedu.duke;
 
-import java.util.Scanner;
+import seedu.duke.data.Profile;
+import seedu.duke.ui.TextUI;
 
+/**
+ * Entry point of the SplitLah application.
+ * Initializes SplitLah and starts interacting with the user.
+ */
 public class Duke {
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+    TextUI ui;
+    Profile profile;
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
+    /** Sets up the required objects for application.   */
+    public Duke() {
+        ui = new TextUI();
+        profile = new Profile();
+    }
+
+    /** Runs the program until it terminates.  */
+    private void run() {
+        showWelcomeMessage();
+        runProcessLoop();
+        showFarewellMessage();
+    }
+
+    /** Prints welcome message. */
+    private void showWelcomeMessage() {
+        ui.printWelcome();
+    }
+
+    /** Shows farewell message and exits the program. */
+    private void showFarewellMessage() {
+        ui.printFarewell();
+        System.exit(0);
+    }
+
+    /** Reads the user input until the user enters the bye command.  */
+    private void runProcessLoop() {
+        String userInput;
+        do {
+            userInput = ui.readNextLine();
+        } while (userInput.contains("Bye"));
     }
 }
