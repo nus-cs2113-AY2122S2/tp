@@ -30,4 +30,12 @@ public class InvalidDataException extends Exception {
         this.message = message;
         this.cause = null;
     }
+
+    /**
+     * Default constructor. No message or exception will be stored.
+     */
+    public InvalidDataException() {
+        this.message = null;
+        this.cause = null;
+    }
 }
