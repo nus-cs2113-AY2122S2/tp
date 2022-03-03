@@ -15,8 +15,8 @@ public class Profile {
      */
     public Profile() {
         this.sessionList = new ArrayList<>();
-        sessionIdTracker = 0;
-        activityIdTracker = 0;
+        sessionIdTracker = 1;
+        activityIdTracker = 1;
     }
 
     /**
