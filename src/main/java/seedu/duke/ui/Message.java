@@ -5,5 +5,5 @@ package seedu.duke.ui;
  * @author Saurav
  */
 public abstract class Message {
-    public static String ERRORCODE_EXAMPLE = "";
+    public static final String ERRORCODE_EXAMPLE = "";
 }
