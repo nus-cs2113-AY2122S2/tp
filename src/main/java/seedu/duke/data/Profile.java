@@ -29,35 +29,25 @@ public class Profile {
 
     /**
      * Returns a new session id for session object to be created.
+     * Assumption: Function is called when,
+     * a new session object is created without errors.
      * @return The new session id as int.
      */
     public int getNewSessionId() {
-        return sessionIdTracker + 1;
-    }
-
-    /**
-     * Updates the new sessionIdTracker.
-     * Assumption: A new session object is created without errors.
-     */
-    public void updateSessionIdTracker() {
-        this.sessionIdTracker += 1;
+        int newSessionId = sessionIdTracker;
+        sessionIdTracker += 1;
+        return newSessionId;
     }
 
     /**
      * Returns a new activity id for activity object to be created.
+     * Assumption: Function is called when,
+     * a new activity object is created without errors.
      * @return The new activity id as int.
      */
-    public int getNewActivityIdTracker() {
-        return activityIdTracker + 1;
+    public int getNewActivityId() {
+        int newActivityId = activityIdTracker;
+        activityIdTracker += 1;
+        return newActivityId;
     }
-
-    /**
-     * Updates the new activityIdTracker.
-     * Assumption: A new activity object is created without errors.
-     */
-    public void updateActivityIdTracker() {
-        this.activityIdTracker += 1;
-    }
-
-
 }
