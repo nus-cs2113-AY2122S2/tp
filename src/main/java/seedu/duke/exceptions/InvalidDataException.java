@@ -38,4 +38,12 @@ public class InvalidDataException extends Exception {
         this.message = null;
         this.cause = null;
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public Throwable getCause() {
+        return cause;
+    }
 }
