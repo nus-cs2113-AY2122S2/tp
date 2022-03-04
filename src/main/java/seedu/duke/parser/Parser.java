@@ -12,6 +12,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents an interpreter that interprets different parts of the user input
  * into data that can be understood by the program.
+ * 
  * @author Warren
  */
 public class Parser {
