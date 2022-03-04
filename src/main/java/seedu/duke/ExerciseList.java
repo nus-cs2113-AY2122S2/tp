@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ExerciseList {
     private static final String EXERCISE_FILE_PATH = "exercises/Exercises.txt";
-    private static final File exerciseFile = new File(EXERCISE_FILE_PATH);
+    private static final File EXERCISE_FILE = new File(EXERCISE_FILE_PATH);
     private final ArrayList<String> exercises = new ArrayList<>();
     private int numberOfExercises = 0;
 
@@ -16,7 +16,7 @@ public class ExerciseList {
      * @throws FileNotFoundException when the local file is missing.
      */
     protected void loadExercises() throws FileNotFoundException {
-        Scanner scanner = new Scanner(exerciseFile);
+        Scanner scanner = new Scanner(EXERCISE_FILE);
         while(scanner.hasNextLine()) {
             var exercise = scanner.nextLine();
             exercises.add(exercise);
