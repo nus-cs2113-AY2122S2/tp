@@ -22,4 +22,20 @@ public class ActivityCost {
         this.cost = cost;
     }
 
+    public int getActivityId() {
+        return activityId;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setActivityId(int activityId) {
+        this.activityId = activityId;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
 }
