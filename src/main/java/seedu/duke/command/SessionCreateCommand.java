@@ -1,4 +1,3 @@
-package seedu.duke.command;public class SessionCreateCommand {
 package seedu.duke.command;
 
 import seedu.duke.data.Profile;
@@ -12,6 +11,15 @@ public class SessionCreateCommand extends Command {
     private String[] personNames;
     private LocalDate sessionDate;
 
+    public String getSessionName() {
+        return sessionName;
+    }
+    public String[] getPersonNames() {
+        return personNames;
+    }
+    public LocalDate getSessionDate() {
+        return sessionDate;
+    }
     @Override
     public void run(TextUI ui, Profile profile) {
 
