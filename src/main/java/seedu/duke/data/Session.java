@@ -11,4 +11,19 @@ public class Session {
     // private ArrayList<Activity> activityList;
     // private ArrayList<Person> personList;
     // private Group group;
+    public String getSessionName() {
+        return sessionName;
+    }
+
+    public int getSessionId() {
+        return sessionId;
+    }
+
+    public LocalDate getDateCreated() {
+        return dateCreated;
+    }
+
+    public String getDateString() {
+        return dateCreated.getDayOfMonth() + " " + dateCreated.getMonth() + " " + dateCreated.getYear();
+    }
 }
