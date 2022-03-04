@@ -13,8 +13,8 @@ public class ActivityCost {
 
     /**
      * Constructs an ActivityCost object.
-     *
      * Assumption: Every field is non-negative.
+     *
      * @param activityId int representing the activityId.
      * @param cost double representing activity cost.
      * @throws InvalidDataException if activityId or cost are negative.
