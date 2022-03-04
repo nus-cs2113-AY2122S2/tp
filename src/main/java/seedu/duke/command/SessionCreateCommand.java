@@ -11,6 +11,13 @@ public class SessionCreateCommand extends Command {
     private String[] personNames;
     private LocalDate sessionDate;
 
+    // Javadocs to be completed when implementing command.
+    public SessionCreateCommand(String sessionName, String[] personNames, LocalDate date) {
+        this.sessionName = sessionName;
+        this.personNames = personNames;
+        this.sessionDate = date;
+    }
+
     public String getSessionName() {
         return sessionName;
     }
