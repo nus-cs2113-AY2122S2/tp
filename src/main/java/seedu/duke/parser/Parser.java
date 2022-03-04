@@ -137,4 +137,19 @@ public class Parser {
             return LocalDate.now();
         }
     }
+
+    public static double parseTotalCost(String commandArgs) throws InvalidFormatException {
+        String argument = getArgumentFromDelimiter(commandArgs, TOTAL_COST_DELIMITER);
+        return parseCostFromString(argument, TOTAL_COST_DELIMITER);
+    }
+
+    public static double[] parseCostList(String commandArgs) throws InvalidFormatException {
+        String argument = getArgumentFromDelimiter(commandArgs, COST_LIST_DELIMITER);
+        String[] costStrings = argument.split(REGEX_WHITESPACES_DELIMITER);
+        double[] costs = new double[costStrings.length];
+        for (int i = 0; i < costStrings.length; i++) {
+            costs[i] = parseCostFromString(costStrings[i], COST_LIST_DELIMITER);
+        }
+        return costs;
+    }
 }
