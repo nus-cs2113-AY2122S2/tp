@@ -14,6 +14,11 @@ public class Person {
     private double totalCost;
     private ArrayList<ActivityCost> activityCostList;
 
+    /**
+     * Constructs a Person.
+     * @param name Name of the Person.
+     * @throws InvalidDataException if name is empty or null.
+     */
     public Person(String name) throws InvalidDataException {
         if (name == null || name.isEmpty()) {
             throw new InvalidDataException("Name cannot be empty.");
