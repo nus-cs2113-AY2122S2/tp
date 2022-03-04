@@ -2,10 +2,22 @@ package seedu.duke.ui;
 
 /**
  * Contains hardcoded strings such as error codes.
+ *
  * @author Saurav
  */
 public abstract class Message {
     public static final String ERRORCODE_EXAMPLE = "";
+    public static final String LOGO = " $$$$$$\\            $$\\ $$\\   $$\\     $$\\           $$\\\n"
+            + "$$  $$\\           $$ |\\|  $$ |    $$ |          $$ |\n"
+            + "$$ /  \\__| $$$$$$\\  $$ |$$\\ $$$$$$\\   $$ | $$$$$$\\  $$$$$$$\\\n"
+            + "\\$$$$$$\\  $$  $$\\ $$ |$$ |\\_$$  _|  $$ | \\____$$\\ $$  __$$\\\n"
+            + " \\____$$\\ $$ /  $$ |$$ |$$ |  $$ |    $$ | $$$$$$$ |$$ |  $$ |\n"
+            + "$$\\   $$ |$$ |  $$ |$$ |$$ |  $$ |$$\\ $$ |$$  __$$ |$$ |  $$ |\n"
+            + "\\$$$$$$  |$$$$$$$  |$$ |$$ |  \\$$$$  |$$ |\\$$$$$$$ |$$ |  $$ |\n"
+            + " \\______/ $$  ____/ \\|\\__|   \\____/ \\__| \\_______|\\__|  \\__|\n"
+            + "          $$ |\n"
+            + "          $$ |\n"
+            + "          \\__|";
     
     public static final String ERROR_PARSER_DELIMITER_NOT_FOUND =
             "Please include the following delimiter in your input: ";
