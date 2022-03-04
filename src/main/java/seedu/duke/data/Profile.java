@@ -21,6 +21,7 @@ public class Profile {
 
     /**
      * Returns the list of session stored in the profile.
+     *
      * @return The ArrayList of sessions.
      */
     public ArrayList<Session> getSessionList() {
@@ -31,6 +32,7 @@ public class Profile {
      * Returns a new session id for session object to be created.
      * Assumption: Function is called when,
      * a new session object is created without errors.
+     *
      * @return The new session id as int.
      */
     public int getNewSessionId() {
@@ -43,6 +45,7 @@ public class Profile {
      * Returns a new activity id for activity object to be created.
      * Assumption: Function is called when,
      * a new activity object is created without errors.
+     *
      * @return The new activity id as int.
      */
     public int getNewActivityId() {
