@@ -13,8 +13,9 @@ public class ActivityCost {
 
     /**
      * Constructs an ActivityCost object.
-     * @param activityId int representing the activityId. Must not be negative.
-     * @param cost double representing activity cost. Must not be negative.
+     * Assumption: Every field is non-negative.
+     * @param activityId int representing the activityId.
+     * @param cost double representing activity cost.
      * @throws InvalidDataException if activityId or cost are negative.
      */
     public ActivityCost(int activityId, double cost) throws InvalidDataException {
@@ -30,7 +31,8 @@ public class ActivityCost {
 
     /**
      * Constructs an ActivityCost object and sets cost to 0 if only activityId is supplied.
-     * @param activityId int representing the activityId. Must not be negative.
+     * Assumption: Every field is non-negative.
+     * @param activityId int representing the activityId.
      * @throws InvalidDataException if activityId is negative.
      */
     public ActivityCost(int activityId) throws InvalidDataException {
