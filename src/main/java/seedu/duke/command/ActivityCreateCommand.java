@@ -3,6 +3,9 @@ package seedu.duke.command;
 import seedu.duke.data.Profile;
 import seedu.duke.ui.TextUI;
 
+/**
+ * Represents an ActivityCreateCommand which has a run method that creates an activity.
+ */
 public class ActivityCreateCommand extends Command {
 
     public static final String COMMAND_TEXT = "activity /create";
@@ -22,6 +25,18 @@ public class ActivityCreateCommand extends Command {
     private int gst;
     private int serviceCharge;
 
+    /**
+     * Constructor to create a ActivityCreateCommand object.
+     * 
+     * @param sessionId Ths id of the session.
+     * @param activityName The name of the activity.
+     * @param cost The total cost of the activity.
+     * @param payer The name of the person who paid for the activity.
+     * @param involvedList The names of the persons who are involved in the activity.
+     * @param costList The respective costs of each person involved in the activity.
+     * @param gst The gst to be included for the cost of the activity.
+     * @param serviceCharge The service charge to be included for the cost of the activity.
+     */
     public ActivityCreateCommand(int sessionId, String activityName, double cost, String payer, String[] involvedList,
                                  double[] costList, int gst, int serviceCharge) {
         this.sessionId = sessionId;
