@@ -3,6 +3,7 @@ package seedu.duke.exceptions;
 /**
  * Data-related errors (such as unexpected null objects) should throw
  * this exception.
+ *
  * @author Saurav
  */
 public class InvalidDataException extends Exception {
@@ -24,6 +25,7 @@ public class InvalidDataException extends Exception {
     /**
      * Constructor that includes a message only.
      * Use this when no exception needs to be stored inside this one.
+     *
      * @param message a String with a descriptive message.
      */
     public InvalidDataException(String message) {

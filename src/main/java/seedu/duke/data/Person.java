@@ -16,6 +16,7 @@ public class Person {
 
     /**
      * Constructs a Person object.
+     *
      * @param name Name of the Person.
      */
     public Person(String name) {
@@ -24,6 +25,7 @@ public class Person {
 
     /**
      * Constructs an activityCost object and adds it to the list of activityCosts.
+     *
      * @param activityId the activityId.
      * @param cost the cost of the activity.
      * @throws InvalidDataException if the activityCost cannot be created from the given parameters.

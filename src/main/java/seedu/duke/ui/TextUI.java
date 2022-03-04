@@ -7,6 +7,7 @@ import java.util.Scanner;
 /**
  * Handles reading from and writing to the user interface.
  * Instantiate a TextUI object to create a user interface.
+ *
  * @author Saurav
  */
 public class TextUI {
