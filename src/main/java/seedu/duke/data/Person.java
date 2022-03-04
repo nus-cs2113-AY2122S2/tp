@@ -16,4 +16,12 @@ public class Person {
         this.name = name;
     }
 
+    public void addActivityCost(int activityId, double cost) throws InvalidDataException {
+        ActivityCost activityCost = new ActivityCost(activityId, cost);
+        activityCostList.add(activityCost);
+        totalCost += activityCost.getCost();
+    }
+
+
+
 }
