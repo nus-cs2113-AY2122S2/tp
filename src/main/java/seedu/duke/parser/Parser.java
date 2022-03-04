@@ -111,4 +111,14 @@ public class Parser {
     public static String parsePayer(String commandArgs) throws InvalidFormatException {
         return getArgumentFromDelimiter(commandArgs, PAYER_DELIMITER);
     }
+    
+    public static int parseSessionId(String commandArgs) throws InvalidFormatException {
+        String argument = getArgumentFromDelimiter(commandArgs, SESSION_ID_DELIMITER);
+        return parseIntFromString(argument, SESSION_ID_DELIMITER);
+    }
+
+    public static int parseActivityId(String commandArgs) throws InvalidFormatException {
+        String argument = getArgumentFromDelimiter(commandArgs, ACTIVITY_ID_DELIMITER);
+        return parseIntFromString(argument, ACTIVITY_ID_DELIMITER);
+    }
 }
