@@ -33,7 +33,7 @@ public class TextUI {
 
     public void printWelcome() {
         printDivider();
-        out.println("_____       _ _ _   _       _");
+        out.println(" _____       _ _ _   _       _");
         out.println("/  ___|     | (_) | | |     | |");
         out.println("\\ `--. _ __ | |_| |_| | __ _| |__");
         out.println(" `--. \\ '_ \\| | | __| |/ _` | '_ \\");
