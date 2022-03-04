@@ -1,5 +1,7 @@
 package seedu.duke.parser;
 
+import seedu.duke.ui.Message;
+
 /**
  * Represents an interpreter that interprets different parts of the user input
  * into data that can be understood by the program.
@@ -23,4 +25,13 @@ public class Parser {
     // MISC CONSTANTS
     private static final String NEXT_DELIMITER_INDICATOR = " /";
     private static final int INVALID_INDEX_INDICATOR = -1;
+
+    // SUPPORTING FUNCTIONS
+    private static String getMissingDelimiterErrorMessage(String delimiter) {
+        return Message.ERROR_PARSER_DELIMITER_NOT_FOUND + delimiter;
+    }
+    
+    private static String getMissingArgumentErrorMessage(String delimiter) {
+        return Message.ERROR_PARSER_DELIMITER_NOT_FOUND + delimiter;
+    }
 }
