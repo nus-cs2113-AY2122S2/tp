@@ -8,7 +8,15 @@ public abstract class Message {
     public static final String ERRORCODE_EXAMPLE = "";
     
     public static final String ERROR_PARSER_DELIMITER_NOT_FOUND =
-            "The following delimiter is not found in your input: ";
+            "Please include the following delimiter in your input: ";
     public static final String ERROR_PARSER_MISSING_ARGUMENT =
-            "Your input is missing an argument after the delimiter: ";
+            "Please include an argument after the following delimiter: ";
+    public static final String ERROR_PARSER_NON_INTEGER_ARGUMENT =
+            "Please enter a valid integer after the following delimiter: ";
+    public static final String ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT =
+            "Please enter a valid monetary value(s) after the following delimiter: ";
+    public static final String ERROR_PARSER_INVALID_GST_SURCHARGE =
+            "Please enter a valid GST surcharge in % after the delimiter: ";
+    public static final String ERROR_PARSER_INVALID_SERVICE_CHARGE =
+            "Please enter a valid service charge in % after the delimiter: ";
 }
