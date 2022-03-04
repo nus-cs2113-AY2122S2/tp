@@ -3,6 +3,9 @@ package seedu.duke.parser;
 import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.ui.Message;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents an interpreter that interprets different parts of the user input
  * into data that can be understood by the program.
@@ -120,5 +123,18 @@ public class Parser {
     public static int parseActivityId(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, ACTIVITY_ID_DELIMITER);
         return parseIntFromString(argument, ACTIVITY_ID_DELIMITER);
+    }
+
+    public static LocalDate parseLocalDate(String commandArgs) throws InvalidFormatException {
+        if (!delimiterExists(commandArgs, DATE_DELIMITER)) {
+            throw new InvalidFormatException(getMissingDelimiterErrorMessage(DATE_DELIMITER));
+        }
+        
+        try {
+            String argument = getArgumentFromDelimiter(commandArgs, DATE_DELIMITER);
+            return LocalDate.parse(argument);
+        } catch (InvalidFormatException | DateTimeParseException exception) {
+            return LocalDate.now();
+        }
     }
 }
