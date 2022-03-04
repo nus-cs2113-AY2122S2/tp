@@ -20,7 +20,7 @@ public class SessionSummaryCommand extends Command {
      * summary of expenditure for the session specified by the session identifier.
      *      
      * @param ui      A user interface to which the command will read its input from and print its output to.
-     * @param profile A Profile object from which Session, Activity and other objects are used to run
+     * @param profile A Profile object from which Session, Activity and other objects are used to run the command.
      */
     @Override
     public void run(TextUI ui, Profile profile) {
