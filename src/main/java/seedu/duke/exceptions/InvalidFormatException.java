@@ -1,4 +1,5 @@
 package seedu.duke.exceptions;
+
 /**
  * Format-related errors (such as invalid input) should throw
  * this exception.
