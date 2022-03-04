@@ -25,17 +25,38 @@ public class Parser {
 
     // MISC CONSTANTS
     private static final String NEXT_DELIMITER_INDICATOR = " /";
+    private static final String REGEX_WHITESPACES_DELIMITER = "\\s+";
     private static final int INVALID_INDEX_INDICATOR = -1;
+    private static final int COMMAND_WITH_ARGS_TOKEN_COUNT = 3;
+    private static final int MINIMUM_SURCHARGE_PERCENT = 0;
+    private static final int MAXIMUM_SURCHARGE_PERCENT = 100;
 
-    // SUPPORTING FUNCTIONS
+    // ERROR REPORTING FUNCTIONS
     private static String getMissingDelimiterErrorMessage(String delimiter) {
         return Message.ERROR_PARSER_DELIMITER_NOT_FOUND + delimiter;
     }
     
     private static String getMissingArgumentErrorMessage(String delimiter) {
-        return Message.ERROR_PARSER_DELIMITER_NOT_FOUND + delimiter;
+        return Message.ERROR_PARSER_MISSING_ARGUMENT + delimiter;
     }
     
+    private static String getNonIntegerErrorMessage(String delimiter) {
+        return Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + delimiter;
+    }
+    
+    private static String getNonMonetaryErrorMessage(String delimiter) {
+        return Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + delimiter;
+    }
+    
+    private static String getInvalidGSTErrorMessage(String delimiter) {
+        return Message.ERROR_PARSER_INVALID_GST_SURCHARGE + delimiter;
+    }
+    
+    private static String getInvalidServiceChargeErrorMessage(String delimiter) {
+        return Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + delimiter;
+    }
+
+    // SUPPORTING FUNCTIONS
     private static String getArgumentFromDelimiter(String commandArgs, String delimiter) throws InvalidFormatException {
         int delimiterIndex = commandArgs.indexOf(delimiter);
         if (delimiterIndex == INVALID_INDEX_INDICATOR) {
