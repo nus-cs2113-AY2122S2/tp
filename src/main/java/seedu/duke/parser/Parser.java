@@ -95,6 +95,11 @@ public class Parser {
             throw new InvalidFormatException(getNonMonetaryErrorMessage(delimiter));
         }
     }
+
+    private static boolean delimiterExists(String commandArgs, String delimiter) {
+        int delimiterIndex = commandArgs.indexOf(delimiter);
+        return delimiterIndex != INVALID_INDEX_INDICATOR;
+    }
     
     // MAIN PUBLIC PARSING FUNCTIONS
     public static String parseName(String commandArgs) throws InvalidFormatException {
