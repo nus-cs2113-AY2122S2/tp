@@ -76,4 +76,20 @@ public class Parser {
         }
         return output;
     }
+
+    private static int parseIntFromString(String input, String delimiter) throws InvalidFormatException {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException exception) {
+            throw new InvalidFormatException(getNonIntegerErrorMessage(delimiter));
+        }
+    }
+    
+    private static double parseCostFromString(String input, String delimiter) throws InvalidFormatException {
+        try {
+            return Double.parseDouble(input);
+        } catch (NumberFormatException exception) {
+            throw new InvalidFormatException(getNonMonetaryErrorMessage(delimiter));
+        }
+    }
 }
