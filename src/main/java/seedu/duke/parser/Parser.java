@@ -51,12 +51,12 @@ public class Parser {
         return Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + delimiter;
     }
     
-    private static String getInvalidGstErrorMessage(String delimiter) {
-        return Message.ERROR_PARSER_INVALID_GST_SURCHARGE + delimiter;
+    private static String getInvalidGstErrorMessage() {
+        return Message.ERROR_PARSER_INVALID_GST_SURCHARGE + GST_DELIMITER;
     }
     
-    private static String getInvalidServiceChargeErrorMessage(String delimiter) {
-        return Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + delimiter;
+    private static String getInvalidServiceChargeErrorMessage() {
+        return Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + SERVICE_CHARGE_DELIMITER;
     }
 
     // SUPPORTING FUNCTIONS
@@ -166,7 +166,7 @@ public class Parser {
         String argument = getArgumentFromDelimiter(commandArgs, GST_DELIMITER);
         int gst = parseIntFromString(argument, GST_DELIMITER);
         if (gst < MINIMUM_SURCHARGE_PERCENT || gst > MAXIMUM_SURCHARGE_PERCENT) {
-            throw new InvalidFormatException(getInvalidGstErrorMessage(GST_DELIMITER));
+            throw new InvalidFormatException(getInvalidGstErrorMessage());
         }
         return gst;
     }
@@ -179,7 +179,7 @@ public class Parser {
         String argument = getArgumentFromDelimiter(commandArgs, SERVICE_CHARGE_DELIMITER);
         int serviceCharge = parseIntFromString(argument, SERVICE_CHARGE_DELIMITER);
         if (serviceCharge < MINIMUM_SURCHARGE_PERCENT || serviceCharge > MAXIMUM_SURCHARGE_PERCENT) {
-            throw new InvalidFormatException(getInvalidServiceChargeErrorMessage(SERVICE_CHARGE_DELIMITER));
+            throw new InvalidFormatException(getInvalidServiceChargeErrorMessage());
         }
         return serviceCharge;
     }
