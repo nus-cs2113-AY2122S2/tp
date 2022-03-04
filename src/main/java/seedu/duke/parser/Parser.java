@@ -1,5 +1,8 @@
 package seedu.duke.parser;
 
+import seedu.duke.command.Command;
+import seedu.duke.command.InvalidCommand;
+import seedu.duke.command.SessionCreateCommand;
 import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.ui.Message;
 
@@ -9,6 +12,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents an interpreter that interprets different parts of the user input
  * into data that can be understood by the program.
+ * 
  * @author Warren
  */
 public class Parser {
@@ -27,6 +31,7 @@ public class Parser {
     private static final String SERVICE_CHARGE_DELIMITER = "/sc";
 
     // MISC CONSTANTS
+    private static final String DELIMITER_INDICATOR = "/";
     private static final String NEXT_DELIMITER_INDICATOR = " /";
     private static final String REGEX_WHITESPACES_DELIMITER = "\\s+";
     private static final int INVALID_INDEX_INDICATOR = -1;
@@ -51,12 +56,12 @@ public class Parser {
         return Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + delimiter;
     }
     
-    private static String getInvalidGstErrorMessage(String delimiter) {
-        return Message.ERROR_PARSER_INVALID_GST_SURCHARGE + delimiter;
+    private static String getInvalidGstErrorMessage() {
+        return Message.ERROR_PARSER_INVALID_GST_SURCHARGE + GST_DELIMITER;
     }
     
-    private static String getInvalidServiceChargeErrorMessage(String delimiter) {
-        return Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + delimiter;
+    private static String getInvalidServiceChargeErrorMessage() {
+        return Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + SERVICE_CHARGE_DELIMITER;
     }
 
     // SUPPORTING FUNCTIONS
@@ -166,7 +171,7 @@ public class Parser {
         String argument = getArgumentFromDelimiter(commandArgs, GST_DELIMITER);
         int gst = parseIntFromString(argument, GST_DELIMITER);
         if (gst < MINIMUM_SURCHARGE_PERCENT || gst > MAXIMUM_SURCHARGE_PERCENT) {
-            throw new InvalidFormatException(getInvalidGstErrorMessage(GST_DELIMITER));
+            throw new InvalidFormatException(getInvalidGstErrorMessage());
         }
         return gst;
     }
@@ -179,8 +184,41 @@ public class Parser {
         String argument = getArgumentFromDelimiter(commandArgs, SERVICE_CHARGE_DELIMITER);
         int serviceCharge = parseIntFromString(argument, SERVICE_CHARGE_DELIMITER);
         if (serviceCharge < MINIMUM_SURCHARGE_PERCENT || serviceCharge > MAXIMUM_SURCHARGE_PERCENT) {
-            throw new InvalidFormatException(getInvalidServiceChargeErrorMessage(SERVICE_CHARGE_DELIMITER));
+            throw new InvalidFormatException(getInvalidServiceChargeErrorMessage());
         }
         return serviceCharge;
+    }
+    
+    // COMMAND PARSING METHODS
+    public static String getRemainingArgument(String commandArgs) {
+        String[] commandTokens = commandArgs.trim().split(REGEX_WHITESPACES_DELIMITER, COMMAND_WITH_ARGS_TOKEN_COUNT);
+        if (commandTokens.length < COMMAND_WITH_ARGS_TOKEN_COUNT) {
+            return null;
+        }
+        return commandTokens[2];
+    }
+
+    public static String getCommandType(String commandArgs) {
+        String[] commandTokens = commandArgs.trim().split(REGEX_WHITESPACES_DELIMITER,COMMAND_WITH_ARGS_TOKEN_COUNT);
+        if (commandTokens.length < COMMAND_WITH_ARGS_TOKEN_COUNT || !commandTokens[1].startsWith(DELIMITER_INDICATOR)) {
+            return null;
+        }
+        return commandTokens[0] + " " + commandTokens[1];
+    }
+
+    public static Command getCommand(String input) {
+        String commandType = getCommandType(input);
+        String remainingArgs = getRemainingArgument(input);
+
+        if (commandType == null) {
+            return new InvalidCommand("");
+        }
+
+        switch (commandType) {
+        case SessionCreateCommand.COMMAND_TEXT:
+            // return Relevant command.prepare(remainingArgs);
+        default:
+            return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
+        }
     }
 }

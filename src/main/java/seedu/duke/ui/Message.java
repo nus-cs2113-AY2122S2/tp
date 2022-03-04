@@ -31,4 +31,6 @@ public abstract class Message {
             "Please enter a valid GST surcharge in % after the delimiter: ";
     public static final String ERROR_PARSER_INVALID_SERVICE_CHARGE =
             "Please enter a valid service charge in % after the delimiter: ";
+    public static final String ERROR_PARSER_INVALID_COMMAND =
+            "Please enter a valid command.";
 }
