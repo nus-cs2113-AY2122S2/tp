@@ -17,12 +17,8 @@ public class Person {
     /**
      * Constructs a Person.
      * @param name Name of the Person.
-     * @throws InvalidDataException if name is empty or null.
      */
-    public Person(String name) throws InvalidDataException {
-        if (name == null || name.isEmpty()) {
-            throw new InvalidDataException("Name cannot be empty.");
-        }
+    public Person(String name) {
         this.name = name;
     }
 
@@ -49,7 +45,4 @@ public class Person {
     public ArrayList<ActivityCost> getActivityCostList() {
         return activityCostList;
     }
-
-
-
 }
