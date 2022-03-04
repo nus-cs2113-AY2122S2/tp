@@ -152,4 +152,30 @@ public class Parser {
         }
         return costs;
     }
+
+    public static int parseGst(String commandArgs) throws InvalidFormatException {
+        if (!delimiterExists(commandArgs, GST_DELIMITER)) {
+            return 0;
+        }
+
+        String argument = getArgumentFromDelimiter(commandArgs, GST_DELIMITER);
+        int gst = parseIntFromString(argument, GST_DELIMITER);
+        if (gst < MINIMUM_SURCHARGE_PERCENT || gst > MAXIMUM_SURCHARGE_PERCENT) {
+            throw new InvalidFormatException(getInvalidGstErrorMessage(GST_DELIMITER));
+        }
+        return gst;
+    }
+
+    public static int parseServiceCharge(String commandArgs) throws InvalidFormatException {
+        if (!delimiterExists(commandArgs, SERVICE_CHARGE_DELIMITER)) {
+            return 0;
+        }
+
+        String argument = getArgumentFromDelimiter(commandArgs, SERVICE_CHARGE_DELIMITER);
+        int serviceCharge = parseIntFromString(argument, SERVICE_CHARGE_DELIMITER);
+        if (serviceCharge < MINIMUM_SURCHARGE_PERCENT || serviceCharge > MAXIMUM_SURCHARGE_PERCENT) {
+            throw new InvalidFormatException(getInvalidServiceChargeErrorMessage(SERVICE_CHARGE_DELIMITER));
+        }
+        return serviceCharge;
+    }
 }
