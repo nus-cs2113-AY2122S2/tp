@@ -1,5 +1,6 @@
 package seedu.duke.parser;
 
+import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.ui.Message;
 
 /**
@@ -33,5 +34,25 @@ public class Parser {
     
     private static String getMissingArgumentErrorMessage(String delimiter) {
         return Message.ERROR_PARSER_DELIMITER_NOT_FOUND + delimiter;
+    }
+    
+    private static String getArgumentFromDelimiter(String commandArgs, String delimiter) throws InvalidFormatException {
+        int delimiterIndex = commandArgs.indexOf(delimiter);
+        if (delimiterIndex == INVALID_INDEX_INDICATOR) {
+            throw new InvalidFormatException(getMissingDelimiterErrorMessage(delimiter));
+        }
+        int argumentIndex = delimiterIndex + delimiter.length();
+        int endingIndex = commandArgs.indexOf(NEXT_DELIMITER_INDICATOR, argumentIndex);
+        String output;
+        if (endingIndex == INVALID_INDEX_INDICATOR) {
+            output = commandArgs.substring(argumentIndex).trim();
+        } else {
+            output = commandArgs.substring(argumentIndex, endingIndex).trim();
+        }
+
+        if (output.isEmpty()) {
+            throw new InvalidFormatException(getMissingArgumentErrorMessage(delimiter));
+        }
+        return output;
     }
 }
