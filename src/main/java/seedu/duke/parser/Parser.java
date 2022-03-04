@@ -1,5 +1,8 @@
 package seedu.duke.parser;
 
+import seedu.duke.command.Command;
+import seedu.duke.command.InvalidCommand;
+import seedu.duke.command.SessionCreateCommand;
 import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.ui.Message;
 
@@ -200,5 +203,21 @@ public class Parser {
             return null;
         }
         return commandTokens[0] + " " + commandTokens[1];
+    }
+
+    public static Command getCommand(String input) {
+        String commandType = getCommandType(input);
+        String remainingArgs = getRemainingArgument(input);
+
+        if (commandType == null) {
+            return new InvalidCommand("");
+        }
+
+        switch (commandType) {
+        case SessionCreateCommand.COMMAND_TEXT:
+            // return Relevant command.prepare(remainingArgs);
+        default:
+            return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
+        }
     }
 }
