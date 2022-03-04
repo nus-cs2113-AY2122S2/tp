@@ -6,8 +6,8 @@ import seedu.duke.ui.TextUI;
 import java.time.LocalDate;
 
 /**
- * Represents a session create command that the user has entered into the application
- * that creates a session and stores into the profile object.
+ * Represents a command that creates a session from user input
+ * and stores into the profile object.
  *
  * @author Roy
  */
