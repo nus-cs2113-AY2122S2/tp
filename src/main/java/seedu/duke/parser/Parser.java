@@ -48,7 +48,7 @@ public class Parser {
         return Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + delimiter;
     }
     
-    private static String getInvalidGSTErrorMessage(String delimiter) {
+    private static String getInvalidGstErrorMessage(String delimiter) {
         return Message.ERROR_PARSER_INVALID_GST_SURCHARGE + delimiter;
     }
     
@@ -91,5 +91,24 @@ public class Parser {
         } catch (NumberFormatException exception) {
             throw new InvalidFormatException(getNonMonetaryErrorMessage(delimiter));
         }
+    }
+    
+    // MAIN PUBLIC PARSING FUNCTIONS
+    public static String parseName(String commandArgs) throws InvalidFormatException {
+        return getArgumentFromDelimiter(commandArgs, NAME_DELIMITER);
+    }
+
+    public static String[] parsePersonList(String commandArgs) throws InvalidFormatException {
+        String argument = getArgumentFromDelimiter(commandArgs, PERSON_LIST_DELIMITER);
+        return argument.split(REGEX_WHITESPACES_DELIMITER);
+    }
+
+    public static String[] parseInvolved(String commandArgs) throws InvalidFormatException {
+        String argument = getArgumentFromDelimiter(commandArgs, INVOLVED_DELIMITER);
+        return argument.split(REGEX_WHITESPACES_DELIMITER);
+    }
+
+    public static String parsePayer(String commandArgs) throws InvalidFormatException {
+        return getArgumentFromDelimiter(commandArgs, PAYER_DELIMITER);
     }
 }
