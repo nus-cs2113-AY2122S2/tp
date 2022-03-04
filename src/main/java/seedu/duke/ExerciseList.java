@@ -17,7 +17,7 @@ public class ExerciseList {
      */
     protected void loadExercises() throws IOException {
         Scanner scanner = new Scanner(EXERCISE_FILE);
-        while(scanner.hasNextLine()) {
+        while (scanner.hasNextLine()) {
             var exercise = scanner.nextLine();
             exercises.add(exercise);
             numberOfExercises += 1;
@@ -29,7 +29,7 @@ public class ExerciseList {
      */
     protected void printExerciseList() {
         for (int i = 0; i < numberOfExercises; i++) {
-            System.out.println( (i + 1) + ". " + exercises.get(i));
+            System.out.println((i + 1) + ". " + exercises.get(i));
         }
     }
 
