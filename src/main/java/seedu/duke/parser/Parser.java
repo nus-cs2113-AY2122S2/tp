@@ -1,5 +1,10 @@
 package seedu.duke.parser;
 
+/**
+ * Represents an interpreter that interprets different parts of the user input
+ * into data that can be understood by the program.
+ * @author Warren
+ */
 public class Parser {
     // DELIMITERS
     private static final String NAME_DELIMITER = "/n";
@@ -14,4 +19,8 @@ public class Parser {
     private static final String COST_LIST_DELIMITER = "/cl";
     private static final String GST_DELIMITER = "/gst";
     private static final String SERVICE_CHARGE_DELIMITER = "/sc";
+
+    // MISC CONSTANTS
+    private static final String NEXT_DELIMITER_INDICATOR = " /";
+    private static final int INVALID_INDEX_INDICATOR = -1;
 }
