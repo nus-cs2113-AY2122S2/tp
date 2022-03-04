@@ -12,6 +12,10 @@ import java.time.LocalDate;
  */
 public class SessionCreateCommand extends Command {
 
+    public static final String COMMAND_TEXT = "session /create";
+
+    private static final String COMMAND_FORMAT = "session /create /n <SESSIONNAME> /p <NAME1 NAME2…>";
+
     private String sessionName;
     private String[] personNames;
     private LocalDate sessionDate;
