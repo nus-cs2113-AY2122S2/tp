@@ -27,6 +27,7 @@ public class Parser {
     private static final String SERVICE_CHARGE_DELIMITER = "/sc";
 
     // MISC CONSTANTS
+    private static final String DELIMITER_INDICATOR = "/";
     private static final String NEXT_DELIMITER_INDICATOR = " /";
     private static final String REGEX_WHITESPACES_DELIMITER = "\\s+";
     private static final int INVALID_INDEX_INDICATOR = -1;
@@ -182,5 +183,22 @@ public class Parser {
             throw new InvalidFormatException(getInvalidServiceChargeErrorMessage());
         }
         return serviceCharge;
+    }
+    
+    // COMMAND PARSING METHODS
+    public static String getRemainingArgument(String commandArgs) {
+        String[] commandTokens = commandArgs.trim().split(REGEX_WHITESPACES_DELIMITER, COMMAND_WITH_ARGS_TOKEN_COUNT);
+        if (commandTokens.length < COMMAND_WITH_ARGS_TOKEN_COUNT) {
+            return null;
+        }
+        return commandTokens[2];
+    }
+
+    public static String getCommandType(String commandArgs) {
+        String[] commandTokens = commandArgs.trim().split(REGEX_WHITESPACES_DELIMITER,COMMAND_WITH_ARGS_TOKEN_COUNT);
+        if (commandTokens.length < COMMAND_WITH_ARGS_TOKEN_COUNT || !commandTokens[1].startsWith(DELIMITER_INDICATOR)) {
+            return null;
+        }
+        return commandTokens[0] + " " + commandTokens[1];
     }
 }
