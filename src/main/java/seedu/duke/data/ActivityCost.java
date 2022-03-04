@@ -37,6 +37,14 @@ public class ActivityCost {
         this(activityId, 0);
     }
 
+    /**
+     * Default constructor, sets activityId to -1 to avoid conflict with other activityIds.
+     */
+    public ActivityCost() {
+        this.activityId = -1;
+        this.cost = 0;
+    }
+
     public int getActivityId() {
         return activityId;
     }
