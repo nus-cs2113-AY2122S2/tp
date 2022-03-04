@@ -2,6 +2,7 @@ package seedu.duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,9 +14,9 @@ public class ExerciseList {
 
     /**
      * Reads the exercises from local file and store them into an ArrayList named exercises.
-     * @throws FileNotFoundException when the local file is missing.
+     * @throws IOException when the local file is missing.
      */
-    protected void loadExercises() throws FileNotFoundException {
+    protected void loadExercises() throws IOException {
         Scanner scanner = new Scanner(EXERCISE_FILE);
         while(scanner.hasNextLine()) {
             var exercise = scanner.nextLine();
@@ -27,7 +28,7 @@ public class ExerciseList {
     /**
      * Prints the list of exercises starting with their index.
      */
-    protected void exercisesList() {
+    protected void printExerciseList() {
         for (int i = 0; i < numberOfExercises; i++) {
             System.out.println( (i + 1) + ". " + exercises.get(i));
         }
@@ -39,7 +40,7 @@ public class ExerciseList {
      * @return the exercise at given index.
      * @throws IndexOutOfBoundsException when the index provided is less than 0 or greater than the numberOfExercises.
      */
-    protected String getExerciseAt(int index) throws IndexOutOfBoundsException{
+    protected String getExerciseAt(int index) throws IndexOutOfBoundsException {
         return exercises.get(index - 1);
     }
 
