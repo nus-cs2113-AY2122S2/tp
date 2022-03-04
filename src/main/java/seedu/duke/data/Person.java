@@ -15,7 +15,7 @@ public class Person {
     private ArrayList<ActivityCost> activityCostList;
 
     /**
-     * Constructs a Person.
+     * Constructs a Person object.
      * @param name Name of the Person.
      */
     public Person(String name) {
