@@ -12,7 +12,7 @@ public class SessionDeleteCommand extends Command {
 
     public static final String COMMAND_TEXT = "session /delete";
 
-    private static final String COMMAND_FORMAT = "session /delete /sid <SESSIONID>";
+    private static final String COMMAND_FORMAT = "Syntax: session /delete /sid <SESSIONID>";
 
     private int sessionId;
 
@@ -21,14 +21,6 @@ public class SessionDeleteCommand extends Command {
         this.sessionId = sessionId;
     }
 
-    /**
-     * Returns the session id for session deletion.
-     *
-     * @return A session id as int.
-     */
-    public int getSessionId() {
-        return sessionId;
-    }
 
     /**
      * Runs the command to delete a session.
