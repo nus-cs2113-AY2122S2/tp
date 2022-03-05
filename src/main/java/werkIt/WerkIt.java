@@ -8,6 +8,10 @@ import data.workouts.WorkoutList;
 
 import java.io.IOException;
 
+/**
+ * This class initiates the various classes/components of WerkIt! and contains the logic code for
+ * prompting the user for an input continuously until the user enters the exit command.
+ */
 public class WerkIt {
     private UI ui;
     private Parser parser;
@@ -15,14 +19,15 @@ public class WerkIt {
     private WorkoutList workoutList;
 
     /**
-     * Initialises the components of the WerkIt! application.
+     * Initialises the components of the WerkIt! application, greets the user, and loads the
+     * various files stored in the system's local disk into this instance of WerkIt! (if applicable).
      */
     public WerkIt() {
         // Initialise Components
         ui = new UI();
-        parser = new Parser();
         exerciseList = new ExerciseList();
-        workoutList = new WorkoutList();
+        workoutList = new WorkoutList(exerciseList);
+        parser = new Parser(ui, exerciseList, workoutList);
 
         ui.printGreetings();
 
@@ -36,14 +41,10 @@ public class WerkIt {
         }
     }
 
-    public void initialiseComponents() {
-        ui = new UI();
-        parser = new Parser();
-        exerciseList = new ExerciseList();
-        workoutList = new WorkoutList();
-    }
-
     /**
+     * Continuously prompts the user for an input (and thereafter executing the necessary
+     * actions) until the exit command is entered.
+     * <p>
      * Method adapted from Team Member Alan Low's iP codebase.
      * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/Sora.java
      */
