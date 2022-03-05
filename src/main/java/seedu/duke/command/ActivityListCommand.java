@@ -11,7 +11,7 @@ public class ActivityListCommand extends Command {
 
     public static final String COMMAND_TEXT = "activity /list";
 
-    private static final String COMMAND_FORMAT = "Syntax: activity /list /s <SESSION_ID>";
+    private static final String COMMAND_FORMAT = "Syntax: activity /list /sid <SESSION_ID>";
 
 
     private int sessionId;
