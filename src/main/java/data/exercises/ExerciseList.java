@@ -1,4 +1,4 @@
-package seedu.duke;
+package data.exercises;
 
 import java.io.File;
 import java.io.IOException;

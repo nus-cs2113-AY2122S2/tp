@@ -1,17 +1,17 @@
-package seedu.duke;
+package data.exercises;
 
 /**
  * Placeholder class for Exercise. Will be implemented by Hao Feng.
  */
 public class Exercise {
-    private String exerciseName;
+    private java.lang.String exerciseName;
 
     // Accessor methods
-    public String getExerciseName() {
+    public java.lang.String getExerciseName() {
         return this.exerciseName;
     }
 
-    public void setExerciseName(String exerciseName) {
+    public void setExerciseName(java.lang.String exerciseName) {
         this.exerciseName = exerciseName;
     }
 }
