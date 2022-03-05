@@ -15,7 +15,7 @@ public class ExerciseList {
      * Reads the exercises from local file and store them into an ArrayList named exercises.
      * @throws IOException when the local file is missing.
      */
-    protected void loadExercises() throws IOException {
+    public void loadExercises() throws IOException {
         Scanner scanner = new Scanner(EXERCISE_FILE);
         while (scanner.hasNextLine()) {
             var exercise = scanner.nextLine();
@@ -49,5 +49,19 @@ public class ExerciseList {
      */
     protected int getNumberOfExercises() {
         return numberOfExercises;
+    }
+
+    /**
+     * Checks if the specified exercise name exists in the exercises ArrayList.
+     *
+     * @param exerciseName The name of the exercise that will be checked for its existence in the list.
+     * @return Returns true if the exercise name exists in the list. Otherwise, false is returned.
+     */
+    public boolean checkIfExerciseExists(String exerciseName) {
+        if (!exercises.contains(exerciseName)) {
+            return false;
+        }
+
+        return true;
     }
 }
