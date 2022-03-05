@@ -48,6 +48,6 @@ public class Duke {
             String userInput = ui.readNextLine();
             command = Parser.getCommand(userInput);
             command.run(ui, profile);
-        } while (!ExitCommand.isExitCommand(command));
+        } while (!Command.isExitCommand(command));
     }
 }

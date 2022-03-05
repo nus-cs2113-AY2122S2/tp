@@ -13,16 +13,6 @@ public class ExitCommand extends Command {
     private static final String COMMAND_FORMAT = "Syntax: exit";
 
     /**
-     * Checks if command object is an instance of an ExitCommand.
-     *
-     * @param command A command object to be checked.
-     * @return True if it is an ExitCommand, else false.
-     */
-    public static boolean isExitCommand(Command command) {
-        return command instanceof ExitCommand;
-    }
-
-    /**
      * Prints the farewell message.
      *
      * @param ui      A user interface print the farewell message
