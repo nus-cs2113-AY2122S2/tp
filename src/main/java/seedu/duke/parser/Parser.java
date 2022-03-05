@@ -103,7 +103,7 @@ public class Parser {
         }
     }
 
-    private static boolean delimiterExists(String commandArgs, String delimiter) {
+    private static boolean hasDelimiter(String commandArgs, String delimiter) {
         int delimiterIndex = commandArgs.indexOf(delimiter);
         return delimiterIndex != INVALID_INDEX_INDICATOR;
     }
@@ -138,7 +138,7 @@ public class Parser {
     }
 
     public static LocalDate parseLocalDate(String commandArgs) throws InvalidFormatException {
-        if (!delimiterExists(commandArgs, DATE_DELIMITER)) {
+        if (!hasDelimiter(commandArgs, DATE_DELIMITER)) {
             throw new InvalidFormatException(getMissingDelimiterErrorMessage(DATE_DELIMITER));
         }
         
@@ -166,7 +166,7 @@ public class Parser {
     }
 
     public static int parseGst(String commandArgs) throws InvalidFormatException {
-        if (!delimiterExists(commandArgs, GST_DELIMITER)) {
+        if (!hasDelimiter(commandArgs, GST_DELIMITER)) {
             return 0;
         }
 
@@ -179,7 +179,7 @@ public class Parser {
     }
 
     public static int parseServiceCharge(String commandArgs) throws InvalidFormatException {
-        if (!delimiterExists(commandArgs, SERVICE_CHARGE_DELIMITER)) {
+        if (!hasDelimiter(commandArgs, SERVICE_CHARGE_DELIMITER)) {
             return 0;
         }
 
