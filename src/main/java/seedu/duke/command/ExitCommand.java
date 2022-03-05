@@ -25,6 +25,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public void run(TextUI ui, Profile profile) {
-
+        ui.printFarewell();
     }
 }
