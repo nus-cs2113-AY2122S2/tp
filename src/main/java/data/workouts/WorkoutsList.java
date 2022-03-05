@@ -1,7 +1,7 @@
 package data.workouts;
 
 import data.exercises.InvalidExerciseException;
-import seedu.duke.Parser;
+import werkIt.Parser;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ public class WorkoutsList {
     ArrayList<Workout> workoutsList = new ArrayList<>();
 
     public Workout createWorkout(String userArgument) throws ArrayIndexOutOfBoundsException,
-            InvalidExerciseException, InvalidWorkoutsException {
+            InvalidExerciseException, InvalidWorkoutException {
         String userExerciseInput = userArgument.split("/reps")[0];
         int userRepsInput = Integer.parseInt(userArgument.split("/reps")[1]);
 
@@ -24,7 +24,7 @@ public class WorkoutsList {
         }
 
         if (!isRepsValueValid) {
-            throw new InvalidWorkoutsException(className, InvalidWorkoutsException.INVALID_REPS_VALUE);
+            throw new InvalidWorkoutException(className, InvalidWorkoutException.INVALID_REPS_VALUE);
         }
 
         Workout newWorkout = new Workout(userExerciseInput, userRepsInput);
