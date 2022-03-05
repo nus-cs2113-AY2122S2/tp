@@ -1,21 +1,25 @@
 package data.workouts;
 
+import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
-import werkIt.Parser;
 
 import java.util.ArrayList;
 
 public class WorkoutList {
-    Parser parser = new Parser();
-
+    ExerciseList exerciseList;
     ArrayList<Workout> workoutsList = new ArrayList<>();
+
+    public WorkoutList(ExerciseList exerciseList) {
+        this.exerciseList = exerciseList;
+    }
 
     public Workout createWorkout(String userArgument) throws ArrayIndexOutOfBoundsException,
             InvalidExerciseException, InvalidWorkoutException {
-        String userExerciseInput = userArgument.split("/reps")[0];
-        int userRepsInput = Integer.parseInt(userArgument.split("/reps")[1]);
+        String userExerciseInput = userArgument.split("/reps")[0].trim();
+        String userRepsInputString = userArgument.split("/reps")[1].trim();
+        int userRepsInput = Integer.parseInt(userRepsInputString);
 
-        boolean isExerciseValid = checkIfExerciseExists(userExerciseInput);
+        boolean isExerciseValid = exerciseList.checkIfExerciseExists(userExerciseInput);
         boolean isRepsValueValid = checkIfRepsValueIsValid(userRepsInput);
 
         String className = this.getClass().getSimpleName();
@@ -32,10 +36,6 @@ public class WorkoutList {
         workoutsList.add(newWorkout);
 
         return newWorkout;
-    }
-
-    public boolean checkIfExerciseExists(String userExerciseInput) {
-        return false;
     }
 
     public boolean checkIfRepsValueIsValid(int userRepsInput) {

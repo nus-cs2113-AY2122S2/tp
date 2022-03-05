@@ -4,20 +4,20 @@ package data.workouts;
  * This class represents a Workout, which is an exercise with a specified number of repetitions.
  */
 public class Workout {
-    private String exercise;
+    private String exerciseName;
     private int repetitions;
 
     public Workout(String exerciseName, int repetitions) {
-        this.exercise = exerciseName;
+        this.exerciseName = exerciseName;
         this.repetitions = repetitions;
     }
 
-    public String getExercise() {
-        return exercise;
+    public String getExerciseName() {
+        return exerciseName;
     }
 
-    public void setExercise(String string) {
-        this.exercise = string;
+    public void setExerciseName(String string) {
+        this.exerciseName = string;
     }
 
     public int getRepetitions() {
@@ -26,5 +26,10 @@ public class Workout {
 
     public void setRepetitions(int repetitions) {
         this.repetitions = repetitions;
+    }
+
+    public String toString() {
+        String displayString = getExerciseName() + " (" + getRepetitions() + " reps)";
+        return displayString;
     }
 }

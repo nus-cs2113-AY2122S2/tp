@@ -1,9 +1,11 @@
 package commands;
 
+import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
 import data.workouts.InvalidWorkoutException;
 import data.workouts.Workout;
 import data.workouts.WorkoutList;
+import werkIt.UI;
 
 /**
  * A class that will handle
@@ -15,14 +17,17 @@ public class WorkoutCommand extends Command {
     public static final String DELETE_ACTION_KEYWORD = "/delete";
     public static final String UPDATE_ACTION_KEYWORD = "/update";
 
-    WorkoutList workoutList = new WorkoutList();
+    private UI ui;
+    private WorkoutList workoutList;
 
     private String userAction;
     private String userArguments;
 
-    public WorkoutCommand(String userInput, String userAction, String userArguments)
-            throws InvalidCommandException {
+    public WorkoutCommand(String userInput, UI ui, WorkoutList workoutList,
+                          String userAction, String userArguments) throws InvalidCommandException {
         super(userInput);
+        this.ui = ui;
+        this.workoutList = workoutList;
         setUserAction(userAction);
         this.userArguments = userArguments;
     }
@@ -41,6 +46,7 @@ public class WorkoutCommand extends Command {
             // Fallthrough
         case UPDATE_ACTION_KEYWORD:
             this.userAction = userAction;
+            break;
         default:
             String className = this.getClass().getSimpleName();
             throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
@@ -56,7 +62,7 @@ public class WorkoutCommand extends Command {
     }
 
     /**
-     * (WIP) Note: need to catch and handle exceptions in this method and not calling method.
+     * (WIP) Note: need to catch and handle exceptions in this method, not the calling method.
      *
      */
     public void execute() {
@@ -64,9 +70,15 @@ public class WorkoutCommand extends Command {
             switch (getUserAction()) {
             case CREATE_ACTION_KEYWORD:
                 Workout newWorkout = workoutList.createWorkout(getUserArguments());
+                ui.printNewWorkoutCreatedMessage(newWorkout);
             }
-        } catch (InvalidExerciseException | InvalidWorkoutException e) {
+        } catch (InvalidExerciseException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Please try again.");
 
+        } catch (InvalidWorkoutException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Please try again.");
         }
     }
 }
