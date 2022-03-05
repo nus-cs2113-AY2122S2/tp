@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
-import seedu.duke.data.Profile;
-import seedu.duke.ui.TextUI;
+import seedu.duke.data.Manager;
 
 /**
  * Takes in an error message as a String.
