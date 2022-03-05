@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.ExitCommand;
 import seedu.duke.command.InvalidCommand;
 import seedu.duke.command.SessionCreateCommand;
 import seedu.duke.exceptions.InvalidFormatException;
@@ -200,6 +201,10 @@ public class Parser {
 
     public static String getCommandType(String commandArgs) {
         String[] commandTokens = commandArgs.trim().split(REGEX_WHITESPACES_DELIMITER,COMMAND_WITH_ARGS_TOKEN_COUNT);
+        // Temporary changed to accept exit command
+        if (commandTokens[0].equalsIgnoreCase("exit")) {
+            return commandTokens[0];
+        }
         if (commandTokens.length < COMMAND_WITH_ARGS_TOKEN_COUNT || !commandTokens[1].startsWith(DELIMITER_INDICATOR)) {
             return null;
         }
@@ -217,6 +222,8 @@ public class Parser {
         switch (commandType) {
         case SessionCreateCommand.COMMAND_TEXT:
             // return Relevant command.prepare(remainingArgs);
+        case ExitCommand.COMMAND_TEXT:
+            return new ExitCommand();
         default:
             return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
         }
