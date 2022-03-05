@@ -1,11 +1,9 @@
 package commands;
 
 import data.exercises.InvalidExerciseException;
-import data.workouts.InvalidWorkoutsException;
+import data.workouts.InvalidWorkoutException;
 import data.workouts.Workout;
 import data.workouts.WorkoutsList;
-
-import java.util.HashMap;
 
 /**
  * A class that will handle
@@ -67,7 +65,7 @@ public class WorkoutCommand extends Command {
             case CREATE_ACTION_KEYWORD:
                 Workout newWorkout = workoutsList.createWorkout(getUserArguments());
             }
-        } catch (InvalidExerciseException | InvalidWorkoutsException e) {
+        } catch (InvalidExerciseException | InvalidWorkoutException e) {
 
         }
     }
