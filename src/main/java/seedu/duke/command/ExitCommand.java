@@ -12,14 +12,20 @@ public class ExitCommand extends Command {
 
     private static final String COMMAND_FORMAT = "Syntax: exit";
 
+    /**
+     * Checks if command object is an instance of an ExitCommand.
+     *
+     * @param command A command object to be checked.
+     * @return True if it is an ExitCommand, else false.
+     */
     public static boolean isExitCommand(Command command) {
         return command instanceof ExitCommand;
     }
 
     /**
-     * Runs the command to exit the application.
+     * Prints the farewell message.
      *
-     * @param ui      A user interface to which the command will read its input from and print its output to.
+     * @param ui      A user interface print the farewell message
      * @param profile A Profile object from which Session, Activity and other objects are used to run
      *                the command.
      */
