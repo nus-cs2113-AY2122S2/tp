@@ -4,7 +4,7 @@ import seedu.duke.data.Profile;
 import seedu.duke.ui.TextUI;
 
 /**
- * Represents an ActivityViewCommand which display activity id, payer, and persons involved in the activity.
+ * Represents an ActivityViewCommand which display activity id, name, payer, and persons involved in the activity.
  */
 public class ActivityViewCommand extends Command {
 
