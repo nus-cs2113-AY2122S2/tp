@@ -16,16 +16,8 @@ public class Workout {
         return exerciseName;
     }
 
-    public void setExerciseName(String string) {
-        this.exerciseName = string;
-    }
-
     public int getRepetitions() {
         return repetitions;
-    }
-
-    public void setRepetitions(int repetitions) {
-        this.repetitions = repetitions;
     }
 
     public String toString() {

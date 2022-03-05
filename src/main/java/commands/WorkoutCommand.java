@@ -1,6 +1,5 @@
 package commands;
 
-import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
 import data.workouts.InvalidWorkoutException;
 import data.workouts.Workout;
