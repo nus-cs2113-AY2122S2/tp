@@ -23,5 +23,6 @@ public class ExitCommand extends Command {
     public void run(TextUI ui, Profile profile) {
         ui.printFarewell();
     public void run(Manager manager) {
+        manager.getUi().printFarewell();
     }
 }
