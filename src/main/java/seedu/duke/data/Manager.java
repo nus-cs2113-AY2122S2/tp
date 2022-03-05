@@ -29,7 +29,7 @@ public class Manager {
     /**
      * Returns a Profile object that stores user created sessions.
      *
-     * @return
+     * @return A Profile object.
      */
     public Profile getProfile() {
         return profile;
