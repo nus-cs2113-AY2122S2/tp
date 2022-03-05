@@ -4,7 +4,7 @@ import seedu.duke.data.Profile;
 import seedu.duke.ui.TextUI;
 
 /**
- * Represents an ActivityListCommand which display activity ids, name, cost and payer within session.
+ * Represents an ActivityListCommand which display activity ids, name, and totalCost of each activity within session.
  */
 public class ActivityListCommand extends Command {
 
