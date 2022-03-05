@@ -37,6 +37,7 @@ public class Parser {
     private static final String REGEX_WHITESPACES_DELIMITER = "\\s+";
     private static final int INVALID_INDEX_INDICATOR = -1;
     private static final int COMMAND_WITH_ARGS_TOKEN_COUNT = 3;
+    private static final int DELIMITERED_COMMAND_MIN_TOKEN_COUNT = 2;
     private static final int MINIMUM_SURCHARGE_PERCENT = 0;
     private static final int MAXIMUM_SURCHARGE_PERCENT = 100;
 
@@ -200,12 +201,11 @@ public class Parser {
     }
 
     public static String getCommandType(String commandArgs) {
-        String[] commandTokens = commandArgs.trim().split(REGEX_WHITESPACES_DELIMITER,COMMAND_WITH_ARGS_TOKEN_COUNT);
-        // Temporary changed to accept exit command
-        if (commandTokens[0].equalsIgnoreCase("exit")) {
+        String[] commandTokens = commandArgs.trim().split(REGEX_WHITESPACES_DELIMITER, COMMAND_WITH_ARGS_TOKEN_COUNT);
+        
+        if (commandTokens.length < DELIMITERED_COMMAND_MIN_TOKEN_COUNT) {
             return commandTokens[0];
-        }
-        if (commandTokens.length < COMMAND_WITH_ARGS_TOKEN_COUNT || !commandTokens[1].startsWith(DELIMITER_INDICATOR)) {
+        } else if (!commandTokens[1].startsWith(DELIMITER_INDICATOR)) {
             return null;
         }
         return commandTokens[0] + " " + commandTokens[1];
