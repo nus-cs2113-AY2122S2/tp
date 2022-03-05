@@ -12,6 +12,9 @@ public class ExitCommand extends Command {
 
     private static final String COMMAND_FORMAT = "Syntax: exit";
 
+    public static boolean isExitCommand(Command command) {
+        return command instanceof ExitCommand;
+    }
 
     /**
      * Runs the command to exit the application.
