@@ -4,7 +4,7 @@ import seedu.duke.data.Profile;
 import seedu.duke.ui.TextUI;
 
 /**
- * Represents an ActivityViewCommand which display activity ids, name, and totalCost of each activity within session.
+ * Represents an ActivityViewCommand which display activity id, payer, and persons involved in the activity.
  */
 public class ActivityViewCommand extends Command {
 
@@ -28,6 +28,7 @@ public class ActivityViewCommand extends Command {
      */
     @Override
     public void run(TextUI ui, Profile profile) {
+
 
     }
 }
