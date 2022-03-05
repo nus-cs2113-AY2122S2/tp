@@ -108,6 +108,55 @@ public class Parser {
         return delimiterIndex != INVALID_INDEX_INDICATOR;
     }
     
+    private static boolean isValidDelimiter(String token) {
+        if (token == null) {
+            return false;
+        }
+        
+        switch (token) {
+        case NAME_DELIMITER:
+            // Fallthrough
+        case PERSON_LIST_DELIMITER:
+            // Fallthrough
+        case INVOLVED_DELIMITER:
+            // Fallthrough
+        case PAYER_DELIMITER:
+            // Fallthrough
+        case SESSION_ID_DELIMITER:
+            // Fallthrough
+        case ACTIVITY_ID_DELIMITER:
+            // Fallthrough
+        case GROUP_ID_DELIMITER:
+            // Fallthrough
+        case DATE_DELIMITER:
+            // Fallthrough
+        case TOTAL_COST_DELIMITER:
+            // Fallthrough
+        case COST_LIST_DELIMITER:
+            // Fallthrough
+        case GST_DELIMITER:
+            // Fallthrough
+        case SERVICE_CHARGE_DELIMITER:
+            return true;
+        default:
+            return false;
+        }
+    }
+    
+    private static boolean containsInvalidDelimiters(String commandArgs) {
+        if (commandArgs == null) {
+            return false;
+        }
+        
+        String[] argumentTokens = commandArgs.split(REGEX_WHITESPACES_DELIMITER);
+        for (String token : argumentTokens) {
+            if (token.contains(DELIMITER_INDICATOR) && !isValidDelimiter(token)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     // MAIN PUBLIC PARSING FUNCTIONS
     public static String parseName(String commandArgs) throws InvalidFormatException {
         return getArgumentFromDelimiter(commandArgs, NAME_DELIMITER);
