@@ -1,10 +1,9 @@
 package seedu.duke.data;
 
-import seedu.duke.exceptions.InvalidDataException;
-
 /**
  * Represents an Activity and its cost.
  * Stores activityId and cost of the activity.
+ *
  * @author Saurav
  */
 public class ActivityCost {
@@ -14,17 +13,11 @@ public class ActivityCost {
     /**
      * Constructs an ActivityCost object.
      * Assumption: Every field is non-negative.
+     *
      * @param activityId int representing the activityId.
      * @param cost double representing activity cost.
-     * @throws InvalidDataException if activityId or cost are negative.
      */
-    public ActivityCost(int activityId, double cost) throws InvalidDataException {
-        if (activityId < 0) {
-            throw new InvalidDataException("Activity ID cannot be negative.");
-        }
-        if (cost < 0) {
-            throw new InvalidDataException("Cost cannot be negative.");
-        }
+    public ActivityCost(int activityId, double cost) {
         this.activityId = activityId;
         this.cost = cost;
     }
@@ -32,10 +25,10 @@ public class ActivityCost {
     /**
      * Constructs an ActivityCost object and sets cost to 0 if only activityId is supplied.
      * Assumption: Every field is non-negative.
+     *
      * @param activityId int representing the activityId.
-     * @throws InvalidDataException if activityId is negative.
      */
-    public ActivityCost(int activityId) throws InvalidDataException {
+    public ActivityCost(int activityId) {
         this(activityId, 0);
     }
 

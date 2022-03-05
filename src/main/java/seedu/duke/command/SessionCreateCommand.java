@@ -6,11 +6,16 @@ import seedu.duke.ui.TextUI;
 import java.time.LocalDate;
 
 /**
- * Represents a session create command that the user has entered into the application
- * that creates a session and stores into the profile object.
+ * Represents a command that creates a session from user input
+ * and stores into the profile object.
+ *
  * @author Roy
  */
 public class SessionCreateCommand extends Command {
+
+    public static final String COMMAND_TEXT = "session /create";
+
+    private static final String COMMAND_FORMAT = "Syntax: session /create /n <SESSIONNAME> /p <NAME1 NAME2…>";
 
     private String sessionName;
     private String[] personNames;
@@ -25,6 +30,7 @@ public class SessionCreateCommand extends Command {
 
     /**
      * Returns the session name stored for session creation.
+     *
      * @return A session name as String.
      */
     public String getSessionName() {
@@ -33,6 +39,7 @@ public class SessionCreateCommand extends Command {
 
     /**
      * Returns an array of people's names stored for session creation.
+     *
      * @return An array of String for people's name.
      */
     public String[] getPersonNames() {
@@ -41,6 +48,7 @@ public class SessionCreateCommand extends Command {
 
     /**
      * Returns the date information stored for session creation.
+     *
      * @return A date as a LocalDate object.
      */
     public LocalDate getSessionDate() {
@@ -49,6 +57,7 @@ public class SessionCreateCommand extends Command {
 
     /**
      * Runs the command to create a session.
+     *
      * @param ui      A user interface to which the command will read its input from and print its output to.
      * @param profile A Profile object from which Session, Activity and other objects are used to run
      *                the command.
