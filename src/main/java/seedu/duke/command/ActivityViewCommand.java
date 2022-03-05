@@ -21,6 +21,11 @@ public class ActivityViewCommand extends Command {
         this.activityId = activityId;
     }
 
+    /**
+     * Runs the command.
+     * @param ui      A user interface to which the command will read its input from and print its output to.
+     * @param profile A Profile object from which Session, Activity and other objects are used to.
+     */
     @Override
     public void run(TextUI ui, Profile profile) {
 
