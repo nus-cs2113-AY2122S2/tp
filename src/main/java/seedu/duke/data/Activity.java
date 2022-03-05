@@ -26,7 +26,7 @@ public class Activity {
      */
     public Activity(int sessionId, int activityId, String activityName, double cost, Person personPaid,
                     ArrayList<Person> involvedPersonList) {
-        this .sessionId = sessionId;
+        this.sessionId = sessionId;
         this.activityId = activityId;
         this.activityName = activityName;
         this.cost = cost;
