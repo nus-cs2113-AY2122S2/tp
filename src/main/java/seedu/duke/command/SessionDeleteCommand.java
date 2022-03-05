@@ -31,6 +31,7 @@ public class SessionDeleteCommand extends Command {
      */
     @Override
     public void run(TextUI ui, Profile profile) {
+    public void run(Manager manager) {
 
     }
 }

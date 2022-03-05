@@ -17,6 +17,7 @@ public abstract class Command {
      *                the command.
      */
     public abstract void run(TextUI ui, Profile profile);
+    public abstract void run(Manager manager);
 
     /**
      * Checks if command object is an instance of an ExitCommand.

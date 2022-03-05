@@ -18,5 +18,6 @@ public class InvalidCommand extends Command {
     public void run(TextUI ui, Profile profile) {
         ui.printlnMessage("Invalid command");
         ui.printlnMessage(errorMessage);
+    public void run(Manager manager) {
     }
 }
