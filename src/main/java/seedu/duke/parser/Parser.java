@@ -1,9 +1,14 @@
 package seedu.duke.parser;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.ActivityCreateCommand;
+import seedu.duke.command.ActivityListCommand;
+import seedu.duke.command.ActivityViewCommand;
+import seedu.duke.command.SessionCreateCommand;
+import seedu.duke.command.SessionDeleteCommand;
+import seedu.duke.command.SessionSummaryCommand;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.InvalidCommand;
-import seedu.duke.command.SessionCreateCommand;
 import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.ui.Message;
 
@@ -265,12 +270,30 @@ public class Parser {
         String remainingArgs = getRemainingArgument(input);
 
         if (commandType == null) {
-            return new InvalidCommand("");
+            return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
+        }
+        
+        if (containsInvalidDelimiters(remainingArgs)) {
+            return new InvalidCommand(Message.ERROR_PARSER_INVALID_DELIMITERS);
         }
 
         switch (commandType) {
+        case "":
+            return new InvalidCommand(Message.ERROR_PARSER_EMPTY_COMMAND);
+        // TEMPORARY FALLTHROUGH FOR ALL COMMANDS UNTIL COMMANDS ARE PROPERLY SET UP
         case SessionCreateCommand.COMMAND_TEXT:
+            // FALLTHROUGH
+        case SessionDeleteCommand.COMMAND_TEXT:
+            // FALLTHROUGH
+        case SessionSummaryCommand.COMMAND_TEXT:
+            // FALLTHROUGH
+        case ActivityCreateCommand.COMMAND_TEXT:
+            // FALLTHROUGH
+        case ActivityListCommand.COMMAND_TEXT:
+            // FALLTHROUGH
+        case ActivityViewCommand.COMMAND_TEXT:
             // return Relevant command.prepare(remainingArgs);
+            return new InvalidCommand("Command is currently not implemented, please try again later.");
         case ExitCommand.COMMAND_TEXT:
             return new ExitCommand();
         default:
