@@ -7,8 +7,19 @@ package commands;
  * Link: https://se-education.org/addressbook-level2/
  */
 public abstract class Command {
-    /**
-     * Executes the command based on the user input.
-     */
-    public abstract void execute(String userInput);
+    protected String userInput;
+
+    public Command(String userInput) {
+        this.userInput = userInput;
+    }
+
+    public String getUserInput() {
+        return userInput;
+    }
+
+    public void setUserInput(String userInput) {
+        this.userInput = userInput;
+    }
+
+    public abstract void execute();
 }
