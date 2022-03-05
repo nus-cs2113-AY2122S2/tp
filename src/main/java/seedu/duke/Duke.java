@@ -40,10 +40,13 @@ public class Duke {
     }
 
     /** Reads the user input until the user enters the bye command.  */
+    /** Reads the user input until the user enters the exit command.  */
     private void runProcessLoop() {
-        String userInput;
+        Command command;
         do {
-            userInput = ui.readNextLine();
-        } while (userInput.contains("Bye"));
+            String userInput = ui.readNextLine();
+            command = Parser.getCommand(userInput);
+            command.run(ui, profile);
+        } while (!ExitCommand.isExitCommand(command));
     }
 }
