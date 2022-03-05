@@ -12,16 +12,15 @@ public class ExitCommand extends Command {
 
     private static final String COMMAND_FORMAT = "Syntax: exit";
 
-
     /**
-     * Runs the command to exit the application.
+     * Prints the farewell message.
      *
-     * @param ui      A user interface to which the command will read its input from and print its output to.
+     * @param ui      A user interface print the farewell message
      * @param profile A Profile object from which Session, Activity and other objects are used to run
      *                the command.
      */
     @Override
     public void run(TextUI ui, Profile profile) {
-
+        ui.printFarewell();
     }
 }

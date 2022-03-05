@@ -17,4 +17,14 @@ public abstract class Command {
      *                the command.
      */
     public abstract void run(TextUI ui, Profile profile);
+
+    /**
+     * Checks if command object is an instance of an ExitCommand.
+     *
+     * @param command A command object to be checked.
+     * @return True if it is an ExitCommand, else false.
+     */
+    public static boolean isExitCommand(Command command) {
+        return command instanceof ExitCommand;
+    }
 }
