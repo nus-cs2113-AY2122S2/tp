@@ -2,6 +2,9 @@ package seedu.duke.data;
 
 import java.util.ArrayList;
 
+/**
+ * Represents an activity that was done during a group outing session.
+ */
 public class Activity {
 
     private int sessionId;
