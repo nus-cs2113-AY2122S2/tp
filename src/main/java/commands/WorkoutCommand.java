@@ -3,7 +3,7 @@ package commands;
 import data.exercises.InvalidExerciseException;
 import data.workouts.InvalidWorkoutException;
 import data.workouts.Workout;
-import data.workouts.WorkoutsList;
+import data.workouts.WorkoutList;
 
 /**
  * A class that will handle
@@ -15,7 +15,7 @@ public class WorkoutCommand extends Command {
     public static final String DELETE_ACTION_KEYWORD = "/delete";
     public static final String UPDATE_ACTION_KEYWORD = "/update";
 
-    WorkoutsList workoutsList = new WorkoutsList();
+    WorkoutList workoutList = new WorkoutList();
 
     private String userAction;
     private String userArguments;
@@ -63,7 +63,7 @@ public class WorkoutCommand extends Command {
         try {
             switch (getUserAction()) {
             case CREATE_ACTION_KEYWORD:
-                Workout newWorkout = workoutsList.createWorkout(getUserArguments());
+                Workout newWorkout = workoutList.createWorkout(getUserArguments());
             }
         } catch (InvalidExerciseException | InvalidWorkoutException e) {
 

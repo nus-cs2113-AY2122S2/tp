@@ -5,7 +5,7 @@ import werkIt.Parser;
 
 import java.util.ArrayList;
 
-public class WorkoutsList {
+public class WorkoutList {
     Parser parser = new Parser();
 
     ArrayList<Workout> workoutsList = new ArrayList<>();
