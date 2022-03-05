@@ -1,5 +1,9 @@
 package werkIt;
 
+import data.workouts.Workout;
+
+import java.util.Scanner;
+
 /**
  * This class contains all the user interface-related texts and methods for the WerkIt! Application.
  */
@@ -13,10 +17,20 @@ public class UI {
             "                                    ";
 
     public static final String WELCOME_MESSAGE = "Welcome to WerkIt!, your personal exercise planner.";
+    public static final String GOODBYE_MESSAGE = "Thank you for using WerkIt! See you again soon...";
 
     // The default parameters for printing the formatting lines
-    public static final int DEFAULT_LINE_LENGTH = 80;
+    public static final int DEFAULT_LINE_LENGTH = 70;
     public static final String DEFAULT_LINE_CHAR = "-";
+
+    // Prompt symbol
+    public static final String PROMPT_SYMBOL = ">";
+
+    // Workout-related messages
+    public static final String NEW_WORKOUT_CREATED_MESSAGE = "Alright, the following workout has been created:";
+
+    // Scanner object for reading in user input from standard input
+    Scanner inputReader = new Scanner(System.in);
 
     /**
      * Prints a line on the console based on the default parameters defined in this Java class.
@@ -24,7 +38,7 @@ public class UI {
      * Source: Team Member Alan Low's iP codebase
      * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/SoraUI.java
      */
-    protected void printLine() {
+    public void printLine() {
         // Prints a line based on the default parameters
         printLine(DEFAULT_LINE_LENGTH, DEFAULT_LINE_CHAR);
     }
@@ -38,7 +52,7 @@ public class UI {
      * @param lineLen The length of the line (measured in 'number of characters').
      * @param character The character that should be used to print the line.
      */
-    protected void printLine(int lineLen, String character) {
+    public void printLine(int lineLen, String character) {
         // Generate a line of whitespaces
         String lineOfWhitespaces = String.format("%" + lineLen + "s", " ");
 
@@ -49,9 +63,60 @@ public class UI {
         System.out.println(lineOfChars);
     }
 
-    protected void printGreetings() {
+    public void printGreetings() {
         printLine(DEFAULT_LINE_LENGTH, "=");
         System.out.println(WERKIT_BANNER_LOGO);
         System.out.println(WELCOME_MESSAGE);
+        printLine();
+    }
+
+    public void printGoodbye() {
+        System.out.println(GOODBYE_MESSAGE);
+        printLine(DEFAULT_LINE_LENGTH, "=");
+    }
+
+    /**
+     * Prints a message that prompts the user to enter a command
+     * <p>
+     * Method adapted from Team Member Alan Low's iP codebase.
+     * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/SoraUI.java
+     */
+    public void printUserInputPrompt(boolean isFirstPrompt) {
+        printLine();
+        if (isFirstPrompt) {
+            System.out.println("Now then, what can I do for you today?");
+        }
+        else {
+            System.out.println("What's next?");
+        }
+
+        printLine();
+        System.out.print(PROMPT_SYMBOL + " ");
+    }
+
+    /**
+     * Reads in a line of the user from the standard input, trims the input, and returns it as a String.
+     * <p>
+     * Method adapted from Team Member Alan Low's iP codebase.
+     * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/SoraParser.java
+     */
+    protected String getUserInput() {
+        String userInput = inputReader.nextLine();
+        String userInputTrimmed = userInput.trim();
+        printLine();
+
+        return userInputTrimmed;
+    }
+
+    /**
+     * Prints a message when a new workout has been created. The newly created workout will also be displayed.
+     *
+     * @param newWorkout
+     */
+    public void printNewWorkoutCreatedMessage(Workout newWorkout) {
+        System.out.println(NEW_WORKOUT_CREATED_MESSAGE);
+        System.out.println();
+        System.out.println("\t" + newWorkout.toString());
+        System.out.println();
     }
 }
