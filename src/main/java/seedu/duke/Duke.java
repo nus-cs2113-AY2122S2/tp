@@ -1,6 +1,9 @@
 package seedu.duke;
 
+import seedu.duke.command.Command;
+import seedu.duke.command.ExitCommand;
 import seedu.duke.data.Profile;
+import seedu.duke.parser.Parser;
 import seedu.duke.ui.TextUI;
 
 /**
@@ -25,7 +28,7 @@ public class Duke {
     private void run() {
         showWelcomeMessage();
         runProcessLoop();
-        showFarewellMessage();
+        exitApplication();
     }
 
     /** Prints welcome message. */
@@ -33,13 +36,11 @@ public class Duke {
         ui.printWelcome();
     }
 
-    /** Shows farewell message and exits the program. */
-    private void showFarewellMessage() {
-        ui.printFarewell();
+    /** Exits the program. */
+    private void exitApplication() {
         System.exit(0);
     }
 
-    /** Reads the user input until the user enters the bye command.  */
     /** Reads the user input until the user enters the exit command.  */
     private void runProcessLoop() {
         Command command;
