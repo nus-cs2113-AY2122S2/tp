@@ -19,6 +19,7 @@ public class Manager {
 
     /**
      * Returns a TextUI object for user inputs and outputs.
+     *
      * @return A TextUI object.
      */
     public TextUI getUi() {
@@ -27,6 +28,7 @@ public class Manager {
 
     /**
      * Returns a Profile object that stores user created sessions.
+     *
      * @return
      */
     public Profile getProfile() {
