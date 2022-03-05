@@ -1,4 +1,4 @@
-package seedu.duke;
+package werkIt;
 
 import commands.Command;
 import commands.InvalidCommandException;

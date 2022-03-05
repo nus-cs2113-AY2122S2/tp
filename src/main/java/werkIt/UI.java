@@ -1,11 +1,21 @@
-package seedu.duke;
+package werkIt;
 
 /**
  * This class contains all the user interface-related texts and methods for the WerkIt! Application.
  */
 public class UI {
+    // WerkIt ASCII Banner Logo Art
+    public static final String WERKIT_BANNER_LOGO = " __        __        _    ___ _   _ \n" +
+            " \\ \\      / /__ _ __| | _|_ _| |_| |\n" +
+            "  \\ \\ /\\ / / _ \\ '__| |/ /| || __| |\n" +
+            "   \\ V  V /  __/ |  |   < | || |_|_|\n" +
+            "    \\_/\\_/ \\___|_|  |_|\\_\\___|\\__(_)\n" +
+            "                                    ";
+
+    public static final String WELCOME_MESSAGE = "Welcome to WerkIt!, your personal exercise planner.";
+
     // The default parameters for printing the formatting lines
-    public static final int DEFAULT_LINE_LENGTH = 60;
+    public static final int DEFAULT_LINE_LENGTH = 80;
     public static final String DEFAULT_LINE_CHAR = "-";
 
     /**
@@ -37,5 +47,11 @@ public class UI {
 
         // Finally, print out the line of characters
         System.out.println(lineOfChars);
+    }
+
+    protected void printGreetings() {
+        printLine(DEFAULT_LINE_LENGTH, "=");
+        System.out.println(WERKIT_BANNER_LOGO);
+        System.out.println(WELCOME_MESSAGE);
     }
 }
