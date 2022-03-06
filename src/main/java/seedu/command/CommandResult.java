@@ -18,7 +18,7 @@ public class CommandResult {
 
     public CommandResult(String result, ArrayList<Equipment> equipmentList){
         RESULT_TO_SHOW = result;
-        RELEVANT_EQUIPMENT = null;
+        RELEVANT_EQUIPMENT = equipmentList;
     }
 
     public String getResultToShow(){
