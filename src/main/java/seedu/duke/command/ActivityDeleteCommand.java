@@ -13,6 +13,12 @@ public class ActivityDeleteCommand extends Command {
     private int sessionId;
     private int activityId;
 
+    /**
+     * Constructs an ActivityDeleteCommand object.
+     *
+     * @param sessionId The id of the session.
+     * @param activityId The id of the activity.
+     */
     public ActivityDeleteCommand(int sessionId, int activityId) {
         this.sessionId = sessionId;
         this.activityId = activityId;
