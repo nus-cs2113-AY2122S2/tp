@@ -10,12 +10,11 @@ import java.util.ArrayList;
  * @author Warren
  */
 public class Session {
-    // To be completed when Activity, Person and Group classes are added
     private String sessionName;
     private int sessionId;
     private LocalDate dateCreated;
-    // private ArrayList<Activity> activityList;
     // private ArrayList<Person> personList;
+    private ArrayList<Activity> activityList;
     // private Group group;
 
     /**
@@ -55,4 +54,12 @@ public class Session {
     public String getDateString() {
         return dateCreated.getDayOfMonth() + " " + dateCreated.getMonth() + " " + dateCreated.getYear();
     }
+    public ArrayList<Activity> getActivityList() {
+        return activityList;
+    }
+
+    public void addActivity(Activity activity) {
+        activityList.add(activity);
+    }
+
 }
