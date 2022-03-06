@@ -39,4 +39,8 @@ public class Activity {
         return activityName;
     }
 
+    public double getTotalCost() {
+        return totalCost;
+    }
+
 }
