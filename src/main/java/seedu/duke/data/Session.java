@@ -26,7 +26,7 @@ public class Session {
     /**
      * Returns the session's name.
      * 
-     * @return A string object containing the name of the session
+     * @return A string object containing the name of the session.
      */
     public String getSessionName() {
         return sessionName;
@@ -55,7 +55,7 @@ public class Session {
      * Returns a String object containing a human-readable version of the date of creation of the session.
      * Format: DD Month YYYY, e.g. 04 March 2022
      * 
-     * @return A String object containing a human-readable version of the date of creation 
+     * @return A String object containing a human-readable version of the date of creation.
      */
     public String getDateString() {
         return dateCreated.getDayOfMonth() + " " + dateCreated.getMonth() + " " + dateCreated.getYear();
