@@ -31,4 +31,8 @@ public class Activity {
         this.involvedPersonList = involvedPersonList;
     }
 
+    public int getActivityId() {
+        return activityId;
+    }
+
 }
