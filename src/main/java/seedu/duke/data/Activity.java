@@ -43,4 +43,8 @@ public class Activity {
         return totalCost;
     }
 
+    public Person getPersonPaid() {
+        return personPaid;
+    }
+
 }
