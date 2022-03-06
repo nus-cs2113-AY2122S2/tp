@@ -1,10 +1,11 @@
 package seedu.duke.ui;
-
-import seedu.duke.exceptions.ModHappyException;
-
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
+
+import seedu.duke.exceptions.ModHappyException;
+
+
 
 
 public class TextUi {
