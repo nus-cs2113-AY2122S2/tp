@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
-import seedu.duke.data.Profile;
-import seedu.duke.ui.TextUI;
+import seedu.duke.data.Manager;
 
 /**
  * Represents a command object that when run, produces a summary of expenditure for that session.
@@ -18,12 +17,11 @@ public class SessionSummaryCommand extends Command {
     /**
      * Runs the command with the session identifier as provided by the user input and prints a
      * summary of expenditure for the session specified by the session identifier.
-     *      
-     * @param ui      A user interface to which the command will read its input from and print its output to.
-     * @param profile A Profile object from which Session, Activity and other objects are used to run the command.
+     *
+     * @param manager A Manager object that manages the TextUI and Profile object.
      */
     @Override
-    public void run(TextUI ui, Profile profile) {
+    public void run(Manager manager) {
         
     }
 
