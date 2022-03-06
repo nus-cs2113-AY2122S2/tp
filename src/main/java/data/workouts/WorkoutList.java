@@ -13,7 +13,7 @@ public class WorkoutList {
         this.exerciseList = exerciseList;
     }
 
-    public Workout createWorkout(String userArgument) throws ArrayIndexOutOfBoundsException,
+    public Workout createAndAddWorkout(String userArgument) throws ArrayIndexOutOfBoundsException,
             InvalidExerciseException, InvalidWorkoutException {
         String userExerciseInput = userArgument.split("/reps")[0].trim();
         String userRepsInputString = userArgument.split("/reps")[1].trim();
