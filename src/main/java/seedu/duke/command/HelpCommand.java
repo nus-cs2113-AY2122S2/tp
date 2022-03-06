@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
-import seedu.duke.data.Profile;
-import seedu.duke.ui.TextUI;
+import seedu.duke.data.Manager;
 
 /**
  * Represents a command that when run, prints a help menu to assist the user
@@ -17,12 +16,10 @@ public class HelpCommand extends Command {
     /**
      * Prints a help message and displays all available commands.
      *
-     * @param ui      A user interface print the help message
-     * @param profile A Profile object from which Session, Activity and other objects are used to run
-     *                the command.
+     * @param manager A Manager object that manages the TextUI and Profile object.
      */
     @Override
-    public void run(TextUI ui, Profile profile) {
-        ui.printHelpMenu();
+    public void run(Manager manager) {
+        manager.getUi().printHelpMenu();
     }
 }
