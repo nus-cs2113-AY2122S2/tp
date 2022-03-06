@@ -30,7 +30,7 @@ public class Person {
      * @param cost the cost of the activity.
      * @throws InvalidDataException if the activityCost cannot be created from the given parameters.
      */
-    public void addActivityCost(int activityId, double cost) throws InvalidDataException {
+    public void addActivityCost(int activityId, double costPaid, double costOwed) throws InvalidDataException {
         ActivityCost activityCost = new ActivityCost(activityId, cost);
         activityCostList.add(activityCost);
         totalCost += activityCost.getCost();
