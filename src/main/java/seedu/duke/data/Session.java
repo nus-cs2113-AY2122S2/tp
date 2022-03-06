@@ -1,5 +1,8 @@
 package seedu.duke.data;
 
+import seedu.duke.exceptions.InvalidDataException;
+import seedu.duke.ui.Message;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -16,6 +19,9 @@ public class Session {
     private ArrayList<Activity> activityList;
     private ArrayList<Person> personList;
     // private Group group;
+    
+    // CONSTANTS
+    private static final int ZERO_INDEXING_OFFSET = 1;
 
     /**
      * Returns the session's name.
@@ -71,6 +77,31 @@ public class Session {
      */
     public void addActivity(Activity activity) {
         activityList.add(activity);
+    }
+
+    public Person getPersonByIndex(int index) throws InvalidDataException {
+        if (personList.isEmpty()) {
+            throw new InvalidDataException(Message.ERROR_SESSION_EMPTY_PERSON_LIST);
+        }
+        
+        try {
+            return personList.get(index - ZERO_INDEXING_OFFSET);
+        } catch (IndexOutOfBoundsException exception) {
+            throw new InvalidDataException(Message.ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST + personList.size());
+        }
+    }
+
+    public Person getPersonByName(String name) throws InvalidDataException {
+        if (personList.isEmpty()) {
+            throw new InvalidDataException(Message.ERROR_SESSION_EMPTY_PERSON_LIST);
+        }
+        
+        for (Person person : personList) {
+            if (person.getName().equalsIgnoreCase(name)) {
+                return person;
+            }
+        }
+        throw new InvalidDataException(Message.ERROR_SESSION_PERSON_NOT_IN_LIST);
     }
 
     public ArrayList<Person> getPersonList() {
