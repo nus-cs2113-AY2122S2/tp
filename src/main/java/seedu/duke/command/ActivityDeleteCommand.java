@@ -2,6 +2,9 @@ package seedu.duke.command;
 
 import seedu.duke.data.Manager;
 
+/**
+ * Represents an ActivityCreateCommand which has a run method that deletes an activity.
+ */
 public class ActivityDeleteCommand extends Command {
 
     public static final String COMMAND_TEXT = "activity /delete";
