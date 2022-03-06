@@ -1,11 +1,9 @@
 package seedu.duke.ui;
 
-import seedu.duke.exceptions.ModHappyException;
-
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import seedu.duke.exceptions.ModHappyException;
 
 public class TextUi {
 
@@ -20,7 +18,7 @@ public class TextUi {
     protected final PrintStream out;
 
     /**
-     * Initialzes TextUi
+     * Initialzes TextUi.
      *
      * @throws ModHappyException ModHappy Exception
      */
@@ -31,7 +29,7 @@ public class TextUi {
 
 
     /**
-     * Formats the window style
+     * Formats the window style.
      *
      * @param message The message to be passed on the chat box
      * @return The formated message
@@ -41,7 +39,7 @@ public class TextUi {
     }
 
     /**
-     * Receives command from user
+     * Receives command from user.
      *
      * @return Received command message
      */
@@ -51,28 +49,28 @@ public class TextUi {
     }
 
     /**
-     * Show the hello message to user
+     * Show the hello message to user.
      */
     public void showMessage(String message) {
         out.println(formatMessage(message));
     }
 
     /**
-     * Show the hello message to user
+     * Show the hello message to user.
      */
     public void showHelloMessage() {
         this.showMessage(HELLO_MESSAGE);
     }
 
     /**
-     * Show the good by message to user
+     * Show the good by message to user.
      */
     public void showGoodByeMessage() {
         this.showMessage(GOOD_BY_MESSAGE);
     }
 
     /**
-     * Show initialize message
+     * Show initialize message.
      */
     public void showInitFailedMessage() {
         this.showMessage(INITIAL_FAILED_MESSAGE);
