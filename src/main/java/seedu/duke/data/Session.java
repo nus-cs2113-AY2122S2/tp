@@ -26,7 +26,7 @@ public class Session {
     /**
      * Returns the session's name.
      * 
-     * @return A string object containing the name of the session.
+     * @return A String object containing the name of the session.
      */
     public String getSessionName() {
         return sessionName;
@@ -102,7 +102,7 @@ public class Session {
      * Returns a Person object with a name that matches the queried name.
      * 
      * @param name A query name used to search for a Person object.
-     * @return A person object in the Session class that has a matching name.
+     * @return A Person object in the Session class that has a matching name.
      * @throws InvalidDataException if personList is empty or no Person object in personList matches queried name.
      */
     public Person getPersonByName(String name) throws InvalidDataException {
