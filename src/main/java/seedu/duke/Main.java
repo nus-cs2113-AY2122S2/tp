@@ -7,8 +7,7 @@ import seedu.duke.ui.TextUi;
 public class Main {
 
     private TextUi ui;
-
-
+    
     /**
      * Main entry-point for the java.duke.Duke application.
      * See <a href="https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java">addressbook-level2</a>

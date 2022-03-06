@@ -6,9 +6,6 @@ import java.util.Scanner;
 
 import seedu.duke.exceptions.ModHappyException;
 
-
-
-
 public class TextUi {
 
     private static final String LS = System.lineSeparator();
