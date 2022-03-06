@@ -5,7 +5,7 @@ package data.workouts;
  */
 public class InvalidWorkoutException extends Exception {
     // Pre-defined error messages
-    public static final String INVALID_REPS_VALUE = "The number of reps specified is invalid.\n" +
+    public static final String INVALID_REPS_VALUE = "Uh oh, the number of reps specified is invalid.\n" +
             "(Needs to be a value of at least 1.)";
 
     private String throwingClass;

@@ -1,8 +1,8 @@
 package commands;
 
 public class InvalidCommandException extends Exception {
-    public static final String INVALID_COMMAND_ERROR_MSG = "The command entered is not recognised.";
-    public static final String INVALID_ACTION_ERROR_MSG = "An invalid user action was specified.";
+    public static final String INVALID_COMMAND_ERROR_MSG = "Uh oh, the command entered is not recognised.";
+    public static final String INVALID_ACTION_ERROR_MSG = "Uh oh, an invalid user action was specified.";
 
     private String throwingClass;
 
