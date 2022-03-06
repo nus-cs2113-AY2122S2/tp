@@ -47,4 +47,8 @@ public class Activity {
         return personPaid;
     }
 
+    public ArrayList<Person> getInvolvedPersonList() {
+        return involvedPersonList;
+    }
+
 }
