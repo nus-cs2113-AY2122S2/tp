@@ -37,7 +37,7 @@ Prerequisites: JDK 11 (use the exact version), update Intellij to the most recen
 
 ### I/O redirection tests
 
-* To run _I/O redirection_ tests (aka _Text UI tests_), navigate to the `text-ui-test` and run the `runtest(.bat/.sh)` script.
+* To run _I/O redirection_ tests (aka _Text UI tests_), navigate to the `text-seedu.duke.ui-test` and run the `runtest(.bat/.sh)` script.
 
 ### JUnit tests
 
