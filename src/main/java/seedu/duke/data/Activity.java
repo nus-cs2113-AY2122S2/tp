@@ -7,6 +7,8 @@ import java.util.ArrayList;
  */
 public class Activity {
 
+    private static final String DELIMITER = " | ";
+
     private int activityId;
     private String activityName;
     private double totalCost;
@@ -49,6 +51,12 @@ public class Activity {
 
     public ArrayList<Person> getInvolvedPersonList() {
         return involvedPersonList;
+    }
+
+    public String getActivitySummaryString() {
+        String costInString = "$" + String.format("%.2f", totalCost);
+        String personName = personPaid.getName();
+        return activityId + DELIMITER + activityName + DELIMITER + costInString + DELIMITER + personName;
     }
 
 }
