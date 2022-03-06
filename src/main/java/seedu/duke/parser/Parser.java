@@ -7,6 +7,7 @@ import seedu.duke.command.ActivityViewCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.SessionCreateCommand;
 import seedu.duke.command.SessionDeleteCommand;
+import seedu.duke.command.SessionListCommand;
 import seedu.duke.command.SessionSummaryCommand;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.InvalidCommand;
@@ -285,6 +286,8 @@ public class Parser {
         case SessionCreateCommand.COMMAND_TEXT:
             // FALLTHROUGH
         case SessionDeleteCommand.COMMAND_TEXT:
+            // FALLTHROUGH
+        case SessionListCommand.COMMAND_TEXT:
             // FALLTHROUGH
         case SessionSummaryCommand.COMMAND_TEXT:
             // FALLTHROUGH
