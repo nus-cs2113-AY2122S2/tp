@@ -35,4 +35,8 @@ public class Activity {
         return activityId;
     }
 
+    public String getActivityName() {
+        return activityName;
+    }
+
 }
