@@ -13,8 +13,8 @@ public class Session {
     private String sessionName;
     private int sessionId;
     private LocalDate dateCreated;
-    // private ArrayList<Person> personList;
     private ArrayList<Activity> activityList;
+    private ArrayList<Person> personList;
     // private Group group;
 
     /**
@@ -73,4 +73,11 @@ public class Session {
         activityList.add(activity);
     }
 
+    public ArrayList<Person> getPersonList() {
+        return personList;
+    }
+
+    public void addPerson(Person person) {
+        personList.add(person);
+    }
 }
