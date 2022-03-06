@@ -59,4 +59,15 @@ public class Activity {
         return activityId + DELIMITER + activityName + DELIMITER + costInString + DELIMITER + personName;
     }
 
+    @Override
+    public String toString() {
+        return "Activity --"
+                + "Name: " + activityName + '\n'
+                + "Id:   " + activityId + '\n'
+                + "Payer: " + personPaid.getName() + '\n'
+                + "Cost: " + totalCost + '\n'
+                + "Involved: \n"
+                + involvedPersonList;
+    }
+
 }
