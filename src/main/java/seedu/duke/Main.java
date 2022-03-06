@@ -1,12 +1,16 @@
 package seedu.duke;
 
 import seedu.duke.commands.Command;
+import seedu.duke.commands.CommandResult;
 import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.parsers.ModHappyParser;
 import seedu.duke.ui.TextUi;
 
 public class Main {
 
+    private static final String EXIT_COMMAND_WORD = "exit";
     private TextUi ui;
+    private ModHappyParser modHappyParser;
 
     /**
      * Main entry-point for the java.duke.Duke application.
@@ -36,6 +40,7 @@ public class Main {
         try {
             this.ui = new TextUi();
             ui.showHelloMessage();
+            this.modHappyParser = new ModHappyParser();
         } catch (ModHappyException e) {
             ui.showInitFailedMessage();
         }
@@ -45,13 +50,18 @@ public class Main {
      * Reads the user command and executes it, until the user calls the exit command.
      **/
     private void runCommandLoopUntilExitCommand() {
-        Command command;
+        Command command = null;
         String userCommandText;
         do {
-            userCommandText = ui.getUserCommand();
-            // To be optimised later
-            ui.showMessage(userCommandText);
-        } while (!userCommandText.equals("exit"));
+            try {
+                userCommandText = ui.getUserCommand();
+                command = modHappyParser.parseCommand(userCommandText);
+                CommandResult result = command.execute();
+                ui.showMessage(result.toString());
+            } catch (Exception e) {
+                ui.showMessage(e);
+            }
+        } while (command == null || !command.getCommandName().equals(EXIT_COMMAND_WORD));
     }
 
     /** Prints the Goodbye message and exits. */
