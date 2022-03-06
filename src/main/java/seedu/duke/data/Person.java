@@ -50,7 +50,12 @@ public class Person {
         }
         return totalCostOwed;
     }
-    
+
+    /**
+     * Calculates the amount of money other Persons owe to this Person.
+     * In other words, how much money this Person must receive in order to break even.
+     * @return Sum of all costPaids - sum of all costOweds in the list of ActivityCosts for this Person.
+     */
     public double getTotalCost() {
         double totalCostPaid = 0;
         double totalCostOwed = 0;
