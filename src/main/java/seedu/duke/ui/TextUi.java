@@ -7,9 +7,6 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 
-
-
-
 public class TextUi {
 
     private static final String LS = System.lineSeparator();
@@ -40,7 +37,7 @@ public class TextUi {
      * @return The formated message
      */
     public String formatMessage(String message) {
-        return String.format("%s%s\n%s\n%s",LS,LINE,message,LINE);
+        return String.format("%s%s\n%s\n%s", LS, LINE, message, LINE);
     }
 
     /**
@@ -57,7 +54,7 @@ public class TextUi {
      * Show the hello message to user
      */
     public void showMessage(String message) {
-        out.println(formatMessage( message));
+        out.println(formatMessage(message));
     }
 
     /**
@@ -77,7 +74,7 @@ public class TextUi {
     /**
      * Show initialize message
      */
-    public void showInitFailedMessage(){
+    public void showInitFailedMessage() {
         this.showMessage(INITIAL_FAILED_MESSAGE);
     }
 

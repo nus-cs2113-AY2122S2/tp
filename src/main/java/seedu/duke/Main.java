@@ -28,9 +28,9 @@ public class Main {
     }
 
     /**
-     * Sets up the required objects
+     * Sets up the required objects.
      *
-     * @param args arguments supplied by the user at program launch
+     * @param args arguments supplied by the user at program launch.
      *
      */
     private void start(String[] args) {
