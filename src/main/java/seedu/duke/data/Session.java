@@ -79,6 +79,13 @@ public class Session {
         activityList.add(activity);
     }
 
+    /**
+     * Returns a Person object specified by a numerical index that identifies the Person.
+     * 
+     * @param index A numerical index that identifies a Person object in the session.
+     * @return A Person object in the Session class specified by index.
+     * @throws InvalidDataException if personList is empty or index is not in [1, personList.size()].
+     */
     public Person getPersonByIndex(int index) throws InvalidDataException {
         if (personList.isEmpty()) {
             throw new InvalidDataException(Message.ERROR_SESSION_EMPTY_PERSON_LIST);
@@ -91,6 +98,13 @@ public class Session {
         }
     }
 
+    /**
+     * Returns a Person object with a name that matches the queried name.
+     * 
+     * @param name A query name used to search for a Person object.
+     * @return A person object in the Session class that has a matching name.
+     * @throws InvalidDataException if personList is empty or no Person object in personList matches queried name.
+     */
     public Person getPersonByName(String name) throws InvalidDataException {
         if (personList.isEmpty()) {
             throw new InvalidDataException(Message.ERROR_SESSION_EMPTY_PERSON_LIST);
@@ -104,10 +118,20 @@ public class Session {
         throw new InvalidDataException(Message.ERROR_SESSION_PERSON_NOT_IN_LIST);
     }
 
+    /**
+     * Returns a list of Person objects representing the participants in the session.
+     * 
+     * @return An ArrayList object containing Person objects that are part of the session.
+     */
     public ArrayList<Person> getPersonList() {
         return personList;
     }
 
+    /**
+     * Adds a Person object to the session.
+     * 
+     * @param person A Person object representing a participant of the session.
+     */
     public void addPerson(Person person) {
         personList.add(person);
     }
