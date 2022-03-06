@@ -27,13 +27,13 @@ public class Person {
      * Constructs an activityCost object and adds it to the list of activityCosts.
      *
      * @param activityId the activityId.
-     * @param cost the cost of the activity.
+     * @param costPaid the cost of the activity.
      * @throws InvalidDataException if the activityCost cannot be created from the given parameters.
      */
     public void addActivityCost(int activityId, double costPaid, double costOwed) throws InvalidDataException {
-        ActivityCost activityCost = new ActivityCost(activityId, cost);
+        ActivityCost activityCost = new ActivityCost(activityId, costPaid, costOwed);
         activityCostList.add(activityCost);
-        totalCost += activityCost.getCost();
+        totalCost += costPaid;
     }
 
     public double getTotalCost() {
