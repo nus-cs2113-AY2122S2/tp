@@ -11,7 +11,6 @@ import java.util.ArrayList;
  */
 public class Person {
     private final String name;
-    private double totalCost;
     private ArrayList<ActivityCost> activityCostList;
 
     /**
@@ -34,11 +33,32 @@ public class Person {
     public void addActivityCost(int activityId, double costPaid, double costOwed) throws InvalidDataException {
         ActivityCost activityCost = new ActivityCost(activityId, costPaid, costOwed);
         activityCostList.add(activityCost);
-        totalCost += costPaid;
     }
 
+    public double getTotalCostPaid() {
+        double totalCostPaid = 0;
+        for (ActivityCost i : activityCostList) {
+            totalCostPaid += i.getCostPaid();
+        }
+        return totalCostPaid;
+    }
+
+    public double getTotalCostOwed() {
+        double totalCostOwed = 0;
+        for (ActivityCost i : activityCostList) {
+            totalCostOwed += i.getCostOwed();
+        }
+        return totalCostOwed;
+    }
+    
     public double getTotalCost() {
-        return totalCost;
+        double totalCostPaid = 0;
+        double totalCostOwed = 0;
+        for (ActivityCost i : activityCostList) {
+            totalCostPaid += i.getCostPaid();
+            totalCostOwed += i.getCostOwed();
+        }
+        return totalCostPaid - totalCostOwed;
     }
 
     public String getName() {
