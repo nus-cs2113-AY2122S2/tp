@@ -54,10 +54,21 @@ public class Session {
     public String getDateString() {
         return dateCreated.getDayOfMonth() + " " + dateCreated.getMonth() + " " + dateCreated.getYear();
     }
+
+    /**
+     * Returns a list of Activity objects representing the activities that occurred in that session.
+     * 
+     * @return An ArrayList object containing Activity objects that are part of the session.
+     */
     public ArrayList<Activity> getActivityList() {
         return activityList;
     }
 
+    /**
+     * Adds an Activity object to the session.
+     * 
+     * @param activity An Activity object representing an activity that happened in the session.
+     */
     public void addActivity(Activity activity) {
         activityList.add(activity);
     }
