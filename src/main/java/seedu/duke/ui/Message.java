@@ -18,6 +18,8 @@ public abstract class Message {
             + "          $$ |\n"
             + "          $$ |\n"
             + "          \\__|";
+    public static final String HELP_MENU =
+            "HELP MENU"; //TODO: Populate help menu
     
     public static final String ERROR_PARSER_DELIMITER_NOT_FOUND =
             "Please include the following delimiter in your input: ";

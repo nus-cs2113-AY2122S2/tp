@@ -42,6 +42,10 @@ public class TextUI {
     private void printDivider() {
         out.println("============================================================");
     }
+    
+    public void printHelpMenu() {
+        out.println(Message.HELP_MENU);
+    }
 
     public void printFarewell() {
         printDivider();

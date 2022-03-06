@@ -4,6 +4,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.ActivityCreateCommand;
 import seedu.duke.command.ActivityListCommand;
 import seedu.duke.command.ActivityViewCommand;
+import seedu.duke.command.HelpCommand;
 import seedu.duke.command.SessionCreateCommand;
 import seedu.duke.command.SessionDeleteCommand;
 import seedu.duke.command.SessionSummaryCommand;
@@ -294,6 +295,8 @@ public class Parser {
         case ActivityViewCommand.COMMAND_TEXT:
             // return Relevant command.prepare(remainingArgs);
             return new InvalidCommand("Command is currently not implemented, please try again later.");
+        case HelpCommand.COMMAND_TEXT:
+            return new HelpCommand();
         case ExitCommand.COMMAND_TEXT:
             return new ExitCommand();
         default:
