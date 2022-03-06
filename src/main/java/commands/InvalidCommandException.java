@@ -6,7 +6,7 @@ public class InvalidCommandException extends Exception {
 
     private String throwingClass;
 
-    public InvalidCommandException (String throwingClass, String errorMessage) {
+    public InvalidCommandException(String throwingClass, String errorMessage) {
         super(errorMessage);
         this.throwingClass = throwingClass;
     }
