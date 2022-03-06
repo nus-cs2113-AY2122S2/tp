@@ -8,18 +8,21 @@ package seedu.duke.data;
  */
 public class ActivityCost {
     private int activityId;
-    private double cost;
+    private double costPaid;
+    private double costOwed;
 
     /**
      * Constructs an ActivityCost object.
      * Assumption: Every field is non-negative.
      *
      * @param activityId int representing the activityId.
-     * @param cost double representing activity cost.
+     * @param costPaid double representing cost paid.
+     * @param costOwed double representing cost owed.
      */
-    public ActivityCost(int activityId, double cost) {
+    public ActivityCost(int activityId, double costPaid, double costOwed) {
         this.activityId = activityId;
-        this.cost = cost;
+        this.costPaid = costPaid;
+        this.costOwed = costOwed;
     }
 
     /**
@@ -29,7 +32,7 @@ public class ActivityCost {
      * @param activityId int representing the activityId.
      */
     public ActivityCost(int activityId) {
-        this(activityId, 0);
+        this(activityId, 0, 0);
     }
 
     /**
@@ -37,23 +40,32 @@ public class ActivityCost {
      */
     public ActivityCost() {
         this.activityId = -1;
-        this.cost = 0;
+        this.costPaid = 0;
+        this.costOwed = 0;
     }
 
     public int getActivityId() {
         return activityId;
     }
 
-    public double getCost() {
-        return cost;
+    public double getCostPaid() {
+        return costPaid;
+    }
+
+    public double getCostOwed() {
+        return costOwed;
     }
 
     public void setActivityId(int activityId) {
         this.activityId = activityId;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
+    public void setCostPaid(int costPaid) {
+        this.costPaid = costPaid;
+    }
+
+    public void setCostOwed(int costOwed) {
+        this.costOwed = costOwed;
     }
 
 }

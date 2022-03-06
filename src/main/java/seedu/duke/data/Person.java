@@ -11,7 +11,6 @@ import java.util.ArrayList;
  */
 public class Person {
     private final String name;
-    private double totalCost;
     private ArrayList<ActivityCost> activityCostList;
 
     /**
@@ -27,17 +26,45 @@ public class Person {
      * Constructs an activityCost object and adds it to the list of activityCosts.
      *
      * @param activityId the activityId.
-     * @param cost the cost of the activity.
+     * @param costPaid the cost of the activity paid by the payer.
+     * @param costOwed the money owed by an individual.
      * @throws InvalidDataException if the activityCost cannot be created from the given parameters.
      */
-    public void addActivityCost(int activityId, double cost) throws InvalidDataException {
-        ActivityCost activityCost = new ActivityCost(activityId, cost);
+    public void addActivityCost(int activityId, double costPaid, double costOwed) throws InvalidDataException {
+        ActivityCost activityCost = new ActivityCost(activityId, costPaid, costOwed);
         activityCostList.add(activityCost);
-        totalCost += activityCost.getCost();
     }
 
+    public double getTotalCostPaid() {
+        double totalCostPaid = 0;
+        for (ActivityCost i : activityCostList) {
+            totalCostPaid += i.getCostPaid();
+        }
+        return totalCostPaid;
+    }
+
+    public double getTotalCostOwed() {
+        double totalCostOwed = 0;
+        for (ActivityCost i : activityCostList) {
+            totalCostOwed += i.getCostOwed();
+        }
+        return totalCostOwed;
+    }
+
+    /**
+     * Calculates the amount of money other Persons owe to this Person.
+     * In other words, how much money this Person must receive in order to break even.
+     *
+     * @return Sum of all costPaids - sum of all costOweds in the list of ActivityCosts for this Person.
+     */
     public double getTotalCost() {
-        return totalCost;
+        double totalCostPaid = 0;
+        double totalCostOwed = 0;
+        for (ActivityCost i : activityCostList) {
+            totalCostPaid += i.getCostPaid();
+            totalCostOwed += i.getCostOwed();
+        }
+        return totalCostPaid - totalCostOwed;
     }
 
     public String getName() {
