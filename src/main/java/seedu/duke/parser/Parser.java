@@ -1,8 +1,16 @@
 package seedu.duke.parser;
 
 import seedu.duke.command.Command;
-import seedu.duke.command.InvalidCommand;
+import seedu.duke.command.ActivityCreateCommand;
+import seedu.duke.command.ActivityListCommand;
+import seedu.duke.command.ActivityViewCommand;
+import seedu.duke.command.HelpCommand;
 import seedu.duke.command.SessionCreateCommand;
+import seedu.duke.command.SessionDeleteCommand;
+import seedu.duke.command.SessionListCommand;
+import seedu.duke.command.SessionSummaryCommand;
+import seedu.duke.command.ExitCommand;
+import seedu.duke.command.InvalidCommand;
 import seedu.duke.exceptions.InvalidFormatException;
 import seedu.duke.ui.Message;
 
@@ -36,6 +44,7 @@ public class Parser {
     private static final String REGEX_WHITESPACES_DELIMITER = "\\s+";
     private static final int INVALID_INDEX_INDICATOR = -1;
     private static final int COMMAND_WITH_ARGS_TOKEN_COUNT = 3;
+    private static final int DELIMITERED_COMMAND_MIN_TOKEN_COUNT = 2;
     private static final int MINIMUM_SURCHARGE_PERCENT = 0;
     private static final int MAXIMUM_SURCHARGE_PERCENT = 100;
 
@@ -101,9 +110,58 @@ public class Parser {
         }
     }
 
-    private static boolean delimiterExists(String commandArgs, String delimiter) {
+    private static boolean hasDelimiter(String commandArgs, String delimiter) {
         int delimiterIndex = commandArgs.indexOf(delimiter);
         return delimiterIndex != INVALID_INDEX_INDICATOR;
+    }
+    
+    private static boolean isValidDelimiter(String token) {
+        if (token == null) {
+            return false;
+        }
+        
+        switch (token) {
+        case NAME_DELIMITER:
+            // Fallthrough
+        case PERSON_LIST_DELIMITER:
+            // Fallthrough
+        case INVOLVED_DELIMITER:
+            // Fallthrough
+        case PAYER_DELIMITER:
+            // Fallthrough
+        case SESSION_ID_DELIMITER:
+            // Fallthrough
+        case ACTIVITY_ID_DELIMITER:
+            // Fallthrough
+        case GROUP_ID_DELIMITER:
+            // Fallthrough
+        case DATE_DELIMITER:
+            // Fallthrough
+        case TOTAL_COST_DELIMITER:
+            // Fallthrough
+        case COST_LIST_DELIMITER:
+            // Fallthrough
+        case GST_DELIMITER:
+            // Fallthrough
+        case SERVICE_CHARGE_DELIMITER:
+            return true;
+        default:
+            return false;
+        }
+    }
+    
+    private static boolean containsInvalidDelimiters(String commandArgs) {
+        if (commandArgs == null) {
+            return false;
+        }
+        
+        String[] argumentTokens = commandArgs.split(REGEX_WHITESPACES_DELIMITER);
+        for (String token : argumentTokens) {
+            if (token.contains(DELIMITER_INDICATOR) && !isValidDelimiter(token)) {
+                return true;
+            }
+        }
+        return false;
     }
     
     // MAIN PUBLIC PARSING FUNCTIONS
@@ -136,7 +194,7 @@ public class Parser {
     }
 
     public static LocalDate parseLocalDate(String commandArgs) throws InvalidFormatException {
-        if (!delimiterExists(commandArgs, DATE_DELIMITER)) {
+        if (!hasDelimiter(commandArgs, DATE_DELIMITER)) {
             throw new InvalidFormatException(getMissingDelimiterErrorMessage(DATE_DELIMITER));
         }
         
@@ -164,7 +222,7 @@ public class Parser {
     }
 
     public static int parseGst(String commandArgs) throws InvalidFormatException {
-        if (!delimiterExists(commandArgs, GST_DELIMITER)) {
+        if (!hasDelimiter(commandArgs, GST_DELIMITER)) {
             return 0;
         }
 
@@ -177,7 +235,7 @@ public class Parser {
     }
 
     public static int parseServiceCharge(String commandArgs) throws InvalidFormatException {
-        if (!delimiterExists(commandArgs, SERVICE_CHARGE_DELIMITER)) {
+        if (!hasDelimiter(commandArgs, SERVICE_CHARGE_DELIMITER)) {
             return 0;
         }
 
@@ -199,8 +257,11 @@ public class Parser {
     }
 
     public static String getCommandType(String commandArgs) {
-        String[] commandTokens = commandArgs.trim().split(REGEX_WHITESPACES_DELIMITER,COMMAND_WITH_ARGS_TOKEN_COUNT);
-        if (commandTokens.length < COMMAND_WITH_ARGS_TOKEN_COUNT || !commandTokens[1].startsWith(DELIMITER_INDICATOR)) {
+        String[] commandTokens = commandArgs.trim().split(REGEX_WHITESPACES_DELIMITER, COMMAND_WITH_ARGS_TOKEN_COUNT);
+        
+        if (commandTokens.length < DELIMITERED_COMMAND_MIN_TOKEN_COUNT) {
+            return commandTokens[0];
+        } else if (!commandTokens[1].startsWith(DELIMITER_INDICATOR)) {
             return null;
         }
         return commandTokens[0] + " " + commandTokens[1];
@@ -211,12 +272,36 @@ public class Parser {
         String remainingArgs = getRemainingArgument(input);
 
         if (commandType == null) {
-            return new InvalidCommand("");
+            return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
+        }
+        
+        if (containsInvalidDelimiters(remainingArgs)) {
+            return new InvalidCommand(Message.ERROR_PARSER_INVALID_DELIMITERS);
         }
 
         switch (commandType) {
+        case "":
+            return new InvalidCommand(Message.ERROR_PARSER_EMPTY_COMMAND);
+        // TEMPORARY FALLTHROUGH FOR ALL COMMANDS UNTIL COMMANDS ARE PROPERLY SET UP
         case SessionCreateCommand.COMMAND_TEXT:
+            // FALLTHROUGH
+        case SessionDeleteCommand.COMMAND_TEXT:
+            // FALLTHROUGH
+        case SessionListCommand.COMMAND_TEXT:
+            // FALLTHROUGH
+        case SessionSummaryCommand.COMMAND_TEXT:
+            // FALLTHROUGH
+        case ActivityCreateCommand.COMMAND_TEXT:
+            // FALLTHROUGH
+        case ActivityListCommand.COMMAND_TEXT:
+            // FALLTHROUGH
+        case ActivityViewCommand.COMMAND_TEXT:
             // return Relevant command.prepare(remainingArgs);
+            return new InvalidCommand("Command is currently not implemented, please try again later.");
+        case HelpCommand.COMMAND_TEXT:
+            return new HelpCommand();
+        case ExitCommand.COMMAND_TEXT:
+            return new ExitCommand();
         default:
             return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
         }

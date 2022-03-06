@@ -1,6 +1,10 @@
 package seedu.duke;
 
+import seedu.duke.command.Command;
+import seedu.duke.command.ExitCommand;
+import seedu.duke.data.Manager;
 import seedu.duke.data.Profile;
+import seedu.duke.parser.Parser;
 import seedu.duke.ui.TextUI;
 
 /**
@@ -8,8 +12,7 @@ import seedu.duke.ui.TextUI;
  * Initializes SplitLah and starts interacting with the user.
  */
 public class Duke {
-    TextUI ui;
-    Profile profile;
+    Manager manager;
 
     public static void main(String[] args) {
         new Duke().run();
@@ -17,33 +20,33 @@ public class Duke {
 
     /** Sets up the required objects for application.   */
     public Duke() {
-        ui = new TextUI();
-        profile = new Profile();
+        manager = new Manager();
     }
 
     /** Runs the program until it terminates.  */
     private void run() {
         showWelcomeMessage();
         runProcessLoop();
-        showFarewellMessage();
+        exitApplication();
     }
 
     /** Prints welcome message. */
     private void showWelcomeMessage() {
-        ui.printWelcome();
+        manager.getUi().printWelcome();
     }
 
-    /** Shows farewell message and exits the program. */
-    private void showFarewellMessage() {
-        ui.printFarewell();
+    /** Exits the program. */
+    private void exitApplication() {
         System.exit(0);
     }
 
-    /** Reads the user input until the user enters the bye command.  */
+    /** Reads the user input until the user enters the exit command.  */
     private void runProcessLoop() {
-        String userInput;
+        Command command;
         do {
-            userInput = ui.readNextLine();
-        } while (userInput.contains("Bye"));
+            String userInput = manager.getUi().readNextLine();
+            command = Parser.getCommand(userInput);
+            command.run(manager);
+        } while (!Command.isExitCommand(command));
     }
 }
