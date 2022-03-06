@@ -78,6 +78,16 @@ public class WorkoutCommand extends Command {
         } catch (InvalidWorkoutException e) {
             System.out.println(e.getMessage());
             System.out.println("Please try again.");
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Uh oh, it seems like too few arguments were entered.");
+            System.out.println("Please try again. Alternatively, type 'help' if you need\n" +
+                    "more information on the commands.");
+
+        } catch (NumberFormatException e) {
+            System.out.println("Uh oh, a number was expected in your input, but a non-formattable\n" +
+                    "number was received.");
+            System.out.println("Please try again.");
         }
     }
 }

@@ -14,7 +14,7 @@ public class WorkoutList {
     }
 
     public Workout createAndAddWorkout(String userArgument) throws ArrayIndexOutOfBoundsException,
-            InvalidExerciseException, InvalidWorkoutException {
+            NumberFormatException, InvalidExerciseException, InvalidWorkoutException {
         String userExerciseInput = userArgument.split("/reps")[0].trim();
         String userRepsInputString = userArgument.split("/reps")[1].trim();
         int userRepsInput = Integer.parseInt(userRepsInputString);
