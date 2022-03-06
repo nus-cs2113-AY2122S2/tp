@@ -25,10 +25,10 @@ public class HelpCommand extends Command {
 
     private void showHelpList(Ui ui) {
         System.out.println("Here is a list of commands available:");
-        String[] helpCommands = {ListCommand.COMMAND_WORD, MarkCommand.COMMAND_WORD
-                , UnmarkCommand.COMMAND_WORD, TodoCommand.COMMAND_WORD, DeadlineCommand.COMMAND_WORD
-                , EventCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD, FindCommand.COMMAND_WORD
-                , ClearCommand.COMMAND_WORD, ExitCommand.COMMAND_WORD,};
+        String[] helpCommands = {ListCommand.COMMAND_WORD, MarkCommand.COMMAND_WORD,
+            UnmarkCommand.COMMAND_WORD, TodoCommand.COMMAND_WORD, DeadlineCommand.COMMAND_WORD,
+            EventCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD, FindCommand.COMMAND_WORD,
+            ClearCommand.COMMAND_WORD, ExitCommand.COMMAND_WORD,};
         for (String helpCommand : helpCommands) {
             ui.showLine();
             showSpecificHelpCommand(ui, helpCommand);
@@ -85,8 +85,8 @@ public class HelpCommand extends Command {
      * commands according to what the keyword is looking for.
      *
      * @param taskList Task array.
-     * @param ui Ui for printing.
-     * @param storage Storage for overwriting/appending save data. Not used in this method.
+     * @param ui       Ui for printing.
+     * @param storage  Storage for overwriting/appending save data. Not used in this method.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {

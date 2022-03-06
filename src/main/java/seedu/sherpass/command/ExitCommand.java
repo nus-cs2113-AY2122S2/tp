@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
 
     /**
      * Returns a boolean value denoting if the given Command object
-     * is of the same instance as an ExitCommand
+     * is of the same instance as an ExitCommand.
      *
      * @param c Command object
      * @return Returns true if c is an instance of ExitCommand. False otherwise.

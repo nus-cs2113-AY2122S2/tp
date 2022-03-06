@@ -7,7 +7,7 @@ import static seedu.sherpass.constant.Messages.WELCOME_MESSAGE;
 
 
 public class Ui {
-    private final static Scanner in = new Scanner(System.in);
+    private final Scanner in = new Scanner(System.in);
     private static final String PARTITION_LINE = "______________________________"
             + "______________________________";
     private static final String LS = System.lineSeparator();
@@ -49,8 +49,8 @@ public class Ui {
      * Prints a welcome message to greet the user.
      */
     public void showWelcomeMessage() {
-        String message = PARTITION_LINE + LS + LOGO +
-                WELCOME_MESSAGE + LS + PARTITION_LINE;
+        String message = PARTITION_LINE + LS + LOGO
+                + WELCOME_MESSAGE + LS + PARTITION_LINE;
         showToUser(message);
     }
 

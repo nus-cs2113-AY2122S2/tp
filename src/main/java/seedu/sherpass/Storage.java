@@ -126,7 +126,7 @@ public class Storage {
     }
 
     private void checkForRepeatedInputs(ArrayList<Task> saveTaskList) throws InputRepeatedException {
-        for (int i = 0; i < saveTaskList.size() -1; i++) {
+        for (int i = 0; i < saveTaskList.size() - 1; i++) {
             if (isTaskRepeated(saveTaskList, i)) {
                 throw new InputRepeatedException();
             }
@@ -134,11 +134,11 @@ public class Storage {
     }
 
     /**
-     * Loads back the save file onto the program.
-     *
-     * @return The saved data of the tasks in the saved file.
-     * tasks are represented in an array denoted by ArrayList<Task>.
-     */
+    * Loads back the save file onto the program.
+    *
+    * @return The saved data of the tasks in the saved file.
+    *       Tasks are represented in an array.
+    */
     public ArrayList<Task> load() {
         try {
             ArrayList<Task> saveTaskList = readSavedData();

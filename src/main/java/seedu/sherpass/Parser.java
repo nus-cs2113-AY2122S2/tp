@@ -1,6 +1,19 @@
 package seedu.sherpass;
 
-import seedu.sherpass.command.*;
+
+import seedu.sherpass.command.Command;
+import seedu.sherpass.command.DeadlineCommand;
+import seedu.sherpass.command.DeleteCommand;
+import seedu.sherpass.command.EventCommand;
+import seedu.sherpass.command.HelpCommand;
+import seedu.sherpass.command.MarkCommand;
+import seedu.sherpass.command.TodoCommand;
+import seedu.sherpass.command.UnmarkCommand;
+import seedu.sherpass.command.UpdateCommand;
+import seedu.sherpass.command.FindCommand;
+import seedu.sherpass.command.ListCommand;
+import seedu.sherpass.command.ExitCommand;
+import seedu.sherpass.command.ClearCommand;
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.task.Deadline;
@@ -64,8 +77,7 @@ public class Parser {
      *
      * @param rawData Array of strings containing saved data of task.
      * @return Task containing the saved data for adding into program's task array.
-     * @throws InvalidInputException If saved data is missing content, i.e.
-     * task description or date.
+     * @throws InvalidInputException If saved data is missing content, i.e. task description or date.
      */
     public static Task parseSavedData(String[] rawData) throws InvalidInputException {
         Task parsedData;
@@ -250,8 +262,8 @@ public class Parser {
         try {
             if (userInput[FIND_BY_TASK_CONTENT_INDEX].contains("/date")) {
                 parsedInputToSearchByDate = userInput[FIND_BY_TASK_CONTENT_INDEX].split("/date");
-                String taskDateToSearch = prepareTaskDate(parsedInputToSearchByDate[FIND_BY_TASK_DATE_INDEX].trim()
-                        , false);
+                String taskDateToSearch = prepareTaskDate(parsedInputToSearchByDate[FIND_BY_TASK_DATE_INDEX].trim(),
+                        false);
                 if (taskDateToSearch == null) {
                     return null;
                 }

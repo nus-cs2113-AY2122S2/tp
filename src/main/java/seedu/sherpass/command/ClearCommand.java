@@ -21,7 +21,7 @@ public class ClearCommand extends Command {
      * @param storage Overwrite saved data after deleting.
      */
     @Override
-    public void execute (TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> tempArray = taskList.getTasks();
         if (tempArray.size() <= 0) {
             ui.showToUser("There are no tasks to clear!");

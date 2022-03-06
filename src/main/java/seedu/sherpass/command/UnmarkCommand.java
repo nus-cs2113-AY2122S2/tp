@@ -4,7 +4,7 @@ import seedu.sherpass.Storage;
 import seedu.sherpass.TaskList;
 import seedu.sherpass.Ui;
 
-public class UnmarkCommand extends Command{
+public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
     public static final String MESSAGE_USAGE = "Unmark: Marks a task as undone."
             + "\nTo unmark a specific task, enter 'unmark <list_index>'.\n\n Here, "

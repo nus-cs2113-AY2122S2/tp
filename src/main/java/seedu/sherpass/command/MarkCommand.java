@@ -4,7 +4,7 @@ import seedu.sherpass.Storage;
 import seedu.sherpass.TaskList;
 import seedu.sherpass.Ui;
 
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
     public static final String MESSAGE_USAGE = "Mark: Marks a task as done. "
             + "\nTo mark a specific task, enter 'mark <list_index>'.\n\n Here, "

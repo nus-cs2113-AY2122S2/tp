@@ -13,8 +13,9 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Creates a constructor for the class TaskList
-     * @param savedTasks Representation of an array of tasks in the form of ArrayList<Task>.
+     * Creates a constructor for the class TaskList.
+     *
+     * @param savedTasks Representation of an array of tasks.
      */
     public TaskList(ArrayList<Task> savedTasks) {
         tasks = savedTasks;
@@ -23,7 +24,7 @@ public class TaskList {
     /**
      * Returns the array of tasks in the class TaskList.
      *
-     * @return the array of tasks represented using ArrayList<Task>.
+     * @return the array of tasks.
      */
     public ArrayList<Task> getTasks() {
         return tasks;
@@ -33,8 +34,8 @@ public class TaskList {
      * Adds a new task to the current array of tasks.
      *
      * @param taskDescription Description of the task.
-     * @param taskDate Date of the task
-     * @param taskType Task type, i.e. todo, deadline or event.
+     * @param taskDate        Date of the task
+     * @param taskType        Task type, i.e. todo, deadline or event.
      */
     public void addTask(String taskDescription, String taskDate, String taskType) {
         Task newTask;
@@ -135,8 +136,7 @@ public class TaskList {
      * Returns the index of a task given its task description.
      *
      * @param taskDescriptionToSearch Description of the task to search for.
-     * @return Index of a task, which corresponds to its placement
-     * in the task array.
+     * @return Index of a task, which corresponds to its placement in the task array.
      */
     public int findIndexToReplace(String taskDescriptionToSearch) {
         int index = -1;
@@ -155,8 +155,8 @@ public class TaskList {
      * Replaces the current date of the task with a new date input.
      *
      * @param taskIndexToReplace Index of a task to search for the task.
-     * @param newTaskDate New date input to replace the old task date.
-     * @param ui Ui for printing partition lines and messages.
+     * @param newTaskDate        New date input to replace the old task date.
+     * @param ui                 Ui for printing partition lines and messages.
      */
     public void replaceTaskDate(int taskIndexToReplace, String newTaskDate, Ui ui) {
         tasks.get(taskIndexToReplace).resetInput(newTaskDate);
@@ -194,7 +194,7 @@ public class TaskList {
      * Finds and prints tasks whose description matches the search keyword.
      *
      * @param findTaskByKeyword A keyword relating to the task description.
-     * @param ui Ui for printing messages.
+     * @param ui                Ui for printing messages.
      */
     public void findByTaskDescription(String findTaskByKeyword, Ui ui) {
         int printIndex = 1;
@@ -213,10 +213,10 @@ public class TaskList {
     }
 
     /**
-     *  Finds and prints tasks whose date and/or time matches the search keyword.
+     * Finds and prints tasks whose date and/or time matches the search keyword.
      *
      * @param findTaskByKeyword A keyword relating to the task date and/or time.
-     * @param ui Ui for printing messages.
+     * @param ui                Ui for printing messages.
      */
     public void findByTaskDate(String findTaskByKeyword, Ui ui) {
         int printIndex = 1;
@@ -238,7 +238,7 @@ public class TaskList {
      * Finds and prints tasks whose task type matches the search keyword.
      *
      * @param taskType Task type, i.e. todo, deadline or event.
-     * @param ui Ui for printing messages.
+     * @param ui       Ui for printing messages.
      */
     public void findByTaskType(String taskType, Ui ui) {
         int printIndex = 1;
