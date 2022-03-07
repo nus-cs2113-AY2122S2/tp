@@ -1,4 +1,5 @@
 greeting message
 Welcome to Contacts Manager
+You haven't added any contacts to your list yet!
 Welcome back to the main menu
 exit message
