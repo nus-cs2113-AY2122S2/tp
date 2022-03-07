@@ -62,6 +62,11 @@ public class Activity {
         return totalCost;
     }
 
+    /**
+     * Returns a person object representing the person who paid.
+     *
+     * @return A person object.
+     */
     public Person getPersonPaid() {
         return personPaid;
     }
