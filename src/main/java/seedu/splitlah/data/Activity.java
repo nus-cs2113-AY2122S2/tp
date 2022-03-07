@@ -92,6 +92,16 @@ public class Activity {
         return activityId + DELIMITER + activityName + DELIMITER + costInString + DELIMITER + personName;
     }
 
+    /**
+     * Returns a string which provides the details of the activity, including the name of the activity,
+     * the id of the activity, the name of the person who paid for the activity, the total cost of the activity,
+     * the persons involved in the activity and their respective costs for the activity.
+     *
+     * @return A string which provides the details of the activity.
+     * @throws InvalidDataException If there is no activity found or if the person in the involvedPersonsList
+     * did not participate in the activity.
+     * @see InvalidDataException
+     */
     public String getActivityDetails() throws InvalidDataException {
         return "Activity --"
                 + "Name: " + activityName + '\n'
