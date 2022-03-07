@@ -21,7 +21,7 @@ public class MarkCommand extends Command{
 
             switch (parsedArg.get(FLAG)) {
             case COMPLETED_FLAG:
-
+                //
 
                 break;
             case UNCOMPLETED_FLAG:
