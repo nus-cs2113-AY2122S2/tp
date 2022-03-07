@@ -35,6 +35,11 @@ public class Activity {
         this.involvedPersonList = involvedPersonList;
     }
 
+    /**
+     * Gets the id of the activity.
+     *
+     * @return The id of the activity.
+     */
     public int getActivityId() {
         return activityId;
     }
