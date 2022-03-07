@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class AddCommand extends Command {
     private final ArrayList<String> COMMAND_STRINGS;
+    public final String COMMAND_WORD = "add";
 
     /**
      * constructor for AddCommand. Initialises successMessage and usageReminder from Command
@@ -14,17 +15,21 @@ public class AddCommand extends Command {
      */
     public AddCommand(ArrayList<String> commandStrings){
         this.COMMAND_STRINGS = commandStrings;
-        successMessage = "Equipment successfully added: %1$s, serial number %2$s" ;
-        usageReminder = ": Adds a Equipment to the equipmentInventory. "
+        successMessage = "Equipment successfully added: %1$s, serial number %2$s";
+        usageReminder = COMMAND_WORD + ": Adds a Equipment to the equipmentInventory. "
                 + "Parameters: n/ITEM_NAME sn/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE\n"
                 + "Example: "
                 + "add n/SpeakerB sn/S1404115ASF t/Speaker c/1000 pf/Loud_Technologies pd/2022-02-23";
     }
 
+    /**
+     * Adds equipment with details given in COMMAND_STRINGS
+     * @return CommandResult with message from execution of this command
+     */
     public CommandResult execute(){
         addEquipment(COMMAND_STRINGS);
 
-        return new CommandResult(String.format(successMessage, COMMAND_STRINGS.get(0), COMMAND_STRINGS.get(1)), equipmentInventory.getEquipmentList());
+        return new CommandResult(String.format(successMessage, COMMAND_STRINGS.get(0), COMMAND_STRINGS.get(1)));
     }
 
     /**
