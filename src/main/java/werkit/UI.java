@@ -1,4 +1,4 @@
-package werkIt;
+package werkit;
 
 import data.workouts.Workout;
 
@@ -9,12 +9,12 @@ import java.util.Scanner;
  */
 public class UI {
     // WerkIt ASCII Banner Logo Art
-    public static final String WERKIT_BANNER_LOGO = " __        __        _    ___ _   _ \n" +
-            " \\ \\      / /__ _ __| | _|_ _| |_| |\n" +
-            "  \\ \\ /\\ / / _ \\ '__| |/ /| || __| |\n" +
-            "   \\ V  V /  __/ |  |   < | || |_|_|\n" +
-            "    \\_/\\_/ \\___|_|  |_|\\_\\___|\\__(_)\n" +
-            "                                    ";
+    public static final String WERKIT_BANNER_LOGO = " __        __        _    ___ _   _ \n"
+            + " \\ \\      / /__ _ __| | _|_ _| |_| |\n"
+            + "  \\ \\ /\\ / / _ \\ '__| |/ /| || __| |\n"
+            + "   \\ V  V /  __/ |  |   < | || |_|_|\n"
+            + "    \\_/\\_/ \\___|_|  |_|\\_\\___|\\__(_)\n"
+            + "                                    ";
 
     public static final String WELCOME_MESSAGE = "Welcome to WerkIt!, your personal exercise planner.";
     public static final String GOODBYE_MESSAGE = "Thank you for using WerkIt! See you again soon...";
@@ -85,8 +85,7 @@ public class UI {
         printLine();
         if (isFirstPrompt) {
             System.out.println("Now then, what can I do for you today?");
-        }
-        else {
+        } else {
             System.out.println("What's next?");
         }
 
@@ -111,7 +110,7 @@ public class UI {
     /**
      * Prints a message when a new workout has been created. The newly created workout will also be displayed.
      *
-     * @param newWorkout
+     * @param newWorkout The Workout object that is newly created.
      */
     public void printNewWorkoutCreatedMessage(Workout newWorkout) {
         System.out.println(NEW_WORKOUT_CREATED_MESSAGE);

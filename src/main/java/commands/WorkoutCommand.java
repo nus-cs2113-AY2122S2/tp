@@ -4,10 +4,10 @@ import data.exercises.InvalidExerciseException;
 import data.workouts.InvalidWorkoutException;
 import data.workouts.Workout;
 import data.workouts.WorkoutList;
-import werkIt.UI;
+import werkit.UI;
 
 /**
- * A class that will handle
+ * A class that will handle the commands relating to workout.
  */
 public class WorkoutCommand extends Command {
     public static final String BASE_KEYWORD = "workout";
@@ -70,7 +70,15 @@ public class WorkoutCommand extends Command {
             case CREATE_ACTION_KEYWORD:
                 Workout newWorkout = workoutList.createAndAddWorkout(getUserArguments());
                 ui.printNewWorkoutCreatedMessage(newWorkout);
+                break;
+            default:
+                String className = this.getClass().getSimpleName();
+                throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
             }
+        } catch (InvalidCommandException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Please try again");
+
         } catch (InvalidExerciseException e) {
             System.out.println(e.getMessage());
             System.out.println("Please try again.");
@@ -81,12 +89,12 @@ public class WorkoutCommand extends Command {
 
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Uh oh, it seems like too few arguments were entered.");
-            System.out.println("Please try again. Alternatively, type 'help' if you need\n" +
-                    "more information on the commands.");
+            System.out.println("Please try again. Alternatively, type 'help' if you need\n"
+                    + "more information on the commands.");
 
         } catch (NumberFormatException e) {
-            System.out.println("Uh oh, a number was expected in your input, but a non-formattable\n" +
-                    "number was received.");
+            System.out.println("Uh oh, a number was expected in your input, but a non-formattable\n"
+                    + "number was received.");
             System.out.println("Please try again.");
         }
     }

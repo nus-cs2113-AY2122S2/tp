@@ -1,4 +1,4 @@
-package werkIt;
+package werkit;
 
 import commands.Command;
 import commands.ExitCommand;

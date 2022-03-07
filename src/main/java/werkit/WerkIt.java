@@ -1,4 +1,4 @@
-package werkIt;
+package werkit;
 
 import commands.Command;
 import commands.ExitCommand;
@@ -52,25 +52,25 @@ public class WerkIt {
         boolean userWantsToExit = false;
         boolean isFirstPrompt = true;
 
-            do {
-                try {
-                    ui.printUserInputPrompt(isFirstPrompt);
-                    isFirstPrompt = false;
-                    String userInput = ui.getUserInput();
-                    Command newCommand = parser.parseUserInput(userInput);
+        do {
+            try {
+                ui.printUserInputPrompt(isFirstPrompt);
+                isFirstPrompt = false;
+                String userInput = ui.getUserInput();
+                Command newCommand = parser.parseUserInput(userInput);
 
-                    if (newCommand instanceof ExitCommand) {
-                        userWantsToExit = true;
-                        continue;
-                    }
-
-                    newCommand.execute();
-
-                } catch (InvalidCommandException e) {
-                    System.out.println(e.getMessage());
-                    System.out.println("Please try again.");
+                if (newCommand instanceof ExitCommand) {
+                    userWantsToExit = true;
+                    continue;
                 }
-            } while (!userWantsToExit);
+
+                newCommand.execute();
+
+            } catch (InvalidCommandException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Please try again.");
+            }
+        } while (!userWantsToExit);
 
         // User is exiting the program
         ui.printGoodbye();
