@@ -4,6 +4,7 @@ import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class WorkoutList {
     ExerciseList exerciseList;
@@ -40,5 +41,35 @@ public class WorkoutList {
 
     public boolean checkIfRepsValueIsValid(int userRepsInput) {
         return userRepsInput >= 1;
+    }
+
+    public void listWorkout(){
+        int index = 0;
+        int totalPrints = workoutsList.size();
+
+        while (totalPrints > 10){
+            index = continuousPrinting(index, 10);
+            totalPrints -= 10;
+            System.out.println("Do you want to view more workouts? [yes/no]");
+            Scanner in = new Scanner(System.in);
+            String input = in.nextLine();
+            if (!input.equals("yes")) {
+                return;
+            }
+        }
+        if (totalPrints > 0){
+            index = continuousPrinting(index, totalPrints);
+            System.out.println("Showed all items in list");
+            return;
+        }
+    }
+
+    public int continuousPrinting(int index, int noOfPrints){
+        System.out.println("Showing workouts " + (index + 1) + "-" + (index + noOfPrints) + " of " + workoutsList.size() + ":");
+        for (int i = 0; i < noOfPrints; i++) {
+            System.out.println(index + 1 + ". " + workoutsList.get(index));
+            index += 1;
+        }
+        return index;
     }
 }

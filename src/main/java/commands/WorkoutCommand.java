@@ -70,6 +70,10 @@ public class WorkoutCommand extends Command {
             case CREATE_ACTION_KEYWORD:
                 Workout newWorkout = workoutList.createAndAddWorkout(getUserArguments());
                 ui.printNewWorkoutCreatedMessage(newWorkout);
+                break;
+            case LIST_ACTION_KEYWORD:
+                workoutList.listWorkout();
+                break;
             }
         } catch (InvalidExerciseException e) {
             System.out.println(e.getMessage());
