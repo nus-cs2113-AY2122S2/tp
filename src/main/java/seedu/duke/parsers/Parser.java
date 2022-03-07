@@ -40,7 +40,7 @@ public abstract class Parser {
             throw new ParseException();
         }
         for (Object groupName : groupNames) {
-            parsedCommand.put(groupName.toString(), matcher.group(groupName.toString()));
+            parsedCommand.put(groupName.toString(), matcher.group(groupName.toString()).trim());
         }
         return parsedCommand;
     }
