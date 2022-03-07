@@ -36,7 +36,7 @@ public class Activity {
     }
 
     /**
-     * Gets the id of the activity.
+     * Returns the id of the activity.
      *
      * @return The id of the activity.
      */
@@ -45,7 +45,7 @@ public class Activity {
     }
 
     /**
-     * Gets the name of the activity.
+     * Returns the name of the activity.
      *
      * @return The name of the activity.
      */
@@ -53,6 +53,11 @@ public class Activity {
         return activityName;
     }
 
+    /**
+     * Returns the total cost of the activity.
+     *
+     * @return The total cost of the activity.
+     */
     public double getTotalCost() {
         return totalCost;
     }
