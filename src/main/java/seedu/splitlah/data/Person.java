@@ -69,9 +69,9 @@ public class Person {
 
     /**
      * Returns the cost owed by this Person object for an Activity
-     * @param activityId
-     * @return
-     * @throws InvalidDataException
+     * @param activityId int representing activityId of the Activity.
+     * @return double representing cost owed by the Person for this Activity.
+     * @throws InvalidDataException if this Person is not participating in any Activities or the activityId is not found.
      */
     public double getActivityCostOwed(int activityId) throws InvalidDataException {
         if (activityCostList.isEmpty()) {
