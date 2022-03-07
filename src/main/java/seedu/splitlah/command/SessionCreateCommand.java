@@ -1,6 +1,8 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.parser.Parser;
 
 import java.time.LocalDate;
 
@@ -14,13 +16,14 @@ public class SessionCreateCommand extends Command {
 
     public static final String COMMAND_TEXT = "session /create";
 
-    private static final String COMMAND_FORMAT = "Syntax: session /create /n <SESSIONNAME> /p <NAME1 NAME2…>";
+    private static final String COMMAND_FORMAT =
+            "Syntax: session /create /n <SESSIONNAME> /d <SESSIONDATE> /pl <NAME1 NAME2…>";
 
     private String sessionName;
     private String[] personNames;
     private LocalDate sessionDate;
 
-    // Javadocs to be completed when implementing command.
+
     public SessionCreateCommand(String sessionName, String[] personNames, LocalDate date) {
         this.sessionName = sessionName;
         this.personNames = personNames;
@@ -28,30 +31,23 @@ public class SessionCreateCommand extends Command {
     }
 
     /**
-     * Returns the session name stored for session creation.
+     * Prepares user arguments for session create command.
      *
-     * @return A session name as String.
+     * @param commandArgs The user's arguments.
+     * @return A SessionCreateCommand object if session name, session date and person list were found in user arguments,
+     *      an InvalidCommand object otherwise.
      */
-    public String getSessionName() {
-        return sessionName;
-    }
+    public static Command prepare(String commandArgs) {
+        try {
+            String parsedSessionName = Parser.parseName(commandArgs);
+            String[] parsedNames = Parser.parsePersonList(commandArgs);
+            LocalDate parsedSessionDate = Parser.parseLocalDate(commandArgs);
 
-    /**
-     * Returns an array of people's names stored for session creation.
-     *
-     * @return An array of String for people's name.
-     */
-    public String[] getPersonNames() {
-        return personNames;
-    }
-
-    /**
-     * Returns the date information stored for session creation.
-     *
-     * @return A date as a LocalDate object.
-     */
-    public LocalDate getSessionDate() {
-        return sessionDate;
+            return new SessionCreateCommand(parsedSessionName, parsedNames, parsedSessionDate);
+        } catch (InvalidFormatException formatException) {
+            String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
+            return new InvalidCommand(invalidCommandMessage);
+        }
     }
 
     /**
