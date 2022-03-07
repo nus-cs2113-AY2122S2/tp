@@ -9,11 +9,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class ModHappyParser extends Parser {
-    
+
     private static final String ARGUMENT = "arguments";
     private static final String COMMAND_WORD = "commandWord";
     private static final String EXIT_COMMAND_WORD = "exit";
-    private static final String MOD_HAPPY_COMMAND_FORMAT = "(?<commandWord>\\S+)(?<arguments>.*)";
+    private static final String MOD_HAPPY_COMMAND_FORMAT = "(?<commandWord>\\S+)\\s*(?<arguments>.*)";
 
 
     public ModHappyParser() throws ModHappyException {

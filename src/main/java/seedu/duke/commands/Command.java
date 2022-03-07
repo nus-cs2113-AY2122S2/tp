@@ -1,6 +1,5 @@
 package seedu.duke.commands;
 
-import seedu.duke.exceptions.InstantiateAbstractClassException;
 import seedu.duke.exceptions.ModHappyException;
 
 /**

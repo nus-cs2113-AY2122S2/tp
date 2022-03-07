@@ -39,7 +39,6 @@ public abstract class Parser {
         if (!matcher.matches()) {
             throw new ParseException();
         }
-        System.out.println("test:" + matcher.group("commandWord"));
         for (Object groupName : groupNames) {
             parsedCommand.put(groupName.toString(), matcher.group(groupName.toString()));
         }
