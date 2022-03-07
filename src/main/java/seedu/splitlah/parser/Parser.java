@@ -1,18 +1,18 @@
-package seedu.duke.parser;
+package seedu.splitlah.parser;
 
-import seedu.duke.command.Command;
-import seedu.duke.command.ActivityCreateCommand;
-import seedu.duke.command.ActivityListCommand;
-import seedu.duke.command.ActivityViewCommand;
-import seedu.duke.command.HelpCommand;
-import seedu.duke.command.SessionCreateCommand;
-import seedu.duke.command.SessionDeleteCommand;
-import seedu.duke.command.SessionListCommand;
-import seedu.duke.command.SessionSummaryCommand;
-import seedu.duke.command.ExitCommand;
-import seedu.duke.command.InvalidCommand;
-import seedu.duke.exceptions.InvalidFormatException;
-import seedu.duke.ui.Message;
+import seedu.splitlah.command.Command;
+import seedu.splitlah.command.ActivityCreateCommand;
+import seedu.splitlah.command.ActivityListCommand;
+import seedu.splitlah.command.ActivityViewCommand;
+import seedu.splitlah.command.HelpCommand;
+import seedu.splitlah.command.SessionCreateCommand;
+import seedu.splitlah.command.SessionDeleteCommand;
+import seedu.splitlah.command.SessionListCommand;
+import seedu.splitlah.command.SessionSummaryCommand;
+import seedu.splitlah.command.ExitCommand;
+import seedu.splitlah.command.InvalidCommand;
+import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -284,7 +284,7 @@ public class Parser {
             return new InvalidCommand(Message.ERROR_PARSER_EMPTY_COMMAND);
         // TEMPORARY FALLTHROUGH FOR ALL COMMANDS UNTIL COMMANDS ARE PROPERLY SET UP
         case SessionCreateCommand.COMMAND_TEXT:
-            // FALLTHROUGH
+            return SessionCreateCommand.prepare(remainingArgs);
         case SessionDeleteCommand.COMMAND_TEXT:
             // FALLTHROUGH
         case SessionListCommand.COMMAND_TEXT:

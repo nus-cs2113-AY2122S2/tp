@@ -1,6 +1,6 @@
-package seedu.duke.command;
+package seedu.splitlah.command;
 
-import seedu.duke.data.Manager;
+import seedu.splitlah.data.Manager;
 
 /**
  * Represents a command object that when run, produces a summary of expenditure for that session.

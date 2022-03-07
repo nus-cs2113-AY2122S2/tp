@@ -1,6 +1,6 @@
-package seedu.duke.command;
+package seedu.splitlah.command;
 
-import seedu.duke.data.Manager;
+import seedu.splitlah.data.Manager;
 
 /**
  * Represents an ActivityViewCommand which displays activity id, name, totalCost, payer,

@@ -1,6 +1,6 @@
-package seedu.duke.command;
+package seedu.splitlah.command;
 
-import seedu.duke.data.Manager;
+import seedu.splitlah.data.Manager;
 
 /**
  * Represents an ActivityListCommand which display activity ids, name, and totalCost of each activity within session.

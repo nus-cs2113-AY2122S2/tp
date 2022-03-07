@@ -1,4 +1,4 @@
-package seedu.duke.ui;
+package seedu.splitlah.ui;
 
 import java.io.InputStream;
 import java.io.PrintStream;

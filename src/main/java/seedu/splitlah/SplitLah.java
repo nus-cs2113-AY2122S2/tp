@@ -1,25 +1,22 @@
-package seedu.duke;
+package seedu.splitlah;
 
-import seedu.duke.command.Command;
-import seedu.duke.command.ExitCommand;
-import seedu.duke.data.Manager;
-import seedu.duke.data.Profile;
-import seedu.duke.parser.Parser;
-import seedu.duke.ui.TextUI;
+import seedu.splitlah.command.Command;
+import seedu.splitlah.data.Manager;
+import seedu.splitlah.parser.Parser;
 
 /**
  * Entry point of the SplitLah application.
  * Initializes SplitLah and starts interacting with the user.
  */
-public class Duke {
+public class SplitLah {
     Manager manager;
 
     public static void main(String[] args) {
-        new Duke().run();
+        new SplitLah().run();
     }
 
     /** Sets up the required objects for application.   */
-    public Duke() {
+    public SplitLah() {
         manager = new Manager();
     }
 

@@ -1,6 +1,6 @@
-package seedu.duke.data;
+package seedu.splitlah.data;
 
-import seedu.duke.ui.TextUI;
+import seedu.splitlah.ui.TextUI;
 
 /**
  * Represents a manager that manages the UI and Profile objects of the application.
