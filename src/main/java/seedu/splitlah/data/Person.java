@@ -67,6 +67,24 @@ public class Person {
         return totalCostPaid - totalCostOwed;
     }
 
+    /**
+     * Returns the cost owed by this Person object for an Activity
+     * @param activityId
+     * @return
+     * @throws InvalidDataException
+     */
+    public double getActivityCostOwed(int activityId) throws InvalidDataException {
+        if (activityCostList.isEmpty()) {
+            throw new InvalidDataException("This person is not participating in any activities.");
+        }
+        for (ActivityCost i : activityCostList) {
+            if (i.getActivityId() == activityId) {
+                return i.getCostOwed();
+            }
+        }
+        throw new InvalidDataException("Activity not found.");
+    }
+
     public String getName() {
         return name;
     }
