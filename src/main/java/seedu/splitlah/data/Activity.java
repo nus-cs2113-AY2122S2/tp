@@ -99,7 +99,7 @@ public class Activity {
      *
      * @return A string which provides the details of the activity.
      * @throws InvalidDataException If there is no activity found or if the person in the involvedPersonsList
-     * did not participate in the activity.
+     *     did not participate in the activity.
      * @see InvalidDataException
      */
     public String getActivityDetails() throws InvalidDataException {
@@ -112,6 +112,14 @@ public class Activity {
                 + getInvolvedListString();
     }
 
+    /**
+     * Returns a string of the persons involved in the activity and their respective costs for the activity.
+     *
+     * @return A string of persons involved and their respective costs.
+     * @throws InvalidDataException If there is no activity found or if the person in the involvedPersonsList
+     *     did not participate in the activity.
+     * @see InvalidDataException
+     */
     private String getInvolvedListString() throws InvalidDataException {
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= involvedPersonList.size(); i++) {
