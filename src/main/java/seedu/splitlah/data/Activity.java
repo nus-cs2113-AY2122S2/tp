@@ -80,6 +80,12 @@ public class Activity {
         return involvedPersonList;
     }
 
+    /**
+     * Returns a string which summarises the activity, including id of the activity, the name of the activity,
+     * the total cost of the activity and the name of the person who paid for the activity.
+     *
+     * @return A string which summarises the activity.
+     */
     public String getActivitySummaryString() {
         String costInString = "$" + String.format("%.2f", totalCost);
         String personName = personPaid.getName();
