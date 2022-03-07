@@ -36,45 +36,46 @@ public class Activity {
     }
 
     /**
-     * Returns the id of the activity.
+     * Returns the session's unique identifier number.
+     * Assumption: The identifier number is unique across all session identifiers in the profile.
      *
-     * @return The id of the activity.
+     * @return An integer representing the activity's identifier number.
      */
     public int getActivityId() {
         return activityId;
     }
 
     /**
-     * Returns the name of the activity.
+     * Returns the activity's name.
      *
-     * @return The name of the activity.
+     * @return A String object containing the name of the session.
      */
     public String getActivityName() {
         return activityName;
     }
 
     /**
-     * Returns the total cost of the activity.
+     * Returns the activity's total cost.
      *
-     * @return The total cost of the activity.
+     * @return A double representing the total cost.
      */
     public double getTotalCost() {
         return totalCost;
     }
 
     /**
-     * Returns a person object representing the person who paid.
+     * Returns a Person object representing the activity's payer.
      *
-     * @return A person object.
+     * @return A Person object representing the person who paid for the activity.
      */
     public Person getPersonPaid() {
         return personPaid;
     }
 
     /**
-     * Returns an array list of person objects representing those who are involved in the activity.
+     * Returns a list of Person objects representing the participants in the activity.
      *
-     * @return An array list of person objects.
+     * @return An ArrayList object containing Person objects that are involved in the activity.
      */
     public ArrayList<Person> getInvolvedPersonList() {
         return involvedPersonList;
