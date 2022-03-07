@@ -21,7 +21,7 @@ public class Activity {
     /**
      * Constructs an Activity object that stores the relevant information required for an Activity.
      *
-     * @param activityId The id of the activity
+     * @param activityId The id of the activity.
      * @param activityName The name of the activity.
      * @param totalCost The total cost of the activity.
      * @param personPaid The person who paid for the activity.
@@ -37,8 +37,8 @@ public class Activity {
     }
 
     /**
-     * Returns the session's unique identifier number.
-     * Assumption: The identifier number is unique across all session identifiers in the profile.
+     * Returns the activity's unique identifier number.
+     * Assumption: The identifier number is unique across all activity identifiers in the profile.
      *
      * @return An integer representing the activity's identifier number.
      */
@@ -49,7 +49,7 @@ public class Activity {
     /**
      * Returns the activity's name.
      *
-     * @return A String object containing the name of the session.
+     * @return A String object containing the name of the activity.
      */
     public String getActivityName() {
         return activityName;
