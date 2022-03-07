@@ -61,7 +61,7 @@ public class Parser {
         // Determine the action the user has entered
         String actionKeyword = userInput.split(" ", 3)[1];
         String arguments = null;
-        switch (actionKeyword){
+        switch (actionKeyword) {
         case CREATE_ACTION_KEYWORD:
             arguments = userInput.split(" ", 3)[2];
             break;
