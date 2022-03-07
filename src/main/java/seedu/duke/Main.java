@@ -48,6 +48,7 @@ public class Main {
 
     /**
      * Reads the user command and executes it, until the user calls the exit command.
+     * See <a href="https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java">addressbook-level2</a>
      **/
     private void runCommandLoopUntilExitCommand() {
         Command command = null;
@@ -64,7 +65,10 @@ public class Main {
         } while (command == null || !command.getCommandName().equals(EXIT_COMMAND_WORD));
     }
 
-    /** Prints the Goodbye message and exits. */
+    /**
+     * Prints the Goodbye message and exits.
+     * See <a href="https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java">addressbook-level2</a>
+     * */
     private void exit() {
         ui.showGoodByeMessage();
         System.exit(0);
