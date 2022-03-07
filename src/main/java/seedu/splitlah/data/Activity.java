@@ -98,7 +98,7 @@ public class Activity {
      * the id of the activity, the name of the person who paid for the activity, the total cost of the activity,
      * the persons involved in the activity and their respective costs for the activity.
      *
-     * @return A string which provides the details of the activity.
+     * @return A String object representing the details of the activity.
      * @throws InvalidDataException If there is no activity found or if the person in the involvedPersonsList
      *     did not participate in the activity.
      * @see InvalidDataException
@@ -116,7 +116,7 @@ public class Activity {
     /**
      * Returns a string of the persons involved in the activity and their respective costs for the activity.
      *
-     * @return A string of persons involved and their respective costs.
+     * @return A String object representing persons involved and their respective costs.
      * @throws InvalidDataException If there is no activity found or if the person in the involvedPersonsList
      *     did not participate in the activity.
      * @see InvalidDataException
@@ -135,11 +135,12 @@ public class Activity {
 
     /**
      * Returns a string with the correct format for the involved persons and their costs for the activity.
+     * Format: <[INDEX]. [PERSON_NAME], $[COST_OWED]>, e.g. <1. Bob, $5.00>
      *
      * @param index The index of the person involved in the activity.
      * @param personName The name of the person involved in the activity.
      * @param costOwed The cost that has not been paid by the person involved in the activity.
-     * @return A string with the correct format for involved persons and costs.
+     * @return A String object with the correct format representing involved persons and costs.
      */
     private String formString(int index, String personName, Double costOwed) {
         return "<" + index + ". " + personName + ", $" + String.format("%.2f", costOwed) + ">\n";
