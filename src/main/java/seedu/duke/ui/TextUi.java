@@ -51,8 +51,8 @@ public class TextUi {
     /**
      * Show the hello message to user.
      */
-    public void showMessage(String message) {
-        out.println(formatMessage(message));
+    public void showMessage(Object message) {
+        out.println(formatMessage(message.toString()));
     }
 
     /**

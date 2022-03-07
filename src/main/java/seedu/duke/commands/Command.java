@@ -1,6 +1,6 @@
 package seedu.duke.commands;
 
-import seedu.duke.exceptions.InstantiateAbstractClassException;
+import seedu.duke.exceptions.ModHappyException;
 
 /**
  * Parent class of all commands in Mod Happy.
@@ -8,7 +8,9 @@ import seedu.duke.exceptions.InstantiateAbstractClassException;
 public abstract class Command {
     protected String commandName = "Command";
 
-    public String execute() throws InstantiateAbstractClassException {
-        throw new InstantiateAbstractClassException(commandName);
+    public abstract CommandResult execute() throws ModHappyException;
+
+    public String getCommandName() {
+        return commandName;
     }
 }
