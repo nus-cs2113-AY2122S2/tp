@@ -5,7 +5,6 @@ public class CommandResult {
     private static final String STRING_RESULT = "String";
     private String commandResultType = "String";
     private Object result;
-    public static int commandNumber = 0;
 
     public CommandResult(Object result) {
         this.result = result;
