@@ -17,7 +17,6 @@ public class ModHappyParser extends Parser {
     private static final String ADD_COMMAND_WORD = "add";
     private static final String MOD_HAPPY_COMMAND_FORMAT = "(?<commandWord>\\S+)\\s*(?<arguments>.*)";
 
-
     public ModHappyParser() {
         super();
         // See also https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
@@ -36,7 +35,7 @@ public class ModHappyParser extends Parser {
             case (EXIT_COMMAND_WORD):
                 return new ExitCommand(parsedCommand.get(COMMAND_WORD));
             case (ADD_COMMAND_WORD):
-                return new AddCommand(parsedCommand.get(COMMAND_WORD));
+                return new AddCommand(parsedCommand.get(ARGUMENT));
             default:
                 throw new UnknownCommandException(userInput);
             }
