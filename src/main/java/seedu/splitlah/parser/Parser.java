@@ -284,7 +284,7 @@ public class Parser {
             return new InvalidCommand(Message.ERROR_PARSER_EMPTY_COMMAND);
         // TEMPORARY FALLTHROUGH FOR ALL COMMANDS UNTIL COMMANDS ARE PROPERLY SET UP
         case SessionCreateCommand.COMMAND_TEXT:
-            // FALLTHROUGH
+            return SessionCreateCommand.prepare(remainingArgs);
         case SessionDeleteCommand.COMMAND_TEXT:
             // FALLTHROUGH
         case SessionListCommand.COMMAND_TEXT:
