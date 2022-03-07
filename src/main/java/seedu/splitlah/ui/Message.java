@@ -6,7 +6,8 @@ package seedu.splitlah.ui;
  * @author Saurav
  */
 public abstract class Message {
-    public static final String ERRORCODE_EXAMPLE = "";
+    // Template
+    public static final String ERROR_CLASS_ISSUE = "";
     // TextUI
     public static final String LOGO = " $$$$$$\\            $$\\ $$\\   $$\\     $$\\           $$\\\n"
             + "$$  $$\\           $$ |\\|  $$ |    $$ |          $$ |\n"
