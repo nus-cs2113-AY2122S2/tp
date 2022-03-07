@@ -51,7 +51,7 @@ public class ParserTest extends Parser {
             assertEquals("\\m", parsedCommand.get("flag"));
             assertEquals("CS2113T", parsedCommand.get("argument1"));
 
-            // add task without -mod
+            // add task with -mod
             groupNames.clear();
             groupNames.add("flag");
             groupNames.add("argument1");
