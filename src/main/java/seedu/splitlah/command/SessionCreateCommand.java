@@ -39,8 +39,11 @@ public class SessionCreateCommand extends Command {
 
     /**
      * Returns an array of people's names stored for session creation.
+     * Prepares user arguments for session create command.
      *
-     * @return An array of String for people's name.
+     * @param commandArgs The user's arguments.
+     * @return If parser does not throw InvalidFormatException, return SessionCreateCommand for execution.
+     *         Else, return InvalidCommand with error message and command usage.
      */
     public String[] getPersonNames() {
         return personNames;
