@@ -3,7 +3,7 @@ package seedu.duke.parsers;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.UnkownCommandException;
+import seedu.duke.exceptions.UnknownCommandException;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -34,13 +34,13 @@ public class ModHappyParser extends Parser {
             case (EXIT_COMMAND_WORD):
                 return new ExitCommand(parsedCommand.get(COMMAND_WORD));
             default:
-                throw new UnkownCommandException(userInput);
+                throw new UnknownCommandException(userInput);
             }
         } catch (ModHappyException e) {
-            throw new UnkownCommandException(userInput);
+            throw new UnknownCommandException(userInput);
         } catch (Exception e) {
             System.out.println(e);
-            throw new UnkownCommandException(userInput);
+            throw new UnknownCommandException(userInput);
         }
     }
 

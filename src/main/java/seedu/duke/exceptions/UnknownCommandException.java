@@ -1,13 +1,13 @@
 package seedu.duke.exceptions;
 
-public class UnkownCommandException extends ModHappyException {
+public class UnknownCommandException extends ModHappyException {
     private static final String ERROR_MESSAGE = "Sorry, I don't understand the following command(,,•́ . •̀,,) :";
 
-    public UnkownCommandException() {
+    public UnknownCommandException() {
         super(ERROR_MESSAGE);
     }
 
-    public UnkownCommandException(String userInput) {
+    public UnknownCommandException(String userInput) {
         super(String.format("%s\n\"%s\"", ERROR_MESSAGE, userInput));
     }
 }
