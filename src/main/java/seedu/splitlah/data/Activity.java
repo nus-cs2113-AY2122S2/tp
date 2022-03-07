@@ -91,7 +91,8 @@ public class Activity {
     public String getActivitySummaryString() {
         String costInString = "$" + String.format("%.2f", totalCost);
         String personName = personPaid.getName();
-        return activityId + SUMMARY_STRING_SEPARATOR + activityName + SUMMARY_STRING_SEPARATOR + costInString + SUMMARY_STRING_SEPARATOR + personName;
+        return activityId + SUMMARY_STRING_SEPARATOR + activityName + SUMMARY_STRING_SEPARATOR + costInString
+                + SUMMARY_STRING_SEPARATOR + personName;
     }
 
     /**
