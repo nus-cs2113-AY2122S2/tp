@@ -44,6 +44,11 @@ public class Activity {
         return activityId;
     }
 
+    /**
+     * Gets the name of the activity.
+     *
+     * @return The name of the activity.
+     */
     public String getActivityName() {
         return activityName;
     }
