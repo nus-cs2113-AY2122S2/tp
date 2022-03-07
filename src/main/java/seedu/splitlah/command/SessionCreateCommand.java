@@ -1,7 +1,6 @@
-package seedu.duke.command;
+package seedu.splitlah.command;
 
-import seedu.duke.data.Profile;
-import seedu.duke.ui.TextUI;
+import seedu.splitlah.data.Manager;
 
 import java.time.LocalDate;
 
@@ -58,12 +57,10 @@ public class SessionCreateCommand extends Command {
     /**
      * Runs the command to create a session.
      *
-     * @param ui      A user interface to which the command will read its input from and print its output to.
-     * @param profile A Profile object from which Session, Activity and other objects are used to run
-     *                the command.
+     * @param manager A Manager object that manages the TextUI and Profile object.
      */
     @Override
-    public void run(TextUI ui, Profile profile) {
+    public void run(Manager manager) {
 
     }
 }

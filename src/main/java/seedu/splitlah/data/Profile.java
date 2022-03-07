@@ -1,4 +1,4 @@
-package seedu.duke.data;
+package seedu.splitlah.data;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package seedu.duke.exceptions;
+package seedu.splitlah.exceptions;
 
 /**
  * Data-related errors (such as unexpected null objects) should throw

@@ -1,4 +1,4 @@
-package seedu.duke.exceptions;
+package seedu.splitlah.exceptions;
 
 /**
  * Format-related errors (such as invalid input) should throw

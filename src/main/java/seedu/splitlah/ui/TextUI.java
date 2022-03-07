@@ -1,4 +1,4 @@
-package seedu.duke.ui;
+package seedu.splitlah.ui;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -41,6 +41,10 @@ public class TextUI {
 
     private void printDivider() {
         out.println("============================================================");
+    }
+    
+    public void printHelpMenu() {
+        out.println(Message.HELP_MENU);
     }
 
     public void printFarewell() {

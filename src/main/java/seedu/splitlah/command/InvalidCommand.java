@@ -1,7 +1,6 @@
-package seedu.duke.command;
+package seedu.splitlah.command;
 
-import seedu.duke.data.Profile;
-import seedu.duke.ui.TextUI;
+import seedu.splitlah.data.Manager;
 
 /**
  * Takes in an error message as a String.
@@ -15,8 +14,8 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public void run(TextUI ui, Profile profile) {
-        ui.printlnMessage("Invalid command");
-        ui.printlnMessage(errorMessage);
+    public void run(Manager manager) {
+        manager.getUi().printlnMessage("Invalid command");
+        manager.getUi().printlnMessage(errorMessage);
     }
 }
