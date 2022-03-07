@@ -1,1 +1,3 @@
-James Gosling
+goto m/Contacts_Manager
+menu
+exit

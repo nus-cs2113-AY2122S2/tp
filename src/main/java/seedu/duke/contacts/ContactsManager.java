@@ -23,7 +23,7 @@ public class ContactsManager {
         System.out.println("add");
     }
 
-    public static void contactsRunner (TextUi ui) {
+    public static void contactsRunner(TextUi ui) {
         contactsWelcome();
         String userInput;
         while (true) {
