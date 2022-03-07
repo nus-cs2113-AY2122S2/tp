@@ -67,7 +67,23 @@ public class Activity {
                 + "Payer: " + personPaid.getName() + '\n'
                 + "Cost: " + totalCost + '\n'
                 + "Involved: \n"
-                + involvedPersonList;
+                + getInvolvedListString();
+    }
+
+    private String getInvolvedListString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= involvedPersonList.size(); i++) {
+            Person person = involvedPersonList.get(i - 1);
+            String personName = person.getName();
+            Double costOwed = person.getActivityCost(activityId);
+            String nextLineToAppend = formString(i, personName, costOwed);
+            sb.append(nextLineToAppend);
+        }
+        return sb.toString();
+    }
+
+    private String formString(int index, String personName, Double costOwed) {
+        return "<" + index + ". " + personName + ", $" + String.format("%.2f", costOwed) + ">\n";
     }
 
 }
