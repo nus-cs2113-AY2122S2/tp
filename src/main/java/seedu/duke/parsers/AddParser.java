@@ -21,6 +21,7 @@ public class AddParser extends Parser{
         groupNames.add("argument2");
     }
 
+    
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         return null;
