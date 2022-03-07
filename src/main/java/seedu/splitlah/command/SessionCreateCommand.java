@@ -53,6 +53,17 @@ public class SessionCreateCommand extends Command {
      */
     public LocalDate getSessionDate() {
         return sessionDate;
+    public static Command prepare(String commandArgs) {
+        try {
+            String parsedSessionName = Parser.parseName(commandArgs);
+            String[] parsedNames = Parser.parsePersonList(commandArgs);
+            LocalDate parsedSessionDate = Parser.parseLocalDate(commandArgs);
+
+            return new SessionCreateCommand(parsedSessionName, parsedNames, parsedSessionDate);
+        } catch (InvalidFormatException formatException) {
+            String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
+            return new InvalidCommand(invalidCommandMessage);
+        }
     }
 
     /**
