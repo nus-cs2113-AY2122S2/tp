@@ -9,6 +9,11 @@ import seedu.duke.ui.TextUi;
 public class Main {
 
     private static final String EXIT_COMMAND_WORD = "exit";
+    private static final String LIST_COMMAND_WORD = "list";
+    private static final String MARK_COMMAND_WORD = "mark";
+    private static final String ADD_COMMAND_WORD = "add";
+    private static final String DELETE_COMMAND_WORD = "del";
+
     private TextUi ui;
     private ModHappyParser modHappyParser;
 

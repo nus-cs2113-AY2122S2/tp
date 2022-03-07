@@ -1,5 +1,6 @@
 package seedu.duke.parsers;
 
+import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.exceptions.ModHappyException;
@@ -13,6 +14,7 @@ public class ModHappyParser extends Parser {
     private static final String ARGUMENT = "arguments";
     private static final String COMMAND_WORD = "commandWord";
     private static final String EXIT_COMMAND_WORD = "exit";
+    private static final String ADD_COMMAND_WORD = "add";
     private static final String MOD_HAPPY_COMMAND_FORMAT = "(?<commandWord>\\S+)\\s*(?<arguments>.*)";
 
 
@@ -33,6 +35,8 @@ public class ModHappyParser extends Parser {
             switch (parsedCommand.get(COMMAND_WORD)) {
             case (EXIT_COMMAND_WORD):
                 return new ExitCommand(parsedCommand.get(COMMAND_WORD));
+            case (ADD_COMMAND_WORD):
+                return new AddCommand(parsedCommand.get(COMMAND_WORD));
             default:
                 throw new UnknownCommandException(userInput);
             }
