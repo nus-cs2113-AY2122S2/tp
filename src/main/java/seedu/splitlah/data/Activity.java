@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Activity {
 
-    private static final String DELIMITER = " | ";
+    private static final String SUMMARY_STRING_SEPARATOR = " | ";
 
     private int activityId;
     private String activityName;
@@ -90,7 +90,7 @@ public class Activity {
     public String getActivitySummaryString() {
         String costInString = "$" + String.format("%.2f", totalCost);
         String personName = personPaid.getName();
-        return activityId + DELIMITER + activityName + DELIMITER + costInString + DELIMITER + personName;
+        return activityId + SUMMARY_STRING_SEPARATOR + activityName + SUMMARY_STRING_SEPARATOR + costInString + SUMMARY_STRING_SEPARATOR + personName;
     }
 
     /**
