@@ -34,8 +34,8 @@ public class SessionCreateCommand extends Command {
      * Prepares user arguments for session create command.
      *
      * @param commandArgs The user's arguments.
-     * @return If parser does not throw InvalidFormatException, return SessionCreateCommand for execution.
-     *         Else, return InvalidCommand with error message and command usage.
+     * @return A SessionCreateCommand object if session name, session date and person list were found in user arguments,
+     *      an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
         try {
