@@ -71,6 +71,11 @@ public class Activity {
         return personPaid;
     }
 
+    /**
+     * Returns an array list of person objects representing those who are involved in the activity.
+     *
+     * @return An array list of person objects.
+     */
     public ArrayList<Person> getInvolvedPersonList() {
         return involvedPersonList;
     }
