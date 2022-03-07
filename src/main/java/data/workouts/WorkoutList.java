@@ -9,6 +9,8 @@ import java.util.Scanner;
 public class WorkoutList {
     ExerciseList exerciseList;
     ArrayList<Workout> workoutsList = new ArrayList<>();
+    public static final int MAX_DISPLAY = 10;
+
 
     public WorkoutList(ExerciseList exerciseList) {
         this.exerciseList = exerciseList;
@@ -47,7 +49,7 @@ public class WorkoutList {
         int index = 0;
         int totalPrints = workoutsList.size();
 
-        while (totalPrints > 10) {
+        while (totalPrints > MAX_DISPLAY) {
             index = continuousPrinting(index, 10);
             totalPrints -= 10;
             System.out.println("Do you want to view more workouts? [yes/no]");
