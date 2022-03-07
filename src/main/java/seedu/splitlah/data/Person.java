@@ -1,6 +1,7 @@
 package seedu.splitlah.data;
 
 import seedu.splitlah.exceptions.InvalidDataException;
+import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
 
@@ -77,14 +78,14 @@ public class Person {
      */
     public double getActivityCostOwed(int activityId) throws InvalidDataException {
         if (activityCostList.isEmpty()) {
-            throw new InvalidDataException("This person is not participating in any activities.");
+            throw new InvalidDataException(Message.ERROR_NO_ACTIVITIES);
         }
-        for (ActivityCost i : activityCostList) {
-            if (i.getActivityId() == activityId) {
-                return i.getCostOwed();
+        for (ActivityCost activityCost : activityCostList) {
+            if (activityCost.getActivityId() == activityId) {
+                return activityCost.getCostOwed();
             }
         }
-        throw new InvalidDataException("Activity not found.");
+        throw new InvalidDataException(Message.ERROR_ACTIVITY_NOT_FOUND);
     }
 
     public String getName() {

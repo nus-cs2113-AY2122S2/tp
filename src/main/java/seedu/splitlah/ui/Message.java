@@ -7,6 +7,7 @@ package seedu.splitlah.ui;
  */
 public abstract class Message {
     public static final String ERRORCODE_EXAMPLE = "";
+    // TextUI
     public static final String LOGO = " $$$$$$\\            $$\\ $$\\   $$\\     $$\\           $$\\\n"
             + "$$  $$\\           $$ |\\|  $$ |    $$ |          $$ |\n"
             + "$$ /  \\__| $$$$$$\\  $$ |$$\\ $$$$$$\\   $$ | $$$$$$\\  $$$$$$$\\\n"
@@ -46,4 +47,11 @@ public abstract class Message {
             "Please enter a valid command.";
     public static final String ERROR_PARSER_INVALID_DELIMITERS =
             "The command contains one or more invalid delimiters. Please rectify and try again.";
+
+    // Person
+    public static final String ERROR_NO_ACTIVITIES =
+            "This person is not participating in any activities.";
+    public static final String ERROR_ACTIVITY_NOT_FOUND =
+            "Activity not found.";
+
 }
