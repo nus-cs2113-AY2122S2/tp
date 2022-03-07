@@ -49,9 +49,9 @@ public abstract class Message {
             "The command contains one or more invalid delimiters. Please rectify and try again.";
 
     // Person
-    public static final String ERROR_NO_ACTIVITIES =
+    public static final String ERROR_PERSON_NO_ACTIVITIES =
             "This person is not participating in any activities.";
-    public static final String ERROR_ACTIVITY_NOT_FOUND =
+    public static final String ERROR_PERSON_ACTIVITY_NOT_FOUND =
             "Activity not found.";
 
 }

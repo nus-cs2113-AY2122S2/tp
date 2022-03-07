@@ -78,14 +78,14 @@ public class Person {
      */
     public double getActivityCostOwed(int activityId) throws InvalidDataException {
         if (activityCostList.isEmpty()) {
-            throw new InvalidDataException(Message.ERROR_NO_ACTIVITIES);
+            throw new InvalidDataException(Message.ERROR_PERSON_NO_ACTIVITIES);
         }
         for (ActivityCost activityCost : activityCostList) {
             if (activityCost.getActivityId() == activityId) {
                 return activityCost.getCostOwed();
             }
         }
-        throw new InvalidDataException(Message.ERROR_ACTIVITY_NOT_FOUND);
+        throw new InvalidDataException(Message.ERROR_PERSON_ACTIVITY_NOT_FOUND);
     }
 
     public String getName() {
