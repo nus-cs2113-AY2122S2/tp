@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Activity {
 
     private static final String SUMMARY_STRING_SEPARATOR = " | ";
+    private static final int ZERO_INDEXING_OFFSET = 1;
 
     private int activityId;
     private String activityName;
@@ -124,7 +125,7 @@ public class Activity {
     private String getInvolvedListString() throws InvalidDataException {
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= involvedPersonList.size(); i++) {
-            Person person = involvedPersonList.get(i - 1);
+            Person person = involvedPersonList.get(i - ZERO_INDEXING_OFFSET);
             String personName = person.getName();
             Double costOwed = person.getActivityCostOwed(activityId);
             String nextLineToAppend = formString(i, personName, costOwed);
