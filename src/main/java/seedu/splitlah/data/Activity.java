@@ -132,6 +132,14 @@ public class Activity {
         return sb.toString();
     }
 
+    /**
+     * Returns a string with the correct format for the involved persons and their costs for the activity.
+     *
+     * @param index The index of the person involved in the activity.
+     * @param personName The name of the person involved in the activity.
+     * @param costOwed The cost that has not been paid by the person involved in the activity.
+     * @return A string with the correct format for involved persons and costs.
+     */
     private String formString(int index, String personName, Double costOwed) {
         return "<" + index + ". " + personName + ", $" + String.format("%.2f", costOwed) + ">\n";
     }
