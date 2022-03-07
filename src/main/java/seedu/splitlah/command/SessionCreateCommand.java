@@ -16,7 +16,8 @@ public class SessionCreateCommand extends Command {
 
     public static final String COMMAND_TEXT = "session /create";
 
-    private static final String COMMAND_FORMAT = "Syntax: session /create /n <SESSIONNAME> /d <SESSIONDATE> /pl <NAME1 NAME2…>";
+    private static final String COMMAND_FORMAT =
+            "Syntax: session /create /n <SESSIONNAME> /d <SESSIONDATE> /pl <NAME1 NAME2…>";
 
     private String sessionName;
     private String[] personNames;
@@ -56,6 +57,6 @@ public class SessionCreateCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-    
+
     }
 }
