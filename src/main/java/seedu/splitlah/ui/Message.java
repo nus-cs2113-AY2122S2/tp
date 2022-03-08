@@ -66,4 +66,8 @@ public abstract class Message {
             "There is another session with the same name, please try another name.";
     public static final String ERROR_PROFILE_DUPLICATE_NAME =
             "There seems to be duplicates in the session you are trying to create, please try again.";
+    public static final String ERROR_PROFILE_SESSION_LIST_EMPTY =
+            "There are no sessions currently stored.";
+    public static final String ERROR_PROFILE_SESSION_NOT_IN_LIST =
+            "The session that you have specified was not found.";
 }
