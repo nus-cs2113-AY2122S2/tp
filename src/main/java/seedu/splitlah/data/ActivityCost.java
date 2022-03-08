@@ -70,17 +70,6 @@ public class ActivityCost {
         this.costOwed = costOwed;
     }
 
-    /**
-     * Compares the ActivityCost object to the given int.
-     * Returns true if the supplied int is equal to this ActivityCost object's activityId.
-     *
-     * @param activityId int representing the activityId.
-     * @return true if this ActivityCost's activityId is equal to the supplied activityId.
-     */
-    public boolean compareActivityId(int activityId) {
-        return this.activityId == activityId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
