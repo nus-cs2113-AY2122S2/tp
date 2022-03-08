@@ -1,7 +1,6 @@
-package seedu.duke.command;
+package seedu.splitlah.command;
 
-import seedu.duke.data.Profile;
-import seedu.duke.ui.TextUI;
+import seedu.splitlah.data.Manager;
 
 /**
  * Represents an ActivityCreateCommand which has a run method that creates an activity.
@@ -50,7 +49,7 @@ public class ActivityCreateCommand extends Command {
     }
 
     @Override
-    public void run(TextUI ui, Profile profile) {
+    public void run(Manager manager) {
 
     }
 }

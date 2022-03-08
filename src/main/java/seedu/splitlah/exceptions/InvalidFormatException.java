@@ -1,11 +1,12 @@
-package seedu.duke.exceptions;
+package seedu.splitlah.exceptions;
 
 /**
- * Data-related errors (such as unexpected null objects) should throw
+ * Format-related errors (such as invalid input) should throw
  * this exception.
+ *
  * @author Saurav
  */
-public class InvalidDataException extends Exception {
+public class InvalidFormatException extends Exception {
     private final String message;
     private final Throwable cause;
 
@@ -14,9 +15,9 @@ public class InvalidDataException extends Exception {
      * Use this to store another exception (such as a Java exception) inside this exception to access it later.
      *
      * @param message A descriptive message of the error as a string.
-     * @param cause   a Throwable to be stored in this exception.
+     * @param cause a Throwable to be stored in this exception.
      */
-    public InvalidDataException(String message, Throwable cause) {
+    public InvalidFormatException(String message, Throwable cause) {
         this.message = message;
         this.cause = cause;
     }
@@ -24,9 +25,10 @@ public class InvalidDataException extends Exception {
     /**
      * Constructor that includes a message only.
      * Use this when no exception needs to be stored inside this one.
+     *
      * @param message a String with a descriptive message.
      */
-    public InvalidDataException(String message) {
+    public InvalidFormatException(String message) {
         this.message = message;
         this.cause = null;
     }
@@ -34,7 +36,7 @@ public class InvalidDataException extends Exception {
     /**
      * Default constructor. No message or exception will be stored.
      */
-    public InvalidDataException() {
+    public InvalidFormatException() {
         this.message = null;
         this.cause = null;
     }

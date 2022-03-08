@@ -1,4 +1,4 @@
-package seedu.duke.ui;
+package seedu.splitlah.ui;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -7,6 +7,7 @@ import java.util.Scanner;
 /**
  * Handles reading from and writing to the user interface.
  * Instantiate a TextUI object to create a user interface.
+ *
  * @author Saurav
  */
 public class TextUI {
@@ -40,6 +41,10 @@ public class TextUI {
 
     private void printDivider() {
         out.println("============================================================");
+    }
+    
+    public void printHelpMenu() {
+        out.println(Message.HELP_MENU);
     }
 
     public void printFarewell() {

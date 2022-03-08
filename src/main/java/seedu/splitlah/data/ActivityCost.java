@@ -1,42 +1,38 @@
-package seedu.duke.data;
-
-import seedu.duke.exceptions.InvalidDataException;
+package seedu.splitlah.data;
 
 /**
  * Represents an Activity and its cost.
  * Stores activityId and cost of the activity.
+ *
  * @author Saurav
  */
 public class ActivityCost {
     private int activityId;
-    private double cost;
+    private double costPaid;
+    private double costOwed;
 
     /**
      * Constructs an ActivityCost object.
      * Assumption: Every field is non-negative.
+     *
      * @param activityId int representing the activityId.
-     * @param cost double representing activity cost.
-     * @throws InvalidDataException if activityId or cost are negative.
+     * @param costPaid double representing cost paid.
+     * @param costOwed double representing cost owed.
      */
-    public ActivityCost(int activityId, double cost) throws InvalidDataException {
-        if (activityId < 0) {
-            throw new InvalidDataException("Activity ID cannot be negative.");
-        }
-        if (cost < 0) {
-            throw new InvalidDataException("Cost cannot be negative.");
-        }
+    public ActivityCost(int activityId, double costPaid, double costOwed) {
         this.activityId = activityId;
-        this.cost = cost;
+        this.costPaid = costPaid;
+        this.costOwed = costOwed;
     }
 
     /**
      * Constructs an ActivityCost object and sets cost to 0 if only activityId is supplied.
      * Assumption: Every field is non-negative.
+     *
      * @param activityId int representing the activityId.
-     * @throws InvalidDataException if activityId is negative.
      */
-    public ActivityCost(int activityId) throws InvalidDataException {
-        this(activityId, 0);
+    public ActivityCost(int activityId) {
+        this(activityId, 0, 0);
     }
 
     /**
@@ -44,23 +40,32 @@ public class ActivityCost {
      */
     public ActivityCost() {
         this.activityId = -1;
-        this.cost = 0;
+        this.costPaid = 0;
+        this.costOwed = 0;
     }
 
     public int getActivityId() {
         return activityId;
     }
 
-    public double getCost() {
-        return cost;
+    public double getCostPaid() {
+        return costPaid;
+    }
+
+    public double getCostOwed() {
+        return costOwed;
     }
 
     public void setActivityId(int activityId) {
         this.activityId = activityId;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
+    public void setCostPaid(int costPaid) {
+        this.costPaid = costPaid;
+    }
+
+    public void setCostOwed(int costOwed) {
+        this.costOwed = costOwed;
     }
 
 }
