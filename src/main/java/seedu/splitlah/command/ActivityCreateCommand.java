@@ -60,6 +60,14 @@ public class ActivityCreateCommand extends Command {
 
     }
 
+    private static void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaying, double cost,
+                                           double[] costList, int activityId) throws InvalidDataException {
+        for (int i = 0; i < involvedPersonList.size(); i++) {
+            Person person = involvedPersonList.get(i);
+            addCostOwedAndCostPaid(personPaying, cost, costList, activityId, i, person);
+        }
+    }
+
     private static void addCostOwedAndCostPaid(Person personPaying, double cost, double[] costList, int activityId,
                                                int i, Person person) throws InvalidDataException {
         if (person == personPaying) {
