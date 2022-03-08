@@ -76,7 +76,6 @@ public class Parser {
     }
 
     public HelpCommand createHelpCommand(String userInput) {
-        HelpCommand helpCommand = new HelpCommand(userInput);
-        return helpCommand;
+        return new HelpCommand(userInput);
     }
 }

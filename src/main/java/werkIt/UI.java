@@ -122,7 +122,7 @@ public class UI {
 
     /**
      * Prints the text in colors pre-defined in TextColor class.
-     * @param color ANSI color codes defined in TextColor class.
+     * @param color ANSI color codes defined in TextColor class ONLY.
      * @param text The string text that needs to be colored.
      */
     public void printColorText(String color, String text) {
@@ -191,6 +191,6 @@ public class UI {
     public void printExitHelp() {
         System.out.println("\t To exit werkIt, please enter: ");
         printColorText(COLOR_YELLOW, "\t exit");
-        System.out.println("\t This will exit werkIt. ☹");
+        System.out.println("\t ☹ This will exit werkIt. :-(");
     }
 }
