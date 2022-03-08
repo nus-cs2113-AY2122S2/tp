@@ -1,6 +1,7 @@
 package seedu.splitlah.data;
 
 import seedu.splitlah.exceptions.InvalidDataException;
+import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
@@ -37,6 +38,14 @@ public class Profile {
         return false;
     }
 
+    /**
+     * Returns the session object via session id specified by user.
+     *
+     * @param sessionId An id to be used to retrieve a session.
+     * @return A session object with the matching session id.
+     * @throws InvalidDataException if there are no sessions stored or the session id
+     *                          specified was not found.
+     */
     public Session getSession(int sessionId) throws InvalidDataException {
         if (sessionList.isEmpty()) {
             throw new InvalidDataException(Message.ERROR_PROFILE_SESSION_LIST_EMPTY);
