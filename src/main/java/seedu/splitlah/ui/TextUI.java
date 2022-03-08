@@ -49,9 +49,11 @@ public class TextUI {
         while (true) {
             switch (confirmation) {
             case ("yes"):
+                // fallthrough
             case ("y"):
                 return true;
             case ("no"):
+                // fallthrough
             case ("n"):
                 printlnMessage(Message.ERROR_TEXTUI_USER_DID_NOT_CONFIRM);
                 return false;
