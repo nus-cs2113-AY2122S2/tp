@@ -61,6 +61,14 @@ public class Session {
         return dateCreated.getDayOfMonth() + " " + dateCreated.getMonth() + " " + dateCreated.getYear();
     }
 
+    /**
+     * Returns an Activity object specified by a numerical identifier that uniquely identifies the activity.
+     * 
+     * @param activityId An integer that uniquely identifies an Activity object in the profile.
+     * @return An Activity object in the Session class specified by activityId
+     * @throws InvalidDataException if activityList is empty or activityList does not contain an Activity object 
+     *                              with the specified activityId
+     */
     public Activity getActivity(int activityId) throws InvalidDataException {
         if (activityList.isEmpty()) {
             throw new InvalidDataException(Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST);
@@ -74,6 +82,14 @@ public class Session {
         throw new InvalidDataException(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST);
     }
 
+    /**
+     * Removes an Activity object specified by a numerical identifier that uniquely identifies the activity
+     * from the Session.
+     *
+     * @param activityId An integer that uniquely identifies an Activity object in the profile.
+     * @throws InvalidDataException if activityList is empty or activityList does not contain an Activity object 
+     *                              with the specified activityId
+     */
     public void removeActivity(int activityId) throws InvalidDataException {
         if (activityList.isEmpty()) {
             throw new InvalidDataException(Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST);
