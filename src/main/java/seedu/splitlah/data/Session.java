@@ -183,4 +183,12 @@ public class Session {
     public void addPerson(Person person) {
         personList.add(person);
     }
+    public Session(String sessionName, int sessionId, LocalDate dateCreated, ArrayList<Person> personList) {
+        this.sessionName = sessionName;
+        this.sessionId = sessionId;
+        this.dateCreated = dateCreated;
+        this.personList = personList;
+        this.activityList = new ArrayList<>();
+    }
+
 }
