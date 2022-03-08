@@ -40,7 +40,7 @@ public class TextUI {
      * @param message A message to be printed initially to the user interface.
      * @return true if the user confirms
      */
-    public boolean doubleConfirm(String message) {
+    public boolean getUserConfirmation(String message) {
         printDivider();
         printlnMessage(message);
         printlnMessage(Message.PROMPT_TEXTUI_REQUEST_CONFIRMATION);
