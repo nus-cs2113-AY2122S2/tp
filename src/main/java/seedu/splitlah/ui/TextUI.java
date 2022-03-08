@@ -32,7 +32,33 @@ public class TextUI {
         return in.nextLine();
     }
 
-    public boolean doubleConfirm
+    /**
+     * Requests confirmation from the user via the user interface.
+     * The user may confirm by inputting Y/y/yes to the interface.
+     * The user may reject by inputting N/n/no to the interface.
+     *
+     * @param message A message to be printed initially to the user interface.
+     * @return true if the user confirms
+     */
+    public boolean doubleConfirm(String message) {
+        printDivider();
+        printlnMessage(message);
+        printlnMessage(Message.PROMPT_TEXTUI_REQUEST_CONFIRMATION);
+        String confirmation = readNextLine();
+        confirmation = confirmation.toLowerCase().strip();
+        printDivider();
+        while (true) {
+            if (confirmation.startsWith("y")) {
+                return true;
+            } else if (confirmation.startsWith("n")) {
+                printlnMessage(Message.ERROR_TEXTUI_USER_DID_NOT_CONFIRM);
+                return false;
+            } else {
+                printlnMessage(Message.ERROR_TEXTUI_REENTER_INPUT);
+                confirmation = readNextLine();
+            }
+        }
+    }
 
     public void printWelcome() {
         printDivider();
