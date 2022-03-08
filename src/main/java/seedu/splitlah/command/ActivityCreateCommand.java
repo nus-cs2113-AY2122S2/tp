@@ -55,6 +55,13 @@ public class ActivityCreateCommand extends Command {
 
     }
 
+    private static void updateCostList(double[] costList, int gst, int serviceCharge) {
+        for (int i = 0; i < costList.length; i++) {
+            costList[i] *= (1 + gst / 100);
+            costList[i] *= (1 + serviceCharge / 100);
+        }
+    }
+
     private static double getTotalCost(double[] costList) {
         double cost = 0;
         for (int i = 0; i < costList.length; i++) {
