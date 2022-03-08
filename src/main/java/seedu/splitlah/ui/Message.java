@@ -28,6 +28,8 @@ public abstract class Message {
             "User did not confirm.";
     public static final String ERROR_TEXTUI_REENTER_INPUT =
             "Invalid input. Please re-enter.";
+    public static final String PERSON_TEXTUI_NO_ACTIVITES =
+            "No activites found.";
 
     // Parser
     public static final String ERROR_PARSER_DELIMITER_NOT_FOUND =

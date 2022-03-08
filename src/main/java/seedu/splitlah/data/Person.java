@@ -43,8 +43,11 @@ public class Person {
      * @throws InvalidDataException if the activityId is not found.
      */
     public void removeActivityCost(int activityId) throws InvalidDataException {
-        ActivityCost activityToRemove = new ActivityCost(activityId);
-        boolean removed = activityCostList.remove(activityToRemove);
+        if (activityCostList.isEmpty()) {
+            throw new InvalidDataException(Message.ERROR_PERSON_NO_ACTIVITIES);
+        }
+        boolean removed =
+                activityCostList.removeIf(activityCost -> activityCost.getActivityId() == activityId);
         if (!removed) {
             throw new InvalidDataException(Message.ERROR_PERSON_ACTIVITY_NOT_FOUND);
         }
