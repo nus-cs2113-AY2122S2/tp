@@ -36,6 +36,9 @@ public class Person {
         activityCostList.add(activityCost);
     }
 
+    public void addActivityCost(int activityId) {
+    }
+
     public double getTotalCostPaid() {
         double totalCostPaid = 0;
         for (ActivityCost i : activityCostList) {
