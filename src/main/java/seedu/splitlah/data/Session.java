@@ -220,4 +220,13 @@ public class Session {
         return summaryString.toString();
     }
 
+    @Override
+    public String toString() {
+        return "Session --"
+                + "Name: " + sessionName + '\n'
+                + "Id:   " + sessionId + '\n'
+                + "Date: " + dateCreated + '\n'
+                + getActivityListSummaryString() + '\n'
+                + getPersonListSummaryString();
+    }
 }
