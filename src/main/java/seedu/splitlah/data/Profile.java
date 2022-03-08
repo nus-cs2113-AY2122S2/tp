@@ -37,6 +37,18 @@ public class Profile {
         return false;
     }
 
+    public Session getSession(int sessionId) throws InvalidDataException {
+        if (sessionList.isEmpty()) {
+            throw new InvalidDataException(Message.ERROR_PROFILE_SESSION_LIST_EMPTY);
+        }
+        for (Session session : sessionList) {
+            if (session.getSessionId() == sessionId) {
+                return session;
+            }
+        }
+        throw new InvalidDataException(Message.ERROR_PROFILE_SESSION_NOT_IN_LIST);
+    }
+
     /**
      * Adds a session to the list of sessions.
      *
