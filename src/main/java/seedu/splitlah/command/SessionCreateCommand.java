@@ -1,10 +1,16 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Person;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Represents a command that creates a session from user input
@@ -33,6 +39,12 @@ public class SessionCreateCommand extends Command {
         this.sessionDate = date;
     }
 
+    /**
+     * Converts list of names to a list of Person objects.
+     *
+     * @param personArray An array of person names
+     * @return An arraylist of person objects
+     */
     private static ArrayList<Person> convertToListOfPerson(String[] personArray) {
         ArrayList<Person> personList = new ArrayList<>();
         for (String name : personArray) {
@@ -41,6 +53,13 @@ public class SessionCreateCommand extends Command {
         }
         return personList;
     }
+
+    /**
+     * Checks to see if list of person has duplicate names.
+     *
+     * @param personList The list of person to check for duplicates.
+     * @return True if it contains duplicates, false otherwise.
+     */
     private boolean hasNameDuplicates(ArrayList<Person> personList) {
         Set<String> set = new HashSet<String>((List)personList);
         if (set.size() < personList.size()) {
@@ -48,6 +67,7 @@ public class SessionCreateCommand extends Command {
         }
         return false;
     }
+
     /**
      * Prepares user arguments for session create command.
      *
@@ -70,6 +90,9 @@ public class SessionCreateCommand extends Command {
 
     /**
      * Runs the command to create a session.
+     * Checks if list of names has duplicates and if session name exists.
+     * If check fails, no session is created and prints error message.
+     * Else a session is created and prints success message.
      *
      * @param manager A Manager object that manages the TextUI and Profile object.
      */
