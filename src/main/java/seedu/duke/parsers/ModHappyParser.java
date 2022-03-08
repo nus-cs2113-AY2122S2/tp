@@ -15,7 +15,8 @@ public class ModHappyParser extends Parser {
     private static final String ADD_COMMAND_WORD = "add";
     private static final String LIST_COMMAND_WORD = "list";
     private static final String MARK_COMMAND_WORD = "mark";
-    private static final String MOD_HAPPY_COMMAND_FORMAT = "(?<commandWord>\\S+)\\s*(?<arguments>.*)";
+    private static final String MOD_HAPPY_COMMAND_FORMAT = "(?<commandWord>\\S+)"
+            + "\\s*(?<arguments>.*)";
 
     public ModHappyParser() {
         super();

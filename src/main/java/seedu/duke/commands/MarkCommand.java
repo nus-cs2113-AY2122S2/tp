@@ -6,7 +6,7 @@ import seedu.duke.parsers.MarkParser;
 
 import java.util.HashMap;
 
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
     private static final String MARK_COMMAND_WORD = "mark";
     private static final String FLAG = "flag";
     private static final String COMPLETED_FLAG = "/c";
@@ -15,7 +15,7 @@ public class MarkCommand extends Command{
     private static final String UNMARK_MESSAGE_TOP = "Ok! I have marked this task for you as uncompleted!\n";
     private static int taskNumber = 0;
 
-    public MarkCommand (String arg) throws ModHappyException {
+    public MarkCommand(String arg) throws ModHappyException {
         try {
             commandName = MARK_COMMAND_WORD;
             MarkParser markParser = new MarkParser();
@@ -25,10 +25,6 @@ public class MarkCommand extends Command{
             case COMPLETED_FLAG:
                 //mark as completed
                 taskNumber = Integer.parseInt(parsedArg.get("taskNumber"));
-
-                break;
-            case UNCOMPLETED_FLAG:
-                //
 
                 break;
             default:
