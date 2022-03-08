@@ -55,4 +55,9 @@ public abstract class Message {
     public static final String ERROR_PERSON_ACTIVITY_NOT_FOUND =
             "Activity not found.";
 
+    // Profile
+    public static final String ERROR_PROFILE_DUPLICATE_SESSION =
+            "There is another session with the same name, please try another name.";
+    public static final String ERROR_PROFILE_DUPLICATE_NAME =
+            "There seems to be duplicates in the session you are trying to create, please try again.";
 }
