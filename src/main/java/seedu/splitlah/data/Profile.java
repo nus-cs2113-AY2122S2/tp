@@ -27,6 +27,9 @@ public class Profile {
         }
         return false;
     }
+    public void addSession(Session session) {
+        this.sessionList.add(session);
+    }
     /**
      * Returns the list of session stored in the profile.
      *
