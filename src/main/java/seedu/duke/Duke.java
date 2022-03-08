@@ -1,21 +1,47 @@
 package seedu.duke;
 
-import java.util.Scanner;
+import seedu.duke.ui.TextUi;
+
+import static seedu.duke.contacts.ContactsManager.contactsRunner;
 
 public class Duke {
+    private TextUi ui;
+
+    private static void greet() {
+        System.out.println("greeting message");
+    }
+
+    private void exit() {
+        System.out.println("exit message");
+        System.exit(0);
+    }
+
+    public static boolean isContacts(String userInput) {
+        return userInput.equals("goto m/Contacts_Manager");
+    }
+
+    public void run() {
+        this.ui = new TextUi();
+        String userInput;
+
+        while (true) {
+            userInput = ui.getUserInput();
+            if (userInput.equals("exit")) {
+                exit();
+            } else if (isContacts(userInput)) {
+                contactsRunner(ui);
+                System.out.println("Welcome back to the main menu");
+            } else {
+                continue;
+            }
+        }
+    }
+
     /**
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
-
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        greet();
+        new Duke().run();
     }
 }
