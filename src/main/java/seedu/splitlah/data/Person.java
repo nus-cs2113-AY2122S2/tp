@@ -36,7 +36,8 @@ public class Person {
         activityCostList.add(activityCost);
     }
 
-    public void addActivityCost(int activityId) {
+    public void removeActivityCost(int activityId) {
+
     }
 
     public double getTotalCostPaid() {
