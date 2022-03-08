@@ -1,5 +1,6 @@
 package seedu.splitlah.command;
 
+import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
 import seedu.splitlah.data.Session;
@@ -57,7 +58,18 @@ public class ActivityCreateCommand extends Command {
 
     @Override
     public void run(Manager manager) {
-
+        try {
+            int activityId = manager.getProfile().getNewActivityId();
+            updateCostAndCostList();
+            Session session = manager.getProfile().getSession(sessionId);
+            Person personPaying = session.getPersonByName(payer);
+            ArrayList<Person> involvedPersonList = getInvolvedPersonList(session, involvedList);
+            addAllActivityCost(involvedPersonList, personPaying, cost, costList, activityId);
+            Activity activity = new Activity(activityId, activityName, cost, personPaying, involvedPersonList);
+            session.addActivity(activity);
+        } catch (InvalidDataException e) {
+            manager.getUi().printlnMessage(e.getMessage());
+        }
     }
 
     private static void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaying, double cost,
