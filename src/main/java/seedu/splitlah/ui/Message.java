@@ -23,13 +23,7 @@ public abstract class Message {
     public static final String HELP_MENU =
             "HELP MENU"; //TODO: Populate help menu
     
-    public static final String ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST =
-            "Please enter a number from 1 to ";
-    public static final String ERROR_SESSION_EMPTY_PERSON_LIST =
-            "The list of participants in the session is currently empty.";
-    public static final String ERROR_SESSION_PERSON_NOT_IN_LIST =
-            "The person that you have specified was not found in this session.";
-    
+    // Parser
     public static final String ERROR_PARSER_DELIMITER_NOT_FOUND =
             "Please include the following delimiter in your input: ";
     public static final String ERROR_PARSER_MISSING_ARGUMENT =
@@ -54,7 +48,19 @@ public abstract class Message {
             "This person is not participating in any activities.";
     public static final String ERROR_PERSON_ACTIVITY_NOT_FOUND =
             "Activity not found.";
-
+    
+    // Session
+    public static final String ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST =
+            "Please enter a number from 1 to ";
+    public static final String ERROR_SESSION_EMPTY_ACTIVITY_LIST =
+            "The list of activities in the session is currently empty.";
+    public static final String ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST =
+            "The activity that you have specified was not found in this session.";
+    public static final String ERROR_SESSION_EMPTY_PERSON_LIST =
+            "The list of participants in the session is currently empty.";
+    public static final String ERROR_SESSION_PERSON_NOT_IN_LIST =
+            "The person that you have specified was not found in this session.";
+    
     // Profile
     public static final String ERROR_PROFILE_DUPLICATE_SESSION =
             "There is another session with the same name, please try another name.";
