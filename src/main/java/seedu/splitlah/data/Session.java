@@ -113,8 +113,10 @@ public class Session {
         }
         
         ArrayList<Person> involvedPersonList = deleteTarget.getInvolvedPersonList();
-        for (Person person : involvedPersonList) {
-            person.removeActivityCost(activityId);
+        if (involvedPersonList != null) {
+            for (Person person : involvedPersonList) {
+                person.removeActivityCost(activityId);
+            }
         }
         activityList.remove(deleteTarget);
     }
