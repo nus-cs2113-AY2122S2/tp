@@ -11,7 +11,6 @@ public class WorkoutList {
     ArrayList<Workout> workoutsList = new ArrayList<>();
     public static final int MAX_DISPLAY = 10;
 
-
     public WorkoutList(ExerciseList exerciseList) {
         this.exerciseList = exerciseList;
     }
@@ -59,6 +58,7 @@ public class WorkoutList {
                 return;
             }
         }
+        
         if (totalPrints > 0) {
             index = continuousPrinting(index, totalPrints);
             System.out.println("Showed all items in list");
