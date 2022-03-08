@@ -1,11 +1,9 @@
 package seedu.duke.commands;
 
+import java.util.HashMap;
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.parsers.AddParser;
 import seedu.duke.parsers.MarkParser;
 import seedu.duke.tasks.Task;
-
-import java.util.HashMap;
 
 public class MarkCommand extends Command {
     private static final String MARK_COMMAND_WORD = "mark";
@@ -26,7 +24,6 @@ public class MarkCommand extends Command {
             MarkParser markParser = new MarkParser();
             HashMap<String, String> parsedArg = markParser.parseString(arg);
             int index;
-
             switch (parsedArg.get(FLAG)) {
             case COMPLETED_FLAG:
                 //to mark as completed
@@ -57,7 +54,7 @@ public class MarkCommand extends Command {
 
     @Override
     public CommandResult execute() throws ModHappyException {
-        String res = (isCompleted)? MARK_MESSAGE_TOP
+        String res = (isCompleted) ? MARK_MESSAGE_TOP
                 + temp + "\n"
                 : UNMARK_MESSAGE_TOP + temp + "\n";
         CommandResult result = new CommandResult(res);
