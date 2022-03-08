@@ -22,9 +22,12 @@ public abstract class Message {
             + "          \\__|";
     public static final String HELP_MENU =
             "HELP MENU"; //TODO: Populate help menu
-    public static final String PROMPT_TEXTUI_REQUEST_CONFIRMATION = "Please enter Y/y/yes to confirm, or N/n/no otherwise.";
-    public static final String ERROR_TEXTUI_USER_DID_NOT_CONFIRM = "User did not confirm.";
-    public static final String ERROR_TEXTUI_REENTER_INPUT = "Invalid input. Please re-enter.";
+    public static final String PROMPT_TEXTUI_REQUEST_CONFIRMATION =
+            "Please enter Y/y/yes to confirm, or N/n/no otherwise.";
+    public static final String ERROR_TEXTUI_USER_DID_NOT_CONFIRM =
+            "User did not confirm.";
+    public static final String ERROR_TEXTUI_REENTER_INPUT =
+            "Invalid input. Please re-enter.";
 
     // Parser
     public static final String ERROR_PARSER_DELIMITER_NOT_FOUND =
