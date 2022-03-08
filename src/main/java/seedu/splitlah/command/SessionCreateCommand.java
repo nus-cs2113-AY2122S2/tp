@@ -75,6 +75,23 @@ public class SessionCreateCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
+        ArrayList<Person> personList = convertToListOfPerson(this.personNames);
+        boolean isDuplicates = hasNameDuplicates(personList);
+        if (isDuplicates) {
+            manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
+            return;
+        }
 
+        boolean isSessionExists = manager.getProfile().hasSessionName(this.sessionName);
+        if (isSessionExists) {
+            manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_SESSION);
+            return;
+        }
+
+        int newSessionId = manager.getProfile().getNewSessionId();
+        // To be completed when session constructor is implemented
+        //  Session newSession = (newSessionId, this.sessionName, this.sessionDate,)
+        //  manager.getProfile().addSession(newSession);
+        manager.getUi().printlnMessage(COMMAND_SUCCESS + newSessionId);
     }
 }
