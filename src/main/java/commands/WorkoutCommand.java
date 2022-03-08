@@ -71,6 +71,9 @@ public class WorkoutCommand extends Command {
                 Workout newWorkout = workoutList.createAndAddWorkout(getUserArguments());
                 ui.printNewWorkoutCreatedMessage(newWorkout);
                 break;
+            case LIST_ACTION_KEYWORD:
+                workoutList.listWorkout();
+                break;
             default:
                 String className = this.getClass().getSimpleName();
                 throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
