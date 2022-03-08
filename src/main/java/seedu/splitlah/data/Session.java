@@ -88,7 +88,8 @@ public class Session {
 
     /**
      * Removes an Activity object specified by a numerical identifier that uniquely identifies the activity
-     * from the Session.
+     * from the Session. Additionally, removes all ActivityCost objects with the same activityId from all Person
+     * objects involved in the activity.
      *
      * @param activityId An integer that uniquely identifies an Activity object in the profile.
      * @throws InvalidDataException if activityList is empty or activityList does not contain an Activity object 
@@ -109,6 +110,13 @@ public class Session {
 
         if (deleteTarget == null) {
             throw new InvalidDataException(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST);
+        }
+        
+        ArrayList<Person> involvedPersonList = deleteTarget.getInvolvedPersonList();
+        if (involvedPersonList != null) {
+            for (Person person : involvedPersonList) {
+                person.removeActivityCost(activityId);
+            }
         }
         activityList.remove(deleteTarget);
     }
@@ -168,6 +176,23 @@ public class Session {
             }
         }
         throw new InvalidDataException(Message.ERROR_SESSION_PERSON_NOT_IN_LIST);
+    }
+
+    /**
+     * Returns an ArrayList of Person objects with names that match the provided name list.
+     * 
+     * @param nameList An array of String objects that represent names of people in the session.
+     * @return An ArrayList object containing Person objects with matching names.
+     * @throws InvalidDataException if personList is empty or 
+     *                              if any name in nameList does not match a Person object in personList.
+     */
+    public ArrayList<Person> getPersonListByName(String[] nameList) throws InvalidDataException {
+        ArrayList<Person> personList = new ArrayList<>();
+        for (String name : nameList) {
+            Person newPerson = getPersonByName(name);
+            personList.add(newPerson);
+        }
+        return personList;
     }
 
     /**

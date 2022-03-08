@@ -22,7 +22,15 @@ public abstract class Message {
             + "          \\__|";
     public static final String HELP_MENU =
             "HELP MENU"; //TODO: Populate help menu
-    
+    public static final String PROMPT_TEXTUI_REQUEST_CONFIRMATION =
+            "Please enter Y/y/yes to confirm, or N/n/no otherwise.";
+    public static final String ERROR_TEXTUI_USER_DID_NOT_CONFIRM =
+            "User did not confirm.";
+    public static final String ERROR_TEXTUI_REENTER_INPUT =
+            "Invalid input. Please re-enter.";
+    public static final String PERSON_TEXTUI_NO_ACTIVITES =
+            "No activites found.";
+
     // Parser
     public static final String ERROR_PARSER_DELIMITER_NOT_FOUND =
             "Please include the following delimiter in your input: ";
@@ -48,7 +56,7 @@ public abstract class Message {
             "This person is not participating in any activities.";
     public static final String ERROR_PERSON_ACTIVITY_NOT_FOUND =
             "Activity not found.";
-    
+
     // Session
     public static final String ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST =
             "Please enter a number from 1 to ";

@@ -1,5 +1,7 @@
 package seedu.splitlah.data;
 
+import java.util.Objects;
+
 /**
  * Represents an Activity and its cost.
  * Stores activityId and cost of the activity.
@@ -67,5 +69,4 @@ public class ActivityCost {
     public void setCostOwed(int costOwed) {
         this.costOwed = costOwed;
     }
-
 }
