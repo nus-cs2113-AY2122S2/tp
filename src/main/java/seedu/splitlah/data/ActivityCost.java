@@ -69,21 +69,4 @@ public class ActivityCost {
     public void setCostOwed(int costOwed) {
         this.costOwed = costOwed;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ActivityCost that = (ActivityCost) o;
-        return activityId == that.activityId;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(activityId);
-    }
 }
