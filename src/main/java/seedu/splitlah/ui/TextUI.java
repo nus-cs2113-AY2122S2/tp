@@ -32,6 +32,8 @@ public class TextUI {
         return in.nextLine();
     }
 
+    public boolean doubleConfirm
+
     public void printWelcome() {
         printDivider();
         out.println(Message.LOGO);

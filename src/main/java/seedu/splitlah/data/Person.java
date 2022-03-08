@@ -24,7 +24,7 @@ public class Person {
     }
 
     /**
-     * Constructs an activityCost object and adds it to the list of activityCosts.
+     * Constructs an ActivityCost object and adds it to the list of ActivityCosts.
      *
      * @param activityId the activityId.
      * @param costPaid the cost of the activity paid by the payer.
@@ -36,8 +36,18 @@ public class Person {
         activityCostList.add(activityCost);
     }
 
-    public void removeActivityCost(int activityId) {
-
+    /**
+     * Removes an ActivityCost object from the list of ActivityCosts.
+     *
+     * @param activityId the activityId of the ActivityCost to be removed.
+     * @throws InvalidDataException if the activityId is not found.
+     */
+    public void removeActivityCost(int activityId) throws InvalidDataException {
+        ActivityCost activityToRemove = new ActivityCost(activityId);
+        boolean removed = activityCostList.remove(activityToRemove);
+        if (!removed) {
+            throw new InvalidDataException(Message.ERROR_PERSON_ACTIVITY_NOT_FOUND);
+        }
     }
 
     public double getTotalCostPaid() {
