@@ -8,7 +8,7 @@ import seedu.duke.tasks.Task;
 import java.util.HashMap;
 
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
 
     private static final String ADD_COMMAND_WORD = "add";
     private static final String FLAG = "flag";
@@ -24,7 +24,6 @@ public class AddCommand extends Command{
             commandName = ADD_COMMAND_WORD;
             AddParser addParser = new AddParser();
             HashMap<String, String> parsedArg = addParser.parseString(arg);
-
             switch (parsedArg.get(FLAG)) {
             case TASK_FLAG:
                 //add tasks
