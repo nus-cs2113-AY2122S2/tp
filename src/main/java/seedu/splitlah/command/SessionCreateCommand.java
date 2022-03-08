@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 /**
@@ -57,13 +58,15 @@ public class SessionCreateCommand extends Command {
     /**
      * Checks to see if list of person has duplicate names.
      *
-     * @param personList The list of person to check for duplicates.
      * @return True if it contains duplicates, false otherwise.
      */
-    private boolean hasNameDuplicates(ArrayList<Person> personList) {
-        Set<String> set = new HashSet<String>((List)personList);
-        if (set.size() < personList.size()) {
-            return true;
+    private boolean hasNameDuplicates() {
+        Set<String> set = new HashSet<>();
+        for (String name : personNames) {
+            String nameToBeAdded = name.toLowerCase();
+            if (set.add(nameToBeAdded) == false) {
+                return true;
+            }
         }
         return false;
     }
@@ -98,12 +101,11 @@ public class SessionCreateCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        ArrayList<Person> personList = convertToListOfPerson(this.personNames);
-        boolean isDuplicates = hasNameDuplicates(personList);
-        if (isDuplicates) {
+        if (hasNameDuplicates()) {
             manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
             return;
         }
+        ArrayList<Person> personList = convertToListOfPerson(this.personNames);
 
         boolean isSessionExists = manager.getProfile().hasSessionName(this.sessionName);
         if (isSessionExists) {
@@ -113,7 +115,7 @@ public class SessionCreateCommand extends Command {
 
         int newSessionId = manager.getProfile().getNewSessionId();
         // To be completed when session constructor is implemented
-        //  Session newSession = (newSessionId, this.sessionName, this.sessionDate,)
+        //  Session newSession = (newSessionId, this.sessionName, this.sessionDate, personList)
         //  manager.getProfile().addSession(newSession);
         manager.getUi().printlnMessage(COMMAND_SUCCESS + newSessionId);
     }
