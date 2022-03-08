@@ -33,6 +33,14 @@ public class SessionCreateCommand extends Command {
         this.sessionDate = date;
     }
 
+    private static ArrayList<Person> convertToListOfPerson(String[] personArray) {
+        ArrayList<Person> personList = new ArrayList<>();
+        for (String name : personArray) {
+            Person newPerson = new Person(name);
+            personList.add(newPerson);
+        }
+        return personList;
+    }
     /**
      * Prepares user arguments for session create command.
      *
