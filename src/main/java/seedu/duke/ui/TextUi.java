@@ -18,7 +18,7 @@ public class TextUi {
     protected final PrintStream out;
 
     /**
-     * Initialzes TextUi.
+     * Initializes TextUi.
      *
      * @throws ModHappyException ModHappy Exception
      */
@@ -31,7 +31,7 @@ public class TextUi {
     /**
      * Formats the window style.
      *
-     * @param message The message to be passed on the chat box
+     * @param message The message to be passed on the chatbot
      * @return The formated message
      */
     public String formatMessage(String message) {
@@ -75,6 +75,5 @@ public class TextUi {
     public void showInitFailedMessage() {
         this.showMessage(INITIAL_FAILED_MESSAGE);
     }
-
 
 }
