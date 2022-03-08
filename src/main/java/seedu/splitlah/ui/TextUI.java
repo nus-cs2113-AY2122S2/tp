@@ -44,18 +44,19 @@ public class TextUI {
         printDivider();
         printlnMessage(message);
         printlnMessage(Message.PROMPT_TEXTUI_REQUEST_CONFIRMATION);
-        String confirmation = readNextLine();
-        confirmation = confirmation.toLowerCase().strip();
+        String confirmation = readNextLine().toLowerCase();
         printDivider();
         while (true) {
-            if (confirmation.startsWith("y")) {
+            switch (confirmation) {
+            case ("yes"):
+            case ("y"):
                 return true;
-            } else if (confirmation.startsWith("n")) {
+            case ("no"):
+            case ("n"):
                 printlnMessage(Message.ERROR_TEXTUI_USER_DID_NOT_CONFIRM);
                 return false;
-            } else {
+            default:
                 printlnMessage(Message.ERROR_TEXTUI_REENTER_INPUT);
-                confirmation = readNextLine();
             }
         }
     }
