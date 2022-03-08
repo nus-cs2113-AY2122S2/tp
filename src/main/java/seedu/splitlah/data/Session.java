@@ -21,6 +21,10 @@ public class Session {
     // private Group group;
     
     // CONSTANTS
+    private static final String ACTIVITY_LIST_HEADER =
+            "Id | Activity Name | Cost | Payee";
+    private static final String PERSON_LIST_HEADER =
+            "Participants";
     private static final int ZERO_INDEXING_OFFSET = 1;
 
     /**
@@ -189,6 +193,31 @@ public class Session {
         this.dateCreated = dateCreated;
         this.personList = personList;
         this.activityList = new ArrayList<>();
+    }
+
+    private String getActivityListSummaryString() {
+        if (activityList.isEmpty()) {
+            return Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST;
+        }
+        
+        StringBuilder summaryString = new StringBuilder(ACTIVITY_LIST_HEADER);
+        for (Activity activity : activityList) {
+            summaryString.append("\n > ").append(activity.getActivitySummaryString());
+        }
+        return summaryString.toString();
+    }
+
+    private String getPersonListSummaryString() {
+        if (personList.isEmpty()) {
+            return Message.ERROR_SESSION_EMPTY_PERSON_LIST;
+        }
+        
+        StringBuilder summaryString = new StringBuilder(PERSON_LIST_HEADER);
+        for (int i = 0; i < personList.size(); i++) {
+            String personName = personList.get(i).getName();
+            summaryString.append("\n ").append(i).append(". ").append(personName);
+        }
+        return summaryString.toString();
     }
 
 }
