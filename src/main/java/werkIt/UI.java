@@ -4,6 +4,9 @@ import data.workouts.Workout;
 
 import java.util.Scanner;
 
+import static textcolors.TextColor.COLOR_RESET;
+import static textcolors.TextColor.COLOR_YELLOW;
+
 /**
  * This class contains all the user interface-related texts and methods for the WerkIt! Application.
  */
@@ -18,14 +21,11 @@ public class UI {
 
     public static final String WELCOME_MESSAGE = "Welcome to WerkIt!, your personal exercise planner.";
     public static final String GOODBYE_MESSAGE = "Thank you for using WerkIt! See you again soon...";
-
     // The default parameters for printing the formatting lines
     public static final int DEFAULT_LINE_LENGTH = 70;
     public static final String DEFAULT_LINE_CHAR = "-";
-
     // Prompt symbol
     public static final String PROMPT_SYMBOL = ">";
-
     // Workout-related messages
     public static final String NEW_WORKOUT_CREATED_MESSAGE = "Alright, the following workout has been created:";
 
@@ -118,5 +118,33 @@ public class UI {
         System.out.println();
         System.out.println("\t" + newWorkout.toString());
         System.out.println();
+    }
+
+    public void printColorText(String color, String text) {
+        System.out.println("\t " + color + text + COLOR_RESET);
+    }
+
+    public void printHelpMessage() {
+        System.out.println("[1]. To view all workouts, please enter:");
+        printColorText(COLOR_YELLOW, "workout /list");
+        System.out.println("\t This will print the list of existing workouts.");
+        printLine();
+        System.out.println("[2]. To add a workout, please enter: ");
+        printColorText(COLOR_YELLOW, "workout /new <exercise name> /reps <no. of repetitions>");
+        System.out.println("\t Example: ");
+        printColorText(COLOR_YELLOW, "workout /new push up /reps 10");
+        System.out.println("\t This will add a workout with 10 reps of push up.");
+        printLine();
+        System.out.println("[3]. To delete a workout, please enter: ");
+        printColorText(COLOR_YELLOW, "workout /delete <index>");
+        System.out.println("\t Example: ");
+        printColorText(COLOR_YELLOW, "workout /delete 1");
+        System.out.println("\t This will delete the workout with index 1 if exists.");
+        printLine();
+        System.out.println("[4]. To update a workout, please enter: ");
+        printColorText(COLOR_YELLOW, "workout /update <index> <quantity>");
+        System.out.println("\t Example: ");
+        printColorText(COLOR_YELLOW, "workout /update 1 15");
+        System.out.println("\t This will update the workout with index 1 to 15 reps if exists.");
     }
 }
