@@ -1,6 +1,12 @@
 package textcolors;
 
+/**
+ * This class contains different ANSI color codes which can be used to color texts.
+ */
 public class TextColor {
+    /**
+     * ANSI codes for different colors.
+     */
     public static final String COLOR_RESET = "\u001B[0m";
     public static final String COLOR_BLACK = "\u001B[30m";
     public static final String COLOR_RED = "\u001B[31m";
