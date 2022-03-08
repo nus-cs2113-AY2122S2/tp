@@ -55,6 +55,12 @@ public class ActivityCreateCommand extends Command {
 
     }
 
+    private static double updateCost(double cost, int gst, int serviceCharge) {
+        cost *= (1 + gst / 100);
+        cost *= (1 + serviceCharge / 100);
+        return cost;
+    }
+
     private static double[] distributeCostEvenly(double cost, int numberOfPeopleInvolved) {
         double dividedCost = cost / numberOfPeopleInvolved;
         double[] costList = new double[numberOfPeopleInvolved];
