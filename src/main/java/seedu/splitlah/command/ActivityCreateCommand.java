@@ -92,16 +92,16 @@ public class ActivityCreateCommand extends Command {
     private void updateCostAndCostList() {
         boolean isZeroCost = cost == 0;
         if (isZeroCost) {
-            updateCostList(costList, gst, serviceCharge);
+            updateCostListWithExtraCharges(costList, gst, serviceCharge);
             cost = getTotalCost(costList);
         } else {
-            cost = updateCost(cost, gst, serviceCharge);
+            cost = updateCostWithExtraCharges(cost, gst, serviceCharge);
             int numberOfPeopleInvolved = involvedList.length;
             costList = distributeCostEvenly(cost, numberOfPeopleInvolved);
         }
     }
 
-    private static void updateCostList(double[] costList, int gst, int serviceCharge) {
+    private static void updateCostListWithExtraCharges(double[] costList, int gst, int serviceCharge) {
         for (int i = 0; i < costList.length; i++) {
             costList[i] *= (1 + gst / 100);
             costList[i] *= (1 + serviceCharge / 100);
@@ -116,7 +116,7 @@ public class ActivityCreateCommand extends Command {
         return cost;
     }
 
-    private static double updateCost(double cost, int gst, int serviceCharge) {
+    private static double updateCostWithExtraCharges(double cost, int gst, int serviceCharge) {
         cost *= (1 + gst / 100);
         cost *= (1 + serviceCharge / 100);
         return cost;
