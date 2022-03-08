@@ -1,6 +1,10 @@
 package werkIt;
 
-import commands.*;
+import commands.Command;
+import commands.ExitCommand;
+import commands.InvalidCommandException;
+import commands.WorkoutCommand;
+import commands.HelpCommand;
 import data.exercises.ExerciseList;
 import data.workouts.WorkoutList;
 
