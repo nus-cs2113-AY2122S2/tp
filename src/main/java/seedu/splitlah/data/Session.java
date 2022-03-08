@@ -178,6 +178,15 @@ public class Session {
         throw new InvalidDataException(Message.ERROR_SESSION_PERSON_NOT_IN_LIST);
     }
 
+    public ArrayList<Person> getPersonListByName(String[] nameList) throws InvalidDataException {
+        ArrayList<Person> personList = new ArrayList<>();
+        for (String name : nameList) {
+            Person newPerson = getPersonByName(name);
+            personList.add(newPerson);
+        }
+        return personList;
+    }
+
     /**
      * Returns a list of Person objects representing the participants in the session.
      * 
