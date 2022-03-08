@@ -22,6 +22,7 @@ public class ActivityCreateCommand extends Command {
             + "[<OPTIONAL ARGS>]\n"
             + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /c <OVERALLCOST> [<OPTIONAL ARGS>]";
     private static final double ZERO_COST_PAID = 0;
+    public static final int NO_COST = 0;
 
     private int sessionId;
     private String activityName;
@@ -90,7 +91,7 @@ public class ActivityCreateCommand extends Command {
     }
 
     private void updateCostAndCostList() {
-        boolean isZeroCost = cost == 0;
+        boolean isZeroCost = cost == NO_COST;
         if (isZeroCost) {
             updateCostListWithExtraCharges(costList, gst, serviceCharge);
             cost = getTotalCost(costList);
