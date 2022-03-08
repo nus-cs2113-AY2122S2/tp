@@ -2,6 +2,8 @@ package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
 
+import java.util.Arrays;
+
 /**
  * Represents an ActivityCreateCommand which has a run method that creates an activity.
  */
@@ -52,4 +54,12 @@ public class ActivityCreateCommand extends Command {
     public void run(Manager manager) {
 
     }
+
+    private static double[] distributeCostEvenly(double cost, int numberOfPeopleInvolved) {
+        double dividedCost = cost / numberOfPeopleInvolved;
+        double[] costList = new double[numberOfPeopleInvolved];
+        Arrays.fill(costList, dividedCost);
+        return costList;
+    }
+
 }
