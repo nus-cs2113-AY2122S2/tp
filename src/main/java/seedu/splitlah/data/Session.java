@@ -61,6 +61,38 @@ public class Session {
         return dateCreated.getDayOfMonth() + " " + dateCreated.getMonth() + " " + dateCreated.getYear();
     }
 
+    public Activity getActivity(int activityId) throws InvalidDataException {
+        if (activityList.isEmpty()) {
+            throw new InvalidDataException(Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST);
+        }
+
+        for (Activity activity : activityList) {
+            if (activity.getActivityId() == activityId) {
+                return activity;
+            }
+        }
+        throw new InvalidDataException(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST);
+    }
+
+    public void removeActivity(int activityId) throws InvalidDataException {
+        if (activityList.isEmpty()) {
+            throw new InvalidDataException(Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST);
+        }
+
+        Activity deleteTarget = null;
+        for (Activity activity : activityList) {
+            if (activity.getActivityId() == activityId) {
+                deleteTarget = activity;
+                break;
+            }
+        }
+
+        if (deleteTarget == null) {
+            throw new InvalidDataException(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST);
+        }
+        activityList.remove(deleteTarget);
+    }
+    
     /**
      * Returns a list of Activity objects representing the activities that occurred in that session.
      * 
