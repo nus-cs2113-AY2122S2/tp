@@ -15,9 +15,9 @@ public class MarkParser extends Parser {
         // See also https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
         this.commandFormat = MARK_FORMAT;
         groupNames.add("flag");
-        groupNames.add("taskNumber");
+        groupNames.add("argument1"); //task number
         groupNames.add("subFlag");
-        groupNames.add("moduleCode");
+        groupNames.add("argument2"); //module code
     }
 
     @Override

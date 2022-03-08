@@ -12,22 +12,26 @@ public class AddCommand extends Command {
 
     private static final String ADD_COMMAND_WORD = "add";
     private static final String FLAG = "flag";
+    private static final String UNCOMPLETED_STATUS_TASK = " (T)( ) ";
     private static final String TASK_FLAG = "/t";
     private static final String MOD_FLAG = "-mod";
     private static final String ADD_MESSAGE_TOP = "Hey! I have added this task for you!\n";
     private static String task = "task";
     private static String mod = "mod";
+    private static String taskWithStatus;
 
     public AddCommand(String arg) throws ModHappyException {
         try {
             commandName = ADD_COMMAND_WORD;
             AddParser addParser = new AddParser();
             HashMap<String, String> parsedArg = addParser.parseString(arg);
+
             switch (parsedArg.get(FLAG)) {
             case TASK_FLAG:
                 //add tasks
                 task = parsedArg.get("argument1");
-                Task.taskList.add(task);
+                taskWithStatus = UNCOMPLETED_STATUS_TASK + task;
+                Task.taskList.add(taskWithStatus);
                 break;
             default:
                 throw new UnsupportedOperationException();
@@ -39,7 +43,8 @@ public class AddCommand extends Command {
 
     @Override
     public CommandResult execute() throws ModHappyException {
-        CommandResult result = new CommandResult(ADD_MESSAGE_TOP + task + "\n"
+        CommandResult result = new CommandResult(ADD_MESSAGE_TOP
+                +  taskWithStatus + "\n"
                 + "Now you have " + Task.taskList.size() + " task(s) in your list!\n");
         return result;
     }
