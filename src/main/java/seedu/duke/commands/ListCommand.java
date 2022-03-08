@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.tasks.Task;
 
 public class ListCommand extends Command {
 
@@ -9,11 +10,15 @@ public class ListCommand extends Command {
 
     public ListCommand(String arguments) {
         commandName = LIST_COMMAND_WORD;
+        System.out.println(LIST_MESSAGE_TOP);
+        for (int j = 1; j <= Task.taskList.size(); j++) {
+            System.out.println(j + ". " + Task.taskList.get(j - 1));
+        }
     }
 
     @Override
     public CommandResult execute() throws ModHappyException {
-        CommandResult result = new CommandResult("\n");
+        CommandResult result = new CommandResult("");
         return result;
     }
 }

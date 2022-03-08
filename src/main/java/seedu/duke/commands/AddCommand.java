@@ -15,8 +15,6 @@ public class AddCommand extends Command {
     private static final String TASK_FLAG = "/t";
     private static final String MOD_FLAG = "-mod";
     private static final String ADD_MESSAGE_TOP = "Hey! I have added this task for you!\n";
-    /*private static final String ADD_MESSAGE_BOTTOM = "Now you have "
-            + Task.taskList.size() + " task(s) in your list!\n";*/
     private static String task = "task";
     private static String mod = "mod";
 
@@ -29,7 +27,7 @@ public class AddCommand extends Command {
             case TASK_FLAG:
                 //add tasks
                 task = parsedArg.get("argument1");
-                //Task.taskList.add(task);
+                Task.taskList.add(task);
                 break;
             default:
                 throw new UnsupportedOperationException();
@@ -41,7 +39,8 @@ public class AddCommand extends Command {
 
     @Override
     public CommandResult execute() throws ModHappyException {
-        CommandResult result = new CommandResult(ADD_MESSAGE_TOP + task + "\n");
+        CommandResult result = new CommandResult(ADD_MESSAGE_TOP + task + "\n"
+                + "Now you have " + Task.taskList.size() + " task(s) in your list!\n");
         return result;
     }
 }
