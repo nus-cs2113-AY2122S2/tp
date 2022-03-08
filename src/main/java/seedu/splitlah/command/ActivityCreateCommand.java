@@ -20,6 +20,7 @@ public class ActivityCreateCommand extends Command {
             + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /c <COST1 COST2…> "
             + "[<OPTIONAL ARGS>]\n"
             + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /c <OVERALLCOST> [<OPTIONAL ARGS>]";
+    private static final double ZERO_COST_PAID = 0;
 
     private int sessionId;
     private String activityName;
@@ -57,6 +58,15 @@ public class ActivityCreateCommand extends Command {
     @Override
     public void run(Manager manager) {
 
+    }
+
+    private static void addCostOwedAndCostPaid(Person personPaying, double cost, double[] costList, int activityId,
+                                               int i, Person person) throws InvalidDataException {
+        if (person == personPaying) {
+            person.addActivityCost(activityId, cost, costList[i]);
+        } else {
+            person.addActivityCost(activityId, ZERO_COST_PAID, costList[i]);
+        }
     }
 
     private ArrayList<Person> getInvolvedPersonList(Session session, String[] involvedList)
