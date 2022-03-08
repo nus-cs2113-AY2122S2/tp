@@ -1,7 +1,11 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Person;
+import seedu.splitlah.data.Session;
+import seedu.splitlah.exceptions.InvalidDataException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -53,6 +57,16 @@ public class ActivityCreateCommand extends Command {
     @Override
     public void run(Manager manager) {
 
+    }
+
+    private ArrayList<Person> getInvolvedPersonList(Session session, String[] involvedList)
+            throws InvalidDataException {
+        ArrayList<Person> involvedPersonList = new ArrayList<>();
+        for (int i = 0; i < involvedList.length; i++) {
+            Person personInvolved = session.getPersonByName(involvedList[i]);
+            involvedPersonList.add(personInvolved);
+        }
+        return involvedPersonList;
     }
 
     private void updateCostAndCostList() {
