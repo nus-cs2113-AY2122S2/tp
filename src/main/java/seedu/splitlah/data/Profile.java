@@ -19,6 +19,14 @@ public class Profile {
         activityIdTracker = 1;
     }
 
+    public boolean hasSessionName(String sessionName) {
+        for (Session session : sessionList) {
+            if (session.getSessionName().equalsIgnoreCase(sessionName)){
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * Returns the list of session stored in the profile.
      *
