@@ -15,7 +15,8 @@ public class AddCommand extends Command {
     private static final String TASK_FLAG = "/t";
     private static final String MOD_FLAG = "-mod";
     private static final String ADD_MESSAGE_TOP = "Hey! I have added this task for you!\n";
-    //private static final String ADD_MESSAGE_BOTTOM = "Now you have " + Task.taskList.size() + " task(s) in your list!\n";
+    /*private static final String ADD_MESSAGE_BOTTOM = "Now you have "
+            + Task.taskList.size() + " task(s) in your list!\n";*/
     private static String task = "task";
     private static String mod = "mod";
 
