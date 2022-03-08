@@ -21,6 +21,10 @@ public class Session {
     // private Group group;
     
     // CONSTANTS
+    private static final String ACTIVITY_LIST_HEADER =
+            "Id | Activity Name | Cost | Payee";
+    private static final String PERSON_LIST_HEADER =
+            "Participants";
     private static final int ZERO_INDEXING_OFFSET = 1;
 
     /**
@@ -61,6 +65,54 @@ public class Session {
         return dateCreated.getDayOfMonth() + " " + dateCreated.getMonth() + " " + dateCreated.getYear();
     }
 
+    /**
+     * Returns an Activity object specified by a numerical identifier that uniquely identifies the activity.
+     * 
+     * @param activityId An integer that uniquely identifies an Activity object in the profile.
+     * @return An Activity object in the Session class specified by activityId
+     * @throws InvalidDataException if activityList is empty or activityList does not contain an Activity object 
+     *                              with the specified activityId
+     */
+    public Activity getActivity(int activityId) throws InvalidDataException {
+        if (activityList.isEmpty()) {
+            throw new InvalidDataException(Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST);
+        }
+
+        for (Activity activity : activityList) {
+            if (activity.getActivityId() == activityId) {
+                return activity;
+            }
+        }
+        throw new InvalidDataException(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST);
+    }
+
+    /**
+     * Removes an Activity object specified by a numerical identifier that uniquely identifies the activity
+     * from the Session.
+     *
+     * @param activityId An integer that uniquely identifies an Activity object in the profile.
+     * @throws InvalidDataException if activityList is empty or activityList does not contain an Activity object 
+     *                              with the specified activityId
+     */
+    public void removeActivity(int activityId) throws InvalidDataException {
+        if (activityList.isEmpty()) {
+            throw new InvalidDataException(Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST);
+        }
+
+        Activity deleteTarget = null;
+        for (Activity activity : activityList) {
+            if (activity.getActivityId() == activityId) {
+                deleteTarget = activity;
+                break;
+            }
+        }
+
+        if (deleteTarget == null) {
+            throw new InvalidDataException(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST);
+        }
+        activityList.remove(deleteTarget);
+    }
+    
     /**
      * Returns a list of Activity objects representing the activities that occurred in that session.
      * 
@@ -134,5 +186,74 @@ public class Session {
      */
     public void addPerson(Person person) {
         personList.add(person);
+    }
+
+    /**
+     * Constructs a Session object with the specified information as a new session.
+     * 
+     * @param sessionName The name of the session.
+     * @param sessionId   A unique identifier for the session.
+     * @param dateCreated A LocalDate object storing the date that the session occurs on.
+     * @param personList  A list of Person objects representing participants of the session.
+     * @see Profile for issuing a unique sessionId
+     */
+    public Session(String sessionName, int sessionId, LocalDate dateCreated, ArrayList<Person> personList) {
+        this.sessionName = sessionName;
+        this.sessionId = sessionId;
+        this.dateCreated = dateCreated;
+        this.personList = personList;
+        this.activityList = new ArrayList<>();
+    }
+
+    /**
+     * Returns a String object containing a summary of the state of activityList.
+     * 
+     * @return A String object containing a summary of all Activity objects in activityList,
+     *         or a message stating that the activityList is empty if there are no Activity objects within.
+     */
+    private String getActivityListSummaryString() {
+        if (activityList.isEmpty()) {
+            return Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST;
+        }
+        
+        StringBuilder summaryString = new StringBuilder(ACTIVITY_LIST_HEADER);
+        for (Activity activity : activityList) {
+            summaryString.append("\n > ").append(activity.getActivitySummaryString());
+        }
+        return summaryString.toString();
+    }
+
+    /**
+     * Returns a String object containing a summary of the state of personList.
+     * 
+     * @return A String object containing a summary of all Person objects in personList,
+     *         or a message stating that the personList is empty if there are no Person objects within.
+     */
+    private String getPersonListSummaryString() {
+        if (personList.isEmpty()) {
+            return Message.ERROR_SESSION_EMPTY_PERSON_LIST;
+        }
+        
+        StringBuilder summaryString = new StringBuilder(PERSON_LIST_HEADER);
+        for (int i = 0; i < personList.size(); i++) {
+            String personName = personList.get(i).getName();
+            summaryString.append("\n ").append(i).append(". ").append(personName);
+        }
+        return summaryString.toString();
+    }
+
+    /**
+     * Returns a String object summarising the state of the Session object.
+     * 
+     * @return A String object containing a summary of the Session object and its member attributes.
+     */
+    @Override
+    public String toString() {
+        return "Session --"
+                + "Name: " + sessionName + '\n'
+                + "Id:   " + sessionId + '\n'
+                + "Date: " + dateCreated + '\n'
+                + getActivityListSummaryString() + '\n'
+                + getPersonListSummaryString();
     }
 }
