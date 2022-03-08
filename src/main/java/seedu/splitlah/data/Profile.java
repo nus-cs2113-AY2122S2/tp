@@ -30,7 +30,7 @@ public class Profile {
      */
     public boolean hasSessionName(String sessionName) {
         for (Session session : sessionList) {
-            if (session.getSessionName().equalsIgnoreCase(sessionName)){
+            if (session.getSessionName().equalsIgnoreCase(sessionName)) {
                 return true;
             }
         }
