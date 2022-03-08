@@ -187,6 +187,16 @@ public class Session {
     public void addPerson(Person person) {
         personList.add(person);
     }
+
+    /**
+     * Constructs a Session object with the specified information as a new session.
+     * 
+     * @param sessionName The name of the session.
+     * @param sessionId   A unique identifier for the session.
+     * @param dateCreated A LocalDate object storing the date that the session occurs on.
+     * @param personList  A list of Person objects representing participants of the session.
+     * @see Profile for issuing a unique sessionId
+     */
     public Session(String sessionName, int sessionId, LocalDate dateCreated, ArrayList<Person> personList) {
         this.sessionName = sessionName;
         this.sessionId = sessionId;
@@ -195,6 +205,12 @@ public class Session {
         this.activityList = new ArrayList<>();
     }
 
+    /**
+     * Returns a String object containing a summary of the state of activityList.
+     * 
+     * @return A String object containing a summary of all Activity objects in activityList,
+     *         or a message stating that the activityList is empty if there are no Activity objects within.
+     */
     private String getActivityListSummaryString() {
         if (activityList.isEmpty()) {
             return Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST;
@@ -207,6 +223,12 @@ public class Session {
         return summaryString.toString();
     }
 
+    /**
+     * Returns a String object containing a summary of the state of personList.
+     * 
+     * @return A String object containing a summary of all Person objects in personList,
+     *         or a message stating that the personList is empty if there are no Person objects within.
+     */
     private String getPersonListSummaryString() {
         if (personList.isEmpty()) {
             return Message.ERROR_SESSION_EMPTY_PERSON_LIST;
@@ -220,6 +242,11 @@ public class Session {
         return summaryString.toString();
     }
 
+    /**
+     * Returns a String object summarising the state of the Session object.
+     * 
+     * @return A String object containing a summary of the Session object and its member attributes.
+     */
     @Override
     public String toString() {
         return "Session --"
