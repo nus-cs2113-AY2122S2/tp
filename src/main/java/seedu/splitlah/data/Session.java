@@ -178,6 +178,14 @@ public class Session {
         throw new InvalidDataException(Message.ERROR_SESSION_PERSON_NOT_IN_LIST);
     }
 
+    /**
+     * Returns an ArrayList of Person objects with names that match the provided name list.
+     * 
+     * @param nameList An array of String objects that represent names of people in the session.
+     * @return An ArrayList object containing Person objects with matching names.
+     * @throws InvalidDataException if personList is empty or 
+     *                              if any name in nameList does not match a Person object in personList.
+     */
     public ArrayList<Person> getPersonListByName(String[] nameList) throws InvalidDataException {
         ArrayList<Person> personList = new ArrayList<>();
         for (String name : nameList) {
