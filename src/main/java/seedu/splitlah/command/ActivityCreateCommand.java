@@ -63,7 +63,7 @@ public class ActivityCreateCommand extends Command {
             updateCostAndCostList();
             Session session = manager.getProfile().getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
-            ArrayList<Person> involvedPersonList = getInvolvedPersonList(session, involvedList);
+            ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
             addAllActivityCost(involvedPersonList, personPaid, cost, costList, activityId);
             Activity activity = new Activity(activityId, activityName, cost, personPaid, involvedPersonList);
             session.addActivity(activity);
@@ -87,16 +87,6 @@ public class ActivityCreateCommand extends Command {
         } else {
             person.addActivityCost(activityId, ZERO_COST_PAID, costList[i]);
         }
-    }
-
-    private ArrayList<Person> getInvolvedPersonList(Session session, String[] involvedList)
-            throws InvalidDataException {
-        ArrayList<Person> involvedPersonList = new ArrayList<>();
-        for (int i = 0; i < involvedList.length; i++) {
-            Person personInvolved = session.getPersonByName(involvedList[i]);
-            involvedPersonList.add(personInvolved);
-        }
-        return involvedPersonList;
     }
 
     private void updateCostAndCostList() {
