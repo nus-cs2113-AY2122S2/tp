@@ -62,27 +62,27 @@ public class ActivityCreateCommand extends Command {
             int activityId = manager.getProfile().getNewActivityId();
             updateCostAndCostList();
             Session session = manager.getProfile().getSession(sessionId);
-            Person personPaying = session.getPersonByName(payer);
+            Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedPersonList = getInvolvedPersonList(session, involvedList);
-            addAllActivityCost(involvedPersonList, personPaying, cost, costList, activityId);
-            Activity activity = new Activity(activityId, activityName, cost, personPaying, involvedPersonList);
+            addAllActivityCost(involvedPersonList, personPaid, cost, costList, activityId);
+            Activity activity = new Activity(activityId, activityName, cost, personPaid, involvedPersonList);
             session.addActivity(activity);
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
         }
     }
 
-    private static void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaying, double cost,
+    private static void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, double cost,
                                            double[] costList, int activityId) throws InvalidDataException {
         for (int i = 0; i < involvedPersonList.size(); i++) {
             Person person = involvedPersonList.get(i);
-            addCostOwedAndCostPaid(personPaying, cost, costList, activityId, i, person);
+            addCostOwedAndCostPaid(personPaid, cost, costList, activityId, i, person);
         }
     }
 
-    private static void addCostOwedAndCostPaid(Person personPaying, double cost, double[] costList, int activityId,
+    private static void addCostOwedAndCostPaid(Person personPaid, double cost, double[] costList, int activityId,
                                                int i, Person person) throws InvalidDataException {
-        if (person == personPaying) {
+        if (person == personPaid) {
             person.addActivityCost(activityId, cost, costList[i]);
         } else {
             person.addActivityCost(activityId, ZERO_COST_PAID, costList[i]);
