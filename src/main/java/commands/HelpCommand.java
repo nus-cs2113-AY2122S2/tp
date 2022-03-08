@@ -11,6 +11,7 @@ public class HelpCommand extends Command {
         super(userInput);
     }
 
+    @Override
     public void execute() {
         ui.printHelpMessage();
     }
