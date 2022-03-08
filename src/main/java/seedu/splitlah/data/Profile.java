@@ -1,5 +1,8 @@
 package seedu.splitlah.data;
 
+import seedu.splitlah.exceptions.InvalidDataException;
+import seedu.splitlah.ui.Message;
+
 import java.util.ArrayList;
 
 /**
@@ -17,6 +20,30 @@ public class Profile {
         this.sessionList = new ArrayList<>();
         sessionIdTracker = 1;
         activityIdTracker = 1;
+    }
+
+    /**
+     * Checks if there is a session exists with the same session name.
+     *
+     * @param sessionName The session name to be checked.
+     * @return True if a session exists with the same name, false otherwise.
+     */
+    public boolean hasSessionName(String sessionName) {
+        for (Session session : sessionList) {
+            if (session.getSessionName().equalsIgnoreCase(sessionName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Adds a session to the list of sessions.
+     *
+     * @param session A session object to be added.
+     */
+    public void addSession(Session session) {
+        this.sessionList.add(session);
     }
 
     /**
