@@ -41,6 +41,13 @@ public class SessionCreateCommand extends Command {
         }
         return personList;
     }
+    private boolean hasNameDuplicates(ArrayList<Person> personList) {
+        Set<String> set = new HashSet<String>((List)personList);
+        if (set.size() < personList.size()) {
+            return true;
+        }
+        return false;
+    }
     /**
      * Prepares user arguments for session create command.
      *
