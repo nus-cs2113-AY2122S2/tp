@@ -27,8 +27,8 @@ public class ParserTest extends Parser {
     public void sampleTest() throws ModHappyException {
         // Test parser for "add" parameter
         try {
-            commandFormat = "\\s*(?<flag>(\\\\(m|t)))\\s+(?<argument1>[^\\-]*)\\s*"
-                    + "((?<subFlag>\\-(\\bmod|d\\b))\\s+(?<argument2>.+))*";
+            commandFormat = "\\s*(?<flag>(/(m|t)))\\s+(?<argument1>[^\\-]*)"
+                    + "\\s*((?<subFlag>\\-(\\bmod|d\\b))\\s+(?<argument2>.+))*";
             groupNames.clear();
 
             // add module with -d
@@ -37,8 +37,8 @@ public class ParserTest extends Parser {
             groupNames.add("argument1");
             groupNames.add("subFlag");
             groupNames.add("argument2");
-            HashMap<String, String> parsedCommand = parseString("\\m CS2113T -d Software Engineer");
-            assertEquals("\\m", parsedCommand.get("flag"));
+            HashMap<String, String> parsedCommand = parseString("/m CS2113T -d Software Engineer");
+            assertEquals("/m", parsedCommand.get("flag"));
             assertEquals("CS2113T", parsedCommand.get("argument1"));
             assertEquals("-d", parsedCommand.get("subFlag"));
             assertEquals("Software Engineer", parsedCommand.get("argument2"));
@@ -47,8 +47,8 @@ public class ParserTest extends Parser {
             groupNames.clear();
             groupNames.add("flag");
             groupNames.add("argument1");
-            parsedCommand = parseString("\\m CS2113T");
-            assertEquals("\\m", parsedCommand.get("flag"));
+            parsedCommand = parseString("/m CS2113T");
+            assertEquals("/m", parsedCommand.get("flag"));
             assertEquals("CS2113T", parsedCommand.get("argument1"));
 
             // add task with -mod
@@ -57,14 +57,48 @@ public class ParserTest extends Parser {
             groupNames.add("argument1");
             groupNames.add("subFlag");
             groupNames.add("argument2");
-            parsedCommand = parseString("\\t CS2113T Assignment -mod CS2113T");
-            assertEquals("\\t", parsedCommand.get("flag"));
+            parsedCommand = parseString("/t CS2113T Assignment -mod CS2113T");
+            assertEquals("/t", parsedCommand.get("flag"));
             assertEquals("CS2113T Assignment", parsedCommand.get("argument1"));
             assertEquals("-mod", parsedCommand.get("subFlag"));
             assertEquals("CS2113T", parsedCommand.get("argument2"));
         } catch (ModHappyException e) {
             throw e;
         }
+
+        // Test parser for "mark" parameter
+        try {
+            commandFormat = "\\s*(?<flag>(/(c|u)))\\s+(?<argument1>[^\\-]*)\\s*"
+                    + "((?<subFlag>\\-(\\bmod\\b))\\s+(?<argument2>.+))*";
+            groupNames.clear();
+
+            // add module with -d
+            groupNames.clear();
+            groupNames.add("flag");
+            groupNames.add("argument1");
+            groupNames.add("subFlag");
+            groupNames.add("argument2");
+            HashMap<String, String> parsedCommand = parseString("/c 1 -mod CS2113T");
+            assertEquals("/c", parsedCommand.get("flag"));
+            assertEquals("1", parsedCommand.get("argument1"));
+            assertEquals("-mod", parsedCommand.get("subFlag"));
+            assertEquals("CS2113T", parsedCommand.get("argument2"));
+
+            // add module without -d
+            groupNames.clear();
+            groupNames.add("flag");
+            groupNames.add("argument1");
+            groupNames.add("subFlag");
+            groupNames.add("argument2");
+            parsedCommand = parseString("/u 1 -mod CS2113T");
+            assertEquals("/u", parsedCommand.get("flag"));
+            assertEquals("1", parsedCommand.get("argument1"));
+            assertEquals("-mod", parsedCommand.get("subFlag"));
+            assertEquals("CS2113T", parsedCommand.get("argument2"));
+        } catch (ModHappyException e) {
+            throw e;
+        }
+
     }
 
 
