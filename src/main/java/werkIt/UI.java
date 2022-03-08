@@ -120,31 +120,77 @@ public class UI {
         System.out.println();
     }
 
+    /**
+     * Prints the text in colors pre-defined in TextColor class.
+     * @param color ANSI color codes defined in TextColor class.
+     * @param text The string text that needs to be colored.
+     */
     public void printColorText(String color, String text) {
-        System.out.println("\t " + color + text + COLOR_RESET);
+        System.out.println(color + text + COLOR_RESET);
     }
 
+    /**
+     * Prints the help messages. To be updated.
+     */
     public void printHelpMessage() {
-        System.out.println("[1]. To view all workouts, please enter:");
-        printColorText(COLOR_YELLOW, "workout /list");
-        System.out.println("\t This will print the list of existing workouts.");
+        printListHelp();
         printLine();
-        System.out.println("[2]. To add a workout, please enter: ");
-        printColorText(COLOR_YELLOW, "workout /new <exercise name> /reps <no. of repetitions>");
+        printWorkoutAddHelp();
+        printLine();
+        printWorkoutDeleteHelp();
+        printLine();
+        printWorkoutUpdateHelp();
+        printLine();
+        printExitHelp();
+    }
+
+    /**
+     * Prints help message for 'list' command.
+     */
+    public void printListHelp() {
+        System.out.println("\t To view all workouts, please enter:");
+        printColorText(COLOR_YELLOW, "\t workout /list");
+    }
+
+    /**
+     * Prints help message for 'workout /new' command.
+     */
+    public void printWorkoutAddHelp() {
+        System.out.println("\t To add a workout, please enter: ");
+        printColorText(COLOR_YELLOW, "\t workout /new <exercise name> /reps <no. of repetitions>");
         System.out.println("\t Example: ");
-        printColorText(COLOR_YELLOW, "workout /new push up /reps 10");
+        printColorText(COLOR_YELLOW, "\t workout /new push up /reps 10");
         System.out.println("\t This will add a workout with 10 reps of push up.");
-        printLine();
-        System.out.println("[3]. To delete a workout, please enter: ");
-        printColorText(COLOR_YELLOW, "workout /delete <index>");
+    }
+
+    /**
+     * Prints help message for 'workout /delete' command.
+     */
+    public void printWorkoutDeleteHelp() {
+        System.out.println("\t To delete a workout, please enter: ");
+        printColorText(COLOR_YELLOW, "\t workout /delete <index>");
         System.out.println("\t Example: ");
-        printColorText(COLOR_YELLOW, "workout /delete 1");
+        printColorText(COLOR_YELLOW, "\t workout /delete 1");
         System.out.println("\t This will delete the workout with index 1 if exists.");
-        printLine();
-        System.out.println("[4]. To update a workout, please enter: ");
-        printColorText(COLOR_YELLOW, "workout /update <index> <quantity>");
+    }
+
+    /**
+     * Prints help message for 'workout /update' command.
+     */
+    public void printWorkoutUpdateHelp() {
+        System.out.println("\t To update a workout, please enter: ");
+        printColorText(COLOR_YELLOW, "\t workout /update <index> <quantity>");
         System.out.println("\t Example: ");
-        printColorText(COLOR_YELLOW, "workout /update 1 15");
+        printColorText(COLOR_YELLOW, "\t workout /update 1 15");
         System.out.println("\t This will update the workout with index 1 to 15 reps if exists.");
+    }
+
+    /**
+     * Prints help message for 'exit' command.
+     */
+    public void printExitHelp() {
+        System.out.println("\t To exit werkIt, please enter: ");
+        printColorText(COLOR_YELLOW, "\t exit");
+        System.out.println("\t This will exit werkIt. ☹");
     }
 }
