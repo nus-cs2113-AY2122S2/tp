@@ -179,6 +179,23 @@ public class Session {
     }
 
     /**
+     * Returns an ArrayList of Person objects with names that match the provided name list.
+     * 
+     * @param nameList An array of String objects that represent names of people in the session.
+     * @return An ArrayList object containing Person objects with matching names.
+     * @throws InvalidDataException if personList is empty or 
+     *                              if any name in nameList does not match a Person object in personList.
+     */
+    public ArrayList<Person> getPersonListByName(String[] nameList) throws InvalidDataException {
+        ArrayList<Person> personList = new ArrayList<>();
+        for (String name : nameList) {
+            Person newPerson = getPersonByName(name);
+            personList.add(newPerson);
+        }
+        return personList;
+    }
+
+    /**
      * Returns a list of Person objects representing the participants in the session.
      * 
      * @return An ArrayList object containing Person objects that are part of the session.
