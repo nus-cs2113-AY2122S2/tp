@@ -110,6 +110,11 @@ public class Session {
         if (deleteTarget == null) {
             throw new InvalidDataException(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST);
         }
+        
+        ArrayList<Person> involvedPersonList = deleteTarget.getInvolvedPersonList();
+        for (Person person : involvedPersonList) {
+            person.removeActivityCost(activityId);
+        }
         activityList.remove(deleteTarget);
     }
     
