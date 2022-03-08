@@ -103,9 +103,9 @@ public class ActivityCreateCommand extends Command {
     }
 
     private static void updateCostListWithExtraCharges(double[] costList, int gst, int serviceCharge) {
+        double extraCharges = getExtraCharges(gst, serviceCharge);
         for (int i = 0; i < costList.length; i++) {
-            costList[i] *= (1 + gst / 100);
-            costList[i] *= (1 + serviceCharge / 100);
+            costList[i] *= extraCharges;
         }
     }
 
@@ -118,9 +118,14 @@ public class ActivityCreateCommand extends Command {
     }
 
     private static double updateCostWithExtraCharges(double cost, int gst, int serviceCharge) {
-        cost *= (1 + gst / 100);
-        cost *= (1 + serviceCharge / 100);
-        return cost;
+        double extraCharges = getExtraCharges(gst, serviceCharge);
+        return cost * extraCharges;
+    }
+
+    private static double getExtraCharges(int gst, int serviceCharge) {
+        double gstMultiplier = 1 + (double)gst / 100;
+        double serviceChargeMultiplier = 1 + (double)serviceCharge / 100;
+        return gstMultiplier * serviceChargeMultiplier;
     }
 
     private static double[] distributeCostEvenly(double cost, int numberOfPeopleInvolved) {
