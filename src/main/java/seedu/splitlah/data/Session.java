@@ -88,7 +88,8 @@ public class Session {
 
     /**
      * Removes an Activity object specified by a numerical identifier that uniquely identifies the activity
-     * from the Session.
+     * from the Session. Additionally, removes all ActivityCost objects with the same activityId from all Person
+     * objects involved in the activity.
      *
      * @param activityId An integer that uniquely identifies an Activity object in the profile.
      * @throws InvalidDataException if activityList is empty or activityList does not contain an Activity object 
