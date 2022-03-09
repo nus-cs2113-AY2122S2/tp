@@ -19,6 +19,8 @@ import static seedu.duke.constant.Messages.ERROR_IO_FAILURE_MESSAGE;
 public class Storage {
     private String saveFilePath;
 
+    private final String PLACEHOLDER_GET_BY_DATE = "12-12-2050";
+    private final String PLACEHOLDER_GET_DO_DATE = "12-12-2050";
 
     /**
      * Creates a constructor for the class Storage.
@@ -56,20 +58,18 @@ public class Storage {
      * Appends new tasks to the save file.
      *
      * @param newTaskDescription Task Description.
-     * @param newTaskDate Task Date and/or time.
+     * @param newTaskByDate Task Deadline and/or time.
+     * @param newTaskDoDate Task Do date
      * @param taskStatus Mark status of the task.
-     * @param taskType Task Type.
      */
     public void appendToFile(String newTaskDescription,
-                             String newTaskDate, String taskStatus,
-                             String taskType) {
+                             String newTaskByDate, String newTaskDoDate,
+                             String taskStatus) {
         try {
             FileWriter fw = new FileWriter(saveFilePath, true);
-            String textToAppend = taskType + " | " + taskStatus + " | "
-                    + newTaskDescription;
-            if (!taskType.equals("T")) {
-                textToAppend += " | " + newTaskDate;
-            }
+            String textToAppend = taskStatus + " | "
+                    + newTaskDescription + " | " + newTaskByDate
+                    + " | " + newTaskDoDate;
 
             fw.write(textToAppend + System.lineSeparator());
             fw.close();
@@ -85,18 +85,12 @@ public class Storage {
      *
      * @param taskList Array of tasks that are to be saved.
      */
-    public void rewriteSavedState(TaskList taskList) {
     public void writeSaveData(TaskList taskList) {
         wipeSavedData();
         ArrayList<Task> replicatedTasks = taskList.getTasks();
-        String taskStatus = "0";
         for (Task task : replicatedTasks) {
-            if (task.isDone()) {
-                taskStatus = "1";
-            }
-            appendToFile(task.getDescription(), task.getDate(),
-                    taskStatus, task.getType());
-            taskStatus = "0";
+            appendToFile(task.getDescription(), PLACEHOLDER_GET_BY_DATE,
+                    PLACEHOLDER_GET_DO_DATE, task.getStatusIcon());
         }
     }
 
@@ -134,20 +128,19 @@ public class Storage {
     }
 
     /**
-    * Loads back the save file onto the program.
-    *
-    * @return The saved data of the tasks in the saved file.
-    *       Tasks are represented in an array.
-    */
+     * Loads back the save file onto the program.
+     *
+     * @return The saved data of the tasks in the saved file.
+     *       Tasks are represented in an array.
+     */
     public ArrayList<Task> load() {
         try {
             ArrayList<Task> saveTaskList = readSavedData();
-            checkForRepeatedInputs(saveTaskList);
             return saveTaskList;
         } catch (FileNotFoundException e) {
             System.out.println(ERROR_FILE_NOT_FOUND_MESSAGE);
             System.exit(1);
-        } catch (ArrayIndexOutOfBoundsException | InvalidInputException | InputRepeatedException e) {
+        } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
             System.out.println(ERROR_CORRUPT_SAVED_FILE_MESSAGE);
             wipeSavedData();
         }
