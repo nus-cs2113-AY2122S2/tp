@@ -12,6 +12,7 @@ import werkit.UI;
 public class WorkoutCommand extends Command {
     public static final String BASE_KEYWORD = "workout";
     public static final String CREATE_ACTION_KEYWORD = "/new";
+    public static final String CREATE_ACTION_REPS_KEYWORD = "/reps";
     public static final String LIST_ACTION_KEYWORD = "/list";
     public static final String DELETE_ACTION_KEYWORD = "/delete";
     public static final String UPDATE_ACTION_KEYWORD = "/update";

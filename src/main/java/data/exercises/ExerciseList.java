@@ -12,16 +12,14 @@ public class ExerciseList {
     private int numberOfExercises = 0;
 
     /**
-     * Reads the exercises from local file and store them into an ArrayList named exercises.
-     * @throws IOException when the local file is missing.
+     * Adds a new exercise into the exercises ArrayList and updates
+     * the relevant variables on the change.
+     *
+     * @param exerciseName The name of the exercise to be added to the list.
      */
-    public void loadExercises() throws IOException {
-        Scanner scanner = new Scanner(EXERCISE_FILE);
-        while (scanner.hasNextLine()) {
-            var exercise = scanner.nextLine();
-            exercises.add(exercise);
-            numberOfExercises += 1;
-        }
+    public void addExerciseToList(String exerciseName) {
+        exercises.add(exerciseName);
+        incrementNumberOfExercises();
     }
 
     /**
@@ -49,6 +47,13 @@ public class ExerciseList {
      */
     protected int getNumberOfExercises() {
         return numberOfExercises;
+    }
+
+    /**
+     * Increments the number of exercises by 1.
+     */
+    protected void incrementNumberOfExercises() {
+        this.numberOfExercises += 1;
     }
 
     /**
