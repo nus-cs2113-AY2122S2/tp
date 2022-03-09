@@ -104,7 +104,7 @@ public class ActivityCreateCommand extends Command {
             String[] involvedList = Parser.parseInvolved(commandArgs);
             int gst = Parser.parseGst(commandArgs);
             int serviceCharge = Parser.parseServiceCharge(commandArgs);
-            boolean hasDifferentLength = hasDifferentLength(cost, involvedList, costList);
+            boolean hasDifferentLength = involvedList.length != costList.length;;
             if (hasDifferentLength) {
                 return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
                         + COMMAND_FORMAT);
@@ -114,12 +114,6 @@ public class ActivityCreateCommand extends Command {
         } catch (InvalidFormatException e) {
             return new InvalidCommand(e.getMessage() + COMMAND_FORMAT);
         }
-    }
-
-    private static boolean hasDifferentLength(double cost, String[] involvedList, double[] costList) {
-        boolean isZeroCost = cost == NO_COST;
-        boolean isDifferentLength = involvedList.length != costList.length;
-        return isZeroCost && isDifferentLength;
     }
 
     /**
