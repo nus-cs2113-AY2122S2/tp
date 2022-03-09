@@ -6,9 +6,4 @@ public class ParseException extends ModHappyException {
     public ParseException() {
         super(ERROR_MESSAGE);
     }
-
-    public ParseException(String className) {
-        super(String.format("%s\n\"%s\"", ERROR_MESSAGE, className));
-    }
-
 }

@@ -1,16 +1,13 @@
 package seedu.duke.commands;
 
 import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.tasks.ModuleList;
 
 /**
  * Parent class of all commands in Mod Happy.
  */
 public abstract class Command {
-    protected String commandName = "Command";
+    protected static final String LS = System.lineSeparator();
 
-    public abstract CommandResult execute() throws ModHappyException;
-
-    public String getCommandName() {
-        return commandName;
-    }
+    public abstract CommandResult execute(ModuleList moduleList) throws ModHappyException;
 }

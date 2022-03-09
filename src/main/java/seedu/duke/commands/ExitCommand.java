@@ -1,20 +1,20 @@
 package seedu.duke.commands;
 
-import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.tasks.ModuleList;
 
 public class ExitCommand extends Command {
-
-    private static final String EXIT_COMMAND_WORD = "exit";
     private static final String READY_EXIT = "I am ready to exit *_*";
 
-    public ExitCommand(String arguments) {
-        commandName = EXIT_COMMAND_WORD;
-    }
+    public static boolean isExit = false;
 
+    /**
+     * Prepares the program for termination.
+     */
     @Override
-    public CommandResult execute() throws ModHappyException {
+    public CommandResult execute(ModuleList moduleList) {
         // This will be replaced by some pre-end process later(e.g. Ask whether to save the modification)
         CommandResult result = new CommandResult(READY_EXIT);
+        isExit = true;
         return result;
     }
 }

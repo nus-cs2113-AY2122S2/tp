@@ -1,28 +1,21 @@
 package seedu.duke.commands;
 
-import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.tasks.Task;
-
-import java.util.ArrayList;
+import seedu.duke.tasks.Module;
+import seedu.duke.tasks.ModuleList;
 
 public class ListCommand extends Command {
+    private static final String LIST_MESSAGE = "Ok! Here are the task(s) in your list:" + LS + "%s";
 
-    private static final String COMMAND_RESULT_TYPE = "ArrayList";
-    private static final String LIST_COMMAND_WORD = "list";
-    private static final String LIST_MESSAGE_TOP = "Ok! Here are the task(s) in your list:\n";
-    //private static String list = "";
-    private static String listLine = "";
-    //private static String LIST_MESSAGE = list;
-    public static ArrayList<String> list = new ArrayList<>();
-
-    public ListCommand(String arguments) {
-        commandName = LIST_COMMAND_WORD;
-    }
-
+    /**
+     * Lists all tasks.
+     */
     @Override
-    public CommandResult execute() throws ModHappyException {
-        CommandResult result = new CommandResult(Task.taskList, COMMAND_RESULT_TYPE);
-        result.setStartWords(LIST_MESSAGE_TOP);
-        return result;
+    public CommandResult execute(ModuleList moduleList) {
+        String res = "";
+        for (Module m : moduleList.getModuleList()) {
+            res += m.printModuleTaskList() + LS;
+        }
+        res += moduleList.getGeneralTasks().printModuleTaskList();
+        return new CommandResult(String.format(LIST_MESSAGE, res));
     }
 }

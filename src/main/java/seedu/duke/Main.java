@@ -2,23 +2,19 @@ package seedu.duke;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
+import seedu.duke.commands.ExitCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.parsers.ModHappyParser;
+import seedu.duke.tasks.ModuleList;
 import seedu.duke.ui.TextUi;
 
 public class Main {
-
-    private static final String EXIT_COMMAND_WORD = "exit";
-    private static final String LIST_COMMAND_WORD = "list";
-    private static final String MARK_COMMAND_WORD = "mark";
-    private static final String ADD_COMMAND_WORD = "add";
-    private static final String DELETE_COMMAND_WORD = "del";
-
     private TextUi ui;
     private ModHappyParser modHappyParser;
+    private ModuleList moduleList;
 
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Main entry-point for the application.
      * See <a href="https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java">addressbook-level2</a>
      */
     public static void main(String[] args) {
@@ -43,10 +39,11 @@ public class Main {
      */
     private void start(String[] args) {
         try {
-            this.ui = new TextUi();
+            ui = new TextUi();
             ui.showHelloMessage();
-            this.modHappyParser = new ModHappyParser();
-        } catch (ModHappyException e) {
+            modHappyParser = new ModHappyParser();
+            moduleList = new ModuleList();
+        } catch (Exception e) {
             ui.showInitFailedMessage();
         }
     }
@@ -62,16 +59,16 @@ public class Main {
             try {
                 userCommandText = ui.getUserCommand();
                 command = modHappyParser.parseCommand(userCommandText);
-                CommandResult result = command.execute();
+                CommandResult result = command.execute(moduleList);
                 ui.showMessage(result.toString());
             } catch (Exception e) {
                 ui.showMessage(e);
             }
-        } while (command == null || !command.getCommandName().equals(EXIT_COMMAND_WORD));
+        } while (command == null || !ExitCommand.isExit);
     }
 
     /**
-     * Prints the Goodbye message and exits.
+     * Prints the goodbye message and exits.
      * See <a href="https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java">addressbook-level2</a>
      * */
     private void exit() {
