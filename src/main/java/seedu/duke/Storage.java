@@ -19,8 +19,8 @@ import static seedu.duke.constant.Messages.ERROR_IO_FAILURE_MESSAGE;
 public class Storage {
     private String saveFilePath;
 
-    private final String PLACEHOLDER_GET_BY_DATE = "12-12-2050";
-    private final String PLACEHOLDER_GET_DO_DATE = "12-12-2050";
+    private final String PLACEHOLDER_GET_BY_DATE = "2050-12-12";
+    private final String PLACEHOLDER_GET_DO_DATE = "2050-12-12";
 
     /**
      * Creates a constructor for the class Storage.
@@ -135,8 +135,8 @@ public class Storage {
      */
     public ArrayList<Task> load() {
         try {
-            ArrayList<Task> saveTaskList = readSavedData();
-            return saveTaskList;
+            ArrayList<Task> savedTaskList = readSavedData();
+            return savedTaskList;
         } catch (FileNotFoundException e) {
             System.out.println(ERROR_FILE_NOT_FOUND_MESSAGE);
             System.exit(1);
