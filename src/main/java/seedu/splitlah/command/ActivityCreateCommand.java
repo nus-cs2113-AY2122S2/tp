@@ -156,6 +156,12 @@ public class ActivityCreateCommand extends Command {
         }
     }
 
+    /**
+     * Returns the total cost of the activity by summing up the costs owed by each person involved in the activity.
+     *
+     * @param costList The costs owed by each person involved in the activity.
+     * @return A double representing the total cost of the activity.
+     */
     private static double getTotalCost(double[] costList) {
         double cost = 0;
         for (int i = 0; i < costList.length; i++) {
