@@ -12,6 +12,7 @@ public class Module {
     public Module(String moduleCode) {
         this(moduleCode, null);
     }
+
     public Module(String moduleCode, String moduleDescription) {
         this.moduleCode = moduleCode;
         this.moduleDescription = moduleDescription;
@@ -22,14 +23,23 @@ public class Module {
         return moduleCode;
     }
 
+    /**
+     * Returns the task list associated with the module.
+     */
     public TaskList getTaskList() {
         return taskList;
     }
 
+    /**
+     * Formats the module and all tasks associated with it as a string.
+     */
     public String printModuleTaskList() {
         return this + LS + taskList.getAllTasks(INDENT);
     }
 
+    /**
+     * Formats the module as a string.
+     */
     @Override
     public String toString() {
         if (moduleDescription != null) {

@@ -4,19 +4,18 @@ import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
-import seedu.duke.tasks.Task;
 
 import java.util.HashMap;
 
+/**
+ * This Parser supports the "add" command.
+ */
 public class AddParser extends Parser {
     private static final String FLAG = "flag";
     private static final String TASK_NAME = "taskName";
     private static final String TASK_DESCRIPTION = "taskDescription";
     private static final String MODULE_CODE = "moduleCode";
     private static final String MODULE_DESCRIPTION = "moduleDescription";
-
-    private static final String TASK_FLAG = "/t";
-    private static final String MODULE_FLAG = "/m";
 
     // Unescaped regex for testing (split into two lines):
     // ^\s*(\/t\s+(?<taskName>.+?(?=(\s+-d\s+)|$))(\s+(-d\s+(?<taskDescription>.+)))?|

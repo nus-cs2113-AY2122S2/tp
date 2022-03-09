@@ -8,6 +8,9 @@ import seedu.duke.exceptions.UnknownCommandException;
 import java.util.HashMap;
 import java.util.HashSet;
 
+/**
+ * This Parser distinguishes between various command words.
+ */
 public class ModHappyParser extends Parser {
 
     private static final String ARGUMENT = "arguments";
@@ -25,6 +28,12 @@ public class ModHappyParser extends Parser {
         groupNames.add(ARGUMENT);
     }
 
+    /**
+     * Extract the command word from the user input and invoke the relevant command-specific parser.
+     * @return a Command instance associated with the user input
+     * @throws ParseException if the user input does not match the string
+     * @throws ModHappyException if the command word was not recognised
+     */
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         try {
@@ -45,8 +54,8 @@ public class ModHappyParser extends Parser {
      * Returns the Parser object for parsing commands associated with the given command word.
      * If the command takes no arguments, null is returned.
      * @param commandWord the command word (e.g. "add")
-     * @return an instance of the relevant Parser object or null.
-     * @throws UnknownCommandException if commandWord does not correspond with any command.
+     * @return an instance of the relevant Parser object or null
+     * @throws UnknownCommandException if commandWord does not correspond with any command
      */
     private Parser getCommandParser(String commandWord) throws UnknownCommandException {
         switch (commandWord) {

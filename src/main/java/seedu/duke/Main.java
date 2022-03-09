@@ -14,7 +14,7 @@ public class Main {
     private ModuleList moduleList;
 
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Main entry-point for the application.
      * See <a href="https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java">addressbook-level2</a>
      */
     public static void main(String[] args) {
@@ -43,7 +43,7 @@ public class Main {
             ui.showHelloMessage();
             modHappyParser = new ModHappyParser();
             moduleList = new ModuleList();
-        } catch (ModHappyException e) {
+        } catch (Exception e) {
             ui.showInitFailedMessage();
         }
     }
@@ -68,7 +68,7 @@ public class Main {
     }
 
     /**
-     * Prints the Goodbye message and exits.
+     * Prints the goodbye message and exits.
      * See <a href="https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java">addressbook-level2</a>
      * */
     private void exit() {

@@ -13,26 +13,22 @@ public class TextUi {
     private static final String GOOD_BY_MESSAGE = "See you later ヾ(*´▽'*)ﾉ";
     private static final String INITIAL_FAILED_MESSAGE = "Failed to start Mod Happy (..•˘_˘•..)";
 
-
     protected final Scanner in;
     protected final PrintStream out;
 
     /**
-     * Initializes TextUi.
-     *
-     * @throws ModHappyException ModHappy Exception
+     * Creates an instance of TextUi.
      */
-    public TextUi() throws ModHappyException {
+    public TextUi() {
         this.in = new Scanner(System.in);
         this.out = System.out;
     }
 
 
     /**
-     * Formats the window style.
+     * Formats the provided message.
      *
-     * @param message The message to be passed on the chatbot
-     * @return The formated message
+     * @param message the message to be printed
      */
     public String formatMessage(String message) {
         return String.format("%s%s\n%s\n%s", LS, LINE, message, LINE);
@@ -41,39 +37,38 @@ public class TextUi {
     /**
      * Receives command from user.
      *
-     * @return Received command message
+     * @return user input
      */
     public String getUserCommand() {
-        String newCommand = in.nextLine();
-        return newCommand;
+        return in.nextLine();
     }
 
     /**
-     * Show the hello message to user.
+     * Display a message.
      */
     public void showMessage(Object message) {
         out.println(formatMessage(message.toString()));
     }
 
     /**
-     * Show the hello message to user.
+     * Display the welcome message.
      */
     public void showHelloMessage() {
-        this.showMessage(HELLO_MESSAGE);
+        showMessage(HELLO_MESSAGE);
     }
 
     /**
-     * Show the good by message to user.
+     * Display the goodbye message.
      */
     public void showGoodByeMessage() {
-        this.showMessage(GOOD_BY_MESSAGE);
+        showMessage(GOOD_BY_MESSAGE);
     }
 
     /**
-     * Show initialize message.
+     * Display the initialisation message.
      */
     public void showInitFailedMessage() {
-        this.showMessage(INITIAL_FAILED_MESSAGE);
+        showMessage(INITIAL_FAILED_MESSAGE);
     }
 
 }

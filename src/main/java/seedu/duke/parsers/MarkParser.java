@@ -7,6 +7,9 @@ import seedu.duke.exceptions.ParseException;
 
 import java.util.HashMap;
 
+/**
+ * This Parser supports the "mark" command.
+ */
 public class MarkParser extends Parser {
     private static final String FLAG = "flag";
     private static final String TASK_INDEX = "taskIndex";

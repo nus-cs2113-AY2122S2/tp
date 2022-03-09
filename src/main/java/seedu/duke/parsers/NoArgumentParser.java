@@ -6,10 +6,11 @@ import seedu.duke.commands.ListCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 
+
+/**
+ * This Parser supports all commands which do not accept any additional arguments or parameters.
+ */
 public class NoArgumentParser extends Parser {
-    // TODO: Centralise the command words into a Strings class.
-    private static final String EXIT_COMMAND_WORD = "exit";
-    private static final String LIST_COMMAND_WORD = "list";
     private final String myCommandWord;
 
     public NoArgumentParser(String commandWord) {

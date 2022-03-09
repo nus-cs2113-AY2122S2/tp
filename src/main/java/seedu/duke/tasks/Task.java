@@ -16,10 +16,17 @@ public class Task {
         this.isTaskDone = false;
     }
 
+    /**
+     * Sets the completion status of the task.
+     * @param status new task completion status
+     */
     public void setTaskDone(boolean status) {
         isTaskDone = status;
     }
 
+    /**
+     * Returns the task as a formatted string.
+     */
     @Override
     public String toString() {
         String taskStatusString = isTaskDone ? ICON_COMPLETED : ICON_UNCOMPLETED;

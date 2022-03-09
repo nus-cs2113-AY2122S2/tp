@@ -8,11 +8,6 @@ import seedu.duke.tasks.ModuleList;
  */
 public abstract class Command {
     protected static final String LS = System.lineSeparator();
-    protected String commandName = "Command";
 
     public abstract CommandResult execute(ModuleList moduleList) throws ModHappyException;
-
-    public String getCommandName() {
-        return commandName;
-    }
 }

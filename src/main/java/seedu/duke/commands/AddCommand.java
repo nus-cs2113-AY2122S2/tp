@@ -1,6 +1,5 @@
 package seedu.duke.commands;
 
-import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
@@ -27,8 +26,11 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Adds the specified task or module.
+     */
     @Override
-    public CommandResult execute(ModuleList moduleList) throws ModHappyException {
+    public CommandResult execute(ModuleList moduleList) {
         String res = "";
         if (isAddTask) {
             // TODO: change this once support for -mod is implemented
@@ -37,8 +39,7 @@ public class AddCommand extends Command {
             res = String.format(ADD_TASK_MESSAGE, targetModule, taskList.addTask(newTask), taskList.size());
         } else {
             if (!moduleList.isModuleExists(newModule.getModuleCode())) {
-                moduleList.addModule(newModule);
-                res = String.format(ADD_MODULE_MESSAGE, newModule);
+                res = String.format(ADD_MODULE_MESSAGE, moduleList.addModule(newModule));
             } else {
                 res = MODULE_ALREADY_EXISTS;
             }
