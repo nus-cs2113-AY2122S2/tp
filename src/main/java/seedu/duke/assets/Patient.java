@@ -15,7 +15,7 @@ public class Patient {
         this.fullName = fullName;
         this.age = age;
         this.gender = gender;
-        Address = address;
+        this.address = address;
         this.dob = dob;
         this.dateAdmission = dateAdmission;
     }
@@ -37,7 +37,7 @@ public class Patient {
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public String getDob() {
