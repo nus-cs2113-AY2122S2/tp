@@ -1,4 +1,11 @@
 goto m/Contacts_Manager
 list
 menu
+goto m/Expense_Tracker
+list
+add d/Date a/18.00 c/Category r/This is a remark
+list
+rm 1
+list
+menu
 exit
