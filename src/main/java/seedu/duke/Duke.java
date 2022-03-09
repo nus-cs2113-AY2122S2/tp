@@ -4,7 +4,7 @@ import seedu.duke.controllers.MainController;
 
 import java.util.Scanner;
 
-public class Main {
+public class Duke {
     /**
      * Main entry-point for application.
      */
