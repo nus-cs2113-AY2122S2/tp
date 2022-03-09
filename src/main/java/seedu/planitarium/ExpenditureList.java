@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ExpenditureList {
 
-    protected ArrayList<Expenditure> expenditureArrayList;
+    private ArrayList<Expenditure> expenditureArrayList;
     private int numberOfExpenditures;
 
     public ExpenditureList() {
