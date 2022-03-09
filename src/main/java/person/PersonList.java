@@ -10,4 +10,8 @@ public class PersonList {
         personList = new ArrayList<Person>();
         numberOfMembers = 0;
     }
+
+    public static int getNumberOfMembers() {
+        return numberOfMembers;
+    }
 }
