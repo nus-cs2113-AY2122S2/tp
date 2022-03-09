@@ -25,11 +25,19 @@ public class PersonList {
         personList.remove(index);
     }
 
-    public static int getRemain() {
+    public static float getRemain() {
         float sum = 0;
         for (Person person: personList) {
             sum += person.getDisposable();
         }
         return sum;
+    }
+
+    public static void list() {
+        for (int i = 0; i < personList.size(); i++) {
+            System.out.println((i+1) + ". " + name + System.lineSeparator() +
+                    "Income: " + personList.get(i).listIncome() + System.lineSeparator() +
+                    "Expenditure: " + personList.get(i).listExpenditure());
+        }
     }
 }
