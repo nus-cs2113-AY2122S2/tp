@@ -6,7 +6,6 @@ import commands.InvalidCommandException;
 import data.exercises.ExerciseList;
 import data.workouts.WorkoutList;
 import storage.FileManager;
-import storage.UnknownFileException;
 
 import java.io.IOException;
 
@@ -27,47 +26,20 @@ public class WerkIt {
      */
     public WerkIt() throws IOException {
         // Initialise Components
-        this.ui = new UI();
-        this.exerciseList = new ExerciseList();
-        this.workoutList = new WorkoutList(getExerciseList());
-        this.fileManager = new FileManager();
-        this.parser = new Parser(getUI(), getExerciseList(), getWorkoutList(), getFileManager());
+        ui = new UI();
+        exerciseList = new ExerciseList();
+        workoutList = new WorkoutList(exerciseList);
+        parser = new Parser(ui, exerciseList, workoutList, fileManager);
 
-        getUI().printGreetings();
+        ui.printGreetings();
 
         // Do file imports
-        loadRequiredDirectoryAndFiles();
-    }
+        System.out.println("(WIP) File import messages will go here");
 
-    public UI getUI() {
-        return this.ui;
-    }
-
-    public Parser getParser() {
-        return this.parser;
-    }
-
-    public ExerciseList getExerciseList() {
-        return this.exerciseList;
-    }
-
-    public WorkoutList getWorkoutList() {
-        return this.workoutList;
-    }
-
-    public FileManager getFileManager() {
-        return this.fileManager;
-    }
-
-    private void loadRequiredDirectoryAndFiles() throws IOException {
-        getUI().printCheckingDirectoryAndFilesMessage();
-        getFileManager().checkAndCreateDirectoriesAndFiles();
-        getUI().printEmptyLineOrStatus(fileManager.checkIfAllDirectoryAndFilesExists());
-
-        getUI().printLoadingFileDataMessage();
-        loadExerciseFile();
-        if (getFileManager().isWasWorkoutsFileAlreadyMade()) {
-            loadWorkoutFile();
+        try {
+            exerciseList.loadExercises();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -83,10 +55,10 @@ public class WerkIt {
 
         do {
             try {
-                getUI().printUserInputPrompt(isFirstPrompt);
+                ui.printUserInputPrompt(isFirstPrompt);
                 isFirstPrompt = false;
-                String userInput = getUI().getUserInput();
-                Command newCommand = getParser().parseUserInput(userInput);
+                String userInput = ui.getUserInput();
+                Command newCommand = parser.parseUserInput(userInput);
 
                 if (newCommand instanceof ExitCommand) {
                     userWantsToExit = true;
@@ -98,29 +70,13 @@ public class WerkIt {
             } catch (InvalidCommandException e) {
                 System.out.println(e.getMessage());
                 System.out.println("Please try again.");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Uh oh, the command entered is invalid.");
+                System.out.println("Please try again.");
             }
         } while (!userWantsToExit);
 
         // User is exiting the program
-        getUI().printGoodbye();
-    }
-
-    private void loadExerciseFile() throws IOException {
-        fileManager.loadExercisesFromFile(getExerciseList());
-        try {
-            getUI().printFileLoadStatusMessage(FileManager.EXERCISE_FILENAME, true);
-        } catch (UnknownFileException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private void loadWorkoutFile() throws IOException {
-        boolean isWorkoutFileLoadSuccessful;
-        isWorkoutFileLoadSuccessful = fileManager.loadWorkoutsFromFile(getWorkoutList());
-        try {
-            getUI().printFileLoadStatusMessage(FileManager.WORKOUT_FILENAME, isWorkoutFileLoadSuccessful);
-        } catch (UnknownFileException e) {
-            System.out.println(e.getMessage());
-        }
+        ui.printGoodbye();
     }
 }
