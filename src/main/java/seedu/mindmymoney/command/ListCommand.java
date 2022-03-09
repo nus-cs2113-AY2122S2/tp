@@ -5,7 +5,8 @@ import seedu.mindmymoney.data.Lists;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
 public class ListCommand extends Command {
-    public ListCommand() {}
+    public ListCommand() {
+    }
 
     /**
      * Prints user's current list of expenditures.
