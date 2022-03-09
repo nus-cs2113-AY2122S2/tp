@@ -7,10 +7,14 @@
                                     
 Welcome to WerkIt!, your personal exercise planner.
 ----------------------------------------------------------------------
-(WIP) File import messages will go here
-exercises\Exercises.txt (The system cannot find the path specified)
+Checking for required directory and files... All OK!
+
+Loading saved file data...
+- Exercises file	OK!
+- Workouts file 	OK!
 ----------------------------------------------------------------------
 Now then, what can I do for you today?
+(Need help? Type 'help' for a guide!)
 ----------------------------------------------------------------------
 > ----------------------------------------------------------------------
 Thank you for using WerkIt! See you again soon...
