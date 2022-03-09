@@ -29,7 +29,7 @@ public class ActivityCreateCommand extends Command {
 
     private int sessionId;
     private String activityName;
-    private double cost;
+    private double totalCost;
     private String payer;
     private String[] involvedList;
     private double[] costList;
@@ -41,18 +41,18 @@ public class ActivityCreateCommand extends Command {
      * 
      * @param sessionId Ths id of the session.
      * @param activityName The name of the activity.
-     * @param cost The total cost of the activity.
+     * @param totalCost The total cost of the activity.
      * @param payer The name of the person who paid for the activity.
      * @param involvedList The names of the persons who are involved in the activity.
      * @param costList The respective costs of each person involved in the activity.
      * @param gst The gst to be included for the cost of the activity.
      * @param serviceCharge The service charge to be included for the cost of the activity.
      */
-    public ActivityCreateCommand(int sessionId, String activityName, double cost, String payer, String[] involvedList,
+    public ActivityCreateCommand(int sessionId, String activityName, double totalCost, String payer, String[] involvedList,
                                  double[] costList, int gst, int serviceCharge) {
         this.sessionId = sessionId;
         this.activityName = activityName;
-        this.cost = cost;
+        this.totalCost = totalCost;
         this.payer = payer;
         this.involvedList = involvedList;
         this.costList = costList;
@@ -70,11 +70,11 @@ public class ActivityCreateCommand extends Command {
     public static Command prepare(String commandArgs) {
         boolean isMissingCost = false;
         boolean isMissingCostList = false;
-        double cost = 0;
+        double totalCost = 0;
         double[] costList = null;
 
         try {
-            cost = Parser.parseTotalCost(commandArgs);
+            totalCost = Parser.parseTotalCost(commandArgs);
         } catch (InvalidFormatException e) {
             isMissingCost = true;
         }
@@ -109,7 +109,7 @@ public class ActivityCreateCommand extends Command {
                 return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
                         + COMMAND_FORMAT);
             }
-            return new ActivityCreateCommand(sessionId, activityName, cost, payer, involvedList, costList, gst,
+            return new ActivityCreateCommand(sessionId, activityName, totalCost, payer, involvedList, costList, gst,
                     serviceCharge);
         } catch (InvalidFormatException e) {
             return new InvalidCommand(e.getMessage() + COMMAND_FORMAT);
@@ -131,8 +131,8 @@ public class ActivityCreateCommand extends Command {
             Session session = manager.getProfile().getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
-            addAllActivityCost(involvedPersonList, personPaid, cost, costList, activityId);
-            Activity activity = new Activity(activityId, activityName, cost, personPaid, involvedPersonList);
+            addAllActivityCost(involvedPersonList, personPaid, totalCost, costList, activityId);
+            Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(activity);
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
@@ -144,17 +144,17 @@ public class ActivityCreateCommand extends Command {
      *
      * @param involvedPersonList The list of persons involved in the activity.
      * @param personPaid The person who paid for the activity.
-     * @param cost The total cost of the activity.
+     * @param totalCost The total cost of the activity.
      * @param costList The costs owed by each person involved in the activity.
      * @param activityId The id of the activity.
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      * @see InvalidDataException
      */
-    private static void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, double cost,
+    private static void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, double totalCost,
                                            double[] costList, int activityId) throws InvalidDataException {
         for (int i = 0; i < involvedPersonList.size(); i++) {
             Person person = involvedPersonList.get(i);
-            addCostOwedAndCostPaid(personPaid, cost, costList, activityId, i, person);
+            addCostOwedAndCostPaid(personPaid, totalCost, costList, activityId, i, person);
         }
     }
 
@@ -165,7 +165,7 @@ public class ActivityCreateCommand extends Command {
      * Else, the cost paid is set to 0.
      *
      * @param personPaid The person who paid for the activity.
-     * @param cost The total cost of the activity.
+     * @param totalCost The total cost of the activity.
      * @param costList The costs owed by each person involved in the activity.
      * @param activityId The id of the activity.
      * @param indexOfCostOwed The index of the cost owed in the list of costs.
@@ -173,10 +173,10 @@ public class ActivityCreateCommand extends Command {
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      * @see InvalidDataException
      */
-    private static void addCostOwedAndCostPaid(Person personPaid, double cost, double[] costList, int activityId,
+    private static void addCostOwedAndCostPaid(Person personPaid, double totalCost, double[] costList, int activityId,
                                                int indexOfCostOwed, Person person) throws InvalidDataException {
         if (person == personPaid) {
-            person.addActivityCost(activityId, cost, costList[indexOfCostOwed]);
+            person.addActivityCost(activityId, totalCost, costList[indexOfCostOwed]);
         } else {
             person.addActivityCost(activityId, ZERO_COST_PAID, costList[indexOfCostOwed]);
         }
@@ -189,14 +189,14 @@ public class ActivityCreateCommand extends Command {
      * Else, the total cost is distributed evenly.
      */
     private void updateCostAndCostList() {
-        boolean isZeroCost = cost == NO_COST;
+        boolean isZeroCost = totalCost == NO_COST;
         if (isZeroCost) {
             updateCostListWithExtraCharges(costList, gst, serviceCharge);
-            cost = getTotalCost(costList);
+            totalCost = getTotalCost(costList);
         } else {
-            cost = updateCostWithExtraCharges(cost, gst, serviceCharge);
+            totalCost = updateCostWithExtraCharges(totalCost, gst, serviceCharge);
             int numberOfPeopleInvolved = involvedList.length;
-            costList = distributeCostEvenly(cost, numberOfPeopleInvolved);
+            costList = distributeCostEvenly(totalCost, numberOfPeopleInvolved);
         }
     }
 
@@ -223,11 +223,11 @@ public class ActivityCreateCommand extends Command {
      * @return A double representing the total cost of the activity.
      */
     private static double getTotalCost(double[] costList) {
-        double cost = 0;
+        double totalCost = 0;
         for (int i = 0; i < costList.length; i++) {
-            cost += costList[i];
+            totalCost += costList[i];
         }
-        return cost;
+        return totalCost;
     }
 
     /**
@@ -235,14 +235,14 @@ public class ActivityCreateCommand extends Command {
      * Extra charges may include gst and service charge.
      * Assumption: gst and service charge are non-negative integers.
      *
-     * @param cost The total cost of the activity excluding extra charges.
+     * @param totalCost The total cost of the activity excluding extra charges.
      * @param gst The gst to be included in the total cost of the activity.
      * @param serviceCharge The service charge to be included in the total cost of the activity.
      * @return A double representing the total cost of the activity.
      */
-    private static double updateCostWithExtraCharges(double cost, int gst, int serviceCharge) {
+    private static double updateCostWithExtraCharges(double totalCost, int gst, int serviceCharge) {
         double extraCharges = getExtraCharges(gst, serviceCharge);
-        return cost * extraCharges;
+        return totalCost * extraCharges;
     }
 
     /**
@@ -263,12 +263,12 @@ public class ActivityCreateCommand extends Command {
      * among the persons involved in the activity.
      * Divides the total cost by the number of people involved in the activity.
      *
-     * @param cost The total cost of the activity.
+     * @param totalCost The total cost of the activity.
      * @param numberOfPeopleInvolved The number of people involved in the activity.
      * @return An array of doubles representing the costs of each person involved in the activity.
      */
-    private static double[] distributeCostEvenly(double cost, int numberOfPeopleInvolved) {
-        double dividedCost = cost / numberOfPeopleInvolved;
+    private static double[] distributeCostEvenly(double totalCost, int numberOfPeopleInvolved) {
+        double dividedCost = totalCost / numberOfPeopleInvolved;
         double[] costList = new double[numberOfPeopleInvolved];
         Arrays.fill(costList, dividedCost);
         return costList;
