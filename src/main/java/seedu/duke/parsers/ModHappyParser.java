@@ -1,6 +1,7 @@
 package seedu.duke.parsers;
 
 import seedu.duke.commands.AddCommand;
+import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.MarkCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.ExitCommand;
@@ -17,6 +18,7 @@ public class ModHappyParser extends Parser {
     private static final String COMMAND_WORD = "commandWord";
     private static final String EXIT_COMMAND_WORD = "exit";
     private static final String ADD_COMMAND_WORD = "add";
+    private static final String DELETE_COMMAND_WORD = "del";
     private static final String LIST_COMMAND_WORD = "list";
     private static final String MARK_COMMAND_WORD = "mark";
     private static final String MOD_HAPPY_COMMAND_FORMAT = "(?<commandWord>\\S+)"
@@ -41,6 +43,8 @@ public class ModHappyParser extends Parser {
                 return new ExitCommand(parsedCommand.get(COMMAND_WORD));
             case (ADD_COMMAND_WORD):
                 return new AddCommand(parsedCommand.get(ARGUMENT));
+            case(DELETE_COMMAND_WORD):
+                return new DeleteCommand(parsedCommand.get(ARGUMENT)).prepareDeleteCommand();
             case (LIST_COMMAND_WORD):
                 return new ListCommand(parsedCommand.get(COMMAND_WORD));
             case (MARK_COMMAND_WORD):
