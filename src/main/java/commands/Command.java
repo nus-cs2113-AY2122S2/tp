@@ -1,7 +1,8 @@
 package commands;
 
 import exceptions.UnknownException;
-import UI.UI;
+import ui.UI;
+
 public class Command {
     protected static final String ADD_PERSON_CMD = "add";
     protected static final String DELETE_PERSON_CMD = "delete";
@@ -13,8 +14,9 @@ public class Command {
     protected static final String LIST = "list";
     protected static final String EXIT = "bye";
     protected String replyMsg;
-    protected UI GUI = new UI();
-    public Command(){
+    protected UI CUI = new UI();
+
+    public Command() {
     }
 /**
 
@@ -22,7 +24,7 @@ public class Command {
      * @param Instr the instruction after parsing by parser
      * @throws UnknownException if the instruction cannot be executed
 
-    public void execute(Parser Instr) throws UnknownException{
+    public void execute(Parser Instr) throws UnknownException {
         //parser
         try () {
             switch () {

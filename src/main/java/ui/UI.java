@@ -1,4 +1,4 @@
-package UI;
+package ui;
 
 /**
  * print messages with horizontal line
@@ -11,8 +11,8 @@ public class UI {
     }
 
     public void printMsg(String message) {
-        this.content = message;
-        System.out.println(content);
+        System.out.println(HORI_LINE);
+        System.out.println(message);
         System.out.println(HORI_LINE);
     }
 }
