@@ -15,6 +15,15 @@ public class CommandHandler {
     public String[] commands;
 
     /**
+     * Constructs new CommandHandler object
+     *
+     * @return new CommandHandler object
+     */
+    public CommandHandler() {
+
+    }
+
+    /**
      *
      */
     public void handleUserInput(ProjectList projectList) {
