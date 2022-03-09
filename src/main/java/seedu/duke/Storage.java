@@ -41,10 +41,9 @@ public class Storage {
         }
     }
 
+    // Wipes the existing file
     private void wipeSavedData() {
         try {
-            // Create new FileWriter to overwrite existing file. But
-            // no new data is written to overwrite file content, so content remains empty, i.e. clears file content
             FileWriter fw = new FileWriter(saveFilePath);
             fw.close();
         } catch (IOException e) {
