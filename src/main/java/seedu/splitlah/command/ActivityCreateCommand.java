@@ -118,12 +118,6 @@ public class ActivityCreateCommand extends Command {
         return isZeroCost && isDifferentLength;
     }
 
-    private static boolean hasBothCostAndCostList(double cost, double[] costList) {
-        boolean hasCost = cost != NO_COST;
-        boolean hasCostList = costList.length != NO_COST_LIST;
-        return hasCost && hasCostList;
-    }
-
     /**
      * Runs the command to create an activity.
      * Gets relevant parameters to create an Activity object.
