@@ -5,16 +5,16 @@ import org.junit.jupiter.api.Test;
 
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
-import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.parsers.ModHappyParser;
-import seedu.duke.parsers.Parser;
 import seedu.duke.tasks.Task;
 
-import java.util.HashMap;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
     private ModHappyParser parser;
