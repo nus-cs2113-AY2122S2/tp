@@ -20,6 +20,15 @@ public class SessionDeleteCommand extends Command {
         this.sessionId = sessionId;
     }
 
+    public static Command prepare(String commandArgs) {
+        try {
+            int sessionId = Parser.parseSessionId(commandArgs);
+            return new SessionDeleteCommand(sessionId);
+        } catch (InvalidFormatException formatException) {
+            String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
+            return new InvalidCommand(invalidCommandMessage);
+        }
+    }
 
     /**
      * Runs the command to delete a session.
