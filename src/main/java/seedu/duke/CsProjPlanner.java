@@ -1,9 +1,9 @@
 package seedu.duke;
 
-import seedu.duke.command_handler.CommandHandler;
+import seedu.duke.commandhandler.CommandHandler;
 import seedu.duke.projects.ProjectList;
 
-public class CSProjPlanner {
+public class CsProjPlanner {
 
     private static ProjectList projectList = new ProjectList();
     private static CommandHandler commandHandler = new CommandHandler();

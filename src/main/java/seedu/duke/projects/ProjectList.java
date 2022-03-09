@@ -6,16 +6,15 @@ public class ProjectList {
     private ArrayList<Project> projectList;
 
     /**
-     * Constructs a ProjectList object
+     * Constructs a ProjectList object.
      *
-     * @return a ProjectList object
      */
     public ProjectList() {
         projectList = new ArrayList<Project>();
     }
 
     /**
-     * Adds a new Project to projectList
+     * Adds a new Project to projectList.
      *
      * @param title Name of the Project
      */
@@ -24,7 +23,7 @@ public class ProjectList {
     }
 
     /**
-     * Deletes a Project from projectList
+     * Deletes a Project from projectList.
      *
      * @param title Name of the project
      */

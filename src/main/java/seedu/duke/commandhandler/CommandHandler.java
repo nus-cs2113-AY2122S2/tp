@@ -1,29 +1,29 @@
-package seedu.duke.command_handler;
+package seedu.duke.commandhandler;
 
-import seedu.duke.projects.Project;
 import seedu.duke.projects.ProjectList;
 import java.util.Scanner;
 
 public class CommandHandler {
 
-    /** Scanner for user input */
+    /** Scanner for user input. */
     public Scanner sc;
-    /** Command entered by user */
+    /** Command entered by user. */
     public String line;
-    /** All words of command entered by user */
+    /** All words of command entered by user. */
     public String[] commands;
 
     /**
-     * Constructs new CommandHandler object
+     * Constructs new CommandHandler object.
      *
-     * @return new CommandHandler object
      */
     public CommandHandler() {
 
     }
 
     /**
+     * Handles all commands given to program by user.
      *
+     * @param projectList ProjectList for commands to work with
      */
     public void handleUserInput(ProjectList projectList) {
 
