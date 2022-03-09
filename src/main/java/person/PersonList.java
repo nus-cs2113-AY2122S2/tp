@@ -20,4 +20,12 @@ public class PersonList {
         personList.add(person);
         numberOfMembers++;
     }
+
+    public static int getRemain() {
+        float sum = 0;
+        for (Person person: personList) {
+            sum += person.getDisposable();
+        }
+        return sum;
+    }
 }
