@@ -34,10 +34,23 @@ public class PersonCostPair implements Comparable<PersonCostPair> {
         isProcessed = processed;
     }
 
+    /**
+     * Returns an integer to identify whether this PersonCostPair object should be ordered
+     * before or after another object.
+     *
+     * @param personCostPair The specified object that this object is comparing to.
+     * @return A value less than 0 if this object's cost is smaller than the specified object's cost, 
+     *         a value greater than 0 if this object's cost is larger,
+     *         and 0 if both objects' costs are numerically equal.
+     */
+    @Override
     public int compareTo(PersonCostPair personCostPair) {
         return Double.compare(cost, personCostPair.getCost());
     }
 
+    /**
+     * A Comparator that would sort two PersonCostPair objects in ascending order of their costs. 
+     */
     public static Comparator<PersonCostPair> PersonCostPairComparator = new Comparator<PersonCostPair>() {
         @Override
         public int compare(PersonCostPair personCostPair1, PersonCostPair personCostPair2) {
