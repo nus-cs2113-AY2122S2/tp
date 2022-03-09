@@ -235,7 +235,7 @@ public class Session {
      * Returns a String object containing a summary of the state of activityList.
      *
      * @return A String object containing a summary of all Activity objects in activityList,
-     * or a message stating that the activityList is empty if there are no Activity objects within.
+     *         or a message stating that the activityList is empty if there are no Activity objects within.
      */
     private String getActivityListSummaryString() {
         if (activityList.isEmpty()) {
@@ -253,7 +253,7 @@ public class Session {
      * Returns a String object containing a summary of the state of personList.
      *
      * @return A String object containing a summary of all Person objects in personList,
-     * or a message stating that the personList is empty if there are no Person objects within.
+     *         or a message stating that the personList is empty if there are no Person objects within.
      */
     private String getPersonListSummaryString() {
         if (personList.isEmpty()) {
