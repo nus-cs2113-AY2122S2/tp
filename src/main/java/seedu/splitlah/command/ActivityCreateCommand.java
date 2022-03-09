@@ -80,6 +80,17 @@ public class ActivityCreateCommand extends Command {
         }
     }
 
+    /**
+     * Adds all relevant activity costs to each involved person's list of activity costs.
+     *
+     * @param involvedPersonList The list of persons involved in the activity.
+     * @param personPaid The person who paid for the activity.
+     * @param cost The total cost of the activity.
+     * @param costList The costs owed by each person involved in the activity.
+     * @param activityId The id of the activity.
+     * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
+     * @see InvalidDataException
+     */
     private static void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, double cost,
                                            double[] costList, int activityId) throws InvalidDataException {
         for (int i = 0; i < involvedPersonList.size(); i++) {
