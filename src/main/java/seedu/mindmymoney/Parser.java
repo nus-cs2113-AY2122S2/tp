@@ -35,7 +35,7 @@ public class Parser {
     public Command parseCommand() {
         String[] parsedInput = parseInput();
 
-        switch(parsedInput[COMMAND_INDEX]) {
+        switch (parsedInput[COMMAND_INDEX]) {
         case "help":
             return new HelpCommand(true);
         case "bye":
