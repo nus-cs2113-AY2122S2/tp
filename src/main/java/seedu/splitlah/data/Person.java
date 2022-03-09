@@ -1,6 +1,7 @@
 package seedu.splitlah.data;
 
 import seedu.splitlah.exceptions.InvalidDataException;
+import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ public class Person {
     }
 
     /**
-     * Constructs an activityCost object and adds it to the list of activityCosts.
+     * Constructs an ActivityCost object and adds it to the list of ActivityCosts.
      *
      * @param activityId the activityId.
      * @param costPaid the cost of the activity paid by the payer.
@@ -33,6 +34,23 @@ public class Person {
     public void addActivityCost(int activityId, double costPaid, double costOwed) throws InvalidDataException {
         ActivityCost activityCost = new ActivityCost(activityId, costPaid, costOwed);
         activityCostList.add(activityCost);
+    }
+
+    /**
+     * Removes an ActivityCost object from the list of ActivityCosts.
+     *
+     * @param activityId the activityId of the ActivityCost to be removed.
+     * @throws InvalidDataException if the activityId is not found.
+     */
+    public void removeActivityCost(int activityId) throws InvalidDataException {
+        if (activityCostList.isEmpty()) {
+            throw new InvalidDataException(Message.ERROR_PERSON_NO_ACTIVITIES);
+        }
+        boolean removed =
+                activityCostList.removeIf(activityCost -> activityCost.getActivityId() == activityId);
+        if (!removed) {
+            throw new InvalidDataException(Message.ERROR_PERSON_ACTIVITY_NOT_FOUND);
+        }
     }
 
     public double getTotalCostPaid() {
@@ -65,6 +83,26 @@ public class Person {
             totalCostOwed += i.getCostOwed();
         }
         return totalCostPaid - totalCostOwed;
+    }
+
+    /**
+     * Returns the cost owed by this Person object for an Activity.
+     *
+     * @param activityId int representing activityId of the Activity.
+     * @return double representing cost owed by the Person for this Activity.
+     * @throws InvalidDataException if this Person is not participating in any Activities
+     *         or the activityId is not found.
+     */
+    public double getActivityCostOwed(int activityId) throws InvalidDataException {
+        if (activityCostList.isEmpty()) {
+            throw new InvalidDataException(Message.ERROR_PERSON_NO_ACTIVITIES);
+        }
+        for (ActivityCost activityCost : activityCostList) {
+            if (activityCost.getActivityId() == activityId) {
+                return activityCost.getCostOwed();
+            }
+        }
+        throw new InvalidDataException(Message.ERROR_PERSON_ACTIVITY_NOT_FOUND);
     }
 
     public String getName() {

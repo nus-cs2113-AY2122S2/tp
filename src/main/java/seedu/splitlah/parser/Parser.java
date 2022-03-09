@@ -251,7 +251,7 @@ public class Parser {
     public static String getRemainingArgument(String commandArgs) {
         String[] commandTokens = commandArgs.trim().split(REGEX_WHITESPACES_DELIMITER, COMMAND_WITH_ARGS_TOKEN_COUNT);
         if (commandTokens.length < COMMAND_WITH_ARGS_TOKEN_COUNT) {
-            return null;
+            return "";
         }
         return commandTokens[2];
     }
@@ -285,11 +285,11 @@ public class Parser {
         // TEMPORARY FALLTHROUGH FOR ALL COMMANDS UNTIL COMMANDS ARE PROPERLY SET UP
         case SessionCreateCommand.COMMAND_TEXT:
             return SessionCreateCommand.prepare(remainingArgs);
+        case SessionSummaryCommand.COMMAND_TEXT:
+            return SessionSummaryCommand.prepare(remainingArgs);
         case SessionDeleteCommand.COMMAND_TEXT:
             // FALLTHROUGH
         case SessionListCommand.COMMAND_TEXT:
-            // FALLTHROUGH
-        case SessionSummaryCommand.COMMAND_TEXT:
             // FALLTHROUGH
         case ActivityCreateCommand.COMMAND_TEXT:
             // FALLTHROUGH
