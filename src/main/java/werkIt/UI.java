@@ -150,6 +150,7 @@ public class UI {
     public void printListHelp() {
         System.out.println("\t To view all workouts, please enter:");
         printColorText(COLOR_YELLOW, "\t workout /list");
+        System.out.println("\t This will print all the existing workouts.");
     }
 
     /**
