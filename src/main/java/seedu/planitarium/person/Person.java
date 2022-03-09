@@ -1,4 +1,4 @@
-package person;
+package seedu.planitarium.person;
 
 public class Person {
     private static String name;
