@@ -38,6 +38,6 @@ public class AddCommand extends Command {
 //        for (Expenditure i : Lists.expenditures) {
 //            System.out.println(indexOfList + ". " + i);
 //            indexOfList++;
-//        }
+        //}
     }
 }

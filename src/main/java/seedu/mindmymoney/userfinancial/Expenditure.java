@@ -1,7 +1,7 @@
 package seedu.mindmymoney.userfinancial;
 
 /**
- * Represents user expenditure
+ * Represents user's expenditure.
  */
 public class Expenditure {
     private String description;

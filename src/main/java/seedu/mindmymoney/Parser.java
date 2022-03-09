@@ -32,6 +32,7 @@ public class Parser {
         case "bye":
             System.out.println("Goodbye!");
             System.exit(0);
+            return new HelpCommand(false); //solving fall through issue, need return something leh
         case "add":
             return new AddCommand(parsedInput[Indexes.INDEX_OF_SECOND_ITEM_IN_STRING]);
         default:
