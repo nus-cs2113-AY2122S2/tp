@@ -28,6 +28,7 @@ public class UI {
     public static final String PROMPT_SYMBOL = ">";
     // Workout-related messages
     public static final String NEW_WORKOUT_CREATED_MESSAGE = "Alright, the following workout has been created:";
+    public static final String DELETED_WORKOUT_MESSAGE = "Alright, the following workout has been removed:";
 
     // Scanner object for reading in user input from standard input
     Scanner inputReader = new Scanner(System.in);
@@ -117,6 +118,18 @@ public class UI {
         System.out.println(NEW_WORKOUT_CREATED_MESSAGE);
         System.out.println();
         System.out.println("\t" + newWorkout.toString());
+        System.out.println();
+    }
+
+    /**
+     * Prints a message when a workout has been deleted. Deleted workout will also be displayed.
+     *
+     * @param deletedWorkout
+     */
+    public void printDeleteWorkoutMessage(Workout deletedWorkout) {
+        System.out.println(DELETED_WORKOUT_MESSAGE);
+        System.out.println();
+        System.out.println("\t" + deletedWorkout.toString());
         System.out.println();
     }
 

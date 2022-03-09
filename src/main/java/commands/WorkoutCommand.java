@@ -4,6 +4,7 @@ import data.exercises.InvalidExerciseException;
 import data.workouts.InvalidWorkoutException;
 import data.workouts.Workout;
 import data.workouts.WorkoutList;
+import data.workouts.WorkoutOutOfRangeException;
 import werkIt.UI;
 
 /**
@@ -74,6 +75,10 @@ public class WorkoutCommand extends Command {
             case LIST_ACTION_KEYWORD:
                 workoutList.listWorkout();
                 break;
+            case DELETE_ACTION_KEYWORD:
+                Workout deletedWorkout = workoutList.deleteWorkout(getUserArguments());
+                ui.printDeleteWorkoutMessage(deletedWorkout);
+                break;
             }
         } catch (InvalidExerciseException e) {
             System.out.println(e.getMessage());
@@ -91,6 +96,9 @@ public class WorkoutCommand extends Command {
         } catch (NumberFormatException e) {
             System.out.println("Uh oh, a number was expected in your input, but a non-formattable\n" +
                     "number was received.");
+            System.out.println("Please try again.");
+        } catch (WorkoutOutOfRangeException e) {
+            System.out.println(e.getMessage());
             System.out.println("Please try again.");
         }
     }

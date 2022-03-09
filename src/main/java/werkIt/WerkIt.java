@@ -69,6 +69,13 @@ public class WerkIt {
                 } catch (InvalidCommandException e) {
                     System.out.println(e.getMessage());
                     System.out.println("Please try again.");
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    // Comment to be removed: This will catch commands with empty descriptors. Example "workout /new".
+                    // This is due to the "arguments = null" in createWorkoutCommand() method under Parser.java.
+                    // The return new WorkoutCommand at that method will treat arguments as null and will
+                    // NOT throw an InvalidCommandException because a null argument is still valid.
+                    System.out.println("Uh oh, the command entered is invalid.");
+                    System.out.println("Please try again.");
                 }
             } while (!userWantsToExit);
 
