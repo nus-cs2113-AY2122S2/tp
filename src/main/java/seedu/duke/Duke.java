@@ -3,6 +3,7 @@ package seedu.duke;
 import java.util.Scanner;
 
 public class Duke {
+
     private static Scanner SCANNER = new Scanner(System.in);
     private static final String ADD_COMMAND = "add";
 
@@ -19,16 +20,22 @@ public class Duke {
 
         String input = getInput();
         Parser parser = new Parser(input);
-        if (parser.getCommand().equals(ADD_COMMAND)) {
-            System.out.println(addEvent(parser));
+
+        String parsedCommand = parser.getCommand();
+        if (parsedCommand.equals(ADD_COMMAND)) {
+            addEvent(parser);
         }
     }
 
     private static String getInput() {
-        return SCANNER.nextLine().trim();
+        String newInput = SCANNER.nextLine();
+        String trimmedInput = newInput.trim();
+        return trimmedInput;
     }
 
-    private static Event addEvent(Parser parser) {
-        return AddCommand.execute(parser.getAddDescription());
+    private static void addEvent(Parser parser) {
+        String[] eventDescription = parser.getAddDescription();
+        Event upcomingEvent = AddCommand.execute(eventDescription);
+        AddCommand.printConfirmation(upcomingEvent);
     }
 }
