@@ -14,4 +14,9 @@ public class PersonList {
     public static int getNumberOfMembers() {
         return numberOfMembers;
     }
+
+    public static void addPerson(String name) {
+        person = new Person(name);
+        personList.add(Person);
+    }
 }
