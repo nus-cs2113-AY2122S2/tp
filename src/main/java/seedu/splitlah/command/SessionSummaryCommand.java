@@ -14,6 +14,16 @@ public class SessionSummaryCommand extends Command {
     
     private int sessionId;
 
+    public static Command prepare(String commandArgs) {
+        try {
+            int sessionId = Parser.parseSessionId(commandArgs);
+            return new SessionSummaryCommand(sessionId);
+        } catch (InvalidFormatException exception) {
+            String invalidCommandMessage = exception.getMessage() + "\n" + COMMAND_FORMAT;
+            return new InvalidCommand(invalidCommandMessage);
+        }
+    }
+
     /**
      * Runs the command with the session identifier as provided by the user input and prints a
      * summary of expenditure for the session specified by the session identifier.
