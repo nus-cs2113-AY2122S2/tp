@@ -48,6 +48,8 @@ public class UI {
     public static final String LOADING_FILE_DATA_MSG = "Loading saved file data...";
     public static final String EXERCISES_FILE_LOADED_MSG =  "- Exercises file\t%s\n";
     public static final String WORKOUTS_FILE_LOADED_MSG = "- Workouts file \t%s\n";
+    public static final String TEMPORARY_LOCATION_PLACEHOLDER = "(Location not shown due to Java CI "
+            + "showing different paths for\n\tthe different OSes)";
     // Workout-related messages
     public static final String NEW_WORKOUT_CREATED_MESSAGE = "Alright, the following workout has been created:";
     public static final String DELETED_WORKOUT_MESSAGE = "Alright, the following workout has been removed:";
@@ -278,7 +280,8 @@ public class UI {
     }
 
     public void printDirectoryCreatedMessage(Path directoryPath) {
-        System.out.printf(DIRECTORY_CREATED_MSG, directoryPath);
+        // System.out.printf(DIRECTORY_CREATED_MSG, directoryPath);
+        System.out.printf(DIRECTORY_CREATED_MSG, TEMPORARY_LOCATION_PLACEHOLDER);
     }
 
     public void printExerciseFileNotFoundMessage() {
@@ -287,7 +290,8 @@ public class UI {
     }
 
     public void printExerciseFileCreatedMessage(Path exerciseFilePath) {
-        System.out.printf(EXERCISE_FILE_CREATED_MSG, exerciseFilePath);
+        // System.out.printf(EXERCISE_FILE_CREATED_MSG, exerciseFilePath);
+        System.out.printf(EXERCISE_FILE_CREATED_MSG, TEMPORARY_LOCATION_PLACEHOLDER);
     }
 
     public void printWorkoutFileNotFoundMessage() {
@@ -296,7 +300,8 @@ public class UI {
     }
 
     public void printWorkoutFileCreatedMessage(Path workoutFilePath) {
-        System.out.printf(WORKOUT_FILE_CREATED_MSG, workoutFilePath);
+        // System.out.printf(WORKOUT_FILE_CREATED_MSG, workoutFilePath);
+        System.out.printf(WORKOUT_FILE_CREATED_MSG, TEMPORARY_LOCATION_PLACEHOLDER);
     }
 
     public void printEmptyLineOrStatus(boolean areAllDirectoryAndFilesPresent) {

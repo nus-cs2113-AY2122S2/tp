@@ -10,15 +10,18 @@ Welcome to WerkIt!, your personal exercise planner.
 Checking for required directory and files...
 - The required data directory was not found. It will be created.
 - The directory has been created at the following location:
-	/home/runner/work/tp/tp/text-ui-test/werkItResources
+	(Location not shown due to Java CI showing different paths for
+	the different OSes)
 
 - The exercise file was not found. It will be created.
 - The exercise file has been created at the following location:
-	/home/runner/work/tp/tp/text-ui-test/werkItResources/exercises.txt
+	(Location not shown due to Java CI showing different paths for
+	the different OSes)
 
 - The workout file was not found. It will be created.
 - The workout file has been created at the following location:
-	/home/runner/work/tp/tp/text-ui-test/werkItResources/workouts.txt
+	(Location not shown due to Java CI showing different paths for
+	the different OSes)
 
 Loading saved file data...
 - Exercises file	[32mOK![0m
@@ -26,6 +29,8 @@ Loading saved file data...
 Now then, what can I do for you today?
 (Need help? Type 'help' for a guide!)
 ----------------------------------------------------------------------
-> ----------------------------------------------------------------------
+>
+
+----------------------------------------------------------------------
 Thank you for using WerkIt! See you again soon...
 ======================================================================

@@ -73,7 +73,7 @@ public class ExerciseList {
      * @return An ArrayList of default exercises.
      */
     public static ArrayList<String> getDefaultExerciseList() {
-        ArrayList<String> defaultExerciseList = new ArrayList();
+        ArrayList<String> defaultExerciseList = new ArrayList<String>();
         defaultExerciseList.add("push up");
         defaultExerciseList.add("bicep curl");
         defaultExerciseList.add("pull up");
