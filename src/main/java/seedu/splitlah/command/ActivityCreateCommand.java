@@ -197,6 +197,15 @@ public class ActivityCreateCommand extends Command {
         return gstMultiplier * serviceChargeMultiplier;
     }
 
+    /**
+     * Returns an array of doubles of the costs that has been distributed evenly
+     * among the persons involved in the activity.
+     * Divides the total cost by the number of people involved in the activity.
+     *
+     * @param cost The total cost of the activity.
+     * @param numberOfPeopleInvolved The number of people involved in the activity.
+     * @return An array of doubles representing the costs of each person involved in the activity.
+     */
     private static double[] distributeCostEvenly(double cost, int numberOfPeopleInvolved) {
         double dividedCost = cost / numberOfPeopleInvolved;
         double[] costList = new double[numberOfPeopleInvolved];
