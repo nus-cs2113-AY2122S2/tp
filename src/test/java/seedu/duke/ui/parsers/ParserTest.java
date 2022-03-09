@@ -107,8 +107,8 @@ public class ParserTest {
 
     @Test
     public void parse_addCommand_withDescription_withWorkingTime_parsedCorrectly_noOrder() {
-        final String testString = "add /t /t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d -t '-t-" +
-                "t-t t-t-t /t/t -d -d -d ' -d \"-d-d-d /t /m -d -d  \"";
+        final String testString = "add /t /t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d -t '-t-"
+                + "t-t t-t-t /t/t -d -d -d ' -d \"-d-d-d /t /m -d -d  \"";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
