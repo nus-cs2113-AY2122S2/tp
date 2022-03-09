@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
+import seedu.duke.commands.ExitCommand;
+import seedu.duke.commands.ListCommand;
+import seedu.duke.commands.MarkCommand;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.parsers.ModHappyParser;
@@ -129,6 +132,40 @@ public class ParserTest {
             fail();
         } catch (ParseException e) {
             return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_markCommand_parsedCorrectly() {
+        final String testString = "mark /c 3";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof MarkCommand);
+            assertEquals(2, ((MarkCommand) c).getTaskIndex()); // Remember, zero-indexed!
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_listCommand() {
+        final String testString = "list";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof ListCommand);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_exitCommand() {
+        final String testString = "exit";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof ExitCommand);
         } catch (Exception e) {
             fail();
         }

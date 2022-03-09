@@ -19,6 +19,10 @@ public class MarkCommand extends Command {
         this.status = status;
     }
 
+    public int getTaskIndex() {
+        return taskIndex;
+    }
+
     /**
      * Marks the specified task as completed or uncompleted.
      * @throws NoSuchTaskException if the user-supplied index is out of bounds
