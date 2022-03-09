@@ -25,7 +25,6 @@ public class ActivityCreateCommand extends Command {
             + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /c <OVERALLCOST> [<OPTIONAL ARGS>]";
     private static final double ZERO_COST_PAID = 0;
     public static final int NO_COST = 0;
-    public static final int NO_COST_LIST = 0;
     public static final String ERROR_INVOLVED_AND_COST_DIFFERENT_LENGTH =
             "Seems like there is a discrepancy between number of people involved and the costs per person";
     public static final String ERROR_HAS_BOTH_COST_AND_COST_LIST =
