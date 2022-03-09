@@ -44,28 +44,40 @@ public class WorkoutList {
         return userRepsInput >= 1;
     }
 
+    /**
+     * Prints all workouts stored in workout list. Display 10 workouts at a time and
+     * prompt the users if they want to view more workouts.
+     */
     public void listWorkout() {
         int index = 0;
         int totalPrints = workoutsList.size();
+        String input = "";
 
         while (totalPrints > MAX_DISPLAY) {
             index = continuousPrinting(index, 10);
             totalPrints -= 10;
-            System.out.println("Do you want to view more workouts? [yes/no]");
-            Scanner in = new Scanner(System.in);
-            String input = in.nextLine();
+            while (!isInputYesOrNo(input)) {
+                System.out.println("Do you want to view more workouts? [yes/no]");
+                Scanner in = new Scanner(System.in);
+                input = in.nextLine();
+            }
             if (!input.equals("yes")) {
                 return;
             }
         }
-        
+
         if (totalPrints > 0) {
             index = continuousPrinting(index, totalPrints);
             System.out.println("Showed all items in list");
             return;
+        } else {
+            System.out.println("The workout list is empty");
         }
     }
 
+    /**
+     * Prints workouts stored in workout list.
+     */
     public int continuousPrinting(int index, int noOfPrints) {
         System.out.println("Showing workouts " + (index + 1) + "-" + (index + noOfPrints) + " of " + workoutsList.size() + ":");
         for (int i = 0; i < noOfPrints; i++) {
@@ -73,6 +85,19 @@ public class WorkoutList {
             index += 1;
         }
         return index;
+    }
+
+    /**
+     * Check if the user input is "yes" or "no".
+     *
+     * @param answer input by user.
+     * @return true if input equals to "yes", else otherwise.
+     */
+    public boolean isInputYesOrNo (String answer) {
+        if (answer.equals("no") || answer.equals("yes")){
+            return true;
+        }
+        return false;
     }
 
     public Workout deleteWorkout(String userArgument) throws WorkoutOutOfRangeException,
