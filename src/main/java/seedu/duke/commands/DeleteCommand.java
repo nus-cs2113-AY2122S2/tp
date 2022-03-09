@@ -8,6 +8,11 @@ import seedu.duke.tasks.TaskList;
 
 public class DeleteCommand extends Command {
 
+    private static final String DELETE_MODULE_SUCCESS = "%s" + " has been deleted.";
+    private static final String DELETE_MODULE_FAILED = "Failed to delete the module";
+    private static final String DELETE_TASK_SUCCESS = "%s" + " has been deleted.";
+    private static final String DELETE_TASK_FAILED = "Failed to delete the task.";
+
     private String moduleCode = "";
     private int taskNumber = -1;
     private String result = "";
@@ -23,7 +28,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute(ModuleList moduleList) {
-        if (taskNumber <= 0) {
+        if (taskNumber < 0) {
             deleteModule(moduleList);
         } else if (moduleCode.isBlank()) {
             deleteTask(moduleList);
@@ -33,11 +38,22 @@ public class DeleteCommand extends Command {
         return new CommandResult(result);
     }
 
+    /**
+     * Deletes given module from moduleList.
+     *
+     * @param moduleList List from which the module is to be deleted from.
+     */
     public void deleteModule(ModuleList moduleList) {
+        //TODO add exception when moduleCode does not exist
         moduleList.removeModule(moduleCode);
-        result = moduleCode + " has been deleted.";
+        result = String.format(DELETE_MODULE_SUCCESS, moduleCode);
     }
 
+    /**
+     * Deletes given task from generalTasks in moduleList.
+     *
+     * @param moduleList List from which the task is to be delete from.
+     */
     private void deleteTask(ModuleList moduleList) {
         Module targetModule = moduleList.getGeneralTasks();
         TaskList taskList = targetModule.getTaskList();
@@ -45,9 +61,9 @@ public class DeleteCommand extends Command {
         try {
             Task task = taskList.getTask(taskIndex);
             taskList.removeTask(taskIndex);
-            System.out.println(task + " has been deleted.");
-        } catch (NoSuchTaskException e) {
-            System.out.println("Failed to delete.");
+            result = String.format(DELETE_TASK_SUCCESS, task);
+        } catch (IndexOutOfBoundsException | NoSuchTaskException e) {
+            result = DELETE_TASK_FAILED;
         }
     }
 
