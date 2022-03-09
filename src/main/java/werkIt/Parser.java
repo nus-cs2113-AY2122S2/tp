@@ -8,7 +8,9 @@ import commands.HelpCommand;
 import data.exercises.ExerciseList;
 import data.workouts.WorkoutList;
 
-import static commands.WorkoutCommand.*;
+import static commands.WorkoutCommand.CREATE_ACTION_KEYWORD;
+import static commands.WorkoutCommand.LIST_ACTION_KEYWORD;
+import static commands.WorkoutCommand.DELETE_ACTION_KEYWORD;
 
 /**
  * This class will parse the input that the user enters into the WerkIt! application into data
