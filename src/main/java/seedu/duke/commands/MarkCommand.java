@@ -2,6 +2,8 @@ package seedu.duke.commands;
 
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.NoSuchTaskException;
+import seedu.duke.tasks.Module;
+import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
 
@@ -18,11 +20,13 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList list) throws ModHappyException {
-        if (taskIndex < 0 || taskIndex >= list.size()) {
+    public CommandResult execute(ModuleList moduleList) throws ModHappyException {
+        Module targetModule = moduleList.getGeneralTasks();
+        TaskList taskList = targetModule.getTaskList();
+        if (taskIndex < 0 || taskIndex >= taskList.size()) {
             throw new NoSuchTaskException();
         }
-        Task target = list.getTask(taskIndex);
+        Task target = taskList.getTask(taskIndex);
         target.setTaskDone(status);
         if (status) {
             return new CommandResult(String.format(MARK_MESSAGE, target));

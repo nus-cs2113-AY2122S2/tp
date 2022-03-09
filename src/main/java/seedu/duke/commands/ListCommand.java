@@ -1,6 +1,8 @@
 package seedu.duke.commands;
 
 import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.tasks.Module;
+import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
 
@@ -16,8 +18,12 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList list) throws ModHappyException {
-        String res = String.format(LIST_MESSAGE, list.getAllTasks());
-        return new CommandResult(res);
+    public CommandResult execute(ModuleList moduleList) throws ModHappyException {
+        String res = "";
+        for (Module m : moduleList.getModuleList()) {
+            res += m.printModuleTaskList() + LS;
+        }
+        res += moduleList.getGeneralTasks().printModuleTaskList();
+        return new CommandResult(String.format(LIST_MESSAGE, res));
     }
 }

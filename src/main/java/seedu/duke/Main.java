@@ -5,14 +5,13 @@ import seedu.duke.commands.CommandResult;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.parsers.ModHappyParser;
-import seedu.duke.parsers.Parser;
-import seedu.duke.tasks.TaskList;
+import seedu.duke.tasks.ModuleList;
 import seedu.duke.ui.TextUi;
 
 public class Main {
     private TextUi ui;
     private ModHappyParser modHappyParser;
-    private TaskList list;
+    private ModuleList moduleList;
 
     /**
      * Main entry-point for the java.duke.Duke application.
@@ -43,7 +42,7 @@ public class Main {
             ui = new TextUi();
             ui.showHelloMessage();
             modHappyParser = new ModHappyParser();
-            list = new TaskList();
+            moduleList = new ModuleList();
         } catch (ModHappyException e) {
             ui.showInitFailedMessage();
         }
@@ -60,7 +59,7 @@ public class Main {
             try {
                 userCommandText = ui.getUserCommand();
                 command = modHappyParser.parseCommand(userCommandText);
-                CommandResult result = command.execute(list);
+                CommandResult result = command.execute(moduleList);
                 ui.showMessage(result.toString());
             } catch (Exception e) {
                 ui.showMessage(e);

@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.TaskList;
 
 public class ExitCommand extends Command {
@@ -15,7 +16,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList list) throws ModHappyException {
+    public CommandResult execute(ModuleList moduleList) throws ModHappyException {
         // This will be replaced by some pre-end process later(e.g. Ask whether to save the modification)
         CommandResult result = new CommandResult(READY_EXIT);
         isExit = true;
