@@ -28,4 +28,14 @@ public class PersonCostPair {
     public boolean isProcessed() {
         return isProcessed;
     }
+
+    public void setProcessed(boolean processed) {
+        isProcessed = processed;
+    }
+
+    public PersonCostPair(Person person) {
+        this.person = person;
+        this.cost = person.getTotalCost();
+        this.isProcessed = false;
+    }
 }
