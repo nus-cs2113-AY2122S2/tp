@@ -5,7 +5,7 @@ public class Doctor {
     String fullName;
     int age;
     char gender;
-    String Address;
+    String address;
     String dob;
     String specialization;
 
@@ -15,7 +15,7 @@ public class Doctor {
         this.fullName = fullName;
         this.age = age;
         this.gender = gender;
-        Address = address;
+        address = address;
         this.dob = dob;
         this.specialization = specialization;
     }
