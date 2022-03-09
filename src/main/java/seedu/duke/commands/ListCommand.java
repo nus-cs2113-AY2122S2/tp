@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class ListCommand extends Command {
 
+    private static final String COMMAND_RESULT_TYPE = "ArrayList";
     private static final String LIST_COMMAND_WORD = "list";
     private static final String LIST_MESSAGE_TOP = "Ok! Here are the task(s) in your list:\n";
     //private static String list = "";
@@ -20,7 +21,8 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() throws ModHappyException {
-        CommandResult result = new CommandResult(LIST_MESSAGE_TOP + Task.taskList.toString().replaceAll(",", "\n"));
+        CommandResult result = new CommandResult(Task.taskList, COMMAND_RESULT_TYPE);
+        result.setStartWords(LIST_MESSAGE_TOP);
         return result;
     }
 }
