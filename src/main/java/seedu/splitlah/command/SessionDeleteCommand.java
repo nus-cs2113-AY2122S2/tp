@@ -13,7 +13,7 @@ public class SessionDeleteCommand extends Command {
 
     public static final String COMMAND_TEXT = "session /delete";
 
-    private static final String COMMAND_FORMAT = "Syntax: session /delete /sid <SESSIONID>";
+    private static final String COMMAND_FORMAT = "Syntax: session /delete /sid [SESSION_ID]";
 
     private int sessionId;
 
