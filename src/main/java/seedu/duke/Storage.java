@@ -19,8 +19,8 @@ import static seedu.duke.constant.Messages.ERROR_IO_FAILURE_MESSAGE;
 public class Storage {
     private String saveFilePath;
 
-    private final String PLACEHOLDER_GET_BY_DATE = "2050-12-12";
-    private final String PLACEHOLDER_GET_DO_DATE = "2050-12-12";
+    private static final String PLACEHOLDER_GET_BY_DATE = "2050-12-12";
+    private static final String PLACEHOLDER_GET_DO_DATE = "2050-12-12";
 
     /**
      * Creates a constructor for the class Storage.
