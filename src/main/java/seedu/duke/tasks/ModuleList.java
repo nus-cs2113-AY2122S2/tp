@@ -1,5 +1,7 @@
 package seedu.duke.tasks;
 
+import seedu.duke.exceptions.NoSuchModuleException;
+
 import java.util.ArrayList;
 
 public class ModuleList {
@@ -19,6 +21,20 @@ public class ModuleList {
     public Module addModule(Module m) {
         list.add(m);
         return m;
+    }
+
+    /**
+     * Removes specified module from the module list.
+     *
+     * @param moduleCode the module code to be removed
+     */
+    public Module removeModule(String moduleCode) throws NoSuchModuleException {
+        if (getModule(moduleCode) == null) {
+            throw new NoSuchModuleException();
+        }
+        Module module = getModule(moduleCode);
+        list.remove(getModule(moduleCode));
+        return module;
     }
 
     /**

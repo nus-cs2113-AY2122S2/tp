@@ -1,5 +1,7 @@
 package seedu.duke.tasks;
 
+import seedu.duke.exceptions.NoSuchTaskException;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -27,6 +29,19 @@ public class TaskList {
     public Task addTask(Task t) {
         list.add(t);
         return t;
+    }
+
+    /**
+     * Removes the specified task from the task list.
+     * @param index The task number to be removed.
+     */
+    public Task removeTask(int index) throws NoSuchTaskException {
+        if (index >= list.size() || index < 0) {
+            throw new NoSuchTaskException();
+        }
+        Task task = getTask(index);
+        list.remove(index);
+        return task;
     }
 
     /**
