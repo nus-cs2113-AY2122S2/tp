@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class ExpenditureList {
 
     protected ArrayList<Expenditure> expenditureArrayList;
+    private int numberOfExpenditures;
 
     public ExpenditureList() {
        this.expenditureArrayList = new ArrayList<>();
@@ -12,25 +13,16 @@ public class ExpenditureList {
 
     public void addExpenditure(String description, double amount) {
         this.expenditureArrayList.add(new Expenditure(description, amount));
+        numberOfExpenditures++;
     }
 
     public double getExpenditureValue(int index) {
-        double value = 0;
-        try {
-            value =  expenditureArrayList.get(index - 1).amount;
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Invalid index");
-        }
-
-        return value;
+        return value =  expenditureArrayList.get(index - 1).amount;
     }
 
     public void remove(int index) {
-        try {
-            expenditureArrayList.remove(index - 1);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Invalid index");
-        }
+        expenditureArrayList.remove(index - 1);
+        numberOfExpenditures--;
     }
 
     public double getTotalExpenditure() {
@@ -47,5 +39,9 @@ public class ExpenditureList {
         for (Expenditure Item : expenditureArrayList) {
             System.out.println(list_index++ + ". " + Item);
         }
+    }
+    
+    public int getNumberOfExpenditures() {
+        return numberOfExpenditures;
     }
 }
