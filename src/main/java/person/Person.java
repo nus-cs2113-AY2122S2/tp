@@ -43,23 +43,23 @@ public class Person {
         incomeList.printIncomeList();
     }
 
-    private static int getTotalExpenditure() {
-        int totalSum = 0;
+    private static float getTotalExpenditure() {
+        float totalSum = 0;
         for (Expenditure item: expenditureList) {
             totalSum += item.getValue();
         }
         return totalSum;
     }
 
-    private static int getTotalIncome() {
-        int totalSum = 0;
+    private static float getTotalIncome() {
+        float totalSum = 0;
         for (Expenditure item: incomeList) {
             totalSum += item.getValue();
         }
         return totalSum;
     }
 
-    public static int getDisposable() {
+    public static float getDisposable() {
         return getTotalIncome() - getTotalExpenditure();
     }
 }
