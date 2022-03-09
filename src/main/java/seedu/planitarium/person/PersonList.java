@@ -1,4 +1,4 @@
-package person;
+package seedu.planitarium.person;
 
 import java.util.ArrayList;
 
