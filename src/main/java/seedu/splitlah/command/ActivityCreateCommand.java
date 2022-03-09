@@ -123,6 +123,12 @@ public class ActivityCreateCommand extends Command {
         }
     }
 
+    /**
+     * Updates cost and list of costs by adding the extra charges and
+     * checks if cost list or cost was provided by the user.
+     * If cost was not provided by the user, the list of costs is summed up to get the total cost of the activity.
+     * Else, the total cost is distributed evenly.
+     */
     private void updateCostAndCostList() {
         boolean isZeroCost = cost == NO_COST;
         if (isZeroCost) {
