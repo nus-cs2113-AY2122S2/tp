@@ -60,7 +60,6 @@ public class UI {
 
     /**
      * Prints a line on the console based on the default parameters defined in this Java class.
-     * <p>
      * Source: Team Member Alan Low's iP codebase
      * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/SoraUI.java
      */
@@ -71,7 +70,6 @@ public class UI {
 
     /**
      * Prints a line on the console based on the specified length and the character/symbol to use
-     * <p>
      * Source: Team Member Alan Low's iP codebase
      * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/SoraUI.java
      *
@@ -103,7 +101,6 @@ public class UI {
 
     /**
      * Prints a message that prompts the user to enter a command
-     * <p>
      * Method adapted from Team Member Alan Low's iP codebase.
      * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/SoraUI.java
      */
@@ -122,7 +119,6 @@ public class UI {
 
     /**
      * Reads in a line of the user from the standard input, trims the input, and returns it as a String.
-     * <p>
      * Method adapted from Team Member Alan Low's iP codebase.
      * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/SoraParser.java
      */
@@ -149,7 +145,7 @@ public class UI {
     /**
      * Prints a message when a workout has been deleted. Deleted workout will also be displayed.
      *
-     * @param deletedWorkout
+     * @param deletedWorkout The workout to be deleted.
      */
     public void printDeleteWorkoutMessage(Workout deletedWorkout) {
         System.out.println(DELETED_WORKOUT_MESSAGE);

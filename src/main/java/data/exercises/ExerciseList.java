@@ -1,27 +1,8 @@
 package data.exercises;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ExerciseList {
-    public static final String[] DEFAULT_EXERCISE_LIST = {
-            "push up",
-            "bicep curl",
-            "pull up",
-            "squat",
-            "lunge",
-            "hip thrust",
-            "sit up",
-            "crunch",
-            "russian twist",
-            "running",
-            "swimming",
-            "jumping jack",
-            "burpee"
-    };
-
     private final ArrayList<String> exercises = new ArrayList<>();
     private int numberOfExercises = 0;
 
@@ -82,5 +63,31 @@ public class ExerciseList {
         }
 
         return true;
+    }
+
+    /**
+     * This method provides a default list of default exercises to populate into the exercises.txt file.
+     * The method is coded this way in order to solve the following checkstyle issue:
+     * 'array initialization' child has incorrect indentation level 16, expected level should be 12.
+     *
+     * @return An ArrayList of default exercises.
+     */
+    public static ArrayList<String> getDefaultExerciseList() {
+        ArrayList<String> defaultExerciseList = new ArrayList();
+        defaultExerciseList.add("push up");
+        defaultExerciseList.add("bicep curl");
+        defaultExerciseList.add("pull up");
+        defaultExerciseList.add("squat");
+        defaultExerciseList.add("lunge");
+        defaultExerciseList.add("hip thrust");
+        defaultExerciseList.add("sit up");
+        defaultExerciseList.add("crunch");
+        defaultExerciseList.add("russian twist");
+        defaultExerciseList.add("running");
+        defaultExerciseList.add("swimming");
+        defaultExerciseList.add("jumping jack");
+        defaultExerciseList.add("burpee");
+
+        return defaultExerciseList;
     }
 }

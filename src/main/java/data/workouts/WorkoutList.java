@@ -73,7 +73,8 @@ public class WorkoutList {
     }
 
     public int continuousPrinting(int index, int noOfPrints) {
-        System.out.println("Showing workouts " + (index + 1) + "-" + (index + noOfPrints) + " of " + workoutsList.size() + ":");
+        System.out.println("Showing workouts " + (index + 1) + "-" + (index + noOfPrints) + " of "
+                + workoutsList.size() + ":");
         for (int i = 0; i < noOfPrints; i++) {
             System.out.println(index + 1 + ". " + workoutsList.get(index));
             index += 1;

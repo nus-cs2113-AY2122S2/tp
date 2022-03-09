@@ -25,9 +25,7 @@ public class FileManager {
      * These characters are used for internal parsing (e.g. reading from data files)
      * and thus cannot be used by the user in his/her input.
      */
-    public static final String[] ILLEGAL_CHARACTERS = {
-            "|"
-    };
+    public static final String[] ILLEGAL_CHARACTERS = {"|"};
 
     // Directory and filenames for data storage
     public static final String USER_WORKING_DIRECTORY_PROPERTY = "user.dir";
@@ -149,7 +147,7 @@ public class FileManager {
 
         // Populate file with default exercises
         FileWriter fileWriter = new FileWriter(getExerciseFilePath().toString());
-        for (String exerciseName : ExerciseList.DEFAULT_EXERCISE_LIST ) {
+        for (String exerciseName : ExerciseList.getDefaultExerciseList()) {
             fileWriter.append(exerciseName);
             fileWriter.append(System.lineSeparator());
         }

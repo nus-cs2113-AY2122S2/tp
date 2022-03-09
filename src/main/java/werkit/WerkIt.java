@@ -74,7 +74,6 @@ public class WerkIt {
     /**
      * Continuously prompts the user for an input (and thereafter executing the necessary
      * actions) until the exit command is entered.
-     * <p>
      * Method adapted from Team Member Alan Low's iP codebase.
      * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/Sora.java
      */
