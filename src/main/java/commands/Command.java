@@ -21,7 +21,7 @@ public class Command {
      * Executes the instruction according to the input after parsing
      * @param Instr the instruction after parsing by parser
      * @throws UnknownException if the instruction cannot be executed
-     
+
     public void execute(Parser Instr) throws UnknownException{
         //parser
         try () {
