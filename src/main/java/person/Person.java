@@ -10,4 +10,15 @@ public class Person {
         incomeList = new IncomeList();
         expenditureList = new ExpenditureList();
     }
+
+    public static void addIncome(int value) {
+        incomeList.add(value);
+        System.out.println("An income of " + value + " has been added");
+    }
+
+    public static void delIncome(int index) {
+        int value = incomeList.get(index).value;
+        incomeList.remove(index);
+        System.out.println("An income of " + value + " has been removed");
+    }
 }
