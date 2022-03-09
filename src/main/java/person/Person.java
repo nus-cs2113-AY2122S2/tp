@@ -21,4 +21,16 @@ public class Person {
         incomeList.remove(index);
         System.out.println("An income of " + value + " has been removed");
     }
+
+    public static void addExpend(String description, int value) {
+        expenditureList.add(description, value);
+        System.out.println("An expenditure of " + value + " for " + description + " has been added");
+    }
+
+    public static void delExpend(int index) {
+        String description = expenditureList.get(index).description;
+        int value = expenditureList.get(index).value;
+        expenditureList.remove(index);
+        System.out.println("An expenditure of " + value + " for " + description + " has been removed");
+    }
 }
