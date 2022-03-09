@@ -64,6 +64,7 @@ public class ParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
             assertNull(t.getTaskDescription());
+            assertNull(t.getEstimatedWorkingTime());
         } catch (Exception e) {
             fail();
         }
@@ -81,6 +82,25 @@ public class ParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
             assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
+            assertNull(t.getEstimatedWorkingTime());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_withWorkingTime_parsedCorrectly() {
+        final String testString = "add /t /t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d   "
+                + "-t \"-d-d-d /t /m -d -d  \"";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof AddCommand);
+            Task t = ((AddCommand) c).getNewTask();
+            assertNotEquals(null, t);
+            assertNull(((AddCommand) c).getNewModule());
+            assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
+            assertEquals("-d-d-d /t /m -d -d", t.getEstimatedWorkingTime());
+            assertNull(t.getTaskDescription());
         } catch (Exception e) {
             fail();
         }
@@ -88,46 +108,27 @@ public class ParserTest {
 
     @Test
     public void parse_addCommand_withDescription_withWorkingTime_parsedCorrectly() {
-        final String testString = "add /t /t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d   "
-                + "-d \"-d-d-d /t /m -d -d  \" -t '-t-"
-                + "t-t t-t-t /t/t -d -d -d '";
+        final String testString = "add /t /t/t/t/t-d -d \"-d-d-d /t /m -d -d  \" "
+                + "-t \"-t-t-t t-t-t /t/t -d -d -d \"";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
             Task t = ((AddCommand) c).getNewTask();
             assertNotEquals(null, t);
             assertNull(((AddCommand) c).getNewModule());
-            assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
+            assertEquals("/t/t/t/t-d", t.getTaskName());
             assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
-            assertEquals("-t-t-t t-t-t /t/t -d -d -d ", t.getEstimatedWorkingTime());
+            assertEquals("-t-t-t t-t-t /t/t -d -d -d", t.getEstimatedWorkingTime());
         } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void parse_addCommand_withDescription_withWorkingTime_parsedCorrectly_noOrder() {
-        final String testString = "add /t /t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d -t '-t-"
-                + "t-t t-t-t /t/t -d -d -d ' -d \"-d-d-d /t /m -d -d  \"";
-        try {
-            Command c = parser.parseCommand(testString);
-            assertTrue(c instanceof AddCommand);
-            Task t = ((AddCommand) c).getNewTask();
-            assertNotEquals(null, t);
-            assertNull(((AddCommand) c).getNewModule());
-            assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
-            assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
-            assertEquals("-t-t-t t-t-t /t/t -d -d -d ", t.getEstimatedWorkingTime());
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void parse_addCommand_withDescription_withWorkingTime_parsedIncorrectly() {
+    public void parse_addCommand_withDescription_withWorkingTime_wrongOrder_Incorrect() {
         final String testString = "add /t /t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d   "
-                + "-d '-d-d-d /t /m -d -d  ' -t \"-t-"
-                + "t-t t-t-t /t/t -d -d -d \"";
+                + "-t \"-t-t-t t-t-t /t/t -d -d -d \" "
+                + "-d \"-d-d-d /t /m -d -d  \" ";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -135,8 +136,8 @@ public class ParserTest {
             assertNotEquals(null, t);
             assertNull(((AddCommand) c).getNewModule());
             assertNotEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
-            assertNotEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
-            assertNotEquals("-t-t-t t-t-t /t/t -d -d -d ", t.getEstimatedWorkingTime());
+            assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
+            assertNotEquals("-t-t-t t-t-t /t/t -d -d -d", t.getEstimatedWorkingTime());
         } catch (Exception e) {
             fail();
         }
