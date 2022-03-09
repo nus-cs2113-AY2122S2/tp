@@ -22,6 +22,14 @@ public class ModuleList {
     }
 
     /**
+     * Removes specified module from the module list.
+     * @param moduleCode the module code to be removed
+     */
+    public void removeModule(String moduleCode) {
+        list.remove(getModule(moduleCode));
+    }
+
+    /**
      * Returns the module stored at the given index in the module list.
      * @param index the index of the module
      */

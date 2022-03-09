@@ -16,6 +16,7 @@ import seedu.duke.exceptions.ParseException;
 public abstract class Parser {
     protected static final String EXIT_COMMAND_WORD = "exit";
     protected static final String ADD_COMMAND_WORD = "add";
+    protected static final String DELETE_COMMAND_WORD = "del";
     protected static final String LIST_COMMAND_WORD = "list";
     protected static final String MARK_COMMAND_WORD = "mark";
     protected static final String EMPTY_STRING = "";

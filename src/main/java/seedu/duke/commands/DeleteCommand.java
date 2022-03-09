@@ -1,64 +1,58 @@
 package seedu.duke.commands;
 
-import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.parsers.DeleteParser;
+import seedu.duke.exceptions.NoSuchTaskException;
+import seedu.duke.tasks.Module;
+import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
+import seedu.duke.tasks.TaskList;
 
 public class DeleteCommand extends Command {
 
     private String moduleCode = "";
     private int taskNumber = -1;
-    private String argument;
     private String result = "";
 
-    public void setModuleCode(String moduleCode) {
+    public DeleteCommand(String moduleCode) {
         this.moduleCode = moduleCode;
     }
 
-    public void setTaskNumber(int taskNumber) {
+    public DeleteCommand(String moduleCode, int taskNumber) {
+        this.moduleCode = moduleCode;
         this.taskNumber = taskNumber;
     }
 
-    public DeleteCommand() {
-    }
-
-    public DeleteCommand(String argument) {
-        this.argument = argument;
-    }
-
-    public Command prepareDeleteCommand() {
-        DeleteParser deleteParser = new DeleteParser();
-        try {
-            return deleteParser.parseCommand(argument);
-        } catch (ModHappyException e) {
-            System.out.println("Error has occurred. Please try again.");
-        }
-        return null;
-    }
-
     @Override
-    public CommandResult execute() {
+    public CommandResult execute(ModuleList moduleList) {
         if (taskNumber <= 0) {
-            deleteModule();
+            deleteModule(moduleList);
         } else if (moduleCode.isBlank()) {
-            deleteTask();
+            deleteTask(moduleList);
         } else {
             deleteTaskFromModule();
         }
         return new CommandResult(result);
     }
 
-    public void deleteTaskFromModule() {
+    public void deleteModule(ModuleList moduleList) {
+        moduleList.removeModule(moduleCode);
+        result = moduleCode + " has been deleted.";
     }
 
-    public void deleteTask() {
+    private void deleteTask(ModuleList moduleList) {
+        Module targetModule = moduleList.getGeneralTasks();
+        TaskList taskList = targetModule.getTaskList();
         int taskIndex = taskNumber - 1;
-        String taskName = Task.taskList.get(taskIndex);
-        Task.taskList.remove(taskIndex);
-        result = taskName + " has been removed.";
+        try {
+            Task task = taskList.getTask(taskIndex);
+            taskList.removeTask(taskIndex);
+            System.out.println(task + " has been deleted.");
+        } catch (NoSuchTaskException e) {
+            System.out.println("Failed to delete.");
+        }
     }
 
-    public void deleteModule() {
-    }
+    // TODO: Implement this after module and task has been linked
+    public void deleteTaskFromModule() {
 
+    }
 }

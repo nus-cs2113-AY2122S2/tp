@@ -12,6 +12,7 @@ public class DeleteParser extends Parser {
     public static final String FLAG_ARGUMENT_GROUP = "flagArgument";
     public static final String SUB_FLAG_GROUP = "subFlag";
     public static final String SUB_FLAG_ARGUMENT_GROUP = "subFlagArgument";
+    //TODO: make the regex stricter in accepting inputs
     private static final String DELETE_FORMAT = "\\s*(?<flag>(\\/(m|t)))\\s+(?<flagArgument>[^\\-]*)\\s*"
             + "((?<subFlag>(-mod)*)\\s+(?<subFlagArgument>.+))*";
 
@@ -26,27 +27,15 @@ public class DeleteParser extends Parser {
 
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
-
-        DeleteCommand deleteCommand = new DeleteCommand();
-        DeleteParser deleteParser = new DeleteParser();
-        HashMap<String, String> parsedArguments = deleteParser.parseString(userInput);
-        String moduleCode;
-        int taskNumber;
-
+        HashMap<String, String> parsedArguments = parseString(userInput);
         switch (parsedArguments.get(FLAG_GROUP)) {
         case "/m":
-            moduleCode = parsedArguments.get(FLAG_ARGUMENT_GROUP);
-            deleteCommand.setModuleCode(moduleCode);
-            break;
+            return new DeleteCommand(parsedArguments.get(FLAG_ARGUMENT_GROUP));
         case "/t":
-            taskNumber = Integer.parseInt(parsedArguments.get(FLAG_ARGUMENT_GROUP));
-            deleteCommand.setTaskNumber(taskNumber);
-            moduleCode = parsedArguments.get(SUB_FLAG_ARGUMENT_GROUP);
-            deleteCommand.setModuleCode(moduleCode);
-            break;
+            return new DeleteCommand(parsedArguments.get(SUB_FLAG_ARGUMENT_GROUP),
+                    Integer.parseInt(parsedArguments.get(FLAG_ARGUMENT_GROUP)));
         default:
             throw new ModHappyException();
         }
-        return deleteCommand;
     }
 }
