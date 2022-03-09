@@ -23,6 +23,7 @@ public class ActivityCreateCommand extends Command {
             + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /c <OVERALLCOST> [<OPTIONAL ARGS>]";
     private static final double ZERO_COST_PAID = 0;
     public static final int NO_COST = 0;
+    public static final int NO_COST_LIST = 0;
 
     private int sessionId;
     private String activityName;
@@ -58,9 +59,12 @@ public class ActivityCreateCommand extends Command {
     }
 
     private static boolean isInvalidCommand(double cost, String[] involvedList, double[] costList) {
-        boolean isZeroCost = cost == 0;
+        boolean isZeroCost = cost == NO_COST;
         boolean isDifferentLength = involvedList.length != costList.length;
-        return isDifferentLength && isZeroCost;
+        boolean isInvalidDueToDifferentLength = isZeroCost && isDifferentLength;
+        boolean hasCostList = costList.length != NO_COST_LIST;
+        boolean hasBothCostAndCostList = !isZeroCost && hasCostList;
+        return isInvalidDueToDifferentLength || hasBothCostAndCostList;
     }
 
     /**
