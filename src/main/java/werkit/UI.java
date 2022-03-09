@@ -85,6 +85,7 @@ public class UI {
         printLine();
         if (isFirstPrompt) {
             System.out.println("Now then, what can I do for you today?");
+            System.out.println("(Need help? Type 'help' for a guide!)");
         } else {
             System.out.println("What's next?");
         }
