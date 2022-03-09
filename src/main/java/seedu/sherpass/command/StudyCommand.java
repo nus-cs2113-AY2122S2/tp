@@ -21,11 +21,10 @@ public class StudyCommand extends Command {
         ui.showLine();
         String userInput = ui.readCommand();
         ui.showLine();
-        String[] parsedInput = userInput.split(" ", 3);
-        while (!parsedInput[STUDY_COMMAND_INDEX].trim().equalsIgnoreCase("leave")) {
-            Parser.parseStudyMode(parsedInput, ui);
+        while (!userInput.contains("leave")) {
+            Parser.parseStudyMode(userInput, ui);
             ui.showLine();
-            parsedInput = ui.readCommand().split(" ", 3);
+            userInput = ui.readCommand();
         }
         ui.showToUser("leaving study session...\n"
             + "Welcome back to the main session! How can I help you?");

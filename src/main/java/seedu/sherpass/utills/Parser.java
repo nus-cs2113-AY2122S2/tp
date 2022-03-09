@@ -346,31 +346,31 @@ public class Parser {
         return -1;
     }
 
-    private static int parseTimerInput(String[] userInput, Ui ui) {
+    private static int parseTimerInput(String[] parsedInput, Ui ui) {
         try {
-            if (userInput[TIMER_FORMAT_INDEX].trim().equalsIgnoreCase("/custom")) {
-                return Integer.parseInt(userInput[CUSTOM_TIMER_INDEX].trim());
+            if (parsedInput[TIMER_FORMAT_INDEX].trim().contains("/custom")) {
+                String[] customTimerInput = parsedInput[TIMER_FORMAT_INDEX].split("/custom", 2);
+                return Integer.parseInt(customTimerInput[CUSTOM_TIMER_INDEX].trim());
             }
-            return selectDefaultTimer(userInput[DEFAULT_TIMER_INDEX].trim(), ui);
+            return selectDefaultTimer(parsedInput[DEFAULT_TIMER_INDEX].trim(), ui);
         } catch (ArrayIndexOutOfBoundsException e) {
             ui.showToUser("Oops! Your input seems to be missing some commands.\n"
                 + "Please re-enter a valid input.");
         } catch (NumberFormatException e) {
-            ui.showToUser("Oops! Your timer input does not seem to be correct\n"
+            ui.showToUser("Oops! Your timer input does not seem to be correct.\n"
                 + "Please re-enter a valid input.");
         }
         return -1;
     }
 
-    public static void parseStudyMode(String[] userInput, Ui ui) {
-        switch (userInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
+    public static void parseStudyMode(String rawUserInput, Ui ui) {
+        ui.showLine();
+        String[] parsedInput = rawUserInput.trim().split(" ", 2);
+        switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
-            int duration = parseTimerInput(userInput, ui);
+            int duration = parseTimerInput(parsedInput, ui);
             if (duration >= 0) {
                 Timer.start(duration, ui);
-            } else {
-                ui.showToUser("Oops! Your timer input does not seem to be correct\n"
-                    + "Please re-enter a valid input.");
             }
             break;
         case "pause":
