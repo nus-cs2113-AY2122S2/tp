@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 /**
  * Controller is an abstract class that should be extended by all Controllers.
+ * 
  * <p>Provides base functionality for printing choices and control implementation.
  */
 public abstract class Controller {
