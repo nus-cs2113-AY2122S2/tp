@@ -76,6 +76,7 @@ public class Parser {
             throw new InvalidInputException();
         }
 
+        // Using Todo for now, will be updated in the future
         parsedData = new Todo(rawData[SAVE_TASK_DESCRIPTION_INDEX].trim());
 
         if (rawData[SAVE_TASK_MARK_STATUS].equals("X")) {
