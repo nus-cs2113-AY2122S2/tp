@@ -141,6 +141,14 @@ public class ActivityCreateCommand extends Command {
         }
     }
 
+    /**
+     * Updates cost list by including the extra charges.
+     * Extra charges may include gst and service charge.
+     *
+     * @param costList The costs owed by each person involved in the activity.
+     * @param gst The gst to be added to the costs for the activity.
+     * @param serviceCharge The service charge to be added to the costs for the activity.
+     */
     private static void updateCostListWithExtraCharges(double[] costList, int gst, int serviceCharge) {
         double extraCharges = getExtraCharges(gst, serviceCharge);
         for (int i = 0; i < costList.length; i++) {
