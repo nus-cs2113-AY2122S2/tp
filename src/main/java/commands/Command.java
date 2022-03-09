@@ -16,12 +16,12 @@ public class Command {
     protected UI GUI = new UI();
     public Command(){
     }
+/**
 
-    /**
      * Executes the instruction according to the input after parsing
      * @param Instr the instruction after parsing by parser
      * @throws UnknownException if the instruction cannot be executed
-     */
+     
     public void execute(Parser Instr) throws UnknownException{
         //parser
         try () {
@@ -53,4 +53,5 @@ public class Command {
         }
         GUI.printMsg(replyMsg);
     }
+    **/
 }
