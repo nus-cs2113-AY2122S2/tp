@@ -4,7 +4,7 @@ public class AddCommand {
     public static Event execute(String[] addDescription) {
         // check parameter value errors
         Event newInput = new Lesson(addDescription);
-        EventList.add(newInput);
+        Timetable.add(newInput);
         return newInput;
     }
 

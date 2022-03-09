@@ -1,11 +1,13 @@
 package seedu.duke;
 
+import java.sql.Time;
 import java.util.Scanner;
 
 public class Duke {
 
     private static Scanner SCANNER = new Scanner(System.in);
     private static final String ADD_COMMAND = "add";
+    private static final String LIST_COMMAND = "list";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -18,12 +20,16 @@ public class Duke {
 
         System.out.println("Hello " + SCANNER.nextLine());
 
-        String input = getInput();
-        Parser parser = new Parser(input);
+        while(true) {
+            String input = getInput();
+            Parser parser = new Parser(input);
 
-        String parsedCommand = parser.getCommand();
-        if (parsedCommand.equals(ADD_COMMAND)) {
-            addEvent(parser);
+            String parsedCommand = parser.getCommand();
+            if (parsedCommand.equals(ADD_COMMAND)) {
+                addEvent(parser);
+            } else if (parsedCommand.equals(LIST_COMMAND)) {
+                listTimetable();
+            }
         }
     }
 
@@ -38,4 +44,11 @@ public class Duke {
         Event upcomingEvent = AddCommand.execute(eventDescription);
         AddCommand.printConfirmation(upcomingEvent);
     }
+
+    private static void listTimetable() {
+        for (int i = 0; i < Timetable.size(); i++) {
+            System.out.println(Timetable.get(i));
+        }
+    }
+
 }
