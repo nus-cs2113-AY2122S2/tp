@@ -285,11 +285,11 @@ public class Parser {
         // TEMPORARY FALLTHROUGH FOR ALL COMMANDS UNTIL COMMANDS ARE PROPERLY SET UP
         case SessionCreateCommand.COMMAND_TEXT:
             return SessionCreateCommand.prepare(remainingArgs);
+        case SessionSummaryCommand.COMMAND_TEXT:
+            return SessionSummaryCommand.prepare(remainingArgs);
         case SessionDeleteCommand.COMMAND_TEXT:
             // FALLTHROUGH
         case SessionListCommand.COMMAND_TEXT:
-            // FALLTHROUGH
-        case SessionSummaryCommand.COMMAND_TEXT:
             // FALLTHROUGH
         case ActivityCreateCommand.COMMAND_TEXT:
             // FALLTHROUGH
