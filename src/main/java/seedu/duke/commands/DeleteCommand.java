@@ -21,6 +21,10 @@ public class DeleteCommand extends Command {
         this.moduleCode = moduleCode;
     }
 
+    public DeleteCommand(int taskNumber) {
+        this.taskNumber = taskNumber;
+    }
+
     public DeleteCommand(String moduleCode, int taskNumber) {
         this.moduleCode = moduleCode;
         this.taskNumber = taskNumber;
