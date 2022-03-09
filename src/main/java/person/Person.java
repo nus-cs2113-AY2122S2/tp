@@ -33,4 +33,13 @@ public class Person {
         expenditureList.remove(index);
         System.out.println("An expenditure of " + value + " for " + description + " has been removed");
     }
+
+    public static void listExpenditure() {
+        System.out.println("Here is the expenditure list for " + name);
+        expenditureList.printExpenditureList();
+    }
+
+    public static void listIncome() {
+        incomeList.printIncomeList();
+    }
 }
