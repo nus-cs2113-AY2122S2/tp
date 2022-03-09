@@ -1,9 +1,8 @@
 package seedu.sherpass.constant;
 
 public class Messages {
-    public static final String WELCOME_MESSAGE = "\nHello! I'm Vera,\n"
-            + "your friendly virtual task manager.\n"
-            + "How can I help you today?";
+    public static final String WELCOME_MESSAGE_ONE = "Welcome to\n";
+    public static final String WELCOME_MESSAGE_TWO = "How can I help you today?";
     public static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon! :)";
 
     private static final String HELP_MESSAGE = "For more information, please enter the 'help' command.";

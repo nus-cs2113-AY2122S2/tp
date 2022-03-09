@@ -3,21 +3,21 @@ package seedu.sherpass.utills;
 import java.util.Scanner;
 
 import static seedu.sherpass.constant.Messages.GOODBYE_MESSAGE;
-import static seedu.sherpass.constant.Messages.WELCOME_MESSAGE;
+import static seedu.sherpass.constant.Messages.WELCOME_MESSAGE_ONE;
+import static seedu.sherpass.constant.Messages.WELCOME_MESSAGE_TWO;
 
 
 public class Ui {
-    private final Scanner in = new Scanner(System.in);
+    private static final Scanner in = new Scanner(System.in);
     private static final String PARTITION_LINE = "______________________________"
-            + "______________________________";
+        + "______________________________";
     private static final String LS = System.lineSeparator();
-    private static final String LOGO = "  _____ __ __    ___  ____   ____   ____  _____ _____\n"
-        + " / ___/|  |  |  /  _]|    \\ |    \\ /    |/ ___// ___/\n"
-        + "(   \\_ |  |  | /  [_ |  D  )|  o  )  o  (   \\_(   \\_ \n"
-        + " \\__  ||  _  ||    _]|    / |   _/|     |\\__  |\\__  |\n"
-        + " /  \\ ||  |  ||   [_ |    \\ |  |  |  _  |/  \\ |/  \\ |\n"
-        + " \\    ||  |  ||     ||  .  \\|  |  |  |  |\\    |\\    |\n"
-        + "  \\___||__|__||_____||__|\\_||__|  |__|__| \\___| \\___|";
+    private static final String LOGO = "  ____  _\n"
+        + " / ___|| |__   ___ _ __ _ __   __ _ ___ ___\n"
+        + " \\___ \\| '_ \\ / _ \\ '__| '_ \\ / _` / __/ __|\n"
+        + "  ___) | | | |  __/ |  | |_) | (_| \\__ \\__ \\\n"
+        + " |____/|_| |_|\\___|_|  | .__/ \\__,_|___/___/\n"
+        + "                       |_|";
 
 
     /**
@@ -55,8 +55,8 @@ public class Ui {
      * Prints a welcome message to greet the user.
      */
     public void showWelcomeMessage() {
-        String message = PARTITION_LINE + LS + LOGO
-                + WELCOME_MESSAGE + LS + PARTITION_LINE;
+        String message = PARTITION_LINE + LS + WELCOME_MESSAGE_ONE
+            + LOGO + LS + WELCOME_MESSAGE_TWO + LS + PARTITION_LINE;
         showToUser(message);
     }
 
