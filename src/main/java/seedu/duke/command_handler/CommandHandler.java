@@ -18,21 +18,22 @@ public class CommandHandler {
      *
      */
     public void handleUserInput(ProjectList projectList) {
-       while (true) {
-           Scanner in = new Scanner(System.in);
-           line = sc.nextLine();
-           commands = line.split(" ");
+        while (true) {
+            Scanner in = new Scanner(System.in);
+            line = sc.nextLine();
+            commands = line.split(" ");
 
-           switch (commands[0].toLowerCase()) {
-           case "addproject": //end the program
-               projectList.addProject(commands[1]);
-               break;
-           case "deleteproject": //list out all tasks
-               projectList.deleteProject(commands[1]);
-               break;
-           case "exit":
-               System.exit(0);
+            switch (commands[0].toLowerCase()) {
+            case "addproject": //end the program
+                projectList.addProject(commands[1]);
+                break;
+            case "deleteproject": //list out all tasks
+                projectList.deleteProject(commands[1]);
+                break;
+            case "exit":
+                System.exit(0);
 
-       }
+            }
+        }
     }
 }
