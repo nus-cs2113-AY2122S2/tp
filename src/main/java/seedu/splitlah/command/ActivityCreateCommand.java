@@ -28,7 +28,10 @@ public class ActivityCreateCommand extends Command {
     public static final int NO_COST_LIST = 0;
     public static final String ERROR_INVOLVED_AND_COST_DIFFERENT_LENGTH =
             "Seems like there is a discrepancy between number of people involved and the costs per person";
-    public static final String ERROR_HAS_BOTH_COST_AND_COST_LIST = "Please only include either a total cost or a list of costs";
+    public static final String ERROR_HAS_BOTH_COST_AND_COST_LIST =
+            "Please only include either a total cost or a list of costs";
+    public static final String ERROR_MISSING_COST_AND_COST_LIST =
+            "Please include either a cost or a list of costs.";
 
     private int sessionId;
     private String activityName;
@@ -64,22 +67,43 @@ public class ActivityCreateCommand extends Command {
     }
 
     public static Command prepare(String commandArgs) {
+        boolean isMissingCost = false;
+        boolean isMissingCostList = false;
+        double cost = 0;
+        double[] costList = null;
+
+        try {
+            cost = Parser.parseTotalCost(commandArgs);
+        } catch (InvalidFormatException e) {
+            isMissingCost = true;
+        }
+
+        try {
+            costList = Parser.parseCostList(commandArgs);
+        } catch (InvalidFormatException e) {
+            isMissingCostList = true;
+        }
+
+        boolean hasMissingCostAndMissingCostList = isMissingCostList && isMissingCost;
+        if (hasMissingCostAndMissingCostList) {
+            return new InvalidCommand(ERROR_MISSING_COST_AND_COST_LIST + COMMAND_FORMAT);
+        }
+
+        boolean hasBothCostAndCostList = !isMissingCostList && !isMissingCost;
+        if (hasBothCostAndCostList) {
+            return new InvalidCommand(ERROR_HAS_BOTH_COST_AND_COST_LIST + COMMAND_FORMAT);
+        }
+
         try {
             int sessionId = Parser.parseSessionId(commandArgs);
             String activityName = Parser.parseName(commandArgs);
-            double cost = Parser.parseTotalCost(commandArgs);
             String payer = Parser.parsePayer(commandArgs);
             String[] involvedList = Parser.parseInvolved(commandArgs);
-            double[] costList = Parser.parseCostList(commandArgs);
             int gst = Parser.parseGst(commandArgs);
             int serviceCharge = Parser.parseServiceCharge(commandArgs);
             boolean hasDifferentLength = hasDifferentLength(cost, involvedList, costList);
             if (hasDifferentLength) {
                 return new InvalidCommand(ERROR_INVOLVED_AND_COST_DIFFERENT_LENGTH + COMMAND_FORMAT);
-            }
-            boolean hasBothCostAndCostList = hasBothCostAndCostList(cost, costList);
-            if (hasBothCostAndCostList) {
-                return new InvalidCommand(ERROR_HAS_BOTH_COST_AND_COST_LIST + COMMAND_FORMAT);
             }
             return new ActivityCreateCommand(sessionId, activityName, cost, payer, involvedList, costList, gst,
                     serviceCharge);
