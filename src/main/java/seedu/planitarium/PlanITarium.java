@@ -1,9 +1,20 @@
 package seedu.planitarium;
 
+import java.util.Scanner;
+
+import commands.Command;
+
 public class PlanITarium {
-    
+    protected Scanner userInput;
+    protected Command commandExecuter;
+
     public void run() {
         printWelcomeMessage();
+        while (true) {
+            userInput = new Scanner(System.in);
+            commandExecuter = new Command(userInput.nextLine());
+            //commandExecuter.execute();
+        }
     }
 
     /**

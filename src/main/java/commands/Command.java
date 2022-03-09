@@ -13,19 +13,20 @@ public class Command {
     protected static final String CALC_REMAIN = "remain";
     protected static final String LIST = "list";
     protected static final String EXIT = "bye";
+    protected String userInput;
     protected String replyMsg;
     protected UI ui = new UI();
 
-    public Command() {
+    public Command(String userInput) {
+        this.userInput = userInput;
     }
 
     /**
      * Executes the instruction according to the input after parsing
-     * @param Instr the instruction after parsing by parser
      * @throws UnknownException if the instruction cannot be executed
     */
     /**
-    public void execute(Parser Instr) throws UnknownException {
+    public void execute() throws UnknownException {
         //parser
         try () {
             switch () {
@@ -54,7 +55,7 @@ public class Command {
         } catch (UnknownException e) {
             this.replyMsg = e.toString();
         }
-        GUI.printMsg(replyMsg);
+        ui.printMsg(replyMsg);
     }
     */
 }
