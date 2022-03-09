@@ -1,6 +1,13 @@
 package seedu.splitlah.command;
 
+import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Person;
+import seedu.splitlah.data.Session;
+import seedu.splitlah.exceptions.InvalidDataException;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Represents an ActivityCreateCommand which has a run method that creates an activity.
@@ -14,6 +21,8 @@ public class ActivityCreateCommand extends Command {
             + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /c <COST1 COST2…> "
             + "[<OPTIONAL ARGS>]\n"
             + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /c <OVERALLCOST> [<OPTIONAL ARGS>]";
+    private static final double ZERO_COST_PAID = 0;
+    public static final int NO_COST = 0;
 
     private int sessionId;
     private String activityName;
@@ -50,6 +59,80 @@ public class ActivityCreateCommand extends Command {
 
     @Override
     public void run(Manager manager) {
-
+        try {
+            int activityId = manager.getProfile().getNewActivityId();
+            updateCostAndCostList();
+            Session session = manager.getProfile().getSession(sessionId);
+            Person personPaid = session.getPersonByName(payer);
+            ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
+            addAllActivityCost(involvedPersonList, personPaid, cost, costList, activityId);
+            Activity activity = new Activity(activityId, activityName, cost, personPaid, involvedPersonList);
+            session.addActivity(activity);
+        } catch (InvalidDataException e) {
+            manager.getUi().printlnMessage(e.getMessage());
+        }
     }
+
+    private static void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, double cost,
+                                           double[] costList, int activityId) throws InvalidDataException {
+        for (int i = 0; i < involvedPersonList.size(); i++) {
+            Person person = involvedPersonList.get(i);
+            addCostOwedAndCostPaid(personPaid, cost, costList, activityId, i, person);
+        }
+    }
+
+    private static void addCostOwedAndCostPaid(Person personPaid, double cost, double[] costList, int activityId,
+                                               int i, Person person) throws InvalidDataException {
+        if (person == personPaid) {
+            person.addActivityCost(activityId, cost, costList[i]);
+        } else {
+            person.addActivityCost(activityId, ZERO_COST_PAID, costList[i]);
+        }
+    }
+
+    private void updateCostAndCostList() {
+        boolean isZeroCost = cost == NO_COST;
+        if (isZeroCost) {
+            updateCostListWithExtraCharges(costList, gst, serviceCharge);
+            cost = getTotalCost(costList);
+        } else {
+            cost = updateCostWithExtraCharges(cost, gst, serviceCharge);
+            int numberOfPeopleInvolved = involvedList.length;
+            costList = distributeCostEvenly(cost, numberOfPeopleInvolved);
+        }
+    }
+
+    private static void updateCostListWithExtraCharges(double[] costList, int gst, int serviceCharge) {
+        double extraCharges = getExtraCharges(gst, serviceCharge);
+        for (int i = 0; i < costList.length; i++) {
+            costList[i] *= extraCharges;
+        }
+    }
+
+    private static double getTotalCost(double[] costList) {
+        double cost = 0;
+        for (int i = 0; i < costList.length; i++) {
+            cost += costList[i];
+        }
+        return cost;
+    }
+
+    private static double updateCostWithExtraCharges(double cost, int gst, int serviceCharge) {
+        double extraCharges = getExtraCharges(gst, serviceCharge);
+        return cost * extraCharges;
+    }
+
+    private static double getExtraCharges(int gst, int serviceCharge) {
+        double gstMultiplier = 1 + (double)gst / 100;
+        double serviceChargeMultiplier = 1 + (double)serviceCharge / 100;
+        return gstMultiplier * serviceChargeMultiplier;
+    }
+
+    private static double[] distributeCostEvenly(double cost, int numberOfPeopleInvolved) {
+        double dividedCost = cost / numberOfPeopleInvolved;
+        double[] costList = new double[numberOfPeopleInvolved];
+        Arrays.fill(costList, dividedCost);
+        return costList;
+    }
+
 }

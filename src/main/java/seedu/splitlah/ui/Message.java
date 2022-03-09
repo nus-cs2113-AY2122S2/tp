@@ -22,14 +22,16 @@ public abstract class Message {
             + "          \\__|";
     public static final String HELP_MENU =
             "HELP MENU"; //TODO: Populate help menu
-    
-    public static final String ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST =
-            "Please enter a number from 1 to ";
-    public static final String ERROR_SESSION_EMPTY_PERSON_LIST =
-            "The list of participants in the session is currently empty.";
-    public static final String ERROR_SESSION_PERSON_NOT_IN_LIST =
-            "The person that you have specified was not found in this session.";
-    
+    public static final String PROMPT_TEXTUI_REQUEST_CONFIRMATION =
+            "Please enter Y/y/yes to confirm, or N/n/no otherwise.";
+    public static final String ERROR_TEXTUI_USER_DID_NOT_CONFIRM =
+            "User did not confirm.";
+    public static final String ERROR_TEXTUI_REENTER_INPUT =
+            "Invalid input. Please re-enter.";
+    public static final String PERSON_TEXTUI_NO_ACTIVITES =
+            "No activites found.";
+
+    // Parser
     public static final String ERROR_PARSER_DELIMITER_NOT_FOUND =
             "Please include the following delimiter in your input: ";
     public static final String ERROR_PARSER_MISSING_ARGUMENT =
@@ -55,9 +57,25 @@ public abstract class Message {
     public static final String ERROR_PERSON_ACTIVITY_NOT_FOUND =
             "Activity not found.";
 
+    // Session
+    public static final String ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST =
+            "Please enter a number from 1 to ";
+    public static final String ERROR_SESSION_EMPTY_ACTIVITY_LIST =
+            "The list of activities in the session is currently empty.";
+    public static final String ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST =
+            "The activity that you have specified was not found in this session.";
+    public static final String ERROR_SESSION_EMPTY_PERSON_LIST =
+            "The list of participants in the session is currently empty.";
+    public static final String ERROR_SESSION_PERSON_NOT_IN_LIST =
+            "The person that you have specified was not found in this session.";
+    
     // Profile
     public static final String ERROR_PROFILE_DUPLICATE_SESSION =
             "There is another session with the same name, please try another name.";
     public static final String ERROR_PROFILE_DUPLICATE_NAME =
             "There seems to be duplicates in the session you are trying to create, please try again.";
+    public static final String ERROR_PROFILE_SESSION_LIST_EMPTY =
+            "There are no sessions currently stored.";
+    public static final String ERROR_PROFILE_SESSION_NOT_IN_LIST =
+            "The session that you have specified was not found.";
 }
