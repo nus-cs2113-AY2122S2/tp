@@ -18,5 +18,11 @@ public class Indexes {
     public static final int FIND_BY_TASK_DESCRIPTION_NO_DATE_INDEX = 1;
     public static final int FIND_BY_TASK_CONTENT_INDEX = 1;
     public static final int DIRECTORY_INDEX = 0;
-
+    public static final int STUDY_COMMAND_INDEX = 0;
+    public static final int TIMER_FORMAT_INDEX = 1;
+    public static final int DEFAULT_TIMER_INDEX = 1;
+    public static final int CUSTOM_TIMER_INDEX = 2;
+    public static final int DEFAULT_TIMER_ONE = 45;
+    public static final int DEFAULT_TIMER_TWO = 60;
+    public static final int DEFAULT_TIMER_THREE = 90;
 }
