@@ -15,19 +15,18 @@ public class Manager {
      * Main application loop that holds switch case statement.
      */
     public void runLoop() {
-
+        ui.printGreeting();
         while (!isTerminated) {
             String commandWord = ui.readCommand();
             switch (commandWord) {
             case "bye":
                 isTerminated = true;
+                ui.printBye();
                 break;
             default:
                 System.out.println(commandWord);
                 break;
             }
         }
-
-
     }
 }
