@@ -251,7 +251,7 @@ public class Parser {
     public static String getRemainingArgument(String commandArgs) {
         String[] commandTokens = commandArgs.trim().split(REGEX_WHITESPACES_DELIMITER, COMMAND_WITH_ARGS_TOKEN_COUNT);
         if (commandTokens.length < COMMAND_WITH_ARGS_TOKEN_COUNT) {
-            return null;
+            return "";
         }
         return commandTokens[2];
     }
