@@ -1,7 +1,7 @@
 package seedu.duke.projects;
 
 public class Project {
-    String title;
+    private String title;
 
     /**
      * Constructs a Project object
