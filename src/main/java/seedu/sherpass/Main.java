@@ -10,7 +10,7 @@ import seedu.sherpass.utills.Ui;
 import java.io.IOException;
 import static seedu.sherpass.constant.Messages.ERROR_IO_FAILURE_MESSAGE;
 
-public class main {
+public class Main {
 
     private Storage storage;
     private TaskList taskList;
@@ -22,7 +22,7 @@ public class main {
      *
      * @param  filePath Location of the save file.
      */
-    public main(String filePath) {
+    public Main(String filePath) {
         ui = new Ui();
         try {
             storage = new Storage(filePath);
@@ -52,7 +52,7 @@ public class main {
     }
 
     public static void main(String[] args) {
-        new main("data/sherpass.txt").run();
+        new Main("data/sherpass.txt").run();
     }
 
 }
