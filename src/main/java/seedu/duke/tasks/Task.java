@@ -47,15 +47,13 @@ public class Task {
     public String toString() {
         String taskStatusString = isTaskDone ? ICON_COMPLETED : ICON_UNCOMPLETED;
         if (taskDescription != null && estimatedWorkingTime != null) {
-            return String.format(TASK_STRING_WITH_DESC_WITH_TIME, taskStatusString, taskName, taskDescription, estimatedWorkingTime);
-        }
-        else if (taskDescription != null) {
+            return String.format(TASK_STRING_WITH_DESC_WITH_TIME, taskStatusString, taskName,
+                    taskDescription, estimatedWorkingTime);
+        } else if (taskDescription != null) {
             return String.format(TASK_STRING_WITH_DESC_NO_TIME, taskStatusString, taskName, taskDescription);
-        }
-        else if (estimatedWorkingTime != null) {
+        } else if (estimatedWorkingTime != null) {
             return String.format(TASK_STRING_NO_DESC_WITH_TIME, taskStatusString, taskName, estimatedWorkingTime);
-        }
-        else {
+        } else {
             return String.format(TASK_STRING_NO_DESC_NO_TIME, taskStatusString, taskName);
         }
 

@@ -23,11 +23,11 @@ public class AddParser extends Parser {
     // (\s+(-t\s+\'(?<estimatedWorkingTime>.+)\')(?=(\s+-d\s+)|$))?
     // |\/m\s+(?<moduleCode>\w+?(?=(\s+-d\s+)|$))(\s+(-d\s+\"(?<moduleDescription>.+)\"))?)
     // TODO: Add support for -mod argument when integrating Task and Module classes with one another
-    private static final String ADD_FORMAT = "^\\s*(\\/t\\s+(?<taskName>.+?(?=(\\s+-d\\s+|\\s+-t\\s+)|$))" +
-            "(\\s+(-d\\s+\\\"(?<taskDescription>.+)\\\")(?=(\\s+-t\\s+)|$))?" +
-            "(\\s+(-t\\s+\\'(?<estimatedWorkingTime>.+)\\')" +
-            "(?=(\\s+-d\\s+)|$))?|\\/m\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)|$))" +
-            "(\\s+(-d\\s+\\\"(?<moduleDescription>.+)\\\"))?)";
+    private static final String ADD_FORMAT = "^\\s*(\\/t\\s+(?<taskName>.+?(?=(\\s+-d\\s+|\\s+-t\\s+)|$))"
+            + "(\\s+(-d\\s+\\\"(?<taskDescription>.+)\\\")(?=(\\s+-t\\s+)|$))?"
+            + "(\\s+(-t\\s+\\'(?<estimatedWorkingTime>.+)\\')"
+            + "(?=(\\s+-d\\s+)|$))?|\\/m\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)|$))"
+            + "(\\s+(-d\\s+\\\"(?<moduleDescription>.+)\\\"))?)";
 
     public AddParser() {
         super();
@@ -49,16 +49,13 @@ public class AddParser extends Parser {
         final String moduleCode = parsedArguments.get(MODULE_CODE);
         final String moduleDescription = parsedArguments.get(MODULE_DESCRIPTION);
         if (!taskName.equals(EMPTY_STRING)) {
-            if (!estimatedWorkingTime.equals(EMPTY_STRING) && !taskDescription.equals(EMPTY_STRING)){
+            if (!estimatedWorkingTime.equals(EMPTY_STRING) && !taskDescription.equals(EMPTY_STRING)) {
                 return new AddCommand(taskName, taskDescription, true, estimatedWorkingTime);
-            }
-            else if (!taskDescription.equals(EMPTY_STRING)) {
+            } else if (!taskDescription.equals(EMPTY_STRING)) {
                 return new AddCommand(taskName, taskDescription, true, null);
-            }
-            else if (!estimatedWorkingTime.equals(EMPTY_STRING)) {
+            } else if (!estimatedWorkingTime.equals(EMPTY_STRING)) {
                 return new AddCommand(taskName, null, true, estimatedWorkingTime);
-            }
-            else {
+            } else {
                 return new AddCommand(taskName, null, true, null);
             }
         }
