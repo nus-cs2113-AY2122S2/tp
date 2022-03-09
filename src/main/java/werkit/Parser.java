@@ -1,4 +1,4 @@
-package werkIt;
+package werkit;
 
 import commands.Command;
 import commands.ExitCommand;
@@ -15,7 +15,6 @@ import static commands.WorkoutCommand.DELETE_ACTION_KEYWORD;
 /**
  * This class will parse the input that the user enters into the WerkIt! application into data
  * that can be further processed by other classes in this application.
- * <p>
  * Design of the commands is inspired by the AddressBook-Level2 project
  * Link: https://se-education.org/addressbook-level2/
  */
@@ -71,6 +70,8 @@ public class Parser {
             arguments = userInput.split(" ", 3)[2];
             break;
         case LIST_ACTION_KEYWORD:
+            break;
+        default:
             break;
         }
         return new WorkoutCommand(userInput, ui, workoutList, actionKeyword, arguments);

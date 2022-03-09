@@ -1,4 +1,4 @@
-import werkIt.WerkIt;
+import werkit.WerkIt;
 
 /**
  * Main entry-point for the WerkIt! application.
