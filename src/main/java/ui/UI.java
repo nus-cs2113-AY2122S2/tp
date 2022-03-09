@@ -1,7 +1,7 @@
 package ui;
 
 /**
- * print messages with horizontal line
+ * Prints messages with horizontal lines.
  */
 public class UI {
     protected static final String HORI_LINE = "---------------------------";

@@ -14,7 +14,7 @@ public class Command {
     protected static final String LIST = "list";
     protected static final String EXIT = "bye";
     protected String replyMsg;
-    protected UI CUI = new UI();
+    protected UI ui = new UI();
 
     public Command() {
     }
