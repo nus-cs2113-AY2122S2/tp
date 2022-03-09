@@ -2,7 +2,12 @@ package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
+import seedu.splitlah.data.Profile;
+import seedu.splitlah.data.Session;
+import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.TextUI;
 import seedu.splitlah.util.PersonCostPair;
 
 import java.util.ArrayList;
@@ -129,12 +134,25 @@ public class SessionSummaryCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        
+        Profile profile = manager.getProfile();
+        TextUI ui = manager.getUi();
+        Session session;
+        try {
+            session = profile.getSession(sessionId);
+        } catch (InvalidDataException exception) {
+            ui.printlnMessage(exception.getMessage());
+            return;
+        }
+
+        ArrayList<Person> personList = session.getPersonList();
+        ArrayList<PersonCostPair> personCostPairList = getPersonCostPairList(personList);
+        // check if NET 0
+        String output = settleAllTransactions(personCostPairList);
     }
 
     /**
      * Default constructor, sets sessionId as specified by the provided value.
-     * 
+     *
      * @param sessionId The session identifier number that uniquely identifies a session.
      */
     public SessionSummaryCommand(int sessionId) {
