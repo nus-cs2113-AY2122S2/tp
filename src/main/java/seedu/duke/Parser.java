@@ -11,7 +11,8 @@ public class Parser {
     private static final String DAY = "d/";
     private static final String STARTTIME = "st/";
     private static final String ENDTIME = "et/";
-    private static final String[] HEADINGS = {NAME, LESSON, DAY, STARTTIME, ENDTIME};
+    private static final String MODE = "m/";
+    private static final String[] HEADINGS = {NAME, LESSON, DAY, STARTTIME, ENDTIME, MODE};
 
     public Parser(String input) {
         this.command = getCommandFromInput(input);
@@ -26,7 +27,7 @@ public class Parser {
     public String[] getAddDescription() {
         // checks empty command description error
         // checks input format error
-        String[] addDescription = new String[5];
+        String[] addDescription = new String[6];
         int index = -1;
         for (String str : description.split(" ")) {
             if (checkHeadings(str) == -1) {
