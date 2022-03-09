@@ -7,6 +7,6 @@ public class PrintStrings {
     private PrintStrings() {
     }
 
-    public static final String LINE = "---------------------------------------" +
-            "------------------------------------------" + System.lineSeparator();
+    public static final String LINE = "---------------------------------------"
+            + "------------------------------------------" + System.lineSeparator();
 }

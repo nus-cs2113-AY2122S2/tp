@@ -3,6 +3,7 @@ package seedu.mindmymoney;
 import seedu.mindmymoney.command.AddCommand;
 import seedu.mindmymoney.command.Command;
 import seedu.mindmymoney.command.HelpCommand;
+import seedu.mindmymoney.command.ListCommand;
 import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.helper.Functions;
 
@@ -35,6 +36,8 @@ public class Parser {
             return new HelpCommand(false); //solving fall through issue, need return something leh
         case "add":
             return new AddCommand(parsedInput[Indexes.INDEX_OF_SECOND_ITEM_IN_STRING]);
+        case "list":
+            return new ListCommand();
         default:
             return new HelpCommand(false);
         }
