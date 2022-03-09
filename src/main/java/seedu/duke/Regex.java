@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
+/*
  * This class is to help with cleaning up code involving regex
  * Creating an Instance of Regex will take in the string input
  * and the regex pattern to match that input
@@ -31,7 +31,7 @@ public class Regex {
         this.groupValues = findMatch();
     }
 
-    /**
+    /*
      * Main driver to create HashMap for group matches
      * Key: Group Name, Value: Match as string
      *
@@ -46,11 +46,12 @@ public class Regex {
         Matcher matcher = regexMatching(regex, input);
 
         // run matcher class to check regex on input string
-        boolean has_match = matcher.find();
+        boolean hasMatch = matcher.find();
         for (String groupName: groupNames) {
-            hashMap.put(groupName, matcher.group(groupName));
-            if(!has_match) {
+            if (!hasMatch) {
                 hashMap.put(groupName, "");
+            } else {
+                hashMap.put(groupName, matcher.group(groupName));
             }
         }
 
@@ -58,7 +59,7 @@ public class Regex {
     }
 
     /**
-     * Match the given input with the given String Regex
+     * Match the given input with the given String Regex.
      *
      * @param regex Given regex pattern
      * @param input Given input to match regex against
@@ -70,7 +71,7 @@ public class Regex {
     }
 
     /**
-     * Finds the group names within the regex pattern
+     * Finds the group names within the regex pattern.
      * To be used as key name for HashMap matches
      *
      * @param regex the regex pattern used

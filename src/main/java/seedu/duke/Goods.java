@@ -1,6 +1,6 @@
 package seedu.duke;
 
-/**
+/*
  * Class to handle the Goods information
  *
  * FOR NOW id we can manually input?
