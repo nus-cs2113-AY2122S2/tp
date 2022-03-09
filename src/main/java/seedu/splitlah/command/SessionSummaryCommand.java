@@ -1,7 +1,11 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Person;
 import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.util.PersonCostPair;
+
+import java.util.ArrayList;
 
 /**
  * Represents a command object that when run, produces a summary of expenditure for that session.
@@ -37,6 +41,25 @@ public class SessionSummaryCommand extends Command {
         return Math.abs(cost) <= SMALL_DIFFERENCE_LIMIT;
     }
 
+    private static ArrayList<PersonCostPair> getPersonCostPairList(ArrayList<Person> personList) {
+        ArrayList<PersonCostPair> personCostPairList = new ArrayList<>();
+        for (Person person : personList) {
+            PersonCostPair newPair = new PersonCostPair(person);
+            if (!isValueSmall(newPair.getCost())) {
+                personCostPairList.add(newPair);
+            }
+        }
+        return personCostPairList;
+    }
+
+    private static boolean isPersonCostPairListValid(ArrayList<PersonCostPair> personCostPairList) {
+        double total = 0;
+        for (PersonCostPair personCostPair : personCostPairList) {
+            total += personCostPair.getCost();
+        }
+        return isValueSmall(total);
+    }
+    
     /**
      * Runs the command with the session identifier as provided by the user input and prints a
      * summary of expenditure for the session specified by the session identifier.
