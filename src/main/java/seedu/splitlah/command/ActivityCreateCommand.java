@@ -86,10 +86,13 @@ public class ActivityCreateCommand extends Command {
     private static boolean isInvalidCommand(double cost, String[] involvedList, double[] costList) {
         boolean isZeroCost = cost == NO_COST;
         boolean isDifferentLength = involvedList.length != costList.length;
-        boolean isInvalidDueToDifferentLength = isZeroCost && isDifferentLength;
+        return isZeroCost && isDifferentLength;
+    }
+
+    private static boolean hasBothCostAndCostList(double cost, double[] costList) {
+        boolean hasCost = cost != NO_COST;
         boolean hasCostList = costList.length != NO_COST_LIST;
-        boolean hasBothCostAndCostList = !isZeroCost && hasCostList;
-        return isInvalidDueToDifferentLength || hasBothCostAndCostList;
+        return hasCost && hasCostList;
     }
 
     /**
