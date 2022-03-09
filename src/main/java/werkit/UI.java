@@ -1,4 +1,4 @@
-package werkIt;
+package werkit;
 
 import data.workouts.Workout;
 
@@ -12,12 +12,12 @@ import static textcolors.TextColor.COLOR_YELLOW;
  */
 public class UI {
     // WerkIt ASCII Banner Logo Art
-    public static final String WERKIT_BANNER_LOGO = " __        __        _    ___ _   _ \n" +
-            " \\ \\      / /__ _ __| | _|_ _| |_| |\n" +
-            "  \\ \\ /\\ / / _ \\ '__| |/ /| || __| |\n" +
-            "   \\ V  V /  __/ |  |   < | || |_|_|\n" +
-            "    \\_/\\_/ \\___|_|  |_|\\_\\___|\\__(_)\n" +
-            "                                    ";
+    public static final String WERKIT_BANNER_LOGO = " __        __        _    ___ _   _ \n"
+            + " \\ \\      / /__ _ __| | _|_ _| |_| |\n"
+            + "  \\ \\ /\\ / / _ \\ '__| |/ /| || __| |\n"
+            + "   \\ V  V /  __/ |  |   < | || |_|_|\n"
+            + "    \\_/\\_/ \\___|_|  |_|\\_\\___|\\__(_)\n"
+            + "                                    ";
 
     public static final String WELCOME_MESSAGE = "Welcome to WerkIt!, your personal exercise planner.";
     public static final String GOODBYE_MESSAGE = "Thank you for using WerkIt! See you again soon...";
@@ -35,7 +35,6 @@ public class UI {
 
     /**
      * Prints a line on the console based on the default parameters defined in this Java class.
-     * <p>
      * Source: Team Member Alan Low's iP codebase
      * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/SoraUI.java
      */
@@ -46,7 +45,6 @@ public class UI {
 
     /**
      * Prints a line on the console based on the specified length and the character/symbol to use
-     * <p>
      * Source: Team Member Alan Low's iP codebase
      * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/SoraUI.java
      *
@@ -78,7 +76,6 @@ public class UI {
 
     /**
      * Prints a message that prompts the user to enter a command
-     * <p>
      * Method adapted from Team Member Alan Low's iP codebase.
      * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/SoraUI.java
      */
@@ -86,8 +83,7 @@ public class UI {
         printLine();
         if (isFirstPrompt) {
             System.out.println("Now then, what can I do for you today?");
-        }
-        else {
+        } else {
             System.out.println("What's next?");
         }
 
@@ -97,7 +93,6 @@ public class UI {
 
     /**
      * Reads in a line of the user from the standard input, trims the input, and returns it as a String.
-     * <p>
      * Method adapted from Team Member Alan Low's iP codebase.
      * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/SoraParser.java
      */
@@ -112,7 +107,7 @@ public class UI {
     /**
      * Prints a message when a new workout has been created. The newly created workout will also be displayed.
      *
-     * @param newWorkout
+     * @param newWorkout workout with exercise name and number of repetitions.
      */
     public void printNewWorkoutCreatedMessage(Workout newWorkout) {
         System.out.println(NEW_WORKOUT_CREATED_MESSAGE);
@@ -124,7 +119,7 @@ public class UI {
     /**
      * Prints a message when a workout has been deleted. Deleted workout will also be displayed.
      *
-     * @param deletedWorkout
+     * @param deletedWorkout workout with exercise name and number of repetitions.
      */
     public void printDeleteWorkoutMessage(Workout deletedWorkout) {
         System.out.println(DELETED_WORKOUT_MESSAGE);

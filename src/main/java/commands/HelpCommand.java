@@ -1,6 +1,6 @@
 package commands;
 
-import werkIt.UI;
+import werkit.UI;
 
 public class HelpCommand extends Command {
     public static final String BASE_KEYWORD = "help";
