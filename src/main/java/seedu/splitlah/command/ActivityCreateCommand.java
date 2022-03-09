@@ -192,7 +192,7 @@ public class ActivityCreateCommand extends Command {
         boolean isZeroCost = totalCost == NO_COST;
         if (isZeroCost) {
             updateCostListWithExtraCharges(costList, gst, serviceCharge);
-            totalCost = getTotalCost(costList);
+            totalCost = calculateTotalCost(costList);
         } else {
             totalCost = updateCostWithExtraCharges(totalCost, gst, serviceCharge);
             int numberOfPeopleInvolved = involvedList.length;
@@ -222,7 +222,7 @@ public class ActivityCreateCommand extends Command {
      * @param costList The costs owed by each person involved in the activity.
      * @return A double representing the total cost of the activity.
      */
-    private static double getTotalCost(double[] costList) {
+    private static double calculateTotalCost(double[] costList) {
         double totalCost = 0;
         for (int i = 0; i < costList.length; i++) {
             totalCost += costList[i];
