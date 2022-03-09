@@ -1,10 +1,6 @@
 package werkIt;
 
-import commands.Command;
-import commands.ExitCommand;
-import commands.InvalidCommandException;
-import commands.WorkoutCommand;
-import commands.HelpCommand;
+import commands.*;
 import data.exercises.ExerciseList;
 import data.workouts.WorkoutList;
 
@@ -54,6 +50,8 @@ public class Parser {
             return createExitCommand(userInput);
         case HelpCommand.BASE_KEYWORD:
             return createHelpCommand(userInput);
+        case ExerciseCommand.BASE_KEYWORD:
+            return createExerciseCommand(userInput);
         default:
             String className = this.getClass().getSimpleName();
             throw new InvalidCommandException(className, InvalidCommandException.INVALID_COMMAND_ERROR_MSG);
@@ -74,6 +72,16 @@ public class Parser {
             break;
         }
         return new WorkoutCommand(userInput, ui, workoutList, actionKeyword, arguments);
+    }
+
+    public ExerciseCommand createExerciseCommand(String userInput) throws InvalidCommandException {
+        String actionKeyword = userInput.split(" ", 3)[1];
+        String arguments = null;
+        switch (actionKeyword) {
+        case LIST_ACTION_KEYWORD:
+            break;
+        }
+        return new ExerciseCommand(userInput, ui, exerciseList, actionKeyword, arguments);
     }
 
     public ExitCommand createExitCommand(String userInput) {
