@@ -5,7 +5,7 @@ public class Doctor {
     String fullName;
     int age;
     char gender;
-    String Address;
+    String address;
     String dob;
     String specialization;
 }
