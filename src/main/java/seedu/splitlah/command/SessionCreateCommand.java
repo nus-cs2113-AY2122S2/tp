@@ -110,16 +110,16 @@ public class SessionCreateCommand extends Command {
             return;
         }
         // TODO: Check if string[] names are actual names.
-        ArrayList<Person> personList = convertToListOfPerson(this.personNames);
+        ArrayList<Person> personList = convertToListOfPerson(personNames);
 
-        boolean isSessionExists = manager.getProfile().hasSessionName(this.sessionName);
+        boolean isSessionExists = manager.getProfile().hasSessionName(sessionName);
         if (isSessionExists) {
             manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_SESSION);
             return;
         }
 
         int newSessionId = manager.getProfile().getNewSessionId();
-        Session newSession = new Session(this.sessionName, newSessionId, this.sessionDate, personList);
+        Session newSession = new Session(sessionName, newSessionId, sessionDate, personList);
         manager.getProfile().addSession(newSession);
         manager.getUi().printlnMessage(COMMAND_SUCCESS + newSessionId);
     }
