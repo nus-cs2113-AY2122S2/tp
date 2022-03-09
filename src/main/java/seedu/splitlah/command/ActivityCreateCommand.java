@@ -17,7 +17,7 @@ import java.util.Arrays;
 public class ActivityCreateCommand extends Command {
 
     public static final String COMMAND_TEXT = "activity /create";
-    private static final String COMMAND_FORMAT = "There are 3 different types of formats:\n"
+    private static final String COMMAND_FORMAT = "Syntax:\n"
             + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /c <OVERALLCOST> "
             + "[<OPTIONAL ARGS>]\n"
             + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /c <COST1 COST2…> "
@@ -26,8 +26,8 @@ public class ActivityCreateCommand extends Command {
     private static final double ZERO_COST_PAID = 0;
     public static final int NO_COST = 0;
     public static final int NO_COST_LIST = 0;
-    public static final String ERROR_DISCREPANCY_NUMBER_INVOLVED_AND_COST = "Seems like there is a discrepancy between number of people involved and " +
-            "the costs per person";
+    public static final String ERROR_INVOLVED_AND_COST_DIFFERENT_LENGTH =
+            "Seems like there is a discrepancy between number of people involved and the costs per person";
 
     private int sessionId;
     private String activityName;
@@ -72,9 +72,9 @@ public class ActivityCreateCommand extends Command {
             double[] costList = Parser.parseCostList(commandArgs);
             int gst = Parser.parseGst(commandArgs);
             int serviceCharge = Parser.parseServiceCharge(commandArgs);
-            boolean isInvalidCommand = isInvalidCommand(cost, involvedList, costList);
+            boolean isInvalidCommand = hasDifferentLength(cost, involvedList, costList);
             if (isInvalidCommand) {
-                return new InvalidCommand(ERROR_DISCREPANCY_NUMBER_INVOLVED_AND_COST);
+                return new InvalidCommand(ERROR_INVOLVED_AND_COST_DIFFERENT_LENGTH + COMMAND_FORMAT);
             }
             return new ActivityCreateCommand(sessionId, activityName, cost, payer, involvedList, costList, gst,
                     serviceCharge);
@@ -83,7 +83,7 @@ public class ActivityCreateCommand extends Command {
         }
     }
 
-    private static boolean isInvalidCommand(double cost, String[] involvedList, double[] costList) {
+    private static boolean hasDifferentLength(double cost, String[] involvedList, double[] costList) {
         boolean isZeroCost = cost == NO_COST;
         boolean isDifferentLength = involvedList.length != costList.length;
         return isZeroCost && isDifferentLength;
