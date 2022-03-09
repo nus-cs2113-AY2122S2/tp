@@ -38,6 +38,13 @@ public class PersonCostPair implements Comparable<PersonCostPair> {
         return Double.compare(cost, personCostPair.getCost());
     }
 
+    public static Comparator<PersonCostPair> PersonCostPairComparator = new Comparator<PersonCostPair>() {
+        @Override
+        public int compare(PersonCostPair personCostPair1, PersonCostPair personCostPair2) {
+            return personCostPair1.compareTo(personCostPair2);
+        }
+    };
+
     public PersonCostPair(Person person) {
         this.person = person;
         this.cost = person.getTotalCost();
