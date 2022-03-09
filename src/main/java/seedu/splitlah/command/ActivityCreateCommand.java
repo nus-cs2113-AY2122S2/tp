@@ -86,7 +86,7 @@ public class ActivityCreateCommand extends Command {
 
         boolean hasBothCostAndCostList = !isMissingCostList && !isMissingCost;
         if (hasBothCostAndCostList) {
-            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
+            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
                     + COMMAND_FORMAT);
         }
 
