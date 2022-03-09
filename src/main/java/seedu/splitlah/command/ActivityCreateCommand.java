@@ -170,6 +170,15 @@ public class ActivityCreateCommand extends Command {
         return cost;
     }
 
+    /**
+     * Returns the total cost by including the extra charges.
+     * Extra charges may include gst and service charge.
+     *
+     * @param cost The total cost of the activity excluding extra charges.
+     * @param gst The gst to be added to the total cost of the activity.
+     * @param serviceCharge The service charge to be added to the total cost of the activity.
+     * @return A double representing the total cost of the activity including extra charges.
+     */
     private static double updateCostWithExtraCharges(double cost, int gst, int serviceCharge) {
         double extraCharges = getExtraCharges(gst, serviceCharge);
         return cost * extraCharges;
