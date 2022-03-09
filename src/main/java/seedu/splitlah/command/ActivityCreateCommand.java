@@ -109,17 +109,17 @@ public class ActivityCreateCommand extends Command {
      * @param cost The total cost of the activity.
      * @param costList The costs owed by each person involved in the activity.
      * @param activityId The id of the activity.
-     * @param i The index of the cost owed in the list of costs.
+     * @param indexOfCostOwed The index of the cost owed in the list of costs.
      * @param person The current person whose costs are added to the list of activity costs.
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      * @see InvalidDataException
      */
     private static void addCostOwedAndCostPaid(Person personPaid, double cost, double[] costList, int activityId,
-                                               int i, Person person) throws InvalidDataException {
+                                               int indexOfCostOwed, Person person) throws InvalidDataException {
         if (person == personPaid) {
-            person.addActivityCost(activityId, cost, costList[i]);
+            person.addActivityCost(activityId, cost, costList[indexOfCostOwed]);
         } else {
-            person.addActivityCost(activityId, ZERO_COST_PAID, costList[i]);
+            person.addActivityCost(activityId, ZERO_COST_PAID, costList[indexOfCostOwed]);
         }
     }
 
