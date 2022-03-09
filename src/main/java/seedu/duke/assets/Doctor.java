@@ -15,7 +15,7 @@ public class Doctor {
         this.fullName = fullName;
         this.age = age;
         this.gender = gender;
-        address = address;
+        this.address = address;
         this.dob = dob;
         this.specialization = specialization;
     }

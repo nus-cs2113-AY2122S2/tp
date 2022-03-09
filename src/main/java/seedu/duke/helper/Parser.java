@@ -16,7 +16,7 @@ public class Parser {
         return parameters;
     }
 
-    public static String[] commandParser (String userInput) {
+    public static String[] commandParser(String userInput) {
         return userInput.trim().split("/info");
     }
 }

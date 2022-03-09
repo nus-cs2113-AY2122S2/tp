@@ -50,14 +50,13 @@ public class Patient {
 
     @Override
     public String toString() {
-        return "Patient{" +
-                "NRIC='" + nric + '\'' +
-                ", Full Name='" + fullName + '\'' +
-                ", Age=" + age +
-                ", Gender=" + gender +
-                ", Address='" + Address + '\'' +
-                ", DOB='" + dob + '\'' +
-                ", DateOfAdmission='" + dateAdmission + '\'' +
-                '}';
+        return "Patient{"
+                + "NRIC='" + nric + '\''
+                + ", Full Name='" + fullName + '\''
+                + ", Age=" + age
+                + ", Gender=" + gender
+                + ", Address='" + address
+                + '\'' + ", DOB='" + dob + '\''
+                + ", DateOfAdmission='" + dateAdmission + '\'' + '}';
     }
 }

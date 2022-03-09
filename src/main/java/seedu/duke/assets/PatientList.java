@@ -7,19 +7,19 @@ public class PatientList {
     ArrayList<Patient> patientList;
 
 
-    public Patient getPatient(String NRIC) {
-       for (Patient patient : patientList) {
-           if (patient.getNRIC().equals(NRIC)){
-               return patient;
+    public Patient getPatient(String nric) {
+        for (Patient patient : patientList) {
+            if (patient.getNRIC().equals(nric)){
+                return patient;
            }
        }
        return null;
     }
 
     //view particular patient
-    public void viewPatient(String NRIC) {
+    public void viewPatient(String nric) {
         //todo: add null exception
-        System.out.println(getPatient(NRIC).toString());
+        System.out.println(getPatient(nric).toString());
     }
 
     //view all patients

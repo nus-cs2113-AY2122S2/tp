@@ -8,7 +8,7 @@ public class DoctorList {
 
 
     //view particular doctor
-    public void viewDoctor(String NRIC) {
+    public void viewDoctor(String Nric) {
 
     }
 
