@@ -1,8 +1,8 @@
 package seedu.sherpass.command;
 
-import seedu.sherpass.Storage;
-import seedu.sherpass.TaskList;
-import seedu.sherpass.Ui;
+import seedu.sherpass.utills.Storage;
+import seedu.sherpass.task.TaskList;
+import seedu.sherpass.utills.Ui;
 
 import static seedu.sherpass.constant.Messages.ERROR_SYSTEM_FAULT_MESSAGE;
 

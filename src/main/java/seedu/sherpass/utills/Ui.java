@@ -1,4 +1,4 @@
-package seedu.sherpass;
+package seedu.sherpass.utills;
 
 import java.util.Scanner;
 

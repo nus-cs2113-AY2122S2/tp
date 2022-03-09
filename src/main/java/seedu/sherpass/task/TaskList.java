@@ -1,9 +1,10 @@
-package seedu.sherpass;
+package seedu.sherpass.task;
 
 import seedu.sherpass.task.Deadline;
 import seedu.sherpass.task.Event;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.Todo;
+import seedu.sherpass.utills.Ui;
 
 import java.util.ArrayList;
 

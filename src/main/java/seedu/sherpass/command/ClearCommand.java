@@ -1,8 +1,8 @@
 package seedu.sherpass.command;
 
-import seedu.sherpass.Storage;
-import seedu.sherpass.TaskList;
-import seedu.sherpass.Ui;
+import seedu.sherpass.utills.Storage;
+import seedu.sherpass.task.TaskList;
+import seedu.sherpass.utills.Ui;
 import seedu.sherpass.task.Task;
 
 import java.util.ArrayList;
