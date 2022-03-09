@@ -21,6 +21,10 @@ public class MainController extends Controller {
             // Relinquish control. This will return to the programme main function.
             System.out.println("Exiting application...");
             return true;
+        default:
+            // This should not happen, since the choice argument for this method is always parsed from the
+            // getChoice() method, which also checks for the range of index input.
+            System.out.println("Unknown choice!");
         }
         System.out.println("Now in Main Menu.");
         System.out.println(this);
