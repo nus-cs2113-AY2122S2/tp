@@ -4,7 +4,10 @@ import data.exercises.InvalidExerciseException;
 import data.workouts.InvalidWorkoutException;
 import data.workouts.Workout;
 import data.workouts.WorkoutList;
+import storage.FileManager;
 import werkit.UI;
+
+import java.io.IOException;
 
 /**
  * A class that will handle the commands relating to workout.
@@ -17,19 +20,33 @@ public class WorkoutCommand extends Command {
     public static final String DELETE_ACTION_KEYWORD = "/delete";
     public static final String UPDATE_ACTION_KEYWORD = "/update";
 
-    private UI ui;
+    private FileManager fileManager;
+    private UI ui = new UI();
     private WorkoutList workoutList;
 
     private String userAction;
     private String userArguments;
 
-    public WorkoutCommand(String userInput, UI ui, WorkoutList workoutList,
-                          String userAction, String userArguments) throws InvalidCommandException {
+    public WorkoutCommand(String userInput, FileManager fileManager, WorkoutList workoutList,
+            String userAction, String userArguments) throws InvalidCommandException,
+            IOException {
         super(userInput);
-        this.ui = ui;
+        this.fileManager = fileManager;
         this.workoutList = workoutList;
         setUserAction(userAction);
         this.userArguments = userArguments;
+    }
+
+    public UI getUI() {
+        return this.ui;
+    }
+
+    public FileManager getFileManager() {
+        return this.fileManager;
+    }
+
+    public WorkoutList getWorkoutList() {
+        return this.workoutList;
     }
 
     public String getUserAction() {
@@ -57,10 +74,6 @@ public class WorkoutCommand extends Command {
         return this.userArguments;
     }
 
-    public void setUserArguments(String userArguments) {
-        this.userArguments = userArguments;
-    }
-
     /**
      * (WIP) Note: need to catch and handle exceptions in this method, not the calling method.
      *
@@ -69,11 +82,12 @@ public class WorkoutCommand extends Command {
         try {
             switch (getUserAction()) {
             case CREATE_ACTION_KEYWORD:
-                Workout newWorkout = workoutList.createAndAddWorkout(getUserArguments());
-                ui.printNewWorkoutCreatedMessage(newWorkout);
+                Workout newWorkout = getWorkoutList().createAndAddWorkout(getUserArguments());
+                getUI().printNewWorkoutCreatedMessage(newWorkout);
+                fileManager.writeNewWorkoutToFile(newWorkout);
                 break;
             case LIST_ACTION_KEYWORD:
-                workoutList.listWorkout();
+                getWorkoutList().listWorkout();
                 break;
             default:
                 String className = this.getClass().getSimpleName();
@@ -100,6 +114,10 @@ public class WorkoutCommand extends Command {
             System.out.println("Uh oh, a number was expected in your input, but a non-formattable\n"
                     + "number was received.");
             System.out.println("Please try again.");
+
+        } catch (IOException e) {
+            System.out.println(UI.IOEXCEPTION_ERROR_MESSAGE);
+            System.exit(-1);
         }
     }
 }

@@ -8,12 +8,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WorkoutList {
-    ExerciseList exerciseList;
-    ArrayList<Workout> workoutsList = new ArrayList<>();
     public static final int MAX_DISPLAY = 10;
+
+    private ExerciseList exerciseList;
+    private ArrayList<Workout> workoutsList = new ArrayList<>();
 
     public WorkoutList(ExerciseList exerciseList) {
         this.exerciseList = exerciseList;
+    }
+
+    public ArrayList<Workout> getWorkoutsList() {
+        return this.workoutsList;
     }
 
     public Workout createAndAddWorkout(String userArgument) throws ArrayIndexOutOfBoundsException,

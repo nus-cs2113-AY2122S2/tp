@@ -6,8 +6,22 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ExerciseList {
-    private static final String EXERCISE_FILE_PATH = "exercises/Exercises.txt";
-    private static final File EXERCISE_FILE = new File(EXERCISE_FILE_PATH);
+    public static final String[] DEFAULT_EXERCISE_LIST = {
+            "push up",
+            "bicep curl",
+            "pull up",
+            "squat",
+            "lunge",
+            "hip thrust",
+            "sit up",
+            "crunch",
+            "russian twist",
+            "running",
+            "swimming",
+            "jumping jack",
+            "burpee"
+    };
+
     private final ArrayList<String> exercises = new ArrayList<>();
     private int numberOfExercises = 0;
 

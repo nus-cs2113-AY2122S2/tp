@@ -5,6 +5,7 @@ import storage.FileManager;
 import storage.UnknownFileException;
 import textcolors.TextColor;
 
+import java.nio.file.Path;
 import java.util.Scanner;
 
 //import static textcolors.TextColor.COLOR_RESET;
@@ -30,13 +31,28 @@ public class UI {
     // Prompt symbol
     public static final String PROMPT_SYMBOL = ">";
     // File loading-related messages
+    public static final String CHECK_DIRECTORY_AND_FILES_MSG = "Checking for required directory and files...";
+    public static final String ALL_DIRECTORY_AND_FILES_PRESENT = "All OK!";
+    public static final String DIRECTORY_NOT_FOUND_MSG = "- The required data directory was not found. It will "
+            + "be created.";
+    public static final String DIRECTORY_CREATED_MSG = "- The directory has been created at the following location:\n"
+            + "\t%s\n";
+    public static final String EXERCISE_FILE_NOT_FOUND_MSG = "- The exercise file was not found. It will be created.";
+    public static final String EXERCISE_FILE_CREATED_MSG = "- The exercise file has been created at the following "
+            + "location:\n\t%s\n";
+    public static final String WORKOUT_FILE_NOT_FOUND_MSG = "- The workout file was not found. It will be created.";
+    public static final String WORKOUT_FILE_CREATED_MSG = "- The workout file has been created at the following "
+            + "location:\n\t%s\n";
     public static final String FILE_LOAD_OK = "OK!";
     public static final String FILE_LOAD_NOT_OK = "Not OK...";
     public static final String LOADING_FILE_DATA_MSG = "Loading saved file data...";
-    public static final String EXERCISES_FILE_LOADED_MSG =  "Exercises file\t%s\n";
-    public static final String WORKOUTS_FILE_LOADED_MSG = "Workouts file\t%s\n";
+    public static final String EXERCISES_FILE_LOADED_MSG =  "- Exercises file\t%s\n";
+    public static final String WORKOUTS_FILE_LOADED_MSG = "- Workouts file \t%s\n";
     // Workout-related messages
     public static final String NEW_WORKOUT_CREATED_MESSAGE = "Alright, the following workout has been created:";
+    // IOException Error Message
+    public static final String IOEXCEPTION_ERROR_MESSAGE = "[ERROR] The program has encountered an IOException "
+            + "and needs to close. Sorry about that...";
 
     // Scanner object for reading in user input from standard input
     Scanner inputReader = new Scanner(System.in);
@@ -241,5 +257,46 @@ public class UI {
         }
 
         System.out.printf(messageToPrint, statusMessage);
+    }
+
+    public void printCheckingDirectoryAndFilesMessage() {
+        System.out.print(CHECK_DIRECTORY_AND_FILES_MSG);
+    }
+
+    public void printDirectoryNotFoundMessage() {
+        System.out.println();
+        System.out.println(DIRECTORY_NOT_FOUND_MSG);
+    }
+
+    public void printDirectoryCreatedMessage(Path directoryPath) {
+        System.out.printf(DIRECTORY_CREATED_MSG, directoryPath);
+    }
+
+    public void printExerciseFileNotFoundMessage() {
+        System.out.println();
+        System.out.println(EXERCISE_FILE_NOT_FOUND_MSG);
+    }
+
+    public void printExerciseFileCreatedMessage(Path exerciseFilePath) {
+        System.out.printf(EXERCISE_FILE_CREATED_MSG, exerciseFilePath);
+    }
+
+    public void printWorkoutFileNotFoundMessage() {
+        System.out.println();
+        System.out.println(WORKOUT_FILE_NOT_FOUND_MSG);
+    }
+
+    public void printWorkoutFileCreatedMessage(Path workoutFilePath) {
+        System.out.printf(WORKOUT_FILE_CREATED_MSG, workoutFilePath);
+    }
+
+    public void printEmptyLineOrStatus(boolean areAllDirectoryAndFilesPresent) {
+        if (areAllDirectoryAndFilesPresent) {
+            String status = getColorText(TextColor.COLOR_GREEN, ALL_DIRECTORY_AND_FILES_PRESENT);
+            System.out.println(" " + status);
+            System.out.println();
+        } else {
+            System.out.println();
+        }
     }
 }

@@ -9,6 +9,8 @@ import data.exercises.ExerciseList;
 import data.workouts.WorkoutList;
 import storage.FileManager;
 
+import java.io.IOException;
+
 import static commands.WorkoutCommand.CREATE_ACTION_KEYWORD;
 import static commands.WorkoutCommand.LIST_ACTION_KEYWORD;
 
@@ -23,11 +25,13 @@ public class Parser {
     private UI ui;
     private ExerciseList exerciseList;
     private WorkoutList workoutList;
+    private FileManager fileManager;
 
-    public Parser(UI ui, ExerciseList exerciseList, WorkoutList workoutList) {
+    public Parser(UI ui, ExerciseList exerciseList, WorkoutList workoutList, FileManager fileManager) {
         this.ui = ui;
         this.exerciseList = exerciseList;
         this.workoutList = workoutList;
+        this.fileManager = fileManager;
     }
 
     public UI getUi() {
@@ -43,7 +47,7 @@ public class Parser {
     }
 
     public Command parseUserInput(String userInput) throws ArrayIndexOutOfBoundsException,
-            InvalidCommandException {
+            InvalidCommandException, IOException {
         // Check for illegal characters
         boolean hasIllegalCharacters = checkInputForIllegalCharacters(userInput);
         String className = this.getClass().getSimpleName();
@@ -76,7 +80,7 @@ public class Parser {
     }
 
     public WorkoutCommand createWorkoutCommand(String userInput) throws ArrayIndexOutOfBoundsException,
-            InvalidCommandException {
+            InvalidCommandException, IOException {
         // Determine the action the user has entered
         String actionKeyword = userInput.split(" ", 3)[1];
         String arguments = null;
@@ -87,7 +91,7 @@ public class Parser {
         case LIST_ACTION_KEYWORD:
             break;
         }
-        return new WorkoutCommand(userInput, ui, workoutList, actionKeyword, arguments);
+        return new WorkoutCommand(userInput, fileManager, workoutList, actionKeyword, arguments);
     }
 
     public ExitCommand createExitCommand(String userInput) {

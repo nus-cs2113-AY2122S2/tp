@@ -25,24 +25,18 @@ public class WerkIt {
      * Initialises the components of the WerkIt! application, greets the user, and loads the
      * various files stored in the system's local disk into this instance of WerkIt! (if applicable).
      */
-    public WerkIt() {
+    public WerkIt() throws IOException {
         // Initialise Components
         this.ui = new UI();
         this.exerciseList = new ExerciseList();
         this.workoutList = new WorkoutList(getExerciseList());
-        this.parser = new Parser(getUI(), getExerciseList(), getWorkoutList());
         this.fileManager = new FileManager();
+        this.parser = new Parser(getUI(), getExerciseList(), getWorkoutList(), getFileManager());
 
         getUI().printGreetings();
 
         // Do file imports
-        getUI().printLoadingFileDataMessage();
-        try {
-            loadExerciseFile();
-            loadWorkoutFile();
-        } catch (UnknownFileException e) {
-            // TODO: handle exception
-        }
+        loadRequiredDirectoryAndFiles();
     }
 
     public UI getUI() {
@@ -65,6 +59,18 @@ public class WerkIt {
         return this.fileManager;
     }
 
+    private void loadRequiredDirectoryAndFiles() throws IOException {
+        getUI().printCheckingDirectoryAndFilesMessage();
+        getFileManager().checkAndCreateDirectoriesAndFiles();
+        getUI().printEmptyLineOrStatus(fileManager.checkIfAllDirectoryAndFilesExists());
+
+        getUI().printLoadingFileDataMessage();
+        loadExerciseFile();
+        if (getFileManager().isWasWorkoutsFileAlreadyMade()) {
+            loadWorkoutFile();
+        }
+    }
+
     /**
      * Continuously prompts the user for an input (and thereafter executing the necessary
      * actions) until the exit command is entered.
@@ -72,7 +78,7 @@ public class WerkIt {
      * Method adapted from Team Member Alan Low's iP codebase.
      * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/Sora.java
      */
-    public void startContinuousUserPrompt() {
+    public void startContinuousUserPrompt() throws IOException {
         boolean userWantsToExit = false;
         boolean isFirstPrompt = true;
 
@@ -100,28 +106,22 @@ public class WerkIt {
         getUI().printGoodbye();
     }
 
-    private void loadExerciseFile() throws UnknownFileException {
-        boolean isExerciseFileLoadSuccessful = false;
+    private void loadExerciseFile() throws IOException {
+        fileManager.loadExercisesFromFile(getExerciseList());
         try {
-            fileManager.loadExercisesFromFile(getExerciseList());
-            isExerciseFileLoadSuccessful = true;
-        } catch (IOException e) {
+            getUI().printFileLoadStatusMessage(FileManager.EXERCISE_FILENAME, true);
+        } catch (UnknownFileException e) {
             System.out.println(e.getMessage());
-        } finally {
-            getUI().printFileLoadStatusMessage(FileManager.EXERCISE_FILENAME,
-                    isExerciseFileLoadSuccessful);
         }
     }
 
-    private void loadWorkoutFile() throws UnknownFileException {
-        boolean isWorkoutFileLoadSuccessful = false;
+    private void loadWorkoutFile() throws IOException {
+        boolean isWorkoutFileLoadSuccessful;
+        isWorkoutFileLoadSuccessful = fileManager.loadWorkoutsFromFile(getWorkoutList());
         try {
-            isWorkoutFileLoadSuccessful = fileManager.loadWorkoutsFromFile(getWorkoutList());
-        } catch (IOException e) {
+            getUI().printFileLoadStatusMessage(FileManager.WORKOUT_FILENAME, isWorkoutFileLoadSuccessful);
+        } catch (UnknownFileException e) {
             System.out.println(e.getMessage());
-        } finally {
-            getUI().printFileLoadStatusMessage(FileManager.WORKOUT_FILENAME,
-                    isWorkoutFileLoadSuccessful);
         }
     }
 }

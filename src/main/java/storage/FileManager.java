@@ -4,11 +4,14 @@ import commands.WorkoutCommand;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
 import data.workouts.InvalidWorkoutException;
+import data.workouts.Workout;
 import data.workouts.WorkoutList;
 import werkit.UI;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -34,8 +37,7 @@ public class FileManager {
 
     // Delimiters for processing file data
     private static final String FILE_DATA_DELIMITER_REGEX = "\\|";
-    private static final String FILE_DATA_DELIMITER = "|";
-    private static final int EXPECTED_WORKOUT_PARAMETERS_PER_LINE = 2;
+    private static final String FILE_DATA_DELIMITER = " | ";
 
     private UI ui = new UI();
     private Path directoryPath;
@@ -46,7 +48,7 @@ public class FileManager {
     private boolean wasExercisesFileAlreadyMade = false;
     private boolean wasWorkoutsFileAlreadyMade = false;
 
-    public FileManager() {
+    public FileManager() throws IOException {
         String workingDirectory = System.getProperty(USER_WORKING_DIRECTORY_PROPERTY);
         this.directoryPath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME);
         this.exerciseFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, EXERCISE_FILENAME);
@@ -63,6 +65,105 @@ public class FileManager {
 
     public Path getWorkoutFilePath() {
         return this.workoutFilePath;
+    }
+
+    public boolean isWasDirectoryAlreadyMade() {
+        return this.wasDirectoryAlreadyMade;
+    }
+
+    public void setWasDirectoryAlreadyMade(boolean wasDirectoryAlreadyMade) {
+        this.wasDirectoryAlreadyMade = wasDirectoryAlreadyMade;
+    }
+
+    public boolean isWasExercisesFileAlreadyMade() {
+        return this.wasExercisesFileAlreadyMade;
+    }
+
+    public void setWasExercisesFileAlreadyMade(boolean wasExercisesFileAlreadyMade) {
+        this.wasExercisesFileAlreadyMade = wasExercisesFileAlreadyMade;
+    }
+
+    public boolean isWasWorkoutsFileAlreadyMade() {
+        return this.wasWorkoutsFileAlreadyMade;
+    }
+
+    public void setWasWorkoutsFileAlreadyMade(boolean wasWorkoutsFileAlreadyMade) {
+        this.wasWorkoutsFileAlreadyMade = wasWorkoutsFileAlreadyMade;
+    }
+
+    public boolean checkIfAllDirectoryAndFilesExists() {
+        if (!isWasDirectoryAlreadyMade()) {
+            return false;
+        }
+        if (!isWasExercisesFileAlreadyMade()) {
+            return false;
+        }
+        if (!isWasWorkoutsFileAlreadyMade()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void checkAndCreateDirectoriesAndFiles() throws IOException {
+        checkIfDataDirectoryAlreadyExists();
+        if (!isWasDirectoryAlreadyMade()) {
+            ui.printDirectoryNotFoundMessage();
+            createDataDirectory();
+            ui.printDirectoryCreatedMessage(getDirectoryPath());
+        }
+
+        checkIfExerciseFileAlreadyExists();
+        if (!isWasExercisesFileAlreadyMade()) {
+            ui.printExerciseFileNotFoundMessage();
+            createExerciseFile();
+            ui.printExerciseFileCreatedMessage(getExerciseFilePath());
+        }
+
+        checkIfWorkoutFileAlreadyExists();
+        if (!isWasWorkoutsFileAlreadyMade()) {
+            ui.printWorkoutFileNotFoundMessage();
+            createWorkoutFile();
+            ui.printWorkoutFileCreatedMessage(getWorkoutFilePath());
+        }
+    }
+
+    public void checkIfDataDirectoryAlreadyExists() {
+        if (Files.exists(getDirectoryPath())) {
+            setWasDirectoryAlreadyMade(true);
+        }
+    }
+
+    public void createDataDirectory() throws IOException {
+        Files.createDirectory(getDirectoryPath());
+    }
+
+    public void checkIfExerciseFileAlreadyExists() {
+        if (Files.exists(getExerciseFilePath())) {
+            setWasExercisesFileAlreadyMade(true);
+        }
+    }
+
+    public void createExerciseFile() throws IOException {
+        Files.createFile(getExerciseFilePath());
+
+        // Populate file with default exercises
+        FileWriter fileWriter = new FileWriter(getExerciseFilePath().toString());
+        for (String exerciseName : ExerciseList.DEFAULT_EXERCISE_LIST ) {
+            fileWriter.append(exerciseName);
+            fileWriter.append(System.lineSeparator());
+        }
+        fileWriter.close();
+    }
+
+    public void checkIfWorkoutFileAlreadyExists() {
+        if (Files.exists(getWorkoutFilePath())) {
+            setWasWorkoutsFileAlreadyMade(true);
+        }
+    }
+
+    public void createWorkoutFile() throws IOException {
+        Files.createFile(getWorkoutFilePath());
     }
 
     /**
@@ -91,8 +192,7 @@ public class FileManager {
                 System.out.println("File data error: insufficient parameters in workout data.");
                 hasNoErrorsDuringLoad = false;
             } catch (InvalidExerciseException | InvalidWorkoutException e) {
-                System.out.println("File data error:");
-                e.getMessage();
+                System.out.println("File data error:" + e.getMessage());
                 hasNoErrorsDuringLoad = false;
             }
         }
@@ -107,11 +207,40 @@ public class FileManager {
 
     private void addFileWorkoutToList(WorkoutList workoutList, String[] workoutFileDataLine)
             throws ArrayIndexOutOfBoundsException, InvalidExerciseException, InvalidWorkoutException {
-        String workoutName = workoutFileDataLine[0].trim();
-        String workoutReps = workoutFileDataLine[1].trim();
+        String workoutName = workoutFileDataLine[0];
+        String workoutReps = workoutFileDataLine[1];
 
         String userArguments = workoutName + " " + WorkoutCommand.CREATE_ACTION_REPS_KEYWORD + " " + workoutReps;
         workoutList.createAndAddWorkout(userArguments);
     }
 
+    public void writeNewWorkoutToFile(Workout newWorkout) throws IOException {
+        String workoutInFileFormat = convertWorkoutToFileDataFormat(newWorkout);
+
+        FileWriter fileWriter = new FileWriter(getWorkoutFilePath().toString(), true);
+        fileWriter.append(workoutInFileFormat);
+        fileWriter.append(System.lineSeparator());
+        fileWriter.close();
+    }
+
+    private String convertWorkoutToFileDataFormat(Workout workout) {
+        StringBuilder workoutInFileFormat = new StringBuilder();
+        workoutInFileFormat.append(workout.getExerciseName());
+        workoutInFileFormat.append(FILE_DATA_DELIMITER);
+        workoutInFileFormat.append(workout.getRepetitions());
+
+        return workoutInFileFormat.toString();
+    }
+
+    public void rewriteAllWorkoutsToFile(WorkoutList workoutList) throws IOException {
+        ArrayList<Workout> listOfWorkouts = workoutList.getWorkoutsList();
+
+        FileWriter fileWriter = new FileWriter(getWorkoutFilePath().toString());
+        for (Workout workout : listOfWorkouts) {
+            String workoutInFileFormat = convertWorkoutToFileDataFormat(workout);
+            fileWriter.append(workoutInFileFormat);
+            fileWriter.append(System.lineSeparator());
+        }
+        fileWriter.close();
+    }
 }
