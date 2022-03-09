@@ -35,11 +35,13 @@ public class TaskList {
      * Removes the specified task from the task list.
      * @param index The task number to be removed.
      */
-    public void removeTask(int index) throws NoSuchTaskException {
-        if (index >= list.size()) {
+    public Task removeTask(int index) throws NoSuchTaskException {
+        if (index >= list.size() || index < 0) {
             throw new NoSuchTaskException();
         }
+        Task task = getTask(index);
         list.remove(index);
+        return task;
     }
 
     /**
