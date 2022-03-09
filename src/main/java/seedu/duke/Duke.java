@@ -21,7 +21,7 @@ public class Duke {
         System.out.println("Hello " + SCANNER.nextLine());
 
         //check for bye message
-        while(true) {
+        while (true) {
             String input = getInput();
             Parser parser = new Parser(input);
 
