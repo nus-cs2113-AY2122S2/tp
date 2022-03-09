@@ -114,9 +114,8 @@ public class SessionCreateCommand extends Command {
         }
 
         int newSessionId = manager.getProfile().getNewSessionId();
-        // To be completed when session constructor is implemented
-        //  Session newSession = (newSessionId, this.sessionName, this.sessionDate, personList)
-        //  manager.getProfile().addSession(newSession);
+        Session newSession = new Session(this.sessionName, newSessionId, this.sessionDate, personList);
+        manager.getProfile().addSession(newSession);
         manager.getUi().printlnMessage(COMMAND_SUCCESS + newSessionId);
     }
 }
