@@ -7,6 +7,7 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,12 +26,6 @@ public class ActivityCreateCommand extends Command {
             + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /c <OVERALLCOST> [<OPTIONAL ARGS>]";
     private static final double ZERO_COST_PAID = 0;
     public static final int NO_COST = 0;
-    public static final String ERROR_INVOLVED_AND_COST_DIFFERENT_LENGTH =
-            "Seems like there is a discrepancy between number of people involved and the costs per person";
-    public static final String ERROR_HAS_BOTH_COST_AND_COST_LIST =
-            "Please only include either a total cost or a list of costs";
-    public static final String ERROR_MISSING_COST_AND_COST_LIST =
-            "Please include either a cost or a list of costs.";
 
     private int sessionId;
     private String activityName;
@@ -85,12 +80,14 @@ public class ActivityCreateCommand extends Command {
 
         boolean hasMissingCostAndMissingCostList = isMissingCostList && isMissingCost;
         if (hasMissingCostAndMissingCostList) {
-            return new InvalidCommand(ERROR_MISSING_COST_AND_COST_LIST + COMMAND_FORMAT);
+            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
+                    + COMMAND_FORMAT);
         }
 
         boolean hasBothCostAndCostList = !isMissingCostList && !isMissingCost;
         if (hasBothCostAndCostList) {
-            return new InvalidCommand(ERROR_HAS_BOTH_COST_AND_COST_LIST + COMMAND_FORMAT);
+            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
+                    + COMMAND_FORMAT);
         }
 
         try {
@@ -102,7 +99,8 @@ public class ActivityCreateCommand extends Command {
             int serviceCharge = Parser.parseServiceCharge(commandArgs);
             boolean hasDifferentLength = hasDifferentLength(cost, involvedList, costList);
             if (hasDifferentLength) {
-                return new InvalidCommand(ERROR_INVOLVED_AND_COST_DIFFERENT_LENGTH + COMMAND_FORMAT);
+                return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
+                        + COMMAND_FORMAT);
             }
             return new ActivityCreateCommand(sessionId, activityName, cost, payer, involvedList, costList, gst,
                     serviceCharge);
