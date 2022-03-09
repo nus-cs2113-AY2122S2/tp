@@ -21,7 +21,7 @@ Checking for required directory and files...
 	/home/runner/work/tp/tp/text-ui-test/werkItResources/workouts.txt
 
 Loading saved file data...
-- Exercises file	OK!
+- Exercises file	[32mOK![0m
 ----------------------------------------------------------------------
 Now then, what can I do for you today?
 (Need help? Type 'help' for a guide!)
