@@ -33,11 +33,5 @@ public class AddCommand extends Command {
             System.out.println("AMOUNT must be a number");
         }
         System.out.print(PrintStrings.LINE);
-// example usage of printing
-//        int indexOfList = 1;
-//        for (Expenditure i : Lists.expenditures) {
-//            System.out.println(indexOfList + ". " + i);
-//            indexOfList++;
-        //}
     }
 }

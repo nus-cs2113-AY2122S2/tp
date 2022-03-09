@@ -4,6 +4,7 @@ import seedu.mindmymoney.command.AddCommand;
 import seedu.mindmymoney.command.Command;
 import seedu.mindmymoney.command.HelpCommand;
 import seedu.mindmymoney.command.UpdateCommand;
+import seedu.mindmymoney.command.ListCommand;
 import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.helper.Functions;
 
@@ -38,6 +39,8 @@ public class Parser {
             return new AddCommand(parsedInput[Indexes.INDEX_OF_SECOND_ITEM_IN_STRING]);
         case "update":
             return new UpdateCommand(parsedInput[Indexes.INDEX_OF_SECOND_ITEM_IN_STRING]);
+        case "list":
+            return new ListCommand();
         default:
             return new HelpCommand(false);
         }
