@@ -5,17 +5,16 @@ import seedu.mindmymoney.data.Lists;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
 public class ListCommand extends Command {
-    public ListCommand() {
-    };
+    public ListCommand() {}
 
     /**
-     * Prints user's current list of expenditures
+     * Prints user's current list of expenditures.
      */
     @Override
     public void executeCommand() {
         if (Lists.expenditures.size() == 0) {
-            System.out.println(PrintStrings.LINE +
-                    "Your list is currently empty! Try adding expenditures first using the add command"
+            System.out.println(PrintStrings.LINE
+                    + "Your list is currently empty! Try adding expenditures first using the add command"
                     + System.lineSeparator() + PrintStrings.LINE);
         } else {
             System.out.println(PrintStrings.LINE);
