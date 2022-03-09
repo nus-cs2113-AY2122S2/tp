@@ -17,10 +17,14 @@ public class MindMyMoney {
         ui.printIntro();
 
         while (true) {
-            String input = ui.readInput();
-            Parser p = new Parser(input);
-            Command c = p.parseCommand();
-            c.executeCommand();
+            try {
+                String input = ui.readInput();
+                Parser p = new Parser(input);
+                Command c = p.parseCommand();
+                c.executeCommand();
+            } catch (MindMyMoneyException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
