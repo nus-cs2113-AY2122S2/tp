@@ -1,5 +1,4 @@
 Welcome to Restaurant Information Programme!
 (0) Exit Application
 ******************************
-Enter choice:
-Exiting application...
+Enter choice: Exiting application...
