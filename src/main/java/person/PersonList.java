@@ -17,6 +17,7 @@ public class PersonList {
 
     public static void addPerson(String name) {
         person = new Person(name);
-        personList.add(Person);
+        personList.add(person);
+        numberOfMembers++;
     }
 }
