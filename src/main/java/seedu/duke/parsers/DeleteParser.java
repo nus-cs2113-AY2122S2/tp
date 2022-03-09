@@ -26,16 +26,17 @@ public class DeleteParser extends Parser {
         HashMap<String, String> parsedArguments = parseString(userInput);
         String taskNumberString = parsedArguments.get(TASK_NUMBER);
         String moduleCode = parsedArguments.get(MODULE_CODE);
-        int taskNumber;
-        try {
-            taskNumber = Integer.parseInt(taskNumberString);
-        } catch (NumberFormatException e) {
-            throw new ParseException();
-        }
         if (!moduleCode.isBlank()) {
             return new DeleteCommand(moduleCode);
         }
+
         if (!taskNumberString.isBlank()) {
+            int taskNumber;
+            try {
+                taskNumber = Integer.parseInt(taskNumberString);
+            } catch (NumberFormatException e) {
+                throw new ParseException();
+            }
             return new DeleteCommand(taskNumber);
         }
         throw new ModHappyException();
