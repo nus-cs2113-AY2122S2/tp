@@ -20,6 +20,11 @@ public class SessionSummaryCommand extends Command {
     private int sessionId;
 
     // MISC CONSTANTS
+    public static final String SUMMARY_HEADER = "Transactions --";
+    public static final String TEMP_ERROR_INVALID_PERSONCOSTPAIR_LIST =
+            "Program has faced some issue : settleAllTransactions, personCostPairList is invalid";
+    public static final String TEMP_ERROR_SETTLEALLTRANSACTION_METHOD_LOGIC_INVALID =
+            "Program has faced some issue : settleAllTransactions, payer, receiver logic is invalid";
     private static final int ZERO_INDEXING_OFFSET = 1;
     private static final double SMALL_DIFFERENCE_LIMIT = 0.0001;
 
@@ -60,6 +65,62 @@ public class SessionSummaryCommand extends Command {
         return isValueSmall(total);
     }
     
+    private String settleTransaction(PersonCostPair payer, PersonCostPair receiver) {
+        double payerCost = Math.abs(payer.getCost());
+        double receiverAmount = Math.abs(receiver.getCost());
+        
+        // Equal costs
+        if (isDifferenceSmall(payerCost, receiverAmount)) {
+            payer.setProcessed(true);
+            receiver.setProcessed(true);
+            return payer.getPerson().getName() + " has to pay " + receiver.getPerson().getName()
+                    + " $" + String.format("%.2f", payerCost);
+        }
+        
+        // Payer has less debt than receiver has to collect
+        if (payerCost < receiverAmount) {
+            payer.setProcessed(true);
+            receiver.setCost(receiverAmount - payerCost);
+            return payer.getPerson().getName() + " has to pay " + receiver.getPerson().getName()
+                    + " $" + String.format("%.2f", payerCost);
+        }
+        
+        // Payer has more debt than receiver has to collect
+        receiver.setProcessed(true);
+        payer.setCost(receiverAmount - payerCost);
+        return payer.getPerson().getName() + " has to pay " + receiver.getPerson().getName()
+                + " $" + String.format("%.2f", receiverAmount);
+    }
+
+    private String settleAllTransactions(ArrayList<PersonCostPair> personCostPairList) {
+        StringBuilder sb = new StringBuilder(SUMMARY_HEADER);
+        personCostPairList.sort(PersonCostPair::compareTo);
+        int payerIndex = 0;
+        int receiverIndex = personCostPairList.size() - ZERO_INDEXING_OFFSET;
+        if (!isPersonCostPairListValid(personCostPairList)) {
+            return TEMP_ERROR_INVALID_PERSONCOSTPAIR_LIST;
+        }
+
+        while (payerIndex < receiverIndex) {
+            PersonCostPair payer = personCostPairList.get(payerIndex);
+            PersonCostPair receiver = personCostPairList.get(payerIndex);
+            if (payer.getCost() > receiver.getCost()) {
+                return TEMP_ERROR_SETTLEALLTRANSACTION_METHOD_LOGIC_INVALID;
+            }
+            String output = settleTransaction(payer, receiver);
+            sb.append('\n').append(output);
+            
+            if (payer.isProcessed()) {
+                payerIndex += 1;
+            }
+            if (receiver.isProcessed()) {
+                receiverIndex -= 1;
+            }
+        }
+
+        return sb.toString();
+    }
+
     /**
      * Runs the command with the session identifier as provided by the user input and prints a
      * summary of expenditure for the session specified by the session identifier.
