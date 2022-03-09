@@ -11,7 +11,13 @@ public class Ui {
     private static final String PARTITION_LINE = "______________________________"
             + "______________________________";
     private static final String LS = System.lineSeparator();
-    private static final String LOGO = "";
+    private static final String LOGO = "  _____ __ __    ___  ____   ____   ____  _____ _____\n"
+        + " / ___/|  |  |  /  _]|    \\ |    \\ /    |/ ___// ___/\n"
+        + "(   \\_ |  |  | /  [_ |  D  )|  o  )  o  (   \\_(   \\_ \n"
+        + " \\__  ||  _  ||    _]|    / |   _/|     |\\__  |\\__  |\n"
+        + " /  \\ ||  |  ||   [_ |    \\ |  |  |  _  |/  \\ |/  \\ |\n"
+        + " \\    ||  |  ||     ||  .  \\|  |  |  |  |\\    |\\    |\n"
+        + "  \\___||__|__||_____||__|\\_||__|  |__|__| \\___| \\___|";
 
 
     /**
