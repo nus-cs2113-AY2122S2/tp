@@ -24,7 +24,6 @@ public class TextUi {
         this.out = System.out;
     }
 
-
     /**
      * Formats the provided message.
      *
@@ -44,28 +43,28 @@ public class TextUi {
     }
 
     /**
-     * Display a message.
+     * Displays a message.
      */
     public void showMessage(Object message) {
         out.println(formatMessage(message.toString()));
     }
 
     /**
-     * Display the welcome message.
+     * Displays the welcome message.
      */
     public void showHelloMessage() {
         showMessage(HELLO_MESSAGE);
     }
 
     /**
-     * Display the goodbye message.
+     * Displays the goodbye message.
      */
     public void showGoodByeMessage() {
         showMessage(GOOD_BY_MESSAGE);
     }
 
     /**
-     * Display the initialisation message.
+     * Displays the initialisation message.
      */
     public void showInitFailedMessage() {
         showMessage(INITIAL_FAILED_MESSAGE);
