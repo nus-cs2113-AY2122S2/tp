@@ -13,11 +13,12 @@ import seedu.splitlah.util.PersonCostPair;
 import java.util.ArrayList;
 
 /**
- * Represents a command object that when run, produces a summary of expenditure for that session.
+ * Represents a command object that produces a summary of expenditure for a specified Session object.
  *
  * @author Warren
  */
 public class SessionSummaryCommand extends Command {
+    
     public static final String COMMAND_TEXT = "session /summary";
 
     public static final String COMMAND_FORMAT = "Syntax: session /summary /sid <SESSIONID>";
@@ -33,6 +34,15 @@ public class SessionSummaryCommand extends Command {
     private static final int ZERO_INDEXING_OFFSET = 1;
     private static final double SMALL_DIFFERENCE_LIMIT = 0.0001;
 
+    /**
+     * Default constructor, sets sessionId as specified by the provided value.
+     *
+     * @param sessionId The session identifier number that uniquely identifies a session.
+     */
+    public SessionSummaryCommand(int sessionId) {
+        this.sessionId = sessionId;
+    }
+    
     public static Command prepare(String commandArgs) {
         try {
             int sessionId = Parser.parseSessionId(commandArgs);
@@ -148,14 +158,5 @@ public class SessionSummaryCommand extends Command {
         ArrayList<PersonCostPair> personCostPairList = getPersonCostPairList(personList);
         // check if NET 0
         String output = processAllTransactions(personCostPairList);
-    }
-
-    /**
-     * Default constructor, sets sessionId as specified by the provided value.
-     *
-     * @param sessionId The session identifier number that uniquely identifies a session.
-     */
-    public SessionSummaryCommand(int sessionId) {
-        this.sessionId = sessionId;
     }
 }

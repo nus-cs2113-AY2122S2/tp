@@ -18,12 +18,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents an interpreter that interprets different parts of the user input
- * into data that can be understood by the program.
+ * Represents a parser that interprets the user input into data that can be understood by the program.
  * 
  * @author Warren
  */
 public class Parser {
+    
     // DELIMITERS
     private static final String NAME_DELIMITER = "/n";
     private static final String PERSON_LIST_DELIMITER = "/pl";

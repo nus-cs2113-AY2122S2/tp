@@ -13,8 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Represents a command that creates a session from user input
- * and stores into the profile object.
+ * Represents a command that creates a Session object from user input and stores it in the Profile object.
  *
  * @author Roy
  */
@@ -26,13 +25,12 @@ public class SessionCreateCommand extends Command {
             "Syntax: session /create /n <SESSIONNAME> /d <SESSIONDATE> /pl <NAME1 NAME2…>";
 
     private static final String COMMAND_SUCCESS =
-            "The session was created successfully with session id of :";
+            "The session was created successfully with session id of: ";
 
     private String sessionName;
     private String[] personNames;
     private LocalDate sessionDate;
-
-
+    
     public SessionCreateCommand(String sessionName, String[] personNames, LocalDate date) {
         this.sessionName = sessionName;
         this.personNames = personNames;
@@ -76,7 +74,7 @@ public class SessionCreateCommand extends Command {
      *
      * @param commandArgs The user's arguments.
      * @return A SessionCreateCommand object if session name, session date and person list were found in user arguments,
-     *      an InvalidCommand object otherwise.
+     *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
         try {

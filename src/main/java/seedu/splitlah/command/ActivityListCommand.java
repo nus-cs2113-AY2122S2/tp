@@ -3,7 +3,7 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Manager;
 
 /**
- * Represents an ActivityListCommand which display activity ids, name, and totalCost of each activity within session.
+ * Represents a command which displays the details of each Activity object within a Session object.
  */
 public class ActivityListCommand extends Command {
 
@@ -22,6 +22,7 @@ public class ActivityListCommand extends Command {
 
     /**
      * Runs the command.
+     * 
      * @param manager A Manager object that manages the TextUI and Profile object.
      */
     @Override
