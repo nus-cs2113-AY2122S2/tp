@@ -30,7 +30,7 @@ public class Profile {
      * Checks if there is a session exists with the same name.
      *
      * @param sessionName A String object that represents the session name.
-     * @return A True if a session exists with the same name, false otherwise.
+     * @return True if a session exists with the same name, false otherwise.
      */
     public boolean hasSessionName(String sessionName) {
         for (Session session : sessionList) {
