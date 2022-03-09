@@ -288,7 +288,7 @@ public class Parser {
         case SessionSummaryCommand.COMMAND_TEXT:
             return SessionSummaryCommand.prepare(remainingArgs);
         case SessionDeleteCommand.COMMAND_TEXT:
-            // FALLTHROUGH
+            return SessionDeleteCommand.prepare(remainingArgs);
         case SessionListCommand.COMMAND_TEXT:
             // FALLTHROUGH
         case ActivityCreateCommand.COMMAND_TEXT:
