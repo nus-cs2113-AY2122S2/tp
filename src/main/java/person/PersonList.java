@@ -21,6 +21,10 @@ public class PersonList {
         numberOfMembers++;
     }
 
+    public static void removePerson(int index) {
+        personList.remove(index);
+    }
+
     public static int getRemain() {
         float sum = 0;
         for (Person person: personList) {
