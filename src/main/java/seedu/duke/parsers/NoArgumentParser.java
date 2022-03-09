@@ -19,7 +19,10 @@ public class NoArgumentParser extends Parser {
 
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
-        // Since NoArgumentParser-related commands take no user input, we can ignore the parameter
+        // NoArgumentParser commands strictly take no input.
+        if (userInput.length() != 0) {
+            throw new ParseException();
+        }
         switch (myCommandWord) {
         case (EXIT_COMMAND_WORD):
             return new ExitCommand();

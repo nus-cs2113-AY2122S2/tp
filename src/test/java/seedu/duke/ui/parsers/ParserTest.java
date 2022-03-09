@@ -150,7 +150,20 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_listCommand() {
+    public void parse_listCommand_unnecessaryArgs() {
+        final String testString = "list blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_listCommand_parsedCorrectly() {
         final String testString = "list";
         try {
             Command c = parser.parseCommand(testString);
@@ -161,7 +174,20 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_exitCommand() {
+    public void parse_exitCommand_unnecessaryArgs() {
+        final String testString = "exit blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_exitCommand_parsedCorrectly() {
         final String testString = "exit";
         try {
             Command c = parser.parseCommand(testString);
