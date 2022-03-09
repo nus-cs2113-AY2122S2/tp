@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
+import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.MarkCommand;
@@ -12,6 +13,7 @@ import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.parsers.ModHappyParser;
 import seedu.duke.tasks.Task;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -138,6 +140,30 @@ public class ParserTest {
             assertNotEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
             assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
             assertNotEquals("-t-t-t t-t-t /t/t -d -d -d", t.getEstimatedWorkingTime());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_deleteCommand_withTaskOnly_parsedCorrectly() {
+        final String testString = "del /t 1";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof DeleteCommand);
+            assertEquals(1, ((DeleteCommand) c).getTaskNumber());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_deleteCommand_withModuleOnly_parsedCorrectly() {
+        final String testString = "del /m CS2113T";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof DeleteCommand);
+            assertEquals("CS2113T", ((DeleteCommand) c).getModuleCode());
         } catch (Exception e) {
             fail();
         }

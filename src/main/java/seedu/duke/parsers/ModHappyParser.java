@@ -65,6 +65,8 @@ public class ModHappyParser extends Parser {
             return new NoArgumentParser(commandWord);
         case (ADD_COMMAND_WORD):
             return new AddParser();
+        case (DELETE_COMMAND_WORD):
+            return new DeleteParser();
         case (MARK_COMMAND_WORD):
             return new MarkParser();
         default:

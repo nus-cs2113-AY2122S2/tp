@@ -23,9 +23,9 @@ public class AddParser extends Parser {
     // (\s+(-t\s+\"(?<estimatedWorkingTime>([^\"]*))\")(?=(\s+-d\s+)|$))?|\/m\s+(?<moduleCode>\w+?(?=(\s+-d\s+)|$))
     // (\s+(-d\s+\"(?<moduleDescription>.+)\"))?)
     // TODO: Add support for -mod argument when integrating Task and Module classes with one another
-    private static final String ADD_FORMAT = "^\\s*(\\/t\\s+(?<taskName>.+?(?=\\s+-d\\s+|\\s+-t\\s+|$))"
+    private static final String ADD_FORMAT = "\\s*(\\/t\\s+(?<taskName>.+?(?=\\s+-d\\s+|\\s+-t\\s+|$))"
             + "(\\s+(-d\\s+\\\"(?<taskDescription>([^\\\"]*))\\\")(?=(\\s+-t\\s+)|$))?(\\s+(-t\\s+\\\""
-            + "(?<estimatedWorkingTime>([^\\\"]*))\\\")(?=(\\s+-d\\s+)|$))?|\\/m\\s+"
+            + "(?<estimatedWorkingTime>([^\\\"]*))\\\"))?|\\/m\\s+"
             + "(?<moduleCode>\\w+?(?=(\\s+-d\\s+)|$))(\\s+(-d\\s+\\\"(?<moduleDescription>.+)\\\"))?)";
 
     public AddParser() {
