@@ -13,8 +13,8 @@ public class AddCommand extends Command {
     private static final String MODULE_ALREADY_EXISTS = "A module with that name already exists...";
 
     private final boolean isAddTask;
-    private Task newTask;
-    private Module newModule;
+    private Task newTask = null;
+    private Module newModule = null;
 
     public AddCommand(String name, String description, boolean isTask) {
         if (isTask) {
@@ -24,6 +24,14 @@ public class AddCommand extends Command {
             newModule = new Module(name, description);
             isAddTask = false;
         }
+    }
+
+    public Task getNewTask() {
+        return newTask;
+    }
+
+    public Module getNewModule() {
+        return newModule;
     }
 
     /**

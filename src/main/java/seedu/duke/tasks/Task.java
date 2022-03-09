@@ -1,10 +1,10 @@
 package seedu.duke.tasks;
 
 public class Task {
-    public static String ICON_UNCOMPLETED = "( )";
-    public static String ICON_COMPLETED = "(X)";
-    public static String TASK_STRING_NO_DESC = "%s %s";
-    public static String TASK_STRING_WITH_DESC = "%s %s (%s)";
+    public static final String ICON_UNCOMPLETED = "( )";
+    public static final String ICON_COMPLETED = "(X)";
+    public static final String TASK_STRING_NO_DESC = "%s %s";
+    public static final String TASK_STRING_WITH_DESC = "%s %s (%s)";
 
     private boolean isTaskDone;
     private String taskName;
@@ -14,6 +14,14 @@ public class Task {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.isTaskDone = false;
+    }
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public String getTaskDescription() {
+        return taskDescription;
     }
 
     /**
