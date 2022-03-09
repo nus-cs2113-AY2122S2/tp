@@ -9,11 +9,11 @@ public class PatientList {
 
     public Patient getPatient(String nric) {
         for (Patient patient : patientList) {
-            if (patient.getNRIC().equals(nric)){
+            if (patient.getNric().equals(nric)) {
                 return patient;
-           }
-       }
-       return null;
+            }
+        }
+        return null;
     }
 
     //view particular patient

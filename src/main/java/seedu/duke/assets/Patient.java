@@ -20,7 +20,7 @@ public class Patient {
         this.dateAdmission = dateAdmission;
     }
 
-    public String getNRIC() {
+    public String getNric() {
         return nric;
     }
 
