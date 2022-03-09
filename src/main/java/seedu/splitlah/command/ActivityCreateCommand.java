@@ -28,6 +28,7 @@ public class ActivityCreateCommand extends Command {
     public static final int NO_COST_LIST = 0;
     public static final String ERROR_INVOLVED_AND_COST_DIFFERENT_LENGTH =
             "Seems like there is a discrepancy between number of people involved and the costs per person";
+    public static final String ERROR_HAS_BOTH_COST_AND_COST_LIST = "Please only include either a total cost or a list of costs";
 
     private int sessionId;
     private String activityName;
@@ -72,9 +73,13 @@ public class ActivityCreateCommand extends Command {
             double[] costList = Parser.parseCostList(commandArgs);
             int gst = Parser.parseGst(commandArgs);
             int serviceCharge = Parser.parseServiceCharge(commandArgs);
-            boolean isInvalidCommand = hasDifferentLength(cost, involvedList, costList);
-            if (isInvalidCommand) {
+            boolean hasDifferentLength = hasDifferentLength(cost, involvedList, costList);
+            if (hasDifferentLength) {
                 return new InvalidCommand(ERROR_INVOLVED_AND_COST_DIFFERENT_LENGTH + COMMAND_FORMAT);
+            }
+            boolean hasBothCostAndCostList = hasBothCostAndCostList(cost, costList);
+            if (hasBothCostAndCostList) {
+                return new InvalidCommand(ERROR_HAS_BOTH_COST_AND_COST_LIST + COMMAND_FORMAT);
             }
             return new ActivityCreateCommand(sessionId, activityName, cost, payer, involvedList, costList, gst,
                     serviceCharge);
