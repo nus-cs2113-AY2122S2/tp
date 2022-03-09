@@ -48,8 +48,8 @@ public class ActivityCreateCommand extends Command {
      * @param gst The gst to be included for the cost of the activity.
      * @param serviceCharge The service charge to be included for the cost of the activity.
      */
-    public ActivityCreateCommand(int sessionId, String activityName, double totalCost, String payer, String[] involvedList,
-                                 double[] costList, int gst, int serviceCharge) {
+    public ActivityCreateCommand(int sessionId, String activityName, double totalCost, String payer,
+                                 String[] involvedList, double[] costList, int gst, int serviceCharge) {
         this.sessionId = sessionId;
         this.activityName = activityName;
         this.totalCost = totalCost;
