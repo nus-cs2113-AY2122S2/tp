@@ -1,19 +1,14 @@
 package data.exercises;
 
-import werkIt.UI;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static textcolors.TextColor.COLOR_YELLOW;
-
 public class ExerciseList {
     private static final String EXERCISE_FILE_PATH = "exercises/Exercises.txt";
     private static final File EXERCISE_FILE = new File(EXERCISE_FILE_PATH);
     private final ArrayList<String> exercises = new ArrayList<>();
-    private final UI ui = new UI();
     private int numberOfExercises = 0;
 
     /**
@@ -32,15 +27,10 @@ public class ExerciseList {
     /**
      * Prints the list of exercises starting with their index.
      */
-    public void printExerciseList() {
-        System.out.println("There are " + getNumberOfExercises() + " exercises available.");
-        System.out.println("Here is the list of exercises: ");
-        ui.printLine();
+    protected void printExerciseList() {
         for (int i = 0; i < numberOfExercises; i++) {
-            ui.printColorText(COLOR_YELLOW, (i + 1) + ". " + exercises.get(i));
+            System.out.println((i + 1) + ". " + exercises.get(i));
         }
-        ui.printLine();
-        System.out.println("End of exercise list.");
     }
 
     /**

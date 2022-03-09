@@ -148,8 +148,6 @@ public class UI {
     public void printHelpMessage() {
         printListHelp();
         printLine();
-        printExerciseListHelp();
-        printLine();
         printWorkoutAddHelp();
         printLine();
         printWorkoutDeleteHelp();
@@ -208,14 +206,5 @@ public class UI {
         System.out.println("\t To exit werkIt, please enter: ");
         printColorText(COLOR_YELLOW, "\t exit");
         System.out.println("\t This will exit werkIt.");
-    }
-
-    /**
-     * Prints help message for 'exercise /list' command.
-     */
-    public void printExerciseListHelp() {
-        System.out.println("\t To view all exercises available, please enter:");
-        printColorText(COLOR_YELLOW, "\t exercise /list");
-        System.out.println("\t This will print all the exercises available.");
     }
 }
