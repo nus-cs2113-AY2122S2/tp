@@ -10,7 +10,7 @@ public class TextUi {
     private static final String LS = System.lineSeparator();
     private static final String LINE = "____________________________________________________________";
     private static final String HELLO_MESSAGE = "Hello, this is Mod Happy (○'◡'○)ﾉ";
-    private static final String GOOD_BY_MESSAGE = "See You Later ヾ(*´▽'*)ﾉ";
+    private static final String GOOD_BY_MESSAGE = "See you later ヾ(*´▽'*)ﾉ";
     private static final String INITIAL_FAILED_MESSAGE = "Failed to start Mod Happy (..•˘_˘•..)";
 
 

@@ -14,8 +14,12 @@ import seedu.duke.exceptions.ParseException;
  * Represents a Parser that parse a {@code Command}.
  */
 public abstract class Parser {
+    protected static final String EXIT_COMMAND_WORD = "exit";
+    protected static final String ADD_COMMAND_WORD = "add";
+    protected static final String LIST_COMMAND_WORD = "list";
+    protected static final String MARK_COMMAND_WORD = "mark";
+    protected static final String EMPTY_STRING = "";
 
-    private static final String NULL_STRING = "";
     protected String commandFormat;
     protected HashMap<String, String> parsedCommand;
     protected HashSet<String> groupNames;
@@ -44,7 +48,7 @@ public abstract class Parser {
             try {
                 parsedCommand.put(groupName.toString(), matcher.group(groupName.toString()).trim());
             } catch (Exception e) {
-                parsedCommand.put(groupName.toString(), NULL_STRING);
+                parsedCommand.put(groupName.toString(), EMPTY_STRING);
             }
         }
         return parsedCommand;
