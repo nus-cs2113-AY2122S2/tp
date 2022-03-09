@@ -71,7 +71,8 @@ public class ParserTest {
 
     @Test
     public void parse_addCommand_withDescription_parsedCorrectly() {
-        final String testString = "add /t /t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d   -d \"-d-d-d /t /m -d -d  \"";
+        final String testString = "add /t /t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d   "
+                + "-d \"-d-d-d /t /m -d -d  \"";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -87,8 +88,9 @@ public class ParserTest {
 
     @Test
     public void parse_addCommand_withDescription_withWorkingTime_parsedCorrectly() {
-        final String testString = "add /t /t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d   -d \"-d-d-d /t /m -d -d  \" -t '-t-" +
-                "t-t t-t-t /t/t -d -d -d '";
+        final String testString = "add /t /t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d   "
+                + "-d \"-d-d-d /t /m -d -d  \" -t '-t-"
+                + "t-t t-t-t /t/t -d -d -d '";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -123,8 +125,9 @@ public class ParserTest {
 
     @Test
     public void parse_addCommand_withDescription_withWorkingTime_parsedIncorrectly() {
-        final String testString = "add /t /t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d   -d '-d-d-d /t /m -d -d  ' -t \"-t-" +
-                "t-t t-t-t /t/t -d -d -d \"";
+        final String testString = "add /t /t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d   "
+                + "-d '-d-d-d /t /m -d -d  ' -t \"-t-"
+                + "t-t t-t-t /t/t -d -d -d \"";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
