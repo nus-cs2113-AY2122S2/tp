@@ -20,12 +20,13 @@ public class StudyCommand extends Command {
             + "Otherwise, feel free to choose your own timer with \n'start /custom <timer_duration>'.");
         ui.showLine();
         String userInput = ui.readCommand();
-        ui.showLine();
         while (!userInput.contains("leave")) {
+            ui.showLine();
             Parser.parseStudyMode(userInput, ui);
             ui.showLine();
             userInput = ui.readCommand();
         }
+        ui.showLine();
         ui.showToUser("leaving study session...\n"
             + "Welcome back to the main session! How can I help you?");
     }

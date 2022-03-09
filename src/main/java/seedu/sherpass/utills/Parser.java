@@ -364,7 +364,6 @@ public class Parser {
     }
 
     public static void parseStudyMode(String rawUserInput, Ui ui) {
-        ui.showLine();
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
