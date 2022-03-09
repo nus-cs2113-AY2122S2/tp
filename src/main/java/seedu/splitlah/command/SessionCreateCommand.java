@@ -2,6 +2,7 @@ package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
+import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
@@ -9,8 +10,6 @@ import seedu.splitlah.ui.Message;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 
 /**
@@ -61,10 +60,11 @@ public class SessionCreateCommand extends Command {
      * @return True if it contains duplicates, false otherwise.
      */
     private boolean hasNameDuplicates() {
-        Set<String> set = new HashSet<>();
+        Set<String> nameSet = new HashSet<>();
         for (String name : personNames) {
             String nameToBeAdded = name.toLowerCase();
-            if (set.add(nameToBeAdded) == false) {
+            // TODO: Check if string is an actual name.
+            if (!nameSet.add(nameToBeAdded)) {
                 return true;
             }
         }
@@ -114,9 +114,8 @@ public class SessionCreateCommand extends Command {
         }
 
         int newSessionId = manager.getProfile().getNewSessionId();
-        // To be completed when session constructor is implemented
-        //  Session newSession = (newSessionId, this.sessionName, this.sessionDate, personList)
-        //  manager.getProfile().addSession(newSession);
+        Session newSession = new Session(this.sessionName, newSessionId, this.sessionDate, personList);
+        manager.getProfile().addSession(newSession);
         manager.getUi().printlnMessage(COMMAND_SUCCESS + newSessionId);
     }
 }
