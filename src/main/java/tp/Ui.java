@@ -3,7 +3,8 @@ package tp;
 import java.util.Scanner;
 
 public class Ui {
-    public static String boundary = "____________________________________________________________" + System.lineSeparator();
+    public static String boundary = "____________________________________________________________"
+                                            + System.lineSeparator();
 
     // Prints welcome message.
     public void sayHello() {

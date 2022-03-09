@@ -7,7 +7,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class AppointmentList {
-    public static String boundary = "____________________________________________________________" + System.lineSeparator();
+    public static String boundary = "____________________________________________________________"
+                                            + System.lineSeparator();
     protected ArrayList<Appointment> appointments = new ArrayList<>();
     protected int countAppointment;
 
@@ -48,7 +49,7 @@ public class AppointmentList {
     }
 
     /**
-     * Deletes an appointment from the list
+     * Deletes an appointment from the list.
      *
      * @param index Index of the appointment to be deleted.
      */

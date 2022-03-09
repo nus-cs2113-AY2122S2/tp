@@ -6,7 +6,8 @@ import tp.person.Person;
 import java.util.ArrayList;
 
 public class PatientList {
-    public static String boundary = "____________________________________________________________" + System.lineSeparator();
+    public static String boundary = "____________________________________________________________"
+                                            + System.lineSeparator();
     protected ArrayList<Patient> patients = new ArrayList<>();
     protected int countPatient;
 
