@@ -184,6 +184,13 @@ public class ActivityCreateCommand extends Command {
         return cost * extraCharges;
     }
 
+    /**
+     * Returns the extra charges to be added to the costs of the activity.
+     *
+     * @param gst The gst to be added to the costs of the activity.
+     * @param serviceCharge The service charge to be added to the costs of the activity.
+     * @return A double representing the extra charges to be included in the costs of the activity.
+     */
     private static double getExtraCharges(int gst, int serviceCharge) {
         double gstMultiplier = 1 + (double)gst / 100;
         double serviceChargeMultiplier = 1 + (double)serviceCharge / 100;
