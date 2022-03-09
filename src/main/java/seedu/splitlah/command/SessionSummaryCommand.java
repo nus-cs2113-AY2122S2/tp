@@ -27,9 +27,9 @@ public class SessionSummaryCommand extends Command {
     // MISC CONSTANTS
     public static final String SUMMARY_HEADER = "Transactions --";
     public static final String TEMP_ERROR_INVALID_PERSONCOSTPAIR_LIST =
-            "Program has faced some issue : settleAllTransactions, personCostPairList is invalid";
-    public static final String TEMP_ERROR_SETTLEALLTRANSACTION_METHOD_LOGIC_INVALID =
-            "Program has faced some issue : settleAllTransactions, payer, receiver logic is invalid";
+            "Program has faced some issue : processAllTransactions, personCostPairList is invalid";
+    public static final String TEMP_ERROR_PROCESSALLTRANSACTION_METHOD_LOGIC_INVALID =
+            "Program has faced some issue : processAllTransactions, payer, receiver logic is invalid";
     private static final int ZERO_INDEXING_OFFSET = 1;
     private static final double SMALL_DIFFERENCE_LIMIT = 0.0001;
 
@@ -70,7 +70,7 @@ public class SessionSummaryCommand extends Command {
         return isValueSmall(total);
     }
     
-    private String settleTransaction(PersonCostPair payer, PersonCostPair receiver) {
+    private String processTransaction(PersonCostPair payer, PersonCostPair receiver) {
         double payerCost = Math.abs(payer.getCost());
         double receiverAmount = Math.abs(receiver.getCost());
         
@@ -97,7 +97,7 @@ public class SessionSummaryCommand extends Command {
                 + " $" + String.format("%.2f", receiverAmount);
     }
 
-    private String settleAllTransactions(ArrayList<PersonCostPair> personCostPairList) {
+    private String processAllTransactions(ArrayList<PersonCostPair> personCostPairList) {
         StringBuilder sb = new StringBuilder(SUMMARY_HEADER);
         personCostPairList.sort(PersonCostPair::compareTo);
         int payerIndex = 0;
@@ -110,9 +110,9 @@ public class SessionSummaryCommand extends Command {
             PersonCostPair payer = personCostPairList.get(payerIndex);
             PersonCostPair receiver = personCostPairList.get(payerIndex);
             if (payer.getCost() > receiver.getCost()) {
-                return TEMP_ERROR_SETTLEALLTRANSACTION_METHOD_LOGIC_INVALID;
+                return TEMP_ERROR_PROCESSALLTRANSACTION_METHOD_LOGIC_INVALID;
             }
-            String output = settleTransaction(payer, receiver);
+            String output = processTransaction(payer, receiver);
             sb.append('\n').append(output);
             
             if (payer.isProcessed()) {
@@ -147,7 +147,7 @@ public class SessionSummaryCommand extends Command {
         ArrayList<Person> personList = session.getPersonList();
         ArrayList<PersonCostPair> personCostPairList = getPersonCostPairList(personList);
         // check if NET 0
-        String output = settleAllTransactions(personCostPairList);
+        String output = processAllTransactions(personCostPairList);
     }
 
     /**
