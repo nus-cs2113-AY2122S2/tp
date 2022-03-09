@@ -78,4 +78,12 @@ public abstract class Message {
             "There are no sessions currently stored.";
     public static final String ERROR_PROFILE_SESSION_NOT_IN_LIST =
             "The session that you have specified was not found.";
+
+    //Activity Create Command
+    public static final String ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH =
+            "There seems to be a discrepancy between number of people involved and the costs per person";
+    public static final String ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST =
+            "Please only include either a total cost or a list of costs";
+    public static final String ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST =
+            "Please include either a cost or a list of costs.";
 }
