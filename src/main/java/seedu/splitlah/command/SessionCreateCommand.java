@@ -23,6 +23,7 @@ public class SessionCreateCommand extends Command {
 
     private static final String COMMAND_FORMAT =
             "Syntax: session /create /n <SESSIONNAME> /d <SESSIONDATE> /pl <NAME1 NAME2…>";
+            "Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 …]";
 
     private static final String COMMAND_SUCCESS =
             "The session was created successfully with session id of: ";
