@@ -3,7 +3,7 @@ package seedu.duke.projects;
 import java.util.ArrayList;
 
 public class ProjectList {
-    ArrayList<Project> projectList;
+    private ArrayList<Project> projectList;
 
     /**
      * Constructs a ProjectList object
@@ -13,4 +13,6 @@ public class ProjectList {
     public ProjectList() {
         projectList = new ArrayList<Project>();
     }
+
+    
 }
