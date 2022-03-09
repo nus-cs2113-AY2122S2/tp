@@ -57,6 +57,13 @@ public class ActivityCreateCommand extends Command {
         this.serviceCharge = serviceCharge;
     }
 
+    /**
+     * Runs the command to create an activity.
+     * Gets relevant parameters to create an Activity object.
+     * If no errors getting parameters, an Activity object is created and added to the session.
+     *
+     * @param manager A Manager object that manages the TextUI and Profile object.
+     */
     @Override
     public void run(Manager manager) {
         try {
