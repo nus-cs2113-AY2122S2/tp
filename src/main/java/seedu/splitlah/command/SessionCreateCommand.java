@@ -65,6 +65,8 @@ public class SessionCreateCommand extends Command {
         for (String name : personNames) {
             String nameToBeAdded = name.toLowerCase();
             if (set.add(nameToBeAdded) == false) {
+            // TODO: Check if string is an actual name.
+            if (!nameSet.add(nameToBeAdded)) {
                 return true;
             }
         }
