@@ -3,6 +3,7 @@ package seedu.duke.parsers;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.exceptions.ParseException;
 
 import java.util.HashMap;
 
@@ -25,11 +26,17 @@ public class DeleteParser extends Parser {
         HashMap<String, String> parsedArguments = parseString(userInput);
         String taskNumberString = parsedArguments.get(TASK_NUMBER);
         String moduleCode = parsedArguments.get(MODULE_CODE);
+        int taskNumber;
+        try {
+            taskNumber = Integer.parseInt(taskNumberString);
+        } catch (NumberFormatException e) {
+            throw new ParseException();
+        }
         if (!moduleCode.isBlank()) {
             return new DeleteCommand(moduleCode);
         }
         if (!taskNumberString.isBlank()) {
-            return new DeleteCommand(Integer.parseInt(taskNumberString));
+            return new DeleteCommand(taskNumber);
         }
         throw new ModHappyException();
     }
