@@ -133,11 +133,7 @@ public class UI {
     /**
      * Prints a message when a new workout has been created. The newly created workout will also be displayed.
      *
-<<<<<<< HEAD:src/main/java/werkit/UI.java
      * @param newWorkout The Workout object that is newly created.
-=======
-     * @param newWorkout workout with exercise name and number of repetitions.
->>>>>>> master:src/main/java/werkIt/UI.java
      */
     public void printNewWorkoutCreatedMessage(Workout newWorkout) {
         System.out.println(NEW_WORKOUT_CREATED_MESSAGE);
@@ -149,11 +145,7 @@ public class UI {
     /**
      * Prints a message when a workout has been deleted. Deleted workout will also be displayed.
      *
-<<<<<<< HEAD:src/main/java/werkit/UI.java
      * @param deletedWorkout The workout to be deleted.
-=======
-     * @param deletedWorkout workout with exercise name and number of repetitions.
->>>>>>> master:src/main/java/werkIt/UI.java
      */
     public void printDeleteWorkoutMessage(Workout deletedWorkout) {
         System.out.println(DELETED_WORKOUT_MESSAGE);
