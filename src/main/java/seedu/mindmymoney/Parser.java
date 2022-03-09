@@ -1,6 +1,10 @@
 package seedu.mindmymoney;
 
-import seedu.mindmymoney.command.*;
+import seedu.mindmymoney.command.Command;
+import seedu.mindmymoney.command.HelpCommand;
+import seedu.mindmymoney.command.AddCommand;
+import seedu.mindmymoney.command.ListCommand;
+import seedu.mindmymoney.command.DeleteCommand;
 import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.helper.Functions;
 
