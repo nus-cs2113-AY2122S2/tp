@@ -2,11 +2,15 @@ package seedu.duke;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import seedu.duke.command_handler.CommandHandler;
 import seedu.duke.projects.Project;
+import seedu.duke.projects.ProjectList;
 
 public class Duke {
 
-    ArrayList<Project> projectList = new ArrayList<Project>();
+    private static ProjectList projectList = new ProjectList();
+    private static CommandHandler commandHandler = new CommandHandler();
 
     /**
      * Main entry-point for the java.duke.Duke application.
@@ -18,11 +22,10 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
 
+        while (true) {
+            commandHandler.handleUserInput(projectList);
+        }
 
-
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
     }
 }
