@@ -80,4 +80,23 @@ public class WorkoutList {
         }
         return index;
     }
+
+    public Workout deleteWorkout(String userArgument) throws WorkoutOutOfRangeException,
+            NumberFormatException, ArrayIndexOutOfBoundsException {
+        int indexToDelete = Integer.parseInt(userArgument.trim());
+
+        String className = this.getClass().getSimpleName();
+        boolean isIndexToDeleteValid = checkDeleteIndexIsWithinRange(indexToDelete);
+        if (!isIndexToDeleteValid) {
+            throw new WorkoutOutOfRangeException(className, WorkoutOutOfRangeException.INDEX_VALUE_OUT_OF_RANGE);
+        }
+
+        Workout deletedWorkout = workoutsList.get(indexToDelete - 1);
+        workoutsList.remove(indexToDelete - 1);
+        return deletedWorkout;
+    }
+
+    public boolean checkDeleteIndexIsWithinRange(int indexToDelete) {
+        return indexToDelete > 0 && indexToDelete <= workoutsList.size();
+    }
 }

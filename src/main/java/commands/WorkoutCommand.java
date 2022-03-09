@@ -2,6 +2,7 @@ package commands;
 
 import data.exercises.InvalidExerciseException;
 import data.workouts.InvalidWorkoutException;
+import data.workouts.WorkoutOutOfRangeException;
 import data.workouts.Workout;
 import data.workouts.WorkoutList;
 import storage.FileManager;
@@ -89,6 +90,10 @@ public class WorkoutCommand extends Command {
             case LIST_ACTION_KEYWORD:
                 getWorkoutList().listWorkout();
                 break;
+            case DELETE_ACTION_KEYWORD:
+                Workout deletedWorkout = workoutList.deleteWorkout(getUserArguments());
+                ui.printDeleteWorkoutMessage(deletedWorkout);
+                break;
             default:
                 String className = this.getClass().getSimpleName();
                 throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
@@ -113,6 +118,10 @@ public class WorkoutCommand extends Command {
         } catch (NumberFormatException e) {
             System.out.println("Uh oh, a number was expected in your input, but a non-formattable\n"
                     + "number was received.");
+            System.out.println("Please try again.");
+
+        } catch (WorkoutOutOfRangeException e) {
+            System.out.println(e.getMessage());
             System.out.println("Please try again.");
 
         } catch (IOException e) {
