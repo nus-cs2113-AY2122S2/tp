@@ -2,6 +2,7 @@ package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
+import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
@@ -61,10 +62,9 @@ public class SessionCreateCommand extends Command {
      * @return True if it contains duplicates, false otherwise.
      */
     private boolean hasNameDuplicates() {
-        Set<String> set = new HashSet<>();
+        Set<String> nameSet = new HashSet<>();
         for (String name : personNames) {
             String nameToBeAdded = name.toLowerCase();
-            if (set.add(nameToBeAdded) == false) {
             // TODO: Check if string is an actual name.
             if (!nameSet.add(nameToBeAdded)) {
                 return true;
