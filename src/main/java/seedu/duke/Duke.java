@@ -1,8 +1,13 @@
 package seedu.duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+import seedu.duke.projects.Project;
 
 public class Duke {
+
+    ArrayList<Project> projectList = new ArrayList<Project>();
+
     /**
      * Main entry-point for the java.duke.Duke application.
      */
@@ -14,6 +19,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
+
+
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
