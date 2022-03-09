@@ -60,6 +60,13 @@ public class ActivityCreateCommand extends Command {
         this.serviceCharge = serviceCharge;
     }
 
+    /**
+     * Prepares user arguments for activity create command.
+     *
+     * @param commandArgs The user's arguments.
+     * @return An ActivityCreateCommand object if necessary parameters were found in user arguments,
+     *         an InvalidCommand object otherwise.
+     */
     public static Command prepare(String commandArgs) {
         boolean isMissingCost = false;
         boolean isMissingCostList = false;
