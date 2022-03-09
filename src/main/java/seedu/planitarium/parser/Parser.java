@@ -1,4 +1,4 @@
-package seedu.duke.util;
+package seedu.planitarium.parser;
 
 public class Parser {
     public static final String DELIMITER_SPACE = " ";
@@ -73,7 +73,7 @@ public class Parser {
      * @return Person's added income.
      */
     public static String parseIncome(String userInput) {
-        parseDelimitedTerm(userInput, DELIMITER_INCOME, DELIMITER_BACK);
+        return parseDelimitedTerm(userInput, DELIMITER_INCOME, DELIMITER_BACK);
     }
 
     /**
@@ -83,7 +83,7 @@ public class Parser {
      * @return Person's expenditure amount.
      */
     public static String parseExpenditure(String userInput) {
-        parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK);
+        return parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK);
     }
 
     /**
