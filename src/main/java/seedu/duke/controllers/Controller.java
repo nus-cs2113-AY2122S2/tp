@@ -4,8 +4,7 @@ import java.util.Scanner;
 
 /**
  * Controller is an abstract class that should be extended by all Controllers.
- * <p>
- * Provides base functionality for printing choices and control implementation.
+ * <p>Provides base functionality for printing choices and control implementation.
  */
 public abstract class Controller {
     /**
@@ -14,8 +13,7 @@ public abstract class Controller {
     protected static final String TERMINATOR = "-";
     /**
      * Options provided by the controller. They can be selected by index.
-     * <p>
-     * All controllers should place the exit option as the top-level choice.
+     * <p>All controllers should place the exit option as the top-level choice.
      */
     protected final String[] choices;
     /**
@@ -25,8 +23,7 @@ public abstract class Controller {
 
     /**
      * Creates a Controller with a list of choices.
-     * <p>
-     * Supply the controller with a Scanner object. You should not create a new Scanner(System.in)
+     * <p>Supply the controller with a Scanner object. You should not create a new Scanner(System.in)
      * object and pass it to the constructor. Instead, create one single global scanner
      * and pass that single scanner to multiple controllers.
      *
@@ -40,8 +37,7 @@ public abstract class Controller {
 
     /**
      * Function that switches between options provided by the current controller.
-     * <p>
-     * This function MUST be overridden for all controllers.
+     * <p>This function MUST be overridden for all controllers.
      *
      * @param choice Option choice.
      * @return Whether to relinquish control or not.
@@ -52,10 +48,8 @@ public abstract class Controller {
 
     /**
      * Provides a base control implementation for all controllers.
-     * <p>
-     * The extended controller MUST override the `optionSwitcher` method for this method to work properly.
-     * <p>
-     * Controllers may choose to override this method to perform extra operations (such as printing statements)
+     * <p>The extended controller MUST override the `optionSwitcher` method for this method to work properly.
+     * <p>Controllers may choose to override this method to perform extra operations (such as printing statements)
      * before entering the input loop.
      */
     public void takeControl() {

@@ -9,9 +9,7 @@ public class MainController extends Controller {
      * @param scanner Scanner for System.in.
      */
     public MainController(Scanner scanner) {
-        super(new String[]{
-                "Exit Application",
-        }, scanner);
+        super(new String[]{"Exit Application"}, scanner);
     }
 
     @Override
