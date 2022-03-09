@@ -57,6 +57,12 @@ public class ActivityCreateCommand extends Command {
         this.serviceCharge = serviceCharge;
     }
 
+    private static boolean isInvalidCommand(double cost, String[] involvedList, double[] costList) {
+        boolean isZeroCost = cost == 0;
+        boolean isDifferentLength = involvedList.length != costList.length;
+        return isDifferentLength && isZeroCost;
+    }
+
     /**
      * Runs the command to create an activity.
      * Gets relevant parameters to create an Activity object.
