@@ -3,11 +3,17 @@ package seedu.duke;
 import java.sql.Time;
 import java.util.Scanner;
 
+import static seedu.duke.ClearCommand.clearList;
+import static seedu.duke.DeleteCommand.executeDelete;
+import static seedu.duke.Parser.getDeleteString;
+
 public class Duke {
 
     private static Scanner SCANNER = new Scanner(System.in);
     private static final String ADD_COMMAND = "add";
     private static final String LIST_COMMAND = "list";
+    private static final String DELETE_COMMAND = "delete";
+    private static final String CLEAR_COMMAND = "clear";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -24,13 +30,17 @@ public class Duke {
         while (true) {
             String input = getInput();
             Parser parser = new Parser(input);
-
             String parsedCommand = parser.getCommand();
             if (parsedCommand.equals(ADD_COMMAND)) {
                 addEvent(parser);
             } else if (parsedCommand.equals(LIST_COMMAND)) {
                 listTimetable();
+            } else if (parsedCommand.equals(DELETE_COMMAND)) {
+                executeDelete(getDeleteString(input));
+            } else if (parsedCommand.equals(CLEAR_COMMAND)) {
+                clearList();
             }
+
         }
     }
 
@@ -48,7 +58,7 @@ public class Duke {
 
     private static void listTimetable() {
         for (int i = 0; i < Timetable.size(); i++) {
-            System.out.println(Timetable.get(i));
+            System.out.println(i + 1 + "." + Timetable.get(i));
         }
     }
 

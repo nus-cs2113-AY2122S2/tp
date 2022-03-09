@@ -62,4 +62,13 @@ public class Parser {
         }
         return -1;
     }
+
+    public static String getDeleteString(String input){
+        String str = "";
+        int spaceIndex = input.trim().indexOf(" ");
+        if (spaceIndex != -1) {
+            str = input.substring(spaceIndex + 1).trim();
+        }
+        return str;
+    }
 }
