@@ -29,9 +29,9 @@ public class SessionDeleteCommand extends Command {
     /**
      * Prepares user arguments for session delete command.
      *
-     * @param commandArgs The user's arguments.
+     * @param commandArgs A String object that represents the user's arguments.
      * @return A SessionDeleteCommand object if session id was found in user arguments,
-     *      an InvalidCommand object otherwise.
+     *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
         try {
@@ -44,7 +44,7 @@ public class SessionDeleteCommand extends Command {
     }
 
     /**
-     * Runs the command to delete a session.
+     * Runs the command to delete a Session object to from the list of sessions managed by the Profile Object.
      *
      * @param manager A Manager object that manages the TextUI and Profile object.
      */
