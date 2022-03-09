@@ -44,6 +44,6 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.removeTask(deleteIndex);
-        storage.rewriteSavedState(taskList);
+        storage.writeSaveData(taskList);
     }
 }

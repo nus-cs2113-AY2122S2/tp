@@ -41,6 +41,6 @@ public class UnmarkCommand extends Command {
             return;
         }
         taskList.unmarkTask(markIndex);
-        storage.rewriteSavedState(taskList);
+        storage.writeSaveData(taskList);
     }
 }

@@ -49,6 +49,6 @@ public class ClearCommand extends Command {
             ui.showToUser("Please confirm your choice with either Y (Yes) or N (No).");
             ui.showLine();
         }
-        storage.rewriteSavedState(taskList);
+        storage.writeSaveData(taskList);
     }
 }

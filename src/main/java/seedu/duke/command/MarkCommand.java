@@ -42,6 +42,6 @@ public class MarkCommand extends Command {
             return;
         }
         taskList.markTask(markIndex);
-        storage.rewriteSavedState(taskList);
+        storage.writeSaveData(taskList);
     }
 }

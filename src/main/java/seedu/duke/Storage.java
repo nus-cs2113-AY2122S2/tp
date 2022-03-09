@@ -87,6 +87,7 @@ public class Storage {
      * @param taskList Array of tasks that are to be saved.
      */
     public void rewriteSavedState(TaskList taskList) {
+    public void writeSaveData(TaskList taskList) {
         wipeSavedData();
         ArrayList<Task> replicatedTasks = taskList.getTasks();
         String taskStatus = "0";
