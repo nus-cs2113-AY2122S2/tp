@@ -10,6 +10,7 @@ import data.workouts.WorkoutList;
 
 import static commands.WorkoutCommand.CREATE_ACTION_KEYWORD;
 import static commands.WorkoutCommand.LIST_ACTION_KEYWORD;
+import static commands.WorkoutCommand.DELETE_ACTION_KEYWORD;
 
 /**
  * This class will parse the input that the user enters into the WerkIt! application into data
@@ -66,6 +67,7 @@ public class Parser {
         String arguments = null;
         switch (actionKeyword) {
         case CREATE_ACTION_KEYWORD:
+        case DELETE_ACTION_KEYWORD:
             arguments = userInput.split(" ", 3)[2];
             break;
         case LIST_ACTION_KEYWORD:
