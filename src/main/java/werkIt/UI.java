@@ -192,6 +192,6 @@ public class UI {
     public void printExitHelp() {
         System.out.println("\t To exit werkIt, please enter: ");
         printColorText(COLOR_YELLOW, "\t exit");
-        System.out.println("\t ☹ This will exit werkIt. :-(");
+        System.out.println("\t This will exit werkIt.");
     }
 }
