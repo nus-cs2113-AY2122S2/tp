@@ -99,6 +99,21 @@ public class ActivityCreateCommand extends Command {
         }
     }
 
+    /**
+     * Adds cost owed and cost paid to each individual's list of activity costs.
+     * Checks if the current person is the person who paid for the activity.
+     * If it is, the cost paid is set to the total cost of the activity.
+     * Else, the cost paid is set to 0.
+     *
+     * @param personPaid The person who paid for the activity.
+     * @param cost The total cost of the activity.
+     * @param costList The costs owed by each person involved in the activity.
+     * @param activityId The id of the activity.
+     * @param i The index of the cost owed in the list of costs.
+     * @param person The current person whose costs are added to the list of activity costs.
+     * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
+     * @see InvalidDataException
+     */
     private static void addCostOwedAndCostPaid(Person personPaid, double cost, double[] costList, int activityId,
                                                int i, Person person) throws InvalidDataException {
         if (person == personPaid) {
