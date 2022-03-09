@@ -4,6 +4,7 @@ import commands.Command;
 import commands.ExitCommand;
 import commands.InvalidCommandException;
 import commands.WorkoutCommand;
+import commands.HelpCommand;
 import data.exercises.ExerciseList;
 import data.workouts.WorkoutList;
 
@@ -50,6 +51,8 @@ public class Parser {
             return createWorkoutCommand(userInput);
         case ExitCommand.BASE_KEYWORD:
             return createExitCommand(userInput);
+        case HelpCommand.BASE_KEYWORD:
+            return createHelpCommand(userInput);
         default:
             String className = this.getClass().getSimpleName();
             throw new InvalidCommandException(className, InvalidCommandException.INVALID_COMMAND_ERROR_MSG);
@@ -74,5 +77,9 @@ public class Parser {
     public ExitCommand createExitCommand(String userInput) {
         ExitCommand newCommand = new ExitCommand(userInput);
         return newCommand;
+    }
+
+    public HelpCommand createHelpCommand(String userInput) {
+        return new HelpCommand(userInput);
     }
 }
