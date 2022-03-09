@@ -21,10 +21,10 @@ public class Activity {
     /**
      * Constructs an Activity object that stores the relevant information required for an Activity.
      *
-     * @param activityId The id of the activity.
-     * @param activityName The name of the activity.
-     * @param totalCost The total cost of the activity.
-     * @param personPaid The person who paid for the activity.
+     * @param activityId         The id of the activity.
+     * @param activityName       The name of the activity.
+     * @param totalCost          The total cost of the activity.
+     * @param personPaid         The person who paid for the activity.
      * @param involvedPersonList The persons involved in the activity.
      */
     public Activity(int activityId, String activityName, double totalCost, Person personPaid,

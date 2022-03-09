@@ -5,7 +5,7 @@ import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 
 /**
- * Represents a command that deletes a session indicated by the user input.
+ * Represents a command that deletes a Session object indicated by the user input from a Profile object.
  *
  * @author Roy
  */
@@ -16,7 +16,6 @@ public class SessionDeleteCommand extends Command {
     private static final String COMMAND_FORMAT = "Syntax: session /delete /sid <SESSIONID>";
 
     private int sessionId;
-
 
     public SessionDeleteCommand(int sessionId) {
         this.sessionId = sessionId;

@@ -7,9 +7,13 @@ import seedu.splitlah.ui.Message;
 import java.util.ArrayList;
 
 /**
- * Represents a Profile for the SplitLah application.
+ * Represents a profile that manages a list of sessions and keeps track of unique session and activity
+ * identifiers for the SplitLah application.
+ * 
+ * @author Roy
  */
 public class Profile {
+    
     private ArrayList<Session> sessionList;
     private int sessionIdTracker;
     private int activityIdTracker;

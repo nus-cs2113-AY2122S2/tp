@@ -3,6 +3,7 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
+import seedu.splitlah.data.Profile;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
@@ -13,17 +14,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Represents an ActivityCreateCommand which has a run method that creates an activity.
+ * Represents a command that creates an Activity object from user input and stores it in the Session object.
  */
 public class ActivityCreateCommand extends Command {
 
     public static final String COMMAND_TEXT = "activity /create";
+
     private static final String COMMAND_FORMAT = "Syntax:\n"
             + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /c <OVERALLCOST> "
             + "[<OPTIONAL ARGS>]\n"
             + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /c <COST1 COST2…> "
             + "[<OPTIONAL ARGS>]\n"
             + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /c <OVERALLCOST> [<OPTIONAL ARGS>]";
+
     private static final double ZERO_COST_PAID = 0;
     public static final int NO_COST = 0;
 
@@ -38,14 +41,14 @@ public class ActivityCreateCommand extends Command {
 
     /**
      * Constructor to create a ActivityCreateCommand object.
-     * 
-     * @param sessionId Ths id of the session.
-     * @param activityName The name of the activity.
-     * @param totalCost The total cost of the activity.
-     * @param payer The name of the person who paid for the activity.
-     * @param involvedList The names of the persons who are involved in the activity.
-     * @param costList The respective costs of each person involved in the activity.
-     * @param gst The gst to be included for the cost of the activity.
+     *
+     * @param sessionId     An integer that uniquely identifies a session.
+     * @param activityName  A String object that represents the Activity object's name.
+     * @param totalCost     A double that represents total cost of the activity.
+     * @param payer         The name of the person who paid for the activity.
+     * @param involvedList  The names of the persons who are involved in the activity.
+     * @param costList      The respective costs of each person involved in the activity.
+     * @param gst           The gst to be included for the cost of the activity.
      * @param serviceCharge The service charge to be included for the cost of the activity.
      */
     public ActivityCreateCommand(int sessionId, String activityName, double totalCost, String payer,
@@ -65,7 +68,7 @@ public class ActivityCreateCommand extends Command {
      *
      * @param commandArgs The user's arguments.
      * @return An ActivityCreateCommand object if necessary parameters were found in user arguments,
-     *         an InvalidCommand object otherwise.
+     * an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
         boolean isMissingCost = false;
@@ -104,7 +107,8 @@ public class ActivityCreateCommand extends Command {
             String[] involvedList = Parser.parseInvolved(commandArgs);
             int gst = Parser.parseGst(commandArgs);
             int serviceCharge = Parser.parseServiceCharge(commandArgs);
-            boolean hasDifferentLength = involvedList.length != costList.length;;
+            boolean hasDifferentLength = involvedList.length != costList.length;
+            ;
             if (hasDifferentLength) {
                 return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
                         + COMMAND_FORMAT);
@@ -143,10 +147,10 @@ public class ActivityCreateCommand extends Command {
      * Adds all relevant activity costs to each involved person's list of activity costs.
      *
      * @param involvedPersonList The list of persons involved in the activity.
-     * @param personPaid The person who paid for the activity.
-     * @param totalCost The total cost of the activity.
-     * @param costList The costs owed by each person involved in the activity.
-     * @param activityId The id of the activity.
+     * @param personPaid         The person who paid for the activity.
+     * @param totalCost          The total cost of the activity.
+     * @param costList           The costs owed by each person involved in the activity.
+     * @param activityId         The id of the activity.
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      * @see InvalidDataException
      */
@@ -164,12 +168,12 @@ public class ActivityCreateCommand extends Command {
      * If it is, the cost paid is set to the total cost of the activity.
      * Else, the cost paid is set to 0.
      *
-     * @param personPaid The person who paid for the activity.
-     * @param totalCost The total cost of the activity.
-     * @param costList The costs owed by each person involved in the activity.
-     * @param activityId The id of the activity.
+     * @param personPaid      The person who paid for the activity.
+     * @param totalCost       The total cost of the activity.
+     * @param costList        The costs owed by each person involved in the activity.
+     * @param activityId      The id of the activity.
      * @param indexOfCostOwed The index of the cost owed in the list of costs.
-     * @param person The current person whose costs are added to the list of activity costs.
+     * @param person          The current person whose costs are added to the list of activity costs.
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      * @see InvalidDataException
      */
@@ -204,8 +208,8 @@ public class ActivityCreateCommand extends Command {
      * Updates cost list by including the extra charges.
      * Extra charges may include gst and service charge.
      *
-     * @param costList The costs owed by each person involved in the activity.
-     * @param gst The gst to be added to the costs for the activity.
+     * @param costList      The costs owed by each person involved in the activity.
+     * @param gst           The gst to be added to the costs for the activity.
      * @param serviceCharge The service charge to be added to the costs for the activity.
      */
     private static void updateCostListWithExtraCharges(double[] costList, int gst, int serviceCharge) {
@@ -235,8 +239,8 @@ public class ActivityCreateCommand extends Command {
      * Extra charges may include gst and service charge.
      * Assumption: gst and service charge are non-negative integers.
      *
-     * @param totalCost The total cost of the activity excluding extra charges.
-     * @param gst The gst to be included in the total cost of the activity.
+     * @param totalCost     The total cost of the activity excluding extra charges.
+     * @param gst           The gst to be included in the total cost of the activity.
      * @param serviceCharge The service charge to be included in the total cost of the activity.
      * @return A double representing the total cost of the activity.
      */
@@ -248,13 +252,13 @@ public class ActivityCreateCommand extends Command {
     /**
      * Returns a double representing the extra charges that is to be included in costs of the activity.
      *
-     * @param gst The gst to be included in the costs of the activity.
+     * @param gst           The gst to be included in the costs of the activity.
      * @param serviceCharge The service charge to be included in the costs of the activity.
      * @return A double representing the extra charges.
      */
     private static double getExtraCharges(int gst, int serviceCharge) {
-        double gstMultiplier = 1 + (double)gst / 100;
-        double serviceChargeMultiplier = 1 + (double)serviceCharge / 100;
+        double gstMultiplier = 1 + (double) gst / 100;
+        double serviceChargeMultiplier = 1 + (double) serviceCharge / 100;
         return gstMultiplier * serviceChargeMultiplier;
     }
 
@@ -263,7 +267,7 @@ public class ActivityCreateCommand extends Command {
      * among the persons involved in the activity.
      * Divides the total cost by the number of people involved in the activity.
      *
-     * @param totalCost The total cost of the activity.
+     * @param totalCost              The total cost of the activity.
      * @param numberOfPeopleInvolved The number of people involved in the activity.
      * @return An array of doubles representing the costs of each person involved in the activity.
      */

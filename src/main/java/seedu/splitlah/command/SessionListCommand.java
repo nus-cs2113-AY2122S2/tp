@@ -3,7 +3,7 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Manager;
 
 /**
- * Represents a command that list all session that is stored in the profile object.
+ * Represents a command that displays the details of each Session object within a Profile object.
  *
  * @author Roy
  */

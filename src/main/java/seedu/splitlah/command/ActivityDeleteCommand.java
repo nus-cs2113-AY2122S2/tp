@@ -3,7 +3,7 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Manager;
 
 /**
- * Represents an ActivityCreateCommand which has a run method that deletes an activity.
+ * Represents a command which deletes an Activity object from a Session object.
  */
 public class ActivityDeleteCommand extends Command {
 
@@ -16,7 +16,7 @@ public class ActivityDeleteCommand extends Command {
     /**
      * Constructs an ActivityDeleteCommand object.
      *
-     * @param sessionId The id of the session.
+     * @param sessionId  The id of the session.
      * @param activityId The id of the activity.
      */
     public ActivityDeleteCommand(int sessionId, int activityId) {
