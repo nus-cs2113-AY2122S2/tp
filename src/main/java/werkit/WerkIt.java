@@ -1,4 +1,4 @@
-package werkIt;
+package werkit;
 
 import commands.Command;
 import commands.ExitCommand;
@@ -44,7 +44,6 @@ public class WerkIt {
     /**
      * Continuously prompts the user for an input (and thereafter executing the necessary
      * actions) until the exit command is entered.
-     * <p>
      * Method adapted from Team Member Alan Low's iP codebase.
      * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/Sora.java
      */
@@ -52,28 +51,28 @@ public class WerkIt {
         boolean userWantsToExit = false;
         boolean isFirstPrompt = true;
 
-            do {
-                try {
-                    ui.printUserInputPrompt(isFirstPrompt);
-                    isFirstPrompt = false;
-                    String userInput = ui.getUserInput();
-                    Command newCommand = parser.parseUserInput(userInput);
+        do {
+            try {
+                ui.printUserInputPrompt(isFirstPrompt);
+                isFirstPrompt = false;
+                String userInput = ui.getUserInput();
+                Command newCommand = parser.parseUserInput(userInput);
 
-                    if (newCommand instanceof ExitCommand) {
-                        userWantsToExit = true;
-                        continue;
-                    }
-
-                    newCommand.execute();
-
-                } catch (InvalidCommandException e) {
-                    System.out.println(e.getMessage());
-                    System.out.println("Please try again.");
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Uh oh, the command entered is invalid.");
-                    System.out.println("Please try again.");
+                if (newCommand instanceof ExitCommand) {
+                    userWantsToExit = true;
+                    continue;
                 }
-            } while (!userWantsToExit);
+
+                newCommand.execute();
+
+            } catch (InvalidCommandException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Please try again.");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Uh oh, the command entered is invalid.");
+                System.out.println("Please try again.");
+            }
+        } while (!userWantsToExit);
 
         // User is exiting the program
         ui.printGoodbye();

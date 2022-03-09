@@ -3,8 +3,8 @@ package data.workouts;
 
 public class WorkoutOutOfRangeException extends Exception {
     // Pre-defined error messages
-    public static final String INDEX_VALUE_OUT_OF_RANGE = "Uh oh, the index specified is out of range.\n" +
-            "(Index specified needs to be within the number of workouts)";
+    public static final String INDEX_VALUE_OUT_OF_RANGE = "Uh oh, the index specified is out of range.\n"
+            + "(Index specified needs to be within the number of workouts)";
 
     private String throwingClass;
 
