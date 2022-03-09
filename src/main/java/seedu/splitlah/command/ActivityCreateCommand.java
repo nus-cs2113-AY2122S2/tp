@@ -5,6 +5,8 @@ import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
+import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.parser.Parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +26,8 @@ public class ActivityCreateCommand extends Command {
     private static final double ZERO_COST_PAID = 0;
     public static final int NO_COST = 0;
     public static final int NO_COST_LIST = 0;
+    public static final String ERROR_DISCREPANCY_NUMBER_INVOLVED_AND_COST = "Seems like there is a discrepancy between number of people involved and " +
+            "the costs per person";
 
     private int sessionId;
     private String activityName;
@@ -56,6 +60,27 @@ public class ActivityCreateCommand extends Command {
         this.costList = costList;
         this.gst = gst;
         this.serviceCharge = serviceCharge;
+    }
+
+    public static Command prepare(String commandArgs) {
+        try {
+            int sessionId = Parser.parseSessionId(commandArgs);
+            String activityName = Parser.parseName(commandArgs);
+            double cost = Parser.parseTotalCost(commandArgs);
+            String payer = Parser.parsePayer(commandArgs);
+            String[] involvedList = Parser.parseInvolved(commandArgs);
+            double[] costList = Parser.parseCostList(commandArgs);
+            int gst = Parser.parseGst(commandArgs);
+            int serviceCharge = Parser.parseServiceCharge(commandArgs);
+            boolean isInvalidCommand = isInvalidCommand(cost, involvedList, costList);
+            if (isInvalidCommand) {
+                return new InvalidCommand(ERROR_DISCREPANCY_NUMBER_INVOLVED_AND_COST);
+            }
+            return new ActivityCreateCommand(sessionId, activityName, cost, payer, involvedList, costList, gst,
+                    serviceCharge);
+        } catch (InvalidFormatException e) {
+            return new InvalidCommand(e.getMessage() + COMMAND_FORMAT);
+        }
     }
 
     private static boolean isInvalidCommand(double cost, String[] involvedList, double[] costList) {
