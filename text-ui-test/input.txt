@@ -1,1 +1,3 @@
-James Gosling
+bad command
+help
+bye
