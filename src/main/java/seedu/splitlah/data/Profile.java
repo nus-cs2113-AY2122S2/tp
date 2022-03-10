@@ -1,32 +1,35 @@
 package seedu.splitlah.data;
 
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
 
 /**
- * Represents a Profile for the SplitLah application.
+ * Represents a profile that manages a list of sessions and keeps track of unique session and activity
+ * identifiers for the SplitLah application.
+ * 
+ * @author Roy
  */
 public class Profile {
+    
     private ArrayList<Session> sessionList;
     private int sessionIdTracker;
     private int activityIdTracker;
 
     /**
-     * Constructor to create a profile object.
+     * Constructor to create a Profile object.
      */
     public Profile() {
         this.sessionList = new ArrayList<>();
-        sessionIdTracker = 1;
-        activityIdTracker = 1;
+        this.sessionIdTracker = 1;
+        this.activityIdTracker = 1;
     }
 
     /**
-     * Checks if there is a session exists with the same session name.
+     * Checks if there is a session exists with the same name.
      *
-     * @param sessionName The session name to be checked.
+     * @param sessionName A String object that represents the session name.
      * @return True if a session exists with the same name, false otherwise.
      */
     public boolean hasSessionName(String sessionName) {
@@ -39,12 +42,12 @@ public class Profile {
     }
 
     /**
-     * Returns the session object via session id specified by user.
+     * Returns the session object via the session unique identifier specified by the user.
      *
-     * @param sessionId An id to be used to retrieve a session.
-     * @return A session object with the matching session id.
-     * @throws InvalidDataException if there are no sessions stored or the session id
-     *                          specified was not found.
+     * @param sessionId An integer that uniquely identifies a session.
+     * @return A Session object with the matching session id.
+     * @throws InvalidDataException If there are no sessions stored or
+     *                              if the session unique identifier specified was not found.
      */
     public Session getSession(int sessionId) throws InvalidDataException {
         if (sessionList.isEmpty()) {
@@ -59,18 +62,18 @@ public class Profile {
     }
 
     /**
-     * Adds a session to the list of sessions.
+     * Adds a Session object to the list of sessions.
      *
-     * @param session A session object to be added.
+     * @param session A Session object that is to be added.
      */
     public void addSession(Session session) {
         this.sessionList.add(session);
     }
 
     /**
-     * Returns the list of session stored in the profile.
+     * Returns the list of session stored in Profile object.
      *
-     * @return The ArrayList of sessions.
+     * @return An ArrayList of Session objects.
      */
     public ArrayList<Session> getSessionList() {
         return sessionList;
@@ -78,10 +81,9 @@ public class Profile {
 
     /**
      * Returns a new session id for session object to be created.
-     * Assumption: Function is called when,
-     * a new session object is created without errors.
+     * Assumption: Function is called when a new Session object is being created without errors.
      *
-     * @return The new session id as int.
+     * @return An integer that represents the new session unique identifier.
      */
     public int getNewSessionId() {
         int newSessionId = sessionIdTracker;
@@ -91,10 +93,9 @@ public class Profile {
 
     /**
      * Returns a new activity id for activity object to be created.
-     * Assumption: Function is called when,
-     * a new activity object is created without errors.
+     * Assumption: Function is called when a new Activity object is being created without errors.
      *
-     * @return The new activity id as int.
+     * @return An integer that represents the new activity unique identifier.
      */
     public int getNewActivityId() {
         int newActivityId = activityIdTracker;

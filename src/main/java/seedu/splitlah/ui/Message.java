@@ -1,15 +1,16 @@
 package seedu.splitlah.ui;
 
 /**
- * Contains hardcoded strings such as error codes.
+ * Container of hardcoded messages.
+ * Naming convention: [TYPE]_[CLASS]_[MESSAGE].
  *
  * @author Saurav
  */
 public abstract class Message {
-    // Template
-    public static final String ERROR_CLASS_ISSUE = "";
+    
     // TextUI
-    public static final String LOGO = " $$$$$$\\            $$\\ $$\\   $$\\     $$\\           $$\\\n"
+    public static final String ASCII_TEXTUI_LOGO = 
+            " $$$$$$\\            $$\\ $$\\   $$\\     $$\\           $$\\\n"
             + "$$  $$\\           $$ |\\|  $$ |    $$ |          $$ |\n"
             + "$$ /  \\__| $$$$$$\\  $$ |$$\\ $$$$$$\\   $$ | $$$$$$\\  $$$$$$$\\\n"
             + "\\$$$$$$\\  $$  $$\\ $$ |$$ |\\_$$  _|  $$ | \\____$$\\ $$  __$$\\\n"
@@ -20,7 +21,7 @@ public abstract class Message {
             + "          $$ |\n"
             + "          $$ |\n"
             + "          \\__|";
-    public static final String HELP_MENU =
+    public static final String MESSAGE_TEXTUI_HELP_MENU =
             "HELP MENU"; //TODO: Populate help menu
     public static final String PROMPT_TEXTUI_REQUEST_CONFIRMATION =
             "Please enter Y/y/yes to confirm, or N/n/no otherwise.";
@@ -28,8 +29,8 @@ public abstract class Message {
             "User did not confirm.";
     public static final String ERROR_TEXTUI_REENTER_INPUT =
             "Invalid input. Please re-enter.";
-    public static final String PERSON_TEXTUI_NO_ACTIVITES =
-            "No activites found.";
+    public static final String PERSON_TEXTUI_NO_ACTIVITIES =
+            "No activities found.";
 
     // Parser
     public static final String ERROR_PARSER_DELIMITER_NOT_FOUND =
@@ -78,4 +79,17 @@ public abstract class Message {
             "There are no sessions currently stored.";
     public static final String ERROR_PROFILE_SESSION_NOT_IN_LIST =
             "The session that you have specified was not found.";
+
+    //Activity
+    public static final String ERROR_ACTIVITY_INACCURATE_INVOLVED_LIST =
+            "The list of involved persons list is inaccurate "
+                    + "as at least one person did not participate in the activity.";
+
+    //Activity Create Command
+    public static final String ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH =
+            "There seems to be a discrepancy between number of people involved and the costs per person";
+    public static final String ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST =
+            "Please only include either a total cost or a list of costs";
+    public static final String ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST =
+            "Please include either a cost or a list of costs.";
 }

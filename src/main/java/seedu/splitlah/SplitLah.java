@@ -15,7 +15,7 @@ public class SplitLah {
         new SplitLah().run();
     }
 
-    /** Sets up the required objects for application.   */
+    /** Sets up the required objects for application.  */
     public SplitLah() {
         manager = new Manager();
     }
@@ -27,12 +27,12 @@ public class SplitLah {
         exitApplication();
     }
 
-    /** Prints welcome message. */
+    /** Prints welcome message.  */
     private void showWelcomeMessage() {
         manager.getUi().printWelcome();
     }
 
-    /** Exits the program. */
+    /** Exits the program.  */
     private void exitApplication() {
         System.exit(0);
     }

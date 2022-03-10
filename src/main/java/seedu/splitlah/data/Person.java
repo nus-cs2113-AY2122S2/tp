@@ -6,11 +6,12 @@ import seedu.splitlah.ui.Message;
 import java.util.ArrayList;
 
 /**
- * Represents a person.
- * Stores its name, total cost and a list of activityCosts.
+ * Represents a person participating in an activity during a group outing session.
+ * 
  * @author Saurav
  */
 public class Person {
+    
     private final String name;
     private ArrayList<ActivityCost> activityCostList;
 

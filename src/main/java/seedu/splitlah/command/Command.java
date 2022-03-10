@@ -5,6 +5,7 @@ import seedu.splitlah.data.Manager;
 /**
  * Represents a generic command that the user has entered into the application
  * that can be run to produce a change or outcome.
+ * 
  * @author Warren
  */
 public abstract class Command {

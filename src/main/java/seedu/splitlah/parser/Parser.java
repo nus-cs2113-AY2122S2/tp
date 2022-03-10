@@ -18,12 +18,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents an interpreter that interprets different parts of the user input
- * into data that can be understood by the program.
+ * Represents a parser that interprets the user input into data that can be understood by the program.
  * 
  * @author Warren
  */
 public class Parser {
+    
     // DELIMITERS
     private static final String NAME_DELIMITER = "/n";
     private static final String PERSON_LIST_DELIMITER = "/pl";
@@ -251,7 +251,7 @@ public class Parser {
     public static String getRemainingArgument(String commandArgs) {
         String[] commandTokens = commandArgs.trim().split(REGEX_WHITESPACES_DELIMITER, COMMAND_WITH_ARGS_TOKEN_COUNT);
         if (commandTokens.length < COMMAND_WITH_ARGS_TOKEN_COUNT) {
-            return null;
+            return "";
         }
         return commandTokens[2];
     }
@@ -285,11 +285,11 @@ public class Parser {
         // TEMPORARY FALLTHROUGH FOR ALL COMMANDS UNTIL COMMANDS ARE PROPERLY SET UP
         case SessionCreateCommand.COMMAND_TEXT:
             return SessionCreateCommand.prepare(remainingArgs);
-        case SessionDeleteCommand.COMMAND_TEXT:
-            // FALLTHROUGH
-        case SessionListCommand.COMMAND_TEXT:
-            // FALLTHROUGH
         case SessionSummaryCommand.COMMAND_TEXT:
+            return SessionSummaryCommand.prepare(remainingArgs);
+        case SessionDeleteCommand.COMMAND_TEXT:
+            return SessionDeleteCommand.prepare(remainingArgs);
+        case SessionListCommand.COMMAND_TEXT:
             // FALLTHROUGH
         case ActivityCreateCommand.COMMAND_TEXT:
             // FALLTHROUGH

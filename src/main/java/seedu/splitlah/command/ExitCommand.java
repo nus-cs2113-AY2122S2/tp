@@ -4,6 +4,8 @@ import seedu.splitlah.data.Manager;
 
 /**
  * Represents a command that exits the application.
+ * 
+ * @author Roy
  */
 public class ExitCommand extends Command {
 
