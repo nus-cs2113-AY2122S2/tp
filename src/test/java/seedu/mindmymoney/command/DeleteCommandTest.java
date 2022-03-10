@@ -70,7 +70,7 @@ class DeleteCommandTest {
      * @throws MindMyMoneyException if user is trying to delete an item from an empty list.
      */
     @Test
-    void deleteCommand_addToEmptyList_expectListUpdated() throws MindMyMoneyException{
+    void deleteCommand_addToEmptyList_expectListUpdated() throws MindMyMoneyException {
         String deleteInputString = "delete 1";
         new DeleteCommand(deleteInputString).executeCommand();
         assertEquals(0, Lists.expenditures.size());
