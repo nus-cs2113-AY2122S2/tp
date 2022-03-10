@@ -9,7 +9,7 @@ public class Dish {
         this.price = price;
     }
 
-    void setPrice(double newPrice) {
+    public void setPrice(double newPrice) {
         this.price = newPrice;
     }
 

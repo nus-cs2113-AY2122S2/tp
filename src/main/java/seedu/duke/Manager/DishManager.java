@@ -1,4 +1,6 @@
-package seedu.duke;
+package seedu.duke.Manager;
+
+import seedu.duke.Dish;
 
 import java.util.ArrayList;
 import java.util.List;
