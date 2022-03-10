@@ -6,12 +6,12 @@ import seedu.mindmymoney.userfinancial.Expenditure;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddCommandTest {
 
     @Test
-    void AddCommand_oneInput_expectListUpdated() {
+    void addCommand_oneInput_expectListUpdated() {
         String inputString = "expenditure 12345";
         ArrayList<Expenditure> testList = Lists.expenditures;
         new AddCommand(inputString);
@@ -20,7 +20,7 @@ class AddCommandTest {
     }
 
     @Test
-    void AddCommand_missingInput_expectOriginalList() {
+    void addCommand_missingInput_expectOriginalList() {
         String inputString = "";
         ArrayList<Expenditure> testList = Lists.expenditures;
         new AddCommand(inputString);
@@ -28,7 +28,7 @@ class AddCommandTest {
     }
 
     @Test
-    void AddCommand_nonIntAmount_expectOriginalList() {
+    void addCommand_nonIntAmount_expectOriginalList() {
         String inputString = "expenditure deadbeef";
         ArrayList<Expenditure> testList = Lists.expenditures;
         new AddCommand(inputString);
