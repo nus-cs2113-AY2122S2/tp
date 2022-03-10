@@ -11,4 +11,10 @@ class SessionCreateCommandTest {
         Command createSessionTwo = SessionCreateCommand.prepare(sessionTwoArgs);
         createSessionTwo.run(manager);
     }
+    public void run_hasOneNameDuplicate_sessionListSizeRemainsTwo() {
+        String userInput = "session /create /n Class outing /d 2022-02-23 /pl Alice Alice Bob";
+        Command command = SessionCreateCommand.prepare(userInput);
+        command.run(manager);
+        assertEquals(2, manager.getProfile().getSessionList().size());
+    }
 }
