@@ -5,6 +5,7 @@ cd "${0%/*}"
 
 cd ..
 ./gradlew clean shadowJar
+rm -f build/libs/data/sherpass.txt 2>/dev/null
 
 cd text-ui-test
 

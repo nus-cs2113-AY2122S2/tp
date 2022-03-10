@@ -1,6 +1,5 @@
 package seedu.sherpass.utills;
 
-
 import seedu.sherpass.command.Command;
 import seedu.sherpass.command.DeadlineCommand;
 import seedu.sherpass.command.DeleteCommand;
@@ -17,8 +16,6 @@ import seedu.sherpass.command.ExitCommand;
 import seedu.sherpass.command.ClearCommand;
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
-import seedu.sherpass.task.Deadline;
-import seedu.sherpass.task.Event;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.task.Todo;
@@ -27,6 +24,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 
 import static seedu.sherpass.constant.DateAndTimeFormat.noTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskNoTimeFormat;
@@ -45,10 +43,10 @@ import static seedu.sherpass.constant.Indexes.FIND_BY_TASK_DESCRIPTION_WITH_DATE
 import static seedu.sherpass.constant.Indexes.HELP_OPTIONS_INDEX;
 import static seedu.sherpass.constant.Indexes.MARK_INDEX;
 import static seedu.sherpass.constant.Indexes.OPTIONS_INDEX;
-import static seedu.sherpass.constant.Indexes.SAVE_TASK_DATE_INDEX;
+import static seedu.sherpass.constant.Indexes.SAVE_TASK_BY_DATE_INDEX;
 import static seedu.sherpass.constant.Indexes.SAVE_TASK_DESCRIPTION_INDEX;
+import static seedu.sherpass.constant.Indexes.SAVE_TASK_DO_DATE_INDEX;
 import static seedu.sherpass.constant.Indexes.SAVE_TASK_MARK_STATUS;
-import static seedu.sherpass.constant.Indexes.SAVE_TASK_TYPE_INDEX;
 import static seedu.sherpass.constant.Indexes.STUDY_COMMAND_INDEX;
 import static seedu.sherpass.constant.Indexes.TASK_CONTENT_INDEX;
 import static seedu.sherpass.constant.Indexes.TASK_DATE_INDEX;
@@ -64,22 +62,8 @@ import static seedu.sherpass.constant.Messages.ERROR_INVALID_MARKING_INDEX_MESSA
 import static seedu.sherpass.constant.Messages.ERROR_TODO_REPEATED_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Messages.HELP_MESSAGE_SPECIFIC_COMMAND;
 
+
 public class Parser {
-
-    private static boolean isReadTaskEmpty(Task parsedData) {
-        switch (parsedData.getType()) {
-        case "T":
-            return parsedData.getDescription().isBlank();
-        case "D":
-            // fallthrough since Deadline and Event have the same getters
-        case "E":
-            return parsedData.getDescription().isBlank() || parsedData.getDate().isBlank();
-        default:
-            return false;
-        }
-    }
-
-
     /**
      * Parses the saved data of the tasks in the save file.
      * Arranges the parsed data in a manner that can be initialised
@@ -90,36 +74,36 @@ public class Parser {
      * @throws InvalidInputException If saved data is missing content, i.e. task description or date.
      */
     public static Task parseSavedData(String[] rawData) throws InvalidInputException {
+        if (!isValidData(rawData)) {
+            throw new InvalidInputException();
+        }
         Task parsedData;
-        if (!rawData[SAVE_TASK_MARK_STATUS].equals("0") && !rawData[SAVE_TASK_MARK_STATUS].equals("1")) {
+        try {
+            LocalDate parsedByDate = LocalDate.parse(rawData[SAVE_TASK_DO_DATE_INDEX]);
+            LocalDate parsedDoDate = LocalDate.parse(rawData[SAVE_TASK_BY_DATE_INDEX]);
+
+        } catch (DateTimeParseException invalidDate) {
             throw new InvalidInputException();
         }
-        String parsedDate = null;
-        if (!rawData[SAVE_TASK_TYPE_INDEX].isBlank()) {
-            parsedDate = prepareTaskDate(rawData[SAVE_TASK_DATE_INDEX].trim(), true);
-        }
-        switch (rawData[SAVE_TASK_TYPE_INDEX].trim()) {
-        case "T":
-            parsedData = new Todo(rawData[SAVE_TASK_DESCRIPTION_INDEX].trim());
-            break;
-        case "D":
-            parsedData = new Deadline(rawData[SAVE_TASK_DESCRIPTION_INDEX].trim(),
-                parsedDate);
-            break;
-        case "E":
-            parsedData = new Event(rawData[SAVE_TASK_DESCRIPTION_INDEX].trim(),
-                parsedDate);
-            break;
-        default:
-            throw new InvalidInputException();
-        }
-        if (isReadTaskEmpty(parsedData)) {
-            throw new InvalidInputException();
-        }
-        if (rawData[SAVE_TASK_MARK_STATUS].equals("1")) {
+
+        // Using Todo for now, will be updated in the future
+        parsedData = new Todo(rawData[SAVE_TASK_DESCRIPTION_INDEX].trim());
+
+        if (rawData[SAVE_TASK_MARK_STATUS].equals("X")) {
             parsedData.markAsDone();
         }
+
         return parsedData;
+    }
+
+    private static Boolean isValidData(String[] rawData) {
+        if (rawData.length != 4) {
+            return false;
+        } else if (!rawData[SAVE_TASK_MARK_STATUS].equals(" ") && !rawData[SAVE_TASK_MARK_STATUS].equals("X")) {
+            return false;
+        }
+        return !rawData[SAVE_TASK_DESCRIPTION_INDEX].isBlank() && !rawData[SAVE_TASK_BY_DATE_INDEX].isBlank()
+            && !rawData[SAVE_TASK_DO_DATE_INDEX].isBlank();
     }
 
 

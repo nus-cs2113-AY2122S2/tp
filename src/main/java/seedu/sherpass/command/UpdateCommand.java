@@ -65,7 +65,7 @@ public class UpdateCommand extends Command {
                 return;
             }
             taskList.replaceTaskDate(taskIndexToReplace, toUpdateTaskDate, ui);
-            storage.rewriteSavedState(taskList);
+            storage.writeSaveData(taskList);
         }
     }
 }

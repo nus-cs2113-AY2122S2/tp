@@ -46,7 +46,6 @@ public class TodoCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTask(toAdd[TASK_DESCRIPTION_INDEX_TODO].trim(), " ", COMMAND_WORD);
-        storage.appendToFile(toAdd[TASK_DESCRIPTION_INDEX_TODO].trim(),
-                " ", "0", "T");
+        storage.writeSaveData(taskList);
     }
 }
