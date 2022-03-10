@@ -7,7 +7,7 @@ public class PersonList {
     private static int numberOfMembers;
 
     public PersonList() {
-        personList = new ArrayList<Person>();
+        personList = new ArrayList<>();
         numberOfMembers = 0;
     }
 
@@ -16,17 +16,17 @@ public class PersonList {
     }
 
     public static void addPerson(String name) {
-        person = new Person(name);
+        Person person = new Person(name);
         personList.add(person);
         numberOfMembers++;
     }
 
     public static void removePerson(int index) {
-        personList.remove(index);
+        personList.remove(index - 1);
     }
 
-    public static float getRemain() {
-        float sum = 0;
+    public static double getRemain() {
+        double sum = 0;
         for (Person person: personList) {
             sum += person.getDisposable();
         }
@@ -34,10 +34,13 @@ public class PersonList {
     }
 
     public static void list() {
-        for (int i = 0; i < personList.size(); i++) {
-            System.out.println((i+1) + ". " + name + System.lineSeparator() +
-                    "Income: " + personList.get(i).listIncome() + System.lineSeparator() +
-                    "Expenditure: " + personList.get(i).listExpenditure());
+        for (int i = 0; i < numberOfMembers; i++) {
+            Person person = personList.get(i);
+            System.out.println((i+1) + ". " + person.getName());
+            System.out.println("Income: ");
+            person.listIncome();
+            System.out.println("Expenditure: ");
+            person.listExpenditure();
         }
     }
 }

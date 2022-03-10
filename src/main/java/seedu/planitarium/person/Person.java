@@ -1,9 +1,12 @@
 package seedu.planitarium.person;
 
+import seedu.planitarium.ExpenditureList;
+import seedu.planitarium.IncomeList;
+
 public class Person {
-    private static String name;
-    private static ArrayList<Income> incomeList;
-    private static ArrayList<Expenditure> expenditureList;
+    protected static String name;
+    protected static IncomeList incomeList;
+    protected static ExpenditureList expenditureList;
 
     public Person(String name) {
         this.name = name;
@@ -11,25 +14,30 @@ public class Person {
         expenditureList = new ExpenditureList();
     }
 
-    public static void addIncome(int value) {
-        incomeList.add(value);
-        System.out.println("An income of " + value + " has been added");
+    public String getName() {
+        return name;
     }
 
-    public static void delIncome(int index) {
-        int value = incomeList.get(index).value;
+    public static void addIncome(String description, double amount) {
+        incomeList.addIncome(description, amount);
+        System.out.println("An income of " + amount + " from " + description + " has been added");
+    }
+
+    public static void deleteIncome(int index) {
+        String description = incomeList.getIncomeDescription(index);
+        double value = incomeList.getIncomeValue(index);
         incomeList.remove(index);
-        System.out.println("An income of " + value + " has been removed");
+        System.out.println("An income of " + value + " for " + description + " has been removed");
     }
 
     public static void addExpend(String description, int value) {
-        expenditureList.add(description, value);
+        expenditureList.addExpenditure(description, value);
         System.out.println("An expenditure of " + value + " for " + description + " has been added");
     }
 
-    public static void delExpend(int index) {
-        String description = expenditureList.get(index).description;
-        int value = expenditureList.get(index).value;
+    public static void deleteExpend(int index) {
+        String description = expenditureList.getExpenditureDescription(index);
+        double value = expenditureList.getExpenditureValue(index);
         expenditureList.remove(index);
         System.out.println("An expenditure of " + value + " for " + description + " has been removed");
     }
@@ -43,23 +51,15 @@ public class Person {
         incomeList.printIncomeList();
     }
 
-    private static float getTotalExpenditure() {
-        float totalSum = 0;
-        for (Expenditure item: expenditureList) {
-            totalSum += item.getValue();
-        }
-        return totalSum;
+    private static double getTotalExpenditure() {
+        return expenditureList.getTotalExpenditure();
     }
 
-    private static float getTotalIncome() {
-        float totalSum = 0;
-        for (Expenditure item: incomeList) {
-            totalSum += item.getValue();
-        }
-        return totalSum;
+    private static double getTotalIncome() {
+        return incomeList.getTotalIncome();
     }
 
-    public static float getDisposable() {
+    public static double getDisposable() {
         return getTotalIncome() - getTotalExpenditure();
     }
 }
