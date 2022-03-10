@@ -59,7 +59,7 @@ public class Activity {
     /**
      * Returns the activity's total cost.
      *
-     * @return A double representing the total cost.
+     * @return A double representing the total cost spent in the activity.
      */
     public double getTotalCost() {
         return totalCost;
@@ -75,9 +75,9 @@ public class Activity {
     }
 
     /**
-     * Returns a list of Person objects representing the participants in the activity.
+     * Returns a list of Person objects representing the persons involved in the activity.
      *
-     * @return An ArrayList object containing Person objects that are involved in the activity.
+     * @return An ArrayList object containing Person objects each representing a person involved in the activity.
      */
     public ArrayList<Person> getInvolvedPersonList() {
         return involvedPersonList;
