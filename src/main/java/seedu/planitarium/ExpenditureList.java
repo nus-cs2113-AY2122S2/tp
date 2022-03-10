@@ -17,7 +17,7 @@ public class ExpenditureList {
     }
 
     public double getExpenditureValue(int index) {
-        return value =  expenditureArrayList.get(index - 1).amount;
+        return expenditureArrayList.get(index - 1).amount;
     }
 
     public void remove(int index) {
@@ -35,9 +35,9 @@ public class ExpenditureList {
 
 
     public void printExpenditureList() {
-        int list_index = 1;
+        int listIndex = 1;
         for (Expenditure Item : expenditureArrayList) {
-            System.out.println(list_index++ + ". " + Item);
+            System.out.println(listIndex++ + ". " + Item);
         }
     }
     
