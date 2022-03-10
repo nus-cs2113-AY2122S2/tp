@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import seedu.duke.exception.InputRepeatedException;
 import seedu.duke.exception.InvalidInputException;
@@ -119,19 +120,6 @@ public class Storage {
         }
     }
 
-    private ArrayList<Task> readSavedData() throws IOException, InvalidInputException {
-        ArrayList<Task> taskList = new ArrayList<>();
-        List<String> dataLines = Files.readAllLines(new File(saveFilePath).toPath());
-        String dataString = String.join("", dataLines);
-        JSONObject dataJson = new JSONObject(dataString);
-        JSONArray array = dataJson.getJSONArray("tasks");
-        for (int i = 0; i < array.length(); i++) {
-            JSONObject taskData = array.getJSONObject(i);
-            taskList.add(Parser.parseSavedData(taskData));
-        }
-        return taskList;
-    }
-
     private boolean isTaskRepeated(ArrayList<Task> saveTaskList, int index) {
         for (int j = index + 1; j < saveTaskList.size(); j++) {
             if (saveTaskList.get(index).getDescription().trim()
@@ -156,18 +144,22 @@ public class Storage {
      * @return The saved data of the tasks in the saved file.
      *       Tasks are represented in an array.
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws IOException {
+        ArrayList<Task> taskList = new ArrayList<>();
         try {
-            ArrayList<Task> savedTaskList = readSavedData();
-            return savedTaskList;
-        } catch (IOException e) {
-            System.out.println(ERROR_FILE_NOT_FOUND_MESSAGE);
-            System.exit(1);
-        } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
-            System.out.println(ERROR_CORRUPT_SAVED_FILE_MESSAGE);
+            List<String> dataLines = Files.readAllLines(new File(saveFilePath).toPath());
+            String dataString = String.join("", dataLines);
+            JSONObject dataJson = new JSONObject(dataString);
+            JSONArray array = dataJson.getJSONArray("tasks");
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject taskData = array.getJSONObject(i);
+                taskList.add(Parser.parseSavedData(taskData));
+            }
+        } catch (InvalidInputException | JSONException e) {
             wipeSavedData();
+            System.out.println(ERROR_CORRUPT_SAVED_FILE_MESSAGE);
         }
-        return new ArrayList<>();
+        return taskList;
     }
 
 }
