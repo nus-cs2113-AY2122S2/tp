@@ -107,7 +107,8 @@ public class Activity {
      * @throws InvalidDataException If there is no activity found or if the person in the involvedPersonsList
      *                              did not participate in the activity.
      */
-    public String getActivityDetails() throws InvalidDataException {
+    @Override
+    public String toString() {
         return "Activity --"
                 + "Name: " + activityName + '\n'
                 + "Id:   " + activityId + '\n'
@@ -125,14 +126,18 @@ public class Activity {
      *     did not participate in the activity.
      * @see InvalidDataException
      */
-    private String getInvolvedListString() throws InvalidDataException {
+    private String getInvolvedListString() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 1; i <= involvedPersonList.size(); i++) {
-            Person person = involvedPersonList.get(i - ZERO_INDEXING_OFFSET);
-            String personName = person.getName();
-            Double costOwed = person.getActivityCostOwed(activityId);
-            String nextLineToAppend = formString(i, personName, costOwed);
-            sb.append(nextLineToAppend);
+        try {
+            for (int i = 1; i <= involvedPersonList.size(); i++) {
+                Person person = involvedPersonList.get(i - ZERO_INDEXING_OFFSET);
+                String personName = person.getName();
+                Double costOwed = person.getActivityCostOwed(activityId);
+                String nextLineToAppend = formString(i, personName, costOwed);
+                sb.append(nextLineToAppend);
+            }
+        } catch (InvalidDataException e) {
+            return e.getMessage();
         }
         return sb.toString();
     }
