@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.constant.DateAndTimeFormat;
 import seedu.duke.task.Task;
 
 import java.util.ArrayList;
@@ -18,8 +19,9 @@ public class Reminder {
      *
      * @param taskList Representation of an array of tasks.
      */
-    public Reminder(TaskList taskList) {
+    public Reminder(TaskList taskList, Ui ui) {
         tasks = taskList.getTasks();
+        this.ui = ui;
     }
 
     /**
@@ -42,29 +44,34 @@ public class Reminder {
                 .sorted(Comparator.comparing(Task::getDate))
                 .collect(toList());
 
-        System.out.println("Tasks to do today:");
-        for (Task task : filteredDailyTasks) {
-            System.out.println(task.toString());
+        if (filteredDailyTasks.size() != 0) {
+            System.out.println("Tasks to do today:");
+            for (Task task : filteredDailyTasks) {
+                System.out.println(task.toString());
+            }
+            ui.showLine();
         }
-        ui.showLine();
     }
 
     /**
      * Prints tasks that is due in the current week
      * with reference to user local machine date.
      */
+
     public void showWeeklyTask() {
         LocalDate nextWeekDate = currentDate.plusDays(7);
 
         ArrayList<Task> filteredThisWeekTasks = (ArrayList<Task>) tasks.stream()
-                .filter((t) -> t.getDate().compareTo(nextWeekDate.toString()) < 0)
+                .filter((t) -> t.getDate().compareTo(nextWeekDate.format(DateAndTimeFormat.noTimeFormat)) < 0)
                 .sorted(Comparator.comparing(Task::getDate))
                 .collect(toList());
 
-        System.out.println("Tasks to be done within the week:");
-        for (Task task : filteredThisWeekTasks) {
-            System.out.println(task.toString());
+        if (filteredThisWeekTasks.size() != 0) {
+            System.out.println("Tasks to be done within the week:");
+            for (Task task : filteredThisWeekTasks) {
+                System.out.println(task.toString());
+            }
+            ui.showLine();
         }
-        ui.showLine();
     }
 }
