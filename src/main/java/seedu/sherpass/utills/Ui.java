@@ -10,14 +10,24 @@ import static seedu.sherpass.constant.Messages.WELCOME_MESSAGE_TWO;
 public class Ui {
     private static final Scanner in = new Scanner(System.in);
     private static final String PARTITION_LINE = "______________________________"
-        + "______________________________";
+            + "______________________________";
     private static final String LS = System.lineSeparator();
-    private static final String LOGO = "  ____  _\n"
-        + " / ___|| |__   ___ _ __ _ __   __ _ ___ ___\n"
-        + " \\___ \\| '_ \\ / _ \\ '__| '_ \\ / _` / __/ __|\n"
-        + "  ___) | | | |  __/ |  | |_) | (_| \\__ \\__ \\\n"
-        + " |____/|_| |_|\\___|_|  | .__/ \\__,_|___/___/\n"
-        + "                       |_|";
+    private static final String ANSI_BRIGHT_BLUE = "\u001B[94m";
+    private static final String ANSI_BRIGHT_CYAN = "\u001B[96m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    private static final String LOGO = ANSI_BRIGHT_BLUE
+            + "  ____  _\n"
+            + " / ___|| |__   ___ _ __ "
+            + ANSI_BRIGHT_CYAN + "_ __   __ _ ___ ___\n"
+            + ANSI_BRIGHT_BLUE + " \\___ \\| '_ \\ / _ \\ '__| "
+            + ANSI_BRIGHT_CYAN  + "'_ \\ / _` / __/ __|\n"
+            + ANSI_BRIGHT_BLUE + "  ___) | | | |  __/ |  "
+            + ANSI_BRIGHT_CYAN + "| |_) | (_| \\__ \\__ \\\n"
+            + ANSI_BRIGHT_BLUE + " |____/|_| |_|\\___|_|  "
+            + ANSI_BRIGHT_CYAN + "| .__/ \\__,_|___/___/\n"
+            + ANSI_BRIGHT_BLUE + "                       "
+            + ANSI_BRIGHT_CYAN + "|_|" + ANSI_RESET;
+
 
 
     /**
@@ -56,7 +66,7 @@ public class Ui {
      */
     public void showWelcomeMessage() {
         String message = PARTITION_LINE + LS + WELCOME_MESSAGE_ONE
-            + LOGO + LS + WELCOME_MESSAGE_TWO + LS + PARTITION_LINE;
+                + LOGO + LS + WELCOME_MESSAGE_TWO + LS + PARTITION_LINE;
         showToUser(message);
     }
 
