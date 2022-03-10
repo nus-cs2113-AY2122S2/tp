@@ -1,4 +1,7 @@
 goto m/Contacts_Manager
+add Lucy
+list
+rm 1
 list
 menu
 exit
