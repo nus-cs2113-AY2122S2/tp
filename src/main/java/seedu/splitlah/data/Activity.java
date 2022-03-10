@@ -25,8 +25,8 @@ public class Activity {
      * @param activityName       A String object that represents the activity's name.
      * @param totalCost          A double that represents the total cost spent in the activity.
      * @param personPaid         A Person object representing the person who paid for the activity.
-     * @param involvedPersonList An ArrayList object containing Persons object
-     *                           representing the persons involved in the activity.
+     * @param involvedPersonList An ArrayList object containing Person objects
+     *                           each representing a person involved in the activity.
      */
     public Activity(int activityId, String activityName, double totalCost, Person personPaid,
                     ArrayList<Person> involvedPersonList) {
