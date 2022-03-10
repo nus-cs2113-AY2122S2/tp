@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class ExerciseList {
     private final ArrayList<String> exercisesList = new ArrayList<>();
     private int numberOfExercises = 0;
-    private final UI ui = new UI();
+    private UI ui = new UI();
 
     /**
      * Adds a new exercise into the exercises ArrayList and updates
