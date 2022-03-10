@@ -2,6 +2,7 @@ package seedu.mindmymoney;
 
 import seedu.mindmymoney.command.Command;
 import seedu.mindmymoney.command.HelpCommand;
+import seedu.mindmymoney.command.UpdateCommand;
 import seedu.mindmymoney.command.AddCommand;
 import seedu.mindmymoney.command.ListCommand;
 import seedu.mindmymoney.command.DeleteCommand;
@@ -37,6 +38,8 @@ public class Parser {
             return new HelpCommand(false); //solving fall through issue, need return something leh
         case "add":
             return new AddCommand(parsedInput[Indexes.INDEX_OF_SECOND_ITEM_IN_STRING]);
+        case "update":
+            return new UpdateCommand(parsedInput[Indexes.INDEX_OF_SECOND_ITEM_IN_STRING]);
         case "list":
             return new ListCommand();
         case "delete":
