@@ -12,7 +12,7 @@ public class Manager {
     Command command = new Command();
     PatientList patientList = new PatientList();
     private boolean isTerminated = false;
-    
+
     /**
      * Main application loop that holds switch case statement.
      */

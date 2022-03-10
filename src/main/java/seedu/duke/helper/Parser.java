@@ -30,25 +30,63 @@ public class Parser {
         for (String parameter: parametersArray) {
             parameter = parameter.trim();
         }
-
-        Pattern nricPattern = Pattern.compile("[A-Z][0-9]{7}[A-Z]");
-        Matcher nricMatcher = nricPattern.matcher(parametersArray[0]);
-
-        Pattern fullNamePattern = Pattern.compile("([a-zA-Z]+( [a-zA-Z]+)+)");
-        Matcher fullNameMatcher = fullNamePattern.matcher(parametersArray[1]);
-
-        int age = Integer.parseInt(parametersArray[2]);
-
-        Pattern genderPattern = Pattern.compile("M|F");
-        Matcher genderMatcher = genderPattern.matcher(parametersArray[3]);
-
-        Pattern addressPattern = Pattern.compile("[\\w\\-\\s'()]*");
-        Matcher addressMatcher = addressPattern.matcher(parametersArray[4]);
-
-        LocalDate dob = LocalDate.parse(parametersArray[5]);
-
-        LocalDate dateAdmission = LocalDate.parse(parametersArray[6]);
+        
 
         return null;
+    }
+
+    private static boolean validateNric(String nric) {
+        Pattern nricPattern = Pattern.compile("[A-Z][0-9]{7}[A-Z]");
+        Matcher nricMatcher = nricPattern.matcher(nric);
+        return nricMatcher.matches();
+    }
+
+    private static boolean validateFullName(String fullName) {
+        Pattern fullNamePattern = Pattern.compile("([a-zA-Z]+( [a-zA-Z]+)+)");
+        Matcher fullNameMatcher = fullNamePattern.matcher(fullName);
+        return fullNameMatcher.matches();
+    }
+
+    private static boolean validateAge(String ageString) {
+        int age = Integer.parseInt(ageString);
+        if (1 <= age && age <= 120) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private static boolean validateGender(String gender) {
+        Pattern genderPattern = Pattern.compile("M|F");
+        Matcher genderMatcher = genderPattern.matcher(gender);
+        return genderMatcher.matches();
+    }
+
+    private static boolean validateAddress(String address) {
+        Pattern addressPattern = Pattern.compile("[\\w\\-\\s'()]*");
+        Matcher addressMatcher = addressPattern.matcher(address);
+        return addressMatcher.matches();
+    }
+
+    private static boolean validateDob(String dobString) {
+        LocalDate dob = LocalDate.parse(dobString);
+        LocalDate today = LocalDate.now();
+        LocalDate dobLimit = LocalDate.parse("1900-01-01");
+        if (dob.isAfter(dobLimit) && dob.isBefore(today)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private static boolean validateAdmissionDate(String admissionDateString) {
+        LocalDate admissionDate = LocalDate.parse(admissionDateString);
+        LocalDate today = LocalDate.now();
+        LocalDate admissionDateLimit = LocalDate.parse("1980-01-01");
+        if (admissionDate.isAfter(admissionDateLimit) && admissionDate.isBefore(today)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

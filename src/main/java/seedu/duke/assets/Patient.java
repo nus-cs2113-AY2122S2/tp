@@ -7,17 +7,17 @@ public class Patient {
     char gender;
     String address;
     String dob;
-    String dateAdmission;
+    String AdmissionDate;
 
     public Patient(String nric, String fullName, int age, char gender, String address, String dob,
-                   String dateAdmission) {
+                   String AdmissionDate) {
         this.nric = nric;
         this.fullName = fullName;
         this.age = age;
         this.gender = gender;
         this.address = address;
         this.dob = dob;
-        this.dateAdmission = dateAdmission;
+        this.AdmissionDate = AdmissionDate;
     }
 
     public String getNric() {
@@ -44,8 +44,8 @@ public class Patient {
         return dob;
     }
 
-    public String getDateAdmission() {
-        return dateAdmission;
+    public String getAdmissionDate() {
+        return AdmissionDate;
     }
 
     @Override
@@ -57,6 +57,6 @@ public class Patient {
                 + ", Gender=" + gender
                 + ", Address='" + address
                 + '\'' + ", DOB='" + dob + '\''
-                + ", DateOfAdmission='" + dateAdmission + '\'' + '}';
+                + ", DateOfAdmission='" + AdmissionDate + '\'' + '}';
     }
 }
