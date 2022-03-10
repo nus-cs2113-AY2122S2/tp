@@ -19,6 +19,7 @@ public class Parser {
     public static final int LIMIT_TWO_TOKENS = 2;
     public static final int LIMIT_TWO_DECIMAL = 2;
     public static final int MIN_USER_INDEX = 1;
+    public static final int MIN_EXPENDITURE_INDEX = 1;
     public static final double MONEY_ZERO = 0.0;
 
     /**
@@ -125,6 +126,23 @@ public class Parser {
             throw new IndexOutOfBoundsException();
         }
         if (checkIndex >= PersonList.getNumberOfMembers()) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    /**
+     * Returns without exception if expenditure index is within expenditure quantity bounds.
+     *
+     * @param expenditureIndex Person's expenditure lookup index.
+     * @param person      Person who has expenditure.
+     */
+    public static void isValidExpenditureIndex(String expenditureIndex, Person person)
+            throws NumberFormatException, IndexOutOfBoundsException {
+        int checkIndex = Integer.parseInt(expenditureIndex);
+        if (checkIndex < MIN_EXPENDITURE_INDEX) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (checkIndex >= Person.getNumberOfExpenditures()) {
             throw new IndexOutOfBoundsException();
         }
     }
