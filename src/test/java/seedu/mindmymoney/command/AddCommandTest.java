@@ -11,7 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddCommandTest {
     private final ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
@@ -54,7 +54,7 @@ class AddCommandTest {
     }
 
     public String getOutput(ArrayList<Expenditure> list) {
-        if(!list.isEmpty()){
+        if (!list.isEmpty()) {
             return list.get(list.size() + Indexes.LIST_INDEX_CORRECTION).getDescription()
                     + list.get(list.size() + Indexes.LIST_INDEX_CORRECTION).getAmount();
         }
