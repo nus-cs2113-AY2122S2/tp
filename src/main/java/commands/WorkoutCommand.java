@@ -91,7 +91,7 @@ public class WorkoutCommand extends Command {
                 getWorkoutList().listWorkout();
                 break;
             case DELETE_ACTION_KEYWORD:
-                Workout deletedWorkout = workoutList.deleteWorkout(getUserArguments());
+                Workout deletedWorkout = getWorkoutList().deleteWorkout(getUserArguments());
                 getUI().printDeleteWorkoutMessage(deletedWorkout);
                 getFileManager().rewriteAllWorkoutsToFile(getWorkoutList());
                 break;
