@@ -108,27 +108,28 @@ public class Storage {
      * @param taskList Array of tasks that are to be saved.
      */
     public void writeSaveData(TaskList taskList) {
-        wipeSavedData();
-        ArrayList<Task> replicatedTasks = taskList.getTasks();
-        for (Task task : replicatedTasks) {
-            appendToFile(task.getDescription(), PLACEHOLDER_GET_BY_DATE,
-                    PLACEHOLDER_GET_DO_DATE, task.getStatusIcon());
+        JSONObject taskJson = convertTaskListToJson(taskList);
+        String taskString = taskJson.toString(4);
+        try {
+            FileWriter writer = new FileWriter(saveFilePath);
+            writer.write(taskString);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(ERROR_IO_FAILURE_MESSAGE);
         }
     }
 
-    private ArrayList<Task> readSavedData() throws
-            FileNotFoundException, ArrayIndexOutOfBoundsException, InvalidInputException {
-        ArrayList<Task> decodedTasks = new ArrayList<>();
-        File f = new File(saveFilePath);
-        Scanner s = new Scanner(f);
-        String[] taskRawData;
-        Task taskParsedData;
-        while (s.hasNext()) {
-            taskRawData = s.nextLine().split(" \\| ");
-            taskParsedData = Parser.parseSavedData(taskRawData);
-            decodedTasks.add(taskParsedData);
+    private ArrayList<Task> readSavedData() throws IOException, InvalidInputException {
+        ArrayList<Task> taskList = new ArrayList<>();
+        List<String> dataLines = Files.readAllLines(new File(saveFilePath).toPath());
+        String dataString = String.join("", dataLines);
+        JSONObject dataJson = new JSONObject(dataString);
+        JSONArray array = dataJson.getJSONArray("tasks");
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject taskData = array.getJSONObject(i);
+            taskList.add(Parser.parseSavedData(taskData));
         }
-        return decodedTasks;
+        return taskList;
     }
 
     private boolean isTaskRepeated(ArrayList<Task> saveTaskList, int index) {
@@ -159,7 +160,7 @@ public class Storage {
         try {
             ArrayList<Task> savedTaskList = readSavedData();
             return savedTaskList;
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             System.out.println(ERROR_FILE_NOT_FOUND_MESSAGE);
             System.exit(1);
         } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
