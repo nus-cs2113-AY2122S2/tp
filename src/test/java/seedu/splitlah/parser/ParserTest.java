@@ -30,4 +30,24 @@ class ParserTest {
         assertEquals(InvalidCommand.class, command.getClass());
     }
 
+    // getCommandType()
+    @Test
+    void getCommandType_emptyStringInput_emptyString() {
+        String emptyString = "";
+        String output = Parser.getCommandType(emptyString);
+        assertEquals("", output);
+    }
+
+    @Test
+    void getCommandType_singleTokenInput_inputEqualsOutput() {
+        String singleTokenString = "randomTest123";
+        String output = Parser.getCommandType(singleTokenString);
+        assertEquals(singleTokenString, output);
+    }
+
+    void getCommandType_doubleTokenNoDelimiterInput_null() {
+        String doubleTokenWithNoDelimiterString = "help apple";
+        String output = Parser.getCommandType(doubleTokenWithNoDelimiterString);
+        assertNull(output);
+    }
 }
