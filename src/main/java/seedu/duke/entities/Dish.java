@@ -2,7 +2,7 @@ package seedu.duke.entities;
 
 public class Dish {
     private String name;
-    private double price;
+    public double price;
 
     public String getName() {
         return name;

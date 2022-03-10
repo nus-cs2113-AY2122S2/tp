@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.entities;
 
 import java.util.ArrayList;
 
@@ -9,11 +9,11 @@ public class Order {
         this.order = new ArrayList<Dish>();
     }
 
-    void addDishToOrder(Dish dish) {
+    public void addDishToOrder(Dish dish) {
         this.order.add(dish);
     }
 
-    void removeDishFromOrderByIndex(int i) {
+    public void removeDishFromOrderByIndex(int i) {
         this.order.remove(i);
     }
 
@@ -28,12 +28,5 @@ public class Order {
         }
         return totalPrice;
     }
-
-//    public String displayOrder() {
-//        StringBuffer sb = new StringBuffer();
-//        sb.append("-----")
-//
-//        return sb.toString();
-//    }
 
 }
