@@ -9,13 +9,13 @@ import java.util.Scanner;
  * DishController (or MenuController if you like).
  */
 public class DishController extends Controller {
-    private static final String[] defaultChoice = {"Exit Menu", "Add Dish", "Delete Dish",
+    private static final String[] CHOICES = {"Exit Menu", "Add Dish", "Delete Dish",
         "Change the price of a dish", "Change the name of a dish"
     };
     private final DishManager dishManager;
 
     public DishController(Scanner scanner) {
-        super(defaultChoice, scanner);
+        super(CHOICES, scanner);
         dishManager = new DishManager();
     }
 
