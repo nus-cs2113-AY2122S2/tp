@@ -1,1 +1,2 @@
-James Gosling
+add id/1 n/chairs q/100
+bye
