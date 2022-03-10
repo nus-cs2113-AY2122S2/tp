@@ -15,8 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static seedu.duke.constant.Indexes.DIRECTORY_INDEX;
-import static seedu.duke.constant.Messages.ERROR_CORRUPT_SAVED_FILE_MESSAGE;
-import static seedu.duke.constant.Messages.ERROR_FILE_NOT_FOUND_MESSAGE;
+import static seedu.duke.constant.Messages.ERROR_CORRUPT_SAVED_FILE_MESSAGE_1;
+import static seedu.duke.constant.Messages.ERROR_CORRUPT_SAVED_FILE_MESSAGE_2;
+import static seedu.duke.constant.Messages.ERROR_CORRUPT_SAVED_FILE_MESSAGE_3;
 import static seedu.duke.constant.Messages.ERROR_IO_FAILURE_MESSAGE;
 
 public class Storage {
@@ -160,6 +161,21 @@ public class Storage {
             System.out.println(ERROR_CORRUPT_SAVED_FILE_MESSAGE);
         }
         return taskList;
+    }
+
+    public void handleCorruptedSave(Ui ui) {
+        ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_1);
+        String response = "";
+        while (!response.equals("Y") || response.equals("N")) {
+            ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_2);
+            response = ui.readCommand();
+            if (response.equals("Y")) {
+                wipeSavedData();
+            } else if (response.equals("N")){
+                ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_3);
+                System.exit(1);
+            }
+        }
     }
 
 }
