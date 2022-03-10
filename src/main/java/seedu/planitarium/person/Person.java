@@ -116,4 +116,22 @@ public class Person {
     public static double getDisposable() {
         return getTotalIncome() - getTotalExpenditure();
     }
+
+    /**
+     * Returns the number of incomes the person has.
+     *
+     * @return The number of incomes
+     */
+    public static int getNumberOfIncome() {
+        return incomeList.getNumberOfIncomes();
+    }
+
+    /**
+     * Returns the number of expenditures the person has.
+     *
+     * @return The number of expenditures
+     */
+    public static int getNumberOfExpenditures() {
+        return expenditureList.getNumberOfExpenditures();
+    }
 }
