@@ -1,7 +1,18 @@
+package seedu.splitlah.command;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import seedu.splitlah.data.Manager;
+
 import static org.junit.jupiter.api.Assertions.*;
+
 class SessionCreateCommandTest {
-  
+
     Manager manager = new Manager();
+
+    /**
+     * This method sets up a list of 2 sessions that is managed by the Manager object.
+     */
     @BeforeEach
     void setUp() {
         String sessionOneArgs = "session /create /n Class outing /d 2022-02-15 /pl Alice Bob";
@@ -11,6 +22,11 @@ class SessionCreateCommandTest {
         Command createSessionTwo = SessionCreateCommand.prepare(sessionTwoArgs);
         createSessionTwo.run(manager);
     }
+
+    /**
+     * Checks if a session is created with duplicated person names.
+     */
+    @Test
     public void run_hasOneNameDuplicate_sessionListSizeRemainsTwo() {
         String userInput = "session /create /n Class outing /d 2022-02-23 /pl Alice Alice Bob";
         Command command = SessionCreateCommand.prepare(userInput);
