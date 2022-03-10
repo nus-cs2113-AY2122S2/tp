@@ -158,12 +158,13 @@ public class Activity {
     }
 
     /**
-     * Returns a string with the correct format for the involved persons and their costs for the activity.
+     * Returns a String object with the correct format for the persons involved int the activity
+     * and their respective costs for the activity.
      * Format: <[INDEX]. [PERSON_NAME], $[COST_OWED]>, e.g. <1. Bob, $5.00>
      *
-     * @param index The index of the person involved in the activity.
-     * @param personName The name of the person involved in the activity.
-     * @param costOwed The cost that has not been paid by the person involved in the activity.
+     * @param index      An integer representing index of the Person object involved in the activity.
+     * @param personName A String object representing the name of the person involved in the activity.
+     * @param costOwed   A double representing the cost that is owed by the person involved in the activity.
      * @return A String object with the correct format representing involved persons and costs.
      */
     private String formString(int index, String personName, Double costOwed) {
