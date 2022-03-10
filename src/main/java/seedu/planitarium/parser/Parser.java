@@ -121,7 +121,10 @@ public class Parser {
      */
     public static void isValidUserIndex(String userIndex) throws NumberFormatException, IndexOutOfBoundsException {
         int checkIndex = Integer.parseInt(userIndex);
-        if (checkIndex < MIN_USER_INDEX || checkIndex >= PersonList.getNumberOfMembers()) {
+        if (checkIndex < MIN_USER_INDEX) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (checkIndex >= PersonList.getNumberOfMembers()) {
             throw new IndexOutOfBoundsException();
         }
     }
