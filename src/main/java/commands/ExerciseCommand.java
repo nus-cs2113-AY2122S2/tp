@@ -35,10 +35,18 @@ public class ExerciseCommand extends Command{
 
     @Override
     public void execute() {
-        switch(userAction) {
-        case LIST_ACTION_KEYWORD:
-            exerciseList.printExerciseList();
-            break;
+        try {
+            switch (userAction) {
+            case LIST_ACTION_KEYWORD:
+                exerciseList.printExerciseList();
+                break;
+            default:
+                String className = this.getClass().getSimpleName();
+                throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
+            }
+        } catch (InvalidCommandException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Please try again");
         }
     }
 }

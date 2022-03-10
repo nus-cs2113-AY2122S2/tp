@@ -1,4 +1,5 @@
 package data.exercises;
+
 import textcolors.TextColor;
 import werkit.UI;
 

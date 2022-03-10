@@ -112,6 +112,9 @@ public class Parser {
         switch (actionKeyword) {
         case LIST_ACTION_KEYWORD:
             break;
+        default:
+            String className = this.getClass().getSimpleName();
+            throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
         }
         return new ExerciseCommand(userInput, ui, exerciseList, actionKeyword, arguments);
     }
