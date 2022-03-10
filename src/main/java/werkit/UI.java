@@ -1,11 +1,15 @@
 package werkit;
 
 import data.workouts.Workout;
+import storage.FileManager;
+import storage.UnknownFileException;
+import textcolors.TextColor;
 
+import java.nio.file.Path;
 import java.util.Scanner;
 
-import static textcolors.TextColor.COLOR_RESET;
-import static textcolors.TextColor.COLOR_YELLOW;
+//import static textcolors.TextColor.COLOR_RESET;
+//import static textcolors.TextColor.COLOR_YELLOW;
 
 /**
  * This class contains all the user interface-related texts and methods for the WerkIt! Application.
@@ -26,9 +30,30 @@ public class UI {
     public static final String DEFAULT_LINE_CHAR = "-";
     // Prompt symbol
     public static final String PROMPT_SYMBOL = ">";
+    // File loading-related messages
+    public static final String CHECK_DIRECTORY_AND_FILES_MSG = "Checking for required directory and files...";
+    public static final String ALL_DIRECTORY_AND_FILES_PRESENT = "All OK!";
+    public static final String DIRECTORY_NOT_FOUND_MSG = "- The required data directory was not found. It will "
+            + "be created.";
+    public static final String DIRECTORY_CREATED_MSG = "- The WerkIt! resource directory has been created in\n"
+            + "  your terminal's current working directory.";
+    public static final String EXERCISE_FILE_NOT_FOUND_MSG = "- The exercise file was not found. It will be created.";
+    public static final String EXERCISE_FILE_CREATED_MSG = "- The exercise file 'exercises.txt' has been created in\n"
+            + "  the WerkIt! resource directory.";
+    public static final String WORKOUT_FILE_NOT_FOUND_MSG = "- The workout file was not found. It will be created.";
+    public static final String WORKOUT_FILE_CREATED_MSG = "- The workout file 'workouts.txt' has been created in\n"
+            + "  the WerkIt! resource directory.";
+    public static final String FILE_LOAD_OK = "OK!";
+    public static final String FILE_LOAD_NOT_OK = "Not OK...";
+    public static final String LOADING_FILE_DATA_MSG = "Loading saved file data...";
+    public static final String EXERCISES_FILE_LOADED_MSG =  "- Exercises file\t%s\n";
+    public static final String WORKOUTS_FILE_LOADED_MSG = "- Workouts file \t%s\n";
     // Workout-related messages
     public static final String NEW_WORKOUT_CREATED_MESSAGE = "Alright, the following workout has been created:";
     public static final String DELETED_WORKOUT_MESSAGE = "Alright, the following workout has been removed:";
+    // IOException Error Message
+    public static final String IOEXCEPTION_ERROR_MESSAGE = "[ERROR] The program has encountered an IOException "
+            + "and needs to close. Sorry about that...";
 
     // Scanner object for reading in user input from standard input
     Scanner inputReader = new Scanner(System.in);
@@ -83,6 +108,7 @@ public class UI {
         printLine();
         if (isFirstPrompt) {
             System.out.println("Now then, what can I do for you today?");
+            System.out.println("(Need help? Type 'help' for a guide!)");
         } else {
             System.out.println("What's next?");
         }
@@ -107,7 +133,7 @@ public class UI {
     /**
      * Prints a message when a new workout has been created. The newly created workout will also be displayed.
      *
-     * @param newWorkout workout with exercise name and number of repetitions.
+     * @param newWorkout The Workout object that is newly created.
      */
     public void printNewWorkoutCreatedMessage(Workout newWorkout) {
         System.out.println(NEW_WORKOUT_CREATED_MESSAGE);
@@ -119,7 +145,7 @@ public class UI {
     /**
      * Prints a message when a workout has been deleted. Deleted workout will also be displayed.
      *
-     * @param deletedWorkout workout with exercise name and number of repetitions.
+     * @param deletedWorkout The workout to be deleted.
      */
     public void printDeleteWorkoutMessage(Workout deletedWorkout) {
         System.out.println(DELETED_WORKOUT_MESSAGE);
@@ -134,7 +160,19 @@ public class UI {
      * @param text The string text that needs to be colored.
      */
     public void printColorText(String color, String text) {
-        System.out.println(color + text + COLOR_RESET);
+        System.out.println(color + text + TextColor.COLOR_RESET);
+    }
+
+    /**
+     * Formats the string to contain the ANSI color code specified.
+     *
+     * @param color The color to format the string into.
+     * @param text The text to be formatted with a color.
+     * @return The string formatted with the ANSI color code.
+     */
+    public String getColorText(String color, String text) {
+        String textWithColor = color + text + TextColor.COLOR_RESET;
+        return textWithColor;
     }
 
     /**
@@ -157,7 +195,7 @@ public class UI {
      */
     public void printListHelp() {
         System.out.println("\t To view all workouts, please enter:");
-        printColorText(COLOR_YELLOW, "\t workout /list");
+        printColorText(TextColor.COLOR_YELLOW, "\t workout /list");
         System.out.println("\t This will print all the existing workouts.");
     }
 
@@ -166,9 +204,9 @@ public class UI {
      */
     public void printWorkoutAddHelp() {
         System.out.println("\t To add a workout, please enter: ");
-        printColorText(COLOR_YELLOW, "\t workout /new <exercise name> /reps <no. of repetitions>");
+        printColorText(TextColor.COLOR_YELLOW, "\t workout /new <exercise name> /reps <no. of repetitions>");
         System.out.println("\t Example: ");
-        printColorText(COLOR_YELLOW, "\t workout /new push up /reps 10");
+        printColorText(TextColor.COLOR_YELLOW, "\t workout /new push up /reps 10");
         System.out.println("\t This will add a workout with 10 reps of push up.");
     }
 
@@ -177,9 +215,9 @@ public class UI {
      */
     public void printWorkoutDeleteHelp() {
         System.out.println("\t To delete a workout, please enter: ");
-        printColorText(COLOR_YELLOW, "\t workout /delete <index>");
+        printColorText(TextColor.COLOR_YELLOW, "\t workout /delete <index>");
         System.out.println("\t Example: ");
-        printColorText(COLOR_YELLOW, "\t workout /delete 1");
+        printColorText(TextColor.COLOR_YELLOW, "\t workout /delete 1");
         System.out.println("\t This will delete the workout with index 1 if exists.");
     }
 
@@ -188,9 +226,9 @@ public class UI {
      */
     public void printWorkoutUpdateHelp() {
         System.out.println("\t To update a workout, please enter: ");
-        printColorText(COLOR_YELLOW, "\t workout /update <index> <quantity>");
+        printColorText(TextColor.COLOR_YELLOW, "\t workout /update <index> <quantity>");
         System.out.println("\t Example: ");
-        printColorText(COLOR_YELLOW, "\t workout /update 1 15");
+        printColorText(TextColor.COLOR_YELLOW, "\t workout /update 1 15");
         System.out.println("\t This will update the workout with index 1 to 15 reps if exists.");
     }
 
@@ -199,7 +237,75 @@ public class UI {
      */
     public void printExitHelp() {
         System.out.println("\t To exit werkIt, please enter: ");
-        printColorText(COLOR_YELLOW, "\t exit");
+        printColorText(TextColor.COLOR_YELLOW, "\t exit");
         System.out.println("\t This will exit werkIt.");
+    }
+
+    public void printLoadingFileDataMessage() {
+        System.out.println(LOADING_FILE_DATA_MSG);
+    }
+
+    public void printFileLoadStatusMessage(String filename, boolean isLoadSuccessful) throws UnknownFileException {
+        String statusMessage;
+        if (isLoadSuccessful) {
+            statusMessage = getColorText(TextColor.COLOR_GREEN, FILE_LOAD_OK);
+        } else {
+            statusMessage = getColorText(TextColor.COLOR_RED, FILE_LOAD_NOT_OK);
+        }
+
+        String messageToPrint;
+        switch (filename) {
+        case FileManager.EXERCISE_FILENAME:
+            messageToPrint = EXERCISES_FILE_LOADED_MSG;
+            break;
+        case FileManager.WORKOUT_FILENAME:
+            messageToPrint = WORKOUTS_FILE_LOADED_MSG;
+            break;
+        default:
+            throw new UnknownFileException(filename, UnknownFileException.UNKNOWN_FILE_MSG);
+        }
+
+        System.out.printf(messageToPrint, statusMessage);
+    }
+
+    public void printCheckingDirectoryAndFilesMessage() {
+        System.out.print(CHECK_DIRECTORY_AND_FILES_MSG);
+    }
+
+    public void printDirectoryNotFoundMessage() {
+        System.out.println();
+        System.out.println(DIRECTORY_NOT_FOUND_MSG);
+    }
+
+    public void printDirectoryCreatedMessage() {
+        System.out.println(DIRECTORY_CREATED_MSG);
+    }
+
+    public void printExerciseFileNotFoundMessage() {
+        System.out.println();
+        System.out.println(EXERCISE_FILE_NOT_FOUND_MSG);
+    }
+
+    public void printExerciseFileCreatedMessage() {
+        System.out.println(EXERCISE_FILE_CREATED_MSG);
+    }
+
+    public void printWorkoutFileNotFoundMessage() {
+        System.out.println();
+        System.out.println(WORKOUT_FILE_NOT_FOUND_MSG);
+    }
+
+    public void printWorkoutFileCreatedMessage() {
+        System.out.println(WORKOUT_FILE_CREATED_MSG);
+    }
+
+    public void printEmptyLineOrStatus(boolean areAllDirectoryAndFilesPresent) {
+        if (areAllDirectoryAndFilesPresent) {
+            String status = getColorText(TextColor.COLOR_GREEN, ALL_DIRECTORY_AND_FILES_PRESENT);
+            System.out.println(" " + status);
+            System.out.println();
+        } else {
+            System.out.println();
+        }
     }
 }
