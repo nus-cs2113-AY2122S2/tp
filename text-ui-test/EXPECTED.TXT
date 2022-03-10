@@ -9,17 +9,16 @@ Welcome to WerkIt!, your personal exercise planner.
 ----------------------------------------------------------------------
 Checking for required directory and files...
 - The required data directory was not found. It will be created.
-- The following directory has been created at your terminal's
-  current working directory:
-	werkItResources
+- The WerkIt! resource directory has been created in
+  your terminal's current working directory.
 
 - The exercise file was not found. It will be created.
-- The exercise file has been created at the following location:
-	werkItResources\exercises.txt
+- The exercise file 'exercises.txt' has been created in
+  the WerkIt! resource directory.
 
 - The workout file was not found. It will be created.
-- The workout file has been created at the following location:
-	werkItResources\exercises.txt
+- The workout file 'workouts.txt' has been created in
+  the WerkIt! resource directory.
 
 Loading saved file data...
 - Exercises file	[32mOK![0m

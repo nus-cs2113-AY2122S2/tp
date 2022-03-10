@@ -35,21 +35,19 @@ public class UI {
     public static final String ALL_DIRECTORY_AND_FILES_PRESENT = "All OK!";
     public static final String DIRECTORY_NOT_FOUND_MSG = "- The required data directory was not found. It will "
             + "be created.";
-    public static final String DIRECTORY_CREATED_MSG = "- The following directory has been created at your terminal's\n"
-            + "  current working directory:\n\t%s\n";
+    public static final String DIRECTORY_CREATED_MSG = "- The WerkIt! resource directory has been created in\n"
+            + "  your terminal's current working directory.";
     public static final String EXERCISE_FILE_NOT_FOUND_MSG = "- The exercise file was not found. It will be created.";
-    public static final String EXERCISE_FILE_CREATED_MSG = "- The exercise file has been created at the following "
-            + "location:\n\t%s\n";
+    public static final String EXERCISE_FILE_CREATED_MSG = "- The exercise file 'exercises.txt' has been created in\n"
+            + "  the WerkIt! resource directory.";
     public static final String WORKOUT_FILE_NOT_FOUND_MSG = "- The workout file was not found. It will be created.";
-    public static final String WORKOUT_FILE_CREATED_MSG = "- The workout file has been created at the following "
-            + "location:\n\t%s\n";
+    public static final String WORKOUT_FILE_CREATED_MSG = "- The workout file 'workouts.txt' has been created in\n"
+            + "  the WerkIt! resource directory.";
     public static final String FILE_LOAD_OK = "OK!";
     public static final String FILE_LOAD_NOT_OK = "Not OK...";
     public static final String LOADING_FILE_DATA_MSG = "Loading saved file data...";
     public static final String EXERCISES_FILE_LOADED_MSG =  "- Exercises file\t%s\n";
     public static final String WORKOUTS_FILE_LOADED_MSG = "- Workouts file \t%s\n";
-    public static final String TEMPORARY_LOCATION_PLACEHOLDER = "(Location not shown due to Java CI "
-            + "showing different paths for\n\tthe different OSes)";
     // Workout-related messages
     public static final String NEW_WORKOUT_CREATED_MESSAGE = "Alright, the following workout has been created:";
     public static final String DELETED_WORKOUT_MESSAGE = "Alright, the following workout has been removed:";
@@ -279,8 +277,8 @@ public class UI {
         System.out.println(DIRECTORY_NOT_FOUND_MSG);
     }
 
-    public void printDirectoryCreatedMessage(Path directoryPath) {
-        System.out.printf(DIRECTORY_CREATED_MSG, directoryPath);
+    public void printDirectoryCreatedMessage() {
+        System.out.println(DIRECTORY_CREATED_MSG);
     }
 
     public void printExerciseFileNotFoundMessage() {
@@ -288,8 +286,8 @@ public class UI {
         System.out.println(EXERCISE_FILE_NOT_FOUND_MSG);
     }
 
-    public void printExerciseFileCreatedMessage(Path exerciseFilePath) {
-        System.out.printf(EXERCISE_FILE_CREATED_MSG, exerciseFilePath);
+    public void printExerciseFileCreatedMessage() {
+        System.out.println(EXERCISE_FILE_CREATED_MSG);
     }
 
     public void printWorkoutFileNotFoundMessage() {
@@ -297,8 +295,8 @@ public class UI {
         System.out.println(WORKOUT_FILE_NOT_FOUND_MSG);
     }
 
-    public void printWorkoutFileCreatedMessage(Path workoutFilePath) {
-        System.out.printf(WORKOUT_FILE_CREATED_MSG, workoutFilePath);
+    public void printWorkoutFileCreatedMessage() {
+        System.out.println(WORKOUT_FILE_CREATED_MSG);
     }
 
     public void printEmptyLineOrStatus(boolean areAllDirectoryAndFilesPresent) {
