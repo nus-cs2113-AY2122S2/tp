@@ -6,6 +6,7 @@ cd ..
 call gradlew clean shadowJar
 
 cd build\libs
+if exist data/sherpass.txt del data/sherpass.txt
 for /f "tokens=*" %%a in (
     'dir /b *.jar'
 ) do (
