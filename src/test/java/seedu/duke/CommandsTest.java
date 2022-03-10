@@ -2,7 +2,7 @@ package seedu.duke;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CommandsTest {
     public void addGoodTest() {
