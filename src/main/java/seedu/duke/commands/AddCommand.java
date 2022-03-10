@@ -16,9 +16,9 @@ public class AddCommand extends Command {
     private Task newTask = null;
     private Module newModule = null;
 
-    public AddCommand(String name, String description, boolean isTask) {
+    public AddCommand(String name, String description, boolean isTask, String estimatedWorkingTime) {
         if (isTask) {
-            newTask = new Task(name, description);
+            newTask = new Task(name, description, estimatedWorkingTime);
             isAddTask = true;
         } else {
             newModule = new Module(name, description);

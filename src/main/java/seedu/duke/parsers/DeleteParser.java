@@ -6,6 +6,7 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class DeleteParser extends Parser {
 
@@ -26,11 +27,11 @@ public class DeleteParser extends Parser {
         HashMap<String, String> parsedArguments = parseString(userInput);
         String taskNumberString = parsedArguments.get(TASK_NUMBER);
         String moduleCode = parsedArguments.get(MODULE_CODE);
-        if (!moduleCode.isBlank()) {
+        if (!Objects.equals(moduleCode, NULL_FIELD)) {
             return new DeleteCommand(moduleCode);
         }
 
-        if (!taskNumberString.isBlank()) {
+        if (!Objects.equals(taskNumberString, NULL_FIELD)) {
             int taskNumber;
             try {
                 taskNumber = Integer.parseInt(taskNumberString);

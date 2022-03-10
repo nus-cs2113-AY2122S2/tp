@@ -1,0 +1,5 @@
+package seedu.duke.tasks;
+
+public enum TaskParameters {
+    DESCRIPTION_AND_WORKING_TIME, DESCRIPTION_ONLY, WORKING_TIME_ONLY, NO_DESCRIPTION_OR_WORKING_TIME
+}
