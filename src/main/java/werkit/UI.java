@@ -181,6 +181,8 @@ public class UI {
     public void printHelpMessage() {
         printListHelp();
         printLine();
+        printExerciseListHelp();
+        printLine();
         printWorkoutAddHelp();
         printLine();
         printWorkoutDeleteHelp();
@@ -188,6 +190,15 @@ public class UI {
         printWorkoutUpdateHelp();
         printLine();
         printExitHelp();
+    }
+
+    /**
+     * Prints help message for 'exercise /list' command.
+     */
+    public void printExerciseListHelp() {
+        System.out.println("\t To view all exercises available, please enter:");
+        printColorText(TextColor.COLOR_YELLOW, "\t exercise /list");
+        System.out.println("\t This will print all the exercises available.");
     }
 
     /**

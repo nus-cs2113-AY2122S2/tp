@@ -1,10 +1,13 @@
 package data.exercises;
+import textcolors.TextColor;
+import werkit.UI;
 
 import java.util.ArrayList;
 
 public class ExerciseList {
     private final ArrayList<String> exercisesList = new ArrayList<>();
     private int numberOfExercises = 0;
+    private final UI ui = new UI();
 
     /**
      * Adds a new exercise into the exercises ArrayList and updates
@@ -20,10 +23,15 @@ public class ExerciseList {
     /**
      * Prints the list of exercises starting with their index.
      */
-    protected void printExerciseList() {
+    public void printExerciseList() {
+        System.out.println("There are " + getNumberOfExercises() + " exercises available.");
+        System.out.println("Here is the list of exercises: ");
+        ui.printLine();
         for (int i = 0; i < numberOfExercises; i++) {
-            System.out.println((i + 1) + ". " + exercisesList.get(i));
+            ui.printColorText(TextColor.COLOR_YELLOW, (i + 1) + ". " + exercisesList.get(i));
         }
+        ui.printLine();
+        System.out.println("End of exercise list.");
     }
 
     /**
