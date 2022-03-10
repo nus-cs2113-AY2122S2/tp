@@ -4,6 +4,14 @@ public class Dish {
     private String name;
     private double price;
 
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
     public Dish(String name, double price) throws IllegalArgumentException {
         if (!isValidName(name)) {
             throw new IllegalArgumentException("New name cannot be null.");
