@@ -120,7 +120,7 @@ public class Activity {
 
     /**
      * Returns a String object of the persons involved in the activity and their respective costs for the activity,
-     * if the persons involved indeed participated and paid for the activity.
+     * if the unique identifier of the activity exists and the persons involved indeed participated in the activity.
      * Else, the method returns an error message.
      *
      * @return A String object representing persons involved and their respective costs.
@@ -137,6 +137,14 @@ public class Activity {
         return involvedListString;
     }
 
+    /**
+     * Returns a String object representing the name of the persons involved in the activity and the cost that each
+     * person owed for the activity in a proper format.
+     *
+     * @return a String object that representing the name and costs of each person involved in the activity.
+     * @throws InvalidDataException If there is no activity found or if the person in the involvedPersonsList
+     *                              did not participate in the activity.
+     */
     private String convertInvolvedListToString() throws InvalidDataException {
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i <= involvedPersonList.size(); i++) {
