@@ -119,12 +119,13 @@ public class Activity {
     }
 
     /**
-     * Returns a string of the persons involved in the activity and their respective costs for the activity.
+     * Returns a String object of the persons involved in the activity and their respective costs for the activity,
+     * if the persons involved indeed participated and paid for the activity.
+     * Else, the method returns an error message.
      *
      * @return A String object representing persons involved and their respective costs.
      * @throws InvalidDataException If there is no activity found or if the person in the involvedPersonsList
-     *     did not participate in the activity.
-     * @see InvalidDataException
+     *                              did not participate in the activity.
      */
     private String getInvolvedListString() {
         String involvedListString;
