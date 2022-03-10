@@ -85,15 +85,15 @@ public class WorkoutCommand extends Command {
             case CREATE_ACTION_KEYWORD:
                 Workout newWorkout = getWorkoutList().createAndAddWorkout(getUserArguments());
                 getUI().printNewWorkoutCreatedMessage(newWorkout);
-                fileManager.writeNewWorkoutToFile(newWorkout);
+                getFileManager().writeNewWorkoutToFile(newWorkout);
                 break;
             case LIST_ACTION_KEYWORD:
                 getWorkoutList().listWorkout();
                 break;
             case DELETE_ACTION_KEYWORD:
                 Workout deletedWorkout = workoutList.deleteWorkout(getUserArguments());
-                ui.printDeleteWorkoutMessage(deletedWorkout);
-                fileManager.rewriteAllWorkoutsToFile(getWorkoutList());
+                getUI().printDeleteWorkoutMessage(deletedWorkout);
+                getFileManager().rewriteAllWorkoutsToFile(getWorkoutList());
                 break;
             default:
                 String className = this.getClass().getSimpleName();

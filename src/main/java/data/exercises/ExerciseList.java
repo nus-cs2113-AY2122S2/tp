@@ -3,7 +3,7 @@ package data.exercises;
 import java.util.ArrayList;
 
 public class ExerciseList {
-    private final ArrayList<String> exercises = new ArrayList<>();
+    private final ArrayList<String> exercisesList = new ArrayList<>();
     private int numberOfExercises = 0;
 
     /**
@@ -13,7 +13,7 @@ public class ExerciseList {
      * @param exerciseName The name of the exercise to be added to the list.
      */
     public void addExerciseToList(String exerciseName) {
-        exercises.add(exerciseName);
+        exercisesList.add(exerciseName);
         incrementNumberOfExercises();
     }
 
@@ -22,7 +22,7 @@ public class ExerciseList {
      */
     protected void printExerciseList() {
         for (int i = 0; i < numberOfExercises; i++) {
-            System.out.println((i + 1) + ". " + exercises.get(i));
+            System.out.println((i + 1) + ". " + exercisesList.get(i));
         }
     }
 
@@ -33,7 +33,7 @@ public class ExerciseList {
      * @throws IndexOutOfBoundsException when the index provided is less than 0 or greater than the numberOfExercises.
      */
     protected String getExerciseAt(int index) throws IndexOutOfBoundsException {
-        return exercises.get(index - 1);
+        return exercisesList.get(index - 1);
     }
 
     /**
@@ -58,7 +58,7 @@ public class ExerciseList {
      * @return Returns true if the exercise name exists in the list. Otherwise, false is returned.
      */
     public boolean checkIfExerciseExists(String exerciseName) {
-        if (!exercises.contains(exerciseName)) {
+        if (!exercisesList.contains(exerciseName)) {
             return false;
         }
 

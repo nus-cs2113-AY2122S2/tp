@@ -185,7 +185,6 @@ public class FileManager {
                 String workoutFileDataLine = workoutFileReader.nextLine();
                 String[] parsedWorkoutFileDataLine = parseFileDataLine(workoutFileDataLine);
                 addFileWorkoutToList(workoutList, parsedWorkoutFileDataLine);
-
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("File data error: insufficient parameters in workout data.");
                 hasNoErrorsDuringLoad = false;
