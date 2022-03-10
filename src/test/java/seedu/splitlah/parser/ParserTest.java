@@ -31,6 +31,10 @@ class ParserTest {
     }
 
     // getCommandType()
+    /**
+     * Checks if an empty String object is returned as the command string
+     * when an empty String object is provided by the user.
+     */
     @Test
     void getCommandType_emptyStringInput_emptyString() {
         String emptyString = "";
@@ -38,6 +42,11 @@ class ParserTest {
         assertEquals("", output);
     }
 
+    /**
+     * Checks if a String object containing identical contents as the input is returned as the command string
+     * when a single token of input is provided by the user.
+     * Matching command types: "help", "list", "exit"
+     */
     @Test
     void getCommandType_singleTokenInput_inputEqualsOutput() {
         String singleTokenString = "randomTest123";
@@ -45,6 +54,11 @@ class ParserTest {
         assertEquals(singleTokenString, output);
     }
 
+    /**
+     * Checks if null is returned when an input, with a second token does not start with a delimiter,
+     * is provided by the user.
+     */
+    @Test
     void getCommandType_doubleTokenNoDelimiterInput_null() {
         String doubleTokenWithNoDelimiterString = "help apple";
         String output = Parser.getCommandType(doubleTokenWithNoDelimiterString);
