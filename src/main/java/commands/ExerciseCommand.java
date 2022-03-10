@@ -3,7 +3,7 @@ package commands;
 import data.exercises.ExerciseList;
 import werkit.UI;
 
-public class ExerciseCommand extends Command{
+public class ExerciseCommand extends Command {
     public static final String BASE_KEYWORD = "exercise";
     public static final String LIST_ACTION_KEYWORD = "/list";
 
