@@ -8,6 +8,9 @@ package seedu.duke;
  */
 public class Goods {
     private int id;
+
+
+
     private String name;
     private int quantity;
     private String description;
@@ -25,6 +28,10 @@ public class Goods {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String toString() {

@@ -25,6 +25,9 @@ public class UserInterface {
                 Commands.addGood(matches.get("id"), matches.get("name"),
                         matches.get("qty"), userGoods);
                 break;
+            case "list":
+                Commands.listGoods(userGoods);
+                break;
             default:
                 //error exception here
                 break;
