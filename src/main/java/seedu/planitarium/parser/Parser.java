@@ -18,7 +18,7 @@ public class Parser {
     public static final int INDEX_RIGHT_REMOVED = 0;
     public static final int LIMIT_TWO_TOKENS = 2;
     public static final int LIMIT_TWO_DECIMAL = 2;
-    public static final int MIN_USER_INDEX = 0;
+    public static final int MIN_USER_INDEX = 1;
     public static final double MONEY_ZERO = 0.0;
 
     /**
