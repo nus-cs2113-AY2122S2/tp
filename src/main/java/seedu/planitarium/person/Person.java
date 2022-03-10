@@ -45,7 +45,7 @@ public class Person {
      * @param index The index of the income to be removed
      */
     public static void deleteIncome(int index) {
-        String description = incomeList.getIncomeDescription(index);
+        String description = incomeList.getDescription(index);
         double value = incomeList.getIncomeValue(index);
         incomeList.remove(index);
         System.out.println("An income of " + value + " for " + description + " has been removed");
@@ -68,7 +68,7 @@ public class Person {
      * @param index The index of the expenditure to be removed.
      */
     public static void deleteExpend(int index) {
-        String description = expenditureList.getExpenditureDescription(index);
+        String description = expenditureList.getDescription(index);
         double value = expenditureList.getExpenditureValue(index);
         expenditureList.remove(index);
         System.out.println("An expenditure of " + value + " for " + description + " has been removed");
