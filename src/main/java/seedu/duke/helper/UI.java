@@ -13,11 +13,11 @@ public class UI {
 
     public String readCommand() {
         readInput();
-        return parser.commandParser(userInput)[0];
+        return parser.commandParser(userInput)[0].trim();
     }
 
     public String readParameters() {
-        return parser.commandParser(userInput)[1];
+        return parser.commandParser(userInput)[1].trim();
     }
 
     public void printNewLineSeparator() {
