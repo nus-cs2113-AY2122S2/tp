@@ -23,7 +23,7 @@ public class Parser {
         return userInput.trim().split("/info");
     }
 
-    public static ArrayList<String> parseAddPatient(String parameters) {
+    public static String[] parseAddPatient(String parameters) {
         // Currently the basic input order should be to just follow the order
         // in Patient class: nric, fullName, age, gender, address, dob, dateAdmission
         String[] parametersArray = parameters.split(",");
