@@ -12,7 +12,7 @@ public class DishManager {
 
     public void printDishes() {
         for (int i = 0; i < dishes.size(); i++) {
-            System.out.println((i+1) + ". " + dishes.get(i));
+            System.out.println((i + 1) + ". " + dishes.get(i));
         }
     }
 
@@ -31,7 +31,7 @@ public class DishManager {
 
     public boolean trySetPrice(int menuIndex, double newPrice) {
         int listIndex = menuIndex - 1;
-        if(!isListIndexValid(listIndex)) {
+        if (!isListIndexValid(listIndex)) {
             return false;
         }
         dishes.get(listIndex).setPrice(newPrice);
@@ -39,7 +39,7 @@ public class DishManager {
     }
 
     private boolean isListIndexValid(int listIndex) {
-        if(listIndex < 0 || listIndex >= dishes.size()) {
+        if (listIndex < 0 || listIndex >= dishes.size()) {
             return false;
         }
         return true;
