@@ -9,14 +9,14 @@ import java.util.ArrayList;
  */
 public class Activity {
 
-    private static final String SUMMARY_STRING_SEPARATOR = " | ";
-    private static final int ZERO_INDEXING_OFFSET = 1;
-
     private int activityId;
     private String activityName;
     private double totalCost;
     private Person personPaid;
     private ArrayList<Person> involvedPersonList;
+
+    private static final String SUMMARY_STRING_SEPARATOR = " | ";
+    private static final int ZERO_INDEXING_OFFSET = 1;
 
     /**
      * Constructs an Activity object that stores the relevant information required for an Activity.
@@ -98,27 +98,6 @@ public class Activity {
     }
 
     /**
-     * Returns a String which provides the details of the activity, including the name of the activity,
-     * the activity's unique identifier, the name of the person who paid for the activity,
-     * the total cost of the activity, the persons involved in the activity
-     * and their respective costs for the activity.
-     *
-     * @return A String object representing the details of the activity.
-     * @throws InvalidDataException If there is no activity found or if the person in the involvedPersonsList
-     *                              did not participate in the activity.
-     */
-    @Override
-    public String toString() {
-        return "Activity --"
-                + "Name: " + activityName + '\n'
-                + "Id:   " + activityId + '\n'
-                + "Payer: " + personPaid.getName() + '\n'
-                + "Cost: " + totalCost + '\n'
-                + "Involved: \n"
-                + getInvolvedListString();
-    }
-
-    /**
      * Returns a String object of the persons involved in the activity and their respective costs for the activity,
      * if the unique identifier of the activity exists and the persons involved indeed participated in the activity.
      * Else, the method returns an error message.
@@ -169,6 +148,27 @@ public class Activity {
      */
     private String formString(int index, String personName, Double costOwed) {
         return "<" + index + ". " + personName + ", $" + String.format("%.2f", costOwed) + ">\n";
+    }
+
+    /**
+     * Returns a String which provides the details of the activity, including the name of the activity,
+     * the activity's unique identifier, the name of the person who paid for the activity,
+     * the total cost of the activity, the persons involved in the activity
+     * and their respective costs for the activity.
+     *
+     * @return A String object representing the details of the activity.
+     * @throws InvalidDataException If there is no activity found or if the person in the involvedPersonsList
+     *                              did not participate in the activity.
+     */
+    @Override
+    public String toString() {
+        return "Activity --"
+                + "Name: " + activityName + '\n'
+                + "Id:   " + activityId + '\n'
+                + "Payer: " + personPaid.getName() + '\n'
+                + "Cost: " + totalCost + '\n'
+                + "Involved: \n"
+                + getInvolvedListString();
     }
 
 }
