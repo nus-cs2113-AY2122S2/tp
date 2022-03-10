@@ -15,7 +15,7 @@ class ParserTest {
     Parser parser;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         parser = new Parser();
     }
 

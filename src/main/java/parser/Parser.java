@@ -17,11 +17,11 @@ public class Parser {
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s*(?<arguments>.*)");
 
 
-    public ArrayList<String> parseCommand(String userInput){
+    public ArrayList<String> parseCommand(String userInput) {
         ArrayList<String> resultArrayList = new ArrayList<>();
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         // guard against no match
-        if (!matcher.matches()){
+        if (!matcher.matches()) {
             System.out.println("Invalid input"); // print correct command
             return resultArrayList;
         }
