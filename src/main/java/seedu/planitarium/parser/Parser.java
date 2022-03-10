@@ -117,7 +117,7 @@ public class Parser {
      * Returns without exception if user index is within membership quantity bounds.
      *
      * @param userIndex Person's user index.
-     * @throws NullPointerException if amount is not a valid integer.
+     * @throws NumberFormatException if amount is not a valid integer.
      * @throws IndexOutOfBoundsException if provided index is out of bounds.
      */
     public static void isValidUserIndex(String userIndex) throws NumberFormatException, IndexOutOfBoundsException {
@@ -134,7 +134,9 @@ public class Parser {
      * Returns without exception if expenditure index is within expenditure quantity bounds.
      *
      * @param expenditureIndex Person's expenditure lookup index.
-     * @param person      Person who has expenditure.
+     * @param person           Person who may have expenditures.
+     * @throws NumberFormatException if index is not a valid integer.
+     * @throws IndexOutOfBoundsException if provided index is out of bounds.
      */
     public static void isValidExpenditureIndex(String expenditureIndex, Person person)
             throws NumberFormatException, IndexOutOfBoundsException {
