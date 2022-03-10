@@ -22,7 +22,16 @@ public class Command {
             Patient newPatient = new Patient(parametersArray[0], parametersArray[1],
                     Integer.parseInt(parametersArray[2]), parametersArray[3].charAt(0),
                     parametersArray[4], parametersArray[5], parametersArray[6]);
-            System.out.println("Got it. The patient above has been added!");
+            System.out.println("The patient above has been added!");
+        }
+    }
+
+    public void deletePatient(PatientList patientList, int index) {
+        if (0 <= index && index <= patientList.getSize()) {
+            patientList.removePatient(index);
+            System.out.println("The patient with the above index number has been removed!");
+        } else {
+            System.out.println("Oops! Please input a valid index number!");
         }
     }
 }
