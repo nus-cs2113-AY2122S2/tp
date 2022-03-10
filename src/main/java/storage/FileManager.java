@@ -65,6 +65,18 @@ public class FileManager {
         return this.workoutFilePath;
     }
 
+    public Path getRelativeDirectoryPath() {
+        return Paths.get(DATA_DIRECTORY_NAME);
+    }
+
+    public Path getRelativeExerciseFilePath() {
+        return Paths.get(DATA_DIRECTORY_NAME, EXERCISE_FILENAME);
+    }
+
+    public Path getRelativeWorkoutsFilePath() {
+        return Paths.get(DATA_DIRECTORY_NAME, EXERCISE_FILENAME);
+    }
+
     public boolean isWasDirectoryAlreadyMade() {
         return this.wasDirectoryAlreadyMade;
     }
@@ -108,21 +120,21 @@ public class FileManager {
         if (!isWasDirectoryAlreadyMade()) {
             ui.printDirectoryNotFoundMessage();
             createDataDirectory();
-            ui.printDirectoryCreatedMessage(getDirectoryPath());
+            ui.printDirectoryCreatedMessage(getRelativeDirectoryPath());
         }
 
         checkIfExerciseFileAlreadyExists();
         if (!isWasExercisesFileAlreadyMade()) {
             ui.printExerciseFileNotFoundMessage();
             createExerciseFile();
-            ui.printExerciseFileCreatedMessage(getExerciseFilePath());
+            ui.printExerciseFileCreatedMessage(getRelativeExerciseFilePath());
         }
 
         checkIfWorkoutFileAlreadyExists();
         if (!isWasWorkoutsFileAlreadyMade()) {
             ui.printWorkoutFileNotFoundMessage();
             createWorkoutFile();
-            ui.printWorkoutFileCreatedMessage(getWorkoutFilePath());
+            ui.printWorkoutFileCreatedMessage(getRelativeWorkoutsFilePath());
         }
     }
 

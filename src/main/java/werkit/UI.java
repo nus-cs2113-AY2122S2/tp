@@ -35,8 +35,8 @@ public class UI {
     public static final String ALL_DIRECTORY_AND_FILES_PRESENT = "All OK!";
     public static final String DIRECTORY_NOT_FOUND_MSG = "- The required data directory was not found. It will "
             + "be created.";
-    public static final String DIRECTORY_CREATED_MSG = "- The directory has been created at the following location:\n"
-            + "\t%s\n";
+    public static final String DIRECTORY_CREATED_MSG = "- The following directory has been created at your terminal's\n"
+            + "  current working directory:\n\t%s\n";
     public static final String EXERCISE_FILE_NOT_FOUND_MSG = "- The exercise file was not found. It will be created.";
     public static final String EXERCISE_FILE_CREATED_MSG = "- The exercise file has been created at the following "
             + "location:\n\t%s\n";
@@ -280,8 +280,7 @@ public class UI {
     }
 
     public void printDirectoryCreatedMessage(Path directoryPath) {
-        // System.out.printf(DIRECTORY_CREATED_MSG, directoryPath);
-        System.out.printf(DIRECTORY_CREATED_MSG, TEMPORARY_LOCATION_PLACEHOLDER);
+        System.out.printf(DIRECTORY_CREATED_MSG, directoryPath);
     }
 
     public void printExerciseFileNotFoundMessage() {
@@ -290,8 +289,7 @@ public class UI {
     }
 
     public void printExerciseFileCreatedMessage(Path exerciseFilePath) {
-        // System.out.printf(EXERCISE_FILE_CREATED_MSG, exerciseFilePath);
-        System.out.printf(EXERCISE_FILE_CREATED_MSG, TEMPORARY_LOCATION_PLACEHOLDER);
+        System.out.printf(EXERCISE_FILE_CREATED_MSG, exerciseFilePath);
     }
 
     public void printWorkoutFileNotFoundMessage() {
@@ -300,8 +298,7 @@ public class UI {
     }
 
     public void printWorkoutFileCreatedMessage(Path workoutFilePath) {
-        // System.out.printf(WORKOUT_FILE_CREATED_MSG, workoutFilePath);
-        System.out.printf(WORKOUT_FILE_CREATED_MSG, TEMPORARY_LOCATION_PLACEHOLDER);
+        System.out.printf(WORKOUT_FILE_CREATED_MSG, workoutFilePath);
     }
 
     public void printEmptyLineOrStatus(boolean areAllDirectoryAndFilesPresent) {
