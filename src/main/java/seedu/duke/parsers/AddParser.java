@@ -6,6 +6,7 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * This Parser supports the "add" command.
@@ -17,7 +18,6 @@ public class AddParser extends Parser {
     private static final String TASK_WORKING_TIME = "estimatedWorkingTime";
     private static final String MODULE_CODE = "moduleCode";
     private static final String MODULE_DESCRIPTION = "moduleDescription";
-    private static final String NULL_FIELD = null;
 
     // Unescaped regex for testing (split into two lines):
     // \s*(\/t\s+(?<taskName>.+?(?=\s+-d\s+|\s+-t\s+|$))(\s+(-d\s+\"(?<taskDescription>([^\"]*))\")(?=(\s+-t\s+)|$))?
@@ -44,24 +44,15 @@ public class AddParser extends Parser {
     public Command parseCommand(String userInput) throws ModHappyException {
         HashMap<String, String> parsedArguments = parseString(userInput);
         final String taskName = parsedArguments.get(TASK_NAME);
-        String taskDescription = parsedArguments.get(TASK_DESCRIPTION);
-        String estimatedWorkingTime = parsedArguments.get(TASK_WORKING_TIME);
+        final String taskDescription = parsedArguments.get(TASK_DESCRIPTION);
+        final String estimatedWorkingTime = parsedArguments.get(TASK_WORKING_TIME);
         final String moduleCode = parsedArguments.get(MODULE_CODE);
         final String moduleDescription = parsedArguments.get(MODULE_DESCRIPTION);
-        if (!taskName.equals(EMPTY_STRING)) {
-            if (taskDescription.equals(EMPTY_STRING)) {
-                taskDescription = NULL_FIELD;
-            }
-            if (estimatedWorkingTime.equals(EMPTY_STRING)) {
-                estimatedWorkingTime = NULL_FIELD;
-            }
+        if (!Objects.equals(taskName, NULL_FIELD)) {
             return new AddCommand(taskName, taskDescription, true, estimatedWorkingTime);
         }
-        if (!moduleCode.equals(EMPTY_STRING)) {
-            if (!moduleDescription.equals(EMPTY_STRING)) {
-                return new AddCommand(moduleCode, moduleDescription, false, NULL_FIELD);
-            }
-            return new AddCommand(moduleCode, NULL_FIELD, false, NULL_FIELD);
+        if (!Objects.equals(moduleCode, NULL_FIELD)) {
+            return new AddCommand(moduleCode, moduleDescription, false, NULL_FIELD);
         }
         throw new ParseException();
     }
