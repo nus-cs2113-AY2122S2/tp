@@ -66,6 +66,10 @@ class ParserTest {
     }
 
     // getRemainingArgument()
+    /**
+     * Checks if an empty String object is returned as the remaining arguments of the command
+     * when an empty String object is provided by the user.
+     */
     @Test
     void getRemainingArgument_emptyStringInput_emptyString() {
         String emptyString = "";
@@ -73,6 +77,10 @@ class ParserTest {
         assertEquals("", output);
     }
 
+    /**
+     * Checks if an empty String object is returned as the remaining arguments of the command
+     * when an input of only a single token is provided by the user.
+     */
     @Test
     void getRemainingArgument_singleTokenInput_emptyString() {
         String singleTokenString = "randomTest123";
@@ -80,6 +88,10 @@ class ParserTest {
         assertEquals("", output);
     }
 
+    /**
+     * Checks if an empty String object is returned as the remaining arguments of the command
+     * when an input of only two tokens is provided by the user.
+     */
     @Test
     void getRemainingArgument_twoInputTokens_emptyString() {
         String twoInputTokensString = "brownFox jumpsOver";
@@ -87,6 +99,10 @@ class ParserTest {
         assertEquals("", output);
     }
 
+    /**
+     * Checks if the third token is correctly returned as the remaining arguments of the command
+     * when an input of three tokens and multiple whitespaces is provided by the user.
+     */
     @Test
     void getRemainingArgument_threeInputTokensAndWhitespace_thirdToken() {
         String threeInputTokensAndWhitespaceString = "brownFox jumpsOver theLazyDog  ";
@@ -94,6 +110,10 @@ class ParserTest {
         assertEquals("theLazyDog", output);
     }
 
+    /**
+     * Checks if the third token and onwards is correctly returned as the remaining arguments of the command
+     * when an input of four tokens is provided by the user.
+     */
     @Test
     void getRemainingArgument_fourInputTokens_thirdToken() {
         String fourInputTokensString = "brownFox jumpsOver theLazy Dog";
