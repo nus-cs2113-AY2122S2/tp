@@ -1,9 +1,13 @@
 package seedu.duke;
 
+import org.json.JSONException;
 import seedu.duke.command.Command;
 import seedu.duke.command.ExitCommand;
+import seedu.duke.exception.InvalidInputException;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import static seedu.duke.constant.Messages.ERROR_IO_FAILURE_MESSAGE;
 
 public class Duke {
@@ -26,6 +30,9 @@ public class Duke {
         } catch (IOException e) {
             ui.showToUser(ERROR_IO_FAILURE_MESSAGE);
             System.exit(1);
+        } catch (InvalidInputException | JSONException e) {
+            storage.handleCorruptedSave(ui);
+            taskList = new TaskList();
         }
     }
 

@@ -251,7 +251,7 @@ public class Parser {
      * Parses the user command input.
      *
      * @param userInput User command.
-     * @param taskList Array of tasks
+     * @param taskList  Array of tasks
      * @return Command type matching the user command.
      */
     public static Command parseCommand(String userInput, TaskList taskList) {

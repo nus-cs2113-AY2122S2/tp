@@ -62,9 +62,9 @@ public class Storage {
      * Appends new tasks to the save file.
      *
      * @param newTaskDescription Task Description.
-     * @param newTaskByDate Task Deadline and/or time.
-     * @param newTaskDoDate Task Do date
-     * @param taskStatus Mark status of the task.
+     * @param newTaskByDate      Task Deadline and/or time.
+     * @param newTaskDoDate      Task Do date
+     * @param taskStatus         Mark status of the task.
      */
     public void appendToFile(String newTaskDescription,
                              String newTaskByDate, String newTaskDoDate,
@@ -143,23 +143,20 @@ public class Storage {
      * Loads back the save file onto the program.
      *
      * @return The saved data of the tasks in the saved file.
-     *       Tasks are represented in an array.
+     * Tasks are represented in an array.
      */
-    public ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() throws IOException, InvalidInputException, JSONException {
         ArrayList<Task> taskList = new ArrayList<>();
-        try {
-            List<String> dataLines = Files.readAllLines(new File(saveFilePath).toPath());
-            String dataString = String.join("", dataLines);
-            JSONObject dataJson = new JSONObject(dataString);
-            JSONArray array = dataJson.getJSONArray("tasks");
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject taskData = array.getJSONObject(i);
-                taskList.add(Parser.parseSavedData(taskData));
-            }
-        } catch (InvalidInputException | JSONException e) {
-            wipeSavedData();
-            System.out.println(ERROR_CORRUPT_SAVED_FILE_MESSAGE);
+        List<String> dataLines = Files.readAllLines(new File(saveFilePath).toPath());
+        String dataString = String.join("", dataLines);
+        JSONObject dataJson = new JSONObject(dataString);
+        JSONArray array = dataJson.getJSONArray("tasks");
+
+        for (int i = 0; i < array.length(); i++) {
+            JSONObject taskData = array.getJSONObject(i);
+            taskList.add(Parser.parseSavedData(taskData));
         }
+
         return taskList;
     }
 

@@ -21,6 +21,10 @@ public class TaskList {
         tasks = savedTasks;
     }
 
+    public TaskList() {
+        tasks = new ArrayList<Task>();
+    }
+
     /**
      * Returns the array of tasks in the class TaskList.
      *
