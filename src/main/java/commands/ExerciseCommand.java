@@ -42,7 +42,7 @@ public class ExerciseCommand extends Command{
                 break;
             default:
                 String className = this.getClass().getSimpleName();
-                throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
+                throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG); 
             }
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
