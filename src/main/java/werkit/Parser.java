@@ -90,6 +90,10 @@ public class Parser {
             arguments = userInput.split(" ", 3)[2];
             break;
         case LIST_ACTION_KEYWORD:
+            if (userInput.split(" ", -1).length > 2) {
+                String className = this.getClass().getSimpleName();
+                throw new InvalidCommandException(className, InvalidCommandException.INVALID_LIST_COMMAND_ERROR_MSG);
+            }
             break;
         default:
             String className = this.getClass().getSimpleName();
