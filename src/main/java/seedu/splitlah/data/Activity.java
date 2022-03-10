@@ -21,11 +21,12 @@ public class Activity {
     /**
      * Constructs an Activity object that stores the relevant information required for an Activity.
      *
-     * @param activityId         The id of the activity.
-     * @param activityName       The name of the activity.
-     * @param totalCost          The total cost of the activity.
-     * @param personPaid         The person who paid for the activity.
-     * @param involvedPersonList The persons involved in the activity.
+     * @param activityId         An integer that uniquely identifies an activity.
+     * @param activityName       A String object that represents the activity's name.
+     * @param totalCost          A double that represents the total cost spent in the activity.
+     * @param personPaid         A Person object representing the person who paid for the activity.
+     * @param involvedPersonList An ArrayList object containing Persons object
+     *                           representing the persons involved in the activity.
      */
     public Activity(int activityId, String activityName, double totalCost, Person personPaid,
                     ArrayList<Person> involvedPersonList) {
