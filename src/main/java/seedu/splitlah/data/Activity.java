@@ -157,8 +157,6 @@ public class Activity {
      * and their respective costs for the activity.
      *
      * @return A String object representing the details of the activity.
-     * @throws InvalidDataException If there is no activity found or if the person in the involvedPersonsList
-     *                              did not participate in the activity.
      */
     @Override
     public String toString() {
