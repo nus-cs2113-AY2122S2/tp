@@ -46,6 +46,6 @@ public class ExpenditureList {
     }
 
     public String getDescription(int index) {
-        return expenditureArrayList.get(index - 1).description;
+        return expenditureArrayList.get(index - 1).getDescription();
     }
 }
