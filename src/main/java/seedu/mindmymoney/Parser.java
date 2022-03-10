@@ -28,24 +28,29 @@ public class Parser {
      * @return Command object with respect to user's input.
      */
     public Command parseCommand() {
-        String[] parsedInput = Functions.parseInput(inputCommand);
-        switch (parsedInput[Indexes.INDEX_OF_FIRST_ITEM_IN_STRING].toLowerCase()) {
-        case "help":
-            return new HelpCommand(true);
-        case "bye":
-            System.out.println("Goodbye!");
-            System.exit(0);
-            return new HelpCommand(false); //solving fall through issue, need return something leh
-        case "add":
-            return new AddCommand(parsedInput[Indexes.INDEX_OF_SECOND_ITEM_IN_STRING]);
-        case "update":
-            return new UpdateCommand(parsedInput[Indexes.INDEX_OF_SECOND_ITEM_IN_STRING]);
-        case "list":
-            return new ListCommand();
-        case "delete":
-            return new DeleteCommand(inputCommand);
-        default:
-            return new HelpCommand(false);
+        try {
+            String[] parsedInput = Functions.parseInput(inputCommand);
+            switch (parsedInput[Indexes.INDEX_OF_FIRST_ITEM_IN_STRING].toLowerCase()) {
+            case "help":
+                return new HelpCommand(true);
+            case "bye":
+                System.out.println("Goodbye!");
+                System.exit(0);
+                return new HelpCommand(false); //solving fall through issue, need return something leh
+            case "add":
+                return new AddCommand(parsedInput[Indexes.INDEX_OF_SECOND_ITEM_IN_STRING]);
+            case "update":
+                return new UpdateCommand(parsedInput[Indexes.INDEX_OF_SECOND_ITEM_IN_STRING]);
+            case "list":
+                return new ListCommand();
+            case "delete":
+                return new DeleteCommand(inputCommand);
+            default:
+                return new HelpCommand(false);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Missing input after command!");
         }
+        return new HelpCommand(false);
     }
 }
