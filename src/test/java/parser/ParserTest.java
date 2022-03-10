@@ -20,7 +20,7 @@ class ParserTest {
     }
 
     @Test
-    void parseCommand_validCommand_splitArrayList() {
+    void parseCommand_validCommand_success() {
         ArrayList<String> desiredResult = new ArrayList<>(
                 Arrays.asList("add", "n/ITEM_NAME sn/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE")
         );
@@ -29,4 +29,10 @@ class ParserTest {
         assertEquals(desiredResult.get(0), actualResult.get(0));
         assertEquals(desiredResult.get(1), actualResult.get(1));
     }
+
+    @Test
+    void parseCommand_incompleteCommand_exceptionThrown(){
+
+    }
+
 }
