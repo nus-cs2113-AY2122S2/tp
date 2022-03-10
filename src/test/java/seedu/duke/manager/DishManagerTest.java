@@ -3,7 +3,10 @@ package seedu.duke.manager;
 import org.junit.jupiter.api.Test;
 import seedu.duke.entities.Dish;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 
 class DishManagerTest {
     @Test
@@ -24,6 +27,7 @@ class DishManagerTest {
         assertDoesNotThrow(() -> dishManager.deleteDish(1));
         assertEquals(0, dishManager.getNumOfDishes());
     }
+
 
     @Test
     void setPrice_IndexNotValidOrPriceNotValid_Throw() {

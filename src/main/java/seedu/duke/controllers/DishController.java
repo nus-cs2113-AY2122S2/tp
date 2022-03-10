@@ -10,7 +10,8 @@ import java.util.Scanner;
  */
 public class DishController extends Controller {
     private static final String[] defaultChoice = {"Exit Menu", "Add Dish", "Delete Dish",
-            "Change the price of a dish", "Change the name of a dish"};
+        "Change the price of a dish", "Change the name of a dish"
+    };
     private final DishManager dishManager;
 
     public DishController(Scanner scanner) {
