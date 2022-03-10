@@ -127,17 +127,23 @@ public class Activity {
      * @see InvalidDataException
      */
     private String getInvolvedListString() {
-        StringBuilder sb = new StringBuilder();
+        String involvedListString;
         try {
-            for (int i = 1; i <= involvedPersonList.size(); i++) {
-                Person person = involvedPersonList.get(i - ZERO_INDEXING_OFFSET);
-                String personName = person.getName();
-                Double costOwed = person.getActivityCostOwed(activityId);
-                String nextLineToAppend = formString(i, personName, costOwed);
-                sb.append(nextLineToAppend);
-            }
+            involvedListString = convertInvolvedListToString();
         } catch (InvalidDataException e) {
             return e.getMessage();
+        }
+        return involvedListString;
+    }
+
+    private String convertInvolvedListToString() throws InvalidDataException {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= involvedPersonList.size(); i++) {
+            Person person = involvedPersonList.get(i - ZERO_INDEXING_OFFSET);
+            String personName = person.getName();
+            Double costOwed = person.getActivityCostOwed(activityId);
+            String nextLineToAppend = formString(i, personName, costOwed);
+            sb.append(nextLineToAppend);
         }
         return sb.toString();
     }
