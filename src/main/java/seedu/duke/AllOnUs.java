@@ -45,16 +45,16 @@ public class AllOnUs {
     }
 
     private static void displayMainMenuFeatures() {
-        System.out.println("Going from menu to section of interest:\n\nAllows " +
-                "access to subsections of the application, namely, to the expense tracker, " +
-                "contacts manager and task manager.\n\nFormat: goto m/SECTION\n\nExamples:" +
-                "\n\n- goto m/Expense_Tracker\n- goto m/Study_Manager\n- goto m/Contacts_Manager" +
-                "\n\n\nGoing back to menu:\n\nAllows navigation back to the menu section of the application. " +
-                "\n\nFormat: menu\n\nExample:\n\n- menu" +
-                "\n\n\nGetting guidance on the usage of the application:\n\nDisplays user guide." +
-                "\n\nFormat: help\n\nExample:\n\n- help" +
-                "\n\n\nExiting the application:\n\nTerminates the application.\n\nFormat: exit" +
-                "\n\nExample:\n\n- exit");
+        System.out.println("Going from menu to section of interest:\n\nAllows "
+                + "access to subsections of the application, namely, to the expense tracker, "
+                + "contacts manager and task manager.\n\nFormat: goto m/SECTION\n\nExamples:"
+                + "\n\n- goto m/Expense_Tracker\n- goto m/Study_Manager\n- goto m/Contacts_Manager"
+                + "\n\n\nGoing back to menu:\n\nAllows navigation back to the menu section of the application. "
+                + "\n\nFormat: menu\n\nExample:\n\n- menu"
+                + "\n\n\nGetting guidance on the usage of the application:\n\nDisplays user guide."
+                + "\n\nFormat: help\n\nExample:\n\n- help"
+                + "\n\n\nExiting the application:\n\nTerminates the application.\n\nFormat: exit"
+                + "\n\nExample:\n\n- exit");
     }
 
     public void run() {
@@ -85,8 +85,8 @@ public class AllOnUs {
     }
 
     private void printInvalidMainMenuCommandMessage() {
-        System.out.println("Oops I am not sure what you mean by this command. Please retry. '" +
-                "Enter \"help\" for guidance.");
+        System.out.println("Oops I am not sure what you mean by this command. Please retry. '"
+                + "Enter \"help\" for guidance.");
     }
 
     private void printMainMenuMessage() {
