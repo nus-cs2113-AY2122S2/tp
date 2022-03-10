@@ -1,4 +1,4 @@
-package seedu.duke.Manager;
+package seedu.duke.manager;
 
 import seedu.duke.Dish;
 
