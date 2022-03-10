@@ -2,8 +2,6 @@ package seedu.duke;
 
 import seedu.duke.helper.UI;
 
-import java.util.Scanner;
-
 /**
  * Manager class contains the main loop that runs until application is terminated.
  */
@@ -19,6 +17,26 @@ public class Manager {
         while (!isTerminated) {
             String commandWord = ui.readCommand();
             switch (commandWord) {
+            case "add patient":
+                break;
+            case "del patient":
+                break;
+            case "view patient":
+                break;
+            case "add doctor":
+                break;
+            case "del doctor":
+                break;
+            case "view doctor":
+                break;
+            case "add medicine":
+                break;
+            case "del medicine":
+                break;
+            case "view medicine":
+                break;
+            case "help":
+                ui.printHelp();
             case "bye":
                 isTerminated = true;
                 ui.printBye();
