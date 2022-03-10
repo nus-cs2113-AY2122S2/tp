@@ -1,7 +1,10 @@
 package parser;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+
 import seedu.command.*;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,13 +52,17 @@ public class Parser {
         return;
     }
 
-    private void prepareAdd(String args) {
+    ArrayList<String> prepareAdd(String args) throws IncompleteCommandException {
         final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
         // validate arg string format
         if (!matcher.matches()) {
-
-            return;
+            throw new IncompleteCommandException("Add command values are incomplete or missing!");
         }
+        ArrayList results = new ArrayList<String>();
+        for (int i = 0; i < matcher.groupCount(); i++) {
+            results.add(matcher.group(i));
+        }
+        return results;
     }
 
     /**
