@@ -22,12 +22,8 @@ public class UserInterface {
                 String regex = "id/(?<id>\\d*) n/(?<name>.*) q/(?<qty>\\d*)";
                 Regex regexMatch = new Regex(userInput, regex);
                 HashMap<String, String> matches = regexMatch.getGroupValues();
-                Goods goods = new Goods(
-                        Integer.parseInt(matches.get("id")),
-                        matches.get("name"),
-                        Integer.parseInt(matches.get("qty")),
-                        ""); //description not yet added since not in UserGuide
-                Commands.addGood(goods, userGoods);
+                Commands.addGood(matches.get("id"), matches.get("name"),
+                        matches.get("qty"), userGoods);
                 break;
             default:
                 //error exception here
