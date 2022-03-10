@@ -41,6 +41,7 @@ public class PersonList {
      */
     public static void removePerson(int index) {
         personList.remove(index - 1);
+        numberOfMembers--;
     }
 
     /**
