@@ -12,7 +12,7 @@ class SessionCreateCommandTest {
     Manager manager = new Manager();
 
     /**
-     * This method creates 2 sessions that is stored and managed by the Manager object.
+     * Creates 2 sessions that is stored and managed by the Manager object.
      */
     @BeforeEach
     void setUp() {
