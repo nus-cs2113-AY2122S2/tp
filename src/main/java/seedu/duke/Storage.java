@@ -1,15 +1,17 @@
 package seedu.duke;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import seedu.duke.exception.InputRepeatedException;
 import seedu.duke.exception.InvalidInputException;
 import seedu.duke.task.Task;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 
 import static seedu.duke.constant.Indexes.DIRECTORY_INDEX;
 import static seedu.duke.constant.Messages.ERROR_CORRUPT_SAVED_FILE_MESSAGE;
@@ -79,6 +81,26 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the JSON representation of the task list.
+     *
+     * @param taskList The task list to be converted into JSON format.
+     * @return JSONObject containing the tasks in the task list.
+     */
+    private JSONObject convertTaskListToJson(TaskList taskList) {
+        JSONObject json = new JSONObject();
+        JSONArray tasks = new JSONArray();
+        for (Task t : taskList.getTasks()) {
+            JSONObject task = new JSONObject();
+            task.put("status", t.getStatusIcon());
+            task.put("by_date", PLACEHOLDER_GET_BY_DATE);
+            task.put("do_date", PLACEHOLDER_GET_DO_DATE);
+            task.put("description", t.getDescription());
+            tasks.put(task);
+        }
+        json.put("tasks", tasks);
+        return json;
+    }
 
     /**
      * Overwrites existing saved data in save file with new data.
