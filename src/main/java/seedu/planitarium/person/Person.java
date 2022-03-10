@@ -14,25 +14,30 @@ public class Person {
         expenditureList = new ExpenditureList();
     }
 
-    public static void addIncome(int value) {
-        incomeList.add(value);
-        System.out.println("An income of " + value + " has been added");
+    public String getName() {
+        return name;
     }
 
-    public static void delIncome(int index) {
-        int value = incomeList.get(index).value;
+    public static void addIncome(String description, double amount) {
+        incomeList.addIncome(description, amount);
+        System.out.println("An income of " + amount + " from " + description + " has been added");
+    }
+
+    public static void deleteIncome(int index) {
+        String description = incomeList.getIncomeDescription(index);
+        double value = incomeList.getIncomeValue(index);
         incomeList.remove(index);
-        System.out.println("An income of " + value + " has been removed");
+        System.out.println("An income of " + value + " for " + description + " has been removed");
     }
 
     public static void addExpend(String description, int value) {
-        expenditureList.add(description, value);
+        expenditureList.addExpenditure(description, value);
         System.out.println("An expenditure of " + value + " for " + description + " has been added");
     }
 
-    public static void delExpend(int index) {
-        String description = expenditureList.get(index).description;
-        int value = expenditureList.get(index).value;
+    public static void deleteExpend(int index) {
+        String description = expenditureList.getExpenditureDescription(index);
+        double value = expenditureList.getExpenditureValue(index);
         expenditureList.remove(index);
         System.out.println("An expenditure of " + value + " for " + description + " has been removed");
     }
