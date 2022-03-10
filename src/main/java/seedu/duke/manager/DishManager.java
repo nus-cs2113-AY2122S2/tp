@@ -86,4 +86,12 @@ public class DishManager {
             throw new IndexOutOfBoundsException();
         }
     }
+
+    /**
+     * Get a copy of dishes.
+     * @return a copy of dishes
+     */
+    public ArrayList<Dish> getDishes() {
+        return new ArrayList<>(dishes);
+    }
 }
