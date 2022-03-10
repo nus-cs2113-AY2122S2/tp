@@ -1,27 +1,20 @@
 package data.exercises;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ExerciseList {
-    private static final String EXERCISE_FILE_PATH = "exercises\\Exercises.txt";
-    private static final File EXERCISE_FILE = new File(EXERCISE_FILE_PATH);
-    private final ArrayList<String> exercises = new ArrayList<>();
+    private final ArrayList<String> exercisesList = new ArrayList<>();
     private int numberOfExercises = 0;
 
     /**
-     * Reads the exercises from local file and store them into an ArrayList named exercises.
-     * @throws IOException when the local file is missing.
+     * Adds a new exercise into the exercises ArrayList and updates
+     * the relevant variables on the change.
+     *
+     * @param exerciseName The name of the exercise to be added to the list.
      */
-    public void loadExercises() throws IOException {
-        Scanner scanner = new Scanner(EXERCISE_FILE);
-        while (scanner.hasNextLine()) {
-            var exercise = scanner.nextLine();
-            exercises.add(exercise);
-            numberOfExercises += 1;
-        }
+    public void addExerciseToList(String exerciseName) {
+        exercisesList.add(exerciseName);
+        incrementNumberOfExercises();
     }
 
     /**
@@ -29,7 +22,7 @@ public class ExerciseList {
      */
     protected void printExerciseList() {
         for (int i = 0; i < numberOfExercises; i++) {
-            System.out.println((i + 1) + ". " + exercises.get(i));
+            System.out.println((i + 1) + ". " + exercisesList.get(i));
         }
     }
 
@@ -40,7 +33,7 @@ public class ExerciseList {
      * @throws IndexOutOfBoundsException when the index provided is less than 0 or greater than the numberOfExercises.
      */
     protected String getExerciseAt(int index) throws IndexOutOfBoundsException {
-        return exercises.get(index - 1);
+        return exercisesList.get(index - 1);
     }
 
     /**
@@ -52,16 +45,49 @@ public class ExerciseList {
     }
 
     /**
+     * Increments the number of exercises by 1.
+     */
+    protected void incrementNumberOfExercises() {
+        this.numberOfExercises += 1;
+    }
+
+    /**
      * Checks if the specified exercise name exists in the exercises ArrayList.
      *
      * @param exerciseName The name of the exercise that will be checked for its existence in the list.
      * @return Returns true if the exercise name exists in the list. Otherwise, false is returned.
      */
     public boolean checkIfExerciseExists(String exerciseName) {
-        if (!exercises.contains(exerciseName)) {
+        if (!exercisesList.contains(exerciseName)) {
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * This method provides a default list of default exercises to populate into the exercises.txt file.
+     * The method is coded this way in order to solve the following checkstyle issue:
+     * 'array initialization' child has incorrect indentation level 16, expected level should be 12.
+     *
+     * @return An ArrayList of default exercises.
+     */
+    public static ArrayList<String> getDefaultExerciseList() {
+        ArrayList<String> defaultExerciseList = new ArrayList<String>();
+        defaultExerciseList.add("push up");
+        defaultExerciseList.add("bicep curl");
+        defaultExerciseList.add("pull up");
+        defaultExerciseList.add("squat");
+        defaultExerciseList.add("lunge");
+        defaultExerciseList.add("hip thrust");
+        defaultExerciseList.add("sit up");
+        defaultExerciseList.add("crunch");
+        defaultExerciseList.add("russian twist");
+        defaultExerciseList.add("running");
+        defaultExerciseList.add("swimming");
+        defaultExerciseList.add("jumping jack");
+        defaultExerciseList.add("burpee");
+
+        return defaultExerciseList;
     }
 }
