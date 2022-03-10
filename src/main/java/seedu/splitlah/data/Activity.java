@@ -98,14 +98,14 @@ public class Activity {
     }
 
     /**
-     * Returns a string which provides the details of the activity, including the name of the activity,
-     * the id of the activity, the name of the person who paid for the activity, the total cost of the activity,
-     * the persons involved in the activity and their respective costs for the activity.
+     * Returns a String which provides the details of the activity, including the name of the activity,
+     * the activity's unique identifier, the name of the person who paid for the activity,
+     * the total cost of the activity, the persons involved in the activity
+     * and their respective costs for the activity.
      *
      * @return A String object representing the details of the activity.
      * @throws InvalidDataException If there is no activity found or if the person in the involvedPersonsList
-     *     did not participate in the activity.
-     * @see InvalidDataException
+     *                              did not participate in the activity.
      */
     public String getActivityDetails() throws InvalidDataException {
         return "Activity --"
