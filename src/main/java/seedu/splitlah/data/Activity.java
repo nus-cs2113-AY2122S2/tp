@@ -38,10 +38,10 @@ public class Activity {
     }
 
     /**
-     * Returns the activity's unique identifier number.
-     * Assumption: The identifier number is unique across all activity identifiers in the profile.
+     * Returns the activity's unique identifier.
+     * Assumption: The identifier number is unique across all activity identifiers in the Profile object.
      *
-     * @return An integer representing the activity's identifier number.
+     * @return An integer representing the activity's identifier.
      */
     public int getActivityId() {
         return activityId;
