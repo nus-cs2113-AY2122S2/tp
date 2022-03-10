@@ -6,7 +6,6 @@ public class PatientList {
 
     private ArrayList<Patient> patientList;
 
-
     public Patient getPatient(String nric) {
         for (Patient patient : patientList) {
             if (patient.getNric().equals(nric)) {

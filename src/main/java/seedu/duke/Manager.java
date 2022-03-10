@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.assets.PatientList;
+import seedu.duke.helper.Command;
 import seedu.duke.helper.UI;
 
 /**
@@ -7,8 +9,10 @@ import seedu.duke.helper.UI;
  */
 public class Manager {
     UI ui = new UI();
+    Command command = new Command();
+    PatientList patientList = new PatientList();
     private boolean isTerminated = false;
-
+    
     /**
      * Main application loop that holds switch case statement.
      */
@@ -16,10 +20,13 @@ public class Manager {
         ui.printGreeting();
         while (!isTerminated) {
             String commandWord = ui.readCommand();
+            String parameters = ui.readParameters();
             switch (commandWord) {
             case "add patient":
+                command.addPatient(patientList, parameters);
                 break;
             case "delete patient":
+                command.deletePatient(patientList, parameters);
                 break;
             case "view patient":
                 break;

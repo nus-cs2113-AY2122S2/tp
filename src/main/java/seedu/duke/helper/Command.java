@@ -26,7 +26,8 @@ public class Command {
         }
     }
 
-    public void deletePatient(PatientList patientList, int index) {
+    public void deletePatient(PatientList patientList, String stringIndex) {
+        int index = Integer.parseInt(stringIndex);
         if (0 <= index && index <= patientList.getSize()) {
             patientList.removePatient(index);
             System.out.println("The patient with the above index number has been removed!");
