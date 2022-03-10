@@ -1,6 +1,7 @@
 package seedu.splitlah.data;
 
 import seedu.splitlah.exceptions.InvalidDataException;
+import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
 
@@ -111,7 +112,7 @@ public class Activity {
         try {
             involvedListString = convertInvolvedListToString();
         } catch (InvalidDataException e) {
-            return e.getMessage();
+            return Message.ERROR_ACTIVITY_INACCURATE_INVOLVED_LIST;
         }
         return involvedListString;
     }
