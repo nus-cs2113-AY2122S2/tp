@@ -1,6 +1,5 @@
 package seedu.duke.helper;
 
-import seedu.duke.assets.Patient;
 import seedu.duke.assets.PatientList;
 
 public class Command {
@@ -13,5 +12,4 @@ public class Command {
         }
         patientList.viewPatient(parameters);
     }
-
 }

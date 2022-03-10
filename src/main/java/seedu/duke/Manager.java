@@ -19,24 +19,25 @@ public class Manager {
             switch (commandWord) {
             case "add patient":
                 break;
-            case "del patient":
+            case "delete patient":
                 break;
             case "view patient":
                 break;
             case "add doctor":
                 break;
-            case "del doctor":
+            case "delete doctor":
                 break;
             case "view doctor":
                 break;
             case "add medicine":
                 break;
-            case "del medicine":
+            case "delete medicine":
                 break;
             case "view medicine":
                 break;
             case "help":
                 ui.printHelp();
+                break;
             case "bye":
                 isTerminated = true;
                 ui.printBye();
