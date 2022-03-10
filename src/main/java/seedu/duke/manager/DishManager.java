@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * DishManager
+ * DishManager.
  */
 public class DishManager {
     private final List<Dish> dishes;
@@ -25,6 +25,7 @@ public class DishManager {
     }
 
     /**
+     * Return the number of dishes.
      * @return the number of current dishes
      */
     public int getNumOfDishes() {
@@ -41,7 +42,7 @@ public class DishManager {
     }
 
     /**
-     * Try to delete dish in menu
+     * Try to delete dish in menu.
      *
      * @param menuIndex the index of dish to delete in menu
      * @throws IndexOutOfBoundsException if menuIndex is not valid

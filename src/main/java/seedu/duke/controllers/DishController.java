@@ -6,10 +6,11 @@ import seedu.duke.manager.DishManager;
 import java.util.Scanner;
 
 /**
- * DishController (or MenuController if you like)
+ * DishController (or MenuController if you like).
  */
 public class DishController extends Controller {
-    private static final String[] defaultChoice = {"Exit Menu", "Add Dish", "Delete Dish", "Change the price of a dish", "Change the name of a dish"};
+    private static final String[] defaultChoice = {"Exit Menu", "Add Dish", "Delete Dish",
+            "Change the price of a dish", "Change the name of a dish"};
     private final DishManager dishManager;
 
     public DishController(Scanner scanner) {
@@ -85,12 +86,10 @@ public class DishController extends Controller {
 
     private void addDish() {
         System.out.println("Adding new dish");
-        String name;
-        double price;
         System.out.print("The name of dish: ");
-        name = scanner.nextLine();
+        String name = scanner.nextLine();
         System.out.print("The price of dish: ");
-        price = scanner.nextDouble();
+        double price = scanner.nextDouble();
         dishManager.addDish(new Dish(name, price));
     }
 
