@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Represents the tests for delete commands.
+ * Represents the tests for delete command.
  */
 class DeleteCommandTest {
     /**
