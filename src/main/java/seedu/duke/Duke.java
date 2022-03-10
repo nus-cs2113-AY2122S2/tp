@@ -11,6 +11,7 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+    private Reminder reminder;
 
     /**
      * Initialises the program.
@@ -23,6 +24,7 @@ public class Duke {
         try {
             storage = new Storage(filePath);
             taskList = new TaskList(storage.load());
+            reminder = new Reminder(taskList);
         } catch (IOException e) {
             ui.showToUser(ERROR_IO_FAILURE_MESSAGE);
             System.exit(1);
@@ -34,6 +36,8 @@ public class Duke {
      */
     public void run() {
         ui.showWelcomeMessage();
+        reminder.showReminders();
+
         boolean isExit = false;
         while (!isExit) {
             String fullCommand = ui.readCommand();
