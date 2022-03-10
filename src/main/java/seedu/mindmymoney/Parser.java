@@ -1,9 +1,10 @@
 package seedu.mindmymoney;
 
-import seedu.mindmymoney.command.AddCommand;
 import seedu.mindmymoney.command.Command;
 import seedu.mindmymoney.command.HelpCommand;
+import seedu.mindmymoney.command.AddCommand;
 import seedu.mindmymoney.command.ListCommand;
+import seedu.mindmymoney.command.DeleteCommand;
 import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.helper.Functions;
 
@@ -27,7 +28,7 @@ public class Parser {
      */
     public Command parseCommand() {
         String[] parsedInput = Functions.parseInput(inputCommand);
-        switch (parsedInput[Indexes.INDEX_OF_FIRST_ITEM_IN_STRING]) {
+        switch (parsedInput[Indexes.INDEX_OF_FIRST_ITEM_IN_STRING].toLowerCase()) {
         case "help":
             return new HelpCommand(true);
         case "bye":
@@ -38,6 +39,8 @@ public class Parser {
             return new AddCommand(parsedInput[Indexes.INDEX_OF_SECOND_ITEM_IN_STRING]);
         case "list":
             return new ListCommand();
+        case "delete":
+            return new DeleteCommand(inputCommand);
         default:
             return new HelpCommand(false);
         }
