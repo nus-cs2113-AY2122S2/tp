@@ -34,5 +34,4 @@ class AddCommandTest {
         new AddCommand(inputString);
         assertEquals(Lists.expenditures, testList);
     }
-
 }
