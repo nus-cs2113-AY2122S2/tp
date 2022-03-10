@@ -4,14 +4,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.splitlah.data.Manager;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class SessionCreateCommandTest {
 
     Manager manager = new Manager();
 
     /**
-     * This method sets up a list of 2 sessions that is managed by the Manager object.
+     * This method creates 2 sessions that is stored and managed by the Manager object.
      */
     @BeforeEach
     void setUp() {
