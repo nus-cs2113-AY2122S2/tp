@@ -24,7 +24,7 @@ public class Duke {
         try {
             storage = new Storage(filePath);
             taskList = new TaskList(storage.load());
-            reminder = new Reminder(taskList);
+            reminder = new Reminder(taskList, ui);
         } catch (IOException e) {
             ui.showToUser(ERROR_IO_FAILURE_MESSAGE);
             System.exit(1);
