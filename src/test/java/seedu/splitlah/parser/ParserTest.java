@@ -64,4 +64,40 @@ class ParserTest {
         String output = Parser.getCommandType(doubleTokenWithNoDelimiterString);
         assertNull(output);
     }
+
+    // getRemainingArgument()
+    @Test
+    void getRemainingArgument_emptyStringInput_emptyString() {
+        String emptyString = "";
+        String output = Parser.getRemainingArgument(emptyString);
+        assertEquals("", output);
+    }
+
+    @Test
+    void getRemainingArgument_singleTokenInput_emptyString() {
+        String singleTokenString = "randomTest123";
+        String output = Parser.getRemainingArgument(singleTokenString);
+        assertEquals("", output);
+    }
+
+    @Test
+    void getRemainingArgument_twoInputTokens_emptyString() {
+        String twoInputTokensString = "brownFox jumpsOver";
+        String output = Parser.getRemainingArgument(twoInputTokensString);
+        assertEquals("", output);
+    }
+
+    @Test
+    void getRemainingArgument_threeInputTokensAndWhitespace_thirdToken() {
+        String threeInputTokensAndWhitespaceString = "brownFox jumpsOver theLazyDog  ";
+        String output = Parser.getRemainingArgument(threeInputTokensAndWhitespaceString);
+        assertEquals("theLazyDog", output);
+    }
+
+    @Test
+    void getRemainingArgument_fourInputTokens_thirdToken() {
+        String fourInputTokensString = "brownFox jumpsOver theLazy Dog";
+        String output = Parser.getRemainingArgument(fourInputTokensString);
+        assertEquals("theLazy Dog", output);
+    }
 }
