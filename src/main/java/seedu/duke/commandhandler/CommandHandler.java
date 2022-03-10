@@ -1,5 +1,7 @@
 package seedu.duke.commandhandler;
 
+import seedu.duke.Messages;
+import seedu.duke.exceptions.IllegalCommandException;
 import seedu.duke.projects.ProjectList;
 import java.util.Scanner;
 
@@ -25,7 +27,7 @@ public class CommandHandler {
      *
      * @param projectList ProjectList for commands to work with
      */
-    public void handleUserInput(ProjectList projectList) {
+    public void handleUserInput(ProjectList projectList) throws IllegalCommandException {
 
         sc = new Scanner(System.in);
         line = sc.nextLine();
@@ -39,6 +41,15 @@ public class CommandHandler {
         case "deleteproject": //list out all tasks
             projectList.deleteProject(commands[1]);
             System.out.println(commands[1] + " Deleted.");
+            break;
+        case "todo":
+            projectList.addTodoToProject(commands[1]);
+            break;
+        case "mark":
+            if (commands.length < 3){
+                throw new IllegalCommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+            }
+            projectList.markTodoAsDone(commands[1], commands[2]);
             break;
         case "exit":
             System.exit(0);

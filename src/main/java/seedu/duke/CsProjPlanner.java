@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.commandhandler.CommandHandler;
+import seedu.duke.exceptions.IllegalCommandException;
 import seedu.duke.projects.ProjectList;
 
 public class CsProjPlanner {
@@ -16,7 +17,10 @@ public class CsProjPlanner {
         System.out.println("Welcome to CSProjPlanner\n");
 
         while (true) {
-            commandHandler.handleUserInput(projectList);
+            try {
+                commandHandler.handleUserInput(projectList);
+            } catch (IllegalCommandException e) {
+            }
         }
 
     }
