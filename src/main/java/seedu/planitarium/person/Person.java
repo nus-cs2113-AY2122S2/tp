@@ -1,9 +1,12 @@
 package seedu.planitarium.person;
 
+import seedu.planitarium.ExpenditureList;
+import seedu.planitarium.IncomeList;
+
 public class Person {
-    private static String name;
-    private static ArrayList<Income> incomeList;
-    private static ArrayList<Expenditure> expenditureList;
+    protected static String name;
+    protected static IncomeList incomeList;
+    protected static ExpenditureList expenditureList;
 
     public Person(String name) {
         this.name = name;
