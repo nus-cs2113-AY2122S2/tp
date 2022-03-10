@@ -38,7 +38,7 @@ public class Activity {
     }
 
     /**
-     * Returns the activity's unique identifier.
+     * Returns an integer representing the activity's unique identifier.
      * Assumption: The identifier number is unique across all activity identifiers in the Profile object.
      *
      * @return An integer representing the activity's identifier.
@@ -48,7 +48,7 @@ public class Activity {
     }
 
     /**
-     * Returns the activity's name.
+     * Returns a String object representing the activity's name.
      *
      * @return A String object containing the name of the activity.
      */
@@ -57,7 +57,7 @@ public class Activity {
     }
 
     /**
-     * Returns the activity's total cost.
+     * Returns a double representing the activity's total cost.
      *
      * @return A double representing the total cost spent in the activity.
      */
@@ -75,7 +75,7 @@ public class Activity {
     }
 
     /**
-     * Returns a list of Person objects representing the persons involved in the activity.
+     * Returns an ArrayList object of Person objects representing the persons involved in the activity.
      *
      * @return An ArrayList object containing Person objects each representing a person involved in the activity.
      */
