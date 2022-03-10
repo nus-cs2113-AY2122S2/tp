@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import seedu.duke.command.Command;
 import seedu.duke.command.DeadlineCommand;
 import seedu.duke.command.DeleteCommand;
@@ -59,45 +61,26 @@ public class Parser {
      * Arranges the parsed data in a manner that can be initialised
      * as a 'Task'.
      *
-     * @param rawData Array of strings containing saved data of task.
+     * @param taskData The data of a task in JSON.
      * @return Task containing the saved data for adding into program's task array.
      * @throws InvalidInputException If saved data is missing content, i.e. task description or date.
      */
-    public static Task parseSavedData(String[] rawData) throws InvalidInputException {
-        if (!isValidData(rawData)) {
-            throw new InvalidInputException();
-        }
-        Task parsedData;
+    public static Task parseSavedData(JSONObject taskData) throws InvalidInputException {
+        Task parsedTask;
         try {
-            LocalDate parsedByDate = LocalDate.parse(rawData[SAVE_TASK_DO_DATE_INDEX]);
-            LocalDate parsedDoDate = LocalDate.parse(rawData[SAVE_TASK_BY_DATE_INDEX]);
-
-        } catch (DateTimeParseException invalidDate) {
+            String description = taskData.getString("description");
+            String by_date = taskData.getString("by_date");
+            String do_date = taskData.getString("do_date");
+            String status = taskData.getString("status");
+            parsedTask = new Todo(description);
+            if (status.equals("X")) {
+                parsedTask.markAsDone();
+            }
+            return parsedTask;
+        } catch (JSONException exception) {
             throw new InvalidInputException();
         }
-
-        // Using Todo for now, will be updated in the future
-        parsedData = new Todo(rawData[SAVE_TASK_DESCRIPTION_INDEX].trim());
-
-        if (rawData[SAVE_TASK_MARK_STATUS].equals("X")) {
-            parsedData.markAsDone();
-        }
-
-        return parsedData;
     }
-
-    private static Boolean isValidData(String[] rawData) {
-        if (rawData.length != 4) {
-            return false;
-        } else if (!rawData[SAVE_TASK_MARK_STATUS].equals(" ") && !rawData[SAVE_TASK_MARK_STATUS].equals("X")) {
-            return false;
-        } else if (rawData[SAVE_TASK_DESCRIPTION_INDEX].isBlank() || rawData[SAVE_TASK_BY_DATE_INDEX].isBlank()
-                || rawData[SAVE_TASK_DO_DATE_INDEX].isBlank()) {
-            return false;
-        }
-        return true;
-    }
-
 
     private static Command prepareMarkOrUnmark(String[] parsedInput, String commandWord, TaskList taskList) {
         try {
