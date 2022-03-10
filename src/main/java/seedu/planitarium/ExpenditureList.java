@@ -44,4 +44,8 @@ public class ExpenditureList {
     public int getNumberOfExpenditures() {
         return numberOfExpenditures;
     }
+
+    public String getDescription(int index) {
+        return expenditureArrayList.get(index - 1).getDescription();
+    }
 }
