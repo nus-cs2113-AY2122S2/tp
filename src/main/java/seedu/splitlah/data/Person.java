@@ -6,11 +6,12 @@ import seedu.splitlah.ui.Message;
 import java.util.ArrayList;
 
 /**
- * Represents a person.
- * Stores its name, total cost and a list of activityCosts.
+ * Represents a person participating in an activity during a group outing session.
+ * 
  * @author Saurav
  */
 public class Person {
+    
     private final String name;
     private ArrayList<ActivityCost> activityCostList;
 
@@ -24,7 +25,7 @@ public class Person {
     }
 
     /**
-     * Constructs an activityCost object and adds it to the list of activityCosts.
+     * Constructs an ActivityCost object and adds it to the list of ActivityCosts.
      *
      * @param activityId the activityId.
      * @param costPaid the cost of the activity paid by the payer.
@@ -34,6 +35,23 @@ public class Person {
     public void addActivityCost(int activityId, double costPaid, double costOwed) throws InvalidDataException {
         ActivityCost activityCost = new ActivityCost(activityId, costPaid, costOwed);
         activityCostList.add(activityCost);
+    }
+
+    /**
+     * Removes an ActivityCost object from the list of ActivityCosts.
+     *
+     * @param activityId the activityId of the ActivityCost to be removed.
+     * @throws InvalidDataException if the activityId is not found.
+     */
+    public void removeActivityCost(int activityId) throws InvalidDataException {
+        if (activityCostList.isEmpty()) {
+            throw new InvalidDataException(Message.ERROR_PERSON_NO_ACTIVITIES);
+        }
+        boolean removed =
+                activityCostList.removeIf(activityCost -> activityCost.getActivityId() == activityId);
+        if (!removed) {
+            throw new InvalidDataException(Message.ERROR_PERSON_ACTIVITY_NOT_FOUND);
+        }
     }
 
     public double getTotalCostPaid() {

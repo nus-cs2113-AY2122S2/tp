@@ -1,12 +1,12 @@
 package seedu.splitlah.exceptions;
 
 /**
- * Format-related errors (such as invalid input) should throw
- * this exception.
+ * Represents an exception that is thrown when format-related errors (such as invalid input) occur.
  *
  * @author Saurav
  */
 public class InvalidFormatException extends Exception {
+    
     private final String message;
     private final Throwable cause;
 

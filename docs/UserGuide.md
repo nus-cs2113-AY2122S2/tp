@@ -15,19 +15,29 @@
 
 {Give detailed description of each feature}
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### Creating a session: `session /create`
+>Creates a new session to be managed by SplitLah. <br> 
+>Sessions are a way for the user to manage their gatherings that happen across the day.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ...]`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+* `[SESSION_NAME]` refers to the name of the session.
+  * The session name is **case-insensitive**.
+* `[SESSION_DATE]` refers to the date of the session.
+  * The format of the date should follow `YYYY-MM-DD`
+* `[NAME1 NAME2 ...]` refers to a list of persons involved in the session.
+  * The names are **case-insensitive**.
 
-Example of usage: 
+Notes:
+- The `[SESSION_NAME]` should be unique across sessions.
+- Each name in `[NAME1 NAME2 ...]` for the session should be unique.
 
-`todo n/Write the rest of the User Guide d/next week`
+Example of usage:
+1. Adds a new session named Class Outing with Alice and Bob involved on 2022-03-15.
+   1. `session /create /n Class Outing /d 2022-03-15 /pl Alice Bob`
+   
+<br>[INSERT SCREEN SHOT]
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
 
 ## FAQ
 
