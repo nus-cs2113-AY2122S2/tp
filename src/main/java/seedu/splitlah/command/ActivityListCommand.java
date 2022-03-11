@@ -19,13 +19,11 @@ public class ActivityListCommand extends Command {
 
     private static final String COMMAND_FORMAT = "Syntax: activity /list /sid <SESSION_ID>";
 
-
     private int sessionId;
 
     public ActivityListCommand(int sessionId) {
         this.sessionId = sessionId;
     }
-
 
     /**
      * Runs the command.
@@ -35,8 +33,8 @@ public class ActivityListCommand extends Command {
     @Override
     public void run(Manager manager) {
         try {
-            Session sessionToBePrinted = manager.getProfile().getSession(sessionId);
-            ArrayList<Activity> activityListToBePrinted = sessionToBePrinted.getActivityList();
+            Session sessionsToBePrinted = manager.getProfile().getSession(sessionId);
+            ArrayList<Activity> activityListToBePrinted = sessionsToBePrinted.getActivityList();
 
             if (activityListToBePrinted.isEmpty()) {
                 manager.getUi().printlnMessage(Message.ERROR_ACTIVITYLIST_ACTIVITY_EMPTY);
@@ -44,22 +42,20 @@ public class ActivityListCommand extends Command {
             }
 
             for (Activity activity : activityListToBePrinted) {
-                manager.getUi().printlnMessage(activity.getActivitySummaryString());
+                manager.getUi().printlnMessageWithDivider(activity.toString());
             }
 
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
         }
-
     }
-
 
     /**
      * Prepares user argument for activity list command.
      *
-     * @param   commandArgs A String object that represents the user's arguments.
-     * @return  An ActivityListCommand object if sessionId was found in user argument,
-     *          an InvalidCommand object otherwise.
+     * @param commandArgs A String object that represents the user's arguments.
+     * @return A ActivityListCommand object if sessionId was found in user argument,
+     *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
         try {
