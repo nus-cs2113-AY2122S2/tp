@@ -263,7 +263,7 @@ public class Session {
         StringBuilder summaryString = new StringBuilder(PERSON_LIST_HEADER);
         for (int i = 0; i < personList.size(); i++) {
             String personName = personList.get(i).getName();
-            summaryString.append("\n ").append(i).append(". ").append(personName);
+            summaryString.append("\n ").append(i + ZERO_INDEXING_OFFSET).append(". ").append(personName);
         }
         return summaryString.toString();
     }
@@ -275,7 +275,7 @@ public class Session {
      */
     @Override
     public String toString() {
-        return "Session --"
+        return "Session --\n"
                 + "Name: " + sessionName + '\n'
                 + "Id:   " + sessionId + '\n'
                 + "Date: " + dateCreated + '\n'
