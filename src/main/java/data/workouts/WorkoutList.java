@@ -65,11 +65,12 @@ public class WorkoutList {
             while (!isInputYesOrNo(input)) {
                 System.out.println("Do you want to view more workouts? [yes/no]");
                 Scanner in = new Scanner(System.in);
-                input = in.nextLine();
+                input = in.nextLine().toLowerCase();
             }
             if (!input.equals("yes")) {
                 return;
             }
+            input = "";
         }
 
         if (totalPrints > 0) {
@@ -98,7 +99,7 @@ public class WorkoutList {
      * Check if the user input is "yes" or "no".
      *
      * @param answer input by user.
-     * @return true if input equals to "yes", else otherwise.
+     * @return true if input equals to "yes" or "no", else otherwise.
      */
     public boolean isInputYesOrNo(String answer) {
         if (answer.equals("no") || answer.equals("yes")) {
