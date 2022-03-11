@@ -3,8 +3,8 @@ package seedu.planitarium.person;
 import java.util.ArrayList;
 
 public class PersonList {
-    private static ArrayList<Person> personList;
-    private static int numberOfMembers;
+    private ArrayList<Person> personList;
+    private int numberOfMembers;
 
     /**
      * Constructs a new PersonList object.
