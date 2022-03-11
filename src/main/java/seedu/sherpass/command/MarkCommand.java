@@ -1,8 +1,8 @@
 package seedu.sherpass.command;
 
-import seedu.sherpass.utills.Storage;
+import seedu.sherpass.util.Storage;
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.utills.Ui;
+import seedu.sherpass.util.Ui;
 
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
@@ -19,7 +19,7 @@ public class MarkCommand extends Command {
      * Saves index of task to mark.
      *
      * @param markIndex Task index to mark.
-     * @param taskList Task array.
+     * @param taskList  Task array.
      */
     public MarkCommand(int markIndex, TaskList taskList) {
         if (taskList.isTaskExist(markIndex)) {
@@ -32,8 +32,8 @@ public class MarkCommand extends Command {
      * Executes mark command. Marks task as Done.
      *
      * @param taskList Task array.
-     * @param ui Ui for printing
-     * @param storage Overwrite save file for newly marked task.
+     * @param ui       Ui for printing
+     * @param storage  Overwrite save file for newly marked task.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {

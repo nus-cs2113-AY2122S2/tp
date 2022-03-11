@@ -1,12 +1,12 @@
 package seedu.sherpass.command;
 
-import seedu.sherpass.utills.Storage;
+import seedu.sherpass.util.Storage;
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.utills.Ui;
+import seedu.sherpass.util.Ui;
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
 
-import static seedu.sherpass.constant.Indexes.TASK_DESCRIPTION_INDEX_TODO;
+import static seedu.sherpass.constant.Index.TASK_DESCRIPTION_INDEX_TODO;
 
 public class TodoCommand extends Command {
     String[] toAdd;
@@ -20,9 +20,9 @@ public class TodoCommand extends Command {
     /**
      * Creates constructor for todo command. Saves task description.
      *
-     * @param toAdd Task Description to add.
+     * @param toAdd    Task Description to add.
      * @param taskList Task array.
-     * @throws InvalidInputException If task description is empty.
+     * @throws InvalidInputException  If task description is empty.
      * @throws InputRepeatedException If task has been added before.
      */
     public TodoCommand(String[] toAdd, TaskList taskList)
@@ -40,8 +40,8 @@ public class TodoCommand extends Command {
      * Executes the adding of todo task.
      *
      * @param taskList Task array.
-     * @param ui Ui for printing messages.
-     * @param storage To append newly added task to save file.
+     * @param ui       Ui for printing messages.
+     * @param storage  To append newly added task to save file.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {

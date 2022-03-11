@@ -1,6 +1,6 @@
 package seedu.sherpass.constant;
 
-public class Messages {
+public class Message {
     public static final String WELCOME_MESSAGE_ONE = "Welcome to\n";
     public static final String WELCOME_MESSAGE_TWO = "How can I help you today?";
     public static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon! :)";

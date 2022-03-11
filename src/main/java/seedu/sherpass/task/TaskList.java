@@ -1,14 +1,10 @@
 package seedu.sherpass.task;
 
-import seedu.sherpass.task.Deadline;
-import seedu.sherpass.task.Event;
-import seedu.sherpass.task.Task;
-import seedu.sherpass.task.Todo;
-import seedu.sherpass.utills.Ui;
+import seedu.sherpass.util.Ui;
 
 import java.util.ArrayList;
 
-import static seedu.sherpass.constant.Messages.ERROR_SYSTEM_FAULT_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_SYSTEM_FAULT_MESSAGE;
 
 public class TaskList {
     private ArrayList<Task> tasks;

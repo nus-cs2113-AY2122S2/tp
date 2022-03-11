@@ -1,4 +1,4 @@
-package seedu.sherpass.utills;
+package seedu.sherpass.util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,11 +16,11 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-import static seedu.sherpass.constant.Indexes.DIRECTORY_INDEX;
-import static seedu.sherpass.constant.Messages.ERROR_CORRUPT_SAVED_FILE_MESSAGE_1;
-import static seedu.sherpass.constant.Messages.ERROR_CORRUPT_SAVED_FILE_MESSAGE_2;
-import static seedu.sherpass.constant.Messages.ERROR_CORRUPT_SAVED_FILE_MESSAGE_3;
-import static seedu.sherpass.constant.Messages.ERROR_IO_FAILURE_MESSAGE;
+import static seedu.sherpass.constant.Index.DIRECTORY_INDEX;
+import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_1;
+import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_2;
+import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_3;
+import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
 
 public class Storage {
     private String saveFilePath;
@@ -145,7 +145,11 @@ public class Storage {
      * Loads back the save file onto the program.
      *
      * @return The saved data of the tasks in the saved file.
+<<<<<<< HEAD:src/main/java/seedu/sherpass/utills/Storage.java
      * Tasks are represented in an array.
+=======
+     *     Tasks are represented in an array.
+>>>>>>> master:src/main/java/seedu/sherpass/util/Storage.java
      */
     public ArrayList<Task> load() throws IOException, InvalidInputException, JSONException {
         ArrayList<Task> taskList = new ArrayList<>();

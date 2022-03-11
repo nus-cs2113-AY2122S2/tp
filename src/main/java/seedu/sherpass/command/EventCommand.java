@@ -1,8 +1,8 @@
 package seedu.sherpass.command;
 
-import seedu.sherpass.utills.Storage;
+import seedu.sherpass.util.Storage;
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.utills.Ui;
+import seedu.sherpass.util.Ui;
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
 
@@ -24,17 +24,17 @@ public class EventCommand extends Command {
      * Creates a constructor for event command. Saves task description and date.
      *
      * @param taskDescription Task description.
-     * @param tasklist Task array.
+     * @param taskList Task array.
      * @param dateInput Task Date.
      * @throws InvalidInputException If Task content is empty.
      * @throws InputRepeatedException If task has already been added.
      */
-    public EventCommand(String taskDescription, TaskList tasklist, String dateInput)
+    public EventCommand(String taskDescription, TaskList taskList, String dateInput)
             throws InvalidInputException, InputRepeatedException {
         if (taskDescription.isBlank()) {
             throw new InvalidInputException();
         }
-        if (tasklist.isTaskAlreadyAdded(taskDescription)) {
+        if (taskList.isTaskAlreadyAdded(taskDescription)) {
             throw new InputRepeatedException();
         }
         toAddTaskDate = dateInput;

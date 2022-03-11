@@ -1,8 +1,8 @@
 package seedu.sherpass.command;
 
-import seedu.sherpass.utills.Storage;
+import seedu.sherpass.util.Storage;
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.utills.Ui;
+import seedu.sherpass.util.Ui;
 
 public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
@@ -19,7 +19,7 @@ public class UnmarkCommand extends Command {
      * Saves index of task to mark.
      *
      * @param markIndex Task index to mark.
-     * @param taskList Task array.
+     * @param taskList  Task array.
      */
     public UnmarkCommand(int markIndex, TaskList taskList) {
         if (taskList.isTaskExist(markIndex)) {
@@ -31,8 +31,8 @@ public class UnmarkCommand extends Command {
      * Executes unmark command. Marks task as undone.
      *
      * @param taskList Task array.
-     * @param ui Ui for printing
-     * @param storage Overwrite save file for newly unmarked task.
+     * @param ui       Ui for printing
+     * @param storage  Overwrite save file for newly unmarked task.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {

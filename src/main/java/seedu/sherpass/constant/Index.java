@@ -1,6 +1,6 @@
 package seedu.sherpass.constant;
 
-public class Indexes {
+public class Index {
     public static final int SAVE_TASK_MARK_STATUS = 0;
     public static final int SAVE_TASK_DESCRIPTION_INDEX = 1;
     public static final int SAVE_TASK_BY_DATE_INDEX = 2;
