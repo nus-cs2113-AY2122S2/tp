@@ -63,14 +63,15 @@ class WorkoutListTest {
     }
 
     @Test
-    void deleteWorkout_validIndexToDelete_expectDeleteWorkout() throws InvalidWorkoutException, InvalidExerciseException,
-            NumberFormatException, ArrayIndexOutOfBoundsException, WorkoutOutOfRangeException {
-
-        int workoutNumberToDeleteInList = 2;
+    void deleteWorkout_validIndexToDelete_expectDeleteWorkout() throws
+            InvalidWorkoutException, InvalidExerciseException,
+            WorkoutOutOfRangeException {
 
         wl.createAndAddWorkout("push up /reps 11");
         wl.createAndAddWorkout("sit up /reps 15");
         wl.createAndAddWorkout("lunge /reps 10");
+
+        int workoutNumberToDeleteInList = 2;
 
         assertEquals("sit up (15 reps)", wl.getWorkoutsList().get(workoutNumberToDeleteInList - 1).toString());
         wl.deleteWorkout(Integer.toString(workoutNumberToDeleteInList));
@@ -78,32 +79,33 @@ class WorkoutListTest {
     }
 
     @Test
-    void deleteWorkout_indexOutOfRange_expectWorkoutOutOfRangeException() throws InvalidWorkoutException, InvalidExerciseException,
-            NumberFormatException, ArrayIndexOutOfBoundsException {
-
-        int workoutNumberToDeleteInList = 5;
+    void deleteWorkout_indexOutOfRange_expectWorkoutOutOfRangeException() throws InvalidWorkoutException,
+            InvalidExerciseException {
 
         wl.createAndAddWorkout("push up /reps 11");
         wl.createAndAddWorkout("sit up /reps 15");
         wl.createAndAddWorkout("lunge /reps 10");
 
+        int workoutNumberToDeleteInList = 5;
+
         assertThrows(WorkoutOutOfRangeException.class,
-                () -> wl.deleteWorkout(Integer.toString(workoutNumberToDeleteInList)));
+            () -> wl.deleteWorkout(Integer.toString(workoutNumberToDeleteInList)));
 
     }
 
     @Test
-    void deleteWorkout_invalidParseArgumentInput_expectNumberFormatException() throws InvalidWorkoutException, InvalidExerciseException,
+    void deleteWorkout_invalidParseArgumentInput_expectNumberFormatException() throws InvalidWorkoutException,
+            InvalidExerciseException,
             ArrayIndexOutOfBoundsException {
-
-        String invalidArgumentSupplied = "t5";
 
         wl.createAndAddWorkout("push up /reps 11");
         wl.createAndAddWorkout("sit up /reps 15");
         wl.createAndAddWorkout("lunge /reps 10");
 
+        String invalidArgumentSupplied = "t5";
+
         assertThrows(NumberFormatException.class,
-                () -> wl.deleteWorkout(invalidArgumentSupplied));
+            () -> wl.deleteWorkout(invalidArgumentSupplied));
 
     }
 }
