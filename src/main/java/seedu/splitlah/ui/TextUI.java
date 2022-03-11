@@ -34,6 +34,7 @@ public class TextUI {
     }
 
     public String readNextLine() {
+        printlnMessage(Message.PROMPT_TEXTUI_AWAITING_INPUT);
         return in.nextLine();
     }
 
@@ -63,8 +64,8 @@ public class TextUI {
                 printlnMessage(Message.ERROR_TEXTUI_USER_DID_NOT_CONFIRM);
                 return false;
             default:
-                confirmation = readNextLine().toLowerCase();
                 printlnMessage(Message.ERROR_TEXTUI_REENTER_INPUT);
+                confirmation = readNextLine().toLowerCase();
             }
         }
     }
