@@ -1,8 +1,10 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.Message;
 
 /**
  * Represents a command that deletes a Session object indicated by the user input from a Profile object.
@@ -57,6 +59,22 @@ public class SessionDeleteCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-
+        String confirmationPrompt = COMMAND_CONFIRMATION + sessionId + "?";
+        boolean isSessionExists = manager.getProfile().hasSessionId(sessionId);
+        if (!isSessionExists) {
+            manager.getUi().printlnMessage(Message.ERROR_PROFILE_SESSION_NOT_IN_LIST);
+            return;
+        }
+        try {
+            boolean isConfirmed = manager.getUi().getUserConfirmation(confirmationPrompt);
+            if (isConfirmed) {
+                manager.getProfile().removeSession(sessionId);
+                manager.getUi().printlnMessage(COMMAND_SUCCESS);
+            } else {
+                manager.getUi().printlnMessage(COMMAND_ABORT);
+            }
+        } catch (InvalidDataException dataException) {
+            manager.getUi().printlnMessage(dataException.getMessage());
+        }
     }
 }
