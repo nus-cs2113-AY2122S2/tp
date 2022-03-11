@@ -47,7 +47,7 @@ public class ProjectList {
             index = Integer.parseInt(indexString);
         }
         catch (NumberFormatException e){
-            System.out.println("The input is not an integer!");
+            System.out.println("The project index is not an integer!");
             return;
         }
 

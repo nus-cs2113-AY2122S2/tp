@@ -43,13 +43,14 @@ public class CommandHandler {
             System.out.println(commands[1] + " Deleted.");
             break;
         case "todo":
-            if (commands.length < 3){
+            if (commands.length < 3) {
                 throw new IllegalCommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
             }
-            projectList.addTodoToProject(commands[1], commands[2]);
+            String todoString = parseTodoString(commands);
+            projectList.addTodoToProject(commands[1], todoString);
             break;
         case "mark":
-            if (commands.length < 3){
+            if (commands.length < 3) {
                 throw new IllegalCommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
             }
             projectList.markTodoAsDone(commands[1], commands[2]);
@@ -62,5 +63,18 @@ public class CommandHandler {
             break;
         }
 
+    }
+
+    public String parseTodoString(String[] strings) {
+        String todoString = "";
+        if (strings.length == 3) {
+            todoString = strings[2];
+        }
+        else {
+            for (int i = 2; i < strings.length; i++) {
+                todoString = todoString + " " + strings[i];
+            }
+        }
+        return todoString;
     }
 }
