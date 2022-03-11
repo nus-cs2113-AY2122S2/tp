@@ -1,38 +1,38 @@
 package seedu.sherpass.util;
 
+import seedu.sherpass.constant.Timer;
+
 public class SherpassTimer extends Thread {
 
-    private volatile boolean threadSuspended = false;
+    private volatile boolean timerPaused = false;
     private boolean hasTimeLeft = true;
     private static Ui ui;
-    private int duration;
     protected int timeLeft;
 
     /**
      * Initialises the parameters needed for the countdown timer.
-     * @param totalDuration Number of seconds in the timer
+     * @param
      */
-    public SherpassTimer(int totalDuration, Ui ui) {
-        duration = totalDuration;
-        timeLeft = totalDuration;
+    public SherpassTimer(Ui ui) {
+        timeLeft = Timer.DURATION_NOT_INITIALISED;
         this.ui = ui;
     }
 
     @Override
     public void run() {
         while (hasTimeLeft) {
-            if (timeLeft % 5 == 0) {
+            if (timeLeft % Timer.TIME_INTERVAL == Timer.NO_TIME_LEFT) {
                 System.out.println(timeLeft + " seconds left.");
             }
             try {
                 Thread.sleep(1000);
                 timeLeft -= 1;
-                if (timeLeft <= 0) {
+                if (timeLeft <= Timer.NO_TIME_LEFT) {
                     hasTimeLeft = false;
                 }
-                if (threadSuspended) {
+                if (timerPaused) {
                     synchronized (this) {
-                        while (threadSuspended) {
+                        while (timerPaused) {
                             wait();
                         }
                     }
@@ -46,19 +46,22 @@ public class SherpassTimer extends Thread {
         this.interrupt();
     }
 
+    public void setDuration(int duration) {
+        timeLeft = duration;
+    }
+
     public void resumeTimer() {
         synchronized (this) {
-            threadSuspended = false;
+            timerPaused = false;
             notify();
         }
-        System.out.println("You have " + timeLeft + " seconds left.");
-        ui.showToUser("Okay! I've resumed the timer.");
+        ui.showToUser("Okay! I've resumed the timer. You have " + timeLeft + " seconds left.");
     }
 
     public void pauseTimer() {
         ui.showToUser("Got it! I've paused the timer.\n"
                 + "Feel free to resume whenever you're ready.");
-        threadSuspended = true;
+        timerPaused = true;
     }
 
     public void stopTimer() {

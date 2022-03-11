@@ -347,15 +347,14 @@ public class Parser {
         return -1;
     }
 
-    public static void parseStudyMode(String rawUserInput, Ui ui) {
+    public static void parseStudyMode(String rawUserInput, Ui ui, SherpassTimer timer) {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
-        SherpassTimer timer;
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
             int duration = parseTimerInput(parsedInput, ui);
             if (duration >= 0) {
-                timer = new SherpassTimer(duration, ui);
-                timer.start(ui);
+                timer.setDuration(duration);
+                timer.start();
             }
             break;
         case "pause":
