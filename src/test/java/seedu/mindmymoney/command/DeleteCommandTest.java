@@ -28,7 +28,7 @@ class DeleteCommandTest {
         String deleteInputString = "delete 1";
         new DeleteCommand(deleteInputString).executeCommand();
         testList.remove(0);
-        assertEquals(testList,Lists.expenditures);
+        assertEquals(testList, Lists.expenditures);
     }
 
     /**
