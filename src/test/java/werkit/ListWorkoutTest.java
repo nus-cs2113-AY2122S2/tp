@@ -26,7 +26,6 @@ public class ListWorkoutTest {
         exerciseList.addExerciseToList("crunch");
         exerciseList.addExerciseToList("russian twist");
         exerciseList.addExerciseToList("jumping jack");
-        exerciseList.addExerciseToList("running");
     }
 
     @Test
