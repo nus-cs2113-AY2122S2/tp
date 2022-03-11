@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ControllerTest {
     @Test
@@ -15,7 +15,7 @@ class ControllerTest {
                 new DishController(scanner),
         };
 
-        for (Controller c: controllers) {
+        for (Controller c : controllers) {
             // Each controller should have at least one choice.
             assertTrue(c.choices.length >= 1);
             // The first choice should always be to exit.
