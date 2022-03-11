@@ -57,8 +57,8 @@ public class ActivityListCommand extends Command {
     /**
      * Prepares user argument for activity list command.
      *
-     * @param commandArgs A String object that represents the user's arguments.
-     * @return An ActivityListCommand object if sessionId was found in user argument,
+     * @param   commandArgs A String object that represents the user's arguments.
+     * @return  An ActivityListCommand object if sessionId was found in user argument,
      *          an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
