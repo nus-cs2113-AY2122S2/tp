@@ -1,8 +1,14 @@
 package seedu.splitlah.command;
 
+import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Session;
+import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.Message;
+
+import java.util.ArrayList;
 
 /**
  * Represents a command which displays the details of an Activity object specified by user input in a Session object.
@@ -29,7 +35,14 @@ public class ActivityViewCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-
+        try {
+            Session sessionsToBePrinted = manager.getProfile().getSession(sessionId);
+            Activity activityToBePrinted = sessionsToBePrinted.getActivity(activityId);
+            
+            manager.getUi().printlnMessageWithDivider(activityToBePrinted.toString());
+        } catch (InvalidDataException e) {
+            manager.getUi().printlnMessage(e.getMessage());
+        }
     }
 
     /**
@@ -48,6 +61,5 @@ public class ActivityViewCommand extends Command {
             String invalidCommandMessage = e.getMessage() + "\n" + COMMAND_FORMAT;
             return new InvalidCommand(invalidCommandMessage);
         }
-
     }
 }
