@@ -300,7 +300,7 @@ public class Parser {
         case ActivityCreateCommand.COMMAND_TEXT:
             return ActivityCreateCommand.prepare(remainingArgs);
         case SessionListCommand.COMMAND_TEXT:
-            // FALLTHROUGH
+            return new SessionListCommand();
         case ActivityListCommand.COMMAND_TEXT:
             // FALLTHROUGH
         case ActivityViewCommand.COMMAND_TEXT:
