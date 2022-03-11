@@ -24,7 +24,8 @@ public class Duke {
             String input = getInput();
             Parser parser = new Parser(input);
             Command parsedCommand = parser.parseCommand();
-            parsedCommand.execute(timetable);
+            String feedback = parsedCommand.execute(timetable);
+            System.out.println(feedback);
         }
     }
 

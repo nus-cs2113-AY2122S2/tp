@@ -4,6 +4,8 @@ import seedu.duke.Timetable;
 
 public class HelpCommand extends Command {
     @Override
-    public void execute(Timetable timetable) {
+    public String execute(Timetable timetable) {
+        return "";
     }
+    // helper messages
 }
