@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FileManagerTest {
     @Test
@@ -23,5 +24,15 @@ public class FileManagerTest {
         assertEquals(expectedOutput1, fm.convertWorkoutToFileDataFormat(testSample1));
         assertEquals(expectedOutput2, fm.convertWorkoutToFileDataFormat(testSample2));
         assertEquals(expectedOutput3, fm.convertWorkoutToFileDataFormat(testSample3));
+    }
+
+    @Test
+    public void convertWorkoutToFileDataFormat_nullWorkoutInput_exceptionThrown() throws IOException {
+        Workout testSample1 = null;
+
+        FileManager fm = new FileManager();
+
+        assertThrows(NullPointerException.class,
+                ()->fm.convertWorkoutToFileDataFormat(testSample1));
     }
 }
