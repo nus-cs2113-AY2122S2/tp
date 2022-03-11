@@ -7,7 +7,11 @@ import java.util.ArrayList;
  */
 public class DeleteCommand extends Command {
     private final ArrayList<String> COMMAND_STRINGS;
-    public final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_DESCRIPTION = ": Deletes the equipment with the specified serial number. "
+            + "Parameters: s/SERIAL_NUMBER\n"
+            + "Example: "
+            + "delete s/SM57-1";
 
     /**
      * constructor for DeleteCommand. Initialises successMessage and usageReminder from Command
@@ -16,10 +20,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(ArrayList<String> commandStrings){
         COMMAND_STRINGS = commandStrings;
         successMessage = "Equipment successfully deleted: %1$s, serial number %2$s";
-        usageReminder = COMMAND_WORD + ": Deletes the equipment with the specified serial number. "
-                + "Parameters: s/SERIAL_NUMBER\n"
-                + "Example: "
-                + "delete s/SM57-1";
+        usageReminder = COMMAND_WORD + COMMAND_DESCRIPTION;
     }
 
     /**
