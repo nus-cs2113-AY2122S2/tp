@@ -27,31 +27,40 @@ public class Parser {
         // Currently the basic input order should be to just follow the order
         // in Patient class: nric, fullName, age, gender, address, dob, dateAdmission
         String[] parametersArray = parameters.split(",");
-        for (String parameter: parametersArray) {
-            parameter = parameter.trim();
+        for (int i = 0; i < parametersArray.length; i++) {
+            parametersArray[i] = parametersArray[i].trim();
         }
-        
-
-        return null;
+        if (parametersArray.length == 7 && validateNric(parametersArray[0]) &&
+                validateFullName(parametersArray[1]) && validateAge(parametersArray[2]) &&
+                validateGender(parametersArray[3]) && validateAddress(parametersArray[4]) &&
+                validateDob(parametersArray[5]) && validateAdmissionDate(parametersArray[6])) {
+            return parametersArray;
+        } else {
+            return null;
+        }
     }
 
     private static boolean validateNric(String nric) {
         Pattern nricPattern = Pattern.compile("[A-Z][0-9]{7}[A-Z]");
         Matcher nricMatcher = nricPattern.matcher(nric);
+        //System.out.println(nric + " " +nricMatcher.matches());
         return nricMatcher.matches();
     }
 
     private static boolean validateFullName(String fullName) {
         Pattern fullNamePattern = Pattern.compile("([a-zA-Z]+( [a-zA-Z]+)+)");
         Matcher fullNameMatcher = fullNamePattern.matcher(fullName);
+        //System.out.println(fullName + " " + fullNameMatcher.matches());
         return fullNameMatcher.matches();
     }
 
     private static boolean validateAge(String ageString) {
         int age = Integer.parseInt(ageString);
         if (1 <= age && age <= 120) {
+            //System.out.println("Age true");
             return true;
         } else {
+            //System.out.println("Age false;");
             return false;
         }
     }
@@ -59,12 +68,14 @@ public class Parser {
     private static boolean validateGender(String gender) {
         Pattern genderPattern = Pattern.compile("M|F");
         Matcher genderMatcher = genderPattern.matcher(gender);
+        //System.out.println(gender + " " + genderMatcher.matches());
         return genderMatcher.matches();
     }
 
     private static boolean validateAddress(String address) {
         Pattern addressPattern = Pattern.compile("[\\w\\-\\s'()]*");
         Matcher addressMatcher = addressPattern.matcher(address);
+        //System.out.println(address + " " + addressMatcher.matches());
         return addressMatcher.matches();
     }
 
@@ -73,8 +84,10 @@ public class Parser {
         LocalDate today = LocalDate.now();
         LocalDate dobLimit = LocalDate.parse("1900-01-01");
         if (dob.isAfter(dobLimit) && dob.isBefore(today)) {
+            //System.out.println("dob true");
             return true;
         } else {
+            //System.out.println("dob false");
             return false;
         }
     }
@@ -84,8 +97,10 @@ public class Parser {
         LocalDate today = LocalDate.now();
         LocalDate admissionDateLimit = LocalDate.parse("1980-01-01");
         if (admissionDate.isAfter(admissionDateLimit) && admissionDate.isBefore(today)) {
+            //System.out.println("Admission true");
             return true;
         } else {
+            //System.out.println("Admission false");
             return false;
         }
     }

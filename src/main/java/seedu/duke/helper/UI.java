@@ -32,7 +32,7 @@ public class UI {
 
     public void printHelp() {
         printNewLineSeparator();
-        System.out.println("Here are the commands:");
+        System.out.println("Here are the commands and examples:");
         System.out.println("1. add patient\n2. delete patient\n3. view patient");
         System.out.println("4. add doctor\n5. delete doctor\n6. view doctor");
         System.out.println("6. add patient\n7. delete patient\n9. view patient");
@@ -48,5 +48,11 @@ public class UI {
     public void printBye() {
         printNewLineSeparator();
         System.out.println("Goodbye! Exiting the programme.");
+    }
+
+    public void printAddPatientWrongFormatMessage() {
+        System.out.println("It seems like the you are missing some parameters to add a new patient!");
+        System.out.println("Please follow the format in the example given below:");
+        System.out.println("add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15");
     }
 }

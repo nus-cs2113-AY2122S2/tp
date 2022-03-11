@@ -19,7 +19,7 @@ public class Manager {
     public void runLoop() {
         ui.printGreeting();
         while (!isTerminated) {
-            String commandWord = ui.readCommand();
+            String commandWord = ui.readCommand();;
             String parameters = ui.readParameters();
             switch (commandWord) {
             case "add patient":

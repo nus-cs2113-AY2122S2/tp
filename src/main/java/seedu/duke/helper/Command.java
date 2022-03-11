@@ -4,7 +4,7 @@ import seedu.duke.assets.Patient;
 import seedu.duke.assets.PatientList;
 
 public class Command {
-
+    private UI ui = new UI();
     //contains all the commands required for patient, doctor and medicine
 
     public void viewPatient(PatientList patientList, String parameters) {
@@ -17,7 +17,7 @@ public class Command {
     public void addPatient(PatientList patientList, String parameters) {
         String[] parametersArray = Parser.parseAddPatient(parameters);
         if (parametersArray == null) {
-            System.out.println("Please implement the above format changes and try again!");
+            ui.printAddPatientWrongFormatMessage();
         } else {
             Patient newPatient = new Patient(parametersArray[0], parametersArray[1],
                     Integer.parseInt(parametersArray[2]), parametersArray[3].charAt(0),
