@@ -8,6 +8,7 @@ import seedu.sherpass.util.Ui;
 
 public class StudyCommand extends Command {
     public static final String COMMAND_WORD = "study";
+    public static boolean isTimerRunning = false;
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
@@ -25,10 +26,16 @@ public class StudyCommand extends Command {
             Parser.parseStudyMode(userInput, ui, timer);
             ui.showLine();
             userInput = ui.readCommand();
+            if (userInput.contains("leave")) {
+                timer.stopTimer();
+            } else if (userInput.contains("start") && !isTimerRunning) {
+                SherpassTimer newTimer = new SherpassTimer(ui);
+                timer = newTimer;
+                isTimerRunning = true;
+            }
         }
         ui.showLine();
         ui.showToUser("leaving study session...\n"
                 + "Welcome back to the main session! How can I help you?");
     }
-
 }

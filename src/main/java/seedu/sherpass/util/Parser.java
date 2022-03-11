@@ -26,6 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 
+import static seedu.sherpass.command.StudyCommand.isTimerRunning;
 import static seedu.sherpass.constant.DateAndTimeFormat.noTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskNoTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskWithTimeFormat;
@@ -351,17 +352,31 @@ public class Parser {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
-            int duration = parseTimerInput(parsedInput, ui);
-            if (duration >= 0) {
-                timer.setDuration(duration);
-                timer.start();
+            if (timer.getHasTimeLeft()) {
+                ui.showToUser("You already have a timer running!");
+            } else {
+                int duration = parseTimerInput(parsedInput, ui);
+                if (duration >= 0) {
+                    timer.setDuration(duration);
+                    timer.start();
+                }
             }
             break;
         case "pause":
-            timer.pauseTimer();
+            if (timer.isTimerPaused()) {
+                ui.showToUser("The timer is already paused!");
+            } else if (!timer.getHasTimeLeft()) {
+                ui.showToUser("The timer has already finished!");
+            } else {
+                timer.pauseTimer();
+            }
             break;
         case "resume":
-            timer.resumeTimer();
+            if (timer.isTimerPaused() && timer.getHasTimeLeft()) {
+                timer.resumeTimer();
+            } else {
+                ui.showToUser("The timer is still running!");
+            }
             break;
         case "stop":
             timer.stopTimer();

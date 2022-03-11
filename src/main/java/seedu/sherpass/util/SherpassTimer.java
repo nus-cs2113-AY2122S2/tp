@@ -1,11 +1,13 @@
 package seedu.sherpass.util;
 
-import seedu.sherpass.constant.Timer;
+import static seedu.sherpass.constant.Timer.*;
+
+import seedu.sherpass.command.StudyCommand;
 
 public class SherpassTimer extends Thread {
 
     private volatile boolean timerPaused = false;
-    private boolean hasTimeLeft = true;
+    private boolean hasTimeLeft = false;
     private static Ui ui;
     protected int timeLeft;
 
@@ -14,20 +16,20 @@ public class SherpassTimer extends Thread {
      * @param
      */
     public SherpassTimer(Ui ui) {
-        timeLeft = Timer.DURATION_NOT_INITIALISED;
+        timeLeft = NO_TIME_LEFT;
         this.ui = ui;
     }
 
     @Override
     public void run() {
         while (hasTimeLeft) {
-            if (timeLeft % Timer.TIME_INTERVAL == Timer.NO_TIME_LEFT) {
+            if (timeLeft % TIME_INTERVAL == NO_TIME_LEFT) {
                 System.out.println(timeLeft + " seconds left.");
             }
             try {
                 Thread.sleep(1000);
                 timeLeft -= 1;
-                if (timeLeft <= Timer.NO_TIME_LEFT) {
+                if (timeLeft <= NO_TIME_LEFT) {
                     hasTimeLeft = false;
                 }
                 if (timerPaused) {
@@ -40,7 +42,7 @@ public class SherpassTimer extends Thread {
             } catch (InterruptedException e) {
             }
         }
-        if (hasTimeLeft) {
+        if (!hasTimeLeft) {
             System.out.println("Time is up!");
         }
         this.interrupt();
@@ -48,7 +50,12 @@ public class SherpassTimer extends Thread {
 
     public void setDuration(int duration) {
         timeLeft = duration;
+        hasTimeLeft = true;
     }
+
+    public boolean getHasTimeLeft() { return hasTimeLeft; }
+
+    public boolean isTimerPaused() { return timerPaused; }
 
     public void resumeTimer() {
         synchronized (this) {
@@ -66,6 +73,9 @@ public class SherpassTimer extends Thread {
 
     public void stopTimer() {
         ui.showToUser("Alright, I've stopped the timer.");
+        StudyCommand.isTimerRunning = false;
+        timeLeft = NO_TIME_LEFT;
+        hasTimeLeft = false;
         this.interrupt();
     }
 }
