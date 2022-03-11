@@ -275,9 +275,8 @@ public class Session {
      */
     @Override
     public String toString() {
-        return "Session --\n"
+        return "Session Id #" + sessionId + " --\n"
                 + "Name: " + sessionName + '\n'
-                + "Id:   " + sessionId + '\n'
                 + "Date: " + dateCreated + '\n'
                 + getActivityListSummaryString() + '\n'
                 + getPersonListSummaryString();
