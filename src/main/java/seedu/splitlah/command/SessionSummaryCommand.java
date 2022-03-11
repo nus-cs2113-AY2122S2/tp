@@ -23,6 +23,7 @@ public class SessionSummaryCommand extends Command {
     public static final String COMMAND_TEXT = "session /summary";
 
     public static final String COMMAND_FORMAT = "Syntax: session /summary /sid <SESSIONID>";
+    
     public static final String PREPEND_SESSION_ID = "\nSession id:   ";
     public static final String PREPEND_SESSION_NAME = "\nSession name: ";
     public static final String PREPEND_SESSION_DATE = "\nSession date: ";
@@ -47,16 +48,6 @@ public class SessionSummaryCommand extends Command {
      */
     public SessionSummaryCommand(int sessionId) {
         this.sessionId = sessionId;
-    }
-    
-    public static Command prepare(String commandArgs) {
-        try {
-            int sessionId = Parser.parseSessionId(commandArgs);
-            return new SessionSummaryCommand(sessionId);
-        } catch (InvalidFormatException exception) {
-            String invalidCommandMessage = exception.getMessage() + "\n" + COMMAND_FORMAT;
-            return new InvalidCommand(invalidCommandMessage);
-        }
     }
 
     private static boolean isDifferenceSmall(double cost1, double cost2) {
@@ -156,6 +147,16 @@ public class SessionSummaryCommand extends Command {
             sb.append(PREPEND_TRANSACTION).append(Message.MESSAGE_SESSIONSUMMARY_NO_PAYMENTS_REQUIRED);
         }
         return sb.toString();
+    }
+
+    public static Command prepare(String commandArgs) {
+        try {
+            int sessionId = Parser.parseSessionId(commandArgs);
+            return new SessionSummaryCommand(sessionId);
+        } catch (InvalidFormatException exception) {
+            String invalidCommandMessage = exception.getMessage() + "\n" + COMMAND_FORMAT;
+            return new InvalidCommand(invalidCommandMessage);
+        }
     }
 
     /**
