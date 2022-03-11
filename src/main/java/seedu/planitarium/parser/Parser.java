@@ -134,7 +134,8 @@ public class Parser {
      */
     public static void isValidUserIndex(String userIndex) throws NumberFormatException, IndexOutOfBoundsException {
         int checkIndex = Integer.parseInt(userIndex);
-        isRangeBoundedIndex(checkIndex, MIN_USER_INDEX, PersonList.getNumberOfMembers());
+        isTooHighIndex(checkIndex, PersonList.getNumberOfMembers());
+        isTooLowIndex(checkIndex, MIN_USER_INDEX);
     }
 
     /**
@@ -148,7 +149,8 @@ public class Parser {
     public static void isValidExpenditureIndex(String expenditureIndex, Person person)
             throws NumberFormatException, IndexOutOfBoundsException {
         int checkIndex = Integer.parseInt(expenditureIndex);
-        isRangeBoundedIndex(checkIndex, MIN_EXPENDITURE_INDEX, person.getNumberOfExpenditures());
+        isTooHighIndex(checkIndex, person.getNumberOfExpenditures());
+        isTooLowIndex(checkIndex, MIN_EXPENDITURE_INDEX);
     }
 
     /**
@@ -162,22 +164,29 @@ public class Parser {
     public static void isValidIncomeIndex(String incomeIndex, Person person)
             throws NumberFormatException, IndexOutOfBoundsException {
         int checkIndex = Integer.parseInt(incomeIndex);
-        isRangeBoundedIndex(checkIndex, MIN_INCOME_INDEX, person.getNumberOfIncomes());
+        isTooHighIndex(checkIndex, person.getNumberOfIncomes());
+        isTooLowIndex(checkIndex, MIN_INCOME_INDEX);
     }
 
     /**
-     * Returns without exception if an index is within the provided bounds.
-     * Ensures that an index is within the indicated index range.
+     * Returns without exception if an index is not lower than minimum accepted index value.
      *
      * @param checkIndex The index to be checked for invalid boundary.
      * @param minIndex   The minimum value an index should be.
-     * @param maxIndex   The value the index must be less than.
      */
-    private static void isRangeBoundedIndex(int checkIndex, int minIndex, int maxIndex)
-                throws IndexOutOfBoundsException {
+    private static void isTooLowIndex(int checkIndex, int minIndex) throws IndexOutOfBoundsException {
         if (checkIndex < minIndex) {
             throw new IndexOutOfBoundsException();
         }
+    }
+
+    /**
+     * Returns without exception if an index is not higher than current maximum index value.
+     *
+     * @param checkIndex The index to be checked for invalid boundary.
+     * @param maxIndex   The value the index must be less than.
+     */
+    private static void isTooHighIndex(int checkIndex, int maxIndex) throws IndexOutOfBoundsException {
         if (checkIndex > maxIndex) {
             throw new IndexOutOfBoundsException();
         }
