@@ -1,4 +1,4 @@
-package seedu.duke.parser;
+package seedu.parser;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
