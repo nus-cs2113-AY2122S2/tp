@@ -22,9 +22,8 @@ public class ActivityCreateCommand extends Command {
     private static final String COMMAND_FORMAT = "Syntax:\n"
             + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /c <OVERALLCOST> "
             + "[<OPTIONAL ARGS>]\n"
-            + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /c <COST1 COST2…> "
-            + "[<OPTIONAL ARGS>]\n"
-            + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /c <OVERALLCOST> [<OPTIONAL ARGS>]";
+            + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /cl <COST1 COST2…> "
+            + "[<OPTIONAL ARGS>]";
 
     private static final String COMMAND_SUCCESS = "The session was created successfully with session id of: ";
 
@@ -119,7 +118,7 @@ public class ActivityCreateCommand extends Command {
             return new ActivityCreateCommand(sessionId, activityName, totalCost, payer, involvedList, costList, gst,
                     serviceCharge);
         } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + COMMAND_FORMAT);
+            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT);
         }
     }
 
