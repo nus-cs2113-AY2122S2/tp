@@ -1,10 +1,12 @@
 package seedu.mindmymoney.command;
 
-import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.constants.PrintStrings;
 import seedu.mindmymoney.data.Lists;
 import seedu.mindmymoney.helper.Functions;
 import seedu.mindmymoney.userfinancial.Expenditure;
+
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM_IN_STRING;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM_IN_STRING;
 
 /**
  * Represents the Add command.
@@ -23,8 +25,8 @@ public class AddCommand extends Command {
         try {
             System.out.print(PrintStrings.LINE);
             String[] parseAddInput = Functions.parseInput(addInput);
-            String description = parseAddInput[Indexes.INDEX_OF_FIRST_ITEM_IN_STRING];
-            int amount = Integer.parseInt(parseAddInput[Indexes.INDEX_OF_SECOND_ITEM_IN_STRING]);
+            String description = parseAddInput[INDEX_OF_FIRST_ITEM_IN_STRING];
+            int amount = Integer.parseInt(parseAddInput[INDEX_OF_SECOND_ITEM_IN_STRING]);
             Lists.expenditures.add(new Expenditure(description, amount));
             System.out.println("Successfully added " + description + " of $" + amount + " into the account");
         } catch (ArrayIndexOutOfBoundsException e) {
