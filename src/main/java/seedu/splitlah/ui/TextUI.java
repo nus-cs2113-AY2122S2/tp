@@ -52,7 +52,6 @@ public class TextUI {
         String confirmation = readNextLine().toLowerCase();
         printDivider();
         while (true) {
-            confirmation = readNextLine().toLowerCase();
             switch (confirmation) {
             case ("yes"):
                 // fallthrough
@@ -64,6 +63,7 @@ public class TextUI {
                 printlnMessage(Message.ERROR_TEXTUI_USER_DID_NOT_CONFIRM);
                 return false;
             default:
+                confirmation = readNextLine().toLowerCase();
                 printlnMessage(Message.ERROR_TEXTUI_REENTER_INPUT);
             }
         }
