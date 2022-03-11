@@ -83,6 +83,8 @@ public class SessionSummaryCommand extends Command {
         
         // Both parties have near 0 cost/debt
         if (isValueSmall(payerCost) && isValueSmall(receiverAmount)) {
+            payer.setProcessed(true);
+            receiver.setProcessed(true);
             return "";
         }
         
@@ -116,6 +118,7 @@ public class SessionSummaryCommand extends Command {
         sb.append(PREPEND_SESSION_DATE).append(session.getDateString());
         sb.append(PREPEND_PAYMENTS);
         personCostPairList.sort(PersonCostPair::compareTo);
+        
         int payerIndex = 0;
         int receiverIndex = personCostPairList.size() - ZERO_INDEXING_OFFSET;
         if (!isPersonCostPairListValid(personCostPairList)) {
@@ -125,7 +128,7 @@ public class SessionSummaryCommand extends Command {
         boolean hasInserted = false;
         while (payerIndex < receiverIndex) {
             PersonCostPair payer = personCostPairList.get(payerIndex);
-            PersonCostPair receiver = personCostPairList.get(payerIndex);
+            PersonCostPair receiver = personCostPairList.get(receiverIndex);
             if (payer.getCost() > receiver.getCost()) {
                 return TEMP_ERROR_PROCESSALLTRANSACTION_METHOD_LOGIC_INVALID;
             }
