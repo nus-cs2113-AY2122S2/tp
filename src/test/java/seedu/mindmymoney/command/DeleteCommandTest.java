@@ -29,52 +29,53 @@ class DeleteCommandTest {
         new DeleteCommand(deleteInputString).executeCommand();
         testList.remove(0);
         assertEquals(testList,Lists.expenditures);
+        Lists.expenditures.clear();
     }
 
     /**
      * Asserts if the index input is out of bounds.
      */
     @Test
-    void deleteCommand_wrongInputValue_expectListUpdated() {
+    void deleteCommand_wrongInputValue_expectException() {
         String inputString = "expenditure 12345";
         new AddCommand(inputString).executeCommand();
         String deleteInputString = "delete 0";
         assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString).executeCommand());
         String deleteInputString2 = "delete 5";
         assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString2).executeCommand());
+        Lists.expenditures.clear();
     }
 
     /**
      * Asserts if the index input is in the correct number format.
      */
     @Test
-    void deleteCommand_wrongInputFormat_expectListUpdated() {
+    void deleteCommand_wrongInputFormat_expectException() {
         String deleteInputString = "delete ONE";
         assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString).executeCommand());
+        Lists.expenditures.clear();
     }
 
     /**
      * Asserts if there is a missing index input in the command.
      */
     @Test
-    void deleteCommand_missingInput_expectListUpdated() {
+    void deleteCommand_missingInput_expectException() {
         String deleteInputString = "delete";
         String deleteInputString2 = "delete ";
         assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString).executeCommand());
         assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString2).executeCommand());
+        Lists.expenditures.clear();
     }
 
     /**
      * Asserts if user is able to delete from an empty list.
      *
-     * @throws MindMyMoneyException if user is trying to delete an item from an empty list.
      */
     @Test
-    void deleteCommand_addToEmptyList_expectListUpdated() throws MindMyMoneyException {
+    void deleteCommand_addToEmptyList_expectException() {
         String deleteInputString = "delete 1";
-        new DeleteCommand(deleteInputString).executeCommand();
-        assertEquals(0, Lists.expenditures.size());
-        String deleteInputString2 = "delete 1";
-        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString2).executeCommand());
+        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString).executeCommand());
+        Lists.expenditures.clear();
     }
 }
