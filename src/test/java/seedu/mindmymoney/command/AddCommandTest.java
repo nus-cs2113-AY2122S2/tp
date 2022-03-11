@@ -3,8 +3,6 @@ package seedu.mindmymoney.command;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.mindmymoney.MindMyMoneyException;
-import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.data.Lists;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
@@ -13,6 +11,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
 
 class AddCommandTest {
     private final ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
@@ -77,8 +76,8 @@ class AddCommandTest {
      */
     public String getOutput(ArrayList<Expenditure> list) {
         if (!list.isEmpty()) {
-            return list.get(list.size() + Indexes.LIST_INDEX_CORRECTION).getDescription()
-                    + list.get(list.size() + Indexes.LIST_INDEX_CORRECTION).getAmount();
+            return list.get(list.size() + LIST_INDEX_CORRECTION).getDescription()
+                    + list.get(list.size() + LIST_INDEX_CORRECTION).getAmount();
         }
         return "";
     }
