@@ -128,6 +128,10 @@ public class WorkoutCommand extends Command {
         } catch (IOException e) {
             System.out.println(UI.IOEXCEPTION_ERROR_MESSAGE);
             System.exit(-1);
+
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Please try again.");
         }
     }
 }

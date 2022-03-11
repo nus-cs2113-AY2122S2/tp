@@ -98,6 +98,9 @@ public class WerkIt {
             } catch (InvalidCommandException e) {
                 System.out.println(e.getMessage());
                 System.out.println("Please try again.");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Uh oh, the command entered is invalid.");
+                System.out.println("Please try again.");
             }
         } while (!userWantsToExit);
 
