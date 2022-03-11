@@ -7,6 +7,7 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 import seedu.splitlah.util.PersonCostPair;
 
@@ -22,11 +23,17 @@ public class SessionSummaryCommand extends Command {
     public static final String COMMAND_TEXT = "session /summary";
 
     public static final String COMMAND_FORMAT = "Syntax: session /summary /sid <SESSIONID>";
+    
+    public static final String PREPEND_SESSION_ID = "\nSession id:   ";
+    public static final String PREPEND_SESSION_NAME = "\nSession name: ";
+    public static final String PREPEND_SESSION_DATE = "\nSession date: ";
+    public static final String PREPEND_PAYMENTS = "\nTransactions to be made:";
+    public static final String PREPEND_TRANSACTION = "\n - ";
 
     private int sessionId;
 
     // MISC CONSTANTS
-    public static final String SUMMARY_HEADER = "Transactions --";
+    public static final String SUMMARY_HEADER = "Summary --";
     public static final String TEMP_ERROR_INVALID_PERSONCOSTPAIR_LIST =
             "Program has faced some issue : processAllTransactions, personCostPairList is invalid";
     public static final String TEMP_ERROR_PROCESSALLTRANSACTION_METHOD_LOGIC_INVALID =
@@ -41,16 +48,6 @@ public class SessionSummaryCommand extends Command {
      */
     public SessionSummaryCommand(int sessionId) {
         this.sessionId = sessionId;
-    }
-    
-    public static Command prepare(String commandArgs) {
-        try {
-            int sessionId = Parser.parseSessionId(commandArgs);
-            return new SessionSummaryCommand(sessionId);
-        } catch (InvalidFormatException exception) {
-            String invalidCommandMessage = exception.getMessage() + "\n" + COMMAND_FORMAT;
-            return new InvalidCommand(invalidCommandMessage);
-        }
     }
 
     private static boolean isDifferenceSmall(double cost1, double cost2) {
@@ -84,6 +81,13 @@ public class SessionSummaryCommand extends Command {
         double payerCost = Math.abs(payer.getCost());
         double receiverAmount = Math.abs(receiver.getCost());
         
+        // Both parties have near 0 cost/debt
+        if (isValueSmall(payerCost) && isValueSmall(receiverAmount)) {
+            payer.setProcessed(true);
+            receiver.setProcessed(true);
+            return "";
+        }
+        
         // Equal costs
         if (isDifferenceSmall(payerCost, receiverAmount)) {
             payer.setProcessed(true);
@@ -107,23 +111,32 @@ public class SessionSummaryCommand extends Command {
                 + " $" + String.format("%.2f", receiverAmount);
     }
 
-    private String processAllTransactions(ArrayList<PersonCostPair> personCostPairList) {
+    private String processAllTransactions(ArrayList<PersonCostPair> personCostPairList, Session session) {
         StringBuilder sb = new StringBuilder(SUMMARY_HEADER);
+        sb.append(PREPEND_SESSION_ID).append(sessionId);
+        sb.append(PREPEND_SESSION_NAME).append(session.getSessionName());
+        sb.append(PREPEND_SESSION_DATE).append(session.getDateString());
+        sb.append(PREPEND_PAYMENTS);
         personCostPairList.sort(PersonCostPair::compareTo);
+        
         int payerIndex = 0;
         int receiverIndex = personCostPairList.size() - ZERO_INDEXING_OFFSET;
         if (!isPersonCostPairListValid(personCostPairList)) {
             return TEMP_ERROR_INVALID_PERSONCOSTPAIR_LIST;
         }
 
+        boolean hasInserted = false;
         while (payerIndex < receiverIndex) {
             PersonCostPair payer = personCostPairList.get(payerIndex);
-            PersonCostPair receiver = personCostPairList.get(payerIndex);
+            PersonCostPair receiver = personCostPairList.get(receiverIndex);
             if (payer.getCost() > receiver.getCost()) {
                 return TEMP_ERROR_PROCESSALLTRANSACTION_METHOD_LOGIC_INVALID;
             }
             String output = processTransaction(payer, receiver);
-            sb.append('\n').append(output);
+            if (!output.isEmpty()) {
+                sb.append(PREPEND_TRANSACTION).append(output);
+                hasInserted = true;
+            }
             
             if (payer.isProcessed()) {
                 payerIndex += 1;
@@ -133,7 +146,20 @@ public class SessionSummaryCommand extends Command {
             }
         }
 
+        if (!hasInserted) {
+            sb.append(PREPEND_TRANSACTION).append(Message.MESSAGE_SESSIONSUMMARY_NO_PAYMENTS_REQUIRED);
+        }
         return sb.toString();
+    }
+
+    public static Command prepare(String commandArgs) {
+        try {
+            int sessionId = Parser.parseSessionId(commandArgs);
+            return new SessionSummaryCommand(sessionId);
+        } catch (InvalidFormatException exception) {
+            String invalidCommandMessage = exception.getMessage() + "\n" + COMMAND_FORMAT;
+            return new InvalidCommand(invalidCommandMessage);
+        }
     }
 
     /**
@@ -157,6 +183,7 @@ public class SessionSummaryCommand extends Command {
         ArrayList<Person> personList = session.getPersonList();
         ArrayList<PersonCostPair> personCostPairList = getPersonCostPairList(personList);
         // check if NET 0
-        String output = processAllTransactions(personCostPairList);
+        String output = processAllTransactions(personCostPairList, session);
+        ui.printlnMessage(output);
     }
 }
