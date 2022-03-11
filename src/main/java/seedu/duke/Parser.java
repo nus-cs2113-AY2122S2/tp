@@ -1,57 +1,100 @@
 package seedu.duke;
 
-import java.util.Arrays;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.AddCommand;
+import seedu.duke.commands.ListCommand;
+import seedu.duke.commands.ClearCommand;
+import seedu.duke.commands.DeleteCommand;
+import seedu.duke.commands.HelpCommand;
+
+import static seedu.duke.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
 
 public class Parser {
     private final String command;
-    private final String description;
+    private final String arguments;
 
-    private static final String NAME = "n/";
-    private static final String LESSON = "l/";
-    private static final String DAY = "d/";
-    private static final String STARTTIME = "st/";
-    private static final String ENDTIME = "et/";
-    private static final String MODE = "m/";
-    private static final String[] HEADINGS = {NAME, LESSON, DAY, STARTTIME, ENDTIME, MODE};
+    private static final int NAME_INDEX = 0;
+    private static final int TITLE_INDEX = 1;
+    private static final int DAY_INDEX = 2;
+    private static final int STARTTIME_INDEX = 3;
+    private static final int ENDTIME_INDEX = 4;
+    private static final int MODE_INDEX = 5;
+    private static final String[] HEADINGS = {"n/", "l/", "d/", "st/", "et/", "m/"};
 
     public Parser(String input) {
         this.command = getCommandFromInput(input);
-        this.description = getDescriptionFromInput(input);
+        this.arguments = getArgumentsFromInput(input);
     }
 
-    public String getCommand() {
-        return command;
+    public Command parseCommand() {
+        switch (command) {
+        case AddCommand.COMMAND_WORD:
+            return prepareAdd();
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+        case DeleteCommand.COMMAND_WORD:
+            return prepareDelete();
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+        default:
+            return new HelpCommand();
+        }
     }
 
-    // Allows input not in specified order as long as every parameter is passed
-    public String[] getAddDescription() {
+    public Command prepareAdd() {
         // checks empty command description error
         // checks input format error
-        String[] addDescription = new String[6];
-        int index = -1;
-        for (String str : description.split(" ")) {
-            if (checkHeadings(str) == -1) {
-                addDescription[index] += " " + str;
-                addDescription[index] = addDescription[index].trim();
-            } else {
-                index = checkHeadings(str);
-                addDescription[index] = str.substring(str.indexOf("/") + 1);
-            }
+        try {
+            String[] eventDescription = splitArguments();
+            String name = eventDescription[NAME_INDEX];
+            String title = eventDescription[TITLE_INDEX];
+            String day = eventDescription[DAY_INDEX].toLowerCase();
+            int startTime = Integer.parseInt(eventDescription[STARTTIME_INDEX]);
+            int endTime = Integer.parseInt(eventDescription[ENDTIME_INDEX]);
+            String mode = eventDescription[MODE_INDEX].toLowerCase();
+            return new AddCommand(name, title, day, startTime, endTime, mode);
+        } catch (NumberFormatException nfe) {
+            System.out.println(ERROR_INVALID_INDEX_FORMAT);
+            return new HelpCommand(); // temporary
         }
-        return addDescription;
+    }
+
+    public Command prepareDelete() {
+        try {
+            int index = Integer.parseInt(arguments);
+            return new DeleteCommand(index);
+        } catch (NumberFormatException nfe) {
+            System.out.println(ERROR_INVALID_INDEX_FORMAT);
+            return new HelpCommand(); // temporary
+        }
     }
 
     private String getCommandFromInput(String input) {
         return input.split(" ")[0].trim().toLowerCase();
     }
 
-    private String getDescriptionFromInput(String input) {
+    private String getArgumentsFromInput(String input) {
         String str = "";
         int spaceIndex = input.trim().indexOf(" ");
         if (spaceIndex != -1) {
             str = input.substring(spaceIndex + 1).trim();
         }
         return str;
+    }
+
+    private String[] splitArguments() {
+        String[] eventDescription = new String[6];
+        int index = -1;
+        for (String str : arguments.split(" ")) {
+            if (checkHeadings(str) == -1) {
+                eventDescription[index] += " " + str;
+                eventDescription[index] = eventDescription[index].trim();
+            } else {
+                index = checkHeadings(str);
+                eventDescription[index] = str.substring(str.indexOf("/") + 1);
+            }
+        }
+        return eventDescription;
     }
 
     private int checkHeadings(String str) {
@@ -61,14 +104,5 @@ public class Parser {
             }
         }
         return -1;
-    }
-
-    public static String getDeleteString(String input){
-        String str = "";
-        int spaceIndex = input.trim().indexOf(" ");
-        if (spaceIndex != -1) {
-            str = input.substring(spaceIndex + 1).trim();
-        }
-        return str;
     }
 }
