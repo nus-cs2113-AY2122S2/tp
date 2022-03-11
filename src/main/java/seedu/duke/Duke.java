@@ -4,7 +4,7 @@ import seedu.duke.ui.TextUi;
 
 import static seedu.duke.contacts.ContactsManager.contactsRunner;
 
-public class AllOnUs {
+public class Duke {
     private TextUi ui;
 
     private static void greet() {
@@ -98,6 +98,6 @@ public class AllOnUs {
      */
     public static void main(String[] args) {
         greet();
-        new AllOnUs().run();
+        new Duke().run();
     }
 }
