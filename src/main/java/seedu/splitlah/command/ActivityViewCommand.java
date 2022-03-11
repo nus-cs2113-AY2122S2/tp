@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class ActivityViewCommand extends Command {
 
     public static final String COMMAND_TEXT = "activity /view";
+
     private static final String COMMAND_FORMAT = "Syntax: activity /view /sid <SESSIONID> /aid <ACTIVITYID>";
 
     private int sessionId;
@@ -50,7 +51,7 @@ public class ActivityViewCommand extends Command {
      *
      * @param   commandArgs  A String object that represents the user's arguments.
      * @return  An ActivityViewCommand object if sessionId and activityId were found in user arguments,
-     *         an InvalidCommand object otherwise.
+     *          an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
         try {
