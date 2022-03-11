@@ -19,13 +19,11 @@ public class ActivityListCommand extends Command {
 
     private static final String COMMAND_FORMAT = "Syntax: activity /list /sid <SESSION_ID>";
 
-
     private int sessionId;
 
     public ActivityListCommand(int sessionId) {
         this.sessionId = sessionId;
     }
-
 
     /**
      * Runs the command.
@@ -50,9 +48,7 @@ public class ActivityListCommand extends Command {
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
         }
-
     }
-
 
     /**
      * Prepares user argument for activity list command.

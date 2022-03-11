@@ -103,5 +103,5 @@ public abstract class Message {
 
     //Activity List Command
     public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =
-        "There are currently no activities in this session";
+            "There are currently no activities in this session";
 }
