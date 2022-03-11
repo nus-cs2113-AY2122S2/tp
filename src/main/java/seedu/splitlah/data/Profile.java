@@ -41,6 +41,18 @@ public class Profile {
         return false;
     }
 
+    public boolean hasSessionId (int sessionId) {
+        if (sessionList.size() == 0) {
+            return false;
+        }
+        for (Session session : sessionList) {
+            if (session.getSessionId() == sessionId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Returns the session object via the session unique identifier specified by the user.
      *
