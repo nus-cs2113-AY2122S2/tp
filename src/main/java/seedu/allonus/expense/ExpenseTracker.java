@@ -1,12 +1,11 @@
-package seedu.duke.expense;
+package seedu.allonus.expense;
 
-import seedu.duke.contacts.Contact;
-import seedu.duke.ui.TextUi;
+import seedu.allonus.ui.TextUi;
 
 import java.util.ArrayList;
 
-import static seedu.duke.expense.ExpenseParser.parseDeleteExpense;
-import static seedu.duke.expense.ExpenseParser.parseNewExpense;
+import static seedu.allonus.expense.ExpenseParser.parseDeleteExpense;
+import static seedu.allonus.expense.ExpenseParser.parseNewExpense;
 
 public class ExpenseTracker {
     private static final String EXPENSE_WELCOME_MESSAGE = "Welcome to Expense Tracker";

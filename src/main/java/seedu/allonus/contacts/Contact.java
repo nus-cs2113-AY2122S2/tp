@@ -1,4 +1,4 @@
-package seedu.duke.contacts;
+package seedu.allonus.contacts;
 
 public class Contact {
     private String name;

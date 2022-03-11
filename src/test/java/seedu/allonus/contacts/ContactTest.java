@@ -1,4 +1,4 @@
-package seedu.duke.contacts;
+package seedu.allonus.contacts;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

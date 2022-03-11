@@ -1,4 +1,4 @@
-package seedu.duke.expense;
+package seedu.allonus.expense;
 
 public class ExpenseParser {
     public static final String DATE_DELIMITER = "/d";

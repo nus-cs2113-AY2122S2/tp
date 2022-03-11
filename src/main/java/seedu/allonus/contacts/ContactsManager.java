@@ -1,7 +1,7 @@
-package seedu.duke.contacts;
+package seedu.allonus.contacts;
 
 
-import seedu.duke.ui.TextUi;
+import seedu.allonus.ui.TextUi;
 
 import java.util.ArrayList;
 
