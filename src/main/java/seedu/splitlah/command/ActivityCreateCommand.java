@@ -107,8 +107,10 @@ public class ActivityCreateCommand extends Command {
             String[] involvedList = Parser.parseInvolved(commandArgs);
             int gst = Parser.parseGst(commandArgs);
             int serviceCharge = Parser.parseServiceCharge(commandArgs);
-            boolean hasDifferentLength = involvedList.length != costList.length;
-            ;
+            boolean hasDifferentLength = false;
+            if (isMissingCost) {
+                hasDifferentLength = involvedList.length != costList.length;
+            }
             if (hasDifferentLength) {
                 return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
                         + COMMAND_FORMAT);
