@@ -112,7 +112,7 @@ public class Parser {
      * @param amount Text to be checked.
      * @throws NumberFormatException if format of text is not a valid double, negative or more than 2 decimal places.
      */
-    public static void isValidMoney(String amount) throws NumberFormatException {
+    public static void checkValidMoney(String amount) throws NumberFormatException {
         double checkMoney = Double.parseDouble(amount);
         if (Double.compare(checkMoney, MONEY_ZERO) < 0) {
             throw new NumberFormatException();
@@ -128,14 +128,16 @@ public class Parser {
     /**
      * Returns without exception if user index is within membership quantity bounds.
      *
-     * @param userIndex Person's user index.
+     * @param userIndex  Person's user index.
+     * @param personList A list of Persons.
      * @throws NumberFormatException if amount is not a valid integer.
      * @throws IndexOutOfBoundsException if provided index is out of bounds.
      */
-    public static void isValidUserIndex(String userIndex) throws NumberFormatException, IndexOutOfBoundsException {
+    public static void checkValidUserIndex(String userIndex, PersonList personList)
+                throws NumberFormatException, IndexOutOfBoundsException {
         int checkIndex = Integer.parseInt(userIndex);
-        isTooHighIndex(checkIndex, PersonList.getNumberOfMembers());
-        isTooLowIndex(checkIndex, MIN_USER_INDEX);
+        checkTooHighIndex(checkIndex, personList.getNumberOfMembers());
+        checkTooLowIndex(checkIndex, MIN_USER_INDEX);
     }
 
     /**
@@ -146,11 +148,11 @@ public class Parser {
      * @throws NumberFormatException if index is not a valid integer.
      * @throws IndexOutOfBoundsException if provided index is out of bounds.
      */
-    public static void isValidExpenditureIndex(String expenditureIndex, Person person)
+    public static void checkValidExpenditureIndex(String expenditureIndex, Person person)
             throws NumberFormatException, IndexOutOfBoundsException {
         int checkIndex = Integer.parseInt(expenditureIndex);
-        isTooHighIndex(checkIndex, person.getNumberOfExpenditures());
-        isTooLowIndex(checkIndex, MIN_EXPENDITURE_INDEX);
+        checkTooHighIndex(checkIndex, person.getNumberOfExpenditures());
+        checkTooLowIndex(checkIndex, MIN_EXPENDITURE_INDEX);
     }
 
     /**
@@ -161,11 +163,11 @@ public class Parser {
      * @throws NumberFormatException if index is not a valid integer.
      * @throws IndexOutOfBoundsException if provided index is out of bounds.
      */
-    public static void isValidIncomeIndex(String incomeIndex, Person person)
+    public static void checkValidIncomeIndex(String incomeIndex, Person person)
             throws NumberFormatException, IndexOutOfBoundsException {
         int checkIndex = Integer.parseInt(incomeIndex);
-        isTooHighIndex(checkIndex, person.getNumberOfIncomes());
-        isTooLowIndex(checkIndex, MIN_INCOME_INDEX);
+        checkTooHighIndex(checkIndex, person.getNumberOfIncomes());
+        checkTooLowIndex(checkIndex, MIN_INCOME_INDEX);
     }
 
     /**
@@ -174,7 +176,7 @@ public class Parser {
      * @param checkIndex The index to be checked for invalid boundary.
      * @param minIndex   The minimum value an index should be.
      */
-    private static void isTooLowIndex(int checkIndex, int minIndex) throws IndexOutOfBoundsException {
+    private static void checkTooLowIndex(int checkIndex, int minIndex) throws IndexOutOfBoundsException {
         if (checkIndex < minIndex) {
             throw new IndexOutOfBoundsException();
         }
@@ -186,7 +188,7 @@ public class Parser {
      * @param checkIndex The index to be checked for invalid boundary.
      * @param maxIndex   The value the index must be less than.
      */
-    private static void isTooHighIndex(int checkIndex, int maxIndex) throws IndexOutOfBoundsException {
+    private static void checkTooHighIndex(int checkIndex, int maxIndex) throws IndexOutOfBoundsException {
         if (checkIndex > maxIndex) {
             throw new IndexOutOfBoundsException();
         }
