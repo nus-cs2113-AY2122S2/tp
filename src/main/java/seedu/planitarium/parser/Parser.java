@@ -7,9 +7,10 @@ public class Parser {
     public static final String DELIMITER_SPACE = " ";
     public static final String DELIMITER_NAME = "/n";
     public static final String DELIMITER_USER_INDEX = "/u";
+    public static final String DELIMITER_DESCRIPTION = "/d";
     public static final String DELIMITER_INCOME = "/i";
     public static final String DELIMITER_EXPENDITURE = "/e";
-    public static final String DELIMITER_BACK = "/[unie]";
+    public static final String DELIMITER_BACK = "/[undie]";
     public static final String DELIMITER_MONEY = ".";
 
     public static final int INDEX_KEYWORD = 0;
@@ -45,7 +46,7 @@ public class Parser {
     }
 
     /**
-     * Returns command keyword from userInput.
+     * Returns command keyword from user input.
      *
      * @param userInput The user's full input text.
      * @return The command keyword issued.
@@ -56,7 +57,7 @@ public class Parser {
     }
 
     /**
-     * Returns person's name from userInput.
+     * Returns person's name from user input.
      *
      * @param userInput The user's full input text.
      * @return Person's name.
@@ -66,7 +67,7 @@ public class Parser {
     }
 
     /**
-     * Returns user index from userInput.
+     * Returns user index from user input.
      *
      * @param userInput The user's full input text.
      * @return Person's user index.
@@ -76,7 +77,17 @@ public class Parser {
     }
 
     /**
-     * Returns income from userInput.
+     * Returns description of item from user input.
+     *
+     * @param userInput The user's full input text.
+     * @return An item's description.
+     */
+    public static String parseDescription(String userInput) {
+        return parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION, DELIMITER_BACK);
+    }
+
+    /**
+     * Returns income from user input.
      *
      * @param userInput The user's full input text.
      * @return Person's added income.
@@ -86,7 +97,7 @@ public class Parser {
     }
 
     /**
-     * Returns expenditure from userInput.
+     * Returns expenditure from user input.
      *
      * @param userInput The user's full input text.
      * @return Person's expenditure amount.
