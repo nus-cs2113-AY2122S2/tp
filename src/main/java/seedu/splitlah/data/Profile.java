@@ -33,7 +33,7 @@ public class Profile {
      * @return True if a session exists with the same name, false otherwise.
      */
     public boolean hasSessionName(String sessionName) {
-        if (sessionList.size() == 0) {
+        if (sessionList.isEmpty()) {
             return false;
         }
         for (Session session : sessionList) {
@@ -51,7 +51,7 @@ public class Profile {
      * @return True if a session exists with the specified session unique identifier, false otherwise.
      */
     public boolean hasSessionId(int sessionId) {
-        if (sessionList.size() == 0) {
+        if (sessionList.isEmpty()) {
             return false;
         }
         for (Session session : sessionList) {
