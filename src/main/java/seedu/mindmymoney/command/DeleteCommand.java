@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
     /**
      * Removes the item from the expenditure list.
      */
-    public void executeCommand() throws MindMyMoneyException {
+    public void executeCommand() throws MindMyMoneyException, NumberFormatException {
         try {
             if (Lists.expenditures.isEmpty()) {
                 throw new MindMyMoneyException(PrintStrings.LINE + System.lineSeparator()
@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
 
             }
         } catch (NumberFormatException e) {
-            System.out.println("INDEX must be a number");
+            throw new MindMyMoneyException("INDEX must be a number");
         }
     }
 
