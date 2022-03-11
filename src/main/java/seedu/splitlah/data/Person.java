@@ -21,6 +21,7 @@ public class Person {
      * @param name Name of the Person.
      */
     public Person(String name) {
+        this.activityCostList = new ArrayList<>();
         this.name = name;
     }
 
