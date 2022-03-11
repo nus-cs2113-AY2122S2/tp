@@ -1,22 +1,34 @@
 package seedu.duke;
 
+import seedu.duke.events.Event;
+
 import java.util.ArrayList;
 
 public class Timetable {
+    private final ArrayList<Event> list;
+    public Timetable() {
+        this.list = new ArrayList<>();
+    }
 
-    public static final ArrayList<Event> list = new ArrayList<>();
-
-    public static void add(Event event) {
+    public void add(Event event) {
         list.add(event);
     }
 
-    public static int size() {
+    public void remove(int index) {
+        list.remove(index);
+    }
+
+    public int size() {
         return list.size();
     }
 
-    public static Event get(int eventIndex) {
+    public Event get(int eventIndex) {
         Event targetEvent = list.get(eventIndex);
         return targetEvent;
+    }
+
+    public void clear() {
+        list.clear();
     }
 
 }

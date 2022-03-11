@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.events;
 
 public class Event {
     private String name;
