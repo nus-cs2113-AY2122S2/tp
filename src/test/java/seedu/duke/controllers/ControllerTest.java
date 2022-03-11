@@ -11,8 +11,8 @@ class ControllerTest {
     public void testHaveExitOption() {
         Scanner scanner = new Scanner(System.in);
         Controller[] controllers = {
-                new MainController(scanner),
-                new DishController(scanner),
+            new MainController(scanner),
+            new DishController(scanner),
         };
 
         for (Controller c : controllers) {
