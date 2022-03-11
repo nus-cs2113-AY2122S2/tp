@@ -134,12 +134,7 @@ public class Parser {
      */
     public static void isValidUserIndex(String userIndex) throws NumberFormatException, IndexOutOfBoundsException {
         int checkIndex = Integer.parseInt(userIndex);
-        if (checkIndex < MIN_USER_INDEX) {
-            throw new IndexOutOfBoundsException();
-        }
-        if (checkIndex >= PersonList.getNumberOfMembers()) {
-            throw new IndexOutOfBoundsException();
-        }
+        isRangeBoundedIndex(checkIndex, MIN_USER_INDEX, PersonList.getNumberOfMembers());
     }
 
     /**
@@ -153,12 +148,7 @@ public class Parser {
     public static void isValidExpenditureIndex(String expenditureIndex, Person person)
             throws NumberFormatException, IndexOutOfBoundsException {
         int checkIndex = Integer.parseInt(expenditureIndex);
-        if (checkIndex < MIN_EXPENDITURE_INDEX) {
-            throw new IndexOutOfBoundsException();
-        }
-        if (checkIndex >= person.getNumberOfExpenditures()) {
-            throw new IndexOutOfBoundsException();
-        }
+        isRangeBoundedIndex(checkIndex, MIN_EXPENDITURE_INDEX, person.getNumberOfExpenditures());
     }
 
     /**
@@ -172,10 +162,23 @@ public class Parser {
     public static void isValidIncomeIndex(String incomeIndex, Person person)
             throws NumberFormatException, IndexOutOfBoundsException {
         int checkIndex = Integer.parseInt(incomeIndex);
-        if (checkIndex < MIN_INCOME_INDEX) {
+        isRangeBoundedIndex(checkIndex, MIN_INCOME_INDEX, person.getNumberOfIncomes());
+    }
+
+    /**
+     * Returns without exception if an index is within the provided bounds.
+     * Ensures that an index is within the indicated index range.
+     *
+     * @param checkIndex The index to be checked for invalid boundary.
+     * @param minIndex   The minimum value an index should be.
+     * @param maxIndex   The value the index must be less than.
+     */
+    private static void isRangeBoundedIndex(int checkIndex, int minIndex, int maxIndex)
+                throws IndexOutOfBoundsException {
+        if (checkIndex < minIndex) {
             throw new IndexOutOfBoundsException();
         }
-        if (checkIndex >= Person.getNumberOfIncomes()) {
+        if (checkIndex >= maxIndex) {
             throw new IndexOutOfBoundsException();
         }
     }
