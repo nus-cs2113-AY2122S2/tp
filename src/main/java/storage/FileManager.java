@@ -197,12 +197,12 @@ public class FileManager {
         return hasNoErrorsDuringLoad;
     }
 
-    private String[] parseFileDataLine(String fileDataLine) {
+    public String[] parseFileDataLine(String fileDataLine) {
         String[] parsedFileDataLine = fileDataLine.split(FILE_DATA_DELIMITER_REGEX);
         return parsedFileDataLine;
     }
 
-    private void addFileWorkoutToList(WorkoutList workoutList, String[] workoutFileDataLine)
+    public void addFileWorkoutToList(WorkoutList workoutList, String[] workoutFileDataLine)
             throws ArrayIndexOutOfBoundsException, InvalidExerciseException, InvalidWorkoutException {
         String workoutName = workoutFileDataLine[0];
         String workoutReps = workoutFileDataLine[1];
@@ -220,7 +220,7 @@ public class FileManager {
         fileWriter.close();
     }
 
-    private String convertWorkoutToFileDataFormat(Workout workout) {
+    public String convertWorkoutToFileDataFormat(Workout workout) {
         StringBuilder workoutInFileFormat = new StringBuilder();
         workoutInFileFormat.append(workout.getExerciseName());
         workoutInFileFormat.append(FILE_DATA_DELIMITER);
