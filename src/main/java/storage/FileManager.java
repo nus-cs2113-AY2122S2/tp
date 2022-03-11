@@ -211,7 +211,7 @@ public class FileManager {
         workoutList.createAndAddWorkout(userArguments);
     }
 
-    public void writeNewWorkoutToFile(Workout newWorkout) throws IOException {
+    public void writeNewWorkoutToFile(Workout newWorkout) throws IOException, NullPointerException {
         String workoutInFileFormat = convertWorkoutToFileDataFormat(newWorkout);
 
         FileWriter fileWriter = new FileWriter(getWorkoutFilePath().toString(), true);
@@ -220,7 +220,11 @@ public class FileManager {
         fileWriter.close();
     }
 
-    public String convertWorkoutToFileDataFormat(Workout workout) {
+    public String convertWorkoutToFileDataFormat(Workout workout) throws NullPointerException {
+        if (workout == null) {
+            throw new NullPointerException("Workout object inputted into convertWorkoutToFileDataFormat() is null.");
+        }
+
         StringBuilder workoutInFileFormat = new StringBuilder();
         workoutInFileFormat.append(workout.getExerciseName());
         workoutInFileFormat.append(FILE_DATA_DELIMITER);
@@ -229,7 +233,7 @@ public class FileManager {
         return workoutInFileFormat.toString();
     }
 
-    public void rewriteAllWorkoutsToFile(WorkoutList workoutList) throws IOException {
+    public void rewriteAllWorkoutsToFile(WorkoutList workoutList) throws IOException, NullPointerException {
         ArrayList<Workout> listOfWorkouts = workoutList.getWorkoutsList();
 
         FileWriter fileWriter = new FileWriter(getWorkoutFilePath().toString());
