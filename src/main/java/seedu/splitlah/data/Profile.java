@@ -27,12 +27,15 @@ public class Profile {
     }
 
     /**
-     * Checks if there is a session exists with the same name.
+     * Checks if there is a session that exists with the same name.
      *
      * @param sessionName A String object that represents the session name.
      * @return True if a session exists with the same name, false otherwise.
      */
     public boolean hasSessionName(String sessionName) {
+        if (sessionList.size() == 0) {
+            return false;
+        }
         for (Session session : sessionList) {
             if (session.getSessionName().equalsIgnoreCase(sessionName)) {
                 return true;
