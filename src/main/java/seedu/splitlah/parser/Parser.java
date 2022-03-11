@@ -1,16 +1,6 @@
 package seedu.splitlah.parser;
 
-import seedu.splitlah.command.Command;
-import seedu.splitlah.command.ActivityCreateCommand;
-import seedu.splitlah.command.ActivityListCommand;
-import seedu.splitlah.command.ActivityViewCommand;
-import seedu.splitlah.command.HelpCommand;
-import seedu.splitlah.command.SessionCreateCommand;
-import seedu.splitlah.command.SessionDeleteCommand;
-import seedu.splitlah.command.SessionListCommand;
-import seedu.splitlah.command.SessionSummaryCommand;
-import seedu.splitlah.command.ExitCommand;
-import seedu.splitlah.command.InvalidCommand;
+import seedu.splitlah.command.*;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.ui.Message;
 
@@ -302,7 +292,7 @@ public class Parser {
         case SessionListCommand.COMMAND_TEXT:
             return new SessionListCommand();
         case ActivityListCommand.COMMAND_TEXT:
-            // FALLTHROUGH
+            return ActivityListCommand.prepare(remainingArgs);
         case ActivityViewCommand.COMMAND_TEXT:
             // return Relevant command.prepare(remainingArgs);
             return new InvalidCommand("Command is currently not implemented, please try again later.");
