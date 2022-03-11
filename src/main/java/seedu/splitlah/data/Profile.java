@@ -27,14 +27,35 @@ public class Profile {
     }
 
     /**
-     * Checks if there is a session exists with the same name.
+     * Checks if there is a session that exists with the same name.
      *
      * @param sessionName A String object that represents the session name.
      * @return True if a session exists with the same name, false otherwise.
      */
     public boolean hasSessionName(String sessionName) {
+        if (sessionList.isEmpty()) {
+            return false;
+        }
         for (Session session : sessionList) {
             if (session.getSessionName().equalsIgnoreCase(sessionName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if there is a session that exists with the specified session unique identifier.
+     *
+     * @param sessionId An integer that uniquely identifies a session.
+     * @return True if a session exists with the specified session unique identifier, false otherwise.
+     */
+    public boolean hasSessionId(int sessionId) {
+        if (sessionList.isEmpty()) {
+            return false;
+        }
+        for (Session session : sessionList) {
+            if (session.getSessionId() == sessionId) {
                 return true;
             }
         }
@@ -67,7 +88,17 @@ public class Profile {
      * @param session A Session object that is to be added.
      */
     public void addSession(Session session) {
-        this.sessionList.add(session);
+        sessionList.add(session);
+    }
+
+    /**
+     * Removes a Session object with the specified session unique identifier from the list of sessions.
+     *
+     * @param sessionId An integer that uniquely identifies a session.
+     */
+    public void removeSession(int sessionId) throws InvalidDataException {
+        Session sessionToBeRemoved = getSession(sessionId);
+        sessionList.remove(sessionToBeRemoved);
     }
 
     /**
