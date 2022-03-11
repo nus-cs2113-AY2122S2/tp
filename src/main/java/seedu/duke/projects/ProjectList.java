@@ -32,14 +32,14 @@ public class ProjectList {
     }
 
     /**
-     * prints all projects in the projectList
+     * prints all projects in the projectList.
      */
-    public void printProject(){
+    public void printProject() {
         int count = 1;
         System.out.println("____________________________________________________________");
         System.out.println("Here are all current project(s) in your list: ");
-        for(Project project: projectList){
-            System.out.println("["+ count + "] " + project.getTitle());
+        for (Project project: projectList) {
+            System.out.println("[" + count + "] " + project.getTitle());
             count++;
         }
         System.out.println("____________________________________________________________");

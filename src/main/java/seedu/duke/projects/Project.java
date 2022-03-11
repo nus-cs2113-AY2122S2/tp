@@ -13,10 +13,11 @@ public class Project {
     }
 
     /**
-     * Gets the title of a project
+     * Gets the title of a project.
+     *
      * @return title
      */
-    public String getTitle(){
+    public String getTitle() {
         return title;
     }
 
