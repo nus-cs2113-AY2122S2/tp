@@ -1,25 +1,32 @@
 package seedu.duke;
 
-public class Timer extends Thread {
+public class SherpassTimer extends Thread {
+
     private volatile boolean threadSuspended = false;
-    protected int time;
+    private boolean hasTimeLeft = true;
+    protected int timeLeft;
 
     /**
      * Initialises the parameters needed for the countdown timer.
      * @param seconds Number of seconds in the timer
      */
-    public Timer(int seconds) {
-        time = seconds;
+    public SherpassTimer(int seconds) {
+        timeLeft = seconds;
     }
 
 
     @Override
     public void run() {
-        while (time > 0) {
-            System.out.println(time + " seconds");
-            time--;
+        while (hasTimeLeft) {
+            if (timeLeft % 5 == 0) {
+                System.out.println(timeLeft + " seconds left.");
+            }
             try {
                 Thread.sleep(1000);
+                timeLeft -= 1;
+                if (timeLeft <= 0) {
+                    hasTimeLeft = false;
+                }
                 if (threadSuspended) {
                     synchronized (this) {
                         while (threadSuspended) {
@@ -28,10 +35,16 @@ public class Timer extends Thread {
                     }
                 }
             } catch (InterruptedException e) {
-                System.out.println("Interrupt");
             }
         }
-        return;
+        if (hasTimeLeft) {
+            System.out.println("Time is up!");
+        }
+        this.interrupt();
+    }
+
+    public void stopTimer() {
+        this.interrupt();
     }
 
     public void suspendTimer() {
@@ -43,5 +56,6 @@ public class Timer extends Thread {
             threadSuspended = false;
             notify();
         }
+        System.out.println("You have " + timeLeft + " seconds left.");
     }
 }
