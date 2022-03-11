@@ -7,19 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * StaffManager is a class which stores/handles/manages many Staffs
+ * StaffManager is a class which stores/handles/manages many Staffs.
  */
 public class StaffManager {
     private final List<Staff> staffs;
 
     /**
-     * Create StaffManager with an empty arraylist of Staffs
+     * Create StaffManager with an empty arraylist of Staffs.
      */
     public StaffManager() {
         staffs = new ArrayList<>();
     }
 
-    public List<Staff> getStaffs(){
+    public List<Staff> getStaffs() {
         return staffs;
     }
 
@@ -41,9 +41,10 @@ public class StaffManager {
      * @param salary     Salary of the Staff.
      * @throws IllegalArgumentException Check if arguments do not fit the requirements.
      */
-    public void addStaff(int staffId, String staffName, String position, double salary) throws IllegalArgumentException {
-        if(findByStaffId(staffId, false) != null) {
-            System.out.println("Staff with the same ID already exists in our staff records. Please give the new staff another ID!");
+    public void addStaff(int staffId, String staffName, String position, double salary)
+        throws IllegalArgumentException {
+        if (findByStaffId(staffId, false) != null) {
+            System.out.println("Staff with the same ID already exists, use another ID...");
         }
         staffs.add(new Staff(staffId, staffName, position, salary));
     }
@@ -60,14 +61,14 @@ public class StaffManager {
             throw new IllegalArgumentException("Staff ID cannot be zero or negative.");
         }
         for (Staff staff : staffs) {
-            if(staffId == staff.getStaffId()){
-                if(printMsg) {
+            if (staffId == staff.getStaffId()) {
+                if (printMsg) {
                     System.out.println(staff + "found!");
                 }
                 return staff;
             }
         }
-        if(printMsg) {
+        if (printMsg) {
             System.out.println("Staff with ID " + staffId + " not found!");
         }
         return null;
@@ -77,15 +78,14 @@ public class StaffManager {
      * Delete Staff from Staffs by ID.
      *
      * @param staffId ID of the Staff
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException Check if staff ID is a positive integer.
      */
     public void deleteByStaffId(int staffId) throws IllegalArgumentException {
         Staff staff = findByStaffId(staffId, false);
-        if(staff != null) {
+        if (staff != null) {
             staffs.remove(staff);
             System.out.println(staff + " had been deleted from our staff records.");
-        }
-        else {
+        } else {
             System.out.println("No staff from our staff records has a matching ID.");
         }
     }

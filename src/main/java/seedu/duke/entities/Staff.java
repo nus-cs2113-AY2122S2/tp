@@ -16,7 +16,7 @@ public class Staff {
      * @param salary     Salary of the Staff.
      * @throws IllegalArgumentException Check if arguments do not fit the requirements.
      */
-    public Staff(int staffId, String staffName, String position, double salary) throws IllegalArgumentException{
+    public Staff(int staffId, String staffName, String position, double salary) throws IllegalArgumentException {
         if (staffId <= 0) {
             throw new IllegalArgumentException("Staff ID cannot be zero or negative.");
         }
@@ -39,7 +39,7 @@ public class Staff {
         return staffId;
     }
 
-    public void setStaffId(int staffId) throws IllegalArgumentException{
+    public void setStaffId(int staffId) throws IllegalArgumentException {
         if (staffId <= 0) {
             throw new IllegalArgumentException("Staff ID cannot be zero or negative.");
         }

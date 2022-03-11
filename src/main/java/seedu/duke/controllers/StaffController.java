@@ -8,14 +8,14 @@ import java.util.Scanner;
 
 public class StaffController extends Controller {
     private static final String[] CHOICES = {
-            "Exit Staff Menu", "Find Staff", "Add Staff"
+        "Exit Staff Menu", "Find Staff", "Add Staff"
     };
     private final StaffManager staffManager;
 
     /**
-     * Creates StaffController which controls StaffManager
+     * Creates StaffController which controls StaffManager.
      *
-     * @param scanner
+     * @param scanner Scanner.
      * @param staffManager StaffManager that the controller controls.
      */
     public StaffController(Scanner scanner, StaffManager staffManager) {
@@ -29,11 +29,16 @@ public class StaffController extends Controller {
         case 1:
             Staff staff = findStaff();
             System.out.println(staff);
+            break;
         case 2:
             addStaff();
+            break;
         case 0:
             System.out.println("Exiting Staff Menu...");
             return true;
+        default:
+            System.out.println("Unknown choice!");
+            break;
         }
         System.out.println("Now in Staff Menu.");
         System.out.println(this);
@@ -52,14 +57,14 @@ public class StaffController extends Controller {
     public void addStaff() throws IllegalArgumentException {
         System.out.println("Adding new staff...");
         System.out.print("ID of staff: ");
-        int staffId = scanner.nextInt();
+        final int staffId = scanner.nextInt();
         scanner.nextLine();
         System.out.println("Name of staff: ");
-        String staffName = scanner.nextLine();
+        final String staffName = scanner.nextLine();
         System.out.println("Position of staff: ");
-        String position = scanner.nextLine();
+        final String position = scanner.nextLine();
         System.out.println("Salary of staff: ");
-        double salary = scanner.nextDouble();
+        final double salary = scanner.nextDouble();
         scanner.nextLine();
         staffManager.addStaff(staffId, staffName, position, salary);
     }
