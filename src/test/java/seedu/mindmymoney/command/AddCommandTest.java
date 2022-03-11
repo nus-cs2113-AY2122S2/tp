@@ -1,9 +1,6 @@
 package seedu.mindmymoney.command;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.data.Lists;
 import seedu.mindmymoney.userfinancial.Expenditure;
@@ -15,14 +12,6 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddCommandTest {
-    private final ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
-    private final PrintStream stdout = System.out;
-
-    @BeforeEach
-    public void setUp() {
-        System.setOut(new PrintStream(capturedOut));
-    }
-
     /**
      * Asserts if user is able to add an input.
      */
@@ -81,10 +70,5 @@ class AddCommandTest {
                     + list.get(list.size() + Indexes.LIST_INDEX_CORRECTION).getAmount();
         }
         return "";
-    }
-
-    @AfterEach
-    public void tearDown() {
-        System.setOut(stdout);
     }
 }
