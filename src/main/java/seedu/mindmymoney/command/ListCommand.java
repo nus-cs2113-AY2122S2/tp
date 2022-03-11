@@ -1,5 +1,6 @@
 package seedu.mindmymoney.command;
 
+import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.constants.PrintStrings;
 import seedu.mindmymoney.data.Lists;
 import seedu.mindmymoney.userfinancial.Expenditure;
@@ -12,11 +13,10 @@ public class ListCommand extends Command {
      * Prints user's current list of expenditures.
      */
     @Override
-    public void executeCommand() {
+    public void executeCommand() throws MindMyMoneyException {
         if (Lists.expenditures.size() == 0) {
-            System.out.println(PrintStrings.LINE
-                    + "Your list is currently empty! Try adding expenditures first using the add command"
-                    + System.lineSeparator() + PrintStrings.LINE);
+            throw new MindMyMoneyException(
+                    "Your list is currently empty! Please add some expenditures to your list first");
         } else {
             System.out.println(PrintStrings.LINE);
             Integer indexOfList = 1;
