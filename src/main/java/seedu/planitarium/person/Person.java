@@ -4,9 +4,9 @@ import seedu.planitarium.ExpenditureList;
 import seedu.planitarium.IncomeList;
 
 public class Person {
-    protected static String name;
-    protected static IncomeList incomeList;
-    protected static ExpenditureList expenditureList;
+    protected String name;
+    protected IncomeList incomeList;
+    protected ExpenditureList expenditureList;
 
     /**
      * Constructs a new Person object.
