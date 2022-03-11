@@ -20,6 +20,7 @@ public class Parser {
     public static final int LIMIT_TWO_DECIMAL = 2;
     public static final int MIN_USER_INDEX = 1;
     public static final int MIN_EXPENDITURE_INDEX = 1;
+    public static final int MIN_INCOME_INDEX = 1;
     public static final double MONEY_ZERO = 0.0;
 
     /**
@@ -144,7 +145,26 @@ public class Parser {
         if (checkIndex < MIN_EXPENDITURE_INDEX) {
             throw new IndexOutOfBoundsException();
         }
-        if (checkIndex >= Person.getNumberOfExpenditures()) {
+        if (checkIndex >= person.getNumberOfExpenditures()) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    /**
+     * Returns without exception if income index is within income quantity bounds.
+     *
+     * @param incomeIndex Person's income lookup index.
+     * @param person      Person who has income.
+     * @throws NumberFormatException if index is not a valid integer.
+     * @throws IndexOutOfBoundsException if provided index is out of bounds.
+     */
+    public static void isValidIncomeIndex(String incomeIndex, Person person)
+            throws NumberFormatException, IndexOutOfBoundsException {
+        int checkIndex = Integer.parseInt(incomeIndex);
+        if (checkIndex < MIN_INCOME_INDEX) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (checkIndex >= Person.getNumberOfIncomes()) {
             throw new IndexOutOfBoundsException();
         }
     }
