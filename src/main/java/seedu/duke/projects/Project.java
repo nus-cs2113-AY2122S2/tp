@@ -6,7 +6,7 @@ public class Project {
     private String title;
     private ArrayList<Todo> todos;
 
-    public Project(){
+    public Project() {
         todos = new ArrayList<Todo>();
     }
 
@@ -37,7 +37,7 @@ public class Project {
      * Marks a todo at specific index as done.
      * @param index
      */
-    public void markTodoAsDone(int index){
+    public void markTodoAsDone(int index) {
         if (index > todos.size()){
             throw new IndexOutOfBoundsException();
         }
@@ -46,7 +46,7 @@ public class Project {
         System.out.println(todos.get(index-1));
     }
 
-    public void addTodo(String todoString){
+    public void addTodo(String todoString) {
         Todo newTodo = new Todo(todoString);
         todos.add(newTodo);
     }

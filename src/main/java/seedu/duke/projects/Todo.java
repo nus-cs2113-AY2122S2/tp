@@ -8,7 +8,7 @@ public class Todo {
     protected String description;
     protected boolean isDone;
 
-    public Todo(String description){
+    public Todo(String description) {
         this.description = description;
         this.isDone = false;
     }

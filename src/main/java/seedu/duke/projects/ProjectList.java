@@ -41,7 +41,7 @@ public class ProjectList {
      * @param indexString Index of the project
      */
 
-    public void addTodoToProject(String indexString, String todoString){
+    public void addTodoToProject(String indexString, String todoString) {
         int index;
         try{
             index = Integer.parseInt(indexString);
@@ -64,7 +64,7 @@ public class ProjectList {
      * @param indexStringTodo Index of the todo.
      */
 
-    public void markTodoAsDone(String indexStringProj, String indexStringTodo){
+    public void markTodoAsDone(String indexStringProj, String indexStringTodo) {
         int indexProj, indexTodo;
         try {
             indexProj = Integer.parseInt(indexStringProj);
