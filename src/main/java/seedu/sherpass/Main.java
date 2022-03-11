@@ -1,0 +1,63 @@
+package seedu.sherpass;
+
+import org.json.JSONException;
+import java.io.IOException;
+import seedu.sherpass.command.Command;
+import seedu.sherpass.command.ExitCommand;
+import seedu.sherpass.exception.InvalidInputException;
+import seedu.sherpass.utills.Parser;
+import seedu.sherpass.utills.Storage;
+import seedu.sherpass.task.TaskList;
+import seedu.sherpass.utills.Ui;
+
+import static seedu.sherpass.constant.Messages.ERROR_IO_FAILURE_MESSAGE;
+
+public class Main {
+
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
+
+    /**
+     * Initialises the program.
+     * Loading of save file also occurs over here.
+     *
+     * @param  filePath Location of the save file.
+     */
+    public Main(String filePath) {
+        ui = new Ui();
+        try {
+            storage = new Storage(filePath);
+            taskList = new TaskList(storage.load());
+        } catch (IOException e) {
+            ui.showToUser(ERROR_IO_FAILURE_MESSAGE);
+            System.exit(1);
+        } catch (InvalidInputException | JSONException e) {
+            storage.handleCorruptedSave(ui);
+            taskList = new TaskList();
+        }
+    }
+
+    /**
+     * Runs the program.
+     */
+    public void run() {
+        ui.showWelcomeMessage();
+        boolean isExit = false;
+        while (!isExit) {
+            String fullCommand = ui.readCommand();
+            ui.showLine();
+            Command c = Parser.parseCommand(fullCommand, taskList);
+            if (c != null) {
+                c.execute(taskList, ui, storage);
+                isExit = ExitCommand.isExit(c);
+            }
+            ui.showLine();
+        }
+    }
+
+    public static void main(String[] args) {
+        new Main("data/sherpass.txt").run();
+    }
+
+}
