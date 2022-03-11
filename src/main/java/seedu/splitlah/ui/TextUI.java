@@ -34,6 +34,7 @@ public class TextUI {
     }
 
     public String readNextLine() {
+        printlnMessage(Message.PROMPT_TEXTUI_AWAITING_INPUT);
         return in.nextLine();
     }
 
