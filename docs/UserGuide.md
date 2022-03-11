@@ -28,7 +28,7 @@ Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ..
 * `[SESSION_DATE]` refers to the date of the session.
   * The format of the date can be in `DD-MM-YYYY` or `YYYY-MM-DD`.
 * `[NAME1 NAME2 ...]` refers to a list of persons involved in the session.
-  * The person names are **case-insensitive**.
+  * Each individual name is **case-insensitive**.
 
 > **Notes:**
 >- The `[SESSION_NAME]` should be unique across sessions.
