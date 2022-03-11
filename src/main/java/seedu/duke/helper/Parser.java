@@ -30,10 +30,10 @@ public class Parser {
         for (int i = 0; i < parametersArray.length; i++) {
             parametersArray[i] = parametersArray[i].trim();
         }
-        if (parametersArray.length == 7 && validateNric(parametersArray[0]) &&
-                validateFullName(parametersArray[1]) && validateAge(parametersArray[2]) &&
-                validateGender(parametersArray[3]) && validateAddress(parametersArray[4]) &&
-                validateDob(parametersArray[5]) && validateAdmissionDate(parametersArray[6])) {
+        if (parametersArray.length == 7 && validateNric(parametersArray[0])
+                && validateFullName(parametersArray[1]) && validateAge(parametersArray[2])
+                && validateGender(parametersArray[3]) && validateAddress(parametersArray[4])
+                && validateDob(parametersArray[5]) && validateAdmissionDate(parametersArray[6])) {
             return parametersArray;
         } else {
             return null;
