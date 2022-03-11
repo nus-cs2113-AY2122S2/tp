@@ -31,6 +31,9 @@ public class UserInterface {
                 matches = regexMatch.getGroupValues();
                 Commands.viewGood(matches.get("id"), userGoods);
                 break;
+            case "list":
+                Commands.listGoods(userGoods);
+                break;
             default:
                 //error exception here
                 break;
