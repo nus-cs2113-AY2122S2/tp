@@ -101,6 +101,14 @@ public class Parser {
             throw new InvalidFormatException(getNonIntegerErrorMessage(delimiter));
         }
     }
+
+    private static int parseIdFromString(String input, String delimiter) throws InvalidFormatException {
+        int idVal = parseIntFromString(input, delimiter);
+        if (idVal <= 0) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_ID_VALUE_NOT_POSITIVE);
+        }
+        return idVal;
+    }
     
     private static double parseCostFromString(String input, String delimiter) throws InvalidFormatException {
         try {
@@ -185,12 +193,12 @@ public class Parser {
     
     public static int parseSessionId(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, SESSION_ID_DELIMITER);
-        return parseIntFromString(argument, SESSION_ID_DELIMITER);
+        return parseIdFromString(argument, SESSION_ID_DELIMITER);
     }
 
     public static int parseActivityId(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, ACTIVITY_ID_DELIMITER);
-        return parseIntFromString(argument, ACTIVITY_ID_DELIMITER);
+        return parseIdFromString(argument, ACTIVITY_ID_DELIMITER);
     }
 
     public static LocalDate parseLocalDate(String commandArgs) throws InvalidFormatException {
