@@ -7,7 +7,7 @@ public class Project {
     private ArrayList<Todo> todos;
 
     public Project(){
-
+        todos = new ArrayList<Todo>();
     }
 
     /**
@@ -17,6 +17,7 @@ public class Project {
      */
     public Project(String title) {
         this.title = title;
+        todos = new ArrayList<Todo>();
     }
 
     public String getTitle(){
@@ -43,5 +44,14 @@ public class Project {
         todos.get(index-1).markAsDone();
         System.out.println("Todo has been marked as done successfully: ");
         System.out.println(todos.get(index-1));
+    }
+
+    public void addTodo(String todoString){
+        Todo newTodo = new Todo(todoString);
+        todos.add(newTodo);
+    }
+
+    public Todo getTodo(int index){
+        return todos.get(index - 1);
     }
 }

@@ -3,6 +3,10 @@ package seedu.duke.projects;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a list of projects.
+ */
+
 public class ProjectList {
     private ArrayList<Project> projectList;
 
@@ -37,7 +41,7 @@ public class ProjectList {
      * @param indexString Index of the project
      */
 
-    public void addTodoToProject(String indexString){
+    public void addTodoToProject(String indexString, String todoString){
         int index;
         try{
             index = Integer.parseInt(indexString);
@@ -47,20 +51,10 @@ public class ProjectList {
             return;
         }
 
-        ArrayList<Todo> todos = new ArrayList<>();
         Project targetProject = new Project();
         targetProject = projectList.get(index-1);
 
-        System.out.println("You can add todos to your project now: (stop by typing endtodo): ");
-        Scanner sc = new Scanner(System.in);
-        String todoString = sc.next();
-        while (!todoString.equals("endtodo")){
-            Todo newTodo = new Todo(todoString);
-            todos.add(newTodo);
-            todoString = sc.next();
-        }
-        System.out.println("Ended adding todos.");
-        targetProject.setTodos(todos);
+        targetProject.addTodo(todoString);
         System.out.println("Todos have been added to project " + targetProject.getTitle());
     }
 
@@ -81,5 +75,9 @@ public class ProjectList {
         }
         Project targetProject = projectList.get(indexProj-1);
         targetProject.markTodoAsDone(indexTodo);
+    }
+
+    public int getSize(){
+        return projectList.size();
     }
 }
