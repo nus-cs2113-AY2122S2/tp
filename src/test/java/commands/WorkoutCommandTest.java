@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WorkoutCommandTest {
     @Test
-    public void WorkoutCommand_normalWorkoutNewConstruction_constructSuccess() throws IOException,
+    public void workoutCommand_normalWorkoutNewConstruction_constructSuccess() throws IOException,
             InvalidCommandException {
         String userInput = "workout /new russian twist /reps 1000";
         String userAction = "/new";
@@ -29,7 +29,7 @@ public class WorkoutCommandTest {
     }
 
     @Test
-    public void WorkoutCommand_invalidAction_exceptionThrown() throws IOException, InvalidCommandException {
+    public void workoutCommand_invalidAction_exceptionThrown() throws IOException, InvalidCommandException {
         String userInput1 = "workout /pancakes";
         String userAction1 = "/pancakes";
         String userArguments1 = null;
@@ -43,8 +43,8 @@ public class WorkoutCommandTest {
         WorkoutList wl = new WorkoutList(el);
 
         assertThrows(InvalidCommandException.class,
-                ()->new WorkoutCommand(userInput1, fm, wl, userAction1, userArguments1));
+            () -> new WorkoutCommand(userInput1, fm, wl, userAction1, userArguments1));
         assertThrows(InvalidCommandException.class,
-                ()->new WorkoutCommand(userInput2, fm, wl, userAction2, userArguments2));
+            () -> new WorkoutCommand(userInput2, fm, wl, userAction2, userArguments2));
     }
 }

@@ -33,6 +33,6 @@ public class FileManagerTest {
         FileManager fm = new FileManager();
 
         assertThrows(NullPointerException.class,
-                ()->fm.convertWorkoutToFileDataFormat(testSample1));
+            () -> fm.convertWorkoutToFileDataFormat(testSample1));
     }
 }
