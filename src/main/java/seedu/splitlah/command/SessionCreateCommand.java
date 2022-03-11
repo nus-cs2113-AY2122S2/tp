@@ -2,6 +2,7 @@ package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
+import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
@@ -9,13 +10,10 @@ import seedu.splitlah.ui.Message;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 
 /**
- * Represents a command that creates a session from user input
- * and stores into the profile object.
+ * Represents a command that creates a Session object from user input and stores it in the Profile object.
  *
  * @author Roy
  */
@@ -24,16 +22,22 @@ public class SessionCreateCommand extends Command {
     public static final String COMMAND_TEXT = "session /create";
 
     private static final String COMMAND_FORMAT =
-            "Syntax: session /create /n <SESSIONNAME> /d <SESSIONDATE> /pl <NAME1 NAME2…>";
+            "Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 …]";
 
     private static final String COMMAND_SUCCESS =
-            "The session was created successfully with session id of :";
+            "The session was created successfully with session id of: ";
 
     private String sessionName;
     private String[] personNames;
     private LocalDate sessionDate;
 
-
+    /**
+     * Initializes a SessionCreateCommand.
+     *
+     * @param sessionName A String object that represents the session name.
+     * @param personNames A String object array that represents the involved persons for the session.
+     * @param date        A LocalDate object that represents the date of the session.
+     */
     public SessionCreateCommand(String sessionName, String[] personNames, LocalDate date) {
         this.sessionName = sessionName;
         this.personNames = personNames;
@@ -41,10 +45,10 @@ public class SessionCreateCommand extends Command {
     }
 
     /**
-     * Converts list of names to a list of Person objects.
+     * Converts a String object array of names to a list of Person objects.
      *
-     * @param personArray An array of person names
-     * @return An arraylist of person objects
+     * @param personArray An array of person names.
+     * @return An ArrayList of Person objects.
      */
     private static ArrayList<Person> convertToListOfPerson(String[] personArray) {
         ArrayList<Person> personList = new ArrayList<>();
@@ -56,15 +60,15 @@ public class SessionCreateCommand extends Command {
     }
 
     /**
-     * Checks to see if list of person has duplicate names.
+     * Checks if String object array of names has duplicated names.
      *
      * @return True if it contains duplicates, false otherwise.
      */
     private boolean hasNameDuplicates() {
-        Set<String> set = new HashSet<>();
+        Set<String> nameSet = new HashSet<>();
         for (String name : personNames) {
             String nameToBeAdded = name.toLowerCase();
-            if (set.add(nameToBeAdded) == false) {
+            if (!nameSet.add(nameToBeAdded)) {
                 return true;
             }
         }
@@ -74,9 +78,9 @@ public class SessionCreateCommand extends Command {
     /**
      * Prepares user arguments for session create command.
      *
-     * @param commandArgs The user's arguments.
+     * @param commandArgs A String object that represents the user's arguments.
      * @return A SessionCreateCommand object if session name, session date and person list were found in user arguments,
-     *      an InvalidCommand object otherwise.
+     *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
         try {
@@ -92,8 +96,8 @@ public class SessionCreateCommand extends Command {
     }
 
     /**
-     * Runs the command to create a session.
-     * Checks if list of names has duplicates and if session name exists.
+     * Runs the command to create a Session object to be stored in the list of sessions managed by the Profile Object.
+     * Checks if array of names has duplicates and if session name exists.
      * If check fails, no session is created and prints error message.
      * Else a session is created and prints success message.
      *
@@ -105,18 +109,18 @@ public class SessionCreateCommand extends Command {
             manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
             return;
         }
-        ArrayList<Person> personList = convertToListOfPerson(this.personNames);
+        // TODO: Check if string[] names are actual names.
+        ArrayList<Person> personList = convertToListOfPerson(personNames);
 
-        boolean isSessionExists = manager.getProfile().hasSessionName(this.sessionName);
+        boolean isSessionExists = manager.getProfile().hasSessionName(sessionName);
         if (isSessionExists) {
             manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_SESSION);
             return;
         }
 
         int newSessionId = manager.getProfile().getNewSessionId();
-        // To be completed when session constructor is implemented
-        //  Session newSession = (newSessionId, this.sessionName, this.sessionDate, personList)
-        //  manager.getProfile().addSession(newSession);
+        Session newSession = new Session(sessionName, newSessionId, sessionDate, personList);
+        manager.getProfile().addSession(newSession);
         manager.getUi().printlnMessage(COMMAND_SUCCESS + newSessionId);
     }
 }

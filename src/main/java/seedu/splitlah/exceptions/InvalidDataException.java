@@ -1,12 +1,12 @@
 package seedu.splitlah.exceptions;
 
 /**
- * Data-related errors (such as unexpected null objects) should throw
- * this exception.
+ * Represents an exception that is thrown when data-related errors (such as unexpected null objects) occur.
  *
  * @author Saurav
  */
 public class InvalidDataException extends Exception {
+    
     private final String message;
     private final Throwable cause;
 

@@ -3,8 +3,9 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Manager;
 
 /**
- * Takes in an error message as a String.
- * Prints "Invalid command" followed by the error message.
+ * Represents a command that takes in an error message and prints "Invalid command" followed by the error message.
+ * 
+ * @author Saurav
  */
 public class InvalidCommand extends Command {
     private final String errorMessage;

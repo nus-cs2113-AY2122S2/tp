@@ -5,12 +5,12 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
- * Handles reading from and writing to the user interface.
- * Instantiate a TextUI object to create a user interface.
+ * Represents a user interface that reads from and writes to the command line.
  *
  * @author Saurav
  */
 public class TextUI {
+    
     Scanner in;
     PrintStream out;
 
@@ -65,7 +65,7 @@ public class TextUI {
 
     public void printWelcome() {
         printDivider();
-        out.println(Message.LOGO);
+        out.println(Message.ASCII_TEXTUI_LOGO);
         out.println("Welcome to Splitlah!");
         printDivider();
     }
@@ -75,12 +75,12 @@ public class TextUI {
     }
     
     public void printHelpMenu() {
-        out.println(Message.HELP_MENU);
+        out.println(Message.MESSAGE_TEXTUI_HELP_MENU);
     }
 
     public void printFarewell() {
         printDivider();
-        out.println(Message.LOGO);
+        out.println(Message.ASCII_TEXTUI_LOGO);
         out.println("Goodbye!");
         printDivider();
     }
