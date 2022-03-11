@@ -1,0 +1,78 @@
+'https://www.lucidchart.com/pages/ER-diagram-symbols-and-meaning
+@startuml
+
+entity "Inventory" as inv {
+  * inventory_id : number <<generated>>
+  --
+  * name: String
+  warehouse_location: String
+  unit: String
+  cost: Float
+    amount: Float
+}
+
+' entity "Stock" as st {
+'  * stock_id : number <<generated>>
+'   --
+'  *inventory_id: number <<FK>>
+'   * name: String
+' * amount: Float
+' }
+
+entity "Announcement" as ann {
+* announcment_id : number <<generated>>
+--
+* title: String
+description: String
+
+}
+'since stored in JSON, just put invoice item and invoice alert 
+'under invoice dont need norm
+entity "Invoice" as invoice {
+    * invoice_id : number <<generated>>
+--
+    * actual_id: String
+    is_outstanding: Boolean
+    description: String
+    stage: String <<Fixed to unfulfilled, picking, delivering, delivered>>
+    delivered_by: user_id <<FK>>
+    deliver_to: String <<address>>
+    is_qc: Boolean
+}
+
+entity "InvoiceItem" as invoice_item{
+    * invoice_item_id : number <<generated>>
+--
+    * inventory_id: number <<FK>>
+    * quantity: float
+    * isPicked: Boolean <<default: False>>
+}
+
+entity "InvoiceAlert" as invoice_alert{
+    * invoice_alert_id: number <<generated>>
+    --
+    * inventory_id: number <<FK>>
+    * description: String
+    * to_notify: user_id <<FK>>
+}
+
+entity "User" as user{
+    * user_id : number <<generated>>
+    --
+    * role_id : number <<FK>>
+}
+
+entity "Role" as role{
+    * role_id : number <<generated>>
+    --
+    * name : String
+}
+
+' inv ||..|{ st 
+invoice ||..o{invoice_item
+invoice ||..o{invoice_alert
+invoice_alert ||..o{user
+user ||..|{role
+
+
+@enduml

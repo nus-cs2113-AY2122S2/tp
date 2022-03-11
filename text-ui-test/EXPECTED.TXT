@@ -5,5 +5,8 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-What is your name?
-Hello James Gosling
+What would you like to do?
+1 chairs (Empty Description) Has been added
+You have 1 goods in the warehouse
+Another command?
+Bye
