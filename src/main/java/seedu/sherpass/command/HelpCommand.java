@@ -25,6 +25,8 @@ public class HelpCommand extends Command {
 
     private void showHelpList(Ui ui) {
         System.out.println("Here is a list of commands available:");
+        // To confirm indentation spaces when prof reply;
+        // CheckStyle wants 4 spaces for continuation indent, but 8 spaces for other
         String[] helpCommands = {ListCommand.COMMAND_WORD, MarkCommand.COMMAND_WORD,
             UnmarkCommand.COMMAND_WORD, TodoCommand.COMMAND_WORD, DeadlineCommand.COMMAND_WORD,
             EventCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD, FindCommand.COMMAND_WORD,

@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
      * Creates constructor for delete command.
      *
      * @param parsedInput Contains task description to search for
-     * @param taskList Task array.
+     * @param taskList    Task array.
      * @throws InvalidInputException If input task description is empty.
      */
     public DeleteCommand(String[] parsedInput, TaskList taskList) throws InvalidInputException {
@@ -38,8 +38,8 @@ public class DeleteCommand extends Command {
      * Executes the deletion of a task.
      *
      * @param taskList Task array.
-     * @param ui Ui for printing messages.
-     * @param storage Overwrites save file after editing contents in task array.
+     * @param ui       Ui for printing messages.
+     * @param storage  Overwrites save file after editing contents in task array.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {

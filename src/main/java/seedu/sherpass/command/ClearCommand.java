@@ -17,8 +17,8 @@ public class ClearCommand extends Command {
      * Executes the clear command. Deletes all saved tasks in the task array.
      *
      * @param taskList Task array.
-     * @param ui UI for printing messages.
-     * @param storage Overwrite saved data after deleting.
+     * @param ui       UI for printing messages.
+     * @param storage  Overwrite saved data after deleting.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {

@@ -20,9 +20,9 @@ public class TodoCommand extends Command {
     /**
      * Creates constructor for todo command. Saves task description.
      *
-     * @param toAdd Task Description to add.
+     * @param toAdd    Task Description to add.
      * @param taskList Task array.
-     * @throws InvalidInputException If task description is empty.
+     * @throws InvalidInputException  If task description is empty.
      * @throws InputRepeatedException If task has been added before.
      */
     public TodoCommand(String[] toAdd, TaskList taskList)
@@ -40,8 +40,8 @@ public class TodoCommand extends Command {
      * Executes the adding of todo task.
      *
      * @param taskList Task array.
-     * @param ui Ui for printing messages.
-     * @param storage To append newly added task to save file.
+     * @param ui       Ui for printing messages.
+     * @param storage  To append newly added task to save file.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {

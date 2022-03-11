@@ -8,7 +8,7 @@ public class Event extends Task {
      * Event tasks accept both task description and date.
      *
      * @param description Task Description.
-     * @param at Task Date.
+     * @param at          Task Date.
      */
     public Event(String description, String at) {
         super(description);

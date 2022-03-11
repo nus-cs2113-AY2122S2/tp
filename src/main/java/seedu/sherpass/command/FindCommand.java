@@ -17,11 +17,11 @@ public class FindCommand extends Command {
 
 
     /**
-     * Creates a constrcutor for the FindCommand class.
+     * Creates a constructor for the FindCommand class.
      * Saves task description and task date for searching in "execute" method.
      *
      * @param taskDescription Task Description to search.
-     * @param taskDate Task Date to search
+     * @param taskDate        Task Date to search
      * @throws InvalidInputException If task description is empty.
      */
     public FindCommand(String taskDescription, String taskDate) throws InvalidInputException {
@@ -55,8 +55,8 @@ public class FindCommand extends Command {
      * that match the search keyword.
      *
      * @param taskList Task array.
-     * @param ui Ui for printing messages.
-     * @param storage Storage for overwriting/appending save data. Not used in this method.
+     * @param ui       Ui for printing messages.
+     * @param storage  Storage for overwriting/appending save data. Not used in this method.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {

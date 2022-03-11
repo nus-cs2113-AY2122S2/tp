@@ -8,7 +8,7 @@ public class Deadline extends Task {
      * Deadline tasks accept both task description and date.
      *
      * @param description Task Description.
-     * @param by Task Date.
+     * @param by          Task Date.
      */
     public Deadline(String description, String by) {
         super(description);
