@@ -2,9 +2,9 @@ package seedu.sherpass.utills;
 
 import java.util.Scanner;
 
-import static seedu.sherpass.constant.Messages.GOODBYE_MESSAGE;
-import static seedu.sherpass.constant.Messages.WELCOME_MESSAGE_ONE;
-import static seedu.sherpass.constant.Messages.WELCOME_MESSAGE_TWO;
+import static seedu.sherpass.constant.Message.GOODBYE_MESSAGE;
+import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_ONE;
+import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_TWO;
 
 
 public class Ui {

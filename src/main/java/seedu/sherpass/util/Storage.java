@@ -12,10 +12,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static seedu.sherpass.constant.Indexes.DIRECTORY_INDEX;
-import static seedu.sherpass.constant.Messages.ERROR_CORRUPT_SAVED_FILE_MESSAGE;
-import static seedu.sherpass.constant.Messages.ERROR_FILE_NOT_FOUND_MESSAGE;
-import static seedu.sherpass.constant.Messages.ERROR_IO_FAILURE_MESSAGE;
+import static seedu.sherpass.constant.Index.DIRECTORY_INDEX;
+import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_FILE_NOT_FOUND_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
 
 public class Storage {
     private String saveFilePath;
@@ -59,9 +59,9 @@ public class Storage {
      * Appends new tasks to the save file.
      *
      * @param newTaskDescription Task Description.
-     * @param newTaskByDate Task Deadline and/or time.
-     * @param newTaskDoDate Task Do date
-     * @param taskStatus Mark status of the task.
+     * @param newTaskByDate      Task Deadline and/or time.
+     * @param newTaskDoDate      Task Do date
+     * @param taskStatus         Mark status of the task.
      */
     public void appendToFile(String newTaskDescription,
                              String newTaskByDate, String newTaskDoDate,
@@ -132,7 +132,7 @@ public class Storage {
      * Loads back the save file onto the program.
      *
      * @return The saved data of the tasks in the saved file.
-     *       Tasks are represented in an array.
+     *     Tasks are represented in an array.
      */
     public ArrayList<Task> load() {
         try {

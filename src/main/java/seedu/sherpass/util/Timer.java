@@ -11,7 +11,7 @@ public class Timer {
 
     public static void pause(Ui ui) {
         ui.showToUser("Got it! I've paused the timer.\n"
-            + "Feel free to resume whenever you're ready.");
+                + "Feel free to resume whenever you're ready.");
     }
 
     public static void stop(Ui ui) {
