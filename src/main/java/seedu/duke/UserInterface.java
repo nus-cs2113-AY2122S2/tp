@@ -28,6 +28,12 @@ public class UserInterface {
             case "list":
                 Commands.listGoods(userGoods);
                 break;
+            case "remove":
+                String format = "id/(?<id>\\d*) q/(?<qty>\\d*)";
+                Regex match = new Regex(userInput, format);
+                HashMap<String, String> inputValues = match.getGroupValues();
+                Commands.removeGood(inputValues.get("id"), inputValues.get("qty"), userGoods);
+                break;
             default:
                 //error exception here
                 break;

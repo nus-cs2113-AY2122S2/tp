@@ -1,5 +1,9 @@
 package seedu.duke;
 
+import util.exceptions.LargeQuantityException;
+import util.exceptions.ItemDoesNotExistException;
+import util.exceptions.NegativeQuantityException;
+
 import java.util.ArrayList;
 
 public class Commands {
@@ -35,7 +39,7 @@ public class Commands {
         System.out.println("List of inventory items: ");
         int counter = 0;
         for (Goods good : userGoods) {
-            System.out.println((counter+1) + ". " + good.getName());
+            System.out.println((counter + 1) + ". " + good.getName());
             counter++;
         }
     }
@@ -46,6 +50,67 @@ public class Commands {
             return "is ";
         } else {
             return "are ";
+        }
+    }
+
+    private static void remove(int id, int qty, ArrayList<Goods> userGoods)
+            throws LargeQuantityException, ItemDoesNotExistException, NegativeQuantityException {
+        boolean isGoodExist = false;
+
+        for (Goods good : userGoods) {
+            if (good.getId() == id) {
+                isGoodExist = true;
+
+                if (qty > good.getQuantity()) {
+                    throw new LargeQuantityException();
+                } else if (qty < 0) {
+                    throw new NegativeQuantityException();
+                }
+
+                good.setQuantity(good.getQuantity() - qty);
+
+                if (qty < 2) {
+                    System.out.println(qty + " " + good.getName() + " has been removed.");
+                } else {
+                    System.out.println(qty + " " + good.getName() + " have been removed.");
+                }
+
+                break;
+            }
+        }
+
+        if (isGoodExist == false) {
+            throw new ItemDoesNotExistException();
+        }
+
+    }
+
+    public static void removeGood(String id, String qty, ArrayList<Goods> userGoods) {
+        if (id.isBlank() || qty.isBlank()) {
+            System.out.println("Please remove goods in this format:\n"
+                    + "remove id/id_of_good_as_number q/quantity_of_good_as_number");
+            return;
+        }
+
+        try {
+            int goodsId = Integer.parseInt(id);
+            int goodsQty = Integer.parseInt(qty);
+
+            remove(goodsId, goodsQty, userGoods);
+
+            System.out.println(1);
+        } catch (NumberFormatException e1) {
+            System.out.println("Please remove goods in this format:\n"
+                    + "remove id/id_of_good_as_number q/quantity_of_good_as_number");
+        } catch (ItemDoesNotExistException e2) {
+            System.out.println("The goods you are trying to remove are ot on the current list. "
+                    + "Please try another id or add the goods first.");
+        } catch (LargeQuantityException e3) {
+            System.out.println("The quantity input is larger than the current quantity of the goods. "
+                    + "Please enter the command again with a smaller quantity.");
+        } catch (NegativeQuantityException e4) {
+            System.out.println("The quantity input is negative. "
+                    + "Please enter the command again with a non-negative quantity.");
         }
     }
 }
