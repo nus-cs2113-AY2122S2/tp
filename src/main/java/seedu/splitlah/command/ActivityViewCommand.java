@@ -6,9 +6,7 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
-import seedu.splitlah.ui.Message;
 
-import java.util.ArrayList;
 
 /**
  * Represents a command which displays the details of an Activity object specified by user input in a Session object.
@@ -49,9 +47,9 @@ public class ActivityViewCommand extends Command {
     /**
      * Prepares user argument for activity view command.
      *
-     * @param   commandArgs  A String object that represents the user's arguments.
-     * @return  An ActivityViewCommand object if sessionId and activityId were found in user arguments,
-     *          an InvalidCommand object otherwise.
+     * @param  commandArgs  A String object that represents the user's arguments.
+     * @return An ActivityViewCommand object if sessionId and activityId were found in user arguments,
+     *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
         try {
