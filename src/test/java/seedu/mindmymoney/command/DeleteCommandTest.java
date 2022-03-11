@@ -6,7 +6,6 @@ import seedu.mindmymoney.data.Lists;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -44,6 +43,7 @@ class DeleteCommandTest {
         assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString).executeCommand());
         String deleteInputString2 = "delete 5";
         assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString2).executeCommand());
+        Lists.expenditures.clear();
     }
 
     /**
@@ -53,6 +53,7 @@ class DeleteCommandTest {
     void deleteCommand_wrongInputFormat_expectException() {
         String deleteInputString = "delete ONE";
         assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString).executeCommand());
+        Lists.expenditures.clear();
     }
 
     /**
@@ -64,16 +65,17 @@ class DeleteCommandTest {
         String deleteInputString2 = "delete ";
         assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString).executeCommand());
         assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString2).executeCommand());
+        Lists.expenditures.clear();
     }
 
     /**
      * Asserts if user is able to delete from an empty list.
      *
-     * @throws MindMyMoneyException if user is trying to delete an item from an empty list.
      */
     @Test
-    void deleteCommand_addToEmptyList_expectException() throws MindMyMoneyException {
+    void deleteCommand_addToEmptyList_expectException() {
         String deleteInputString = "delete 1";
         assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString).executeCommand());
+        Lists.expenditures.clear();
     }
 }
