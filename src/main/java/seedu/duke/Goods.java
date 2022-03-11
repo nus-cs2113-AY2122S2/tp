@@ -19,6 +19,14 @@ public class Goods {
         this.description = description;
     }
 
+    public int getId () {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public int getQuantity() {
         return quantity;
     }
