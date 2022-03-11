@@ -1,11 +1,11 @@
 package seedu.sherpass.command;
 
-import seedu.sherpass.utills.Storage;
+import seedu.sherpass.util.Storage;
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.utills.Ui;
+import seedu.sherpass.util.Ui;
 
-import static seedu.sherpass.constant.Messages.HELP_MESSAGE_QUICK_START_COMMAND;
-import static seedu.sherpass.constant.Messages.HELP_MESSAGE_SPECIFIC_COMMAND;
+import static seedu.sherpass.constant.Message.HELP_MESSAGE_QUICK_START_COMMAND;
+import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
 
 public class HelpCommand extends Command {
     private String helpInput;

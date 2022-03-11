@@ -1,11 +1,9 @@
 package seedu.sherpass.command;
 
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.utills.Parser;
-import seedu.sherpass.utills.Storage;
-import seedu.sherpass.utills.Ui;
-
-import static seedu.sherpass.constant.Indexes.STUDY_COMMAND_INDEX;
+import seedu.sherpass.util.Parser;
+import seedu.sherpass.util.Storage;
+import seedu.sherpass.util.Ui;
 
 public class StudyCommand extends Command {
     public static final String COMMAND_WORD = "study";

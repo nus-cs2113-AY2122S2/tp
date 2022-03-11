@@ -1,12 +1,12 @@
 package seedu.sherpass.command;
 
-import seedu.sherpass.utills.Storage;
+import seedu.sherpass.util.Storage;
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.utills.Ui;
+import seedu.sherpass.util.Ui;
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
 
-import static seedu.sherpass.constant.Indexes.TASK_DESCRIPTION_INDEX_TODO;
+import static seedu.sherpass.constant.Index.TASK_DESCRIPTION_INDEX_TODO;
 
 public class TodoCommand extends Command {
     String[] toAdd;

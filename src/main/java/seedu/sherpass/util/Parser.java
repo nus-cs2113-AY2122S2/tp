@@ -1,4 +1,4 @@
-package seedu.sherpass.utills;
+package seedu.sherpass.util;
 
 import seedu.sherpass.command.Command;
 import seedu.sherpass.command.DeadlineCommand;

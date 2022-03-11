@@ -1,4 +1,4 @@
-package seedu.sherpass.utills;
+package seedu.sherpass.util;
 
 public class Timer {
     public static void start(int duration, Ui ui) {

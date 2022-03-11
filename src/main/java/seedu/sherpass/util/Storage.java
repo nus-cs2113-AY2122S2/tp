@@ -1,4 +1,4 @@
-package seedu.sherpass.utills;
+package seedu.sherpass.util;
 
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
