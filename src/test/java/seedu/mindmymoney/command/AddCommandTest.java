@@ -35,6 +35,8 @@ class AddCommandTest {
         String expectedOutput = getOutput(testList);
         String actualOutput = getOutput(Lists.expenditures);
         assertEquals(expectedOutput, actualOutput);
+        testList.clear();
+        Lists.expenditures.clear();
     }
 
     /**
@@ -48,6 +50,8 @@ class AddCommandTest {
         String expectedOutput = getOutput(testList);
         String actualOutput = getOutput(Lists.expenditures);
         assertEquals(expectedOutput, actualOutput);
+        testList.clear();
+        Lists.expenditures.clear();
     }
 
     /**
@@ -61,6 +65,8 @@ class AddCommandTest {
         String expectedOutput = getOutput(testList);
         String actualOutput = getOutput(Lists.expenditures);
         assertEquals(expectedOutput, actualOutput);
+        testList.clear();
+        Lists.expenditures.clear();
     }
 
     /**
