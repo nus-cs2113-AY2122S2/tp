@@ -11,4 +11,4 @@ Noted. I've removed this contact:
 Now you have 0 contacts in the list.
 You haven't added any contacts to your list yet!
 Welcome back to the main menu
-exit message
+Goodbye! Hope to see you again...
