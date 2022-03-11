@@ -1,17 +1,17 @@
-package werkit;
+package data.workouts;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
-import data.workouts.InvalidWorkoutException;
-import data.workouts.WorkoutList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-public class ListWorkoutTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
+class WorkoutListTest {
     ExerciseList exerciseList = new ExerciseList();
     WorkoutList wl = new WorkoutList(exerciseList);
 
@@ -26,7 +26,6 @@ public class ListWorkoutTest {
         exerciseList.addExerciseToList("crunch");
         exerciseList.addExerciseToList("russian twist");
         exerciseList.addExerciseToList("jumping jack");
-        exerciseList.addExerciseToList("running");
     }
 
     @Test
@@ -47,10 +46,10 @@ public class ListWorkoutTest {
         wl.createAndAddWorkout("lunge /reps 10");
         String expectedOutput =
                 "Showing workouts 1-3 of 3:\n"
-                + "1. push up (11 reps)\n"
-                + "2. sit up (15 reps)\n"
-                + "3. lunge (10 reps)\n"
-                + "Showed all items in list\n";
+                        + "1. push up (11 reps)\n"
+                        + "2. sit up (15 reps)\n"
+                        + "3. lunge (10 reps)\n"
+                        + "Showed all items in list\n";
         expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
         ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(consoleOutput);
