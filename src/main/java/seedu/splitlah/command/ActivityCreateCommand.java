@@ -3,7 +3,6 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
-import seedu.splitlah.data.Profile;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
@@ -23,9 +22,10 @@ public class ActivityCreateCommand extends Command {
     private static final String COMMAND_FORMAT = "Syntax:\n"
             + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /c <OVERALLCOST> "
             + "[<OPTIONAL ARGS>]\n"
-            + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /c <COST1 COST2…> "
-            + "[<OPTIONAL ARGS>]\n"
-            + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /c <OVERALLCOST> [<OPTIONAL ARGS>]";
+            + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /cl <COST1 COST2…> "
+            + "[<OPTIONAL ARGS>]";
+
+    private static final String COMMAND_SUCCESS = "The session was created successfully with session id of: ";
 
     private static final double ZERO_COST_PAID = 0;
     public static final int NO_COST = 0;
@@ -107,8 +107,10 @@ public class ActivityCreateCommand extends Command {
             String[] involvedList = Parser.parseInvolved(commandArgs);
             int gst = Parser.parseGst(commandArgs);
             int serviceCharge = Parser.parseServiceCharge(commandArgs);
-            boolean hasDifferentLength = involvedList.length != costList.length;
-            ;
+            boolean hasDifferentLength = false;
+            if (isMissingCost) {
+                hasDifferentLength = involvedList.length != costList.length;
+            }
             if (hasDifferentLength) {
                 return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
                         + COMMAND_FORMAT);
@@ -116,7 +118,7 @@ public class ActivityCreateCommand extends Command {
             return new ActivityCreateCommand(sessionId, activityName, totalCost, payer, involvedList, costList, gst,
                     serviceCharge);
         } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + COMMAND_FORMAT);
+            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT);
         }
     }
 
@@ -138,6 +140,7 @@ public class ActivityCreateCommand extends Command {
             addAllActivityCost(involvedPersonList, personPaid, totalCost, costList, activityId);
             Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(activity);
+            manager.getUi().printlnMessage(COMMAND_SUCCESS + activityId);
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
         }
