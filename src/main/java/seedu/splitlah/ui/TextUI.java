@@ -48,7 +48,6 @@ public class TextUI {
     public boolean getUserConfirmation(String message) {
         printDivider();
         printlnMessage(message);
-        printlnMessage(Message.PROMPT_TEXTUI_REQUEST_CONFIRMATION);
         String confirmation = readNextLine().toLowerCase();
         printDivider();
         while (true) {
@@ -64,6 +63,7 @@ public class TextUI {
                 return false;
             default:
                 printlnMessage(Message.ERROR_TEXTUI_REENTER_INPUT);
+                confirmation = readNextLine().toLowerCase();
             }
         }
     }
