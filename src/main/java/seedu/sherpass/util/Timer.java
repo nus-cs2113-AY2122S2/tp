@@ -4,7 +4,7 @@ import static seedu.sherpass.constant.Timer.*;
 
 import seedu.sherpass.command.StudyCommand;
 
-public class SherpassTimer extends Thread {
+public class Timer extends Thread {
 
     private volatile boolean timerPaused = false;
     private boolean hasTimeLeft = false;
@@ -13,9 +13,9 @@ public class SherpassTimer extends Thread {
 
     /**
      * Initialises the parameters needed for the countdown timer.
-     * @param
+     * @param ui ui
      */
-    public SherpassTimer(Ui ui) {
+    public Timer(Ui ui) {
         timeLeft = NO_TIME_LEFT;
         this.ui = ui;
     }

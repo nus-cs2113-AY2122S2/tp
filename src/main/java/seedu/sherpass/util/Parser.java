@@ -26,7 +26,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 
-import static seedu.sherpass.command.StudyCommand.isTimerRunning;
 import static seedu.sherpass.constant.DateAndTimeFormat.noTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskNoTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskWithTimeFormat;
@@ -348,7 +347,7 @@ public class Parser {
         return -1;
     }
 
-    public static void parseStudyMode(String rawUserInput, Ui ui, SherpassTimer timer) {
+    public static void parseStudyMode(String rawUserInput, Ui ui, Timer timer) {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":

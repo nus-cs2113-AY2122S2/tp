@@ -2,7 +2,7 @@ package seedu.sherpass.command;
 
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Parser;
-import seedu.sherpass.util.SherpassTimer;
+import seedu.sherpass.util.Timer;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
@@ -19,7 +19,7 @@ public class StudyCommand extends Command {
                 + "3) 1.5 hours\n\n"
                 + "Otherwise, feel free to choose your own timer with \n'start /custom <timer_duration>'.");
         ui.showLine();
-        SherpassTimer timer = new SherpassTimer(ui);
+        Timer timer = new Timer(ui);
         String userInput = ui.readCommand();
         while (!userInput.contains("leave")) {
             ui.showLine();
@@ -29,7 +29,7 @@ public class StudyCommand extends Command {
             if (userInput.contains("leave")) {
                 timer.stopTimer();
             } else if (userInput.contains("start") && !isTimerRunning) {
-                SherpassTimer newTimer = new SherpassTimer(ui);
+                Timer newTimer = new Timer(ui);
                 timer = newTimer;
                 isTimerRunning = true;
             }
