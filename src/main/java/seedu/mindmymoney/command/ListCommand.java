@@ -9,6 +9,16 @@ public class ListCommand extends Command {
     public ListCommand() {
     }
 
+    public String listToString() {
+        Integer indexOfList = 1;
+        String listInString = "";
+        for (Expenditure i : Lists.expenditures) {
+            listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription() + "\n";
+            indexOfList++;
+        }
+        return listInString;
+    }
+
     /**
      * Prints user's current list of expenditures.
      */
@@ -18,13 +28,9 @@ public class ListCommand extends Command {
             throw new MindMyMoneyException(
                     "Your list is currently empty! Please add some expenditures to your list first");
         } else {
-            System.out.println(PrintStrings.LINE);
-            Integer indexOfList = 1;
-            for (Expenditure i : Lists.expenditures) {
-                System.out.println(indexOfList + ". $" + i.getAmount() + " on " + i.getDescription());
-                indexOfList++;
-            }
-            System.out.println(PrintStrings.LINE);
+            System.out.print(PrintStrings.LINE);
+            System.out.println(listToString());
+            System.out.print(PrintStrings.LINE);
         }
     }
 }
