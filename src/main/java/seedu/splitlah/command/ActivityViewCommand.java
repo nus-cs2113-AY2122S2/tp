@@ -48,8 +48,8 @@ public class ActivityViewCommand extends Command {
     /**
      * Prepares user argument for activity view command.
      *
-     * @param commandArgs  A String object that represents the user's arguments.
-     * @return An ActivityViewCommand object if sessionId and activityId were found in user arguments,
+     * @param   commandArgs  A String object that represents the user's arguments.
+     * @return  An ActivityViewCommand object if sessionId and activityId were found in user arguments,
      *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
