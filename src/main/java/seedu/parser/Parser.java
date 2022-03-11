@@ -1,11 +1,13 @@
-package parser;
+package seedu.parser;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+<<<<<<< HEAD:src/main/java/parser/Parser.java
 import seedu.command.*;
 
 import java.util.Collections;
+=======
+>>>>>>> master:src/main/java/seedu/parser/Parser.java
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

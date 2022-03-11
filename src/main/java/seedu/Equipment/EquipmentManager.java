@@ -1,4 +1,4 @@
-package seedu.Equipment;
+package seedu.equipment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
