@@ -10,6 +10,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
 
 class AddCommandTest {
     /**
@@ -66,8 +67,8 @@ class AddCommandTest {
      */
     public String getOutput(ArrayList<Expenditure> list) {
         if (!list.isEmpty()) {
-            return list.get(list.size() + Indexes.LIST_INDEX_CORRECTION).getDescription()
-                    + list.get(list.size() + Indexes.LIST_INDEX_CORRECTION).getAmount();
+            return list.get(list.size() + LIST_INDEX_CORRECTION).getDescription()
+                    + list.get(list.size() + LIST_INDEX_CORRECTION).getAmount();
         }
         return "";
     }

@@ -1,9 +1,13 @@
 package seedu.mindmymoney.command;
 
-import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.constants.PrintStrings;
 import seedu.mindmymoney.data.Lists;
 import seedu.mindmymoney.userfinancial.Expenditure;
+
+import static seedu.mindmymoney.constants.Indexes.SPLIT_LIMIT;
+import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM_IN_STRING;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM_IN_STRING;
 
 /**
  * Class for managing update commands.
@@ -23,22 +27,22 @@ public class UpdateCommand extends Command {
     public void executeCommand() {
         try {
             System.out.print(PrintStrings.LINE);
-            String[] parseUpdateInput = updateInput.split(" ", Indexes.SPLIT_LIMIT);
+            String[] parseUpdateInput = updateInput.split(" ", SPLIT_LIMIT);
 
             // get the index to update, amount, description
-            String indexString = parseUpdateInput[Indexes.INDEX_OF_FIRST_ITEM_IN_STRING];
-            String expenditureDescription = parseUpdateInput[Indexes.INDEX_OF_SECOND_ITEM_IN_STRING];
+            String indexString = parseUpdateInput[INDEX_OF_FIRST_ITEM_IN_STRING];
+            String expenditureDescription = parseUpdateInput[INDEX_OF_SECOND_ITEM_IN_STRING];
             int divisionIndex = expenditureDescription.lastIndexOf(" ");
-            String description = expenditureDescription.substring(Indexes.INDEX_OF_FIRST_ITEM_IN_STRING,
+            String description = expenditureDescription.substring(INDEX_OF_FIRST_ITEM_IN_STRING,
                     divisionIndex).strip();
             String amountString = expenditureDescription.substring(divisionIndex).strip();
 
-            int indexToUpdate = Integer.parseInt(indexString) + Indexes.LIST_INDEX_CORRECTION;
+            int indexToUpdate = Integer.parseInt(indexString) + LIST_INDEX_CORRECTION;
             Expenditure newExpenditure = new Expenditure(description, Integer.parseInt(amountString));
             Lists.expenditures.set(indexToUpdate, newExpenditure);
 
             System.out.printf("Successfully set expenditure %d to %s\n",
-                    indexToUpdate - Indexes.LIST_INDEX_CORRECTION, newExpenditure);
+                    indexToUpdate - LIST_INDEX_CORRECTION, newExpenditure);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Did you forget to input INDEX, DESCRIPTION or AMOUNT?");
         } catch (NumberFormatException e) {

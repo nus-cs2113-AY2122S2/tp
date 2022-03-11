@@ -6,15 +6,15 @@ import seedu.mindmymoney.command.UpdateCommand;
 import seedu.mindmymoney.command.AddCommand;
 import seedu.mindmymoney.command.ListCommand;
 import seedu.mindmymoney.command.DeleteCommand;
-import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.helper.Functions;
+
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM_IN_STRING;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM_IN_STRING;
 
 /**
  * Represents the input parser and deals with making sense of user commands.
  */
 public class Parser {
-    public static final int SPLIT_LIMIT = 2;
-
     protected String inputCommand;
 
     public Parser(String inputCommand) {
@@ -30,7 +30,7 @@ public class Parser {
     public Command parseCommand() {
         try {
             String[] parsedInput = Functions.parseInput(inputCommand);
-            switch (parsedInput[Indexes.INDEX_OF_FIRST_ITEM_IN_STRING].toLowerCase()) {
+            switch (parsedInput[INDEX_OF_FIRST_ITEM_IN_STRING].toLowerCase()) {
             case "help":
                 return new HelpCommand(true);
             case "bye":
@@ -38,9 +38,9 @@ public class Parser {
                 System.exit(0);
                 return new HelpCommand(false); //solving fall through issue, need return something leh
             case "add":
-                return new AddCommand(parsedInput[Indexes.INDEX_OF_SECOND_ITEM_IN_STRING]);
+                return new AddCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING]);
             case "update":
-                return new UpdateCommand(parsedInput[Indexes.INDEX_OF_SECOND_ITEM_IN_STRING]);
+                return new UpdateCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING]);
             case "list":
                 return new ListCommand();
             case "delete":
