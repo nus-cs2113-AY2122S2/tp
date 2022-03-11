@@ -66,13 +66,13 @@ public class Duke {
             System.out.println("Menu:");
             userInput = ui.getUserInput();
 
-            if (userInput.equals("exit")) {
+            if (isExitCommand(userInput)) {
                 exit();
             } else if (isHelpCommand(userInput)) {
                 displayHelp();
             } else if (isContactsManagerCommand(userInput)) {
                 contactsRunner(ui);
-                System.out.println("Welcome back to the main menu");
+                printMainMenuMessage();
             } else if (isStudyManagerCommand(userInput)) {
                 //studyManagerRunner(ui);
                 printMainMenuMessage();
