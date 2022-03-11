@@ -1,6 +1,14 @@
 package seedu.splitlah.command;
 
+import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Session;
+import seedu.splitlah.exceptions.InvalidDataException;
+import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.Message;
+
+import java.util.ArrayList;
 
 /**
  * Represents a command which displays the details of each Activity object within a Session object.
@@ -14,7 +22,6 @@ public class ActivityListCommand extends Command {
 
     private int sessionId;
 
-
     public ActivityListCommand(int sessionId) {
         this.sessionId = sessionId;
     }
@@ -27,6 +34,41 @@ public class ActivityListCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
+        try {
+            Session sessionsToBePrinted = manager.getProfile().getSession(sessionId);
+            ArrayList<Activity> activityListToBePrinted = sessionsToBePrinted.getActivityList();
+
+            if (activityListToBePrinted.isEmpty()) {
+                manager.getUi().printlnMessage(Message.ERROR_ACTIVITYLIST_ACTIVITY_EMPTY);
+                return;
+            }
+
+            for (Activity activity : activityListToBePrinted) {
+                manager.getUi().printlnMessageWithDivider(activity.toString());
+            }
+
+        } catch (InvalidDataException e) {
+            manager.getUi().printlnMessage(e.getMessage());
+        }
+
+    }
+
+
+    /**
+     * Prepares user argument for activity list command.
+     *
+     * @param commandArgs A String object that represents the user's arguments.
+     * @return A ActivityListCommand object if sessionId was found in user argument,
+     *         an InvalidCommand object otherwise.
+     */
+    public static Command prepare(String commandArgs) {
+        try {
+            int sessionId = Parser.parseSessionId(commandArgs);
+            return new ActivityListCommand(sessionId);
+        } catch (InvalidFormatException e) {
+            String invalidCommandMessage = e.getMessage() + "\n" + COMMAND_FORMAT;
+            return new InvalidCommand(invalidCommandMessage);
+        }
 
     }
 }
