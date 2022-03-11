@@ -25,4 +25,27 @@ public class Commands {
                     + "add id/id_of_good_as_number n/name_of_good q/quantity_of_good_as_number");
         }
     }
+
+    public static void listGoods(ArrayList<Goods> userGoods) {
+        int numberOfUserGoods = userGoods.size();
+        if (userGoods.isEmpty()) {
+            System.out.println("There is no inventory in the warehouse.");
+            return;
+        }
+        System.out.println("List of inventory items: ");
+        int counter = 0;
+        for (Goods good : userGoods) {
+            System.out.println((counter+1) + ". " + good.getName());
+            counter++;
+        }
+    }
+
+    /*Function to print grammar for statements to print*/
+    public static String checkPlural(int numberOfGoods) {
+        if (numberOfGoods <= 1) {
+            return "is ";
+        } else {
+            return "are ";
+        }
+    }
 }
