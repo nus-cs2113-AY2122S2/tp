@@ -10,8 +10,7 @@ class ListCommandTest {
     @Test
     void listCommand_emptyList_expectException() {
         ListCommand listCommandTest = new ListCommand();
-        assertThrows(MindMyMoneyException.class,
-                ()-> listCommandTest.executeCommand());
+        assertThrows(MindMyMoneyException.class, () -> listCommandTest.executeCommand());
     }
 
 }
