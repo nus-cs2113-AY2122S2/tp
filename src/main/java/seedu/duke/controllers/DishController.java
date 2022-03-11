@@ -48,6 +48,10 @@ public class DishController extends Controller {
         return false;
     }
 
+    /**
+     * Give user prompt and get input to change name of one dish.
+     * @throws IllegalArgumentException when input cannot be parsed
+     */
     private void changeName() throws IllegalArgumentException {
         System.out.println("Changing name");
         System.out.print("The index of dish");
@@ -61,6 +65,10 @@ public class DishController extends Controller {
         }
     }
 
+    /**
+     * Give user prompt and get input to change price of one dish.
+     * @throws IllegalArgumentException when input cannot be parsed.
+     */
     private void changePrice() throws IllegalArgumentException {
         System.out.println("Changing price");
         System.out.print("The index of dish: ");
@@ -74,6 +82,10 @@ public class DishController extends Controller {
         }
     }
 
+    /**
+     * Give user prompt and get input to delete one dish.
+     * @throws IllegalArgumentException when input cannot be parsed
+     */
     private void deleteDish() throws IllegalArgumentException {
         System.out.println("Deleting dish");
         System.out.print("The index of dish : ");
@@ -85,7 +97,11 @@ public class DishController extends Controller {
         }
     }
 
-    private void addDish() {
+    /**
+     * Give user prompt and get input to add one dish.
+     * @throws IllegalArgumentException When input cannot be parsed
+     */
+    private void addDish() throws IllegalArgumentException {
         System.out.println("Adding new dish");
         System.out.print("The name of dish: ");
         String name = scanner.nextLine();
