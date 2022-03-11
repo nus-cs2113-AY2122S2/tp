@@ -35,8 +35,8 @@ public class ActivityListCommand extends Command {
     @Override
     public void run(Manager manager) {
         try {
-            Session sessionsToBePrinted = manager.getProfile().getSession(sessionId);
-            ArrayList<Activity> activityListToBePrinted = sessionsToBePrinted.getActivityList();
+            Session sessionToBePrinted = manager.getProfile().getSession(sessionId);
+            ArrayList<Activity> activityListToBePrinted = sessionToBePrinted.getActivityList();
 
             if (activityListToBePrinted.isEmpty()) {
                 manager.getUi().printlnMessage(Message.ERROR_ACTIVITYLIST_ACTIVITY_EMPTY);
@@ -58,7 +58,7 @@ public class ActivityListCommand extends Command {
      * Prepares user argument for activity list command.
      *
      * @param commandArgs A String object that represents the user's arguments.
-     * @return A ActivityListCommand object if sessionId was found in user argument,
+     * @return An ActivityListCommand object if sessionId was found in user argument,
      *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
