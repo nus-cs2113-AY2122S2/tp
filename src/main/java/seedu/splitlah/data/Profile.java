@@ -44,7 +44,13 @@ public class Profile {
         return false;
     }
 
-    public boolean hasSessionId (int sessionId) {
+    /**
+     * Checks if there is a session that exists with the specified session unique identifier.
+     *
+     * @param sessionId An integer that uniquely identifies a session.
+     * @return True if a session exists with the specified session unique identifier, false otherwise.
+     */
+    public boolean hasSessionId(int sessionId) {
         if (sessionList.size() == 0) {
             return false;
         }
@@ -83,6 +89,16 @@ public class Profile {
      */
     public void addSession(Session session) {
         this.sessionList.add(session);
+    }
+
+    /**
+     * Removes a Session object with the specified session unique identifier from the list of sessions.
+     *
+     * @param sessionId An integer that uniquely identifies a session.
+     */
+    public void removeSession(int sessionId) throws InvalidDataException {
+        Session sessionToBeRemoved = getSession(sessionId);
+        this.sessionList.remove(sessionToBeRemoved);
     }
 
     /**
