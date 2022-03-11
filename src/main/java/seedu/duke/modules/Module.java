@@ -26,7 +26,7 @@ public class Module {
     public String getTimeSlot() {
         return timeSlot;
     }
-    
+
     @Override
     public String toString() {
         return "[Module] " + "Code='" + moduleCode + '\'' + ", Category='" + category + '\'';
