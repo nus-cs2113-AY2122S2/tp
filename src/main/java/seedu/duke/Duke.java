@@ -1,10 +1,7 @@
 package seedu.duke;
 
-import seedu.duke.commands.Command;
-
 import java.util.Scanner;
-
-import static seedu.duke.Parser.getDeleteString;
+import seedu.duke.commands.Command;
 
 public class Duke {
 

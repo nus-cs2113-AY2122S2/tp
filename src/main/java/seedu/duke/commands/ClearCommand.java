@@ -6,7 +6,7 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
 
     @Override
-    public void execute(Timetable timetable){
+    public void execute(Timetable timetable) {
         timetable.clear();
     }
 }

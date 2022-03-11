@@ -16,8 +16,8 @@ public class DeleteCommand extends Command {
 
     public void execute(Timetable timetable) {
         try {
-            Event event = timetable.get(index-1);
-            timetable.remove(index-1);
+            Event event = timetable.get(index - 1);
+            timetable.remove(index - 1);
             printDeleteConfirmation(event);
         } catch (IndexOutOfBoundsException ie) {
             System.out.println(ERROR_INDEX_OUT_OF_BOUND);

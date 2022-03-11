@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Timetable {
     private final ArrayList<Event> list;
+
     public Timetable() {
         this.list = new ArrayList<>();
     }

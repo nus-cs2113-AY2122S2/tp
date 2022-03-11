@@ -1,9 +1,9 @@
 package seedu.duke;
 
 public class ErrorMessages {
-//    public enum ErrorTypes {
-//        INVALID_LIST_INDEX_DELETE,INVALID_LIST_INDEX_DELETE_STRING_DETECTED
-//    }
+    //public enum ErrorTypes {
+    //    INVALID_LIST_INDEX_DELETE,INVALID_LIST_INDEX_DELETE_STRING_DETECTED
+    //}
 
     // can generalise error messages to all commands that requires index
     public static final String ERROR_INDEX_OUT_OF_BOUND = " Hi I need a valid index in the list so I can delete";
