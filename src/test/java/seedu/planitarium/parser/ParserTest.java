@@ -7,8 +7,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
 
+    Parser p = new Parser();
+
     @Test
-    void parseDelimitedTerm() {
+    void parseDelimitedTerm_getDelimitedToken_success() {
+        String input1 = "";
     }
 
     @Test
