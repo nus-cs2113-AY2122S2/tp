@@ -4,6 +4,8 @@ import seedu.duke.events.Event;
 import seedu.duke.events.Lesson;
 import seedu.duke.Timetable;
 
+import seedu.duke.exceptions.DuplicateEventException;
+
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
@@ -24,14 +26,18 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(Timetable timetable) {
-        Event newEvent = new Lesson(name, title, day, startTime, endTime, mode);
-        timetable.add(newEvent);
-        printConfirmation(newEvent);
+    public String execute(Timetable timetable) {
+        try {
+            Event newEvent = new Lesson(name, title, day, startTime, endTime, mode);
+            timetable.add(newEvent);
+            return addConfirmation(newEvent);
+        } catch (DuplicateEventException dee) {
+            return dee.getMessage();
+        }
     }
 
-    private void printConfirmation(Event event) {
-        System.out.println("The following event has been added to your timetable:");
-        System.out.println(event);
+    private String addConfirmation(Event event) {
+        return "The following event has been added to your timetable:\n"
+                + event;
     }
 }

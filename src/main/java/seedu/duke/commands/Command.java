@@ -4,5 +4,5 @@ import seedu.duke.Timetable;
 
 public abstract class Command {
 
-    public abstract void execute(Timetable timetable);
+    public abstract String execute(Timetable timetable);
 }
