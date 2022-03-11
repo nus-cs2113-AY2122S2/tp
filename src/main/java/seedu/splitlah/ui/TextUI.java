@@ -47,6 +47,7 @@ public class TextUI {
         String confirmation = readNextLine().toLowerCase();
         printDivider();
         while (true) {
+            confirmation = readNextLine().toLowerCase();
             switch (confirmation) {
             case ("yes"):
                 // fallthrough

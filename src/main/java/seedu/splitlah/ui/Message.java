@@ -31,6 +31,8 @@ public abstract class Message {
             "Invalid input. Please re-enter.";
     public static final String PERSON_TEXTUI_NO_ACTIVITIES =
             "No activities found.";
+    public static final String PROMPT_TEXTUI_AWAITING_INPUT =
+            ">";
 
     // Parser
     public static final String ERROR_PARSER_DELIMITER_NOT_FOUND =
