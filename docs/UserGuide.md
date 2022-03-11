@@ -65,7 +65,6 @@ Expected output:
 List of inventory items:
     1. Chairs
     2. Wooden Tables
-There are 2 inventory in the warehouse.
 ```
 
 ### Getting a description of inventory: `description`
