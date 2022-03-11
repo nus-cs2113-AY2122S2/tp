@@ -82,12 +82,16 @@ public abstract class Message {
     public static final String ERROR_PROFILE_SESSION_NOT_IN_LIST =
             "The session that you have specified was not found.";
 
-    //Activity
+    // Activity
     public static final String ERROR_ACTIVITY_INACCURATE_INVOLVED_LIST =
             "The list of involved persons list is inaccurate "
                     + "as at least one person did not participate in the activity.";
 
-    //Activity Create Command
+    // Session Summary Command
+    public static final String MESSAGE_SESSIONSUMMARY_NO_PAYMENTS_REQUIRED =
+            "There are no payments to be made.";
+    
+    // Activity Create Command
     public static final String ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH =
             "There seems to be a discrepancy between number of people involved and the costs per person";
     public static final String ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST =
