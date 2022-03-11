@@ -1,7 +1,7 @@
 -------------------------
 Welcome! This is the Hospital Management System.
 Please type in your input:
-James Gosling
+bye /info bye
 -------------------------
 Goodbye! Exiting the programme.
 Terminated
