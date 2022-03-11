@@ -7,6 +7,7 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 import seedu.splitlah.util.PersonCostPair;
 
@@ -89,6 +90,11 @@ public class SessionSummaryCommand extends Command {
         double payerCost = Math.abs(payer.getCost());
         double receiverAmount = Math.abs(receiver.getCost());
         
+        // Both parties have near 0 cost/debt
+        if (isValueSmall(payerCost) && isValueSmall(receiverAmount)) {
+            return "";
+        }
+        
         // Equal costs
         if (isDifferenceSmall(payerCost, receiverAmount)) {
             payer.setProcessed(true);
@@ -125,6 +131,7 @@ public class SessionSummaryCommand extends Command {
             return TEMP_ERROR_INVALID_PERSONCOSTPAIR_LIST;
         }
 
+        boolean hasInserted = false;
         while (payerIndex < receiverIndex) {
             PersonCostPair payer = personCostPairList.get(payerIndex);
             PersonCostPair receiver = personCostPairList.get(payerIndex);
@@ -132,7 +139,10 @@ public class SessionSummaryCommand extends Command {
                 return TEMP_ERROR_PROCESSALLTRANSACTION_METHOD_LOGIC_INVALID;
             }
             String output = processTransaction(payer, receiver);
-            sb.append('\n').append(output);
+            if (!output.isEmpty()) {
+                sb.append(PREPEND_TRANSACTION).append(output);
+                hasInserted = true;
+            }
             
             if (payer.isProcessed()) {
                 payerIndex += 1;
@@ -142,6 +152,9 @@ public class SessionSummaryCommand extends Command {
             }
         }
 
+        if (!hasInserted) {
+            sb.append(PREPEND_TRANSACTION).append(Message.MESSAGE_SESSIONSUMMARY_NO_PAYMENTS_REQUIRED);
+        }
         return sb.toString();
     }
 
@@ -166,6 +179,7 @@ public class SessionSummaryCommand extends Command {
         ArrayList<Person> personList = session.getPersonList();
         ArrayList<PersonCostPair> personCostPairList = getPersonCostPairList(personList);
         // check if NET 0
-        String output = processAllTransactions(personCostPairList);
+        String output = processAllTransactions(personCostPairList, session);
+        ui.printlnMessage(output);
     }
 }
