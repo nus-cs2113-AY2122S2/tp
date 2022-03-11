@@ -1,5 +1,6 @@
 package seedu.planitarium.parser;
 
+import seedu.planitarium.person.Person;
 import seedu.planitarium.person.PersonList;
 
 public class Parser {
@@ -17,8 +18,8 @@ public class Parser {
     public static final int INDEX_RIGHT_REMOVED = 0;
     public static final int LIMIT_TWO_TOKENS = 2;
     public static final int LIMIT_TWO_DECIMAL = 2;
-    public static final int MIN_USER_INDEX = 0;
-    public static final float MONEY_ZERO = 0.0f;
+    public static final int MIN_USER_INDEX = 1;
+    public static final double MONEY_ZERO = 0.0;
 
     /**
      * Returns the term surrounded by two delimiters.
@@ -93,14 +94,14 @@ public class Parser {
     }
 
     /**
-     * Returns without exception if text is a valid float.
+     * Returns without exception if text is a valid double.
      *
      * @param amount Text to be checked.
-     * @throws NumberFormatException if format of text is not a valid float, negative or more than 2 decimal places.
+     * @throws NumberFormatException if format of text is not a valid double, negative or more than 2 decimal places.
      */
     public static void isValidMoney(String amount) throws NumberFormatException {
-        float checkMoney = Float.parseFloat(amount);
-        if (Float.compare(checkMoney, MONEY_ZERO) < 0) {
+        double checkMoney = Double.parseDouble(amount);
+        if (Double.compare(checkMoney, MONEY_ZERO) < 0) {
             throw new NumberFormatException();
         }
         if (amount.contains(DELIMITER_MONEY)) {
@@ -120,7 +121,10 @@ public class Parser {
      */
     public static void isValidUserIndex(String userIndex) throws NumberFormatException, IndexOutOfBoundsException {
         int checkIndex = Integer.parseInt(userIndex);
-        if (checkIndex < MIN_USER_INDEX || checkIndex >= PersonList.getNumberOfMembers()) {
+        if (checkIndex < MIN_USER_INDEX) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (checkIndex >= PersonList.getNumberOfMembers()) {
             throw new IndexOutOfBoundsException();
         }
     }
