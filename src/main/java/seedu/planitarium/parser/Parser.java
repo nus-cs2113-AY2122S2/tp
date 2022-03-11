@@ -178,7 +178,7 @@ public class Parser {
         if (checkIndex < minIndex) {
             throw new IndexOutOfBoundsException();
         }
-        if (checkIndex >= maxIndex) {
+        if (checkIndex > maxIndex) {
             throw new IndexOutOfBoundsException();
         }
     }
