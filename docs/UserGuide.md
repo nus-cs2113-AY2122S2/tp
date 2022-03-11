@@ -39,8 +39,24 @@ Example of usage:
    1. `session /create /n Class Outing /d 2022-03-15 /pl Alice Bob`
    
 <br>[INSERT SCREEN SHOT]
+<br>
+<br>
+### Deleting a session: `session /delete`
+>Deletes an existing session that is managed by SplitLah. <br>
+>Sessions are a way for the user to manage their gatherings that happen across the day.
 
+Format: `session /delete /sid [SESSION_ID]`
 
+* `[SESSION_ID]` refers to the unique identifier of the session.
+    * The unique identifier for a session can be retrieved with `session /list` command.
+
+Example of usage:
+1. Remove an existing session that was created with session unique identifier of 1.
+   1. `session /delete /sid 1`
+
+<br>[INSERT SCREEN SHOT]
+<br>
+<br>
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
