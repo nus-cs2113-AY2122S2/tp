@@ -43,16 +43,15 @@ public class ProjectList {
 
     public void addTodoToProject(String indexString, String todoString) {
         int index;
-        try{
+        try {
             index = Integer.parseInt(indexString);
-        }
-        catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("The project index is not an integer!");
             return;
         }
 
         Project targetProject = new Project();
-        targetProject = projectList.get(index-1);
+        targetProject = projectList.get(index - 1);
 
         targetProject.addTodo(todoString);
         System.out.println("Todos have been added to project " + targetProject.getTitle());
@@ -65,19 +64,20 @@ public class ProjectList {
      */
 
     public void markTodoAsDone(String indexStringProj, String indexStringTodo) {
-        int indexProj, indexTodo;
+        int indexProj;
+        int indexTodo;
         try {
             indexProj = Integer.parseInt(indexStringProj);
             indexTodo = Integer.parseInt(indexStringTodo);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("The input is not an integer!");
             return;
         }
-        Project targetProject = projectList.get(indexProj-1);
+        Project targetProject = projectList.get(indexProj - 1);
         targetProject.markTodoAsDone(indexTodo);
     }
 
-    public int getSize(){
+    public int getSize() {
         return projectList.size();
     }
 }

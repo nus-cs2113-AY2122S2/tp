@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ProjectListTest {
     private static final String PROJECT1NAME = "CS2113tP";
@@ -29,6 +29,6 @@ class ProjectListTest {
     @Test
     void markTodoAsDone_indexOutOfRange() {
         String targetIndexString = "5";
-        assertThrows(IndexOutOfBoundsException.class, ()->defaultProjectList.markTodoAsDone("1", targetIndexString));
+        assertThrows(IndexOutOfBoundsException.class, () -> defaultProjectList.markTodoAsDone("1", targetIndexString));
     }
 }

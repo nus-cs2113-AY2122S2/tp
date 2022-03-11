@@ -20,30 +20,22 @@ public class Project {
         todos = new ArrayList<Todo>();
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return title;
     }
 
-    /**
-     * Sets the todolist of a project
-     * @param todos
-     */
-
-    public void setTodos(ArrayList<Todo> todos){
-        this.todos = todos;
-    }
 
     /**
-     * Marks a todo at specific index as done.
-     * @param index
+     * Marks a t/odo at specific index as done.
+     * @param index the target index
      */
     public void markTodoAsDone(int index) {
-        if (index > todos.size()){
+        if (index > todos.size()) {
             throw new IndexOutOfBoundsException();
         }
-        todos.get(index-1).markAsDone();
+        todos.get(index - 1).markAsDone();
         System.out.println("Todo has been marked as done successfully: ");
-        System.out.println(todos.get(index-1));
+        System.out.println(todos.get(index - 1));
     }
 
     public void addTodo(String todoString) {
@@ -51,7 +43,7 @@ public class Project {
         todos.add(newTodo);
     }
 
-    public Todo getTodo(int index){
+    public Todo getTodo(int index) {
         return todos.get(index - 1);
     }
 }

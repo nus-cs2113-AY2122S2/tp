@@ -69,8 +69,7 @@ public class CommandHandler {
         String todoString = "";
         if (strings.length == 3) {
             todoString = strings[2];
-        }
-        else {
+        } else {
             for (int i = 2; i < strings.length; i++) {
                 todoString = todoString + " " + strings[i];
             }

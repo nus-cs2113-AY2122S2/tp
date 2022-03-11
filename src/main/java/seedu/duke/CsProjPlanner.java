@@ -20,6 +20,7 @@ public class CsProjPlanner {
             try {
                 commandHandler.handleUserInput(projectList);
             } catch (IllegalCommandException e) {
+                System.out.println("The input does not conform to the required format.");
             }
         }
 
