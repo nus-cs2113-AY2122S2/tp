@@ -15,6 +15,15 @@ public class PersonList {
     }
 
     /**
+     * Returns the array list containing persons added.
+     *
+     * @return The array list
+     */
+    public ArrayList<Person> getPersonList() {
+        return personList;
+    }
+
+    /**
      * Returns the number of members in the list.
      *
      * @return The number of person objects present in the array list
