@@ -4,12 +4,19 @@
 
 {Give a product intro}
 
+---
+
 ## Quick Start
 
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Down the latest version of WerkIt! from [here (WIP)](http://link.to/duke).
+3. (Recommended) Create a new directory and move the WerkIt! JAR file to the directory.
+4. (Recommended) Set your current working directory to the new directory.
+5. Run the WerkIt! application with the command: `java -jar WerkIt.jar`.
+
+---
 
 ## Features 
 
@@ -54,14 +61,51 @@ Example of usage:
 
 `todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
 
-## FAQ
+---
+
+## WerkIt!'s Local Storage Information
+When you start WerkIt! for the first time, the following directory and folders are created:
+
+```
+werkItResources/        // Primary resource directory for WerkIt!
+    ├── exercises.txt   // Text file containing a list of exercises
+    └── workouts.txt    // Text file containing a list of user-created workouts
+```
+
+Do note that the directory (and by extension, the files) will be created in your terminal's
+**current working directory**. Thus, it is highly recommended for you to create a new directory
+with the WerkIt! JAR file inside it, and running the application from the directory.
+
+When you launch WerkIt! in subsequent sessions, please ensure that you run it from the same directory
+that you did when starting WerkIt! for the first time.
+
+---
+
+## Frequently Asked Questions (FAQ)
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: Locate your `werkItResources` directory and WerkIt! JAR file, copy and paste it in your other 
+computer's desired location. Thereafter, you can run WerkIt! as per normal. 
+- (Please see 'WerkIt's Local Storage Information' for recommended location).
+
+<br/>
+
+**Q**: I cannot see the workouts that I have created in previous sessions.
+
+**A**: Please ensure that you launch WerkIt! from the same directory that you did when starting the application for the 
+first time. Your saved data should be in that directory.
+
+<br/>
+
+---
 
 ## Command Summary
 
 {Give a 'cheat sheet' of commands here}
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+| Action         | Format and Example                                                                                                   |
+|:---------------|:---------------------------------------------------------------------------------------------------------------------|
+| Create Workout | Format: `workout /new <exercise name> /reps <number of repetitions>`<br/>Example: `workout /new biceps curl /reps 1` |
+
+
