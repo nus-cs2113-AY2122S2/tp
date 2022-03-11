@@ -11,4 +11,13 @@ public class Project {
     public Project(String title) {
         this.title = title;
     }
+
+    /**
+     * Gets the title of a project
+     * @return title
+     */
+    public String getTitle(){
+        return title;
+    }
+
 }
