@@ -24,6 +24,16 @@ public class PersonList {
     }
 
     /**
+     * Returns the person specified by the given index.
+     *
+     * @param index The index of the person
+     * @return The person with the index
+     */
+    public Person getPerson(int index) {
+        return personList.get(index - 1);
+    }
+
+    /**
      * Returns the number of members in the list.
      *
      * @return The number of person objects present in the array list
