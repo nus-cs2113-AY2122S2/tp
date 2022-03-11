@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.ui.TextUi;
 
 import static seedu.duke.contacts.ContactsManager.contactsRunner;
+import static seedu.duke.expense.ExpenseTracker.expenseRunner;
 
 public class Duke {
     private TextUi ui;
@@ -62,7 +63,9 @@ public class Duke {
         String userInput;
 
         while (true) {
+            System.out.println("Menu:");
             userInput = ui.getUserInput();
+
             if (isExitCommand(userInput)) {
                 exit();
             } else if (isHelpCommand(userInput)) {
@@ -74,7 +77,7 @@ public class Duke {
                 //studyManagerRunner(ui);
                 printMainMenuMessage();
             } else if (isExpenseTrackerCommand(userInput)) {
-                //expenseTrackerRunner(ui);
+                expenseRunner(ui);
                 printMainMenuMessage();
             } else if (isNotEmpty(userInput)) {
                 printInvalidMainMenuCommandMessage();

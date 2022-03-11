@@ -1,4 +1,5 @@
 greeting message
+Menu:
 Welcome to Contacts Manager
 Got it. I've added this contact:
   Lucy
@@ -11,4 +12,15 @@ Noted. I've removed this contact:
 Now you have 0 contacts in the list.
 You haven't added any contacts to your list yet!
 Welcome back to the main menu
+Menu:
+Welcome to Expense Tracker
+You haven't added any expenses to your list yet!
+Added Date|18.00|Category|This is a remark
+Here are the expenses you have made so far:
+ 1. Date|18.00|Category|This is a remark
+
+Deleted entry: Date|18.00|Category|This is a remark
+You haven't added any expenses to your list yet!
+Welcome back to the main menu
+Menu:
 Goodbye! Hope to see you again...
