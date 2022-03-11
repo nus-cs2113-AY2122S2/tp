@@ -88,7 +88,7 @@ public class Profile {
      * @param session A Session object that is to be added.
      */
     public void addSession(Session session) {
-        this.sessionList.add(session);
+        sessionList.add(session);
     }
 
     /**
@@ -98,7 +98,7 @@ public class Profile {
      */
     public void removeSession(int sessionId) throws InvalidDataException {
         Session sessionToBeRemoved = getSession(sessionId);
-        this.sessionList.remove(sessionToBeRemoved);
+        sessionList.remove(sessionToBeRemoved);
     }
 
     /**
