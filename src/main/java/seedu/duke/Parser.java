@@ -37,10 +37,6 @@ public class Parser {
                 return new DeleteCommand(id);
             case "packages":
                 return new PackagesCommand();
-
-            case "reserve":
-            case "reservations":
-                return new FindReservationsCommand();
             default:
                 return new ByeCommand();
         }
