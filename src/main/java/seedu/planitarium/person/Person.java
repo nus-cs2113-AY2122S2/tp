@@ -34,8 +34,8 @@ public class Person {
      * @param description The source of the income
      * @param amount The value of the income
      */
-    public static void addIncome(String description, double amount) {
-        incomeList.addIncome(description, amount);
+    public void addIncome(String description, double amount) {
+        this.incomeList.addIncome(description, amount);
         System.out.println("An income of " + amount + " from " + description + " has been added");
     }
 
@@ -44,7 +44,7 @@ public class Person {
      *
      * @param index The index of the income to be removed
      */
-    public static void deleteIncome(int index) {
+    public void deleteIncome(int index) {
         String description = incomeList.getDescription(index);
         double value = incomeList.getIncomeValue(index);
         incomeList.remove(index);
@@ -57,7 +57,7 @@ public class Person {
      * @param description The reason for the expenditure
      * @param value The value of the expenditure
      */
-    public static void addExpend(String description, int value) {
+    public void addExpend(String description, int value) {
         expenditureList.addExpenditure(description, value);
         System.out.println("An expenditure of " + value + " for " + description + " has been added");
     }
@@ -67,7 +67,7 @@ public class Person {
      *
      * @param index The index of the expenditure to be removed.
      */
-    public static void deleteExpend(int index) {
+    public void deleteExpend(int index) {
         String description = expenditureList.getDescription(index);
         double value = expenditureList.getExpenditureValue(index);
         expenditureList.remove(index);
@@ -77,7 +77,7 @@ public class Person {
     /**
      * Lists the expenditures of the person.
      */
-    public static void listExpenditure() {
+    public void listExpenditure() {
         System.out.println("Here is the expenditure list for " + name);
         expenditureList.printExpenditureList();
     }
@@ -85,7 +85,7 @@ public class Person {
     /**
      * Lists the income of the person.
      */
-    public static void listIncome() {
+    public void listIncome() {
         System.out.println("Here is the income list for " + name);
         incomeList.printIncomeList();
     }
@@ -95,7 +95,7 @@ public class Person {
      *
      * @return Total value of expenditures
      */
-    private static double getTotalExpenditure() {
+    private double getTotalExpenditure() {
         return expenditureList.getTotalExpenditure();
     }
 
@@ -104,7 +104,7 @@ public class Person {
      *
      * @return Total value of incomes
      */
-    private static double getTotalIncome() {
+    private double getTotalIncome() {
         return incomeList.getTotalIncome();
     }
 
@@ -113,7 +113,7 @@ public class Person {
      *
      * @return The total value contributed by the person
      */
-    public static double getDisposable() {
+    public double getDisposable() {
         return getTotalIncome() - getTotalExpenditure();
     }
 
@@ -122,7 +122,7 @@ public class Person {
      *
      * @return The number of incomes
      */
-    public static int getNumberOfIncome() {
+    public int getNumberOfIncome() {
         return incomeList.getNumberOfIncomes();
     }
 
@@ -131,7 +131,7 @@ public class Person {
      *
      * @return The number of expenditures
      */
-    public static int getNumberOfExpenditures() {
+    public int getNumberOfExpenditures() {
         return expenditureList.getNumberOfExpenditures();
     }
 }
