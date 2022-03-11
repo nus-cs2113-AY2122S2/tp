@@ -4,7 +4,10 @@ import seedu.mindmymoney.constants.PrintStrings;
 import seedu.mindmymoney.data.Lists;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
-import static seedu.mindmymoney.constants.Indexes.*;
+import static seedu.mindmymoney.constants.Indexes.SPLIT_LIMIT;
+import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM_IN_STRING;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM_IN_STRING;
 
 /**
  * Class for managing update commands.
