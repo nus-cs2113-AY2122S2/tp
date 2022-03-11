@@ -2,8 +2,8 @@ package seedu.sherpass.constant;
 
 import java.time.format.DateTimeFormatter;
 
-import static seedu.sherpass.constant.Messages.DATE_FORMAT_WITHOUT_TIME;
-import static seedu.sherpass.constant.Messages.DATE_FORMAT_WITH_TIME;
+import static seedu.sherpass.constant.Message.DATE_FORMAT_WITHOUT_TIME;
+import static seedu.sherpass.constant.Message.DATE_FORMAT_WITH_TIME;
 
 public class DateAndTimeFormat {
 

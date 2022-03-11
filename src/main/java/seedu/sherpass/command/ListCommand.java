@@ -1,8 +1,8 @@
 package seedu.sherpass.command;
 
-import seedu.sherpass.utills.Storage;
+import seedu.sherpass.util.Storage;
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.utills.Ui;
+import seedu.sherpass.util.Ui;
 
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
@@ -14,8 +14,8 @@ public class ListCommand extends Command {
      * Executes the list command. List all tasks availble in task array.
      *
      * @param taskList Task array.
-     * @param ui Ui for printing task content.
-     * @param storage Storage for overwriting/appending save data. Not used in this method.
+     * @param ui       Ui for printing task content.
+     * @param storage  Storage for overwriting/appending save data. Not used in this method.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {

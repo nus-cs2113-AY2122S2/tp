@@ -1,10 +1,10 @@
 package seedu.sherpass.command;
 
-import seedu.sherpass.utills.Storage;
+import seedu.sherpass.util.Storage;
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.utills.Ui;
+import seedu.sherpass.util.Ui;
 
-import static seedu.sherpass.constant.Messages.ERROR_SYSTEM_FAULT_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_SYSTEM_FAULT_MESSAGE;
 
 public class UpdateCommand extends Command {
     String taskDescriptionForSearchingTask;
@@ -15,7 +15,7 @@ public class UpdateCommand extends Command {
      * Saves task description and date.
      *
      * @param taskDescription Task Description to search for.
-     * @param dateInput Task Date to replace existing task date.
+     * @param dateInput       Task Date to replace existing task date.
      */
     public UpdateCommand(String taskDescription, String dateInput) {
         taskDescriptionForSearchingTask = taskDescription;
@@ -54,8 +54,8 @@ public class UpdateCommand extends Command {
      * an existing task.
      *
      * @param taskList Task array
-     * @param ui Ui for printing messages.
-     * @param storage Storage for overwriting save data after replacing task date with new input.
+     * @param ui       Ui for printing messages.
+     * @param storage  Storage for overwriting save data after replacing task date with new input.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (isTaskBeingReplaced(ui)) {

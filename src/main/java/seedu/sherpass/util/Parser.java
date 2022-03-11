@@ -1,4 +1,4 @@
-package seedu.sherpass.utills;
+package seedu.sherpass.util;
 
 import seedu.sherpass.command.Command;
 import seedu.sherpass.command.DeadlineCommand;
@@ -31,36 +31,36 @@ import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskNoTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskWithTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.withTimeFormat;
 
-import static seedu.sherpass.constant.Indexes.CUSTOM_TIMER_INDEX;
-import static seedu.sherpass.constant.Indexes.DEFAULT_TIMER_INDEX;
-import static seedu.sherpass.constant.Indexes.DEFAULT_TIMER_ONE;
-import static seedu.sherpass.constant.Indexes.DEFAULT_TIMER_THREE;
-import static seedu.sherpass.constant.Indexes.DEFAULT_TIMER_TWO;
-import static seedu.sherpass.constant.Indexes.FIND_BY_TASK_CONTENT_INDEX;
-import static seedu.sherpass.constant.Indexes.FIND_BY_TASK_DATE_INDEX;
-import static seedu.sherpass.constant.Indexes.FIND_BY_TASK_DESCRIPTION_NO_DATE_INDEX;
-import static seedu.sherpass.constant.Indexes.FIND_BY_TASK_DESCRIPTION_WITH_DATE_INDEX;
-import static seedu.sherpass.constant.Indexes.HELP_OPTIONS_INDEX;
-import static seedu.sherpass.constant.Indexes.MARK_INDEX;
-import static seedu.sherpass.constant.Indexes.OPTIONS_INDEX;
-import static seedu.sherpass.constant.Indexes.SAVE_TASK_BY_DATE_INDEX;
-import static seedu.sherpass.constant.Indexes.SAVE_TASK_DESCRIPTION_INDEX;
-import static seedu.sherpass.constant.Indexes.SAVE_TASK_DO_DATE_INDEX;
-import static seedu.sherpass.constant.Indexes.SAVE_TASK_MARK_STATUS;
-import static seedu.sherpass.constant.Indexes.STUDY_COMMAND_INDEX;
-import static seedu.sherpass.constant.Indexes.TASK_CONTENT_INDEX;
-import static seedu.sherpass.constant.Indexes.TASK_DATE_INDEX;
-import static seedu.sherpass.constant.Indexes.TASK_DESCRIPTION_INDEX;
-import static seedu.sherpass.constant.Indexes.TIMER_FORMAT_INDEX;
-import static seedu.sherpass.constant.Messages.DATE_FORMAT_WITHOUT_TIME;
-import static seedu.sherpass.constant.Messages.DATE_FORMAT_WITH_TIME;
-import static seedu.sherpass.constant.Messages.ERROR_DEADLINE_MISSING_COMMAND_MESSAGE;
-import static seedu.sherpass.constant.Messages.ERROR_EVENT_MISSING_COMMAND_MESSAGE;
-import static seedu.sherpass.constant.Messages.ERROR_INVALID_DELETE_INDEX_MESSAGE;
-import static seedu.sherpass.constant.Messages.ERROR_INVALID_INPUT_MESSAGE;
-import static seedu.sherpass.constant.Messages.ERROR_INVALID_MARKING_INDEX_MESSAGE;
-import static seedu.sherpass.constant.Messages.ERROR_TODO_REPEATED_INPUT_MESSAGE;
-import static seedu.sherpass.constant.Messages.HELP_MESSAGE_SPECIFIC_COMMAND;
+import static seedu.sherpass.constant.Index.CUSTOM_TIMER_INDEX;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_INDEX;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ONE;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_THREE;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
+import static seedu.sherpass.constant.Index.FIND_BY_TASK_CONTENT_INDEX;
+import static seedu.sherpass.constant.Index.FIND_BY_TASK_DATE_INDEX;
+import static seedu.sherpass.constant.Index.FIND_BY_TASK_DESCRIPTION_NO_DATE_INDEX;
+import static seedu.sherpass.constant.Index.FIND_BY_TASK_DESCRIPTION_WITH_DATE_INDEX;
+import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
+import static seedu.sherpass.constant.Index.MARK_INDEX;
+import static seedu.sherpass.constant.Index.OPTIONS_INDEX;
+import static seedu.sherpass.constant.Index.SAVE_TASK_BY_DATE_INDEX;
+import static seedu.sherpass.constant.Index.SAVE_TASK_DESCRIPTION_INDEX;
+import static seedu.sherpass.constant.Index.SAVE_TASK_DO_DATE_INDEX;
+import static seedu.sherpass.constant.Index.SAVE_TASK_MARK_STATUS;
+import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
+import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
+import static seedu.sherpass.constant.Index.TASK_DATE_INDEX;
+import static seedu.sherpass.constant.Index.TASK_DESCRIPTION_INDEX;
+import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
+import static seedu.sherpass.constant.Message.DATE_FORMAT_WITHOUT_TIME;
+import static seedu.sherpass.constant.Message.DATE_FORMAT_WITH_TIME;
+import static seedu.sherpass.constant.Message.ERROR_DEADLINE_MISSING_COMMAND_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_EVENT_MISSING_COMMAND_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_TODO_REPEATED_INPUT_MESSAGE;
+import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
 
 
 public class Parser {
@@ -103,7 +103,7 @@ public class Parser {
             return false;
         }
         return !rawData[SAVE_TASK_DESCRIPTION_INDEX].isBlank() && !rawData[SAVE_TASK_BY_DATE_INDEX].isBlank()
-            && !rawData[SAVE_TASK_DO_DATE_INDEX].isBlank();
+                && !rawData[SAVE_TASK_DO_DATE_INDEX].isBlank();
     }
 
 
@@ -122,7 +122,7 @@ public class Parser {
 
     private static void printMissingInputMessage(String input, String taskType) {
         System.out.println("Oops! The " + input + " of a(n) " + taskType + " cannot be empty."
-            + HELP_MESSAGE_SPECIFIC_COMMAND);
+                + HELP_MESSAGE_SPECIFIC_COMMAND);
     }
 
     private static Command prepareAddTodo(String[] parsedInput, TaskList taskList) {
@@ -148,14 +148,14 @@ public class Parser {
     private static String confirmInvalidDateFormat() throws InvalidInputException {
         Ui anotherUi = new Ui();
         anotherUi.showToUser("It seems that the date and time\nyou gave is not in the correct format.\n"
-            + "Would you like to re-enter a valid date and time? (Y/N)\n"
-            + "*Enter 'No' to skip the adding of this task*");
+                + "Would you like to re-enter a valid date and time? (Y/N)\n"
+                + "*Enter 'No' to skip the adding of this task*");
         anotherUi.showLine();
         while (true) {
             String input = anotherUi.readCommand();
             anotherUi.showLine();
             if (input.trim().equalsIgnoreCase("Y")
-                || input.trim().equalsIgnoreCase("Yes")) {
+                    || input.trim().equalsIgnoreCase("Yes")) {
                 anotherUi.showToUser("Understood. Please key in the date and time you wish to save.");
                 anotherUi.showLine();
                 anotherUi.showToUser("Enter valid date input:");
@@ -164,7 +164,7 @@ public class Parser {
                 return prepareTaskDate(input.trim(), false);
             }
             if (input.trim().equalsIgnoreCase("N")
-                || input.trim().equalsIgnoreCase("No")) {
+                    || input.trim().equalsIgnoreCase("No")) {
                 anotherUi.showToUser("Okay, proceeding to stop current task process...");
                 return null;
             }
@@ -174,14 +174,14 @@ public class Parser {
     }
 
     private static String checkCorrectDateFormat(String rawTaskDate, boolean isParseSaveFile)
-        throws InvalidInputException {
+            throws InvalidInputException {
         try {
             if (isParseSaveFile) {
                 return LocalDate.parse(rawTaskDate, savedTaskNoTimeFormat)
-                    .format(DateTimeFormatter.ofPattern(DATE_FORMAT_WITHOUT_TIME));
+                        .format(DateTimeFormatter.ofPattern(DATE_FORMAT_WITHOUT_TIME));
             }
             return LocalDate.parse(rawTaskDate, noTimeFormat)
-                .format(DateTimeFormatter.ofPattern(DATE_FORMAT_WITHOUT_TIME));
+                    .format(DateTimeFormatter.ofPattern(DATE_FORMAT_WITHOUT_TIME));
         } catch (DateTimeParseException e) {
             if (isParseSaveFile) {
                 throw new InvalidInputException();
@@ -191,17 +191,17 @@ public class Parser {
     }
 
     private static String prepareTaskDate(String rawTaskDate, boolean isParseSaveFile)
-        throws InvalidInputException {
+            throws InvalidInputException {
         if (rawTaskDate.isBlank()) {
             throw new InvalidInputException();
         }
         try {
             if (isParseSaveFile) {
                 return LocalDateTime.parse(rawTaskDate, savedTaskWithTimeFormat)
-                    .format(DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_TIME));
+                        .format(DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_TIME));
             }
             return LocalDateTime.parse(rawTaskDate, withTimeFormat)
-                .format(DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_TIME));
+                    .format(DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_TIME));
         } catch (DateTimeParseException e) {
             return checkCorrectDateFormat(rawTaskDate, isParseSaveFile);
         }
@@ -257,17 +257,17 @@ public class Parser {
             if (userInput[FIND_BY_TASK_CONTENT_INDEX].contains("/date")) {
                 parsedInputToSearchByDate = userInput[FIND_BY_TASK_CONTENT_INDEX].split("/date");
                 String taskDateToSearch = prepareTaskDate(parsedInputToSearchByDate[FIND_BY_TASK_DATE_INDEX].trim(),
-                    false);
+                        false);
                 if (taskDateToSearch == null) {
                     return null;
                 }
                 return new FindCommand(parsedInputToSearchByDate[FIND_BY_TASK_DESCRIPTION_WITH_DATE_INDEX].trim(),
-                    taskDateToSearch);
+                        taskDateToSearch);
             }
             return new FindCommand(userInput[FIND_BY_TASK_DESCRIPTION_NO_DATE_INDEX].trim(), null);
         } catch (IndexOutOfBoundsException | InvalidInputException e) {
             System.out.println("Your search input seems to be missing.\n"
-                + "Please enter your input again." + HELP_MESSAGE_SPECIFIC_COMMAND);
+                    + "Please enter your input again." + HELP_MESSAGE_SPECIFIC_COMMAND);
         }
         return null;
     }
@@ -293,10 +293,10 @@ public class Parser {
             return prepareAddTodo(parsedInput, taskList);
         case EventCommand.COMMAND_WORD:
             return prepareAddEventOrDeadline(parsedInput, "/at",
-                taskList, EventCommand.COMMAND_WORD);
+                    taskList, EventCommand.COMMAND_WORD);
         case DeadlineCommand.COMMAND_WORD:
             return prepareAddEventOrDeadline(parsedInput, "/by",
-                taskList, DeadlineCommand.COMMAND_WORD);
+                    taskList, DeadlineCommand.COMMAND_WORD);
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(parsedInput, taskList);
         case FindCommand.COMMAND_WORD:
@@ -325,7 +325,7 @@ public class Parser {
             return DEFAULT_TIMER_THREE;
         default:
             ui.showToUser("Sorry! I can't recognise the choice you've entered.\n"
-                + "Please re-enter a valid default timer input");
+                    + "Please re-enter a valid default timer input");
         }
         return -1;
     }
@@ -339,10 +339,10 @@ public class Parser {
             return selectDefaultTimer(parsedInput[DEFAULT_TIMER_INDEX].trim(), ui);
         } catch (ArrayIndexOutOfBoundsException e) {
             ui.showToUser("Oops! Your input seems to be missing some commands.\n"
-                + "Please re-enter a valid input.");
+                    + "Please re-enter a valid input.");
         } catch (NumberFormatException e) {
             ui.showToUser("Oops! Your timer input does not seem to be correct.\n"
-                + "Please re-enter a valid input.");
+                    + "Please re-enter a valid input.");
         }
         return -1;
     }
