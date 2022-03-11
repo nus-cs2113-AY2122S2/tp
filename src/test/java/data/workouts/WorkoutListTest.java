@@ -2,6 +2,7 @@ package data.workouts;
 
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
+import data.workouts.WorkoutOutOfRangeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +10,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class WorkoutListTest {
@@ -58,5 +60,52 @@ class WorkoutListTest {
         System.out.flush();
         String consoleOutputs = consoleOutput.toString().replaceAll("\n", "").replaceAll("\r", "");
         assertEquals(expectedOutput, consoleOutputs);
+    }
+
+    @Test
+    void deleteWorkout_validIndexToDelete_expectDeleteWorkout() throws
+            InvalidWorkoutException, InvalidExerciseException,
+            WorkoutOutOfRangeException {
+
+        wl.createAndAddWorkout("push up /reps 11");
+        wl.createAndAddWorkout("sit up /reps 15");
+        wl.createAndAddWorkout("lunge /reps 10");
+
+        int workoutNumberToDeleteInList = 2;
+
+        assertEquals("sit up (15 reps)", wl.getWorkoutsList().get(workoutNumberToDeleteInList - 1).toString());
+        wl.deleteWorkout(Integer.toString(workoutNumberToDeleteInList));
+        assertEquals("lunge (10 reps)", wl.getWorkoutsList().get(workoutNumberToDeleteInList - 1).toString());
+    }
+
+    @Test
+    void deleteWorkout_indexOutOfRange_expectWorkoutOutOfRangeException() throws InvalidWorkoutException,
+            InvalidExerciseException {
+
+        wl.createAndAddWorkout("push up /reps 11");
+        wl.createAndAddWorkout("sit up /reps 15");
+        wl.createAndAddWorkout("lunge /reps 10");
+
+        int workoutNumberToDeleteInList = 5;
+
+        assertThrows(WorkoutOutOfRangeException.class,
+            () -> wl.deleteWorkout(Integer.toString(workoutNumberToDeleteInList)));
+
+    }
+
+    @Test
+    void deleteWorkout_invalidParseArgumentInput_expectNumberFormatException() throws InvalidWorkoutException,
+            InvalidExerciseException,
+            ArrayIndexOutOfBoundsException {
+
+        wl.createAndAddWorkout("push up /reps 11");
+        wl.createAndAddWorkout("sit up /reps 15");
+        wl.createAndAddWorkout("lunge /reps 10");
+
+        String invalidArgumentSupplied = "t5";
+
+        assertThrows(NumberFormatException.class,
+            () -> wl.deleteWorkout(invalidArgumentSupplied));
+
     }
 }
