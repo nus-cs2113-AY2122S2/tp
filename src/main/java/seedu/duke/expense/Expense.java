@@ -25,7 +25,7 @@ public class Expense {
 
     @Override
     public String toString() {
-            return date + "|" + amount + "|" + category + "|" + remark;
-        }
+        return date + "|" + amount + "|" + category + "|" + remark;
+    }
 
 }

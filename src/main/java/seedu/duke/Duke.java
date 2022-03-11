@@ -20,6 +20,7 @@ public class Duke {
     public static boolean isContacts(String userInput) {
         return userInput.equals("goto m/Contacts_Manager");
     }
+
     public static boolean isExpense(String userInput) {
         return userInput.equals("goto m/Expense_Tracker");
     }

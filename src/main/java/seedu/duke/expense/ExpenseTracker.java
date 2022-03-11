@@ -44,7 +44,7 @@ public class ExpenseTracker {
         Expense.setNoOfItems(Expense.getNoOfItems() + 1);
     }
 
-    public static void expenseRunner (TextUi ui) {
+    public static void expenseRunner(TextUi ui) {
         expenseWelcome();
         String userInput;
         while (true) {
@@ -55,14 +55,15 @@ public class ExpenseTracker {
                 listExpenses();
             } else if (userInput.startsWith("rm")) {
                 int index = parseDeleteExpense(userInput);
-                deleteExpense(expenseList, index );
-              //format of add d/DATE a/AMOUNT c/CATEGORY r/REMARK
+                deleteExpense(expenseList, index);
             } else if (userInput.startsWith("add")) {
                 //return some array here, split the user input into date, amount, category, remark
                 String[] rawInput = userInput.split(" ", 2);
                 String[] newExpense = parseNewExpense(userInput);
                 Expense e = new Expense(newExpense[0], newExpense[1], newExpense[2], newExpense[3]);
                 addExpense(expenseList, e);
+            } else {
+                continue;
             }
         }
     }
