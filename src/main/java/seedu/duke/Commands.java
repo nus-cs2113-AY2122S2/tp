@@ -28,22 +28,19 @@ public class Commands {
 
     public static void listGoods(ArrayList<Goods> userGoods) {
         int numberOfUserGoods = userGoods.size();
-        int maxIndexOfUserGoods = numberOfUserGoods - 1;
-        int counter = 0;
         if (userGoods.isEmpty()) {
             System.out.println("There is no inventory in the warehouse.");
             return;
         }
         System.out.println("List of inventory items: ");
-        while (counter <= maxIndexOfUserGoods) {
-            String nameOfGood = userGoods.get(counter).getName();
-            System.out.println((counter+1) + ". " + nameOfGood);
+        int counter = 0;
+        for (Goods good : userGoods) {
+            System.out.println((counter+1) + ". " + good.getName());
             counter++;
         }
-        System.out.println("There " + checkPlural(numberOfUserGoods) + numberOfUserGoods
-                + " inventory in the warehouse.");
     }
 
+    /*Function to print grammar for statements to print*/
     public static String checkPlural(int numberOfGoods) {
         if (numberOfGoods <= 1) {
             return "is ";
