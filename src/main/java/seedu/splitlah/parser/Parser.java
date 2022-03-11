@@ -302,7 +302,7 @@ public class Parser {
         case SessionListCommand.COMMAND_TEXT:
             return new SessionListCommand();
         case ActivityListCommand.COMMAND_TEXT:
-            return ActivityListCommand.prepare(remainingArgs);
+            // FALLTHROUGH
         case ActivityViewCommand.COMMAND_TEXT:
             // return Relevant command.prepare(remainingArgs);
             return new InvalidCommand("Command is currently not implemented, please try again later.");
