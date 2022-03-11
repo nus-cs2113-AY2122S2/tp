@@ -13,7 +13,7 @@
 
 ## Features 
 
-> Heads up! Your inputs cannot contain the pipe character `|`!
+> **Heads up!** Your inputs cannot contain the pipe character `|`!
 
 ### Create a Workout: `workout /new`
 Creates a new workout.
