@@ -28,6 +28,11 @@ public class TextUI {
         out.println(message);
     }
 
+    public void printlnMessageWithDivider(String message) {
+        out.println(message);
+        printDivider();
+    }
+
     public String readNextLine() {
         return in.nextLine();
     }
