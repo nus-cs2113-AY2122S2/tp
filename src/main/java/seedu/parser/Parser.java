@@ -1,9 +1,6 @@
-package parser;
+package seedu.parser;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
-import seedu.command.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

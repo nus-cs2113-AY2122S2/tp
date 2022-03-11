@@ -1,7 +1,9 @@
-package parser;
+package seedu.duke.parser;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.parser.IncompleteCommandException;
+import seedu.parser.Parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;

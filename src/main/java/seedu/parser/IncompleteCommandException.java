@@ -1,4 +1,4 @@
-package parser;
+package seedu.parser;
 
 /**
  * Signal that given data does not include necessary arguments

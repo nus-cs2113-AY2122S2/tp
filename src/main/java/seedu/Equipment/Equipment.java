@@ -1,4 +1,4 @@
-package seedu.Equipment;
+package seedu.equipment;
 
 public class Equipment {
     private String itemName;
