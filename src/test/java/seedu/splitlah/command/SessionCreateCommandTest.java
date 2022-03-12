@@ -34,6 +34,11 @@ class SessionCreateCommandTest {
         command.run(manager);
         assertEquals(2, manager.getProfile().getSessionList().size());
     }
+
+    /**
+     * Checks if a session is created when a session with the same name exists.
+     */
+    @Test
     public void run_hasSessionDuplicate_sessionListSizeRemainsTwo() {
         String userInput = "session /create /n Class outing /d 2022-02-15 /pl Mallory Eves";
         Command command = SessionCreateCommand.prepare(userInput);
