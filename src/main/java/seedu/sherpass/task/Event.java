@@ -1,4 +1,4 @@
-package seedu.sherpass.task;
+/*package seedu.sherpass.task;
 
 public class Event extends Task {
     protected String at;
@@ -10,7 +10,7 @@ public class Event extends Task {
      * @param description Task Description.
      * @param at          Task Date.
      */
-    public Event(String description, String at) {
+ /*   public Event(String description, String at) {
         super(description);
         this.at = at;
     }
@@ -20,10 +20,10 @@ public class Event extends Task {
      *
      * @return Task date.
      */
-    @Override
-    public String getDate() {
-        return at;
-    }
+   // @Override
+   // public String getDate() {
+   //     return at;
+   // }
 
 
     /**
@@ -31,17 +31,17 @@ public class Event extends Task {
      *
      * @return "E" for event.
      */
-    @Override
-    public String getType() {
-        return "E";
-    }
+   // @Override
+   // public String getType() {
+   //     return "E";
+   // }
 
     /**
      * Overrides existing task date with new date input.
      *
      * @param date New task date input.
      */
-    @Override
+ /*   @Override
     public void resetInput(String date) {
         at = date;
     }
@@ -53,8 +53,9 @@ public class Event extends Task {
      *
      * @return Task content.
      */
-    @Override
+/*    @Override
     public String toString() {
         return "[E] " + super.toString() + " (at: " + at + ")";
     }
 }
+*/

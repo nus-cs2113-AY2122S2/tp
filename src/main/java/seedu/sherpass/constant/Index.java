@@ -4,7 +4,7 @@ public class Index {
     public static final int SAVE_TASK_MARK_STATUS = 0;
     public static final int SAVE_TASK_DESCRIPTION_INDEX = 1;
     public static final int SAVE_TASK_BY_DATE_INDEX = 2;
-    public static final int SAVE_TASK_DO_DATE_INDEX = 3;
+    public static final int SAVE_TASK_REMIND_DATE_INDEX = 3;
     public static final int DELETE_INDEX = 1;
     public static final int OPTIONS_INDEX = 0;
     public static final int MARK_INDEX = 1;

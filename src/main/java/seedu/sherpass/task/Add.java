@@ -1,6 +1,6 @@
 package seedu.sherpass.task;
 
-public class Todo extends Task {
+public class Add extends Task {
 
     /**
      * Creates a constructor for the 'todo' task.
@@ -8,20 +8,19 @@ public class Todo extends Task {
      *
      * @param description Description of the todo.
      */
-    public Todo(String description) {
-        super(description);
+    public Add(String description, String byDate, String remindDate) {
+        super(description, byDate, remindDate);
     }
-
 
     /**
      * Returns the task type.
      *
      * @return "T" for todo.
      */
-    @Override
-    public String getType() {
-        return "T";
-    }
+ //   @Override
+ //   public String getType() {
+ //       return "T";
+ //   }
 
 
     /**
@@ -31,8 +30,8 @@ public class Todo extends Task {
      *
      * @return Task content.
      */
-    @Override
-    public String toString() {
-        return "[T] " + super.toString();
-    }
+  //  @Override
+  //  public String toString() {
+   //     return "[T] " + super.toString();
+   // }
 }

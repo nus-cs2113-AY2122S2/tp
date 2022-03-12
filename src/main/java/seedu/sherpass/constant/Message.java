@@ -1,24 +1,23 @@
 package seedu.sherpass.constant;
 
 public class Message {
+    public static final String EMPTY_STRING = "";
     public static final String WELCOME_MESSAGE_ONE = "Welcome to\n";
     public static final String WELCOME_MESSAGE_TWO = "How can I help you today?";
     public static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon! :)";
 
     private static final String HELP_MESSAGE = "For more information, please enter the 'help' command.";
     public static final String HELP_MESSAGE_SPECIFIC_COMMAND = "\n\nFor more information on "
-            + "the command you wish to execute,\nenter 'help <command>' e.g. help todo";
+            + "the command you wish to execute,\nenter 'help <command>' e.g. help add";
     public static final String HELP_MESSAGE_QUICK_START_COMMAND = "Command input quick start guide:\n"
             + "1) List: list\n"
             + "2) Mark: mark <list_index>\n"
             + "3) Unmark: unmark <list_index>\n"
-            + "4) Todo: todo <task_description>\n"
-            + "5) Deadline: deadline <task_description> /by <task_date>\n"
-            + "6) Event: event <task_description> /at <task_date>\n"
-            + "7) Delete: delete <list_index>\n"
-            + "8) Find: find <keyword>\n"
-            + "9) Clear: clear\n"
-            + "9) Bye: bye";
+            + "4) Add: add <task_description> /by <task_date> /remind <remind_date>\n"
+            + "5) Delete: delete <list_index>\n"
+            + "6) Find: find <keyword>\n"
+            + "7) Clear: clear\n"
+            + "8) Bye: bye";
 
     public static final String ERROR_INVALID_INPUT_MESSAGE = "Please key in an appropriate command.\n"
             + HELP_MESSAGE;

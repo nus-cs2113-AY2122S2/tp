@@ -1,4 +1,4 @@
-package seedu.sherpass.task;
+/*package seedu.sherpass.task;
 
 public class Deadline extends Task {
     protected String by;
@@ -10,7 +10,7 @@ public class Deadline extends Task {
      * @param description Task Description.
      * @param by          Task Date.
      */
-    public Deadline(String description, String by) {
+ /*   public Deadline(String description, String by) {
         super(description);
         this.by = by;
     }
@@ -20,27 +20,27 @@ public class Deadline extends Task {
      *
      * @return Task date.
      */
-    @Override
-    public String getDate() {
-        return by;
-    }
+  //  @Override
+  //  public String getDate() {
+  //      return by;
+ //   }
 
     /**
      * Returns string version of task type.
      *
      * @return "D" for deadline.
      */
-    @Override
-    public String getType() {
-        return "D";
-    }
+   // @Override
+   // public String getType() {
+   //     return "D";
+   // }
 
     /**
      * Overrides existing task date with new date input.
      *
      * @param date Task Date.
      */
-    @Override
+/*    @Override
     public void resetInput(String date) {
         by = date;
     }
@@ -53,8 +53,9 @@ public class Deadline extends Task {
      *
      * @return Task content.
      */
-    @Override
+ /*   @Override
     public String toString() {
         return "[D] " + super.toString() + " (by: " + by + ")";
     }
 }
+*/
