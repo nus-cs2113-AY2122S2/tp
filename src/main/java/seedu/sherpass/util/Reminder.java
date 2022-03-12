@@ -4,6 +4,7 @@ import seedu.sherpass.constant.DateAndTimeFormat;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -41,17 +42,19 @@ public class Reminder {
      */
     public void showDailyTask() {
         ArrayList<Task> filteredDailyTasks = (ArrayList<Task>) tasks.stream()
-                .filter((t) -> t.getDate().equals(currentDate))
-                .sorted(Comparator.comparing(Task::getDate))
+                .filter((t) -> isEqualDate(t.getDate(), currentDate))
+                .filter((t) -> !t.isDone())
                 .collect(toList());
 
-        if (filteredDailyTasks.size() != 0) {
-            System.out.println("Tasks to do today:");
+        if (filteredDailyTasks.isEmpty()) {
+            ui.showToUser("Your schedule is empty today.");
+        } else {
+            System.out.println("Schedule for today:");
             for (Task task : filteredDailyTasks) {
                 System.out.println(task.toString());
             }
-            ui.showLine();
         }
+        ui.showLine();
     }
 
     /**
@@ -63,16 +66,37 @@ public class Reminder {
         LocalDate nextWeekDate = currentDate.plusDays(7);
 
         ArrayList<Task> filteredThisWeekTasks = (ArrayList<Task>) tasks.stream()
-                .filter((t) -> t.getDate().compareTo(nextWeekDate.format(DateAndTimeFormat.noTimeFormat)) < 0)
+                .filter((t) -> isBeforeDate(t.getDate(), nextWeekDate))
+                .filter((t) -> !t.isDone())
                 .sorted(Comparator.comparing(Task::getDate))
                 .collect(toList());
 
-        if (filteredThisWeekTasks.size() != 0) {
+        if (filteredThisWeekTasks.isEmpty()) {
+            ui.showToUser("You do not have any pending task for the week.");
+        } else {
             System.out.println("Tasks to be done within the week:");
             for (Task task : filteredThisWeekTasks) {
                 System.out.println(task.toString());
             }
-            ui.showLine();
+        }
+        ui.showLine();
+    }
+
+    private boolean isEqualDate(String currentDate, LocalDate compareDate) {
+        if (currentDate == " ") {
+            return false;
+        } else {
+            LocalDate date = LocalDate.parse(currentDate, DateAndTimeFormat.noTimeFormat);
+            return date.isEqual(compareDate);
+        }
+    }
+
+    private boolean isBeforeDate(String currentDate, LocalDate compareDate) {
+        if (currentDate == " ") {
+            return false;
+        } else {
+            LocalDate date = LocalDate.parse(currentDate, DateAndTimeFormat.noTimeFormat);
+            return date.isBefore(compareDate);
         }
     }
 }
