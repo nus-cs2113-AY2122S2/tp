@@ -16,12 +16,12 @@ public class Patient extends Person {
     @Override
     public String toString() {
         return "Patient{"
-                + "NRIC='" + nric + '\''
-                + ", Full Name='" + fullName + '\''
-                + ", Age=" + age
-                + ", Gender=" + gender
-                + ", Address='" + address
-                + '\'' + ", DOB='" + dob + '\''
-                + ", DateOfAdmission='" + dateAdmission + '\'' + '}';
+                + "NRIC='" + getNric() + '\''
+                + ", Full Name='" + getFullName() + '\''
+                + ", Age=" + getAge()
+                + ", Gender=" + getGender()
+                + ", Address='" + getAddress()
+                + '\'' + ", DOB='" + getDob() + '\''
+                + ", DateOfAdmission='" + getDateAdmission() + '\'' + '}';
     }
 }
