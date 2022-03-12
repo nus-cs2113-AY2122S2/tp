@@ -7,6 +7,7 @@ import seedu.sherpass.command.StudyCommand;
 public class Timer extends Thread {
 
     private volatile boolean timerPaused = false;
+    private boolean forcedStop = false;
     private boolean hasTimeLeft = false;
     private static Ui ui;
     protected int timeLeft;
@@ -22,9 +23,10 @@ public class Timer extends Thread {
 
     @Override
     public void run() {
+        StudyCommand.isTimerRunning = true;
         while (hasTimeLeft) {
             if (timeLeft % TIME_INTERVAL == NO_TIME_LEFT) {
-                System.out.println(timeLeft + " seconds left.");
+                ui.showToUser(timeLeft + " seconds left.");
             }
             try {
                 Thread.sleep(1000);
@@ -42,8 +44,9 @@ public class Timer extends Thread {
             } catch (InterruptedException e) {
             }
         }
-        if (!hasTimeLeft) {
-            System.out.println("Time is up!");
+        if (!hasTimeLeft && !forcedStop) {
+            StudyCommand.isTimerRunning = false;
+            ui.showToUser("Time is up!");
         }
         this.interrupt();
     }
@@ -72,10 +75,15 @@ public class Timer extends Thread {
     }
 
     public void stopTimer() {
-        ui.showToUser("Alright, I've stopped the timer.");
-        StudyCommand.isTimerRunning = false;
-        timeLeft = NO_TIME_LEFT;
-        hasTimeLeft = false;
-        this.interrupt();
+        if (StudyCommand.isTimerRunning) {
+            ui.showToUser("Alright, I've stopped the timer.");
+            StudyCommand.isTimerRunning = false;
+            forcedStop = true;
+            timeLeft = NO_TIME_LEFT;
+            hasTimeLeft = false;
+            this.interrupt();
+        } else {
+            ui.showToUser("The timer has already stopped.");
+        }
     }
 }

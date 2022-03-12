@@ -31,27 +31,7 @@ import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskNoTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskWithTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.withTimeFormat;
 
-import static seedu.sherpass.constant.Index.CUSTOM_TIMER_INDEX;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_INDEX;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ONE;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_THREE;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
-import static seedu.sherpass.constant.Index.FIND_BY_TASK_CONTENT_INDEX;
-import static seedu.sherpass.constant.Index.FIND_BY_TASK_DATE_INDEX;
-import static seedu.sherpass.constant.Index.FIND_BY_TASK_DESCRIPTION_NO_DATE_INDEX;
-import static seedu.sherpass.constant.Index.FIND_BY_TASK_DESCRIPTION_WITH_DATE_INDEX;
-import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
-import static seedu.sherpass.constant.Index.MARK_INDEX;
-import static seedu.sherpass.constant.Index.OPTIONS_INDEX;
-import static seedu.sherpass.constant.Index.SAVE_TASK_BY_DATE_INDEX;
-import static seedu.sherpass.constant.Index.SAVE_TASK_DESCRIPTION_INDEX;
-import static seedu.sherpass.constant.Index.SAVE_TASK_DO_DATE_INDEX;
-import static seedu.sherpass.constant.Index.SAVE_TASK_MARK_STATUS;
-import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
-import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
-import static seedu.sherpass.constant.Index.TASK_DATE_INDEX;
-import static seedu.sherpass.constant.Index.TASK_DESCRIPTION_INDEX;
-import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
+import static seedu.sherpass.constant.Index.*;
 import static seedu.sherpass.constant.Message.DATE_FORMAT_WITHOUT_TIME;
 import static seedu.sherpass.constant.Message.DATE_FORMAT_WITH_TIME;
 import static seedu.sherpass.constant.Message.ERROR_DEADLINE_MISSING_COMMAND_MESSAGE;
@@ -317,6 +297,8 @@ public class Parser {
 
     private static int selectDefaultTimer(String defaultTimerChoice, Ui ui) {
         switch (defaultTimerChoice) {
+        case "0":
+            return DEFAULT_TIMER_ZERO;
         case "1":
             return DEFAULT_TIMER_ONE;
         case "2":
