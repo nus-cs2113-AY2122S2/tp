@@ -1,6 +1,8 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.parser.Parser;
 
 /**
  * Represents a command which deletes an Activity object from a Session object.
@@ -8,7 +10,8 @@ import seedu.splitlah.data.Manager;
 public class ActivityDeleteCommand extends Command {
 
     public static final String COMMAND_TEXT = "activity /delete";
-    private static final String COMMAND_FORMAT = "Syntax: activity /delete /sid <SESSIONID> /aid <ACTIVITYID>";
+
+    private static final String COMMAND_FORMAT = "Syntax: activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]";
 
     private int sessionId;
     private int activityId;
@@ -22,6 +25,16 @@ public class ActivityDeleteCommand extends Command {
     public ActivityDeleteCommand(int sessionId, int activityId) {
         this.sessionId = sessionId;
         this.activityId = activityId;
+    }
+
+    public static Command prepare(String commandArgs) {
+        try {
+            int sessionId = Parser.parseSessionId(commandArgs);
+            int activityId = Parser.parseActivityId(commandArgs);
+            return new ActivityDeleteCommand(sessionId, activityId);
+        } catch (InvalidFormatException e) {
+            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT);
+        }
     }
 
     @Override
