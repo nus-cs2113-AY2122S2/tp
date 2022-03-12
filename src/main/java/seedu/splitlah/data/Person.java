@@ -28,9 +28,9 @@ public class Person {
     /**
      * Constructs an ActivityCost object and adds it to the list of ActivityCosts.
      *
-     * @param activityId An inte
-     * @param costPaid   the cost of the activity paid by the payer.
-     * @param costOwed   the money owed by an individual.
+     * @param activityId An integer that uniquely identifies an activity.
+     * @param costPaid   A double that represents the cost paid by a Person object.
+     * @param costOwed   A double that represents the cost owed by a Person object.
      * @throws InvalidDataException if the activityCost cannot be created from the given parameters.
      */
     public void addActivityCost(int activityId, double costPaid, double costOwed) throws InvalidDataException {
