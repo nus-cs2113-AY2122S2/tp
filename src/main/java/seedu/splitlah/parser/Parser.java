@@ -15,6 +15,7 @@ import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -42,6 +43,7 @@ public class Parser {
     private static final String DELIMITER_INDICATOR = "/";
     private static final String NEXT_DELIMITER_INDICATOR = " /";
     private static final String REGEX_WHITESPACES_DELIMITER = "\\s+";
+    private static final String LOCALDATE_TODAY_INDICATOR = "today";
     private static final int INVALID_INDEX_INDICATOR = -1;
     private static final int COMMAND_WITH_ARGS_TOKEN_COUNT = 3;
     private static final int DELIMITERED_COMMAND_MIN_TOKEN_COUNT = 2;
@@ -206,12 +208,16 @@ public class Parser {
         if (!hasDelimiter(commandArgs, DATE_DELIMITER)) {
             throw new InvalidFormatException(getMissingDelimiterErrorMessage(DATE_DELIMITER));
         }
+
+        String argument = getArgumentFromDelimiter(commandArgs, DATE_DELIMITER);
+        if (argument.equalsIgnoreCase(LOCALDATE_TODAY_INDICATOR)) {
+            return LocalDate.now();
+        }
         
         try {
-            String argument = getArgumentFromDelimiter(commandArgs, DATE_DELIMITER);
-            return LocalDate.parse(argument);
-        } catch (InvalidFormatException | DateTimeParseException exception) {
-            return LocalDate.now();
+            return LocalDate.parse(argument, DATE_FORMAT);
+        } catch (DateTimeParseException exception) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_INVALID_DATE_FORMAT);
         }
     }
 
