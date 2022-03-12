@@ -1,6 +1,6 @@
 # User Guide
 
-#Contents
+## Contents
 
 * [User Guide](#user-guide)
 * [Contents](#contents)
