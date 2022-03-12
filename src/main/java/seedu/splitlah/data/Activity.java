@@ -127,13 +127,18 @@ public class Activity {
      */
     private String convertInvolvedListToString() throws InvalidDataException {
         StringBuilder sb = new StringBuilder();
-        for (int i = 1; i <= involvedPersonList.size(); i++) {
+        for (int i = 1; i < involvedPersonList.size(); i++) {
             Person person = involvedPersonList.get(i - ZERO_INDEXING_OFFSET);
             String personName = person.getName();
             Double costOwed = person.getActivityCostOwed(activityId);
             String nextLineToAppend = formString(i, personName, costOwed);
-            sb.append(nextLineToAppend);
+            sb.append(nextLineToAppend + "\n");
         }
+        Person person = involvedPersonList.get(involvedPersonList.size() - ZERO_INDEXING_OFFSET);
+        String personName = person.getName();
+        Double costOwed = person.getActivityCostOwed(activityId);
+        String nextLineToAppend = formString(involvedPersonList.size(), personName, costOwed);
+        sb.append(nextLineToAppend);
         return sb.toString();
     }
 
@@ -148,7 +153,7 @@ public class Activity {
      * @return A String object with the correct format representing involved persons and costs.
      */
     private String formString(int index, String personName, Double costOwed) {
-        return "\n " + index + ". " + personName + ", $" + String.format("%.2f", costOwed);
+        return " " + index + ". " + personName + ", $" + String.format("%.2f", costOwed);
     }
 
     /**
@@ -166,7 +171,7 @@ public class Activity {
                 + "Id:    " + activityId + '\n'
                 + "Payer: " + personPaid.getName() + '\n'
                 + "Cost:  $" + String.format("%.2f", totalCost) + '\n'
-                + "Involved: "
+                + "Involved: \n"
                 + getInvolvedListString();
     }
 
