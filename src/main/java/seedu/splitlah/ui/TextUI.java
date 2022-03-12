@@ -24,6 +24,10 @@ public class TextUI {
         out = new PrintStream(System.out);
     }
 
+    public void printMessage(String message) {
+        out.print(message);
+    }
+
     public void printlnMessage(String message) {
         out.println(message);
     }
@@ -34,7 +38,7 @@ public class TextUI {
     }
 
     public String readNextLine() {
-        printlnMessage(Message.PROMPT_TEXTUI_AWAITING_INPUT);
+        printMessage(Message.PROMPT_TEXTUI_AWAITING_INPUT);
         return in.nextLine();
     }
 
