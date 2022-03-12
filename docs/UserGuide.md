@@ -8,8 +8,8 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
 
 - [Quick Start](#Quick-Start)
 - [Features](#Features)
-   - [print all projects](#print-all-projects)
-   - [exit](#exit)
+   - [print all projects](#print-all-projects-viewproject)
+   - [exit](#exit-exit)
 - [FAQ](#FAQ)
 - [Command Summary](#Command-Summary)
 
