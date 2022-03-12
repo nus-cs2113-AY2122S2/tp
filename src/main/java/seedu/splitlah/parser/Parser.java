@@ -309,8 +309,7 @@ public class Parser {
         case ActivityCreateCommand.COMMAND_TEXT:
             return ActivityCreateCommand.prepare(remainingArgs);
         case ActivityDeleteCommand.COMMAND_TEXT:
-            // TEMPORARY INVALID COMMAND UNTIL COMMAND DEVELOPED
-            return new InvalidCommand("activity /delete is not yet developed, please try again later.");
+            return ActivityDeleteCommand.prepare(remainingArgs);
         case ActivityListCommand.COMMAND_TEXT:
             return ActivityListCommand.prepare(remainingArgs);
         case ActivityViewCommand.COMMAND_TEXT:
