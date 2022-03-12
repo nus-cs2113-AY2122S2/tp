@@ -82,6 +82,18 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 > **Notes:**
 >- The `[ACTIVITY_NAME]` should be unique across all activities.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
+
+Examples of usage:
+1. Adds a new activity in a session with session identifier 1, named Class Lunch, where Alice paid for both
+   Bob and herself with a total cost of $10.
+    1. `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /c 10`
+2. Adds a new activity in a session with session identifier 1, named Class Lunch, where Alice paid for both
+   Bob and herself. Alice's meal costs $3.50 while Bob's meal costs $7.
+    1. `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7`
+
+<br>[INSERT SCREEN SHOT]
+<br>
+<br>
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
