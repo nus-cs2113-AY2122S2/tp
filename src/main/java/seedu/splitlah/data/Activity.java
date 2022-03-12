@@ -161,11 +161,11 @@ public class Activity {
      */
     @Override
     public String toString() {
-        return "Activity --"
-                + "Name: " + activityName + '\n'
-                + "Id:   " + activityId + '\n'
+        return "Activity Id #" + activityId + "--\n"
+                + "Name:  " + activityName + '\n'
+                + "Id:    " + activityId + '\n'
                 + "Payer: " + personPaid.getName() + '\n'
-                + "Cost: " + totalCost + '\n'
+                + "Cost:  $" + String.format("%.2f", totalCost) + '\n'
                 + "Involved: \n"
                 + getInvolvedListString();
     }
