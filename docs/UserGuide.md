@@ -18,15 +18,15 @@ activities they participated in, for a particular session, via a Command Line In
 {Give detailed description of each feature}
 
 ### Creating a session: `session /create`
->Creates a new session to be managed by SplitLah. <br> 
->Sessions are a way for the user to manage their gatherings that happen across the day.
+> Creates a new session to be managed by SplitLah. <br> 
+> Sessions are a way for the user to manage their gatherings that happen across the day.
 
 Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ...]`
 
 * `[SESSION_NAME]` refers to the name of the session.
   * The session name is **case-insensitive**.
 * `[SESSION_DATE]` refers to the date of the session.
-  * The format of the date can be in `DD-MM-YYYY` or `YYYY-MM-DD`.
+  * The format of the date must be in `DD-MM-YYYY`.
 * `[NAME1 NAME2 ...]` refers to a list of persons involved in the session.
   * Each individual name is **case-insensitive**.
 
@@ -35,15 +35,15 @@ Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ..
 >- Each name in `[NAME1 NAME2 ...]` for the session should be unique.
 
 Example of usage:
-1. Adds a new session named Class Outing with Alice and Bob involved on 2022-03-15.
-   1. `session /create /n Class Outing /d 2022-03-15 /pl Alice Bob`
+1. Adds a new session named Class Outing with Alice and Bob involved on 15-03-2022.
+   - `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob`
    
-<br>[INSERT SCREEN SHOT]
+![Session create command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand.png)
 <br>
 <br>
 ### Deleting a session: `session /delete`
->Deletes an existing session that is managed by SplitLah. <br>
->Sessions are a way for the user to manage their gatherings that happen across the day.
+> Deletes an existing session that is managed by SplitLah. <br>
+> Sessions are a way for the user to manage their gatherings that happen across the day.
 
 Format: `session /delete /sid [SESSION_ID]`
 
@@ -52,11 +52,21 @@ Format: `session /delete /sid [SESSION_ID]`
 
 Example of usage:
 1. Remove an existing session that was created with session unique identifier of 1.
-   1. `session /delete /sid 1`
+   - `session /delete /sid 1`
 
-<br>[INSERT SCREEN SHOT]
+![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
 <br>
 <br>
+### Listing all sessions: `session /list`
+> List all sessions that were previously created.
+
+Format: `session /list`
+
+Example of usage:
+![Session list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionListCommand.png)
+<br>
+<br>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
