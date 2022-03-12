@@ -54,7 +54,7 @@ Example of usage:
 1. Remove an existing session that was created with a session unique identifier of 1.
    - `session /delete /sid 1`
 > **Notes:**
->- The session with a unique identifier of `[SESSION_ID]` has to exist before the activity can be removed.
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
 
 ![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
 <br>
@@ -126,7 +126,7 @@ Example of usage:
 1. Get a session summary for an existing session with a session unique identifier of 1.
     1. `session /summary /sid 1`
 > **Notes:**
->- The session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
 
 <br>[INSERT SCREEN SHOT]
 <br>
