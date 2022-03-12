@@ -101,7 +101,7 @@ public class Commands {
             System.out.println("Please remove goods in this format:\n"
                     + "remove id/id_of_good_as_number q/quantity_of_good_as_number");
         } catch (ItemDoesNotExistException e2) {
-            System.out.println("The goods you are trying to remove are ot on the current list. "
+            System.out.println("The goods you are trying to remove are not on the current list. "
                     + "Please try another id or add the goods first.");
         } catch (LargeQuantityException e3) {
             System.out.println("The quantity input is larger than the current quantity of the goods. "
