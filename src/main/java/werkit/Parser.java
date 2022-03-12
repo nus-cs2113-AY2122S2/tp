@@ -15,6 +15,8 @@ import java.io.IOException;
 import static commands.WorkoutCommand.CREATE_ACTION_KEYWORD;
 import static commands.WorkoutCommand.LIST_ACTION_KEYWORD;
 import static commands.WorkoutCommand.DELETE_ACTION_KEYWORD;
+import static commands.WorkoutCommand.UPDATE_ACTION_KEYWORD;
+
 
 /**
  * This class will parse the input that the user enters into the WerkIt! application into data
@@ -102,6 +104,13 @@ public class Parser {
             if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
                 throw new InvalidCommandException(className,
                         InvalidCommandException.INVALID_DELETE_WORKOUT_COMMAND_ERROR_MSG);
+            }
+            arguments = userInput.split(" ", 3)[2];
+            break;
+        case UPDATE_ACTION_KEYWORD:
+            if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_UPDATE_WORKOUT_COMMAND_ERROR_MSG);
             }
             arguments = userInput.split(" ", 3)[2];
             break;
