@@ -13,7 +13,7 @@ activities they participated in, for a particular session, via a Command Line In
 3. Copy the file to the folder you wish to use as a home folder for SplitLah.
 4. Via command line, navigate to the home folder and run it with `java -jar SplitLah.jar`.
 5. Type in a command and press Enter to execute it. A few commands you can try are:
-    - `session /create /n Apple /d 11-03-2022 /pl Warren Ivan Roy` : Creates a Session named "Apple" occurring on 
+    - `session /create /n Outing /d 11-03-2022 /pl Warren Ivan Roy` : Creates a Session named "Outing" occurring on 
    11/03/2022 (DD-MM-YYYY) with Warren, Ivan, and Roy as members.
     - `session /list` : Lists all Sessions.
     - `activity /create /sid 1 /n Lunch /p Warren /i Warren Roy Ivan /c 7.5` : Creates an Activity named "Lunch" and
