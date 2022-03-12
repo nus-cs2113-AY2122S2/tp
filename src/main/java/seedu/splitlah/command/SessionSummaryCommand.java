@@ -41,20 +41,43 @@ public class SessionSummaryCommand extends Command {
     /**
      * Default constructor, sets sessionId as specified by the provided value.
      *
-     * @param sessionId The session identifier number that uniquely identifies a session.
+     * @param sessionId An integer that uniquely identifies a session.
      */
     public SessionSummaryCommand(int sessionId) {
         this.sessionId = sessionId;
     }
 
+    /**
+     * Checks whether the difference between two double values is negligible to minimise floating point errors.
+     * 
+     * @param cost1 A double that represents a monetary value to be compared.
+     * @param cost2 Another double that represents a monetary value to be compared.
+     * @return true if the difference is negligible,
+     *         false otherwise.
+     */
     private static boolean isDifferenceSmall(double cost1, double cost2) {
         return Math.abs(cost1 - cost2) <= SMALL_DIFFERENCE_LIMIT;
     }
-    
+
+    /**
+     * Checks whether a double value is negligible in monetary value.
+     * 
+     * @param cost A double that represents a monetary value to be checked for.
+     * @return true if the value is negligible,
+     *         false otherwise.
+     */
     private static boolean isValueSmall(double cost) {
         return Math.abs(cost) <= SMALL_DIFFERENCE_LIMIT;
     }
 
+    /**
+     * Returns an ArrayList object of PersonCostPair objects which represent the total cost borne by each
+     * Person object in the ArrayList object of Person object provided in the parameter.
+     * 
+     * @param personList An ArrayList object of Person objects representing a list of participants in a Session object.
+     * @return An ArrayList object of PersonCostPair objects each corresponding to a Person object in the
+     *         ArrayList object provided in the parameter.
+     */
     private static ArrayList<PersonCostPair> getPersonCostPairList(ArrayList<Person> personList) {
         ArrayList<PersonCostPair> personCostPairList = new ArrayList<>();
         for (Person person : personList) {
@@ -66,6 +89,15 @@ public class SessionSummaryCommand extends Command {
         return personCostPairList;
     }
 
+    /**
+     * Checks if an ArrayList object of PersonCostPair objects has a negligible total sum, representing that there
+     * is a matching owing sum of money for every owed sum of money in the Session object.
+     * 
+     * @param personCostPairList An ArrayList object of PersonCostPair objects that each represents the total cost borne
+     *                           by a Person object.
+     * @return true if the provided ArrayList object of PersonCostPair objects has a negligible total sum,
+     *         false otherwise.
+     */
     private static boolean isPersonCostPairListValid(ArrayList<PersonCostPair> personCostPairList) {
         double total = 0;
         for (PersonCostPair personCostPair : personCostPairList) {
@@ -73,12 +105,24 @@ public class SessionSummaryCommand extends Command {
         }
         return isValueSmall(total);
     }
-    
+
+    /**
+     * Returns a String object representing a transaction that should happen between two Person objects as described by
+     * the PersonCostPair objects provided as parameters, in order settle the debt/owed amount of at least one person
+     * out of the two persons described by the parameters.
+     * 
+     * @param payer    A PersonCostPair object that describes the total cost borne by a Person object representing a
+     *                 person that has to pay.
+     * @param receiver A PersonCostPair object that describes the total cost borne by a Person object representing a
+     *                 person that has to be paid.
+     * @return A String object representing a transaction between two Person objects if there are debts to settle,
+     *         an empty String object if both parties have a negligible debt/to-be-paid amount.
+     */
     private String processTransaction(PersonCostPair payer, PersonCostPair receiver) {
         double payerCost = Math.abs(payer.getCost());
         double receiverAmount = Math.abs(receiver.getCost());
         
-        // Both parties have near 0 cost/debt
+        // Both parties have negligible debt/cost
         if (isValueSmall(payerCost) && isValueSmall(receiverAmount)) {
             payer.setProcessed(true);
             receiver.setProcessed(true);
@@ -108,6 +152,16 @@ public class SessionSummaryCommand extends Command {
                 + " $" + String.format("%.2f", receiverAmount);
     }
 
+    /**
+     * Processes the ArrayList object of PersonCostPair objects and returns a String object that represents a
+     * summary of all transactions that has to be made in order for the entire session to reach a settlement
+     * where no debts are owed or uncollected.
+     * 
+     * @param personCostPairList An ArrayList object of PersonCostPair objects that each represents the total cost borne
+     *                           by a Person object.
+     * @param session            A Session object of which the transactions are processed and summarised for.
+     * @return A String object representing the summary of all transactions to be made for the session.
+     */
     private String processAllTransactions(ArrayList<PersonCostPair> personCostPairList, Session session) {
         String dateString = session.getDateCreated().format(dateFormat);
         StringBuilder sb = new StringBuilder(SUMMARY_HEADER_PREPEND);
@@ -148,6 +202,14 @@ public class SessionSummaryCommand extends Command {
         return sb.toString();
     }
 
+    /**
+     * Prepares user arguments for the creation of a SessionSummaryCommand object.
+     * 
+     * @param commandArgs A String object that represents the user's input arguments.
+     * @return A SessionSummaryCommand object if a valid integer representing a session's unique identifier is found
+     *         in the input arguments,
+     *         an InvalidCommand object otherwise.
+     */
     public static Command prepare(String commandArgs) {
         assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_EMPTY;
         try {
