@@ -26,7 +26,7 @@ Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ..
 * `[SESSION_NAME]` refers to the name of the session.
   * The session name is **case-insensitive**.
 * `[SESSION_DATE]` refers to the date of the session.
-  * The format of the date can be in `DD-MM-YYYY` or `YYYY-MM-DD`.
+  * The format of the date must be in `DD-MM-YYYY`.
 * `[NAME1 NAME2 ...]` refers to a list of persons involved in the session.
   * Each individual name is **case-insensitive**.
 
@@ -35,8 +35,8 @@ Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ..
 >- Each name in `[NAME1 NAME2 ...]` for the session should be unique.
 
 Example of usage:
-1. Adds a new session named Class Outing with Alice and Bob involved on 2022-03-15.
-   1. `session /create /n Class Outing /d 2022-03-15 /pl Alice Bob`
+1. Adds a new session named Class Outing with Alice and Bob involved on 15-03-2022.
+   1. `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob`
    
 <br>[INSERT SCREEN SHOT]
 <br>
