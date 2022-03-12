@@ -2,6 +2,7 @@ package seedu.splitlah.parser;
 
 import seedu.splitlah.command.Command;
 import seedu.splitlah.command.ActivityCreateCommand;
+import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.HelpCommand;
@@ -294,20 +295,22 @@ public class Parser {
             return new InvalidCommand(Message.ERROR_PARSER_INVALID_DELIMITERS);
         }
 
-        switch (commandType) {
+        switch (commandType.toLowerCase()) {
         case "":
             return new InvalidCommand(Message.ERROR_PARSER_EMPTY_COMMAND);
-        // TEMPORARY FALLTHROUGH FOR ALL COMMANDS UNTIL COMMANDS ARE PROPERLY SET UP
         case SessionCreateCommand.COMMAND_TEXT:
             return SessionCreateCommand.prepare(remainingArgs);
-        case SessionSummaryCommand.COMMAND_TEXT:
-            return SessionSummaryCommand.prepare(remainingArgs);
         case SessionDeleteCommand.COMMAND_TEXT:
             return SessionDeleteCommand.prepare(remainingArgs);
-        case ActivityCreateCommand.COMMAND_TEXT:
-            return ActivityCreateCommand.prepare(remainingArgs);
+        case SessionSummaryCommand.COMMAND_TEXT:
+            return SessionSummaryCommand.prepare(remainingArgs);
         case SessionListCommand.COMMAND_TEXT:
             return new SessionListCommand();
+        case ActivityCreateCommand.COMMAND_TEXT:
+            return ActivityCreateCommand.prepare(remainingArgs);
+        case ActivityDeleteCommand.COMMAND_TEXT:
+            // TEMPORARY INVALID COMMAND UNTIL COMMAND DEVELOPED
+            return new InvalidCommand("activity /delete is not yet developed, please try again later.");
         case ActivityListCommand.COMMAND_TEXT:
             return ActivityListCommand.prepare(remainingArgs);
         case ActivityViewCommand.COMMAND_TEXT:
