@@ -33,6 +33,12 @@ public class CsProjPlanner {
     }
 
     private static void welcomeDisplay() {
+        System.out.println("\n   ___________ ____               _    ____  __\n"
+                + "  / ____/ ___// __ \\_________    (_)  / __ \\/ /___ _____  ____  ___  _____\n"
+                + " / /    \\__ \\/ /_/ / ___/ __ \\  / /  / /_/ / / __ `/ __ \\/ __ \\/ _ \\/ ___/\n"
+                + "/ /___ ___/ / ____/ /  / /_/ / / /  / ____/ / /_/ / / / / / / /  __/ /\n"
+                + "\\____//____/_/   /_/   \\____/_/ /  /_/   /_/\\__,_/_/ /_/_/ /_/\\___/_/\n"
+                + "                           /___/");
         System.out.println("\nWelcome to CSProjPlanner\n");
         System.out.println("____________________________________________________________");
         System.out.println("What can I help you?");
