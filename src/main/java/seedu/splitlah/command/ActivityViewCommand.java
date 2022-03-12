@@ -1,6 +1,12 @@
 package seedu.splitlah.command;
 
+import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Session;
+import seedu.splitlah.exceptions.InvalidDataException;
+import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.parser.Parser;
+
 
 /**
  * Represents a command which displays the details of an Activity object specified by user input in a Session object.
@@ -28,6 +34,31 @@ public class ActivityViewCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
+        try {
+            Session sessionToBePrinted = manager.getProfile().getSession(sessionId);
+            Activity activityToBePrinted = sessionToBePrinted.getActivity(activityId);
+            
+            manager.getUi().printlnMessageWithDivider(activityToBePrinted.toString());
+        } catch (InvalidDataException e) {
+            manager.getUi().printlnMessage(e.getMessage());
+        }
+    }
 
+    /**
+     * Prepares user argument for activity view command.
+     *
+     * @param  commandArgs  A String object that represents the user's arguments.
+     * @return An ActivityViewCommand object if sessionId and activityId were found in user arguments,
+     *         an InvalidCommand object otherwise.
+     */
+    public static Command prepare(String commandArgs) {
+        try {
+            int sessionId = Parser.parseSessionId(commandArgs);
+            int activityId = Parser.parseActivityId(commandArgs);
+            return new ActivityViewCommand(sessionId, activityId);
+        } catch (InvalidFormatException e) {
+            String invalidCommandMessage = e.getMessage() + "\n" + COMMAND_FORMAT;
+            return new InvalidCommand(invalidCommandMessage);
+        }
     }
 }
