@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 public class PatientList {
 
-    ArrayList<Patient> patientList;
-
+    private ArrayList<Patient> patientList;
 
     public Patient getPatient(String nric) {
         for (Patient patient : patientList) {
@@ -30,5 +29,13 @@ public class PatientList {
     @Override
     public String toString() {
         return "aaa";
+    }
+
+    public int getSize() {
+        return patientList.size();
+    }
+
+    public void removePatient(int index) {
+        patientList.remove(index);
     }
 }
