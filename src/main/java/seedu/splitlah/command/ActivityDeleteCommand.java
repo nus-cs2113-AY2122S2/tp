@@ -1,8 +1,11 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Session;
+import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.Message;
 
 /**
  * Represents a command which deletes an Activity object from a Session object.
@@ -12,6 +15,12 @@ public class ActivityDeleteCommand extends Command {
     public static final String COMMAND_TEXT = "activity /delete";
 
     private static final String COMMAND_FORMAT = "Syntax: activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]";
+
+    private static final String COMMAND_CONFIRMATION = "Are you sure you want to delete activity id: ";
+
+    private static final String COMMAND_ABORT = "Okay! Activity was not deleted.";
+
+    private static final String COMMAND_SUCCESS = "The activity was deleted successfully.";
 
     private int sessionId;
     private int activityId;
@@ -46,6 +55,18 @@ public class ActivityDeleteCommand extends Command {
 
     @Override
     public void run(Manager manager) {
-
+        try {
+            Session session = manager.getProfile().getSession(sessionId);
+            String confirmationPrompt = COMMAND_CONFIRMATION + activityId + "?";
+            boolean isConfirmed = manager.getUi().getUserConfirmation(confirmationPrompt);
+            if (isConfirmed) {
+                session.removeActivity(activityId);
+                manager.getUi().printlnMessage(COMMAND_SUCCESS);
+            } else {
+                manager.getUi().printlnMessage(COMMAND_ABORT);
+            }
+        } catch (InvalidDataException e) {
+            manager.getUi().printlnMessage(e.getMessage());
+        }
     }
 }
