@@ -1,8 +1,7 @@
-package seedu.sherpass;
+package seedu.sherpass.util;
 
 import seedu.sherpass.constant.DateAndTimeFormat;
 import seedu.sherpass.task.Task;
-import seedu.sherpass.util.Ui;
 import seedu.sherpass.task.TaskList;
 
 import java.util.ArrayList;
