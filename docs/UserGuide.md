@@ -18,8 +18,8 @@ activities they participated in, for a particular session, via a Command Line In
 {Give detailed description of each feature}
 
 ### Creating a session: `session /create`
->Creates a new session to be managed by SplitLah. <br> 
->Sessions are a way for the user to manage their gatherings that happen across the day.
+> Creates a new session to be managed by SplitLah. <br> 
+> Sessions are a way for the user to manage their gatherings that happen across the day.
 
 Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ...]`
 
@@ -42,8 +42,8 @@ Example of usage:
 <br>
 <br>
 ### Deleting a session: `session /delete`
->Deletes an existing session that is managed by SplitLah. <br>
->Sessions are a way for the user to manage their gatherings that happen across the day.
+> Deletes an existing session that is managed by SplitLah. <br>
+> Sessions are a way for the user to manage their gatherings that happen across the day.
 
 Format: `session /delete /sid [SESSION_ID]`
 
@@ -57,6 +57,13 @@ Example of usage:
 <br>[INSERT SCREEN SHOT]
 <br>
 <br>
+### Listing all sessions: `session /list`
+> List all sessions that were previously created.
+
+Format: `session /list`
+<br>
+<br>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
