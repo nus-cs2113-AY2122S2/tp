@@ -101,7 +101,7 @@ public abstract class Message {
     public static final String ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST =
             "Please include either a cost or a list of costs.";
 
-    //Activity List Command
+    // Activity List Command
     public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =
             "There are currently no activities in this session";
 }
