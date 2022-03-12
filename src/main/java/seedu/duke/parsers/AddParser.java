@@ -3,6 +3,9 @@ package seedu.duke.parsers;
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.tasks.Task;
+
+import java.util.HashMap;
 
 public class AddParser extends Parser {
 
@@ -14,7 +17,7 @@ public class AddParser extends Parser {
 
     public AddParser() {
         super();
-        // See also https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
+        //See also https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
         this.commandFormat = ADD_FORMAT;
         groupNames.add("flag");
         groupNames.add("argument1");
@@ -22,7 +25,7 @@ public class AddParser extends Parser {
         groupNames.add("argument2");
     }
 
-    
+
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         return null;

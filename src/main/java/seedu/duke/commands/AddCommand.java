@@ -25,7 +25,6 @@ public class AddCommand extends Command {
             commandName = ADD_COMMAND_WORD;
             AddParser addParser = new AddParser();
             HashMap<String, String> parsedArg = addParser.parseString(arg);
-
             switch (parsedArg.get(FLAG)) {
             case TASK_FLAG:
                 //add tasks
