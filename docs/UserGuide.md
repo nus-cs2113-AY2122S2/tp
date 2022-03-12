@@ -1,5 +1,10 @@
 # User Guide
 
+## Contents
+
+* TOC
+  {:toc}
+
 ## Introduction
 
 SplitLah is a CLI program that lets users split bills proportionally amongst themselves after a group outing. SplitLah does
@@ -19,10 +24,6 @@ Target users:
 - People who dislike calculating how much people owe across several activities.
 - People who go on group outings where different people pay for different activities, making bill-splitting harder.
 
-## Contents
-
-* TOC
-{:toc}
 
 ## Quick Start
 
@@ -32,6 +33,8 @@ Target users:
 4. Start SplitLah by executing `java -jar SplitLah.jar` in the terminal.
 5. Type in a command and press Enter to execute it.
 6. Refer to Features for a more in-depth explanation of all commands available.
+
+<hr>
 
 ## Features 
 
