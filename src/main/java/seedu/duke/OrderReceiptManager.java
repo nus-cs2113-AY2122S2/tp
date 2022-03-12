@@ -1,23 +1,20 @@
 package seedu.duke;
 
 import java.util.List;
+import static manager.OrderManager.orders;
+
 public class OrderReceiptManager {
-    private List<Order> orders;
-
-    @Override
-    public String toString() {
+    public void printOrderReceipt() {
         if (this.orders.size() == 0) {
-            return "No orders!";
+            System.out.println("No orders!");
         }
-
-        StringBuilder builder = new StringBuilder();
-        // Column
-        builder.append(String.format("%-10s | %-36s | %-35s | %s\n", "Order ID", "Table No.", "Date & Time", "Status"));
-        for (int index = 0; index < this.orders.size(); index++) {
-            builder.append(String.format("%-10d | %s\n", index + 1, this.orders.get(index).orderListing()));
+        for (Order order: orders) {
+            for(Dish dish : order) {
+                System.out.println(dish.toString());
+            }
+            System.out.println("Total price:" + order.getTotalPrice());
         }
-        builder.deleteCharAt(builder.length() - 1); // Remove last newline.
-        return builder.toString();
+        System.out.println("Total revenue:" + OrderManager.getAllOrderValue());
     }
 }
 
