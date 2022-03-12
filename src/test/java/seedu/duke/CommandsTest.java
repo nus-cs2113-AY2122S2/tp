@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +24,5 @@ class CommandsTest {
         //test 4, non-numerical inputs for id - good is not added
         Commands.addGood("hi", "chairs", "15", goodsArrayList);
         assertEquals(0, goodsArrayList.size());
-
     }
-
 }

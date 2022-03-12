@@ -26,6 +26,14 @@ public class Goods {
         return quantity;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public String getDescription() {
         return description;
     }
