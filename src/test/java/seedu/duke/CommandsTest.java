@@ -16,11 +16,11 @@ class CommandsTest {
         Commands.addGood("1", "chairs", "15", goodsArrayList);
         assertEquals(1, goodsArrayList.size());
 
-/*
+        /*
         //test 2, adding non-unique id with different name - fail, good is not added
         Commands.addGood("1", "tables", "15", goodsArrayList);
         assertEquals(1, goodsArrayList.size());
-*/
+        */
 
         goodsArrayList = new ArrayList<>();
         //test 3, blank inputs - fail, good is not added
@@ -42,11 +42,11 @@ class CommandsTest {
         Commands.addGood("1", "chairs", "15", goodsArrayList);
         Commands.addGood("2", "table", "15", goodsArrayList);
 
-/*
+        /*
         //test 1, delete all (15) chairs - success, only left tables in list
         Commands.removeGood("1", "15", goodsArrayList);
         assertEquals(1, goodsArrayList.size());
-*/
+        */
 
         //test 2, delete 1 table - success, 14 tables left
         Commands.removeGood("2", "1", goodsArrayList);
