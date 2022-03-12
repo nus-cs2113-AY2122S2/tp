@@ -34,7 +34,7 @@ public class Task {
         return estimatedWorkingTime;
     }
 
-    /**
+    /**.
      * Check what are the tasks parameters input by user
      * @return Task parameters status
      */
