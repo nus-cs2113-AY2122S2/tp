@@ -47,6 +47,7 @@ public class Parser {
     private static final int DELIMITERED_COMMAND_MIN_TOKEN_COUNT = 2;
     private static final int MINIMUM_SURCHARGE_PERCENT = 0;
     private static final int MAXIMUM_SURCHARGE_PERCENT = 100;
+    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     // ERROR REPORTING FUNCTIONS
     private static String getMissingDelimiterErrorMessage(String delimiter) {
