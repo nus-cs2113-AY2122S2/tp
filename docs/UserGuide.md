@@ -78,6 +78,10 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
     * Each individual name is **case-insensitive**.
 * `[TOTAL_COST]` refers to the total cost of the activity.
 * `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
+
+> **Notes:**
+>- The `[ACTIVITY_NAME]` should be unique across all activities.
+>- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
