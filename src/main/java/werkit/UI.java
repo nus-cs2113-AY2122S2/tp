@@ -156,7 +156,8 @@ public class UI {
     }
 
     /**
-     * Prints a message when a workout has been updated. Deleted workout will also be displayed.
+     * Prints a message when a workout has been updated.
+     * Shows updated workout.
      *
      * @param updateWorkout The workout to be updated.
      */
