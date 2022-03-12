@@ -11,6 +11,7 @@ import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 import seedu.splitlah.util.PersonCostPair;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -37,6 +38,7 @@ public class SessionSummaryCommand extends Command {
             "Program has faced some issue : processAllTransactions, personCostPairList is invalid";
     public static final String TEMP_ERROR_PROCESSALLTRANSACTION_METHOD_LOGIC_INVALID =
             "Program has faced some issue : processAllTransactions, payer, receiver logic is invalid";
+    private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final int ZERO_INDEXING_OFFSET = 1;
     private static final double SMALL_DIFFERENCE_LIMIT = 0.0001;
 
@@ -111,10 +113,11 @@ public class SessionSummaryCommand extends Command {
     }
 
     private String processAllTransactions(ArrayList<PersonCostPair> personCostPairList, Session session) {
+        String dateString = session.getDateCreated().format(dateFormat);
         StringBuilder sb = new StringBuilder(SUMMARY_HEADER_PREPEND);
         sb.append(sessionId).append(SUMMARY_HEADER_POSTPEND);
         sb.append(PREPEND_SESSION_NAME).append(session.getSessionName());
-        sb.append(PREPEND_SESSION_DATE).append(session.getDateString());
+        sb.append(PREPEND_SESSION_DATE).append(dateString);
         sb.append(PREPEND_PAYMENTS);
         personCostPairList.sort(PersonCostPair::compareTo);
         
@@ -182,8 +185,7 @@ public class SessionSummaryCommand extends Command {
 
         ArrayList<Person> personList = session.getPersonList();
         ArrayList<PersonCostPair> personCostPairList = getPersonCostPairList(personList);
-        // check if NET 0
         String output = processAllTransactions(personCostPairList, session);
-        ui.printlnMessage(output);
+        ui.printlnMessageWithDivider(output);
     }
 }
