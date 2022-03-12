@@ -1,2 +1,7 @@
 add id/1 n/chairs q/100
+list
+view id/1
+remove id/1 q/14
+list
+view id/1
 bye

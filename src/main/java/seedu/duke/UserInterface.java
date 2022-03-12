@@ -14,8 +14,6 @@ public class UserInterface {
         userInput = input.nextLine();
         while (!userInput.equals("bye")) {
             // current implementation is just take 1st value for command
-            // i am using regex for my own function for now, but can change
-            // when more is done
             String command = userInput.split(" ")[0];
             switch (command) {
             case "add":

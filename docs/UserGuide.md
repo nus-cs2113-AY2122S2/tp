@@ -26,16 +26,16 @@
 ### Adding inventory items: `add`
 Adds a new item to the list of todo items.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Format: `add id/ID n/GOOD_NAME q/QUANTITY`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+* The `ID` is an integer uniquely represent the items.
+* The `QUANTITY` is a non-negative integer.
 
 Example of usage: 
 
-`todo n/Write the rest of the User Guide d/next week`
+`add id/101 n/chairs q/100`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+`add id/102 n/tables q/15`
 
 ### Removing inventory items: `remove`
 Adds a new item to the list of todo items.
@@ -69,7 +69,7 @@ List of inventory items:
     2. Wooden Tables
 ```
 
-### Getting a description of inventory: `description`
+### Getting a description of inventory: `view`
 Adds a new item to the list of todo items.
 
 Format: `todo n/TODO_NAME d/DEADLINE`

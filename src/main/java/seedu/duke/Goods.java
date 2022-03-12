@@ -20,10 +20,6 @@ public class Goods {
         this.description = description;
     }
 
-    public int getId () {
-        return id;
-    }
-
     public int getQuantity() {
         return quantity;
     }
