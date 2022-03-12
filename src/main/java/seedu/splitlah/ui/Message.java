@@ -55,8 +55,8 @@ public abstract class Message {
             "Please enter a valid command.";
     public static final String ERROR_PARSER_INVALID_DELIMITERS =
             "The command contains one or more invalid delimiters. Please rectify and try again.";
-    public static final String ASSERT_SESSIONCREATE_COMMAND_ARGUMENTS_EMPTY =
-            "The command arguments cannot be null";
+    public static final String ASSERT_PARSER_COMMAND_ARGUMENTS_EMPTY =
+            "The command arguments cannot be null.";
 
     // Person
     public static final String ERROR_PERSON_NO_ACTIVITIES =
@@ -92,7 +92,7 @@ public abstract class Message {
                     + "as at least one person did not participate in the activity.";
 
     // Session Create Command
-    public static final String ASSERT_SESSIONCREATE_NAME_DUPLICATE_NOT_DETECTED =
+    public static final String ASSERT_SESSIONCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
             "Name duplicates exists but not detected.";
     public static final String ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY =
             "The array of person names is empty but was not handled in prepare function.";

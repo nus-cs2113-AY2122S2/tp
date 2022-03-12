@@ -39,6 +39,8 @@ public class SessionCreateCommand extends Command {
      * @param date        A LocalDate object that represents the date of the session.
      */
     public SessionCreateCommand(String sessionName, String[] personNames, LocalDate date) {
+        assert personNames != null : Message.ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY;
+        assert personNames.length != 0 : Message.ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY;
         this.sessionName = sessionName;
         this.personNames = personNames;
         this.sessionDate = date;
@@ -50,7 +52,6 @@ public class SessionCreateCommand extends Command {
      * @return An ArrayList of Person objects.
      */
     private ArrayList<Person> convertToListOfPerson() {
-        assert personNames.length != 0 : Message.ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY;
         ArrayList<Person> personList = new ArrayList<>();
         for (String name : personNames) {
             Person newPerson = new Person(name);
@@ -65,7 +66,6 @@ public class SessionCreateCommand extends Command {
      * @return True if it contains duplicates, false otherwise.
      */
     private boolean hasNameDuplicates() {
-        assert personNames.length != 0 : Message.ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY;
         Set<String> nameSet = new HashSet<>();
         for (String name : personNames) {
             String nameToBeAdded = name.toLowerCase();
@@ -73,7 +73,8 @@ public class SessionCreateCommand extends Command {
                 return true;
             }
         }
-        assert nameSet.size() == personNames.length : Message.ASSERT_SESSIONCREATE_NAME_DUPLICATE_NOT_DETECTED;
+        assert nameSet.size() == personNames.length :
+                Message.ASSERT_SESSIONCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED;
         return false;
     }
 
@@ -85,7 +86,7 @@ public class SessionCreateCommand extends Command {
      *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
-        assert commandArgs != null : Message.ASSERT_SESSIONCREATE_COMMAND_ARGUMENTS_EMPTY;
+        assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_EMPTY;
         try {
             String parsedSessionName = Parser.parseName(commandArgs);
             String[] parsedNames = Parser.parsePersonList(commandArgs);
