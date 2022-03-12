@@ -2,6 +2,7 @@ package seedu.splitlah.parser;
 
 import seedu.splitlah.command.Command;
 import seedu.splitlah.command.ActivityCreateCommand;
+import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.HelpCommand;
@@ -15,6 +16,7 @@ import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -42,11 +44,13 @@ public class Parser {
     private static final String DELIMITER_INDICATOR = "/";
     private static final String NEXT_DELIMITER_INDICATOR = " /";
     private static final String REGEX_WHITESPACES_DELIMITER = "\\s+";
+    private static final String LOCALDATE_TODAY_INDICATOR = "today";
     private static final int INVALID_INDEX_INDICATOR = -1;
     private static final int COMMAND_WITH_ARGS_TOKEN_COUNT = 3;
     private static final int DELIMITERED_COMMAND_MIN_TOKEN_COUNT = 2;
     private static final int MINIMUM_SURCHARGE_PERCENT = 0;
     private static final int MAXIMUM_SURCHARGE_PERCENT = 100;
+    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     // ERROR REPORTING FUNCTIONS
     private static String getMissingDelimiterErrorMessage(String delimiter) {
@@ -205,12 +209,16 @@ public class Parser {
         if (!hasDelimiter(commandArgs, DATE_DELIMITER)) {
             throw new InvalidFormatException(getMissingDelimiterErrorMessage(DATE_DELIMITER));
         }
+
+        String argument = getArgumentFromDelimiter(commandArgs, DATE_DELIMITER);
+        if (argument.equalsIgnoreCase(LOCALDATE_TODAY_INDICATOR)) {
+            return LocalDate.now();
+        }
         
         try {
-            String argument = getArgumentFromDelimiter(commandArgs, DATE_DELIMITER);
-            return LocalDate.parse(argument);
-        } catch (InvalidFormatException | DateTimeParseException exception) {
-            return LocalDate.now();
+            return LocalDate.parse(argument, DATE_FORMAT);
+        } catch (DateTimeParseException exception) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_INVALID_DATE_FORMAT);
         }
     }
 
@@ -287,20 +295,22 @@ public class Parser {
             return new InvalidCommand(Message.ERROR_PARSER_INVALID_DELIMITERS);
         }
 
-        switch (commandType) {
+        switch (commandType.toLowerCase()) {
         case "":
             return new InvalidCommand(Message.ERROR_PARSER_EMPTY_COMMAND);
-        // TEMPORARY FALLTHROUGH FOR ALL COMMANDS UNTIL COMMANDS ARE PROPERLY SET UP
         case SessionCreateCommand.COMMAND_TEXT:
             return SessionCreateCommand.prepare(remainingArgs);
-        case SessionSummaryCommand.COMMAND_TEXT:
-            return SessionSummaryCommand.prepare(remainingArgs);
         case SessionDeleteCommand.COMMAND_TEXT:
             return SessionDeleteCommand.prepare(remainingArgs);
-        case ActivityCreateCommand.COMMAND_TEXT:
-            return ActivityCreateCommand.prepare(remainingArgs);
+        case SessionSummaryCommand.COMMAND_TEXT:
+            return SessionSummaryCommand.prepare(remainingArgs);
         case SessionListCommand.COMMAND_TEXT:
             return new SessionListCommand();
+        case ActivityCreateCommand.COMMAND_TEXT:
+            return ActivityCreateCommand.prepare(remainingArgs);
+        case ActivityDeleteCommand.COMMAND_TEXT:
+            // TEMPORARY INVALID COMMAND UNTIL COMMAND DEVELOPED
+            return new InvalidCommand("activity /delete is not yet developed, please try again later.");
         case ActivityListCommand.COMMAND_TEXT:
             return ActivityListCommand.prepare(remainingArgs);
         case ActivityViewCommand.COMMAND_TEXT:
