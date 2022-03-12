@@ -36,9 +36,9 @@ Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ..
 
 Example of usage:
 1. Adds a new session named Class Outing with Alice and Bob involved on 15-03-2022.
-   1. `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob`
+   - `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob`
    
-<br>[INSERT SCREEN SHOT]
+![Session create command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand.png)
 <br>
 <br>
 ### Deleting a session: `session /delete`
@@ -52,15 +52,18 @@ Format: `session /delete /sid [SESSION_ID]`
 
 Example of usage:
 1. Remove an existing session that was created with session unique identifier of 1.
-   1. `session /delete /sid 1`
+   - `session /delete /sid 1`
 
-<br>[INSERT SCREEN SHOT]
+![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
 <br>
 <br>
 ### Listing all sessions: `session /list`
 > List all sessions that were previously created.
 
 Format: `session /list`
+
+Example of usage:
+![Session list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionListCommand.png)
 <br>
 <br>
 
