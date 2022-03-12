@@ -22,6 +22,9 @@ public class ActivityViewCommand extends Command {
     private int sessionId;
     private int activityId;
 
+    private static final String SESSION_ID_HEADER = "Session Id #";
+    private static final String SEPARATOR = " | ";
+
     public ActivityViewCommand(int sessionId, int activityId) {
         this.sessionId = sessionId;
         this.activityId = activityId;
@@ -35,10 +38,10 @@ public class ActivityViewCommand extends Command {
     @Override
     public void run(Manager manager) {
         try {
-            Session sessionToBePrinted = manager.getProfile().getSession(sessionId);
-            Activity activityToBePrinted = sessionToBePrinted.getActivity(activityId);
-            
-            manager.getUi().printlnMessageWithDivider(activityToBePrinted.toString());
+            Session session = manager.getProfile().getSession(sessionId);
+            Activity activityToBePrinted = session.getActivity(activityId);
+            String messageToBePrinted = SESSION_ID_HEADER + sessionId + SEPARATOR + activityToBePrinted.toString();
+            manager.getUi().printlnMessageWithDivider(messageToBePrinted);
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
         }

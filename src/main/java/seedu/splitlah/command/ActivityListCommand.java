@@ -21,6 +21,9 @@ public class ActivityListCommand extends Command {
 
     private int sessionId;
 
+    private static final String LIST_HEADER_PREPEND = "Activity List (Session Id #";
+    private static final String LIST_CLOSER_POSTPEND = ")";
+
     public ActivityListCommand(int sessionId) {
         this.sessionId = sessionId;
     }
@@ -41,6 +44,7 @@ public class ActivityListCommand extends Command {
                 return;
             }
 
+            manager.getUi().printlnMessage(LIST_HEADER_PREPEND + sessionId + LIST_CLOSER_POSTPEND);
             for (Activity activity : activityListToBePrinted) {
                 manager.getUi().printlnMessage(activity.getActivitySummaryString());
             }
