@@ -45,6 +45,6 @@ run{
     standardInput = System.in
 }
 
-compileJava.options.encoding = 'UTF-8'
-compileTestJava.options.encoding = 'UTF-8'
-javadoc.options.encoding = 'UTF-8'
+compileJava.options.encoding = 'GBK'
+compileTestJava.options.encoding = 'GBK'
+javadoc.options.encoding = 'GBK'
