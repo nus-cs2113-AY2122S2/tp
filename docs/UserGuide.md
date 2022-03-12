@@ -67,6 +67,17 @@ Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 
 Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
 /cl [COST1 COST2 ...] [OPTIONAL_ARGUMENTS]`
+
+* `[SESSION_ID]` refers to the unique identifier of the session.
+    * The unique identifier for a session can be retrieved with `session /list` command.
+* `[ACTIVITY_NAME]` refers to the name of the activity.
+    * The activity name is **case-insensitive**.
+* `[PERSON_PAID]` refers to the person who paid for the activity.
+    * The person's name is **case-insensitive**.
+* `[NAME1 NAME2 ...]` refers to a list of persons involved in the activity.
+    * Each individual name is **case-insensitive**.
+* `[TOTAL_COST]` refers to the total cost of the activity.
+* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
