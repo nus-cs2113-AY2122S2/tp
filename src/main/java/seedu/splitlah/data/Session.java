@@ -4,6 +4,7 @@ import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +27,8 @@ public class Session {
     private static final String PERSON_LIST_HEADER =
             "Participants";
     private static final int ZERO_INDEXING_OFFSET = 1;
-
+    private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    
     /**
      * Returns the session's name.
      *
@@ -277,7 +279,7 @@ public class Session {
     public String toString() {
         return "Session Id #" + sessionId + " --\n"
                 + "Name: " + sessionName + '\n'
-                + "Date: " + dateCreated + '\n'
+                + "Date: " + dateCreated.format(dateFormat) + '\n'
                 + getActivityListSummaryString() + '\n'
                 + getPersonListSummaryString();
     }
