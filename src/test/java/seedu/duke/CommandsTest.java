@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,5 +25,4 @@ class CommandsTest {
         Commands.addGood("hi", "chairs", "15", goodsArrayList);
         assertEquals(0, goodsArrayList.size());
     }
-
 }

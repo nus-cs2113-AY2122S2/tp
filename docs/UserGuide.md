@@ -49,6 +49,10 @@ Example of usage:
 
 `remove id/101 q/2`
 
+Expected output:
+
+`2 chairs have been removed.`
+
 ### Getting a list of total inventory: `list`
 To get a list of names of every inventory item.
 
