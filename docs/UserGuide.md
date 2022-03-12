@@ -1,30 +1,46 @@
 # User Guide
 
+## Contents
+
+* TOC
+  {:toc}
+
 ## Introduction
 
-SplitLah is an application for keeping track of expenses during group outing sessions, specifically for those who are 
-budget conscious. It then proceeds to split the expenses according to the group members' individual costs for the 
-activities they participated in, for a particular session, via a Command Line Interface(CLI).
+SplitLah is a CLI program that lets users split bills proportionally amongst themselves after a group outing. SplitLah does
+the work of calculating how much each participant must pay across multiple activities, and keeps track of who paid the total
+bill for each activity.
+
+Value proposition:
+
+- Allows users to keep track of several activities and their participants.
+- Splits costs evenly or independently depending on what is required.
+- Combines all payments due together for easy settlement of payments.
+- Can be operated quickly by an experienced typist.
+
+Target users:
+
+- People who go on group outings often and split bills.
+- People who dislike manually calculating how much people owe across several activities.
+- People who go on group outings where different people pay for different activities, making bill-splitting harder.
+
 
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest .jar version of SplitLah from [here](https://github.com/AY2122S2-CS2113T-T10-1/tp/releases)
 3. Copy the file to the folder you wish to use as a home folder for SplitLah.
-4. Via command line, navigate to the home folder and run it with `java -jar SplitLah.jar`.
-5. Type in a command and press Enter to execute it. A few commands you can try are:
-    - `session /create /n Outing /d 11-03-2022 /pl Warren Ivan Roy` : Creates a Session named "Outing" occurring on 
-   11/03/2022 (DD-MM-YYYY) with Warren, Ivan, and Roy as members.
-    - `session /list` : Lists all Sessions.
-    - `activity /create /sid 1 /n Lunch /p Warren /i Warren Roy Ivan /c 7.5` : Creates an Activity named "Lunch" and
-   assigns it to the Session #1. The participats are Warren, Roy and Ivan, but only Warren has paid.
-    - `activity /list /sid 1` : Lists Activities grouped under Session #1.
+4. Start SplitLah by executing `java -jar SplitLah.jar` in the terminal.
+5. Type in a command and press Enter to execute it.
 6. Refer to Features for a more in-depth explanation of all commands available.
+
+<hr>
 
 ## Features 
 
+
 ### Creating a session: `session /create`
-> Creates a new session to be managed by SplitLah. <br> 
+> Creates a new session.<br>
 > Sessions are a way for the user to manage their gatherings that happen across the day.
 
 Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ...]`
@@ -118,7 +134,7 @@ Examples of usage:
 <br>[INSERT SCREEN SHOT]
 <br>
 <br>
-### Settle all transactions for a session: `session /summary`
+### Settling all transactions for a session: `session /summary`
 > Prints out a summary of the session to tell you, for that session, who needs to pay how much to another person
 > in order for everyone to have no remaining debts and no more debt to collect from others.<br>
 > This helps you to quickly calculate all payments that have to be done at the end of the day for a group outing.
@@ -139,15 +155,18 @@ Example of usage:
 <br>
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: Is data saved to the disk upon exit?
 
-**A**: {your answer here}
+**A**: SplitLah 1.0 does not currently support saving data to the disk.
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-|Command|Description|
-|---|---|
-|`session`|Creates 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+| Action                                   | Format                                                                                                                                                                                                           |
+|------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Add session                              | Format: `session /create /n [SESSION_NAME] /d [DATE] /pl [PARTICIPANTS]`<br><br> Example: `session /create /n Outing /d 15-03-2022 /pl Warren, Ivan, Roy`                                                        |
+| Delete session                           | Format: `session /delete /sid [SESSION_ID]`<br><br>Example: `session /delete /sid 1`                                                                                                                             |
+| Create activity and split costs evenly   | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /c [TOTAL_COST]`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /c 7.5`            |
+| Create activity and split costs manually | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /cl [COST1] [COST2]...`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /c 1 1 5.5` |
+| List sessions                            | Format: `session /list`                                                                                                                                                                                          |
+| Show session summary                     | Format: `session /summary /sid [SESSION_ID]`<br><br>Example: `session /summary /sid 1`                                                                                                                           |
+| Exit                                     | Format: `exit`                                                                                                                                                                                                   |
