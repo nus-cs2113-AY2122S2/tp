@@ -30,6 +30,25 @@ public class Session {
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     
     /**
+     * Constructs a Session object with the specified information as a new session.
+     *
+     * @param sessionName The name of the session.
+     * @param sessionId   A unique identifier for the session.
+     * @param dateCreated A LocalDate object storing the date that the session occurs on.
+     * @param personList  A list of Person objects representing participants of the session.
+     * @see Profile#getNewSessionId() for issuing a unique sessionId
+     */
+    public Session(String sessionName, int sessionId, LocalDate dateCreated, ArrayList<Person> personList) {
+        assert personList != null : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
+        assert personList.size() != 0 : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
+        this.sessionName = sessionName;
+        this.sessionId = sessionId;
+        this.dateCreated = dateCreated;
+        this.personList = personList;
+        this.activityList = new ArrayList<>();
+    }
+    
+    /**
      * Returns the session's name.
      *
      * @return A String object containing the name of the session.
@@ -65,6 +84,24 @@ public class Session {
      */
     public String getDateString() {
         return dateCreated.getDayOfMonth() + " " + dateCreated.getMonth() + " " + dateCreated.getYear();
+    }
+
+    /**
+     * Returns a list of Activity objects representing the activities that occurred in that session.
+     *
+     * @return An ArrayList object containing Activity objects that are part of the session.
+     */
+    public ArrayList<Activity> getActivityList() {
+        return activityList;
+    }
+
+    /**
+     * Returns a list of Person objects representing the participants in the session.
+     *
+     * @return An ArrayList object containing Person objects that are part of the session.
+     */
+    public ArrayList<Person> getPersonList() {
+        return personList;
     }
 
     /**
@@ -121,15 +158,6 @@ public class Session {
             }
         }
         activityList.remove(deleteTarget);
-    }
-
-    /**
-     * Returns a list of Activity objects representing the activities that occurred in that session.
-     *
-     * @return An ArrayList object containing Activity objects that are part of the session.
-     */
-    public ArrayList<Activity> getActivityList() {
-        return activityList;
     }
 
     /**
@@ -199,38 +227,12 @@ public class Session {
     }
 
     /**
-     * Returns a list of Person objects representing the participants in the session.
-     *
-     * @return An ArrayList object containing Person objects that are part of the session.
-     */
-    public ArrayList<Person> getPersonList() {
-        return personList;
-    }
-
-    /**
      * Adds a Person object to the session.
      *
      * @param person A Person object representing a participant of the session.
      */
     public void addPerson(Person person) {
         personList.add(person);
-    }
-
-    /**
-     * Constructs a Session object with the specified information as a new session.
-     *
-     * @param sessionName The name of the session.
-     * @param sessionId   A unique identifier for the session.
-     * @param dateCreated A LocalDate object storing the date that the session occurs on.
-     * @param personList  A list of Person objects representing participants of the session.
-     * @see Profile#getNewSessionId() for issuing a unique sessionId
-     */
-    public Session(String sessionName, int sessionId, LocalDate dateCreated, ArrayList<Person> personList) {
-        this.sessionName = sessionName;
-        this.sessionId = sessionId;
-        this.dateCreated = dateCreated;
-        this.personList = personList;
-        this.activityList = new ArrayList<>();
     }
 
     /**
