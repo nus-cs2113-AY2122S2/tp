@@ -28,9 +28,9 @@ public class Person {
     /**
      * Constructs an ActivityCost object and adds it to the list of ActivityCosts.
      *
-     * @param activityId            the activityId.
-     * @param costPaid              the cost of the activity paid by the payer.
-     * @param costOwed              the money owed by an individual.
+     * @param activityId the activityId.
+     * @param costPaid   the cost of the activity paid by the payer.
+     * @param costOwed   the money owed by an individual.
      * @throws InvalidDataException if the activityCost cannot be created from the given parameters.
      */
     public void addActivityCost(int activityId, double costPaid, double costOwed) throws InvalidDataException {
@@ -41,7 +41,7 @@ public class Person {
     /**
      * Removes an ActivityCost object from the list of ActivityCosts.
      *
-     * @param activityId            the activityId of the ActivityCost to be removed.
+     * @param activityId the activityId of the ActivityCost to be removed.
      * @throws InvalidDataException if the activityId is not found.
      */
     public void removeActivityCost(int activityId) throws InvalidDataException {
@@ -90,8 +90,8 @@ public class Person {
     /**
      * Returns the cost owed by this Person object for an Activity.
      *
-     * @param activityId            int representing activityId of the Activity.
-     * @return                      double representing cost owed by the Person for this Activity.
+     * @param activityId int representing activityId of the Activity.
+     * @return double representing cost owed by the Person for this Activity.
      * @throws InvalidDataException If this Person is not participating in any Activities.
      *                              If the activityId is not found.
      */
