@@ -25,12 +25,17 @@ public class SessionListCommand extends Command {
     @Override
     public void run(Manager manager) {
         ArrayList<Session> sessionsToBePrinted = manager.getProfile().getSessionList();
+        int sessionListSize = sessionsToBePrinted.size();
         if (sessionsToBePrinted.isEmpty()) {
             manager.getUi().printlnMessage(Message.ERROR_PROFILE_SESSION_LIST_EMPTY);
             return;
         }
-        for (Session session : sessionsToBePrinted) {
-            manager.getUi().printlnMessageWithDivider(session.toString());
+
+        for (int i = 0; i < sessionListSize - 1; i++) {
+            manager.getUi().printlnMessage(sessionsToBePrinted.get(i).getSessionSimplifiedString());
+            manager.getUi().printDashDivider();
         }
+        String lastSessionToPrint = sessionsToBePrinted.get(sessionListSize - 1).getSessionSimplifiedString();
+        manager.getUi().printlnMessageWithDivider(lastSessionToPrint);
     }
 }
