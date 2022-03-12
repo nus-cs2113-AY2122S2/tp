@@ -87,6 +87,10 @@ Examples of usage:
 1. Adds a new activity in a session with session identifier 1, named Class Lunch, where Alice paid for both
    Bob and herself with a total cost of $10.
     1. `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /c 10`
+
+<br>[INSERT SCREEN SHOT]
+<br>
+<br>
 2. Adds a new activity in a session with session identifier 1, named Class Lunch, where Alice paid for both
    Bob and herself. Alice's meal costs $3.50 while Bob's meal costs $7.
     1. `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7`
