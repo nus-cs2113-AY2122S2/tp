@@ -27,6 +27,13 @@ public class ActivityDeleteCommand extends Command {
         this.activityId = activityId;
     }
 
+    /**
+     * Prepares user arguments for activity delete command.
+     *
+     * @param commandArgs The user's arguments.
+     * @return An ActivityDeleteCommand object if necessary parameters were found in user arguments,
+     *         an InvalidCommand object otherwise.
+     */
     public static Command prepare(String commandArgs) {
         try {
             int sessionId = Parser.parseSessionId(commandArgs);
