@@ -3,6 +3,7 @@ package seedu.sherpass;
 import seedu.sherpass.command.Command;
 import seedu.sherpass.command.ExitCommand;
 import seedu.sherpass.util.Parser;
+import seedu.sherpass.util.Reminder;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Ui;
