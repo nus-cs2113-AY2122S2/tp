@@ -18,7 +18,7 @@ public class Commands {
             Goods goods = new Goods(
                     Integer.parseInt(id),
                     name,
-                    Integer.parseInt(id),
+                    Integer.parseInt(qty),
                     "Empty Description"); //description not yet added since not in UserGuide
             userGoods.add(goods);
             System.out.printf("%d %s Has been added\n" + "You have %d goods in the warehouse\n",
@@ -27,6 +27,24 @@ public class Commands {
             // error handling here
             System.out.println("Please add a good in this format:\n"
                     + "add id/id_of_good_as_number n/name_of_good q/quantity_of_good_as_number");
+        }
+    }
+
+    public static void viewGood(String id, ArrayList<Goods> userGoods) {
+        try {
+            Integer idToBeViewed = Integer.parseInt(id);
+            for (Goods good : userGoods) {
+                if (idToBeViewed.equals(good.getId())) {
+                    System.out.println("Viewing item with id " + good.getId());
+                    System.out.println("Item name: " + good.getName());
+                    System.out.println("Item description: " + good.getDescription());
+                    System.out.println("Item quantity: " + good.getQuantity());
+                    return;
+                }
+            }
+            System.out.println("Could not find item with given id!");
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid format entered! Check format and try again!");
         }
     }
 

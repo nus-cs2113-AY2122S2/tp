@@ -25,6 +25,12 @@ public class UserInterface {
                 Commands.addGood(matches.get("id"), matches.get("name"),
                         matches.get("qty"), userGoods);
                 break;
+            case "view":
+                regex = "id/(?<id>\\d*)";
+                regexMatch = new Regex(userInput, regex);
+                matches = regexMatch.getGroupValues();
+                Commands.viewGood(matches.get("id"), userGoods);
+                break;
             case "list":
                 Commands.listGoods(userGoods);
                 break;

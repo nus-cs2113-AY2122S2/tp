@@ -9,8 +9,6 @@ package seedu.duke;
 public class Goods {
     private int id;
 
-
-
     private String name;
     private int quantity;
     private String description;
@@ -20,6 +18,10 @@ public class Goods {
         this.name = name;
         this.quantity = quantity;
         this.description = description;
+    }
+
+    public int getId () {
+        return id;
     }
 
     public int getQuantity() {
