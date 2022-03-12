@@ -43,6 +43,8 @@ public abstract class Message {
             "Please enter a valid integer after the following delimiter: ";
     public static final String ERROR_PARSER_ID_VALUE_NOT_POSITIVE =
             "Please enter a positive value for identifier numbers.";
+    public static final String ERROR_PARSER_INVALID_DATE_FORMAT =
+            "Please enter the date in the form DD-MM-YYYY or enter 'today' for today's date.";
     public static final String ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT =
             "Please enter a valid monetary value(s) after the following delimiter: ";
     public static final String ERROR_PARSER_INVALID_GST_SURCHARGE =
