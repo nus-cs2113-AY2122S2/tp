@@ -9,6 +9,8 @@ import seedu.splitlah.ui.Message;
 
 /**
  * Represents a command which deletes an Activity object from a Session object.
+ *
+ * @author Ivan
  */
 public class ActivityDeleteCommand extends Command {
 
