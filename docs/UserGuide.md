@@ -32,7 +32,7 @@ Target users:
 - A forward slash `/` indicates a delimiter and is used to separate arguments to the application.<br>
 Each command's documentation specifies the required delimiters and their purpose.
 
-## Workflow 
+## How SplitLah works
 - An activity represents a single group activity, paid for by one person. Activities store a list of its participants,
 the payer, and how much each participant owes.
   - Example: `Lunch at a restaurant`
