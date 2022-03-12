@@ -1,15 +1,12 @@
 package seedu.sherpass.util;
 
 import seedu.sherpass.command.Command;
-import seedu.sherpass.command.DeadlineCommand;
 import seedu.sherpass.command.DeleteCommand;
-import seedu.sherpass.command.EventCommand;
 import seedu.sherpass.command.HelpCommand;
 import seedu.sherpass.command.MarkCommand;
 import seedu.sherpass.command.StudyCommand;
-import seedu.sherpass.command.TodoCommand;
+import seedu.sherpass.command.AddCommand;
 import seedu.sherpass.command.UnmarkCommand;
-import seedu.sherpass.command.UpdateCommand;
 import seedu.sherpass.command.FindCommand;
 import seedu.sherpass.command.ListCommand;
 import seedu.sherpass.command.ExitCommand;
@@ -18,13 +15,12 @@ import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.task.Todo;
+import seedu.sherpass.task.Add;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 
 import static seedu.sherpass.constant.DateAndTimeFormat.noTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskNoTimeFormat;
@@ -45,22 +41,13 @@ import static seedu.sherpass.constant.Index.MARK_INDEX;
 import static seedu.sherpass.constant.Index.OPTIONS_INDEX;
 import static seedu.sherpass.constant.Index.SAVE_TASK_BY_DATE_INDEX;
 import static seedu.sherpass.constant.Index.SAVE_TASK_DESCRIPTION_INDEX;
-import static seedu.sherpass.constant.Index.SAVE_TASK_DO_DATE_INDEX;
+import static seedu.sherpass.constant.Index.SAVE_TASK_REMIND_DATE_INDEX;
 import static seedu.sherpass.constant.Index.SAVE_TASK_MARK_STATUS;
 import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
 import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
 import static seedu.sherpass.constant.Index.TASK_DATE_INDEX;
-import static seedu.sherpass.constant.Index.TASK_DESCRIPTION_INDEX;
 import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
-import static seedu.sherpass.constant.Message.DATE_FORMAT_WITHOUT_TIME;
-import static seedu.sherpass.constant.Message.DATE_FORMAT_WITH_TIME;
-import static seedu.sherpass.constant.Message.ERROR_DEADLINE_MISSING_COMMAND_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_EVENT_MISSING_COMMAND_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_TODO_REPEATED_INPUT_MESSAGE;
-import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
+import static seedu.sherpass.constant.Message.*;
 
 
 public class Parser {
@@ -77,17 +64,25 @@ public class Parser {
         if (!isValidData(rawData)) {
             throw new InvalidInputException();
         }
-        Task parsedData;
-        try {
-            LocalDate parsedByDate = LocalDate.parse(rawData[SAVE_TASK_DO_DATE_INDEX]);
-            LocalDate parsedDoDate = LocalDate.parse(rawData[SAVE_TASK_BY_DATE_INDEX]);
 
-        } catch (DateTimeParseException invalidDate) {
-            throw new InvalidInputException();
+        Task parsedData;
+        String parsedByDate = "";
+        String parsedRemindDate = "";
+
+        if (rawData.length >= 3) {
+            try {
+                parsedByDate = prepareTaskDate(rawData[SAVE_TASK_BY_DATE_INDEX], true);
+
+                if (rawData.length == 4) {
+                    parsedRemindDate = prepareTaskDate(rawData[SAVE_TASK_REMIND_DATE_INDEX], true);
+                }
+
+            } catch (DateTimeParseException invalidDate) {
+                throw new InvalidInputException();
+            }
         }
 
-        // Using Todo for now, will be updated in the future
-        parsedData = new Todo(rawData[SAVE_TASK_DESCRIPTION_INDEX].trim());
+        parsedData = new Add(rawData[SAVE_TASK_DESCRIPTION_INDEX].trim(), parsedByDate, parsedRemindDate);
 
         if (rawData[SAVE_TASK_MARK_STATUS].equals("X")) {
             parsedData.markAsDone();
@@ -97,13 +92,10 @@ public class Parser {
     }
 
     private static Boolean isValidData(String[] rawData) {
-        if (rawData.length != 4) {
-            return false;
-        } else if (!rawData[SAVE_TASK_MARK_STATUS].equals(" ") && !rawData[SAVE_TASK_MARK_STATUS].equals("X")) {
+        if (!rawData[SAVE_TASK_MARK_STATUS].equals(" ") && !rawData[SAVE_TASK_MARK_STATUS].equals("X")) {
             return false;
         }
-        return !rawData[SAVE_TASK_DESCRIPTION_INDEX].isBlank() && !rawData[SAVE_TASK_BY_DATE_INDEX].isBlank()
-                && !rawData[SAVE_TASK_DO_DATE_INDEX].isBlank();
+        return !rawData[SAVE_TASK_DESCRIPTION_INDEX].isBlank();
     }
 
 
@@ -120,30 +112,38 @@ public class Parser {
         return null;
     }
 
-    private static void printMissingInputMessage(String input, String taskType) {
-        System.out.println("Oops! The " + input + " of a(n) " + taskType + " cannot be empty."
+    private static void printMissingInputMessage() {
+        System.out.println("Oops! The description of an 'add' command cannot be empty."
                 + HELP_MESSAGE_SPECIFIC_COMMAND);
     }
 
-    private static Command prepareAddTodo(String[] parsedInput, TaskList taskList) {
+    private static Command prepareAdd(String[] splitInput, TaskList taskList) {
+        String[] filteredTaskContent = null;
+        String byDate = null;
+        String remindDate = null;
         try {
-            return new TodoCommand(parsedInput, taskList);
+            if (!splitInput[TASK_CONTENT_INDEX].contains("/by") && !splitInput[TASK_CONTENT_INDEX].contains("/remind")) {
+                return new AddCommand(splitInput[TASK_CONTENT_INDEX], taskList, EMPTY_STRING, EMPTY_STRING);
+            } else {
+                filteredTaskContent = splitInput[TASK_CONTENT_INDEX].split("/by", 2);
+                if (!splitInput[1].contains("/remind")) {
+                    byDate = prepareTaskDate(filteredTaskContent[1].trim(), false);
+                    return new AddCommand(filteredTaskContent[0].trim(), taskList, byDate, EMPTY_STRING);
+                } else {
+                    String[] filteredDates = filteredTaskContent[1].split("/remind");
+                    byDate = prepareTaskDate(filteredDates[0].trim(), false);
+                    remindDate = prepareTaskDate(filteredDates[1].trim(), false);
+                    return new AddCommand(filteredTaskContent[0], taskList, byDate, remindDate);
+                }
+            }
         } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
-            printMissingInputMessage("description", "todo");
+            printMissingInputMessage();
         } catch (InputRepeatedException e) {
-            System.out.println(ERROR_TODO_REPEATED_INPUT_MESSAGE);
+            //return new UpdateCommand(filteredTaskContent[TASK_DESCRIPTION_INDEX].trim(), byDate);
+            System.out.println("repeated description. delete the previous iteration and type out your command again");
         }
         return null;
     }
-
-    private static void printMissingCommandMessage(String taskType) {
-        if (taskType.equals("event")) {
-            System.out.println(ERROR_EVENT_MISSING_COMMAND_MESSAGE + HELP_MESSAGE_SPECIFIC_COMMAND);
-        } else {
-            System.out.println(ERROR_DEADLINE_MISSING_COMMAND_MESSAGE + HELP_MESSAGE_SPECIFIC_COMMAND);
-        }
-    }
-
 
     private static String confirmInvalidDateFormat() throws InvalidInputException {
         Ui anotherUi = new Ui();
@@ -196,41 +196,22 @@ public class Parser {
             throw new InvalidInputException();
         }
         try {
+            // converts readable date String to localDate (yyyy-MM-dd) and back to readable date String
+            // basically just to check whether the input date is valid or will throw any exception
             if (isParseSaveFile) {
-                return LocalDateTime.parse(rawTaskDate, savedTaskWithTimeFormat)
-                        .format(DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_TIME));
+                LocalDate localDate = LocalDate.parse(rawTaskDate, savedTaskNoTimeFormat);
+                String readableDate = localDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT_WITHOUT_TIME));
+                return readableDate;
             }
-            return LocalDateTime.parse(rawTaskDate, withTimeFormat)
-                    .format(DateTimeFormatter.ofPattern(DATE_FORMAT_WITH_TIME));
+
+            // converts localDate of format (yyyy/MM/dd) to String of format (dd MMM yyyy, EEE)
+            LocalDate localDate = LocalDate.parse(rawTaskDate, noTimeFormat);
+            String readableDate = localDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT_WITHOUT_TIME));
+            return readableDate;
+
         } catch (DateTimeParseException e) {
             return checkCorrectDateFormat(rawTaskDate, isParseSaveFile);
         }
-    }
-
-    private static Command prepareAddEventOrDeadline(String[] parsedInput, String inputKeyword,
-                                                     TaskList taskList, String taskType) {
-        String[] filteredTaskContent = null;
-        String dueDate = null;
-        try {
-            if (!parsedInput[TASK_CONTENT_INDEX].contains(inputKeyword)) {
-                printMissingCommandMessage(taskType);
-                return null;
-            }
-            filteredTaskContent = parsedInput[TASK_CONTENT_INDEX].split(inputKeyword, 2);
-            dueDate = prepareTaskDate(filteredTaskContent[TASK_DATE_INDEX].trim(), false);
-            if (dueDate == null) {
-                return null;
-            }
-            if (taskType.equals(EventCommand.COMMAND_WORD)) {
-                return new EventCommand(filteredTaskContent[TASK_DESCRIPTION_INDEX].trim(), taskList, dueDate);
-            }
-            return new DeadlineCommand(filteredTaskContent[TASK_DESCRIPTION_INDEX].trim(), taskList, dueDate);
-        } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
-            printMissingInputMessage("description and/or date\n", taskType);
-        } catch (InputRepeatedException e) {
-            return new UpdateCommand(filteredTaskContent[TASK_DESCRIPTION_INDEX].trim(), dueDate);
-        }
-        return null;
     }
 
     private static Command prepareDelete(String[] parsedInput, TaskList taskList) {
@@ -280,27 +261,21 @@ public class Parser {
      * @return Command type matching the user command.
      */
     public static Command parseCommand(String userInput, TaskList taskList) {
-        String[] parsedInput = userInput.split(" ", 2);
-        String commandWord = parsedInput[OPTIONS_INDEX].toLowerCase().trim();
+        String[] splitInput = userInput.split(" ", 2);
+        String commandWord = splitInput[OPTIONS_INDEX].toLowerCase().trim();
         switch (commandWord) {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
         case MarkCommand.COMMAND_WORD:
-            return prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD, taskList);
+            return prepareMarkOrUnmark(splitInput, MarkCommand.COMMAND_WORD, taskList);
         case UnmarkCommand.COMMAND_WORD:
-            return prepareMarkOrUnmark(parsedInput, UnmarkCommand.COMMAND_WORD, taskList);
-        case TodoCommand.COMMAND_WORD:
-            return prepareAddTodo(parsedInput, taskList);
-        case EventCommand.COMMAND_WORD:
-            return prepareAddEventOrDeadline(parsedInput, "/at",
-                    taskList, EventCommand.COMMAND_WORD);
-        case DeadlineCommand.COMMAND_WORD:
-            return prepareAddEventOrDeadline(parsedInput, "/by",
-                    taskList, DeadlineCommand.COMMAND_WORD);
+            return prepareMarkOrUnmark(splitInput, UnmarkCommand.COMMAND_WORD, taskList);
+        case AddCommand.COMMAND_WORD:
+            return prepareAdd(splitInput, taskList);
         case DeleteCommand.COMMAND_WORD:
-            return prepareDelete(parsedInput, taskList);
+            return prepareDelete(splitInput, taskList);
         case FindCommand.COMMAND_WORD:
-            return prepareFind(parsedInput);
+            return prepareFind(splitInput);
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
         case StudyCommand.COMMAND_WORD:

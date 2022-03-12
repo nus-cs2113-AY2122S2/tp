@@ -1,8 +1,10 @@
 package seedu.sherpass.task;
 
-public abstract class Task {
+public class Task {
     protected String description;
     protected boolean isDone;
+    protected String byDate;
+    protected String remindDate;
 
 
     /**
@@ -11,9 +13,11 @@ public abstract class Task {
      *
      * @param description Description of task.
      */
-    public Task(String description) {
+    public Task(String description, String byDate, String remindDate) {
         this.description = description;
         this.isDone = false;
+        this.byDate = byDate;
+        this.remindDate = remindDate;
     }
 
     /**
@@ -79,8 +83,12 @@ public abstract class Task {
      *
      * @return White space.
      */
-    public String getDate() {
-        return " ";
+    public String getByDate() {
+        return byDate;
+    }
+
+    public String getRemindDate() {
+        return remindDate;
     }
 
     /**
@@ -90,7 +98,7 @@ public abstract class Task {
      *
      * @return Nothing as function is abstract.
      */
-    public abstract String getType();
+    //public abstract String getType();
 
 
     /**
@@ -102,6 +110,16 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.getDescription();
+        if (this.byDate.equals("") && this.remindDate.equals("")) {
+            return "[" + this.getStatusIcon() + "] " + this.getDescription();
+        } else if (this.remindDate.equals("")){
+            return "[" + this.getStatusIcon() + "] " + this.getDescription()
+                    + " (by: " + this.byDate + ")";
+        } else {
+            return "[" + this.getStatusIcon() + "] " + this.getDescription()
+                    + " (by: " + this.byDate + ") (reminder on: " + this.remindDate +")";
+        }
     }
+
+
 }
