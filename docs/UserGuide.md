@@ -26,7 +26,7 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
 ## Features 
 
 ### print all projects: `viewproject`
-Prints all projects in the list
+Prints all projects in the list by their names
 
 Format: `viewproject`
 
