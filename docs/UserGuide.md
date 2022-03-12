@@ -1,22 +1,22 @@
 # User Guide
 
-
-Contents
-=================
+#Contents
 
 * [User Guide](#user-guide)
+* [Contents](#contents)
     * [Introduction](#introduction)
-    * [Quick Notes](#quick-notes)
     * [How SplitLah works](#how-splitlah-works)
+    * [Quick Notes](#quick-notes)
     * [Quick Start](#quick-start)
     * [Features](#features)
-        * [Creating a session: session /create](#creating-a-session-session-create)
-        * [Deleting a session: session /delete](#deleting-a-session-session-delete)
-        * [Listing all sessions: session /list](#listing-all-sessions-session-list)
-        * [Creating an activity: activity /create](#creating-an-activity-activity-create)
-        * [Settling all transactions for a session: session /summary](#settling-all-transactions-for-a-session-session-summary)
+        * [Creating a session: `session /create`](#creating-a-session-session-create)
+        * [Deleting a session: `session /delete`](#deleting-a-session-session-delete)
+        * [Listing all sessions: `session /list`](#listing-all-sessions-session-list)
+        * [Creating an activity: `activity /create`](#creating-an-activity-activity-create)
+        * [Settling all transactions for a session: `session /summary`](#settling-all-transactions-for-a-session-session-summary)
     * [FAQ](#faq)
     * [Command Summary](#command-summary)
+
 
 ## Introduction
 
@@ -37,14 +37,6 @@ Target users:
 - People who dislike manually calculating how much people owe across several activities.
 - People who go on group outings where different people pay for different activities, making bill-splitting harder.
 
-## Quick Notes
-
-- Allowed characters for values:
-  - Alphanumeric characters: `A-Z`, `a-z`, `0-9`
-  - Whitespace: `Birthday party`
-- A forward slash `/` indicates a delimiter and is used to separate arguments to the application.<br>
-Each command's documentation specifies the required delimiters and their purpose.
-
 ## How SplitLah works
 - An activity represents a single group activity, paid for by one person. Activities store a list of its participants,
 the payer, and how much each participant owes.
@@ -63,6 +55,20 @@ activity could have a different payer.
     - Each paid for by a different person.
 - At the end of a session, SplitLah calculates how much each person owes and who they need to pay. This information is
 displayed in an easy-to-read summary.
+
+## Quick Notes
+
+- Allowed characters for values:
+    - Alphanumeric characters: `A-Z`, `a-z`, `0-9`
+    - Decimals: `3.5`
+    - Whitespace: `Birthday party`
+- A forward slash `/` indicates a delimiter and is used to separate commands into parts.
+  Each command's documentation specifies the required delimiters and their purpose.
+  - Example: `/n`, `/sid`
+- Parameters enclosed in [ ] must be supplied by the user. 
+  - Example: `[SESSION_ID]`
+- Parameters with an ellipsis `...` indicate that the user can supply multiple values.
+  - Example: `[COST1] [COST2] ...`
 
 ## Quick Start
 
