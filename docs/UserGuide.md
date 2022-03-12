@@ -24,6 +24,32 @@ Target users:
 - People who dislike manually calculating how much people owe across several activities.
 - People who go on group outings where different people pay for different activities, making bill-splitting harder.
 
+## Quick Notes
+
+- Allowed characters for values:
+  - Alphanumeric characters: `A-Z`, `a-z`, `0-9`
+  - Whitespace: `Birthday party`
+- A forward slash `/` indicates a delimiter and is used to separate arguments to the application.<br>
+Each command's documentation specifies the required delimiters and their purpose.
+
+## Workflow 
+- An activity represents a single group activity, paid for by one person. Activities store a list of its participants,
+the payer, and how much each participant owes.
+  - Example: `Lunch at a restaurant`
+  - Consisting of the following participants:
+    - `Warren`, `Ivan`, `Roy`
+  - Paid for by:
+    - `Warren`
+- A session represents a period of time and stores one or more activities, as well as a list of participants. Each
+activity could have a different payer.
+  - Example: `Ivan's birthday`
+  - Consisting of the following participants:
+    - `Warren`, `Ivan`, `Roy`
+  - Consisting of the following activities:
+    - `Breakfast at McDonald's`, `Lunch at a restaurant`, `Movie at a theatre`
+    - Each paid for by a different person.
+- At the end of a session, SplitLah calculates how much each person owes and who they need to pay. This information is
+displayed in an easy-to-read summary.
 
 ## Quick Start
 
