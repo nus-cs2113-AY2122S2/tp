@@ -22,6 +22,6 @@ public class Patient extends Person {
                 + ", Gender=" + gender
                 + ", Address='" + address
                 + '\'' + ", DOB='" + dob + '\''
-                + ", DateOfAdmission='" + dateAdmission + '\'' + '}';
+                + ", DateOfAdmission='" + admissionDate + '\'' + '}';
     }
 }
