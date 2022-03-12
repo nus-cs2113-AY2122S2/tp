@@ -44,7 +44,3 @@ checkstyle {
 run{
     standardInput = System.in
 }
-
-compileJava.options.encoding = 'GBK'
-compileTestJava.options.encoding = 'GBK'
-javadoc.options.encoding = 'GBK'
