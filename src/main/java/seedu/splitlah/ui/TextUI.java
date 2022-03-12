@@ -83,6 +83,10 @@ public class TextUI {
     private void printDivider() {
         out.println("============================================================");
     }
+
+    public void printDashDivider() {
+        out.println("------------------------------------------------------------");
+    }
     
     public void printHelpMenu() {
         out.println(Message.MESSAGE_TEXTUI_HELP_MENU);
