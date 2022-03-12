@@ -1,51 +1,58 @@
 package seedu.duke.commands;
 
-import java.util.HashMap;
-import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.parsers.AddParser;
+import seedu.duke.tasks.Module;
+import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
-
+import seedu.duke.tasks.TaskList;
 
 
 public class AddCommand extends Command {
 
-    private static final String ADD_COMMAND_WORD = "add";
-    private static final String FLAG = "flag";
-    private static final String UNCOMPLETED_STATUS_TASK = " (T)( ) ";
-    private static final String TASK_FLAG = "/t";
-    private static final String MOD_FLAG = "-mod";
-    private static final String ADD_MESSAGE_TOP = "Hey! I have added this task for you!\n";
-    private static String task = "task";
-    private static String mod = "mod";
-    private static String taskWithStatus;
-    private static String res;
+    private static final String ADD_TASK_MESSAGE = "Hey! I have added this task under %s!" + LS + "%s" + LS
+            + "Now you have %d task(s) in your list!" + LS;
+    private static final String ADD_MODULE_MESSAGE = "Hey! I have added this module!" + LS + "%s";
+    private static final String MODULE_ALREADY_EXISTS = "A module with that name already exists...";
 
-    public AddCommand(String arg) throws ModHappyException {
-        try {
-            commandName = ADD_COMMAND_WORD;
-            AddParser addParser = new AddParser();
-            HashMap<String, String> parsedArg = addParser.parseString(arg);
-            switch (parsedArg.get(FLAG)) {
-            case TASK_FLAG:
-                //add tasks
-                task = parsedArg.get("argument1");
-                taskWithStatus = UNCOMPLETED_STATUS_TASK + task;
-                Task.taskList.add(taskWithStatus);
-                res = ADD_MESSAGE_TOP
-                        +  taskWithStatus + "\n"
-                        + "Now you have " + Task.taskList.size() + " task(s) in your list!\n";
-                break;
-            default:
-                throw new UnsupportedOperationException();
-            }
-        } catch (ModHappyException e) {
-            throw e;
+    private final boolean isAddTask;
+    private Task newTask = null;
+    private Module newModule = null;
+
+    public AddCommand(String name, String description, boolean isTask, String estimatedWorkingTime) {
+        if (isTask) {
+            newTask = new Task(name, description, estimatedWorkingTime);
+            isAddTask = true;
+        } else {
+            newModule = new Module(name, description);
+            isAddTask = false;
         }
     }
 
+    public Task getNewTask() {
+        return newTask;
+    }
+
+    public Module getNewModule() {
+        return newModule;
+    }
+
+    /**
+     * Adds the specified task or module.
+     */
     @Override
-    public CommandResult execute() throws ModHappyException {
-        CommandResult result = new CommandResult(res);
-        return result;
+    public CommandResult execute(ModuleList moduleList) {
+        String res = "";
+        if (isAddTask) {
+            // TODO: change this once support for -mod is implemented
+            Module targetModule = moduleList.getGeneralTasks();
+            TaskList taskList = targetModule.getTaskList();
+            res = String.format(ADD_TASK_MESSAGE, targetModule, taskList.addTask(newTask), taskList.size());
+        } else {
+            if (!moduleList.isModuleExists(newModule.getModuleCode())) {
+                res = String.format(ADD_MODULE_MESSAGE, moduleList.addModule(newModule));
+            } else {
+                res = MODULE_ALREADY_EXISTS;
+            }
+        }
+        return new CommandResult(res);
     }
 }
