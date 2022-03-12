@@ -1,4 +1,3 @@
 Welcome to CSProjPlanner
 
-addproject project1
 project1 Added.
