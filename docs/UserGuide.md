@@ -158,13 +158,12 @@ Example of usage:
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-| Command                                                                                                      | Description                                                                  |
-|--------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| `session /create /n [SESSION_NAME] /d [DATE] /pl [PARTICIPANTS]`                                             | Creates a Session.                                                           |
-| `session /delete /sid [SESSION_ID]`                                                                          | Deletes a Session.                                                           |
-| `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /c [TOTAL_COST]`         | Creates an Activity and splits `TOTAL_COST` evenly amongst all participants. | 
-| `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /c [COST1] [COST2] ...` | Creates an Activity and assigns a unique `COST` to each participant.|
-| `session /list`                                                                                              | Lists sessions.                                                              |
-| `session /summary /sid [SESSION_ID]`                                                                         | Displays a summary of the Session.                                           |
+| Action                                 | Format                                                                                                                                                                                                           |
+|----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Add session                            | Format: `session /create /n [SESSION_NAME] /d [DATE] /pl [PARTICIPANTS]`<br><br> Example: `session /create /n Outing /d 15-03-2022 /pl Warren, Ivan, Roy`                                                        |
+| Delete session                         | Format: `session /delete /sid [SESSION_ID]`<br><br>Example: `session /delete /sid 1`                                                                                                                             |
+| Create activity and split costs evenly | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /c [TOTAL_COST]`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /c 7.5`            |
+| Create activity and split costs manually| Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /cl [COST1] [COST2]...`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /c 1 1 5.5` |
+|List sessions| Format: `session /list`                                                                                                                                                                                          |
+|Show session summary| Format: `session /summary /sid [SESSION_ID]`<br><br>Example: `session /summary /sid 1`                                                                                                                           |
+|Exit|Format: `exit`|
