@@ -1,6 +1,9 @@
 package data.workouts;
 
-
+/**
+ * Thrown to indicate that the index specified for operations such as
+ * update and delete is not within the range of the workout list.
+ */
 public class WorkoutOutOfRangeException extends Exception {
     // Pre-defined error messages
     public static final String INDEX_VALUE_OUT_OF_RANGE = "Uh oh, the index specified is out of range.\n"
