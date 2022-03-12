@@ -106,6 +106,26 @@ public class Session {
     }
 
     /**
+     * Checks whether the Session object has an Activity object with the queried unique identifier.
+     * 
+     * @param activityId An integer that uniquely identifies an Activity object in the profile.
+     * @return true if the Session object has an Activity object with a unique identifier matching the query,
+     *         false otherwise.
+     */
+    public boolean hasActivity(int activityId) {
+        if (activityList.isEmpty()) {
+            return false;
+        }
+        
+        for (Activity activity : activityList) {
+            if (activity.getActivityId() == activityId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns an Activity object specified by a numerical identifier that uniquely identifies the activity.
      *
      * @param activityId An integer that uniquely identifies an Activity object in the profile.
