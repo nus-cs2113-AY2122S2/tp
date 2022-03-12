@@ -8,6 +8,7 @@ import seedu.splitlah.data.Manager;
  * @author Saurav
  */
 public class InvalidCommand extends Command {
+
     private final String errorMessage;
 
     public InvalidCommand(String errorMessage) {
