@@ -5,6 +5,7 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.Message;
 
 /**
  * Represents a command which deletes an Activity object from a Session object.
@@ -63,8 +64,19 @@ public class ActivityDeleteCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
+        Session session = null;
         try {
-            Session session = manager.getProfile().getSession(sessionId);
+            session = manager.getProfile().getSession(sessionId);
+            boolean isActivityExists = session.hasActivity(activityId);
+            if (!isActivityExists) {
+                manager.getUi().printlnMessage(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST);
+                return;
+            }
+        } catch (InvalidDataException e) {
+            manager.getUi().printlnMessage(e.getMessage());
+        }
+
+        try {
             String confirmationPrompt = COMMAND_CONFIRMATION + activityId + "?";
             boolean isConfirmed = manager.getUi().getUserConfirmation(confirmationPrompt);
             if (isConfirmed) {
