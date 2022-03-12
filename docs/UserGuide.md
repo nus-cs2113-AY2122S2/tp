@@ -51,8 +51,25 @@ Format: `session /delete /sid [SESSION_ID]`
     * The unique identifier for a session can be retrieved with `session /list` command.
 
 Example of usage:
-1. Remove an existing session that was created with session unique identifier of 1.
+1. Remove an existing session that was created with a session unique identifier of 1.
    1. `session /delete /sid 1`
+
+<br>[INSERT SCREEN SHOT]
+<br>
+<br>
+### Settle all transactions for a session: `session /summary`
+>Prints out a summary of the session to tell you, for that session, who needs to pay how much to another person
+> in order for everyone to have no remaining debts and no more money to collect from others.<br>
+>This helps you calculate all payments that has to be done at the end of the day for the group outing quickly.
+
+Format: `session /summary /sid [SESSION_ID]`
+
+* `[SESSION_ID]` refers to the unique identifier of the session.
+    * The unique identifier for a session can be retrieved with `session /list` command.
+
+Example of usage:
+1. Get a session summary for an existing session with a session unique identifier of 1.
+    1. `session /summary /sid 1`
 
 <br>[INSERT SCREEN SHOT]
 <br>
