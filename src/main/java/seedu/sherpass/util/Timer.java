@@ -1,8 +1,11 @@
 package seedu.sherpass.util;
 
-import static seedu.sherpass.constant.Timer.*;
-
 import seedu.sherpass.command.StudyCommand;
+
+import static seedu.sherpass.constant.Timer.TIME_INTERVAL;
+import static seedu.sherpass.constant.Timer.NO_TIME_LEFT;
+import static seedu.sherpass.constant.Timer.ONE_MINUTE;
+import static seedu.sherpass.constant.Timer.ONE_HOUR;
 
 public class Timer extends Thread {
 
@@ -24,11 +27,9 @@ public class Timer extends Thread {
     @Override
     public void run() {
         StudyCommand.isTimerRunning = true;
-        ui.showToUser("Timer started for " + timeLeft + " seconds.");
+        printTimerStart();
         while (hasTimeLeft) {
-            if (timeLeft % TIME_INTERVAL == NO_TIME_LEFT) {
-                ui.showToUser(timeLeft + " seconds left.");
-            }
+            printTimeLeft();
             try {
                 Thread.sleep(1000);
                 timeLeft -= 1;
@@ -43,6 +44,7 @@ public class Timer extends Thread {
                     }
                 }
             } catch (InterruptedException e) {
+                return;
             }
         }
         if (!hasTimeLeft && !forcedStop) {
@@ -50,6 +52,39 @@ public class Timer extends Thread {
             ui.showToUser("Time is up! Would you like to start another timer?");
         }
         this.interrupt();
+    }
+
+    public void printTimeLeft() {
+        if (timeLeft > ONE_MINUTE) {
+            if (timeLeft % ONE_MINUTE == 0) {
+                int minutesLeft = timeLeft/ONE_MINUTE;
+                ui.showToUser(minutesLeft + " minutes left.");
+            }
+        } else {
+            if (timeLeft % TIME_INTERVAL == 0) {
+                ui.showToUser(timeLeft + " seconds left.");
+            }
+        }
+    }
+
+    public void printTimerStart() {
+        int hours;
+        int minutes;
+        int seconds;
+        if (timeLeft >= ONE_HOUR) {
+            hours = timeLeft/ONE_HOUR;
+            minutes = (timeLeft - hours * ONE_HOUR) / ONE_MINUTE;
+            seconds = timeLeft - hours * ONE_HOUR - minutes * ONE_MINUTE;
+            ui.showToUser("Timer of " + hours + " hours " + minutes + " minutes "
+                    + seconds + " seconds started.");
+        } else if (timeLeft >= ONE_MINUTE){
+            minutes = timeLeft / ONE_MINUTE;
+            seconds = timeLeft - (minutes * ONE_MINUTE);
+            ui.showToUser("Timer of " + minutes + " minutes "
+                    + seconds + " seconds started.");
+        } else {
+            ui.showToUser("Timer of " + timeLeft + " seconds started.");
+        }
     }
 
     public void setDuration(int duration) {
