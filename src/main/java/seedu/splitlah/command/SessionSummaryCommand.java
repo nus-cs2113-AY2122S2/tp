@@ -34,10 +34,6 @@ public class SessionSummaryCommand extends Command {
     public static final String PREPEND_SESSION_DATE = "\nDate: ";
     public static final String PREPEND_PAYMENTS = "\nTransactions to be made:";
     public static final String PREPEND_TRANSACTION = "\n - ";
-    public static final String TEMP_ERROR_INVALID_PERSONCOSTPAIR_LIST =
-            "Program has faced some issue : processAllTransactions, personCostPairList is invalid";
-    public static final String TEMP_ERROR_PROCESSALLTRANSACTION_METHOD_LOGIC_INVALID =
-            "Program has faced some issue : processAllTransactions, payer, receiver logic is invalid";
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final int ZERO_INDEXING_OFFSET = 1;
     private static final double SMALL_DIFFERENCE_LIMIT = 0.0001;
@@ -123,23 +119,21 @@ public class SessionSummaryCommand extends Command {
         
         int payerIndex = 0;
         int receiverIndex = personCostPairList.size() - ZERO_INDEXING_OFFSET;
-        if (!isPersonCostPairListValid(personCostPairList)) {
-            return TEMP_ERROR_INVALID_PERSONCOSTPAIR_LIST;
-        }
+        assert isPersonCostPairListValid(personCostPairList) : 
+                Message.ASSERT_SESSIONSUMMARY_INVALID_PERSONCOSTPAIR_LIST;
 
         boolean hasInserted = false;
         while (payerIndex < receiverIndex) {
             PersonCostPair payer = personCostPairList.get(payerIndex);
             PersonCostPair receiver = personCostPairList.get(receiverIndex);
-            if (payer.getCost() > receiver.getCost()) {
-                return TEMP_ERROR_PROCESSALLTRANSACTION_METHOD_LOGIC_INVALID;
-            }
+            assert payer.getCost() > receiver.getCost() : 
+                    Message.ASSERT_SESSIONSUMMARY_PAYER_EXPECTS_FROM_RECEIVER;
             String output = processTransaction(payer, receiver);
+            
             if (!output.isEmpty()) {
                 sb.append(PREPEND_TRANSACTION).append(output);
                 hasInserted = true;
             }
-            
             if (payer.isProcessed()) {
                 payerIndex += 1;
             }
