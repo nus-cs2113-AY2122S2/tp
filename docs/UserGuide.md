@@ -3,7 +3,7 @@
 ## Contents
 
 * TOC
-{:toc}
+  {:toc}
 
 ## Introduction
 
