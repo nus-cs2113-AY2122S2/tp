@@ -1,22 +1,17 @@
 package seedu.duke.assets;
 
-public class Doctor {
-    String nric;
-    String fullName;
-    int age;
-    char gender;
-    String address;
-    String dob;
+public class Doctor extends Person {
     String specialization;
 
-    public Doctor(String nric, String fullName, int age, char gender, String address, String dob,
-                  String specialization) {
-        this.nric = nric;
-        this.fullName = fullName;
-        this.age = age;
-        this.gender = gender;
-        this.address = address;
-        this.dob = dob;
+    public Doctor(String nric, String fullName, int age, char gender, String address,
+                  String dob, String specialization) {
+        super(nric, fullName, age, gender, address, dob);
         this.specialization = specialization;
     }
+
+    public String getSpecialization() {
+        return specialization;
+    }
+    
+    // @override toString()
 }
