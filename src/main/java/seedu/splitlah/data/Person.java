@@ -28,10 +28,10 @@ public class Person {
     /**
      * Constructs an ActivityCost object and adds it to the list of ActivityCosts.
      *
-     * @param activityId the activityId.
-     * @param costPaid the cost of the activity paid by the payer.
-     * @param costOwed the money owed by an individual.
-     * @throws InvalidDataException if the activityCost cannot be created from the given parameters.
+     * @param activityId An integer that uniquely identifies an activity.
+     * @param costPaid   A double that represents the cost paid by a Person.
+     * @param costOwed   A double that represents the cost owed by a Person.
+     * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      */
     public void addActivityCost(int activityId, double costPaid, double costOwed) throws InvalidDataException {
         ActivityCost activityCost = new ActivityCost(activityId, costPaid, costOwed);
@@ -41,7 +41,7 @@ public class Person {
     /**
      * Removes an ActivityCost object from the list of ActivityCosts.
      *
-     * @param activityId the activityId of the ActivityCost to be removed.
+     * @param activityId The activityId of the ActivityCost to be removed.
      * @throws InvalidDataException if the activityId is not found.
      */
     public void removeActivityCost(int activityId) throws InvalidDataException {
@@ -90,10 +90,10 @@ public class Person {
     /**
      * Returns the cost owed by this Person object for an Activity.
      *
-     * @param activityId int representing activityId of the Activity.
-     * @return double representing cost owed by the Person for this Activity.
-     * @throws InvalidDataException if this Person is not participating in any Activities
-     *         or the activityId is not found.
+     * @param activityId An integer that uniquely identifies an activity.
+     * @return A double representing cost owed by the Person for this Activity.
+     * @throws InvalidDataException If this Person is not participating in any Activities.
+     *                              If the activityId is not found.
      */
     public double getActivityCostOwed(int activityId) throws InvalidDataException {
         if (activityCostList.isEmpty()) {

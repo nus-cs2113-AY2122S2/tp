@@ -47,7 +47,7 @@ public class TextUI {
      * The user may confirm by inputting Y/y/yes to the interface.
      * The user may reject by inputting N/n/no to the interface.
      *
-     * @param message A message to be printed initially to the user interface.
+     * @param message A String object to be printed initially to the user interface.
      * @return true if the user confirms
      */
     public boolean getUserConfirmation(String message) {
@@ -82,6 +82,10 @@ public class TextUI {
 
     private void printDivider() {
         out.println("============================================================");
+    }
+
+    public void printDashDivider() {
+        out.println("------------------------------------------------------------");
     }
     
     public void printHelpMenu() {
