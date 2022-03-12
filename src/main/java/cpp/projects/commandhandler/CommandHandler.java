@@ -1,6 +1,7 @@
-package seedu.duke.commandhandler;
+package cpp.projects.commandhandler;
 
-import seedu.duke.projects.ProjectList;
+import cpp.projects.ProjectList;
+
 import java.util.Scanner;
 
 public class CommandHandler {
@@ -29,23 +30,25 @@ public class CommandHandler {
         commands = userInput.split(" ");
 
         switch (commands[0].toLowerCase()) {
-        case "addproject": //end the program
+        case "addproject": //add a project into list
             projectList.addProject(commands[1]);
             System.out.println("____________________________________________________________");
             System.out.println(commands[1] + " Added.");
             System.out.println("____________________________________________________________");
             break;
-        case "deleteproject": //list out all tasks
+        case "deleteproject": //delete a project based on its name
             projectList.deleteProject(commands[1]);
             System.out.println("____________________________________________________________");
             System.out.println(commands[1] + " Deleted.");
             System.out.println("____________________________________________________________");
             break;
-        case "viewproject":
+        case "viewproject": //view all project(s) by name
             projectList.printProject();
             break;
         default:
-            System.out.println("Unknown command");
+            System.out.println("____________________________________________________________");
+            System.out.println("Unknown command.");
+            System.out.println("____________________________________________________________");
             break;
         }
 

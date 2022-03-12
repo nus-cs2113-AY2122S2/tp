@@ -1,4 +1,4 @@
-package seedu.duke.projects;
+package cpp.projects;
 
 public class Project {
     private String title;

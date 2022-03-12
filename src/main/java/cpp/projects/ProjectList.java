@@ -1,9 +1,9 @@
-package seedu.duke.projects;
+package cpp.projects;
 
 import java.util.ArrayList;
 
 public class ProjectList {
-    private static ArrayList<Project> projectList;
+    private ArrayList<Project> projectList;
 
     /**
      * Constructs a ProjectList object.
@@ -28,7 +28,17 @@ public class ProjectList {
      * @param title Name of the project
      */
     public void deleteProject(String title) {
-        projectList.remove(title);
+        int index = -1;
+        int count = 0;
+
+        for (Project project: projectList) {
+            if (project.getTitle().equalsIgnoreCase(title)) {
+                index = count;
+                break;
+            }
+            count++;
+        }
+        projectList.remove(index);
     }
 
     /**
@@ -37,7 +47,7 @@ public class ProjectList {
     public void printProject() {
         int count = 1;
         System.out.println("____________________________________________________________");
-        System.out.println("Here are all current project(s) in your list: ");
+        System.out.println("Here are all current project(s) in your list:");
         for (Project project: projectList) {
             System.out.println("[" + count + "] " + project.getTitle());
             count++;

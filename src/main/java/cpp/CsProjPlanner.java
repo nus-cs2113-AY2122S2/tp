@@ -1,7 +1,7 @@
-package seedu.duke;
+package cpp;
 
-import seedu.duke.commandhandler.CommandHandler;
-import seedu.duke.projects.ProjectList;
+import cpp.projects.commandhandler.CommandHandler;
+import cpp.projects.ProjectList;
 
 import java.util.Scanner;
 
