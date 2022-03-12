@@ -38,8 +38,8 @@ public class ActivityViewCommand extends Command {
     @Override
     public void run(Manager manager) {
         try {
-            Session sessionToBePrinted = manager.getProfile().getSession(sessionId);
-            Activity activityToBePrinted = sessionToBePrinted.getActivity(activityId);
+            Session session = manager.getProfile().getSession(sessionId);
+            Activity activityToBePrinted = session.getActivity(activityId);
             String messageToBePrinted = SESSION_ID_HEADER + sessionId + SEPARATOR + activityToBePrinted.toString();
             manager.getUi().printlnMessageWithDivider(messageToBePrinted);
         } catch (InvalidDataException e) {
