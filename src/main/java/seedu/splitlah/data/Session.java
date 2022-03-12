@@ -26,6 +26,7 @@ public class Session {
             "Id | Activity Name | Cost | Payee";
     private static final String PERSON_LIST_HEADER =
             "Participants";
+    private static final String SUMMARY_STRING_SEPARATOR = " | ";
     private static final int ZERO_INDEXING_OFFSET = 1;
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     
@@ -274,8 +275,19 @@ public class Session {
 
     /**
      * Returns a String object summarising the state of the Session object.
+     * 
+     * @return A String object containing a summary of the Session object.
+     */
+    public String getSessionSimplifiedString() {
+        return sessionId + SUMMARY_STRING_SEPARATOR + sessionName + "\n  | " + dateCreated.format(dateFormat)
+                + SUMMARY_STRING_SEPARATOR + personList.size() + " participants"
+                + SUMMARY_STRING_SEPARATOR + activityList.size() + " activities";
+    }
+
+    /**
+     * Returns a String object describing the state of the Session object.
      *
-     * @return A String object containing a summary of the Session object and its member attributes.
+     * @return A String object containing a description of the Session object and its member attributes.
      */
     @Override
     public String toString() {
