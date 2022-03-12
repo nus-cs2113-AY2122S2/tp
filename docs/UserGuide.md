@@ -1,13 +1,12 @@
 # User Guide
 
-
-Contents
-=================
+#Contents
 
 * [User Guide](#user-guide)
+* [Contents](#contents)
     * [Introduction](#introduction)
-    * [Quick Notes](#quick-notes)
     * [How SplitLah works](#how-splitlah-works)
+    * [Quick Notes](#quick-notes)
     * [Quick Start](#quick-start)
     * [Features](#features)
         * [Creating a session: `session /create`](#creating-a-session-session-create)
@@ -17,6 +16,7 @@ Contents
         * [Settling all transactions for a session: `session /summary`](#settling-all-transactions-for-a-session-session-summary)
     * [FAQ](#faq)
     * [Command Summary](#command-summary)
+
 
 ## Introduction
 
