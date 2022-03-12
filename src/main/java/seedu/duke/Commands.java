@@ -55,12 +55,9 @@ public class Commands {
 
     private static void remove(int id, int qty, ArrayList<Goods> userGoods)
             throws LargeQuantityException, ItemDoesNotExistException {
-        boolean isGoodExist = false;
 
         for (Goods good : userGoods) {
             if (good.getId() == id) {
-                isGoodExist = true;
-
                 if (qty > good.getQuantity()) {
                     throw new LargeQuantityException();
                 }
@@ -73,14 +70,11 @@ public class Commands {
                     System.out.println(qty + " " + good.getName() + " have been removed.");
                 }
 
-                break;
+                return;
             }
         }
 
-        if (!isGoodExist) {
-            throw new ItemDoesNotExistException();
-        }
-
+        throw new ItemDoesNotExistException();
     }
 
     public static void removeGood(String id, String qty, ArrayList<Goods> userGoods) {
