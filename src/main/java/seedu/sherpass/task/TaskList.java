@@ -4,9 +4,6 @@ import seedu.sherpass.util.Ui;
 
 import java.util.ArrayList;
 
-import static seedu.sherpass.constant.Message.EMPTY_STRING;
-import static seedu.sherpass.constant.Message.ERROR_SYSTEM_FAULT_MESSAGE;
-
 public class TaskList {
     private ArrayList<Task> tasks;
 
@@ -36,7 +33,7 @@ public class TaskList {
      * @param taskRemindDate    Reminder date of the task
      */
     public void addTask(String taskDescription, String taskByDate, String taskRemindDate) {
-        Task newTask = new Add(taskDescription, taskByDate, taskRemindDate);
+        Task newTask = new Task(taskDescription, taskByDate, taskRemindDate);
         tasks.add(newTask);
         System.out.println("Got it. I've added this task:\n  " + newTask
                 + "\nNow you have " + tasks.size() + " task(s) in the list.");
