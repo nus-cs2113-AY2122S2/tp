@@ -75,6 +75,8 @@ public abstract class Message {
             "The list of participants in the session is currently empty.";
     public static final String ERROR_SESSION_PERSON_NOT_IN_LIST =
             "The person that you have specified was not found in this session.";
+    public static final String ASSERT_SESSION_PERSON_LIST_EMPTY =
+            "Session object cannot be constructed with a null or empty person list.";
     
     // Profile
     public static final String ERROR_PROFILE_DUPLICATE_SESSION =
