@@ -23,17 +23,16 @@ public class SessionSummaryCommand extends Command {
     public static final String COMMAND_TEXT = "session /summary";
 
     public static final String COMMAND_FORMAT = "Syntax: session /summary /sid <SESSIONID>";
-    
-    public static final String PREPEND_SESSION_ID = "\nSession id:   ";
-    public static final String PREPEND_SESSION_NAME = "\nSession name: ";
-    public static final String PREPEND_SESSION_DATE = "\nSession date: ";
-    public static final String PREPEND_PAYMENTS = "\nTransactions to be made:";
-    public static final String PREPEND_TRANSACTION = "\n - ";
 
     private int sessionId;
 
     // MISC CONSTANTS
     public static final String SUMMARY_HEADER = "Summary --";
+    public static final String PREPEND_SESSION_ID = "\nSession id:   ";
+    public static final String PREPEND_SESSION_NAME = "\nSession name: ";
+    public static final String PREPEND_SESSION_DATE = "\nSession date: ";
+    public static final String PREPEND_PAYMENTS = "\nTransactions to be made:";
+    public static final String PREPEND_TRANSACTION = "\n - ";
     public static final String TEMP_ERROR_INVALID_PERSONCOSTPAIR_LIST =
             "Program has faced some issue : processAllTransactions, personCostPairList is invalid";
     public static final String TEMP_ERROR_PROCESSALLTRANSACTION_METHOD_LOGIC_INVALID =
