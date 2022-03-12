@@ -5,7 +5,6 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
-import seedu.splitlah.ui.Message;
 
 /**
  * Represents a command which deletes an Activity object from a Session object.
