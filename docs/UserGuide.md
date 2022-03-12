@@ -3,13 +3,13 @@
 ## Contents
 
 * TOC
-  {:toc}
+{:toc}
 
 ## Introduction
 
 SplitLah is a CLI program that lets users split bills proportionally amongst themselves after a group outing. SplitLah does
-the work of calculating how much each participant must pay across multiple activities, and keeps track of who has paid
-and who has not.
+the work of calculating how much each participant must pay across multiple activities, and keeps track of who paid the total
+bill for each activity.
 
 Value proposition:
 
