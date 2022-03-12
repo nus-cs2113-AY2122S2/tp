@@ -67,9 +67,9 @@ Example of usage:
 <br>
 <br>
 ### Creating an activity: `activity /create`
->Creates a new activity within a particular session to be managed by SplitLah. <br>
->Activities are a way for the user to keep track of the activities and their respective costs throughout a session. <br>
->Other information include the person who paid for the activity and the people involved in the activity.
+> Creates a new activity within a particular session to be managed by SplitLah. <br>
+> Activities are a way for the user to keep track of the activities and their respective costs throughout a session. <br>
+> Other information include the person who paid for the activity and the people involved in the activity.
 
 Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
 /c [TOTAL_COST] [OPTIONAL_ARGUMENTS]`
@@ -89,8 +89,11 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 * `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
 
 > **Notes:**
+>- The session with session identifier `[SESSION_ID]` has to exist before the activity can be created.
 >- The `[ACTIVITY_NAME]` should be unique across all activities.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
+>- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` have to be names that are already captured in the session with
+   the session identifier `[SESSION_ID]`.
 
 Examples of usage:
 1. Adds a new activity in a session with session identifier 1, named Class Lunch, where Alice paid for both
