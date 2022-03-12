@@ -26,6 +26,7 @@ public class Commands {
         }
     }
 
+    /*Prints all inventory in a numbered list in order of input*/
     public static void listGoods(ArrayList<Goods> userGoods) {
         int numberOfUserGoods = userGoods.size();
         if (userGoods.isEmpty()) {
@@ -35,7 +36,7 @@ public class Commands {
         System.out.println("List of inventory items: ");
         int counter = 0;
         for (Goods good : userGoods) {
-            System.out.println((counter+1) + ". " + good.getName());
+            System.out.println((counter + 1) + ". " + good.getName());
             counter++;
         }
     }
