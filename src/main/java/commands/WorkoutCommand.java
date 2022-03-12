@@ -29,7 +29,7 @@ public class WorkoutCommand extends Command {
     private String userArguments;
 
     public WorkoutCommand(String userInput, FileManager fileManager, WorkoutList workoutList,
-                          String userAction, String userArguments) throws InvalidCommandException,
+            String userAction, String userArguments) throws InvalidCommandException,
             IOException {
         super(userInput);
         this.fileManager = fileManager;
@@ -95,8 +95,8 @@ public class WorkoutCommand extends Command {
                 getFileManager().rewriteAllWorkoutsToFile(getWorkoutList());
                 break;
             case UPDATE_ACTION_KEYWORD:
-                Workout updateWorkout = getWorkoutList().updateWorkout(getUserArguments());
-                getUI().printUpdateWorkoutMessage(updateWorkout);
+                Workout updatedWorkout = getWorkoutList().updateWorkout(getUserArguments());
+                getUI().printUpdateWorkoutMessage(updatedWorkout);
                 getFileManager().rewriteAllWorkoutsToFile(getWorkoutList());
                 break;
             default:

@@ -159,7 +159,7 @@ public class UI {
      * Prints a message when a workout has been updated.
      * Shows updated workout.
      *
-     * @param updateWorkout The workout to be updated.
+     * @param updateWorkout The workout that is updated.
      */
     public void printUpdateWorkoutMessage(Workout updateWorkout) {
         System.out.println(UPDATED_WORKOUT_MESSAGE);
