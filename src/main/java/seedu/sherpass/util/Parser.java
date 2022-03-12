@@ -15,17 +15,13 @@ import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.task.Add;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.noTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskNoTimeFormat;
-import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskWithTimeFormat;
-import static seedu.sherpass.constant.DateAndTimeFormat.withTimeFormat;
 
 import static seedu.sherpass.constant.Index.CUSTOM_TIMER_INDEX;
 import static seedu.sherpass.constant.Index.DEFAULT_TIMER_INDEX;
@@ -45,7 +41,6 @@ import static seedu.sherpass.constant.Index.SAVE_TASK_REMIND_DATE_INDEX;
 import static seedu.sherpass.constant.Index.SAVE_TASK_MARK_STATUS;
 import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
 import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
-import static seedu.sherpass.constant.Index.TASK_DATE_INDEX;
 import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
 import static seedu.sherpass.constant.Message.*;
 
@@ -82,7 +77,7 @@ public class Parser {
             }
         }
 
-        parsedData = new Add(rawData[SAVE_TASK_DESCRIPTION_INDEX].trim(), parsedByDate, parsedRemindDate);
+        parsedData = new Task(rawData[SAVE_TASK_DESCRIPTION_INDEX].trim(), parsedByDate, parsedRemindDate);
 
         if (rawData[SAVE_TASK_MARK_STATUS].equals("X")) {
             parsedData.markAsDone();

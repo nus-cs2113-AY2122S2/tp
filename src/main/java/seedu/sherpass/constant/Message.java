@@ -21,12 +21,6 @@ public class Message {
 
     public static final String ERROR_INVALID_INPUT_MESSAGE = "Please key in an appropriate command.\n"
             + HELP_MESSAGE;
-    public static final String ERROR_EVENT_MISSING_COMMAND_MESSAGE = "Oops! You forgot to "
-            + "add a '/at' to your 'event' command.";
-    public static final String ERROR_DEADLINE_MISSING_COMMAND_MESSAGE = "Oops! You forgot to"
-            + " add a '/by' to your 'deadline' command.";
-    public static final String ERROR_TODO_REPEATED_INPUT_MESSAGE = "Oops! It seems that you've "
-            + "already added this task.";
     public static final String ERROR_INVALID_DELETE_INDEX_MESSAGE = "Oops! It seems that you've given\n"
             + "an invalid index to delete the task.";
     public static final String ERROR_IO_FAILURE_MESSAGE = "Oh no! We've encountered an error \nwhile "
