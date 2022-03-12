@@ -23,17 +23,17 @@ public class SessionSummaryCommand extends Command {
     
     public static final String COMMAND_TEXT = "session /summary";
 
-    public static final String COMMAND_FORMAT = "Syntax: session /summary /sid <SESSIONID>";
+    private static final String COMMAND_FORMAT = "Syntax: session /summary /sid <SESSIONID>";
 
     private int sessionId;
 
     // MISC CONSTANTS
-    public static final String SUMMARY_HEADER_PREPEND = "Summary (Session Id #";
-    public static final String SUMMARY_HEADER_POSTPEND = ") --";
-    public static final String PREPEND_SESSION_NAME = "\nName: ";
-    public static final String PREPEND_SESSION_DATE = "\nDate: ";
-    public static final String PREPEND_PAYMENTS = "\nTransactions to be made:";
-    public static final String PREPEND_TRANSACTION = "\n - ";
+    private static final String SUMMARY_HEADER_PREPEND = "Summary (Session Id #";
+    private static final String SUMMARY_HEADER_POSTPEND = ") --";
+    private static final String PREPEND_SESSION_NAME = "\nName: ";
+    private static final String PREPEND_SESSION_DATE = "\nDate: ";
+    private static final String PREPEND_PAYMENTS = "\nTransactions to be made:";
+    private static final String PREPEND_TRANSACTION = "\n - ";
     private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final int ZERO_INDEXING_OFFSET = 1;
     private static final double SMALL_DIFFERENCE_LIMIT = 0.0001;
