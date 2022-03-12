@@ -72,11 +72,6 @@ public class ActivityDeleteCommand extends Command {
                 manager.getUi().printlnMessage(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST);
                 return;
             }
-        } catch (InvalidDataException e) {
-            manager.getUi().printlnMessage(e.getMessage());
-        }
-
-        try {
             String confirmationPrompt = COMMAND_CONFIRMATION + activityId + "?";
             boolean isConfirmed = manager.getUi().getUserConfirmation(confirmationPrompt);
             if (isConfirmed) {
