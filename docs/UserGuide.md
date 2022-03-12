@@ -8,6 +8,8 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
 
 - [Quick Start](#Quick-Start)
 - [Features](#Features)
+- [FAQ](#FAQ)
+- [Command Summary](#Command-Summary)
 
 ## Quick Start
 
@@ -23,19 +25,18 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
 
 ## Features 
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### print all projects: `viewproject`
+Prints all projects in the list
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Format: `viewproject`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+* The `viewproject` cannot contain a space, i.e., `view project` will be considered an unknown command.
 
-Example of usage: 
+### exit: `exit`
+Exit the program
 
-`todo n/Write the rest of the User Guide d/next week`
+Format: `exit`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
 
 ## FAQ
 
@@ -45,6 +46,7 @@ Example of usage:
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+| Action              | Format                                   |
+|---------------------|------------------------------------------|
+| view all project(s) | `viewproject`                            |
+| Exit                | `exit`                                   |
