@@ -34,4 +34,10 @@ class SessionCreateCommandTest {
         command.run(manager);
         assertEquals(2, manager.getProfile().getSessionList().size());
     }
+    public void run_hasSessionDuplicate_sessionListSizeRemainsTwo() {
+        String userInput = "session /create /n Class outing /d 2022-02-15 /pl Mallory Eves";
+        Command command = SessionCreateCommand.prepare(userInput);
+        command.run(manager);
+        assertEquals(2, manager.getProfile().getSessionList().size());
+    }
 }
