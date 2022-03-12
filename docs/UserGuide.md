@@ -2,10 +2,9 @@
 
 ## Introduction
 
-SplitLah is an application for keeping track of expenses during group outing sessions, specifically for those who are 
-budget conscious. It then proceeds to split the expenses according to the group members' individual costs for the 
-activities they participated in, for a particular session, via a Command Line Interface(CLI).
-
+SplitLah is an application for people who split bills equally amongst themselves after a group outing. SplitLah does
+the work of calculating how much each participant must pay across multiple activities, and keeps track of who has paid
+and who has not. You can use SplitLah through a Command Line Interface (CLI).
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
@@ -17,14 +16,17 @@ activities they participated in, for a particular session, via a Command Line In
    11/03/2022 (DD-MM-YYYY) with Warren, Ivan, and Roy as members.
     - `session /list` : Lists all Sessions.
     - `activity /create /sid 1 /n Lunch /p Warren /i Warren Roy Ivan /c 7.5` : Creates an Activity named "Lunch" and
-   assigns it to the Session #1. The participats are Warren, Roy and Ivan, but only Warren has paid.
+   assigns it to Session #1. The participants are Warren, Roy and Ivan. Warren pays for everyone, costing him a total 
+    of $7.50.
     - `activity /list /sid 1` : Lists Activities grouped under Session #1.
+    - `session /summary /sid 1` : Summarises Session #1, including how much each member owes and how much they have 
+    already paid.
 6. Refer to Features for a more in-depth explanation of all commands available.
 
 ## Features 
 
 ### Creating a session: `session /create`
-> Creates a new session to be managed by SplitLah. <br> 
+> Creates a new session.<br>
 > Sessions are a way for the user to manage their gatherings that happen across the day.
 
 Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ...]`
@@ -139,15 +141,19 @@ Example of usage:
 <br>
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: Is data saved to the disk upon exit?
 
-**A**: {your answer here}
+**A**: SplitLah 1.0 does not currently support saving data to the disk.
 
 ## Command Summary
 
 {Give a 'cheat sheet' of commands here}
 
-|Command|Description|
-|---|---|
-|`session`|Creates 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+| Command                                                                                                      | Description                                                                  |
+|--------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| `session /create /n [SESSION_NAME] /d [DATE] /pl [PARTICIPANTS]`                                             | Creates a Session.                                                           |
+| `session /delete /sid [SESSION_ID]`                                                                          | Deletes a Session.                                                           |
+| `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /c [TOTAL_COST]`         | Creates an Activity and splits `TOTAL_COST` evenly amongst all participants. | 
+| `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /c [COST1] [COST2] ...` | Creates an Activity and assigns a unique `COST` to each participant.|
+| `session /list`                                                                                              | Lists sessions.                                                              |
+| `session /summary /sid [SESSION_ID]`                                                                         | Displays a summary of the Session.                                           |
