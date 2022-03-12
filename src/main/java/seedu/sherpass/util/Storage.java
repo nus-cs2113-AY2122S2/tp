@@ -145,24 +145,21 @@ public class Storage {
      * Loads back the save file onto the program.
      *
      * @return The saved data of the tasks in the saved file.
-<<<<<<< HEAD:src/main/java/seedu/sherpass/utills/Storage.java
      * Tasks are represented in an array.
-=======
-     *     Tasks are represented in an array.
->>>>>>> master:src/main/java/seedu/sherpass/util/Storage.java
      */
     public ArrayList<Task> load() throws IOException, InvalidInputException, JSONException {
         ArrayList<Task> taskList = new ArrayList<>();
         List<String> dataLines = Files.readAllLines(new File(saveFilePath).toPath());
-        String dataString = String.join("", dataLines);
-        JSONObject dataJson = new JSONObject(dataString);
-        JSONArray array = dataJson.getJSONArray("tasks");
+        if (dataLines.size() > 0) {
+            String dataString = String.join("", dataLines);
+            JSONObject dataJson = new JSONObject(dataString);
+            JSONArray array = dataJson.getJSONArray("tasks");
 
-        for (int i = 0; i < array.length(); i++) {
-            JSONObject taskData = array.getJSONObject(i);
-            taskList.add(Parser.parseSavedData(taskData));
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject taskData = array.getJSONObject(i);
+                taskList.add(Parser.parseSavedData(taskData));
+            }
         }
-
         return taskList;
     }
 

@@ -58,7 +58,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        new Main("data/sherpass.txt").run();
+        new Main("data/sherpass.json").run();
     }
 
 }
