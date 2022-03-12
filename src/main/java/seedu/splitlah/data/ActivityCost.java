@@ -17,9 +17,9 @@ public class ActivityCost {
      * Constructs an ActivityCost object.
      * Assumption: Every field is non-negative.
      *
-     * @param activityId int representing the activityId.
-     * @param costPaid   double representing cost paid.
-     * @param costOwed   double representing cost owed.
+     * @param activityId An integer that uniquely identifies an activity.
+     * @param costPaid   A double that represents the cost paid by a Person object.
+     * @param costOwed   A double that represents the cost owed by a Person object.
      */
     public ActivityCost(int activityId, double costPaid, double costOwed) {
         this.activityId = activityId;
