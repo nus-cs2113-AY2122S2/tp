@@ -18,8 +18,8 @@ public class ActivityCost {
      * Assumption: Every field is non-negative.
      *
      * @param activityId int representing the activityId.
-     * @param costPaid double representing cost paid.
-     * @param costOwed double representing cost owed.
+     * @param costPaid   double representing cost paid.
+     * @param costOwed   double representing cost owed.
      */
     public ActivityCost(int activityId, double costPaid, double costOwed) {
         this.activityId = activityId;

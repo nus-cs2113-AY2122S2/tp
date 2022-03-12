@@ -15,7 +15,7 @@ public class InvalidFormatException extends Exception {
      * Use this to store another exception (such as a Java exception) inside this exception to access it later.
      *
      * @param message A descriptive message of the error as a string.
-     * @param cause a Throwable to be stored in this exception.
+     * @param cause   a Throwable to be stored in this exception.
      */
     public InvalidFormatException(String message, Throwable cause) {
         this.message = message;
