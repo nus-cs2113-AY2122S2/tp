@@ -61,6 +61,12 @@ Example of usage:
 >Creates a new activity within a particular session to be managed by SplitLah. <br>
 >Activities are a way for the user to keep track of the activities and their respective costs throughout a session. <br>
 >Other information include the person who paid for the activity and the people involved in the activity.
+
+Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
+/c [TOTAL_COST] [OPTIONAL_ARGUMENTS]`
+
+Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
+/cl [COST1 COST2 ...] [OPTIONAL_ARGUMENTS]`
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
