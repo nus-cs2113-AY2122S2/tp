@@ -26,6 +26,7 @@ public class Commands {
         }
     }
 
+    /*Prints all inventory in a numbered list in order of input*/
     public static void listGoods(ArrayList<Goods> userGoods) {
         int numberOfUserGoods = userGoods.size();
         if (userGoods.isEmpty()) {
