@@ -57,7 +57,7 @@ public class Timer extends Thread {
     public void printTimeLeft() {
         if (timeLeft > ONE_MINUTE) {
             if (timeLeft % ONE_MINUTE == 0) {
-                int minutesLeft = timeLeft/ONE_MINUTE;
+                int minutesLeft = timeLeft / ONE_MINUTE;
                 ui.showToUser(minutesLeft + " minutes left.");
             }
         } else {
@@ -72,12 +72,12 @@ public class Timer extends Thread {
         int minutes;
         int seconds;
         if (timeLeft >= ONE_HOUR) {
-            hours = timeLeft/ONE_HOUR;
+            hours = timeLeft / ONE_HOUR;
             minutes = (timeLeft - hours * ONE_HOUR) / ONE_MINUTE;
             seconds = timeLeft - hours * ONE_HOUR - minutes * ONE_MINUTE;
             ui.showToUser("Timer of " + hours + " hours " + minutes + " minutes "
                     + seconds + " seconds started.");
-        } else if (timeLeft >= ONE_MINUTE){
+        } else if (timeLeft >= ONE_MINUTE) {
             minutes = timeLeft / ONE_MINUTE;
             seconds = timeLeft - (minutes * ONE_MINUTE);
             ui.showToUser("Timer of " + minutes + " minutes "
@@ -92,9 +92,13 @@ public class Timer extends Thread {
         hasTimeLeft = true;
     }
 
-    public boolean getHasTimeLeft() { return hasTimeLeft; }
+    public boolean getHasTimeLeft() {
+        return hasTimeLeft;
+    }
 
-    public boolean isTimerPaused() { return timerPaused; }
+    public boolean isTimerPaused() {
+        return timerPaused; 
+    }
 
     public void resumeTimer() {
         synchronized (this) {
