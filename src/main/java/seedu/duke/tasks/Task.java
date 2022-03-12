@@ -34,6 +34,10 @@ public class Task {
         return estimatedWorkingTime;
     }
 
+    /**.
+     * Check what are the tasks parameters input by user
+     * @return Task parameters status
+     */
     public TaskParameters getTaskParameterStatus() {
         boolean hasTaskDescriptionAndWorkingTime = (taskDescription != null && estimatedWorkingTime != null);
         boolean hasTaskDescriptionOnly = (taskDescription != null);

@@ -1,12 +1,12 @@
 package seedu.duke.parsers;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
-
-import java.util.HashMap;
-import java.util.Objects;
 
 public class DeleteParser extends Parser {
 

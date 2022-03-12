@@ -1,12 +1,12 @@
 package seedu.duke.parsers;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
-
-import java.util.HashMap;
-import java.util.Objects;
 
 /**
  * This Parser supports the "add" command.
@@ -39,7 +39,7 @@ public class AddParser extends Parser {
         groupNames.add(MODULE_CODE);
         groupNames.add(MODULE_DESCRIPTION);
     }
-    
+
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         HashMap<String, String> parsedArguments = parseString(userInput);

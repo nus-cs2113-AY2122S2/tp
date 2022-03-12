@@ -7,6 +7,7 @@ import seedu.duke.tasks.TaskList;
 
 
 public class AddCommand extends Command {
+
     private static final String ADD_TASK_MESSAGE = "Hey! I have added this task under %s!" + LS + "%s" + LS
             + "Now you have %d task(s) in your list!" + LS;
     private static final String ADD_MODULE_MESSAGE = "Hey! I have added this module!" + LS + "%s";

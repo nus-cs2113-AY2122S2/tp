@@ -1,8 +1,8 @@
 package seedu.duke.tasks;
 
-import seedu.duke.exceptions.NoSuchTaskException;
-
 import java.util.ArrayList;
+
+import seedu.duke.exceptions.NoSuchTaskException;
 
 public class TaskList {
     private static final String LS = System.lineSeparator();

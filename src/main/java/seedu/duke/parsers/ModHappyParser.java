@@ -1,12 +1,12 @@
 package seedu.duke.parsers;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 import seedu.duke.commands.Command;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
-
-import java.util.HashMap;
-import java.util.HashSet;
 
 /**
  * This Parser distinguishes between various command words.
@@ -73,5 +73,4 @@ public class ModHappyParser extends Parser {
             throw new UnknownCommandException();
         }
     }
-
 }

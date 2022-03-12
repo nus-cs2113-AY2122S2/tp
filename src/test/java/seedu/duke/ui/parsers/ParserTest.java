@@ -43,19 +43,6 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_addCommand_invalidFlag() {
-        final String testString = "add /a blahblah -d blahblahblah";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
     public void parse_addCommand_noDescription_parsedCorrectly() {
         final String testString = "add /t /t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d   ";
         try {
@@ -127,7 +114,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_addCommand_withDescription_withWorkingTime_wrongOrder_Incorrect() {
+    public void parse_addCommand_withDescription_withWorkingTime_wrongOrder() {
         final String testString = "add /t /t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d   "
                 + "-t \"-t-t-t t-t-t /t/t -d -d -d \" "
                 + "-d \"-d-d-d /t /m -d -d  \" ";
@@ -140,6 +127,58 @@ public class ParserTest {
             assertNotEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
             assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
             assertNotEquals("-t-t-t t-t-t /t/t -d -d -d", t.getEstimatedWorkingTime());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_invalidFlag() {
+        final String testString = "add /a blahblah -d blahblahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_noFlagProvided() {
+        final String testString = "add cs2113t";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_withModuleOnly_noModuleProvided() {
+        final String testString = "add /m";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_withTaskOnly_noTaskProvided() {
+        final String testString = "add /t";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
         } catch (Exception e) {
             fail();
         }
@@ -170,8 +209,98 @@ public class ParserTest {
     }
 
     @Test
+    public void parse_deleteCommand_invalidFlag() {
+        final String testString = "del /a 1";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_deleteCommand_noFlagProvided() {
+        final String testString = "del 1";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_deleteCommand_withModuleOnly_noModuleProvided() {
+        final String testString = "del /m";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_deleteCommand_withTaskOnly_noIndexProvided() {
+        final String testString = "del /t";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_deleteCommand_withTaskOnly_notANumber() {
+        final String testString = "del /t iamnotanumber";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_deleteCommand_unnecessaryArgs() {
+        final String testString = "del /t 1 blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_markCommand_parsedCorrectly() {
+        final String testString = "mark /c 3";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof MarkCommand);
+            assertEquals(2, ((MarkCommand) c).getTaskIndex()); // Remember, zero-indexed!
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
     public void parse_markCommand_invalidFlag() {
-        final String testString = "mark /a 1234";
+        final String testString = "mark /a 1";
         try {
             parser.parseCommand(testString);
             fail();
@@ -184,7 +313,7 @@ public class ParserTest {
 
     @Test
     public void parse_markCommand_noFlagProvided() {
-        final String testString = "mark 123";
+        final String testString = "mark 1";
         try {
             parser.parseCommand(testString);
             fail();
@@ -222,20 +351,8 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_markCommand_parsedCorrectly() {
-        final String testString = "mark /c 3";
-        try {
-            Command c = parser.parseCommand(testString);
-            assertTrue(c instanceof MarkCommand);
-            assertEquals(2, ((MarkCommand) c).getTaskIndex()); // Remember, zero-indexed!
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void parse_listCommand_unnecessaryArgs() {
-        final String testString = "list blahblah";
+    public void parse_markCommand_unnecessaryArgs() {
+        final String testString = "mark /c 1 blahblah";
         try {
             parser.parseCommand(testString);
             fail();
@@ -258,8 +375,8 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_exitCommand_unnecessaryArgs() {
-        final String testString = "exit blahblah";
+    public void parse_listCommand_unnecessaryArgs() {
+        final String testString = "list blahblah";
         try {
             parser.parseCommand(testString);
             fail();
@@ -276,6 +393,19 @@ public class ParserTest {
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof ExitCommand);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_exitCommand_unnecessaryArgs() {
+        final String testString = "exit blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
         } catch (Exception e) {
             fail();
         }
