@@ -57,7 +57,6 @@ activity could have a different payer.
 displayed in an easy-to-read summary.
 
 ## Quick Notes
-
 - Allowed characters for values:
     - Alphanumeric characters: `A-Z`, `a-z`, `0-9`
     - Decimals: `3.5`
