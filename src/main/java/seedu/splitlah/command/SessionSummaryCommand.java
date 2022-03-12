@@ -152,6 +152,7 @@ public class SessionSummaryCommand extends Command {
     }
 
     public static Command prepare(String commandArgs) {
+        assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_EMPTY;
         try {
             int sessionId = Parser.parseSessionId(commandArgs);
             return new SessionSummaryCommand(sessionId);
