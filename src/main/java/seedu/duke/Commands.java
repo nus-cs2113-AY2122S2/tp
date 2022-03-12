@@ -54,7 +54,7 @@ public class Commands {
     }
 
     private static void remove(int id, int qty, ArrayList<Goods> userGoods)
-            throws LargeQuantityException, ItemDoesNotExistException, NegativeQuantityException {
+            throws LargeQuantityException, ItemDoesNotExistException {
         boolean isGoodExist = false;
 
         for (Goods good : userGoods) {
@@ -63,8 +63,6 @@ public class Commands {
 
                 if (qty > good.getQuantity()) {
                     throw new LargeQuantityException();
-                } else if (qty < 0) {
-                    throw new NegativeQuantityException();
                 }
 
                 good.setQuantity(good.getQuantity() - qty);
@@ -79,7 +77,7 @@ public class Commands {
             }
         }
 
-        if (isGoodExist == false) {
+        if (!isGoodExist) {
             throw new ItemDoesNotExistException();
         }
 
@@ -108,9 +106,6 @@ public class Commands {
         } catch (LargeQuantityException e3) {
             System.out.println("The quantity input is larger than the current quantity of the goods. "
                     + "Please enter the command again with a smaller quantity.");
-        } catch (NegativeQuantityException e4) {
-            System.out.println("The quantity input is negative. "
-                    + "Please enter the command again with a non-negative quantity.");
         }
     }
 }
