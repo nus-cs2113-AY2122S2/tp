@@ -8,14 +8,20 @@ activities they participated in, for a particular session, via a Command Line In
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Download the latest .jar version of SplitLah from [here](https://github.com/AY2122S2-CS2113T-T10-1/tp/releases)
+3. Copy the file to the folder you wish to use as a home folder for SplitLah.
+4. Via command line, navigate to the home folder and run it with `java -jar SplitLah.jar`.
+5. Type in a command and press Enter to execute it. A few commands you can try are:
+    - `session /create /n Outing /d 11-03-2022 /pl Warren Ivan Roy` : Creates a Session named "Outing" occurring on 
+   11/03/2022 (DD-MM-YYYY) with Warren, Ivan, and Roy as members.
+    - `session /list` : Lists all Sessions.
+    - `activity /create /sid 1 /n Lunch /p Warren /i Warren Roy Ivan /c 7.5` : Creates an Activity named "Lunch" and
+   assigns it to the Session #1. The participats are Warren, Roy and Ivan, but only Warren has paid.
+    - `activity /list /sid 1` : Lists Activities grouped under Session #1.
+6. Refer to Features for a more in-depth explanation of all commands available.
 
 ## Features 
-
-{Give detailed description of each feature}
 
 ### Creating a session: `session /create`
 > Creates a new session to be managed by SplitLah. <br> 
@@ -51,8 +57,10 @@ Format: `session /delete /sid [SESSION_ID]`
     * The unique identifier for a session can be retrieved with `session /list` command.
 
 Example of usage:
-1. Remove an existing session that was created with session unique identifier of 1.
+1. Remove an existing session that was created with a session unique identifier of 1.
    - `session /delete /sid 1`
+> **Notes:**
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
 
 ![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
 <br>
@@ -89,23 +97,42 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 * `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
 
 > **Notes:**
->- The session with session identifier `[SESSION_ID]` has to exist before the activity can be created.
+>- The session with a unique identifier of `[SESSION_ID]` has to exist before the activity can be created.
 >- The `[ACTIVITY_NAME]` should be unique across all activities.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` have to be names that are already captured in the session with
-   the session identifier `[SESSION_ID]`.
+   a unique identifier of `[SESSION_ID]`.
 
 Examples of usage:
-1. Adds a new activity in a session with session identifier 1, named Class Lunch, where Alice paid for both
+1. Adds a new activity in a session with a session unique identifier of 1, named Class Lunch, where Alice paid for both
    Bob and herself with a total cost of $10.
     1. `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /c 10`
 
 <br>[INSERT SCREEN SHOT]
 <br>
 <br>
-2. Adds a new activity in a session with session identifier 1, named Class Lunch, where Alice paid for both
+2. Adds a new activity in a session with a session unique identifier of 1, named Class Lunch, where Alice paid for both
    Bob and herself. Alice's meal costs $3.50 while Bob's meal costs $7.
     1. `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7`
+
+<br>[INSERT SCREEN SHOT]
+<br>
+<br>
+### Settle all transactions for a session: `session /summary`
+> Prints out a summary of the session to tell you, for that session, who needs to pay how much to another person
+> in order for everyone to have no remaining debts and no more debt to collect from others.<br>
+> This helps you to quickly calculate all payments that have to be done at the end of the day for a group outing.
+
+Format: `session /summary /sid [SESSION_ID]`
+
+* `[SESSION_ID]` refers to the unique identifier of the session.
+    * The unique identifier for a session can be retrieved with `session /list` command.
+
+Example of usage:
+1. Get a session summary for an existing session with a session unique identifier of 1.
+    1. `session /summary /sid 1`
+> **Notes:**
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
 
 <br>[INSERT SCREEN SHOT]
 <br>
@@ -120,4 +147,7 @@ Examples of usage:
 
 {Give a 'cheat sheet' of commands here}
 
+|Command|Description|
+|---|---|
+|`session`|Creates 
 * Add todo `todo n/TODO_NAME d/DEADLINE`
