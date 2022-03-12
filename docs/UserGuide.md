@@ -2,28 +2,39 @@
 
 ## Introduction
 
-SplitLah is an application for people who split bills equally amongst themselves after a group outing. SplitLah does
+SplitLah is a CLI program that lets users split bills proportionally amongst themselves after a group outing. SplitLah does
 the work of calculating how much each participant must pay across multiple activities, and keeps track of who has paid
-and who has not. You can use SplitLah through a Command Line Interface (CLI).
+and who has not.
+
+Value proposition:
+
+- Allows users to keep track of several activities and their participants.
+- Splits costs evenly or unevenly depending on what is required.
+- Lumps all payments due together for easy payment.
+- Can be operated quickly by an experienced typist.
+
+Target users:
+
+- People who go on group outings often and split bills.
+- People who dislike calculating how much people owe across several activities.
+- People who go on group outings where different people pay for different activities, making bill-splitting harder.
+
+## Contents
+
+* TOC
+{:toc}
+
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest .jar version of SplitLah from [here](https://github.com/AY2122S2-CS2113T-T10-1/tp/releases)
 3. Copy the file to the folder you wish to use as a home folder for SplitLah.
-4. Via command line, navigate to the home folder and run it with `java -jar SplitLah.jar`.
-5. Type in a command and press Enter to execute it. A few commands you can try are:
-    - `session /create /n Outing /d 11-03-2022 /pl Warren Ivan Roy` : Creates a Session named "Outing" occurring on 
-   11/03/2022 (DD-MM-YYYY) with Warren, Ivan, and Roy as members.
-    - `session /list` : Lists all Sessions.
-    - `activity /create /sid 1 /n Lunch /p Warren /i Warren Roy Ivan /c 7.5` : Creates an Activity named "Lunch" and
-   assigns it to Session #1. The participants are Warren, Roy and Ivan. Warren pays for everyone, costing him a total 
-    of $7.50.
-    - `activity /list /sid 1` : Lists Activities grouped under Session #1.
-    - `session /summary /sid 1` : Summarises Session #1, including how much each member owes and how much they have 
-    already paid.
+4. Start SplitLah by executing `java -jar SplitLah.jar` in the terminal.
+5. Type in a command and press Enter to execute it.
 6. Refer to Features for a more in-depth explanation of all commands available.
 
 ## Features 
+
 
 ### Creating a session: `session /create`
 > Creates a new session.<br>
