@@ -1,9 +1,22 @@
 # User Guide
 
-## Contents
 
-* TOC
-  {:toc}
+Contents
+=================
+
+* [User Guide](#user-guide)
+    * [Introduction](#introduction)
+    * [Quick Notes](#quick-notes)
+    * [How SplitLah works](#how-splitlah-works)
+    * [Quick Start](#quick-start)
+    * [Features](#features)
+        * [Creating a session: session /create](#creating-a-session-session-create)
+        * [Deleting a session: session /delete](#deleting-a-session-session-delete)
+        * [Listing all sessions: session /list](#listing-all-sessions-session-list)
+        * [Creating an activity: activity /create](#creating-an-activity-activity-create)
+        * [Settling all transactions for a session: session /summary](#settling-all-transactions-for-a-session-session-summary)
+    * [FAQ](#faq)
+    * [Command Summary](#command-summary)
 
 ## Introduction
 
