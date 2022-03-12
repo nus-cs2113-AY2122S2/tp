@@ -14,14 +14,14 @@ bill for each activity.
 Value proposition:
 
 - Allows users to keep track of several activities and their participants.
-- Splits costs evenly or unevenly depending on what is required.
-- Lumps all payments due together for easy payment.
+- Splits costs evenly or independently depending on what is required.
+- Combines all payments due together for easy settlement of payments.
 - Can be operated quickly by an experienced typist.
 
 Target users:
 
 - People who go on group outings often and split bills.
-- People who dislike calculating how much people owe across several activities.
+- People who dislike manually calculating how much people owe across several activities.
 - People who go on group outings where different people pay for different activities, making bill-splitting harder.
 
 
@@ -134,7 +134,7 @@ Examples of usage:
 <br>[INSERT SCREEN SHOT]
 <br>
 <br>
-### Settle all transactions for a session: `session /summary`
+### Settling all transactions for a session: `session /summary`
 > Prints out a summary of the session to tell you, for that session, who needs to pay how much to another person
 > in order for everyone to have no remaining debts and no more debt to collect from others.<br>
 > This helps you to quickly calculate all payments that have to be done at the end of the day for a group outing.
