@@ -22,8 +22,8 @@ public class ActivityViewCommand extends Command {
     private int sessionId;
     private int activityId;
 
-    public static final String SESSION_ID_HEADER = "Session Id #";
-    public static final String SEPARATOR = " | ";
+    private static final String SESSION_ID_HEADER = "Session Id #";
+    private static final String SEPARATOR = " | ";
 
     public ActivityViewCommand(int sessionId, int activityId) {
         this.sessionId = sessionId;
