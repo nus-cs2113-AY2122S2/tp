@@ -20,6 +20,10 @@ public class Workout {
         return repetitions;
     }
 
+    public void setRepetitions(int repetitions) {
+        this.repetitions = repetitions;
+    }
+
     public String toString() {
         String displayString = getExerciseName() + " (" + getRepetitions() + " reps)";
         return displayString;

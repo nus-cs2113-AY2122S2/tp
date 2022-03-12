@@ -29,7 +29,7 @@ public class WorkoutCommand extends Command {
     private String userArguments;
 
     public WorkoutCommand(String userInput, FileManager fileManager, WorkoutList workoutList,
-            String userAction, String userArguments) throws InvalidCommandException,
+                          String userAction, String userArguments) throws InvalidCommandException,
             IOException {
         super(userInput);
         this.fileManager = fileManager;
@@ -77,7 +77,6 @@ public class WorkoutCommand extends Command {
 
     /**
      * (WIP) Note: need to catch and handle exceptions in this method, not the calling method.
-     *
      */
     public void execute() {
         try {
@@ -93,6 +92,11 @@ public class WorkoutCommand extends Command {
             case DELETE_ACTION_KEYWORD:
                 Workout deletedWorkout = getWorkoutList().deleteWorkout(getUserArguments());
                 getUI().printDeleteWorkoutMessage(deletedWorkout);
+                getFileManager().rewriteAllWorkoutsToFile(getWorkoutList());
+                break;
+            case UPDATE_ACTION_KEYWORD:
+                Workout updateWorkout = getWorkoutList().updateWorkout(getUserArguments());
+                getUI().printUpdateWorkoutMessage(updateWorkout);
                 getFileManager().rewriteAllWorkoutsToFile(getWorkoutList());
                 break;
             default:
@@ -119,7 +123,8 @@ public class WorkoutCommand extends Command {
         } catch (NumberFormatException e) {
             System.out.println("Uh oh, a number was expected in your input, but a non-formattable\n"
                     + "number was received.");
-            System.out.println("Please try again.");
+            System.out.println("Please try again.Alternatively, type 'help' if you need\n"
+                    + "more information on the commands.");
 
         } catch (WorkoutOutOfRangeException e) {
             System.out.println(e.getMessage());
