@@ -39,7 +39,7 @@ public class ActivityDeleteCommand extends Command {
     }
 
     /**
-     * Prepares user arguments for activity delete command.
+     * Prepares user arguments for the deletion of an Activity object.
      *
      * @param commandArgs The user's arguments.
      * @return An ActivityDeleteCommand object if necessary parameters were found in user arguments,
