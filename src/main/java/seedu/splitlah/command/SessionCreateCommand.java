@@ -47,12 +47,12 @@ public class SessionCreateCommand extends Command {
     /**
      * Converts a String object array of names to a list of Person objects.
      *
-     * @param personArray An array of person names.
      * @return An ArrayList of Person objects.
      */
-    private static ArrayList<Person> convertToListOfPerson(String[] personArray) {
+    private ArrayList<Person> convertToListOfPerson() {
+        assert personNames.length != 0 : Message.ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY;
         ArrayList<Person> personList = new ArrayList<>();
-        for (String name : personArray) {
+        for (String name : personNames) {
             Person newPerson = new Person(name);
             personList.add(newPerson);
         }
@@ -65,6 +65,7 @@ public class SessionCreateCommand extends Command {
      * @return True if it contains duplicates, false otherwise.
      */
     private boolean hasNameDuplicates() {
+        assert personNames.length != 0 : Message.ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY;
         Set<String> nameSet = new HashSet<>();
         for (String name : personNames) {
             String nameToBeAdded = name.toLowerCase();
@@ -72,6 +73,7 @@ public class SessionCreateCommand extends Command {
                 return true;
             }
         }
+        assert nameSet.size() == personNames.length : Message.ASSERT_SESSIONCREATE_NAME_DUPLICATE_NOT_DETECTED;
         return false;
     }
 
@@ -83,6 +85,7 @@ public class SessionCreateCommand extends Command {
      *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
+        assert commandArgs != null : Message.ASSERT_SESSIONCREATE_COMMAND_ARGUMENTS_EMPTY;
         try {
             String parsedSessionName = Parser.parseName(commandArgs);
             String[] parsedNames = Parser.parsePersonList(commandArgs);
@@ -105,19 +108,20 @@ public class SessionCreateCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        if (hasNameDuplicates()) {
+        boolean hasDuplicates = hasNameDuplicates();
+        if (hasDuplicates) {
             manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
             return;
         }
+
         // TODO: Check if string[] names are actual names.
-        ArrayList<Person> personList = convertToListOfPerson(personNames);
+        ArrayList<Person> personList = convertToListOfPerson();
 
         boolean isSessionExists = manager.getProfile().hasSessionName(sessionName);
         if (isSessionExists) {
             manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_SESSION);
             return;
         }
-
         int newSessionId = manager.getProfile().getNewSessionId();
         Session newSession = new Session(sessionName, newSessionId, sessionDate, personList);
         manager.getProfile().addSession(newSession);
