@@ -24,6 +24,7 @@ public class Timer extends Thread {
     @Override
     public void run() {
         StudyCommand.isTimerRunning = true;
+        ui.showToUser("Timer started for " + timeLeft + " seconds.");
         while (hasTimeLeft) {
             if (timeLeft % TIME_INTERVAL == NO_TIME_LEFT) {
                 ui.showToUser(timeLeft + " seconds left.");
@@ -46,7 +47,7 @@ public class Timer extends Thread {
         }
         if (!hasTimeLeft && !forcedStop) {
             StudyCommand.isTimerRunning = false;
-            ui.showToUser("Time is up!");
+            ui.showToUser("Time is up! Would you like to start another timer?");
         }
         this.interrupt();
     }

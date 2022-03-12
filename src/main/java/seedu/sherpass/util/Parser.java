@@ -32,15 +32,7 @@ import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskWithTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.withTimeFormat;
 
 import static seedu.sherpass.constant.Index.*;
-import static seedu.sherpass.constant.Message.DATE_FORMAT_WITHOUT_TIME;
-import static seedu.sherpass.constant.Message.DATE_FORMAT_WITH_TIME;
-import static seedu.sherpass.constant.Message.ERROR_DEADLINE_MISSING_COMMAND_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_EVENT_MISSING_COMMAND_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_TODO_REPEATED_INPUT_MESSAGE;
-import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
+import static seedu.sherpass.constant.Message.*;
 
 
 public class Parser {
@@ -363,7 +355,7 @@ public class Parser {
             timer.stopTimer();
             break;
         default:
-            ui.showToUser(ERROR_INVALID_INPUT_MESSAGE);
+            ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);
         }
     }
 }

@@ -13,11 +13,12 @@ public class StudyCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showToUser("Gotcha! Entering study mode...");
-        ui.showToUser("Done! To get started, enter one of the three default timers:\n"
+        ui.showToUser("Done! To get started, enter one of the three default timers "
+                + "using 'start <mode_number>':\n"
                 + "1) 30 minutes\n"
                 + "2) 1 hour\n"
                 + "3) 1.5 hours\n\n"
-                + "For testing purposes, you can use a 30s timer with option 0.\n"
+                + "For testing purposes, you can start a 30s timer with mode number 0.\n"
                 + "Otherwise, feel free to choose your own timer with \n'start /custom <timer_duration>'.");
         ui.showLine();
         Timer timer = new Timer(ui);

@@ -19,9 +19,18 @@ public class Message {
             + "8) Find: find <keyword>\n"
             + "9) Clear: clear\n"
             + "9) Bye: bye";
+    public static final String HELP_MESSAGE_STUDY = "Timer command input quick start guide:\n"
+            + "1) Start default timer: start <mode_index>\n"
+            + "2) Start custom timer: start /custom <timer_duration>\n"
+            + "3) Stop timer: stop\n"
+            + "4) Pause timer: pause\n"
+            + "5) Resume timer: resume\n"
+            + "6) Exit study mode: leave\n";
 
     public static final String ERROR_INVALID_INPUT_MESSAGE = "Please key in an appropriate command.\n"
             + HELP_MESSAGE;
+    public static final String ERROR_INVALID_STUDY_INPUT_MESSAGE = "Please key in an appropriate command.\n"
+            + HELP_MESSAGE_STUDY;
     public static final String ERROR_EVENT_MISSING_COMMAND_MESSAGE = "Oops! You forgot to "
             + "add a '/at' to your 'event' command.";
     public static final String ERROR_DEADLINE_MISSING_COMMAND_MESSAGE = "Oops! You forgot to"
