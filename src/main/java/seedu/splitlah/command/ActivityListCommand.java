@@ -44,7 +44,6 @@ public class ActivityListCommand extends Command {
             for (Activity activity : activityListToBePrinted) {
                 manager.getUi().printlnMessage(activity.getActivitySummaryString());
             }
-
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
         }
@@ -65,6 +64,5 @@ public class ActivityListCommand extends Command {
             String invalidCommandMessage = e.getMessage() + "\n" + COMMAND_FORMAT;
             return new InvalidCommand(invalidCommandMessage);
         }
-
     }
 }
