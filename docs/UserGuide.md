@@ -103,8 +103,7 @@ Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ..
 Example of usage:
 1. Adds a new session named Class Outing with Alice and Bob involved on 15-03-2022.
    - `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob`
-   
-![Session create command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand.png)
+   ![Session create command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand.png)
 <br>
 <br>
 ### Deleting a session: `session /delete`
