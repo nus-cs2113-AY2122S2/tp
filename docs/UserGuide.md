@@ -138,7 +138,8 @@ Example of usage:
 <br>
 ### Creating an activity: `activity /create`
 > Creates a new activity within a particular session to be managed by SplitLah. <br>
-> Activities are a way for the user to keep track of the activities and their respective costs throughout a session. <br>
+> Activities are a way for the user to keep track of the activities and their respective costs throughout a session. 
+> <br>
 > Other information include the person who paid for the activity and the people involved in the activity.
 
 Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
@@ -180,6 +181,10 @@ Examples of usage:
 ![Activity create command [2] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[2].png)
 <br>
 <br>
+### Deleting an activity: `activity /delete`
+> Deletes an existing activity in a particular session that is managed by SplitLah. <br>
+> Activities are a way for the user to keep track of the activities and their respective costs throughout a session.
+> <br>
 ### Settling all transactions for a session: `session /summary`
 > Prints out a summary of the session to tell you, for that session, who needs to pay how much to another person
 > in order for everyone to have no remaining debts and no more debt to collect from others.<br>
