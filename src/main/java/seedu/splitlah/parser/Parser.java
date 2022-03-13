@@ -161,11 +161,29 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks the provided String object which represents the command arguments for the existence of a specified
+     * delimiter.
+     * 
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @param delimiter   A String object that represents a demarcation of a specific argument in the command.
+     * @return true if the String object representing the command arguments contains the specified delimiter,
+     *         false otherwise.
+     */
     private static boolean hasDelimiter(String commandArgs, String delimiter) {
         int delimiterIndex = commandArgs.indexOf(delimiter);
         return delimiterIndex != INVALID_INDEX_INDICATOR;
     }
-    
+
+    /**
+     * Checks if the provided String object, which represents a single token in the command arguments, is a delimiter
+     * that is used in any of the commands available in SplitLah.
+     * 
+     * @param token A String object representing a sequence of characters that are isolated by whitespaces in the
+     *              command arguments.
+     * @return true if the provided String object is a delimiter used in any of the commands available in SplitLah,
+     *         false otherwise.
+     */
     private static boolean isValidDelimiter(String token) {
         if (token == null) {
             return false;
@@ -200,7 +218,16 @@ public class Parser {
             return false;
         }
     }
-    
+
+    /**
+     * Checks whether the provided String object which represents the command arguments contains any invalid
+     * delimiters.
+     * 
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return true if there are tokens in the command arguments that contains a forward slash character ('/') but is
+     *         not a valid delimiter used in any commands in SplitLah,
+     *         false otherwise.
+     */
     private static boolean containsInvalidDelimiters(String commandArgs) {
         if (commandArgs == null) {
             return false;
