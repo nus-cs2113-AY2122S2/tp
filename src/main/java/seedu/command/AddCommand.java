@@ -1,0 +1,51 @@
+package seedu.command;
+
+import java.util.ArrayList;
+
+/**
+ * Subclass of Command. Handles adding of equipment to equipmentInventory.
+ */
+public class AddCommand extends Command {
+    private final ArrayList<String> COMMAND_STRINGS;
+    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_DESCRIPTION = ": Adds a Equipment to the equipmentInventory. "
+            + "Parameters: n/ITEM_NAME sn/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE\n"
+            + "Example: "
+            + "add n/SpeakerB sn/S1404115ASF t/Speaker c/1000 pf/Loud_Technologies pd/2022-02-23";
+
+    /**
+     * constructor for AddCommand. Initialises successMessage and usageReminder from Command
+     * @param commandStrings parsed user input which contains details of equipment to be added
+     */
+    public AddCommand(ArrayList<String> commandStrings){
+        this.COMMAND_STRINGS = commandStrings;
+        successMessage = "Equipment successfully added: %1$s, serial number %2$s";
+        usageReminder = COMMAND_WORD + COMMAND_DESCRIPTION;
+    }
+
+    /**
+     * Adds equipment with details given in COMMAND_STRINGS
+     * @return CommandResult with message from execution of this command
+     */
+    public CommandResult execute(){
+        addEquipment(COMMAND_STRINGS);
+
+        return new CommandResult(String.format(successMessage, COMMAND_STRINGS.get(0), COMMAND_STRINGS.get(1)));
+    }
+
+    /**
+     * Uses information from the ArrayList to create a new Equipment and add it to the inventory.
+     * @param userInput ArrayList of String which contains the individual attributes of the equipment to be added
+     */
+    public void addEquipment(ArrayList<String> userInput){
+        String equipmentName = userInput.get(0);
+        String serialNumber = userInput.get(1);
+        EquipmentType type = userInput.get(2);
+        double cost = Double.parseDouble(userInput.get(3));
+        String purchasedFrom = userInput.get(4);
+        String purchasedDate = userInput.get(5);
+        Equipment equipment = new Equipment(equipmentName, serialNumber, type, cost, purchasedFrom, purchasedDate);
+
+        equipmentInventory.addEquipment(equipment);
+    }
+}
