@@ -147,6 +147,15 @@ public class Parser {
         return output;
     }
 
+    /**
+     * Returns an integer represented by the provided input String object.
+     * 
+     * @param input     A String object that contains numeric characters only and represents an integer.
+     * @param delimiter A String object that represents a demarcation of a specific argument in the command.
+     * @return An integer represented by the input String object.
+     * @throws InvalidFormatException If the provided input String object contains non-numeric characters and cannot
+     *                                be parsed as an integer.
+     */
     private static int parseIntFromString(String input, String delimiter) throws InvalidFormatException {
         try {
             return Integer.parseInt(input);
@@ -155,6 +164,16 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns an integer representing a unique identifier number, represented by the provided input String object.
+     * 
+     * @param input     A String object that contains numeric characters only and represents a unique identifier number.
+     * @param delimiter A String object that represents a demarcation of a specific argument in the command.
+     * @return An integer representing a unique identifier number.
+     * @throws InvalidFormatException If the provided input String object contains non-numeric characters and cannot be
+     *                                parsed as an integer, or
+     *                                if the integer parsed from the input String object is not a positive integer.
+     */
     private static int parseIdFromString(String input, String delimiter) throws InvalidFormatException {
         int idVal = parseIntFromString(input, delimiter);
         if (idVal <= 0) {
@@ -270,12 +289,32 @@ public class Parser {
     public static String parsePayer(String commandArgs) throws InvalidFormatException {
         return getArgumentFromDelimiter(commandArgs, PAYER_DELIMITER);
     }
-    
+
+    /**
+     * Returns an integer that represents a session unique identifier, given the command arguments from user input, 
+     * delimited by the Session ID delimiter.
+     *
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return An integer that represents a session unique identifier.
+     * @throws InvalidFormatException If the Session ID delimiter is not found in the command arguments, or
+     *                                if no arguments representing a session unique identifier were provided after the 
+     *                                Session ID delimiter.
+     */
     public static int parseSessionId(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, SESSION_ID_DELIMITER);
         return parseIdFromString(argument, SESSION_ID_DELIMITER);
     }
 
+    /**
+     * Returns an integer that represents an activity unique identifier, given the command arguments from user input, 
+     * delimited by the Activity ID delimiter.
+     *
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return An integer that represents an activity unique identifier.
+     * @throws InvalidFormatException If the Activity ID delimiter is not found in the command arguments, or
+     *                                if no arguments representing an activity unique identifier were provided after the 
+     *                                Activity ID delimiter.
+     */
     public static int parseActivityId(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, ACTIVITY_ID_DELIMITER);
         return parseIdFromString(argument, ACTIVITY_ID_DELIMITER);
