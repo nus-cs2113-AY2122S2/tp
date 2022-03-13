@@ -10,7 +10,7 @@
     * [Parser Component](#parser-component)
     * [Command Component](#command-component)
 * Implementation
-  * [To be completed]
+    * [To be completed]
 * [Project Scope](#product-scope)
 * [User Stories](#user-stories)
 * [Non-Functional Requirements](#non-functional-requirements)
@@ -22,32 +22,42 @@
 
 ## Design
 ### Architecture
-![Application Diagram Screenshot](https://raw.githubusercontent.com/froststein/tp/master/docs/images/developerguide/ArchitectureDiagram.drawio.png)
+![Application Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ArchitectureDiagram.drawio.png)
 
 The *Architecture Diagram* shown above illustrates the high-level design of the SplitLah application.
 
 **Overview of components**
-  * `Main`
+* `Main`
     * On app launch: Creates an instance of `Manager` and runs command loop.
-  * `Manager`
+* `Manager`
     * On creation: Initializes the Profile, TextUI and Storage components.
-    * On run: Loads data from `Storage`, receives user input from UI and uses `Parser` to parser user input into application.
-  * `Profile`
-    * Handles cached data within run time of application. Manages and stores `sessions`, `activities` and `groups` that were created by the user.
-  * `TextUI`
+    * On run: Loads data from `Storage`, receives user input from UI and uses `Parser` to parse user input into application.
+* `Profile`
+    * Handles cached data within run time of application. Manages and stores the list of `session` 
+      that were created by the user before storing it into `Storage`.
+* `TextUI`
     * Handles UI operations of the application.
-  * `Storage`
+* `Storage`
     * Handles storage operations of the application.
-  * `Parser`
+* `Parser`
     * Handles input parsing and determines which command to run.
-  * `Command`
+* `Command`
     * Defines how a command is executed.
 
+**Interaction between components**
+
+
 ### Manager Component
+![Manager Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ManagerComponent.drawio.png)
+
 ### Profile Component
+
 ### TextUI Component
+
 ### Storage Component
+
 ### Parser Component
+
 ### Command Component
 
 
