@@ -167,16 +167,16 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 Examples of usage:
 1. Adds a new activity in a session with a session unique identifier of 1, named Class Lunch, where Alice paid for both
    Bob and herself with a total cost of $10.
-    1. `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /c 10`
+   - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /c 10`
 
-<br>[INSERT SCREEN SHOT]
+![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
 <br>
 <br>
 2. Adds a new activity in a session with a session unique identifier of 1, named Class Lunch, where Alice paid for both
    Bob and herself. Alice's meal costs $3.50 while Bob's meal costs $7.
-    1. `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7`
+   - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7`
 
-<br>[INSERT SCREEN SHOT]
+![Activity create command [2] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[2].png)
 <br>
 <br>
 ### Settling all transactions for a session: `session /summary`
