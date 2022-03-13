@@ -30,6 +30,8 @@ public class PersonList {
      * @return The person with the index
      */
     public Person getPerson(int index) {
+        assert(index >= 1);
+        assert(index <= numberOfMembers);
         return personList.get(index - 1);
     }
 
