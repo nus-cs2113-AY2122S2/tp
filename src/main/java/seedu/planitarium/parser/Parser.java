@@ -1,5 +1,6 @@
 package seedu.planitarium.parser;
 
+import exceptions.InvalidMoneyException;
 import exceptions.MissingDelimiterException;
 import seedu.planitarium.person.Person;
 import seedu.planitarium.person.PersonList;
@@ -130,24 +131,30 @@ public class Parser {
     }
 
     /**
-     * Returns without exception if text is a valid double.
+     * Returns a valid double, to be used as a monetary value, converted from a string.
      *
      * @param amount Text to be checked.
      * @return A valid double for monetary values.
-     * @throws NumberFormatException if format of text is not a valid double, negative or more than 2 decimal places.
+     * @throws InvalidMoneyException if format of text is not a valid double, negative or more than 2 decimal places.
      */
-    public static double getValidMoney(String amount) throws NumberFormatException {
-        double checkMoney = Double.parseDouble(amount);
-        if (Double.compare(checkMoney, MONEY_ZERO) < 0) {
-            throw new NumberFormatException();
-        }
-        if (amount.contains(DELIMITER_MONEY)) {
-            String decimalPlace = parseDelimitedTerm(amount, DELIMITER_MONEY, DELIMITER_BACK);
-            if (decimalPlace.length() > LIMIT_TWO_DECIMAL) {
+    public static double getValidMoney(String amount) throws InvalidMoneyException {
+        try {
+            double checkMoney = Double.parseDouble(amount);
+            if (Double.compare(checkMoney, MONEY_ZERO) < 0) {
+                // to be caught immediately within this method
                 throw new NumberFormatException();
             }
+            if (amount.contains(DELIMITER_MONEY)) {
+                String decimalPlace = parseDelimitedTerm(amount, DELIMITER_MONEY, DELIMITER_BACK);
+                if (decimalPlace.length() > LIMIT_TWO_DECIMAL) {
+                    // to be caught immediately within this method
+                    throw new NumberFormatException();
+                }
+            }
+            return checkMoney;
+        } catch (NumberFormatException e) {
+            throw new InvalidMoneyException(amount);
         }
-        return checkMoney;
     }
 
     /**
