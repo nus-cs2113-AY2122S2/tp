@@ -10,7 +10,8 @@ public class Parser {
     public static final String DELIMITER_DESCRIPTION = "/d";
     public static final String DELIMITER_INCOME = "/i";
     public static final String DELIMITER_EXPENDITURE = "/e";
-    public static final String DELIMITER_BACK = "/[undie]";
+    public static final String DELIMITER_RECORD_INDEX = "/r";
+    public static final String DELIMITER_BACK = "/[ruined]";
     public static final String DELIMITER_MONEY = ".";
 
     public static final int INDEX_KEYWORD = 0;
@@ -104,6 +105,16 @@ public class Parser {
      */
     public static String parseExpenditure(String userInput) {
         return parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK);
+    }
+
+    /**
+     * Returns a record's index from user input.
+     *
+     * @param userInput The user's full input text.
+     * @return A record's index.
+     */
+    public static String parseRecordIndex(String userInput) {
+        return parseDelimitedTerm(userInput, DELIMITER_RECORD_INDEX, DELIMITER_BACK);
     }
 
     /**
