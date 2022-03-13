@@ -11,6 +11,7 @@ import data.workouts.WorkoutList;
 import storage.FileManager;
 
 import java.io.IOException;
+import java.util.logging.*;
 
 import static commands.WorkoutCommand.CREATE_ACTION_KEYWORD;
 import static commands.WorkoutCommand.LIST_ACTION_KEYWORD;
@@ -31,6 +32,7 @@ public class Parser {
     private FileManager fileManager;
     public static final int EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS = 2;
     public static final int EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS = 3;
+    private static Logger logger = Logger.getLogger(Parser.class.getName());
 
     public Parser(UI ui, ExerciseList exerciseList, WorkoutList workoutList, FileManager fileManager) {
         this.ui = ui;
@@ -131,6 +133,7 @@ public class Parser {
     }
 
     public ExerciseCommand createExerciseCommand(String userInput) throws InvalidCommandException {
+        logger.entering(getClass().getName(), "createExerciseCommand");
         String actionKeyword = userInput.split(" ", 3)[1];
         String arguments = null;
         switch (actionKeyword) {
@@ -138,9 +141,12 @@ public class Parser {
             break;
         default:
             String className = this.getClass().getSimpleName();
+            logger.log(Level.WARNING, "Invalid action under exercise command is entered!");
             throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
         }
+        logger.exiting(getClass().getName(), "createExerciseCommand");
         return new ExerciseCommand(userInput, ui, exerciseList, actionKeyword, arguments);
+
     }
 
     public HelpCommand createHelpCommand(String userInput) {
