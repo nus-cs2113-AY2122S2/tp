@@ -2,17 +2,14 @@ package seedu.duke.controllers;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Scanner;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ControllerTest {
     @Test
     public void testHaveExitOption() {
-        Scanner scanner = new Scanner(System.in);
         Controller[] controllers = {
-            new MainController(scanner),
-            new DishController(scanner),
+            new MainController(),
+            // new DishController(),
         };
 
         for (Controller c : controllers) {

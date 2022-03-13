@@ -1,15 +1,11 @@
 package seedu.duke.controllers;
 
-import java.util.Scanner;
-
 public class MainController extends Controller {
     /**
      * Creates the MainController.
-     *
-     * @param scanner Scanner for System.in.
      */
-    public MainController(Scanner scanner) {
-        super(new String[]{"Exit Application"}, scanner);
+    public MainController() {
+        super(new String[]{"Exit Application"});
     }
 
     @Override
