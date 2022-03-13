@@ -20,45 +20,25 @@ public class OrderManager {
         this.orders.add(order);
     }
 
-    public void addDishToOrder() {
+    public int addDishToOrder(Object inputObj) {
         Order order = null;
-        boolean notQuit = true;
-        System.out.println("Enter dishes you want to order (Q/q to exit): ");
-        Scanner sc = new Scanner(System.in);
-        String userInput = sc.nextLine();
-        if (userInput == "Q" || userInput == "q") {
-            notQuit = false;
-        }
-        while (notQuit) {
-            Object inputObj = userInput;
-            if (inputObj instanceof Integer && ((Integer) inputObj <= this.dishes.size())) {
-                int dishIdx = (Integer) inputObj;
-                Dish dish = this.dishes.get(dishIdx);
-                order.addDishToOrder(dish);
-            } else {
-                System.out.println("Please enter a valid input: number of dish in the menu.");
-            }
-            System.out.printf("You’ve already added %d dish(es), some more: \n", this.dishes.size());
-            userInput = sc.nextLine();
-            if (userInput == "Q" || userInput == "q") {
-                notQuit = false;
-            }
+        if (inputObj instanceof Integer && ((Integer) inputObj <= this.dishes.size())) {
+            int dishIdx = (Integer) inputObj;
+            Dish dish = this.dishes.get(dishIdx);
+            order.addDishToOrder(dish);
+        } else {
+            System.out.println("Please enter a valid input: number of dish in the menu.");
         }
         addOrder(order);
+        return this.orders.size();
     }
 
-    public void deleteOrder() {
-        System.out.println("Enter the order you want to delete: ");
-        Scanner sc = new Scanner(System.in);
-        int userInput = sc.nextInt();
-        this.orders.remove(userInput);
+    public void deleteOrder(int userInputInt) {
+        this.orders.remove(userInputInt);
     }
 
-    public double getOrderPrice() {
-        System.out.println("Enter the order you want to get price: ");
-        Scanner sc = new Scanner(System.in);
-        int userInput = sc.nextInt();
-        return this.orders.get(userInput).getTotalPrice();
+    public double getOrderPrice(int userInputInt) {
+        return this.orders.get(userInputInt).getTotalPrice();
     }
 
     public double getAllOrderValue() {

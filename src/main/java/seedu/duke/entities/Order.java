@@ -3,28 +3,28 @@ package seedu.duke.entities;
 import java.util.ArrayList;
 
 public class Order {
-    private ArrayList<Dish> order;
+    private ArrayList<Dish> dishes;
 
     Order() {
-        this.order = new ArrayList<Dish>();
+        this.dishes = new ArrayList<Dish>();
     }
 
     public void addDishToOrder(Dish dish) {
-        this.order.add(dish);
+        this.dishes.add(dish);
     }
 
     public void removeDishFromOrderByIndex(int i) {
-        this.order.remove(i);
+        this.dishes.remove(i);
     }
 
     public int getOrderLength() {
-        return this.order.size();
+        return this.dishes.size();
     }
 
     public double getTotalPrice() {
         double totalPrice = 0;
-        for (int i = 0; i < this.order.size(); i++) {
-            totalPrice += this.order.get(i).price;
+        for (int i = 0; i < this.dishes.size(); i++) {
+            totalPrice += this.dishes.get(i).getPrice();
         }
         return totalPrice;
     }
