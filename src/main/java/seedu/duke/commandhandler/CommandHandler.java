@@ -3,6 +3,7 @@ package seedu.duke.commandhandler;
 import seedu.duke.projects.ProjectList;
 import java.util.Scanner;
 
+
 public class CommandHandler {
 
     /** Scanner for user input. */

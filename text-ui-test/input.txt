@@ -1,1 +1,5 @@
-James Gosling
+addProject cs2113
+addDeadline cs2113 17/03/2022
+addDeadline cs3245 24/03/2022
+exit
+
