@@ -486,16 +486,35 @@ public class Parser {
     }
     
     // COMMAND PARSING METHODS
-    public static String getRemainingArgument(String commandArgs) {
-        String[] commandTokens = commandArgs.trim().split(REGEX_WHITESPACES_DELIMITER, COMMAND_WITH_ARGS_TOKEN_COUNT);
+
+    /**
+     * Returns a String object containing the arguments portion of the entire command input from the user.<br>
+     * E.g. Returns "/n Lunch /d 11-03-2022 /pl Warren Ivan Roy" where
+     *      commandString = "session /create /n Lunch /d 11-03-2022 /pl Warren Ivan Roy"
+     * 
+     * @param commandString A String object that contains the entire command input provided by the user.
+     * @return A String object containing the arguments portion of the entire command input from the user if any,
+     *         an empty String object otherwise.
+     */
+    public static String getRemainingArgument(String commandString) {
+        String[] commandTokens = commandString.trim().split(REGEX_WHITESPACES_DELIMITER, COMMAND_WITH_ARGS_TOKEN_COUNT);
         if (commandTokens.length < COMMAND_WITH_ARGS_TOKEN_COUNT) {
             return "";
         }
         return commandTokens[2];
     }
 
-    public static String getCommandType(String commandArgs) {
-        String[] commandTokens = commandArgs.trim().split(REGEX_WHITESPACES_DELIMITER, COMMAND_WITH_ARGS_TOKEN_COUNT);
+    /**
+     * Returns a String object containing the command type portion of the entire command input from the user.<br>
+     * E.g. Returns "session /create" where
+     *      commandString = "session /create /n Lunch /d 11-03-2022 /pl Warren Ivan Roy"
+     *
+     * @param commandString A String object that contains the entire command input provided by the user.
+     * @return A String object containing the command type portion of the entire command input from the user if valid,
+     *         null otherwise.
+     */
+    public static String getCommandType(String commandString) {
+        String[] commandTokens = commandString.trim().split(REGEX_WHITESPACES_DELIMITER, COMMAND_WITH_ARGS_TOKEN_COUNT);
         
         if (commandTokens.length < DELIMITERED_COMMAND_MIN_TOKEN_COUNT) {
             return commandTokens[0];
