@@ -20,14 +20,11 @@ public class PatientList {
     }
 
     /**
-     * Adds a patient to the patient list.
      *
-     * @param name Name of the patient.
-     * @param phoneNumber Phone number of the patient.
-     * @param email Email address of the patient.
+     * @param patient the patient will be added
      */
-    public void addPatient(String name, String phoneNumber, String email) {
-        patients.add(new Patient(countPatient + 1, name, phoneNumber, email));
+    public void addPatient(Patient patient) {
+        patients.add(patient);
         countPatient++;
 
         System.out.println(boundary + "Noted. I've added this patient:");
@@ -58,7 +55,7 @@ public class PatientList {
         System.out.println(patients.get(index));
         System.out.print("Now you have " + (countPatient - 1)
                                  + " patients recorded in the system." + System.lineSeparator() + boundary);
-        patients.remove(index);
+        patients.remove(index - 1);
         countPatient -= 1;
     }
 }

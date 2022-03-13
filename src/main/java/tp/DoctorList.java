@@ -3,16 +3,17 @@ package tp;
 import tp.person.Doctor;
 import tp.person.Person;
 
+import javax.print.Doc;
 import java.util.ArrayList;
 
 public class DoctorList {
     public static String boundary = "____________________________________________________________"
                                             + System.lineSeparator();
     protected ArrayList<Doctor> doctors = new ArrayList<>();
-    protected int countDoctor;
+    protected int size;
 
     public DoctorList() {
-        countDoctor = 0;
+        size = 0;
     }
 
     public Person getDoctor(int index) {
@@ -20,18 +21,15 @@ public class DoctorList {
     }
 
     /**
-     * Adds a doctor to the doctor list.
      *
-     * @param name Name of doctor.
-     * @param phoneNumber Phone number of the doctor.
-     * @param email Email address of the doctor.
+     * @param doctor the doctor will be added
      */
-    public void addDoctor(String name, String phoneNumber, String email) {
-        doctors.add(new Doctor(countDoctor + 1, name, phoneNumber, email));
-        countDoctor++;
+    public void addDoctor(Doctor doctor) {
+        doctors.add(doctor);
+        size++;
         System.out.println(boundary + "Noted. I've added this doctor:");
-        System.out.println(doctors.get(countDoctor - 1));
-        System.out.print("Now you have " + countDoctor
+        System.out.println(doctors.get(size - 1));
+        System.out.print("Now you have " + size
                                  + " doctors recorded in the system." + System.lineSeparator() + boundary);
     }
 
@@ -40,10 +38,10 @@ public class DoctorList {
      */
     public void printDoctorList() {
         System.out.println(boundary + "Here are the doctors in this hospital:");
-        for (int i = 0; i < countDoctor; i++) {
+        for (int i = 0; i < size; i++) {
             System.out.println((i + 1) + ". " + getDoctor(i));
         }
-        System.out.print("You have " + countDoctor + " doctors recorded in the system."
+        System.out.print("You have " + size + " doctors recorded in the system."
                                  + System.lineSeparator() + boundary);
     }
 
@@ -55,9 +53,9 @@ public class DoctorList {
     public void deleteDoctor(int index) {
         System.out.println(boundary + "Noted. I've removed this doctor:");
         System.out.println(doctors.get(index));
-        System.out.print("Now you have " + (countDoctor - 1)
+        System.out.print("Now you have " + (size - 1)
                                  + " doctors in the system." + System.lineSeparator() + boundary);
-        doctors.remove(index);
-        countDoctor -= 1;
+        doctors.remove(index - 1);
+        size -= 1;
     }
 }
