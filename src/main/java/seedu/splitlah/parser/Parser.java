@@ -117,6 +117,16 @@ public class Parser {
     }
 
     // SUPPORTING FUNCTIONS
+
+    /**
+     * Returns a String object that represents an argument in the command that follows a specified delimiter.
+     * 
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user. 
+     * @param delimiter   A String object that represents a demarcation of a specific argument in the command.
+     * @return A String object that represents an argument demarcated by the specified delimiter in the command.
+     * @throws InvalidFormatException If the specified delimiter is not found in the arguments of the command, or
+     *                                if a specified delimiter is found but no argument follows the delimiter.
+     */
     private static String getArgumentFromDelimiter(String commandArgs, String delimiter) throws InvalidFormatException {
         int delimiterIndex = commandArgs.indexOf(delimiter);
         if (delimiterIndex == INVALID_INDEX_INDICATOR) {
