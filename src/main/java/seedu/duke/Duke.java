@@ -11,7 +11,7 @@ public class Duke {
         boolean shouldExitProgram = false;
         Ui ui = new Ui();
         String userInput;
-        while(!shouldExitProgram){
+        while (!shouldExitProgram) {
             userInput = ui.readUserInput();
         }
     }

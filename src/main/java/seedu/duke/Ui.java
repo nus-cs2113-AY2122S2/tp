@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.Scanner;
+
 /**
  * Represents the User Interface component of the program.
  * The Ui object handles all interactions with the user such as printing the outputs to the user
@@ -8,6 +9,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner in;
+
     public Ui() {
         in = new Scanner(System.in);
     }
