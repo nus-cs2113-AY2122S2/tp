@@ -16,7 +16,7 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
    
    ```
 
-More information can be found in the User Guide.
+More information can be found in the [User Guide](UserGuide.md)
 
 ## Quick Start
 
