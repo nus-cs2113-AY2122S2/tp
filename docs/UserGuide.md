@@ -38,8 +38,8 @@ Target users:
 - People who go on group outings where different people pay for different activities, making bill-splitting harder.
 
 ## How SplitLah works
-- An activity represents a single group activity, paid for by one person. Activities store a list of its participants,
-the payer, and how much each participant owes.
+- An activity represents a single group activity, paid for by one person. An activity stores a list of its participants,
+the payer and how much each participant owes.
   - Example: `Lunch at a restaurant`
   - Consisting of the following participants:
     - `Warren`, `Ivan`, `Roy`
