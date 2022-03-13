@@ -25,6 +25,7 @@ public class ExerciseList {
      * Prints the list of exercises starting with their index.
      */
     public void printExerciseList() {
+        assert getNumberOfExercises() == exercisesList.size();
         System.out.println("There are " + getNumberOfExercises() + " exercises available.");
         System.out.println("Here is the list of exercises: ");
         ui.printLine();
@@ -42,6 +43,7 @@ public class ExerciseList {
      * @throws IndexOutOfBoundsException when the index provided is less than 0 or greater than the numberOfExercises.
      */
     protected String getExerciseAt(int index) throws IndexOutOfBoundsException {
+        assert (0 < index)  && (index <= numberOfExercises);
         return exercisesList.get(index - 1);
     }
 
