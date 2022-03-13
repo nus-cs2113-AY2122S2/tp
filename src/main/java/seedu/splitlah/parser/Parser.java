@@ -368,6 +368,19 @@ public class Parser {
         return parseIdFromString(argument, ACTIVITY_ID_DELIMITER);
     }
 
+    /**
+     * Returns a LocalDate object that represents a date, given the command arguments from user input, 
+     * delimited by the Date delimiter.
+     *
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return A LocalDate object that represents a date specified by the argument in the format of 'DD-MM-YYYY' or
+     *         the current date if the argument following the Date delimiter indicates "today".
+     * @throws InvalidFormatException If the Date delimiter is not found in the command arguments,
+     *                                if no arguments representing a date were provided after the 
+     *                                Date delimiter, or
+     *                                if the argument provided does not indicate "today" nor follow the date format of
+     *                                'DD-MM-YYYY'.
+     */
     public static LocalDate parseLocalDate(String commandArgs) throws InvalidFormatException {
         if (!hasDelimiter(commandArgs, DATE_DELIMITER)) {
             throw new InvalidFormatException(getMissingDelimiterErrorMessage(DATE_DELIMITER));
