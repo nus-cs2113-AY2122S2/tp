@@ -132,6 +132,7 @@ Example of usage:
 Format: `session /list`
 
 Example of usage:
+
 ![Session list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionListCommand.png)
 <br>
 <br>
