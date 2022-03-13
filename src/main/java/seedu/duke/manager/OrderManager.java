@@ -1,7 +1,6 @@
 package seedu.duke.manager;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import seedu.duke.entities.Order;
 import seedu.duke.entities.Dish;
 
@@ -47,6 +46,19 @@ public class OrderManager {
             total += this.orders.get(i).getTotalPrice();
         }
         return total;
+    }
+
+    public void printReceipt() {
+        if (this.orders.size() == 0) {
+            System.out.println("No orders!");
+        }
+        for (Order order: orders) {
+            for (Dish dish : dishes) {
+                System.out.println(dish.toString());
+            }
+            System.out.println("Total price:" + order.getTotalPrice());
+        }
+        System.out.println("Total revenue:" + this.getAllOrderValue());
     }
 
 }
