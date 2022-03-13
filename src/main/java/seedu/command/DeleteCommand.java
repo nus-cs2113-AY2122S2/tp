@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
      * constructor for DeleteCommand. Initialises successMessage and usageReminder from Command
      * @param commandStrings parsed user input which contains details of equipment to be deleted
      */
-    public DeleteCommand(ArrayList<String> commandStrings){
+    public DeleteCommand(ArrayList<String> commandStrings) {
         COMMAND_STRINGS = commandStrings;
         successMessage = "Equipment successfully deleted: %1$s, serial number %2$s";
         usageReminder = COMMAND_WORD + COMMAND_DESCRIPTION;
@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
      * Deletes equipment specified by serial number
      * @return CommandResult with message from execution of this command
      */
-    public CommandResult execute(){
+    public CommandResult execute() {
         String equipmentName = equipmentInventory.getEquipmentList().get(COMMAND_STRINGS.get(0)).getItemName();
         equipmentInventory.deleteEquipment(COMMAND_STRINGS.get(0));
 

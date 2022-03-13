@@ -13,6 +13,8 @@ public abstract class Command {
     protected String successMessage;
     public String usageReminder;
     protected EquipmentManager equipmentInventory;
+    protected final String INCORRECT_ENUM_TYPE = "Wrong type of equipment. The allowed types are: MICROPHONE, SPEAKER, STAND, CABLE";
+    protected final String INCORRECT_COST_FORMAT = "Please enter numbers only for cost and omit symbols";
 
     public abstract CommandResult execute();
 

@@ -12,7 +12,7 @@ public class CheckCommand extends Command {
     private final ArrayList<String> COMMAND_STRINGS;
     public static final String COMMAND_WORD = "check";
     public static final String COMMAND_DESCRIPTION = ": Gives details of the equipment with the specified name. "
-            + "Parameters: n/ITEM_NAME\n"
+            + "Parameters: n/ITEM_NAME" + System.lineSeparator()
             + "Example: "
             + "check n/MixerC";
 
@@ -20,7 +20,7 @@ public class CheckCommand extends Command {
      * constructor for CheckCommand. Initialises successMessage and usageReminder from Command
      * @param commandStrings parsed user input which contains details of equipment to be viewed
      */
-    public CheckCommand(ArrayList<String> commandStrings){
+    public CheckCommand(ArrayList<String> commandStrings) {
         COMMAND_STRINGS = commandStrings;
         successMessage = "Here are the equipment matching to '%1$s':" + System.lineSeparator();
         usageReminder = COMMAND_WORD + COMMAND_DESCRIPTION;
@@ -30,7 +30,7 @@ public class CheckCommand extends Command {
      * Gives details of equipment specified by name
      * @return CommandResult with message from execution of this command
      */
-    public CommandResult execute(){
+    public CommandResult execute() {
         String name, sn, purchasedFrom, purchasedDate;
         EquipmentType type;
         double cost;

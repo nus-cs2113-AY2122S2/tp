@@ -5,7 +5,7 @@ package seedu;
  * @param <K> the class of the key
  * @param <V> the class of the value
  */
-public class Pair<K, V>{
+public class Pair<K, V> {
 
     K key;
     V value;

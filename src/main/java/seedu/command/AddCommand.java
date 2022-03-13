@@ -1,7 +1,6 @@
 package seedu.command;
 
 import seedu.equipment.DuplicateSerialNumber;
-import seedu.equipment.Equipment;
 import seedu.equipment.EquipmentType;
 
 import java.util.ArrayList;
@@ -34,8 +33,12 @@ public class AddCommand extends Command {
     public CommandResult execute(){
         try {
             addEquipment(COMMAND_STRINGS);
-        }catch(DuplicateSerialNumber e){
+        } catch (DuplicateSerialNumber e){
             return new CommandResult(String.format(DUPLICATE_ITEM_ERROR, COMMAND_STRINGS.get(1)));
+        } catch (NullPointerException | NumberFormatException e){
+            return new CommandResult(INCORRECT_COST_FORMAT);
+        } catch (IllegalArgumentException e) {
+            return new CommandResult(INCORRECT_ENUM_TYPE);
         }
 
         return new CommandResult(String.format(successMessage, COMMAND_STRINGS.get(0), COMMAND_STRINGS.get(1)));
@@ -45,7 +48,7 @@ public class AddCommand extends Command {
      * Uses information from the ArrayList to create a new Equipment and add it to the inventory.
      * @param userInput ArrayList of String which contains the individual attributes of the equipment to be added
      */
-    public void addEquipment(ArrayList<String> userInput) throws DuplicateSerialNumber{
+    public void addEquipment(ArrayList<String> userInput) throws DuplicateSerialNumber {
         String equipmentName = userInput.get(0);
         String serialNumber = userInput.get(1);
         EquipmentType type = EquipmentType.valueOf(userInput.get(2));
@@ -53,10 +56,6 @@ public class AddCommand extends Command {
         String purchasedFrom = userInput.get(4);
         String purchasedDate = userInput.get(5);
 
-        try {
-            equipmentInventory.addEquipment(equipmentName, serialNumber, type, cost, purchasedFrom, purchasedDate);
-        }catch(DuplicateSerialNumber e){
-            throw new DuplicateSerialNumber();
-        }
+        equipmentInventory.addEquipment(equipmentName, serialNumber, type, cost, purchasedFrom, purchasedDate);
     }
 }

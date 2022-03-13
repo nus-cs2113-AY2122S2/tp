@@ -18,12 +18,12 @@ public class UpdateCommand extends Command {
     /**
      * constructor for UpdateCommand. Initialises successMessage and usageReminder from Command
      */
-    public UpdateCommand(){
+    public UpdateCommand() {
         successMessage = "Equipment successfully updated: %1$s for serial number %2$s";
         usageReminder = COMMAND_WORD + COMMAND_DESCRIPTION;
     }
 
-    public CommandResult execute(){
+    public CommandResult execute() {
         ArrayList<Pair<String, String>> updatePairs = generateUpdatePairs();
         successMessage = equipmentInventory.updateEquipment(serialNumber, updatePairs);
 
@@ -54,7 +54,7 @@ public class UpdateCommand extends Command {
         this.cost = cost;
     }
 
-    public ArrayList<Pair<String, String>> generateUpdatePairs(){
+    public ArrayList<Pair<String, String>> generateUpdatePairs() {
         ArrayList<Pair<String, String>> pairs = new ArrayList<>();
         if(updateName != null){
             pairs.add(new Pair<String, String>("itemName", updateName));

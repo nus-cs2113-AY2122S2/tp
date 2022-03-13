@@ -15,13 +15,13 @@ public class ListCommand extends Command {
     /**
      * constructor for ListCommand with NO specified type. Initialises successMessage and usageReminder from Command
      */
-    public ListCommand(){
+    public ListCommand() {
         COMMAND_STRINGS = null;
-        successMessage = "TOTAL QUANTITY OF EQUIPMENT: %1$d\n";
+        successMessage = "TOTAL QUANTITY OF EQUIPMENT: %1$d" + System.lineSeparator();
         usageReminder = COMMAND_WORD + ": print a list of all equipment in the inventory. "
                 + "Parameters: NIL"
                 + "Example: "
-                + "list\n"
+                + "list" + System.lineSeparator()
                 + COMMAND_WORD + " t/Type: print a list of all equipment in the inventory of the specified type"
                 + "Parameters: t/Type"
                 + "Example: "
@@ -32,7 +32,7 @@ public class ListCommand extends Command {
      * constructor for ListCommand with specified type. Initialises successMessage and usageReminder from Command
      * @param commandStrings parsed user input which contains details of equipment to be viewed
      */
-    public ListCommand(ArrayList<String> commandStrings){
+    public ListCommand(ArrayList<String> commandStrings) {
         COMMAND_STRINGS = commandStrings;
         successMessage = "TOTAL QUANTITY OF %1$s: %2$d" + System.lineSeparator();
         usageReminder = COMMAND_WORD + ": print a list of all equipment in the inventory. "
@@ -49,7 +49,7 @@ public class ListCommand extends Command {
      * List all equipment or list equipment of specified type
      * @return CommandResult with message from execution of this command
      */
-    public CommandResult execute(){
+    public CommandResult execute() {
         int listSize;
         ArrayList<Equipment> equipmentArrayList;
         if(COMMAND_STRINGS == null){

@@ -13,12 +13,12 @@ public class CommandResult {
     private final String RESULT_TO_SHOW;
     private final ArrayList<Equipment> RELEVANT_EQUIPMENT;
 
-    public CommandResult(String result){
+    public CommandResult(String result) {
         RESULT_TO_SHOW = result;
         RELEVANT_EQUIPMENT = null;
     }
 
-    public CommandResult(String result, ArrayList<Equipment> equipmentList){
+    public CommandResult(String result, ArrayList<Equipment> equipmentList) {
         RESULT_TO_SHOW = result;
         RELEVANT_EQUIPMENT = equipmentList;
     }
