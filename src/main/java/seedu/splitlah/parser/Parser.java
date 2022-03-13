@@ -524,6 +524,13 @@ public class Parser {
         return commandTokens[0] + " " + commandTokens[1];
     }
 
+    /**
+     * Returns a Command object that corresponds to the String object representing the input provided by the user.
+     * 
+     * @param input A String object representing the input entered by the user of SplitLah.
+     * @return A Command object that performs the task specified by the user if the syntax of the input is valid,
+     *         an InvalidCommand object that prints an error message otherwise.
+     */
     public static Command getCommand(String input) {
         String commandType = getCommandType(input);
         String remainingArgs = getRemainingArgument(input);
