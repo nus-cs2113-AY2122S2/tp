@@ -1,4 +1,21 @@
 # Developer Guide
+## Contents
+* [Acknowledgements](#acknowledgements)
+* [Design](#design)
+    * [Architecture](#architecture)
+    * [Manager Component](#manager-component)
+    * [Profile Component](#profile-component)
+    * [TextUI Component](#textui-component)
+    * [Storage Component](#storage-component)
+    * [Parser Component](#parser-component)
+    * [Command Component](#command-component)
+* Implementation
+  * [To be completed]
+* [Project Scope](#product-scope)
+* [User Stories](#user-stories)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+
 
 ## Acknowledgements
 
