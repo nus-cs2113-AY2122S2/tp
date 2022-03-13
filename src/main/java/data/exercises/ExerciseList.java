@@ -25,7 +25,7 @@ public class ExerciseList {
      * Prints the list of exercises starting with their index.
      */
     public void printExerciseList() {
-        assert getNumberOfExercises() == 13;
+        assert getNumberOfExercises() == exercisesList.size();
         System.out.println("There are " + getNumberOfExercises() + " exercises available.");
         System.out.println("Here is the list of exercises: ");
         ui.printLine();
