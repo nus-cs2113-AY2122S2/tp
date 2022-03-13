@@ -68,9 +68,9 @@ public class PersonList {
      *
      * @return The total remaining disposable income
      */
-    public double getRemain(PersonList personList) {
+    public double getRemain() {
         double sum = 0;
-        for (Person person: personList.getPersonList()) {
+        for (Person person: this.getPersonList()) {
             sum += person.getDisposable();
         }
         return sum;
