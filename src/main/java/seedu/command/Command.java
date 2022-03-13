@@ -9,7 +9,7 @@ import java.util.HashMap;
 // https://github.com/nus-cs2113-AY2122S2/personbook/tree/master/src/main/java/seedu/personbook/commands
 public abstract class Command {
     protected String successMessage;
-    protected String usageReminder;
+    public String usageReminder;
     protected EquipmentManager equipmentInventory;
 
     public abstract CommandResult execute();

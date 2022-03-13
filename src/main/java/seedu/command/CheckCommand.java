@@ -7,7 +7,11 @@ import java.util.ArrayList;
  */
 public class CheckCommand extends Command {
     private final ArrayList<String> COMMAND_STRINGS;
-    public final String COMMAND_WORD = "check";
+    public static final String COMMAND_WORD = "check";
+    public static final String COMMAND_DESCRIPTION = ": Gives details of the equipment with the specified name. "
+            + "Parameters: n/ITEM_NAME\n"
+            + "Example: "
+            + "check n/MixerC";
 
     /**
      * constructor for CheckCommand. Initialises successMessage and usageReminder from Command
@@ -21,10 +25,7 @@ public class CheckCommand extends Command {
                 + "S/N:  %4$s\n"
                 + "Purchased From:  %5$s\n"
                 + "Purchase Date:  %6$s\n";
-        usageReminder = COMMAND_WORD + ": Gives details of the equipment with the specified name. "
-                + "Parameters: n/ITEM_NAME\n"
-                + "Example: "
-                + "check n/MixerC";
+        usageReminder = COMMAND_WORD + COMMAND_DESCRIPTION;
     }
 
     /**
