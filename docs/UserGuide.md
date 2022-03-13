@@ -189,13 +189,18 @@ Format: `session /summary /sid [SESSION_ID]`
 * `[SESSION_ID]` refers to the unique identifier of the session.
     * The unique identifier for a session can be retrieved with `session /list` command.
 
-Example of usage:
-1. Get a session summary for an existing session with a session unique identifier of 1.
-   - `session /summary /sid 1`
 > **💡 Note:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
 
-<br>[INSERT SCREEN SHOT]
+Example of usage:
+1. A [session](#creating-a-session-session-create) was previously created with session named Class Outing with Alice 
+   and Bob involved on 15-03-2022.
+2. An [activity](#creating-an-activity-activity-create) was created with activity named Class Lunch, where Alice paid for both
+   Bob and herself with a total cost of $10.
+3. Get a session summary for an existing session with a session unique identifier of 1.
+   - `session /summary /sid 1`
+
+![Session summary command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionSummaryCommand.png)
 <br>
 <br>
 ## FAQ
