@@ -181,7 +181,17 @@ public class Parser {
         }
         return idVal;
     }
-    
+
+    /**
+     * Returns a double representing a cost value, represented by the provided input String object.
+     *
+     * @param input     A String object that contains numeric characters or a single decimal point character,
+     *                  representing a cost value.
+     * @param delimiter A String object that represents a demarcation of a specific argument in the command.
+     * @return An double representing a cost value.
+     * @throws InvalidFormatException If the provided input String object contains characters other than numeric
+     *                                characters or a single decimal point character, and cannot be parsed as a double.
+     */
     private static double parseCostFromString(String input, String delimiter) throws InvalidFormatException {
         try {
             return Double.parseDouble(input);
@@ -375,11 +385,33 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a double that represents a single total cost, given the command arguments from user input, 
+     * delimited by the Total cost delimiter.
+     *
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return A double that represents a single total cost.
+     * @throws InvalidFormatException If the Total cost delimiter is not found in the command arguments,
+     *                                if no arguments representing a total cost were provided after the 
+     *                                Total cost delimiter, or
+     *                                if the arguments cannot be parsed as a double.
+     */
     public static double parseTotalCost(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, TOTAL_COST_DELIMITER);
         return parseCostFromString(argument, TOTAL_COST_DELIMITER);
     }
 
+    /**
+     * Returns a double array object that represents a list of cost values, given the command arguments from user input, 
+     * delimited by the Cost list delimiter.
+     *
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return A double array object that represents a list of cost values.
+     * @throws InvalidFormatException If the Cost list delimiter is not found in the command arguments,
+     *                                if no arguments representing a list of cost values were provided after the 
+     *                                Cost list delimiter, or
+     *                                if any token in the argument cannot be parsed as a double.
+     */
     public static double[] parseCostList(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, COST_LIST_DELIMITER);
         String[] costStrings = argument.split(REGEX_WHITESPACES_DELIMITER);
