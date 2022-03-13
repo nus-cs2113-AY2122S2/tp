@@ -25,6 +25,24 @@
 ![Application Diagram Screenshot](https://raw.githubusercontent.com/froststein/tp/master/docs/images/developerguide/ArchitectureDiagram.drawio.png)
 
 The *Architecture Diagram* shown above illustrates the high-level design of the SplitLah application.
+
+**Overview of components**
+  * `Main`
+    * On app launch: Creates an instance of `Manager` and runs command loop.
+  * `Manager`
+    * On creation: Initializes the Profile, TextUI and Storage components.
+    * On run: Loads data from `Storage`, receives user input from UI and uses `Parser` to parser user input into application.
+  * `Profile`
+    * Handles cached data within run time of application. Manages and stores `sessions`, `activities` and `groups` that were created by the user.
+  * `TextUI`
+    * Handles UI operations of the application.
+  * `Storage`
+    * Handles storage operations of the application.
+  * `Parser`
+    * Handles input parsing and determines which command to run.
+  * `Command`
+    * Defines how a command is executed.
+
 ### Manager Component
 ### Profile Component
 ### TextUI Component
