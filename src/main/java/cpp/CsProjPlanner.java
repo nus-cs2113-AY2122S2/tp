@@ -1,5 +1,6 @@
 package cpp;
 
+import cpp.exceptions.IllegalCommandException;
 import cpp.projects.commandhandler.CommandHandler;
 import cpp.projects.ProjectList;
 
@@ -13,7 +14,7 @@ public class CsProjPlanner {
     /**
      * Main entry-point for the CSProjPlanner application.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalCommandException {
         String input;
         Scanner in = new Scanner(System.in);
 
