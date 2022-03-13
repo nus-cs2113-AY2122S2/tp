@@ -4,6 +4,7 @@ import seedu.allonus.ui.TextUi;
 
 import static seedu.allonus.contacts.ContactsManager.contactsRunner;
 import static seedu.allonus.expense.ExpenseTracker.expenseRunner;
+import seedu.allonus.modules.StudyManager;
 
 public class AllOnUs {
     private TextUi ui;
@@ -62,6 +63,8 @@ public class AllOnUs {
         this.ui = new TextUi();
         String userInput;
 
+        StudyManager studyManager = new StudyManager();
+
         while (true) {
             System.out.println("Menu:");
             userInput = ui.getUserInput();
@@ -74,7 +77,7 @@ public class AllOnUs {
                 contactsRunner(ui);
                 printMainMenuMessage();
             } else if (isStudyManagerCommand(userInput)) {
-                //studyManagerRunner(ui);
+                studyManager.studyManagerRunner(ui);
                 printMainMenuMessage();
             } else if (isExpenseTrackerCommand(userInput)) {
                 expenseRunner(ui);

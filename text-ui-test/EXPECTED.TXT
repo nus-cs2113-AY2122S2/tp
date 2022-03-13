@@ -23,4 +23,15 @@ Deleted entry: Date|18.00|Category|This is a remark
 You haven't added any expenses to your list yet!
 Welcome back to the main menu
 Menu:
+Welcome to Modules Tracker, where you can track all your classes.
+There are no modules in your list yet!
+Okay, I have added a new module to the schedule
+[Module] CS2113 Lecture: Thursday, 2pm-4pm
+Here are the modules in your schedule:
+1: [Module] CS2113 Lecture: Thursday, 2pm-4pm
+Noted I have removed this module from your schedule:
+[Module] CS2113 Lecture: Thursday, 2pm-4pm
+There are no modules in your list yet!
+Welcome back to the main menu
+Menu:
 Goodbye! Hope to see you again...

@@ -11,4 +11,11 @@ list
 rm 1
 list
 menu
+goto m/Study_Manager
+list
+add m/CS2113 c/lec d/Thursday t/2pm-4pm
+list
+rm 1
+list
+menu
 exit

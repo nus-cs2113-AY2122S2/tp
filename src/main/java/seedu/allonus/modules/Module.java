@@ -6,9 +6,11 @@ public class Module {
     private String day;
     private String timeSlot;
 
-    public Module(String moduleCode, String category) {
+    public Module(String moduleCode, String category, String day, String timeSlot) {
         this.moduleCode = moduleCode;
         this.category = category;
+        this.day = day;
+        this.timeSlot = timeSlot;
     }
 
     public String getModuleCode() {
@@ -28,7 +30,8 @@ public class Module {
     }
 
     @Override
+    //needs to be fixed
     public String toString() {
-        return "[Module] " + "Code='" + moduleCode + '\'' + ", Category='" + category + '\'';
+        return "[Module] " + moduleCode + " " + category + ": " + day + ", " + timeSlot;
     }
 }
