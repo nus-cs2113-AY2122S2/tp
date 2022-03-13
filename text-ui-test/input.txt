@@ -1,1 +1,8 @@
-James Gosling
+addproject cs2113
+listprojects
+addproject gex1005
+listprojects
+deleteproject cs2113
+listprojects
+blah
+exit
