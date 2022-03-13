@@ -58,7 +58,7 @@ public class AppointmentList {
         System.out.println(appointments.get(index));
         System.out.print("Now you have " + (countAppointment - 1)
                                  + " appointments recorded in the system." + System.lineSeparator() + boundary);
-        appointments.remove(index);
+        appointments.remove(index - 1);
         countAppointment -= 1;
     }
 }

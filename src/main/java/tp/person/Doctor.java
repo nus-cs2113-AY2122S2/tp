@@ -3,7 +3,7 @@ package tp.person;
 public class Doctor extends Person {
     protected boolean isOnDuty;
 
-    public Doctor(int id, String name, String phoneNumber, String email) {
+    public Doctor(String id, String name, String phoneNumber, String email) {
         super(id, name, phoneNumber, email);
         isOnDuty = false;
     }
@@ -20,4 +20,5 @@ public class Doctor extends Person {
     public String toString() {
         return "* DOCTOR " + super.toString();
     }
+
 }
