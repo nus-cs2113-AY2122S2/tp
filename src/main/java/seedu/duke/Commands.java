@@ -89,6 +89,10 @@ public class Commands {
                     System.out.println(qty + " " + good.getName() + " have been removed.");
                 }
 
+                if (good.getQuantity() == 0) {
+                    userGoods.remove(good);
+                }
+
                 return;
             }
         }
