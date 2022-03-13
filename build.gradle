@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.CsProjPlanner"
+    mainClassName = "cpp.CsProjPlanner"
 }
 
 shadowJar {

@@ -2,32 +2,43 @@
 
 ## Introduction
 
-{Give a product intro}
+CSProj Planner is a desktop app to help Computer Science students manage their projects. However, while being optimized for CS students, the app will still be useful to any student looking to easily keep track of all their upcoming projects. Users are able to add and delete projects at will, as well as view the tasks needed to be done for their submissions.
+
+## Contents
+
+- [Quick Start](#Quick-Start)
+- [Features](#Features)
+   - [print all projects](#print-all-projects-viewproject)
+   - [exit](#exit-exit)
+- [FAQ](#FAQ)
+- [Command Summary](#Command-Summary)
 
 ## Quick Start
 
-{Give steps to get started quickly}
+- Ensure you have Java  `11` or above installed in your computer.
+- Ensure you have downloaded our latest version.
+- Copy the file to your preferred folder as the home folder for your CSProj Planner.
+- Double click the file to start the app.
+- Type your command in the command box and press Enter to execute it. Some example commands you can try:
+   -  `addproj cs2113`: Add a new project named cs2113 to the planner.
+   - `viewproj`: list out all projects in the list.  
+   - `exit`: Exits the project.
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
 
 ## Features 
 
-{Give detailed description of each feature}
+### print all projects: `viewproject`
+Prints all projects in the list by their names
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+Format: `viewproject`
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+* The `viewproject` cannot contain a space, i.e., `view project` will be considered an unknown command.
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+### exit: `exit`
+Exit the program
 
-Example of usage: 
+Format: `exit`
 
-`todo n/Write the rest of the User Guide d/next week`
-
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
 
 ## FAQ
 
@@ -37,6 +48,7 @@ Example of usage:
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+| Action              | Format                                   |
+|---------------------|------------------------------------------|
+| view all project(s) | `viewproject`                            |
+| Exit                | `exit`                                   |

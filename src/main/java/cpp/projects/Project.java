@@ -1,4 +1,4 @@
-package seedu.duke.projects;
+package cpp.projects;
 
 import java.util.ArrayList;
 
@@ -46,4 +46,14 @@ public class Project {
     public Todo getTodo(int index) {
         return todos.get(index - 1);
     }
+
+    /**
+     * Gets the title of a project.
+     *
+     * @return title
+     */
+    public String getTitle() {
+        return title;
+    }
+
 }
