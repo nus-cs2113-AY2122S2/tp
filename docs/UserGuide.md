@@ -96,7 +96,7 @@ Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ..
 * `[NAME1 NAME2 ...]` refers to a list of persons involved in the session.
   * Each individual name is **case-insensitive**.
 
-> **Notes:**
+> **💡 Note(s):**
 >- The `[SESSION_NAME]` should be unique across sessions.
 >- Each name in `[NAME1 NAME2 ...]` for the session should be unique.
 
@@ -115,12 +115,13 @@ Format: `session /delete /sid [SESSION_ID]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
     * The unique identifier for a session can be retrieved with `session /list` command.
+> **💡 Note(s):**
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
+>- A confirmation must be given before deletion takes place.
 
 Example of usage:
 1. Remove an existing session that was created with a session unique identifier of 1.
    - `session /delete /sid 1`
-> **Notes:**
->- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
 
 ![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
 <br>
@@ -156,7 +157,7 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 * `[TOTAL_COST]` refers to the total cost of the activity.
 * `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
 
-> **Notes:**
+> **💡 Note(s):**
 >- The session with a unique identifier of `[SESSION_ID]` has to exist before the activity can be created.
 >- The `[ACTIVITY_NAME]` should be unique across all activities.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
@@ -166,16 +167,16 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 Examples of usage:
 1. Adds a new activity in a session with a session unique identifier of 1, named Class Lunch, where Alice paid for both
    Bob and herself with a total cost of $10.
-    1. `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /c 10`
+   - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /c 10`
 
-<br>[INSERT SCREEN SHOT]
+![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
 <br>
 <br>
 2. Adds a new activity in a session with a session unique identifier of 1, named Class Lunch, where Alice paid for both
    Bob and herself. Alice's meal costs $3.50 while Bob's meal costs $7.
-    1. `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7`
+   - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7`
 
-<br>[INSERT SCREEN SHOT]
+![Activity create command [2] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[2].png)
 <br>
 <br>
 ### Settling all transactions for a session: `session /summary`
@@ -188,13 +189,18 @@ Format: `session /summary /sid [SESSION_ID]`
 * `[SESSION_ID]` refers to the unique identifier of the session.
     * The unique identifier for a session can be retrieved with `session /list` command.
 
-Example of usage:
-1. Get a session summary for an existing session with a session unique identifier of 1.
-    1. `session /summary /sid 1`
-> **Notes:**
+> **💡 Note:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
 
-<br>[INSERT SCREEN SHOT]
+Example of usage:
+1. A [session](#creating-a-session-session-create) was previously created with session named Class Outing with Alice 
+   and Bob involved on 15-03-2022.
+2. An [activity](#creating-an-activity-activity-create) was created with activity named Class Lunch, where Alice paid for both
+   Bob and herself with a total cost of $10.
+3. Get a session summary for an existing session with a session unique identifier of 1.
+   - `session /summary /sid 1`
+
+![Session summary command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionSummaryCommand.png)
 <br>
 <br>
 ## FAQ
