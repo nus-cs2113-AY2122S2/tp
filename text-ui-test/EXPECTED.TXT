@@ -1,5 +1,29 @@
 greeting message
+Menu:
 Welcome to Contacts Manager
+Got it. I've added this contact:
+  Lucy
+Now you have 1 contacts in the list.
+Here are the contacts in your list:
+ 1. Lucy
+
+Noted. I've removed this contact:
+  Lucy
+Now you have 0 contacts in the list.
 You haven't added any contacts to your list yet!
 Welcome back to the main menu
-exit message
+Menu:
+Welcome to Expense Tracker
+You haven't added any expenses to your list yet!
+Added Date|18.00|Category|This is a remark
+Some fields are empty! Try again!
+Some fields are empty! Try again!
+Here are the expenses you have made so far:
+ 1. Date|18.00|Category|This is a remark
+
+Selected item does not exist in the list
+Deleted entry: Date|18.00|Category|This is a remark
+You haven't added any expenses to your list yet!
+Welcome back to the main menu
+Menu:
+Goodbye! Hope to see you again...
