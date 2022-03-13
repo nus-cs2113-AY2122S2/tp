@@ -3,7 +3,6 @@ package seedu.duke.helper;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -151,7 +150,7 @@ public class Parser {
         }
     }
 
-    private static boolean validateMedicine (String[] parameters) {
+    private static boolean validateMedicine(String[] parameters) {
         boolean check = true;
         for (int i = 0; i < 5; i++) {
             switch (i) {
