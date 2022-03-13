@@ -12,7 +12,7 @@ public class TextUi {
     private static final String GOOD_BY_MESSAGE = "See you later ヾ(*´▽'*)ﾉ";
     private static final String INITIAL_FAILED_MESSAGE = "Failed to start Mod Happy (..•˘_˘•..)";
 
-    /**
+    /**.
      * For addCommand
      */
     public static final String ADD_TASK_MESSAGE_TOP = "Hey! I have added this task under %s!";
@@ -21,23 +21,23 @@ public class TextUi {
     public static final String MODULE_ALREADY_EXISTS = "A module with that name already exists...";
     public static final String ESTIMATED_WORKING_TIME = "Estimated Working Time: ";
 
-    /**
+    /**.
      * For deleteCommand
      */
     public static final String DELETE_MESSAGE = " has been deleted.";
 
-    /**
+    /**.
      * For exitCommand
      */
     public static final String READY_EXIT = "I am ready to exit *_*";
 
-    /**
+    /**.
      * For listCommand
      */
     public static final String LIST_MESSAGE_TOP = "Ok! Here are the task(s) in your list:";
     public static final String EMPTY_LIST = "(empty)";
 
-    /**
+    /**.
      * For markCommand
      */
     public static final String MARK_MESSAGE_TOP = "Nice! I have marked this task as completed!";
@@ -45,23 +45,23 @@ public class TextUi {
     public static final String ICON_UNCOMPLETED = "( )";
     public static final String ICON_COMPLETED = "(X)";
 
-    /**
+    /**.
      * For command result
      */
     public static final String ARRAYLIST_RESULT = "ArrayList";
     public static final String STRING_RESULT = "String";
 
-    /**
+    /**.
      * For exceptions
      */
-    public static final String ERROR_NO_SUCH_MODULE ="Sorry, no such module exists ._.";
-    public static final String ERROR_NO_SUCH_TASK ="Sorry, no such task exists ._.";
+    public static final String ERROR_NO_SUCH_MODULE = "Sorry, no such module exists ._.";
+    public static final String ERROR_NO_SUCH_TASK = "Sorry, no such task exists ._.";
     public static final String ERROR_PARSE_FAILED = "This parse failed 0_0";
     public static final String ERROR_UNKNOWN_COMMAND = "Sorry, I don't understand the following command:";
     public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, I don't understand the result format:";
 
-    /**
-     * For Parsers
+    /**.
+     * For parsers
      */
     public static final String TASK_NAME = "taskName";
     public static final String TASK_DESCRIPTION = "taskDescription";
@@ -81,7 +81,7 @@ public class TextUi {
     public static final String LIST_COMMAND_WORD = "list";
     public static final String MARK_COMMAND_WORD = "mark";
 
-    /**
+    /**.
      * General Strings
      */
     public static final String STRING = "String";
