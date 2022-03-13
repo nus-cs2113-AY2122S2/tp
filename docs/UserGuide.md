@@ -115,12 +115,12 @@ Format: `session /delete /sid [SESSION_ID]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
     * The unique identifier for a session can be retrieved with `session /list` command.
+> **Notes:**
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
 
 Example of usage:
 1. Remove an existing session that was created with a session unique identifier of 1.
    - `session /delete /sid 1`
-> **Notes:**
->- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
 
 ![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
 <br>
