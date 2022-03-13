@@ -122,8 +122,7 @@ Format: `session /delete /sid [SESSION_ID]`
 Example of usage:
 1. Remove an existing session that was created with a session unique identifier of 1.
    - `session /delete /sid 1`
-
-![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
+   ![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
 <br>
 <br>
 ### Listing all sessions: `session /list`
