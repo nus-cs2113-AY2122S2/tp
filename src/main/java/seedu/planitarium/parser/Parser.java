@@ -1,5 +1,6 @@
 package seedu.planitarium.parser;
 
+import exceptions.InvalidIndexException;
 import exceptions.InvalidMoneyException;
 import exceptions.MissingDelimiterException;
 import seedu.planitarium.person.Person;
@@ -158,18 +159,22 @@ public class Parser {
     }
 
     /**
-     * Returns without exception if user index is within membership quantity bounds.
+     * Returns a valid integer user index that is within membership quantity bounds.
      *
      * @param userIndex  Person's user index.
      * @param personList A list of Persons.
-     * @throws NumberFormatException if amount is not a valid integer.
-     * @throws IndexOutOfBoundsException if provided index is out of bounds.
+     * @return A valid integer user index.
+     * @throws InvalidIndexException if amount is not a valid integer or out of bounds.
      */
-    public static void checkValidUserIndex(String userIndex, PersonList personList)
-                throws NumberFormatException, IndexOutOfBoundsException {
-        int checkIndex = Integer.parseInt(userIndex);
-        checkTooHighIndex(checkIndex, personList.getNumberOfMembers());
-        checkTooLowIndex(checkIndex, MIN_USER_INDEX);
+    public static int getValidUserIndex(String userIndex, PersonList personList) throws InvalidIndexException {
+        try {
+            int checkIndex = Integer.parseInt(userIndex);
+            checkTooHighIndex(checkIndex, personList.getNumberOfMembers());
+            checkTooLowIndex(checkIndex, MIN_USER_INDEX);
+            return checkIndex;
+        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+            throw new InvalidIndexException(userIndex);
+        }
     }
 
     /**
