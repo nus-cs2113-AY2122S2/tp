@@ -8,17 +8,15 @@ public class AddPatientCommand extends Command {
     protected String name;
     protected String phoneNumber;
     protected String email;
-    protected boolean isOnDuty;
 
     public AddPatientCommand() {
     }
 
-    public AddPatientCommand(String id, String name, String phoneNumber, String email, boolean isOnDuty) {
+    public AddPatientCommand(String id, String name, String phoneNumber, String email) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.isOnDuty = isOnDuty;
     }
 
     /**

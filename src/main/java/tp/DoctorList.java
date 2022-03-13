@@ -17,7 +17,7 @@ public class DoctorList {
     }
 
     public Person getDoctor(int index) {
-        return doctors.get(index);
+        return doctors.get(index - 1);
     }
 
     /**
