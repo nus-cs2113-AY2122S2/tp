@@ -1,5 +1,8 @@
 package seedu.command;
 
+import seedu.equipment.Equipment;
+import seedu.equipment.EquipmentType;
+
 import java.util.ArrayList;
 
 /**
@@ -11,7 +14,6 @@ public class ListCommand extends Command {
 
     /**
      * constructor for ListCommand with NO specified type. Initialises successMessage and usageReminder from Command
-     * @param commandStrings parsed user input which contains details of equipment to be viewed
      */
     public ListCommand(){
         COMMAND_STRINGS = null;
@@ -32,11 +34,11 @@ public class ListCommand extends Command {
      */
     public ListCommand(ArrayList<String> commandStrings){
         COMMAND_STRINGS = commandStrings;
-        successMessage = "TOTAL QUANTITY OF %1$s: %2$d\n";
+        successMessage = "TOTAL QUANTITY OF %1$s: %2$d" + System.lineSeparator();
         usageReminder = COMMAND_WORD + ": print a list of all equipment in the inventory. "
                 + "Parameters: NIL"
                 + "Example: "
-                + "list\n"
+                + "list" + System.lineSeparator()
                 + COMMAND_WORD + " t/Type: print a list of all equipment in the inventory of the specified type"
                 + "Parameters: t/Type"
                 + "Example: "
@@ -56,7 +58,7 @@ public class ListCommand extends Command {
             return new CommandResult(String.format(successMessage, listSize), equipmentArrayList);
         }
 
-        String typeToList = COMMAND_STRINGS.get(0);
+        EquipmentType typeToList = EquipmentType.valueOf(COMMAND_STRINGS.get(0));
         equipmentArrayList = equipmentInventory.listEquipment(typeToList);
         listSize = equipmentArrayList.size();
         return new CommandResult(String.format(successMessage, typeToList, listSize), equipmentArrayList);

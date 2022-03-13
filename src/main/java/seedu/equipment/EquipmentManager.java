@@ -35,6 +35,10 @@ public class EquipmentManager {
         return listOfEquipments;
     }
 
+    public HashMap<String, Equipment> getEquipmentList(){
+        return equipmentList;
+    }
+
     public ArrayList<Equipment> listEquipment() {
         return new ArrayList<>(equipmentList.values());
     }

@@ -1,5 +1,8 @@
 package seedu.command;
 
+import seedu.equipment.Equipment;
+import seedu.equipment.EquipmentType;
+
 import java.util.ArrayList;
 
 /**
@@ -19,12 +22,7 @@ public class CheckCommand extends Command {
      */
     public CheckCommand(ArrayList<String> commandStrings){
         COMMAND_STRINGS = commandStrings;
-        successMessage = "Name:  %1$s\n"
-                + "Type:  %2$s\n"
-                + "Cost:  %3$f\n"
-                + "S/N:  %4$s\n"
-                + "Purchased From:  %5$s\n"
-                + "Purchase Date:  %6$s\n";
+        successMessage = "Here are the equipment matching to '%1$s':" + System.lineSeparator();
         usageReminder = COMMAND_WORD + COMMAND_DESCRIPTION;
     }
 
@@ -33,17 +31,12 @@ public class CheckCommand extends Command {
      * @return CommandResult with message from execution of this command
      */
     public CommandResult execute(){
-        String name, type, sn, purchasedFrom, purchasedDate;
+        String name, sn, purchasedFrom, purchasedDate;
+        EquipmentType type;
         double cost;
 
-        Equipment equipment = equipmentInventory.checkEquipment(COMMAND_STRINGS.get(0));
-        name = equipment.getItemName();
-        type = equipment.getType();
-        sn = equipment.getSerialNumber();
-        purchasedFrom = equipment.getPurchasedFrom();
-        purchasedDate = equipment.getPurchasedDate();
-        cost = equipment.getCost();
+        ArrayList<Equipment> equipment = equipmentInventory.checkEquipment(COMMAND_STRINGS.get(0));
 
-        return new CommandResult(String.format(successMessage, name, type, cost, sn, purchasedFrom, purchasedDate));
+        return new CommandResult(String.format(successMessage, COMMAND_STRINGS.get(0)), equipment);
     }
 }

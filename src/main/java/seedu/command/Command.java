@@ -1,5 +1,7 @@
 package seedu.command;
 
+import seedu.equipment.EquipmentManager;
+
 import java.util.HashMap;
 
 /**

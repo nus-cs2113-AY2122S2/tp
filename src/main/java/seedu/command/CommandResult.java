@@ -1,5 +1,7 @@
 package seedu.command;
 
+import seedu.equipment.Equipment;
+
 import java.util.ArrayList;
 
 /**
