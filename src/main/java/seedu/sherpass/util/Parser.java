@@ -1,18 +1,9 @@
 package seedu.sherpass.util;
 
-import seedu.sherpass.command.Command;
-import seedu.sherpass.command.DeleteCommand;
-import seedu.sherpass.command.HelpCommand;
-import seedu.sherpass.command.MarkCommand;
-import seedu.sherpass.command.StudyCommand;
-import seedu.sherpass.command.AddCommand;
-import seedu.sherpass.command.UnmarkCommand;
-import seedu.sherpass.command.FindCommand;
-import seedu.sherpass.command.ListCommand;
-import seedu.sherpass.command.ExitCommand;
-import seedu.sherpass.command.ClearCommand;
+import seedu.sherpass.command.*;
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
+import seedu.sherpass.exception.WrongEditInfoFormat;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
@@ -46,6 +37,7 @@ import static seedu.sherpass.constant.Message.*;
 
 
 public class Parser {
+
     /**
      * Parses the saved data of the tasks in the save file.
      * Arranges the parsed data in a manner that can be initialised
@@ -139,6 +131,94 @@ public class Parser {
         }
         return null;
     }
+
+    private static Command prepareEdit(String[] splitInput, TaskList taskList) {
+
+        String[] fullEditInfo = splitInput[1].trim().split(" ", 2);
+
+        //7 possibilities of editing, incorrect format of inputs are rejected
+        try {
+            int taskNumberToEdit = Integer.parseInt(fullEditInfo[0]);
+
+            checkValidTaskNumber(taskNumberToEdit, taskList);
+            checkCorrectEditInfoFormat(fullEditInfo[1]);
+
+            return handleEdit(taskNumberToEdit, fullEditInfo[1]);
+
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            System.out.println("Please key in a valid task number");
+        } catch (InvalidInputException e) {
+            System.out.println("Invalid date");
+        } catch (WrongEditInfoFormat e) {
+            System.out.println("Please use the correct order of keywords:\n" +
+                    "<task_description> /by <task_due_date> /remind <task_reminder_date>\n\n" +
+                    "You only need to input the parts you want to edit.\n" +
+                    "e.g. edit 1 /remind 2022/02/12\n" +
+                    "(The task_description and task_due_date is left out here)");
+        }
+
+        return null;
+    }
+
+    private static void checkValidTaskNumber(int taskNumberToEdit, TaskList taskList) {
+        if ((taskNumberToEdit > taskList.getLength()) || (taskNumberToEdit < 0)) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    private static void checkCorrectEditInfoFormat(String fullEditInfo) throws WrongEditInfoFormat {
+        // tests to make sure the byDate is before the remindDate
+        if (fullEditInfo.contains("/by") && fullEditInfo.contains("/remind")) {
+            if (fullEditInfo.indexOf("/by") > fullEditInfo.indexOf("/remind")) {
+                throw new WrongEditInfoFormat();
+            }
+        }
+        // tests to make sure the task description is the first input if it is present
+        String[] splitEditInfo = fullEditInfo.split("/by \\d{4}/\\d{2}/\\d{2}|/remind \\d{4}/\\d{2}/\\d{2}");
+        if (splitEditInfo.length > 1) {
+            throw new WrongEditInfoFormat();
+        }
+    }
+
+    private static Command handleEdit(int taskNumberToEdit, String fullEditInfo)//, boolean[] presenceOfEdits)
+            throws InvalidInputException{
+
+        String[] splitEditInfo = fullEditInfo.split(" ");
+        String descriptionToEdit;
+        String parsedByDateToEdit;
+        String parsedRemindDateToEdit;
+
+        if (!splitEditInfo[0].trim().equals("/by") && !(splitEditInfo[0].trim().equals("/remind"))) {
+            descriptionToEdit = splitEditInfo[0];
+        } else {
+            descriptionToEdit = EMPTY_STRING;
+        }
+
+        if (fullEditInfo.contains("/by")) {
+            String byDateToEdit = fullEditInfo.substring(fullEditInfo.indexOf("/by") + 4).split(" ")[0].trim();
+            if (byDateToEdit.isBlank()) {
+                parsedByDateToEdit = EMPTY_STRING;
+            } else {
+                parsedByDateToEdit = prepareTaskDate(byDateToEdit, false);
+            }
+        } else {
+            parsedByDateToEdit = EMPTY_STRING;
+        }
+
+        if (fullEditInfo.contains("/remind")) {
+            String remindDateToEdit = fullEditInfo.substring(fullEditInfo.indexOf("/remind") + 8).split(" ")[0].trim();
+            if (remindDateToEdit.isBlank()) {
+                parsedRemindDateToEdit = EMPTY_STRING;
+            } else {
+                parsedRemindDateToEdit = prepareTaskDate(remindDateToEdit, false);
+            }
+        } else {
+            parsedRemindDateToEdit = EMPTY_STRING;
+        }
+
+        return new EditCommand(taskNumberToEdit, descriptionToEdit, parsedByDateToEdit, parsedRemindDateToEdit);
+    }
+
 
     private static String confirmInvalidDateFormat() throws InvalidInputException {
         Ui anotherUi = new Ui();
@@ -267,6 +347,8 @@ public class Parser {
             return prepareMarkOrUnmark(splitInput, UnmarkCommand.COMMAND_WORD, taskList);
         case AddCommand.COMMAND_WORD:
             return prepareAdd(splitInput, taskList);
+        case EditCommand.COMMAND_WORD:
+            return prepareEdit(splitInput, taskList);
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(splitInput, taskList);
         case FindCommand.COMMAND_WORD:

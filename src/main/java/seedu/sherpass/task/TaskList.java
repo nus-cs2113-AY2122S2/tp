@@ -25,6 +25,14 @@ public class TaskList {
         return tasks;
     }
 
+    public int getLength() {
+        int tasksLength = 0;
+        for (Task task : tasks) {
+            tasksLength += 1;
+        }
+        return tasksLength;
+    }
+
     /**
      * Adds a new task to the current array of tasks.
      *

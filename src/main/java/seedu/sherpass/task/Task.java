@@ -112,4 +112,15 @@ public class Task {
     }
 
 
+    public void setTaskDescription(String taskDescription) {
+        this.description = taskDescription;
+    }
+
+    public void setByDate(String byDate) {
+        this.byDate = byDate;
+    }
+
+    public void setRemindDate(String remindDate) {
+        this.remindDate = remindDate;
+    }
 }
