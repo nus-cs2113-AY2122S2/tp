@@ -185,6 +185,7 @@ public class Parser {
      *
      * @param checkIndex The index to be checked for invalid boundary.
      * @param minIndex   The minimum value an index should be.
+     * @throws IndexOutOfBoundsException if provided index is less than expected.
      */
     private static void checkTooLowIndex(int checkIndex, int minIndex) throws IndexOutOfBoundsException {
         if (checkIndex < minIndex) {
@@ -197,6 +198,7 @@ public class Parser {
      *
      * @param checkIndex The index to be checked for invalid boundary.
      * @param maxIndex   The value the index must be less than.
+     * @throws IndexOutOfBoundsException if provided index is more than expected.
      */
     private static void checkTooHighIndex(int checkIndex, int maxIndex) throws IndexOutOfBoundsException {
         if (checkIndex > maxIndex) {
