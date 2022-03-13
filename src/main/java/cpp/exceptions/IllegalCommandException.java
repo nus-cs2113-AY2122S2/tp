@@ -1,4 +1,4 @@
-package seedu.duke.exceptions;
+package cpp.exceptions;
 
 /**
  * Signals that the user does not key in input according to command format.

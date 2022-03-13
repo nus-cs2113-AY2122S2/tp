@@ -1,4 +1,4 @@
-package seedu.duke.projects;
+package cpp.projects;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

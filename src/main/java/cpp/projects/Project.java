@@ -20,11 +20,6 @@ public class Project {
         todos = new ArrayList<Todo>();
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-
     /**
      * Marks a t/odo at specific index as done.
      * @param index the target index

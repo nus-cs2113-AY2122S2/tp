@@ -1,4 +1,4 @@
-package seedu.duke.projects;
+package cpp.projects;
 
 /**
  * Represents a t/odo in a project.

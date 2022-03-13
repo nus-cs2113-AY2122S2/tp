@@ -1,4 +1,4 @@
-package seedu.duke;
+package cpp;
 
 /**
  * Stores user visible messages.
