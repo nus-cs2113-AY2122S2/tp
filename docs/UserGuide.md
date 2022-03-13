@@ -200,8 +200,7 @@ Example of usage:
 1. Remove an existing activity that was created with an activity unique identifier of 1 in a session with the unique
    identifier of 1.
     - `activity /delete /sid 1 /aid 1`
-
-![Activity delete command Screenshot]()
+    ![Activity delete command Screenshot]()
 <br>
 <br>
 ### Settling all transactions for a session: `session /summary`
