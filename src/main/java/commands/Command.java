@@ -77,7 +77,7 @@ public class Command {
         int index;
         uid = parser.parseUserIndex(userInput);
         index = parser.parseRecIndex(userInput);
-        newPerson = PersonList.getPerson(uid);
+        newPerson = personList.getPerson(uid);
         newPerson.deleteExpend(index);
     }
 
@@ -89,7 +89,7 @@ public class Command {
         description = parser.parseDescription(userInput);
         amount = parser.parseExpenditure((userInput));
         uid = parser.parseUserIndex(userInput);
-        newPerson = PersonList.getPerson(uid);
+        newPerson = personList.getPerson(uid);
         newPerson.addExpend(description, amount);
     }
 
@@ -99,7 +99,7 @@ public class Command {
         int index;
         uid = parser.parseUserIndex(userInput);
         index = parser.parseRecIndex(userInput);
-        newPerson = PersonList.getPerson(uid);
+        newPerson = personList.getPerson(uid);
         newPerson.deleteIncome(index);
     }
 
@@ -111,7 +111,7 @@ public class Command {
         description = parser.parseDescription(userInput);
         amount = parser.parseIncome(userInput);
         uid = parser.parseUserIndex(userInput);
-        newPerson = PersonList.getPerson(uid);
+        newPerson = personList.getPerson(uid);
         newPerson.addIncome(description, amount);
     }
 
