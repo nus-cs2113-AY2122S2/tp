@@ -1,5 +1,6 @@
 package seedu.planitarium.parser;
 
+import exceptions.MissingDelimiterException;
 import seedu.planitarium.person.Person;
 import seedu.planitarium.person.PersonList;
 
@@ -61,8 +62,10 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return Person's name.
+     * @throws MissingDelimiterException if user input does not contain delimiter for name.
      */
-    public static String parseName(String userInput) {
+    public static String parseName(String userInput) throws MissingDelimiterException {
+        checkContainsDelimiter(userInput, DELIMITER_NAME);
         return parseDelimitedTerm(userInput, DELIMITER_NAME, DELIMITER_BACK).trim();
     }
 
@@ -71,8 +74,10 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return Person's user index.
+     * @throws MissingDelimiterException if user input does not contain delimiter for user index.
      */
-    public static String parseUserIndex(String userInput) {
+    public static String parseUserIndex(String userInput) throws MissingDelimiterException {
+        checkContainsDelimiter(userInput, DELIMITER_USER_INDEX);
         return parseDelimitedTerm(userInput, DELIMITER_USER_INDEX, DELIMITER_BACK).trim();
     }
 
@@ -81,8 +86,10 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return An item's description.
+     * @throws MissingDelimiterException if user input does not contain delimiter for description.
      */
-    public static String parseDescription(String userInput) {
+    public static String parseDescription(String userInput) throws MissingDelimiterException {
+        checkContainsDelimiter(userInput, DELIMITER_DESCRIPTION);
         return parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION, DELIMITER_BACK).trim();
     }
 
@@ -91,8 +98,10 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return Person's added income.
+     * @throws MissingDelimiterException if user input does not contain delimiter for income.
      */
-    public static String parseIncome(String userInput) {
+    public static String parseIncome(String userInput) throws MissingDelimiterException {
+        checkContainsDelimiter(userInput, DELIMITER_INCOME);
         return parseDelimitedTerm(userInput, DELIMITER_INCOME, DELIMITER_BACK).trim();
     }
 
@@ -101,8 +110,10 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return Person's expenditure amount.
+     * @throws MissingDelimiterException if user input does not contain delimiter for expenditure.
      */
-    public static String parseExpenditure(String userInput) {
+    public static String parseExpenditure(String userInput) throws MissingDelimiterException {
+        checkContainsDelimiter(userInput, DELIMITER_EXPENDITURE);
         return parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK).trim();
     }
 
@@ -111,8 +122,10 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return A record's index.
+     * @throws MissingDelimiterException if user input does not contain delimiter for record index.
      */
-    public static String parseRecordIndex(String userInput) {
+    public static String parseRecordIndex(String userInput) throws MissingDelimiterException {
+        checkContainsDelimiter(userInput, DELIMITER_RECORD_INDEX);
         return parseDelimitedTerm(userInput, DELIMITER_RECORD_INDEX, DELIMITER_BACK).trim();
     }
 
@@ -203,6 +216,19 @@ public class Parser {
     private static void checkTooHighIndex(int checkIndex, int maxIndex) throws IndexOutOfBoundsException {
         if (checkIndex > maxIndex) {
             throw new IndexOutOfBoundsException();
+        }
+    }
+
+    /**
+     * Returns without exception if user input contains a given delimiter character sequence.
+     *
+     * @param userInput User input to be checked.
+     * @param delimiter A delimiter used to separate details.
+     * @throws MissingDelimiterException if user input does not contain the delimiter.
+     */
+    private static void checkContainsDelimiter(String userInput, String delimiter) throws MissingDelimiterException {
+        if (!userInput.contains(delimiter)) {
+            throw new MissingDelimiterException(delimiter);
         }
     }
 }
