@@ -1,9 +1,5 @@
 package seedu.duke.controllers;
 
-import seedu.duke.controllers.Controller;
-import seedu.duke.entities.Dish;
-import seedu.duke.entities.Order;
-import seedu.duke.manager.DishManager;
 import seedu.duke.manager.OrderManager;
 
 import java.util.Scanner;
@@ -64,7 +60,8 @@ public class OrderController extends Controller {
             System.out.printf("Total value of all orders: %f. \n", orderManager.getAllOrderValue());
             break;
         case 6:
-            System.out.println("Implement me to print receipt");
+            System.out.println("These are all your orders receipts. \n");
+            orderManager.printReceipt();
             break;
         default:
             // This should not happen, since the choice argument for this method is always parsed from the
