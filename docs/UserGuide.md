@@ -197,6 +197,15 @@ Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity in that session can be removed.
 >- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be removed.
 >- A confirmation must be given before deletion takes place.
+
+Example of usage:
+1. Remove an existing activity that was created with an activity unique identifier of 1 in a session with the unique
+   identifier of 1.
+    - `activity /delete /sid 1 /aid 1`
+
+![Activity delete command Screenshot]()
+<br>
+<br>
 ### Settling all transactions for a session: `session /summary`
 > Prints out a summary of the session to tell you, for that session, who needs to pay how much to another person
 > in order for everyone to have no remaining debts and no more debt to collect from others.<br>
