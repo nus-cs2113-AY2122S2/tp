@@ -14,7 +14,7 @@ public class Person {
      * @param name The name of the person to be created
      */
     public Person(String name) {
-        assert(name != NULL);
+        assert(name != null);
         this.name = name;
         incomeList = new IncomeList();
         expenditureList = new ExpenditureList();
@@ -36,7 +36,7 @@ public class Person {
      * @param amount The value of the income
      */
     public void addIncome(String description, double amount) {
-        assert(description != NULL);
+        assert(description != null);
         this.incomeList.addIncome(description, amount);
         System.out.println("An income of " + amount + " from " + description + " has been added");
     }
@@ -62,7 +62,7 @@ public class Person {
      * @param value The value of the expenditure
      */
     public void addExpend(String description, int value) {
-        assert(description != NULL);
+        assert(description != null);
         expenditureList.addExpenditure(description, value);
         System.out.println("An expenditure of " + value + " for " + description + " has been added");
     }

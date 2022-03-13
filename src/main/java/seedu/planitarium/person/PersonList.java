@@ -50,7 +50,7 @@ public class PersonList {
      * @param name The name of the person to be added
      */
     public void addPerson(String name) {
-        assert(name != NULL);
+        assert(name != null);
         Person person = new Person(name);
         personList.add(person);
         numberOfMembers++;
