@@ -132,7 +132,7 @@ public class Parser {
     }
 
     /**
-     * Returns a valid double, to be used as a monetary value, converted from a string.
+     * Returns a valid double that is a monetary value.
      *
      * @param amount Text to be checked.
      * @return A valid double for monetary values.
@@ -200,7 +200,7 @@ public class Parser {
      * Returns a valid income index that is within income quantity bounds.
      *
      * @param incomeIndex Person's income lookup index.
-     * @param person      Person who has income.
+     * @param person      Person who may have incomes.
      * @throws InvalidIndexException if index is not a valid integer or out of bounds.
      */
     public static int getValidIncomeIndex(String incomeIndex, Person person)
@@ -219,8 +219,8 @@ public class Parser {
      * Returns without exception if an index is not lower than minimum accepted index value.
      *
      * @param checkIndex The index to be checked for invalid boundary.
-     * @param minIndex   The minimum value an index should be.
-     * @throws IndexOutOfBoundsException if provided index is less than expected.
+     * @param minIndex   The minimum value that an index can be.
+     * @throws IndexOutOfBoundsException if provided index is less than indicated minimum.
      */
     private static void checkTooLowIndex(int checkIndex, int minIndex) throws IndexOutOfBoundsException {
         if (checkIndex < minIndex) {
@@ -232,8 +232,8 @@ public class Parser {
      * Returns without exception if an index is not higher than current maximum index value.
      *
      * @param checkIndex The index to be checked for invalid boundary.
-     * @param maxIndex   The value the index must be less than.
-     * @throws IndexOutOfBoundsException if provided index is more than expected.
+     * @param maxIndex   The maximum value that an index can be.
+     * @throws IndexOutOfBoundsException if provided index is more than indicated maximum.
      */
     private static void checkTooHighIndex(int checkIndex, int maxIndex) throws IndexOutOfBoundsException {
         if (checkIndex > maxIndex) {

@@ -1,5 +1,8 @@
 package exceptions;
 
+/**
+ * Thrown to indicate that a string is missing a given delimiter (character sequence).
+ */
 public class MissingDelimiterException extends Exception {
     protected static final String ERROR_MSG = "Missing delimiter `%s`";
 
