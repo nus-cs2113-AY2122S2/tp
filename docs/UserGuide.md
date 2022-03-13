@@ -192,6 +192,11 @@ Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
     * The unique identifier for a session can be retrieved with `session /list` command.
 * `[ACTIVITY_ID]` refers to the unique identifier of the activity.
     * The unique identifier for an activity can be retried with `activity /list` command.
+
+> **💡 Note(s):**
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity in that session can be removed.
+>- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be removed.
+>- A confirmation must be given before deletion takes place.
 ### Settling all transactions for a session: `session /summary`
 > Prints out a summary of the session to tell you, for that session, who needs to pay how much to another person
 > in order for everyone to have no remaining debts and no more debt to collect from others.<br>
