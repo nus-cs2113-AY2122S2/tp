@@ -1,12 +1,12 @@
-package seedu.duke.expense;
+package seedu.allonus.expense;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static seedu.duke.expense.ExpenseParser.parseDeleteExpense;
-import static seedu.duke.expense.ExpenseParser.parseKeywordExpense;
+import static seedu.allonus.expense.ExpenseParser.parseDeleteExpense;
+import static seedu.allonus.expense.ExpenseParser.parseKeywordExpense;
 
 class ExpenseParserTest {
 

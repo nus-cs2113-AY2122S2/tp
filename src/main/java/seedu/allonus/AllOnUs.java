@@ -1,11 +1,11 @@
-package seedu.duke;
+package seedu.allonus;
 
-import seedu.duke.ui.TextUi;
+import seedu.allonus.ui.TextUi;
 
-import static seedu.duke.contacts.ContactsManager.contactsRunner;
-import static seedu.duke.expense.ExpenseTracker.expenseRunner;
+import static seedu.allonus.contacts.ContactsManager.contactsRunner;
+import static seedu.allonus.expense.ExpenseTracker.expenseRunner;
 
-public class Duke {
+public class AllOnUs {
     private TextUi ui;
 
     private static void greet() {
@@ -101,6 +101,6 @@ public class Duke {
      */
     public static void main(String[] args) {
         greet();
-        new Duke().run();
+        new AllOnUs().run();
     }
 }

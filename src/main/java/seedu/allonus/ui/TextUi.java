@@ -1,4 +1,4 @@
-package seedu.duke.ui;
+package seedu.allonus.ui;
 
 import java.io.InputStream;
 import java.util.Scanner;
