@@ -9,6 +9,8 @@ import storage.FileManager;
 import werkit.UI;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A class that will handle the commands relating to workout.
@@ -27,6 +29,8 @@ public class WorkoutCommand extends Command {
 
     private String userAction;
     private String userArguments;
+
+    private static Logger logger = Logger.getLogger(WorkoutCommand.class.getName());
 
     public WorkoutCommand(String userInput, FileManager fileManager, WorkoutList workoutList,
             String userAction, String userArguments) throws InvalidCommandException,
@@ -101,6 +105,7 @@ public class WorkoutCommand extends Command {
                 break;
             default:
                 String className = this.getClass().getSimpleName();
+                logger.log(Level.WARNING, "Invalid action under workout command is entered!");
                 throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
             }
         } catch (InvalidCommandException e) {
@@ -121,9 +126,10 @@ public class WorkoutCommand extends Command {
                     + "more information on the commands.");
 
         } catch (NumberFormatException e) {
+            logger.log(Level.WARNING, "A non-formattable number was received!");
             System.out.println("Uh oh, a number was expected in your input, but a non-formattable\n"
                     + "number was received.");
-            System.out.println("Please try again.Alternatively, type 'help' if you need\n"
+            System.out.println("Please try again. Alternatively, type 'help' if you need\n"
                     + "more information on the commands.");
 
         } catch (WorkoutOutOfRangeException e) {
