@@ -8,12 +8,9 @@ public class Duke {
      */
 
     private void run() {
-        boolean shouldExitProgram = false;
         Ui ui = new Ui();
         String userInput;
-        while (!shouldExitProgram) {
-            userInput = ui.readUserInput();
-        }
+        userInput = ui.readUserInput();
     }
 
     public static void main(String[] args) {
