@@ -94,4 +94,9 @@ public class DishManager {
     public ArrayList<Dish> getDishes() {
         return new ArrayList<>(dishes);
     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 96c2766fe7d3ec908aeca1ba008ece820ec5b398
 }
