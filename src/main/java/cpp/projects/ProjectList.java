@@ -45,8 +45,13 @@ public class ProjectList {
      * prints all projects in the projectList.
      */
     public void printProject() {
-        int count = 1;
         System.out.println("____________________________________________________________");
+        if (projectList.size() == 0) { //no project in the list, print another message
+            System.out.println("You have not added any projects yet!");
+            System.out.println("____________________________________________________________");
+            return;
+        }
+        int count = 1;
         System.out.println("Here are all current project(s) in your list:");
         for (Project project: projectList) {
             System.out.println("[" + count + "] " + project.getTitle());
