@@ -185,6 +185,13 @@ Examples of usage:
 > Deletes an existing activity in a particular session that is managed by SplitLah. <br>
 > Activities are a way for the user to keep track of the activities and their respective costs throughout a session.
 > <br>
+
+Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
+
+* `[SESSION_ID]` refers to the unique identifier of the session.
+    * The unique identifier for a session can be retrieved with `session /list` command.
+* `[ACTIVITY_ID]` refers to the unique identifier of the activity.
+    * The unique identifier for an activity can be retried with `activity /list` command.
 ### Settling all transactions for a session: `session /summary`
 > Prints out a summary of the session to tell you, for that session, who needs to pay how much to another person
 > in order for everyone to have no remaining debts and no more debt to collect from others.<br>
