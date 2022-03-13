@@ -28,46 +28,32 @@ public class Command {
 
     /**
      * Executes the instruction according to the input after parsing
-     * @param userInput the instruction after parsing by parser
      * @throws UnknownException if the instruction cannot be executed
     */
 
     public void execute() throws UnknownException {
-        String name;
-        String uid;
-        String amount;
         try {
             switch (parser.parseKeyword(userInput)) {
             case ADD_PERSON_CMD:
-                name  = parser.parseName(userInput);
-                personList.addPerson(name);
+                addPerson();
                 break;
             case DELETE_PERSON_CMD:
-                uid = parser.parseUserIndex(userInput);
-                personList.deletePerson(uid);
+                deletePerson();
                 break;
             case ADD_INCOME_CMD:
-                amount = parser.parseIncome(userInput);
-                uid = parser.parseUserIndex(userInput);
-                expenditureList.addIncome(amount, uid);
+                addIncome();
                 break;
             case DELETE_INCOME_CMD:
-                amount = parser.parseIncome(userInput);
-                uid = parser.parseUserIndex(userInput);
-                expenditureList.deleteIncome(amount, uid);
+                deleteIncome();
                 break;
             case ADD_SPENT_CMD:
-                amount = parser.parseExpenditure((userInput));
-                uid = parser.parseUserIndex(userInput);
-                expenditureList.addExpenditure(amount, uid);
+                addSpend();
                 break;
             case DELETE_SPEND_CMD:
-                amount = parser.parseExpenditure((userInput));
-                uid = parser.parseUserIndex(userInput);
-                expenditureList.addExpenditure(amount, uid);
+                deleteSpend();
                 break;
             case CALC_REMAIN:
-                personList.remain();
+                personList.getRemain();
                 break;
             case LIST:
                 personList.list();
@@ -83,6 +69,65 @@ public class Command {
             this.replyMsg = e.toString();
         }
         ui.printMsg(replyMsg);
+    }
+
+    private void deleteSpend() {
+        Person newPerson;
+        String uid;
+        int index;
+        uid = parser.parseUserIndex(userInput);
+        index = parser.parseRecIndex(userInput);
+        newPerson = PersonList.getPerson(uid);
+        newPerson.deleteExpend(index);
+    }
+
+    private void addSpend() {
+        String amount;
+        String uid;
+        Person newPerson;
+        String description;
+        description = parser.parseDescription(userInput);
+        amount = parser.parseExpenditure((userInput));
+        uid = parser.parseUserIndex(userInput);
+        newPerson = PersonList.getPerson(uid);
+        newPerson.addExpend(description, amount);
+    }
+
+    private void deleteIncome() {
+        Person newPerson;
+        String uid;
+        int index;
+        uid = parser.parseUserIndex(userInput);
+        index = parser.parseRecIndex(userInput);
+        newPerson = PersonList.getPerson(uid);
+        newPerson.deleteIncome(index);
+    }
+
+    private void addIncome() {
+        String uid;
+        String amount;
+        Person newPerson;
+        String description;
+        description = parser.parseDescription(userInput);
+        amount = parser.parseIncome(userInput);
+        uid = parser.parseUserIndex(userInput);
+        newPerson = PersonList.getPerson(uid);
+        newPerson.addIncome(description, amount);
+    }
+
+    private void deletePerson() throws Exception{
+        try {
+            int uid = parser.checkValidUserIndex(parser.parseUserIndex(userInput), this.personList);
+            personList.removePerson(uid);
+        } catch (Exception e) {
+            throw new UnknownException();
+        }
+    }
+
+    private void addPerson() {
+        String name;
+        name  = parser.parseName(userInput);
+        personList.addPerson(name);
     }
 
 }
