@@ -2,7 +2,7 @@ package seedu.duke;
 
 import java.util.ArrayList;
 
-abstract public class Command {
+public abstract class Command {
     protected boolean isExit;
 
     protected Command() {
