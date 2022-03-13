@@ -360,8 +360,8 @@ public class Parser {
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents an activity unique identifier.
      * @throws InvalidFormatException If the Activity ID delimiter is not found in the command arguments, or
-     *                                if no arguments representing an activity unique identifier were provided after the 
-     *                                Activity ID delimiter.
+     *                                if no arguments representing an activity unique identifier were provided after 
+     *                                the Activity ID delimiter.
      */
     public static int parseActivityId(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, ACTIVITY_ID_DELIMITER);
@@ -415,8 +415,8 @@ public class Parser {
     }
 
     /**
-     * Returns a double array object that represents a list of cost values, given the command arguments from user input, 
-     * delimited by the Cost list delimiter.
+     * Returns a double array object that represents a list of cost values, given the command arguments from 
+     * user input, delimited by the Cost list delimiter.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A double array object that represents a list of cost values.
