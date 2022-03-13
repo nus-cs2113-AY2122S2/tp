@@ -92,16 +92,6 @@ public class Task {
     }
 
     /**
-     * Returns task type. Current parent class is created
-     * as a template for child classes to perform its own
-     * respective functions.
-     *
-     * @return Nothing as function is abstract.
-     */
-    //public abstract String getType();
-
-
-    /**
      * Returns a string version of the task content.
      * Content includes mark status, task type and description.
      * For ease of printing the task.
@@ -122,4 +112,15 @@ public class Task {
     }
 
 
+    public void setTaskDescription(String taskDescription) {
+        this.description = taskDescription;
+    }
+
+    public void setByDate(String byDate) {
+        this.byDate = byDate;
+    }
+
+    public void setRemindDate(String remindDate) {
+        this.remindDate = remindDate;
+    }
 }
