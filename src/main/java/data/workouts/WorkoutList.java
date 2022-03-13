@@ -96,7 +96,7 @@ public class WorkoutList {
     }
 
     /**
-     * Check if the user input is "yes" or "no".
+     * Checks if the user input is "yes" or "no".
      *
      * @param answer input by user.
      * @return true if input equals to "yes" or "no", else otherwise.
@@ -113,7 +113,7 @@ public class WorkoutList {
         int indexToDelete = Integer.parseInt(userArgument.trim());
 
         String className = this.getClass().getSimpleName();
-        boolean isIndexToDeleteValid = checkDeleteIndexIsWithinRange(indexToDelete);
+        boolean isIndexToDeleteValid = checkIndexIsWithinRange(indexToDelete);
         if (!isIndexToDeleteValid) {
             throw new WorkoutOutOfRangeException(className, WorkoutOutOfRangeException.INDEX_VALUE_OUT_OF_RANGE);
         }
@@ -123,7 +123,32 @@ public class WorkoutList {
         return deletedWorkout;
     }
 
-    public boolean checkDeleteIndexIsWithinRange(int indexToDelete) {
-        return indexToDelete > 0 && indexToDelete <= workoutsList.size();
+
+    private boolean checkIndexIsWithinRange(int index) {
+        return index > 0 && index <= workoutsList.size();
+    }
+
+    public Workout updateWorkout(String userArgument) throws ArrayIndexOutOfBoundsException,
+            NumberFormatException, WorkoutOutOfRangeException, InvalidWorkoutException {
+        String[] updateDetails = userArgument.split(" ", 2);
+        String indexToUpdateString = updateDetails[0].trim();
+        String newNumberOfRepsString = updateDetails[1].trim();
+        int indexToUpdate = Integer.parseInt(indexToUpdateString);
+        int newNumberOfReps = Integer.parseInt(newNumberOfRepsString);
+
+        boolean isIndexToUpdateValid = checkIndexIsWithinRange(indexToUpdate);
+        boolean isNewNumberOfRepsValid = checkIfRepsValueIsValid(newNumberOfReps);
+        String className = this.getClass().getSimpleName();
+
+        if (!isIndexToUpdateValid) {
+            throw new WorkoutOutOfRangeException(className, WorkoutOutOfRangeException.INDEX_VALUE_OUT_OF_RANGE);
+        }
+        if (!isNewNumberOfRepsValid) {
+            throw new InvalidWorkoutException(className, InvalidWorkoutException.INVALID_REPS_VALUE);
+        }
+
+        Workout updateWorkout = workoutsList.get(indexToUpdate - 1);
+        updateWorkout.setRepetitions(newNumberOfReps);
+        return updateWorkout;
     }
 }
