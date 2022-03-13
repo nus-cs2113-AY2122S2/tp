@@ -1,15 +1,11 @@
 package seedu.duke.controllers;
 
-import java.util.Scanner;
-
 public class MainController extends Controller {
     /**
      * Creates the MainController.
-     *
-     * @param scanner Scanner for System.in.
      */
-    public MainController(Scanner scanner) {
-        super(new String[]{"Exit Application"}, scanner);
+    public MainController() {
+        super(new String[]{"Exit Application"});
     }
 
     @Override
@@ -20,9 +16,7 @@ public class MainController extends Controller {
             System.out.println("Exiting application...");
             return true;
         default:
-            // This should not happen, since the choice argument for this method is always parsed from the
-            // getChoice() method, which also checks for the range of index input.
-            System.out.println("Unknown choice!");
+            System.out.println("Invalid choice!");
         }
         System.out.println("Now in Main Menu.");
         System.out.println(this);
