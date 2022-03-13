@@ -11,7 +11,8 @@ import data.workouts.WorkoutList;
 import storage.FileManager;
 
 import java.io.IOException;
-import java.util.logging.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import static commands.WorkoutCommand.CREATE_ACTION_KEYWORD;
 import static commands.WorkoutCommand.LIST_ACTION_KEYWORD;
