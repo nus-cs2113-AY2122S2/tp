@@ -56,7 +56,7 @@ public class ProjectList {
         int count = 1;
         System.out.println("Here are all current project(s) in your list:");
         for (Project project: projectList) {
-            System.out.println("[" + count + "] " + project.getTitle());
+            System.out.println("[" + count + "] " + project.getTitle() + " (" + project.getDeadline() + ")");
             count++;
         }
         System.out.println(Constants.SEPARATOR);
