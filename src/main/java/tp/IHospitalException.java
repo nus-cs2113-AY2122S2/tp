@@ -1,6 +1,6 @@
 package tp;
 
-public class IHospitalException extends Throwable{
+public class IHospitalException extends Throwable {
     public IHospitalException(String s) {
         super(s);
     }

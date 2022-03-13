@@ -20,19 +20,9 @@ public class AddDoctorCommand extends Command {
         this.isOnDuty = isOnDuty;
     }
 
-    /**
-     *
-     * @param doctorList Doctors' list
-     * @param patientList  Patients' list
-     * @param appointmentList Appointments' list
-     * @param ui IHospital's ui
-     * @param storage IHospital's storage
-     * @return
-     * @throws IHospitalException
-     */
-
     @Override
-    public void execute(DoctorList doctorList, PatientList patientList, AppointmentList appointmentList, Ui ui, Storage storage) throws IHospitalException {
+    public void execute(DoctorList doctorList, PatientList patientList,
+                        AppointmentList appointmentList, Ui ui, Storage storage) throws IHospitalException {
         Doctor doctor = new Doctor(id, name, phoneNumber, email);
         doctorList.addDoctor(doctor);
     }

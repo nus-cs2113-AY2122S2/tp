@@ -2,6 +2,7 @@ package tp;
 
 public class DeleteAppointmentCommand extends Command {
     int index;
+
     public DeleteAppointmentCommand(){
 
     }
@@ -9,8 +10,10 @@ public class DeleteAppointmentCommand extends Command {
     public DeleteAppointmentCommand(int index) {
         this.index = index;
     }
+
     @Override
-    public void execute(DoctorList doctorList, PatientList patientList, AppointmentList appointmentList, Ui ui, Storage storage) throws IHospitalException {
+    public void execute(DoctorList doctorList, PatientList patientList,
+                        AppointmentList appointmentList, Ui ui, Storage storage) throws IHospitalException {
         appointmentList.deleteAppointment(index);
     }
 }

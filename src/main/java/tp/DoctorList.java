@@ -20,10 +20,6 @@ public class DoctorList {
         return doctors.get(index - 1);
     }
 
-    /**
-     *
-     * @param doctor the doctor will be added
-     */
     public void addDoctor(Doctor doctor) {
         doctors.add(doctor);
         size++;
@@ -33,9 +29,6 @@ public class DoctorList {
                                  + " doctors recorded in the system." + System.lineSeparator() + boundary);
     }
 
-    /**
-     * Prints the current list of doctors.
-     */
     public void printDoctorList() {
         System.out.println(boundary + "Here are the doctors in this hospital:");
         for (int i = 0; i < size; i++) {
@@ -45,11 +38,6 @@ public class DoctorList {
                                  + System.lineSeparator() + boundary);
     }
 
-    /**
-     * Delete a doctor from doctor list.
-     *
-     * @param index Index of the doctor to be removed.
-     */
     public void deleteDoctor(int index) {
         System.out.println(boundary + "Noted. I've removed this doctor:");
         System.out.println(doctors.get(index));

@@ -10,7 +10,9 @@ public class AddAppointmentCommand extends Command {
     protected int patientIndex;
     protected LocalDateTime time;
 
-    public AddAppointmentCommand() {}
+    public AddAppointmentCommand() {
+
+    }
 
     public AddAppointmentCommand(int doctorIndex, int patientIndex, String time) {
         this.doctorIndex = doctorIndex;
@@ -20,7 +22,8 @@ public class AddAppointmentCommand extends Command {
 
 
     @Override
-    public void execute(DoctorList doctorList, PatientList patientList, AppointmentList appointmentList, Ui ui, Storage storage) throws IHospitalException {
+    public void execute(DoctorList doctorList, PatientList patientList,
+                        AppointmentList appointmentList, Ui ui, Storage storage) throws IHospitalException {
         Doctor doctor = (Doctor) doctorList.getDoctor(doctorIndex);
         Patient patient = (Patient) patientList.getPatient(patientIndex);
         appointmentList.addAppointment(doctor, patient, time);

@@ -19,10 +19,6 @@ public class PatientList {
         return patients.get(index - 1);
     }
 
-    /**
-     *
-     * @param patient the patient will be added
-     */
     public void addPatient(Patient patient) {
         patients.add(patient);
         countPatient++;
