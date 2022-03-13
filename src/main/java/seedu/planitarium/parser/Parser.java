@@ -53,8 +53,7 @@ public class Parser {
      * @return The command keyword issued.
      */
     public static String parseKeyword(String userInput) {
-        String keyword = userInput.split(DELIMITER_SPACE)[INDEX_KEYWORD];
-        return keyword.trim();
+        return userInput.split(DELIMITER_SPACE)[INDEX_KEYWORD].trim();
     }
 
     /**
@@ -64,7 +63,7 @@ public class Parser {
      * @return Person's name.
      */
     public static String parseName(String userInput) {
-        return parseDelimitedTerm(userInput, DELIMITER_NAME, DELIMITER_BACK);
+        return parseDelimitedTerm(userInput, DELIMITER_NAME, DELIMITER_BACK).trim();
     }
 
     /**
@@ -74,7 +73,7 @@ public class Parser {
      * @return Person's user index.
      */
     public static String parseUserIndex(String userInput) {
-        return parseDelimitedTerm(userInput, DELIMITER_USER_INDEX, DELIMITER_BACK);
+        return parseDelimitedTerm(userInput, DELIMITER_USER_INDEX, DELIMITER_BACK).trim();
     }
 
     /**
@@ -84,7 +83,7 @@ public class Parser {
      * @return An item's description.
      */
     public static String parseDescription(String userInput) {
-        return parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION, DELIMITER_BACK);
+        return parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION, DELIMITER_BACK).trim();
     }
 
     /**
@@ -94,7 +93,7 @@ public class Parser {
      * @return Person's added income.
      */
     public static String parseIncome(String userInput) {
-        return parseDelimitedTerm(userInput, DELIMITER_INCOME, DELIMITER_BACK);
+        return parseDelimitedTerm(userInput, DELIMITER_INCOME, DELIMITER_BACK).trim();
     }
 
     /**
@@ -104,7 +103,7 @@ public class Parser {
      * @return Person's expenditure amount.
      */
     public static String parseExpenditure(String userInput) {
-        return parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK);
+        return parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK).trim();
     }
 
     /**
@@ -114,7 +113,7 @@ public class Parser {
      * @return A record's index.
      */
     public static String parseRecordIndex(String userInput) {
-        return parseDelimitedTerm(userInput, DELIMITER_RECORD_INDEX, DELIMITER_BACK);
+        return parseDelimitedTerm(userInput, DELIMITER_RECORD_INDEX, DELIMITER_BACK).trim();
     }
 
     /**
