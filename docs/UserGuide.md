@@ -8,7 +8,7 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
 
 - [Quick Start](#Quick-Start)
 - [Features](#Features)
-   - [print all projects](#print-all-projects-viewproject)
+   - [print all projects](#print-all-projects-listprojects)
    - [exit](#exit-exit)
 - [FAQ](#FAQ)
 - [Command Summary](#Command-Summary)
@@ -27,12 +27,12 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
 
 ## Features 
 
-### print all projects: `viewproject`
+### print all projects: `listprojects`
 Prints all projects in the list by their names
 
-Format: `viewproject`
+Format: `listprojects` or `listproject`
 
-* The `viewproject` cannot contain a space, i.e., `view project` will be considered an unknown command.
+* The `listprojects`(`listproject`) cannot contain a space, i.e., `list projects`(`list project`) will be considered an unknown command.
 
 ### exit: `exit`
 Exit the program
@@ -50,5 +50,5 @@ Format: `exit`
 
 | Action              | Format                                   |
 |---------------------|------------------------------------------|
-| view all project(s) | `viewproject`                            |
+| view all project(s) | `listproject`, `listprojects`            |
 | Exit                | `exit`                                   |
