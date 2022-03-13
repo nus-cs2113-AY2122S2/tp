@@ -18,8 +18,8 @@
 
 
 ## Acknowledgements
+* Address Book (Level-3) - Provide samples of User Guide(UG) and Developer Guide(DG)
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 ## Design
 ### Architecture
 ![Application Diagram Screenshot](https://raw.githubusercontent.com/froststein/tp/master/docs/images/developerguide/ArchitectureDiagram.drawio.png)
@@ -55,8 +55,3 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
 
 ## Glossary
 
-* *glossary item* - Definition
-
-## Instructions for manual testing
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
