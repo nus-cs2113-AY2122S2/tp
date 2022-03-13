@@ -12,6 +12,7 @@ import seedu.duke.commands.MarkCommand;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.parsers.ModHappyParser;
+import seedu.duke.tasks.Module;
 import seedu.duke.tasks.Task;
 
 
@@ -166,6 +167,46 @@ public class ParserTest {
             fail();
         } catch (ParseException e) {
             return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_invalidModule() {
+        final String testString = "add /m cs2113t 123";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_withDescription_invalidInput() {
+        final String testString = "add /m cs2113t -d \"11111\"123";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_validModule() {
+        final String testString = "add /m cs2113t";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof AddCommand);
+            Module t = ((AddCommand) c).getNewModule();
+            assertNotEquals(null, t);
+            assertEquals("cs2113t", t.getModuleCode());
         } catch (Exception e) {
             fail();
         }

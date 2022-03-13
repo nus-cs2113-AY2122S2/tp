@@ -24,13 +24,13 @@ public class AddParser extends Parser {
     // Unescaped regex for testing (split into two lines):
     // \s*((\/t\s+(?<taskName>.+?(?=\s+-d\s+|\s+-t\s+|$))(\s+(-d\s+\"(?<taskDescription>([^\"]*))\")(?=(\s+-t\s+)|$))?
     // (\s+(-t\s+\"(?<estimatedWorkingTime>([^\"]*))\")(?=(\s+-d\s+)|$))?(\s+(-d\s+\"(?<taskDescription2>([^\"]*))\"))?
-    // |\/m\s+(?<moduleCode>\w+?(?=(\s+-d\s+)|\s+.*$))(\s+(-d\s+\"(?<moduleDescription>.+)\"))?))(?<invalid>.*)
+    // |\/m\s+(?<moduleCode>\w+?(?=(\s+-d\s+)|\s+|$))(\s+(-d\s+\"(?<moduleDescription>.+)\"))?))(?<invalid>.*)
     // TODO: Add support for -mod argument when integrating Task and Module classes with one another
-    private static final String ADD_FORMAT = "\\s*((\\/t\\s+(?<taskName>.+?(?=\\s+-d\\s+|\\s+-t\\s+|$))(\\s+(-d\\s+\\\""
-            + "(?<taskDescription>([^\\\"]*))\\\")(?=(\\s+-t\\s+)|$))?(\\s+(-t\\s+\\\""
+    private static final String ADD_FORMAT = "\\s*((\\/t\\s+(?<taskName>.+?(?=\\s+-d\\s+|\\s+-t\\s+|$))"
+            + "(\\s+(-d\\s+\\\"(?<taskDescription>([^\\\"]*))\\\")(?=(\\s+-t\\s+)|$))?(\\s+(-t\\s+\\\""
             + "(?<estimatedWorkingTime>([^\\\"]*))\\\")(?=(\\s+-d\\s+)|$))?(\\s+(-d\\s+\\\""
-            + "(?<taskDescription2>([^\\\"]*))\\\"))?|\\/m\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)|\\s+.*$))"
-            + "(\\s+(-d\\s+\\\"(?<moduleDescription>.+)\\\"))?))(?<invalid>.*)";
+            + "(?<taskDescription2>([^\\\"]*))\\\"))?|\\/m\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)|\\s+|$))(\\s+(-d\\s+"
+            + "\\\"(?<moduleDescription>.+)\\\"))?))(?<invalid>.*)";
 
     public AddParser() {
         super();
@@ -56,21 +56,21 @@ public class AddParser extends Parser {
         String invalid = parsedArguments.get(INVALID);
         String taskDescription = parsedArguments.get(TASK_DESCRIPTION);
         if (invalid.isEmpty()) {
-            invalid = NULL_FIELD;
+            invalid = null;
         }
-        boolean isInvalid = ((!Objects.equals(invalid, NULL_FIELD))
-                || ((!Objects.equals(taskDescription, NULL_FIELD))
-                && (!Objects.equals(taskDescriptionTwo, NULL_FIELD))));
+        boolean isInvalid = ((!Objects.isNull(invalid))
+                || ((!Objects.isNull(taskDescription))
+                && (!Objects.isNull(taskDescriptionTwo))));
         if (isInvalid) {
             throw new ParseException();
-        } else if ((Objects.equals(taskDescription, NULL_FIELD)) && (!Objects.equals(taskDescriptionTwo, NULL_FIELD))) {
+        } else if (Objects.isNull(taskDescription) && !Objects.isNull(taskDescriptionTwo)) {
             taskDescription = taskDescriptionTwo;
         }
-        if (!Objects.equals(taskName, NULL_FIELD)) {
+        if (!Objects.isNull(taskName)) {
             return new AddCommand(taskName, taskDescription, true, estimatedWorkingTime);
         }
-        if (!Objects.equals(moduleCode, NULL_FIELD)) {
-            return new AddCommand(moduleCode, moduleDescription, false, NULL_FIELD);
+        if (!Objects.isNull(moduleCode)) {
+            return new AddCommand(moduleCode, moduleDescription, false, null);
         }
         throw new ParseException();
     }
