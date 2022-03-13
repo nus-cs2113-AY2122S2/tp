@@ -51,6 +51,7 @@ public class UI {
     // Workout-related messages
     public static final String NEW_WORKOUT_CREATED_MESSAGE = "Alright, the following workout has been created:";
     public static final String DELETED_WORKOUT_MESSAGE = "Alright, the following workout has been removed:";
+    public static final String UPDATED_WORKOUT_MESSAGE = "Alright, the following workout has been updated:";
     // IOException Error Message
     public static final String IOEXCEPTION_ERROR_MESSAGE = "[ERROR] The program has encountered an IOException "
             + "and needs to close. Sorry about that...";
@@ -151,6 +152,19 @@ public class UI {
         System.out.println(DELETED_WORKOUT_MESSAGE);
         System.out.println();
         System.out.println("\t" + deletedWorkout.toString());
+        System.out.println();
+    }
+
+    /**
+     * Prints a message when a workout has been updated.
+     * Shows updated workout.
+     *
+     * @param updateWorkout The workout that is updated.
+     */
+    public void printUpdateWorkoutMessage(Workout updateWorkout) {
+        System.out.println(UPDATED_WORKOUT_MESSAGE);
+        System.out.println();
+        System.out.println("\t" + updateWorkout.toString());
         System.out.println();
     }
 

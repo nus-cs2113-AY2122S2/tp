@@ -15,6 +15,8 @@ import java.io.IOException;
 import static commands.WorkoutCommand.CREATE_ACTION_KEYWORD;
 import static commands.WorkoutCommand.LIST_ACTION_KEYWORD;
 import static commands.WorkoutCommand.DELETE_ACTION_KEYWORD;
+import static commands.WorkoutCommand.UPDATE_ACTION_KEYWORD;
+
 
 /**
  * This class will parse the input that the user enters into the WerkIt! application into data
@@ -27,6 +29,8 @@ public class Parser {
     private ExerciseList exerciseList;
     private WorkoutList workoutList;
     private FileManager fileManager;
+    public static final int EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS = 2;
+    public static final int EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS = 3;
 
     public Parser(UI ui, ExerciseList exerciseList, WorkoutList workoutList, FileManager fileManager) {
         this.ui = ui;
@@ -87,19 +91,35 @@ public class Parser {
         // Determine the action the user has entered
         String actionKeyword = userInput.split(" ", 3)[1];
         String arguments = null;
+        String className = this.getClass().getSimpleName();
         switch (actionKeyword) {
         case CREATE_ACTION_KEYWORD:
+            if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_NEW_WORKOUT_COMMAND_ERROR_MSG);
+            }
+            arguments = userInput.split(" ", 3)[2];
+            break;
         case DELETE_ACTION_KEYWORD:
+            if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_DELETE_WORKOUT_COMMAND_ERROR_MSG);
+            }
+            arguments = userInput.split(" ", 3)[2];
+            break;
+        case UPDATE_ACTION_KEYWORD:
+            if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_UPDATE_WORKOUT_COMMAND_ERROR_MSG);
+            }
             arguments = userInput.split(" ", 3)[2];
             break;
         case LIST_ACTION_KEYWORD:
-            if (userInput.split(" ", -1).length > 2) {
-                String className = this.getClass().getSimpleName();
+            if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
                 throw new InvalidCommandException(className, InvalidCommandException.INVALID_LIST_COMMAND_ERROR_MSG);
             }
             break;
         default:
-            String className = this.getClass().getSimpleName();
             throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
         }
         return new WorkoutCommand(userInput, fileManager, workoutList, actionKeyword, arguments);
