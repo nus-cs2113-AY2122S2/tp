@@ -40,6 +40,9 @@ public class CommandHandler {
             projectList.deleteProject(commands[1]);
             System.out.println(commands[1] + " Deleted.");
             break;
+        case "adddeadline":
+            projectList.addDeadline(commands[1], commands[2]);
+            break;
         case "exit":
             System.exit(0);
             break;
