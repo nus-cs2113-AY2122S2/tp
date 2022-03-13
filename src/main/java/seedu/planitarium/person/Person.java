@@ -36,6 +36,7 @@ public class Person {
      * @param amount The value of the income
      */
     public void addIncome(String description, double amount) {
+        assert(description != NULL);
         this.incomeList.addIncome(description, amount);
         System.out.println("An income of " + amount + " from " + description + " has been added");
     }
@@ -59,6 +60,7 @@ public class Person {
      * @param value The value of the expenditure
      */
     public void addExpend(String description, int value) {
+        assert(description != NULL);
         expenditureList.addExpenditure(description, value);
         System.out.println("An expenditure of " + value + " for " + description + " has been added");
     }
