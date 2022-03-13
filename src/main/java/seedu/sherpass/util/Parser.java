@@ -1,6 +1,18 @@
 package seedu.sherpass.util;
 
-import seedu.sherpass.command.*;
+import seedu.sherpass.command.Command;
+import seedu.sherpass.command.AddCommand;
+import seedu.sherpass.command.ClearCommand;
+import seedu.sherpass.command.DeleteCommand;
+import seedu.sherpass.command.EditCommand;
+import seedu.sherpass.command.ExitCommand;
+import seedu.sherpass.command.FindCommand;
+import seedu.sherpass.command.HelpCommand;
+import seedu.sherpass.command.ListCommand;
+import seedu.sherpass.command.MarkCommand;
+import seedu.sherpass.command.StudyCommand;
+import seedu.sherpass.command.UnmarkCommand;
+import seedu.sherpass.command.UpdateCommand;
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.WrongEditInfoFormat;
@@ -33,7 +45,12 @@ import static seedu.sherpass.constant.Index.SAVE_TASK_MARK_STATUS;
 import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
 import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
 import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
-import static seedu.sherpass.constant.Message.*;
+import static seedu.sherpass.constant.Message.EMPTY_STRING;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
+import static seedu.sherpass.constant.Message.DATE_FORMAT_WITHOUT_TIME;
+import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
 
 
 public class Parser {
@@ -109,7 +126,8 @@ public class Parser {
         String byDate = null;
         String remindDate = null;
         try {
-            if (!splitInput[TASK_CONTENT_INDEX].contains("/by") && !splitInput[TASK_CONTENT_INDEX].contains("/remind")) {
+            if (!splitInput[TASK_CONTENT_INDEX].contains("/by")
+                    && !splitInput[TASK_CONTENT_INDEX].contains("/remind")) {
                 return new AddCommand(splitInput[TASK_CONTENT_INDEX], taskList, EMPTY_STRING, EMPTY_STRING);
             } else {
                 filteredTaskContent = splitInput[TASK_CONTENT_INDEX].split("/by", 2);
@@ -150,11 +168,11 @@ public class Parser {
         } catch (InvalidInputException e) {
             System.out.println("Invalid date");
         } catch (WrongEditInfoFormat e) {
-            System.out.println("Please use the correct order of keywords:\n" +
-                    "<task_description> /by <task_due_date> /remind <task_reminder_date>\n\n" +
-                    "You only need to input the parts you want to edit.\n" +
-                    "e.g. edit 1 /remind 2022/02/12\n" +
-                    "(The task_description and task_due_date is left out here)");
+            System.out.println("Please use the correct order of keywords:\n"
+                    + "<task_description> /by <task_due_date> /remind <task_reminder_date>\n\n"
+                    + "You only need to input the parts you want to edit.\n"
+                    + "e.g. edit 1 /remind 2022/02/12\n"
+                    + "(The task_description and task_due_date is left out here)");
         }
 
         return null;
@@ -181,7 +199,7 @@ public class Parser {
     }
 
     private static Command handleEdit(int taskNumberToEdit, String fullEditInfo)//, boolean[] presenceOfEdits)
-            throws InvalidInputException{
+            throws InvalidInputException {
 
         String[] splitEditInfo = fullEditInfo.split(" ");
         String descriptionToEdit;
@@ -206,7 +224,8 @@ public class Parser {
         }
 
         if (fullEditInfo.contains("/remind")) {
-            String remindDateToEdit = fullEditInfo.substring(fullEditInfo.indexOf("/remind") + 8).split(" ")[0].trim();
+            String remindDateToEdit =
+                    fullEditInfo.substring(fullEditInfo.indexOf("/remind") + 8).split(" ")[0].trim();
             if (remindDateToEdit.isBlank()) {
                 parsedRemindDateToEdit = EMPTY_STRING;
             } else {
