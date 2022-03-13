@@ -1,9 +1,14 @@
 package seedu.planitarium;
 
+import java.util.Scanner;
+
 public class PlanITarium {
     
     public void run() {
-        printWelcomeMessage();
+        Scanner in = new Scanner();
+        initialisePlanitarium();
+        // executeCommands();
+        printExitMessage();
     }
 
     /**
@@ -11,6 +16,10 @@ public class PlanITarium {
      */
     public static void main(String[] args) {
         new PlanITarium().run();
+    }
+
+    private static void initialisePlanitarium() {
+        printWelcomeMessage();
     }
 
     private static void printWelcomeMessage() {
@@ -25,5 +34,9 @@ public class PlanITarium {
             + "$$       $$  $$$$$$$ $$   $$  $$    $$    $$$$$$$ $$    $$  $$$$$$$  $$  $$  $$\n"
             + "$$       $$  $$$$$$$ $$   $$  $$    $$    $$$$$$$ $$    $$  $$$$$$$  $$  $$  $$\n";
         System.out.println(logo);
+    }
+
+    private static void printExitMessage() {
+        System.out.println("See you next time~");
     }
 }
