@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Project {
     private String title;
     private ArrayList<Todo> todos;
+    private String deadline;
 
     public Project() {
         todos = new ArrayList<Todo>();
@@ -51,4 +52,24 @@ public class Project {
         return title;
     }
 
+    /**
+     * Sets a deadline to the Project.
+     *
+     * @param deadline Deadline of the project
+     */
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
+
+    /**
+     * Gets the deadline of the Project.
+     *
+     * @return The deadline of the Project
+     */
+    public String getDeadline() {
+        if (deadline == null) {
+            return "No deadline specified";
+        }
+        return deadline;
+    }
 }
