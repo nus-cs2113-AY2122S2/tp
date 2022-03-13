@@ -16,9 +16,12 @@ Menu:
 Welcome to Expense Tracker
 You haven't added any expenses to your list yet!
 Added Date|18.00|Category|This is a remark
+Some fields are empty! Try again!
+Some fields are empty! Try again!
 Here are the expenses you have made so far:
  1. Date|18.00|Category|This is a remark
 
+Selected item does not exist in the list
 Deleted entry: Date|18.00|Category|This is a remark
 You haven't added any expenses to your list yet!
 Welcome back to the main menu
