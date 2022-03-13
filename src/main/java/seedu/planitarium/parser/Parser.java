@@ -133,9 +133,10 @@ public class Parser {
      * Returns without exception if text is a valid double.
      *
      * @param amount Text to be checked.
+     * @return A valid double for monetary values.
      * @throws NumberFormatException if format of text is not a valid double, negative or more than 2 decimal places.
      */
-    public static void checkValidMoney(String amount) throws NumberFormatException {
+    public static double getValidMoney(String amount) throws NumberFormatException {
         double checkMoney = Double.parseDouble(amount);
         if (Double.compare(checkMoney, MONEY_ZERO) < 0) {
             throw new NumberFormatException();
@@ -146,6 +147,7 @@ public class Parser {
                 throw new NumberFormatException();
             }
         }
+        return checkMoney;
     }
 
     /**
