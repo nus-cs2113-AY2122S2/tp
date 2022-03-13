@@ -40,6 +40,7 @@ public class Parser {
     );
     public static final String MESSAGE_INCOMPLETE_COMMAND_MISSING_DELIMITER =
             "Please split your command into arguments with each argument seperated by spaces!";
+    public static final String INCORRECT_COMMAND_FORMAT = "Incorrect Command format!";
 
     public Command parseCommand(String userInput) throws IncompleteCommandException {
         ArrayList<String> commandAndArgument = null;
@@ -58,7 +59,6 @@ public class Parser {
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(AddCommand.COMMAND_WORD + AddCommand.COMMAND_DESCRIPTION);
             }
-            break;
         case CheckCommand.COMMAND_WORD:
             try {
                 args = prepareView(commandAndArgument.get(1));
@@ -66,7 +66,6 @@ public class Parser {
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(CheckCommand.COMMAND_WORD + CheckCommand.COMMAND_DESCRIPTION);
             }
-            break;
         case DeleteCommand.COMMAND_WORD:
             try {
                 args = prepareDelete(commandAndArgument.get(1));
@@ -74,29 +73,31 @@ public class Parser {
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(DeleteCommand.COMMAND_WORD + DeleteCommand.COMMAND_DESCRIPTION);
             }
-            break;
         case UpdateCommand.COMMAND_WORD:
             try {
                 args = extractArguments(commandAndArgument.get(1));
-                UpdateCommand updateCommand = new UpdateCommand(serialNumber);
+                UpdateCommand updateCommand = new UpdateCommand();
                 for (String s : args) {
                     int delimiterPos = s.indexOf('/');
                     String argType = s.substring(0, delimiterPos);
                     String argValue = s.substring(0, delimiterPos + 1);
                     switch (argType) {
-                    case 'n':
+                    case "s":
+                        updateCommand.setSerialNumber(argValue);
+                        break;
+                    case "n":
                         updateCommand.setUpdateName(argValue);
                         break;
-                    case 'pd':
+                    case "pd":
                         updateCommand.setPurchaseDate(argValue);
                         break;
-                    case 't':
+                    case "t":
                         updateCommand.setType(argValue);
                         break;
-                    case 'pf':
+                    case "pf":
                         updateCommand.setPurchaseFrom(argValue);
                         break;
-                    case 'c':
+                    case "c":
                         updateCommand.setCost(argValue);
                         break;
                     default:
@@ -107,9 +108,9 @@ public class Parser {
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(UpdateCommand.COMMAND_WORD + UpdateCommand.COMMAND_DESCRIPTION);
             }
-            break;
+        default:
+            return new IncorrectCommand(INCORRECT_COMMAND_FORMAT);
         }
-
     }
 
     /**
@@ -137,7 +138,6 @@ public class Parser {
         return splitArguments;
     }
 
-    protected ArrayList<>
 
     /**
      * Prepare arguments for AddCommand by splitting up the arguments into different parts

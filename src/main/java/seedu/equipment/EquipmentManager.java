@@ -1,5 +1,7 @@
 package seedu.equipment;
 
+import seedu.Pair;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -43,8 +45,9 @@ public class EquipmentManager {
         return new ArrayList<>(equipmentList.values());
     }
 
-    public void updateEquipment(String serialNumber) {
+    public String updateEquipment(String serialNumber, ArrayList<Pair<String, String>> updatePairs) {
         // To be updated
+        return "";
     }
 
     public void deleteEquipment(String serialNumber) {
