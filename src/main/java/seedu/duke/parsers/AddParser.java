@@ -15,19 +15,22 @@ public class AddParser extends Parser {
     private static final String FLAG = "flag";
     private static final String TASK_NAME = "taskName";
     private static final String TASK_DESCRIPTION = "taskDescription";
+    private static final String TASK_DESCRIPTION_TWO = "taskDescription2";
     private static final String TASK_WORKING_TIME = "estimatedWorkingTime";
     private static final String MODULE_CODE = "moduleCode";
     private static final String MODULE_DESCRIPTION = "moduleDescription";
+    private static final String INVALID = "invalid";
 
     // Unescaped regex for testing (split into two lines):
-    // \s*(\/t\s+(?<taskName>.+?(?=\s+-d\s+|\s+-t\s+|$))(\s+(-d\s+\"(?<taskDescription>([^\"]*))\")(?=(\s+-t\s+)|$))?
-    // (\s+(-t\s+\"(?<estimatedWorkingTime>([^\"]*))\")(?=(\s+-d\s+)|$))?|\/m\s+(?<moduleCode>\w+?(?=(\s+-d\s+)|$))
-    // (\s+(-d\s+\"(?<moduleDescription>.+)\"))?)
+    // \s*((\/t\s+(?<taskName>.+?(?=\s+-d\s+|\s+-t\s+|$))(\s+(-d\s+\"(?<taskDescription>([^\"]*))\")(?=(\s+-t\s+)|$))?
+    // (\s+(-t\s+\"(?<estimatedWorkingTime>([^\"]*))\")(?=(\s+-d\s+)|$))?(\s+(-d\s+\"(?<taskDescription2>([^\"]*))\"))?
+    // |\/m\s+(?<moduleCode>\w+?(?=(\s+-d\s+)|\s+.*$))(\s+(-d\s+\"(?<moduleDescription>.+)\"))?))(?<invalid>.*)
     // TODO: Add support for -mod argument when integrating Task and Module classes with one another
-    private static final String ADD_FORMAT = "\\s*(\\/t\\s+(?<taskName>.+?(?=\\s+-d\\s+|\\s+-t\\s+|$))"
-            + "(\\s+(-d\\s+\\\"(?<taskDescription>([^\\\"]*))\\\")(?=(\\s+-t\\s+)|$))?(\\s+(-t\\s+\\\""
-            + "(?<estimatedWorkingTime>([^\\\"]*))\\\"))?|\\/m\\s+"
-            + "(?<moduleCode>\\w+?(?=(\\s+-d\\s+)|$))(\\s+(-d\\s+\\\"(?<moduleDescription>.+)\\\"))?)";
+    private static final String ADD_FORMAT = "\\s*((\\/t\\s+(?<taskName>.+?(?=\\s+-d\\s+|\\s+-t\\s+|$))(\\s+(-d\\s+\\\""
+            + "(?<taskDescription>([^\\\"]*))\\\")(?=(\\s+-t\\s+)|$))?(\\s+(-t\\s+\\\""
+            + "(?<estimatedWorkingTime>([^\\\"]*))\\\")(?=(\\s+-d\\s+)|$))?(\\s+(-d\\s+\\\""
+            + "(?<taskDescription2>([^\\\"]*))\\\"))?|\\/m\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)|\\s+.*$))"
+            + "(\\s+(-d\\s+\\\"(?<moduleDescription>.+)\\\"))?))(?<invalid>.*)";
 
     public AddParser() {
         super();
@@ -38,16 +41,31 @@ public class AddParser extends Parser {
         groupNames.add(TASK_WORKING_TIME);
         groupNames.add(MODULE_CODE);
         groupNames.add(MODULE_DESCRIPTION);
+        groupNames.add(TASK_DESCRIPTION_TWO);
+        groupNames.add(INVALID);
     }
 
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         HashMap<String, String> parsedArguments = parseString(userInput);
         final String taskName = parsedArguments.get(TASK_NAME);
-        final String taskDescription = parsedArguments.get(TASK_DESCRIPTION);
         final String estimatedWorkingTime = parsedArguments.get(TASK_WORKING_TIME);
         final String moduleCode = parsedArguments.get(MODULE_CODE);
         final String moduleDescription = parsedArguments.get(MODULE_DESCRIPTION);
+        final String taskDescriptionTwo = parsedArguments.get(TASK_DESCRIPTION_TWO);
+        String invalid = parsedArguments.get(INVALID);
+        String taskDescription = parsedArguments.get(TASK_DESCRIPTION);
+        if (invalid.isEmpty()) {
+            invalid = NULL_FIELD;
+        }
+        boolean isInvalid = ((!Objects.equals(invalid, NULL_FIELD))
+                || ((!Objects.equals(taskDescription, NULL_FIELD))
+                && (!Objects.equals(taskDescriptionTwo, NULL_FIELD))));
+        if (isInvalid) {
+            throw new ParseException();
+        } else if ((Objects.equals(taskDescription, NULL_FIELD)) && (!Objects.equals(taskDescriptionTwo, NULL_FIELD))) {
+            taskDescription = taskDescriptionTwo;
+        }
         if (!Objects.equals(taskName, NULL_FIELD)) {
             return new AddCommand(taskName, taskDescription, true, estimatedWorkingTime);
         }

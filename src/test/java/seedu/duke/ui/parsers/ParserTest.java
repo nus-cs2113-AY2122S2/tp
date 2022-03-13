@@ -114,7 +114,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_addCommand_withDescription_withWorkingTime_wrongOrder() {
+    public void parse_addCommand_withDescription_withWorkingTime_differentOrder() {
         final String testString = "add /t /t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d   "
                 + "-t \"-t-t-t t-t-t /t/t -d -d -d \" "
                 + "-d \"-d-d-d /t /m -d -d  \" ";
@@ -124,9 +124,48 @@ public class ParserTest {
             Task t = ((AddCommand) c).getNewTask();
             assertNotEquals(null, t);
             assertNull(((AddCommand) c).getNewModule());
-            assertNotEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
+            assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
             assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
-            assertNotEquals("-t-t-t t-t-t /t/t -d -d -d", t.getEstimatedWorkingTime());
+            assertEquals("-t-t-t t-t-t /t/t -d -d -d", t.getEstimatedWorkingTime());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_task_invalidInput() {
+        final String testString = "add /t 000 -d \"123\" -t \"456\" invalid";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_duplicateTaskDescription() {
+        final String testString = "add /t 000 -d \"123\" -t \"456\" -d \"789\"";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_duplicateWorkingTime() {
+        final String testString = "add /t 000 -t \"123\" -d \"456\" -t \"789\"";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
         } catch (Exception e) {
             fail();
         }
