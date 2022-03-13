@@ -272,20 +272,58 @@ public class Parser {
     }
     
     // MAIN PUBLIC PARSING FUNCTIONS
+    /**
+     * Returns a String object that represents a name, given the command arguments from user input, delimited by the
+     * Name delimiter.
+     * 
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return A String object that represents a name.
+     * @throws InvalidFormatException If the Name delimiter is not found in the command arguments, or
+     *                                if no arguments representing a name were provided after the Name delimiter.
+     */
     public static String parseName(String commandArgs) throws InvalidFormatException {
         return getArgumentFromDelimiter(commandArgs, NAME_DELIMITER);
     }
 
+    /**
+     * Returns a String array object that represents a list of names separated by whitespaces,
+     * given the command arguments from user input, delimited by the Person list delimiter.
+     *
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return A String array object that represents a list of names.
+     * @throws InvalidFormatException If the Person list delimiter is not found in the command arguments, or
+     *                                if no arguments representing a list of names were provided after the 
+     *                                Person list delimiter.
+     */
     public static String[] parsePersonList(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, PERSON_LIST_DELIMITER);
         return argument.split(REGEX_WHITESPACES_DELIMITER);
     }
 
+    /**
+     * Returns a String array object that represents a list of names of involved persons separated by whitespaces,
+     * given the command arguments from user input, delimited by the Involved delimiter.
+     *
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return A String array object that represents a list of names of involved persons.
+     * @throws InvalidFormatException If the Involved delimiter is not found in the command arguments, or
+     *                                if no arguments representing a list of names were provided after the 
+     *                                Involved delimiter.
+     */
     public static String[] parseInvolved(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, INVOLVED_DELIMITER);
         return argument.split(REGEX_WHITESPACES_DELIMITER);
     }
 
+    /**
+     * Returns a String object that represents a name of a payer, given the command arguments from user input, 
+     * delimited by the Payer delimiter.
+     *
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return A String object that represents a name of a payer.
+     * @throws InvalidFormatException If the Payer delimiter is not found in the command arguments, or
+     *                                if no arguments representing a name were provided after the Payer delimiter.
+     */
     public static String parsePayer(String commandArgs) throws InvalidFormatException {
         return getArgumentFromDelimiter(commandArgs, PAYER_DELIMITER);
     }
