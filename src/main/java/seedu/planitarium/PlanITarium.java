@@ -1,12 +1,13 @@
 package seedu.planitarium;
 
 import commands.Command;
-
+import ui.UI;
 import java.util.Scanner;
 
 public class PlanITarium {
     protected Scanner userInput;
     protected Command commandExecuter;
+    protected UI ui = new UI();
 
     public void run() throws Exception{
         ui.printWelcomeMessage();

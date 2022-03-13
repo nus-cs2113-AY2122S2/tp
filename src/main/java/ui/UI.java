@@ -32,7 +32,7 @@ public class UI {
         System.out.println(EXIT_MSG);
     }
 
-    private static void printWelcomeMessage() {
+    public static void printWelcomeMessage() {
         System.out.println(LOGO);
     }
 }

@@ -2,6 +2,8 @@ package commands;
 
 import exceptions.UnknownException;
 import seedu.planitarium.parser.Parser;
+import seedu.planitarium.person.Person;
+import seedu.planitarium.person.PersonList;
 import ui.UI;
 
 public class Command {
@@ -18,6 +20,7 @@ public class Command {
     protected String replyMsg;
     protected Parser parser = new Parser();
     protected UI ui = new UI();
+    protected PersonList personList = new PersonList();
 
     public Command(String userInput) {
         this.userInput = userInput;
