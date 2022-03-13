@@ -197,18 +197,22 @@ public class Parser {
     }
 
     /**
-     * Returns without exception if income index is within income quantity bounds.
+     * Returns a valid income index that is within income quantity bounds.
      *
      * @param incomeIndex Person's income lookup index.
      * @param person      Person who has income.
-     * @throws NumberFormatException if index is not a valid integer.
-     * @throws IndexOutOfBoundsException if provided index is out of bounds.
+     * @throws InvalidIndexException if index is not a valid integer or out of bounds.
      */
-    public static void checkValidIncomeIndex(String incomeIndex, Person person)
-            throws NumberFormatException, IndexOutOfBoundsException {
-        int checkIndex = Integer.parseInt(incomeIndex);
-        checkTooHighIndex(checkIndex, person.getNumberOfIncomes());
-        checkTooLowIndex(checkIndex, MIN_INCOME_INDEX);
+    public static int getValidIncomeIndex(String incomeIndex, Person person)
+            throws InvalidIndexException {
+        try {
+            int checkIndex = Integer.parseInt(incomeIndex);
+            checkTooHighIndex(checkIndex, person.getNumberOfIncomes());
+            checkTooLowIndex(checkIndex, MIN_INCOME_INDEX);
+            return checkIndex;
+        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+            throw new InvalidIndexException(incomeIndex);
+        }
     }
 
     /**
