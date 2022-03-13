@@ -62,6 +62,8 @@ public class PersonList {
      * @param index The index of the person to be removed
      */
     public void removePerson(int index) {
+        assert(index >= 1);
+        assert(index <= numberOfMembers);
         personList.remove(index - 1);
         numberOfMembers--;
     }
