@@ -14,6 +14,7 @@ public class Person {
      * @param name The name of the person to be created
      */
     public Person(String name) {
+        assert(name != NULL);
         this.name = name;
         incomeList = new IncomeList();
         expenditureList = new ExpenditureList();
