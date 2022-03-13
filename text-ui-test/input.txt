@@ -1,8 +1,8 @@
 addproject cs2113
-viewproject
+listprojects
 addproject gex1005
-viewproject
+listprojects
 deleteproject cs2113
-viewproject
+listprojects
 blah
 exit
