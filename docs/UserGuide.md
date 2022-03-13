@@ -96,7 +96,7 @@ Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ..
 * `[NAME1 NAME2 ...]` refers to a list of persons involved in the session.
   * Each individual name is **case-insensitive**.
 
-> **Notes:**
+> **💡 Note(s):**
 >- The `[SESSION_NAME]` should be unique across sessions.
 >- Each name in `[NAME1 NAME2 ...]` for the session should be unique.
 
@@ -115,8 +115,9 @@ Format: `session /delete /sid [SESSION_ID]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
     * The unique identifier for a session can be retrieved with `session /list` command.
-> **Notes:**
+> **💡 Note(s):**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
+>- A confirmation must be given before deletion takes place.
 
 Example of usage:
 1. Remove an existing session that was created with a session unique identifier of 1.
@@ -156,7 +157,7 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 * `[TOTAL_COST]` refers to the total cost of the activity.
 * `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
 
-> **Notes:**
+> **💡 Note(s):**
 >- The session with a unique identifier of `[SESSION_ID]` has to exist before the activity can be created.
 >- The `[ACTIVITY_NAME]` should be unique across all activities.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
@@ -190,8 +191,8 @@ Format: `session /summary /sid [SESSION_ID]`
 
 Example of usage:
 1. Get a session summary for an existing session with a session unique identifier of 1.
-    1. `session /summary /sid 1`
-> **Notes:**
+   - `session /summary /sid 1`
+> **💡 Note:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
 
 <br>[INSERT SCREEN SHOT]
