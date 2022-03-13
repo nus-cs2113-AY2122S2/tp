@@ -47,9 +47,11 @@ public class Person {
      * @param index The index of the income to be removed
      */
     public void deleteIncome(int index) {
-        String description = incomeList.getDescription(index);
-        double value = incomeList.getIncomeValue(index);
-        incomeList.remove(index);
+        assert(index >= 1);
+        assert(index <= getNumberOfIncomes());
+        String description = incomeList.getDescription(index - 1);
+        double value = incomeList.getIncomeValue(index - 1);
+        incomeList.remove(index - 1);
         System.out.println("An income of " + value + " for " + description + " has been removed");
     }
 
@@ -71,9 +73,11 @@ public class Person {
      * @param index The index of the expenditure to be removed.
      */
     public void deleteExpend(int index) {
-        String description = expenditureList.getDescription(index);
-        double value = expenditureList.getExpenditureValue(index);
-        expenditureList.remove(index);
+        assert(index >= 1);
+        assert(index <= getNumberOfExpenditures());
+        String description = expenditureList.getDescription(index - 1);
+        double value = expenditureList.getExpenditureValue(index - 1);
+        expenditureList.remove(index - 1);
         System.out.println("An expenditure of " + value + " for " + description + " has been removed");
     }
 
