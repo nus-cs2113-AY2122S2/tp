@@ -53,7 +53,7 @@ public class Project {
     }
 
     /**
-     * Sets a deadline to the Project
+     * Sets a deadline to the Project.
      *
      * @param deadline Deadline of the project
      */
@@ -62,7 +62,7 @@ public class Project {
     }
 
     /**
-     * Gets the deadline of the Project
+     * Gets the deadline of the Project.
      *
      * @return The deadline of the Project
      */

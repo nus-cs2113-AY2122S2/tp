@@ -1,7 +1,7 @@
 package cpp;
 
 /**
- * Stores Magic Constants
+ * Stores Magic Constants.
  */
 
 public class Constants {

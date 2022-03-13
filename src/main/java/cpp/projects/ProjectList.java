@@ -108,7 +108,7 @@ public class ProjectList {
     }
 
     /**
-     * Adds a deadline to a specified Project
+     * Adds a deadline to a specified Project.
      *
      * @param title Name of the project
      * @param deadline Deadline for the project
