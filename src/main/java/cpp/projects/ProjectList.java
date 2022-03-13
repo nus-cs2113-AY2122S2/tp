@@ -1,5 +1,7 @@
 package cpp.projects;
 
+import cpp.Constants;
+
 import java.util.ArrayList;
 
 public class ProjectList {
@@ -45,10 +47,10 @@ public class ProjectList {
      * prints all projects in the projectList.
      */
     public void printProject() {
-        System.out.println("____________________________________________________________");
+        System.out.println(Constants.SEPARATOR);
         if (projectList.size() == 0) { //no project in the list, print another message
             System.out.println("You have not added any projects yet!");
-            System.out.println("____________________________________________________________");
+            System.out.println(Constants.SEPARATOR);
             return;
         }
         int count = 1;
@@ -57,7 +59,7 @@ public class ProjectList {
             System.out.println("[" + count + "] " + project.getTitle());
             count++;
         }
-        System.out.println("____________________________________________________________");
+        System.out.println(Constants.SEPARATOR);
     }
 
     /**
@@ -70,7 +72,9 @@ public class ProjectList {
         try {
             index = Integer.parseInt(indexString);
         } catch (NumberFormatException e) {
+            System.out.println(Constants.SEPARATOR);
             System.out.println("The project index is not an integer!");
+            System.out.println(Constants.SEPARATOR);
             return;
         }
 
@@ -94,7 +98,9 @@ public class ProjectList {
             indexProj = Integer.parseInt(indexStringProj);
             indexTodo = Integer.parseInt(indexStringTodo);
         } catch (NumberFormatException e) {
+            System.out.println(Constants.SEPARATOR);
             System.out.println("The input is not an integer!");
+            System.out.println(Constants.SEPARATOR);
             return;
         }
         Project targetProject = projectList.get(indexProj - 1);
@@ -108,6 +114,7 @@ public class ProjectList {
      * @param deadline Deadline for the project
      */
     public void addDeadline(String title, String deadline) {
+        System.out.println(Constants.SEPARATOR);
         boolean isAdded = false;
         for (Project project : projectList) {
             if (project.getTitle().equals(title)) {
@@ -119,5 +126,6 @@ public class ProjectList {
         if (!isAdded) {
             System.out.println("Sorry! There was no project with that name.");
         }
+        System.out.println(Constants.SEPARATOR);
     }
 }

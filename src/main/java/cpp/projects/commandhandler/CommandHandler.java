@@ -2,7 +2,7 @@ package cpp.projects.commandhandler;
 
 import cpp.exceptions.IllegalCommandException;
 import cpp.projects.ProjectList;
-import cpp.Messages;
+import cpp.Constants;
 
 import java.util.Scanner;
 
@@ -34,15 +34,15 @@ public class CommandHandler {
         switch (commands[0].toLowerCase()) {
         case "addproject": //add a project into list
             projectList.addProject(commands[1]);
-            System.out.println("____________________________________________________________");
+            System.out.println(Constants.SEPARATOR);
             System.out.println(commands[1] + " Added.");
-            System.out.println("____________________________________________________________");
+            System.out.println(Constants.SEPARATOR);
             break;
         case "deleteproject": //delete a project based on its name
             projectList.deleteProject(commands[1]);
-            System.out.println("____________________________________________________________");
+            System.out.println(Constants.SEPARATOR);
             System.out.println(commands[1] + " Deleted.");
-            System.out.println("____________________________________________________________");
+            System.out.println(Constants.SEPARATOR);
             break;
         case "listprojects":
         case "listproject": //view all project(s) by name
@@ -50,14 +50,14 @@ public class CommandHandler {
             break;
         case "todo":
             if (commands.length < 3) {
-                throw new IllegalCommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+                throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
             }
             String todoString = parseTodoString(commands);
             projectList.addTodoToProject(commands[1], todoString);
             break;
         case "mark":
             if (commands.length < 3) {
-                throw new IllegalCommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+                throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
             }
             projectList.markTodoAsDone(commands[1], commands[2]);
             break;
@@ -65,9 +65,9 @@ public class CommandHandler {
             projectList.addDeadline(commands[1], commands[2]);
             break;
         default:
-            System.out.println("____________________________________________________________");
+            System.out.println(Constants.SEPARATOR);
             System.out.println("Unknown command.");
-            System.out.println("____________________________________________________________");
+            System.out.println(Constants.SEPARATOR);
             break;
         }
 
