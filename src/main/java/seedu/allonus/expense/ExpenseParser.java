@@ -39,6 +39,7 @@ public class ExpenseParser {
         return result;
 
     }
+
     public static int parseDeleteExpense(String userInput) throws IndexOutOfBoundsException, NumberFormatException {
         String[] rawInput = userInput.split(" ", 2);
         int result = Integer.parseInt(rawInput[1]);

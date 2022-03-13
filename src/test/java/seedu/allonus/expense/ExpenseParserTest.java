@@ -2,9 +2,9 @@ package seedu.allonus.expense;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.allonus.expense.ExpenseParser.parseDeleteExpense;
 import static seedu.allonus.expense.ExpenseParser.parseKeywordExpense;
 
@@ -14,12 +14,12 @@ class ExpenseParserTest {
     void testParseKeyword() {
         String testInput = "d/13/3/2022 a/18.00 c/Movie r/This is a remark";
         String date = parseKeywordExpense(testInput, "d/", "[dacr]/");
-        String amount = parseKeywordExpense(testInput, "a/", "[dacr]/");
-        String category = parseKeywordExpense(testInput, "c/", "[dacr]/");
-        String remarks = parseKeywordExpense(testInput, "r/", "[dacr]/");
         assertEquals(date, "13/3/2022");
+        String amount = parseKeywordExpense(testInput, "a/", "[dacr]/");
         assertEquals(amount, "18.00");
+        String category = parseKeywordExpense(testInput, "c/", "[dacr]/");
         assertEquals(category, "Movie");
+        String remarks = parseKeywordExpense(testInput, "r/", "[dacr]/");
         assertEquals(remarks, "This is a remark");
     }
 
