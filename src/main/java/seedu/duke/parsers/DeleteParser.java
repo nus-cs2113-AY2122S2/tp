@@ -7,11 +7,11 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
+import seedu.duke.ui.TextUi;
 
 public class DeleteParser extends Parser {
-
-    public static final String MODULE_CODE = "moduleCode";
-    public static final String TASK_NUMBER = "taskNumber";
+    public static final String MODULE_CODE = TextUi.MODULE_CODE;
+    public static final String TASK_NUMBER = TextUi.TASK_NUMBER;
     //TODO: make the regex stricter in accepting inputs and extend to deleting tasks from modules
     private static final String DELETE_FORMAT = "\\s*(\\/t\\s+(?<taskNumber>\\d+))|\\/m\\s+(?<moduleCode>\\w+)";
 

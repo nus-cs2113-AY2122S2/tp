@@ -2,17 +2,14 @@ package seedu.duke.commands;
 
 import java.util.ArrayList;
 
+import seedu.duke.ui.TextUi;
+
 public class CommandResult {
-
-    private static final String ARRAYLIST_RESULT = "ArrayList";
-    private static final String NULL_STRING = "";
-    private static final String STRING_RESULT = "String";
-
-    private String commandResultType = "String";
+    private String commandResultType = TextUi.STRING;
     private Object resultString;
     private ArrayList<String> resultArrayList;
-    private String startWords = "";
-    private String endWords = "";
+    private String startWords = TextUi.NULL_STRING;
+    private String endWords = TextUi.NULL_STRING;
 
     public CommandResult(String result) {
         this.resultString = result;
@@ -40,17 +37,17 @@ public class CommandResult {
     @Override
     public String toString() {
         switch (commandResultType) {
-        case STRING_RESULT:
+        case TextUi.STRING_RESULT:
             return resultString.toString();
-        case ARRAYLIST_RESULT:
-            String result = NULL_STRING;
-            if (!startWords.equals(NULL_STRING)) {
+        case TextUi.ARRAYLIST_RESULT:
+            String result = TextUi.NULL_STRING;
+            if (!startWords.equals(TextUi.NULL_STRING)) {
                 result = startWords + "\n";
             }
             for (int i = 0; i < resultArrayList.size(); i++) {
                 result += String.format("%s. %s\n", i + 1, resultArrayList.get(i).toString());
             }
-            if (!endWords.equals(NULL_STRING)) {
+            if (!endWords.equals(TextUi.NULL_STRING)) {
                 result = startWords + "\n";
             }
             return result;

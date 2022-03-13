@@ -7,14 +7,14 @@ import seedu.duke.commands.Command;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
+import seedu.duke.ui.TextUi;
 
 /**
  * This Parser distinguishes between various command words.
  */
 public class ModHappyParser extends Parser {
-
-    private static final String ARGUMENT = "arguments";
-    private static final String COMMAND_WORD = "commandWord";
+    private static final String ARGUMENT = TextUi.ARGUMENT;
+    private static final String COMMAND_WORD = TextUi.COMMAND_WORD;
     private static final String MOD_HAPPY_COMMAND_FORMAT = "(?<commandWord>\\S+)"
             + "\\s*(?<arguments>.*)";
 

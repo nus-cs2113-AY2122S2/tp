@@ -1,7 +1,9 @@
 package seedu.duke.exceptions;
 
+import seedu.duke.ui.TextUi;
+
 public class UnsupportedResultTypeException extends ModHappyException {
-    private static final String ERROR_MESSAGE = "Sorry, I don't understand the result format:";
+    private static final String ERROR_MESSAGE = TextUi.ERROR_UNSUPPORTED_RESULT_TYPE;
 
     public UnsupportedResultTypeException() {
         super(ERROR_MESSAGE);

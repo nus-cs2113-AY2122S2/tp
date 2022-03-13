@@ -4,6 +4,7 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.MarkCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
+import seedu.duke.ui.TextUi;
 
 import java.util.HashMap;
 
@@ -11,10 +12,10 @@ import java.util.HashMap;
  * This Parser supports the "mark" command.
  */
 public class MarkParser extends Parser {
-    private static final String FLAG = "flag";
-    private static final String TASK_INDEX = "taskIndex";
-    private static final String COMPLETED_FLAG = "/c";
-    private static final String UNCOMPLETED_FLAG = "/u";
+    private static final String FLAG = TextUi.FLAG;
+    private static final String TASK_INDEX = TextUi.TASK_INDEX;
+    private static final String COMPLETED_FLAG = TextUi.COMPLETED_FLAG;
+    private static final String UNCOMPLETED_FLAG = TextUi.UNCOMPLETED_FLAG;
 
     // Unescaped regex for testing:
     // \s*(?<flag>\/(c|u))\s+(?<taskIndex>\d+)$

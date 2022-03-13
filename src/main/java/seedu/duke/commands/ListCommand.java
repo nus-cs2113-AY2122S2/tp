@@ -2,9 +2,10 @@ package seedu.duke.commands;
 
 import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
+import seedu.duke.ui.TextUi;
 
 public class ListCommand extends Command {
-    private static final String LIST_MESSAGE = "Ok! Here are the task(s) in your list:" + LS + "%s";
+    private static final String LIST_MESSAGE = TextUi.LIST_MESSAGE_TOP + LS + "%s";
 
     /**
      * Lists all tasks.

@@ -1,7 +1,9 @@
 package seedu.duke.exceptions;
 
+import seedu.duke.ui.TextUi;
+
 public class UnknownCommandException extends ModHappyException {
-    private static final String ERROR_MESSAGE = "Sorry, I don't understand the following command:" + LS + "\"%s\"";
+    private static final String ERROR_MESSAGE = TextUi.ERROR_UNKNOWN_COMMAND + LS + "\"%s\"";
 
     public UnknownCommandException() {
         super(ERROR_MESSAGE);
