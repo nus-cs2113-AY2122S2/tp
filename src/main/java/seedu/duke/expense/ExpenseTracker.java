@@ -1,6 +1,5 @@
 package seedu.duke.expense;
 
-import seedu.duke.contacts.Contact;
 import seedu.duke.ui.TextUi;
 
 import java.util.ArrayList;
