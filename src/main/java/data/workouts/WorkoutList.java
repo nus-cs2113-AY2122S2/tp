@@ -6,12 +6,15 @@ import data.exercises.InvalidExerciseException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class WorkoutList {
     public static final int MAX_DISPLAY = 10;
 
     private ExerciseList exerciseList;
     private ArrayList<Workout> workoutsList = new ArrayList<>();
+    private static Logger logger = Logger.getLogger(WorkoutList.class.getName());
 
     public WorkoutList(ExerciseList exerciseList) {
         this.exerciseList = exerciseList;
@@ -121,16 +124,20 @@ public class WorkoutList {
      */
     public Workout deleteWorkout(String userArgument) throws WorkoutOutOfRangeException,
             NumberFormatException, ArrayIndexOutOfBoundsException {
+        logger.entering(getClass().getName(), "deleteWorkout");
         int indexToDelete = Integer.parseInt(userArgument.trim());
 
         String className = this.getClass().getSimpleName();
         boolean isIndexToDeleteValid = checkIndexIsWithinRange(indexToDelete);
         if (!isIndexToDeleteValid) {
+            logger.log(Level.WARNING, "Workout number to delete is out of range!");
             throw new WorkoutOutOfRangeException(className, WorkoutOutOfRangeException.INDEX_VALUE_OUT_OF_RANGE);
         }
 
+        assert (indexToDelete > 0) && (indexToDelete <= workoutsList.size());
         Workout deletedWorkout = workoutsList.get(indexToDelete - 1);
         workoutsList.remove(indexToDelete - 1);
+        logger.exiting(getClass().getName(), "deleteWorkout");
         return deletedWorkout;
     }
 
