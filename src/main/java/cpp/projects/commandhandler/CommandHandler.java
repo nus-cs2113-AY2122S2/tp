@@ -42,7 +42,7 @@ public class CommandHandler {
             System.out.println(commands[1] + " Deleted.");
             System.out.println("____________________________________________________________");
             break;
-        case "viewproject": //view all project(s) by name
+        case "listprojects": //view all project(s) by name
             projectList.printProject();
             break;
         default:
