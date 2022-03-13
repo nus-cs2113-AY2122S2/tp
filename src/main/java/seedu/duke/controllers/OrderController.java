@@ -8,10 +8,10 @@ import seedu.duke.manager.OrderManager;
 import java.util.Scanner;
 
 public class OrderController extends Controller {
-    private static final String[] CHOICES = {"0. Exit", "1. Display Menu",
-        "2. Create an order", "3. Delete an order",
-        "4. Get total value of current order",
-        "5. Get total value of all orders in the list", "6, Print receipt"
+    private static final String[] CHOICES = {"Exit", "Display Menu",
+        "Create an order", "Delete an order",
+        "Get total value of current order",
+        "Get total value of all orders in the list", "Print receipt"
     };
     private final OrderManager orderManager;
 
