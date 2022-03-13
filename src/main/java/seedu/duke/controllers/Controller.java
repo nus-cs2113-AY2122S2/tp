@@ -82,14 +82,7 @@ public abstract class Controller {
      * @throws OperationTerminationException When user inputs terminator.
      */
     protected int getChoice() throws OperationTerminationException {
-        while (true) {
-            int choice = InputParser.getInteger("Enter choice: ");
-            if (choice < 0 || choice > choices.length - 1) {
-                System.out.println("Invalid range! Try again...");
-                continue;
-            }
-            return choice;
-        }
+        return InputParser.getInteger("Enter choice: ");
     }
 
     /**
