@@ -36,11 +36,11 @@ public class WorkoutCommand extends Command {
      * Constructs a new instance of the WorkoutCommand. Constructed when the user enters a
      * workout-related command.
      *
-     * @param userInput The user's full original input.
-     * @param fileManager An instance of the FileManager class.
-     * @param workoutList An instance of the WorkoutList class.
-     * @param userAction The action that was parsed from the user's input.
-     * @param userArguments The arguments that are accompanied with the user action.
+     * @param userInput     The user's full original input.
+     * @param fileManager   An instance of the FileManager class.
+     * @param workoutList   An instance of the WorkoutList class.
+     * @param userAction    The action that was parsed from the user's input.
+     * @param userArguments The arguments that are accompanied by the user action.
      * @throws InvalidCommandException If the command entered by the user is incorrect.
      */
     public WorkoutCommand(String userInput, FileManager fileManager, WorkoutList workoutList,
@@ -52,22 +52,49 @@ public class WorkoutCommand extends Command {
         this.userArguments = userArguments;
     }
 
+    /**
+     * Gets the instance of the UI class.
+     *
+     * @return An instance of the UI class.
+     */
     public UI getUI() {
         return this.ui;
     }
 
+    /**
+     * Gets the instance of the FileManager class.
+     *
+     * @return An instance of the FileManager class.
+     */
     public FileManager getFileManager() {
         return this.fileManager;
     }
 
+    /**
+     * Gets the instance of the WorkoutList class.
+     *
+     * @return An instance of the WorkoutList class.
+     */
     public WorkoutList getWorkoutList() {
         return this.workoutList;
     }
 
+    /**
+     * Gets the action of the workout command specified by the user.
+     *
+     * @return A string containing the action specified by the user.
+     */
     public String getUserAction() {
         return this.userAction;
     }
 
+    /**
+     * Checks for the validity of the action specified by the user and sets the class field
+     * userAction to the action (if valid).
+     *
+     * @param userAction A string containing the action specified by the user.
+     * @throws InvalidCommandException If the action specified by the user is invalid.
+     */
     public void setUserAction(String userAction) throws InvalidCommandException {
         switch (userAction) {
         case CREATE_ACTION_KEYWORD:
@@ -85,13 +112,21 @@ public class WorkoutCommand extends Command {
         }
     }
 
+    /**
+     * Gets the user argument stored in the class instance.
+     *
+     * @return A string containing the user argument.
+     */
     public String getUserArguments() {
         return this.userArguments;
     }
 
     /**
-     * (WIP) Note: need to catch and handle exceptions in this method, not the calling method.
+     * Executes a workout-related command based on the action and arguments that is stored in the
+     * class fields. If the action and/or arguments specified are invalid, this method will handle the
+     * exceptions and print appropriate responses.
      */
+    @Override
     public void execute() {
         try {
             switch (getUserAction()) {

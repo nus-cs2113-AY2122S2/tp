@@ -17,7 +17,7 @@ public class InvalidWorkoutException extends Exception {
      * thrown from and the accompanying error message.
      *
      * @param throwingClass The class name that this exception instance was thrown from.
-     * @param errorMessage The error message given by the throwing method.
+     * @param errorMessage  The error message given by the throwing method.
      */
     public InvalidWorkoutException(String throwingClass, String errorMessage) {
         super(errorMessage);
