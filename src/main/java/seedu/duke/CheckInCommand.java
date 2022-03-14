@@ -1,16 +1,18 @@
 package seedu.duke;
 
-public class CheckInCommand extends Command{
+public class CheckInCommand extends Command {
     RoomList roomList;
     int roomId;
 
     @Override
-    public void execute(){ }
+    public void execute(){
+    }
+
     @Override
-    public void execute(RoomList list){
+    public void execute(RoomList list) {
         this.roomList = list;
-        for(Room room : list.getRoomList()){
-            if(room.getRoomId() == roomId){
+        for (Room room : list.getRoomList()) {
+            if (room.getRoomId() == roomId) {
                 room.checkIn();
                 // haven't implement ui
                 System.out.println("Finished!");
@@ -19,9 +21,11 @@ public class CheckInCommand extends Command{
             }
         }
     }
+
     // check valid room number
     // check the room is vacant or not
-    public CheckInCommand(String command){
+
+    public CheckInCommand(String command) {
         roomId = Integer.parseInt(command.trim());
     }
 

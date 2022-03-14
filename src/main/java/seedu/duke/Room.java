@@ -30,15 +30,16 @@ public class Room {
         return isVacant;
     }
 
-    public void checkIn(){
+    public void checkIn() {
         isVacant = false;
     }
 
-    public void checkOut(){
+    public void checkOut() {
         isVacant = true;
     }
 
-    public String toString(){
-        return getType() + "\t\t" +getRoomId() +"\t\t\t\t"+getLevel()+"\t\t"+(getIsVacant()?"Vacant":"Occupied");
+    public String toString() {
+        return getType() + "\t\t" + getRoomId() + "\t\t\t\t"
+                + getLevel() + "\t\t" + (getIsVacant() ? "Vacant" : "Occupied");
     }
 }

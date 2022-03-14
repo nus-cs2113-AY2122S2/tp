@@ -13,14 +13,13 @@ public class CommandParser {
         } else if (commandString.startsWith(ADD_ITEM_COMMAND)) {
             String commandStringWithoutCommand = commandString.replace(ADD_ITEM_COMMAND, "");
             userCommand = new AddItemCommand(commandStringWithoutCommand);
-        } else if(commandString.startsWith(CHECK_IN)){
+        } else if (commandString.startsWith(CHECK_IN)) {
             String commandStringWithoutCommand = commandString.replace(CHECK_IN, "");
             userCommand = new CheckInCommand(commandStringWithoutCommand);
-        } else if(commandString.startsWith(CHECK_OUT)){
+        } else if (commandString.startsWith(CHECK_OUT)) {
             String commandStringWithoutCommand = commandString.replace(CHECK_OUT, "");
             userCommand = new CheckOutCommand(commandStringWithoutCommand);
-        }
-        else {
+        } else {
             throw new WrongCommandException("Invalid Command");
         }
         return userCommand;
