@@ -124,4 +124,16 @@ class ParserTest {
         String output = Parser.getRemainingArgument(fourInputTokensString);
         assertEquals("theLazy Dog", output);
     }
+
+    @Test
+    void parseName_missingDelimiter_exceptionThrown() {
+        String argumentWithoutNameDelimiter = "n Class outing /d 23-02-2022 /pl Alice Alice Bob";
+        try {
+            String output = Parser.parseName(argumentWithoutNameDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.NAME_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
 }
