@@ -6,12 +6,15 @@ import data.exercises.InvalidExerciseException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class WorkoutList {
     public static final int MAX_DISPLAY = 10;
 
     private ExerciseList exerciseList;
     private ArrayList<Workout> workoutsList = new ArrayList<>();
+    private static Logger logger = Logger.getLogger(WorkoutList.class.getName());
 
     public WorkoutList(ExerciseList exerciseList) {
         this.exerciseList = exerciseList;
@@ -108,22 +111,43 @@ public class WorkoutList {
         return false;
     }
 
+    /**
+     * This method removes the intended workout in the workout list.
+     * The intended workout to delete is determined by the user who
+     * will indicate the workout number to delete in the workout list.
+     *
+     * @param userArgument The argument entered by user, that is, the workout number to delete.
+     * @return deletedWorkout, the workout object that is deleted from the workoutsList.
+     * @throws WorkoutOutOfRangeException If workout number to delete is out of range.
+     * @throws NumberFormatException If workout number could not be parsed into an integer.
+     * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
+     */
     public Workout deleteWorkout(String userArgument) throws WorkoutOutOfRangeException,
             NumberFormatException, ArrayIndexOutOfBoundsException {
+        logger.entering(getClass().getName(), "deleteWorkout");
         int indexToDelete = Integer.parseInt(userArgument.trim());
 
         String className = this.getClass().getSimpleName();
         boolean isIndexToDeleteValid = checkIndexIsWithinRange(indexToDelete);
         if (!isIndexToDeleteValid) {
+            logger.log(Level.WARNING, "Workout number to delete is out of range!");
             throw new WorkoutOutOfRangeException(className, WorkoutOutOfRangeException.INDEX_VALUE_OUT_OF_RANGE);
         }
 
+        assert (indexToDelete > 0) && (indexToDelete <= workoutsList.size());
         Workout deletedWorkout = workoutsList.get(indexToDelete - 1);
         workoutsList.remove(indexToDelete - 1);
+        logger.exiting(getClass().getName(), "deleteWorkout");
         return deletedWorkout;
     }
 
-
+    /**
+     * This method checks whether the index supplied for operations
+     * such as delete and update is within the range of the current workout list.
+     *
+     * @param index The index to check.
+     * @return true if index is within range, else false if out of range.
+     */
     private boolean checkIndexIsWithinRange(int index) {
         return index > 0 && index <= workoutsList.size();
     }
