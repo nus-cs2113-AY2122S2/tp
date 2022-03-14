@@ -12,7 +12,7 @@ import static seedu.duke.common.Messages.MESSAGE_GOODBYE;
  */
 public class TextUi {
     public static void showWelcomeMessage() {
-        System.out.println(LOGO);
+        //System.out.println(LOGO);
         System.out.println(MESSAGE_WELCOME);
         System.out.println(MESSAGE_DIVIDER);
         System.out.println(MESSAGE_QUESTION_NAME);
