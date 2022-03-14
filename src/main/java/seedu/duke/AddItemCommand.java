@@ -9,8 +9,8 @@ public class AddItemCommand extends Command {
     private static final int ITEM_PAX_INDICATOR_LENGTH = 4;
 
     public AddItemCommand(String userInput) throws HotelLiteManagerException {
-        boolean isValidAddItemCommand = userInput.contains(ITEM_NAME_INDICATOR) &&
-                userInput.contains(ITEM_PAX_INDICATOR);
+        boolean isValidAddItemCommand = userInput.contains(ITEM_NAME_INDICATOR)
+                && userInput.contains(ITEM_PAX_INDICATOR);
         if (!isValidAddItemCommand) {
             throw new InvalidCommandException();
         }
