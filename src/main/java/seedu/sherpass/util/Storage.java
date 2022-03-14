@@ -111,7 +111,7 @@ public class Storage {
      *
      * @param taskList Array of tasks that are to be saved.
      */
-    public void writeSaveData(TaskList taskList) {
+    public JSONObject writeSaveData(TaskList taskList) {
         JSONObject taskJson = convertTaskListToJson(taskList);
         String taskString = taskJson.toString(4);
         try {
@@ -121,6 +121,7 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(ERROR_IO_FAILURE_MESSAGE);
         }
+        return taskJson;
     }
 
     private boolean isTaskRepeated(ArrayList<Task> saveTaskList, int index) {
