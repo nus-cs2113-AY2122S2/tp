@@ -2,7 +2,6 @@ package seedu.duke;
 
 import util.exceptions.LargeQuantityException;
 import util.exceptions.ItemDoesNotExistException;
-import util.exceptions.NegativeQuantityException;
 
 import java.util.ArrayList;
 
