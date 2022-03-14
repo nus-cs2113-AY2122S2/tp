@@ -24,7 +24,7 @@ public class ParserTest {
     }
 
     @Test
-    public void prepareDeleteCommand_InvalidIndex_throwException() throws DuplicateEventException {
+    public void prepareDeleteCommand_InvalidIndex_throwException() {
         String inputString = "delete hello";
         Parser parser = new Parser(inputString);
         parser.parseCommand();
