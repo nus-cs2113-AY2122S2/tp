@@ -2,10 +2,10 @@ package seedu.sherpass.util;
 
 import seedu.sherpass.command.StudyCommand;
 
-import static seedu.sherpass.constant.Timer.TIME_INTERVAL;
-import static seedu.sherpass.constant.Timer.NO_TIME_LEFT;
-import static seedu.sherpass.constant.Timer.ONE_MINUTE;
-import static seedu.sherpass.constant.Timer.ONE_HOUR;
+import static seedu.sherpass.constant.TimerConstant.TIME_INTERVAL;
+import static seedu.sherpass.constant.TimerConstant.NO_TIME_LEFT;
+import static seedu.sherpass.constant.TimerConstant.ONE_MINUTE;
+import static seedu.sherpass.constant.TimerConstant.ONE_HOUR;
 
 public class Timer extends Thread {
 
@@ -30,28 +30,44 @@ public class Timer extends Thread {
         printTimerStart();
         while (hasTimeLeft) {
             printTimeLeft();
-            try {
-                Thread.sleep(1000);
-                timeLeft -= 1;
-                if (timeLeft <= NO_TIME_LEFT) {
-                    hasTimeLeft = false;
-                }
-                if (timerPaused) {
-                    synchronized (this) {
-                        while (timerPaused) {
-                            wait();
-                        }
-                    }
-                }
-            } catch (InterruptedException e) {
-                return;
-            }
+            updateTimer();
         }
-        if (!hasTimeLeft && !forcedStop) {
+        if (timerRanOutOfTime()) {
             StudyCommand.isTimerRunning = false;
             ui.showToUser("Time is up! Would you like to start another timer?");
         }
         this.interrupt();
+    }
+
+    private void updateTimer() {
+        try {
+            Thread.sleep(1000);
+            timeLeft -= 1;
+            if (timeLeft <= NO_TIME_LEFT) {
+                hasTimeLeft = false;
+            }
+            if (timerPaused) {
+                waitForTimerToResume();
+            }
+        } catch (InterruptedException e) {
+            return;
+        }
+    }
+
+    private void waitForTimerToResume() {
+        try {
+            synchronized (this) {
+                while (timerPaused) {
+                    wait();
+                }
+            }
+        } catch (InterruptedException e) {
+            return;
+        }
+    }
+
+    private boolean timerRanOutOfTime() {
+        return (!hasTimeLeft && !forcedStop);
     }
 
     public void printTimeLeft() {
@@ -97,7 +113,7 @@ public class Timer extends Thread {
     }
 
     public boolean isTimerPaused() {
-        return timerPaused; 
+        return timerPaused;
     }
 
     public void resumeTimer() {
