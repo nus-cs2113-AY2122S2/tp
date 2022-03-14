@@ -21,11 +21,15 @@ public class ActivityCreateCommand extends Command {
 
     public static final String COMMAND_TEXT = "activity /create";
 
-    private static final String COMMAND_FORMAT = "Syntax:\n"
-            + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /c <OVERALLCOST> "
-            + "[<OPTIONAL ARGS>]\n"
-            + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /cl <COST1 COST2…> "
-            + "[<OPTIONAL ARGS>]";
+    private static final String COMMAND_FORMAT = "Syntax:\n";
+
+    public static final String COMMAND_FORMAT_FIRST =
+            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER_NAME] /i [NAME1 NAME2…]"
+                    + "/c <TOTAL_COST> [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
+
+    public static final String COMMAND_FORMAT_SECOND =
+            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER_NAME] /i [NAME1 NAME2…]"
+                    + "/cl [COST1 COST2…] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
     private static final String COMMAND_SUCCESS = "The activity was created successfully with activity id of: ";
 
@@ -93,13 +97,13 @@ public class ActivityCreateCommand extends Command {
         boolean hasMissingCostAndMissingCostList = isMissingCostList && isMissingCost;
         if (hasMissingCostAndMissingCostList) {
             return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
-                    + "\n" + COMMAND_FORMAT);
+                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n" + COMMAND_FORMAT_SECOND);
         }
 
         boolean hasBothCostAndCostList = !isMissingCostList && !isMissingCost;
         if (hasBothCostAndCostList) {
             return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
-                    + "\n" + COMMAND_FORMAT);
+                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n" + COMMAND_FORMAT_SECOND);
         }
 
         try {
@@ -115,12 +119,13 @@ public class ActivityCreateCommand extends Command {
             }
             if (hasDifferentLength) {
                 return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
-                        + "\n" + COMMAND_FORMAT);
+                        + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n" + COMMAND_FORMAT_SECOND);
             }
             return new ActivityCreateCommand(sessionId, activityName, totalCost, payer, involvedList, costList, gst,
                     serviceCharge);
         } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT);
+            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n"
+                    + COMMAND_FORMAT_SECOND);
         }
     }
 
