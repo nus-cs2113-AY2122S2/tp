@@ -11,10 +11,12 @@ public class OrderController extends Controller {
         "Get total value of all orders in the list", "Print receipt"
     };
     private final OrderManager orderManager;
+    private final Scanner scanner;
 
-    public OrderController(Scanner scanner) {
-        super(CHOICES, scanner);
+    public OrderController() {
+        super(CHOICES);
         orderManager = new OrderManager();
+        scanner = new Scanner(System.in);
     }
 
     @Override
