@@ -50,7 +50,7 @@ class WorkoutListTest {
                         + "1. push up (11 reps)\n"
                         + "2. sit up (15 reps)\n"
                         + "3. lunge (10 reps)\n"
-                        + "Showed all items in list\n";
+                        + "Showed all workouts in list\n";
         expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
         ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(consoleOutput);

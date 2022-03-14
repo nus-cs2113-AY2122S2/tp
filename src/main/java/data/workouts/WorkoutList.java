@@ -86,7 +86,7 @@ public class WorkoutList {
 
         if (totalPrints > 0) {
             continuousPrinting(index, totalPrints);
-            System.out.println("Showed all items in list");
+            System.out.println("Showed all workouts in list");
             return;
         } else {
             assert (workoutsList.size() == 0);
