@@ -58,12 +58,14 @@ public class WorkoutList {
      * prompt the users if they want to view more workouts.
      */
     public void listWorkout() {
+        logger.entering(getClass().getName(), "listWorkout");
         int index = 0;
         int totalPrints = workoutsList.size();
         String input = "";
 
         while (totalPrints > MAX_DISPLAY) {
             index = continuousPrinting(index, 10);
+            assert (index <= workoutsList.size());
             totalPrints -= 10;
             while (!isInputYesOrNo(input)) {
                 System.out.println("Do you want to view more workouts? [yes/no]");
@@ -77,12 +79,14 @@ public class WorkoutList {
         }
 
         if (totalPrints > 0) {
-            index = continuousPrinting(index, totalPrints);
+            continuousPrinting(index, totalPrints);
             System.out.println("Showed all items in list");
             return;
         } else {
+            assert (workoutsList.size() == 0);
             System.out.println("The workout list is empty");
         }
+        logger.exiting(getClass().getName(), "listWorkout");
     }
 
     /**
@@ -91,6 +95,7 @@ public class WorkoutList {
     public int continuousPrinting(int index, int noOfPrints) {
         System.out.println("Showing workouts " + (index + 1) + "-" + (index + noOfPrints)
                 + " of " + workoutsList.size() + ":");
+        assert (noOfPrints <= workoutsList.size());
         for (int i = 0; i < noOfPrints; i++) {
             System.out.println(index + 1 + ". " + workoutsList.get(index));
             index += 1;
