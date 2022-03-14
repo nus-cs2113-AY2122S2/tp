@@ -15,6 +15,7 @@ import seedu.duke.util.StringConstants;
  * Represents a Parser that parse a {@code Command}.
  */
 public abstract class Parser {
+
     protected static final String EXIT_COMMAND_WORD = StringConstants.EXIT_COMMAND_WORD;
     protected static final String ADD_COMMAND_WORD = StringConstants.ADD_COMMAND_WORD;
     protected static final String DELETE_COMMAND_WORD = StringConstants.DELETE_COMMAND_WORD;
@@ -51,7 +52,7 @@ public abstract class Parser {
             try {
                 parsedCommand.put(groupName.toString(), matcher.group(groupName.toString()).trim());
             } catch (Exception e) {
-                parsedCommand.put(groupName.toString(), NULL_FIELD);
+                parsedCommand.put(groupName.toString(), null);
             }
         }
         return parsedCommand;
