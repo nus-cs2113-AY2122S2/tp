@@ -25,10 +25,10 @@ Creates a new workout.
 
 Format: `workout /new <exercise name> /reps <number of repetitions>`
 
-| Parameters | Description                                                                                                                                                      |
-| --- |------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<exercise name>` | The name of the exercise. <ul><li>Exercise name must be from the pre-defined list of exercises</li><li>Type `exercise /list` for the list of exercises</li></ul> |
-| `<number of repetitions>` | The number of repetitions that should be carried out for `<exercise name>`.                                                                                      |
+| Parameters | Description                                                                                                                                                       |
+| --- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `<exercise name>` | The name of the exercise. <ul><li>Exercise name must be from the pre-defined list of exercises.</li><li>Type `exercise /list` for the list of exercises</li></ul> |
+| `<number of repetitions>` | The number of repetitions that should be carried out for `<exercise name>`.                                                                                       |
 
 **Example**
 ```
@@ -48,7 +48,7 @@ A new workout of carrying out Russian twists 50 times will be created and added 
 ---
 
 ## WerkIt!'s Local Storage Information
-When you start WerkIt! for the first time, the following directory and folders are created:
+When you start WerkIt! for the first time, the following directory and files are created:
 
 ```
 werkItResources/        // Primary resource directory for WerkIt!
@@ -58,7 +58,7 @@ werkItResources/        // Primary resource directory for WerkIt!
 
 Do note that the directory (and by extension, the files) will be created in your terminal's
 **current working directory**. Thus, it is highly recommended for you to create a new directory
-with the WerkIt! JAR file inside it, and running the application from the directory.
+with the WerkIt! JAR file inside it, and run the application from the directory.
 
 When you launch WerkIt! in subsequent sessions, please ensure that you run it from the same directory
 that you did when starting WerkIt! for the first time.
