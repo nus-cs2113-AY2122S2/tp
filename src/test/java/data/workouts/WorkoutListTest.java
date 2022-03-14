@@ -87,7 +87,6 @@ class WorkoutListTest {
         wl.createAndAddWorkout("lunge /reps 10");
 
         int workoutNumberToDeleteInList = 5;
-
         assertThrows(WorkoutOutOfRangeException.class,
             () -> wl.deleteWorkout(Integer.toString(workoutNumberToDeleteInList)));
 
@@ -95,15 +94,13 @@ class WorkoutListTest {
 
     @Test
     void deleteWorkout_invalidParseArgumentInput_expectNumberFormatException() throws InvalidWorkoutException,
-            InvalidExerciseException,
-            ArrayIndexOutOfBoundsException {
+            InvalidExerciseException, ArrayIndexOutOfBoundsException {
 
         wl.createAndAddWorkout("push up /reps 11");
         wl.createAndAddWorkout("sit up /reps 15");
         wl.createAndAddWorkout("lunge /reps 10");
 
         String invalidArgumentSupplied = "t5";
-
         assertThrows(NumberFormatException.class,
             () -> wl.deleteWorkout(invalidArgumentSupplied));
 
