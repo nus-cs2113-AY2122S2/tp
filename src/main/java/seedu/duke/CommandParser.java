@@ -16,21 +16,21 @@ public class CommandParser {
         } else if (commandString.startsWith(ADD_ITEM_COMMAND)) {
             String commandStringWithoutCommand = commandString.replace(ADD_ITEM_COMMAND, "");
             userCommand = new AddItemCommand(commandStringWithoutCommand);
-        } else if(commandString.startsWith(CHECK_IN)){
+        } else if (commandString.startsWith(CHECK_IN)) {
             String commandStringWithoutCommand = commandString.replace(CHECK_IN, "");
             userCommand = new CheckInCommand(commandStringWithoutCommand);
-        } else if(commandString.startsWith(CHECK_OUT)){
+        } else if (commandString.startsWith(CHECK_OUT)) {
             String commandStringWithoutCommand = commandString.replace(CHECK_OUT, "");
             userCommand = new CheckOutCommand(commandStringWithoutCommand);
-        } else if(commandString.startsWith(CHECK_ROOM)){
+        } else if (commandString.startsWith(CHECK_ROOM)) {
             String commandStringWithoutCommand = commandString.replace(CHECK_ROOM, "");
             userCommand = new CheckRoomCommand(commandStringWithoutCommand);
-        }else if(commandString.startsWith(CHECK_ALL_ROOM)){
+        } else if (commandString.startsWith(CHECK_ALL_ROOM)) {
             userCommand = new CheckAllRoomCommand();
-        }else if(commandString.startsWith(CHECK_ROOM_BY_LEVEL)){
+        } else if (commandString.startsWith(CHECK_ROOM_BY_LEVEL)) {
             String commandStringWithoutCommand = commandString.replace(CHECK_ROOM_BY_LEVEL, "");
             userCommand = new CheckRoomByLevelCommand(commandStringWithoutCommand);
-        }else {
+        } else {
             throw new WrongCommandException("Invalid Command");
         }
         return userCommand;
