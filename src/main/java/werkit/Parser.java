@@ -10,7 +10,6 @@ import data.exercises.ExerciseList;
 import data.workouts.WorkoutList;
 import storage.FileManager;
 
-import java.io.IOException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
