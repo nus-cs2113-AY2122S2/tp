@@ -5,7 +5,8 @@ import java.util.ArrayList;
 
 public class RoomList {
     ArrayList<Room> roomList = new ArrayList<>();
-    public RoomList(){  // dummy data for initialization
+
+    public RoomList() {  // dummy data for initialization
         Room r1 = new Room(101,1,RoomType.Single);
         roomList.add(r1);
         r1 = new Room(102,1,RoomType.Single);
@@ -28,11 +29,11 @@ public class RoomList {
         roomList.add(r1);
         r1 = new Room(401,4,RoomType.Twin);
         roomList.add(r1);
-        r1 = new Room(402 ,4,RoomType.Twin);
+        r1 = new Room(402,4,RoomType.Twin);
         roomList.add(r1);
     }
 
-    public ArrayList<Room> getRoomList(){
+    public ArrayList<Room> getRoomList() {
         return roomList;
     }
 }
