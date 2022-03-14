@@ -1,6 +1,6 @@
 package seedu.duke.assets;
 
-public class Person {
+public abstract class Person {
     String nric;
     String fullName;
     int age;

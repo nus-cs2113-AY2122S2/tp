@@ -1,6 +1,12 @@
 -------------------------
 Welcome! This is the Hospital Management System.
 Please type in your input:
+Medicine has been added
+Wrong Medicine Format
+Wrong Medicine Format
+Wrong Medicine Format
+Wrong Medicine Format
+Wrong Medicine Format
 -------------------------
 Goodbye! Exiting the programme.
 Terminated

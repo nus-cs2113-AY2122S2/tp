@@ -1,5 +1,6 @@
 package seedu.duke.helper;
 
+import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.Patient;
 import seedu.duke.assets.PatientList;
 
@@ -7,7 +8,15 @@ public class Command {
     private UI ui = new UI();
     //contains all the commands required for patient, doctor and medicine
 
+    private boolean nullChecker(String string) {
+        return string != null;
+    }
+
+
     public void viewPatient(PatientList patientList, String parameters) {
+        if (!nullChecker(parameters)) {
+            return;
+        }
         if (Parser.parseViewPatient(parameters) == null) {
             patientList.viewPatient();
         }
@@ -15,6 +24,9 @@ public class Command {
     }
 
     public void addPatient(PatientList patientList, String parameters) {
+        if (!nullChecker(parameters)) {
+            return;
+        }
         String[] parametersArray = Parser.parseAddPatient(parameters);
         if (parametersArray == null) {
             ui.printAddPatientWrongFormatMessage();
@@ -34,5 +46,18 @@ public class Command {
         } else {
             System.out.println("Oops! Please input a valid index number!");
         }
+    }
+
+    public void addMedicine(MedicineList medicineList, String parameters) {
+        if (!nullChecker(parameters)) {
+            return;
+        }
+        String[] parameterArray = Parser.parseAddMedicine(parameters);
+        if (parameterArray == null) {
+            System.out.println("Wrong Medicine Format");
+            return;
+        }
+        medicineList.add(parameterArray);
+        System.out.println("Medicine has been added");;
     }
 }

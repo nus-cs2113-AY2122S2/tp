@@ -17,6 +17,10 @@ public class UI {
     }
 
     public String readParameters() {
+        String[] userInputArray = parser.commandParser(userInput);
+        if (userInputArray.length == 1) {
+            return null;
+        }
         return parser.commandParser(userInput)[1].trim();
     }
 

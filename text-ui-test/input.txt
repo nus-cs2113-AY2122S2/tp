@@ -1,1 +1,7 @@
-bye /info bye
+add medicine /info Paracetamol,500,2023-12-12,Headaches,10
+add medicine /info Paracetam2l,500,2023-12-12,Headaches,10
+add medicine /info Paracetamol,0,2023-12-12,Headaches,10
+add medicine /info Paracetamol,500,2020-12-12,Headaches,10
+add medicine /info Paracetamol,500,2023-12-12,Headaches,0
+add medicine /info Paracetamol,500,12-01-2023,Headaches,10
+bye
