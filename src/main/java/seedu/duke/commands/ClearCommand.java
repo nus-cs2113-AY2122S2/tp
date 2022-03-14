@@ -16,6 +16,5 @@ public class ClearCommand extends Command {
 
     public static void printClearConfirmation() {
         System.out.println("Your whole timetable has been cleared");
-
     }
 }
