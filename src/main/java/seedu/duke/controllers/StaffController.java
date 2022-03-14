@@ -1,6 +1,8 @@
 package seedu.duke.controllers;
 
+import jdk.dynalink.Operation;
 import seedu.duke.entities.Dish;
+import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.manager.StaffManager;
 import seedu.duke.entities.Staff;
 
@@ -15,57 +17,53 @@ public class StaffController extends Controller {
     /**
      * Creates StaffController which controls StaffManager.
      *
-     * @param scanner Scanner.
      * @param staffManager StaffManager that the controller controls.
      */
-    public StaffController(Scanner scanner, StaffManager staffManager) {
-        super(CHOICES, scanner);
+    public StaffController(StaffManager staffManager) {
+        super(CHOICES);
         this.staffManager = staffManager;
     }
 
     @Override
-    protected boolean optionSwitcher(int choice) throws IllegalArgumentException {
-        switch (choice) {
-        case 1:
-            Staff staff = findStaff();
-            System.out.println(staff);
-            break;
-        case 2:
-            addStaff();
-            break;
-        case 0:
-            System.out.println("Exiting Staff Menu...");
-            return true;
-        default:
-            System.out.println("Unknown choice!");
-            break;
+    protected boolean optionSwitcher(int choice) throws OperationTerminationException {
+        try {
+            switch (choice) {
+            case 1:
+                Staff staff = findStaff();
+                System.out.println(staff);
+                break;
+            case 2:
+                addStaff();
+                break;
+            case 0:
+                System.out.println("Exiting Staff Menu...");
+                return true;
+            default:
+                System.out.println("Unknown choice!");
+                break;
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
         System.out.println("Now in Staff Menu.");
         System.out.println(this);
         return false;
     }
 
-    public Staff findStaff() throws IllegalArgumentException {
+    public Staff findStaff() throws OperationTerminationException {
         System.out.println("Finding staff...");
-        System.out.print("ID of staff: ");
-        int staffId = scanner.nextInt();
-        scanner.nextLine();
+        int staffId = InputParser.getInteger("ID of staff: ");
         Staff targetStaff = staffManager.findByStaffId(staffId, true);
         return targetStaff;
     }
 
-    public void addStaff() throws IllegalArgumentException {
+    public void addStaff() throws OperationTerminationException{
         System.out.println("Adding new staff...");
-        System.out.print("ID of staff: ");
-        final int staffId = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Name of staff: ");
-        final String staffName = scanner.nextLine();
-        System.out.println("Position of staff: ");
-        final String position = scanner.nextLine();
+        final int staffId = InputParser.getInteger("ID of staff: ");
+        final String staffName = InputParser.getString("Name of staff: ");
+        final String position = InputParser.getString("Position of staff: ");
         System.out.println("Salary of staff: ");
-        final double salary = scanner.nextDouble();
-        scanner.nextLine();
+        final double salary = InputParser.getDouble("Salary of staff: ");
         staffManager.addStaff(staffId, staffName, position, salary);
     }
 
