@@ -20,12 +20,13 @@ public class CommandParser {
         } else if (commandString.startsWith(CHECK_OUT)) {
             String commandStringWithoutCommand = commandString.replace(CHECK_OUT, "");
             userCommand = new CheckOutCommand(commandStringWithoutCommand);
+        }  else if (commandString.startsWith(CHECK_BY_CATEGORY)) {
+            String commandStringWithoutCommand = commandString.replace(CHECK_BY_CATEGORY, "");
+            userCommand = new CheckRoomByCatCommand(commandStringWithoutCommand);
         } else {
             throw new WrongCommandException("Invalid Command");
         }
         return userCommand;
     }
 }
-//      } else if (commandString.startsWith(CHECK_BY_CATEGORY)) {
-//          String commandStringWithoutCommand = commandString.replace(CHECK_BY_CATEGORY, "");
-//          userCommand = new CheckRoomByCatCommand(commandStringWithoutCommand);
+
