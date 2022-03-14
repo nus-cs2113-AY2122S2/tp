@@ -161,7 +161,7 @@ public class WerkIt {
         } catch (UnknownFileException e) {
             System.out.println(e.getMessage());
         }
-        
+
         logger.log(Level.INFO, "Exercise file data loaded.");
     }
 
