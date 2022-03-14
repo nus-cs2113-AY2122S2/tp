@@ -1,5 +1,7 @@
 package seedu.sherpass.util;
 
+import seedu.sherpass.exception.InvalidTimeException;
+
 import static seedu.sherpass.util.Parser.parseStudyMode;
 import static seedu.sherpass.util.Parser.parseTimerInput;
 
@@ -41,16 +43,25 @@ public class TimerLogic {
      *
      * @param parsedInput Parsed input of the user
      */
-    public static void startTimer(String[] parsedInput) {
+    public static void startTimer(String[] parsedInput) throws InvalidTimeException {
         if (timer.getHasTimeLeft()) {
             ui.showToUser("You already have a timer running!");
         } else {
             int duration = parseTimerInput(parsedInput, ui);
-            if (duration >= 0) {
+            if (validDuration(duration)) {
                 timer.setDuration(duration);
                 timer.start();
+            } else {
+                throw new InvalidTimeException();
             }
         }
+    }
+
+    private static boolean validDuration(int duration) {
+        if (duration > 0) {
+            return true;
+        }
+        return false;
     }
 
     public static void pauseTimer() {

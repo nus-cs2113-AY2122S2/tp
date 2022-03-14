@@ -16,6 +16,7 @@ import seedu.sherpass.command.ExitCommand;
 import seedu.sherpass.command.ClearCommand;
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
+import seedu.sherpass.exception.InvalidTimeException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.task.Todo;
@@ -381,7 +382,12 @@ public class Parser {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
-            startTimer(parsedInput);
+            try {
+                startTimer(parsedInput);
+            } catch (InvalidTimeException e) {
+                ui.showToUser("Oops! Your timer input does not seem to be correct.\n"
+                        + "Please re-enter a valid duration.");
+            }
             break;
         case "pause":
             pauseTimer();
