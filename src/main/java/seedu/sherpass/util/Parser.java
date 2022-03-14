@@ -16,6 +16,7 @@ import seedu.sherpass.command.ExitCommand;
 import seedu.sherpass.command.ClearCommand;
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
+import seedu.sherpass.exception.InvalidTimeException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.task.Todo;
@@ -31,37 +32,44 @@ import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskNoTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskWithTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.withTimeFormat;
 
-import static seedu.sherpass.constant.Index.CUSTOM_TIMER_INDEX;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_INDEX;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ONE;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_THREE;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
+import static seedu.sherpass.constant.Index.SAVE_TASK_BY_DATE_INDEX;
+import static seedu.sherpass.constant.Index.SAVE_TASK_DO_DATE_INDEX;
+import static seedu.sherpass.constant.Index.SAVE_TASK_DESCRIPTION_INDEX;
+import static seedu.sherpass.constant.Index.SAVE_TASK_MARK_STATUS;
+import static seedu.sherpass.constant.Index.MARK_INDEX;
+import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
+import static seedu.sherpass.constant.Index.TASK_DATE_INDEX;
+import static seedu.sherpass.constant.Index.TASK_DESCRIPTION_INDEX;
+import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
 import static seedu.sherpass.constant.Index.FIND_BY_TASK_CONTENT_INDEX;
 import static seedu.sherpass.constant.Index.FIND_BY_TASK_DATE_INDEX;
 import static seedu.sherpass.constant.Index.FIND_BY_TASK_DESCRIPTION_NO_DATE_INDEX;
 import static seedu.sherpass.constant.Index.FIND_BY_TASK_DESCRIPTION_WITH_DATE_INDEX;
-import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
-import static seedu.sherpass.constant.Index.MARK_INDEX;
 import static seedu.sherpass.constant.Index.OPTIONS_INDEX;
-import static seedu.sherpass.constant.Index.SAVE_TASK_BY_DATE_INDEX;
-import static seedu.sherpass.constant.Index.SAVE_TASK_DESCRIPTION_INDEX;
-import static seedu.sherpass.constant.Index.SAVE_TASK_DO_DATE_INDEX;
-import static seedu.sherpass.constant.Index.SAVE_TASK_MARK_STATUS;
-import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
-import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
-import static seedu.sherpass.constant.Index.TASK_DATE_INDEX;
-import static seedu.sherpass.constant.Index.TASK_DESCRIPTION_INDEX;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ZERO;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ONE;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_THREE;
 import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
-import static seedu.sherpass.constant.Message.DATE_FORMAT_WITHOUT_TIME;
-import static seedu.sherpass.constant.Message.DATE_FORMAT_WITH_TIME;
-import static seedu.sherpass.constant.Message.ERROR_DEADLINE_MISSING_COMMAND_MESSAGE;
+import static seedu.sherpass.constant.Index.CUSTOM_TIMER_INDEX;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_INDEX;
+import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
+
+import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
+import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
+import static seedu.sherpass.constant.Message.ERROR_TODO_REPEATED_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_EVENT_MISSING_COMMAND_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_DEADLINE_MISSING_COMMAND_MESSAGE;
+import static seedu.sherpass.constant.Message.DATE_FORMAT_WITH_TIME;
+import static seedu.sherpass.constant.Message.DATE_FORMAT_WITHOUT_TIME;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_STUDY_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_TODO_REPEATED_INPUT_MESSAGE;
-import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
 
+import static seedu.sherpass.util.TimerLogic.pauseTimer;
+import static seedu.sherpass.util.TimerLogic.resumeTimer;
+import static seedu.sherpass.util.TimerLogic.startTimer;
+import static seedu.sherpass.util.TimerLogic.stopTimer;
 
 public class Parser {
     /**
@@ -315,8 +323,17 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the default timer modes.
+     *
+     * @param defaultTimerChoice Mode number
+     * @param ui UI
+     * @return Returns the duration of the timer mode selected in seconds
+     */
     private static int selectDefaultTimer(String defaultTimerChoice, Ui ui) {
         switch (defaultTimerChoice) {
+        case "0":
+            return DEFAULT_TIMER_ZERO;
         case "1":
             return DEFAULT_TIMER_ONE;
         case "2":
@@ -330,7 +347,14 @@ public class Parser {
         return -1;
     }
 
-    private static int parseTimerInput(String[] parsedInput, Ui ui) {
+    /**
+     * Parses input to the timer.
+     *
+     * @param parsedInput Parsed input
+     * @param ui UI
+     * @return Returns the duration of the timer, else returns -1 if invalid duration specified
+     */
+    public static int parseTimerInput(String[] parsedInput, Ui ui) {
         try {
             if (parsedInput[TIMER_FORMAT_INDEX].trim().contains("/custom")) {
                 String[] customTimerInput = parsedInput[TIMER_FORMAT_INDEX].split("/custom", 2);
@@ -347,26 +371,35 @@ public class Parser {
         return -1;
     }
 
-    public static void parseStudyMode(String rawUserInput, Ui ui) {
+    /**
+     * Parses commands for study mode.
+     *
+     * @param rawUserInput Raw user input
+     * @param ui UI
+     * @param timer Timer object
+     */
+    public static void parseStudyMode(String rawUserInput, Ui ui, Timer timer) {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
-            int duration = parseTimerInput(parsedInput, ui);
-            if (duration >= 0) {
-                Timer.start(duration, ui);
+            try {
+                startTimer(parsedInput);
+            } catch (InvalidTimeException e) {
+                ui.showToUser("Oops! Your timer input does not seem to be correct.\n"
+                        + "Please re-enter a valid duration.");
             }
             break;
         case "pause":
-            Timer.pause(ui);
+            pauseTimer();
             break;
         case "resume":
-            Timer.resume(ui);
+            resumeTimer();
             break;
         case "stop":
-            Timer.stop(ui);
+            stopTimer();
             break;
         default:
-            ui.showToUser(ERROR_INVALID_INPUT_MESSAGE);
+            ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);
         }
     }
 }

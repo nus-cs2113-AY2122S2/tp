@@ -47,6 +47,7 @@ public class Main {
         while (!isExit) {
             String fullCommand = ui.readCommand();
             ui.showLine();
+
             Command c = Parser.parseCommand(fullCommand, taskList);
             if (c != null) {
                 c.execute(taskList, ui, storage);
