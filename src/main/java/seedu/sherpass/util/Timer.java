@@ -80,6 +80,8 @@ public class Timer extends Thread {
     }
 
     /**
+     * Returns whether timer ran out of time
+     * 
      * @return Boolean of whether timer ran out of time
      */
     private boolean timerRanOutOfTime() {
