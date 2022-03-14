@@ -4,9 +4,9 @@ import seedu.duke.Parser;
 import seedu.duke.Timetable;
 import java.util.Scanner;
 
-public abstract class Command {
+import static seedu.duke.commands.ExitCommand.EXIT_COMMAND;
 
-    public static final String EXIT_COMMAND = "exit";
+public abstract class Command {
 
     public abstract String execute(Timetable timetable);
 
