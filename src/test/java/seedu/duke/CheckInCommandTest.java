@@ -2,9 +2,9 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class CheckInCommandTest {
     // format
@@ -36,6 +36,6 @@ class CheckInCommandTest {
         CheckInCommand checkInCommand = new CheckInCommand(inputCommand);
         Room expectedRoom = null;
         assertThrows(InvalidRoomNumberException.class,
-                () -> checkInCommand.execute(inputRoomList));
+            () -> checkInCommand.execute(inputRoomList));
     }
 }
