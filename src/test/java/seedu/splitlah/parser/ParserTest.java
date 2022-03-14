@@ -148,4 +148,15 @@ class ParserTest {
             assertEquals(errorMessage, exception.getMessage());
         }
     }
+    
+    @Test
+    void parseName_delimiterAndArgumentExists_argumentString() {
+        String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 /pl Alice Alice Bob";
+        try {
+            String output = Parser.parseName(argumentWithoutNameDelimiter);
+            assertEquals("Class outing", output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
 }
