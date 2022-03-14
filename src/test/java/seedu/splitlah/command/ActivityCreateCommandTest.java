@@ -38,4 +38,16 @@ class ActivityCreateCommandTest {
         assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
     }
 
+    @Test
+    public void run_costListAndInvolvedListDifferentLength_activityListSizeRemainsOne() throws InvalidDataException {
+        String firstUserInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /cl 10 10";
+        Command firstCommand = Parser.getCommand(firstUserInput);
+        firstCommand.run(manager);
+        assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
+        String secondUserInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob /cl 10 10 10";
+        Command secondCommand = Parser.getCommand(secondUserInput);
+        secondCommand.run(manager);
+        assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
+    }
+
 }
