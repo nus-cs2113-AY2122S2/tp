@@ -10,7 +10,7 @@ public class ExitCommand extends Command {
         System.out.println("see u again!");
     }
 
-    public void execute(RoomList roomList){
+    public void execute(RoomList roomList) {
         System.out.println("see u again!");
     }
 }
