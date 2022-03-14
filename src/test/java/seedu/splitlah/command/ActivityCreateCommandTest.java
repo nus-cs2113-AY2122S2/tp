@@ -52,6 +52,11 @@ class ActivityCreateCommandTest {
         assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
     }
 
+    /**
+     * Checks if an activity is created when an activity has different length for involved list and cost list.
+     * @throws InvalidDataException If there are no sessions stored or
+     *                              if the session unique identifier specified was not found.
+     */
     @Test
     public void run_costListAndInvolvedListDifferentLength_activityListSizeRemainsOne() throws InvalidDataException {
         String firstUserInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /cl 10 10";
