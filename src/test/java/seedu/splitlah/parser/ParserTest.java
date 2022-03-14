@@ -3,9 +3,13 @@ package seedu.splitlah.parser;
 import org.junit.jupiter.api.Test;
 import seedu.splitlah.command.Command;
 import seedu.splitlah.command.InvalidCommand;
+import seedu.splitlah.exceptions.InvalidDataException;
+import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.ui.Message;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
 
@@ -115,7 +119,7 @@ class ParserTest {
      * when an input of four tokens is provided by the user.
      */
     @Test
-    void getRemainingArgument_fourInputTokens_thirdToken() {
+    void getRemainingArgument_fourInputTokens_thirdTokenOnwards() {
         String fourInputTokensString = "brownFox jumpsOver theLazy Dog";
         String output = Parser.getRemainingArgument(fourInputTokensString);
         assertEquals("theLazy Dog", output);
