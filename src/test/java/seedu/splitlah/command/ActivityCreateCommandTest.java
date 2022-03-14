@@ -32,7 +32,7 @@ class ActivityCreateCommandTest {
      *                              if the session unique identifier specified was not found.
      */
     @Test
-    public void run_hasMissingCostAndCostList_invalidCommand() throws InvalidDataException {
+    public void prepare_hasMissingCostAndCostList_invalidCommand() throws InvalidDataException {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie";
         Command command = Parser.getCommand(userInput);
         assertEquals(InvalidCommand.class, command.getClass());
@@ -44,7 +44,7 @@ class ActivityCreateCommandTest {
      *                              if the session unique identifier specified was not found.
      */
     @Test
-    public void run_hasBothCostAndCostList_invalidCommand() throws InvalidDataException {
+    public void prepare_hasBothCostAndCostList_invalidCommand() throws InvalidDataException {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /c 30 /cl 10 10 10";
         Command command = Parser.getCommand(userInput);
         assertEquals(InvalidCommand.class, command.getClass());
@@ -56,7 +56,7 @@ class ActivityCreateCommandTest {
      *                              if the session unique identifier specified was not found.
      */
     @Test
-    public void run_costListAndInvolvedListDifferentLength_invalidCommand() throws InvalidDataException {
+    public void prepare_costListAndInvolvedListDifferentLength_invalidCommand() throws InvalidDataException {
         String firstUserInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /cl 10 10";
         Command firstCommand = Parser.getCommand(firstUserInput);
         assertEquals(InvalidCommand.class, firstCommand.getClass());
@@ -76,6 +76,32 @@ class ActivityCreateCommandTest {
         Command command = Parser.getCommand(userInput);
         command.run(manager);
         assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
+    }
+
+    /**
+     * Checks if activity is created with missing delimiters.
+     */
+    @Test
+    public void prepare_hasMissingDelimiter_InvalidCommand() {
+        // Case 1: Missing /sid delimiter
+        String argsMissingSessionIdDelimiter = "activity /create /n Dinner /p Alice /i Alice Bob Charlie /c 15";
+        Command sessionWithMissingSessionIdDelimiter = Parser.getCommand(argsMissingSessionIdDelimiter);
+        assertEquals(InvalidCommand.class, sessionWithMissingSessionIdDelimiter.getClass());
+
+        // Case 2: Missing /n delimiter
+        String argsMissingNameDelimiter = "activity /create /sid 1 /p Alice /i Alice Bob Charlie /c 15";
+        Command sessionWithMissingNameDelimiter = Parser.getCommand(argsMissingNameDelimiter);
+        assertEquals(InvalidCommand.class, sessionWithMissingNameDelimiter.getClass());
+
+        // Case 3: Missing /p delimiter
+        String argsMissingPayerListDelimiter = "activity /create /sid 1 /n Dinner /i Alice Bob Charlie /c 15";
+        Command sessionWithMissingPayerListDelimiter = Parser.getCommand(argsMissingPayerListDelimiter);
+        assertEquals(InvalidCommand.class, sessionWithMissingPayerListDelimiter.getClass());
+
+        // Case 4: Missing /i delimiter
+        String argsMissingInvolvedListDelimiter = "activity /create /sid 1 /n Dinner /p Alice /c 15";
+        Command activityWithMissingInvolvedListDelimiter = Parser.getCommand(argsMissingInvolvedListDelimiter);
+        assertEquals(InvalidCommand.class, activityWithMissingInvolvedListDelimiter.getClass());
     }
 
 }
