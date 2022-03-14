@@ -205,10 +205,8 @@ Example of usage:
 <br>
 
 ### Viewing an activity: `activity /view`
-> Allows user to view an existing activity in a particular session that is managed by SplitLah.
-> <br> 
-Activities are a way for the user to keep track of the activities and their respective costs throughout a session.
-> <br>
+> Allows user to view an existing activity in a particular session that is managed by SplitLah. <br>
+> Activities are a way for the user to keep track of the activities and their respective costs throughout a session. <br>
 > Sessions are a way for the user to manage their gatherings that happen across the day.
 
 Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
@@ -217,7 +215,7 @@ Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 * `[SESSION_ID]` refers to the unique identifier of the session.
     * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 * `[ACTIVITY_ID]` refers to the unique identifier of the activity. 
-    * The unique identifier for a session can be retrieved with [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
+    * The unique identifier for an activity can be retrieved with [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
 
 > **💡 Note(s):**
 >- The session with a unique identifier of `[SESSION_ID]` and the activity with a unique identifier of `[ACTIVITY_ID]` have to exist before the activity can be viewed.
