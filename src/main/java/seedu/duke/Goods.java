@@ -20,7 +20,7 @@ public class Goods {
         this.description = description;
     }
 
-    public int getId () {
+    public int getId() {
         return id;
     }
 
