@@ -32,11 +32,10 @@ class ActivityCreateCommandTest {
      *                              if the session unique identifier specified was not found.
      */
     @Test
-    public void run_hasMissingCostAndCostList_activityListSizeRemainsOne() throws InvalidDataException {
+    public void run_hasMissingCostAndCostList_invalidCommand() throws InvalidDataException {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie";
         Command command = Parser.getCommand(userInput);
-        command.run(manager);
-        assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
+        assertEquals(InvalidCommand.class, command.getClass());
     }
 
     /**
@@ -45,11 +44,10 @@ class ActivityCreateCommandTest {
      *                              if the session unique identifier specified was not found.
      */
     @Test
-    public void run_hasBothCostAndCostList_activityListSizeRemainsOne() throws InvalidDataException {
+    public void run_hasBothCostAndCostList_invalidCommand() throws InvalidDataException {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /c 30 /cl 10 10 10";
         Command command = Parser.getCommand(userInput);
-        command.run(manager);
-        assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
+        assertEquals(InvalidCommand.class, command.getClass());
     }
 
     /**
@@ -58,15 +56,13 @@ class ActivityCreateCommandTest {
      *                              if the session unique identifier specified was not found.
      */
     @Test
-    public void run_costListAndInvolvedListDifferentLength_activityListSizeRemainsOne() throws InvalidDataException {
+    public void run_costListAndInvolvedListDifferentLength_invalidCommand() throws InvalidDataException {
         String firstUserInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /cl 10 10";
         Command firstCommand = Parser.getCommand(firstUserInput);
-        firstCommand.run(manager);
-        assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
+        assertEquals(InvalidCommand.class, firstCommand.getClass());
         String secondUserInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob /cl 10 10 10";
         Command secondCommand = Parser.getCommand(secondUserInput);
-        secondCommand.run(manager);
-        assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
+        assertEquals(InvalidCommand.class, secondCommand.getClass());
     }
 
     /**
