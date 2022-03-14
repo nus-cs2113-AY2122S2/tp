@@ -243,9 +243,10 @@ public class WorkoutList {
     public boolean checkForExistingWorkout(String exerciseName, int repetitionCount) {
         for (Workout existingWorkout : getWorkoutsList()) {
             boolean hasSameExerciseName = existingWorkout.getExerciseName().equals(exerciseName);
-            boolean hasSameRepsCount = existingWorkout.getRepetitions() == repetitionCount;
+            boolean hasSameRepsCount = (existingWorkout.getRepetitions() == repetitionCount);
 
             if (hasSameExerciseName && hasSameRepsCount) {
+                logger.log(Level.INFO, "Existing workout found in the list.");
                 return true;
             }
         }
