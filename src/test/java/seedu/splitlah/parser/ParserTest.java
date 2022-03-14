@@ -170,4 +170,16 @@ class ParserTest {
             fail();
         }
     }
+    
+    @Test
+    void parsePersonList_missingDelimiter_exceptionThrown() {
+        String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 pl Alice Alice Bob";
+        try {
+            String[] output = Parser.parsePersonList(argumentWithoutNameDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.PERSON_LIST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
 }
