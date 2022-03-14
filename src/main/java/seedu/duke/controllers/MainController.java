@@ -1,5 +1,7 @@
 package seedu.duke.controllers;
 
+import seedu.duke.exceptions.OperationTerminationException;
+
 public class MainController extends Controller {
     /**
      * Creates the MainController.
@@ -9,7 +11,7 @@ public class MainController extends Controller {
     }
 
     @Override
-    protected boolean optionSwitcher(int choice) throws IllegalArgumentException {
+    protected boolean optionSwitcher(int choice) throws OperationTerminationException {
         switch (choice) {
         case 0:
             // Relinquish control. This will return to the programme main function.
