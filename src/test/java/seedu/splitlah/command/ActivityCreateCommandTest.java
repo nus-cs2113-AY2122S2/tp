@@ -26,6 +26,11 @@ class ActivityCreateCommandTest {
         createActivityOne.run(manager);
     }
 
+    /**
+     * Checks if an activity is created when an activity is missing both cost and cost list.
+     * @throws InvalidDataException If there are no sessions stored or
+     *                              if the session unique identifier specified was not found.
+     */
     @Test
     public void run_hasMissingCostAndCostList_activityListSizeRemainsOne() throws InvalidDataException {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie";
