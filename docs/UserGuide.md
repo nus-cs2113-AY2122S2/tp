@@ -13,6 +13,8 @@
         * [Deleting a session: `session /delete`](#deleting-a-session-session-delete)
         * [Listing all sessions: `session /list`](#listing-all-sessions-session-list)
         * [Creating an activity: `activity /create`](#creating-an-activity-activity-create)
+        * [Viewing an activity: `activity /view`](#viewing-an-activity-activity-view)
+        * [Listing all activities in a session: `activity /list`](#listing-all-activities-in-a-session-activity-list)
         * [Settling all transactions for a session: `session /summary`](#settling-all-transactions-for-a-session-session-summary)
     * [FAQ](#faq)
     * [Command Summary](#command-summary)
@@ -201,6 +203,37 @@ Example of usage:
     ![Activity delete command Screenshot]()
 <br>
 <br>
+
+### Viewing an activity: `activity /view`
+> Allows user to view an existing activity in a particular session that is managed by SplitLah.
+> <br> 
+Activities are a way for the user to keep track of the activities and their respective costs throughout a session.
+> <br>
+> Sessions are a way for the user to manage their gatherings that happen across the day.
+
+Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
+
+
+* `[SESSION_ID]` refers to the unique identifier of the session.
+    * The unique identifier for a session can be retrieved with `session /list` command.
+* `[ACTIVITY_ID]` refers to the unique identifier of the activity.
+    *  * The unique identifier for a session can be retrieved with `activity /list` command.
+
+> **💡 Note(s):**
+>- The session with a unique identifier of `[SESSION_ID]` and the activity with a unique identifier of `[ACTIVITY_ID]` have to exist before the activity can be viewed.
+
+
+Examples of usage:
+1. Views an activity with a unique identifier of 1 in a session with a session unique identifier of 1.
+    - `activity /view /sid 2 /aid 1` 
+<br>
+   ![Activity create command Screenshot](images/userguide/ActivityViewCommand.png)
+      <br>
+   
+<br>     
+<br>
+
+
 ### Settling all transactions for a session: `session /summary`
 > Prints out a summary of the session to tell you, for that session, who needs to pay how much to another person
 > in order for everyone to have no remaining debts and no more debt to collect from others.<br>
