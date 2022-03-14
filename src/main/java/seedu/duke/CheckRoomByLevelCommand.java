@@ -10,12 +10,23 @@ public class CheckRoomByLevelCommand extends Command {
 
 
     @Override
-    public void execute() throws WrongCommandException {
+    public void execute() {
 
     }
 
     @Override
-    public void execute(RoomList list) throws WrongCommandException {
+    public void execute(RoomList list) throws InvalidLevelException {
+        boolean isValidLevel = false;
+        for (Room room : list.getRoomList()) {
+            if (room.getLevel() == level) {
+                isValidLevel = true;
+                break;
+            }
+        }
+        if (!isValidLevel) {
+            throw new InvalidLevelException();
+        }
+
         System.out.println(TABLE_HEAD);
         for (Room room : list.getRoomList()) {
             if (room.getLevel() == level) {
