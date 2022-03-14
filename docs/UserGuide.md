@@ -225,14 +225,40 @@ Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 
 Examples of usage:
 1. Views an activity with a unique identifier of 1 in a session with a session unique identifier of 1.
-    - `activity /view /sid 2 /aid 1` 
+    - `activity /view /sid 1 /aid 1` 
 <br>
-   ![Activity create command Screenshot](images/userguide/ActivityViewCommand.png)
+   ![Activity view command Screenshot](images/userguide/ActivityViewCommand.png)
       <br>
    
 <br>     
 <br>
 
+### Listing all activities in a session: `activity /list`
+> Allows user to view all the existing activities in a particular session that is managed by SplitLah.
+> <br>
+Activities are a way for the user to keep track of the activities and their respective costs throughout a session.
+> <br>
+> Sessions are a way for the user to manage their gatherings that happen across the day.
+
+Format: `activity /list /sid [SESSION_ID]`
+
+
+* `[SESSION_ID]` refers to the unique identifier of the session.
+    * The unique identifier for a session can be retrieved with `session /list` command.
+
+> **💡 Note(s):**
+>- The session with a unique identifier of `[SESSION_ID]` have to exist before the activities can be listed.
+
+
+Examples of usage:
+1. Views an activity with a unique identifier of 1 in a session with a session unique identifier of 1.
+    - `activity /view /sid 1`
+      <br>
+      ![Activity list command Screenshot](images/userguide/ActivityListCommand.png)
+      <br>
+
+<br>     
+<br>
 
 ### Settling all transactions for a session: `session /summary`
 > Prints out a summary of the session to tell you, for that session, who needs to pay how much to another person
