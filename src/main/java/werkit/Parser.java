@@ -92,6 +92,7 @@ public class Parser {
         boolean hasIllegalCharacters = checkInputForIllegalCharacters(userInput);
         String className = this.getClass().getSimpleName();
         if (hasIllegalCharacters) {
+            logger.log(Level.WARNING, "Illegal character used by user.");
             throw new InvalidCommandException(className, InvalidCommandException.ILLEGAL_CHARACTER_USED_ERROR_MSG);
         }
 
@@ -108,6 +109,7 @@ public class Parser {
         case ExerciseCommand.BASE_KEYWORD:
             return createExerciseCommand(userInput);
         default:
+            logger.log(Level.WARNING, "Unknown command entered by user.");
             throw new InvalidCommandException(className, InvalidCommandException.INVALID_COMMAND_ERROR_MSG);
         }
     }
@@ -173,6 +175,7 @@ public class Parser {
             }
             break;
         default:
+            logger.log(Level.WARNING, "User has entered an invalid workout command action.");
             throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
         }
         return new WorkoutCommand(userInput, fileManager, workoutList, actionKeyword, arguments);
