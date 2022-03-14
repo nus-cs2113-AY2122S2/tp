@@ -182,4 +182,15 @@ class ParserTest {
             assertEquals(errorMessage, exception.getMessage());
         }
     }
+
+    void parsePersonList_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 /pl";
+        try {
+            String[] output = Parser.parsePersonList(argumentWithoutNameDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.PERSON_LIST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
 }
