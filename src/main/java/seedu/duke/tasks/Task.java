@@ -7,8 +7,10 @@ public class Task {
     public static final String ICON_COMPLETED = StringConstants.ICON_COMPLETED;
     public static final String TASK_STRING_NO_DESC_NO_TIME = "%s %s";
     public static final String TASK_STRING_WITH_DESC_NO_TIME = "%s %s (%s)";
-    public static final String TASK_STRING_NO_DESC_WITH_TIME = "%s %s (" + StringConstants.ESTIMATED_WORKING_TIME + "%s)";
-    public static final String TASK_STRING_WITH_DESC_WITH_TIME = "%s %s (%s) (" + StringConstants.ESTIMATED_WORKING_TIME + "%s)";
+    public static final String TASK_STRING_NO_DESC_WITH_TIME = "%s %s ("
+            + StringConstants.ESTIMATED_WORKING_TIME + "%s)";
+    public static final String TASK_STRING_WITH_DESC_WITH_TIME = "%s %s (%s) ("
+            + StringConstants.ESTIMATED_WORKING_TIME + "%s)";
 
     private boolean isTaskDone;
     private String taskName;
