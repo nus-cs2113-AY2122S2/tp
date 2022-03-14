@@ -23,5 +23,14 @@ class SessionDeleteCommandTest {
         createSessionTwo.run(manager);
     }
 
+    /**
+     * Checks if session is deleted with a missing delimiter.
+     */
+    @Test
+    public void prepare_hasMissingDelimiter_InvalidCommand() {
+        String argsMissingSidDelimiter = "session /delete";
+        Command sessionWithMissingSidDelimiter = Parser.getCommand(argsMissingSidDelimiter);
+        assertEquals(InvalidCommand.class, sessionWithMissingSidDelimiter.getClass());
+    }
 
 }
