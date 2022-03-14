@@ -18,7 +18,6 @@ public class Command {
     protected static final String EXIT = "bye";
     protected String userInput;
     protected String replyMsg;
-    //protected Parser parser = new Parser();
     protected UI ui = new UI();
     protected PersonList personList = new PersonList();
     protected Person newPerson;
@@ -81,7 +80,7 @@ public class Command {
      * Deletes expenditure of someone from the list.
      * @throws Exception if the user input is invalid.
      */
-    private void deleteSpend() throws Exception{
+    private void deleteSpend() throws Exception {
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), personList);
         newPerson = personList.getPerson(uid);
         index = Parser.getValidIncomeIndex(Parser.parseRecordIndex(userInput), newPerson);
@@ -92,7 +91,7 @@ public class Command {
      * Adds expenditure of someone from the list.
      * @throws Exception if the user input is invalid.
      */
-    private void addSpend() throws Exception{
+    private void addSpend() throws Exception {
         description = Parser.parseDescription(userInput);
         amount = Parser.getValidMoney(Parser.parseIncome(userInput));
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), personList);
@@ -104,7 +103,7 @@ public class Command {
      * Deletes income of someone from the list.
      * @throws Exception if the user input is invalid.
      */
-    private void deleteIncome() throws Exception{
+    private void deleteIncome() throws Exception {
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), personList) ;
         newPerson = personList.getPerson(uid);
         index = Parser.getValidIncomeIndex(Parser.parseRecordIndex(userInput), newPerson);
@@ -116,7 +115,7 @@ public class Command {
      * @throws Exception is the user input is invalid.
      */
 
-    private void addIncome() throws Exception{
+    private void addIncome() throws Exception {
         description = Parser.parseDescription(userInput);
         amount = Parser.getValidMoney(Parser.parseIncome(userInput));
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), personList);
@@ -128,7 +127,7 @@ public class Command {
      * Deletes a person from the list.
      * @throws Exception if the user input is invalid.
      */
-    private void deletePerson() throws Exception{
+    private void deletePerson() throws Exception {
         int uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), this.personList);
         personList.removePerson(uid);
     }
@@ -137,7 +136,7 @@ public class Command {
      * Adds a person from the list.
      * @throws Exception if the user input is invalid.
      */
-    private void addPerson() throws Exception{
+    private void addPerson() throws Exception {
         name  = Parser.parseName(userInput);
         personList.addPerson(name);
     }
