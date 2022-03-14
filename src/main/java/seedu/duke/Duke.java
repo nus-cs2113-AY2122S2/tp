@@ -10,7 +10,7 @@ import parser.Parser;
 public class Duke {
 
     /** Version info of the program. */
-    public static final String VERSION = "PersonBook - Version 1.0";
+    public static final String VERSION = "Spendvelope - Version 1.0";
 
     private TextUi ui;
     private RecordManager recordMgr = new RecordManager();
