@@ -171,6 +171,9 @@ class ParserTest {
         }
     }
     
+    /**
+     * Checks if an exception is properly thrown when the Person list delimiter is not provided by the user.
+     */
     @Test
     void parsePersonList_missingDelimiter_exceptionThrown() {
         String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 pl Alice Alice Bob";
@@ -183,6 +186,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Person list delimiter is provided but no arguments 
+     * following the Person list delimiter are provided by the user.
+     */
     @Test
     void parsePersonList_delimiterExistsWithoutArgument_exceptionThrown() {
         String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 /pl";
@@ -195,6 +202,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if a String array object containing names of persons is properly returned when the Person list delimiter
+     * and arguments following it are properly provided by the user.
+     */
     @Test
     void parsePersonList_delimiterAndArgumentExists_personList() {
         String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 /pl Alice Charles Bob";
