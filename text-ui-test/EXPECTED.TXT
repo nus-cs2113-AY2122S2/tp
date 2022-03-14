@@ -12,7 +12,16 @@ $$\   $$ |$$ |  $$ |$$ |$$ |  $$ |$$\ $$ |$$  __$$ |$$ |  $$ |
           \__|
 Welcome to Splitlah!
 ============================================================
-============================================================
+> Invalid command
+Please enter a valid command.
+> Invalid command
+Please include the following delimiter in your input: /n
+Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 …]
+> The session was created successfully with session id of: 1
+> There is another session with the same name, please try another name.
+> The session was created successfully with session id of: 2
+> There seems to be duplicates in the session you are trying to create, please try again.
+> ============================================================
  $$$$$$\            $$\ $$\   $$\     $$\           $$\
 $$  $$\           $$ |\|  $$ |    $$ |          $$ |
 $$ /  \__| $$$$$$\  $$ |$$\ $$$$$$\   $$ | $$$$$$\  $$$$$$$\
