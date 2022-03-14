@@ -11,6 +11,8 @@ import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represents a command that creates an Activity object from user input and stores it in the Session object.
@@ -131,6 +133,11 @@ public class ActivityCreateCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
+        boolean hasDuplicates = hasNameDuplicates();
+        if (hasDuplicates) {
+            manager.getUi().printlnMessage(Message.ERROR_ACTIVITYCREATE_DUPLICATE_NAME);
+            return;
+        }
         try {
             int activityId = manager.getProfile().getNewActivityId();
             updateCostAndCostList();
@@ -144,6 +151,19 @@ public class ActivityCreateCommand extends Command {
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
         }
+    }
+
+    private boolean hasNameDuplicates() {
+        Set<String> nameSet = new HashSet<>();
+        for (String name : involvedList) {
+            String nameToBeAdded = name.toLowerCase();
+            if (!nameSet.add(nameToBeAdded)) {
+                return true;
+            }
+        }
+        assert nameSet.size() == involvedList.length :
+                Message.ASSERT_ACTIVITYCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED;
+        return false;
     }
 
     /**
