@@ -1,14 +1,14 @@
 package seedu.sherpass.command;
 
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.util.Parser;
-import seedu.sherpass.util.Timer;
+
 import seedu.sherpass.util.Storage;
+import seedu.sherpass.util.TimerLogic;
 import seedu.sherpass.util.Ui;
+
 
 public class StudyCommand extends Command {
     public static final String COMMAND_WORD = "study";
-    public static boolean isTimerRunning = false;
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
@@ -21,22 +21,8 @@ public class StudyCommand extends Command {
                 + "For testing purposes, you can start a 30s timer with mode number 0.\n"
                 + "Otherwise, feel free to choose your own timer with \n'start /custom <timer_duration>'.");
         ui.showLine();
-        Timer timer = new Timer(ui);
-        String userInput = ui.readCommand();
-        while (!userInput.contains("leave")) {
-            ui.showLine();
-            Parser.parseStudyMode(userInput, ui, timer);
-            ui.showLine();
-            userInput = ui.readCommand();
-            if (userInput.contains("leave")) {
-                if (isTimerRunning) {
-                    timer.stopTimer();
-                }
-            } else if (userInput.contains("start") && !isTimerRunning) {
-                Timer newTimer = new Timer(ui);
-                timer = newTimer;
-            }
-        }
+        TimerLogic timerLogic = new TimerLogic(ui);
+        timerLogic.enterStudyMode();
         ui.showLine();
         ui.showToUser("Leaving study session...\n"
                 + "Welcome back to the main session! How can I help you?");

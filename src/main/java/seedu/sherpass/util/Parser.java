@@ -65,6 +65,11 @@ import static seedu.sherpass.constant.Message.ERROR_INVALID_STUDY_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
 
+import static seedu.sherpass.util.TimerLogic.pauseTimer;
+import static seedu.sherpass.util.TimerLogic.resumeTimer;
+import static seedu.sherpass.util.TimerLogic.startTimer;
+import static seedu.sherpass.util.TimerLogic.stopTimer;
+
 public class Parser {
     /**
      * Parses the saved data of the tasks in the save file.
@@ -334,7 +339,7 @@ public class Parser {
         return -1;
     }
 
-    private static int parseTimerInput(String[] parsedInput, Ui ui) {
+    public static int parseTimerInput(String[] parsedInput, Ui ui) {
         try {
             if (parsedInput[TIMER_FORMAT_INDEX].trim().contains("/custom")) {
                 String[] customTimerInput = parsedInput[TIMER_FORMAT_INDEX].split("/custom", 2);
@@ -355,34 +360,16 @@ public class Parser {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
-            if (timer.getHasTimeLeft()) {
-                ui.showToUser("You already have a timer running!");
-            } else {
-                int duration = parseTimerInput(parsedInput, ui);
-                if (duration >= 0) {
-                    timer.setDuration(duration);
-                    timer.start();
-                }
-            }
+            startTimer(parsedInput);
             break;
         case "pause":
-            if (timer.isTimerPaused()) {
-                ui.showToUser("The timer is already paused!");
-            } else if (!timer.getHasTimeLeft()) {
-                ui.showToUser("The timer has already finished!");
-            } else {
-                timer.pauseTimer();
-            }
+            pauseTimer();
             break;
         case "resume":
-            if (timer.isTimerPaused() && timer.getHasTimeLeft()) {
-                timer.resumeTimer();
-            } else {
-                ui.showToUser("The timer is still running!");
-            }
+            resumeTimer();
             break;
         case "stop":
-            timer.stopTimer();
+            stopTimer();
             break;
         default:
             ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);

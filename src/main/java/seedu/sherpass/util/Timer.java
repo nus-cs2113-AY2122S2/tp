@@ -1,6 +1,6 @@
 package seedu.sherpass.util;
 
-import seedu.sherpass.command.StudyCommand;
+import static seedu.sherpass.util.TimerLogic.isTimerRunning;
 
 import static seedu.sherpass.constant.TimerConstant.TIME_INTERVAL;
 import static seedu.sherpass.constant.TimerConstant.NO_TIME_LEFT;
@@ -26,14 +26,14 @@ public class Timer extends Thread {
 
     @Override
     public void run() {
-        StudyCommand.isTimerRunning = true;
+        isTimerRunning = true;
         printTimerStart();
         while (hasTimeLeft) {
             printTimeLeft();
             updateTimer();
         }
         if (timerRanOutOfTime()) {
-            StudyCommand.isTimerRunning = false;
+            isTimerRunning = false;
             ui.showToUser("Time is up! Would you like to start another timer?");
         }
         this.interrupt();
@@ -131,9 +131,9 @@ public class Timer extends Thread {
     }
 
     public void stopTimer() {
-        if (StudyCommand.isTimerRunning) {
+        if (isTimerRunning) {
             ui.showToUser("Alright, I've stopped the timer.");
-            StudyCommand.isTimerRunning = false;
+            isTimerRunning = false;
             forcedStop = true;
             timeLeft = NO_TIME_LEFT;
             hasTimeLeft = false;
@@ -142,4 +142,5 @@ public class Timer extends Thread {
             ui.showToUser("The timer has already stopped.");
         }
     }
+
 }
