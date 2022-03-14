@@ -7,11 +7,14 @@ import seedu.duke.commands.ClearCommand;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.HelpCommand;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static seedu.duke.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
 
 public class Parser {
     private final String command;
     private final String arguments;
+    public static Logger logger = Logger.getLogger(Parser.class.getName());
 
     private static final int NAME_INDEX = 0;
     private static final int TITLE_INDEX = 1;
@@ -65,6 +68,7 @@ public class Parser {
             return new DeleteCommand(index);
         } catch (NumberFormatException nfe) {
             System.out.println(ERROR_INVALID_INDEX_FORMAT);
+            logger.log(Level.INFO, "Invalid index to delete Error detected.");
             return new HelpCommand();
         }
     }
