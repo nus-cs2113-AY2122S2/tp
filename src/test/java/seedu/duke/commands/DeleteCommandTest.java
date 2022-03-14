@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Timetable;
 import seedu.duke.events.Lesson;
@@ -10,18 +11,18 @@ import static seedu.duke.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
 
 public class DeleteCommandTest {
 
-    public static Timetable populateTimetable() throws DuplicateEventException {
-        Timetable timetable = new Timetable();
+    Timetable timetable = new Timetable();
+
+    @BeforeEach
+    void setUp() throws DuplicateEventException {
         Lesson lesson1 = new Lesson("John","CS2113","Friday",1230,1330,"online");
         Lesson lesson2 = new Lesson("John","CS2113","Friday",1400,1600,"physical");
         timetable.add(lesson1);
         timetable.add(lesson2);
-        return timetable;
     }
 
     @Test
     public void deleteCommand_IndexOutOfBoundsSize_throwException() throws DuplicateEventException {
-        Timetable timetable = populateTimetable();
         //delete index that is not found in list
         DeleteCommand deleteIndexSize = new DeleteCommand(timetable.size());
         deleteIndexSize.execute(timetable);
