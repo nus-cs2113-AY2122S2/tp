@@ -27,8 +27,7 @@ class ParserTest {
     }
 
     @Test
-    public void parseUserInput_invalidBaseKeyword_expectInvalidCommandException()
-            throws InvalidCommandException {
+    public void parseUserInput_invalidBaseKeyword_expectInvalidCommandException() {
         Parser parser = new Parser(ui, exerciseList, workoutList, fileManager);
 
         String testInput = "hmmm /new russian twist /reps 1000";
