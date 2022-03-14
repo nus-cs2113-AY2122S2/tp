@@ -9,6 +9,11 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+/**
+ * This class represents an instance of a list of workouts entered by the user.
+ * It contains functionality to validate the user's inputs as well as allow the user to
+ * create, modify, and delete workouts.
+ */
 public class WorkoutList {
     public static final int MAX_DISPLAY = 10;
 
@@ -16,14 +21,38 @@ public class WorkoutList {
     private ArrayList<Workout> workoutsList = new ArrayList<>();
     private static Logger logger = Logger.getLogger(WorkoutList.class.getName());
 
+    /**
+     * Constructs an instance of the WorkoutList class.
+     *
+     * @param exerciseList An instance of the ExerciseList class.
+     */
     public WorkoutList(ExerciseList exerciseList) {
         this.exerciseList = exerciseList;
     }
 
+    /**
+     * Gets the list of workouts.
+     *
+     * @return An ArrayList of Workouts.
+     */
     public ArrayList<Workout> getWorkoutsList() {
         return this.workoutsList;
     }
 
+    /**
+     * Parses the given user argument to identify the details of the new workout to be added.
+     * Thereafter, the details will be checked for their validity. If all checks pass, a new
+     * Workout object is instantiated before adding it to the ArrayList of workouts.
+     *
+     * @param userArgument The user's details for the new workout, including exercise name
+     *                     and number of repetitions.
+     * @return A Workout object that represents the new workout.
+     * @throws ArrayIndexOutOfBoundsException If userArgument contains insufficient arguments and parsing fails.
+     * @throws NumberFormatException          If the number of repetitions specified in userArgument is an
+     *                                        invalid number.
+     * @throws InvalidExerciseException       If the exercise name specified in userArgument is invalid.
+     * @throws InvalidWorkoutException        If the details specified in userArgument is invalid.
+     */
     public Workout createAndAddWorkout(String userArgument) throws ArrayIndexOutOfBoundsException,
             NumberFormatException, InvalidExerciseException, InvalidWorkoutException {
         String userExerciseInput = userArgument.split(WorkoutCommand.CREATE_ACTION_REPS_KEYWORD)[0].trim();
@@ -55,6 +84,13 @@ public class WorkoutList {
         return newWorkout;
     }
 
+    /**
+     * Checks if the number of repetitions specified is a value that is at least 1.
+     * Workouts must be an exercise with a minimum repetition value of 1.
+     *
+     * @param userRepsInput The repetition value to check.
+     * @return True if the repetition value is at least 1. Otherwise, returns false.
+     */
     public boolean checkIfRepsValueIsValid(int userRepsInput) {
         return userRepsInput >= 1;
     }
@@ -182,6 +218,16 @@ public class WorkoutList {
         return updateWorkout;
     }
 
+    /**
+     * Checks if the provided workout details already exists in the ArrayList of workouts. A workout
+     * is considered to already exist in the list if both the exercise name and repetition count matches
+     * an existing workout in the ArrayList.
+     *
+     * @param exerciseName    The name of the exercise to check.
+     * @param repetitionCount The number of repetitions of the exercise to check.
+     * @return True if an existing workout with the same exercise name and repetition count exists in the list.
+     * Otherwise, returns false.
+     */
     public boolean checkForExistingWorkout(String exerciseName, int repetitionCount) {
         for (Workout existingWorkout : getWorkoutsList()) {
             boolean hasSameExerciseName = existingWorkout.getExerciseName().equals(exerciseName);
