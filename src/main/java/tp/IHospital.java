@@ -19,7 +19,7 @@ public class IHospital {
         while (!fullCommand.equals("bye")) {
             try {
                 Command c = parser.parse(fullCommand);
-                System.out.println(c.execute(doctors, patients, appointments, ui, storage));
+                // System.out.println(c.execute(doctors, patients, appointments, ui, storage));
                 fullCommand = Parser.getCommand();
             } catch (IHospitalException e) {
                 System.out.println(e.getMessage());
