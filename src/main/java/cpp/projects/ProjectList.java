@@ -128,4 +128,24 @@ public class ProjectList {
         }
         System.out.println(Constants.SEPARATOR);
     }
+
+    /**
+     * Displays all details of a specified Project.
+     *
+     * @param title Name of the project
+     */
+    public void view(String title) {
+        System.out.println(Constants.SEPARATOR);
+        boolean isFound = false;
+        for (Project project : projectList) {
+            if (project.getTitle().equals(title)) {
+                project.print();
+                isFound = true;
+            }
+        }
+        if (!isFound) {
+            System.out.println("Sorry! There was no project with that name.");
+        }
+        System.out.println(Constants.SEPARATOR);
+    }
 }
