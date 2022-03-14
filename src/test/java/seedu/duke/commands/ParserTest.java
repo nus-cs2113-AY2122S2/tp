@@ -4,8 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
 import seedu.duke.Timetable;
-import seedu.duke.events.Lesson;
-import seedu.duke.exceptions.DuplicateEventException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -25,9 +23,11 @@ public class ParserTest {
 
     @Test
     public void prepareDeleteCommand_InvalidIndex_throwException() {
+        Timetable timetable = new Timetable();
         String inputString = "delete hello";
         Parser parser = new Parser(inputString);
         parser.parseCommand();
-        assertEquals(ERROR_INVALID_INDEX_FORMAT + "\r\n",outputStreamCaptor.toString());
+        //assertEquals(ERROR_INVALID_INDEX_FORMAT + "\n",outputStreamCaptor.toString());
+        assertEquals(new HelpCommand().execute(timetable),parser.prepareDelete().execute(timetable));
     }
 }
