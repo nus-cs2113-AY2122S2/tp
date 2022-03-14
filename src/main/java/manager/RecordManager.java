@@ -1,6 +1,9 @@
-package Manager;
+package manager;
+
+import data.record.Record;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Manager class that is able to store, edit, and access a list of records.
@@ -47,5 +50,9 @@ public class RecordManager {
         for (Record record : records) {
             System.out.println(++recordNum + record.toString());
         }
+    }
+
+    public List<Record> getAllRecords() {
+        return records;
     }
 }
