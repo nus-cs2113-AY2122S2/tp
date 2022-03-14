@@ -1,6 +1,10 @@
 package werkit;
 
-import commands.*;
+import commands.ExerciseCommand;
+import commands.ExitCommand;
+import commands.HelpCommand;
+import commands.WorkoutCommand;
+import commands.InvalidCommandException;
 import data.exercises.ExerciseList;
 import data.workouts.WorkoutList;
 import org.junit.jupiter.api.BeforeEach;
