@@ -3,6 +3,7 @@ package seedu.splitlah.command;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,9 +19,9 @@ class SessionCreateCommandTest {
     void setUp() {
         String sessionOneArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob";
         String sessionTwoArgs = "session /create /n Family gathering /d 20-02-2022  /pl Eves Mallory";
-        Command createSessionOne = SessionCreateCommand.prepare(sessionOneArgs);
+        Command createSessionOne = Parser.getCommand(sessionOneArgs);
         createSessionOne.run(manager);
-        Command createSessionTwo = SessionCreateCommand.prepare(sessionTwoArgs);
+        Command createSessionTwo = Parser.getCommand(sessionTwoArgs);
         createSessionTwo.run(manager);
     }
 
@@ -30,7 +31,7 @@ class SessionCreateCommandTest {
     @Test
     public void run_hasOneNameDuplicate_sessionListSizeRemainsTwo() {
         String userInput = "session /create /n Class outing /d 23-02-2022 /pl Alice Alice Bob";
-        Command command = SessionCreateCommand.prepare(userInput);
+        Command command = Parser.getCommand(userInput);
         command.run(manager);
         assertEquals(2, manager.getProfile().getSessionList().size());
     }
@@ -41,7 +42,7 @@ class SessionCreateCommandTest {
     @Test
     public void run_hasSessionDuplicate_sessionListSizeRemainsTwo() {
         String userInput = "session /create /n Class outing /d 15-02-2022 /pl Mallory Eves";
-        Command command = SessionCreateCommand.prepare(userInput);
+        Command command = Parser.getCommand(userInput);
         command.run(manager);
         assertEquals(2, manager.getProfile().getSessionList().size());
     }
