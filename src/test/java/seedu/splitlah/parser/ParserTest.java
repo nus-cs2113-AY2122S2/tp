@@ -183,6 +183,7 @@ class ParserTest {
         }
     }
 
+    @Test
     void parsePersonList_delimiterExistsWithoutArgument_exceptionThrown() {
         String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 /pl";
         try {
@@ -191,6 +192,20 @@ class ParserTest {
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.PERSON_LIST_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parsePersonList_delimiterAndArgumentExists_personList() {
+        String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 /pl Alice Charles Bob";
+        try {
+            String[] output = Parser.parsePersonList(argumentWithoutNameDelimiter);
+            assertEquals(3, output.length);
+            assertEquals("Alice", output[0]);
+            assertEquals("Charles", output[1]);
+            assertEquals("Bob", output[2]);
+        } catch (InvalidFormatException exception) {
+            fail();
         }
     }
 }
