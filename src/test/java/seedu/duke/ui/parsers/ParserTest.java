@@ -597,12 +597,26 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_markCommand_parsedCorrectly() {
+    public void parse_markCommand_noModule_parsedCorrectly() {
         final String testString = "mark /c 3";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof MarkCommand);
             assertEquals(2, ((MarkCommand) c).getTaskIndex()); // Remember, zero-indexed!
+            assertNull(((MarkCommand) c).getTaskModuleString());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_markCommand_withModule_parsedCorrectly() {
+        final String testString = "mark /c 3 -m cs2113t";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof MarkCommand);
+            assertEquals(2, ((MarkCommand) c).getTaskIndex()); // Remember, zero-indexed!
+            assertEquals("cs2113t", ((MarkCommand) c).getTaskModuleString());
         } catch (Exception e) {
             fail();
         }
@@ -661,7 +675,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_markCommand_unnecessaryArgs() {
+    public void parse_markCommand_invalidInput() {
         final String testString = "mark /c 1 blahblah";
         try {
             parser.parseCommand(testString);

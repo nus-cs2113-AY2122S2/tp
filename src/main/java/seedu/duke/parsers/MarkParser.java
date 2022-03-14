@@ -13,13 +13,13 @@ import java.util.HashMap;
 public class MarkParser extends Parser {
     private static final String FLAG = "flag";
     private static final String TASK_INDEX = "taskIndex";
+    private static final String TASK_MODULE = "taskModule";
     private static final String COMPLETED_FLAG = "/c";
     private static final String UNCOMPLETED_FLAG = "/u";
 
     // Unescaped regex for testing:
-    // \s*(?<flag>\/(c|u))\s+(?<taskIndex>\d+)$
-    // TODO: augment this format to support module code parameter
-    private static final String MARK_FORMAT = "\\s*(?<flag>\\/(c|u))\\s+(?<taskIndex>\\d+)$";
+    // (?<flag>\/(c|u))\s+(?<taskIndex>\d+)(\s+-m\s+(?<taskModule>\w+))?
+    private static final String MARK_FORMAT = "(?<flag>\\/(c|u))\\s+(?<taskIndex>\\d+)(\\s+-m\\s+(?<taskModule>\\w+))?";
 
     public MarkParser() {
         super();
@@ -27,20 +27,22 @@ public class MarkParser extends Parser {
         this.commandFormat = MARK_FORMAT;
         groupNames.add(FLAG);
         groupNames.add(TASK_INDEX);
+        groupNames.add(TASK_MODULE);
     }
 
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         HashMap<String, String> parsedArguments = parseString(userInput);
         final String commandFlag = parsedArguments.get(FLAG);
+        final String taskModule = parsedArguments.get(TASK_MODULE);
         try {
             // Account for the zero-indexing
             final int taskIndex = Integer.parseInt(parsedArguments.get(TASK_INDEX)) - 1;
             switch (commandFlag) {
             case (COMPLETED_FLAG):
-                return new MarkCommand(taskIndex, true);
+                return new MarkCommand(taskIndex, taskModule, true);
             case (UNCOMPLETED_FLAG):
-                return new MarkCommand(taskIndex, false);
+                return new MarkCommand(taskIndex, taskModule, false);
             default:
                 throw new ParseException();
             }
