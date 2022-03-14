@@ -9,7 +9,7 @@ public class CheckInCommand extends Command {
     }
 
     @Override
-    public void execute(RoomList list) {
+    public void execute(RoomList list) throws HotelLiteManagerException {
         this.roomList = list;
         for (Room room : list.getRoomList()) {
             if (room.getRoomId() == roomId) {
@@ -20,6 +20,8 @@ public class CheckInCommand extends Command {
                 return;
             }
         }
+
+        throw new InvalidRoomNumberException();
     }
 
     // check valid room number

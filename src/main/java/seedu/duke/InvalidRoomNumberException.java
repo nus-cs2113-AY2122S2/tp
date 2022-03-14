@@ -1,6 +1,6 @@
 package seedu.duke;
 
-public class InvalidRoomNumberException extends HotelLiteManagerException{
+public class InvalidRoomNumberException extends HotelLiteManagerException {
     private static final String ERROR_MESSAGE = "Error! Room number is invalid";
 
     @Override

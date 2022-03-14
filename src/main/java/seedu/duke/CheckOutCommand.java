@@ -10,7 +10,7 @@ public class CheckOutCommand extends Command {
     }
 
     @Override
-    public void execute(RoomList list) {
+    public void execute(RoomList list) throws InvalidRoomNumberException {
         this.roomList = list;
         for (Room room : list.getRoomList()) {
             if (room.getRoomId() == roomId) {
@@ -21,6 +21,7 @@ public class CheckOutCommand extends Command {
                 return;
             }
         }
+        throw new InvalidRoomNumberException();
     }
 
     // check valid room number

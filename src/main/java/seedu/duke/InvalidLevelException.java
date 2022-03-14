@@ -1,6 +1,6 @@
 package seedu.duke;
 
-public class InvalidLevelException extends HotelLiteManagerException{
+public class InvalidLevelException extends HotelLiteManagerException {
     private static final String ERROR_MESSAGE = "Error! Category is invalid";
 
     @Override

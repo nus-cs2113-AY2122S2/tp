@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class RoomList {
-    ArrayList<Room> roomList = new ArrayList<>();
+    private ArrayList<Room> roomList = new ArrayList<>();
 
     public RoomList() {  // dummy data for initialization
         Room r1 = new Room(101,1,RoomType.Single);

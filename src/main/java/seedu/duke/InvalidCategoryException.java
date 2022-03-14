@@ -1,11 +1,11 @@
 package seedu.duke;
 
-public class InvalidCategoryException extends HotelLiteManagerException{
-        private static final String ERROR_MESSAGE = "Error! Room number is invalid";
+public class InvalidCategoryException extends HotelLiteManagerException {
+    private static final String ERROR_MESSAGE = "Error! Room number is invalid";
 
-        @Override
-        public String getErrorMessage() {
-            return ERROR_MESSAGE;
-        }
+    @Override
+    public String getErrorMessage() {
+        return ERROR_MESSAGE;
+    }
 
 }
