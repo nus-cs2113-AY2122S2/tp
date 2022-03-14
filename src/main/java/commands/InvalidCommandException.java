@@ -1,5 +1,8 @@
 package commands;
 
+/**
+ * Thrown to indicate that a command entered by the user is invalid.
+ */
 public class InvalidCommandException extends Exception {
     public static final String INVALID_COMMAND_ERROR_MSG = "Uh oh, the command entered is not recognised.";
     public static final String INVALID_ACTION_ERROR_MSG = "Uh oh, an invalid user action was specified.";
@@ -16,11 +19,22 @@ public class InvalidCommandException extends Exception {
 
     private String throwingClass;
 
+    /**
+     * Constructs an InvalidCommandException with the class that threw it and the error message.
+     *
+     * @param throwingClass The class that threw this InvalidCommandException.
+     * @param errorMessage  The accompanying error message.
+     */
     public InvalidCommandException(String throwingClass, String errorMessage) {
         super(errorMessage);
         this.throwingClass = throwingClass;
     }
 
+    /**
+     * Gets the class that threw this InvalidCommandException.
+     *
+     * @return A string containing the name of the class that threw this exception.
+     */
     public String getThrowingClass() {
         return this.throwingClass;
     }
