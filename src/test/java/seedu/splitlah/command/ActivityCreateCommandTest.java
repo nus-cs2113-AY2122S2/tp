@@ -2,6 +2,7 @@ package seedu.splitlah.command;
 
 import org.junit.jupiter.api.BeforeEach;
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.parser.Parser;
 
 class ActivityCreateCommandTest {
 
@@ -10,10 +11,10 @@ class ActivityCreateCommandTest {
     @BeforeEach
     void setUp() {
         String sessionOneArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob Charlie";
-        Command createSessionOne = SessionCreateCommand.prepare(sessionOneArgs);
+        Command createSessionOne = Parser.getCommand(sessionOneArgs);
         createSessionOne.run(manager);
-        String activityOneArgs = "activity /create /n Lunch /p Alice /i Alice Bob Charlie /c 15";
-        Command createActivityOne = ActivityCreateCommand.prepare(activityOneArgs);
+        String activityOneArgs = "activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /c 15";
+        Command createActivityOne = Parser.getCommand(activityOneArgs);
         createActivityOne.run(manager);
     }
 
