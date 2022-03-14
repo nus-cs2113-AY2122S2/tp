@@ -91,13 +91,13 @@ public class ActivityCreateCommand extends Command {
         boolean hasMissingCostAndMissingCostList = isMissingCostList && isMissingCost;
         if (hasMissingCostAndMissingCostList) {
             return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
-                    + COMMAND_FORMAT);
+                    + "\n" + COMMAND_FORMAT);
         }
 
         boolean hasBothCostAndCostList = !isMissingCostList && !isMissingCost;
         if (hasBothCostAndCostList) {
             return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
-                    + COMMAND_FORMAT);
+                    + "\n" + COMMAND_FORMAT);
         }
 
         try {
@@ -113,7 +113,7 @@ public class ActivityCreateCommand extends Command {
             }
             if (hasDifferentLength) {
                 return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
-                        + COMMAND_FORMAT);
+                        + "\n" + COMMAND_FORMAT);
             }
             return new ActivityCreateCommand(sessionId, activityName, totalCost, payer, involvedList, costList, gst,
                     serviceCharge);
