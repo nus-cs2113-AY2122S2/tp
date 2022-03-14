@@ -67,7 +67,7 @@ public class StringConstants {
     public static final String MODULE_DESCRIPTION = "moduleDescription";
     public static final String TASK_NUMBER = "taskNumber";
     public static final String FLAG = "flag";
-    public static final String INVALID = "invalid"
+    public static final String INVALID = "invalid";
     public static final String TASK_INDEX = "taskIndex";
     public static final String COMPLETED_FLAG = "/c";
     public static final String UNCOMPLETED_FLAG = "/u";
