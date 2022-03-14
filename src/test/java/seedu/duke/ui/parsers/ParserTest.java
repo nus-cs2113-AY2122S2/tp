@@ -13,6 +13,7 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.parsers.ModHappyParser;
+import seedu.duke.tasks.Module;
 import seedu.duke.tasks.Task;
 
 
@@ -37,19 +38,6 @@ public class ParserTest {
             parser.parseCommand(testString);
             fail();
         } catch (UnknownCommandException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void parse_addCommand_invalidFlag() {
-        final String testString = "add /a blahblah -d blahblahblah";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -128,7 +116,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_addCommand_withDescription_withWorkingTime_wrongOrder_Incorrect() {
+    public void parse_addCommand_withDescription_withWorkingTime_differentOrder() {
         final String testString = "add /t /t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d   "
                 + "-t \"-t-t-t t-t-t /t/t -d -d -d \" "
                 + "-d \"-d-d-d /t /m -d -d  \" ";
@@ -138,9 +126,140 @@ public class ParserTest {
             Task t = ((AddCommand) c).getNewTask();
             assertNotEquals(null, t);
             assertNull(((AddCommand) c).getNewModule());
-            assertNotEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
+            assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
             assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
-            assertNotEquals("-t-t-t t-t-t /t/t -d -d -d", t.getEstimatedWorkingTime());
+            assertEquals("-t-t-t t-t-t /t/t -d -d -d", t.getEstimatedWorkingTime());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_task_invalidInput() {
+        final String testString = "add /t 000 -d \"123\" -t \"456\" invalid";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_duplicateTaskDescription() {
+        final String testString = "add /t 000 -d \"123\" -t \"456\" -d \"789\"";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_duplicateWorkingTime() {
+        final String testString = "add /t 000 -t \"123\" -d \"456\" -t \"789\"";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_invalidModule() {
+        final String testString = "add /m cs2113t 123";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_withDescription_invalidInput() {
+        final String testString = "add /m cs2113t -d \"11111\"123";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_validModule() {
+        final String testString = "add /m cs2113t";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof AddCommand);
+            Module t = ((AddCommand) c).getNewModule();
+            assertNotEquals(null, t);
+            assertEquals("cs2113t", t.getModuleCode());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_invalidFlag() {
+        final String testString = "add /a blahblah -d blahblahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_noFlagProvided() {
+        final String testString = "add cs2113t";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_withModuleOnly_noModuleProvided() {
+        final String testString = "add /m";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_withTaskOnly_noTaskProvided() {
+        final String testString = "add /t";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
         } catch (Exception e) {
             fail();
         }
@@ -171,18 +290,98 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_helpCommand_invalidCommand() {
-        final String testString = "help test";
+    public void parse_deleteCommand_invalidFlag() {
+        final String testString = "del /a 1";
         try {
-            Command c = parser.parseCommand(testString);;
-        } catch (ModHappyException e) {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
 
+    @Test
+    public void parse_deleteCommand_noFlagProvided() {
+        final String testString = "del 1";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_deleteCommand_withModuleOnly_noModuleProvided() {
+        final String testString = "del /m";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_deleteCommand_withTaskOnly_noIndexProvided() {
+        final String testString = "del /t";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_deleteCommand_withTaskOnly_notANumber() {
+        final String testString = "del /t iamnotanumber";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_deleteCommand_unnecessaryArgs() {
+        final String testString = "del /t 1 blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_markCommand_parsedCorrectly() {
+        final String testString = "mark /c 3";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof MarkCommand);
+            assertEquals(2, ((MarkCommand) c).getTaskIndex()); // Remember, zero-indexed!
+        } catch (Exception e) {
+            fail();
         }
     }
 
     @Test
     public void parse_markCommand_invalidFlag() {
-        final String testString = "mark /a 1234";
+        final String testString = "mark /a 1";
         try {
             parser.parseCommand(testString);
             fail();
@@ -195,7 +394,7 @@ public class ParserTest {
 
     @Test
     public void parse_markCommand_noFlagProvided() {
-        final String testString = "mark 123";
+        final String testString = "mark 1";
         try {
             parser.parseCommand(testString);
             fail();
@@ -233,20 +432,8 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_markCommand_parsedCorrectly() {
-        final String testString = "mark /c 3";
-        try {
-            Command c = parser.parseCommand(testString);
-            assertTrue(c instanceof MarkCommand);
-            assertEquals(2, ((MarkCommand) c).getTaskIndex()); // Remember, zero-indexed!
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void parse_listCommand_unnecessaryArgs() {
-        final String testString = "list blahblah";
+    public void parse_markCommand_unnecessaryArgs() {
+        final String testString = "mark /c 1 blahblah";
         try {
             parser.parseCommand(testString);
             fail();
@@ -269,8 +456,8 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_exitCommand_unnecessaryArgs() {
-        final String testString = "exit blahblah";
+    public void parse_listCommand_unnecessaryArgs() {
+        final String testString = "list blahblah";
         try {
             parser.parseCommand(testString);
             fail();
@@ -287,6 +474,19 @@ public class ParserTest {
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof ExitCommand);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_exitCommand_unnecessaryArgs() {
+        final String testString = "exit blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
         } catch (Exception e) {
             fail();
         }

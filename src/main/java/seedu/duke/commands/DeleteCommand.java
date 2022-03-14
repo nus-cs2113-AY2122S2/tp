@@ -5,11 +5,12 @@ import seedu.duke.exceptions.NoSuchTaskException;
 import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.TaskList;
+import seedu.duke.util.StringConstants;
 
 public class DeleteCommand extends Command {
 
-    private static final String DELETE_MODULE_SUCCESS = "%s has been deleted.";
-    private static final String DELETE_TASK_SUCCESS = "%s has been deleted.";
+    private static final String DELETE_MODULE_SUCCESS = "%s" + StringConstants.DELETE_MESSAGE;
+    private static final String DELETE_TASK_SUCCESS = "%s" + StringConstants.DELETE_MESSAGE;
 
     private String moduleCode = "";
     private int taskNumber = -1;

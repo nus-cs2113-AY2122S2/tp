@@ -6,7 +6,6 @@ import seedu.duke.commands.ListCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 
-
 /**
  * This Parser supports all commands which do not accept any additional arguments or parameters.
  */

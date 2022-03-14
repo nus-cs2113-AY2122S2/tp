@@ -6,10 +6,11 @@ import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
+import seedu.duke.util.StringConstants;
 
 public class MarkCommand extends Command {
-    private static final String MARK_MESSAGE = "Nice! I have marked this task as completed!" + LS + "%s";
-    private static final String UNMARK_MESSAGE = "Ok! I have marked this task for you as uncompleted!" + LS + "%s";
+    private static final String MARK_MESSAGE = StringConstants.MARK_MESSAGE_TOP + LS + "%s";
+    private static final String UNMARK_MESSAGE = StringConstants.UNMARK_MESSAGE_TOP + LS + "%s";
 
     private final int taskIndex;
     private final boolean status;

@@ -1,8 +1,8 @@
 package seedu.duke.tasks;
 
-import seedu.duke.exceptions.NoSuchModuleException;
-
 import java.util.ArrayList;
+
+import seedu.duke.exceptions.NoSuchModuleException;
 
 public class ModuleList {
     private static final String LS = System.lineSeparator();

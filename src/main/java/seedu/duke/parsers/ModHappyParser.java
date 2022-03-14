@@ -1,20 +1,20 @@
 package seedu.duke.parsers;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 import seedu.duke.commands.Command;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
-
-import java.util.HashMap;
-import java.util.HashSet;
+import seedu.duke.util.StringConstants;
 
 /**
  * This Parser distinguishes between various command words.
  */
 public class ModHappyParser extends Parser {
-
-    private static final String ARGUMENT = "arguments";
-    private static final String COMMAND_WORD = "commandWord";
+    private static final String ARGUMENT = StringConstants.ARGUMENT;
+    private static final String COMMAND_WORD = StringConstants.COMMAND_WORD;
     private static final String MOD_HAPPY_COMMAND_FORMAT = "(?<commandWord>\\S+)"
             + "\\s*(?<arguments>.*)";
 
@@ -75,5 +75,4 @@ public class ModHappyParser extends Parser {
             throw new UnknownCommandException();
         }
     }
-
 }

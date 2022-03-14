@@ -1,33 +1,58 @@
 package seedu.duke.parsers;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
-
-import java.util.HashMap;
-import java.util.Objects;
+import seedu.duke.util.StringConstants;
 
 /**
  * This Parser supports the "add" command.
  */
 public class AddParser extends Parser {
-    private static final String FLAG = "flag";
-    private static final String TASK_NAME = "taskName";
-    private static final String TASK_DESCRIPTION = "taskDescription";
-    private static final String TASK_WORKING_TIME = "estimatedWorkingTime";
-    private static final String MODULE_CODE = "moduleCode";
-    private static final String MODULE_DESCRIPTION = "moduleDescription";
+    private static final String TASK_NAME = StringConstants.TASK_NAME;
+    private static final String TASK_DESCRIPTION = StringConstants.TASK_DESCRIPTION;
+    private static final String TASK_WORKING_TIME = StringConstants.TASK_WORKING_TIME;
+    private static final String MODULE_CODE = StringConstants.MODULE_CODE;
+    private static final String MODULE_DESCRIPTION = StringConstants.MODULE_DESCRIPTION;
+    private static final String FLAG = StringConstants.FLAG;
+    private static final String TASK_DESCRIPTION_TWO = StringConstants.TASK_DESCRIPTION_TWO;
+    private static final String INVALID = StringConstants.INVALID;
 
     // Unescaped regex for testing (split into two lines):
-    // \s*(\/t\s+(?<taskName>.+?(?=\s+-d\s+|\s+-t\s+|$))(\s+(-d\s+\"(?<taskDescription>([^\"]*))\")(?=(\s+-t\s+)|$))?
-    // (\s+(-t\s+\"(?<estimatedWorkingTime>([^\"]*))\")(?=(\s+-d\s+)|$))?|\/m\s+(?<moduleCode>\w+?(?=(\s+-d\s+)|$))
-    // (\s+(-d\s+\"(?<moduleDescription>.+)\"))?)
+    // \s*((\/t\s+(?<taskName>.+?(?=\s+-d\s+|\s+-t\s+|$))(\s+(-d\s+\"(?<taskDescription>([^\"]*))\")(?=(\s+-t\s+)|$))?
+    // (\s+(-t\s+\"(?<estimatedWorkingTime>([^\"]*))\")(?=(\s+-d\s+)|$))?(\s+(-d\s+\"(?<taskDescription2>([^\"]*))\"))?
+    // |\/m\s+(?<moduleCode>\w+?(?=(\s+-d\s+)|\s+|$))(\s+(-d\s+\"(?<moduleDescription>([^\"]*))\"))?))(?<invalid>.*)
+
+    /*
+    * Basic explanation for Add format regex
+    * \s*((\/t\s+(?<taskName>.+?) ... )) -- captures taskName (no constraint)
+    * (?=\s+-d\s+|\s+-t\s+|$) -- asserts that -d or -t might follow
+    * (\s+(-d\s+\"(?<taskDescription>([^\"]*))\") ... )? -- captures taskDescription (cannot have ")
+    *                                                       which must be enclosed with "". Optional
+    * (?=(\s+-t\s+)|$) -- asserts -t might follow
+    * (\s+(-t\s+\"(?<estimatedWorkingTime>([^\"]*))\") ... )? -- captures estimatedWorkingTime (cannot have ")
+    *                                                            which must be enclosed with "". Optional
+    * (?=(\s+-d\s+)|$) -- asserts -d might follow
+    * (\s+(-d\s+\"(?<taskDescription2>([^\"]*))\"))? -- captures taskDescription2 with same constraints 
+    *                                                   if -t precedes -d
+    * \s*(( ... |\/m\s+(?<moduleCode>\w+? ... ) -- alternatively captures moduleCode
+    *                                              (no whitespaces or special characters)
+    * (?=(\s+-d\s+)|\s+|$) -- asserts -d or whitespaces (if command is invalid) might follow
+    * (\s+(-d\s+\"(?<moduleDescription>([^\"]*))\"))? -- captures moduleDescription (cannot have ")
+    *                                                    which must be enclosed with "". Optional
+    * \s+( Task | Module )(?<invalid>.*) -- any input at any part of the command
+    *                                       that does not fit the pattern will be captured as invalid
+    * */
     // TODO: Add support for -mod argument when integrating Task and Module classes with one another
-    private static final String ADD_FORMAT = "\\s*(\\/t\\s+(?<taskName>.+?(?=\\s+-d\\s+|\\s+-t\\s+|$))"
+    private static final String ADD_FORMAT = "\\s*((\\/t\\s+(?<taskName>.+?(?=\\s+-d\\s+|\\s+-t\\s+|$))"
             + "(\\s+(-d\\s+\\\"(?<taskDescription>([^\\\"]*))\\\")(?=(\\s+-t\\s+)|$))?(\\s+(-t\\s+\\\""
-            + "(?<estimatedWorkingTime>([^\\\"]*))\\\"))?|\\/m\\s+"
-            + "(?<moduleCode>\\w+?(?=(\\s+-d\\s+)|$))(\\s+(-d\\s+\\\"(?<moduleDescription>.+)\\\"))?)";
+            + "(?<estimatedWorkingTime>([^\\\"]*))\\\")(?=(\\s+-d\\s+)|$))?(\\s+(-d\\s+\\\""
+            + "(?<taskDescription2>([^\\\"]*))\\\"))?|\\/m\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)|\\s+|$))(\\s+(-d\\s+"
+            + "\\\"(?<moduleDescription>([^\\\"]*))\\\"))?))(?<invalid>.*)";
 
     public AddParser() {
         super();
@@ -38,21 +63,35 @@ public class AddParser extends Parser {
         groupNames.add(TASK_WORKING_TIME);
         groupNames.add(MODULE_CODE);
         groupNames.add(MODULE_DESCRIPTION);
+        groupNames.add(TASK_DESCRIPTION_TWO);
+        groupNames.add(INVALID);
     }
-    
+
     @Override
     public Command parseCommand(String userInput) throws ModHappyException {
         HashMap<String, String> parsedArguments = parseString(userInput);
         final String taskName = parsedArguments.get(TASK_NAME);
-        final String taskDescription = parsedArguments.get(TASK_DESCRIPTION);
         final String estimatedWorkingTime = parsedArguments.get(TASK_WORKING_TIME);
         final String moduleCode = parsedArguments.get(MODULE_CODE);
         final String moduleDescription = parsedArguments.get(MODULE_DESCRIPTION);
-        if (!Objects.equals(taskName, NULL_FIELD)) {
+        final String taskDescriptionTwo = parsedArguments.get(TASK_DESCRIPTION_TWO);
+        String invalid = parsedArguments.get(INVALID);
+        String taskDescription = parsedArguments.get(TASK_DESCRIPTION);
+        if (invalid.isEmpty()) {
+            invalid = null;
+        }
+        boolean isInvalid = ((!Objects.isNull(invalid))
+                || ((!Objects.isNull(taskDescription)) && (!Objects.isNull(taskDescriptionTwo))));
+        if (isInvalid) {
+            throw new ParseException();
+        } else if (Objects.isNull(taskDescription) && !Objects.isNull(taskDescriptionTwo)) {
+            taskDescription = taskDescriptionTwo;
+        }
+        if (!Objects.isNull(taskName)) {
             return new AddCommand(taskName, taskDescription, true, estimatedWorkingTime);
         }
-        if (!Objects.equals(moduleCode, NULL_FIELD)) {
-            return new AddCommand(moduleCode, moduleDescription, false, NULL_FIELD);
+        if (!Objects.isNull(moduleCode)) {
+            return new AddCommand(moduleCode, moduleDescription, false, null);
         }
         throw new ParseException();
     }
