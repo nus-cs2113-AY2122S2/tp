@@ -2,15 +2,18 @@
 
 ## Introduction
 
-{Give a product intro}
-
+WerkIt! is an application for managing workout routines,
+optimized for use via a Command Line Interface (CLI).
 ---
+
+* Table of Contents
+  {:toc}
 
 ## Quick Start Guide
 
-1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of WerkIt! from [here (WIP)](http://link.to/duke).
-3. (Recommended) Create a new directory and move the WerkIt! JAR file to the directory.
+1. Ensure that you have [Java 11](https://www.oracle.com/java/technologies/downloads/) or above installed.
+2. Download the latest version of WerkIt! from [here](https://github.com/AY2122S2-CS2113T-T09-2/tp/releases).
+3. (Recommended) Create a new directory and move the WerkIt! JAR file to that directory.
 4. (Recommended) Set your current working directory to the new directory.
 5. Run the WerkIt! application with the command: `java -jar WerkIt.jar`.
 
@@ -45,6 +48,51 @@ Alright, the following workout has been created:
 ```
 A new workout of carrying out Russian twists 50 times will be created and added to the application's list of workouts.
 
+---
+
+### Delete a Workout: `workout /delete`
+Removes an existing workout from the workout list.
+
+Format: `workout /delete <workout number to delete>`
+
+| Parameters                   | Description                                             |
+|------------------------------|---------------------------------------------------------|
+| `<workout number to delete>` | The workout number to be removed from the workout list. |
+
+**Example**
+<br/>Initially, the workout list contains the following workouts:
+```
+----------------------------------------------------------------------
+Showing workouts 1-2 of 2:
+1. russian twist (50 reps)
+2. push up (20 reps)
+Showed all items in list
+----------------------------------------------------------------------
+```
+To remove workout number 2 from the list, the following command is entered:
+```
+> workout /delete 2
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+Alright, the following workout has been removed:
+
+	push up (20 reps)
+
+----------------------------------------------------------------------
+What's next?
+----------------------------------------------------------------------
+```
+Workout number 2 (push up with 20 reps) is removed from the workout list. 
+Running the `workout /list` command will show the workout list as follows:
+```
+----------------------------------------------------------------------
+Showing workouts 1-1 of 1:
+1. russian twist (50 reps)
+Showed all items in list
+----------------------------------------------------------------------
+```
 ---
 
 ## WerkIt!'s Local Storage Information
@@ -91,5 +139,6 @@ first time. Your saved data should be in that directory.
 | Action         | Format and Example                                                                                                   |
 |:---------------|:---------------------------------------------------------------------------------------------------------------------|
 | Create Workout | Format: `workout /new <exercise name> /reps <number of repetitions>`<br/>Example: `workout /new biceps curl /reps 1` |
+| Delete Workout | Format: `workout /delete <workout number to delete>`<br/>Example: `workout /delete 2`                                |
 
 
