@@ -114,6 +114,7 @@ public class Storage {
     public JSONObject writeSaveData(TaskList taskList) {
         JSONObject taskJson = convertTaskListToJson(taskList);
         String taskString = taskJson.toString(4);
+        assert taskString != null;
         try {
             FileWriter writer = new FileWriter(saveFilePath);
             writer.write(taskString);
@@ -177,15 +178,19 @@ public class Storage {
     public void handleCorruptedSave(Ui ui) {
         ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_1);
         String response = "";
-        while (!response.equalsIgnoreCase("Y") || response.equalsIgnoreCase("N")) {
+
+        while (!response.equalsIgnoreCase("y") && !response.equalsIgnoreCase("n")) {
             ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_2);
             response = ui.readCommand();
-            if (response.equalsIgnoreCase("Y")) {
-                wipeSavedData();
-            } else if (response.equalsIgnoreCase("N")) {
-                ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_3);
-                System.exit(1);
-            }
+        }
+
+        assert response.equalsIgnoreCase("y") || response.equalsIgnoreCase("n");
+
+        if (response.equalsIgnoreCase("y")) {
+            wipeSavedData();
+        } else {
+            ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_3);
+            System.exit(1);
         }
     }
 
