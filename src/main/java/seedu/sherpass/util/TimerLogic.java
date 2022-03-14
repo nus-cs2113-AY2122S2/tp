@@ -27,6 +27,7 @@ public class TimerLogic {
             }
         }
     }
+    
     public static void startTimer(String[] parsedInput) {
         if (timer.getHasTimeLeft()) {
             ui.showToUser("You already have a timer running!");
