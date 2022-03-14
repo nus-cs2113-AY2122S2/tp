@@ -51,7 +51,7 @@ A new workout of carrying out Russian twists 50 times will be created and added 
 ---
 
 ### Delete a Workout: `workout /delete`
-Remove an existing workout from the workout list.
+Removes an existing workout from the workout list.
 
 Format: `workout /delete <workout number to delete>`
 
