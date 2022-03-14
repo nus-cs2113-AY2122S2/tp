@@ -1,6 +1,7 @@
 package seedu.splitlah.command;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.parser.Parser;
 
@@ -33,4 +34,14 @@ class SessionDeleteCommandTest {
         assertEquals(InvalidCommand.class, sessionWithMissingSidDelimiter.getClass());
     }
 
+    /**
+     * Checks if session is deleted with an invalid session unique identifier.
+     */
+    @Test
+    public void run_sessionDoesNotExists_sessionListSizeRemainsTwo() {
+        String userInput = "session /delete /sid 3";
+        Command command = Parser.getCommand(userInput);
+        command.run(manager);
+        assertEquals(2, manager.getProfile().getSessionList().size());
+    }
 }
