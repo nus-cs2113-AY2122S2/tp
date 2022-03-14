@@ -8,12 +8,19 @@ import seedu.allonus.modules.exceptions.ModuleTimeException;
 import seedu.allonus.ui.TextUi;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class StudyManager {
     private static ArrayList<Module> modulesList = new ArrayList<>();
     private static final String WELCOME_MESSAGE = "Welcome to Modules Tracker, where you can track all your "
             + "classes.";
+    private static Logger logger = Logger.getLogger("mylogger");
+
+    public ArrayList<Module> getModulesList() {
+        return modulesList;
+    }
 
     public void studyManagerRunner(TextUi ui) {
         printWelcomeMessage();
@@ -66,12 +73,14 @@ public class StudyManager {
                 printMessage(removedModule.toString());
             }
         } catch (IndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, "wrong index for delete");
             if (modulesList.size() == 0) {
                 printMessage("There are no modules to delete!");
             } else {
                 printMessage(" Oops there are only " + modulesList.size() + " modules left in your schedule");
             }
         } catch (NumberFormatException e) {
+            logger.log(Level.WARNING, "no index number specified for delete");
             printMessage("Please enter the index of the module you would like to delete");
         }
 
@@ -103,35 +112,26 @@ public class StudyManager {
             String day = checkedParameters[2];
             String time = checkedParameters[3];
 
-            switch (category) {
-            case "lec":
-                category = "Lecture";
-                break;
-            case "tut":
-                category = "Tutorial";
-                break;
-            case "exam":
-                category = "Exam";
-                break;
-            default:
-                printMessage("Category has to be one of lec,tut or exam");
-                return null;
-            }
             return new Module(module, category, day, time);
         } catch (IndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, "Wrong format for add module");
             printMessage("Please ensure that your input follows the form:");
             printMessage("add m/CS2113 c/lec d/Thursday t/2pm-4pm");
             return null;
         } catch (ModuleDayException e) {
+            logger.log(Level.WARNING, "Day was not specified for add module");
             printMessage("Please enter the day of your module");
             return null;
         } catch (ModuleCategoryException e) {
+            logger.log(Level.WARNING, "Category was not specified for add module");
             printMessage("Please enter the category of your module");
             return null;
         } catch (ModuleTimeException e) {
+            logger.log(Level.WARNING, "Time was not specified for add module");
             printMessage("Please enter the time of your module's class");
             return null;
         } catch (ModuleCodeException e) {
+            logger.log(Level.WARNING, "Code was not specified for add module");
             printMessage("Please enter the code for your module");
             return null;
         }
@@ -168,6 +168,22 @@ public class StudyManager {
                 throw new ModuleCategoryException();
             } else {
                 category = parameters[1].substring(2);
+                switch (category) {
+                case "lec":
+                    category = "Lecture";
+                    break;
+                case "tut":
+                    category = "Tutorial";
+                    break;
+                case "exam":
+                    category = "Exam";
+                    break;
+                default:
+                    printMessage("Category has to be one of lec,tut or exam");
+                    throw new ModuleCategoryException();
+                }
+                assert (category == "Lecture" || category == "Tutorial" || category == "Exam") : "category is not one"
+                        + " of lec, tut or exam";
             }
         } catch (IndexOutOfBoundsException e) {
             throw new ModuleCategoryException();
