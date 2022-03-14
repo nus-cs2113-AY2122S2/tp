@@ -9,6 +9,8 @@ import storage.FileManager;
 import storage.UnknownFileException;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.logging.*;
 
 /**
  * This class initiates the various classes/components of WerkIt! and contains the logic code for
@@ -20,6 +22,7 @@ public class WerkIt {
     private ExerciseList exerciseList;
     private WorkoutList workoutList;
     private FileManager fileManager;
+    private static Logger logger = Logger.getLogger(WerkIt.class.getName());
 
     /**
      * Initialises the components of the WerkIt! application, greets the user, and loads the
@@ -32,6 +35,7 @@ public class WerkIt {
         this.workoutList = new WorkoutList(getExerciseList());
         this.fileManager = new FileManager();
         this.parser = new Parser(getUI(), getExerciseList(), getWorkoutList(), getFileManager());
+        logger.log(Level.INFO, "Components instantiated.");
 
         getUI().printGreetings();
 
@@ -95,6 +99,10 @@ public class WerkIt {
         getFileManager().checkAndCreateDirectoriesAndFiles();
         getUI().printEmptyLineOrStatus(fileManager.checkIfAllDirectoryAndFilesExists());
 
+        assert (Files.exists(fileManager.getWorkoutFilePath()));
+        assert (Files.exists(fileManager.getExerciseFilePath()));
+        assert (Files.exists(fileManager.getWorkoutFilePath()));
+
         getUI().printLoadingFileDataMessage();
         loadExerciseFile();
         if (getFileManager().isWasWorkoutsFileAlreadyMade()) {
@@ -136,6 +144,7 @@ public class WerkIt {
         } while (!userWantsToExit);
 
         // User is exiting the program
+        assert (userWantsToExit);
         getUI().printGoodbye();
     }
 
@@ -152,6 +161,8 @@ public class WerkIt {
         } catch (UnknownFileException e) {
             System.out.println(e.getMessage());
         }
+        
+        logger.log(Level.INFO, "Exercise file data loaded.");
     }
 
     /**
@@ -168,5 +179,7 @@ public class WerkIt {
         } catch (UnknownFileException e) {
             System.out.println(e.getMessage());
         }
+
+        logger.log(Level.INFO, "Workout file data loaded.");
     }
 }
