@@ -9,6 +9,7 @@ import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.MarkCommand;
+import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.parsers.ModHappyParser;
@@ -166,6 +167,16 @@ public class ParserTest {
             assertEquals("CS2113T", ((DeleteCommand) c).getModuleCode());
         } catch (Exception e) {
             fail();
+        }
+    }
+
+    @Test
+    public void parse_helpCommand_invalidCommand() {
+        final String testString = "help test";
+        try {
+            Command c = parser.parseCommand(testString);;
+        } catch (ModHappyException e) {
+
         }
     }
 

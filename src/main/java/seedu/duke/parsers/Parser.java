@@ -19,6 +19,7 @@ public abstract class Parser {
     protected static final String DELETE_COMMAND_WORD = "del";
     protected static final String LIST_COMMAND_WORD = "list";
     protected static final String MARK_COMMAND_WORD = "mark";
+    protected static final String HELP_COMMAND_WORD = "help";
     protected static final String NULL_FIELD = null;
 
     protected String commandFormat;
