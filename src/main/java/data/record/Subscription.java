@@ -1,4 +1,6 @@
-public class Subscription extends Record{
+package data.record;
+
+public class Subscription extends Record {
     private String renewal;
     public Subscription (String name, float price, String date, String renewal){
         super(name, price, date);
@@ -8,6 +10,4 @@ public class Subscription extends Record{
     public String getRenewal() {
         return renewal;
     }
-
-
 }
