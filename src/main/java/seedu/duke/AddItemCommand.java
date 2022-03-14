@@ -3,10 +3,10 @@ package seedu.duke;
 public class AddItemCommand extends Command {
     private String itemName;
     private int itemPax;
-    private final String ITEM_NAME_INDICATOR = "Name:";
-    private final int ITEM_NAME_INDICATOR_LENGTH = 5;
-    private final String ITEM_PAX_INDICATOR = "Pax:";
-    private final int ITEM_PAX_INDICATOR_LENGTH = 4;
+    private static final String ITEM_NAME_INDICATOR = "Name:";
+    private static final int ITEM_NAME_INDICATOR_LENGTH = 5;
+    private static final String ITEM_PAX_INDICATOR = "Pax:";
+    private static final int ITEM_PAX_INDICATOR_LENGTH = 4;
 
     public AddItemCommand(String userInput) throws HotelLiteManagerException {
         boolean isValidAddItemCommand = userInput.contains(ITEM_NAME_INDICATOR) &&
@@ -49,6 +49,7 @@ public class AddItemCommand extends Command {
         return itemPax;
     }
 
+    @Override
     public void execute() {
     }
 

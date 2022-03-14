@@ -1,8 +1,8 @@
 package seedu.duke;
 
 public class CommandParser {
-    public static final String BYE = "bye";
-    public static final String ADD_ITEM_COMMAND = "Add Item";
+    private static final String BYE = "bye";
+    private static final String ADD_ITEM_COMMAND = "Add Item";
 
     public Command parse(String commandString) throws WrongCommandException, HotelLiteManagerException {
         Command userCommand = null;
