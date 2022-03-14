@@ -18,20 +18,15 @@ public class Ui {
         System.out.print(boundary + "Bye. Hope to see you again soon!" + System.lineSeparator() + boundary);
     }
 
-    // Interacts with user and edit the given task list accordingly.
-    public void interact() {
-
-    }
-
     public void printDoctorPage(DoctorList doctors) {
         System.out.print(boundary);
         System.out.println("Welcome to Doctor Page.");
-        doctors.printDoctorList();
+        System.out.print(doctors);
     }
 
     public void printPatientPage(PatientList patients) {
         System.out.print(boundary);
         System.out.println("Welcome to Patient Page.");
-        patients.printPatientList();
+        System.out.print(patients);
     }
 }

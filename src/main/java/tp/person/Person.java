@@ -19,6 +19,18 @@ public class Person {
         this.email = email;
     }
 
+    public void editName(String name) {
+        this.name = name;
+    }
+
+    public void editPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void editEmail(String email) {
+        this.email = email;
+    }
+
     public String getId() {
         return id;
     }
