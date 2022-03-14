@@ -24,4 +24,7 @@ public class Ui {
         return userInput;
     }
 
+    public void printErrorMessage(HotelLiteManagerException exception) {
+        System.out.println(exception.getErrorMessage());
+    }
 }
