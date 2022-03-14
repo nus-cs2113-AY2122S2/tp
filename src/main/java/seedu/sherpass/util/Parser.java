@@ -67,9 +67,7 @@ import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
 
 public class Parser {
     /**
-     * Parses the saved data of the tasks in the save file.
-     * Arranges the parsed data in a manner that can be initialised
-     * as a 'Task'.
+     * Returns a task object parsed from the data file
      *
      * @param taskData The data of a task in JSON.
      * @return Task containing the saved data for adding into program's task array.

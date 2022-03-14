@@ -145,8 +145,10 @@ public class Storage {
     /**
      * Loads back the save file onto the program.
      *
-     * @return The saved data of the tasks in the saved file.
-     * Tasks are represented in an array.
+     * @return ArrayList containing the tasks saved in the data file
+     * @throws IOException           If an I/O error occurs while reading the data file
+     * @throws InvalidInputException If the data has missing fields for a task
+     * @throws JSONException         If the data file has an invalid JSON format
      */
     public ArrayList<Task> load() throws IOException, InvalidInputException, JSONException {
         ArrayList<Task> taskList = new ArrayList<>();
@@ -164,6 +166,14 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Creates a new save file or exits the program.
+     *
+     * When the save file fails to load, the user decides if the program creates new save file
+     * or the user can manually inspect the save file.
+     *
+     * @param ui Ui for printing messages
+     */
     public void handleCorruptedSave(Ui ui) {
         ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_1);
         String response = "";
