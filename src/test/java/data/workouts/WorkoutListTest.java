@@ -2,7 +2,6 @@ package data.workouts;
 
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
-import data.workouts.WorkoutOutOfRangeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -104,5 +103,54 @@ class WorkoutListTest {
         assertThrows(NumberFormatException.class,
             () -> wl.deleteWorkout(invalidArgumentSupplied));
 
+    }
+
+    @Test
+    void updateWorkout_validInputArgument_expectSuccessUpdate() throws InvalidWorkoutException,
+            InvalidExerciseException, WorkoutOutOfRangeException {
+        wl.createAndAddWorkout("push up /reps 11");
+        wl.createAndAddWorkout("sit up /reps 15");
+        wl.createAndAddWorkout("lunge /reps 10");
+
+        int indexToUpdate = 3;
+        int newReps = 15;
+        String updateArgument = Integer.toString(indexToUpdate) + " " + Integer.toString(newReps);
+
+        String workoutDetails = wl.getWorkoutsList().get(indexToUpdate - 1).toString();
+
+        assertEquals("lunge (10 reps)", workoutDetails);
+        wl.updateWorkout(updateArgument);
+        workoutDetails = wl.getWorkoutsList().get(indexToUpdate - 1).toString();
+        assertEquals("lunge (15 reps)", workoutDetails);
+    }
+
+    @Test
+    void updateWorkout_InvalidNumberFormat_expectNumberFormatException() throws InvalidWorkoutException,
+            InvalidExerciseException, ArrayIndexOutOfBoundsException {
+        wl.createAndAddWorkout("push up /reps 11");
+        wl.createAndAddWorkout("sit up /reps 15");
+        wl.createAndAddWorkout("lunge /reps 10");
+
+        String indexToUpdate = "a";
+        int newReps = 15;
+        String updateArgument = indexToUpdate + " " + Integer.toString(newReps);
+
+        assertThrows(NumberFormatException.class,
+            () -> wl.updateWorkout(updateArgument));
+    }
+
+    @Test
+    void updateWorkout_workoutIndexOutOfRange_expectWorkoutOutOfRangeException() throws InvalidWorkoutException,
+            InvalidExerciseException {
+        wl.createAndAddWorkout("push up /reps 11");
+        wl.createAndAddWorkout("sit up /reps 15");
+        wl.createAndAddWorkout("lunge /reps 10");
+
+        String indexToUpdate = "4";
+        int newReps = 15;
+        String updateArgument = indexToUpdate + " " + Integer.toString(newReps);
+
+        assertThrows(WorkoutOutOfRangeException.class,
+            () -> wl.updateWorkout(updateArgument));
     }
 }
