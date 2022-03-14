@@ -7,6 +7,7 @@ public class CommandParser {
     private static final String CHECK_OUT = "check out";
     private static final String CHECK_ROOM = "check room";
     private static final String CHECK_ALL_ROOM = "check all room";
+    private static final String CHECK_ROOM_BY_LEVEL = "check level room";
 
     public Command parse(String commandString) throws WrongCommandException, HotelLiteManagerException {
         Command userCommand = null;
@@ -23,9 +24,12 @@ public class CommandParser {
             userCommand = new CheckOutCommand(commandStringWithoutCommand);
         } else if(commandString.startsWith(CHECK_ROOM)){
             String commandStringWithoutCommand = commandString.replace(CHECK_ROOM, "");
-            userCommand = new ChcekRoomCommand(commandStringWithoutCommand);
+            userCommand = new CheckRoomCommand(commandStringWithoutCommand);
         }else if(commandString.startsWith(CHECK_ALL_ROOM)){
             userCommand = new CheckAllRoomCommand();
+        }else if(commandString.startsWith(CHECK_ROOM_BY_LEVEL)){
+            String commandStringWithoutCommand = commandString.replace(CHECK_ROOM_BY_LEVEL, "");
+            userCommand = new CheckRoomByLevelCommand(commandStringWithoutCommand);
         }else {
             throw new WrongCommandException("Invalid Command");
         }
