@@ -29,7 +29,7 @@ class SessionCreateCommandTest {
      * Checks if session is created with missing delimiters.
      */
     @Test
-    public void run_hasMissingDelimiter_InvalidCommand() {
+    public void prepare_hasMissingDelimiter_InvalidCommand() {
         // Case 1: Missing /n delimiter
         String argsMissingNameDelimiter = "session /create /d 15-02-2022 /pl Alice Bob";
         Command sessionWithMissingNameDelimiter = Parser.getCommand(argsMissingNameDelimiter);
