@@ -322,6 +322,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the default timer modes.
+     *
+     * @param defaultTimerChoice Mode number
+     * @param ui UI
+     * @return Returns the duration of the timer mode selected in seconds
+     */
     private static int selectDefaultTimer(String defaultTimerChoice, Ui ui) {
         switch (defaultTimerChoice) {
         case "0":
@@ -339,6 +346,13 @@ public class Parser {
         return -1;
     }
 
+    /**
+     * Parses input to the timer.
+     *
+     * @param parsedInput Parsed input
+     * @param ui UI
+     * @return Returns the duration of the timer, else returns -1 if invalid duration specified
+     */
     public static int parseTimerInput(String[] parsedInput, Ui ui) {
         try {
             if (parsedInput[TIMER_FORMAT_INDEX].trim().contains("/custom")) {
@@ -356,6 +370,13 @@ public class Parser {
         return -1;
     }
 
+    /**
+     * Parses commands for study mode.
+     *
+     * @param rawUserInput Raw user input
+     * @param ui UI
+     * @param timer Timer object
+     */
     public static void parseStudyMode(String rawUserInput, Ui ui, Timer timer) {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {

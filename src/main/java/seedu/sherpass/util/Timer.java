@@ -16,14 +16,19 @@ public class Timer extends Thread {
     protected int timeLeft;
 
     /**
-     * Initialises the parameters needed for the countdown timer.
-     * @param ui ui
+     * Creates a constructor for timer. Initialises the parameters needed for the countdown timer.
+     *
+     * @param ui UI
      */
     public Timer(Ui ui) {
         timeLeft = NO_TIME_LEFT;
         this.ui = ui;
     }
 
+    /**
+     * Creates a new thread to run the timer. The timer will continue to run until it has run out of time, or has been
+     * stopped by the user.
+     */
     @Override
     public void run() {
         isTimerRunning = true;
@@ -39,6 +44,10 @@ public class Timer extends Thread {
         this.interrupt();
     }
 
+    /**
+     * Updates the timer by letting the thread sleep for 1 second, then updating timeLeft. The timer will not update
+     * if it is paused and will instead wait for the user to resume the timer.
+     */
     private void updateTimer() {
         try {
             Thread.sleep(1000);
@@ -54,6 +63,10 @@ public class Timer extends Thread {
         }
     }
 
+    /**
+     * Method causes the thread which the timer is running on to wait when it is paused, until the user resumes the
+     * timer.
+     */
     private void waitForTimerToResume() {
         try {
             synchronized (this) {
@@ -66,10 +79,18 @@ public class Timer extends Thread {
         }
     }
 
+    /**
+     * @return Boolean of whether timer ran out of time
+     */
     private boolean timerRanOutOfTime() {
         return (!hasTimeLeft && !forcedStop);
     }
 
+    /**
+     * Prints the time left on the timer at certain intervals.
+     * When timer has more than a minute remaining, it prints time remaining every minute (X min:00s).
+     * It will print out the time remaining every TIME_INTERVAL seconds when less than a minute remains.
+     */
     public void printTimeLeft() {
         if (timeLeft > ONE_MINUTE) {
             if (timeLeft % ONE_MINUTE == 0) {
@@ -83,6 +104,9 @@ public class Timer extends Thread {
         }
     }
 
+    /**
+     * Prints the timer selected by the user.
+     */
     public void printTimerStart() {
         int hours;
         int minutes;
@@ -103,6 +127,11 @@ public class Timer extends Thread {
         }
     }
 
+    /**
+     * Sets the duration of the timer, as specified by the user.
+     *
+     * @param duration Duration of timer in seconds
+     */
     public void setDuration(int duration) {
         timeLeft = duration;
         hasTimeLeft = true;
@@ -116,6 +145,9 @@ public class Timer extends Thread {
         return timerPaused;
     }
 
+    /**
+     * Resumes the timer by calling notify() on the waiting thread.
+     */
     public void resumeTimer() {
         synchronized (this) {
             timerPaused = false;
@@ -130,6 +162,9 @@ public class Timer extends Thread {
         timerPaused = true;
     }
 
+    /**
+     * Stops the timer if it is running, else prints an error message.
+     */
     public void stopTimer() {
         if (isTimerRunning) {
             ui.showToUser("Alright, I've stopped the timer.");

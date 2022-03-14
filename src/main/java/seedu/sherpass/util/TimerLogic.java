@@ -8,11 +8,19 @@ public class TimerLogic {
     private static Ui ui;
     private static Timer timer;
 
+    /**
+     * Creates a constructor for TimerLogic.
+     * @param ui UI
+     */
     public TimerLogic(Ui ui) {
         this.ui = ui;
         timer = new Timer(ui);
     }
 
+    /**
+     * Method is called when user chooses to enter Study mode. User is able to start, pause and stop a timer in Study
+     * mode. Only one timer can be running at a time. User can leave Study mode by typing "leave".
+     */
     public void enterStudyMode() {
         String userInput = ui.readCommand();
         while (!userInput.contains("leave")) {
@@ -27,7 +35,12 @@ public class TimerLogic {
             }
         }
     }
-    
+
+    /**
+     * Creates a thread using timer.start() to start the timer with the user's specified duration.
+     *
+     * @param parsedInput Parsed input of the user
+     */
     public static void startTimer(String[] parsedInput) {
         if (timer.getHasTimeLeft()) {
             ui.showToUser("You already have a timer running!");
@@ -70,6 +83,11 @@ public class TimerLogic {
         }
     }
 
+    /**
+     * Resets the timer by creating a new timer object, which can then be started by the user.
+     *
+     * @return New timer object
+     */
     private Timer resetTimer() {
         return new Timer(ui);
     }
