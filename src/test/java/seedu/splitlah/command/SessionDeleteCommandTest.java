@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.parser.Parser;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SessionDeleteCommandTest {
 
