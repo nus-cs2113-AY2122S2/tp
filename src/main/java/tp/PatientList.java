@@ -30,18 +30,6 @@ public class PatientList {
     }
 
     /**
-     * Prints the current list of patients.
-     */
-    public void printPatientList() {
-        System.out.println(boundary + "Here are the patients recorded:");
-        for (int i = 0; i < countPatient; i++) {
-            System.out.println((i + 1) + ". " + getPatient(i));
-        }
-        System.out.print("You have " + countPatient + " patients recorded in the system."
-                                 + System.lineSeparator() + boundary);
-    }
-
-    /**
      * Deletes a patient from the list.
      *
      * @param index Index of the patient to be deleted.
@@ -53,6 +41,17 @@ public class PatientList {
                                  + " patients recorded in the system." + System.lineSeparator() + boundary);
         patients.remove(index - 1);
         countPatient -= 1;
+    }
+
+    @Override
+    public String toString() {
+        String toPrint = boundary + "Here are the patients recorded:" + System.lineSeparator();
+        for (int i = 0; i < countPatient; i++) {
+            toPrint += ((i + 1) + ". " + getPatient(i) + System.lineSeparator());
+        }
+        toPrint += ("You have " + countPatient + " patients recorded in the system."
+                            + System.lineSeparator() + boundary + System.lineSeparator());
+        return toPrint;
     }
 }
 

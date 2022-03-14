@@ -29,15 +29,6 @@ public class DoctorList {
                                  + " doctors recorded in the system." + System.lineSeparator() + boundary);
     }
 
-    public void printDoctorList() {
-        System.out.println(boundary + "Here are the doctors in this hospital:");
-        for (int i = 0; i < size; i++) {
-            System.out.println((i + 1) + ". " + getDoctor(i));
-        }
-        System.out.print("You have " + size + " doctors recorded in the system."
-                                 + System.lineSeparator() + boundary);
-    }
-
     public void deleteDoctor(int index) {
         System.out.println(boundary + "Noted. I've removed this doctor:");
         System.out.println(doctors.get(index));
@@ -45,5 +36,16 @@ public class DoctorList {
                                  + " doctors in the system." + System.lineSeparator() + boundary);
         doctors.remove(index - 1);
         size -= 1;
+    }
+
+    @Override
+    public String toString() {
+        String toPrint = boundary + "Here are the doctors in this hospital:" + System.lineSeparator();
+        for (int i = 0; i < size; i++) {
+            toPrint += ((i + 1) + ". " + getDoctor(i));
+        }
+        toPrint += ("You have " + size + " doctors recorded in the system."
+                            + System.lineSeparator() + boundary + System.lineSeparator());
+        return toPrint;
     }
 }

@@ -37,18 +37,6 @@ public class AppointmentList {
     }
 
     /**
-    * Prints the current list of Appointment.
-    */
-    public void printAppointmentList() {
-        System.out.println(boundary + "Here are the existing appointments:");
-        for (int i = 0; i < countAppointment; i++) {
-            System.out.println((i + 1) + ". " + getAppointment(i));
-        }
-        System.out.print("Now you have " + countAppointment
-                                 + " appointments recorded in the system." + System.lineSeparator() + boundary);
-    }
-
-    /**
      * Deletes an appointment from the list.
      *
      * @param index Index of the appointment to be deleted.
@@ -60,5 +48,17 @@ public class AppointmentList {
                                  + " appointments recorded in the system." + System.lineSeparator() + boundary);
         appointments.remove(index - 1);
         countAppointment -= 1;
+    }
+
+    @Override
+    public String toString() {
+        String toPrint = boundary + "Here are the existing appointments:" + System.lineSeparator();
+        for (int i = 0; i < countAppointment; i++) {
+            toPrint += ((i + 1) + ". " + getAppointment(i));
+        }
+        toPrint += ("Now you have " + countAppointment
+                            + " appointments recorded in the system." + System.lineSeparator()
+                            + boundary + System.lineSeparator());
+        return toPrint;
     }
 }
