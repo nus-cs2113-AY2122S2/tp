@@ -8,7 +8,7 @@ public class ClearCommand extends Command {
 
     @Override
     public void execute(Timetable timetable) {
-        for (int i = 0; i < timetable.size(); i++){
+        for (int i = 0; i < timetable.size(); i++) {
             timetable.remove(i);
         }
         printClearConfirmation();
