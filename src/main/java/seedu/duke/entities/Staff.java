@@ -14,8 +14,21 @@ public class Staff {
      * @param staffName  Name of the Staff.
      * @param position   Job position of the Staff.
      * @param salary     Salary of the Staff.
+     * @throws IllegalArgumentException Check if arguments do not fit the requirements.
      */
-    public Staff(int staffId, String staffName, String position, double salary) {
+    public Staff(int staffId, String staffName, String position, double salary) throws IllegalArgumentException {
+        if (staffId <= 0) {
+            throw new IllegalArgumentException("Staff ID cannot be zero or negative.");
+        }
+        if (!isValidName(staffName)) {
+            throw new IllegalArgumentException("Staff name cannot be null.");
+        }
+        if (!isValidName(position)) {
+            throw new IllegalArgumentException("Position cannot be null or empty.");
+        }
+        if (salary <= 0) {
+            throw new IllegalArgumentException("Salary cannot be zero or negative.");
+        }
         this.staffId = staffId;
         this.staffName = staffName;
         this.position = position;
@@ -26,10 +39,9 @@ public class Staff {
         return staffId;
     }
 
-    public void setStaffId(int staffId) {
+    public void setStaffId(int staffId) throws IllegalArgumentException {
         if (staffId <= 0) {
-            System.out.println("Staff ID cannot be zero or negative.");
-            return;
+            throw new IllegalArgumentException("Staff ID cannot be zero or negative.");
         }
         this.staffId = staffId;
     }
@@ -38,10 +50,9 @@ public class Staff {
         return staffName;
     }
 
-    public void setStaffName(String staffName) {
+    public void setStaffName(String staffName) throws IllegalArgumentException {
         if (!isValidName(staffName)) {
-            System.out.println("Staff name cannot be null.");
-            return;
+            throw new IllegalArgumentException("Staff name cannot be null.");
         }
         this.staffName = staffName;
     }
@@ -50,10 +61,9 @@ public class Staff {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(String position) throws IllegalArgumentException {
         if (!isValidName(position)) {
-            System.out.println("Staff name cannot be null.");
-            return;
+            throw new IllegalArgumentException("Staff name cannot be null.");
         }
         this.position = position;
     }
@@ -62,10 +72,9 @@ public class Staff {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(double salary) throws IllegalArgumentException {
         if (salary <= 0) {
-            System.out.println("Salary cannot be zero or negative.");
-            return;
+            throw new IllegalArgumentException("Salary cannot be zero or negative.");
         }
         this.salary = salary;
     }

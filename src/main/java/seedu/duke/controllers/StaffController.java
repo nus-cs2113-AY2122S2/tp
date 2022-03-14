@@ -24,10 +24,11 @@ public class StaffController extends Controller {
     }
 
     @Override
-    protected boolean optionSwitcher(int choice) {
+    protected boolean optionSwitcher(int choice) throws IllegalArgumentException {
         switch (choice) {
         case 1:
             Staff staff = findStaff();
+            System.out.println(staff);
             break;
         case 2:
             addStaff();
@@ -44,7 +45,7 @@ public class StaffController extends Controller {
         return false;
     }
 
-    public Staff findStaff() {
+    public Staff findStaff() throws IllegalArgumentException {
         System.out.println("Finding staff...");
         System.out.print("ID of staff: ");
         int staffId = scanner.nextInt();
@@ -53,7 +54,7 @@ public class StaffController extends Controller {
         return targetStaff;
     }
 
-    public void addStaff() {
+    public void addStaff() throws IllegalArgumentException {
         System.out.println("Adding new staff...");
         System.out.print("ID of staff: ");
         final int staffId = scanner.nextInt();
