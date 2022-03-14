@@ -41,4 +41,22 @@ public final class InputParser {
             }
         }
     }
+
+    /**
+     * Helper method to get a valid double.
+     *
+     * @param msg Message to show user when getting input.
+     * @return Returns a valid double.
+     * @throws OperationTerminationException When user inputs terminator.
+     */
+    public static double getDouble(String msg) throws OperationTerminationException {
+        while (true) {
+            try {
+                String line = getString(msg).toLowerCase();
+                return Double.parseDouble(line);
+            } catch (NumberFormatException e) {
+                System.out.printf("Error parsing integer - %s\n", e.getMessage());
+            }
+        }
+    }
 }
