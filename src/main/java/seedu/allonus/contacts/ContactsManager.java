@@ -1,13 +1,31 @@
 package seedu.allonus.contacts;
 
-
 import seedu.allonus.ui.TextUi;
 
 import java.util.ArrayList;
 
 public class ContactsManager {
 
-    private static final String CONTACTS_WELCOME_MESSAGE = "Welcome to Contacts Manager";
+    private static final String CONTACTS_WELCOME_MESSAGE =
+            "Welcome to Contacts Manager";
+
+    private static final String CONTACTS_EMPTY_LIST_MESSAGE =
+            "You haven't added any contacts to your list yet!";
+    private static final String CONTACTS_LIST_SUCCESS_MESSAGE =
+            "Here are the contacts in your list:\n";
+
+    private static final String CONTACTS_REMOVE_SUCCESS_MESSAGE =
+            "Noted. I've removed this contact:\n  ";
+    private static final String CONTACTS_REMOVE_INVALID_INDEX_MESSAGE =
+            "You can only delete with a valid number that's in the list :')";
+
+    private static final String CONTACTS_ADD_SUCCESS_MESSAGE =
+            "Got it. I've added this contact:\n  ";
+
+    private static final String CONTACTS_INVALID_COMMAND_MESSAGE =
+            "Please enter a valid command for the Contacts Manager!\n"
+            + "You can try \"list\", \"add\", or \"rm\"";
+
     private static final int CONTACTS_LIST_MAX_SIZE = 100;
     private static final ArrayList<Contact> contactsList = new ArrayList<>(CONTACTS_LIST_MAX_SIZE);
 
@@ -24,6 +42,10 @@ public class ContactsManager {
         printFormat(CONTACTS_WELCOME_MESSAGE);
     }
 
+    private static String printNewNumOfTasksInListMessage() {
+        return String.format("\nNow you have %d contacts in the list.", contactsList.size());
+    }
+
     /**
      * Returns index of item in the list using number given by user.
      *
@@ -32,13 +54,12 @@ public class ContactsManager {
      */
     public static int parseNum(String userInput) {
         String stringOfNum = userInput.split(" ", 0)[1];
-        int ind = Integer.parseInt(stringOfNum) - 1;
-        return ind;
+        return Integer.parseInt(stringOfNum) - 1;
     }
 
     private static void listContacts() {
         if (contactsList.size() == 0) {
-            printFormat("You haven't added any contacts to your list yet!");
+            printFormat(CONTACTS_EMPTY_LIST_MESSAGE);
             return;
         }
 
@@ -47,17 +68,23 @@ public class ContactsManager {
             Contact curr = contactsList.get(i);
             listAsString = listAsString.concat(String.format(" %d. %s\n", i + 1, curr));
         }
-        printFormat("Here are the contacts in your list:\n" + listAsString);
+        printFormat(CONTACTS_LIST_SUCCESS_MESSAGE + listAsString);
     }
 
     private static void deleteContact(String userInput) {
         Contact curr;
-        int taskInd = parseNum(userInput);
-        curr = contactsList.get(taskInd);
-        contactsList.remove(taskInd);
-        printFormat("Noted. I've removed this contact:\n  "
-                + curr
-                + String.format("\nNow you have %d contacts in the list.", contactsList.size()));
+        try {
+            int taskInd = parseNum(userInput);
+            curr = contactsList.get(taskInd);
+            assert taskInd < contactsList.size();
+            contactsList.remove(taskInd);
+            assert taskInd >= 0;
+            assert taskInd < CONTACTS_LIST_MAX_SIZE;
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            printFormat(CONTACTS_REMOVE_INVALID_INDEX_MESSAGE);
+            return;
+        }
+        printFormat(CONTACTS_REMOVE_SUCCESS_MESSAGE + curr + printNewNumOfTasksInListMessage());
     }
 
     private static void addContact(String userInput) {
@@ -69,9 +96,7 @@ public class ContactsManager {
 
         Contact contact = new Contact(name);
         contactsList.add(contact);
-        printFormat("Got it. I've added this contact:\n  "
-                + contact
-                + String.format("\nNow you have %d contacts in the list.", contactsList.size()));
+        printFormat(CONTACTS_ADD_SUCCESS_MESSAGE + contact + printNewNumOfTasksInListMessage());
     }
 
     public static void contactsRunner(TextUi ui) {
@@ -85,8 +110,10 @@ public class ContactsManager {
                 listContacts();
             } else if (userInput.startsWith("rm")) {
                 deleteContact(userInput);
-            } else {
+            } else if (userInput.startsWith("add")) {
                 addContact(userInput);
+            } else {
+                printFormat(CONTACTS_INVALID_COMMAND_MESSAGE);
             }
         }
     }

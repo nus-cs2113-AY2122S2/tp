@@ -1,6 +1,12 @@
 goto m/Contacts_Manager
+invalid contacts command
 add Lucy
 list
+rm
+rm 0
+rm 17
+rm1
+rm not_a_number
 rm 1
 list
 menu
