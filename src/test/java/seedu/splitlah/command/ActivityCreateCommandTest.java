@@ -12,6 +12,10 @@ class ActivityCreateCommandTest {
 
     Manager manager = new Manager();
 
+    /**
+     * Creates a session that is stored and managed by the Manager object.
+     * Creates an activity in the new session that was created.
+     */
     @BeforeEach
     void setUp() {
         String sessionOneArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob Charlie";
