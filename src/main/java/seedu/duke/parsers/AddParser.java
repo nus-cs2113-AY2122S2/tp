@@ -23,6 +23,25 @@ public class AddParser extends Parser {
     // (/t\s+\"(?<taskName>[^\"]+)\"(\s+-d\s+\"(?<taskDescription>[^\"]+)\")?
     // (\s+-t\s+\"(?<estimatedWorkingTime>[^\"]+)\")?(\s+-m\s+\"(?<taskModule>\w+)\")?
     // |/m\s+(?<moduleCode>\w+?(?=(\s+-d\s+)|$))(\s+(-d\s+\"(?<moduleDescription>.+)\"))?)
+
+    /* Explanation for regex:
+     * (/t\s+\"(?<taskName>[^\"]+)\"                     -- matches [/t "taskName"].
+     * (\\s+-d\\s+\\\"(?<taskDescription>[^\\\"]+)\\\")? -- matches [-d "taskDescription"] if present. Optional
+     * (\s+-t\s+\"(?<estimatedWorkingTime>[^\"]+)\")?    -- matches [-t "estimatedWorkingTime"] if present. Optional
+     *                                                   -- None of the above fields accept " as a valid character.
+     *
+     * (\s+-m\s+\"(?<taskModule>\w+)\")?                 -- matches [-m taskModule] if present. Optional
+     *                                                      Note that taskModule does not require "", but must be a
+     *                                                      single word composed of [a-zA-Z0-9_].
+     *
+     * /m\s+(?<moduleCode>\w+?(?=(\s+-d\s+)|$))          -- matches [/m moduleCode]
+     *                                                      Same as above, note that moduleCode does not require "",
+     *                                                      but must also be a single word composed of [a-zA-Z0-9_].
+     *
+     * (\s+(-d\s+\"(?<moduleDescription>.+)\"))?)        -- matches [-d "moduleDescription"] if present. Optional
+     *                                                      Does not accept " as a valid character.
+     */
+
     private static final String ADD_FORMAT = "(/t\\s+\\\"(?<taskName>[^\\\"]+)\\\"(\\s+-d\\s+\\\""
             + "(?<taskDescription>[^\\\"]+)\\\")?(\\s+-t\\s+\\\"(?<estimatedWorkingTime>[^\\\"]+)\\\")?"
             + "(\\s+-m\\s+(?<taskModule>\\w+))?|/m\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)|$))"
@@ -49,10 +68,10 @@ public class AddParser extends Parser {
         final String taskModule = parsedArguments.get(TASK_MODULE);
         final String moduleCode = parsedArguments.get(MODULE_CODE);
         final String moduleDescription = parsedArguments.get(MODULE_DESCRIPTION);
-        if (!Objects.equals(taskName, NULL_FIELD)) {
+        if (!Objects.isNull(taskName)) {
             return new AddCommand(taskName, taskDescription, estimatedWorkingTime, taskModule);
         }
-        if (!Objects.equals(moduleCode, NULL_FIELD)) {
+        if (!Objects.isNull(moduleCode)) {
             return new AddCommand(moduleCode, moduleDescription);
         }
         throw new ParseException();

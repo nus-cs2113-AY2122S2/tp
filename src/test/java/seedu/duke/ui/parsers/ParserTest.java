@@ -294,6 +294,45 @@ public class ParserTest {
     }
 
     @Test
+    public void parse_addCommand_duplicateTaskDescription() {
+        final String testString = "add /t 000 -d \"123\" -t \"456\" -d \"789\"";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_duplicateWorkingTime() {
+        final String testString = "add /t 000 -t \"123\" -d \"456\" -t \"789\"";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_task_invalidInput() {
+        final String testString = "add /t 000 -d \"123\" -t \"456\" invalid";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
     public void parse_addCommand_module_noDescription_parsedCorrectly() {
         final String testString = "add  \t /m modulecode \t\t    ";
         try {
@@ -341,6 +380,19 @@ public class ParserTest {
     @Test
     public void parse_addCommand_module_withDescription_invalidModuleCode() {
         final String testString = "add  \t /m module code \t\t    -d \t\t  \t \"i am a descrip\t -d-d tion\t \"\t  ";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_addCommand_module_withDescription_invalidInput() {
+        final String testString = "add /m cs2113t -d \"11111\"123";
         try {
             parser.parseCommand(testString);
             fail();
