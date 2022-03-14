@@ -2,7 +2,6 @@ package data.workouts;
 
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
-import data.workouts.WorkoutOutOfRangeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -137,7 +136,7 @@ class WorkoutListTest {
         String updateArgument = indexToUpdate + " " + Integer.toString(newReps);
 
         assertThrows(NumberFormatException.class,
-                () -> wl.updateWorkout(updateArgument));
+            () -> wl.updateWorkout(updateArgument));
     }
 
     @Test
@@ -152,6 +151,6 @@ class WorkoutListTest {
         String updateArgument = indexToUpdate + " " + Integer.toString(newReps);
 
         assertThrows(WorkoutOutOfRangeException.class,
-                () -> wl.updateWorkout(updateArgument));
+            () -> wl.updateWorkout(updateArgument));
     }
 }
