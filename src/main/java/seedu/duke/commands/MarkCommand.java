@@ -6,11 +6,11 @@ import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
-import seedu.duke.ui.TextUi;
+import seedu.duke.util.StringConstants;
 
 public class MarkCommand extends Command {
-    private static final String MARK_MESSAGE = TextUi.MARK_MESSAGE_TOP + LS + "%s";
-    private static final String UNMARK_MESSAGE = TextUi.UNMARK_MESSAGE_TOP + LS + "%s";
+    private static final String MARK_MESSAGE = StringConstants.MARK_MESSAGE_TOP + LS + "%s";
+    private static final String UNMARK_MESSAGE = StringConstants.UNMARK_MESSAGE_TOP + LS + "%s";
 
     private final int taskIndex;
     private final boolean status;

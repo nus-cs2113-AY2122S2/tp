@@ -1,9 +1,9 @@
 package seedu.duke.exceptions;
 
-import seedu.duke.ui.TextUi;
+import seedu.duke.util.StringConstants;
 
 public class UnknownCommandException extends ModHappyException {
-    private static final String ERROR_MESSAGE = TextUi.ERROR_UNKNOWN_COMMAND + LS + "\"%s\"";
+    private static final String ERROR_MESSAGE = StringConstants.ERROR_UNKNOWN_COMMAND + LS + "\"%s\"";
 
     public UnknownCommandException() {
         super(ERROR_MESSAGE);

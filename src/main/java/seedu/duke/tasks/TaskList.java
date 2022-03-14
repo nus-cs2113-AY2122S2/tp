@@ -3,12 +3,12 @@ package seedu.duke.tasks;
 import java.util.ArrayList;
 
 import seedu.duke.exceptions.NoSuchTaskException;
-import seedu.duke.ui.TextUi;
+import seedu.duke.util.StringConstants;
 
 public class TaskList {
     private static final String LS = System.lineSeparator();
     private static final String ITEMIZE_FORMAT = "%d. %s" + LS;
-    private static final String EMPTY_LIST = TextUi.EMPTY_LIST;
+    private static final String EMPTY_LIST = StringConstants.EMPTY_LIST;
 
     private final ArrayList<Task> list;
 

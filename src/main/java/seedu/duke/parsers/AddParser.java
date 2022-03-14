@@ -7,17 +7,17 @@ import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
-import seedu.duke.ui.TextUi;
+import seedu.duke.util.StringConstants;
 
 /**
  * This Parser supports the "add" command.
  */
 public class AddParser extends Parser {
-    private static final String TASK_NAME = TextUi.TASK_NAME;
-    private static final String TASK_DESCRIPTION = TextUi.TASK_DESCRIPTION;
-    private static final String TASK_WORKING_TIME = TextUi.TASK_WORKING_TIME;
-    private static final String MODULE_CODE = TextUi.MODULE_CODE;
-    private static final String MODULE_DESCRIPTION = TextUi.MODULE_DESCRIPTION;
+    private static final String TASK_NAME = StringConstants.TASK_NAME;
+    private static final String TASK_DESCRIPTION = StringConstants.TASK_DESCRIPTION;
+    private static final String TASK_WORKING_TIME = StringConstants.TASK_WORKING_TIME;
+    private static final String MODULE_CODE = StringConstants.MODULE_CODE;
+    private static final String MODULE_DESCRIPTION = StringConstants.MODULE_DESCRIPTION;
 
     // Unescaped regex for testing (split into two lines):
     // \s*(\/t\s+(?<taskName>.+?(?=\s+-d\s+|\s+-t\s+|$))(\s+(-d\s+\"(?<taskDescription>([^\"]*))\")(?=(\s+-t\s+)|$))?

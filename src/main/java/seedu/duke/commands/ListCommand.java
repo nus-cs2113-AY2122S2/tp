@@ -2,10 +2,10 @@ package seedu.duke.commands;
 
 import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
-import seedu.duke.ui.TextUi;
+import seedu.duke.util.StringConstants;
 
 public class ListCommand extends Command {
-    private static final String LIST_MESSAGE = TextUi.LIST_MESSAGE_TOP + LS + "%s";
+    private static final String LIST_MESSAGE = StringConstants.LIST_MESSAGE_TOP + LS + "%s";
 
     /**
      * Lists all tasks.

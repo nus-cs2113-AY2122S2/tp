@@ -4,12 +4,12 @@ import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
-import seedu.duke.ui.TextUi;
+import seedu.duke.util.StringConstants;
 
 public class AddCommand extends Command {
-    private static final String ADD_TASK_MESSAGE = TextUi.ADD_TASK_MESSAGE_TOP + LS + "%s" + LS
-            + TextUi.ADD_TASK_MESSAGE_BOTTOM + LS;
-    private static final String ADD_MODULE_MESSAGE = TextUi.ADD_MODULE_MESSAGE_TOP + LS + "%s";
+    private static final String ADD_TASK_MESSAGE = StringConstants.ADD_TASK_MESSAGE_TOP + LS + "%s" + LS
+            + StringConstants.ADD_TASK_MESSAGE_BOTTOM + LS;
+    private static final String ADD_MODULE_MESSAGE = StringConstants.ADD_MODULE_MESSAGE_TOP + LS + "%s";
 
     private final boolean isAddTask;
     private Task newTask = null;
@@ -48,7 +48,7 @@ public class AddCommand extends Command {
             if (!moduleList.isModuleExists(newModule.getModuleCode())) {
                 res = String.format(ADD_MODULE_MESSAGE, moduleList.addModule(newModule));
             } else {
-                res = TextUi.MODULE_ALREADY_EXISTS;
+                res = StringConstants.MODULE_ALREADY_EXISTS;
             }
         }
         return new CommandResult(res);

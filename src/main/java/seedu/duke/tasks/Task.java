@@ -1,14 +1,14 @@
 package seedu.duke.tasks;
 
-import seedu.duke.ui.TextUi;
+import seedu.duke.util.StringConstants;
 
 public class Task {
-    public static final String ICON_UNCOMPLETED = TextUi.ICON_UNCOMPLETED;
-    public static final String ICON_COMPLETED = TextUi.ICON_COMPLETED;
+    public static final String ICON_UNCOMPLETED = StringConstants.ICON_UNCOMPLETED;
+    public static final String ICON_COMPLETED = StringConstants.ICON_COMPLETED;
     public static final String TASK_STRING_NO_DESC_NO_TIME = "%s %s";
     public static final String TASK_STRING_WITH_DESC_NO_TIME = "%s %s (%s)";
-    public static final String TASK_STRING_NO_DESC_WITH_TIME = "%s %s (" + TextUi.ESTIMATED_WORKING_TIME + "%s)";
-    public static final String TASK_STRING_WITH_DESC_WITH_TIME = "%s %s (%s) (" + TextUi.ESTIMATED_WORKING_TIME + "%s)";
+    public static final String TASK_STRING_NO_DESC_WITH_TIME = "%s %s (" + StringConstants.ESTIMATED_WORKING_TIME + "%s)";
+    public static final String TASK_STRING_WITH_DESC_WITH_TIME = "%s %s (%s) (" + StringConstants.ESTIMATED_WORKING_TIME + "%s)";
 
     private boolean isTaskDone;
     private String taskName;
