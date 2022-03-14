@@ -30,8 +30,15 @@ public class Module {
     }
 
     @Override
-    //needs to be fixed
     public String toString() {
         return "[Module] " + moduleCode + " " + category + ": " + day + ", " + timeSlot;
+    }
+
+    public boolean isEqualTo(Module anotherModule) {
+        boolean isEqual = (this.moduleCode.equals(anotherModule.getModuleCode()))
+                && (this.category.equals(anotherModule.getCategory()))
+                && (this.day.equals(anotherModule.getDay()))
+                && (this.timeSlot.equals(anotherModule.getTimeSlot()));
+        return isEqual;
     }
 }
