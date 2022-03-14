@@ -1,8 +1,12 @@
 package seedu.splitlah.command;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.parser.Parser;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ActivityCreateCommandTest {
 
@@ -16,6 +20,14 @@ class ActivityCreateCommandTest {
         String activityOneArgs = "activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /c 15";
         Command createActivityOne = Parser.getCommand(activityOneArgs);
         createActivityOne.run(manager);
+    }
+
+    @Test
+    public void run_hasMissingCostAndCostList_activityListSizeRemainsOne() throws InvalidDataException {
+        String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie";
+        Command command = Parser.getCommand(userInput);
+        command.run(manager);
+        assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
     }
 
 }
