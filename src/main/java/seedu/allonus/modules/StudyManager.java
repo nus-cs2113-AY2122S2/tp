@@ -69,7 +69,7 @@ public class StudyManager {
             if (modulesList.size() == 0) {
                 printMessage("There are no modules to delete!");
             } else {
-                printMessage(" Oops there are only "+ modulesList.size() + " modules left in your schedule");
+                printMessage(" Oops there are only " + modulesList.size() + " modules left in your schedule");
             }
         } catch (NumberFormatException e) {
             printMessage("Please enter the index of the module you would like to delete");
@@ -94,10 +94,10 @@ public class StudyManager {
             String[] rawInput = userInput.split(" ", 2);
             String[] parameters = rawInput[1].split(" ", 4);
             String[] checkedParameters = validateAddInputs(parameters);
-//            String module = parameters[0].substring(2);
-//            String category = parameters[1].substring(2);
-//            String day = parameters[2].substring(2);
-//            String time = parameters[3].substring(2);
+            // String module = parameters[0].substring(2);
+            // String category = parameters[1].substring(2);
+            // String day = parameters[2].substring(2);
+            // String time = parameters[3].substring(2);
             String module = checkedParameters[0];
             String category = checkedParameters[1];
             String day = checkedParameters[2];
@@ -139,15 +139,10 @@ public class StudyManager {
 
     public String[] validateAddInputs(String[] parameters) throws ModuleCodeException, ModuleCategoryException,
             ModuleDayException, ModuleTimeException {
-        String module;
-        String category;
-        String day;
-        String time;
-
-        module = moduleCodeChecker(parameters);
-        category = moduleCategoryChecker(parameters);
-        day = moduleDayChecker(parameters);
-        time = moduleTimeChecker(parameters);
+        String module = moduleCodeChecker(parameters);
+        String category = moduleCategoryChecker(parameters);
+        String day = moduleDayChecker(parameters);
+        String time = moduleTimeChecker(parameters);
 
         return new String[]{module,category,day,time};
     }
@@ -200,7 +195,7 @@ public class StudyManager {
             if (parameters[3].substring(2).equals("") || !parameters[3].substring(0, 2).equals("t/")) {
                 throw new ModuleTimeException();
             } else {
-                time = parameters[0].substring(2);
+                time = parameters[3].substring(2);
             }
         } catch (IndexOutOfBoundsException e) {
             throw new ModuleTimeException();
