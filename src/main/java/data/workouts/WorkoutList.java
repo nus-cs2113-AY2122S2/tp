@@ -39,7 +39,13 @@ public class WorkoutList {
         }
 
         if (!isRepsValueValid) {
-            throw new InvalidWorkoutException(className, InvalidWorkoutException.INVALID_REPS_VALUE);
+            throw new InvalidWorkoutException(className, InvalidWorkoutException.INVALID_REPS_VALUE_ERROR_MSG);
+        }
+
+        boolean hasSameExerciseNameAndReps = checkForExistingWorkout(userExerciseInput, userRepsInput);
+
+        if (hasSameExerciseNameAndReps) {
+            throw new InvalidWorkoutException(className, InvalidWorkoutException.DUPLICATE_WORKOUT_ERROR_MSG);
         }
 
         Workout newWorkout = new Workout(userExerciseInput, userRepsInput);
@@ -173,11 +179,24 @@ public class WorkoutList {
             throw new WorkoutOutOfRangeException(className, WorkoutOutOfRangeException.INDEX_VALUE_OUT_OF_RANGE);
         }
         if (!isNewNumberOfRepsValid) {
-            throw new InvalidWorkoutException(className, InvalidWorkoutException.INVALID_REPS_VALUE);
+            throw new InvalidWorkoutException(className, InvalidWorkoutException.INVALID_REPS_VALUE_ERROR_MSG);
         }
 
         Workout updateWorkout = workoutsList.get(indexToUpdate - 1);
         updateWorkout.setRepetitions(newNumberOfReps);
         return updateWorkout;
+    }
+
+    public boolean checkForExistingWorkout(String exerciseName, int repetitionCount) {
+        for (Workout existingWorkout : getWorkoutsList()) {
+            boolean hasSameExerciseName = existingWorkout.getExerciseName().equals(exerciseName);
+            boolean hasSameRepsCount = existingWorkout.getRepetitions() == repetitionCount;
+
+            if (hasSameExerciseName && hasSameRepsCount) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
