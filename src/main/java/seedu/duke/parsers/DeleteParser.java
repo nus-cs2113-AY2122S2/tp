@@ -10,15 +10,19 @@ import seedu.duke.exceptions.ParseException;
 
 public class DeleteParser extends Parser {
 
-    public static final String MODULE_CODE = "moduleCode";
     public static final String TASK_NUMBER = "taskNumber";
-    //TODO: make the regex stricter in accepting inputs and extend to deleting tasks from modules
-    private static final String DELETE_FORMAT = "\\s*(\\/t\\s+(?<taskNumber>\\d+))|\\/m\\s+(?<moduleCode>\\w+)";
+    public static final String TASK_MODULE = "taskModule";
+    public static final String MODULE_CODE = "moduleCode";
+    // Unescaped regex for testing:
+    // (/t\s+(?<taskNumber>\d+)(\s+-m\s+(?<taskModule>\w+))?|/m\s+(?<moduleCode>\w+))
+    private static final String DELETE_FORMAT = "(/t\\s+(?<taskNumber>\\d+)(\\s+-m\\s+(?<taskModule>\\w+))?"
+            + "|/m\\s+(?<moduleCode>\\w+))";
 
     public DeleteParser() {
         super();
         this.commandFormat = DELETE_FORMAT;
         groupNames.add(TASK_NUMBER);
+        groupNames.add(TASK_MODULE);
         groupNames.add(MODULE_CODE);
     }
 
@@ -26,11 +30,11 @@ public class DeleteParser extends Parser {
     public Command parseCommand(String userInput) throws ModHappyException {
         HashMap<String, String> parsedArguments = parseString(userInput);
         String taskNumberString = parsedArguments.get(TASK_NUMBER);
+        String taskModuleString = parsedArguments.get(TASK_MODULE);
         String moduleCode = parsedArguments.get(MODULE_CODE);
         if (!Objects.equals(moduleCode, NULL_FIELD)) {
             return new DeleteCommand(moduleCode);
         }
-
         if (!Objects.equals(taskNumberString, NULL_FIELD)) {
             int taskNumber;
             try {
@@ -38,7 +42,7 @@ public class DeleteParser extends Parser {
             } catch (NumberFormatException e) {
                 throw new ParseException();
             }
-            return new DeleteCommand(taskNumber);
+            return new DeleteCommand(taskNumber, taskModuleString);
         }
         throw new ModHappyException();
     }

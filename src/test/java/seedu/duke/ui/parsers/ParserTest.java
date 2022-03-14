@@ -416,12 +416,51 @@ public class ParserTest {
     }
 
     @Test
+    public void parse_deleteCommand_withTaskOnly_integerOverflow() {
+        final String testString = "del /t 2147483648";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
     public void parse_deleteCommand_withModuleOnly_parsedCorrectly() {
         final String testString = "del /m CS2113T";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof DeleteCommand);
             assertEquals("CS2113T", ((DeleteCommand) c).getModuleCode());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_deleteCommand_withTask_withTargetModule_parsedCorrectly() {
+        final String testString = "del /t 1 -m cs2113t";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof DeleteCommand);
+            assertEquals(1, ((DeleteCommand) c).getTaskNumber());
+            assertEquals("cs2113t", ((DeleteCommand) c).getTaskModule());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_deleteCommand_withTask_withTargetModule_invalidModuleCode() {
+        final String testString = "del /t 1 -m cs 2113 t";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
         } catch (Exception e) {
             fail();
         }
