@@ -10,13 +10,13 @@ public class EditCommand extends Command {
     int taskIndex;
     String taskDescription;
     String byDate;
-    String remindDate;
+    String doOnDate;
 
-    public EditCommand(int taskNumber, String taskDescription, String byDate, String remindDate) {
+    public EditCommand(int taskNumber, String taskDescription, String byDate, String doOnDate) {
         this.taskIndex = taskNumber - 1;
         this.taskDescription = taskDescription;
         this.byDate = byDate;
-        this.remindDate = remindDate;
+        this.doOnDate = doOnDate;
     }
 
 
@@ -27,8 +27,8 @@ public class EditCommand extends Command {
         if (!byDate.trim().isBlank()) {
             taskList.getTasks().get(taskIndex).setByDate(byDate);
         }
-        if (!remindDate.trim().isBlank()) {
-            taskList.getTasks().get(taskIndex).setRemindDate(remindDate);
+        if (!doOnDate.trim().isBlank()) {
+            taskList.getTasks().get(taskIndex).setDoOnDate(doOnDate);
         }
         printEditTaskMessage(taskList, taskIndex);
         storage.writeSaveData(taskList);

@@ -87,7 +87,7 @@ public class Storage {
         ArrayList<Task> replicatedTasks = taskList.getTasks();
         for (Task task : replicatedTasks) {
             appendToFile(task.getStatusIcon(), task.getDescription(), task.getByDate(),
-                    task.getRemindDate());
+                    task.getDoOnDate());
         }
     }
 

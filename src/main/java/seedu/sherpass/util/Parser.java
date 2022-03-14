@@ -15,6 +15,7 @@ import seedu.sherpass.command.UnmarkCommand;
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.WrongEditInfoFormatException;
+import seedu.sherpass.exception.InvalidTimeException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
@@ -25,32 +26,38 @@ import java.time.format.DateTimeParseException;
 import static seedu.sherpass.constant.DateAndTimeFormat.noTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskNoTimeFormat;
 
-import static seedu.sherpass.constant.Index.CUSTOM_TIMER_INDEX;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_INDEX;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ONE;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_THREE;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
+import static seedu.sherpass.constant.Index.SAVE_TASK_BY_DATE_INDEX;
+import static seedu.sherpass.constant.Index.SAVE_TASK_DESCRIPTION_INDEX;
+import static seedu.sherpass.constant.Index.SAVE_TASK_DO_ON_DATE_INDEX;
+import static seedu.sherpass.constant.Index.SAVE_TASK_MARK_STATUS;
+import static seedu.sherpass.constant.Index.MARK_INDEX;
+import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
+import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
+import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
 import static seedu.sherpass.constant.Index.FIND_BY_TASK_CONTENT_INDEX;
 import static seedu.sherpass.constant.Index.FIND_BY_TASK_DATE_INDEX;
 import static seedu.sherpass.constant.Index.FIND_BY_TASK_DESCRIPTION_NO_DATE_INDEX;
 import static seedu.sherpass.constant.Index.FIND_BY_TASK_DESCRIPTION_WITH_DATE_INDEX;
-import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
-import static seedu.sherpass.constant.Index.MARK_INDEX;
 import static seedu.sherpass.constant.Index.OPTIONS_INDEX;
-import static seedu.sherpass.constant.Index.SAVE_TASK_BY_DATE_INDEX;
-import static seedu.sherpass.constant.Index.SAVE_TASK_DESCRIPTION_INDEX;
-import static seedu.sherpass.constant.Index.SAVE_TASK_REMIND_DATE_INDEX;
-import static seedu.sherpass.constant.Index.SAVE_TASK_MARK_STATUS;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ZERO;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ONE;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_THREE;
+import static seedu.sherpass.constant.Index.CUSTOM_TIMER_INDEX;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_INDEX;
 import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
-import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
-import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.DATE_FORMAT_WITHOUT_TIME;
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_STUDY_INPUT_MESSAGE;
 
+import static seedu.sherpass.util.TimerLogic.pauseTimer;
+import static seedu.sherpass.util.TimerLogic.resumeTimer;
+import static seedu.sherpass.util.TimerLogic.startTimer;
+import static seedu.sherpass.util.TimerLogic.stopTimer;
 
 public class Parser {
 
@@ -70,14 +77,14 @@ public class Parser {
 
         Task parsedData;
         String parsedByDate = "";
-        String parsedRemindDate = "";
+        String parsedDoOnDate = "";
 
         if (rawData.length >= 3) {
             try {
                 parsedByDate = prepareTaskDate(rawData[SAVE_TASK_BY_DATE_INDEX], true);
 
                 if (rawData.length == 4) {
-                    parsedRemindDate = prepareTaskDate(rawData[SAVE_TASK_REMIND_DATE_INDEX], true);
+                    parsedDoOnDate = prepareTaskDate(rawData[SAVE_TASK_DO_ON_DATE_INDEX], true);
                 }
 
             } catch (DateTimeParseException invalidDate) {
@@ -85,7 +92,7 @@ public class Parser {
             }
         }
 
-        parsedData = new Task(rawData[SAVE_TASK_DESCRIPTION_INDEX].trim(), parsedByDate, parsedRemindDate);
+        parsedData = new Task(rawData[SAVE_TASK_DESCRIPTION_INDEX].trim(), parsedByDate, parsedDoOnDate);
 
         if (rawData[SAVE_TASK_MARK_STATUS].equals("X")) {
             parsedData.markAsDone();
@@ -121,25 +128,24 @@ public class Parser {
     }
 
     private static Command prepareAdd(String[] splitInput, TaskList taskList) {
-        String[] filteredTaskContent = null;
-        String byDate = null;
-        String remindDate = null;
+        String[] filteredTaskContent;
+        String byDate;
+        String doOnDate;
         try {
-            if (!splitInput[TASK_CONTENT_INDEX].contains("/by")
-                    && !splitInput[TASK_CONTENT_INDEX].contains("/remind")) {
+            if (!splitInput[TASK_CONTENT_INDEX].contains("/by") && !splitInput[TASK_CONTENT_INDEX].contains("/do_on")) {
                 return new AddCommand(splitInput[TASK_CONTENT_INDEX], taskList, EMPTY_STRING, EMPTY_STRING);
             }
 
             filteredTaskContent = splitInput[TASK_CONTENT_INDEX].split("/by", 2);
-            if (!splitInput[1].contains("/remind")) {
+            if (!splitInput[1].contains("/do_on")) {
                 byDate = prepareTaskDate(filteredTaskContent[1].trim(), false);
                 return new AddCommand(filteredTaskContent[0].trim(), taskList, byDate, EMPTY_STRING);
             }
 
-            String[] filteredDates = filteredTaskContent[1].split("/remind");
+            String[] filteredDates = filteredTaskContent[1].split("/do_on");
             byDate = prepareTaskDate(filteredDates[0].trim(), false);
-            remindDate = prepareTaskDate(filteredDates[1].trim(), false);
-            return new AddCommand(filteredTaskContent[0], taskList, byDate, remindDate);
+            doOnDate = prepareTaskDate(filteredDates[1].trim(), false);
+            return new AddCommand(filteredTaskContent[0], taskList, byDate, doOnDate);
 
         } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
             printMissingInputMessage();
@@ -167,9 +173,9 @@ public class Parser {
             System.out.println("Invalid date");
         } catch (WrongEditInfoFormatException e) {
             System.out.println("Please use the correct order of keywords:\n"
-                    + "<task_description> /by <task_due_date> /remind <task_reminder_date>\n\n"
+                    + "<task_description> /by <task_due_date> /do_on <date_to_work_on_task>\n\n"
                     + "You only need to input the parts you want to edit.\n"
-                    + "e.g. edit 1 /remind 2022/02/12\n"
+                    + "e.g. edit 1 /do_on 2022/02/12\n"
                     + "(The task_description and task_due_date is left out here)");
         }
 
@@ -177,14 +183,14 @@ public class Parser {
     }
 
     private static void checkCorrectEditInfoFormat(String fullEditInfo) throws WrongEditInfoFormatException {
-        // tests to make sure the byDate is before the remindDate
-        if (fullEditInfo.contains("/by") && fullEditInfo.contains("/remind")) {
-            if (fullEditInfo.indexOf("/by") > fullEditInfo.indexOf("/remind")) {
+        // tests to make sure the byDate is before the doOnDate
+        if (fullEditInfo.contains("/by") && fullEditInfo.contains("/do_on")) {
+            if (fullEditInfo.indexOf("/by") > fullEditInfo.indexOf("/do_on")) {
                 throw new WrongEditInfoFormatException();
             }
         }
         // tests to make sure the task description is the first input if it is present
-        String[] splitEditInfo = fullEditInfo.split("/by \\d{4}/\\d{2}/\\d{2}|/remind \\d{4}/\\d{2}/\\d{2}");
+        String[] splitEditInfo = fullEditInfo.split("/by \\d{4}/\\d{2}/\\d{2}|/do_on \\d{4}/\\d{2}/\\d{2}");
         if (splitEditInfo.length > 1) {
             throw new WrongEditInfoFormatException();
         }
@@ -197,14 +203,14 @@ public class Parser {
         String parsedByDateToEdit;
         String parsedRemindDateToEdit;
 
-        if (!splitEditInfo[0].trim().equals("/by") && !(splitEditInfo[0].trim().equals("/remind"))) {
+        if (!splitEditInfo[0].trim().equals("/by") && !(splitEditInfo[0].trim().equals("/do_on"))) {
             descriptionToEdit = splitEditInfo[0];
         } else {
             descriptionToEdit = EMPTY_STRING;
         }
 
         parsedByDateToEdit = getParsedDateToEdit(fullEditInfo, "/by");
-        parsedRemindDateToEdit = getParsedDateToEdit(fullEditInfo, "/remind");
+        parsedRemindDateToEdit = getParsedDateToEdit(fullEditInfo, "/do_on");
 
         return new EditCommand(taskNumberToEdit, descriptionToEdit, parsedByDateToEdit, parsedRemindDateToEdit);
     }
@@ -216,7 +222,7 @@ public class Parser {
             int offsetForKeyword = keyword.length() + 1;
             int offsetForSubstring = fullEditInfo.indexOf(keyword) + offsetForKeyword;
 
-            // gets the substring (of fullEditInfo) after the keyword (, which is either "/by" or "/remind")
+            // gets the substring (of fullEditInfo) after the keyword (, which is either "/by" or "/do_on")
             // splits the substring and obtains the first word (which should be the date of format yyyy/MM/dd)
             String dateToEdit = fullEditInfo.substring(offsetForSubstring).split(" ")[0].trim();
 
@@ -378,8 +384,17 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the default timer modes.
+     *
+     * @param defaultTimerChoice Mode number
+     * @param ui UI
+     * @return Returns the duration of the timer mode selected in seconds
+     */
     private static int selectDefaultTimer(String defaultTimerChoice, Ui ui) {
         switch (defaultTimerChoice) {
+        case "0":
+            return DEFAULT_TIMER_ZERO;
         case "1":
             return DEFAULT_TIMER_ONE;
         case "2":
@@ -393,7 +408,14 @@ public class Parser {
         return -1;
     }
 
-    private static int parseTimerInput(String[] parsedInput, Ui ui) {
+    /**
+     * Parses input to the timer.
+     *
+     * @param parsedInput Parsed input
+     * @param ui UI
+     * @return Returns the duration of the timer, else returns -1 if invalid duration specified
+     */
+    public static int parseTimerInput(String[] parsedInput, Ui ui) {
         try {
             if (parsedInput[TIMER_FORMAT_INDEX].trim().contains("/custom")) {
                 String[] customTimerInput = parsedInput[TIMER_FORMAT_INDEX].split("/custom", 2);
@@ -410,26 +432,35 @@ public class Parser {
         return -1;
     }
 
-    public static void parseStudyMode(String rawUserInput, Ui ui) {
+    /**
+     * Parses commands for study mode.
+     *
+     * @param rawUserInput Raw user input
+     * @param ui UI
+     * @param timer Timer object
+     */
+    public static void parseStudyMode(String rawUserInput, Ui ui, Timer timer) {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
-            int duration = parseTimerInput(parsedInput, ui);
-            if (duration >= 0) {
-                Timer.start(duration, ui);
+            try {
+                startTimer(parsedInput);
+            } catch (InvalidTimeException e) {
+                ui.showToUser("Oops! Your timer input does not seem to be correct.\n"
+                        + "Please re-enter a valid duration.");
             }
             break;
         case "pause":
-            Timer.pause(ui);
+            pauseTimer();
             break;
         case "resume":
-            Timer.resume(ui);
+            resumeTimer();
             break;
         case "stop":
-            Timer.stop(ui);
+            stopTimer();
             break;
         default:
-            ui.showToUser(ERROR_INVALID_INPUT_MESSAGE);
+            ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);
         }
     }
 }

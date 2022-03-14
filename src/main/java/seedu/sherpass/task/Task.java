@@ -4,7 +4,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected String byDate;
-    protected String remindDate;
+    protected String doOnDate;
 
 
     /**
@@ -13,11 +13,11 @@ public class Task {
      *
      * @param description Description of task.
      */
-    public Task(String description, String byDate, String remindDate) {
+    public Task(String description, String byDate, String doOnDate) {
         this.description = description;
         this.isDone = false;
         this.byDate = byDate;
-        this.remindDate = remindDate;
+        this.doOnDate = doOnDate;
     }
 
     /**
@@ -87,8 +87,8 @@ public class Task {
         return byDate;
     }
 
-    public String getRemindDate() {
-        return remindDate;
+    public String getDoOnDate() {
+        return doOnDate;
     }
 
     /**
@@ -100,17 +100,17 @@ public class Task {
      */
     @Override
     public String toString() {
-        if (this.byDate.equals("") && this.remindDate.equals("")) {
+        if (this.byDate.equals("") && this.doOnDate.equals("")) {
             return "[" + this.getStatusIcon() + "] " + this.getDescription();
         }
 
-        if (this.remindDate.equals("")) {
+        if (this.doOnDate.equals("")) {
             return "[" + this.getStatusIcon() + "] " + this.getDescription()
                     + " (by: " + this.byDate + ")";
         }
 
         return "[" + this.getStatusIcon() + "] " + this.getDescription()
-            + " (by: " + this.byDate + ") (reminder on: " + this.remindDate + ")";
+            + " (by: " + this.byDate + ") (reminder on: " + this.doOnDate + ")";
     }
 
 
@@ -122,7 +122,7 @@ public class Task {
         this.byDate = byDate;
     }
 
-    public void setRemindDate(String remindDate) {
-        this.remindDate = remindDate;
+    public void setDoOnDate(String doOnDate) {
+        this.doOnDate = doOnDate;
     }
 }
