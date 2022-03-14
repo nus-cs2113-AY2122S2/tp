@@ -247,11 +247,11 @@ Format: `activity /list /sid [SESSION_ID]`
     * The unique identifier for a session can be retrieved with `session /list` command.
 
 > **💡 Note(s):**
->- The session with a unique identifier of `[SESSION_ID]` have to exist before the activities can be listed.
+>- The session with a unique identifier of `[SESSION_ID]` has to exist before the activities can be listed.
 
 
 Examples of usage:
-1. Views an activity with a unique identifier of 1 in a session with a session unique identifier of 1.
+1. List the activities in a session with a unique identifier of 1.
     - `activity /view /sid 1`
       <br>
       ![Activity list command Screenshot](images/userguide/ActivityListCommand.png)
