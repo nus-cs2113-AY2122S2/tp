@@ -1,5 +1,15 @@
 package seedu.splitlah.ui;
 
+import seedu.splitlah.command.ActivityDeleteCommand;
+import seedu.splitlah.command.ActivityListCommand;
+import seedu.splitlah.command.ActivityViewCommand;
+import seedu.splitlah.command.ExitCommand;
+import seedu.splitlah.command.HelpCommand;
+import seedu.splitlah.command.SessionCreateCommand;
+import seedu.splitlah.command.SessionDeleteCommand;
+import seedu.splitlah.command.SessionListCommand;
+import seedu.splitlah.command.SessionSummaryCommand;
+
 /**
  * Container of hardcoded messages.
  * Naming convention: [TYPE]_[CLASS]_[MESSAGE].
