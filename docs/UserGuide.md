@@ -52,7 +52,7 @@ A new workout of carrying out Russian twists 50 times will be created and added 
 ### Show all Workouts: `workout /list`
 List down all workouts that have been created and stored in the workout list.
 
-Syntax: `workout /list`
+Format: `workout /list`
 
 **Example**
 ```
