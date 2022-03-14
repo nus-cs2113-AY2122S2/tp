@@ -1,18 +1,21 @@
 package seedu.duke.commands;
 
 import seedu.duke.Timetable;
-import seedu.duke.events.Event;
 
 public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
 
     @Override
     public String execute(Timetable timetable) {
-        timetable.clear();
-        return clearConfirmation();
+        for (int i = 0; i < timetable.size(); i++) {
+            timetable.remove(i);
+        }
+        printClearConfirmation();
+        return "";
     }
 
-    private String clearConfirmation() {
-        return "The timetable has been cleared.\n";
+    public static void printClearConfirmation() {
+        System.out.println("Your whole timetable has been cleared");
     }
+
 }
