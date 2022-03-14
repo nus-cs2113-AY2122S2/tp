@@ -114,7 +114,7 @@ public class WorkoutCommand extends Command {
 
         } catch (InvalidExerciseException e) {
             System.out.println(e.getMessage());
-            System.out.println("Please try again.");
+            System.out.println("Please try again. Enter 'exercise /list' for a list\nof available exercises.");
 
         } catch (InvalidWorkoutException e) {
             System.out.println(e.getMessage());
