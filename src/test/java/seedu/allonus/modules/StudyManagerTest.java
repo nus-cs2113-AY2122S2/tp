@@ -53,8 +53,6 @@ public class StudyManagerTest {
     @Test
     public void testDeleteModule() {
         StudyManager studyManager = new StudyManager();
-
-        String USER_INPUT_FOR_DELETE = "rm 1";
         studyManager.deleteModule(USER_INPUT_FOR_DELETE);
 
         // after deletion cs2113 should not be in the list
