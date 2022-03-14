@@ -16,7 +16,7 @@ public class ActivityDeleteCommand extends Command {
 
     public static final String COMMAND_TEXT = "activity /delete";
 
-    private static final String COMMAND_FORMAT = "Syntax: activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]";
+    public static final String COMMAND_FORMAT = "Syntax: activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]";
 
     private static final String COMMAND_CONFIRMATION = "Are you sure you want to delete activity id: ";
 

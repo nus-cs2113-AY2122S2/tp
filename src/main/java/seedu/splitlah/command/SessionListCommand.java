@@ -15,7 +15,7 @@ public class SessionListCommand extends Command {
 
     public static final String COMMAND_TEXT = "session /list";
 
-    private static final String COMMAND_FORMAT = "Syntax: session /list";
+    public static final String COMMAND_FORMAT = "Syntax: session /list";
 
     private static final String SESSION_LIST_HEADER = "List of Sessions";
 

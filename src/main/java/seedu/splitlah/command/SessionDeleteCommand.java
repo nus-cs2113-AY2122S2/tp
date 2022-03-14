@@ -15,7 +15,7 @@ public class SessionDeleteCommand extends Command {
 
     public static final String COMMAND_TEXT = "session /delete";
 
-    private static final String COMMAND_FORMAT = "Syntax: session /delete /sid [SESSION_ID]";
+    public static final String COMMAND_FORMAT = "Syntax: session /delete /sid [SESSION_ID]";
 
     private static final String COMMAND_CONFIRMATION = "Are you sure you want to delete session id: ";
 
