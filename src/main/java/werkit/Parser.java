@@ -81,7 +81,7 @@ public class Parser {
      *
      * @param userInput The unparsed input given by the user.
      * @return A subclass of the Command object. The type of Command object is determined based on the
-     * user's input.
+     *         user's input.
      * @throws ArrayIndexOutOfBoundsException If the user's input contains insufficient information to parse.
      * @throws InvalidCommandException        If the user's input contains invalid or insufficient information
      *                                        to parse.

@@ -8,7 +8,8 @@ import data.workouts.WorkoutList;
 import org.junit.jupiter.api.Test;
 import storage.FileManager;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ParserTest {
     private UI ui = new UI();
