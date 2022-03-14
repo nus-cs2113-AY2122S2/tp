@@ -26,6 +26,27 @@ class SessionCreateCommandTest {
     }
 
     /**
+     * Checks if session is created with missing delimiters.
+     */
+    @Test
+    public void run_hasMissingDelimiter_InvalidCommand() {
+        // Case 1: Missing /n delimiter
+        String argsMissingNameDelimiter = "session /create /d 15-02-2022 /pl Alice Bob";
+        Command createSessionOne = Parser.getCommand(argsMissingNameDelimiter);
+        assertEquals(InvalidCommand.class, createSessionOne.getClass());
+
+        // Case 2: Missing /d delimiter
+        String argsMissingDateDelimiter = "session /create /n Class outing /pl Alice Bob";
+        Command createSessionTwo = Parser.getCommand(argsMissingDateDelimiter);
+        assertEquals(InvalidCommand.class, createSessionTwo.getClass());
+
+        // Case 3: Missing /pl delimiter
+        String argsMissingPersonListDelimiter = "session /create /n Class outing /d 15-02-2022";
+        Command createSessionThree = Parser.getCommand(argsMissingPersonListDelimiter);
+        assertEquals(InvalidCommand.class, createSessionThree.getClass());
+    }
+
+    /**
      * Checks if a session is created with duplicated person names.
      */
     @Test
