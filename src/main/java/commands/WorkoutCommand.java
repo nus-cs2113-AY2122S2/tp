@@ -32,9 +32,19 @@ public class WorkoutCommand extends Command {
 
     private static Logger logger = Logger.getLogger(WorkoutCommand.class.getName());
 
+    /**
+     * Constructs a new instance of the WorkoutCommand. Constructed when the user enters a
+     * workout-related command.
+     *
+     * @param userInput The user's full original input.
+     * @param fileManager An instance of the FileManager class.
+     * @param workoutList An instance of the WorkoutList class.
+     * @param userAction The action that was parsed from the user's input.
+     * @param userArguments The arguments that are accompanied with the user action.
+     * @throws InvalidCommandException If the command entered by the user is incorrect.
+     */
     public WorkoutCommand(String userInput, FileManager fileManager, WorkoutList workoutList,
-            String userAction, String userArguments) throws InvalidCommandException,
-            IOException {
+            String userAction, String userArguments) throws InvalidCommandException {
         super(userInput);
         this.fileManager = fileManager;
         this.workoutList = workoutList;
