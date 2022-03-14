@@ -1,9 +1,8 @@
 package seedu.duke.controllers;
 
 import seedu.duke.entities.Dish;
+import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.manager.DishManager;
-
-import java.util.Scanner;
 
 /**
  * DishController (or MenuController if you like).
@@ -13,16 +12,14 @@ public class DishController extends Controller {
             "Change the price of a dish", "Change the name of a dish"
     };
     private final DishManager dishManager;
-    private final Scanner scanner;
 
     public DishController() {
         super(CHOICES);
         dishManager = new DishManager();
-        scanner = new Scanner(System.in);
     }
 
     @Override
-    protected boolean optionSwitcher(int choice) {
+    protected boolean optionSwitcher(int choice) throws OperationTerminationException {
         try {
             switch (choice) {
             case 1:
@@ -54,37 +51,30 @@ public class DishController extends Controller {
         return false;
     }
 
-    private void changeName() throws IndexOutOfBoundsException, IllegalArgumentException {
-        System.out.println("Changing name");
-        System.out.print("The index of dish");
-        int index = scanner.nextInt();
-        System.out.print("The new name of dish");
-        String name = scanner.nextLine();
+    private void changeName() throws IndexOutOfBoundsException, IllegalArgumentException, OperationTerminationException {
+        System.out.println("Changing name...");
+        int index = InputParser.getInteger("The index of dish");
+        String name = InputParser.getString("The new name of dish");
         dishManager.setName(index, name);
     }
 
-    private void changePrice() throws IndexOutOfBoundsException, IllegalArgumentException {
-        System.out.println("Changing price");
-        System.out.print("The index of dish: ");
-        int index = scanner.nextInt();
-        System.out.print("The new price of dish: ");
-        double newPrice = scanner.nextDouble();
+    private void changePrice() throws IndexOutOfBoundsException, IllegalArgumentException, OperationTerminationException {
+        System.out.println("Changing price...");
+        int index = InputParser.getInteger("The index of dish");
+        double newPrice = InputParser.getDouble("The new price of dish: ");
         dishManager.setPrice(index, newPrice);
     }
 
-    private void deleteDish() throws IndexOutOfBoundsException {
+    private void deleteDish() throws IndexOutOfBoundsException, OperationTerminationException {
         System.out.println("Deleting dish");
-        System.out.print("The index of dish : ");
-        int index = scanner.nextInt();
+        int index = InputParser.getInteger("The index of dish");
         dishManager.deleteDish(index);
     }
 
-    private void addDish() throws IllegalArgumentException {
-        System.out.println("Adding new dish");
-        System.out.print("The name of dish: ");
-        String name = scanner.nextLine();
-        System.out.print("The price of dish: ");
-        double price = scanner.nextDouble();
+    private void addDish() throws IllegalArgumentException, OperationTerminationException {
+        System.out.println("Adding new dish...");
+        String name = InputParser.getString("The name of dish: ");
+        double price = InputParser.getDouble("The price of dish: ");
         dishManager.addDish(new Dish(name, price));
     }
 
