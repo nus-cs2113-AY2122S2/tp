@@ -31,7 +31,7 @@ public class ActivityCreateCommand extends Command {
             "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
                     + "/cl [COST1 COST2…] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
-    private static final String COMMAND_SUCCESS = "The activity was created successfully with activity id of: ";
+    private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
 
     private int sessionId;
     private String activityName;
@@ -306,7 +306,7 @@ public class ActivityCreateCommand extends Command {
             addAllActivityCost(involvedPersonList, personPaid, totalCost, costList, activityId);
             Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(activity);
-            manager.getUi().printlnMessage(COMMAND_SUCCESS + activityId);
+            manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + activity);
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
         }
