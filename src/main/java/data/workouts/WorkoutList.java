@@ -231,7 +231,7 @@ public class WorkoutList {
      * @param exerciseName    The name of the exercise to check.
      * @param repetitionCount The number of repetitions of the exercise to check.
      * @return True if an existing workout with the same exercise name and repetition count exists in the list.
-     * Otherwise, returns false.
+     *         Otherwise, returns false.
      */
     public boolean checkForExistingWorkout(String exerciseName, int repetitionCount) {
         for (Workout existingWorkout : getWorkoutsList()) {

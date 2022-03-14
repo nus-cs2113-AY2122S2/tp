@@ -152,7 +152,7 @@ public class FileManager {
      * of the application.
      *
      * @return Returns true if all the required directory and files already exists. Otherwise,
-     * returns false.
+     *         returns false.
      */
     public boolean checkIfAllDirectoryAndFilesExists() {
         if (!isWasDirectoryAlreadyMade()) {
@@ -173,7 +173,7 @@ public class FileManager {
      * of the application. If any of them does not exist, create them.
      *
      * @throws IOException If the application is unable to create the required directory
-     * and/or files.
+     *         and/or files.
      */
     public void checkAndCreateDirectoriesAndFiles() throws IOException {
         checkIfDataDirectoryAlreadyExists();
@@ -282,7 +282,7 @@ public class FileManager {
      *
      * @param workoutList An instance of the WorkoutList class.
      * @return Returns true if all workouts have been loaded into the application successfully.
-     * Otherwise, returns false.
+     *         Otherwise, returns false.
      * @throws IOException If the method is unable to open the workout file.
      */
     public boolean loadWorkoutsFromFile(WorkoutList workoutList) throws IOException {
