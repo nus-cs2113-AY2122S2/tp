@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.events.Event;
+import seedu.duke.exceptions.DuplicateEventException;
 
 import java.util.ArrayList;
 
@@ -11,7 +12,10 @@ public class Timetable {
         this.list = new ArrayList<>();
     }
 
-    public void add(Event event) {
+    public void add(Event event) throws DuplicateEventException {
+        if (isDuplicate(event)) {
+            throw new DuplicateEventException();
+        }
         list.add(event);
     }
 
@@ -30,6 +34,16 @@ public class Timetable {
 
     public void clear() {
         list.clear();
+    }
+
+    private boolean isDuplicate(Event newEvent) {
+        for (int i = 0; i < list.size(); i++) {
+            Event event = list.get(i);
+            if (event.equals(newEvent)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
