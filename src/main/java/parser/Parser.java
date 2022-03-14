@@ -55,18 +55,71 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareAddCommand(String args) {
-        String[] parts = args.split("i/");
-        // Validate arg string format
-        if (parts.length != 2) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        String[] words = args.trim().split(" ", 2);  // split the input into command and arguments
+        if (words.length == 0) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
+
+        final String category = words[0]; //either product or subscription
+        final String arguments = args.replaceFirst(category, "").trim();
+
+        String[] parts = arguments.split(" "); // i/Tom,
+        //add product i/ITEM_NAME p/PRICE d/DATE t/PRODUCT_TYPE
+        //add subscription i/ITEM_NAME p/PRICE d/DATE r/RENEWAL
+
+        //make sure that the user input a name
         try {
-            return new AddCommand(
-                    parts[0].trim(),
-                    parts[1].trim()
-            );
-        } catch (IllegalValueException ive) {
+            String name = parts[0].replace("i/", "");
+        } catch (IndexOutOfBoundsException ive) {
             return new IncorrectCommand(ive.getMessage());
+        }
+
+        //make sure that the user input a price
+        try {
+            double price = Double.parseDouble(parts[1].replace("p/", ""));
+        } catch (IndexOutOfBoundsException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
+
+        //make sure that the user input a date
+        try {
+            String date = parts[2].replace("i/", "");
+        } catch (IndexOutOfBoundsException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
+
+        switch (category) {
+            case "product":
+                //make sure that the user input a product type
+                try {
+                    String productType = parts[3].replace("t/", "");
+                } catch (IndexOutOfBoundsException ive) {
+                    return new IncorrectCommand(ive.getMessage());
+                }
+
+                try {
+                    AddCommand addCmd = new AddCommand();
+                    addCmd.AddProductCommand(name, price, date, productType); //here the function should return a command
+                    //HELP
+                    //HELP
+                } catch (IllegalValueException ive) {
+                    return new IncorrectCommand(ive.getMessage());
+                }
+            case "subscription":
+                //make sure that the user input a renewal date
+                try {
+                    String renewal = parts[3].replace("r/", "");
+                } catch (IndexOutOfBoundsException ive) {
+                    return new IncorrectCommand(ive.getMessage());
+                }
+
+                try {
+                    return new AddSubscriptionCommand(name, price, date, renewal); //do i split AddCommand into Add subscription command and Add product Command
+                    //HELP
+                    //HELP
+                } catch (IllegalValueException ive) {
+                    return new IncorrectCommand(ive.getMessage());
+                }
         }
     }
 

@@ -22,15 +22,29 @@ public class AddCommand extends Command {
 
     private final Record toAdd;
 
+    public AddCommand(){
+
+    }
     /**
      * Convenience constructor using raw values.
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String name, double price, String category,
-                      String date) throws IllegalValueException {
-        this.toAdd = new Record(name, price, category, date);
+    public void AddProductCommand(String name, double price,
+                      String date, String productType) throws IllegalValueException {
+        this.toAdd = new Product(name, price, date, productType);
     }
+
+    /**
+     * Convenience constructor using raw values.
+     *
+     * @throws IllegalValueException if any of the raw values are invalid
+     */
+    public void AddSubscriptionCommand(String name, double price,
+                             String date, String renewal) throws IllegalValueException {
+        this.toAdd = new Subscription(name, price, date, renewal);
+    }
+
 
     public Record getRecord() {
         return toAdd;
