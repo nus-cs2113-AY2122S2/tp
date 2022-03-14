@@ -8,6 +8,7 @@ public abstract class Command {
     }
 
     public abstract void execute() throws WrongCommandException;
+    public abstract void execute(RoomList list) throws WrongCommandException;
 
     public boolean isExit() {
         return this.isExit;

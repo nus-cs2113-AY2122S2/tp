@@ -9,4 +9,5 @@ public class ExitCommand extends Command {
     public void execute() {
         System.out.println("see u again!");
     }
+    public void execute(RoomList roomList){}
 }

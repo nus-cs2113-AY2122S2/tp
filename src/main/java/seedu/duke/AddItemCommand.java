@@ -53,6 +53,9 @@ public class AddItemCommand extends Command {
     public void execute() {
     }
 
+    public void execute(RoomList list) {
+    }
+
     public String getItemName() {
         return itemName;
     }
