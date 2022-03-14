@@ -33,6 +33,6 @@ class ParserTest {
 
         String testInput = "hmmm /new russian twist /reps 1000";
         assertThrows(InvalidCommandException.class,
-                () -> parser.parseUserInput(testInput));
+            () -> parser.parseUserInput(testInput));
     }
 }
