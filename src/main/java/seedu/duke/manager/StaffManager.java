@@ -39,10 +39,8 @@ public class StaffManager {
      * @param staffName  Name of the Staff.
      * @param position   Job position of the Staff.
      * @param salary     Salary of the Staff.
-     * @throws IllegalArgumentException Check if arguments do not fit the requirements.
      */
-    public void addStaff(int staffId, String staffName, String position, double salary)
-        throws IllegalArgumentException {
+    public void addStaff(int staffId, String staffName, String position, double salary) {
         if (findByStaffId(staffId, false) != null) {
             System.out.println("Staff with the same ID already exists, use another ID...");
         }

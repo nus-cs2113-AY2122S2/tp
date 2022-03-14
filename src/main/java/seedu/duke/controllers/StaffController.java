@@ -26,24 +26,20 @@ public class StaffController extends Controller {
 
     @Override
     protected boolean optionSwitcher(int choice) throws OperationTerminationException {
-        try {
-            switch (choice) {
-            case 1:
-                Staff staff = findStaff();
-                System.out.println(staff);
-                break;
-            case 2:
-                addStaff();
-                break;
-            case 0:
-                System.out.println("Exiting Staff Menu...");
-                return true;
-            default:
-                System.out.println("Unknown choice!");
-                break;
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+        switch (choice) {
+        case 1:
+            Staff staff = findStaff();
+            System.out.println(staff);
+            break;
+        case 2:
+            addStaff();
+            break;
+        case 0:
+            System.out.println("Exiting Staff Menu...");
+            return true;
+        default:
+            System.out.println("Unknown choice!");
+            break;
         }
         System.out.println("Now in Staff Menu.");
         System.out.println(this);
