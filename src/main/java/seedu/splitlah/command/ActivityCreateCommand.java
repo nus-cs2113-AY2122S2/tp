@@ -25,7 +25,7 @@ public class ActivityCreateCommand extends Command {
 
     public static final String COMMAND_FORMAT_FIRST =
             "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
-                    + "/c <TOTAL_COST> [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
+                    + "/co <TOTAL_COST> [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
     public static final String COMMAND_FORMAT_SECOND =
             "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
@@ -77,10 +77,28 @@ public class ActivityCreateCommand extends Command {
      *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
-        boolean isMissingCost = false;
-        boolean isMissingCostList = false;
+        int sessionId = -1;
+        String activityName = null;
+        String payer = null;
+        String[] involvedList = null;
         double totalCost = 0;
         double[] costList = null;
+        int gst = 0;
+        int serviceCharge = 0;
+
+        try {
+            sessionId = Parser.parseSessionId(commandArgs);
+            activityName = Parser.parseName(commandArgs);
+            payer = Parser.parsePayer(commandArgs);
+            involvedList = Parser.parseInvolved(commandArgs);
+        } catch (InvalidFormatException e) {
+            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t"
+                    + COMMAND_FORMAT_SECOND);
+        }
+
+        boolean isMissingCost = false;
+        boolean isMissingCostList = false;
+        boolean hasDifferentLength = false;
 
         try {
             totalCost = Parser.parseTotalCost(commandArgs);
@@ -106,27 +124,24 @@ public class ActivityCreateCommand extends Command {
                     + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
         }
 
-        try {
-            int sessionId = Parser.parseSessionId(commandArgs);
-            String activityName = Parser.parseName(commandArgs);
-            String payer = Parser.parsePayer(commandArgs);
-            String[] involvedList = Parser.parseInvolved(commandArgs);
-            int gst = Parser.parseGst(commandArgs);
-            int serviceCharge = Parser.parseServiceCharge(commandArgs);
-            boolean hasDifferentLength = false;
-            if (isMissingCost) {
-                hasDifferentLength = involvedList.length != costList.length;
-            }
-            if (hasDifferentLength) {
-                return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
-                        + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
-            }
-            return new ActivityCreateCommand(sessionId, activityName, totalCost, payer, involvedList, costList, gst,
-                    serviceCharge);
-        } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + "\n\t" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n"
-                    + COMMAND_FORMAT_SECOND);
+        if (isMissingCost) {
+            hasDifferentLength = involvedList.length != costList.length;
         }
+        if (hasDifferentLength) {
+            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
+                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
+        }
+
+        try {
+            gst = Parser.parseGst(commandArgs);
+            serviceCharge = Parser.parseServiceCharge(commandArgs);
+        } catch (InvalidFormatException e) {
+            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
+                    + "\n\t" + COMMAND_FORMAT_SECOND);
+        }
+
+        return new ActivityCreateCommand(sessionId, activityName, totalCost, payer, involvedList, costList, gst,
+                serviceCharge);
     }
 
     /**
