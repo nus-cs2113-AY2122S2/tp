@@ -35,7 +35,7 @@ public class Timer extends Thread {
         printTimerStart();
         while (hasTimeLeft) {
             printTimeLeft();
-            updateTimer();
+            update();
         }
         if (timerRanOutOfTime()) {
             isTimerRunning = false;
@@ -48,13 +48,11 @@ public class Timer extends Thread {
      * Updates the timer by letting the thread sleep for 1 second, then updating timeLeft. The timer will not update
      * if it is paused and will instead wait for the user to resume the timer.
      */
-    private void updateTimer() {
+    private void update() {
         try {
             Thread.sleep(1000);
             timeLeft -= 1;
-            if (timeLeft <= NO_TIME_LEFT) {
-                hasTimeLeft = false;
-            }
+            updateHasTimeLeft();
             if (timerPaused) {
                 waitForTimerToResume();
             }
@@ -63,25 +61,27 @@ public class Timer extends Thread {
         }
     }
 
+    private void updateHasTimeLeft() {
+        if (timeLeft <= NO_TIME_LEFT) {
+            hasTimeLeft = false;
+        }
+    }
+
     /**
      * Method causes the thread which the timer is running on to wait when it is paused, until the user resumes the
      * timer.
      */
-    private void waitForTimerToResume() {
-        try {
-            synchronized (this) {
-                while (timerPaused) {
-                    wait();
-                }
+    private void waitForTimerToResume() throws InterruptedException {
+        synchronized (this) {
+            while (timerPaused) {
+                wait();
             }
-        } catch (InterruptedException e) {
-            return;
         }
     }
 
     /**
      * Returns whether timer ran out of time
-     * 
+     *
      * @return Boolean of whether timer ran out of time
      */
     private boolean timerRanOutOfTime() {
@@ -99,10 +99,10 @@ public class Timer extends Thread {
                 int minutesLeft = timeLeft / ONE_MINUTE;
                 ui.showToUser(minutesLeft + " minutes left.");
             }
-        } else {
-            if (timeLeft % TIME_INTERVAL == 0) {
-                ui.showToUser(timeLeft + " seconds left.");
-            }
+            return;
+        }
+        if (timeLeft % TIME_INTERVAL == 0) {
+            ui.showToUser(timeLeft + " seconds left.");
         }
     }
 

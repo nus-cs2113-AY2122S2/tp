@@ -6,6 +6,7 @@ import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.TimerLogic;
 import seedu.sherpass.util.Ui;
 
+import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_STUDY;
 
 public class StudyCommand extends Command {
     public static final String COMMAND_WORD = "study";
@@ -13,18 +14,9 @@ public class StudyCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showToUser("Gotcha! Entering study mode...");
-        ui.showToUser("Done! To get started, enter one of the three default timers "
-                + "using 'start <mode_number>':\n"
-                + "1) 30 minutes\n"
-                + "2) 1 hour\n"
-                + "3) 1.5 hours\n\n"
-                + "For testing purposes, you can start a 30s timer with mode number 0.\n"
-                + "Otherwise, feel free to choose your own timer with \n'start /custom <timer_duration>'.");
+        ui.showToUser(WELCOME_MESSAGE_STUDY);
         ui.showLine();
         TimerLogic timerLogic = new TimerLogic(ui);
         timerLogic.enterStudyMode();
-        ui.showLine();
-        ui.showToUser("Leaving study session...\n"
-                + "Welcome back to the main session! How can I help you?");
     }
 }

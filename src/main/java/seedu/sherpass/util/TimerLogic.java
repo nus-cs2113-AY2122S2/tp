@@ -2,6 +2,8 @@ package seedu.sherpass.util;
 
 import seedu.sherpass.exception.InvalidTimeException;
 
+import static seedu.sherpass.constant.Message.GOODBYE_MESSAGE_STUDY;
+
 import static seedu.sherpass.util.Parser.parseStudyMode;
 import static seedu.sherpass.util.Parser.parseTimerInput;
 
@@ -32,7 +34,9 @@ public class TimerLogic {
             userInput = ui.readCommand();
             if (userInput.contains("leave")) {
                 leaveStudyMode();
-            } else if (userInput.contains("start") && !isTimerRunning) {
+                return;
+            }
+            if (userInput.contains("start") && !isTimerRunning) {
                 timer = resetTimer();
             }
         }
@@ -46,14 +50,14 @@ public class TimerLogic {
     public static void startTimer(String[] parsedInput) throws InvalidTimeException {
         if (timer.getHasTimeLeft()) {
             ui.showToUser("You already have a timer running!");
+            return;
+        }
+        int duration = parseTimerInput(parsedInput, ui);
+        if (validDuration(duration)) {
+            timer.setDuration(duration);
+            timer.start();
         } else {
-            int duration = parseTimerInput(parsedInput, ui);
-            if (validDuration(duration)) {
-                timer.setDuration(duration);
-                timer.start();
-            } else {
-                throw new InvalidTimeException();
-            }
+            throw new InvalidTimeException();
         }
     }
 
@@ -92,6 +96,8 @@ public class TimerLogic {
         if (isTimerRunning) {
             timer.stopTimer();
         }
+        ui.showLine();
+        ui.showToUser(GOODBYE_MESSAGE_STUDY);
     }
 
     /**
