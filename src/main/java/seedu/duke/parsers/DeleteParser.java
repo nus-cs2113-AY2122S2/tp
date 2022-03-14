@@ -27,11 +27,11 @@ public class DeleteParser extends Parser {
         HashMap<String, String> parsedArguments = parseString(userInput);
         String taskNumberString = parsedArguments.get(TASK_NUMBER);
         String moduleCode = parsedArguments.get(MODULE_CODE);
-        if (!Objects.equals(moduleCode, NULL_FIELD)) {
+        if (!Objects.isNull(moduleCode)) {
             return new DeleteCommand(moduleCode);
         }
 
-        if (!Objects.equals(taskNumberString, NULL_FIELD)) {
+        if (!Objects.isNull(taskNumberString)) {
             int taskNumber;
             try {
                 taskNumber = Integer.parseInt(taskNumberString);

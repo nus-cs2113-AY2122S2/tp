@@ -19,7 +19,6 @@ public abstract class Parser {
     protected static final String DELETE_COMMAND_WORD = "del";
     protected static final String LIST_COMMAND_WORD = "list";
     protected static final String MARK_COMMAND_WORD = "mark";
-    protected static final String NULL_FIELD = null;
 
     protected String commandFormat;
     protected HashMap<String, String> parsedCommand;
@@ -50,7 +49,7 @@ public abstract class Parser {
             try {
                 parsedCommand.put(groupName.toString(), matcher.group(groupName.toString()).trim());
             } catch (Exception e) {
-                parsedCommand.put(groupName.toString(), NULL_FIELD);
+                parsedCommand.put(groupName.toString(), null);
             }
         }
         return parsedCommand;
