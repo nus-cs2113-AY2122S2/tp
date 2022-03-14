@@ -25,7 +25,7 @@ public class SessionCreateCommand extends Command {
             "Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 …]";
 
     private static final String COMMAND_SUCCESS =
-            "The session was created successfully with session id of: ";
+            "The session was created successfully.\n";
 
     private String sessionName;
     private String[] personNames;
@@ -126,6 +126,6 @@ public class SessionCreateCommand extends Command {
         int newSessionId = manager.getProfile().getNewSessionId();
         Session newSession = new Session(sessionName, newSessionId, sessionDate, personList);
         manager.getProfile().addSession(newSession);
-        manager.getUi().printlnMessage(COMMAND_SUCCESS + newSessionId);
+        manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + newSession);
     }
 }
