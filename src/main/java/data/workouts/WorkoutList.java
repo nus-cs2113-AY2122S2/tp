@@ -64,20 +64,27 @@ public class WorkoutList {
 
         String className = this.getClass().getSimpleName();
         if (!isExerciseValid) {
+            logger.log(Level.WARNING, "Exercise name is invalid.");
             throw new InvalidExerciseException(className, InvalidExerciseException.INVALID_EXERCISE_NAME_ERROR_MSG);
         }
 
         if (!isRepsValueValid) {
+            logger.log(Level.WARNING, "Repetition value is invalid.");
             throw new InvalidWorkoutException(className, InvalidWorkoutException.INVALID_REPS_VALUE_ERROR_MSG);
         }
 
         boolean hasSameExerciseNameAndReps = checkForExistingWorkout(userExerciseInput, userRepsInput);
 
         if (hasSameExerciseNameAndReps) {
+            logger.log(Level.WARNING, "Existing workout with identical exercise name and repetition "
+                    + "value found in the list of workouts.");
             throw new InvalidWorkoutException(className, InvalidWorkoutException.DUPLICATE_WORKOUT_ERROR_MSG);
         }
 
+        assert (isExerciseValid && isRepsValueValid && !hasSameExerciseNameAndReps);
+
         Workout newWorkout = new Workout(userExerciseInput, userRepsInput);
+        logger.log(Level.INFO, "New workout created.");
 
         workoutsList.add(newWorkout);
 
