@@ -1,9 +1,13 @@
 package seedu.duke.commands;
 
+import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
+
+import java.util.Objects;
 
 
 public class AddCommand extends Command {
@@ -15,20 +19,26 @@ public class AddCommand extends Command {
 
     private final boolean isAddTask;
     private Task newTask = null;
+    private String targetModuleName = null;
     private Module newModule = null;
 
-    public AddCommand(String name, String description, boolean isTask, String estimatedWorkingTime) {
-        if (isTask) {
-            newTask = new Task(name, description, estimatedWorkingTime);
-            isAddTask = true;
-        } else {
-            newModule = new Module(name, description);
-            isAddTask = false;
-        }
+    public AddCommand(String name, String description, String estimatedWorkingTime, String taskModule) {
+        newTask = new Task(name, description, estimatedWorkingTime);
+        targetModuleName = taskModule;
+        isAddTask = true;
+    }
+
+    public AddCommand(String moduleName, String moduleDescription) {
+        newModule = new Module(moduleName, moduleDescription);
+        isAddTask = false;
     }
 
     public Task getNewTask() {
         return newTask;
+    }
+
+    public String getTargetModuleName() {
+        return targetModuleName;
     }
 
     public Module getNewModule() {
@@ -39,11 +49,16 @@ public class AddCommand extends Command {
      * Adds the specified task or module.
      */
     @Override
-    public CommandResult execute(ModuleList moduleList) {
+    public CommandResult execute(ModuleList moduleList) throws ModHappyException {
         String res = "";
         if (isAddTask) {
-            // TODO: change this once support for -mod is implemented
             Module targetModule = moduleList.getGeneralTasks();
+            if (!Objects.isNull(targetModuleName)) {
+                targetModule = moduleList.getModule(targetModuleName);
+                if (Objects.isNull(targetModule)) {
+                    throw new NoSuchModuleException();
+                }
+            }
             TaskList taskList = targetModule.getTaskList();
             res = String.format(ADD_TASK_MESSAGE, targetModule, taskList.addTask(newTask), taskList.size());
         } else {
