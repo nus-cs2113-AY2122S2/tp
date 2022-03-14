@@ -69,6 +69,11 @@ class ActivityCreateCommandTest {
         assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
     }
 
+    /**
+     * Checks if an activity is created when an activity has duplicate names in the involved list.
+     * @throws InvalidDataException If there are no sessions stored or
+     *                              if the session unique identifier specified was not found.
+     */
     @Test
     public void run_hasNameDuplicatesInInvolvedList_activityListSizeRemainsOne() throws InvalidDataException {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Alice Charlie /c 30";
