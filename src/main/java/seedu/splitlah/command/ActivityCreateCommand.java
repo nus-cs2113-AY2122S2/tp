@@ -25,7 +25,7 @@ public class ActivityCreateCommand extends Command {
             + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /cl <COST1 COST2…> "
             + "[<OPTIONAL ARGS>]";
 
-    private static final String COMMAND_SUCCESS = "The session was created successfully with session id of: ";
+    private static final String COMMAND_SUCCESS = "The activity was created successfully with activity id of: ";
 
     private static final double ZERO_COST_PAID = 0;
     public static final int NO_COST = 0;

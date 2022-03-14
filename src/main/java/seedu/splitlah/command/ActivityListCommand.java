@@ -21,6 +21,9 @@ public class ActivityListCommand extends Command {
 
     private int sessionId;
 
+    private static final String LIST_HEADER_PREPEND = "Activity List (Session Id #";
+    private static final String LIST_CLOSER_POSTPEND = ")";
+
     public ActivityListCommand(int sessionId) {
         this.sessionId = sessionId;
     }
@@ -33,18 +36,18 @@ public class ActivityListCommand extends Command {
     @Override
     public void run(Manager manager) {
         try {
-            Session sessionsToBePrinted = manager.getProfile().getSession(sessionId);
-            ArrayList<Activity> activityListToBePrinted = sessionsToBePrinted.getActivityList();
+            Session sessionToBePrinted = manager.getProfile().getSession(sessionId);
+            ArrayList<Activity> activityListToBePrinted = sessionToBePrinted.getActivityList();
 
             if (activityListToBePrinted.isEmpty()) {
                 manager.getUi().printlnMessage(Message.ERROR_ACTIVITYLIST_ACTIVITY_EMPTY);
                 return;
             }
 
+            manager.getUi().printlnMessage(LIST_HEADER_PREPEND + sessionId + LIST_CLOSER_POSTPEND);
             for (Activity activity : activityListToBePrinted) {
-                manager.getUi().printlnMessageWithDivider(activity.toString());
+                manager.getUi().printlnMessage(activity.getActivitySummaryString());
             }
-
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
         }
@@ -53,8 +56,8 @@ public class ActivityListCommand extends Command {
     /**
      * Prepares user argument for activity list command.
      *
-     * @param commandArgs A String object that represents the user's arguments.
-     * @return A ActivityListCommand object if sessionId was found in user argument,
+     * @param  commandArgs A String object that represents the user's arguments.
+     * @return An ActivityListCommand object if sessionId was found in user argument,
      *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
@@ -65,6 +68,5 @@ public class ActivityListCommand extends Command {
             String invalidCommandMessage = e.getMessage() + "\n" + COMMAND_FORMAT;
             return new InvalidCommand(invalidCommandMessage);
         }
-
     }
 }

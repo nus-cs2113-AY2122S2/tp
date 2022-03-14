@@ -36,7 +36,7 @@ public class SessionDeleteCommand extends Command {
     }
 
     /**
-     * Prepares user arguments for session delete command.
+     * Prepares user arguments for the creation of a SessionDeleteCommand object.
      *
      * @param commandArgs A String object that represents the user's arguments.
      * @return A SessionDeleteCommand object if session id was found in user arguments,

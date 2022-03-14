@@ -79,7 +79,7 @@ public class SessionCreateCommand extends Command {
     }
 
     /**
-     * Prepares user arguments for session create command.
+     * Prepares user arguments for the creation of a SessionCreateCommand object.
      *
      * @param commandArgs A String object that represents the user's arguments.
      * @return A SessionCreateCommand object if session name, session date and person list were found in user arguments,
