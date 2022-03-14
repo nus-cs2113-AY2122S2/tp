@@ -65,7 +65,7 @@ public class Parser {
             return new DeleteCommand(index);
         } catch (NumberFormatException nfe) {
             System.out.println(ERROR_INVALID_INDEX_FORMAT);
-            return new HelpCommand(); // temporary
+            return new HelpCommand();
         }
     }
 
