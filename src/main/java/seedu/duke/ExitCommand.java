@@ -11,6 +11,6 @@ public class ExitCommand extends Command {
     }
 
     public void execute(RoomList roomList){
-
+        System.out.println("see u again!");
     }
 }
