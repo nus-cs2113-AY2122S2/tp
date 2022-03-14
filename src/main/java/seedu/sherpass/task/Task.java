@@ -102,13 +102,15 @@ public class Task {
     public String toString() {
         if (this.byDate.equals("") && this.remindDate.equals("")) {
             return "[" + this.getStatusIcon() + "] " + this.getDescription();
-        } else if (this.remindDate.equals("")) {
+        }
+
+        if (this.remindDate.equals("")) {
             return "[" + this.getStatusIcon() + "] " + this.getDescription()
                     + " (by: " + this.byDate + ")";
-        } else {
-            return "[" + this.getStatusIcon() + "] " + this.getDescription()
-                    + " (by: " + this.byDate + ") (reminder on: " + this.remindDate + ")";
         }
+
+        return "[" + this.getStatusIcon() + "] " + this.getDescription()
+            + " (by: " + this.byDate + ") (reminder on: " + this.remindDate + ")";
     }
 
 

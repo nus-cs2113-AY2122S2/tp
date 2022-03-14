@@ -12,10 +12,9 @@ import seedu.sherpass.command.ListCommand;
 import seedu.sherpass.command.MarkCommand;
 import seedu.sherpass.command.StudyCommand;
 import seedu.sherpass.command.UnmarkCommand;
-import seedu.sherpass.command.UpdateCommand;
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
-import seedu.sherpass.exception.WrongEditInfoFormat;
+import seedu.sherpass.exception.WrongEditInfoFormatException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
@@ -129,18 +128,19 @@ public class Parser {
             if (!splitInput[TASK_CONTENT_INDEX].contains("/by")
                     && !splitInput[TASK_CONTENT_INDEX].contains("/remind")) {
                 return new AddCommand(splitInput[TASK_CONTENT_INDEX], taskList, EMPTY_STRING, EMPTY_STRING);
-            } else {
-                filteredTaskContent = splitInput[TASK_CONTENT_INDEX].split("/by", 2);
-                if (!splitInput[1].contains("/remind")) {
-                    byDate = prepareTaskDate(filteredTaskContent[1].trim(), false);
-                    return new AddCommand(filteredTaskContent[0].trim(), taskList, byDate, EMPTY_STRING);
-                } else {
-                    String[] filteredDates = filteredTaskContent[1].split("/remind");
-                    byDate = prepareTaskDate(filteredDates[0].trim(), false);
-                    remindDate = prepareTaskDate(filteredDates[1].trim(), false);
-                    return new AddCommand(filteredTaskContent[0], taskList, byDate, remindDate);
-                }
             }
+
+            filteredTaskContent = splitInput[TASK_CONTENT_INDEX].split("/by", 2);
+            if (!splitInput[1].contains("/remind")) {
+                byDate = prepareTaskDate(filteredTaskContent[1].trim(), false);
+                return new AddCommand(filteredTaskContent[0].trim(), taskList, byDate, EMPTY_STRING);
+            }
+
+            String[] filteredDates = filteredTaskContent[1].split("/remind");
+            byDate = prepareTaskDate(filteredDates[0].trim(), false);
+            remindDate = prepareTaskDate(filteredDates[1].trim(), false);
+            return new AddCommand(filteredTaskContent[0], taskList, byDate, remindDate);
+
         } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
             printMissingInputMessage();
         } catch (InputRepeatedException e) {
@@ -156,18 +156,16 @@ public class Parser {
 
         //7 possibilities of editing, incorrect format of inputs are rejected
         try {
+
             int taskNumberToEdit = Integer.parseInt(fullEditInfo[0]);
-
-            checkValidTaskNumber(taskNumberToEdit, taskList);
             checkCorrectEditInfoFormat(fullEditInfo[1]);
-
             return handleEdit(taskNumberToEdit, fullEditInfo[1]);
 
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             System.out.println("Please key in a valid task number");
         } catch (InvalidInputException e) {
             System.out.println("Invalid date");
-        } catch (WrongEditInfoFormat e) {
+        } catch (WrongEditInfoFormatException e) {
             System.out.println("Please use the correct order of keywords:\n"
                     + "<task_description> /by <task_due_date> /remind <task_reminder_date>\n\n"
                     + "You only need to input the parts you want to edit.\n"
@@ -178,28 +176,21 @@ public class Parser {
         return null;
     }
 
-    private static void checkValidTaskNumber(int taskNumberToEdit, TaskList taskList) {
-        if ((taskNumberToEdit > taskList.getLength()) || (taskNumberToEdit < 0)) {
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
-    private static void checkCorrectEditInfoFormat(String fullEditInfo) throws WrongEditInfoFormat {
+    private static void checkCorrectEditInfoFormat(String fullEditInfo) throws WrongEditInfoFormatException {
         // tests to make sure the byDate is before the remindDate
         if (fullEditInfo.contains("/by") && fullEditInfo.contains("/remind")) {
             if (fullEditInfo.indexOf("/by") > fullEditInfo.indexOf("/remind")) {
-                throw new WrongEditInfoFormat();
+                throw new WrongEditInfoFormatException();
             }
         }
         // tests to make sure the task description is the first input if it is present
         String[] splitEditInfo = fullEditInfo.split("/by \\d{4}/\\d{2}/\\d{2}|/remind \\d{4}/\\d{2}/\\d{2}");
         if (splitEditInfo.length > 1) {
-            throw new WrongEditInfoFormat();
+            throw new WrongEditInfoFormatException();
         }
     }
 
-    private static Command handleEdit(int taskNumberToEdit, String fullEditInfo)//, boolean[] presenceOfEdits)
-            throws InvalidInputException {
+    private static Command handleEdit(int taskNumberToEdit, String fullEditInfo) throws InvalidInputException {
 
         String[] splitEditInfo = fullEditInfo.split(" ");
         String descriptionToEdit;
@@ -212,30 +203,31 @@ public class Parser {
             descriptionToEdit = EMPTY_STRING;
         }
 
-        if (fullEditInfo.contains("/by")) {
-            String byDateToEdit = fullEditInfo.substring(fullEditInfo.indexOf("/by") + 4).split(" ")[0].trim();
-            if (byDateToEdit.isBlank()) {
-                parsedByDateToEdit = EMPTY_STRING;
-            } else {
-                parsedByDateToEdit = prepareTaskDate(byDateToEdit, false);
-            }
-        } else {
-            parsedByDateToEdit = EMPTY_STRING;
-        }
-
-        if (fullEditInfo.contains("/remind")) {
-            String remindDateToEdit =
-                    fullEditInfo.substring(fullEditInfo.indexOf("/remind") + 8).split(" ")[0].trim();
-            if (remindDateToEdit.isBlank()) {
-                parsedRemindDateToEdit = EMPTY_STRING;
-            } else {
-                parsedRemindDateToEdit = prepareTaskDate(remindDateToEdit, false);
-            }
-        } else {
-            parsedRemindDateToEdit = EMPTY_STRING;
-        }
+        parsedByDateToEdit = getParsedDateToEdit(fullEditInfo, "/by");
+        parsedRemindDateToEdit = getParsedDateToEdit(fullEditInfo, "/remind");
 
         return new EditCommand(taskNumberToEdit, descriptionToEdit, parsedByDateToEdit, parsedRemindDateToEdit);
+    }
+
+    private static String getParsedDateToEdit(String fullEditInfo, String keyword) throws InvalidInputException {
+
+        if (fullEditInfo.contains(keyword)) {
+
+            int offsetForKeyword = keyword.length() + 1;
+            int offsetForSubstring = fullEditInfo.indexOf(keyword) + offsetForKeyword;
+
+            // gets the substring (of fullEditInfo) after the keyword (, which is either "/by" or "/remind")
+            // splits the substring and obtains the first word (which should be the date of format yyyy/MM/dd)
+            String dateToEdit = fullEditInfo.substring(offsetForSubstring).split(" ")[0].trim();
+
+            if (dateToEdit.isBlank()) {
+                return EMPTY_STRING;
+            }
+
+            return prepareTaskDate(dateToEdit, false);
+        }
+
+        return EMPTY_STRING;
     }
 
 

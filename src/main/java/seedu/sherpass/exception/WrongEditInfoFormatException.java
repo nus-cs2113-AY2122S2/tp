@@ -1,4 +1,4 @@
 package seedu.sherpass.exception;
 
-public class WrongEditInfoFormat extends Exception{
+public class WrongEditInfoFormatException extends Exception{
 }
