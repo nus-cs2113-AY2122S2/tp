@@ -45,7 +45,16 @@ public class DeleteCommand extends Command {
         if (taskNumber < 0) {
             deleteModule(moduleList);
         } else {
-            deleteTaskFromModule(moduleList);
+            Module targetModule;
+            if (Objects.isNull(taskModule)) {
+                targetModule = moduleList.getGeneralTasks();
+            } else {
+                targetModule = moduleList.getModule(taskModule);
+                if (Objects.isNull(targetModule)) {
+                    throw new NoSuchModuleException();
+                }
+            }
+            deleteTaskFromModule(targetModule);
         }
         return new CommandResult(result);
     }
@@ -60,20 +69,11 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes a given task.
+     * Deletes a task from the given module.
      *
-     * @param moduleList List of modules in which to search for the task.
+     * @param targetModule The module from which to delete the task
      */
-    public void deleteTaskFromModule(ModuleList moduleList) throws ModHappyException {
-        Module targetModule;
-        if (Objects.isNull(taskModule)) {
-            targetModule = moduleList.getGeneralTasks();
-        } else {
-            targetModule = moduleList.getModule(taskModule);
-            if (Objects.isNull(targetModule)) {
-                throw new NoSuchModuleException();
-            }
-        }
+    public void deleteTaskFromModule(Module targetModule) throws ModHappyException {
         TaskList taskList = targetModule.getTaskList();
         int taskIndex = taskNumber - 1;
         result = String.format(DELETE_TASK_SUCCESS, taskList.removeTask(taskIndex));
