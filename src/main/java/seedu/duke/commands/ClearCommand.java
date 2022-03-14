@@ -1,7 +1,6 @@
 package seedu.duke.commands;
 
 import seedu.duke.Timetable;
-import seedu.duke.events.Event;
 
 public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
