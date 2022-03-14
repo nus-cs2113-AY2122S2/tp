@@ -2,7 +2,8 @@ import werkit.UI;
 import werkit.WerkIt;
 
 import java.io.IOException;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Main entry-point for the WerkIt! application.

@@ -10,7 +10,8 @@ import storage.UnknownFileException;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class initiates the various classes/components of WerkIt! and contains the logic code for
