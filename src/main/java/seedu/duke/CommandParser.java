@@ -5,6 +5,7 @@ public class CommandParser {
     private static final String ADD_ITEM_COMMAND = "Add Item";
     private static final String CHECK_IN = "check in";
     private static final String CHECK_OUT = "check out";
+    private static final String CHECK_ROOM = "check room";
 
     public Command parse(String commandString) throws WrongCommandException, HotelLiteManagerException {
         Command userCommand = null;

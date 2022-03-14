@@ -19,6 +19,7 @@ public class CheckInCommand extends Command{
             }
         }
     }
+
     // check valid room number
     // check the room is vacant or not
     public CheckInCommand(String command){
