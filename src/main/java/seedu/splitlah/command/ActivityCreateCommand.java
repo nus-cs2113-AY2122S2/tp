@@ -153,6 +153,12 @@ public class ActivityCreateCommand extends Command {
         }
     }
 
+    /**
+     * Checks if String object array of names has duplicated names.
+     *
+     * @return true if it contains duplicates,
+     *         false otherwise.
+     */
     private boolean hasNameDuplicates() {
         Set<String> nameSet = new HashSet<>();
         for (String name : involvedList) {
