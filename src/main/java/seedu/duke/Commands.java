@@ -111,8 +111,6 @@ public class Commands {
             int goodsQty = Integer.parseInt(qty);
 
             remove(goodsId, goodsQty, userGoods);
-
-            System.out.println(1);
         } catch (NumberFormatException e1) {
             System.out.println("Please remove goods in this format:\n"
                     + "remove id/id_of_good_as_number q/quantity_of_good_as_number");
