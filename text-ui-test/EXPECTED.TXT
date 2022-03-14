@@ -17,9 +17,25 @@ Please enter a valid command.
 > Invalid command
 Please include the following delimiter in your input: /n
 Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 …]
-> The session was created successfully with session id of: 1
+> The session was created successfully.
+Session Id #1 --
+Name: Class outing 1
+Date: 12-03-2022
+The list of activities in the session is currently empty.
+Participants
+ 1. alice
+ 2. bob
+============================================================
 > There is another session with the same name, please try another name.
-> The session was created successfully with session id of: 2
+> The session was created successfully.
+Session Id #2 --
+Name: Class outing 2
+Date: 12-03-2022
+The list of activities in the session is currently empty.
+Participants
+ 1. alice
+ 2. bob
+============================================================
 > There seems to be duplicates in the session you are trying to create, please try again.
 > ============================================================
  $$$$$$\            $$\ $$\   $$\     $$\           $$\

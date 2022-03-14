@@ -146,6 +146,11 @@ public abstract class Message {
             "Please only include either a total cost or a list of costs";
     public static final String ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST =
             "Please include either a cost or a list of costs.";
+    public static final String ERROR_ACTIVITYCREATE_DUPLICATE_NAME =
+            "There seems to be duplicates in names of the people involved in the activity you are trying to create, "
+                    + "please try again.";
+    public static final String ASSERT_ACTIVITYCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
+            "Name duplicates exists but not detected.";
 
     // Activity List Command
     public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =
