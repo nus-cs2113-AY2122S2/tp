@@ -6,7 +6,16 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
 
     @Override
-    public void execute(Timetable timetable) {
-        timetable.clear();
+    public String execute(Timetable timetable) {
+        for (int i = 0; i < timetable.size(); i++) {
+            timetable.remove(i);
+        }
+        printClearConfirmation();
+        return "";
     }
+
+    public static void printClearConfirmation() {
+        System.out.println("Your whole timetable has been cleared");
+    }
+
 }
