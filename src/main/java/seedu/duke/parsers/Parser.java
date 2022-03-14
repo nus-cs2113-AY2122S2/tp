@@ -8,17 +8,20 @@ import java.util.regex.Pattern;
 import seedu.duke.commands.Command;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
+import seedu.duke.util.StringConstants;
 
 
 /**
  * Represents a Parser that parse a {@code Command}.
  */
 public abstract class Parser {
-    protected static final String EXIT_COMMAND_WORD = "exit";
-    protected static final String ADD_COMMAND_WORD = "add";
-    protected static final String DELETE_COMMAND_WORD = "del";
-    protected static final String LIST_COMMAND_WORD = "list";
-    protected static final String MARK_COMMAND_WORD = "mark";
+
+    protected static final String EXIT_COMMAND_WORD = StringConstants.EXIT_COMMAND_WORD;
+    protected static final String ADD_COMMAND_WORD = StringConstants.ADD_COMMAND_WORD;
+    protected static final String DELETE_COMMAND_WORD = StringConstants.DELETE_COMMAND_WORD;
+    protected static final String LIST_COMMAND_WORD = StringConstants.LIST_COMMAND_WORD;
+    protected static final String MARK_COMMAND_WORD = StringConstants.MARK_COMMAND_WORD;
+    protected static final String NULL_FIELD = null;
 
     protected String commandFormat;
     protected HashMap<String, String> parsedCommand;

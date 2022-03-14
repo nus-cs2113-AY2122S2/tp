@@ -7,19 +7,20 @@ import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
+import seedu.duke.util.StringConstants;
 
 /**
  * This Parser supports the "add" command.
  */
 public class AddParser extends Parser {
-    private static final String FLAG = "flag";
-    private static final String TASK_NAME = "taskName";
-    private static final String TASK_DESCRIPTION = "taskDescription";
-    private static final String TASK_DESCRIPTION_TWO = "taskDescription2";
-    private static final String TASK_WORKING_TIME = "estimatedWorkingTime";
-    private static final String MODULE_CODE = "moduleCode";
-    private static final String MODULE_DESCRIPTION = "moduleDescription";
-    private static final String INVALID = "invalid";
+    private static final String TASK_NAME = StringConstants.TASK_NAME;
+    private static final String TASK_DESCRIPTION = StringConstants.TASK_DESCRIPTION;
+    private static final String TASK_WORKING_TIME = StringConstants.TASK_WORKING_TIME;
+    private static final String MODULE_CODE = StringConstants.MODULE_CODE;
+    private static final String MODULE_DESCRIPTION = StringConstants.MODULE_DESCRIPTION;
+    private static final String FLAG = StringConstants.FLAG;
+    private static final String TASK_DESCRIPTION_TWO = StringConstants.TASK_DESCRIPTION_TWO;
+    private static final String INVALID = StringConstants.INVALID;
 
     // Unescaped regex for testing (split into two lines):
     // \s*((\/t\s+(?<taskName>.+?(?=\s+-d\s+|\s+-t\s+|$))(\s+(-d\s+\"(?<taskDescription>([^\"]*))\")(?=(\s+-t\s+)|$))?
