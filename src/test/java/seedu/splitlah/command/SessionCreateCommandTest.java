@@ -3,6 +3,7 @@ package seedu.splitlah.command;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,10 +19,31 @@ class SessionCreateCommandTest {
     void setUp() {
         String sessionOneArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob";
         String sessionTwoArgs = "session /create /n Family gathering /d 20-02-2022  /pl Eves Mallory";
-        Command createSessionOne = SessionCreateCommand.prepare(sessionOneArgs);
+        Command createSessionOne = Parser.getCommand(sessionOneArgs);
         createSessionOne.run(manager);
-        Command createSessionTwo = SessionCreateCommand.prepare(sessionTwoArgs);
+        Command createSessionTwo = Parser.getCommand(sessionTwoArgs);
         createSessionTwo.run(manager);
+    }
+
+    /**
+     * Checks if session is created with missing delimiters.
+     */
+    @Test
+    public void prepare_hasMissingDelimiter_InvalidCommand() {
+        // Case 1: Missing /n delimiter
+        String argsMissingNameDelimiter = "session /create /d 15-02-2022 /pl Alice Bob";
+        Command sessionWithMissingNameDelimiter = Parser.getCommand(argsMissingNameDelimiter);
+        assertEquals(InvalidCommand.class, sessionWithMissingNameDelimiter.getClass());
+
+        // Case 2: Missing /d delimiter
+        String argsMissingDateDelimiter = "session /create /n Class outing /pl Alice Bob";
+        Command sessionWithMissingDateDelimiter = Parser.getCommand(argsMissingDateDelimiter);
+        assertEquals(InvalidCommand.class, sessionWithMissingDateDelimiter.getClass());
+
+        // Case 3: Missing /pl delimiter
+        String argsMissingPersonListDelimiter = "session /create /n Class outing /d 15-02-2022";
+        Command sessionWithMissingPersonListDelimiter = Parser.getCommand(argsMissingPersonListDelimiter);
+        assertEquals(InvalidCommand.class, sessionWithMissingPersonListDelimiter.getClass());
     }
 
     /**
@@ -30,7 +52,7 @@ class SessionCreateCommandTest {
     @Test
     public void run_hasOneNameDuplicate_sessionListSizeRemainsTwo() {
         String userInput = "session /create /n Class outing /d 23-02-2022 /pl Alice Alice Bob";
-        Command command = SessionCreateCommand.prepare(userInput);
+        Command command = Parser.getCommand(userInput);
         command.run(manager);
         assertEquals(2, manager.getProfile().getSessionList().size());
     }
@@ -41,7 +63,7 @@ class SessionCreateCommandTest {
     @Test
     public void run_hasSessionDuplicate_sessionListSizeRemainsTwo() {
         String userInput = "session /create /n Class outing /d 15-02-2022 /pl Mallory Eves";
-        Command command = SessionCreateCommand.prepare(userInput);
+        Command command = Parser.getCommand(userInput);
         command.run(manager);
         assertEquals(2, manager.getProfile().getSessionList().size());
     }

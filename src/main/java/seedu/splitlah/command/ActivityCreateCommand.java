@@ -11,6 +11,8 @@ import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represents a command that creates an Activity object from user input and stores it in the Session object.
@@ -19,16 +21,17 @@ public class ActivityCreateCommand extends Command {
 
     public static final String COMMAND_TEXT = "activity /create";
 
-    private static final String COMMAND_FORMAT = "Syntax:\n"
-            + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /c <OVERALLCOST> "
-            + "[<OPTIONAL ARGS>]\n"
-            + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /cl <COST1 COST2…> "
-            + "[<OPTIONAL ARGS>]";
+    private static final String COMMAND_FORMAT = "Syntax:\n\t";
 
-    private static final String COMMAND_SUCCESS = "The activity was created successfully with activity id of: ";
+    public static final String COMMAND_FORMAT_FIRST =
+            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
+                    + "/co <TOTAL_COST> [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
-    private static final double ZERO_COST_PAID = 0;
-    public static final int NO_COST = 0;
+    public static final String COMMAND_FORMAT_SECOND =
+            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
+                    + "/cl [COST1 COST2…] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
+
+    private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
 
     private int sessionId;
     private String activityName;
@@ -38,6 +41,9 @@ public class ActivityCreateCommand extends Command {
     private double[] costList;
     private int gst;
     private int serviceCharge;
+
+    private static final double ZERO_COST_PAID = 0;
+    private static final int NO_COST = 0;
 
     /**
      * Constructor to create a ActivityCreateCommand object.
@@ -71,10 +77,28 @@ public class ActivityCreateCommand extends Command {
      *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
-        boolean isMissingCost = false;
-        boolean isMissingCostList = false;
+        int sessionId = -1;
+        String activityName = null;
+        String payer = null;
+        String[] involvedList = null;
         double totalCost = 0;
         double[] costList = null;
+        int gst = 0;
+        int serviceCharge = 0;
+
+        try {
+            sessionId = Parser.parseSessionId(commandArgs);
+            activityName = Parser.parseName(commandArgs);
+            payer = Parser.parsePayer(commandArgs);
+            involvedList = Parser.parseInvolved(commandArgs);
+        } catch (InvalidFormatException e) {
+            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t"
+                    + COMMAND_FORMAT_SECOND);
+        }
+
+        boolean isMissingCost = false;
+        boolean isMissingCostList = false;
+        boolean hasDifferentLength = false;
 
         try {
             totalCost = Parser.parseTotalCost(commandArgs);
@@ -91,59 +115,52 @@ public class ActivityCreateCommand extends Command {
         boolean hasMissingCostAndMissingCostList = isMissingCostList && isMissingCost;
         if (hasMissingCostAndMissingCostList) {
             return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
-                    + COMMAND_FORMAT);
+                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
         }
 
         boolean hasBothCostAndCostList = !isMissingCostList && !isMissingCost;
         if (hasBothCostAndCostList) {
             return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
-                    + COMMAND_FORMAT);
+                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
+        }
+
+        if (isMissingCost) {
+            hasDifferentLength = involvedList.length != costList.length;
+        }
+        if (hasDifferentLength) {
+            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
+                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
         }
 
         try {
-            int sessionId = Parser.parseSessionId(commandArgs);
-            String activityName = Parser.parseName(commandArgs);
-            String payer = Parser.parsePayer(commandArgs);
-            String[] involvedList = Parser.parseInvolved(commandArgs);
-            int gst = Parser.parseGst(commandArgs);
-            int serviceCharge = Parser.parseServiceCharge(commandArgs);
-            boolean hasDifferentLength = false;
-            if (isMissingCost) {
-                hasDifferentLength = involvedList.length != costList.length;
-            }
-            if (hasDifferentLength) {
-                return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
-                        + COMMAND_FORMAT);
-            }
-            return new ActivityCreateCommand(sessionId, activityName, totalCost, payer, involvedList, costList, gst,
-                    serviceCharge);
+            gst = Parser.parseGst(commandArgs);
+            serviceCharge = Parser.parseServiceCharge(commandArgs);
         } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT);
+            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
+                    + "\n\t" + COMMAND_FORMAT_SECOND);
         }
+
+        return new ActivityCreateCommand(sessionId, activityName, totalCost, payer, involvedList, costList, gst,
+                serviceCharge);
     }
 
     /**
-     * Runs the command to create an activity.
-     * Gets relevant parameters to create an Activity object.
-     * If no errors getting parameters, an Activity object is created and added to the session.
+     * Checks if String object array of names has duplicated names.
      *
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @return true if it contains duplicates,
+     *         false otherwise.
      */
-    @Override
-    public void run(Manager manager) {
-        try {
-            int activityId = manager.getProfile().getNewActivityId();
-            updateCostAndCostList();
-            Session session = manager.getProfile().getSession(sessionId);
-            Person personPaid = session.getPersonByName(payer);
-            ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
-            addAllActivityCost(involvedPersonList, personPaid, totalCost, costList, activityId);
-            Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
-            session.addActivity(activity);
-            manager.getUi().printlnMessage(COMMAND_SUCCESS + activityId);
-        } catch (InvalidDataException e) {
-            manager.getUi().printlnMessage(e.getMessage());
+    private boolean hasNameDuplicates() {
+        Set<String> nameSet = new HashSet<>();
+        for (String name : involvedList) {
+            String nameToBeAdded = name.toLowerCase();
+            if (!nameSet.add(nameToBeAdded)) {
+                return true;
+            }
         }
+        assert nameSet.size() == involvedList.length :
+                Message.ASSERT_ACTIVITYCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED;
+        return false;
     }
 
     /**
@@ -279,6 +296,35 @@ public class ActivityCreateCommand extends Command {
         double[] costList = new double[numberOfPeopleInvolved];
         Arrays.fill(costList, dividedCost);
         return costList;
+    }
+
+    /**
+     * Runs the command to create an activity.
+     * Gets relevant parameters to create an Activity object.
+     * If no errors getting parameters, an Activity object is created and added to the session.
+     *
+     * @param manager A Manager object that manages the TextUI and Profile object.
+     */
+    @Override
+    public void run(Manager manager) {
+        boolean hasDuplicates = hasNameDuplicates();
+        if (hasDuplicates) {
+            manager.getUi().printlnMessage(Message.ERROR_ACTIVITYCREATE_DUPLICATE_NAME);
+            return;
+        }
+        try {
+            int activityId = manager.getProfile().getNewActivityId();
+            updateCostAndCostList();
+            Session session = manager.getProfile().getSession(sessionId);
+            Person personPaid = session.getPersonByName(payer);
+            ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
+            addAllActivityCost(involvedPersonList, personPaid, totalCost, costList, activityId);
+            Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
+            session.addActivity(activity);
+            manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + activity);
+        } catch (InvalidDataException e) {
+            manager.getUi().printlnMessage(e.getMessage());
+        }
     }
 
 }

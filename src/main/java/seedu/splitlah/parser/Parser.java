@@ -35,7 +35,7 @@ public class Parser {
     public static final String ACTIVITY_ID_DELIMITER = "/aid";
     public static final String GROUP_ID_DELIMITER = "/gid";
     public static final String DATE_DELIMITER = "/d";
-    public static final String TOTAL_COST_DELIMITER = "/c";
+    public static final String TOTAL_COST_DELIMITER = "/co";
     public static final String COST_LIST_DELIMITER = "/cl";
     public static final String GST_DELIMITER = "/gst";
     public static final String SERVICE_CHARGE_DELIMITER = "/sc";

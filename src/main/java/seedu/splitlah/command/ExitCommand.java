@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
 
     public static final String COMMAND_TEXT = "exit";
 
-    private static final String COMMAND_FORMAT = "Syntax: exit";
+    public static final String COMMAND_FORMAT = "Syntax: exit";
 
     /**
      * Prints the farewell message.

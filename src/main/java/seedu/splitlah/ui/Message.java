@@ -1,5 +1,16 @@
 package seedu.splitlah.ui;
 
+import seedu.splitlah.command.ActivityCreateCommand;
+import seedu.splitlah.command.ActivityDeleteCommand;
+import seedu.splitlah.command.ActivityListCommand;
+import seedu.splitlah.command.ActivityViewCommand;
+import seedu.splitlah.command.ExitCommand;
+import seedu.splitlah.command.HelpCommand;
+import seedu.splitlah.command.SessionCreateCommand;
+import seedu.splitlah.command.SessionDeleteCommand;
+import seedu.splitlah.command.SessionListCommand;
+import seedu.splitlah.command.SessionSummaryCommand;
+
 /**
  * Container of hardcoded messages.
  * Naming convention: [TYPE]_[CLASS]_[MESSAGE].
@@ -22,7 +33,28 @@ public abstract class Message {
             + "          $$ |\n"
             + "          \\__|";
     public static final String MESSAGE_TEXTUI_HELP_MENU =
-            "HELP MENU"; //TODO: Populate help menu
+            "HELP MENU --\n" 
+                    + "1.  Create a new session\n"
+                    + "        " + SessionCreateCommand.COMMAND_FORMAT + "\n"
+                    + "2.  Delete an existing session\n"
+                    + "        " + SessionDeleteCommand.COMMAND_FORMAT + "\n"
+                    + "3.  List all existing sessions\n"
+                    + "        " + SessionListCommand.COMMAND_FORMAT + "\n"
+                    + "4.  Create a new activity\n"
+                    + "        Syntax: " + ActivityCreateCommand.COMMAND_FORMAT_FIRST + "\n"
+                    + "                " + ActivityCreateCommand.COMMAND_FORMAT_SECOND + "\n"
+                    + "5.  Delete an existing activity\n"
+                    + "        " + ActivityDeleteCommand.COMMAND_FORMAT + "\n"
+                    + "6.  List all existing activities\n"
+                    + "        " + ActivityListCommand.COMMAND_FORMAT + "\n"
+                    + "7.  View an existing activity's details\n"
+                    + "        " + ActivityViewCommand.COMMAND_FORMAT + "\n"
+                    + "8.  Show the summary of an existing session\n"
+                    + "        " + SessionSummaryCommand.COMMAND_FORMAT + "\n"
+                    + "9.  Show this help menu\n"
+                    + "        " + HelpCommand.COMMAND_FORMAT + "\n"
+                    + "10. Exit the program\n"
+                    + "        " + ExitCommand.COMMAND_FORMAT;
     public static final String PROMPT_TEXTUI_REQUEST_CONFIRMATION =
             "Please enter Y/y/yes to confirm, or N/n/no otherwise.";
     public static final String ERROR_TEXTUI_USER_DID_NOT_CONFIRM =
@@ -116,6 +148,11 @@ public abstract class Message {
             "Please only include either a total cost or a list of costs";
     public static final String ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST =
             "Please include either a cost or a list of costs.";
+    public static final String ERROR_ACTIVITYCREATE_DUPLICATE_NAME =
+            "There seems to be duplicates in names of the people involved in the activity you are trying to create, "
+                    + "please try again.";
+    public static final String ASSERT_ACTIVITYCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
+            "Name duplicates exists but not detected.";
 
     // Activity List Command
     public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =
