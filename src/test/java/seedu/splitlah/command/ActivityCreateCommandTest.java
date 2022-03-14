@@ -30,4 +30,12 @@ class ActivityCreateCommandTest {
         assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
     }
 
+    @Test
+    public void run_hasBothCostAndCostList_activityListSizeRemainsOne() throws InvalidDataException {
+        String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /c 30 /cl 10 10 10";
+        Command command = Parser.getCommand(userInput);
+        command.run(manager);
+        assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
+    }
+
 }
