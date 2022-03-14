@@ -125,6 +125,9 @@ class ParserTest {
         assertEquals("theLazy Dog", output);
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Name delimiter is not provided by the user.
+     */
     @Test
     void parseName_missingDelimiter_exceptionThrown() {
         String argumentWithoutNameDelimiter = "n Class outing /d 23-02-2022 /pl Alice Alice Bob";
@@ -136,7 +139,11 @@ class ParserTest {
             assertEquals(errorMessage, exception.getMessage());
         }
     }
-    
+
+    /**
+     * Checks if an exception is properly thrown when the Name delimiter is provided but no arguments 
+     * following the Name delimiter are provided by the user.
+     */
     @Test
     void parseName_delimiterExistsWithoutArgument_exceptionThrown() {
         String argumentWithoutNameDelimiter = "/n /d 23-02-2022 /pl Alice Alice Bob";
@@ -148,7 +155,11 @@ class ParserTest {
             assertEquals(errorMessage, exception.getMessage());
         }
     }
-    
+
+    /**
+     * Checks if a String object containing the name is properly returned when the Name delimiter and arguments
+     * following it are properly provided by the user.
+     */
     @Test
     void parseName_delimiterAndArgumentExists_argumentString() {
         String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 /pl Alice Alice Bob";
