@@ -49,6 +49,29 @@ Alright, the following workout has been created:
 A new workout of carrying out Russian twists 50 times will be created and added to the application's list of workouts.
 
 ---
+### Show all Workouts: `workout /list`
+List down all workouts that have been created and stored in the workout list.
+
+Syntax: `workout /list`
+
+**Example**
+```
+> workout /list
+```
+**Expected Outcome**
+```
+------------------------------------------------------------
+Showing workouts 1-3 of 3:
+1. push up (10 reps)
+2. sit up (10 reps)
+3. pull up (10 reps)
+Showed all workouts in list
+------------------------------------------------------------
+```
+
+In the current workout list, there are a total of 3 workouts. All the workouts have been listed. 
+
+---
 
 ### Delete a Workout: `workout /delete`
 Removes an existing workout from the workout list.
@@ -66,7 +89,7 @@ Format: `workout /delete <workout number to delete>`
 Showing workouts 1-2 of 2:
 1. russian twist (50 reps)
 2. push up (20 reps)
-Showed all items in list
+Showed all workouts in list
 ----------------------------------------------------------------------
 ```
 To remove workout number 2 from the list, the following command is entered:
@@ -90,7 +113,7 @@ Running the `workout /list` command will show the workout list as follows:
 ----------------------------------------------------------------------
 Showing workouts 1-1 of 1:
 1. russian twist (50 reps)
-Showed all items in list
+Showed all workouts in list
 ----------------------------------------------------------------------
 ```
 ---
