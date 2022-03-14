@@ -252,7 +252,7 @@ Format: `activity /list /sid [SESSION_ID]`
 
 Examples of usage:
 1. List the activities in a session with a unique identifier of 1.
-    - `activity /view /sid 1`
+    - `activity /list /sid 1`
       <br>
       ![Activity list command Screenshot](images/userguide/ActivityListCommand.png)
       <br>
@@ -297,6 +297,8 @@ Example of usage:
 | Delete session                           | Format: `session /delete /sid [SESSION_ID]`<br><br>Example: `session /delete /sid 1`                                                                                                                             |
 | Create activity and split costs evenly   | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /c [TOTAL_COST]`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /c 7.5`            |
 | Create activity and split costs manually | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /cl [COST1] [COST2]...`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /c 1 1 5.5` |
+| List activities                          | Format: `activity /list /sid [SESSION_ID]` <br><br>Example: `activity /list /sid 1`                                                                                                                              |
+| View an activity                         | Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]` <br><br>Example: `activity /view /sid 1 /aid 1`                                                                                                    |                                                                                                                                                                                                                  |
 | List sessions                            | Format: `session /list`                                                                                                                                                                                          |
 | Show session summary                     | Format: `session /summary /sid [SESSION_ID]`<br><br>Example: `session /summary /sid 1`                                                                                                                           |
-| Exit                                     | Format: `exit`                                                                                                                                                                                                   |
+| Exit                                     | Format: `exit`                                                                                                                                                                                                   |                                                                                                                                                                                   |
