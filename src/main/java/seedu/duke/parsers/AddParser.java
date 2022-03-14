@@ -30,15 +30,21 @@ public class AddParser extends Parser {
     * Basic explanation for Add format regex
     * \s*((\/t\s+(?<taskName>.+?) ... )) -- captures taskName (no constraint)
     * (?=\s+-d\s+|\s+-t\s+|$) -- asserts that -d or -t might follow
-    * (\s+(-d\s+\"(?<taskDescription>([^\"]*))\") ... )? -- captures taskDescription (cannot have ") which must be enclosed with "". Optional
+    * (\s+(-d\s+\"(?<taskDescription>([^\"]*))\") ... )? -- captures taskDescription (cannot have ")
+    *                                                       which must be enclosed with "". Optional
     * (?=(\s+-t\s+)|$) -- asserts -t might follow
-    * (\s+(-t\s+\"(?<estimatedWorkingTime>([^\"]*))\") ... )? -- captures estimatedWorkingTime (cannot have ") which must be enclosed with "". Optional
+    * (\s+(-t\s+\"(?<estimatedWorkingTime>([^\"]*))\") ... )? -- captures estimatedWorkingTime (cannot have ")
+    *                                                            which must be enclosed with "". Optional
     * (?=(\s+-d\s+)|$) -- asserts -d might follow
-    * (\s+(-d\s+\"(?<taskDescription2>([^\"]*))\"))? -- captures taskDescription2 with same constraints if -t precedes -d
-    * \s*(( ... |\/m\s+(?<moduleCode>\w+? ... ) -- alternatively captures moduleCode (no whitespaces or special characters)
+    * (\s+(-d\s+\"(?<taskDescription2>([^\"]*))\"))? -- captures taskDescription2 with same constraints 
+    *                                                   if -t precedes -d
+    * \s*(( ... |\/m\s+(?<moduleCode>\w+? ... ) -- alternatively captures moduleCode
+    *                                              (no whitespaces or special characters)
     * (?=(\s+-d\s+)|\s+|$) -- asserts -d or whitespaces (if command is invalid) might follow
-    * (\s+(-d\s+\"(?<moduleDescription>([^\"]*))\"))? -- captures moduleDescription (cannot have ") which must be enclosed with "". Optional
-    * \s+( Task | Module )(?<invalid>.*) -- any input at any part of the command that does not fit the pattern will be captured as invalid
+    * (\s+(-d\s+\"(?<moduleDescription>([^\"]*))\"))? -- captures moduleDescription (cannot have ")
+    *                                                    which must be enclosed with "". Optional
+    * \s+( Task | Module )(?<invalid>.*) -- any input at any part of the command
+    *                                       that does not fit the pattern will be captured as invalid
     * */
     // TODO: Add support for -mod argument when integrating Task and Module classes with one another
     private static final String ADD_FORMAT = "\\s*((\\/t\\s+(?<taskName>.+?(?=\\s+-d\\s+|\\s+-t\\s+|$))"
