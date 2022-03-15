@@ -99,8 +99,9 @@ depicts a scenario when a user attempts to create a session.
 * Comfortable using CLI applications.
 
 ### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
+SplitLah will help the user keep track of expenditures made during each group outing that they go on and help the user 
+calculate what transactions that they should make in order to ensure that everyone pays equally for the activities that 
+they engage in during the outings.
 
 ## User Stories
 
