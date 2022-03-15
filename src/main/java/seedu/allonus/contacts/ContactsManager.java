@@ -4,10 +4,17 @@ import seedu.allonus.ui.TextUi;
 
 import java.util.ArrayList;
 
+import static seedu.allonus.contacts.ContactParser.parseContact;
+
 public class ContactsManager {
 
     private static final String CONTACTS_WELCOME_MESSAGE =
             "Welcome to Contacts Manager";
+    private static final String CONTACTS_INVALID_COMMAND_MESSAGE =
+            "Please enter a valid command for the Contacts Manager!\n"
+                    + "You can try \"list\", \"add\", or \"rm\"";
+    private static final String CONTACTS_UPDATED_LIST_SIZE_MESSAGE =
+            "\nNow you have %d contacts in the list.";
 
     private static final String CONTACTS_EMPTY_LIST_MESSAGE =
             "You haven't added any contacts to your list yet!";
@@ -21,10 +28,6 @@ public class ContactsManager {
 
     private static final String CONTACTS_ADD_SUCCESS_MESSAGE =
             "Got it. I've added this contact:\n  ";
-
-    private static final String CONTACTS_INVALID_COMMAND_MESSAGE =
-            "Please enter a valid command for the Contacts Manager!\n"
-            + "You can try \"list\", \"add\", or \"rm\"";
 
     private static final int CONTACTS_LIST_MAX_SIZE = 100;
     private static final ArrayList<Contact> contactsList = new ArrayList<>(CONTACTS_LIST_MAX_SIZE);
@@ -40,10 +43,6 @@ public class ContactsManager {
 
     private static void contactsWelcome() {
         printFormat(CONTACTS_WELCOME_MESSAGE);
-    }
-
-    private static String printNewNumOfTasksInListMessage() {
-        return String.format("\nNow you have %d contacts in the list.", contactsList.size());
     }
 
     /**
@@ -84,19 +83,21 @@ public class ContactsManager {
             printFormat(CONTACTS_REMOVE_INVALID_INDEX_MESSAGE);
             return;
         }
-        printFormat(CONTACTS_REMOVE_SUCCESS_MESSAGE + curr + printNewNumOfTasksInListMessage());
+        printFormat(CONTACTS_REMOVE_SUCCESS_MESSAGE + curr
+                + String.format(CONTACTS_UPDATED_LIST_SIZE_MESSAGE, contactsList.size()));
     }
 
     private static void addContact(String userInput) {
-        String[] commands = userInput.split(" ", 2);
-        String name = "";
-        if (commands.length > 1) {
-            name = commands[1];
+        Contact contact;
+        try {
+            contact = parseContact(userInput);
+        } catch (InvalidContactField e) {
+            printFormat(e.getMessage());
+            return;
         }
-
-        Contact contact = new Contact(name);
         contactsList.add(contact);
-        printFormat(CONTACTS_ADD_SUCCESS_MESSAGE + contact + printNewNumOfTasksInListMessage());
+        printFormat(CONTACTS_ADD_SUCCESS_MESSAGE + contact
+                + String.format(CONTACTS_UPDATED_LIST_SIZE_MESSAGE, contactsList.size()));
     }
 
     public static void contactsRunner(TextUi ui) {
