@@ -22,12 +22,12 @@ bill for each activity.
         * [Exit](#exit)
     * [FAQ](#faq)
     * [Command Summary](#command-summary)
-
     
+## Introduction
 Value proposition:
 
 - Allows users to keep track of several activities and their participants.
-- Splits costs evenly or independently depending on what is required.
+- Split costs evenly or independently depending on what is required.
 - Combines all payments due together for easy settlement of payments.
 - Can be operated quickly by an experienced typist.
 
@@ -42,14 +42,14 @@ Target users:
 the payer and how much each participant owes.
   - Example: `Lunch at a restaurant`
   - Consisting of the following participants:
-    - `Warren`, `Ivan`, `Roy`
+    - `Alice`, `Bob`, `Charlie`
   - Paid for by:
-    - `Warren`
+    - `Alice`
 - A session represents a period of time and stores one or more activities, as well as a list of participants. Each
 activity could have a different payer.
-  - Example: `Ivan's birthday`
+  - Example: `Bob's birthday`
   - Consisting of the following participants:
-    - `Warren`, `Ivan`, `Roy`
+    - `Alice`, `Bob`, `Charlie`
   - Consisting of the following activities:
     - `Breakfast at McDonald's`, `Lunch at a restaurant`, `Movie at a theatre`
     - Each paid for by a different person.
@@ -173,7 +173,7 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
    `[SESSION_ID]`.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also only be a single word without whitespaces.
-   > <br>E.g `Alice Tan` is not allowed.
+   > <br>Example: `Alice Tan` is not allowed.
 >- The values that follow the delimiters `/co` and `/cl` can only have a maximum of 12 digits before
    and 2 digits after the decimal point, if any.
 
