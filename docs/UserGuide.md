@@ -54,12 +54,12 @@ Format: `reset`
 **A**: {your answer here}
 
 ## Command Summary
-| Command | Format                                                                                                                                                    |
-|:-------:|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-|  help   | `help`                                                                                                                                                    |
-|   add   | `add /m MODULE_CODE [-d "MODULE_DESCRIPTION"]`</br>`add /t "TASK_NAME" [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”] [-m MODULE_CODE]`            |
-|   del   | `del /m MODULE_CODE del /t TASK_NUMBER [-m MODULE_CODE]`                                                                                                  |
-|  edit   | `edit /t TASK_INDEX (-n "TASK_NAME" or -d "TASK_DESCRIPTION" or -t "ESTIMATED_WORKING_TIME") [-m MODULE_CODE]edit /m MODULE_CODE -d "MODULE_DESCRIPTION"` |
-|  mark   | `mark /c TASK_NUMBER [-m MODULE_CODE]`</br>`mark /u TASK_NUMBER [-m MODULE_CODE]`                                                                         |
-|  list   | `list`                                                                                                                                                    |
-|  reset  | `reset`                                                                                                                                                   |
+| Command | Format                                                                                                                                                             |
+|:-------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  help   | `help`                                                                                                                                                             |
+|   add   | `add /m MODULE_CODE [-d "MODULE_DESCRIPTION"]`</br>`add /t "TASK_NAME" [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”] [-m MODULE_CODE]`                     |
+|   del   | `del /m MODULE_CODE del /t TASK_NUMBER [-m MODULE_CODE]`                                                                                                           |
+|  edit   | `edit /t TASK_INDEX (-n "TASK_NAME" or -d "TASK_DESCRIPTION" or -t "ESTIMATED_WORKING_TIME") [-m MODULE_CODE]` </br> `edit /m MODULE_CODE -d "MODULE_DESCRIPTION"` |
+|  mark   | `mark /c TASK_NUMBER [-m MODULE_CODE]`</br>`mark /u TASK_NUMBER [-m MODULE_CODE]`                                                                                  |
+|  list   | `list`                                                                                                                                                             |
+|  reset  | `reset`                                                                                                                                                            |
