@@ -61,10 +61,26 @@ public class Command {
         if (isNull(parameters)) {
             return;
         }
-        if (Parser.parseViewPatient(parameters) == null) {
+        if (Parser.parseViewDoctor(parameters) == null) {
             doctorList.viewDoctor();
         }
         doctorList.viewDoctor(parameters);
+    }
+
+    public void deleteDoctor(DoctorList doctorList, String stringIndex) {
+        int indexDoctor;
+        try {
+            indexDoctor = Integer.parseInt(stringIndex);
+        } catch (NumberFormatException numberFormatException) {
+            ui.printDeleteDoctorErrorMessage(doctorList);
+            return;
+        }
+        if (1 <= indexDoctor && indexDoctor <= doctorList.getSize()) {
+            doctorList.removeDoctor(indexDoctor - 1);
+            System.out.println("The doctor with the specified index has been removed.");
+        } else {
+            ui.printDeleteDoctorErrorMessage(doctorList);
+        }
     }
 
 
