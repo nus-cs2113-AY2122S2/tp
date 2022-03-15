@@ -61,7 +61,7 @@ public class StaffManager {
         for (Staff staff : staffs) {
             if (staffId == staff.getStaffId()) {
                 if (printMsg) {
-                    System.out.println(staff + "found!");
+                    System.out.println(staff + " found!");
                 }
                 return staff;
             }

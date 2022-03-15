@@ -51,7 +51,6 @@ public class StaffController extends Controller {
         final int staffId = InputParser.getInteger("ID of staff: ");
         final String staffName = InputParser.getString("Name of staff: ");
         final String position = InputParser.getString("Position of staff: ");
-        System.out.println("Salary of staff: ");
         final double salary = InputParser.getDouble("Salary of staff: ");
         staffManager.addStaff(staffId, staffName, position, salary);
     }
