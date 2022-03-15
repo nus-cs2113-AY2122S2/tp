@@ -143,7 +143,7 @@ public class ProjectList {
      * @return total number of projects in the list
      */
 
-    public int getProjectNo (){
+    public int getProjectNo() {
         return projectList.size();
     }
 
