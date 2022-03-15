@@ -1,19 +1,17 @@
 package seedu.duke.helper;
 
 import seedu.duke.assets.MedicineList;
-import seedu.duke.assets.Patient;
 import seedu.duke.assets.PatientList;
 
 public class Command {
     private UI ui = new UI();
-    //contains all the commands required for patient, doctor and medicine
 
-    private boolean nullChecker(String string) {
-        return string != null;
+    private boolean isNull(String string) {
+        return string == null;
     }
 
     public void viewPatient(PatientList patientList, String parameters) {
-        if (!nullChecker(parameters)) {
+        if (isNull(parameters)) {
             return;
         }
         if (Parser.parseViewPatient(parameters) == null) {
@@ -23,32 +21,42 @@ public class Command {
     }
 
     public void addPatient(PatientList patientList, String parameters) {
-        if (!nullChecker(parameters)) {
+        if (isNull(parameters)) {
+            ui.printNullParametersMessage();
+            ui.printAddPatientExampleMessage();
             return;
         }
-        String[] parametersArray = Parser.parseAddPatient(parameters);
-        if (parametersArray == null) {
-            ui.printAddPatientWrongFormatMessage();
+        String[] addPatientParameters = Parser.parseAddPatient(parameters);
+        if (addPatientParameters == null) {
+            ui.printAddPatientExampleMessage();
         } else {
-            Patient newPatient = new Patient(parametersArray[0], parametersArray[1],
-                    Integer.parseInt(parametersArray[2]), parametersArray[3].charAt(0),
-                    parametersArray[4], parametersArray[5], parametersArray[6]);
-            System.out.println("The patient above has been added!");
+            patientList.add(addPatientParameters);
+            System.out.println("The patient above has been added.");
         }
     }
 
     public void deletePatient(PatientList patientList, String stringIndex) {
-        int index = Integer.parseInt(stringIndex);
-        if (0 <= index && index <= patientList.getSize()) {
-            patientList.removePatient(index);
-            System.out.println("The patient with the above index number has been removed!");
+        if (patientList.getSize() == 0) {
+            System.out.println("There is nothing to delete in patientList.");
+            return;
+        }
+        int index;
+        try {
+            index = Integer.parseInt(stringIndex);
+        } catch (NumberFormatException numberFormatException) {
+            ui.printDeletePatientExampleMessage(patientList);
+            return;
+        }
+        if (1 <= index && index <= patientList.getSize()) {
+            patientList.removePatient(index - 1);
+            System.out.println("The patient with the above index number has been removed.");
         } else {
-            System.out.println("Oops! Please input a valid index number!");
+            ui.printDeletePatientExampleMessage(patientList);
         }
     }
 
     public void addMedicine(MedicineList medicineList, String parameters) {
-        if (!nullChecker(parameters)) {
+        if (isNull(parameters)) {
             return;
         }
         String[] parameterArray = Parser.parseAddMedicine(parameters);
@@ -57,6 +65,6 @@ public class Command {
             return;
         }
         medicineList.add(parameterArray);
-        System.out.println("Medicine has been added");;
+        System.out.println("Medicine has been added");
     }
 }

@@ -4,5 +4,5 @@ add medicine /info Paracetamol,0,2023-12-12,Headaches,10
 add medicine /info Paracetamol,500,2020-12-12,Headaches,10
 add medicine /info Paracetamol,500,2023-12-12,Headaches,0
 add medicine /info Paracetamol,500,12-01-2023,Headaches,10
-add patient /info S1234567A, Tan Wei Li, 23, M, 13 Caker Street, 1990-12-12, 2022-01-01
+add patient /info T4867591Z, Mary Douglas Owen, 25, F, 15 King's Avenue, 1997-08-26, 2020-03-30
 bye
