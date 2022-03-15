@@ -44,7 +44,7 @@ public class Parser {
      * @param delimiter_right The delimiter on the right of term.
      * @return A non-delimiter-surrounded term.
      */
-     public static String parseDelimitedTerm(String text, String delimiter_left, String delimiter_right) {
+    public static String parseDelimitedTerm(String text, String delimiter_left, String delimiter_right) {
         String[] firstParse = text.split(delimiter_left, LIMIT_TWO_TOKENS);
         String leftRemoved;
         if (firstParse.length == LIMIT_TWO_TOKENS) {
