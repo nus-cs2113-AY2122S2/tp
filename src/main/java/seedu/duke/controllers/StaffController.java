@@ -38,7 +38,6 @@ public class StaffController extends Controller {
             System.out.println("Unknown choice!");
             break;
         }
-        System.out.println("Now in Staff Menu.");
         System.out.println(this);
         return false;
     }
@@ -87,7 +86,7 @@ public class StaffController extends Controller {
      */
     @Override
     public void takeControl() {
-        System.out.println("You are entering the Staff Menu...");
+        System.out.println("Entering Staff Menu...\n");
         super.takeControl();
     }
 }
