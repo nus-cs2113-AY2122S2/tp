@@ -10,7 +10,7 @@ public class ListCommand extends Command {
     }
 
     public String listToString() {
-        Integer indexOfList = 1;
+        int indexOfList = 1;
         String listInString = "";
         for (Expenditure i : Lists.expenditures) {
             listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription() + "\n";
