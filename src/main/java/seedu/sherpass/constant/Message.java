@@ -55,4 +55,10 @@ public class Message {
     public static final String ERROR_INVALID_MARKING_INDEX_MESSAGE = "Bzzt!\nPlease"
             + " key in a valid task number to mark/unmark your task."
             + HELP_MESSAGE_SPECIFIC_COMMAND;
+    public static final String ERROR_INVALID_TIMER_INPUT_MESSAGE = "Oops! Your timer input "
+            + "does not seem to be correct.\n\n"
+            + "Please select one of the three default modes with\n"
+            + "\t'start <mode_number>'\n\n"
+            + "or choose your own custom timer with\n"
+            + "\t'start /custom <timer_duration>'";
 }

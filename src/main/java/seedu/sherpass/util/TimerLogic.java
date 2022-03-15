@@ -63,6 +63,7 @@ public class TimerLogic {
     private static boolean isValidDuration(int duration) {
         if (duration > 0) {
             return true;
+            ui.showToUser(ERROR_INVALID_TIMER_INPUT_MESSAGE);
         }
         return false;
     }
