@@ -3,7 +3,11 @@ package seedu.planitarium;
 import ui.UI;
 
 import java.io.IOException;
-import java.util.logging.*;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class ProjectLogger {
     private Logger logger;
@@ -24,7 +28,8 @@ public class ProjectLogger {
     }
 
     /**
-     * Initialize a logger for the program
+     * Initialize a logger for the program.
+     * 
      * @throws IOException if there's exception for reading or writing.
      */
     private void initialiseLogger(String fileName) throws IOException {
