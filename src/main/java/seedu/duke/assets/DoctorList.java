@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class DoctorList {
 
-    ArrayList<Doctor> doctors;
+    ArrayList<Doctor> doctors = new ArrayList<>();
 
     public void add(String[] addDoctorParameters) {
         Doctor newDoctor = new Doctor(addDoctorParameters[0],addDoctorParameters[1],

@@ -72,7 +72,7 @@ public class Command {
     public void addDoctor(DoctorList doctorList, String parameters) {
         if (isNull(parameters)) {
             ui.printNullParametersMessage();
-            ui.printAddPatientExampleMessage();
+            ui.printAddDoctorExampleMessage();
             return;
         }
         String[] addDoctorParameters = Parser.parseAddDoctor(parameters);
@@ -80,7 +80,7 @@ public class Command {
             ui.printAddPatientExampleMessage();
         } else {
             doctorList.add(addDoctorParameters);
-            System.out.println("The patient above has been added.");
+            System.out.println("The doctor above has been added.");
         }
     }
 }
