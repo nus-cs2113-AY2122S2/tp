@@ -206,6 +206,19 @@ public class WorkoutList {
         return index > 0 && index <= workoutsList.size();
     }
 
+    /**
+     * Updates the number of reps of an existing workout.
+     * Updates the workout by stating the index of the workout and
+     * new number of repetitions.
+     *
+     * @param userArgument The argument entered by user, which includes index of workout to update
+     *                     and new number of repetitions.
+     * @return updatedWorkout The workout object which has been updated.
+     * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
+     * @throws NumberFormatException If workout index and number of reps could not be parsed into an integer.
+     * @throws WorkoutOutOfRangeException If workout index is out of total number of workout in workoutsList.
+     * @throws InvalidWorkoutException If the value of repetition is not valid.
+     */
     public Workout updateWorkout(String userArgument) throws ArrayIndexOutOfBoundsException,
             NumberFormatException, WorkoutOutOfRangeException, InvalidWorkoutException {
         String[] updateDetails = userArgument.split(" ", 2);
@@ -225,9 +238,9 @@ public class WorkoutList {
             throw new InvalidWorkoutException(className, InvalidWorkoutException.INVALID_REPS_VALUE_ERROR_MSG);
         }
 
-        Workout updateWorkout = workoutsList.get(indexToUpdate - 1);
-        updateWorkout.setRepetitions(newNumberOfReps);
-        return updateWorkout;
+        Workout updatedWorkout = workoutsList.get(indexToUpdate - 1);
+        updatedWorkout.setRepetitions(newNumberOfReps);
+        return updatedWorkout;
     }
 
     /**
