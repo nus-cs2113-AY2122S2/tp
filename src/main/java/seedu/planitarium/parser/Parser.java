@@ -145,13 +145,13 @@ public class Parser {
                 // to be caught immediately within this method
                 throw new NumberFormatException();
             }
-            if (amount.contains(DELIMITER_MONEY)) {
-                String decimalPlace = parseDelimitedTerm(amount, DELIMITER_MONEY, DELIMITER_BACK);
-                if (decimalPlace.length() > LIMIT_TWO_DECIMAL) {
+            //if (amount.contains(DELIMITER_MONEY)) {
+            //    String decimalPlace = parseDelimitedTerm(amount, DELIMITER_MONEY, DELIMITER_BACK);
+            //    if (decimalPlace.length() > LIMIT_TWO_DECIMAL) {
                     // to be caught immediately within this method
-                    throw new NumberFormatException();
-                }
-            }
+            //        throw new NumberFormatException();
+            //    }
+            //}
             return checkMoney;
         } catch (NumberFormatException e) {
             throw new InvalidMoneyException(amount);

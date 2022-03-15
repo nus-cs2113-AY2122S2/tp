@@ -19,16 +19,17 @@ public class Command {
     protected String userInput;
     protected String replyMsg;
     protected UI ui = new UI();
-    protected PersonList personList = new PersonList();
     protected Person newPerson;
     protected Double amount;
     protected int uid;
     protected int index;
     protected String description;
     protected String name;
+    protected PersonList personList;
 
-    public Command(String userInput) {
+    public Command(String userInput, PersonList personList) {
         this.userInput = userInput;
+        this.personList = personList;
     }
 
     /**
@@ -72,8 +73,8 @@ public class Command {
             }
         } catch (Exception e) {
             this.replyMsg = e.toString();
+            ui.printMsg(replyMsg);
         }
-        ui.printMsg(replyMsg);
     }
 
     /**
@@ -83,7 +84,7 @@ public class Command {
     private void deleteSpend() throws Exception {
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), personList);
         newPerson = personList.getPerson(uid);
-        index = Parser.getValidIncomeIndex(Parser.parseRecordIndex(userInput), newPerson);
+        index = Parser.getValidExpenditureIndex(Parser.parseRecordIndex(userInput), newPerson);
         newPerson.deleteExpend(index);
     }
 
@@ -93,7 +94,7 @@ public class Command {
      */
     private void addSpend() throws Exception {
         description = Parser.parseDescription(userInput);
-        amount = Parser.getValidMoney(Parser.parseIncome(userInput));
+        amount = Parser.getValidMoney(Parser.parseExpenditure(userInput));
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), personList);
         newPerson = personList.getPerson(uid);
         newPerson.addExpend(description, amount);

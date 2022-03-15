@@ -4,13 +4,15 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.*;
 import commands.Command;
+import seedu.planitarium.person.PersonList;
 import ui.UI;
 
 public class PlanITarium {
     public static final Logger logger = Logger.getLogger(PlanITarium.class.getName());
     protected Scanner userInput;
     protected Command commandExecuter;
-    protected UI ui = new UI();
+    protected static UI ui = new UI();
+    protected PersonList personList = new PersonList();
 
     /**
      * Entry-point for the PlanITarium application.
@@ -19,20 +21,27 @@ public class PlanITarium {
         try {
             new PlanITarium().run();
         } catch (Exception e) {
-            UI.exit(); // Need fix later
+            ui.exit(); // Need fix later
         }
     }
 
+    /**
+     * Runs the entire program.
+     * @throws Exception if there's unacceptable condition exits.
+     */
     public void run() throws Exception {
-        initialisePlanitarium(ui);
+        initialisePlanitarium();
         while (true) {
             userInput = new Scanner(System.in);
-            commandExecuter = new Command(userInput.nextLine());
+            commandExecuter = new Command(userInput.nextLine(), personList);
             commandExecuter.execute();
         }
     }
 
-    private static void initialisePlanitarium(UI ui) {
+    /**
+     * Initializes the program with logger.
+     */
+    private static void initialisePlanitarium() {
         try {
             initialiseLogger();
         } catch (IOException e) {
@@ -41,6 +50,10 @@ public class PlanITarium {
         ui.printWelcomeMessage();
     }
 
+    /**
+     * Initialize a logger for the program
+     * @throws IOException if there's exception for reading or writing.
+     */
     private static void initialiseLogger() throws IOException {
         LogManager.getLogManager().reset();
         logger.setLevel(Level.ALL);
