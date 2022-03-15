@@ -138,7 +138,6 @@ public class ProjectList {
     }
 
     /**
-<<<<<<< HEAD
      * Gets the total number of projects in the list (for test use).
      *
      * @return total number of projects in the list
@@ -149,17 +148,15 @@ public class ProjectList {
     }
 
     private int findProjectIndex(String name) {
-        int index = -1;
         int count = 0;
 
         for (Project project : projectList) {
             if (project.getTitle().equalsIgnoreCase(name)) { //find the index of the project
-                index = count;
-                break;
+                return count;
             }
             count++;
         }
-        return index;
+        return -1;
     }
 
     /**
