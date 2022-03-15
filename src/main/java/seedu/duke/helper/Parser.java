@@ -40,6 +40,18 @@ public class Parser {
         }
     }
 
+    public static ArrayList<String> parseViewDoctor(String description) {
+        //no specific doctor
+        if (description == null) {
+            return null;
+        }
+
+        //if specific doctor
+        ArrayList<String> parameters = new ArrayList<String>();
+        parameters.add(description);
+        return parameters;
+    }
+
     public static String[] parseAddMedicine(String parameters) {
         String[] medicineParameters = parameters.trim().split(",");
         if (medicineParameters.length == 5 && validateMedicine(medicineParameters)) {

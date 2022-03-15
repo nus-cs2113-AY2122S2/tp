@@ -33,4 +33,19 @@ public class DoctorList {
     public void viewDoctor() {
         System.out.println(doctors.toString());
     }
+
+    //get the number of doctors
+    public int getSize() {
+        return doctors.size();
+    }
+
+    //remove the specific doctor
+    public void removeDoctor(int index) {
+        doctors.remove(index);
+    }
+
+    @Override
+    public String toString() {
+        return "aaa";
+    }
 }
