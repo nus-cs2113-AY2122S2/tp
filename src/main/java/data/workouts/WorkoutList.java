@@ -243,15 +243,15 @@ public class WorkoutList {
 
         Workout updatedWorkout = workoutsList.get(indexToUpdate - 1);
         String exerciseName = updatedWorkout.getExerciseName();
-        boolean isWorkoutExist = checkForExistingWorkout(exerciseName, newRepsValue);
+        boolean isExistingWorkout = checkForExistingWorkout(exerciseName, newRepsValue);
 
-        if (isWorkoutExist) {
+        if (isExistingWorkout) {
             logger.log(Level.WARNING, "\"" + exerciseName + " (" + newRepsValue + ")\" "
                 + "has already existed in the list. Cannot be updated.");
             throw new InvalidWorkoutException(className, InvalidWorkoutException.DUPLICATE_WORKOUT_ERROR_MSG);
         }
 
-        assert (isIndexToUpdateValid && isNewRepsValueValid && !isWorkoutExist);
+        assert (isIndexToUpdateValid && isNewRepsValueValid && !isExistingWorkout);
         updatedWorkout.setRepetitions(newRepsValue);
         logger.exiting(getClass().getName(), "updateWorkout");
         return updatedWorkout;
