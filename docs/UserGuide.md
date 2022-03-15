@@ -160,7 +160,7 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 * `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
 
 > **💡 Note(s):**
->- A session with a unique identifier of `[SESSION_ID]` has to exist before the activity can be created and assigned to 
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to 
 > it.
 >- The `[ACTIVITY_NAME]` should be unique across all activities.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
@@ -169,7 +169,7 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 
 Examples of usage:
 1. Adds a new activity to a session with a session unique identifier of 1 named Class Lunch. Alice paid a total of $10
-   for both Bob and herself.
+   for both Bob and herself which will be split equally between them later on.
    - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /c 10` <br>
    ![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
 <br>
@@ -181,7 +181,7 @@ Examples of usage:
 <br>
 <br>
 ### Deleting an activity: `activity /delete`
-> Deletes an activity from a particular session.<br>
+> Deletes an existing activity from a particular session.<br>
 > An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
@@ -273,7 +273,7 @@ Example of usage:
    and Bob involved on 15-03-2022.
 2. An [activity](#creating-an-activity-activity-create) was created with activity named Class Lunch, where Alice paid for both
    Bob and herself with a total cost of $10.
-3. Get a session summary for an existing session with a session unique identifier of 1.
+3. Get a session summary for an active session with a session unique identifier of 1.
    - `session /summary /sid 1` <br>
    ![Session summary command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionSummaryCommand.png)
 <br>
