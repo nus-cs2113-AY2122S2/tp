@@ -3,13 +3,11 @@ package seedu.duke.controllers;
 import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.manager.OrderManager;
 
-import java.util.Scanner;
-
 public class OrderController extends Controller {
     private static final String[] CHOICES = {"Exit", "Display Menu",
-        "Create an order", "Delete an order",
-        "Get total value of current order",
-        "Get total value of all orders in the list", "Print receipt"
+            "Create an order", "Delete an order",
+            "Get total value of current order",
+            "Get total value of all orders in the list", "Print receipt"
     };
     private final OrderManager orderManager;
 
@@ -19,16 +17,16 @@ public class OrderController extends Controller {
     }
 
     @Override
-    protected boolean optionSwitcher(int choice) throws IllegalArgumentException, OperationTerminationException {
+    protected boolean optionSwitcher(int choice) throws OperationTerminationException {
         switch (choice) {
         case 0:
             System.out.println("Exiting application...");
-            return true;
+            break;
         case 1:
             System.out.println("Implement me to view menu :D");
             break;
         case 2:
-            quitOrder();
+            addOrder();
             break;
         case 3:
             deleteOrder();
@@ -52,16 +50,16 @@ public class OrderController extends Controller {
         return false;
     }
 
-    private void quitOrder() throws OperationTerminationException {
+    private void addOrder() throws OperationTerminationException {
         boolean notQuit = true;
-        String userInput= InputParser.getString("Enter dishes you want to order (Q/q to exit): ");
+        String userInput = InputParser.getString("Enter dishes you want to order (Q/q to exit): ");
         if (userInput == "Q" || userInput == "q") {
             notQuit = false;
         }
         while (notQuit) {
             Object inputObj = userInput;
             int size = orderManager.addDishToOrder(inputObj);
-            userInput= InputParser.getString("You’ve already added " + size + "dish(es), some more: \n");
+            userInput = InputParser.getString("You’ve already added " + size + "dish(es), some more: \n");
             if (userInput == "Q" || userInput == "q") {
                 notQuit = false;
             }
