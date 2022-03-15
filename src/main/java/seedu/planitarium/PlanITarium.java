@@ -1,20 +1,20 @@
 package seedu.planitarium;
 
-import java.io.IOException;
+import java.util.logging.Level;
 import java.util.Scanner;
-import java.util.logging.*;
+
 import seedu.planitarium.commands.Command;
 import seedu.planitarium.commands.CommandFactory;
 import seedu.planitarium.person.PersonList;
 import seedu.planitarium.ui.UI;
 
 public class PlanITarium {
-    public static final Logger logger = Logger.getLogger(PlanITarium.class.getName());
     protected Scanner userInput;
     protected Command command;
     protected static UI ui = new UI();
     protected PersonList personList = new PersonList();
     protected CommandFactory commandFactory = new CommandFactory();
+    protected static ProjectLogger logger;
 
     /**
      * Entry-point for the PlanITarium application.
@@ -23,7 +23,7 @@ public class PlanITarium {
         try {
             new PlanITarium().run();
         } catch (Exception e) {
-            ui.exit(); // Need fix later
+            ui.exit();
         }
     }
 
@@ -35,6 +35,7 @@ public class PlanITarium {
         initialisePlanitarium();
         while (true) {
             userInput = new Scanner(System.in);
+            logger.getLogger().log(Level.INFO, "Next line has been read");
             command = commandFactory.getCommand(userInput.nextLine(), personList);
             command.execute();
         }
@@ -44,24 +45,8 @@ public class PlanITarium {
      * Initializes the program with logger.
      */
     private static void initialisePlanitarium() {
-        try {
-            initialiseLogger();
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "File logger not working.", e);
-        }
+        logger = new ProjectLogger(PlanITarium.class.getName(), "PlanITarium.log");
+        logger.getLogger().log(Level.INFO, "Logger initialised");
         ui.printWelcomeMessage();
-    }
-
-    /**
-     * Initialize a logger for the program
-     * @throws IOException if there's exception for reading or writing.
-     */
-    private static void initialiseLogger() throws IOException {
-        LogManager.getLogManager().reset();
-        logger.setLevel(Level.ALL);
-        FileHandler fh = new FileHandler("PlanITarium.log");
-        fh.setFormatter(new SimpleFormatter());
-        fh.setLevel(Level.ALL);
-        logger.addHandler(fh);
     }
 }

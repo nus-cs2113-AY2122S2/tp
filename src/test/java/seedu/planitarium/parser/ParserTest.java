@@ -7,13 +7,20 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
 
-    Parser p = new Parser();
-
     @Test
     void parseDelimitedTerm_getDelimitedToken_success() {
         String input1 = "";
-    }
+        String input2 = "add /e bills";
+        String delimiter = "/e";
+        String delimiterBack = "/n";
 
+        String output1 = Parser.parseDelimitedTerm(input1, delimiter, delimiterBack);
+        assertEquals(input1, output1);
+
+        String output2 = Parser.parseDelimitedTerm(input2, delimiter, delimiterBack);
+        assertEquals("bills", output2);
+    }
+    /*
     @Test
     void parseKeyword() {
     }
@@ -27,10 +34,34 @@ class ParserTest {
     }
 
     @Test
+    void parseDescription() {
+    }
+
+    @Test
     void parseIncome() {
     }
 
     @Test
     void parseExpenditure() {
     }
+
+    @Test
+    void parseRecordIndex() {
+    }
+
+    @Test
+    void getValidMoney() {
+    }
+
+    @Test
+    void getValidUserIndex() {
+    }
+
+    @Test
+    void getValidExpenditureIndex() {
+    }
+
+    @Test
+    void getValidIncomeIndex() {
+    }*/
 }
