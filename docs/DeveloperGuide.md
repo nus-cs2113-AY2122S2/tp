@@ -72,6 +72,21 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
 
 ### Command Component
 
+##Implementation
+### Add a session
+### Remove a session
+### View a session
+### List sessions
+### Settle a session
+### Add an activity
+### Remove an activity
+### View an activity
+### List activities
+### Add a group
+### Remove a group
+### View a group
+### List groups
+
 
 ## Product scope
 ### Target user profile
