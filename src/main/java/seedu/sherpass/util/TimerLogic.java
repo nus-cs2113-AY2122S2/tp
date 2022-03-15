@@ -51,6 +51,7 @@ public class TimerLogic {
         }
         try {
             int duration = Parser.parseTimerInput(parsedInput);
+            assert (duration > 0);
             timer.setDuration(duration);
             timer.start();
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException | InvalidTimeException e) {
