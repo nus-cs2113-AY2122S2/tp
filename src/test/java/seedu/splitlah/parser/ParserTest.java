@@ -3,9 +3,13 @@ package seedu.splitlah.parser;
 import org.junit.jupiter.api.Test;
 import seedu.splitlah.command.Command;
 import seedu.splitlah.command.InvalidCommand;
+import seedu.splitlah.exceptions.InvalidDataException;
+import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.ui.Message;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
 
@@ -115,9 +119,104 @@ class ParserTest {
      * when an input of four tokens is provided by the user.
      */
     @Test
-    void getRemainingArgument_fourInputTokens_thirdToken() {
+    void getRemainingArgument_fourInputTokens_thirdTokenOnwards() {
         String fourInputTokensString = "brownFox jumpsOver theLazy Dog";
         String output = Parser.getRemainingArgument(fourInputTokensString);
         assertEquals("theLazy Dog", output);
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Name delimiter is not provided by the user.
+     */
+    @Test
+    void parseName_missingDelimiter_exceptionThrown() {
+        String argumentWithoutNameDelimiter = "n Class outing /d 23-02-2022 /pl Alice Alice Bob";
+        try {
+            String output = Parser.parseName(argumentWithoutNameDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.NAME_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Name delimiter is provided but no arguments 
+     * following the Name delimiter are provided by the user.
+     */
+    @Test
+    void parseName_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutNameDelimiter = "/n /d 23-02-2022 /pl Alice Alice Bob";
+        try {
+            String output = Parser.parseName(argumentWithoutNameDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.NAME_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if a String object containing the name is properly returned when the Name delimiter and arguments
+     * following it are properly provided by the user.
+     */
+    @Test
+    void parseName_delimiterAndArgumentExists_argumentString() {
+        String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 /pl Alice Alice Bob";
+        try {
+            String output = Parser.parseName(argumentWithoutNameDelimiter);
+            assertEquals("Class outing", output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+    
+    /**
+     * Checks if an exception is properly thrown when the Person list delimiter is not provided by the user.
+     */
+    @Test
+    void parsePersonList_missingDelimiter_exceptionThrown() {
+        String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 pl Alice Alice Bob";
+        try {
+            String[] output = Parser.parsePersonList(argumentWithoutNameDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.PERSON_LIST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Person list delimiter is provided but no arguments 
+     * following the Person list delimiter are provided by the user.
+     */
+    @Test
+    void parsePersonList_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 /pl";
+        try {
+            String[] output = Parser.parsePersonList(argumentWithoutNameDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.PERSON_LIST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if a String array object containing names of persons is properly returned when the Person list delimiter
+     * and arguments following it are properly provided by the user.
+     */
+    @Test
+    void parsePersonList_delimiterAndArgumentExists_personList() {
+        String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 /pl Alice Charles Bob";
+        try {
+            String[] output = Parser.parsePersonList(argumentWithoutNameDelimiter);
+            assertEquals(3, output.length);
+            assertEquals("Alice", output[0]);
+            assertEquals("Charles", output[1]);
+            assertEquals("Bob", output[2]);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
     }
 }

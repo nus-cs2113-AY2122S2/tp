@@ -98,6 +98,10 @@ public abstract class Message {
     public static final String ERROR_PERSON_ACTIVITY_NOT_FOUND =
             "Activity not found.";
 
+    // Name
+    public static final String ERROR_NAME_INVALIDNAME =
+            "Invalid name. Names must contain only alphabetical characters.";
+
     // Session
     public static final String ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST =
             "Please enter a number from 1 to ";
@@ -116,7 +120,7 @@ public abstract class Message {
     public static final String ERROR_PROFILE_DUPLICATE_SESSION =
             "There is another session with the same name, please try another name.";
     public static final String ERROR_PROFILE_DUPLICATE_NAME =
-            "There seems to be duplicates in the session you are trying to create, please try again.";
+            "There are duplicates in person names for the session you are trying to create, please try again.";
     public static final String ERROR_PROFILE_SESSION_LIST_EMPTY =
             "There are no sessions currently stored.";
     public static final String ERROR_PROFILE_SESSION_NOT_IN_LIST =
@@ -157,4 +161,5 @@ public abstract class Message {
     // Activity List Command
     public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =
             "There are currently no activities in this session";
+
 }
