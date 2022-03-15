@@ -220,7 +220,7 @@ public class WorkoutList {
      * @throws InvalidWorkoutException        If the value of repetition is not valid.
      */
     public Workout updateWorkout(String userArgument) throws ArrayIndexOutOfBoundsException,
-        NumberFormatException, WorkoutOutOfRangeException, InvalidWorkoutException {
+            NumberFormatException, WorkoutOutOfRangeException, InvalidWorkoutException {
         logger.entering(getClass().getName(), "updateWorkout");
         String[] updateDetails = userArgument.split(" ", 2);
         String indexToUpdateString = updateDetails[0].trim();
