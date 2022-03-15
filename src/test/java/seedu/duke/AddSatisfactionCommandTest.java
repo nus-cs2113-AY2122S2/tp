@@ -7,7 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddSatisfactionCommandTest {
     @Test
-    public void commandParser_addCommandWithNonEmptySatisfactionCustomerAndSatisfactionValue_success() throws Exception {
+    public void commandParser_addCommandWithNonEmptySatisfactionCustomerAndSatisfactionValue_success()
+            throws Exception {
         CommandParser parser = new CommandParser();
         Command command = parser.parse("Add Satisfaction Bob 3");
         AddSatisfactionCommand addSatisfactionCommand = (AddSatisfactionCommand) command;
@@ -28,6 +29,7 @@ public class AddSatisfactionCommandTest {
 
     @Test
     public void commandParser_addCommandWithInvalidSatisfactionValue_exceptionThrown() {
-        assertThrows(InvalidSatisfactionValueException.class, () -> new CommandParser().parse("Add Satisfaction Bob -1"));
+        assertThrows(InvalidSatisfactionValueException.class, () ->
+                new CommandParser().parse("Add Satisfaction Bob -1"));
     }
 }
