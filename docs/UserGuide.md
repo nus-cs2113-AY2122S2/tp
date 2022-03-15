@@ -117,6 +117,7 @@ Format: `session /delete /sid [SESSION_ID]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
     * The unique identifier for a session can be retrieved with `session /list` command.
+
 > **💡 Note(s):**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
 >- A confirmation must be given before deletion takes place.
@@ -205,8 +206,7 @@ Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 >- A confirmation must be given before deletion takes place.
 
 Example of usage:
-1. Remove an existing activity with a unique identifier of 1 from a session with a unique
-   identifier of 2.
+1. Remove an existing activity with a unique identifier of 1 from a session with a unique <br> identifier of 2.
    - `activity /delete /sid 2 /aid 1` <br>
    ![Activity delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityDeleteCommand.png)
 <br>
@@ -297,14 +297,14 @@ Format: `exit`
 
 ## Command Summary
 
-| Action                                   | Format                                                                                                                                                                                                           |
-|------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Add session                              | Format: `session /create /n [SESSION_NAME] /d [DATE] /pl [PARTICIPANTS]`<br><br> Example: `session /create /n Outing /d 15-03-2022 /pl Warren, Ivan, Roy`                                                        |
-| Delete session                           | Format: `session /delete /sid [SESSION_ID]`<br><br>Example: `session /delete /sid 1`                                                                                                                             |
-| Create activity and split costs evenly   | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /c [TOTAL_COST]`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /c 7.5`            |
-| Create activity and split costs manually | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /cl [COST1] [COST2]...`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /c 1 1 5.5` |
-| List activities                          | Format: `activity /list /sid [SESSION_ID]` <br><br>Example: `activity /list /sid 1`                                                                                                                              |
-| View an activity                         | Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]` <br><br>Example: `activity /view /sid 1 /aid 1`                                                                                                    |                                                                                                                                                                                                                  |
-| List sessions                            | Format: `session /list`                                                                                                                                                                                          |
-| Show session summary                     | Format: `session /summary /sid [SESSION_ID]`<br><br>Example: `session /summary /sid 1`                                                                                                                           |
-| Exit                                     | Format: `exit`                                                                                                                                                                                                   |                                                                                                                                                                                   |
+| Action                                   | Format                                                                                                                                                                                                            |
+|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Add session                              | Format: `session /create /n [SESSION_NAME] /d [DATE] /pl [PARTICIPANTS]`<br><br> Example: `session /create /n Outing /d 15-03-2022 /pl Warren, Ivan, Roy`                                                         |
+| Delete session                           | Format: `session /delete /sid [SESSION_ID]`<br><br>Example: `session /delete /sid 1`                                                                                                                              |
+| Create activity and split costs evenly   | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /co [TOTAL_COST]`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /co 7.5`           |
+| Create activity and split costs manually | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /cl [COST1] [COST2]...`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /cl 1 1 5.5` |
+| List activities                          | Format: `activity /list /sid [SESSION_ID]` <br><br>Example: `activity /list /sid 1`                                                                                                                               |
+| View an activity                         | Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]` <br><br>Example: `activity /view /sid 1 /aid 1`                                                                                                     |                                                                                                                                                                                                                  |
+| List sessions                            | Format: `session /list`                                                                                                                                                                                           |
+| Show session summary                     | Format: `session /summary /sid [SESSION_ID]`<br><br>Example: `session /summary /sid 1`                                                                                                                            |
+| Exit                                     | Format: `exit`                                                                                                                                                                                                    |                                                                                                                                                                                   |
