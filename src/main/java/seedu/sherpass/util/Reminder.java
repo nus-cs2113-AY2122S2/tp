@@ -1,12 +1,11 @@
 package seedu.sherpass.util;
 
-import seedu.sherpass.constant.DateAndTimeFormat;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.time.LocalDate;
+
+import java.util.ArrayList;
 import java.util.Comparator;
 
 import static java.util.stream.Collectors.toList;
@@ -81,21 +80,17 @@ public class Reminder {
         ui.showLine();
     }
 
-    private boolean isEqualDate(String currentDate, LocalDate compareDate) {
-        if (currentDate == " ") {
+    private boolean isEqualDate(LocalDate currentDate, LocalDate compareDate) {
+        if (currentDate == null) {
             return false;
-        } else {
-            LocalDate date = LocalDate.parse(currentDate, DateAndTimeFormat.savedTaskNoTimeFormat);
-            return date.isEqual(compareDate);
         }
+        return currentDate.isEqual(compareDate);
     }
 
-    private boolean isBeforeDate(String currentDate, LocalDate compareDate) {
-        if (currentDate == " ") {
+    private boolean isBeforeDate(LocalDate currentDate, LocalDate compareDate) {
+        if (currentDate == null) {
             return false;
-        } else {
-            LocalDate date = LocalDate.parse(currentDate, DateAndTimeFormat.savedTaskNoTimeFormat);
-            return date.isBefore(compareDate);
         }
+        return currentDate.isBefore(compareDate);
     }
 }
