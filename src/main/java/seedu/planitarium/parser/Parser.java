@@ -166,7 +166,7 @@ public class Parser {
             //if (amount.contains(DELIMITER_MONEY)) {
             //    String decimalPlace = parseDelimitedTerm(amount, DELIMITER_MONEY, DELIMITER_BACK);
             //    if (decimalPlace.length() > LIMIT_TWO_DECIMAL) {
-            // to be caught immediately within this method
+            //        to be caught immediately within this method
             //        throw new NumberFormatException();
             //    }
             //}
