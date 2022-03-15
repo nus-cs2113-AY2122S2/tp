@@ -93,6 +93,11 @@ public class ProjectList {
             return;
         }
         Project targetProject = projectList.get(indexProj - 1);
-        targetProject.markTodoAsDone(indexTodo);
+        try {
+            targetProject.markTodoAsDone(indexTodo);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("The index is out or range.");
+        }
+
     }
 }
