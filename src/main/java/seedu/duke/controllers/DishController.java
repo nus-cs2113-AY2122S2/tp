@@ -9,13 +9,19 @@ import seedu.duke.manager.DishManager;
  */
 public class DishController extends Controller {
     private static final String[] CHOICES = {"Exit Menu", "Add Dish", "Delete Dish",
-            "Change the price of a dish", "Change the name of a dish"
+        "Change the price of a dish", "Change the name of a dish"
     };
     private final DishManager dishManager;
 
     public DishController() {
         super(CHOICES);
         dishManager = new DishManager();
+    }
+
+    @Override
+    public void takeControl() {
+        System.out.println("You are using Menu function");
+        super.takeControl();
     }
 
     @Override
@@ -90,13 +96,5 @@ public class DishController extends Controller {
         } catch (IllegalArgumentException e) {
             System.out.println("Please make sure the name is not empty and price is positive");
         }
-    }
-
-}
-
-    @Override
-    public void takeControl() {
-        System.out.println("You are using Menu function");
-        super.takeControl();
     }
 }

@@ -35,10 +35,10 @@ public class StaffManager {
     /**
      * Add a Staff to staffs.
      *
-     * @param staffId    ID of the Staff.
-     * @param staffName  Name of the Staff.
-     * @param position   Job position of the Staff.
-     * @param salary     Salary of the Staff.
+     * @param staffId   ID of the Staff.
+     * @param staffName Name of the Staff.
+     * @param position  Job position of the Staff.
+     * @param salary    Salary of the Staff.
      */
     public void addStaff(int staffId, String staffName, String position, double salary) {
         if (findByStaffId(staffId, false) != null) {
@@ -50,7 +50,7 @@ public class StaffManager {
     /**
      * Find Staff from Staffs by ID.
      *
-     * @param staffId ID of the Staff.
+     * @param staffId  ID of the Staff.
      * @param printMsg Boolean to determine if found message should be printed.
      */
     public Staff findByStaffId(int staffId, boolean printMsg) {

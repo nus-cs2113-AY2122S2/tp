@@ -3,8 +3,6 @@ package seedu.duke.controllers;
 import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.manager.OrderManager;
 
-import java.util.Scanner;
-
 public class OrderController extends Controller {
     private static final String[] CHOICES = {"Exit", "Display Menu",
         "Create an order", "Delete an order",
@@ -54,14 +52,14 @@ public class OrderController extends Controller {
 
     private void quitOrder() throws OperationTerminationException {
         boolean notQuit = true;
-        String userInput= InputParser.getString("Enter dishes you want to order (Q/q to exit): ");
+        String userInput = InputParser.getString("Enter dishes you want to order (Q/q to exit): ");
         if (userInput == "Q" || userInput == "q") {
             notQuit = false;
         }
         while (notQuit) {
             Object inputObj = userInput;
             int size = orderManager.addDishToOrder(inputObj);
-            userInput= InputParser.getString("You’ve already added " + size + "dish(es), some more: \n");
+            userInput = InputParser.getString("You’ve already added " + size + "dish(es), some more: \n");
             if (userInput == "Q" || userInput == "q") {
                 notQuit = false;
             }

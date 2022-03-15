@@ -5,8 +5,8 @@ import seedu.duke.exceptions.OperationTerminationException;
 import java.util.Scanner;
 
 public final class InputParser {
-    private static final Scanner scanner = new Scanner(System.in);
     public static final String TERMINATOR = "-";
+    private static final Scanner scanner = new Scanner(System.in);
 
     /**
      * Helper method to get a valid string.
