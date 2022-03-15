@@ -10,7 +10,6 @@ import data.exercises.ExerciseList;
 import data.workouts.WorkoutList;
 import storage.FileManager;
 
-import java.io.IOException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -35,6 +34,14 @@ public class Parser {
     public static final int EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS = 3;
     private static Logger logger = Logger.getLogger(Parser.class.getName());
 
+    /**
+     * Constructs the Parser object with the required components for this instance to operate.
+     *
+     * @param ui           An instance of the UI class.
+     * @param exerciseList An instance of the ExerciseList class.
+     * @param workoutList  An instance of the WorkoutList class.
+     * @param fileManager  An instance of the FileManager class.
+     */
     public Parser(UI ui, ExerciseList exerciseList, WorkoutList workoutList, FileManager fileManager) {
         this.ui = ui;
         this.exerciseList = exerciseList;
@@ -42,20 +49,45 @@ public class Parser {
         this.fileManager = fileManager;
     }
 
+    /**
+     * Gets the UI object stored in this Parser object.
+     *
+     * @return The UI object.
+     */
     public UI getUi() {
         return ui;
     }
 
+    /**
+     * Gets the ExerciseList object stored in this Parser object.
+     *
+     * @return The ExerciseList object.
+     */
     public ExerciseList getExerciseList() {
         return exerciseList;
     }
 
+    /**
+     * Gets the WorkoutList object stored in this Parser object.
+     *
+     * @return The WorkoutList object.
+     */
     public WorkoutList getWorkoutList() {
         return workoutList;
     }
 
+    /**
+     * Parses the user's input and determines the correct command object to instantiate.
+     *
+     * @param userInput The unparsed input given by the user.
+     * @return A subclass of the Command object. The type of Command object is determined based on the
+     *         user's input.
+     * @throws ArrayIndexOutOfBoundsException If the user's input contains insufficient information to parse.
+     * @throws InvalidCommandException        If the user's input contains invalid or insufficient information
+     *                                        to parse.
+     */
     public Command parseUserInput(String userInput) throws ArrayIndexOutOfBoundsException,
-            InvalidCommandException, IOException {
+            InvalidCommandException {
         // Check for illegal characters
         boolean hasIllegalCharacters = checkInputForIllegalCharacters(userInput);
         String className = this.getClass().getSimpleName();
@@ -80,6 +112,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if the user's input contains illegal characters. Illegal characters are characters that are
+     * required by the application for purposes such as reading/writing to resource files. Thus, these
+     * characters cannot be used by the user.
+     *
+     * @param userInput The user's input.
+     * @return Returns true if the user's input contains at least one illegal character. Otherwise,
+     *         returns false.
+     */
     private boolean checkInputForIllegalCharacters(String userInput) {
         for (String illegalCharacter : FileManager.ILLEGAL_CHARACTERS) {
             if (userInput.contains(illegalCharacter)) {
@@ -89,8 +130,17 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Creates a new workout command with the appropriate parameters stored into the object.
+     *
+     * @param userInput The user's input.
+     * @return A WorkoutCommand object containing the parsed parameters obtained from the user's input.
+     * @throws ArrayIndexOutOfBoundsException If the user's input contains insufficient information to parse.
+     * @throws InvalidCommandException        If the user's input contains invalid or insufficient information
+     *                                        to parse.
+     */
     public WorkoutCommand createWorkoutCommand(String userInput) throws ArrayIndexOutOfBoundsException,
-            InvalidCommandException, IOException {
+            InvalidCommandException {
         // Determine the action the user has entered
         String actionKeyword = userInput.split(" ", 3)[1];
         String arguments = null;

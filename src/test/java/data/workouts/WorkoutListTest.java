@@ -153,4 +153,29 @@ class WorkoutListTest {
         assertThrows(WorkoutOutOfRangeException.class,
             () -> wl.updateWorkout(updateArgument));
     }
+
+    @Test
+    void checkForExistingWorkout_uniqueNewWorkout_expectFalse() throws InvalidWorkoutException,
+            InvalidExerciseException {
+        wl.createAndAddWorkout("russian twist /reps 1000");
+
+        String newWorkoutExerciseName1 = "running";
+        int newWorkoutRepsCount1 = 1000;
+        String newWorkoutExerciseName2 = "russian twist";
+        int newWorkoutRepsCount2 = 999;
+
+        assertEquals(false, wl.checkForExistingWorkout(newWorkoutExerciseName1, newWorkoutRepsCount1));
+        assertEquals(false, wl.checkForExistingWorkout(newWorkoutExerciseName2, newWorkoutRepsCount2));
+    }
+
+    @Test
+    void checkForExistingWorkout_nonUniqueNewWorkout_expectTrue()
+            throws InvalidWorkoutException, InvalidExerciseException {
+        wl.createAndAddWorkout("russian twist /reps 1000");
+
+        String newWorkoutExerciseName = "russian twist";
+        int newWorkoutRepsCount = 1000;
+
+        assertEquals(true, wl.checkForExistingWorkout(newWorkoutExerciseName, newWorkoutRepsCount));
+    }
 }
