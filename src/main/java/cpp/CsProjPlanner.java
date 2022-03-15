@@ -15,7 +15,7 @@ public class CsProjPlanner {
     /**
      * Main entry-point for the CSProjPlanner application.
      */
-    public static void main(String[] args) throws IllegalCommandException {
+    public static void main(String[] args) {
         String input;
         Scanner in = new Scanner(System.in);
 
@@ -24,7 +24,11 @@ public class CsProjPlanner {
         input = in.nextLine();
 
         while (!input.equalsIgnoreCase("exit")) {
-            commandHandler.handleUserInput(projectList, input);
+            try {
+                commandHandler.handleUserInput(projectList, input);
+            } catch (IllegalCommandException e) {
+                System.out.println(e.getMessage());
+            }
             Response.displayNext();
             input = in.nextLine(); //fetch next input from the user
         }

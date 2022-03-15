@@ -1,6 +1,7 @@
 package cpp.projects;
 
 import cpp.Constants;
+import cpp.exceptions.NegativeIndexException;
 
 import java.util.ArrayList;
 
@@ -90,7 +91,7 @@ public class ProjectList {
         targetProject = projectList.get(index - 1);
 
         targetProject.addTodo(todoString);
-        System.out.println("Todos have been added to project " + targetProject.getTitle());
+
     }
 
     /**
@@ -99,7 +100,7 @@ public class ProjectList {
      * @param indexStringTodo Index of the todo.
      */
 
-    public void markTodoAsDone(String indexStringProj, String indexStringTodo) {
+    public void markTodoAsDone(String indexStringProj, String indexStringTodo) throws NegativeIndexException {
         int indexProj;
         int indexTodo;
         try {
@@ -111,8 +112,17 @@ public class ProjectList {
             System.out.println(Constants.SEPARATOR);
             return;
         }
+        if (indexProj <= 0 || indexTodo <= 0) {
+            throw new NegativeIndexException();
+        }
         Project targetProject = projectList.get(indexProj - 1);
-        targetProject.markTodoAsDone(indexTodo);
+
+        try {
+            targetProject.markTodoAsDone(indexTodo);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("The index is out or range.");
+        }
+
     }
 
     /**

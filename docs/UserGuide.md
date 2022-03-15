@@ -34,6 +34,33 @@ Format: `listprojects` or `listproject`
 
 * The `listprojects`(`listproject`) cannot contain a space, i.e., `list projects`(`list project`) will be considered an unknown command.
 
+### add todo to a project: `todo`
+Adds a todo task with description to a project
+
+Format: `todo [project_index] [description]`
+* The `project_Index` must be a positive integer.
+
+#### Example of usage
+`todo 1 buy textbooks`
+#### Example of output
+```Todo:  buy textbooks have been added to project pro1```
+
+### mark todo as done: `mark`
+
+Format: `mark [project_index] [todo_index]`
+* The `project_index` and `todo_index` must be positive integers.
+
+#### Example of usage
+`mark 1 1`
+
+#### Example of output
+
+```aidl
+Todo has been marked as done successfully: 
+[X] buy textbooks
+```
+
+
 ### exit: `exit`
 Exit the program
 
@@ -51,4 +78,6 @@ Format: `exit`
 | Action              | Format                                   |
 |---------------------|------------------------------------------|
 | view all project(s) | `listproject`, `listprojects`            |
+| add todo            | `todo [project_index] [description]`     |
+| mark todo as done   | `mark [project_index] [todo_index]`
 | Exit                | `exit`                                   |

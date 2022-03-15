@@ -1,5 +1,6 @@
 package cpp.projects;
 
+import cpp.exceptions.NegativeIndexException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -37,13 +38,11 @@ class ProjectListTest {
         emptyProjectList.addProject(PROJECT1NAME); //add same project to see if it is added repeatedly
         assertEquals(1, emptyProjectList.getProjectNo());
     }
-    
+
     @Test
-    void markTodoAsDone_indexOutOfRange() {
-        defaultProjectList.addProject(PROJECT1NAME);
-        defaultProjectList.addTodoToProject("1",TODO1);
-        defaultProjectList.addTodoToProject("1",TODO2);
-        String targetIndexString = "5";
-        assertThrows(IndexOutOfBoundsException.class, () -> defaultProjectList.markTodoAsDone("1", targetIndexString));
+
+    void markTodoAsDone_negativeIndex() {
+        String targetIndexString = "-1";
+        assertThrows(NegativeIndexException.class, () -> defaultProjectList.markTodoAsDone("1", targetIndexString));
     }
 }
