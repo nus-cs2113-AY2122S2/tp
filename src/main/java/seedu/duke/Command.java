@@ -13,6 +13,8 @@ public abstract class Command {
         return this.isExit;
     }
 
-    // MUST FIX SO THAT EXECUTION WORKS WITH ANY COMMAND (CURRENTLY SPECIALIZED FOR SATISFACTION-RELATED COMMANDS)
-    public abstract void execute(SatisfactionList satisfactionlist, Ui ui);
+    public abstract void execute();
+
+    public abstract void execute(SatisfactionList satisfactionList);
+
 }

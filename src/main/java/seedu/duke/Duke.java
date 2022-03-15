@@ -15,7 +15,8 @@ public class Duke {
             try {
                 userInput = ui.readUserInput();
                 Command command = commandParser.parse(userInput);
-                command.execute(satisfactionList, ui);
+                command.execute();
+                command.execute(satisfactionList);
                 shouldExitProgram = command.isExit();
             } catch (WrongCommandException error) {
                 System.out.println(error.getMessage());

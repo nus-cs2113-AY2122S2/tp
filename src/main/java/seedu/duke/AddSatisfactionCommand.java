@@ -16,7 +16,11 @@ public class AddSatisfactionCommand extends Command {
     }
 
     @Override
-    public void execute(SatisfactionList satisfactionList, Ui ui) {
+    public void execute() {
+
+    }
+
+    public void execute(SatisfactionList satisfactionList) {
         satisfactionList.addSatisfaction(satisfaction);
     }
 

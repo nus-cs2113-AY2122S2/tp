@@ -8,7 +8,11 @@ public class ExitCommand extends Command {
     }
 
     // Must fix these parameters...
-    public void execute(SatisfactionList satisfactionList, Ui ui) {
+    public void execute() {
         System.out.println("see u again!");
+    }
+
+    public void execute(SatisfactionList satisfactionList) {
+
     }
 }
