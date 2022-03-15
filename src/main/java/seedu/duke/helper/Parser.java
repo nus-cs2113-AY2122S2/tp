@@ -26,10 +26,15 @@ public class Parser {
 
     public static String[] parseAddPatient(String parameters) {
         String[] addPatientParameters = parameters.split(",");
+        System.out.println(addPatientParameters.length);
         for (int i = 0; i < addPatientParameters.length; i++) {
             addPatientParameters[i] = addPatientParameters[i].trim();
         }
-        if (addPatientParameters.length == 7 && validateAddPatient(addPatientParameters)) {
+        if (addPatientParameters.length != 7) {
+            System.out.println("There is one or more parameters missing.");
+            return null;
+        }
+        if (validateAddPatient(addPatientParameters)) {
             return addPatientParameters;
         } else {
             return null;
@@ -46,35 +51,41 @@ public class Parser {
     }
 
     private static boolean validateAddPatient(String[] parameters) {
-        boolean check = true;
-        for (int i = 0; i < 7; i++) {
-            switch (i) {
-            case 0:
-                check = validateNric(parameters[i]);
-                break;
-            case 1:
-                check = check && validateFullName(parameters[i]);
-                break;
-            case 2:
-                check = check && validateAge(parameters[i]);
-                break;
-            case 3:
-                check = check && validateGender(parameters[i]);
-                break;
-            case 4:
-                check = check && validateAddress(parameters[i]);
-                break;
-            case 5:
-                check = check && validateDob(parameters[i]);
-                break;
-            case 6:
-                check = check && validateAdmissionDate(parameters[i]);
-                break;
-            default:
-                break;
-            }
+        boolean isValid = true;
+        if (!validateNric(parameters[0])) {
+            System.out.println("NRIC must start with a capital letter, " +
+                    "followed by 7 digits and end with a capital letter.");
+            isValid = false;
         }
-        return check;
+        if (!validateFullName(parameters[1])) {
+            System.out.println("Full name must contain only alphabets and no special characters.");
+            isValid = false;
+        }
+        if (!validateAge(parameters[2])) {
+            System.out.println("Age must be between 1 and 120 inclusive.");
+            isValid = false;
+        }
+        if (!validateGender(parameters[3])) {
+            System.out.println("Gender must be a single char: M or F.");
+            isValid = false;
+        }
+        if (!validateAddress(parameters[4])) {
+            System.out.println("Address must be alphanumeric. " +
+                    "Only these specific special characters are allowed: ' ( ) #");
+            isValid = false;
+        }
+        if (!validateDob(parameters[5])) {
+            System.out.println("Date of birth must be in YYYY-MM-DD format. " +
+                    "It cannot be before 1900-01-01 or be today and after.");
+            isValid = false;
+        }
+        if (!validateAdmissionDate(parameters[6])) {
+            System.out.println("Date of birth must be in YYYY-MM-DD format. " +
+                    "It cannot be before 1980-01-01 or be today and after.");
+            isValid = false;
+        }
+
+        return isValid;
     }
 
     private static boolean validateMedicine(String[] parameters) {
@@ -133,7 +144,7 @@ public class Parser {
     }
 
     private static boolean validateAddress(String address) {
-        Pattern addressPattern = Pattern.compile("[\\w\\-\\s'()]*");
+        Pattern addressPattern = Pattern.compile("[\\w\\-\\s'()#]*");
         Matcher addressMatcher = addressPattern.matcher(address);
         return addressMatcher.matches();
     }

@@ -24,16 +24,18 @@ public class Command {
 
     public void addPatient(PatientList patientList, String parameters) {
         if (!nullChecker(parameters)) {
+            ui.printAddPatientNullParametersMessage();
+            ui.printAddPatientExampleMessage();
             return;
         }
-        String[] parametersArray = Parser.parseAddPatient(parameters);
-        if (parametersArray == null) {
-            ui.printAddPatientWrongFormatMessage();
+        String[] addPatientParameters = Parser.parseAddPatient(parameters);
+        if (addPatientParameters == null) {
+            ui.printAddPatientExampleMessage();
         } else {
-            Patient newPatient = new Patient(parametersArray[0], parametersArray[1],
-                    Integer.parseInt(parametersArray[2]), parametersArray[3].charAt(0),
-                    parametersArray[4], parametersArray[5], parametersArray[6]);
-            System.out.println("The patient above has been added!");
+            Patient newPatient = new Patient(addPatientParameters[0], addPatientParameters[1],
+                    Integer.parseInt(addPatientParameters[2]), addPatientParameters[3].charAt(0),
+                    addPatientParameters[4], addPatientParameters[5], addPatientParameters[6]);
+            System.out.println("The patient above has been added.");
         }
     }
 
@@ -41,9 +43,9 @@ public class Command {
         int index = Integer.parseInt(stringIndex);
         if (0 <= index && index <= patientList.getSize()) {
             patientList.removePatient(index);
-            System.out.println("The patient with the above index number has been removed!");
+            System.out.println("The patient with the above index number has been removed.");
         } else {
-            System.out.println("Oops! Please input a valid index number!");
+            System.out.println("Invalid index number!");
         }
     }
 
