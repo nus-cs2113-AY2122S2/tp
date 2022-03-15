@@ -10,7 +10,8 @@ import static seedu.allonus.expense.ExpenseParser.parseNewExpense;
 public class ExpenseTracker {
     private static final String EXPENSE_WELCOME_MESSAGE = "Welcome to Expense Tracker";
     private static final ArrayList<Expense> expenseList = new ArrayList<>();
-    public static final String ASSERT_NUMBER_OF_ITEMS_NON_NEGATIVE = "Number of items in the expense list must be at least 0";
+    public static final String ASSERT_NUMBER_OF_ITEMS_NON_NEGATIVE =
+            "Number of items in the expense list must be at least 0";
     public static final String ASSERT_EXPENSE_OBJECT_NOT_NULL = "Expense object should not be null";
     public static final String LIST_EXPENSE_OUTPUT = "Here are the expenses you have made so far:\n";
     public static final String LOG_DELETE_INTENT = "User wants to delete an expense record";
@@ -19,12 +20,13 @@ public class ExpenseTracker {
     private static void expenseWelcome() {
         System.out.println(EXPENSE_WELCOME_MESSAGE);
     }
+
     private static Logger logger = Logger.getLogger("expenseLogger");
 
     private static void listExpenses() {
         logger.log(Level.INFO, "User wants to list all expenses made");
         int noOfItems = Expense.getNoOfItems();
-        assert noOfItems >= 0: ASSERT_NUMBER_OF_ITEMS_NON_NEGATIVE;
+        assert noOfItems >= 0 : ASSERT_NUMBER_OF_ITEMS_NON_NEGATIVE;
         if (noOfItems == 0) {
             System.out.println("You haven't added any expenses to your list yet!");
             return;
@@ -33,7 +35,7 @@ public class ExpenseTracker {
         String listAsString = "";
         for (int i = 0; i < noOfItems; i++) {
             Expense curr = expenseList.get(i);
-            assert curr != null: ASSERT_EXPENSE_OBJECT_NOT_NULL;
+            assert curr != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
             listAsString = listAsString.concat(String.format(" %d. %s\n", i + 1, curr));
         }
         System.out.println(LIST_EXPENSE_OUTPUT + listAsString);
@@ -49,7 +51,7 @@ public class ExpenseTracker {
 
     private static void addExpense(ArrayList<Expense> list, Expense e) {
         logger.log(Level.INFO, "User wants to add an expense made");
-        assert e != null: ASSERT_EXPENSE_OBJECT_NOT_NULL;
+        assert e != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
         list.add(e);
         System.out.println("Added " + e);
         Expense.setNoOfItems(Expense.getNoOfItems() + 1);
@@ -58,7 +60,7 @@ public class ExpenseTracker {
     public static void expenseRunner(TextUi ui) {
         expenseWelcome();
         String rawInput = ui.getUserInput();
-        assert rawInput != null: ASSERT_INPUT_NOT_NULL;
+        assert rawInput != null : ASSERT_INPUT_NOT_NULL;
         String keyWord = rawInput.split(" ", 2)[0].trim();
         while (!(keyWord.equals("menu"))) {
             switch (keyWord) {
@@ -86,7 +88,7 @@ public class ExpenseTracker {
             case ("add"):
                 try {
                     String[] newExpense = parseNewExpense(rawInput);
-                    assert newExpense != null: ASSERT_EXPENSE_OBJECT_NOT_NULL;
+                    assert newExpense != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
                     Expense e = new Expense(newExpense[0], newExpense[1], newExpense[2], newExpense[3]);
                     addExpense(expenseList, e);
                 } catch (IndexOutOfBoundsException e) {
