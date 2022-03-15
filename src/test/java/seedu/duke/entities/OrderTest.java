@@ -1,4 +1,14 @@
 package seedu.duke.entities;
 
-public class OrderTest {
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+class OrderTest {
+    @Test
+    void order_InvalidInput_ThrowIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Order());
+    }
 }
