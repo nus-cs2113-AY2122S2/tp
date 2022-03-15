@@ -18,4 +18,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 #Binary files
 /*.class
-data/sherpass.txt
+data/sherpass.json
+data/test.json
