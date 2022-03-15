@@ -42,6 +42,7 @@ public class Manager {
                 command.addMedicine(medicineList, parameters);
                 break;
             case "delete medicine":
+                command.deleteMedicine(medicineList, parameters);
                 break;
             case "view medicine":
                 break;
