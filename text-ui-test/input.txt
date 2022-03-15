@@ -1,8 +1,12 @@
+help
 addproject cs2113
-viewproject
+addDeadline cs2113 17/03/2022
+addDeadline cs3245 24/03/2022
+listprojects
 addproject gex1005
-viewproject
+listprojects
 deleteproject cs2113
-viewproject
+listprojects
 blah
 exit
+

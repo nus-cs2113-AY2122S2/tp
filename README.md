@@ -16,7 +16,7 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
    
    ```
 
-# User Guide
+More information can be found in the [User Guide](docs/UserGuide.md).
 
 ## Quick Start
 
@@ -25,8 +25,8 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
 - Copy the file to your preferred folder as the home folder for your CSProj Planner.
 - Double click the file to start the app.
 - Type your command in the command box and press Enter to execute it. Some example commands you can try:
-   -  `addproj cs2113`: add a new project named cs2113 to the planner.
+   -  `addproject cs2113`: add a new project named cs2113 to the planner.
   
-   - `viewproj`: list out all projects in the list.
+   - `listprojects`: list out all projects in the list.
   
    - `exit`: exit the project.
