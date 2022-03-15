@@ -45,7 +45,7 @@ public class CommandHandler {
             projectList.printProject();
             break;
         case "todo":
-            if (commands.length < 3) {
+            if (commands.length < Constants.THREE_ARGUMENTS) {
                 throw new IllegalCommandException(Constants.MESSAGE_INVALID_TODO_COMMAND_FORMAT);
             }
             String todoString = parseTodoString(commands);
@@ -53,7 +53,7 @@ public class CommandHandler {
 
             break;
         case "mark":
-            if (commands.length < 3) {
+            if (commands.length < Constants.THREE_ARGUMENTS) {
                 throw new IllegalCommandException(Constants.MESSAGE_INVALID_MARK_COMMAND_FORMAT);
             }
             try {
@@ -63,10 +63,13 @@ public class CommandHandler {
             }
             break;
         case "adddeadline":
+            if (commands.length < Constants.THREE_ARGUMENTS) {
+                throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
+            }
             projectList.addDeadline(commands[1], commands[2]);
             break;
         case "view":
-            if (commands.length < 2) {
+            if (commands.length < Constants.TWO_ARGUMENTS) {
                 throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
             }
             projectList.view(commands[1]);
@@ -83,7 +86,7 @@ public class CommandHandler {
 
     public String parseTodoString(String[] strings) {
         String todoString = "";
-        if (strings.length == 3) {
+        if (strings.length == Constants.THREE_ARGUMENTS) {
             todoString = strings[2];
         } else {
             for (int i = 2; i < strings.length; i++) {

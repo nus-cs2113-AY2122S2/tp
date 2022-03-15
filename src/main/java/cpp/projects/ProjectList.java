@@ -25,7 +25,7 @@ public class ProjectList {
     public void addProject(String title) {
         System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(title);
-        if (index == -1) { //this is a new project
+        if (index == Constants.PROJECT_NOT_FOUND) { //this is a new project
             projectList.add(new Project(title));
             System.out.println(title + " added.");
         } else {
@@ -166,7 +166,7 @@ public class ProjectList {
             }
             count++;
         }
-        return -1;
+        return Constants.PROJECT_NOT_FOUND;
     }
 
     /**
@@ -177,7 +177,7 @@ public class ProjectList {
     public void view(String title) {
         System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(title);
-        if (index == -1) { //project not found
+        if (index == Constants.PROJECT_NOT_FOUND) { //project not found
             System.out.println("Sorry! There was no project with that name.");
         } else {
             Project project = projectList.get(index);

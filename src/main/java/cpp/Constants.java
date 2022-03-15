@@ -13,4 +13,8 @@ public class Constants {
     public static final String MESSAGE_INVALID_MARK_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be: \n"
             + "mark [project_index] [todo_index]";
+
+    public static final int PROJECT_NOT_FOUND = -1;
+    public static final int TWO_ARGUMENTS = 2;
+    public static final int THREE_ARGUMENTS = 3;
 }
