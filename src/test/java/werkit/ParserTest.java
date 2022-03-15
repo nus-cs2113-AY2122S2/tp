@@ -1,38 +1,77 @@
 package werkit;
 
-import commands.Command;
-import commands.InvalidCommandException;
+import commands.ExerciseCommand;
+import commands.ExitCommand;
+import commands.HelpCommand;
 import commands.WorkoutCommand;
+import commands.InvalidCommandException;
 import data.exercises.ExerciseList;
 import data.workouts.WorkoutList;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import storage.FileManager;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ParserTest {
-    private UI ui = new UI();
-    private ExerciseList exerciseList = new ExerciseList();
-    private WorkoutList workoutList = new WorkoutList(exerciseList);
-    private FileManager fileManager = new FileManager();
+    private UI ui;
+    private ExerciseList exerciseList;
+    private WorkoutList workoutList;
+    private FileManager fileManager;
+    private Parser parser;
 
-    @Test
-    public void parseUserInput_normalWorkoutCreateCommandInput_expectWorkoutCommand()
-            throws InvalidCommandException {
-        Parser parser = new Parser(ui, exerciseList, workoutList, fileManager);
-
-        String testInput = "workout /new russian twist /reps 1000";
-        Command result = parser.parseUserInput(testInput);
-        assertTrue(result instanceof WorkoutCommand);
+    @BeforeEach
+    void setUp() {
+        this.parser = new Parser(ui, exerciseList, workoutList, fileManager);
     }
 
     @Test
-    public void parseUserInput_invalidBaseKeyword_expectInvalidCommandException() {
-        Parser parser = new Parser(ui, exerciseList, workoutList, fileManager);
+    void parseUserInput_validHelpCommand_expectSuccess() throws InvalidCommandException, IOException {
+        assertTrue(parser.parseUserInput("help") instanceof HelpCommand);
+    }
 
-        String testInput = "hmmm /new russian twist /reps 1000";
-        assertThrows(InvalidCommandException.class,
-            () -> parser.parseUserInput(testInput));
+    @Test
+    void parseUserInput_validExitCommand_expectSuccess() throws InvalidCommandException, IOException {
+        assertTrue(parser.parseUserInput("exit") instanceof ExitCommand);
+    }
+
+    @Test
+    void parseUserInput_invalidGeneralCommand_exceptionThrown() {
+        assertThrows(InvalidCommandException.class, () -> parser.parseUserInput("exitt"));
+        assertThrows(InvalidCommandException.class, () -> parser.parseUserInput("helpp"));
+        assertThrows(InvalidCommandException.class, () -> parser.parseUserInput(""));
+        assertThrows(InvalidCommandException.class, () -> parser.parseUserInput("|"));
+        assertThrows(InvalidCommandException.class, () -> parser.parseUserInput("workout /new | push up /reps 20"));
+    }
+
+    @Test
+    void createWorkoutCommand_validWorkoutCommand_expectSuccess() throws InvalidCommandException, IOException {
+        assertTrue(parser.createWorkoutCommand("workout /new push up /reps 20") instanceof WorkoutCommand);
+        assertTrue(parser.createWorkoutCommand("workout /update 1 15") instanceof WorkoutCommand);
+        assertTrue(parser.createWorkoutCommand("workout /delete 1") instanceof WorkoutCommand);
+        assertTrue(parser.createWorkoutCommand("workout /list") instanceof WorkoutCommand);
+    }
+
+    @Test
+    void createWorkoutCommand_invalidWorkoutCommand_exceptionThrown() {
+        assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /new"));
+        assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /delete"));
+        assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /update"));
+        assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /test"));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> parser.createWorkoutCommand("workout"));
+    }
+
+    @Test
+    void createExerciseCommand_validExerciseCommand_expectSuccess() throws InvalidCommandException {
+        assertTrue(parser.createExerciseCommand("exercise /list") instanceof ExerciseCommand);
+    }
+
+    @Test
+    void createExerciseCommand_invalidExerciseCommand_exceptionThrown() {
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> parser.createExerciseCommand("exercise"));
+        assertThrows(InvalidCommandException.class, () -> parser.createExerciseCommand("exercise /test"));
     }
 }
