@@ -1,4 +1,4 @@
-package seedu.duke.ui.parsers;
+package seedu.duke.parsers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,6 @@ import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.MarkCommand;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
-import seedu.duke.parsers.ModHappyParser;
 import seedu.duke.tasks.Module;
 import seedu.duke.tasks.Task;
 

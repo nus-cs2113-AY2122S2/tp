@@ -1,18 +1,13 @@
-package seedu.duke.ui.parsers;
+package seedu.duke.parsers;
 
 
-
-import java.util.HashMap;
-
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.duke.commands.Command;
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.ParseException;
-import seedu.duke.parsers.Parser;
-
-
 
 public class ParserTest extends Parser {
     public ParserTest() {
