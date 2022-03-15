@@ -29,7 +29,7 @@ public class UI {
         System.out.println(HORI_LINE);
     }
 
-    public void exit() {
+    public static void exit() {
         System.out.println(EXIT_MSG);
     }
 

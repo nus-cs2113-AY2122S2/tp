@@ -27,6 +27,7 @@ public class Command {
      * Executes the instruction according to the input after parsing.
      * @throws Exception if the instruction cannot be executed.
     */
-    public void execute() throws Exception {}
+    public void execute() throws Exception {
+    }
 
 }

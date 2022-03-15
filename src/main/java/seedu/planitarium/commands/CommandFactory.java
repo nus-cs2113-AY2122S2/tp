@@ -14,13 +14,13 @@ public class CommandFactory {
     protected static final String CALC_REMAIN = "remain";
     protected static final String LIST = "list";
     protected static final String EXIT = "bye";
-    protected Command newCommand;
 
     public CommandFactory() {
     }
 
-    public Command getCommand(String userInput, PersonList personList) throws Exception {
+    public Command getCommand(String userInput, PersonList personList) throws UnknownException {
         try {
+            Command newCommand;
             switch (Parser.parseKeyword(userInput)) {
             case ADD_PERSON_CMD:
                 newCommand = new AddPersonCommand(userInput, personList);
@@ -48,10 +48,10 @@ public class CommandFactory {
             default:
                 throw new UnknownException();
             }
+            return newCommand;
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new UnknownException();
         }
-        return newCommand;
     }
 
 }
