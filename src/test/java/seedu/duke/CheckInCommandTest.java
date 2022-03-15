@@ -15,9 +15,11 @@ class CheckInCommandTest {
     @Test
     void execute_validRoomNumber_expectRoomBeingOccupied() throws HotelLiteManagerException {
         RoomList inputRoomList = new RoomList();
+        ItemList itemList = new ItemList();
+        Ui ui = new Ui();
         String inputCommand = "301";
         CheckInCommand checkInCommand = new CheckInCommand(inputCommand);
-        checkInCommand.execute(inputRoomList);
+        checkInCommand.execute(inputRoomList, itemList, ui);
         Room expectedRoom = null;
         for (Room room : inputRoomList.getRoomList()) {
             if (room.getRoomId() == 301) {
@@ -32,10 +34,12 @@ class CheckInCommandTest {
     @Test
     void execute_inValidRoomNumber_throwException() {
         RoomList inputRoomList = new RoomList();
+        ItemList itemList = new ItemList();
+        Ui ui = new Ui();
         String inputCommand = "601";
         CheckInCommand checkInCommand = new CheckInCommand(inputCommand);
         Room expectedRoom = null;
         assertThrows(InvalidRoomNumberException.class,
-            () -> checkInCommand.execute(inputRoomList));
+            () -> checkInCommand.execute(inputRoomList,itemList,ui));
     }
 }
