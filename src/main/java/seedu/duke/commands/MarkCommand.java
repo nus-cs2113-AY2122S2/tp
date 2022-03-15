@@ -1,6 +1,9 @@
 package seedu.duke.commands;
 
+import java.util.Objects;
+
 import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.exceptions.NoSuchTaskException;
 import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
@@ -13,15 +16,21 @@ public class MarkCommand extends Command {
     private static final String UNMARK_MESSAGE = StringConstants.UNMARK_MESSAGE_TOP + LS + "%s";
 
     private final int taskIndex;
+    private final String taskModuleString;
     private final boolean status;
 
-    public MarkCommand(int taskIndex, boolean status) {
+    public MarkCommand(int taskIndex, String taskModuleString, boolean status) {
         this.taskIndex = taskIndex;
+        this.taskModuleString = taskModuleString;
         this.status = status;
     }
 
     public int getTaskIndex() {
         return taskIndex;
+    }
+
+    public String getTaskModuleString() {
+        return taskModuleString;
     }
 
     /**
@@ -31,6 +40,12 @@ public class MarkCommand extends Command {
     @Override
     public CommandResult execute(ModuleList moduleList) throws ModHappyException {
         Module targetModule = moduleList.getGeneralTasks();
+        if (!Objects.isNull(taskModuleString)) {
+            targetModule = moduleList.getModule(taskModuleString);
+            if (Objects.isNull(targetModule)) {
+                throw new NoSuchModuleException();
+            }
+        }
         TaskList taskList = targetModule.getTaskList();
         if (taskIndex < 0 || taskIndex >= taskList.size()) {
             throw new NoSuchTaskException();
