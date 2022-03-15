@@ -42,7 +42,7 @@ public class Reminder {
      */
     public void showDailyTask() {
         ArrayList<Task> filteredDailyTasks = (ArrayList<Task>) tasks.stream()
-                .filter((t) -> isEqualDate(t.getDate(), currentDate))
+                .filter((t) -> isEqualDate(t.getByDate(), currentDate))
                 .filter((t) -> !t.isDone())
                 .collect(toList());
 
@@ -61,14 +61,13 @@ public class Reminder {
      * Prints tasks that is due in the current week
      * with reference to user local machine date.
      */
-
     public void showWeeklyTask() {
         LocalDate nextWeekDate = currentDate.plusDays(7);
 
         ArrayList<Task> filteredThisWeekTasks = (ArrayList<Task>) tasks.stream()
-                .filter((t) -> isBeforeDate(t.getDate(), nextWeekDate))
+                .filter((t) -> isBeforeDate(t.getByDate(), nextWeekDate))
                 .filter((t) -> !t.isDone())
-                .sorted(Comparator.comparing(Task::getDate))
+                .sorted(Comparator.comparing(Task::getByDate))
                 .collect(toList());
 
         if (filteredThisWeekTasks.isEmpty()) {
@@ -86,7 +85,7 @@ public class Reminder {
         if (currentDate == " ") {
             return false;
         } else {
-            LocalDate date = LocalDate.parse(currentDate, DateAndTimeFormat.noTimeFormat);
+            LocalDate date = LocalDate.parse(currentDate, DateAndTimeFormat.savedTaskNoTimeFormat);
             return date.isEqual(compareDate);
         }
     }
@@ -95,7 +94,7 @@ public class Reminder {
         if (currentDate == " ") {
             return false;
         } else {
-            LocalDate date = LocalDate.parse(currentDate, DateAndTimeFormat.noTimeFormat);
+            LocalDate date = LocalDate.parse(currentDate, DateAndTimeFormat.savedTaskNoTimeFormat);
             return date.isBefore(compareDate);
         }
     }

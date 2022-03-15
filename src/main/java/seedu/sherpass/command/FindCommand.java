@@ -40,7 +40,7 @@ public class FindCommand extends Command {
             return "E";
         case "/deadline":
             return "D";
-        case "/todo":
+        case "/add":
             return "T";
         default:
             ui.showToUser(ERROR_SYSTEM_FAULT_MESSAGE);
@@ -62,11 +62,6 @@ public class FindCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (findTaskByDate != null) {
             taskList.findByTaskDate(findTaskByDate, ui);
-            return;
-        }
-        if (findTaskByDescription.equals("/event") || findTaskByDescription.equals("/deadline")
-                || findTaskByDescription.equals("/todo")) {
-            taskList.findByTaskType(convertToTaskType(ui), ui);
             return;
         }
         taskList.findByTaskDescription(findTaskByDescription, ui);

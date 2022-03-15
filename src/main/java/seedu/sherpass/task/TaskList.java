@@ -4,8 +4,6 @@ import seedu.sherpass.util.Ui;
 
 import java.util.ArrayList;
 
-import static seedu.sherpass.constant.Message.ERROR_SYSTEM_FAULT_MESSAGE;
-
 public class TaskList {
     private ArrayList<Task> tasks;
 
@@ -35,26 +33,11 @@ public class TaskList {
      * Adds a new task to the current array of tasks.
      *
      * @param taskDescription Description of the task.
-     * @param taskDate        Date of the task
-     * @param taskType        Task type, i.e. todo, deadline or event.
+     * @param taskByDate        Due date of the task
+     * @param taskRemindDate    Reminder date of the task
      */
-    public void addTask(String taskDescription, String taskDate, String taskType) {
-        Task newTask;
-        switch (taskType) {
-        case "todo":
-            newTask = new Todo(taskDescription);
-            break;
-        case "deadline":
-            newTask = new Deadline(taskDescription, taskDate);
-            break;
-        case "event":
-            newTask = new Event(taskDescription, taskDate);
-            break;
-        default:
-            System.out.println(ERROR_SYSTEM_FAULT_MESSAGE);
-            return;
-        }
-
+    public void addTask(String taskDescription, String taskByDate, String taskRemindDate) {
+        Task newTask = new Task(taskDescription, taskByDate, taskRemindDate);
         tasks.add(newTask);
         System.out.println("Got it. I've added this task:\n  " + newTask
                 + "\nNow you have " + tasks.size() + " task(s) in the list.");
@@ -223,29 +206,7 @@ public class TaskList {
         int printIndex = 1;
         ui.showToUser("Here are the matching tasks in your list:");
         for (Task task : tasks) {
-            if (!task.getType().equals("T") && task.getDate().contains(findTaskByKeyword)) {
-                String listIndex = String.valueOf(printIndex);
-                ui.showToUser(listIndex + ". " + task);
-                printIndex++;
-            }
-        }
-        if (printIndex == 1) {
-            ui.showLine();
-            ui.showToUser("Sorry! There are no tasks that match your description!");
-        }
-    }
-
-    /**
-     * Finds and prints tasks whose task type matches the search keyword.
-     *
-     * @param taskType Task type, i.e. todo, deadline or event.
-     * @param ui       Ui for printing messages.
-     */
-    public void findByTaskType(String taskType, Ui ui) {
-        int printIndex = 1;
-        ui.showToUser("Here are the matching tasks in your list:");
-        for (Task task : tasks) {
-            if (task.getType().equals(taskType)) {
+            if (task.getByDate().contains(findTaskByKeyword)) {
                 String listIndex = String.valueOf(printIndex);
                 ui.showToUser(listIndex + ". " + task);
                 printIndex++;
