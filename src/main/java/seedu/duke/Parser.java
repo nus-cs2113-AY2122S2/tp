@@ -3,7 +3,6 @@ package seedu.duke;
 import seedu.duke.commands.*;
 import seedu.duke.exceptions.InvalidDayException;
 import seedu.duke.exceptions.MissingValueException;
-import seedu.duke.exceptions.InvalidDayException;
 import seedu.duke.exceptions.InvalidTimeException;
 import seedu.duke.exceptions.InvalidModeException;
 
@@ -57,21 +56,21 @@ public class Parser {
             String name = eventDescription[NAME_INDEX];
             String title = eventDescription[TITLE_INDEX];
             String day = eventDescription[DAY_INDEX].toLowerCase();
-            checkDay(day);
             int startTime = Integer.parseInt(eventDescription[STARTTIME_INDEX]);
             int endTime = Integer.parseInt(eventDescription[ENDTIME_INDEX]);
-            checkTime(startTime, endTime);
             String mode = eventDescription[MODE_INDEX].toLowerCase();
+            checkDay(day);
+            checkTime(startTime, endTime);
             checkMode(mode);
             return new AddCommand(name, title, day, startTime, endTime, mode);
-        } catch (InvalidTimeException | NumberFormatException nfe) {
-            System.out.println(ERROR_INVALID_TIME);
-            return new HelpCommand();
         } catch (NullPointerException npe) {
             System.out.println(ERROR_MISSING_PARAMETERS);
             return new HelpCommand();
         } catch (MissingValueException mve) {
             System.out.println(ERROR_MISSING_VALUES);
+            return new HelpCommand();
+        } catch (InvalidTimeException | NumberFormatException ite) {
+            System.out.println(ERROR_INVALID_TIME);
             return new HelpCommand();
         } catch (InvalidDayException ide) {
             System.out.println(ERROR_INVALID_DAY);
