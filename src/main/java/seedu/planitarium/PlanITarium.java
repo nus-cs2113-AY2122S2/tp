@@ -45,7 +45,7 @@ public class PlanITarium {
         try {
             initialiseLogger();
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "File logger not working.", e);
+            logger.log(Level.WARNING, "File logger not working.", e);
         }
         ui.printWelcomeMessage();
     }
