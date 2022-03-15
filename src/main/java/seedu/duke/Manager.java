@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
+import seedu.duke.assets.DoctorList;
 import seedu.duke.helper.Command;
 import seedu.duke.helper.UI;
 
@@ -13,6 +14,7 @@ public class Manager {
     Command command = new Command();
     PatientList patientList = new PatientList();
     private MedicineList medicineList = new MedicineList();
+    private DoctorList doctorList = new DoctorList();
     private boolean isTerminated = false;
 
     /**
@@ -35,8 +37,10 @@ public class Manager {
             case "add doctor":
                 break;
             case "delete doctor":
+                command.deleteDoctor(doctorList, parameters);
                 break;
             case "view doctor":
+                command.viewDoctor(doctorList, parameters);
                 break;
             case "add medicine":
                 command.addMedicine(medicineList, parameters);
