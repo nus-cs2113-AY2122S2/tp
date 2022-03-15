@@ -76,6 +76,6 @@ public class Staff {
 
     @Override
     public String toString() {
-        return String.format("%-3s | %-3s | %s", this.getStaffId(), this.getStaffName(), this.getPosition());
+        return String.format("%-5s | %-15s | %s", this.getStaffId(), this.getStaffName(), this.getPosition());
     }
 }
