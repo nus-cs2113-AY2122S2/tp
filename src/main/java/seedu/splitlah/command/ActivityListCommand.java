@@ -20,7 +20,7 @@ public class ActivityListCommand extends Command {
     public static final String COMMAND_FORMAT = "Syntax: activity /list /sid [SESSION_ID]";
 
     public static final String[] COMMAND_DELIMITERS = {
-        Parser.SESSION_ID_DELIMITER,
+        Parser.SESSION_ID_DELIMITER
     };
 
     private int sessionId;
