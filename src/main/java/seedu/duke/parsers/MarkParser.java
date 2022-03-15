@@ -6,16 +6,17 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.MarkCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
+import seedu.duke.util.StringConstants;
 
 /**
  * This Parser supports the "mark" command.
  */
 public class MarkParser extends Parser {
-    private static final String FLAG = "flag";
-    private static final String TASK_INDEX = "taskIndex";
-    private static final String TASK_MODULE = "taskModule";
-    private static final String COMPLETED_FLAG = "/c";
-    private static final String UNCOMPLETED_FLAG = "/u";
+    private static final String FLAG = StringConstants.FLAG;
+    private static final String TASK_INDEX = StringConstants.TASK_INDEX;
+    private static final String TASK_MODULE = StringConstants.TASK_MODULE;
+    private static final String COMPLETED_FLAG = StringConstants.COMPLETED_FLAG;
+    private static final String UNCOMPLETED_FLAG = StringConstants.UNCOMPLETED_FLAG;
 
     // Unescaped regex for testing:
     // (?<flag>\/(c|u))\s+(?<taskIndex>\d+)(\s+-m\s+(?<taskModule>\w+))?

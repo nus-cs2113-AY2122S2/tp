@@ -7,12 +7,13 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
+import seedu.duke.util.StringConstants;
 
 public class DeleteParser extends Parser {
+    public static final String TASK_NUMBER = StringConstants.TASK_NUMBER;
+    public static final String TASK_MODULE = StringConstants.TASK_MODULE;
+    public static final String MODULE_CODE = StringConstants.MODULE_CODE;
 
-    public static final String TASK_NUMBER = "taskNumber";
-    public static final String TASK_MODULE = "taskModule";
-    public static final String MODULE_CODE = "moduleCode";
     // Unescaped regex for testing:
     // (/t\s+(?<taskNumber>\d+)(\s+-m\s+(?<taskModule>\w+))?|/m\s+(?<moduleCode>\w+))
     private static final String DELETE_FORMAT = "(/t\\s+(?<taskNumber>\\d+)(\\s+-m\\s+(?<taskModule>\\w+))?"

@@ -1,9 +1,11 @@
 package seedu.duke.tasks;
 
+import seedu.duke.util.StringConstants;
+
 public class Module {
     private static final String LS = System.lineSeparator();
     private static final String MODULE_STRING_WITH_DESC = "%s (%s)";
-    private static final String INDENT = "    ";
+    private static final String INDENT = StringConstants.INDENT;
 
     private String moduleCode;
     private String moduleDescription;
