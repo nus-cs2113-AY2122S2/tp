@@ -13,8 +13,4 @@ class IncomeTest {
     @Test
     void getDescription() {
     }
-
-    @Test
-    void testToString() {
-    }
 }
