@@ -122,7 +122,7 @@ public class Person {
      *
      * @return The number of incomes
      */
-    public int getNumberOfIncome() {
+    public int getNumberOfIncomes() {
         return incomeList.getNumberOfIncomes();
     }
 
