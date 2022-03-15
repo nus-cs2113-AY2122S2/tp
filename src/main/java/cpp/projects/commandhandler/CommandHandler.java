@@ -1,8 +1,9 @@
 package cpp.projects.commandhandler;
 
+import cpp.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.projects.ProjectList;
-import cpp.Constants;
+import cpp.response.Response;
 
 import java.util.Scanner;
 
@@ -34,15 +35,11 @@ public class CommandHandler {
         switch (commands[0].toLowerCase()) {
         case "addproject": //add a project into list
             projectList.addProject(commands[1]);
-            System.out.println(Constants.SEPARATOR);
-            System.out.println(commands[1] + " added.");
-            System.out.println(Constants.SEPARATOR);
+            Response.printAddProject(commands[1]);
             break;
         case "deleteproject": //delete a project based on its name
             projectList.deleteProject(commands[1]);
-            System.out.println(Constants.SEPARATOR);
-            System.out.println(commands[1] + " deleted.");
-            System.out.println(Constants.SEPARATOR);
+            Response.printDeleteProject(commands[1]);
             break;
         case "listprojects":
         case "listproject": //view all project(s) by name
@@ -70,10 +67,11 @@ public class CommandHandler {
             }
             projectList.view(commands[1]);
             break;
+        case "help":
+            Response.printHelp();
+            break;
         default:
-            System.out.println(Constants.SEPARATOR);
-            System.out.println("Unknown command.");
-            System.out.println(Constants.SEPARATOR);
+            Response.printDefault();
             break;
         }
 
