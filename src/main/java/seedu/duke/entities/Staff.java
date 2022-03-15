@@ -10,16 +10,20 @@ public class Staff {
     /**
      * Create a Staff with id, name, position and salary.
      *
-     * @param staffId    ID of the Staff.
-     * @param staffName  Name of the Staff.
-     * @param position   Job position of the Staff.
-     * @param salary     Salary of the Staff.
+     * @param staffId   ID of the Staff.
+     * @param staffName Name of the Staff.
+     * @param position  Job position of the Staff.
+     * @param salary    Salary of the Staff.
      */
     public Staff(int staffId, String staffName, String position, double salary) {
         this.staffId = staffId;
         this.staffName = staffName;
         this.position = position;
         this.salary = salary;
+    }
+
+    private static boolean isValidName(String name) {
+        return !(name == null || name == "");
     }
 
     public int getStaffId() {
@@ -68,10 +72,6 @@ public class Staff {
             return;
         }
         this.salary = salary;
-    }
-
-    private static boolean isValidName(String name) {
-        return !(name == null || name == "");
     }
 
     @Override
