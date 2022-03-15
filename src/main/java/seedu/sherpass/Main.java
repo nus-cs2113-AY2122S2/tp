@@ -1,18 +1,22 @@
 package seedu.sherpass;
 
 import org.json.JSONException;
+
 import seedu.sherpass.command.Command;
 import seedu.sherpass.command.ExitCommand;
+
 import seedu.sherpass.exception.InvalidInputException;
+
 import seedu.sherpass.util.Parser;
 import seedu.sherpass.util.Reminder;
 import seedu.sherpass.util.Storage;
-
-import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Ui;
 
-import java.io.IOException;
+import seedu.sherpass.task.TaskList;
+
 import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
+
+import java.io.IOException;
 
 public class Main {
 
