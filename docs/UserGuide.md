@@ -172,6 +172,11 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
    `[SESSION_ID]`.
+>- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also only be a single word without whitespaces.
+   > <br>E.g `Alice Tan` is not allowed.
+>- The values that follow the delimiters `/co` and `/cl` can only have a maximum of 12 digits before
+   and 2 digits after the decimal point, if any.
+
 
 Examples of usage:
 1. Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid a total of $10
