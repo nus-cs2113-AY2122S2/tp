@@ -30,6 +30,8 @@ public class PersonList {
      * @return The person with the index
      */
     public Person getPerson(int index) {
+        assert(index >= 1);
+        assert(index <= numberOfMembers);
         return personList.get(index - 1);
     }
 
@@ -48,6 +50,7 @@ public class PersonList {
      * @param name The name of the person to be added
      */
     public void addPerson(String name) {
+        assert(name != null);
         Person person = new Person(name);
         personList.add(person);
         numberOfMembers++;
@@ -59,6 +62,8 @@ public class PersonList {
      * @param index The index of the person to be removed
      */
     public void removePerson(int index) {
+        assert(index >= 1);
+        assert(index <= numberOfMembers);
         personList.remove(index - 1);
         numberOfMembers--;
     }
@@ -68,9 +73,9 @@ public class PersonList {
      *
      * @return The total remaining disposable income
      */
-    public double getRemain(PersonList personList) {
+    public double getRemain() {
         double sum = 0;
-        for (Person person: personList.getPersonList()) {
+        for (Person person: this.getPersonList()) {
             sum += person.getDisposable();
         }
         return sum;
