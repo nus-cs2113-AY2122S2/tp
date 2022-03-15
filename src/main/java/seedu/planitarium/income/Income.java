@@ -23,6 +23,6 @@ public class Income {
     }
 
     public String toString() {
-        return  "Income: " + description + "     Amount: $" + String.format("%.2f", amount);
+        return  description + "     Amount: $" + String.format("%.2f", amount);
     }
 }
