@@ -25,17 +25,12 @@ public class Parser {
     }
 
     public static String[] parseAddPatient(String parameters) {
-        // Currently the basic input order should be to just follow the order
-        // in Patient class: nric, fullName, age, gender, address, dob, dateAdmission
-        String[] parametersArray = parameters.split(",");
-        for (int i = 0; i < parametersArray.length; i++) {
-            parametersArray[i] = parametersArray[i].trim();
+        String[] addPatientParameters = parameters.split(",");
+        for (int i = 0; i < addPatientParameters.length; i++) {
+            addPatientParameters[i] = addPatientParameters[i].trim();
         }
-        if (parametersArray.length == 7 && validateNric(parametersArray[0])
-                && validateFullName(parametersArray[1]) && validateAge(parametersArray[2])
-                && validateGender(parametersArray[3]) && validateAddress(parametersArray[4])
-                && validateDob(parametersArray[5]) && validateAdmissionDate(parametersArray[6])) {
-            return parametersArray;
+        if (addPatientParameters.length == 7 && validateAddPatient(addPatientParameters)) {
+            return addPatientParameters;
         } else {
             return null;
         }
@@ -50,27 +45,78 @@ public class Parser {
         }
     }
 
+    private static boolean validateAddPatient(String[] parameters) {
+        boolean check = true;
+        for (int i = 0; i < 7; i++) {
+            switch (i) {
+            case 0:
+                check = validateNric(parameters[i]);
+                break;
+            case 1:
+                check = check && validateFullName(parameters[i]);
+                break;
+            case 2:
+                check = check && validateAge(parameters[i]);
+                break;
+            case 3:
+                check = check && validateGender(parameters[i]);
+                break;
+            case 4:
+                check = check && validateAddress(parameters[i]);
+                break;
+            case 5:
+                check = check && validateDob(parameters[i]);
+                break;
+            case 6:
+                check = check && validateAdmissionDate(parameters[i]);
+                break;
+            default:
+                break;
+            }
+        }
+        return check;
+    }
+
+    private static boolean validateMedicine(String[] parameters) {
+        boolean check = true;
+        for (int i = 0; i < 5; i++) {
+            switch (i) {
+            case 0:
+                check = validateMedicineName(parameters[i]);
+                break;
+            case 1:
+                check = check && validateDosage(parameters[i]);
+                break;
+            case 2:
+                check = check && validateExpiry(parameters[i]);
+                break;
+            case 4:
+                check = check && validateQuantity(parameters[i]);
+                break;
+            default:
+                break;
+            }
+        }
+        return check;
+    }
+
     private static boolean validateNric(String nric) {
         Pattern nricPattern = Pattern.compile("[A-Z][0-9]{7}[A-Z]");
         Matcher nricMatcher = nricPattern.matcher(nric);
-        //System.out.println(nric + " " +nricMatcher.matches());
         return nricMatcher.matches();
     }
 
     private static boolean validateFullName(String fullName) {
         Pattern fullNamePattern = Pattern.compile("([a-zA-Z]+( [a-zA-Z]+)+)");
         Matcher fullNameMatcher = fullNamePattern.matcher(fullName);
-        //System.out.println(fullName + " " + fullNameMatcher.matches());
         return fullNameMatcher.matches();
     }
 
     private static boolean validateAge(String ageString) {
         int age = Integer.parseInt(ageString);
         if (1 <= age && age <= 120) {
-            //System.out.println("Age true");
             return true;
         } else {
-            //System.out.println("Age false;");
             return false;
         }
     }
@@ -78,14 +124,12 @@ public class Parser {
     private static boolean validateGender(String gender) {
         Pattern genderPattern = Pattern.compile("M|F");
         Matcher genderMatcher = genderPattern.matcher(gender);
-        //System.out.println(gender + " " + genderMatcher.matches());
         return genderMatcher.matches();
     }
 
     private static boolean validateAddress(String address) {
         Pattern addressPattern = Pattern.compile("[\\w\\-\\s'()]*");
         Matcher addressMatcher = addressPattern.matcher(address);
-        //System.out.println(address + " " + addressMatcher.matches());
         return addressMatcher.matches();
     }
 
@@ -94,10 +138,8 @@ public class Parser {
         LocalDate today = LocalDate.now();
         LocalDate dobLimit = LocalDate.parse("1900-01-01");
         if (dob.isAfter(dobLimit) && dob.isBefore(today)) {
-            //System.out.println("dob true");
             return true;
         } else {
-            //System.out.println("dob false");
             return false;
         }
     }
@@ -107,10 +149,8 @@ public class Parser {
         LocalDate today = LocalDate.now();
         LocalDate admissionDateLimit = LocalDate.parse("1980-01-01");
         if (admissionDate.isAfter(admissionDateLimit) && admissionDate.isBefore(today)) {
-            //System.out.println("Admission true");
             return true;
         } else {
-            //System.out.println("Admission false");
             return false;
         }
     }
@@ -149,40 +189,5 @@ public class Parser {
             return false;
         }
     }
-
-    private static boolean validateMedicine(String[] parameters) {
-        boolean check = true;
-        for (int i = 0; i < 5; i++) {
-            switch (i) {
-            case 0:
-                check = validateMedicineName(parameters[i]);
-                break;
-            case 1:
-                check = check && validateDosage(parameters[i]);
-                break;
-            case 2:
-                check = check && validateExpiry(parameters[i]);
-                break;
-            case 4:
-                check = check && validateQuantity(parameters[i]);
-                break;
-            default:
-                break;
-            }
-        }
-        return check;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

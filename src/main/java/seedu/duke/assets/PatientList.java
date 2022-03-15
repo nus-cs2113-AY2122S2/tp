@@ -15,13 +15,11 @@ public class PatientList {
         return null;
     }
 
-    //view particular patient
     public void viewPatient(String nric) {
         //todo: add null exception
         System.out.println(getPatient(nric).toString());
     }
 
-    //view all patients
     public void viewPatient() {
         System.out.println(patientList.toString());
     }
