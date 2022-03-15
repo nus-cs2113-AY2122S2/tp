@@ -1,8 +1,9 @@
 package seedu.sherpass.command;
 
 import seedu.sherpass.util.Storage;
-import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Ui;
+
+import seedu.sherpass.task.TaskList;
 
 public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
