@@ -358,7 +358,7 @@ public class Parser {
      * @param ui UI
      * @param timer Timer object
      */
-    public static void parseStudyMode(String rawUserInput, Ui ui, Timer timer) {
+    public static void parseStudyMode(String rawUserInput, Ui ui) {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
