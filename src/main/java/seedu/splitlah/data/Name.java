@@ -14,7 +14,7 @@ public class Name {
 
     public Name(String name) throws InvalidDataException {
         if (!name.matches("[a-zA-Z]+")) {
-            throw new InvalidDataException(Message.ERROR_NAME_INVALIDNAME);
+            throw new InvalidDataException(Message.ERROR_NAME_INVALID_NAME);
         }
         this.name = name;
     }

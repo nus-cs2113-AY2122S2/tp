@@ -200,10 +200,36 @@ public class Parser {
         }
         
         int indexOfDecimal = input.indexOf('.');
+        if (indexOfDecimal == INVALID_INDEX_INDICATOR) {
+            return true;
+        }
         int decimalPlaces = input.length() - indexOfDecimal - 1;
         return decimalPlaces <= 2;
     }
-    
+
+    /**
+     * Checks if the given String object representing a monetary value has at most twelve digits before decimal point.
+     *
+     * @param input A String object representing a monetary value.
+     * @return true if the String object can be parsed as a double and
+     *         represents a monetary value that has at most twelve digits before decimal point,
+     *         false otherwise.
+     */
+    private static boolean hasAtMostTwelveIntegerPlaces(String input) {
+        try {
+            double cost = Double.parseDouble(input);
+        } catch (NumberFormatException exception) {
+            return false;
+        }
+
+        int numberChars = input.length();
+        int indexOfDecimal = input.indexOf('.');
+        if (indexOfDecimal == INVALID_INDEX_INDICATOR) {
+            return numberChars <= 12;
+        }
+        return indexOfDecimal <= 12;
+    }
+
     /**
      * Returns a double representing a cost value, represented by the provided input String object.
      *
@@ -229,6 +255,9 @@ public class Parser {
         }
         if (!hasAtMostTwoDecimalPlaces(input)) {
             throw new InvalidFormatException(Message.ERROR_PARSER_COST_NOT_TWO_DP);
+        }
+        if (!hasAtMostTwelveIntegerPlaces(input)) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_COST_MORE_THAN_TWELVE_DIGITS_BEFORE_DP);
         }
         return cost;
     }

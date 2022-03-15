@@ -37,6 +37,11 @@ public class TextUI {
         printDivider();
     }
 
+    public void printlnMessageWithDashDivider(String message) {
+        out.println(message);
+        printDashDivider();
+    }
+
     public String readNextLine() {
         printMessage(Message.PROMPT_TEXTUI_AWAITING_INPUT);
         return in.nextLine();
@@ -51,10 +56,9 @@ public class TextUI {
      * @return true if the user confirms
      */
     public boolean getUserConfirmation(String message) {
-        printDivider();
         printlnMessage(message);
+        printlnMessage(Message.PROMPT_TEXTUI_REQUEST_CONFIRMATION);
         String confirmation = readNextLine().toLowerCase();
-        printDivider();
         while (true) {
             switch (confirmation) {
             case ("yes"):
@@ -64,7 +68,6 @@ public class TextUI {
             case ("no"):
                 // fallthrough
             case ("n"):
-                printlnMessage(Message.ERROR_TEXTUI_USER_DID_NOT_CONFIRM);
                 return false;
             default:
                 printlnMessage(Message.ERROR_TEXTUI_REENTER_INPUT);
