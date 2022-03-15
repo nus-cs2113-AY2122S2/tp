@@ -16,6 +16,7 @@ public class Dish {
     }
 
     private static String toTitleCase(String givenString) {
+        assert(isValidName(givenString));
         String[] arr = givenString.split(" ");
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < arr.length; i++) {
@@ -30,6 +31,7 @@ public class Dish {
     }
 
     public String getName() {
+        assert(isValidName(name));
         return name;
     }
 
@@ -41,6 +43,7 @@ public class Dish {
     }
 
     public double getPrice() {
+        assert(price >= 0);
         return price;
     }
 

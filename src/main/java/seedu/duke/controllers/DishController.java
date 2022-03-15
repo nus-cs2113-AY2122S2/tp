@@ -4,15 +4,22 @@ import seedu.duke.entities.Dish;
 import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.manager.DishManager;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * DishController (or MenuController if you like).
  */
 public class DishController extends Controller {
     private static final String[] CHOICES = {"Exit Menu", "Add Dish", "Delete Dish",
-        "Change the price of a dish", "Change the name of a dish"
+            "Change the price of a dish", "Change the name of a dish"
     };
+    private static Logger logger = Logger.getLogger("DishController");
     private final DishManager dishManager;
 
+    private static void logInfo(String msg) {
+        logger.log(Level.INFO, msg);
+    }
     public DishController() {
         super(CHOICES);
         dishManager = new DishManager();
@@ -20,6 +27,7 @@ public class DishController extends Controller {
 
     @Override
     public void takeControl() {
+        logInfo("User is using menu function");
         System.out.println("You are using Menu function");
         super.takeControl();
     }
@@ -52,6 +60,7 @@ public class DishController extends Controller {
     }
 
     private void changeName() throws OperationTerminationException {
+        logInfo("User is changing the name of dish");
         System.out.println("Changing name...");
         int index = InputParser.getInteger("The index of dish");
         String name = InputParser.getString("The new name of dish");
@@ -65,6 +74,7 @@ public class DishController extends Controller {
     }
 
     private void changePrice() throws OperationTerminationException {
+        logInfo("User is changing the price of dish");
         System.out.println("Changing price...");
         int index = InputParser.getInteger("The index of dish");
         double newPrice = InputParser.getDouble("The new price of dish: ");
@@ -78,6 +88,7 @@ public class DishController extends Controller {
     }
 
     private void deleteDish() throws OperationTerminationException {
+        logInfo("User is deleting dish");
         System.out.println("Deleting dish");
         int index = InputParser.getInteger("The index of dish");
         try {
@@ -88,6 +99,7 @@ public class DishController extends Controller {
     }
 
     private void addDish() throws OperationTerminationException {
+        logInfo("User is adding dish");
         System.out.println("Adding new dish...");
         String name = InputParser.getString("The name of dish: ");
         double price = InputParser.getDouble("The price of dish: ");
