@@ -12,6 +12,7 @@ repositories {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.9.0'
 }
 
 test {
@@ -29,11 +30,11 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "seedu.duke.InvMgr"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "invmgr"
     archiveClassifier = null
 }
 
