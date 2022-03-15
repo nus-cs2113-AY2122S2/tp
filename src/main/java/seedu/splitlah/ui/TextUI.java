@@ -89,7 +89,7 @@ public class TextUI {
     }
     
     public void printHelpMenu() {
-        out.println(Message.MESSAGE_TEXTUI_HELP_MENU);
+        printlnMessageWithDivider(Message.MESSAGE_TEXTUI_HELP_MENU);
     }
 
     public void printFarewell() {

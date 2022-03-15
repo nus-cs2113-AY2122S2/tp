@@ -11,7 +11,7 @@ public class HelpCommand extends Command {
     
     public static final String COMMAND_TEXT = "help";
 
-    private static final String COMMAND_FORMAT = "Syntax: help";
+    public static final String COMMAND_FORMAT = "Syntax: help";
 
     /**
      * Prints a help message and displays all available commands.
