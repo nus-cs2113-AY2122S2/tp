@@ -2,6 +2,7 @@ package cpp.projects.commandhandler;
 
 import cpp.Constants;
 import cpp.exceptions.IllegalCommandException;
+import cpp.exceptions.NegativeIndexException;
 import cpp.projects.ProjectList;
 import cpp.response.Response;
 
@@ -47,16 +48,21 @@ public class CommandHandler {
             break;
         case "todo":
             if (commands.length < 3) {
-                throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
+                throw new IllegalCommandException(Constants.MESSAGE_INVALID_TODO_COMMAND_FORMAT);
             }
             String todoString = parseTodoString(commands);
             projectList.addTodoToProject(commands[1], todoString);
+
             break;
         case "mark":
             if (commands.length < 3) {
-                throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
+                throw new IllegalCommandException(Constants.MESSAGE_INVALID_MARK_COMMAND_FORMAT);
             }
-            projectList.markTodoAsDone(commands[1], commands[2]);
+            try {
+                projectList.markTodoAsDone(commands[1], commands[2]);
+            } catch (NegativeIndexException e) {
+                System.out.println("The target index is a negative number. Please enter a positive integer.");
+            }
             break;
         case "adddeadline":
             projectList.addDeadline(commands[1], commands[2]);

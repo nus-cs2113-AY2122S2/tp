@@ -39,6 +39,7 @@ public class Project {
     public void addTodo(String todoString) {
         Todo newTodo = new Todo(todoString);
         todos.add(newTodo);
+        System.out.println("Todo: " + todoString+" have been added to project " + getTitle());
     }
 
     public Todo getTodo(int index) {
