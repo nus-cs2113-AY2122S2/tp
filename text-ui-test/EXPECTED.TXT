@@ -1,12 +1,19 @@
 greeting message
 Menu:
 Welcome to Contacts Manager
+Please enter a valid command for the Contacts Manager!
+You can try "list", "add", or "rm"
 Got it. I've added this contact:
   Lucy
 Now you have 1 contacts in the list.
 Here are the contacts in your list:
  1. Lucy
 
+You can only delete with a valid number that's in the list :')
+You can only delete with a valid number that's in the list :')
+You can only delete with a valid number that's in the list :')
+You can only delete with a valid number that's in the list :')
+You can only delete with a valid number that's in the list :')
 Noted. I've removed this contact:
   Lucy
 Now you have 0 contacts in the list.

@@ -9,25 +9,75 @@
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+1. Down the latest version of `AlloNUS` from [here](http://link.to/duke).
 
 ## Features 
 
 {Give detailed description of each feature}
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### Main Menu Features
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+#### ...
+...
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+Format: `add ...`
+
+* ...
+* ...
+
+Example of usage:
+
+`...`
+
+`...`
+
+### Expense Tracker Features
+
+#### Adding an expense: `add`
+Adds a new expense to the list of expenses.
+
+Format: `add ...`
+
+* ...
+* ...
+
+Example of usage:
+
+`...`
+
+`...`
+
+### Study Manager Features
+
+#### Adding a module: `add`
+Adds a new module to the list of modules.
+
+Format: `add ...`
+
+* ...
+* ...
 
 Example of usage: 
 
-`todo n/Write the rest of the User Guide d/next week`
+`...`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+`...`
+
+### Contacts Tracker Features
+
+#### Adding a contact: `add`
+Adds a new contact to the list of contacts.
+
+Format: `add ...`
+
+* ...
+* ...
+
+Example of usage:
+
+`...`
+
+`...`
 
 ## FAQ
 
