@@ -24,8 +24,7 @@ class StorageTest {
         try {
             Storage storage = new Storage("data/test.json");
             TaskList tasks = new TaskList();
-            tasks.addTask("task_one", LocalDate.parse("2022-12-12")
-                    , null);
+            tasks.addTask("task_one", LocalDate.parse("2022-12-12"), null);
             storage.writeSaveData(tasks);
         } catch (IOException exception) {
             exception.printStackTrace();
