@@ -7,7 +7,8 @@ public class ExitCommand extends Command {
         isExit = true;
     }
 
-    public void execute() {
+    // Must fix these parameters...
+    public void execute(SatisfactionList satisfactionList, Ui ui) {
         System.out.println("see u again!");
     }
 }
