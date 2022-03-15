@@ -33,6 +33,7 @@ public class Manager {
                 command.deletePatient(patientList, parameters);
                 break;
             case "view patient":
+                command.viewPatient(patientList, parameters);
                 break;
             case "add doctor":
                 break;
@@ -40,12 +41,13 @@ public class Manager {
                 //command.deleteDoctor(doctorList, parameters);
                 break;
             case "view doctor":
-                //command.viewDoctor(doctorList, parameters);
+                command.viewDoctor(doctorList, parameters);
                 break;
             case "add medicine":
                 command.addMedicine(medicineList, parameters);
                 break;
             case "delete medicine":
+
                 break;
             case "view medicine":
                 break;

@@ -2,6 +2,8 @@ package seedu.duke.helper;
 
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
+import seedu.duke.assets.DoctorList;
+
 
 public class Command {
     private UI ui = new UI();
@@ -54,6 +56,17 @@ public class Command {
             ui.printDeletePatientExampleMessage(patientList);
         }
     }
+
+    public void viewDoctor(DoctorList doctorList, String parameters) {
+        if (isNull(parameters)) {
+            return;
+        }
+        if (Parser.parseViewPatient(parameters) == null) {
+            doctorList.viewDoctor();
+        }
+        doctorList.viewDoctor(parameters);
+    }
+
 
     public void addMedicine(MedicineList medicineList, String parameters) {
         if (isNull(parameters)) {
