@@ -71,6 +71,8 @@ public abstract class Message {
             "Please include the following delimiter in your input: ";
     public static final String ERROR_PARSER_MISSING_ARGUMENT =
             "Please include an argument after the following delimiter: ";
+    public static final String ERROR_PARSER_MORE_THAN_ONE_PAYER =
+            "The activity should only have a single payer. Please rectify and try again.";
     public static final String ERROR_PARSER_NON_INTEGER_ARGUMENT =
             "Please enter a valid integer after the following delimiter: ";
     public static final String ERROR_PARSER_ID_VALUE_NOT_POSITIVE =
@@ -79,6 +81,10 @@ public abstract class Message {
             "Please enter the date in the form DD-MM-YYYY or enter 'today' for today's date.";
     public static final String ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT =
             "Please enter a valid monetary value(s) after the following delimiter: ";
+    public static final String ERROR_PARSER_COST_NOT_POSITIVE =
+            "Please enter a positive value for monetary value(s).";
+    public static final String ERROR_PARSER_COST_NOT_TWO_DP =
+            "Please enter a value up to 2 decimal places for monetary value(s).";
     public static final String ERROR_PARSER_INVALID_GST_SURCHARGE =
             "Please enter a valid GST surcharge in % after the delimiter: ";
     public static final String ERROR_PARSER_INVALID_SERVICE_CHARGE =
@@ -87,8 +93,12 @@ public abstract class Message {
             "Please enter a command.";
     public static final String ERROR_PARSER_INVALID_COMMAND =
             "Please enter a valid command.";
+    public static final String ERROR_PARSER_ADDITIONAL_INVALID_TOKEN =
+            "The command contains an argument that does not have a delimiter. Please rectify and try again.";
     public static final String ERROR_PARSER_INVALID_DELIMITERS =
             "The command contains one or more invalid delimiters. Please rectify and try again.";
+    public static final String ERROR_PARSER_DUPLICATE_DELIMITERS =
+            "The command contains one or more duplicate delimiters. Please rectify and try again.";
     public static final String ASSERT_PARSER_COMMAND_ARGUMENTS_EMPTY =
             "The command arguments cannot be null.";
 

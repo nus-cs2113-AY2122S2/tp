@@ -27,6 +27,12 @@ public class SessionCreateCommand extends Command {
     private static final String COMMAND_SUCCESS =
             "The session was created successfully.\n";
 
+    public static final String[] COMMAND_DELIMITERS = { 
+        Parser.NAME_DELIMITER,
+        Parser.DATE_DELIMITER,
+        Parser.PERSON_LIST_DELIMITER
+    };
+
     private String sessionName;
     private String[] personNames;
     private LocalDate sessionDate;

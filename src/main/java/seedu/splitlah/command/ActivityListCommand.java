@@ -19,6 +19,10 @@ public class ActivityListCommand extends Command {
 
     public static final String COMMAND_FORMAT = "Syntax: activity /list /sid [SESSION_ID]";
 
+    public static final String[] COMMAND_DELIMITERS = {
+        Parser.SESSION_ID_DELIMITER
+    };
+
     private int sessionId;
 
     private static final String LIST_HEADER_PREPEND = "Activity List (Session Id #";

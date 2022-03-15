@@ -18,6 +18,8 @@ import seedu.splitlah.ui.Message;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represents a parser that interprets the user input into data that can be understood by the program.
@@ -183,6 +185,26 @@ public class Parser {
     }
 
     /**
+     * Checks if the given String object representing a monetary value has at most two decimal places.
+     * 
+     * @param input A String object representing a monetary value.
+     * @return true if the String object can be parsed as a double and 
+     *         represents a monetary value has at most two decimal places,
+     *         false otherwise.
+     */
+    private static boolean hasAtMostTwoDecimalPlaces(String input) {
+        try {
+            double cost = Double.parseDouble(input);
+        } catch (NumberFormatException exception) {
+            return false;
+        }
+        
+        int indexOfDecimal = input.indexOf('.');
+        int decimalPlaces = input.length() - indexOfDecimal - 1;
+        return decimalPlaces <= 2;
+    }
+    
+    /**
      * Returns a double representing a cost value, represented by the provided input String object.
      *
      * @param input     A String object that contains numeric characters or a single decimal point character,
@@ -190,14 +212,25 @@ public class Parser {
      * @param delimiter A String object that represents a demarcation of a specific argument in the command.
      * @return An double representing a cost value.
      * @throws InvalidFormatException If the provided input String object contains characters other than numeric
-     *                                characters or a single decimal point character, and cannot be parsed as a double.
+     *                                characters or a single decimal point character,
+     *                                and cannot be parsed as a double, or
+     *                                if the double parsed from the input String object is not a positive value.
      */
     private static double parseCostFromString(String input, String delimiter) throws InvalidFormatException {
+        double cost;
         try {
-            return Double.parseDouble(input);
+            cost = Double.parseDouble(input);
         } catch (NumberFormatException exception) {
             throw new InvalidFormatException(getNonMonetaryErrorMessage(delimiter));
         }
+        
+        if (cost <= 0) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_COST_NOT_POSITIVE);
+        }
+        if (!hasAtMostTwoDecimalPlaces(input)) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_COST_NOT_TWO_DP);
+        }
+        return cost;
     }
 
     /**
@@ -280,6 +313,122 @@ public class Parser {
         }
         return false;
     }
+
+    /**
+     * Checks whether the provided String object which represents the command arguments contains any duplicate
+     * delimiters.
+     * 
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return true if there are tokens in the command arguments containing a forward slash character ('/') that
+     *         appears twice or more times in the arguments,
+     *         false otherwise.
+     */
+    private static boolean containsDuplicateDelimiters(String commandArgs) {
+        if (commandArgs == null) {
+            return false;
+        }
+
+        Set<String> delimiterSet = new HashSet<>();
+        String[] argumentTokens = commandArgs.split(REGEX_WHITESPACES_DELIMITER);
+        for (String token : argumentTokens) {
+            if (token.contains(DELIMITER_INDICATOR) && !delimiterSet.add(token)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks whether a String array object contains a String object 
+     * with the same contents, ignoring case, as the specified String object.
+     * 
+     * @param stringToCheck A String object that is specified to be checked against the String array object.
+     * @param stringArray   A String array object to be checked against.
+     * @return true if stringArray contains a String object with the same contents as stringToCheck,
+     *         false otherwise.
+     */
+    private static boolean hasStringInStringArray(String stringToCheck, String[] stringArray) {
+        if (stringToCheck == null || stringArray == null) {
+            return false;
+        }
+        
+        for (String string : stringArray) {
+            if (string.equalsIgnoreCase(stringToCheck)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks whether any delimiter inside the provided String object which represents the command arguments does not
+     * belong to the command type specified by the String object which represents the command type.
+     * 
+     * @param commandType   A String object representing the command type of the command input from the user.
+     * @param remainingArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return true if any delimiter inside remainingArgs do not belong to command type as represented by commandType,
+     *         false otherwise.
+     */
+    private static boolean containsDelimitersNotFromCommand(String commandType, String remainingArgs) {
+        String[] delimiterList;
+        switch (commandType) {
+        case ActivityCreateCommand.COMMAND_TEXT:
+            delimiterList = ActivityCreateCommand.COMMAND_DELIMITERS;
+            break;
+        case ActivityDeleteCommand.COMMAND_TEXT:
+            delimiterList = ActivityDeleteCommand.COMMAND_DELIMITERS;
+            break;
+        case ActivityListCommand.COMMAND_TEXT:
+            delimiterList = ActivityListCommand.COMMAND_DELIMITERS;
+            break;
+        case ActivityViewCommand.COMMAND_TEXT:
+            delimiterList = ActivityViewCommand.COMMAND_DELIMITERS;
+            break;
+        case SessionCreateCommand.COMMAND_TEXT:
+            delimiterList = SessionCreateCommand.COMMAND_DELIMITERS;
+            break;
+        case SessionDeleteCommand.COMMAND_TEXT:
+            delimiterList = SessionDeleteCommand.COMMAND_DELIMITERS;
+            break;
+        case SessionSummaryCommand.COMMAND_TEXT:
+            delimiterList = SessionSummaryCommand.COMMAND_DELIMITERS;
+            break;
+        default:
+            return !remainingArgs.isEmpty();
+        }
+
+        String[] argumentTokens = remainingArgs.split(REGEX_WHITESPACES_DELIMITER);
+        for (String token : argumentTokens) {
+            if (token.contains(DELIMITER_INDICATOR) && !hasStringInStringArray(token, delimiterList)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns a String object that represents a corresponding error message for the first error check to be failed,
+     * when checking for validity of arguments for a specified command.
+     * 
+     * @param commandType   A String object representing the command type of the command input from the user.
+     * @param remainingArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return A String object with the first error check to be failed, if any, or
+     *         an empty String object if remainingArgs is empty or if none of the error checks fail.
+     */
+    private static String checkIfArgumentsValidForCommand(String commandType, String remainingArgs) {
+        if (remainingArgs.isEmpty()) {
+            return "";
+        } else if (!remainingArgs.startsWith(DELIMITER_INDICATOR)) {
+            return Message.ERROR_PARSER_ADDITIONAL_INVALID_TOKEN;
+        } else if (containsInvalidDelimiters(remainingArgs)
+                || containsDelimitersNotFromCommand(commandType, remainingArgs)) {
+            return Message.ERROR_PARSER_INVALID_DELIMITERS;
+        } else if (containsDuplicateDelimiters(remainingArgs)) {
+            return Message.ERROR_PARSER_DUPLICATE_DELIMITERS;
+        } else {
+            return "";
+        }
+    }
     
     // MAIN PUBLIC PARSING FUNCTIONS
     /**
@@ -331,11 +480,16 @@ public class Parser {
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A String object that represents a name of a payer.
-     * @throws InvalidFormatException If the Payer delimiter is not found in the command arguments, or
-     *                                if no arguments representing a name were provided after the Payer delimiter.
+     * @throws InvalidFormatException If the Payer delimiter is not found in the command arguments,
+     *                                if no arguments representing a name were provided after the Payer delimiter, or
+     *                                if the argument contains more than a single name.
      */
     public static String parsePayer(String commandArgs) throws InvalidFormatException {
-        return getArgumentFromDelimiter(commandArgs, PAYER_DELIMITER);
+        String payer = getArgumentFromDelimiter(commandArgs, PAYER_DELIMITER);
+        if (payer.indexOf(' ') != INVALID_INDEX_INDICATOR) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_MORE_THAN_ONE_PAYER);
+        }
+        return payer;
     }
 
     /**
@@ -344,9 +498,11 @@ public class Parser {
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents a session unique identifier.
-     * @throws InvalidFormatException If the Session ID delimiter is not found in the command arguments, or
+     * @throws InvalidFormatException If the Session ID delimiter is not found in the command arguments,
      *                                if no arguments representing a session unique identifier were provided after the 
-     *                                Session ID delimiter.
+     *                                Session ID delimiter,
+     *                                if the parsed argument cannot be parsed as an integer, or
+     *                                if the integer parsed from the argument is not a positive integer.
      */
     public static int parseSessionId(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, SESSION_ID_DELIMITER);
@@ -359,9 +515,11 @@ public class Parser {
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents an activity unique identifier.
-     * @throws InvalidFormatException If the Activity ID delimiter is not found in the command arguments, or
+     * @throws InvalidFormatException If the Activity ID delimiter is not found in the command arguments,
      *                                if no arguments representing an activity unique identifier were provided after 
-     *                                the Activity ID delimiter.
+     *                                the Activity ID delimiter,
+     *                                if the parsed argument cannot be parsed as an integer, or
+     *                                if the integer parsed from the argument is not a positive integer.
      */
     public static int parseActivityId(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, ACTIVITY_ID_DELIMITER);
@@ -406,8 +564,9 @@ public class Parser {
      * @return A double that represents a single total cost.
      * @throws InvalidFormatException If the Total cost delimiter is not found in the command arguments,
      *                                if no arguments representing a total cost were provided after the 
-     *                                Total cost delimiter, or
-     *                                if the arguments cannot be parsed as a double.
+     *                                Total cost delimiter,
+     *                                if the arguments cannot be parsed as a double, or
+     *                                if the cost value parsed is not positive.
      */
     public static double parseTotalCost(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, TOTAL_COST_DELIMITER);
@@ -422,8 +581,9 @@ public class Parser {
      * @return A double array object that represents a list of cost values.
      * @throws InvalidFormatException If the Cost list delimiter is not found in the command arguments,
      *                                if no arguments representing a list of cost values were provided after the 
-     *                                Cost list delimiter, or
-     *                                if any token in the argument cannot be parsed as a double.
+     *                                Cost list delimiter,
+     *                                if any token in the argument cannot be parsed as a double, or
+     *                                if any cost value parsed is not positive.
      */
     public static double[] parseCostList(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, COST_LIST_DELIMITER);
@@ -539,8 +699,9 @@ public class Parser {
             return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
         }
         
-        if (containsInvalidDelimiters(remainingArgs)) {
-            return new InvalidCommand(Message.ERROR_PARSER_INVALID_DELIMITERS);
+        String errorMessage = checkIfArgumentsValidForCommand(commandType, remainingArgs);
+        if (!errorMessage.isEmpty()) {
+            return new InvalidCommand(errorMessage);
         }
 
         switch (commandType.toLowerCase()) {
