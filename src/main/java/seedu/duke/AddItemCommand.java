@@ -50,11 +50,12 @@ public class AddItemCommand extends Command {
         return itemPax;
     }
 
-    @Override
-    public void execute(ItemList listOfItems, Ui ui) {
+
+    public void execute(RoomList list, ItemList listOfItems, Ui ui) {
         Item item = getItem();
         listOfItems.addItemToList(item);
         ui.printAddItemAcknowledgementMessage(listOfItems);
+
     }
 
     public Item getItem() {
