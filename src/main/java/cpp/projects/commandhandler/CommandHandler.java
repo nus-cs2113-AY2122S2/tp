@@ -10,12 +10,7 @@ import java.util.Scanner;
 
 public class CommandHandler {
 
-    /** Scanner for user input. */
-    public Scanner sc;
-    /** Command entered by user. */
-    public String line;
-    /** All words of command entered by user. */
-    public String[] commands;
+    private String[] commands;
 
     /**
      * Constructs new CommandHandler object.
