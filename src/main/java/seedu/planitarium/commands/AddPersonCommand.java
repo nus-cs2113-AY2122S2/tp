@@ -14,7 +14,7 @@ public class AddPersonCommand extends Command {
     }
 
     @Override
-    public void execute() throws UnknownException {
+    public void execute() throws Exception {
         personList.addPerson(name);
     }
 
