@@ -81,7 +81,7 @@ public class DishController extends Controller {
         }
     }
 
-    private void addDish() throws IllegalArgumentException, OperationTerminationException {
+    private void addDish() throws OperationTerminationException {
         System.out.println("Adding new dish...");
         String name = InputParser.getString("The name of dish: ");
         double price = InputParser.getDouble("The price of dish: ");
