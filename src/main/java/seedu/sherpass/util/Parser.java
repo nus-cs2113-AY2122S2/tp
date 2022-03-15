@@ -334,7 +334,7 @@ public class Parser {
      * @param parsedInput Parsed input.
      * @return Returns duration of custom timer input, or the duration of
      *         selected default timer mode in seconds.
-     * @throws InvalidTimeException If timer input <= 0 or there is
+     * @throws InvalidTimeException If timer input less than or equals to 0 or there is
      *                              multiple timer inputs.
      */
     public static int parseTimerInput(String[] parsedInput) throws InvalidTimeException {

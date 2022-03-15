@@ -1,4 +1,5 @@
 package seedu.sherpass.util;
+
 import org.junit.jupiter.api.Test;
 import seedu.sherpass.exception.InvalidTimeException;
 
@@ -13,7 +14,7 @@ public class ParserTest {
         String studyCommandInput = "start ";
         String[] timerInput = studyCommandInput.split(" ", 2);
         assertThrows(InvalidTimeException.class,
-                ()->Parser.parseTimerInput(timerInput));
+            () -> Parser.parseTimerInput(timerInput));
     }
 
     @Test
@@ -21,7 +22,7 @@ public class ParserTest {
         String studyCommandInput = "start  ";
         String[] timerInput = studyCommandInput.split(" ", 2);
         assertThrows(InvalidTimeException.class,
-                ()->Parser.parseTimerInput(timerInput));
+            () -> Parser.parseTimerInput(timerInput));
     }
 
     @Test
@@ -29,7 +30,7 @@ public class ParserTest {
         String studyCommandInput = "start /custom  ";
         String[] timerInput = studyCommandInput.split(" ", 2);
         assertThrows(NumberFormatException.class,
-                ()->Parser.parseTimerInput(timerInput));
+            () -> Parser.parseTimerInput(timerInput));
     }
 
     @Test
@@ -53,7 +54,7 @@ public class ParserTest {
         String studyCommandInput = "start 2 3";
         String[] timerInput = studyCommandInput.split(" ", 2);
         assertThrows(InvalidTimeException.class,
-                ()->Parser.parseTimerInput(timerInput));
+            () -> Parser.parseTimerInput(timerInput));
     }
 
     @Test
@@ -61,7 +62,7 @@ public class ParserTest {
         String studyCommandInput = "start /custom 600 1500 1200";
         String[] timerInput = studyCommandInput.split(" ", 2);
         assertThrows(NumberFormatException.class,
-                ()->Parser.parseTimerInput(timerInput));
+            () -> Parser.parseTimerInput(timerInput));
     }
 
     @Test
@@ -69,7 +70,7 @@ public class ParserTest {
         String studyCommandInput = "start 2 /custom 900";
         String[] timerInput = studyCommandInput.split(" ", 2);
         assertThrows(InvalidTimeException.class,
-                ()->Parser.parseTimerInput(timerInput));
+            () -> Parser.parseTimerInput(timerInput));
     }
 
 }
