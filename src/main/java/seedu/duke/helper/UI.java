@@ -1,5 +1,7 @@
 package seedu.duke.helper;
 
+import seedu.duke.assets.PatientList;
+
 import java.util.Scanner;
 
 public class UI {
@@ -54,9 +56,22 @@ public class UI {
         System.out.println("Goodbye! Exiting the programme.");
     }
 
-    public void printAddPatientWrongFormatMessage() {
-        System.out.println("It seems like the you are missing some parameters to add a new patient!");
-        System.out.println("Please follow the format in the example given below:");
-        System.out.println("add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15");
+    public void printAddPatientExampleMessage() {
+        System.out.println("Please note the error(s) mentioned above and try again!");
+        System.out.println("Here are two examples. Please follow the input order:");
+        System.out.println("add patient /info S1234567A, John Doe, 23, M, 10 Baker Street,"
+                + " 1999-12-31, 2021-02-15");
+        System.out.println("add patient /info T4867591Z, Mary Douglas Owen, 25, F, 15 King's Avenue,"
+                + "1997-08-26, 2020-03-30");
+    }
+
+    public void printDeletePatientExampleMessage(PatientList patientList) {
+        System.out.println("Please input a postive number up to " + patientList.getSize() + " only.");
+        System.out.println("Here is an example:");
+        System.out.println("delete patient /info 1");
+    }
+
+    public void printNullParametersMessage() {
+        System.out.println("Parameters missing or not detected. Please use /info for parameters.");
     }
 }
