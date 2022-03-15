@@ -1,11 +1,11 @@
 package seedu.duke.parsers;
 
+import java.util.HashMap;
+
 import seedu.duke.commands.Command;
 import seedu.duke.commands.MarkCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
-
-import java.util.HashMap;
 
 /**
  * This Parser supports the "mark" command.

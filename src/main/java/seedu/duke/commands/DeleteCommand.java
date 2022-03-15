@@ -1,13 +1,12 @@
 package seedu.duke.commands;
 
+import java.util.Objects;
+
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.NoSuchModuleException;
-import seedu.duke.exceptions.NoSuchTaskException;
 import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.TaskList;
-
-import java.util.Objects;
 
 public class DeleteCommand extends Command {
 

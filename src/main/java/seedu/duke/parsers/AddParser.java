@@ -69,10 +69,11 @@ public class AddParser extends Parser {
         final String moduleCode = parsedArguments.get(MODULE_CODE);
         final String moduleDescription = parsedArguments.get(MODULE_DESCRIPTION);
         if (!Objects.isNull(taskName)) {
-            return new AddCommand(taskName, taskDescription, estimatedWorkingTime, taskModule);
+            return new AddCommand(AddCommand.AddObjectType.TASK, taskName, taskDescription, estimatedWorkingTime,
+                    taskModule);
         }
         if (!Objects.isNull(moduleCode)) {
-            return new AddCommand(moduleCode, moduleDescription);
+            return new AddCommand(AddCommand.AddObjectType.MODULE, moduleCode, moduleDescription);
         }
         throw new ParseException();
     }

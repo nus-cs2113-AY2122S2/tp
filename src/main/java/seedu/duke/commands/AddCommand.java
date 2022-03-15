@@ -1,5 +1,7 @@
 package seedu.duke.commands;
 
+import java.util.Objects;
+
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.tasks.Module;
@@ -7,10 +9,11 @@ import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
 
-import java.util.Objects;
-
 
 public class AddCommand extends Command {
+    public enum AddObjectType {
+        TASK, MODULE
+    }
 
     private static final String ADD_TASK_MESSAGE = "Hey! I have added this task under %s!" + LS + "%s" + LS
             + "Now you have %d task(s) in your list!" + LS;
@@ -22,14 +25,17 @@ public class AddCommand extends Command {
     private String targetModuleName = null;
     private Module newModule = null;
 
-    public AddCommand(String name, String description, String estimatedWorkingTime, String taskModule) {
-        newTask = new Task(name, description, estimatedWorkingTime);
+    public AddCommand(AddObjectType type, String taskName, String taskDescription, String estimatedWorkingTime,
+                      String taskModule) {
+        assert type == AddObjectType.TASK;
+        newTask = new Task(taskName, taskDescription, estimatedWorkingTime);
         targetModuleName = taskModule;
         isAddTask = true;
     }
 
-    public AddCommand(String moduleName, String moduleDescription) {
-        newModule = new Module(moduleName, moduleDescription);
+    public AddCommand(AddObjectType type, String moduleCode, String moduleDescription) {
+        assert type == AddObjectType.MODULE;
+        newModule = new Module(moduleCode, moduleDescription);
         isAddTask = false;
     }
 

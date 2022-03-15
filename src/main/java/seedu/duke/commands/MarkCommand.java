@@ -1,5 +1,7 @@
 package seedu.duke.commands;
 
+import java.util.Objects;
+
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.exceptions.NoSuchTaskException;
@@ -7,8 +9,6 @@ import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
-
-import java.util.Objects;
 
 public class MarkCommand extends Command {
     private static final String MARK_MESSAGE = "Nice! I have marked this task as completed!" + LS + "%s";
