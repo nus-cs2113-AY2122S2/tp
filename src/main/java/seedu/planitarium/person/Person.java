@@ -1,6 +1,6 @@
 package seedu.planitarium.person;
 
-import seedu.planitarium.ExpenditureList;
+import seedu.planitarium.expenditure.ExpenditureList;
 import seedu.planitarium.IncomeList;
 
 public class Person {
