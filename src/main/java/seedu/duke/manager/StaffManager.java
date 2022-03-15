@@ -44,7 +44,6 @@ public class StaffManager {
      * @param salary    Salary of the Staff.
      */
     public void addStaff(int staffId, String staffName, String position, double salary) {
-        assert staffId > 0 : "Invalid ID";
         if (findByStaffId(staffId, false) != null) {
             logInfo("Failed to add staff: Staff with same ID already exists.");
             System.out.println("Staff with the same ID already exists, use another ID...");
@@ -60,7 +59,6 @@ public class StaffManager {
      * @param printMsg Boolean to determine if found message should be printed.
      */
     public Staff findByStaffId(int staffId, boolean printMsg) {
-        assert staffId > 0 : "Invalid ID";
         if (staffId <= 0) {
             logInfo("Invalid input for ID.");
             System.out.println("Staff ID cannot be zero or negative.");
@@ -88,7 +86,6 @@ public class StaffManager {
      * @param staffId ID of the Staff
      */
     public void deleteByStaffId(int staffId) {
-        assert staffId > 0 : "Invalid ID";
         Staff staff = findByStaffId(staffId, false);
         if (staff != null) {
             staffs.remove(staff);
