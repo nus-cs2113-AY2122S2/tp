@@ -18,8 +18,9 @@ class DukeTest {
         CommandParser parser = new CommandParser();
         Command command = parser.parse("Add Item Name:Toilet Roll Pax:5");
         AddItemCommand addItemCommand = (AddItemCommand) command;
-        assertEquals("Toilet Roll", addItemCommand.getItemName());
-        assertEquals(5, addItemCommand.getItemPax());
+        Item item = addItemCommand.getItem();
+        assertEquals("Toilet Roll", item.getName());
+        assertEquals(5, item.getPax());
     }
 
     @Test

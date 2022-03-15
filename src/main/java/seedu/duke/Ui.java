@@ -24,7 +24,13 @@ public class Ui {
         return userInput;
     }
 
+
     public void printErrorMessage(HotelLiteManagerException exception) {
         System.out.println(exception.getErrorMessage());
+    }
+
+    public void printAddItemAcknowledgementMessage(ItemList listOfItems) {
+        System.out.println("The item and its pax has been added to the list of items in the inventory.");
+        System.out.printf("There are currently %d items within the inventory.\n", listOfItems.getSize());
     }
 }

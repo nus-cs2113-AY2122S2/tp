@@ -6,11 +6,7 @@ public class ExitCommand extends Command {
         isExit = true;
     }
 
-    public void execute() {
-        System.out.println("see u again!");
-    }
-
-    public void execute(RoomList roomList) {
+    public void execute(RoomList roomList, ItemList listOfItems, Ui ui) throws WrongCommandException {
         System.out.println("see u again!");
     }
 }
