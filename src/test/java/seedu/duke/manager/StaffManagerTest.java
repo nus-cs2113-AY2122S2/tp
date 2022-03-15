@@ -27,9 +27,9 @@ public class StaffManagerTest {
         staffManager.addStaff(2, "Ben", "Chef", 6000);
         staffManager.addStaff(3, "Cathy", "Waiter", 5000);
         staffManager.addStaff(4, "Darylharhar", "Chef", 5000);
-        assertEquals(new Staff(1, "August", "Chef", 5500), staffManager.findByStaffId(1, false));
-        assertEquals(new Staff(2, "Ben", "Chef", 6000), staffManager.findByStaffId(2, false));
-        assertEquals(new Staff(3, "Cathy", "Waiter", 5000), staffManager.findByStaffId(3, false));
-        assertEquals(new Staff(4, "Darylharhar", "Chef", 5000), staffManager.findByStaffId(4, false));
+        assertEquals("August", staffManager.findByStaffId(1, false).getStaffName());
+        assertEquals("Ben", staffManager.findByStaffId(2, false).getStaffName());
+        assertEquals("Waiter", staffManager.findByStaffId(3, false).getPosition());
+        assertEquals("Chef", staffManager.findByStaffId(4, false).getPosition());
     }
 }
