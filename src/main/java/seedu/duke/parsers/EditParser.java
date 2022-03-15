@@ -23,7 +23,7 @@ public class EditParser extends Parser {
             + "(?=\\s+-n\\s+\\\"[^\\\"]+\\\"|\\s+-d\\s+\\\"[^\\\"]+\\\"|\\s+-t\\s+\\\"[^\\\"]+\\\")"
             + "(\\s+-n\\s+\\\"((?<taskName>[^\\\"]+)\\\")?|\\s+-d\\s+\\\"((?<taskDescription>[^\\\"]+)\\\")?"
             + "|(\\s+-t\\s+\\\"(?<estimatedWorkingTime>[^\\\"]+)\\\")?))(\\s+-m\\s+(?<taskModule>\\w+))?"
-            + "|(/m\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)|$))(\\s+(-d\\s+\\\"(?<moduleDescription>.+)\\\"))?)";
+            + "|(/m\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)))(\\s+(-d\\s+\\\"(?<moduleDescription>.+)\\\")))";
 
     public EditParser() {
         super();
