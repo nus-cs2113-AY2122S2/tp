@@ -188,11 +188,29 @@ public class ActivityCreateCommand extends Command {
         boolean hasAddedForPersonPaid = false;
         for (int i = 0; i < involvedPersonList.size(); i++) {
             Person person = involvedPersonList.get(i);
-            hasAddedForPersonPaid = addCostOwedAndCostPaid(personPaid, activityId, i, person);
+            addCostOwedAndCostPaid(personPaid, activityId, i, person);
+            hasAddedForPersonPaid = isPersonPaid(personPaid, hasAddedForPersonPaid, person);
         }
         if (!hasAddedForPersonPaid) {
             personPaid.addActivityCost(activityId, totalCost, ZERO_COST_OWED);
         }
+    }
+
+    /**
+     * Checks if the Person object currently referred to represents the person who paid for the activity.
+     *
+     * @param personPaid            The Person object representing the person who paid for the activity.
+     * @param hasAddedForPersonPaid A boolean representing whether the activity cost has been added for the person who
+     *                              paid for the activity.
+     * @param person                The Person object currently referred to among the persons involved.
+     * @return true if the Person object that is currently referred to represents the person who paid for the activity,
+     *         false otherwise.
+     */
+    private boolean isPersonPaid(Person personPaid, boolean hasAddedForPersonPaid, Person person) {
+        if (person == personPaid) {
+            hasAddedForPersonPaid = true;
+        }
+        return hasAddedForPersonPaid;
     }
 
     /**
@@ -205,18 +223,14 @@ public class ActivityCreateCommand extends Command {
      * @param activityId      The id of the activity.
      * @param indexOfCostOwed The index of the cost owed in the list of costs.
      * @param person          The current person whose costs are added to the list of activity costs.
-     * @return true if the person whose activity cost is to be added is the person who paid for the activity,
-     *         false otherwise
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      */
-    private boolean addCostOwedAndCostPaid(Person personPaid, int activityId, int indexOfCostOwed, Person person)
+    private void addCostOwedAndCostPaid(Person personPaid, int activityId, int indexOfCostOwed, Person person)
             throws InvalidDataException {
         if (person == personPaid) {
             person.addActivityCost(activityId, totalCost, costList[indexOfCostOwed]);
-            return true;
         } else {
             person.addActivityCost(activityId, ZERO_COST_PAID, costList[indexOfCostOwed]);
-            return false;
         }
     }
 
