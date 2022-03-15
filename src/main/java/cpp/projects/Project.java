@@ -1,5 +1,7 @@
 package cpp.projects;
 
+import cpp.Constants;
+
 import java.util.ArrayList;
 
 public class Project {
@@ -71,5 +73,28 @@ public class Project {
             return "No deadline specified";
         }
         return deadline;
+    }
+
+    /**
+     * Gets the list of all todos in the Project.
+     *
+     * @return List of all todos
+     */
+    public ArrayList<Todo> getTodos() {
+        return this.todos;
+    }
+
+    /**
+     * Displays all details of the project.
+     */
+    public void print() {
+        System.out.println(Constants.SEPARATOR);
+        System.out.print("Project Name: " + getTitle() + "\n");
+        System.out.print("Deadline: " + getDeadline() + "\n");
+        int count = 1;
+        for (Todo todo: getTodos()) {
+            System.out.print("\t" + "[" + count + "]. " + todo.toString() + "\n");
+            count++;
+        }
     }
 }

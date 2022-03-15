@@ -138,6 +138,7 @@ public class ProjectList {
     }
 
     /**
+<<<<<<< HEAD
      * Gets the total number of projects in the list (for test use).
      *
      * @return total number of projects in the list
@@ -151,7 +152,7 @@ public class ProjectList {
         int index = -1;
         int count = 0;
 
-        for (Project project: projectList) {
+        for (Project project : projectList) {
             if (project.getTitle().equalsIgnoreCase(name)) { //find the index of the project
                 index = count;
                 break;
@@ -159,5 +160,22 @@ public class ProjectList {
             count++;
         }
         return index;
+    }
+
+    /**
+     * Displays all details of a specified Project.
+     *
+     * @param title Name of the project
+     */
+    public void view(String title) {
+        System.out.println(Constants.SEPARATOR);
+        int index = findProjectIndex(title);
+        if (index == -1) { //project not found
+            System.out.println("Sorry! There was no project with that name.");
+        } else {
+            Project project = projectList.get(index);
+            project.print();
+        }
+        System.out.println(Constants.SEPARATOR);
     }
 }

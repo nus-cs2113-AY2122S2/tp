@@ -1,8 +1,9 @@
 package cpp.projects.commandhandler;
 
+import cpp.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.projects.ProjectList;
-import cpp.Constants;
+import cpp.response.Response;
 
 import java.util.Scanner;
 
@@ -58,10 +59,17 @@ public class CommandHandler {
         case "adddeadline":
             projectList.addDeadline(commands[1], commands[2]);
             break;
+        case "view":
+            if (commands.length < 2) {
+                throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
+            }
+            projectList.view(commands[1]);
+            break;
+        case "help":
+            Response.printHelp();
+            break;
         default:
-            System.out.println(Constants.SEPARATOR);
-            System.out.println("Unknown command.");
-            System.out.println(Constants.SEPARATOR);
+            Response.printDefault();
             break;
         }
 

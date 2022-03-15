@@ -3,6 +3,7 @@ package cpp;
 import cpp.exceptions.IllegalCommandException;
 import cpp.projects.commandhandler.CommandHandler;
 import cpp.projects.ProjectList;
+import cpp.response.Response;
 
 import java.util.Scanner;
 
@@ -18,37 +19,17 @@ public class CsProjPlanner {
         String input;
         Scanner in = new Scanner(System.in);
 
-        welcomeDisplay(); //display welcome message
+        Response.displayWelcome(); //display welcome message
 
         input = in.nextLine();
 
         while (!input.equalsIgnoreCase("exit")) {
             commandHandler.handleUserInput(projectList, input);
-            System.out.println("What can I help you next?");
-            System.out.println("____________________________________________________________");
+            Response.displayNext();
             input = in.nextLine(); //fetch next input from the user
         }
 
-        exitDisplay();
+        Response.displayExit();
 
-    }
-
-    private static void welcomeDisplay() {
-        System.out.println("\n   ___________ ____               _    ____  __\n"
-                + "  / ____/ ___// __ \\_________    (_)  / __ \\/ /___ _____  ____  ___  _____\n"
-                + " / /    \\__ \\/ /_/ / ___/ __ \\  / /  / /_/ / / __ `/ __ \\/ __ \\/ _ \\/ ___/\n"
-                + "/ /___ ___/ / ____/ /  / /_/ / / /  / ____/ / /_/ / / / / / / /  __/ /\n"
-                + "\\____//____/_/   /_/   \\____/_/ /  /_/   /_/\\__,_/_/ /_/_/ /_/\\___/_/\n"
-                + "                           /___/");
-        System.out.println("\nWelcome to CSProjPlanner\n");
-        System.out.println("____________________________________________________________");
-        System.out.println("What can I help you?");
-        System.out.println("____________________________________________________________");
-    }
-
-    private static void exitDisplay() {
-        System.out.println("____________________________________________________________");
-        System.out.println("Bye. Wish you have a nice day.");
-        System.out.println("____________________________________________________________");
     }
 }
