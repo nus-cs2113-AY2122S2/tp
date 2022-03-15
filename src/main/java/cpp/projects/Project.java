@@ -93,7 +93,7 @@ public class Project {
         System.out.print("Deadline: " + getDeadline() + "\n");
         int count = 1;
         for (Todo todo: getTodos()) {
-            System.out.print("\t" + count + ". " + todo.toString() + "\n");
+            System.out.print("\t" + "[" + count + "]. " + todo.toString() + "\n");
             count++;
         }
     }

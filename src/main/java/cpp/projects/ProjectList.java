@@ -17,11 +17,20 @@ public class ProjectList {
 
     /**
      * Adds a new Project to projectList.
+     * It will check if the project has existed already in the list by using findProjectIndex() method.
      *
      * @param title Name of the Project
      */
     public void addProject(String title) {
-        projectList.add(new Project(title));
+        System.out.println(Constants.SEPARATOR);
+        int index = findProjectIndex(title);
+        if (index == -1) { //this is a new project
+            projectList.add(new Project(title));
+            System.out.println(title + " added.");
+        } else {
+            System.out.println("Failed to add " + title + ". You have added this project before!");
+        }
+        System.out.println(Constants.SEPARATOR);
     }
 
     /**
@@ -30,17 +39,16 @@ public class ProjectList {
      * @param title Name of the project
      */
     public void deleteProject(String title) {
-        int index = -1;
-        int count = 0;
-
-        for (Project project: projectList) {
-            if (project.getTitle().equalsIgnoreCase(title)) {
-                index = count;
-                break;
-            }
-            count++;
+        System.out.println(Constants.SEPARATOR);
+        int index = findProjectIndex(title);
+        try {
+            projectList.remove(index);
+            System.out.println(title + " deleted.");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("There is no such project named " + title + ".");
+        } finally {
+            System.out.println(Constants.SEPARATOR);
         }
-        projectList.remove(index);
     }
 
     /**
@@ -130,21 +138,40 @@ public class ProjectList {
     }
 
     /**
+     * Gets the total number of projects in the list (for test use).
+     *
+     * @return total number of projects in the list
+     */
+
+    public int getProjectNo() {
+        return projectList.size();
+    }
+
+    private int findProjectIndex(String name) {
+        int count = 0;
+
+        for (Project project : projectList) {
+            if (project.getTitle().equalsIgnoreCase(name)) { //find the index of the project
+                return count;
+            }
+            count++;
+        }
+        return -1;
+    }
+
+    /**
      * Displays all details of a specified Project.
      *
      * @param title Name of the project
      */
     public void view(String title) {
         System.out.println(Constants.SEPARATOR);
-        boolean isFound = false;
-        for (Project project : projectList) {
-            if (project.getTitle().equals(title)) {
-                project.print();
-                isFound = true;
-            }
-        }
-        if (!isFound) {
+        int index = findProjectIndex(title);
+        if (index == -1) { //project not found
             System.out.println("Sorry! There was no project with that name.");
+        } else {
+            Project project = projectList.get(index);
+            project.print();
         }
         System.out.println(Constants.SEPARATOR);
     }
