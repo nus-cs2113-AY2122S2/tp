@@ -1,7 +1,10 @@
 # User Guide
 
-## Contents
+SplitLah is a CLI program that lets users split bills proportionally amongst themselves after a group outing. SplitLah does
+the work of calculating how much each participant must pay across multiple activities, and keeps track of who paid the total
+bill for each activity.
 
+## Contents
 * [User Guide](#user-guide)
 * [Contents](#contents)
     * [Introduction](#introduction)
@@ -16,16 +19,11 @@
         * [Viewing an activity: `activity /view`](#viewing-an-activity-activity-view)
         * [Listing all activities in a session: `activity /list`](#listing-all-activities-in-a-session-activity-list)
         * [Settling all transactions for a session: `session /summary`](#settling-all-transactions-for-a-session-session-summary)
+        * [Exit](#exit)
     * [FAQ](#faq)
     * [Command Summary](#command-summary)
 
-
-## Introduction
-
-SplitLah is a CLI program that lets users split bills proportionally amongst themselves after a group outing. SplitLah does
-the work of calculating how much each participant must pay across multiple activities, and keeps track of who paid the total
-bill for each activity.
-
+    
 Value proposition:
 
 - Allows users to keep track of several activities and their participants.
@@ -150,7 +148,7 @@ Example of usage:
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
-/c [TOTAL_COST] [OPTIONAL_ARGUMENTS]`
+/co [TOTAL_COST] [OPTIONAL_ARGUMENTS]`
 
 Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
 /cl [COST1 COST2 ...] [OPTIONAL_ARGUMENTS]`
@@ -175,18 +173,15 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
    `[SESSION_ID]`.
 
 Examples of usage:
-1. Adds a new activity to a session with a session unique identifier of 1 named Class Lunch. Alice paid a total of $10
+1. Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid a total of $10
    for both Bob and herself which will be split equally between them later on.
-   - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /c 10` <br>
-
+   - `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /co 10` <br>
    ![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
- 
 <br>
 <br>
-2. Adds a new activity to a session with a session unique identifier of 1 named Class Lunch. Alice paid for both
+2. Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid for both
    Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.
-   - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7` <br>
-
+   - `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7` <br>
    ![Activity create command [2] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[2].png)
 
 <br>
@@ -212,8 +207,8 @@ Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 
 Example of usage:
 1. Remove an existing activity with a unique identifier of 1 from a session with a unique
-   identifier of 1.
-    - `activity /delete /sid 1 /aid 1` <br>
+   identifier of 2.
+    - `activity /delete /sid 2 /aid 1` <br>
     ![Activity delete command Screenshot]()
 <br>
 <br>
@@ -236,12 +231,10 @@ Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 
 
 Examples of usage:
-1. Views an activity with a unique identifier of 1 in a session with a session unique identifier of 1.
-    - `activity /view /sid 1 /aid 1`
-      <br>
+1. Views an activity with a unique identifier of 2 in a session with a session unique identifier of 2.
+    - `activity /view /sid 2 /aid 2` <br>
       ![Activity view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityViewCommand.png)
-      <br>
-   
+
 <br>     
 <br>
 
@@ -262,8 +255,8 @@ Format: `activity /list /sid [SESSION_ID]`
 
 
 Examples of usage:
-1. Lists all activities in a session with a unique identifier of 1.
-    - `activity /list /sid 1`
+1. Lists all activities in a session with a unique identifier of 2.
+    - `activity /list /sid 2`
       <br>
       ![Activity list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityListCommand.png)
       <br>
@@ -289,11 +282,16 @@ Example of usage:
    and Bob involved on 15-03-2022.
 2. An [activity](#creating-an-activity-activity-create) was created with activity named Class Lunch, where Alice paid for both
    Bob and herself with a total cost of $10.
-3. Get a session summary for an active session with a session unique identifier of 1.
+3. Get a session summary for an active session with a session unique identifier of 2.
    - `session /summary /sid 1` <br>
    ![Session summary command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionSummaryCommand.png)
 <br>
 <br>
+
+### Exit
+> Exits the application.
+
+Format: `exit`
  
 ## FAQ
 
