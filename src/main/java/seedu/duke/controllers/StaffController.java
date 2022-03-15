@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class StaffController extends Controller {
     private static final String[] CHOICES = {
-        "Exit Staff Menu", "Find Staff", "Add Staff"
+        "Exit Staff Menu", "Find Staff", "Add Staff", "Delete Staff"
     };
     private final StaffManager staffManager;
     private static Logger logger = Logger.getLogger("StaffController");
