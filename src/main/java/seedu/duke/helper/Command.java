@@ -1,5 +1,6 @@
 package seedu.duke.helper;
 
+import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
 
@@ -66,5 +67,20 @@ public class Command {
         }
         medicineList.add(parameterArray);
         System.out.println("Medicine has been added");
+    }
+
+    public void addDoctor(DoctorList doctorList, String parameters) {
+        if (isNull(parameters)) {
+            ui.printNullParametersMessage();
+            ui.printAddPatientExampleMessage();
+            return;
+        }
+        String[] addDoctorParameters = Parser.parseAddDoctor(parameters);
+        if (addDoctorParameters == null) {
+            ui.printAddPatientExampleMessage();
+        } else {
+            doctorList.add(addDoctorParameters);
+            System.out.println("The patient above has been added.");
+        }
     }
 }
