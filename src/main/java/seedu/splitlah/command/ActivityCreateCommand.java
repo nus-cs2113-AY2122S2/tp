@@ -78,14 +78,14 @@ public class ActivityCreateCommand extends Command {
      *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
-        int sessionId = -1;
-        String activityName = null;
-        String payer = null;
-        String[] involvedList = null;
+        int sessionId;
+        String activityName;
+        String payer;
+        String[] involvedList;
         double totalCost = 0;
         double[] costList = null;
-        int gst = 0;
-        int serviceCharge = 0;
+        int gst;
+        int serviceCharge;
 
         try {
             sessionId = Parser.parseSessionId(commandArgs);
