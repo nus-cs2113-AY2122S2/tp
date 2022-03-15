@@ -87,7 +87,7 @@ displayed in an easy-to-read summary.
 
 ### Creating a session: `session /create`
 > Creates a new session.<br>
-> A session represents a period of time and contains one or more activities.
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ...]`
 
@@ -110,7 +110,7 @@ Example of usage:
 <br>
 ### Deleting a session: `session /delete`
 > Deletes an existing session.<br>
-> A session represents a period of time and contains one or more activities.
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 > 
 Format: `session /delete /sid [SESSION_ID]`
 
@@ -128,7 +128,7 @@ Example of usage:
 <br>
 ### Listing all sessions: `session /list`
 > List all active sessions. Deleted sessions will not be listed.<br>
-> A session represents a period of time and contains one or more activities.
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `session /list`
 
@@ -139,8 +139,8 @@ Example of usage:
 <br>
 ### Creating an activity: `activity /create`
 > Creates a new activity and assigns it to a session. <br>
-> An activity stores an activity name, costs related to the activity and the name of the payer.<br>
-> A session represents a period of time and contains one or more activities.
+> An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
 /c [TOTAL_COST] [OPTIONAL_ARGUMENTS]`
@@ -182,8 +182,8 @@ Examples of usage:
 <br>
 ### Deleting an activity: `activity /delete`
 > Deletes an activity from a particular session.<br>
-> An activity stores an activity name, costs related to the activity and the name of the payer.<br>
-> A session represents a period of time and contains one or more activities.
+> An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 
@@ -207,7 +207,7 @@ Example of usage:
 
 ### Viewing an activity: `activity /view`
 > Displays details about an activity.<br>
-> An activity stores an activity name, costs related to the activity and the name of the payer.<br>
+> An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
 
 Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 
@@ -233,8 +233,8 @@ Examples of usage:
 
 ### Listing all activities in a session: `activity /list`
 > Allows user to view all existing activities in a particular session.<br>
-> An activity stores an activity name, costs related to the activity and the name of the payer.<br>
-> A session represents a period of time and contains one or more activities.
+> An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `activity /list /sid [SESSION_ID]`
 
@@ -258,7 +258,7 @@ Examples of usage:
 
 ### Settling all transactions for a session: `session /summary`
 > Displays a summary of a session that details how much each person must pay and to whom for all debts to be resolved.<br>
-> A session represents a period of time and contains one or more activities.
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `session /summary /sid [SESSION_ID]`
 
