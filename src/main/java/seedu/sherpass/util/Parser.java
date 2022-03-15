@@ -367,12 +367,13 @@ public class Parser {
             break;
         case "pause":
             TimerLogic.pauseTimer();
+            TimerLogic.callPauseTimer();
             break;
         case "resume":
-            TimerLogic.resumeTimer();
+            TimerLogic.callResumeTimer();
             break;
         case "stop":
-            TimerLogic.stopTimer();
+            TimerLogic.callStopTimer();
             break;
         default:
             ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);
