@@ -182,6 +182,14 @@ public class Parser {
         return idVal;
     }
 
+    /**
+     * Checks if the given String object representing a monetary value has at most two decimal places.
+     * 
+     * @param input A String object representing a monetary value.
+     * @return true if the String object can be parsed as a double and 
+     *         represents a monetary value has at most two decimal places,
+     *         false otherwise.
+     */
     private static boolean hasAtMostTwoDecimalPlaces(String input) {
         try {
             double cost = Double.parseDouble(input);
@@ -202,7 +210,9 @@ public class Parser {
      * @param delimiter A String object that represents a demarcation of a specific argument in the command.
      * @return An double representing a cost value.
      * @throws InvalidFormatException If the provided input String object contains characters other than numeric
-     *                                characters or a single decimal point character, and cannot be parsed as a double.
+     *                                characters or a single decimal point character,
+     *                                and cannot be parsed as a double, or
+     *                                if the double parsed from the input String object is not a positive value.
      */
     private static double parseCostFromString(String input, String delimiter) throws InvalidFormatException {
         double cost;
