@@ -24,6 +24,7 @@ public class CommandHandler {
      * Handles all non-exit commands given to program by user.
      *
      * @param projectList ProjectList for commands to work with
+     * @param userInput Command entered by user
      */
     public void handleUserInput(ProjectList projectList, String userInput) throws IllegalCommandException {
         commands = userInput.split(" ");
