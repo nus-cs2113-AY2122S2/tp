@@ -65,7 +65,7 @@ public class Parser {
             isValid = false;
         }
         if (!validateGender(parameters[3])) {
-            System.out.println("Gender must be a single char: M or F.");
+            System.out.println("Gender must be a single character: M or F.");
             isValid = false;
         }
         if (!validateAddress(parameters[4])) {

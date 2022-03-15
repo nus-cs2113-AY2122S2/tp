@@ -22,7 +22,7 @@ public class Command {
 
     public void addPatient(PatientList patientList, String parameters) {
         if (isNull(parameters)) {
-            ui.printAddPatientNullParametersMessage();
+            ui.printNullParametersMessage();
             ui.printAddPatientExampleMessage();
             return;
         }
@@ -36,12 +36,22 @@ public class Command {
     }
 
     public void deletePatient(PatientList patientList, String stringIndex) {
-        int index = Integer.parseInt(stringIndex);
-        if (0 <= index && index <= patientList.getSize()) {
-            patientList.removePatient(index);
+        if (patientList.getSize() == 0) {
+            System.out.println("There is nothing to delete in patientList.");
+            return;
+        }
+        int index;
+        try {
+            index = Integer.parseInt(stringIndex);
+        } catch (NumberFormatException numberFormatException) {
+            ui.printDeletePatientExampleMessage(patientList);
+            return;
+        }
+        if (1 <= index && index <= patientList.getSize()) {
+            patientList.removePatient(index - 1);
             System.out.println("The patient with the above index number has been removed.");
         } else {
-            System.out.println("Invalid index number!");
+            ui.printDeletePatientExampleMessage(patientList);
         }
     }
 
