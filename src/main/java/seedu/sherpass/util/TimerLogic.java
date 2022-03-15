@@ -16,7 +16,7 @@ public class TimerLogic {
      * @param ui UI
      */
     public TimerLogic(Ui ui) {
-        this.ui = ui;
+        TimerLogic.ui = ui;
         timer = new Timer(ui);
     }
 
