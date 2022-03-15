@@ -47,6 +47,11 @@ public class Task {
         this.workingTime = workingTime;
         this.taskParameters = getTaskParameterStatus();
     }
+
+    public void setTaskName (String taskName) {
+        this.taskName = taskName;
+    }
+    
     /**.
      * Check what are the tasks parameters input by user
      * @return Task parameters status

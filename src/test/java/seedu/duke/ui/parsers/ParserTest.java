@@ -3,12 +3,7 @@ package seedu.duke.ui.parsers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.Command;
-import seedu.duke.commands.DeleteCommand;
-import seedu.duke.commands.ExitCommand;
-import seedu.duke.commands.ListCommand;
-import seedu.duke.commands.MarkCommand;
+import seedu.duke.commands.*;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.parsers.ModHappyParser;
@@ -585,6 +580,85 @@ public class ParserTest {
     @Test
     public void parse_deleteCommand_unnecessaryArgs() {
         final String testString = "del /t 1 blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_editCommand_task_unnecessaryArgs() {
+        final String testString = "edit /t 1 blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_editCommand_task_parsedCorrectly() {
+        final String testString = "edit /t 1 -n \"changed\" -m cs2113t";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof EditCommand);
+            assertEquals(1, ((EditCommand) c).getTaskNumber());
+            assertNull(((EditCommand) c).getModuleCode());
+            assertEquals("cs2113t", ((EditCommand) c).getTaskModule());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_editCommand_task_noOptionalFlags() {
+        final String testString = "edit /t 1";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_editCommand_module_wrongFlag() {
+        final String testString = "edit /m cs2113t -t \"111\"";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_editCommand_task_notANumber() {
+        final String testString = "edit /t two -t \"111\"";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_editCommand_task_tooManyFlags() {
+        final String testString = "edit /t 2 -m cs2113t -d \"123\" -t \"111\"";
         try {
             parser.parseCommand(testString);
             fail();

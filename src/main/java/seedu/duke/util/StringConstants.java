@@ -22,6 +22,15 @@ public class StringConstants {
      */
     public static final String DELETE_MESSAGE = " has been deleted.";
 
+    /**
+     * For editCommand
+     */
+    public static final String EDIT_TASK_SUCCESS = "The %s of %s has been changed.";
+    public static final String EDIT_MODULE_SUCCESS = "The description of %s has been changed.";
+    public static final String EDIT_TASK_WITH_MODULE_SUCCESS = "The %s of %s from %s has been changed.";
+    public static final String TASK_NAME_STR = "task name";
+    public static final String TASK_DESCRIPTION_STR = "description";
+    public static final String ESTIMATED_WORKING_TIME_STR = "estimated working time";
     /**.
      * For exitCommand
      */
@@ -77,6 +86,7 @@ public class StringConstants {
     public static final String DELETE_COMMAND_WORD = "del";
     public static final String LIST_COMMAND_WORD = "list";
     public static final String MARK_COMMAND_WORD = "mark";
+    public static final String EDIT_COMMAND_WORD = "edit";
 
     /**.
      * General Strings
