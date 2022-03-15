@@ -6,6 +6,7 @@ public class Duke {
      */
     private void run() {
         CommandParser commandParser = new CommandParser();
+        ItemList listOfItems = new ItemList();
         boolean shouldExitProgram = false;
         Ui ui = new Ui();
         String userInput;
@@ -13,7 +14,7 @@ public class Duke {
             try {
                 userInput = ui.readUserInput();
                 Command command = commandParser.parse(userInput);
-                command.execute();
+                command.execute(listOfItems, ui);
                 shouldExitProgram = command.isExit();
             } catch (WrongCommandException error) {
                 System.out.println(error.getMessage());
