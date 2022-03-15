@@ -90,8 +90,10 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
 
 ## Product scope
 ### Target user profile
-
-{Describe the target user profile}
+* Budget conscious individuals
+* Prefers to use desktop applications over other types of applications.
+* Are able to type relatively fast.
+* Comfortable using CLI applications.
 
 ### Value proposition
 
