@@ -6,7 +6,7 @@ import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
 import seedu.duke.ui.Ui;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private final int index;
 
     public DeleteCommand(int index) {
