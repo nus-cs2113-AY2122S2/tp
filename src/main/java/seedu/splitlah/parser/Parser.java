@@ -182,6 +182,18 @@ public class Parser {
         return idVal;
     }
 
+    private static boolean hasAtMostTwoDecimalPlaces(String input) {
+        try {
+            double cost = Double.parseDouble(input);
+        } catch (NumberFormatException exception) {
+            return false;
+        }
+        
+        int indexOfDecimal = input.indexOf('.');
+        int decimalPlaces = input.length() - indexOfDecimal - 1;
+        return decimalPlaces <= 2;
+    }
+    
     /**
      * Returns a double representing a cost value, represented by the provided input String object.
      *
