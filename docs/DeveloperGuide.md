@@ -108,7 +108,7 @@ they engage in during the outings.
 
 | Version | As a ...              | I want to ...                        | So that I can ...                                                            |
 |---------|-----------------------|--------------------------------------|------------------------------------------------------------------------------|
-| v1.0    | new user              | see usage instructions               | refer to them when I forget how to use the application                       |
+| v1.0    | New user              | see usage instructions               | refer to them when I forget how to use the application                       |
 | v1.0    | Budget conscious user | create sessions                      | record the transactions of the outing                                        |
 | v1.0    | Budget conscious user | create activities                    | able to track the expenditure for each activity                              |
 | v1.0    | Budget conscious user | view an existing session             | view the full details of a session previously created                        |
