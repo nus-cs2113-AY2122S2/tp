@@ -1,23 +1,25 @@
 package seedu.duke;
 
 public class AddItemCommand extends Command {
-    private String itemName;
-    private int itemPax;
+    private Item item;
     private static final String ITEM_NAME_INDICATOR = "Name:";
     private static final int ITEM_NAME_INDICATOR_LENGTH = 5;
     private static final String ITEM_PAX_INDICATOR = "Pax:";
     private static final int ITEM_PAX_INDICATOR_LENGTH = 4;
 
     public AddItemCommand(String userInput) throws HotelLiteManagerException {
+        Item item;
+        int itemPax;
+        String itemName;
         boolean isValidAddItemCommand = userInput.contains(ITEM_NAME_INDICATOR)
                 && userInput.contains(ITEM_PAX_INDICATOR);
         if (!isValidAddItemCommand) {
             throw new InvalidCommandException();
         }
-        int itemPax = extractItemPax(userInput);
-        String itemName = extractItemName(userInput);
-        setItemName(itemName);
-        setItemPax(itemPax);
+        itemPax = extractItemPax(userInput);
+        itemName = extractItemName(userInput);
+        item = new Item(itemName, itemPax);
+        setItem(item);
     }
 
     private String extractItemName(String userInput) throws HotelLiteManagerException {
@@ -46,27 +48,25 @@ public class AddItemCommand extends Command {
         } catch (NumberFormatException e) {
             throw new InvalidItemPaxException();
         }
+        if (itemPax <= 0) {
+            throw new InvalidItemPaxException();
+        }
         return itemPax;
     }
 
     @Override
-    public void execute() {
+    public void execute(ItemList listOfItems, Ui ui) {
+        Item item = getItem();
+        listOfItems.addItemToList(item);
+        ui.printAddItemAcknowledgementMessage(listOfItems);
     }
 
-    public String getItemName() {
-        return itemName;
+    public Item getItem() {
+        return item;
     }
 
-    private void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
-    public int getItemPax() {
-        return itemPax;
-    }
-
-    private void setItemPax(int itemPax) {
-        this.itemPax = itemPax;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
 }
