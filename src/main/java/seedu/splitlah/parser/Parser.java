@@ -378,6 +378,21 @@ public class Parser {
         }
         return false;
     }
+
+    private static String checkIfArgumentsValidForCommand(String commandType, String remainingArgs) {
+        if (remainingArgs.isEmpty()) {
+            return "";
+        } else if (!remainingArgs.startsWith(DELIMITER_INDICATOR)) {
+            return Message.ERROR_PARSER_ADDITIONAL_INVALID_TOKEN;
+        } else if (containsInvalidDelimiters(remainingArgs)
+                || containsDelimitersNotFromCommand(commandType, remainingArgs)) {
+            return Message.ERROR_PARSER_INVALID_DELIMITERS;
+        } else if (containsDuplicateDelimiters(remainingArgs)) {
+            return Message.ERROR_PARSER_DUPLICATE_DELIMITERS;
+        } else {
+            return "";
+        }
+    }
     
     // MAIN PUBLIC PARSING FUNCTIONS
     /**
@@ -648,8 +663,9 @@ public class Parser {
             return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
         }
         
-        if (containsInvalidDelimiters(remainingArgs)) {
-            return new InvalidCommand(Message.ERROR_PARSER_INVALID_DELIMITERS);
+        String errorMessage = checkIfArgumentsValidForCommand(commandType, remainingArgs);
+        if (!errorMessage.isEmpty()) {
+            return new InvalidCommand(errorMessage);
         }
 
         switch (commandType.toLowerCase()) {
