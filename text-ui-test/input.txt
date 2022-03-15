@@ -19,5 +19,11 @@ y
 list
 edit 3 /by 5/5/2022
 list
+study
+start blank
+start 1 /custom 1
+resume
+stop
+leave
 bye
 
