@@ -57,7 +57,14 @@ public class Parser {
         }
     }
 
-    private static boolean validateAddDoctor(String[] addDoctorParameters) {
+    private static boolean validateAddDoctor(String[] parameters) {
+        boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters,0,6));
+        //validate full name cause specialization is also j a name
+        if (!validateFullName(parameters[6])) {
+            System.out.println("Specialization must be a name");
+            isValid = false;
+        }
+        return isValid;
     }
 
     public static String[] parseAddMedicine(String parameters) {

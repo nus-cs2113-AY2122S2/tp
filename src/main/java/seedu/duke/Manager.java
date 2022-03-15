@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
 import seedu.duke.helper.Command;
@@ -9,10 +10,11 @@ import seedu.duke.helper.UI;
  * Manager class contains the main loop that runs until application is terminated.
  */
 public class Manager {
-    UI ui = new UI();
-    Command command = new Command();
-    PatientList patientList = new PatientList();
+    private UI ui = new UI();
+    private Command command = new Command();
+    private PatientList patientList = new PatientList();
     private MedicineList medicineList = new MedicineList();
+    private DoctorList doctorList = new DoctorList();
     private boolean isTerminated = false;
 
     /**
@@ -33,6 +35,7 @@ public class Manager {
             case "view patient":
                 break;
             case "add doctor":
+                command.addDoctor(doctorList, parameters);
                 break;
             case "delete doctor":
                 break;
