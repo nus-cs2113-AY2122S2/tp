@@ -1,7 +1,8 @@
-package commands;
+package seedu.planitarium.commands;
 
-import exceptions.UnknownException;
+import seedu.planitarium.exceptions.UnknownException;
 import seedu.planitarium.parser.Parser;
+import seedu.planitarium.person.PersonList;
 
 public class CommandFactory {
     protected static final String ADD_PERSON_CMD = "add";
@@ -13,47 +14,44 @@ public class CommandFactory {
     protected static final String CALC_REMAIN = "remain";
     protected static final String LIST = "list";
     protected static final String EXIT = "bye";
-    protected String userInput;
+    protected Command newCommand;
 
-    public CommandFactory(String userInput) {
-        this.userInput = userInput;
+    public CommandFactory() {
     }
 
-    public Command getCommand() {
-        Command newCommand;
+    public Command getCommand(String userInput, PersonList personList) throws Exception {
         try {
             switch (Parser.parseKeyword(userInput)) {
             case ADD_PERSON_CMD:
-                newCommand = new AddPersonCommand(userInput);
+                newCommand = new AddPersonCommand(userInput, personList);
                 break;
             case DELETE_PERSON_CMD:
-                deletePerson();
+                newCommand = new DeletePersonCommand(userInput, personList);
                 break;
             case ADD_INCOME_CMD:
-                addIncome();
+            case ADD_SPENT_CMD:
+                newCommand = new AddRecordCommand(userInput, personList);
                 break;
             case DELETE_INCOME_CMD:
-                deleteIncome();
-                break;
-            case ADD_SPENT_CMD:
-                addSpend();
-                break;
             case DELETE_SPEND_CMD:
-                deleteSpend();
+                newCommand = new DeleteRecordCommand(userInput, personList);
                 break;
             case CALC_REMAIN:
-                personList.getRemain();
+                newCommand = new RemainCommand(userInput, personList);
                 break;
             case LIST:
-                personList.list();
+                newCommand = new ListCommand(userInput, personList);
                 break;
             case EXIT:
-                ui.exit();
-                System.exit(0);
+                newCommand = new ExitCommand(userInput, personList);
                 break;
             default:
                 throw new UnknownException();
             }
-            return newCommand;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return newCommand;
     }
+
 }

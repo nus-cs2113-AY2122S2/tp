@@ -1,4 +1,4 @@
-package exceptions;
+package seedu.planitarium.exceptions;
 
 /**
  * Thrown to indicate that a string cannot be converted into a valid monetary value in double.

@@ -1,8 +1,8 @@
 package seedu.planitarium.parser;
 
-import exceptions.InvalidIndexException;
-import exceptions.InvalidMoneyException;
-import exceptions.MissingDelimiterException;
+import seedu.planitarium.exceptions.InvalidIndexException;
+import seedu.planitarium.exceptions.InvalidMoneyException;
+import seedu.planitarium.exceptions.MissingDelimiterException;
 import seedu.planitarium.person.Person;
 import seedu.planitarium.person.PersonList;
 

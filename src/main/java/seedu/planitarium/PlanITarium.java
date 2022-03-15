@@ -3,16 +3,18 @@ package seedu.planitarium;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.*;
-import commands.Command;
+import seedu.planitarium.commands.Command;
+import seedu.planitarium.commands.CommandFactory;
 import seedu.planitarium.person.PersonList;
-import ui.UI;
+import seedu.planitarium.ui.UI;
 
 public class PlanITarium {
     public static final Logger logger = Logger.getLogger(PlanITarium.class.getName());
     protected Scanner userInput;
-    protected Command commandExecuter;
+    protected Command command;
     protected static UI ui = new UI();
     protected PersonList personList = new PersonList();
+    protected CommandFactory commandFactory = new CommandFactory();
 
     /**
      * Entry-point for the PlanITarium application.
@@ -33,8 +35,8 @@ public class PlanITarium {
         initialisePlanitarium();
         while (true) {
             userInput = new Scanner(System.in);
-            commandExecuter = new Command(userInput.nextLine(), personList);
-            commandExecuter.execute();
+            command = commandFactory.getCommand(userInput.nextLine(), personList);
+            command.execute();
         }
     }
 
