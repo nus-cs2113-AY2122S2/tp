@@ -26,6 +26,7 @@ public class DishManager {
 
     /**
      * Return the number of dishes.
+     *
      * @return the number of current dishes
      */
     public int getNumOfDishes() {
@@ -89,6 +90,7 @@ public class DishManager {
 
     /**
      * Get a copy of dishes.
+     *
      * @return a copy of dishes
      */
     public ArrayList<Dish> getDishes() {

@@ -2,8 +2,6 @@ package seedu.duke.entities;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class OrderTest {

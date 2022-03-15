@@ -1,14 +1,15 @@
 package seedu.duke.manager;
 
-import java.util.ArrayList;
-import seedu.duke.entities.Order;
 import seedu.duke.entities.Dish;
+import seedu.duke.entities.Order;
+
+import java.util.ArrayList;
 
 
 public class OrderManager {
-    private ArrayList<Order> orders;
-    private DishManager dishManager = new DishManager();
-    private ArrayList<Dish> dishes;
+    private final ArrayList<Order> orders;
+    private final DishManager dishManager = new DishManager();
+    private final ArrayList<Dish> dishes;
 
     public OrderManager() {
         this.orders = new ArrayList<Order>();
@@ -52,7 +53,7 @@ public class OrderManager {
         if (this.orders.size() == 0) {
             System.out.println("No orders!");
         }
-        for (Order order: orders) {
+        for (Order order : orders) {
             for (Dish dish : dishes) {
                 System.out.println(dish.toString());
             }
