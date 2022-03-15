@@ -69,7 +69,7 @@ public class Command {
     }
 
     public void deleteMedicine(MedicineList medicineList, String stringIndex) {
-        if (!nullChecker(stringIndex)) {
+        if (!isNull(stringIndex)) {
             return;
         }
         try {
