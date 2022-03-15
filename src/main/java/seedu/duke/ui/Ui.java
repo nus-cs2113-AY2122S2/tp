@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.ui;
 
 import java.util.Scanner;
 
@@ -15,7 +15,7 @@ public class Ui {
     }
 
     /**
-     * Prints the welcome message when user starts Duke.
+     * Prints the welcome message when user starts InvMgr.
      */
     public void showWelcome() {
         System.out.println(WELCOME_BANNER);
