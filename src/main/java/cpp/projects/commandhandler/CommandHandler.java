@@ -64,6 +64,12 @@ public class CommandHandler {
         case "adddeadline":
             projectList.addDeadline(commands[1], commands[2]);
             break;
+        case "view":
+            if (commands.length < 2) {
+                throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
+            }
+            projectList.view(commands[1]);
+            break;
         default:
             System.out.println(Constants.SEPARATOR);
             System.out.println("Unknown command.");
