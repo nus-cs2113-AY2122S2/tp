@@ -30,8 +30,8 @@ public class PersonList {
      * @return The person with the index
      */
     public Person getPerson(int index) {
-        assert(index >= 1);
-        assert(index <= numberOfMembers);
+        assert (index >= 1);
+        assert (index <= numberOfMembers);
         return personList.get(index - 1);
     }
 
@@ -50,7 +50,7 @@ public class PersonList {
      * @param name The name of the person to be added
      */
     public void addPerson(String name) {
-        assert(name != null);
+        assert (name != null);
         Person person = new Person(name);
         personList.add(person);
         numberOfMembers++;
@@ -62,8 +62,8 @@ public class PersonList {
      * @param index The index of the person to be removed
      */
     public void removePerson(int index) {
-        assert(index >= 1);
-        assert(index <= numberOfMembers);
+        assert (index >= 1);
+        assert (index <= numberOfMembers);
         personList.remove(index - 1);
         numberOfMembers--;
     }
@@ -85,7 +85,7 @@ public class PersonList {
     public void list() {
         for (int i = 0; i < numberOfMembers; i++) {
             Person person = personList.get(i);
-            System.out.println((i+1) + ". " + person.getName());
+            System.out.println((i + 1) + ". " + person.getName());
             person.listIncome();
             person.listExpenditure();
         }

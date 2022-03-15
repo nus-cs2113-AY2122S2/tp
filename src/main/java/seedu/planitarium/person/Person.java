@@ -14,7 +14,7 @@ public class Person {
      * @param name The name of the person to be created
      */
     public Person(String name) {
-        assert(name != null);
+        assert (name != null);
         this.name = name;
         incomeList = new IncomeList();
         expenditureList = new ExpenditureList();
@@ -36,7 +36,7 @@ public class Person {
      * @param amount The value of the income
      */
     public void addIncome(String description, double amount) {
-        assert(description != null);
+        assert (description != null);
         this.incomeList.addIncome(description, amount);
         System.out.println("An income of " + amount + " from " + description + " has been added to " + this.name);
     }
@@ -47,10 +47,8 @@ public class Person {
      * @param index The index of the income to be removed
      */
     public void deleteIncome(int index) {
-        System.out.println(index);
-        assert(index >= 1);
-        System.out.println(index);
-        assert(index <= getNumberOfIncomes());
+        assert (index >= 1);
+        assert (index <= getNumberOfIncomes());
         String description = incomeList.getDescription(index);
         double value = incomeList.getIncomeValue(index);
         incomeList.remove(index);
@@ -64,7 +62,7 @@ public class Person {
      * @param amount The value of the expenditure
      */
     public void addExpend(String description, double amount) {
-        assert(description != null);
+        assert (description != null);
         expenditureList.addExpenditure(description, amount);
         System.out.println("An expenditure of " + amount + " for " + description + " has been added to " + this.name);
     }
@@ -75,8 +73,8 @@ public class Person {
      * @param index The index of the expenditure to be removed.
      */
     public void deleteExpend(int index) {
-        assert(index >= 1);
-        assert(index <= getNumberOfExpenditures());
+        assert (index >= 1);
+        assert (index <= getNumberOfExpenditures());
         String description = expenditureList.getDescription(index);
         double value = expenditureList.getExpenditureValue(index);
         expenditureList.remove(index);
