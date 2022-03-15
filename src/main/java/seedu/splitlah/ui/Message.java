@@ -98,6 +98,10 @@ public abstract class Message {
     public static final String ERROR_PERSON_ACTIVITY_NOT_FOUND =
             "Activity not found.";
 
+    // Name
+    public static final String ERROR_NAME_INVALIDNAME =
+            "Invalid name. Names must contain only alphabetical characters.";
+
     // Session
     public static final String ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST =
             "Please enter a number from 1 to ";
@@ -157,4 +161,5 @@ public abstract class Message {
     // Activity List Command
     public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =
             "There are currently no activities in this session";
+
 }

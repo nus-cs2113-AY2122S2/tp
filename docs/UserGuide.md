@@ -86,8 +86,9 @@ displayed in an easy-to-read summary.
 
 
 ### Creating a session: `session /create`
+
 > Creates a new session.<br>
-> Sessions are a way for the user to manage their gatherings that happen across the day.
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ...]`
 
@@ -99,8 +100,8 @@ Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ..
   * Each individual name is **case-insensitive**.
 
 > **💡 Note(s):**
->- The `[SESSION_NAME]` should be unique across sessions.
->- Each name in `[NAME1 NAME2 ...]` for the session should be unique.
+>- The `[SESSION_NAME]` should be unique across all active sessions.
+>- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
 
 Example of usage:
 1. Adds a new session named Class Outing with Alice and Bob involved on 15-03-2022.
@@ -108,10 +109,12 @@ Example of usage:
    ![Session create command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand.png)
 <br>
 <br>
-### Deleting a session: `session /delete`
-> Deletes an existing session that is managed by SplitLah. <br>
-> Sessions are a way for the user to manage their gatherings that happen across the day.
 
+### Deleting a session: `session /delete`
+
+> Deletes an existing session.<br>
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
+> 
 Format: `session /delete /sid [SESSION_ID]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
@@ -121,13 +124,16 @@ Format: `session /delete /sid [SESSION_ID]`
 >- A confirmation must be given before deletion takes place.
 
 Example of usage:
-1. Remove an existing session that was created with a session unique identifier of 1.
+1. Remove an existing session with a unique identifier of 1.
    - `session /delete /sid 1` <br>
    ![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
 <br>
 <br>
+
 ### Listing all sessions: `session /list`
-> List all sessions that were previously created.
+
+> List all active sessions. Deleted sessions will not be listed.<br>
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `session /list`
 
@@ -136,11 +142,12 @@ Example of usage:
 ![Session list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionListCommand.png)
 <br>
 <br>
+
 ### Creating an activity: `activity /create`
-> Creates a new activity within a particular session to be managed by SplitLah. <br>
-> Activities are a way for the user to keep track of the activities and their respective costs throughout a session. 
-> <br>
-> Other information include the person who paid for the activity and the people involved in the activity.
+
+> Creates a new activity and assigns it to a session. <br>
+> An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
 /c [TOTAL_COST] [OPTIONAL_ARGUMENTS]`
@@ -160,29 +167,32 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 * `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
 
 > **💡 Note(s):**
->- The session with a unique identifier of `[SESSION_ID]` has to exist before the activity can be created.
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to 
+> it.
 >- The `[ACTIVITY_NAME]` should be unique across all activities.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
->- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` have to be names that are already captured in the session with
-   a unique identifier of `[SESSION_ID]`.
+>- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
+   `[SESSION_ID]`.
 
 Examples of usage:
-1. Adds a new activity in a session with a session unique identifier of 1, named Class Lunch, where Alice paid for both
-   Bob and herself with a total cost of $10.
+1. Adds a new activity to a session with a session unique identifier of 1 named Class Lunch. Alice paid a total of $10
+   for both Bob and herself which will be split equally between them later on.
    - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /c 10` <br>
    ![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
 <br>
 <br>
-2. Adds a new activity in a session with a session unique identifier of 1, named Class Lunch, where Alice paid for both
-   Bob and herself. Alice's meal costs $3.50 while Bob's meal costs $7.
-   - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7 <br>
+3. Adds a new activity to a session with a session unique identifier of 1 named Class Lunch. Alice paid for both
+   Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.
+   - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7` <br>
    ![Activity create command [2] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[2].png)
 <br>
 <br>
+
 ### Deleting an activity: `activity /delete`
-> Deletes an existing activity in a particular session that is managed by SplitLah. <br>
-> Activities are a way for the user to keep track of the activities and their respective costs throughout a session.
-> <br>
+
+> Deletes an existing activity from a particular session.<br>
+> An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 
@@ -197,7 +207,7 @@ Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 >- A confirmation must be given before deletion takes place.
 
 Example of usage:
-1. Remove an existing activity that was created with an activity unique identifier of 1 in a session with the unique
+1. Remove an existing activity with a unique identifier of 1 from a session with a unique
    identifier of 1.
     - `activity /delete /sid 1 /aid 1` <br>
     ![Activity delete command Screenshot]()
@@ -205,9 +215,9 @@ Example of usage:
 <br>
 
 ### Viewing an activity: `activity /view`
-> Allows user to view an existing activity in a particular session that is managed by SplitLah. <br>
-> Activities are a way for the user to keep track of the activities and their respective costs throughout a session. <br>
-> Sessions are a way for the user to manage their gatherings that happen across the day.
+
+> Displays details about an activity.<br>
+> An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
 
 Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 
@@ -232,9 +242,10 @@ Examples of usage:
 <br>
 
 ### Listing all activities in a session: `activity /list`
-> Allows user to view all the existing activities in a particular session that is managed by SplitLah. <br>
-Activities are a way for the user to keep track of the activities and their respective costs throughout a session. <br>
-> Sessions are a way for the user to manage their gatherings that happen across the day.
+
+> Allows user to view all existing activities in a particular session.<br>
+> An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `activity /list /sid [SESSION_ID]`
 
@@ -243,11 +254,11 @@ Format: `activity /list /sid [SESSION_ID]`
     * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 
 > **💡 Note(s):**
->- The session with a unique identifier of `[SESSION_ID]` has to exist before the activities can be listed.
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before its activities can be listed.
 
 
 Examples of usage:
-1. List the activities in a session with a unique identifier of 1.
+1. Lists all activities in a session with a unique identifier of 1.
     - `activity /list /sid 1`
       <br>
       ![Activity list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityListCommand.png)
@@ -257,9 +268,9 @@ Examples of usage:
 <br>
 
 ### Settling all transactions for a session: `session /summary`
-> Prints out a summary of the session to tell you, for that session, who needs to pay how much to another person
-> in order for everyone to have no remaining debts and no more debt to collect from others.<br>
-> This helps you to quickly calculate all payments that have to be done at the end of the day for a group outing.
+
+> Displays a summary of a session that details how much each person must pay and to whom for all debts to be resolved.<br>
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `session /summary /sid [SESSION_ID]`
 
@@ -274,11 +285,12 @@ Example of usage:
    and Bob involved on 15-03-2022.
 2. An [activity](#creating-an-activity-activity-create) was created with activity named Class Lunch, where Alice paid for both
    Bob and herself with a total cost of $10.
-3. Get a session summary for an existing session with a session unique identifier of 1.
+3. Get a session summary for an active session with a session unique identifier of 1.
    - `session /summary /sid 1` <br>
    ![Session summary command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionSummaryCommand.png)
 <br>
 <br>
+ 
 ## FAQ
 
 **Q**: Is data saved to the disk upon exit?
