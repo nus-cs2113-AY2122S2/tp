@@ -9,9 +9,15 @@ public class ExpenseParser {
     public static final String ASSERT_INPUT_NOT_NULL = "User input should not be null";
     public static final String ASSERT_DELIMITER_NOT_NULL = "Delimiter should not be null";
     public static final String ASSERT_RESULT_NOT_NULL = "Result should not be null";
+    public static final int EXPENSE_FIELDS = 1;
+    public static final int SPLIT_IN_HALF = 2;
+    public static final int RIGHT_SIDE = 1;
+    public static final int LEFT_SIDE = 0;
+    public static final int ZERO = 0;
+    public static final int INDEX_TO_BE_DELETED = 1;
 
     public static String[] parseNewExpense(String userInput) throws IndexOutOfBoundsException {
-        String rawInput = userInput.split(" ", 2)[1].trim();
+        String rawInput = userInput.split(" ", SPLIT_IN_HALF)[EXPENSE_FIELDS].trim();
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;
         if (!rawInput.contains(DATE_DELIMITER) || !rawInput.contains(AMOUNT_DELIMITER)
                 || !rawInput.contains(CATEGORY_DELIMITER) || !rawInput.contains(REMARKS_DELIMITER)) {
@@ -30,17 +36,17 @@ public class ExpenseParser {
         assert userInput != null : ASSERT_INPUT_NOT_NULL;
         assert leftDelimiter != null : ASSERT_DELIMITER_NOT_NULL;
         assert rightDelimiter != null : ASSERT_DELIMITER_NOT_NULL;
-        String[] stripLeftOfDelimiter = userInput.split(leftDelimiter, 2);
+        String[] stripLeftOfDelimiter = userInput.split(leftDelimiter, SPLIT_IN_HALF);
         String rightOfDelimiter;
-        if (stripLeftOfDelimiter.length == 2) {
-            rightOfDelimiter  = stripLeftOfDelimiter[1];
+        if (stripLeftOfDelimiter.length == SPLIT_IN_HALF) {
+            rightOfDelimiter  = stripLeftOfDelimiter[RIGHT_SIDE];
         } else {
-            rightOfDelimiter =  stripLeftOfDelimiter[0];
+            rightOfDelimiter =  stripLeftOfDelimiter[LEFT_SIDE];
         }
-        String[] stripRightOfDelimiter = rightOfDelimiter.split(rightDelimiter, 2);
-        String result = stripRightOfDelimiter[0].trim();
+        String[] stripRightOfDelimiter = rightOfDelimiter.split(rightDelimiter, SPLIT_IN_HALF);
+        String result = stripRightOfDelimiter[LEFT_SIDE].trim();
         assert result != null : ASSERT_RESULT_NOT_NULL;
-        if (result.length() == 0) {
+        if (result.length() == ZERO) {
             throw new IndexOutOfBoundsException();
         }
         return result;
@@ -49,8 +55,8 @@ public class ExpenseParser {
 
     public static int parseDeleteExpense(String userInput) throws IndexOutOfBoundsException, NumberFormatException {
         assert userInput != null : ASSERT_INPUT_NOT_NULL;
-        String[] rawInput = userInput.split(" ", 2);
-        int result = Integer.parseInt(rawInput[1]);
+        String[] rawInput = userInput.split(" ", SPLIT_IN_HALF);
+        int result = Integer.parseInt(rawInput[INDEX_TO_BE_DELETED]);
         return result;
     }
 }
