@@ -31,20 +31,20 @@ public class Parser {
     /**
      * Returns the term surrounded by two delimiters.
      *
-     * @param text          The text containing the term to be parsed.
-     * @param delimiter_left The delimiter on the left of term.
-     * @param delimiter_right The delimiter on the right of term.
+     * @param text           The text containing the term to be parsed.
+     * @param delimiterLeft  The delimiter on the left of term.
+     * @param delimiterRight The delimiter on the right of term.
      * @return A non-delimiter-surrounded term.
      */
-     public static String parseDelimitedTerm(String text, String delimiter_left, String delimiter_right) {
-        String[] firstParse = text.split(delimiter_left, LIMIT_TWO_TOKENS);
+    public static String parseDelimitedTerm(String text, String delimiterLeft, String delimiterRight) {
+        String[] firstParse = text.split(delimiterLeft, LIMIT_TWO_TOKENS);
         String leftRemoved;
         if (firstParse.length == LIMIT_TWO_TOKENS) {
             leftRemoved = firstParse[INDEX_LEFT_REMOVED];
         } else {
             leftRemoved = firstParse[INDEX_LEFT_NOT_EXIST];
         }
-        String[] secondParse = leftRemoved.split(delimiter_right, LIMIT_TWO_TOKENS);
+        String[] secondParse = leftRemoved.split(delimiterRight, LIMIT_TWO_TOKENS);
         String rightRemoved = secondParse[INDEX_RIGHT_REMOVED];
         return rightRemoved.trim();
     }
@@ -148,7 +148,7 @@ public class Parser {
             //if (amount.contains(DELIMITER_MONEY)) {
             //    String decimalPlace = parseDelimitedTerm(amount, DELIMITER_MONEY, DELIMITER_BACK);
             //    if (decimalPlace.length() > LIMIT_TWO_DECIMAL) {
-                    // to be caught immediately within this method
+            // to be caught immediately within this method
             //        throw new NumberFormatException();
             //    }
             //}
@@ -172,7 +172,7 @@ public class Parser {
             checkTooHighIndex(checkIndex, personList.getNumberOfMembers());
             checkTooLowIndex(checkIndex, MIN_USER_INDEX);
             return checkIndex;
-        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidIndexException(userIndex);
         }
     }
@@ -185,13 +185,13 @@ public class Parser {
      * @throws InvalidIndexException if index is not a valid integer or out of bounds.
      */
     public static int getValidExpenditureIndex(String expenditureIndex, Person person)
-                throws InvalidIndexException {
+            throws InvalidIndexException {
         try {
             int checkIndex = Integer.parseInt(expenditureIndex);
             checkTooHighIndex(checkIndex, person.getNumberOfExpenditures());
             checkTooLowIndex(checkIndex, MIN_EXPENDITURE_INDEX);
             return checkIndex;
-        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidIndexException(expenditureIndex);
         }
     }
@@ -210,7 +210,7 @@ public class Parser {
             checkTooHighIndex(checkIndex, person.getNumberOfIncomes());
             checkTooLowIndex(checkIndex, MIN_INCOME_INDEX);
             return checkIndex;
-        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidIndexException(incomeIndex);
         }
     }
