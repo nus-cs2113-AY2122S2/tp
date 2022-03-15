@@ -1,7 +1,6 @@
 package seedu.planitarium.expenditure;
 
 import org.junit.jupiter.api.Test;
-import seedu.planitarium.ExpenditureList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
