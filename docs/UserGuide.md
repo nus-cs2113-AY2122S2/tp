@@ -86,8 +86,9 @@ displayed in an easy-to-read summary.
 
 
 ### Creating a session: `session /create`
+
 > Creates a new session.<br>
-> A session represents a period of time and contains one or more activities.
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ...]`
 
@@ -108,9 +109,12 @@ Example of usage:
    ![Session create command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand.png)
 <br>
 <br>
-### Deleting a session: `session /delete`
-> Deletes an existing session.
 
+### Deleting a session: `session /delete`
+
+> Deletes an existing session.<br>
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
+> 
 Format: `session /delete /sid [SESSION_ID]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
@@ -125,8 +129,11 @@ Example of usage:
    ![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
 <br>
 <br>
+
 ### Listing all sessions: `session /list`
-> List all active sessions. Deleted sessions will not be listed.
+
+> List all active sessions. Deleted sessions will not be listed.<br>
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `session /list`
 
@@ -135,9 +142,12 @@ Example of usage:
 ![Session list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionListCommand.png)
 <br>
 <br>
+
 ### Creating an activity: `activity /create`
+
 > Creates a new activity and assigns it to a session. <br>
-> An activity stores an activity name, costs related to the activity and the name of the payer.
+> An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
 /c [TOTAL_COST] [OPTIONAL_ARGUMENTS]`
@@ -157,7 +167,7 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 * `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
 
 > **💡 Note(s):**
->- A session with a unique identifier of `[SESSION_ID]` has to exist before the activity can be created and assigned to 
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to 
 > it.
 >- The `[ACTIVITY_NAME]` should be unique across all activities.
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
@@ -166,19 +176,23 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 
 Examples of usage:
 1. Adds a new activity to a session with a session unique identifier of 1 named Class Lunch. Alice paid a total of $10
-   for both Bob and herself.
+   for both Bob and herself which will be split equally between them later on.
    - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /c 10` <br>
    ![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
 <br>
 <br>
 3. Adds a new activity to a session with a session unique identifier of 1 named Class Lunch. Alice paid for both
    Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.
-   - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7 <br>
+   - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7` <br>
    ![Activity create command [2] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[2].png)
 <br>
 <br>
+
 ### Deleting an activity: `activity /delete`
-> Deletes an activity from a particular session.
+
+> Deletes an existing activity from a particular session.<br>
+> An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 
@@ -201,7 +215,9 @@ Example of usage:
 <br>
 
 ### Viewing an activity: `activity /view`
-> Displays details about an activity.
+
+> Displays details about an activity.<br>
+> An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
 
 Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 
@@ -226,7 +242,10 @@ Examples of usage:
 <br>
 
 ### Listing all activities in a session: `activity /list`
-> Allows user to view all existing activities in a particular session.
+
+> Allows user to view all existing activities in a particular session.<br>
+> An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `activity /list /sid [SESSION_ID]`
 
@@ -249,7 +268,9 @@ Examples of usage:
 <br>
 
 ### Settling all transactions for a session: `session /summary`
-> Displays a summary of a session that details how much each person must pay and to whom for all debts to be resolved.
+
+> Displays a summary of a session that details how much each person must pay and to whom for all debts to be resolved.<br>
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `session /summary /sid [SESSION_ID]`
 
@@ -264,11 +285,12 @@ Example of usage:
    and Bob involved on 15-03-2022.
 2. An [activity](#creating-an-activity-activity-create) was created with activity named Class Lunch, where Alice paid for both
    Bob and herself with a total cost of $10.
-3. Get a session summary for an existing session with a session unique identifier of 1.
+3. Get a session summary for an active session with a session unique identifier of 1.
    - `session /summary /sid 1` <br>
    ![Session summary command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionSummaryCommand.png)
 <br>
 <br>
+ 
 ## FAQ
 
 **Q**: Is data saved to the disk upon exit?
