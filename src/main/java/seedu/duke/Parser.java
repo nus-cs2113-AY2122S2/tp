@@ -83,7 +83,11 @@ public class Parser {
     }
 
     private void checkTime(int startTime, int endTime) throws InvalidTimeException {
-        if (startTime >= 2400 || endTime >= 2400) {
+        int startMinutes = startTime % 100;
+        int endMinutes = endTime % 100;
+        int startHours = startTime / 100;
+        int endHours = endTime / 100;
+        if (startMinutes >= 60 || endMinutes >= 60 || startHours >= 24 || endHours >= 24) {
             throw new InvalidTimeException();
         }
     }
