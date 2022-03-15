@@ -53,7 +53,7 @@ public class Commands {
             System.out.println("There is no inventory in the warehouse.");
             return;
         }
-        System.out.println("List of inventory items: ");
+        System.out.println("List of inventory items:");
         int counter = 0;
         for (Goods good : userGoods) {
             System.out.println((counter + 1) + ". " + good.getName());
