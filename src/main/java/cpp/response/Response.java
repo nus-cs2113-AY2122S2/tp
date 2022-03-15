@@ -3,7 +3,7 @@ package cpp.response;
 import cpp.Constants;
 
 /**
- * Handles the responses to give to user
+ * Handles the responses to give to user.
  */
 public class Response {
     public static void displayWelcome() {
