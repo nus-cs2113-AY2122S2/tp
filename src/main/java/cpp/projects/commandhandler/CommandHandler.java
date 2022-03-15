@@ -61,6 +61,9 @@ public class CommandHandler {
         case "adddeadline":
             projectList.addDeadline(commands[1], commands[2]);
             break;
+        case "help":
+            Response.printHelp();
+            break;
         default:
             Response.printDefault();
             break;
