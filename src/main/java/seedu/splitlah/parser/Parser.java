@@ -328,6 +328,56 @@ public class Parser {
         }
         return false;
     }
+
+    private static boolean hasStringInStringArray(String stringToCheck, String[] stringArray) {
+        if (stringToCheck == null || stringArray == null) {
+            return false;
+        }
+        
+        for (String string : stringArray) {
+            if (string.equalsIgnoreCase(stringToCheck)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean containsDelimitersNotFromCommand(String commandType, String remainingArgs) {
+        String[] delimiterList;
+        switch (commandType) {
+        case ActivityCreateCommand.COMMAND_TEXT:
+            delimiterList = ActivityCreateCommand.COMMAND_DELIMITERS;
+            break;
+        case ActivityDeleteCommand.COMMAND_TEXT:
+            delimiterList = ActivityDeleteCommand.COMMAND_DELIMITERS;
+            break;
+        case ActivityListCommand.COMMAND_TEXT:
+            delimiterList = ActivityListCommand.COMMAND_DELIMITERS;
+            break;
+        case ActivityViewCommand.COMMAND_TEXT:
+            delimiterList = ActivityViewCommand.COMMAND_DELIMITERS;
+            break;
+        case SessionCreateCommand.COMMAND_TEXT:
+            delimiterList = SessionCreateCommand.COMMAND_DELIMITERS;
+            break;
+        case SessionDeleteCommand.COMMAND_TEXT:
+            delimiterList = SessionDeleteCommand.COMMAND_DELIMITERS;
+            break;
+        case SessionSummaryCommand.COMMAND_TEXT:
+            delimiterList = SessionSummaryCommand.COMMAND_DELIMITERS;
+            break;
+        default:
+            return !remainingArgs.isEmpty();
+        }
+
+        String[] argumentTokens = remainingArgs.split(REGEX_WHITESPACES_DELIMITER);
+        for (String token : argumentTokens) {
+            if (token.contains(DELIMITER_INDICATOR) && !hasStringInStringArray(token, delimiterList)) {
+                return true;
+            }
+        }
+        return false;
+    }
     
     // MAIN PUBLIC PARSING FUNCTIONS
     /**
