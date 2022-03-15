@@ -1,14 +1,16 @@
 package seedu.duke.util;
 
 public class StringConstants {
-    /**.
+    /**
+     * .
      * For start and exit of program
      */
     public static final String HELLO_MESSAGE = "Hello, this is Mod Happy (○'◡'○)ﾉ";
     public static final String GOOD_BYE_MESSAGE = "See you later ヾ(*´▽'*)ﾉ";
     public static final String INITIAL_FAILED_MESSAGE = "Failed to start Mod Happy (..•˘_˘•..)";
 
-    /**.
+    /**
+     * .
      * For addCommand
      */
     public static final String ADD_TASK_MESSAGE_TOP = "Hey! I have added this task under %s!";
@@ -17,23 +19,27 @@ public class StringConstants {
     public static final String MODULE_ALREADY_EXISTS = "A module with that name already exists...";
     public static final String ESTIMATED_WORKING_TIME = "Estimated Working Time: ";
 
-    /**.
+    /**
+     * .
      * For deleteCommand
      */
     public static final String DELETE_MESSAGE = " has been deleted.";
 
-    /**.
+    /**
+     * .
      * For exitCommand
      */
     public static final String READY_EXIT = "I am ready to exit *_*";
 
-    /**.
+    /**
+     * .
      * For listCommand
      */
     public static final String LIST_MESSAGE_TOP = "Ok! Here are the task(s) in your list:";
     public static final String EMPTY_LIST = "(empty)";
 
-    /**.
+    /**
+     * .
      * For markCommand
      */
     public static final String MARK_MESSAGE_TOP = "Nice! I have marked this task as completed!";
@@ -41,7 +47,8 @@ public class StringConstants {
     public static final String ICON_UNCOMPLETED = "( )";
     public static final String ICON_COMPLETED = "(X)";
 
-    /**.
+    /**
+     * .
      * For helpCommand
      */
     public static final String HELP_NOTE = "Compulsory Flags start with \"/\". Optional Flags start with \"-\".\n"
@@ -55,6 +62,10 @@ public class StringConstants {
     public static final String DELETE_HELP = "Deletes an object as indicated by command input.\n"
             + "Format to delete a module: del /m MODULE_CODE\n"
             + "Format to delete a task:   del /t TASK_NUMBER [-m MODULE_CODE]";
+    public static final String EDIT_HELP = "Edits a task or module indicated by command input.\n"
+            + "Format to edit a module: edit /m MODULE_CODE -d \"MODULE_DESCRIPTION\"\n"
+            + "Format to edit a task: edit /t TASK_INDEX"
+            + "(-n \"TASK_NAME\" or -d \"TASK_DESCRIPTION\" or -t \"ESTIMATED_WORKING_TIME\") [-m MODULE_CODE]";
     public static final String LIST_HELP = "Displays a list of all tasks, grouped by module code.\n"
             + "Format to list all tasks: list";
     public static final String MARK_HELP = "Mark a task with the given task number from the specified module."
@@ -66,13 +77,15 @@ public class StringConstants {
             + "Available commands: exit, add, del, list, mark, help";
     public static final String HELP_EXCEPTION = "Sorry, but no help exists for that command.";
 
-    /**.
+    /**
+     * .
      * For command result
      */
     public static final String ARRAYLIST_RESULT = "ArrayList";
     public static final String STRING_RESULT = "String";
 
-    /**.
+    /**
+     * .
      * For exceptions
      */
     public static final String ERROR_NO_SUCH_MODULE = "Sorry, no such module exists ._.";
@@ -81,7 +94,8 @@ public class StringConstants {
     public static final String ERROR_UNKNOWN_COMMAND = "Sorry, I don't understand the following command:";
     public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, I don't understand the result format:";
 
-    /**.
+    /**
+     * .
      * For parsers
      */
     public static final String TASK_NAME = "taskName";
@@ -100,11 +114,13 @@ public class StringConstants {
     public static final String EXIT_COMMAND_WORD = "exit";
     public static final String ADD_COMMAND_WORD = "add";
     public static final String DELETE_COMMAND_WORD = "del";
+    public static final String EDIT_COMMAND_WORD = "edit";
     public static final String LIST_COMMAND_WORD = "list";
     public static final String MARK_COMMAND_WORD = "mark";
     public static final String HELP_COMMAND_WORD = "help";
 
-    /**.
+    /**
+     * .
      * General Strings
      */
     public static final String STRING = "String";
