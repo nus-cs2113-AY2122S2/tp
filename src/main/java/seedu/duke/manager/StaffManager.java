@@ -44,11 +44,12 @@ public class StaffManager {
      * @param salary    Salary of the Staff.
      */
     public void addStaff(int staffId, String staffName, String position, double salary) {
+        assert staffId > 0:"Invalid ID";
         if (findByStaffId(staffId, false) != null) {
-            logger.log(Level.INFO, "Failed to add staff: Staff with same ID already exists.");
+            logInfo("Failed to add staff: Staff with same ID already exists.");
             System.out.println("Staff with the same ID already exists, use another ID...");
         }
-        logger.log(Level.INFO, "Successful addition of staff");
+        logInfo("Successful addition of staff");
         staffs.add(new Staff(staffId, staffName, position, salary));
     }
 
@@ -59,21 +60,22 @@ public class StaffManager {
      * @param printMsg Boolean to determine if found message should be printed.
      */
     public Staff findByStaffId(int staffId, boolean printMsg) {
+        assert staffId > 0:"Invalid ID";
         if (staffId <= 0) {
-            logger.log(Level.INFO, "Invalid input for ID.");
+            logInfo("Invalid input for ID.");
             System.out.println("Staff ID cannot be zero or negative.");
             return null;
         }
         for (Staff staff : staffs) {
             if (staffId == staff.getStaffId()) {
                 if (printMsg) {
-                    logger.log(Level.INFO, "Successful search for staff.");
+                    logInfo("Successful search for staff.");
                     System.out.println(staff + " found!");
                 }
                 return staff;
             }
         }
-        logger.log(Level.INFO, "Unsuccessful search for staff.");
+        logInfo("Unsuccessful search for staff.");
         if (printMsg) {
             System.out.println("Staff with ID " + staffId + " not found!");
         }
@@ -86,15 +88,20 @@ public class StaffManager {
      * @param staffId ID of the Staff
      */
     public void deleteByStaffId(int staffId) {
+        assert staffId > 0:"Invalid ID";
         Staff staff = findByStaffId(staffId, false);
         if (staff != null) {
             staffs.remove(staff);
-            logger.log(Level.INFO, "Successful deletion of staff.");
+            logInfo("Successful deletion of staff.");
             System.out.println(staff + " had been deleted from our staff records.");
         } else {
-            logger.log(Level.INFO, "Failed to delete staff: No staff with matching ID.");
+            logInfo("Failed to delete staff: No staff with matching ID.");
             System.out.println("No staff from our staff records has a matching ID.");
         }
+    }
+
+    private static void logInfo(String msg) {
+        logger.log(Level.INFO, msg);
     }
 
     /**

@@ -35,7 +35,7 @@ public class StaffController extends Controller {
             deleteStaff();
             break;
         case 0:
-            logger.log(Level.INFO, "Exiting staff Menu");
+            logInfo("Exiting staff Menu");
             System.out.println("Exiting Staff Menu...");
             return true;
         default:
@@ -53,9 +53,10 @@ public class StaffController extends Controller {
      * @throws OperationTerminationException When user inputs terminator.
      */
     private void findStaff() throws OperationTerminationException {
-        logger.log(Level.INFO, "Finding staff");
+        logInfo("Finding staff");
         System.out.println("Finding staff...");
         int staffId = InputParser.getInteger("ID of staff: ");
+        assert staffId > 0:"Invalid ID";
         staffManager.findByStaffId(staffId, true);
     }
 
@@ -65,12 +66,14 @@ public class StaffController extends Controller {
      * @throws OperationTerminationException When user inputs terminator.
      */
     private void addStaff() throws OperationTerminationException {
-        logger.log(Level.INFO, "Adding staff");
+        logInfo("Adding staff");
         System.out.println("Adding new staff...");
         final int staffId = InputParser.getInteger("ID of staff: ");
+        assert staffId > 0:"Invalid ID";
         final String staffName = InputParser.getString("Name of staff: ");
         final String position = InputParser.getString("Position of staff: ");
         final double salary = InputParser.getDouble("Salary of staff: ");
+        assert salary > 0:"Invalid salary";
         staffManager.addStaff(staffId, staffName, position, salary);
     }
 
@@ -80,10 +83,15 @@ public class StaffController extends Controller {
      * @throws OperationTerminationException When user inputs terminator.
      */
     private void deleteStaff() throws OperationTerminationException {
-        logger.log(Level.INFO, "Deleting staff");
+        logInfo("Deleting staff");
         System.out.println("Deleting staff...");
         final int staffId = InputParser.getInteger("ID of staff: ");
+        assert staffId > 0:"Invalid ID";
         staffManager.deleteByStaffId(staffId);
+    }
+
+    private static void logInfo(String msg) {
+        logger.log(Level.INFO, msg);
     }
 
     /**

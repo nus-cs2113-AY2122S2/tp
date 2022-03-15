@@ -31,6 +31,7 @@ public class Staff {
     }
 
     public void setStaffId(int staffId) {
+        assert staffId > 0:"Invalid ID";
         if (staffId <= 0) {
             System.out.println("Staff ID cannot be zero or negative.");
             return;
@@ -43,6 +44,7 @@ public class Staff {
     }
 
     public void setStaffName(String staffName) {
+        assert isValidName(staffName):"Invalid name";
         if (!isValidName(staffName)) {
             System.out.println("Staff name cannot be null.");
             return;
@@ -55,6 +57,7 @@ public class Staff {
     }
 
     public void setPosition(String position) {
+        assert isValidName(position):"Invalid position";
         if (!isValidName(position)) {
             System.out.println("Staff name cannot be null.");
             return;
@@ -67,6 +70,7 @@ public class Staff {
     }
 
     public void setSalary(double salary) {
+        assert salary > 0:"Invalid salary";
         if (salary <= 0) {
             System.out.println("Salary cannot be zero or negative.");
             return;
