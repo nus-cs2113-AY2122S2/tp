@@ -35,7 +35,12 @@ public class TaskListStorage extends ListStorage<Task> {
         try {
             Reader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8);
             Task[] list = gson.fromJson(reader, Task[].class);
-            ArrayList<Task> arrayList = new ArrayList<>(Arrays.asList(list));
+            ArrayList<Task> arrayList;
+            if (list != null) {
+                arrayList = new ArrayList<>(Arrays.asList(list));
+            } else {
+                arrayList = new ArrayList<>();
+            }
             return arrayList;
 
         } catch (Exception e) {
