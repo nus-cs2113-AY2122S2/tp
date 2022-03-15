@@ -20,8 +20,8 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
 - Copy the file to your preferred folder as the home folder for your CSProj Planner.
 - Double click the file to start the app.
 - Type your command in the command box and press Enter to execute it. Some example commands you can try:
-   -  `addproj cs2113`: Add a new project named cs2113 to the planner.
-   - `viewproj`: list out all projects in the list.  
+   - `addproject cs2113`: Add a new project named cs2113 to the planner.
+   - `listproject`: list out all projects in the list.  
    - `exit`: Exits the project.
 
 
@@ -60,6 +60,21 @@ Todo has been marked as done successfully:
 [X] buy textbooks
 ```
 
+### add a deadline to a project: `addDeadline`
+Adds a deadline date to a project
+
+Format: `addDeadline [project_name] [deadline]`
+
+#### Example of usage
+`addDeadline nextProject Friday`
+
+#### Example of output
+```Deadline added to nextProject: Sunday```
+
+### help: `help`
+List out all available commands
+
+Format: `help`
 
 ### exit: `exit`
 Exit the program
@@ -79,5 +94,6 @@ Format: `exit`
 |---------------------|------------------------------------------|
 | view all project(s) | `listproject`, `listprojects`            |
 | add todo            | `todo [project_index] [description]`     |
-| mark todo as done   | `mark [project_index] [todo_index]`
+| mark todo as done   | `mark [project_index] [todo_index]`      |
+| add deadline        | `addDeadline  [project_name] [deadline]` |
 | Exit                | `exit`                                   |
