@@ -41,20 +41,24 @@ public class Reminder {
      * with reference to user local machine date.
      */
     public void showDailyTask() {
-        ArrayList<Task> filteredDailyTasks = (ArrayList<Task>) tasks.stream()
-                .filter((t) -> isEqualDate(t.getByDate(), currentDate))
-                .filter((t) -> !t.isDone())
-                .collect(toList());
+        try {
+            ArrayList<Task> filteredDailyTasks = (ArrayList<Task>) tasks.stream()
+                    .filter((t) -> isEqualDate(t.getByDate(), currentDate))
+                    .filter((t) -> !t.isDone())
+                    .collect(toList());
 
-        if (filteredDailyTasks.isEmpty()) {
-            ui.showToUser("Your schedule is empty today.");
-        } else {
-            System.out.println("Schedule for today:");
-            for (Task task : filteredDailyTasks) {
-                System.out.println(task.toString());
+            if (filteredDailyTasks.isEmpty()) {
+                ui.showToUser("Your schedule is empty today.");
+            } else {
+                System.out.println("Schedule for today:");
+                for (Task task : filteredDailyTasks) {
+                    System.out.println(task.toString());
+                }
             }
+            ui.showLine();
+        } catch (Exception e) {
+            System.out.println("Wrong date format");
         }
-        ui.showLine();
     }
 
     /**
@@ -62,23 +66,27 @@ public class Reminder {
      * with reference to user local machine date.
      */
     public void showWeeklyTask() {
-        LocalDate nextWeekDate = currentDate.plusDays(7);
+        try {
+            LocalDate nextWeekDate = currentDate.plusDays(7);
 
-        ArrayList<Task> filteredThisWeekTasks = (ArrayList<Task>) tasks.stream()
-                .filter((t) -> isBeforeDate(t.getByDate(), nextWeekDate))
-                .filter((t) -> !t.isDone())
-                .sorted(Comparator.comparing(Task::getByDate))
-                .collect(toList());
+            ArrayList<Task> filteredThisWeekTasks = (ArrayList<Task>) tasks.stream()
+                    .filter((t) -> isBeforeDate(t.getByDate(), nextWeekDate))
+                    .filter((t) -> !t.isDone())
+                    .sorted(Comparator.comparing(Task::getByDate))
+                    .collect(toList());
 
-        if (filteredThisWeekTasks.isEmpty()) {
-            ui.showToUser("You do not have any pending task for the week.");
-        } else {
-            System.out.println("Tasks to be done within the week:");
-            for (Task task : filteredThisWeekTasks) {
-                System.out.println(task.toString());
+            if (filteredThisWeekTasks.isEmpty()) {
+                ui.showToUser("You do not have any pending task for the week.");
+            } else {
+                System.out.println("Tasks to be done within the week:");
+                for (Task task : filteredThisWeekTasks) {
+                    System.out.println(task.toString());
+                }
             }
+            ui.showLine();
+        } catch (Exception e) {
+            System.out.println("Wrong date format");
         }
-        ui.showLine();
     }
 
     private boolean isEqualDate(String currentDate, LocalDate compareDate) {
