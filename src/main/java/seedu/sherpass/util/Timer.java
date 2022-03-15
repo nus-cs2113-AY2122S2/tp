@@ -9,7 +9,7 @@ import static seedu.sherpass.constant.TimerConstant.ONE_HOUR;
 
 public class Timer extends Thread {
 
-    private volatile boolean timerPaused = false;
+    private volatile boolean isTimerPaused = false;
     private boolean forcedStop = false;
     private boolean hasTimeLeft = false;
     private static Ui ui;
@@ -22,7 +22,7 @@ public class Timer extends Thread {
      */
     public Timer(Ui ui) {
         timeLeft = NO_TIME_LEFT;
-        this.ui = ui;
+        Timer.ui = ui;
     }
 
     /**
@@ -53,7 +53,7 @@ public class Timer extends Thread {
             Thread.sleep(1000);
             timeLeft -= 1;
             updateHasTimeLeft();
-            if (timerPaused) {
+            if (isTimerPaused) {
                 waitForTimerToResume();
             }
         } catch (InterruptedException e) {
@@ -73,7 +73,7 @@ public class Timer extends Thread {
      */
     private void waitForTimerToResume() throws InterruptedException {
         synchronized (this) {
-            while (timerPaused) {
+            while (isTimerPaused) {
                 wait();
             }
         }
@@ -144,7 +144,7 @@ public class Timer extends Thread {
     }
 
     public boolean isTimerPaused() {
-        return timerPaused;
+        return isTimerPaused;
     }
 
     /**
@@ -152,7 +152,7 @@ public class Timer extends Thread {
      */
     public void resumeTimer() {
         synchronized (this) {
-            timerPaused = false;
+            isTimerPaused = false;
             notify();
         }
         ui.showToUser("Okay! I've resumed the timer. You have " + timeLeft + " seconds left.");
@@ -161,7 +161,7 @@ public class Timer extends Thread {
     public void pauseTimer() {
         ui.showToUser("Got it! I've paused the timer.\n"
                 + "Feel free to resume whenever you're ready.");
-        timerPaused = true;
+        isTimerPaused = true;
     }
 
     /**
