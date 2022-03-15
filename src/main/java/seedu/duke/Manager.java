@@ -31,6 +31,7 @@ public class Manager {
                 command.deletePatient(patientList, parameters);
                 break;
             case "view patient":
+                command.viewPatient(patientList, parameters);
                 break;
             case "add doctor":
                 break;
