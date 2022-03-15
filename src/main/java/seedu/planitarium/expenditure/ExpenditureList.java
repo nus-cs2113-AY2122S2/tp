@@ -32,7 +32,7 @@ public class ExpenditureList {
      * @return The cost of the expenditure
      */
     public double getExpenditureValue(int index) {
-        return expenditureArrayList.get(index - 1).amount;
+        return expenditureArrayList.get(index - 1).getAmount();
     }
 
     /**
