@@ -73,9 +73,9 @@ public class SessionDeleteCommand extends Command {
             boolean isConfirmed = manager.getUi().getUserConfirmation(confirmationPrompt);
             if (isConfirmed) {
                 manager.getProfile().removeSession(sessionId);
-                manager.getUi().printlnMessage(COMMAND_SUCCESS);
+                manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
             } else {
-                manager.getUi().printlnMessage(COMMAND_ABORT);
+                manager.getUi().printlnMessageWithDivider(COMMAND_ABORT);
             }
         } catch (InvalidDataException dataException) {
             manager.getUi().printlnMessage(dataException.getMessage());
