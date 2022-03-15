@@ -8,25 +8,21 @@ public class AddItemCommand extends Command {
     private Item item;
 
     public AddItemCommand(String userInput) throws HotelLiteManagerException {
-        int itemPax;
-        String itemName;
-        Item item;
         boolean isValidAddItemCommand = userInput.contains(ITEM_NAME_INDICATOR)
                 && userInput.contains(ITEM_PAX_INDICATOR);
         if (!isValidAddItemCommand) {
             throw new InvalidCommandException();
         }
-        itemPax = extractItemPax(userInput);
-        itemName = extractItemName(userInput);
-        item = new Item(itemName, itemPax);
+        int itemPax = extractItemPax(userInput);
+        String itemName = extractItemName(userInput);
+        Item item = new Item(itemName, itemPax);
         setItem(item);
     }
 
     private String extractItemName(String userInput) throws HotelLiteManagerException {
-        String itemName;
         int itemNameStartingPosition = userInput.indexOf(ITEM_NAME_INDICATOR) + ITEM_NAME_INDICATOR_LENGTH;
         int itemPaxIndicatorPosition = userInput.indexOf(ITEM_PAX_INDICATOR);
-        itemName = userInput.substring(itemNameStartingPosition, itemPaxIndicatorPosition);
+        String itemName = userInput.substring(itemNameStartingPosition, itemPaxIndicatorPosition);
         itemName = itemName.trim();
         if (itemName.isEmpty()) {
             throw new EmptyItemNameException();
