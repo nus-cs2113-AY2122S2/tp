@@ -18,6 +18,8 @@ import seedu.splitlah.ui.Message;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represents a parser that interprets the user input into data that can be understood by the program.
@@ -306,6 +308,21 @@ public class Parser {
         String[] argumentTokens = commandArgs.split(REGEX_WHITESPACES_DELIMITER);
         for (String token : argumentTokens) {
             if (token.contains(DELIMITER_INDICATOR) && !isValidDelimiter(token)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean containsDuplicateDelimiters(String commandArgs) {
+        if (commandArgs == null) {
+            return false;
+        }
+
+        Set<String> delimiterSet = new HashSet<>();
+        String[] argumentTokens = commandArgs.split(REGEX_WHITESPACES_DELIMITER);
+        for (String token : argumentTokens) {
+            if (token.contains(DELIMITER_INDICATOR) && !delimiterSet.add(token)) {
                 return true;
             }
         }
