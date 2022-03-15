@@ -8,6 +8,7 @@ public class ModuleTest {
 
     @Test
     public void testStringConversion() {
-        assertEquals("[Module] Code='CS2113', Category='Lecture'",new Module("CS2113","Lecture").toString());
+        assertEquals("[Module] CS2113 Lecture: Thursday, 2pm-4pm",
+                new Module("CS2113","Lecture","Thursday","2pm-4pm").toString());
     }
 }
