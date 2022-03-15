@@ -3,16 +3,9 @@ package seedu.duke.ui;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.util.StringConstants;
 
 public class TextUi {
-
-    private static final String LS = System.lineSeparator();
-    private static final String LINE = "____________________________________________________________";
-    private static final String HELLO_MESSAGE = "Hello, this is Mod Happy (○'◡'○)ﾉ";
-    private static final String GOOD_BY_MESSAGE = "See you later ヾ(*´▽'*)ﾉ";
-    private static final String INITIAL_FAILED_MESSAGE = "Failed to start Mod Happy (..•˘_˘•..)";
-
     protected final Scanner in;
     protected final PrintStream out;
 
@@ -30,7 +23,7 @@ public class TextUi {
      * @param message the message to be printed
      */
     public String formatMessage(String message) {
-        return String.format("%s%s\n%s\n%s", LS, LINE, message, LINE);
+        return String.format("%s%s\n%s\n%s", StringConstants.LS, StringConstants.LINE, message, StringConstants.LINE);
     }
 
     /**
@@ -53,21 +46,21 @@ public class TextUi {
      * Displays the welcome message.
      */
     public void showHelloMessage() {
-        showMessage(HELLO_MESSAGE);
+        showMessage(StringConstants.HELLO_MESSAGE);
     }
 
     /**
      * Displays the goodbye message.
      */
     public void showGoodByeMessage() {
-        showMessage(GOOD_BY_MESSAGE);
+        showMessage(StringConstants.GOOD_BYE_MESSAGE);
     }
 
     /**
      * Displays the initialisation message.
      */
     public void showInitFailedMessage() {
-        showMessage(INITIAL_FAILED_MESSAGE);
+        showMessage(StringConstants.INITIAL_FAILED_MESSAGE);
     }
 
 }
