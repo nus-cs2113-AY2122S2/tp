@@ -246,8 +246,8 @@ public class WorkoutList {
         boolean isWorkoutExist = checkForExistingWorkout(exerciseName, newRepsValue);
 
         if (isWorkoutExist) {
-            logger.log(Level.WARNING, "\"" + exerciseName + " (" + newRepsValue + ")\" " +
-                "has already existed in the list. Cannot be updated." );
+            logger.log(Level.WARNING, "\"" + exerciseName + " (" + newRepsValue + ")\" "
+                + "has already existed in the list. Cannot be updated.");
             throw new InvalidWorkoutException(className, InvalidWorkoutException.DUPLICATE_WORKOUT_ERROR_MSG);
         }
 
