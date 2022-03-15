@@ -93,8 +93,12 @@ public abstract class Message {
             "Please enter a command.";
     public static final String ERROR_PARSER_INVALID_COMMAND =
             "Please enter a valid command.";
+    public static final String ERROR_PARSER_ADDITIONAL_INVALID_TOKEN =
+            "The command contains an argument that does not have a delimiter. Please rectify and try again.";
     public static final String ERROR_PARSER_INVALID_DELIMITERS =
             "The command contains one or more invalid delimiters. Please rectify and try again.";
+    public static final String ERROR_PARSER_DUPLICATE_DELIMITERS =
+            "The command contains one or more duplicate delimiters. Please rectify and try again.";
     public static final String ASSERT_PARSER_COMMAND_ARGUMENTS_EMPTY =
             "The command arguments cannot be null.";
 
