@@ -55,6 +55,6 @@ public class Dish {
     }
 
     public String toString() {
-        return name + " ---- " + (price == 0 ? "free" : ("$ " + price));
+        return name + " ---- " + (price == 0 ? "free" : ("$" + price));
     }
 }

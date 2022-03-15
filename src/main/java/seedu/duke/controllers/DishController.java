@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * DishController (or MenuController if you like).
  */
 public class DishController extends Controller {
-    private static final String[] CHOICES = {"Exit Menu", "Add Dish", "Delete Dish",
+    private static final String[] CHOICES = {"Exit Menu", "List Dish", "Add Dish", "Delete Dish",
             "Change the price of a dish", "Change the name of a dish"
     };
     private static Logger logger = Logger.getLogger("DishController");
@@ -35,21 +35,24 @@ public class DishController extends Controller {
     @Override
     protected boolean optionSwitcher(int choice) throws OperationTerminationException {
         switch (choice) {
-        case 1:
-            addDish();
-            break;
-        case 2:
-            deleteDish();
-            break;
-        case 3:
-            changePrice();
-            break;
-        case 4:
-            changeName();
-            break;
         case 0:
             System.out.println("Exiting Menu...");
             return true;
+        case 1:
+            listDishes();
+            break;
+        case 2:
+            addDish();
+            break;
+        case 3:
+            deleteDish();
+            break;
+        case 4:
+            changePrice();
+            break;
+        case 5:
+            changeName();
+            break;
         default:
             System.out.println("Unknown choice!");
             break;
@@ -57,6 +60,12 @@ public class DishController extends Controller {
         System.out.println("You are using Menu function");
         System.out.println(this);
         return false;
+    }
+
+    private void listDishes() {
+        logInfo("User is listing dishes");
+        System.out.println("Listing dishes...");
+        dishManager.printDishes();
     }
 
     private void changeName() throws OperationTerminationException {
