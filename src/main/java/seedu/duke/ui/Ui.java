@@ -1,42 +1,56 @@
 package seedu.duke.ui;
 
 import java.util.Scanner;
+import static seedu.duke.common.Messages.WELCOME_MESSAGE;
+import static seedu.duke.common.Messages.HELP_MESSAGE;
+import static seedu.duke.common.Messages.DIVIDER;
 
+/**
+ * Handles the UI of the application
+ * */
 public class Ui {
-    // Fixed string output for startup and exit.
-    private static final String WELCOME_BANNER =
-            "Hello! I'm InvMgr!"
-            + "\nWhat can I do for you?";
 
-    private Scanner scannerInput;
+    private final Scanner scanner;
 
     public Ui() {
-        scannerInput = new Scanner(System.in);
+        scanner = new Scanner(System.in);
+    }
+
+    /**
+     * Displays message(s) to user
+     *
+     * @param message Message to be displayed to user
+     * */
+    public void showMessages(String... message) {
+        for (String m : message) {
+            System.out.println(m);
+        }
     }
 
     /**
      * Prints the welcome message when user starts InvMgr.
      */
-    public void showWelcome() {
-        System.out.println(WELCOME_BANNER);
+    public void showWelcomeMessage() {
+        showMessages(
+                DIVIDER,
+                WELCOME_MESSAGE,
+                DIVIDER,
+                HELP_MESSAGE,
+                DIVIDER);
     }
 
     /**
-     * Reads a line of input from the user.
-     *
-     * @return a line of the user input
-     */
-    public String readCommand() {
-        String userInput = scannerInput.nextLine();
-        return userInput;
+     * Shows dividing line between messages
+     * */
+    public void showDivider() {
+        showMessages(DIVIDER);
     }
 
     /**
-     * Prints output.
-     *
-     * @param output String to print
-     */
-    public void showOutput(String output) {
-        System.out.println(output);
+     * Gets user's raw input in the CLI
+     * */
+    public String getRawUserInput() {
+        System.out.println("Enter command: ");
+        return scanner.nextLine();
     }
 }
