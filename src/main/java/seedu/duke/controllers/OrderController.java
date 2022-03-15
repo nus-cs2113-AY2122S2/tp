@@ -17,7 +17,7 @@ public class OrderController extends Controller {
     }
 
     @Override
-    protected boolean optionSwitcher(int choice) throws IllegalArgumentException, OperationTerminationException {
+    protected boolean optionSwitcher(int choice) throws OperationTerminationException {
         switch (choice) {
         case 0:
             System.out.println("Exiting application...");
@@ -76,11 +76,11 @@ public class OrderController extends Controller {
         System.out.printf("Total value of all orders: %f. \n", orderManager.getOrderPrice(userInputInt));
     }
 
-    private void getAllOrderPrice() throws OperationTerminationException {
+    private void getAllOrderPrice() {
         System.out.printf("Total value of all orders: %f. \n", orderManager.getAllOrderValue());
     }
 
-    private void printReceipt() throws OperationTerminationException {
+    private void printReceipt() {
         System.out.println("These are all your orders receipts. \n");
         orderManager.printReceipt();
     }
