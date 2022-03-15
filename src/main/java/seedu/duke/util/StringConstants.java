@@ -86,13 +86,12 @@ public class StringConstants {
      */
     public static final String TASK_NAME = "taskName";
     public static final String TASK_DESCRIPTION = "taskDescription";
-    public static final String TASK_DESCRIPTION_TWO = "taskDescription2";
     public static final String TASK_WORKING_TIME = "estimatedWorkingTime";
+    public static final String TASK_MODULE = "taskModule";
     public static final String MODULE_CODE = "moduleCode";
     public static final String MODULE_DESCRIPTION = "moduleDescription";
     public static final String TASK_NUMBER = "taskNumber";
     public static final String FLAG = "flag";
-    public static final String INVALID = "invalid";
     public static final String TASK_INDEX = "taskIndex";
     public static final String COMPLETED_FLAG = "/c";
     public static final String UNCOMPLETED_FLAG = "/u";
