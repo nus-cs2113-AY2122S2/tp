@@ -86,6 +86,7 @@ displayed in an easy-to-read summary.
 
 
 ### Creating a session: `session /create`
+
 > Creates a new session.<br>
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
@@ -108,7 +109,9 @@ Example of usage:
    ![Session create command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand.png)
 <br>
 <br>
+
 ### Deleting a session: `session /delete`
+
 > Deletes an existing session.<br>
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 > 
@@ -126,7 +129,9 @@ Example of usage:
    ![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
 <br>
 <br>
+
 ### Listing all sessions: `session /list`
+
 > List all active sessions. Deleted sessions will not be listed.<br>
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
@@ -137,7 +142,9 @@ Example of usage:
 ![Session list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionListCommand.png)
 <br>
 <br>
+
 ### Creating an activity: `activity /create`
+
 > Creates a new activity and assigns it to a session. <br>
 > An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
@@ -180,7 +187,9 @@ Examples of usage:
    ![Activity create command [2] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[2].png)
 <br>
 <br>
+
 ### Deleting an activity: `activity /delete`
+
 > Deletes an existing activity from a particular session.<br>
 > An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
@@ -206,6 +215,7 @@ Example of usage:
 <br>
 
 ### Viewing an activity: `activity /view`
+
 > Displays details about an activity.<br>
 > An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
 
@@ -232,6 +242,7 @@ Examples of usage:
 <br>
 
 ### Listing all activities in a session: `activity /list`
+
 > Allows user to view all existing activities in a particular session.<br>
 > An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
@@ -257,6 +268,7 @@ Examples of usage:
 <br>
 
 ### Settling all transactions for a session: `session /summary`
+
 > Displays a summary of a session that details how much each person must pay and to whom for all debts to be resolved.<br>
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
@@ -278,6 +290,7 @@ Example of usage:
    ![Session summary command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionSummaryCommand.png)
 <br>
 <br>
+ 
 ## FAQ
 
 **Q**: Is data saved to the disk upon exit?
