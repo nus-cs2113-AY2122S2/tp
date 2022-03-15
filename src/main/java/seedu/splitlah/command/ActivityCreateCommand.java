@@ -171,7 +171,6 @@ public class ActivityCreateCommand extends Command {
      * @param personPaid         The person who paid for the activity.
      * @param activityId         The id of the activity.
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
-     * @see InvalidDataException
      */
     private void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, int activityId)
             throws InvalidDataException {
@@ -196,7 +195,6 @@ public class ActivityCreateCommand extends Command {
      * @param indexOfCostOwed The index of the cost owed in the list of costs.
      * @param person          The current person whose costs are added to the list of activity costs.
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
-     * @see InvalidDataException
      */
     private boolean addCostOwedAndCostPaid(Person personPaid, int activityId, int indexOfCostOwed, Person person)
             throws InvalidDataException {
@@ -243,8 +241,8 @@ public class ActivityCreateCommand extends Command {
      * by summing up the costs owed by each person involved in the activity.
      */
     private void calculateTotalCost() {
-        for (int i = 0; i < costList.length; i++) {
-            totalCost += costList[i];
+        for (double cost : costList) {
+            totalCost += cost;
         }
     }
 
