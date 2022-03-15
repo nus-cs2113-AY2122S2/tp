@@ -37,10 +37,10 @@ public class Manager {
             case "add doctor":
                 break;
             case "delete doctor":
-                command.deleteDoctor(doctorList, parameters);
+                //command.deleteDoctor(doctorList, parameters);
                 break;
             case "view doctor":
-                command.viewDoctor(doctorList, parameters);
+                //command.viewDoctor(doctorList, parameters);
                 break;
             case "add medicine":
                 command.addMedicine(medicineList, parameters);
