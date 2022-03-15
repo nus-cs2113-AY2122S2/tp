@@ -59,12 +59,12 @@ public class Person {
      * Adds an expenditure to the list of expenditures.
      *
      * @param description The reason for the expenditure
-     * @param value The value of the expenditure
+     * @param amount The value of the expenditure
      */
-    public void addExpend(String description, int value) {
+    public void addExpend(String description, double amount) {
         assert(description != null);
-        expenditureList.addExpenditure(description, value);
-        System.out.println("An expenditure of " + value + " for " + description + " has been added");
+        expenditureList.addExpenditure(description, amount);
+        System.out.println("An expenditure of " + amount + " for " + description + " has been added");
     }
 
     /**
