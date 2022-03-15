@@ -313,11 +313,11 @@ public class ActivityCreateCommand extends Command {
             return;
         }
         try {
-            int activityId = manager.getProfile().getNewActivityId();
             updateCostAndCostList();
             Session session = manager.getProfile().getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
+            int activityId = manager.getProfile().getNewActivityId();
             addAllActivityCost(involvedPersonList, personPaid, totalCost, costList, activityId);
             Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(activity);
