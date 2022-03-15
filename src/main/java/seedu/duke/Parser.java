@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.commands.*;
+import seedu.duke.exceptions.InvalidDayException;
 import seedu.duke.exceptions.MissingValueException;
 
 import java.util.logging.Level;
@@ -9,6 +10,8 @@ import java.util.logging.Logger;
 import static seedu.duke.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
 import static seedu.duke.ErrorMessages.ERROR_MISSING_PARAMETERS;
 import static seedu.duke.ErrorMessages.ERROR_MISSING_VALUES;
+import static seedu.duke.ErrorMessages.ERROR_INVALID_DAY;
+import static seedu.duke.ErrorMessages.ERROR_INVALID_TIME;
 
 public class Parser {
     private final String command;
@@ -22,7 +25,6 @@ public class Parser {
     private static final int ENDTIME_INDEX = 4;
     private static final int MODE_INDEX = 5;
     private static final String[] HEADINGS = {"n/", "l/", "d/", "st/", "et/", "m/"};
-    private static final String[] DAYS = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
 
     public Parser(String input) {
         this.command = getCommandFromInput(input);
@@ -53,18 +55,22 @@ public class Parser {
             String name = eventDescription[NAME_INDEX];
             String title = eventDescription[TITLE_INDEX];
             String day = eventDescription[DAY_INDEX].toLowerCase();
+            checkDay(day);
             int startTime = Integer.parseInt(eventDescription[STARTTIME_INDEX]);
             int endTime = Integer.parseInt(eventDescription[ENDTIME_INDEX]);
             String mode = eventDescription[MODE_INDEX].toLowerCase();
             return new AddCommand(name, title, day, startTime, endTime, mode);
         } catch (NumberFormatException nfe) {
-            System.out.println(ERROR_INVALID_INDEX_FORMAT);
-            return new HelpCommand(); // temporary
-        } catch (IndexOutOfBoundsException ie) {
+            System.out.println(ERROR_INVALID_TIME);
+            return new HelpCommand(); 
+        } catch (NullPointerException npe) {
             System.out.println(ERROR_MISSING_PARAMETERS);
             return new HelpCommand();
         } catch (MissingValueException mve) {
             System.out.println(ERROR_MISSING_VALUES);
+            return new HelpCommand();
+        } catch (InvalidDayException ide) {
+            System.out.println(ERROR_INVALID_DAY);
             return new HelpCommand();
         }
     }
@@ -74,6 +80,21 @@ public class Parser {
             if (eventDescription[i].length() == 0) {
                 throw new MissingValueException();
             }
+        }
+    }
+
+    private void checkDay (String day) throws InvalidDayException {
+        switch (day) {
+        case "monday":
+        case "tuesday":
+        case "wednesday":
+        case "thursday":
+        case "friday":
+        case "saturday":
+        case "sunday":
+            break;
+        default:
+            throw new InvalidDayException();
         }
     }
 
