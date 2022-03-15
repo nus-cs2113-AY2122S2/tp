@@ -28,8 +28,8 @@ public class DeleteCommand extends Command {
      * @return CommandResult with message from execution of this command
      */
     public CommandResult execute() {
-        String equipmentName = equipmentInventory.getEquipmentList().get(COMMAND_STRINGS.get(0)).getItemName();
-        equipmentInventory.deleteEquipment(COMMAND_STRINGS.get(0));
+        String equipmentName = equipmentManager.getEquipmentList().get(COMMAND_STRINGS.get(0)).getItemName();
+        equipmentManager.deleteEquipment(COMMAND_STRINGS.get(0));
 
         return new CommandResult(String.format(successMessage, equipmentName,COMMAND_STRINGS.get(1)));
     }

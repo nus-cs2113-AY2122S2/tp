@@ -2,8 +2,6 @@ package seedu.command;
 
 import seedu.equipment.EquipmentManager;
 
-import java.util.HashMap;
-
 /**
  * Abstract parent class for all types of commands
  */
@@ -12,7 +10,7 @@ import java.util.HashMap;
 public abstract class Command {
     protected String successMessage;
     public String usageReminder;
-    protected EquipmentManager equipmentInventory;
+    protected EquipmentManager equipmentManager;
     protected final String INCORRECT_ENUM_TYPE = "Wrong type of equipment. The allowed types are: MICROPHONE, SPEAKER, STAND, CABLE";
     protected final String INCORRECT_COST_FORMAT = "Please enter numbers only for cost and omit symbols";
 
@@ -20,5 +18,9 @@ public abstract class Command {
 
     public String getUsageReminder(){
         return usageReminder;
+    }
+
+    public void setEquipmentManager(EquipmentManager equipmentManager) {
+        this.equipmentManager = equipmentManager;
     }
 }

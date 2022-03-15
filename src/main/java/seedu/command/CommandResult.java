@@ -3,6 +3,7 @@ package seedu.command;
 import seedu.equipment.Equipment;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Represents the result of a command execution.
@@ -29,5 +30,18 @@ public class CommandResult {
 
     public ArrayList<Equipment> getRelevantEquipment(){
         return RELEVANT_EQUIPMENT;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CommandResult that = (CommandResult) o;
+        return RESULT_TO_SHOW.equals(that.RESULT_TO_SHOW) && Objects.equals(RELEVANT_EQUIPMENT, that.RELEVANT_EQUIPMENT);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(RESULT_TO_SHOW, RELEVANT_EQUIPMENT);
     }
 }

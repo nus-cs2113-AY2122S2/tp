@@ -40,7 +40,7 @@ public class Duke {
     }
 
     private CommandResult executeCommand(Command command) {
-        command.setEquipmentInventory(equipmentInventory);
+        command.setEquipmentManager(equipmentInventory);
         CommandResult result = command.execute();
         return result;
     }

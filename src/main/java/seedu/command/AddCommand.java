@@ -56,6 +56,6 @@ public class AddCommand extends Command {
         String purchasedFrom = userInput.get(4);
         String purchasedDate = userInput.get(5);
 
-        equipmentInventory.addEquipment(equipmentName, serialNumber, type, cost, purchasedFrom, purchasedDate);
+        equipmentManager.addEquipment(equipmentName, serialNumber, type, cost, purchasedFrom, purchasedDate);
     }
 }

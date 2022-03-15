@@ -53,13 +53,13 @@ public class ListCommand extends Command {
         int listSize;
         ArrayList<Equipment> equipmentArrayList;
         if(COMMAND_STRINGS == null){
-            equipmentArrayList = equipmentInventory.listEquipment();
+            equipmentArrayList = equipmentManager.listEquipment();
             listSize = equipmentArrayList.size();
             return new CommandResult(String.format(successMessage, listSize), equipmentArrayList);
         }
 
         EquipmentType typeToList = EquipmentType.valueOf(COMMAND_STRINGS.get(0));
-        equipmentArrayList = equipmentInventory.listEquipment(typeToList);
+        equipmentArrayList = equipmentManager.listEquipment(typeToList);
         listSize = equipmentArrayList.size();
         return new CommandResult(String.format(successMessage, typeToList, listSize), equipmentArrayList);
     }

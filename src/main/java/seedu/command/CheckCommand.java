@@ -35,7 +35,7 @@ public class CheckCommand extends Command {
         EquipmentType type;
         double cost;
 
-        ArrayList<Equipment> equipment = equipmentInventory.checkEquipment(COMMAND_STRINGS.get(0));
+        ArrayList<Equipment> equipment = equipmentManager.checkEquipment(COMMAND_STRINGS.get(0));
 
         return new CommandResult(String.format(successMessage, COMMAND_STRINGS.get(0)), equipment);
     }

@@ -25,7 +25,7 @@ public class UpdateCommand extends Command {
 
     public CommandResult execute() {
         ArrayList<Pair<String, String>> updatePairs = generateUpdatePairs();
-        successMessage = equipmentInventory.updateEquipment(serialNumber, updatePairs);
+        successMessage = equipmentManager.updateEquipment(serialNumber, updatePairs);
 
         return new CommandResult(successMessage);
     }
@@ -56,19 +56,19 @@ public class UpdateCommand extends Command {
 
     public ArrayList<Pair<String, String>> generateUpdatePairs() {
         ArrayList<Pair<String, String>> pairs = new ArrayList<>();
-        if(updateName != null){
+        if (updateName != null) {
             pairs.add(new Pair<String, String>("itemName", updateName));
         }
-        if(type != null){
+        if (type != null) {
             pairs.add(new Pair<String, String>("type", type));
         }
-        if(cost != null){
+        if (cost != null) {
             pairs.add(new Pair<String, String>("cost", cost));
         }
-        if(purchaseDate != null){
+        if (purchaseDate != null) {
             pairs.add(new Pair<String, String>("purchasedDate", purchaseDate));
         }
-        if(purchaseFrom != null){
+        if (purchaseFrom != null) {
             pairs.add(new Pair<String, String>("purchasedFrom", purchaseFrom));
         }
 
