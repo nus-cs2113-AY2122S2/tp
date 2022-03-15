@@ -40,8 +40,19 @@ Got it. I've added this task:
 Now you have 3 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
+Nice! I've marked this task as done:
+  [X] weekly quiz  (by: Mon, 10/10/2022) (reminder on: Sat, 08/10/2022)
+____________________________________________________________
+____________________________________________________________
+Bzzt!
+Please key in a valid task number to mark/unmark your task.
+
+For more information on the command you wish to execute,
+enter 'help <command>' e.g. help add
+____________________________________________________________
+____________________________________________________________
 Here are the tasks in your list:
-1. [ ] weekly quiz  (by: Mon, 10/10/2022) (reminder on: Sat, 08/10/2022)
+1. [X] weekly quiz  (by: Mon, 10/10/2022) (reminder on: Sat, 08/10/2022)
 2. [ ] apply for internship (by: Tue, 11/10/2022)
 3. [ ] revise for finals
 ____________________________________________________________
@@ -61,7 +72,7 @@ Now you have 4 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [ ] weekly quiz  (by: Mon, 10/10/2022) (reminder on: Sat, 08/10/2022)
+1. [X] weekly quiz  (by: Mon, 10/10/2022) (reminder on: Sat, 08/10/2022)
 2. [ ] apply for internship (by: Tue, 11/10/2022)
 3. [ ] revise for finals
 4. [ ] submit essay
@@ -85,7 +96,7 @@ Now you have 5 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [ ] weekly quiz  (by: Mon, 10/10/2022) (reminder on: Sat, 08/10/2022)
+1. [X] weekly quiz  (by: Mon, 10/10/2022) (reminder on: Sat, 08/10/2022)
 2. [ ] apply for internship (by: Tue, 11/10/2022)
 3. [ ] revise for finals
 4. [ ] submit essay
@@ -110,7 +121,7 @@ Now you have 6 task(s) in the list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [ ] weekly quiz  (by: Mon, 10/10/2022) (reminder on: Sat, 08/10/2022)
+1. [X] weekly quiz  (by: Mon, 10/10/2022) (reminder on: Sat, 08/10/2022)
 2. [ ] apply for internship (by: Tue, 11/10/2022)
 3. [ ] revise for finals
 4. [ ] submit essay
@@ -125,7 +136,7 @@ Ok, I've edited this task as such!
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [ ] weekly quiz  (by: Mon, 10/10/2022) (reminder on: Sat, 08/10/2022)
+1. [X] weekly quiz  (by: Mon, 10/10/2022) (reminder on: Sat, 08/10/2022)
 2. [ ] apply for internship (by: Tue, 11/10/2022)
 3. [ ] revise for finals (by: Thu, 05/05/2022)
 4. [ ] submit essay
