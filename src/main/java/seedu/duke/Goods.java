@@ -20,7 +20,7 @@ public class Goods {
         this.description = description;
     }
 
-    public int getId () {
+    public int getId() {
         return id;
     }
 
@@ -30,10 +30,6 @@ public class Goods {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getDescription() {
