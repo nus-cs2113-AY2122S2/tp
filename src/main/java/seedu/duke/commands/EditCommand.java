@@ -21,14 +21,14 @@ public class EditCommand extends Command {
 
     private String moduleCode;
     private String taskModule;
-    private int taskNumber = -1;
+    private int taskIndex = -1;
     private String taskParameter;
     private String result = "";
     private boolean isGeneralTask = false;
     final private String changedParameter;
 
-    public int getTaskNumber() {
-        return taskNumber;
+    public int getTaskIndex() {
+        return taskIndex;
     }
 
     public String getModuleCode() {
@@ -44,15 +44,18 @@ public class EditCommand extends Command {
         this.changedParameter = description;
     }
 
-    public EditCommand(String taskModule, int taskNumber, String description, String workingTime, String taskName) {
+    public EditCommand(String taskModule, int taskIndex, String description, String workingTime, String taskName) {
         this.taskModule = taskModule;
-        this.taskNumber = taskNumber;
+        this.taskIndex = taskIndex;
         if (!Objects.isNull(description)) {
             this.taskParameter = TASK_DESCRIPTION;
             this.changedParameter = description;
+            assert Objects.isNull(workingTime);
+            assert Objects.isNull(taskName);
         } else if (!Objects.isNull(workingTime)){
             this.taskParameter = ESTIMATED_WORKING_TIME;
             this.changedParameter = workingTime;
+            assert Objects.isNull(taskName);
         } else {
             this.taskParameter = TASK_NAME;
             this.changedParameter = taskName;
@@ -61,7 +64,7 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute(ModuleList moduleList) throws ModHappyException {
-        if (taskNumber < 0) {
+        if (taskIndex < 0) {
             editModuleDescription(moduleList);
         } else {
             Module targetModule;
@@ -97,7 +100,6 @@ public class EditCommand extends Command {
      */
     private void editTaskFromModule(Module targetModule) {
         TaskList taskList = targetModule.getTaskList();
-        int taskIndex = taskNumber - 1;
         Task targetTask = taskList.getTask(taskIndex);
         String targetTaskName = targetTask.getTaskName();
         if (taskParameter.equals(TASK_DESCRIPTION)) {

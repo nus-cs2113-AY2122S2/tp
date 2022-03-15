@@ -37,13 +37,13 @@ public class DeleteParser extends Parser {
             return new DeleteCommand(moduleCode);
         }
         if (!Objects.isNull(taskNumberString)) {
-            int taskNumber;
+            int taskIndex;
             try {
-                taskNumber = Integer.parseInt(taskNumberString);
+                taskIndex = Integer.parseInt(taskNumberString) - 1;
             } catch (NumberFormatException e) {
                 throw new ParseException();
             }
-            return new DeleteCommand(taskNumber, taskModuleString);
+            return new DeleteCommand(taskIndex, taskModuleString);
         }
         throw new ModHappyException();
     }

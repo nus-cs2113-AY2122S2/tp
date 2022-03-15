@@ -52,13 +52,13 @@ public class EditParser extends Parser {
         }
 
         if (!Objects.isNull(taskNumberString)) {
-            int taskNumber;
+            int taskIndex;
             try {
-                taskNumber = Integer.parseInt(taskNumberString);
+                 taskIndex = Integer.parseInt(taskNumberString) - 1;
             } catch (NumberFormatException e) {
                 throw new ParseException();
             }
-            return new EditCommand(taskModule, taskNumber, taskDescription, estimatedWorkingTime, taskName);
+            return new EditCommand(taskModule, taskIndex, taskDescription, estimatedWorkingTime, taskName);
         }
         throw new ModHappyException();
     }

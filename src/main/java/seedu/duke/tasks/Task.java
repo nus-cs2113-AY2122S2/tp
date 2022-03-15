@@ -51,7 +51,7 @@ public class Task {
     public void setTaskName (String taskName) {
         this.taskName = taskName;
     }
-    
+
     /**.
      * Check what are the tasks parameters input by user
      * @return Task parameters status

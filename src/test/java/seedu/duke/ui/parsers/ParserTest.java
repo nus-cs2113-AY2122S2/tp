@@ -455,7 +455,7 @@ public class ParserTest {
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof DeleteCommand);
-            assertEquals(1, ((DeleteCommand) c).getTaskNumber());
+            assertEquals(0, ((DeleteCommand) c).getTaskIndex()); // zero-indexed
         } catch (Exception e) {
             fail();
         }
@@ -492,7 +492,7 @@ public class ParserTest {
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof DeleteCommand);
-            assertEquals(1, ((DeleteCommand) c).getTaskNumber());
+            assertEquals(0, ((DeleteCommand) c).getTaskIndex()); // zero-indexed
             assertEquals("cs2113t", ((DeleteCommand) c).getTaskModule());
         } catch (Exception e) {
             fail();
@@ -609,7 +609,7 @@ public class ParserTest {
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof EditCommand);
-            assertEquals(1, ((EditCommand) c).getTaskNumber());
+            assertEquals(0, ((EditCommand) c).getTaskIndex()); // zero-indexed
             assertNull(((EditCommand) c).getModuleCode());
             assertEquals("cs2113t", ((EditCommand) c).getTaskModule());
         } catch (Exception e) {
@@ -658,7 +658,7 @@ public class ParserTest {
 
     @Test
     public void parse_editCommand_task_tooManyFlags() {
-        final String testString = "edit /t 2 -m cs2113t -d \"123\" -t \"111\"";
+        final String testString = "edit /t 2 -d \"123\" -t \"111\" -m cs2113t";
         try {
             parser.parseCommand(testString);
             fail();
