@@ -4,8 +4,8 @@ import cpp.exceptions.NegativeIndexException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ProjectListTest {
@@ -19,15 +19,28 @@ class ProjectListTest {
 
     @BeforeEach
     void setUp() {
-
+        emptyProjectList = new ProjectList();
         defaultProjectList = new ProjectList();
-        defaultProjectList.addProject(PROJECT1NAME);
-        defaultProjectList.addTodoToProject("1",TODO1);
-        defaultProjectList.addTodoToProject("1",TODO2);
-
     }
 
     @Test
+    void addProject() { //aims to test if addProject work well
+        emptyProjectList.addProject(PROJECT1NAME);
+        assertEquals(1, emptyProjectList.getProjectNo());
+        emptyProjectList.addProject(PROJECT2NAME);
+        assertEquals(2, emptyProjectList.getProjectNo());
+    }
+
+    @Test
+    void addRepeatProject() { //aims to test if addProject can detect the problem of adding repeated project
+        emptyProjectList.addProject(PROJECT1NAME);
+        assertEquals(1, emptyProjectList.getProjectNo());
+        emptyProjectList.addProject(PROJECT1NAME); //add same project to see if it is added repeatedly
+        assertEquals(1, emptyProjectList.getProjectNo());
+    }
+
+    @Test
+
     void markTodoAsDone_negativeIndex() {
         String targetIndexString = "-1";
         assertThrows(NegativeIndexException.class, () -> defaultProjectList.markTodoAsDone("1", targetIndexString));

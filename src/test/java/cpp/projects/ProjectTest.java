@@ -11,4 +11,5 @@ public class ProjectTest {
         testProj.setDeadline("Sunday");
         assertEquals(testProj.getDeadline(), "Sunday");
     }
+
 }

@@ -31,18 +31,6 @@ public class Response {
         System.out.println(Constants.SEPARATOR);
     }
 
-    public static void printAddProject(String title) {
-        System.out.println(Constants.SEPARATOR);
-        System.out.println(title + " added.");
-        System.out.println(Constants.SEPARATOR);
-    }
-
-    public static void printDeleteProject(String title) {
-        System.out.println(Constants.SEPARATOR);
-        System.out.println(title + " deleted.");
-        System.out.println(Constants.SEPARATOR);
-    }
-
     public static void printHelp() {
         int count = 1;
         System.out.println(Constants.SEPARATOR);
@@ -52,7 +40,7 @@ public class Response {
         System.out.println(count++ + ". addDeadline <Project Name> <Date>");
         System.out.println(count++ + ". todo <Project Index> <Description>");
         System.out.println(count++ + ". mark <Project Index> <Todo Index>");
-        System.out.println(count++ + ". listProjects");
+        System.out.println(count++ + ". listProjects/listProject");
         System.out.println(count++ + ". view <Project Name>");
         System.out.println(count++ + ". exit");
         System.out.println(Constants.SEPARATOR);
