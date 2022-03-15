@@ -36,7 +36,7 @@ public class AddParser extends Parser {
     * (\s+(-t\s+\"(?<estimatedWorkingTime>([^\"]*))\") ... )? -- captures estimatedWorkingTime (cannot have ")
     *                                                            which must be enclosed with "". Optional
     * (?=(\s+-d\s+)|$) -- asserts -d might follow
-    * (\s+(-d\s+\"(?<taskDescription2>([^\"]*))\"))? -- captures taskDescription2 with same constraints 
+    * (\s+(-d\s+\"(?<taskDescription2>([^\"]*))\"))? -- captures taskDescription2 with same constraints
     *                                                   if -t precedes -d
     * \s*(( ... |\/m\s+(?<moduleCode>\w+? ... ) -- alternatively captures moduleCode
     *                                              (no whitespaces or special characters)

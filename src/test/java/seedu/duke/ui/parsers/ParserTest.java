@@ -54,7 +54,7 @@ public class ParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
             assertNull(t.getTaskDescription());
-            assertNull(t.getEstimatedWorkingTime());
+            assertNull(t.getWorkingTime());
         } catch (Exception e) {
             fail();
         }
@@ -72,7 +72,7 @@ public class ParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
             assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
-            assertNull(t.getEstimatedWorkingTime());
+            assertNull(t.getWorkingTime());
         } catch (Exception e) {
             fail();
         }
@@ -89,7 +89,7 @@ public class ParserTest {
             assertNotEquals(null, t);
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
-            assertEquals("-d-d-d /t /m -d -d", t.getEstimatedWorkingTime());
+            assertEquals("-d-d-d /t /m -d -d", t.getWorkingTime());
             assertNull(t.getTaskDescription());
         } catch (Exception e) {
             fail();
@@ -108,7 +108,7 @@ public class ParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d", t.getTaskName());
             assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
-            assertEquals("-t-t-t t-t-t /t/t -d -d -d", t.getEstimatedWorkingTime());
+            assertEquals("-t-t-t t-t-t /t/t -d -d -d", t.getWorkingTime());
         } catch (Exception e) {
             fail();
         }
@@ -127,7 +127,7 @@ public class ParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
             assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
-            assertEquals("-t-t-t t-t-t /t/t -d -d -d", t.getEstimatedWorkingTime());
+            assertEquals("-t-t-t t-t-t /t/t -d -d -d", t.getWorkingTime());
         } catch (Exception e) {
             fail();
         }

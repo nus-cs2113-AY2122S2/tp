@@ -23,6 +23,10 @@ public class Module {
         return moduleCode;
     }
 
+    public void setModuleDescription(String description) {
+        this.moduleDescription = description;
+    }
+
     /**
      * Returns the task list associated with the module.
      */

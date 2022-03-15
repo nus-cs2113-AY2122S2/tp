@@ -69,6 +69,8 @@ public class ModHappyParser extends Parser {
             return new DeleteParser();
         case (MARK_COMMAND_WORD):
             return new MarkParser();
+        case (EDIT_COMMAND_WORD):
+            return new EditParser();
         default:
             throw new UnknownCommandException();
         }
