@@ -9,14 +9,8 @@ public class CheckAllRoomCommand extends Command {
     public CheckAllRoomCommand() {
     }
 
-
     @Override
-    public void execute() {
-
-    }
-
-    @Override
-    public void execute(RoomList roomList) {
+    public void execute(RoomList roomList, ItemList itemList, Ui ui) {
         this.roomList = new RoomList();
         System.out.println(TABLE_HEAD);
         for (Room room : roomList.getRoomList()) {

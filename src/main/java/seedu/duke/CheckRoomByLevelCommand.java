@@ -10,14 +10,9 @@ public class CheckRoomByLevelCommand extends Command {
 
 
     @Override
-    public void execute() {
-
-    }
-
-    @Override
-    public void execute(RoomList list) throws InvalidLevelException {
+    public void execute(RoomList roomList, ItemList itemList, Ui ui) throws InvalidLevelException {
         boolean isValidLevel = false;
-        for (Room room : list.getRoomList()) {
+        for (Room room : roomList.getRoomList()) {
             if (room.getLevel() == level) {
                 isValidLevel = true;
                 break;
@@ -28,7 +23,7 @@ public class CheckRoomByLevelCommand extends Command {
         }
 
         System.out.println(TABLE_HEAD);
-        for (Room room : list.getRoomList()) {
+        for (Room room : roomList.getRoomList()) {
             if (room.getLevel() == level) {
                 System.out.println(room);
             }

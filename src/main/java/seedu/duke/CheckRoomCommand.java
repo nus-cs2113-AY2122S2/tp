@@ -8,14 +8,9 @@ public class CheckRoomCommand extends Command {
     }
 
     @Override
-    public void execute(){
-
-    }
-
-    @Override
     // check if the room id is correct
-    public void execute(RoomList list) {
-        for (Room room : list.getRoomList()) {
+    public void execute(RoomList roomList, ItemList itemList, Ui ui) {
+        for (Room room : roomList.getRoomList()) {
             if (room.getRoomId() == roomId) {
                 System.out.println(room);
                 return;
