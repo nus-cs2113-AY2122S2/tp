@@ -8,9 +8,9 @@ public class AddItemCommand extends Command {
     private Item item;
 
     public AddItemCommand(String userInput) throws HotelLiteManagerException {
-        Item item;
         int itemPax;
         String itemName;
+        Item item;
         boolean isValidAddItemCommand = userInput.contains(ITEM_NAME_INDICATOR)
                 && userInput.contains(ITEM_PAX_INDICATOR);
         if (!isValidAddItemCommand) {
