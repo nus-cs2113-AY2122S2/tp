@@ -1,18 +1,16 @@
 package seedu.sherpass.util;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.task.Todo;
+import seedu.sherpass.task.Task;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StorageTest {
 
@@ -37,8 +35,8 @@ class StorageTest {
     public void load_oneTask_expectTaskList() {
         try {
             Storage storage = new Storage("data/test.json");
-            TaskList actual_list = new TaskList(storage.load());
-            Todo task = (Todo) actual_list.getTasks().get(0);
+            TaskList actualList = new TaskList(storage.load());
+            Task task = actualList.getTasks().get(0);
             assertEquals(task.getDescription(), "task_one");
             assertEquals(task.getStatusIcon(), " ");
         } catch (InvalidInputException | IOException | JSONException exception) {

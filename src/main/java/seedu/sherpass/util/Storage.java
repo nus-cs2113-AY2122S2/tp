@@ -169,10 +169,10 @@ public class Storage {
 
     /**
      * Creates a new save file or exits the program.
-     *
+     *<p>
      * When the save file fails to load, the user decides if the program creates new save file
      * or the user can manually inspect the save file.
-     *
+     *</p>
      * @param ui Ui for printing messages
      */
     public void handleCorruptedSave(Ui ui) {
