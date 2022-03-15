@@ -54,6 +54,7 @@ public class PersonList {
         Person person = new Person(name);
         personList.add(person);
         numberOfMembers++;
+        System.out.println(name + " has been successfully added");
     }
 
     /**
@@ -64,8 +65,10 @@ public class PersonList {
     public void removePerson(int index) {
         assert (index >= 1);
         assert (index <= numberOfMembers);
+        String name = personList.get(index - 1).getName();
         personList.remove(index - 1);
         numberOfMembers--;
+        System.out.println(name + " has been successfully removed");
     }
 
     /**
