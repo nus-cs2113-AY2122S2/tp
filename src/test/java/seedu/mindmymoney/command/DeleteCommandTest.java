@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * Represents the tests for delete command.
  */
 class DeleteCommandTest {
+
     /**
      * Asserts that the correct item has been deleted.
      *
@@ -21,15 +22,15 @@ class DeleteCommandTest {
      */
     @Test
     void deleteCommand_oneInput_expectListUpdated() throws MindMyMoneyException {
+        Lists itemList = new Lists();
         String inputString = "expenditure 12345";
         ArrayList<Expenditure> testList = new ArrayList<>();
-        new AddCommand(inputString).executeCommand();
+        new AddCommand(inputString, itemList).executeCommand();
         testList.add(new Expenditure("expenditure", 12345));
         String deleteInputString = "delete 1";
-        new DeleteCommand(deleteInputString).executeCommand();
+        new DeleteCommand(deleteInputString, itemList).executeCommand();
         testList.remove(0);
-        assertEquals(testList, Lists.expenditures);
-        Lists.expenditures.clear();
+        assertEquals(testList.size(), itemList.size());
     }
 
     /**
@@ -37,13 +38,13 @@ class DeleteCommandTest {
      */
     @Test
     void deleteCommand_wrongInputValue_expectException() {
+        Lists itemList = new Lists();
         String inputString = "expenditure 12345";
-        new AddCommand(inputString).executeCommand();
+        new AddCommand(inputString, itemList).executeCommand();
         String deleteInputString = "delete 0";
-        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString).executeCommand());
+        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString, itemList).executeCommand());
         String deleteInputString2 = "delete 5";
-        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString2).executeCommand());
-        Lists.expenditures.clear();
+        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString2, itemList).executeCommand());
     }
 
     /**
@@ -51,9 +52,9 @@ class DeleteCommandTest {
      */
     @Test
     void deleteCommand_wrongInputFormat_expectException() {
+        Lists itemList = new Lists();
         String deleteInputString = "delete ONE";
-        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString).executeCommand());
-        Lists.expenditures.clear();
+        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString, itemList).executeCommand());
     }
 
     /**
@@ -61,11 +62,11 @@ class DeleteCommandTest {
      */
     @Test
     void deleteCommand_missingInput_expectException() {
+        Lists itemList = new Lists();
         String deleteInputString = "delete";
         String deleteInputString2 = "delete ";
-        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString).executeCommand());
-        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString2).executeCommand());
-        Lists.expenditures.clear();
+        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString, itemList).executeCommand());
+        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString2, itemList).executeCommand());
     }
 
     /**
@@ -74,8 +75,8 @@ class DeleteCommandTest {
      */
     @Test
     void deleteCommand_addToEmptyList_expectException() {
+        Lists itemList = new Lists();
         String deleteInputString = "delete 1";
-        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString).executeCommand());
-        Lists.expenditures.clear();
+        assertThrows(MindMyMoneyException.class, () -> new DeleteCommand(deleteInputString, itemList).executeCommand());
     }
 }

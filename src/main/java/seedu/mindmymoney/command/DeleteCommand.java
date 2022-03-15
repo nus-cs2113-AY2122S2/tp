@@ -9,9 +9,12 @@ import seedu.mindmymoney.data.Lists;
  */
 public class DeleteCommand extends Command {
     private String input;
+    public Lists itemList;
 
-    public DeleteCommand(String input) {
+
+    public DeleteCommand(String input, Lists listArray) {
         this.input = input;
+        this.itemList = listArray;
     }
 
     /**
@@ -19,7 +22,7 @@ public class DeleteCommand extends Command {
      */
     public void executeCommand() throws MindMyMoneyException, NumberFormatException {
         try {
-            if (Lists.expenditures.isEmpty()) {
+            if (itemList.isEmpty()) {
                 throw new MindMyMoneyException(PrintStrings.LINE + System.lineSeparator()
                         + "Please add something to the list first:)"
                         + System.lineSeparator() + PrintStrings.LINE);
@@ -31,14 +34,14 @@ public class DeleteCommand extends Command {
             }
             String getNumber = splitMessage[1];
             int positionToDelete = Integer.parseInt(getNumber) - 1;
-            if (positionToDelete + 1 <= 0 | positionToDelete + 1 > Lists.expenditures.size()) {
+            if (positionToDelete + 1 <= 0 | positionToDelete + 1 > itemList.size()) {
                 throw new MindMyMoneyException("Please input a valid index");
             } else {
                 System.out.println(PrintStrings.LINE + "I have removed "
-                        + Lists.expenditures.get(positionToDelete).getDescription()
-                        + " of $" + Lists.expenditures.get(positionToDelete).getAmount()
+                        + itemList.get(positionToDelete).getDescription()
+                        + " of $" + itemList.get(positionToDelete).getAmount()
                         + " from the account" + System.lineSeparator() + PrintStrings.LINE);
-                Lists.expenditures.remove(positionToDelete);
+                itemList.delete(positionToDelete);
 
             }
         } catch (NumberFormatException e) {

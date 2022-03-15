@@ -13,9 +13,11 @@ import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM_IN_STRING
  */
 public class AddCommand extends Command {
     private String addInput;
+    public Lists itemList;
 
-    public AddCommand(String addInput) {
+    public AddCommand(String addInput, Lists listArray) {
         this.addInput = addInput;
+        this.itemList = listArray;
     }
 
     /**
@@ -27,7 +29,7 @@ public class AddCommand extends Command {
             String[] parseAddInput = Functions.parseInput(addInput);
             String description = parseAddInput[INDEX_OF_FIRST_ITEM_IN_STRING];
             int amount = Integer.parseInt(parseAddInput[INDEX_OF_SECOND_ITEM_IN_STRING]);
-            Lists.expenditures.add(new Expenditure(description, amount));
+            itemList.add(new Expenditure(description, amount));
             System.out.println("Successfully added " + description + " of $" + amount + " into the account");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Did you forget to input DESCRIPTION or AMOUNT?");

@@ -14,9 +14,11 @@ import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM_IN_STRING
  */
 public class UpdateCommand extends Command {
     private final String updateInput;
+    public Lists itemList;
 
-    public UpdateCommand(String updateInput) {
+    public UpdateCommand(String updateInput, Lists listArray) {
         this.updateInput = updateInput;
+        this.itemList = listArray;
     }
 
     /**
@@ -39,7 +41,7 @@ public class UpdateCommand extends Command {
 
             int indexToUpdate = Integer.parseInt(indexString) + LIST_INDEX_CORRECTION;
             Expenditure newExpenditure = new Expenditure(description, Integer.parseInt(amountString));
-            Lists.expenditures.set(indexToUpdate, newExpenditure);
+            itemList.set(indexToUpdate, newExpenditure);
 
             System.out.printf("Successfully set expenditure %d to %s\n",
                     indexToUpdate - LIST_INDEX_CORRECTION, newExpenditure);
