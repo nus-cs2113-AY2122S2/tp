@@ -1,15 +1,14 @@
 package seedu.duke;
 
-import seedu.duke.commands.Command;
-import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.ListCommand;
-import seedu.duke.commands.ClearCommand;
-import seedu.duke.commands.DeleteCommand;
-import seedu.duke.commands.HelpCommand;
+import seedu.duke.commands.*;
+import seedu.duke.exceptions.MissingValueException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import static seedu.duke.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
+import static seedu.duke.ErrorMessages.ERROR_MISSING_PARAMETERS;
+import static seedu.duke.ErrorMessages.ERROR_MISSING_VALUES;
 
 public class Parser {
     private final String command;
@@ -23,6 +22,7 @@ public class Parser {
     private static final int ENDTIME_INDEX = 4;
     private static final int MODE_INDEX = 5;
     private static final String[] HEADINGS = {"n/", "l/", "d/", "st/", "et/", "m/"};
+    private static final String[] DAYS = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
 
     public Parser(String input) {
         this.command = getCommandFromInput(input);
@@ -49,6 +49,7 @@ public class Parser {
         // checks input format error
         try {
             String[] eventDescription = splitArguments();
+            checkValidityOfArguments(eventDescription);
             String name = eventDescription[NAME_INDEX];
             String title = eventDescription[TITLE_INDEX];
             String day = eventDescription[DAY_INDEX].toLowerCase();
@@ -59,6 +60,20 @@ public class Parser {
         } catch (NumberFormatException nfe) {
             System.out.println(ERROR_INVALID_INDEX_FORMAT);
             return new HelpCommand(); // temporary
+        } catch (IndexOutOfBoundsException ie) {
+            System.out.println(ERROR_MISSING_PARAMETERS);
+            return new HelpCommand();
+        } catch (MissingValueException mve) {
+            System.out.println(ERROR_MISSING_VALUES);
+            return new HelpCommand();
+        }
+    }
+
+    private void checkValidityOfArguments(String[] eventDescription) throws MissingValueException {
+        for (int i = 0; i < MODE_INDEX; i++) {
+            if (eventDescription[i].length() == 0) {
+                throw new MissingValueException();
+            }
         }
     }
 
