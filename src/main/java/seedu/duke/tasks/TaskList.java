@@ -10,17 +10,17 @@ public class TaskList {
     private static final String ITEMIZE_FORMAT = "%d. %s" + LS;
     private static final String EMPTY_LIST = StringConstants.EMPTY_LIST;
 
-    private final ArrayList<Task> list;
+    private final ArrayList<Task> taskList;
 
     public TaskList() {
-        list = new ArrayList<>();
+        taskList = new ArrayList<>();
     }
 
     /**
      * Returns the size of the task list.
      */
     public int size() {
-        return list.size();
+        return taskList.size();
     }
 
     /**
@@ -28,7 +28,7 @@ public class TaskList {
      * @param t the task to be added
      */
     public Task addTask(Task t) {
-        list.add(t);
+        taskList.add(t);
         return t;
     }
 
@@ -37,11 +37,11 @@ public class TaskList {
      * @param index The task number to be removed.
      */
     public Task removeTask(int index) throws NoSuchTaskException {
-        if (index >= list.size() || index < 0) {
+        if (index >= taskList.size() || index < 0) {
             throw new NoSuchTaskException();
         }
         Task task = getTask(index);
-        list.remove(index);
+        taskList.remove(index);
         return task;
     }
 
@@ -50,7 +50,11 @@ public class TaskList {
      * @param index the index of the task
      */
     public Task getTask(int index) {
-        return list.get(index);
+        return taskList.get(index);
+    }
+
+    public ArrayList<Task> getTaskList() {
+        return taskList;
     }
 
     /**
@@ -59,8 +63,8 @@ public class TaskList {
      */
     public String getAllTasks(String indent) {
         String res = "";
-        for (int i = 0; i < list.size(); i++) {
-            res += indent + String.format(ITEMIZE_FORMAT, i + 1, list.get(i));
+        for (int i = 0; i < taskList.size(); i++) {
+            res += indent + String.format(ITEMIZE_FORMAT, i + 1, taskList.get(i));
         }
         if (res.length() == 0) {
             res = indent + EMPTY_LIST;
