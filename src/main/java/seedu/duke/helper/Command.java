@@ -1,12 +1,10 @@
 package seedu.duke.helper;
 
 import seedu.duke.assets.MedicineList;
-import seedu.duke.assets.Patient;
 import seedu.duke.assets.PatientList;
 
 public class Command {
     private UI ui = new UI();
-    //contains all the commands required for patient, doctor and medicine
 
     private boolean isNull(String string) {
         return string == null;
@@ -32,9 +30,7 @@ public class Command {
         if (addPatientParameters == null) {
             ui.printAddPatientExampleMessage();
         } else {
-            Patient newPatient = new Patient(addPatientParameters[0], addPatientParameters[1],
-                    Integer.parseInt(addPatientParameters[2]), addPatientParameters[3].charAt(0),
-                    addPatientParameters[4], addPatientParameters[5], addPatientParameters[6]);
+            patientList.add(addPatientParameters);
             System.out.println("The patient above has been added.");
         }
     }
@@ -59,6 +55,6 @@ public class Command {
             return;
         }
         medicineList.add(parameterArray);
-        System.out.println("Medicine has been added");;
+        System.out.println("Medicine has been added");
     }
 }

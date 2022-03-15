@@ -42,7 +42,7 @@ public class Parser {
 
     public static String[] parseAddMedicine(String parameters) {
         String[] medicineParameters = parameters.trim().split(",");
-        if (medicineParameters.length ==  5 && validateMedicine(medicineParameters)) {
+        if (medicineParameters.length == 5 && validateMedicine(medicineParameters)) {
             return medicineParameters;
         } else {
             return null;
@@ -52,8 +52,8 @@ public class Parser {
     private static boolean validateAddPatient(String[] parameters) {
         boolean isValid = true;
         if (!validateNric(parameters[0])) {
-            System.out.println("NRIC must start with a capital letter, " +
-                    "followed by 7 digits and end with a capital letter.");
+            System.out.println("NRIC must start with a capital letter, "
+                    + "followed by 7 digits and end with a capital letter.");
             isValid = false;
         }
         if (!validateFullName(parameters[1])) {
@@ -69,21 +69,20 @@ public class Parser {
             isValid = false;
         }
         if (!validateAddress(parameters[4])) {
-            System.out.println("Address must be alphanumeric. " +
-                    "Only these specific special characters are allowed: ' ( ) #");
+            System.out.println("Address must be alphanumeric. "
+                    + "Only these specific special characters are allowed: ' ( ) #");
             isValid = false;
         }
         if (!validateDob(parameters[5])) {
-            System.out.println("Date of birth must be in YYYY-MM-DD format. " +
-                    "It cannot be before 1900-01-01 or be today and after.");
+            System.out.println("Date of birth must be in YYYY-MM-DD format. "
+                    + "It cannot be before 1900-01-01 or be today and after.");
             isValid = false;
         }
         if (!validateAdmissionDate(parameters[6])) {
-            System.out.println("Date of birth must be in YYYY-MM-DD format. " +
-                    "It cannot be before 1980-01-01 or be today and after.");
+            System.out.println("Date of birth must be in YYYY-MM-DD format. "
+                    + "It cannot be before 1980-01-01 or be today and after.");
             isValid = false;
         }
-
         return isValid;
     }
 
