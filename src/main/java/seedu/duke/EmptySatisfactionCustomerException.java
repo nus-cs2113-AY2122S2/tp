@@ -1,6 +1,6 @@
 package seedu.duke;
 
-public class EmptySatisfactionCustomerException extends HotelLiteManagerException{
+public class EmptySatisfactionCustomerException extends HotelLiteManagerException {
     private static final String ERROR_MESSAGE = "Error! Customer name cannot be empty.";
 
     @Override
