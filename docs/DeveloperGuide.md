@@ -75,7 +75,7 @@ depicts a scenario when a user attempts to create a session.
 
 ### Command Component
 
-##Implementation
+## Implementation
 
 ### Add a session
 ### Remove a session
