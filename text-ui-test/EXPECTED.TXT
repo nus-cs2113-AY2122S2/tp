@@ -7,7 +7,7 @@ Wrong Medicine Format
 Wrong Medicine Format
 Wrong Medicine Format
 Wrong Medicine Format
-The patient above has been added!
+The patient above has been added.
 -------------------------
 Goodbye! Exiting the programme.
 Terminated

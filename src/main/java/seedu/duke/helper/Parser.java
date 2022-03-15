@@ -26,7 +26,6 @@ public class Parser {
 
     public static String[] parseAddPatient(String parameters) {
         String[] addPatientParameters = parameters.split(",");
-        System.out.println(addPatientParameters.length);
         for (int i = 0; i < addPatientParameters.length; i++) {
             addPatientParameters[i] = addPatientParameters[i].trim();
         }

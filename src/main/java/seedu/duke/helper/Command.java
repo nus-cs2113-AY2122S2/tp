@@ -8,12 +8,12 @@ public class Command {
     private UI ui = new UI();
     //contains all the commands required for patient, doctor and medicine
 
-    private boolean nullChecker(String string) {
-        return string != null;
+    private boolean isNull(String string) {
+        return string == null;
     }
 
     public void viewPatient(PatientList patientList, String parameters) {
-        if (!nullChecker(parameters)) {
+        if (isNull(parameters)) {
             return;
         }
         if (Parser.parseViewPatient(parameters) == null) {
@@ -23,7 +23,7 @@ public class Command {
     }
 
     public void addPatient(PatientList patientList, String parameters) {
-        if (!nullChecker(parameters)) {
+        if (isNull(parameters)) {
             ui.printAddPatientNullParametersMessage();
             ui.printAddPatientExampleMessage();
             return;
@@ -50,7 +50,7 @@ public class Command {
     }
 
     public void addMedicine(MedicineList medicineList, String parameters) {
-        if (!nullChecker(parameters)) {
+        if (isNull(parameters)) {
             return;
         }
         String[] parameterArray = Parser.parseAddMedicine(parameters);
