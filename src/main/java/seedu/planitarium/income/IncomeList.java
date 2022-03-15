@@ -29,7 +29,7 @@ public class IncomeList {
         return incomeArrayList.get(index - 1).getDescription();
     }
 
-    public double getNumberOfIncome () {
+    public int getNumberOfIncomes() {
         return numberOfIncomes;
     }
 
