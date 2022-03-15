@@ -157,4 +157,6 @@ public abstract class Message {
     // Activity List Command
     public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =
             "There are currently no activities in this session";
+    public static final String ERROR_NAME_INVALIDNAME =
+            "Invalid name. Names must contain only alphabetical characters.";
 }
