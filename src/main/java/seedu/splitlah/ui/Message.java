@@ -71,6 +71,8 @@ public abstract class Message {
             "Please include the following delimiter in your input: ";
     public static final String ERROR_PARSER_MISSING_ARGUMENT =
             "Please include an argument after the following delimiter: ";
+    public static final String ERROR_PARSER_MORE_THAN_ONE_PAYER =
+            "The activity should only have a single payer. Please rectify and try again.";
     public static final String ERROR_PARSER_NON_INTEGER_ARGUMENT =
             "Please enter a valid integer after the following delimiter: ";
     public static final String ERROR_PARSER_ID_VALUE_NOT_POSITIVE =

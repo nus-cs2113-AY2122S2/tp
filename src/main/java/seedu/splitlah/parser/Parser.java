@@ -331,11 +331,16 @@ public class Parser {
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A String object that represents a name of a payer.
-     * @throws InvalidFormatException If the Payer delimiter is not found in the command arguments, or
-     *                                if no arguments representing a name were provided after the Payer delimiter.
+     * @throws InvalidFormatException If the Payer delimiter is not found in the command arguments,
+     *                                if no arguments representing a name were provided after the Payer delimiter, or
+     *                                if the argument contains more than a single name.
      */
     public static String parsePayer(String commandArgs) throws InvalidFormatException {
-        return getArgumentFromDelimiter(commandArgs, PAYER_DELIMITER);
+        String payer = getArgumentFromDelimiter(commandArgs, PAYER_DELIMITER);
+        if (payer.indexOf(' ') != INVALID_INDEX_INDICATOR) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_MORE_THAN_ONE_PAYER);
+        }
+        return payer;
     }
 
     /**
