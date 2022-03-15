@@ -18,7 +18,4 @@ public class CheckAllRoomCommand extends Command {
         }
     }
 
-
-
-
 }

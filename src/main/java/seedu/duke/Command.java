@@ -10,7 +10,6 @@ public abstract class Command {
     public abstract void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList listOfItems, Ui ui)
             throws HotelLiteManagerException, WrongCommandException;
 
-
     public boolean isExit() {
         return this.isExit;
     }
