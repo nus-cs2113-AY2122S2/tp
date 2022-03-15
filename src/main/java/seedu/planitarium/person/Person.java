@@ -14,6 +14,7 @@ public class Person {
      * @param name The name of the person to be created
      */
     public Person(String name) {
+        assert(name != null);
         this.name = name;
         incomeList = new IncomeList();
         expenditureList = new ExpenditureList();
@@ -35,6 +36,7 @@ public class Person {
      * @param amount The value of the income
      */
     public void addIncome(String description, double amount) {
+        assert(description != null);
         this.incomeList.addIncome(description, amount);
         System.out.println("An income of " + amount + " from " + description + " has been added");
     }
@@ -45,9 +47,11 @@ public class Person {
      * @param index The index of the income to be removed
      */
     public void deleteIncome(int index) {
-        String description = incomeList.getDescription(index);
-        double value = incomeList.getIncomeValue(index);
-        incomeList.remove(index);
+        assert(index >= 1);
+        assert(index <= getNumberOfIncomes());
+        String description = incomeList.getDescription(index - 1);
+        double value = incomeList.getIncomeValue(index - 1);
+        incomeList.remove(index - 1);
         System.out.println("An income of " + value + " for " + description + " has been removed");
     }
 
@@ -55,11 +59,12 @@ public class Person {
      * Adds an expenditure to the list of expenditures.
      *
      * @param description The reason for the expenditure
-     * @param value The value of the expenditure
+     * @param amount The value of the expenditure
      */
-    public void addExpend(String description, int value) {
-        expenditureList.addExpenditure(description, value);
-        System.out.println("An expenditure of " + value + " for " + description + " has been added");
+    public void addExpend(String description, double amount) {
+        assert(description != null);
+        expenditureList.addExpenditure(description, amount);
+        System.out.println("An expenditure of " + amount + " for " + description + " has been added");
     }
 
     /**
@@ -68,9 +73,11 @@ public class Person {
      * @param index The index of the expenditure to be removed.
      */
     public void deleteExpend(int index) {
-        String description = expenditureList.getDescription(index);
-        double value = expenditureList.getExpenditureValue(index);
-        expenditureList.remove(index);
+        assert(index >= 1);
+        assert(index <= getNumberOfExpenditures());
+        String description = expenditureList.getDescription(index - 1);
+        double value = expenditureList.getExpenditureValue(index - 1);
+        expenditureList.remove(index - 1);
         System.out.println("An expenditure of " + value + " for " + description + " has been removed");
     }
 
