@@ -13,7 +13,6 @@ public class StaffController extends Controller {
         "Exit Staff Menu", "Find Staff", "Add Staff", "Delete Staff"
     };
     private final StaffManager staffManager;
-    private static Logger logger = Logger.getLogger("StaffController");
 
     /**
      * Creates StaffController which controls StaffManager.
