@@ -1,12 +1,8 @@
 package seedu.duke.controllers;
 
-import jdk.dynalink.Operation;
-import seedu.duke.entities.Dish;
+import seedu.duke.entities.Staff;
 import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.manager.StaffManager;
-import seedu.duke.entities.Staff;
-
-import java.util.Scanner;
 
 public class StaffController extends Controller {
     private static final String[] CHOICES = {
@@ -16,12 +12,10 @@ public class StaffController extends Controller {
 
     /**
      * Creates StaffController which controls StaffManager.
-     *
-     * @param staffManager StaffManager that the controller controls.
      */
-    public StaffController(StaffManager staffManager) {
+    public StaffController() {
         super(CHOICES);
-        this.staffManager = staffManager;
+        this.staffManager = new StaffManager();
     }
 
     @Override
@@ -49,16 +43,14 @@ public class StaffController extends Controller {
     public Staff findStaff() throws OperationTerminationException {
         System.out.println("Finding staff...");
         int staffId = InputParser.getInteger("ID of staff: ");
-        Staff targetStaff = staffManager.findByStaffId(staffId, true);
-        return targetStaff;
+        return staffManager.findByStaffId(staffId, true);
     }
 
-    public void addStaff() throws OperationTerminationException{
+    public void addStaff() throws OperationTerminationException {
         System.out.println("Adding new staff...");
         final int staffId = InputParser.getInteger("ID of staff: ");
         final String staffName = InputParser.getString("Name of staff: ");
         final String position = InputParser.getString("Position of staff: ");
-        System.out.println("Salary of staff: ");
         final double salary = InputParser.getDouble("Salary of staff: ");
         staffManager.addStaff(staffId, staffName, position, salary);
     }
@@ -71,5 +63,4 @@ public class StaffController extends Controller {
         System.out.println("You are entering the Staff Menu...");
         super.takeControl();
     }
-
 }

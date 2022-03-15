@@ -3,7 +3,7 @@ package seedu.duke.entities;
 import java.util.ArrayList;
 
 public class Order {
-    private ArrayList<Dish> dishes;
+    private final ArrayList<Dish> dishes;
 
     Order() {
         this.dishes = new ArrayList<Dish>();
