@@ -20,9 +20,6 @@ import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
 public class Storage {
     private String saveFilePath;
 
-    private static final String PLACEHOLDER_GET_BY_DATE = "2050-12-12";
-    private static final String PLACEHOLDER_GET_DO_DATE = "2050-12-12";
-
     /**
      * Creates a constructor for the class Storage.
      * Initialises and creates location for save file if missing.
@@ -58,14 +55,13 @@ public class Storage {
     /**
      * Appends new tasks to the save file.
      *
+     * @param taskStatus         Mark status of the task.
      * @param newTaskDescription Task Description.
      * @param newTaskByDate      Task Deadline and/or time.
      * @param newTaskDoDate      Task Do date
-     * @param taskStatus         Mark status of the task.
      */
-    public void appendToFile(String newTaskDescription,
-                             String newTaskByDate, String newTaskDoDate,
-                             String taskStatus) {
+    public void appendToFile(String taskStatus, String newTaskDescription,
+                             String newTaskByDate, String newTaskDoDate) {
         try {
             FileWriter fw = new FileWriter(saveFilePath, true);
             String textToAppend = taskStatus + " | "
@@ -90,8 +86,8 @@ public class Storage {
         wipeSavedData();
         ArrayList<Task> replicatedTasks = taskList.getTasks();
         for (Task task : replicatedTasks) {
-            appendToFile(task.getDescription(), PLACEHOLDER_GET_BY_DATE,
-                    PLACEHOLDER_GET_DO_DATE, task.getStatusIcon());
+            appendToFile(task.getStatusIcon(), task.getDescription(), task.getByDate(),
+                    task.getDoOnDate());
         }
     }
 

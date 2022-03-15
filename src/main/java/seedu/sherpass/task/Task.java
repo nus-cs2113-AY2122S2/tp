@@ -1,8 +1,10 @@
 package seedu.sherpass.task;
 
-public abstract class Task {
+public class Task {
     protected String description;
     protected boolean isDone;
+    protected String byDate;
+    protected String doOnDate;
 
 
     /**
@@ -11,9 +13,11 @@ public abstract class Task {
      *
      * @param description Description of task.
      */
-    public Task(String description) {
+    public Task(String description, String byDate, String doOnDate) {
         this.description = description;
         this.isDone = false;
+        this.byDate = byDate;
+        this.doOnDate = doOnDate;
     }
 
     /**
@@ -79,19 +83,13 @@ public abstract class Task {
      *
      * @return White space.
      */
-    public String getDate() {
-        return " ";
+    public String getByDate() {
+        return byDate;
     }
 
-    /**
-     * Returns task type. Current parent class is created
-     * as a template for child classes to perform its own
-     * respective functions.
-     *
-     * @return Nothing as function is abstract.
-     */
-    public abstract String getType();
-
+    public String getDoOnDate() {
+        return doOnDate;
+    }
 
     /**
      * Returns a string version of the task content.
@@ -102,6 +100,29 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.getDescription();
+        if (this.byDate.equals("") && this.doOnDate.equals("")) {
+            return "[" + this.getStatusIcon() + "] " + this.getDescription();
+        }
+
+        if (this.doOnDate.equals("")) {
+            return "[" + this.getStatusIcon() + "] " + this.getDescription()
+                    + " (by: " + this.byDate + ")";
+        }
+
+        return "[" + this.getStatusIcon() + "] " + this.getDescription()
+            + " (by: " + this.byDate + ") (reminder on: " + this.doOnDate + ")";
+    }
+
+
+    public void setTaskDescription(String taskDescription) {
+        this.description = taskDescription;
+    }
+
+    public void setByDate(String byDate) {
+        this.byDate = byDate;
+    }
+
+    public void setDoOnDate(String doOnDate) {
+        this.doOnDate = doOnDate;
     }
 }
