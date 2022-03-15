@@ -76,6 +76,7 @@ depicts a scenario when a user attempts to create a session.
 ### Command Component
 
 ##Implementation
+
 ### Add a session
 ### Remove a session
 ### View a session
@@ -93,7 +94,7 @@ depicts a scenario when a user attempts to create a session.
 
 ## Product scope
 ### Target user profile
-* Budget conscious individuals
+* Budget conscious.
 * Prefers to use desktop applications over other types of applications.
 * Are able to type relatively fast.
 * Comfortable using CLI applications.
@@ -105,17 +106,17 @@ they engage in during the outings.
 
 ## User Stories
 
-| Version | As a ...              | I want to ...                        | So that I can ...                                                                 |
-|---------|-----------------------|--------------------------------------|-----------------------------------------------------------------------------------|
-| v1.0    | new user              | see usage instructions               | refer to them when I forget how to use the application                            |
-| v1.0    | Budget conscious user | create sessions                      | I can record the transactions of the outing                                       |
-| v1.0    | Budget conscious user | create activities                    | I am able to track the expenditure for each activity                              |
-| v1.0    | Budget conscious user | view an existing session             | I can view the full details of a session previously created                       |
-| v1.0    | Budget conscious user | view an existing activity            | I can view the cost breakdown of who paid and who was involved in the activity    |
-| v1.0    | Budget conscious user | list all existing sessions           | I can view all sessions previously created                                        |
-| v1.0    | Budget conscious user | list all activities in a session     | I can view all the activities that happened in the session                        |
-| v1.0    | Budget conscious user | settle all transactions of a session | I can see a summary of who needs to pay what amount to who for the entire session |
-| v1.0    | {Placeholder}         | {Placeholder}                        | {Placeholder}                                                                     |
+| Version | As a ...              | I want to ...                        | So that I can ...                                                            |
+|---------|-----------------------|--------------------------------------|------------------------------------------------------------------------------|
+| v1.0    | new user              | see usage instructions               | refer to them when I forget how to use the application                       |
+| v1.0    | Budget conscious user | create sessions                      | record the transactions of the outing                                        |
+| v1.0    | Budget conscious user | create activities                    | able to track the expenditure for each activity                              |
+| v1.0    | Budget conscious user | view an existing session             | view the full details of a session previously created                        |
+| v1.0    | Budget conscious user | view an existing activity            | view the cost breakdown of who paid and who was involved in the activity     |
+| v1.0    | Budget conscious user | list all existing sessions           | view all sessions previously created                                         |
+| v1.0    | Budget conscious user | list all activities in a session     | view all the activities that happened in the session                         |
+| v1.0    | Budget conscious user | settle all transactions of a session | see a summary of who needs to pay what amount to who for the entire session  |
+| v1.0    | {Placeholder}         | {Placeholder}                        | {Placeholder}                                                                |
 
 ## Non-Functional Requirements
 1. The application should be able to work in any operating systems with `Java 11` installed.
