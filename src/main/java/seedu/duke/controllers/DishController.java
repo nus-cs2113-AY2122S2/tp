@@ -20,7 +20,7 @@ public class DishController extends Controller {
 
     @Override
     public void takeControl() {
-        System.out.println("You are using Menu function");
+        System.out.println("Entering Dish Menu...\n");
         super.takeControl();
     }
 
@@ -46,7 +46,6 @@ public class DishController extends Controller {
             System.out.println("Unknown choice!");
             break;
         }
-        System.out.println("You are using Menu function");
         System.out.println(this);
         return false;
     }

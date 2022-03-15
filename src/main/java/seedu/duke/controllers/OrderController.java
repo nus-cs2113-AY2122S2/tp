@@ -20,7 +20,7 @@ public class OrderController extends Controller {
     protected boolean optionSwitcher(int choice) throws OperationTerminationException {
         switch (choice) {
         case 0:
-            System.out.println("Exiting application...");
+            System.out.println("Exiting menu...");
             return true;
         case 1:
             System.out.println("Implement me to view menu :D");
@@ -41,11 +41,9 @@ public class OrderController extends Controller {
             printReceipt();
             break;
         default:
-            // This should not happen, since the choice argument for this method is always parsed from the
-            // getChoice() method, which also checks for the range of index input.
             System.out.println("Unknown choice!");
+            break;
         }
-        System.out.println("Now in Main Menu.");
         System.out.println(this);
         return false;
     }
@@ -87,7 +85,7 @@ public class OrderController extends Controller {
 
     @Override
     public void takeControl() {
-        System.out.println("You are using Order function");
+        System.out.println("Entering Order Menu...\n");
         super.takeControl();
     }
 }
