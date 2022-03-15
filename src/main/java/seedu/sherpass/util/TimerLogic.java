@@ -29,7 +29,7 @@ public class TimerLogic {
         String userInput = ui.readCommand();
         while (!userInput.contains("leave")) {
             ui.showLine();
-            parseStudyMode(userInput, ui, timer);
+            parseStudyMode(userInput, ui);
             ui.showLine();
             userInput = ui.readCommand();
             if (userInput.contains("leave")) {

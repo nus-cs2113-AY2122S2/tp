@@ -46,11 +46,6 @@ import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAG
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_STUDY_INPUT_MESSAGE;
 
-import static seedu.sherpass.util.TimerLogic.pauseTimer;
-import static seedu.sherpass.util.TimerLogic.resumeTimer;
-import static seedu.sherpass.util.TimerLogic.startTimer;
-import static seedu.sherpass.util.TimerLogic.stopTimer;
-
 public class Parser {
 
     /**
@@ -361,20 +356,20 @@ public class Parser {
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
             try {
-                startTimer(parsedInput);
+                TimerLogic.startTimer(parsedInput);
             } catch (InvalidTimeException e) {
                 ui.showToUser("Oops! Your timer input does not seem to be correct.\n"
                         + "Please re-enter a valid duration.");
             }
             break;
         case "pause":
-            pauseTimer();
+            TimerLogic.pauseTimer();
             break;
         case "resume":
-            resumeTimer();
+            TimerLogic.resumeTimer();
             break;
         case "stop":
-            stopTimer();
+            TimerLogic.stopTimer();
             break;
         default:
             ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);
