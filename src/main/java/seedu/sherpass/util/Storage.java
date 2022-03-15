@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
@@ -13,6 +12,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +21,8 @@ import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_1
 import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_2;
 import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_3;
 import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
+import static seedu.sherpass.constant.DateAndTimeFormat.parseFormat;
+
 
 public class Storage {
     private String saveFilePath;
@@ -58,30 +60,6 @@ public class Storage {
     }
 
     /**
-     * Appends new tasks to the save file.
-     *
-     * @param taskStatus         Mark status of the task.
-     * @param newTaskDescription Task Description.
-     * @param newTaskByDate      Task Deadline and/or time.
-     * @param newTaskDoDate      Task Do date
-     */
-    public void appendToFile(String taskStatus, String newTaskDescription,
-                             String newTaskByDate, String newTaskDoDate) {
-        try {
-            FileWriter fw = new FileWriter(saveFilePath, true);
-            String textToAppend = taskStatus + " | "
-                    + newTaskDescription + " | " + newTaskByDate
-                    + " | " + newTaskDoDate;
-
-            fw.write(textToAppend + System.lineSeparator());
-            fw.close();
-
-        } catch (IOException e) {
-            System.out.println(ERROR_IO_FAILURE_MESSAGE);
-        }
-    }
-
-    /**
      * Returns the JSON representation of the task list.
      *
      * @param taskList The task list to be converted into JSON format.
@@ -93,8 +71,8 @@ public class Storage {
         for (Task t : taskList.getTasks()) {
             JSONObject task = new JSONObject();
             task.put("status", t.getStatusIcon());
-            task.put("by_date", t.getByDate());
-            task.put("do_date", t.getDoOnDate());
+            task.put("by_date", (t.getByDate() == null ? "null" : t.getByDate().format(parseFormat)));
+            task.put("do_date", (t.getDoOnDate() == null ? "null" : t.getDoOnDate().format(parseFormat)));
             task.put("description", t.getDescription());
             tasks.put(task);
         }
@@ -119,24 +97,6 @@ public class Storage {
             System.out.println(ERROR_IO_FAILURE_MESSAGE);
         }
         return taskJson;
-    }
-
-    private boolean isTaskRepeated(ArrayList<Task> saveTaskList, int index) {
-        for (int j = index + 1; j < saveTaskList.size(); j++) {
-            if (saveTaskList.get(index).getDescription().trim()
-                    .equalsIgnoreCase(saveTaskList.get(j).getDescription().trim())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void checkForRepeatedInputs(ArrayList<Task> saveTaskList) throws InputRepeatedException {
-        for (int i = 0; i < saveTaskList.size() - 1; i++) {
-            if (isTaskRepeated(saveTaskList, i)) {
-                throw new InputRepeatedException();
-            }
-        }
     }
 
     /**
@@ -165,10 +125,11 @@ public class Storage {
 
     /**
      * Creates a new save file or exits the program.
-     *<p>
+     * <p>
      * When the save file fails to load, the user decides if the program creates new save file
      * or the user can manually inspect the save file.
-     *</p>
+     * </p>
+     *
      * @param ui Ui for printing messages
      */
     public void handleCorruptedSave(Ui ui) {

@@ -36,7 +36,6 @@ public class Main {
         try {
             storage = new Storage(filePath);
             taskList = new TaskList(storage.load());
-            reminder = new Reminder(taskList, ui);
         } catch (IOException e) {
             ui.showToUser(ERROR_IO_FAILURE_MESSAGE);
             System.exit(1);
@@ -44,6 +43,7 @@ public class Main {
             storage.handleCorruptedSave(ui);
             taskList = new TaskList();
         }
+        reminder = new Reminder(taskList, ui);
     }
 
     /**

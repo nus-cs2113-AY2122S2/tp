@@ -13,19 +13,19 @@ import seedu.sherpass.command.ListCommand;
 import seedu.sherpass.command.MarkCommand;
 import seedu.sherpass.command.StudyCommand;
 import seedu.sherpass.command.UnmarkCommand;
+
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.WrongEditInfoFormatException;
 import seedu.sherpass.exception.InvalidTimeException;
+
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import static seedu.sherpass.constant.DateAndTimeFormat.noTimeFormat;
-import static seedu.sherpass.constant.DateAndTimeFormat.savedTaskNoTimeFormat;
+import static seedu.sherpass.constant.DateAndTimeFormat.parseFormat;
 
 import static seedu.sherpass.constant.Index.MARK_INDEX;
 import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
@@ -47,7 +47,6 @@ import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
-import static seedu.sherpass.constant.Message.DATE_FORMAT_WITHOUT_TIME;
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_STUDY_INPUT_MESSAGE;
 
@@ -69,59 +68,27 @@ public class Parser {
         Task parsedTask;
         try {
             String description = taskData.getString("description");
-            String byDate = taskData.getString("by_date");
-            String doOnDate = taskData.getString("do_date");
+            String byDateString = taskData.getString("by_date");
+            String doOnDateString = taskData.getString("do_date");
+            LocalDate byDate = null;
+            LocalDate doOnDate = null;
+            if (!byDateString.equals("null")) {
+                byDate = LocalDate.parse(byDateString, parseFormat);
+            }
+            if (!doOnDateString.equals("null")) {
+                doOnDate = LocalDate.parse(doOnDateString, parseFormat);
+            }
             String status = taskData.getString("status");
             parsedTask = new Task(description, byDate, doOnDate);
             if (status.equals("X")) {
                 parsedTask.markAsDone();
             }
             return parsedTask;
-        } catch (JSONException exception) {
+        } catch (JSONException | DateTimeParseException exception) {
             throw new InvalidInputException();
         }
     }
-        /*
-=======
-    public static Task parseSavedData(String[] rawData) throws InvalidInputException {
-        if (!isValidData(rawData)) {
-            throw new InvalidInputException();
-        }
 
-        Task parsedData;
-        String parsedByDate = "";
-        String parsedDoOnDate = "";
-
-        if (rawData.length >= 3) {
-            try {
-                parsedByDate = prepareTaskDate(rawData[SAVE_TASK_BY_DATE_INDEX], true);
-
-                if (rawData.length == 4) {
-                    parsedDoOnDate = prepareTaskDate(rawData[SAVE_TASK_DO_ON_DATE_INDEX], true);
-                }
-
-            } catch (DateTimeParseException invalidDate) {
-                throw new InvalidInputException();
-            }
-        }
-
-        parsedData = new Task(rawData[SAVE_TASK_DESCRIPTION_INDEX].trim(), parsedByDate, parsedDoOnDate);
-
-        if (rawData[SAVE_TASK_MARK_STATUS].equals("X")) {
-            parsedData.markAsDone();
-        }
-
-        return parsedData;
-    }
-
-    private static Boolean isValidData(String[] rawData) {
-        if (!rawData[SAVE_TASK_MARK_STATUS].equals(" ") && !rawData[SAVE_TASK_MARK_STATUS].equals("X")) {
-            return false;
-        }
-        return !rawData[SAVE_TASK_DESCRIPTION_INDEX].isBlank();
->>>>>>> master
-    }
-*/
     private static Command prepareMarkOrUnmark(String[] parsedInput, String commandWord, TaskList taskList) {
         try {
             int markIndex = Integer.parseInt(parsedInput[MARK_INDEX]) - 1;
@@ -142,34 +109,33 @@ public class Parser {
 
     private static Command prepareAdd(String[] splitInput, TaskList taskList) {
         String[] filteredTaskContent;
-        String byDate;
-        String doOnDate;
+        LocalDate byDate;
+        LocalDate doOnDate;
         try {
             if (!splitInput[TASK_CONTENT_INDEX].contains("/by") && !splitInput[TASK_CONTENT_INDEX].contains("/do_on")) {
-                return new AddCommand(splitInput[TASK_CONTENT_INDEX], taskList, EMPTY_STRING, EMPTY_STRING);
+                return new AddCommand(splitInput[TASK_CONTENT_INDEX], taskList, null, null);
             }
 
             filteredTaskContent = splitInput[TASK_CONTENT_INDEX].split("/by", 2);
             if (!splitInput[1].contains("/do_on")) {
-                byDate = prepareTaskDate(filteredTaskContent[1].trim(), false);
-                return new AddCommand(filteredTaskContent[0].trim(), taskList, byDate, EMPTY_STRING);
+                byDate = prepareTaskDate(filteredTaskContent[1].trim());
+                return new AddCommand(filteredTaskContent[0].trim(), taskList, byDate, null);
             }
 
             String[] filteredDates = filteredTaskContent[1].split("/do_on");
-            byDate = prepareTaskDate(filteredDates[0].trim(), false);
-            doOnDate = prepareTaskDate(filteredDates[1].trim(), false);
+            byDate = prepareTaskDate(filteredDates[0].trim());
+            doOnDate = prepareTaskDate(filteredDates[1].trim());
             return new AddCommand(filteredTaskContent[0], taskList, byDate, doOnDate);
 
         } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
             printMissingInputMessage();
         } catch (InputRepeatedException e) {
-            //return new UpdateCommand(filteredTaskContent[TASK_DESCRIPTION_INDEX].trim(), byDate);
             System.out.println("repeated description. delete the previous iteration and type out your command again");
         }
         return null;
     }
 
-    private static Command prepareEdit(String[] splitInput, TaskList taskList) {
+    private static Command prepareEdit(String[] splitInput) {
 
         String[] fullEditInfo = splitInput[1].trim().split(" ", 2);
 
@@ -213,8 +179,8 @@ public class Parser {
 
         String[] splitEditInfo = fullEditInfo.split(" ");
         String descriptionToEdit;
-        String parsedByDateToEdit;
-        String parsedRemindDateToEdit;
+        LocalDate parsedByDateToEdit;
+        LocalDate parsedRemindDateToEdit;
 
         if (!splitEditInfo[0].trim().equals("/by") && !(splitEditInfo[0].trim().equals("/do_on"))) {
             descriptionToEdit = splitEditInfo[0];
@@ -228,7 +194,7 @@ public class Parser {
         return new EditCommand(taskNumberToEdit, descriptionToEdit, parsedByDateToEdit, parsedRemindDateToEdit);
     }
 
-    private static String getParsedDateToEdit(String fullEditInfo, String keyword) throws InvalidInputException {
+    private static LocalDate getParsedDateToEdit(String fullEditInfo, String keyword) throws InvalidInputException {
 
         if (fullEditInfo.contains(keyword)) {
 
@@ -239,18 +205,14 @@ public class Parser {
             // splits the substring and obtains the first word (which should be the date of format yyyy/MM/dd)
             String dateToEdit = fullEditInfo.substring(offsetForSubstring).split(" ")[0].trim();
 
-            if (dateToEdit.isBlank()) {
-                return EMPTY_STRING;
-            }
-
-            return prepareTaskDate(dateToEdit, false);
+            return prepareTaskDate(dateToEdit);
         }
 
-        return EMPTY_STRING;
+        return null;
     }
 
 
-    private static String confirmInvalidDateFormat() throws InvalidInputException {
+    private static LocalDate confirmInvalidDateFormat() throws InvalidInputException {
         Ui anotherUi = new Ui();
         anotherUi.showToUser("It seems that the date and time\nyou gave is not in the correct format.\n"
                 + "Would you like to re-enter a valid date and time? (Y/N)\n"
@@ -266,7 +228,7 @@ public class Parser {
                 anotherUi.showToUser("Enter valid date input:");
                 input = anotherUi.readCommand();
                 anotherUi.showLine();
-                return prepareTaskDate(input.trim(), false);
+                return prepareTaskDate(input.trim());
             }
             if (input.trim().equalsIgnoreCase("N")
                     || input.trim().equalsIgnoreCase("No")) {
@@ -278,44 +240,16 @@ public class Parser {
         }
     }
 
-    private static String checkCorrectDateFormat(String rawTaskDate, boolean isParseSaveFile)
-            throws InvalidInputException {
-        try {
-            if (isParseSaveFile) {
-                return LocalDate.parse(rawTaskDate, savedTaskNoTimeFormat)
-                        .format(DateTimeFormatter.ofPattern(DATE_FORMAT_WITHOUT_TIME));
-            }
-            return LocalDate.parse(rawTaskDate, noTimeFormat)
-                    .format(DateTimeFormatter.ofPattern(DATE_FORMAT_WITHOUT_TIME));
-        } catch (DateTimeParseException e) {
-            if (isParseSaveFile) {
-                throw new InvalidInputException();
-            }
-            return confirmInvalidDateFormat();
-        }
-    }
-
-    private static String prepareTaskDate(String rawTaskDate, boolean isParseSaveFile)
+    private static LocalDate prepareTaskDate(String rawTaskDate)
             throws InvalidInputException {
         if (rawTaskDate.isBlank()) {
-            throw new InvalidInputException();
+            return null;
         }
         try {
-            // converts readable date String to localDate (yyyy-MM-dd) and back to readable date String
-            // basically just to check whether the input date is valid or will throw any exception
-            if (isParseSaveFile) {
-                LocalDate localDate = LocalDate.parse(rawTaskDate, savedTaskNoTimeFormat);
-                String readableDate = localDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT_WITHOUT_TIME));
-                return readableDate;
-            }
-
-            // converts localDate of format (yyyy/MM/dd) to String of format (dd MMM yyyy, EEE)
-            LocalDate localDate = LocalDate.parse(rawTaskDate, noTimeFormat);
-            String readableDate = localDate.format(DateTimeFormatter.ofPattern(DATE_FORMAT_WITHOUT_TIME));
-            return readableDate;
-
+            LocalDate localDate = LocalDate.parse(rawTaskDate, parseFormat);
+            return localDate;
         } catch (DateTimeParseException e) {
-            return checkCorrectDateFormat(rawTaskDate, isParseSaveFile);
+            return confirmInvalidDateFormat();
         }
     }
 
@@ -357,7 +291,7 @@ public class Parser {
         case AddCommand.COMMAND_WORD:
             return prepareAdd(splitInput, taskList);
         case EditCommand.COMMAND_WORD:
-            return prepareEdit(splitInput, taskList);
+            return prepareEdit(splitInput);
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(splitInput, taskList);
         case ClearCommand.COMMAND_WORD:

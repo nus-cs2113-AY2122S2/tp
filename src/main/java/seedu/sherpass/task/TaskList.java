@@ -2,6 +2,8 @@ package seedu.sherpass.task;
 
 import seedu.sherpass.util.Ui;
 
+import java.time.LocalDate;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -36,7 +38,7 @@ public class TaskList {
      * @param taskByDate        Due date of the task
      * @param taskRemindDate    Reminder date of the task
      */
-    public void addTask(String taskDescription, String taskByDate, String taskRemindDate) {
+    public void addTask(String taskDescription, LocalDate taskByDate, LocalDate taskRemindDate) {
         Task newTask = new Task(taskDescription, taskByDate, taskRemindDate);
         tasks.add(newTask);
         System.out.println("Got it. I've added this task:\n  " + newTask
