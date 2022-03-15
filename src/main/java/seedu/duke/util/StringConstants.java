@@ -74,7 +74,7 @@ public class StringConstants {
             + "Format to mark a task as uncompleted: mark /u TASK_NUMBER [-m MODULE_CODE]";
     public static final String RESET_HELP = "Removes all modules and tasks.\n"
             + "Format to remove all modules and tasks: reset";
-    public static final String HELP_HELP = "Displays help and format for selected command.\n"
+    public static final String HELP = "Displays help and format for selected command.\n"
             + "Format to display help for specific: help COMMAND\n"
             + "Available commands: exit, add, del, list, mark, help";
     public static final String HELP_EXCEPTION = "Sorry, but no help exists for that command.";
