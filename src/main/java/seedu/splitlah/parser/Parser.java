@@ -380,9 +380,11 @@ public class Parser {
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents a session unique identifier.
-     * @throws InvalidFormatException If the Session ID delimiter is not found in the command arguments, or
+     * @throws InvalidFormatException If the Session ID delimiter is not found in the command arguments,
      *                                if no arguments representing a session unique identifier were provided after the 
-     *                                Session ID delimiter.
+     *                                Session ID delimiter,
+     *                                if the parsed argument cannot be parsed as an integer, or
+     *                                if the integer parsed from the argument is not a positive integer.
      */
     public static int parseSessionId(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, SESSION_ID_DELIMITER);
@@ -395,9 +397,11 @@ public class Parser {
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents an activity unique identifier.
-     * @throws InvalidFormatException If the Activity ID delimiter is not found in the command arguments, or
+     * @throws InvalidFormatException If the Activity ID delimiter is not found in the command arguments,
      *                                if no arguments representing an activity unique identifier were provided after 
-     *                                the Activity ID delimiter.
+     *                                the Activity ID delimiter,
+     *                                if the parsed argument cannot be parsed as an integer, or
+     *                                if the integer parsed from the argument is not a positive integer.
      */
     public static int parseActivityId(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, ACTIVITY_ID_DELIMITER);
@@ -442,8 +446,9 @@ public class Parser {
      * @return A double that represents a single total cost.
      * @throws InvalidFormatException If the Total cost delimiter is not found in the command arguments,
      *                                if no arguments representing a total cost were provided after the 
-     *                                Total cost delimiter, or
-     *                                if the arguments cannot be parsed as a double.
+     *                                Total cost delimiter,
+     *                                if the arguments cannot be parsed as a double, or
+     *                                if the cost value parsed is not positive.
      */
     public static double parseTotalCost(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, TOTAL_COST_DELIMITER);
@@ -458,8 +463,9 @@ public class Parser {
      * @return A double array object that represents a list of cost values.
      * @throws InvalidFormatException If the Cost list delimiter is not found in the command arguments,
      *                                if no arguments representing a list of cost values were provided after the 
-     *                                Cost list delimiter, or
-     *                                if any token in the argument cannot be parsed as a double.
+     *                                Cost list delimiter,
+     *                                if any token in the argument cannot be parsed as a double, or
+     *                                if any cost value parsed is not positive.
      */
     public static double[] parseCostList(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, COST_LIST_DELIMITER);
