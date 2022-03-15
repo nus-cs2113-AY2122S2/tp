@@ -57,7 +57,7 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
     * Defines how a command is executed.
 
 **Interaction between components**
-![Manager Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ComponentInteraction.drawio.png)
+![Component Interaction Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ComponentInteraction.drawio.png)
 <br>
 The *Component Interaction Diagram* shows the inner workings of how each component in SplitLah interacts. The diagram 
 depicts a scenario when a user attempts to create a session.
