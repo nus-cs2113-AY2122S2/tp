@@ -8,11 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class StaffTest {
     @Test
-    void staff_InvalidInput_ErrorMessage() {
+    void staff_testCreateStaff() {
         Staff staff1 =  new Staff(1, "Jay", "Waiter", 5000);
         Staff staff2 = new Staff(2, "Mary", "Chef", 5000);
         assertTrue(staff1.toString().equals("1     | Jay             | Waiter"));
-        assertTrue(staff1.toString().equals("2     | Mary            | Chef"));
+        assertTrue(staff2.toString().equals("2     | Mary            | Chef"));
     }
-
 }
