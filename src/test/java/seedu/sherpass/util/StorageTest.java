@@ -8,6 +8,7 @@ import seedu.sherpass.task.Task;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +24,8 @@ class StorageTest {
         try {
             Storage storage = new Storage("data/test.json");
             TaskList tasks = new TaskList();
-            tasks.addTask("task_one", "2050-12-12", "todo");
+            tasks.addTask("task_one", LocalDate.parse("2022-12-12")
+                    , null);
             storage.writeSaveData(tasks);
         } catch (IOException exception) {
             exception.printStackTrace();
@@ -33,11 +35,14 @@ class StorageTest {
 
     @Test
     public void load_oneTask_expectTaskList() {
+        writeSaveData_oneTask_expectFileCreated();
         try {
             Storage storage = new Storage("data/test.json");
             TaskList actualList = new TaskList(storage.load());
             Task task = actualList.getTasks().get(0);
             assertEquals(task.getDescription(), "task_one");
+            assertEquals(task.getByDate(), LocalDate.parse("2022-12-12"));
+            assertEquals(task.getDoOnDate(), null);
             assertEquals(task.getStatusIcon(), " ");
         } catch (InvalidInputException | IOException | JSONException exception) {
             exception.printStackTrace();
