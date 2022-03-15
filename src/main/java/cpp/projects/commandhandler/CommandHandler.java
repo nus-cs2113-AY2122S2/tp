@@ -34,15 +34,9 @@ public class CommandHandler {
         switch (commands[0].toLowerCase()) {
         case "addproject": //add a project into list
             projectList.addProject(commands[1]);
-            System.out.println(Constants.SEPARATOR);
-            System.out.println(commands[1] + " added.");
-            System.out.println(Constants.SEPARATOR);
             break;
         case "deleteproject": //delete a project based on its name
             projectList.deleteProject(commands[1]);
-            System.out.println(Constants.SEPARATOR);
-            System.out.println(commands[1] + " deleted.");
-            System.out.println(Constants.SEPARATOR);
             break;
         case "listprojects":
         case "listproject": //view all project(s) by name
