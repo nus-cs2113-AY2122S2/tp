@@ -38,7 +38,7 @@ public class Parser {
 
     public static String[] parseAddMedicine(String parameters) {
         String[] medicineParameters = parameters.trim().split(",");
-        if (medicineParameters.length ==  5 && validateMedicine(medicineParameters)) {
+        if (medicineParameters.length == 5 && validateMedicine(medicineParameters)) {
             return medicineParameters;
         } else {
             return null;
@@ -196,7 +196,7 @@ public class Parser {
         }
     }
 
-    private static  boolean validateQuantity(String quantity) {
+    private static boolean validateQuantity(String quantity) {
         try {
             int quantityInt = Integer.parseInt(quantity);
             return quantityInt > 0;

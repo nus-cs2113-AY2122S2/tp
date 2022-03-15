@@ -17,4 +17,28 @@ public class Medicine {
         this.sideEffects = sideEffects;
         this.quantity = quantity;
     }
+
+    public int getMedicineId() {
+        return medicineId;
+    }
+
+    public String getMedicineName() {
+        return medicineName;
+    }
+
+    public int getDosage() {
+        return dosage;
+    }
+
+    public String getExpiry() {
+        return expiry;
+    }
+
+    public String getSideEffects() {
+        return sideEffects;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
 }

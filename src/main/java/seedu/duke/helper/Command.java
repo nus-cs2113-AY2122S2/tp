@@ -57,6 +57,7 @@ public class Command {
             return;
         }
         medicineList.add(parameterArray);
-        System.out.println("Medicine has been added");;
+        System.out.println("Medicine has been added");
+        ;
     }
 }
