@@ -38,7 +38,7 @@ public class Person {
     public void addIncome(String description, double amount) {
         assert(description != null);
         this.incomeList.addIncome(description, amount);
-        System.out.println("An income of " + amount + " from " + description + " has been added");
+        System.out.println("An income of " + amount + " from " + description + " has been added to " + this.name);
     }
 
     /**
@@ -54,7 +54,7 @@ public class Person {
         String description = incomeList.getDescription(index);
         double value = incomeList.getIncomeValue(index);
         incomeList.remove(index);
-        System.out.println("An income of " + value + " for " + description + " has been removed");
+        System.out.println("An income of " + value + " for " + description + " has been removed from " + this.name);
     }
 
     /**
@@ -66,7 +66,7 @@ public class Person {
     public void addExpend(String description, double amount) {
         assert(description != null);
         expenditureList.addExpenditure(description, amount);
-        System.out.println("An expenditure of " + amount + " for " + description + " has been added");
+        System.out.println("An expenditure of " + amount + " for " + description + " has been added to " + this.name);
     }
 
     /**
@@ -80,7 +80,8 @@ public class Person {
         String description = expenditureList.getDescription(index);
         double value = expenditureList.getExpenditureValue(index);
         expenditureList.remove(index);
-        System.out.println("An expenditure of " + value + " for " + description + " has been removed");
+        System.out.println("An expenditure of " + value + " for " + description
+                + " has been removed from " + this.name);
     }
 
     /**
