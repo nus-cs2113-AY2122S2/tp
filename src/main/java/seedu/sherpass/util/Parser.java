@@ -28,6 +28,7 @@ import java.time.format.DateTimeParseException;
 import static seedu.sherpass.constant.DateAndTimeFormat.parseFormat;
 
 import static seedu.sherpass.constant.Index.MARK_INDEX;
+import static seedu.sherpass.constant.Index.CUSTOM_COMMAND_INDEX;
 import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
 import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
 import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
@@ -267,7 +268,7 @@ public class Parser {
      * Parses the user command input.
      *
      * @param userInput User command.
-     * @param taskList  Array of tasks
+     * @param taskList  Array of tasks.
      * @return Command type matching the user command.
      */
     public static Command parseCommand(String userInput, TaskList taskList) {
@@ -303,11 +304,12 @@ public class Parser {
     /**
      * Parses the default timer modes.
      *
-     * @param defaultTimerChoice Mode number
-     * @param ui                 UI
-     * @return Returns the duration of the timer mode selected in seconds
+     * @param defaultTimerChoice Mode number.
+     * @return Returns the duration of the timer mode selected in seconds.
+     * @throws InvalidTimeException If defaultTimerChoice does not match
+     *                              with the given choices.
      */
-    private static int selectDefaultTimer(String defaultTimerChoice, Ui ui) {
+    private static int selectDefaultTimer(String defaultTimerChoice) throws InvalidTimeException {
         switch (defaultTimerChoice) {
         case "0":
             return DEFAULT_TIMER_ZERO;
@@ -318,55 +320,51 @@ public class Parser {
         case "3":
             return DEFAULT_TIMER_THREE;
         default:
-            ui.showToUser("Sorry! I can't recognise the choice you've entered.\n"
-                    + "Please re-enter a valid default timer input");
+            throw new InvalidTimeException();
         }
-        return -1;
+    }
+
+    private static boolean isValidDuration(int duration) {
+        return duration > 0;
     }
 
     /**
      * Parses input to the timer.
      *
-     * @param parsedInput Parsed input
-     * @param ui          UI
-     * @return Returns the duration of the timer, else returns -1 if invalid duration specified
+     * @param parsedInput Parsed input.
+     * @return Returns duration of custom timer input, or the duration of
+     *         selected default timer mode in seconds.
+     * @throws InvalidTimeException If timer input <= 0 or there is
+     *                              multiple timer inputs.
      */
-    public static int parseTimerInput(String[] parsedInput, Ui ui) {
-        try {
-            if (parsedInput[TIMER_FORMAT_INDEX].trim().contains("/custom")) {
-                String[] customTimerInput = parsedInput[TIMER_FORMAT_INDEX].split("/custom", 2);
-                return Integer.parseInt(customTimerInput[CUSTOM_TIMER_INDEX].trim());
+    public static int parseTimerInput(String[] parsedInput) throws InvalidTimeException {
+        if (parsedInput[TIMER_FORMAT_INDEX].trim().contains("/custom")) {
+            if (parsedInput[TIMER_FORMAT_INDEX].trim().indexOf("/custom") != CUSTOM_COMMAND_INDEX) {
+                throw new InvalidTimeException();
             }
-            return selectDefaultTimer(parsedInput[DEFAULT_TIMER_INDEX].trim(), ui);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            ui.showToUser("Oops! Your input seems to be missing some commands.\n"
-                    + "Please re-enter a valid input.");
-        } catch (NumberFormatException e) {
-            ui.showToUser("Oops! Your timer input does not seem to be correct.\n"
-                    + "Please re-enter a valid input.");
+            String[] customTimerInput = parsedInput[TIMER_FORMAT_INDEX].split("/custom", 2);
+            int customDuration = Integer.parseInt(customTimerInput[CUSTOM_TIMER_INDEX].trim());
+            if (!isValidDuration(customDuration)) {
+                throw new InvalidTimeException();
+            }
+            return customDuration;
         }
-        return -1;
+        return selectDefaultTimer(parsedInput[DEFAULT_TIMER_INDEX].trim());
     }
 
     /**
      * Parses commands for study mode.
      *
-     * @param rawUserInput Raw user input
-     * @param ui           UI
+     * @param rawUserInput Raw user input.
+     * @param ui           UI.
      */
     public static void parseStudyMode(String rawUserInput, Ui ui) {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
-            try {
-                TimerLogic.startTimer(parsedInput);
-            } catch (InvalidTimeException e) {
-                ui.showToUser("Oops! Your timer input does not seem to be correct.\n"
-                        + "Please re-enter a valid duration.");
-            }
+            TimerLogic.callStartTimer(parsedInput);
             break;
         case "pause":
-            TimerLogic.pauseTimer();
             TimerLogic.callPauseTimer();
             break;
         case "resume":

@@ -2,6 +2,7 @@ package seedu.sherpass.util;
 
 import seedu.sherpass.exception.InvalidTimeException;
 
+import static seedu.sherpass.constant.Message.ERROR_INVALID_TIMER_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.GOODBYE_MESSAGE_STUDY;
 
 import static seedu.sherpass.util.Parser.parseStudyMode;
@@ -13,6 +14,7 @@ public class TimerLogic {
 
     /**
      * Creates a constructor for TimerLogic.
+     *
      * @param ui UI
      */
     public TimerLogic(Ui ui) {
@@ -31,10 +33,6 @@ public class TimerLogic {
             parseStudyMode(userInput, ui);
             ui.showLine();
             userInput = ui.readCommand();
-            if (userInput.contains("leave")) {
-                leaveStudyMode();
-                return;
-            }
             if (userInput.contains("start") && !isTimerRunning) {
                 timer = resetTimer();
             }
@@ -46,29 +44,21 @@ public class TimerLogic {
      *
      * @param parsedInput Parsed input of the user
      */
-    public static void startTimer(String[] parsedInput) throws InvalidTimeException {
+    public static void callStartTimer(String[] parsedInput) {
         if (timer.getHasTimeLeft()) {
             ui.showToUser("You already have a timer running!");
             return;
         }
-        int duration = Parser.parseTimerInput(parsedInput, ui);
-        if (isValidDuration(duration)) {
+        try {
+            int duration = Parser.parseTimerInput(parsedInput);
             timer.setDuration(duration);
             timer.start();
-        } else {
-            throw new InvalidTimeException();
-        }
-    }
-
-    private static boolean isValidDuration(int duration) {
-        if (duration > 0) {
-            return true;
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException | InvalidTimeException e) {
             ui.showToUser(ERROR_INVALID_TIMER_INPUT_MESSAGE);
         }
-        return false;
     }
 
-    public static void pauseTimer() {
+    public static void callPauseTimer() {
         if (timer.isTimerPaused()) {
             ui.showToUser("The timer is already paused!");
         } else if (!timer.getHasTimeLeft()) {
@@ -78,21 +68,21 @@ public class TimerLogic {
         }
     }
 
-    public static void resumeTimer() {
+    public static void callResumeTimer() {
         if (timer.isTimerPaused() && timer.getHasTimeLeft()) {
             timer.resumeTimer();
         } else if (isTimerRunning) {
-            ui.showToUser("There is no timer running currently!");
-        } else {
             ui.showToUser("The timer is still running!");
+        } else {
+            ui.showToUser("There is no timer running currently!");
         }
     }
 
-    public static void stopTimer() {
+    public static void callStopTimer() {
         timer.stopTimer();
     }
 
-    private void leaveStudyMode() {
+    public void leaveStudyMode() {
         if (isTimerRunning) {
             timer.stopTimer();
         }

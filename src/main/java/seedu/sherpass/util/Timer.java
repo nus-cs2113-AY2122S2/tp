@@ -39,7 +39,8 @@ public class Timer extends Thread {
         }
         if (timerRanOutOfTime()) {
             isTimerRunning = false;
-            ui.showToUser("Time is up! Would you like to start another timer?");
+            ui.showToUser("Time is up!");
+            ui.showLine();
         }
         this.interrupt();
     }
@@ -82,7 +83,7 @@ public class Timer extends Thread {
     /**
      * Returns whether timer ran out of time.
      *
-     * @return Boolean of whether timer ran out of time
+     * @return Boolean of whether timer ran out of time.
      */
     private boolean timerRanOutOfTime() {
         return (!hasTimeLeft && !forcedStop);
@@ -132,7 +133,7 @@ public class Timer extends Thread {
     /**
      * Sets the duration of the timer, as specified by the user.
      *
-     * @param duration Duration of timer in seconds
+     * @param duration Duration of timer in seconds.
      */
     public void setDuration(int duration) {
         timeLeft = duration;

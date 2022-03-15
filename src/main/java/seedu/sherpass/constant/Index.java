@@ -16,4 +16,5 @@ public class Index {
     public static final int DEFAULT_TIMER_THREE = 5400;
     public static final int DEFAULT_TIMER_ZERO = 30;
     public static final int INDENT_FACTOR = 4;
+    public static final int CUSTOM_COMMAND_INDEX = 0;
 }

@@ -17,10 +17,10 @@ public class StudyCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showToUser("Gotcha! Entering study mode...");
         ui.showToUser(WELCOME_MESSAGE_STUDY);
         ui.showLine();
         TimerLogic timerLogic = new TimerLogic(ui);
         timerLogic.enterStudyMode();
+        timerLogic.leaveStudyMode();
     }
 }
