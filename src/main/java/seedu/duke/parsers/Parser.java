@@ -15,12 +15,12 @@ import seedu.duke.util.StringConstants;
  * Represents a Parser that parse a {@code Command}.
  */
 public abstract class Parser {
-
     protected static final String EXIT_COMMAND_WORD = StringConstants.EXIT_COMMAND_WORD;
     protected static final String ADD_COMMAND_WORD = StringConstants.ADD_COMMAND_WORD;
     protected static final String DELETE_COMMAND_WORD = StringConstants.DELETE_COMMAND_WORD;
     protected static final String LIST_COMMAND_WORD = StringConstants.LIST_COMMAND_WORD;
     protected static final String MARK_COMMAND_WORD = StringConstants.MARK_COMMAND_WORD;
+    protected static final String HELP_COMMAND_WORD = StringConstants.HELP_COMMAND_WORD;
     protected static final String NULL_FIELD = null;
 
     protected String commandFormat;
