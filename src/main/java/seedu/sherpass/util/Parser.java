@@ -8,7 +8,6 @@ import seedu.sherpass.command.ClearCommand;
 import seedu.sherpass.command.DeleteCommand;
 import seedu.sherpass.command.EditCommand;
 import seedu.sherpass.command.ExitCommand;
-import seedu.sherpass.command.FindCommand;
 import seedu.sherpass.command.HelpCommand;
 import seedu.sherpass.command.ListCommand;
 import seedu.sherpass.command.MarkCommand;
@@ -338,27 +337,6 @@ public class Parser {
         }
     }
 
-    private static Command prepareFind(String[] userInput) {
-        String[] parsedInputToSearchByDate;
-        try {
-            if (userInput[FIND_BY_TASK_CONTENT_INDEX].contains("/date")) {
-                parsedInputToSearchByDate = userInput[FIND_BY_TASK_CONTENT_INDEX].split("/date");
-                String taskDateToSearch = prepareTaskDate(parsedInputToSearchByDate[FIND_BY_TASK_DATE_INDEX].trim(),
-                        false);
-                if (taskDateToSearch == null) {
-                    return null;
-                }
-                return new FindCommand(parsedInputToSearchByDate[FIND_BY_TASK_DESCRIPTION_WITH_DATE_INDEX].trim(),
-                        taskDateToSearch);
-            }
-            return new FindCommand(userInput[FIND_BY_TASK_DESCRIPTION_NO_DATE_INDEX].trim(), null);
-        } catch (IndexOutOfBoundsException | InvalidInputException e) {
-            System.out.println("Your search input seems to be missing.\n"
-                    + "Please enter your input again." + HELP_MESSAGE_SPECIFIC_COMMAND);
-        }
-        return null;
-    }
-
     /**
      * Parses the user command input.
      *
@@ -382,8 +360,6 @@ public class Parser {
             return prepareEdit(splitInput, taskList);
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(splitInput, taskList);
-        case FindCommand.COMMAND_WORD:
-            return prepareFind(splitInput);
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
         case StudyCommand.COMMAND_WORD:

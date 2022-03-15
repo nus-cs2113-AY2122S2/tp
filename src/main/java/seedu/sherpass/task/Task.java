@@ -64,18 +64,6 @@ public class Task {
     }
 
     /**
-     * Replaces task date with new task date input.
-     * Refreshes the task to original state, i.e. unmarked.
-     * Current parent class is created as template for child
-     * classes to perform this function.
-     *
-     * @param date Task Date.
-     */
-    public void resetInput(String date) {
-        markAsUndone();
-    }
-
-    /**
      * Returns task date. Parent class is created
      * as a template for child classes to perform its own
      * respective functions, i.e. each task date returned is

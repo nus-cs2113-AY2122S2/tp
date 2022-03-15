@@ -115,40 +115,6 @@ public class TaskList {
         return false;
     }
 
-
-    /**
-     * Returns the index of a task given its task description.
-     *
-     * @param taskDescriptionToSearch Description of the task to search for.
-     * @return Index of a task, which corresponds to its placement in the task array.
-     */
-    public int findIndexToReplace(String taskDescriptionToSearch) {
-        int index = -1;
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getDescription()
-                    .equalsIgnoreCase(taskDescriptionToSearch.trim())) {
-                index = i;
-                break;
-            }
-        }
-        return index;
-    }
-
-
-    /**
-     * Replaces the current date of the task with a new date input.
-     *
-     * @param taskIndexToReplace Index of a task to search for the task.
-     * @param newTaskDate        New date input to replace the old task date.
-     * @param ui                 Ui for printing partition lines and messages.
-     */
-    public void replaceTaskDate(int taskIndexToReplace, String newTaskDate, Ui ui) {
-        tasks.get(taskIndexToReplace).resetInput(newTaskDate);
-        ui.showLine();
-        ui.showToUser("Done! I've updated this task:\n  " + tasks.get(taskIndexToReplace));
-    }
-
-
     /**
      * Returns a boolean value denoting the existence of a task
      * within the task array.
@@ -171,51 +137,6 @@ public class TaskList {
         tasks.remove(deleteIndex);
         System.out.println("Okay. I've removed this task:\n  " + taskToBeRemoved
                 + "\nNow you have " + tasks.size() + " task(s) in the list.");
-    }
-
-
-    /**
-     * Finds and prints tasks whose description matches the search keyword.
-     *
-     * @param findTaskByKeyword A keyword relating to the task description.
-     * @param ui                Ui for printing messages.
-     */
-    public void findByTaskDescription(String findTaskByKeyword, Ui ui) {
-        int printIndex = 1;
-        ui.showToUser("Here are the matching tasks in your list:");
-        for (Task task : tasks) {
-            if (task.getDescription().contains(findTaskByKeyword)) {
-                String listIndex = String.valueOf(printIndex);
-                ui.showToUser(listIndex + ". " + task);
-                printIndex++;
-            }
-        }
-        if (printIndex == 1) {
-            ui.showLine();
-            ui.showToUser("Sorry! There are no tasks that match your description!");
-        }
-    }
-
-    /**
-     * Finds and prints tasks whose date and/or time matches the search keyword.
-     *
-     * @param findTaskByKeyword A keyword relating to the task date and/or time.
-     * @param ui                Ui for printing messages.
-     */
-    public void findByTaskDate(String findTaskByKeyword, Ui ui) {
-        int printIndex = 1;
-        ui.showToUser("Here are the matching tasks in your list:");
-        for (Task task : tasks) {
-            if (task.getByDate().contains(findTaskByKeyword)) {
-                String listIndex = String.valueOf(printIndex);
-                ui.showToUser(listIndex + ". " + task);
-                printIndex++;
-            }
-        }
-        if (printIndex == 1) {
-            ui.showLine();
-            ui.showToUser("Sorry! There are no tasks that match your description!");
-        }
     }
 
     /**
