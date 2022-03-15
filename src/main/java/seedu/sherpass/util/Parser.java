@@ -163,7 +163,8 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
             printMissingInputMessage();
         } catch (InputRepeatedException e) {
-            System.out.println("repeated description. delete the previous iteration and type out your command again");
+            System.out.println("Oops! It seems that you've entered a duplicate task.\n"
+                    + "Please re-enter a new task if you wish to add one.");
         }
         return null;
     }
