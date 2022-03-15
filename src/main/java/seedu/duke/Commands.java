@@ -2,7 +2,6 @@ package seedu.duke;
 
 import util.exceptions.LargeQuantityException;
 import util.exceptions.ItemDoesNotExistException;
-import util.exceptions.NegativeQuantityException;
 
 import java.util.ArrayList;
 
@@ -88,6 +87,10 @@ public class Commands {
                     System.out.println(qty + " " + good.getName() + " have been removed.");
                 }
 
+                if (good.getQuantity() == 0) {
+                    userGoods.remove(good);
+                }
+
                 return;
             }
         }
@@ -107,7 +110,7 @@ public class Commands {
             int goodsQty = Integer.parseInt(qty);
 
             remove(goodsId, goodsQty, userGoods);
-
+          
         } catch (NumberFormatException e1) {
             System.out.println("Please remove goods in this format:\n"
                     + "remove id/id_of_good_as_number q/quantity_of_good_as_number");
