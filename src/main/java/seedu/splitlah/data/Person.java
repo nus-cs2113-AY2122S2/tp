@@ -51,7 +51,7 @@ public class Person {
         boolean removed =
                 activityCostList.removeIf(activityCost -> activityCost.getActivityId() == activityId);
         if (!removed) {
-            throw new InvalidDataException(Message.ERROR_PERSON_ACTIVITY_NOT_FOUND);
+            throw new InvalidDataException(Message.ERROR_PERSON_ACTIVITY_NOT_FOUND + activityId);
         }
     }
 
@@ -104,7 +104,7 @@ public class Person {
                 return activityCost.getCostOwed();
             }
         }
-        throw new InvalidDataException(Message.ERROR_PERSON_ACTIVITY_NOT_FOUND);
+        throw new InvalidDataException(Message.ERROR_PERSON_ACTIVITY_NOT_FOUND + activityId);
     }
 
     public String getName() {
