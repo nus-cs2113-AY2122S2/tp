@@ -1,12 +1,14 @@
 package seedu.duke.commands;
 
+import java.util.ArrayList;
+
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
+import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
 import seedu.duke.util.StringConstants;
 
-import java.util.ArrayList;
 
 public class ResetCommand extends Command {
     @Override
@@ -23,12 +25,6 @@ public class ResetCommand extends Command {
     public void removeAll(ModuleList moduleList) throws ModHappyException {
         removeGeneralTasks(moduleList);
         ArrayList<Module> modules = moduleList.getModuleList();
-        for (Module m: modules) {
-            TaskList moduleTaskList = m.getTaskList();
-            for (int i = 0; i < moduleTaskList.size(); i += 1) {
-                moduleTaskList.removeTask(i);
-            }
-        }
         modules.clear();
         assert (moduleList.getModuleList().size() == 0);
     }
@@ -41,9 +37,8 @@ public class ResetCommand extends Command {
     public void removeGeneralTasks(ModuleList moduleList) throws ModHappyException {
         Module generalTask = moduleList.getGeneralTasks();
         TaskList generalTaskList = generalTask.getTaskList();
-        for (int i = 0; i < generalTaskList.size(); i += 1) {
-            generalTaskList.removeTask(i);
-        }
+        ArrayList<Task> generalTasks = generalTaskList.getList();
+        generalTasks.clear();
         assert (generalTaskList.size() == 0);
     }
 }
