@@ -45,8 +45,6 @@ public class Message {
     public static final String ERROR_IO_FAILURE_MESSAGE = "Oh no! We've encountered an error \nwhile "
             + "trying to processing the system.\n"
             + "Please reboot and execute the application again.";
-    public static final String ERROR_SYSTEM_FAULT_MESSAGE = "Oops! There seems to be some problem"
-            + "with the code.\nPlease contact the developers for help.";
     public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_1 = "Oops! It seems that your saved file "
             + "was corrupted.";
     public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_2 = "Would you like to start with a new save "
@@ -54,11 +52,7 @@ public class Message {
     public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_3 = "We're sorry this happened. "
             + "Please refer to the troubleshooting section in the user guide "
             + "or contact the developers for help.";
-    public static final String ERROR_FILE_NOT_FOUND_MESSAGE = "Sorry! There was an error while loading your"
-            + "saved file. Please restart and try again later.";
     public static final String ERROR_INVALID_MARKING_INDEX_MESSAGE = "Bzzt!\nPlease"
             + " key in a valid task number to mark/unmark your task."
             + HELP_MESSAGE_SPECIFIC_COMMAND;
-    public static final String DATE_FORMAT_WITH_TIME = "dd MMM yyyy, EEE hh:mm a";
-    public static final String DATE_FORMAT_WITHOUT_TIME = "dd MMM yyyy, EEE";
 }
