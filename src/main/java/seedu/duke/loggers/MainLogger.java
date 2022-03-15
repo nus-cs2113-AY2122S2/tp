@@ -1,4 +1,4 @@
-package seedu.duke.controllers;
+package seedu.duke.loggers;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

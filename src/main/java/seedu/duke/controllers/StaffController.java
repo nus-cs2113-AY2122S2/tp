@@ -1,12 +1,8 @@
 package seedu.duke.controllers;
 
-import seedu.duke.entities.Staff;
 import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.manager.StaffManager;
-import seedu.duke.controllers.MainLogger;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import seedu.duke.loggers.MainLogger;
 
 public class StaffController extends Controller {
     private static final String[] CHOICES = {
