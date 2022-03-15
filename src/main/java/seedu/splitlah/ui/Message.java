@@ -81,6 +81,10 @@ public abstract class Message {
             "Please enter the date in the form DD-MM-YYYY or enter 'today' for today's date.";
     public static final String ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT =
             "Please enter a valid monetary value(s) after the following delimiter: ";
+    public static final String ERROR_PARSER_COST_NOT_POSITIVE =
+            "Please enter a positive value for monetary value(s).";
+    public static final String ERROR_PARSER_COST_NOT_TWO_DP =
+            "Please enter a value up to 2 decimal places for monetary value(s).";
     public static final String ERROR_PARSER_INVALID_GST_SURCHARGE =
             "Please enter a valid GST surcharge in % after the delimiter: ";
     public static final String ERROR_PARSER_INVALID_SERVICE_CHARGE =
