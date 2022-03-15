@@ -7,8 +7,6 @@ package seedu.duke;
  */
 public class Satisfaction {
     protected String customerName;
-    // Since satisfactionValues are from 1-5 only, consider using enum? Or throwing exceptions if
-    // the satisfaction values are out-of-bounds
     protected int satisfactionValue;
 
     public Satisfaction(String customerName, int satisfactionValue) {

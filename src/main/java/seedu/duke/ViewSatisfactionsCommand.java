@@ -3,9 +3,7 @@ package seedu.duke;
 import java.util.ArrayList;
 public class ViewSatisfactionsCommand extends Command {
     @Override
-    public void execute() {
-
-    }
+    public void execute() {}
 
     public void execute(SatisfactionList satisfactionList) {
         int number = 1;

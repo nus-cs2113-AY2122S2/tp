@@ -3,22 +3,50 @@ package seedu.duke;
 public class AddSatisfactionCommand extends Command {
     private Satisfaction satisfaction;
 
-    // Must add Exceptions to ensure that satisfactionValues are between 1 and 5
-    // Also add JUNIT tests (and docstring?)
-    // Ask Yangzhi if he pushed his Exceptions code
-    public AddSatisfactionCommand(String commandStringWithoutCommand) {
-        String[] input = commandStringWithoutCommand.split(" ");
-        String customerName = input[0].trim();
-        String satisfactionString = input[1].trim();
-        int satisfactionValue = Integer.parseInt(satisfactionString);
+    public AddSatisfactionCommand(String commandStringWithoutCommand) throws HotelLiteManagerException{
+        String customerName = "";
+        int satisfactionValue = 0;
+        try {
+            customerName = extractCustomerName(commandStringWithoutCommand);
+            satisfactionValue = extractSatisfactionValue(commandStringWithoutCommand);
+        } catch (EmptySatisfactionCustomerException e) {
+            throw new EmptySatisfactionCustomerException();
+        } catch (EmptySatisfactionValueException e) {
+            throw new EmptySatisfactionValueException();
+        } catch (InvalidSatisfactionValueException e) {
+            throw new InvalidSatisfactionValueException();
+        }
         Satisfaction satisfaction = new Satisfaction(customerName, satisfactionValue);
         setSatisfaction(satisfaction);
     }
 
-    @Override
-    public void execute() {
-
+    private String extractCustomerName(String userInput) throws HotelLiteManagerException {
+        String[] splitInput = userInput.split(" ");
+        if (splitInput.length == 0) {
+            throw new EmptySatisfactionCustomerException();
+        }
+        String customerName = splitInput[0].trim();
+        if (customerName.isEmpty()) {
+            throw new EmptySatisfactionCustomerException();
+        }
+        return customerName;
     }
+
+    private int extractSatisfactionValue(String userInput) throws HotelLiteManagerException {
+        String[] splitInput = userInput.split(" ");
+        if (splitInput.length < 2) {
+            throw new EmptySatisfactionValueException();
+        }
+        String satisfactionString = splitInput[1].trim();
+        int satisfactionValue = Integer.parseInt(satisfactionString);
+        if (satisfactionValue < 1 || satisfactionValue > 5) {
+            throw new InvalidSatisfactionValueException();
+        }
+        return satisfactionValue;
+    }
+
+    @Override
+    public void execute() {}
 
     public void execute(SatisfactionList satisfactionList) {
         satisfactionList.addSatisfaction(satisfaction);
