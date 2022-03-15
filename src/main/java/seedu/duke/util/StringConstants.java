@@ -55,14 +55,14 @@ public class StringConstants {
             + "Compulsory Parameters are fully capitalised: e.g. MODULE_CODE.\n"
             + "Optional Parameters are in square brackets: e.g. [-m MODULE_DESCRIPTION]";
     public static final String EXIT_HELP = "Exits the program.\nFormat to exit program: exit";
-    public static final String ADD_HELP = "Adds an object as indicated by the command input.\n"
+    public static final String ADD_HELP = "Adds a module or task as indicated by the command input.\n"
             + "Format to add module: add /m MODULE_CODE [-d \"MODULE_DESCRIPTION\"]\n"
             + "Format to add task:   add /t \"TASK_NAME\" [-d \"TASK_DESCRIPTION\"] [-t \"ESTIMATED_WORKING_TIME\"]"
             + " [-m MODULE_CODE]";
-    public static final String DELETE_HELP = "Deletes an object as indicated by command input.\n"
+    public static final String DELETE_HELP = "Deletes a module or task as indicated by command input.\n"
             + "Format to delete a module: del /m MODULE_CODE\n"
             + "Format to delete a task:   del /t TASK_NUMBER [-m MODULE_CODE]";
-    public static final String EDIT_HELP = "Edits a task or module indicated by command input.\n"
+    public static final String EDIT_HELP = "Edits a module or task as indicated by command input.\n"
             + "Format to edit a module: edit /m MODULE_CODE -d \"MODULE_DESCRIPTION\"\n"
             + "Format to edit a task: edit /t TASK_INDEX"
             + "(-n \"TASK_NAME\" or -d \"TASK_DESCRIPTION\" or -t \"ESTIMATED_WORKING_TIME\") [-m MODULE_CODE]";
@@ -72,6 +72,8 @@ public class StringConstants {
             + "If no module code is given, the task to be marked will be drawn from the \"general tasks\" list.\n"
             + "Format to mark a task as completed:   mark /c TASK_NUMBER [-m MODULE_CODE]\n"
             + "Format to mark a task as uncompleted: mark /u TASK_NUMBER [-m MODULE_CODE]";
+    public static final String RESET_HELP = "Removes all modules and tasks.\n"
+            + "Format to remove all modules and tasks: reset";
     public static final String HELP_HELP = "Displays help and format for selected command.\n"
             + "Format to display help for specific: help COMMAND\n"
             + "Available commands: exit, add, del, list, mark, help";
@@ -117,6 +119,7 @@ public class StringConstants {
     public static final String EDIT_COMMAND_WORD = "edit";
     public static final String LIST_COMMAND_WORD = "list";
     public static final String MARK_COMMAND_WORD = "mark";
+    public static final String RESET_COMMAND_WORD = "reset";
     public static final String HELP_COMMAND_WORD = "help";
 
     /**

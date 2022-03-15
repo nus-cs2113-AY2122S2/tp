@@ -4,6 +4,8 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.util.StringConstants;
 
+import static seedu.duke.util.StringConstants.RESET_COMMAND_WORD;
+
 public class HelpCommand extends Command {
 
     protected static final String EXIT_COMMAND_WORD = StringConstants.EXIT_COMMAND_WORD;
@@ -20,6 +22,7 @@ public class HelpCommand extends Command {
     protected static final String EDIT_HELP = StringConstants.EDIT_HELP;
     protected static final String LIST_HELP = StringConstants.LIST_HELP;
     protected static final String MARK_HELP = StringConstants.MARK_HELP;
+    protected static final String RESET_HELP = StringConstants.RESET_HELP;
     protected static final String HELP_HELP = StringConstants.HELP_HELP;
     protected static final String HELP_EXCEPTION = StringConstants.HELP_EXCEPTION;
 
@@ -46,6 +49,8 @@ public class HelpCommand extends Command {
             return new CommandResult(LIST_HELP);
         case MARK_COMMAND_WORD:
             return new CommandResult(MARK_HELP);
+        case RESET_COMMAND_WORD:
+            return new CommandResult(RESET_HELP);
         case HELP_COMMAND_WORD:
             return new CommandResult(HELP_HELP);
         default:
