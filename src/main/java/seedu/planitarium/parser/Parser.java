@@ -28,24 +28,34 @@ public class Parser {
     public static final int MIN_INCOME_INDEX = 1;
     public static final double MONEY_ZERO = 0.0;
 
+    private static final String ASSERT_INPUT_NOT_NULL = "User input should not be null";
+    private static final String ASSERT_OUTPUT_NOT_NULL = "Parsed output should not be null";
+    private static final String ASSERT_MONEY_NOT_NULL = "Money input should not be null";
+    private static final String ASSERT_MONEY_NON_NEGATIVE = "Money output should be non-negative";
+    private static final String ASSERT_USER_INDEX_NOT_NULL = "User index should not be null";
+    private static final String ASSERT_EXPENDITURE_INDEX_NOT_NULL = "Expenditure index should not be null";
+    private static final String ASSERT_INCOME_INDEX_NOT_NULL = "Income index should not be null";
+
     /**
      * Returns the term surrounded by two delimiters.
      *
-     * @param text          The text containing the term to be parsed.
-     * @param delimiter_left The delimiter on the left of term.
-     * @param delimiter_right The delimiter on the right of term.
+     * @param text           The text containing the term to be parsed.
+     * @param delimiterLeft  The delimiter on the left of term.
+     * @param delimiterRight The delimiter on the right of term.
      * @return A non-delimiter-surrounded term.
      */
-     public static String parseDelimitedTerm(String text, String delimiter_left, String delimiter_right) {
-        String[] firstParse = text.split(delimiter_left, LIMIT_TWO_TOKENS);
+    public static String parseDelimitedTerm(String text, String delimiterLeft, String delimiterRight) {
+        String[] firstParse = text.split(delimiterLeft, LIMIT_TWO_TOKENS);
         String leftRemoved;
         if (firstParse.length == LIMIT_TWO_TOKENS) {
             leftRemoved = firstParse[INDEX_LEFT_REMOVED];
         } else {
             leftRemoved = firstParse[INDEX_LEFT_NOT_EXIST];
         }
-        String[] secondParse = leftRemoved.split(delimiter_right, LIMIT_TWO_TOKENS);
+        String[] secondParse = leftRemoved.split(delimiterRight, LIMIT_TWO_TOKENS);
         String rightRemoved = secondParse[INDEX_RIGHT_REMOVED];
+
+        assert rightRemoved != null : ASSERT_OUTPUT_NOT_NULL;
         return rightRemoved.trim();
     }
 
@@ -56,6 +66,7 @@ public class Parser {
      * @return The command keyword issued.
      */
     public static String parseKeyword(String userInput) {
+        assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         return userInput.split(DELIMITER_SPACE)[INDEX_KEYWORD].trim();
     }
 
@@ -67,6 +78,7 @@ public class Parser {
      * @throws MissingDelimiterException if user input does not contain delimiter for name.
      */
     public static String parseName(String userInput) throws MissingDelimiterException {
+        assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsDelimiter(userInput, DELIMITER_NAME);
         return parseDelimitedTerm(userInput, DELIMITER_NAME, DELIMITER_BACK).trim();
     }
@@ -79,6 +91,7 @@ public class Parser {
      * @throws MissingDelimiterException if user input does not contain delimiter for user index.
      */
     public static String parseUserIndex(String userInput) throws MissingDelimiterException {
+        assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsDelimiter(userInput, DELIMITER_USER_INDEX);
         return parseDelimitedTerm(userInput, DELIMITER_USER_INDEX, DELIMITER_BACK).trim();
     }
@@ -91,6 +104,7 @@ public class Parser {
      * @throws MissingDelimiterException if user input does not contain delimiter for description.
      */
     public static String parseDescription(String userInput) throws MissingDelimiterException {
+        assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsDelimiter(userInput, DELIMITER_DESCRIPTION);
         return parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION, DELIMITER_BACK).trim();
     }
@@ -103,6 +117,7 @@ public class Parser {
      * @throws MissingDelimiterException if user input does not contain delimiter for income.
      */
     public static String parseIncome(String userInput) throws MissingDelimiterException {
+        assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsDelimiter(userInput, DELIMITER_INCOME);
         return parseDelimitedTerm(userInput, DELIMITER_INCOME, DELIMITER_BACK).trim();
     }
@@ -115,6 +130,7 @@ public class Parser {
      * @throws MissingDelimiterException if user input does not contain delimiter for expenditure.
      */
     public static String parseExpenditure(String userInput) throws MissingDelimiterException {
+        assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsDelimiter(userInput, DELIMITER_EXPENDITURE);
         return parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK).trim();
     }
@@ -127,6 +143,7 @@ public class Parser {
      * @throws MissingDelimiterException if user input does not contain delimiter for record index.
      */
     public static String parseRecordIndex(String userInput) throws MissingDelimiterException {
+        assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsDelimiter(userInput, DELIMITER_RECORD_INDEX);
         return parseDelimitedTerm(userInput, DELIMITER_RECORD_INDEX, DELIMITER_BACK).trim();
     }
@@ -139,6 +156,7 @@ public class Parser {
      * @throws InvalidMoneyException if format of text is not a valid double, negative or more than 2 decimal places.
      */
     public static double getValidMoney(String amount) throws InvalidMoneyException {
+        assert (amount != null) : ASSERT_MONEY_NOT_NULL;
         try {
             double checkMoney = Double.parseDouble(amount);
             if (Double.compare(checkMoney, MONEY_ZERO) < 0) {
@@ -148,7 +166,7 @@ public class Parser {
             //if (amount.contains(DELIMITER_MONEY)) {
             //    String decimalPlace = parseDelimitedTerm(amount, DELIMITER_MONEY, DELIMITER_BACK);
             //    if (decimalPlace.length() > LIMIT_TWO_DECIMAL) {
-                    // to be caught immediately within this method
+            //        to be caught immediately within this method
             //        throw new NumberFormatException();
             //    }
             //}
@@ -167,12 +185,13 @@ public class Parser {
      * @throws InvalidIndexException if amount is not a valid integer or out of bounds.
      */
     public static int getValidUserIndex(String userIndex, PersonList personList) throws InvalidIndexException {
+        assert (userIndex != null) : ASSERT_USER_INDEX_NOT_NULL;
         try {
             int checkIndex = Integer.parseInt(userIndex);
             checkTooHighIndex(checkIndex, personList.getNumberOfMembers());
             checkTooLowIndex(checkIndex, MIN_USER_INDEX);
             return checkIndex;
-        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidIndexException(userIndex);
         }
     }
@@ -182,16 +201,17 @@ public class Parser {
      *
      * @param expenditureIndex Person's expenditure lookup index.
      * @param person           Person who may have expenditures.
+     * @return A valid expenditure index.
      * @throws InvalidIndexException if index is not a valid integer or out of bounds.
      */
-    public static int getValidExpenditureIndex(String expenditureIndex, Person person)
-                throws InvalidIndexException {
+    public static int getValidExpenditureIndex(String expenditureIndex, Person person) throws InvalidIndexException {
+        assert (expenditureIndex != null) : ASSERT_EXPENDITURE_INDEX_NOT_NULL;
         try {
             int checkIndex = Integer.parseInt(expenditureIndex);
             checkTooHighIndex(checkIndex, person.getNumberOfExpenditures());
             checkTooLowIndex(checkIndex, MIN_EXPENDITURE_INDEX);
             return checkIndex;
-        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidIndexException(expenditureIndex);
         }
     }
@@ -201,16 +221,17 @@ public class Parser {
      *
      * @param incomeIndex Person's income lookup index.
      * @param person      Person who may have incomes.
+     * @return A valid income index.
      * @throws InvalidIndexException if index is not a valid integer or out of bounds.
      */
-    public static int getValidIncomeIndex(String incomeIndex, Person person)
-            throws InvalidIndexException {
+    public static int getValidIncomeIndex(String incomeIndex, Person person) throws InvalidIndexException {
+        assert (incomeIndex != null) : ASSERT_INCOME_INDEX_NOT_NULL;
         try {
             int checkIndex = Integer.parseInt(incomeIndex);
             checkTooHighIndex(checkIndex, person.getNumberOfIncomes());
             checkTooLowIndex(checkIndex, MIN_INCOME_INDEX);
             return checkIndex;
-        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidIndexException(incomeIndex);
         }
     }
