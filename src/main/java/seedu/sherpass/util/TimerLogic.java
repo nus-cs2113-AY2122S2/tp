@@ -53,6 +53,7 @@ public class TimerLogic {
             return;
         }
         int duration = parseTimerInput(parsedInput, ui);
+        assert duration > 0;
         if (isValidDuration(duration)) {
             timer.setDuration(duration);
             timer.start();
