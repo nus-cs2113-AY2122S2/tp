@@ -1,6 +1,11 @@
 package seedu.duke;
 
-import seedu.duke.commands.*;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.AddCommand;
+import seedu.duke.commands.ClearCommand;
+import seedu.duke.commands.HelpCommand;
+import seedu.duke.commands.DeleteCommand;
+import seedu.duke.commands.ListCommand;
 import seedu.duke.exceptions.InvalidDayException;
 import seedu.duke.exceptions.MissingValueException;
 import seedu.duke.exceptions.InvalidTimeException;
@@ -53,8 +58,6 @@ public class Parser {
         try {
             String[] eventDescription = splitArguments();
             checkValidityOfArguments(eventDescription);
-            String name = eventDescription[NAME_INDEX];
-            String title = eventDescription[TITLE_INDEX];
             String day = eventDescription[DAY_INDEX].toLowerCase();
             int startTime = Integer.parseInt(eventDescription[STARTTIME_INDEX]);
             int endTime = Integer.parseInt(eventDescription[ENDTIME_INDEX]);
@@ -62,6 +65,8 @@ public class Parser {
             checkDay(day);
             checkTime(startTime, endTime);
             checkMode(mode);
+            String name = eventDescription[NAME_INDEX];
+            String title = eventDescription[TITLE_INDEX];
             return new AddCommand(name, title, day, startTime, endTime, mode);
         } catch (NullPointerException npe) {
             System.out.println(ERROR_MISSING_PARAMETERS);
@@ -99,14 +104,14 @@ public class Parser {
         }
     }
 
-    private void checkMode (String mode) throws InvalidModeException {
+    private void checkMode(String mode) throws InvalidModeException {
         if (mode.equals("online") || mode.equals("physical")) {
             return;
         }
         throw new InvalidModeException();
     }
 
-    private void checkDay (String day) throws InvalidDayException {
+    private void checkDay(String day) throws InvalidDayException {
         switch (day) {
         case "monday":
         case "tuesday":
