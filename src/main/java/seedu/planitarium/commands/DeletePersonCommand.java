@@ -4,7 +4,7 @@ import seedu.planitarium.exceptions.UnknownException;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.PersonList;
 
-public class DeletePersonCommand extends Command{
+public class DeletePersonCommand extends Command {
 
     protected int uid;
 
