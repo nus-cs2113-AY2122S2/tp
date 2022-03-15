@@ -104,6 +104,8 @@ public class Parser {
         LocalDate doOnDate;
         try {
             if (!splitInput[TASK_CONTENT_INDEX].contains("/by") && !splitInput[TASK_CONTENT_INDEX].contains("/do_on")) {
+            if (!splitInput[TASK_CONTENT_INDEX].contains("/by")
+                    && !splitInput[TASK_CONTENT_INDEX].contains("/do_on")) {
                 return new AddCommand(splitInput[TASK_CONTENT_INDEX], taskList, null, null);
             }
 
