@@ -100,16 +100,27 @@ public class ActivityCreateCommand extends Command {
         boolean isMissingCost = false;
         boolean isMissingCostList = false;
         boolean hasDifferentLength = false;
+        String errorMessage = null;
 
         try {
             totalCost = Parser.parseTotalCost(commandArgs);
         } catch (InvalidFormatException e) {
+            if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
+                    + Parser.TOTAL_COST_DELIMITER)) {
+                return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
+                        + "\n\t" + COMMAND_FORMAT_SECOND);
+            }
             isMissingCost = true;
         }
 
         try {
             costList = Parser.parseCostList(commandArgs);
         } catch (InvalidFormatException e) {
+            if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
+                    + Parser.COST_LIST_DELIMITER)) {
+                return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
+                        + "\n\t" + COMMAND_FORMAT_SECOND);
+            }
             isMissingCostList = true;
         }
 
@@ -194,6 +205,8 @@ public class ActivityCreateCommand extends Command {
      * @param activityId      The id of the activity.
      * @param indexOfCostOwed The index of the cost owed in the list of costs.
      * @param person          The current person whose costs are added to the list of activity costs.
+     * @return true if the person whose activity cost is to be added is the person who paid for the activity,
+     *         false otherwise
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      */
     private boolean addCostOwedAndCostPaid(Person personPaid, int activityId, int indexOfCostOwed, Person person)
