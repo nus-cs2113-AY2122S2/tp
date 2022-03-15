@@ -176,7 +176,7 @@ public class Parser {
         String[] splitEditInfo = fullEditInfo.split(" ");
         String descriptionToEdit;
         LocalDate parsedByDateToEdit;
-        LocalDate parsedRemindDateToEdit;
+        LocalDate parsedDoOnDateToEdit;
 
         if (!splitEditInfo[0].trim().equals("/by") && !(splitEditInfo[0].trim().equals("/do_on"))) {
             descriptionToEdit = splitEditInfo[0];
@@ -185,9 +185,9 @@ public class Parser {
         }
 
         parsedByDateToEdit = getParsedDateToEdit(fullEditInfo, "/by");
-        parsedRemindDateToEdit = getParsedDateToEdit(fullEditInfo, "/do_on");
+        parsedDoOnDateToEdit = getParsedDateToEdit(fullEditInfo, "/do_on");
 
-        return new EditCommand(taskNumberToEdit, descriptionToEdit, parsedByDateToEdit, parsedRemindDateToEdit);
+        return new EditCommand(taskNumberToEdit, descriptionToEdit, parsedByDateToEdit, parsedDoOnDateToEdit);
     }
 
     private static LocalDate getParsedDateToEdit(String fullEditInfo, String keyword) throws InvalidInputException {
@@ -236,8 +236,7 @@ public class Parser {
         }
     }
 
-    private static LocalDate prepareTaskDate(String rawTaskDate)
-            throws InvalidInputException {
+    private static LocalDate prepareTaskDate(String rawTaskDate) throws InvalidInputException {
         if (rawTaskDate.isBlank()) {
             return null;
         }

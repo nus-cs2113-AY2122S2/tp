@@ -83,16 +83,14 @@ public class Reminder {
     private boolean isEqualDate(LocalDate currentDate, LocalDate compareDate) {
         if (currentDate == null) {
             return false;
-        } else {
-            return currentDate.isEqual(compareDate);
         }
+        return currentDate.isEqual(compareDate);
     }
 
     private boolean isBeforeDate(LocalDate currentDate, LocalDate compareDate) {
         if (currentDate == null) {
             return false;
-        } else {
-            return currentDate.isBefore(compareDate);
         }
+        return currentDate.isBefore(compareDate);
     }
 }

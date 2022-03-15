@@ -47,6 +47,4 @@ class StorageTest {
             exception.printStackTrace();
         }
     }
-
-
 }

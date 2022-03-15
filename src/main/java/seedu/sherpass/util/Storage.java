@@ -25,6 +25,7 @@ import static seedu.sherpass.constant.DateAndTimeFormat.parseFormat;
 
 
 public class Storage {
+    public static final int INDENT_FACTOR = 4;
     private String saveFilePath;
 
     /**
@@ -69,12 +70,12 @@ public class Storage {
         JSONObject json = new JSONObject();
         JSONArray tasks = new JSONArray();
         for (Task t : taskList.getTasks()) {
-            JSONObject task = new JSONObject();
-            task.put("status", t.getStatusIcon());
-            task.put("by_date", (t.getByDate() == null ? "null" : t.getByDate().format(parseFormat)));
-            task.put("do_date", (t.getDoOnDate() == null ? "null" : t.getDoOnDate().format(parseFormat)));
-            task.put("description", t.getDescription());
-            tasks.put(task);
+            JSONObject taskToStore = new JSONObject();
+            taskToStore.put("status", t.getStatusIcon());
+            taskToStore.put("by_date", (t.getByDate() == null ? "null" : t.getByDate().format(parseFormat)));
+            taskToStore.put("do_date", (t.getDoOnDate() == null ? "null" : t.getDoOnDate().format(parseFormat)));
+            taskToStore.put("description", t.getDescription());
+            tasks.put(taskToStore);
         }
         json.put("tasks", tasks);
         return json;
@@ -87,7 +88,7 @@ public class Storage {
      */
     public JSONObject writeSaveData(TaskList taskList) {
         JSONObject taskJson = convertTaskListToJson(taskList);
-        String taskString = taskJson.toString(4);
+        String taskString = taskJson.toString(INDENT_FACTOR);
         assert taskString != null;
         try {
             FileWriter writer = new FileWriter(saveFilePath);
@@ -138,7 +139,7 @@ public class Storage {
 
         while (!response.equalsIgnoreCase("y") && !response.equalsIgnoreCase("n")) {
             ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_2);
-            response = ui.readCommand();
+            response = ui.readCommand().trim();
         }
 
         assert response.equalsIgnoreCase("y") || response.equalsIgnoreCase("n");
