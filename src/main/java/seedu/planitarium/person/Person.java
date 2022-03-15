@@ -87,7 +87,7 @@ public class Person {
      * Lists the expenditures of the person.
      */
     public void listExpenditure() {
-        System.out.println("Here is the expenditure list for " + name);
+        System.out.println("Here is the expenditure list for " + name + ":");
         expenditureList.printExpenditureList();
     }
 
@@ -95,7 +95,7 @@ public class Person {
      * Lists the income of the person.
      */
     public void listIncome() {
-        System.out.println("Here is the income list for " + name);
+        System.out.println("Here is the income list for " + name + ":");
         incomeList.printIncomeList();
     }
 

@@ -88,9 +88,7 @@ public class PersonList {
         for (int i = 0; i < numberOfMembers; i++) {
             Person person = personList.get(i);
             System.out.println((i+1) + ". " + person.getName());
-            System.out.println("Income: ");
             person.listIncome();
-            System.out.println("Expenditure: ");
             person.listExpenditure();
         }
     }
