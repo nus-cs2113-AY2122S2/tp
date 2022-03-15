@@ -27,6 +27,15 @@ public class Expenditure {
     }
 
     /**
+     * Returns the amount of a particular expenditure.
+     *
+     * @return The amount of an expenditure
+     */
+    public double getAmount() {
+        return amount;
+    }
+
+    /**
      * Returns the whole string including
      * the description of the expenditure and its amount in two decimal place.
      *
