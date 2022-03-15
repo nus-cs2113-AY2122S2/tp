@@ -10,38 +10,30 @@ public class Staff {
     /**
      * Create a Staff with id, name, position and salary.
      *
-     * @param staffId    ID of the Staff.
-     * @param staffName  Name of the Staff.
-     * @param position   Job position of the Staff.
-     * @param salary     Salary of the Staff.
-     * @throws IllegalArgumentException Check if arguments do not fit the requirements.
+     * @param staffId   ID of the Staff.
+     * @param staffName Name of the Staff.
+     * @param position  Job position of the Staff.
+     * @param salary    Salary of the Staff.
      */
-    public Staff(int staffId, String staffName, String position, double salary) throws IllegalArgumentException {
-        if (staffId <= 0) {
-            throw new IllegalArgumentException("Staff ID cannot be zero or negative.");
-        }
-        if (!isValidName(staffName)) {
-            throw new IllegalArgumentException("Staff name cannot be null.");
-        }
-        if (!isValidName(position)) {
-            throw new IllegalArgumentException("Position cannot be null or empty.");
-        }
-        if (salary <= 0) {
-            throw new IllegalArgumentException("Salary cannot be zero or negative.");
-        }
+    public Staff(int staffId, String staffName, String position, double salary) {
         this.staffId = staffId;
         this.staffName = staffName;
         this.position = position;
         this.salary = salary;
     }
 
+    private static boolean isValidName(String name) {
+        return !(name == null || name == "");
+    }
+
     public int getStaffId() {
         return staffId;
     }
 
-    public void setStaffId(int staffId) throws IllegalArgumentException {
+    public void setStaffId(int staffId) {
         if (staffId <= 0) {
-            throw new IllegalArgumentException("Staff ID cannot be zero or negative.");
+            System.out.println("Staff ID cannot be zero or negative.");
+            return;
         }
         this.staffId = staffId;
     }
@@ -50,9 +42,10 @@ public class Staff {
         return staffName;
     }
 
-    public void setStaffName(String staffName) throws IllegalArgumentException {
+    public void setStaffName(String staffName) {
         if (!isValidName(staffName)) {
-            throw new IllegalArgumentException("Staff name cannot be null.");
+            System.out.println("Staff name cannot be null.");
+            return;
         }
         this.staffName = staffName;
     }
@@ -61,9 +54,10 @@ public class Staff {
         return position;
     }
 
-    public void setPosition(String position) throws IllegalArgumentException {
+    public void setPosition(String position) {
         if (!isValidName(position)) {
-            throw new IllegalArgumentException("Staff name cannot be null.");
+            System.out.println("Staff name cannot be null.");
+            return;
         }
         this.position = position;
     }
@@ -72,15 +66,12 @@ public class Staff {
         return salary;
     }
 
-    public void setSalary(double salary) throws IllegalArgumentException {
+    public void setSalary(double salary) {
         if (salary <= 0) {
-            throw new IllegalArgumentException("Salary cannot be zero or negative.");
+            System.out.println("Salary cannot be zero or negative.");
+            return;
         }
         this.salary = salary;
-    }
-
-    private static boolean isValidName(String name) {
-        return !(name == null || name == "");
     }
 
     @Override

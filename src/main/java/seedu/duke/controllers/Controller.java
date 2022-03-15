@@ -1,6 +1,6 @@
 package seedu.duke.controllers;
 
-import java.util.Scanner;
+import seedu.duke.exceptions.OperationTerminationException;
 
 /**
  * Controller is an abstract class that should be extended by all Controllers.
@@ -9,19 +9,11 @@ import java.util.Scanner;
  */
 public abstract class Controller {
     /**
-     * This character tells the current command to terminate.
-     */
-    protected static final String TERMINATOR = "-";
-    /**
      * Options provided by the controller. They can be selected by index.
      *
      * <p>All controllers should place the exit option as the top-level choice.
      */
     protected final String[] choices;
-    /**
-     * The global scanner object that should be used by all Controllers in the application.
-     */
-    protected final Scanner scanner;
 
     /**
      * Creates a Controller with a list of choices.
@@ -31,11 +23,9 @@ public abstract class Controller {
      * and pass that single scanner to multiple controllers.
      *
      * @param choices Array of strings listing the choices available to the user.
-     * @param scanner Scanner for System.in.
      */
-    public Controller(String[] choices, Scanner scanner) {
+    public Controller(String[] choices) {
         this.choices = choices;
-        this.scanner = scanner;
     }
 
     /**
@@ -45,10 +35,10 @@ public abstract class Controller {
      *
      * @param choice Option choice.
      * @return Whether to relinquish control or not.
-     * @throws IllegalArgumentException When option methods throw the same error. This will
-     *                                  be caught by the `takeControl` method.
+     * @throws OperationTerminationException When option methods throw the same error. This will
+     *                                       be caught by the `takeControl` method.
      */
-    protected abstract boolean optionSwitcher(int choice) throws IllegalArgumentException;
+    protected abstract boolean optionSwitcher(int choice) throws OperationTerminationException;
 
     /**
      * Provides a base control implementation for all controllers.
@@ -69,7 +59,7 @@ public abstract class Controller {
             // try-catch block for getting choice.
             try {
                 choice = this.getChoice();
-            } catch (IllegalArgumentException e) {
+            } catch (OperationTerminationException e) {
                 // If user enters terminating character, then we set choice to 0, effectively breaking the user
                 // out of the input loop for this controller.
                 choice = 0;
@@ -79,7 +69,7 @@ public abstract class Controller {
                 if (this.optionSwitcher(choice)) {
                     break;
                 }
-            } catch (IllegalArgumentException e) {
+            } catch (OperationTerminationException e) {
                 System.out.println("Terminating operation!");
             }
         }
@@ -89,37 +79,10 @@ public abstract class Controller {
      * Helper method to get a valid choice.
      *
      * @return Returns a valid choice.
-     * @throws IllegalArgumentException When user inputs terminator.
+     * @throws OperationTerminationException When user inputs terminator.
      */
-    protected int getChoice() throws IllegalArgumentException {
-        while (true) {
-            try {
-                String line = this.getString("Enter choice: ").toLowerCase();
-                int choice = Integer.parseInt(line);
-                if (choice < 0 || choice > choices.length - 1) {
-                    throw new NumberFormatException("Invalid range!");
-                }
-                return choice;
-            } catch (NumberFormatException e) {
-                System.out.printf("Error parsing index - %s\n", e.getMessage());
-            }
-        }
-    }
-
-    /**
-     * Helper method to get a valid string.
-     *
-     * @param msg Message to show user when getting input.
-     * @return Returns a valid string.
-     * @throws IllegalArgumentException When user inputs terminator.
-     */
-    protected String getString(String msg) throws IllegalArgumentException {
-        System.out.print(msg);
-        String line = scanner.nextLine();
-        if (line.equals(TERMINATOR)) {
-            throw new IllegalArgumentException();
-        }
-        return line;
+    protected int getChoice() throws OperationTerminationException {
+        return InputParser.getInteger("Enter choice: ");
     }
 
     /**

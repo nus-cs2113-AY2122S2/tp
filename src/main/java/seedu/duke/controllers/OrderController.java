@@ -1,8 +1,7 @@
 package seedu.duke.controllers;
 
+import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.manager.OrderManager;
-
-import java.util.Scanner;
 
 public class OrderController extends Controller {
     private static final String[] CHOICES = {"Exit", "Display Menu",
@@ -12,13 +11,13 @@ public class OrderController extends Controller {
     };
     private final OrderManager orderManager;
 
-    public OrderController(Scanner scanner) {
-        super(CHOICES, scanner);
+    public OrderController() {
+        super(CHOICES);
         orderManager = new OrderManager();
     }
 
     @Override
-    protected boolean optionSwitcher(int choice) throws IllegalArgumentException {
+    protected boolean optionSwitcher(int choice) throws OperationTerminationException {
         switch (choice) {
         case 0:
             System.out.println("Exiting application...");
@@ -27,41 +26,19 @@ public class OrderController extends Controller {
             System.out.println("Implement me to view menu :D");
             break;
         case 2:
-            boolean notQuit = true;
-            System.out.println("Enter dishes you want to order (Q/q to exit): ");
-            Scanner sc = new Scanner(System.in);
-            String userInput = sc.nextLine();
-            if (userInput == "Q" || userInput == "q") {
-                notQuit = false;
-            }
-            while (notQuit) {
-                Object inputObj = userInput;
-                int size = orderManager.addDishToOrder(inputObj);
-                System.out.printf("You’ve already added %d dish(es), some more: \n", size);
-                userInput = sc.nextLine();
-                if (userInput == "Q" || userInput == "q") {
-                    notQuit = false;
-                }
-            }
+            quitOrder();
             break;
         case 3:
-            System.out.println("Enter the order you want to delete: ");
-            Scanner sc2 = new Scanner(System.in);
-            int userInputInt = sc2.nextInt();
-            orderManager.deleteOrder(userInputInt);
+            deleteOrder();
             break;
         case 4:
-            System.out.println("Enter the order you want to get price: ");
-            Scanner sc3 = new Scanner(System.in);
-            userInputInt = sc3.nextInt();
-            System.out.printf("Total value of all orders: %f. \n", orderManager.getOrderPrice(userInputInt));
+            getOrderPrice();
             break;
         case 5:
-            System.out.printf("Total value of all orders: %f. \n", orderManager.getAllOrderValue());
+            getAllOrderPrice();
             break;
         case 6:
-            System.out.println("These are all your orders receipts. \n");
-            orderManager.printReceipt();
+            printReceipt();
             break;
         default:
             // This should not happen, since the choice argument for this method is always parsed from the
@@ -71,6 +48,41 @@ public class OrderController extends Controller {
         System.out.println("Now in Main Menu.");
         System.out.println(this);
         return false;
+    }
+
+    private void quitOrder() throws OperationTerminationException {
+        boolean notQuit = true;
+        String userInput = InputParser.getString("Enter dishes you want to order (Q/q to exit): ");
+        if (userInput == "Q" || userInput == "q") {
+            notQuit = false;
+        }
+        while (notQuit) {
+            Object inputObj = userInput;
+            int size = orderManager.addDishToOrder(inputObj);
+            userInput = InputParser.getString("You’ve already added " + size + "dish(es), some more: \n");
+            if (userInput == "Q" || userInput == "q") {
+                notQuit = false;
+            }
+        }
+    }
+
+    private void deleteOrder() throws OperationTerminationException {
+        int userInputInt = InputParser.getInteger("Enter the order you want to delete: ");
+        orderManager.deleteOrder(userInputInt);
+    }
+
+    private void getOrderPrice() throws OperationTerminationException {
+        int userInputInt = InputParser.getInteger("Enter the order you want to get price: ");
+        System.out.printf("Total value of all orders: %f. \n", orderManager.getOrderPrice(userInputInt));
+    }
+
+    private void getAllOrderPrice() {
+        System.out.printf("Total value of all orders: %f. \n", orderManager.getAllOrderValue());
+    }
+
+    private void printReceipt() {
+        System.out.println("These are all your orders receipts. \n");
+        orderManager.printReceipt();
     }
 
     @Override

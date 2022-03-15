@@ -1,9 +1,8 @@
 package seedu.duke.controllers;
 
 import seedu.duke.entities.Dish;
+import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.manager.DishManager;
-
-import java.util.Scanner;
 
 /**
  * DishController (or MenuController if you like).
@@ -14,13 +13,19 @@ public class DishController extends Controller {
     };
     private final DishManager dishManager;
 
-    public DishController(Scanner scanner) {
-        super(CHOICES, scanner);
+    public DishController() {
+        super(CHOICES);
         dishManager = new DishManager();
     }
 
     @Override
-    protected boolean optionSwitcher(int choice) throws IllegalArgumentException {
+    public void takeControl() {
+        System.out.println("You are using Menu function");
+        super.takeControl();
+    }
+
+    @Override
+    protected boolean optionSwitcher(int choice) throws OperationTerminationException {
         switch (choice) {
         case 1:
             addDish();
@@ -35,84 +40,61 @@ public class DishController extends Controller {
             changeName();
             break;
         case 0:
-            // Relinquish control. This will return to the programme main function.
-            System.out.println("Exiting application...");
+            System.out.println("Exiting Menu...");
             return true;
         default:
-            // This should not happen, since the choice argument for this method is always parsed from the
-            // getChoice() method, which also checks for the range of index input.
             System.out.println("Unknown choice!");
+            break;
         }
-        System.out.println("Now in Main Menu.");
+        System.out.println("You are using Menu function");
         System.out.println(this);
         return false;
     }
 
-    /**
-     * Give user prompt and get input to change name of one dish.
-     * @throws IllegalArgumentException when input cannot be parsed
-     */
-    private void changeName() throws IllegalArgumentException {
-        System.out.println("Changing name");
-        System.out.print("The index of dish");
-        int index = scanner.nextInt();
-        System.out.print("The new name of dish");
-        String name = scanner.nextLine();
+    private void changeName() throws OperationTerminationException {
+        System.out.println("Changing name...");
+        int index = InputParser.getInteger("The index of dish");
+        String name = InputParser.getString("The new name of dish");
         try {
             dishManager.setName(index, name);
         } catch (IndexOutOfBoundsException e) {
-            throw new IllegalArgumentException(e.getMessage());
+            System.out.println("Please make sure the index is valid");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Please make sure the name is not empty");
         }
     }
 
-    /**
-     * Give user prompt and get input to change price of one dish.
-     * @throws IllegalArgumentException when input cannot be parsed.
-     */
-    private void changePrice() throws IllegalArgumentException {
-        System.out.println("Changing price");
-        System.out.print("The index of dish: ");
-        int index = scanner.nextInt();
-        System.out.print("The new price of dish: ");
-        double newPrice = scanner.nextDouble();
+    private void changePrice() throws OperationTerminationException {
+        System.out.println("Changing price...");
+        int index = InputParser.getInteger("The index of dish");
+        double newPrice = InputParser.getDouble("The new price of dish: ");
         try {
             dishManager.setPrice(index, newPrice);
         } catch (IndexOutOfBoundsException e) {
-            throw new IllegalArgumentException(e.getMessage());
+            System.out.println("Please make sure the index is valid");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Please make sure the price is not negative");
         }
     }
 
-    /**
-     * Give user prompt and get input to delete one dish.
-     * @throws IllegalArgumentException when input cannot be parsed
-     */
-    private void deleteDish() throws IllegalArgumentException {
+    private void deleteDish() throws OperationTerminationException {
         System.out.println("Deleting dish");
-        System.out.print("The index of dish : ");
-        int index = scanner.nextInt();
+        int index = InputParser.getInteger("The index of dish");
         try {
             dishManager.deleteDish(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new IllegalArgumentException(e.getMessage());
+            System.out.println("Please make sure the index is valid");
         }
     }
 
-    /**
-     * Give user prompt and get input to add one dish.
-     * @throws IllegalArgumentException When input cannot be parsed
-     */
-    private void addDish() throws IllegalArgumentException {
-        System.out.println("Adding new dish");
-        System.out.print("The name of dish: ");
-        String name = scanner.nextLine();
-        System.out.print("The price of dish: ");
-        double price = scanner.nextDouble();
-        dishManager.addDish(new Dish(name, price));
-    }
-
-    @Override
-    public void takeControl() {
-        System.out.println("You are using Menu function");
-        super.takeControl();
+    private void addDish() throws OperationTerminationException {
+        System.out.println("Adding new dish...");
+        String name = InputParser.getString("The name of dish: ");
+        double price = InputParser.getDouble("The price of dish: ");
+        try {
+            dishManager.addDish(new Dish(name, price));
+        } catch (IllegalArgumentException e) {
+            System.out.println("Please make sure the name is not empty and price is positive");
+        }
     }
 }
