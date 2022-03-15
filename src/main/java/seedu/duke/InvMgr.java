@@ -24,6 +24,7 @@ public class InvMgr {
         while (!isExit) {
             String command = ui.readCommand();
             Command inputCommand = Parser.parse(command);
+            inputCommand.execute(ui, itemList);
             if (inputCommand instanceof ByeCommand) {
                 break;
             }
