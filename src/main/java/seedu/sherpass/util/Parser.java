@@ -241,8 +241,7 @@ public class Parser {
             return null;
         }
         try {
-            LocalDate localDate = LocalDate.parse(rawTaskDate, parseFormat);
-            return localDate;
+            return LocalDate.parse(rawTaskDate, parseFormat);
         } catch (DateTimeParseException e) {
             return confirmInvalidDateFormat();
         }
@@ -307,7 +306,7 @@ public class Parser {
      * Parses the default timer modes.
      *
      * @param defaultTimerChoice Mode number
-     * @param ui UI
+     * @param ui                 UI
      * @return Returns the duration of the timer mode selected in seconds
      */
     private static int selectDefaultTimer(String defaultTimerChoice, Ui ui) {
@@ -331,7 +330,7 @@ public class Parser {
      * Parses input to the timer.
      *
      * @param parsedInput Parsed input
-     * @param ui UI
+     * @param ui          UI
      * @return Returns the duration of the timer, else returns -1 if invalid duration specified
      */
     public static int parseTimerInput(String[] parsedInput, Ui ui) {
@@ -355,8 +354,7 @@ public class Parser {
      * Parses commands for study mode.
      *
      * @param rawUserInput Raw user input
-     * @param ui UI
-     * @param timer Timer object
+     * @param ui           UI
      */
     public static void parseStudyMode(String rawUserInput, Ui ui) {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
