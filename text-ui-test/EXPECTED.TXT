@@ -1,2 +1,9 @@
 Invalid Command
+Invalid Command
+Invalid Command
+Error! AGE must be integer
+Noted!
+[ sgg ]: 17
+Error! AGE must be integer
+Error! AGE must be integer
 see u again!

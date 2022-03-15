@@ -50,7 +50,7 @@ public class AddItemCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(Ui ui) {
     }
 
     public String getItemName() {

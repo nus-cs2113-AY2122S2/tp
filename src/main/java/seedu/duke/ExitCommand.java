@@ -6,7 +6,7 @@ public class ExitCommand extends Command {
         isExit = true;
     }
 
-    public void execute() {
+    public void execute(Ui ui) {
         System.out.println("see u again!");
     }
 }

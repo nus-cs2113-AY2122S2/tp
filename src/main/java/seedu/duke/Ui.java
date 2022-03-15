@@ -27,4 +27,12 @@ public class Ui {
     public void printErrorMessage(HotelLiteManagerException exception) {
         System.out.println(exception.getErrorMessage());
     }
+
+    public void printHousekeeperNoted(Housekeeper housekeeper) {
+        System.out.println("Noted!");
+        System.out.println(housekeeper);
+
+    }
+
+
 }
