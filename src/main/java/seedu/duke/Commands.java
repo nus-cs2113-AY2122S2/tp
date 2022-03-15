@@ -20,8 +20,7 @@ public class Commands {
                     Integer.parseInt(qty),
                     "Empty Description"); //description not yet added since not in UserGuide
             userGoods.add(goods);
-            System.out.printf("%d %s Has been added\n" + "You have %d goods in the warehouse\n",
-                    goods.getQuantity(), goods, userGoods.size());
+            System.out.printf("%d %s Has been added\n", goods.getQuantity(), goods);
         } catch (NumberFormatException e) {
             // error handling here
             System.out.println("Please add a good in this format:\n"
@@ -49,12 +48,12 @@ public class Commands {
 
     /*Prints all inventory in a numbered list in order of input*/
     public static void listGoods(ArrayList<Goods> userGoods) {
-        int numberOfUserGoods = userGoods.size();
+        //int numberOfUserGoods = userGoods.size();
         if (userGoods.isEmpty()) {
             System.out.println("There is no inventory in the warehouse.");
             return;
         }
-        System.out.println("List of inventory items: ");
+        System.out.println("List of inventory items:");
         int counter = 0;
         for (Goods good : userGoods) {
             System.out.println((counter + 1) + ". " + good.getName());
@@ -111,6 +110,7 @@ public class Commands {
             int goodsQty = Integer.parseInt(qty);
 
             remove(goodsId, goodsQty, userGoods);
+          
         } catch (NumberFormatException e1) {
             System.out.println("Please remove goods in this format:\n"
                     + "remove id/id_of_good_as_number q/quantity_of_good_as_number");

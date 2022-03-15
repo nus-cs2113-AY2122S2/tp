@@ -6,7 +6,24 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 What would you like to do?
-1 chairs (Empty Description) Has been added
-You have 1 goods in the warehouse
+100 chairs (Empty Description) Has been added
+Another command?
+List of inventory items:
+1. chairs
+Another command?
+Viewing item with id 1
+Item name: chairs
+Item description: Empty Description
+Item quantity: 100
+Another command?
+14 chairs have been removed.
+Another command?
+List of inventory items:
+1. chairs
+Another command?
+Viewing item with id 1
+Item name: chairs
+Item description: Empty Description
+Item quantity: 86
 Another command?
 Bye
