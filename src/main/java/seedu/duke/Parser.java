@@ -3,6 +3,8 @@ package seedu.duke;
 import seedu.duke.commands.*;
 import seedu.duke.exceptions.InvalidDayException;
 import seedu.duke.exceptions.MissingValueException;
+import seedu.duke.exceptions.InvalidDayException;
+import seedu.duke.exceptions.InvalidTimeException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,8 +49,6 @@ public class Parser {
     }
 
     public Command prepareAdd() {
-        // checks empty command description error
-        // checks input format error
         try {
             String[] eventDescription = splitArguments();
             checkValidityOfArguments(eventDescription);
@@ -58,11 +58,12 @@ public class Parser {
             checkDay(day);
             int startTime = Integer.parseInt(eventDescription[STARTTIME_INDEX]);
             int endTime = Integer.parseInt(eventDescription[ENDTIME_INDEX]);
+            checkTime(startTime, endTime);
             String mode = eventDescription[MODE_INDEX].toLowerCase();
             return new AddCommand(name, title, day, startTime, endTime, mode);
-        } catch (NumberFormatException nfe) {
+        } catch (InvalidTimeException | NumberFormatException nfe) {
             System.out.println(ERROR_INVALID_TIME);
-            return new HelpCommand(); 
+            return new HelpCommand();
         } catch (NullPointerException npe) {
             System.out.println(ERROR_MISSING_PARAMETERS);
             return new HelpCommand();
@@ -72,6 +73,12 @@ public class Parser {
         } catch (InvalidDayException ide) {
             System.out.println(ERROR_INVALID_DAY);
             return new HelpCommand();
+        }
+    }
+
+    private void checkTime(int startTime, int endTime) throws InvalidTimeException {
+        if (startTime >= 2400 || endTime >= 2400) {
+            throw new InvalidTimeException();
         }
     }
 
