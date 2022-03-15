@@ -17,12 +17,12 @@ public abstract class Command {
     public abstract void execute(ItemList itemList, Ui ui, Storage storage);
 
     /**
-     * Returns false if the command is not a command to exit the program
-     * Override this method to return true if it is an exit command
+     * Returns false by default if the command is not a command to exit the program.
+     * Override this method to return true if it is an exit command.
      *
      * @return False if the command is a command to exit the program. Returns True otherwise.
      */
     public boolean isExit() {
-        return true;
+        return false;
     }
 }

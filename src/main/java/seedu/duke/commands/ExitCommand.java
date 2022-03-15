@@ -10,7 +10,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Returns True to override the default as this is a command to exit the program
+     * Returns True to override the default as this is a command to exit the program.
      *
      * @return True to indicate this is a Command to exit the program
      */
