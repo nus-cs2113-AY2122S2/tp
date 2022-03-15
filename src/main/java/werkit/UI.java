@@ -5,16 +5,16 @@ import storage.FileManager;
 import storage.UnknownFileException;
 import textcolors.TextColor;
 
-import java.nio.file.Path;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.Scanner;
-
-//import static textcolors.TextColor.COLOR_RESET;
-//import static textcolors.TextColor.COLOR_YELLOW;
 
 /**
  * This class contains all the user interface-related texts and methods for the WerkIt! Application.
  */
 public class UI {
+    private static Logger logger = Logger.getLogger(UI.class.getName());
+
     // WerkIt ASCII Banner Logo Art
     public static final String WERKIT_BANNER_LOGO = " __        __        _    ___ _   _ \n"
             + " \\ \\      / /__ _ __| | _|_ _| |_| |\n"
@@ -305,6 +305,7 @@ public class UI {
             messageToPrint = WORKOUTS_FILE_LOADED_MSG;
             break;
         default:
+            logger.log(Level.WARNING, "Unknown filename encountered.");
             throw new UnknownFileException(filename, UnknownFileException.UNKNOWN_FILE_MSG);
         }
 

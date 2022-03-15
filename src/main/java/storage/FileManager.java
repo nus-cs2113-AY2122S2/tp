@@ -14,6 +14,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.Scanner;
 
 /**
@@ -46,6 +48,8 @@ public class FileManager {
     private boolean wasDirectoryAlreadyMade = false;
     private boolean wasExercisesFileAlreadyMade = false;
     private boolean wasWorkoutsFileAlreadyMade = false;
+
+    private static Logger logger = Logger.getLogger(FileManager.class.getName());
 
     /**
      * Constructs a FileManager object. While instantiating, Paths objects of the various URIs
@@ -196,6 +200,10 @@ public class FileManager {
             createWorkoutFile();
             ui.printWorkoutFileCreatedMessage();
         }
+
+        assert (Files.exists(getDirectoryPath()));
+        assert (Files.exists(getExerciseFilePath()));
+        assert (Files.exists(getWorkoutFilePath()));
     }
 
     /**
@@ -204,6 +212,7 @@ public class FileManager {
      */
     public void checkIfDataDirectoryAlreadyExists() {
         if (Files.exists(getDirectoryPath())) {
+            logger.log(Level.INFO, "Resource directory already exists.");
             setWasDirectoryAlreadyMade(true);
         }
     }
@@ -223,6 +232,7 @@ public class FileManager {
      */
     public void checkIfExerciseFileAlreadyExists() {
         if (Files.exists(getExerciseFilePath())) {
+            logger.log(Level.INFO, "Exercise file already exists.");
             setWasExercisesFileAlreadyMade(true);
         }
     }
@@ -250,6 +260,7 @@ public class FileManager {
      */
     public void checkIfWorkoutFileAlreadyExists() {
         if (Files.exists(getWorkoutFilePath())) {
+            logger.log(Level.INFO, "Workout file already exists.");
             setWasWorkoutsFileAlreadyMade(true);
         }
     }
