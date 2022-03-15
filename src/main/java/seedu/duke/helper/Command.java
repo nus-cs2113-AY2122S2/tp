@@ -59,4 +59,21 @@ public class Command {
         medicineList.add(parameterArray);
         System.out.println("Medicine has been added");;
     }
+
+    public void deleteMedicine(MedicineList medicineList, String stringIndex) {
+        if (!nullChecker(stringIndex)) {
+            return;
+        }
+        try {
+            int index = Integer.parseInt(stringIndex);
+            if (index < 1 || index > medicineList.size()) {
+                System.out.println("Number is not within range of 1 - " + medicineList.size());
+                return;
+            }
+            medicineList.delete(index);
+            System.out.println("The medicine record at index " + index + " has been deleted.");
+        } catch (NumberFormatException numberFormatException) {
+            System.out.println("Parameter given is not a number.");
+        }
+    }
 }
