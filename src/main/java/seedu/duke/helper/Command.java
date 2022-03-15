@@ -75,7 +75,7 @@ public class Command {
             ui.printDeleteDoctorErrorMessage(doctorList);
             return;
         }
-        if (1 <= indexDoctor && indexDoctor <= doctorList.getSize()) {
+        if (1 <= indexDoctor && indexDoctor <= doctorList.getSizeDoctor()) {
             doctorList.removeDoctor(indexDoctor - 1);
             System.out.println("The doctor with the specified index has been removed.");
         } else {

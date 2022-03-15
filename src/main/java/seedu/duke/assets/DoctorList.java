@@ -35,7 +35,7 @@ public class DoctorList {
     }
 
     //get the number of doctors
-    public int getSize() {
+    public int getSizeDoctor() {
         return doctors.size();
     }
 

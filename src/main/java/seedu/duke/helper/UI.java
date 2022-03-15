@@ -73,7 +73,7 @@ public class UI {
     }
 
     public void printDeleteDoctorErrorMessage(DoctorList doctorList) {
-        System.out.println("Please enter a number from 1 till  " + doctorList.getSize() + " .");
+        System.out.println("Please enter a number from 1 till  " + doctorList.getSizeDoctor() + " .");
         System.out.println("Here is an example:");
         System.out.println("delete doctor /info 1");
     }
