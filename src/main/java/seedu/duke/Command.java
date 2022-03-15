@@ -8,7 +8,7 @@ public abstract class Command {
     }
 
     public abstract void execute(RoomList roomList, ItemList listOfItems, Ui ui)
-            throws WrongCommandException, InvalidRoomNumberException;
+            throws HotelLiteManagerException, WrongCommandException;
 
     public boolean isExit() {
         return this.isExit;
