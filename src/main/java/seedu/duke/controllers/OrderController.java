@@ -1,5 +1,6 @@
 package seedu.duke.controllers;
 
+import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.manager.OrderManager;
 
 import java.util.Scanner;
@@ -11,16 +12,14 @@ public class OrderController extends Controller {
         "Get total value of all orders in the list", "Print receipt"
     };
     private final OrderManager orderManager;
-    private final Scanner scanner;
 
     public OrderController() {
         super(CHOICES);
         orderManager = new OrderManager();
-        scanner = new Scanner(System.in);
     }
 
     @Override
-    protected boolean optionSwitcher(int choice) throws IllegalArgumentException {
+    protected boolean optionSwitcher(int choice) throws IllegalArgumentException, OperationTerminationException {
         switch (choice) {
         case 0:
             System.out.println("Exiting application...");
@@ -30,32 +29,25 @@ public class OrderController extends Controller {
             break;
         case 2:
             boolean notQuit = true;
-            System.out.println("Enter dishes you want to order (Q/q to exit): ");
-            Scanner sc = new Scanner(System.in);
-            String userInput = sc.nextLine();
+            String userInput= InputParser.getString("Enter dishes you want to order (Q/q to exit): ");
             if (userInput == "Q" || userInput == "q") {
                 notQuit = false;
             }
             while (notQuit) {
                 Object inputObj = userInput;
                 int size = orderManager.addDishToOrder(inputObj);
-                System.out.printf("You’ve already added %d dish(es), some more: \n", size);
-                userInput = sc.nextLine();
+                userInput= InputParser.getString("You’ve already added " + size + "dish(es), some more: \n");
                 if (userInput == "Q" || userInput == "q") {
                     notQuit = false;
                 }
             }
             break;
         case 3:
-            System.out.println("Enter the order you want to delete: ");
-            Scanner sc2 = new Scanner(System.in);
-            int userInputInt = sc2.nextInt();
+            int userInputInt = InputParser.getInteger("Enter the order you want to delete: ");
             orderManager.deleteOrder(userInputInt);
             break;
         case 4:
-            System.out.println("Enter the order you want to get price: ");
-            Scanner sc3 = new Scanner(System.in);
-            userInputInt = sc3.nextInt();
+            userInputInt = InputParser.getInteger("Enter the order you want to get price: ");
             System.out.printf("Total value of all orders: %f. \n", orderManager.getOrderPrice(userInputInt));
             break;
         case 5:
