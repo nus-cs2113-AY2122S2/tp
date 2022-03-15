@@ -98,12 +98,52 @@ public class Parser {
                 + HELP_MESSAGE_SPECIFIC_COMMAND);
     }
 
+    private static LocalDate confirmInvalidDateFormat() throws InvalidInputException {
+        Ui anotherUi = new Ui();
+        anotherUi.showToUser("It seems that the date and time\nyou gave is not in the correct format.\n"
+                + "Would you like to re-enter a valid date and time? (Y/N)\n"
+                + "*Enter 'No' to skip the adding of this task*");
+        anotherUi.showLine();
+        while (true) {
+            String input = anotherUi.readCommand();
+            anotherUi.showLine();
+            if (input.trim().equalsIgnoreCase("Y")
+                    || input.trim().equalsIgnoreCase("Yes")) {
+                anotherUi.showToUser("Understood. Please key in the date and time you wish to save.");
+                anotherUi.showLine();
+                anotherUi.showToUser("Enter valid date input:");
+                input = anotherUi.readCommand();
+                anotherUi.showLine();
+                return prepareTaskDate(input.trim());
+            }
+            if (input.trim().equalsIgnoreCase("N")
+                    || input.trim().equalsIgnoreCase("No")) {
+                anotherUi.showToUser("Okay, proceeding to stop current task process...");
+                return null;
+            }
+            anotherUi.showToUser("Please confirm your choice with either Y (Yes) or N (No).");
+            anotherUi.showLine();
+        }
+    }
+
+    private static LocalDate prepareTaskDate(String rawTaskDate) throws InvalidInputException {
+        if (rawTaskDate.isBlank()) {
+            return null;
+        }
+        try {
+            return LocalDate.parse(rawTaskDate, parseFormat);
+        } catch (DateTimeParseException e) {
+            return confirmInvalidDateFormat();
+        }
+    }
+
+
+    // Please add in constants to the magic literals
     private static Command prepareAdd(String[] splitInput, TaskList taskList) {
         String[] filteredTaskContent;
         LocalDate byDate;
         LocalDate doOnDate;
         try {
-            if (!splitInput[TASK_CONTENT_INDEX].contains("/by") && !splitInput[TASK_CONTENT_INDEX].contains("/do_on")) {
             if (!splitInput[TASK_CONTENT_INDEX].contains("/by")
                     && !splitInput[TASK_CONTENT_INDEX].contains("/do_on")) {
                 return new AddCommand(splitInput[TASK_CONTENT_INDEX], taskList, null, null);
@@ -202,46 +242,6 @@ public class Parser {
         }
 
         return null;
-    }
-
-
-    private static LocalDate confirmInvalidDateFormat() throws InvalidInputException {
-        Ui anotherUi = new Ui();
-        anotherUi.showToUser("It seems that the date and time\nyou gave is not in the correct format.\n"
-                + "Would you like to re-enter a valid date and time? (Y/N)\n"
-                + "*Enter 'No' to skip the adding of this task*");
-        anotherUi.showLine();
-        while (true) {
-            String input = anotherUi.readCommand();
-            anotherUi.showLine();
-            if (input.trim().equalsIgnoreCase("Y")
-                    || input.trim().equalsIgnoreCase("Yes")) {
-                anotherUi.showToUser("Understood. Please key in the date and time you wish to save.");
-                anotherUi.showLine();
-                anotherUi.showToUser("Enter valid date input:");
-                input = anotherUi.readCommand();
-                anotherUi.showLine();
-                return prepareTaskDate(input.trim());
-            }
-            if (input.trim().equalsIgnoreCase("N")
-                    || input.trim().equalsIgnoreCase("No")) {
-                anotherUi.showToUser("Okay, proceeding to stop current task process...");
-                return null;
-            }
-            anotherUi.showToUser("Please confirm your choice with either Y (Yes) or N (No).");
-            anotherUi.showLine();
-        }
-    }
-
-    private static LocalDate prepareTaskDate(String rawTaskDate) throws InvalidInputException {
-        if (rawTaskDate.isBlank()) {
-            return null;
-        }
-        try {
-            return LocalDate.parse(rawTaskDate, parseFormat);
-        } catch (DateTimeParseException e) {
-            return confirmInvalidDateFormat();
-        }
     }
 
     private static Command prepareDelete(String[] parsedInput, TaskList taskList) {
