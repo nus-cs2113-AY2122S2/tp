@@ -1,7 +1,7 @@
 package seedu.planitarium.person;
 
-import seedu.planitarium.ExpenditureList;
 import seedu.planitarium.income.IncomeList;
+import seedu.planitarium.expenditure.ExpenditureList;
 
 public class Person {
     protected String name;

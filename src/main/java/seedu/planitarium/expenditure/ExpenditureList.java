@@ -1,4 +1,4 @@
-package seedu.planitarium;
+package seedu.planitarium.expenditure;
 
 import java.util.ArrayList;
 
