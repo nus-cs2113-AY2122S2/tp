@@ -16,12 +16,12 @@ public class Dish {
     }
 
     private static String toTitleCase(String givenString) {
-        assert(isValidName(givenString));
+        assert (isValidName(givenString));
         String[] arr = givenString.split(" ");
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < arr.length; i++) {
             sb.append(Character.toUpperCase(arr[i].charAt(0)))
-                .append(arr[i].substring(1)).append(" ");
+                    .append(arr[i].substring(1)).append(" ");
         }
         return sb.toString().trim();
     }
@@ -31,7 +31,7 @@ public class Dish {
     }
 
     public String getName() {
-        assert(isValidName(name));
+        assert (isValidName(name));
         return name;
     }
 
@@ -43,7 +43,7 @@ public class Dish {
     }
 
     public double getPrice() {
-        assert(price >= 0);
+        assert (price >= 0);
         return price;
     }
 

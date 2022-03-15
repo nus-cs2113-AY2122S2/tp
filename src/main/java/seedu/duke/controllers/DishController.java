@@ -11,15 +11,15 @@ import java.util.logging.Logger;
  * DishController (or MenuController if you like).
  */
 public class DishController extends Controller {
-    private static final String[] CHOICES = {"Exit Menu", "List Dish", "Add Dish", "Delete Dish",
-            "Change the price of a dish", "Change the name of a dish"
-    };
+    private static final String[] CHOICES = {"Exit Menu", "List Dish", "Add Dish",
+        "Delete Dish", "Change the price of a dish", "Change the name of a dish"};
     private static Logger logger = Logger.getLogger("DishController");
     private final DishManager dishManager;
 
     private static void logInfo(String msg) {
         logger.log(Level.INFO, msg);
     }
+
     public DishController() {
         super(CHOICES);
         dishManager = new DishManager();
