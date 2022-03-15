@@ -1,7 +1,6 @@
 package seedu.planitarium.commands;
 
 import seedu.planitarium.exceptions.MissingDelimiterException;
-import seedu.planitarium.exceptions.UnknownException;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.PersonList;
 
