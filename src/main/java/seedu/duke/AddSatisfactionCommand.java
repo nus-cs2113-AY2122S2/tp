@@ -3,7 +3,7 @@ package seedu.duke;
 public class AddSatisfactionCommand extends Command {
     private Satisfaction satisfaction;
 
-    public AddSatisfactionCommand(String commandStringWithoutCommand) throws HotelLiteManagerException{
+    public AddSatisfactionCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
         String customerName = "";
         int satisfactionValue = 0;
         try {
@@ -46,9 +46,8 @@ public class AddSatisfactionCommand extends Command {
     }
 
     @Override
-    public void execute() {}
-
-    public void execute(SatisfactionList satisfactionList) {
+    public void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList listOfItems, Ui ui)
+            throws HotelLiteManagerException, WrongCommandException {
         satisfactionList.addSatisfaction(satisfaction);
     }
 

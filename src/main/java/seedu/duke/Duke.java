@@ -11,14 +11,13 @@ public class Duke {
         ItemList listOfItems = new ItemList();
         boolean shouldExitProgram = false;
         Ui ui = new Ui();
+        RoomList roomList = new RoomList();
         String userInput;
         while (!shouldExitProgram) {
             try {
                 userInput = ui.readUserInput();
                 Command command = commandParser.parse(userInput);
-                command.execute();
-                command.execute(satisfactionList);
-                command.execute(listOfItems, ui);
+                command.execute(satisfactionList, roomList, listOfItems, ui);
                 shouldExitProgram = command.isExit();
             } catch (WrongCommandException error) {
                 System.out.println(error.getMessage());

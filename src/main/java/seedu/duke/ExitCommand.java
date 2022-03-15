@@ -6,11 +6,8 @@ public class ExitCommand extends Command {
         isExit = true;
     }
 
-    public void execute() {}
-  
-    public void execute(ItemList listOfItems, Ui ui) throws WrongCommandException {
+    public void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList listOfItems, Ui ui)
+            throws HotelLiteManagerException, WrongCommandException {
         System.out.println("see u again!");
     }
-
-    public void execute(SatisfactionList satisfactionList) {}
 }
