@@ -31,7 +31,7 @@ public class StaffController extends Controller {
             deleteStaff();
             break;
         case 0:
-            MainLogger.logInfo("Exiting staff Menu");
+            MainLogger.logInfo(this, "Exiting staff Menu");
             System.out.println("Exiting Staff Menu...");
             return true;
         default:
@@ -49,7 +49,7 @@ public class StaffController extends Controller {
      * @throws OperationTerminationException When user inputs terminator.
      */
     private void findStaff() throws OperationTerminationException {
-        MainLogger.logInfo("Finding staff");
+        MainLogger.logInfo(this, "Finding staff");
         System.out.println("Finding staff...");
         int staffId = InputParser.getInteger("ID of staff: ");
         staffManager.findByStaffId(staffId, true);
@@ -61,7 +61,7 @@ public class StaffController extends Controller {
      * @throws OperationTerminationException When user inputs terminator.
      */
     private void addStaff() throws OperationTerminationException {
-        MainLogger.logInfo("Adding staff");
+        MainLogger.logInfo(this, "Adding staff");
         System.out.println("Adding new staff...");
         final int staffId = InputParser.getInteger("ID of staff: ");
         final String staffName = InputParser.getString("Name of staff: ");
@@ -76,7 +76,7 @@ public class StaffController extends Controller {
      * @throws OperationTerminationException When user inputs terminator.
      */
     private void deleteStaff() throws OperationTerminationException {
-        MainLogger.logInfo("Deleting staff");
+        MainLogger.logInfo(this, "Deleting staff");
         System.out.println("Deleting staff...");
         final int staffId = InputParser.getInteger("ID of staff: ");
         staffManager.deleteByStaffId(staffId);

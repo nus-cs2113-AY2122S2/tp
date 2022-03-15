@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 public class MainLogger {
     private static final Logger logger = Logger.getLogger("Main");
 
-    public static void logInfo(String msg) {
-        logger.log(Level.INFO, msg);
+    public static void logInfo(Object o, String msg) {
+        logger.log(Level.INFO, String.format("%s: %s", o.getClass().getSimpleName(), msg));
     }
 }

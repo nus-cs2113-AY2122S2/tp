@@ -43,10 +43,10 @@ public class StaffManager {
      */
     public void addStaff(int staffId, String staffName, String position, double salary) {
         if (findByStaffId(staffId, false) != null) {
-            MainLogger.logInfo("Failed to add staff: Staff with same ID already exists.");
+            MainLogger.logInfo(this, "Failed to add staff: Staff with same ID already exists.");
             System.out.println("Staff with the same ID already exists, use another ID...");
         }
-        MainLogger.logInfo("Successful addition of staff");
+        MainLogger.logInfo(this, "Successful addition of staff");
         staffs.add(new Staff(staffId, staffName, position, salary));
     }
 
@@ -58,20 +58,20 @@ public class StaffManager {
      */
     public Staff findByStaffId(int staffId, boolean printMsg) {
         if (staffId <= 0) {
-            MainLogger.logInfo("Invalid input for ID.");
+            MainLogger.logInfo(this, "Invalid input for ID.");
             System.out.println("Staff ID cannot be zero or negative.");
             return null;
         }
         for (Staff staff : staffs) {
             if (staffId == staff.getStaffId()) {
                 if (printMsg) {
-                    MainLogger.logInfo("Successful search for staff.");
+                    MainLogger.logInfo(this, "Successful search for staff.");
                     System.out.println(staff + " found!");
                 }
                 return staff;
             }
         }
-        MainLogger.logInfo("Unsuccessful search for staff.");
+        MainLogger.logInfo(this, "Unsuccessful search for staff.");
         if (printMsg) {
             System.out.println("Staff with ID " + staffId + " not found!");
         }
@@ -87,10 +87,10 @@ public class StaffManager {
         Staff staff = findByStaffId(staffId, false);
         if (staff != null) {
             staffs.remove(staff);
-            MainLogger.logInfo("Successful deletion of staff.");
+            MainLogger.logInfo(this, "Successful deletion of staff.");
             System.out.println(staff + " had been deleted from our staff records.");
         } else {
-            MainLogger.logInfo("Failed to delete staff: No staff with matching ID.");
+            MainLogger.logInfo(this, "Failed to delete staff: No staff with matching ID.");
             System.out.println("No staff from our staff records has a matching ID.");
         }
     }
