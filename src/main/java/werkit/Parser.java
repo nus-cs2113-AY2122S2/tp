@@ -183,7 +183,8 @@ public class Parser {
         return newCommand;
     }
 
-    public ExerciseCommand createExerciseCommand(String userInput) throws InvalidCommandException {
+    public ExerciseCommand createExerciseCommand(String userInput) throws
+            InvalidCommandException, ArrayIndexOutOfBoundsException {
         logger.entering(getClass().getName(), "createExerciseCommand");
         String actionKeyword = userInput.split(" ", 3)[1];
         String arguments = null;
