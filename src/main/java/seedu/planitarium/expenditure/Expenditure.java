@@ -42,7 +42,7 @@ public class Expenditure {
      * @return The string of the description and the amount of the expenditure
      */
     public String toString() {
-        return  "Item: " + description + "     Amount: $" + String.format("%.2f", amount);
+        return  description + ": $" + String.format("%.2f", amount);
     }
 
 }
