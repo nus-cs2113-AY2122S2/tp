@@ -42,7 +42,7 @@ public class Parser {
             "Please split your command into arguments with each argument seperated by spaces!";
     public static final String INCORRECT_COMMAND_FORMAT = "Incorrect Command format!";
 
-    public Command parseCommand(String userInput) throws IncompleteCommandException {
+    public Command parseCommand(String userInput) {
         ArrayList<String> commandAndArgument = null;
         ArrayList<String> args = null;
         try {
