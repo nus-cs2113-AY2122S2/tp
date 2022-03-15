@@ -1,9 +1,15 @@
 package seedu.sherpass.task;
 
-public abstract class Task {
+import java.time.LocalDate;
+
+import static seedu.sherpass.constant.DateAndTimeFormat.outputFormat;
+
+public class Task {
+
     protected String description;
     protected boolean isDone;
-
+    protected LocalDate byDate;
+    protected LocalDate doOnDate;
 
     /**
      * Creates a constructor for the parent class of tasks, 'Task'.
@@ -11,9 +17,11 @@ public abstract class Task {
      *
      * @param description Description of task.
      */
-    public Task(String description) {
+    public Task(String description, LocalDate byDate, LocalDate doOnDate) {
         this.description = description;
         this.isDone = false;
+        this.byDate = byDate;
+        this.doOnDate = doOnDate;
     }
 
     /**
@@ -60,18 +68,6 @@ public abstract class Task {
     }
 
     /**
-     * Replaces task date with new task date input.
-     * Refreshes the task to original state, i.e. unmarked.
-     * Current parent class is created as template for child
-     * classes to perform this function.
-     *
-     * @param date Task Date.
-     */
-    public void resetInput(String date) {
-        markAsUndone();
-    }
-
-    /**
      * Returns task date. Parent class is created
      * as a template for child classes to perform its own
      * respective functions, i.e. each task date returned is
@@ -79,19 +75,21 @@ public abstract class Task {
      *
      * @return White space.
      */
-    public String getDate() {
-        return " ";
+    public LocalDate getByDate() {
+        return byDate;
     }
 
-    /**
-     * Returns task type. Current parent class is created
-     * as a template for child classes to perform its own
-     * respective functions.
-     *
-     * @return Nothing as function is abstract.
-     */
-    public abstract String getType();
+    public LocalDate getDoOnDate() {
+        return doOnDate;
+    }
 
+    public String getByDateString() {
+        return byDate.format(outputFormat);
+    }
+
+    public String getDoOnDateString() {
+        return doOnDate.format(outputFormat);
+    }
 
     /**
      * Returns a string version of the task content.
@@ -102,6 +100,25 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.getDescription();
+        String result = "[" + this.getStatusIcon() + "] " + this.getDescription();
+        if (this.byDate != null) {
+            result += " (by: " + getByDateString() + ")";
+        }
+        if (this.doOnDate != null) {
+            result += " (reminder on: " + getDoOnDateString() + ")";
+        }
+        return result;
+    }
+
+    public void setTaskDescription(String taskDescription) {
+        this.description = taskDescription;
+    }
+
+    public void setByDate(LocalDate byDate) {
+        this.byDate = byDate;
+    }
+
+    public void setDoOnDate(LocalDate doOnDate) {
+        this.doOnDate = doOnDate;
     }
 }

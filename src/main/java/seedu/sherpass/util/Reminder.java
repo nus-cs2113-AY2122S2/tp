@@ -1,12 +1,11 @@
 package seedu.sherpass.util;
 
-import seedu.sherpass.constant.DateAndTimeFormat;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.time.LocalDate;
+
+import java.util.ArrayList;
 import java.util.Comparator;
 
 import static java.util.stream.Collectors.toList;
@@ -42,7 +41,7 @@ public class Reminder {
      */
     public void showDailyTask() {
         ArrayList<Task> filteredDailyTasks = (ArrayList<Task>) tasks.stream()
-                .filter((t) -> isEqualDate(t.getDate(), currentDate))
+                .filter((t) -> isEqualDate(t.getByDate(), currentDate))
                 .filter((t) -> !t.isDone())
                 .collect(toList());
 
@@ -61,14 +60,13 @@ public class Reminder {
      * Prints tasks that is due in the current week
      * with reference to user local machine date.
      */
-
     public void showWeeklyTask() {
         LocalDate nextWeekDate = currentDate.plusDays(7);
 
         ArrayList<Task> filteredThisWeekTasks = (ArrayList<Task>) tasks.stream()
-                .filter((t) -> isBeforeDate(t.getDate(), nextWeekDate))
+                .filter((t) -> isBeforeDate(t.getByDate(), nextWeekDate))
                 .filter((t) -> !t.isDone())
-                .sorted(Comparator.comparing(Task::getDate))
+                .sorted(Comparator.comparing(Task::getByDate))
                 .collect(toList());
 
         if (filteredThisWeekTasks.isEmpty()) {
@@ -82,21 +80,17 @@ public class Reminder {
         ui.showLine();
     }
 
-    private boolean isEqualDate(String currentDate, LocalDate compareDate) {
-        if (currentDate == " ") {
+    private boolean isEqualDate(LocalDate currentDate, LocalDate compareDate) {
+        if (currentDate == null) {
             return false;
-        } else {
-            LocalDate date = LocalDate.parse(currentDate, DateAndTimeFormat.noTimeFormat);
-            return date.isEqual(compareDate);
         }
+        return currentDate.isEqual(compareDate);
     }
 
-    private boolean isBeforeDate(String currentDate, LocalDate compareDate) {
-        if (currentDate == " ") {
+    private boolean isBeforeDate(LocalDate currentDate, LocalDate compareDate) {
+        if (currentDate == null) {
             return false;
-        } else {
-            LocalDate date = LocalDate.parse(currentDate, DateAndTimeFormat.noTimeFormat);
-            return date.isBefore(compareDate);
         }
+        return currentDate.isBefore(compareDate);
     }
 }

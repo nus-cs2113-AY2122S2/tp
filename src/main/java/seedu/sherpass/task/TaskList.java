@@ -2,9 +2,9 @@ package seedu.sherpass.task;
 
 import seedu.sherpass.util.Ui;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 
-import static seedu.sherpass.constant.Message.ERROR_SYSTEM_FAULT_MESSAGE;
+import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -16,6 +16,10 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> savedTasks) {
         tasks = savedTasks;
+    }
+
+    public TaskList() {
+        tasks = new ArrayList<Task>();
     }
 
     /**
@@ -31,26 +35,11 @@ public class TaskList {
      * Adds a new task to the current array of tasks.
      *
      * @param taskDescription Description of the task.
-     * @param taskDate        Date of the task
-     * @param taskType        Task type, i.e. todo, deadline or event.
+     * @param taskByDate        Due date of the task
+     * @param taskRemindDate    Reminder date of the task
      */
-    public void addTask(String taskDescription, String taskDate, String taskType) {
-        Task newTask;
-        switch (taskType) {
-        case "todo":
-            newTask = new Todo(taskDescription);
-            break;
-        case "deadline":
-            newTask = new Deadline(taskDescription, taskDate);
-            break;
-        case "event":
-            newTask = new Event(taskDescription, taskDate);
-            break;
-        default:
-            System.out.println(ERROR_SYSTEM_FAULT_MESSAGE);
-            return;
-        }
-
+    public void addTask(String taskDescription, LocalDate taskByDate, LocalDate taskRemindDate) {
+        Task newTask = new Task(taskDescription, taskByDate, taskRemindDate);
         tasks.add(newTask);
         System.out.println("Got it. I've added this task:\n  " + newTask
                 + "\nNow you have " + tasks.size() + " task(s) in the list.");
@@ -128,40 +117,6 @@ public class TaskList {
         return false;
     }
 
-
-    /**
-     * Returns the index of a task given its task description.
-     *
-     * @param taskDescriptionToSearch Description of the task to search for.
-     * @return Index of a task, which corresponds to its placement in the task array.
-     */
-    public int findIndexToReplace(String taskDescriptionToSearch) {
-        int index = -1;
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getDescription()
-                    .equalsIgnoreCase(taskDescriptionToSearch.trim())) {
-                index = i;
-                break;
-            }
-        }
-        return index;
-    }
-
-
-    /**
-     * Replaces the current date of the task with a new date input.
-     *
-     * @param taskIndexToReplace Index of a task to search for the task.
-     * @param newTaskDate        New date input to replace the old task date.
-     * @param ui                 Ui for printing partition lines and messages.
-     */
-    public void replaceTaskDate(int taskIndexToReplace, String newTaskDate, Ui ui) {
-        tasks.get(taskIndexToReplace).resetInput(newTaskDate);
-        ui.showLine();
-        ui.showToUser("Done! I've updated this task:\n  " + tasks.get(taskIndexToReplace));
-    }
-
-
     /**
      * Returns a boolean value denoting the existence of a task
      * within the task array.
@@ -184,73 +139,6 @@ public class TaskList {
         tasks.remove(deleteIndex);
         System.out.println("Okay. I've removed this task:\n  " + taskToBeRemoved
                 + "\nNow you have " + tasks.size() + " task(s) in the list.");
-    }
-
-
-    /**
-     * Finds and prints tasks whose description matches the search keyword.
-     *
-     * @param findTaskByKeyword A keyword relating to the task description.
-     * @param ui                Ui for printing messages.
-     */
-    public void findByTaskDescription(String findTaskByKeyword, Ui ui) {
-        int printIndex = 1;
-        ui.showToUser("Here are the matching tasks in your list:");
-        for (Task task : tasks) {
-            if (task.getDescription().contains(findTaskByKeyword)) {
-                String listIndex = String.valueOf(printIndex);
-                ui.showToUser(listIndex + ". " + task);
-                printIndex++;
-            }
-        }
-        if (printIndex == 1) {
-            ui.showLine();
-            ui.showToUser("Sorry! There are no tasks that match your description!");
-        }
-    }
-
-    /**
-     * Finds and prints tasks whose date and/or time matches the search keyword.
-     *
-     * @param findTaskByKeyword A keyword relating to the task date and/or time.
-     * @param ui                Ui for printing messages.
-     */
-    public void findByTaskDate(String findTaskByKeyword, Ui ui) {
-        int printIndex = 1;
-        ui.showToUser("Here are the matching tasks in your list:");
-        for (Task task : tasks) {
-            if (!task.getType().equals("T") && task.getDate().contains(findTaskByKeyword)) {
-                String listIndex = String.valueOf(printIndex);
-                ui.showToUser(listIndex + ". " + task);
-                printIndex++;
-            }
-        }
-        if (printIndex == 1) {
-            ui.showLine();
-            ui.showToUser("Sorry! There are no tasks that match your description!");
-        }
-    }
-
-    /**
-     * Finds and prints tasks whose task type matches the search keyword.
-     *
-     * @param taskType Task type, i.e. todo, deadline or event.
-     * @param ui       Ui for printing messages.
-     */
-    public void findByTaskType(String taskType, Ui ui) {
-        int printIndex = 1;
-        ui.showToUser("Here are the matching tasks in your list:");
-        for (Task task : tasks) {
-            if (task.getType().equals(taskType)) {
-                String listIndex = String.valueOf(printIndex);
-                ui.showToUser(listIndex + ". " + task);
-                printIndex++;
-            }
-        }
-        if (printIndex == 1) {
-            ui.showLine();
-            ui.showToUser("Sorry! There are no tasks that match your description!");
-        }
     }
 
     /**
