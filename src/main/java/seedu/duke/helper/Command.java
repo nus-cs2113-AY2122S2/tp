@@ -12,7 +12,6 @@ public class Command {
         return string != null;
     }
 
-
     public void viewPatient(PatientList patientList, String parameters) {
         if (!nullChecker(parameters)) {
             return;

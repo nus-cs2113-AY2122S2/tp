@@ -113,7 +113,12 @@ public class Parser {
     }
 
     private static boolean validateAge(String ageString) {
-        int age = Integer.parseInt(ageString);
+        int age;
+        try {
+            age = Integer.parseInt(ageString);
+        } catch (NumberFormatException numberFormatException) {
+            return false;
+        }
         if (1 <= age && age <= 120) {
             return true;
         } else {
@@ -134,7 +139,12 @@ public class Parser {
     }
 
     private static boolean validateDob(String dobString) {
-        LocalDate dob = LocalDate.parse(dobString);
+        LocalDate dob;
+        try {
+            dob = LocalDate.parse(dobString);
+        } catch (DateTimeParseException dateTimeParseException) {
+            return false;
+        }
         LocalDate today = LocalDate.now();
         LocalDate dobLimit = LocalDate.parse("1900-01-01");
         if (dob.isAfter(dobLimit) && dob.isBefore(today)) {
@@ -145,7 +155,12 @@ public class Parser {
     }
 
     private static boolean validateAdmissionDate(String admissionDateString) {
-        LocalDate admissionDate = LocalDate.parse(admissionDateString);
+        LocalDate admissionDate;
+        try {
+            admissionDate = LocalDate.parse(admissionDateString);
+        } catch (DateTimeParseException dateTimeParseException) {
+            return false;
+        }
         LocalDate today = LocalDate.now();
         LocalDate admissionDateLimit = LocalDate.parse("1980-01-01");
         if (admissionDate.isAfter(admissionDateLimit) && admissionDate.isBefore(today)) {
