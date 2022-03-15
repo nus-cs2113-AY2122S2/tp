@@ -183,7 +183,6 @@ Examples of usage:
    Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.
    - `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7` <br>
    ![Activity create command [2] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[2].png)
-
 <br>
 <br>
 
@@ -208,14 +207,14 @@ Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 Example of usage:
 1. Remove an existing activity with a unique identifier of 1 from a session with a unique
    identifier of 2.
-    - `activity /delete /sid 2 /aid 1` <br>
-    ![Activity delete command Screenshot]()
+   - `activity /delete /sid 2 /aid 1` <br>
+   ![Activity delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityDeleteCommand.png)
 <br>
 <br>
 
 ### Viewing an activity: `activity /view`
 
-> Displays details about an activity.<br>
+> Display details about an activity.<br>
 > An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
 
 Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
@@ -234,7 +233,6 @@ Examples of usage:
 1. Views an activity with a unique identifier of 2 in a session with a session unique identifier of 2.
     - `activity /view /sid 2 /aid 2` <br>
       ![Activity view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityViewCommand.png)
-
 <br>     
 <br>
 
@@ -245,8 +243,6 @@ Examples of usage:
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `activity /list /sid [SESSION_ID]`
-
-
 * `[SESSION_ID]` refers to the unique identifier of the session.
     * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 
