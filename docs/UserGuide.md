@@ -17,7 +17,8 @@ Note:</br>
 Compulsory Flags start with "/". </br>
 Optional Flags start with "-". </br>
 Compulsory Parameters are fully capitalised: e.g. MODULE_CODE. </br>
-Optional Parameters are in square brackets: e.g. [-m MODULE_DESCRIPTION]
+Optional Parameters are in square brackets: e.g. [-m "MODULE_DESCRIPTION"]
+All parameters except MODULE_CODE are surrounded by double quotation marks e.g. "PARAMETER".
 
 ### Accessing Help: `help`
 
@@ -51,11 +52,11 @@ Format: `reset`
 **A**: {your answer here}
 
 ## Command Summary
-| Command | Format                                                                                                                                   |
-|:-------:|------------------------------------------------------------------------------------------------------------------------------------------|
-|  help   | `help`                                                                                                                                   |
-|   add   | `add /m MODULE_CODE [-d MODULE_DESCRIPTION]`</br>`add /t TASK_NAME [-d TASK_DESCRIPTION] [-t “ESTIMATED_WORKING_TIME”] [-m MODULE_CODE]` |
-|   del   | `del /m MODULE_CODE del /t TASK_NUMBER [-m MODULE_CODE]`                                                                                 |
-|  mark   | `mark /c TASK_NUMBER [-m MODULE_CODE]`</br>`mark /u TASK_NUMBER [-m MODULE_CODE]`                                                        |
-|  list   | `list`                                                                                                                                   |
-|  reset  | `reset`                                                                                                                                  |
+| Command | Format                                                                                                                                         |
+|:-------:|------------------------------------------------------------------------------------------------------------------------------------------------|
+|  help   | `help`                                                                                                                                         |
+|   add   | `add /m MODULE_CODE [-d "MODULE_DESCRIPTION"]`</br>`add /t "TASK_NAME" [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”] [-m MODULE_CODE]` |
+|   del   | `del /m MODULE_CODE del /t TASK_NUMBER [-m MODULE_CODE]`                                                                                       |
+|  mark   | `mark /c TASK_NUMBER [-m MODULE_CODE]`</br>`mark /u TASK_NUMBER [-m MODULE_CODE]`                                                              |
+|  list   | `list`                                                                                                                                         |
+|  reset  | `reset`                                                                                                                                        |
