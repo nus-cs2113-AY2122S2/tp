@@ -9,7 +9,7 @@ public class CheckRoomCommand extends Command {
 
     @Override
     // check if the room id is correct
-    public void execute(RoomList roomList, ItemList itemList, Ui ui) {
+    public void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList itemList, Ui ui) {
         for (Room room : roomList.getRoomList()) {
             if (room.getRoomId() == roomId) {
                 System.out.println(room);

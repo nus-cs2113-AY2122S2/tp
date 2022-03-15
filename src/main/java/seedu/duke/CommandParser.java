@@ -3,6 +3,8 @@ package seedu.duke;
 public class CommandParser {
     private static final String BYE = "bye";
     private static final String ADD_ITEM_COMMAND = "Add Item";
+    public static final String ADD_SATISFACTION_COMMAND = "Add Satisfaction";
+    public static final String VIEW_SATISFACTIONS_COMMAND = "View Satisfactions";
     private static final String CHECK_IN = "check in";
     private static final String CHECK_OUT = "check out";
     private static final String CHECK_ROOM = "check room";
@@ -12,27 +14,33 @@ public class CommandParser {
 
     public Command parse(String commandString) throws WrongCommandException, HotelLiteManagerException {
         Command userCommand = null;
+        String commandStringWithoutCommand;
         if (commandString.equals(BYE)) {
-            return new ExitCommand();
+            userCommand = new ExitCommand();
+        } else if (commandString.startsWith(ADD_SATISFACTION_COMMAND)) {
+            commandStringWithoutCommand = commandString.replace(ADD_SATISFACTION_COMMAND, "").trim();
+            userCommand = new AddSatisfactionCommand(commandStringWithoutCommand);
+        } else if (commandString.startsWith(VIEW_SATISFACTIONS_COMMAND)) {
+            userCommand = new ViewSatisfactionsCommand();
         } else if (commandString.startsWith(ADD_ITEM_COMMAND)) {
-            String commandStringWithoutCommand = commandString.replace(ADD_ITEM_COMMAND, "");
+            commandStringWithoutCommand = commandString.replace(ADD_ITEM_COMMAND, "");
             userCommand = new AddItemCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(CHECK_IN)) {
-            String commandStringWithoutCommand = commandString.replace(CHECK_IN, "");
+            commandStringWithoutCommand = commandString.replace(CHECK_IN, "");
             userCommand = new CheckInCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(CHECK_OUT)) {
-            String commandStringWithoutCommand = commandString.replace(CHECK_OUT, "");
+            commandStringWithoutCommand = commandString.replace(CHECK_OUT, "");
             userCommand = new CheckOutCommand(commandStringWithoutCommand);
         }  else if (commandString.startsWith(CHECK_BY_CATEGORY)) {
-            String commandStringWithoutCommand = commandString.replace(CHECK_BY_CATEGORY, "");
+            commandStringWithoutCommand = commandString.replace(CHECK_BY_CATEGORY, "");
             userCommand = new CheckRoomByCatCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(CHECK_ROOM)) {
-            String commandStringWithoutCommand = commandString.replace(CHECK_ROOM, "");
+            commandStringWithoutCommand = commandString.replace(CHECK_ROOM, "");
             userCommand = new CheckRoomCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(CHECK_ALL_ROOM)) {
             userCommand = new CheckAllRoomCommand();
         } else if (commandString.startsWith(CHECK_ROOM_BY_LEVEL)) {
-            String commandStringWithoutCommand = commandString.replace(CHECK_ROOM_BY_LEVEL, "");
+            commandStringWithoutCommand = commandString.replace(CHECK_ROOM_BY_LEVEL, "");
             userCommand = new CheckRoomByLevelCommand(commandStringWithoutCommand);
         } else {
             throw new WrongCommandException("Invalid Command");

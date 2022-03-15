@@ -31,7 +31,7 @@ public class CheckRoomByCatCommand extends Command {
 
 
     @Override
-    public void execute(RoomList roomList, ItemList itemList, Ui ui) {
+    public void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList itemList, Ui ui) {
         System.out.println(TABLE_HEAD);
         for (Room room : roomList.getRoomList()) {
             if (room.getType() == type) {
