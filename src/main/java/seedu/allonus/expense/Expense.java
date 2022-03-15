@@ -1,11 +1,14 @@
 package seedu.allonus.expense;
 
+import java.util.logging.Logger;
+
 public class Expense {
 
     private String date;
     private String amount;
     private String category;
     private String remark;
+    static  Logger logger;
     private static int noOfItems = 0;
 
     public static void setNoOfItems(int noOfItems) {

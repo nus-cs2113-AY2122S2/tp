@@ -6,10 +6,13 @@ public class ExpenseParser {
     public static final String CATEGORY_DELIMITER = "c/";
     public static final String REMARKS_DELIMITER = "r/";
     public static final String ALL_DELIMITERS = "[dacr]/";
+    public static final String ASSERT_INPUT_NOT_NULL = "User input should not be null";
+    public static final String ASSERT_DELIMITER_NOT_NULL = "Delimiter should not be null";
+    public static final String ASSERT_RESULT_NOT_NULL = "Result should not be null";
 
     public static String[] parseNewExpense(String userInput) throws IndexOutOfBoundsException {
         String rawInput = userInput.split(" ", 2)[1].trim();
-
+        assert rawInput != null: ASSERT_INPUT_NOT_NULL;
         if (!rawInput.contains(DATE_DELIMITER) || !rawInput.contains(AMOUNT_DELIMITER)
                 || !rawInput.contains(CATEGORY_DELIMITER) || !rawInput.contains(REMARKS_DELIMITER)) {
             throw new IndexOutOfBoundsException();
@@ -24,6 +27,9 @@ public class ExpenseParser {
 
     public static String parseKeywordExpense(String userInput, String leftDelimiter, String rightDelimiter)
             throws IndexOutOfBoundsException {
+        assert userInput != null: ASSERT_INPUT_NOT_NULL;
+        assert leftDelimiter != null: ASSERT_DELIMITER_NOT_NULL;
+        assert rightDelimiter != null: ASSERT_DELIMITER_NOT_NULL;
         String[] stripLeftOfDelimiter = userInput.split(leftDelimiter, 2);
         String rightOfDelimiter;
         if (stripLeftOfDelimiter.length == 2) {
@@ -33,6 +39,7 @@ public class ExpenseParser {
         }
         String[] stripRightOfDelimiter = rightOfDelimiter.split(rightDelimiter, 2);
         String result = stripRightOfDelimiter[0].trim();
+        assert result != null: ASSERT_RESULT_NOT_NULL;
         if (result.length() == 0) {
             throw new IndexOutOfBoundsException();
         }
@@ -41,6 +48,7 @@ public class ExpenseParser {
     }
 
     public static int parseDeleteExpense(String userInput) throws IndexOutOfBoundsException, NumberFormatException {
+        assert userInput != null: ASSERT_INPUT_NOT_NULL;
         String[] rawInput = userInput.split(" ", 2);
         int result = Integer.parseInt(rawInput[1]);
         return result;
