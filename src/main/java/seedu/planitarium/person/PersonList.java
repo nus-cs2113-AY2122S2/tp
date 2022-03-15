@@ -30,8 +30,8 @@ public class PersonList {
      * @return The person with the index
      */
     public Person getPerson(int index) {
-        assert(index >= 1);
-        assert(index <= numberOfMembers);
+        assert (index >= 1);
+        assert (index <= numberOfMembers);
         return personList.get(index - 1);
     }
 
@@ -50,10 +50,11 @@ public class PersonList {
      * @param name The name of the person to be added
      */
     public void addPerson(String name) {
-        assert(name != null);
+        assert (name != null);
         Person person = new Person(name);
         personList.add(person);
         numberOfMembers++;
+        System.out.println(name + " has been successfully added");
     }
 
     /**
@@ -62,23 +63,23 @@ public class PersonList {
      * @param index The index of the person to be removed
      */
     public void removePerson(int index) {
-        assert(index >= 1);
-        assert(index <= numberOfMembers);
+        assert (index >= 1);
+        assert (index <= numberOfMembers);
+        String name = personList.get(index - 1).getName();
         personList.remove(index - 1);
         numberOfMembers--;
+        System.out.println(name + " has been successfully removed");
     }
 
     /**
-     * Returns the total remaining disposable income of persons in the array list.
-     *
-     * @return The total remaining disposable income
+     * Prints the total remaining disposable income of persons in the array list.
      */
-    public double getRemain() {
+    public void getRemain() {
         double sum = 0;
         for (Person person: this.getPersonList()) {
             sum += person.getDisposable();
         }
-        return sum;
+        System.out.println("Your family has a remaining balance of $" + sum);
     }
 
     /**
@@ -87,10 +88,8 @@ public class PersonList {
     public void list() {
         for (int i = 0; i < numberOfMembers; i++) {
             Person person = personList.get(i);
-            System.out.println((i+1) + ". " + person.getName());
-            System.out.println("Income: ");
+            System.out.println((i + 1) + ". " + person.getName());
             person.listIncome();
-            System.out.println("Expenditure: ");
             person.listExpenditure();
         }
     }
