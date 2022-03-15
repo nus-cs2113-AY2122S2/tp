@@ -26,12 +26,6 @@ class ProjectListTest {
         defaultProjectList.addTodoToProject("1",TODO2);
 
     }
-    
-    @Test
-    void markTodoAsDone_indexOutOfRange() {
-        String targetIndexString = "5";
-        assertThrows(IndexOutOfBoundsException.class, () -> defaultProjectList.markTodoAsDone("1", targetIndexString));
-    }
 
     @Test
     void markTodoAsDone_negativeIndex() {
