@@ -36,7 +36,7 @@ Participants
  1. alice
  2. bob
 ============================================================
-> There seems to be duplicates in the session you are trying to create, please try again.
+> There are duplicates in person names for the session you are trying to create, please try again.
 > ============================================================
  $$$$$$\            $$\ $$\   $$\     $$\           $$\
 $$  $$\           $$ |\|  $$ |    $$ |          $$ |
