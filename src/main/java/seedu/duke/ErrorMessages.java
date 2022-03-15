@@ -13,4 +13,5 @@ public class ErrorMessages {
     public static final String ERROR_MISSING_VALUES = " Hi 1 or more parameters have missing values";
     public static final String ERROR_INVALID_DAY = " Hi please input a valid day";
     public static final String ERROR_INVALID_TIME = " Hi please input a valid time";
+    public static final String ERROR_INVALID_MODE = " Hi please input a valid mode, either online or physical";
 }

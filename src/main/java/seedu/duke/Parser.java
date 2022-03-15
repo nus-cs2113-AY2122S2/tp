@@ -5,6 +5,7 @@ import seedu.duke.exceptions.InvalidDayException;
 import seedu.duke.exceptions.MissingValueException;
 import seedu.duke.exceptions.InvalidDayException;
 import seedu.duke.exceptions.InvalidTimeException;
+import seedu.duke.exceptions.InvalidModeException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +15,7 @@ import static seedu.duke.ErrorMessages.ERROR_MISSING_PARAMETERS;
 import static seedu.duke.ErrorMessages.ERROR_MISSING_VALUES;
 import static seedu.duke.ErrorMessages.ERROR_INVALID_DAY;
 import static seedu.duke.ErrorMessages.ERROR_INVALID_TIME;
+import static seedu.duke.ErrorMessages.ERROR_INVALID_MODE;
 
 public class Parser {
     private final String command;
@@ -60,6 +62,7 @@ public class Parser {
             int endTime = Integer.parseInt(eventDescription[ENDTIME_INDEX]);
             checkTime(startTime, endTime);
             String mode = eventDescription[MODE_INDEX].toLowerCase();
+            checkMode(mode);
             return new AddCommand(name, title, day, startTime, endTime, mode);
         } catch (InvalidTimeException | NumberFormatException nfe) {
             System.out.println(ERROR_INVALID_TIME);
@@ -72,6 +75,9 @@ public class Parser {
             return new HelpCommand();
         } catch (InvalidDayException ide) {
             System.out.println(ERROR_INVALID_DAY);
+            return new HelpCommand();
+        } catch (InvalidModeException ime) {
+            System.out.println(ERROR_INVALID_MODE);
             return new HelpCommand();
         }
     }
@@ -88,6 +94,13 @@ public class Parser {
                 throw new MissingValueException();
             }
         }
+    }
+
+    private void checkMode (String mode) throws InvalidModeException {
+        if (mode.equals("online") || mode.equals("physical")) {
+            return;
+        }
+        throw new InvalidModeException();
     }
 
     private void checkDay (String day) throws InvalidDayException {
