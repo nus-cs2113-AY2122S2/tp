@@ -1,11 +1,11 @@
 package seedu.duke;
 
 public class AddItemCommand extends Command {
-    private Item item;
     private static final String ITEM_NAME_INDICATOR = "Name:";
     private static final int ITEM_NAME_INDICATOR_LENGTH = 5;
     private static final String ITEM_PAX_INDICATOR = "Pax:";
     private static final int ITEM_PAX_INDICATOR_LENGTH = 4;
+    private Item item;
 
     public AddItemCommand(String userInput) throws HotelLiteManagerException {
         Item item;

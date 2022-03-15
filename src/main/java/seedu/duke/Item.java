@@ -1,27 +1,27 @@
 package seedu.duke;
 
 public class Item {
-    private String Name;
-    private int Pax;
+    private String name;
+    private int pax;
 
-    public Item(String Name, int Pax) {
-        setName(Name);
-        setPax(Pax);
+    public Item(String name, int pax) {
+        setName(name);
+        setPax(pax);
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public int getPax() {
-        return Pax;
+        return pax;
     }
 
     public void setPax(int pax) {
-        Pax = pax;
+        this.pax = pax;
     }
 }
