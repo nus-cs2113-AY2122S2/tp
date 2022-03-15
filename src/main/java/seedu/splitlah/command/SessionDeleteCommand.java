@@ -24,6 +24,10 @@ public class SessionDeleteCommand extends Command {
     private static final String COMMAND_SUCCESS =
             "The session was deleted successfully.";
 
+    public static final String[] COMMAND_DELIMITERS = {
+        Parser.SESSION_ID_DELIMITER
+    };
+
     private int sessionId;
 
     /**

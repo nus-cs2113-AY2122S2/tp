@@ -32,6 +32,17 @@ public class ActivityCreateCommand extends Command {
                     + "/cl [COST1 COST2…] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
     private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
+    
+    public static final String[] COMMAND_DELIMITERS = { 
+        Parser.SESSION_ID_DELIMITER, 
+        Parser.NAME_DELIMITER, 
+        Parser.PAYER_DELIMITER, 
+        Parser.INVOLVED_DELIMITER, 
+        Parser.TOTAL_COST_DELIMITER, 
+        Parser.COST_LIST_DELIMITER,
+        Parser.GST_DELIMITER,
+        Parser.SERVICE_CHARGE_DELIMITER 
+    };
 
     private int sessionId;
     private String activityName;
