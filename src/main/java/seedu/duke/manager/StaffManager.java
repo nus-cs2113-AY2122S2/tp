@@ -96,4 +96,13 @@ public class StaffManager {
             System.out.println("No staff from our staff records has a matching ID.");
         }
     }
+
+    /**
+     * Return the number of staffs in Staffs.
+     *
+     * @return the number of current staff.
+     */
+    public int getNumOfStaffs() {
+        return staffs.size();
+    }
 }
