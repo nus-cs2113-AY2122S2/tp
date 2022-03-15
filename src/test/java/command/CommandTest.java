@@ -1,6 +1,6 @@
 package command;
 
-import commands.Command;
+import seedu.planitarium.commands.Command;
 import org.junit.jupiter.api.Test;
 import seedu.planitarium.person.PersonList;
 

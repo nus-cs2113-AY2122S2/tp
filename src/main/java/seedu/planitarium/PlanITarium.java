@@ -1,17 +1,19 @@
 package seedu.planitarium;
 
-import java.util.Scanner;
 import java.util.logging.Level;
+import java.util.Scanner;
 
-import commands.Command;
+import seedu.planitarium.commands.Command;
+import seedu.planitarium.commands.CommandFactory;
 import seedu.planitarium.person.PersonList;
-import ui.UI;
+import seedu.planitarium.ui.UI;
 
 public class PlanITarium {
     protected Scanner userInput;
-    protected Command commandExecuter;
-    protected static UI ui = new UI();
+    protected Command command;
+    //protected static UI ui = new UI(); in case it is needed later on 
     protected PersonList personList = new PersonList();
+    protected CommandFactory commandFactory = new CommandFactory();
     protected static ProjectLogger logger;
 
     /**
@@ -21,7 +23,7 @@ public class PlanITarium {
         try {
             new PlanITarium().run();
         } catch (Exception e) {
-            ui.exit();
+            UI.exit();
         }
     }
 
@@ -32,10 +34,15 @@ public class PlanITarium {
     public void run() throws Exception {
         initialisePlanitarium();
         while (true) {
-            userInput = new Scanner(System.in);
-            logger.getLogger().log(Level.INFO, "Next line has been read");
-            commandExecuter = new Command(userInput.nextLine(), personList);
-            commandExecuter.execute();
+            try {
+                userInput = new Scanner(System.in);
+                logger.getLogger().log(Level.INFO, "Next line has been read");
+                command = commandFactory.getCommand(userInput.nextLine(), personList);
+                command.execute();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
@@ -45,6 +52,6 @@ public class PlanITarium {
     private static void initialisePlanitarium() {
         logger = new ProjectLogger(PlanITarium.class.getName(), "PlanITarium.log");
         logger.getLogger().log(Level.INFO, "Logger initialised");
-        ui.printWelcomeMessage();
+        UI.printWelcomeMessage();
     }
 }

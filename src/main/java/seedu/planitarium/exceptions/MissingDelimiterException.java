@@ -1,4 +1,4 @@
-package exceptions;
+package seedu.planitarium.exceptions;
 
 /**
  * Thrown to indicate that a string is missing a given delimiter (character sequence).
