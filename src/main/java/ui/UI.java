@@ -5,6 +5,7 @@ package ui;
  */
 public class UI {
     protected static final String HORI_LINE = "---------------------------";
+    protected static final String WELCOME_MSG = "Welcome to PlanITarium, your personal expenditure manager.";
     protected static final String EXIT_MSG = "Goodbye. Hope to see you again.";
     protected static final String LOGO =
             "$$$$$$$  $$                   $$ $$$$$$$$               $$\n"
@@ -34,5 +35,6 @@ public class UI {
 
     public static void printWelcomeMessage() {
         System.out.println(LOGO);
+        System.out.println(WELCOME_MSG);
     }
 }
