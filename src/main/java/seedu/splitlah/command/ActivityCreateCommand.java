@@ -43,6 +43,7 @@ public class ActivityCreateCommand extends Command {
     private int serviceCharge;
 
     private static final double ZERO_COST_PAID = 0;
+    public static final double ZERO_COST_OWED = 0;
     private static final int NO_COST = 0;
 
     /**
@@ -168,17 +169,20 @@ public class ActivityCreateCommand extends Command {
      *
      * @param involvedPersonList The list of persons involved in the activity.
      * @param personPaid         The person who paid for the activity.
-     * @param totalCost          The total cost of the activity.
      * @param costList           The costs owed by each person involved in the activity.
      * @param activityId         The id of the activity.
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      * @see InvalidDataException
      */
-    private static void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, double totalCost,
-                                           double[] costList, int activityId) throws InvalidDataException {
+    private void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, double[] costList,
+                                    int activityId) throws InvalidDataException {
+        boolean hasAddedForPersonPaid = false;
         for (int i = 0; i < involvedPersonList.size(); i++) {
             Person person = involvedPersonList.get(i);
-            addCostOwedAndCostPaid(personPaid, totalCost, costList, activityId, i, person);
+            hasAddedForPersonPaid = addCostOwedAndCostPaid(personPaid, costList, activityId, i, person);
+        }
+        if (!hasAddedForPersonPaid) {
+            personPaid.addActivityCost(activityId, totalCost, ZERO_COST_OWED);
         }
     }
 
@@ -189,7 +193,6 @@ public class ActivityCreateCommand extends Command {
      * Else, the cost paid is set to 0.
      *
      * @param personPaid      The person who paid for the activity.
-     * @param totalCost       The total cost of the activity.
      * @param costList        The costs owed by each person involved in the activity.
      * @param activityId      The id of the activity.
      * @param indexOfCostOwed The index of the cost owed in the list of costs.
@@ -197,12 +200,14 @@ public class ActivityCreateCommand extends Command {
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      * @see InvalidDataException
      */
-    private static void addCostOwedAndCostPaid(Person personPaid, double totalCost, double[] costList, int activityId,
-                                               int indexOfCostOwed, Person person) throws InvalidDataException {
+    private boolean addCostOwedAndCostPaid(Person personPaid, double[] costList, int activityId, int indexOfCostOwed,
+                                           Person person) throws InvalidDataException {
         if (person == personPaid) {
             person.addActivityCost(activityId, totalCost, costList[indexOfCostOwed]);
+            return true;
         } else {
             person.addActivityCost(activityId, ZERO_COST_PAID, costList[indexOfCostOwed]);
+            return false;
         }
     }
 
@@ -318,7 +323,7 @@ public class ActivityCreateCommand extends Command {
             Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
             int activityId = manager.getProfile().getNewActivityId();
-            addAllActivityCost(involvedPersonList, personPaid, totalCost, costList, activityId);
+            addAllActivityCost(involvedPersonList, personPaid, costList, activityId);
             Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(activity);
             manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + activity);
