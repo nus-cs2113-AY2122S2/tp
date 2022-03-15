@@ -203,8 +203,8 @@ public class ActivityCreateCommand extends Command {
      * @param hasAddedForPersonPaid A boolean representing whether the activity cost has been added for the person who
      *                              paid for the activity.
      * @param person                The Person object currently referred to among the persons involved.
-     * @return true if the Person object that is currently referred to represents the person who paid for the activity,
-     *         false otherwise.
+     * @return true if the Person object currently referred to represents the person who paid for the activity,
+     *         hasAddedForPersonPaid otherwise.
      */
     private boolean isPersonPaid(Person personPaid, boolean hasAddedForPersonPaid, Person person) {
         if (person == personPaid) {
