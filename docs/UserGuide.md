@@ -183,7 +183,7 @@ Examples of usage:
 <br>
 3. Adds a new activity to a session with a session unique identifier of 1 named Class Lunch. Alice paid for both
    Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.
-   - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7 <br>
+   - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7` <br>
    ![Activity create command [2] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[2].png)
 <br>
 <br>
