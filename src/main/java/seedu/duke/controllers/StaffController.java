@@ -56,7 +56,7 @@ public class StaffController extends Controller {
         logInfo("Finding staff");
         System.out.println("Finding staff...");
         int staffId = InputParser.getInteger("ID of staff: ");
-        assert staffId > 0:"Invalid ID";
+        assert staffId > 0 : "Invalid ID";
         staffManager.findByStaffId(staffId, true);
     }
 
@@ -69,11 +69,11 @@ public class StaffController extends Controller {
         logInfo("Adding staff");
         System.out.println("Adding new staff...");
         final int staffId = InputParser.getInteger("ID of staff: ");
-        assert staffId > 0:"Invalid ID";
+        assert staffId > 0 : "Invalid ID";
         final String staffName = InputParser.getString("Name of staff: ");
         final String position = InputParser.getString("Position of staff: ");
         final double salary = InputParser.getDouble("Salary of staff: ");
-        assert salary > 0:"Invalid salary";
+        assert salary > 0 : "Invalid salary";
         staffManager.addStaff(staffId, staffName, position, salary);
     }
 
@@ -86,7 +86,7 @@ public class StaffController extends Controller {
         logInfo("Deleting staff");
         System.out.println("Deleting staff...");
         final int staffId = InputParser.getInteger("ID of staff: ");
-        assert staffId > 0:"Invalid ID";
+        assert staffId > 0 : "Invalid ID";
         staffManager.deleteByStaffId(staffId);
     }
 
