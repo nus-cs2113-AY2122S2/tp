@@ -28,6 +28,14 @@ public class Parser {
     public static final int MIN_INCOME_INDEX = 1;
     public static final double MONEY_ZERO = 0.0;
 
+    private static final String ASSERT_INPUT_NOT_NULL = "User input should not be null";
+    private static final String ASSERT_OUTPUT_NOT_NULL = "Parsed output should not be null";
+    private static final String ASSERT_MONEY_NOT_NULL = "Money input should not be null";
+    private static final String ASSERT_MONEY_NON_NEGATIVE = "Money output should be non-negative";
+    private static final String ASSERT_USER_INDEX_NOT_NULL = "User index should not be null";
+    private static final String ASSERT_EXPENDITURE_INDEX_NOT_NULL = "Expenditure index should not be null";
+    private static final String ASSERT_INCOME_INDEX_NOT_NULL = "Income index should not be null";
+
     /**
      * Returns the term surrounded by two delimiters.
      *
