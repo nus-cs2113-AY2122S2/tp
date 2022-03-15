@@ -116,7 +116,7 @@ public class Parser {
     }
 
     private static boolean validateFullName(String fullName) {
-        Pattern fullNamePattern = Pattern.compile("([a-zA-Z]+( [a-zA-Z]+)+)");
+        Pattern fullNamePattern = Pattern.compile("[a-zA-Z ]*");
         Matcher fullNameMatcher = fullNamePattern.matcher(fullName);
         return fullNameMatcher.matches();
     }
