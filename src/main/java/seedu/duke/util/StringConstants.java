@@ -50,7 +50,7 @@ public class StringConstants {
     public static final String EXIT_HELP = "Exits the program.\nFormat to exit program: exit";
     public static final String ADD_HELP = "Adds an object as indicated by the command input.\n"
             + "Format to add module: add /m MODULE_CODE [-d \"MODULE_DESCRIPTION\"]\n"
-            + "Format to add task:   add /t TASK_NAME [-d \"TASK_DESCRIPTION\"] [-t \"ESTIMATED_WORKING_TIME\"]"
+            + "Format to add task:   add /t \"TASK_NAME\" [-d \"TASK_DESCRIPTION\"] [-t \"ESTIMATED_WORKING_TIME\"]"
             + " [-m MODULE_CODE]";
     public static final String DELETE_HELP = "Deletes an object as indicated by command input.\n"
             + "Format to delete a module: del /m MODULE_CODE\n"
