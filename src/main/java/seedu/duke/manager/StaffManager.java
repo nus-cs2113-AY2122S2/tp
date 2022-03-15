@@ -2,18 +2,16 @@ package seedu.duke.manager;
 
 
 import seedu.duke.entities.Staff;
+import seedu.duke.controllers.MainLogger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * StaffManager is a class which stores/handles/manages many Staffs.
  */
 public class StaffManager {
     private final List<Staff> staffs;
-    private static Logger logger = Logger.getLogger("StaffManager");
 
     /**
      * Create StaffManager with an empty arraylist of Staffs.
@@ -45,10 +43,10 @@ public class StaffManager {
      */
     public void addStaff(int staffId, String staffName, String position, double salary) {
         if (findByStaffId(staffId, false) != null) {
-            logInfo("Failed to add staff: Staff with same ID already exists.");
+            MainLogger.logInfo("Failed to add staff: Staff with same ID already exists.");
             System.out.println("Staff with the same ID already exists, use another ID...");
         }
-        logInfo("Successful addition of staff");
+        MainLogger.logInfo("Successful addition of staff");
         staffs.add(new Staff(staffId, staffName, position, salary));
     }
 
@@ -60,20 +58,20 @@ public class StaffManager {
      */
     public Staff findByStaffId(int staffId, boolean printMsg) {
         if (staffId <= 0) {
-            logInfo("Invalid input for ID.");
+            MainLogger.logInfo("Invalid input for ID.");
             System.out.println("Staff ID cannot be zero or negative.");
             return null;
         }
         for (Staff staff : staffs) {
             if (staffId == staff.getStaffId()) {
                 if (printMsg) {
-                    logInfo("Successful search for staff.");
+                    MainLogger.logInfo("Successful search for staff.");
                     System.out.println(staff + " found!");
                 }
                 return staff;
             }
         }
-        logInfo("Unsuccessful search for staff.");
+        MainLogger.logInfo("Unsuccessful search for staff.");
         if (printMsg) {
             System.out.println("Staff with ID " + staffId + " not found!");
         }
@@ -89,16 +87,12 @@ public class StaffManager {
         Staff staff = findByStaffId(staffId, false);
         if (staff != null) {
             staffs.remove(staff);
-            logInfo("Successful deletion of staff.");
+            MainLogger.logInfo("Successful deletion of staff.");
             System.out.println(staff + " had been deleted from our staff records.");
         } else {
-            logInfo("Failed to delete staff: No staff with matching ID.");
+            MainLogger.logInfo("Failed to delete staff: No staff with matching ID.");
             System.out.println("No staff from our staff records has a matching ID.");
         }
-    }
-
-    private static void logInfo(String msg) {
-        logger.log(Level.INFO, msg);
     }
 
     /**

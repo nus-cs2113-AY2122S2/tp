@@ -3,6 +3,7 @@ package seedu.duke.controllers;
 import seedu.duke.entities.Staff;
 import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.manager.StaffManager;
+import seedu.duke.controllers.MainLogger;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +36,7 @@ public class StaffController extends Controller {
             deleteStaff();
             break;
         case 0:
-            logInfo("Exiting staff Menu");
+            MainLogger.logInfo("Exiting staff Menu");
             System.out.println("Exiting Staff Menu...");
             return true;
         default:
@@ -53,7 +54,7 @@ public class StaffController extends Controller {
      * @throws OperationTerminationException When user inputs terminator.
      */
     private void findStaff() throws OperationTerminationException {
-        logInfo("Finding staff");
+        MainLogger.logInfo("Finding staff");
         System.out.println("Finding staff...");
         int staffId = InputParser.getInteger("ID of staff: ");
         staffManager.findByStaffId(staffId, true);
@@ -65,7 +66,7 @@ public class StaffController extends Controller {
      * @throws OperationTerminationException When user inputs terminator.
      */
     private void addStaff() throws OperationTerminationException {
-        logInfo("Adding staff");
+        MainLogger.logInfo("Adding staff");
         System.out.println("Adding new staff...");
         final int staffId = InputParser.getInteger("ID of staff: ");
         final String staffName = InputParser.getString("Name of staff: ");
@@ -80,14 +81,10 @@ public class StaffController extends Controller {
      * @throws OperationTerminationException When user inputs terminator.
      */
     private void deleteStaff() throws OperationTerminationException {
-        logInfo("Deleting staff");
+        MainLogger.logInfo("Deleting staff");
         System.out.println("Deleting staff...");
         final int staffId = InputParser.getInteger("ID of staff: ");
         staffManager.deleteByStaffId(staffId);
-    }
-
-    private static void logInfo(String msg) {
-        logger.log(Level.INFO, msg);
     }
 
     /**
