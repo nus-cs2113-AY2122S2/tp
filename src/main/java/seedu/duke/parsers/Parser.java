@@ -21,6 +21,7 @@ public abstract class Parser {
     protected static final String DELETE_COMMAND_WORD = StringConstants.DELETE_COMMAND_WORD;
     protected static final String LIST_COMMAND_WORD = StringConstants.LIST_COMMAND_WORD;
     protected static final String MARK_COMMAND_WORD = StringConstants.MARK_COMMAND_WORD;
+    protected static final String RESET_COMMAND_WORD = StringConstants.RESET_COMMAND_WORD;
     protected static final String NULL_FIELD = null;
 
     protected String commandFormat;

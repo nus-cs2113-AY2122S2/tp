@@ -42,6 +42,11 @@ public class StringConstants {
     public static final String ICON_COMPLETED = "(X)";
 
     /**.
+     * For reset
+     */
+    public static final String RESET_MESSAGE = "All modules and tasks have been removed.";
+
+    /**.
      * For command result
      */
     public static final String ARRAYLIST_RESULT = "ArrayList";
@@ -78,6 +83,7 @@ public class StringConstants {
     public static final String DELETE_COMMAND_WORD = "del";
     public static final String LIST_COMMAND_WORD = "list";
     public static final String MARK_COMMAND_WORD = "mark";
+    public static final String RESET_COMMAND_WORD = "reset";
 
     /**.
      * General Strings
