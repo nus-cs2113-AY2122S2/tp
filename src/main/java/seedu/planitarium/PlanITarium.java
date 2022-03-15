@@ -1,33 +1,35 @@
 package seedu.planitarium;
 
+<<<<<<< HEAD
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.*;
+import commands.Command;
+import ui.UI;
+import java.util.Scanner;
 
 public class PlanITarium {
     public static final Logger logger = Logger.getLogger(PlanITarium.class.getName());
+    protected Scanner userInput;
+    protected Command commandExecuter;
+    protected UI ui = new UI();
 
-    /**
-     * Entry-point for the PlanITarium application.
-     */
-    public static void main(String[] args) {
-        new PlanITarium().run();
+    public void run() throws Exception {
+        initialisePlanitarium(ui);
+        while (true) {
+            userInput = new Scanner(System.in);
+            commandExecuter = new Command(userInput.nextLine());
+            commandExecuter.execute();
+        }
     }
 
-    public void run() {
-        Scanner in = new Scanner();
-        initialisePlanitarium();
-        // executeCommands();
-        printExitMessage();
-    }
-
-    private static void initialisePlanitarium() {
+    private static void initialisePlanitarium(UI ui) {
         try {
             initialiseLogger();
         } catch (IOException e) {
             logger.log(Level.SEVERE, "File logger not working.", e);
         }
-        printWelcomeMessage();
+        ui.printWelcomeMessage();
     }
 
     private static void initialiseLogger() throws IOException {
@@ -39,21 +41,14 @@ public class PlanITarium {
         logger.addHandler(fh);
     }
 
-    private static void printWelcomeMessage() {
-        String logo = "$$$$$$$  $$                   $$ $$$$$$$$               $$\n"
-            + "$$$$$$$  $$                   $$ $$$$$$$$\n"
-            + "$$ $$$$  $$  $$$$$$  $$$$$$$  $$    $$    $$$$$$  $$$$$ $$  $$   $$  $$$$$$$$$$\n"
-            + "$$ $$$$  $$  $$$$$$  $$$$$$$  $$    $$    $$$$$$  $$$$$ $$  $$   $$  $$$$$$$$$$\n"
-            + "$$$$$$$  $$    $$$$  $$$$$$$  $$    $$      $$$$  $$$$$ $$  $$   $$  $$$$$$$$$$\n"
-            + "$$$$$$$  $$   $$$$$  $$$ $$$  $$    $$     $$$$$  $$$   $$  $$  $$$  $$$$$$$$$$\n"
-            + "$$       $$  $$$$$$  $$$  $$  $$    $$    $$$$$$  $$$   $$  $$$ $$$  $$  $$  $$\n"
-            + "$$       $$  $$$$$$$ $$   $$  $$    $$    $$$$$$$ $$    $$  $$$$$$$  $$  $$  $$\n"
-            + "$$       $$  $$$$$$$ $$   $$  $$    $$    $$$$$$$ $$    $$  $$$$$$$  $$  $$  $$\n"
-            + "$$       $$  $$$$$$$ $$   $$  $$    $$    $$$$$$$ $$    $$  $$$$$$$  $$  $$  $$\n";
-        System.out.println(logo);
-    }
-
-    private static void printExitMessage() {
-        System.out.println("See you next time~");
+    /**
+     * Entry-point for the PlanITarium application.
+     */
+    public static void main(String[] args) {
+        try {
+            new PlanITarium().run();
+        } catch (Exception e) {
+            UI.exit(); // Need fix later
+        }
     }
 }

@@ -1,4 +1,4 @@
-package seedu.planitarium;
+package seedu.planitarium.expenditure;
 
 
 public class Expenditure {
@@ -24,6 +24,15 @@ public class Expenditure {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Returns the amount of a particular expenditure.
+     *
+     * @return The amount of an expenditure
+     */
+    public double getAmount() {
+        return amount;
     }
 
     /**

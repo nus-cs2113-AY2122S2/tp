@@ -5,6 +5,18 @@ package ui;
  */
 public class UI {
     protected static final String HORI_LINE = "---------------------------";
+    protected static final String EXIT_MSG = "Goodbye. Hope to see you again.";
+    protected static final String LOGO =
+            "$$$$$$$  $$                   $$ $$$$$$$$               $$\n"
+                    + "$$$$$$$  $$                   $$ $$$$$$$$\n"
+                    + "$$ $$$$  $$  $$$$$$  $$$$$$$  $$    $$    $$$$$$  $$$$$ $$  $$   $$  $$$$$$$$$$\n"
+                    + "$$ $$$$  $$  $$$$$$  $$$$$$$  $$    $$    $$$$$$  $$$$$ $$  $$   $$  $$$$$$$$$$\n"
+                    + "$$$$$$$  $$    $$$$  $$$$$$$  $$    $$      $$$$  $$$$$ $$  $$   $$  $$$$$$$$$$\n"
+                    + "$$$$$$$  $$   $$$$$  $$$ $$$  $$    $$     $$$$$  $$$   $$  $$  $$$  $$$$$$$$$$\n"
+                    + "$$       $$  $$$$$$  $$$  $$  $$    $$    $$$$$$  $$$   $$  $$$ $$$  $$  $$  $$\n"
+                    + "$$       $$  $$$$$$$ $$   $$  $$    $$    $$$$$$$ $$    $$  $$$$$$$  $$  $$  $$\n"
+                    + "$$       $$  $$$$$$$ $$   $$  $$    $$    $$$$$$$ $$    $$  $$$$$$$  $$  $$  $$\n"
+                    + "$$       $$  $$$$$$$ $$   $$  $$    $$    $$$$$$$ $$    $$  $$$$$$$  $$  $$  $$\n";
     protected String content;
 
     public UI() {
@@ -14,5 +26,13 @@ public class UI {
         System.out.println(HORI_LINE);
         System.out.println(message);
         System.out.println(HORI_LINE);
+    }
+
+    public void exit() {
+        System.out.println(EXIT_MSG);
+    }
+
+    public static void printWelcomeMessage() {
+        System.out.println(LOGO);
     }
 }

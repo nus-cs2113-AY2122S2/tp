@@ -1,5 +1,8 @@
 package seedu.planitarium.parser;
 
+import exceptions.InvalidIndexException;
+import exceptions.InvalidMoneyException;
+import exceptions.MissingDelimiterException;
 import seedu.planitarium.person.Person;
 import seedu.planitarium.person.PersonList;
 
@@ -10,7 +13,8 @@ public class Parser {
     public static final String DELIMITER_DESCRIPTION = "/d";
     public static final String DELIMITER_INCOME = "/i";
     public static final String DELIMITER_EXPENDITURE = "/e";
-    public static final String DELIMITER_BACK = "/[undie]";
+    public static final String DELIMITER_RECORD_INDEX = "/r";
+    public static final String DELIMITER_BACK = "/[ruined]";
     public static final String DELIMITER_MONEY = ".";
 
     public static final int INDEX_KEYWORD = 0;
@@ -52,8 +56,7 @@ public class Parser {
      * @return The command keyword issued.
      */
     public static String parseKeyword(String userInput) {
-        String keyword = userInput.split(DELIMITER_SPACE)[INDEX_KEYWORD];
-        return keyword.trim();
+        return userInput.split(DELIMITER_SPACE)[INDEX_KEYWORD].trim();
     }
 
     /**
@@ -61,9 +64,11 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return Person's name.
+     * @throws MissingDelimiterException if user input does not contain delimiter for name.
      */
-    public static String parseName(String userInput) {
-        return parseDelimitedTerm(userInput, DELIMITER_NAME, DELIMITER_BACK);
+    public static String parseName(String userInput) throws MissingDelimiterException {
+        checkContainsDelimiter(userInput, DELIMITER_NAME);
+        return parseDelimitedTerm(userInput, DELIMITER_NAME, DELIMITER_BACK).trim();
     }
 
     /**
@@ -71,9 +76,11 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return Person's user index.
+     * @throws MissingDelimiterException if user input does not contain delimiter for user index.
      */
-    public static String parseUserIndex(String userInput) {
-        return parseDelimitedTerm(userInput, DELIMITER_USER_INDEX, DELIMITER_BACK);
+    public static String parseUserIndex(String userInput) throws MissingDelimiterException {
+        checkContainsDelimiter(userInput, DELIMITER_USER_INDEX);
+        return parseDelimitedTerm(userInput, DELIMITER_USER_INDEX, DELIMITER_BACK).trim();
     }
 
     /**
@@ -81,9 +88,11 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return An item's description.
+     * @throws MissingDelimiterException if user input does not contain delimiter for description.
      */
-    public static String parseDescription(String userInput) {
-        return parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION, DELIMITER_BACK);
+    public static String parseDescription(String userInput) throws MissingDelimiterException {
+        checkContainsDelimiter(userInput, DELIMITER_DESCRIPTION);
+        return parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION, DELIMITER_BACK).trim();
     }
 
     /**
@@ -91,9 +100,11 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return Person's added income.
+     * @throws MissingDelimiterException if user input does not contain delimiter for income.
      */
-    public static String parseIncome(String userInput) {
-        return parseDelimitedTerm(userInput, DELIMITER_INCOME, DELIMITER_BACK);
+    public static String parseIncome(String userInput) throws MissingDelimiterException {
+        checkContainsDelimiter(userInput, DELIMITER_INCOME);
+        return parseDelimitedTerm(userInput, DELIMITER_INCOME, DELIMITER_BACK).trim();
     }
 
     /**
@@ -101,80 +112,115 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return Person's expenditure amount.
+     * @throws MissingDelimiterException if user input does not contain delimiter for expenditure.
      */
-    public static String parseExpenditure(String userInput) {
-        return parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK);
+    public static String parseExpenditure(String userInput) throws MissingDelimiterException {
+        checkContainsDelimiter(userInput, DELIMITER_EXPENDITURE);
+        return parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK).trim();
     }
 
     /**
-     * Returns without exception if text is a valid double.
+     * Returns a record's index from user input.
+     *
+     * @param userInput The user's full input text.
+     * @return A record's index.
+     * @throws MissingDelimiterException if user input does not contain delimiter for record index.
+     */
+    public static String parseRecordIndex(String userInput) throws MissingDelimiterException {
+        checkContainsDelimiter(userInput, DELIMITER_RECORD_INDEX);
+        return parseDelimitedTerm(userInput, DELIMITER_RECORD_INDEX, DELIMITER_BACK).trim();
+    }
+
+    /**
+     * Returns a valid double that is a monetary value.
      *
      * @param amount Text to be checked.
-     * @throws NumberFormatException if format of text is not a valid double, negative or more than 2 decimal places.
+     * @return A valid double for monetary values.
+     * @throws InvalidMoneyException if format of text is not a valid double, negative or more than 2 decimal places.
      */
-    public static void checkValidMoney(String amount) throws NumberFormatException {
-        double checkMoney = Double.parseDouble(amount);
-        if (Double.compare(checkMoney, MONEY_ZERO) < 0) {
-            throw new NumberFormatException();
-        }
-        if (amount.contains(DELIMITER_MONEY)) {
-            String decimalPlace = parseDelimitedTerm(amount, DELIMITER_MONEY, DELIMITER_BACK);
-            if (decimalPlace.length() > LIMIT_TWO_DECIMAL) {
+    public static double getValidMoney(String amount) throws InvalidMoneyException {
+        try {
+            double checkMoney = Double.parseDouble(amount);
+            if (Double.compare(checkMoney, MONEY_ZERO) < 0) {
+                // to be caught immediately within this method
                 throw new NumberFormatException();
             }
+            if (amount.contains(DELIMITER_MONEY)) {
+                String decimalPlace = parseDelimitedTerm(amount, DELIMITER_MONEY, DELIMITER_BACK);
+                if (decimalPlace.length() > LIMIT_TWO_DECIMAL) {
+                    // to be caught immediately within this method
+                    throw new NumberFormatException();
+                }
+            }
+            return checkMoney;
+        } catch (NumberFormatException e) {
+            throw new InvalidMoneyException(amount);
         }
     }
 
     /**
-     * Returns without exception if user index is within membership quantity bounds.
+     * Returns a valid integer user index that is within membership quantity bounds.
      *
      * @param userIndex  Person's user index.
      * @param personList A list of Persons.
-     * @throws NumberFormatException if amount is not a valid integer.
-     * @throws IndexOutOfBoundsException if provided index is out of bounds.
+     * @return A valid integer user index.
+     * @throws InvalidIndexException if amount is not a valid integer or out of bounds.
      */
-    public static void checkValidUserIndex(String userIndex, PersonList personList)
-                throws NumberFormatException, IndexOutOfBoundsException {
-        int checkIndex = Integer.parseInt(userIndex);
-        checkTooHighIndex(checkIndex, personList.getNumberOfMembers());
-        checkTooLowIndex(checkIndex, MIN_USER_INDEX);
+    public static int getValidUserIndex(String userIndex, PersonList personList) throws InvalidIndexException {
+        try {
+            int checkIndex = Integer.parseInt(userIndex);
+            checkTooHighIndex(checkIndex, personList.getNumberOfMembers());
+            checkTooLowIndex(checkIndex, MIN_USER_INDEX);
+            return checkIndex;
+        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+            throw new InvalidIndexException(userIndex);
+        }
     }
 
     /**
-     * Returns without exception if expenditure index is within expenditure quantity bounds.
+     * Returns a valid expenditure index that is within expenditure quantity bounds.
      *
      * @param expenditureIndex Person's expenditure lookup index.
      * @param person           Person who may have expenditures.
-     * @throws NumberFormatException if index is not a valid integer.
-     * @throws IndexOutOfBoundsException if provided index is out of bounds.
+     * @throws InvalidIndexException if index is not a valid integer or out of bounds.
      */
-    public static void checkValidExpenditureIndex(String expenditureIndex, Person person)
-            throws NumberFormatException, IndexOutOfBoundsException {
-        int checkIndex = Integer.parseInt(expenditureIndex);
-        checkTooHighIndex(checkIndex, person.getNumberOfExpenditures());
-        checkTooLowIndex(checkIndex, MIN_EXPENDITURE_INDEX);
+    public static int getValidExpenditureIndex(String expenditureIndex, Person person)
+                throws InvalidIndexException {
+        try {
+            int checkIndex = Integer.parseInt(expenditureIndex);
+            checkTooHighIndex(checkIndex, person.getNumberOfExpenditures());
+            checkTooLowIndex(checkIndex, MIN_EXPENDITURE_INDEX);
+            return checkIndex;
+        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+            throw new InvalidIndexException(expenditureIndex);
+        }
     }
 
     /**
-     * Returns without exception if income index is within income quantity bounds.
+     * Returns a valid income index that is within income quantity bounds.
      *
      * @param incomeIndex Person's income lookup index.
-     * @param person      Person who has income.
-     * @throws NumberFormatException if index is not a valid integer.
-     * @throws IndexOutOfBoundsException if provided index is out of bounds.
+     * @param person      Person who may have incomes.
+     * @throws InvalidIndexException if index is not a valid integer or out of bounds.
      */
-    public static void checkValidIncomeIndex(String incomeIndex, Person person)
-            throws NumberFormatException, IndexOutOfBoundsException {
-        int checkIndex = Integer.parseInt(incomeIndex);
-        checkTooHighIndex(checkIndex, person.getNumberOfIncomes());
-        checkTooLowIndex(checkIndex, MIN_INCOME_INDEX);
+    public static int getValidIncomeIndex(String incomeIndex, Person person)
+            throws InvalidIndexException {
+        try {
+            int checkIndex = Integer.parseInt(incomeIndex);
+            checkTooHighIndex(checkIndex, person.getNumberOfIncomes());
+            checkTooLowIndex(checkIndex, MIN_INCOME_INDEX);
+            return checkIndex;
+        } catch (NumberFormatException|IndexOutOfBoundsException e) {
+            throw new InvalidIndexException(incomeIndex);
+        }
     }
 
     /**
      * Returns without exception if an index is not lower than minimum accepted index value.
      *
      * @param checkIndex The index to be checked for invalid boundary.
-     * @param minIndex   The minimum value an index should be.
+     * @param minIndex   The minimum value that an index can be.
+     * @throws IndexOutOfBoundsException if provided index is less than indicated minimum.
      */
     private static void checkTooLowIndex(int checkIndex, int minIndex) throws IndexOutOfBoundsException {
         if (checkIndex < minIndex) {
@@ -186,11 +232,25 @@ public class Parser {
      * Returns without exception if an index is not higher than current maximum index value.
      *
      * @param checkIndex The index to be checked for invalid boundary.
-     * @param maxIndex   The value the index must be less than.
+     * @param maxIndex   The maximum value that an index can be.
+     * @throws IndexOutOfBoundsException if provided index is more than indicated maximum.
      */
     private static void checkTooHighIndex(int checkIndex, int maxIndex) throws IndexOutOfBoundsException {
         if (checkIndex > maxIndex) {
             throw new IndexOutOfBoundsException();
+        }
+    }
+
+    /**
+     * Returns without exception if user input contains a given delimiter character sequence.
+     *
+     * @param userInput User input to be checked.
+     * @param delimiter A delimiter used to separate details.
+     * @throws MissingDelimiterException if user input does not contain the delimiter.
+     */
+    private static void checkContainsDelimiter(String userInput, String delimiter) throws MissingDelimiterException {
+        if (!userInput.contains(delimiter)) {
+            throw new MissingDelimiterException(delimiter);
         }
     }
 }
