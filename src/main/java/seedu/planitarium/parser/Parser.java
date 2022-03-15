@@ -182,6 +182,7 @@ public class Parser {
      *
      * @param expenditureIndex Person's expenditure lookup index.
      * @param person           Person who may have expenditures.
+     * @return A valid expenditure index.
      * @throws InvalidIndexException if index is not a valid integer or out of bounds.
      */
     public static int getValidExpenditureIndex(String expenditureIndex, Person person)
@@ -201,6 +202,7 @@ public class Parser {
      *
      * @param incomeIndex Person's income lookup index.
      * @param person      Person who may have incomes.
+     * @return A valid income index.
      * @throws InvalidIndexException if index is not a valid integer or out of bounds.
      */
     public static int getValidIncomeIndex(String incomeIndex, Person person)
