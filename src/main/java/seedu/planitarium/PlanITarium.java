@@ -9,7 +9,7 @@ public class PlanITarium {
     protected Command commandExecuter;
     protected UI ui = new UI();
 
-    public void run() throws Exception{
+    public void run() throws Exception {
         ui.printWelcomeMessage();
         while (true) {
             userInput = new Scanner(System.in);
@@ -21,7 +21,7 @@ public class PlanITarium {
     /**
      * Entry-point for the PlanITarium application.
      */
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         new PlanITarium().run();
     }
 
