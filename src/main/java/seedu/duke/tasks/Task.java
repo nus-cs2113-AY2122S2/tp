@@ -48,7 +48,7 @@ public class Task {
         this.taskParameters = getTaskParameterStatus();
     }
 
-    public void setTaskName (String taskName) {
+    public void setTaskName(String taskName) {
         this.taskName = taskName;
     }
 

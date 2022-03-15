@@ -25,7 +25,7 @@ public class EditCommand extends Command {
     private String taskParameter;
     private String result = "";
     private boolean isGeneralTask = false;
-    final private String changedParameter;
+    private final String changedParameter;
 
     public int getTaskIndex() {
         return taskIndex;
@@ -52,7 +52,7 @@ public class EditCommand extends Command {
             this.changedParameter = description;
             assert Objects.isNull(workingTime);
             assert Objects.isNull(taskName);
-        } else if (!Objects.isNull(workingTime)){
+        } else if (!Objects.isNull(workingTime)) {
             this.taskParameter = ESTIMATED_WORKING_TIME;
             this.changedParameter = workingTime;
             assert Objects.isNull(taskName);
@@ -104,7 +104,7 @@ public class EditCommand extends Command {
         String targetTaskName = targetTask.getTaskName();
         if (taskParameter.equals(TASK_DESCRIPTION)) {
             targetTask.setTaskDescription(changedParameter);
-        } else if (taskParameter.equals(ESTIMATED_WORKING_TIME)){
+        } else if (taskParameter.equals(ESTIMATED_WORKING_TIME)) {
             targetTask.setWorkingTime(changedParameter);
         } else {
             targetTask.setTaskName(changedParameter);

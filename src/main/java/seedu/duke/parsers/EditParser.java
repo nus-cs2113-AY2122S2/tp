@@ -54,7 +54,7 @@ public class EditParser extends Parser {
         if (!Objects.isNull(taskNumberString)) {
             int taskIndex;
             try {
-                 taskIndex = Integer.parseInt(taskNumberString) - 1;
+                taskIndex = Integer.parseInt(taskNumberString) - 1;
             } catch (NumberFormatException e) {
                 throw new ParseException();
             }

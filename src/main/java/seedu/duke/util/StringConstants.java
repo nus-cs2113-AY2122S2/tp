@@ -22,7 +22,7 @@ public class StringConstants {
      */
     public static final String DELETE_MESSAGE = " has been deleted.";
 
-    /**
+    /**.
      * For editCommand
      */
     public static final String EDIT_TASK_SUCCESS = "The %s of %s has been changed.";
