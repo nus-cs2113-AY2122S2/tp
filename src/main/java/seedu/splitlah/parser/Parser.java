@@ -314,6 +314,15 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Checks whether the provided String object which represents the command arguments contains any duplicate
+     * delimiters.
+     * 
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return true if there are tokens in the command arguments containing a forward slash character ('/') that
+     *         appears twice or more times in the arguments,
+     *         false otherwise.
+     */
     private static boolean containsDuplicateDelimiters(String commandArgs) {
         if (commandArgs == null) {
             return false;
@@ -329,6 +338,15 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Checks whether a String array object contains a String object 
+     * with the same contents, ignoring case, as the specified String object.
+     * 
+     * @param stringToCheck A String object that is specified to be checked against the String array object.
+     * @param stringArray   A String array object to be checked against.
+     * @return true if stringArray contains a String object with the same contents as stringToCheck,
+     *         false otherwise.
+     */
     private static boolean hasStringInStringArray(String stringToCheck, String[] stringArray) {
         if (stringToCheck == null || stringArray == null) {
             return false;
@@ -342,6 +360,15 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Checks whether any delimiter inside the provided String object which represents the command arguments does not
+     * belong to the command type specified by the String object which represents the command type.
+     * 
+     * @param commandType   A String object representing the command type of the command input from the user.
+     * @param remainingArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return true if any delimiter inside remainingArgs do not belong to command type as represented by commandType,
+     *         false otherwise.
+     */
     private static boolean containsDelimitersNotFromCommand(String commandType, String remainingArgs) {
         String[] delimiterList;
         switch (commandType) {
@@ -379,6 +406,15 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Returns a String object that represents a corresponding error message for the first error check to be failed,
+     * when checking for validity of arguments for a specified command.
+     * 
+     * @param commandType   A String object representing the command type of the command input from the user.
+     * @param remainingArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return A String object with the first error check to be failed, if any, or
+     *         an empty String object if remainingArgs is empty or if none of the error checks fail.
+     */
     private static String checkIfArgumentsValidForCommand(String commandType, String remainingArgs) {
         if (remainingArgs.isEmpty()) {
             return "";
