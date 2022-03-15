@@ -205,11 +205,20 @@ public class Parser {
      *                                characters or a single decimal point character, and cannot be parsed as a double.
      */
     private static double parseCostFromString(String input, String delimiter) throws InvalidFormatException {
+        double cost;
         try {
-            return Double.parseDouble(input);
+            cost = Double.parseDouble(input);
         } catch (NumberFormatException exception) {
             throw new InvalidFormatException(getNonMonetaryErrorMessage(delimiter));
         }
+        
+        if (cost <= 0) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_COST_NOT_POSITIVE);
+        }
+        if (!hasAtMostTwoDecimalPlaces(input)) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_COST_NOT_TWO_DP);
+        }
+        return cost;
     }
 
     /**
