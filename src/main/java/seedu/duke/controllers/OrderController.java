@@ -28,34 +28,19 @@ public class OrderController extends Controller {
             System.out.println("Implement me to view menu :D");
             break;
         case 2:
-            boolean notQuit = true;
-            String userInput= InputParser.getString("Enter dishes you want to order (Q/q to exit): ");
-            if (userInput == "Q" || userInput == "q") {
-                notQuit = false;
-            }
-            while (notQuit) {
-                Object inputObj = userInput;
-                int size = orderManager.addDishToOrder(inputObj);
-                userInput= InputParser.getString("You’ve already added " + size + "dish(es), some more: \n");
-                if (userInput == "Q" || userInput == "q") {
-                    notQuit = false;
-                }
-            }
+            quitOrder();
             break;
         case 3:
-            int userInputInt = InputParser.getInteger("Enter the order you want to delete: ");
-            orderManager.deleteOrder(userInputInt);
+            deleteOrder();
             break;
         case 4:
-            userInputInt = InputParser.getInteger("Enter the order you want to get price: ");
-            System.out.printf("Total value of all orders: %f. \n", orderManager.getOrderPrice(userInputInt));
+            getOrderPrice();
             break;
         case 5:
-            System.out.printf("Total value of all orders: %f. \n", orderManager.getAllOrderValue());
+            getAllOrderPrice();
             break;
         case 6:
-            System.out.println("These are all your orders receipts. \n");
-            orderManager.printReceipt();
+            printReceipt();
             break;
         default:
             // This should not happen, since the choice argument for this method is always parsed from the
@@ -65,6 +50,41 @@ public class OrderController extends Controller {
         System.out.println("Now in Main Menu.");
         System.out.println(this);
         return false;
+    }
+
+    private void quitOrder() throws OperationTerminationException {
+        boolean notQuit = true;
+        String userInput= InputParser.getString("Enter dishes you want to order (Q/q to exit): ");
+        if (userInput == "Q" || userInput == "q") {
+            notQuit = false;
+        }
+        while (notQuit) {
+            Object inputObj = userInput;
+            int size = orderManager.addDishToOrder(inputObj);
+            userInput= InputParser.getString("You’ve already added " + size + "dish(es), some more: \n");
+            if (userInput == "Q" || userInput == "q") {
+                notQuit = false;
+            }
+        }
+    }
+
+    private void deleteOrder() throws OperationTerminationException {
+        int userInputInt = InputParser.getInteger("Enter the order you want to delete: ");
+        orderManager.deleteOrder(userInputInt);
+    }
+
+    private void getOrderPrice() throws OperationTerminationException {
+        int userInputInt = InputParser.getInteger("Enter the order you want to get price: ");
+        System.out.printf("Total value of all orders: %f. \n", orderManager.getOrderPrice(userInputInt));
+    }
+
+    private void getAllOrderPrice() throws OperationTerminationException {
+        System.out.printf("Total value of all orders: %f. \n", orderManager.getAllOrderValue());
+    }
+
+    private void printReceipt() throws OperationTerminationException {
+        System.out.println("These are all your orders receipts. \n");
+        orderManager.printReceipt();
     }
 
     @Override
