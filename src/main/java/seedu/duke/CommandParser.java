@@ -40,7 +40,7 @@ public class CommandParser {
         } else if (commandString.startsWith(CHECK_OUT)) {
             commandStringWithoutCommand = commandString.replace(CHECK_OUT, "");
             userCommand = new CheckOutCommand(commandStringWithoutCommand);
-        }  else if (commandString.startsWith(CHECK_BY_CATEGORY)) {
+        } else if (commandString.startsWith(CHECK_BY_CATEGORY)) {
             commandStringWithoutCommand = commandString.replace(CHECK_BY_CATEGORY, "");
             userCommand = new CheckRoomByCatCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(CHECK_ROOM)) {

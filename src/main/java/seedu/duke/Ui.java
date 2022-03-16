@@ -9,7 +9,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner in;
-    private final int ARRAY_INDEX_OFFSET = 1;
+    private static final int ARRAY_INDEX_OFFSET = 1;
 
     public Ui() {
         in = new Scanner(System.in);
@@ -40,6 +40,7 @@ public class Ui {
         System.out.println("The item and its pax has been added to the list of items in the inventory.");
         System.out.printf("There are currently %d items within the inventory.\n", listOfItems.getSize());
     }
+
     public void printItemList(ItemList listOfItems) {
         String itemName;
         int itemPax;
