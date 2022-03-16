@@ -9,13 +9,14 @@ public class CheckRoomCommand extends Command {
 
     @Override
     // check if the room id is correct
-    public void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList itemList, Ui ui) {
+    public void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList itemList, Ui ui) throws InvalidRoomNumberException {
         for (Room room : roomList.getRoomList()) {
             if (room.getRoomId() == roomId) {
                 System.out.println(room);
                 return;
             }
         }
+        throw new InvalidRoomNumberException();
     }
 }
 
