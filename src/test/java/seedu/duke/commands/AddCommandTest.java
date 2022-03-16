@@ -20,6 +20,9 @@ class AddCommandTest {
     private Command addCommandTotalOverlap;
     private Command addCommandOverlapDifferentDay;
 
+    /**
+     * Set up multiple AddCommands to test out varying edge cases for overlapping lessons.
+     */
     @BeforeEach
     public void setUp() {
         timetable = new Timetable();
@@ -55,6 +58,10 @@ class AddCommandTest {
         assertEquals(ERROR_DUPLICATE_EVENT, addCommand.execute(timetable));
     }
 
+    /**
+     * The following 4 test methods ensure that the program informs user and continues running smoothly
+     * when an event to be added has a timing clash with an existing event in the user's timetable.
+     */
     @Test
     public void addCommand_startTimeOverlap_throwException() {
         addCommand.execute(timetable);
@@ -79,6 +86,10 @@ class AddCommandTest {
         assertEquals(ERROR_OVERLAPPING_EVENT, addCommandTotalOverlap.execute(timetable));
     }
 
+    /**
+     * Test method to ensure that no error is detected when the timing of an event to be added
+     * overlaps with another event on a different day.
+     */
     @Test
     public void addCommand_OverlapDifferentDay_throwException() {
         addCommand.execute(timetable);
