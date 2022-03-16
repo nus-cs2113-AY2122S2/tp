@@ -44,6 +44,8 @@ public class Parser {
     private static final String ASSERT_INCOME_INDEX_NOT_NULL = "Income index should not be null";
 
     private static final String LOG_PARSED_VALUES = "User Input '%s' parsed out as '%s'";
+    private static final String LOG_VALID_MONEY = "Converted the string '%s' into '%.2f'";
+    private static final String LOG_INVALID_MONEY = "Invalid money of '%s' caught";
 
     /**
      * Returns the term surrounded by two delimiters.
@@ -193,8 +195,10 @@ public class Parser {
             //        throw new NumberFormatException();
             //    }
             //}
+            logger.getLogger().log(Level.INFO, String.format(LOG_VALID_MONEY, amount, checkMoney));
             return checkMoney;
         } catch (NumberFormatException e) {
+            logger.getLogger().log(Level.WARNING, String.format(LOG_INVALID_MONEY, amount));
             throw new InvalidMoneyException(amount);
         }
     }
