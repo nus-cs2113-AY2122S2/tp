@@ -1,6 +1,7 @@
 package seedu.planitarium.parser;
 
 import seedu.planitarium.ProjectLogger;
+import seedu.planitarium.exceptions.DuplicateDelimiterException;
 import seedu.planitarium.exceptions.InvalidIndexException;
 import seedu.planitarium.exceptions.InvalidMoneyException;
 import seedu.planitarium.exceptions.MissingDelimiterException;
@@ -23,6 +24,7 @@ public class Parser {
     public static final String DELIMITER_RECORD_INDEX = "/r";
     public static final String DELIMITER_BACK = "/[ruined]";
     public static final String DELIMITER_MONEY = ".";
+    public static final String EMPTY_STRING = "";
 
     public static final int INDEX_KEYWORD = 0;
     public static final int INDEX_LEFT_NOT_EXIST = 0;
@@ -52,6 +54,7 @@ public class Parser {
     private static final String LOG_INDEX_TOO_HIGH = "Input index '%d' is more than the maximum index of '%d'";
     private static final String LOG_CHECK_INDEX_BOUNDS = "Checking index '%d' for bounds violation";
     private static final String LOG_MISSING_DELIMITER = "User input '%s' is missing delimiter '%s'";
+    private static final String LOG_TOO_MANY_DELIMITER = "User input '%s' has too many delimiters '%s'";
 
 
     /**
@@ -97,9 +100,9 @@ public class Parser {
      * @return Person's name.
      * @throws MissingDelimiterException if user input does not contain delimiter for name.
      */
-    public static String parseName(String userInput) throws MissingDelimiterException {
+    public static String parseName(String userInput) throws MissingDelimiterException, DuplicateDelimiterException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        checkContainsDelimiter(userInput, DELIMITER_NAME);
+        checkContainsOnlyOneDelimiter(userInput, DELIMITER_NAME);
         String name = parseDelimitedTerm(userInput, DELIMITER_NAME, DELIMITER_BACK).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, name));
         return name;
@@ -112,9 +115,10 @@ public class Parser {
      * @return Person's user index.
      * @throws MissingDelimiterException if user input does not contain delimiter for user index.
      */
-    public static String parseUserIndex(String userInput) throws MissingDelimiterException {
+    public static String parseUserIndex(String userInput)
+                throws MissingDelimiterException, DuplicateDelimiterException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        checkContainsDelimiter(userInput, DELIMITER_USER_INDEX);
+        checkContainsOnlyOneDelimiter(userInput, DELIMITER_USER_INDEX);
         String userIndex = parseDelimitedTerm(userInput, DELIMITER_USER_INDEX, DELIMITER_BACK).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, userIndex));
         return userIndex;
@@ -127,9 +131,10 @@ public class Parser {
      * @return An item's description.
      * @throws MissingDelimiterException if user input does not contain delimiter for description.
      */
-    public static String parseDescription(String userInput) throws MissingDelimiterException {
+    public static String parseDescription(String userInput)
+                throws MissingDelimiterException, DuplicateDelimiterException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        checkContainsDelimiter(userInput, DELIMITER_DESCRIPTION);
+        checkContainsOnlyOneDelimiter(userInput, DELIMITER_DESCRIPTION);
         String description = parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION, DELIMITER_BACK).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, description));
         return description;
@@ -142,9 +147,10 @@ public class Parser {
      * @return Person's added income.
      * @throws MissingDelimiterException if user input does not contain delimiter for income.
      */
-    public static String parseIncome(String userInput) throws MissingDelimiterException {
+    public static String parseIncome(String userInput)
+                throws MissingDelimiterException, DuplicateDelimiterException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        checkContainsDelimiter(userInput, DELIMITER_INCOME);
+        checkContainsOnlyOneDelimiter(userInput, DELIMITER_INCOME);
         String income = parseDelimitedTerm(userInput, DELIMITER_INCOME, DELIMITER_BACK).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, income));
         return income;
@@ -157,9 +163,10 @@ public class Parser {
      * @return Person's expenditure amount.
      * @throws MissingDelimiterException if user input does not contain delimiter for expenditure.
      */
-    public static String parseExpenditure(String userInput) throws MissingDelimiterException {
+    public static String parseExpenditure(String userInput)
+                throws MissingDelimiterException, DuplicateDelimiterException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        checkContainsDelimiter(userInput, DELIMITER_EXPENDITURE);
+        checkContainsOnlyOneDelimiter(userInput, DELIMITER_EXPENDITURE);
         String expenditure = parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, expenditure));
         return expenditure;
@@ -172,9 +179,10 @@ public class Parser {
      * @return A record's index.
      * @throws MissingDelimiterException if user input does not contain delimiter for record index.
      */
-    public static String parseRecordIndex(String userInput) throws MissingDelimiterException {
+    public static String parseRecordIndex(String userInput)
+                throws MissingDelimiterException, DuplicateDelimiterException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        checkContainsDelimiter(userInput, DELIMITER_RECORD_INDEX);
+        checkContainsOnlyOneDelimiter(userInput, DELIMITER_RECORD_INDEX);
         String record = parseDelimitedTerm(userInput, DELIMITER_RECORD_INDEX, DELIMITER_BACK).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, record));
         return record;
@@ -307,16 +315,25 @@ public class Parser {
     }
 
     /**
-     * Returns without exception if user input contains a given delimiter character sequence.
+     * Returns without exception if user input contains one occurrence of a given delimiter.
      *
      * @param userInput User input to be checked.
      * @param delimiter A delimiter used to separate details.
      * @throws MissingDelimiterException if user input does not contain the delimiter.
      */
-    private static void checkContainsDelimiter(String userInput, String delimiter) throws MissingDelimiterException {
-        if (!userInput.contains(delimiter)) {
+    private static void checkContainsOnlyOneDelimiter(String userInput, String delimiter)
+                throws MissingDelimiterException, DuplicateDelimiterException {
+        int inputLengthWithDelimiter = userInput.length();
+        int inputLengthNoDelimiter = userInput.replace(delimiter, EMPTY_STRING).length();
+        int lengthOfDelimiter = delimiter.length();
+
+        if ((inputLengthWithDelimiter - inputLengthNoDelimiter) < lengthOfDelimiter) {
             logger.getLogger().log(Level.WARNING, String.format(LOG_MISSING_DELIMITER, userInput, delimiter));
             throw new MissingDelimiterException(delimiter);
+        }
+        if ((inputLengthWithDelimiter - inputLengthNoDelimiter) > lengthOfDelimiter) {
+            logger.getLogger().log(Level.WARNING, String.format(LOG_TOO_MANY_DELIMITER, userInput, delimiter));
+            throw new DuplicateDelimiterException(delimiter);
         }
     }
 }
