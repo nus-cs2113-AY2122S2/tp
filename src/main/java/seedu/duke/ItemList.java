@@ -2,6 +2,10 @@ package seedu.duke;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list of the items within the inventory. An ItemList object contains the methods to add items to the
+ * item list as well as update the paxs of the current items within the item List.
+ */
 public class ItemList {
     ArrayList<Item> listOfItems;
 
@@ -26,6 +30,12 @@ public class ItemList {
         return listOfItems.size();
     }
 
+    /**
+     * Returns a specific item within the item list based on the index passed in.
+     *
+     * @param index The index of the item within the list that would be returned.
+     * @return The item specified by the index passed into the function.
+     */
     public Item getItem(int index) {
         ArrayList<Item> listOfItems = getListOfItems();
         Item item = listOfItems.get(index);

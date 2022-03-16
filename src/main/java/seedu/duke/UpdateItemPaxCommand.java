@@ -1,8 +1,8 @@
 package seedu.duke;
 
 /**
- * Represents an Update Item Pax Command. An Update Item Pax Command object consists of the name of the item to update
- * and the new pax value.
+ * Represents a command to update the pax of an item within the item list. An UpdateItemPaxCommand object consists of
+ * the name of the item to update and the new pax value.
  */
 public class UpdateItemPaxCommand extends Command {
     private Item item;
@@ -17,8 +17,9 @@ public class UpdateItemPaxCommand extends Command {
      * Extracts out the item name and item pax from the user input and creates an UpdateItemPaxCommand object.
      *
      * @param userInput The user's input.
-     * @throws HotelLiteManagerException if either the formatting of the update item pax command is invalid or if the
-     *                                   item pax, name is empty or invalid.
+     * @throws HotelLiteManagerException if the formatting of the update item pax command is invalid, the item pax is
+     *                                   empty or invalid, the item name is empty, or the item name and pax are both
+     *                                   empty.
      */
     public UpdateItemPaxCommand(String userInput) throws HotelLiteManagerException {
         boolean isValidUpdateItemCommand = userInput.contains(ITEM_NAME_INDICATOR)
