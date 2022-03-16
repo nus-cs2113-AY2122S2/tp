@@ -16,7 +16,7 @@ class DukeTest {
     @Test
     public void commandParser_addCommandWithNonEmptyItemNameAndPax_success() throws Exception {
         CommandParser parser = new CommandParser();
-        Command command = parser.parse("Add Item Name:Toilet Roll Pax:5");
+        Command command = parser.parse("Add Item /Name:Toilet Roll /Pax:5");
         AddItemCommand addItemCommand = (AddItemCommand) command;
         Item item = addItemCommand.getItem();
         assertEquals("Toilet Roll", item.getName());
@@ -25,12 +25,12 @@ class DukeTest {
 
     @Test
     public void commandParser_addCommandWithEmptyItemName_exceptionThrown() {
-        assertThrows(EmptyItemNameException.class, () -> new CommandParser().parse("Add Item Name: Pax:5"));
+        assertThrows(EmptyItemNameException.class, () -> new CommandParser().parse("Add Item /Name: /Pax:5"));
     }
 
     @Test
     public void commandParser_addCommandWithEmptyItemPax_exceptionThrown() {
-        assertThrows(EmptyItemPaxException.class, () -> new CommandParser().parse("Add Item Name:Toilet Roll Pax:"));
+        assertThrows(EmptyItemPaxException.class, () -> new CommandParser().parse("Add Item /Name:Toilet Roll /Pax:"));
     }
 
     @Test
