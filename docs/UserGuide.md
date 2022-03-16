@@ -18,11 +18,11 @@
 ## Features
 
 Note:<br>
-Compulsory Flags start with "/". <br>
-Optional Flags start with "-". <br>
-Compulsory Parameters are fully capitalised: e.g. MODULE_CODE. <br>
-Optional Parameters are in square brackets: e.g. [-m "MODULE_DESCRIPTION"]
-All parameters except MODULE_CODE are surrounded by double quotation marks e.g. "PARAMETER".
+Compulsory flags start with "/". <br>
+Optional flags start with "-". <br>
+Compulsory parameters are fully capitalised. E.g. MODULE_CODE <br>
+Optional parameters are in square brackets. E.g. [-m "MODULE_DESCRIPTION"]
+All parameters except MODULE_CODE are surrounded by double quotation marks. E.g. "PARAMETER"
 
 ### Accessing Help: `help`
 
@@ -75,6 +75,8 @@ Format: `reset`
 **A**: {your answer here}
 
 ## Command Summary
+
+
 | Command | Format                                                                                                                                                             |
 |:-------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |  help   | `help`                                                                                                                                                             |
