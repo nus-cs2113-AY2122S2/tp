@@ -59,16 +59,16 @@ public class Parser {
         } else if (fullCommand.contains("add appointment")) {
             String time;
             String dummy = fullCommand.trim();
-            int timeIndex = dummy.indexOf("/t");
+            int timeIndex = dummy.indexOf("/t") + 3;
             int doctorIndex = dummy.indexOf("/d");
-            time = dummy.substring(timeIndex, doctorIndex);
+            time = dummy.substring(timeIndex, doctorIndex).trim();
             int patientIndex = dummy.indexOf("/p");
-            String s = dummy.substring(doctorIndex, patientIndex);
+            String s = dummy.substring(doctorIndex + 3, patientIndex);
 
-            doctorIndex = Integer.parseInt(s);
+            doctorIndex = Integer.parseInt(s.trim());
             patientIndex += 3;
             s = dummy.substring(patientIndex);
-            patientIndex = Integer.parseInt(s);
+            patientIndex = Integer.parseInt(s.trim());
             return new AddAppointmentCommand(doctorIndex, patientIndex, time);
         } else if (fullCommand.contains("delete doctor")) {
             String dummy = fullCommand.trim();
@@ -88,6 +88,8 @@ public class Parser {
             return new ListAppointmentListCommand();
         } else if (fullCommand.contains("list patient")) {
             return new ListPatientListCommand();
+        } else if (fullCommand.contains("bye")) {
+            return new ExitCommand();
         }
         return null;
     }

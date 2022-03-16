@@ -36,7 +36,7 @@ public class PatientList {
      */
     public void deletePatient(int index) {
         System.out.println(boundary + "Noted. I've removed this patient:");
-        System.out.println(patients.get(index));
+        System.out.println(patients.get(index - 1));
         System.out.print("Now you have " + (countPatient - 1)
                                  + " patients recorded in the system." + System.lineSeparator() + boundary);
         patients.remove(index - 1);
@@ -46,8 +46,8 @@ public class PatientList {
     @Override
     public String toString() {
         String toPrint = boundary + "Here are the patients recorded:" + System.lineSeparator();
-        for (int i = 0; i < countPatient; i++) {
-            toPrint += ((i + 1) + ". " + getPatient(i) + System.lineSeparator());
+        for (int i = 1; i <= countPatient; i++) {
+            toPrint += (i + ". " + getPatient(i) + System.lineSeparator());
         }
         toPrint += ("You have " + countPatient + " patients recorded in the system."
                             + System.lineSeparator() + boundary + System.lineSeparator());
