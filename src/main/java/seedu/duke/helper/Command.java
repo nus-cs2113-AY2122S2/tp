@@ -67,4 +67,12 @@ public class Command {
         medicineList.add(parameterArray);
         System.out.println("Medicine has been added");
     }
+
+    public void viewMedicine(MedicineList medicineList, String parameters) {
+        if (Parser.parseViewMedicine(parameters) == null) {
+            medicineList.viewMedicine();
+        } else {
+            medicineList.viewMedicine(parameters);
+        }
+    }
 }

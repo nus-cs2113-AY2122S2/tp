@@ -21,7 +21,7 @@ public class Manager {
     public void runLoop() {
         ui.printGreeting();
         while (!isTerminated) {
-            String commandWord = ui.readCommand();;
+            String commandWord = ui.readCommand();
             String parameters = ui.readParameters();
             switch (commandWord) {
             case "add patient":
@@ -44,6 +44,7 @@ public class Manager {
             case "delete medicine":
                 break;
             case "view medicine":
+                command.viewMedicine(medicineList, parameters);
                 break;
             case "help":
                 ui.printHelp();

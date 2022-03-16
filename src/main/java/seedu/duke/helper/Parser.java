@@ -49,6 +49,10 @@ public class Parser {
         }
     }
 
+    public static String parseViewMedicine(String parameter) {
+        return parameter;
+    }
+
     private static boolean validateAddPatient(String[] parameters) {
         boolean isValid = true;
         if (!validateNric(parameters[0])) {

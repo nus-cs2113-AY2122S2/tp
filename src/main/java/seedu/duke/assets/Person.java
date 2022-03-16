@@ -1,12 +1,12 @@
 package seedu.duke.assets;
 
 public abstract class Person {
-    String nric;
-    String fullName;
-    int age;
-    char gender;
-    String address;
-    String dob;
+    private String nric;
+    private String fullName;
+    private int age;
+    private char gender;
+    private String address;
+    private String dob;
 
     public Person(String nric, String fullName, int age, char gender, String address,
                   String dob) {
