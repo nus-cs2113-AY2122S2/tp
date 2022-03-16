@@ -1,8 +1,7 @@
 package seedu.duke;
 
 /**
- * Extract name and age of housekeeper from user input and record it into the
- * housekeeper list.
+ * Extract name and age of housekeeper from user input and record it into the housekeeper list.
  */
 public class AddHousekeeperCommand extends Command {
     private Housekeeper housekeeper;
