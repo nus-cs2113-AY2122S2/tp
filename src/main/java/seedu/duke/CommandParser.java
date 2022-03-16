@@ -6,7 +6,6 @@ public class CommandParser {
     public static final String VIEW_ITEM_LIST_COMMAND = "View Item In Inventory";
     private static final String ADD_HOUSEKEEPER_COMMAND = "Add Housekeeper ";
     private static final String ADD_AVAILABILITY_COMMAND = "Availability ";
-    private static final String VIEW_HOUSEKEEPER_COMMAND = "View Recorded Housekeeper";
     public static final String ADD_SATISFACTION_COMMAND = "Add Satisfaction";
     public static final String VIEW_SATISFACTIONS_COMMAND = "View Satisfactions";
     private static final String CHECK_IN = "check in";
@@ -51,6 +50,9 @@ public class CommandParser {
         } else if (commandString.startsWith(CHECK_ROOM_BY_LEVEL)) {
             commandStringWithoutCommand = commandString.replace(CHECK_ROOM_BY_LEVEL, "");
             userCommand = new CheckRoomByLevelCommand(commandStringWithoutCommand);
+        } else if (commandString.startsWith(ADD_AVAILABILITY_COMMAND)) {
+            commandStringWithoutCommand = commandString.replace(ADD_AVAILABILITY_COMMAND, "");
+            userCommand = new AddAvailabilityCommand(commandStringWithoutCommand);
         } else {
             throw new WrongCommandException("Invalid Command");
         }
