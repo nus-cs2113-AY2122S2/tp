@@ -19,7 +19,7 @@ public class ExpenditureTest {
     @Test
     void serialization_normalInput_correctDeserialization() {
         Expenditure expenditure = new Expenditure("Test%!$+:/=-<%<%<of amount>%>9()&)* \t\n"
-                + "expenditure", 20);
+                + "expenditure", null, 20);
         String serialized = expenditure.serialize();
         try {
             Expenditure deserialized = Expenditure.deserialize(serialized);
