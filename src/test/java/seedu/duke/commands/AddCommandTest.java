@@ -91,7 +91,7 @@ class AddCommandTest {
      * overlaps with another event on a different day.
      */
     @Test
-    public void addCommand_OverlapDifferentDay_throwException() {
+    public void addCommand_OverlapDifferentDay_noExceptionThrown() {
         addCommand.execute(timetable);
         assertNotEquals(ERROR_OVERLAPPING_EVENT, addCommandOverlapDifferentDay.execute(timetable));
     }
