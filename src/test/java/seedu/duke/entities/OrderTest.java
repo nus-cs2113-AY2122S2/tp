@@ -9,6 +9,6 @@ import java.util.Arrays;
 class OrderTest {
     @Test
     void order_InvalidInput_ThrowIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Order(Arrays.asList(new Dish("meat", 10))));
+        assertThrows(IllegalArgumentException.class, () -> new Order(Arrays.asList(new Dish(null, 10))));
     }
 }
