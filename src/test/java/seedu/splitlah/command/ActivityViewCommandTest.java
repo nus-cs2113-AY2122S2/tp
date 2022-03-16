@@ -27,8 +27,7 @@ public class ActivityViewCommandTest {
         Command createActivityTwo = Parser.getCommand(activityTwoArgs);
         createActivityTwo.run(manager);
     }
-
-
+    
     /**
      * Checks if activities are listed with missing delimiters.
      */
