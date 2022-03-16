@@ -24,6 +24,8 @@ public class CsProjPlanner {
         input = in.nextLine();
 
         while (!input.equalsIgnoreCase("exit")) {
+            assert (projectList != null) : "List of projects does not exist.";
+            assert (commandHandler != null) : "Command Handler does not exist.";
             try {
                 commandHandler.handleUserInput(projectList, input);
             } catch (IllegalCommandException e) {

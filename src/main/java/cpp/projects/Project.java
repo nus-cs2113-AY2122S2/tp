@@ -28,7 +28,7 @@ public class Project {
      * @param index the target index
      */
     public void markTodoAsDone(int index) {
-        if (index > todos.size()) {
+        if (index > todos.size() || index < 1) {
             throw new IndexOutOfBoundsException();
         }
         todos.get(index - 1).markAsDone();
