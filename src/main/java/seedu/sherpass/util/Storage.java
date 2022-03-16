@@ -17,15 +17,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static seedu.sherpass.constant.Index.DIRECTORY_INDEX;
+import static seedu.sherpass.constant.Index.INDENT_FACTOR;
 import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_1;
 import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_2;
 import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_3;
+import static seedu.sherpass.constant.Message.ERROR_DUPLICATE_TASK_MESSAGE_1;
+import static seedu.sherpass.constant.Message.ERROR_DUPLICATE_TASK_MESSAGE_2;
 import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
+
 import static seedu.sherpass.constant.DateAndTimeFormat.parseFormat;
 
 
 public class Storage {
-    public static final int INDENT_FACTOR = 4;
     private String saveFilePath;
 
     /**
@@ -118,10 +121,25 @@ public class Storage {
 
             for (int i = 0; i < array.length(); i++) {
                 JSONObject taskData = array.getJSONObject(i);
-                taskList.add(Parser.parseSavedData(taskData));
+                Task newTask = Parser.parseSavedData(taskData);
+                if (!isDuplicateTask(taskList, newTask.getDescription())) {
+                    taskList.add(newTask);
+                } else {
+                    System.out.println(ERROR_DUPLICATE_TASK_MESSAGE_1 + newTask.getDescription()
+                        + ERROR_DUPLICATE_TASK_MESSAGE_2);
+                }
             }
         }
         return taskList;
+    }
+
+    private boolean isDuplicateTask(ArrayList<Task> tasks, String description) {
+        for (Task t : tasks) {
+            if (t.getDescription().equals(description)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

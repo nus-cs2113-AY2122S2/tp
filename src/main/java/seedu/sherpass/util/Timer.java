@@ -1,6 +1,5 @@
 package seedu.sherpass.util;
 
-import static seedu.sherpass.util.TimerLogic.isTimerRunning;
 
 import static seedu.sherpass.constant.TimerConstant.TIME_INTERVAL;
 import static seedu.sherpass.constant.TimerConstant.NO_TIME_LEFT;
@@ -9,7 +8,8 @@ import static seedu.sherpass.constant.TimerConstant.ONE_HOUR;
 
 public class Timer extends Thread {
 
-    private volatile boolean timerPaused = false;
+    private boolean isTimerRunning = false;
+    private volatile boolean isTimerPaused = false;
     private boolean forcedStop = false;
     private boolean hasTimeLeft = false;
     private static Ui ui;
@@ -22,7 +22,16 @@ public class Timer extends Thread {
      */
     public Timer(Ui ui) {
         timeLeft = NO_TIME_LEFT;
-        this.ui = ui;
+        Timer.ui = ui;
+    }
+
+    /**
+     * Returns timer running status.
+     *
+     * @return Returns true if timer has started. False otherwise.
+     */
+    public boolean isTimerRunning() {
+        return isTimerRunning;
     }
 
     /**
@@ -41,7 +50,8 @@ public class Timer extends Thread {
         if (timerRanOutOfTime()) {
             assert timeLeft <= NO_TIME_LEFT;
             isTimerRunning = false;
-            ui.showToUser("Time is up! Would you like to start another timer?");
+            ui.showToUser("Time is up!");
+            ui.showLine();
         }
         this.interrupt();
     }
@@ -55,7 +65,7 @@ public class Timer extends Thread {
             Thread.sleep(1000);
             timeLeft -= 1;
             updateHasTimeLeft();
-            if (timerPaused) {
+            if (isTimerPaused) {
                 waitForTimerToResume();
             }
         } catch (InterruptedException e) {
@@ -75,7 +85,7 @@ public class Timer extends Thread {
      */
     private void waitForTimerToResume() throws InterruptedException {
         synchronized (this) {
-            while (timerPaused) {
+            while (isTimerPaused) {
                 wait();
             }
         }
@@ -84,7 +94,7 @@ public class Timer extends Thread {
     /**
      * Returns whether timer ran out of time.
      *
-     * @return Boolean of whether timer ran out of time
+     * @return Boolean of whether timer ran out of time.
      */
     private boolean timerRanOutOfTime() {
         return (!hasTimeLeft && !forcedStop);
@@ -134,7 +144,7 @@ public class Timer extends Thread {
     /**
      * Sets the duration of the timer, as specified by the user.
      *
-     * @param duration Duration of timer in seconds
+     * @param duration Duration of timer in seconds.
      */
     public void setDuration(int duration) {
         timeLeft = duration;
@@ -146,7 +156,7 @@ public class Timer extends Thread {
     }
 
     public boolean isTimerPaused() {
-        return timerPaused;
+        return isTimerPaused;
     }
 
     public int getTimeLeft() {
@@ -158,7 +168,7 @@ public class Timer extends Thread {
      */
     public void resumeTimer() {
         synchronized (this) {
-            timerPaused = false;
+            isTimerPaused = false;
             notify();
         }
         ui.showToUser("Okay! I've resumed the timer. You have " + timeLeft + " seconds left.");
@@ -167,7 +177,7 @@ public class Timer extends Thread {
     public void pauseTimer() {
         ui.showToUser("Got it! I've paused the timer.\n"
                 + "Feel free to resume whenever you're ready.");
-        timerPaused = true;
+        isTimerPaused = true;
     }
 
     /**

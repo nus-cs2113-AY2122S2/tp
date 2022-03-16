@@ -5,13 +5,13 @@ public class Message {
     public static final String WELCOME_MESSAGE_ONE = "Welcome to\n";
     public static final String WELCOME_MESSAGE_TWO = "How can I help you today?";
     public static final String WELCOME_MESSAGE_STUDY = "Gotcha! Entering study mode...\n"
-            + "Done! To get started, enter one of the three default timers "
+            + "Done! To get started, enter one of the three default timers\n"
             + "using 'start <mode_number>':\n"
             + "1) 30 minutes\n"
             + "2) 1 hour\n"
             + "3) 1.5 hours\n\n"
-            + "For testing purposes, you can start a 30s timer with mode number 0.\n"
-            + "Otherwise, feel free to choose your own timer with \n'start /custom <timer_duration>'.";
+            + "For testing purposes, you may start a 30s timer\nwith mode number 0.\n"
+            + "Otherwise, feel free to choose your own timer with\n'start /custom <timer_duration>'.";
     public static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon! :)";
     public static final String GOODBYE_MESSAGE_STUDY = "Leaving study session...\n"
             + "Welcome back to the main session! How can I help you?";
@@ -29,12 +29,12 @@ public class Message {
             + "7) Clear: clear\n"
             + "8) Bye: bye";
     public static final String HELP_MESSAGE_STUDY = "Timer command input quick start guide:\n"
-            + "1) Start default timer: start <mode_index>\n"
+            + "1) Start default timer: start <mode_number>\n"
             + "2) Start custom timer: start /custom <timer_duration>\n"
             + "3) Stop timer: stop\n"
             + "4) Pause timer: pause\n"
             + "5) Resume timer: resume\n"
-            + "6) Exit study mode: leave\n";
+            + "6) Exit study mode: leave";
 
     public static final String ERROR_INVALID_INPUT_MESSAGE = "Please key in an appropriate command.\n"
             + HELP_MESSAGE;
@@ -46,7 +46,7 @@ public class Message {
             + "trying to processing the system.\n"
             + "Please reboot and execute the application again.";
     public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_1 = "Oops! It seems that your saved file "
-            + "was corrupted.";
+            + "is corrupted.";
     public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_2 = "Would you like to start with a new save "
             + "file? (Y/N):";
     public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_3 = "We're sorry this happened. "
@@ -55,4 +55,12 @@ public class Message {
     public static final String ERROR_INVALID_MARKING_INDEX_MESSAGE = "Bzzt!\nPlease"
             + " key in a valid task number to mark/unmark your task."
             + HELP_MESSAGE_SPECIFIC_COMMAND;
+    public static final String ERROR_INVALID_TIMER_INPUT_MESSAGE = "Oops! Your timer input "
+            + "does not seem to be correct.\n\n"
+            + "Please select one of the three default modes with\n"
+            + "\t'start <mode_number>'\n\n"
+            + "or choose your own custom timer with\n"
+            + "\t'start /custom <timer_duration>'";
+    public static final String ERROR_DUPLICATE_TASK_MESSAGE_1 = "Skipping task \"";
+    public static final String ERROR_DUPLICATE_TASK_MESSAGE_2 = "\" as it already exists!";
 }
