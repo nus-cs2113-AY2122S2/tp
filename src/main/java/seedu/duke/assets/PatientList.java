@@ -25,7 +25,7 @@ public class PatientList {
     }
 
     public void viewPatient() {
-        System.out.println(patients.toString());
+        System.out.println(this);
     }
 
     public void add(String[] addPatientParameters) {
