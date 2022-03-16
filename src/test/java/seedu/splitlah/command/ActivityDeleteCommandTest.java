@@ -20,6 +20,9 @@ class ActivityDeleteCommandTest {
         String activityOneArgs = "activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         Command createActivityOne = Parser.getCommand(activityOneArgs);
         createActivityOne.run(manager);
+        String activityTwoArgs = "activity /create /sid 1 /n Lunch /p Alice /i Bob Charlie /cl 5 5";
+        Command createActivityTwo = Parser.getCommand(activityTwoArgs);
+        createActivityTwo.run(manager);
     }
 
     @Test
@@ -46,7 +49,7 @@ class ActivityDeleteCommandTest {
         String userInput = "activity /delete /sid 3 /aid 1";
         Command command = Parser.getCommand(userInput);
         command.run(manager);
-        assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
+        assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
     }
 
 }
