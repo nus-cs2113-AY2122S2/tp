@@ -13,7 +13,7 @@
 
 ## Features
 
-Note:</br>
+Note:<br>
 Compulsory Flags start with "/". <br>
 Optional Flags start with "-". <br>
 Compulsory Parameters are fully capitalised: e.g. MODULE_CODE. <br>
@@ -54,6 +54,8 @@ Format: `reset`
 **A**: {your answer here}
 
 ## Command Summary
+<br>
+
 | Command | Format                                                                                                                                                           |
 |:-------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |  help   | `help`                                                                                                                                                           |
