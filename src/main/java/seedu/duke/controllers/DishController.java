@@ -2,15 +2,15 @@ package seedu.duke.controllers;
 
 import seedu.duke.entities.Dish;
 import seedu.duke.exceptions.OperationTerminationException;
+import seedu.duke.loggers.MainLogger;
 import seedu.duke.manager.DishManager;
 
 /**
  * DishController (or MenuController if you like).
  */
 public class DishController extends Controller {
-    private static final String[] CHOICES = {"Exit Menu", "Add Dish", "Delete Dish",
-        "Change the price of a dish", "Change the name of a dish"
-    };
+    private static final String[] CHOICES = {"Exit Menu", "List Dish", "Add Dish",
+        "Delete Dish", "Change the price of a dish", "Change the name of a dish"};
     private final DishManager dishManager;
 
     public DishController() {
@@ -20,6 +20,7 @@ public class DishController extends Controller {
 
     @Override
     public void takeControl() {
+        MainLogger.logInfo(this, "User is using menu function");
         System.out.println("Entering Dish Menu...\n");
         super.takeControl();
     }
@@ -27,21 +28,24 @@ public class DishController extends Controller {
     @Override
     protected boolean optionSwitcher(int choice) throws OperationTerminationException {
         switch (choice) {
-        case 1:
-            addDish();
-            break;
-        case 2:
-            deleteDish();
-            break;
-        case 3:
-            changePrice();
-            break;
-        case 4:
-            changeName();
-            break;
         case 0:
             System.out.println("Exiting Menu...");
             return true;
+        case 1:
+            listDishes();
+            break;
+        case 2:
+            addDish();
+            break;
+        case 3:
+            deleteDish();
+            break;
+        case 4:
+            changePrice();
+            break;
+        case 5:
+            changeName();
+            break;
         default:
             System.out.println("Unknown choice!");
             break;
@@ -50,7 +54,14 @@ public class DishController extends Controller {
         return false;
     }
 
+    private void listDishes() {
+        MainLogger.logInfo(this, "User is listing dishes");
+        System.out.println("Listing dishes...");
+        dishManager.printDishes();
+    }
+
     private void changeName() throws OperationTerminationException {
+        MainLogger.logInfo(this, "User is changing the name of dish");
         System.out.println("Changing name...");
         int index = InputParser.getInteger("The index of dish");
         String name = InputParser.getString("The new name of dish");
@@ -64,6 +75,7 @@ public class DishController extends Controller {
     }
 
     private void changePrice() throws OperationTerminationException {
+        MainLogger.logInfo(this, "User is changing the price of dish");
         System.out.println("Changing price...");
         int index = InputParser.getInteger("The index of dish");
         double newPrice = InputParser.getDouble("The new price of dish: ");
@@ -77,7 +89,8 @@ public class DishController extends Controller {
     }
 
     private void deleteDish() throws OperationTerminationException {
-        System.out.println("Deleting dish");
+        MainLogger.logInfo(this, "User is deleting dish");
+        System.out.println("Deleting dish...");
         int index = InputParser.getInteger("The index of dish");
         try {
             dishManager.deleteDish(index);
@@ -87,6 +100,7 @@ public class DishController extends Controller {
     }
 
     private void addDish() throws OperationTerminationException {
+        MainLogger.logInfo(this, "User is adding dish");
         System.out.println("Adding new dish...");
         String name = InputParser.getString("The name of dish: ");
         double price = InputParser.getDouble("The price of dish: ");

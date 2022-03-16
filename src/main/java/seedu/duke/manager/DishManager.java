@@ -19,6 +19,10 @@ public class DishManager {
      * Print all the dishes/menu.
      */
     public void printDishes() {
+        if (dishes.size() == 0) {
+            System.out.println("There is no dish in the list");
+            return;
+        }
         for (int i = 0; i < dishes.size(); i++) {
             System.out.println((i + 1) + ". " + dishes.get(i));
         }
