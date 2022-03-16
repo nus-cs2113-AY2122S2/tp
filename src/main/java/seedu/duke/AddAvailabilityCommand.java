@@ -74,7 +74,7 @@ public class AddAvailabilityCommand extends Command {
     @Override
     public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
                         AssignmentMap assignmentMap, RoomList roomList,
-                        ItemList listOfItems, Ui ui) {
+                        ItemList listOfItems, Ui ui) throws UserExistException {
         String availability = getAvailability();
         String name = getName();
         ui.printMessage("Added " + name + " availability into records");
