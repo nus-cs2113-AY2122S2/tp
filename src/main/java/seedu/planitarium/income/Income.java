@@ -16,6 +16,10 @@ public class Income {
         this.amount = amount;
     }
 
+    /**
+     * Returns the amount of the income object.
+     * @return The amount of income
+     */
     public double getAmount() {
         return amount;
     }
