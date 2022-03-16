@@ -63,8 +63,8 @@ public class DishController extends Controller {
     private void changeName() throws OperationTerminationException {
         MainLogger.logInfo(this, "User is changing the name of dish");
         System.out.println("Changing name...");
-        int index = InputParser.getInteger("The index of dish");
-        String name = InputParser.getString("The new name of dish");
+        int index = InputParser.getInteger("The index of dish: ");
+        String name = InputParser.getString("The new name of dish: ");
         try {
             dishManager.setName(index, name);
         } catch (IndexOutOfBoundsException e) {
@@ -77,7 +77,7 @@ public class DishController extends Controller {
     private void changePrice() throws OperationTerminationException {
         MainLogger.logInfo(this, "User is changing the price of dish");
         System.out.println("Changing price...");
-        int index = InputParser.getInteger("The index of dish");
+        int index = InputParser.getInteger("The index of dish: ");
         double newPrice = InputParser.getDouble("The new price of dish: ");
         try {
             dishManager.setPrice(index, newPrice);
@@ -91,7 +91,7 @@ public class DishController extends Controller {
     private void deleteDish() throws OperationTerminationException {
         MainLogger.logInfo(this, "User is deleting dish");
         System.out.println("Deleting dish...");
-        int index = InputParser.getInteger("The index of dish");
+        int index = InputParser.getInteger("The index of dish: ");
         try {
             dishManager.deleteDish(index);
         } catch (IndexOutOfBoundsException e) {
