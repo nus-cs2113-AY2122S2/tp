@@ -32,7 +32,8 @@ public class PersonList {
     public Person getPerson(int index) {
         assert (index >= 1);
         assert (index <= numberOfMembers);
-        return personList.get(index - 1);
+        int listIndex = index - 1;
+        return personList.get(listIndex);
     }
 
     /**
@@ -65,8 +66,9 @@ public class PersonList {
     public void removePerson(int index) {
         assert (index >= 1);
         assert (index <= numberOfMembers);
-        String name = personList.get(index - 1).getName();
-        personList.remove(index - 1);
+        int listIndex = index - 1;
+        String name = personList.get(listIndex).getName();
+        personList.remove(listIndex);
         numberOfMembers--;
         System.out.println(name + " has been successfully removed");
     }
