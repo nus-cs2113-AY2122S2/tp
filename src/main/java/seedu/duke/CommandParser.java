@@ -61,7 +61,7 @@ public class CommandParser {
             userCommand = new AddAvailabilityCommand(commandStringWithoutCommand);
         } else if (commandString.contains((VIEW_HOUSEKEEPER_COMMAND))) {
             userCommand = new ViewHousekeeperListCommand();
-        }else if (commandString.startsWith(ASSIGN_HOUSEKEEPER)) {
+        } else if (commandString.startsWith(ASSIGN_HOUSEKEEPER)) {
             commandStringWithoutCommand = commandString.replace(ADD_AVAILABILITY_COMMAND, "");
             userCommand = new AssignHousekeeperCommand(commandStringWithoutCommand);
         } else {

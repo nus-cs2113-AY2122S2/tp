@@ -74,7 +74,8 @@ public class AssignHousekeeperCommand extends Command {
     @Override
     public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
                         AssignmentMap assignmentMap, RoomList roomList,
-                        ItemList listOfItems, Ui ui) throws InvalidRoomNumberException, InvalidHousekeeperProfile {
+                        ItemList listOfItems, Ui ui)
+            throws InvalidRoomNumberException, InvalidHousekeeperProfile {
         String roomID = getroomID();
         String name = getName();
         ui.printMessage("Assigned " + name + " to room#" + roomID + ".");

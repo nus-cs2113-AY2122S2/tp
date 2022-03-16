@@ -8,7 +8,8 @@ public class AssignmentMap {
             new HashMap<>();
 
     public void addAssignment(String name, String roomID,
-                              HousekeeperList housekeeperList, RoomList roomList) throws InvalidHousekeeperProfile, InvalidRoomNumberException {
+                              HousekeeperList housekeeperList, RoomList roomList)
+            throws InvalidHousekeeperProfile, InvalidRoomNumberException {
         Room room;
         Housekeeper housekeeper;
 
@@ -19,9 +20,13 @@ public class AssignmentMap {
                     if (h.getName().equalsIgnoreCase(name)) {
                         housekeeper = h;
                         map.put(room, housekeeper);
-                    } else throw new InvalidHousekeeperProfile();
+                    } else {
+                        throw new InvalidHousekeeperProfile();
+                    }
                 }
-            } else throw new InvalidRoomNumberException();
+            } else {
+                throw new InvalidRoomNumberException();
+            }
         }
     }
 }
