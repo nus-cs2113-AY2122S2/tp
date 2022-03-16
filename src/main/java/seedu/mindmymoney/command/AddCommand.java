@@ -1,7 +1,7 @@
 package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.constants.PrintStrings;
-import seedu.mindmymoney.data.Lists;
+import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.helper.Functions;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
@@ -13,11 +13,11 @@ import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM_IN_STRING
  */
 public class AddCommand extends Command {
     private String addInput;
-    public Lists itemList;
+    public ExpenditureList expenditureList;
 
-    public AddCommand(String addInput, Lists listArray) {
+    public AddCommand(String addInput, ExpenditureList expenditureList) {
         this.addInput = addInput;
-        this.itemList = listArray;
+        this.expenditureList = expenditureList;
     }
 
     /**
@@ -29,7 +29,7 @@ public class AddCommand extends Command {
             String[] parseAddInput = Functions.parseInput(addInput);
             String description = parseAddInput[INDEX_OF_FIRST_ITEM_IN_STRING];
             int amount = Integer.parseInt(parseAddInput[INDEX_OF_SECOND_ITEM_IN_STRING]);
-            itemList.add(new Expenditure(description, amount));
+            expenditureList.add(new Expenditure(description, amount));
             System.out.println("Successfully added " + description + " of $" + amount + " into the account");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Did you forget to input DESCRIPTION or AMOUNT?");

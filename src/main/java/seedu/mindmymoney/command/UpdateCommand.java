@@ -1,7 +1,7 @@
 package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.constants.PrintStrings;
-import seedu.mindmymoney.data.Lists;
+import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
 import static seedu.mindmymoney.constants.Indexes.SPLIT_LIMIT;
@@ -14,11 +14,11 @@ import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM_IN_STRING
  */
 public class UpdateCommand extends Command {
     private final String updateInput;
-    public Lists itemList;
+    public ExpenditureList itemList;
 
-    public UpdateCommand(String updateInput, Lists listArray) {
+    public UpdateCommand(String updateInput, ExpenditureList expenditureList) {
         this.updateInput = updateInput;
-        this.itemList = listArray;
+        this.itemList = expenditureList;
     }
 
     /**

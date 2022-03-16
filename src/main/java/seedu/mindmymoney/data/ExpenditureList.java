@@ -5,17 +5,17 @@ import seedu.mindmymoney.userfinancial.Expenditure;
 import java.util.ArrayList;
 
 /**
- * Container for lists.
+ * Container for expenditure lists.
  */
-public class Lists {
-    public ArrayList<Expenditure> itemList;
+public class ExpenditureList {
+    public ArrayList<Expenditure> expenditureListArray;
 
-    public Lists() {
+    public ExpenditureList() {
         this(new ArrayList<>());
     }
 
-    public Lists(ArrayList<Expenditure> listArray) {
-        this.itemList = listArray;
+    public ExpenditureList(ArrayList<Expenditure> listArray) {
+        this.expenditureListArray = listArray;
     }
 
     /**
@@ -24,7 +24,7 @@ public class Lists {
      * @return true if list is empty, false otherwise
      */
     public boolean isEmpty() {
-        return itemList.isEmpty();
+        return expenditureListArray.isEmpty();
     }
 
     /**
@@ -33,7 +33,7 @@ public class Lists {
      * @return size of the task list.
      */
     public int size() {
-        return itemList.size();
+        return expenditureListArray.size();
     }
 
     /**
@@ -43,7 +43,7 @@ public class Lists {
      * @return The expenditure item.
      */
     public Expenditure get(int index) {
-        return itemList.get(index);
+        return expenditureListArray.get(index);
     }
 
     /**
@@ -52,7 +52,7 @@ public class Lists {
      * @param index Index of the item to delete.
      */
     public void delete(int index) {
-        itemList.remove(index);
+        expenditureListArray.remove(index);
     }
 
     /**
@@ -60,7 +60,7 @@ public class Lists {
      * @param item The expenditure item to be added.
      */
     public void add(Expenditure item) {
-        itemList.add(item);
+        expenditureListArray.add(item);
     }
 
     /**
@@ -69,6 +69,6 @@ public class Lists {
      * @param item  The expenditure item to be updated.
      */
     public void set(int index, Expenditure item) {
-        itemList.set(index,item);
+        expenditureListArray.set(index,item);
     }
 }

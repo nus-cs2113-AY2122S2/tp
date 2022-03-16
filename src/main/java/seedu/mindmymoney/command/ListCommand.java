@@ -2,20 +2,20 @@ package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.constants.PrintStrings;
-import seedu.mindmymoney.data.Lists;
+import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
 public class ListCommand extends Command {
-    public Lists itemListArray;
+    public ExpenditureList expenditureList;
 
-    public ListCommand(Lists listArray) {
-        this.itemListArray = listArray;
+    public ListCommand(ExpenditureList expenditureList) {
+        this.expenditureList = expenditureList;
     }
 
     public String listToString() {
         int indexOfList = 1;
         String listInString = "";
-        for (Expenditure i : itemListArray.itemList) {
+        for (Expenditure i : expenditureList.expenditureListArray) {
             listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription() + "\n";
             indexOfList++;
         }
@@ -27,7 +27,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void executeCommand() throws MindMyMoneyException {
-        if (itemListArray.size() == 0) {
+        if (expenditureList.size() == 0) {
             throw new MindMyMoneyException(
                     "Your list is currently empty! Please add some expenditures to your list first");
         } else {

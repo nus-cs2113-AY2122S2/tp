@@ -1,7 +1,7 @@
 package seedu.mindmymoney.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.mindmymoney.data.Lists;
+import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
 import java.util.ArrayList;
@@ -15,13 +15,13 @@ class AddCommandTest {
      */
     @Test
     void addCommand_oneInput_expectListUpdated() {
-        Lists itemList = new Lists();
+        ExpenditureList expenditureTestList = new ExpenditureList();
         String inputString = "expenditure 12345";
-        new AddCommand(inputString, itemList).executeCommand();
+        new AddCommand(inputString, expenditureTestList).executeCommand();
         ArrayList<Expenditure> testList = new ArrayList<>();
         testList.add(new Expenditure("expenditure", 12345));
         String expectedOutput = getOutput(testList);
-        String actualOutput = getOutput(itemList.itemList);
+        String actualOutput = getOutput(expenditureTestList.expenditureListArray);
         assertEquals(expectedOutput, actualOutput);
         testList.clear();
     }
@@ -31,12 +31,12 @@ class AddCommandTest {
      */
     @Test
     void addCommand_missingInput_expectOriginalList() {
-        Lists itemList = new Lists();
+        ExpenditureList expenditureTestList = new ExpenditureList();
         String inputString = "";
         ArrayList<Expenditure> testList = new ArrayList<>();
-        new AddCommand(inputString, itemList).executeCommand();
+        new AddCommand(inputString, expenditureTestList).executeCommand();
         String expectedOutput = getOutput(testList);
-        String actualOutput = getOutput(itemList.itemList);
+        String actualOutput = getOutput(expenditureTestList.expenditureListArray);
         assertEquals(expectedOutput, actualOutput);
     }
 
@@ -45,12 +45,12 @@ class AddCommandTest {
      */
     @Test
     void addCommand_nonIntAmount_expectOriginalList() {
-        Lists itemList = new Lists();
+        ExpenditureList expenditureTestList = new ExpenditureList();
         String inputString = "expenditure deadbeef";
         ArrayList<Expenditure> testList = new ArrayList<>();
-        new AddCommand(inputString, itemList).executeCommand();
+        new AddCommand(inputString, expenditureTestList).executeCommand();
         String expectedOutput = getOutput(testList);
-        String actualOutput = getOutput(itemList.itemList);
+        String actualOutput = getOutput(expenditureTestList.expenditureListArray);
         assertEquals(expectedOutput, actualOutput);
     }
 

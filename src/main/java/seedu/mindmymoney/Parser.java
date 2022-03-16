@@ -6,7 +6,7 @@ import seedu.mindmymoney.command.UpdateCommand;
 import seedu.mindmymoney.command.AddCommand;
 import seedu.mindmymoney.command.ListCommand;
 import seedu.mindmymoney.command.DeleteCommand;
-import seedu.mindmymoney.data.Lists;
+import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.helper.Functions;
 
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM_IN_STRING;
@@ -25,7 +25,7 @@ public class Parser {
      * @param itemList The list of expenditures.
      * @return Command object with respect to user's input.
      */
-    public static Command parseCommand(String input, Lists itemList) {
+    public static Command parseCommand(String input, ExpenditureList itemList) {
         try {
             String[] parsedInput = Functions.parseInput(input);
             switch (parsedInput[INDEX_OF_FIRST_ITEM_IN_STRING].toLowerCase()) {

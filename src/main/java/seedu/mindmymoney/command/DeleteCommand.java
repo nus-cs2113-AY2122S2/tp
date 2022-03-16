@@ -2,19 +2,28 @@ package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.constants.PrintStrings;
-import seedu.mindmymoney.data.Lists;
+import seedu.mindmymoney.data.ExpenditureList;
 
 /**
  * Represents the Delete command.
  */
 public class DeleteCommand extends Command {
     private String input;
-    public Lists itemList;
+    public ExpenditureList expenditureList;
 
 
-    public DeleteCommand(String input, Lists listArray) {
+    public DeleteCommand(String input, ExpenditureList expenditureList) {
         this.input = input;
-        this.itemList = listArray;
+        this.expenditureList = expenditureList;
+    }
+
+    /**
+     * Checks if the position to delete is within the bounds of the array length.
+     * @param positionToDelete position of index to delete.
+     * @return true if position is within the bounds, false otherwise.
+     */
+    public boolean checkOutOfBounds(int positionToDelete) {
+        return (positionToDelete + 1 <= 0 || positionToDelete + 1 > expenditureList.size());
     }
 
     /**
@@ -22,7 +31,7 @@ public class DeleteCommand extends Command {
      */
     public void executeCommand() throws MindMyMoneyException, NumberFormatException {
         try {
-            if (itemList.isEmpty()) {
+            if (expenditureList.isEmpty()) {
                 throw new MindMyMoneyException(PrintStrings.LINE + System.lineSeparator()
                         + "Please add something to the list first:)"
                         + System.lineSeparator() + PrintStrings.LINE);
@@ -34,14 +43,14 @@ public class DeleteCommand extends Command {
             }
             String getNumber = splitMessage[1];
             int positionToDelete = Integer.parseInt(getNumber) - 1;
-            if (positionToDelete + 1 <= 0 | positionToDelete + 1 > itemList.size()) {
+            if (checkOutOfBounds(positionToDelete)) {
                 throw new MindMyMoneyException("Please input a valid index");
             } else {
                 System.out.println(PrintStrings.LINE + "I have removed "
-                        + itemList.get(positionToDelete).getDescription()
-                        + " of $" + itemList.get(positionToDelete).getAmount()
+                        + expenditureList.get(positionToDelete).getDescription()
+                        + " of $" + expenditureList.get(positionToDelete).getAmount()
                         + " from the account" + System.lineSeparator() + PrintStrings.LINE);
-                itemList.delete(positionToDelete);
+                expenditureList.delete(positionToDelete);
 
             }
         } catch (NumberFormatException e) {

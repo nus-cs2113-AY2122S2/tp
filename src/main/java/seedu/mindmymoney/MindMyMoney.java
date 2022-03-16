@@ -1,7 +1,7 @@
 package seedu.mindmymoney;
 
 import seedu.mindmymoney.command.Command;
-import seedu.mindmymoney.data.Lists;
+import seedu.mindmymoney.data.ExpenditureList;
 
 /**
  * Represents the entry point of the MindMyMoney program. Initializes the program and starts interaction with the
@@ -9,11 +9,11 @@ import seedu.mindmymoney.data.Lists;
  */
 public class MindMyMoney {
     private final Ui ui;
-    private Lists itemList;
+    private ExpenditureList itemList;
 
     public MindMyMoney() {
         ui = new Ui();
-        itemList = new Lists();
+        itemList = new ExpenditureList();
     }
 
     public void run() {
@@ -22,8 +22,8 @@ public class MindMyMoney {
         while (true) {
             try {
                 String input = ui.readInput();
-                Command c = Parser.parseCommand(input, itemList);
-                c.executeCommand();
+                Command commandType = Parser.parseCommand(input, itemList);
+                commandType.executeCommand();
             } catch (MindMyMoneyException e) {
                 System.out.println(e.getMessage());
             }
