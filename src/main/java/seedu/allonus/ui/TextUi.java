@@ -5,7 +5,8 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
- * This class handles input interactions with the user. It comprises mainly of a method that reads command line use input.
+ * Handles input interactions with the user. It comprises mainly of a method that
+ * reads command line use input.
  */
 public class TextUi {
     private final Scanner in;
@@ -19,7 +20,7 @@ public class TextUi {
     }
 
     /**
-     * This method returns a string containing user input from the command line.
+     * Returns a string containing user input from the command line.
      *
      * @return string containing user input.
      * @see IllegalStateException

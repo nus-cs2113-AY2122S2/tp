@@ -11,14 +11,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This class runs the main menu functionality of the AllOnUs application and is also where the main method is located.
+ * Runs the main menu functionality of the AllOnUs application and is also where the main method is located.
  */
 public class AllOnUs {
     private TextUi ui;
     private static Logger logger = Logger.getLogger("MenuLog");
 
     /**
-     * This method displays the greeting message of this program.
+     * Displays the greeting message of this program.
      *
      * @return Nothing.
      */
@@ -28,7 +28,7 @@ public class AllOnUs {
     }
 
     /**
-     * This method carries out termination of the program.
+     * Carries out termination of the program.
      */
     private void exit() {
         System.out.println("Goodbye! Hope to see you again...");
@@ -37,7 +37,7 @@ public class AllOnUs {
     }
 
     /**
-     * This method checks whether <code>userInput</code> is a "goto m/Contacts_Manager" command or not.
+     * Checks whether <code>userInput</code> is a "goto m/Contacts_Manager" command or not.
      *
      * @param userInput String containing user input.
      * @return <code>true</code> if is a "goto m/Contacts_Manager" command else <code>false</code>.
@@ -47,7 +47,7 @@ public class AllOnUs {
     }
 
     /**
-     * This method checks whether <code>userInput</code> is a "goto m/Study_Manager" command or not.
+     * Checks whether <code>userInput</code> is a "goto m/Study_Manager" command or not.
      *
      * @param userInput String containing user input.
      * @return <code>true</code> if is a "goto m/Study_Manager" command else <code>false</code>.
@@ -57,7 +57,7 @@ public class AllOnUs {
     }
 
     /**
-     * This method checks whether <code>userInput</code> is a "goto m/Expense_Tracker" command or not.
+     * Checks whether <code>userInput</code> is a "goto m/Expense_Tracker" command or not.
      *
      * @param userInput String containing user input.
      * @return <code>true</code> if is a "goto m/Expense_Tracker" command else <code>false</code>.
@@ -67,7 +67,7 @@ public class AllOnUs {
     }
 
     /**
-     * This method checks whether <code>userInput</code> is an "exit" command or not.
+     * Checks whether <code>userInput</code> is an "exit" command or not.
      *
      * @param userInput String containing user input.
      * @return <code>true</code> if is an "exit" command else <code>false</code>.
@@ -77,7 +77,7 @@ public class AllOnUs {
     }
 
     /**
-     * This method checks whether <code>userInput</code> is empty or not.
+     * Checks whether <code>userInput</code> is empty or not.
      *
      * @param userInput String containing user input.
      * @return <code>true</code> if length of string <code>userInput</code> is not 0 else <code>false</code>.
@@ -87,7 +87,7 @@ public class AllOnUs {
     }
 
     /**
-     * This method checks whether <code>userInput</code> is a "help" command or not.
+     * Checks whether <code>userInput</code> is a "help" command or not.
      *
      * @param userInput String containing user input.
      * @return <code>true</code> if is a "help" command else <code>false</code>.
@@ -102,7 +102,7 @@ public class AllOnUs {
     }
 
     /**
-     * This method prints a help message that can guide the user.
+     * Prints a help message that can guide the user.
      *
      * @return Nothing.
      */
@@ -120,7 +120,7 @@ public class AllOnUs {
     }
 
     /**
-     * This method runs the functionality of the main menu of the program.
+     * Runs the functionality of the main menu of the program.
      *
      * @return Nothing.
      * @see IllegalStateException
@@ -137,10 +137,12 @@ public class AllOnUs {
             try {
                 userInput = ui.getUserInput();
             } catch (NoSuchElementException e) {
-                logger.log(Level.WARNING, "NoSuchElementException triggered when scanning for user input. This should not happen. Investigation required.");
+                logger.log(Level.WARNING, "NoSuchElementException triggered when scanning for user input. "
+                        + "This should not happen. Investigation required.");
                 continue;
             } catch (IllegalStateException e) {
-                logger.log(Level.WARNING, "IllegalStateException triggered when scanning for user input. Scanner object on input stream should not be closed. Investigation required.");
+                logger.log(Level.WARNING, "IllegalStateException triggered when scanning for user input. "
+                        + "Scanner object on input stream should not be closed. Investigation required.");
                 continue;
             }
 
@@ -179,7 +181,7 @@ public class AllOnUs {
     }
 
     /**
-     * This method prints a guiding message that addresses an invalid user command.
+     * Prints a guiding message that addresses an invalid user command.
      *
      * @return Nothing.
      */
@@ -189,7 +191,7 @@ public class AllOnUs {
     }
 
     /**
-     * This method prints a message that represents what the users will read upon return to menu.
+     * Prints a message that represents what the users will read upon return to menu.
      *
      * @return Nothing.
      */
