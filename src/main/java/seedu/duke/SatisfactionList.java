@@ -27,5 +27,9 @@ public class SatisfactionList {
         this.satisfactionList = satisfactionList;
     }
 
+    public int getSize() {
+        return satisfactionList.size();
+    }
+
 
 }

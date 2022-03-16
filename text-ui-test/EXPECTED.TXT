@@ -35,4 +35,10 @@ Error! Invalid Command -> Availability NAME @ M,T,W,T,F,S,S
 2. [ Tom ]: 33, T
 3. [ sally ]: 17, <Enter Availability>
 ======== End of the list ========
+The pax of Toilet Roll has been updated to 5.
+Error! Item Pax is invalid.
+Error! Item Pax cannot be empty.
+Error! Item Name cannot be empty.
+Error! Invalid Command.
+Error! Item not found in inventory. Kindly add the item into the inventory first.
 see u again!
