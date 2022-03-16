@@ -24,9 +24,8 @@ public class AssignmentMap {
                         throw new InvalidHousekeeperProfile();
                     }
                 }
-            } else {
-                throw new InvalidRoomNumberException();
             }
         }
+        throw new InvalidRoomNumberException();
     }
 }
