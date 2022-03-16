@@ -46,6 +46,9 @@ public class Parser {
     private static final String LOG_PARSED_VALUES = "User Input '%s' parsed out as '%s'";
     private static final String LOG_VALID_MONEY = "Converted the string '%s' into '%.2f'";
     private static final String LOG_INVALID_MONEY = "Invalid money of '%s' caught";
+    private static final String LOG_VALID_INDEX = "Valid index '%d' being returned";
+    private static final String LOG_INVALID_INDEX = "Invalid index of '%s' caught";
+
 
     /**
      * Returns the term surrounded by two delimiters.
@@ -217,8 +220,10 @@ public class Parser {
             int checkIndex = Integer.parseInt(userIndex);
             checkTooHighIndex(checkIndex, personList.getNumberOfMembers());
             checkTooLowIndex(checkIndex, MIN_USER_INDEX);
+            logger.getLogger().log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            logger.getLogger().log(Level.WARNING, String.format(LOG_INVALID_INDEX, userIndex));
             throw new InvalidIndexException(userIndex);
         }
     }
@@ -237,8 +242,10 @@ public class Parser {
             int checkIndex = Integer.parseInt(expenditureIndex);
             checkTooHighIndex(checkIndex, person.getNumberOfExpenditures());
             checkTooLowIndex(checkIndex, MIN_EXPENDITURE_INDEX);
+            logger.getLogger().log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            logger.getLogger().log(Level.WARNING, String.format(LOG_INVALID_INDEX, expenditureIndex));
             throw new InvalidIndexException(expenditureIndex);
         }
     }
@@ -257,8 +264,10 @@ public class Parser {
             int checkIndex = Integer.parseInt(incomeIndex);
             checkTooHighIndex(checkIndex, person.getNumberOfIncomes());
             checkTooLowIndex(checkIndex, MIN_INCOME_INDEX);
+            logger.getLogger().log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            logger.getLogger().log(Level.WARNING, String.format(LOG_INVALID_INDEX, incomeIndex));
             throw new InvalidIndexException(incomeIndex);
         }
     }
