@@ -7,6 +7,7 @@ import java.util.Scanner;
  * The Ui object handles all interactions with the user such as printing the outputs to the user
  * as well as reading in the user inputs .
  */
+
 public class Ui {
     private Scanner in;
     private static final int ARRAY_INDEX_OFFSET = 1;
@@ -57,5 +58,12 @@ public class Ui {
             currentListIndex = i + ARRAY_INDEX_OFFSET;
             System.out.printf("%d. Item Name: %s Item Pax: %d\n", currentListIndex, itemName, itemPax);
         }
+    }
+
+    public void printAddSatisfactionAcknowledgementMessage(SatisfactionList satisfactionList,
+                                                           Satisfaction recentSatisfaction) {
+        System.out.println("The Satisfaction instance " + recentSatisfaction.getCustomerName() + ": "
+                + recentSatisfaction.getSatisfactionValue() + " has been added to the list of Satisfactions.");
+        System.out.printf("There are currently %d items within the inventory.\n", satisfactionList.getSize());
     }
 }
