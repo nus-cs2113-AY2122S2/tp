@@ -7,7 +7,7 @@ public class Person {
     protected String name;
     protected IncomeList incomeList;
     protected ExpenditureList expenditureList;
-    private static int SINGULAR = 1;
+    protected static int SINGULAR = 1;
 
     /**
      * Constructs a new Person object.
