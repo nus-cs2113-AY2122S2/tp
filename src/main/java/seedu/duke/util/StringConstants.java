@@ -9,9 +9,9 @@ public class StringConstants {
     public static final String GOOD_BYE_MESSAGE = "See you later ヾ(*´▽'*)ﾉ";
     public static final String INITIAL_FAILED_MESSAGE = "Failed to start Mod Happy (..•˘_˘•..)";
 
-    /**
-     * .
-     * For addCommand
+
+    /**.
+     * For AddComman
      */
     public static final String ADD_TASK_MESSAGE_TOP = "Hey! I have added this task under %s!";
     public static final String ADD_TASK_MESSAGE_BOTTOM = "Now you have %d task(s) in your list!";
@@ -19,28 +19,25 @@ public class StringConstants {
     public static final String MODULE_ALREADY_EXISTS = "A module with that name already exists...";
     public static final String ESTIMATED_WORKING_TIME = "Estimated Working Time: ";
 
-    /**
-     * .
-     * For deleteCommand
+
+    /**.
+     * For DeleteCommand
      */
     public static final String DELETE_MESSAGE = " has been deleted.";
 
-    /**
-     * .
-     * For exitCommand
+    /**.
+     * For ExitCommand
      */
     public static final String READY_EXIT = "I am ready to exit *_*";
 
-    /**
-     * .
-     * For listCommand
+    /**.
+     * For ListCommand
      */
     public static final String LIST_MESSAGE_TOP = "Ok! Here are the task(s) in your list:";
     public static final String EMPTY_LIST = "(empty)";
 
-    /**
-     * .
-     * For markCommand
+    /**.
+     * For MarkCommand
      */
     public static final String MARK_MESSAGE_TOP = "Nice! I have marked this task as completed!";
     public static final String UNMARK_MESSAGE_TOP = "Ok! I have marked this task for you as uncompleted!";
@@ -86,6 +83,13 @@ public class StringConstants {
 
     /**
      * .
+     * For SaveCommand
+     */
+    public static final String TASK_PATH = "data/task.json";
+    public static final String MODULE_PATH = "data/module.json";
+    public static final String SAVED_SUCCESSFULLY = "Ok! Already saved the modification for you";
+
+    /**.
      * For command result
      */
     public static final String ARRAYLIST_RESULT = "ArrayList";
@@ -100,6 +104,9 @@ public class StringConstants {
     public static final String ERROR_PARSE_FAILED = "This parse failed 0_0";
     public static final String ERROR_UNKNOWN_COMMAND = "Sorry, I don't understand the following command:";
     public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, I don't understand the result format:";
+    public static final String ERROR_WRITE_STREAM_BROKEN = "Sorry, The write steam is broken";
+    public static final String ERROR_READ_STREAM_BROKEN = "Sorry, The read steam is broken";
+    public static final String ERROR_FILE_CREATE_FAIL = "Sorry, Failed to create the file";
 
     /**
      * .
@@ -126,6 +133,7 @@ public class StringConstants {
     public static final String MARK_COMMAND_WORD = "mark";
     public static final String RESET_COMMAND_WORD = "reset";
     public static final String HELP_COMMAND_WORD = "help";
+    public static final String SAVE_COMMAND_WORD = "save";
 
     /**
      * .
