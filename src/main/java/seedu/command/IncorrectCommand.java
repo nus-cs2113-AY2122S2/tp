@@ -17,4 +17,8 @@ public class IncorrectCommand extends Command {
         return new CommandResult(feedbackToUser);
     }
 
+    public boolean equals(IncorrectCommand other) {
+        return feedbackToUser.equals(other.feedbackToUser);
+    }
+
 }
