@@ -43,11 +43,15 @@ public class Parser {
     private static final String ASSERT_EXPENDITURE_INDEX_NOT_NULL = "Expenditure index should not be null";
     private static final String ASSERT_INCOME_INDEX_NOT_NULL = "Income index should not be null";
 
-    private static final String LOG_PARSED_VALUES = "User Input '%s' parsed out as '%s'";
+    private static final String LOG_PARSED_VALUES = "User input '%s' parsed out as '%s'";
     private static final String LOG_VALID_MONEY = "Converted the string '%s' into '%.2f'";
     private static final String LOG_INVALID_MONEY = "Invalid money of '%s' caught";
     private static final String LOG_VALID_INDEX = "Valid index '%d' being returned";
     private static final String LOG_INVALID_INDEX = "Invalid index of '%s' caught";
+    private static final String LOG_INDEX_TOO_LOW = "Input index '%d' is less than the minimum index of '%d'";
+    private static final String LOG_INDEX_TOO_HIGH = "Input index '%d' is more than the maximum index of '%d'";
+    private static final String LOG_CHECK_INDEX_BOUNDS = "Checking index '%d' for bounds violation";
+    private static final String LOG_MISSING_DELIMITER = "User input '%s' is missing delimiter '%s'";
 
 
     /**
@@ -280,7 +284,9 @@ public class Parser {
      * @throws IndexOutOfBoundsException if provided index is less than indicated minimum.
      */
     private static void checkTooLowIndex(int checkIndex, int minIndex) throws IndexOutOfBoundsException {
+        logger.getLogger().log(Level.INFO, String.format(LOG_CHECK_INDEX_BOUNDS, checkIndex));
         if (checkIndex < minIndex) {
+            logger.getLogger().log(Level.WARNING, String.format(LOG_INDEX_TOO_LOW, checkIndex, minIndex));
             throw new IndexOutOfBoundsException();
         }
     }
@@ -293,7 +299,9 @@ public class Parser {
      * @throws IndexOutOfBoundsException if provided index is more than indicated maximum.
      */
     private static void checkTooHighIndex(int checkIndex, int maxIndex) throws IndexOutOfBoundsException {
+        logger.getLogger().log(Level.INFO, String.format(LOG_CHECK_INDEX_BOUNDS, checkIndex));
         if (checkIndex > maxIndex) {
+            logger.getLogger().log(Level.WARNING, String.format(LOG_INDEX_TOO_HIGH, checkIndex, maxIndex));
             throw new IndexOutOfBoundsException();
         }
     }
@@ -307,6 +315,7 @@ public class Parser {
      */
     private static void checkContainsDelimiter(String userInput, String delimiter) throws MissingDelimiterException {
         if (!userInput.contains(delimiter)) {
+            logger.getLogger().log(Level.WARNING, String.format(LOG_MISSING_DELIMITER, userInput, delimiter));
             throw new MissingDelimiterException(delimiter);
         }
     }
