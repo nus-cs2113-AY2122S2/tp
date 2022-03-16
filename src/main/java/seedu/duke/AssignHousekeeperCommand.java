@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.util.logging.*;
+
 /**
  * Identifies the name of the housekeeper and assign to room id
  * housekeeper list.
@@ -9,6 +11,7 @@ public class AssignHousekeeperCommand extends Command {
     private String roomID;
     private static final String ASSIGNMENT_INDICATE = "##";
     private static final int ONLY_ONE_FIELD_ENTERED = 1;
+    private static Logger logger = Logger.getLogger("Assign Housekeeper");
 
     public AssignHousekeeperCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
         if (commandStringWithoutCommand.isEmpty()) {
@@ -23,6 +26,7 @@ public class AssignHousekeeperCommand extends Command {
         if (id.isEmpty()) {
             throw new InvalidAvailabilityException();
         }
+        logger.log(Level.INFO, "Assign Command parsed");
         setName(name);
         setRoomID(id);
     }
@@ -80,5 +84,6 @@ public class AssignHousekeeperCommand extends Command {
         String name = getName();
         ui.printMessage("Assigned " + name + " to room#" + roomID + ".");
         assignmentMap.addAssignment(name, roomID, housekeeperList, roomList);
+        logger.log(Level.INFO, "end of processing");
     }
 }
