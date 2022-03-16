@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private ArrayList<Dish> dishes = null;
+    private List<Dish> dishes;
 
     public <T> Order(List<T> asList) {
 
     }
 
     public Order() {
-        this.dishes = new ArrayList<>();
     }
 
     public void addDishToOrder(Dish dish) {
