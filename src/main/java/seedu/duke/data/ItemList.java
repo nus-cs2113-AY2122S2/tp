@@ -1,6 +1,6 @@
 package seedu.duke.data;
 
-import seedu.duke.data.Item;
+import seedu.duke.exceptions.InvMgrException;
 
 import java.util.ArrayList;
 
