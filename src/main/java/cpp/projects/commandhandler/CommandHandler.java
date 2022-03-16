@@ -62,12 +62,36 @@ public class CommandHandler {
 
     }
 
-    private void addProject(ProjectList projectList, String[] commands) {
-        projectList.addProject(commands[1]);
+    private void addProject(ProjectList projectList, String[] commands) throws IllegalCommandException {
+        if (commands.length < Constants.TWO_ARGUMENTS) {
+            throw new IllegalCommandException(Constants.MESSAGE_INVALID_ADDPROJECT_COMMAND_FORMAT);
+        }
+
+        String projectName = "";
+
+        for (int i = 1; i < commands.length; i++) {
+            if (i != 1) {
+                projectName += " ";
+            }
+            projectName += commands[i];
+        }
+        projectList.addProject(projectName);
     }
 
-    private void deleteProject(ProjectList projectList, String[] commands) {
-        projectList.deleteProject(commands[1]);
+    private void deleteProject(ProjectList projectList, String[] commands) throws IllegalCommandException {
+        if (commands.length < Constants.TWO_ARGUMENTS) {
+            throw new IllegalCommandException(Constants.MESSAGE_INVALID_DELETEPROJECT_COMMAND_FORMAT);
+        }
+
+        String projectName = "";
+
+        for (int i = 1; i < commands.length; i++) {
+            if (i != 1) {
+                projectName += " ";
+            }
+            projectName += commands[i];
+        }
+        projectList.deleteProject(projectName);
     }
 
     private void listProjects(ProjectList projectList) {
