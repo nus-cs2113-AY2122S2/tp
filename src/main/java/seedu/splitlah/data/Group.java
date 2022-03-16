@@ -54,4 +54,13 @@ public class Group {
             throw new InvalidDataException(Message.ERROR_GROUP_PERSON_NOT_IN_LIST);
         }
     }
+
+    public String getGroupSummary() {
+        return "";
+    }
+
+    @Override
+    public String toString() {
+        return "";
+    }
 }
