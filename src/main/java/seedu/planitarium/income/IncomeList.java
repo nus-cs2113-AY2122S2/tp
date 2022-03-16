@@ -60,6 +60,10 @@ public class IncomeList {
         return incomeArrayList.get(index - 1).getDescription();
     }
 
+    /**
+     * Returns the number of income in the person's income list.
+     * @return The number of income
+     */
     public int getNumberOfIncomes() {
         return numberOfIncomes;
     }
