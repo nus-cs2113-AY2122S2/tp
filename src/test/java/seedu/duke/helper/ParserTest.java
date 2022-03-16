@@ -5,8 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 
-import javax.swing.text.html.parser.Parser;
 import java.util.logging.Logger;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ParserTest {
 
@@ -30,8 +31,6 @@ class ParserTest {
     void parseAddMedicineTest() {
         String userInput = "paracetamol,500,2023-02-02,Headaches,500";
         String[] userInputArray = {"paracetamol", "500", "2023-02-02", "Headaches", "500"};
-        assertArrayEquals(userInputArray, Parser.parseAddMedicine(userInput));
+        assertEquals(userInputArray, Parser.parseAddMedicine(userInput));
     }
-
-
 }
