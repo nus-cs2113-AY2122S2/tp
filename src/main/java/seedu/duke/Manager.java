@@ -21,6 +21,7 @@ public class Manager {
     public void runLoop() {
         ui.printGreeting();
         while (!isTerminated) {
+            ui.printPrompt();
             String commandWord = ui.readCommand();;
             String parameters = ui.readParameters();
             switch (commandWord) {
