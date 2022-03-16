@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
 import seedu.duke.helper.Command;
+import seedu.duke.helper.Storage;
 import seedu.duke.helper.UI;
 
 /**
@@ -11,9 +12,8 @@ import seedu.duke.helper.UI;
 public class Manager {
     UI ui = new UI();
     Command command = new Command();
-    PatientList patientList = new PatientList();
-    private MedicineList medicineList = new MedicineList();
     private boolean isTerminated = false;
+    private Storage storage = new Storage();
 
     /**
      * Main application loop that holds switch case statement.
@@ -25,10 +25,10 @@ public class Manager {
             String parameters = ui.readParameters();
             switch (commandWord) {
             case "add patient":
-                command.addPatient(patientList, parameters);
+                command.addPatient(storage.patients, parameters);
                 break;
             case "delete patient":
-                command.deletePatient(patientList, parameters);
+                command.deletePatient(storage.patients, parameters);
                 break;
             case "view patient":
                 break;
@@ -39,10 +39,10 @@ public class Manager {
             case "view doctor":
                 break;
             case "add medicine":
-                command.addMedicine(medicineList, parameters);
+                command.addMedicine(storage.medicines, parameters);
                 break;
             case "delete medicine":
-                command.deleteMedicine(medicineList, parameters);
+                command.deleteMedicine(storage.medicines, parameters);
                 break;
             case "view medicine":
                 break;
@@ -51,6 +51,7 @@ public class Manager {
                 break;
             case "bye":
                 isTerminated = true;
+                storage.saveData();
                 ui.printBye();
                 break;
             default:
