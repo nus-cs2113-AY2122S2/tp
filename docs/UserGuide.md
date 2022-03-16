@@ -21,7 +21,7 @@ Note:<br>
 Compulsory flags start with "/". <br>
 Optional flags start with "-". <br>
 Compulsory parameters are fully capitalised. E.g. MODULE_CODE <br>
-Optional parameters are in square brackets. E.g. [-m "MODULE_DESCRIPTION"]
+Optional parameters are in square brackets. E.g. [-m "MODULE_DESCRIPTION"] <br>
 All parameters except MODULE_CODE are surrounded by double quotation marks. E.g. "PARAMETER"
 
 ### Accessing Help: `help`
@@ -34,7 +34,7 @@ A module can have its description while a task can have its description and/or i
 - Add a module <br><br>
   Format: `add /m MODULE_CODE [-d "MODULE_DESCRIPTION"]`<br><br>
   Example to add a module: `add /m CS2113T -d "Software Engineering"`<br><br>
-  Note: The module code should not have any spaces or special characters.<br><br>
+  Note: The module code cannot have any spaces or special characters.<br><br>
 - Add a task <br><br>
   Format: `add /t "TASK_NAME" [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”] [-m MODULE_CODE]`<br><br>
   Example to add a general task without any parameters: `add /t "Review PR"`<br>
@@ -85,15 +85,13 @@ Mark a task as completed or uncompleted with the given task number from the spec
 
 ### Listing all tasks/modules: `list`
 
-Displays a list of all tasks, some of which are grouped by module code while the rest fall under "general tasks" list.
-
+Displays a list of all tasks, some of which are grouped by module code while the rest fall under "general tasks" list.<br><br>
 Format: `list`
 
-Example: `list`
 
 ### Clearing the list: `reset`
 
-Removes all tasks and modules. <br>
+Removes all tasks and modules. <br><br>
 Format: `reset`
 
 ## FAQ
