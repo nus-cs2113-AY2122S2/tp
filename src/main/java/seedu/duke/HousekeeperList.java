@@ -27,7 +27,7 @@ public class HousekeeperList {
     /**
      * Method checks if Housekeeper name is current in records.
      *
-     * @param name The name of the housekeeper
+     * @param name The name of the housekeeper.
      * @return false If name is not in records and true if name is in records.
      */
     public boolean hasNameAdded(String name) {

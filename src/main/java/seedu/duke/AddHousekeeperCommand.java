@@ -29,7 +29,7 @@ public class AddHousekeeperCommand extends Command {
      *
      * @param commandStringWithoutCommand Input given by user.
      * @return housekeeper profile.
-     * @throws InvalidAgeException       Age enter is invalid/
+     * @throws InvalidAgeException       Age enter is invalid.
      * @throws InvalidHousekeeperProfile Command enter regarding the housekeeper profile is wrong.
      */
     private Housekeeper extractDetails(String commandStringWithoutCommand)

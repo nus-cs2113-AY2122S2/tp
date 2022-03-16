@@ -1,7 +1,7 @@
 package seedu.duke;
 
 /**
- * Records the age, name and availability of each Housekeeper
+ * Records the age, name and availability of each Housekeeper.
  */
 public class Housekeeper {
     private String name;
