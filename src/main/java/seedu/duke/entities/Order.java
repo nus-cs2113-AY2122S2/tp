@@ -4,11 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private final ArrayList<Dish> dishes;
-
-    Order() {
-        this.dishes = new ArrayList<Dish>();
-    }
+    private final ArrayList<Dish> dishes = null;
 
     public <T> Order(List<T> asList) {
     }
