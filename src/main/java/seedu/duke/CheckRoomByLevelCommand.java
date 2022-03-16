@@ -9,6 +9,17 @@ public class CheckRoomByLevelCommand extends Command {
     }
 
     @Override
+    /**
+     * Override of execute command in Command class.
+     * Print out all room information with corresponding level
+     * including the information of:
+     * type, room number, level and status.
+     * @param satisfactionList The given list of Satisfaction objects.
+     * @param roomList The given list of Room objects.
+     * @param itemList The given list of Item objects.
+     * @param ui The user interface for this execution method.
+     * @throws InvalidLevelException if the level is invalid.
+     */
     public void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList itemList, Ui ui)
             throws InvalidLevelException {
         boolean isValidLevel = false;

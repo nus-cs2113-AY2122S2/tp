@@ -10,6 +10,15 @@ public class CheckAllRoomCommand extends Command {
     }
 
     @Override
+    /**
+     * Override of execute command in Command class.
+     * Print out all room information including:
+     * type, room number, level and status.
+     * @param satisfactionList The given list of Satisfaction objects.
+     * @param roomList The given list of Room objects.
+     * @param itemList The given list of Item objects.
+     * @param ui The user interface for this execution method.
+     */
     public void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList itemList, Ui ui) {
         this.roomList = new RoomList();
         System.out.println(TABLE_HEAD);

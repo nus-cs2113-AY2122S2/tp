@@ -5,6 +5,17 @@ public class CheckOutCommand extends Command {
     int roomId;
 
     @Override
+    /**
+     * Override of execute command in Command class.
+     * Check out room with corresponding room number.
+     * The room status will be changed to vacant
+     * After check in, it will print out corresponding room information.
+     * @param satisfactionList The given list of Satisfaction objects.
+     * @param roomList The given list of Room objects.
+     * @param itemList The given list of Item objects.
+     * @param ui The user interface for this execution method.
+     * @throws InvalidRoomNumberException if the room number is not in the room list.
+     */
     public void execute(SatisfactionList satisfactionList, RoomList list, ItemList itemList, Ui ui)
             throws InvalidRoomNumberException {
         this.roomList = list;
