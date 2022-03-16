@@ -32,7 +32,7 @@ public class Ui {
         System.out.println(System.lineSeparator());
         System.out.println(logo);
         int randomIndex = rand.nextInt(48);
-        System.out.println("<< " + tips[randomIndex] + " >>" + System.lineSeparator());
+        System.out.println(tips[randomIndex] + System.lineSeparator());
         System.out.println("Welcome to MindMyMoney");
         System.out.println("What can I do for you?" + System.lineSeparator());
     }
