@@ -24,6 +24,10 @@ public class Income {
         return amount;
     }
 
+    /**
+     * Returns the description of the income object.
+     * @return The description of income
+     */
     public String getDescription() {
         return description;
     }
