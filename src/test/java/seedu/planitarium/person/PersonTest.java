@@ -31,4 +31,15 @@ class PersonTest {
             assertNull(e.getMessage());
         }
     }
+
+    @Test
+    public void addExpend_invalidDescription_assertionError() {
+        Person person = new Person(VALID_NAME);
+        try {
+            person.addExpend(null, VALID_AMOUNT);
+            fail();
+        } catch (AssertionError e) {
+            assertNull(e.getMessage());
+        }
+    }
 }
