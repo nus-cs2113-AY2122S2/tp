@@ -94,7 +94,7 @@ public class DishController extends Controller {
 
     private void deleteDish() throws OperationTerminationException {
         MainLogger.logInfo(this, "User is deleting dish");
-        System.out.println("Deleting dish");
+        System.out.println("Deleting dish...");
         int index = InputParser.getInteger("The index of dish");
         try {
             dishManager.deleteDish(index);
