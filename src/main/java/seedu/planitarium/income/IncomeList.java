@@ -68,6 +68,10 @@ public class IncomeList {
         return numberOfIncomes;
     }
 
+    /**
+     * Returns the total income amount in the person's list.
+     * @return The total amount of all income in the list
+     */
     public double getTotalIncome() {
         double totalAmount = 0;
         for (Income item : incomeArrayList) {
