@@ -46,7 +46,7 @@ public class Message {
             + "trying to processing the system.\n"
             + "Please reboot and execute the application again.";
     public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_1 = "Oops! It seems that your saved file "
-            + "was corrupted.";
+            + "is corrupted.";
     public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_2 = "Would you like to start with a new save "
             + "file? (Y/N):";
     public static final String ERROR_CORRUPT_SAVED_FILE_MESSAGE_3 = "We're sorry this happened. "
@@ -55,4 +55,6 @@ public class Message {
     public static final String ERROR_INVALID_MARKING_INDEX_MESSAGE = "Bzzt!\nPlease"
             + " key in a valid task number to mark/unmark your task."
             + HELP_MESSAGE_SPECIFIC_COMMAND;
+    public static final String ERROR_DUPLICATE_TASK_MESSAGE_1 = "Skipping task \"";
+    public static final String ERROR_DUPLICATE_TASK_MESSAGE_2 = "\" as it already exists!";
 }
