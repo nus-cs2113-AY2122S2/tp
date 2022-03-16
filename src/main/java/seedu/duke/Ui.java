@@ -58,4 +58,12 @@ public class Ui {
             System.out.printf("%d. Item Name: %s Item Pax: %d\n", currentListIndex, itemName, itemPax);
         }
     }
+
+    public void printHousekeeperList(HousekeeperList housekeeperList) {
+        printMessage("======== Housekeeper List ========");
+        for (int i = 0; i < housekeeperList.getTotalHousekeeper(); i++) {
+            System.out.println((i + 1) + ". " + housekeeperList.getHousekeeper(i));
+        }
+        System.out.println("======== End of the list ========");
+    }
 }
