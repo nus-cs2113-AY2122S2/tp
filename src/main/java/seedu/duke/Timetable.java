@@ -65,17 +65,8 @@ public class Timetable {
      */
     private boolean isOverlap(Event newEvent) {
         for (int i = 0; i < list.size(); i++) {
-            Event existingEvent = list.get(i);
-            if (!existingEvent.day.equals(newEvent.day)) {
-                continue;
-            }
-            boolean startTimeOverlap = newEvent.startTime >= existingEvent.startTime
-                    && newEvent.startTime < existingEvent.endTime;
-            boolean endTimeOverlap = newEvent.endTime > existingEvent.startTime
-                    && newEvent.endTime <= existingEvent.endTime;
-            boolean totalOverlap = newEvent.startTime <= existingEvent.startTime
-                    && newEvent.endTime >= existingEvent.endTime;
-            if (startTimeOverlap || endTimeOverlap || totalOverlap) {
+            Event event = list.get(i);
+            if (event.overlaps(newEvent)) {
                 return true;
             }
         }
