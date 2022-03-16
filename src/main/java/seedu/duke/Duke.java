@@ -1,6 +1,13 @@
 package seedu.duke;
 
-import tp.*;
+import tp.DoctorList;
+import tp.Parser;
+import tp.PatientList;
+import tp.Ui;
+import tp.AppointmentList;
+import tp.Storage;
+import tp.IHospitalException;
+import tp.Command;
 import tp.person.Patient;
 
 import java.util.Scanner;
@@ -15,10 +22,11 @@ public class Duke {
     private static DoctorList doctorList = new DoctorList();
     private static AppointmentList appointmentList = new AppointmentList();
     private static Storage storage = new Storage();
+
     public static void main(String[] args) throws IHospitalException {
         ui.sayHello();
         String fullCommand = parser.getCommand();
-        while(!fullCommand.equals("bye")) {
+        while (!fullCommand.equals("bye")) {
             Command command = parser.parse(fullCommand);
             command.execute(doctorList, patientList, appointmentList, ui, storage);
             fullCommand = parser.getCommand();

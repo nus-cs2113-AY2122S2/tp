@@ -7,7 +7,8 @@ public class ExitCommand extends Command {
 
 
     @Override
-    public void execute(DoctorList doctorList, PatientList patientList, AppointmentList appointmentList, Ui ui, Storage storage) throws IHospitalException {
-        return ;
+    public void execute(DoctorList doctorList, PatientList patientList,
+                        AppointmentList appointmentList, Ui ui, Storage storage) throws IHospitalException {
+        return;
     }
 }
