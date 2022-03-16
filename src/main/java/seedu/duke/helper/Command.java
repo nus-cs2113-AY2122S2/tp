@@ -133,7 +133,7 @@ public class Command {
         try {
             int index = Integer.parseInt(stringIndex);
             if (index < 1 || index > medicineList.size()) {
-                System.out.println("Number is not within range of 1 - " + medicineList.size());
+                System.out.println("Number is not within range.");
                 return;
             }
             medicineList.delete(index);

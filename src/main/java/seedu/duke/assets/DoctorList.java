@@ -37,7 +37,7 @@ public class DoctorList {
 
     //view all doctor
     public void viewDoctor() {
-        System.out.println(doctors);
+        System.out.println(this);
     }
 
     //get the number of doctors
