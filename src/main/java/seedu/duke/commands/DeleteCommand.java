@@ -10,6 +10,12 @@ import seedu.duke.ui.Ui;
  * Deletes an item identified using it's displayed index from the item list.
  */
 public class DeleteCommand extends Command {
+    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_NAME = "Delete Item";
+    public static final String USAGE_MESSAGE = "Deletes an item from the inventory list";
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " [item number]";
+    public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + ":\n"
+            + "[Command Format] " + COMMAND_FORMAT + "\n";
     private final int index;
 
     /**

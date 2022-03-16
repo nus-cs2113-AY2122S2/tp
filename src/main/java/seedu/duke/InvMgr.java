@@ -21,7 +21,7 @@ public class InvMgr {
             storage = new Storage(filePath);
             itemList = new ItemList(storage.loadData());
         } catch (InvMgrException e) {
-            ui.showError(e);
+            ui.showMessages("Error!");
             itemList = new ItemList(new ArrayList<Item>());
         }
     }
