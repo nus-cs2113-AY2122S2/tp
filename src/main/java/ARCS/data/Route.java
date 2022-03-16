@@ -1,7 +1,7 @@
 package ARCS.data;
 
 public class Route {
-    private int flightID;
+    private String flightID;
     private String date;
     private String time;
     private String from;
@@ -9,7 +9,7 @@ public class Route {
     private int capacity;
     private int sold;
 
-    public Route(int flightID, String date, String time, String from, String to, int capacity) {
+    public Route(String flightID, String date, String time, String from, String to, int capacity) {
         this.flightID = flightID;
         this.date = date;
         this.time = time;
@@ -19,7 +19,7 @@ public class Route {
         sold = 0;
     }
 
-    public int getFlightID() {
+    public String getFlightID() {
         return flightID;
     }
 

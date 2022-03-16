@@ -9,10 +9,8 @@ public class AddRouteCommand extends Command{
     private final String SUCCESS_MESSAGE = "OK! The following new route is added: ";
     private final String DUPLICATE_MESSAGE = "Sorry! The flight ID already exits. This flight cannot be added.";
 
-    public AddRouteCommand(RouteManager routeManager,
-                           int flightID, String date, String time,
+    public AddRouteCommand(String flightID, String date, String time,
                            String from, String to, int capacity) {
-        this.routeManager = routeManager;
         this.toAdd = new Route(flightID, date, time, from, to, capacity);
     }
 
