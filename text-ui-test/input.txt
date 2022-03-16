@@ -6,12 +6,12 @@ Add Housekeeper sgg ~ 17
 Add Housekeeper hello ~ joo
 Add Housekeeper sus ~
 View Recorded Housekeeper
-Add Item Name:Toilet Roll Pax:15
-Add Item Name: Pax:20
-Add Item Name:Toilet Roll Pax:
-Add Item Name:Toilet Roll Pax:-1
-Add Item Name:Toilet Roll Pax:0
-Add Item Name:Spoon Pax:2
+Add Item /Name:Toilet Roll /Pax:15
+Add Item /Name: /Pax:20
+Add Item /Name:Toilet Roll /Pax:
+Add Item /Name:Toilet Roll /Pax:-1
+Add Item /Name:Toilet Roll /Pax:0
+Add Item /Name:Spoon /Pax:2
 Add Housekeeper Tom ~ 33
 Add Housekeeper tOm ~ 33
 Add Housekeeper sally ~ 17
