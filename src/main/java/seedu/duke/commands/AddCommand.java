@@ -24,6 +24,6 @@ public class AddCommand extends Command {
     @Override
     public void execute(ItemList itemList, Ui ui) {
         itemList.addItem(itemToAdd);
-        ui.showOutput(itemToAdd + " has been added!");
+        ui.showMessages(itemToAdd + " has been added!");
     }
 }

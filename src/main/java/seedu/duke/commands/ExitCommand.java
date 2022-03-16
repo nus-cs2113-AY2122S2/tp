@@ -6,7 +6,7 @@ import seedu.duke.ui.Ui;
 
 public class ExitCommand extends Command {
     public void execute(ItemList itemList, Ui ui) {
-        ui.showOutput("bye");
+        ui.showMessages("bye");
     }
 
     /**
