@@ -65,12 +65,12 @@ class CommandsTest {
         assertEquals(2, goodsArrayList.size());
     }
 
-//    @Test
-//    void totalGoodsTest(){
-//        ArrayList<Goods> goodsArrayList = new ArrayList<>();
-//        Commands.addGood("1", "chairs", "15", goodsArrayList);
-//        Commands.addGood("2", "table", "15", goodsArrayList);
-//
-//
-//    }
+    //    @Test
+    //    void totalGoodsTest(){
+    //        ArrayList<Goods> goodsArrayList = new ArrayList<>();
+    //        Commands.addGood("1", "chairs", "15", goodsArrayList);
+    //        Commands.addGood("2", "table", "15", goodsArrayList);
+    //
+    //
+    //    }
 }
