@@ -6,12 +6,16 @@ import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.parser.Parser;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ActivityDeleteCommandTest {
 
     Manager manager = new Manager();
 
+    /**
+     * Creates a session that is stored and managed by the Manager object.
+     * Creates 2 activities in the new session that was created.
+     */
     @BeforeEach
     void setUp() {
         String sessionOneArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob Charlie";
@@ -25,6 +29,9 @@ class ActivityDeleteCommandTest {
         createActivityTwo.run(manager);
     }
 
+    /**
+     * Checks if an activity is deleted with missing delimiters.
+     */
     @Test
     public void prepare_hasMissingDelimiter_InvalidCommand() {
 
@@ -44,6 +51,11 @@ class ActivityDeleteCommandTest {
         assertEquals(InvalidCommand.class, activityWithMissingAidDelimiter.getClass());
     }
 
+    /**
+     * Checks if an activity is deleted with an invalid session unique identifier.
+     * @throws InvalidDataException If there are no sessions stored or
+     *                              if the session unique identifier specified was not found.
+     */
     @Test
     public void run_sessionDoesNotExists_activityListSizeRemainsTwo() throws InvalidDataException {
         String userInput = "activity /delete /sid 3 /aid 1";
@@ -52,6 +64,11 @@ class ActivityDeleteCommandTest {
         assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
     }
 
+    /**
+     * Checks if an activity is deleted with an invalid activity unique identifier.
+     * @throws InvalidDataException If there are no sessions stored or
+     *                              if the session unique identifier specified was not found.
+     */
     @Test
     public void run_activityDoesNotExists_activityListSizeRemainsTwo() throws InvalidDataException {
         String userInput = "activity /delete /sid 1 /aid 3";
