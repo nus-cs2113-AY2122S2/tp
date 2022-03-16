@@ -6,9 +6,16 @@ import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
 import seedu.duke.ui.Ui;
 
+/**
+ * Deletes an item identified using it's displayed index from the item list.
+ */
 public class DeleteCommand extends Command {
     private final int index;
 
+    /**
+     * Creates a DeleteCommand to delete item using specified index.
+     * @param index index specified.
+     */
     public DeleteCommand(int index) {
         requireNonNull(index, "no index was indicated!");
         this.index = index;
