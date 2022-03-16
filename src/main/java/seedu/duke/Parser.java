@@ -2,16 +2,29 @@ package seedu.duke;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.ClearCommand;
-import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.HelpCommand;
+import seedu.duke.commands.DeleteCommand;
+import seedu.duke.commands.ListCommand;
+import seedu.duke.exceptions.InvalidDayException;
+import seedu.duke.exceptions.MissingValueException;
+import seedu.duke.exceptions.InvalidTimeException;
+import seedu.duke.exceptions.InvalidModeException;
 
-import static seedu.duke.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static seedu.duke.common.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
+import static seedu.duke.common.ErrorMessages.ERROR_MISSING_PARAMETERS;
+import static seedu.duke.common.ErrorMessages.ERROR_MISSING_VALUES;
+import static seedu.duke.common.ErrorMessages.ERROR_INVALID_DAY;
+import static seedu.duke.common.ErrorMessages.ERROR_INVALID_TIME;
+import static seedu.duke.common.ErrorMessages.ERROR_INVALID_MODE;
 
 public class Parser {
     private final String command;
     private final String arguments;
+    public static Logger logger = Logger.getLogger(Parser.class.getName());
 
     private static final int NAME_INDEX = 0;
     private static final int TITLE_INDEX = 1;
@@ -42,20 +55,74 @@ public class Parser {
     }
 
     public Command prepareAdd() {
-        // checks empty command description error
-        // checks input format error
         try {
             String[] eventDescription = splitArguments();
-            String name = eventDescription[NAME_INDEX];
-            String title = eventDescription[TITLE_INDEX];
+            checkValidityOfArguments(eventDescription);
             String day = eventDescription[DAY_INDEX].toLowerCase();
             int startTime = Integer.parseInt(eventDescription[STARTTIME_INDEX]);
             int endTime = Integer.parseInt(eventDescription[ENDTIME_INDEX]);
             String mode = eventDescription[MODE_INDEX].toLowerCase();
+            checkDay(day);
+            checkTime(startTime, endTime);
+            checkMode(mode);
+            String name = eventDescription[NAME_INDEX];
+            String title = eventDescription[TITLE_INDEX];
             return new AddCommand(name, title, day, startTime, endTime, mode);
-        } catch (NumberFormatException nfe) {
-            System.out.println(ERROR_INVALID_INDEX_FORMAT);
-            return new HelpCommand(); // temporary
+        } catch (NullPointerException npe) {
+            System.out.println(ERROR_MISSING_PARAMETERS);
+            return new HelpCommand();
+        } catch (MissingValueException mve) {
+            System.out.println(ERROR_MISSING_VALUES);
+            return new HelpCommand();
+        } catch (InvalidTimeException | NumberFormatException ite) {
+            System.out.println(ERROR_INVALID_TIME);
+            return new HelpCommand();
+        } catch (InvalidDayException ide) {
+            System.out.println(ERROR_INVALID_DAY);
+            return new HelpCommand();
+        } catch (InvalidModeException ime) {
+            System.out.println(ERROR_INVALID_MODE);
+            return new HelpCommand();
+        }
+    }
+
+    private void checkTime(int startTime, int endTime) throws InvalidTimeException {
+        int startMinutes = startTime % 100;
+        int endMinutes = endTime % 100;
+        int startHours = startTime / 100;
+        int endHours = endTime / 100;
+        if (startMinutes >= 60 || endMinutes >= 60 || startHours >= 24 || endHours >= 24) {
+            throw new InvalidTimeException();
+        }
+    }
+
+    private void checkValidityOfArguments(String[] eventDescription) throws MissingValueException {
+        for (int i = 0; i < MODE_INDEX; i++) {
+            if (eventDescription[i].length() == 0) {
+                throw new MissingValueException();
+            }
+        }
+    }
+
+    private void checkMode(String mode) throws InvalidModeException {
+        if (mode.equals("online") || mode.equals("physical")) {
+            return;
+        }
+        throw new InvalidModeException();
+    }
+
+    private void checkDay(String day) throws InvalidDayException {
+        switch (day) {
+        case "monday":
+        case "tuesday":
+        case "wednesday":
+        case "thursday":
+        case "friday":
+        case "saturday":
+        case "sunday":
+            break;
+        default:
+            throw new InvalidDayException();
         }
     }
 
@@ -65,7 +132,8 @@ public class Parser {
             return new DeleteCommand(index);
         } catch (NumberFormatException nfe) {
             System.out.println(ERROR_INVALID_INDEX_FORMAT);
-            return new HelpCommand(); // temporary
+            logger.log(Level.INFO, "Invalid index to delete Error detected.");
+            return new HelpCommand();
         }
     }
 

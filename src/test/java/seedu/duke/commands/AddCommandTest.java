@@ -1,27 +1,30 @@
 package seedu.duke.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.duke.events.Event;
-import seedu.duke.events.Lesson;
 import seedu.duke.Timetable;
 
-import seedu.duke.exceptions.DuplicateEventException;
+import static seedu.duke.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 
 class AddCommandTest {
-    @Test
-    public void addCommand_duplicateEvent_throwException() {
-        Timetable timetable = new Timetable();
-        AddCommand addCommand = new AddCommand(
+    private Timetable timetable;
+    private Command addCommand;
+
+    @BeforeEach
+    public void setUp() {
+        timetable = new Timetable();
+        addCommand = new AddCommand(
                 "John", "CS2113", "Monday",
                 1200, 1300, "online"
         );
-        addCommand.execute(timetable);
-        assertEquals(DuplicateEventException.message, addCommand.execute(timetable));
     }
 
-    // days of week
-    // mode
-    // startTime/endTime
+    @Test
+    public void addCommand_duplicateEvent_throwException() {
+        addCommand.execute(timetable);
+        assertEquals(ERROR_DUPLICATE_EVENT, addCommand.execute(timetable));
+    }
 }

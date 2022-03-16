@@ -8,5 +8,4 @@ public class HelpCommand extends Command {
     public String execute(Timetable timetable) {
         return MESSAGE_HELP;
     }
-    // helper messages
 }
