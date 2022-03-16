@@ -125,6 +125,7 @@ class ParserTest {
         assertEquals("theLazy Dog", output);
     }
 
+    //  parseName()
     /**
      * Checks if an exception is properly thrown when the Name delimiter is not provided by the user.
      */
@@ -141,14 +142,14 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Name delimiter is provided but no arguments 
+     * Checks if an exception is properly thrown when the Name delimiter is provided but no arguments
      * following the Name delimiter are provided by the user.
      */
     @Test
     void parseName_delimiterExistsWithoutArgument_exceptionThrown() {
-        String argumentWithoutNameDelimiter = "/n /d 23-02-2022 /pl Alice Alice Bob";
+        String argumentWithoutNameArgument = "/n /d 23-02-2022 /pl Alice Alice Bob";
         try {
-            String output = Parser.parseName(argumentWithoutNameDelimiter);
+            String output = Parser.parseName(argumentWithoutNameArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.NAME_DELIMITER;
@@ -162,23 +163,24 @@ class ParserTest {
      */
     @Test
     void parseName_delimiterAndArgumentExists_argumentString() {
-        String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 /pl Alice Alice Bob";
+        String argumentWithDelimiterAndArgument = "/n Class outing /d 23-02-2022 /pl Alice Alice Bob";
         try {
-            String output = Parser.parseName(argumentWithoutNameDelimiter);
+            String output = Parser.parseName(argumentWithDelimiterAndArgument);
             assertEquals("Class outing", output);
         } catch (InvalidFormatException exception) {
             fail();
         }
     }
-    
+
+    // parsePersonList()
     /**
      * Checks if an exception is properly thrown when the Person list delimiter is not provided by the user.
      */
     @Test
     void parsePersonList_missingDelimiter_exceptionThrown() {
-        String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 pl Alice Alice Bob";
+        String argumentWithoutPersonListDelimiter = "/n Class outing /d 23-02-2022 pl Alice Alice Bob";
         try {
-            String[] output = Parser.parsePersonList(argumentWithoutNameDelimiter);
+            String[] output = Parser.parsePersonList(argumentWithoutPersonListDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.PERSON_LIST_DELIMITER;
@@ -187,14 +189,14 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Person list delimiter is provided but no arguments 
+     * Checks if an exception is properly thrown when the Person list delimiter is provided but no arguments
      * following the Person list delimiter are provided by the user.
      */
     @Test
     void parsePersonList_delimiterExistsWithoutArgument_exceptionThrown() {
-        String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 /pl";
+        String argumentWithoutPersonListArgument = "/n Class outing /d 23-02-2022 /pl";
         try {
-            String[] output = Parser.parsePersonList(argumentWithoutNameDelimiter);
+            String[] output = Parser.parsePersonList(argumentWithoutPersonListArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.PERSON_LIST_DELIMITER;
@@ -208,13 +210,284 @@ class ParserTest {
      */
     @Test
     void parsePersonList_delimiterAndArgumentExists_personList() {
-        String argumentWithoutNameDelimiter = "/n Class outing /d 23-02-2022 /pl Alice Charles Bob";
+        String argumentWithDelimiterAndArgument = "/n Class outing /d 23-02-2022 /pl Alice Charles Bob";
         try {
-            String[] output = Parser.parsePersonList(argumentWithoutNameDelimiter);
+            String[] output = Parser.parsePersonList(argumentWithDelimiterAndArgument);
             assertEquals(3, output.length);
             assertEquals("Alice", output[0]);
             assertEquals("Charles", output[1]);
             assertEquals("Bob", output[2]);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+    
+    // parseInvolved()
+    /**
+     * Checks if an exception is properly thrown when the Involved delimiter is not provided by the user.
+     */
+    @Test
+    void parseInvolved_missingDelimiter_exceptionThrown() {
+        String argumentWithoutInvolvedDelimiter = "/sid 1 /n Lunch /p Alice i Alice Bob Charlie /co 15";
+        try {
+            String[] output = Parser.parseInvolved(argumentWithoutInvolvedDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.INVOLVED_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Involved delimiter is provided but no arguments
+     * following the Involved delimiter are provided by the user.
+     */
+    @Test
+    void parseInvolved_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutInvolvedArgument = "/sid 1 /n Lunch /p Alice /i /co 15";
+        try {
+            String[] output = Parser.parseInvolved(argumentWithoutInvolvedArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.INVOLVED_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if a String array object containing names of persons is properly returned when the Involved delimiter
+     * and arguments following it are properly provided by the user.
+     */
+    @Test
+    void parseInvolved_delimiterAndArgumentExists_personList() {
+        String argumentWithDelimiterAndArgument = "/sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            String[] output = Parser.parseInvolved(argumentWithDelimiterAndArgument);
+            assertEquals(3, output.length);
+            assertEquals("Alice", output[0]);
+            assertEquals("Bob", output[1]);
+            assertEquals("Charlie", output[2]);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+
+    // parsePayer()
+    /**
+     * Checks if an exception is properly thrown when the Payer delimiter is not provided by the user.
+     */
+    @Test
+    void parsePayer_missingDelimiter_exceptionThrown() {
+        String argumentWithoutPayerDelimiter = "/sid 1 /n Lunch p Alice /i Alice Bob Charlie /co 15";
+        try {
+            String output = Parser.parsePayer(argumentWithoutPayerDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.PAYER_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Payer delimiter is provided but no arguments
+     * following the Payer delimiter are provided by the user.
+     */
+    @Test
+    void parsePayer_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutPayerArgument = "/sid 1 /n Lunch /p /i Alice Bob Charlie /co 15";
+        try {
+            String output = Parser.parsePayer(argumentWithoutPayerArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.PAYER_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Payer delimiter is provided but multiple names are
+     * provided following the Payer delimiter.
+     */
+    @Test
+    void parsePayer_delimiterExistsMultiplePayers_exceptionThrown() {
+        String argumentWithoutPayerArgument = "/sid 1 /n Lunch /p Alice Bob /i Alice Bob Charlie /co 15";
+        try {
+            String output = Parser.parsePayer(argumentWithoutPayerArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MORE_THAN_ONE_PAYER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if a String object containing the payer name is properly returned when the Payer delimiter and argument
+     * following it are properly provided by the user.
+     */
+    @Test
+    void parsePayer_delimiterExistsSinglePayer_argumentString() {
+        String argumentWithDelimiterAndArgument = "/sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            String output = Parser.parsePayer(argumentWithDelimiterAndArgument);
+            assertEquals("Alice", output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+
+    // parseSessionId()
+    /**
+     * Checks if an exception is properly thrown when the Session Id delimiter is not provided by the user.
+     */
+    @Test
+    void parseSessionId_missingDelimiter_exceptionThrown() {
+        String argumentWithoutSessionIdDelimiter = "sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            int output = Parser.parseSessionId(argumentWithoutSessionIdDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.SESSION_ID_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Session Id delimiter is provided but no arguments
+     * following the delimiter are provided by the user.
+     */
+    @Test
+    void parseSessionId_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutSessionIdArgument = "/sid  /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            int output = Parser.parseSessionId(argumentWithoutSessionIdArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.SESSION_ID_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Session Id delimiter is provided but a non-integer
+     * argument is provided by the user.
+     */
+    @Test
+    void parseSessionId_delimiterExistsArgumentNotInteger_exceptionThrown() {
+        String argumentWithNonIntArgument = "/sid a1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            int output = Parser.parseSessionId(argumentWithNonIntArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + Parser.SESSION_ID_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Session Id delimiter is provided but a negative integer
+     * argument is provided by the user.
+     */
+    @Test
+    void parseSessionId_delimiterExistsArgumentNegativeInteger_exceptionThrown() {
+        String argumentWithNegativeIntArgument = "/sid -9 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            int output = Parser.parseSessionId(argumentWithNegativeIntArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_ID_VALUE_NOT_POSITIVE;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an integer representing a session unique identifier is properly returned when the
+     * Session Id delimiter is provided along with a positive integer as the argument by the user.
+     */
+    @Test
+    void parseSessionId_delimiterExistsArgumentPositiveInteger_sessionId() {
+        String argumentWithDelimiterAndPositiveInt = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            int output = Parser.parseSessionId(argumentWithDelimiterAndPositiveInt);
+            assertEquals(3, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+
+    // parseActivityId()
+    /**
+     * Checks if an exception is properly thrown when the Activity Id delimiter is not provided by the user.
+     */
+    @Test
+    void parseActivityId_missingDelimiter_exceptionThrown() {
+        String argumentWithoutActivityIdDelimiter = "/sid 1 aid 5";
+        try {
+            int output = Parser.parseActivityId(argumentWithoutActivityIdDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.ACTIVITY_ID_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Activity Id delimiter is provided but no arguments
+     * following the delimiter are provided by the user.
+     */
+    @Test
+    void parseActivityId_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutActivityIdArgument = "/sid 1 /aid ";
+        try {
+            int output = Parser.parseActivityId(argumentWithoutActivityIdArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.ACTIVITY_ID_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Activity Id delimiter is provided but a non-integer
+     * argument is provided by the user.
+     */
+    @Test
+    void parseActivityId_delimiterExistsArgumentNotInteger_exceptionThrown() {
+        String argumentWithNonIntArgument = "/sid 1 /aid a5";
+        try {
+            int output = Parser.parseActivityId(argumentWithNonIntArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + Parser.ACTIVITY_ID_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Activity Id delimiter is provided but a negative integer
+     * argument is provided by the user.
+     */
+    @Test
+    void parseActivityId_delimiterExistsArgumentNegativeInteger_exceptionThrown() {
+        String argumentWithNegativeIntArgument = "/sid 1 /aid -5";
+        try {
+            int output = Parser.parseActivityId(argumentWithNegativeIntArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_ID_VALUE_NOT_POSITIVE;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an integer representing a activity unique identifier is properly returned when the
+     * Activity Id delimiter is provided along with a positive integer as the argument by the user.
+     */
+    @Test
+    void parseActivityId_delimiterExistsArgumentPositiveInteger_activityId() {
+        String argumentWithDelimiterAndPositiveInt = "/sid 1 /aid 5";
+        try {
+            int output = Parser.parseActivityId(argumentWithDelimiterAndPositiveInt);
+            assertEquals(5, output);
         } catch (InvalidFormatException exception) {
             fail();
         }
