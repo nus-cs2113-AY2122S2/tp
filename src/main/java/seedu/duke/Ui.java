@@ -29,8 +29,15 @@ public class Ui {
         System.out.println(exception.getErrorMessage());
     }
 
+    public void printHousekeeperNoted(Housekeeper housekeeper) {
+        System.out.println("Noted!");
+        System.out.println(housekeeper);
+
+    }
+
     public void printAddItemAcknowledgementMessage(ItemList listOfItems) {
         System.out.println("The item and its pax has been added to the list of items in the inventory.");
         System.out.printf("There are currently %d items within the inventory.\n", listOfItems.getSize());
     }
+
 }
