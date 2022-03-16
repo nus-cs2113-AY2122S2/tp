@@ -5,7 +5,7 @@ public class Income {
     protected double amount;
 
     /**
-     * Initialise a new income object
+     * Initialise a new income object.
      * @param description - Income's description
      * @param amount - Income's amount
      */
