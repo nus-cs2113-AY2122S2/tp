@@ -175,12 +175,14 @@ public class Parser {
         case LIST_ACTION_KEYWORD:
             if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
                 logger.log(Level.WARNING, "User has entered an invalid list workout command action.");
-                throw new InvalidCommandException(className, InvalidCommandException.INVALID_LIST_COMMAND_ERROR_MSG);
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_WORKOUT_LIST_COMMAND_ERROR_MSG);
             }
             break;
         default:
             logger.log(Level.WARNING, "User has entered an invalid workout command action.");
-            throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
+            throw new InvalidCommandException(className,
+                    InvalidCommandException.INVALID_ACTION_ERROR_MSG);
         }
         return new WorkoutCommand(userInput, fileManager, workoutList, actionKeyword, arguments);
     }
@@ -193,14 +195,19 @@ public class Parser {
     public ExerciseCommand createExerciseCommand(String userInput) throws
             InvalidCommandException, ArrayIndexOutOfBoundsException {
         logger.entering(getClass().getName(), "createExerciseCommand");
+        String className = this.getClass().getSimpleName();
         String actionKeyword = userInput.split(" ", 3)[1];
         String arguments = null;
         switch (actionKeyword) {
         case LIST_ACTION_KEYWORD:
+            if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
+                logger.log(Level.WARNING, "User has entered an invalid list exercise command action.");
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_EXERCISE_LIST_COMMAND_ERROR_MSG);
+            }
             break;
         default:
-            String className = this.getClass().getSimpleName();
-            logger.log(Level.WARNING, "Invalid action under exercise command is entered!");
+            logger.log(Level.WARNING, "User has entered an invalid action under exercise command.");
             throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
         }
         logger.exiting(getClass().getName(), "createExerciseCommand");
