@@ -1,7 +1,7 @@
 package seedu.duke;
 
 /**
- * Identifies the name and availability of the housekeeper and update availability into the
+ * Identifies the name of the housekeeper and assign to room id
  * housekeeper list.
  */
 public class AssignHousekeeperCommand extends Command {
