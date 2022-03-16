@@ -65,6 +65,7 @@ public class TimerLogic {
         } else if (!timer.getHasTimeLeft()) {
             ui.showToUser("The timer has already finished!");
         } else {
+            assert isTimerRunning;
             timer.pauseTimer();
         }
     }
@@ -73,6 +74,7 @@ public class TimerLogic {
         if (timer.isTimerPaused() && timer.getHasTimeLeft()) {
             timer.resumeTimer();
         } else if (isTimerRunning) {
+            assert timer.getHasTimeLeft();
             ui.showToUser("The timer is still running!");
         } else {
             ui.showToUser("There is no timer running currently!");
