@@ -36,4 +36,23 @@ class PersonListTest {
             assertNull(e.getMessage());
         }
     }
+
+    @Test
+    public void removePerson_validIndex_success() {
+        PersonList list = new PersonList();
+        list.addPerson("Alice");
+        list.removePerson(1);
+        assertTrue(list.getPersonList().isEmpty());
+    }
+
+    @Test
+    public void removePerson_invalidIndex_assertionError() {
+        PersonList list = new PersonList();
+        try {
+            list.removePerson(INVALID_INDEX);
+            fail();
+        } catch (AssertionError e) {
+            assertNull(e.getMessage());
+        }
+    }
 }
