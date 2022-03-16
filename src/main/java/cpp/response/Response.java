@@ -35,13 +35,13 @@ public class Response {
         int count = 1;
         System.out.println(Constants.SEPARATOR);
         System.out.println("Here are all the possible commands:");
-        System.out.println(count++ + ". addProject <Project Name>");
-        System.out.println(count++ + ". deleteProject <Project Name>");
-        System.out.println(count++ + ". addDeadline <Project Name> <Date>");
-        System.out.println(count++ + ". todo <Project Index> <Description>");
-        System.out.println(count++ + ". mark <Project Index> <Todo Index>");
-        System.out.println(count++ + ". listProjects/listProject");
-        System.out.println(count++ + ". view <Project Name>");
+        System.out.println(count++ + ". addproject [Project Name]");
+        System.out.println(count++ + ". deleteproject [Project Name]");
+        System.out.println(count++ + ". adddeadline [Project Name] [Date]");
+        System.out.println(count++ + ". todo [Project Index] [Description]");
+        System.out.println(count++ + ". mark [Project Index] [Todo Index]");
+        System.out.println(count++ + ". listprojects/listproject");
+        System.out.println(count++ + ". view [Project Name]");
         System.out.println(count++ + ". exit");
         System.out.println(Constants.SEPARATOR);
     }

@@ -185,7 +185,7 @@ public class ProjectList {
             System.out.println("Sorry! There was no project with that name.");
         } else {
             Project project = projectList.get(index);
-            project.print();
+            project.printDetails();
         }
         System.out.println(Constants.SEPARATOR);
     }

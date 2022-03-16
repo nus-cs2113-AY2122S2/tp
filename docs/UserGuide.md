@@ -88,7 +88,7 @@ Todo has been marked as done successfully:
 ### add a deadline to a project: `addDeadline`
 Adds a deadline date to a project
 
-Format: `addDeadline [project_name] [deadline]`
+Format: `adddeadline [project_name] [deadline]`
 
 #### Example of usage
 `addDeadline nextProject Friday`
