@@ -83,4 +83,22 @@ public class UI {
     public void printNullParametersMessage() {
         System.out.println("Parameters missing or not detected. Please use /info for parameters.");
     }
+
+    public void printPrompt() {
+        System.out.print("You: ");
+    }
+
+    public void printParagraph(String paragraph) {
+        System.out.print("HalpMi: ");
+        String[] arrayOfSentences = paragraph.split("\n");
+        for (String s : arrayOfSentences) {
+            System.out.print("        ");
+            System.out.println(s);
+        }
+    }
+
+    public void printCont(String sentence) {
+        System.out.print("        ");
+        System.out.println(sentence);
+    }
 }
