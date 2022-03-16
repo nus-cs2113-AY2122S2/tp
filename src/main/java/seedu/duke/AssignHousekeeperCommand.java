@@ -1,6 +1,7 @@
 package seedu.duke;
 
-import java.util.logging.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * Identifies the name of the housekeeper and assign to room id
@@ -26,9 +27,9 @@ public class AssignHousekeeperCommand extends Command {
         if (id.isEmpty()) {
             throw new InvalidAvailabilityException();
         }
-        logger.log(Level.INFO, "Assign Command parsed");
         setName(name);
         setRoomID(id);
+        logger.log(Level.INFO, "Assign Command parsed");
     }
 
     /**
