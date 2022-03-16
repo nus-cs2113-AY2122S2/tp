@@ -20,21 +20,46 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
 - Copy the file to your preferred folder as the home folder for your CSProj Planner.
 - Double click the file to start the app.
 - Type your command in the command box and press Enter to execute it. Some example commands you can try:
-   -  `addproj cs2113`: Add a new project named cs2113 to the planner.
-   - `viewproj`: list out all projects in the list.  
+   - `addproject cs2113`: Add a new project named cs2113 to the planner.
+   - `listproject`: list out all projects in the list.  
    - `exit`: Exits the project.
 
 
 ## Features 
 
-### print all projects: `listprojects`
+### Add a project: `addproject`
+Add a project to your current list of projects
+
+Format: `addproject [project_name]`
+*The `project_name` has no restrictions; it can be of any length, number of words, and any
+types of characters.
+
+#### Example of usage
+`addproject project1`
+
+### Example of output
+```project1 added.```
+
+### Delete a project: `deleteproject`
+Delete a project from your current list of projects
+
+Format: `deleteproject [project_name]`
+*The `project_name` must be a match for a current project already in your list of projects
+
+#### Example of usage
+`deleteproject project1`
+
+### Example of output
+```project1 deleted.```
+
+### Print all projects: `listprojects`
 Prints all projects in the list with their names and project deadlines
 
 Format: `listprojects` or `listproject`
 
 * The `listprojects`(`listproject`) cannot contain a space, i.e., `list projects`(`list project`) will be considered an unknown command.
 
-### add todo to a project: `todo`
+### Add todo to a project: `todo`
 Adds a todo task with description to a project
 
 Format: `todo [project_index] [description]`
@@ -60,6 +85,21 @@ Todo has been marked as done successfully:
 [X] buy textbooks
 ```
 
+### add a deadline to a project: `addDeadline`
+Adds a deadline date to a project
+
+Format: `addDeadline [project_name] [deadline]`
+
+#### Example of usage
+`addDeadline nextProject Friday`
+
+#### Example of output
+```Deadline added to nextProject: Sunday```
+
+### help: `help`
+List out all available commands
+
+Format: `help`
 
 ### exit: `exit`
 Exit the program
@@ -79,5 +119,6 @@ Format: `exit`
 |---------------------|------------------------------------------|
 | view all project(s) | `listproject`, `listprojects`            |
 | add todo            | `todo [project_index] [description]`     |
-| mark todo as done   | `mark [project_index] [todo_index]`
+| mark todo as done   | `mark [project_index] [todo_index]`      |
+| add deadline        | `addDeadline  [project_name] [deadline]` |
 | Exit                | `exit`                                   |
