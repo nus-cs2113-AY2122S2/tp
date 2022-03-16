@@ -6,10 +6,10 @@ package seedu.duke;
  */
 public class UpdateItemPaxCommand extends Command {
     private Item item;
-    private final String ITEM_NAME_INDICATOR = "/Name:";
-    private final int ITEM_NAME_INDICATOR_LENGTH = 6;
-    private final String ITEM_PAX_INDICATOR = "/New Pax:";
-    private final int ITEM_PAX_INDICATOR_LENGTH = 9;
+    private static final String ITEM_NAME_INDICATOR = "/Name:";
+    private static final int ITEM_NAME_INDICATOR_LENGTH = 6;
+    private static final String ITEM_PAX_INDICATOR = "/New Pax:";
+    private static final int ITEM_PAX_INDICATOR_LENGTH = 9;
 
     /**
      * Takes in the user input and checks if the formatting of the Update Item Pax Command within the user input is
@@ -21,17 +21,14 @@ public class UpdateItemPaxCommand extends Command {
      *                                   item pax, name is empty or invalid.
      */
     public UpdateItemPaxCommand(String userInput) throws HotelLiteManagerException {
-        Item item;
-        int itemPax;
-        String itemName;
         boolean isValidUpdateItemCommand = userInput.contains(ITEM_NAME_INDICATOR)
                 && userInput.contains(ITEM_PAX_INDICATOR);
         if (!isValidUpdateItemCommand) {
             throw new InvalidCommandException();
         }
-        itemPax = extractItemPax(userInput);
-        itemName = extractItemName(userInput);
-        item = new Item(itemName, itemPax);
+        int itemPax = extractItemPax(userInput);
+        String itemName = extractItemName(userInput);
+        Item item = new Item(itemName, itemPax);
         setItem(item);
     }
 

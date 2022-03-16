@@ -52,11 +52,10 @@ public class CommandParser {
         } else if (commandString.startsWith(CHECK_ROOM_BY_LEVEL)) {
             commandStringWithoutCommand = commandString.replace(CHECK_ROOM_BY_LEVEL, "");
             userCommand = new CheckRoomByLevelCommand(commandStringWithoutCommand);
-        } else if (commandString.startsWith(UPDATE_ITEM_PAX_COMMAND)){
+        } else if (commandString.startsWith(UPDATE_ITEM_PAX_COMMAND)) {
             commandStringWithoutCommand = commandString.replace(UPDATE_ITEM_PAX_COMMAND, "");
             userCommand = new UpdateItemPaxCommand(commandStringWithoutCommand);
-        }
-        else {
+        } else {
             throw new WrongCommandException("Invalid Command");
         }
         return userCommand;
