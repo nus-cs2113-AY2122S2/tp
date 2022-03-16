@@ -10,6 +10,8 @@ public class Income {
      * @param amount - Income's amount
      */
     public Income(String description, double amount) {
+        assert (description != null);
+        assert (amount >= 0);
         this.description = description;
         this.amount = amount;
     }
