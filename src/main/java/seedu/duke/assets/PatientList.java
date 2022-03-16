@@ -19,6 +19,7 @@ public class PatientList {
         Patient patient = getPatient(nric);
         if (patient == null) {
             System.out.println("There is no such patient");
+            return;
         }
         System.out.println(getPatient(nric).toString());
     }

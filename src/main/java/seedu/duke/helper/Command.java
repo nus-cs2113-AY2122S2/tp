@@ -12,12 +12,11 @@ public class Command {
 
     public void viewPatient(PatientList patientList, String nric) {
         if (isNull(nric)) {
-            return;
+            patientList.viewPatient();;
         }
-        if (Parser.parseViewPatient(nric) == null) {
-            patientList.viewPatient();
+        else {
+            patientList.viewPatient(nric);
         }
-        patientList.viewPatient(nric);
     }
 
     public void addPatient(PatientList patientList, String parameters) {
