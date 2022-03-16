@@ -413,4 +413,64 @@ class ParserTest {
             fail();
         }
     }
+
+    // parseActivityId()
+    @Test
+    void parseActivityId_missingDelimiter_exceptionThrown() {
+        String argumentWithoutActivityIdDelimiter = "/sid 1 aid 5";
+        try {
+            int output = Parser.parseActivityId(argumentWithoutActivityIdDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.ACTIVITY_ID_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseActivityId_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutActivityIdArgument = "/sid 1 /aid ";
+        try {
+            int output = Parser.parseActivityId(argumentWithoutActivityIdArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.ACTIVITY_ID_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseActivityId_delimiterExistsArgumentNotInteger_exceptionThrown() {
+        String argumentWithNonIntArgument = "/sid 1 /aid a5";
+        try {
+            int output = Parser.parseActivityId(argumentWithNonIntArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + Parser.ACTIVITY_ID_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseActivityId_delimiterExistsArgumentNegativeInteger_exceptionThrown() {
+        String argumentWithNegativeIntArgument = "/sid 1 /aid -5";
+        try {
+            int output = Parser.parseActivityId(argumentWithNegativeIntArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_ID_VALUE_NOT_POSITIVE;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseActivityId_delimiterExistsArgumentPositiveInteger_activityId() {
+        String argumentWithDelimiterAndPositiveInt = "/sid 1 /aid 5";
+        try {
+            int output = Parser.parseActivityId(argumentWithDelimiterAndPositiveInt);
+            assertEquals(5, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
 }
