@@ -11,9 +11,9 @@ public class ErrorMessages {
             + "integer that I can parse";
     public static final String ERROR_MISSING_PARAMETERS = "Hi 1 or more parameters are missing";
     public static final String ERROR_MISSING_VALUES = "Hi 1 or more parameters have missing values";
-    public static final String ERROR_INVALID_DAY = "Hi please input a valid day\n"
-            + "Accepted inputs are: 0000 - 2359";
     public static final String ERROR_INVALID_TIME = "Hi please input a valid time\n"
+            + "Accepted inputs are: 0000 - 2359";
+    public static final String ERROR_INVALID_DAY = "Hi please input a valid day\n"
             + "Accepted inputs are:\n"
             + "monday\n"
             + "tuesday\n"
@@ -24,5 +24,6 @@ public class ErrorMessages {
             + "sunday";
     public static final String ERROR_INVALID_MODE = "Hi please input a valid mode\n"
             + "Accepted inputs are: online or physical";
+    public static final String ERROR_EMPTY_LIST = "There are no lessons in your timetable yet!";
 
 }
