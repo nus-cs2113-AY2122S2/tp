@@ -7,10 +7,18 @@ public class IncomeList {
     private ArrayList<Income> incomeArrayList;
     private int numberOfIncomes;
 
+    /**
+     * Creates a new Income Object.
+     */
     public IncomeList() {
         this.incomeArrayList = new ArrayList<>();
     }
 
+    /**
+     * Creates and add a new income object to the income list.
+     * @param description The description of the user's income
+     * @param amount The income amount
+     */
     public void addIncome(String description, double amount) {
         this.incomeArrayList.add(new Income(description, amount));
         numberOfIncomes++;
