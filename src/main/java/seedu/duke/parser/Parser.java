@@ -3,13 +3,16 @@ package seedu.duke.parser;
 import seedu.duke.data.Item;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.ExitCommand;
-import seedu.duke.commands.InvalidCommand;
+import seedu.duke.common.Messages;
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.DeleteCommand;
+import seedu.duke.commands.ListCommand;
+import seedu.duke.exceptions.InvMgrException;
+import seedu.duke.common.Messages;
 
 public class Parser {
 
-    public static Command parse(String userCommand) {
+    public static Command parse(String userCommand) throws InvMgrException {
         if (userCommand.startsWith("exit")) {
             return new ExitCommand();
 
@@ -21,8 +24,11 @@ public class Parser {
             String deleteIndex = userCommand.split(" ")[1];
             return new DeleteCommand(Integer.parseInt(deleteIndex));
 
+        } else if (userCommand.startsWith("list")) {
+            return new ListCommand();
+
         } else {
-            return new InvalidCommand();
+            throw new InvMgrException(Messages.INVALID_COMMAND);
           
         }
     }
