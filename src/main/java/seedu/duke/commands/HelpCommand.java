@@ -13,10 +13,10 @@ public class HelpCommand extends Command {
             + "[Command Format] " + COMMAND_FORMAT + "\n";
 
     @Override
-    public void execute(Ui ui, ItemList itemList) {
+    public void execute(ItemList itemList, Ui ui) {
         System.out.println(Messages.COMMAND_MENU_MESSAGE +
                 Messages.DIVIDER +
-                ByeCommand.HELP_MESSAGE + Messages.DIVIDER +
+                ExitCommand.HELP_MESSAGE + Messages.DIVIDER +
                 HelpCommand.HELP_MESSAGE + Messages.DIVIDER);
     }
 }
