@@ -3,8 +3,12 @@ package seedu.duke.parsers;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.ListCommand;
+import seedu.duke.commands.ResetCommand;
+import seedu.duke.commands.SaveCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
+
+import static seedu.duke.util.StringConstants.SAVE_COMMAND_WORD;
 
 /**
  * This Parser supports all commands which do not accept any additional arguments or parameters.
@@ -27,6 +31,10 @@ public class NoArgumentParser extends Parser {
             return new ExitCommand();
         case (LIST_COMMAND_WORD):
             return new ListCommand();
+        case (RESET_COMMAND_WORD):
+            return new ResetCommand();
+        case (SAVE_COMMAND_WORD):
+            return new SaveCommand();
         default:
             throw new ParseException();
         }

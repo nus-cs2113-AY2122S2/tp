@@ -25,11 +25,22 @@ public class Module {
         return moduleCode;
     }
 
+    public String getModuleDescription() {
+        return moduleDescription;
+    }
+
     /**
      * Returns the task list associated with the module.
      */
     public TaskList getTaskList() {
         return taskList;
+    }
+
+    /**
+     * Adds one task in task list associated with the module.
+     */
+    public void addTask(Task task) {
+        taskList.addTask(task);
     }
 
     /**
