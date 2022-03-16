@@ -1,9 +1,9 @@
 package seedu.allonus;
 
-import seedu.allonus.ui.TextUi;
-
 import static seedu.allonus.contacts.ContactsManager.contactsRunner;
 import static seedu.allonus.expense.ExpenseTracker.expenseRunner;
+
+import seedu.allonus.ui.TextUi;
 import seedu.allonus.modules.StudyManager;
 
 import java.util.NoSuchElementException;
