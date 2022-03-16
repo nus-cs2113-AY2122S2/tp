@@ -29,7 +29,7 @@ public class DoctorList {
 
     //view particular doctor
     public void viewDoctor(String nric) {
-        if((getDoctor(nric)) == null){
+        if ((getDoctor(nric)) == null) {
             System.out.println("Doctor doesn't exist please try again!");
             return;
         }
@@ -54,7 +54,7 @@ public class DoctorList {
     @Override
     public String toString() {
         String doctorName = " ";
-            int index = 1;
+        int index = 1;
         for (Doctor doctor : this.doctors) {
             doctorName += String.format("%d. %s", index, doctor.toString());
             if (index != this.getSizeDoctor()) {
