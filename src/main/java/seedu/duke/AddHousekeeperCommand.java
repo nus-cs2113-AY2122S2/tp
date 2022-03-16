@@ -1,8 +1,7 @@
 package seedu.duke;
 
 /**
- * Extract name and age of housekeeper from user input and record it into the
- * housekeeper list.
+ * Extract name and age of housekeeper from user input and record it into the housekeeper list.
  */
 public class AddHousekeeperCommand extends Command {
     private Housekeeper housekeeper;
@@ -29,7 +28,7 @@ public class AddHousekeeperCommand extends Command {
      *
      * @param commandStringWithoutCommand Input given by user.
      * @return housekeeper profile.
-     * @throws InvalidAgeException       Age enter is invalid/
+     * @throws InvalidAgeException       Age enter is invalid.
      * @throws InvalidHousekeeperProfile Command enter regarding the housekeeper profile is wrong.
      */
     private Housekeeper extractDetails(String commandStringWithoutCommand)
@@ -63,9 +62,20 @@ public class AddHousekeeperCommand extends Command {
         this.housekeeper = housekeeper;
     }
 
+    /**
+     * Method to add new housekeeper profile into list and rejects any profile that has already been recorded.
+     *
+     * @param housekeeperList  The list of housekeeper recorded.
+     * @param satisfactionList The given list of Satisfaction objects.
+     * @param roomList         The given list of Room objects. N/A for this class, but
+     *                         must be included for the execution override.
+     * @param listOfItems      The given list of Item objects. N/A for this class, but
+     *                         must be included for the execution override.
+     * @param ui               The user interface for this execution method.
+     */
     @Override
     public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList roomList,
-                        ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
+                        ItemList listOfItems, Ui ui) {
         boolean isRecorded = housekeeperList.hasNameAdded(getHousekeeper().getName());
         if (!isRecorded) {
             housekeeperList.addHousekeeper(getHousekeeper());

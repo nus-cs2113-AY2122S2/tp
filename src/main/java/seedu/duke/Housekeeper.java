@@ -1,12 +1,27 @@
 package seedu.duke;
 
+/**
+ * Records the age, name and availability of each Housekeeper.
+ */
 public class Housekeeper {
     private String name;
     private int age;
+    private String availability;
 
     public Housekeeper(String name, int age) {
         this.name = name;
         this.age = age;
+    }
+
+    public String getAvailability() {
+        if (availability == null) {
+            return "<Enter Availability>";
+        }
+        return availability;
+    }
+
+    public void setAvailability(String availability) {
+        this.availability = availability;
     }
 
     public String getName() {
@@ -27,8 +42,7 @@ public class Housekeeper {
 
     @Override
     public String toString() {
-        return "[ " + getName() + " ]: " + getAge();
+        return "[ " + getName() + " ]: " + getAge() + ", " + getAvailability();
     }
-
 
 }
