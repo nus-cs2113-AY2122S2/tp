@@ -22,6 +22,16 @@ public class UpdateCommand extends Command {
     }
 
     /**
+     * Indicates whether the program should exit.
+     *
+     * @return Indication on whether the program should exit.
+     */
+    @Override
+    public boolean isExit() {
+        return false;
+    }
+
+    /**
      * Executes the given update command. Parses its input, and prints
      * feedback to standard output.
      */

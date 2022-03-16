@@ -23,6 +23,16 @@ public class ListCommand extends Command {
     }
 
     /**
+     * Indicates whether the program should exit.
+     *
+     * @return Indication on whether the program should exit.
+     */
+    @Override
+    public boolean isExit() {
+        return false;
+    }
+
+    /**
      * Prints user's current list of expenditures.
      */
     @Override
