@@ -125,6 +125,7 @@ class ParserTest {
         assertEquals("theLazy Dog", output);
     }
 
+    //  parseName()
     /**
      * Checks if an exception is properly thrown when the Name delimiter is not provided by the user.
      */
@@ -141,7 +142,7 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Name delimiter is provided but no arguments 
+     * Checks if an exception is properly thrown when the Name delimiter is provided but no arguments
      * following the Name delimiter are provided by the user.
      */
     @Test
@@ -170,7 +171,8 @@ class ParserTest {
             fail();
         }
     }
-    
+
+    // parsePersonList()
     /**
      * Checks if an exception is properly thrown when the Person list delimiter is not provided by the user.
      */
@@ -187,7 +189,7 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Person list delimiter is provided but no arguments 
+     * Checks if an exception is properly thrown when the Person list delimiter is provided but no arguments
      * following the Person list delimiter are provided by the user.
      */
     @Test
@@ -219,4 +221,44 @@ class ParserTest {
             fail();
         }
     }
+    
+    // parseInvolved()
+    @Test
+    void parseInvolved_missingDelimiter_exceptionThrown() {
+        String argumentWithoutInvolvedDelimiter = "/sid 1 /n Lunch /p Alice i Alice Bob Charlie /co 15";
+        try {
+            String[] output = Parser.parseInvolved(argumentWithoutInvolvedDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.INVOLVED_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseInvolved_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutInvolvedArgument = "/sid 1 /n Lunch /p Alice /i /co 15";
+        try {
+            String[] output = Parser.parseInvolved(argumentWithoutInvolvedArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.INVOLVED_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseInvolved_delimiterAndArgumentExists_personList() {
+        String argumentWithDelimiterAndArgument = "/sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            String[] output = Parser.parseInvolved(argumentWithDelimiterAndArgument);
+            assertEquals(3, output.length);
+            assertEquals("Alice", output[0]);
+            assertEquals("Bob", output[1]);
+            assertEquals("Charlie", output[2]);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+
 }
