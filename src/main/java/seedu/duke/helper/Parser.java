@@ -240,7 +240,7 @@ public class Parser {
         }
     }
 
-    private static  boolean validateQuantity(String quantity) {
+    private static boolean validateQuantity(String quantity) {
         try {
             int quantityInt = Integer.parseInt(quantity);
             return quantityInt > 0;

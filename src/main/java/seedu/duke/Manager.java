@@ -25,7 +25,7 @@ public class Manager {
         ui.printGreeting();
         while (!isTerminated) {
             ui.printPrompt();
-            String commandWord = ui.readCommand();;
+            String commandWord = ui.readCommand();
             String parameters = ui.readParameters();
             switch (commandWord) {
             case "add patient":
@@ -57,6 +57,7 @@ public class Manager {
  master
                 break;
             case "view medicine":
+                command.viewMedicine(medicineList, parameters);
                 break;
             case "help":
                 ui.printHelp();
