@@ -22,7 +22,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, ItemList itemList) {
+    public void execute(ItemList itemList, Ui ui) {
         itemList.addItem(itemToAdd);
         ui.showOutput(itemToAdd + " has been added!");
     }
