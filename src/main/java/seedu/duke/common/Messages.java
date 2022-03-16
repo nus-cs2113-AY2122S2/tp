@@ -3,7 +3,6 @@ package seedu.duke.common;
 /**
  *  Container for user visible messages.
  */
-
 public class Messages {
     public static final String LOGO = " ___      ___ __________ __________ __________ ___ ___    "
             + "___ __________ ____________ ___ ____________ \n"
