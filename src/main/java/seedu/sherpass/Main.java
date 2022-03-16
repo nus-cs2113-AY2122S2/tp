@@ -40,7 +40,7 @@ public class Main {
             ui.showToUser(ERROR_IO_FAILURE_MESSAGE);
             System.exit(1);
         } catch (InvalidInputException | JSONException e) {
-            System.out.println(e.getMessage());
+            ui.showToUser(e.getMessage());
             storage.handleCorruptedSave(ui);
             taskList = new TaskList();
         }
