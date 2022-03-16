@@ -30,6 +30,11 @@ public class MedicineList {
                 + " in the system.");
     }
 
+    public void viewMedicine(int parameters) {
+        getMedicineInfo(medicines.get(parameters - 1));
+    }
+
+    /*
     public void viewMedicine(String parameters) {
         if (parameters.equals("name")) {
             for (Medicine medicine : medicines) {
@@ -38,7 +43,7 @@ public class MedicineList {
             }
         }
     }
-
+    */
     public void delete(int number) {
         medicines.remove(number - 1);
     }

@@ -69,10 +69,20 @@ public class Command {
     }
 
     public void viewMedicine(MedicineList medicineList, String parameters) {
-        if (Parser.parseViewMedicine(parameters) == null) {
+        if (parameters == null) {
             medicineList.viewMedicine();
         } else {
-            medicineList.viewMedicine(parameters);
+            try {
+                int index = Integer.parseInt(parameters);
+                if (index < 1 || medicineList.size() < index) {
+                    System.out.println("Index is out of range.");
+                    return;
+                }
+                medicineList.viewMedicine(index);
+            } catch (NumberFormatException e) {
+                System.out.println("Index is out of range.");
+            }
+
         }
     }
 
