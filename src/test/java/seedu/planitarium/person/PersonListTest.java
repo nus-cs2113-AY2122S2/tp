@@ -10,4 +10,11 @@ class PersonListTest {
         PersonList list = new PersonList();
         assertEquals(0, list.getNumberOfMembers());
     }
+
+    @Test
+    public void getNumberOfMembers_addPerson_returnOne() {
+        PersonList list = new PersonList();
+        list.addPerson("Alice");
+        assertEquals(1, list.getNumberOfMembers());
+    }
 }
