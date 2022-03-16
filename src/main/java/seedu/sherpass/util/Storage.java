@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static seedu.sherpass.constant.Index.DIRECTORY_INDEX;
+import static seedu.sherpass.constant.Index.INDENT_FACTOR;
 import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_1;
 import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_2;
 import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_3;
@@ -28,7 +29,6 @@ import static seedu.sherpass.constant.DateAndTimeFormat.parseFormat;
 
 
 public class Storage {
-    public static final int INDENT_FACTOR = 4;
     private String saveFilePath;
 
     /**
