@@ -126,6 +126,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Try to parse the delete command to see if index has been done.
+     *
+     */
     public Command prepareDelete() {
         try {
             int index = Integer.parseInt(arguments);

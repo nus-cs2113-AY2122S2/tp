@@ -67,4 +67,12 @@ public class ParserTest {
         Command command = parser.parseCommand();
         assertEquals(HelpCommand.class,command.getClass());
     }
+
+    @Test
+    public void prepareDeleteCommand_noIndex_throwException() {
+        String inputString = "delete";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(HelpCommand.class,command.getClass());
+    }
 }

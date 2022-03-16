@@ -13,6 +13,10 @@ public class DeleteCommandTest {
 
     Timetable timetable = new Timetable();
 
+    /**
+     * Set up a timetable object to set up and test commands.
+     *
+     */
     @BeforeEach
     void setUp() throws DuplicateEventException {
         Lesson lesson1 = new Lesson("John","CS2113","Friday",1230,1330,"online");
@@ -21,6 +25,10 @@ public class DeleteCommandTest {
         timetable.add(lesson2);
     }
 
+    /**
+     * Test method to see if code catches instance of index out of bounds and if it throws exception.
+     *
+     */
     @Test
     public void deleteCommand_IndexOutOfBoundsSize_throwException() {
         //delete index that is not found in list
