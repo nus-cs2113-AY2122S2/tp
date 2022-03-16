@@ -23,17 +23,17 @@ class ParserTest {
     @Test
     @DisplayName("validateMedicine method in Parser Class")
     void validateMedicineTest() {
-        String[] userInputArray = {"paracetamol","500","2023-02-02","Headaches","500"};
+        String[] userInputArray = {"paracetamol", "500", "2023-02-02", "Headaches", "500"};
         String userInput = "paracetamol,500,2023-02-02,Headaches,500";
-        assertEquals(true,Parser.validateMedicine(userInputArray));
+        assertEquals(true, Parser.validateMedicine(userInputArray));
     }
 
     @Test
     @DisplayName("parseAddMedicine method in Parser Class")
     void parseAddMedicineTest() {
         String userInput = "paracetamol,500,2023-02-02,Headaches,500";
-        String[] userInputArray = {"paracetamol","500","2023-02-02","Headaches","500"};
-        assertArrayEquals(userInputArray,Parser.parseAddMedicine(userInput));
+        String[] userInputArray = {"paracetamol", "500", "2023-02-02", "Headaches", "500"};
+        assertArrayEquals(userInputArray, Parser.parseAddMedicine(userInput));
     }
 
 

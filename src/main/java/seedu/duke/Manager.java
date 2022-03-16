@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
+import seedu.duke.assets.DoctorList;
 import seedu.duke.helper.Command;
 import seedu.duke.helper.Storage;
 import seedu.duke.helper.UI;
@@ -23,7 +24,7 @@ public class Manager {
         ui.printGreeting();
         while (!isTerminated) {
             ui.printPrompt();
-            String commandWord = ui.readCommand();;
+            String commandWord = ui.readCommand();
             String parameters = ui.readParameters();
             switch (commandWord) {
             case "add patient":
@@ -39,8 +40,10 @@ public class Manager {
                 command.addDoctor(storage.doctors, parameters);
                 break;
             case "delete doctor":
+                command.deleteDoctor(doctorList, parameters);
                 break;
             case "view doctor":
+                command.viewDoctor(doctorList, parameters);
                 break;
             case "add medicine":
                 command.addMedicine(storage.medicines, parameters);
@@ -49,6 +52,7 @@ public class Manager {
                 command.deleteMedicine(storage.medicines, parameters);
                 break;
             case "view medicine":
+                command.viewMedicine(medicineList, parameters);
                 break;
             case "help":
                 ui.printHelp();

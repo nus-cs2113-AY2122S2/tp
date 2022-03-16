@@ -30,6 +30,19 @@ public class Parser {
         }
     }
 
+
+    public static ArrayList<String> parseViewDoctor(String description) {
+        //no specific doctor
+        if (description == null) {
+            return null;
+        }
+
+        //if specific doctor
+        ArrayList<String> parameters = new ArrayList<String>();
+        parameters.add(description);
+        return parameters;
+    }
+
     public static String[] parseAddDoctor(String parameters) {
         String[] addDoctorParameters = parameters.split(",");
         for (int i = 0; i < addDoctorParameters.length; i++) {
@@ -54,6 +67,7 @@ public class Parser {
             isValid = false;
         }
         return isValid;
+
     }
 
     public static String[] parseAddMedicine(String parameters) {
@@ -227,7 +241,7 @@ public class Parser {
         }
     }
 
-    private static  boolean validateQuantity(String quantity) {
+    private static boolean validateQuantity(String quantity) {
         try {
             int quantityInt = Integer.parseInt(quantity);
             return quantityInt > 0;

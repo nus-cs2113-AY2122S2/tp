@@ -3,6 +3,8 @@ package seedu.duke.helper;
 import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
+import seedu.duke.assets.DoctorList;
+
 
 public class Command {
     private UI ui = new UI();
@@ -13,7 +15,8 @@ public class Command {
 
     public void viewPatient(PatientList patientList, String nric) {
         if (isNull(nric)) {
-            patientList.viewPatient();;
+            patientList.viewPatient();
+            ;
         } else {
             patientList.viewPatient(nric);
         }
@@ -54,6 +57,34 @@ public class Command {
         }
     }
 
+    public void viewDoctor(DoctorList doctorList, String nric) {
+        if (isNull(nric)) {
+            return;
+        }
+        if (Parser.parseViewDoctor(nric) == null) {
+            doctorList.viewDoctor();
+
+        }
+        doctorList.viewDoctor(nric);
+    }
+
+    public void deleteDoctor(DoctorList doctorList, String stringIndex) {
+        int indexDoctor;
+        try {
+            indexDoctor = Integer.parseInt(stringIndex);
+        } catch (NumberFormatException numberFormatException) {
+            ui.printDeleteDoctorErrorMessage(doctorList);
+            return;
+        }
+        if (1 <= indexDoctor && indexDoctor <= doctorList.getSizeDoctor()) {
+            doctorList.removeDoctor(indexDoctor - 1);
+            System.out.println("The doctor with the specified index has been removed.");
+        } else {
+            ui.printDeleteDoctorErrorMessage(doctorList);
+        }
+    }
+
+
     public void addMedicine(MedicineList medicineList, String parameters) {
         if (isNull(parameters)) {
             return;
@@ -67,6 +98,22 @@ public class Command {
         System.out.println("Medicine has been added");
     }
 
+    public void viewMedicine(MedicineList medicineList, String parameters) {
+        if (parameters == null) {
+            medicineList.viewMedicine();
+        } else {
+            try {
+                int index = Integer.parseInt(parameters);
+                if (index < 1 || medicineList.size() < index) {
+                    System.out.println("Index is out of range.");
+                    return;
+                }
+                medicineList.viewMedicine(index);
+            } catch (NumberFormatException e) {
+                System.out.println("Index is out of range.");
+            }
+        }
+    }
 
     public void addDoctor(DoctorList doctorList, String parameters) {
         if (isNull(parameters)) {
@@ -97,7 +144,6 @@ public class Command {
             System.out.println("The medicine record at index " + index + " has been deleted.");
         } catch (NumberFormatException numberFormatException) {
             System.out.println("Parameter given is not a number.");
-
         }
     }
 }

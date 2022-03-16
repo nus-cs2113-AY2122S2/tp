@@ -22,4 +22,28 @@ public class Medicine {
         return medicineName + "," + dosage + "," + expiry
                 + "," + sideEffects + "," + quantity;
     }
+
+    public int getMedicineId() {
+        return medicineId;
+    }
+
+    public String getMedicineName() {
+        return medicineName;
+    }
+
+    public int getDosage() {
+        return dosage;
+    }
+
+    public String getExpiry() {
+        return expiry;
+    }
+
+    public String getSideEffects() {
+        return sideEffects;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
 }
