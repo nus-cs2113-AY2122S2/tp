@@ -47,6 +47,11 @@ public class StringConstants {
     public static final String ICON_UNCOMPLETED = "( )";
     public static final String ICON_COMPLETED = "(X)";
 
+    /**.
+     * For reset
+     */
+    public static final String RESET_MESSAGE = "All modules and tasks have been removed.";
+
     /**
      * .
      * For helpCommand
