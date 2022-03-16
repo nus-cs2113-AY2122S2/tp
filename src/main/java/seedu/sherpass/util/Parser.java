@@ -70,14 +70,14 @@ public class Parser {
             if (!doOnDateString.equals("null")) {
                 doOnDate = LocalDate.parse(doOnDateString, parseFormat);
             }
-            String status = taskData.getString("status");
             parsedTask = new Task(description, byDate, doOnDate);
+            String status = taskData.getString("status");
             if (status.equals("X")) {
                 parsedTask.markAsDone();
             }
             return parsedTask;
         } catch (JSONException | DateTimeParseException exception) {
-            throw new InvalidInputException();
+            throw new InvalidInputException(exception.getMessage());
         }
     }
 
