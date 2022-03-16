@@ -125,7 +125,7 @@ public class Commands {
     }
 
     public static void totalGoods(ArrayList<Goods> userGoods) throws NullException {
-        if (userGoods == null){
+        if (userGoods == null) {
             throw new NullException("userGoods");
 
         }
