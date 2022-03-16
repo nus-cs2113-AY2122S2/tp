@@ -5,6 +5,7 @@ import seedu.duke.events.Lesson;
 import seedu.duke.Timetable;
 
 import seedu.duke.exceptions.DuplicateEventException;
+import static seedu.duke.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
@@ -32,7 +33,7 @@ public class AddCommand extends Command {
             timetable.add(newEvent);
             return addConfirmation(newEvent);
         } catch (DuplicateEventException dee) {
-            return dee.getMessage();
+            return ERROR_DUPLICATE_EVENT;
         }
     }
 
