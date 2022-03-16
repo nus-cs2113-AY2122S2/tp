@@ -96,7 +96,8 @@ public class AddItemCommand extends Command {
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      */
     public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
-                        AssignmentMap assignmentMap, RoomList roomList, ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
+                        AssignmentMap assignmentMap, RoomList roomList, ItemList listOfItems, Ui ui) throws
+            HotelLiteManagerException, WrongCommandException {
         Item item = getItem();
         listOfItems.addItemToList(item);
         ui.printAddItemAcknowledgementMessage(listOfItems);
