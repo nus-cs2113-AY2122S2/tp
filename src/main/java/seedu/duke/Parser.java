@@ -15,12 +15,14 @@ import seedu.duke.exceptions.InvalidModeException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static seedu.duke.common.Messages.MESSAGE_HELP;
 import static seedu.duke.common.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
 import static seedu.duke.common.ErrorMessages.ERROR_MISSING_PARAMETERS;
 import static seedu.duke.common.ErrorMessages.ERROR_MISSING_VALUES;
 import static seedu.duke.common.ErrorMessages.ERROR_INVALID_DAY;
 import static seedu.duke.common.ErrorMessages.ERROR_INVALID_TIME;
 import static seedu.duke.common.ErrorMessages.ERROR_INVALID_MODE;
+import static seedu.duke.common.ErrorMessages.ERROR_INVALID_COMMAND;
 
 public class Parser {
     private final String command;
@@ -51,7 +53,8 @@ public class Parser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
         default:
-            return new HelpCommand();
+            String feedback =ERROR_INVALID_COMMAND + '\n' + MESSAGE_HELP;
+            return new CommandResult(feedback);
         }
     }
 
