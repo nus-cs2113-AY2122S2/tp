@@ -1,5 +1,6 @@
 package ARCS.ui;
 
+import ARCS.commands.CommandResult;
 import ARCS.common.Messages;
 
 import java.util.Scanner;
@@ -29,5 +30,9 @@ public class Ui {
 
     public void showResultToUser(String result) {
         System.out.println(result);
+    }
+
+    public void showResultToUser(CommandResult result) {
+        System.out.println(result.getFeedbackToUser());
     }
 }
