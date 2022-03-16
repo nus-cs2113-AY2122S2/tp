@@ -34,7 +34,6 @@ class ActivityDeleteCommandTest {
      */
     @Test
     public void prepare_hasMissingDelimiter_InvalidCommand() {
-
         // Case 1: Missing both /sid and /aid delimiters
         String argsMissingBothDelimiters = "activity /delete";
         Command activityWithMissingBothDelimiters = Parser.getCommand(argsMissingBothDelimiters);
