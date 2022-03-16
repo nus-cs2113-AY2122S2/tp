@@ -1,9 +1,20 @@
 package seedu.duke;
 
+/**
+ * Class that implements execution behavior for listing the information
+ * of all rooms with corresponding category.
+ * Information contains its type, room id, level and vacancy status
+ */
 public class CheckRoomByCatCommand extends Command {
     private RoomType type;
     private static String TABLE_HEAD = "Type\t\tRoom Id\t\tlevel\t\tStatus";
 
+    /**
+     * Extracts the room type from user input.
+     *
+     * @param commandStringWithoutCommand contains the information of the room type.
+     * @throws InvalidCategoryException If the category is not valid.
+     */
     public CheckRoomByCatCommand(String commandStringWithoutCommand) throws InvalidCategoryException {
         switch (commandStringWithoutCommand.trim()) {
         case "single":

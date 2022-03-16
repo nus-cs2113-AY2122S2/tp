@@ -1,5 +1,10 @@
 package seedu.duke;
 
+/**
+ * Class that checks in a room and changes the status
+ * of the room to be occupied.
+ */
+
 public class CheckInCommand extends Command {
     RoomList roomList;
     int roomId;
@@ -30,9 +35,11 @@ public class CheckInCommand extends Command {
         throw new InvalidRoomNumberException();
     }
 
-    // check valid room number
-    // check the room is vacant or not
-
+    /**
+     * Constructor that initializes the roomId.
+     *
+     * @param command contains the roomId.
+     */
     public CheckInCommand(String command) {
         roomId = Integer.parseInt(command.trim());
     }

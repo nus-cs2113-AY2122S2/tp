@@ -1,9 +1,19 @@
 package seedu.duke;
 
+/**
+ * Class that implements execution behavior for listing the information
+ * of all rooms with corresponding category.
+ * Information contains its type, room id, level and vacancy status
+ */
 public class CheckRoomByLevelCommand extends Command {
     private int level;
     private static String TABLE_HEAD = "Type\t\tRoom Id\t\tlevel\t\tStatus";
 
+    /**
+     * Extracts the room level from user input.
+     *
+     * @param commandStringWithoutCommand contains the information of the level.
+     */
     public CheckRoomByLevelCommand(String commandStringWithoutCommand) {
         level = Integer.parseInt(commandStringWithoutCommand.trim());
     }

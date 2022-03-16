@@ -1,7 +1,9 @@
 package seedu.duke;
 
-import java.math.RoundingMode;
-
+/**
+ * Class that implements execution behavior for listing all room.
+ * information with its type, room id, level and vacancy status.
+ */
 public class CheckAllRoomCommand extends Command {
     private RoomList roomList;
     private static String TABLE_HEAD = "Type\t\tRoom Id\t\tlevel\t\tStatus";
