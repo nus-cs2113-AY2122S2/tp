@@ -24,7 +24,8 @@ public abstract class Command {
      * @throws HotelLiteManagerException If there is any error with user input.
      * @throws WrongCommandException If the command is not recognized.
      */
-    public abstract void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList roomList,
+    public abstract void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
+                                 AssignmentMap assignmentMap, RoomList roomList,
                                  ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException;
 
     public boolean isExit() {

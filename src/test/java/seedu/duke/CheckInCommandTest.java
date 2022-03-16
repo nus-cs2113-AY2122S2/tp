@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,12 +17,13 @@ class CheckInCommandTest {
     void execute_validRoomNumber_expectRoomBeingOccupied() throws HotelLiteManagerException {
         RoomList inputRoomList = new RoomList();
         ItemList itemList = new ItemList();
+        AssignmentMap assignmentMap = new AssignmentMap();
         Ui ui = new Ui();
         SatisfactionList satisfactionList = new SatisfactionList();
         HousekeeperList housekeeperList = new HousekeeperList();
         String inputCommand = "301";
         CheckInCommand checkInCommand = new CheckInCommand(inputCommand);
-        checkInCommand.execute(housekeeperList, satisfactionList, inputRoomList, itemList, ui);
+        checkInCommand.execute(housekeeperList, satisfactionList, assignmentMap, inputRoomList, itemList, ui);
         Room expectedRoom = null;
         for (Room room : inputRoomList.getRoomList()) {
             if (room.getRoomId() == 301) {
@@ -38,12 +40,13 @@ class CheckInCommandTest {
         RoomList inputRoomList = new RoomList();
         ItemList itemList = new ItemList();
         Ui ui = new Ui();
+        AssignmentMap assignmentMap = new AssignmentMap();
         SatisfactionList satisfactionList = new SatisfactionList();
         HousekeeperList housekeeperList = new HousekeeperList();
         String inputCommand = "601";
         CheckInCommand checkInCommand = new CheckInCommand(inputCommand);
         Room expectedRoom = null;
         assertThrows(InvalidRoomNumberException.class,
-            () -> checkInCommand.execute(housekeeperList, satisfactionList, inputRoomList,itemList,ui));
+            () -> checkInCommand.execute(housekeeperList, satisfactionList, assignmentMap, inputRoomList,itemList,ui));
     }
 }

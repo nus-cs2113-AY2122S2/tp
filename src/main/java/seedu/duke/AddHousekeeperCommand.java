@@ -74,7 +74,8 @@ public class AddHousekeeperCommand extends Command {
      * @param ui               The user interface for this execution method.
      */
     @Override
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList roomList,
+    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
+                        AssignmentMap assignmentMap, RoomList roomList,
                         ItemList listOfItems, Ui ui) throws InvalidUserException {
         boolean isRecorded = housekeeperList.hasNameAdded(getHousekeeper().getName());
         if (!isRecorded) {
@@ -83,5 +84,6 @@ public class AddHousekeeperCommand extends Command {
         } else {
             throw new InvalidUserException();
         }
+
     }
 }
