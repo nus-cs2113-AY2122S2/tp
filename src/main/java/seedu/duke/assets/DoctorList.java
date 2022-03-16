@@ -23,8 +23,8 @@ public class DoctorList {
 
     //view particular doctor
     public void viewDoctor(String nric) {
-        if (isNull(nric)) {
-            System.out.println("Please input a valid doctor, doctor doesnt exist");
+        if((getDoctor(nric)) == null){
+            System.out.println("Doctor doesn't exist please try again!");
             return;
         }
         System.out.println(getDoctor(nric));
