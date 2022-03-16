@@ -4,8 +4,8 @@ import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
 import java.util.ArrayList;
-import java.time.LocalDate;
 import java.util.Comparator;
+import java.time.LocalDate;
 
 import static java.util.stream.Collectors.toList;
 
@@ -78,11 +78,11 @@ public class Reminder {
     }
 
     private void addDailyTaskToFilteredDailyTasks(ArrayList<Task> filteredDailyTasks, Task task) {
-        if (task.getByDate() == null) {
+        if (hasNoDeadline(task)) {
             return;
         } else if (task.getByDate().isEqual(todayDate)) {
             filteredDailyTasks.add(task);
-        } else if (task.getDoOnDate() == null) {
+        } else if (hasNoReminderDate(task)) {
             return;
         } else if (task.getDoOnDate().isEqual(todayDate)) {
             filteredDailyTasks.add(task);
@@ -99,5 +99,21 @@ public class Reminder {
         return (ArrayList<Task>) filteredDailyTasks.stream()
                 .filter((t) -> !t.isDone())
                 .collect(toList());
+    }
+
+    private boolean hasNoDeadline(Task task) {
+        if (task.getByDate() == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean hasNoReminderDate(Task task) {
+        if (task.getDoOnDate() == null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
