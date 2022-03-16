@@ -3,7 +3,7 @@ package seedu.duke.events;
 public class Event {
     private String name;
     private String title;
-    private String day;
+    public String day;
     public int startTime;
     public int endTime;
     private String mode;
