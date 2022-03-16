@@ -9,7 +9,10 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
 - [Quick Start](#Quick-Start)
 - [Features](#Features)
    - [print all projects](#print-all-projects-listprojects)
+   - [add todo to a project](#add-todo-to-a-project-todo)
+   - [mark todo as done](#mark-todo-as-done)
    - [exit](#exit-exit)
+   
 - [FAQ](#FAQ)
 - [Command Summary](#Command-Summary)
 
@@ -70,7 +73,7 @@ Format: `todo [project_index] [description]`
 #### Example of output
 ```Todo:  buy textbooks have been added to project pro1```
 
-### mark todo as done: `mark`
+### Mark todo as done: `mark`
 
 Format: `mark [project_index] [todo_index]`
 * The `project_index` and `todo_index` must be positive integers.
