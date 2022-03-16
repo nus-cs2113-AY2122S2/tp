@@ -7,4 +7,6 @@ Error! Item Pax is invalid.
 Error! Item Pax is invalid.
 The item and its pax has been added to the list of items in the inventory.
 There are currently 2 items within the inventory.
+1. Item Name: Toilet Roll Item Pax: 15
+2. Item Name: Spoon Item Pax: 2
 see u again!

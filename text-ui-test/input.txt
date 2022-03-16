@@ -5,4 +5,5 @@ Add Item Name:Toilet Roll Pax:
 Add Item Name:Toilet Roll Pax:-1
 Add Item Name:Toilet Roll Pax:0
 Add Item Name:Spoon Pax:2
+View Item In Inventory
 bye
