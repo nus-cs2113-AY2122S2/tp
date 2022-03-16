@@ -130,7 +130,7 @@ public class Command {
     }
 
     public void deleteMedicine(MedicineList medicineList, String stringIndex) {
-        if (!isNull(stringIndex)) {
+        if (isNull(stringIndex)) {
             return;
         }
         try {

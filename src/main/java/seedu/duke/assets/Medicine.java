@@ -18,6 +18,11 @@ public class Medicine {
         this.quantity = quantity;
     }
 
+    public String saveString() {
+        return medicineName + "," + dosage + "," + expiry
+                + "," + sideEffects + "," + quantity;
+    }
+
     public int getMedicineId() {
         return medicineId;
     }
