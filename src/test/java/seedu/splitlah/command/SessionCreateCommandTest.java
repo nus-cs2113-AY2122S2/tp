@@ -67,7 +67,7 @@ class SessionCreateCommandTest {
      */
     @Test
     public void run_hasOneNameDuplicate_sessionListSizeRemainsTwo() {
-        String userInput = "session /create /n Class outing /d 23-02-2022 /pl Alice Alice Bob";
+        String userInput = "session /create /n University outing /d 23-02-2022 /pl Alice Alice Bob";
         Command command = Parser.getCommand(userInput);
         command.run(manager);
         assertEquals(2, manager.getProfile().getSessionList().size());
@@ -79,7 +79,7 @@ class SessionCreateCommandTest {
     @Test
     public void run_hasOneNameDuplicate_sessionIdNotIncremented() {
         int currentSessionId = manager.getProfile().getSessionIdTracker();
-        String userInput = "session /create /n Class outing /d 23-02-2022 /pl Alice Alice Bob";
+        String userInput = "session /create /n University outing /d 23-02-2022 /pl Alice Alice Bob";
         Command command = Parser.getCommand(userInput);
         command.run(manager);
         int testSessionId = manager.getProfile().getSessionIdTracker();
