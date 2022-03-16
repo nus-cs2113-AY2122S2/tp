@@ -5,9 +5,9 @@ import seedu.duke.manager.OrderManager;
 
 public class OrderController extends Controller {
     private static final String[] CHOICES = {"Exit", "Display Menu",
-            "Create an order", "Delete an order",
-            "Get total value of current order",
-            "Get total value of all orders in the list", "Print receipt"
+        "Create an order", "Delete an order",
+        "Get total value of current order",
+        "Get total value of all orders in the list", "Print receipt"
     };
     private final OrderManager orderManager;
 
