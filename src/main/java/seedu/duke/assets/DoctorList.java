@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class DoctorList {
 
+ delete-patient
 
     private ArrayList<Doctor> doctors = new ArrayList<>();
 
@@ -17,6 +18,15 @@ public class DoctorList {
         return null;
     }
 
+    ArrayList<Doctor> doctors = new ArrayList<>();
+ master
+
+    public void add(String[] addDoctorParameters) {
+        Doctor newDoctor = new Doctor(addDoctorParameters[0],addDoctorParameters[1],
+                Integer.parseInt(addDoctorParameters[2]), addDoctorParameters[3].charAt(0),
+                addDoctorParameters[4],addDoctorParameters[5], addDoctorParameters[6]);
+        doctors.add(newDoctor);
+    }
 
     //view particular doctor
     public void viewDoctor(String nric) {

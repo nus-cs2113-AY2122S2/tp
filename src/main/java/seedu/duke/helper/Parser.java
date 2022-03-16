@@ -3,22 +3,12 @@ package seedu.duke.helper;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
 
-    public static ArrayList<String> parseViewPatient(String description) {
-        //if no NRIC
-        if (description == null) {
-            return null;
-        }
-
-        //if NRIC
-        ArrayList<String> parameters = new ArrayList<String>();
-        parameters.add(description);
-        return parameters;
-    }
 
     public static String[] commandParser(String userInput) {
         return userInput.trim().split("/info");
@@ -40,6 +30,7 @@ public class Parser {
         }
     }
 
+ delete-patient
     public static ArrayList<String> parseViewDoctor(String description) {
         //no specific doctor
         if (description == null) {
@@ -50,6 +41,32 @@ public class Parser {
         ArrayList<String> parameters = new ArrayList<String>();
         parameters.add(description);
         return parameters;
+
+    public static String[] parseAddDoctor(String parameters) {
+        String[] addDoctorParameters = parameters.split(",");
+        for (int i = 0; i < addDoctorParameters.length; i++) {
+            addDoctorParameters[i] = addDoctorParameters[i].trim();
+        }
+        if (addDoctorParameters.length != 7) {
+            System.out.println("There is one or more parameters missing.");
+            return null;
+        }
+        if (validateAddDoctor(addDoctorParameters)) {
+            return addDoctorParameters;
+        } else {
+            return null;
+        }
+    }
+
+    private static boolean validateAddDoctor(String[] parameters) {
+        boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters,0,6));
+        //validate full name cause specialization is also j a name
+        if (!validateFullName(parameters[6])) {
+            System.out.println("Specialization must be a name");
+            isValid = false;
+        }
+        return isValid;
+ master
     }
 
     public static String[] parseAddMedicine(String parameters) {
@@ -61,7 +78,8 @@ public class Parser {
         }
     }
 
-    private static boolean validateAddPatient(String[] parameters) {
+
+    private static boolean validateAddPerson(String[] parameters) {
         boolean isValid = true;
         if (!validateNric(parameters[0])) {
             System.out.println("NRIC must start with a capital letter, "
@@ -90,6 +108,11 @@ public class Parser {
                     + "It cannot be before 1900-01-01 or be today and after.");
             isValid = false;
         }
+        return isValid;
+    }
+
+    private static boolean validateAddPatient(String[] parameters) {
+        boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters,0,6));
         if (!validateAdmissionDate(parameters[6])) {
             System.out.println("Date of birth must be in YYYY-MM-DD format. "
                     + "It cannot be before 1980-01-01 or be today and after.");
@@ -98,7 +121,7 @@ public class Parser {
         return isValid;
     }
 
-    private static boolean validateMedicine(String[] parameters) {
+    public static boolean validateMedicine(String[] parameters) {
         boolean check = true;
         for (int i = 0; i < 5; i++) {
             switch (i) {

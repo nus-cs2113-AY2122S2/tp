@@ -1,5 +1,6 @@
 package seedu.duke.helper;
 
+import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
 import seedu.duke.assets.DoctorList;
@@ -12,14 +13,12 @@ public class Command {
         return string == null;
     }
 
-    public void viewPatient(PatientList patientList, String parameters) {
-        if (isNull(parameters)) {
-            return;
+    public void viewPatient(PatientList patientList, String nric) {
+        if (isNull(nric)) {
+            patientList.viewPatient();;
+        } else {
+            patientList.viewPatient(nric);
         }
-        if (Parser.parseViewPatient(parameters) == null) {
-            patientList.viewPatient();
-        }
-        patientList.viewPatient(parameters);
     }
 
     public void addPatient(PatientList patientList, String parameters) {
@@ -96,5 +95,39 @@ public class Command {
         }
         medicineList.add(parameterArray);
         System.out.println("Medicine has been added");
+    }
+
+
+    public void addDoctor(DoctorList doctorList, String parameters) {
+        if (isNull(parameters)) {
+            ui.printNullParametersMessage();
+            ui.printAddDoctorExampleMessage();
+            return;
+        }
+        String[] addDoctorParameters = Parser.parseAddDoctor(parameters);
+        if (addDoctorParameters == null) {
+            ui.printAddPatientExampleMessage();
+        } else {
+            doctorList.add(addDoctorParameters);
+            System.out.println("The doctor above has been added.");
+        }
+    }
+
+    public void deleteMedicine(MedicineList medicineList, String stringIndex) {
+        if (!isNull(stringIndex)) {
+            return;
+        }
+        try {
+            int index = Integer.parseInt(stringIndex);
+            if (index < 1 || index > medicineList.size()) {
+                System.out.println("Number is not within range of 1 - " + medicineList.size());
+                return;
+            }
+            medicineList.delete(index);
+            System.out.println("The medicine record at index " + index + " has been deleted.");
+        } catch (NumberFormatException numberFormatException) {
+            System.out.println("Parameter given is not a number.");
+
+        }
     }
 }
