@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class PersonList {
     private ArrayList<Person> personList;
     private int numberOfMembers;
+    private static int SINGULAR = 1;
 
     /**
      * Constructs a new PersonList object.
@@ -30,7 +31,7 @@ public class PersonList {
      * @return The person with the index
      */
     public Person getPerson(int index) {
-        assert (index >= 1);
+        assert (index >= SINGULAR);
         assert (index <= numberOfMembers);
         int listIndex = index - 1;
         return personList.get(listIndex);
@@ -64,7 +65,7 @@ public class PersonList {
      * @param index The index of the person to be removed
      */
     public void removePerson(int index) {
-        assert (index >= 1);
+        assert (index >= SINGULAR);
         assert (index <= numberOfMembers);
         int listIndex = index - 1;
         String name = personList.get(listIndex).getName();
