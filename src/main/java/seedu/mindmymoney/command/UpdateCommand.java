@@ -38,6 +38,8 @@ public class UpdateCommand extends Command {
     @Override
     public void executeCommand() {
         try {
+            String description;
+            String category = null;
             System.out.print(PrintStrings.LINE);
             String[] parseUpdateInput = updateInput.split(" ", SPLIT_LIMIT);
 
@@ -45,14 +47,22 @@ public class UpdateCommand extends Command {
             String indexString = parseUpdateInput[INDEX_OF_FIRST_ITEM_IN_STRING];
             String expenditureDescription = parseUpdateInput[INDEX_OF_SECOND_ITEM_IN_STRING];
             int divisionIndex = expenditureDescription.lastIndexOf(" ");
-            String description = expenditureDescription.substring(INDEX_OF_FIRST_ITEM_IN_STRING,
+            String descriptionAndCategory = expenditureDescription.substring(INDEX_OF_FIRST_ITEM_IN_STRING,
                     divisionIndex).strip();
+            if (descriptionAndCategory.contains("-c ")) {
+                descriptionAndCategory = descriptionAndCategory.replace("-c ", "");
+                int divisionIndexForCategory = descriptionAndCategory.lastIndexOf(" ");
+                description = descriptionAndCategory.substring(INDEX_OF_FIRST_ITEM_IN_STRING,
+                        divisionIndexForCategory).strip();
+                category = descriptionAndCategory.substring(divisionIndexForCategory).strip();
+            } else {
+                description = expenditureDescription.substring(INDEX_OF_FIRST_ITEM_IN_STRING,
+                        divisionIndex).strip();
+            }
             String amountString = expenditureDescription.substring(divisionIndex).strip();
-
             int indexToUpdate = Integer.parseInt(indexString) + LIST_INDEX_CORRECTION;
-            Expenditure newExpenditure = new Expenditure(description, Integer.parseInt(amountString));
+            Expenditure newExpenditure = new Expenditure(description, category, Integer.parseInt(amountString));
             itemList.set(indexToUpdate, newExpenditure);
-
             System.out.printf("Successfully set expenditure %d to %s\n",
                     indexToUpdate - LIST_INDEX_CORRECTION, newExpenditure);
         } catch (ArrayIndexOutOfBoundsException e) {

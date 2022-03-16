@@ -12,9 +12,11 @@ What can I do for you?
 > ------------------------------------Help Page------------------------------------
 1. Listing all Expenditures: list
 2. Adding an Expenditure entry: add [DESCRIPTION] [AMOUNT]
-3. Updating an Expenditure entry: update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]
-4. Removing an Expenditure entry: delete [INDEX]
-5. Exiting the program: bye
+3. Adding an Expenditure entry with category: add [DESCRIPTION] -c [CATEGORY] [AMOUNT]
+4. Updating an Expenditure entry: update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]
+5. Updating an Expenditure entry with category: update [INDEX] [NEW_DESCRIPTION] -c [NEW_CATEGORY] [NEW_AMOUNT]
+6. Removing an Expenditure entry: delete [INDEX]
+7. Exiting the program: bye
 ---------------------------------------------------------------------------------
 
 > ---------------------------------------------------------------------------------
