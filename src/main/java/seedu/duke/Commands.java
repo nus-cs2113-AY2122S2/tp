@@ -130,7 +130,7 @@ public class Commands {
 
         }
         Integer total = 0;
-        for (Goods good: userGoods){
+        for (Goods good: userGoods) {
             total += good.getQuantity();
         }
         System.out.println(String.format("There are %d goods in total.",total));
