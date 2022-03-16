@@ -21,6 +21,7 @@ public class ExpenditureList {
      * @param amount The cost for this expenditure
      */
     public void addExpenditure(String description, double amount) {
+        assert (description != null);
         this.expenditureArrayList.add(new Expenditure(description, amount));
         numberOfExpenditures++;
     }
@@ -32,6 +33,8 @@ public class ExpenditureList {
      * @return The cost of the expenditure
      */
     public double getExpenditureValue(int index) {
+        assert (index >= 1);
+        assert (index <= numberOfExpenditures);
         return expenditureArrayList.get(index - 1).getAmount();
     }
 
@@ -41,6 +44,8 @@ public class ExpenditureList {
      * @param index The index of the expenditure on the person's expenditure list
      */
     public void remove(int index) {
+        assert (index >= 1);
+        assert (index <= numberOfExpenditures);
         expenditureArrayList.remove(index - 1);
         numberOfExpenditures--;
     }
@@ -84,6 +89,8 @@ public class ExpenditureList {
      * @return The description of the expenditure
      */
     public String getDescription(int index) {
+        assert (index >= 1);
+        assert (index <= numberOfExpenditures);
         return expenditureArrayList.get(index - 1).getDescription();
     }
 }

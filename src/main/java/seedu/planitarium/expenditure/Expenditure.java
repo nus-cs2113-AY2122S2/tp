@@ -13,6 +13,7 @@ public class Expenditure {
      * @param amount The cost of that expenditure
      */
     public Expenditure(String description, double amount) {
+        assert (description != null);
         this.description = description;
         this.amount = amount;
     }
