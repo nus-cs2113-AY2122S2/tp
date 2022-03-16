@@ -31,8 +31,9 @@ public class Ui {
 
         System.out.println(System.lineSeparator());
         System.out.println(logo);
-        //int randomIndex = rand.nextInt(48);
-        //System.out.println(tips[randomIndex] + System.lineSeparator());
+        int randomIndex = rand.nextInt(48);
+        assert randomIndex >= 0 && randomIndex <= 48 : "randomIndex is not within the bounds";
+        System.out.println("<< " + tips[randomIndex] + " >>" + System.lineSeparator());
         System.out.println("Welcome to MindMyMoney");
         System.out.println("What can I do for you?" + System.lineSeparator());
     }
