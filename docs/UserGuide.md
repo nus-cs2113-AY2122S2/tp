@@ -51,6 +51,7 @@ For a module, you are able to change its description only.
 - Edit a module description <br>
   Format: `edit /m MODULE_CODE -d "MODULE_DESCRIPTION"` <br><br>
   Example to edit a module description: `edit /m CS2113T -d "Software Engineering & OOP"`<br>
+
 ### Marking a task: `mark`
 
 ### Listing all tasks/modules: `list`
