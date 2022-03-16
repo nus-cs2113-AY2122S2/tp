@@ -50,7 +50,7 @@ A new workout of carrying out Russian twists 50 times will be created and added 
 
 ---
 ### Show all Workouts: `workout /list`
-List down all workouts that have been created and stored in the workout list.
+Lists down all workouts that have been created and stored in the workout list.
 
 Format: `workout /list`
 
@@ -118,6 +118,54 @@ Showed all workouts in list
 ```
 ---
 
+### Update a Workout: `workout /update`
+Modifies an existing workout from the workout list.<br>
+*Noted: Only the number of repetition can be changed.*
+
+Format: `workout /update <index of workout to update> <new number of repetitions>`
+
+| Parameters                     | Description                                              |
+|--------------------------------|----------------------------------------------------------|
+| `<index of workout to update>` | The index of workout to be update from the workout list. |
+| `<new number of repetitions>`  | The number of repetitions to be changed to.              |
+
+**Example**<br>
+Initially, the workout list contains the following workouts:
+```
+----------------------------------------------------------------------
+Showing workouts 1-3 of 3:
+1. push up (10 reps)
+2. sit up (10 reps)
+3. pull up (10 reps)
+Showed all workouts in list
+----------------------------------------------------------------------
+```
+To update workout with index 1 to 15 reps, the following command should be entered:
+```
+> workout /update 1 15
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+Alright, the following workout has been updated:
+
+	push up (15 reps)
+
+----------------------------------------------------------------------
+```
+Now workout with index 1 (push up with 10 reps) is updated to push up with 15 reps.
+Now running the `workout /list` command again will show the workout list as follows:
+```
+----------------------------------------------------------------------
+Showing workouts 1-3 of 3:
+1. push up (15 reps)
+2. sit up (10 reps)
+3. pull up (10 reps)
+Showed all workouts in list
+----------------------------------------------------------------------
+```
+---
+
 ## WerkIt!'s Local Storage Information
 When you start WerkIt! for the first time, the following directory and files are created:
 
@@ -159,9 +207,9 @@ first time. Your saved data should be in that directory.
 
 {Give a 'cheat sheet' of commands here}
 
-| Action         | Format and Example                                                                                                   |
-|:---------------|:---------------------------------------------------------------------------------------------------------------------|
-| Create Workout | Format: `workout /new <exercise name> /reps <number of repetitions>`<br/>Example: `workout /new biceps curl /reps 1` |
-| Delete Workout | Format: `workout /delete <workout number to delete>`<br/>Example: `workout /delete 2`                                |
-
+| Action         | Format and Example                                                                                                         |
+|:---------------|:---------------------------------------------------------------------------------------------------------------------------|
+| Create Workout | Format: `workout /new <exercise name> /reps <number of repetitions>`<br/>Example: `workout /new biceps curl /reps 1`       |
+| Delete Workout | Format: `workout /delete <workout number to delete>`<br/>Example: `workout /delete 2`                                      |
+| Update Workout | Format: `workout /update <index of workout to be updated> <new number of repetitions>`<br/>Example: `workout /update 1 15` |
 
