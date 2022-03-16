@@ -1,4 +1,0 @@
-push up | 10
-sit up | 10
-pull up | 10
-push up | 15
