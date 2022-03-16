@@ -4,6 +4,9 @@ import seedu.planitarium.exceptions.UnknownException;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.PersonList;
 
+/**
+ * Generates different command classes for execution according to user instruction.
+ */
 public class CommandFactory {
     protected static final String ADD_PERSON_CMD = "add";
     protected static final String DELETE_PERSON_CMD = "delete";

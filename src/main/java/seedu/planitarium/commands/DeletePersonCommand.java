@@ -4,7 +4,12 @@ import seedu.planitarium.exceptions.UnknownException;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.PersonList;
 
+/**
+ * Executes the delete command and delete a person from the list.
+ */
 public class DeletePersonCommand extends Command {
+    protected static final String USER_INDEX_NOT_VALID = "User index should be valid";
+    protected static final String PERSONLIST_NOT_NULL = "Personlist should not be null";
 
     protected int uid;
 
@@ -15,6 +20,8 @@ public class DeletePersonCommand extends Command {
 
     @Override
     public void execute() throws UnknownException {
+        assert (uid < 1) : USER_INDEX_NOT_VALID;
+        assert (personList != null) : PERSONLIST_NOT_NULL;
         personList.removePerson(uid);
     }
 

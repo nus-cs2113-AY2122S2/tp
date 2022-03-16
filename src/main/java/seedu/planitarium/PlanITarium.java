@@ -11,7 +11,7 @@ import seedu.planitarium.ui.UI;
 public class PlanITarium {
     protected Scanner userInput;
     protected Command command;
-    //protected static UI ui = new UI(); in case it is needed later on 
+    //protected static UI ui = new UI(); in case it is needed later on
     protected PersonList personList = new PersonList();
     protected CommandFactory commandFactory = new CommandFactory();
     protected static ProjectLogger logger;
