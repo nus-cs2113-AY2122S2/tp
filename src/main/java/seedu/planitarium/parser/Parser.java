@@ -1,12 +1,19 @@
 package seedu.planitarium.parser;
 
+import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.exceptions.InvalidIndexException;
 import seedu.planitarium.exceptions.InvalidMoneyException;
 import seedu.planitarium.exceptions.MissingDelimiterException;
 import seedu.planitarium.person.Person;
 import seedu.planitarium.person.PersonList;
 
+import java.util.logging.Level;
+
 public class Parser {
+    private static final String className = Parser.class.getSimpleName();
+    private static final String fileName = className + ".log";
+    private static final ProjectLogger logger = new ProjectLogger(className, fileName);
+
     public static final String DELIMITER_SPACE = " ";
     public static final String DELIMITER_NAME = "/n";
     public static final String DELIMITER_USER_INDEX = "/u";
@@ -35,6 +42,8 @@ public class Parser {
     private static final String ASSERT_USER_INDEX_NOT_NULL = "User index should not be null";
     private static final String ASSERT_EXPENDITURE_INDEX_NOT_NULL = "Expenditure index should not be null";
     private static final String ASSERT_INCOME_INDEX_NOT_NULL = "Income index should not be null";
+
+    private static final String LOG_PARSED_VALUES = "User Input '%s' parsed out as '%s'";
 
     /**
      * Returns the term surrounded by two delimiters.
