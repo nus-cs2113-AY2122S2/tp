@@ -32,6 +32,8 @@ public class IncomeList {
      * @return The income amount
      */
     public double getIncomeValue(int index) {
+        assert (index > 0);
+        assert (index <= numberOfIncomes);
         return incomeArrayList.get(index - 1).getAmount();
     }
 
