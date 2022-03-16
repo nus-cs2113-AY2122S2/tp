@@ -88,11 +88,15 @@ Mark a task as completed or uncompleted with the given task number from the spec
 Displays a list of all tasks, some of which are grouped by module code while the rest fall under "general tasks" list.<br><br>
 Format: `list`
 
-
 ### Clearing the list: `reset`
 
 Removes all tasks and modules. <br><br>
 Format: `reset`
+
+### Saving the list: `save`
+
+Saves all tasks and modules. <br><br>
+Format: `save`
 
 ## FAQ
 
@@ -103,13 +107,14 @@ Format: `reset`
 ## Command Summary
 <br>
 
-| Command | Format                                                                                                                                                           |
-|:-------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|  help   | `help`                                                                                                                                                           |
-|   add   | `add /m MODULE_CODE [-d "MODULE_DESCRIPTION"]`<br>`add /t "TASK_NAME" [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”] [-m MODULE_CODE]`                    |
-|   del   | `del /m MODULE_CODE del /t TASK_NUMBER [-m MODULE_CODE]`                                                                                                         |
+| Command | Format                                                                                                                                                            |
+|:-------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  help   | `help`                                                                                                                                                            |
+|   add   | `add /m MODULE_CODE [-d "MODULE_DESCRIPTION"]`<br>`add /t "TASK_NAME" [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”] [-m MODULE_CODE]`                     |
+|   del   | `del /m MODULE_CODE del /t TASK_NUMBER [-m MODULE_CODE]`                                                                                                          |
 |  edit   | `edit /t TASK_INDEX (-n "TASK_NAME" or -d "TASK_DESCRIPTION" or -t "ESTIMATED_WORKING_TIME") [-m MODULE_CODE]` <br> `edit /m MODULE_CODE -d "MODULE_DESCRIPTION"` |
-|  mark   | `mark /c TASK_NUMBER [-m MODULE_CODE]`<br>`mark /u TASK_NUMBER [-m MODULE_CODE]`                                                                                 |
-|  list   | `list`                                                                                                                                                           |
-|  reset  | `reset`                                                                                                                                                          |
+|  mark   | `mark /c TASK_NUMBER [-m MODULE_CODE]`<br>`mark /u TASK_NUMBER [-m MODULE_CODE]`                                                                                  |
+|  list   | `list`                                                                                                                                                            |
+|  reset  | `reset`                                                                                                                                                           |
+|  save   | `save`                                                                                                                                                            |
 
