@@ -3,14 +3,13 @@ package storage;
 import data.workouts.Workout;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FileManagerTest {
+
     @Test
-    public void convertWorkoutToFileDataFormat_normalWorkoutInput_conversionSuccess() throws IOException {
+    public void convertWorkoutToFileDataFormat_normalWorkoutInput_conversionSuccess() {
         Workout testSample1 = new Workout("push up", 1);
         Workout testSample2 = new Workout("russian twist", 1000);
         Workout testSample3 = new Workout("swimming", 20);
@@ -27,7 +26,7 @@ public class FileManagerTest {
     }
 
     @Test
-    public void convertWorkoutToFileDataFormat_nullWorkoutInput_exceptionThrown() throws IOException {
+    public void convertWorkoutToFileDataFormat_nullWorkoutInput_exceptionThrown() {
         Workout testSample1 = null;
 
         FileManager fm = new FileManager();

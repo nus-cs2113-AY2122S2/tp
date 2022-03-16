@@ -5,16 +5,16 @@ import storage.FileManager;
 import storage.UnknownFileException;
 import textcolors.TextColor;
 
-import java.nio.file.Path;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.Scanner;
-
-//import static textcolors.TextColor.COLOR_RESET;
-//import static textcolors.TextColor.COLOR_YELLOW;
 
 /**
  * This class contains all the user interface-related texts and methods for the WerkIt! Application.
  */
 public class UI {
+    private static Logger logger = Logger.getLogger(UI.class.getName());
+
     // WerkIt ASCII Banner Logo Art
     public static final String WERKIT_BANNER_LOGO = " __        __        _    ___ _   _ \n"
             + " \\ \\      / /__ _ __| | _|_ _| |_| |\n"
@@ -88,6 +88,10 @@ public class UI {
         System.out.println(lineOfChars);
     }
 
+    /**
+     * Prints the greetings when the user starts the WerkIt! application. The greeting includes the
+     * banner logo as well as a welcome message.
+     */
     public void printGreetings() {
         printLine(DEFAULT_LINE_LENGTH, "=");
         System.out.println(WERKIT_BANNER_LOGO);
@@ -95,6 +99,9 @@ public class UI {
         printLine();
     }
 
+    /**
+     * Prints the message that will greet the user farewell when the user exits the application.
+     */
     public void printGoodbye() {
         System.out.println(GOODBYE_MESSAGE);
         printLine(DEFAULT_LINE_LENGTH, "=");
@@ -266,10 +273,21 @@ public class UI {
         System.out.println("\t This will exit werkIt.");
     }
 
+    /**
+     * Prints a message that tells the user that the saved file data is being loaded
+     * into the application.
+     */
     public void printLoadingFileDataMessage() {
         System.out.println(LOADING_FILE_DATA_MSG);
     }
 
+    /**
+     * Prints the result of the file load process.
+     *
+     * @param filename         The name of the file that is loaded.
+     * @param isLoadSuccessful Whether the file load is successful or not.
+     * @throws UnknownFileException If the filename specified is unknown.
+     */
     public void printFileLoadStatusMessage(String filename, boolean isLoadSuccessful) throws UnknownFileException {
         String statusMessage;
         if (isLoadSuccessful) {
@@ -287,43 +305,77 @@ public class UI {
             messageToPrint = WORKOUTS_FILE_LOADED_MSG;
             break;
         default:
+            logger.log(Level.WARNING, "Unknown filename encountered.");
             throw new UnknownFileException(filename, UnknownFileException.UNKNOWN_FILE_MSG);
         }
 
         System.out.printf(messageToPrint, statusMessage);
     }
 
+    /**
+     * Prints a message to tell the user that the application is currently checking whether the required
+     * directory and files exist in the user's system.
+     */
     public void printCheckingDirectoryAndFilesMessage() {
         System.out.print(CHECK_DIRECTORY_AND_FILES_MSG);
     }
 
+    /**
+     * Prints a message to tell the user that the required directory is not found and a new one
+     * will be created.
+     */
     public void printDirectoryNotFoundMessage() {
         System.out.println();
         System.out.println(DIRECTORY_NOT_FOUND_MSG);
     }
 
+    /**
+     * Prints a message to tell the user that the required directory has been successfully created.
+     */
     public void printDirectoryCreatedMessage() {
         System.out.println(DIRECTORY_CREATED_MSG);
     }
 
+    /**
+     * Prints a message to tell the user that the exercise file is not found on the user's system
+     * and a new one will be created.
+     */
     public void printExerciseFileNotFoundMessage() {
         System.out.println();
         System.out.println(EXERCISE_FILE_NOT_FOUND_MSG);
     }
 
+    /**
+     * Prints a message to tell the user that the exercise file has been successfully created.
+     */
     public void printExerciseFileCreatedMessage() {
         System.out.println(EXERCISE_FILE_CREATED_MSG);
     }
 
+    /**
+     * Prints a message to tell the user that the workout file is not found on the user's system
+     * and a new one will be created.
+     */
     public void printWorkoutFileNotFoundMessage() {
         System.out.println();
         System.out.println(WORKOUT_FILE_NOT_FOUND_MSG);
     }
 
+    /**
+     * Prints a message to tell the user that the workout file has been successfully created.
+     */
     public void printWorkoutFileCreatedMessage() {
         System.out.println(WORKOUT_FILE_CREATED_MSG);
     }
 
+    /**
+     * Prints either the status or nothing depending on the presence of the required directory and
+     * files on the user's system. If all the required directory and files are present, a status
+     * will be printed. Otherwise, an empty line will be printed.
+     *
+     * @param areAllDirectoryAndFilesPresent A boolean indicating if the required directory and
+     *                                       files are present.
+     */
     public void printEmptyLineOrStatus(boolean areAllDirectoryAndFilesPresent) {
         if (areAllDirectoryAndFilesPresent) {
             String status = getColorText(TextColor.COLOR_GREEN, ALL_DIRECTORY_AND_FILES_PRESENT);
