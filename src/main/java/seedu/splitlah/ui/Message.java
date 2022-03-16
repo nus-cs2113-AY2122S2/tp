@@ -145,6 +145,12 @@ public abstract class Message {
             "Name duplicates exist but not detected.";
     public static final String ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY =
             "The array of person names is empty but was not handled in prepare function.";
+    public static final String LOGGER_SESSIONCREATE_SESSION_ADDED =
+            "A session was added into the list of sessions with Id: ";
+
+    // Session Delete Command
+    public static final String LOGGER_SESSIONDELETE_SESSION_REMOVED =
+            "A session was remove from the list of session with Id: ";
 
     // Session Summary Command
     public static final String MESSAGE_SESSIONSUMMARY_NO_PAYMENTS_REQUIRED =
