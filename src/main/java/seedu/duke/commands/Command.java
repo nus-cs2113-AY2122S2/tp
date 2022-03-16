@@ -12,7 +12,6 @@ public abstract class Command {
      *
      * @param itemList ItemList containing all items in the current inventory
      * @param ui User Interface for reading inputs and/or printing outputs
-     * @param storage Storage object to write output to
      */
     public abstract void execute(Ui ui, ItemList itemList);
 
