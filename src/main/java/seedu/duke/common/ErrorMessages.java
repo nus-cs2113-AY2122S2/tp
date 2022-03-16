@@ -26,4 +26,6 @@ public class ErrorMessages {
     public static final String ERROR_OVERLAPPING_EVENT = "This event coincides with another event. "
             + "This event will not be added to the timetable.";
 
+    public static final String ERROR_INIT_FAILED = "Failed to initialise MeetingJio application. Exiting...";
+
 }

@@ -39,8 +39,4 @@ public class Messages {
             + "4. " + MESSAGE_CLEAR_FORMAT
             + "5. " + MESSAGE_EXIT_FORMAT
             + MESSAGE_DIVIDER;
-
-    // Error Messages
-    public static final String MESSAGE_INIT_FAILED = "Failed to initialise MeetingJio application. Exiting...";
-
 }
