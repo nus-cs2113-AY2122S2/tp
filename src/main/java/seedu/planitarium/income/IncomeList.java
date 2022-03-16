@@ -80,6 +80,9 @@ public class IncomeList {
         return totalAmount;
     }
 
+    /**
+     * Prints all income in the person's income list.
+     */
     public void printIncomeList() {
         int listIndex = 1;
         for (Income item : incomeArrayList) {
