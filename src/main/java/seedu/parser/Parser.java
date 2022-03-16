@@ -76,32 +76,7 @@ public class Parser {
         case UpdateCommand.COMMAND_WORD:
             try {
                 args = extractArguments(commandAndArgument.get(1));
-                UpdateCommand updateCommand = new UpdateCommand();
-                for (String s : args) {
-                    int delimiterPos = s.indexOf('/');
-                    String argType = s.substring(0, delimiterPos);
-                    String argValue = s.substring(0, delimiterPos + 1);
-                    switch (argType) {
-                    case "n":
-                        updateCommand.setUpdateName(argValue);
-                        break;
-                    case "pd":
-                        updateCommand.setPurchaseDate(argValue);
-                        break;
-                    case "t":
-                        updateCommand.setType(argValue);
-                        break;
-                    case "pf":
-                        updateCommand.setPurchaseFrom(argValue);
-                        break;
-                    case "c":
-                        updateCommand.setCost(argValue);
-                        break;
-                    default:
-                        System.out.println("`" + argValue + "` not updated for type " + argType +": Unrecognised Tag");
-                    }
-                }
-                return updateCommand;
+                return prepareUpdate(args);
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(UpdateCommand.COMMAND_WORD + UpdateCommand.COMMAND_DESCRIPTION);
             }
@@ -109,6 +84,35 @@ public class Parser {
             return new IncorrectCommand(INCORRECT_COMMAND_FORMAT);
         }
 
+    }
+
+    protected UpdateCommand prepareUpdate(ArrayList<String> args) {
+        UpdateCommand updateCommand = new UpdateCommand();
+        for (String s : args) {
+            int delimiterPos = s.indexOf('/');
+            String argType = s.substring(0, delimiterPos);
+            String argValue = s.substring(0, delimiterPos + 1);
+            switch (argType) {
+            case "n":
+                updateCommand.setUpdateName(argValue);
+                break;
+            case "pd":
+                updateCommand.setPurchaseDate(argValue);
+                break;
+            case "t":
+                updateCommand.setType(argValue);
+                break;
+            case "pf":
+                updateCommand.setPurchaseFrom(argValue);
+                break;
+            case "c":
+                updateCommand.setCost(argValue);
+                break;
+            default:
+                System.out.println("`" + argValue + "` not updated for type " + argType +": Unrecognised Tag");
+            }
+        }
+        return updateCommand;
     }
 
     /**
