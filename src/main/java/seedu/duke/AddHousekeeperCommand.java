@@ -2,7 +2,7 @@ package seedu.duke;
 
 public class AddHousekeeperCommand extends Command {
     private Housekeeper housekeeper;
-    private final String AGE_INDICATE = "~";
+    private static final String AGE_INDICATE = "~";
     private Ui ui = new Ui();
 
     public AddHousekeeperCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
@@ -14,7 +14,8 @@ public class AddHousekeeperCommand extends Command {
         ui.printHousekeeperNoted(housekeeper);
     }
 
-    private Housekeeper extractDetails(String commandStringWithoutCommand) throws InvalidAgeException, InvalidHousekeeperProfile {
+    private Housekeeper extractDetails(String commandStringWithoutCommand)
+            throws InvalidAgeException, InvalidHousekeeperProfile {
         int ageNumber;
         boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(AGE_INDICATE);
         if (isSymbolIncorrect) {
@@ -45,7 +46,8 @@ public class AddHousekeeperCommand extends Command {
     }
 
     @Override
-    public void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
+    public void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList listOfItems, Ui ui)
+            throws HotelLiteManagerException, WrongCommandException {
 
     }
 }
