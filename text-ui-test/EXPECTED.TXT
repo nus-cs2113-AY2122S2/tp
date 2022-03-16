@@ -1,13 +1,13 @@
 -------------------------
 Welcome! This is the Hospital Management System.
 Please type in your input:
-Medicine has been added
-Wrong Medicine Format
-Wrong Medicine Format
-Wrong Medicine Format
-Wrong Medicine Format
-Wrong Medicine Format
-The patient above has been added.
--------------------------
+You: Medicine has been added
+You: Wrong Medicine Format
+You: Wrong Medicine Format
+You: Wrong Medicine Format
+You: Wrong Medicine Format
+You: Wrong Medicine Format
+You: The patient above has been added.
+You: -------------------------
 Goodbye! Exiting the programme.
 Terminated
