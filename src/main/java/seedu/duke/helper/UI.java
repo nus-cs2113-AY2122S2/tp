@@ -65,6 +65,15 @@ public class UI {
                 + "1997-08-26, 2020-03-30");
     }
 
+    public void printAddDoctorExampleMessage() {
+        System.out.println("Please note the error(s) mentioned above and try again!");
+        System.out.println("Here are two examples. Please follow the input order:");
+        System.out.println("add doctor /info S1234567A, John Doe, 23, M, 10 Baker Street,"
+                + " 1999-12-31, Urinology");
+        System.out.println("add doctor /info T4867591Z, Mary Douglas Owen, 25, F, 15 King's Avenue,"
+                + "1997-08-26, Optometry");
+    }
+
     public void printDeletePatientExampleMessage(PatientList patientList) {
         System.out.println("Please input a postive number up to " + patientList.getSize() + " only.");
         System.out.println("Here is an example:");

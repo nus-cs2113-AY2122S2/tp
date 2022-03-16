@@ -1,5 +1,6 @@
 package seedu.duke.helper;
 
+import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
 
@@ -66,6 +67,22 @@ public class Command {
         System.out.println("Medicine has been added");
     }
 
+
+    public void addDoctor(DoctorList doctorList, String parameters) {
+        if (isNull(parameters)) {
+            ui.printNullParametersMessage();
+            ui.printAddDoctorExampleMessage();
+            return;
+        }
+        String[] addDoctorParameters = Parser.parseAddDoctor(parameters);
+        if (addDoctorParameters == null) {
+            ui.printAddPatientExampleMessage();
+        } else {
+            doctorList.add(addDoctorParameters);
+            System.out.println("The doctor above has been added.");
+        }
+    }
+
     public void deleteMedicine(MedicineList medicineList, String stringIndex) {
         if (!isNull(stringIndex)) {
             return;
@@ -80,6 +97,7 @@ public class Command {
             System.out.println("The medicine record at index " + index + " has been deleted.");
         } catch (NumberFormatException numberFormatException) {
             System.out.println("Parameter given is not a number.");
+
         }
     }
 }
