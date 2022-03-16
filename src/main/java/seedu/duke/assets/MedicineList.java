@@ -16,10 +16,10 @@ public class MedicineList {
     }
 
     public void getMedicineInfo(Medicine medicine) {
-        System.out.println(Integer.toString(medicine.getMedicineId()) + ": " +
-                medicine.getMedicineName() + ", " +
-                Integer.toString(medicine.getDosage()) + ", " + medicine.getExpiry() + ", " +
-                medicine.getSideEffects() + ", " + Integer.toString(medicine.getQuantity()));
+        System.out.println(Integer.toString(medicine.getMedicineId()) + ": "
+                + medicine.getMedicineName() + ", "
+                + Integer.toString(medicine.getDosage()) + ", " + medicine.getExpiry() + ", "
+                + medicine.getSideEffects() + ", " + Integer.toString(medicine.getQuantity()));
     }
 
     public void viewMedicine() {

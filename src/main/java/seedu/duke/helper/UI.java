@@ -40,15 +40,15 @@ public class UI {
         printNewLineSeparator();
         System.out.println("Here are the commands and examples:");
         System.out.println("1. add patient /info. Example:");
-        System.out.println("add patient /info S1234567A, John Doe, 23, M, 10 Baker Street," +
-                " 1999-12-31, 2021-02-15");
+        System.out.println("add patient /info S1234567A, John Doe, 23, M, 10 Baker Street,"
+                + " 1999-12-31, 2021-02-15");
         System.out.println("2. delete patient. Example:");
         System.out.println("delete patient /info 1");
         System.out.println("3. view patient. Example:");
         System.out.println("view patient");
         System.out.println("4. add doctor. Example:");
-        System.out.println("add doctor /info S1234567A, Shirley Tan, 40, F, 1 Baker Road, " +
-                "1980-12-31, Dermatology");
+        System.out.println("add doctor /info S1234567A, Shirley Tan, 40, F, 1 Baker Road, "
+                + "1980-12-31, Dermatology");
         System.out.println("5. delete doctor. Example:");
         System.out.println("delete doctor /info 1");
         System.out.println("6. view doctor. Example:");
