@@ -12,6 +12,7 @@ package seedu.duke;
 
 public class AddSatisfactionCommand extends Command {
     private Satisfaction satisfaction;
+    private Ui ui = new Ui();
 
     /**
      * Extracts the customer name and satisfaction value from user input,
@@ -98,6 +99,8 @@ public class AddSatisfactionCommand extends Command {
                         AssignmentMap assignmentMap, RoomList roomList,
                         ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
         satisfactionList.addSatisfaction(satisfaction);
+        ui.printAddSatisfactionAcknowledgementMessage(satisfactionList, satisfaction);
+
     }
 
     public Satisfaction getSatisfaction() {

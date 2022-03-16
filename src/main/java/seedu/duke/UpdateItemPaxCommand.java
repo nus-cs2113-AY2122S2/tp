@@ -78,10 +78,26 @@ public class UpdateItemPaxCommand extends Command {
         return itemPax;
     }
 
+    /**
+     * Updates the pax of the item within the item list using the item name and new pax found in the instance variable
+     * named item within the UpdateItemPaxCommand object.
+     *
+     * @param housekeeperList  The list of housekeeper recorded. N/A for this class, but
+     *                         must be included for the execution override.
+     * @param satisfactionList The given list of Satisfaction objects. N/A for this class, but
+     *                         must be included for the execution override.
+     * @param roomList         The given list of Room objects. N/A for this class, but
+     *                         must be included for the execution override.
+     * @param listOfItems      The list of items within the inventory.
+     * @param ui               The object that deals with user interface for the program.
+     * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
+     */
     @Override
     public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
                         AssignmentMap assignmentMap, RoomList roomList,
                         ItemList listOfItems, Ui ui) throws HotelLiteManagerException {
+        listOfItems.updateItemPaxInList(item);
+        ui.printUpdateItemPaxAcknowledgementMessage(item);
     }
 
     public Item getItem() {
