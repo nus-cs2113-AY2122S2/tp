@@ -6,7 +6,8 @@ import seedu.duke.ui.TextUi;
 import static seedu.duke.common.Messages.MESSAGE_DIVIDER;
 
 /**
- * MeetingJio is an application that allows users to find potential time slots for team meetings based on everyone’s availability.
+ * MeetingJio is an application that allows users to find potential time slots
+ * for team meetings based on everyone’s availability.
  * Users can add a new lesson and delete a lesson in a timetable.
  */
 public class Duke {

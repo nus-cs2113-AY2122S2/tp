@@ -8,6 +8,7 @@ import static seedu.duke.commands.ExitCommand.EXIT_COMMAND;
 /**
  * Represents an executable command.
  */
+
 public abstract class Command {
 
     public abstract String execute(Timetable timetable);
