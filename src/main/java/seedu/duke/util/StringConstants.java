@@ -103,7 +103,6 @@ public class StringConstants {
     /**
      * For SaveCommand.
      */
-    public static final String SAVED_SUCCESSFULLY = "All your data was saved successfully!";
     public static final String MODULE_DATA_SAVE_FAILED = "Failed to write module data to file. "
             + "Your modules were NOT saved!";
     public static final String MODULE_DATA_SAVE_SUCCESS = "Module data written to file.";
@@ -125,8 +124,8 @@ public class StringConstants {
     public static final String ERROR_PARSE_FAILED = "This parse failed 0_0";
     public static final String ERROR_UNKNOWN_COMMAND = "Sorry, I don't understand the following command:";
     public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, I don't understand the result format:";
-    public static final String ERROR_WRITE_FILE = "Something went wrong while saving data...";
-    public static final String ERROR_READ_FILE = "Something went wrong while loading data...";
+    public static final String ERROR_WRITE_FILE = "Error writing to file...";
+    public static final String ERROR_READ_FILE = "Error reading from file...";
     public static final String ERROR_FILE_CREATE_FAIL = "Sorry, file creation failed...";
 
     /**

@@ -11,7 +11,7 @@ public class SaveCommand extends Command {
 
     @Override
     public CommandResult execute(ModuleList moduleList) throws ModHappyException {
-        // Even if there is an error writing to one file, we should still try to write to the other.
+        // Even if there is an error writing to one file, we should still try to write to the others.
         String writeStatus = "";
         try {
             // Master Task List
@@ -20,6 +20,7 @@ public class SaveCommand extends Command {
             taskListStorage.jsonWriter(taskList.getTaskList(), StringConstants.TASK_PATH);
             writeStatus += StringConstants.TASK_DATA_SAVE_SUCCESS + StringConstants.LS;
         } catch (ModHappyException e) {
+            writeStatus += e + StringConstants.LS;
             writeStatus += StringConstants.TASK_DATA_SAVE_FAILED + StringConstants.LS;
         }
         try {
@@ -27,6 +28,7 @@ public class SaveCommand extends Command {
             moduleListStorage.jsonWriter(moduleList.getModuleList(), StringConstants.MODULE_PATH);
             writeStatus += StringConstants.MODULE_DATA_SAVE_SUCCESS + StringConstants.LS;
         } catch (ModHappyException e) {
+            writeStatus += e + StringConstants.LS;
             writeStatus += StringConstants.MODULE_DATA_SAVE_FAILED + StringConstants.LS;
         }
         return new CommandResult(writeStatus);

@@ -45,9 +45,7 @@ public class Main {
 
     /**
      * Sets up the required objects.
-     *
      * @param args arguments supplied by the user at program launch.
-     *
      */
     private void start(String[] args) {
         try {
@@ -61,6 +59,10 @@ public class Main {
         }
     }
 
+    /**
+     * Initialises the program data by attempting to read from the data files, if possible.
+     * If a data file is not found or contains invalid data, the file will be treated as blank instead.
+     */
     private void loadDataFromFile() {
         File moduleDataFile = new File(modulePath);
         if (moduleDataFile.exists()) {

@@ -4,16 +4,14 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.util.StringConstants;
 
-import static seedu.duke.util.StringConstants.RESET_COMMAND_WORD;
-
 public class HelpCommand extends Command {
-
     protected static final String EXIT_COMMAND_WORD = StringConstants.EXIT_COMMAND_WORD;
     protected static final String ADD_COMMAND_WORD = StringConstants.ADD_COMMAND_WORD;
     protected static final String DELETE_COMMAND_WORD = StringConstants.DELETE_COMMAND_WORD;
     protected static final String EDIT_COMMAND_WORD = StringConstants.EDIT_COMMAND_WORD;
     protected static final String LIST_COMMAND_WORD = StringConstants.LIST_COMMAND_WORD;
     protected static final String MARK_COMMAND_WORD = StringConstants.MARK_COMMAND_WORD;
+    protected static final String RESET_COMMAND_WORD = StringConstants.RESET_COMMAND_WORD;
     protected static final String SAVE_COMMAND_WORD = StringConstants.SAVE_COMMAND_WORD;
     protected static final String HELP_COMMAND_WORD = StringConstants.HELP_COMMAND_WORD;
 

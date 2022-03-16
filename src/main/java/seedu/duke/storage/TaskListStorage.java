@@ -16,18 +16,16 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ReadException;
 import seedu.duke.tasks.Task;
 
-
-
 /**
- * A data access object managing the write and read of task list.
+ * A data access object managing the loading and saving of TaskList instances.
  */
 public class TaskListStorage extends ListStorage<Task> {
 
     /**
-     * Reads and deserializes the json file and return the task list.
-     * @param path the relative path of the storage file
-     * @return Loaded task list
-     * @throws ModHappyException Read task list fail exception
+     * Deserialises the TaskList stored in the json file.
+     * @param path json file path
+     * @return deserialised TaskList object
+     * @throws ModHappyException if an error was encountered during reading
      */
     @Override
     public ArrayList<Task> jsonReader(String path) throws ModHappyException {
