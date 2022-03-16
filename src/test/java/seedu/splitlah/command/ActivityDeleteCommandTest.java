@@ -1,6 +1,7 @@
 package seedu.splitlah.command;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.parser.Parser;
 
@@ -18,6 +19,15 @@ class ActivityDeleteCommandTest {
         String activityOneArgs = "activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         Command createActivityOne = Parser.getCommand(activityOneArgs);
         createActivityOne.run(manager);
+    }
+
+    @Test
+    public void prepare_hasMissingDelimiter_InvalidCommand() {
+
+        // Case 1: Missing /sid delimiter
+        String argsMissingSidDelimiter = "activity /delete";
+        Command activityWithMissingSidDelimiter = Parser.getCommand(argsMissingSidDelimiter);
+        assertEquals(InvalidCommand.class, activityWithMissingSidDelimiter.getClass());
     }
 
 }
