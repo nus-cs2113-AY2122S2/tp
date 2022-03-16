@@ -272,4 +272,51 @@ class ParserTest {
         }
     }
 
+    // parsePayer()
+    @Test
+    void parsePayer_missingDelimiter_exceptionThrown() {
+        String argumentWithoutPayerDelimiter = "/sid 1 /n Lunch p Alice /i Alice Bob Charlie /co 15";
+        try {
+            String output = Parser.parsePayer(argumentWithoutPayerDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.PAYER_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parsePayer_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutPayerArgument = "/sid 1 /n Lunch /p /i Alice Bob Charlie /co 15";
+        try {
+            String output = Parser.parsePayer(argumentWithoutPayerArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.PAYER_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parsePayer_delimiterExistsMultiplePayers_exceptionThrown() {
+        String argumentWithoutPayerArgument = "/sid 1 /n Lunch /p Alice Bob /i Alice Bob Charlie /co 15";
+        try {
+            String output = Parser.parsePayer(argumentWithoutPayerArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MORE_THAN_ONE_PAYER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parsePayer_delimiterExistsSinglePayer_argumentString() {
+        String argumentWithDelimiterAndArgument = "/sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            String output = Parser.parsePayer(argumentWithDelimiterAndArgument);
+            assertEquals("Alice", output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
 }
