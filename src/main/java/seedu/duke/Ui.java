@@ -60,6 +60,14 @@ public class Ui {
         }
     }
 
+    public void printHousekeeperList(HousekeeperList housekeeperList) {
+        printMessage("======== Housekeeper List ========");
+        for (int i = 0; i < housekeeperList.getTotalHousekeeper(); i++) {
+            System.out.println((i + 1) + ". " + housekeeperList.getHousekeeper(i));
+        }
+        System.out.println("======== End of the list ========");
+    }
+
     /**
      * Prints an acknowledgement message informing the user that the pax of the item was successfully updated.
      *
@@ -76,3 +84,4 @@ public class Ui {
         System.out.printf("There are currently %d items within the inventory.\n", satisfactionList.getSize());
     }
 }
+
