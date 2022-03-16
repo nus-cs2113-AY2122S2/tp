@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -36,7 +37,7 @@ public class TaskListStorage extends ListStorage<Task> {
             Reader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8);
             Task[] list = gson.fromJson(reader, Task[].class);
             ArrayList<Task> arrayList;
-            if (list != null) {
+            if (!Objects.isNull(list)) {
                 arrayList = new ArrayList<>(Arrays.asList(list));
             } else {
                 arrayList = new ArrayList<>();

@@ -62,8 +62,8 @@ public class StringConstants {
     public static final String ERROR_PARSE_FAILED = "This parse failed 0_0";
     public static final String ERROR_UNKNOWN_COMMAND = "Sorry, I don't understand the following command:";
     public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, I don't understand the result format:";
-    public static final String ERROR_WRITE_STREAM_BROKEN = "Sorry, The write steams is broken";
-    public static final String ERROR_READ_STREAM_BROKEN = "Sorry, The read steams is broken";
+    public static final String ERROR_WRITE_STREAM_BROKEN = "Sorry, The write steam is broken";
+    public static final String ERROR_READ_STREAM_BROKEN = "Sorry, The read steam is broken";
     public static final String ERROR_FILE_CREATE_FAIL = "Sorry, Failed to create the file";
 
     /**.

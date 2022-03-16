@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -36,7 +37,7 @@ public class ModuleListStorage extends ListStorage<Module> {
             Reader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8);
             Module[] list = gson.fromJson(reader, Module[].class);
             ArrayList<Module> arrayList;
-            if (list != null) {
+            if (!Objects.isNull(list)) {
                 arrayList = new ArrayList<>(Arrays.asList(list));
             } else {
                 arrayList = new ArrayList<>();
