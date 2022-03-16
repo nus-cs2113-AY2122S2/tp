@@ -57,7 +57,7 @@ public class OrderController extends Controller {
         while (notQuit) {
             Object inputObj = userInput;
             int size = orderManager.addDishToOrder(inputObj);
-            userInput = InputParser.getString("You’ve already added " + size + "dish(es), some more: \n");
+            userInput = InputParser.getString("You’ve already added " + size + " dish(es), some more: \n");
             if (userInput == "Q" || userInput == "q") {
                 notQuit = false;
             }
