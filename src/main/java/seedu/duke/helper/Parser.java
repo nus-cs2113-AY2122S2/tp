@@ -90,7 +90,7 @@ public class Parser {
         return isValid;
     }
 
-    private static boolean validateMedicine(String[] parameters) {
+    public static boolean validateMedicine(String[] parameters) {
         boolean check = true;
         for (int i = 0; i < 5; i++) {
             switch (i) {
