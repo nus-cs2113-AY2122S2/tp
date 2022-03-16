@@ -32,8 +32,8 @@ public class StorageTest {
         }
         Storage storage = new Storage(storageFile);
         ExpenditureList expenditureList = new ExpenditureList();
-        expenditureList.add(new Expenditure("test", 1));
-        expenditureList.add(new Expenditure("Make tests", 999));
+        expenditureList.add(new Expenditure("test", null, 1));
+        expenditureList.add(new Expenditure("Make tests", null, 999));
         storage.save(expenditureList);
         ExpenditureList loadOutcome = storage.load();
         assertEquals(expenditureList.expenditureListArray, loadOutcome.expenditureListArray);
