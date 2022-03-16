@@ -15,8 +15,13 @@ If you can type fast, MeetingJio can get your meeting management tasks done fast
 
 ## Features
 
+### Viewing help: `help`
+Shows a list of commands available.
+
+Format: `help`
+
 ### Adding a lesson: `add`
-Add a new lesson to the list of lessons.
+Adds a new lesson to the list.
 
 Format: `add n/NAME l/LESSON d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE`
 
@@ -24,13 +29,12 @@ Format: `add n/NAME l/LESSON d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE`
 * The accepted options of `MODE` are _online_ and _physical_.
 * Duplicate lesson will not be added.
 
-Example of usage: 
+Example of usage:
 
 `add n/John Doe l/CS2113 d/Friday st/1230 et/1330 m/online`
 
-
 ### Deleting a lesson: `delete`
-Delete a lesson from the list of lessons.
+Deletes a lesson from the list.
 
 Format: ` delete INDEX`
 
@@ -46,17 +50,25 @@ Shows a list of lessons that has been added.
 
 Format: `list`
 
+### Clearing all lessons: `clear`
+Deletes all the lessons from the list.
+
+Format: `clear`
+
 ### Exiting the application: `exit`
-Exits the application. 
+Exits the application.
 
 Format: `exit`
 
 
 ## Command summary
 
-| Action     | Format                                                               |
-|------------|----------------------------------------------------------------------|
-| Add lesson | `add n/NAME l/LESSON d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE` |
-| List       | `list`                                                               |
-| Delete     | `delete INDEX`                                                       |
-| Exit       | `exit`                                                               |
+| Action | Format                                                               |
+|--------|----------------------------------------------------------------------|
+| Help   | `help`                                                               |
+| Add    | `add n/NAME l/LESSON d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE` |
+| Delete | `delete INDEX`                                                       |
+| List   | `list`                                                               |
+| Clear  | `clear`                                                              |
+| Exit   | `exit`                                                               |
+
