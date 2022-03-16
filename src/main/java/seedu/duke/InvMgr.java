@@ -18,7 +18,7 @@ public class InvMgr {
     private Ui ui;
 
     /**
-     * Sets up the required objects, loads the user's inventory list file from the user's hard disk
+     * Sets up the required objects, loads the user's inventory list file from the user's hard disk.
      *
      * @param filePath File path of the user's inventory list file
      * */
@@ -34,7 +34,7 @@ public class InvMgr {
     }
 
     /**
-     * Greets the user and processes the user's inputs until the user issues an exit command
+     * Greets the user and processes the user's inputs until the user issues an exit command.
      * */
     public void run() {
         ui.showWelcomeMessage();
