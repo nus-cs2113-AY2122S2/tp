@@ -155,6 +155,22 @@ class WorkoutListTest {
     }
 
     @Test
+    void updateWorkout_workoutToUpdateHasExisted_expectInvalidWorkoutException() throws InvalidWorkoutException,
+            InvalidExerciseException {
+        wl.createAndAddWorkout("pull up /reps 15");
+        wl.createAndAddWorkout("sit up /reps 15");
+        wl.createAndAddWorkout("pull up /reps 10");
+
+        String indexToUpdate = "3";
+        int newReps = 15;
+        String updateArgument = indexToUpdate + " " + Integer.toString(newReps);
+
+        assertThrows(InvalidWorkoutException.class,
+            () -> wl.updateWorkout(updateArgument));
+
+    }
+
+    @Test
     void checkForExistingWorkout_uniqueNewWorkout_expectFalse() throws InvalidWorkoutException,
             InvalidExerciseException {
         wl.createAndAddWorkout("russian twist /reps 1000");
