@@ -63,7 +63,7 @@ public class AddHousekeeperCommand extends Command {
     }
 
     /**
-     * Method to add new housekeeper profile into list and rejects any profile that has already been recorded
+     * Method to add new housekeeper profile into list and rejects any profile that has already been recorded.
      *
      * @param housekeeperList  The list of housekeeper recorded.
      * @param satisfactionList The given list of Satisfaction objects.
