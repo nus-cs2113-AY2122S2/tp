@@ -1,17 +1,38 @@
 package seedu.planitarium.income;
 
+import seedu.planitarium.ProjectLogger;
+import seedu.planitarium.parser.Parser;
+
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 public class IncomeList {
 
     private ArrayList<Income> incomeArrayList;
     private int numberOfIncomes;
 
+    private ProjectLogger logger;
+
+    public static final int ARRAY_INDEX = 0;
+    private static final String LOG_CLASS_NAME = Parser.class.getSimpleName();
+    private static final String LOG_FILE_PATH = LOG_CLASS_NAME + ".log";
+    private static final String LOG_INIT = "Logger for " + LOG_CLASS_NAME + " initialised.";
+    private static final String LOG_ASSERT_PASSED = "Assertion passed.";
+    private static final String LOG_ADD_INC = "addIncome()";
+    private static final String LOG_GET_INC_VAL = "getIncomeValue()";
+    private static final String LOG_REMOVE = "remove()";
+    private static final String LOG_DESC = "getDescription()";
+    private static final String LOG_GET_NUM_INC = "getNumberOfIncomes()";
+    private static final String LOG_GET_TOTAL_INC = "getTotalIncome()";
+    private static final String LOG_PRINT_LIST = "printIncomeList()";
+
     /**
      * Creates a new Income Object.
      */
     public IncomeList() {
         this.incomeArrayList = new ArrayList<>();
+        logger = new ProjectLogger(LOG_CLASS_NAME, LOG_FILE_PATH);
+        logger.getLogger().log(Level.INFO, LOG_INIT);
     }
 
     /**
@@ -20,8 +41,10 @@ public class IncomeList {
      * @param amount The income amount
      */
     public void addIncome(String description, double amount) {
+        logger.getLogger().log(Level.INFO, LOG_ADD_INC);
         assert (description != null);
         assert (amount >= 0);
+        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
         this.incomeArrayList.add(new Income(description, amount));
         numberOfIncomes++;
     }
@@ -32,8 +55,10 @@ public class IncomeList {
      * @return The income amount
      */
     public double getIncomeValue(int index) {
-        assert (index > 0);
+        logger.getLogger().log(Level.INFO, LOG_GET_INC_VAL);
+        assert (index > ARRAY_INDEX);
         assert (index <= numberOfIncomes);
+        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
         return incomeArrayList.get(index - 1).getAmount();
     }
 
@@ -42,21 +67,25 @@ public class IncomeList {
      * @param index The index of the income on the person's income list
      */
     public void remove(int index) {
-        assert (index > 0);
+        logger.getLogger().log(Level.INFO, LOG_REMOVE);
+        assert (index > ARRAY_INDEX);
         assert (index <= numberOfIncomes);
+        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
         incomeArrayList.remove(index - 1);
         numberOfIncomes--;
     }
 
     /**
      * Returns the description of an income object from a
-     * person's expenditure list.
+     * person's Income list.
      * @param index The index of the income on the list
      * @return The description of the income
      */
     public String getDescription(int index) {
-        assert (index > 0);
+        logger.getLogger().log(Level.INFO, LOG_DESC);
+        assert (index > ARRAY_INDEX);
         assert (index <= numberOfIncomes);
+        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
         return incomeArrayList.get(index - 1).getDescription();
     }
 
@@ -65,6 +94,7 @@ public class IncomeList {
      * @return The number of income
      */
     public int getNumberOfIncomes() {
+        logger.getLogger().log(Level.INFO, LOG_GET_NUM_INC);
         return numberOfIncomes;
     }
 
@@ -73,6 +103,7 @@ public class IncomeList {
      * @return The total amount of all income in the list
      */
     public double getTotalIncome() {
+        logger.getLogger().log(Level.INFO, LOG_GET_TOTAL_INC);
         double totalAmount = 0;
         for (Income item : incomeArrayList) {
             totalAmount += item.amount;
@@ -84,6 +115,7 @@ public class IncomeList {
      * Prints all income in the person's income list.
      */
     public void printIncomeList() {
+        logger.getLogger().log(Level.INFO, LOG_PRINT_LIST);
         int listIndex = 1;
         for (Income item : incomeArrayList) {
             System.out.println(listIndex++ + ". " + item);
