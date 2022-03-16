@@ -19,8 +19,6 @@ public class AllOnUs {
 
     /**
      * Displays the greeting message of this program.
-     *
-     * @return Nothing.
      */
     private static void greet() {
         logger.log(Level.INFO, "Printing greeting message.");
@@ -103,8 +101,6 @@ public class AllOnUs {
 
     /**
      * Prints a help message that can guide the user.
-     *
-     * @return Nothing.
      */
     private static void displayMainMenuFeatures() {
         System.out.println("Going from menu to section of interest:\n\nAllows "
@@ -122,7 +118,6 @@ public class AllOnUs {
     /**
      * Runs the functionality of the main menu of the program.
      *
-     * @return Nothing.
      * @see IllegalStateException
      * @see NoSuchElementException
      */
@@ -182,8 +177,6 @@ public class AllOnUs {
 
     /**
      * Prints a guiding message that addresses an invalid user command.
-     *
-     * @return Nothing.
      */
     private void printInvalidMainMenuCommandMessage() {
         System.out.println("Oops I am not sure what you mean by this command. Please retry. '"
@@ -192,8 +185,6 @@ public class AllOnUs {
 
     /**
      * Prints a message that represents what the users will read upon return to menu.
-     *
-     * @return Nothing.
      */
     private void printMainMenuMessage() {
         System.out.println("Welcome back to the main menu");
