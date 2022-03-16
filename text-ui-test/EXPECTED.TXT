@@ -1,4 +1,5 @@
 Invalid Command
+<<<<<<< HEAD
 Invalid Command
 Invalid Command
 Error! AGE must be integer
@@ -7,3 +8,14 @@ Noted!
 Error! AGE must be integer
 Error! AGE must be integer
 see u again!
+=======
+The item and its pax has been added to the list of items in the inventory.
+There are currently 1 items within the inventory.
+Error! Item Name cannot be empty.
+Error! Item Pax cannot be empty.
+Error! Item Pax is invalid.
+Error! Item Pax is invalid.
+The item and its pax has been added to the list of items in the inventory.
+There are currently 2 items within the inventory.
+see u again!
+>>>>>>> 4fa3675b66d503fcb7949dc309bb64924c9030db

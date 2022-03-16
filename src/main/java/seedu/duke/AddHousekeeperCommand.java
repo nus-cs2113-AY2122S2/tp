@@ -45,8 +45,7 @@ public class AddHousekeeperCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui) throws WrongCommandException {
-
+    public void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
 
     }
 }
