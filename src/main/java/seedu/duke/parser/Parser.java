@@ -8,6 +8,7 @@ import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.DeleteCommand;
 
 public class Parser {
+
     public static Command parse(String userCommand) {
         if (userCommand.startsWith("exit")) {
             return new ExitCommand();
@@ -22,6 +23,7 @@ public class Parser {
 
         } else {
             return new HiCommand();
+          
         }
     }
 
