@@ -37,6 +37,13 @@ public class Module {
     }
 
     /**
+     * Adds one task in task list associated with the module.
+     */
+    public void addTask(Task task) {
+        taskList.addTask(task);
+    }
+
+    /**
      * Formats the module and all tasks associated with it as a string.
      */
     public String printModuleTaskList() {
