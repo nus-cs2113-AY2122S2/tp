@@ -46,7 +46,7 @@ public class TaskList {
     }
 
     public ArrayList<Task> getList() {
-        return list;
+        return taskList;
     }
 
     /**
