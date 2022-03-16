@@ -16,7 +16,7 @@ public class DescCommand extends Command {
     @Override
     public void execute(ItemList itemList, Ui ui, Storage storage) {
         try {
-            // Get item from itemList by searching for itemName
+            // Get item from itemList by searching for the item's name
             Item item = itemList.contains(itemName);
 
             // Get description of item found
