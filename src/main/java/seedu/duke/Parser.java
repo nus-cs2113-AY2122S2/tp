@@ -14,12 +14,12 @@ import seedu.duke.exceptions.InvalidModeException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static seedu.duke.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
-import static seedu.duke.ErrorMessages.ERROR_MISSING_PARAMETERS;
-import static seedu.duke.ErrorMessages.ERROR_MISSING_VALUES;
-import static seedu.duke.ErrorMessages.ERROR_INVALID_DAY;
-import static seedu.duke.ErrorMessages.ERROR_INVALID_TIME;
-import static seedu.duke.ErrorMessages.ERROR_INVALID_MODE;
+import static seedu.duke.common.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
+import static seedu.duke.common.ErrorMessages.ERROR_MISSING_PARAMETERS;
+import static seedu.duke.common.ErrorMessages.ERROR_MISSING_VALUES;
+import static seedu.duke.common.ErrorMessages.ERROR_INVALID_DAY;
+import static seedu.duke.common.ErrorMessages.ERROR_INVALID_TIME;
+import static seedu.duke.common.ErrorMessages.ERROR_INVALID_MODE;
 
 public class Parser {
     private final String command;

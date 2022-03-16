@@ -1,7 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.Timetable;
-import static seedu.duke.ErrorMessages.ERROR_EMPTY_LIST;
+import static seedu.duke.common.ErrorMessages.ERROR_EMPTY_LIST;
 
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";

@@ -7,7 +7,7 @@ import seedu.duke.events.Lesson;
 import seedu.duke.exceptions.DuplicateEventException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.duke.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
+import static seedu.duke.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
 
 public class DeleteCommandTest {
 
@@ -22,7 +22,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void deleteCommand_IndexOutOfBoundsSize_throwException() throws DuplicateEventException {
+    public void deleteCommand_IndexOutOfBoundsSize_throwException() {
         //delete index that is not found in list
         DeleteCommand deleteIndexSize = new DeleteCommand(timetable.size());
         deleteIndexSize.execute(timetable);
