@@ -46,6 +46,18 @@ class SessionCreateCommandTest {
         assertEquals(InvalidCommand.class, sessionWithMissingPersonListDelimiter.getClass());
     }
 
+    public void run_validCommand_sessionListSizeBecomesThree() {
+        String userInput = "session /create /n Class gathering /d 15-02-2022 /pl Alice Bob";
+        Command command = Parser.getCommand(userInput);
+
+        // Check if a SessionCreateCommand instance was returned.
+        assertEquals(SessionCreateCommand.class, command.getClass());
+        command.run(manager);
+
+        // Check if session was successfully added into the list of sessions.
+        assertEquals(3, manager.getProfile().getSessionList().size());
+    }
+
     /**
      * Checks if a session is created with duplicated person names.
      */
