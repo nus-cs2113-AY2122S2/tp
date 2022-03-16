@@ -159,9 +159,13 @@ public class WorkoutList {
      * @return true if input equals to "yes" or "no", else otherwise.
      */
     public boolean isInputYesOrNo(String answer) {
+        if (answer.equals("")) {
+            return false;
+        }
         if (answer.equals("no") || answer.equals("yes")) {
             return true;
         }
+        logger.log(Level.WARNING, "User did not entered the command that was expected.");
         return false;
     }
 

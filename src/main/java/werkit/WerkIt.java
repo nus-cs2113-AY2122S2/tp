@@ -138,9 +138,11 @@ public class WerkIt {
             } catch (InvalidCommandException e) {
                 System.out.println(e.getMessage());
                 System.out.println("Please try again.");
+                logger.log(Level.WARNING, "User has entered an invalid command.");
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Uh oh, the command entered is invalid.");
                 System.out.println("Please try again.");
+                logger.log(Level.WARNING, "User has entered an array index out of bound invalid command.");
             }
         } while (!userWantsToExit);
 
@@ -161,6 +163,7 @@ public class WerkIt {
             getUI().printFileLoadStatusMessage(FileManager.EXERCISE_FILENAME, true);
         } catch (UnknownFileException e) {
             System.out.println(e.getMessage());
+            logger.log(Level.WARNING, "Unknown file name was encountered.");
         }
 
         logger.log(Level.INFO, "Exercise file data loaded.");
@@ -179,6 +182,7 @@ public class WerkIt {
             getUI().printFileLoadStatusMessage(FileManager.WORKOUT_FILENAME, isWorkoutFileLoadSuccessful);
         } catch (UnknownFileException e) {
             System.out.println(e.getMessage());
+            logger.log(Level.WARNING, "Unknown file name was encountered.");
         }
 
         logger.log(Level.INFO, "Workout file data loaded.");
