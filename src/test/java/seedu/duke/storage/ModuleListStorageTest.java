@@ -12,12 +12,13 @@ import static org.junit.jupiter.api.Assertions.fail;
 import seedu.duke.tasks.Module;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
+import seedu.duke.util.StringConstants;
 
 
 public class ModuleListStorageTest {
     private ModuleListStorage moduleListStorage;
-    private ArrayList<seedu.duke.tasks.Module> moduleList;
-    private String path = "data/module.json";
+    private ArrayList<Module> moduleList;
+    private final String path = StringConstants.MODULE_PATH;
 
     @BeforeEach
     public void setUp() {
@@ -28,7 +29,6 @@ public class ModuleListStorageTest {
     @Test
     public void store_empty_module_list_and_read() {
         try {
-            String path = "data/module.json";
             moduleListStorage.jsonWriter(moduleList, path);
             ArrayList<Module> list = moduleListStorage.jsonReader(path);
             assertTrue(list.containsAll(moduleList) && moduleList.containsAll(list));
@@ -47,12 +47,12 @@ public class ModuleListStorageTest {
             moduleList.add(module1);
             moduleList.add(module2);
             moduleList.add(module3);
-            String path = "data/module.json";
             moduleListStorage.jsonWriter(moduleList, path);
-            ArrayList<seedu.duke.tasks.Module> list = moduleListStorage.jsonReader(path);
+            ArrayList<Module> list = moduleListStorage.jsonReader(path);
             assertEquals(list.size(), moduleList.size());
             for (int i = 0; i < list.size(); i++) {
                 assertEquals(list.get(i).getModuleCode(), moduleList.get(i).getModuleCode());
+                assertEquals(list.get(i).getModuleDescription(), moduleList.get(i).getModuleDescription());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,12 +75,12 @@ public class ModuleListStorageTest {
             moduleList.add(module1);
             moduleList.add(module2);
             moduleList.add(module3);
-            String path = "data/module.json";
             moduleListStorage.jsonWriter(moduleList, path);
             ArrayList<Module> list = moduleListStorage.jsonReader(path);
             assertEquals(list.size(), moduleList.size());
             for (int i = 0; i < list.size(); i++) {
                 assertEquals(list.get(i).getModuleCode(), moduleList.get(i).getModuleCode());
+                assertEquals(list.get(i).getModuleDescription(), moduleList.get(i).getModuleDescription());
                 TaskList taskList1 = list.get(i).getTaskList();
                 TaskList taskList2 = moduleList.get(i).getTaskList();
                 assertEquals(taskList1.size(), taskList2.size());

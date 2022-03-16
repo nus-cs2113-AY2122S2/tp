@@ -24,6 +24,9 @@ public class AddCommand extends Command {
     private String targetModuleName = null;
     private Module newModule = null;
 
+    /**
+     * Constructor for use with commands involving adding tasks.
+     */
     public AddCommand(AddObjectType type, String taskName, String taskDescription, String estimatedWorkingTime,
                       String taskModule) {
         assert type == AddObjectType.TASK;
@@ -32,6 +35,9 @@ public class AddCommand extends Command {
         targetModuleName = taskModule;
     }
 
+    /**
+     * Constructor for use with commands involving adding modules.
+     */
     public AddCommand(AddObjectType type, String moduleCode, String moduleDescription) {
         assert type == AddObjectType.MODULE;
         typeToAdd = type;

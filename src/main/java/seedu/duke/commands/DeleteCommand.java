@@ -11,8 +11,7 @@ import seedu.duke.util.StringConstants;
 
 public class DeleteCommand extends Command {
 
-    private static final String DELETE_MODULE_SUCCESS = "%s" + StringConstants.DELETE_MESSAGE;
-    private static final String DELETE_TASK_SUCCESS = "%s" + StringConstants.DELETE_MESSAGE;
+    private static final String DELETE_MESSAGE = StringConstants.DELETE_MESSAGE;
 
     private String moduleCode;
     private int taskIndex = -1;
@@ -65,7 +64,7 @@ public class DeleteCommand extends Command {
      * @param moduleList List from which the module is to be deleted from.
      */
     public void deleteModule(ModuleList moduleList) throws ModHappyException {
-        result = String.format(DELETE_MODULE_SUCCESS, moduleList.removeModule(moduleCode));
+        result = String.format(DELETE_MESSAGE, moduleList.removeModule(moduleCode));
     }
 
     /**
@@ -75,6 +74,6 @@ public class DeleteCommand extends Command {
      */
     public void deleteTaskFromModule(Module targetModule) throws ModHappyException {
         TaskList taskList = targetModule.getTaskList();
-        result = String.format(DELETE_TASK_SUCCESS, taskList.removeTask(taskIndex));
+        result = String.format(DELETE_MESSAGE, taskList.removeTask(taskIndex));
     }
 }

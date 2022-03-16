@@ -2,31 +2,48 @@ package seedu.duke.util;
 
 public class StringConstants {
     /**
-     * .
-     * For start and exit of program
+     * File paths for data files.
+     */
+    public static final String TASK_PATH = "data/task.json";
+    public static final String MODULE_PATH = "data/module.json";
+
+    /**
+     * For start and exit of program.
      */
     public static final String HELLO_MESSAGE = "Hello, this is Mod Happy (○'◡'○)ﾉ";
     public static final String GOOD_BYE_MESSAGE = "See you later ヾ(*´▽'*)ﾉ";
-    public static final String INITIAL_FAILED_MESSAGE = "Failed to start Mod Happy (..•˘_˘•..)";
+    public static final String INIT_FAILED_MESSAGE = "Failed to start Mod Happy (..•˘_˘•..)";
+
+    /**
+     * For loading of data.
+     *
+     */
+    public static final String MODULE_DATA_LOAD_FAILED = "Failed to load module data. "
+            + "Empty module list loaded instead.";
+    public static final String MODULE_DATA_LOAD_SUCCESS = "Successfully loaded module data!";
+    public static final String TASK_DATA_LOAD_FAILED = "Failed to load general task data. "
+            + "Empty list of general tasks loaded instead.";
+    public static final String TASK_DATA_LOAD_SUCCESS = "Successfully loaded general task data!";
 
 
-    /**.
-     * For AddCommand
+    /**
+     * For AddCommand.
      */
     public static final String ADD_TASK_MESSAGE_TOP = "Hey! I have added this task under %s!";
     public static final String ADD_TASK_MESSAGE_BOTTOM = "Now you have %d task(s) in your list!";
     public static final String ADD_MODULE_MESSAGE_TOP = "Hey! I have added this module!";
     public static final String MODULE_ALREADY_EXISTS = "A module with that name already exists...";
-    public static final String ESTIMATED_WORKING_TIME = "Estimated Working Time: ";
+    public static final String ESTIMATED_WORKING_TIME = "Estimated working time: ";
 
 
-    /**.
-     * For DeleteCommand
+    /**
+     * For DeleteCommand.
      */
-    public static final String DELETE_MESSAGE = " has been deleted.";
+    public static final String DELETE_MESSAGE = "%s has been deleted.";
 
-    /**.
-     * For EditCommand
+
+    /**
+     * For EditCommand.
      */
     public static final String EDIT_TASK_SUCCESS = "The %s of %s has been changed.";
     public static final String EDIT_MODULE_SUCCESS = "The description of %s has been changed.";
@@ -35,37 +52,36 @@ public class StringConstants {
     public static final String TASK_DESCRIPTION_STR = "description";
     public static final String ESTIMATED_WORKING_TIME_STR = "estimated working time";
 
-    /**.
-     * For ExitCommand
+    /**
+     * For ExitCommand.
      */
     public static final String READY_EXIT = "I am ready to exit *_*";
 
-    /**.
-     * For ListCommand
+    /**
+     * For ListCommand.
      */
     public static final String LIST_MESSAGE_TOP = "Ok! Here are the task(s) in your list:";
     public static final String EMPTY_LIST = "(empty)";
 
-    /**.
-     * For MarkCommand
+    /**
+     * For MarkCommand.
      */
     public static final String MARK_MESSAGE_TOP = "Nice! I have marked this task as completed!";
     public static final String UNMARK_MESSAGE_TOP = "Ok! I have marked this task for you as uncompleted!";
     public static final String ICON_UNCOMPLETED = "( )";
     public static final String ICON_COMPLETED = "(X)";
 
-    /**.
-     * For reset
+    /**
+     * For ResetCommand.
      */
     public static final String RESET_MESSAGE = "All modules and tasks have been removed.";
 
     /**
-     * .
-     * For helpCommand
+     * For HelpCommand.
      */
-    public static final String HELP_NOTE = "Compulsory Flags start with \"/\". Optional Flags start with \"-\".\n"
-            + "Compulsory Parameters are fully capitalised: e.g. MODULE_CODE.\n"
-            + "Optional Parameters are in square brackets: e.g. [-m MODULE_DESCRIPTION]";
+    public static final String HELP_NOTE = "Compulsory flags start with \"/\". Optional flags start with \"-\".\n"
+            + "Compulsory parameters are fully capitalised: e.g. MODULE_CODE.\n"
+            + "Optional parameters are in square brackets: e.g. [-m MODULE_DESCRIPTION]";
     public static final String EXIT_HELP = "Exits the program.\nFormat to exit program: exit";
     public static final String ADD_HELP = "Adds a module or task as indicated by the command input.\n"
             + "Format to add module: add /m MODULE_CODE [-d \"MODULE_DESCRIPTION\"]\n"
@@ -76,7 +92,7 @@ public class StringConstants {
             + "Format to delete a task:   del /t TASK_NUMBER [-m MODULE_CODE]";
     public static final String EDIT_HELP = "Edits a module or task as indicated by command input.\n"
             + "Format to edit a module: edit /m MODULE_CODE -d \"MODULE_DESCRIPTION\"\n"
-            + "Format to edit a task: edit /t TASK_INDEX"
+            + "Format to edit a task:   edit /t TASK_INDEX"
             + "(-n \"TASK_NAME\" or -d \"TASK_DESCRIPTION\" or -t \"ESTIMATED_WORKING_TIME\") [-m MODULE_CODE]";
     public static final String LIST_HELP = "Displays a list of all tasks, grouped by module code.\n"
             + "Format to list all tasks: list";
@@ -86,41 +102,44 @@ public class StringConstants {
             + "Format to mark a task as uncompleted: mark /u TASK_NUMBER [-m MODULE_CODE]";
     public static final String RESET_HELP = "Removes all modules and tasks.\n"
             + "Format to remove all modules and tasks: reset";
+    public static final String SAVE_HELP = "Saves your modules and tasks.\n"
+            + "Format to save: save";
     public static final String HELP = "Displays help and format for selected command.\n"
-            + "Format to display help for specific: help COMMAND\n"
-            + "Available commands: exit, add, del, list, mark, help";
+            + "Format to display help for specific command: help COMMAND\n"
+            + "Available commands: exit, add, del, list, mark, save, help";
     public static final String HELP_EXCEPTION = "Sorry, but no help exists for that command.";
 
     /**
-     * .
-     * For SaveCommand
+     * For SaveCommand.
      */
-    public static final String TASK_PATH = "data/task.json";
-    public static final String MODULE_PATH = "data/module.json";
-    public static final String SAVED_SUCCESSFULLY = "Ok! Already saved the modification for you";
+    public static final String MODULE_DATA_SAVE_FAILED = "Failed to write module data to file. "
+            + "Your modules were NOT saved!";
+    public static final String MODULE_DATA_SAVE_SUCCESS = "Module data written to file.";
+    public static final String TASK_DATA_SAVE_FAILED = "Failed to write general task data to file. "
+            + "Your general tasks were NOT saved!";
+    public static final String TASK_DATA_SAVE_SUCCESS = "General tasks written to file.";
 
-    /**.
-     * For command result
+    /**
+     * For CommandResult.
      */
     public static final String ARRAYLIST_RESULT = "ArrayList";
     public static final String STRING_RESULT = "String";
 
     /**
-     * .
-     * For exceptions
+     * For exceptions.
      */
     public static final String ERROR_NO_SUCH_MODULE = "Sorry, no such module exists ._.";
     public static final String ERROR_NO_SUCH_TASK = "Sorry, no such task exists ._.";
     public static final String ERROR_PARSE_FAILED = "This parse failed 0_0";
     public static final String ERROR_UNKNOWN_COMMAND = "Sorry, I don't understand the following command:";
     public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, I don't understand the result format:";
-    public static final String ERROR_WRITE_STREAM_BROKEN = "Sorry, The write stream is broken";
-    public static final String ERROR_READ_STREAM_BROKEN = "Sorry, The read stream is broken";
-    public static final String ERROR_FILE_CREATE_FAIL = "Sorry, Failed to create the file";
+    public static final String ERROR_WRITE_FILE = "Error writing to file...";
+    public static final String ERROR_READ_FILE = "Error reading from file...";
+    public static final String ERROR_FILE_CREATE_FAIL = "Sorry, file creation failed...";
+
 
     /**
-     * .
-     * For parsers
+     * For parsers.
      */
     public static final String TASK_NAME = "taskName";
     public static final String TASK_DESCRIPTION = "taskDescription";
@@ -146,8 +165,7 @@ public class StringConstants {
     public static final String SAVE_COMMAND_WORD = "save";
 
     /**
-     * .
-     * General Strings
+     * General strings.
      */
     public static final String STRING = "String";
     public static final String INDENT = "    ";
