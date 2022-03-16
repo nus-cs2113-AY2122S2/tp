@@ -1,6 +1,12 @@
 package seedu.duke;
 
+/**
+ * Class that implements behavior of parsing user input and linking
+ * that user input to a Command class.
+ */
+
 public class CommandParser {
+
     private static final String BYE = "bye";
     private static final String ADD_ITEM_COMMAND = "Add Item";
     private static final String VIEW_ITEM_LIST_COMMAND = "View Item In Inventory";
@@ -18,6 +24,14 @@ public class CommandParser {
     private static final String ASSIGN_HOUSEKEEPER = "Assign";
     public static final String VIEW_HOUSEKEEPER_COMMAND = "View Recorded Housekeeper";
 
+    /**
+     * Parses the user-provided command and creates the relevant Command object.
+     * @param commandString User input to be parsed and turned into a Command object.
+     * @return The relevant Command object created based on the user input.
+     * @throws WrongCommandException If the user input cannot be recognized as a Command object.
+     * @throws HotelLiteManagerException If there is an error in user input that prevents it from being parsed into
+     *     the relevant Command object.
+     */
     public Command parse(String commandString) throws WrongCommandException, HotelLiteManagerException {
         Command userCommand = null;
         String commandStringWithoutCommand;
