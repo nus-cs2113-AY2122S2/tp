@@ -42,6 +42,8 @@ public class IncomeList {
      * @param index The index of the income on the person's income list
      */
     public void remove(int index) {
+        assert (index > 0);
+        assert (index <= numberOfIncomes);
         incomeArrayList.remove(index - 1);
         numberOfIncomes--;
     }
