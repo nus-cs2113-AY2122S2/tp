@@ -54,7 +54,7 @@ public class UI {
         System.out.println("6. view doctor. Example:");
         System.out.println("view doctor");
         System.out.println("7. add medicine. Example:");
-        System.out.println("add medicine /info 1, Paracetamol, 500, 2023-06-11, Slight headache, 10");
+        System.out.println("add medicine /info Paracetamol, 500, 2023-06-11, Slight headache, 10");
         System.out.println("8. delete medicine. Example:");
         System.out.println("delete medicine /info 1");
         System.out.println("9. view medicine. Example:");
