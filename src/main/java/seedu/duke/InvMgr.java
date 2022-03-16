@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.commands.ByeCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.data.ItemList;
 import seedu.duke.parser.Parser;
@@ -24,10 +23,8 @@ public class InvMgr {
         while (!isExit) {
             String command = ui.getRawUserInput();
             Command inputCommand = Parser.parse(command);
-            inputCommand.execute(ui, itemList);
-            if (inputCommand instanceof ByeCommand) {
-                break;
-            }
+            inputCommand.execute(itemList, ui);
+            isExit = inputCommand.isExit();
         }
     }
 
