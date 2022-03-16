@@ -12,5 +12,6 @@ public abstract class Command {
      * Executes the given command. This method is to be implemented by child classes.
      */
     public abstract void executeCommand() throws MindMyMoneyException;
+    
     public abstract boolean isExit();
 }
