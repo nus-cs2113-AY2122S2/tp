@@ -1,4 +1,4 @@
-package seedu.duke.ui.parsers;
+package seedu.duke.parsers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -675,7 +675,7 @@ public class ModHappyParserTest {
     }
 
     @Test
-    public void parse_markCommand_invalidInput() {
+    public void parse_markCommand_unnecessaryArgs() {
         final String testString = "mark /c 1 blahblah";
         try {
             parser.parseCommand(testString);
