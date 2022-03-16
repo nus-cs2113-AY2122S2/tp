@@ -20,6 +20,8 @@ public class IncomeList {
      * @param amount The income amount
      */
     public void addIncome(String description, double amount) {
+        assert (description != null);
+        assert (amount >= 0);
         this.incomeArrayList.add(new Income(description, amount));
         numberOfIncomes++;
     }
