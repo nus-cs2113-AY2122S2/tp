@@ -42,26 +42,27 @@ class CommandsTest {
         Commands.addGood("1", "chairs", "15", goodsArrayList);
         Commands.addGood("2", "table", "15", goodsArrayList);
 
-        /*
         //test 1, delete all (15) chairs - success, only left tables in list
         Commands.removeGood("1", "15", goodsArrayList);
         assertEquals(1, goodsArrayList.size());
-        */
 
         //test 2, delete 1 table - success, 14 tables left
         Commands.removeGood("2", "1", goodsArrayList);
-        assertEquals(14, goodsArrayList.get(1).getQuantity());
+        assertEquals(14, goodsArrayList.get(0).getQuantity());
 
         //test 3, delete 16 tables - fail, deleting more than expected
         Commands.removeGood("2", "16", goodsArrayList);
-        assertEquals(14, goodsArrayList.get(1).getQuantity());
+        assertEquals(1, goodsArrayList.size());
+        assertEquals(14, goodsArrayList.get(0).getQuantity());
 
         //test 4, non-numerical inputs - fail, good is not deleted
         Commands.removeGood("hi", "1", goodsArrayList);
-        assertEquals(14, goodsArrayList.get(1).getQuantity());
+        assertEquals(1, goodsArrayList.size());
+        assertEquals(14, goodsArrayList.get(0).getQuantity());
 
         //test 5, deleting good id that does not exist - fail
         Commands.removeGood("4", "15", goodsArrayList);
-        assertEquals(2, goodsArrayList.size());
+        assertEquals(1, goodsArrayList.size());
+        assertEquals(14, goodsArrayList.get(0).getQuantity());
     }
 }
