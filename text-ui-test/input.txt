@@ -19,4 +19,10 @@ Availability sus @ M,T
 Availability jane @ M
 Availability tom @ T
 Availability sally @
+Update Item Pax /Name:Toilet Roll /New Pax:5
+Update Item Pax /Name:Toilet Roll /New Pax:-1
+Update Item Pax /Name:Toilet Roll /New Pax:
+Update Item Pax /Name: /New Pax:5
+Update Item Pax
+Update Item Pax /Name:Swimming Pool /New Pax:5
 bye
