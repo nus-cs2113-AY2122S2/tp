@@ -415,6 +415,9 @@ class ParserTest {
     }
 
     // parseActivityId()
+    /**
+     * Checks if an exception is properly thrown when the Activity Id delimiter is not provided by the user.
+     */
     @Test
     void parseActivityId_missingDelimiter_exceptionThrown() {
         String argumentWithoutActivityIdDelimiter = "/sid 1 aid 5";
@@ -427,6 +430,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Activity Id delimiter is provided but no arguments
+     * following the delimiter are provided by the user.
+     */
     @Test
     void parseActivityId_delimiterExistsWithoutArgument_exceptionThrown() {
         String argumentWithoutActivityIdArgument = "/sid 1 /aid ";
@@ -439,6 +446,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Activity Id delimiter is provided but a non-integer
+     * argument is provided by the user.
+     */
     @Test
     void parseActivityId_delimiterExistsArgumentNotInteger_exceptionThrown() {
         String argumentWithNonIntArgument = "/sid 1 /aid a5";
@@ -451,6 +462,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Activity Id delimiter is provided but a negative integer
+     * argument is provided by the user.
+     */
     @Test
     void parseActivityId_delimiterExistsArgumentNegativeInteger_exceptionThrown() {
         String argumentWithNegativeIntArgument = "/sid 1 /aid -5";
@@ -463,6 +478,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an integer representing a activity unique identifier is properly returned when the
+     * Activity Id delimiter is provided along with a positive integer as the argument by the user.
+     */
     @Test
     void parseActivityId_delimiterExistsArgumentPositiveInteger_activityId() {
         String argumentWithDelimiterAndPositiveInt = "/sid 1 /aid 5";
