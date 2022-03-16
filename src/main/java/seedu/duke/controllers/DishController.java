@@ -1,13 +1,9 @@
 package seedu.duke.controllers;
 
-import com.sun.tools.javac.Main;
 import seedu.duke.entities.Dish;
 import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.loggers.MainLogger;
 import seedu.duke.manager.DishManager;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * DishController (or MenuController if you like).
