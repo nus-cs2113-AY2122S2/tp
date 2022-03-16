@@ -9,7 +9,7 @@ import seedu.planitarium.person.PersonList;
  * Executes the delete command and delete an income or an expenditure record to a particular
  * person in the list.
  */
-public class DeleteRecordCommand extends Command{
+public class DeleteRecordCommand extends Command {
     protected static final String DELETE_INCOME_CMD = "deletein";
     protected static final String DELETE_SPEND_CMD = "deleteout";
     protected static final String INPUT_NOT_NULL = "Input should not be empty";

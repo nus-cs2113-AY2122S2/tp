@@ -7,9 +7,9 @@ import seedu.planitarium.person.PersonList;
 
 /**
  * Executes the add command and add an income or an expenditure record to a particular
- * person in the list
+ * person in the list.
  */
-public class AddRecordCommand extends Command{
+public class AddRecordCommand extends Command {
     protected static final String ADD_INCOME_CMD = "addin";
     protected static final String ADD_SPENT_CMD = "addout";
     protected static final String DESCRIPTION_NOT_NULL = "Description should not be empty";

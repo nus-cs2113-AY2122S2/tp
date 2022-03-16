@@ -12,12 +12,12 @@ public class ExpenditureList {
     private ProjectLogger logger;
 
     /**
-     * Creates a new ExpenditureList object
+     * Creates a new ExpenditureList object.
      */
     public ExpenditureList() {
-       this.expenditureArrayList = new ArrayList<>();
-       logger = new ProjectLogger(ExpenditureList.class.getName(), "ExpenditureList.log");
-       logger.getLogger().log(Level.INFO, "Logger for ExpenditureList initialised.");
+        this.expenditureArrayList = new ArrayList<>();
+        logger = new ProjectLogger(ExpenditureList.class.getName(), "ExpenditureList.log");
+        logger.getLogger().log(Level.INFO, "Logger for ExpenditureList initialised.");
     }
 
     /**
@@ -82,8 +82,8 @@ public class ExpenditureList {
     public void printExpenditureList() {
         logger.getLogger().log(Level.INFO, "printExpenditureList() called");
         int listIndex = BASE_INDEX;
-        for (Expenditure Item : expenditureArrayList) {
-            System.out.println(listIndex++ + ". " + Item);
+        for (Expenditure item : expenditureArrayList) {
+            System.out.println(listIndex++ + ". " + item);
         }
     }
 

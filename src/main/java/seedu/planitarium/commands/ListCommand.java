@@ -5,7 +5,7 @@ import seedu.planitarium.person.PersonList;
 /**
  * Executes list command and list all the information stored in the personlist.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     protected static final String PERSONLIST_NOT_NULL = "Personlist should not be null";
 

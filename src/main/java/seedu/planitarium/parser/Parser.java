@@ -23,7 +23,7 @@ public class Parser {
     public static final String DELIMITER_EXPENDITURE = "/e";
     public static final String DELIMITER_RECORD_INDEX = "/r";
     public static final String DELIMITER_BACK = "/[ruined]";
-    public static final String DELIMITER_MONEY = ".";
+    // public static final String DELIMITER_MONEY = ".";
     public static final String EMPTY_STRING = "";
 
     public static final int INDEX_KEYWORD = 0;
@@ -31,7 +31,7 @@ public class Parser {
     public static final int INDEX_LEFT_REMOVED = 1;
     public static final int INDEX_RIGHT_REMOVED = 0;
     public static final int LIMIT_TWO_TOKENS = 2;
-    public static final int LIMIT_TWO_DECIMAL = 2;
+    // public static final int LIMIT_TWO_DECIMAL = 2;
     public static final int MIN_USER_INDEX = 1;
     public static final int MIN_EXPENDITURE_INDEX = 1;
     public static final int MIN_INCOME_INDEX = 1;
@@ -40,7 +40,7 @@ public class Parser {
     private static final String ASSERT_INPUT_NOT_NULL = "User input should not be null";
     private static final String ASSERT_OUTPUT_NOT_NULL = "Parsed output should not be null";
     private static final String ASSERT_MONEY_NOT_NULL = "Money input should not be null";
-    private static final String ASSERT_MONEY_NON_NEGATIVE = "Money output should be non-negative";
+    // private static final String ASSERT_MONEY_NON_NEGATIVE = "Money output should be non-negative";
     private static final String ASSERT_USER_INDEX_NOT_NULL = "User index should not be null";
     private static final String ASSERT_EXPENDITURE_INDEX_NOT_NULL = "Expenditure index should not be null";
     private static final String ASSERT_INCOME_INDEX_NOT_NULL = "Income index should not be null";
