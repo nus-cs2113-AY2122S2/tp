@@ -26,7 +26,7 @@ class DeleteCommandTest {
         String inputString = "expenditure 12345";
         ArrayList<Expenditure> testList = new ArrayList<>();
         new AddCommand(inputString, expenditureTestList).executeCommand();
-        testList.add(new Expenditure("expenditure", 12345));
+        testList.add(new Expenditure("expenditure", "Food",12345));
         String deleteInputString = "delete 1";
         new DeleteCommand(deleteInputString, expenditureTestList).executeCommand();
         testList.remove(0);

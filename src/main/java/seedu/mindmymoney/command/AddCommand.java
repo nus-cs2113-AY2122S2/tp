@@ -25,14 +25,25 @@ public class AddCommand extends Command {
      */
     public void executeCommand() {
         try {
+            String category = null;
+            int amount;
             System.out.print(PrintStrings.LINE);
             String[] parseAddInput = Functions.parseInput(addInput);
             String description = parseAddInput[INDEX_OF_FIRST_ITEM_IN_STRING];
-            int amount = Integer.parseInt(parseAddInput[INDEX_OF_SECOND_ITEM_IN_STRING]);
-            expenditureList.add(new Expenditure(description, amount));
-            System.out.println("Successfully added " + description + " of $" + amount + " into the account");
+            if (parseAddInput[INDEX_OF_SECOND_ITEM_IN_STRING].contains("-c")) {
+                parseAddInput = Functions.parseInputWithCommandFlag(parseAddInput[INDEX_OF_SECOND_ITEM_IN_STRING]);
+                category = parseAddInput[INDEX_OF_FIRST_ITEM_IN_STRING];
+            }
+            amount = Integer.parseInt(parseAddInput[INDEX_OF_SECOND_ITEM_IN_STRING]);
+            expenditureList.add(new Expenditure(description, category, amount));
+            if (category == null) {
+                System.out.println("Successfully added " + description + " of $" + amount + " into the account");
+            } else {
+                System.out.println("Successfully added " + description + " of $" + amount + " from " + category
+                        + " into the account");
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Did you forget to input DESCRIPTION or AMOUNT?");
+            System.out.println("Did you forget to input DESCRIPTION or AMOUNT?" + e);
         } catch (NumberFormatException e) {
             System.out.println("AMOUNT must be a number");
         }
