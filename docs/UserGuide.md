@@ -38,6 +38,18 @@ Deletes an object as indicated by the command argument.
 
 ### Editing a task/module: `edit`
 
+Edits an object's parameter as indicated by the command arguments.<br>
+For a task, you are able to change its name, description, or estimated working time.<br>
+For a module, you are able to change its description only.
+
+- Edit a task parameter <br>
+  Format: `edit /t TASK_INDEX (-n "TASK_NAME" or -d "TASK_DESCRIPTION" or -t "ESTIMATED_WORKING_TIME") [-m MODULE_CODE]`
+  <br><br>
+  Example to edit a task parameter: `edit /t 1 -n "CS2113T Tutorial 2" -m CS2113T` <br><br>
+  Note: You can only edit one task parameter per command. <br><br>
+- Edit a module description <br>
+  Format: `edit /m MODULE_CODE -d "MODULE_DESCRIPTION"` <br><br>
+  Example to edit a module description: `edit /m CS2113T -d "Software Engineering & OOP"`
 ### Marking a task: `mark`
 
 ### Listing all tasks/modules: `list`
