@@ -23,5 +23,7 @@ public class ErrorMessages {
     public static final String ERROR_EMPTY_LIST = "There are no lessons in your timetable yet!";
     public static final String ERROR_DUPLICATE_EVENT = "This event already exists. "
             + "Duplicate event will not be not added to the timetable.";
+    public static final String ERROR_OVERLAPPING_EVENT = "This event coincides with another event. "
+            + "This event will not be added to the timetable.";
 
 }
