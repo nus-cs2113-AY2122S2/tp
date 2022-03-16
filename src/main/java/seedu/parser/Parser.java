@@ -27,7 +27,6 @@ public class Parser {
                     "pf\\/(?<purchasedFrom>.+)" + "\\s+" +
                     "pd\\/(?<purchasedDate>.+)"
     );
-    public static final int PREPAREADD_REQUIRED_ARGUMENT_COUNT = 6;
     public static final Pattern VIEW_COMMAND_FORMAT = Pattern.compile("n/(?<itemName>.+)");
     public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("s/(?<itemName>.+)");
     // ARGUMENT_FORMAT extracts first n-1 tags
@@ -42,6 +41,12 @@ public class Parser {
             "Please split your command into arguments with each argument seperated by spaces!";
     public static final String INCORRECT_COMMAND_FORMAT = "Incorrect Command format!";
 
+    /**
+     * Interpret the command requested by the user and returns a corresponding Command object
+     *
+     * @param userInput Raw string of input values
+     * @return command of parent class Command with parameters specified
+     */
     public Command parseCommand(String userInput) {
         ArrayList<String> commandAndArgument;
         ArrayList<String> args;
@@ -87,8 +92,115 @@ public class Parser {
     }
 
     /**
-     * Create UpdateCommand class containing all arguments required to update a given item
+     * Break down a command into the command term to be parsed and the remainder of the arguments.
+     * Assumes command term and remainder arguments are delimited by minimally one space.
      *
+     * @param userInput String to be split into substrings
+     * @return ArrayList of String, first element being the command term and the second element being arguments
+     * @throws IncompleteCommandException if no space is found
+     */
+    public ArrayList<String> splitCommandTerm(String userInput) throws IncompleteCommandException {
+        ArrayList<String> resultArrayList = new ArrayList<>();
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        // guard against no match
+        if (!matcher.matches()) {
+            throw new IncompleteCommandException("Could not find space delimiter between command and arguments!");
+        }
+        resultArrayList.add(matcher.group("commandWord"));
+        resultArrayList.add(matcher.group("arguments"));
+        return resultArrayList;
+    }
+    /**
+     * Prepare arguments for AddCommand by splitting up the arguments into different parts
+     * <p>
+     * Index:
+     * 0. <code> equipmentName </code>: String of equipment name
+     * 1. <code> serialNumber </code>: String of unique serial number
+     * 2. <code> type </code>: String representation of enumerated class
+     * 3. <code> cost </code>: String representation of double value, "$" optional but "," delimiter forbidden
+     * 4. <code> purchasedFrom </code>: String of vendor name, suggest adhering to one consistent naming scheme
+     * 5. <code> purchasedDate </code>: String representation for now, possibility for future support
+     *
+     * @param args String to be split into substrings
+     * @return ArrayList of arguments
+     * @throws IncompleteCommandException if no match found
+     */
+    protected ArrayList<String> prepareAdd(String args) throws IncompleteCommandException {
+        final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
+        // validate arg string format
+        int matchCount = matcher.groupCount();
+        if (!matcher.matches()) {
+            throw new IncompleteCommandException("Add command values are incomplete or missing!");
+        }
+        ArrayList<String> results = new ArrayList<>();
+        for (int i = 1; i <= matchCount; i++) {
+            String result = matcher.group(i);
+            if (hasSlashDelimiter(result)) {
+                throw new IncompleteCommandException("Use of '/' for purposes other than delimiter is forbidden!");
+            }
+            results.add(result);
+        }
+        return results;
+    }
+
+    /**
+     * Prepare argument for CheckCommand by removing the preceding "n/" prefix
+     *
+     * @param args String to be split into substrings
+     * @return ArrayList of one element (assumes rest of string is item name)
+     * @throws IncompleteCommandException if no match found
+     */
+    protected ArrayList<String> prepareView(String args) throws IncompleteCommandException {
+        final Matcher matcher = VIEW_COMMAND_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            throw new IncompleteCommandException("View command values are incomplete or missing!");
+        }
+        return new ArrayList<>(Collections.singleton(matcher.group(1)));
+    }
+
+    /**
+     * Prepare argument for DeleteCommand by removing the preceding "s/" prefix
+     *
+     * @param args String to be split into substrings
+     * @return ArrayList of one element (assumes rest of string is serial number)
+     * @throws IncompleteCommandException if no match found
+     */
+    protected ArrayList<String> prepareDelete(String args) throws IncompleteCommandException {
+        final Matcher matcher = DELETE_COMMAND_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            throw new IncompleteCommandException("Delete command values are incomplete or missing!");
+        }
+        return new ArrayList<>(Collections.singleton(matcher.group(1)));
+    }
+
+    /**
+     * Splits main arguments into split tags with each substring
+     *
+     * @param args String to be split into substrings
+     * @return ArrayList of two elements
+     * @throws IncompleteCommandException if no parameters found
+     */
+    protected ArrayList<String> extractArguments(String args) throws IncompleteCommandException {
+        int lastIndex = 0;
+        ArrayList<String> splitArguments = new ArrayList<>();
+        try {
+            Matcher matcher = ARGUMENT_FORMAT.matcher(args.trim());
+            while (matcher.find()) {
+                splitArguments.add(matcher.group().trim());
+                lastIndex = matcher.end();
+            }
+            matcher.usePattern(ARGUMENT_TRAILING_FORMAT);
+            matcher.find(lastIndex);
+            splitArguments.add(matcher.group().trim());
+        } catch (IllegalStateException e) {
+            throw new IncompleteCommandException("No parameters found!");
+        }
+        return splitArguments;
+    }
+
+    /**
+     * Create UpdateCommand class containing all arguments required to update a given item
+     * <p>
      * Should multiple arguments specifying the same argument parameter (e.g. 'c/1000' and 'c/2000') is given,
      * the previous arguments passed in will be overwritten by the most recent parameter ('c/2000' in example).
      *
@@ -101,7 +213,7 @@ public class Parser {
             int delimiterPos = s.indexOf('/');
             // the case where delimiterPos = -1 is impossible as
             // ARGUMENT_FORMAT and ARGUMENT_TRAILING_FORMAT regex requires a '/'
-            assert delimiterPos != -1: "Each args will need to include minimally a '/' to split arg and value upon";
+            assert delimiterPos != -1 : "Each args will need to include minimally a '/' to split arg and value upon";
             String argType = s.substring(0, delimiterPos);
             String argValue = s.substring(delimiterPos + 1);
             switch (argType) {
@@ -132,110 +244,8 @@ public class Parser {
         return updateCommand;
     }
 
-    /**
-     * Splits main arguments into split tags with each substring
-     *
-     * @param args String to be split into substrings
-     * @return ArrayList of two elements
-     * @throws IncompleteCommandException if no parameters found
-     */
-    protected ArrayList<String> extractArguments(String args) throws IncompleteCommandException {
-        int lastIndex = 0;
-        ArrayList<String> splitArguments = new ArrayList<>();
-        try {
-            Matcher matcher = ARGUMENT_FORMAT.matcher(args.trim());
-            while (matcher.find()) {
-                splitArguments.add(matcher.group());
-                lastIndex = matcher.end();
-            }
-            matcher.usePattern(ARGUMENT_TRAILING_FORMAT);
-            matcher.find(lastIndex);
-            splitArguments.add(matcher.group());
-        } catch (IllegalStateException e) {
-            throw new IncompleteCommandException("No parameters found!");
-        }
-        return splitArguments;
-    }
-
-
-    /**
-     * Prepare arguments for AddCommand by splitting up the arguments into different parts
-     * <p>
-     * Index:
-     * 0. <code> equipmentName </code>: String of equipment name
-     * 1. <code> serialNumber </code>: String of unique serial number
-     * 2. <code> type </code>: String representation of enumerated class
-     * 3. <code> cost </code>: String representation of double value, "$" optional but "," delimiter forbidden
-     * 4. <code> purchasedFrom </code>: String of vendor name, suggest adhering to one consistent naming scheme
-     * 5. <code> purchasedDate </code>: String representation for now, possibility for future support
-     *
-     * @param args String to be split into substrings
-     * @return ArrayList of arguments
-     * @throws IncompleteCommandException if no match found
-     */
-    protected ArrayList<String> prepareAdd(String args) throws IncompleteCommandException {
-        final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
-        // validate arg string format
-        int matchCount = matcher.groupCount();
-        if (!matcher.matches() || matchCount != PREPAREADD_REQUIRED_ARGUMENT_COUNT) {
-            throw new IncompleteCommandException("Add command values are incomplete or missing!");
-        }
-        ArrayList<String> results = new ArrayList<>();
-        for (int i = 1; i <= matchCount; i++) {
-            results.add(matcher.group(i));
-        }
-        return results;
-    }
-
-    /**
-     * Prepare argument for CheckCommand by removing the preceding "n/" prefix
-     *
-     * @param args String to be split into substrings
-     * @return ArrayList of one element (assumes rest of string is item name)
-     * @throws IncompleteCommandException if no match found
-     */
-    protected ArrayList<String> prepareView(String args) throws IncompleteCommandException {
-        final Matcher matcher = VIEW_COMMAND_FORMAT.matcher(args.trim());
-        if (!matcher.matches()) {
-            throw new IncompleteCommandException("View command values are incomplete or missing!");
-        }
-        return new ArrayList<>(Collections.singleton(matcher.group()));
-    }
-
-    /**
-     * Prepare argument for DeleteCommand by removing the preceding "s/" prefix
-     *
-     * @param args String to be split into substrings
-     * @return ArrayList of one element (assumes rest of string is serial number)
-     * @throws IncompleteCommandException if no match found
-     */
-    protected ArrayList<String> prepareDelete(String args) throws IncompleteCommandException {
-        final Matcher matcher = DELETE_COMMAND_FORMAT.matcher(args.trim());
-        if (!matcher.matches()) {
-            throw new IncompleteCommandException("Delete command values are incomplete or missing!");
-        }
-        return new ArrayList<>(Collections.singleton(matcher.group()));
-    }
-
-
-    /**
-     * Break down a command into the command term to be parsed and the remainder of the arguments.
-     * Assumes command term and remainder arguments are delimited by minimally one space.
-     *
-     * @param userInput String to be split into substrings
-     * @return ArrayList of String, first element being the command term and the second element being arguments
-     * @throws IncompleteCommandException if no space is found
-     */
-    public ArrayList<String> splitCommandTerm(String userInput) throws IncompleteCommandException {
-        ArrayList<String> resultArrayList = new ArrayList<>();
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
-        // guard against no match
-        if (!matcher.matches()) {
-            throw new IncompleteCommandException("Could not find space delimiter between command and arguments!");
-        }
-        resultArrayList.add(matcher.group("commandWord"));
-        resultArrayList.add(matcher.group("arguments"));
-        return resultArrayList;
+    private static boolean hasSlashDelimiter(String argument) {
+        return argument.contains("/");
     }
 
 
