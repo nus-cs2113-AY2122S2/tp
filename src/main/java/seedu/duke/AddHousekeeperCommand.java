@@ -76,13 +76,13 @@ public class AddHousekeeperCommand extends Command {
     @Override
     public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
                         AssignmentMap assignmentMap, RoomList roomList,
-                        ItemList listOfItems, Ui ui) {
+                        ItemList listOfItems, Ui ui) throws InvalidUserException {
         boolean isRecorded = housekeeperList.hasNameAdded(getHousekeeper().getName());
         if (!isRecorded) {
             housekeeperList.addHousekeeper(getHousekeeper());
             ui.printHousekeeperNoted(housekeeper);
         } else {
-            ui.printMessage("This person has already been recorded");
+            throw new InvalidUserException();
         }
 
     }
