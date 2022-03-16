@@ -1,11 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.commands.Command;
-import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.ClearCommand;
-import seedu.duke.commands.HelpCommand;
-import seedu.duke.commands.DeleteCommand;
-import seedu.duke.commands.ListCommand;
+import seedu.duke.commands.*;
 import seedu.duke.exceptions.InvalidDayException;
 import seedu.duke.exceptions.MissingValueException;
 import seedu.duke.exceptions.InvalidTimeException;
@@ -68,21 +63,16 @@ public class Parser {
             String name = eventDescription[NAME_INDEX];
             String title = eventDescription[TITLE_INDEX];
             return new AddCommand(name, title, day, startTime, endTime, mode);
-        } catch (NullPointerException npe) {
-            System.out.println(ERROR_MISSING_PARAMETERS);
-            return new HelpCommand();
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
+            return new CommandResult(ERROR_MISSING_PARAMETERS);
         } catch (MissingValueException mve) {
-            System.out.println(ERROR_MISSING_VALUES);
-            return new HelpCommand();
+            return new CommandResult(ERROR_MISSING_VALUES);
         } catch (InvalidTimeException | NumberFormatException ite) {
-            System.out.println(ERROR_INVALID_TIME);
-            return new HelpCommand();
+            return new CommandResult(ERROR_INVALID_TIME);
         } catch (InvalidDayException ide) {
-            System.out.println(ERROR_INVALID_DAY);
-            return new HelpCommand();
+            return new CommandResult(ERROR_INVALID_DAY);
         } catch (InvalidModeException ime) {
-            System.out.println(ERROR_INVALID_MODE);
-            return new HelpCommand();
+            return new CommandResult(ERROR_INVALID_MODE);
         }
     }
 
