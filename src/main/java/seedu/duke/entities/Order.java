@@ -1,12 +1,16 @@
 package seedu.duke.entities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Order {
-    private final ArrayList<Dish> dishes;
+    private List<Dish> dishes;
 
-    Order() {
-        this.dishes = new ArrayList<Dish>();
+    public <T> Order(List<T> asList) {
+
+    }
+
+    public Order() {
     }
 
     public void addDishToOrder(Dish dish) {
