@@ -12,9 +12,8 @@ public abstract class Command {
      *
      * @param itemList ItemList containing all items in the current inventory
      * @param ui User Interface for reading inputs and/or printing outputs
-     * @param storage Storage object to write output to
      */
-    public abstract void execute(ItemList itemList, Ui ui, Storage storage);
+    public abstract void execute(ItemList itemList, Ui ui);
 
     /**
      * Returns false by default if the command is not a command to exit the program.
