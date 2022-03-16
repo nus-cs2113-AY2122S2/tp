@@ -12,21 +12,26 @@ public class Ui {
     private static final String PARTITION_LINE = "______________________________"
             + "______________________________";
     private static final String LS = System.lineSeparator();
-    private static final String ANSI_GREEN_BOLD = "\u001B[32;1m";
-    private static final String ANSI_BRIGHT_GREEN_BOLD = "\u001B[92;1m";
-    public static final String ANSI_RESET = "\u001B[0m";
-    private static final String LOGO = ANSI_GREEN_BOLD
+    // To KIV for future use
+    // private static final String ANSI_GREEN_BOLD = "\u001B[32m";
+    // private static final String ANSI_BRIGHT_GREEN_BOLD = "\u001B[92m";
+    // public static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANOTHER_BLANK_STRING = "";
+    private static final String BLANK_STRING = "";
+
+    public static final String LAST_BLANK_STRING = "";
+    private static final String LOGO = ANOTHER_BLANK_STRING
             + "  ____  _\n"
             + " / ___|| |__   ___ _ __ "
-            + ANSI_BRIGHT_GREEN_BOLD + "_ __   __ _ ___ ___\n"
-            + ANSI_GREEN_BOLD + " \\___ \\| '_ \\ / _ \\ '__| "
-            + ANSI_BRIGHT_GREEN_BOLD + "'_ \\ / _` / __/ __|\n"
-            + ANSI_GREEN_BOLD + "  ___) | | | |  __/ |  "
-            + ANSI_BRIGHT_GREEN_BOLD + "| |_) | (_| \\__ \\__ \\\n"
-            + ANSI_GREEN_BOLD + " |____/|_| |_|\\___|_|  "
-            + ANSI_BRIGHT_GREEN_BOLD + "| .__/ \\__,_|___/___/\n"
-            + ANSI_GREEN_BOLD + "                       "
-            + ANSI_BRIGHT_GREEN_BOLD + "|_|" + ANSI_RESET;
+            + BLANK_STRING + "_ __   __ _ ___ ___\n"
+            + ANOTHER_BLANK_STRING + " \\___ \\| '_ \\ / _ \\ '__| "
+            + BLANK_STRING + "'_ \\ / _` / __/ __|\n"
+            + ANOTHER_BLANK_STRING + "  ___) | | | |  __/ |  "
+            + BLANK_STRING + "| |_) | (_| \\__ \\__ \\\n"
+            + ANOTHER_BLANK_STRING + " |____/|_| |_|\\___|_|  "
+            + BLANK_STRING + "| .__/ \\__,_|___/___/\n"
+            + ANOTHER_BLANK_STRING + "                       "
+            + BLANK_STRING + "|_|" + LAST_BLANK_STRING;
 
 
 
