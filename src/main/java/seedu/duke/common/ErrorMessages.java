@@ -24,4 +24,6 @@ public class ErrorMessages {
     public static final String ERROR_DUPLICATE_EVENT = "This event already exists. "
             + "Duplicate event will not be not added to the timetable.";
 
+    public static final String ERROR_INIT_FAILED = "Failed to initialise MeetingJio application. Exiting...";
+
 }
