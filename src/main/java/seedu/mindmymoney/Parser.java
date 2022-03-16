@@ -30,6 +30,8 @@ public class Parser {
     public Command parseCommand() {
         try {
             String[] parsedInput = Functions.parseInput(inputCommand);
+            assert parsedInput[0] != null;
+
             switch (parsedInput[INDEX_OF_FIRST_ITEM_IN_STRING].toLowerCase()) {
             case "help":
                 return new HelpCommand(true);
