@@ -61,6 +61,7 @@ public class ModHappyParser extends Parser {
         switch (commandWord) {
         case (EXIT_COMMAND_WORD):
         case (LIST_COMMAND_WORD):
+        case(RESET_COMMAND_WORD):
             // Intentional fallthrough
             return new NoArgumentParser(commandWord);
         case (ADD_COMMAND_WORD):
@@ -71,6 +72,8 @@ public class ModHappyParser extends Parser {
             return new MarkParser();
         case (EDIT_COMMAND_WORD):
             return new EditParser();
+        case (HELP_COMMAND_WORD):
+            return new HelpParser();
         default:
             throw new UnknownCommandException();
         }
