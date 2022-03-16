@@ -1,7 +1,9 @@
 package seedu.duke.controllers;
 
+import com.sun.tools.javac.Main;
 import seedu.duke.entities.Dish;
 import seedu.duke.exceptions.OperationTerminationException;
+import seedu.duke.loggers.MainLogger;
 import seedu.duke.manager.DishManager;
 
 import java.util.logging.Level;
@@ -13,12 +15,7 @@ import java.util.logging.Logger;
 public class DishController extends Controller {
     private static final String[] CHOICES = {"Exit Menu", "List Dish", "Add Dish",
         "Delete Dish", "Change the price of a dish", "Change the name of a dish"};
-    private static Logger logger = Logger.getLogger("DishController");
     private final DishManager dishManager;
-
-    private static void logInfo(String msg) {
-        logger.log(Level.INFO, msg);
-    }
 
     public DishController() {
         super(CHOICES);
@@ -27,8 +24,8 @@ public class DishController extends Controller {
 
     @Override
     public void takeControl() {
-        logInfo("User is using menu function");
-        System.out.println("You are using Menu function");
+        MainLogger.logInfo(this, "User is using menu function");
+        System.out.println("Entering Dish Menu...\n");
         super.takeControl();
     }
 
@@ -57,19 +54,18 @@ public class DishController extends Controller {
             System.out.println("Unknown choice!");
             break;
         }
-        System.out.println("You are using Menu function");
         System.out.println(this);
         return false;
     }
 
     private void listDishes() {
-        logInfo("User is listing dishes");
+        MainLogger.logInfo(this, "User is listing dishes");
         System.out.println("Listing dishes...");
         dishManager.printDishes();
     }
 
     private void changeName() throws OperationTerminationException {
-        logInfo("User is changing the name of dish");
+        MainLogger.logInfo(this, "User is changing the name of dish");
         System.out.println("Changing name...");
         int index = InputParser.getInteger("The index of dish");
         String name = InputParser.getString("The new name of dish");
@@ -83,7 +79,7 @@ public class DishController extends Controller {
     }
 
     private void changePrice() throws OperationTerminationException {
-        logInfo("User is changing the price of dish");
+        MainLogger.logInfo(this, "User is changing the price of dish");
         System.out.println("Changing price...");
         int index = InputParser.getInteger("The index of dish");
         double newPrice = InputParser.getDouble("The new price of dish: ");
@@ -97,7 +93,7 @@ public class DishController extends Controller {
     }
 
     private void deleteDish() throws OperationTerminationException {
-        logInfo("User is deleting dish");
+        MainLogger.logInfo(this, "User is deleting dish");
         System.out.println("Deleting dish");
         int index = InputParser.getInteger("The index of dish");
         try {
@@ -108,7 +104,7 @@ public class DishController extends Controller {
     }
 
     private void addDish() throws OperationTerminationException {
-        logInfo("User is adding dish");
+        MainLogger.logInfo(this, "User is adding dish");
         System.out.println("Adding new dish...");
         String name = InputParser.getString("The name of dish: ");
         double price = InputParser.getDouble("The price of dish: ");

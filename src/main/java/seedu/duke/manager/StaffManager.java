@@ -2,6 +2,7 @@ package seedu.duke.manager;
 
 
 import seedu.duke.entities.Staff;
+import seedu.duke.loggers.MainLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +43,10 @@ public class StaffManager {
      */
     public void addStaff(int staffId, String staffName, String position, double salary) {
         if (findByStaffId(staffId, false) != null) {
+            MainLogger.logInfo(this, "Failed to add staff: Staff with same ID already exists.");
             System.out.println("Staff with the same ID already exists, use another ID...");
         }
+        MainLogger.logInfo(this, "Successful addition of staff");
         staffs.add(new Staff(staffId, staffName, position, salary));
     }
 
@@ -55,17 +58,20 @@ public class StaffManager {
      */
     public Staff findByStaffId(int staffId, boolean printMsg) {
         if (staffId <= 0) {
+            MainLogger.logInfo(this, "Invalid input for ID.");
             System.out.println("Staff ID cannot be zero or negative.");
             return null;
         }
         for (Staff staff : staffs) {
             if (staffId == staff.getStaffId()) {
                 if (printMsg) {
+                    MainLogger.logInfo(this, "Successful search for staff.");
                     System.out.println(staff + " found!");
                 }
                 return staff;
             }
         }
+        MainLogger.logInfo(this, "Unsuccessful search for staff.");
         if (printMsg) {
             System.out.println("Staff with ID " + staffId + " not found!");
         }
@@ -81,9 +87,20 @@ public class StaffManager {
         Staff staff = findByStaffId(staffId, false);
         if (staff != null) {
             staffs.remove(staff);
+            MainLogger.logInfo(this, "Successful deletion of staff.");
             System.out.println(staff + " had been deleted from our staff records.");
         } else {
+            MainLogger.logInfo(this, "Failed to delete staff: No staff with matching ID.");
             System.out.println("No staff from our staff records has a matching ID.");
         }
+    }
+
+    /**
+     * Return the number of staffs in Staffs.
+     *
+     * @return the number of current staff.
+     */
+    public int getNumOfStaffs() {
+        return staffs.size();
     }
 }
