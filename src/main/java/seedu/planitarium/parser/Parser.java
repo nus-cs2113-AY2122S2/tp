@@ -76,7 +76,9 @@ public class Parser {
      */
     public static String parseKeyword(String userInput) {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        return userInput.split(DELIMITER_SPACE)[INDEX_KEYWORD].trim();
+        String keyword = userInput.split(DELIMITER_SPACE)[INDEX_KEYWORD].trim();
+        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, keyword));
+        return keyword;
     }
 
     /**
@@ -89,7 +91,9 @@ public class Parser {
     public static String parseName(String userInput) throws MissingDelimiterException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsDelimiter(userInput, DELIMITER_NAME);
-        return parseDelimitedTerm(userInput, DELIMITER_NAME, DELIMITER_BACK).trim();
+        String name = parseDelimitedTerm(userInput, DELIMITER_NAME, DELIMITER_BACK).trim();
+        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, name));
+        return name;
     }
 
     /**
@@ -102,7 +106,9 @@ public class Parser {
     public static String parseUserIndex(String userInput) throws MissingDelimiterException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsDelimiter(userInput, DELIMITER_USER_INDEX);
-        return parseDelimitedTerm(userInput, DELIMITER_USER_INDEX, DELIMITER_BACK).trim();
+        String userIndex = parseDelimitedTerm(userInput, DELIMITER_USER_INDEX, DELIMITER_BACK).trim();
+        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, userIndex));
+        return userIndex;
     }
 
     /**
@@ -115,7 +121,9 @@ public class Parser {
     public static String parseDescription(String userInput) throws MissingDelimiterException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsDelimiter(userInput, DELIMITER_DESCRIPTION);
-        return parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION, DELIMITER_BACK).trim();
+        String description = parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION, DELIMITER_BACK).trim();
+        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, description));
+        return description;
     }
 
     /**
@@ -128,7 +136,9 @@ public class Parser {
     public static String parseIncome(String userInput) throws MissingDelimiterException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsDelimiter(userInput, DELIMITER_INCOME);
-        return parseDelimitedTerm(userInput, DELIMITER_INCOME, DELIMITER_BACK).trim();
+        String income = parseDelimitedTerm(userInput, DELIMITER_INCOME, DELIMITER_BACK).trim();
+        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, income));
+        return income;
     }
 
     /**
@@ -141,7 +151,9 @@ public class Parser {
     public static String parseExpenditure(String userInput) throws MissingDelimiterException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsDelimiter(userInput, DELIMITER_EXPENDITURE);
-        return parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK).trim();
+        String expenditure = parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK).trim();
+        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, expenditure));
+        return expenditure;
     }
 
     /**
@@ -154,7 +166,9 @@ public class Parser {
     public static String parseRecordIndex(String userInput) throws MissingDelimiterException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsDelimiter(userInput, DELIMITER_RECORD_INDEX);
-        return parseDelimitedTerm(userInput, DELIMITER_RECORD_INDEX, DELIMITER_BACK).trim();
+        String record = parseDelimitedTerm(userInput, DELIMITER_RECORD_INDEX, DELIMITER_BACK).trim();
+        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, record));
+        return record;
     }
 
     /**
