@@ -7,7 +7,7 @@ import static seedu.duke.common.Messages.DIVIDER;
 import seedu.duke.exceptions.InvMgrException;
 
 /**
- * Handles the UI of the application
+ * Handles the UI of the application.
  * */
 public class Ui {
 
@@ -18,7 +18,7 @@ public class Ui {
     }
 
     /**
-     * Displays message(s) to user
+     * Displays message(s) to user.
      *
      * @param message Message to be displayed to user
      * */
