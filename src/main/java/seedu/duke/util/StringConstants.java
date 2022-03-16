@@ -11,7 +11,7 @@ public class StringConstants {
 
 
     /**.
-     * For AddComman
+     * For AddCommand
      */
     public static final String ADD_TASK_MESSAGE_TOP = "Hey! I have added this task under %s!";
     public static final String ADD_TASK_MESSAGE_BOTTOM = "Now you have %d task(s) in your list!";
@@ -24,6 +24,16 @@ public class StringConstants {
      * For DeleteCommand
      */
     public static final String DELETE_MESSAGE = " has been deleted.";
+
+    /**.
+     * For EditCommand
+     */
+    public static final String EDIT_TASK_SUCCESS = "The %s of %s has been changed.";
+    public static final String EDIT_MODULE_SUCCESS = "The description of %s has been changed.";
+    public static final String EDIT_TASK_WITH_MODULE_SUCCESS = "The %s of %s from %s has been changed.";
+    public static final String TASK_NAME_STR = "task name";
+    public static final String TASK_DESCRIPTION_STR = "description";
+    public static final String ESTIMATED_WORKING_TIME_STR = "estimated working time";
 
     /**.
      * For ExitCommand
@@ -104,8 +114,8 @@ public class StringConstants {
     public static final String ERROR_PARSE_FAILED = "This parse failed 0_0";
     public static final String ERROR_UNKNOWN_COMMAND = "Sorry, I don't understand the following command:";
     public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, I don't understand the result format:";
-    public static final String ERROR_WRITE_STREAM_BROKEN = "Sorry, The write steam is broken";
-    public static final String ERROR_READ_STREAM_BROKEN = "Sorry, The read steam is broken";
+    public static final String ERROR_WRITE_STREAM_BROKEN = "Sorry, The write stream is broken";
+    public static final String ERROR_READ_STREAM_BROKEN = "Sorry, The read stream is broken";
     public static final String ERROR_FILE_CREATE_FAIL = "Sorry, Failed to create the file";
 
     /**

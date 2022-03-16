@@ -77,7 +77,7 @@ public class ModuleListStorageTest {
             moduleList.add(module3);
             String path = "data/module.json";
             moduleListStorage.jsonWriter(moduleList, path);
-            ArrayList<seedu.duke.tasks.Module> list = moduleListStorage.jsonReader(path);
+            ArrayList<Module> list = moduleListStorage.jsonReader(path);
             assertEquals(list.size(), moduleList.size());
             for (int i = 0; i < list.size(); i++) {
                 assertEquals(list.get(i).getModuleCode(), moduleList.get(i).getModuleCode());
@@ -87,8 +87,8 @@ public class ModuleListStorageTest {
                 for (int j = 0; j < taskList1.size(); j++) {
                     assertEquals(taskList1.getTask(j).getTaskName(), taskList2.getTask(j).getTaskName());
                     assertEquals(taskList1.getTask(j).getTaskDescription(), taskList2.getTask(j).getTaskDescription());
-                    assertEquals(taskList1.getTask(j).getEstimatedWorkingTime(),
-                            taskList2.getTask(j).getEstimatedWorkingTime());
+                    assertEquals(taskList1.getTask(j).getWorkingTime(),
+                            taskList2.getTask(j).getWorkingTime());
                 }
             }
         } catch (Exception e) {
