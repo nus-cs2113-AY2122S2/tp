@@ -2,14 +2,12 @@
 
 ## Introduction
 
-`MindMyMoney` (M<sup>3</sup>) was proposed for users with multiple payment methods who wish to track their expenditures. 
-Conducting anecdotal interviews, we realized users face difficulty tracking their expenditures across different payment 
-platforms on vastly different items. `MindMyMoney` was then conceptualized on the basis of tracking user’s expenditures.
+`MindMyMoney` (M<sup>3</sup>) was proposed for users with multiple payment methods who wish to track their expenditures.
 
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed. 
-2. Down the latest version of `MindMyMoney` from [here](https://github.com/AY2122S2-CS2113T-T10-4/tp).
+2. Down the latest version of `MindMyMoney` from [here](https://github.com/AY2122S2-CS2113T-T10-4/tp/releases)).
 
 
 ## Commands Summary <br>
@@ -25,10 +23,11 @@ platforms on vastly different items. `MindMyMoney` was then conceptualized on th
 |
 
 ## Features <br>
-The following are features of the `MindMyMoney` application. Please ensure that the format of commands given is accurate<br>
+The following are features of the `MindMyMoney` application. Please ensure that the format of commands given is accurate
+Words in `[SQUARE_BRACKETS]` are the parameters.<br>
 
 ### Display list of currently available commands:`help` <br>
-Prints a list of currently available commands for users to track their expenditures<br> 
+Prints a list of currently available commands<br> 
 Format:`help` <br>
 ![help screenshot](./images/help.PNG)<br>
 
