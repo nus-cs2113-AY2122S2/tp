@@ -140,7 +140,7 @@ Showing workouts 1-3 of 3:
 Showed all workouts in list
 ----------------------------------------------------------------------
 ```
-To update workout with index 1 to 15 reps, enter the following command::
+To update workout with index 1 to 15 reps, enter the following command:
 ```
 > workout /update 1 15
 ```
