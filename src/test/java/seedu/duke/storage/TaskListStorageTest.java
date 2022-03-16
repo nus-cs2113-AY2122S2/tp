@@ -10,12 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import seedu.duke.tasks.Task;
+import seedu.duke.util.StringConstants;
 
 
 public class TaskListStorageTest {
     private TaskListStorage taskListStorage;
-    private ArrayList<seedu.duke.tasks.Task> taskList;
-    private String path = "data/task.json";
+    private ArrayList<Task> taskList;
+    private final String path = StringConstants.TASK_PATH;
 
     @BeforeEach
     public void setUp() {
@@ -26,7 +27,6 @@ public class TaskListStorageTest {
     @Test
     public void store_empty_module_list_and_read() {
         try {
-            String path = "data/task.json";
             taskListStorage.jsonWriter(taskList, path);
             ArrayList<Task> list = taskListStorage.jsonReader(path);
             assertTrue(list.containsAll(taskList) && taskList.containsAll(list));
@@ -45,9 +45,8 @@ public class TaskListStorageTest {
             taskList.add(task1);
             taskList.add(task2);
             taskList.add(task3);
-            String path = "data/task.json";
             taskListStorage.jsonWriter(taskList, path);
-            ArrayList<seedu.duke.tasks.Task> list = taskListStorage.jsonReader(path);
+            ArrayList<Task> list = taskListStorage.jsonReader(path);
             assertEquals(list.size(), taskList.size());
             for (int i = 0; i < list.size(); i++) {
                 assertEquals(list.get(i).getTaskName(), taskList.get(i).getTaskName());

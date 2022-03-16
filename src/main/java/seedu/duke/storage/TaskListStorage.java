@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.ReadStreamBrokenException;
+import seedu.duke.exceptions.ReadException;
 import seedu.duke.tasks.Task;
 
 
@@ -45,7 +45,7 @@ public class TaskListStorage extends ListStorage<Task> {
             return arrayList;
 
         } catch (Exception e) {
-            throw new ReadStreamBrokenException();
+            throw new ReadException();
         }
     }
 

@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 
 import seedu.duke.exceptions.FileCreateFailException;
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.WriteStreamBrokenException;
+import seedu.duke.exceptions.WriteException;
 
 
 /**
@@ -38,7 +38,7 @@ public abstract class ListStorage<ModHappyT extends Object> implements Storage<A
             isr.close();
             fos.close();
         } catch (Exception e) {
-            throw new WriteStreamBrokenException();
+            throw new WriteException();
         }
     }
 

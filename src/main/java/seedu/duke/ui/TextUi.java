@@ -36,10 +36,17 @@ public class TextUi {
     }
 
     /**
-     * Displays a message.
+     * Displays a message enclosed by horizontal lines.
      */
     public void showMessage(Object message) {
         out.println(formatMessage(message.toString()));
+    }
+
+    /**
+     * Displays a message without any special formatting.
+     */
+    public void showUnformattedMessage(Object message) {
+        out.println(message.toString());
     }
 
     /**
@@ -60,7 +67,7 @@ public class TextUi {
      * Displays the initialisation message.
      */
     public void showInitFailedMessage() {
-        showMessage(StringConstants.INITIAL_FAILED_MESSAGE);
+        showMessage(StringConstants.INIT_FAILED_MESSAGE);
     }
 
 }
