@@ -133,5 +133,6 @@ public class SessionCreateCommand extends Command {
         Session newSession = new Session(sessionName, newSessionId, sessionDate, personList);
         manager.getProfile().addSession(newSession);
         manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + newSession);
+        manager.getLogger().finest(Message.LOGGER_SESSIONCREATE_SESSION_ADDED + newSessionId);
     }
 }

@@ -74,6 +74,7 @@ public class SessionDeleteCommand extends Command {
             if (isConfirmed) {
                 manager.getProfile().removeSession(sessionId);
                 manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
+                manager.getLogger().finest(Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
             } else {
                 manager.getUi().printlnMessageWithDivider(COMMAND_ABORT);
             }
