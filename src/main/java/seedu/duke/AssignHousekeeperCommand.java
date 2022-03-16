@@ -3,6 +3,7 @@ package seedu.duke;
 /**
  * Identifies the name of the housekeeper and assign to room id
  * housekeeper list.
+ * something to test
  */
 public class AssignHousekeeperCommand extends Command {
     private String name;
