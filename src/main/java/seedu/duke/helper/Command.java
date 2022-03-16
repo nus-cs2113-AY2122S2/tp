@@ -13,7 +13,8 @@ public class Command {
 
     public void viewPatient(PatientList patientList, String nric) {
         if (isNull(nric)) {
-            patientList.viewPatient();;
+            patientList.viewPatient();
+            ;
         } else {
             patientList.viewPatient(nric);
         }
@@ -67,6 +68,22 @@ public class Command {
         System.out.println("Medicine has been added");
     }
 
+    public void viewMedicine(MedicineList medicineList, String parameters) {
+        if (parameters == null) {
+            medicineList.viewMedicine();
+        } else {
+            try {
+                int index = Integer.parseInt(parameters);
+                if (index < 1 || medicineList.size() < index) {
+                    System.out.println("Index is out of range.");
+                    return;
+                }
+                medicineList.viewMedicine(index);
+            } catch (NumberFormatException e) {
+                System.out.println("Index is out of range.");
+            }
+        }
+    }
 
     public void addDoctor(DoctorList doctorList, String parameters) {
         if (isNull(parameters)) {
@@ -97,7 +114,6 @@ public class Command {
             System.out.println("The medicine record at index " + index + " has been deleted.");
         } catch (NumberFormatException numberFormatException) {
             System.out.println("Parameter given is not a number.");
-
         }
     }
 }
