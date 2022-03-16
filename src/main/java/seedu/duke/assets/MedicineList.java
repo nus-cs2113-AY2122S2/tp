@@ -10,7 +10,7 @@ public class MedicineList {
     }
 
     public void add(String[] parameterArray) {
-        Medicine newMedicine = new Medicine(medicines.size(), parameterArray[0], Integer.parseInt(parameterArray[1]),
+        Medicine newMedicine = new Medicine(medicines.size() + 1, parameterArray[0], Integer.parseInt(parameterArray[1]),
                 parameterArray[2], parameterArray[3], Integer.parseInt(parameterArray[4]));
         medicines.add(newMedicine);
     }
@@ -23,6 +23,10 @@ public class MedicineList {
     }
 
     public void viewMedicine() {
+        if (size() == 0) {
+            System.out.println("There are no medicines currently.");
+            return;
+        }
         for (Medicine medicine : medicines) {
             getMedicineInfo(medicine);
         }

@@ -94,13 +94,13 @@ public class UI {
     }
 
     public void printDeletePatientExampleMessage(PatientList patientList) {
-        System.out.println("Please input a postive number up to " + patientList.getSize() + " only.");
+        System.out.println("Please input a positive number up to " + patientList.getSize() + " only.");
         System.out.println("Here is an example:");
         System.out.println("delete patient /info 1");
     }
 
     public void printDeleteDoctorErrorMessage(DoctorList doctorList) {
-        System.out.println("Please enter a number from 1 till  " + doctorList.getSizeDoctor() + " .");
+        System.out.println("Please input a positive number up to " + doctorList.getSizeDoctor() + " only.");
         System.out.println("Here is an example:");
         System.out.println("delete doctor /info 1");
     }

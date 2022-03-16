@@ -3,7 +3,6 @@ package seedu.duke.helper;
 import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
-import seedu.duke.assets.DoctorList;
 
 
 public class Command {
@@ -58,12 +57,9 @@ public class Command {
     }
 
     public void viewDoctor(DoctorList doctorList, String nric) {
-        if (isNull(nric)) {
-            return;
-        }
-        if (Parser.parseViewDoctor(nric) == null) {
+        if (nric == null) {
             doctorList.viewDoctor();
-
+            return;
         }
         doctorList.viewDoctor(nric);
     }
@@ -87,11 +83,14 @@ public class Command {
 
     public void addMedicine(MedicineList medicineList, String parameters) {
         if (isNull(parameters)) {
+            System.out.println("Invalid format. Please follow the below example and try again.");
+            System.out.println("add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
             return;
         }
         String[] parameterArray = Parser.parseAddMedicine(parameters);
         if (parameterArray == null) {
-            System.out.println("Wrong Medicine Format");
+            System.out.println("There are missing parameters. Please follow the below example and try again.");
+            System.out.println("add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
             return;
         }
         medicineList.add(parameterArray);
@@ -132,12 +131,13 @@ public class Command {
 
     public void deleteMedicine(MedicineList medicineList, String stringIndex) {
         if (isNull(stringIndex)) {
+            System.out.println("Parameter missing.");
             return;
         }
         try {
             int index = Integer.parseInt(stringIndex);
             if (index < 1 || index > medicineList.size()) {
-                System.out.println("Number is not within range of 1 - " + medicineList.size());
+                System.out.println("Number is not within range.");
                 return;
             }
             medicineList.delete(index);
