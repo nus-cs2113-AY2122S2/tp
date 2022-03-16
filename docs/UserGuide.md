@@ -124,10 +124,10 @@ Modifies an existing workout from the workout list.<br>
 
 Format: `workout /update <index of workout to update> <new number of repetitions>`
 
-| Parameters                     | Description                                              |
-|--------------------------------|----------------------------------------------------------|
-| `<index of workout to update>` | The index of workout to be update from the workout list. |
-| `<new number of repetitions>`  | The number of repetitions to be changed to.              |
+| Parameters                     | Description                                               |
+|--------------------------------|-----------------------------------------------------------|
+| `<index of workout to update>` | The index of workout to be updated from the workout list. |
+| `<new number of repetitions>`  | The number of repetitions to be changed to.               |
 
 **Example**<br>
 Initially, the workout list contains the following workouts:
@@ -140,7 +140,7 @@ Showing workouts 1-3 of 3:
 Showed all workouts in list
 ----------------------------------------------------------------------
 ```
-To update workout with index 1 to 15 reps, the following command should be entered:
+To update workout with index 1 to 15 reps, enter the following command::
 ```
 > workout /update 1 15
 ```
@@ -153,7 +153,7 @@ Alright, the following workout has been updated:
 
 ----------------------------------------------------------------------
 ```
-Now workout with index 1 (push up with 10 reps) is updated to push up with 15 reps.
+Now the workout with index 1 (push up with 10 reps) is updated to push up with 15 reps.
 Now running the `workout /list` command again will show the workout list as follows:
 ```
 ----------------------------------------------------------------------
