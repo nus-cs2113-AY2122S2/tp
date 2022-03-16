@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class ListCommand extends Command {
     private final ArrayList<String> COMMAND_STRINGS;
-    public final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "list";
 
     /**
      * constructor for ListCommand with NO specified type. Initialises successMessage and usageReminder from Command

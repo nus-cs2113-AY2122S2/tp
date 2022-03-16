@@ -85,6 +85,13 @@ public class Parser {
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(UpdateCommand.COMMAND_WORD + UpdateCommand.COMMAND_DESCRIPTION);
             }
+        case ListCommand.COMMAND_WORD:
+            if (commandAndArgument.get(1).equals(null)) {
+                return new ListCommand();
+            } else {
+                return new ListCommand(new ArrayList<>(Collections.singleton(commandAndArgument.get(1))));
+            }
+
         default:
             return new IncorrectCommand(INCORRECT_COMMAND_FORMAT);
         }
@@ -94,6 +101,7 @@ public class Parser {
     /**
      * Break down a command into the command term to be parsed and the remainder of the arguments.
      * Assumes command term and remainder arguments are delimited by minimally one space.
+     * If first element is "list", remainder arguments can be empty, in which case a null second object will be passed in.
      *
      * @param userInput String to be split into substrings
      * @return ArrayList of String, first element being the command term and the second element being arguments
@@ -101,7 +109,13 @@ public class Parser {
      */
     public ArrayList<String> splitCommandTerm(String userInput) throws IncompleteCommandException {
         ArrayList<String> resultArrayList = new ArrayList<>();
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        userInput = userInput.trim();
+        if (userInput.equals(ListCommand.COMMAND_WORD)) {
+            resultArrayList.add("list");
+            resultArrayList.add(null);
+            return resultArrayList;
+        }
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput);
         // guard against no match
         if (!matcher.matches()) {
             throw new IncompleteCommandException("Could not find space delimiter between command and arguments!");
