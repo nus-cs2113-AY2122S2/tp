@@ -69,6 +69,15 @@ class SessionCreateCommandTest {
         assertEquals(2, manager.getProfile().getSessionList().size());
     }
 
+    public void run_hasOneNameDuplicate_sessionIdNotIncremented() {
+        int newSessionId = manager.getProfile().getNewSessionId();
+        String userInput = "session /create /n Class outing /d 23-02-2022 /pl Alice Alice Bob";
+        Command command = Parser.getCommand(userInput);
+        command.run(manager);
+        int testSessionId = manager.getProfile().getNewSessionId();
+        assertEquals(newSessionId, testSessionId - 1);
+    }
+
     /**
      * Checks if a session is created when a session with the same name exists.
      */
