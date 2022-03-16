@@ -1,5 +1,6 @@
 package seedu.duke.helper;
 
+import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.PatientList;
 
 import java.util.Scanner;
@@ -96,6 +97,12 @@ public class UI {
         System.out.println("Please input a postive number up to " + patientList.getSize() + " only.");
         System.out.println("Here is an example:");
         System.out.println("delete patient /info 1");
+    }
+
+    public void printDeleteDoctorErrorMessage(DoctorList doctorList) {
+        System.out.println("Please enter a number from 1 till  " + doctorList.getSizeDoctor() + " .");
+        System.out.println("Here is an example:");
+        System.out.println("delete doctor /info 1");
     }
 
     public void printNullParametersMessage() {
