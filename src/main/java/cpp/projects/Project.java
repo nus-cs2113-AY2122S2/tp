@@ -90,7 +90,6 @@ public class Project {
      * Displays all details of the project.
      */
     public void printDetails() {
-        System.out.println(Constants.SEPARATOR);
         System.out.print("Project Name: " + getTitle() + "\n");
         System.out.print("Deadline: " + getDeadline() + "\n");
         int count = 1;
