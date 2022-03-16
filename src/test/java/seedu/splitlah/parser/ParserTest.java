@@ -336,6 +336,9 @@ class ParserTest {
     }
 
     // parseSessionId()
+    /**
+     * Checks if an exception is properly thrown when the Session Id delimiter is not provided by the user.
+     */
     @Test
     void parseSessionId_missingDelimiter_exceptionThrown() {
         String argumentWithoutSessionIdDelimiter = "sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
@@ -348,6 +351,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Session Id delimiter is provided but no arguments
+     * following the delimiter are provided by the user.
+     */
     @Test
     void parseSessionId_delimiterExistsWithoutArgument_exceptionThrown() {
         String argumentWithoutSessionIdArgument = "/sid  /n Lunch /p Alice /i Alice Bob Charlie /co 15";
@@ -360,6 +367,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Session Id delimiter is provided but a non-integer
+     * argument is provided by the user.
+     */
     @Test
     void parseSessionId_delimiterExistsArgumentNotInteger_exceptionThrown() {
         String argumentWithNonIntArgument = "/sid a1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
@@ -372,6 +383,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Session Id delimiter is provided but a negative integer
+     * argument is provided by the user.
+     */
     @Test
     void parseSessionId_delimiterExistsArgumentNegativeInteger_exceptionThrown() {
         String argumentWithNegativeIntArgument = "/sid -9 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
@@ -384,6 +399,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an integer representing a session unique identifier is properly returned when the
+     * Session Id delimiter is provided along with a positive integer as the argument by the user.
+     */
     @Test
     void parseSessionId_delimiterExistsArgumentPositiveInteger_sessionId() {
         String argumentWithDelimiterAndPositiveInt = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
