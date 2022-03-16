@@ -36,7 +36,6 @@ public class Expenditure {
 
     public void setCategory(String category) {
         this.category = category;
-        System.out.println(category);
     }
 
     public String getCategory() {
@@ -113,7 +112,7 @@ public class Expenditure {
         try {
             int amount = Integer.parseInt(parts[1]);
             String escapedDescription = unescapeDataString(parts[0].strip());
-            return new Expenditure(escapedDescription, amount);
+            return new Expenditure(escapedDescription, null, amount);
         } catch (NumberFormatException e) {
             throw new MindMyMoneyException("Invalid format for expenditure amount");
         }
