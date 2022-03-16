@@ -1,6 +1,9 @@
 package seedu.mindmymoney;
 
 import java.util.Scanner;
+import java.util.Random;
+
+import static seedu.mindmymoney.constants.PrintStrings.tips;
 
 /**
  * Deals with interactions with the user.
@@ -9,9 +12,11 @@ public class Ui {
     public static final String PROMPT = "> ";
 
     private final Scanner in;
+    private final Random rand;
 
     public Ui() {
         this.in = new Scanner(System.in);
+        this.rand = new Random();
     }
 
     /**
@@ -24,8 +29,11 @@ public class Ui {
                 + "|_|  |_|_|_||_\\__,_|_|  |_|\\_, |_|  |_\\___/_||_\\___|\\_, |\n"
                 + "                           |__/                     |__/";
 
-        System.out.print(System.lineSeparator());
+        System.out.println(System.lineSeparator());
         System.out.println(logo);
+        int randomIndex = rand.nextInt(48);
+        assert randomIndex >= 0 && randomIndex <= 48 : "randomIndex is not within the bounds";
+        System.out.println("<< " + tips[randomIndex] + " >>" + System.lineSeparator());
         System.out.println("Welcome to MindMyMoney");
         System.out.println("What can I do for you?" + System.lineSeparator());
     }

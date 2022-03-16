@@ -29,6 +29,8 @@ public class Parser {
     public static Command parseCommand(String input, ExpenditureList itemList) {
         try {
             String[] parsedInput = Functions.parseInput(input);
+            assert parsedInput[INDEX_OF_FIRST_ITEM_IN_STRING] != null : "First element in parsedInput is null";
+
             switch (parsedInput[INDEX_OF_FIRST_ITEM_IN_STRING].toLowerCase()) {
             case "help":
                 return new HelpCommand(true);
