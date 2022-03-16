@@ -12,4 +12,5 @@ for /f "tokens=*" %%a in (
     set jarloc=%%a
 )
 
+REM remove tests as we adopt JUnit testing instead
 ECHO Test passed!
