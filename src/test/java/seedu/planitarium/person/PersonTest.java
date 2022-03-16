@@ -20,4 +20,15 @@ class PersonTest {
             assertNull(e.getMessage());
         }
     }
+
+    @Test
+    public void deleteIncome_invalidIndex_assertionError() {
+        Person person = new Person(VALID_NAME);
+        try {
+            person.deleteIncome(INVALID_INDEX);
+            fail();
+        } catch (AssertionError e) {
+            assertNull(e.getMessage());
+        }
+    }
 }
