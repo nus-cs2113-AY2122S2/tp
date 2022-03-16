@@ -6,6 +6,7 @@ public class Duke {
      */
     SatisfactionList satisfactionList = new SatisfactionList();
     HousekeeperList housekeeperList = new HousekeeperList();
+    AssignmentMap assignmentMap = new AssignmentMap();
 
     private void run() {
         CommandParser commandParser = new CommandParser();
@@ -18,7 +19,7 @@ public class Duke {
             try {
                 userInput = ui.readUserInput();
                 Command command = commandParser.parse(userInput);
-                command.execute(housekeeperList, satisfactionList, roomList, listOfItems, ui);
+                command.execute(housekeeperList, satisfactionList, assignmentMap, roomList, listOfItems, ui);
                 shouldExitProgram = command.isExit();
             } catch (WrongCommandException error) {
                 System.out.println(error.getMessage());

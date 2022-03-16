@@ -7,7 +7,8 @@ public abstract class Command {
         this.isExit = false;
     }
 
-    public abstract void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList roomList,
+    public abstract void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
+                                 AssignmentMap assignmentMap, RoomList roomList,
                                  ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException;
 
     public boolean isExit() {

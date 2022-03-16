@@ -21,7 +21,8 @@ public class CheckInCommand extends Command {
      * @param ui The user interface for this execution method.
      * @throws InvalidRoomNumberException if the room number is not in the room list.
      */
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList list,
+    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
+                        AssignmentMap assignmentMap, RoomList list,
                         ItemList itemList, Ui ui) throws InvalidRoomNumberException {
         this.roomList = list;
         for (Room room : list.getRoomList()) {

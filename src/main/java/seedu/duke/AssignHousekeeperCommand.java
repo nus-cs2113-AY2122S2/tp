@@ -4,13 +4,13 @@ package seedu.duke;
  * Identifies the name and availability of the housekeeper and update availability into the
  * housekeeper list.
  */
-public class AddAvailabilityCommand extends Command {
+public class AssignHousekeeperCommand extends Command {
     private String name;
-    private String availability;
-    private static final String AVAILABILITY_INDICATE = "@";
+    private String roomID;
+    private static final String ASSIGNMENT_INDICATE = "##";
     private static final int ONLY_ONE_FIELD_ENTERED = 1;
 
-    public AddAvailabilityCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
+    public AssignHousekeeperCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
         if (commandStringWithoutCommand.isEmpty()) {
             throw new InvalidAvailabilityException();
         }
@@ -19,12 +19,12 @@ public class AddAvailabilityCommand extends Command {
         if (input.length == ONLY_ONE_FIELD_ENTERED) {
             throw new InvalidAvailabilityException();
         }
-        String availability = input[1].trim();
-        if (availability.isEmpty()) {
+        String id = input[1].trim();
+        if (id.isEmpty()) {
             throw new InvalidAvailabilityException();
         }
         setName(name);
-        setAvailability(availability);
+        setRoomID(id);
     }
 
     /**
@@ -35,11 +35,11 @@ public class AddAvailabilityCommand extends Command {
      * @throws HotelLiteManagerException When description of availability is invalid.
      */
     private String[] extractInput(String commandStringWithoutCommand) throws HotelLiteManagerException {
-        boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(AVAILABILITY_INDICATE);
+        boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(ASSIGNMENT_INDICATE);
         if (isSymbolIncorrect) {
             throw new InvalidAvailabilityException();
         }
-        String[] input = commandStringWithoutCommand.split(AVAILABILITY_INDICATE);
+        String[] input = commandStringWithoutCommand.split(ASSIGNMENT_INDICATE);
         return input;
     }
 
@@ -51,12 +51,12 @@ public class AddAvailabilityCommand extends Command {
         this.name = name;
     }
 
-    public String getAvailability() {
-        return availability;
+    public String getroomID() {
+        return roomID;
     }
 
-    public void setAvailability(String availability) {
-        this.availability = availability;
+    public void setRoomID(String roomID) {
+        this.roomID = roomID;
     }
 
     /**
@@ -74,10 +74,10 @@ public class AddAvailabilityCommand extends Command {
     @Override
     public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
                         AssignmentMap assignmentMap, RoomList roomList,
-                        ItemList listOfItems, Ui ui) {
-        String availability = getAvailability();
+                        ItemList listOfItems, Ui ui) throws InvalidRoomNumberException, InvalidHousekeeperProfile {
+        String roomID = getroomID();
         String name = getName();
-        ui.printMessage("Added " + name + " availability into records");
-        housekeeperList.searchAvailability(name, availability);
+        ui.printMessage("Assigned " + name + " to room#" + roomID + ".");
+        assignmentMap.addAssignment(name, roomID, housekeeperList, roomList);
     }
 }

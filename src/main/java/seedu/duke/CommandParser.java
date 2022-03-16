@@ -15,6 +15,7 @@ public class CommandParser {
     private static final String CHECK_ROOM_BY_LEVEL = "check level room";
     private static final String CHECK_BY_CATEGORY = "check category room";
     private static final String UPDATE_ITEM_PAX_COMMAND = "Update Item Pax";
+    private static final String ASSIGN_HOUSEKEEPER = "Assign";
 
     public Command parse(String commandString) throws WrongCommandException, HotelLiteManagerException {
         Command userCommand = null;
@@ -57,6 +58,9 @@ public class CommandParser {
         } else if (commandString.startsWith(ADD_AVAILABILITY_COMMAND)) {
             commandStringWithoutCommand = commandString.replace(ADD_AVAILABILITY_COMMAND, "");
             userCommand = new AddAvailabilityCommand(commandStringWithoutCommand);
+        }else if (commandString.startsWith(ASSIGN_HOUSEKEEPER)) {
+            commandStringWithoutCommand = commandString.replace(ADD_AVAILABILITY_COMMAND, "");
+            userCommand = new AssignHousekeeperCommand(commandStringWithoutCommand);
         } else {
             throw new WrongCommandException("Invalid Command");
         }
