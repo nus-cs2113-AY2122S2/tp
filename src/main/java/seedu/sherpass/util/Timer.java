@@ -43,10 +43,12 @@ public class Timer extends Thread {
         isTimerRunning = true;
         printTimerStart();
         while (hasTimeLeft) {
+            assert timeLeft > NO_TIME_LEFT;
             printTimeLeft();
             update();
         }
         if (timerRanOutOfTime()) {
+            assert timeLeft <= NO_TIME_LEFT;
             isTimerRunning = false;
             ui.showToUser("Time is up!");
             ui.showLine();
@@ -155,6 +157,10 @@ public class Timer extends Thread {
 
     public boolean isTimerPaused() {
         return isTimerPaused;
+    }
+
+    public int getTimeLeft() {
+        return timeLeft;
     }
 
     /**
