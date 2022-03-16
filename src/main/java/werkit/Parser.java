@@ -175,12 +175,14 @@ public class Parser {
         case LIST_ACTION_KEYWORD:
             if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
                 logger.log(Level.WARNING, "User has entered an invalid list workout command action.");
-                throw new InvalidCommandException(className, InvalidCommandException.INVALID_WORKOUT_LIST_COMMAND_ERROR_MSG);
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_WORKOUT_LIST_COMMAND_ERROR_MSG);
             }
             break;
         default:
             logger.log(Level.WARNING, "User has entered an invalid workout command action.");
-            throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
+            throw new InvalidCommandException(className,
+                    InvalidCommandException.INVALID_ACTION_ERROR_MSG);
         }
         return new WorkoutCommand(userInput, fileManager, workoutList, actionKeyword, arguments);
     }
