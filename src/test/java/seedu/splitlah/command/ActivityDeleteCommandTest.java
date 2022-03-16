@@ -52,6 +52,7 @@ class ActivityDeleteCommandTest {
 
     /**
      * Checks if an activity is deleted with an invalid session unique identifier.
+     *
      * @throws InvalidDataException If there are no sessions stored or
      *                              if the session unique identifier specified was not found.
      */
@@ -65,6 +66,7 @@ class ActivityDeleteCommandTest {
 
     /**
      * Checks if an activity is deleted with an invalid activity unique identifier.
+     *
      * @throws InvalidDataException If there are no sessions stored or
      *                              if the session unique identifier specified was not found.
      */
