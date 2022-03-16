@@ -63,6 +63,7 @@ public class CommandHandler {
     }
 
     private void addProject(ProjectList projectList, String[] commands) throws IllegalCommandException {
+        assert (projectList != null && commands != null) : "Cannot add to project list.";
         if (commands.length < Constants.TWO_ARGUMENTS) {
             throw new IllegalCommandException(Constants.MESSAGE_INVALID_ADDPROJECT_COMMAND_FORMAT);
         }
@@ -79,6 +80,7 @@ public class CommandHandler {
     }
 
     private void deleteProject(ProjectList projectList, String[] commands) throws IllegalCommandException {
+        assert (projectList != null && commands != null) : "Cannot delete from project list.";
         if (commands.length < Constants.TWO_ARGUMENTS) {
             throw new IllegalCommandException(Constants.MESSAGE_INVALID_DELETEPROJECT_COMMAND_FORMAT);
         }
@@ -95,10 +97,12 @@ public class CommandHandler {
     }
 
     private void listProjects(ProjectList projectList) {
+        assert (projectList != null) : "Cannot print projects.";
         projectList.printProject();
     }
 
     private void toDo(ProjectList projectList, String[] commands) throws IllegalCommandException {
+        assert (projectList != null && commands != null) : "Cannot add todo to a project.";
         if (commands.length < Constants.THREE_ARGUMENTS) {
             throw new IllegalCommandException(Constants.MESSAGE_INVALID_TODO_COMMAND_FORMAT);
         }
@@ -107,6 +111,7 @@ public class CommandHandler {
     }
 
     private void mark(ProjectList projectList, String[] commands) throws IllegalCommandException {
+        assert (projectList != null && commands != null) : "Cannot mark a todo.";
         if (commands.length < Constants.THREE_ARGUMENTS) {
             throw new IllegalCommandException(Constants.MESSAGE_INVALID_MARK_COMMAND_FORMAT);
         }
@@ -118,6 +123,7 @@ public class CommandHandler {
     }
 
     private void addDeadline(ProjectList projectList, String[] commands) throws IllegalCommandException {
+        assert (projectList != null && commands != null) : "Cannot add a deadline to a project.";
         if (commands.length < Constants.THREE_ARGUMENTS) {
             throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
         }
@@ -125,13 +131,12 @@ public class CommandHandler {
     }
 
     private void view(ProjectList projectList, String[] commands) throws IllegalCommandException {
+        assert (projectList != null && commands != null) : "Cannot view this project.";
         if (commands.length < Constants.TWO_ARGUMENTS) {
             throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
         }
         projectList.view(commands[1]);
     }
-
-
 
     private String parseTodoString(String[] strings) {
         String todoString = "";
