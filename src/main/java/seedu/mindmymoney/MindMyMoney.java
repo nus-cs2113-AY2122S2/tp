@@ -10,20 +10,23 @@ import seedu.mindmymoney.data.ExpenditureList;
 public class MindMyMoney {
     private final Ui ui;
     private ExpenditureList itemList;
+    private final Storage storage;
+    private static final String STORAGE_FILENAME = "list.txt";
 
     public MindMyMoney() {
         ui = new Ui();
-        itemList = new ExpenditureList();
+        storage = new Storage(STORAGE_FILENAME);
     }
 
     public void run() {
         ui.printIntro();
-
+        itemList = storage.load();
         while (true) {
             try {
                 String input = ui.readInput();
                 Command commandType = Parser.parseCommand(input, itemList);
                 commandType.executeCommand();
+                storage.save(itemList);
             } catch (MindMyMoneyException e) {
                 System.out.println(e.getMessage());
             }
