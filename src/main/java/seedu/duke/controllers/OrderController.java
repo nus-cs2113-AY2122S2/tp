@@ -49,9 +49,8 @@ public class OrderController extends Controller {
     }
 
     private void addOrder() throws OperationTerminationException {
-        boolean notQuit = true;
         String userInput = InputParser.getString("Enter dishes you want to order (enter '-' to exit): ");
-        while (notQuit) {
+        while (true) {
             Object inputObj = userInput;
             int size = orderManager.addDishToOrder(inputObj);
             userInput = InputParser.getString("You’ve already added " + size + " dish(es), some more: \n");
