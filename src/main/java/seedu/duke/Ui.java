@@ -9,6 +9,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner in;
+    private static final int ARRAY_INDEX_OFFSET = 1;
 
     public Ui() {
         in = new Scanner(System.in);
@@ -29,8 +30,28 @@ public class Ui {
         System.out.println(exception.getErrorMessage());
     }
 
+    public void printHousekeeperNoted(Housekeeper housekeeper) {
+        System.out.println("Noted!");
+        System.out.println(housekeeper);
+
+    }
+
     public void printAddItemAcknowledgementMessage(ItemList listOfItems) {
         System.out.println("The item and its pax has been added to the list of items in the inventory.");
         System.out.printf("There are currently %d items within the inventory.\n", listOfItems.getSize());
+    }
+
+    public void printItemList(ItemList listOfItems) {
+        String itemName;
+        int itemPax;
+        Item currentItem;
+        int currentListIndex;
+        for (int i = 0; i < listOfItems.getSize(); i++) {
+            currentItem = listOfItems.getItem(i);
+            itemName = currentItem.getName();
+            itemPax = currentItem.getPax();
+            currentListIndex = i + ARRAY_INDEX_OFFSET;
+            System.out.printf("%d. Item Name: %s Item Pax: %d\n", currentListIndex, itemName, itemPax);
+        }
     }
 }

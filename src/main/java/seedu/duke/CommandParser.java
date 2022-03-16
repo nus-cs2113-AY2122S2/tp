@@ -3,6 +3,10 @@ package seedu.duke;
 public class CommandParser {
     private static final String BYE = "bye";
     private static final String ADD_ITEM_COMMAND = "Add Item";
+    public static final String VIEW_ITEM_LIST_COMMAND = "View Item In Inventory";
+    private static final String ADD_HOUSEKEEPER_COMMAND = "Add Housekeeper ";
+    private static final String ADD_AVAILABILITY_COMMAND = "Availability ";
+    private static final String VIEW_HOUSEKEEPER_COMMAND = "View Recorded Housekeeper";
     public static final String ADD_SATISFACTION_COMMAND = "Add Satisfaction";
     public static final String VIEW_SATISFACTIONS_COMMAND = "View Satisfactions";
     private static final String CHECK_IN = "check in";
@@ -25,13 +29,18 @@ public class CommandParser {
         } else if (commandString.startsWith(ADD_ITEM_COMMAND)) {
             commandStringWithoutCommand = commandString.replace(ADD_ITEM_COMMAND, "");
             userCommand = new AddItemCommand(commandStringWithoutCommand);
+        } else if (commandString.equals(VIEW_ITEM_LIST_COMMAND)) {
+            userCommand = new ViewItemListCommand();
+        } else if (commandString.startsWith((ADD_HOUSEKEEPER_COMMAND))) {
+            commandStringWithoutCommand = commandString.replace(ADD_HOUSEKEEPER_COMMAND, "");
+            userCommand = new AddHousekeeperCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(CHECK_IN)) {
             commandStringWithoutCommand = commandString.replace(CHECK_IN, "");
             userCommand = new CheckInCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(CHECK_OUT)) {
             commandStringWithoutCommand = commandString.replace(CHECK_OUT, "");
             userCommand = new CheckOutCommand(commandStringWithoutCommand);
-        }  else if (commandString.startsWith(CHECK_BY_CATEGORY)) {
+        } else if (commandString.startsWith(CHECK_BY_CATEGORY)) {
             commandStringWithoutCommand = commandString.replace(CHECK_BY_CATEGORY, "");
             userCommand = new CheckRoomByCatCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(CHECK_ROOM)) {

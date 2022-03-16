@@ -25,4 +25,10 @@ public class ItemList {
     public int getSize() {
         return listOfItems.size();
     }
+
+    public Item getItem(int index) {
+        ArrayList<Item> listOfItems = getListOfItems();
+        Item item = listOfItems.get(index);
+        return item;
+    }
 }
