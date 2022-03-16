@@ -20,17 +20,7 @@ public class Parser {
             String deleteIndex = userCommand.split(" ")[1];
             return new DeleteCommand(Integer.parseInt(deleteIndex));
 
-        }/* else if (userCommand.startsWith("list")) {
-            return new ListCommand();
-
-        } else if (userCommand.startsWith("desc")) {
-            int descIndex = userCommand.split(" ")[1];
-            return new DescCommand(descIndex);
-            
-        } else if (userCommand.startsWith("help")) {
-            return new HelpCommand();
-
-        }*/ else {
+        } else {
             return new HiCommand();
         }
     }
