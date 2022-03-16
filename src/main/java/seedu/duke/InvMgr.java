@@ -31,7 +31,7 @@ public class InvMgr {
         while (!isExit) {
             String command = ui.readCommand();
             Command inputCommand = Parser.parse(command);
-            inputCommand.execute(itemList, ui, storage);
+            inputCommand.execute(ui, itemList);
             isExit = inputCommand.isExit();
         }
     }
