@@ -46,6 +46,15 @@ public class DoctorList {
 
     @Override
     public String toString() {
-        return "aaa";
+        String doctorName = " ";
+            int index = 1;
+        for (Doctor doctor : this.doctors) {
+            doctorName += String.format("%d. %s", index, doctor.toString());
+            if (index != this.getSizeDoctor()) {
+                doctorName += "\n";
+            }
+            index++;
+        }
+        return doctorName;
     }
 }
