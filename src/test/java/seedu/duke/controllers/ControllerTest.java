@@ -9,7 +9,9 @@ class ControllerTest {
     public void testHaveExitOption() {
         Controller[] controllers = {
             new MainController(),
-            // new DishController(),
+            new DishController(),
+            new OrderController(),
+            new StaffController(),
         };
 
         for (Controller c : controllers) {

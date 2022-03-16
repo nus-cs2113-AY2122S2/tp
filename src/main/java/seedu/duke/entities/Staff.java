@@ -16,10 +16,10 @@ public class Staff {
      * @param salary    Salary of the Staff.
      */
     public Staff(int staffId, String staffName, String position, double salary) {
-        this.staffId = staffId;
-        this.staffName = staffName;
-        this.position = position;
-        this.salary = salary;
+        setStaffId(staffId);
+        setStaffName(staffName);
+        setPosition(position);
+        setSalary(salary);
     }
 
     private static boolean isValidName(String name) {
@@ -35,6 +35,7 @@ public class Staff {
             System.out.println("Staff ID cannot be zero or negative.");
             return;
         }
+        assert staffId > 0 : "Staff ID should be more than 0.";
         this.staffId = staffId;
     }
 
@@ -47,6 +48,7 @@ public class Staff {
             System.out.println("Staff name cannot be null.");
             return;
         }
+        assert isValidName(staffName) : "Staff name should not be null.";
         this.staffName = staffName;
     }
 
@@ -59,6 +61,7 @@ public class Staff {
             System.out.println("Staff name cannot be null.");
             return;
         }
+        assert isValidName(position) : "Position should not be null.";
         this.position = position;
     }
 
@@ -71,6 +74,7 @@ public class Staff {
             System.out.println("Salary cannot be zero or negative.");
             return;
         }
+        assert salary > 0 : "Salary should be more than 0.";
         this.salary = salary;
     }
 

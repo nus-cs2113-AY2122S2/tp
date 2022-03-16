@@ -1,5 +1,7 @@
 package seedu.duke.controllers;
 
+import seedu.duke.loggers.MainLogger;
+
 public class MainController extends Controller {
     private static final String[] CHOICES = {
         "Exit Application", "Enter Dish Menu", "Enter Order Menu", "Enter Staff Menu"
@@ -35,23 +37,24 @@ public class MainController extends Controller {
         default:
             System.out.println("Invalid choice!");
         }
+        MainLogger.logInfo(this, "Back in Main Menu.");
         System.out.println("Now in Main Menu.");
         System.out.println(this);
         return false;
     }
 
     private void enterDishMenu() {
-        System.out.println("Entering Dish Menu...\n");
+        MainLogger.logInfo(this, "User entered Dish Menu.");
         this.controllers[0].takeControl();
     }
 
     private void enterOrderMenu() {
-        System.out.println("Entering Order Menu...\n");
+        MainLogger.logInfo(this, "User entered Order Menu.");
         this.controllers[1].takeControl();
     }
 
     private void enterStaffMenu() {
-        System.out.println("Entering Staff Menu...\n");
+        MainLogger.logInfo(this, "User entered Staff Menu.");
         this.controllers[2].takeControl();
     }
 

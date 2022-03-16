@@ -55,7 +55,7 @@ public final class InputParser {
                 String line = getString(msg).toLowerCase();
                 return Double.parseDouble(line);
             } catch (NumberFormatException e) {
-                System.out.printf("Error parsing integer - %s\n", e.getMessage());
+                System.out.printf("Error parsing double - %s\n", e.getMessage());
             }
         }
     }
