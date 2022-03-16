@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class PersonListTest {
+    private final String VALID_NAME = "Alice";
     private final int INVALID_INDEX = -10;
 
     @Test
@@ -19,14 +20,14 @@ class PersonListTest {
     @Test
     public void getNumberOfMembers_addPerson_returnOne() {
         PersonList list = new PersonList();
-        list.addPerson("Alice");
+        list.addPerson(VALID_NAME);
         assertEquals(1, list.getNumberOfMembers());
     }
     
     @Test
     public void getNumberOfMembers_addAndDeletePerson_returnZero() {
         PersonList list = new PersonList();
-        list.addPerson("Alice");
+        list.addPerson(VALID_NAME);
         list.removePerson(1);
         assertEquals(0, list.getNumberOfMembers());
     }
@@ -45,7 +46,7 @@ class PersonListTest {
     @Test
     public void removePerson_validIndex_success() {
         PersonList list = new PersonList();
-        list.addPerson("Alice");
+        list.addPerson(VALID_NAME);
         list.removePerson(1);
         assertTrue(list.getPersonList().isEmpty());
     }
