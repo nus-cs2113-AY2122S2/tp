@@ -100,7 +100,7 @@ public class PersonList {
     /**
      * Prints the total remaining disposable income of persons in the array list.
      */
-    public void getRemain() {
+    public void printRemain() {
         String infoString = "Method getRemain() called";
         logger.getLogger().log(Level.INFO, infoString);
         double sum = 0;
