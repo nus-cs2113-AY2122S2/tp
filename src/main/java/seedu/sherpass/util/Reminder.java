@@ -2,10 +2,7 @@ package seedu.sherpass.util;
 
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
-import static seedu.sherpass.constant.Message.DATE_FORMAT_WITHOUT_TIME;
 
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -83,33 +80,17 @@ public class Reminder {
         ui.showLine();
     }
 
-    private boolean isEqualDate(String currentDate, LocalDate compareDate) {
-        if (currentDate == "") {
+    private boolean isEqualDate(LocalDate currentDate, LocalDate compareDate) {
+        if (currentDate == null) {
             return false;
-        } else {
-            try {
-                LocalDate date = convertStringToLocalDateWithoutTime(currentDate);
-                return date.isEqual(compareDate);
-            } catch (DateTimeParseException e) {
-                return false;
-            }
         }
+        return currentDate.isEqual(compareDate);
     }
 
-    private boolean isBeforeDate(String currentDate, LocalDate compareDate) {
-        if (currentDate == "") {
+    private boolean isBeforeDate(LocalDate currentDate, LocalDate compareDate) {
+        if (currentDate == null) {
             return false;
-        } else {
-            try {
-                LocalDate date = convertStringToLocalDateWithoutTime(currentDate);
-                return date.isBefore(compareDate);
-            } catch (DateTimeParseException e) {
-                return false;
-            }
         }
-    }
-
-    private LocalDate convertStringToLocalDateWithoutTime(String date) {
-        return LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT_WITHOUT_TIME));
+        return currentDate.isBefore(compareDate);
     }
 }

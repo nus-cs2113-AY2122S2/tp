@@ -1,23 +1,31 @@
 package seedu.sherpass.util;
 
-import seedu.sherpass.exception.InputRepeatedException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 
 import static seedu.sherpass.constant.Index.DIRECTORY_INDEX;
-import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_FILE_NOT_FOUND_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_1;
+import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_2;
+import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_3;
 import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
+import static seedu.sherpass.constant.DateAndTimeFormat.parseFormat;
+
 
 public class Storage {
+    public static final int INDENT_FACTOR = 4;
     private String saveFilePath;
 
     /**
@@ -53,97 +61,95 @@ public class Storage {
     }
 
     /**
-     * Appends new tasks to the save file.
+     * Returns the JSON representation of the task list.
      *
-     * @param taskStatus         Mark status of the task.
-     * @param newTaskDescription Task Description.
-     * @param newTaskByDate      Task Deadline and/or time.
-     * @param newTaskDoDate      Task Do date
+     * @param taskList The task list to be converted into JSON format.
+     * @return JSONObject containing the tasks in the task list.
      */
-    public void appendToFile(String taskStatus, String newTaskDescription,
-                             String newTaskByDate, String newTaskDoDate) {
-        try {
-            FileWriter fw = new FileWriter(saveFilePath, true);
-            String textToAppend = taskStatus + " | "
-                    + newTaskDescription + " | " + newTaskByDate
-                    + " | " + newTaskDoDate;
-
-            fw.write(textToAppend + System.lineSeparator());
-            fw.close();
-
-        } catch (IOException e) {
-            System.out.println(ERROR_IO_FAILURE_MESSAGE);
+    private JSONObject convertTaskListToJson(TaskList taskList) {
+        JSONObject json = new JSONObject();
+        JSONArray tasks = new JSONArray();
+        for (Task t : taskList.getTasks()) {
+            JSONObject taskToStore = new JSONObject();
+            taskToStore.put("status", t.getStatusIcon());
+            taskToStore.put("by_date", (t.getByDate() == null ? "null" : t.getByDate().format(parseFormat)));
+            taskToStore.put("do_date", (t.getDoOnDate() == null ? "null" : t.getDoOnDate().format(parseFormat)));
+            taskToStore.put("description", t.getDescription());
+            tasks.put(taskToStore);
         }
+        json.put("tasks", tasks);
+        return json;
     }
-
 
     /**
      * Overwrites existing saved data in save file with new data.
      *
      * @param taskList Array of tasks that are to be saved.
      */
-    public void writeSaveData(TaskList taskList) {
-        wipeSavedData();
-        ArrayList<Task> replicatedTasks = taskList.getTasks();
-        for (Task task : replicatedTasks) {
-            appendToFile(task.getStatusIcon(), task.getDescription(), task.getByDate(),
-                    task.getDoOnDate());
+    public JSONObject writeSaveData(TaskList taskList) {
+        JSONObject taskJson = convertTaskListToJson(taskList);
+        String taskString = taskJson.toString(INDENT_FACTOR);
+        assert taskString != null;
+        try {
+            FileWriter writer = new FileWriter(saveFilePath);
+            writer.write(taskString);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(ERROR_IO_FAILURE_MESSAGE);
         }
-    }
-
-    private ArrayList<Task> readSavedData() throws
-            FileNotFoundException, ArrayIndexOutOfBoundsException, InvalidInputException {
-        ArrayList<Task> decodedTasks = new ArrayList<>();
-        File f = new File(saveFilePath);
-        Scanner s = new Scanner(f);
-        String[] taskRawData;
-        Task taskParsedData;
-        while (s.hasNext()) {
-            taskRawData = s.nextLine().split(" \\| ");
-            taskParsedData = Parser.parseSavedData(taskRawData);
-            decodedTasks.add(taskParsedData);
-        }
-        return decodedTasks;
-    }
-
-    private boolean isTaskRepeated(ArrayList<Task> saveTaskList, int index) {
-        for (int j = index + 1; j < saveTaskList.size(); j++) {
-            if (saveTaskList.get(index).getDescription().trim()
-                    .equalsIgnoreCase(saveTaskList.get(j).getDescription().trim())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void checkForRepeatedInputs(ArrayList<Task> saveTaskList) throws InputRepeatedException {
-        for (int i = 0; i < saveTaskList.size() - 1; i++) {
-            if (isTaskRepeated(saveTaskList, i)) {
-                throw new InputRepeatedException();
-            }
-        }
+        return taskJson;
     }
 
     /**
      * Loads back the save file onto the program.
      *
-     * @return The saved data of the tasks in the saved file.
-     *     Tasks are represented in an array.
+     * @return ArrayList containing the tasks saved in the data file
+     * @throws IOException           If an I/O error occurs while reading the data file
+     * @throws InvalidInputException If the data has missing fields for a task
+     * @throws JSONException         If the data file has an invalid JSON format
      */
-    public ArrayList<Task> load() {
-        try {
-            ArrayList<Task> savedTaskList = readSavedData();
-            //checkForRepeatedInputs(savedTaskList);
-            return savedTaskList;
-        } catch (FileNotFoundException e) {
-            System.out.println(ERROR_FILE_NOT_FOUND_MESSAGE);
-            System.exit(1);
-        } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
-            // To include InputRepeatedException if checkForRepeatedInputs() is called
-            System.out.println(ERROR_CORRUPT_SAVED_FILE_MESSAGE);
-            wipeSavedData();
+    public ArrayList<Task> load() throws IOException, InvalidInputException, JSONException {
+        ArrayList<Task> taskList = new ArrayList<>();
+        List<String> dataLines = Files.readAllLines(new File(saveFilePath).toPath());
+        if (dataLines.size() > 0) {
+            String dataString = String.join("", dataLines);
+            JSONObject dataJson = new JSONObject(dataString);
+            JSONArray array = dataJson.getJSONArray("tasks");
+
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject taskData = array.getJSONObject(i);
+                taskList.add(Parser.parseSavedData(taskData));
+            }
         }
-        return new ArrayList<>();
+        return taskList;
+    }
+
+    /**
+     * Creates a new save file or exits the program.
+     * <p>
+     * When the save file fails to load, the user decides if the program creates new save file
+     * or the user can manually inspect the save file.
+     * </p>
+     *
+     * @param ui Ui for printing messages
+     */
+    public void handleCorruptedSave(Ui ui) {
+        ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_1);
+        String response = "";
+
+        while (!response.equalsIgnoreCase("y") && !response.equalsIgnoreCase("n")) {
+            ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_2);
+            response = ui.readCommand().trim();
+        }
+
+        assert response.equalsIgnoreCase("y") || response.equalsIgnoreCase("n");
+
+        if (response.equalsIgnoreCase("y")) {
+            wipeSavedData();
+        } else {
+            ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_3);
+            System.exit(1);
+        }
     }
 
 }

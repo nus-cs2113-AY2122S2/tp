@@ -1,11 +1,15 @@
 package seedu.sherpass.task;
 
+import java.time.LocalDate;
+
+import static seedu.sherpass.constant.DateAndTimeFormat.outputFormat;
+
 public class Task {
+
     protected String description;
     protected boolean isDone;
-    protected String byDate;
-    protected String doOnDate;
-
+    protected LocalDate byDate;
+    protected LocalDate doOnDate;
 
     /**
      * Creates a constructor for the parent class of tasks, 'Task'.
@@ -13,7 +17,7 @@ public class Task {
      *
      * @param description Description of task.
      */
-    public Task(String description, String byDate, String doOnDate) {
+    public Task(String description, LocalDate byDate, LocalDate doOnDate) {
         this.description = description;
         this.isDone = false;
         this.byDate = byDate;
@@ -64,18 +68,6 @@ public class Task {
     }
 
     /**
-     * Replaces task date with new task date input.
-     * Refreshes the task to original state, i.e. unmarked.
-     * Current parent class is created as template for child
-     * classes to perform this function.
-     *
-     * @param date Task Date.
-     */
-    public void resetInput(String date) {
-        markAsUndone();
-    }
-
-    /**
      * Returns task date. Parent class is created
      * as a template for child classes to perform its own
      * respective functions, i.e. each task date returned is
@@ -83,12 +75,20 @@ public class Task {
      *
      * @return White space.
      */
-    public String getByDate() {
+    public LocalDate getByDate() {
         return byDate;
     }
 
-    public String getDoOnDate() {
+    public LocalDate getDoOnDate() {
         return doOnDate;
+    }
+
+    public String getByDateString() {
+        return byDate.format(outputFormat);
+    }
+
+    public String getDoOnDateString() {
+        return doOnDate.format(outputFormat);
     }
 
     /**
@@ -100,29 +100,25 @@ public class Task {
      */
     @Override
     public String toString() {
-        if (this.byDate.equals("") && this.doOnDate.equals("")) {
-            return "[" + this.getStatusIcon() + "] " + this.getDescription();
+        String result = "[" + this.getStatusIcon() + "] " + this.getDescription();
+        if (this.byDate != null) {
+            result += " (by: " + getByDateString() + ")";
         }
-
-        if (this.doOnDate.equals("")) {
-            return "[" + this.getStatusIcon() + "] " + this.getDescription()
-                    + " (by: " + this.byDate + ")";
+        if (this.doOnDate != null) {
+            result += " (reminder on: " + getDoOnDateString() + ")";
         }
-
-        return "[" + this.getStatusIcon() + "] " + this.getDescription()
-            + " (by: " + this.byDate + ") (reminder on: " + this.doOnDate + ")";
+        return result;
     }
-
 
     public void setTaskDescription(String taskDescription) {
         this.description = taskDescription;
     }
 
-    public void setByDate(String byDate) {
+    public void setByDate(LocalDate byDate) {
         this.byDate = byDate;
     }
 
-    public void setDoOnDate(String doOnDate) {
+    public void setDoOnDate(LocalDate doOnDate) {
         this.doOnDate = doOnDate;
     }
 }
