@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.Timetable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.duke.ErrorMessages.ERROR_EMPTY_LIST;
+import static seedu.duke.common.ErrorMessages.ERROR_EMPTY_LIST;
 
 public class ListCommandTest {
 

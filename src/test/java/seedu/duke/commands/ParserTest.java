@@ -9,6 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
 
+    //setup
+
+    //prepareAdd
+
     @Test
     public void prepareDeleteCommand_InvalidIndex_throwException() {
         Timetable timetable = new Timetable();

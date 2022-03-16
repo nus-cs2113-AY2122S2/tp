@@ -8,6 +8,6 @@ public class ExitCommand extends Command {
 
     @Override
     public String execute(Timetable timetable) {
-        return " ";
+        return "";
     }
 }
