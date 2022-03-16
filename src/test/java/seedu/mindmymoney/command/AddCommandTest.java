@@ -19,7 +19,7 @@ class AddCommandTest {
         String inputString = "expenditure 12345";
         new AddCommand(inputString, expenditureTestList).executeCommand();
         ArrayList<Expenditure> testList = new ArrayList<>();
-        testList.add(new Expenditure("expenditure", 12345));
+        testList.add(new Expenditure("expenditure", null, 12345));
         String expectedOutput = getOutput(testList);
         String actualOutput = getOutput(expenditureTestList.expenditureListArray);
         assertEquals(expectedOutput, actualOutput);

@@ -16,7 +16,12 @@ public class ListCommand extends Command {
         int indexOfList = 1;
         String listInString = "";
         for (Expenditure i : expenditureList.expenditureListArray) {
-            listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription() + "\n";
+            if (i.getCategory() == null) {
+                listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription() + "\n";
+            } else {
+                listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription() + " from "
+                        + i.getCategory() + "\n";
+            }
             indexOfList++;
         }
         return listInString;
