@@ -17,4 +17,9 @@ public class Medicine {
         this.sideEffects = sideEffects;
         this.quantity = quantity;
     }
+
+    public String saveString() {
+        return medicineName + "," + dosage + "," + expiry
+                + "," + sideEffects + "," + quantity;
+    }
 }

@@ -14,4 +14,9 @@ public class Doctor extends Person {
     }
     
     // @override toString()
+
+    public String saveString() {
+        return nric + "," + fullName + "," + age + "," + gender
+                + "," + address + "," + dob + "," + specialization;
+    }
 }
