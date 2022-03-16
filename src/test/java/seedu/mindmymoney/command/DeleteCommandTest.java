@@ -43,10 +43,10 @@ class DeleteCommandTest {
         new AddCommand(inputString, expenditureTestList).executeCommand();
         String deleteInputString = "delete 0";
         assertThrows(MindMyMoneyException.class,
-                () -> new DeleteCommand(deleteInputString, expenditureTestList).executeCommand());
+            () -> new DeleteCommand(deleteInputString, expenditureTestList).executeCommand());
         String delInputString2 = "delete 5";
         assertThrows(MindMyMoneyException.class,
-                () -> new DeleteCommand(delInputString2, expenditureTestList).executeCommand());
+            () -> new DeleteCommand(delInputString2, expenditureTestList).executeCommand());
     }
 
     /**
@@ -57,7 +57,7 @@ class DeleteCommandTest {
         ExpenditureList expenditureTestList = new ExpenditureList();
         String delInputString = "delete ONE";
         assertThrows(MindMyMoneyException.class,
-                () -> new DeleteCommand(delInputString, expenditureTestList).executeCommand());
+            () -> new DeleteCommand(delInputString, expenditureTestList).executeCommand());
     }
 
     /**
@@ -69,9 +69,9 @@ class DeleteCommandTest {
         String deleteInputString = "delete";
         String delInputString2 = "delete ";
         assertThrows(MindMyMoneyException.class,
-                () -> new DeleteCommand(deleteInputString, expenditureTestList).executeCommand());
+            () -> new DeleteCommand(deleteInputString, expenditureTestList).executeCommand());
         assertThrows(MindMyMoneyException.class,
-                () -> new DeleteCommand(delInputString2, expenditureTestList).executeCommand());
+            () -> new DeleteCommand(delInputString2, expenditureTestList).executeCommand());
     }
 
     /**
@@ -83,6 +83,6 @@ class DeleteCommandTest {
         ExpenditureList expenditureTestList = new ExpenditureList();
         String deleteInputString = "delete 1";
         assertThrows(MindMyMoneyException.class,
-                () -> new DeleteCommand(deleteInputString, expenditureTestList).executeCommand());
+            () -> new DeleteCommand(deleteInputString, expenditureTestList).executeCommand());
     }
 }
