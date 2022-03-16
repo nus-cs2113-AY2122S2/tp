@@ -55,12 +55,12 @@ public class Timetable {
             if (!existingEvent.day.equals(newEvent.day)) {
                 continue;
             }
-            boolean startTimeOverlap = newEvent.startTime >= existingEvent.startTime &&
-                    newEvent.startTime < existingEvent.endTime;
-            boolean endTimeOverlap = newEvent.endTime > existingEvent.startTime &&
-                    newEvent.endTime <= existingEvent.endTime;
-            boolean totalOverlap = newEvent.startTime <= existingEvent.startTime &&
-                    newEvent.endTime >= existingEvent.endTime;
+            boolean startTimeOverlap = newEvent.startTime >= existingEvent.startTime
+                    && newEvent.startTime < existingEvent.endTime;
+            boolean endTimeOverlap = newEvent.endTime > existingEvent.startTime
+                    && newEvent.endTime <= existingEvent.endTime;
+            boolean totalOverlap = newEvent.startTime <= existingEvent.startTime
+                    && newEvent.endTime >= existingEvent.endTime;
             if (startTimeOverlap || endTimeOverlap || totalOverlap) {
                 return true;
             }
