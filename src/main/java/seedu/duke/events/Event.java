@@ -54,14 +54,10 @@ public class Event {
      * Checks if the events belongs to the same day and person. If it does not, there is definitely no overlap.
      * If it does, check if there is timing overlap.
      *
-     * @param obj The new event to be added
+     * @param event The new event to be added
      * @return True if the event belongs to the same person and on the same day with timing clash. False otherwise
      */
-    public boolean overlaps(Object obj) {
-        if (!(obj instanceof Event)) {
-            return false;
-        }
-        Event event = (Event) obj;
+    public boolean overlaps(Event event) {
         if (!day.equals(event.day)) {
             return false;
         }
