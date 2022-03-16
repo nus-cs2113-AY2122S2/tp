@@ -5,6 +5,6 @@ import seedu.duke.ui.Ui;
 
 public class ByeCommand extends Command {
     public void execute(Ui ui, ItemList itemList) {
-        ui.showOutput("bye");
+        System.out.println("bye");
     }
 }

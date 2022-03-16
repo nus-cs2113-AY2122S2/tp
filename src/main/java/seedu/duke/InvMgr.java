@@ -19,10 +19,10 @@ public class InvMgr {
     }
 
     public void run() {
-        ui.showWelcome();
+        ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
-            String command = ui.readCommand();
+            String command = ui.getRawUserInput();
             Command inputCommand = Parser.parse(command);
             inputCommand.execute(ui, itemList);
             if (inputCommand instanceof ByeCommand) {
