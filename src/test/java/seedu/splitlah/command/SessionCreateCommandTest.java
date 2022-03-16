@@ -88,4 +88,12 @@ class SessionCreateCommandTest {
         command.run(manager);
         assertEquals(2, manager.getProfile().getSessionList().size());
     }
+    public void run_hasSessionDuplicate_sessionIdNotIncremented() {
+        int newSessionId = manager.getProfile().getNewSessionId();
+        String userInput = "session /create /n Class outing /d 15-02-2022 /pl Mallory Eves";
+        Command command = Parser.getCommand(userInput);
+        command.run(manager);
+        int testSessionId = manager.getProfile().getNewSessionId();
+        assertEquals(newSessionId, testSessionId - 1);
+    }
 }
