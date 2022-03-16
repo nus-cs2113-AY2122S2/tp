@@ -27,14 +27,39 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
 
 ## Features 
 
-### print all projects: `listprojects`
+### Add a project: `addproject`
+Add a project to your current list of projects
+
+Format: `addproject [project_name]`
+*The `project_name` has no restrictions; it can be of any length, number of words, and any
+types of characters.
+
+#### Example of usage
+`addproject project1`
+
+### Example of output
+```project1 added.```
+
+### Delete a project: `deleteproject`
+Delete a project from your current list of projects
+
+Format: `deleteproject [project_name]`
+*The `project_name` must be a match for a current project already in your list of projects
+
+#### Example of usage
+`deleteproject project1`
+
+### Example of output
+```project1 deleted.```
+
+### Print all projects: `listprojects`
 Prints all projects in the list with their names and project deadlines
 
 Format: `listprojects` or `listproject`
 
 * The `listprojects`(`listproject`) cannot contain a space, i.e., `list projects`(`list project`) will be considered an unknown command.
 
-### add todo to a project: `todo`
+### Add todo to a project: `todo`
 Adds a todo task with description to a project
 
 Format: `todo [project_index] [description]`
