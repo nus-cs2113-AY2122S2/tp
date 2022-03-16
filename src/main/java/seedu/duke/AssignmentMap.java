@@ -20,10 +20,9 @@ public class AssignmentMap {
                     if (h.getName().equalsIgnoreCase(name)) {
                         housekeeper = h;
                         map.put(room, housekeeper);
-                    } else {
-                        throw new InvalidHousekeeperProfile();
                     }
                 }
+                throw new InvalidHousekeeperProfile();
             }
         }
         throw new InvalidRoomNumberException();
