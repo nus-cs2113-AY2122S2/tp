@@ -74,7 +74,8 @@ class SessionCreateCommandTest {
     }
 
     /**
-     * Checks if session unique identifier is incremented if a session is created with duplicated person names.
+     * Checks if session unique identifier is incremented if a session fails
+     * to be created due to duplicate names in person list.
      */
     @Test
     public void run_hasOneNameDuplicate_sessionIdNotIncremented() {
@@ -98,8 +99,8 @@ class SessionCreateCommandTest {
     }
 
     /**
-     * Checks if session unique identifier is incremented if a session is created when
-     * a session with the same name exists.
+     * Checks if session unique identifier is incremented when a session fails to be created
+     * because another session with the same name already exists.
      */
     @Test
     public void run_hasSessionDuplicate_sessionIdNotIncremented() {
