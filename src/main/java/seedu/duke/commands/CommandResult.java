@@ -1,7 +1,6 @@
 package seedu.duke.commands;
 
 import seedu.duke.Timetable;
-import static seedu.duke.common.Messages.MESSAGE_HELP;
 
 public class CommandResult extends Command {
 
@@ -13,6 +12,6 @@ public class CommandResult extends Command {
 
     @Override
     public String execute(Timetable timetable) {
-        return MESSAGE_HELP;
+        return feedbackToUser;
     }
 }
