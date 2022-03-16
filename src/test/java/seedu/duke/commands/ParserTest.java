@@ -19,7 +19,7 @@ public class ParserTest {
 
     /**
      * Test method to ensure that the program informs user and continues running smoothly
-     * when the input for 'day' is invalid
+     * when the input for 'day' is invalid.
      */
     @Test
     public void prepareAdd_invalidDay_throwException() {
@@ -31,7 +31,7 @@ public class ParserTest {
 
     /**
      * Test method to ensure that the program informs user and continues running smoothly
-     * when the input for 'time' is invalid
+     * when the input for 'time' is invalid.
      */
     @Test
     public void prepareAdd_timeOutOfRange_throwException() {
@@ -43,7 +43,7 @@ public class ParserTest {
 
     /**
      * Test method to ensure that the program informs user and continues running smoothly
-     * when the given start time is later than the given end time
+     * when the given start time is later than the given end time.
      */
     @Test
     public void prepareAdd_startTimeGreaterThanEndTime_throwException() {
@@ -55,7 +55,7 @@ public class ParserTest {
 
     /**
      * Test method to ensure that the program informs user and continues running smoothly
-     * when the input for 'time' is not an integer
+     * when the input for 'time' is not an integer.
      */
     @Test
     public void prepareAdd_timeNotInteger_throwException() {
@@ -67,7 +67,7 @@ public class ParserTest {
 
     /**
      * Test method to ensure that the program informs user and continues running smoothly
-     * when the input for 'mode' is invalid
+     * when the input for 'mode' is invalid.
      */
     @Test
     public void prepareAdd_invalidMode_throwException() {
@@ -79,7 +79,7 @@ public class ParserTest {
 
     /**
      * Test method to ensure that the program informs user and continues running smoothly
-     * when certain parameters are missing from the user's input
+     * when certain parameters are missing from the user's input.
      */
     @Test
     public void prepareAdd_missingParameters_throwException() {
@@ -91,7 +91,7 @@ public class ParserTest {
 
     /**
      * Test method to ensure that the program informs user and continues running smoothly
-     * when the values of certain parameters are missing from the user's input
+     * when the values of certain parameters are missing from the user's input.
      */
     @Test
     public void prepareAdd_parametersMissingValues_throwException() {
@@ -103,7 +103,6 @@ public class ParserTest {
 
     @Test
     public void prepareDeleteCommand_invalidIndex_throwException() {
-        Timetable timetable = new Timetable();
         String inputString = "delete hello";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();

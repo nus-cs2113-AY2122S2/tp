@@ -7,8 +7,8 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     /**
-     * List out all entries in the user's timetable
-     * If there are no lessons found, notify user accordingly
+     * List out all entries in the user's timetable.
+     * If there are no lessons found, notify user accordingly.
      *
      * @param timetable User's timetable containing a list of lessons
      * @return String containing all of the user's lessons

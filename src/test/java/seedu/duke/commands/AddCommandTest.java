@@ -21,7 +21,7 @@ class AddCommandTest {
     private Command addCommandOverlapDifferentDay;
 
     /**
-     * Set up multiple AddCommands to test out varying edge cases for overlapping lessons
+     * Set up multiple AddCommands to test out varying edge cases for overlapping lessons.
      */
     @BeforeEach
     public void setUp() {
@@ -60,7 +60,7 @@ class AddCommandTest {
 
     /**
      * The following 4 test methods ensure that the program informs user and continues running smoothly
-     * when an event to be added has a timing clash with an existing event in the user's timetable
+     * when an event to be added has a timing clash with an existing event in the user's timetable.
      */
     @Test
     public void addCommand_startTimeOverlap_throwException() {

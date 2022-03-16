@@ -14,7 +14,7 @@ public class Timetable {
     }
 
     /**
-     * Checks if the event to be added has already been added, or if there is a timing clash with an existing event
+     * Checks if the event to be added has already been added, or if there is a timing clash with an existing event.
      *
      * @param event New event to be added
      * @throws DuplicateEventException If identical event has already been added
@@ -58,7 +58,7 @@ public class Timetable {
 
     /**
      * Checks through all existing events and comparing their timings to the event to be added to ensure that
-     * there is no timing clash
+     * there is no timing clash.
      *
      * @param newEvent Event to be added
      * @return true if there is overlap, otherwise false
