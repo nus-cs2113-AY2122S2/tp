@@ -15,4 +15,8 @@ Add Housekeeper Tom ~ 33
 Add Housekeeper tOm ~ 33
 Add Housekeeper sally ~ 17
 View Item In Inventory
+Availability sus @ M,T
+Availability jane @ M
+Availability tom @ T
+Availability sally @
 bye
