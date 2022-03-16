@@ -3,23 +3,29 @@ package ARCS.parser;
 import ARCS.commands.AddRouteCommand;
 import ARCS.commands.Command;
 import ARCS.commands.ExitCommand;
+import ARCS.commands.ListRouteCommand;
 
 public class Parser {
     public Command parseCommand(String userInput) {
         String[] fullInput = userInput.split(" ", 2);
         String commandWord = fullInput[0];
         String argumentLine = fullInput.length > 1? fullInput[1] : null;
+        Command command = null;
 
         switch (commandWord) {
         case AddRouteCommand.COMMAND_WORD:
-            return prepareAddRoute(argumentLine);
+            command = prepareAddRoute(argumentLine);
+            break;
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            command = new ExitCommand();
+            break;
+        case ListRouteCommand.COMMAND_WORD:
+            command = new ListRouteCommand();
+            break;
         default:
             break;
-
         }
-        return null;
+        return command;
     }
 
     private Command prepareAddRoute(String argumentLine) {

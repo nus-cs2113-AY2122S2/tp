@@ -3,6 +3,7 @@ package ARCS.ui;
 import ARCS.commands.CommandResult;
 import ARCS.common.Messages;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -38,5 +39,13 @@ public class Ui {
 
     public void showResultToUser(CommandResult result) {
         System.out.println(result.getFeedbackToUser());
+        // Show routes information if it exists
+        ArrayList<String> routesInfo = result.getRoutesInfo();
+        if (routesInfo != null) {
+            for (int i = 1; i <= routesInfo.size(); i++) {
+                System.out.println(i + ".");
+                System.out.println(routesInfo.get(i-1));
+            }
+        }
     }
 }
