@@ -2,6 +2,7 @@ package seedu.duke;
 
 import util.exceptions.LargeQuantityException;
 import util.exceptions.ItemDoesNotExistException;
+import util.exceptions.NullException;
 
 import java.util.ArrayList;
 
@@ -121,5 +122,16 @@ public class Commands {
             System.out.println("The quantity input is larger than the current quantity of the goods. "
                     + "Please enter the command again with a smaller quantity.");
         }
+    }
+
+    public static void totalGoods(ArrayList<Goods> userGoods) throws NullException {
+        if (userGoods == null){
+            throw new NullException("userGoods");
+        }
+        Integer total = 0;
+        for (Goods good: userGoods){
+            total += good.getQuantity();
+        }
+        System.out.println(String.format("There are %d goods in total.",total));
     }
 }

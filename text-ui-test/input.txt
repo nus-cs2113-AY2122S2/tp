@@ -4,4 +4,5 @@ view id/1
 remove id/1 q/14
 list
 view id/1
+total
 bye
