@@ -123,6 +123,14 @@ public class Profile {
     }
 
     /**
+     * Returns the value of the current session unique identifier that is tracked.
+     * @return An integer that represents the current session unique identifier.
+     */
+    public int getSessionIdTracker() {
+        return sessionIdTracker;
+    }
+
+    /**
      * Returns a new activity id for activity object to be created.
      * Assumption: Function is called when a new Activity object is being created without errors.
      *
@@ -132,5 +140,13 @@ public class Profile {
         int newActivityId = activityIdTracker;
         activityIdTracker += 1;
         return newActivityId;
+    }
+
+    /**
+     * Returns the value of the current activity unique identifier that is tracked.
+     * @return An integer that represents the current activity unique identifier.
+     */
+    public int getActivityIdTracker() {
+        return activityIdTracker;
     }
 }

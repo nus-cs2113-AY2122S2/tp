@@ -23,7 +23,11 @@ public class SessionSummaryCommand extends Command {
     
     public static final String COMMAND_TEXT = "session /summary";
 
-    private static final String COMMAND_FORMAT = "Syntax: session /summary /sid <SESSIONID>";
+    public static final String COMMAND_FORMAT = "Syntax: session /summary /sid [SESSION_ID]";
+
+    public static final String[] COMMAND_DELIMITERS = {
+        Parser.SESSION_ID_DELIMITER
+    };
 
     private int sessionId;
 

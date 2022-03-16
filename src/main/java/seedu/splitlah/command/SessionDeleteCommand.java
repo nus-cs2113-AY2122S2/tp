@@ -15,7 +15,7 @@ public class SessionDeleteCommand extends Command {
 
     public static final String COMMAND_TEXT = "session /delete";
 
-    private static final String COMMAND_FORMAT = "Syntax: session /delete /sid [SESSION_ID]";
+    public static final String COMMAND_FORMAT = "Syntax: session /delete /sid [SESSION_ID]";
 
     private static final String COMMAND_CONFIRMATION = "Are you sure you want to delete session id: ";
 
@@ -23,6 +23,10 @@ public class SessionDeleteCommand extends Command {
 
     private static final String COMMAND_SUCCESS =
             "The session was deleted successfully.";
+
+    public static final String[] COMMAND_DELIMITERS = {
+        Parser.SESSION_ID_DELIMITER
+    };
 
     private int sessionId;
 
@@ -69,9 +73,9 @@ public class SessionDeleteCommand extends Command {
             boolean isConfirmed = manager.getUi().getUserConfirmation(confirmationPrompt);
             if (isConfirmed) {
                 manager.getProfile().removeSession(sessionId);
-                manager.getUi().printlnMessage(COMMAND_SUCCESS);
+                manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
             } else {
-                manager.getUi().printlnMessage(COMMAND_ABORT);
+                manager.getUi().printlnMessageWithDivider(COMMAND_ABORT);
             }
         } catch (InvalidDataException dataException) {
             manager.getUi().printlnMessage(dataException.getMessage());

@@ -17,7 +17,12 @@ public class ActivityViewCommand extends Command {
 
     public static final String COMMAND_TEXT = "activity /view";
 
-    private static final String COMMAND_FORMAT = "Syntax: activity /view /sid <SESSIONID> /aid <ACTIVITYID>";
+    public static final String COMMAND_FORMAT = "Syntax: activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]";
+
+    public static final String[] COMMAND_DELIMITERS = { 
+        Parser.SESSION_ID_DELIMITER,
+        Parser.ACTIVITY_ID_DELIMITER
+    };
 
     private int sessionId;
     private int activityId;

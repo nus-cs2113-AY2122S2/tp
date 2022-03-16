@@ -11,6 +11,8 @@ import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represents a command that creates an Activity object from user input and stores it in the Session object.
@@ -19,16 +21,28 @@ public class ActivityCreateCommand extends Command {
 
     public static final String COMMAND_TEXT = "activity /create";
 
-    private static final String COMMAND_FORMAT = "Syntax:\n"
-            + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /c <OVERALLCOST> "
-            + "[<OPTIONAL ARGS>]\n"
-            + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /cl <COST1 COST2…> "
-            + "[<OPTIONAL ARGS>]";
+    private static final String COMMAND_FORMAT = "Syntax:\n\t";
 
-    private static final String COMMAND_SUCCESS = "The activity was created successfully with activity id of: ";
+    public static final String COMMAND_FORMAT_FIRST =
+            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
+                    + "/co <TOTAL_COST> [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
-    private static final double ZERO_COST_PAID = 0;
-    public static final int NO_COST = 0;
+    public static final String COMMAND_FORMAT_SECOND =
+            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
+                    + "/cl [COST1 COST2…] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
+
+    private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
+    
+    public static final String[] COMMAND_DELIMITERS = { 
+        Parser.SESSION_ID_DELIMITER, 
+        Parser.NAME_DELIMITER, 
+        Parser.PAYER_DELIMITER, 
+        Parser.INVOLVED_DELIMITER, 
+        Parser.TOTAL_COST_DELIMITER, 
+        Parser.COST_LIST_DELIMITER,
+        Parser.GST_DELIMITER,
+        Parser.SERVICE_CHARGE_DELIMITER 
+    };
 
     private int sessionId;
     private String activityName;
@@ -38,6 +52,10 @@ public class ActivityCreateCommand extends Command {
     private double[] costList;
     private int gst;
     private int serviceCharge;
+
+    private static final double ZERO_COST_PAID = 0;
+    public static final double ZERO_COST_OWED = 0;
+    private static final int NO_COST = 0;
 
     /**
      * Constructor to create a ActivityCreateCommand object.
@@ -71,79 +89,101 @@ public class ActivityCreateCommand extends Command {
      *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
-        boolean isMissingCost = false;
-        boolean isMissingCostList = false;
+        int sessionId;
+        String activityName;
+        String payer;
+        String[] involvedList;
         double totalCost = 0;
         double[] costList = null;
+        int gst;
+        int serviceCharge;
+
+        try {
+            sessionId = Parser.parseSessionId(commandArgs);
+            activityName = Parser.parseName(commandArgs);
+            payer = Parser.parsePayer(commandArgs);
+            involvedList = Parser.parseInvolved(commandArgs);
+        } catch (InvalidFormatException e) {
+            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t"
+                    + COMMAND_FORMAT_SECOND);
+        }
+
+        boolean isMissingCost = false;
+        boolean isMissingCostList = false;
+        boolean hasDifferentLength = false;
+        String errorMessage = null;
 
         try {
             totalCost = Parser.parseTotalCost(commandArgs);
         } catch (InvalidFormatException e) {
+            if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
+                    + Parser.TOTAL_COST_DELIMITER)) {
+                return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
+                        + "\n\t" + COMMAND_FORMAT_SECOND);
+            }
             isMissingCost = true;
         }
 
         try {
             costList = Parser.parseCostList(commandArgs);
         } catch (InvalidFormatException e) {
+            if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
+                    + Parser.COST_LIST_DELIMITER)) {
+                return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
+                        + "\n\t" + COMMAND_FORMAT_SECOND);
+            }
             isMissingCostList = true;
         }
 
         boolean hasMissingCostAndMissingCostList = isMissingCostList && isMissingCost;
         if (hasMissingCostAndMissingCostList) {
             return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
-                    + COMMAND_FORMAT);
+                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
         }
 
         boolean hasBothCostAndCostList = !isMissingCostList && !isMissingCost;
         if (hasBothCostAndCostList) {
             return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
-                    + COMMAND_FORMAT);
+                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
+        }
+
+        if (isMissingCost) {
+            hasDifferentLength = involvedList.length != costList.length;
+        }
+        if (hasDifferentLength) {
+            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
+                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
         }
 
         try {
-            int sessionId = Parser.parseSessionId(commandArgs);
-            String activityName = Parser.parseName(commandArgs);
-            String payer = Parser.parsePayer(commandArgs);
-            String[] involvedList = Parser.parseInvolved(commandArgs);
-            int gst = Parser.parseGst(commandArgs);
-            int serviceCharge = Parser.parseServiceCharge(commandArgs);
-            boolean hasDifferentLength = false;
-            if (isMissingCost) {
-                hasDifferentLength = involvedList.length != costList.length;
-            }
-            if (hasDifferentLength) {
-                return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
-                        + COMMAND_FORMAT);
-            }
-            return new ActivityCreateCommand(sessionId, activityName, totalCost, payer, involvedList, costList, gst,
-                    serviceCharge);
+            gst = Parser.parseGst(commandArgs);
+            serviceCharge = Parser.parseServiceCharge(commandArgs);
         } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT);
+            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
+                    + "\n\t" + COMMAND_FORMAT_SECOND);
         }
+
+        return new ActivityCreateCommand(sessionId, activityName, totalCost, payer, involvedList, costList, gst,
+                serviceCharge);
     }
 
     /**
-     * Runs the command to create an activity.
-     * Gets relevant parameters to create an Activity object.
-     * If no errors getting parameters, an Activity object is created and added to the session.
+     * Checks if String object array of names has duplicated names.
      *
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @return true if it contains duplicates,
+     *         false otherwise.
      */
-    @Override
-    public void run(Manager manager) {
-        try {
-            int activityId = manager.getProfile().getNewActivityId();
-            updateCostAndCostList();
-            Session session = manager.getProfile().getSession(sessionId);
-            Person personPaid = session.getPersonByName(payer);
-            ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
-            addAllActivityCost(involvedPersonList, personPaid, totalCost, costList, activityId);
-            Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
-            session.addActivity(activity);
-            manager.getUi().printlnMessage(COMMAND_SUCCESS + activityId);
-        } catch (InvalidDataException e) {
-            manager.getUi().printlnMessage(e.getMessage());
+    private boolean hasNameDuplicates() {
+        Set<String> nameSet = new HashSet<>();
+        for (String name : involvedList) {
+            String nameToBeAdded = name.toLowerCase();
+            if (!nameSet.add(nameToBeAdded)) {
+                return true;
+            }
         }
+        assert nameSet.size() == involvedList.length :
+                Message.ASSERT_ACTIVITYCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED;
+        return false;
     }
 
     /**
@@ -151,18 +191,37 @@ public class ActivityCreateCommand extends Command {
      *
      * @param involvedPersonList The list of persons involved in the activity.
      * @param personPaid         The person who paid for the activity.
-     * @param totalCost          The total cost of the activity.
-     * @param costList           The costs owed by each person involved in the activity.
      * @param activityId         The id of the activity.
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
-     * @see InvalidDataException
      */
-    private static void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, double totalCost,
-                                           double[] costList, int activityId) throws InvalidDataException {
+    private void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, int activityId)
+            throws InvalidDataException {
+        boolean hasAddedForPersonPaid = false;
         for (int i = 0; i < involvedPersonList.size(); i++) {
             Person person = involvedPersonList.get(i);
-            addCostOwedAndCostPaid(personPaid, totalCost, costList, activityId, i, person);
+            addCostOwedAndCostPaid(personPaid, activityId, i, person);
+            hasAddedForPersonPaid = isPersonPaid(personPaid, hasAddedForPersonPaid, person);
         }
+        if (!hasAddedForPersonPaid) {
+            personPaid.addActivityCost(activityId, totalCost, ZERO_COST_OWED);
+        }
+    }
+
+    /**
+     * Checks if the Person object currently referred to represents the person who paid for the activity.
+     *
+     * @param personPaid            The Person object representing the person who paid for the activity.
+     * @param hasAddedForPersonPaid A boolean representing whether the activity cost has been added for the person who
+     *                              paid for the activity.
+     * @param person                The Person object currently referred to among the persons involved.
+     * @return true if the Person object currently referred to represents the person who paid for the activity,
+     *         hasAddedForPersonPaid otherwise.
+     */
+    private boolean isPersonPaid(Person personPaid, boolean hasAddedForPersonPaid, Person person) {
+        if (person == personPaid) {
+            hasAddedForPersonPaid = true;
+        }
+        return hasAddedForPersonPaid;
     }
 
     /**
@@ -172,16 +231,13 @@ public class ActivityCreateCommand extends Command {
      * Else, the cost paid is set to 0.
      *
      * @param personPaid      The person who paid for the activity.
-     * @param totalCost       The total cost of the activity.
-     * @param costList        The costs owed by each person involved in the activity.
      * @param activityId      The id of the activity.
      * @param indexOfCostOwed The index of the cost owed in the list of costs.
      * @param person          The current person whose costs are added to the list of activity costs.
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
-     * @see InvalidDataException
      */
-    private static void addCostOwedAndCostPaid(Person personPaid, double totalCost, double[] costList, int activityId,
-                                               int indexOfCostOwed, Person person) throws InvalidDataException {
+    private void addCostOwedAndCostPaid(Person personPaid, int activityId, int indexOfCostOwed, Person person)
+            throws InvalidDataException {
         if (person == personPaid) {
             person.addActivityCost(activityId, totalCost, costList[indexOfCostOwed]);
         } else {
@@ -198,25 +254,21 @@ public class ActivityCreateCommand extends Command {
     private void updateCostAndCostList() {
         boolean isZeroCost = totalCost == NO_COST;
         if (isZeroCost) {
-            updateCostListWithExtraCharges(costList, gst, serviceCharge);
-            totalCost = calculateTotalCost(costList);
+            updateCostListWithExtraCharges();
+            calculateTotalCost();
         } else {
-            totalCost = updateCostWithExtraCharges(totalCost, gst, serviceCharge);
+            updateCostWithExtraCharges();
             int numberOfPeopleInvolved = involvedList.length;
-            costList = distributeCostEvenly(totalCost, numberOfPeopleInvolved);
+            costList = distributeCostEvenly(numberOfPeopleInvolved);
         }
     }
 
     /**
      * Updates cost list by including the extra charges.
      * Extra charges may include gst and service charge.
-     *
-     * @param costList      The costs owed by each person involved in the activity.
-     * @param gst           The gst to be added to the costs for the activity.
-     * @param serviceCharge The service charge to be added to the costs for the activity.
      */
-    private static void updateCostListWithExtraCharges(double[] costList, int gst, int serviceCharge) {
-        double extraCharges = getExtraCharges(gst, serviceCharge);
+    private void updateCostListWithExtraCharges() {
+        double extraCharges = getExtraCharges();
         for (int i = 0; i < costList.length; i++) {
             costList[i] *= extraCharges;
         }
@@ -225,41 +277,29 @@ public class ActivityCreateCommand extends Command {
     /**
      * Returns a double representing the total cost of the activity
      * by summing up the costs owed by each person involved in the activity.
-     *
-     * @param costList The costs owed by each person involved in the activity.
-     * @return A double representing the total cost of the activity.
      */
-    private static double calculateTotalCost(double[] costList) {
-        double totalCost = 0;
-        for (int i = 0; i < costList.length; i++) {
-            totalCost += costList[i];
+    private void calculateTotalCost() {
+        for (double cost : costList) {
+            totalCost += cost;
         }
-        return totalCost;
     }
 
     /**
      * Returns a double representing the total cost by including the extra charges.
      * Extra charges may include gst and service charge.
      * Assumption: gst and service charge are non-negative integers.
-     *
-     * @param totalCost     The total cost of the activity excluding extra charges.
-     * @param gst           The gst to be included in the total cost of the activity.
-     * @param serviceCharge The service charge to be included in the total cost of the activity.
-     * @return A double representing the total cost of the activity.
      */
-    private static double updateCostWithExtraCharges(double totalCost, int gst, int serviceCharge) {
-        double extraCharges = getExtraCharges(gst, serviceCharge);
-        return totalCost * extraCharges;
+    private void updateCostWithExtraCharges() {
+        double extraCharges = getExtraCharges();
+        totalCost *= extraCharges;
     }
 
     /**
      * Returns a double representing the extra charges that is to be included in costs of the activity.
      *
-     * @param gst           The gst to be included in the costs of the activity.
-     * @param serviceCharge The service charge to be included in the costs of the activity.
      * @return A double representing the extra charges.
      */
-    private static double getExtraCharges(int gst, int serviceCharge) {
+    private double getExtraCharges() {
         double gstMultiplier = 1 + (double) gst / 100;
         double serviceChargeMultiplier = 1 + (double) serviceCharge / 100;
         return gstMultiplier * serviceChargeMultiplier;
@@ -270,15 +310,43 @@ public class ActivityCreateCommand extends Command {
      * among the persons involved in the activity.
      * Divides the total cost by the number of people involved in the activity.
      *
-     * @param totalCost              The total cost of the activity.
      * @param numberOfPeopleInvolved The number of people involved in the activity.
      * @return An array of doubles representing the costs of each person involved in the activity.
      */
-    private static double[] distributeCostEvenly(double totalCost, int numberOfPeopleInvolved) {
+    private double[] distributeCostEvenly(int numberOfPeopleInvolved) {
         double dividedCost = totalCost / numberOfPeopleInvolved;
         double[] costList = new double[numberOfPeopleInvolved];
         Arrays.fill(costList, dividedCost);
         return costList;
+    }
+
+    /**
+     * Runs the command to create an activity.
+     * Gets relevant parameters to create an Activity object.
+     * If no errors getting parameters, an Activity object is created and added to the session.
+     *
+     * @param manager A Manager object that manages the TextUI and Profile object.
+     */
+    @Override
+    public void run(Manager manager) {
+        boolean hasDuplicates = hasNameDuplicates();
+        if (hasDuplicates) {
+            manager.getUi().printlnMessage(Message.ERROR_ACTIVITYCREATE_DUPLICATE_NAME);
+            return;
+        }
+        try {
+            updateCostAndCostList();
+            Session session = manager.getProfile().getSession(sessionId);
+            Person personPaid = session.getPersonByName(payer);
+            ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
+            int activityId = manager.getProfile().getNewActivityId();
+            addAllActivityCost(involvedPersonList, personPaid, activityId);
+            Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
+            session.addActivity(activity);
+            manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + activity);
+        } catch (InvalidDataException e) {
+            manager.getUi().printlnMessage(e.getMessage());
+        }
     }
 
 }

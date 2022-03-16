@@ -21,11 +21,17 @@ public class SessionCreateCommand extends Command {
 
     public static final String COMMAND_TEXT = "session /create";
 
-    private static final String COMMAND_FORMAT =
+    public static final String COMMAND_FORMAT =
             "Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 …]";
 
     private static final String COMMAND_SUCCESS =
-            "The session was created successfully with session id of: ";
+            "The session was created successfully.\n";
+
+    public static final String[] COMMAND_DELIMITERS = { 
+        Parser.NAME_DELIMITER,
+        Parser.DATE_DELIMITER,
+        Parser.PERSON_LIST_DELIMITER
+    };
 
     private String sessionName;
     private String[] personNames;
@@ -126,6 +132,6 @@ public class SessionCreateCommand extends Command {
         int newSessionId = manager.getProfile().getNewSessionId();
         Session newSession = new Session(sessionName, newSessionId, sessionDate, personList);
         manager.getProfile().addSession(newSession);
-        manager.getUi().printlnMessage(COMMAND_SUCCESS + newSessionId);
+        manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + newSession);
     }
 }

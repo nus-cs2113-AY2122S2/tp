@@ -15,7 +15,9 @@ public class SessionListCommand extends Command {
 
     public static final String COMMAND_TEXT = "session /list";
 
-    private static final String COMMAND_FORMAT = "Syntax: session /list";
+    public static final String COMMAND_FORMAT = "Syntax: session /list";
+
+    private static final String SESSION_LIST_HEADER = "List of Sessions";
 
     /**
      * Prints the list of sessions previously created by the user.
@@ -30,7 +32,7 @@ public class SessionListCommand extends Command {
             manager.getUi().printlnMessage(Message.ERROR_PROFILE_SESSION_LIST_EMPTY);
             return;
         }
-
+        manager.getUi().printlnMessageWithDashDivider(SESSION_LIST_HEADER);
         for (int i = 0; i < sessionListSize - 1; i++) {
             manager.getUi().printlnMessage(sessionsToBePrinted.get(i).getSessionSimplifiedString());
             manager.getUi().printDashDivider();
