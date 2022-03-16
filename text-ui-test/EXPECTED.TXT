@@ -1,4 +1,7 @@
 Welcome to Restaurant Information Programme!
 (0) Exit Application
+(1) Enter Dish Menu
+(2) Enter Order Menu
+(3) Enter Staff Menu
 ******************************
 Enter choice: Exiting application...
