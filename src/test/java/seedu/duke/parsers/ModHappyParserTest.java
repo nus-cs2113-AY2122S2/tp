@@ -4,8 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteCommand;
+import seedu.duke.commands.EditCommand;
+import seedu.duke.commands.Command;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.MarkCommand;
@@ -54,7 +55,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
             assertNull(t.getTaskDescription());
-            assertNull(t.getEstimatedWorkingTime());
+            assertNull(t.getWorkingTime());
             assertNull(((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
             fail();
@@ -73,7 +74,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
             assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
-            assertNull(t.getEstimatedWorkingTime());
+            assertNull(t.getWorkingTime());
             assertNull(((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
             fail();
@@ -91,7 +92,7 @@ public class ModHappyParserTest {
             assertNotEquals(null, t);
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
-            assertEquals("-d-d-d /t /m -d -d", t.getEstimatedWorkingTime());
+            assertEquals("-d-d-d /t /m -d -d", t.getWorkingTime());
             assertNull(t.getTaskDescription());
             assertNull(((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
@@ -111,7 +112,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d", t.getTaskName());
             assertNull(t.getTaskDescription());
-            assertNull(t.getEstimatedWorkingTime());
+            assertNull(t.getWorkingTime());
             assertEquals("cs2113t", ((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
             fail();
@@ -144,7 +145,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d", t.getTaskName());
             assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
-            assertEquals("-t-t-t t-t-t /t/t -d -d -d", t.getEstimatedWorkingTime());
+            assertEquals("-t-t-t t-t-t /t/t -d -d -d", t.getWorkingTime());
             assertNull(((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
             fail();
@@ -178,7 +179,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d", t.getTaskName());
             assertEquals("-d-d-d /t /m -d -d", t.getTaskDescription());
-            assertNull(t.getEstimatedWorkingTime());
+            assertNull(t.getWorkingTime());
             assertEquals("cs2113t", ((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
             fail();
@@ -211,7 +212,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d", t.getTaskName());
             assertNull(t.getTaskDescription());
-            assertEquals("-d-d-d /t /m -d -d", t.getEstimatedWorkingTime());
+            assertEquals("-d-d-d /t /m -d -d", t.getWorkingTime());
             assertEquals("cs2113t", ((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
             fail();
@@ -244,7 +245,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewModule());
             assertEquals("/t/t/t/t-d", t.getTaskName());
             assertEquals("-d-d-t-m /m -m -d -t", t.getTaskDescription());
-            assertEquals("-d-d-d /t /m -d -d", t.getEstimatedWorkingTime());
+            assertEquals("-d-d-d /t /m -d -d", t.getWorkingTime());
             assertEquals("cs2113t", ((AddCommand) c).getTargetModuleName());
         } catch (Exception e) {
             fail();
@@ -461,7 +462,7 @@ public class ModHappyParserTest {
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof DeleteCommand);
-            assertEquals(1, ((DeleteCommand) c).getTaskNumber());
+            assertEquals(0, ((DeleteCommand) c).getTaskIndex()); // zero-indexed
         } catch (Exception e) {
             fail();
         }
@@ -498,7 +499,7 @@ public class ModHappyParserTest {
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof DeleteCommand);
-            assertEquals(1, ((DeleteCommand) c).getTaskNumber());
+            assertEquals(0, ((DeleteCommand) c).getTaskIndex()); // zero-indexed
             assertEquals("cs2113t", ((DeleteCommand) c).getTaskModule());
         } catch (Exception e) {
             fail();
@@ -586,6 +587,85 @@ public class ModHappyParserTest {
     @Test
     public void parse_deleteCommand_unnecessaryArgs() {
         final String testString = "del /t 1 blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_editCommand_task_unnecessaryArgs() {
+        final String testString = "edit /t 1 blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_editCommand_task_parsedCorrectly() {
+        final String testString = "edit /t 1 -n \"changed\" -m cs2113t";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof EditCommand);
+            assertEquals(0, ((EditCommand) c).getTaskIndex()); // zero-indexed
+            assertNull(((EditCommand) c).getModuleCode());
+            assertEquals("cs2113t", ((EditCommand) c).getTaskModule());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_editCommand_task_noOptionalFlags() {
+        final String testString = "edit /t 1";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_editCommand_module_wrongFlag() {
+        final String testString = "edit /m cs2113t -t \"111\"";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_editCommand_task_notANumber() {
+        final String testString = "edit /t two -t \"111\"";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_editCommand_task_tooManyFlags() {
+        final String testString = "edit /t 2 -d \"123\" -t \"111\" -m cs2113t";
         try {
             parser.parseCommand(testString);
             fail();

@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import seedu.duke.exceptions.NoSuchModuleException;
 
 public class ModuleList {
-    private static final String LS = System.lineSeparator();
-    private final ArrayList<Module> list;
-    private final Module generalTasks;
+    private ArrayList<Module> list;
+    private Module generalTasks;
 
     public ModuleList() {
         list = new ArrayList<>();
@@ -63,8 +62,16 @@ public class ModuleList {
         return list;
     }
 
+    public void setModuleList(ArrayList<Module> list) {
+        this.list = list;
+    }
+
     public Module getGeneralTasks() {
         return generalTasks;
+    }
+
+    public void initialiseGeneralTasksFromTaskList(ArrayList<Task> generalTaskList) {
+        generalTasks.setTaskArrayList(generalTaskList);
     }
 
     /**

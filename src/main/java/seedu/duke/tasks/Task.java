@@ -15,14 +15,14 @@ public class Task {
     private boolean isTaskDone;
     private String taskName;
     private String taskDescription;
-    private String estimatedWorkingTime;
+    private String workingTime;
     private TaskParameters taskParameters;
 
-    public Task(String taskName, String taskDescription, String estimatedWorkingTime) {
+    public Task(String taskName, String taskDescription, String workingTime) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.isTaskDone = false;
-        this.estimatedWorkingTime = estimatedWorkingTime;
+        this.workingTime = workingTime;
         this.taskParameters = getTaskParameterStatus();
     }
 
@@ -34,8 +34,22 @@ public class Task {
         return taskDescription;
     }
 
-    public String getEstimatedWorkingTime() {
-        return estimatedWorkingTime;
+    public String getWorkingTime() {
+        return workingTime;
+    }
+
+    public void setTaskDescription(String description) {
+        this.taskDescription = description;
+        this.taskParameters = getTaskParameterStatus();
+    }
+
+    public void setWorkingTime(String workingTime) {
+        this.workingTime = workingTime;
+        this.taskParameters = getTaskParameterStatus();
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
     }
 
     /**.
@@ -43,9 +57,9 @@ public class Task {
      * @return Task parameters status
      */
     public TaskParameters getTaskParameterStatus() {
-        boolean hasTaskDescriptionAndWorkingTime = (taskDescription != null && estimatedWorkingTime != null);
+        boolean hasTaskDescriptionAndWorkingTime = (taskDescription != null && workingTime != null);
         boolean hasTaskDescriptionOnly = (taskDescription != null);
-        boolean hasWorkingTimeOnly = (estimatedWorkingTime != null);
+        boolean hasWorkingTimeOnly = (workingTime != null);
         if (hasTaskDescriptionAndWorkingTime) {
             return TaskParameters.DESCRIPTION_AND_WORKING_TIME;
         } else if (hasTaskDescriptionOnly) {
@@ -74,11 +88,11 @@ public class Task {
         switch (taskParameters) {
         case DESCRIPTION_AND_WORKING_TIME:
             return String.format(TASK_STRING_WITH_DESC_WITH_TIME, taskStatusString, taskName,
-                    taskDescription, estimatedWorkingTime);
+                    taskDescription, workingTime);
         case DESCRIPTION_ONLY:
             return String.format(TASK_STRING_WITH_DESC_NO_TIME, taskStatusString, taskName, taskDescription);
         case WORKING_TIME_ONLY:
-            return String.format(TASK_STRING_NO_DESC_WITH_TIME, taskStatusString, taskName, estimatedWorkingTime);
+            return String.format(TASK_STRING_NO_DESC_WITH_TIME, taskStatusString, taskName, workingTime);
         default:
             return String.format(TASK_STRING_NO_DESC_NO_TIME, taskStatusString, taskName);
         }
