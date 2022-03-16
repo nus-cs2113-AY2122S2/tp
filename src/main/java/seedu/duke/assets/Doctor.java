@@ -14,10 +14,21 @@ public class Doctor extends Person {
         super(nric, fullName, age, gender, address, dob);
         this.specialization = specialization;
     }
-    /*
+
     public String getSpecialization() {
         return specialization;
     }
-    */
+
+    @Override
+    public String toString() {
+        return "Doctor {"
+                + "Nric='" + getNric() + '\''
+                + ", Full Name='" + getFullName() + '\''
+                + ", Age=" + getAge()
+                + ", Gender=" + getGender()
+                + ", Address='" + getAddress()
+                + '\'' + ", DOB='" + getDob() + '\''
+                + ", Specialization='" + getSpecialization() + '\'' + '}';
+    }
 
 }

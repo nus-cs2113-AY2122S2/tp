@@ -24,14 +24,15 @@ public class DoctorList {
     //view particular doctor
     public void viewDoctor(String nric) {
         if (isNull(nric)) {
+            System.out.println("Please input a valid doctor, doctor doesnt exist");
             return;
         }
-        System.out.println(getDoctor(nric).toString());
+        System.out.println(getDoctor(nric));
     }
 
     //view all doctor
     public void viewDoctor() {
-        System.out.println(doctors.toString());
+        System.out.println(doctors);
     }
 
     //get the number of doctors

@@ -57,14 +57,15 @@ public class Command {
         }
     }
 
-    public void viewDoctor(DoctorList doctorList, String parameters) {
-        if (isNull(parameters)) {
+    public void viewDoctor(DoctorList doctorList, String nric) {
+        if (isNull(nric)) {
             return;
         }
-        if (Parser.parseViewDoctor(parameters) == null) {
+        if (Parser.parseViewDoctor(nric) == null) {
             doctorList.viewDoctor();
+
         }
-        doctorList.viewDoctor(parameters);
+        doctorList.viewDoctor(nric);
     }
 
     public void deleteDoctor(DoctorList doctorList, String stringIndex) {
