@@ -5,10 +5,16 @@ import seedu.duke.commands.Command;
 import seedu.duke.ui.TextUi;
 import static seedu.duke.common.Messages.MESSAGE_DIVIDER;
 
+/**
+ * MeetingJio is an application that allows users to find potential time slots
+ * for team meetings based on everyone’s availability.
+ * Users can add a new lesson and delete a lesson in a timetable.
+ */
 public class Duke {
 
     private static Scanner in = new Scanner(System.in);
 
+    /** Starts the interaction with the user. */
     public static void main(String[] args) {
         start();
         String name = in.nextLine();
@@ -23,6 +29,7 @@ public class Duke {
         TextUi.showGoodByeMessage();
     }
 
+    /** Initializes the application. */
     private static void start() {
         try {
             TextUi.showWelcomeMessage();

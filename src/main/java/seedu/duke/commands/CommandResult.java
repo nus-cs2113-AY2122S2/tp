@@ -2,6 +2,9 @@ package seedu.duke.commands;
 
 import seedu.duke.Timetable;
 
+/**
+ * Represents the result of a command execution.
+ */
 public class CommandResult extends Command {
 
     public final String feedbackToUser;
