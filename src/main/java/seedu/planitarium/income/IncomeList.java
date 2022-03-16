@@ -37,6 +37,10 @@ public class IncomeList {
         return incomeArrayList.get(index - 1).getAmount();
     }
 
+    /**
+     * Removes an income object from list of income.
+     * @param index The index of the income on the person's income list
+     */
     public void remove(int index) {
         incomeArrayList.remove(index - 1);
         numberOfIncomes--;
