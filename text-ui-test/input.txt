@@ -11,19 +11,6 @@ Add Item Name:Toilet Roll Pax:
 Add Item Name:Toilet Roll Pax:-1
 Add Item Name:Toilet Roll Pax:0
 Add Item Name:Spoon Pax:2
-<<<<<<< HEAD
-check all room
-check in 301
-check in 504
-check in 202
-check out 202
-check room 301
-check level room 3
-check level room 8
-check category room queen
-check category room ABC
-bye
-=======
 Add Housekeeper Tom ~ 33
 Add Housekeeper tOm ~ 33
 Add Housekeeper sally ~ 17
@@ -33,4 +20,3 @@ Availability jane @ M
 Availability tom @ T
 Availability sally @
 bye
->>>>>>> 167a432c04679a72e90ca730ec5286fc476f7c7d
