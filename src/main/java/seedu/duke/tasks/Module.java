@@ -27,6 +27,10 @@ public class Module {
         return moduleCode;
     }
 
+    public void setModuleDescription(String description) {
+        this.moduleDescription = description;
+    }
+
     public String getModuleDescription() {
         return moduleDescription;
     }

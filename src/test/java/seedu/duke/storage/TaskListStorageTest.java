@@ -51,7 +51,7 @@ public class TaskListStorageTest {
             for (int i = 0; i < list.size(); i++) {
                 assertEquals(list.get(i).getTaskName(), taskList.get(i).getTaskName());
                 assertEquals(list.get(i).getTaskDescription(), taskList.get(i).getTaskDescription());
-                assertEquals(list.get(i).getEstimatedWorkingTime(), taskList.get(i).getEstimatedWorkingTime());
+                assertEquals(list.get(i).getWorkingTime(), taskList.get(i).getWorkingTime());
             }
         } catch (Exception e) {
             e.printStackTrace();

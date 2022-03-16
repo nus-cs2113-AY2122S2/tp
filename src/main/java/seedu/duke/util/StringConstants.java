@@ -26,7 +26,6 @@ public class StringConstants {
     public static final String TASK_DATA_LOAD_SUCCESS = "Successfully loaded general task data!";
 
 
-
     /**
      * For AddCommand.
      */
@@ -41,6 +40,17 @@ public class StringConstants {
      * For DeleteCommand.
      */
     public static final String DELETE_MESSAGE = "%s has been deleted.";
+
+
+    /**
+     * For EditCommand.
+     */
+    public static final String EDIT_TASK_SUCCESS = "The %s of %s has been changed.";
+    public static final String EDIT_MODULE_SUCCESS = "The description of %s has been changed.";
+    public static final String EDIT_TASK_WITH_MODULE_SUCCESS = "The %s of %s from %s has been changed.";
+    public static final String TASK_NAME_STR = "task name";
+    public static final String TASK_DESCRIPTION_STR = "description";
+    public static final String ESTIMATED_WORKING_TIME_STR = "estimated working time";
 
     /**
      * For ExitCommand.
@@ -67,7 +77,6 @@ public class StringConstants {
     public static final String RESET_MESSAGE = "All modules and tasks have been removed.";
 
     /**
-     * .
      * For HelpCommand.
      */
     public static final String HELP_NOTE = "Compulsory flags start with \"/\". Optional flags start with \"-\".\n"
@@ -127,6 +136,7 @@ public class StringConstants {
     public static final String ERROR_WRITE_FILE = "Error writing to file...";
     public static final String ERROR_READ_FILE = "Error reading from file...";
     public static final String ERROR_FILE_CREATE_FAIL = "Sorry, file creation failed...";
+
 
     /**
      * For parsers.
