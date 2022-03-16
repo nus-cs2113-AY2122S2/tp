@@ -1,21 +1,36 @@
 package seedu.duke;
 
+import tp.DoctorList;
+import tp.Parser;
+import tp.PatientList;
+import tp.Ui;
+import tp.AppointmentList;
+import tp.Storage;
+import tp.IHospitalException;
+import tp.Command;
+import tp.person.Patient;
+
 import java.util.Scanner;
 
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                              + "|  _ \\ _   _| | _____ \n"
-                              + "| | | | | | | |/ / _ \\\n"
-                              + "| |_| | |_| |   <  __/\n"
-                              + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+    private static final Ui ui = new Ui();
+    private static final Parser parser = new Parser();
+    private static PatientList patientList = new PatientList();
+    private static DoctorList doctorList = new DoctorList();
+    private static AppointmentList appointmentList = new AppointmentList();
+    private static Storage storage = new Storage();
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+    public static void main(String[] args) throws IHospitalException {
+        ui.sayHello();
+        String fullCommand = parser.getCommand();
+        while (!fullCommand.equals("bye")) {
+            Command command = parser.parse(fullCommand);
+            command.execute(doctorList, patientList, appointmentList, ui, storage);
+            fullCommand = parser.getCommand();
+        }
+        ui.sayGoodbye();
     }
 }

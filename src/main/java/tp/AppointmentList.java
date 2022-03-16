@@ -17,7 +17,7 @@ public class AppointmentList {
     }
 
     public Appointment getAppointment(int index) {
-        return appointments.get(index);
+        return appointments.get(index - 1);
     }
 
     /**
@@ -43,7 +43,7 @@ public class AppointmentList {
      */
     public void deleteAppointment(int index) {
         System.out.println(boundary + "Noted. I've removed this appointment:");
-        System.out.println(appointments.get(index));
+        System.out.println(appointments.get(index - 1));
         System.out.print("Now you have " + (countAppointment - 1)
                                  + " appointments recorded in the system." + System.lineSeparator() + boundary);
         appointments.remove(index - 1);
@@ -53,8 +53,8 @@ public class AppointmentList {
     @Override
     public String toString() {
         String toPrint = boundary + "Here are the existing appointments:" + System.lineSeparator();
-        for (int i = 0; i < countAppointment; i++) {
-            toPrint += ((i + 1) + ". " + getAppointment(i));
+        for (int i = 1; i <= countAppointment; i++) {
+            toPrint += (i + ". " + getAppointment(i));
         }
         toPrint += ("Now you have " + countAppointment
                             + " appointments recorded in the system." + System.lineSeparator()
