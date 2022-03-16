@@ -51,5 +51,4 @@ class DukeTest {
     public void commandParser_addCommandInvalidAge_exceptionThrown() {
         assertThrows(InvalidAgeException.class, () -> new CommandParser().parse("Add Housekeeper Susan ~ fifty"));
     }
-
 }

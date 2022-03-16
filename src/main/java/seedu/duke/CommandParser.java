@@ -3,7 +3,7 @@ package seedu.duke;
 public class CommandParser {
     private static final String BYE = "bye";
     private static final String ADD_ITEM_COMMAND = "Add Item";
-    public static final String VIEW_ITEM_LIST_COMMAND = "View Item In Inventory";
+    private static final String VIEW_ITEM_LIST_COMMAND = "View Item In Inventory";
     private static final String ADD_HOUSEKEEPER_COMMAND = "Add Housekeeper ";
     private static final String ADD_AVAILABILITY_COMMAND = "Availability ";
     private static final String VIEW_HOUSEKEEPER_COMMAND = "View Recorded Housekeeper";
@@ -15,6 +15,7 @@ public class CommandParser {
     private static final String CHECK_ALL_ROOM = "check all room";
     private static final String CHECK_ROOM_BY_LEVEL = "check level room";
     private static final String CHECK_BY_CATEGORY = "check category room";
+    private static final String UPDATE_ITEM_PAX_COMMAND = "Update Item Pax";
 
     public Command parse(String commandString) throws WrongCommandException, HotelLiteManagerException {
         Command userCommand = null;
@@ -51,7 +52,11 @@ public class CommandParser {
         } else if (commandString.startsWith(CHECK_ROOM_BY_LEVEL)) {
             commandStringWithoutCommand = commandString.replace(CHECK_ROOM_BY_LEVEL, "");
             userCommand = new CheckRoomByLevelCommand(commandStringWithoutCommand);
-        } else {
+        } else if (commandString.startsWith(UPDATE_ITEM_PAX_COMMAND)){
+            commandStringWithoutCommand = commandString.replace(UPDATE_ITEM_PAX_COMMAND, "");
+            userCommand = new UpdateItemPaxCommand(commandStringWithoutCommand);
+        }
+        else {
             throw new WrongCommandException("Invalid Command");
         }
         return userCommand;
