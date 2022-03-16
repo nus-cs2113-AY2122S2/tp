@@ -1,13 +1,13 @@
 package seedu.duke.parsers;
 
+import java.util.HashMap;
+import java.util.Objects;
+
 import seedu.duke.commands.Command;
 import seedu.duke.commands.EditCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.util.StringConstants;
-
-import java.util.HashMap;
-import java.util.Objects;
 
 public class EditParser extends Parser {
 

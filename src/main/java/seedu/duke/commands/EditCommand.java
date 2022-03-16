@@ -1,5 +1,7 @@
 package seedu.duke.commands;
 
+import java.util.Objects;
+
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.tasks.Module;
@@ -7,8 +9,6 @@ import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
 import seedu.duke.util.StringConstants;
-
-import java.util.Objects;
 
 public class EditCommand extends Command {
 
@@ -62,21 +62,33 @@ public class EditCommand extends Command {
         }
     }
 
+    /**
+     * Gets the module that the target task belongs to, or General Tasks if it does not belong to any module.
+     * @param moduleList List of modules from which the target task belongs to, or General Tasks if it does not
+     *                   belong to any module.
+     * @return the module the target task belongs to, or General Tasks if it does not belong to any module.
+     * @throws NoSuchModuleException if the target module does not exist
+     */
+    private Module getTargetModule(ModuleList moduleList) throws NoSuchModuleException {
+        Module targetModule;
+        if (Objects.isNull(taskModule)) {
+            isGeneralTask = true;
+            targetModule = moduleList.getGeneralTasks();
+        } else {
+            targetModule = moduleList.getModule(taskModule);
+            if (Objects.isNull(targetModule)) {
+                throw new NoSuchModuleException();
+            }
+        }
+        return targetModule;
+    }
+
     @Override
     public CommandResult execute(ModuleList moduleList) throws ModHappyException {
         if (taskIndex < 0) {
             editModuleDescription(moduleList);
         } else {
-            Module targetModule;
-            if (Objects.isNull(taskModule)) {
-                targetModule = moduleList.getGeneralTasks();
-                isGeneralTask = true;
-            } else {
-                targetModule = moduleList.getModule(taskModule);
-                if (Objects.isNull(targetModule)) {
-                    throw new NoSuchModuleException();
-                }
-            }
+            Module targetModule = getTargetModule(moduleList);
             editTaskFromModule(targetModule);
         }
         return new CommandResult(result);
