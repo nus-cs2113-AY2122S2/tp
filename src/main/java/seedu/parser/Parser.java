@@ -1,6 +1,5 @@
 package seedu.parser;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import seedu.command.*;
@@ -21,13 +20,14 @@ public class Parser {
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s+(?<arguments>.+)");
     public static final Pattern ADD_COMMAND_FORMAT = Pattern.compile(
-            "n/(?<itemName>.+)" + "\\s+" +
-                    "sn/(?<serialNumber>.+)" + "\\s+" +
-                    "t/(?<equipmentType>.+)" + "\\s+" +
-                    "c/(?<cost>.+)" + "\\s+" +
-                    "pf/(?<purchasedFrom>.+)" + "\\s+" +
-                    "pd/(?<purchasedDate>.+)"
+            "n\\/(?<itemName>.+)" + "\\s+" +
+                    "sn\\/(?<serialNumber>.+)" + "\\s+" +
+                    "t\\/(?<equipmentType>.+)" + "\\s+" +
+                    "c\\/(?<cost>.+)" + "\\s+" +
+                    "pf\\/(?<purchasedFrom>.+)" + "\\s+" +
+                    "pd\\/(?<purchasedDate>.+)"
     );
+    public static final int PREPAREADD_REQUIRED_ARGUMENT_COUNT = 6;
     public static final Pattern VIEW_COMMAND_FORMAT = Pattern.compile("n/(?<itemName>.+)");
     public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("s/(?<itemName>.+)");
     // Pattern extracts first n-1 tags
@@ -43,8 +43,8 @@ public class Parser {
     public static final String INCORRECT_COMMAND_FORMAT = "Incorrect Command format!";
 
     public Command parseCommand(String userInput) {
-        ArrayList<String> commandAndArgument = null;
-        ArrayList<String> args = null;
+        ArrayList<String> commandAndArgument;
+        ArrayList<String> args;
         try {
             commandAndArgument = splitCommandTerm(userInput);
         } catch (IncompleteCommandException e) {
@@ -82,9 +82,6 @@ public class Parser {
                     String argType = s.substring(0, delimiterPos);
                     String argValue = s.substring(0, delimiterPos + 1);
                     switch (argType) {
-                    case "s":
-                        updateCommand.setSerialNumber(argValue);
-                        break;
                     case "n":
                         updateCommand.setUpdateName(argValue);
                         break;
@@ -111,14 +108,15 @@ public class Parser {
         default:
             return new IncorrectCommand(INCORRECT_COMMAND_FORMAT);
         }
+
     }
 
     /**
      * Splits main arguments into split tags with each substring
      *
-     * @param args
+     * @param args String to be split into substrings
      * @return ArrayList of two elements
-     * @throws IncompleteCommandException
+     * @throws IncompleteCommandException if no parameters found
      */
     protected ArrayList<String> extractArguments(String args) throws IncompleteCommandException {
         int lastIndex = 0;
@@ -150,51 +148,52 @@ public class Parser {
      * 4. <code> purchasedFrom </code>: String of vendor name, suggest adhering to one consistent naming scheme
      * 5. <code> purchasedDate </code>: String representation for now, possibility for future support
      *
-     * @param args
+     * @param args String to be split into substrings
      * @return ArrayList of arguments
      * @throws IncompleteCommandException if no match found
      */
     protected ArrayList<String> prepareAdd(String args) throws IncompleteCommandException {
         final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
         // validate arg string format
-        if (!matcher.matches()) {
+        int matchCount = matcher.groupCount();
+        if (!matcher.matches() || matchCount != PREPAREADD_REQUIRED_ARGUMENT_COUNT) {
             throw new IncompleteCommandException("Add command values are incomplete or missing!");
         }
-        ArrayList results = new ArrayList<String>();
-        for (int i = 0; i < matcher.groupCount(); i++) {
-            results.add(matcher.group());
+        ArrayList<String> results = new ArrayList<>();
+        for (int i = 1; i <= matchCount; i++) {
+            results.add(matcher.group(i));
         }
         return results;
     }
 
     /**
-     * Prepare argument for CheckCommand by removing the preceeding "n/" prefix
+     * Prepare argument for CheckCommand by removing the preceding "n/" prefix
      *
-     * @param args
+     * @param args String to be split into substrings
      * @return ArrayList of one element (assumes rest of string is item name)
-     * @throws IncompleteCommandException
+     * @throws IncompleteCommandException if no match found
      */
     protected ArrayList<String> prepareView(String args) throws IncompleteCommandException {
         final Matcher matcher = VIEW_COMMAND_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             throw new IncompleteCommandException("View command values are incomplete or missing!");
         }
-        return new ArrayList<String>(Collections.singleton(matcher.group()));
+        return new ArrayList<>(Collections.singleton(matcher.group()));
     }
 
     /**
-     * Prepare argument for DeleteCommand by removing the preceeding "s/" prefix
+     * Prepare argument for DeleteCommand by removing the preceding "s/" prefix
      *
-     * @param args
+     * @param args String to be split into substrings
      * @return ArrayList of one element (assumes rest of string is serial number)
-     * @throws IncompleteCommandException
+     * @throws IncompleteCommandException if no match found
      */
     protected ArrayList<String> prepareDelete(String args) throws IncompleteCommandException {
         final Matcher matcher = DELETE_COMMAND_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             throw new IncompleteCommandException("Delete command values are incomplete or missing!");
         }
-        return new ArrayList<String>(Collections.singleton(matcher.group()));
+        return new ArrayList<>(Collections.singleton(matcher.group()));
     }
 
 
@@ -202,7 +201,7 @@ public class Parser {
      * Break down a command into the command term to be parsed and the remainder of the arguments.
      * Assumes command term and remainder arguments are delimited by minimally one space.
      *
-     * @param userInput
+     * @param userInput String to be split into substrings
      * @return ArrayList of String, first element being the command term and the second element being arguments
      * @throws IncompleteCommandException if no space is found
      */

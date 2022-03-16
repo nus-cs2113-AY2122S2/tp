@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import seedu.parser.IncompleteCommandException;
 import seedu.parser.Parser;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -33,7 +34,7 @@ class ParserTest {
     }
 
     @Test
-    void splitCommandTerm_incompleteCommand_exceptionThrown() {
+    void splitCommandTerm_noSpaceDelimiter_exceptionThrown() {
         ArrayList<String> unexpectedResult = new ArrayList<>(
                 Arrays.asList("add", "n/ITEM_NAMEsn/SERIAL_NUMBERt/TYPEc/COSTpf/PURCHASED_FROMpd/PURCHASED_DATE")
         );
@@ -55,6 +56,36 @@ class ParserTest {
         ArrayList<String> actualResult = parser.prepareAdd(
                 "n/Speaker B sn/S1404115ASF t/Speaker c/1000 pf/Loud Technologies pd/2022-02-23");
         assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void prepareAdd_insufficientArguments_exceptionThrown() {
+        ArrayList<String> unexpectedResult = new ArrayList<>(
+                Arrays.asList("Speaker B", "S1404115ASF", "1000", "Loud Technologies", "2022-02-23")
+        );
+        try {
+            ArrayList<String> actualResult = parser.prepareAdd(
+                    "n/Speaker B sn/S1404115ASF c/1000 pf/Loud Technologies pd/2022-02-23");
+            assertEquals(unexpectedResult, actualResult);
+            fail();
+        } catch (IncompleteCommandException e) {
+            assertEquals("Add command values are incomplete or missing!", e.getMessage());
+        }
+    }
+
+    @Test
+    void prepareAdd_argumentEnteredTwice_exceptionThrown() {
+        ArrayList<String> unexpectedResult = new ArrayList<>(
+                Arrays.asList("Speaker B", "S1404115ASF", "Speaker", "1000", "1000", "Loud Technologies", "2022-02-23")
+        );
+        try {
+            ArrayList<String> actualResult = parser.prepareAdd(
+                    "n/Speaker B sn/S1404115ASF t/Speaker c/1000 c/1000 pf/Loud Technologies pd/2022-02-23");
+            assertEquals(unexpectedResult, actualResult);
+            fail();
+        } catch (IncompleteCommandException e) {
+            assertEquals("Add command values are incomplete or missing!", e.getMessage());
+        }
     }
 
 }
