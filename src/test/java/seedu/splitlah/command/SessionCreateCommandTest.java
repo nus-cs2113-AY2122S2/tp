@@ -78,12 +78,12 @@ class SessionCreateCommandTest {
      */
     @Test
     public void run_hasOneNameDuplicate_sessionIdNotIncremented() {
-        int newSessionId = manager.getProfile().getNewSessionId();
+        int currentSessionId = manager.getProfile().getSessionIdTracker();
         String userInput = "session /create /n Class outing /d 23-02-2022 /pl Alice Alice Bob";
         Command command = Parser.getCommand(userInput);
         command.run(manager);
-        int testSessionId = manager.getProfile().getNewSessionId();
-        assertEquals(newSessionId, testSessionId - 1);
+        int testSessionId = manager.getProfile().getSessionIdTracker();
+        assertEquals(currentSessionId, testSessionId);
     }
 
     /**
@@ -103,11 +103,11 @@ class SessionCreateCommandTest {
      */
     @Test
     public void run_hasSessionDuplicate_sessionIdNotIncremented() {
-        int newSessionId = manager.getProfile().getNewSessionId();
+        int currentSessionId = manager.getProfile().getSessionIdTracker();
         String userInput = "session /create /n Class outing /d 15-02-2022 /pl Mallory Eves";
         Command command = Parser.getCommand(userInput);
         command.run(manager);
-        int testSessionId = manager.getProfile().getNewSessionId();
-        assertEquals(newSessionId, testSessionId - 1);
+        int testSessionId = manager.getProfile().getSessionIdTracker();
+        assertEquals(currentSessionId, testSessionId);
     }
 }
