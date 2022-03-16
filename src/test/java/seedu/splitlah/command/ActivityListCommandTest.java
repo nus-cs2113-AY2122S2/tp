@@ -28,16 +28,20 @@ public class ActivityListCommandTest {
         createActivityTwo.run(manager);
     }
 
-
     /**
-     * Checks if activities are listed with missing sid.
+     * Checks if activities are listed with missing session unique identifier.
      */
     @Test
     public void prepare_hasMissingDelimiter_InvalidCommand() {
-        //Missing sid
-        String argsMissingSidDelimiter = "activity /list";
+        // Missing delimiter
+        String argsMissingSidDelimiter = "activity /list /sid";
         Command activityWithMissingSidDelimiter = Parser.getCommand(argsMissingSidDelimiter);
         assertEquals(InvalidCommand.class, activityWithMissingSidDelimiter.getClass());
+
+        // Missing argument after delimiter.
+        String argsMissingArgument = "activity /list 1";
+        Command activityWithMissingArgument = Parser.getCommand(argsMissingArgument);
+        assertEquals(InvalidCommand.class, activityWithMissingArgument.getClass());
     }
 
 }
