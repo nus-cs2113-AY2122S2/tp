@@ -18,4 +18,12 @@ public class ItemList {
     public Item removeItem(int index) {
         return this.itemList.remove(index);
     }
+
+    public Item getItem(int index) {
+        return this.itemList.get(index);
+    }
+
+    public int getSize() {
+        return this.itemList.size();
+    }
 }
