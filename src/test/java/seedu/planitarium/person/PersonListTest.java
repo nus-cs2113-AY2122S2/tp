@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class PersonListTest {
-    private final String VALID_NAME = "Alice";
-    private final int INVALID_INDEX = -10;
+    private static final String VALID_NAME = "Alice";
+    private static final int INVALID_INDEX = -10;
 
     @Test
     public void getNumberOfMembers_newPersonList_returnZero() {

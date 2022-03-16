@@ -11,38 +11,30 @@ import seedu.planitarium.ui.UI;
 public class PlanITarium {
     protected Scanner userInput;
     protected Command command;
-    //protected static UI ui = new UI(); in case it is needed later on
     protected PersonList personList = new PersonList();
     protected CommandFactory commandFactory = new CommandFactory();
     protected static ProjectLogger logger;
 
-    /**
-     * Entry-point for the PlanITarium application.
-     */
-    public static void main(String[] args) {
-        try {
-            new PlanITarium().run();
-        } catch (Exception e) {
-            UI.exit();
-        }
+    public static void main(String args[]) {
+        initialisePlanitarium();
+        new PlanITarium().run();
     }
 
     /**
      * Runs the entire program.
-     * @throws Exception if there's unacceptable condition exits.
      */
-    public void run() throws Exception {
-        initialisePlanitarium();
+    public void run() {
+        userInput = new Scanner(System.in);
         while (true) {
             try {
-                userInput = new Scanner(System.in);
                 command = commandFactory.getCommand(userInput.nextLine(), personList);
                 logger.getLogger().log(Level.INFO, "Next line has been read");
+                System.out.println(UI.HORI_LINE);
                 command.execute();
+                System.out.println(UI.HORI_LINE);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }
 

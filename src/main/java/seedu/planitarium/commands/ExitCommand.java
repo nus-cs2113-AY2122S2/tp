@@ -14,6 +14,7 @@ public class ExitCommand extends Command {
     @Override
     public void execute() {
         ui.exit();
+        System.out.println(ui.HORI_LINE);
         System.exit(0);
     }
 }

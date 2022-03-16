@@ -10,19 +10,19 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class AddPersonCommandTest {
 
-    AddPersonCommand addPersonCommand;
-    String ADD_PERSON = "add /n Alice";
-    PersonList personList;
-    Command c = new Command(ADD_PERSON, personList);
+    public static AddPersonCommand addPersonCommand;
+    public static final String ADD_PERSON = "add /n Alice";
+    public static PersonList personList = new PersonList();
 
     @Test
     public void addPerson_getPerson_success() {
         try {
             addPersonCommand = new AddPersonCommand(ADD_PERSON, personList);
+            addPersonCommand.execute();
         } catch (Exception e) {
             fail();
         }
-        int uid = personList.getNumberOfMembers() - 1;
+        int uid = personList.getNumberOfMembers();
         Assertions.assertEquals("Alice", personList.getPerson(uid).getName());
     }
 }

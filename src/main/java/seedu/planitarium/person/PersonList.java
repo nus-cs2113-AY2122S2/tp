@@ -9,7 +9,7 @@ public class PersonList {
     private ArrayList<Person> personList;
     private int numberOfMembers;
     private ProjectLogger logger;
-    private final int SINGULAR = 1;
+    private static final int SINGULAR = 1;
 
     /**
      * Constructs a new PersonList object.

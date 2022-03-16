@@ -12,9 +12,6 @@ class ExpenditureListTest {
     private static int VALID_INDEX = 1;
     private ExpenditureList personOne;
 
-    /**
-     * Creates a test ExpenditureList object with two expenditure added
-     */
     @BeforeEach
     public void setUp() {
         personOne = new ExpenditureList();
@@ -22,11 +19,6 @@ class ExpenditureListTest {
         personOne.addExpenditure("Transport", 5);
     }
 
-    /**
-     * Creates a new ExpenditureList object and adds an expenditure.
-     * Checks if both description and amount matches the test input
-     * through getDescription and getExpenditureValue methods.
-     */
     @Test
     public void addExpenditure_newExpenditure_existsInExpenditure() {
         ExpenditureList personTwo = new ExpenditureList();
@@ -38,10 +30,6 @@ class ExpenditureListTest {
 
     }
 
-    /**
-     * Checks if the description of the expenditure added matches
-     * the test input.
-     */
     @Test
     public void getDescription_validIndex_expectSameDescription() {
         String inputString = "Food";
@@ -49,10 +37,6 @@ class ExpenditureListTest {
         assertEquals(inputString, getDescriptionString);
     }
 
-    /**
-     * Checks if the amount of the expenditure matches the
-     * the test input.
-     */
     @Test
     public void getExpenditureValue_validIndex_expectSameDescription() {
         double inputAmount = 20;
@@ -60,10 +44,6 @@ class ExpenditureListTest {
         assertEquals(inputAmount, getAmount);
     }
 
-    /**
-     * Checks if the method successfully removes an expenditure
-     * by comparing the number of expenditure before and after removal.
-     */
     @Test
     public void remove_expenditureExists_removesNormally() {
         int numberOfExpenditureBeforeRemoval = personOne.getNumberOfExpenditures();
@@ -72,10 +52,6 @@ class ExpenditureListTest {
         assertEquals(numberOfExpenditureBeforeRemoval - 1, numberOfExpenditureAfterRemoval);
     }
 
-    /**
-     * Tests if assertion blocks an invalid index in
-     * the remove method.
-     */
     @Test
     public void remove_invalidIndex_expectAssertionError() {
         try {
@@ -86,10 +62,6 @@ class ExpenditureListTest {
         }
     }
 
-    /**
-     * Tests if assertion blocks an invalid index in
-     * the getDescription method.
-     */
     @Test
     public void getDescription_invalidIndex_expectAssertionError() {
         try {
@@ -100,10 +72,6 @@ class ExpenditureListTest {
         }
     }
 
-    /**
-     * Tests if assertion blocks an invalid index in
-     * the getExpenditureValue method.
-     */
     @Test
     public void getExpenditureValue_invalidIndex_expectAssertionError() {
         try {
@@ -114,10 +82,6 @@ class ExpenditureListTest {
         }
     }
 
-    /**
-     * Tests if assertion will block a null description input
-     * in the addExpenditure method.
-     */
     @Test
     public void addExpenditure_nullDescription_expectAssertionError() {
         ExpenditureList testList = new ExpenditureList();

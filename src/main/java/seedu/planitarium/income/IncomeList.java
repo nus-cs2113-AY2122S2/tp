@@ -1,7 +1,6 @@
 package seedu.planitarium.income;
 
 import seedu.planitarium.ProjectLogger;
-import seedu.planitarium.parser.Parser;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -14,7 +13,7 @@ public class IncomeList {
     private ProjectLogger logger;
 
     public static final int ARRAY_INDEX = 0;
-    private static final String LOG_CLASS_NAME = Parser.class.getSimpleName();
+    private static final String LOG_CLASS_NAME = IncomeList.class.getSimpleName();
     private static final String LOG_FILE_PATH = LOG_CLASS_NAME + ".log";
     private static final String LOG_INIT = "Logger for " + LOG_CLASS_NAME + " initialised.";
     private static final String LOG_ASSERT_PASSED = "Assertion passed.";
