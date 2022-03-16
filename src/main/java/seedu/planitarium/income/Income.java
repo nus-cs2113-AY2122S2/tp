@@ -32,6 +32,10 @@ public class Income {
         return description;
     }
 
+    /**
+     * Returns the income object's description and its amount in two decimal place.
+     * @return The string of the description and the amount of the income
+     */
     public String toString() {
         return  description + ": $" + String.format("%.2f", amount);
     }
