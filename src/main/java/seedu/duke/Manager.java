@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
 import seedu.duke.helper.Command;
@@ -21,6 +22,7 @@ public class Manager {
     public void runLoop() {
         ui.printGreeting();
         while (!isTerminated) {
+            ui.printPrompt();
             String commandWord = ui.readCommand();;
             String parameters = ui.readParameters();
             switch (commandWord) {
@@ -31,8 +33,10 @@ public class Manager {
                 command.deletePatient(storage.patients, parameters);
                 break;
             case "view patient":
+                command.viewPatient(storage.patients, parameters);
                 break;
             case "add doctor":
+                command.addDoctor(storage.doctors, parameters);
                 break;
             case "delete doctor":
                 break;
@@ -51,13 +55,14 @@ public class Manager {
                 break;
             case "bye":
                 isTerminated = true;
-                storage.saveData();
+
                 ui.printBye();
                 break;
             default:
                 System.out.println(commandWord);
                 break;
             }
+            storage.saveData();
         }
     }
 }

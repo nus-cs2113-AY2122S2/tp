@@ -16,12 +16,16 @@ public class PatientList {
     }
 
     public void viewPatient(String nric) {
-        //todo: add null exception
+        Patient patient = getPatient(nric);
+        if (patient == null) {
+            System.out.println("There is no such patient");
+            return;
+        }
         System.out.println(getPatient(nric).toString());
     }
 
     public void viewPatient() {
-        System.out.println(patients.toString());
+        System.out.println(this);
     }
 
     public void add(String[] addPatientParameters) {
@@ -45,6 +49,15 @@ public class PatientList {
 
     @Override
     public String toString() {
-        return "aaa";
+        String output = "";
+        int number = 1;
+        for (Patient patient : this.patients) {
+            output += String.format("%d. %s", number, patient.toString());
+            if (number != this.getSize()) {
+                output += "\n";
+            }
+            number++;
+        }
+        return output;
     }
 }
