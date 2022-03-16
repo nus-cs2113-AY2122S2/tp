@@ -35,6 +35,9 @@ public class Storage {
      */
     public void writeData(ArrayList<Item> itemList) throws InvMgrException {
         try {
+            if (itemList == null) {
+                throw new NullPointerException();
+            }
             Gson gson = new Gson();
             String serializedItems = gson.toJson(itemList);
             Files.writeString(this.dataPath, serializedItems, StandardCharsets.UTF_8, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
@@ -45,7 +48,8 @@ public class Storage {
 
     /**
      * Returns the Path representing the data file.
-     * @return
+     *
+     * @return the dataPath of this Storage
      */
     public Path getDataPath() {
         return dataPath;
