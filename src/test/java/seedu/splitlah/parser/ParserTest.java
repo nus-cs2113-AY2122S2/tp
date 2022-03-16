@@ -273,6 +273,9 @@ class ParserTest {
     }
 
     // parsePayer()
+    /**
+     * Checks if an exception is properly thrown when the Payer delimiter is not provided by the user.
+     */
     @Test
     void parsePayer_missingDelimiter_exceptionThrown() {
         String argumentWithoutPayerDelimiter = "/sid 1 /n Lunch p Alice /i Alice Bob Charlie /co 15";
@@ -285,6 +288,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Payer delimiter is provided but no arguments
+     * following the Payer delimiter are provided by the user.
+     */
     @Test
     void parsePayer_delimiterExistsWithoutArgument_exceptionThrown() {
         String argumentWithoutPayerArgument = "/sid 1 /n Lunch /p /i Alice Bob Charlie /co 15";
@@ -297,6 +304,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Payer delimiter is provided but multiple names are
+     * provided following the Payer delimiter.
+     */
     @Test
     void parsePayer_delimiterExistsMultiplePayers_exceptionThrown() {
         String argumentWithoutPayerArgument = "/sid 1 /n Lunch /p Alice Bob /i Alice Bob Charlie /co 15";
@@ -309,6 +320,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if a String object containing the payer name is properly returned when the Payer delimiter and argument
+     * following it are properly provided by the user.
+     */
     @Test
     void parsePayer_delimiterExistsSinglePayer_argumentString() {
         String argumentWithDelimiterAndArgument = "/sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
