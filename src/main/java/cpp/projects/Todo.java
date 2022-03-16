@@ -1,9 +1,8 @@
 package cpp.projects;
 
 /**
- * Represents a t/odo in a project.
+ * Represents a todo in a project.
  */
-
 public class Todo {
     protected String description;
     protected boolean isDone;
@@ -19,9 +18,9 @@ public class Todo {
 
     /**
      * Gets the status of a todo.
+     *
      * @return todo status
      */
-
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -29,7 +28,6 @@ public class Todo {
     /**
      * Marks the todo as done.
      */
-
     public void markAsDone() {
         this.isDone = true;
     }
@@ -37,7 +35,6 @@ public class Todo {
     /**
      * Marks the todo as undone.
      */
-
     public void markAsUndone() {
         this.isDone = false;
     }
