@@ -30,7 +30,7 @@ public class Parser {
         }
     }
 
- delete-patient
+
     public static ArrayList<String> parseViewDoctor(String description) {
         //no specific doctor
         if (description == null) {
@@ -66,7 +66,7 @@ public class Parser {
             isValid = false;
         }
         return isValid;
- master
+
     }
 
     public static String[] parseAddMedicine(String parameters) {
