@@ -55,7 +55,6 @@ public class AddItemCommand extends Command {
         Item item = getItem();
         listOfItems.addItemToList(item);
         ui.printAddItemAcknowledgementMessage(listOfItems);
-
     }
 
     public Item getItem() {

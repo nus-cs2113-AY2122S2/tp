@@ -5,6 +5,7 @@ package seedu.duke;
  * (a value from 1-5) and customerName (the name of the customer with
  * this satisfactionValue).
  */
+
 public class Satisfaction {
     protected String customerName;
     protected int satisfactionValue;

@@ -1,4 +1,11 @@
 Invalid Command
+Invalid Command
+Invalid Command
+Error! AGE must be integer
+Noted!
+[ sgg ]: 17
+Error! AGE must be integer
+Error! AGE must be integer
 The item and its pax has been added to the list of items in the inventory.
 There are currently 1 items within the inventory.
 Error! Item Name cannot be empty.
