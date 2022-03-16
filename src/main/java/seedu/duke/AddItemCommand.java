@@ -50,8 +50,8 @@ public class AddItemCommand extends Command {
         return itemPax;
     }
 
-    public void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList listOfItems, Ui ui)
-            throws HotelLiteManagerException, WrongCommandException {
+    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList roomList,
+                        ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
         Item item = getItem();
         listOfItems.addItemToList(item);
         ui.printAddItemAcknowledgementMessage(listOfItems);

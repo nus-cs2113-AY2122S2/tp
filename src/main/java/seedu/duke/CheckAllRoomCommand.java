@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import java.math.RoundingMode;
-
 public class CheckAllRoomCommand extends Command {
     private RoomList roomList;
     private static String TABLE_HEAD = "Type\t\tRoom Id\t\tlevel\t\tStatus";
@@ -10,7 +8,8 @@ public class CheckAllRoomCommand extends Command {
     }
 
     @Override
-    public void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList itemList, Ui ui) {
+    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList roomList,
+                        ItemList itemList, Ui ui) {
         this.roomList = new RoomList();
         System.out.println(TABLE_HEAD);
         for (Room room : roomList.getRoomList()) {

@@ -5,6 +5,7 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     SatisfactionList satisfactionList = new SatisfactionList();
+    HousekeeperList housekeeperList = new HousekeeperList();
 
     private void run() {
         CommandParser commandParser = new CommandParser();
@@ -17,7 +18,7 @@ public class Duke {
             try {
                 userInput = ui.readUserInput();
                 Command command = commandParser.parse(userInput);
-                command.execute(satisfactionList, roomList, listOfItems, ui);
+                command.execute(housekeeperList, satisfactionList, roomList, listOfItems, ui);
                 shouldExitProgram = command.isExit();
             } catch (WrongCommandException error) {
                 System.out.println(error.getMessage());

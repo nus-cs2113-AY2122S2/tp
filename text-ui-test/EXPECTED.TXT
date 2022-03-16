@@ -14,4 +14,9 @@ Error! Item Pax is invalid.
 Error! Item Pax is invalid.
 The item and its pax has been added to the list of items in the inventory.
 There are currently 2 items within the inventory.
+Noted!
+[ Tom ]: 33
+This person has already been recorded
+Noted!
+[ sally ]: 17
 see u again!

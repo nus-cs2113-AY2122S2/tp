@@ -18,9 +18,10 @@ class CheckInCommandTest {
         ItemList itemList = new ItemList();
         Ui ui = new Ui();
         SatisfactionList satisfactionList = new SatisfactionList();
+        HousekeeperList housekeeperList = new HousekeeperList();
         String inputCommand = "301";
         CheckInCommand checkInCommand = new CheckInCommand(inputCommand);
-        checkInCommand.execute(satisfactionList, inputRoomList, itemList, ui);
+        checkInCommand.execute(housekeeperList, satisfactionList, inputRoomList, itemList, ui);
         Room expectedRoom = null;
         for (Room room : inputRoomList.getRoomList()) {
             if (room.getRoomId() == 301) {
@@ -38,10 +39,11 @@ class CheckInCommandTest {
         ItemList itemList = new ItemList();
         Ui ui = new Ui();
         SatisfactionList satisfactionList = new SatisfactionList();
+        HousekeeperList housekeeperList = new HousekeeperList();
         String inputCommand = "601";
         CheckInCommand checkInCommand = new CheckInCommand(inputCommand);
         Room expectedRoom = null;
         assertThrows(InvalidRoomNumberException.class,
-            () -> checkInCommand.execute(satisfactionList, inputRoomList,itemList,ui));
+            () -> checkInCommand.execute(housekeeperList, satisfactionList, inputRoomList,itemList,ui));
     }
 }
