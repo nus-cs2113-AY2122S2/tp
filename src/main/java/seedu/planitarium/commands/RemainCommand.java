@@ -10,6 +10,6 @@ public class RemainCommand extends Command {
 
     @Override
     public void execute() {
-        personList.getRemain();
+        personList.printRemain();
     }
 }

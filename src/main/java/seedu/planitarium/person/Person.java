@@ -7,6 +7,7 @@ public class Person {
     protected String name;
     protected IncomeList incomeList;
     protected ExpenditureList expenditureList;
+    protected static int SINGULAR = 1;
 
     /**
      * Constructs a new Person object.
@@ -47,7 +48,7 @@ public class Person {
      * @param index The index of the income to be removed
      */
     public void deleteIncome(int index) {
-        assert (index >= 1);
+        assert (index >= SINGULAR);
         assert (index <= getNumberOfIncomes());
         String description = incomeList.getDescription(index);
         double value = incomeList.getIncomeValue(index);
@@ -73,7 +74,7 @@ public class Person {
      * @param index The index of the expenditure to be removed.
      */
     public void deleteExpend(int index) {
-        assert (index >= 1);
+        assert (index >= SINGULAR);
         assert (index <= getNumberOfExpenditures());
         String description = expenditureList.getDescription(index);
         double value = expenditureList.getExpenditureValue(index);

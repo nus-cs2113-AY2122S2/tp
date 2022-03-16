@@ -1,0 +1,6 @@
+Mar 16, 2022 5:31:51 PM seedu.planitarium.person.PersonList <init>
+INFO: Logger for PersonList initialised
+Mar 16, 2022 5:32:01 PM seedu.planitarium.person.PersonList addPerson
+INFO: Entering addPerson()
+Mar 16, 2022 5:32:01 PM seedu.planitarium.person.PersonList addPerson
+INFO: Non-null assertion passed in addPerson()
