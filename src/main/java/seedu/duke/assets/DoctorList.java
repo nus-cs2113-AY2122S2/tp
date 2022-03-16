@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class DoctorList {
 
-    ArrayList<Doctor> doctorList;
+    ArrayList<Doctor> doctorList = new ArrayList<>();
 
 
     //view particular doctor
@@ -15,5 +15,9 @@ public class DoctorList {
     //view all doctor
     public void viewDoctor() {
 
+    }
+
+    public ArrayList<Doctor> getList() {
+        return doctorList;
     }
 }

@@ -39,6 +39,10 @@ public class PatientList {
         patients.remove(index);
     }
 
+    public ArrayList<Patient> getList() {
+        return patients;
+    }
+
     @Override
     public String toString() {
         return "aaa";
