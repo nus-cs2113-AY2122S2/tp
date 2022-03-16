@@ -1,5 +1,9 @@
 package seedu.duke;
 
+/**
+ * Represents an item that is stored within the inventory. An item object consists of the item's name as well as its
+ * pax.
+ */
 public class Item {
     private String name;
     private int pax;

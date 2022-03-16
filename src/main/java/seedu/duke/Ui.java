@@ -7,7 +7,6 @@ import java.util.Scanner;
  * The Ui object handles all interactions with the user such as printing the outputs to the user
  * as well as reading in the user inputs .
  */
-
 public class Ui {
     private Scanner in;
     private static final int ARRAY_INDEX_OFFSET = 1;
@@ -41,11 +40,22 @@ public class Ui {
 
     }
 
+    /**
+     * Prints out an acknowledgement message to inform the user that the item has been added to the item list as well
+     * as the number of items within the item list.
+     *
+     * @param listOfItems The item list containing all the items in the inventory.
+     */
     public void printAddItemAcknowledgementMessage(ItemList listOfItems) {
         System.out.println("The item and its pax has been added to the list of items in the inventory.");
         System.out.printf("There are currently %d items within the inventory.\n", listOfItems.getSize());
     }
 
+    /**
+     * Prints out the item name ,pax as well as index for each item that is found within the item list.
+     *
+     * @param listOfItems The item list containing all the items in the inventory.
+     */
     public void printItemList(ItemList listOfItems) {
         String itemName;
         int itemPax;
