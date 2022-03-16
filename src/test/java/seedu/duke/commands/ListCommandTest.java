@@ -10,6 +10,10 @@ public class ListCommandTest {
 
     Timetable timetable = new Timetable();
 
+    /**
+     * Test method to ensure that the program informs user and continues to run as intended
+     * when the timetable is empty
+     */
     @Test
     public void listCommand_emptyList_returnEmptyListNotification() {
         ListCommand listCommand = new ListCommand();

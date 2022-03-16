@@ -55,6 +55,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Collate the user's input and verify the validity of the input value of each parameter
+     * Invalid inputs will be identified
+     * If input is valid, AddCommand class is returned
+     *
+     * @return AddCommand if input is valid
+     *         CommandResult if input is invalid, with the error description as a parameter
+     */
     public Command prepareAdd() {
         try {
             String[] eventDescription = splitArguments();
@@ -82,6 +90,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks the validity of the user's given startTime and endTime
+     *
+     * @param startTime Time at which the event begins
+     * @param endTime Time at which the event ends
+     * @throws InvalidTimeException If the given hours and minutes are invalid, or if startTime is later than endTime
+     */
     private void checkTime(int startTime, int endTime) throws InvalidTimeException {
         int startMinutes = startTime % 100;
         int endMinutes = endTime % 100;
@@ -94,6 +109,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks that all parameters have a non-null value
+     *
+     * @param eventDescription Array of user's input
+     * @throws MissingValueException If at least one parameter has no value
+     */
     private void checkValidityOfArguments(String[] eventDescription) throws MissingValueException {
         for (int i = 0; i < MODE_INDEX; i++) {
             if (eventDescription[i].length() == 0) {
@@ -102,6 +123,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks that the mode given by the user is either online or physical
+     *
+     * @param mode String given by user
+     * @throws InvalidModeException If mode is neither online nor physical
+     */
     private void checkMode(String mode) throws InvalidModeException {
         if (mode.equals("online") || mode.equals("physical")) {
             return;
@@ -109,6 +136,12 @@ public class Parser {
         throw new InvalidModeException();
     }
 
+    /**
+     * Ensures that the 'day' parameter in user's input is a valid day
+     *
+     * @param day String given by user
+     * @throws InvalidDayException If value of 'day' does not correspond to an actual day
+     */
     private void checkDay(String day) throws InvalidDayException {
         switch (day) {
         case "monday":

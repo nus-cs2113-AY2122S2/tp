@@ -6,6 +6,13 @@ import static seedu.duke.common.ErrorMessages.ERROR_EMPTY_LIST;
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
+    /**
+     * List out all entries in the user's timetable
+     * If there are no lessons found, notify user accordingly
+     *
+     * @param timetable User's timetable containing a list of lessons
+     * @return String containing all of the user's lessons
+     */
     @Override
     public String execute(Timetable timetable) {
         if (timetable.size() == 0) {
