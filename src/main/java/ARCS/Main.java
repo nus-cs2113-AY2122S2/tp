@@ -1,6 +1,9 @@
 package ARCS;
 
+import ARCS.commands.Command;
+import ARCS.commands.CommandResult;
 import ARCS.data.RouteManager;
+import ARCS.parser.Parser;
 import ARCS.ui.Ui;
 
 
@@ -8,6 +11,7 @@ import ARCS.ui.Ui;
 public class Main {
     private Ui ui;
     private RouteManager routeManager;
+    private Parser parser;
 
     /**
      * Main entry-point for the ARCS application.
@@ -19,12 +23,19 @@ public class Main {
     public void run() {
         ui = new Ui();
         routeManager = new RouteManager();
+        parser = new Parser();
+        Command command;
         ui.showWelcomeMessage();
 
-        ui.showDivider();
-        String userCommandText = ui.getUserCommand();
-        ui.showResultToUser(userCommandText);
-        ui.showDivider();
-        
+        do {
+            ui.showDivider();
+            String userCommandText = ui.getUserCommand();
+            command = parser.parseCommand(userCommandText);
+            command.setData(routeManager);
+            CommandResult result = command.execute();
+            ui.showResultToUser(result);
+        } while (!command.isExit());
+
+        ui.showExitMessage();
     }
 }

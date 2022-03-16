@@ -22,6 +22,10 @@ public class Ui {
         System.out.println(Messages.WELCOME);
     }
 
+    public void showExitMessage() {
+        System.out.println(Messages.BYE);
+    }
+
     public String getUserCommand() {
         String fullInputLine = sc.nextLine();
         fullInputLine = fullInputLine.trim();

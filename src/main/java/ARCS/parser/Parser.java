@@ -2,6 +2,7 @@ package ARCS.parser;
 
 import ARCS.commands.AddRouteCommand;
 import ARCS.commands.Command;
+import ARCS.commands.ExitCommand;
 
 public class Parser {
     public Command parseCommand(String userInput) {
@@ -12,6 +13,8 @@ public class Parser {
         switch (commandWord) {
         case AddRouteCommand.COMMAND_WORD:
             return prepareAddRoute(argumentLine);
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
         default:
             break;
 
@@ -29,6 +32,9 @@ public class Parser {
         int capacity = 0;
         for (String arg: args) {
             arg = arg.trim();
+            if (arg.isEmpty()) {
+                continue;
+            }
             String[] argSplit = arg.split("/");
             String field = argSplit[0].trim();
             String value = argSplit[1].trim();
