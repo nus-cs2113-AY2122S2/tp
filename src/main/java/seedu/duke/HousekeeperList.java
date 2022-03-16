@@ -56,10 +56,10 @@ public class HousekeeperList {
     /**
      * Method to find the housekeeper name in the records and add their availability into the records.
      *
-     * @param name         Houskeeper Name
+     * @param name         Housekeeper Name
      * @param availability Housekeeper's availability to be added in records
      */
-    public void searchAvailability(String name, String availability) {
+    public void searchAvailability(String name, String availability) throws UserExistException {
         boolean isExist = false;
         String nameConvertLowerCase = name.toLowerCase();
         for (int i = 0; i < housekeeperList.size(); i++) {
@@ -71,7 +71,7 @@ public class HousekeeperList {
             }
         }
         if (!isExist) {
-            ui.printMessage("User does not exist");
+            throw new UserExistException();
         }
     }
 }

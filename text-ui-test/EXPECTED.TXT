@@ -1,11 +1,11 @@
 Invalid Command
 Invalid Command
 Invalid Command
-Error! AGE must be integer
+Error! AGE must be integer.
 Noted!
 [ sgg ]: 17, <Enter Availability>
-Error! AGE must be integer
-Error! AGE must be integer
+Error! AGE must be integer.
+Error! AGE must be integer.
 ======== Housekeeper List ========
 1. [ sgg ]: 17, <Enter Availability>
 ======== End of the list ========
@@ -19,15 +19,15 @@ The item and its pax has been added to the list of items in the inventory.
 There are currently 2 items within the inventory.
 Noted!
 [ Tom ]: 33, <Enter Availability>
-This person has already been recorded
+Error! This person has already been recorded.
 Noted!
 [ sally ]: 17, <Enter Availability>
 1. Item Name: Toilet Roll Item Pax: 15
 2. Item Name: Spoon Item Pax: 2
 Added sus availability into records
-User does not exist
+Error! User does not exist.
 Added jane availability into records
-User does not exist
+Error! User does not exist.
 Added tom availability into records
 Error! Invalid Command -> Availability NAME @ M,T,W,T,F,S,S
 ======== Housekeeper List ========
