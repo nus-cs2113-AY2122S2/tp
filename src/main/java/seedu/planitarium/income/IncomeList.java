@@ -26,6 +26,11 @@ public class IncomeList {
         numberOfIncomes++;
     }
 
+    /**
+     * Returns the amount of an income object in the list.
+     * @param index The index of the income on the person's income list
+     * @return The income amount
+     */
     public double getIncomeValue(int index) {
         return incomeArrayList.get(index - 1).getAmount();
     }
