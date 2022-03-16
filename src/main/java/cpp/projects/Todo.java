@@ -1,7 +1,7 @@
 package cpp.projects;
 
 /**
- * Represents a t/odo in a project.
+ * Represents a todo in a project.
  */
 
 public class Todo {
@@ -19,6 +19,7 @@ public class Todo {
 
     /**
      * Gets the status of a todo.
+     *
      * @return todo status
      */
 

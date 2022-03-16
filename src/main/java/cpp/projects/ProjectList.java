@@ -75,10 +75,10 @@ public class ProjectList {
 
     /**
      * Add a todo to one project in projectList.
+     *
      * @param indexString Index of the project
      * @param todoString The todo task the user wants to add to the project
      */
-
     public void addTodoToProject(String indexString, String todoString) {
         assert (todoString != null && todoString != "") : "Cannot add todo string to a project.";
         int index;
@@ -100,10 +100,10 @@ public class ProjectList {
 
     /**
      * Marks a todo in a project as done.
+     *
      * @param indexStringProj Index of the project.
      * @param indexStringTodo Index of the todo.
      */
-
     public void markTodoAsDone(String indexStringProj, String indexStringTodo) throws NegativeIndexException {
         int indexProj;
         int indexTodo;

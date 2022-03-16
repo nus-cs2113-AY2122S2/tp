@@ -24,7 +24,8 @@ public class Project {
     }
 
     /**
-     * Marks a t/odo at specific index as done.
+     * Marks a todo at specific index as done.
+     *
      * @param index the target index
      */
     public void markTodoAsDone(int index) {

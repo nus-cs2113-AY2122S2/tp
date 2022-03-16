@@ -6,8 +6,6 @@ import cpp.exceptions.NegativeIndexException;
 import cpp.projects.ProjectList;
 import cpp.response.Response;
 
-import java.util.Scanner;
-
 public class CommandHandler {
 
     private String[] commands;
