@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, ItemList itemList) {
+    public void execute(ItemList itemList, Ui ui) {
         Item removedItem = itemList.removeItem(index);
         ui.showOutput(removedItem + " has been deleted.");
     }
