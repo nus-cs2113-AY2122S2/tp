@@ -32,11 +32,29 @@ public class Ui {
     }
 
     /**
-     * Prints output.
+     * Prints output on stdout based on the given String.
      *
      * @param output String to print
      */
     public void showOutput(String output) {
         System.out.println(output);
+    }
+
+    /**
+     * Show errors on stderr based on the given String.
+     *
+     * @param output the output to show
+     */
+    public void showError(String output) {
+        System.err.println(output);
+    }
+
+    /**
+     * Show errors on stderr based on the message from the given Exception.
+     *
+     * @param e the associated Exception raised from the error
+     */
+    public void showError(Exception e) {
+        System.err.println(e.getMessage());
     }
 }
