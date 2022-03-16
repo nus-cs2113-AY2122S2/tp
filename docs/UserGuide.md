@@ -8,8 +8,12 @@
 
 {Give steps to get started quickly}
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+1. Ensure that you have _Java 11_ or above installed. The link to _Java 11_ installer is [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
+2. Download the latest version of `Mod Happy` from [here](http://link.to/duke).
+3. Copy the jar file into an empty folder.
+4. Open a terminal on your laptop, and go to the working directory where the file is saved.
+5. Run the command  `java -jar tp.jar` to start the program.
+6. You can now enter different commands.
 
 ## Features
 
@@ -28,10 +32,10 @@ All parameters except MODULE_CODE are surrounded by double quotation marks e.g. 
 
 Deletes an object as indicated by the command argument.
 
-- Delete a module </br>
+- Delete a module </br></br>
   Format: `del /m MODULE_CODE`</br></br>
   Example to delete a module: `del /m CS2113T`</br></br>
-- Delete a task </br>
+- Delete a task </br></br>
   Format: `del /t TASK_NUMBER [-m MODULE_CODE]`</br></br>
   Example to delete a general task: `del /t sleep later`</br>
   Example to delete a module task: `del /t review pr -m CS2113T`</br>
@@ -40,7 +44,24 @@ Deletes an object as indicated by the command argument.
 
 ### Marking a task: `mark`
 
+Mark a task as completed or uncompleted with the given task number from the specified module. If no module code is given, the task to be marked will be drawn from the “general tasks” list.
+
+- Mark a task as completed </br></br>
+  Format: `mark /c TASK_INDEX [-m MODULE_CODE]` </br></br>
+  Example to mark a general task as completed: `mark /c lab report`</br>
+  Example to mark a module task as completed: `mark /c merge pr -m CS2113T`</br></br>
+- Mark a task as uncompleted </br></br>
+  Format: `mark /u TASK_INDEX [-m MODULE_CODE]` </br></br>
+  Example to mark a general task as uncompleted: `mark /u lab report`</br>
+  Example to mark a module task as uncompleted: `mark /u merge pr -m CS2113T`</br></br>
+
 ### Listing all tasks/modules: `list`
+
+Displays a list of all tasks, some of which are grouped by module code while the rest fall under "general tasks" list.
+
+Format: `list`
+
+Example: `list`
 
 ### Clearing the list: `reset`
 
