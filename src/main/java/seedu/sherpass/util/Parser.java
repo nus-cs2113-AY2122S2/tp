@@ -358,20 +358,20 @@ public class Parser {
      * @param rawUserInput Raw user input.
      * @param ui           UI.
      */
-    public static void parseStudyMode(String rawUserInput, Ui ui) {
+    public static void parseStudyMode(String rawUserInput, Ui ui, TimerLogic timerLogic) {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
-            TimerLogic.callStartTimer(parsedInput);
+            timerLogic.callStartTimer(parsedInput);
             break;
         case "pause":
-            TimerLogic.callPauseTimer();
+            timerLogic.callPauseTimer();
             break;
         case "resume":
-            TimerLogic.callResumeTimer();
+            timerLogic.callResumeTimer();
             break;
         case "stop":
-            TimerLogic.callStopTimer();
+            timerLogic.callStopTimer();
             break;
         default:
             ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);

@@ -6,8 +6,10 @@ import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.TimerLogic;
 import seedu.sherpass.util.Ui;
 
+import static seedu.sherpass.constant.Message.GOODBYE_MESSAGE_STUDY;
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_STUDY;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_STUDY;
+import static seedu.sherpass.util.Parser.parseStudyMode;
 
 public class StudyCommand extends Command {
     public static final String COMMAND_WORD = "study";
@@ -15,12 +17,37 @@ public class StudyCommand extends Command {
             + "User can access timer features while in a study session.\n\n"
             + HELP_MESSAGE_STUDY;
 
-    @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    /**
+     * Method is called when user chooses to enter Study mode. User is able to start, pause and stop a timer in Study
+     * mode. Only one timer can be running at a time. User can leave Study mode by typing "leave".
+     */
+    private void enterStudyMode(Ui ui, TimerLogic timerLogic) {
         ui.showToUser(WELCOME_MESSAGE_STUDY);
         ui.showLine();
+        String userInput = ui.readCommand();
+        while (!userInput.contains("leave")) {
+            ui.showLine();
+            parseStudyMode(userInput, ui, timerLogic);
+            ui.showLine();
+            userInput = ui.readCommand();
+            if (userInput.contains("start") && !timerLogic.isTimerRunning()) {
+                timerLogic.callResetTimer();
+            }
+        }
+    }
+
+    public void leaveStudyMode(Ui ui, TimerLogic timerLogic) {
+        if (timerLogic.isTimerRunning()) {
+            timerLogic.callStopTimer();
+        }
+        ui.showLine();
+        ui.showToUser(GOODBYE_MESSAGE_STUDY);
+    }
+
+    @Override
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         TimerLogic timerLogic = new TimerLogic(ui);
-        timerLogic.enterStudyMode();
-        timerLogic.leaveStudyMode();
+        enterStudyMode(ui, timerLogic);
+        leaveStudyMode(ui, timerLogic);
     }
 }

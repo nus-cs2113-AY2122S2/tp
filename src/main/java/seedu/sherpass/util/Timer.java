@@ -1,6 +1,5 @@
 package seedu.sherpass.util;
 
-import static seedu.sherpass.util.TimerLogic.isTimerRunning;
 
 import static seedu.sherpass.constant.TimerConstant.TIME_INTERVAL;
 import static seedu.sherpass.constant.TimerConstant.NO_TIME_LEFT;
@@ -9,6 +8,7 @@ import static seedu.sherpass.constant.TimerConstant.ONE_HOUR;
 
 public class Timer extends Thread {
 
+    private boolean isTimerRunning = false;
     private volatile boolean isTimerPaused = false;
     private boolean forcedStop = false;
     private boolean hasTimeLeft = false;
@@ -23,6 +23,15 @@ public class Timer extends Thread {
     public Timer(Ui ui) {
         timeLeft = NO_TIME_LEFT;
         Timer.ui = ui;
+    }
+
+    /**
+     * Returns timer running status.
+     *
+     * @return Returns true if timer has started. False otherwise.
+     */
+    public boolean isTimerRunning() {
+        return isTimerRunning;
     }
 
     /**
