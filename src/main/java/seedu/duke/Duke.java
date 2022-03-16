@@ -10,7 +10,7 @@ public class Duke {
     private static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
-        TextUi.showWelcomeMessage();
+        start();
         String name = in.nextLine();
         System.out.println(MESSAGE_DIVIDER);
         System.out.println("Hello! " + name);
@@ -21,5 +21,13 @@ public class Duke {
         String userInput = in.nextLine();
         Command.executeCommand(userInput, timetable, in);
         TextUi.showGoodByeMessage();
+    }
+
+    private static void start() {
+        try {
+            TextUi.showWelcomeMessage();
+        } catch (RuntimeException e) {
+            TextUi.showInitFailedMessage();
+        }
     }
 }

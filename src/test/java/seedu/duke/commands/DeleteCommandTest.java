@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.Timetable;
 import seedu.duke.events.Lesson;
 import seedu.duke.exceptions.DuplicateEventException;
+import seedu.duke.exceptions.OverlappingEventException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.duke.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
@@ -14,7 +15,7 @@ public class DeleteCommandTest {
     Timetable timetable = new Timetable();
 
     @BeforeEach
-    void setUp() throws DuplicateEventException {
+    void setUp() throws DuplicateEventException, OverlappingEventException {
         Lesson lesson1 = new Lesson("John","CS2113","Friday",1230,1330,"online");
         Lesson lesson2 = new Lesson("John","CS2113","Friday",1400,1600,"physical");
         timetable.add(lesson1);

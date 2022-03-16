@@ -5,7 +5,10 @@ import seedu.duke.events.Lesson;
 import seedu.duke.Timetable;
 
 import seedu.duke.exceptions.DuplicateEventException;
+import seedu.duke.exceptions.OverlappingEventException;
+
 import static seedu.duke.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
+import static seedu.duke.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
 
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
@@ -34,6 +37,8 @@ public class AddCommand extends Command {
             return addConfirmation(newEvent);
         } catch (DuplicateEventException dee) {
             return ERROR_DUPLICATE_EVENT;
+        } catch (OverlappingEventException oee) {
+            return ERROR_OVERLAPPING_EVENT;
         }
     }
 
