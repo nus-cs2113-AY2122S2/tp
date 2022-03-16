@@ -51,4 +51,18 @@ class DukeTest {
     public void commandParser_addCommandInvalidAge_exceptionThrown() {
         assertThrows(InvalidAgeException.class, () -> new CommandParser().parse("Add Housekeeper Susan ~ fifty"));
     }
+
+    @Test
+    public void commandParser_addCommandNameAvailability_success() throws Exception {
+        CommandParser parser = new CommandParser();
+        Command command = parser.parse("Availability Susan @ Monday");
+        AddAvailabilityCommand addAvailabilityCommand = (AddAvailabilityCommand) command;
+        assertEquals("Monday", addAvailabilityCommand.getAvailability());
+        assertEquals("Susan", addAvailabilityCommand.getName());
+    }
+
+    @Test
+    public void commandParser_addCommandInvalidAvailability_exceptionThrown() {
+        assertThrows(InvalidAvailabilityException.class, () -> new CommandParser().parse("Availability Susan @ "));
+    }
 }
