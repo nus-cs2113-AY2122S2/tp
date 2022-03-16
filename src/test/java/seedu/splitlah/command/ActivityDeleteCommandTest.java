@@ -3,6 +3,7 @@ package seedu.splitlah.command;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +14,7 @@ class ActivityDeleteCommandTest {
 
     @BeforeEach
     void setUp() {
-        String sessionOneArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob";
+        String sessionOneArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob Charlie";
         Command createSessionOne = Parser.getCommand(sessionOneArgs);
         createSessionOne.run(manager);
         String activityOneArgs = "activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
@@ -38,6 +39,14 @@ class ActivityDeleteCommandTest {
         String argsMissingAidDelimiter = "activity /delete /sid 1";
         Command activityWithMissingAidDelimiter = Parser.getCommand(argsMissingAidDelimiter);
         assertEquals(InvalidCommand.class, activityWithMissingAidDelimiter.getClass());
+    }
+
+    @Test
+    public void run_sessionDoesNotExists_activityListSizeRemainsOne() throws InvalidDataException {
+        String userInput = "activity /delete /sid 3 /aid 1";
+        Command command = Parser.getCommand(userInput);
+        command.run(manager);
+        assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
     }
 
 }
