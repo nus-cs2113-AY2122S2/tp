@@ -334,4 +334,64 @@ class ParserTest {
             fail();
         }
     }
+
+    // parseSessionId()
+    @Test
+    void parseSessionId_missingDelimiter_exceptionThrown() {
+        String argumentWithoutSessionIdDelimiter = "sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            int output = Parser.parseSessionId(argumentWithoutSessionIdDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.SESSION_ID_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseSessionId_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutSessionIdArgument = "/sid  /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            int output = Parser.parseSessionId(argumentWithoutSessionIdArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.SESSION_ID_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseSessionId_delimiterExistsArgumentNotInteger_exceptionThrown() {
+        String argumentWithNonIntArgument = "/sid a1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            int output = Parser.parseSessionId(argumentWithNonIntArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + Parser.SESSION_ID_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseSessionId_delimiterExistsArgumentNegativeInteger_exceptionThrown() {
+        String argumentWithNegativeIntArgument = "/sid -9 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            int output = Parser.parseSessionId(argumentWithNegativeIntArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_ID_VALUE_NOT_POSITIVE;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseSessionId_delimiterExistsArgumentPositiveInteger_sessionId() {
+        String argumentWithDelimiterAndPositiveInt = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            int output = Parser.parseSessionId(argumentWithDelimiterAndPositiveInt);
+            assertEquals(3, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
 }
