@@ -1,6 +1,6 @@
 package seedu.duke.data;
 
-import seedu.duke.data.Item;
+import seedu.duke.exceptions.InvMgrException;
 
 import java.util.ArrayList;
 
@@ -17,5 +17,13 @@ public class ItemList {
 
     public Item removeItem(int index) {
         return this.itemList.remove(index);
+    }
+
+    public Item getItem(int index) {
+        return this.itemList.get(index);
+    }
+
+    public int getSize() {
+        return this.itemList.size();
     }
 }
