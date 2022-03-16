@@ -41,6 +41,7 @@ public class Parser {
         ArrayList<String> parameters = new ArrayList<String>();
         parameters.add(description);
         return parameters;
+    }
 
     public static String[] parseAddDoctor(String parameters) {
         String[] addDoctorParameters = parameters.split(",");
