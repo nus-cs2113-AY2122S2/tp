@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.Timetable;
+import static seedu.duke.ErrorMessages.ERROR_EMPTY_LIST;
 
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
@@ -8,7 +9,7 @@ public class ListCommand extends Command {
     @Override
     public String execute(Timetable timetable) {
         if (timetable.size() == 0) {
-            return "There are no lessons in your timetable yet!";
+            return ERROR_EMPTY_LIST;
         }
         String str = "";
         for (int i = 0; i < timetable.size(); i++) {
