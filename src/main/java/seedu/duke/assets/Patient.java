@@ -24,4 +24,9 @@ public class Patient extends Person {
                 + '\'' + ", DOB='" + getDob() + '\''
                 + ", DateOfAdmission='" + getDateAdmission() + '\'' + '}';
     }
+
+    public String saveString() {
+        return nric + "," + fullName + "," + age + "," + gender
+                + "," + address + "," + dob + "," + dateAdmission;
+    }
 }

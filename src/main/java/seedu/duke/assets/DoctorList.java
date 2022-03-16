@@ -64,4 +64,8 @@ public class DoctorList {
         }
         return doctorName;
     }
+
+    public ArrayList<Doctor> getList() {
+        return doctors;
+    }
 }

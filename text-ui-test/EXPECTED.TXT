@@ -1,3 +1,4 @@
+No saved data found!
 -------------------------
 Welcome! This is the Hospital Management System.
 Please type in your input:

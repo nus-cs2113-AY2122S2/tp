@@ -5,18 +5,17 @@ import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
 import seedu.duke.assets.DoctorList;
 import seedu.duke.helper.Command;
+import seedu.duke.helper.Storage;
 import seedu.duke.helper.UI;
 
 /**
  * Manager class contains the main loop that runs until application is terminated.
  */
 public class Manager {
-    private UI ui = new UI();
-    private Command command = new Command();
-    private PatientList patientList = new PatientList();
-    private MedicineList medicineList = new MedicineList();
-    private DoctorList doctorList = new DoctorList();
+    UI ui = new UI();
+    Command command = new Command();
     private boolean isTerminated = false;
+    private Storage storage = new Storage();
 
     /**
      * Main application loop that holds switch case statement.
@@ -29,31 +28,31 @@ public class Manager {
             String parameters = ui.readParameters();
             switch (commandWord) {
             case "add patient":
-                command.addPatient(patientList, parameters);
+                command.addPatient(storage.patients, parameters);
                 break;
             case "delete patient":
-                command.deletePatient(patientList, parameters);
+                command.deletePatient(storage.patients, parameters);
                 break;
             case "view patient":
-                command.viewPatient(patientList, parameters);
+                command.viewPatient(storage.patients, parameters);
                 break;
             case "add doctor":
-                command.addDoctor(doctorList, parameters);
+                command.addDoctor(storage.doctors, parameters);
                 break;
             case "delete doctor":
-                command.deleteDoctor(doctorList, parameters);
+                command.deleteDoctor(storage.doctors, parameters);
                 break;
             case "view doctor":
-                command.viewDoctor(doctorList, parameters);
+                command.viewDoctor(storage.doctors, parameters);
                 break;
             case "add medicine":
-                command.addMedicine(medicineList, parameters);
+                command.addMedicine(storage.medicines, parameters);
                 break;
             case "delete medicine":
-                command.deleteMedicine(medicineList, parameters);
+                command.deleteMedicine(storage.medicines, parameters);
                 break;
             case "view medicine":
-                command.viewMedicine(medicineList, parameters);
+                command.viewMedicine(storage.medicines, parameters);
                 break;
             case "help":
                 ui.printHelp();
@@ -66,6 +65,7 @@ public class Manager {
                 System.out.println(commandWord);
                 break;
             }
+            storage.saveData();
         }
     }
 }

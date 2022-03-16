@@ -47,4 +47,9 @@ public class MedicineList {
     public void delete(int number) {
         medicines.remove(number - 1);
     }
+
+    public ArrayList<Medicine> getList() {
+        return medicines;
+    }
+
 }
