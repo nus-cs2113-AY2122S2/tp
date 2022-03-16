@@ -18,8 +18,8 @@ import java.util.ArrayList;
 public class Storage {
     private File storageFile;
 
-    public Storage(String pathToStorageFile) {
-        storageFile = new File(pathToStorageFile);
+    public Storage(File storageFile) {
+        this.storageFile = storageFile;
         if (!storageFile.exists()) {
             try {
                 storageFile.createNewFile();
@@ -28,7 +28,6 @@ public class Storage {
                         + "You may still use MindMyMoney; however, your expenditure list will not be saved.");
             }
         }
-
     }
 
     /**

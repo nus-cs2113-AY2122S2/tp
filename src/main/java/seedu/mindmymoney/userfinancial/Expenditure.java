@@ -2,6 +2,8 @@ package seedu.mindmymoney.userfinancial;
 
 import seedu.mindmymoney.MindMyMoneyException;
 
+import java.util.Objects;
+
 /**
  * Represents user's expenditure.
  */
@@ -33,6 +35,20 @@ public class Expenditure {
     @Override
     public String toString() {
         return getDescription() + " of $" + getAmount();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Expenditure)) {
+            return false;
+        }
+        Expenditure expenditure = (Expenditure) object;
+        return description.equals(expenditure.description) && (amount == expenditure.amount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, amount);
     }
 
     private static final String CONTROL_SEQUENCE_BEGIN = "<%<";

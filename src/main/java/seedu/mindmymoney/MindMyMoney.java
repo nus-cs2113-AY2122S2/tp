@@ -3,6 +3,8 @@ package seedu.mindmymoney;
 import seedu.mindmymoney.command.Command;
 import seedu.mindmymoney.data.ExpenditureList;
 
+import java.io.File;
+
 /**
  * Represents the entry point of the MindMyMoney program. Initializes the program and starts interaction with the
  * user.
@@ -15,7 +17,7 @@ public class MindMyMoney {
 
     public MindMyMoney() {
         ui = new Ui();
-        storage = new Storage(STORAGE_FILENAME);
+        storage = new Storage(new File(STORAGE_FILENAME));
     }
 
     public void run() {
