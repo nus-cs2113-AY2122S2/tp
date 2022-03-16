@@ -53,7 +53,7 @@ public class Parser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
         default:
-            String feedback =ERROR_INVALID_COMMAND + '\n' + MESSAGE_HELP;
+            String feedback = ERROR_INVALID_COMMAND + '\n' + MESSAGE_HELP;
             return new CommandResult(feedback);
         }
     }
