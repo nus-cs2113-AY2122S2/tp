@@ -13,7 +13,10 @@ public class ClearCommand extends Command {
      */
     @Override
     public String execute(Timetable timetable) {
-        timetable.clear();
+        int numEntries = timetable.size();
+        for (int i = 0; i < numEntries; i++) {
+            timetable.remove(0);
+        }
         printClearConfirmation();
         return "";
     }

@@ -3,7 +3,6 @@ package seedu.duke.common;
 /**
  *  Container for user visible messages.
  */
-
 public class Messages {
     public static final String LOGO = " ___      ___ __________ __________ __________ ___ ___    "
             + "___ __________ ____________ ___ ____________ \n"
@@ -26,7 +25,7 @@ public class Messages {
             + "__________________________________________________";
     public static final String MESSAGE_GOODBYE = "See you again!";
     public static final String MESSAGE_ADD_FORMAT = "To add a lesson: add n/[Name] l/[Lesson] "
-            + "d/[day] st/[StartTime] et/[EndTime] m/[Mode]\n";
+            + "d/[Day] st/[StartTime] et/[EndTime] m/[Mode]\n";
     public static final String MESSAGE_DELETE_FORMAT = "To delete a lesson: delete [Index]\n";
     public static final String MESSAGE_LIST_FORMAT = "To list all lessons: list\n";
     public static final String MESSAGE_CLEAR_FORMAT = "To clear all entries: clear\n";
