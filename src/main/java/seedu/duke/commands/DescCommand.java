@@ -14,18 +14,14 @@ public class DescCommand extends Command {
 
     @Override
     public void execute(ItemList itemList, Ui ui) {
-        try {
-            // Get item from itemList by searching for the item's name
-            Item item = itemList.getItem(index);
+        // Get item from itemList by searching for the item's name
+        Item item = itemList.getItem(index);
 
-            // Get description of item found
-            String itemDescription = item.getDescription();
+        // Get description of item found
+        String itemDescription = item.getDescription();
 
-            // Print item name and description
-            ui.showOutput("Name of Item: " + item.toString() + System.lineSeparator()
-                    + "Description: " + itemDescription);
-        } catch (InvMgrException e) {
-            ui.showOutput("Please enter another search phrase");
-        }
+        // Print item name and description
+        ui.showOutput("Name of Item: " + item.toString() + System.lineSeparator()
+                + "Description: " + itemDescription);
     }
 }
