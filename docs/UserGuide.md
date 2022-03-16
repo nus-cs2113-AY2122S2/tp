@@ -1,7 +1,10 @@
 # User Guide
 
-## Contents
+SplitLah is a CLI program that lets users split bills proportionally amongst themselves after a group outing. SplitLah does
+the work of calculating how much each participant must pay across multiple activities, and keeps track of who paid the total
+bill for each activity.
 
+## Contents
 * [User Guide](#user-guide)
 * [Contents](#contents)
     * [Introduction](#introduction)
@@ -16,20 +19,15 @@
         * [Viewing an activity: `activity /view`](#viewing-an-activity-activity-view)
         * [Listing all activities in a session: `activity /list`](#listing-all-activities-in-a-session-activity-list)
         * [Settling all transactions for a session: `session /summary`](#settling-all-transactions-for-a-session-session-summary)
+        * [Exit](#exit)
     * [FAQ](#faq)
     * [Command Summary](#command-summary)
-
-
+    
 ## Introduction
-
-SplitLah is a CLI program that lets users split bills proportionally amongst themselves after a group outing. SplitLah does
-the work of calculating how much each participant must pay across multiple activities, and keeps track of who paid the total
-bill for each activity.
-
 Value proposition:
 
 - Allows users to keep track of several activities and their participants.
-- Splits costs evenly or independently depending on what is required.
+- Split costs evenly or independently depending on what is required.
 - Combines all payments due together for easy settlement of payments.
 - Can be operated quickly by an experienced typist.
 
@@ -44,14 +42,14 @@ Target users:
 the payer and how much each participant owes.
   - Example: `Lunch at a restaurant`
   - Consisting of the following participants:
-    - `Warren`, `Ivan`, `Roy`
+    - `Alice`, `Bob`, `Charlie`
   - Paid for by:
-    - `Warren`
+    - `Alice`
 - A session represents a period of time and stores one or more activities, as well as a list of participants. Each
 activity could have a different payer.
-  - Example: `Ivan's birthday`
+  - Example: `Bob's birthday`
   - Consisting of the following participants:
-    - `Warren`, `Ivan`, `Roy`
+    - `Alice`, `Bob`, `Charlie`
   - Consisting of the following activities:
     - `Breakfast at McDonald's`, `Lunch at a restaurant`, `Movie at a theatre`
     - Each paid for by a different person.
@@ -119,6 +117,7 @@ Format: `session /delete /sid [SESSION_ID]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
     * The unique identifier for a session can be retrieved with `session /list` command.
+
 > **💡 Note(s):**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
 >- A confirmation must be given before deletion takes place.
@@ -150,7 +149,7 @@ Example of usage:
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
-/c [TOTAL_COST] [OPTIONAL_ARGUMENTS]`
+/co [TOTAL_COST] [OPTIONAL_ARGUMENTS]`
 
 Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
 /cl [COST1 COST2 ...] [OPTIONAL_ARGUMENTS]`
@@ -173,22 +172,23 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 >- Each name in `[NAME1 NAME2 ...]` for the activity should be unique.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also be associated with the session referenced by
    `[SESSION_ID]`.
+>- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also only be a single word without whitespaces.
+   > <br>Example: `Alice Tan` is not allowed.
+>- The values that follow the delimiters `/co` and `/cl` can only have a maximum of 12 digits before
+   and 2 digits after the decimal point, if any.
+
 
 Examples of usage:
-1. Adds a new activity to a session with a session unique identifier of 1 named Class Lunch. Alice paid a total of $10
+1. Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid a total of $10
    for both Bob and herself which will be split equally between them later on.
-   - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /c 10` <br>
-
+   - `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /co 10` <br>
    ![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
- 
 <br>
 <br>
-2. Adds a new activity to a session with a session unique identifier of 1 named Class Lunch. Alice paid for both
+2. Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid for both
    Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.
-   - `activity /create /sid 1 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7` <br>
-
+   - `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7` <br>
    ![Activity create command [2] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[2].png)
-
 <br>
 <br>
 
@@ -211,16 +211,15 @@ Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 >- A confirmation must be given before deletion takes place.
 
 Example of usage:
-1. Remove an existing activity with a unique identifier of 1 from a session with a unique
-   identifier of 1.
-    - `activity /delete /sid 1 /aid 1` <br>
-    ![Activity delete command Screenshot]()
+1. Remove an existing activity with a unique identifier of 1 from a session with a unique <br> identifier of 2.
+   - `activity /delete /sid 2 /aid 1` <br>
+   ![Activity delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityDeleteCommand.png)
 <br>
 <br>
 
 ### Viewing an activity: `activity /view`
 
-> Displays details about an activity.<br>
+> Display details about an activity.<br>
 > An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
 
 Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
@@ -236,12 +235,9 @@ Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 
 
 Examples of usage:
-1. Views an activity with a unique identifier of 1 in a session with a session unique identifier of 1.
-    - `activity /view /sid 1 /aid 1`
-      <br>
+1. Views an activity with a unique identifier of 2 in a session with a session unique identifier of 2.
+    - `activity /view /sid 2 /aid 2` <br>
       ![Activity view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityViewCommand.png)
-      <br>
-   
 <br>     
 <br>
 
@@ -252,8 +248,6 @@ Examples of usage:
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `activity /list /sid [SESSION_ID]`
-
-
 * `[SESSION_ID]` refers to the unique identifier of the session.
     * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 
@@ -262,8 +256,8 @@ Format: `activity /list /sid [SESSION_ID]`
 
 
 Examples of usage:
-1. Lists all activities in a session with a unique identifier of 1.
-    - `activity /list /sid 1`
+1. Lists all activities in a session with a unique identifier of 2.
+    - `activity /list /sid 2`
       <br>
       ![Activity list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityListCommand.png)
       <br>
@@ -289,11 +283,16 @@ Example of usage:
    and Bob involved on 15-03-2022.
 2. An [activity](#creating-an-activity-activity-create) was created with activity named Class Lunch, where Alice paid for both
    Bob and herself with a total cost of $10.
-3. Get a session summary for an active session with a session unique identifier of 1.
+3. Get a session summary for an active session with a session unique identifier of 2.
    - `session /summary /sid 1` <br>
    ![Session summary command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionSummaryCommand.png)
 <br>
 <br>
+
+### Exit
+> Exits the application.
+
+Format: `exit`
  
 ## FAQ
 
@@ -303,14 +302,14 @@ Example of usage:
 
 ## Command Summary
 
-| Action                                   | Format                                                                                                                                                                                                           |
-|------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Add session                              | Format: `session /create /n [SESSION_NAME] /d [DATE] /pl [PARTICIPANTS]`<br><br> Example: `session /create /n Outing /d 15-03-2022 /pl Warren, Ivan, Roy`                                                        |
-| Delete session                           | Format: `session /delete /sid [SESSION_ID]`<br><br>Example: `session /delete /sid 1`                                                                                                                             |
-| Create activity and split costs evenly   | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /c [TOTAL_COST]`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /c 7.5`            |
-| Create activity and split costs manually | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /cl [COST1] [COST2]...`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /c 1 1 5.5` |
-| List activities                          | Format: `activity /list /sid [SESSION_ID]` <br><br>Example: `activity /list /sid 1`                                                                                                                              |
-| View an activity                         | Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]` <br><br>Example: `activity /view /sid 1 /aid 1`                                                                                                    |                                                                                                                                                                                                                  |
-| List sessions                            | Format: `session /list`                                                                                                                                                                                          |
-| Show session summary                     | Format: `session /summary /sid [SESSION_ID]`<br><br>Example: `session /summary /sid 1`                                                                                                                           |
-| Exit                                     | Format: `exit`                                                                                                                                                                                                   |                                                                                                                                                                                   |
+| Action                                   | Format                                                                                                                                                                                                            |
+|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Add session                              | Format: `session /create /n [SESSION_NAME] /d [DATE] /pl [PARTICIPANTS]`<br><br> Example: `session /create /n Outing /d 15-03-2022 /pl Warren, Ivan, Roy`                                                         |
+| Delete session                           | Format: `session /delete /sid [SESSION_ID]`<br><br>Example: `session /delete /sid 1`                                                                                                                              |
+| Create activity and split costs evenly   | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /co [TOTAL_COST]`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /co 7.5`           |
+| Create activity and split costs manually | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [PARTICIPANTS] /cl [COST1] [COST2]...`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /cl 1 1 5.5` |
+| List activities                          | Format: `activity /list /sid [SESSION_ID]` <br><br>Example: `activity /list /sid 1`                                                                                                                               |
+| View an activity                         | Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]` <br><br>Example: `activity /view /sid 1 /aid 1`                                                                                                     |                                                                                                                                                                                                                  |
+| List sessions                            | Format: `session /list`                                                                                                                                                                                           |
+| Show session summary                     | Format: `session /summary /sid [SESSION_ID]`<br><br>Example: `session /summary /sid 1`                                                                                                                            |
+| Exit                                     | Format: `exit`                                                                                                                                                                                                    |                                                                                                                                                                                   |
