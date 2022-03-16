@@ -31,16 +31,13 @@ public class StorageTest {
     }
 
     @Test
-    void loadData_invalidJSONFile_throwException() throws InvMgrException {
+    void loadData_invalidJsonNFile_throwException() throws InvMgrException {
         Storage testStorage = new Storage("test/data/load/invalidData.json");
         assertThrows(InvMgrException.class, () -> testStorage.loadData());
     }
 
     @Test
-    void loadData_validJSONFile_validList() throws InvMgrException {
-        Storage testStorage = new Storage("test/data/load/validInputData.json");
-        ArrayList<Item> testItemList = testStorage.loadData();
-
+    void loadData_validJsonNFile_validList() throws InvMgrException {
         ArrayList<Item> expectedItemList = new ArrayList<>();
         Item item1 = new Item("Markers", 3, "Drawing");
         Item item2 = new Item("Whiteboard", 1, "To draw on");
@@ -48,6 +45,9 @@ public class StorageTest {
         expectedItemList.add(item1);
         expectedItemList.add(item2);
         expectedItemList.add(item3);
+
+        Storage testStorage = new Storage("test/data/load/validInputData.json");
+        ArrayList<Item> testItemList = testStorage.loadData();
 
         assertListEquals(expectedItemList, testItemList);
     }
@@ -59,8 +59,7 @@ public class StorageTest {
     }
 
     @Test
-    void writeData_validList_validJSON() throws InvMgrException {
-        Storage testStorage = new Storage("test/data/read/actualData.json");
+    void writeData_validList_validJsonN() throws InvMgrException {
         ArrayList<Item> itemList = new ArrayList<>();
         Item item1 = new Item("Markers", 3, "Drawing");
         Item item2 = new Item("Whiteboard", 1, "To draw on");
@@ -69,6 +68,7 @@ public class StorageTest {
         itemList.add(item2);
         itemList.add(item3);
 
+        Storage testStorage = new Storage("test/data/read/actualData.json");
         testStorage.writeData(itemList);
 
         Storage expectedStorage = new Storage("test/data/read/expectedData.json");
@@ -95,14 +95,14 @@ public class StorageTest {
     }
 
     /**
-     * Constructs a HashSets to do unordered comparison of two {@code ArrayList<Item>}
+     * Constructs a HashSets to do unordered comparison of two {@code ArrayList<Item>}.
      *
      * @param expectedList the list to expect
      * @param actualList the list to check against
      */
     private void assertListEquals(ArrayList<Item> expectedList, ArrayList<Item> actualList) {
         HashSet<String> checker = new HashSet<String>();
-        for (int i=0; i<actualList.size(); i++) {
+        for (int i = 0; i < actualList.size(); i++) {
             checker.add(expectedList.get(i).saveString());
             checker.add(actualList.get(i).saveString());
         }

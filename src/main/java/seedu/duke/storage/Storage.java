@@ -67,7 +67,6 @@ public class Storage {
      * @throws InvMgrException for any IO exceptions while writing
      */
     public void writeData(ArrayList<Item> itemList) throws InvMgrException {
-        assert itemList != null : "itemList is null";
         if (itemList == null) {
             throw new NullPointerException();
         }
