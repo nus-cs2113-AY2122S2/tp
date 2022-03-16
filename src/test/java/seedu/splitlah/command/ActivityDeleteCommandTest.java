@@ -45,8 +45,16 @@ class ActivityDeleteCommandTest {
     }
 
     @Test
-    public void run_sessionDoesNotExists_activityListSizeRemainsOne() throws InvalidDataException {
+    public void run_sessionDoesNotExists_activityListSizeRemainsTwo() throws InvalidDataException {
         String userInput = "activity /delete /sid 3 /aid 1";
+        Command command = Parser.getCommand(userInput);
+        command.run(manager);
+        assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
+    }
+
+    @Test
+    public void run_activityDoesNotExists_activityListSizeRemainsTwo() throws InvalidDataException {
+        String userInput = "activity /delete /sid 1 /aid 3";
         Command command = Parser.getCommand(userInput);
         command.run(manager);
         assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
