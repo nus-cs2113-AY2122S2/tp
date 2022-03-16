@@ -83,11 +83,14 @@ public class Command {
 
     public void addMedicine(MedicineList medicineList, String parameters) {
         if (isNull(parameters)) {
+            System.out.println("Invalid format. Please follow the below example and try again.");
+            System.out.println("add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
             return;
         }
         String[] parameterArray = Parser.parseAddMedicine(parameters);
         if (parameterArray == null) {
-            System.out.println("Wrong Medicine Format");
+            System.out.println("There are missing parameters. Please follow the below example and try again.");
+            System.out.println("add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
             return;
         }
         medicineList.add(parameterArray);
@@ -128,6 +131,7 @@ public class Command {
 
     public void deleteMedicine(MedicineList medicineList, String stringIndex) {
         if (isNull(stringIndex)) {
+            System.out.println("Parameter missing.");
             return;
         }
         try {
