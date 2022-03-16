@@ -1,19 +1,37 @@
 package seedu.duke;
 
+/**
+ * Extract name and age of housekeeper from user input and record it into the
+ * housekeeper list.
+ */
 public class AddHousekeeperCommand extends Command {
     private Housekeeper housekeeper;
     private static final String AGE_INDICATE = "~";
     private Ui ui = new Ui();
 
+    /**
+     * Creates a new housekeeper profile consisting of their name and age which would be recorded
+     * into housekeeper list.
+     *
+     * @param commandStringWithoutCommand Input of age and name given by user.
+     * @throws HotelLiteManagerException When user input an empty data.
+     */
     public AddHousekeeperCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
         if (commandStringWithoutCommand.isEmpty()) {
             throw new InvalidHousekeeperProfile();
         }
         Housekeeper housekeeper = extractDetails(commandStringWithoutCommand);
         setHousekeeper(housekeeper);
-        ui.printHousekeeperNoted(housekeeper);
     }
 
+    /**
+     * Extract name and age details of the housekeeper.
+     *
+     * @param commandStringWithoutCommand Input given by user.
+     * @return housekeeper profile.
+     * @throws InvalidAgeException       Age enter is invalid/
+     * @throws InvalidHousekeeperProfile Command enter regarding the housekeeper profile is wrong.
+     */
     private Housekeeper extractDetails(String commandStringWithoutCommand)
             throws InvalidAgeException, InvalidHousekeeperProfile {
         int ageNumber;
@@ -46,8 +64,15 @@ public class AddHousekeeperCommand extends Command {
     }
 
     @Override
-    public void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList listOfItems, Ui ui)
-            throws HotelLiteManagerException, WrongCommandException {
+    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList roomList,
+                        ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
+        boolean isRecorded = housekeeperList.hasNameAdded(getHousekeeper().getName());
+        if (!isRecorded) {
+            housekeeperList.addHousekeeper(getHousekeeper());
+            ui.printHousekeeperNoted(housekeeper);
+        } else {
+            ui.printMessage("This person has already been recorded");
+        }
 
     }
 }

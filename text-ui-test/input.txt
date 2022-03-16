@@ -11,5 +11,8 @@ Add Item Name:Toilet Roll Pax:
 Add Item Name:Toilet Roll Pax:-1
 Add Item Name:Toilet Roll Pax:0
 Add Item Name:Spoon Pax:2
+Add Housekeeper Tom ~ 33
+Add Housekeeper tOm ~ 33
+Add Housekeeper sally ~ 17
 View Item In Inventory
 bye

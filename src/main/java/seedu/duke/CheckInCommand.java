@@ -5,8 +5,8 @@ public class CheckInCommand extends Command {
     int roomId;
 
     @Override
-    public void execute(SatisfactionList satisfactionList, RoomList list, ItemList itemList, Ui ui)
-            throws InvalidRoomNumberException {
+    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList list,
+                        ItemList itemList, Ui ui) throws InvalidRoomNumberException {
         this.roomList = list;
         for (Room room : list.getRoomList()) {
             if (room.getRoomId() == roomId) {

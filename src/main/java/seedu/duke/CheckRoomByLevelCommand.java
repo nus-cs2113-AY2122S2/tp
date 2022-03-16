@@ -9,7 +9,8 @@ public class CheckRoomByLevelCommand extends Command {
     }
 
     @Override
-    public void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList itemList, Ui ui)
+    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList roomList,
+                        ItemList itemList, Ui ui)
             throws InvalidLevelException {
         boolean isValidLevel = false;
         for (Room room : roomList.getRoomList()) {

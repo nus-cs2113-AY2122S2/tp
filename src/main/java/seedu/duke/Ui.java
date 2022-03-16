@@ -30,6 +30,10 @@ public class Ui {
         System.out.println(exception.getErrorMessage());
     }
 
+    public void printMessage(String message) {
+        System.out.println(message);
+    }
+
     public void printHousekeeperNoted(Housekeeper housekeeper) {
         System.out.println("Noted!");
         System.out.println(housekeeper);
