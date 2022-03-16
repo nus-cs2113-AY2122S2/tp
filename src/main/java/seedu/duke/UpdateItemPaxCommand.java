@@ -87,6 +87,7 @@ public class UpdateItemPaxCommand extends Command {
      *                         must be included for the execution override.
      * @param satisfactionList The given list of Satisfaction objects. N/A for this class, but
      *                         must be included for the execution override.
+     * @param assignmentMap    The assignments of the various housekeepers.
      * @param roomList         The given list of Room objects. N/A for this class, but
      *                         must be included for the execution override.
      * @param listOfItems      The list of items within the inventory.
@@ -94,7 +95,8 @@ public class UpdateItemPaxCommand extends Command {
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      */
     @Override
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList roomList,
+    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
+                        AssignmentMap assignmentMap, RoomList roomList,
                         ItemList listOfItems, Ui ui) throws HotelLiteManagerException {
         listOfItems.updateItemPaxInList(item);
         ui.printUpdateItemPaxAcknowledgementMessage(item);

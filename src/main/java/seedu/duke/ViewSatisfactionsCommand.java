@@ -27,7 +27,8 @@ public class ViewSatisfactionsCommand extends Command {
      * @param ui               The user interface for this execution method.
      */
     @Override
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList roomList,
+    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
+                        AssignmentMap assignmentMap, RoomList roomList,
                         ItemList itemList, Ui ui) {
         int number = 1;
         ArrayList<Satisfaction> satisfactionArrayList = satisfactionList.getSatisfactionList();

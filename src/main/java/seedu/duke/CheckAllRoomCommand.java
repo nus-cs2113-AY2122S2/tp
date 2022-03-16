@@ -22,7 +22,8 @@ public class CheckAllRoomCommand extends Command {
      * @param itemList The given list of Item objects.
      * @param ui The user interface for this execution method.
      */
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList roomList,
+    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
+                        AssignmentMap assignmentMap, RoomList roomList,
                         ItemList itemList, Ui ui) {
         this.roomList = new RoomList();
         System.out.println(TABLE_HEAD);

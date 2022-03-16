@@ -17,9 +17,10 @@ public class AddSatisfactionCommand extends Command {
     /**
      * Extracts the customer name and satisfaction value from user input,
      * uses these two values to create a corresponding Satisfaction object.
+     *
      * @param commandStringWithoutCommand The user input (should be of form "[customerName] [satisfactionValue]").
      * @throws HotelLiteManagerException If there is an error in user input (e.g. empty customer name, empty
-     *     satisfaction value, or invalid satisfaction value).
+     *                                   satisfaction value, or invalid satisfaction value).
      */
     public AddSatisfactionCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
         String customerName = "";
@@ -41,6 +42,7 @@ public class AddSatisfactionCommand extends Command {
     /**
      * Helper method for AddSatisfactionCommand. Extracts the customer's name
      * from the user input.
+     *
      * @param userInput The user input (should be of form "[customerName] [satisfactionValue]").
      * @return The name of the customer (String).
      * @throws HotelLiteManagerException If there is an error in user input (the customer's name is empty).
@@ -60,10 +62,11 @@ public class AddSatisfactionCommand extends Command {
     /**
      * Helper method for AddSatisfactionCommand. Extracts the customer's satisfaction value
      * from user input.
+     *
      * @param userInput The user input (should be of form "[customerName] [satisfactionValue]").
      * @return The customer's satisfaction value (should be an integer from 1-5 inclusive).
      * @throws HotelLiteManagerException If there is an error in user input (the satisfaction value is
-     *     empty or is not an integer between 1 and 5).
+     *                                   empty or is not an integer between 1 and 5).
      */
     private int extractSatisfactionValue(String userInput) throws HotelLiteManagerException {
         String[] splitInput = userInput.split(" ");
@@ -95,7 +98,8 @@ public class AddSatisfactionCommand extends Command {
      *                 must be included for the execution override.
      * @param ui The user interface for this execution method.
      */
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList roomList,
+    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
+                        AssignmentMap assignmentMap, RoomList roomList,
                         ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
         satisfactionList.addSatisfaction(satisfaction);
         ui.printAddSatisfactionAcknowledgementMessage(satisfactionList, satisfaction);

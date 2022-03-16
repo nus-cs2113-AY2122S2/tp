@@ -38,31 +38,9 @@ class DukeTest {
         assertThrows(InvalidCommandException.class, () -> new CommandParser().parse("Add Item"));
     }
 
-    @Test
-    public void commandParser_addCommandNameAge_success() throws Exception {
-        CommandParser parser = new CommandParser();
-        Command command = parser.parse("Add Housekeeper Susan ~ 23");
-        AddHousekeeperCommand addHousekeeperCommand = (AddHousekeeperCommand) command;
-        assertEquals("Susan", addHousekeeperCommand.getHousekeeper().getName());
-        assertEquals(23, addHousekeeperCommand.getHousekeeper().getAge());
-    }
 
     @Test
-    public void commandParser_addCommandInvalidAge_exceptionThrown() {
-        assertThrows(InvalidAgeException.class, () -> new CommandParser().parse("Add Housekeeper Susan ~ fifty"));
-    }
-
-    @Test
-    public void commandParser_addCommandNameAvailability_success() throws Exception {
-        CommandParser parser = new CommandParser();
-        Command command = parser.parse("Availability Susan @ Monday");
-        AddAvailabilityCommand addAvailabilityCommand = (AddAvailabilityCommand) command;
-        assertEquals("Monday", addAvailabilityCommand.getAvailability());
-        assertEquals("Susan", addAvailabilityCommand.getName());
-    }
-
-    @Test
-    public void commandParser_addCommandInvalidAvailability_exceptionThrown() {
-        assertThrows(InvalidAvailabilityException.class, () -> new CommandParser().parse("Availability Susan @ "));
+    public void commandParser_addCommandInvalidView_exceptionThrown() {
+        assertThrows(WrongCommandException.class, () -> new CommandParser().parse("ViewRecorded Housekeeper"));
     }
 }
