@@ -50,17 +50,11 @@ public class OrderController extends Controller {
 
     private void addOrder() throws OperationTerminationException {
         boolean notQuit = true;
-        String userInput = InputParser.getString("Enter dishes you want to order (Q/q to exit): ");
-        if (userInput == "Q" || userInput == "q") {
-            notQuit = false;
-        }
+        String userInput = InputParser.getString("Enter dishes you want to order (enter '-' to exit): ");
         while (notQuit) {
             Object inputObj = userInput;
             int size = orderManager.addDishToOrder(inputObj);
             userInput = InputParser.getString("You’ve already added " + size + " dish(es), some more: \n");
-            if (userInput == "Q" || userInput == "q") {
-                notQuit = false;
-            }
         }
     }
 

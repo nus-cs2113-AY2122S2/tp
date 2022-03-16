@@ -6,10 +6,6 @@ import java.util.List;
 public class Order {
     private ArrayList<Dish> dishes = null;
 
-    public <T> Order(List<T> asList) {
-        
-    }
-
     public Order() {
         this.dishes = new ArrayList<>();
     }
