@@ -26,6 +26,6 @@ Item name: chairs
 Item description: Empty Description
 Item quantity: 86
 Another command?
-There are 86 goods in total
+There are 86 goods in total.
 Another command?
 Bye
