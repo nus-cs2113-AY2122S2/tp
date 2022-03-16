@@ -30,22 +30,26 @@ class SessionCreateCommandTest {
      */
     @Test
     public void prepare_hasMissingDelimiter_InvalidCommand() {
-        // Case 1: Missing /n delimiter
+        // Case 1: Missing /n delimiter.
         String argsMissingNameDelimiter = "session /create /d 15-02-2022 /pl Alice Bob";
         Command sessionWithMissingNameDelimiter = Parser.getCommand(argsMissingNameDelimiter);
         assertEquals(InvalidCommand.class, sessionWithMissingNameDelimiter.getClass());
 
-        // Case 2: Missing /d delimiter
+        // Case 2: Missing /d delimiter.
         String argsMissingDateDelimiter = "session /create /n Class outing /pl Alice Bob";
         Command sessionWithMissingDateDelimiter = Parser.getCommand(argsMissingDateDelimiter);
         assertEquals(InvalidCommand.class, sessionWithMissingDateDelimiter.getClass());
 
-        // Case 3: Missing /pl delimiter
+        // Case 3: Missing /pl delimiter.
         String argsMissingPersonListDelimiter = "session /create /n Class outing /d 15-02-2022";
         Command sessionWithMissingPersonListDelimiter = Parser.getCommand(argsMissingPersonListDelimiter);
         assertEquals(InvalidCommand.class, sessionWithMissingPersonListDelimiter.getClass());
     }
 
+    /**
+     * Checks if session is created successfully and added into list of sessions.
+     */
+    @Test
     public void run_validCommand_sessionListSizeBecomesThree() {
         String userInput = "session /create /n Class gathering /d 15-02-2022 /pl Alice Bob";
         Command command = Parser.getCommand(userInput);
@@ -69,6 +73,10 @@ class SessionCreateCommandTest {
         assertEquals(2, manager.getProfile().getSessionList().size());
     }
 
+    /**
+     * Checks if session unique identifier is incremented if a session is created with duplicated person names.
+     */
+    @Test
     public void run_hasOneNameDuplicate_sessionIdNotIncremented() {
         int newSessionId = manager.getProfile().getNewSessionId();
         String userInput = "session /create /n Class outing /d 23-02-2022 /pl Alice Alice Bob";
@@ -88,6 +96,12 @@ class SessionCreateCommandTest {
         command.run(manager);
         assertEquals(2, manager.getProfile().getSessionList().size());
     }
+
+    /**
+     * Checks if session unique identifier is incremented if a session is created when
+     * a session with the same name exists.
+     */
+    @Test
     public void run_hasSessionDuplicate_sessionIdNotIncremented() {
         int newSessionId = manager.getProfile().getNewSessionId();
         String userInput = "session /create /n Class outing /d 15-02-2022 /pl Mallory Eves";
