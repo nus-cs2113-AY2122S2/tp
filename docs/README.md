@@ -1,4 +1,4 @@
-# Duke
+# Mod Happy
 
 {Give product intro here}
 
