@@ -23,8 +23,8 @@ public class DescCommand extends Command {
             String itemDescription = item.getDescription();
 
             // Print item name and description
-            ui.showOutput("Name of Item: " + itemName + System.lineSeparator() +
-                    "Description: " + itemDescription);
+            ui.showOutput("Name of Item: " + itemName + System.lineSeparator()
+                    + "Description: " + itemDescription);
         } catch (InvMgrException e) {
             ui.showOutput("Please enter another search phrase");
         }
