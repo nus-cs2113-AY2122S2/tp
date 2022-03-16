@@ -48,7 +48,15 @@ public class IncomeList {
         numberOfIncomes--;
     }
 
+    /**
+     * Returns the description of an income object from a
+     * person's expenditure list.
+     * @param index The index of the income on the list
+     * @return The description of the income
+     */
     public String getDescription(int index) {
+        assert (index > 0);
+        assert (index <= numberOfIncomes);
         return incomeArrayList.get(index - 1).getDescription();
     }
 
