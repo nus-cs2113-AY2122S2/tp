@@ -3,12 +3,12 @@ Creating save directory...
 Creating new save state...
 ____________________________________________________________
 Welcome to
-[94m  ____  _
- / ___|| |__   ___ _ __ [96m_ __   __ _ ___ ___
-[94m \___ \| '_ \ / _ \ '__| [96m'_ \ / _` / __/ __|
-[94m  ___) | | | |  __/ |  [96m| |_) | (_| \__ \__ \
-[94m |____/|_| |_|\___|_|  [96m| .__/ \__,_|___/___/
-[94m                       [96m|_|[0m
+[32;1m  ____  _
+ / ___|| |__   ___ _ __ [92;1m_ __   __ _ ___ ___
+[32;1m \___ \| '_ \ / _ \ '__| [92;1m'_ \ / _` / __/ __|
+[32;1m  ___) | | | |  __/ |  [92;1m| |_) | (_| \__ \__ \
+[32;1m |____/|_| |_|\___|_|  [92;1m| .__/ \__,_|___/___/
+[32;1m                       [92;1m|_|[0m
 How can I help you today?
 ____________________________________________________________
 Your schedule is empty today.
@@ -144,6 +144,47 @@ Here are the tasks in your list:
 6. [ ] find a wife  (by: Tue, 12/12/2023) (reminder on: Tue, 10/10/2023)
 ____________________________________________________________
 A total of 6 item(s) have been found!
+____________________________________________________________
+____________________________________________________________
+Gotcha! Entering study mode...
+Done! To get started, enter one of the three default timers
+using 'start <mode_number>':
+1) 30 minutes
+2) 1 hour
+3) 1.5 hours
+
+For testing purposes, you may start a 30s timer
+with mode number 0.
+Otherwise, feel free to choose your own timer with
+'start /custom <timer_duration>'.
+____________________________________________________________
+____________________________________________________________
+Oops! Your timer input does not seem to be correct.
+
+Please select one of the three default modes with
+	'start <mode_number>'
+
+or choose your own custom timer with
+	'start /custom <timer_duration>'
+____________________________________________________________
+____________________________________________________________
+Oops! Your timer input does not seem to be correct.
+
+Please select one of the three default modes with
+	'start <mode_number>'
+
+or choose your own custom timer with
+	'start /custom <timer_duration>'
+____________________________________________________________
+____________________________________________________________
+There is no timer running currently!
+____________________________________________________________
+____________________________________________________________
+The timer has already stopped.
+____________________________________________________________
+____________________________________________________________
+Leaving study session...
+Welcome back to the main session! How can I help you?
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon! :)
