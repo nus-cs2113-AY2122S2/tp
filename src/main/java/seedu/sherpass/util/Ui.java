@@ -12,21 +12,21 @@ public class Ui {
     private static final String PARTITION_LINE = "______________________________"
             + "______________________________";
     private static final String LS = System.lineSeparator();
-    private static final String ANSI_BRIGHT_BLUE = "\u001B[94m";
-    private static final String ANSI_BRIGHT_CYAN = "\u001B[96m";
+    private static final String ANSI_GREEN_BOLD = "\u001B[32;1m";
+    private static final String ANSI_BRIGHT_GREEN_BOLD = "\u001B[92;1m";
     public static final String ANSI_RESET = "\u001B[0m";
-    private static final String LOGO = ANSI_BRIGHT_BLUE
+    private static final String LOGO = ANSI_GREEN_BOLD
             + "  ____  _\n"
             + " / ___|| |__   ___ _ __ "
-            + ANSI_BRIGHT_CYAN + "_ __   __ _ ___ ___\n"
-            + ANSI_BRIGHT_BLUE + " \\___ \\| '_ \\ / _ \\ '__| "
-            + ANSI_BRIGHT_CYAN  + "'_ \\ / _` / __/ __|\n"
-            + ANSI_BRIGHT_BLUE + "  ___) | | | |  __/ |  "
-            + ANSI_BRIGHT_CYAN + "| |_) | (_| \\__ \\__ \\\n"
-            + ANSI_BRIGHT_BLUE + " |____/|_| |_|\\___|_|  "
-            + ANSI_BRIGHT_CYAN + "| .__/ \\__,_|___/___/\n"
-            + ANSI_BRIGHT_BLUE + "                       "
-            + ANSI_BRIGHT_CYAN + "|_|" + ANSI_RESET;
+            + ANSI_BRIGHT_GREEN_BOLD + "_ __   __ _ ___ ___\n"
+            + ANSI_GREEN_BOLD + " \\___ \\| '_ \\ / _ \\ '__| "
+            + ANSI_BRIGHT_GREEN_BOLD + "'_ \\ / _` / __/ __|\n"
+            + ANSI_GREEN_BOLD + "  ___) | | | |  __/ |  "
+            + ANSI_BRIGHT_GREEN_BOLD + "| |_) | (_| \\__ \\__ \\\n"
+            + ANSI_GREEN_BOLD + " |____/|_| |_|\\___|_|  "
+            + ANSI_BRIGHT_GREEN_BOLD + "| .__/ \\__,_|___/___/\n"
+            + ANSI_GREEN_BOLD + "                       "
+            + ANSI_BRIGHT_GREEN_BOLD + "|_|" + ANSI_RESET;
 
 
 

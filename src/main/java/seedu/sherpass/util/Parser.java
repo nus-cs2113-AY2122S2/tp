@@ -28,6 +28,7 @@ import java.time.format.DateTimeParseException;
 import static seedu.sherpass.constant.DateAndTimeFormat.parseFormat;
 
 import static seedu.sherpass.constant.Index.MARK_INDEX;
+import static seedu.sherpass.constant.Index.CUSTOM_COMMAND_INDEX;
 import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
 import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
 import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
@@ -45,11 +46,6 @@ import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE
 import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_STUDY_INPUT_MESSAGE;
-
-import static seedu.sherpass.util.TimerLogic.pauseTimer;
-import static seedu.sherpass.util.TimerLogic.resumeTimer;
-import static seedu.sherpass.util.TimerLogic.startTimer;
-import static seedu.sherpass.util.TimerLogic.stopTimer;
 
 public class Parser {
 
@@ -74,14 +70,14 @@ public class Parser {
             if (!doOnDateString.equals("null")) {
                 doOnDate = LocalDate.parse(doOnDateString, parseFormat);
             }
-            String status = taskData.getString("status");
             parsedTask = new Task(description, byDate, doOnDate);
+            String status = taskData.getString("status");
             if (status.equals("X")) {
                 parsedTask.markAsDone();
             }
             return parsedTask;
         } catch (JSONException | DateTimeParseException exception) {
-            throw new InvalidInputException();
+            throw new InvalidInputException(exception.getMessage());
         }
     }
 
@@ -103,12 +99,54 @@ public class Parser {
                 + HELP_MESSAGE_SPECIFIC_COMMAND);
     }
 
+    private static LocalDate confirmInvalidDateFormat() throws InvalidInputException {
+        Ui anotherUi = new Ui();
+        anotherUi.showToUser("It seems that the date and time\nyou gave is not in the correct format.\n"
+                + "Would you like to re-enter a valid date and time? (Y/N)\n"
+                + "*Enter 'No' to skip the adding of this task*");
+        anotherUi.showLine();
+        while (true) {
+            String input = anotherUi.readCommand();
+            anotherUi.showLine();
+            if (input.trim().equalsIgnoreCase("Y")
+                    || input.trim().equalsIgnoreCase("Yes")) {
+                anotherUi.showToUser("Understood. Please key in the date and time you wish to save.");
+                anotherUi.showLine();
+                anotherUi.showToUser("Enter valid date input:");
+                input = anotherUi.readCommand();
+                anotherUi.showLine();
+                return prepareTaskDate(input.trim());
+            }
+            if (input.trim().equalsIgnoreCase("N")
+                    || input.trim().equalsIgnoreCase("No")) {
+                anotherUi.showToUser("Okay, proceeding to stop current task process...");
+                return null;
+            }
+            anotherUi.showToUser("Please confirm your choice with either Y (Yes) or N (No).");
+            anotherUi.showLine();
+        }
+    }
+
+    private static LocalDate prepareTaskDate(String rawTaskDate) throws InvalidInputException {
+        if (rawTaskDate.isBlank()) {
+            return null;
+        }
+        try {
+            return LocalDate.parse(rawTaskDate, parseFormat);
+        } catch (DateTimeParseException e) {
+            return confirmInvalidDateFormat();
+        }
+    }
+
+
+    // Please add in constants to the magic literals
     private static Command prepareAdd(String[] splitInput, TaskList taskList) {
         String[] filteredTaskContent;
         LocalDate byDate;
         LocalDate doOnDate;
         try {
-            if (!splitInput[TASK_CONTENT_INDEX].contains("/by") && !splitInput[TASK_CONTENT_INDEX].contains("/do_on")) {
+            if (!splitInput[TASK_CONTENT_INDEX].contains("/by")
+                    && !splitInput[TASK_CONTENT_INDEX].contains("/do_on")) {
                 return new AddCommand(splitInput[TASK_CONTENT_INDEX], taskList, null, null);
             }
 
@@ -126,7 +164,8 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
             printMissingInputMessage();
         } catch (InputRepeatedException e) {
-            System.out.println("repeated description. delete the previous iteration and type out your command again");
+            System.out.println("Oops! It seems that you've entered a duplicate task.\n"
+                    + "Please re-enter a new task if you wish to add one.");
         }
         return null;
     }
@@ -207,47 +246,6 @@ public class Parser {
         return null;
     }
 
-
-    private static LocalDate confirmInvalidDateFormat() throws InvalidInputException {
-        Ui anotherUi = new Ui();
-        anotherUi.showToUser("It seems that the date and time\nyou gave is not in the correct format.\n"
-                + "Would you like to re-enter a valid date and time? (Y/N)\n"
-                + "*Enter 'No' to skip the adding of this task*");
-        anotherUi.showLine();
-        while (true) {
-            String input = anotherUi.readCommand();
-            anotherUi.showLine();
-            if (input.trim().equalsIgnoreCase("Y")
-                    || input.trim().equalsIgnoreCase("Yes")) {
-                anotherUi.showToUser("Understood. Please key in the date and time you wish to save.");
-                anotherUi.showLine();
-                anotherUi.showToUser("Enter valid date input:");
-                input = anotherUi.readCommand();
-                anotherUi.showLine();
-                return prepareTaskDate(input.trim());
-            }
-            if (input.trim().equalsIgnoreCase("N")
-                    || input.trim().equalsIgnoreCase("No")) {
-                anotherUi.showToUser("Okay, proceeding to stop current task process...");
-                return null;
-            }
-            anotherUi.showToUser("Please confirm your choice with either Y (Yes) or N (No).");
-            anotherUi.showLine();
-        }
-    }
-
-    private static LocalDate prepareTaskDate(String rawTaskDate) throws InvalidInputException {
-        if (rawTaskDate.isBlank()) {
-            return null;
-        }
-        try {
-            LocalDate localDate = LocalDate.parse(rawTaskDate, parseFormat);
-            return localDate;
-        } catch (DateTimeParseException e) {
-            return confirmInvalidDateFormat();
-        }
-    }
-
     private static Command prepareDelete(String[] parsedInput, TaskList taskList) {
         try {
             return new DeleteCommand(parsedInput, taskList);
@@ -270,7 +268,7 @@ public class Parser {
      * Parses the user command input.
      *
      * @param userInput User command.
-     * @param taskList  Array of tasks
+     * @param taskList  Array of tasks.
      * @return Command type matching the user command.
      */
     public static Command parseCommand(String userInput, TaskList taskList) {
@@ -306,11 +304,12 @@ public class Parser {
     /**
      * Parses the default timer modes.
      *
-     * @param defaultTimerChoice Mode number
-     * @param ui UI
-     * @return Returns the duration of the timer mode selected in seconds
+     * @param defaultTimerChoice Mode number.
+     * @return Returns the duration of the timer mode selected in seconds.
+     * @throws InvalidTimeException If defaultTimerChoice does not match
+     *                              with the given choices.
      */
-    private static int selectDefaultTimer(String defaultTimerChoice, Ui ui) {
+    private static int selectDefaultTimer(String defaultTimerChoice) throws InvalidTimeException {
         switch (defaultTimerChoice) {
         case "0":
             return DEFAULT_TIMER_ZERO;
@@ -321,62 +320,58 @@ public class Parser {
         case "3":
             return DEFAULT_TIMER_THREE;
         default:
-            ui.showToUser("Sorry! I can't recognise the choice you've entered.\n"
-                    + "Please re-enter a valid default timer input");
+            throw new InvalidTimeException();
         }
-        return -1;
+    }
+
+    private static boolean isValidDuration(int duration) {
+        return duration > 0;
     }
 
     /**
      * Parses input to the timer.
      *
-     * @param parsedInput Parsed input
-     * @param ui UI
-     * @return Returns the duration of the timer, else returns -1 if invalid duration specified
+     * @param parsedInput Parsed input.
+     * @return Returns duration of custom timer input, or the duration of
+     *         selected default timer mode in seconds.
+     * @throws InvalidTimeException If timer input less than or equals to 0 or there is
+     *                              multiple timer inputs.
      */
-    public static int parseTimerInput(String[] parsedInput, Ui ui) {
-        try {
-            if (parsedInput[TIMER_FORMAT_INDEX].trim().contains("/custom")) {
-                String[] customTimerInput = parsedInput[TIMER_FORMAT_INDEX].split("/custom", 2);
-                return Integer.parseInt(customTimerInput[CUSTOM_TIMER_INDEX].trim());
+    public static int parseTimerInput(String[] parsedInput) throws InvalidTimeException {
+        if (parsedInput[TIMER_FORMAT_INDEX].trim().contains("/custom")) {
+            if (parsedInput[TIMER_FORMAT_INDEX].trim().indexOf("/custom") != CUSTOM_COMMAND_INDEX) {
+                throw new InvalidTimeException();
             }
-            return selectDefaultTimer(parsedInput[DEFAULT_TIMER_INDEX].trim(), ui);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            ui.showToUser("Oops! Your input seems to be missing some commands.\n"
-                    + "Please re-enter a valid input.");
-        } catch (NumberFormatException e) {
-            ui.showToUser("Oops! Your timer input does not seem to be correct.\n"
-                    + "Please re-enter a valid input.");
+            String[] customTimerInput = parsedInput[TIMER_FORMAT_INDEX].split("/custom", 2);
+            int customDuration = Integer.parseInt(customTimerInput[CUSTOM_TIMER_INDEX].trim());
+            if (!isValidDuration(customDuration)) {
+                throw new InvalidTimeException();
+            }
+            return customDuration;
         }
-        return -1;
+        return selectDefaultTimer(parsedInput[DEFAULT_TIMER_INDEX].trim());
     }
 
     /**
      * Parses commands for study mode.
      *
-     * @param rawUserInput Raw user input
-     * @param ui UI
-     * @param timer Timer object
+     * @param rawUserInput Raw user input.
+     * @param ui           UI.
      */
-    public static void parseStudyMode(String rawUserInput, Ui ui, Timer timer) {
+    public static void parseStudyMode(String rawUserInput, Ui ui, TimerLogic timerLogic) {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
-            try {
-                startTimer(parsedInput);
-            } catch (InvalidTimeException e) {
-                ui.showToUser("Oops! Your timer input does not seem to be correct.\n"
-                        + "Please re-enter a valid duration.");
-            }
+            timerLogic.callStartTimer(parsedInput);
             break;
         case "pause":
-            pauseTimer();
+            timerLogic.callPauseTimer();
             break;
         case "resume":
-            resumeTimer();
+            timerLogic.callResumeTimer();
             break;
         case "stop":
-            stopTimer();
+            timerLogic.callStopTimer();
             break;
         default:
             ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);
