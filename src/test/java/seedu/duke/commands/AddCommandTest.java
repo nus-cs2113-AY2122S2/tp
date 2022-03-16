@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.duke.Timetable;
 
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.duke.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 import static seedu.duke.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
 
@@ -17,6 +18,7 @@ class AddCommandTest {
     private Command addCommandStartTimeOverlap;
     private Command addCommandEndTimeOverlap;
     private Command addCommandTotalOverlap;
+    private Command addCommandOverlapDifferentDay;
 
     @BeforeEach
     public void setUp() {
@@ -40,6 +42,10 @@ class AddCommandTest {
         addCommandTotalOverlap = new AddCommand(
                 "John", "CS2113", "Monday",
                 1000, 1600, "online"
+        );
+        addCommandOverlapDifferentDay = new AddCommand(
+                "John", "CS2113", "Friday",
+                1200, 1300, "online"
         );
     }
 
@@ -71,6 +77,12 @@ class AddCommandTest {
     public void addCommand_totalOverlap_throwException() {
         addCommand.execute(timetable);
         assertEquals(ERROR_OVERLAPPING_EVENT, addCommandTotalOverlap.execute(timetable));
+    }
+
+    @Test
+    public void addCommand_OverlapDifferentDay_throwException() {
+        addCommand.execute(timetable);
+        assertNotEquals(ERROR_OVERLAPPING_EVENT, addCommandOverlapDifferentDay.execute(timetable));
     }
 
 }

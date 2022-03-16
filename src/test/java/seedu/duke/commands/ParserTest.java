@@ -28,6 +28,14 @@ public class ParserTest {
     }
 
     @Test
+    public void prepareAdd_startTimeGreaterThanEndTime_throwException() {
+        String inputString = "add n/john l/cs2113 d/monday st/1800 et/1600 m/online";
+        Parser parser = new Parser(inputString);
+        Command command = parser.parseCommand();
+        assertEquals(HelpCommand.class, command.getClass());
+    }
+
+    @Test
     public void prepareAdd_timeNotInteger_throwException() {
         String inputString = "add n/john l/cs2113 d/mon st/noon et/1800 m/online";
         Parser parser = new Parser(inputString);
