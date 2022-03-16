@@ -1,4 +1,4 @@
-greeting message
+Welcome to the AllOnUs life management suite. How can we help you today?
 Menu:
 Welcome to Contacts Manager
 Please enter a valid command for the Contacts Manager!

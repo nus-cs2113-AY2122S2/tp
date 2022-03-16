@@ -1,3 +1,4 @@
+//@@author OzairHasan
 package seedu.allonus;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -40,3 +41,4 @@ class AllOnUsTest {
         assertEquals(false, AllOnUs.isNotEmpty(""));
     }
 }
+//@@author
