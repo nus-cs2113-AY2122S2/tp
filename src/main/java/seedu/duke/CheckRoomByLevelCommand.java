@@ -30,7 +30,9 @@ public class CheckRoomByLevelCommand extends Command {
      * @param ui The user interface for this execution method.
      * @throws InvalidLevelException if the level is invalid.
      */
-    public void execute(SatisfactionList satisfactionList, RoomList roomList, ItemList itemList, Ui ui)
+
+    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList roomList,
+                        ItemList itemList, Ui ui)
             throws InvalidLevelException {
         boolean isValidLevel = false;
         for (Room room : roomList.getRoomList()) {

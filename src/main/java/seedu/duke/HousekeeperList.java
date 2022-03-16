@@ -17,6 +17,20 @@ public class HousekeeperList {
         return housekeeperList.get(index);
     }
 
+    public void addHousekeeper(Housekeeper newHousekeeper) {
+        getHousekeeperList().add(newHousekeeper);
+    }
+
+    public boolean hasNameAdded(String name) {
+        String convertNameToLowerCase = name.toLowerCase();
+        ArrayList<Housekeeper> housekeeperFound = (ArrayList<Housekeeper>) housekeeperList.stream()
+                .filter((t) -> t.getName().toLowerCase().contains(convertNameToLowerCase))
+                .collect(toList());
+        if (housekeeperFound.size() >= 1) {
+            return true;
+        }
+        return false;
+    }
 
     public int getTotalHousekeeper() {
         return housekeeperList.size();
