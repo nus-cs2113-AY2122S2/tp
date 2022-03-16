@@ -36,8 +36,8 @@ public class PlanITarium {
         while (true) {
             try {
                 userInput = new Scanner(System.in);
-                logger.getLogger().log(Level.INFO, "Next line has been read");
                 command = commandFactory.getCommand(userInput.nextLine(), personList);
+                logger.getLogger().log(Level.INFO, "Next line has been read");
                 command.execute();
             } catch (Exception e) {
                 e.printStackTrace();

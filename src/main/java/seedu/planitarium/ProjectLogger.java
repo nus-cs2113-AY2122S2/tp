@@ -34,7 +34,7 @@ public class ProjectLogger {
      * @throws IOException if there's exception for reading or writing.
      */
     private void initialiseLogger(String fileName) throws IOException {
-        LogManager.getLogManager().reset();
+        logger.setUseParentHandlers(false);
         this.logger.setLevel(Level.ALL);
         FileHandler fh = new FileHandler(fileName);
         fh.setFormatter(new SimpleFormatter());

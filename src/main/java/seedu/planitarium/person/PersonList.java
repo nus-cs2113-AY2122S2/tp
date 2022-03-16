@@ -1,10 +1,15 @@
 package seedu.planitarium.person;
 
+import seedu.planitarium.ProjectLogger;
+
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 public class PersonList {
     private ArrayList<Person> personList;
     private int numberOfMembers;
+    private ProjectLogger logger;
+    private final int SINGULAR = 1;
 
     /**
      * Constructs a new PersonList object.
@@ -12,6 +17,9 @@ public class PersonList {
     public PersonList() {
         personList = new ArrayList<>();
         numberOfMembers = 0;
+        logger = new ProjectLogger(PersonList.class.getName(), "PersonList.log");
+        String infoString = "Logger for PersonList initialised";
+        logger.getLogger().log(Level.INFO, infoString);
     }
 
     /**
@@ -20,6 +28,8 @@ public class PersonList {
      * @return The array list
      */
     public ArrayList<Person> getPersonList() {
+        String infoString = "Method getPersonList() called";
+        logger.getLogger().log(Level.INFO, infoString);
         return personList;
     }
 
@@ -30,9 +40,14 @@ public class PersonList {
      * @return The person with the index
      */
     public Person getPerson(int index) {
-        assert (index >= 1);
+        String infoString = "Entering getPerson()";
+        logger.getLogger().log(Level.INFO, infoString);
+        assert (index >= SINGULAR);
         assert (index <= numberOfMembers);
-        return personList.get(index - 1);
+        infoString = "Index assertions passed in getPerson()";
+        logger.getLogger().log(Level.INFO, infoString);
+        int listIndex = index - 1;
+        return personList.get(listIndex);
     }
 
     /**
@@ -41,6 +56,8 @@ public class PersonList {
      * @return The number of person objects present in the array list
      */
     public int getNumberOfMembers() {
+        String infoString = "Method getNumberOfMembers() called";
+        logger.getLogger().log(Level.INFO, infoString);
         return numberOfMembers;
     }
 
@@ -50,7 +67,11 @@ public class PersonList {
      * @param name The name of the person to be added
      */
     public void addPerson(String name) {
+        String infoString = "Entering addPerson()";
+        logger.getLogger().log(Level.INFO, infoString);
         assert (name != null);
+        infoString = "Non-null assertion passed in addPerson()";
+        logger.getLogger().log(Level.INFO, infoString);
         Person person = new Person(name);
         personList.add(person);
         numberOfMembers++;
@@ -63,10 +84,15 @@ public class PersonList {
      * @param index The index of the person to be removed
      */
     public void removePerson(int index) {
-        assert (index >= 1);
+        String infoString = "Entering removePerson()";
+        logger.getLogger().log(Level.INFO, infoString);
+        assert (index >= SINGULAR);
         assert (index <= numberOfMembers);
-        String name = personList.get(index - 1).getName();
-        personList.remove(index - 1);
+        infoString = "Index assertions passed in removePerson()";
+        logger.getLogger().log(Level.INFO, infoString);
+        int listIndex = index - 1;
+        String name = personList.get(listIndex).getName();
+        personList.remove(listIndex);
         numberOfMembers--;
         System.out.println(name + " has been successfully removed");
     }
@@ -74,7 +100,9 @@ public class PersonList {
     /**
      * Prints the total remaining disposable income of persons in the array list.
      */
-    public void getRemain() {
+    public void printRemain() {
+        String infoString = "Method getRemain() called";
+        logger.getLogger().log(Level.INFO, infoString);
         double sum = 0;
         for (Person person: this.getPersonList()) {
             sum += person.getDisposable();
@@ -86,6 +114,8 @@ public class PersonList {
      * Lists the names of everyone in the array list, followed by their list of income and expenditure.
      */
     public void list() {
+        String infoString = "Method list() called";
+        logger.getLogger().log(Level.INFO, infoString);
         for (int i = 0; i < numberOfMembers; i++) {
             Person person = personList.get(i);
             System.out.println((i + 1) + ". " + person.getName());
