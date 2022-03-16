@@ -26,7 +26,7 @@ public class OrderController extends Controller {
             System.out.println("Implement me to view menu :D");
             break;
         case 2:
-            quitOrder();
+            addOrder();
             break;
         case 3:
             deleteOrder();
@@ -48,7 +48,7 @@ public class OrderController extends Controller {
         return false;
     }
 
-    private void quitOrder() throws OperationTerminationException {
+    private void addOrder() throws OperationTerminationException {
         boolean notQuit = true;
         String userInput = InputParser.getString("Enter dishes you want to order (Q/q to exit): ");
         if (userInput == "Q" || userInput == "q") {
