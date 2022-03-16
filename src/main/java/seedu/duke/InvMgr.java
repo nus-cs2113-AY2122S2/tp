@@ -40,10 +40,14 @@ public class InvMgr {
         ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
-            String command = ui.getRawUserInput();
-            Command inputCommand = Parser.parse(command);
-            inputCommand.execute(itemList, ui);
-            isExit = inputCommand.isExit();
+            try {
+                String command = ui.getRawUserInput();
+                Command inputCommand = Parser.parse(command);
+                inputCommand.execute(itemList, ui);
+                isExit = inputCommand.isExit();
+            } catch (InvMgrException e) {
+                ui.showError(e);
+            }
         }
     }
 
