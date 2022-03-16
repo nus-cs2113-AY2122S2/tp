@@ -1,12 +1,16 @@
 package seedu.duke;
 
 import seedu.duke.commands.Command;
+import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
+import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
+import seedu.duke.common.Messages;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class InvMgr {
     private Storage storage;
@@ -20,11 +24,12 @@ public class InvMgr {
      * */
     public InvMgr(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
         try {
-            itemList = new ItemList(storage.load());
-        } catch (IOException e) {
-            e.printStackTrace();
+            storage = new Storage(filePath);
+            itemList = new ItemList(storage.loadData());
+        } catch (InvMgrException e) {
+            ui.showMessages(Messages.ERROR_MESSAGE);
+            itemList = new ItemList(new ArrayList<Item>());
         }
     }
 
@@ -35,10 +40,9 @@ public class InvMgr {
         ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
-            String userInput = ui.getRawUserInput();
-            ui.showDivider();
-            Command inputCommand = Parser.parse(userInput);
-            inputCommand.execute(ui, itemList);
+            String command = ui.getRawUserInput();
+            Command inputCommand = Parser.parse(command);
+            inputCommand.execute(itemList, ui);
             isExit = inputCommand.isExit();
         }
     }
