@@ -127,6 +127,7 @@ public class Commands {
     public static void totalGoods(ArrayList<Goods> userGoods) throws NullException {
         if (userGoods == null){
             throw new NullException("userGoods");
+
         }
         Integer total = 0;
         for (Goods good: userGoods){

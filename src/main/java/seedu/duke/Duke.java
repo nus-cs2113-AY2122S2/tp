@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import util.exceptions.NullException;
+
 import java.util.Scanner;
 
 /**
@@ -20,7 +22,7 @@ public class Duke {
         System.out.println("Bye");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NullException {
         hello();
         UserInterface.run();
         bye();
