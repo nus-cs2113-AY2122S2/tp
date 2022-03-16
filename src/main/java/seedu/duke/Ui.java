@@ -58,4 +58,13 @@ public class Ui {
             System.out.printf("%d. Item Name: %s Item Pax: %d\n", currentListIndex, itemName, itemPax);
         }
     }
+
+    /**
+     * Prints an acknowledgement message informing the user that the pax of the item was successfully updated.
+     *
+     * @param updatedItem The item within the inventory whose pax has been updated by the user.
+     */
+    public void printUpdateItemPaxAcknowledgementMessage(Item updatedItem) {
+        System.out.printf("The pax of %s has been updated to %d.\n", updatedItem.getName(), updatedItem.getPax());
+    }
 }

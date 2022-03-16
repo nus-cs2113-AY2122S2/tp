@@ -27,4 +27,10 @@ Added jane availability into records
 User does not exist
 Added tom availability into records
 Error! Invalid Command -> Availability NAME @ M,T,W,T,F,S,S
+The pax of Toilet Roll has been updated to 5.
+Error! Item Pax is invalid.
+Error! Item Pax cannot be empty.
+Error! Item Name cannot be empty.
+Error! Invalid Command.
+Error! Item not found in inventory. Kindly add the item into the inventory first.
 see u again!
