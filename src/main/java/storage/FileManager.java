@@ -394,11 +394,12 @@ public class FileManager {
      *                              by this method.
      */
     public void rewriteAllWorkoutsToFile(WorkoutList workoutList) throws IOException, NullPointerException {
-        ArrayList<Workout> listOfWorkouts = workoutList.getWorkoutsDisplayList();
+        ArrayList<String> listOfWorkouts = workoutList.getWorkoutsDisplayList();
 
         FileWriter fileWriter = new FileWriter(getWorkoutFilePath().toString());
-        for (Workout workout : listOfWorkouts) {
-            String workoutInFileFormat = convertWorkoutToFileDataFormat(workout);
+        for (String workoutKey : listOfWorkouts) {
+            Workout workoutObject = workoutList.getWorkoutsHashMapList().get(workoutKey);
+            String workoutInFileFormat = convertWorkoutToFileDataFormat(workoutObject);
             fileWriter.append(workoutInFileFormat);
             fileWriter.append(System.lineSeparator());
         }
