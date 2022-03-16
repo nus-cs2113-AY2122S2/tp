@@ -1,36 +1,32 @@
 package seedu.duke.storage;
 
-
-
 import seedu.duke.exceptions.ModHappyException;
-
 
 /**
  * Storage interfaces of ModHappy.
- * @param <T> Any data type
+ * @param <T> any data type
  */
 public interface Storage<T extends Object> {
 
     /**
-     * Writes a type T object to json file.
-     * @param object Type T object
-     * @param path Relative path of json file
-     * @throws ModHappyException Write exception
+     * Writes an object of type T to a json file.
+     * @param path json file path
+     * @throws ModHappyException if an error was encountered during writing
      */
     void jsonWriter(T object, String path) throws ModHappyException;
 
     /**
      * Load and deserialize a type T object from json file.
-     * @param path Relative path of json file
-     * @return Type T object
-     * @throws ModHappyException Read exception
+     * @param path json file path
+     * @return the unserialised object of type T
+     * @throws ModHappyException if an error was encountered during reading
      */
     T jsonReader(String path) throws ModHappyException;
 
     /**
      * Checks the existence of the storage file, and create if not exists.
-     * @param path Relative path of json file
-     * @throws ModHappyException Create file exception
+     * @param path json file path
+     * @throws ModHappyException if the file could not be created
      */
     void createTargetFile(String path) throws ModHappyException;
 }

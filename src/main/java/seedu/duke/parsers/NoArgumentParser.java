@@ -8,8 +8,6 @@ import seedu.duke.commands.SaveCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 
-import static seedu.duke.util.StringConstants.SAVE_COMMAND_WORD;
-
 /**
  * This Parser supports all commands which do not accept any additional arguments or parameters.
  */

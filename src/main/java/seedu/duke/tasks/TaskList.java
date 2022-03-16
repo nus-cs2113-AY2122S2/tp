@@ -6,11 +6,11 @@ import seedu.duke.exceptions.NoSuchTaskException;
 import seedu.duke.util.StringConstants;
 
 public class TaskList {
-    private static final String LS = System.lineSeparator();
+    private static final String LS = StringConstants.LS;
     private static final String ITEMIZE_FORMAT = "%d. %s" + LS;
     private static final String EMPTY_LIST = StringConstants.EMPTY_LIST;
 
-    private final ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
 
     public TaskList() {
         taskList = new ArrayList<>();
@@ -49,6 +49,10 @@ public class TaskList {
         return taskList;
     }
 
+    public void setList(ArrayList<Task> list) {
+        taskList = list;
+    }
+
     /**
      * Returns the task stored at the given index in the task list.
      * @param index the index of the task
@@ -71,7 +75,7 @@ public class TaskList {
             res += indent + String.format(ITEMIZE_FORMAT, i + 1, taskList.get(i));
         }
         if (res.length() == 0) {
-            res = indent + EMPTY_LIST;
+            res = indent + EMPTY_LIST + LS;
         }
         return res;
     }

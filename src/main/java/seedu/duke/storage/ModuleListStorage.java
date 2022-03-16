@@ -1,6 +1,5 @@
 package seedu.duke.storage;
 
-
 import java.io.File;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
@@ -14,20 +13,19 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.ReadStreamBrokenException;
+import seedu.duke.exceptions.ReadException;
 
 import seedu.duke.tasks.Module;
 
-
 /**
- * A data access object managing the write and read of module list.
+ * A data access object managing the loading and saving of ModuleList instances.
  */
 public class ModuleListStorage extends ListStorage<Module> {
     /**
-     * Reads and deserializes the json file and return the module list.
-     * @param path the relative path of the storage file
-     * @return Loaded module list
-     * @throws ModHappyException Read module list fail exception
+     * Deserialises the ModuleList stored in the json file.
+     * @param path json file path
+     * @return deserialised ModuleList object
+     * @throws ModHappyException if an error was encountered during reading
      */
     @Override
     public ArrayList<Module> jsonReader(String path) throws ModHappyException {
@@ -44,7 +42,7 @@ public class ModuleListStorage extends ListStorage<Module> {
             }
             return arrayList;
         } catch (Exception e) {
-            throw new ReadStreamBrokenException();
+            throw new ReadException();
         }
     }
 

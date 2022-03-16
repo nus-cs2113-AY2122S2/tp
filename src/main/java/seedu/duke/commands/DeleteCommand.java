@@ -11,11 +11,10 @@ import seedu.duke.util.StringConstants;
 
 public class DeleteCommand extends Command {
 
-    private static final String DELETE_MODULE_SUCCESS = "%s" + StringConstants.DELETE_MESSAGE;
-    private static final String DELETE_TASK_SUCCESS = "%s" + StringConstants.DELETE_MESSAGE;
+    private static final String DELETE_MESSAGE = StringConstants.DELETE_MESSAGE;
 
     private String moduleCode;
-    private int taskNumber = -1;
+    private int taskIndex = -1;
     private String taskModule;
     private String result;
 
@@ -23,8 +22,8 @@ public class DeleteCommand extends Command {
         return moduleCode;
     }
 
-    public int getTaskNumber() {
-        return taskNumber;
+    public int getTaskIndex() {
+        return taskIndex;
     }
 
     public String getTaskModule() {
@@ -35,14 +34,14 @@ public class DeleteCommand extends Command {
         this.moduleCode = moduleCode;
     }
 
-    public DeleteCommand(int taskNumber, String taskModule) {
-        this.taskNumber = taskNumber;
+    public DeleteCommand(int taskIndex, String taskModule) {
+        this.taskIndex = taskIndex;
         this.taskModule = taskModule;
     }
 
     @Override
     public CommandResult execute(ModuleList moduleList) throws ModHappyException {
-        if (taskNumber < 0) {
+        if (taskIndex < 0) {
             deleteModule(moduleList);
         } else {
             Module targetModule;
@@ -65,7 +64,7 @@ public class DeleteCommand extends Command {
      * @param moduleList List from which the module is to be deleted from.
      */
     public void deleteModule(ModuleList moduleList) throws ModHappyException {
-        result = String.format(DELETE_MODULE_SUCCESS, moduleList.removeModule(moduleCode));
+        result = String.format(DELETE_MESSAGE, moduleList.removeModule(moduleCode));
     }
 
     /**
@@ -75,7 +74,6 @@ public class DeleteCommand extends Command {
      */
     public void deleteTaskFromModule(Module targetModule) throws ModHappyException {
         TaskList taskList = targetModule.getTaskList();
-        int taskIndex = taskNumber - 1;
-        result = String.format(DELETE_TASK_SUCCESS, taskList.removeTask(taskIndex));
+        result = String.format(DELETE_MESSAGE, taskList.removeTask(taskIndex));
     }
 }
