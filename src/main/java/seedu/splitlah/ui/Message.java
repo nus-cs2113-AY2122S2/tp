@@ -134,10 +134,6 @@ public abstract class Message {
             "There are currently no sessions stored.";
     public static final String ERROR_PROFILE_SESSION_NOT_IN_LIST =
             "The session that you have specified was not found.";
-    public static final String LOGGER_PROFILE_SESSION_ADDED =
-            "A session was added into the list of sessions with Id: ";
-    public static final String LOGGER_PROFILE_SESSION_REMOVED =
-            "A session was remove from the list of session with Id: ";
 
     // Activity
     public static final String ERROR_ACTIVITY_INACCURATE_INVOLVED_LIST =
@@ -149,6 +145,12 @@ public abstract class Message {
             "Name duplicates exist but not detected.";
     public static final String ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY =
             "The array of person names is empty but was not handled in prepare function.";
+    public static final String LOGGER_SESSIONCREATE_SESSION_ADDED =
+            "A session was added into the list of sessions with Id: ";
+
+    // Session Delete Command
+    public static final String LOGGER_SESSIONDELETE_SESSION_REMOVED =
+            "A session was remove from the list of session with Id: ";
 
     // Session Summary Command
     public static final String MESSAGE_SESSIONSUMMARY_NO_PAYMENTS_REQUIRED =
