@@ -7,6 +7,7 @@ public class Expenditure {
     private String description;
     private int amount;
     private String category;
+
     public Expenditure(String description, String category, int amount) {
         setDescription(description);
         setAmount(amount);
@@ -40,7 +41,7 @@ public class Expenditure {
 
     @Override
     public String toString() {
-        if (getCategory() == null){
+        if (getCategory() == null) {
             return getDescription() + " of $" + getAmount();
         }
         return getDescription() + " of $" + getAmount() + " from " + getCategory();

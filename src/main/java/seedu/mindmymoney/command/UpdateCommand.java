@@ -39,12 +39,12 @@ public class UpdateCommand extends Command {
             int divisionIndex = expenditureDescription.lastIndexOf(" ");
             String descriptionAndCategory = expenditureDescription.substring(INDEX_OF_FIRST_ITEM_IN_STRING,
                     divisionIndex).strip();
-            if (descriptionAndCategory.contains("-c ")){
+            if (descriptionAndCategory.contains("-c ")) {
                 descriptionAndCategory = descriptionAndCategory.replace("-c ", "");
                 int divisionIndexForCategory = descriptionAndCategory.lastIndexOf(" ");
                 description = descriptionAndCategory.substring(INDEX_OF_FIRST_ITEM_IN_STRING,
                         divisionIndexForCategory).strip();
-                category =  descriptionAndCategory.substring(divisionIndexForCategory).strip();
+                category = descriptionAndCategory.substring(divisionIndexForCategory).strip();
             } else {
                 description = expenditureDescription.substring(INDEX_OF_FIRST_ITEM_IN_STRING,
                         divisionIndex).strip();

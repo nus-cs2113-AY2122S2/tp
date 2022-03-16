@@ -30,11 +30,13 @@ public class AddCommand extends Command {
             System.out.print(PrintStrings.LINE);
             String[] parseAddInput = Functions.parseInput(addInput);
             String description = parseAddInput[INDEX_OF_FIRST_ITEM_IN_STRING];
+            assert description != null: "Description should not be null";
             if (parseAddInput[INDEX_OF_SECOND_ITEM_IN_STRING].contains("-c")) {
                 parseAddInput = Functions.parseInputWithCommandFlag(parseAddInput[INDEX_OF_SECOND_ITEM_IN_STRING]);
                 category = parseAddInput[INDEX_OF_FIRST_ITEM_IN_STRING];
             }
             amount = Integer.parseInt(parseAddInput[INDEX_OF_SECOND_ITEM_IN_STRING]);
+            assert amount >= 0: "Amount should have a positive value";
             expenditureList.add(new Expenditure(description, category, amount));
             if (category == null) {
                 System.out.println("Successfully added " + description + " of $" + amount + " into the account");
