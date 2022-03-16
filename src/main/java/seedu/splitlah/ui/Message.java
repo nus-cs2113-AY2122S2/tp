@@ -134,6 +134,10 @@ public abstract class Message {
             "There are currently no sessions stored.";
     public static final String ERROR_PROFILE_SESSION_NOT_IN_LIST =
             "The session that you have specified was not found.";
+    public static final String LOGGER_PROFILE_SESSION_ADDED =
+            "A session was added into the list of sessions with Id: ";
+    public static final String LOGGER_PROFILE_SESSION_REMOVED =
+            "A session was remove from the list of session with Id: ";
 
     // Activity
     public static final String ERROR_ACTIVITY_INACCURATE_INVOLVED_LIST =
