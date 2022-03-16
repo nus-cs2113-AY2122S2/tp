@@ -14,7 +14,8 @@ public class ViewHousekeeperListCommand extends Command {
      * @param ui               The user interface for this execution method.
      */
     @Override
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList roomList, ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
+    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, RoomList roomList,
+                        ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
         ui.printHousekeeperList(housekeeperList);
     }
 }
