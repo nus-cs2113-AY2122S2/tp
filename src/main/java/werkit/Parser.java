@@ -150,6 +150,7 @@ public class Parser {
         switch (actionKeyword) {
         case CREATE_ACTION_KEYWORD:
             if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+                logger.log(Level.WARNING, "User has entered an invalid create workout command action.");
                 throw new InvalidCommandException(className,
                         InvalidCommandException.INVALID_NEW_WORKOUT_COMMAND_ERROR_MSG);
             }
@@ -157,6 +158,7 @@ public class Parser {
             break;
         case DELETE_ACTION_KEYWORD:
             if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+                logger.log(Level.WARNING, "User has entered an invalid delete workout command action.");
                 throw new InvalidCommandException(className,
                         InvalidCommandException.INVALID_DELETE_WORKOUT_COMMAND_ERROR_MSG);
             }
@@ -164,6 +166,7 @@ public class Parser {
             break;
         case UPDATE_ACTION_KEYWORD:
             if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+                logger.log(Level.WARNING, "User has entered an invalid update workout command action.");
                 throw new InvalidCommandException(className,
                         InvalidCommandException.INVALID_UPDATE_WORKOUT_COMMAND_ERROR_MSG);
             }
@@ -171,6 +174,7 @@ public class Parser {
             break;
         case LIST_ACTION_KEYWORD:
             if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
+                logger.log(Level.WARNING, "User has entered an invalid list workout command action.");
                 throw new InvalidCommandException(className, InvalidCommandException.INVALID_LIST_COMMAND_ERROR_MSG);
             }
             break;
