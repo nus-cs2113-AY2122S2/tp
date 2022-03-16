@@ -45,6 +45,10 @@ public class TaskList {
         return task;
     }
 
+    public ArrayList<Task> getList() {
+        return list;
+    }
+
     /**
      * Returns the task stored at the given index in the task list.
      * @param index the index of the task
