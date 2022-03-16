@@ -30,11 +30,11 @@ public class Parser {
     public static final int PREPAREADD_REQUIRED_ARGUMENT_COUNT = 6;
     public static final Pattern VIEW_COMMAND_FORMAT = Pattern.compile("n/(?<itemName>.+)");
     public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("s/(?<itemName>.+)");
-    // Pattern extracts first n-1 tags
+    // ARGUMENT_FORMAT extracts first n-1 tags
     public static final Pattern ARGUMENT_FORMAT = Pattern.compile(
             "((?:sn|n|t|c|pf|pd)\\/[\\w\\s\\-]+?)\\s+(?=sn|n|t|c|pf|pd)"
     );
-    // Extracts last tag
+    // ARGUMENT_TRAILING_FORMAT extracts last tag
     public static final Pattern ARGUMENT_TRAILING_FORMAT = Pattern.compile(
             "(?<!\\w)(?:sn|n|t|c|pf|pd)\\/([\\w\\s\\-]+)"
     );
@@ -86,12 +86,24 @@ public class Parser {
 
     }
 
-    protected UpdateCommand prepareUpdate(ArrayList<String> args) {
+    /**
+     * Create UpdateCommand class containing all arguments required to update a given item
+     *
+     * Should multiple arguments specifying the same argument parameter (e.g. 'c/1000' and 'c/2000') is given,
+     * the previous arguments passed in will be overwritten by the most recent parameter ('c/2000' in example).
+     *
+     * @param args ArrayList of arguments for an Update Command
+     * @return Command object
+     */
+    protected Command prepareUpdate(ArrayList<String> args) throws IncompleteCommandException {
         UpdateCommand updateCommand = new UpdateCommand();
         for (String s : args) {
             int delimiterPos = s.indexOf('/');
+            // the case where delimiterPos = -1 is impossible as
+            // ARGUMENT_FORMAT and ARGUMENT_TRAILING_FORMAT regex requires a '/'
+            assert delimiterPos != -1: "Each args will need to include minimally a '/' to split arg and value upon";
             String argType = s.substring(0, delimiterPos);
-            String argValue = s.substring(0, delimiterPos + 1);
+            String argValue = s.substring(delimiterPos + 1);
             switch (argType) {
             case "n":
                 updateCommand.setUpdateName(argValue);
@@ -108,10 +120,15 @@ public class Parser {
             case "c":
                 updateCommand.setCost(argValue);
                 break;
+            case "sn":
+                updateCommand.setSerialNumber(argValue);
+                break;
             default:
-                System.out.println("`" + argValue + "` not updated for type " + argType +": Unrecognised Tag");
+                System.out.println("`" + argValue + "` not updated for type " + argType + ": Unrecognised Tag");
             }
         }
+        if (updateCommand.getSerialNumber() == null)
+            return new IncorrectCommand("Serial Number is required to update an item!");
         return updateCommand;
     }
 

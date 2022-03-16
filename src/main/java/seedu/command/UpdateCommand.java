@@ -30,8 +30,12 @@ public class UpdateCommand extends Command {
         return new CommandResult(successMessage);
     }
 
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
     public void setSerialNumber(String serialNumber) {
-        this.updateName = serialNumber;
+        this.serialNumber = serialNumber;
     }
 
     public void setUpdateName(String updateName) {
@@ -70,6 +74,9 @@ public class UpdateCommand extends Command {
         }
         if (purchaseFrom != null) {
             pairs.add(new Pair<String, String>("purchasedFrom", purchaseFrom));
+        }
+        if (serialNumber != null) {
+            pairs.add(new Pair<String, String>("serialNumber", serialNumber));
         }
 
         return pairs;
