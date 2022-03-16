@@ -9,6 +9,10 @@ public class Order {
     public <T> Order(List<T> asList) {
     }
 
+    public Order() {
+
+    }
+
     public void addDishToOrder(Dish dish) {
         this.dishes.add(dish);
     }
