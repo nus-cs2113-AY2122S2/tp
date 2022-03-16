@@ -5,6 +5,7 @@ Add Housekeeper sus ~
 Add Housekeeper sgg ~ 17
 Add Housekeeper hello ~ joo
 Add Housekeeper sus ~
+View Recorded Housekeeper
 Add Item Name:Toilet Roll Pax:15
 Add Item Name: Pax:20
 Add Item Name:Toilet Roll Pax:
@@ -19,6 +20,7 @@ Availability sus @ M,T
 Availability jane @ M
 Availability tom @ T
 Availability sally @
+View Recorded Housekeeper
 Update Item Pax /Name:Toilet Roll /New Pax:5
 Update Item Pax /Name:Toilet Roll /New Pax:-1
 Update Item Pax /Name:Toilet Roll /New Pax:

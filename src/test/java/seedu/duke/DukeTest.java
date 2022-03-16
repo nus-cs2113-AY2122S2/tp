@@ -65,4 +65,9 @@ class DukeTest {
     public void commandParser_addCommandInvalidAvailability_exceptionThrown() {
         assertThrows(InvalidAvailabilityException.class, () -> new CommandParser().parse("Availability Susan @ "));
     }
+
+    @Test
+    public void commandParser_addCommandInvalidView_exceptionThrown() {
+        assertThrows(WrongCommandException.class, () -> new CommandParser().parse("ViewRecorded Housekeeper"));
+    }
 }
