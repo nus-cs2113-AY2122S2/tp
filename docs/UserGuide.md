@@ -6,7 +6,6 @@
 
 ## Quick Start
 
-{Give steps to get started quickly}
 
 1. Ensure that you have _Java 11_ or above installed. The link to _Java 11_ installer is [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
 2. Download the latest version of `Mod Happy` from [here](http://link.to/duke).
@@ -83,6 +82,6 @@ Format: `reset`
 |   add   | `add /m MODULE_CODE [-d "MODULE_DESCRIPTION"]`</br>`add /t "TASK_NAME" [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”] [-m MODULE_CODE]`                     |
 |   del   | `del /m MODULE_CODE del /t TASK_NUMBER [-m MODULE_CODE]`                                                                                                           |
 |  edit   | `edit /t TASK_INDEX (-n "TASK_NAME" or -d "TASK_DESCRIPTION" or -t "ESTIMATED_WORKING_TIME") [-m MODULE_CODE]` </br> `edit /m MODULE_CODE -d "MODULE_DESCRIPTION"` |
-|  mark   | `mark /c TASK_NUMBER [-m MODULE_CODE]`</br>`mark /u TASK_NUMBER [-m MODULE_CODE]`                                                                                  |
+|  mark   | `mark /c TASK_INDEX [-m MODULE_CODE]`</br>`mark /u TASK_INDEX [-m MODULE_CODE]`                                                                                    |
 |  list   | `list`                                                                                                                                                             |
 |  reset  | `reset`                                                                                                                                                            |
