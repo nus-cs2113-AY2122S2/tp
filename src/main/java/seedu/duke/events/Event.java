@@ -4,8 +4,8 @@ public class Event {
     private String name;
     private String title;
     private String day;
-    private int startTime;
-    private int endTime;
+    public int startTime;
+    public int endTime;
     private String mode;
 
     public Event(String name, String title, String day, int startTime, int endTime, String mode) {
