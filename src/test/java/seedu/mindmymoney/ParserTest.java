@@ -1,12 +1,14 @@
 package seedu.mindmymoney;
 
 import org.junit.jupiter.api.Test;
-import seedu.mindmymoney.command.*;
+import seedu.mindmymoney.command.DeleteCommand;
+import seedu.mindmymoney.command.ListCommand;
+import seedu.mindmymoney.command.AddCommand;
+import seedu.mindmymoney.command.UpdateCommand;
+import seedu.mindmymoney.command.HelpCommand;
 import seedu.mindmymoney.data.ExpenditureList;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ParserTest {
 
@@ -14,7 +16,7 @@ class ParserTest {
     public static final int TEST_INDEX = 0; //arbitrary number for testing
 
     /**
-     * Checks Parser.parseCommand() that it returns a Command object for each test input
+     * Checks Parser.parseCommand() that it returns a Command object for each test input.
      */
     @Test
     void parseCommand_normalInput_expectCorrectCommandObject() {
@@ -38,7 +40,7 @@ class ParserTest {
 
     /**
      * Invalid input by user should return a HelpCommand object
-     * and print an invalid command message
+     * and print an invalid command message.
      */
     @Test
     void parseCommand_invalidInput_expectHelpCommand() {
