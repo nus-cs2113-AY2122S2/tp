@@ -29,6 +29,7 @@ public class Parser {
 
         } else {
             throw new InvMgrException(Messages.INVALID_COMMAND);
+
           
         }
     }
