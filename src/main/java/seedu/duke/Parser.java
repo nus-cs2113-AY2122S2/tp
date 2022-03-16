@@ -52,6 +52,8 @@ public class Parser {
             return prepareDelete();
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
         default:
             String feedback = ERROR_INVALID_COMMAND + '\n' + MESSAGE_HELP;
             return new CommandResult(feedback);
@@ -169,9 +171,8 @@ public class Parser {
             int index = Integer.parseInt(arguments);
             return new DeleteCommand(index);
         } catch (NumberFormatException nfe) {
-            System.out.println(ERROR_INVALID_INDEX_FORMAT);
             logger.log(Level.INFO, "Invalid index to delete Error detected.");
-            return new HelpCommand();
+            return new CommandResult(ERROR_INVALID_INDEX_FORMAT);
         }
     }
 

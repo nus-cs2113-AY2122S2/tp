@@ -1,13 +1,13 @@
 package seedu.duke.commands;
 
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
 import seedu.duke.Timetable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static seedu.duke.common.ErrorMessages.ERROR_INVALID_DAY;
+import static seedu.duke.common.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
 import static seedu.duke.common.ErrorMessages.ERROR_INVALID_TIME;
 import static seedu.duke.common.ErrorMessages.ERROR_INVALID_MODE;
 import static seedu.duke.common.ErrorMessages.ERROR_MISSING_PARAMETERS;
@@ -106,7 +106,7 @@ public class ParserTest {
         String inputString = "delete hello";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
-        assertEquals(HelpCommand.class,command.getClass());
+        assertEquals(ERROR_INVALID_INDEX_FORMAT, command.execute(timetable));
     }
 
     @Test
@@ -114,6 +114,6 @@ public class ParserTest {
         String inputString = "delete";
         Parser parser = new Parser(inputString);
         Command command = parser.parseCommand();
-        assertEquals(HelpCommand.class,command.getClass());
+        assertEquals(ERROR_INVALID_INDEX_FORMAT, command.execute(timetable));
     }
 }
