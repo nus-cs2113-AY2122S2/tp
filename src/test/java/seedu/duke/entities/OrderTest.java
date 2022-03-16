@@ -10,7 +10,8 @@ class OrderTest {
     @Test
     void staff_InvalidInput_ThrowIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Order(Arrays.asList(new Dish(null, 10))));
-        assertThrows(IllegalArgumentException.class, () -> new Order(Arrays.asList(new Dish("chicken", 10), new Dish("potato", 5))));
+        assertThrows(IllegalArgumentException.class, () -> new Order(Arrays.asList(new Dish("chicken", 10),
+                new Dish("potato", 5))));
     }
 }
 
