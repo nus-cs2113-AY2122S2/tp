@@ -12,6 +12,16 @@ public class HelpCommand extends Command {
     }
 
     /**
+     * Indicates whether the program should exit.
+     *
+     * @return Indication on whether the program should exit.
+     */
+    @Override
+    public boolean isExit() {
+        return false;
+    }
+
+    /**
      * Prints out the help page if the user requested for it. If not, it means an invalid command was received,
      * and prints out an error message.
      */

@@ -21,6 +21,16 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Indicates whether the program should exit.
+     *
+     * @return Indication on whether the program should exit.
+     */
+    @Override
+    public boolean isExit() {
+        return false;
+    }
+
+    /**
      * Sets the DESCRIPTION and AMOUNT fields in the users' expenditure and adds it into the list.
      */
     public void executeCommand() {
