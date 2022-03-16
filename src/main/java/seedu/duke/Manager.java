@@ -40,10 +40,10 @@ public class Manager {
                 command.addDoctor(storage.doctors, parameters);
                 break;
             case "delete doctor":
-                command.deleteDoctor(doctorList, parameters);
+                command.deleteDoctor(storage.doctors, parameters);
                 break;
             case "view doctor":
-                command.viewDoctor(doctorList, parameters);
+                command.viewDoctor(storage.doctors, parameters);
                 break;
             case "add medicine":
                 command.addMedicine(storage.medicines, parameters);
@@ -52,14 +52,13 @@ public class Manager {
                 command.deleteMedicine(storage.medicines, parameters);
                 break;
             case "view medicine":
-                command.viewMedicine(medicineList, parameters);
+                command.viewMedicine(storage.medicines, parameters);
                 break;
             case "help":
                 ui.printHelp();
                 break;
             case "bye":
                 isTerminated = true;
-
                 ui.printBye();
                 break;
             default:
