@@ -13,8 +13,7 @@ public class Command {
     public void viewPatient(PatientList patientList, String nric) {
         if (isNull(nric)) {
             patientList.viewPatient();;
-        }
-        else {
+        } else {
             patientList.viewPatient(nric);
         }
     }
