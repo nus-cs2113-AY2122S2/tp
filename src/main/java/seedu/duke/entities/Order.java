@@ -1,12 +1,11 @@
 package seedu.duke.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
     private List<Dish> dishes;
 
-    public <T> Order(List<T> asList) {
+    public Order(List<Dish> asList) {
 
     }
 
