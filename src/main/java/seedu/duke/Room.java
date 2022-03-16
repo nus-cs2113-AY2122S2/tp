@@ -1,5 +1,8 @@
 package seedu.duke;
 
+/**
+ * Room class has the parameter of roomId, level type and vacancy status.
+ */
 public class Room {
     private int roomId;
     private int level;
