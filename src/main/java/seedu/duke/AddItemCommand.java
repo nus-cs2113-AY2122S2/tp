@@ -5,10 +5,10 @@ package seedu.duke;
  * to add as well as its pax.
  */
 public class AddItemCommand extends Command {
-    private static final String ITEM_NAME_INDICATOR = "Name:";
-    private static final int ITEM_NAME_INDICATOR_LENGTH = 5;
-    private static final String ITEM_PAX_INDICATOR = "Pax:";
-    private static final int ITEM_PAX_INDICATOR_LENGTH = 4;
+    private static final String ITEM_NAME_INDICATOR = "/Name:";
+    private static final int ITEM_NAME_INDICATOR_LENGTH = 6;
+    private static final String ITEM_PAX_INDICATOR = "/Pax:";
+    private static final int ITEM_PAX_INDICATOR_LENGTH = 5;
     private Item item;
 
     /**
