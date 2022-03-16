@@ -4,7 +4,6 @@ import seedu.duke.data.Item;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.HiCommand;
-import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.DeleteCommand;
 
