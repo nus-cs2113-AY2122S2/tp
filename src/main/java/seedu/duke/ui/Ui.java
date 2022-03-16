@@ -4,6 +4,7 @@ import java.util.Scanner;
 import static seedu.duke.common.Messages.WELCOME_MESSAGE;
 import static seedu.duke.common.Messages.HELP_MESSAGE;
 import static seedu.duke.common.Messages.DIVIDER;
+import seedu.duke.exceptions.InvMgrException;
 
 /**
  * Handles the UI of the application
@@ -52,5 +53,9 @@ public class Ui {
     public String getRawUserInput() {
         System.out.println("Enter command: ");
         return scanner.nextLine();
+    }
+
+    public void showError(InvMgrException e) {
+        System.out.println(e.getMessage());
     }
 }
