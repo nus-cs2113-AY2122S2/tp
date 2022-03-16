@@ -25,6 +25,7 @@ public abstract class Controller {
      * @param choices Array of strings listing the choices available to the user.
      */
     public Controller(String[] choices) {
+        assert choices.length >= 1 && choices[0].toLowerCase().contains("exit");
         this.choices = choices;
     }
 
