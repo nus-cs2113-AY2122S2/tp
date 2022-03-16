@@ -47,12 +47,12 @@ public class TaskListStorageTest {
             taskList.add(task3);
             String path = "data/task.json";
             taskListStorage.jsonWriter(taskList, path);
-            ArrayList<seedu.duke.tasks.Task> list = taskListStorage.jsonReader(path);
+            ArrayList<Task> list = taskListStorage.jsonReader(path);
             assertEquals(list.size(), taskList.size());
             for (int i = 0; i < list.size(); i++) {
                 assertEquals(list.get(i).getTaskName(), taskList.get(i).getTaskName());
                 assertEquals(list.get(i).getTaskDescription(), taskList.get(i).getTaskDescription());
-                assertEquals(list.get(i).getEstimatedWorkingTime(), taskList.get(i).getEstimatedWorkingTime());
+                assertEquals(list.get(i).getWorkingTime(), taskList.get(i).getWorkingTime());
             }
         } catch (Exception e) {
             e.printStackTrace();
