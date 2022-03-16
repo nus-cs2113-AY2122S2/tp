@@ -16,7 +16,7 @@ public class DescCommand extends Command {
     public void execute(ItemList itemList, Ui ui) {
         try {
             // Get item from itemList by searching for the item's name
-            Item item = itemList.get(index);
+            Item item = itemList.getItem(index);
 
             // Get description of item found
             String itemDescription = item.getDescription();
