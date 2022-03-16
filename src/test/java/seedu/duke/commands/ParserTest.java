@@ -14,7 +14,7 @@ import static seedu.duke.common.ErrorMessages.ERROR_MISSING_PARAMETERS;
 import static seedu.duke.common.ErrorMessages.ERROR_MISSING_VALUES;
 
 public class ParserTest {
-    
+
     Timetable timetable = new Timetable();
 
     @Test

@@ -1,6 +1,12 @@
 package seedu.duke;
 
-import seedu.duke.commands.*;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.AddCommand;
+import seedu.duke.commands.ClearCommand;
+import seedu.duke.commands.HelpCommand;
+import seedu.duke.commands.DeleteCommand;
+import seedu.duke.commands.ListCommand;
+import seedu.duke.commands.CommandResult;
 import seedu.duke.exceptions.InvalidDayException;
 import seedu.duke.exceptions.MissingValueException;
 import seedu.duke.exceptions.InvalidTimeException;
