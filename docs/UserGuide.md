@@ -8,8 +8,8 @@ If you can type fast, MeetingJio can get your meeting management tasks done fast
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `MeetingJio` from [here](https://github.com/AY2122S2-CS2113-T11-3/tp/releases/tag/v1.0).
-3. Run `java -jar MeetingJio.jar` at the terminal.
+2. Download the latest version of `MeetingJio` from [here](http://link.to/duke).
+3. Run `java -jar tp.jar` at the _home folder_ at terminal.
 4. Type the command in the terminal and press Enter to execute it.
 5. Refer to the *Features* below for the details of the commands.
 
