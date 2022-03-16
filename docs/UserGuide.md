@@ -31,16 +31,16 @@ All parameters except MODULE_CODE are surrounded by double quotation marks. E.g.
 Adds an object as indicated by the command argument. <br>
 A module can have its description while a task can have its description and/or its estimated working time.
 
-- Add a module <br>
+- Add a module <br><br>
   Format: `add /m MODULE_CODE [-d "MODULE_DESCRIPTION"]`<br><br>
   Example to add a module: `add /m CS2113T -d "Software Engineering"`<br><br>
   Note: The module code should not have any spaces or special characters.<br><br>
-- Add a task <br>
+- Add a task <br><br>
   Format: `add /t "TASK_NAME" [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”] [-m MODULE_CODE]`<br><br>
   Example to add a general task without any parameters: `add /t "Review PR"`<br>
   Example to add a module task with parameters: `add /t "iP Level-0" -d "Greet user and exit" -t "1 hour" -m CS2113T`
 <br><br>
-  Note: Adding tasks with parameters must be in the order (-d, -t, -m), omitting any flags you are not adding.<br>
+  Note: Adding tasks with parameters must be in the order (-d, -t, -m), omitting any flags you are not adding.<br><br>
 
 ### Deleting a task/module: `del`
 
@@ -52,7 +52,7 @@ Deletes an object as indicated by the command argument.
 - Delete a task <br><br>
   Format: `del /t TASK_NUMBER [-m MODULE_CODE]`<br><br>
   Example to delete a general task: `del /t 1`<br>
-  Example to delete a module task: `del /t 1 -m CS2113T`<br>
+  Example to delete a module task: `del /t 1 -m CS2113T`<br><br>
 
 ### Editing a task/module: `edit`
 
@@ -60,15 +60,15 @@ Edits an object's parameter as indicated by the command arguments.<br>
 For a module, you are able to change its description only.<br>
 For a task, you are able to change its name, description, or estimated working time.
 
-- Edit a module description <br>
+- Edit a module description <br><br>
   Format: `edit /m MODULE_CODE -d "MODULE_DESCRIPTION"` <br><br>
   Example to edit a module description: `edit /m CS2113T -d "Software Engineering & OOP"`<br><br>
-- Edit a task parameter <br>
+- Edit a task parameter <br><br>
   Format: `edit /t TASK_INDEX (-n "TASK_NAME" or -d "TASK_DESCRIPTION" or -t "ESTIMATED_WORKING_TIME") [-m MODULE_CODE]`
   <br><br>
   Example to edit a task parameter: `edit /t 1 -n "CS2113T Tutorial 2" -m CS2113T` <br><br>
   Note: You can only edit one task parameter per command. <br>
-  Not allowed: `edit /t 2 -n "CS2113T Tutorial 1" -d "Draw class diagram" -m CS2113T`<br>
+  Not allowed: `edit /t 2 -n "CS2113T Tutorial 1" -d "Draw class diagram" -m CS2113T`<br><br>
 
 ### Marking a task: `mark`
 
