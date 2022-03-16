@@ -2,6 +2,11 @@ package seedu.duke;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a data structure containing multiple Satisfaction objects.
+ * Uses an ArrayList to store the Satisfaction objects.
+ */
+
 public class SatisfactionList {
     private ArrayList<Satisfaction> satisfactionList;
 
