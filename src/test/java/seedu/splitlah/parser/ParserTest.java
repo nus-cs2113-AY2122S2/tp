@@ -223,6 +223,9 @@ class ParserTest {
     }
     
     // parseInvolved()
+    /**
+     * Checks if an exception is properly thrown when the Involved delimiter is not provided by the user.
+     */
     @Test
     void parseInvolved_missingDelimiter_exceptionThrown() {
         String argumentWithoutInvolvedDelimiter = "/sid 1 /n Lunch /p Alice i Alice Bob Charlie /co 15";
@@ -235,6 +238,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Involved delimiter is provided but no arguments
+     * following the Involved delimiter are provided by the user.
+     */
     @Test
     void parseInvolved_delimiterExistsWithoutArgument_exceptionThrown() {
         String argumentWithoutInvolvedArgument = "/sid 1 /n Lunch /p Alice /i /co 15";
@@ -247,6 +254,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if a String array object containing names of persons is properly returned when the Involved delimiter
+     * and arguments following it are properly provided by the user.
+     */
     @Test
     void parseInvolved_delimiterAndArgumentExists_personList() {
         String argumentWithDelimiterAndArgument = "/sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
