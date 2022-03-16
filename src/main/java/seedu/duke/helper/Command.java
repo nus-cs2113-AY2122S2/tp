@@ -10,14 +10,12 @@ public class Command {
         return string == null;
     }
 
-    public void viewPatient(PatientList patientList, String parameters) {
-        if (isNull(parameters)) {
-            return;
+    public void viewPatient(PatientList patientList, String nric) {
+        if (isNull(nric)) {
+            patientList.viewPatient();;
+        } else {
+            patientList.viewPatient(nric);
         }
-        if (Parser.parseViewPatient(parameters) == null) {
-            patientList.viewPatient();
-        }
-        patientList.viewPatient(parameters);
     }
 
     public void addPatient(PatientList patientList, String parameters) {
