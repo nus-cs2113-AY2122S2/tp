@@ -14,11 +14,11 @@ public class Ui {
     }
 
     public void showDivider() {
-        System.out.println("\t" + DIVIDER);
+        System.out.println(DIVIDER);
     }
 
     public void showWelcomeMessage() {
-        System.out.println("\t" + Messages.WELCOME);
+        System.out.println(Messages.WELCOME);
     }
 
     public String getUserCommand() {
@@ -28,6 +28,6 @@ public class Ui {
     }
 
     public void showResultToUser(String result) {
-        System.out.println("\t" + result);
+        System.out.println(result);
     }
 }
