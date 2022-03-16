@@ -13,6 +13,12 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Execute delete command using the timetable provided.
+     *
+     * @param timetable Timetable object initialised by programme
+     *
+     */
     public String execute(Timetable timetable) {
         try {
             Event event = timetable.get(index - 1);
@@ -23,6 +29,12 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Inform user that delete has happened.
+     *
+     * @param event Event to inform user that said event has been deleted
+     *
+     */
     private String deleteConfirmation(Event event) {
         return "The following event has been deleted from your timetable:\n"
                 + event;

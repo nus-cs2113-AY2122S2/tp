@@ -89,9 +89,11 @@ public class Parser {
     private void checkTime(int startTime, int endTime) throws InvalidTimeException {
         int startMinutes = startTime % 100;
         int endMinutes = endTime % 100;
+        boolean invalidMinutes = startMinutes >= 60 || endMinutes >= 60;
         int startHours = startTime / 100;
         int endHours = endTime / 100;
-        if (startMinutes >= 60 || endMinutes >= 60 || startHours >= 24 || endHours >= 24) {
+        boolean invalidHours = startHours >= 24 || endHours >= 24;
+        if (invalidMinutes || invalidHours || startTime > endTime) {
             throw new InvalidTimeException();
         }
     }
@@ -126,6 +128,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Try to parse the delete command to see if index has been done.
+     *
+     */
     public Command prepareDelete() {
         try {
             int index = Integer.parseInt(arguments);
