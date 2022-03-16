@@ -24,15 +24,20 @@ class ActivityDeleteCommandTest {
     @Test
     public void prepare_hasMissingDelimiter_InvalidCommand() {
 
-        // Case 1: Missing /sid delimiter and missing /aid delimiter
-        String firstArgsMissingSidDelimiter = "activity /delete";
-        Command firstActivityWithMissingSidDelimiter = Parser.getCommand(firstArgsMissingSidDelimiter);
-        assertEquals(InvalidCommand.class, firstActivityWithMissingSidDelimiter.getClass());
+        // Case 1: Missing both /sid and /aid delimiters
+        String argsMissingBothDelimiters = "activity /delete";
+        Command activityWithMissingBothDelimiters = Parser.getCommand(argsMissingBothDelimiters);
+        assertEquals(InvalidCommand.class, activityWithMissingBothDelimiters.getClass());
 
         // Case 2: Missing /sid delimiter only
-        String secondArgsMissingSidDelimiter = "activity /delete /aid 1";
-        Command secondActivityWithMissingSidDelimiter = Parser.getCommand(secondArgsMissingSidDelimiter);
-        assertEquals(InvalidCommand.class, secondActivityWithMissingSidDelimiter.getClass());
+        String argsMissingSidDelimiter = "activity /delete /aid 1";
+        Command activityWithMissingSidDelimiter = Parser.getCommand(argsMissingSidDelimiter);
+        assertEquals(InvalidCommand.class, activityWithMissingSidDelimiter.getClass());
+
+        // Case 3: Missing /aid delimiter only
+        String argsMissingAidDelimiter = "activity /delete /sid 1";
+        Command activityWithMissingAidDelimiter = Parser.getCommand(argsMissingAidDelimiter);
+        assertEquals(InvalidCommand.class, activityWithMissingAidDelimiter.getClass());
     }
 
 }
