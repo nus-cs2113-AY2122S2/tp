@@ -43,8 +43,8 @@ public class IncomeList {
 
     public void printIncomeList() {
         int listIndex = 1;
-        for (Income Item : incomeArrayList) {
-            System.out.println(listIndex++ + ". " + Item);
+        for (Income item : incomeArrayList) {
+            System.out.println(listIndex++ + ". " + item);
         }
     }
 }
