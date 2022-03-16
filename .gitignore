@@ -2,3 +2,4 @@
 .idea/
 build/
 *.log
+out/artifacts/tp_jar/tp.jar
