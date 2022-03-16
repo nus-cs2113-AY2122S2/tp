@@ -42,4 +42,15 @@ class PersonTest {
             assertNull(e.getMessage());
         }
     }
+
+    @Test
+    public void deleteExpend_invalidIndex_assertionError() {
+        Person person = new Person(VALID_NAME);
+        try {
+            person.deleteExpend(INVALID_INDEX);
+            fail();
+        } catch (AssertionError e) {
+            assertNull(e.getMessage());
+        }
+    }
 }
