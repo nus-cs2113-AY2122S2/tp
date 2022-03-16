@@ -211,39 +211,53 @@ public class WorkoutList {
     }
 
     /**
-     * Updates the number of reps of an existing workout.
-     * Updates the workout by stating the index of the workout and
+     * Updates the number of repetitions of an existing workout.
+     * Modifies the workout by stating the index of the workout and
      * new number of repetitions.
      *
      * @param userArgument The argument entered by user, which includes index of workout to update
      *                     and new number of repetitions.
      * @return updatedWorkout The workout object which has been updated.
      * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
-     * @throws NumberFormatException If workout index and number of reps could not be parsed into an integer.
-     * @throws WorkoutOutOfRangeException If workout index is out of total number of workout in workoutsList.
-     * @throws InvalidWorkoutException If the value of repetition is not valid.
+     * @throws NumberFormatException          If workout index and number of reps could not be parsed into an integer.
+     * @throws WorkoutOutOfRangeException     If workout index is out of total number of workout in workoutsList.
+     * @throws InvalidWorkoutException        If the value of repetition is not valid.
      */
     public Workout updateWorkout(String userArgument) throws ArrayIndexOutOfBoundsException,
             NumberFormatException, WorkoutOutOfRangeException, InvalidWorkoutException {
+        logger.entering(getClass().getName(), "updateWorkout");
         String[] updateDetails = userArgument.split(" ", 2);
         String indexToUpdateString = updateDetails[0].trim();
         String newNumberOfRepsString = updateDetails[1].trim();
         int indexToUpdate = Integer.parseInt(indexToUpdateString);
-        int newNumberOfReps = Integer.parseInt(newNumberOfRepsString);
+        int newRepsValue = Integer.parseInt(newNumberOfRepsString);
 
         boolean isIndexToUpdateValid = checkIndexIsWithinRange(indexToUpdate);
-        boolean isNewNumberOfRepsValid = checkIfRepsValueIsValid(newNumberOfReps);
+        boolean isNewRepsValueValid = checkIfRepsValueIsValid(newRepsValue);
         String className = this.getClass().getSimpleName();
 
         if (!isIndexToUpdateValid) {
+            logger.log(Level.WARNING, "Workout index to update is out of range!");
             throw new WorkoutOutOfRangeException(className, WorkoutOutOfRangeException.INDEX_VALUE_OUT_OF_RANGE);
         }
-        if (!isNewNumberOfRepsValid) {
+        if (!isNewRepsValueValid) {
+            logger.log(Level.WARNING, "Repetition value is invalid.");
             throw new InvalidWorkoutException(className, InvalidWorkoutException.INVALID_REPS_VALUE_ERROR_MSG);
         }
 
         Workout updatedWorkout = workoutsList.get(indexToUpdate - 1);
-        updatedWorkout.setRepetitions(newNumberOfReps);
+        String exerciseName = updatedWorkout.getExerciseName();
+        boolean isExistingWorkout = checkForExistingWorkout(exerciseName, newRepsValue);
+
+        if (isExistingWorkout) {
+            logger.log(Level.WARNING, "\"" + exerciseName + " (" + newRepsValue + ")\" "
+                + "has already existed in the list. Cannot be updated.");
+            throw new InvalidWorkoutException(className, InvalidWorkoutException.DUPLICATE_WORKOUT_ERROR_MSG);
+        }
+
+        assert (isIndexToUpdateValid && isNewRepsValueValid && !isExistingWorkout);
+        updatedWorkout.setRepetitions(newRepsValue);
+        logger.exiting(getClass().getName(), "updateWorkout");
         return updatedWorkout;
     }
 
