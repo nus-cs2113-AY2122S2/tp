@@ -15,7 +15,7 @@ public class PlanITarium {
     protected CommandFactory commandFactory = new CommandFactory();
     protected static ProjectLogger logger;
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         initialisePlanitarium();
         new PlanITarium().run();
     }
