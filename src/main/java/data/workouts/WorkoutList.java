@@ -5,6 +5,7 @@ import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -18,7 +19,8 @@ public class WorkoutList {
     public static final int MAX_DISPLAY = 10;
 
     private ExerciseList exerciseList;
-    private ArrayList<Workout> workoutsList = new ArrayList<>();
+    private HashMap<String, Workout> workoutsList = new HashMap<>();
+    private ArrayList<Workout> workoutsDisplayList = new ArrayList<>();
     private static Logger logger = Logger.getLogger(WorkoutList.class.getName());
 
     /**
@@ -35,8 +37,8 @@ public class WorkoutList {
      *
      * @return An ArrayList of Workouts.
      */
-    public ArrayList<Workout> getWorkoutsList() {
-        return this.workoutsList;
+    public ArrayList<Workout> getWorkoutsDisplayList() {
+        return this.workoutsDisplayList;
     }
 
     /**
@@ -86,7 +88,7 @@ public class WorkoutList {
         Workout newWorkout = new Workout(userExerciseInput, userRepsInput);
         logger.log(Level.INFO, "New workout created.");
 
-        workoutsList.add(newWorkout);
+        workoutsDisplayList.add(newWorkout);
 
         return newWorkout;
     }
@@ -109,12 +111,12 @@ public class WorkoutList {
     public void listWorkout() {
         logger.entering(getClass().getName(), "listWorkout");
         int index = 0;
-        int totalPrints = workoutsList.size();
+        int totalPrints = workoutsDisplayList.size();
         String input = "";
 
         while (totalPrints > MAX_DISPLAY) {
             index = continuousPrinting(index, 10);
-            assert (index <= workoutsList.size());
+            assert (index <= workoutsDisplayList.size());
             totalPrints -= 10;
             while (!isInputYesOrNo(input)) {
                 System.out.println("Do you want to view more workouts? [yes/no]");
@@ -132,7 +134,7 @@ public class WorkoutList {
             System.out.println("Showed all workouts in list");
             return;
         } else {
-            assert (workoutsList.size() == 0);
+            assert (workoutsDisplayList.size() == 0);
             System.out.println("The workout list is empty");
         }
         logger.exiting(getClass().getName(), "listWorkout");
@@ -143,10 +145,10 @@ public class WorkoutList {
      */
     public int continuousPrinting(int index, int noOfPrints) {
         System.out.println("Showing workouts " + (index + 1) + "-" + (index + noOfPrints)
-                + " of " + workoutsList.size() + ":");
-        assert (noOfPrints <= workoutsList.size());
+                + " of " + workoutsDisplayList.size() + ":");
+        assert (noOfPrints <= workoutsDisplayList.size());
         for (int i = 0; i < noOfPrints; i++) {
-            System.out.println(index + 1 + ". " + workoutsList.get(index));
+            System.out.println(index + 1 + ". " + workoutsDisplayList.get(index));
             index += 1;
         }
         return index;
@@ -192,9 +194,9 @@ public class WorkoutList {
             throw new WorkoutOutOfRangeException(className, WorkoutOutOfRangeException.INDEX_VALUE_OUT_OF_RANGE);
         }
 
-        assert (indexToDelete > 0) && (indexToDelete <= workoutsList.size());
-        Workout deletedWorkout = workoutsList.get(indexToDelete - 1);
-        workoutsList.remove(indexToDelete - 1);
+        assert (indexToDelete > 0) && (indexToDelete <= workoutsDisplayList.size());
+        Workout deletedWorkout = workoutsDisplayList.get(indexToDelete - 1);
+        workoutsDisplayList.remove(indexToDelete - 1);
         logger.exiting(getClass().getName(), "deleteWorkout");
         return deletedWorkout;
     }
@@ -207,7 +209,7 @@ public class WorkoutList {
      * @return true if index is within range, else false if out of range.
      */
     private boolean checkIndexIsWithinRange(int index) {
-        return index > 0 && index <= workoutsList.size();
+        return index > 0 && index <= workoutsDisplayList.size();
     }
 
     /**
@@ -245,7 +247,7 @@ public class WorkoutList {
             throw new InvalidWorkoutException(className, InvalidWorkoutException.INVALID_REPS_VALUE_ERROR_MSG);
         }
 
-        Workout updatedWorkout = workoutsList.get(indexToUpdate - 1);
+        Workout updatedWorkout = workoutsDisplayList.get(indexToUpdate - 1);
         String exerciseName = updatedWorkout.getExerciseName();
         boolean isExistingWorkout = checkForExistingWorkout(exerciseName, newRepsValue);
 
@@ -272,7 +274,7 @@ public class WorkoutList {
      *         Otherwise, returns false.
      */
     public boolean checkForExistingWorkout(String exerciseName, int repetitionCount) {
-        for (Workout existingWorkout : getWorkoutsList()) {
+        for (Workout existingWorkout : getWorkoutsDisplayList()) {
             boolean hasSameExerciseName = existingWorkout.getExerciseName().equals(exerciseName);
             boolean hasSameRepsCount = (existingWorkout.getRepetitions() == repetitionCount);
 

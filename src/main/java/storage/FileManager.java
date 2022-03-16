@@ -394,7 +394,7 @@ public class FileManager {
      *                              by this method.
      */
     public void rewriteAllWorkoutsToFile(WorkoutList workoutList) throws IOException, NullPointerException {
-        ArrayList<Workout> listOfWorkouts = workoutList.getWorkoutsList();
+        ArrayList<Workout> listOfWorkouts = workoutList.getWorkoutsDisplayList();
 
         FileWriter fileWriter = new FileWriter(getWorkoutFilePath().toString());
         for (Workout workout : listOfWorkouts) {
