@@ -18,6 +18,16 @@ public class DeleteCommand extends Command {
     }
 
     /**
+     * Indicates whether the program should exit.
+     *
+     * @return Indication on whether the program should exit.
+     */
+    @Override
+    public boolean isExit() {
+        return false;
+    }
+
+    /**
      * Checks if the position to delete is within the bounds of the array length.
      * @param positionToDelete position of index to delete.
      * @return true if position is within the bounds, false otherwise.
@@ -46,7 +56,7 @@ public class DeleteCommand extends Command {
             if (checkOutOfBounds(positionToDelete)) {
                 throw new MindMyMoneyException("Please input a valid index");
             } else {
-                System.out.println(PrintStrings.LINE + "I have removed "
+                System.out.print(PrintStrings.LINE + "I have removed "
                         + expenditureList.get(positionToDelete).getDescription()
                         + " of $" + expenditureList.get(positionToDelete).getAmount()
                         + " from the account" + System.lineSeparator() + PrintStrings.LINE);

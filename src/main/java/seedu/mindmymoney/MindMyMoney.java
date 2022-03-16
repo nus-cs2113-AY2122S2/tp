@@ -21,12 +21,14 @@ public class MindMyMoney {
     public void run() {
         ui.printIntro();
         itemList = storage.load();
-        while (true) {
+        boolean isExit = false;
+        while (!isExit) {
             try {
                 String input = ui.readInput();
                 Command commandType = Parser.parseCommand(input, itemList);
                 commandType.executeCommand();
                 storage.save(itemList);
+                isExit = commandType.isExit();
             } catch (MindMyMoneyException e) {
                 System.out.println(e.getMessage());
             }
