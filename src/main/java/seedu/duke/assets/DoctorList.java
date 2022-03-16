@@ -5,9 +5,6 @@ import java.util.ArrayList;
 
 public class DoctorList {
 
-    private boolean isNull(String string) {
-        return string == null;
-    }
 
     private ArrayList<Doctor> doctors = new ArrayList<>();
 
