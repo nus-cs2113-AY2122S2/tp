@@ -17,4 +17,12 @@ class PersonListTest {
         list.addPerson("Alice");
         assertEquals(1, list.getNumberOfMembers());
     }
+    
+    @Test
+    public void getNumberOfMembers_addAndDeletePerson_returnZero() {
+        PersonList list = new PersonList();
+        list.addPerson("Alice");
+        list.removePerson(1);
+        assertEquals(0, list.getNumberOfMembers());
+    }
 }
