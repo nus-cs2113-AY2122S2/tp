@@ -3,7 +3,6 @@ package seedu.duke.helper;
 import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
-import seedu.duke.assets.DoctorList;
 
 
 public class Command {
