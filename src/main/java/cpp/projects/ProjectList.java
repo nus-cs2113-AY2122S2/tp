@@ -88,9 +88,9 @@ public class ProjectList {
             return;
         }
 
-        Project targetProject = new Project();
+        Project targetProject;
         targetProject = projectList.get(index - 1);
-
+        assert targetProject != null : "The target project does not exist!";
         targetProject.addTodo(todoString);
 
     }
