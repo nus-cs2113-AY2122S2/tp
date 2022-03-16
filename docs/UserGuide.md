@@ -36,7 +36,7 @@ A module can have its description while a task can have its description and/or i
   Example to add a general task without any parameters: `add /t "Review PR"`<br>
   Example to add a module task with parameters: `add /t "iP Level-0" -d "Greet user and exit" -t "1 hour" -m CS2113T`
 <br><br>
-  Note: Adding tasks with parameters must be in the order (-d, -t, -m), omitting any flags you are not adding.<br><br>
+  Note: Adding tasks with parameters must be in the order (-d, -t, -m), omitting any flags you are not adding.<br>
 
 ### Deleting a task/module: `del`
 
