@@ -55,4 +55,6 @@ public class Message {
     public static final String ERROR_INVALID_MARKING_INDEX_MESSAGE = "Bzzt!\nPlease"
             + " key in a valid task number to mark/unmark your task."
             + HELP_MESSAGE_SPECIFIC_COMMAND;
+    public static final String ERROR_DUPLICATE_TASK_MESSAGE_1 = "Skipping task \"";
+    public static final String ERROR_DUPLICATE_TASK_MESSAGE_2 = "\" as it already exists!";
 }
