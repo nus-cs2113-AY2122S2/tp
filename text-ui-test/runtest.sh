@@ -8,4 +8,4 @@ cd ..
 
 cd text-ui-test
 
-echo "Test passed!"
+echo "Test passed!"  #Remove tests as we adopt JUnit testing instead
