@@ -4,7 +4,6 @@ import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 /**
  * Represents a profile that manages a list of sessions and keeps track of unique session and activity
@@ -17,8 +16,6 @@ public class Profile {
     private ArrayList<Session> sessionList;
     private int sessionIdTracker;
     private int activityIdTracker;
-
-    private static Logger logger = Logger.getLogger(Profile.class.getName());
 
     /**
      * Constructor to create a Profile object.
@@ -92,7 +89,6 @@ public class Profile {
      */
     public void addSession(Session session) {
         sessionList.add(session);
-        logger.finest(Message.LOGGER_PROFILE_SESSION_ADDED + session.getSessionId());
     }
 
     /**
@@ -103,7 +99,6 @@ public class Profile {
     public void removeSession(int sessionId) throws InvalidDataException {
         Session sessionToBeRemoved = getSession(sessionId);
         sessionList.remove(sessionToBeRemoved);
-        logger.finest(Message.LOGGER_PROFILE_SESSION_REMOVED + sessionId);
     }
 
     /**
