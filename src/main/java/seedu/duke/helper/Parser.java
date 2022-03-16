@@ -2,7 +2,6 @@ package seedu.duke.helper;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,19 +27,6 @@ public class Parser {
         } else {
             return null;
         }
-    }
-
-
-    public static ArrayList<String> parseViewDoctor(String description) {
-        //no specific doctor
-        if (description == null) {
-            return null;
-        }
-
-        //if specific doctor
-        ArrayList<String> parameters = new ArrayList<String>();
-        parameters.add(description);
-        return parameters;
     }
 
     public static String[] parseAddDoctor(String parameters) {

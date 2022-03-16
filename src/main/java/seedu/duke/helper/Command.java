@@ -3,7 +3,6 @@ package seedu.duke.helper;
 import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
-import seedu.duke.assets.DoctorList;
 
 
 public class Command {
@@ -58,12 +57,9 @@ public class Command {
     }
 
     public void viewDoctor(DoctorList doctorList, String nric) {
-        if (isNull(nric)) {
-            return;
-        }
-        if (Parser.parseViewDoctor(nric) == null) {
+        if (nric == null) {
             doctorList.viewDoctor();
-
+            return;
         }
         doctorList.viewDoctor(nric);
     }

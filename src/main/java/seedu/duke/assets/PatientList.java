@@ -49,6 +49,9 @@ public class PatientList {
 
     @Override
     public String toString() {
+        if (getSize() == 0) {
+            return "There are no patients currently.";
+        }
         String output = "";
         int number = 1;
         for (Patient patient : this.patients) {

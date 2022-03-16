@@ -18,8 +18,6 @@ public class DoctorList {
         return null;
     }
 
-
-
     public void add(String[] addDoctorParameters) {
         Doctor newDoctor = new Doctor(addDoctorParameters[0],addDoctorParameters[1],
                 Integer.parseInt(addDoctorParameters[2]), addDoctorParameters[3].charAt(0),
@@ -29,11 +27,12 @@ public class DoctorList {
 
     //view particular doctor
     public void viewDoctor(String nric) {
-        if ((getDoctor(nric)) == null) {
+        Doctor doctor = getDoctor(nric);
+        if (doctor == null) {
             System.out.println("Doctor doesn't exist please try again!");
             return;
         }
-        System.out.println(getDoctor(nric));
+        System.out.println(doctor);
     }
 
     //view all doctor
@@ -53,6 +52,9 @@ public class DoctorList {
 
     @Override
     public String toString() {
+        if (getSizeDoctor() == 0) {
+            return "There are no doctors.";
+        }
         String doctorName = " ";
         int index = 1;
         for (Doctor doctor : this.doctors) {

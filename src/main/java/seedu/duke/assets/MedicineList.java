@@ -23,6 +23,10 @@ public class MedicineList {
     }
 
     public void viewMedicine() {
+        if (size() == 0) {
+            System.out.println("There are no medicines currently.");
+            return;
+        }
         for (Medicine medicine : medicines) {
             getMedicineInfo(medicine);
         }
