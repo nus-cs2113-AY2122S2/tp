@@ -85,7 +85,7 @@ public class Parser {
     }
 
     /**
-     * Method used to create item for AddCommand to handle
+     * Method used to create item for AddCommand to handle.
      * 
      * @param userCommand User input
      * @return item to be added into itemList
