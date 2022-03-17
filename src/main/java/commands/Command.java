@@ -14,6 +14,7 @@ import static ui.TextUi.DISPLAYED_INDEX_OFFSET;
 public class Command {
     protected RecordManager recordMgr;
     private int index = -1;
+    static protected double totalExpense = 0;
 
     public Command() {
     }

@@ -33,6 +33,7 @@ public class AddCommand extends Command {
     public void AddProductCommand(String name, double price,
                       String date, String productType) throws IllegalValueException {
         this.toAdd = new Product(name, price, date, productType);
+        super.totalExpense += price;
     }
 
     /**
@@ -43,6 +44,7 @@ public class AddCommand extends Command {
     public void AddSubscriptionCommand(String name, double price,
                              String date, String renewal) throws IllegalValueException {
         this.toAdd = new Subscription(name, price, date, renewal);
+        super.totalExpense += price;
     }
 
 
