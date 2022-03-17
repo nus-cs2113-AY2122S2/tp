@@ -9,14 +9,19 @@ public class HelpCommand extends Command {
     public static final String COMMAND_NAME = "Help";
     public static final String USAGE_MESSAGE = "Displays all functions of inventory manager";
     public static final String COMMAND_FORMAT = COMMAND_WORD;
-    public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + ":\n"
-            + "[Command Format] " + COMMAND_FORMAT + "\n";
+    public static final String HELP_MESSAGE = COMMAND_NAME + ":\n"
+            + "[Function] "
+            + USAGE_MESSAGE
+            + ":\n"
+            + "[Command Format] "
+            + COMMAND_FORMAT
+            + "\n";
 
     @Override
-    public void execute(Ui ui, ItemList itemList) {
-        System.out.println(Messages.COMMAND_MENU_MESSAGE +
-                Messages.DIVIDER +
-                ByeCommand.HELP_MESSAGE + Messages.DIVIDER +
-                HelpCommand.HELP_MESSAGE + Messages.DIVIDER);
+    public void execute(ItemList itemList, Ui ui) {
+        System.out.println(Messages.COMMAND_MENU_MESSAGE
+                + Messages.DIVIDER
+                + ExitCommand.HELP_MESSAGE + Messages.DIVIDER
+                + HelpCommand.HELP_MESSAGE + Messages.DIVIDER);
     }
 }

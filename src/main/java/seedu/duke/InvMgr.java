@@ -1,12 +1,16 @@
 package seedu.duke;
 
 import seedu.duke.commands.Command;
+import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
+import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
+import seedu.duke.common.Messages;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class InvMgr {
     private Storage storage;
@@ -14,32 +18,36 @@ public class InvMgr {
     private Ui ui;
 
     /**
-     * Sets up the required objects, loads the user's inventory list file from the user's hard disk
+     * Sets up the required objects, loads the user's inventory list file from the user's hard disk.
      *
      * @param filePath File path of the user's inventory list file
      * */
     public InvMgr(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
         try {
-            itemList = new ItemList(storage.load());
-        } catch (IOException e) {
-            e.printStackTrace();
+            storage = new Storage(filePath);
+            itemList = new ItemList(storage.loadData());
+        } catch (InvMgrException e) {
+            ui.showMessages(Messages.ERROR_MESSAGE);
+            itemList = new ItemList(new ArrayList<Item>());
         }
     }
 
     /**
-     * Greets the user and processes the user's inputs until the user issues an exit command
+     * Greets the user and processes the user's inputs until the user issues an exit command.
      * */
     public void run() {
         ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
-            String userInput = ui.getRawUserInput();
-            ui.showDivider();
-            Command inputCommand = Parser.parse(userInput);
-            inputCommand.execute(ui, itemList);
-            isExit = inputCommand.isExit();
+            try {
+                String command = ui.getRawUserInput();
+                Command inputCommand = Parser.parse(command);
+                inputCommand.execute(itemList, ui);
+                isExit = inputCommand.isExit();
+            } catch (InvMgrException e) {
+                ui.showError(e);
+            }
         }
     }
 
