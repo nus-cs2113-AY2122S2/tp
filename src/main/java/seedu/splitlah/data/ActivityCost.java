@@ -15,8 +15,7 @@ public class ActivityCost {
     private double costPaid;
     private double costOwed;
 
-    private static String LOGGER_FILE_NAME = "SplitLah";
-    private static Logger logger = Logger.getLogger(LOGGER_FILE_NAME);
+    private static final Logger logger = Manager.getLogger();
 
     /**
      * Constructs an ActivityCost object.

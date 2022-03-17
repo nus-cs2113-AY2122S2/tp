@@ -48,7 +48,7 @@ public class Manager {
      *
      * @return A Logger object.
      */
-    public Logger getLogger() {
+    public static Logger getLogger() {
         return logger;
     }
 }
