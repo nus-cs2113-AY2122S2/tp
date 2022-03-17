@@ -154,7 +154,7 @@ public abstract class Message {
 
     // Session Delete Command
     public static final String LOGGER_SESSIONDELETE_SESSION_REMOVED =
-            "A session was remove from the list of session with Id: ";
+            "A session was removed from the list of session with Id: ";
 
     // Session Summary Command
     public static final String MESSAGE_SESSIONSUMMARY_NO_PAYMENTS_REQUIRED =
@@ -163,6 +163,10 @@ public abstract class Message {
             "The generated personCostPairList is invalid with a non-zero total sum of debt.";
     public static final String ASSERT_SESSIONSUMMARY_PAYER_EXPECTS_FROM_RECEIVER =
             "Payer has a greater total cost than receiver.";
+    public static final String LOGGER_SESSIONSUMMARY_SESSION_ID_NOT_FOUND =
+            "A session summary was unable to be produced as a session with the following Id was not found :";
+    public static final String LOGGER_SESSIONSUMMARY_SESSION_SUMMARY_PRINTED =
+            "A session summary has been successful produced for the session with the following Id: ";
     
     // Activity Create Command
     public static final String ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH =
