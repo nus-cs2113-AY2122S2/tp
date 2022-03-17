@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(ItemList itemList, Ui ui) {
         boolean isWithinRange = index <= itemList.getSize();
-        assert isWithinRange == true : "There is no such index!";\
+        assert isWithinRange == true : "There is no such index!";
 
         Item removedItem = itemList.removeItem(index);
         ui.showMessages(removedItem + " has been deleted.");
