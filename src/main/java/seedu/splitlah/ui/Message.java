@@ -183,6 +183,6 @@ public abstract class Message {
     public static final String ASSERT_ACTIVITYLIST_SESSION_ID_LESS_THAN_ONE =
             "Session unique identifier is less than one";
     public static final String LOGGER_ACTIVITYLIST_SESSION_ID_NOT_FOUND =
-            "Session with the unique identifier does not exist";
+            "Session was not found with unique identifier of:";
 
 }
