@@ -50,4 +50,24 @@ class ProfileTest {
         boolean isExists = manager.getProfile().hasSessionId(sessionIdToTest);
         assertEquals(false, isExists);
     }
+    @Test
+    public void getSession_validSessionId_sessionReturned() {
+        int sessionIdToTest = 1;
+        try {
+            Session retrievedSession = manager.getProfile().getSession(sessionIdToTest);
+            assertEquals(sessionIdToTest, retrievedSession.getSessionId());
+        } catch (InvalidDataException invalidDataException) {
+            fail();
+        }
+    }
+    @Test
+    public void getSession_invalidSessionId_exceptionThrown() {
+        int sessionIdToTest = 10;
+        try {
+            manager.getProfile().getSession(sessionIdToTest);
+            fail();
+        } catch (InvalidDataException invalidDataException) {
+            assertEquals(invalidDataException.getMessage(), Message.ERROR_PROFILE_SESSION_NOT_IN_LIST);
+        }
+    }
 }
