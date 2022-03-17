@@ -2,7 +2,13 @@ package seedu.parser;
 
 import java.util.ArrayList;
 
-import seedu.command.*;
+import seedu.command.AddCommand;
+import seedu.command.CheckCommand;
+import seedu.command.Command;
+import seedu.command.DeleteCommand;
+import seedu.command.IncorrectCommand;
+import seedu.command.ListCommand;
+import seedu.command.UpdateCommand;
 
 import java.util.Collections;
 import java.util.regex.Matcher;
@@ -20,12 +26,12 @@ public class Parser {
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s+(?<arguments>.+)");
     public static final Pattern ADD_COMMAND_FORMAT = Pattern.compile(
-            "n\\/(?<itemName>.+)" + "\\s+" +
-                    "s\\/(?<serialNumber>.+)" + "\\s+" +
-                    "t\\/(?<equipmentType>.+)" + "\\s+" +
-                    "c\\/(?<cost>.+)" + "\\s+" +
-                    "pf\\/(?<purchasedFrom>.+)" + "\\s+" +
-                    "pd\\/(?<purchasedDate>.+)"
+            "n\\/(?<itemName>.+)" + "\\s+"
+                    + "s\\/(?<serialNumber>.+)" + "\\s+"
+                    + "t\\/(?<equipmentType>.+)" + "\\s+"
+                    + "c\\/(?<cost>.+)" + "\\s+"
+                    + "pf\\/(?<purchasedFrom>.+)" + "\\s+"
+                    + "pd\\/(?<purchasedDate>.+)"
     );
     public static final Pattern VIEW_COMMAND_FORMAT = Pattern.compile("n/(?<itemName>.+)");
     public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("s/(?<itemName>.+)");
@@ -42,7 +48,7 @@ public class Parser {
     public static final String INCORRECT_COMMAND_FORMAT = "Incorrect Command format!";
 
     /**
-     * Interpret the command requested by the user and returns a corresponding Command object
+     * Interpret the command requested by the user and returns a corresponding Command object.
      *
      * @param userInput Raw string of input values
      * @return command of parent class Command with parameters specified
@@ -101,7 +107,8 @@ public class Parser {
     /**
      * Break down a command into the command term to be parsed and the remainder of the arguments.
      * Assumes command term and remainder arguments are delimited by minimally one space.
-     * If first element is "list", remainder arguments can be empty, in which case a null second object will be passed in.
+     * If first element is "list", remainder arguments can be empty, in which case a null
+     * second object will be passed in.
      *
      * @param userInput String to be split into substrings
      * @return ArrayList of String, first element being the command term and the second element being arguments
@@ -126,7 +133,7 @@ public class Parser {
     }
 
     /**
-     * Prepare arguments for AddCommand by splitting up the arguments into different parts
+     * Prepare arguments for AddCommand by splitting up the arguments into different parts.
      * <p>
      * Index:
      * 0. <code> equipmentName </code>: String of equipment name
@@ -159,7 +166,7 @@ public class Parser {
     }
 
     /**
-     * Prepare argument for CheckCommand by removing the preceding "n/" prefix
+     * Prepare argument for CheckCommand by removing the preceding "n/" prefix.
      *
      * @param args String to be split into substrings
      * @return ArrayList of one element (assumes rest of string is item name)
@@ -174,7 +181,7 @@ public class Parser {
     }
 
     /**
-     * Prepare argument for DeleteCommand by removing the preceding "s/" prefix
+     * Prepare argument for DeleteCommand by removing the preceding "s/" prefix.
      *
      * @param args String to be split into substrings
      * @return ArrayList of one element (assumes rest of string is serial number)
@@ -189,7 +196,7 @@ public class Parser {
     }
 
     /**
-     * Splits main arguments into split tags with each substring
+     * Splits main arguments into split tags with each substring.
      *
      * @param args String to be split into substrings
      * @return ArrayList of two elements
