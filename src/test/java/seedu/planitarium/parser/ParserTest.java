@@ -87,8 +87,44 @@ class ParserTest {
             fail();
         }
     }
+
     @Test
-    void parseKeyword() {
+    void parseUserIndex_delimiterExist_success() throws DuplicateDelimiterException, MissingDelimiterException {
+        String input = "addin /u 1 /d Gift /i 100";
+        String output = Parser.parseUserIndex(input);
+        assertEquals("1", output);
+    }
+
+    @Test
+    void parseUserIndex_nullInput_assertThrown() throws DuplicateDelimiterException, MissingDelimiterException {
+        try {
+            Parser.parseUserIndex(null);
+            fail();
+        } catch (AssertionError e) {
+            assertEquals("User input should not be null", e.getMessage());
+        }
+    }
+
+    @Test
+    void parseUserIndex_delimiterIssues_exceptionThrown() {
+        try {
+            String noDelimiter = "addin 1 /d Gift /i 100";
+            Parser.parseUserIndex(noDelimiter);
+            fail();
+        } catch (MissingDelimiterException e) {
+            assertEquals("Missing delimiter `/u`", e.getMessage());
+        } catch (DuplicateDelimiterException e) {
+            fail();
+        }
+        try {
+            String tooManyDelimiter = "addin /u 1 /u 2 /d Gift /i 100";
+            Parser.parseUserIndex(tooManyDelimiter);
+            fail();
+        } catch (DuplicateDelimiterException e) {
+            assertEquals("Too many delimiter `/u`", e.getMessage());
+        } catch (MissingDelimiterException e) {
+            fail();
+        }
     }
 
     @Test
