@@ -29,6 +29,12 @@ public class AddCommand extends Command {
         this.mode = mode;
     }
 
+    /**
+     * Execute Add command using the timetable provided.
+     *
+     * @param timetable Timetable object initialised by program
+     *
+     */
     @Override
     public String execute(Timetable timetable) {
         try {
@@ -42,6 +48,12 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Inform user that add has happened.
+     *
+     * @param event Event that inform user that said event has been event
+     *
+     */
     private String addConfirmation(Event event) {
         return "The following event has been added to your timetable:\n"
                 + event;
