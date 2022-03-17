@@ -48,7 +48,10 @@ public class Parser {
             if (arg.isEmpty()) {
                 continue;
             }
-            String[] argSplit = arg.split("/");
+            String[] argSplit = arg.split("/", 2);
+            if (argSplit.length < 2) {
+                continue;
+            }
             String field = argSplit[0].trim();
             String value = argSplit[1].trim();
             switch (field) {
@@ -83,6 +86,9 @@ public class Parser {
     }
 
     public Command prepareFindRouteCommand(String argumentLine) {
+        if (argumentLine == null || argumentLine.isEmpty()) {
+            return new FindRouteCommand(null, null, null, null);
+        }
         String[] args = argumentLine.split(" ");
         String date = null;
         String to = null;
@@ -94,7 +100,10 @@ public class Parser {
             if (arg.isEmpty()) {
                 continue;
             }
-            String[] argSplit = arg.split("/");
+            String[] argSplit = arg.split("/", 2);
+            if (argSplit.length < 2) {
+                continue;
+            }
             String field = argSplit[0].trim();
             String value = argSplit[1].trim();
             switch (field) {

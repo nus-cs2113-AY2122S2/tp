@@ -11,7 +11,7 @@ public class AddRouteCommand extends Command{
     private ArrayList<String> emptyFields = new ArrayList<>();
 
     private final String SUCCESS_MESSAGE = "OK! The following new route is added: ";
-    private final String DUPLICATE_MESSAGE = "Sorry! The flight ID already exits. This flight cannot be added.";
+    private final String DUPLICATE_MESSAGE = "The flight ID already exits. This flight cannot be added.";
     private final String EMPTY_FIELD_MESSAGE = "These necessary fields are not specified:";
 
     public AddRouteCommand(String flightID, String date, String time,
@@ -22,19 +22,19 @@ public class AddRouteCommand extends Command{
 
     private void checkEmptyField(String flightID, String date, String time,
                                  String from, String to, int capacity) {
-        if (flightID == null) {
+        if (flightID == null || flightID.isEmpty()) {
             emptyFields.add("Flight ID");
         }
-        if (date == null) {
+        if (date == null || date.isEmpty()) {
             emptyFields.add("Flight date");
         }
-        if (time == null) {
+        if (time == null || time.isEmpty()) {
             emptyFields.add("Flight time");
         }
-        if (from == null) {
+        if (from == null || from.isEmpty()) {
             emptyFields.add("Source");
         }
-        if (to == null) {
+        if (to == null || to.isEmpty()) {
             emptyFields.add("Destination");
         }
         if (capacity == 0) {
@@ -54,7 +54,7 @@ public class AddRouteCommand extends Command{
             result = new CommandResult(SUCCESS_MESSAGE + System.lineSeparator()
                     + toAdd.getFlightInfo());
         } catch (DuplicateDataException e) {
-            result = new CommandResult(e.getMessage());
+            result = new CommandResult(DUPLICATE_MESSAGE);
         }
 
         return result;
