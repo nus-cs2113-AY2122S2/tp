@@ -147,6 +147,9 @@ public class Profile {
         }
         throw new InvalidDataException(Message.ERROR_PROFILE_SESSION_NOT_IN_LIST);
     }
+    public void addGroup(Group group) {
+        groupList.add(group);
+    }
      * Assumption: Function is called when a new Session object is being created without errors.
      *
      * @return An integer that represents the new session unique identifier.
