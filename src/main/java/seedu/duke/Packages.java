@@ -2,13 +2,14 @@ package seedu.duke;
 
 import java.util.ArrayList;
 //Packages include arrayList packages to hold all TravelPackages
+
 public class Packages {
     private ArrayList<TravelPackage> packages;
     private ArrayList<Reservation> reservations;
 
-    public Packages(ArrayList<TravelPackage> packages, ArrayList<Reservation> reservations) {
-        this.packages = packages;
-        this.reservations = reservations;
+    public Packages() {
+        packages = new ArrayList<>();
+        reservations = new ArrayList<>();
     }
 
     public int getSize() {
@@ -27,7 +28,7 @@ public class Packages {
         packages.remove(index);
     }
 
-    public Reservation getReservation(int index){
+    public Reservation getReservation(int index) {
         return reservations.get(index);
     }
 

@@ -8,10 +8,9 @@ import seedu.duke.TravelPackage;
 public class AddCommand extends Command {
     private TravelPackage newPackage;
 
-    public AddCommand(String name, int id, int date1, int date2, String hotel, double price, String country,
+    public AddCommand(String name, int date1, int date2, String hotel, double price, String country,
             int maxVacancies) {
-        super(false);
-        this.newPackage = new TravelPackage(name, id, new Date(date1), new Date(date2), hotel, price, country,
+        this.newPackage = new TravelPackage(name, new Date(date1), new Date(date2), hotel, price, country,
                 maxVacancies);
     }
 

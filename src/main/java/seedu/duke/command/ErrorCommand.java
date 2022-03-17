@@ -2,11 +2,10 @@ package seedu.duke.command;
 
 import seedu.duke.Packages;
 
-public class ErrorCommand extends Command{
+public class ErrorCommand extends Command {
     private String input;
 
-    public ErrorCommand(String input)  {
-        super(false);
+    public ErrorCommand(String input) {
         this.input = input;
     }
 
@@ -15,5 +14,4 @@ public class ErrorCommand extends Command{
         System.out.println("Use the help command to find out the valid commands.");
 
     }
-
 }

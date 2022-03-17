@@ -13,9 +13,14 @@ public class Parser {
         String[] inputArray = input.split(" ");
         String commandType = inputArray[0];
 
-        int id, start, end, vacancies;
+        String id;
+        int start;
+        int end;
+        int vacancies;
         double price;
-        String name, hotel, country;
+        String name;
+        String hotel;
+        String country;
 
         switch (commandType) {
         case "bye":
@@ -23,24 +28,22 @@ public class Parser {
 
         case "add": //only can have spaces between variables - what if hotel has 2 words?
             final int nameIndex = 1;
-            final int idIndex = 2;
-            final int startIndex = 3;
-            final int endIndex = 4;
-            final int hotelIndex = 5;
-            final int priceIndex = 6;
-            final int countryIndex = 7;
-            final int vacanciesIndex = 8;
+            final int startIndex = 2;
+            final int endIndex = 3;
+            final int hotelIndex = 4;
+            final int priceIndex = 5;
+            final int countryIndex = 6;
+            final int vacanciesIndex = 7;
             name = inputArray[nameIndex];
-            id = Integer.parseInt(inputArray[idIndex]);
             start = Integer.parseInt(inputArray[startIndex]);
             end = Integer.parseInt(inputArray[endIndex]);
             hotel = inputArray[hotelIndex];
             price = Double.parseDouble(inputArray[priceIndex]);
             country = inputArray[countryIndex];
             vacancies = Integer.parseInt(inputArray[vacanciesIndex]);
-            return new AddCommand(name, id, start, end, hotel, price, country, vacancies);
+            return new AddCommand(name, start, end, hotel, price, country, vacancies);
         case "delete":
-            id = Integer.parseInt(inputArray[1]);
+            id = inputArray[1];
             return new DeleteCommand(id);
         case "packages":
             return new PackagesCommand();
