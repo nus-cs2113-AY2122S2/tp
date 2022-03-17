@@ -712,6 +712,9 @@ class ParserTest {
     }
 
     // parseCostList()
+    /**
+     * Checks if an exception is properly thrown when the Cost list delimiter is not provided by the user.
+     */
     @Test
     void parseCostList_missingDelimiter_exceptionThrown() {
         String argumentWithoutCostListDelimiter = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie cl 10 10 10";
@@ -724,6 +727,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Cost list delimiter is provided but no arguments
+     * following the Cost list delimiter are provided by the user.
+     */
     @Test
     void parseCostList_delimiterExistsWithoutArgument_exceptionThrown() {
         String argumentWithoutCostListArguments = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl ";
@@ -736,6 +743,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Cost list delimiter is provided by the user but the 
+     * arguments following the Cost list delimiter are non-numeric.
+     */
     @Test
     void parseCostList_delimiterExistsArgumentsNotNumeric_exceptionThrown() {
         String argumentWithNonNumericArguments = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl apple orange";
@@ -748,6 +759,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Cost list delimiter is provided by the user but the 
+     * argument following the Cost list delimiter contain negative numeric values.
+     */
     @Test
     void parseCostList_delimiterExistsCostsNegative_exceptionThrown() {
         String argumentWithNegativeArguments =
@@ -761,6 +776,10 @@ class ParserTest {
         }
     }
     
+    /**
+     * Checks if an exception is properly thrown when the Cost list delimiter and positive numeric values are
+     * provided as arguments, but some numeric values has more than two decimal places.
+     */
     @Test
     void parseCostList_delimiterExistsArgumentPositiveMoreThanTwoDecimalPlaces_exceptionThrown() {
         String argumentWithPositiveArgumentsMoreThan2DP =
@@ -774,6 +793,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Cost list delimiter and positive numeric values are
+     * provided as arguments, but some numeric values has more than twelve digits before decimal point.
+     */
     @Test
     void parseCostList_delimiterExistsArgumentPositiveMoreThanTwelveDigitsBeforeDecimalPoint_exceptionThrown() {
         String argumentWithPositiveArgumentsMoreThan12DigitsBeforeDP =
@@ -787,6 +810,11 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if a double array object containing individual cost as stated is properly returned when the 
+     * Cost list delimiter and valid positive numeric values as arguments are properly provided by the user.
+     * A valid positive numeric value has at most twelve digits before the decimal point and at most 2 decimal places.
+     */
     @Test
     void parseCostList_delimiterExistsArgumentValid_doubleArrayContainingCostList() {
         String argumentWithDelimiterAndValidArguments =
