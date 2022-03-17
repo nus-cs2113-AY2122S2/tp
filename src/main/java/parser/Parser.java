@@ -1,6 +1,12 @@
 package parser;
 
-import commands.*;
+import commands.AddCommand;
+import commands.Command;
+import commands.DeleteCommand;
+import commands.ExitCommand;
+import commands.HelpCommand;
+import commands.IncorrectCommand;
+import commands.ListCommand;
 import data.exception.IllegalValueException;
 
 import java.util.Locale;
@@ -95,6 +101,8 @@ public class Parser {
         String date = matcher.group(1).replace("d/","");
         words[1] = words[1].replace(matcher.group(1),"");
 
+        AddCommand addCmd;
+
         switch (category) {
         case "product":
             //make sure that the user input a product type
@@ -107,12 +115,14 @@ public class Parser {
             matcher = productTypePattern.matcher(words[1]);
             String productType = matcher.group(1).replace("d/","");
 
+            addCmd = new AddCommand();
             try {
-                AddCommand addCmd = new AddCommand();
                 addCmd.AddProductCommand(name, price, date, productType); //here the function should return a command
-            } catch (IllegalValueException ive) {
-                return new IncorrectCommand(ive.getMessage());
+            } catch (IllegalValueException e) {
+                return new IncorrectCommand("Adding product went wrong!");
             }
+            break;
+
         case "subscription":
             //make sure that the user input a renewal date
             if (!words[1].contains("r/")) {
@@ -124,15 +134,18 @@ public class Parser {
             matcher = renewalDatePattern.matcher(words[1]);
             String renewalDate = matcher.group(1).replace("d/","");
 
+            addCmd = new AddCommand();
             try {
-                return new AddSubscriptionCommand(name, price, date, renewalDate); //do i split AddCommand into Add subscription command and Add product Command
-            } catch (IllegalValueException ive) {
-                return new IncorrectCommand(ive.getMessage());
+                addCmd.AddSubscriptionCommand(name, price, date, renewalDate); //do i split AddCommand into Add subscription command and Add product Command
+            } catch (IllegalValueException e) {
+                return new IncorrectCommand("Adding subscription went wrong!");
             }
+            break;
         default:
-            System.out.println("Something went wrong!");
             return new IncorrectCommand("Something went wrong!");
         }
+
+        return addCmd;
     }
 
     /**
