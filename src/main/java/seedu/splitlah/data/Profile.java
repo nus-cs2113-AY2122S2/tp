@@ -154,6 +154,9 @@ public class Profile {
         Group groupToBeRemoved = getGroup(groupId);
         sessionList.remove(groupToBeRemoved);
     }
+    public ArrayList<Group> getGroupList() {
+        return groupList;
+    }
      * Assumption: Function is called when a new Session object is being created without errors.
      *
      * @return An integer that represents the new session unique identifier.
