@@ -6,7 +6,7 @@ package commands;
  */
 public class IncorrectCommand extends Command {
 
-    public final String feedbackToUser;
+    private final String feedbackToUser;
 
     public IncorrectCommand(String feedbackToUser) {
         this.feedbackToUser = feedbackToUser;
@@ -16,5 +16,4 @@ public class IncorrectCommand extends Command {
     public CommandResult execute() {
         return new CommandResult(feedbackToUser);
     }
-
 }
