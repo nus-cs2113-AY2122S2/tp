@@ -6,10 +6,26 @@ public class ExpenseParser {
     public static final String CATEGORY_DELIMITER = "c/";
     public static final String REMARKS_DELIMITER = "r/";
     public static final String ALL_DELIMITERS = "[dacr]/";
+    public static final String ASSERT_INPUT_NOT_NULL = "User input should not be null";
+    public static final String ASSERT_DELIMITER_NOT_NULL = "Delimiter should not be null";
+    public static final String ASSERT_RESULT_NOT_NULL = "Result should not be null";
+    public static final int EXPENSE_FIELDS = 1;
+    public static final int SPLIT_IN_HALF = 2;
+    public static final int RIGHT_SIDE = 1;
+    public static final int LEFT_SIDE = 0;
+    public static final int ZERO = 0;
+    public static final int INDEX_TO_BE_DELETED = 1;
 
+    /**
+     * Determines the content of the user input by splitting it into fields depending on the delimiters
+     * provided.
+     * @param userInput the line that is inputted by the user
+     * @return list of parameters representing the date, amount, category and remarks
+     * @throws IndexOutOfBoundsException if some fields are missing, or wrong delimiters are used
+     */
     public static String[] parseNewExpense(String userInput) throws IndexOutOfBoundsException {
-        String rawInput = userInput.split(" ", 2)[1].trim();
-
+        String rawInput = userInput.split(" ", SPLIT_IN_HALF)[EXPENSE_FIELDS].trim();
+        assert rawInput != null : ASSERT_INPUT_NOT_NULL;
         if (!rawInput.contains(DATE_DELIMITER) || !rawInput.contains(AMOUNT_DELIMITER)
                 || !rawInput.contains(CATEGORY_DELIMITER) || !rawInput.contains(REMARKS_DELIMITER)) {
             throw new IndexOutOfBoundsException();
@@ -22,27 +38,48 @@ public class ExpenseParser {
         return result;
     }
 
+    /**
+     * Looks for a specific delimiter within the user's input.
+     * @param userInput the line that is inputted by the user
+     * @param leftDelimiter the delimiter to look for
+     * @param rightDelimiter the next delimiter to cut off reading from
+     * @return the contents of the field specified by the delimiter
+     * @throws IndexOutOfBoundsException if contents supplied is missing
+     */
     public static String parseKeywordExpense(String userInput, String leftDelimiter, String rightDelimiter)
             throws IndexOutOfBoundsException {
-        String[] stripLeftOfDelimiter = userInput.split(leftDelimiter, 2);
+        assert userInput != null : ASSERT_INPUT_NOT_NULL;
+        assert leftDelimiter != null : ASSERT_DELIMITER_NOT_NULL;
+        assert rightDelimiter != null : ASSERT_DELIMITER_NOT_NULL;
+        String[] stripLeftOfDelimiter = userInput.split(leftDelimiter, SPLIT_IN_HALF);
         String rightOfDelimiter;
-        if (stripLeftOfDelimiter.length == 2) {
-            rightOfDelimiter  = stripLeftOfDelimiter[1];
+        if (stripLeftOfDelimiter.length == SPLIT_IN_HALF) {
+            rightOfDelimiter  = stripLeftOfDelimiter[RIGHT_SIDE];
         } else {
-            rightOfDelimiter =  stripLeftOfDelimiter[0];
+            rightOfDelimiter =  stripLeftOfDelimiter[LEFT_SIDE];
         }
-        String[] stripRightOfDelimiter = rightOfDelimiter.split(rightDelimiter, 2);
-        String result = stripRightOfDelimiter[0].trim();
-        if (result.length() == 0) {
+        String[] stripRightOfDelimiter = rightOfDelimiter.split(rightDelimiter, SPLIT_IN_HALF);
+        String result = stripRightOfDelimiter[LEFT_SIDE].trim();
+        assert result != null : ASSERT_RESULT_NOT_NULL;
+        if (result.length() == ZERO) {
             throw new IndexOutOfBoundsException();
         }
         return result;
 
     }
 
+    /**
+     * Processes a delete command.
+     * @param userInput the line that is inputted by the user
+     * @return the index of the record to be deleted
+     * @throws IndexOutOfBoundsException if some fields are missing
+     * @throws NumberFormatException if index provided is not an integer
+     */
     public static int parseDeleteExpense(String userInput) throws IndexOutOfBoundsException, NumberFormatException {
-        String[] rawInput = userInput.split(" ", 2);
-        int result = Integer.parseInt(rawInput[1]);
+        assert userInput != null : ASSERT_INPUT_NOT_NULL;
+        String[] rawInput = userInput.split(" ", SPLIT_IN_HALF);
+        int result = Integer.parseInt(rawInput[INDEX_TO_BE_DELETED]);
         return result;
     }
 }
+
