@@ -16,7 +16,6 @@ public class ListCommand extends Command {
             + ": Displays all records in the RecordManager as a list with index numbers.\n"
             + "Example: " + COMMAND_WORD;
 
-
     @Override
     public CommandResult execute() {
         List<Record> allRecords = recordMgr.getAllRecords();

@@ -9,7 +9,7 @@ import java.util.List;
  * Manager class that is able to store, edit, and access a list of records.
  */
 public class RecordManager {
-    private ArrayList<Record> records;
+    private List<Record> records;
 
     /**
      * Constructs a <code>RecordManager</code> with an empty list of records.
