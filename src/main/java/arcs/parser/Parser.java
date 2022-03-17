@@ -39,7 +39,7 @@ public class Parser {
             command = new ExitCommand(mainUi);
             break;
         default:
-            throw new ArcsException(seedu.duke.commands.Command.COMMAND_ERROR);
+            throw new ArcsException(arcs.commands.Command.COMMAND_ERROR);
         }
         return command;
     }
@@ -57,7 +57,7 @@ public class Parser {
             command = new RemoveMenuItemCommand(ui,menuItems);
             break;
         default:
-            throw new ArcsException(seedu.duke.commands.Command.COMMAND_ERROR);
+            throw new ArcsException(arcs.commands.Command.COMMAND_ERROR);
         }
         return command;
     }
