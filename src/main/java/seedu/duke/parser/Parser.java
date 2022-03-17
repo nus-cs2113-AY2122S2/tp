@@ -11,10 +11,6 @@ import seedu.duke.commands.DescCommand;
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.common.Messages;
 
-/**
- * Handles raw user inputs.
- */
-
 public class Parser {
 
     /**
