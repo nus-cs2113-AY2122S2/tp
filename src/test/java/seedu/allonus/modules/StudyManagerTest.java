@@ -1,6 +1,7 @@
 package seedu.allonus.modules;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -9,6 +10,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+/**
+ * Tests the working of StudyManager class.
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class StudyManagerTest {
 
@@ -18,7 +22,11 @@ public class StudyManagerTest {
     private Module ee4204;
 
     ArrayList<Module> testList = new ArrayList<>();
+    StudyManager studyManager;
 
+    /**
+     * Creates three new module objects and adds them to the test module list.
+     */
     @BeforeAll
     public void setUp() {
         cs2113 = new Module("CS2113", "Lecture", "Friday", "4pm-6pm");
@@ -28,11 +36,17 @@ public class StudyManagerTest {
         testList.add(cs2113);
         testList.add(cs3244);
         testList.add(ee4204);
+
+        studyManager = new StudyManager();
     }
 
-    @Test
+    /**
+     * Tests add module function of Study Manager class.
+     * Ensures that the contents of the module list is equal to the test list.
+     */
+    @BeforeEach
     public void testAddModule() {
-        StudyManager studyManager = new StudyManager();
+
 
         String userInputCs2113 = "add m/CS2113 c/lec d/Friday t/4pm-6pm";
         String userInputCs3244 = "add m/CS3244 c/tut d/Monday t/2pm-3pm";
@@ -50,9 +64,12 @@ public class StudyManagerTest {
         }
     }
 
+    /**
+     * Tests delete module function of Study Manager class.
+     * Checks that the deleted module is not in the module list.
+     */
     @Test
     public void testDeleteModule() {
-        StudyManager studyManager = new StudyManager();
         studyManager.deleteModule(USER_INPUT_FOR_DELETE);
 
         // after deletion cs2113 should not be in the list
