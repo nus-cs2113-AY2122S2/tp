@@ -6,22 +6,59 @@ import seedu.splitlah.ui.Message;
 import java.util.ArrayList;
 
 
+/**
+ * Represents a group of people.
+ *
+ * @author Tianle
+ */
 public class Group {
 
     private ArrayList<Person> personList;
     private String groupName;
     private int groupId;
 
+
+    /**
+     * Constructs a Group object.
+     *
+     * @param personList  A list of Person objects representing participants of the group.
+     * @param groupName   A String object that represents the group's name.
+     * @param groupId     An integer that uniquely identifies a group.
+     */
     public Group(ArrayList<Person> personList, String groupName, int groupId) {
         this.personList = personList;
         this.groupName = groupName;
         this.groupId = groupId;
     }
 
+    /**
+     * Returns the group's name.
+     *
+     * @return A String object containing the name of the group.
+     */
+    public String getGroupName() {
+        return groupName;
+    }
+
+    /**
+     * Returns the group's Id.
+     *
+     * @return An integer object containing the Id of the group.
+     */
+    public int getGroupId() {
+        return groupId;
+    }
+
+
+    /**
+     * Returns a list of Person objects representing the participants in the group.
+     *
+     * @return An ArrayList object containing Person objects in the group.
+     */
     public ArrayList<Person> getPersonList() {
         return personList;
     }
-
+    
     public boolean isEmptyGroup() {
         return personList.isEmpty();
     }
