@@ -74,7 +74,7 @@ public class Parser {
         }
 
         final String category = words[0].toLowerCase(Locale.ENGLISH); //either product or subscription
-        final String arguments = words[1].trim();
+        final String arguments = args.replaceFirst(category, "").trim();
 
         // product has "t/PRODUCT TYPE"
         // subscription has "r/RENEWAL"
