@@ -8,7 +8,7 @@ import static seedu.allonus.expense.ExpenseParser.parseDeleteExpense;
 import static seedu.allonus.expense.ExpenseParser.parseNewExpense;
 
 /**
- * The core function of the expense tracker, which executes user commands based on keywords
+ * The core function of the expense tracker, which executes user commands based on keywords.
  */
 public class ExpenseTracker {
     private static final String EXPENSE_WELCOME_MESSAGE = "Welcome to Expense Tracker";
@@ -50,7 +50,7 @@ public class ExpenseTracker {
 
 
     /**
-     * List out all current records in the expense list
+     * List out all current records in the expense list.
      */
     private static void listExpenses() {
         logger.log(Level.INFO, LOG_LIST_INTENT);
@@ -70,7 +70,7 @@ public class ExpenseTracker {
     }
 
     /**
-     * Deletes a record from the list of expenses
+     * Deletes a record from the list of expenses.
      * @param list list of expenses itself
      * @param index the index of the item to be deleted
      * @throws IndexOutOfBoundsException if the expense record is not found
@@ -84,7 +84,7 @@ public class ExpenseTracker {
     }
 
     /**
-     * Adds a record into the list of expenses
+     * Adds a record into the list of expenses.
      * @param list list of expenses itself
      * @param e the expense object itself to be added
      */
@@ -97,11 +97,11 @@ public class ExpenseTracker {
     }
 
     /**
-     * Determines which command to execute depending on the keyword supplied
+     * Determines which command to execute depending on the keyword supplied.
      * @param ui the user input itself
      * @throws ExpenseException if an invalid keyword is supplied
      */
-    public static void expenseRunner(TextUi ui) throws ExpenseException {
+    public static void expenseRunner(TextUi ui) {
         expenseWelcome();
         String rawInput = ui.getUserInput();
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;
@@ -143,7 +143,7 @@ public class ExpenseTracker {
                 break;
             default:
                 logger.log(Level.WARNING, LOG_INVALID_COMMANDS);
-                throw new ExpenseException(MSG_INVALID_COMMANDS);
+                System.out.println(MSG_INVALID_COMMANDS);
             }
             rawInput = ui.getUserInput();
             keyWord = rawInput.split(" ", SPLIT_INTO_HALF)[KEYWORD_INDEX].trim();

@@ -18,7 +18,7 @@ public class ExpenseParser {
 
     /**
      * Determines the content of the user input by splitting it into fields depending on the delimiters
-     * provided
+     * provided.
      * @param userInput the line that is inputted by the user
      * @return list of parameters representing the date, amount, category and remarks
      * @throws IndexOutOfBoundsException if some fields are missing, or wrong delimiters are used
@@ -39,7 +39,7 @@ public class ExpenseParser {
     }
 
     /**
-     * Looks for a specific delimiter within the user's input
+     * Looks for a specific delimiter within the user's input.
      * @param userInput the line that is inputted by the user
      * @param leftDelimiter the delimiter to look for
      * @param rightDelimiter the next delimiter to cut off reading from
@@ -69,7 +69,7 @@ public class ExpenseParser {
     }
 
     /**
-     * Processes a delete command
+     * Processes a delete command.
      * @param userInput the line that is inputted by the user
      * @return the index of the record to be deleted
      * @throws IndexOutOfBoundsException if some fields are missing
@@ -82,3 +82,4 @@ public class ExpenseParser {
         return result;
     }
 }
+
