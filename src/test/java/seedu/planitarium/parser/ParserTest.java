@@ -282,6 +282,46 @@ class ParserTest {
             fail();
         }
     }
+
+    @Test
+    void getValidMoney_positiveDouble_success() throws InvalidMoneyException {
+        String input = "10.50";
+        Double output = Parser.getValidMoney(input);
+        assertEquals(10.50, output);
+    }
+
+    @Test
+    void getValidMoney_nullInput_assertThrown() {
+        try {
+            Parser.getValidMoney(null);
+            fail();
+        } catch (AssertionError e) {
+            assertEquals("Money input should not be null", e.getMessage());
+        } catch (InvalidMoneyException e) {
+            fail();
+        }
+    }
+
+    @Test
+    void getValidMoney_negativeDouble_exceptionThrown() {
+        try {
+            String input = "-10.50";
+            Parser.getValidMoney(input);
+            fail();
+        } catch (InvalidMoneyException e) {
+            assertEquals("Invalid money value: `-10.50`", e.getMessage());
+        }
+    }
+
+    @Test
+    void getValidMoney_notNumber_exceptionThrown() {
+        try {
+            String input = "hundred";
+            Parser.getValidMoney(input);
+            fail();
+        } catch (InvalidMoneyException e) {
+            assertEquals("Invalid money value: `hundred`", e.getMessage());
+        }
     }
 
     @Test
