@@ -14,6 +14,7 @@ class ProjectListTest {
     private static final String PROJECT3NAME = "CS3005Project";
     private static final String TODO1 = "Set up the team repo.";
     private static final String TODO2 = "Complete user guide.";
+    private static final String DEADLINE1 = "12/12/2024";
     private ProjectList emptyProjectList;
     private ProjectList defaultProjectList;
 
@@ -44,4 +45,12 @@ class ProjectListTest {
         String targetIndexString = "-1";
         assertThrows(NegativeIndexException.class, () -> defaultProjectList.markTodoAsDone("1", targetIndexString));
     }
+
+    @Test
+    void deleteProjects() { //aims to test the deletion of projects
+        emptyProjectList.addProject(PROJECT1NAME);
+        emptyProjectList.deleteProject(PROJECT1NAME);
+        assertEquals(0, emptyProjectList.getProjectNo());
+    }
+
 }

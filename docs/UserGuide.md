@@ -9,7 +9,10 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
 - [Quick Start](#Quick-Start)
 - [Features](#Features)
    - [print all projects](#print-all-projects-listprojects)
+   - [add todo to a project](#add-todo-to-a-project-todo)
+   - [mark todo as done](#mark-todo-as-done-mark)
    - [exit](#exit-exit)
+   
 - [FAQ](#FAQ)
 - [Command Summary](#Command-Summary)
 
@@ -70,7 +73,7 @@ Format: `todo [project_index] [description]`
 #### Example of output
 ```Todo:  buy textbooks have been added to project pro1```
 
-### mark todo as done: `mark`
+### Mark todo as done: `mark`
 
 Format: `mark [project_index] [todo_index]`
 * The `project_index` and `todo_index` must be positive integers.
@@ -85,16 +88,33 @@ Todo has been marked as done successfully:
 [X] buy textbooks
 ```
 
-### add a deadline to a project: `addDeadline`
+### add a deadline to a project: `adddeadline`
 Adds a deadline date to a project
 
-Format: `addDeadline [project_name] [deadline]`
+Format: `adddeadline [project_name] [deadline]`
 
 #### Example of usage
 `addDeadline nextProject Friday`
 
 #### Example of output
 ```Deadline added to nextProject: Sunday```
+
+### view details of a project: `view`
+View details of a project: Name, deadline, todos
+
+Format: `view [project_name]`
+
+#### Example of usage
+`view cs2113`
+
+#### Example of output
+
+```aidl
+Project Name: cs2113
+Deadline: 17/03/2022
+	[1]. [X] complete addproject command
+	[2]. [ ] complete deleteproject command
+```
 
 ### help: `help`
 List out all available commands
@@ -117,8 +137,11 @@ Format: `exit`
 
 | Action              | Format                                   |
 |---------------------|------------------------------------------|
+| add project         | `addproject [project_name]`              |
+| delete project      | `deleteproject [project_name]`           |
 | view all project(s) | `listproject`, `listprojects`            |
 | add todo            | `todo [project_index] [description]`     |
 | mark todo as done   | `mark [project_index] [todo_index]`      |
-| add deadline        | `addDeadline  [project_name] [deadline]` |
+| add deadline        | `adddeadline  [project_name] [deadline]` |
+| view a project      | `view [project_name]`                    |
 | Exit                | `exit`                                   |

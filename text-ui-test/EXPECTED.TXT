@@ -14,13 +14,13 @@ What can I help you with?
 ____________________________________________________________
 ____________________________________________________________
 Here are all the possible commands:
-1. addProject <Project Name>
-2. deleteProject <Project Name>
-3. addDeadline <Project Name> <Date>
-4. todo <Project Index> <Description>
-5. mark <Project Index> <Todo Index>
-6. listProjects/listProject
-7. view <Project Name>
+1. addproject [Project Name]
+2. deleteproject [Project Name]
+3. adddeadline [Project Name] [Date]
+4. todo [Project Index] [Description]
+5. mark [Project Index] [Todo Index]
+6. listprojects/listproject
+7. view [Project Name]
 8. exit
 ____________________________________________________________
 What can I help you with next?
