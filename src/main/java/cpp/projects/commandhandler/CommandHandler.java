@@ -63,9 +63,10 @@ public class CommandHandler {
 
     }
 
-    private String getProjectName(String[] userInput){
-        assert (userInput.length >= Constants.TWO_ARGUMENTS): "You must provide the name for the project!";
-        String[] splitedName = Arrays.copyOfRange(userInput, 1, userInput.length); //get the splited version of project name
+    private String getProjectName(String[] userInput) {
+        assert (userInput.length >= Constants.TWO_ARGUMENTS) : "You must provide the name for the project!";
+        // get the splited version of project name
+        String[] splitedName = Arrays.copyOfRange(userInput, 1, userInput.length);
         String projectName = String.join(" ", splitedName);
         return projectName;
     }
