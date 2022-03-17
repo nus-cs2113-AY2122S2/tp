@@ -52,14 +52,20 @@ public class TaskList {
      * @param ui Ui class for printing of messages.
      */
     public void printAllTasks(Ui ui) {
-        int printIndex = 1;
-        System.out.println("Here are the tasks in your list:");
-        for (Task task : tasks) {
-            System.out.println(printIndex + ". " + task);
-            printIndex++;
+        if (!tasks.isEmpty()) {
+            if (tasks.size() > 1) {
+                System.out.println("Here are the " + tasks.size() + " tasks in your list:");
+            } else {
+                System.out.println("Here is the 1 task in your list:");
+            }
+            int printIndex = 1;
+            for (Task task : tasks) {
+                System.out.println(printIndex + ". " + task);
+                printIndex++;
+            }
+        } else {
+            System.out.println("There are no tasks in your list.");
         }
-        ui.showLine();
-        System.out.println("A total of " + (printIndex - 1) + " item(s) have been found!");
     }
 
 
