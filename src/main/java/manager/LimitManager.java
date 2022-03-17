@@ -1,8 +1,13 @@
 package manager;
 
 
+import java.util.ArrayList;
+
 public class LimitManager {
     private double limit;
+    public LimitManager() {
+        limit = 0;
+    }
     public void setLimit(double limit) {
         this.limit = limit;
     }
