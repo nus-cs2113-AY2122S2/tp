@@ -24,6 +24,7 @@ public class Ui {
      * */
     public void showMessages(String... message) {
         for (String m : message) {
+            assert m != null : "Messages should not be a null message!";
             System.out.println(m);
         }
     }
