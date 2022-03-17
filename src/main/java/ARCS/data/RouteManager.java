@@ -16,4 +16,10 @@ public class RouteManager {
     public ArrayList<Route> getAllRoutes() {
         return routes;
     }
+
+    public Route deleteRoute(int index) {
+        Route deleted = routes.get(index - 1);
+        routes.remove(index - 1);
+        return deleted;
+    }
 }

@@ -1,9 +1,6 @@
 package ARCS.parser;
 
-import ARCS.commands.AddRouteCommand;
-import ARCS.commands.Command;
-import ARCS.commands.ExitCommand;
-import ARCS.commands.ListRouteCommand;
+import ARCS.commands.*;
 
 public class Parser {
     public Command parseCommand(String userInput) {
@@ -21,6 +18,9 @@ public class Parser {
             break;
         case ListRouteCommand.COMMAND_WORD:
             command = new ListRouteCommand();
+            break;
+        case DeleteRouteCommand.COMMAND_WORD:
+            command = prepareDeleteRouteCommand(argumentLine);
             break;
         default:
             break;
@@ -68,5 +68,10 @@ public class Parser {
             }
         }
         return new AddRouteCommand(fId, date, time, from, to, capacity);
+    }
+
+    public Command prepareDeleteRouteCommand(String argumentLine) {
+        int index = Integer.parseInt(argumentLine.trim());
+        return new DeleteRouteCommand(index);
     }
 }
