@@ -1,6 +1,23 @@
-import static org.junit.jupiter.api.Assertions.*;
+package seedu.splitlah.data;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import seedu.splitlah.command.Command;
+import seedu.splitlah.exceptions.InvalidDataException;
+import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.Message;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+
 class ProfileTest {
-  
+
+    Manager manager = new Manager();
+
+    /**
+     * Creates 2 sessions that is stored and managed by the Manager object.
+     */
     @BeforeEach
     void setUp() {
         String sessionOneArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob";
@@ -50,6 +67,11 @@ class ProfileTest {
         boolean isExists = manager.getProfile().hasSessionId(sessionIdToTest);
         assertEquals(false, isExists);
     }
+
+
+    /**
+     * Checks if the session is returned when a session unique identifier is in the list of sessions.
+     */
     @Test
     public void getSession_validSessionId_sessionReturned() {
         int sessionIdToTest = 1;
@@ -60,6 +82,10 @@ class ProfileTest {
             fail();
         }
     }
+
+    /**
+     * Checks if an exception is properly thrown when a session unique identifier is not in the list of sessions.
+     */
     @Test
     public void getSession_invalidSessionId_exceptionThrown() {
         int sessionIdToTest = 10;
