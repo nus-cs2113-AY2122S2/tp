@@ -32,19 +32,19 @@ public class ActivityListCommandTest {
      * Checks if activities are listed with missing session unique identifier.
      */
     @Test
-    public void prepare_hasMissingDelimiter_InvalidCommand() {
-        // Missing delimiter
+    public void prepare_hasMissingDelimiters_InvalidCommand() {
+        // Missing delimiters
         String inputMissingSidDelimiter = "activity /list /1";
         Command activityWithMissingSidDelimiter = Parser.getCommand(inputMissingSidDelimiter);
         assertEquals(InvalidCommand.class, activityWithMissingSidDelimiter.getClass());
     }
 
     /**
-     * Checks if activities are listed with missing argument after the delimiter.
+     * Checks if activities are listed with missing arguments after the delimiter.
      */
     @Test
-    public void prepare_hasMissingArgument_InvalidCommand() {
-        // Missing argument after delimiter.
+    public void prepare_hasMissingArguments_InvalidCommand() {
+        // Missing arguments after delimiter.
         String inputMissingArgument = "activity /list /sid";
         Command activityWithMissingArgument = Parser.getCommand(inputMissingArgument);
         assertEquals(InvalidCommand.class, activityWithMissingArgument.getClass());
