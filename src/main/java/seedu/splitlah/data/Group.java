@@ -92,7 +92,7 @@ public class Group {
         }
 
         for (Person personInGroup : personList) {
-            if (personInGroup.getName().equals(person.getName())) {
+            if (personInGroup.getName().equalsIgnoreCase(person.getName())) {
                 return true;
             }
         }
@@ -111,7 +111,7 @@ public class Group {
         }
         Person deleteTarget = null;
         for (Person personInGroup : personList) {
-            if (personInGroup.getName().equals(person.getName())) {
+            if (personInGroup.getName().equalsIgnoreCase(person.getName())) {
                 deleteTarget = personInGroup;
                 break;
             }
