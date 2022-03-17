@@ -13,6 +13,12 @@ import java.util.List;
 public class Command {
     protected RecordManager recordMgr;
     protected LimitManager limitMgr;
+    private int index = -1;
+    static protected double totalExpense = 0;
+
+    public Command() {
+    }
+    
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of records.
      *
