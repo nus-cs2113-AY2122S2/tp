@@ -20,7 +20,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New record added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This record already exists in the RecordManager";
 
-    private final Record toAdd;
+    private Record toAdd;
 
     public AddCommand(){
 
