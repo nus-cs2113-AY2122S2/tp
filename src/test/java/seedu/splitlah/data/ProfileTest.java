@@ -29,7 +29,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if method returns true when a session name exists within the list of session.
+     * Checks if method returns true when a Session object with the specified session name is found.
      */
     @Test
     public void hasSessionName_inputContainsExistingSessionName_true() {
@@ -39,7 +39,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if method returns false when a session name does not exist within the list of session.
+     * Checks if method returns false when a Session object with the specified session name is not found.
      */
     @Test
     public void hasSessionName_inputContainsNonExistingSessionName_false() {
@@ -49,7 +49,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if method returns true when a session unique identifier exists within the list of session.
+     * Checks if method returns true when a Session object with the specified session unique identifier is found.
      */
     @Test
     public void hasSessionId_inputContainsExistingSessionId_true() {
@@ -59,7 +59,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if method returns false when a session unique identifier does not exist within the list of session.
+     * Checks if method returns false when a Session object with the specified session unique identifier is not found.
      */
     @Test
     public void hasSessionId_inputContainsNonExistingSessionId_false() {
@@ -70,7 +70,8 @@ class ProfileTest {
 
 
     /**
-     * Checks if the session is returned when a session unique identifier is in the list of sessions.
+     * Checks if the correct Session object is properly returned when a Session object with
+     * the specified session unique identifier is found.
      */
     @Test
     public void getSession_validSessionId_sessionReturned() {
@@ -84,7 +85,8 @@ class ProfileTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when a session unique identifier is not in the list of sessions.
+     * Checks if an exception is properly thrown when a Session object with
+     * a specified session unique identifier is not found.
      */
     @Test
     public void getSession_invalidSessionId_exceptionThrown() {
