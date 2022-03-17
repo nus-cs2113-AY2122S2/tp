@@ -41,14 +41,14 @@ public class Ui {
     }
 
     /**
-     * Shows dividing line between messages
+     * Shows dividing line between messages.
      * */
     public void showDivider() {
         showMessages(DIVIDER);
     }
 
     /**
-     * Gets user's raw input in the CLI
+     * Gets user's raw input in the CLI.
      * */
     public String getRawUserInput() {
         System.out.println("Enter command: ");
