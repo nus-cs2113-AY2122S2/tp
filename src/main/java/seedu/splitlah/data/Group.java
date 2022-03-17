@@ -5,7 +5,6 @@ import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
 
-
 /**
  * Represents a group of people.
  *
@@ -23,7 +22,8 @@ public class Group {
     /**
      * Constructs a Group object.
      *
-     * @param personList  A list of Person objects representing participants of the group.
+     * @param personList  An ArrayList object containing Person objects representing
+     *                    participants of the group.
      * @param groupName   A String object that represents the group's name.
      * @param groupId     An integer that uniquely identifies a group.
      */
@@ -43,7 +43,7 @@ public class Group {
     }
 
     /**
-     * Returns the group's Id.
+     * Returns the group's unique identifier.
      *
      * @return An integer object containing the id of the group.
      */
@@ -63,10 +63,10 @@ public class Group {
     /**
      * Checks whether the Group object has at least one participant.
      *
-     * @return  True if the Group object has at least one participant,
-     *          False otherwise.
+     * @return  true if the Group object has at least one participant,
+     *          false otherwise.
      */
-    public boolean isEmptyGroup() {
+    public boolean isGroupEmpty() {
         return personList.isEmpty();
     }
 
@@ -83,16 +83,16 @@ public class Group {
      * Checks if a Person object is contained in the Group object.
      *
      * @param person  A Person object.
-     * @return  True if a particular Person object is in the Group object,
-     *          False otherwise.
+     * @return  true if a particular Person object is in the Group object,
+     *          false otherwise.
      */
     public boolean hasPerson(Person person) {
         if (personList.isEmpty()) {
             return false;
         }
 
-        for (Person p : personList) {
-            if (p.getName() == person.getName()) {
+        for (Person personInGroup : personList) {
+            if (personInGroup.getName().equals(person.getName())) {
                 return true;
             }
         }
@@ -102,23 +102,24 @@ public class Group {
     /**
      * Removes a Person object from the Group object.
      *
-     * @param person  A Person object.
-     * @throws InvalidDataException  If the Person object is not in the Group object.
+     * @param person A Person object.
+     * @throws InvalidDataException If the Person object is not in the Group object.
      */
     public void removePerson(Person person) throws InvalidDataException {
         if (personList.isEmpty()) {
             throw new InvalidDataException(Message.ERROR_GROUP_EMPTY_PERSON_LIST);
         }
         Person deleteTarget = null;
-        for (Person p : personList) {
-            if (p.getName() == person.getName()) {
-                deleteTarget = p;
+        for (Person personInGroup : personList) {
+            if (personInGroup.getName().equals(person.getName())) {
+                deleteTarget = personInGroup;
                 break;
             }
         }
         if (deleteTarget == null) {
             throw new InvalidDataException(Message.ERROR_GROUP_PERSON_NOT_IN_LIST);
         }
+        personList.remove(deleteTarget);
     }
 
     /**
@@ -126,7 +127,7 @@ public class Group {
      *
      * @return  An integer object that represents that total number of participants in the group.
      */
-    public int personCount() {
+    public int getPersonCount() {
         return personList.size();
     }
 
