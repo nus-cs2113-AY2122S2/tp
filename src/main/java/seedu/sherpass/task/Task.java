@@ -105,7 +105,7 @@ public class Task {
             result += " (by: " + getByDateString() + ")";
         }
         if (this.doOnDate != null) {
-            result += " (reminder on: " + getDoOnDateString() + ")";
+            result += " (do on: " + getDoOnDateString() + ")";
         }
         return result;
     }

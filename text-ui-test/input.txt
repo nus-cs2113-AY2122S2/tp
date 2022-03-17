@@ -7,15 +7,8 @@ mark 1
 mark 5
 list
 add submit essay /by tomorrow
-n
-list
-add find a job /by tomorrow
-y
-12/12/2022
 list
 add find a wife /by 12/12/2023 /do_on anytime
-y
-10/10/2023
 list
 edit 3 /by 5/5/2022
 list

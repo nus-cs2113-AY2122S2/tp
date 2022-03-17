@@ -35,11 +35,11 @@ public class TaskList {
      * Adds a new task to the current array of tasks.
      *
      * @param taskDescription Description of the task.
-     * @param taskByDate        Due date of the task
-     * @param taskRemindDate    Reminder date of the task
+     * @param taskByDate      Due date of the task
+     * @param taskDoOnDate    Date to work on the task
      */
-    public void addTask(String taskDescription, LocalDate taskByDate, LocalDate taskRemindDate) {
-        Task newTask = new Task(taskDescription, taskByDate, taskRemindDate);
+    public void addTask(String taskDescription, LocalDate taskByDate, LocalDate taskDoOnDate) {
+        Task newTask = new Task(taskDescription, taskByDate, taskDoOnDate);
         tasks.add(newTask);
         System.out.println("Got it. I've added this task:\n  " + newTask
                 + "\nNow you have " + tasks.size() + " task(s) in the list.");
@@ -48,18 +48,22 @@ public class TaskList {
 
     /**
      * Prints all available tasks in the task list.
-     *
-     * @param ui Ui class for printing of messages.
      */
-    public void printAllTasks(Ui ui) {
-        int printIndex = 1;
-        System.out.println("Here are the tasks in your list:");
-        for (Task task : tasks) {
-            System.out.println(printIndex + ". " + task);
-            printIndex++;
+    public void printAllTasks() {
+        if (!tasks.isEmpty()) {
+            if (tasks.size() > 1) {
+                System.out.println("Here are the " + tasks.size() + " tasks in your list:");
+            } else {
+                System.out.println("Here is the 1 task in your list:");
+            }
+            int printIndex = 1;
+            for (Task task : tasks) {
+                System.out.println(printIndex + ". " + task);
+                printIndex++;
+            }
+        } else {
+            System.out.println("There are no tasks in your list.");
         }
-        ui.showLine();
-        System.out.println("A total of " + (printIndex - 1) + " item(s) have been found!");
     }
 
 

@@ -5,14 +5,40 @@ import seedu.sherpass.exception.InvalidTimeException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
+import static seedu.sherpass.constant.StringConstant.SINGLE_SPACE;
 
 public class ParserTest {
 
     @Test
+    void prepareEdit_noInput_expectNull() {
+        String editCommandInput = "";
+        assertNull(Parser.prepareEdit(editCommandInput));
+    }
+
+    @Test
+    void prepareEdit_InvalidTaskNumber_expectNull() {
+        String editCommandInput = "t";
+        assertNull(Parser.prepareEdit(editCommandInput));
+    }
+
+    @Test
+    void prepareEdit_InvalidDateFormat_expectNull() {
+        String editCommandInput = "/by 99/99/9999";
+        assertNull(Parser.prepareEdit(editCommandInput));
+    }
+
+    @Test
+    void prepareEdit_WrongEditInfoOrder_expectNull() {
+        String editCommandInput = "/remind 20/12/2022 /by 19/12/2022";
+        assertNull(Parser.prepareEdit(editCommandInput));
+    }
+
+    @Test
     void parseTimerInput_noInput_InvalidTimeExceptionThrown() {
         String studyCommandInput = "start ";
-        String[] timerInput = studyCommandInput.split(" ", 2);
+        String[] timerInput = studyCommandInput.split(SINGLE_SPACE, 2);
         assertThrows(InvalidTimeException.class,
             () -> Parser.parseTimerInput(timerInput));
     }
@@ -20,7 +46,7 @@ public class ParserTest {
     @Test
     void parseTimerInput_blankDefaultTimerInput_InvalidTimeExceptionThrown() {
         String studyCommandInput = "start  ";
-        String[] timerInput = studyCommandInput.split(" ", 2);
+        String[] timerInput = studyCommandInput.split(SINGLE_SPACE, 2);
         assertThrows(InvalidTimeException.class,
             () -> Parser.parseTimerInput(timerInput));
     }
@@ -28,7 +54,7 @@ public class ParserTest {
     @Test
     void parseTimerInput_blankCustomTimerInput_NumberFormatExceptionThrown() {
         String studyCommandInput = "start /custom  ";
-        String[] timerInput = studyCommandInput.split(" ", 2);
+        String[] timerInput = studyCommandInput.split(SINGLE_SPACE, 2);
         assertThrows(NumberFormatException.class,
             () -> Parser.parseTimerInput(timerInput));
     }
@@ -36,7 +62,7 @@ public class ParserTest {
     @Test
     void parseTimerInput_defaultTimerTwo_expectOneHour() throws InvalidTimeException {
         String studyCommandInput = "start 2";
-        String[] timerInput = studyCommandInput.split(" ", 2);
+        String[] timerInput = studyCommandInput.split(SINGLE_SPACE, 2);
         int duration = Parser.parseTimerInput(timerInput);
         assertEquals(DEFAULT_TIMER_TWO, duration);
     }
@@ -44,7 +70,7 @@ public class ParserTest {
     @Test
     void parseTimerInput_customInput900_expect900Seconds() throws InvalidTimeException {
         String studyCommandInput = "start /custom 900";
-        String[] timerInput = studyCommandInput.split(" ", 2);
+        String[] timerInput = studyCommandInput.split(SINGLE_SPACE, 2);
         int duration = Parser.parseTimerInput(timerInput);
         assertEquals(900, duration);
     }
@@ -52,7 +78,7 @@ public class ParserTest {
     @Test
     void parseTimerInput_defaultTimerTwoInputs_InvalidTimeExceptionThrown() {
         String studyCommandInput = "start 2 3";
-        String[] timerInput = studyCommandInput.split(" ", 2);
+        String[] timerInput = studyCommandInput.split(SINGLE_SPACE, 2);
         assertThrows(InvalidTimeException.class,
             () -> Parser.parseTimerInput(timerInput));
     }
@@ -60,7 +86,7 @@ public class ParserTest {
     @Test
     void parseTimerInput_customTimerThreeInputs_NumberFormatExceptionThrown() {
         String studyCommandInput = "start /custom 600 1500 1200";
-        String[] timerInput = studyCommandInput.split(" ", 2);
+        String[] timerInput = studyCommandInput.split(SINGLE_SPACE, 2);
         assertThrows(NumberFormatException.class,
             () -> Parser.parseTimerInput(timerInput));
     }
@@ -68,7 +94,7 @@ public class ParserTest {
     @Test
     void parseTimerInput_validDefaultAndCustomTimerInputs_InvalidTimeExceptionThrown() {
         String studyCommandInput = "start 2 /custom 900";
-        String[] timerInput = studyCommandInput.split(" ", 2);
+        String[] timerInput = studyCommandInput.split(SINGLE_SPACE, 2);
         assertThrows(InvalidTimeException.class,
             () -> Parser.parseTimerInput(timerInput));
     }

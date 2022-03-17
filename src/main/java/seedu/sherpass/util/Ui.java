@@ -9,8 +9,8 @@ import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_TWO;
 
 public class Ui {
     private static final Scanner in = new Scanner(System.in);
-    private static final String PARTITION_LINE = "______________________________"
-            + "______________________________";
+    private static final String PARTITION_LINE = "________________________________________________"
+            + "________________________________________________";
     private static final String LS = System.lineSeparator();
     private static final String ANSI_GREEN_BOLD = "\u001B[32;1m";
     private static final String ANSI_BRIGHT_GREEN_BOLD = "\u001B[92;1m";

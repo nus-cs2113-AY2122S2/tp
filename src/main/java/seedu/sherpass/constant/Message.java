@@ -17,17 +17,19 @@ public class Message {
             + "Welcome back to the main session! How can I help you?";
 
     private static final String HELP_MESSAGE = "For more information, please enter the 'help' command.";
-    public static final String HELP_MESSAGE_SPECIFIC_COMMAND = "\n\nFor more information on "
-            + "the command you wish to execute,\nenter 'help <command>' e.g. help add";
     public static final String HELP_MESSAGE_QUICK_START_COMMAND = "Command input quick start guide:\n"
             + "1) List: list\n"
-            + "2) Mark: mark <list_index>\n"
-            + "3) Unmark: unmark <list_index>\n"
+            + "2) Mark: mark <task_number>\n"
+            + "3) Unmark: unmark <task_number>\n"
             + "4) Add: add <task_description> /by <task_due_date> /do_on <date_to_work_on_task>\n"
-            + "5) Delete: delete <list_index>\n"
-            + "6) Find: find <keyword>\n"
+            + "5) Edit: edit <task_number> <task_description> /by <task_due_date> /do_on <date_to_work_on_task>\n"
+            + "6) Delete: delete <task_number>\n"
             + "7) Clear: clear\n"
-            + "8) Bye: bye";
+            + "8) Study: study\n"
+            + "9) Help: help <command_word>\n"
+            + "10) Bye: bye";
+    public static final String HELP_MESSAGE_SPECIFIC_COMMAND = "\n\nFor more information, enter 'help ";
+    public static final String HELP_MESSAGE_COMMAND = "\n\nFor more information, enter 'help'";
     public static final String HELP_MESSAGE_STUDY = "Timer command input quick start guide:\n"
             + "1) Start default timer: start <mode_number>\n"
             + "2) Start custom timer: start /custom <timer_duration>\n"
@@ -53,8 +55,23 @@ public class Message {
             + "Please refer to the troubleshooting section in the user guide "
             + "or contact the developers for help.";
     public static final String ERROR_INVALID_MARKING_INDEX_MESSAGE = "Bzzt!\nPlease"
-            + " key in a valid task number to mark/unmark your task."
-            + HELP_MESSAGE_SPECIFIC_COMMAND;
+            + " key in a valid task number to mark/unmark your task.";
+    public static final String ERROR_EMPTY_ADD_MESSAGE = "Oops! The description of an 'add' command cannot be empty.";
+    public static final String ERROR_INVALID_DATE_FORMAT_MESSAGE = "Please key in valid date(s) of the format:\n\t"
+            + "d/M/yyyy\n(Note: date and month can be in 1 or 2 digits)";
+    public static final String ERROR_INVALID_TASK_NUMBER_MESSAGE = "Please key in a valid task number";
+    public static final String ERROR_DUPLICATE_ADD_TASK_MESSAGE = "Oops! It seems that you've entered "
+            + "a duplicate task.\nPlease re-enter a new task if you wish to add one.";
+    public static final String ERROR_INVALID_ADD_FORMAT_MESSAGE = "Please use the correct order of attributes:\n"
+            + "<task_description> /by <task_due_date> /do_on <date_to_work_on_task>\n\n"
+            + "You only need to input the attributes you want to edit.\n"
+            + "e.g. add do homework /do_on 2022/02/12\n"
+            + "(The task_description and task_due_date is left out here)";
+    public static final String ERROR_INVALID_EDIT_FORMAT_MESSAGE = "Please use the correct order of attributes:\n"
+            + "<task_description> /by <task_due_date> /do_on <date_to_work_on_task>\n\n"
+            + "You only need to input the attributes you want to edit.\n"
+            + "e.g. edit 1 /do_on 2022/02/12\n"
+            + "(The task_description and task_due_date is left out here)";
     public static final String ERROR_INVALID_TIMER_INPUT_MESSAGE = "Oops! Your timer input "
             + "does not seem to be correct.\n\n"
             + "Please select one of the three default modes with\n"
