@@ -575,4 +575,111 @@ class ParserTest {
             fail();
         }
     }
+
+    // parseTotalCost()
+    @Test
+    void parseTotalCost_missingDelimiter_exceptionThrown() {
+        String argumentWithoutTotalCostDelimiter = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie co 15";
+        try {
+            double output = Parser.parseTotalCost(argumentWithoutTotalCostDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.TOTAL_COST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseTotalCost_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutTotalCostArgument = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co ";
+        try {
+            double output = Parser.parseTotalCost(argumentWithoutTotalCostArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.TOTAL_COST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseTotalCost_delimiterExistsArgumentNotNumeric_exceptionThrown() {
+        String argumentWithNonNumericArgument = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co apple";
+        try {
+            double output = Parser.parseTotalCost(argumentWithNonNumericArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + Parser.TOTAL_COST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseTotalCost_delimiterExistsArgumentNegative_exceptionThrown() {
+        String argumentWithNegativeArgument = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co -1.24";
+        try {
+            double output = Parser.parseTotalCost(argumentWithNegativeArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_COST_NOT_POSITIVE;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseTotalCost_delimiterExistsArgumentPositiveMoreThanTwoDecimalPlaces_exceptionThrown() {
+        String argumentWithPositiveArgumentMoreThan2DP = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 1.2444";
+        try {
+            double output = Parser.parseTotalCost(argumentWithPositiveArgumentMoreThan2DP);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_COST_NOT_TWO_DP;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseTotalCost_delimiterExistsArgumentPositiveMoreThanTwelveDigitsBeforeDecimalPoint_exceptionThrown() {
+        String argumentWithPositiveArgumentMoreThan12DigitsBeforeDP =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 1234567890123.1";
+        try {
+            double output = Parser.parseTotalCost(argumentWithPositiveArgumentMoreThan12DigitsBeforeDP);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_COST_MORE_THAN_TWELVE_DIGITS_BEFORE_DP;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseTotalCost_delimiterExistsArgumentPositive_totalCost() {
+        // Testing numerical limits
+        String argumentWithDelimiterAndValidArgumentTestLimit =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 123456789012.99";
+        try {
+            double output = Parser.parseTotalCost(argumentWithDelimiterAndValidArgumentTestLimit);
+            assertEquals(123456789012.99, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+
+        // Testing with no decimal places
+        String argumentWithDelimiterAndValidArgumentTestNoDecimal =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 123456789012";
+        try {
+            double output = Parser.parseTotalCost(argumentWithDelimiterAndValidArgumentTestNoDecimal);
+            assertEquals(123456789012.0, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+
+        // Testing with commonly used values
+        String argumentWithDelimiterAndValidArgumentTestNormal =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 10.70";
+        try {
+            double output = Parser.parseTotalCost(argumentWithDelimiterAndValidArgumentTestNormal);
+            assertEquals(10.70, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
 }
