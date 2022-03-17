@@ -18,7 +18,8 @@ public class HelpCommand extends Command {
                 + DeleteCommand.MESSAGE_USAGE + System.lineSeparator()
                 + ListCommand.MESSAGE_USAGE + System.lineSeparator()
                 + HelpCommand.MESSAGE_USAGE + System.lineSeparator()
-                + ExitCommand.MESSAGE_USAGE
+                + ExitCommand.MESSAGE_USAGE + System.lineSeparator()
+                + LimitCommand.MESSAGE_USAGE
         );
     }
 }
