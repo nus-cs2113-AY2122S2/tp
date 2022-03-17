@@ -48,6 +48,8 @@ public class Ui {
      */
     public void printAddItemAcknowledgementMessage(ItemList listOfItems) {
         System.out.println("The item and its pax has been added to the list of items in the inventory.");
+        assert (listOfItems.getSize() > 0) : "Assertion Failed! Number of items in the item list is 0 after an item "
+                + "was added to it.";
         System.out.printf("There are currently %d items within the inventory.\n", listOfItems.getSize());
     }
 
@@ -65,6 +67,8 @@ public class Ui {
             currentItem = listOfItems.getItem(i);
             itemName = currentItem.getName();
             itemPax = currentItem.getPax();
+            assert (itemPax >= 0) : "Assertion Failed! Pax of an item within the listOfItems is less than 0 !";
+            assert (!itemName.isEmpty()) : "Assertion Failed! The name of the item within the listOfItems is empty !";
             currentListIndex = i + ARRAY_INDEX_OFFSET;
             System.out.printf("%d. Item Name: %s Item Pax: %d\n", currentListIndex, itemName, itemPax);
         }
@@ -84,7 +88,11 @@ public class Ui {
      * @param updatedItem The item within the inventory whose pax has been updated by the user.
      */
     public void printUpdateItemPaxAcknowledgementMessage(Item updatedItem) {
-        System.out.printf("The pax of %s has been updated to %d.\n", updatedItem.getName(), updatedItem.getPax());
+        String updatedItemName = updatedItem.getName();
+        int updatedItemNewPax = updatedItem.getPax();
+        assert (!updatedItemName.isEmpty()) : "Assertion Failed! Updated item has an empty item name.";
+        assert (updatedItemNewPax >= 0) : "Assertion Failed! Updated item has a pax that is less than 0.";
+        System.out.printf("The pax of %s has been updated to %d.\n", updatedItemName, updatedItemNewPax);
     }
 
     public void printAddSatisfactionAcknowledgementMessage(SatisfactionList satisfactionList,
