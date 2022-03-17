@@ -33,15 +33,40 @@ public class AddHousekeeperCommand extends Command {
     private Housekeeper extractDetails(String commandStringWithoutCommand)
             throws InvalidAgeException, InvalidHousekeeperProfile {
         int ageNumber;
-        String age;
+        String inputAge;
+        String inputName;
+        String name;
+        String[] input;
         boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(AGE_INDICATE);
         if (isSymbolIncorrect) {
             throw new InvalidHousekeeperProfile();
         }
-        String[] input = commandStringWithoutCommand.split(AGE_INDICATE);
-        String name = input[0].trim();
         try {
-            age = input[1].trim();
+            input = commandStringWithoutCommand.split(AGE_INDICATE);
+            inputName = input[0];
+            inputAge = input[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidHousekeeperProfile();
+        }
+        name = extractName(inputName);
+        ageNumber = extractAge(inputAge);
+        assert (!name.isEmpty()) : "Housekeeper name should not be empty.";
+        Housekeeper housekeeper = new Housekeeper(name, ageNumber);
+        return housekeeper;
+    }
+
+    /**
+     * This method extracts the age of housekeeper from the user input.
+     *
+     * @param inputAge Input age given by user.
+     * @return Valid age.
+     * @throws InvalidAgeException When age given is not valid.
+     */
+    private int extractAge(String inputAge) throws InvalidAgeException {
+        int ageNumber;
+        String age;
+        try {
+            age = inputAge.trim();
             ageNumber = Integer.parseInt(age);
         } catch (NumberFormatException e) {
             throw new InvalidAgeException();
@@ -50,10 +75,28 @@ public class AddHousekeeperCommand extends Command {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidAgeException();
         }
-        assert (!name.isEmpty()) : "Housekeeper name should not be empty.";
         assert (!age.isEmpty()) : "Age should not be empty.";
-        Housekeeper housekeeper = new Housekeeper(name, ageNumber);
-        return housekeeper;
+        return ageNumber;
+    }
+
+    /**
+     * This method extracts the name of the housekeeper from the user input.
+     *
+     * @param inputName Input name give by user.
+     * @return Valid name.
+     * @throws InvalidHousekeeperProfile When name given is empty
+     */
+    private String extractName(String inputName) throws InvalidHousekeeperProfile {
+        String name;
+        try {
+            name = inputName.trim();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidHousekeeperProfile();
+        }
+        if (name.isEmpty()) {
+            throw new InvalidHousekeeperProfile();
+        }
+        return name;
     }
 
     public Housekeeper getHousekeeper() {

@@ -11,22 +11,39 @@ public class AddAvailabilityCommand extends Command {
     private static final int ONLY_ONE_FIELD_ENTERED = 1;
 
     public AddAvailabilityCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
+        String[] input;
+        String inputName;
+        String inputAvailability;
         if (commandStringWithoutCommand.isEmpty()) {
             throw new InvalidAvailabilityException();
         }
-        String[] input = extractInput(commandStringWithoutCommand);
-        String name = input[0].trim();
-        if (input.length == ONLY_ONE_FIELD_ENTERED) {
+        try {
+            input = extractInput(commandStringWithoutCommand);
+            inputName = input[0].trim();
+            inputAvailability = input[1].trim();
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidAvailabilityException();
         }
-        String availability = input[1].trim();
-        if (availability.isEmpty()) {
-            throw new InvalidAvailabilityException();
-        }
+        String name = checkValidExtract(inputName);
+        String availability = checkValidExtract(inputAvailability);
         assert (!name.isEmpty()) : "Name of Housekeeper should not be empty.";
         assert (!availability.isEmpty()) : "Availability should not be empty";
-        setName(name);
-        setAvailability(availability);
+        setName(inputName);
+        setAvailability(inputAvailability);
+    }
+
+    /**
+     * This method verifies that input given by user is not empty.
+     *
+     * @param inputGiven Either the name or availability given by user.
+     * @return Either the valid Name or Availability.
+     * @throws InvalidAvailabilityException When input given is empty.
+     */
+    private String checkValidExtract(String inputGiven) throws InvalidAvailabilityException {
+        if (inputGiven.isEmpty()) {
+            throw new InvalidAvailabilityException();
+        }
+        return inputGiven;
     }
 
     /**
