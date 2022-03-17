@@ -107,6 +107,11 @@ class ActivityCreateCommandTest {
         String argsMissingSessionIdAndNameDelimiter = "activity /create /p Alice /i Alice Bob Charlie /co 15";
         Command activityWithMissingSessionIdAndNameDelimiter = Parser.getCommand(argsMissingSessionIdAndNameDelimiter);
         assertEquals(InvalidCommand.class, activityWithMissingSessionIdAndNameDelimiter.getClass());
+
+        // Case 6: Missing /sid and /p delimiter
+        String argsMissingSidAndPayerDelimiter = "activity /create /n Dinner /i Alice Bob Charlie /co 15";
+        Command activityWithMissingSidAndPayerDelimiter = Parser.getCommand(argsMissingSidAndPayerDelimiter);
+        assertEquals(InvalidCommand.class, activityWithMissingSidAndPayerDelimiter.getClass());
     }
 
     @Test
