@@ -204,6 +204,45 @@ class ParserTest {
             fail();
         }
     }
+
+    @Test
+    void parseExpenditure_delimiterExist_success() throws DuplicateDelimiterException, MissingDelimiterException {
+        String input = "addout /u 1 /d Food /e 10.50";
+        String output = Parser.parseExpenditure(input);
+        assertEquals("10.50", output);
+    }
+
+    @Test
+    void parseExpenditure_nullInput_assertThrown() throws DuplicateDelimiterException, MissingDelimiterException {
+        try {
+            Parser.parseExpenditure(null);
+            fail();
+        } catch (AssertionError e) {
+            assertEquals("User input should not be null", e.getMessage());
+        }
+    }
+
+    @Test
+    void parseExpenditure_delimiterIssues_exceptionThrown() {
+        try {
+            String noDelimiter = "addout /u 1 /d Food 10.50";
+            Parser.parseExpenditure(noDelimiter);
+            fail();
+        } catch (MissingDelimiterException e) {
+            assertEquals("Missing delimiter `/e`", e.getMessage());
+        } catch (DuplicateDelimiterException e) {
+            fail();
+        }
+        try {
+            String tooManyDelimiter = "addout /u 1 /d Food /e 10.50 /e";
+            Parser.parseExpenditure(tooManyDelimiter);
+            fail();
+        } catch (DuplicateDelimiterException e) {
+            assertEquals("Too many delimiter `/e`", e.getMessage());
+        } catch (MissingDelimiterException e) {
+            fail();
+        }
+    }
     }
 
     @Test
