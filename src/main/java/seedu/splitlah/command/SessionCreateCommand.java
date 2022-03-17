@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
 
 /**
  * Represents a command that creates a Session object from user input and stores it in the Profile object.
@@ -133,6 +134,6 @@ public class SessionCreateCommand extends Command {
         Session newSession = new Session(sessionName, newSessionId, sessionDate, personList);
         manager.getProfile().addSession(newSession);
         manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + newSession);
-        manager.getLogger().finest(Message.LOGGER_SESSIONCREATE_SESSION_ADDED + newSessionId);
+        manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONCREATE_SESSION_ADDED + newSessionId);
     }
 }

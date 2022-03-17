@@ -23,7 +23,6 @@ public class Manager {
         ui = new TextUI();
         profile = new Profile();
         logger = Logger.getLogger(LOGGER_FILE_NAME);
-        logger.setLevel(Level.INFO);
     }
 
     /**
