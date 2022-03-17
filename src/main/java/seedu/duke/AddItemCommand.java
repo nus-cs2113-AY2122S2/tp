@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 /**
  * Represents a command to add a new item to the item list. An AddItemCommand object consists of the name of the item
  * to add as well as its pax.
@@ -10,6 +13,7 @@ public class AddItemCommand extends Command {
     private static final String ITEM_PAX_INDICATOR = "/Pax:";
     private static final int ITEM_PAX_INDICATOR_LENGTH = 5;
     private Item item;
+    private static Logger itemLogger = Logger.getLogger("itemLogger");
 
     /**
      * Takes in the user input and checks if the formatting of the Add Item Command within the user input is
@@ -25,6 +29,7 @@ public class AddItemCommand extends Command {
         boolean isValidAddItemCommand = userInput.contains(ITEM_NAME_INDICATOR)
                 && userInput.contains(ITEM_PAX_INDICATOR);
         if (!isValidAddItemCommand) {
+            itemLogger.log(Level.WARNING, "Invalid formatting for AddItemCommand detected. Exception thrown.");
             throw new InvalidCommandException();
         }
         int itemPax = extractItemPax(userInput);
@@ -46,6 +51,7 @@ public class AddItemCommand extends Command {
         String itemName = userInput.substring(itemNameStartingPosition, itemPaxIndicatorPosition);
         itemName = itemName.trim();
         if (itemName.isEmpty()) {
+            itemLogger.log(Level.WARNING, "Detected an empty item name for AddItemCommand. Exception thrown.");
             throw new EmptyItemNameException();
         }
         return itemName;
@@ -64,15 +70,18 @@ public class AddItemCommand extends Command {
         int stringEndingPosition = userInput.length();
         int itemPaxStartingPosition = userInput.indexOf(ITEM_PAX_INDICATOR) + ITEM_PAX_INDICATOR_LENGTH;
         if (itemPaxStartingPosition == stringEndingPosition) {
+            itemLogger.log(Level.WARNING, "Detected an empty item name for AddItemCommand. Exception thrown.");
             throw new EmptyItemPaxException();
         }
         itemPaxStringVersion = userInput.substring(itemPaxStartingPosition);
         try {
             itemPax = Integer.parseInt(itemPaxStringVersion);
         } catch (NumberFormatException e) {
+            itemLogger.log(Level.WARNING, "Detected an invalid item pax for AddItemCommand. Exception thrown.");
             throw new InvalidItemPaxException();
         }
         if (itemPax <= 0) {
+            itemLogger.log(Level.WARNING, "Detected an invalid item pax for AddItemCommand. Exception thrown.");
             throw new InvalidItemPaxException();
         }
         return itemPax;
@@ -99,6 +108,7 @@ public class AddItemCommand extends Command {
                         AssignmentMap assignmentMap, RoomList roomList, ItemList listOfItems, Ui ui) throws
             HotelLiteManagerException, WrongCommandException {
         Item item = getItem();
+        assert (item != null) : "Assertion Failed! There is no item within the AddItemCommand object.";
         listOfItems.addItemToList(item);
         ui.printAddItemAcknowledgementMessage(listOfItems);
     }
