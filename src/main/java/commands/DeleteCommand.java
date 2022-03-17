@@ -12,10 +12,10 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the record identified by the index number used in the last record listing.\n"
-            + "Parameters: INDEX\n"
+            + "Parameters: INDEX" + System.lineSeparator()
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Record: %1$s";
+    private static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Record: %1$s";
 
     private final int toDelete;
 

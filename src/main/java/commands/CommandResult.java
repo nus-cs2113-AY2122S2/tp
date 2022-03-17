@@ -6,10 +6,11 @@ import java.util.List;
 
 public class CommandResult {
     /** The feedback message to be shown to the user. Contains a description of the execution result */
-    public final String feedbackToUser;
+    private final String feedbackToUser;
 
     /** The list of records that was produced by the command */
     private final List<Record> relevantRecords;
+
 
     public CommandResult(String feedbackToUser) {
         this.feedbackToUser = feedbackToUser;
@@ -26,5 +27,9 @@ public class CommandResult {
      */
     public List<Record> getRelevantRecords() {
         return relevantRecords;
+    }
+
+    public String getFeedbackToUser() {
+        return feedbackToUser;
     }
 }
