@@ -92,7 +92,7 @@ public class Parser {
                 return new IncorrectCommand(UpdateCommand.COMMAND_WORD + UpdateCommand.COMMAND_DESCRIPTION);
             }
         case ListCommand.COMMAND_WORD:
-            if (commandAndArgument.get(1).equals(null)) {
+            if (commandAndArgument.get(1) == null) {
                 return new ListCommand();
             } else {
                 return new ListCommand(new ArrayList<>(Collections.singleton(commandAndArgument.get(1))));
