@@ -104,7 +104,7 @@ public class Parser {
      * @param exceptionMessage  Specific exception message of each task
      * @param commandWord       Command word of the command
      */
-    private static void printExceptionMessage(String exceptionMessage, String commandWord) {
+    public static void printExceptionMessage(String exceptionMessage, String commandWord) {
         System.out.println(exceptionMessage + HELP_MESSAGE_SPECIFIC_COMMAND + commandWord + CLOSED_APOSTROPHE);
     }
 
@@ -117,7 +117,7 @@ public class Parser {
      * @param taskList      Task array.
      * @return A new Mark or Unmark command. If user input is invalid, return null.
      */
-    private static Command prepareMarkOrUnmark(String taskContent, String commandWord, TaskList taskList) {
+    public static Command prepareMarkOrUnmark(String taskContent, String commandWord, TaskList taskList) {
         try {
             int markIndex = Integer.parseInt(taskContent) - 1;
             if (commandWord.equals(MarkCommand.COMMAND_WORD)) {
@@ -143,7 +143,7 @@ public class Parser {
      * @throws InvalidInputException If rawTaskDate is an empty string.
      * @throws DateTimeParseException If rawTaskDate cannot be parsed by LocalDate.
      */
-    private static LocalDate prepareTaskDate(String rawTaskDate)
+    public static LocalDate prepareTaskDate(String rawTaskDate)
             throws InvalidInputException, DateTimeParseException {
         if (rawTaskDate.isBlank()) {
             return null;
@@ -163,7 +163,7 @@ public class Parser {
      * @param taskList      Task array.
      * @return A new Add command. If user's input is invalid, return null.
      */
-    private static Command prepareAdd(String taskContent, TaskList taskList) {
+    public static Command prepareAdd(String taskContent, TaskList taskList) {
         String[] splitTaskContent;
         LocalDate byDate;
         LocalDate doOnDate;
@@ -205,7 +205,7 @@ public class Parser {
      *                      (the 3 attributes after task_number are optional)
      * @return A new Edit command. If user's input is invalid, return null.
      */
-    private static Command prepareEdit(String taskContent) {
+    public static Command prepareEdit(String taskContent) {
 
         String[] fullEditInfo = taskContent.trim().split(SINGLE_SPACE, 2);
 
@@ -235,7 +235,7 @@ public class Parser {
      * @param fullEditInfo  User's input.
      * @throws WrongEditInfoFormatException If fullEditInfo is of the wrong format.
      */
-    private static void checkCorrectEditInfoFormat(String fullEditInfo) throws WrongEditInfoFormatException {
+    public static void checkCorrectEditInfoFormat(String fullEditInfo) throws WrongEditInfoFormatException {
         // tests to make sure the byDate is before the doOnDate
         if (fullEditInfo.contains(BY_KEYWORD) && fullEditInfo.contains(DO_ON_KEYWORD)
                 && (fullEditInfo.indexOf(BY_KEYWORD) > fullEditInfo.indexOf(DO_ON_KEYWORD))) {
@@ -258,9 +258,9 @@ public class Parser {
      * @return A new Edit command containing the parsed attributes.
      * @throws InvalidInputException If dates cannot be parsed by LocalDate.
      */
-    private static Command handleEdit(int taskNumberToEdit, String fullEditInfo) throws InvalidInputException {
+    public static Command handleEdit(int taskNumberToEdit, String fullEditInfo) throws InvalidInputException {
 
-        assert(!fullEditInfo.isBlank());
+        assert (!fullEditInfo.isBlank());
 
         String descriptionToEdit;
         String[] splitEditInfo = fullEditInfo.split(REGEX_TO_SPLIT_STRING_USING_BY_OR_DO_ON_DATES);
@@ -290,7 +290,7 @@ public class Parser {
      * @return Task date of type LocalDate.
      * @throws InvalidInputException If date cannot be parsed by LocalDate.
      */
-    private static LocalDate getParsedDateToEdit(String fullEditInfo, String keyword) throws InvalidInputException {
+    public static LocalDate getParsedDateToEdit(String fullEditInfo, String keyword) throws InvalidInputException {
 
         if (fullEditInfo.contains(keyword)) {
 
@@ -304,7 +304,7 @@ public class Parser {
 
             try {
                 return LocalDate.parse(dateToEdit, parseFormat);
-            } catch (DateTimeParseException e){
+            } catch (DateTimeParseException e) {
                 throw new InvalidInputException();
             }
         }
@@ -319,7 +319,7 @@ public class Parser {
      * @param taskList      Task array.
      * @return A new Delete command. If user's input is invalid, return null.
      */
-    private static Command prepareDelete(String taskContent, TaskList taskList) {
+    public static Command prepareDelete(String taskContent, TaskList taskList) {
         try {
             return new DeleteCommand(taskContent, taskList);
         } catch (IndexOutOfBoundsException | InvalidInputException | NumberFormatException e) {
@@ -335,7 +335,7 @@ public class Parser {
      * @param userInput Denotes the commandWord (e.g. "add")
      * @return A new Help command. If user's input is invalid, return a help command to show a short command summary.
      */
-    private static Command prepareHelp(String userInput) {
+    public static Command prepareHelp(String userInput) {
         try {
             String[] splitInput = userInput.split(SINGLE_SPACE, 2);
             return new HelpCommand(splitInput[HELP_OPTIONS_INDEX]);

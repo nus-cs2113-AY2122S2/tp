@@ -65,7 +65,7 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Prints out the task edit message
+     * Prints out the task edit message.
      *
      * @param taskList  Task array.
      * @param taskIndex Index of task edited
