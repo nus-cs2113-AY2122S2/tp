@@ -167,7 +167,43 @@ class ParserTest {
     }
 
     @Test
-    void parseIncome() {
+    void parseIncome_delimiterExist_success() throws DuplicateDelimiterException, MissingDelimiterException {
+        String input = "addin /u 1 /d Gift /i 100";
+        String output = Parser.parseIncome(input);
+        assertEquals("100", output);
+    }
+
+    @Test
+    void parseIncome_nullInput_assertThrown() throws DuplicateDelimiterException, MissingDelimiterException {
+        try {
+            Parser.parseIncome(null);
+            fail();
+        } catch (AssertionError e) {
+            assertEquals("User input should not be null", e.getMessage());
+        }
+    }
+
+    @Test
+    void parseIncome_delimiterIssues_exceptionThrown() {
+        try {
+            String noDelimiter = "addin /u 1 /d Gift 100";
+            Parser.parseIncome(noDelimiter);
+            fail();
+        } catch (MissingDelimiterException e) {
+            assertEquals("Missing delimiter `/i`", e.getMessage());
+        } catch (DuplicateDelimiterException e) {
+            fail();
+        }
+        try {
+            String tooManyDelimiter = "addin /u 1 /d Gift /i 100 /i";
+            Parser.parseIncome(tooManyDelimiter);
+            fail();
+        } catch (DuplicateDelimiterException e) {
+            assertEquals("Too many delimiter `/i`", e.getMessage());
+        } catch (MissingDelimiterException e) {
+            fail();
+        }
+    }
     }
 
     @Test
