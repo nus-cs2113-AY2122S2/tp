@@ -14,8 +14,10 @@ import java.util.ArrayList;
 public class Profile {
     
     private ArrayList<Session> sessionList;
+    private ArrayList<Group> groupList;
     private int sessionIdTracker;
     private int activityIdTracker;
+    private int groupIdTracker;
 
     /**
      * Constructor to create a Profile object.
