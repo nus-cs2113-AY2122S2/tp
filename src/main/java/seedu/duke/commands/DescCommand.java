@@ -21,7 +21,7 @@ public class DescCommand extends Command {
         String itemDescription = item.getDescription();
 
         // Print item name and description
-        ui.showMessages("Name of Item: " + item.toString() + System.lineSeparator()
+        ui.showMessages("Name of Item: " + item.getName() + System.lineSeparator()
                 + "Description: " + itemDescription);
     }
 }
