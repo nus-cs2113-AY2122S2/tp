@@ -31,6 +31,7 @@ public class AddCommand extends Command {
                       String date, String productType) throws IllegalValueException {
         this.toAdd = new Product(name, price, date, productType);
         super.totalExpense += price;
+        if (limitMgr.ifExceedLimit(super.totalExpense)) limitMgr.displayWarning();
     }
 
     /**
