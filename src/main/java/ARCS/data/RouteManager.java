@@ -12,6 +12,10 @@ public class RouteManager {
         routes = new ArrayList<>();
     }
 
+    public RouteManager(ArrayList<Route> routes) {
+        this.routes = routes;
+    }
+
     public void addRoute(Route newRoute) throws DuplicateDataException {
         boolean hasDuplicateId = hasDuplicateFlightId(newRoute);
         if (hasDuplicateId) {

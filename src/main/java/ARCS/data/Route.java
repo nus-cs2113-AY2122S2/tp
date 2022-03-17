@@ -53,4 +53,12 @@ public class Route {
 
         return flightInfo;
     }
+
+    @Override
+    public String toString() {
+        String str = flightID + "/" + date + "/"
+                + time + "/" + from + "/"
+                + to + "/" + capacity;
+        return str;
+    }
 }
