@@ -378,10 +378,64 @@ class ParserTest {
     }
 
     @Test
-    void getValidExpenditureIndex() {
+    void getValidExpenditureIndex_validUserIndex_success() throws InvalidIndexException {
+        PersonList personList = new PersonList();
+        personList.addPerson("Alice");
+        Person person = personList.getPerson(1);
+        person.addExpend("Food", 10.5);
+
+        String input = "1";
+        int output = Parser.getValidExpenditureIndex(input, person);
+        assertEquals(1, output);
     }
 
     @Test
-    void getValidIncomeIndex() {
-    }*/
+    void getValidExpenditureIndex_nullInput_assertThrown() throws InvalidIndexException {
+        try {
+            PersonList personList = new PersonList();
+            personList.addPerson("Alice");
+            Person person = personList.getPerson(1);
+            Parser.getValidExpenditureIndex(null, person);
+            fail();
+        } catch (AssertionError e) {
+            assertEquals("Expenditure index should not be null", e.getMessage());
+        }
+    }
+
+    @Test
+    void getValidExpenditureIndex_notNumber_exceptionThrown() {
+        try {
+            PersonList personList = new PersonList();
+            personList.addPerson("Alice");
+            Person person = personList.getPerson(1);
+
+            String input = "Alice";
+            Parser.getValidExpenditureIndex(input, person);
+            fail();
+        } catch (InvalidIndexException e) {
+            assertEquals("Invalid index: `Alice`", e.getMessage());
+        }
+    }
+
+    @Test
+    void getValidExpenditureIndex_indexOutOfRange_exceptionThrown() {
+        PersonList personList = new PersonList();
+        personList.addPerson("Alice");
+        Person person = personList.getPerson(1);
+        person.addExpend("Food", 10.5);
+        try {
+            String tooLow = "0";
+            Parser.getValidExpenditureIndex(tooLow, person);
+
+        } catch (InvalidIndexException e) {
+            assertEquals("Invalid index: `0`", e.getMessage());
+        }
+        try {
+            String tooLow = "2";
+            Parser.getValidExpenditureIndex(tooLow, person);
+
+        } catch (InvalidIndexException e) {
+            assertEquals("Invalid index: `2`", e.getMessage());
+        }
+    }
 }
