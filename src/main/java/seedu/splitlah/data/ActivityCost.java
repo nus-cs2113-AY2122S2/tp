@@ -15,8 +15,6 @@ public class ActivityCost {
     private double costPaid;
     private double costOwed;
 
-    private static final Logger logger = Manager.getLogger();
-
     /**
      * Constructs an ActivityCost object.
      * Assumption: Every field is non-negative.
@@ -26,7 +24,7 @@ public class ActivityCost {
      * @param costOwed   A double that represents the cost owed by a Person object.
      */
     public ActivityCost(int activityId, double costPaid, double costOwed) {
-        logger.log(Level.INFO, "Constructing ActivityCost with activityId, costPaid and costOwed");
+        Manager.getLogger().log(Level.INFO, "Constructing ActivityCost with activityId, costPaid and costOwed");
         this.activityId = activityId;
         this.costPaid = costPaid;
         this.costOwed = costOwed;
@@ -40,7 +38,7 @@ public class ActivityCost {
      */
     public ActivityCost(int activityId) {
         this(activityId, 0, 0);
-        logger.log(Level.INFO, "Constructing ActivityCost with activityId");
+        Manager.getLogger().log(Level.INFO, "Constructing ActivityCost with activityId");
     }
 
     /**
@@ -50,7 +48,7 @@ public class ActivityCost {
         this.activityId = -1;
         this.costPaid = 0;
         this.costOwed = 0;
-        logger.log(Level.INFO, "Constructing ActivityCost with default parameters");
+        Manager.getLogger().log(Level.INFO, "Constructing ActivityCost with default parameters");
     }
 
     public int getActivityId() {

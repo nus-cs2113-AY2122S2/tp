@@ -15,7 +15,6 @@ public class Manager {
     private static String LOGGER_FILE_NAME = "SplitLah";
     public static Logger logger = Logger.getLogger(LOGGER_FILE_NAME);
 
-
     /**
      * Constructor to create a Manager object.
      */
