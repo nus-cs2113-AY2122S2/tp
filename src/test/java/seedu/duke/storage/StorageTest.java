@@ -21,19 +21,19 @@ public class StorageTest {
     @Test
     void loadData_emptyFile_loadEmptyList() throws InvMgrException {
         Storage testStorage = new Storage("test/data/load/empty.json");
-        ArrayList testItemList = testStorage.loadData();
-        ArrayList expectedItemList = new ArrayList<Item>();
+        ArrayList<Item> testItemList = testStorage.loadData();
+        ArrayList<Item> expectedItemList = new ArrayList<Item>();
         assertEquals(expectedItemList, testItemList);
     }
 
     @Test
-    void loadData_invalidJsonNFile_throwException() throws InvMgrException {
+    void loadData_invalidJsonFile_throwException() throws InvMgrException {
         Storage testStorage = new Storage("test/data/load/invalidData.json");
         assertThrows(InvMgrException.class, () -> testStorage.loadData());
     }
 
     @Test
-    void loadData_validJsonNFile_validList() throws InvMgrException {
+    void loadData_validJsonFile_validList() throws InvMgrException {
         ArrayList<Item> expectedItemList = new ArrayList<>();
         Item item1 = new Item("Markers", 3, "Drawing");
         Item item2 = new Item("Whiteboard", 1, "To draw on");
@@ -55,7 +55,7 @@ public class StorageTest {
     }
 
     @Test
-    void writeData_validList_validJsonN() throws InvMgrException {
+    void writeData_validList_validJson() throws InvMgrException {
         ArrayList<Item> itemList = new ArrayList<>();
         Item item1 = new Item("Markers", 3, "Drawing");
         Item item2 = new Item("Whiteboard", 1, "To draw on");
