@@ -12,6 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+/**
+ * Represents the class that will handle Modules created by the user.
+ */
 public class StudyManager {
     private static ArrayList<Module> modulesList = new ArrayList<>();
     private static final String WELCOME_MESSAGE = "Welcome to Modules Tracker, where you can track all your "
@@ -22,6 +25,10 @@ public class StudyManager {
         return modulesList;
     }
 
+    /**
+     * Runs the Study Manager to manage the modules.
+     * @param ui Contains the input by the user.
+     */
     public void studyManagerRunner(TextUi ui) {
         printWelcomeMessage();
         String userInput;
@@ -42,6 +49,10 @@ public class StudyManager {
         }
     }
 
+    /**
+     * Prints a given input string using system output.
+     * @param message String that is to be printed on the console.
+     */
     private void printMessage(String message) {
         System.out.println(message);
     }
@@ -50,6 +61,9 @@ public class StudyManager {
         printMessage(WELCOME_MESSAGE);
     }
 
+    /**
+     * Prints the modules currently in the module list.
+     */
     public void listModules() {
         if (modulesList.size() == 0) {
             printMessage("There are no modules in your list yet!");
@@ -62,6 +76,11 @@ public class StudyManager {
         }
     }
 
+    /**
+     * Deletes an existing module denoted by its index from the module list.
+     * @param userInput Input string that contains the rm command and the module index
+     *                  that is to be deleted.
+     */
     public void deleteModule(String userInput) {
         try {
             String moduleNumber = userInput.replace("rm ","");
@@ -86,6 +105,11 @@ public class StudyManager {
 
     }
 
+    /**
+     * Adds a new module to the module list.
+     * Calls addModuleParser to parse the input string.
+     * @param userInput String input that contains the add command and module attributes.
+     */
     public void addModule(String userInput) {
         Module newModule = addModuleParser(userInput);
         if (newModule == null) {
@@ -97,6 +121,12 @@ public class StudyManager {
 
     }
 
+    /**
+     * Parses the input string for the module attributes and creates a new module object.
+     * Handles the exceptions if there are any missing attributes.
+     * @param userInput String input that contains the add command and module attributes.
+     * @return Module object that was created.
+     */
     public Module addModuleParser(String userInput) {
         //add m/CS2113 c/lec d/Thursday t/2pm-4pm
         try {
@@ -137,6 +167,16 @@ public class StudyManager {
         }
     }
 
+    /**
+     * Validates the attributes for a new module.
+     * Throws relevant exceptions for the respective missing attributes.
+     * @param parameters String array containing the user inputs for each attribute.
+     * @return String array containing the validated parameters.
+     * @throws ModuleCodeException If the module code is absent in user input.
+     * @throws ModuleCategoryException If the module category is absent in user input.
+     * @throws ModuleDayException If the module day is absent in user input.
+     * @throws ModuleTimeException If the module timeslot is absent in user input.
+     */
     public String[] validateAddInputs(String[] parameters) throws ModuleCodeException, ModuleCategoryException,
             ModuleDayException, ModuleTimeException {
         String module = moduleCodeChecker(parameters);
@@ -147,6 +187,12 @@ public class StudyManager {
         return new String[]{module,category,day,time};
     }
 
+    /**
+     * Checks that the module code is valid.
+     * @param parameters String array containing the user inputs for each attribute.
+     * @return String containing the verified module code.
+     * @throws ModuleCodeException If the module code is absent in user input.
+     */
     private String moduleCodeChecker(String[] parameters) throws ModuleCodeException {
         String module;
         try {
@@ -161,6 +207,12 @@ public class StudyManager {
         return module;
     }
 
+    /**
+     * Checks that the module category is valid.
+     * @param parameters String array containing the user inputs for each attribute.
+     * @return String containing the verified module category.
+     * @throws ModuleCategoryException If the module category is absent in user input.
+     */
     private String moduleCategoryChecker(String[] parameters) throws ModuleCategoryException {
         String category;
         try {
@@ -191,6 +243,12 @@ public class StudyManager {
         return category;
     }
 
+    /**
+     * Checks that the module day is valid.
+     * @param parameters String array containing the user inputs for each attribute.
+     * @return String containing the verified module day.
+     * @throws ModuleDayException If the module day is absent in user input.
+     */
     private String moduleDayChecker(String[] parameters) throws ModuleDayException {
         String day;
         try {
@@ -205,6 +263,12 @@ public class StudyManager {
         return day;
     }
 
+    /**
+     * Checks that the module time is valid.
+     * @param parameters String array containing the user inputs for each attribute.
+     * @return String containing the verified module time.
+     * @throws ModuleTimeException If the module time is absent in user input.
+     */
     private String moduleTimeChecker(String[] parameters) throws ModuleTimeException {
         String time;
         try {

@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+/**
+ * Tests the working of StudyManager class.
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class StudyManagerTest {
 
@@ -19,6 +22,9 @@ public class StudyManagerTest {
 
     ArrayList<Module> testList = new ArrayList<>();
 
+    /**
+     * Creates three new module objects and adds them to the test module list.
+     */
     @BeforeAll
     public void setUp() {
         cs2113 = new Module("CS2113", "Lecture", "Friday", "4pm-6pm");
@@ -30,6 +36,10 @@ public class StudyManagerTest {
         testList.add(ee4204);
     }
 
+    /**
+     * Tests add module function of Study Manager class.
+     * Ensures that the contents of the module list is equal to the test list.
+     */
     @Test
     public void testAddModule() {
         StudyManager studyManager = new StudyManager();
@@ -50,6 +60,10 @@ public class StudyManagerTest {
         }
     }
 
+    /**
+     * Tests delete module function of Study Manager class.
+     * Checks that the deleted module is not in the module list.
+     */
     @Test
     public void testDeleteModule() {
         StudyManager studyManager = new StudyManager();
