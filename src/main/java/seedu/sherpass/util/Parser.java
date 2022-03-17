@@ -16,7 +16,7 @@ import seedu.sherpass.command.UnmarkCommand;
 
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
-import seedu.sherpass.exception.WrongEditInfoFormatException;
+import seedu.sherpass.exception.WrongAttributeOrderException;
 import seedu.sherpass.exception.InvalidTimeException;
 
 import seedu.sherpass.task.Task;
@@ -55,6 +55,7 @@ import static seedu.sherpass.constant.Message.ERROR_EMPTY_ADD_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_DATE_FORMAT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_DUPLICATE_ADD_TASK_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_TASK_NUMBER_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_ADD_FORMAT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_EDIT_FORMAT_MESSAGE;
 
 import static seedu.sherpass.constant.StringConstant.DO_ON_KEYWORD;
@@ -168,20 +169,27 @@ public class Parser {
         LocalDate byDate;
         LocalDate doOnDate;
         try {
+            checkCorrectAttributeInfoFormat(taskContent);
+
             if (!taskContent.contains(BY_KEYWORD) && !taskContent.contains(DO_ON_KEYWORD)) {
                 return new AddCommand(taskContent, taskList, null, null);
             }
 
-            splitTaskContent = taskContent.split(BY_KEYWORD, 2);
-
-            if (!taskContent.contains(DO_ON_KEYWORD)) {
+            if (taskContent.contains(BY_KEYWORD) && !taskContent.contains(DO_ON_KEYWORD)) {
+                splitTaskContent = taskContent.split(BY_KEYWORD, 2);
                 byDate = prepareTaskDate(splitTaskContent[TASK_CONTENT_INDEX].trim());
                 return new AddCommand(splitTaskContent[TASK_DESCRIPTION_INDEX].trim(), taskList, byDate, null);
             }
 
-            String[] splitDates = splitTaskContent[TASK_CONTENT_INDEX].split(DO_ON_KEYWORD);
-            byDate = prepareTaskDate(splitDates[BY_DATE_INDEX].trim());
-            doOnDate = prepareTaskDate(splitDates[DO_ON_DATE_INDEX].trim());
+            if (taskContent.contains(DO_ON_KEYWORD) && !taskContent.contains(BY_KEYWORD)) {
+                splitTaskContent = taskContent.split(DO_ON_KEYWORD, 2);
+                doOnDate = prepareTaskDate(splitTaskContent[TASK_CONTENT_INDEX].trim());
+                return new AddCommand(splitTaskContent[TASK_DESCRIPTION_INDEX].trim(), taskList, null, doOnDate);
+            }
+
+            splitTaskContent = taskContent.split(REGEX_TO_SPLIT_STRING_USING_BY_OR_DO_ON_DATES, 3);
+            byDate = prepareTaskDate(splitTaskContent[BY_DATE_INDEX].trim());
+            doOnDate = prepareTaskDate(splitTaskContent[DO_ON_DATE_INDEX].trim());
             return new AddCommand(splitTaskContent[TASK_DESCRIPTION_INDEX], taskList, byDate, doOnDate);
 
         } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
@@ -190,8 +198,32 @@ public class Parser {
             printExceptionMessage(ERROR_INVALID_DATE_FORMAT_MESSAGE, AddCommand.COMMAND_WORD);
         } catch (InputRepeatedException e) {
             printExceptionMessage(ERROR_DUPLICATE_ADD_TASK_MESSAGE, AddCommand.COMMAND_WORD);
+        } catch (WrongAttributeOrderException e) {
+            printExceptionMessage(ERROR_INVALID_ADD_FORMAT_MESSAGE, AddCommand.COMMAND_WORD);
         }
         return null;
+    }
+
+    /**
+     * Checks if the user input is of the correct order of attributes.
+     * Correct order should be: [task_description] /by [task_due_date] /do_on [date to work on task]
+     * (The 3 attributes are individually optional.)
+     *
+     * @param fullInfoString  User's input.
+     * @throws WrongAttributeOrderException If fullEditInfo is of the wrong format.
+     */
+    public static void checkCorrectAttributeInfoFormat(String fullInfoString) throws WrongAttributeOrderException {
+        // tests to make sure the byDate is before the doOnDate
+        if (fullInfoString.contains(BY_KEYWORD) && fullInfoString.contains(DO_ON_KEYWORD)
+                && (fullInfoString.indexOf(BY_KEYWORD) > fullInfoString.indexOf(DO_ON_KEYWORD))) {
+            throw new WrongAttributeOrderException();
+        }
+
+        // tests to make sure the task description is the first input if it is present
+        String[] splitEditInfo = fullInfoString.split(REGEX_TO_SPLIT_STRING_USING_BY_OR_DO_ON_DATES);
+        if (splitEditInfo.length > 1) {
+            throw new WrongAttributeOrderException();
+        }
     }
 
     /**
@@ -213,40 +245,18 @@ public class Parser {
         try {
 
             int taskNumberToEdit = Integer.parseInt(fullEditInfo[TASK_NUMBER_INDEX]);
-            checkCorrectEditInfoFormat(fullEditInfo[TASK_CONTENT_INDEX]);
+            checkCorrectAttributeInfoFormat(fullEditInfo[TASK_CONTENT_INDEX]);
             return handleEdit(taskNumberToEdit, fullEditInfo[TASK_CONTENT_INDEX]);
 
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             printExceptionMessage(ERROR_INVALID_TASK_NUMBER_MESSAGE, EditCommand.COMMAND_WORD);
         } catch (InvalidInputException e) {
             printExceptionMessage(ERROR_INVALID_DATE_FORMAT_MESSAGE, EditCommand.COMMAND_WORD);
-        } catch (WrongEditInfoFormatException e) {
+        } catch (WrongAttributeOrderException e) {
             printExceptionMessage(ERROR_INVALID_EDIT_FORMAT_MESSAGE, EditCommand.COMMAND_WORD);
         }
 
         return null;
-    }
-
-    /**
-     * Checks if the Edit info is of the correct order of attributes.
-     * Correct order should be: [task_description] /by [task_due_date] /do_on [date to work on task]
-     * (The 3 attributes are individually optional.)
-     *
-     * @param fullEditInfo  User's input.
-     * @throws WrongEditInfoFormatException If fullEditInfo is of the wrong format.
-     */
-    public static void checkCorrectEditInfoFormat(String fullEditInfo) throws WrongEditInfoFormatException {
-        // tests to make sure the byDate is before the doOnDate
-        if (fullEditInfo.contains(BY_KEYWORD) && fullEditInfo.contains(DO_ON_KEYWORD)
-                && (fullEditInfo.indexOf(BY_KEYWORD) > fullEditInfo.indexOf(DO_ON_KEYWORD))) {
-            throw new WrongEditInfoFormatException();
-        }
-
-        // tests to make sure the task description is the first input if it is present
-        String[] splitEditInfo = fullEditInfo.split(REGEX_TO_SPLIT_STRING_USING_BY_OR_DO_ON_DATES);
-        if (splitEditInfo.length > 1) {
-            throw new WrongEditInfoFormatException();
-        }
     }
 
     /**
