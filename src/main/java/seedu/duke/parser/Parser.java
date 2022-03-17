@@ -87,7 +87,7 @@ public class Parser {
     private static String getDesc(String[] itemString) {
         String descString = itemString[3];
         int descStringLength = descString.length();
-        return descString.substring(0, descStringLength - 2);
+        return descString.substring(0, descStringLength);
     }
 
     /**
