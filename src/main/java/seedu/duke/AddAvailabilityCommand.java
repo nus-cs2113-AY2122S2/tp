@@ -23,6 +23,8 @@ public class AddAvailabilityCommand extends Command {
         if (availability.isEmpty()) {
             throw new InvalidAvailabilityException();
         }
+        assert (!name.isEmpty()) : "Name of Housekeeper should not be empty.";
+        assert (!availability.isEmpty()) : "Availability should not be empty";
         setName(name);
         setAvailability(availability);
     }

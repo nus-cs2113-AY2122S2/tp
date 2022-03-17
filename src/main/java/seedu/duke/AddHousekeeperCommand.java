@@ -6,7 +6,6 @@ package seedu.duke;
 public class AddHousekeeperCommand extends Command {
     private Housekeeper housekeeper;
     private static final String AGE_INDICATE = "~";
-    private Ui ui = new Ui();
 
     /**
      * Creates a new housekeeper profile consisting of their name and age which would be recorded
@@ -34,6 +33,7 @@ public class AddHousekeeperCommand extends Command {
     private Housekeeper extractDetails(String commandStringWithoutCommand)
             throws InvalidAgeException, InvalidHousekeeperProfile {
         int ageNumber;
+        String age;
         boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(AGE_INDICATE);
         if (isSymbolIncorrect) {
             throw new InvalidHousekeeperProfile();
@@ -41,7 +41,7 @@ public class AddHousekeeperCommand extends Command {
         String[] input = commandStringWithoutCommand.split(AGE_INDICATE);
         String name = input[0].trim();
         try {
-            String age = input[1].trim();
+            age = input[1].trim();
             ageNumber = Integer.parseInt(age);
         } catch (NumberFormatException e) {
             throw new InvalidAgeException();
@@ -50,6 +50,8 @@ public class AddHousekeeperCommand extends Command {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidAgeException();
         }
+        assert (!name.isEmpty()) : "Housekeeper name should not be empty.";
+        assert (!age.isEmpty()) : "Age should not be empty.";
         Housekeeper housekeeper = new Housekeeper(name, ageNumber);
         return housekeeper;
     }
