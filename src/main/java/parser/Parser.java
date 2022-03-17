@@ -34,7 +34,7 @@ public class Parser {
         }
 
         final String commandWord = words[0].toLowerCase(Locale.ENGLISH);
-        final String arguments = words[1].trim();
+        final String arguments = userInput.replaceFirst(commandWord, "").trim();
 
         switch (commandWord) {
         case AddCommand.COMMAND_WORD:
