@@ -29,7 +29,10 @@ public class Parser {
             return new AddCommand(item);
 
         } else if (userCommand.startsWith("delete")) {
-            String deleteIndex = userCommand.split(" ")[1];
+            String[] splitString = userCommand.split(" ");
+            assert splitString.length == 2 : "input should be delete with an integer behind";
+            String deleteIndex = splitString[1];
+            assert isNum(deleteIndex) : "delete should have a integer behind it";
             return new DeleteCommand(Integer.parseInt(deleteIndex) - 1);
 
         } else if (userCommand.startsWith("list")) {
@@ -39,9 +42,11 @@ public class Parser {
             return new HelpCommand();
 
         } else if (userCommand.startsWith("desc")) {
-            String descIndex = userCommand.split(" ")[1];
+            String[] splitString = userCommand.split(" ");
+            assert splitString.length == 2 : "input should be desc with an integer behind";
+            String descIndex = splitString[1];
+            assert isNum(descIndex) : "desc should have a integer behind it";
             return new DescCommand(Integer.parseInt(descIndex) - 1);
-
         } else {
             throw new InvMgrException(Messages.INVALID_COMMAND);
        
@@ -69,6 +74,7 @@ public class Parser {
     private static int getQuantity(String[] itemString) {
         String quantityString = itemString[2];
         int quantityStringLength = quantityString.length();
+        assert isNum(quantityString) : "quantity should be a number";
         return Integer.parseInt(quantityString.substring(0, quantityStringLength - 2));
     }
 
@@ -81,7 +87,7 @@ public class Parser {
     private static String getDesc(String[] itemString) {
         String descString = itemString[3];
         int descStringLength = descString.length();
-        return descString.substring(0, descStringLength - 2);
+        return descString.substring(0, descStringLength);
     }
 
     /**
@@ -92,9 +98,25 @@ public class Parser {
      */
     private static Item createItem(String userCommand) {
         String[] itemString = userCommand.split("/");
+        assert itemString.length == 4 : "userCommand should have 3 '/' inside it";
         String name = getName(itemString);
         int quantity = getQuantity(itemString);
         String desc = getDesc(itemString);
         return new Item(name, quantity, desc);
+    }
+
+    /**
+     * Method to check if a String is a number.
+     *
+     * @param number String that is being checked.
+     * @return Boolean value whether it is a number.
+     */
+    private static boolean isNum(String number) {
+        try {
+            Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 }
