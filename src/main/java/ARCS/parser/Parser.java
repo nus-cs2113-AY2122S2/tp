@@ -22,6 +22,8 @@ public class Parser {
         case DeleteRouteCommand.COMMAND_WORD:
             command = prepareDeleteRouteCommand(argumentLine);
             break;
+        case FindRouteCommand.COMMAND_WORD:
+            command = prepareFindRouteCommand(argumentLine);
         default:
             break;
         }
@@ -73,5 +75,40 @@ public class Parser {
     public Command prepareDeleteRouteCommand(String argumentLine) {
         int index = Integer.parseInt(argumentLine.trim());
         return new DeleteRouteCommand(index);
+    }
+
+    public Command prepareFindRouteCommand(String argumentLine) {
+        String[] args = argumentLine.split(" ");
+        String date = null;
+        String to = null;
+        String from = null;
+        String time = null;
+
+        for (String arg: args) {
+            arg = arg.trim();
+            if (arg.isEmpty()) {
+                continue;
+            }
+            String[] argSplit = arg.split("/");
+            String field = argSplit[0].trim();
+            String value = argSplit[1].trim();
+            switch (field) {
+            case "fd":
+                date = value;
+                break;
+            case "ft":
+                time = value;
+                break;
+            case "d":
+                to = value;
+                break;
+            case "s":
+                from = value;
+                break;
+            default:
+                break;
+            }
+        }
+        return new FindRouteCommand(date, to, from, time);
     }
 }

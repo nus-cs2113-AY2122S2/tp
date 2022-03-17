@@ -2,7 +2,6 @@ package ARCS.commands;
 
 import ARCS.data.Route;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ListRouteCommand extends Command{

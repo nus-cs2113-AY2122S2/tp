@@ -22,4 +22,26 @@ public class RouteManager {
         routes.remove(index - 1);
         return deleted;
     }
+
+    public ArrayList<Route> findRoute(String date, String to, String from) {
+        ArrayList<Route> result = new ArrayList<>();
+        for (Route route: routes) {
+            if (route.getDate().equals(date) && route.getTo().equals(to)
+                && route.getFrom().equals(from)) {
+                result.add(route);
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<Route> findRoute(String date, String to, String from, String time) {
+        ArrayList<Route> result = new ArrayList<>();
+        for (Route route: routes) {
+            if (route.getDate().equals(date) && route.getTo().equals(to)
+                    && route.getFrom().equals(from) && route.getTime().equals(time)) {
+                result.add(route);
+            }
+        }
+        return result;
+    }
 }
