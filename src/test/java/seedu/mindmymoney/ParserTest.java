@@ -24,6 +24,8 @@ class ParserTest {
         ExpenditureList testList = new ExpenditureList();
         Parser testParser = new Parser();
         assertTrue(testParser.parseCommand(testInput, testList) instanceof HelpCommand);
+        assert testParser.parseCommand(testInput, testList) instanceof HelpCommand : "testParser should return an "
+                + "instance of HelpCommand";
 
         testInput = "add description " + TEST_PRICE;
         assertTrue(testParser.parseCommand(testInput, testList) instanceof AddCommand);
