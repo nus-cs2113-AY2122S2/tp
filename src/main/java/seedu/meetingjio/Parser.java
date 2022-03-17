@@ -96,6 +96,9 @@ public class Parser {
             return new CommandResult(ERROR_INVALID_DAY);
         } catch (InvalidModeException ime) {
             return new CommandResult(ERROR_INVALID_MODE);
+        } catch (AssertionError ae) {
+            logger.log(Level.INFO, "Assertion Error");
+            return new CommandResult(ae.getMessage());
         }
     }
 
