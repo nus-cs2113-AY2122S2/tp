@@ -7,13 +7,14 @@ public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits the program.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits the program." + System.lineSeparator()
             + "Example: " + COMMAND_WORD;
-    public static final String MESSAGE_EXIT_ACKNOWEDGEMENT = "Exiting PersonBook as requested ...";
+
+    private static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Spendvelope ...";
 
     @Override
     public CommandResult execute() {
-        return new CommandResult(MESSAGE_EXIT_ACKNOWEDGEMENT);
+        return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT);
     }
 
     public static boolean isExit(Command command) {

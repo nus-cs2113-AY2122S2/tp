@@ -1,17 +1,15 @@
 package ui;
-        import static common.Messages.MESSAGE_GOODBYE;
-        import static common.Messages.MESSAGE_INIT_FAILED;
-        import static common.Messages.MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE;
-        import static common.Messages.MESSAGE_WELCOME;
 
-        import java.io.InputStream;
-        import java.io.PrintStream;
-        import java.util.ArrayList;
-        import java.util.List;
-        import java.util.Scanner;
+import static common.Messages.MESSAGE_GOODBYE;
+import static common.Messages.MESSAGE_WELCOME;
 
-        import commands.CommandResult;
-        import data.record.Record;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.List;
+import java.util.Scanner;
+
+import commands.CommandResult;
+import data.record.Record;
 
 /**
  * Text UI of the application.
@@ -97,7 +95,6 @@ public class TextUi {
                 DIVIDER,
                 MESSAGE_WELCOME,
                 version,
-                MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE,
                 DIVIDER);
     }
 
@@ -122,7 +119,7 @@ public class TextUi {
         if (resultRecords != null) {
             System.out.println(resultRecords);
         }
-        showToUser(result.feedbackToUser, DIVIDER);
+        showToUser(result.getFeedbackToUser(), DIVIDER);
     }
 
 }
