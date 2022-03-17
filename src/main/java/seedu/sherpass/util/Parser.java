@@ -24,28 +24,44 @@ import seedu.sherpass.task.TaskList;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.parseFormat;
 
-import static seedu.sherpass.constant.Index.MARK_INDEX;
-import static seedu.sherpass.constant.Index.CUSTOM_COMMAND_INDEX;
-import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
-import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
-import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
 import static seedu.sherpass.constant.Index.OPTIONS_INDEX;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ZERO;
+import static seedu.sherpass.constant.Index.TASK_NUMBER_INDEX;
+import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
+import static seedu.sherpass.constant.Index.TASK_DESCRIPTION_INDEX;
+import static seedu.sherpass.constant.Index.BY_DATE_INDEX;
+import static seedu.sherpass.constant.Index.DO_ON_DATE_INDEX;
+import static seedu.sherpass.constant.Index.FIRST_SUBSTRING_INDEX;
+import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
+import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
+import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
+import static seedu.sherpass.constant.Index.CUSTOM_TIMER_INDEX;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_INDEX;
 import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ONE;
 import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
 import static seedu.sherpass.constant.Index.DEFAULT_TIMER_THREE;
-import static seedu.sherpass.constant.Index.CUSTOM_TIMER_INDEX;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_INDEX;
-import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ZERO;
+import static seedu.sherpass.constant.Index.CUSTOM_COMMAND_INDEX;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_STUDY_INPUT_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_EMPTY_ADD_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_DATE_FORMAT_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_DUPLICATE_ADD_TASK_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_TASK_NUMBER_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_EDIT_FORMAT_MESSAGE;
+
+import static seedu.sherpass.constant.StringConstant.DO_ON_KEYWORD;
+import static seedu.sherpass.constant.StringConstant.BY_KEYWORD;
+import static seedu.sherpass.constant.StringConstant.SINGLE_SPACE;
+import static seedu.sherpass.constant.StringConstant.CLOSED_APOSTROPHE;
+import static seedu.sherpass.constant.StringConstant.REGEX_TO_SPLIT_STRING_USING_BY_OR_DO_ON_DATES;
 
 public class Parser {
 
@@ -81,116 +97,83 @@ public class Parser {
         }
     }
 
-    private static Command prepareMarkOrUnmark(String[] parsedInput, String commandWord, TaskList taskList) {
+    private static void printExceptionMessage(String exceptionMessage, String commandWord) {
+        System.out.println(exceptionMessage + HELP_MESSAGE_SPECIFIC_COMMAND + commandWord + CLOSED_APOSTROPHE);
+    }
+
+    private static Command prepareMarkOrUnmark(String taskContent, String commandWord, TaskList taskList) {
         try {
-            int markIndex = Integer.parseInt(parsedInput[MARK_INDEX]) - 1;
+            int markIndex = Integer.parseInt(taskContent) - 1;
             if (commandWord.equals(MarkCommand.COMMAND_WORD)) {
                 return new MarkCommand(markIndex, taskList);
             }
             return new UnmarkCommand(markIndex, taskList);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            System.out.println(ERROR_INVALID_MARKING_INDEX_MESSAGE);
+            if (commandWord.equals(MarkCommand.COMMAND_WORD)) {
+                printExceptionMessage(ERROR_INVALID_MARKING_INDEX_MESSAGE, MarkCommand.COMMAND_WORD);
+            } else {
+                printExceptionMessage(ERROR_INVALID_MARKING_INDEX_MESSAGE, UnmarkCommand.COMMAND_WORD);
+            }
         }
         return null;
     }
 
-    private static void printMissingInputMessage() {
-        System.out.println("Oops! The description of an 'add' command cannot be empty."
-                + HELP_MESSAGE_SPECIFIC_COMMAND);
-    }
-
-    private static LocalDate confirmInvalidDateFormat() throws InvalidInputException {
-        Ui anotherUi = new Ui();
-        anotherUi.showToUser("It seems that the date and time\nyou gave is not in the correct format.\n"
-                + "Would you like to re-enter a valid date and time? (Y/N)\n"
-                + "*Enter 'No' to skip the adding of this task*");
-        anotherUi.showLine();
-        while (true) {
-            String input = anotherUi.readCommand();
-            anotherUi.showLine();
-            if (input.trim().equalsIgnoreCase("Y")
-                    || input.trim().equalsIgnoreCase("Yes")) {
-                anotherUi.showToUser("Understood. Please key in the date and time you wish to save.");
-                anotherUi.showLine();
-                anotherUi.showToUser("Enter valid date input:");
-                input = anotherUi.readCommand();
-                anotherUi.showLine();
-                return prepareTaskDate(input.trim());
-            }
-            if (input.trim().equalsIgnoreCase("N")
-                    || input.trim().equalsIgnoreCase("No")) {
-                anotherUi.showToUser("Okay, proceeding to stop current task process...");
-                return null;
-            }
-            anotherUi.showToUser("Please confirm your choice with either Y (Yes) or N (No).");
-            anotherUi.showLine();
-        }
-    }
-
-    private static LocalDate prepareTaskDate(String rawTaskDate) throws InvalidInputException {
+    private static LocalDate prepareTaskDate(String rawTaskDate)
+            throws InvalidInputException, DateTimeParseException {
         if (rawTaskDate.isBlank()) {
             return null;
         }
-        try {
-            return LocalDate.parse(rawTaskDate, parseFormat);
-        } catch (DateTimeParseException e) {
-            return confirmInvalidDateFormat();
-        }
+        return LocalDate.parse(rawTaskDate, parseFormat);
     }
 
-
-    // Please add in constants to the magic literals
-    private static Command prepareAdd(String[] splitInput, TaskList taskList) {
-        String[] filteredTaskContent;
+    private static Command prepareAdd(String taskContent, TaskList taskList) {
+        String[] splitTaskContent;
         LocalDate byDate;
         LocalDate doOnDate;
         try {
-            if (!splitInput[TASK_CONTENT_INDEX].contains("/by")
-                    && !splitInput[TASK_CONTENT_INDEX].contains("/do_on")) {
-                return new AddCommand(splitInput[TASK_CONTENT_INDEX], taskList, null, null);
+            if (!taskContent.contains(BY_KEYWORD) && !taskContent.contains(DO_ON_KEYWORD)) {
+                return new AddCommand(taskContent, taskList, null, null);
             }
 
-            filteredTaskContent = splitInput[TASK_CONTENT_INDEX].split("/by", 2);
-            if (!splitInput[1].contains("/do_on")) {
-                byDate = prepareTaskDate(filteredTaskContent[1].trim());
-                return new AddCommand(filteredTaskContent[0].trim(), taskList, byDate, null);
+            splitTaskContent = taskContent.split(BY_KEYWORD, 2);
+
+            if (!taskContent.contains(DO_ON_KEYWORD)) {
+                byDate = prepareTaskDate(splitTaskContent[TASK_CONTENT_INDEX].trim());
+                return new AddCommand(splitTaskContent[TASK_DESCRIPTION_INDEX].trim(), taskList, byDate, null);
             }
 
-            String[] filteredDates = filteredTaskContent[1].split("/do_on");
-            byDate = prepareTaskDate(filteredDates[0].trim());
-            doOnDate = prepareTaskDate(filteredDates[1].trim());
-            return new AddCommand(filteredTaskContent[0], taskList, byDate, doOnDate);
+            String[] splitDates = splitTaskContent[TASK_CONTENT_INDEX].split(DO_ON_KEYWORD);
+            byDate = prepareTaskDate(splitDates[BY_DATE_INDEX].trim());
+            doOnDate = prepareTaskDate(splitDates[DO_ON_DATE_INDEX].trim());
+            return new AddCommand(splitTaskContent[TASK_DESCRIPTION_INDEX], taskList, byDate, doOnDate);
 
         } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
-            printMissingInputMessage();
+            printExceptionMessage(ERROR_EMPTY_ADD_MESSAGE, AddCommand.COMMAND_WORD);
+        } catch (DateTimeParseException e) {
+            printExceptionMessage(ERROR_INVALID_DATE_FORMAT_MESSAGE, AddCommand.COMMAND_WORD);
         } catch (InputRepeatedException e) {
-            System.out.println("Oops! It seems that you've entered a duplicate task.\n"
-                    + "Please re-enter a new task if you wish to add one.");
+            printExceptionMessage(ERROR_DUPLICATE_ADD_TASK_MESSAGE, AddCommand.COMMAND_WORD);
         }
         return null;
     }
 
-    private static Command prepareEdit(String[] splitInput) {
+    private static Command prepareEdit(String taskContent) {
 
-        String[] fullEditInfo = splitInput[1].trim().split(" ", 2);
+        String[] fullEditInfo = taskContent.trim().split(SINGLE_SPACE, 2);
 
-        //7 possibilities of editing, incorrect format of inputs are rejected
+        //7 possibilities of editing. Incorrect format of inputs are rejected
         try {
 
-            int taskNumberToEdit = Integer.parseInt(fullEditInfo[0]);
-            checkCorrectEditInfoFormat(fullEditInfo[1]);
-            return handleEdit(taskNumberToEdit, fullEditInfo[1]);
+            int taskNumberToEdit = Integer.parseInt(fullEditInfo[TASK_NUMBER_INDEX]);
+            checkCorrectEditInfoFormat(fullEditInfo[TASK_CONTENT_INDEX]);
+            return handleEdit(taskNumberToEdit, fullEditInfo[TASK_CONTENT_INDEX]);
 
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            System.out.println("Please key in a valid task number");
+            printExceptionMessage(ERROR_INVALID_TASK_NUMBER_MESSAGE, EditCommand.COMMAND_WORD);
         } catch (InvalidInputException e) {
-            System.out.println("Invalid date");
+            printExceptionMessage(ERROR_INVALID_DATE_FORMAT_MESSAGE, EditCommand.COMMAND_WORD);
         } catch (WrongEditInfoFormatException e) {
-            System.out.println("Please use the correct order of keywords:\n"
-                    + "<task_description> /by <task_due_date> /do_on <date_to_work_on_task>\n\n"
-                    + "You only need to input the parts you want to edit.\n"
-                    + "e.g. edit 1 /do_on 2022/02/12\n"
-                    + "(The task_description and task_due_date is left out here)");
+            printExceptionMessage(ERROR_INVALID_EDIT_FORMAT_MESSAGE, EditCommand.COMMAND_WORD);
         }
 
         return null;
@@ -198,13 +181,13 @@ public class Parser {
 
     private static void checkCorrectEditInfoFormat(String fullEditInfo) throws WrongEditInfoFormatException {
         // tests to make sure the byDate is before the doOnDate
-        if (fullEditInfo.contains("/by") && fullEditInfo.contains("/do_on")) {
-            if (fullEditInfo.indexOf("/by") > fullEditInfo.indexOf("/do_on")) {
-                throw new WrongEditInfoFormatException();
-            }
+        if (fullEditInfo.contains(BY_KEYWORD) && fullEditInfo.contains(DO_ON_KEYWORD)
+                && (fullEditInfo.indexOf(BY_KEYWORD) > fullEditInfo.indexOf(DO_ON_KEYWORD))) {
+            throw new WrongEditInfoFormatException();
         }
+
         // tests to make sure the task description is the first input if it is present
-        String[] splitEditInfo = fullEditInfo.split("/by \\d{4}/\\d{2}/\\d{2}|/do_on \\d{4}/\\d{2}/\\d{2}");
+        String[] splitEditInfo = fullEditInfo.split(REGEX_TO_SPLIT_STRING_USING_BY_OR_DO_ON_DATES);
         if (splitEditInfo.length > 1) {
             throw new WrongEditInfoFormatException();
         }
@@ -212,19 +195,23 @@ public class Parser {
 
     private static Command handleEdit(int taskNumberToEdit, String fullEditInfo) throws InvalidInputException {
 
-        String[] splitEditInfo = fullEditInfo.split(" ");
-        String descriptionToEdit;
-        LocalDate parsedByDateToEdit;
-        LocalDate parsedDoOnDateToEdit;
+        assert(!fullEditInfo.isBlank());
 
-        if (!splitEditInfo[0].trim().equals("/by") && !(splitEditInfo[0].trim().equals("/do_on"))) {
-            descriptionToEdit = splitEditInfo[0];
+        String descriptionToEdit;
+        String[] splitEditInfo = fullEditInfo.split(REGEX_TO_SPLIT_STRING_USING_BY_OR_DO_ON_DATES);
+
+        if (Arrays.stream(splitEditInfo).findAny().isPresent()) {   //if the splitEditInfo array is not empty
+            if (!splitEditInfo[FIRST_SUBSTRING_INDEX].isBlank()) {
+                descriptionToEdit = splitEditInfo[FIRST_SUBSTRING_INDEX];
+            } else {
+                descriptionToEdit = EMPTY_STRING;
+            }
         } else {
             descriptionToEdit = EMPTY_STRING;
         }
 
-        parsedByDateToEdit = getParsedDateToEdit(fullEditInfo, "/by");
-        parsedDoOnDateToEdit = getParsedDateToEdit(fullEditInfo, "/do_on");
+        LocalDate parsedByDateToEdit = getParsedDateToEdit(fullEditInfo, BY_KEYWORD);
+        LocalDate parsedDoOnDateToEdit = getParsedDateToEdit(fullEditInfo, DO_ON_KEYWORD);
 
         return new EditCommand(taskNumberToEdit, descriptionToEdit, parsedByDateToEdit, parsedDoOnDateToEdit);
     }
@@ -233,32 +220,36 @@ public class Parser {
 
         if (fullEditInfo.contains(keyword)) {
 
+            // gets the substring (of fullEditInfo) after the keyword (, which is either "/by" or "/do_on")
             int offsetForKeyword = keyword.length() + 1;
             int offsetForSubstring = fullEditInfo.indexOf(keyword) + offsetForKeyword;
+            String substringAfterKeyword = fullEditInfo.substring(offsetForSubstring);
 
-            // gets the substring (of fullEditInfo) after the keyword (, which is either "/by" or "/do_on")
-            // splits the substring and obtains the first word (which should be the date of format yyyy/MM/dd)
-            String dateToEdit = fullEditInfo.substring(offsetForSubstring).split(" ")[0].trim();
+            // splits the substring and obtains the first word (which should be the date of format d/M/yyyy)
+            String dateToEdit = substringAfterKeyword.split(SINGLE_SPACE)[FIRST_SUBSTRING_INDEX].trim();
 
-            return prepareTaskDate(dateToEdit);
+            try {
+                return LocalDate.parse(dateToEdit, parseFormat);
+            } catch (DateTimeParseException e){
+                throw new InvalidInputException();
+            }
         }
-
         return null;
     }
 
-    private static Command prepareDelete(String[] parsedInput, TaskList taskList) {
+    private static Command prepareDelete(String taskContent, TaskList taskList) {
         try {
-            return new DeleteCommand(parsedInput, taskList);
+            return new DeleteCommand(taskContent, taskList);
         } catch (IndexOutOfBoundsException | InvalidInputException | NumberFormatException e) {
-            System.out.println(ERROR_INVALID_DELETE_INDEX_MESSAGE + HELP_MESSAGE_SPECIFIC_COMMAND);
+            printExceptionMessage(ERROR_INVALID_DELETE_INDEX_MESSAGE, DeleteCommand.COMMAND_WORD);
         }
         return null;
     }
 
     private static Command prepareHelp(String userInput) {
         try {
-            String[] parsedInput = userInput.split(" ", 2);
-            return new HelpCommand(parsedInput[HELP_OPTIONS_INDEX]);
+            String[] splitInput = userInput.split(SINGLE_SPACE, 2);
+            return new HelpCommand(splitInput[HELP_OPTIONS_INDEX]);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             return new HelpCommand("show help list");
         }
@@ -272,21 +263,26 @@ public class Parser {
      * @return Command type matching the user command.
      */
     public static Command parseCommand(String userInput, TaskList taskList) {
-        String[] splitInput = userInput.split(" ", 2);
+        String[] splitInput = userInput.split(SINGLE_SPACE, 2);
         String commandWord = splitInput[OPTIONS_INDEX].toLowerCase().trim();
+        String taskContent = EMPTY_STRING; 
+        if (splitInput.length > 1) {
+            taskContent = splitInput[TASK_CONTENT_INDEX].trim();
+        }
+        
         switch (commandWord) {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
         case MarkCommand.COMMAND_WORD:
-            return prepareMarkOrUnmark(splitInput, MarkCommand.COMMAND_WORD, taskList);
+            return prepareMarkOrUnmark(taskContent, MarkCommand.COMMAND_WORD, taskList);
         case UnmarkCommand.COMMAND_WORD:
-            return prepareMarkOrUnmark(splitInput, UnmarkCommand.COMMAND_WORD, taskList);
+            return prepareMarkOrUnmark(taskContent, UnmarkCommand.COMMAND_WORD, taskList);
         case AddCommand.COMMAND_WORD:
-            return prepareAdd(splitInput, taskList);
+            return prepareAdd(taskContent, taskList);
         case EditCommand.COMMAND_WORD:
-            return prepareEdit(splitInput);
+            return prepareEdit(taskContent);
         case DeleteCommand.COMMAND_WORD:
-            return prepareDelete(splitInput, taskList);
+            return prepareDelete(taskContent, taskList);
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
         case StudyCommand.COMMAND_WORD:
@@ -359,7 +355,7 @@ public class Parser {
      * @param ui           UI.
      */
     public static void parseStudyMode(String rawUserInput, Ui ui, TimerLogic timerLogic) {
-        String[] parsedInput = rawUserInput.trim().split(" ", 2);
+        String[] parsedInput = rawUserInput.trim().split(SINGLE_SPACE, 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
             timerLogic.callStartTimer(parsedInput);
@@ -374,7 +370,7 @@ public class Parser {
             timerLogic.callStopTimer();
             break;
         default:
-            ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);
+            printExceptionMessage(ERROR_INVALID_STUDY_INPUT_MESSAGE, StudyCommand.COMMAND_WORD);
         }
     }
 }
