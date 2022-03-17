@@ -1,6 +1,6 @@
 goto m/Contacts_Manager
 invalid contacts command
-add n/Lucy
+add n/Lucy f/SoC e/email@u.nus.edu d/group mate from cs2113
 list
 rm
 rm 0
@@ -8,6 +8,15 @@ rm 17
 rm1
 rm not_a_number
 rm 1
+list
+add n/Lucy d/group mate from cs2113 f/SoC e/email@u.nus.edu
+list
+rm 1
+list
+add n/Gen f/ e/ d/
+add n/Gen f/YNC e/ d/
+add n/Gen f/ e/email@gmail.com d/
+add n/Gen f/YNC e/email@gmail.com d/
 list
 menu
 goto m/Expense_Tracker

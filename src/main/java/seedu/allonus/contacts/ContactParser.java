@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class ContactParser {
 
     private static final int MAX_NUMBER_OF_FIELDS = 5;
-    private static Logger logger = Logger.getLogger("Foo");
+    private static Logger logger = Logger.getLogger("");
 
     private static ArrayList<String> getFields(String userInput) {
         String regex = "[nfetd]/.*?(?=([nfetd]/|$))";
@@ -21,31 +21,55 @@ public class ContactParser {
             fields.add(matcher.group().trim());
         }
 
-        // System.out.println(fields.toString());
         return fields;
+    }
+
+    private static void isValidField(String fieldContent) throws InvalidContactField {
+        if (fieldContent.equals("")) {
+            logger.log(Level.FINE, String.format("Invalid contact field: %s", fieldContent));
+            throw new InvalidContactField("Invalid contact field(s)!");
+        }
     }
 
     private static Contact parseContactFields(ArrayList<String> fields) throws InvalidContactField {
         String regex = "(?<=[nfetd]/).*";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher;
-        Contact contact = null;
+        String name = null;
+        String faculty = null;
+        String email = null;
+        String description = null;
+
         for (String field : fields) {
+            matcher = pattern.matcher(field);
+            matcher.find();
+            String fieldContent = matcher.group().trim();
+            isValidField(fieldContent);
+
             char fieldType = field.charAt(0);
             switch (fieldType) {
             case 'n':
-                matcher = pattern.matcher(field);
-                // System.out.println(field);
-                matcher.find();
-                String name = matcher.group();
-                contact = new Contact(name);
+                name = fieldContent;
+                break;
+            case 'f':
+                faculty = fieldContent;
+                break;
+            case 'e':
+                email = fieldContent;
+                break;
+            case 'd':
+                description = fieldContent;
                 break;
             default:
-                logger.log(Level.WARNING, String.format("Invalid contact field: %s", field));
+                logger.log(Level.FINE, String.format("Invalid contact field: %s", field));
                 throw new InvalidContactField("Invalid contact field!");
             }
         }
-        return contact;
+        assert !name.equals("");
+        assert !faculty.equals("");
+        assert !email.equals("");
+        assert !description.equals("");
+        return new Contact(name, faculty, email, description);
     }
 
     public static Contact parseContact(String userInput) throws InvalidContactField {

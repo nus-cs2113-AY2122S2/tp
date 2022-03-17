@@ -2,20 +2,39 @@ package seedu.allonus.contacts;
 
 public class Contact {
     private String name;
+    private String faculty;
+    private String email;
+    private String description;
 
-    public Contact() {
-    }
-
-    public Contact(String name) {
+    public Contact(String name, String faculty, String email, String description) {
         this.name = name;
+        this.faculty = faculty;
+        this.email = email;
+        this.description = description;
     }
 
     public String getName() {
         return name;
     }
 
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public String toString() {
-        return name;
+        String contactPrinted = "Name: " + getName()
+                +  ", Faculty: " + getFaculty()
+                + ", Email: " + getEmail()
+                + ", Description: " + getDescription();
+        return contactPrinted;
     }
 }
