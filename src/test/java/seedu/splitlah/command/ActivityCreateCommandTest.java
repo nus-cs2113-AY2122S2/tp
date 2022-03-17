@@ -120,6 +120,11 @@ class ActivityCreateCommandTest {
         String argsMissingPayerArgument = "activity /create /sid 1 /n Dinner /p /i Alice Bob Charlie /co 15";
         Command sessionWithMissingPayerArgument = Parser.getCommand(argsMissingPayerArgument);
         assertEquals(InvalidCommand.class, sessionWithMissingPayerArgument.getClass());
+
+        // Case 4: Missing involved list
+        String argsMissingInvolvedListArgument = "activity /create /sid 1 /n Dinner /p Alice /i /co 15";
+        Command activityWithMissingInvolvedListArgument = Parser.getCommand(argsMissingInvolvedListArgument);
+        assertEquals(InvalidCommand.class, activityWithMissingInvolvedListArgument.getClass());
     }
 
 }
