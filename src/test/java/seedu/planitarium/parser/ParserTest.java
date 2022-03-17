@@ -243,6 +243,45 @@ class ParserTest {
             fail();
         }
     }
+
+    @Test
+    void parseRecordIndex_delimiterExist_success() throws DuplicateDelimiterException, MissingDelimiterException {
+        String input = "deletein /u 1 /r 2";
+        String output = Parser.parseRecordIndex(input);
+        assertEquals("2", output);
+    }
+
+    @Test
+    void parseRecordIndex_nullInput_assertThrown() {
+        try {
+            Parser.parseKeyword(null);
+            fail();
+        } catch (AssertionError e) {
+            assertEquals("User input should not be null", e.getMessage());
+        }
+    }
+
+    @Test
+    void parseRecordIndex_delimiterIssues_exceptionThrown() {
+        try {
+            String noDelimiter = "deletein /u 1 2";
+            Parser.parseRecordIndex(noDelimiter);
+            fail();
+        } catch (MissingDelimiterException e) {
+            assertEquals("Missing delimiter `/r`", e.getMessage());
+        } catch (DuplicateDelimiterException e) {
+            fail();
+        }
+        try {
+            String tooManyDelimiter = "deletein /u 1 /r 2 /r 1";
+            Parser.parseRecordIndex(tooManyDelimiter);
+            fail();
+        } catch (DuplicateDelimiterException e) {
+            assertEquals("Too many delimiter `/r`", e.getMessage());
+        } catch (MissingDelimiterException e) {
+            fail();
+        }
+    }
     }
 
     @Test
