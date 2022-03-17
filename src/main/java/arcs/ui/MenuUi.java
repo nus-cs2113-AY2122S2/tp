@@ -10,7 +10,7 @@ import arcs.data.validitychecker.ValidPriceChecker;
 import arcs.parser.Parser;
 
 /**
- * Represents the class that interfaces with the user for menu functions
+ * Represents the class that interfaces with the user for menu functions.
  */
 
 public class MenuUi extends MainUi {
@@ -34,7 +34,7 @@ public class MenuUi extends MainUi {
     }
 
     /**
-     * Prints menu UI options
+     * Prints menu UI options.
      */
     //NOTE: To allow add, remove, edit and print, in final version.
     public void displaySubMenu() {
@@ -53,7 +53,7 @@ public class MenuUi extends MainUi {
     }
 
     /**
-     * Prints add menu item UI option
+     * Prints add menu item UI option.
      */
     public void displayAddMenuItemOption() {
         printLineDivider();
@@ -61,7 +61,7 @@ public class MenuUi extends MainUi {
     }
 
     /**
-     * Prints remove menu item UI option
+     * Prints remove menu item UI option.
      */
     public String displayRemoveMenuItemOption() {
         return lineDivider + "\n" + " Enter the index of menu item you want to remove. ";
@@ -75,14 +75,14 @@ public class MenuUi extends MainUi {
     }
 
     /**
-     * Prints exit message when user exits menu interface
+     * Prints exit message when user exits menu interface.
      */
     public void exitMenuMessage() {
         System.out.println("Exiting menu interface.");
     }
 
     /**
-     * Prints error message
+     * Prints error message.
      *
      * @param message
      *            String representation of error message
@@ -92,7 +92,7 @@ public class MenuUi extends MainUi {
     }
 
     /**
-     * Prints string representation of menu item
+     * Prints string representation of menu item.
      *
      * @param menuItem menu item to be printed
      */
@@ -101,7 +101,7 @@ public class MenuUi extends MainUi {
     }
 
     /**
-     * Prints the size of the menu item list
+     * Prints the size of the menu item list.
      *
      * @param size of menu item list
      */
@@ -110,7 +110,7 @@ public class MenuUi extends MainUi {
     }
 
     /**
-     * Prints the message when user adds a new menu item
+     * Prints the message when user adds a new menu item.
      *
      * @param menuItem the menu item to be added
      * @param size The size of the menu item list
@@ -122,7 +122,7 @@ public class MenuUi extends MainUi {
     }
 
     /**
-     * Prints the message when user removes a task
+     * Prints the message when user removes a task.
      *
      * @param menuItem menu item to be removed from the list
      * @param size The size of the menu item list
@@ -134,9 +134,9 @@ public class MenuUi extends MainUi {
     }
 
     /**
-     * Prints menu items in the menu item arraylist
+     * Prints menu items in the menu item arraylist.
      *
-     * @param menuItems
+     * @param menuItems list of menu items
      */
     public void printMenuItems(MenuItemList menuItems) {
         System.out.println("Your current in-flight menu is:");

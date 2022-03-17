@@ -14,8 +14,7 @@ public class ValidPriceChecker implements RawInputChecker {
         Matcher matcher = pattern.matcher(price);
         if (matcher.matches()) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

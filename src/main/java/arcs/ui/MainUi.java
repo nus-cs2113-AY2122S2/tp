@@ -55,7 +55,7 @@ public class MainUi {
     }
 
     /**
-     * Prints welcome message
+     * Prints welcome message.
      */
     public void displayWelcomeMessage() {
         System.out.println("Hello from\n" + appLogo);
@@ -70,22 +70,13 @@ public class MainUi {
         System.out.println("\nEnter your choice: ");
     }
 
-    /**
-     * Takes in user input with scanner
-     *
-     * @return String representation of input
-     */
-    public String getUserInput() {
-        String userInput = scannerIn.nextLine();
-        return userInput;
-    }
 
     public void printLineDivider() {
         System.out.println(lineDivider);
     }
 
     /**
-     * Prints exit message when user exits the app
+     * Prints exit message when user exits the app.
      */
     public void printExitMessage() {
         printLineDivider();
@@ -136,6 +127,16 @@ public class MainUi {
             line = scannerIn.nextLine().trim();
         }
         return line;
+    }
+
+    /**
+     * Takes in user input with scanner
+     *
+     * @return String representation of input
+     */
+    public String getUserInput() {
+        String userInput = scannerIn.nextLine();
+        return userInput;
     }
 
     public void showResultToUser(CommandResult result) {

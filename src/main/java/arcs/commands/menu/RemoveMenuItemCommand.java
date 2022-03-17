@@ -34,7 +34,7 @@ public class RemoveMenuItemCommand extends MenuItemCommand {
     }
 
     /**
-     * Prompts user for menu items to add
+     * Prompts user for menu items to remove.
      *
      * @throws ArcsException If user input is valid
      */
@@ -51,7 +51,7 @@ public class RemoveMenuItemCommand extends MenuItemCommand {
                 menuItems.removeMenuItem(indexToRemove);
                 ui.printRemoveMessage(menuItem, menuItems.getSize());
                 isItemRemoved = true;
-            } catch (IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
                 ui.printError(Parser.INVALID_MENU_ITEM_ERROR);
             }
         }

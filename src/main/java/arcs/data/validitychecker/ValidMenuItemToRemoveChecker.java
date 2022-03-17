@@ -13,8 +13,7 @@ public class ValidMenuItemToRemoveChecker implements RawInputChecker {
             int numericIndex = Integer.parseInt(menuItemIndex);
             if (!(numericIndex > 0)) {
                 return false;
-            }
-            else {
+            } else {
                 return true;
             }
         } catch (NumberFormatException e) {

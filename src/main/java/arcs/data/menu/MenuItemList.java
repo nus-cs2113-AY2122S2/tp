@@ -4,20 +4,20 @@ import java.util.ArrayList;
 
 public class MenuItemList {
     /**
-     * Represents the controller for ArrayList of menu items in ARCS
+     * Represents the controller for ArrayList of menu items in ARCS.
      */
     private ArrayList<MenuItem> menuItemList;
     /**
-     * Constructs the class with the menu items arraylist
+     * Constructs the class with the menu items arraylist.
      *
-     * @param menuItemList
+     * @param menuItemList list of menu items
      */
     public MenuItemList(ArrayList<MenuItem> menuItemList) {
         this.menuItemList = menuItemList;
     }
 
     /**
-     * Getter for a specific menu item
+     * Getter for a specific menu item.
      *
      * @param index Index of menu item
      *            Index of task
@@ -28,7 +28,7 @@ public class MenuItemList {
     }
 
     /**
-     * Getter for menu item list
+     * Getter for menu item list.
      *
      * @return ArrayList of menu items
      */
@@ -37,7 +37,7 @@ public class MenuItemList {
     }
 
     /**
-     * Getter for menu item list size
+     * Getter for menu item list size.
      *
      * @return Size of arraylist of menu items
      */
@@ -46,7 +46,7 @@ public class MenuItemList {
     }
 
     /**
-     * Removing of menu items from the list
+     * Removing of menu items from the list.
      *
      * @param index of Menu Item object to remove.
      */
@@ -55,7 +55,7 @@ public class MenuItemList {
     }
 
     /**
-     *  Adding a menu item to the list of menu items
+     *  Adding a menu item to the list of menu items.
      *
      * @param menuItem
      */

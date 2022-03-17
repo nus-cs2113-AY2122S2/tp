@@ -7,7 +7,6 @@ import arcs.parser.Parser;
 import arcs.storage.RouteFileManager;
 import arcs.ui.MainUi;
 import arcs.ui.MenuUi;
-import arcs.ui.Ui;
 import arcs.data.menu.MenuItem;
 import arcs.commands.Command;
 import arcs.commands.ExitCommand;
@@ -22,7 +21,6 @@ public class Main {
     private MainUi mainUi;
     private MenuUi menuUi;
     private MenuItemList menuItemList;
-    private Ui ui;
     private RouteManager routeManager;
 
     /**
