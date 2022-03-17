@@ -104,4 +104,12 @@ class ActivityCreateCommandTest {
         assertEquals(InvalidCommand.class, activityWithMissingInvolvedListDelimiter.getClass());
     }
 
+    @Test
+    public void prepare_hasMissingArguments_InvalidCommand() {
+        // Case 1: Missing session ID
+        String argsMissingSessionIdArgument = "activity /create /sid /n Dinner /p Alice /i Alice Bob Charlie /co 15";
+        Command sessionWithMissingSessionIdArgument = Parser.getCommand(argsMissingSessionIdArgument);
+        assertEquals(InvalidCommand.class, sessionWithMissingSessionIdArgument.getClass());
+    }
+
 }
