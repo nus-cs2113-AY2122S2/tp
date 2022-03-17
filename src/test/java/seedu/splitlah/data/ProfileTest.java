@@ -10,12 +10,20 @@ class ProfileTest {
         Command createSessionTwo = Parser.getCommand(sessionTwoArgs);
         createSessionTwo.run(manager);
     }
+
+    /**
+     * Checks if method returns true when a session name exists within the list of session.
+     */
     @Test
     public void hasSessionName_inputContainsExistingSessionName_true() {
         String sessionNameToTest = "Class outing";
         boolean isExists = manager.getProfile().hasSessionName(sessionNameToTest);
         assertEquals(true, isExists);
     }
+
+    /**
+     * Checks if method returns false when a session name does not exist within the list of session.
+     */
     @Test
     public void hasSessionName_inputContainsNonExistingSessionName_false() {
         String sessionNameToTest = "School gathering";
