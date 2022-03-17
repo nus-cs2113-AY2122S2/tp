@@ -32,7 +32,7 @@ class ListCommandTest {
         }
 
         CommandResult actualResult = listCommand.execute();
-        CommandResult expectedResult = new CommandResult("TOTAL QUANTITY OF SPEAKER: 1"  + System.lineSeparator(), equipmentManager.listEquipment());
+        CommandResult expectedResult = new CommandResult("TOTAL QUANTITY OF SPEAKER: 1"  + System.lineSeparator(), equipmentManager.listEquipment(EquipmentType.valueOf("SPEAKER")));
 
         assertEquals(expectedResult, actualResult);
     }
@@ -40,9 +40,21 @@ class ListCommandTest {
     @Test
     void execute_noSpecifiedType_success() {
         listCommand = new ListCommand();
+        listCommand.setEquipmentManager(new EquipmentManager());
+        EquipmentManager equipmentManager = listCommand.equipmentManager;
+        try {
+            equipmentManager.addEquipment("Speaker B",
+                    "S1404115ASF",
+                    EquipmentType.valueOf("SPEAKER"),
+                    1000,
+                    "Loud Technologies",
+                    "2022-02-23");
+        } catch (DuplicateSerialNumber e) {
+            fail();
+        }
 
         CommandResult actualResult = listCommand.execute();
-        CommandResult expectedResult = new CommandResult("TOTAL QUANTITY OF EQUIPMENT: 1" + System.lineSeparator());
+        CommandResult expectedResult = new CommandResult("TOTAL QUANTITY OF EQUIPMENT: 1" + System.lineSeparator(), equipmentManager.listEquipment());
 
         assertEquals(expectedResult, actualResult);
     }
