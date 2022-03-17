@@ -15,7 +15,8 @@ public class Duke {
         ArrayList<TravelPackage> temp = new ArrayList<>();
         temp.add(new TravelPackage("Experience Korea!", 1, new Date(25032021), new Date(28032021), "Four Seasons",
                 500.25, "Korea", 20));
-        packages = new Packages(temp);
+        ArrayList<Reservation> temp2 = new ArrayList<>();
+        packages = new Packages(temp,temp2);
     }
 
     public static void main(String[] args) {
