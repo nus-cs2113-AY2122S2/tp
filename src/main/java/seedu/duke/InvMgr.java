@@ -18,7 +18,7 @@ public class InvMgr {
     private Ui ui;
 
     /**
-     * Sets up the required objects, loads the user's inventory list file from the user's hard disk
+     * Sets up the required objects, loads the user's inventory list file from the user's hard disk.
      *
      * @param filePath File path of the user's inventory list file
      * */
@@ -35,16 +35,20 @@ public class InvMgr {
     }
 
     /**
-     * Greets the user and processes the user's inputs until the user issues an exit command
+     * Greets the user and processes the user's inputs until the user issues an exit command.
      * */
     private void run() {
         ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
-            String command = ui.getRawUserInput();
-            Command inputCommand = Parser.parse(command);
-            inputCommand.execute(itemList, ui);
-            isExit = inputCommand.isExit();
+            try {
+                String command = ui.getRawUserInput();
+                Command inputCommand = Parser.parse(command);
+                inputCommand.execute(itemList, ui);
+                isExit = inputCommand.isExit();
+            } catch (InvMgrException e) {
+                ui.showError(e);
+            }
         }
         assert false : "Execution should never reach this point!";
     }
