@@ -9,7 +9,6 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 import seedu.duke.common.Messages;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class InvMgr {
@@ -45,6 +44,7 @@ public class InvMgr {
                 Command inputCommand = Parser.parse(command);
                 inputCommand.execute(itemList, ui);
                 isExit = inputCommand.isExit();
+                storage.writeData(itemList.getItemArrayList());
             } catch (InvMgrException e) {
                 ui.showError(e);
             }
