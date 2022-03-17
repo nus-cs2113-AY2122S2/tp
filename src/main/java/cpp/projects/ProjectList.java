@@ -23,7 +23,6 @@ public class ProjectList {
      * @param title Name of the Project
      */
     public void addProject(String title) {
-        assert (title != null) : "Cannot create a project.";
         System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(title);
         if (index == Constants.PROJECT_NOT_FOUND) { //this is a new project
@@ -41,7 +40,6 @@ public class ProjectList {
      * @param title Name of the project
      */
     public void deleteProject(String title) {
-        assert (title != null && title != "") : "Cannot delete the project";
         System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(title);
         try {
