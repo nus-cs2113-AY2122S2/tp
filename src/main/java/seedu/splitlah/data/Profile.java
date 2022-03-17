@@ -29,7 +29,7 @@ public class Profile {
     }
 
     /**
-     * Checks if there is a session that exists with the same name.
+     * Checks if there is a Session object that exists with the same name.
      *
      * @param sessionName A String object that represents the session name.
      * @return true if a session exists with the same name, false otherwise.
@@ -47,9 +47,9 @@ public class Profile {
     }
 
     /**
-     * Checks if there is a session that exists with the specified session unique identifier.
+     * Checks if there is a Session object that exists with the specified session unique identifier.
      *
-     * @param sessionId An integer that uniquely identifies a session.
+     * @param sessionId An integer that uniquely identifies a Session object.
      * @return true if a session exists with the specified session unique identifier, false otherwise.
      */
     public boolean hasSessionId(int sessionId) {
@@ -65,10 +65,10 @@ public class Profile {
     }
 
     /**
-     * Returns the session object via the session unique identifier specified by the user.
+     * Returns the Session object via the session unique identifier specified by the user.
      *
-     * @param sessionId An integer that uniquely identifies a session.
-     * @return A Session object with the matching session id.
+     * @param sessionId An integer that uniquely identifies a Session object.
+     * @return A Session object with the matching session unique identifier.
      * @throws InvalidDataException If there are no sessions stored or
      *                              if the session unique identifier specified was not found.
      */
@@ -104,7 +104,7 @@ public class Profile {
     }
 
     /**
-     * Returns the list of session stored in Profile object.
+     * Returns the list of session stored in profile.
      *
      * @return An ArrayList of Session objects.
      */
@@ -133,7 +133,7 @@ public class Profile {
     }
 
     /**
-     * Returns a new activity id for activity object to be created.
+     * Returns a new activity unique identifier for Activity object to be created.
      * Assumption: Function is called when a new Activity object is being created without errors.
      *
      * @return An integer that represents the new activity unique identifier.
