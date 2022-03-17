@@ -1,1 +1,4 @@
+add n/Paper Cup q/25 d/100ml paper cups
+list
+desc 1
 exit
