@@ -17,16 +17,18 @@ public class Message {
             + "Welcome back to the main session! How can I help you?";
 
     private static final String HELP_MESSAGE = "For more information, please enter the 'help' command.";
-    public static final String HELP_MESSAGE_SPECIFIC_COMMAND = "\n\nFor more information, enter 'help ";
     public static final String HELP_MESSAGE_QUICK_START_COMMAND = "Command input quick start guide:\n"
             + "1) List: list\n"
-            + "2) Mark: mark <list_index>\n"
-            + "3) Unmark: unmark <list_index>\n"
+            + "2) Mark: mark <task_number>\n"
+            + "3) Unmark: unmark <task_number>\n"
             + "4) Add: add <task_description> /by <task_due_date> /do_on <date_to_work_on_task>\n"
-            + "5) Delete: delete <list_index>\n"
-            + "6) Find: find <keyword>\n"
+            + "5) Edit: edit <task_number> <task_description> /by <task_due_date> /do_on <date_to_work_on_task>\n"
+            + "6) Delete: delete <task_number>\n"
             + "7) Clear: clear\n"
-            + "8) Bye: bye";
+            + "8) Study: study\n"
+            + "9) Help: help <command_word>\n"
+            + "10) Bye: bye";
+    public static final String HELP_MESSAGE_SPECIFIC_COMMAND = "\n\nFor more information, enter 'help'";
     public static final String HELP_MESSAGE_STUDY = "Timer command input quick start guide:\n"
             + "1) Start default timer: start <mode_number>\n"
             + "2) Start custom timer: start /custom <timer_duration>\n"

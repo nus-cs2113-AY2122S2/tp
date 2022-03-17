@@ -97,10 +97,26 @@ public class Parser {
         }
     }
 
+    /**
+     * Prints out exception messages for commands.
+     * Includes a suggestion to refer to help command.
+     *
+     * @param exceptionMessage  Specific exception message of each task
+     * @param commandWord       Command word of the command
+     */
     private static void printExceptionMessage(String exceptionMessage, String commandWord) {
         System.out.println(exceptionMessage + HELP_MESSAGE_SPECIFIC_COMMAND + commandWord + CLOSED_APOSTROPHE);
     }
 
+    /**
+     * Checks if the user input for the Mark or Unmark command is valid.
+     * Then it creates and returns a new Mark or Unmark command to the parseCommand method.
+     *
+     * @param taskContent   User's input. Should be of type int denoting task number to mark or unmark.
+     * @param commandWord   Command word of command (either 'mark' or 'unmark'.
+     * @param taskList      Task array.
+     * @return A new Mark or Unmark command. If user input is invalid, return null.
+     */
     private static Command prepareMarkOrUnmark(String taskContent, String commandWord, TaskList taskList) {
         try {
             int markIndex = Integer.parseInt(taskContent) - 1;
@@ -118,6 +134,15 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Converts String input to a LocalDate date.
+     * If input has invalid format, throw exceptions.
+     *
+     * @param rawTaskDate   String of format d/M/yyyy
+     * @return LocalDate of format d/M/yyyy
+     * @throws InvalidInputException If rawTaskDate is an empty string.
+     * @throws DateTimeParseException If rawTaskDate cannot be parsed by LocalDate.
+     */
     private static LocalDate prepareTaskDate(String rawTaskDate)
             throws InvalidInputException, DateTimeParseException {
         if (rawTaskDate.isBlank()) {
@@ -126,6 +151,18 @@ public class Parser {
         return LocalDate.parse(rawTaskDate, parseFormat);
     }
 
+    /**
+     * Checks if the user's input is valid for the Add command.
+     * User's input is invalid if user input is empty, the task date is not of format d/M/yyyy,
+     * or if the task description is a repeated one from a current task in the task list.
+     * If user's input is valid, it creates and returns a new Add command to the parseCommand method.
+     *
+     * @param taskContent   User's input. Should be of the format:
+     *                      [task_description] /by [task_due_date] /do_on [date to work on task]
+     *                      (the 2 dates are optional)
+     * @param taskList      Task array.
+     * @return A new Add command. If user's input is invalid, return null.
+     */
     private static Command prepareAdd(String taskContent, TaskList taskList) {
         String[] splitTaskContent;
         LocalDate byDate;
@@ -157,6 +194,17 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Checks if the user's input is valid for the Edit command.
+     * User's input is invalid if the first word is not a valid task number, the user input is empty,
+     * the task date(s) is/are not of format d/M/yyyy, or if the attributes are not inputted in the correct format.
+     * If user's input is valid, it creates and returns a new Edit command to the parseCommand method.
+     *
+     * @param taskContent   User's input. Should be of the format:
+     *                      [task_number] [task_description] /by [task_due_date] /do_on [date to work on task]
+     *                      (the 3 attributes after task_number are optional)
+     * @return A new Edit command. If user's input is invalid, return null.
+     */
     private static Command prepareEdit(String taskContent) {
 
         String[] fullEditInfo = taskContent.trim().split(SINGLE_SPACE, 2);
@@ -179,6 +227,14 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Checks if the Edit info is of the correct order of attributes.
+     * Correct order should be: [task_description] /by [task_due_date] /do_on [date to work on task]
+     * (The 3 attributes are individually optional.)
+     *
+     * @param fullEditInfo  User's input.
+     * @throws WrongEditInfoFormatException If fullEditInfo is of the wrong format.
+     */
     private static void checkCorrectEditInfoFormat(String fullEditInfo) throws WrongEditInfoFormatException {
         // tests to make sure the byDate is before the doOnDate
         if (fullEditInfo.contains(BY_KEYWORD) && fullEditInfo.contains(DO_ON_KEYWORD)
@@ -193,6 +249,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user's input (to determine the task description, task due date, and date to work on task)
+     * for the Edit command. Returns parsed command to the prepareEdit command.
+     *
+     * @param taskNumberToEdit  Index of task to edit.
+     * @param fullEditInfo      User's input.
+     * @return A new Edit command containing the parsed attributes.
+     * @throws InvalidInputException If dates cannot be parsed by LocalDate.
+     */
     private static Command handleEdit(int taskNumberToEdit, String fullEditInfo) throws InvalidInputException {
 
         assert(!fullEditInfo.isBlank());
@@ -216,11 +281,20 @@ public class Parser {
         return new EditCommand(taskNumberToEdit, descriptionToEdit, parsedByDateToEdit, parsedDoOnDateToEdit);
     }
 
+    /**
+     * Extracts either the task_due_date or the date_to_work_on_task from the user's input,
+     * then converts it to LocalDate format, and returns it to the handleEdit command.     *
+     *
+     * @param fullEditInfo  User's input.
+     * @param keyword       Either "/by" or "/do_on".
+     * @return Task date of type LocalDate.
+     * @throws InvalidInputException If date cannot be parsed by LocalDate.
+     */
     private static LocalDate getParsedDateToEdit(String fullEditInfo, String keyword) throws InvalidInputException {
 
         if (fullEditInfo.contains(keyword)) {
 
-            // gets the substring (of fullEditInfo) after the keyword (, which is either "/by" or "/do_on")
+            // gets the substring (of fullEditInfo) after the keyword (which is either "/by" or "/do_on")
             int offsetForKeyword = keyword.length() + 1;
             int offsetForSubstring = fullEditInfo.indexOf(keyword) + offsetForKeyword;
             String substringAfterKeyword = fullEditInfo.substring(offsetForSubstring);
@@ -237,6 +311,14 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Checks if the user's input is a valid task number to delete the task.
+     * If user's input is valid, return a new Delete command to the parseCommand method.
+     *
+     * @param taskContent   User's input.
+     * @param taskList      Task array.
+     * @return A new Delete command. If user's input is invalid, return null.
+     */
     private static Command prepareDelete(String taskContent, TaskList taskList) {
         try {
             return new DeleteCommand(taskContent, taskList);
@@ -246,6 +328,13 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Checks if user's input is a valid commandWord.
+     * If it is, returns a new Help command to the parseCommand method.
+     *
+     * @param userInput Denotes the commandWord (e.g. "add")
+     * @return A new Help command. If user's input is invalid, return a help command to show a short command summary.
+     */
     private static Command prepareHelp(String userInput) {
         try {
             String[] splitInput = userInput.split(SINGLE_SPACE, 2);

@@ -1,15 +1,15 @@
 package seedu.sherpass.command;
 
-import seedu.sherpass.task.TaskList;
-
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
+
+import seedu.sherpass.task.TaskList;
 
 import java.time.LocalDate;
 
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
-    public static final String MESSAGE_USAGE = "edit: Edits a task in the task list.\n\n"
+    public static final String MESSAGE_USAGE = "Edit: Edits a task in the task list.\n\n"
             + "To execute the command,\nenter 'edit <task_number> <task_description> "
             + "/by <task_due_date> /do_on <date_to_work_on_task>'.\n\n"
             + "Note:\n\tThe 3 attributes after the task number are optional.\n"
@@ -26,6 +26,15 @@ public class EditCommand extends Command {
     LocalDate byDate;
     LocalDate doOnDate;
 
+    /**
+     * Creates constructor for edit command.
+     * Saves index of task to edit, task description, task due date, and date to work on task.
+     *
+     * @param taskNumber         Task number to edit.
+     * @param taskDescription    Task Description to edit.
+     * @param byDate             Task due date.
+     * @param doOnDate           Date to work on task.
+     */
     public EditCommand(int taskNumber, String taskDescription, LocalDate byDate, LocalDate doOnDate) {
         this.taskIndex = taskNumber - 1;
         this.taskDescription = taskDescription;
@@ -33,7 +42,14 @@ public class EditCommand extends Command {
         this.doOnDate = doOnDate;
     }
 
-
+    /**
+     * Executes the editing of a task.
+     *
+     * @param taskList Task array.
+     * @param ui       Ui for printing messages.
+     * @param storage  To append newly added task to save file.
+     */
+    @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (!taskDescription.trim().isBlank()) {
             taskList.getTasks().get(taskIndex).setTaskDescription(taskDescription);
@@ -48,6 +64,12 @@ public class EditCommand extends Command {
         storage.writeSaveData(taskList);
     }
 
+    /**
+     * Prints out the task edit message
+     *
+     * @param taskList  Task array.
+     * @param taskIndex Index of task edited
+     */
     private void printEditTaskMessage(TaskList taskList, int taskIndex) {
         System.out.println("Ok, I've edited this task as such!"
                 + "\n  " + taskList.getTasks().get(taskIndex));

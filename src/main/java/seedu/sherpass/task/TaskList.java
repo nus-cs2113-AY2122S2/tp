@@ -48,10 +48,8 @@ public class TaskList {
 
     /**
      * Prints all available tasks in the task list.
-     *
-     * @param ui Ui class for printing of messages.
      */
-    public void printAllTasks(Ui ui) {
+    public void printAllTasks() {
         if (!tasks.isEmpty()) {
             if (tasks.size() > 1) {
                 System.out.println("Here are the " + tasks.size() + " tasks in your list:");
