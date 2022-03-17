@@ -577,6 +577,9 @@ class ParserTest {
     }
 
     // parseTotalCost()
+    /**
+     * Checks if an exception is properly thrown when the Total cost delimiter is not provided by the user.
+     */
     @Test
     void parseTotalCost_missingDelimiter_exceptionThrown() {
         String argumentWithoutTotalCostDelimiter = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie co 15";
@@ -589,6 +592,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Total cost delimiter is provided but no arguments
+     * following the Total cost delimiter are provided by the user.
+     */
     @Test
     void parseTotalCost_delimiterExistsWithoutArgument_exceptionThrown() {
         String argumentWithoutTotalCostArgument = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co ";
@@ -601,6 +608,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Total cost delimiter is provided by the user but the 
+     * argument following the Total cost delimiter is non-numeric.
+     */
     @Test
     void parseTotalCost_delimiterExistsArgumentNotNumeric_exceptionThrown() {
         String argumentWithNonNumericArgument = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co apple";
@@ -613,6 +624,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Total cost delimiter is provided by the user but the
+     * argument following the Total cost delimiter is a negative numeric value.
+     */
     @Test
     void parseTotalCost_delimiterExistsArgumentNegative_exceptionThrown() {
         String argumentWithNegativeArgument = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co -1.24";
@@ -625,6 +640,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Total cost delimiter and a positive numeric value are
+     * provided as arguments, but the numeric value has more than two decimal places.
+     */
     @Test
     void parseTotalCost_delimiterExistsArgumentPositiveMoreThanTwoDecimalPlaces_exceptionThrown() {
         String argumentWithPositiveArgumentMoreThan2DP = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 1.2444";
@@ -637,6 +656,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Total cost delimiter and a positive numeric value are
+     * provided as arguments, but the numeric value has more than twelve digits before decimal point.
+     */
     @Test
     void parseTotalCost_delimiterExistsArgumentPositiveMoreThanTwelveDigitsBeforeDecimalPoint_exceptionThrown() {
         String argumentWithPositiveArgumentMoreThan12DigitsBeforeDP =
@@ -650,6 +673,11 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if a double containing the total cost as stated is properly returned when the Total cost delimiter
+     * and a valid positive numeric value as argument are properly provided by the user.
+     * A valid positive numeric value has at most twelve digits before the decimal point and at most 2 decimal places.
+     */
     @Test
     void parseTotalCost_delimiterExistsArgumentPositive_totalCost() {
         // Testing numerical limits
