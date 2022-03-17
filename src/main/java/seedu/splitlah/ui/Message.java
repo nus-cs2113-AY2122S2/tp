@@ -18,7 +18,11 @@ import seedu.splitlah.command.SessionSummaryCommand;
  * @author Saurav
  */
 public abstract class Message {
-    
+
+    // SplitLah
+    public static final String LOGGER_SPLITLAH_APPLICATION_EXIT =
+            "The application is terminated";
+
     // TextUI
     public static final String ASCII_TEXTUI_LOGO = 
             " $$$$$$\\            $$\\ $$\\   $$\\     $$\\           $$\\\n"

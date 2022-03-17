@@ -3,6 +3,9 @@ package seedu.splitlah;
 import seedu.splitlah.command.Command;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.Message;
+
+import java.util.logging.Level;
 
 /**
  * Entry point of the SplitLah application.
@@ -34,6 +37,7 @@ public class SplitLah {
 
     /** Exits the program.  */
     private void exitApplication() {
+        manager.getLogger().log(Level.INFO, Message.LOGGER_SPLITLAH_APPLICATION_EXIT);
         System.exit(0);
     }
 
