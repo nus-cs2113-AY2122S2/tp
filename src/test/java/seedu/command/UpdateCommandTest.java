@@ -7,9 +7,12 @@ import seedu.Pair;
 import seedu.equipment.DuplicateSerialNumber;
 import seedu.equipment.EquipmentManager;
 import seedu.equipment.EquipmentType;
+import seedu.parser.IncompleteCommandException;
 import seedu.parser.Parser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,12 +33,10 @@ class UpdateCommandTest {
             fail();
         }
 
-        updateCommand = new UpdateCommand();
+        updateCommand = new UpdateCommand(new ArrayList<>(
+                Arrays.asList("sn/S1404115ASF", "n/Speaker C", "c/2000", "pd/2022-01-26")
+        ));
         updateCommand.setEquipmentManager(equipmentManager);
-        updateCommand.setSerialNumber("S1404115ASF");
-        updateCommand.setUpdateName("Speaker C");
-        updateCommand.setCost("2000");
-        updateCommand.setPurchaseDate("2022-01-26");
     }
 
     @Test
@@ -50,13 +51,9 @@ class UpdateCommandTest {
                 + System.lineSeparator()
                 + "New purchase date: 2022-01-26");
 
-        System.out.println(updateCommand.getSerialNumber());
-
         CommandResult actualResult = updateCommand.execute();
 
-        System.out.println(actualResult.getResultToShow());
-
-//        assertEquals(expectedResult, actualResult);
+        assertEquals(expectedResult, actualResult);
     }
 
     @Test
@@ -69,5 +66,37 @@ class UpdateCommandTest {
         ArrayList<Pair<String, String>> actualResult = updateCommand.generateUpdatePairs();
 
         assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void prepareUpdate_missingSlashDelimiter_assertionErrorThrown() throws AssertionError {
+        ArrayList<String> testArrayList = new ArrayList<>(Collections.singleton("thiswillnotwork"));
+        updateCommand = new UpdateCommand(testArrayList);
+        try {
+            updateCommand.prepareUpdate();
+        } catch (AssertionError error) {
+            assertEquals("Each args will need to include minimally a '/' to split arg and value upon", error.getMessage());
+        }
+    }
+
+    @Test
+    void prepareUpdate_missingSerialNumber_exceptionThrown() throws IncompleteCommandException {
+        ArrayList<String> testArrayList = new ArrayList<>(Arrays.asList(
+                "n/Speaker B", "t/Speaker", "c/1000", "pf/Loud Technologies", "pd/2022-02-23"));
+        updateCommand = new UpdateCommand(testArrayList);
+        CommandResult expectedResult = new CommandResult("Serial Number is required to run this command");
+        assertEquals(expectedResult, updateCommand.execute());
+    }
+
+    @Test
+    void prepareUpdate_mostRecentArgValueUsed_success() throws IncompleteCommandException {
+        ArrayList<String> testArrayList = new ArrayList<>(Arrays.asList(
+                "sn/S1404115ASF", "n/Speaker B", "n/Speaker A"));
+        UpdateCommand expectedCommand = new UpdateCommand(new ArrayList<>(
+                Arrays.asList("sn/S1404115ASF", "n/Speaker A")
+        ));
+        UpdateCommand actualCommand = new UpdateCommand(testArrayList);
+        actualCommand.prepareUpdate();
+        assertEquals(expectedCommand, actualCommand);
     }
 }
