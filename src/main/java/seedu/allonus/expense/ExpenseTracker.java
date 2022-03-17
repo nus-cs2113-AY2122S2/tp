@@ -7,6 +7,9 @@ import java.util.logging.Level;
 import static seedu.allonus.expense.ExpenseParser.parseDeleteExpense;
 import static seedu.allonus.expense.ExpenseParser.parseNewExpense;
 
+/**
+ * The core function of the expense tracker, which executes user commands based on keywords
+ */
 public class ExpenseTracker {
     private static final String EXPENSE_WELCOME_MESSAGE = "Welcome to Expense Tracker";
     private static final ArrayList<Expense> expenseList = new ArrayList<>();
@@ -45,6 +48,10 @@ public class ExpenseTracker {
 
     private static Logger logger = Logger.getLogger("expenseLogger");
 
+
+    /**
+     * List out all current records in the expense list
+     */
     private static void listExpenses() {
         logger.log(Level.INFO, LOG_LIST_INTENT);
         int noOfItems = Expense.getNoOfItems();
@@ -53,7 +60,6 @@ public class ExpenseTracker {
             System.out.println(MSG_EMPTY_LIST);
             return;
         }
-
         String listAsString = "";
         for (int i = ZERO; i < noOfItems; i++) {
             Expense curr = expenseList.get(i);
@@ -63,6 +69,12 @@ public class ExpenseTracker {
         System.out.println(LIST_EXPENSE_OUTPUT + listAsString);
     }
 
+    /**
+     * Deletes a record from the list of expenses
+     * @param list list of expenses itself
+     * @param index the index of the item to be deleted
+     * @throws IndexOutOfBoundsException if the expense record is not found
+     */
     private static void deleteExpense(ArrayList<Expense> list, int index) throws IndexOutOfBoundsException {
         logger.log(Level.INFO, LOG_DELETE_INTENT);
         Expense toBeDeleted = list.get(index - EXPENSE_INDEX);
@@ -71,6 +83,11 @@ public class ExpenseTracker {
         System.out.println("Deleted entry: " + toBeDeleted);
     }
 
+    /**
+     * Adds a record into the list of expenses
+     * @param list list of expenses itself
+     * @param e the expense object itself to be added
+     */
     private static void addExpense(ArrayList<Expense> list, Expense e) {
         logger.log(Level.INFO, LOG_ADD_INTENT);
         assert e != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
@@ -79,7 +96,12 @@ public class ExpenseTracker {
         Expense.setNoOfItems(Expense.getNoOfItems() + EXPENSE_INDEX);
     }
 
-    public static void expenseRunner(TextUi ui) {
+    /**
+     * Determines which command to execute depending on the keyword supplied
+     * @param ui the user input itself
+     * @throws ExpenseException if an invalid keyword is supplied
+     */
+    public static void expenseRunner(TextUi ui) throws ExpenseException {
         expenseWelcome();
         String rawInput = ui.getUserInput();
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;
@@ -121,8 +143,7 @@ public class ExpenseTracker {
                 break;
             default:
                 logger.log(Level.WARNING, LOG_INVALID_COMMANDS);
-                System.out.println(MSG_INVALID_COMMANDS);
-                break;
+                throw new ExpenseException(MSG_INVALID_COMMANDS);
             }
             rawInput = ui.getUserInput();
             keyWord = rawInput.split(" ", SPLIT_INTO_HALF)[KEYWORD_INDEX].trim();

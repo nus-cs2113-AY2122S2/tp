@@ -16,6 +16,13 @@ public class ExpenseParser {
     public static final int ZERO = 0;
     public static final int INDEX_TO_BE_DELETED = 1;
 
+    /**
+     * Determines the content of the user input by splitting it into fields depending on the delimiters
+     * provided
+     * @param userInput the line that is inputted by the user
+     * @return list of parameters representing the date, amount, category and remarks
+     * @throws IndexOutOfBoundsException if some fields are missing, or wrong delimiters are used
+     */
     public static String[] parseNewExpense(String userInput) throws IndexOutOfBoundsException {
         String rawInput = userInput.split(" ", SPLIT_IN_HALF)[EXPENSE_FIELDS].trim();
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;
@@ -31,6 +38,14 @@ public class ExpenseParser {
         return result;
     }
 
+    /**
+     * Looks for a specific delimiter within the user's input
+     * @param userInput the line that is inputted by the user
+     * @param leftDelimiter the delimiter to look for
+     * @param rightDelimiter the next delimiter to cut off reading from
+     * @return the contents of the field specified by the delimiter
+     * @throws IndexOutOfBoundsException if contents supplied is missing
+     */
     public static String parseKeywordExpense(String userInput, String leftDelimiter, String rightDelimiter)
             throws IndexOutOfBoundsException {
         assert userInput != null : ASSERT_INPUT_NOT_NULL;
@@ -53,6 +68,13 @@ public class ExpenseParser {
 
     }
 
+    /**
+     * Processes a delete command
+     * @param userInput the line that is inputted by the user
+     * @return the index of the record to be deleted
+     * @throws IndexOutOfBoundsException if some fields are missing
+     * @throws NumberFormatException if index provided is not an integer
+     */
     public static int parseDeleteExpense(String userInput) throws IndexOutOfBoundsException, NumberFormatException {
         assert userInput != null : ASSERT_INPUT_NOT_NULL;
         String[] rawInput = userInput.split(" ", SPLIT_IN_HALF);
