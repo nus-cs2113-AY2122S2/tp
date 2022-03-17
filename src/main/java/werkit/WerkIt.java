@@ -6,6 +6,7 @@ import commands.InvalidCommandException;
 import data.exercises.ExerciseList;
 import data.workouts.WorkoutList;
 import storage.FileManager;
+import storage.LogHandler;
 import storage.UnknownFileException;
 
 import java.io.IOException;
@@ -36,6 +37,8 @@ public class WerkIt {
         this.workoutList = new WorkoutList(getExerciseList());
         this.fileManager = new FileManager();
         this.parser = new Parser(getUI(), getExerciseList(), getWorkoutList(), getFileManager());
+
+        LogHandler.linkToFileLogger(logger);
         logger.log(Level.INFO, "Components instantiated.");
 
         getUI().printGreetings();
