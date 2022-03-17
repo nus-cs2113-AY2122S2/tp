@@ -199,4 +199,7 @@ public class Profile {
         groupIdTracker += 1;
         return newGroupId;
     }
+    public int getGroupIdTracker() {
+        return groupIdTracker;
+    }
 }
