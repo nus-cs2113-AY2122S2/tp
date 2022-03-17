@@ -9,6 +9,7 @@ import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 /**
  * Represents a command which displays the details of each Activity object within a Session object.
@@ -57,6 +58,7 @@ public class ActivityListCommand extends Command {
             manager.getUi().printlnMessageWithDivider(lastActivityToPrint);
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
+            manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYLIST_SESSION_ID_NOT_FOUND + sessionId);
         }
     }
 
