@@ -53,10 +53,10 @@ public class DeleteCommand extends Command {
             }
             String getNumber = splitMessage[1];
             int positionToDelete = Integer.parseInt(getNumber) - 1;
-            assert positionToDelete >= 0 : "Index should always be >= 0";
             if (checkOutOfBounds(positionToDelete)) {
                 throw new MindMyMoneyException("Please input a valid index");
             } else {
+                assert positionToDelete >= 0 : "Index should always be >= 0";
                 System.out.print(PrintStrings.LINE + "I have removed "
                         + expenditureList.get(positionToDelete).getDescription()
                         + " of $" + expenditureList.get(positionToDelete).getAmount()
