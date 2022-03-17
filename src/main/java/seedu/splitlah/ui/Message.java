@@ -104,6 +104,14 @@ public abstract class Message {
     public static final String ASSERT_PARSER_COMMAND_ARGUMENTS_EMPTY =
             "The command arguments cannot be null.";
 
+    // ActivityCost
+    public static final String LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_DEFAULT_PARAMS =
+            "Constructing ActivityCost with default parameters";
+    public static final String LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_ACTIVITYID =
+            "Constructing ActivityCost with activityId";
+    public static final String LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_ALL_PARAMS =
+            "Constructing ActivityCost with activityId, costPaid and costOwed";
+
     // Person
     public static final String ERROR_PERSON_NO_ACTIVITIES =
             "This person is not participating in any activities.";

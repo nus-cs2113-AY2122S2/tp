@@ -1,5 +1,7 @@
 package seedu.splitlah.data;
 
+import seedu.splitlah.ui.Message;
+
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +26,7 @@ public class ActivityCost {
      * @param costOwed   A double that represents the cost owed by a Person object.
      */
     public ActivityCost(int activityId, double costPaid, double costOwed) {
-        Manager.getLogger().log(Level.INFO, "Constructing ActivityCost with activityId, costPaid and costOwed");
+        Manager.getLogger().log(Level.INFO, Message.LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_ALL_PARAMS);
         this.activityId = activityId;
         this.costPaid = costPaid;
         this.costOwed = costOwed;
@@ -38,7 +40,7 @@ public class ActivityCost {
      */
     public ActivityCost(int activityId) {
         this(activityId, 0, 0);
-        Manager.getLogger().log(Level.INFO, "Constructing ActivityCost with activityId");
+        Manager.getLogger().log(Level.INFO, Message.LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_ACTIVITYID);
     }
 
     /**
@@ -48,7 +50,7 @@ public class ActivityCost {
         this.activityId = -1;
         this.costPaid = 0;
         this.costOwed = 0;
-        Manager.getLogger().log(Level.INFO, "Constructing ActivityCost with default parameters");
+        Manager.getLogger().log(Level.INFO, Message.LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_DEFAULT_PARAMS);
     }
 
     public int getActivityId() {
