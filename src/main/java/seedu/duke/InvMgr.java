@@ -9,7 +9,6 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 import seedu.duke.common.Messages;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class InvMgr {
