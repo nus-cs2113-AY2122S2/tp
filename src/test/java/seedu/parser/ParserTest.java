@@ -234,7 +234,7 @@ class ParserTest {
         ArrayList<String> testArrayList = new ArrayList<>(Arrays.asList(
                 "n/Speaker B", "t/Speaker", "c/1000", "pf/Loud Technologies", "pd/2022-02-23"));
         IncorrectCommand expectedCommand = new IncorrectCommand("Serial Number is required to update an item!");
-        assertEquals(expectedCommand, parser.prepareUpdate(testArrayList));
+        assertTrue(expectedCommand.equals(parser.prepareUpdate(testArrayList)));
     }
 
     @Test
@@ -245,7 +245,7 @@ class ParserTest {
         UpdateCommand expectedCommand = new UpdateCommand();
         expectedCommand.setSerialNumber("S1404115ASF");
         expectedCommand.setType("Speaker A");
-        assertEquals(expectedCommand, parser.prepareUpdate(testArrayList));
+        assertTrue(expectedCommand.equals(parser.prepareUpdate(testArrayList)));
     }
 
 }
