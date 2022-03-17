@@ -11,6 +11,24 @@ public class Item {
         this.description = description;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Returns a boolean indicating if an Item contains the search term in the item name.
+     *
+     * @param searchTerm User input of search term
+     * @return True if search term found in item name. Returns False, if otherwise.
+     */
+    public boolean contains(String searchTerm) {
+        if (name == searchTerm) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Returns the string representation of an Item when saved to storage.
      *
