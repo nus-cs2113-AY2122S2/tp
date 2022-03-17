@@ -23,6 +23,7 @@ public class InvMgr {
      * @param filePath File path of the user's inventory list file
      * */
     public InvMgr(String filePath) {
+        assert filePath != null : "File path cannot be a null string!";
         ui = new Ui();
         try {
             storage = new Storage(filePath);
@@ -36,7 +37,7 @@ public class InvMgr {
     /**
      * Greets the user and processes the user's inputs until the user issues an exit command
      * */
-    public void run() {
+    private void run() {
         ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
@@ -45,6 +46,7 @@ public class InvMgr {
             inputCommand.execute(itemList, ui);
             isExit = inputCommand.isExit();
         }
+        assert false : "Execution should never reach this point!";
     }
 
     /**
