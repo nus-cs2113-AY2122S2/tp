@@ -17,11 +17,8 @@ public class DescCommand extends Command {
         // Get item from itemList by searching for the item's name
         Item item = itemList.getItem(index);
 
-        // Get description of item found
-        String itemDescription = item.getDescription();
-
         // Print item name and description
         ui.showMessages("Name of Item: " + item.getName() + System.lineSeparator()
-                + "Description: " + itemDescription);
+                + "Description: " + item.getDescription());
     }
 }
