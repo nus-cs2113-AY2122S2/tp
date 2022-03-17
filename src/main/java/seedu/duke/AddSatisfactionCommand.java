@@ -9,7 +9,7 @@ import java.util.logging.Level;
  * Constructor creates the Satisfaction object from user input, and execute
  * method overrides the Command class's execute method to add the Satisfaction
  * object to the given satisfactionList (data structure that stores all the
- * Satisfaction objects).Each Satisfaction object corresponds to a customer and
+ * Satisfaction objects). Each Satisfaction object corresponds to a customer and
  * a satisfaction rating from1 to 5 inclusive.
  */
 
