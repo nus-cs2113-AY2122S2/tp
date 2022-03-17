@@ -125,6 +125,17 @@ public class Profile {
         }
         return false;
     }
+    public boolean hasGroupId(int groupId) {
+        if (groupList.isEmpty()) {
+            return false;
+        }
+        for (Group group : groupList) {
+            if (group.getGroupId() == groupId) {
+                return true;
+            }
+        }
+        return false;
+    }
      * Assumption: Function is called when a new Session object is being created without errors.
      *
      * @return An integer that represents the new session unique identifier.
