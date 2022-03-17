@@ -98,7 +98,7 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return Person's name.
-     * @throws MissingDelimiterException if user input does not contain delimiter for name.
+     * @throws MissingDelimiterException   if user input does not contain delimiter for name.
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
      */
     public static String parseName(String userInput) throws MissingDelimiterException, DuplicateDelimiterException {
@@ -114,7 +114,7 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return Person's user index.
-     * @throws MissingDelimiterException if user input does not contain delimiter for user index.
+     * @throws MissingDelimiterException   if user input does not contain delimiter for user index.
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
      */
     public static String parseUserIndex(String userInput)
@@ -131,7 +131,7 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return An item's description.
-     * @throws MissingDelimiterException if user input does not contain delimiter for description.
+     * @throws MissingDelimiterException   if user input does not contain delimiter for description.
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
      */
     public static String parseDescription(String userInput)
@@ -148,7 +148,7 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return Person's added income.
-     * @throws MissingDelimiterException if user input does not contain delimiter for income.
+     * @throws MissingDelimiterException   if user input does not contain delimiter for income.
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
      */
     public static String parseIncome(String userInput)
@@ -165,7 +165,7 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return Person's expenditure amount.
-     * @throws MissingDelimiterException if user input does not contain delimiter for expenditure.
+     * @throws MissingDelimiterException   if user input does not contain delimiter for expenditure.
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
      */
     public static String parseExpenditure(String userInput)
@@ -182,7 +182,7 @@ public class Parser {
      *
      * @param userInput The user's full input text.
      * @return A record's index.
-     * @throws MissingDelimiterException if user input does not contain delimiter for record index.
+     * @throws MissingDelimiterException   if user input does not contain delimiter for record index.
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
      */
     public static String parseRecordIndex(String userInput)
