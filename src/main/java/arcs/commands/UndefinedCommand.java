@@ -1,4 +1,4 @@
-package ARCS.commands;
+package arcs.commands;
 
 public class UndefinedCommand extends Command {
     private static final String UNDEFINED_MESSAGE = "Sorry! The system cannot read this command.";

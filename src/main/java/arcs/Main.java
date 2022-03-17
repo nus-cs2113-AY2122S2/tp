@@ -1,14 +1,12 @@
-package ARCS;
+package arcs;
 
-import ARCS.commands.Command;
-import ARCS.commands.CommandResult;
-import ARCS.data.RouteManager;
-import ARCS.data.exception.ARCSException;
-import ARCS.parser.Parser;
-import ARCS.storage.RouteFileManager;
-import ARCS.ui.Ui;
+import arcs.commands.Command;
+import arcs.commands.CommandResult;
+import arcs.data.RouteManager;
+import arcs.parser.Parser;
+import arcs.storage.RouteFileManager;
+import arcs.ui.Ui;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 
 

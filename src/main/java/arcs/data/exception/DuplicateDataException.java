@@ -1,4 +1,4 @@
-package ARCS.data.exception;
+package arcs.data.exception;
 
 public class DuplicateDataException extends ARCSException {
     public DuplicateDataException(String message) {

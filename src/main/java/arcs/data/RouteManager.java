@@ -1,7 +1,7 @@
-package ARCS.data;
+package arcs.data;
 
-import ARCS.data.exception.ARCSException;
-import ARCS.data.exception.DuplicateDataException;
+import arcs.data.exception.ARCSException;
+import arcs.data.exception.DuplicateDataException;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,4 @@
-package ARCS.commands;
-
-import ARCS.data.Route;
+package arcs.commands;
 
 import java.util.ArrayList;
 

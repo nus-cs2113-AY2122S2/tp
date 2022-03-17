@@ -1,4 +1,4 @@
-package ARCS;
+package arcs;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

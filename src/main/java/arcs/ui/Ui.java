@@ -1,7 +1,7 @@
-package ARCS.ui;
+package arcs.ui;
 
-import ARCS.commands.CommandResult;
-import ARCS.common.Messages;
+import arcs.commands.CommandResult;
+import arcs.common.Messages;
 
 import java.util.ArrayList;
 import java.util.Scanner;

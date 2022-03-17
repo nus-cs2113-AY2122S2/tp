@@ -1,6 +1,6 @@
-package ARCS.parser;
+package arcs.parser;
 
-import ARCS.commands.*;
+import arcs.commands.*;
 
 public class Parser {
     public Command parseCommand(String userInput) {

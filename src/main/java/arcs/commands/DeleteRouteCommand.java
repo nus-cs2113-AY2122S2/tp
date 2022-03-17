@@ -1,7 +1,7 @@
-package ARCS.commands;
+package arcs.commands;
 
-import ARCS.data.Route;
-import ARCS.data.exception.ARCSException;
+import arcs.data.Route;
+import arcs.data.exception.ARCSException;
 
 public class DeleteRouteCommand extends Command {
     public static final String COMMAND_WORD = "deleteRoute";

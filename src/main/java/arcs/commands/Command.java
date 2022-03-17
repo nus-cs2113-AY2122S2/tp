@@ -1,6 +1,6 @@
-package ARCS.commands;
+package arcs.commands;
 
-import ARCS.data.RouteManager;
+import arcs.data.RouteManager;
 
 public abstract class Command {
     protected RouteManager routeManager;

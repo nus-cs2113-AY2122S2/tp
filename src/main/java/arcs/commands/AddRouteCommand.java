@@ -1,7 +1,7 @@
-package ARCS.commands;
+package arcs.commands;
 
-import ARCS.data.Route;
-import ARCS.data.exception.DuplicateDataException;
+import arcs.data.Route;
+import arcs.data.exception.DuplicateDataException;
 
 import java.util.ArrayList;
 
