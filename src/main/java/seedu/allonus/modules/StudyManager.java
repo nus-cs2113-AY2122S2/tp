@@ -30,6 +30,7 @@ public class StudyManager {
      * @param ui Contains the input by the user.
      */
     public void studyManagerRunner(TextUi ui) {
+        logger.setLevel(Level.WARNING);
         printWelcomeMessage();
         String userInput;
         boolean isRunning = true;
