@@ -24,7 +24,9 @@ public class Parser {
             break;
         case FindRouteCommand.COMMAND_WORD:
             command = prepareFindRouteCommand(argumentLine);
+            break;
         default:
+            command = new UndefinedCommand();
             break;
         }
         return command;
