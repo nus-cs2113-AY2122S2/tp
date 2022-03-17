@@ -34,4 +34,11 @@ class CommandHandlerTest {
             defaultCommandHandler.handleUserInput(defaultProjectList, "view")
         );
     }
+
+    @Test
+    void input_unknownCommand() {
+        assertThrows(IllegalCommandException.class, () ->
+                defaultCommandHandler.handleUserInput(defaultProjectList, "unknownCommand")
+        );
+    }
 }

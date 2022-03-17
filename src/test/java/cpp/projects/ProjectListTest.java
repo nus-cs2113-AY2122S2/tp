@@ -50,7 +50,14 @@ class ProjectListTest {
     void deleteProjects() { //aims to test the deletion of projects
         emptyProjectList.addProject(PROJECT1NAME);
         emptyProjectList.deleteProject(PROJECT1NAME);
-        assertEquals(0, emptyProjectList.getProjectNo());
+
+    }
+
+    @Test
+    void deleteProjects_ProjectsNotExist() { //aims to test the deletion of projects when the projects do not exist
+        emptyProjectList.addProject(PROJECT1NAME);
+        emptyProjectList.deleteProject(PROJECT3NAME);
+        assertEquals(1, emptyProjectList.getProjectNo());
     }
 
 }
