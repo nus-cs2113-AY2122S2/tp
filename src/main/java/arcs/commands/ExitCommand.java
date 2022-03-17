@@ -7,7 +7,9 @@ public class ExitCommand extends Command {
      * Command word to trigger this command.
      */
     public static final String COMMAND_WORD = "3";
+
     final MainUi ui;
+
     /**
      * Initializes command for execution.
      *
@@ -23,7 +25,6 @@ public class ExitCommand extends Command {
     @Override
     public CommandResult execute() {
         setIsExit();
-
         ui.printExitMessage();
         return null;
     }

@@ -1,7 +1,11 @@
 package arcs.parser;
 
 
-import arcs.commands.route.*;
+import arcs.commands.route.AddRouteCommand;
+import arcs.commands.route.DeleteRouteCommand;
+import arcs.commands.route.FindRouteCommand;
+import arcs.commands.route.FlightRouteCommand;
+import arcs.commands.route.ListRouteCommand;
 import arcs.commands.Command;
 import arcs.commands.ExitCommand;
 import arcs.commands.UndefinedCommand;
@@ -201,8 +205,7 @@ public class Parser {
     public boolean isYes(String choice) {
         if (choice.equalsIgnoreCase("YES")) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

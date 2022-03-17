@@ -11,8 +11,7 @@ public class MinimumInputLengthChecker implements RawInputChecker {
     public boolean isValid(String line) {
         if (line.length() >= 5) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

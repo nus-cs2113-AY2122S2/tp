@@ -15,11 +15,9 @@ public class YesNoChecker implements RawInputChecker {
     public boolean isValid(String line) {
         if (line.equalsIgnoreCase("YES")) {
             return true;
-        }
-        else if (line.equalsIgnoreCase("NO")) {
+        } else if (line.equalsIgnoreCase("NO")) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

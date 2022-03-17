@@ -30,7 +30,7 @@ public class AddMenuItemCommand extends MenuItemCommand {
     }
 
     /**
-     * Prompts user for menu items to add
+     * Prompts user for menu items to add.
      *
      * @throws ArcsException If user input is valid
      */

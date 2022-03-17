@@ -8,10 +8,10 @@ public class MenuItem {
     private static int runningCount=1; //used to track the number to Menu items.
 
     public MenuItem(String name, String itemType, String price) {
-        this.menuItemName=name;
-        this.menuItemType= MenuItemType.valueOf(itemType.toUpperCase());
-        this.menuItemPrice=price;
-        this.menuItemID=runningCount;
+        this.menuItemName = name;
+        this.menuItemType = MenuItemType.valueOf(itemType.toUpperCase());
+        this.menuItemPrice = price;
+        this.menuItemID = runningCount;
         runningCount++;
     }
 
@@ -36,7 +36,7 @@ public class MenuItem {
     }
 
     /**
-     * Getter for the menu item object
+     * Getter for the menu item object.
      *
      * @return string representation of the menu item
      */

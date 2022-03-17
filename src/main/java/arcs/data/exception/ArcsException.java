@@ -1,7 +1,7 @@
 package arcs.data.exception;
 
 /**
- * Throws exceptions relating ARCS application
+ * Throws exceptions relating ARCS application.
  */
 public class ArcsException extends Exception {
     /**
