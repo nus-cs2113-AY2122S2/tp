@@ -12,9 +12,9 @@ public class Manager {
     
     private TextUI ui;
     private Profile profile;
-    public static Logger logger;
-
     private static String LOGGER_FILE_NAME = "SplitLah";
+    public static Logger logger = Logger.getLogger(LOGGER_FILE_NAME);
+
 
     /**
      * Constructor to create a Manager object.
@@ -22,7 +22,6 @@ public class Manager {
     public Manager() {
         ui = new TextUI();
         profile = new Profile();
-        logger = Logger.getLogger(LOGGER_FILE_NAME);
     }
 
     /**
