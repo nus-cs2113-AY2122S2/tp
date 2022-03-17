@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 /**
  * Represents a command to update the pax of an item within the item list. An UpdateItemPaxCommand object consists of
  * the name of the item to update and the new pax value.
@@ -10,6 +13,7 @@ public class UpdateItemPaxCommand extends Command {
     private static final int ITEM_NAME_INDICATOR_LENGTH = 6;
     private static final String ITEM_PAX_INDICATOR = "/New Pax:";
     private static final int ITEM_PAX_INDICATOR_LENGTH = 9;
+    private static Logger itemLogger = Logger.getLogger("itemLogger");
 
     /**
      * Takes in the user input and checks if the formatting of the Update Item Pax Command within the user input is
@@ -25,6 +29,8 @@ public class UpdateItemPaxCommand extends Command {
         boolean isValidUpdateItemCommand = userInput.contains(ITEM_NAME_INDICATOR)
                 && userInput.contains(ITEM_PAX_INDICATOR);
         if (!isValidUpdateItemCommand) {
+            itemLogger.log(Level.WARNING, "Invalid formatting for UpdateItemPaxCommand detected. Exception "
+                    + "thrown");
             throw new InvalidCommandException();
         }
         int itemPax = extractItemPax(userInput);
@@ -47,6 +53,8 @@ public class UpdateItemPaxCommand extends Command {
         itemName = userInput.substring(itemNameStartingPosition, itemPaxIndicatorPosition);
         itemName = itemName.trim();
         if (itemName.isEmpty()) {
+            itemLogger.log(Level.WARNING, "Detected an empty item name for UpdateItemPaxCommand. Exception "
+                    + "thrown.");
             throw new EmptyItemNameException();
         }
         return itemName;
@@ -65,15 +73,21 @@ public class UpdateItemPaxCommand extends Command {
         int stringEndingPosition = userInput.length();
         int itemPaxStartingPosition = userInput.indexOf(ITEM_PAX_INDICATOR) + ITEM_PAX_INDICATOR_LENGTH;
         if (itemPaxStartingPosition == stringEndingPosition) {
+            itemLogger.log(Level.WARNING, "Detected an empty item pax for UpdateItemPaxCommand. Exception "
+                    + "thrown.");
             throw new EmptyItemPaxException();
         }
         itemPaxStringVersion = userInput.substring(itemPaxStartingPosition);
         try {
             itemPax = Integer.parseInt(itemPaxStringVersion);
         } catch (NumberFormatException e) {
+            itemLogger.log(Level.WARNING, "Detected an invalid item pax for UpdateItemPaxCommand. Exception "
+                    + "thrown");
             throw new InvalidItemPaxException();
         }
         if (itemPax < 0) {
+            itemLogger.log(Level.WARNING, "Detected an invalid item pax for UpdateItemPaxCommand. Exception "
+                    + "thrown");
             throw new InvalidItemPaxException();
         }
         return itemPax;
@@ -98,6 +112,7 @@ public class UpdateItemPaxCommand extends Command {
     public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
                         AssignmentMap assignmentMap, RoomList roomList,
                         ItemList listOfItems, Ui ui) throws HotelLiteManagerException {
+        assert (item != null) : "Assertion Failed! There is no item within the UpdateItemPaxCommand object.";
         listOfItems.updateItemPaxInList(item);
         ui.printUpdateItemPaxAcknowledgementMessage(item);
     }

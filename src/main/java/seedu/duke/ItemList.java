@@ -1,6 +1,8 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Represents a list of the items within the inventory. An ItemList object contains the methods to add items to the
@@ -8,6 +10,7 @@ import java.util.ArrayList;
  */
 public class ItemList {
     ArrayList<Item> listOfItems;
+    private static Logger itemLogger = Logger.getLogger("itemLogger");
 
     public ItemList() {
         ArrayList<Item> listOfItems = new ArrayList<>();
@@ -51,7 +54,9 @@ public class ItemList {
      */
     public void updateItemPaxInList(Item item) throws ItemNotFoundException {
         String nameOfItemToUpdate = item.getName();
-        int updatedItemPax = item.getPax();
+        int paxOfItemToUpdate = item.getPax();
+        assert (paxOfItemToUpdate >= 0) : "Assertion Failed! Item to update has a pax that is lesser than 0";
+        assert (!nameOfItemToUpdate.isEmpty()) : "Assertion Failed! Item to update has an empty name.";
         boolean isItemFound = false;
         Item currentItem;
         String currentItemName;
@@ -60,11 +65,13 @@ public class ItemList {
             currentItem = listOfItems.get(i);
             currentItemName = currentItem.getName();
             if (currentItemName.equals(nameOfItemToUpdate)) {
-                currentItem.setPax(updatedItemPax);
+                currentItem.setPax(paxOfItemToUpdate);
                 isItemFound = true;
             }
         }
         if (isItemFound == false) {
+            itemLogger.log(Level.WARNING, "The item whose pax is to be updated cannot be found within the Item "
+                    + "List. Exception thrown.");
             throw new ItemNotFoundException();
         }
     }
