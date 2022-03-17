@@ -70,7 +70,7 @@ public class SessionCreateCommand extends Command {
     /**
      * Checks if String object array of names has duplicated names.
      *
-     * @return True if it contains duplicates, false otherwise.
+     * @return true if it contains duplicates, false otherwise.
      */
     private boolean hasNameDuplicates() {
         Set<String> nameSet = new HashSet<>();
