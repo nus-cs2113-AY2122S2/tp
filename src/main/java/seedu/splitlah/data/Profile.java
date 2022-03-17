@@ -136,6 +136,17 @@ public class Profile {
         }
         return false;
     }
+    public Group getGroup(int groupId) throws InvalidDataException {
+        if (groupList.isEmpty()) {
+            throw new InvalidDataException(Message.ERROR_PROFILE_GROUP_LIST_EMPTY);
+        }
+        for (Group group : groupList) {
+            if (group.getGroupId() == groupId) {
+                return group;
+            }
+        }
+        throw new InvalidDataException(Message.ERROR_PROFILE_SESSION_NOT_IN_LIST);
+    }
      * Assumption: Function is called when a new Session object is being created without errors.
      *
      * @return An integer that represents the new session unique identifier.
