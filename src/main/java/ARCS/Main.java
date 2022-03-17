@@ -3,6 +3,7 @@ package ARCS;
 import ARCS.commands.Command;
 import ARCS.commands.CommandResult;
 import ARCS.data.RouteManager;
+import ARCS.data.exception.ARCSException;
 import ARCS.parser.Parser;
 import ARCS.ui.Ui;
 
@@ -34,6 +35,12 @@ public class Main {
             command.setData(routeManager);
             CommandResult result = command.execute();
             ui.showResultToUser(result);
+//            try {
+//                CommandResult result = command.execute();
+//                ui.showResultToUser(result);
+//            } catch (ARCSException e) {
+//                ui.showToUser(e.getMessage());
+//            }
         } while (!command.isExit());
 
         ui.showExitMessage();

@@ -33,8 +33,8 @@ public class Ui {
         return fullInputLine;
     }
 
-    public void showResultToUser(String result) {
-        System.out.println(result);
+    public void showToUser(String message) {
+        System.out.println(message);
     }
 
     public void showResultToUser(CommandResult result) {

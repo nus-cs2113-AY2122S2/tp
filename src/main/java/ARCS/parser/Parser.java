@@ -6,7 +6,7 @@ public class Parser {
     public Command parseCommand(String userInput) {
         String[] fullInput = userInput.split(" ", 2);
         String commandWord = fullInput[0];
-        String argumentLine = fullInput.length > 1? fullInput[1] : null;
+        String argumentLine = fullInput.length > 1? fullInput[1].trim() : null;
         Command command = null;
 
         switch (commandWord) {
@@ -33,8 +33,11 @@ public class Parser {
     }
 
     private Command prepareAddRoute(String argumentLine) {
+        if (argumentLine == null || argumentLine.isEmpty()) {
+            return new AddRouteCommand(null, null, null, null, null, 0);
+        }
         String[] args = argumentLine.split(" ");
-        String fId = "0";
+        String fId = null;
         String date = null;
         String time = null;
         String from = null;

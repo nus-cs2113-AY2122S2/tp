@@ -1,5 +1,7 @@
 package ARCS.data;
 
+import ARCS.data.exception.DuplicateDataException;
+
 import java.util.ArrayList;
 
 public class RouteManager {
@@ -9,7 +11,12 @@ public class RouteManager {
         routes = new ArrayList<>();
     }
 
-    public void addRoute(Route newRoute) {
+    public void addRoute(Route newRoute) throws DuplicateDataException {
+        boolean hasDuplicateId = hasDuplicateFlightId(newRoute);
+        if (hasDuplicateId) {
+            throw new DuplicateDataException("The flight ID is already occupied.");
+        }
+
         routes.add(newRoute);
     }
 
@@ -43,5 +50,15 @@ public class RouteManager {
             }
         }
         return result;
+    }
+
+    public boolean hasDuplicateFlightId (Route newRoute) {
+        String newId = newRoute.getFlightID();
+        for (Route route: routes) {
+            if (route.getFlightID().equals(newId)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
