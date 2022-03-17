@@ -1,13 +1,13 @@
 package seedu.duke;
 
 public class Reservation {
-    private int reservationID;
-    private String customerName;
-    private String contactNumber;
-    private int packageID;
-    private int numOfPax;
+    private final int reservationID;
+    private final String customerName;
+    private final String contactNumber;
+    private final String packageID;
+    private final int numOfPax;
 
-    public Reservation(int reservationID, int packageID, String customerName, String contactNumber, int numOfPax){
+    public Reservation(int reservationID, String packageID, String customerName, String contactNumber, int numOfPax){
         this.reservationID = reservationID;
         this.customerName = customerName;
         this.contactNumber = contactNumber;
@@ -23,7 +23,7 @@ public class Reservation {
         return numOfPax;
     }
 
-    public int getPackageID() {
+    public String getPackageID() {
         return packageID;
     }
 

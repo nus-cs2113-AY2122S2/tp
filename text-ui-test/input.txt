@@ -1,1 +1,13 @@
-James Gosling
+add Skiing 10 20 Hilton 1000 Switzerland 500
+packages
+reservation
+1
+1
+John
+83232321
+P1
+5
+reservation
+3
+1
+bye

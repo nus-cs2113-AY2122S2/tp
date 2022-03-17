@@ -6,9 +6,9 @@ public class Packages {
     private ArrayList<TravelPackage> packages;
     private ArrayList<Reservation> reservations;
 
-    public Packages(ArrayList<TravelPackage> packages, ArrayList<Reservation> reservations) {
-        this.packages = packages;
-        this.reservations = reservations;
+    public Packages() {
+        packages = new ArrayList<>();
+        reservations = new ArrayList<>();
     }
 
     public int getSize() {

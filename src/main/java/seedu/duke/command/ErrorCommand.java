@@ -6,7 +6,6 @@ public class ErrorCommand extends Command{
     private String input;
 
     public ErrorCommand(String input)  {
-        super(false);
         this.input = input;
     }
 

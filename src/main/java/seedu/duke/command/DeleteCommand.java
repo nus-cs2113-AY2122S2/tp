@@ -3,16 +3,16 @@ package seedu.duke.command;
 import seedu.duke.Packages;
 
 public class DeleteCommand extends Command {
-    private int id;
+    private final String id;
 
-    public DeleteCommand(int id) {
-        super(false);
+    public DeleteCommand(String id) {
         this.id = id;
     }
 
     public void execute(Packages packages) {
-        for (int i = 0; i < packages.getSize(); i++) {
-            if (packages.getPackage(i).getID() == id) {
+        int numberOfPackages = packages.getSize();
+        for (int i = 0; i < numberOfPackages; i++) {
+            if (packages.getPackage(i).getID().equals(id)) {
                 packages.removePackage(i);
                 break;
             }

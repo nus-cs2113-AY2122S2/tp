@@ -3,11 +3,7 @@ package seedu.duke.command;
 import seedu.duke.Packages;
 
 public abstract class Command {
-    private boolean isExit;
-
-    public Command(boolean isExit) {
-        this.isExit = isExit;
-    }
+    private boolean isExit = false;
 
     public boolean getIsExit() {
         return this.isExit;
