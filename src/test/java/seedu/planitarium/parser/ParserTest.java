@@ -1,6 +1,12 @@
 package seedu.planitarium.parser;
 
 import org.junit.jupiter.api.Test;
+import seedu.planitarium.exceptions.DuplicateDelimiterException;
+import seedu.planitarium.exceptions.InvalidIndexException;
+import seedu.planitarium.exceptions.InvalidMoneyException;
+import seedu.planitarium.exceptions.MissingDelimiterException;
+import seedu.planitarium.person.Person;
+import seedu.planitarium.person.PersonList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -8,19 +14,40 @@ import static org.junit.jupiter.api.Assertions.fail;
 class ParserTest {
 
     @Test
-    void parseDelimitedTerm_getDelimitedToken_success() {
+    void parseDelimitedTerm_delimitedTerm_success() {
         String input1 = "";
-        String input2 = "add /e bills";
-        String delimiter = "/e";
-        String delimiterBack = "/n";
+        String input2 = "add /n bill";
+        String delimiter = "/n";
+        String delimiterBack = "/e";
 
         String output1 = Parser.parseDelimitedTerm(input1, delimiter, delimiterBack);
         assertEquals(input1, output1);
 
         String output2 = Parser.parseDelimitedTerm(input2, delimiter, delimiterBack);
-        assertEquals("bills", output2);
+        assertEquals("bill", output2);
     }
-    /*
+
+    @Test
+    void parseKeyword_keywordExist_success() {
+        String input1 = "";
+        String input2 = "add /n bill";
+
+        String output1 = Parser.parseKeyword(input1);
+        assertEquals(input1, output1);
+
+        String output2 = Parser.parseKeyword(input2);
+        assertEquals("add", output2);
+    }
+
+    @Test
+    void parseKeyword_keywordIsNull_assertThrown() {
+        try {
+            Parser.parseKeyword(null);
+            fail();
+        } catch (AssertionError e) {
+            assertEquals("User input should not be null", e.getMessage());
+        }
+    }
     @Test
     void parseKeyword() {
     }
