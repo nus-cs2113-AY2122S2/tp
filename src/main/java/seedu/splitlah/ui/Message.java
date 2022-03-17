@@ -181,4 +181,11 @@ public abstract class Message {
     public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =
             "There are currently no activities in this session.";
 
+    // Group
+    public static final String ERROR_GROUP_EMPTY_PERSON_LIST =
+            "There are currently no person in this group.";
+
+    public static final String ERROR_GROUP_PERSON_NOT_IN_LIST =
+            "This person is not in the group.";
+
 }
