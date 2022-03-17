@@ -132,7 +132,7 @@ public class Parser {
             if (eventDescription[i].length() == 0) {
                 throw new MissingValueException();
             }
-            assert(eventDescription[i].length() != 0) : "The parameters have non-null values";
+            assert (eventDescription[i].length() != 0) : "The parameters have non-null values";
         }
     }
 
