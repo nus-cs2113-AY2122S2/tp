@@ -22,10 +22,10 @@ public class Group {
     /**
      * Constructs a Group object.
      *
-     * @param personList  An ArrayList object containing Person objects representing
-     *                    participants of the group.
-     * @param groupName   A String object that represents the group's name.
-     * @param groupId     An integer that uniquely identifies a group.
+     * @param personList An ArrayList object containing Person objects representing
+     *                   participants of the group.
+     * @param groupName  A String object that represents the group's name.
+     * @param groupId    An integer that uniquely identifies a group.
      */
     public Group(ArrayList<Person> personList, String groupName, int groupId) {
         this.personList = personList;
@@ -82,7 +82,7 @@ public class Group {
     /**
      * Checks if a Person object is contained in the Group object.
      *
-     * @param person  A Person object.
+     * @param person A Person object.
      * @return  true if a particular Person object is in the Group object,
      *          false otherwise.
      */
