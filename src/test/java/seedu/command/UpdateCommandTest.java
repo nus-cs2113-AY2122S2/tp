@@ -34,7 +34,7 @@ class UpdateCommandTest {
         }
 
         updateCommand = new UpdateCommand(new ArrayList<>(
-                Arrays.asList("sn/S1404115ASF", "n/Speaker C", "c/2000", "pd/2022-01-26")
+                Arrays.asList("s/S1404115ASF", "n/Speaker C", "c/2000", "pd/2022-01-26")
         ));
         updateCommand.setEquipmentManager(equipmentManager);
     }
@@ -91,9 +91,9 @@ class UpdateCommandTest {
     @Test
     void prepareUpdate_mostRecentArgValueUsed_success() throws IncompleteCommandException {
         ArrayList<String> testArrayList = new ArrayList<>(Arrays.asList(
-                "sn/S1404115ASF", "n/Speaker B", "n/Speaker A"));
+                "s/S1404115ASF", "n/Speaker B", "n/Speaker A"));
         UpdateCommand expectedCommand = new UpdateCommand(new ArrayList<>(
-                Arrays.asList("sn/S1404115ASF", "n/Speaker A")
+                Arrays.asList("s/S1404115ASF", "n/Speaker A")
         ));
         UpdateCommand actualCommand = new UpdateCommand(testArrayList);
         actualCommand.prepareUpdate();
