@@ -40,7 +40,6 @@ class ProjectListTest {
     }
 
     @Test
-
     void markTodoAsDone_negativeIndex() {
         String targetIndexString = "-1";
         assertThrows(NegativeIndexException.class, () -> defaultProjectList.markTodoAsDone("1", targetIndexString));
