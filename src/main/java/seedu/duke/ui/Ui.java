@@ -7,7 +7,7 @@ import static seedu.duke.common.Messages.DIVIDER;
 import seedu.duke.exceptions.InvMgrException;
 
 /**
- * Handles the UI of the application
+ * Handles the UI of the application.
  * */
 public class Ui {
 
@@ -18,7 +18,7 @@ public class Ui {
     }
 
     /**
-     * Displays message(s) to user
+     * Displays message(s) to user.
      *
      * @param message Message to be displayed to user
      * */
@@ -41,14 +41,14 @@ public class Ui {
     }
 
     /**
-     * Shows dividing line between messages
+     * Shows dividing line between messages.
      * */
     public void showDivider() {
         showMessages(DIVIDER);
     }
 
     /**
-     * Gets user's raw input in the CLI
+     * Gets user's raw input in the CLI.
      * */
     public String getRawUserInput() {
         System.out.println("Enter command: ");
