@@ -1,6 +1,8 @@
 package seedu.allonus;
 
-import static seedu.allonus.contacts.ContactsManager.contactsRunner;
+import seedu.allonus.contacts.ContactsManager;
+import seedu.allonus.ui.TextUi;
+
 import static seedu.allonus.expense.ExpenseTracker.expenseRunner;
 
 import seedu.allonus.ui.TextUi;
@@ -125,6 +127,7 @@ public class AllOnUs {
         this.ui = new TextUi();
         String userInput;
 
+        ContactsManager contactsManager = new ContactsManager();
         StudyManager studyManager = new StudyManager();
 
         while (true) {
@@ -149,7 +152,7 @@ public class AllOnUs {
                 displayHelp();
             } else if (isContactsManagerCommand(userInput)) {
                 logger.log(Level.INFO, "User entered command to navigate to Contacts Manager.");
-                contactsRunner(ui);
+                contactsManager.contactsRunner(ui);
 
                 logger.log(Level.INFO, "User back in Menu.");
                 printMainMenuMessage();

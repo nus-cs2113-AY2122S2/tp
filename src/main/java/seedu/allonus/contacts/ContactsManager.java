@@ -3,6 +3,8 @@ package seedu.allonus.contacts;
 import seedu.allonus.ui.TextUi;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static seedu.allonus.contacts.ContactParser.parseContact;
 
@@ -29,6 +31,7 @@ public class ContactsManager {
     private static final String CONTACTS_ADD_SUCCESS_MESSAGE =
             "Got it. I've added this contact:\n  ";
 
+    private static Logger logger = Logger.getLogger("");
     private static final int CONTACTS_LIST_MAX_SIZE = 100;
     private static final ArrayList<Contact> contactsList = new ArrayList<>(CONTACTS_LIST_MAX_SIZE);
 
@@ -43,6 +46,7 @@ public class ContactsManager {
 
     private static void contactsWelcome() {
         printFormat(CONTACTS_WELCOME_MESSAGE);
+        logger.log(Level.FINER, "Entering Contacts Manager");
     }
 
     /**
@@ -106,6 +110,7 @@ public class ContactsManager {
         while (true) {
             userInput = ui.getUserInput();
             if (userInput.equals("menu")) {
+                logger.log(Level.FINER, "Exiting Contacts Manager");
                 return;
             } else if (userInput.equals("list")) {
                 listContacts();
@@ -115,6 +120,7 @@ public class ContactsManager {
                 addContact(userInput);
             } else {
                 printFormat(CONTACTS_INVALID_COMMAND_MESSAGE);
+                logger.log(Level.FINER, String.format("Invalid command to Contacts Manager: %s", userInput));
             }
         }
     }

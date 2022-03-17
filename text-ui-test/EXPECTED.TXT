@@ -4,10 +4,10 @@ Welcome to Contacts Manager
 Please enter a valid command for the Contacts Manager!
 You can try "list", "add", or "rm"
 Got it. I've added this contact:
-  Lucy
+  Name: Lucy, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
 Now you have 1 contacts in the list.
 Here are the contacts in your list:
- 1. Lucy
+ 1. Name: Lucy, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
 
 You can only delete with a valid number that's in the list :')
 You can only delete with a valid number that's in the list :')
@@ -15,8 +15,23 @@ You can only delete with a valid number that's in the list :')
 You can only delete with a valid number that's in the list :')
 You can only delete with a valid number that's in the list :')
 Noted. I've removed this contact:
-  Lucy
+  Name: Lucy, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
 Now you have 0 contacts in the list.
+You haven't added any contacts to your list yet!
+Got it. I've added this contact:
+  Name: Lucy, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
+Now you have 1 contacts in the list.
+Here are the contacts in your list:
+ 1. Name: Lucy, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
+
+Noted. I've removed this contact:
+  Name: Lucy, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
+Now you have 0 contacts in the list.
+You haven't added any contacts to your list yet!
+Invalid contact field(s)!
+Invalid contact field(s)!
+Invalid contact field(s)!
+Invalid contact field(s)!
 You haven't added any contacts to your list yet!
 Welcome back to the main menu
 Menu:

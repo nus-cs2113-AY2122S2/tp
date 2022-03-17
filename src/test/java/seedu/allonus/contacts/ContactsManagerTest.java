@@ -22,10 +22,10 @@ public class ContactsManagerTest {
     @BeforeEach
     public void setUp() throws Exception {
 
-        aliceBetsy = new Contact("Alice Betsy");
-        bobChaplin = new Contact("Bob Chaplin");
-        charlieDouglas = new Contact("Charlie Douglas");
-        davidElliot = new Contact("David Elliot");
+        aliceBetsy = new Contact("Alice Betsy", "FOS", "e1@u.nus.edu", "AB");
+        bobChaplin = new Contact("Bob Chaplin", "FASS", "e2@u.nus.edu", "BC");
+        charlieDouglas = new Contact("Charlie Douglas", "SDE", "e3@u.nus.edu", "CD");
+        davidElliot = new Contact("David Elliot", "SoC", "e4@u.nus.edu", "DE");
 
         emptyContactsList = new ArrayList<>(CONTACTS_LIST_MAX_SIZE);
         defaultContactsList = new ArrayList<>(CONTACTS_LIST_MAX_SIZE);
