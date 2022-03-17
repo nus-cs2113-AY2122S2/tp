@@ -100,26 +100,33 @@ public class Group {
     }
 
     /**
-     * Removes a Person object from the Group object.
+     * Returns a Person object represented by the name.
      *
-     * @param person A Person object.
-     * @throws InvalidDataException If the Person object is not in the Group object.
+     * @param personName A String object that represents the person's name.
+     * @return A Person object represented by its name.
+     * @throws InvalidDataException if the person is not in the Group object.
      */
-    public void removePerson(Person person) throws InvalidDataException {
+    public Person getPersonFromGroup(String personName) throws InvalidDataException {
         if (personList.isEmpty()) {
             throw new InvalidDataException(Message.ERROR_GROUP_EMPTY_PERSON_LIST);
         }
-        Person deleteTarget = null;
         for (Person personInGroup : personList) {
-            if (personInGroup.getName().equalsIgnoreCase(person.getName())) {
-                deleteTarget = personInGroup;
-                break;
+            if (personInGroup.getName().equalsIgnoreCase(personName)) {
+                return personInGroup;
             }
         }
-        if (deleteTarget == null) {
-            throw new InvalidDataException(Message.ERROR_GROUP_PERSON_NOT_IN_LIST);
-        }
-        personList.remove(deleteTarget);
+        throw new InvalidDataException(Message.ERROR_GROUP_PERSON_NOT_IN_LIST);
+    }
+
+    /**
+     * Removes a Person object from the Group object.
+     *
+     * @param  personName A String object that represents the person's name.
+     * @throws InvalidDataException If the Person is not in the Group object.
+     */
+    public void removePerson(String personName) throws InvalidDataException {
+        Person personToBeRemoved = getPersonFromGroup(personName);
+        personList.remove(personToBeRemoved);
     }
 
     /**
