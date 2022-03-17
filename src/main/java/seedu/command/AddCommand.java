@@ -12,9 +12,9 @@ public class AddCommand extends Command {
     private final ArrayList<String> COMMAND_STRINGS;
     public static final String COMMAND_WORD = "add";
     public static final String COMMAND_DESCRIPTION = ": Adds a Equipment to the equipmentInventory. "
-            + "Parameters: n/ITEM_NAME sn/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE" + System.lineSeparator()
+            + "Parameters: n/ITEM_NAME s/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE" + System.lineSeparator()
             + "Example: "
-            + "add n/SpeakerB sn/S1404115ASF t/Speaker c/1000 pf/Loud_Technologies pd/2022-02-23";
+            + "add n/SpeakerB s/S1404115ASF t/Speaker c/1000 pf/Loud_Technologies pd/2022-02-23";
     public static final String DUPLICATE_ITEM_ERROR = "There is already an item with this serial number: %1$s";
     /**
      * constructor for AddCommand. Initialises successMessage and usageReminder from Command

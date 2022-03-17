@@ -21,7 +21,7 @@ public class Parser {
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s+(?<arguments>.+)");
     public static final Pattern ADD_COMMAND_FORMAT = Pattern.compile(
             "n\\/(?<itemName>.+)" + "\\s+" +
-                    "sn\\/(?<serialNumber>.+)" + "\\s+" +
+                    "s\\/(?<serialNumber>.+)" + "\\s+" +
                     "t\\/(?<equipmentType>.+)" + "\\s+" +
                     "c\\/(?<cost>.+)" + "\\s+" +
                     "pf\\/(?<purchasedFrom>.+)" + "\\s+" +
@@ -31,11 +31,11 @@ public class Parser {
     public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("s/(?<itemName>.+)");
     // ARGUMENT_FORMAT extracts first n-1 tags
     public static final Pattern ARGUMENT_FORMAT = Pattern.compile(
-            "((?:sn|n|t|c|pf|pd)\\/[\\w\\s\\-]+?)\\s+(?=sn|n|t|c|pf|pd)"
+            "((?:s|n|t|c|pf|pd)\\/[\\w\\s\\-]+?)\\s+(?=sn|n|t|c|pf|pd)"
     );
     // ARGUMENT_TRAILING_FORMAT extracts last tag
     public static final Pattern ARGUMENT_TRAILING_FORMAT = Pattern.compile(
-            "(?<!\\w)(?:sn|n|t|c|pf|pd)\\/([\\w\\s\\-]+)"
+            "(?<!\\w)(?:s|n|t|c|pf|pd)\\/([\\w\\s\\-]+)"
     );
     public static final String MESSAGE_INCOMPLETE_COMMAND_MISSING_DELIMITER =
             "Please split your command into arguments with each argument seperated by spaces!";
