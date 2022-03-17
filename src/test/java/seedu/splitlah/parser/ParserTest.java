@@ -7,6 +7,8 @@ import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.ui.Message;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -488,6 +490,341 @@ class ParserTest {
         try {
             int output = Parser.parseActivityId(argumentWithDelimiterAndPositiveInt);
             assertEquals(5, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+
+    // parseLocalDate()
+    /**
+     * Checks if an exception is properly thrown when the Date delimiter is not provided by the user.
+     */
+    @Test
+    void parseLocalDate_missingDelimiter_exceptionThrown() {
+        String argumentWithoutDateDelimiter = "/n Class outing d 23-02-2022 /pl Alice Alice Bob";
+        try {
+            LocalDate output = Parser.parseLocalDate(argumentWithoutDateDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.DATE_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Date delimiter is provided but no arguments
+     * following the Date delimiter are provided by the user.
+     */
+    @Test
+    void parseLocalDate_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutDateArgument = "/n Class outing /d /pl Alice Alice Bob";
+        try {
+            LocalDate output = Parser.parseLocalDate(argumentWithoutDateArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.DATE_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Date delimiter is provided by the user but the argument
+     * following the Date delimiter is a date of invalid formatting.
+     */
+    @Test
+    void parseLocalDate_invalidDateFormatting_exceptionThrown() {
+        String argumentWithInvalidDateFormatting = "/n Class outing /d 2022-03-04 /pl Alice Alice Bob";
+        try {
+            LocalDate output = Parser.parseLocalDate(argumentWithInvalidDateFormatting);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_INVALID_DATE_FORMAT;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if a LocalDate object containing the specified date in correct formatting is properly returned
+     * when the Date delimiter and arguments following it are properly provided by the user.
+     */
+    @Test
+    void parseLocalDate_validDateFormatting_validDate() {
+        String argumentWithValidDateFormatting = "/n Class outing /d 23-02-2022 /pl Alice Alice Bob";
+        try {
+            LocalDate output = Parser.parseLocalDate(argumentWithValidDateFormatting);
+            assertEquals(23, output.getDayOfMonth());
+            assertEquals(2, output.getMonthValue());
+            assertEquals(2022, output.getYear());
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+
+    /**
+     * Checks if a LocalDate object containing the current date is properly returned
+     * when the Date delimiter and "today" as argument are properly provided by the user.
+     */
+    @Test
+    void parseLocalDate_todayAsInput_validDate() {
+        String argumentWithTodayAsDate = "/n Class outing /d today /pl Alice Alice Bob";
+        try {
+            LocalDate output = Parser.parseLocalDate(argumentWithTodayAsDate);
+            LocalDate today = LocalDate.now();
+            assertEquals(today, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+
+    // parseTotalCost()
+    /**
+     * Checks if an exception is properly thrown when the Total cost delimiter is not provided by the user.
+     */
+    @Test
+    void parseTotalCost_missingDelimiter_exceptionThrown() {
+        String argumentWithoutTotalCostDelimiter = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie co 15";
+        try {
+            double output = Parser.parseTotalCost(argumentWithoutTotalCostDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.TOTAL_COST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Total cost delimiter is provided but no arguments
+     * following the Total cost delimiter are provided by the user.
+     */
+    @Test
+    void parseTotalCost_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutTotalCostArgument = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co ";
+        try {
+            double output = Parser.parseTotalCost(argumentWithoutTotalCostArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.TOTAL_COST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Total cost delimiter is provided by the user but the 
+     * argument following the Total cost delimiter is non-numeric.
+     */
+    @Test
+    void parseTotalCost_delimiterExistsArgumentNotNumeric_exceptionThrown() {
+        String argumentWithNonNumericArgument = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co apple";
+        try {
+            double output = Parser.parseTotalCost(argumentWithNonNumericArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + Parser.TOTAL_COST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Total cost delimiter is provided by the user but the
+     * argument following the Total cost delimiter is a negative numeric value.
+     */
+    @Test
+    void parseTotalCost_delimiterExistsArgumentNegative_exceptionThrown() {
+        String argumentWithNegativeArgument = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co -1.24";
+        try {
+            double output = Parser.parseTotalCost(argumentWithNegativeArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_COST_NOT_POSITIVE;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Total cost delimiter and a positive numeric value are
+     * provided as arguments, but the numeric value has more than two decimal places.
+     */
+    @Test
+    void parseTotalCost_delimiterExistsArgumentPositiveMoreThanTwoDecimalPlaces_exceptionThrown() {
+        String argumentWithPositiveArgumentMoreThan2DP = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 1.2444";
+        try {
+            double output = Parser.parseTotalCost(argumentWithPositiveArgumentMoreThan2DP);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_COST_NOT_TWO_DP;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Total cost delimiter and a positive numeric value are
+     * provided as arguments, but the numeric value has more than twelve digits before decimal point.
+     */
+    @Test
+    void parseTotalCost_delimiterExistsArgumentPositiveMoreThanTwelveDigitsBeforeDecimalPoint_exceptionThrown() {
+        String argumentWithPositiveArgumentMoreThan12DigitsBeforeDP =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 1234567890123.1";
+        try {
+            double output = Parser.parseTotalCost(argumentWithPositiveArgumentMoreThan12DigitsBeforeDP);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_COST_MORE_THAN_TWELVE_DIGITS_BEFORE_DP;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if a double containing the total cost as stated is properly returned when the Total cost delimiter
+     * and a valid positive numeric value as argument are properly provided by the user.
+     * A valid positive numeric value has at most twelve digits before the decimal point and at most 2 decimal places.
+     */
+    @Test
+    void parseTotalCost_delimiterExistsArgumentValid_totalCost() {
+        // Testing numerical limits
+        String argumentWithDelimiterAndValidArgumentTestLimit =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 123456789012.99";
+        try {
+            double output = Parser.parseTotalCost(argumentWithDelimiterAndValidArgumentTestLimit);
+            assertEquals(123456789012.99, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+
+        // Testing with no decimal places
+        String argumentWithDelimiterAndValidArgumentTestNoDecimal =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 123456789012";
+        try {
+            double output = Parser.parseTotalCost(argumentWithDelimiterAndValidArgumentTestNoDecimal);
+            assertEquals(123456789012.0, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+
+        // Testing with commonly used values
+        String argumentWithDelimiterAndValidArgumentTestNormal =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 10.70";
+        try {
+            double output = Parser.parseTotalCost(argumentWithDelimiterAndValidArgumentTestNormal);
+            assertEquals(10.70, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+
+    // parseCostList()
+    /**
+     * Checks if an exception is properly thrown when the Cost list delimiter is not provided by the user.
+     */
+    @Test
+    void parseCostList_missingDelimiter_exceptionThrown() {
+        String argumentWithoutCostListDelimiter = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie cl 10 10 10";
+        try {
+            double[] output = Parser.parseCostList(argumentWithoutCostListDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.COST_LIST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Cost list delimiter is provided but no arguments
+     * following the Cost list delimiter are provided by the user.
+     */
+    @Test
+    void parseCostList_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutCostListArguments = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl ";
+        try {
+            double[] output = Parser.parseCostList(argumentWithoutCostListArguments);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.COST_LIST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Cost list delimiter is provided by the user but the 
+     * arguments following the Cost list delimiter are non-numeric.
+     */
+    @Test
+    void parseCostList_delimiterExistsArgumentsNotNumeric_exceptionThrown() {
+        String argumentWithNonNumericArguments = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl apple orange";
+        try {
+            double[] output = Parser.parseCostList(argumentWithNonNumericArguments);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + Parser.COST_LIST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Cost list delimiter is provided by the user but the 
+     * argument following the Cost list delimiter contain negative numeric values.
+     */
+    @Test
+    void parseCostList_delimiterExistsCostsNegative_exceptionThrown() {
+        String argumentWithNegativeArguments =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl 10 -10 10";
+        try {
+            double[] output = Parser.parseCostList(argumentWithNegativeArguments);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_COST_NOT_POSITIVE;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+    
+    /**
+     * Checks if an exception is properly thrown when the Cost list delimiter and positive numeric values are
+     * provided as arguments, but some numeric values has more than two decimal places.
+     */
+    @Test
+    void parseCostList_delimiterExistsArgumentPositiveMoreThanTwoDecimalPlaces_exceptionThrown() {
+        String argumentWithPositiveArgumentsMoreThan2DP =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl 1.2444 15.30 20";
+        try {
+            double[] output = Parser.parseCostList(argumentWithPositiveArgumentsMoreThan2DP);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_COST_NOT_TWO_DP;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Cost list delimiter and positive numeric values are
+     * provided as arguments, but some numeric values has more than twelve digits before decimal point.
+     */
+    @Test
+    void parseCostList_delimiterExistsArgumentPositiveMoreThanTwelveDigitsBeforeDecimalPoint_exceptionThrown() {
+        String argumentWithPositiveArgumentsMoreThan12DigitsBeforeDP =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl 1234567890123.1 15.30 20";
+        try {
+            double[] output = Parser.parseCostList(argumentWithPositiveArgumentsMoreThan12DigitsBeforeDP);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_COST_MORE_THAN_TWELVE_DIGITS_BEFORE_DP;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if a double array object containing individual cost as stated is properly returned when the 
+     * Cost list delimiter and valid positive numeric values as arguments are properly provided by the user.
+     * A valid positive numeric value has at most twelve digits before the decimal point and at most 2 decimal places.
+     */
+    @Test
+    void parseCostList_delimiterExistsArgumentValid_doubleArrayContainingCostList() {
+        String argumentWithDelimiterAndValidArguments =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl 123456789012.34 123456789012 10.70";
+        try {
+            double[] output = Parser.parseCostList(argumentWithDelimiterAndValidArguments);
+            assertEquals(3, output.length);
+            assertEquals(123456789012.34, output[0]);
+            assertEquals(123456789012.0, output[1]);
+            assertEquals(10.70, output[2]);
         } catch (InvalidFormatException exception) {
             fail();
         }
