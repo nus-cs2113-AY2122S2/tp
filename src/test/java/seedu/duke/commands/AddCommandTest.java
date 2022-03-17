@@ -19,7 +19,6 @@ public class AddCommandTest {
 
     @Test
     public void execute_validItemList_addSuccessful() {
-        Ui tempUi = new Ui();
         ArrayList<Item> tempItemList = new ArrayList<>();
         Item item1 = new Item("Markers", 3, "Drawing");
         Item item2 = new Item("Whiteboard", 1, "To draw on");
@@ -31,11 +30,13 @@ public class AddCommandTest {
         ItemList expectedItemList = new ItemList(tempItemList);
         int initSize = expectedItemList.getSize();
 
+        Ui tempUi = new Ui();
+
         Item validItem = new Item("Paper Towels", 25, "For cleaning");
         AddCommand testComd = new AddCommand(validItem);
         testComd.execute(expectedItemList, tempUi);
 
-        assertEquals(initSize+1, expectedItemList.getSize());
+        assertEquals(initSize + 1, expectedItemList.getSize());
     }
 
 }
