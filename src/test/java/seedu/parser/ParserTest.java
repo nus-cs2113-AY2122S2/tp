@@ -216,36 +216,4 @@ class ParserTest {
         assertEquals("No parameters found!", exception.getMessage());
     }
 
-    @Test
-    void prepareUpdate_missingSlashDelimiter_assertionErrorThrown() throws AssertionError {
-        ArrayList<String> testArrayList = new ArrayList<>(Collections.singleton("thiswillnotwork"));
-        try {
-            parser.prepareUpdate(testArrayList);
-            fail();
-        } catch (IncompleteCommandException e) {
-            fail();
-        } catch (AssertionError error) {
-            assertEquals("Each args will need to include minimally a '/' to split arg and value upon", error.getMessage());
-        }
-    }
-
-    @Test
-    void prepareUpdate_missingSerialNumber_exceptionThrown() throws IncompleteCommandException {
-        ArrayList<String> testArrayList = new ArrayList<>(Arrays.asList(
-                "n/Speaker B", "t/Speaker", "c/1000", "pf/Loud Technologies", "pd/2022-02-23"));
-        IncorrectCommand expectedCommand = new IncorrectCommand("Serial Number is required to update an item!");
-        assertTrue(expectedCommand.equals(parser.prepareUpdate(testArrayList)));
-    }
-
-    @Test
-    void prepareUpdate_mostRecentArgValueUsed_success() throws IncompleteCommandException {
-        // TODO: ask for equals() to be defined in abstract Command class
-        ArrayList<String> testArrayList = new ArrayList<>(Arrays.asList(
-                "sn/S1404115ASF", "n/Speaker B", "n/Speaker A"));
-        UpdateCommand expectedCommand = new UpdateCommand();
-        expectedCommand.setSerialNumber("S1404115ASF");
-        expectedCommand.setType("Speaker A");
-        assertTrue(expectedCommand.equals(parser.prepareUpdate(testArrayList)));
-    }
-
 }

@@ -20,13 +20,9 @@ class AddCommandTest {
             Arrays.asList("Speaker B", "S1404115ASF", "SPEAKER", "1000", "Loud Technologies", "2022-02-23")
     );
 
-//    @BeforeEach
-//    void setup() {
-//        addCommand = new AddCommand(userInput);
-//    }
-
     @Test
     void execute_duplicateSerialNumber_exceptionThrown() throws DuplicateSerialNumber {
+        addCommand = new AddCommand(userInput);
         addCommand.setEquipmentManager(new EquipmentManager());
         EquipmentManager equipmentManager = addCommand.equipmentManager;
         equipmentManager.addEquipment("Speaker B",
