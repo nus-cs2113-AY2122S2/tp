@@ -42,7 +42,7 @@ public class Command {
     public void setData(RecordManager recordMgr) {
         this.recordMgr = recordMgr;
     }
-    public void setLimits(LimitManager limitMgr) {
+    public void setLimitManager(LimitManager limitMgr) {
         this.limitMgr = limitMgr;
     }
 }
