@@ -11,37 +11,41 @@ import java.util.Objects;
 // Created with reference to
 // https://github.com/nus-cs2113-AY2122S2/personbook/tree/master/src/main/java/seedu/personbook/commands
 public class CommandResult {
-    private final String RESULT_TO_SHOW;
-    private final ArrayList<Equipment> RELEVANT_EQUIPMENT;
+    private final String resultToShow;
+    private final ArrayList<Equipment> relevantEquipment;
 
     public CommandResult(String result) {
-        RESULT_TO_SHOW = result;
-        RELEVANT_EQUIPMENT = null;
+        resultToShow = result;
+        relevantEquipment = null;
     }
 
     public CommandResult(String result, ArrayList<Equipment> equipmentList) {
-        RESULT_TO_SHOW = result;
-        RELEVANT_EQUIPMENT = equipmentList;
+        resultToShow = result;
+        relevantEquipment = equipmentList;
     }
 
     public String getResultToShow() {
-        return RESULT_TO_SHOW;
+        return resultToShow;
     }
 
     public ArrayList<Equipment> getRelevantEquipment() {
-        return RELEVANT_EQUIPMENT;
+        return relevantEquipment;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         CommandResult that = (CommandResult) o;
-        return RESULT_TO_SHOW.equals(that.RESULT_TO_SHOW) && Objects.equals(RELEVANT_EQUIPMENT, that.RELEVANT_EQUIPMENT);
+        return resultToShow.equals(that.resultToShow) && Objects.equals(relevantEquipment, that.relevantEquipment);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(RESULT_TO_SHOW, RELEVANT_EQUIPMENT);
+        return Objects.hash(resultToShow, relevantEquipment);
     }
 }

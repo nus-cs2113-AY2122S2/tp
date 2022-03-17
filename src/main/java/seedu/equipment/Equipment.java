@@ -10,7 +10,8 @@ public class Equipment {
     private String purchasedFrom;
     private String purchasedDate;
 
-    public Equipment(String itemName, String serialNumber, EquipmentType type, double cost, String purchasedFrom, String purchasedDate) {
+    public Equipment(String itemName, String serialNumber, EquipmentType type, double cost, String purchasedFrom,
+                     String purchasedDate) {
         this.itemName = itemName;
         this.serialNumber = serialNumber;
         this.type = type;
@@ -69,10 +70,19 @@ public class Equipment {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Equipment equipment = (Equipment) o;
-        return Double.compare(equipment.cost, cost) == 0 && itemName.equals(equipment.itemName) && serialNumber.equals(equipment.serialNumber) && type == equipment.type && purchasedFrom.equals(equipment.purchasedFrom) && purchasedDate.equals(equipment.purchasedDate);
+        return Double.compare(equipment.cost, cost) == 0 &&
+                itemName.equals(equipment.itemName) &&
+                serialNumber.equals(equipment.serialNumber) &&
+                type == equipment.type &&
+                purchasedFrom.equals(equipment.purchasedFrom) &&
+                purchasedDate.equals(equipment.purchasedDate);
     }
 
     @Override
