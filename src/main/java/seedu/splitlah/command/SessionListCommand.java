@@ -32,7 +32,7 @@ public class SessionListCommand extends Command {
             manager.getUi().printlnMessage(Message.ERROR_PROFILE_SESSION_LIST_EMPTY);
             return;
         }
-        manager.getUi().printlnMessageWithDivider(SESSION_LIST_HEADER);
+        manager.getUi().printlnMessageWithDashDivider(SESSION_LIST_HEADER);
         for (int i = 0; i < sessionListSize - 1; i++) {
             manager.getUi().printlnMessage(sessionsToBePrinted.get(i).getSessionSimplifiedString());
             manager.getUi().printDashDivider();

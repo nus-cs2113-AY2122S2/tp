@@ -6,6 +6,8 @@ import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
 
+import java.util.logging.Level;
+
 /**
  * Represents a command that deletes a Session object indicated by the user input from a Profile object.
  *
@@ -23,6 +25,10 @@ public class SessionDeleteCommand extends Command {
 
     private static final String COMMAND_SUCCESS =
             "The session was deleted successfully.";
+
+    public static final String[] COMMAND_DELIMITERS = {
+        Parser.SESSION_ID_DELIMITER
+    };
 
     private int sessionId;
 
@@ -69,9 +75,10 @@ public class SessionDeleteCommand extends Command {
             boolean isConfirmed = manager.getUi().getUserConfirmation(confirmationPrompt);
             if (isConfirmed) {
                 manager.getProfile().removeSession(sessionId);
-                manager.getUi().printlnMessage(COMMAND_SUCCESS);
+                manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
+                manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
             } else {
-                manager.getUi().printlnMessage(COMMAND_ABORT);
+                manager.getUi().printlnMessageWithDivider(COMMAND_ABORT);
             }
         } catch (InvalidDataException dataException) {
             manager.getUi().printlnMessage(dataException.getMessage());

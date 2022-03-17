@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
 
 /**
  * Represents a command that creates a Session object from user input and stores it in the Profile object.
@@ -26,6 +27,12 @@ public class SessionCreateCommand extends Command {
 
     private static final String COMMAND_SUCCESS =
             "The session was created successfully.\n";
+
+    public static final String[] COMMAND_DELIMITERS = { 
+        Parser.NAME_DELIMITER,
+        Parser.DATE_DELIMITER,
+        Parser.PERSON_LIST_DELIMITER
+    };
 
     private String sessionName;
     private String[] personNames;
@@ -63,7 +70,7 @@ public class SessionCreateCommand extends Command {
     /**
      * Checks if String object array of names has duplicated names.
      *
-     * @return True if it contains duplicates, false otherwise.
+     * @return true if it contains duplicates, false otherwise.
      */
     private boolean hasNameDuplicates() {
         Set<String> nameSet = new HashSet<>();
@@ -127,5 +134,6 @@ public class SessionCreateCommand extends Command {
         Session newSession = new Session(sessionName, newSessionId, sessionDate, personList);
         manager.getProfile().addSession(newSession);
         manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + newSession);
+        manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONCREATE_SESSION_ADDED + newSessionId);
     }
 }

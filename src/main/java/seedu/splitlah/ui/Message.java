@@ -18,7 +18,11 @@ import seedu.splitlah.command.SessionSummaryCommand;
  * @author Saurav
  */
 public abstract class Message {
-    
+
+    // SplitLah
+    public static final String LOGGER_SPLITLAH_APPLICATION_EXIT =
+            "The application is terminated";
+
     // TextUI
     public static final String ASCII_TEXTUI_LOGO = 
             " $$$$$$\\            $$\\ $$\\   $$\\     $$\\           $$\\\n"
@@ -57,12 +61,8 @@ public abstract class Message {
                     + "        " + ExitCommand.COMMAND_FORMAT;
     public static final String PROMPT_TEXTUI_REQUEST_CONFIRMATION =
             "Please enter Y/y/yes to confirm, or N/n/no otherwise.";
-    public static final String ERROR_TEXTUI_USER_DID_NOT_CONFIRM =
-            "User did not confirm.";
     public static final String ERROR_TEXTUI_REENTER_INPUT =
             "Invalid input. Please re-enter.";
-    public static final String PERSON_TEXTUI_NO_ACTIVITIES =
-            "No activities found.";
     public static final String PROMPT_TEXTUI_AWAITING_INPUT =
             "> ";
 
@@ -71,6 +71,8 @@ public abstract class Message {
             "Please include the following delimiter in your input: ";
     public static final String ERROR_PARSER_MISSING_ARGUMENT =
             "Please include an argument after the following delimiter: ";
+    public static final String ERROR_PARSER_MORE_THAN_ONE_PAYER =
+            "The activity should only have a single payer. Please rectify and try again.";
     public static final String ERROR_PARSER_NON_INTEGER_ARGUMENT =
             "Please enter a valid integer after the following delimiter: ";
     public static final String ERROR_PARSER_ID_VALUE_NOT_POSITIVE =
@@ -79,6 +81,12 @@ public abstract class Message {
             "Please enter the date in the form DD-MM-YYYY or enter 'today' for today's date.";
     public static final String ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT =
             "Please enter a valid monetary value(s) after the following delimiter: ";
+    public static final String ERROR_PARSER_COST_NOT_POSITIVE =
+            "Please enter a positive value for monetary value(s).";
+    public static final String ERROR_PARSER_COST_NOT_TWO_DP =
+            "Please enter a value up to 2 decimal places for monetary value(s).";
+    public static final String ERROR_PARSER_COST_MORE_THAN_TWELVE_DIGITS_BEFORE_DP =
+            "Please enter a value up to 12 digits in dollars for monetary value(s).";
     public static final String ERROR_PARSER_INVALID_GST_SURCHARGE =
             "Please enter a valid GST surcharge in % after the delimiter: ";
     public static final String ERROR_PARSER_INVALID_SERVICE_CHARGE =
@@ -87,8 +95,12 @@ public abstract class Message {
             "Please enter a command.";
     public static final String ERROR_PARSER_INVALID_COMMAND =
             "Please enter a valid command.";
+    public static final String ERROR_PARSER_ADDITIONAL_INVALID_TOKEN =
+            "The command contains an argument that does not have a delimiter. Please rectify and try again.";
     public static final String ERROR_PARSER_INVALID_DELIMITERS =
             "The command contains one or more invalid delimiters. Please rectify and try again.";
+    public static final String ERROR_PARSER_DUPLICATE_DELIMITERS =
+            "The command contains one or more duplicate delimiters. Please rectify and try again.";
     public static final String ASSERT_PARSER_COMMAND_ARGUMENTS_EMPTY =
             "The command arguments cannot be null.";
 
@@ -96,7 +108,11 @@ public abstract class Message {
     public static final String ERROR_PERSON_NO_ACTIVITIES =
             "This person is not participating in any activities.";
     public static final String ERROR_PERSON_ACTIVITY_NOT_FOUND =
-            "Activity not found.";
+            "This person is not participating in the activity with Id: ";
+
+    // Name
+    public static final String ERROR_NAME_INVALID_NAME =
+            "Invalid name. Names must contain only alphabetical characters.";
 
     // Session
     public static final String ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST =
@@ -114,11 +130,12 @@ public abstract class Message {
     
     // Profile
     public static final String ERROR_PROFILE_DUPLICATE_SESSION =
-            "There is another session with the same name, please try another name.";
+            "There is another session with the same name. Please rename and try again.";
     public static final String ERROR_PROFILE_DUPLICATE_NAME =
-            "There seems to be duplicates in the session you are trying to create, please try again.";
+            "There are duplicate names in the person list for the session you are trying to create. "
+                    + "Please rectify and try again.";
     public static final String ERROR_PROFILE_SESSION_LIST_EMPTY =
-            "There are no sessions currently stored.";
+            "There are currently no sessions stored.";
     public static final String ERROR_PROFILE_SESSION_NOT_IN_LIST =
             "The session that you have specified was not found.";
 
@@ -129,9 +146,15 @@ public abstract class Message {
 
     // Session Create Command
     public static final String ASSERT_SESSIONCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
-            "Name duplicates exists but not detected.";
+            "Name duplicates exist but not detected.";
     public static final String ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY =
             "The array of person names is empty but was not handled in prepare function.";
+    public static final String LOGGER_SESSIONCREATE_SESSION_ADDED =
+            "A session was added into the list of sessions with Id: ";
+
+    // Session Delete Command
+    public static final String LOGGER_SESSIONDELETE_SESSION_REMOVED =
+            "A session was remove from the list of session with Id: ";
 
     // Session Summary Command
     public static final String MESSAGE_SESSIONSUMMARY_NO_PAYMENTS_REQUIRED =
@@ -143,18 +166,19 @@ public abstract class Message {
     
     // Activity Create Command
     public static final String ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH =
-            "There seems to be a discrepancy between number of people involved and the costs per person";
+            "There is a mismatch between persons involved and the costs for each person. Please rectify and try again.";
     public static final String ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST =
-            "Please only include either a total cost or a list of costs";
+            "Please only include either a total cost or a list of costs.";
     public static final String ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST =
             "Please include either a cost or a list of costs.";
     public static final String ERROR_ACTIVITYCREATE_DUPLICATE_NAME =
-            "There seems to be duplicates in names of the people involved in the activity you are trying to create, "
-                    + "please try again.";
+            "There are duplicate names in the persons involved for the activity you are trying to create. "
+                    + "Please rectify and try again.";
     public static final String ASSERT_ACTIVITYCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
             "Name duplicates exists but not detected.";
 
     // Activity List Command
     public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =
-            "There are currently no activities in this session";
+            "There are currently no activities in this session.";
+
 }

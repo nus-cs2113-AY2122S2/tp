@@ -30,20 +30,36 @@ class SessionCreateCommandTest {
      */
     @Test
     public void prepare_hasMissingDelimiter_InvalidCommand() {
-        // Case 1: Missing /n delimiter
+        // Case 1: Missing /n delimiter.
         String argsMissingNameDelimiter = "session /create /d 15-02-2022 /pl Alice Bob";
         Command sessionWithMissingNameDelimiter = Parser.getCommand(argsMissingNameDelimiter);
         assertEquals(InvalidCommand.class, sessionWithMissingNameDelimiter.getClass());
 
-        // Case 2: Missing /d delimiter
+        // Case 2: Missing /d delimiter.
         String argsMissingDateDelimiter = "session /create /n Class outing /pl Alice Bob";
         Command sessionWithMissingDateDelimiter = Parser.getCommand(argsMissingDateDelimiter);
         assertEquals(InvalidCommand.class, sessionWithMissingDateDelimiter.getClass());
 
-        // Case 3: Missing /pl delimiter
+        // Case 3: Missing /pl delimiter.
         String argsMissingPersonListDelimiter = "session /create /n Class outing /d 15-02-2022";
         Command sessionWithMissingPersonListDelimiter = Parser.getCommand(argsMissingPersonListDelimiter);
         assertEquals(InvalidCommand.class, sessionWithMissingPersonListDelimiter.getClass());
+    }
+
+    /**
+     * Checks if session is created successfully and added into list of sessions.
+     */
+    @Test
+    public void run_validCommand_sessionListSizeBecomesThree() {
+        String userInput = "session /create /n Class gathering /d 15-02-2022 /pl Alice Bob";
+        Command command = Parser.getCommand(userInput);
+
+        // Check if a SessionCreateCommand instance was returned.
+        assertEquals(SessionCreateCommand.class, command.getClass());
+        command.run(manager);
+
+        // Check if session was successfully added into the list of sessions.
+        assertEquals(3, manager.getProfile().getSessionList().size());
     }
 
     /**
@@ -51,10 +67,24 @@ class SessionCreateCommandTest {
      */
     @Test
     public void run_hasOneNameDuplicate_sessionListSizeRemainsTwo() {
-        String userInput = "session /create /n Class outing /d 23-02-2022 /pl Alice Alice Bob";
+        String userInput = "session /create /n University outing /d 23-02-2022 /pl Alice Alice Bob";
         Command command = Parser.getCommand(userInput);
         command.run(manager);
         assertEquals(2, manager.getProfile().getSessionList().size());
+    }
+
+    /**
+     * Checks if session unique identifier is incremented if a session fails
+     * to be created due to duplicate names in person list.
+     */
+    @Test
+    public void run_hasOneNameDuplicate_sessionIdNotIncremented() {
+        int currentSessionId = manager.getProfile().getSessionIdTracker();
+        String userInput = "session /create /n University outing /d 23-02-2022 /pl Alice Alice Bob";
+        Command command = Parser.getCommand(userInput);
+        command.run(manager);
+        int testSessionId = manager.getProfile().getSessionIdTracker();
+        assertEquals(currentSessionId, testSessionId);
     }
 
     /**
@@ -66,5 +96,19 @@ class SessionCreateCommandTest {
         Command command = Parser.getCommand(userInput);
         command.run(manager);
         assertEquals(2, manager.getProfile().getSessionList().size());
+    }
+
+    /**
+     * Checks if session unique identifier is incremented when a session fails to be created
+     * because another session with the same name already exists.
+     */
+    @Test
+    public void run_hasSessionDuplicate_sessionIdNotIncremented() {
+        int currentSessionId = manager.getProfile().getSessionIdTracker();
+        String userInput = "session /create /n Class outing /d 15-02-2022 /pl Mallory Eves";
+        Command command = Parser.getCommand(userInput);
+        command.run(manager);
+        int testSessionId = manager.getProfile().getSessionIdTracker();
+        assertEquals(currentSessionId, testSessionId);
     }
 }
