@@ -7,6 +7,8 @@ import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.ui.Message;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -494,6 +496,9 @@ class ParserTest {
     }
 
     // parseLocalDate()
+    /**
+     * Checks if an exception is properly thrown when the Date delimiter is not provided by the user.
+     */
     @Test
     void parseLocalDate_missingDelimiter_exceptionThrown() {
         String argumentWithoutDateDelimiter = "/n Class outing d 23-02-2022 /pl Alice Alice Bob";
@@ -506,6 +511,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Date delimiter is provided but no arguments
+     * following the Date delimiter are provided by the user.
+     */
     @Test
     void parseLocalDate_delimiterExistsWithoutArgument_exceptionThrown() {
         String argumentWithoutDateArgument = "/n Class outing /d /pl Alice Alice Bob";
@@ -518,6 +527,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Date delimiter is provided by the user but the argument
+     * following the Date delimiter is a date of invalid formatting.
+     */
     @Test
     void parseLocalDate_invalidDateFormatting_exceptionThrown() {
         String argumentWithInvalidDateFormatting = "/n Class outing /d 2022-03-04 /pl Alice Alice Bob";
@@ -530,6 +543,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if a LocalDate object containing the specified date in correct formatting is properly returned
+     * when the Date delimiter and arguments following it are properly provided by the user.
+     */
     @Test
     void parseLocalDate_validDateFormatting_validDate() {
         String argumentWithValidDateFormatting = "/n Class outing /d 23-02-2022 /pl Alice Alice Bob";
@@ -543,6 +560,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if a LocalDate object containing the current date is properly returned
+     * when the Date delimiter and "today" as argument are properly provided by the user.
+     */
     @Test
     void parseLocalDate_todayAsInput_validDate() {
         String argumentWithTodayAsDate = "/n Class outing /d today /pl Alice Alice Bob";
