@@ -94,9 +94,9 @@ class ActivityCreateCommandTest {
         assertEquals(InvalidCommand.class, sessionWithMissingNameDelimiter.getClass());
 
         // Case 3: Missing /p delimiter
-        String argsMissingPayerListDelimiter = "activity /create /sid 1 /n Dinner /i Alice Bob Charlie /co 15";
-        Command sessionWithMissingPayerListDelimiter = Parser.getCommand(argsMissingPayerListDelimiter);
-        assertEquals(InvalidCommand.class, sessionWithMissingPayerListDelimiter.getClass());
+        String argsMissingPayerDelimiter = "activity /create /sid 1 /n Dinner /i Alice Bob Charlie /co 15";
+        Command sessionWithMissingPayerDelimiter = Parser.getCommand(argsMissingPayerDelimiter);
+        assertEquals(InvalidCommand.class, sessionWithMissingPayerDelimiter.getClass());
 
         // Case 4: Missing /i delimiter
         String argsMissingInvolvedListDelimiter = "activity /create /sid 1 /n Dinner /p Alice /co 15";
