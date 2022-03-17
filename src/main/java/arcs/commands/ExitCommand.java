@@ -1,15 +1,30 @@
 package arcs.commands;
 
-public class ExitCommand extends Command {
-    public static final String COMMAND_WORD = "exit";
-    private static final String EXIT_MESSAGE = "Exiting ARCS system ...";
+import arcs.ui.MainUi;
 
-    public ExitCommand() {
-        isExit = true;
+public class ExitCommand extends Command {
+    /**
+     * Command word to trigger this command.
+     */
+    public static final String COMMAND_WORD = "3";
+    final MainUi ui;
+    /**
+     * Initializes command for execution.
+     *
+     * @param ui Ui object.
+     */
+    public ExitCommand(MainUi ui) {
+        this.ui = ui;
     }
 
+    /**
+     * Says goodbye to user and exits MySTARS.
+     */
     @Override
     public CommandResult execute() {
-        return new CommandResult(EXIT_MESSAGE);
+        setIsExit();
+
+        ui.printExitMessage();
+        return null;
     }
 }

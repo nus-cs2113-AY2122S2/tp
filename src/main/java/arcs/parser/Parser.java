@@ -1,15 +1,67 @@
 package arcs.parser;
 
 
-import arcs.commands.AddRouteCommand;
+import arcs.commands.route.*;
 import arcs.commands.Command;
 import arcs.commands.ExitCommand;
-import arcs.commands.ListRouteCommand;
-import arcs.commands.DeleteRouteCommand;
-import arcs.commands.FindRouteCommand;
 import arcs.commands.UndefinedCommand;
+import arcs.commands.menu.AddMenuItemCommand;
+import arcs.commands.menu.MenuItemCommand;
+import arcs.commands.menu.PrintMenuItemsCommand;
+import arcs.commands.menu.RemoveMenuItemCommand;
+import arcs.data.RouteManager;
+import arcs.data.exception.ArcsException;
+import arcs.data.menu.MenuItemList;
+import arcs.ui.MainUi;
+import arcs.ui.MenuUi;
 
 public class Parser {
+
+    public static final String INVALID_MENU_ITEM_ERROR = "Please enter a valid index";
+
+    private MenuUi menuUi;
+    private RouteManager routeManager;
+
+    public Command parseMainMenuInput(String fullCommand, MainUi mainUi, MenuItemList menuItems,
+                                      RouteManager routeManager) throws ArcsException {
+        Command command;
+        switch (fullCommand.trim()) {
+        case MenuItemCommand.COMMAND_WORD:
+            menuUi = new MenuUi();
+            command = parseUserMenuInput(menuUi.readCommand(), menuItems, menuUi);
+            break;
+        case FlightRouteCommand.COMMAND_WORD:
+            String userCommandText = mainUi.getUserCommand();
+            command = parseCommand(userCommandText);
+            command.setData(routeManager);
+            break;
+        case ExitCommand.COMMAND_WORD:
+            command = new ExitCommand(mainUi);
+            break;
+        default:
+            throw new ArcsException(seedu.duke.commands.Command.COMMAND_ERROR);
+        }
+        return command;
+    }
+
+    public Command parseUserMenuInput(String fullCommand, MenuItemList menuItems, MenuUi ui) throws ArcsException {
+        Command command;
+        switch (fullCommand.trim()) {
+        case AddMenuItemCommand.COMMAND_WORD:
+            command = new AddMenuItemCommand(ui,menuItems);
+            break;
+        case PrintMenuItemsCommand.COMMAND_WORD:
+            command = new PrintMenuItemsCommand(ui,menuItems);
+            break;
+        case RemoveMenuItemCommand.COMMAND_WORD:
+            command = new RemoveMenuItemCommand(ui,menuItems);
+            break;
+        default:
+            throw new ArcsException(seedu.duke.commands.Command.COMMAND_ERROR);
+        }
+        return command;
+    }
+
     public Command parseCommand(String userInput) {
         String[] fullInput = userInput.split(" ", 2);
         String commandWord = fullInput[0];
@@ -19,9 +71,6 @@ public class Parser {
         switch (commandWord) {
         case AddRouteCommand.COMMAND_WORD:
             command = prepareAddRoute(argumentLine);
-            break;
-        case ExitCommand.COMMAND_WORD:
-            command = new ExitCommand();
             break;
         case ListRouteCommand.COMMAND_WORD:
             command = new ListRouteCommand();
@@ -141,5 +190,20 @@ public class Parser {
             }
         }
         return new FindRouteCommand(date, to, from, time);
+    }
+
+    /**
+     * Returns if user input is yes.
+     *
+     * @param choice User input.
+     * @return True if yes, false otherwise.
+     */
+    public boolean isYes(String choice) {
+        if (choice.equalsIgnoreCase("YES")) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
