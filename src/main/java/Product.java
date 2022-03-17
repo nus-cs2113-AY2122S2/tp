@@ -1,16 +1,19 @@
-public class Product extends Record{
+import data.record.Record;
 
-    private String category;
+public class Product extends Record {
 
-    public Product (String name, float price, String date, String productType){
-        super( name, price, date);
-        this.category = productType;
+    private String productType;
+
+    public Product (String name, double price, String date, String productType){
+        super(name, price, date);
+        this.productType = productType;
     }
-    public float getPrice(){
-        return this.price;
+
+    public void setCategory(String category) {
+        this.productType = category;
     }
 
     public String getCategory() {
-        return category;
+        return productType;
     }
 }
