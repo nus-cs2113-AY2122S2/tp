@@ -184,6 +184,10 @@ public abstract class Message {
     // Activity List Command
     public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =
             "There are currently no activities in this session.";
+    public static final String ASSERT_ACTIVITYLIST_SESSION_ID_LESS_THAN_ONE =
+            "Session unique identifier is less than one";
+    public static final String LOGGER_ACTIVITYLIST_SESSION_ID_NOT_FOUND =
+            "Session was not found with unique identifier of:";
 
     // Group
     public static final String ERROR_GROUP_EMPTY_PERSON_LIST =
