@@ -42,6 +42,7 @@ public class AddCommand extends Command {
                              String date, String renewal) throws IllegalValueException {
         this.toAdd = new Subscription(name, price, date, renewal);
         super.totalExpense += price;
+        if (limitMgr.ifExceedLimit(super.totalExpense)) limitMgr.displayWarning();
     }
 
     @Override

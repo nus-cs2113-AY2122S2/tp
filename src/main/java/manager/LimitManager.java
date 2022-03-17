@@ -13,7 +13,7 @@ public class LimitManager {
         this.limit=0;
     }
     public void displayWarning(){
-        System.out.println("You have exceeded the spending limit!!");
+        System.out.println("WARNING: You have exceeded the spending limit!!");
     }
     public boolean ifExceedLimit(double total){
         if (total>this.limit) return true;
