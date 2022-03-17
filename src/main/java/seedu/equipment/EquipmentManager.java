@@ -45,9 +45,38 @@ public class EquipmentManager {
         return new ArrayList<>(equipmentList.values());
     }
 
-    public String updateEquipment(String serialNumber, ArrayList<Pair<String, String>> updatePairs) {
-        // To be updated
-        return "";
+    public boolean updateEquipment(String serialNumber, ArrayList<Pair<String, String>> updatePairs) {
+        if (!equipmentList.containsKey(serialNumber)){
+            return false;
+        }
+        Equipment updatedEquipment = equipmentList.get(serialNumber);
+        for (Pair<String, String> updates : updatePairs) {
+            String key = updates.getKey();
+            switch (key) {
+            case "itemName":
+                updatedEquipment.setItemName(updates.getValue());
+                break;
+            case "type":
+                try {
+                    updatedEquipment.setType(EquipmentType.valueOf(updates.getValue()));
+                } catch (IllegalArgumentException e) {
+                    return false;
+                }
+                break;
+            case "cost":
+                updatedEquipment.setCost(Double.parseDouble(updates.getValue()));
+                break;
+            case "purchaseDate":
+                updatedEquipment.setPurchasedDate(updates.getValue());
+                break;
+            case "purchaseFrom":
+                updatedEquipment.setPurchasedFrom(updates.getValue());
+                break;
+            default:
+                break;
+            }
+        }
+        return true;
     }
 
     public void deleteEquipment(String serialNumber) {
