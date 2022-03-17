@@ -28,7 +28,8 @@ public class Message {
             + "8) Study: study\n"
             + "9) Help: help <command_word>\n"
             + "10) Bye: bye";
-    public static final String HELP_MESSAGE_SPECIFIC_COMMAND = "\n\nFor more information, enter 'help'";
+    public static final String HELP_MESSAGE_SPECIFIC_COMMAND = "\n\nFor more information, enter 'help ";
+    public static final String HELP_MESSAGE_COMMAND = "\n\nFor more information, enter 'help'";
     public static final String HELP_MESSAGE_STUDY = "Timer command input quick start guide:\n"
             + "1) Start default timer: start <mode_number>\n"
             + "2) Start custom timer: start /custom <timer_duration>\n"
@@ -61,6 +62,11 @@ public class Message {
     public static final String ERROR_INVALID_TASK_NUMBER_MESSAGE = "Please key in a valid task number";
     public static final String ERROR_DUPLICATE_ADD_TASK_MESSAGE = "Oops! It seems that you've entered "
             + "a duplicate task.\nPlease re-enter a new task if you wish to add one.";
+    public static final String ERROR_INVALID_ADD_FORMAT_MESSAGE = "Please use the correct order of attributes:\n"
+            + "<task_description> /by <task_due_date> /do_on <date_to_work_on_task>\n\n"
+            + "You only need to input the attributes you want to edit.\n"
+            + "e.g. add do homework /do_on 2022/02/12\n"
+            + "(The task_description and task_due_date is left out here)";
     public static final String ERROR_INVALID_EDIT_FORMAT_MESSAGE = "Please use the correct order of attributes:\n"
             + "<task_description> /by <task_due_date> /do_on <date_to_work_on_task>\n\n"
             + "You only need to input the attributes you want to edit.\n"

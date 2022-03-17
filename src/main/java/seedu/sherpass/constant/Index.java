@@ -7,8 +7,8 @@ public class Index {
     public static final int TASK_NUMBER_INDEX = 0;
     public static final int TASK_DESCRIPTION_INDEX = 0;
     public static final int TASK_CONTENT_INDEX = 1;
-    public static final int BY_DATE_INDEX = 0;
-    public static final int DO_ON_DATE_INDEX = 1;
+    public static final int BY_DATE_INDEX = 1;
+    public static final int DO_ON_DATE_INDEX = 2;
     public static final int FIRST_SUBSTRING_INDEX = 0;
     public static final int HELP_OPTIONS_INDEX = 1;
     public static final int DIRECTORY_INDEX = 0;

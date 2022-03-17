@@ -6,7 +6,7 @@ import seedu.sherpass.util.Ui;
 import seedu.sherpass.task.TaskList;
 
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_QUICK_START_COMMAND;
-import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
+import static seedu.sherpass.constant.Message.HELP_MESSAGE_COMMAND;
 
 public class HelpCommand extends Command {
     private String helpInput;
@@ -70,7 +70,7 @@ public class HelpCommand extends Command {
             ui.showToUser(ExitCommand.MESSAGE_USAGE);
             break;
         case COMMAND_WORD_VARIANT:
-            ui.showToUser(HELP_MESSAGE_QUICK_START_COMMAND + HELP_MESSAGE_SPECIFIC_COMMAND);
+            ui.showToUser(HELP_MESSAGE_QUICK_START_COMMAND + HELP_MESSAGE_COMMAND);
             break;
         default:
             showHelpList(ui);
