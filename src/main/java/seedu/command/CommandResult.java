@@ -24,11 +24,11 @@ public class CommandResult {
         RELEVANT_EQUIPMENT = equipmentList;
     }
 
-    public String getResultToShow(){
+    public String getResultToShow() {
         return RESULT_TO_SHOW;
     }
 
-    public ArrayList<Equipment> getRelevantEquipment(){
+    public ArrayList<Equipment> getRelevantEquipment() {
         return RELEVANT_EQUIPMENT;
     }
 

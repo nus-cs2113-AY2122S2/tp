@@ -38,7 +38,7 @@ class AddCommandTest {
     }
 
     @Test
-    void execute_incorrectCostFormat_exceptionThrown(){
+    void execute_incorrectCostFormat_exceptionThrown() {
         addCommand = new AddCommand(new ArrayList<>(
                 Arrays.asList("Speaker B", "S1404115ASF", "SPEAKER", "$1000", "Loud Technologies", "2022-02-23")
         ));

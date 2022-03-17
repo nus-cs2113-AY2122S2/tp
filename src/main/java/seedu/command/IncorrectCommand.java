@@ -2,6 +2,7 @@ package seedu.command;
 
 /**
  * Represents an incorrect command. Upon execution, provide some feedback to user
+ *
  * @author Shun Yao
  */
 public class IncorrectCommand extends Command {

@@ -71,9 +71,8 @@ class UpdateCommandTest {
     @Test
     void prepareUpdate_missingSlashDelimiter_assertionErrorThrown() throws AssertionError {
         ArrayList<String> testArrayList = new ArrayList<>(Collections.singleton("thiswillnotwork"));
-        updateCommand = new UpdateCommand(testArrayList);
         try {
-            updateCommand.prepareUpdate();
+            updateCommand = new UpdateCommand(testArrayList);
         } catch (AssertionError error) {
             assertEquals("Each args will need to include minimally a '/' to split arg and value upon", error.getMessage());
         }

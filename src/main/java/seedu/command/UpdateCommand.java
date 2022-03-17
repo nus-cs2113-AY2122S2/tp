@@ -90,7 +90,7 @@ public class UpdateCommand extends Command {
         return pairs;
     }
 
-    public String generateUpdateString(){
+    public String generateUpdateString() {
         String updateDetails = "";
         if (updateName != null) {
             updateDetails = updateDetails + System.lineSeparator() + "New name: " + updateName;
@@ -119,7 +119,7 @@ public class UpdateCommand extends Command {
      *
      * @return Command object
      */
-    protected void prepareUpdate() {
+    protected void prepareUpdate() throws AssertionError {
         for (String s : COMMAND_STRINGS) {
             int delimiterPos = s.indexOf('/');
             // the case where delimiterPos = -1 is impossible as
@@ -143,7 +143,7 @@ public class UpdateCommand extends Command {
             case "c":
                 setCost(argValue);
                 break;
-            case "sn":
+            case "s":
                 setSerialNumber(argValue);
                 break;
             default:

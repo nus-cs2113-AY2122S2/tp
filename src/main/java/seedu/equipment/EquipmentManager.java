@@ -37,7 +37,7 @@ public class EquipmentManager {
         return listOfEquipments;
     }
 
-    public HashMap<String, Equipment> getEquipmentList(){
+    public HashMap<String, Equipment> getEquipmentList() {
         return equipmentList;
     }
 
