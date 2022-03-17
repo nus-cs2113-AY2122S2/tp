@@ -144,6 +144,10 @@ public abstract class Message {
             "The list of involved persons list is inaccurate "
                     + "as at least one person did not participate in the activity.";
 
+    // Invalid Command
+    public static final String ASSERT_INVALIDCOMMAND_MANAGER_DOES_NOT_EXIST =
+            "Manager does not exist.";
+
     // Session Create Command
     public static final String ASSERT_SESSIONCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
             "Name duplicates exist but not detected.";
