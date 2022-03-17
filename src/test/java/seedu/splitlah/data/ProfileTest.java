@@ -30,12 +30,20 @@ class ProfileTest {
         boolean isExists = manager.getProfile().hasSessionName(sessionNameToTest);
         assertEquals(false, isExists);
     }
+
+    /**
+     * Checks if method returns true when a session unique identifier exists within the list of session.
+     */
     @Test
     public void hasSessionId_inputContainsExistingSessionId_true() {
         int sessionIdToTest = 1;
         boolean isExists = manager.getProfile().hasSessionId(sessionIdToTest);
         assertEquals(true, isExists);
     }
+
+    /**
+     * Checks if method returns false when a session unique identifier does not exist within the list of session.
+     */
     @Test
     public void hasSessionId_inputContainsNonExistingSessionId_false() {
         int sessionIdToTest = 10;
