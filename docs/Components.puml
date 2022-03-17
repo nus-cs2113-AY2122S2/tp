@@ -1,0 +1,25 @@
+@startuml
+[Main]
+[Parser]
+[Command]
+actor user
+user <..> [Ui]
+[Ui]-*[Main]
+[Main]..>[Parser]
+[Parser]..>[Command]: return
+[Main] ..> [Command]: execute
+[CommandResult] <.. [Command]: return
+[Main] <.. [CommandResult]
+[Command] ..> [Storage]
+[Module]
+[Task]
+[ModuleList]
+[TaskList]
+[Module] --> [Task]
+[ModuleList] --> [Module]
+[TaskList] --> [Task]
+[Command] ..> [ModuleList]
+[Command] ..> [TaskList]
+[ModuleList] ..> [Storage]
+[TaskList] ..> [Storage]
+@enduml
