@@ -41,6 +41,12 @@ public class Event {
         if (endTime != event.endTime) {
             return false;
         }
+        assert (name.equals(event.name)) : "The names are different";
+        assert (title.equals(event.title)) : "The titles are different";
+        assert (day.equals(event.day)) : "The days are different";
+        assert (mode.equals(event.mode)) : "The modes are different";
+        assert (startTime == event.startTime) : "The start times are different";
+        assert (endTime == event.endTime) : "The end times are different";
         return true;
     }
 

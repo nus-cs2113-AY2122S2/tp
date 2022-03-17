@@ -71,17 +71,21 @@ public class Parser {
     public Command prepareAdd() {
         try {
             String[] eventDescription = splitArguments();
-            checkValidityOfArguments(eventDescription);
+            checkNonNullValues(eventDescription);
+
             String day = eventDescription[DAY_INDEX].toLowerCase();
             int startTime = Integer.parseInt(eventDescription[STARTTIME_INDEX]);
             int endTime = Integer.parseInt(eventDescription[ENDTIME_INDEX]);
             String mode = eventDescription[MODE_INDEX].toLowerCase();
+
             checkDay(day);
             checkTime(startTime, endTime);
             checkMode(mode);
+
             String name = eventDescription[NAME_INDEX];
             String title = eventDescription[TITLE_INDEX];
             return new AddCommand(name, title, day, startTime, endTime, mode);
+
         } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS);
         } catch (MissingValueException mve) {
@@ -92,6 +96,9 @@ public class Parser {
             return new CommandResult(ERROR_INVALID_DAY);
         } catch (InvalidModeException ime) {
             return new CommandResult(ERROR_INVALID_MODE);
+        } catch (AssertionError ae) {
+            logger.log(Level.INFO, "Assertion Error");
+            return new CommandResult(ae.getMessage());
         }
     }
 
@@ -120,11 +127,12 @@ public class Parser {
      * @param eventDescription Array of user's input
      * @throws MissingValueException If at least one parameter has no value
      */
-    private void checkValidityOfArguments(String[] eventDescription) throws MissingValueException {
+    private void checkNonNullValues(String[] eventDescription) throws MissingValueException {
         for (int i = 0; i < MODE_INDEX; i++) {
             if (eventDescription[i].length() == 0) {
                 throw new MissingValueException();
             }
+            assert (eventDescription[i].length() != 0) : "The parameters have non-null values";
         }
     }
 
@@ -209,6 +217,8 @@ public class Parser {
             if (str.contains(HEADINGS[i])) {
                 return i;
             }
+            assert !str.contains(HEADINGS[i]) :
+                    String.format("String contains %s", HEADINGS[i]);
         }
         return -1;
     }
