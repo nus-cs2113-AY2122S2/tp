@@ -19,15 +19,17 @@ public class UpdateCommand extends Command {
      * constructor for UpdateCommand. Initialises successMessage and usageReminder from Command
      */
     public UpdateCommand() {
-        successMessage = "Equipment successfully updated: %1$s for serial number %2$s";
+        successMessage = "Equipment successfully updated for serial number %1$s,"
+                + System.lineSeparator()
+                + "Updated details are: %2$s";
         usageReminder = COMMAND_WORD + COMMAND_DESCRIPTION;
     }
 
     public CommandResult execute() {
         ArrayList<Pair<String, String>> updatePairs = generateUpdatePairs();
-        successMessage = equipmentManager.updateEquipment(serialNumber, updatePairs);
+        equipmentManager.updateEquipment(serialNumber, updatePairs);
 
-        return new CommandResult(successMessage);
+        return new CommandResult(String.format(successMessage, serialNumber, generateUpdateString()));
     }
 
     public String getSerialNumber() {
@@ -61,24 +63,42 @@ public class UpdateCommand extends Command {
     public ArrayList<Pair<String, String>> generateUpdatePairs() {
         ArrayList<Pair<String, String>> pairs = new ArrayList<>();
         if (updateName != null) {
-            pairs.add(new Pair<String, String>("itemName", updateName));
+            pairs.add(new Pair<>("itemName", updateName));
         }
         if (type != null) {
-            pairs.add(new Pair<String, String>("type", type));
+            pairs.add(new Pair<>("type", type));
         }
         if (cost != null) {
-            pairs.add(new Pair<String, String>("cost", cost));
+            pairs.add(new Pair<>("cost", cost));
         }
         if (purchaseDate != null) {
-            pairs.add(new Pair<String, String>("purchasedDate", purchaseDate));
+            pairs.add(new Pair<>("purchasedDate", purchaseDate));
         }
         if (purchaseFrom != null) {
-            pairs.add(new Pair<String, String>("purchasedFrom", purchaseFrom));
-        }
-        if (serialNumber != null) {
-            pairs.add(new Pair<String, String>("serialNumber", serialNumber));
+            pairs.add(new Pair<>("purchasedFrom", purchaseFrom));
         }
 
         return pairs;
+    }
+
+    public String generateUpdateString(){
+        String updateDetails = "";
+        if (updateName != null) {
+            updateDetails = updateDetails + System.lineSeparator() + "New name: " + updateName;
+        }
+        if (type != null) {
+            updateDetails = updateDetails + System.lineSeparator() + "New type: " + type;
+        }
+        if (cost != null) {
+            updateDetails = updateDetails + System.lineSeparator() + "New cost: " + cost;
+        }
+        if (purchaseDate != null) {
+            updateDetails = updateDetails + System.lineSeparator() + "New purchase date: " + purchaseDate;
+        }
+        if (purchaseFrom != null) {
+            updateDetails = updateDetails + System.lineSeparator() + "New purchased from: " + purchaseFrom;
+        }
+
+        return updateDetails;
     }
 }
