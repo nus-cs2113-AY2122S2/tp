@@ -9,9 +9,13 @@ import java.util.ArrayList;
 public class Group {
 
     private ArrayList<Person> personList;
+    private String groupName;
+    private int groupId;
 
-    public Group(ArrayList<Person> personList) {
+    public Group(ArrayList<Person> personList, String groupName, int groupId) {
         this.personList = personList;
+        this.groupName = groupName;
+        this.groupId = groupId;
     }
 
     public ArrayList<Person> getPersonList() {
@@ -53,10 +57,6 @@ public class Group {
         if (deleteTarget == null) {
             throw new InvalidDataException(Message.ERROR_GROUP_PERSON_NOT_IN_LIST);
         }
-    }
-
-    public String getGroupSummary() {
-        return "";
     }
 
     @Override
