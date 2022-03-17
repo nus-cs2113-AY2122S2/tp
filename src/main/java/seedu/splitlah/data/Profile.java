@@ -150,6 +150,10 @@ public class Profile {
     public void addGroup(Group group) {
         groupList.add(group);
     }
+    public void removeGroup(int groupId) throws InvalidDataException {
+        Group groupToBeRemoved = getGroup(groupId);
+        sessionList.remove(groupToBeRemoved);
+    }
      * Assumption: Function is called when a new Session object is being created without errors.
      *
      * @return An integer that represents the new session unique identifier.
