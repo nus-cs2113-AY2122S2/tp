@@ -1,11 +1,11 @@
 Invalid Command
 Invalid Command
 Invalid Command
-Error! AGE must be integer.
+Error! Invalid Command -> Availability NAME @ INT AGE
 Noted!
 [ sgg ]: 17, <Enter Availability>
 Error! AGE must be integer.
-Error! AGE must be integer.
+Error! Invalid Command -> Availability NAME @ INT AGE
 ======== Housekeeper List ========
 1. [ sgg ]: 17, <Enter Availability>
 ======== End of the list ========
