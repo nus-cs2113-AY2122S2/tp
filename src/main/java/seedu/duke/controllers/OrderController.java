@@ -41,7 +41,7 @@ public class OrderController extends Controller {
             printReceipt();
             break;
         default:
-            System.out.println("Unknown choice!");
+            assert false: "Unknown choice!";
             break;
         }
         System.out.println(this);
