@@ -11,7 +11,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(ItemList itemList, Ui ui) {
-        ui.showMessages("Here are the tasks in your list:");
+        ui.showMessages("Here are the items in your list:");
         for (int i = 0; i < itemList.getSize(); i++) {
             ui.showMessages(String.valueOf(i + 1) + "." + itemList.getItem(i));
         }

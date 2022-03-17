@@ -6,6 +6,12 @@ import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.ui.Ui;
 
 public class DescCommand extends Command {
+    public static final String COMMAND_WORD = "desc";
+    public static final String COMMAND_NAME = "Describe Item";
+    public static final String USAGE_MESSAGE = "Describes the function of an item";
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " [item number]";
+    public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + ":\n"
+            + "[Command Format] " + COMMAND_FORMAT + "\n";
     private final int index;
 
     public DescCommand(int index) {
