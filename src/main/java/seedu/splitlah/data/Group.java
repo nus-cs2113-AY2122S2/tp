@@ -17,6 +17,8 @@ public class Group {
     private String groupName;
     private int groupId;
 
+    private static final String PERSON_LIST_HEADER = "Participants";
+    private static final int ZERO_INDEXING_OFFSET = 1;
 
     /**
      * Constructs a Group object.
@@ -43,7 +45,7 @@ public class Group {
     /**
      * Returns the group's Id.
      *
-     * @return An integer object containing the Id of the group.
+     * @return An integer object containing the id of the group.
      */
     public int getGroupId() {
         return groupId;
@@ -58,15 +60,34 @@ public class Group {
     public ArrayList<Person> getPersonList() {
         return personList;
     }
-    
+
+
+    /**
+     * Checks whether the Group object has at least one participant.
+     *
+     * @return  True if the Group object has at least one participant,
+     *          False otherwise.
+     */
     public boolean isEmptyGroup() {
         return personList.isEmpty();
     }
 
+    /**
+     * Adds a Person object to the group.
+     *
+     * @param person A Person object.
+     */
     public void addPerson(Person person) {
         personList.add(person);
     }
 
+    /**
+     * Checks if a Person object is contained in the Group object.
+     *
+     * @param person  A Person object.
+     * @return  True if a particular Person object is in the Group object,
+     *          False otherwise.
+     */
     public boolean hasPerson(Person person) {
         if (personList.isEmpty()) {
             return false;
@@ -80,6 +101,12 @@ public class Group {
         return false;
     }
 
+    /**
+     * Removes a Person object from the Group object.
+     *
+     * @param person  A Person object.
+     * @throws InvalidDataException  If the Person object is not in the Group object.
+     */
     public void removePerson(Person person) throws InvalidDataException {
         if (personList.isEmpty()) {
             throw new InvalidDataException(Message.ERROR_GROUP_EMPTY_PERSON_LIST);
@@ -96,8 +123,32 @@ public class Group {
         }
     }
 
+
+    /**
+     * Returns the numer of participants in the group.
+     *
+     * @return  An integer object that represents that total number of participants in the group.
+     */
+    public int personCount() {
+        return personList.size();
+    }
+
+    /**
+     * Returns a String object describing the Group object.
+     *
+     * @return A String object containing a description of the Group object.
+     */
     @Override
     public String toString() {
-        return "";
+        if (personList.isEmpty()) {
+            return Message.ERROR_GROUP_EMPTY_PERSON_LIST;
+        }
+
+        StringBuilder summaryString = new StringBuilder(PERSON_LIST_HEADER);
+        for (int i = 0; i < personList.size(); i++) {
+            String personName = personList.get(i).getName();
+            summaryString.append("\n ").append(i + ZERO_INDEXING_OFFSET).append(". ").append(personName);
+        }
+        return summaryString.toString();
     }
 }
