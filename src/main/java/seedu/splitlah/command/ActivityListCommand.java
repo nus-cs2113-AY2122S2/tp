@@ -29,6 +29,7 @@ public class ActivityListCommand extends Command {
     private static final String LIST_CLOSER_POSTPEND = ")";
 
     public ActivityListCommand(int sessionId) {
+        assert sessionId > 0 : Message.ASSERT_ACTIVITYLIST_SESSION_ID_LESS_THAN_ONE;
         this.sessionId = sessionId;
     }
 
