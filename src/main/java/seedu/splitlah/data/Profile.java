@@ -113,7 +113,11 @@ public class Profile {
     }
 
     /**
-     * Returns a new session id for session object to be created.
+     * Checks if there is a Group object that exists with the same name.
+     *
+     * @param groupName A String object that represents the group name.
+     * @return true if a group exists with the same name, false otherwise.
+     */
     public boolean hasGroupName(String groupName) {
         if (groupList.isEmpty()) {
             return false;
@@ -125,6 +129,13 @@ public class Profile {
         }
         return false;
     }
+
+    /**
+     * Checks if there is a Group object that exists with the specified group unique identifier.
+     *
+     * @param groupId An integer that uniquely identifies a group.
+     * @return true if a group exists with the specified group unique identifier, false otherwise.
+     */
     public boolean hasGroupId(int groupId) {
         if (groupList.isEmpty()) {
             return false;
@@ -136,6 +147,15 @@ public class Profile {
         }
         return false;
     }
+
+    /**
+     * Returns the Group object via the group unique identifier specified by the user.
+     *
+     * @param groupId An integer that uniquely identifies a Group object.
+     * @return A Group object with the matching group unique identifier.
+     * @throws InvalidDataException If there are no groups stored or
+     *                              if the group unique identifier specified was not found.
+     */
     public Group getGroup(int groupId) throws InvalidDataException {
         if (groupList.isEmpty()) {
             throw new InvalidDataException(Message.ERROR_PROFILE_GROUP_LIST_EMPTY);
@@ -145,18 +165,39 @@ public class Profile {
                 return group;
             }
         }
-        throw new InvalidDataException(Message.ERROR_PROFILE_SESSION_NOT_IN_LIST);
+        throw new InvalidDataException(Message.ERROR_PROFILE_GROUP_NOT_IN_LIST);
     }
+
+    /**
+     * Adds a Group object to the list of groups.
+     *
+     * @param group A Group object that is to be added.
+     */
     public void addGroup(Group group) {
         groupList.add(group);
     }
+
+    /**
+     * Removes a Group object with the specified group unique identifier from the list of groups.
+     *
+     * @param groupId An integer that uniquely identifies a Group object.
+     */
     public void removeGroup(int groupId) throws InvalidDataException {
         Group groupToBeRemoved = getGroup(groupId);
         sessionList.remove(groupToBeRemoved);
     }
+
+    /**
+     * Returns the list of groups stored in profile.
+     *
+     * @return An Arraylist of Group objects.
+     */
     public ArrayList<Group> getGroupList() {
         return groupList;
     }
+
+    /**
+     * Returns a new session unique identifier for Session object to be created.
      * Assumption: Function is called when a new Session object is being created without errors.
      *
      * @return An integer that represents the new session unique identifier.
@@ -194,11 +235,23 @@ public class Profile {
     public int getActivityIdTracker() {
         return activityIdTracker;
     }
+
+    /**
+     * Returns a new group unique identifier for Group object to be created.
+     * Assumption: Function is called when a new Group object is being created without errors.
+     *
+     * @return An integer that represents the new group unique identifier.
+     */
     public int getNewGroupId() {
         int newGroupId = groupIdTracker;
         groupIdTracker += 1;
         return newGroupId;
     }
+
+    /**
+     * Returns the value of the current group unique identifier that is tracked.
+     * @return An integer that represents the current group unique identifier.
+     */
     public int getGroupIdTracker() {
         return groupIdTracker;
     }
