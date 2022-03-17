@@ -39,7 +39,7 @@ public class Reminder {
      * Prints tasks that need to be done today
      * with reference to user local machine date.
      */
-    public void showDailyTask() {
+    public ArrayList<Task> showDailyTask() {
         ArrayList<Task> filteredDailyTasks = getFilteredDailyTasks();
 
         if (filteredDailyTasks.isEmpty()) {
@@ -51,13 +51,14 @@ public class Reminder {
             }
         }
         ui.showLine();
+        return filteredDailyTasks;
     }
 
     /**
      * Prints tasks that is due in the current week
      * with reference to user local machine date.
      */
-    public void showWeeklyTask() {
+    public ArrayList<Task> showWeeklyTask() {
         LocalDate nextWeekDate = todayDate.plusDays(7);
 
         ArrayList<Task> filteredThisWeekTasks = (ArrayList<Task>) tasks.stream()
@@ -75,6 +76,7 @@ public class Reminder {
             }
         }
         ui.showLine();
+        return filteredThisWeekTasks;
     }
 
     private void addDailyTaskToFilteredDailyTasks(ArrayList<Task> filteredDailyTasks, Task task) {
