@@ -63,8 +63,8 @@ public class Group {
     /**
      * Checks whether the Group object has at least one participant.
      *
-     * @return  true if the Group object has at least one participant,
-     *          false otherwise.
+     * @return true if the Group object has at least one participant,
+     *         false otherwise.
      */
     public boolean isGroupEmpty() {
         return personList.isEmpty();
@@ -83,8 +83,8 @@ public class Group {
      * Checks if a Person object is contained in the Group object.
      *
      * @param person A Person object.
-     * @return  true if a particular Person object is in the Group object,
-     *          false otherwise.
+     * @return true if a particular Person object is in the Group object,
+     *         false otherwise.
      */
     public boolean hasPerson(Person person) {
         if (personList.isEmpty()) {
@@ -121,7 +121,7 @@ public class Group {
     /**
      * Removes a Person object from the Group object.
      *
-     * @param  personName A String object that represents the person's name.
+     * @param personName A String object that represents the person's name.
      * @throws InvalidDataException If the Person is not in the Group object.
      */
     public void removePerson(String personName) throws InvalidDataException {
