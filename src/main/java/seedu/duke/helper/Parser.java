@@ -2,7 +2,6 @@ package seedu.duke.helper;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,19 +29,6 @@ public class Parser {
         }
     }
 
-
-    public static ArrayList<String> parseViewDoctor(String description) {
-        //no specific doctor
-        if (description == null) {
-            return null;
-        }
-
-        //if specific doctor
-        ArrayList<String> parameters = new ArrayList<String>();
-        parameters.add(description);
-        return parameters;
-    }
-
     public static String[] parseAddDoctor(String parameters) {
         String[] addDoctorParameters = parameters.split(",");
         for (int i = 0; i < addDoctorParameters.length; i++) {
@@ -60,7 +46,7 @@ public class Parser {
     }
 
     private static boolean validateAddDoctor(String[] parameters) {
-        boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters,0,6));
+        boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
         //validate full name cause specialization is also j a name
         if (!validateFullName(parameters[6])) {
             System.out.println("Specialization must be a name");
@@ -72,13 +58,15 @@ public class Parser {
 
     public static String[] parseAddMedicine(String parameters) {
         String[] medicineParameters = parameters.trim().split(",");
+        for (int i = 0; i < medicineParameters.length; i++) {
+            medicineParameters[i] = medicineParameters[i].trim();
+        }
         if (medicineParameters.length == 5 && validateMedicine(medicineParameters)) {
             return medicineParameters;
         } else {
             return null;
         }
     }
-
 
     private static boolean validateAddPerson(String[] parameters) {
         boolean isValid = true;
@@ -113,7 +101,7 @@ public class Parser {
     }
 
     private static boolean validateAddPatient(String[] parameters) {
-        boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters,0,6));
+        boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
         if (!validateAdmissionDate(parameters[6])) {
             System.out.println("Date of birth must be in YYYY-MM-DD format. "
                     + "It cannot be before 1980-01-01 or be today and after.");
