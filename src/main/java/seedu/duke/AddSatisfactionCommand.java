@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 /**
  * Class that implements execution behavior for adding a Satisfaction
  * object (e.g. when user types "Add Satisfaction [customerName] [satisfactionValue]").
@@ -13,6 +16,7 @@ package seedu.duke;
 public class AddSatisfactionCommand extends Command {
     private Satisfaction satisfaction;
     private Ui ui = new Ui();
+    private static Logger logger = Logger.getLogger("satisfactionLogger");
 
     /**
      * Extracts the customer name and satisfaction value from user input,
@@ -29,12 +33,18 @@ public class AddSatisfactionCommand extends Command {
             customerName = extractCustomerName(commandStringWithoutCommand);
             satisfactionValue = extractSatisfactionValue(commandStringWithoutCommand);
         } catch (EmptySatisfactionCustomerException e) {
+            logger.log(Level.WARNING, "Customer name was found to be empty.");
             throw new EmptySatisfactionCustomerException();
         } catch (EmptySatisfactionValueException e) {
+            logger.log(Level.WARNING, "Satisfaction value was found to be empty.");
             throw new EmptySatisfactionValueException();
         } catch (InvalidSatisfactionValueException e) {
+            logger.log(Level.WARNING, "Satisfaction value was found to be invalid.");
             throw new InvalidSatisfactionValueException();
         }
+        assert (!customerName.isEmpty()) : "The customer's name should be non-empty.";
+        assert (satisfactionValue <= 5 && satisfactionValue >= 1) : "The satisfaction value must be an integer between"
+                + "1 and 5.";
         Satisfaction satisfaction = new Satisfaction(customerName, satisfactionValue);
         setSatisfaction(satisfaction);
     }
