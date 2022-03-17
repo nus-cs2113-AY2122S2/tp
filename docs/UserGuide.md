@@ -13,7 +13,7 @@ CSProj Planner is a desktop app to help Computer Science students manage their p
    - [print all projects](#print-all-projects-listprojects)
    - [add todo to a project](#add-todo-to-a-project-todo)
    - [mark todo as done](#mark-todo-as-done-mark)
-   - [add a deadline to a project](#add-a-deadline-to-a-project)
+   - [add a deadline to a project](#add-a-deadline-to-a-project-adddeadline)
    - [view](#view-details-of-a-project-view)
    - [exit](#exit-exit)
    
