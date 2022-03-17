@@ -40,9 +40,16 @@ class ProjectListTest {
     }
 
     @Test
-
     void markTodoAsDone_negativeIndex() {
         String targetIndexString = "-1";
         assertThrows(NegativeIndexException.class, () -> defaultProjectList.markTodoAsDone("1", targetIndexString));
     }
+
+    @Test
+    void deleteProjects() { //aims to test the deletion of projects
+        emptyProjectList.addProject(PROJECT1NAME);
+        emptyProjectList.deleteProject(PROJECT1NAME);
+        assertEquals(0, emptyProjectList.getProjectNo());
+    }
+
 }
