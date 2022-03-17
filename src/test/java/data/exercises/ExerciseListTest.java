@@ -2,15 +2,18 @@ package data.exercises;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import storage.LogHandler;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ExerciseListTest {
-    ExerciseList exerciseList = new ExerciseList();
+    ExerciseList exerciseList;
 
     @BeforeEach
     void setUp() {
+        LogHandler.startLogHandler();
+        exerciseList = new ExerciseList();
         String firstSampleExercise = "push up";
         String secondSampleExercise = "pull up";
         exerciseList.addExerciseToList(firstSampleExercise);

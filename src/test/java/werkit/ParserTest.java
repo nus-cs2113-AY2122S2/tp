@@ -10,6 +10,7 @@ import data.workouts.WorkoutList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import storage.FileManager;
+import storage.LogHandler;
 
 import java.io.IOException;
 
@@ -25,6 +26,7 @@ class ParserTest {
 
     @BeforeEach
     void setUp() {
+        LogHandler.startLogHandler();
         this.parser = new Parser(ui, exerciseList, workoutList, fileManager);
     }
 

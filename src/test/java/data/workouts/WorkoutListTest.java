@@ -4,6 +4,7 @@ import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import storage.LogHandler;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -13,11 +14,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class WorkoutListTest {
-    ExerciseList exerciseList = new ExerciseList();
-    WorkoutList wl = new WorkoutList(exerciseList);
+    ExerciseList exerciseList;
+    WorkoutList wl;
 
     @BeforeEach
     void setUp() {
+        LogHandler.startLogHandler();
+        exerciseList = new ExerciseList();
+        wl = new WorkoutList(exerciseList);
+
         exerciseList.addExerciseToList("push up");
         exerciseList.addExerciseToList("pull up");
         exerciseList.addExerciseToList("sit up");
