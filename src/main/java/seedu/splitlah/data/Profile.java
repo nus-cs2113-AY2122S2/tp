@@ -114,6 +114,17 @@ public class Profile {
 
     /**
      * Returns a new session id for session object to be created.
+    public boolean hasGroupName(String groupName) {
+        if (groupList.isEmpty()) {
+            return false;
+        }
+        for (Group group : groupList) {
+            if (group.getGroupName().equalsIgnoreCase(groupName)) {
+                return true;
+            }
+        }
+        return false;
+    }
      * Assumption: Function is called when a new Session object is being created without errors.
      *
      * @return An integer that represents the new session unique identifier.
