@@ -1,6 +1,13 @@
 package arcs.parser;
 
-import arcs.commands.*;
+
+import arcs.commands.AddRouteCommand;
+import arcs.commands.Command;
+import arcs.commands.ExitCommand;
+import arcs.commands.ListRouteCommand;
+import arcs.commands.DeleteRouteCommand;
+import arcs.commands.FindRouteCommand;
+import arcs.commands.UndefinedCommand;
 
 public class Parser {
     public Command parseCommand(String userInput) {
@@ -37,7 +44,7 @@ public class Parser {
             return new AddRouteCommand(null, null, null, null, null, 0);
         }
         String[] args = argumentLine.split(" ");
-        String fID = null;
+        String fId = null;
         String date = null;
         String time = null;
         String from = null;
@@ -56,7 +63,7 @@ public class Parser {
             String value = argSplit[1].trim();
             switch (field) {
             case "fid":
-                fID = value;
+                fId = value;
                 break;
             case "fd":
                 date = value;
@@ -77,7 +84,7 @@ public class Parser {
                 break;
             }
         }
-        return new AddRouteCommand(fID, date, time, from, to, capacity);
+        return new AddRouteCommand(fId, date, time, from, to, capacity);
     }
 
     public Command prepareDeleteRouteCommand(String argumentLine) {
