@@ -72,6 +72,12 @@ public class ActivityCreateCommand extends Command {
      */
     public ActivityCreateCommand(int sessionId, String activityName, double totalCost, String payer,
                                  String[] involvedList, double[] costList, int gst, int serviceCharge) {
+        assert sessionId > 0 : Message.ASSERT_ACTIVITYCREATE_SESSION_ID_LESS_THAN_ONE;
+        assert activityName != null : Message.ASSERT_ACTIVITYCREATE_ACTIVITY_NAME_MISSING;
+        assert totalCost > 0 : Message.ASSERT_ACTIVITYCREATE_TOTAL_COST_LESS_THAN_ONE;
+        assert payer != null : Message.ASSERT_ACTIVITYCREATE_PAYER_NAME_MISSING;
+        assert involvedList != null : Message.ASSERT_ACTIVITYCREATE_INVOLVED_LIST_ARRAY_EMPTY;
+        assert costList != null : Message.ASSERT_ACTIVITYCREATE_COST_LIST_ARRAY_EMPTY;
         this.sessionId = sessionId;
         this.activityName = activityName;
         this.totalCost = totalCost;
