@@ -194,4 +194,9 @@ public class Profile {
     public int getActivityIdTracker() {
         return activityIdTracker;
     }
+    public int getNewGroupId() {
+        int newGroupId = groupIdTracker;
+        groupIdTracker += 1;
+        return newGroupId;
+    }
 }
