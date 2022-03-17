@@ -1,7 +1,10 @@
 package commands;
 
 import data.exception.IllegalValueException;
+import data.record.Product;
 import data.record.Record;
+import data.record.Subscription;
+
 
 /**
  * Adds a record to the RecordManager.
