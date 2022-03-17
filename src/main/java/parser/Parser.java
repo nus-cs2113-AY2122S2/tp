@@ -3,6 +3,10 @@ package parser;
 import commands.*;
 import data.exception.IllegalValueException;
 
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
@@ -10,8 +14,6 @@ import static common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
  * Parses user input.
  */
 public class Parser {
-
-
     /**
      * Parses user input into command for execution.
      *
@@ -24,27 +26,27 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = words[0];
-        final String arguments = userInput.replaceFirst(commandWord, "").trim();
+        final String commandWord = words[0].toLowerCase(Locale.ENGLISH);
+        final String arguments = words[1].trim();
 
         switch (commandWord) {
+        case AddCommand.COMMAND_WORD:
+            return prepareAddCommand(arguments);
 
-            case AddCommand.COMMAND_WORD:
-                return prepareAddCommand(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return prepareDeleteCommand(arguments);
 
-            case DeleteCommand.COMMAND_WORD:
-                return prepareDeleteCommand(arguments);
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
-            case HelpCommand.COMMAND_WORD:
-                return new HelpCommand();
-            default:
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        default:
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
     }
 
@@ -55,18 +57,81 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareAddCommand(String args) {
-        String[] parts = args.split("i/");
-        // Validate arg string format
-        if (parts.length != 2) {
+        String[] words = args.trim().split(" ", 2);  // split the input into command and arguments
+
+        if (words.length == 0) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
+        final String category = words[0].toLowerCase(Locale.ENGLISH); //either product or subscription
+        final String arguments = words[1].trim();
+
+        // product has "t/PRODUCT TYPE"
+        // subscription has "r/RENEWAL"
+
+        // check that the common fields "i/ITEM_NAME p/PRICE d/DATE" are present
+        if (!arguments.contains("i/") || !arguments.contains("p/") || !arguments.contains("d/")) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-        try {
-            return new AddCommand(
-                    parts[0].trim(),
-                    parts[1].trim()
-            );
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
+
+        Matcher matcher;
+
+        // extracts item name
+        Pattern itemNamePattern = Pattern.compile("i/.*?(?=( [pdtr]/)|$)");
+        matcher = itemNamePattern.matcher(words[1]);
+        String name = matcher.group(1).replace("i/","");
+        words[1] = words[1].replace(matcher.group(1),"");
+
+        // extracts price
+        Pattern pricePattern = Pattern.compile("p/.*?(?=( [pdtr]/)|$)");
+        matcher = pricePattern.matcher(words[1]);
+        String priceString = matcher.group(1);
+        Double price = Double.parseDouble(priceString.replace("p/",""));
+        words[1] = words[1].replace(matcher.group(1),"");
+
+        // extracts date
+        Pattern datePattern = Pattern.compile("d/.*?(?=( [pdtr]/)|$)");
+        matcher = datePattern.matcher(words[1]);
+        String date = matcher.group(1).replace("d/","");
+        words[1] = words[1].replace(matcher.group(1),"");
+
+        switch (category) {
+        case "product":
+            //make sure that the user input a product type
+            if (!words[1].contains("t/")) {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            }
+
+            // extracts product type
+            Pattern productTypePattern = Pattern.compile("d/.*?(?=( [pdtr]/)|$)");
+            matcher = productTypePattern.matcher(words[1]);
+            String productType = matcher.group(1).replace("d/","");
+
+            try {
+                AddCommand addCmd = new AddCommand();
+                addCmd.AddProductCommand(name, price, date, productType); //here the function should return a command
+            } catch (IllegalValueException ive) {
+                return new IncorrectCommand(ive.getMessage());
+            }
+        case "subscription":
+            //make sure that the user input a renewal date
+            if (!words[1].contains("r/")) {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            }
+
+            // extracts product type
+            Pattern renewalDatePattern = Pattern.compile("d/.*?(?=( [pdtr]/)|$)");
+            matcher = renewalDatePattern.matcher(words[1]);
+            String renewalDate = matcher.group(1).replace("d/","");
+
+            try {
+                return new AddSubscriptionCommand(name, price, date, renewalDate); //do i split AddCommand into Add subscription command and Add product Command
+            } catch (IllegalValueException ive) {
+                return new IncorrectCommand(ive.getMessage());
+            }
+        default:
+            System.out.println("Something went wrong!");
+            return new IncorrectCommand("Something went wrong!");
         }
     }
 
