@@ -31,7 +31,7 @@ public class Parser {
     public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("s/(?<itemName>.+)");
     // ARGUMENT_FORMAT extracts first n-1 tags
     public static final Pattern ARGUMENT_FORMAT = Pattern.compile(
-            "((?:s|n|t|c|pf|pd)\\/[\\w\\s\\-]+?)\\s+(?=sn|n|t|c|pf|pd)"
+            "((?:s|n|t|c|pf|pd)\\/[\\w\\s\\-]+?)\\s+(?=s|n|t|c|pf|pd)"
     );
     // ARGUMENT_TRAILING_FORMAT extracts last tag
     public static final Pattern ARGUMENT_TRAILING_FORMAT = Pattern.compile(
@@ -124,6 +124,7 @@ public class Parser {
         resultArrayList.add(matcher.group("arguments"));
         return resultArrayList;
     }
+
     /**
      * Prepare arguments for AddCommand by splitting up the arguments into different parts
      * <p>
