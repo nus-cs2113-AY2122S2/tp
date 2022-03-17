@@ -74,7 +74,7 @@ public class Parser {
         }
 
         final String category = words[0].toLowerCase(Locale.ENGLISH); //either product or subscription
-        final String arguments = args.replaceFirst(category, "").trim();
+        String arguments = words[1].trim();
 
         // product has "t/PRODUCT TYPE"
         // subscription has "r/RENEWAL"
@@ -87,37 +87,41 @@ public class Parser {
         Matcher matcher;
 
         // extracts item name
-        Pattern itemNamePattern = Pattern.compile("i/.*?(?=( [pdtr]/)|$)");
-        matcher = itemNamePattern.matcher(words[1]);
-        String name = matcher.group(1).replace("i/","");
-        words[1] = words[1].replace(matcher.group(1),"");
+        Pattern itemNamePattern = Pattern.compile("i/.*?(?=( [ipdtr]/)|$)");
+        matcher = itemNamePattern.matcher(arguments);
+        matcher.find();
+        String name = matcher.group(0).replace("i/","");
+        arguments = arguments.replace(matcher.group(0),"");
 
         // extracts price
-        Pattern pricePattern = Pattern.compile("p/.*?(?=( [pdtr]/)|$)");
-        matcher = pricePattern.matcher(words[1]);
-        String priceString = matcher.group(1);
-        Double price = Double.parseDouble(priceString.replace("p/",""));
-        words[1] = words[1].replace(matcher.group(1),"");
+        Pattern pricePattern = Pattern.compile("p/.*?(?=( [ipdtr]/)|$)");
+        matcher = pricePattern.matcher(arguments);
+        matcher.find();
+        String priceString = matcher.group(0);
+        Double price = Double.parseDouble(priceString.replaceAll("[^\\d.]", ""));
+        arguments = arguments.replace(matcher.group(0),"");
 
         // extracts date
-        Pattern datePattern = Pattern.compile("d/.*?(?=( [pdtr]/)|$)");
-        matcher = datePattern.matcher(words[1]);
-        String date = matcher.group(1).replace("d/","");
-        words[1] = words[1].replace(matcher.group(1),"");
+        Pattern datePattern = Pattern.compile("d/.*?(?=( [ipdtr]/)|$)");
+        matcher = datePattern.matcher(arguments);
+        matcher.find();
+        String date = matcher.group(0).replace("d/","");
+        arguments = arguments.replace(matcher.group(0),"");
 
         AddCommand addCmd;
 
         switch (category) {
         case "product":
             //make sure that the user input a product type
-            if (!words[1].contains("t/")) {
+            if (!arguments.contains("t/")) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
 
             // extracts product type
-            Pattern productTypePattern = Pattern.compile("d/.*?(?=( [pdtr]/)|$)");
-            matcher = productTypePattern.matcher(words[1]);
-            String productType = matcher.group(1).replace("d/","");
+            Pattern productTypePattern = Pattern.compile("t/.*?(?=( [ipdtr]/)|$)");
+            matcher = productTypePattern.matcher(arguments);
+            matcher.find();
+            String productType = matcher.group(0).replace("t/","");
 
             addCmd = new AddCommand();
             try {
@@ -129,14 +133,15 @@ public class Parser {
 
         case "subscription":
             //make sure that the user input a renewal date
-            if (!words[1].contains("r/")) {
+            if (!arguments.contains("r/")) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
 
             // extracts product type
-            Pattern renewalDatePattern = Pattern.compile("d/.*?(?=( [pdtr]/)|$)");
-            matcher = renewalDatePattern.matcher(words[1]);
-            String renewalDate = matcher.group(1).replace("d/","");
+            Pattern renewalDatePattern = Pattern.compile("r/.*?(?=( [ipdtr]/)|$)");
+            matcher = renewalDatePattern.matcher(arguments);
+            matcher.find();
+            String renewalDate = matcher.group(0).replace("r/","");
 
             addCmd = new AddCommand();
             try {
