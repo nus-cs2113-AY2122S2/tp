@@ -1,6 +1,7 @@
 package seedu.allonus.modules;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -21,6 +22,7 @@ public class StudyManagerTest {
     private Module ee4204;
 
     ArrayList<Module> testList = new ArrayList<>();
+    StudyManager studyManager;
 
     /**
      * Creates three new module objects and adds them to the test module list.
@@ -34,15 +36,17 @@ public class StudyManagerTest {
         testList.add(cs2113);
         testList.add(cs3244);
         testList.add(ee4204);
+
+        studyManager = new StudyManager();
     }
 
     /**
      * Tests add module function of Study Manager class.
      * Ensures that the contents of the module list is equal to the test list.
      */
-    @Test
+    @BeforeEach
     public void testAddModule() {
-        StudyManager studyManager = new StudyManager();
+
 
         String userInputCs2113 = "add m/CS2113 c/lec d/Friday t/4pm-6pm";
         String userInputCs3244 = "add m/CS3244 c/tut d/Monday t/2pm-3pm";
@@ -66,7 +70,6 @@ public class StudyManagerTest {
      */
     @Test
     public void testDeleteModule() {
-        StudyManager studyManager = new StudyManager();
         studyManager.deleteModule(USER_INPUT_FOR_DELETE);
 
         // after deletion cs2113 should not be in the list
