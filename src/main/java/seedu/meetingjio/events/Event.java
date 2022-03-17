@@ -77,6 +77,8 @@ public class Event {
         boolean totalOverlap = event.startTime <= startTime
                 && event.endTime >= endTime;
         if (startTimeOverlap || endTimeOverlap || totalOverlap) {
+            assert day.equals(event.day): "No overlap as events are on different days\n";
+            assert name.equals(event.name): "No overlap as events are for different people\n";
             return true;
         }
         return false;
