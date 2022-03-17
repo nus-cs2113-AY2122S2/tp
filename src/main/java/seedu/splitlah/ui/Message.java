@@ -176,6 +176,13 @@ public abstract class Message {
                     + "Please rectify and try again.";
     public static final String ASSERT_ACTIVITYCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
             "Name duplicates exists but not detected.";
+    public static final String LOGGER_ACTIVITYCREATE_ACTIVITY_ADDED =
+            "An Activity object was succesfully added into the list of activities with Id: ";
+    public static final String LOGGER_ACTIVITYCREATE_FAILED_ADDING_ACTIVITY =
+            "An Activity object failed to be added into the list of activities due to the following error: ";
+    public static final String LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST =
+            "An Activity object failed to be added into the list of activities because there are duplicate names in"
+                    + "the involved list.";
 
     // Activity List Command
     public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =

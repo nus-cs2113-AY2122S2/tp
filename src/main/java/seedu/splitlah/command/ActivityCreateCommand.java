@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
 
 /**
  * Represents a command that creates an Activity object from user input and stores it in the Session object.
@@ -332,6 +333,7 @@ public class ActivityCreateCommand extends Command {
         boolean hasDuplicates = hasNameDuplicates();
         if (hasDuplicates) {
             manager.getUi().printlnMessage(Message.ERROR_ACTIVITYCREATE_DUPLICATE_NAME);
+            manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST);
             return;
         }
         try {
@@ -344,8 +346,11 @@ public class ActivityCreateCommand extends Command {
             Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(activity);
             manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + activity);
+            manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_ACTIVITY_ADDED + activityId);
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
+            manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_FAILED_ADDING_ACTIVITY
+                    + "\n" + e.getMessage());
         }
     }
 
