@@ -679,7 +679,7 @@ class ParserTest {
      * A valid positive numeric value has at most twelve digits before the decimal point and at most 2 decimal places.
      */
     @Test
-    void parseTotalCost_delimiterExistsArgumentPositive_totalCost() {
+    void parseTotalCost_delimiterExistsArgumentValid_totalCost() {
         // Testing numerical limits
         String argumentWithDelimiterAndValidArgumentTestLimit =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 123456789012.99";
@@ -706,6 +706,97 @@ class ParserTest {
         try {
             double output = Parser.parseTotalCost(argumentWithDelimiterAndValidArgumentTestNormal);
             assertEquals(10.70, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+
+    // parseCostList()
+    @Test
+    void parseCostList_missingDelimiter_exceptionThrown() {
+        String argumentWithoutCostListDelimiter = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie cl 10 10 10";
+        try {
+            double[] output = Parser.parseCostList(argumentWithoutCostListDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.COST_LIST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseCostList_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutCostListArguments = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl ";
+        try {
+            double[] output = Parser.parseCostList(argumentWithoutCostListArguments);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.COST_LIST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseCostList_delimiterExistsArgumentsNotNumeric_exceptionThrown() {
+        String argumentWithNonNumericArguments = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl apple orange";
+        try {
+            double[] output = Parser.parseCostList(argumentWithNonNumericArguments);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + Parser.COST_LIST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseCostList_delimiterExistsCostsNegative_exceptionThrown() {
+        String argumentWithNegativeArguments =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl 10 -10 10";
+        try {
+            double[] output = Parser.parseCostList(argumentWithNegativeArguments);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_COST_NOT_POSITIVE;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+    
+    @Test
+    void parseCostList_delimiterExistsArgumentPositiveMoreThanTwoDecimalPlaces_exceptionThrown() {
+        String argumentWithPositiveArgumentsMoreThan2DP =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl 1.2444 15.30 20";
+        try {
+            double[] output = Parser.parseCostList(argumentWithPositiveArgumentsMoreThan2DP);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_COST_NOT_TWO_DP;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseCostList_delimiterExistsArgumentPositiveMoreThanTwelveDigitsBeforeDecimalPoint_exceptionThrown() {
+        String argumentWithPositiveArgumentsMoreThan12DigitsBeforeDP =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl 1234567890123.1 15.30 20";
+        try {
+            double[] output = Parser.parseCostList(argumentWithPositiveArgumentsMoreThan12DigitsBeforeDP);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_COST_MORE_THAN_TWELVE_DIGITS_BEFORE_DP;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseCostList_delimiterExistsArgumentValid_doubleArrayContainingCostList() {
+        String argumentWithDelimiterAndValidArguments =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl 123456789012.34 123456789012 10.70";
+        try {
+            double[] output = Parser.parseCostList(argumentWithDelimiterAndValidArguments);
+            assertEquals(3, output.length);
+            assertEquals(123456789012.34, output[0]);
+            assertEquals(123456789012.0, output[1]);
+            assertEquals(10.70, output[2]);
         } catch (InvalidFormatException exception) {
             fail();
         }
