@@ -444,7 +444,7 @@ class ParserTest {
         PersonList personList = new PersonList();
         personList.addPerson("Alice");
         Person person = personList.getPerson(1);
-        person.addExpend("Food", 10.5);
+        person.addIncome("Gift", 100);
 
         String input = "1";
         int output = Parser.getValidIncomeIndex(input, person);
@@ -460,7 +460,7 @@ class ParserTest {
             Parser.getValidIncomeIndex(null, person);
             fail();
         } catch (AssertionError e) {
-            assertEquals("Expenditure index should not be null", e.getMessage());
+            assertEquals("Income index should not be null", e.getMessage());
         }
     }
 
@@ -484,7 +484,7 @@ class ParserTest {
         PersonList personList = new PersonList();
         personList.addPerson("Alice");
         Person person = personList.getPerson(1);
-        person.addExpend("Food", 10.5);
+        person.addIncome("Gift", 100);
         try {
             String tooLow = "0";
             Parser.getValidIncomeIndex(tooLow, person);
