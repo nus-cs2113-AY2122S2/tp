@@ -14,9 +14,13 @@ public class Parser {
         String commandType = inputArray[0];
 
         String id;
-        int start, end, vacancies;
+        int start;
+        int end;
+        int vacancies;
         double price;
-        String name, hotel, country;
+        String name;
+        String hotel;
+        String country;
 
         switch (commandType) {
         case "bye":

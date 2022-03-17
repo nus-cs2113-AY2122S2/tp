@@ -1,4 +1,5 @@
 package seedu.duke;
+
 import java.util.Date;
 
 public class TravelPackage {
@@ -12,7 +13,8 @@ public class TravelPackage {
     private final int maxParticipants;
     private final int numParticipants;
 
-    public TravelPackage(String name, Date startDate, Date endDate, String hotel, double price, String country, int maxParticipants) {
+    public TravelPackage(String name, Date startDate, Date endDate,
+                         String hotel, double price, String country, int maxParticipants) {
         this.name = name;
         // this.period = [startDate,endDate];
         this.hotel = hotel;
@@ -32,7 +34,12 @@ public class TravelPackage {
     }
 
     public String toString() {
-        return "Here are the details for " + this.name + ", Travel Package ID of " + this.getID() + "\nCountry: "+ this.country + "\nPrice: " +  this.price + "\nHotel: " + this.hotel;
+        return "Here are the details for "
+                + this.name + ", Travel Package ID of "
+                + this.getID() + "\nCountry: "
+                + this.country + "\nPrice: "
+                +  this.price + "\nHotel: "
+                + this.hotel;
     }
 
 

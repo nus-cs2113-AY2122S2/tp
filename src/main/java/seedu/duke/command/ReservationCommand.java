@@ -4,7 +4,7 @@ import seedu.duke.Packages;
 import seedu.duke.Reservation;
 import java.util.Scanner;
 
-public class ReservationCommand extends Command{
+public class ReservationCommand extends Command {
     public void execute(Packages packages) {
         Scanner s = new Scanner(System.in);
         System.out.println("Please choose which function you would like to perform for Reservations.");
@@ -27,7 +27,7 @@ public class ReservationCommand extends Command{
         }
     }
 
-    public void printReservation(Packages packages){
+    public void printReservation(Packages packages) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Reservation ID to check details: ");
         int index = sc.nextInt();
@@ -37,29 +37,30 @@ public class ReservationCommand extends Command{
                 System.out.println(packages.getReservation(i));
                 reservationFound = true;
                 break;
-            }}
+            }
+        }
         if (!reservationFound) {
             System.out.println("Reservation ID could not be found. Please try again with a valid ID.");
         }
     }
 
-    public void addReservation(Packages packages){
+    public void addReservation(Packages packages) {
         Scanner c = new Scanner(System.in);
         System.out.println("Enter reservation ID: ");
-        int rid = Integer.parseInt(c.nextLine());
+        final int rid = Integer.parseInt(c.nextLine());
         System.out.println("Enter customer name: ");
-        String name = c.nextLine();
+        final String name = c.nextLine();
         System.out.println("Enter mobile number: ");
-        String number = c.nextLine();
+        final String number = c.nextLine();
         System.out.println("Enter Travel Package ID: ");
-        String tid = c.nextLine();
+        final String tid = c.nextLine();
         System.out.println("Enter number of pax: ");
-        int pax = Integer.parseInt(c.nextLine());
+        final int pax = Integer.parseInt(c.nextLine());
 
         packages.addReservation(new Reservation(rid, tid, name, number, pax));
     }
 
-    public void deleteReservation(Packages packages){
+    public void deleteReservation(Packages packages) {
         Scanner p = new Scanner(System.in);
         System.out.println("Please enter the reservation ID to be deleted: ");
         int index = p.nextInt();

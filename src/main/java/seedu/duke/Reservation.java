@@ -7,7 +7,7 @@ public class Reservation {
     private final String packageID;
     private final int numOfPax;
 
-    public Reservation(int reservationID, String packageID, String customerName, String contactNumber, int numOfPax){
+    public Reservation(int reservationID, String packageID, String customerName, String contactNumber, int numOfPax) {
         this.reservationID = reservationID;
         this.customerName = customerName;
         this.contactNumber = contactNumber;
@@ -37,11 +37,10 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Reservation '" + getReservationID() + "'\n" +
-                "Package        " + getPackageID() + "\n" +
-                "POC            " + getCustomerName() + "\n" +
-                "Contact No.    " + getContactNumber() + "\n" +
-                "Pax            " + getNumOfPax() + "\n"
-                ;
+        return "Reservation '" + getReservationID() + "'\n"
+                + "Package        " + getPackageID() + "\n"
+                + "POC            " + getCustomerName() + "\n"
+                + "Contact No.    " + getContactNumber() + "\n"
+                + "Pax            " + getNumOfPax() + "\n";
     }
 }
