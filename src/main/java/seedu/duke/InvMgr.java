@@ -44,6 +44,7 @@ public class InvMgr {
                 Command inputCommand = Parser.parse(command);
                 inputCommand.execute(itemList, ui);
                 isExit = inputCommand.isExit();
+                storage.writeData(itemList.getItemArrayList());
             } catch (InvMgrException e) {
                 ui.showError(e);
             }
