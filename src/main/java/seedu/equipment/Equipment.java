@@ -1,5 +1,7 @@
 package seedu.equipment;
 
+import java.util.Objects;
+
 public class Equipment {
     private String itemName;
     private String serialNumber;
@@ -63,5 +65,18 @@ public class Equipment {
 
     public void setPurchasedDate(String purchasedDate) {
         this.purchasedDate = purchasedDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Equipment equipment = (Equipment) o;
+        return Double.compare(equipment.cost, cost) == 0 && itemName.equals(equipment.itemName) && serialNumber.equals(equipment.serialNumber) && type == equipment.type && purchasedFrom.equals(equipment.purchasedFrom) && purchasedDate.equals(equipment.purchasedDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(itemName, serialNumber, type, cost, purchasedFrom, purchasedDate);
     }
 }

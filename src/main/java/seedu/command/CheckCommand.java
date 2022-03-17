@@ -1,5 +1,8 @@
 package seedu.command;
 
+import seedu.equipment.Equipment;
+import seedu.equipment.EquipmentType;
+
 import java.util.ArrayList;
 
 /**
@@ -9,7 +12,7 @@ public class CheckCommand extends Command {
     private final ArrayList<String> COMMAND_STRINGS;
     public static final String COMMAND_WORD = "check";
     public static final String COMMAND_DESCRIPTION = ": Gives details of the equipment with the specified name. "
-            + "Parameters: n/ITEM_NAME\n"
+            + "Parameters: n/ITEM_NAME" + System.lineSeparator()
             + "Example: "
             + "check n/MixerC";
 
@@ -17,14 +20,9 @@ public class CheckCommand extends Command {
      * constructor for CheckCommand. Initialises successMessage and usageReminder from Command
      * @param commandStrings parsed user input which contains details of equipment to be viewed
      */
-    public CheckCommand(ArrayList<String> commandStrings){
+    public CheckCommand(ArrayList<String> commandStrings) {
         COMMAND_STRINGS = commandStrings;
-        successMessage = "Name:  %1$s\n"
-                + "Type:  %2$s\n"
-                + "Cost:  %3$f\n"
-                + "S/N:  %4$s\n"
-                + "Purchased From:  %5$s\n"
-                + "Purchase Date:  %6$s\n";
+        successMessage = "Here are the equipment matching to '%1$s':" + System.lineSeparator();
         usageReminder = COMMAND_WORD + COMMAND_DESCRIPTION;
     }
 
@@ -32,18 +30,13 @@ public class CheckCommand extends Command {
      * Gives details of equipment specified by name
      * @return CommandResult with message from execution of this command
      */
-    public CommandResult execute(){
-        String name, type, sn, purchasedFrom, purchasedDate;
+    public CommandResult execute() {
+        String name, sn, purchasedFrom, purchasedDate;
+        EquipmentType type;
         double cost;
 
-        Equipment equipment = equipmentInventory.checkEquipment(COMMAND_STRINGS.get(0));
-        name = equipment.getItemName();
-        type = equipment.getType();
-        sn = equipment.getSerialNumber();
-        purchasedFrom = equipment.getPurchasedFrom();
-        purchasedDate = equipment.getPurchasedDate();
-        cost = equipment.getCost();
+        ArrayList<Equipment> equipment = equipmentManager.checkEquipment(COMMAND_STRINGS.get(0));
 
-        return new CommandResult(String.format(successMessage, name, type, cost, sn, purchasedFrom, purchasedDate));
+        return new CommandResult(String.format(successMessage, COMMAND_STRINGS.get(0)), equipment);
     }
 }

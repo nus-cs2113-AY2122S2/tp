@@ -9,7 +9,7 @@ public class DeleteCommand extends Command {
     private final ArrayList<String> COMMAND_STRINGS;
     public static final String COMMAND_WORD = "delete";
     public static final String COMMAND_DESCRIPTION = ": Deletes the equipment with the specified serial number. "
-            + "Parameters: s/SERIAL_NUMBER\n"
+            + "Parameters: s/SERIAL_NUMBER" + System.lineSeparator()
             + "Example: "
             + "delete s/SM57-1";
 
@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
      * constructor for DeleteCommand. Initialises successMessage and usageReminder from Command
      * @param commandStrings parsed user input which contains details of equipment to be deleted
      */
-    public DeleteCommand(ArrayList<String> commandStrings){
+    public DeleteCommand(ArrayList<String> commandStrings) {
         COMMAND_STRINGS = commandStrings;
         successMessage = "Equipment successfully deleted: %1$s, serial number %2$s";
         usageReminder = COMMAND_WORD + COMMAND_DESCRIPTION;
@@ -27,9 +27,9 @@ public class DeleteCommand extends Command {
      * Deletes equipment specified by serial number
      * @return CommandResult with message from execution of this command
      */
-    public CommandResult execute(){
-        String equipmentName = equipmentInventory.getEquipmentList().get(COMMAND_STRINGS.get(0));
-        equipmentInventory.deleteEquipment(COMMAND_STRINGS.get(0));
+    public CommandResult execute() {
+        String equipmentName = equipmentManager.getEquipmentList().get(COMMAND_STRINGS.get(0)).getItemName();
+        equipmentManager.deleteEquipment(COMMAND_STRINGS.get(0));
 
         return new CommandResult(String.format(successMessage, equipmentName,COMMAND_STRINGS.get(1)));
     }
