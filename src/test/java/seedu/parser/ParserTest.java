@@ -212,7 +212,7 @@ class ParserTest {
 
     @Test
     void extractArguments_wrongArgTypesUsed_exceptionThrown() throws IncompleteCommandException {
-        Throwable exception = assertThrows(IncompleteCommandException.class, ()-> parser.extractArguments("x/Speaker B a/Speaker b/1000 d/Loud Technologies e/2022-02-23"));
+        Throwable exception = assertThrows(IncompleteCommandException.class, () -> parser.extractArguments("x/Speaker B a/Speaker b/1000 d/Loud Technologies e/2022-02-23"));
         assertEquals("No parameters found!", exception.getMessage());
     }
 

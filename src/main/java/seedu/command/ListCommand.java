@@ -30,6 +30,7 @@ public class ListCommand extends Command {
 
     /**
      * constructor for ListCommand with specified type. Initialises successMessage and usageReminder from Command
+     *
      * @param commandStrings parsed user input which contains details of equipment to be viewed
      */
     public ListCommand(ArrayList<String> commandStrings) {
@@ -47,12 +48,13 @@ public class ListCommand extends Command {
 
     /**
      * List all equipment or list equipment of specified type
+     *
      * @return CommandResult with message from execution of this command
      */
     public CommandResult execute() {
         int listSize;
         ArrayList<Equipment> equipmentArrayList;
-        if(COMMAND_STRINGS == null){
+        if (COMMAND_STRINGS == null) {
             equipmentArrayList = equipmentManager.listEquipment();
             listSize = equipmentArrayList.size();
             return new CommandResult(String.format(successMessage, listSize), equipmentArrayList);

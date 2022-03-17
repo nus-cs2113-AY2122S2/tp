@@ -18,6 +18,7 @@ public class CheckCommand extends Command {
 
     /**
      * constructor for CheckCommand. Initialises successMessage and usageReminder from Command
+     *
      * @param commandStrings parsed user input which contains details of equipment to be viewed
      */
     public CheckCommand(ArrayList<String> commandStrings) {
@@ -28,6 +29,7 @@ public class CheckCommand extends Command {
 
     /**
      * Gives details of equipment specified by name
+     *
      * @return CommandResult with message from execution of this command
      */
     public CommandResult execute() {

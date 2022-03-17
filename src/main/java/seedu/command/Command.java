@@ -18,7 +18,7 @@ public abstract class Command {
 
     public abstract CommandResult execute();
 
-    public String getUsageReminder(){
+    public String getUsageReminder() {
         return usageReminder;
     }
 

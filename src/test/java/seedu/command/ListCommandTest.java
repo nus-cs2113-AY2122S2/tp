@@ -32,7 +32,7 @@ class ListCommandTest {
         }
 
         CommandResult actualResult = listCommand.execute();
-        CommandResult expectedResult = new CommandResult("TOTAL QUANTITY OF SPEAKER: 1"  + System.lineSeparator(), equipmentManager.listEquipment(EquipmentType.valueOf("SPEAKER")));
+        CommandResult expectedResult = new CommandResult("TOTAL QUANTITY OF SPEAKER: 1" + System.lineSeparator(), equipmentManager.listEquipment(EquipmentType.valueOf("SPEAKER")));
 
         assertEquals(expectedResult, actualResult);
     }
