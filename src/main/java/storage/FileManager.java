@@ -398,7 +398,8 @@ public class FileManager {
 
         FileWriter fileWriter = new FileWriter(getWorkoutFilePath().toString());
         for (String workoutKey : listOfWorkouts) {
-            Workout workoutObject = workoutList.getWorkoutsHashMapList().get(workoutKey);
+            Workout workoutObject = workoutList.getWorkoutFromKey(workoutKey);
+            assert (workoutObject != null) : "Workout object is NULL";
             String workoutInFileFormat = convertWorkoutToFileDataFormat(workoutObject);
             fileWriter.append(workoutInFileFormat);
             fileWriter.append(System.lineSeparator());

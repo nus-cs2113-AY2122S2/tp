@@ -51,6 +51,16 @@ public class WorkoutList {
     }
 
     /**
+     * Gets the Workout object based on its key as stored in the workoutsHashMapList.
+     *
+     * @param workoutKey The key that maps to the desired Workout object.
+     * @return The Workout object that is mapped to workoutKey.
+     */
+    public Workout getWorkoutFromKey(String workoutKey) {
+        return getWorkoutsHashMapList().get(workoutKey);
+    }
+
+    /**
      * Retrieves the Workout object from the HashMap workoutsHashMapList based on the index number
      * of the object stored in workoutsDisplayList. This index number is the number shown in
      * 'workout /list'.
@@ -64,6 +74,34 @@ public class WorkoutList {
         String keyValue = getWorkoutsDisplayList().get(elementNum);
         Workout workoutObject = workoutsHashMapList.get(keyValue);
         return workoutObject;
+    }
+
+    /**
+     * Updates an existing Workout object in workoutsHashMapList's with a new key. This should be called when
+     * a workout's repetition count has been updated. Once the Workout object has been reassigned to the new
+     * key, the former key will be removed. The ArrayList workoutsDisplayList will also be updated with the
+     * new key.
+     *
+     * @param existingKey    The existing key that maps to the updated Workout object.
+     * @param updatedWorkout The Workout object that has been updated.
+     */
+    public void updateWorkoutsHashMapList(String existingKey, Workout updatedWorkout) {
+        // Update key-value in workoutHashMapList
+        String newKey = updatedWorkout.toString();
+        getWorkoutsHashMapList().put(newKey, updatedWorkout);
+        getWorkoutsHashMapList().remove(existingKey);
+
+        // Update key in workoutsDisplayList
+        for (int i = 0; i < getWorkoutsDisplayList().size(); i += 1) {
+            String key = getWorkoutsDisplayList().get(i);
+            if (key.equals(existingKey)) {
+                getWorkoutsDisplayList().set(i, newKey);
+                break;
+            }
+        }
+
+        assert (!getWorkoutsDisplayList().contains(existingKey)) : "Old key should no longer "
+                + "exist in workoutsDisplayList.";
     }
 
     /**
@@ -291,7 +329,9 @@ public class WorkoutList {
         }
 
         assert (isIndexToUpdateValid && isNewRepsValueValid && !isExistingWorkout);
+        String oldWorkoutKey = updatedWorkout.toString();
         updatedWorkout.setRepetitions(newRepsValue);
+        updateWorkoutsHashMapList(oldWorkoutKey, updatedWorkout);
         logger.exiting(getClass().getName(), "updateWorkout");
         return updatedWorkout;
     }
