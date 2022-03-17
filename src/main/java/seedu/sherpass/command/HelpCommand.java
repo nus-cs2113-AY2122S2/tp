@@ -27,8 +27,9 @@ public class HelpCommand extends Command {
     private void showHelpList(Ui ui) {
         System.out.println("Here is a list of commands available:");
         String[] helpCommands = {ListCommand.COMMAND_WORD, MarkCommand.COMMAND_WORD,
-            UnmarkCommand.COMMAND_WORD, AddCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD,
-            ClearCommand.COMMAND_WORD, StudyCommand.COMMAND_WORD, ExitCommand.COMMAND_WORD};
+            UnmarkCommand.COMMAND_WORD, AddCommand.COMMAND_WORD, EditCommand.COMMAND_WORD,
+            DeleteCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD, StudyCommand.COMMAND_WORD,
+            ExitCommand.COMMAND_WORD};
         for (String helpCommand : helpCommands) {
             ui.showLine();
             showSpecificHelpCommand(ui, helpCommand);
@@ -52,6 +53,9 @@ public class HelpCommand extends Command {
             break;
         case AddCommand.COMMAND_WORD:
             ui.showToUser(AddCommand.MESSAGE_USAGE);
+            break;
+        case EditCommand.COMMAND_WORD:
+            ui.showToUser(EditCommand.MESSAGE_USAGE);
             break;
         case DeleteCommand.COMMAND_WORD:
             ui.showToUser(DeleteCommand.MESSAGE_USAGE);
