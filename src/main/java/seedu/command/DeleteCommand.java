@@ -28,9 +28,15 @@ public class DeleteCommand extends Command {
      * @return CommandResult with message from execution of this command
      */
     public CommandResult execute() {
-        String equipmentName = equipmentManager.getEquipmentList().get(COMMAND_STRINGS.get(0)).getItemName();
+        String equipmentName;
+        try {
+            equipmentName = equipmentManager.getEquipmentList().get(COMMAND_STRINGS.get(0)).getItemName();
+        } catch (NullPointerException e) {
+            return new CommandResult(INVALID_SERIAL_NUMBER);
+        }
+
         equipmentManager.deleteEquipment(COMMAND_STRINGS.get(0));
 
-        return new CommandResult(String.format(successMessage, equipmentName,COMMAND_STRINGS.get(1)));
+        return new CommandResult(String.format(successMessage, equipmentName,COMMAND_STRINGS.get(0)));
     }
 }
