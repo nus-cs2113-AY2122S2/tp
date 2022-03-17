@@ -52,7 +52,7 @@ public class Group {
     }
 
     /**
-     * Returns a list of Person objects representing the participants in the group.
+     * Returns an ArrayList object containing Person objects representing the participants in the group.
      *
      * @return An ArrayList object containing Person objects in the group.
      */
@@ -132,7 +132,7 @@ public class Group {
     /**
      * Returns the number of participants in the group.
      *
-     * @return  An integer object that represents that total number of participants in the group.
+     * @return An integer object that represents that total number of participants in the group.
      */
     public int getPersonCount() {
         return personList.size();
