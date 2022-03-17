@@ -19,4 +19,7 @@ public abstract class Record {
     public void setPrice(double price) {
         this.price = price;
     }
+    public String toString(){
+        return name+", price = "+price+", date = "+date;
+    }
 }

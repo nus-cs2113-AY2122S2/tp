@@ -14,4 +14,9 @@ public class Subscription extends Record {
     public String getRenewal() {
         return renewal;
     }
+
+    @Override
+    public String toString() {
+        return "Subscription : " + super.toString() + ", renewal = "+renewal;
+    }
 }

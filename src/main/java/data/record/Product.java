@@ -2,18 +2,22 @@ package data.record;
 
 public class Product extends Record {
 
-    private String category;
+    private String productType;
 
     public Product (String name, double price, String date, String productType){
         super( name, price, date);
-        this.category = productType;
+        this.productType = productType;
     }
 
-    public String getCategory() {
-        return category;
+    public String getProductType() {
+        return productType;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
+    @Override
+    public String toString(){
+        return productType+": "+super.toString() + "";
     }
 }
