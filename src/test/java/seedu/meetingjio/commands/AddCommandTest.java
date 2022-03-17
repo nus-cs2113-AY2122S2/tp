@@ -19,6 +19,7 @@ class AddCommandTest {
     private Command addCommandEndTimeOverlap;
     private Command addCommandTotalOverlap;
     private Command addCommandOverlapDifferentDay;
+    private Command addCommandOverlapDifferentName;
 
     /**
      * Set up multiple AddCommands to test out varying edge cases for overlapping lessons.
@@ -48,6 +49,10 @@ class AddCommandTest {
         );
         addCommandOverlapDifferentDay = new AddCommand(
                 "John", "CS2113", "Friday",
+                1200, 1300, "online"
+        );
+        addCommandOverlapDifferentName = new AddCommand(
+                "Johnny", "CS2113", "Monday",
                 1200, 1300, "online"
         );
     }
@@ -94,6 +99,16 @@ class AddCommandTest {
     public void addCommand_OverlapDifferentDay_noExceptionThrown() {
         addCommand.execute(timetable);
         assertNotEquals(ERROR_OVERLAPPING_EVENT, addCommandOverlapDifferentDay.execute(timetable));
+    }
+
+    /**
+     * Test method to ensure that no error is detected when a person adds an event that has timing
+     * clash with an event that another person has added.
+     */
+    @Test
+    public void addCommand_OverlapDifferentName_noExceptionThrown() {
+        addCommand.execute(timetable);
+        assertNotEquals(ERROR_OVERLAPPING_EVENT, addCommandOverlapDifferentName.execute(timetable));
     }
 
 }
