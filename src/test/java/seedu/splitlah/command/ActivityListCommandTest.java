@@ -34,7 +34,7 @@ public class ActivityListCommandTest {
     @Test
     public void prepare_hasMissingDelimiter_InvalidCommand() {
         // Missing delimiter
-        String inputMissingSidDelimiter = "activity /list /sid";
+        String inputMissingSidDelimiter = "activity /list /1";
         Command activityWithMissingSidDelimiter = Parser.getCommand(inputMissingSidDelimiter);
         assertEquals(InvalidCommand.class, activityWithMissingSidDelimiter.getClass());
     }
@@ -45,7 +45,7 @@ public class ActivityListCommandTest {
     @Test
     public void prepare_hasMissingArgument_InvalidCommand() {
         // Missing argument after delimiter.
-        String inputMissingArgument = "activity /list 1";
+        String inputMissingArgument = "activity /list /sid";
         Command activityWithMissingArgument = Parser.getCommand(inputMissingArgument);
         assertEquals(InvalidCommand.class, activityWithMissingArgument.getClass());
     }
