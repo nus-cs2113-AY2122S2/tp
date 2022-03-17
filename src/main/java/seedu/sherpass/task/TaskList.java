@@ -35,11 +35,11 @@ public class TaskList {
      * Adds a new task to the current array of tasks.
      *
      * @param taskDescription Description of the task.
-     * @param taskByDate        Due date of the task
-     * @param taskRemindDate    Reminder date of the task
+     * @param taskByDate      Due date of the task
+     * @param taskDoOnDate    Date to work on the task
      */
-    public void addTask(String taskDescription, LocalDate taskByDate, LocalDate taskRemindDate) {
-        Task newTask = new Task(taskDescription, taskByDate, taskRemindDate);
+    public void addTask(String taskDescription, LocalDate taskByDate, LocalDate taskDoOnDate) {
+        Task newTask = new Task(taskDescription, taskByDate, taskDoOnDate);
         tasks.add(newTask);
         System.out.println("Got it. I've added this task:\n  " + newTask
                 + "\nNow you have " + tasks.size() + " task(s) in the list.");
