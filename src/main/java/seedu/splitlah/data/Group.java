@@ -18,7 +18,7 @@ public class Group {
     private int groupId;
 
     private static final String PERSON_LIST_HEADER = "Participants";
-    private static final int ZERO_INDEXING_OFFSET = 1;
+    private static final int OFFSET = 1;
 
     /**
      * Constructs a Group object.
@@ -51,7 +51,6 @@ public class Group {
         return groupId;
     }
 
-
     /**
      * Returns a list of Person objects representing the participants in the group.
      *
@@ -60,7 +59,6 @@ public class Group {
     public ArrayList<Person> getPersonList() {
         return personList;
     }
-
 
     /**
      * Checks whether the Group object has at least one participant.
@@ -123,9 +121,8 @@ public class Group {
         }
     }
 
-
     /**
-     * Returns the numer of participants in the group.
+     * Returns the number of participants in the group.
      *
      * @return  An integer object that represents that total number of participants in the group.
      */
@@ -144,11 +141,12 @@ public class Group {
             return Message.ERROR_GROUP_EMPTY_PERSON_LIST;
         }
 
-        StringBuilder summaryString = new StringBuilder(PERSON_LIST_HEADER);
+        StringBuilder outputString = new StringBuilder(PERSON_LIST_HEADER);
         for (int i = 0; i < personList.size(); i++) {
             String personName = personList.get(i).getName();
-            summaryString.append("\n ").append(i + ZERO_INDEXING_OFFSET).append(". ").append(personName);
+            outputString.append("\n ").append(i + OFFSET).append(". ").append(personName);
         }
-        return summaryString.toString();
+        return outputString.toString();
     }
+
 }
