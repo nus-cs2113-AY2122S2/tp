@@ -18,7 +18,7 @@ public class ListCommand extends Command {
         if (timetable.size() == 0) {
             return ERROR_EMPTY_LIST;
         }
-        assert timetable.size() > 0: ERROR_EMPTY_LIST;
+        assert timetable.size() > 0 : ERROR_EMPTY_LIST;
         String str = "";
         for (int i = 0; i < timetable.size(); i++) {
             int listIndex = i + 1;
