@@ -16,6 +16,6 @@ public class ItemTest {
         assertEquals("A4 stacks of 30", newItem.getDescription());
         assertEquals(true, newItem.contains("Paper"));
         assertEquals("Paper | 10 | A4 stacks of 30", newItem.saveString());
-        assertEquals("Paper | 10 ", newItem.toString());
+        assertEquals("Paper | 10", newItem.toString());
     }
 }
