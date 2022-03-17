@@ -13,6 +13,7 @@ import seedu.splitlah.util.PersonCostPair;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 /**
  * Represents a command object that produces a summary of expenditure for a specified Session object.
@@ -240,6 +241,7 @@ public class SessionSummaryCommand extends Command {
             session = profile.getSession(sessionId);
         } catch (InvalidDataException exception) {
             ui.printlnMessage(exception.getMessage());
+            manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONSUMMARY_SESSION_ID_NOT_FOUND + sessionId);
             return;
         }
 
@@ -247,5 +249,6 @@ public class SessionSummaryCommand extends Command {
         ArrayList<PersonCostPair> personCostPairList = getPersonCostPairList(personList);
         String output = processAllTransactions(personCostPairList, session);
         ui.printlnMessageWithDivider(output);
+        manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONSUMMARY_SESSION_SUMMARY_PRINTED + sessionId);
     }
 }
