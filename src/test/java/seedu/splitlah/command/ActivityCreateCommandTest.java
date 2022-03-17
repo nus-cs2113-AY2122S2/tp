@@ -94,14 +94,47 @@ class ActivityCreateCommandTest {
         assertEquals(InvalidCommand.class, sessionWithMissingNameDelimiter.getClass());
 
         // Case 3: Missing /p delimiter
-        String argsMissingPayerListDelimiter = "activity /create /sid 1 /n Dinner /i Alice Bob Charlie /co 15";
-        Command sessionWithMissingPayerListDelimiter = Parser.getCommand(argsMissingPayerListDelimiter);
-        assertEquals(InvalidCommand.class, sessionWithMissingPayerListDelimiter.getClass());
+        String argsMissingPayerDelimiter = "activity /create /sid 1 /n Dinner /i Alice Bob Charlie /co 15";
+        Command sessionWithMissingPayerDelimiter = Parser.getCommand(argsMissingPayerDelimiter);
+        assertEquals(InvalidCommand.class, sessionWithMissingPayerDelimiter.getClass());
 
         // Case 4: Missing /i delimiter
         String argsMissingInvolvedListDelimiter = "activity /create /sid 1 /n Dinner /p Alice /co 15";
         Command activityWithMissingInvolvedListDelimiter = Parser.getCommand(argsMissingInvolvedListDelimiter);
         assertEquals(InvalidCommand.class, activityWithMissingInvolvedListDelimiter.getClass());
+
+        // Case 5: Missing /sid and /n delimiter
+        String argsMissingSessionIdAndNameDelimiter = "activity /create /p Alice /i Alice Bob Charlie /co 15";
+        Command activityWithMissingSessionIdAndNameDelimiter = Parser.getCommand(argsMissingSessionIdAndNameDelimiter);
+        assertEquals(InvalidCommand.class, activityWithMissingSessionIdAndNameDelimiter.getClass());
+
+        // Case 6: Missing /sid and /p delimiter
+        String argsMissingSidAndPayerDelimiter = "activity /create /n Dinner /i Alice Bob Charlie /co 15";
+        Command activityWithMissingSidAndPayerDelimiter = Parser.getCommand(argsMissingSidAndPayerDelimiter);
+        assertEquals(InvalidCommand.class, activityWithMissingSidAndPayerDelimiter.getClass());
+    }
+
+    @Test
+    public void prepare_hasMissingArguments_InvalidCommand() {
+        // Case 1: Missing session ID
+        String argsMissingSessionIdArgument = "activity /create /sid /n Dinner /p Alice /i Alice Bob Charlie /co 15";
+        Command sessionWithMissingSessionIdArgument = Parser.getCommand(argsMissingSessionIdArgument);
+        assertEquals(InvalidCommand.class, sessionWithMissingSessionIdArgument.getClass());
+
+        // Case 2: Missing Activity Name
+        String argsMissingNameArgument = "activity /create /sid 1 /n /p Alice /i Alice Bob Charlie /co 15";
+        Command sessionWithMissingNameArgument = Parser.getCommand(argsMissingNameArgument);
+        assertEquals(InvalidCommand.class, sessionWithMissingNameArgument.getClass());
+
+        // Case 3: Missing Payer
+        String argsMissingPayerArgument = "activity /create /sid 1 /n Dinner /p /i Alice Bob Charlie /co 15";
+        Command sessionWithMissingPayerArgument = Parser.getCommand(argsMissingPayerArgument);
+        assertEquals(InvalidCommand.class, sessionWithMissingPayerArgument.getClass());
+
+        // Case 4: Missing involved list
+        String argsMissingInvolvedListArgument = "activity /create /sid 1 /n Dinner /p Alice /i /co 15";
+        Command activityWithMissingInvolvedListArgument = Parser.getCommand(argsMissingInvolvedListArgument);
+        assertEquals(InvalidCommand.class, activityWithMissingInvolvedListArgument.getClass());
     }
 
 }

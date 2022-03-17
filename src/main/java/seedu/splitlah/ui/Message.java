@@ -192,6 +192,25 @@ public abstract class Message {
                     + "Please rectify and try again.";
     public static final String ASSERT_ACTIVITYCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
             "Name duplicates exists but not detected.";
+    public static final String ASSERT_ACTIVITYCREATE_SESSION_ID_LESS_THAN_ONE =
+            "Session ID is less than or equals to zero.";
+    public static final String ASSERT_ACTIVITYCREATE_ACTIVITY_NAME_MISSING =
+            "Activity name is missing.";
+    public static final String ASSERT_ACTIVITYCREATE_TOTAL_COST_LESS_THAN_ONE =
+            "Total cost is less than or equals to zero.";
+    public static final String ASSERT_ACTIVITYCREATE_PAYER_NAME_MISSING =
+            "Payer's name is missing.";
+    public static final String ASSERT_ACTIVITYCREATE_INVOLVED_LIST_ARRAY_EMPTY =
+            "Involved list array does not contain the list of names of the persons involved in the activity.";
+    public static final String ASSERT_ACTIVITYCREATE_COST_LIST_ARRAY_EMPTY =
+            "Cost list array does not contain the respective costs of the persons involved in the activity.";
+    public static final String LOGGER_ACTIVITYCREATE_ACTIVITY_ADDED =
+            "An Activity object was succesfully added into the list of activities with Id: ";
+    public static final String LOGGER_ACTIVITYCREATE_FAILED_ADDING_ACTIVITY =
+            "An Activity object failed to be added into the list of activities due to the following error: ";
+    public static final String LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST =
+            "An Activity object failed to be added into the list of activities because there are duplicate names in"
+                    + "the involved list.";
 
     // Activity List Command
     public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =
