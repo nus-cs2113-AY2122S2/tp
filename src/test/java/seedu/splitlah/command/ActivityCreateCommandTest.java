@@ -110,6 +110,11 @@ class ActivityCreateCommandTest {
         String argsMissingSessionIdArgument = "activity /create /sid /n Dinner /p Alice /i Alice Bob Charlie /co 15";
         Command sessionWithMissingSessionIdArgument = Parser.getCommand(argsMissingSessionIdArgument);
         assertEquals(InvalidCommand.class, sessionWithMissingSessionIdArgument.getClass());
+
+        // Case 2: Missing Activity Name
+        String argsMissingNameArgument = "activity /create /sid 1 /n /p Alice /i Alice Bob Charlie /co 15";
+        Command sessionWithMissingNameArgument = Parser.getCommand(argsMissingNameArgument);
+        assertEquals(InvalidCommand.class, sessionWithMissingNameArgument.getClass());
     }
 
 }
