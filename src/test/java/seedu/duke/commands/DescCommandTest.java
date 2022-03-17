@@ -2,10 +2,6 @@ package seedu.duke.commands;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.data.Item;
-import seedu.duke.data.ItemList;
-import seedu.duke.ui.Ui;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
