@@ -31,10 +31,6 @@ public class CheckCommand extends Command {
      * @return CommandResult with message from execution of this command
      */
     public CommandResult execute() {
-        String name, sn, purchasedFrom, purchasedDate;
-        EquipmentType type;
-        double cost;
-
         ArrayList<Equipment> equipment = equipmentManager.checkEquipment(COMMAND_STRINGS.get(0));
 
         return new CommandResult(String.format(successMessage, COMMAND_STRINGS.get(0)), equipment);
