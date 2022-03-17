@@ -10,4 +10,16 @@ class ProfileTest {
         Command createSessionTwo = Parser.getCommand(sessionTwoArgs);
         createSessionTwo.run(manager);
     }
+    @Test
+    public void hasSessionName_inputContainsExistingSessionName_true() {
+        String sessionNameToTest = "Class outing";
+        boolean isExists = manager.getProfile().hasSessionName(sessionNameToTest);
+        assertEquals(true, isExists);
+    }
+    @Test
+    public void hasSessionName_inputContainsNonExistingSessionName_false() {
+        String sessionNameToTest = "School gathering";
+        boolean isExists = manager.getProfile().hasSessionName(sessionNameToTest);
+        assertEquals(false, isExists);
+    }
 }
