@@ -13,7 +13,7 @@ public class FindRouteCommand extends Command {
     private ArrayList<String> emptyFields = new ArrayList<>();
     private static final String FOUND_MESSAGE = "The following flight routes has been found:";
     private static final String EMPTY_MESSAGE = "No flight route found.";
-    private final String EMPTY_FIELD_MESSAGE = "These necessary fields are not specified:";
+    private static final String EMPTY_FIELD_MESSAGE = "These necessary fields are not specified:";
 
     public FindRouteCommand(String date, String to, String from, String time) {
         this.date = date;
@@ -54,7 +54,7 @@ public class FindRouteCommand extends Command {
         }
 
         CommandResult commandResult;
-        if(routesInfo.isEmpty()) {
+        if (routesInfo.isEmpty()) {
             commandResult = new CommandResult(EMPTY_MESSAGE);
         } else {
             commandResult = new CommandResult(FOUND_MESSAGE, routesInfo);

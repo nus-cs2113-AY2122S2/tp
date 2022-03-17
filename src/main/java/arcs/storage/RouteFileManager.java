@@ -12,32 +12,32 @@ public class RouteFileManager {
     private static String DIR_PATH = "data";
     private static final String fileName = "route.txt";
 
-    public RouteFileManager(){
+    public RouteFileManager() {
         DIR_PATH = System.getProperty("user.dir") + File.separator + "data";
     }
 
     public ArrayList<Route> loadData() throws IOException {
         File dir = new File(DIR_PATH);
-        if(!dir.exists()) {
+        if (!dir.exists()) {
             dir.mkdir();
         }
         File file = new File(DIR_PATH + File.separator + fileName);
-        if(!file.exists()) {
+        if (!file.exists()) {
             file.createNewFile();
         }
         Scanner s = new Scanner(file);
         ArrayList<String> records = new ArrayList<>();
-        while(s.hasNextLine()) {
+        while (s.hasNextLine()) {
             records.add(s.nextLine());
         }
 
         return decodeData(records);
     }
 
-    public void saveData(ArrayList<Route> routes) throws IOException{
+    public void saveData(ArrayList<Route> routes) throws IOException {
         FileWriter fw = new FileWriter(DIR_PATH + File.separator + fileName);
         ArrayList<String> records = encodeData(routes);
-        for(int i = 0; i < records.size(); i++){
+        for (int i = 0; i < records.size(); i++) {
             fw.write(records.get(i));
             fw.write(System.lineSeparator());
         }

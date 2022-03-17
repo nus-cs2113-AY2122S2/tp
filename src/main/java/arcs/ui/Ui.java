@@ -44,7 +44,7 @@ public class Ui {
         if (routesInfo != null) {
             for (int i = 1; i <= routesInfo.size(); i++) {
                 System.out.println(i + ".");
-                System.out.println(routesInfo.get(i-1));
+                System.out.println(routesInfo.get(i - 1));
             }
         }
     }

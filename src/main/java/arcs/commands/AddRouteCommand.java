@@ -5,14 +5,14 @@ import arcs.data.exception.DuplicateDataException;
 
 import java.util.ArrayList;
 
-public class AddRouteCommand extends Command{
+public class AddRouteCommand extends Command {
     public static final String COMMAND_WORD = "addRoute";
     private Route toAdd;
     private ArrayList<String> emptyFields = new ArrayList<>();
 
-    private final String SUCCESS_MESSAGE = "OK! The following new route is added: ";
-    private final String DUPLICATE_MESSAGE = "The flight ID already exits. This flight cannot be added.";
-    private final String EMPTY_FIELD_MESSAGE = "These necessary fields are not specified:";
+    private static final String SUCCESS_MESSAGE = "OK! The following new route is added: ";
+    private static final String DUPLICATE_MESSAGE = "The flight ID already exits. This flight cannot be added.";
+    private static final String EMPTY_FIELD_MESSAGE = "These necessary fields are not specified:";
 
     public AddRouteCommand(String flightID, String date, String time,
                            String from, String to, int capacity) {

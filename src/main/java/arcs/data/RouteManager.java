@@ -1,6 +1,6 @@
 package arcs.data;
 
-import arcs.data.exception.ARCSException;
+import arcs.data.exception.ArcsException;
 import arcs.data.exception.DuplicateDataException;
 
 import java.util.ArrayList;
@@ -29,9 +29,9 @@ public class RouteManager {
         return routes;
     }
 
-    public Route deleteRoute(int index) throws ARCSException {
+    public Route deleteRoute(int index) throws ArcsException {
         if (index <= 0 || index > routes.size()) {
-            throw new ARCSException("Index out of bound.");
+            throw new ArcsException("Index out of bound.");
         }
         Route deleted = routes.get(index - 1);
         routes.remove(index - 1);
@@ -60,7 +60,7 @@ public class RouteManager {
         return result;
     }
 
-    public boolean hasDuplicateFlightId (Route newRoute) {
+    public boolean hasDuplicateFlightId(Route newRoute) {
         String newId = newRoute.getFlightID();
         for (Route route: routes) {
             if (route.getFlightID().equals(newId)) {

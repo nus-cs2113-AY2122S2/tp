@@ -6,7 +6,7 @@ public class Parser {
     public Command parseCommand(String userInput) {
         String[] fullInput = userInput.split(" ", 2);
         String commandWord = fullInput[0];
-        String argumentLine = fullInput.length > 1? fullInput[1].trim() : null;
+        String argumentLine = fullInput.length > 1 ? fullInput[1].trim() : null;
         Command command;
 
         switch (commandWord) {
@@ -37,7 +37,7 @@ public class Parser {
             return new AddRouteCommand(null, null, null, null, null, 0);
         }
         String[] args = argumentLine.split(" ");
-        String fId = null;
+        String fID = null;
         String date = null;
         String time = null;
         String from = null;
@@ -56,7 +56,7 @@ public class Parser {
             String value = argSplit[1].trim();
             switch (field) {
             case "fid":
-                fId = value;
+                fID = value;
                 break;
             case "fd":
                 date = value;
@@ -77,7 +77,7 @@ public class Parser {
                 break;
             }
         }
-        return new AddRouteCommand(fId, date, time, from, to, capacity);
+        return new AddRouteCommand(fID, date, time, from, to, capacity);
     }
 
     public Command prepareDeleteRouteCommand(String argumentLine) {
