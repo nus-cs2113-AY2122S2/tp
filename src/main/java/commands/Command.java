@@ -1,6 +1,7 @@
 package commands;
 
 import common.Messages;
+import manager.LimitManager;
 import manager.RecordManager;
 import data.record.Record;
 
@@ -11,14 +12,14 @@ import java.util.List;
  */
 public class Command {
     protected RecordManager recordMgr;
-<<<<<<< HEAD
+
     private int index = -1;
     static protected double totalExpense = 0;
 
     public Command() {
     }
-=======
->>>>>>> 61e4e37fcc205f7e10fb786e0752101beb672375
+
+    protected LimitManager limitMgr;
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of records.
@@ -42,5 +43,8 @@ public class Command {
      */
     public void setData(RecordManager recordMgr) {
         this.recordMgr = recordMgr;
+    }
+    public void setLimits(LimitManager limitMgr) {
+        this.limitMgr = limitMgr;
     }
 }

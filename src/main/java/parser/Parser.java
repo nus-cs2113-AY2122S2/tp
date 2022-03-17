@@ -7,6 +7,7 @@ import commands.ExitCommand;
 import commands.HelpCommand;
 import commands.IncorrectCommand;
 import commands.ListCommand;
+import commands.LimitCommand;
 import data.exception.IllegalValueException;
 
 import java.util.Locale;
@@ -47,6 +48,9 @@ public class Parser {
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+
+        case LimitCommand.COMMAND_WORD:
+            return setLimitCommand(arguments);
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
@@ -156,7 +160,7 @@ public class Parser {
      */
     private Command prepareDeleteCommand(String args) {
         try {
-            final int targetIndex = parseArgsAsDisplayedIndex(args);
+            final int targetIndex = (int) parseArgsAsDisplayedIndex(args);
             return new DeleteCommand(targetIndex);
         } catch (ParseException pe) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
@@ -165,6 +169,16 @@ public class Parser {
         }
     }
 
+    private Command setLimitCommand(String args) {
+        try {
+            double targetLimit = parseArgsAsDisplayedIndex(args);
+            return new LimitCommand(targetLimit);
+        } catch (ParseException pe) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LimitCommand.MESSAGE_USAGE));
+        } catch (NumberFormatException nfe) {
+            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+    }
 
     /**
      * Parses the given arguments string as a single index number.
@@ -174,7 +188,7 @@ public class Parser {
      * @throws ParseException if no region of the args string could be found for the index
      * @throws NumberFormatException the args string region is not a valid number
      */
-    private int parseArgsAsDisplayedIndex(String args) throws ParseException, NumberFormatException {
+    private double parseArgsAsDisplayedIndex(String args) throws ParseException, NumberFormatException {
         if (args.isEmpty()) {
             throw new ParseException("Could not find index number to parse");
         }
