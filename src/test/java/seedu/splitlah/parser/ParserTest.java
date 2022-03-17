@@ -492,4 +492,66 @@ class ParserTest {
             fail();
         }
     }
+
+    // parseLocalDate()
+    @Test
+    void parseLocalDate_missingDelimiter_exceptionThrown() {
+        String argumentWithoutDateDelimiter = "/n Class outing d 23-02-2022 /pl Alice Alice Bob";
+        try {
+            LocalDate output = Parser.parseLocalDate(argumentWithoutDateDelimiter);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.DATE_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseLocalDate_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutDateArgument = "/n Class outing /d /pl Alice Alice Bob";
+        try {
+            LocalDate output = Parser.parseLocalDate(argumentWithoutDateArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.DATE_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseLocalDate_invalidDateFormatting_exceptionThrown() {
+        String argumentWithInvalidDateFormatting = "/n Class outing /d 2022-03-04 /pl Alice Alice Bob";
+        try {
+            LocalDate output = Parser.parseLocalDate(argumentWithInvalidDateFormatting);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_INVALID_DATE_FORMAT;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseLocalDate_validDateFormatting_validDate() {
+        String argumentWithValidDateFormatting = "/n Class outing /d 23-02-2022 /pl Alice Alice Bob";
+        try {
+            LocalDate output = Parser.parseLocalDate(argumentWithValidDateFormatting);
+            assertEquals(23, output.getDayOfMonth());
+            assertEquals(2, output.getMonthValue());
+            assertEquals(2022, output.getYear());
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+
+    @Test
+    void parseLocalDate_todayAsInput_validDate() {
+        String argumentWithTodayAsDate = "/n Class outing /d today /pl Alice Alice Bob";
+        try {
+            LocalDate output = Parser.parseLocalDate(argumentWithTodayAsDate);
+            LocalDate today = LocalDate.now();
+            assertEquals(today, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
 }
