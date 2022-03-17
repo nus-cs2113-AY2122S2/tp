@@ -9,6 +9,9 @@ import seedu.duke.storage.Storage;
 
 public class ListCommand extends Command {
 
+    /**
+     * Prints out the list of items in the itemList.
+     */
     @Override
     public void execute(ItemList itemList, Ui ui) {
         ui.showMessages("Here are the tasks in your list:");
