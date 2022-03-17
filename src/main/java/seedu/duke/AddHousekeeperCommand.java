@@ -32,15 +32,13 @@ public class AddHousekeeperCommand extends Command {
      */
     private Housekeeper extractDetails(String commandStringWithoutCommand)
             throws InvalidAgeException, InvalidHousekeeperProfile {
-        int ageNumber;
-        String inputAge;
-        String inputName;
-        String name;
-        String[] input;
         boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(AGE_INDICATE);
         if (isSymbolIncorrect) {
             throw new InvalidHousekeeperProfile();
         }
+        String[] input;
+        String inputAge;
+        String inputName;
         try {
             input = commandStringWithoutCommand.split(AGE_INDICATE);
             inputName = input[0];
@@ -48,6 +46,8 @@ public class AddHousekeeperCommand extends Command {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidHousekeeperProfile();
         }
+        int ageNumber;
+        String name;
         name = extractName(inputName);
         ageNumber = extractAge(inputAge);
         assert (!name.isEmpty()) : "Housekeeper name should not be empty.";
