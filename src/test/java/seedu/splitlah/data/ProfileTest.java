@@ -30,4 +30,16 @@ class ProfileTest {
         boolean isExists = manager.getProfile().hasSessionName(sessionNameToTest);
         assertEquals(false, isExists);
     }
+    @Test
+    public void hasSessionId_inputContainsExistingSessionId_true() {
+        int sessionIdToTest = 1;
+        boolean isExists = manager.getProfile().hasSessionId(sessionIdToTest);
+        assertEquals(true, isExists);
+    }
+    @Test
+    public void hasSessionId_inputContainsNonExistingSessionId_false() {
+        int sessionIdToTest = 10;
+        boolean isExists = manager.getProfile().hasSessionId(sessionIdToTest);
+        assertEquals(false, isExists);
+    }
 }
