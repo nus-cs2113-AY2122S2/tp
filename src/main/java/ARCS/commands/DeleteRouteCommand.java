@@ -1,6 +1,7 @@
 package ARCS.commands;
 
 import ARCS.data.Route;
+import ARCS.data.exception.ARCSException;
 
 public class DeleteRouteCommand extends Command {
     public static final String COMMAND_WORD = "deleteRoute";
@@ -13,8 +14,15 @@ public class DeleteRouteCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        Route deleted = routeManager.deleteRoute(index);
-        return new CommandResult(SUCCESS_MESSAGE + System.lineSeparator()
-                + deleted.getFlightInfo());
+        CommandResult result;
+        try {
+            Route deleted = routeManager.deleteRoute(index);
+            result = new CommandResult(SUCCESS_MESSAGE + System.lineSeparator()
+                    + deleted.getFlightInfo());
+        } catch (ARCSException e) {
+            result = new CommandResult(e.getMessage());
+        }
+
+        return result;
     }
 }

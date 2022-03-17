@@ -1,5 +1,6 @@
 package ARCS.data;
 
+import ARCS.data.exception.ARCSException;
 import ARCS.data.exception.DuplicateDataException;
 
 import java.util.ArrayList;
@@ -24,7 +25,10 @@ public class RouteManager {
         return routes;
     }
 
-    public Route deleteRoute(int index) {
+    public Route deleteRoute(int index) throws ARCSException {
+        if (index <= 0 || index > routes.size()) {
+            throw new ARCSException("Index out of bound.");
+        }
         Route deleted = routes.get(index - 1);
         routes.remove(index - 1);
         return deleted;

@@ -7,7 +7,7 @@ public class Parser {
         String[] fullInput = userInput.split(" ", 2);
         String commandWord = fullInput[0];
         String argumentLine = fullInput.length > 1? fullInput[1].trim() : null;
-        Command command = null;
+        Command command;
 
         switch (commandWord) {
         case AddRouteCommand.COMMAND_WORD:
@@ -81,8 +81,18 @@ public class Parser {
     }
 
     public Command prepareDeleteRouteCommand(String argumentLine) {
-        int index = Integer.parseInt(argumentLine.trim());
-        return new DeleteRouteCommand(index);
+        if (argumentLine == null || argumentLine.isEmpty()) {
+            return new UndefinedCommand("Index is not specified");
+        }
+        Command result;
+        try {
+            int index = Integer.parseInt(argumentLine);
+            result = new DeleteRouteCommand(index);
+        } catch (NumberFormatException e) {
+            result = new UndefinedCommand("Index should be an integer.");
+        }
+
+        return result;
     }
 
     public Command prepareFindRouteCommand(String argumentLine) {
