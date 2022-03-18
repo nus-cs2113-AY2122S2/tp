@@ -200,9 +200,9 @@ public abstract class Message {
             "Total cost is less than or equals to zero.";
     public static final String ASSERT_ACTIVITYCREATE_PAYER_NAME_MISSING =
             "Payer's name is missing.";
-    public static final String ASSERT_ACTIVITYCREATE_INVOLVED_LIST_ARRAY_EMPTY =
+    public static final String ASSERT_ACTIVITYCREATE_INVOLVED_LIST_ARRAY_NULL =
             "Involved list array does not contain the list of names of the persons involved in the activity.";
-    public static final String ASSERT_ACTIVITYCREATE_COST_LIST_ARRAY_EMPTY =
+    public static final String ASSERT_ACTIVITYCREATE_COST_LIST_ARRAY_NULL =
             "Cost list array does not contain the respective costs of the persons involved in the activity.";
     public static final String LOGGER_ACTIVITYCREATE_ACTIVITY_ADDED =
             "An Activity object was succesfully added into the list of activities with Id: ";
