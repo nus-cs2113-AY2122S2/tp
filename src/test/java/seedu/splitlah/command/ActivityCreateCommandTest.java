@@ -104,6 +104,9 @@ class ActivityCreateCommandTest {
         assertEquals(InvalidCommand.class, activityWithMissingInvolvedListDelimiter.getClass());
     }
 
+    /**
+     * Checks if activity is created with missing arguments.
+     */
     @Test
     public void prepare_hasMissingArguments_InvalidCommand() {
         // Case 1: Missing session ID
