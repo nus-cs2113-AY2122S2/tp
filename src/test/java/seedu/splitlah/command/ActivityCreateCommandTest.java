@@ -66,19 +66,6 @@ class ActivityCreateCommandTest {
     }
 
     /**
-     * Checks if an activity is created when an activity has duplicate names in the involved list.
-     * @throws InvalidDataException If there are no sessions stored or
-     *                              if the session unique identifier specified was not found.
-     */
-    @Test
-    public void run_hasNameDuplicatesInInvolvedList_activityListSizeRemainsOne() throws InvalidDataException {
-        String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Alice Charlie /co 30";
-        Command command = Parser.getCommand(userInput);
-        command.run(manager);
-        assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
-    }
-
-    /**
      * Checks if activity is created with missing delimiters.
      */
     @Test
@@ -128,6 +115,32 @@ class ActivityCreateCommandTest {
         String argsMissingInvolvedListArgument = "activity /create /sid 1 /n Dinner /p Alice /i /co 15";
         Command activityWithMissingInvolvedListArgument = Parser.getCommand(argsMissingInvolvedListArgument);
         assertEquals(InvalidCommand.class, activityWithMissingInvolvedListArgument.getClass());
+    }
+
+
+    /**
+     * Checks if an activity is created when an activity has duplicate names in the involved list.
+     * @throws InvalidDataException If there are no sessions stored or
+     *                              if the session unique identifier specified was not found.
+     */
+    @Test
+    public void run_hasNameDuplicatesInInvolvedList_activityListSizeRemainsOne() throws InvalidDataException {
+        String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Alice Charlie /co 30";
+        Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityCreateCommand.class, command.getClass());
+        command.run(manager);
+        assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
+    }
+
+    @Test
+    public void run_hasNameDuplicatesInInvolvedList_activityIdNotIncremented() throws InvalidDataException {
+        int currentActivityId = manager.getProfile().getActivityIdTracker();
+        String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Alice Charlie /co 30";
+        Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityCreateCommand.class, command.getClass());
+        command.run(manager);
+        int testActivityId = manager.getProfile().getSessionIdTracker();
+        assertEquals(currentActivityId, testActivityId);
     }
 
 }
