@@ -927,6 +927,10 @@ class ParserTest {
     }
 
     // parseServiceCharge()
+    /**
+     * Checks if an integer representing a service charge percent value of 0 is properly returned 
+     * when the Service charge delimiter is not provided by the user.
+     */
     @Test
     void parseServiceCharge_missingDelimiter_serviceChargeZeroPercent() {
         String argumentWithoutServiceChargeDelimiter =
@@ -939,6 +943,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Service charge delimiter is provided but no arguments
+     * following the Service charge delimiter are provided by the user.
+     */
     @Test
     void parseServiceCharge_delimiterExistsWithoutArgument_exceptionThrown() {
         String argumentWithoutServiceChargeArgument =
@@ -952,6 +960,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Service charge delimiter is provided by the user but the 
+     * argument following the Service charge delimiter cannot be parsed as an integer.
+     */
     @Test
     void parseServiceCharge_delimiterExistsArgumentNotInteger_exceptionThrown() {
         String argumentWithNonIntegerArgument =
@@ -965,6 +977,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the Service charge delimiter and an integer representing the
+     * service charge is provided by the user but the integer is not within the valid range of [0, 100].
+     */
     @Test
     void parseServiceCharge_delimiterExistsArgumentIntegerButNotInRange_exceptionThrown() {
         // Test negative values
@@ -990,6 +1006,11 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an integer representing a service charge percent value is properly returned when the 
+     * Service charge delimiter and an argument with an integer value within the valid range of [0, 100]
+     * is provided by the user.
+     */
     @Test
     void parseServiceCharge_delimiterExistsArgumentIntegerWithinRange_serviceChargePercentage() {
         String argumentWithIntegerArgumentInRange =
