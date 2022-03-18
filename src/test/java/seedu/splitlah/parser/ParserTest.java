@@ -887,7 +887,7 @@ class ParserTest {
      */
     @Test
     void parseGst_delimiterExistsArgumentIntegerButNotInRange_exceptionThrown() {
-        // Test negative values
+        // Test values less than 0, negative values
         String argumentWithIntegerArgumentUnderRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst -1 /sc 10";
         try {
@@ -898,7 +898,7 @@ class ParserTest {
             assertEquals(errorMessage, exception.getMessage());
         }
 
-        // Test negative values
+        // Test values greater than 100
         String argumentWithIntegerArgumentAboveRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 101 /sc 10";
         try {
@@ -983,7 +983,7 @@ class ParserTest {
      */
     @Test
     void parseServiceCharge_delimiterExistsArgumentIntegerButNotInRange_exceptionThrown() {
-        // Test negative values
+        // Test values less than 0, negative values
         String argumentWithIntegerArgumentUnderRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc -1";
         try {
@@ -994,7 +994,7 @@ class ParserTest {
             assertEquals(errorMessage, exception.getMessage());
         }
 
-        // Test negative values
+        // Test values greater than 100
         String argumentWithIntegerArgumentAboveRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 101";
         try {
