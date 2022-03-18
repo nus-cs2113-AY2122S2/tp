@@ -4,6 +4,9 @@ import seedu.meetingjio.Parser;
 import seedu.meetingjio.Timetable;
 import java.util.Scanner;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static seedu.meetingjio.commands.ExitCommand.EXIT_COMMAND;
 /**
  * Represents an executable command.
@@ -12,6 +15,8 @@ import static seedu.meetingjio.commands.ExitCommand.EXIT_COMMAND;
 public abstract class Command {
 
     public abstract String execute(Timetable timetable);
+
+    public static Logger logger = Logger.getLogger(Parser.class.getName());
 
     /**
      * Executes the command until termination or the exit command is called.
@@ -25,8 +30,12 @@ public abstract class Command {
             String trimmedInput = userInput.trim();
             Parser parser = new Parser(trimmedInput);
             Command parsedCommand = parser.parseCommand();
-            String feedback = parsedCommand.execute(timetable);
-            System.out.println(feedback);
+            try {
+                String feedback = parsedCommand.execute(timetable);
+                System.out.println(feedback);
+            } catch (AssertionError ae) {
+                logger.log(Level.INFO, "Assertion Error");
+            }
             userInput = in.nextLine();
         }
     }
