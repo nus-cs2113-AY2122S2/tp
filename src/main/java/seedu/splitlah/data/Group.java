@@ -19,18 +19,18 @@ public class Group {
     private static final String PERSON_LIST_HEADER = "Participants";
     private static final int OFFSET = 1;
 
+
     /**
      * Constructs a Group object.
      *
-     * @param personList An ArrayList object containing Person objects representing
-     *                   participants of the group.
-     * @param groupName  A String object that represents the group's name.
-     * @param groupId    An integer that uniquely identifies a group.
+     * @param groupName A String object that represents the group's name.
+     * @param groupId An integer that uniquely identifies a group.
+     * @param personList An ArrayList object containing Person objects
      */
-    public Group(ArrayList<Person> personList, String groupName, int groupId) {
-        this.personList = personList;
+    public Group(String groupName, int groupId, ArrayList<Person> personList) {
         this.groupName = groupName;
         this.groupId = groupId;
+        this.personList = personList;
     }
 
     /**
@@ -150,6 +150,7 @@ public class Group {
         }
 
         StringBuilder outputString = new StringBuilder(PERSON_LIST_HEADER);
+        outputString.append("Group Id: ").append(groupId);
         for (int i = 0; i < personList.size(); i++) {
             String personName = personList.get(i).getName();
             outputString.append("\n ").append(i + OFFSET).append(". ").append(personName);
