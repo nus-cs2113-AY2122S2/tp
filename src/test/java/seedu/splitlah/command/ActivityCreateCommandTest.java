@@ -133,13 +133,13 @@ class ActivityCreateCommandTest {
     }
 
     @Test
-    public void run_hasNameDuplicatesInInvolvedList_activityIdNotIncremented() throws InvalidDataException {
+    public void run_hasNameDuplicatesInInvolvedList_activityIdNotIncremented() {
         int currentActivityId = manager.getProfile().getActivityIdTracker();
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Alice Charlie /co 30";
         Command command = Parser.getCommand(userInput);
         assertEquals(ActivityCreateCommand.class, command.getClass());
         command.run(manager);
-        int testActivityId = manager.getProfile().getSessionIdTracker();
+        int testActivityId = manager.getProfile().getActivityIdTracker();
         assertEquals(currentActivityId, testActivityId);
     }
 
@@ -150,6 +150,17 @@ class ActivityCreateCommandTest {
         assertEquals(ActivityCreateCommand.class, command.getClass());
         command.run(manager);
         assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
+    }
+
+    @Test
+    public void run_validCommand_activityIdIncremented() {
+        int currentActivityId = manager.getProfile().getActivityIdTracker();
+        String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30";
+        Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityCreateCommand.class, command.getClass());
+        command.run(manager);
+        int testActivityId = manager.getProfile().getActivityIdTracker();
+        assertEquals(currentActivityId + 1, testActivityId);
     }
 
 }
