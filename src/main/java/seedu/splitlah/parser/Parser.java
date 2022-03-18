@@ -185,16 +185,16 @@ public class Parser {
     }
 
     /**
-     * Checks if the given String object representing a monetary value has at most two decimal places.
+     * Checks if the given String object representing a real number has at most two decimal places.
      * 
-     * @param input A String object representing a monetary value.
+     * @param input A String object representing a real number.
      * @return true if the String object can be parsed as a double and 
-     *         represents a monetary value has at most two decimal places,
+     *         represents a real number has at most two decimal places,
      *         false otherwise.
      */
     private static boolean hasAtMostTwoDecimalPlaces(String input) {
         try {
-            double cost = Double.parseDouble(input);
+            double value = Double.parseDouble(input);
         } catch (NumberFormatException exception) {
             return false;
         }
