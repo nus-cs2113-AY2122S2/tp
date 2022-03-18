@@ -255,8 +255,10 @@ public class Parser {
      * @return An double representing a cost value.
      * @throws InvalidFormatException If the provided input String object contains characters other than numeric
      *                                characters or a single decimal point character,
-     *                                and cannot be parsed as a double, or
-     *                                if the double parsed from the input String object is not a positive value.
+     *                                and cannot be parsed as a double,
+     *                                if the double parsed from the input String object is not a positive value,
+     *                                if the parsed double has more than 2 decimal points, or
+     *                                if the parsed double has more than 12 digits before the decimal point.                                
      */
     private static double parseCostFromString(String input, String delimiter) throws InvalidFormatException {
         double cost;
