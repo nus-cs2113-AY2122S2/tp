@@ -40,6 +40,7 @@ class ActivityCreateCommandTest {
 
     /**
      * Checks if an activity is created when an activity has both cost and cost list.
+     *
      * @throws InvalidDataException If there are no sessions stored or
      *                              if the session unique identifier specified was not found.
      */
@@ -52,6 +53,7 @@ class ActivityCreateCommandTest {
 
     /**
      * Checks if an activity is created when an activity has different length for involved list and cost list.
+     *
      * @throws InvalidDataException If there are no sessions stored or
      *                              if the session unique identifier specified was not found.
      */
@@ -117,9 +119,9 @@ class ActivityCreateCommandTest {
         assertEquals(InvalidCommand.class, activityWithMissingInvolvedListArgument.getClass());
     }
 
-
     /**
-     * Checks if an activity is created when an activity has duplicate names in the involved list.
+     * Checks if an activity is not created when an activity has duplicate names in the involved list.
+     *
      * @throws InvalidDataException If there are no sessions stored or
      *                              if the session unique identifier specified was not found.
      */
@@ -133,7 +135,7 @@ class ActivityCreateCommandTest {
     }
 
     /**
-     * Checks if activity unique identifier is incremented if an activity fails
+     * Checks if activity unique identifier is not incremented if an activity fails
      * to be created due to duplicate names in involved list.
      */
     @Test
@@ -149,6 +151,7 @@ class ActivityCreateCommandTest {
 
     /**
      * Checks if activity is created successfully and added into list of activities.
+     *
      * @throws InvalidDataException If there are no sessions stored or
      *                              if the session unique identifier specified was not found.
      */
