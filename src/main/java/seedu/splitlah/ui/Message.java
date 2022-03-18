@@ -24,7 +24,7 @@ public abstract class Message {
             "The application is terminated";
 
     // TextUI
-    public static final String ASCII_TEXTUI_LOGO = 
+    public static final String ASCII_TEXTUI_LOGO =
             " $$$$$$\\            $$\\ $$\\   $$\\     $$\\           $$\\\n"
             + "$$  $$\\           $$ |\\|  $$ |    $$ |          $$ |\n"
             + "$$ /  \\__| $$$$$$\\  $$ |$$\\ $$$$$$\\   $$ | $$$$$$\\  $$$$$$$\\\n"
@@ -37,7 +37,7 @@ public abstract class Message {
             + "          $$ |\n"
             + "          \\__|";
     public static final String MESSAGE_TEXTUI_HELP_MENU =
-            "HELP MENU --\n" 
+            "HELP MENU --\n"
                     + "1.  Create a new session\n"
                     + "        " + SessionCreateCommand.COMMAND_FORMAT + "\n"
                     + "2.  Delete an existing session\n"
@@ -137,7 +137,7 @@ public abstract class Message {
             "The person that you have specified was not found in this session.";
     public static final String ASSERT_SESSION_PERSON_LIST_EMPTY =
             "Session object cannot be constructed with a null or empty person list.";
-    
+
     // Profile
     public static final String ERROR_PROFILE_DUPLICATE_SESSION =
             "There is another session with the same name. Please rename and try again.";
@@ -185,7 +185,7 @@ public abstract class Message {
             "A session summary was not produced as a Session object with the following Id was not found :";
     public static final String LOGGER_SESSIONSUMMARY_SESSION_SUMMARY_PRINTED =
             "A session summary has been successful produced for the Session object with the following Id: ";
-    
+
     // Activity Create Command
     public static final String ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH =
             "There is a mismatch between persons involved and the costs for each person. Please rectify and try again.";
@@ -239,6 +239,8 @@ public abstract class Message {
             "There are duplicate names in the person list for the group you are trying to create.";
     public static final String ERROR_GROUPCREATE_DUPLICATE_GROUP_ID =
              "There is another group with the same Id.";
+    public static final String ASSERT_GROUPCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
+             "Name duplicates exists but not detected.";
 
 
 }
