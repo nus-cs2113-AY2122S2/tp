@@ -41,4 +41,8 @@ Error! Item Pax cannot be empty.
 Error! Item Name cannot be empty.
 Error! Invalid Command.
 Error! Item not found in inventory. Kindly add the item into the inventory first.
+Error! Invalid Command -> Availability NAME @ INT AGE
+Error! Invalid Command -> Availability NAME @ INT AGE
+Error! Invalid Command -> Availability NAME @ M,T,W,T,F,S,S
+Error! Invalid Command -> Availability NAME @ M,T,W,T,F,S,S
 see u again!
