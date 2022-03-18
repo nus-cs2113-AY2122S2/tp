@@ -1,0 +1,56 @@
+@startuml random
+
+class Order{
+    - String ShipToName
+    - String ShipToAddress
+    - Float Amount
+    - Date ToFulfilBy
+    - Date FulfilledBy
+    - List<OrderItem> items 
+}
+
+
+class Warehouse{
+    - List<Order> orders
+    - List<Item> inventory
+    - Float totalCapacity
+    - Float capacityLevel
+    + Warehouse()
+    + getOrderById()
+    + addItem()
+    + viewItem()
+    + listItems()
+    + removeItem(Float qty)
+    + remove()
+    + totalGoods()
+    + getFulfilmentRate()
+
+}
+
+class UnitItem{
+    - Review review
+    - String name
+    - String unit_price
+    - Float price
+    - Float weight
+    - Bool isPerishable
+    + UnitItem()  
+    + void print()
+}
+
+class Item extends UnitItem{
+    - Float quantity
+    + Item()
+}
+' quantity here refers to how much 
+class OrderItem extends Item{
+    - Bool isCheckedOff
+    + OrderItem()
+}
+
+
+' Billable <|-- Item
+Item "0..*"<-- Warehouse : contains
+Warehouse "0..*"--> Order
+Order "1..*" --> OrderItem
+@enduml
