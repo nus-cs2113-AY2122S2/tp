@@ -75,7 +75,7 @@ public class ActivityCreateCommand extends Command {
         assert sessionId > 0 : Message.ASSERT_ACTIVITYCREATE_SESSION_ID_LESS_THAN_ONE;
         assert activityName != null : Message.ASSERT_ACTIVITYCREATE_ACTIVITY_NAME_MISSING;
         assert payer != null : Message.ASSERT_ACTIVITYCREATE_PAYER_NAME_MISSING;
-        assert involvedList != null : Message.ASSERT_ACTIVITYCREATE_INVOLVED_LIST_ARRAY_EMPTY;
+        assert involvedList != null : Message.ASSERT_ACTIVITYCREATE_INVOLVED_LIST_ARRAY_NULL;
         this.sessionId = sessionId;
         this.activityName = activityName;
         this.totalCost = totalCost;
@@ -116,7 +116,6 @@ public class ActivityCreateCommand extends Command {
         boolean isMissingCost = false;
         boolean isMissingCostList = false;
         boolean hasDifferentLength = false;
-        String errorMessage = null;
 
         try {
             totalCost = Parser.parseTotalCost(commandArgs);
@@ -342,7 +341,7 @@ public class ActivityCreateCommand extends Command {
         }
         try {
             updateCostAndCostList();
-            assert costList != null : Message.ASSERT_ACTIVITYCREATE_COST_LIST_ARRAY_EMPTY;
+            assert costList != null : Message.ASSERT_ACTIVITYCREATE_COST_LIST_ARRAY_NULL;
             assert totalCost > 0 : Message.ASSERT_ACTIVITYCREATE_TOTAL_COST_LESS_THAN_ONE;
             Session session = manager.getProfile().getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
