@@ -24,6 +24,7 @@ public class ListCommand extends Command {
             }
             indexOfList++;
         }
+        assert listInString.length() != 0 : "Return string should be non-empty";
         return listInString;
     }
 
