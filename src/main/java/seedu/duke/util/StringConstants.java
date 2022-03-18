@@ -62,6 +62,7 @@ public class StringConstants {
      */
     public static final String LIST_MESSAGE_TOP = "Ok! Here are the task(s) in your list:";
     public static final String EMPTY_LIST = "(empty)";
+    public static final String LIST_ARGUMENT = "listArgument";
 
     /**
      * For MarkCommand.
@@ -107,7 +108,11 @@ public class StringConstants {
     public static final String HELP = "Displays help and format for selected command.\n"
             + "Format to display help for specific command: help COMMAND\n"
             + "Available commands: exit, add, del, list, mark, save, help";
+    public static final String TAG_HELP = "Set a custom tag for your tasks.\n"
+            + "Format to add a tag: tag add TASK_INDEX [-m MODULE_CODE] TAG_DESCRIPTION\n"
+            + "Format to delete a tag: tag del TASK_INDEX [-m MODULE_CODE] TAG_DESCRIPTION";
     public static final String HELP_EXCEPTION = "Sorry, but no help exists for that command.";
+    public static final String HELP_COMMAND_ARGUMENT = "command";
 
     /**
      * For SaveCommand.
@@ -118,6 +123,12 @@ public class StringConstants {
     public static final String TASK_DATA_SAVE_FAILED = "Failed to write general task data to file. "
             + "Your general tasks were NOT saved!";
     public static final String TASK_DATA_SAVE_SUCCESS = "General tasks written to file.";
+
+    /**
+     * For TagCommand.
+     */
+    public static final String ADD_TAG_MESSAGE = "%s has been tagged with %s.";
+    public static final String DEL_TAG_MESSAGE = "%s has %s tag removed.";
 
     /**
      * For CommandResult.
@@ -136,6 +147,7 @@ public class StringConstants {
     public static final String ERROR_WRITE_FILE = "Error writing to file...";
     public static final String ERROR_READ_FILE = "Error reading from file...";
     public static final String ERROR_FILE_CREATE_FAIL = "Sorry, file creation failed...";
+    public static final String ERROR_NO_SUCH_TAG = "Sorry, no such tag exists ._.";
 
 
     /**
@@ -153,6 +165,8 @@ public class StringConstants {
     public static final String COMPLETED_FLAG = "/c";
     public static final String UNCOMPLETED_FLAG = "/u";
     public static final String ARGUMENT = "arguments";
+    public static final String TAG_DESCRIPTION = "tagDescription";
+    public static final String TAG_OPERATION = "tagOperation";
     public static final String COMMAND_WORD = "commandWord";
     public static final String EXIT_COMMAND_WORD = "exit";
     public static final String ADD_COMMAND_WORD = "add";
@@ -163,6 +177,7 @@ public class StringConstants {
     public static final String RESET_COMMAND_WORD = "reset";
     public static final String HELP_COMMAND_WORD = "help";
     public static final String SAVE_COMMAND_WORD = "save";
+    public static final String TAG_COMMAND_WORD = "tag";
 
     /**
      * General strings.

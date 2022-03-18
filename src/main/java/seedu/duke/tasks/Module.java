@@ -60,6 +60,10 @@ public class Module {
         return this + LS + taskList.getAllTasks(INDENT);
     }
 
+    public String printModuleTaskListWithTag(String tag) {
+        return this + LS + taskList.getTasksWithTag(INDENT, tag);
+    }
+
     /**
      * Formats the module as a string.
      */
