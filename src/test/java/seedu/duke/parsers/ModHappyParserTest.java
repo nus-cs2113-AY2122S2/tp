@@ -11,6 +11,7 @@ import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.MarkCommand;
 import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.exceptions.NoSuchTaskException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.parsers.ModHappyParser;
@@ -773,19 +774,6 @@ public class ModHappyParserTest {
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof ListCommand);
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void parse_listCommand_unnecessaryArgs() {
-        final String testString = "list blahblah";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
         } catch (Exception e) {
             fail();
         }
