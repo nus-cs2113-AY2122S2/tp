@@ -574,6 +574,23 @@ public class Parser {
     }
 
     /**
+     * Returns an integer that represents a group unique identifier, given the command arguments from user input, 
+     * delimited by the Group ID delimiter.
+     *
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return An integer that represents a group unique identifier.
+     * @throws InvalidFormatException If the Group ID delimiter is not found in the command arguments,
+     *                                if no arguments representing a group unique identifier were provided after 
+     *                                the Group ID delimiter,
+     *                                if the parsed argument cannot be parsed as an integer, or
+     *                                if the integer parsed from the argument is not a positive integer.
+     */
+    public static int parseGroupId(String commandArgs) throws InvalidFormatException {
+        String argument = getArgumentFromDelimiter(commandArgs, GROUP_ID_DELIMITER);
+        return parseIdFromString(argument, GROUP_ID_DELIMITER);
+    }
+
+    /**
      * Returns a LocalDate object that represents a date, given the command arguments from user input, 
      * delimited by the Date delimiter.
      *

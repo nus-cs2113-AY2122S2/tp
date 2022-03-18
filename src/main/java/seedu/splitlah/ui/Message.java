@@ -103,6 +103,8 @@ public abstract class Message {
             "The command contains one or more duplicate delimiters. Please rectify and try again.";
     public static final String ASSERT_PARSER_COMMAND_ARGUMENTS_EMPTY =
             "The command arguments cannot be null.";
+    public static final String ASSERT_PARSER_PLACES_NEGATIVE =
+            "A number cannot have less than 0 digits before the integer position.";
 
     // ActivityCost
     public static final String LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_DEFAULT_PARAMS =
