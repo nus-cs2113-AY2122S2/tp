@@ -89,4 +89,15 @@ public class Equipment {
     public int hashCode() {
         return Objects.hash(itemName, serialNumber, type, cost, purchasedFrom, purchasedDate);
     }
+
+    @Override
+    public String toString() {
+        return  "itemName=" + itemName + "," + System.lineSeparator() +
+                "serialNumber=" + serialNumber + "," + System.lineSeparator() +
+                "type=" + type + "," + System.lineSeparator() +
+                "cost=" + cost + "," + System.lineSeparator() +
+                "purchasedFrom=" + purchasedFrom + "," + System.lineSeparator() +
+                "purchasedDate=" + purchasedDate + System.lineSeparator() + System.lineSeparator()
+                ;
+    }
 }

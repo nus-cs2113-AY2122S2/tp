@@ -14,11 +14,14 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "                  _                            _                                               \n" +
+                "                  (_)                          | |                                              \n" +
+                "   ___  __ _ _   _ _ _ __  _ __ ___   ___ _ __ | |_ _ __ ___   __ _ _ __   __ _  __ _  ___ _ __ \n" +
+                "  / _ \\/ _` | | | | | '_ \\| '_ ` _ \\ / _ \\ '_ \\| __| '_ ` _ \\ / _` | '_ \\ / _` |/ _` |/ _ \\ '__|\n" +
+                " |  __/ (_| | |_| | | |_) | | | | | |  __/ | | | |_| | | | | | (_| | | | | (_| | (_| |  __/ |   \n" +
+                "  \\___|\\__, |\\__,_|_| .__/|_| |_| |_|\\___|_| |_|\\__|_| |_| |_|\\__,_|_| |_|\\__,_|\\__, |\\___|_|   \n" +
+                "          | |       | |                                                          __/ |          \n" +
+                "          |_|       |_|                                                         |___/";
         System.out.println("Hello from\n" + logo);
         System.out.println("What do you want to do?");
 
@@ -34,6 +37,9 @@ public class Duke {
             command = new Parser().parseCommand(userCommand);
             result = executeCommand(command);
             System.out.println(result.getResultToShow());
+            if  (result.getRelevantEquipment() != null) {
+                System.out.println(result.getRelevantEquipment());
+            }
 
             userCommand = in.nextLine();
         }
