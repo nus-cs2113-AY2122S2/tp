@@ -318,8 +318,8 @@ public class WorkoutList {
             throw new InvalidWorkoutException(className, InvalidWorkoutException.INVALID_REPS_VALUE_ERROR_MSG);
         }
 
-        Workout updatedWorkout = getWorkoutFromIndexNum(indexToUpdate);
-        String exerciseName = updatedWorkout.getExerciseName();
+        Workout workoutToUpdate = getWorkoutFromIndexNum(indexToUpdate);
+        String exerciseName = workoutToUpdate.getExerciseName();
         boolean isExistingWorkout = checkForExistingWorkout(exerciseName, newRepsValue);
 
         if (isExistingWorkout) {
@@ -329,10 +329,11 @@ public class WorkoutList {
         }
 
         assert (isIndexToUpdateValid && isNewRepsValueValid && !isExistingWorkout);
-        String oldWorkoutKey = updatedWorkout.toString();
+        String oldWorkoutKey = workoutToUpdate.toString();
+        Workout updatedWorkout = workoutToUpdate;
         updatedWorkout.setRepetitions(newRepsValue);
         updateWorkoutsHashMapList(oldWorkoutKey, updatedWorkout);
-        logger.exiting(getClass().getName(), "updateWorkout");
+        logger.exiting(getClass().getName(), "Finished updating workout.");
         return updatedWorkout;
     }
 
