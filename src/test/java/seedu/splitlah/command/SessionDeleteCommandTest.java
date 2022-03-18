@@ -29,7 +29,7 @@ class SessionDeleteCommandTest {
      */
     @Test
     public void prepare_hasMissingDelimiter_InvalidCommand() {
-        String argsMissingSidDelimiter = "session /delete";
+        String argsMissingSidDelimiter = "session /delete sid 1";
         Command sessionWithMissingSidDelimiter = Parser.getCommand(argsMissingSidDelimiter);
         assertEquals(InvalidCommand.class, sessionWithMissingSidDelimiter.getClass());
     }
