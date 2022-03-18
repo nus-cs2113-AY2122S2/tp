@@ -88,9 +88,9 @@ public abstract class Message {
     public static final String ERROR_PARSER_COST_MORE_THAN_TWELVE_DIGITS_BEFORE_DP =
             "Please enter a value up to 12 digits in dollars for monetary value(s).";
     public static final String ERROR_PARSER_INVALID_GST_SURCHARGE =
-            "Please enter a valid GST surcharge in % after the delimiter: ";
+            "Please enter a valid GST surcharge in % in the range [0, 100] after the delimiter: ";
     public static final String ERROR_PARSER_INVALID_SERVICE_CHARGE =
-            "Please enter a valid service charge in % after the delimiter: ";
+            "Please enter a valid service charge in % in the range [0, 100] after the delimiter: ";
     public static final String ERROR_PARSER_EMPTY_COMMAND =
             "Please enter a command.";
     public static final String ERROR_PARSER_INVALID_COMMAND =
