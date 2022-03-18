@@ -1,4 +1,4 @@
-# Duke
+# Spendvelope
 
 {Give product intro here}
 
