@@ -1,5 +1,3 @@
-package seedu.duke;
-
 import commands.Command;
 import commands.CommandResult;
 import commands.ExitCommand;
@@ -7,7 +5,7 @@ import manager.RecordManager;
 import ui.TextUi;
 import parser.Parser;
 
-public class Duke {
+public class Spendvelope {
 
     /** Version info of the program. */
     public static final String VERSION = "Spendvelope - Version 1.0";
@@ -19,7 +17,7 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        new Duke().run();
+        new Spendvelope().run();
     }
 
     /** Runs the program until termination.  */
