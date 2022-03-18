@@ -46,6 +46,23 @@ class SessionCreateCommandTest {
         assertEquals(InvalidCommand.class, sessionWithMissingPersonListDelimiter.getClass());
     }
 
+    public void prepare_hasMissingArguments_InvalidCommand() {
+        // Case 1: Missing Session name.
+        String argsMissingNameArgument = "session /create /n /d 15-02-2022 /pl Alice Bob";
+        Command sessionWithMissingNameArgument = Parser.getCommand(argsMissingNameArgument);
+        assertEquals(InvalidCommand.class, sessionWithMissingNameArgument.getClass());
+
+        // Case 2: Missing Session Date.
+        String argsMissingDateArgument = "session /create /n Class gathering /d /pl Alice Bob";
+        Command sessionWithMissingDateArgument = Parser.getCommand(argsMissingDateArgument);
+        assertEquals(InvalidCommand.class, sessionWithMissingDateArgument.getClass());
+
+        // Case 3: Missing List of persons.
+        String argsMissingPersonListArgument = "session /create /n Class gathering /d 15-02-2022 /pl";
+        Command sessionWithMissingPersonListArgument = Parser.getCommand(argsMissingPersonListArgument);
+        assertEquals(InvalidCommand.class, sessionWithMissingPersonListArgument.getClass());
+    }
+
     /**
      * Checks if session is created successfully and added into list of sessions.
      */
