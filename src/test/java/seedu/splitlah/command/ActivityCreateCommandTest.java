@@ -109,6 +109,11 @@ class ActivityCreateCommandTest {
         String argsMissingInvolvedListArgument = "activity /create /sid 1 /n Dinner /p Alice /i /co 15";
         Command activityWithMissingInvolvedListArgument = Parser.getCommand(argsMissingInvolvedListArgument);
         assertEquals(InvalidCommand.class, activityWithMissingInvolvedListArgument.getClass());
+
+        // Case 5: Missing total cost
+        String argsMissingTotalCostArgument = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co";
+        Command activityWithMissingTotalCostArgument = Parser.getCommand(argsMissingTotalCostArgument);
+        assertEquals(InvalidCommand.class, activityWithMissingTotalCostArgument.getClass());
     }
 
     /**
