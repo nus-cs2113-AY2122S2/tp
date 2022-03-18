@@ -829,4 +829,197 @@ class ParserTest {
             fail();
         }
     }
+    
+    // parseGst()
+    /**
+     * Checks if an integer representing a GST percent value of 0 is properly returned 
+     * when the GST delimiter is not provided by the user.
+     */
+    @Test
+    void parseGst_missingDelimiter_gstZeroPercent() {
+        String argumentWithoutGstDelimiter =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            int output = Parser.parseGst(argumentWithoutGstDelimiter);
+            assertEquals(0, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the GST delimiter is provided but no arguments
+     * following the GST delimiter are provided by the user.
+     */
+    @Test
+    void parseGst_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutGstArgument =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst /sc 10";
+        try {
+            int output = Parser.parseGst(argumentWithoutGstArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.GST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the GST delimiter is provided by the user but the 
+     * argument following the GST delimiter cannot be parsed as an integer.
+     */
+    @Test
+    void parseGst_delimiterExistsArgumentNotInteger_exceptionThrown() {
+        String argumentWithNonIntegerArgument =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst apple /sc 10";
+        try {
+            int output = Parser.parseGst(argumentWithNonIntegerArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + Parser.GST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the GST delimiter and an integer representing the GST 
+     * is provided by the user but the integer is not within the valid range of [0, 100].
+     */
+    @Test
+    void parseGst_delimiterExistsArgumentIntegerButNotInRange_exceptionThrown() {
+        // Test values less than 0, negative values
+        String argumentWithIntegerArgumentUnderRange =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst -1 /sc 10";
+        try {
+            int output = Parser.parseGst(argumentWithIntegerArgumentUnderRange);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_INVALID_GST_SURCHARGE + Parser.GST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+
+        // Test values greater than 100
+        String argumentWithIntegerArgumentAboveRange =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 101 /sc 10";
+        try {
+            int output = Parser.parseGst(argumentWithIntegerArgumentAboveRange);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_INVALID_GST_SURCHARGE + Parser.GST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an integer representing a GST percent value is properly returned when the GST delimiter and
+     * an argument with an integer value within the valid range of [0, 100] is provided by the user.
+     */
+    @Test
+    void parseGst_delimiterExistsArgumentIntegerWithinRange_gstPercentage() {
+        String argumentWithIntegerArgumentInRange =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 10";
+        try {
+            int output = Parser.parseGst(argumentWithIntegerArgumentInRange);
+            assertEquals(7, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+
+    // parseServiceCharge()
+    /**
+     * Checks if an integer representing a service charge percent value of 0 is properly returned 
+     * when the Service charge delimiter is not provided by the user.
+     */
+    @Test
+    void parseServiceCharge_missingDelimiter_serviceChargeZeroPercent() {
+        String argumentWithoutServiceChargeDelimiter =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            int output = Parser.parseServiceCharge(argumentWithoutServiceChargeDelimiter);
+            assertEquals(0, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Service charge delimiter is provided but no arguments
+     * following the Service charge delimiter are provided by the user.
+     */
+    @Test
+    void parseServiceCharge_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutServiceChargeArgument =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc ";
+        try {
+            int output = Parser.parseServiceCharge(argumentWithoutServiceChargeArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.SERVICE_CHARGE_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Service charge delimiter is provided by the user but the 
+     * argument following the Service charge delimiter cannot be parsed as an integer.
+     */
+    @Test
+    void parseServiceCharge_delimiterExistsArgumentNotInteger_exceptionThrown() {
+        String argumentWithNonIntegerArgument =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc apple";
+        try {
+            int output = Parser.parseServiceCharge(argumentWithNonIntegerArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + Parser.SERVICE_CHARGE_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Service charge delimiter and an integer representing the
+     * service charge is provided by the user but the integer is not within the valid range of [0, 100].
+     */
+    @Test
+    void parseServiceCharge_delimiterExistsArgumentIntegerButNotInRange_exceptionThrown() {
+        // Test values less than 0, negative values
+        String argumentWithIntegerArgumentUnderRange =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc -1";
+        try {
+            int output = Parser.parseServiceCharge(argumentWithIntegerArgumentUnderRange);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + Parser.SERVICE_CHARGE_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+
+        // Test values greater than 100
+        String argumentWithIntegerArgumentAboveRange =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 101";
+        try {
+            int output = Parser.parseServiceCharge(argumentWithIntegerArgumentAboveRange);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + Parser.SERVICE_CHARGE_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an integer representing a service charge percent value is properly returned when the 
+     * Service charge delimiter and an argument with an integer value within the valid range of [0, 100]
+     * is provided by the user.
+     */
+    @Test
+    void parseServiceCharge_delimiterExistsArgumentIntegerWithinRange_serviceChargePercentage() {
+        String argumentWithIntegerArgumentInRange =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 10";
+        try {
+            int output = Parser.parseServiceCharge(argumentWithIntegerArgumentInRange);
+            assertEquals(10, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
 }
