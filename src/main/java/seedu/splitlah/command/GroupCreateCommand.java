@@ -75,7 +75,7 @@ public class GroupCreateCommand extends Command {
             }
         }
         assert nameSet.size() == personNames.length :
-            Message.ASSERT_SESSIONCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED;
+            Message.ASSERT_GROUPCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED;
         return false;
     }
 
@@ -122,11 +122,6 @@ public class GroupCreateCommand extends Command {
             return;
         }
         int newGroupId = manager.getProfile().getNewGroupId();
-        boolean isGroupIdExists = manager.getProfile().hasGroupId(newGroupId);
-        if (isGroupIdExists) {
-            manager.getUi().printlnMessage(Message.ERROR_GROUPCREATE_DUPLICATE_GROUP_ID);
-            return;
-        }
 
         Group newGroup = new Group(groupName, newGroupId, personList);
         manager.getProfile().addGroup(newGroup);
