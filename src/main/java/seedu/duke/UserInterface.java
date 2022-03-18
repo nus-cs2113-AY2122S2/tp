@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import util.exceptions.NullException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -9,7 +11,7 @@ public class UserInterface {
     private static String userInput;
     private static ArrayList<Goods> userGoods = new ArrayList<>();
 
-    public static void run() {
+    public static void run() throws NullException {
         input = new Scanner(System.in);
         userInput = input.nextLine();
         while (!userInput.equals("bye")) {
@@ -37,6 +39,9 @@ public class UserInterface {
                 Regex match = new Regex(userInput, format);
                 HashMap<String, String> inputValues = match.getGroupValues();
                 Commands.removeGood(inputValues.get("id"), inputValues.get("qty"), userGoods);
+                break;
+            case "total":
+                Commands.totalGoods(userGoods);
                 break;
             default:
                 //error exception here

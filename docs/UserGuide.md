@@ -10,7 +10,7 @@
   * [Adding inventory items:] `add` [#Adding inventory items:]
   * [Removing inventory items:] `remove`[#Removing inventory items:]
   * [Getting a list of total inventory:] `list` [#Getting a list of total inventory:]
-  * [Getting a description of inventory:] `description` [#Getting a description of inventory:]
+  * [Getting a view of inventory:] `view` [#Getting a view of chosen inventory:]
   * [Getting the total number of inventory in the warehouse:] `total` [#Getting the total number of inventory 
   in the warehouse:]
 
@@ -37,6 +37,12 @@ Example of usage:
 
 `add id/102 n/tables q/15`
 
+Expected Output
+```
+100 chairs (Empty Description) Has been added
+15 tables (Empty Description) Has been added
+```
+
 ### Removing inventory items: `remove`
 Adds a new item to the list of todo items.
 
@@ -51,7 +57,9 @@ Example of usage:
 
 Expected output:
 
-`2 chairs have been removed.`
+```
+2 chairs have been removed.
+```
 
 ### Getting a list of total inventory: `list`
 To get a list of names of every inventory item.
@@ -70,41 +78,42 @@ List of inventory items:
 ```
 
 ### Getting a description of inventory: `view`
-Adds a new item to the list of todo items.
+View the details of a specific good, based on its ID number.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Format: `view id/ID`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.
+* The `ID` is an integer uniquely represent the items.
 
 Example of usage:
 
-`todo n/Write the rest of the User Guide d/next week`
+`view id/1`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+Expected output:
+```
+Viewing item with id 1
+Item name: chairs
+Item description: Empty Description
+Item quantity: 86
+```
 
 ### Getting the total number of inventory in the warehouse: `total`
-Adds a new item to the list of todo items.
+Prints out the total number of goods in the entire warehouse.
 
-Format: `todo n/TODO_NAME d/DEADLINE`
-
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.
+Format: `total`
 
 Example of usage:
 
-`todo n/Write the rest of the User Guide d/next week`
+`total`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
-
-## FAQ
-
-**Q**: How do I transfer my data to another computer? 
-
-**A**: {your answer here}
+Expected output:
+```
+There are 86 goods in total.
+```
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+* Add goods `add id/ID n/GOOD_NAME q/QUANTITY`
+* Remove goods: `remove i/ID q/QUANTITY`
+* List goods: `list`
+* View goods: `view id/ID`
+* Total: `total`
