@@ -24,7 +24,7 @@ public class Group {
      * Constructs a Group object.
      *
      * @param groupName A String object that represents the group's name.
-     * @param groupId An integer that uniquely identifies a group.
+     * @param groupId   An integer that uniquely identifies a group.
      * @param personList An ArrayList object containing Person objects
      */
     public Group(String groupName, int groupId, ArrayList<Person> personList) {
