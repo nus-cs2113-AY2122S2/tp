@@ -24,7 +24,7 @@ public class GroupCreateCommand extends Command {
     public static final String COMMAND_FORMAT =
         "Syntax: group /create /n [GROUP_NAME] /pl [NAME1 NAME2 …]";
 
-    private static final String COMMAND_SUCCESS =
+    private static final String SUCCESS_MESSAGE =
         "The group was created successfully.\n";
 
     public static final String[] COMMAND_DELIMITERS = {
@@ -130,6 +130,6 @@ public class GroupCreateCommand extends Command {
 
         Group newGroup = new Group(groupName, newGroupId, personList);
         manager.getProfile().addGroup(newGroup);
-        manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + newGroup);
+        manager.getUi().printlnMessageWithDivider(SUCCESS_MESSAGE + newGroup);
     }
 }
