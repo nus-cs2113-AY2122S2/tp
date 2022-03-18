@@ -831,6 +831,10 @@ class ParserTest {
     }
     
     // parseGst()
+    /**
+     * Checks if an integer representing a GST percent value of 0 is properly returned 
+     * when the GST delimiter is not provided by the user.
+     */
     @Test
     void parseGst_missingDelimiter_gstZeroPercent() {
         String argumentWithoutGstDelimiter =
@@ -843,6 +847,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the GST delimiter is provided but no arguments
+     * following the GST delimiter are provided by the user.
+     */
     @Test
     void parseGst_delimiterExistsWithoutArgument_exceptionThrown() {
         String argumentWithoutGstArgument =
@@ -856,6 +864,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the GST delimiter is provided by the user but the 
+     * argument following the GST delimiter cannot be parsed as an integer.
+     */
     @Test
     void parseGst_delimiterExistsArgumentNotInteger_exceptionThrown() {
         String argumentWithNonIntegerArgument =
@@ -869,6 +881,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is properly thrown when the GST delimiter and an integer representing the GST 
+     * is provided by the user but the integer is not within the valid range of [0, 100].
+     */
     @Test
     void parseGst_delimiterExistsArgumentIntegerButNotInRange_exceptionThrown() {
         // Test negative values
@@ -894,6 +910,10 @@ class ParserTest {
         }
     }
 
+    /**
+     * Checks if an integer representing a GST percent value is properly returned when the GST delimiter and
+     * an argument with an integer value within the valid range of [0, 100] is provided by the user.
+     */
     @Test
     void parseGst_delimiterExistsArgumentIntegerWithinRange_gstPercentage() {
         String argumentWithIntegerArgumentInRange =
