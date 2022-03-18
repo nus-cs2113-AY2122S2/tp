@@ -28,11 +28,9 @@ class ActivityCreateCommandTest {
 
     /**
      * Checks if an activity is created when an activity is missing both cost and cost list.
-     * @throws InvalidDataException If there are no sessions stored or
-     *                              if the session unique identifier specified was not found.
      */
     @Test
-    public void prepare_hasMissingCostAndCostList_invalidCommand() throws InvalidDataException {
+    public void prepare_hasMissingCostAndCostList_invalidCommand() {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie";
         Command command = Parser.getCommand(userInput);
         assertEquals(InvalidCommand.class, command.getClass());
@@ -40,12 +38,9 @@ class ActivityCreateCommandTest {
 
     /**
      * Checks if an activity is created when an activity has both cost and cost list.
-     *
-     * @throws InvalidDataException If there are no sessions stored or
-     *                              if the session unique identifier specified was not found.
      */
     @Test
-    public void prepare_hasBothCostAndCostList_invalidCommand() throws InvalidDataException {
+    public void prepare_hasBothCostAndCostList_invalidCommand() {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30 /cl 10 10 10";
         Command command = Parser.getCommand(userInput);
         assertEquals(InvalidCommand.class, command.getClass());
@@ -53,12 +48,9 @@ class ActivityCreateCommandTest {
 
     /**
      * Checks if an activity is created when an activity has different length for involved list and cost list.
-     *
-     * @throws InvalidDataException If there are no sessions stored or
-     *                              if the session unique identifier specified was not found.
      */
     @Test
-    public void prepare_costListAndInvolvedListDifferentLength_invalidCommand() throws InvalidDataException {
+    public void prepare_costListAndInvolvedListDifferentLength_invalidCommand() {
         String firstUserInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /cl 10 10";
         Command firstCommand = Parser.getCommand(firstUserInput);
         assertEquals(InvalidCommand.class, firstCommand.getClass());
