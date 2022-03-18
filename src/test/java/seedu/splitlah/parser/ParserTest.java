@@ -925,4 +925,80 @@ class ParserTest {
             fail();
         }
     }
+
+    // parseServiceCharge()
+    @Test
+    void parseServiceCharge_missingDelimiter_serviceChargeZeroPercent() {
+        String argumentWithoutServiceChargeDelimiter =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            int output = Parser.parseServiceCharge(argumentWithoutServiceChargeDelimiter);
+            assertEquals(0, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+
+    @Test
+    void parseServiceCharge_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutServiceChargeArgument =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc ";
+        try {
+            int output = Parser.parseServiceCharge(argumentWithoutServiceChargeArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.SERVICE_CHARGE_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseServiceCharge_delimiterExistsArgumentNotInteger_exceptionThrown() {
+        String argumentWithNonIntegerArgument =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc apple";
+        try {
+            int output = Parser.parseServiceCharge(argumentWithNonIntegerArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + Parser.SERVICE_CHARGE_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseServiceCharge_delimiterExistsArgumentIntegerButNotInRange_exceptionThrown() {
+        // Test negative values
+        String argumentWithIntegerArgumentUnderRange =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc -1";
+        try {
+            int output = Parser.parseServiceCharge(argumentWithIntegerArgumentUnderRange);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + Parser.SERVICE_CHARGE_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+
+        // Test negative values
+        String argumentWithIntegerArgumentAboveRange =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 101";
+        try {
+            int output = Parser.parseServiceCharge(argumentWithIntegerArgumentAboveRange);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + Parser.SERVICE_CHARGE_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseServiceCharge_delimiterExistsArgumentIntegerWithinRange_serviceChargePercentage() {
+        String argumentWithIntegerArgumentInRange =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 10";
+        try {
+            int output = Parser.parseServiceCharge(argumentWithIntegerArgumentInRange);
+            assertEquals(10, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
 }
