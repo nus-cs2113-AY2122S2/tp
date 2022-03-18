@@ -143,4 +143,13 @@ class ActivityCreateCommandTest {
         assertEquals(currentActivityId, testActivityId);
     }
 
+    @Test
+    public void run_validCommand_activityListSizeBecomesTwo() throws InvalidDataException {
+        String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30";
+        Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityCreateCommand.class, command.getClass());
+        command.run(manager);
+        assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
+    }
+
 }
