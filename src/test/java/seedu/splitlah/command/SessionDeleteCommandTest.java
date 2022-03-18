@@ -34,6 +34,11 @@ class SessionDeleteCommandTest {
         assertEquals(InvalidCommand.class, sessionWithMissingSidDelimiter.getClass());
     }
 
+    public void prepare_hasMissingArgument_InvalidCommand() {
+        String argsMissingSidDelimiter = "session /delete /sid";
+        Command sessionWithMissingSidDelimiter = Parser.getCommand(argsMissingSidDelimiter);
+        assertEquals(InvalidCommand.class, sessionWithMissingSidDelimiter.getClass());
+    }
     /**
      * Checks if session is deleted with an invalid session unique identifier.
      */
