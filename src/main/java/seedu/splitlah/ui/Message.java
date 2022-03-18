@@ -146,6 +146,10 @@ public abstract class Message {
             "There are currently no sessions stored.";
     public static final String ERROR_PROFILE_SESSION_NOT_IN_LIST =
             "The session that you have specified was not found.";
+    public static final String ERROR_PROFILE_GROUP_LIST_EMPTY =
+            "There are currently no groups stored.";
+    public static final String ERROR_PROFILE_GROUP_NOT_IN_LIST =
+            "The group that you have specified was not found.";
 
     // Activity
     public static final String ERROR_ACTIVITY_INACCURATE_INVOLVED_LIST =
