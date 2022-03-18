@@ -829,4 +829,80 @@ class ParserTest {
             fail();
         }
     }
+    
+    // parseGst()
+    @Test
+    void parseGst_missingDelimiter_gstZeroPercent() {
+        String argumentWithoutGstDelimiter =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        try {
+            int output = Parser.parseGst(argumentWithoutGstDelimiter);
+            assertEquals(0, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
+
+    @Test
+    void parseGst_delimiterExistsWithoutArgument_exceptionThrown() {
+        String argumentWithoutGstArgument =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst /sc 10";
+        try {
+            int output = Parser.parseGst(argumentWithoutGstArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.GST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseGst_delimiterExistsArgumentNotInteger_exceptionThrown() {
+        String argumentWithNonIntegerArgument =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst apple /sc 10";
+        try {
+            int output = Parser.parseGst(argumentWithNonIntegerArgument);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + Parser.GST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseGst_delimiterExistsArgumentIntegerButNotInRange_exceptionThrown() {
+        // Test negative values
+        String argumentWithIntegerArgumentUnderRange =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst -1 /sc 10";
+        try {
+            int output = Parser.parseGst(argumentWithIntegerArgumentUnderRange);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_INVALID_GST_SURCHARGE + Parser.GST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+
+        // Test negative values
+        String argumentWithIntegerArgumentAboveRange =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 101 /sc 10";
+        try {
+            int output = Parser.parseGst(argumentWithIntegerArgumentAboveRange);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_INVALID_GST_SURCHARGE + Parser.GST_DELIMITER;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    @Test
+    void parseGst_delimiterExistsArgumentIntegerWithinRange_gstPercentage() {
+        String argumentWithIntegerArgumentInRange =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 10";
+        try {
+            int output = Parser.parseGst(argumentWithIntegerArgumentInRange);
+            assertEquals(7, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+    }
 }
