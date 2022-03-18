@@ -39,6 +39,18 @@ class SessionDeleteCommandTest {
         Command sessionWithMissingSidDelimiter = Parser.getCommand(argsMissingSidDelimiter);
         assertEquals(InvalidCommand.class, sessionWithMissingSidDelimiter.getClass());
     }
+    public void run_validCommand_sessionListSizeBecomesOne() {
+        String userInput = "session /delete /sid 1";
+        Command command = Parser.getCommand(userInput);
+
+        // Check if a SessionDeleteCommand instance was returned.
+        assertEquals(SessionDeleteCommand.class, command.getClass());
+        command.run(manager);
+
+        // Check if session was successfully removed from the list of sessions.
+        assertEquals(1, manager.getProfile().getSessionList().size());
+    }
+
     /**
      * Checks if session is deleted with an invalid session unique identifier.
      */
