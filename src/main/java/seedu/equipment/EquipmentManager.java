@@ -6,7 +6,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class EquipmentManager {
-    private final HashMap<String, Equipment> equipmentList = new HashMap<>();
+    private final HashMap<String, Equipment> equipmentList;
+
+    public EquipmentManager() {
+        this.equipmentList = new HashMap<>();
+    }
 
     public void addEquipment(String itemName, String serialNumber, EquipmentType type, double cost,
                              String purchasedFrom, String purchasedDate) throws DuplicateSerialNumber {
