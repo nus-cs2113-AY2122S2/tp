@@ -594,8 +594,10 @@ public class Parser {
      * @throws InvalidFormatException If the Total cost delimiter is not found in the command arguments,
      *                                if no arguments representing a total cost were provided after the 
      *                                Total cost delimiter,
-     *                                if the arguments cannot be parsed as a double, or
-     *                                if the cost value parsed is not positive.
+     *                                if the arguments cannot be parsed as a double,
+     *                                if the parsed cost value is not positive,
+     *                                if the parsed cost value has more than 2 decimal points, or
+     *                                if the parsed cost value has more than 12 digits before the decimal point.
      */
     public static double parseTotalCost(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, TOTAL_COST_DELIMITER);
@@ -612,7 +614,9 @@ public class Parser {
      *                                if no arguments representing a list of cost values were provided after the 
      *                                Cost list delimiter,
      *                                if any token in the argument cannot be parsed as a double, or
-     *                                if any cost value parsed is not positive.
+     *                                if any cost value parsed is not positive,
+     *                                if any parsed cost value has more than 2 decimal points, or
+     *                                if any parsed cost value has more than 12 digits before the decimal point.
      */
     public static double[] parseCostList(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, COST_LIST_DELIMITER);
@@ -630,8 +634,7 @@ public class Parser {
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents a GST charge in percents.
-     * @throws InvalidFormatException If the GST delimiter is not found in the command arguments,
-     *                                if no arguments representing a GST charge were provided after the 
+     * @throws InvalidFormatException If no arguments representing a GST charge were provided after the 
      *                                GST delimiter,
      *                                if the argument cannot be parsed as an integer, or
      *                                if the parsed GST percentage is not in [0, 100].
@@ -655,8 +658,7 @@ public class Parser {
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents a service charge in percents.
-     * @throws InvalidFormatException If the Service charge delimiter is not found in the command arguments,
-     *                                if no arguments representing a service charge were provided after the 
+     * @throws InvalidFormatException If no arguments representing a service charge were provided after the 
      *                                Service charge delimiter,
      *                                if the argument cannot be parsed as an integer, or
      *                                if the parsed service charge percentage is not in [0, 100].
