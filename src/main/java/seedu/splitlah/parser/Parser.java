@@ -208,6 +208,33 @@ public class Parser {
     }
 
     /**
+     * Checks if the given String object representing a real number has less than
+     * a specified number of digits before decimal point.
+     *
+     * @param input  A String object representing a real number.
+     * @param places An integer representing the maximum number of digits that the input value
+     *               should have before the decimal point.
+     * @return true if the String object can be parsed as a double and
+     *         represents a real number that has at most the specified number of digits before decimal point,
+     *         false otherwise.
+     */
+    private static boolean hasAtMostGivenIntegerPlaces(String input, int places) {
+        assert places >= 0 : Message.ASSERT_PARSER_PLACES_NEGATIVE;
+        try {
+            double value = Double.parseDouble(input);
+        } catch (NumberFormatException exception) {
+            return false;
+        }
+
+        int numberChars = input.length();
+        int indexOfDecimal = input.indexOf('.');
+        if (indexOfDecimal == INVALID_INDEX_INDICATOR) {
+            return numberChars <= places;
+        }
+        return indexOfDecimal <= places;
+    }
+
+    /**
      * Checks if the given String object representing a monetary value has at most twelve digits before decimal point.
      *
      * @param input A String object representing a monetary value.
@@ -216,18 +243,7 @@ public class Parser {
      *         false otherwise.
      */
     private static boolean hasAtMostTwelveIntegerPlaces(String input) {
-        try {
-            double cost = Double.parseDouble(input);
-        } catch (NumberFormatException exception) {
-            return false;
-        }
-
-        int numberChars = input.length();
-        int indexOfDecimal = input.indexOf('.');
-        if (indexOfDecimal == INVALID_INDEX_INDICATOR) {
-            return numberChars <= 12;
-        }
-        return indexOfDecimal <= 12;
+        return hasAtMostGivenIntegerPlaces(input, 12);
     }
 
     /**
