@@ -14,9 +14,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a record to the RecordManager. "
-            + "Parameters: add i/ITEM_NAME p/PRICE c/CATEGORY d/DATE" + System.lineSeparator()
+            + "Parameters: add product i/ITEM_NAME p/PRICE t/CATEGORY d/DATE" + System.lineSeparator()
             + "Example: " + COMMAND_WORD
-            + " i/handphone cover p/$10 c/accessory d/14022022";
+            + " add product i/handphone cover p/$10 t/accessory d/14022022";
 
     private static final String MESSAGE_SUCCESS = "New record added: %1$s";
 
@@ -31,7 +31,7 @@ public class AddCommand extends Command {
                       String date, String productType) throws IllegalValueException {
         this.toAdd = new Product(name, price, date, productType);
         super.totalExpense += price;
-        if (limitMgr.ifExceedLimit(super.totalExpense)) limitMgr.displayWarning();
+        //if (limitMgr.ifExceedLimit(super.totalExpense)) limitMgr.displayWarning();
     }
 
     /**
@@ -43,7 +43,7 @@ public class AddCommand extends Command {
                              String date, String renewal) throws IllegalValueException {
         this.toAdd = new Subscription(name, price, date, renewal);
         super.totalExpense += price;
-        if (limitMgr.ifExceedLimit(super.totalExpense)) limitMgr.displayWarning();
+        //if (limitMgr.ifExceedLimit(super.totalExpense)) limitMgr.displayWarning();
     }
 
     @Override
