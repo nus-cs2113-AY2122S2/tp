@@ -330,11 +330,10 @@ public class WorkoutList {
 
         assert (isIndexToUpdateValid && isNewRepsValueValid && !isExistingWorkout);
         String oldWorkoutKey = workoutToUpdate.toString();
-        Workout updatedWorkout = workoutToUpdate;
-        updatedWorkout.setRepetitions(newRepsValue);
-        updateWorkoutsHashMapList(oldWorkoutKey, updatedWorkout);
+        workoutToUpdate.setRepetitions(newRepsValue);
+        updateWorkoutsHashMapList(oldWorkoutKey, workoutToUpdate);
         logger.exiting(getClass().getName(), "Finished updating workout.");
-        return updatedWorkout;
+        return workoutToUpdate;
     }
 
     /**
