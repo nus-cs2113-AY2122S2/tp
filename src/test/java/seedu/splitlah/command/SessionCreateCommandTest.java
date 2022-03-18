@@ -79,6 +79,15 @@ class SessionCreateCommandTest {
         assertEquals(3, manager.getProfile().getSessionList().size());
     }
 
+    public void run_validCommand_sessionIdIncremented() {
+        String userInput = "session /create /n Class gathering /d 15-02-2022 /pl Alice Bob";
+        Command command = Parser.getCommand(userInput);
+        int currentSessionId = manager.getProfile().getSessionIdTracker();
+        command.run(manager);
+        int testSessionId = manager.getProfile().getSessionIdTracker();
+        assertEquals(currentSessionId + 1, testSessionId);
+    }
+
     /**
      * Checks if a session is created with duplicated person names.
      */
