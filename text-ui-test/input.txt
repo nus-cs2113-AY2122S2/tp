@@ -27,4 +27,8 @@ Update Item Pax /Name:Toilet Roll /New Pax:
 Update Item Pax /Name: /New Pax:5
 Update Item Pax
 Update Item Pax /Name:Swimming Pool /New Pax:5
+Add Housekeeper ~
+Add Housekeeper KO  13
+Availability @
+Availability lucy M
 bye

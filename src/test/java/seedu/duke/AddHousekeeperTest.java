@@ -20,4 +20,9 @@ public class AddHousekeeperTest {
     public void commandParser_addCommandInvalidAge_exceptionThrown() {
         assertThrows(InvalidAgeException.class, () -> new CommandParser().parse("Add Housekeeper Susan ~ fifty"));
     }
+
+    @Test
+    public void commandParser_addCommandEmptyDescription_exceptionThrown() {
+        assertThrows(InvalidHousekeeperProfile.class, () -> new CommandParser().parse("Add Housekeeper ~ "));
+    }
 }
