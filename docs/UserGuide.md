@@ -83,6 +83,15 @@ Mark a task as completed or uncompleted with the given task number from the spec
   Example to mark a general task as uncompleted: `mark /u 1`<br>
   Example to mark a module task as uncompleted: `mark /u 1 -m CS2113T`<br><br>
 
+### Setting custom tags: `tag`
+
+Adds or deletes a tag from the task as indicated by the command argument. If no module code is given, the task will be drawn from the "general tasks" list.
+
+- Add a tag <br><br>
+  Format: `tag add TASK_INDEX [-m MODULE_CODE] TAG_DESCRIPTION` <br><br>
+- Delete a tag <br><br>
+  Format: `tag del TASK_INDEX [-m MODULE_CODE] TAG_DESCRIPTION` <br><br>
+
 ### Listing all tasks/modules: `list`
 
 Displays a list of all tasks, some of which are grouped by module code while the rest fall under "general tasks" list.<br><br>
