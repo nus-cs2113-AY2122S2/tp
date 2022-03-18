@@ -258,7 +258,7 @@ public class Parser {
      *                                and cannot be parsed as a double,
      *                                if the double parsed from the input String object is not a positive value,
      *                                if the parsed double has more than 2 decimal points, or
-     *                                if the parsed double has more than 12 digits before the decimal point.                                
+     *                                if the parsed double has more than 12 digits before the decimal point.
      */
     private static double parseCostFromString(String input, String delimiter) throws InvalidFormatException {
         double cost;
