@@ -1,6 +1,7 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
@@ -61,8 +62,10 @@ public class SessionDeleteCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
+        Session session = null;
         try {
-            manager.getProfile().removeSession(sessionId);
+            session = manager.getProfile().getSession(sessionId);
+            manager.getProfile().removeSession(session);
             manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
             manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
         } catch (InvalidDataException dataException) {
