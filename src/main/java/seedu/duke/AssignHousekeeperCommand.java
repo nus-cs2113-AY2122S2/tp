@@ -82,9 +82,9 @@ public class AssignHousekeeperCommand extends Command {
                         ItemList listOfItems, Ui ui)
             throws InvalidRoomNumberException, InvalidHousekeeperProfile {
         String roomID = getroomID();
-        assert !roomID.isEmpty(): "name should not be empty";
+        assert !roomID.isEmpty() : "ID should not be empty";
         String name = getName();
-        assert !name.isEmpty(): "name should not be empty";
+        assert !name.isEmpty() : "name should not be empty";
         assignmentMap.addAssignment(name, roomID, housekeeperList, roomList);
         ui.printMessage("Assigned " + name + " to room#" + roomID + ".");
         logger.log(Level.INFO, "end of processing");
