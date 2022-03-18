@@ -32,7 +32,8 @@ public class Profile {
      * Checks if there is a Session object that exists with the same name.
      *
      * @param sessionName A String object that represents the session name.
-     * @return true if a session exists with the same name, false otherwise.
+     * @return true if a session exists with the same name,
+     *         false otherwise.
      */
     public boolean hasSessionName(String sessionName) {
         if (sessionList.isEmpty()) {
@@ -50,7 +51,8 @@ public class Profile {
      * Checks if there is a Session object that exists with the specified session unique identifier.
      *
      * @param sessionId An integer that uniquely identifies a Session object.
-     * @return true if a session exists with the specified session unique identifier, false otherwise.
+     * @return true if a session exists with the specified session unique identifier,
+     *         false otherwise.
      */
     public boolean hasSessionId(int sessionId) {
         if (sessionList.isEmpty()) {
@@ -116,7 +118,8 @@ public class Profile {
      * Checks if there is a Group object that exists with the same name.
      *
      * @param groupName A String object that represents the group name.
-     * @return true if a group exists with the same name, false otherwise.
+     * @return true if a group exists with the same name,
+     *         false otherwise.
      */
     public boolean hasGroupName(String groupName) {
         if (groupList.isEmpty()) {
@@ -134,7 +137,8 @@ public class Profile {
      * Checks if there is a Group object that exists with the specified group unique identifier.
      *
      * @param groupId An integer that uniquely identifies a group.
-     * @return true if a group exists with the specified group unique identifier, false otherwise.
+     * @return true if a group exists with the specified group unique identifier
+     *         false otherwise.
      */
     public boolean hasGroupId(int groupId) {
         if (groupList.isEmpty()) {
@@ -184,7 +188,7 @@ public class Profile {
      */
     public void removeGroup(int groupId) throws InvalidDataException {
         Group groupToBeRemoved = getGroup(groupId);
-        sessionList.remove(groupToBeRemoved);
+        groupList.remove(groupToBeRemoved);
     }
 
     /**
@@ -210,6 +214,7 @@ public class Profile {
 
     /**
      * Returns the value of the current session unique identifier that is tracked.
+     *
      * @return An integer that represents the current session unique identifier.
      */
     public int getSessionIdTracker() {
@@ -230,6 +235,7 @@ public class Profile {
 
     /**
      * Returns the value of the current activity unique identifier that is tracked.
+     *
      * @return An integer that represents the current activity unique identifier.
      */
     public int getActivityIdTracker() {
@@ -250,6 +256,7 @@ public class Profile {
 
     /**
      * Returns the value of the current group unique identifier that is tracked.
+     *
      * @return An integer that represents the current group unique identifier.
      */
     public int getGroupIdTracker() {
