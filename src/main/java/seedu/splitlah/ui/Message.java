@@ -229,8 +229,16 @@ public abstract class Message {
     // Group
     public static final String ERROR_GROUP_EMPTY_PERSON_LIST =
             "There are currently no person in this group.";
-
     public static final String ERROR_GROUP_PERSON_NOT_IN_LIST =
             "This person is not in the group.";
+
+    // Group Create Command
+    public static final String ERROR_GROUPCREATE_DUPLICATE_GROUP_NAME =
+            "There is another group with the same name.";
+    public static final String ERROR_GROUPCREATE_DUPLICATE_NAMES =
+            "There are duplicate names in the person list for the group you are trying to create.";
+    public static final String ERROR_GROUPCREATE_DUPLICATE_GROUP_ID =
+             "There is another group with the same Id.";
+
 
 }
