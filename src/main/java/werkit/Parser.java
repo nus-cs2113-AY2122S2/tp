@@ -237,7 +237,7 @@ public class Parser {
         switch (actionKeyword) {
         case SEARCH_EXERCISE_ACTION_KEYWORD:
             if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
-                logger.log(Level.WARNING, "User has entered an invalid update search exercise command action.");
+                logger.log(Level.WARNING, "User has entered an invalid search exercise command action.");
                 throw new InvalidCommandException(className,
                         InvalidCommandException.INVALID_SEARCH_EXERCISE_COMMAND_ERROR_MSG);
             }

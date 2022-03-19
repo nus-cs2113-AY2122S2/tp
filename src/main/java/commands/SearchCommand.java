@@ -5,6 +5,7 @@ import werkit.UI;
 import textcolors.TextColor;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class SearchCommand extends Command {
     public static final String BASE_KEYWORD = "search";
@@ -24,7 +25,7 @@ public class SearchCommand extends Command {
         this.ui = ui;
         this.exerciseList = exerciseList;
         setUserAction(userAction);
-        this.userArguments = userArguments;
+        this.userArguments = userArguments.toLowerCase();
     }
 
     public void setUserAction(String userAction) throws InvalidCommandException {
@@ -54,7 +55,6 @@ public class SearchCommand extends Command {
                             ui.printLine();
                         }
                         ui.printColorText(TextColor.COLOR_YELLOW, count + ". " + exerciseListToSearch.get(i));
-                        //System.out.println(count + ". " + exerciseListToSearch.get(i));
                     }
                 }
                 if (count == 0) {
