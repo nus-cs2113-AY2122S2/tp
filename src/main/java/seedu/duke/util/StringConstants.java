@@ -89,7 +89,7 @@ public class StringConstants {
             + "Optional parameters are in square brackets: e.g. [-m MODULE_DESCRIPTION]";
     public static final String EXIT_HELP = "Exits the program.\nFormat to exit program: exit";
     public static final String ADD_HELP = "Adds a module or task as indicated by the command input.\n"
-            + "Format to add module: add /m MODULE_CODE [-d \"MODULE_DESCRIPTION\"]\n"
+            + "Format to add module: add /m MODULE_CODE /c MODULAR_CREDITS [-d \"MODULE_DESCRIPTION\"]\n"
             + "Format to add task:   add /t \"TASK_NAME\" [-d \"TASK_DESCRIPTION\"] [-t \"ESTIMATED_WORKING_TIME\"]"
             + " [-m MODULE_CODE]";
     public static final String DELETE_HELP = "Deletes a module or task as indicated by command input.\n"
