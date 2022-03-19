@@ -37,7 +37,7 @@ public class GroupCreateCommand extends Command {
     /**
      * Initializes a GroupCreateCommand.
      *
-     * @param groupName A String object that represents the group name.
+     * @param groupName   A String object that represents the group name.
      * @param personNames A String object array that represents the involved persons for the group.
      */
     public GroupCreateCommand(String groupName, String[] personNames) {
