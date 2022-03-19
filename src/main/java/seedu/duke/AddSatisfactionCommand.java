@@ -63,8 +63,13 @@ public class AddSatisfactionCommand extends Command {
             throw new EmptySatisfactionCustomerException();
         }
         String customerName = "";
-        for (int i = 0; i < splitInput.length - 1; i++) {
-            customerName += splitInput[i] + " ";
+        // If customer's name consists of multiple words, concatenate those words to find full name
+        if (splitInput.length > 1) {
+            for (int i = 0; i < splitInput.length - 1; i++) {
+                customerName += splitInput[i] + " ";
+            }
+        } else { // Else, customer's name is one word
+            customerName = splitInput[0];
         }
         customerName = customerName.trim();
         if (customerName.isEmpty()) {
@@ -100,6 +105,7 @@ public class AddSatisfactionCommand extends Command {
         return satisfactionValue;
     }
 
+
     @Override
     /**
      * Override of execute command in Command class.
@@ -115,6 +121,9 @@ public class AddSatisfactionCommand extends Command {
     public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
                         AssignmentMap assignmentMap, RoomList roomList,
                         ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
+        if (satisfactionList.isCustomerInSatisfactionList(satisfaction.getCustomerName())) {
+            throw new RepeatCustomerException();
+        }
         satisfactionList.addSatisfaction(satisfaction);
         ui.printAddSatisfactionAcknowledgementMessage(satisfactionList, satisfaction);
 
