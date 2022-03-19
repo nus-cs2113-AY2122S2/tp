@@ -71,6 +71,11 @@ throughout the lifetime of the application. While the `Storage` helps to save wh
 The `TextUI` class serves as an interface to read user inputs and print application outputs.
 
 ### Profile Component
+![Profile Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ProfileComponent.drawio.png)
+<br>
+The `Profile` class holds the list of sessions and groups that have been created by the user. 
+It also tracks the unique identifier for `Session`, `Activity` and `Group` classes. The `Profile`
+class would return a unique identifier every time a new `Session`, `Activity` or `Group` is created. 
 
 ### TextUI Component
 
