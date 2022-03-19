@@ -7,7 +7,6 @@ import seedu.duke.exceptions.ParseException;
 import seedu.duke.util.StringConstants;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Objects;
 
 public class GradeParser extends Parser {

@@ -38,9 +38,9 @@ public class GradeCommand extends Command {
     }
 
     /**
-     * Deletes given module from moduleList.
+     * Adds/Changes grade to specified module from moduleList.
      *
-     * @param moduleList List from which the module is to be deleted from.
+     * @param moduleList List from which the module which grade is to be added/changed.
      */
     public void addGradeToModule(ModuleList moduleList) throws ModHappyException {
         Module targetModule = moduleList.getModule(moduleCode);
