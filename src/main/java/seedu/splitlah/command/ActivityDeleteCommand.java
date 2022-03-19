@@ -37,6 +37,8 @@ public class ActivityDeleteCommand extends Command {
      * @param activityId The id of the activity.
      */
     public ActivityDeleteCommand(int sessionId, int activityId) {
+        assert sessionId > 0 : Message.ASSERT_ACTIVITYDELETE_SESSION_ID_NOT_INITIALIZED;
+        assert activityId > 0 : Message.ASSERT_ACTIVITYDELETE_ACTIVITY_ID_NOT_INITIALIZED;
         this.sessionId = sessionId;
         this.activityId = activityId;
     }

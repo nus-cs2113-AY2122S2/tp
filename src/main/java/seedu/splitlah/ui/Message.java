@@ -221,6 +221,10 @@ public abstract class Message {
     // Activity Delete Command
     public static final String ASSERT_ACTIVITYDELETE_SESSION_IS_NULL =
             "Session is still not initialized.";
+    public static final String ASSERT_ACTIVITYDELETE_SESSION_ID_NOT_INITIALIZED =
+            "Session Id not initialized.";
+    public static final String ASSERT_ACTIVITYDELETE_ACTIVITY_ID_NOT_INITIALIZED =
+            "Activity Id not initialized.";
     public static final String LOGGER_ACTIVITYDELETE_ACTIVITY_REMOVED =
             "An Activity object was successfully deleted from the list of activities with Id: ";
 
