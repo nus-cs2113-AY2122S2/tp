@@ -1,6 +1,7 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
@@ -18,10 +19,6 @@ public class SessionDeleteCommand extends Command {
     public static final String COMMAND_TEXT = "session /delete";
 
     public static final String COMMAND_FORMAT = "Syntax: session /delete /sid [SESSION_ID]";
-
-    private static final String COMMAND_CONFIRMATION = "Are you sure you want to delete session id: ";
-
-    private static final String COMMAND_ABORT = "Okay! Session was not deleted.";
 
     private static final String COMMAND_SUCCESS =
             "The session was deleted successfully.";
@@ -65,21 +62,12 @@ public class SessionDeleteCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        String confirmationPrompt = COMMAND_CONFIRMATION + sessionId + "?";
-        boolean isSessionExists = manager.getProfile().hasSessionId(sessionId);
-        if (!isSessionExists) {
-            manager.getUi().printlnMessage(Message.ERROR_PROFILE_SESSION_NOT_IN_LIST);
-            return;
-        }
+        Session session = null;
         try {
-            boolean isConfirmed = manager.getUi().getUserConfirmation(confirmationPrompt);
-            if (isConfirmed) {
-                manager.getProfile().removeSession(sessionId);
-                manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
-                manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
-            } else {
-                manager.getUi().printlnMessageWithDivider(COMMAND_ABORT);
-            }
+            session = manager.getProfile().getSession(sessionId);
+            manager.getProfile().removeSession(session);
+            manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
+            manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
         } catch (InvalidDataException dataException) {
             manager.getUi().printlnMessage(dataException.getMessage());
         }
