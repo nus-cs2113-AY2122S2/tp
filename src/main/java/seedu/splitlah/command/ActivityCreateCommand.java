@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
 
 /**
  * Represents a command that creates an Activity object from user input and stores it in the Session object.
@@ -71,6 +72,10 @@ public class ActivityCreateCommand extends Command {
      */
     public ActivityCreateCommand(int sessionId, String activityName, double totalCost, String payer,
                                  String[] involvedList, double[] costList, int gst, int serviceCharge) {
+        assert sessionId > 0 : Message.ASSERT_ACTIVITYCREATE_SESSION_ID_LESS_THAN_ONE;
+        assert activityName != null : Message.ASSERT_ACTIVITYCREATE_ACTIVITY_NAME_MISSING;
+        assert payer != null : Message.ASSERT_ACTIVITYCREATE_PAYER_NAME_MISSING;
+        assert involvedList != null : Message.ASSERT_ACTIVITYCREATE_INVOLVED_LIST_ARRAY_NULL;
         this.sessionId = sessionId;
         this.activityName = activityName;
         this.totalCost = totalCost;
@@ -111,7 +116,6 @@ public class ActivityCreateCommand extends Command {
         boolean isMissingCost = false;
         boolean isMissingCostList = false;
         boolean hasDifferentLength = false;
-        String errorMessage = null;
 
         try {
             totalCost = Parser.parseTotalCost(commandArgs);
@@ -332,10 +336,13 @@ public class ActivityCreateCommand extends Command {
         boolean hasDuplicates = hasNameDuplicates();
         if (hasDuplicates) {
             manager.getUi().printlnMessage(Message.ERROR_ACTIVITYCREATE_DUPLICATE_NAME);
+            Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST);
             return;
         }
         try {
             updateCostAndCostList();
+            assert costList != null : Message.ASSERT_ACTIVITYCREATE_COST_LIST_ARRAY_NULL;
+            assert totalCost > 0 : Message.ASSERT_ACTIVITYCREATE_TOTAL_COST_LESS_THAN_ONE;
             Session session = manager.getProfile().getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
@@ -344,8 +351,11 @@ public class ActivityCreateCommand extends Command {
             Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(activity);
             manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + activity);
+            Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_ACTIVITY_ADDED + activityId);
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
+            Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_FAILED_ADDING_ACTIVITY
+                    + "\n" + e.getMessage());
         }
     }
 

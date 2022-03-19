@@ -18,7 +18,11 @@ import seedu.splitlah.command.SessionSummaryCommand;
  * @author Saurav
  */
 public abstract class Message {
-    
+
+    // SplitLah
+    public static final String LOGGER_SPLITLAH_APPLICATION_EXIT =
+            "The application is terminated";
+
     // TextUI
     public static final String ASCII_TEXTUI_LOGO = 
             " $$$$$$\\            $$\\ $$\\   $$\\     $$\\           $$\\\n"
@@ -84,9 +88,9 @@ public abstract class Message {
     public static final String ERROR_PARSER_COST_MORE_THAN_TWELVE_DIGITS_BEFORE_DP =
             "Please enter a value up to 12 digits in dollars for monetary value(s).";
     public static final String ERROR_PARSER_INVALID_GST_SURCHARGE =
-            "Please enter a valid GST surcharge in % after the delimiter: ";
+            "Please enter a valid GST surcharge in % in the range [0, 100] after the delimiter: ";
     public static final String ERROR_PARSER_INVALID_SERVICE_CHARGE =
-            "Please enter a valid service charge in % after the delimiter: ";
+            "Please enter a valid service charge in % in the range [0, 100] after the delimiter: ";
     public static final String ERROR_PARSER_EMPTY_COMMAND =
             "Please enter a command.";
     public static final String ERROR_PARSER_INVALID_COMMAND =
@@ -99,6 +103,16 @@ public abstract class Message {
             "The command contains one or more duplicate delimiters. Please rectify and try again.";
     public static final String ASSERT_PARSER_COMMAND_ARGUMENTS_EMPTY =
             "The command arguments cannot be null.";
+    public static final String ASSERT_PARSER_PLACES_NEGATIVE =
+            "A number cannot have less than 0 digits before the integer position.";
+
+    // ActivityCost
+    public static final String LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_DEFAULT_PARAMS =
+            "Constructing ActivityCost with default parameters";
+    public static final String LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_ACTIVITYID =
+            "Constructing ActivityCost with activityId";
+    public static final String LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_ALL_PARAMS =
+            "Constructing ActivityCost with activityId, costPaid and costOwed";
 
     // Person
     public static final String ERROR_PERSON_NO_ACTIVITIES =
@@ -134,17 +148,31 @@ public abstract class Message {
             "There are currently no sessions stored.";
     public static final String ERROR_PROFILE_SESSION_NOT_IN_LIST =
             "The session that you have specified was not found.";
+    public static final String ERROR_PROFILE_GROUP_LIST_EMPTY =
+            "There are currently no groups stored.";
+    public static final String ERROR_PROFILE_GROUP_NOT_IN_LIST =
+            "The group that you have specified was not found.";
 
     // Activity
     public static final String ERROR_ACTIVITY_INACCURATE_INVOLVED_LIST =
             "The list of involved persons list is inaccurate "
                     + "as at least one person did not participate in the activity.";
 
+    // Invalid Command
+    public static final String ASSERT_INVALIDCOMMAND_MANAGER_DOES_NOT_EXIST =
+            "Manager does not exist.";
+
     // Session Create Command
     public static final String ASSERT_SESSIONCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
             "Name duplicates exist but not detected.";
     public static final String ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY =
             "The array of person names is empty but was not handled in prepare function.";
+    public static final String LOGGER_SESSIONCREATE_SESSION_ADDED =
+            "A session was added into the list of sessions with Id: ";
+
+    // Session Delete Command
+    public static final String LOGGER_SESSIONDELETE_SESSION_REMOVED =
+            "A session was removed from the list of session with Id: ";
 
     // Session Summary Command
     public static final String MESSAGE_SESSIONSUMMARY_NO_PAYMENTS_REQUIRED =
@@ -153,6 +181,10 @@ public abstract class Message {
             "The generated personCostPairList is invalid with a non-zero total sum of debt.";
     public static final String ASSERT_SESSIONSUMMARY_PAYER_EXPECTS_FROM_RECEIVER =
             "Payer has a greater total cost than receiver.";
+    public static final String LOGGER_SESSIONSUMMARY_SESSION_ID_NOT_FOUND =
+            "A session summary was not produced as a Session object with the following Id was not found :";
+    public static final String LOGGER_SESSIONSUMMARY_SESSION_SUMMARY_PRINTED =
+            "A session summary has been successful produced for the Session object with the following Id: ";
     
     // Activity Create Command
     public static final String ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH =
@@ -166,9 +198,39 @@ public abstract class Message {
                     + "Please rectify and try again.";
     public static final String ASSERT_ACTIVITYCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
             "Name duplicates exists but not detected.";
+    public static final String ASSERT_ACTIVITYCREATE_SESSION_ID_LESS_THAN_ONE =
+            "Session ID is less than or equals to zero.";
+    public static final String ASSERT_ACTIVITYCREATE_ACTIVITY_NAME_MISSING =
+            "Activity name is missing.";
+    public static final String ASSERT_ACTIVITYCREATE_TOTAL_COST_LESS_THAN_ONE =
+            "Total cost is less than or equals to zero.";
+    public static final String ASSERT_ACTIVITYCREATE_PAYER_NAME_MISSING =
+            "Payer's name is missing.";
+    public static final String ASSERT_ACTIVITYCREATE_INVOLVED_LIST_ARRAY_NULL =
+            "Involved list array does not contain the list of names of the persons involved in the activity.";
+    public static final String ASSERT_ACTIVITYCREATE_COST_LIST_ARRAY_NULL =
+            "Cost list array does not contain the respective costs of the persons involved in the activity.";
+    public static final String LOGGER_ACTIVITYCREATE_ACTIVITY_ADDED =
+            "An Activity object was succesfully added into the list of activities with Id: ";
+    public static final String LOGGER_ACTIVITYCREATE_FAILED_ADDING_ACTIVITY =
+            "An Activity object failed to be added into the list of activities due to the following error: ";
+    public static final String LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST =
+            "An Activity object failed to be added into the list of activities because there are duplicate names in"
+                    + "the involved list.";
 
     // Activity List Command
     public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =
             "There are currently no activities in this session.";
+    public static final String ASSERT_ACTIVITYLIST_SESSION_ID_LESS_THAN_ONE =
+            "Session unique identifier is less than one";
+    public static final String LOGGER_ACTIVITYLIST_SESSION_ID_NOT_FOUND =
+            "Session was not found with unique identifier of:";
+
+    // Group
+    public static final String ERROR_GROUP_EMPTY_PERSON_LIST =
+            "There are currently no person in this group.";
+
+    public static final String ERROR_GROUP_PERSON_NOT_IN_LIST =
+            "This person is not in the group.";
 
 }

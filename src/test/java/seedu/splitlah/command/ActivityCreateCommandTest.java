@@ -28,11 +28,9 @@ class ActivityCreateCommandTest {
 
     /**
      * Checks if an activity is created when an activity is missing both cost and cost list.
-     * @throws InvalidDataException If there are no sessions stored or
-     *                              if the session unique identifier specified was not found.
      */
     @Test
-    public void prepare_hasMissingCostAndCostList_invalidCommand() throws InvalidDataException {
+    public void prepare_hasMissingCostAndCostList_invalidCommand() {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie";
         Command command = Parser.getCommand(userInput);
         assertEquals(InvalidCommand.class, command.getClass());
@@ -40,11 +38,9 @@ class ActivityCreateCommandTest {
 
     /**
      * Checks if an activity is created when an activity has both cost and cost list.
-     * @throws InvalidDataException If there are no sessions stored or
-     *                              if the session unique identifier specified was not found.
      */
     @Test
-    public void prepare_hasBothCostAndCostList_invalidCommand() throws InvalidDataException {
+    public void prepare_hasBothCostAndCostList_invalidCommand() {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30 /cl 10 10 10";
         Command command = Parser.getCommand(userInput);
         assertEquals(InvalidCommand.class, command.getClass());
@@ -52,30 +48,15 @@ class ActivityCreateCommandTest {
 
     /**
      * Checks if an activity is created when an activity has different length for involved list and cost list.
-     * @throws InvalidDataException If there are no sessions stored or
-     *                              if the session unique identifier specified was not found.
      */
     @Test
-    public void prepare_costListAndInvolvedListDifferentLength_invalidCommand() throws InvalidDataException {
+    public void prepare_costListAndInvolvedListDifferentLength_invalidCommand() {
         String firstUserInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /cl 10 10";
         Command firstCommand = Parser.getCommand(firstUserInput);
         assertEquals(InvalidCommand.class, firstCommand.getClass());
         String secondUserInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob /cl 10 10 10";
         Command secondCommand = Parser.getCommand(secondUserInput);
         assertEquals(InvalidCommand.class, secondCommand.getClass());
-    }
-
-    /**
-     * Checks if an activity is created when an activity has duplicate names in the involved list.
-     * @throws InvalidDataException If there are no sessions stored or
-     *                              if the session unique identifier specified was not found.
-     */
-    @Test
-    public void run_hasNameDuplicatesInInvolvedList_activityListSizeRemainsOne() throws InvalidDataException {
-        String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Alice Charlie /co 30";
-        Command command = Parser.getCommand(userInput);
-        command.run(manager);
-        assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
     }
 
     /**
@@ -94,14 +75,109 @@ class ActivityCreateCommandTest {
         assertEquals(InvalidCommand.class, sessionWithMissingNameDelimiter.getClass());
 
         // Case 3: Missing /p delimiter
-        String argsMissingPayerListDelimiter = "activity /create /sid 1 /n Dinner /i Alice Bob Charlie /co 15";
-        Command sessionWithMissingPayerListDelimiter = Parser.getCommand(argsMissingPayerListDelimiter);
-        assertEquals(InvalidCommand.class, sessionWithMissingPayerListDelimiter.getClass());
+        String argsMissingPayerDelimiter = "activity /create /sid 1 /n Dinner /i Alice Bob Charlie /co 15";
+        Command sessionWithMissingPayerDelimiter = Parser.getCommand(argsMissingPayerDelimiter);
+        assertEquals(InvalidCommand.class, sessionWithMissingPayerDelimiter.getClass());
 
         // Case 4: Missing /i delimiter
         String argsMissingInvolvedListDelimiter = "activity /create /sid 1 /n Dinner /p Alice /co 15";
         Command activityWithMissingInvolvedListDelimiter = Parser.getCommand(argsMissingInvolvedListDelimiter);
         assertEquals(InvalidCommand.class, activityWithMissingInvolvedListDelimiter.getClass());
+    }
+
+    /**
+     * Checks if activity is created with missing arguments.
+     */
+    @Test
+    public void prepare_hasMissingArguments_InvalidCommand() {
+        // Case 1: Missing session ID
+        String argsMissingSessionIdArgument = "activity /create /sid /n Dinner /p Alice /i Alice Bob Charlie /co 15";
+        Command sessionWithMissingSessionIdArgument = Parser.getCommand(argsMissingSessionIdArgument);
+        assertEquals(InvalidCommand.class, sessionWithMissingSessionIdArgument.getClass());
+
+        // Case 2: Missing Activity Name
+        String argsMissingNameArgument = "activity /create /sid 1 /n /p Alice /i Alice Bob Charlie /co 15";
+        Command sessionWithMissingNameArgument = Parser.getCommand(argsMissingNameArgument);
+        assertEquals(InvalidCommand.class, sessionWithMissingNameArgument.getClass());
+
+        // Case 3: Missing Payer
+        String argsMissingPayerArgument = "activity /create /sid 1 /n Dinner /p /i Alice Bob Charlie /co 15";
+        Command sessionWithMissingPayerArgument = Parser.getCommand(argsMissingPayerArgument);
+        assertEquals(InvalidCommand.class, sessionWithMissingPayerArgument.getClass());
+
+        // Case 4: Missing involved list
+        String argsMissingInvolvedListArgument = "activity /create /sid 1 /n Dinner /p Alice /i /co 15";
+        Command activityWithMissingInvolvedListArgument = Parser.getCommand(argsMissingInvolvedListArgument);
+        assertEquals(InvalidCommand.class, activityWithMissingInvolvedListArgument.getClass());
+
+        // Case 5: Missing total cost
+        String argsMissingTotalCostArgument = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co";
+        Command activityWithMissingTotalCostArgument = Parser.getCommand(argsMissingTotalCostArgument);
+        assertEquals(InvalidCommand.class, activityWithMissingTotalCostArgument.getClass());
+
+        // Case 6: Missing cost list
+        String argsMissingCostListArgument = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /cl";
+        Command activityWithMissingCostListArgument = Parser.getCommand(argsMissingCostListArgument);
+        assertEquals(InvalidCommand.class, activityWithMissingCostListArgument.getClass());
+    }
+
+    /**
+     * Checks if an activity is not created when an activity has duplicate names in the involved list.
+     *
+     * @throws InvalidDataException If there are no sessions stored or
+     *                              if the session unique identifier specified was not found.
+     */
+    @Test
+    public void run_hasNameDuplicatesInInvolvedList_activityListSizeRemainsOne() throws InvalidDataException {
+        String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Alice Charlie /co 30";
+        Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityCreateCommand.class, command.getClass());
+        command.run(manager);
+        assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
+    }
+
+    /**
+     * Checks if activity unique identifier is not incremented if an activity fails
+     * to be created due to duplicate names in involved list.
+     */
+    @Test
+    public void run_hasNameDuplicatesInInvolvedList_activityIdNotIncremented() {
+        int currentActivityId = manager.getProfile().getActivityIdTracker();
+        String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Alice Charlie /co 30";
+        Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityCreateCommand.class, command.getClass());
+        command.run(manager);
+        int testActivityId = manager.getProfile().getActivityIdTracker();
+        assertEquals(currentActivityId, testActivityId);
+    }
+
+    /**
+     * Checks if activity is created successfully and added into list of activities.
+     *
+     * @throws InvalidDataException If there are no sessions stored or
+     *                              if the session unique identifier specified was not found.
+     */
+    @Test
+    public void run_validCommand_activityListSizeBecomesTwo() throws InvalidDataException {
+        String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30";
+        Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityCreateCommand.class, command.getClass());
+        command.run(manager);
+        assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
+    }
+
+    /**
+     * Checks if activity is created successfully and activity unique identifier is incremented.
+     */
+    @Test
+    public void run_validCommand_activityIdIncremented() {
+        int currentActivityId = manager.getProfile().getActivityIdTracker();
+        String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30";
+        Command command = Parser.getCommand(userInput);
+        assertEquals(ActivityCreateCommand.class, command.getClass());
+        command.run(manager);
+        int testActivityId = manager.getProfile().getActivityIdTracker();
+        assertEquals(currentActivityId + 1, testActivityId);
     }
 
 }

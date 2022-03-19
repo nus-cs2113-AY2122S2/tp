@@ -185,16 +185,16 @@ public class Parser {
     }
 
     /**
-     * Checks if the given String object representing a monetary value has at most two decimal places.
+     * Checks if the given String object representing a real number has at most two decimal places.
      * 
-     * @param input A String object representing a monetary value.
+     * @param input A String object representing a real number.
      * @return true if the String object can be parsed as a double and 
-     *         represents a monetary value has at most two decimal places,
+     *         represents a real number has at most two decimal places,
      *         false otherwise.
      */
     private static boolean hasAtMostTwoDecimalPlaces(String input) {
         try {
-            double cost = Double.parseDouble(input);
+            double value = Double.parseDouble(input);
         } catch (NumberFormatException exception) {
             return false;
         }
@@ -208,6 +208,33 @@ public class Parser {
     }
 
     /**
+     * Checks if the given String object representing a real number has less than
+     * a specified number of digits before decimal point.
+     *
+     * @param input  A String object representing a real number.
+     * @param places An integer representing the maximum number of digits that the input value
+     *               should have before the decimal point.
+     * @return true if the String object can be parsed as a double and
+     *         represents a real number that has at most the specified number of digits before decimal point,
+     *         false otherwise.
+     */
+    private static boolean hasAtMostGivenIntegerPlaces(String input, int places) {
+        assert places >= 0 : Message.ASSERT_PARSER_PLACES_NEGATIVE;
+        try {
+            double value = Double.parseDouble(input);
+        } catch (NumberFormatException exception) {
+            return false;
+        }
+
+        int numberChars = input.length();
+        int indexOfDecimal = input.indexOf('.');
+        if (indexOfDecimal == INVALID_INDEX_INDICATOR) {
+            return numberChars <= places;
+        }
+        return indexOfDecimal <= places;
+    }
+
+    /**
      * Checks if the given String object representing a monetary value has at most twelve digits before decimal point.
      *
      * @param input A String object representing a monetary value.
@@ -216,18 +243,7 @@ public class Parser {
      *         false otherwise.
      */
     private static boolean hasAtMostTwelveIntegerPlaces(String input) {
-        try {
-            double cost = Double.parseDouble(input);
-        } catch (NumberFormatException exception) {
-            return false;
-        }
-
-        int numberChars = input.length();
-        int indexOfDecimal = input.indexOf('.');
-        if (indexOfDecimal == INVALID_INDEX_INDICATOR) {
-            return numberChars <= 12;
-        }
-        return indexOfDecimal <= 12;
+        return hasAtMostGivenIntegerPlaces(input, 12);
     }
 
     /**
@@ -239,8 +255,10 @@ public class Parser {
      * @return An double representing a cost value.
      * @throws InvalidFormatException If the provided input String object contains characters other than numeric
      *                                characters or a single decimal point character,
-     *                                and cannot be parsed as a double, or
-     *                                if the double parsed from the input String object is not a positive value.
+     *                                and cannot be parsed as a double,
+     *                                if the double parsed from the input String object is not a positive value,
+     *                                if the parsed double has more than 2 decimal points, or
+     *                                if the parsed double has more than 12 digits before the decimal point.
      */
     private static double parseCostFromString(String input, String delimiter) throws InvalidFormatException {
         double cost;
@@ -556,6 +574,23 @@ public class Parser {
     }
 
     /**
+     * Returns an integer that represents a group unique identifier, given the command arguments from user input, 
+     * delimited by the Group ID delimiter.
+     *
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return An integer that represents a group unique identifier.
+     * @throws InvalidFormatException If the Group ID delimiter is not found in the command arguments,
+     *                                if no arguments representing a group unique identifier were provided after 
+     *                                the Group ID delimiter,
+     *                                if the parsed argument cannot be parsed as an integer, or
+     *                                if the integer parsed from the argument is not a positive integer.
+     */
+    public static int parseGroupId(String commandArgs) throws InvalidFormatException {
+        String argument = getArgumentFromDelimiter(commandArgs, GROUP_ID_DELIMITER);
+        return parseIdFromString(argument, GROUP_ID_DELIMITER);
+    }
+
+    /**
      * Returns a LocalDate object that represents a date, given the command arguments from user input, 
      * delimited by the Date delimiter.
      *
@@ -594,8 +629,10 @@ public class Parser {
      * @throws InvalidFormatException If the Total cost delimiter is not found in the command arguments,
      *                                if no arguments representing a total cost were provided after the 
      *                                Total cost delimiter,
-     *                                if the arguments cannot be parsed as a double, or
-     *                                if the cost value parsed is not positive.
+     *                                if the arguments cannot be parsed as a double,
+     *                                if the parsed cost value is not positive,
+     *                                if the parsed cost value has more than 2 decimal points, or
+     *                                if the parsed cost value has more than 12 digits before the decimal point.
      */
     public static double parseTotalCost(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, TOTAL_COST_DELIMITER);
@@ -612,7 +649,9 @@ public class Parser {
      *                                if no arguments representing a list of cost values were provided after the 
      *                                Cost list delimiter,
      *                                if any token in the argument cannot be parsed as a double, or
-     *                                if any cost value parsed is not positive.
+     *                                if any cost value parsed is not positive,
+     *                                if any parsed cost value has more than 2 decimal points, or
+     *                                if any parsed cost value has more than 12 digits before the decimal point.
      */
     public static double[] parseCostList(String commandArgs) throws InvalidFormatException {
         String argument = getArgumentFromDelimiter(commandArgs, COST_LIST_DELIMITER);
@@ -630,8 +669,7 @@ public class Parser {
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents a GST charge in percents.
-     * @throws InvalidFormatException If the GST delimiter is not found in the command arguments,
-     *                                if no arguments representing a GST charge were provided after the 
+     * @throws InvalidFormatException If no arguments representing a GST charge were provided after the 
      *                                GST delimiter,
      *                                if the argument cannot be parsed as an integer, or
      *                                if the parsed GST percentage is not in [0, 100].
@@ -655,8 +693,7 @@ public class Parser {
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents a service charge in percents.
-     * @throws InvalidFormatException If the Service charge delimiter is not found in the command arguments,
-     *                                if no arguments representing a service charge were provided after the 
+     * @throws InvalidFormatException If no arguments representing a service charge were provided after the 
      *                                Service charge delimiter,
      *                                if the argument cannot be parsed as an integer, or
      *                                if the parsed service charge percentage is not in [0, 100].
