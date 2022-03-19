@@ -274,10 +274,10 @@ public class Session {
     }
 
     /**
-     * Returns a String object containing a summary of the state of activityList.
+     * Returns a String object containing a summary of the state of the member attribute activityList.
      *
-     * @return A String object containing a summary of all Activity objects in activityList,
-     *         or a message stating that the activityList is empty if there are no Activity objects within.
+     * @return A String object containing a summary of all Activity objects in activityList, or
+     *         a message stating that the activityList is empty if there are no Activity objects within.
      */
     private String getActivityListSummaryString() {
         if (activityList.isEmpty()) {
@@ -292,10 +292,10 @@ public class Session {
     }
 
     /**
-     * Returns a String object containing a summary of the state of personList.
+     * Returns a String object containing a summary of the state of the member attribute personList.
      *
-     * @return A String object containing a summary of all Person objects in personList,
-     *         or a message stating that the personList is empty if there are no Person objects within.
+     * @return A String object containing a summary of all Person objects in personList, or
+     *         a message stating that the personList is empty if there are no Person objects within.
      */
     private String getPersonListSummaryString() {
         if (personList.isEmpty()) {
@@ -310,6 +310,12 @@ public class Session {
         return summaryString.toString();
     }
 
+    /**
+     * Returns a String object containing a summary of the state of the member attribute group.
+     *
+     * @return A String object containing the name of the Group object if group is not null, or
+     *         a message stating that there is no group in the session, if group is null.
+     */
     private String getGroupSummaryString() {
         if (group == null) {
             return "Group: None";
