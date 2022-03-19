@@ -20,7 +20,7 @@ public class Session {
     private LocalDate dateCreated;
     private ArrayList<Activity> activityList;
     private ArrayList<Person> personList;
-    // private Group group;
+    private Group group;
 
     // CONSTANTS
     private static final String ACTIVITY_LIST_HEADER =
@@ -47,6 +47,29 @@ public class Session {
         this.dateCreated = dateCreated;
         this.personList = personList;
         this.activityList = new ArrayList<>();
+        this.group = null;
+    }
+
+    /**
+     * Constructs a Session object with the specified information as a new session.
+     *
+     * @param sessionName The name of the session.
+     * @param sessionId   A unique identifier for the session.
+     * @param dateCreated A LocalDate object storing the date that the session occurs on.
+     * @param personList  A list of Person objects representing participants of the session.
+     * @param group       A Group object representing a group of persons participating in the session.
+     * @see Profile#getNewSessionId() for issuing a unique sessionId
+     */
+    public Session(String sessionName, int sessionId, LocalDate dateCreated, ArrayList<Person> personList,
+                   Group group) {
+        assert personList != null : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
+        assert personList.size() != 0 : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
+        this.sessionName = sessionName;
+        this.sessionId = sessionId;
+        this.dateCreated = dateCreated;
+        this.personList = personList;
+        this.activityList = new ArrayList<>();
+        this.group = group;
     }
     
     /**
@@ -103,6 +126,15 @@ public class Session {
      */
     public ArrayList<Person> getPersonList() {
         return personList;
+    }
+
+    /**
+     * Returns a Group object representing a group of persons participating in the session.
+     * 
+     * @return A Group object containing Person objects that are participating in the session.
+     */
+    public Group getGroup() {
+        return group;
     }
 
     /**
@@ -257,10 +289,10 @@ public class Session {
     }
 
     /**
-     * Returns a String object containing a summary of the state of activityList.
+     * Returns a String object containing a summary of the state of the member attribute activityList.
      *
-     * @return A String object containing a summary of all Activity objects in activityList,
-     *         or a message stating that the activityList is empty if there are no Activity objects within.
+     * @return A String object containing a summary of all Activity objects in activityList, or
+     *         a message stating that the activityList is empty if there are no Activity objects within.
      */
     private String getActivityListSummaryString() {
         if (activityList.isEmpty()) {
@@ -275,10 +307,10 @@ public class Session {
     }
 
     /**
-     * Returns a String object containing a summary of the state of personList.
+     * Returns a String object containing a summary of the state of the member attribute personList.
      *
-     * @return A String object containing a summary of all Person objects in personList,
-     *         or a message stating that the personList is empty if there are no Person objects within.
+     * @return A String object containing a summary of all Person objects in personList, or
+     *         a message stating that the personList is empty if there are no Person objects within.
      */
     private String getPersonListSummaryString() {
         if (personList.isEmpty()) {
@@ -294,14 +326,30 @@ public class Session {
     }
 
     /**
+     * Returns a String object containing a summary of the state of the member attribute group.
+     *
+     * @return A String object containing the name of the Group object if group is not null, or
+     *         a message stating that there is no group in the session, if group is null.
+     */
+    private String getGroupSummaryString() {
+        if (group == null) {
+            return "Group: None";
+        } else {
+            return "Group: " + group.getGroupName();
+        }
+    }
+
+    /**
      * Returns a String object summarising the state of the Session object.
      * 
      * @return A String object containing a summary of the Session object.
      */
     public String getSessionSimplifiedString() {
-        return sessionId + SUMMARY_STRING_SEPARATOR + sessionName + "\n  | " + dateCreated.format(Parser.DATE_FORMAT)
+        return sessionId + SUMMARY_STRING_SEPARATOR + sessionName + "\n "
+                + SUMMARY_STRING_SEPARATOR + dateCreated.format(Parser.DATE_FORMAT)
                 + SUMMARY_STRING_SEPARATOR + personList.size() + " participants"
-                + SUMMARY_STRING_SEPARATOR + activityList.size() + " activities";
+                + SUMMARY_STRING_SEPARATOR + activityList.size() + " activities"
+                + SUMMARY_STRING_SEPARATOR + getGroupSummaryString();
     }
 
     /**
@@ -315,6 +363,7 @@ public class Session {
                 + "Name: " + sessionName + '\n'
                 + "Date: " + dateCreated.format(Parser.DATE_FORMAT) + '\n'
                 + getActivityListSummaryString() + '\n'
-                + getPersonListSummaryString();
+                + getPersonListSummaryString() + '\n'
+                + getGroupSummaryString();
     }
 }

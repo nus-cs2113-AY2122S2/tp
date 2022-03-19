@@ -25,6 +25,7 @@ The list of activities in the session is currently empty.
 Participants
  1. alice
  2. bob
+Group: None
 ============================================================
 > There is another session with the same name. Please rename and try again.
 > The session was created successfully.
@@ -35,6 +36,7 @@ The list of activities in the session is currently empty.
 Participants
  1. alice
  2. bob
+Group: None
 ============================================================
 > There are duplicate names in the person list for the session you are trying to create. Please rectify and try again.
 > ============================================================
