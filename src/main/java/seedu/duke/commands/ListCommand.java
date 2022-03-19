@@ -13,7 +13,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Lists all tasks.
+     * Lists all tasks when no argument is provided. Otherwise, list only tasks with matching tag.
      */
     @Override
     public CommandResult execute(ModuleList moduleList) {

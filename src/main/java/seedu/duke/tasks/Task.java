@@ -8,11 +8,11 @@ public class Task {
     public static final String ICON_UNCOMPLETED = StringConstants.ICON_UNCOMPLETED;
     public static final String ICON_COMPLETED = StringConstants.ICON_COMPLETED;
     public static final String TASK_STRING_NO_DESC_NO_TIME = "%s %s %s";
-    public static final String TASK_STRING_WITH_DESC_NO_TIME = "%s %s (%s)";
+    public static final String TASK_STRING_WITH_DESC_NO_TIME = "%s %s (%s) %s";
     public static final String TASK_STRING_NO_DESC_WITH_TIME = "%s %s ("
-            + StringConstants.ESTIMATED_WORKING_TIME + "%s)";
+            + StringConstants.ESTIMATED_WORKING_TIME + "%s) %s";
     public static final String TASK_STRING_WITH_DESC_WITH_TIME = "%s %s (%s) ("
-            + StringConstants.ESTIMATED_WORKING_TIME + "%s)";
+            + StringConstants.ESTIMATED_WORKING_TIME + "%s) %s";
 
     private boolean isTaskDone;
     private String taskName;
@@ -96,11 +96,11 @@ public class Task {
         switch (taskParameters) {
         case DESCRIPTION_AND_WORKING_TIME:
             return String.format(TASK_STRING_WITH_DESC_WITH_TIME, taskStatusString, taskName,
-                    taskDescription, workingTime);
+                    taskDescription, workingTime, tags);
         case DESCRIPTION_ONLY:
-            return String.format(TASK_STRING_WITH_DESC_NO_TIME, taskStatusString, taskName, taskDescription);
+            return String.format(TASK_STRING_WITH_DESC_NO_TIME, taskStatusString, taskName, taskDescription, tags);
         case WORKING_TIME_ONLY:
-            return String.format(TASK_STRING_NO_DESC_WITH_TIME, taskStatusString, taskName, workingTime);
+            return String.format(TASK_STRING_NO_DESC_WITH_TIME, taskStatusString, taskName, workingTime, tags);
         default:
             return String.format(TASK_STRING_NO_DESC_NO_TIME, taskStatusString, taskName, tags);
         }

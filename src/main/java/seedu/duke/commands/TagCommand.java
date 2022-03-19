@@ -2,6 +2,8 @@ package seedu.duke.commands;
 
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.NoSuchModuleException;
+import seedu.duke.exceptions.NoSuchTagException;
+import seedu.duke.exceptions.ParseException;
 import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
@@ -12,7 +14,8 @@ import java.util.Objects;
 
 public class TagCommand extends Command {
 
-    private static final String ADD_COMMAND = StringConstants.ADD_COMMAND_WORD;
+    private static final String ADD_TAG = StringConstants.ADD_COMMAND_WORD;
+    private static final String DEL_TAG = StringConstants.DELETE_COMMAND_WORD;
     private static final String ADD_TAG_MESSAGE = StringConstants.ADD_TAG_MESSAGE;
     private static final String DEL_TAG_MESSAGE = StringConstants.DEL_TAG_MESSAGE;
 
@@ -34,30 +37,39 @@ public class TagCommand extends Command {
         Module targetModule;
         if (Objects.isNull(taskModule)) {
             targetModule = moduleList.getGeneralTasks();
-            if (tagOperation.equals("add")) {
-                addTag(targetModule);
-            } else {
-                removeTag(targetModule);
-            }
         } else {
             targetModule = moduleList.getModule(taskModule);
             if (Objects.isNull(targetModule)) {
                 throw new NoSuchModuleException();
             }
-            if (tagOperation.equals(ADD_COMMAND)) {
-                addTag(targetModule);
-            } else {
-                removeTag(targetModule);
-            }
         }
-        return new CommandResult(result);
+        switch (tagOperation) {
+        case ADD_TAG:
+            addTag(targetModule);
+            return new CommandResult(result);
+        case DEL_TAG:
+            removeTag(targetModule);
+            return new CommandResult(result);
+        default:
+            throw new ParseException();
+        }
     }
 
+    /**
+     * Adds a tag to a task.
+     *
+     * @param targetModule Module that contains the task to be tagged.
+     */
     private void addTag(Module targetModule) throws ModHappyException {
         TaskList taskList = targetModule.getTaskList();
         result  = String.format(ADD_TAG_MESSAGE, taskList.addTag(tagDescription, taskIndex), tagDescription);
     }
 
+    /**
+     * Removes a tag from a task.
+     *
+     * @param targetModule Module that contains the task with the tag to be removed
+     */
     private void removeTag(Module targetModule) throws ModHappyException {
         TaskList taskList = targetModule.getTaskList();
         Task task = taskList.deleteTag(tagDescription, taskIndex);
