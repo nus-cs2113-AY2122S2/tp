@@ -12,6 +12,7 @@ import seedu.splitlah.command.SessionListCommand;
 import seedu.splitlah.command.SessionSummaryCommand;
 import seedu.splitlah.command.ExitCommand;
 import seedu.splitlah.command.InvalidCommand;
+import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.ui.Message;
 
@@ -440,6 +441,9 @@ public class Parser {
         case SessionSummaryCommand.COMMAND_TEXT:
             delimiterList = SessionSummaryCommand.COMMAND_DELIMITERS;
             break;
+        case GroupCreateCommand.COMMAND_TEXT:
+            delimiterList = GroupCreateCommand.COMMAND_DELIMITERS;
+            break;
         default:
             return !remainingArgs.isEmpty();
         }
@@ -789,6 +793,8 @@ public class Parser {
             return ActivityListCommand.prepare(remainingArgs);
         case ActivityViewCommand.COMMAND_TEXT:
             return ActivityViewCommand.prepare(remainingArgs);
+        case GroupCreateCommand.COMMAND_TEXT:
+            return GroupCreateCommand.prepare(remainingArgs);
         case HelpCommand.COMMAND_TEXT:
             return new HelpCommand();
         case ExitCommand.COMMAND_TEXT:

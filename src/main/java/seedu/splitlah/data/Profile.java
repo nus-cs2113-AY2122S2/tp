@@ -24,6 +24,7 @@ public class Profile {
      */
     public Profile() {
         this.sessionList = new ArrayList<>();
+        this.groupList = new ArrayList<>();
         this.sessionIdTracker = 1;
         this.activityIdTracker = 1;
     }
