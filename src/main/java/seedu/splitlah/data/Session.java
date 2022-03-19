@@ -310,6 +310,14 @@ public class Session {
         return summaryString.toString();
     }
 
+    private String getGroupSummaryString() {
+        if (group == null) {
+            return "Group: None";
+        } else {
+            return "Group: " + group.getGroupName();
+        }
+    }
+
     /**
      * Returns a String object summarising the state of the Session object.
      * 
