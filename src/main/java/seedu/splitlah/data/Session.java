@@ -324,9 +324,11 @@ public class Session {
      * @return A String object containing a summary of the Session object.
      */
     public String getSessionSimplifiedString() {
-        return sessionId + SUMMARY_STRING_SEPARATOR + sessionName + "\n  | " + dateCreated.format(Parser.DATE_FORMAT)
+        return sessionId + SUMMARY_STRING_SEPARATOR + sessionName + "\n "
+                + SUMMARY_STRING_SEPARATOR + dateCreated.format(Parser.DATE_FORMAT)
                 + SUMMARY_STRING_SEPARATOR + personList.size() + " participants"
-                + SUMMARY_STRING_SEPARATOR + activityList.size() + " activities";
+                + SUMMARY_STRING_SEPARATOR + activityList.size() + " activities"
+                + SUMMARY_STRING_SEPARATOR + getGroupSummaryString();
     }
 
     /**
@@ -340,6 +342,7 @@ public class Session {
                 + "Name: " + sessionName + '\n'
                 + "Date: " + dateCreated.format(Parser.DATE_FORMAT) + '\n'
                 + getActivityListSummaryString() + '\n'
-                + getPersonListSummaryString();
+                + getPersonListSummaryString() + '\n'
+                + getGroupSummaryString();
     }
 }
