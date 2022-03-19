@@ -32,7 +32,7 @@ public class AddParser extends Parser {
      * (\s+-t\s+\"(?<estimatedWorkingTime>[^\"]+)\")?    -- matches [-t "estimatedWorkingTime"] if present. Optional
      *                                                   -- None of the above fields accept " as a valid character.
      *
-     * (\s+-m\s+\"(?<taskModule>\w+)\")?                 -- matches [-m taskModule] if present. Optional
+     * (\s+-m\s+(?<taskModule>\w+))?                 -- matches [-m taskModule] if present. Optional
      *                                                      Note that taskModule does not require "", but must be a
      *                                                      single word composed of [a-zA-Z0-9_].
      *
@@ -49,7 +49,7 @@ public class AddParser extends Parser {
 
     private static final String ADD_FORMAT = "(/t\\s+\\\"(?<taskName>[^\\\"]+)\\\"(\\s+-d\\s+\\\""
             + "(?<taskDescription>[^\\\"]+)\\\")?(\\s+-t\\s+\\\"(?<estimatedWorkingTime>[^\\\"]+)\\\")?"
-            + "(\\s+-m\\s+\\\"(?<taskModule>\\w+)\\\")?|/m\\s+(?<moduleCode>\\w+?)(\\s+(/c\\s+(?<modularCredit>\\d+))"
+            + "(\\s+-m\\s+(?<taskModule>\\w+))?|/m\\s+(?<moduleCode>\\w+?)(\\s+(/c\\s+(?<modularCredit>\\d+))"
             + "(?=(\\s+-d\\s+)|$))(\\s+(-d\\s+\\\"(?<moduleDescription>.+)\\\"))?)";
 
     public AddParser() {

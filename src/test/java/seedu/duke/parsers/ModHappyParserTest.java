@@ -3,13 +3,7 @@ package seedu.duke.parsers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.DeleteCommand;
-import seedu.duke.commands.EditCommand;
-import seedu.duke.commands.Command;
-import seedu.duke.commands.ExitCommand;
-import seedu.duke.commands.ListCommand;
-import seedu.duke.commands.MarkCommand;
+import seedu.duke.commands.*;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
@@ -335,7 +329,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_module_noDescription_parsedCorrectly() {
-        final String testString = "add  \t /m modulecode \t\t    ";
+        final String testString = "add  \t /m modulecode /c 4 \t\t    ";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -343,6 +337,7 @@ public class ModHappyParserTest {
             assertNotEquals(null, m);
             assertNull(((AddCommand) c).getNewTask());
             assertEquals("modulecode", m.getModuleCode());
+            assertEquals(4, m.getModularCredit());
             assertNull(m.getModuleDescription());
         } catch (Exception e) {
             fail();
@@ -350,8 +345,21 @@ public class ModHappyParserTest {
     }
 
     @Test
+    public void parse_addCommand_module_invalidModularCredit() {
+        final String testString = "add  \t /m modulecode /c four \t\t    ";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
     public void parse_addCommand_module_noDescription_invalidModuleCode() {
-        final String testString = "add  \t /m module code \t\t    ";
+        final String testString = "add  \t /m module code /c 4 \t\t    ";
         try {
             parser.parseCommand(testString);
             fail();
@@ -364,7 +372,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_module_withDescription_parsedCorrectly() {
-        final String testString = "add  \t /m modu__lec_ode \t\t    -d \t\t  \t \"i am a descrip\t -d-d tion\t \"\t  ";
+        final String testString = "add  \t /m modu__lec_ode \t\t  /c 23  -d  \t \"i am a descrip\t -d-d tion\t \"\t  ";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -373,6 +381,7 @@ public class ModHappyParserTest {
             assertNull(((AddCommand) c).getNewTask());
             assertEquals("modu__lec_ode", m.getModuleCode());
             assertEquals("i am a descrip\t -d-d tion", m.getModuleDescription());
+            assertEquals(23, m.getModularCredit());
         } catch (Exception e) {
             fail();
         }
@@ -393,7 +402,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_module_withDescription_invalidInput() {
-        final String testString = "add /m cs2113t -d \"11111\"123";
+        final String testString = "add /m cs2113t /c 4 -d \"11111\"123";
         try {
             parser.parseCommand(testString);
             fail();
@@ -666,6 +675,58 @@ public class ModHappyParserTest {
     @Test
     public void parse_editCommand_task_tooManyFlags() {
         final String testString = "edit /t 2 -d \"123\" -t \"111\" -m cs2113t";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_gradeCommand_parsedCorrectly() {
+        final String testString = "grade /m CS2113T /g a+";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof GradeCommand);
+            assertEquals("CS2113T", ((GradeCommand) c).getModuleCode()); // Remember, zero-indexed!
+            assertEquals("A+", ((GradeCommand) c).getModuleGrade());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_gradeCommand_invalidFlags() {
+        final String testString = "grade /m CS2113T /c A+";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_gradeCommand_invalidGrade() {
+        final String testString = "grade /m CS2113T /g F-";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_gradeCommand_wrongOrder() {
+        final String testString = "grade /g A- /m CS2113T";
         try {
             parser.parseCommand(testString);
             fail();

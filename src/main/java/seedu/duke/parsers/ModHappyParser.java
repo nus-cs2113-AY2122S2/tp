@@ -77,6 +77,8 @@ public class ModHappyParser extends Parser {
             return new EditParser();
         case (HELP_COMMAND_WORD):
             return new HelpParser();
+        case (GRADE_COMMAND_WORD):
+            return new GradeParser();
         default:
             throw new UnknownCommandException();
         }
