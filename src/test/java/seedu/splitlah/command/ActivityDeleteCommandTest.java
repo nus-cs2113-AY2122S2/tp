@@ -50,6 +50,14 @@ class ActivityDeleteCommandTest {
         assertEquals(InvalidCommand.class, activityWithMissingAidDelimiter.getClass());
     }
 
+    @Test
+    public void prepare_hasMissingArgument_InvalidCommand() {
+        // Case 1: Missing both /sid and /aid arguments
+        String argsMissingBothDelimiters = "activity /delete /sid /aid";
+        Command activityWithMissingBothDelimiters = Parser.getCommand(argsMissingBothDelimiters);
+        assertEquals(InvalidCommand.class, activityWithMissingBothDelimiters.getClass());
+    }
+
     /**
      * Checks if an activity is deleted with an invalid session unique identifier.
      *
