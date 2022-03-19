@@ -30,7 +30,7 @@ class ActivityDeleteCommandTest {
     }
 
     /**
-     * Checks if an activity is deleted with missing delimiters.
+     * Checks if an activity is not deleted with missing delimiters.
      */
     @Test
     public void prepare_hasMissingDelimiter_InvalidCommand() {
@@ -50,6 +50,9 @@ class ActivityDeleteCommandTest {
         assertEquals(InvalidCommand.class, activityWithMissingAidDelimiter.getClass());
     }
 
+    /**
+     * Checks if an activity is not deleted with missing delimiters.
+     */
     @Test
     public void prepare_hasMissingArgument_InvalidCommand() {
         // Case 1: Missing both Session Id and Activity Id arguments
@@ -69,7 +72,7 @@ class ActivityDeleteCommandTest {
     }
 
     /**
-     * Checks if an activity is deleted with an invalid session unique identifier.
+     * Checks if an activity is not deleted with an invalid session unique identifier.
      *
      * @throws InvalidDataException If there are no sessions stored or
      *                              if the session unique identifier specified was not found.
@@ -83,7 +86,7 @@ class ActivityDeleteCommandTest {
     }
 
     /**
-     * Checks if an activity is deleted with an invalid activity unique identifier.
+     * Checks if an activity is not deleted with an invalid activity unique identifier.
      *
      * @throws InvalidDataException If there are no sessions stored or
      *                              if the session unique identifier specified was not found.
@@ -96,6 +99,12 @@ class ActivityDeleteCommandTest {
         assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
     }
 
+    /**
+     * Checks if an activity is deleted with a valid command.
+     *
+     * @throws InvalidDataException If there are no sessions stored or
+     *                              if the session unique identifier specified was not found.
+     */
     @Test
     public void run_validCommand_activityListsSizeBecomesOne() throws InvalidDataException {
         String userInput = "activity /delete /sid 1 /aid 1";
