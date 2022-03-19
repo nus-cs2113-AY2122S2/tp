@@ -59,13 +59,23 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
 **Interaction between components**
 ![Component Interaction Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ComponentInteraction.drawio.png)
 <br>
-The *Component Interaction Diagram* shows the inner workings of how each component in SplitLah interacts. The diagram 
-depicts a scenario when a user attempts to create a session.
+The *Component Interaction Diagram* shows the inner workings of how each component in SplitLah interacts. 
+The diagram depicts a scenario when a user attempts to create a session.
 
 ### Manager Component
 ![Manager Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ManagerComponent.drawio.png)
+<br>
+The `Manager` class is initialized by the `Main` class when the application starts.
+It stores the `Profile`, `TextUI` and `Storage` objects. The `Profile` class helps to manage all data accesses 
+throughout the lifetime of the application. While the `Storage` helps to save what the `Profile` class has captured. 
+The `TextUI` class serves as an interface to read user inputs and print application outputs.
 
 ### Profile Component
+![Profile Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ProfileComponent.drawio.png)
+<br>
+The `Profile` class holds the list of sessions and groups that have been created by the user. 
+It also tracks the unique identifier for `Session`, `Activity` and `Group` classes. The `Profile`
+class would return a unique identifier every time a new `Session`, `Activity` or `Group` is created. 
 
 ### TextUI Component
 
@@ -106,17 +116,17 @@ they engage in during the outings.
 
 ## User Stories
 
-| Version | As a ...              | I want to ...                        | So that I can ...                                                            |
-|---------|-----------------------|--------------------------------------|------------------------------------------------------------------------------|
-| v1.0    | New user              | see usage instructions               | refer to them when I forget how to use the application                       |
-| v1.0    | Budget conscious user | create sessions                      | record the transactions of the outing                                        |
-| v1.0    | Budget conscious user | create activities                    | able to track the expenditure for each activity                              |
-| v1.0    | Budget conscious user | view an existing session             | view the full details of a session previously created                        |
-| v1.0    | Budget conscious user | view an existing activity            | view the cost breakdown of who paid and who was involved in the activity     |
-| v1.0    | Budget conscious user | list all existing sessions           | view all sessions previously created                                         |
-| v1.0    | Budget conscious user | list all activities in a session     | view all the activities that happened in the session                         |
-| v1.0    | Budget conscious user | settle all transactions of a session | see a summary of who needs to pay what amount to who for the entire session  |
-| v1.0    | {Placeholder}         | {Placeholder}                        | {Placeholder}                                                                |
+| Version | As a ...              | I want to ...                        | So that I can ...                                                           |
+|---------|-----------------------|--------------------------------------|-----------------------------------------------------------------------------|
+| v1.0    | New user              | see usage instructions               | refer to them when I forget how to use the application                      |
+| v1.0    | Budget conscious user | create sessions                      | record the transactions of the outing                                       |
+| v1.0    | Budget conscious user | create activities                    | able to track the expenditure for each activity                             |
+| v1.0    | Budget conscious user | view an existing session             | view the full details of a session previously created                       |
+| v1.0    | Budget conscious user | view an existing activity            | view the cost breakdown of who paid and who was involved in the activity    |
+| v1.0    | Budget conscious user | list all existing sessions           | view all sessions previously created                                        |
+| v1.0    | Budget conscious user | list all activities in a session     | view all the activities that happened in the session                        |
+| v1.0    | Budget conscious user | settle all transactions of a session | see a summary of who needs to pay what amount to who for the entire session |
+| v1.0    | User                  | exit the application                 | stop tracking                                                               |
 
 ## Non-Functional Requirements
 1. The application should be able to work in any operating systems with `Java 11` installed.
