@@ -9,6 +9,7 @@ import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.util.StringConstants;
 
+import static seedu.duke.util.StringConstants.OPTION_COMMAND_WORD;
 import static seedu.duke.util.StringConstants.SAVE_COMMAND_WORD;
 
 /**
@@ -77,6 +78,8 @@ public class ModHappyParser extends Parser {
             return new EditParser();
         case (HELP_COMMAND_WORD):
             return new HelpParser();
+        case (OPTION_COMMAND_WORD):
+            return new OptionParser();
         default:
             throw new UnknownCommandException();
         }

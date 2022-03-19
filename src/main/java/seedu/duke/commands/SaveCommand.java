@@ -1,23 +1,29 @@
 package seedu.duke.commands;
 
 import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.storage.ConfigurationStorage;
 import seedu.duke.storage.ModuleListStorage;
 import seedu.duke.storage.TaskListStorage;
 import seedu.duke.tasks.ModuleList;
+import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
+import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
+
+import java.util.ArrayList;
 
 public class SaveCommand extends Command {
 
     @Override
-    public CommandResult execute(ModuleList moduleList) throws ModHappyException {
+    public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
         // Even if there is an error writing to one file, we should still try to write to the others.
         String writeStatus = "";
         try {
             // Master Task List
             TaskListStorage taskListStorage = new TaskListStorage();
             TaskList taskList = moduleList.getGeneralTasks().getTaskList();
-            taskListStorage.jsonWriter(taskList.getTaskList(), StringConstants.TASK_PATH);
+            ArrayList<seedu.duke.tasks.Task> taskArrayList = taskList.getTaskList();
+            taskListStorage.jsonWriter(taskArrayList, StringConstants.TASK_PATH);
             writeStatus += StringConstants.TASK_DATA_SAVE_SUCCESS + StringConstants.LS;
         } catch (ModHappyException e) {
             writeStatus += e + StringConstants.LS;
@@ -25,11 +31,20 @@ public class SaveCommand extends Command {
         }
         try {
             ModuleListStorage moduleListStorage = new ModuleListStorage();
-            moduleListStorage.jsonWriter(moduleList.getModuleList(), StringConstants.MODULE_PATH);
+            ArrayList<seedu.duke.tasks.Module> moduleArrayList = moduleList.getModuleList();
+            moduleListStorage.jsonWriter(moduleArrayList, StringConstants.MODULE_PATH);
             writeStatus += StringConstants.MODULE_DATA_SAVE_SUCCESS + StringConstants.LS;
         } catch (ModHappyException e) {
             writeStatus += e + StringConstants.LS;
             writeStatus += StringConstants.MODULE_DATA_SAVE_FAILED + StringConstants.LS;
+        }
+        try {
+            ConfigurationStorage configurationStorage = new ConfigurationStorage();
+            configurationStorage.jsonWriter(configuration, StringConstants.CONFIGURATION_PATH);
+            writeStatus += StringConstants.CONFIGURATION_DATA_SAVE_SUCCESS + StringConstants.LS;
+        } catch (ModHappyException e) {
+            writeStatus += e + StringConstants.LS;
+            writeStatus += StringConstants.CONFIGURATION_DATA_SAVE_FAILED + StringConstants.LS;
         }
         return new CommandResult(writeStatus);
     }

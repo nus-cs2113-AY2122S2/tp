@@ -2,7 +2,11 @@ package seedu.duke.commands;
 
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.tasks.ModuleList;
+import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
+
+import static seedu.duke.util.StringConstants.OPTION_COMMAND_WORD;
+import static seedu.duke.util.StringConstants.OPTION_HELP;
 
 public class HelpCommand extends Command {
     protected static final String EXIT_COMMAND_WORD = StringConstants.EXIT_COMMAND_WORD;
@@ -34,7 +38,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ModuleList moduleList) throws ModHappyException {
+    public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
         if (command.isBlank()) {
             return new CommandResult(HELP + "\n\n" + HELP_NOTE);
         }
@@ -55,6 +59,8 @@ public class HelpCommand extends Command {
             return new CommandResult(RESET_HELP);
         case SAVE_COMMAND_WORD:
             return new CommandResult(SAVE_HELP);
+        case OPTION_COMMAND_WORD:
+            return new CommandResult(OPTION_HELP + "\n" + configuration.getConfigurationGroupExplain());
         case HELP_COMMAND_WORD:
             return new CommandResult(HELP + "\n\n" + HELP_NOTE);
         default:

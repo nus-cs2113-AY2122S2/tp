@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
+import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
 public class ListCommand extends Command {
@@ -11,7 +12,7 @@ public class ListCommand extends Command {
      * Lists all tasks.
      */
     @Override
-    public CommandResult execute(ModuleList moduleList) {
+    public CommandResult execute(ModuleList moduleList, Configuration configuration) {
         String res = "";
         for (Module m : moduleList.getModuleList()) {
             res += m.printModuleTaskList() + LS;

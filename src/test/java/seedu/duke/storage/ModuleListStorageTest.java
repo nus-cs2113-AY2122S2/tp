@@ -16,9 +16,10 @@ import seedu.duke.util.StringConstants;
 
 
 public class ModuleListStorageTest {
+    private final String path = StringConstants.MODULE_TEST_PATH;
     private ModuleListStorage moduleListStorage;
     private ArrayList<Module> moduleList;
-    private final String path = StringConstants.MODULE_PATH;
+
 
     @BeforeEach
     public void setUp() {

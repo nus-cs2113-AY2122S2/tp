@@ -8,6 +8,7 @@ import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
+import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
 public class EditCommand extends Command {
@@ -84,7 +85,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ModuleList moduleList) throws ModHappyException {
+    public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
         if (taskIndex < 0) {
             editModuleDescription(moduleList);
         } else {
