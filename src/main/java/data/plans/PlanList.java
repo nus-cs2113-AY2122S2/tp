@@ -142,9 +142,9 @@ public class PlanList {
     public void listAllPlan() {
         if (getPlansDisplayList().size() <= 0) {
             System.out.println("Oops! You have not created any plans yet!");
-            System.out.println("To create a new plan, enter 'plan /new <plan name> /workouts " +
-                    "\n<workout number(s) to add, separated by comma>'." +
-                    "\nAlternatively, enter 'help' for more information.");
+            System.out.println("To create a new plan, enter 'plan /new <plan name> /workouts "
+                    + "\n<workout number(s) to add, separated by comma>'."
+                    + "\nAlternatively, enter 'help' for more information.");
             return;
         }
 
