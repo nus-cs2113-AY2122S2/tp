@@ -27,6 +27,7 @@ public class Profile {
         this.groupList = new ArrayList<>();
         this.sessionIdTracker = 1;
         this.activityIdTracker = 1;
+        this.groupIdTracker = 1;
     }
 
     /**
