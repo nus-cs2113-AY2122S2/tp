@@ -7,6 +7,8 @@ import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
 
+import java.util.logging.Level;
+
 /**
  * Represents a command which deletes an Activity object from a Session object.
  *
@@ -17,10 +19,6 @@ public class ActivityDeleteCommand extends Command {
     public static final String COMMAND_TEXT = "activity /delete";
 
     public static final String COMMAND_FORMAT = "Syntax: activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]";
-
-    private static final String COMMAND_CONFIRMATION = "Are you sure you want to delete activity id: ";
-
-    private static final String COMMAND_ABORT = "Okay! Activity was not deleted.";
 
     private static final String COMMAND_SUCCESS = "The activity was deleted successfully.";
 
@@ -39,6 +37,8 @@ public class ActivityDeleteCommand extends Command {
      * @param activityId The id of the activity.
      */
     public ActivityDeleteCommand(int sessionId, int activityId) {
+        assert sessionId > 0 : Message.ASSERT_ACTIVITYDELETE_SESSION_ID_NOT_INITIALIZED;
+        assert activityId > 0 : Message.ASSERT_ACTIVITYDELETE_ACTIVITY_ID_NOT_INITIALIZED;
         this.sessionId = sessionId;
         this.activityId = activityId;
     }
@@ -74,19 +74,10 @@ public class ActivityDeleteCommand extends Command {
         Session session = null;
         try {
             session = manager.getProfile().getSession(sessionId);
-            boolean isActivityExists = session.hasActivity(activityId);
-            if (!isActivityExists) {
-                manager.getUi().printlnMessage(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST);
-                return;
-            }
-            String confirmationPrompt = COMMAND_CONFIRMATION + activityId + "?";
-            boolean isConfirmed = manager.getUi().getUserConfirmation(confirmationPrompt);
-            if (isConfirmed) {
-                session.removeActivity(activityId);
-                manager.getUi().printlnMessage(COMMAND_SUCCESS);
-            } else {
-                manager.getUi().printlnMessage(COMMAND_ABORT);
-            }
+            assert session != null : Message.ASSERT_ACTIVITYDELETE_SESSION_IS_NULL;
+            session.removeActivity(activityId);
+            manager.getUi().printlnMessage(COMMAND_SUCCESS);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYDELETE_ACTIVITY_REMOVED + activityId);
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
         }
