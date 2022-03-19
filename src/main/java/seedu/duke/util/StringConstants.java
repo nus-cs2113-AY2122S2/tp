@@ -107,7 +107,7 @@ public class StringConstants {
             + "Format to save: save";
     public static final String HELP = "Displays help and format for selected command.\n"
             + "Format to display help for specific command: help COMMAND\n"
-            + "Available commands: exit, add, del, list, mark, save, help";
+            + "Available commands: exit, add, del, list, mark, save, help, reset, tag";
     public static final String TAG_HELP = "Set a custom tag for your tasks.\n"
             + "Format to add a tag: tag add TASK_INDEX [-m MODULE_CODE] TAG_DESCRIPTION\n"
             + "Format to delete a tag: tag del TASK_INDEX [-m MODULE_CODE] TAG_DESCRIPTION";
