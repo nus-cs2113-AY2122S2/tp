@@ -9,7 +9,6 @@ import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
 import seedu.duke.util.StringConstants;
 
-
 public class ResetCommand extends Command {
     @Override
     public CommandResult execute(ModuleList moduleList) throws ModHappyException {

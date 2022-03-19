@@ -1,6 +1,5 @@
 package seedu.duke.storage;
 
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -11,21 +10,19 @@ import com.google.gson.Gson;
 
 import seedu.duke.exceptions.FileCreateFailException;
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.WriteStreamBrokenException;
-
+import seedu.duke.exceptions.WriteException;
 
 /**
- * A data access object that can manage the storage of ArrayList style objects.
+ * A data access object that can manage the storage of ArrayList instances.
  * @param <ModHappyT> ModHappy class
  */
 public abstract class ListStorage<ModHappyT extends Object> implements Storage<ArrayList<ModHappyT>> {
 
 
     /**
-     * Writes a ArrayList of ModHappy Data type into a json file.
-     * @param arrayList ArrayList of ModHappy objects to be written
-     * @param path The relative path of storage file to the project root
-     * @throws ModHappyException Write fail exception
+     * Writes a ArrayList with elements of type ModHappyT to a json file.
+     * @param path json file path
+     * @throws ModHappyException if an error was encountered during writing
      */
     @Override
     public void jsonWriter(ArrayList<ModHappyT> arrayList, String path) throws ModHappyException {
@@ -38,14 +35,14 @@ public abstract class ListStorage<ModHappyT extends Object> implements Storage<A
             isr.close();
             fos.close();
         } catch (Exception e) {
-            throw new WriteStreamBrokenException();
+            throw new WriteException();
         }
     }
 
     /**
-     * Checks the existence of the storage file, and create if not exists.
-     * @param path Relative path of the storage file
-     * @throws ModHappyException Fail to create file exception
+     * Checks for the existence of the storage file and create it if it does not already exist.
+     * @param path json file path
+     * @throws ModHappyException if the file could not be created
      */
     @Override
     public void createTargetFile(String path) throws ModHappyException {

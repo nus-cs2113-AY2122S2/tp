@@ -2,6 +2,8 @@ package seedu.duke.tasks;
 
 import seedu.duke.util.StringConstants;
 
+import java.util.ArrayList;
+
 public class Module {
     private static final String LS = System.lineSeparator();
     private static final String MODULE_STRING_WITH_DESC = "%s (%s)";
@@ -27,6 +29,10 @@ public class Module {
         return moduleCode;
     }
 
+    public void setModuleDescription(String description) {
+        this.moduleDescription = description;
+    }
+
     public String getModuleDescription() {
         return moduleDescription;
     }
@@ -36,6 +42,10 @@ public class Module {
      */
     public TaskList getTaskList() {
         return taskList;
+    }
+
+    public void setTaskArrayList(ArrayList<Task> list) {
+        taskList.setList(list);
     }
 
     /**

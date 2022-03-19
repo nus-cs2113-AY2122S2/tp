@@ -13,7 +13,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public CommandResult execute(ModuleList moduleList) {
-        // This will be replaced by some pre-end process later(e.g. Ask whether to save the modification)
+        // TODO: ask the user whether changes should be saved, if unsaved changes were detected.
         CommandResult result = new CommandResult(StringConstants.READY_EXIT);
         isExit = true;
         return result;
