@@ -135,4 +135,15 @@ public class Commands {
         }
         System.out.println(String.format("There are %d goods in total.",total));
     }
+
+    public static void addOrder(String orderId, String orderDate, String postalCode, String receiverName, String receiverAddress) {
+        if (orderId.isBlank() || postalCode.isBlank()
+                || receiverName.isBlank() || receiverAddress.isBlank()) {
+            System.out.println(1);
+        }
+
+        if (orderDate.isBlank()) {
+            //hello
+        }
+    }
 }
