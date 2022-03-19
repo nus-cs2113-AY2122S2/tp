@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PlanList {
+    public static final int MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN = 10;
     private WorkoutList workoutList;
     private HashMap<String, Plan> plansHashMapList = new HashMap<>();
     private ArrayList<String> plansDisplayList = new ArrayList<>();
@@ -23,8 +24,6 @@ public class PlanList {
     public HashMap<String, Plan> getPlansHashMapList() {
         return this.plansHashMapList;
     }
-
-    public static final int MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN = 10;
 
     public Plan getPlanFromKey(String planKey) {
         return getPlansHashMapList().get(planKey);

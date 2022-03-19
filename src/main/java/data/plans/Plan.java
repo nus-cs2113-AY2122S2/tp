@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public class Plan {
     private String planName;
-    private ArrayList<Workout> workoutsInPlanList = new ArrayList<>();
+    private ArrayList<Workout> listOfWorkouts = new ArrayList<>();
 
-    public Plan(String planName, ArrayList<Workout> workoutsInPlanList) {
+    public Plan(String planName, ArrayList<Workout> listOfWorkouts) {
         this.planName = planName;
-        this.workoutsInPlanList = workoutsInPlanList;
+        this.listOfWorkouts = listOfWorkouts;
     }
 
     public String getPlanName() {
@@ -18,7 +18,7 @@ public class Plan {
     }
 
     public ArrayList<Workout> getWorkoutsInPlanList() {
-        return workoutsInPlanList;
+        return listOfWorkouts;
     }
 
     public void setPlanName() {
@@ -26,7 +26,7 @@ public class Plan {
     }
 
     public void setWorkoutsInPlanList() {
-        this.workoutsInPlanList = workoutsInPlanList;
+        this.listOfWorkouts = listOfWorkouts;
     }
 
     public String toString() {

@@ -4,6 +4,7 @@ import data.plans.InvalidPlanException;
 import data.plans.Plan;
 import data.plans.PlanList;
 import storage.FileManager;
+import storage.LogHandler;
 import werkit.UI;
 
 import java.util.logging.Level;
@@ -24,7 +25,7 @@ public class PlanCommand extends Command {
     private String userAction;
     private String userArguments;
 
-    private static Logger logger = Logger.getLogger(WorkoutCommand.class.getName());
+    private static Logger logger = Logger.getLogger(PlanCommand.class.getName());
 
     public PlanCommand(String userInput, FileManager fileManager, PlanList planList,
                        String userAction, String userArguments) throws InvalidCommandException {
@@ -33,6 +34,8 @@ public class PlanCommand extends Command {
         this.planList = planList;
         setUserAction(userAction);
         this.userArguments = userArguments;
+
+        LogHandler.linkToFileLogger(logger);
     }
 
     /**
@@ -81,8 +84,11 @@ public class PlanCommand extends Command {
     public void setUserAction(String userAction) throws InvalidCommandException {
         switch (userAction) {
         case CREATE_ACTION_KEYWORD:
+            //Fallthrough
         case LIST_ACTION_KEYWORD:
+            //Fallthrough
         case DELETE_ACTION_KEYWORD:
+            //Fallthrough
         case DETAILS_ACTION_KEYWORD:
             this.userAction = userAction;
             break;
@@ -131,7 +137,6 @@ public class PlanCommand extends Command {
             System.out.println("Uh oh, it seems like too few arguments were entered.");
             System.out.println("Please try again. Alternatively, type 'help' if you need\n"
                     + "more information on the commands.");
-
         } catch (NumberFormatException e) {
             logger.log(Level.WARNING, "A non-formattable number was received!");
             System.out.println("Uh oh, a number was expected in your input, but a non-formattable\n"
@@ -139,7 +144,6 @@ public class PlanCommand extends Command {
             System.out.println("Please try again. Alternatively, type 'help' if you need\n"
                     + "more information on the commands.");
         }
-
     }
 }
 
