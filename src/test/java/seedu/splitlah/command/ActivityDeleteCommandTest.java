@@ -52,10 +52,15 @@ class ActivityDeleteCommandTest {
 
     @Test
     public void prepare_hasMissingArgument_InvalidCommand() {
-        // Case 1: Missing both /sid and /aid arguments
-        String argsMissingBothDelimiters = "activity /delete /sid /aid";
-        Command activityWithMissingBothDelimiters = Parser.getCommand(argsMissingBothDelimiters);
-        assertEquals(InvalidCommand.class, activityWithMissingBothDelimiters.getClass());
+        // Case 1: Missing both Session Id and Activity Id arguments
+        String argsMissingBothArguments = "activity /delete /sid /aid";
+        Command activityWithMissingBothArguments = Parser.getCommand(argsMissingBothArguments);
+        assertEquals(InvalidCommand.class, activityWithMissingBothArguments.getClass());
+
+        // Case 2: Missing Session Id argument only
+        String argsMissingSessionIdArgument = "activity /delete /sid /aid 1";
+        Command activityWithMissingSessionIdArgument = Parser.getCommand(argsMissingSessionIdArgument);
+        assertEquals(InvalidCommand.class, activityWithMissingSessionIdArgument.getClass());
     }
 
     /**
