@@ -31,5 +31,39 @@ public class SatisfactionList {
         return satisfactionList.size();
     }
 
+    /**
+     * Helper for ViewSatisfactionCommand class.
+     * Prints out the information of the Satisfaction objects
+     * in this satisfactionList (i.e. prints out each Satisfaction object's
+     * corresponding customer name and satisfaction value).
+     */
+    public void viewSatisfactions() {
+        int number = 1;
+        if (getSize() == 0) {
+            System.out.println("There are no recorded satisfactions.");
+        }
+        for (Satisfaction satisfaction : satisfactionList) {
+            System.out.println(Integer.toString(number) + ". " + satisfaction.getCustomerName() + " - "
+                    + satisfaction.getSatisfactionValue());
+            number += 1;
+        }
+
+    }
+
+    /**
+     * Helper for AverageSatisfactionCommand class.
+     * Calculates the average customer satisfaction rating of
+     * the Satisfaction objects in this satisfactionList.
+     * @return The average customer satisfaction rating.
+     */
+    public double calculateAverageSatisfaction() {
+        int satisfactionSum = 0;
+        for (Satisfaction satisfaction : satisfactionList) {
+            satisfactionSum += satisfaction.getSatisfactionValue();
+        }
+        double satisfactionAverage = (double) satisfactionSum / (double) getSize();
+        return satisfactionAverage;
+    }
+
 
 }
