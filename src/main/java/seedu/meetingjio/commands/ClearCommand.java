@@ -4,6 +4,7 @@ import seedu.meetingjio.Timetable;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_NON_EMPTY_LIST;
 
+//@@author ibrahimisramos
 public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
 

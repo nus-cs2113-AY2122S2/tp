@@ -6,6 +6,7 @@ import seedu.meetingjio.Timetable;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DELETE_COMMAND_FAILED;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
 
+//@@author ibrahimisramos
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     private final int index;
