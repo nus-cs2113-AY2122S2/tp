@@ -59,8 +59,8 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
 **Interaction between components**
 ![Component Interaction Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ComponentInteraction.drawio.png)
 <br>
-The *Component Interaction Diagram* shows the inner workings of how each component in SplitLah interacts. The diagram 
-depicts a scenario when a user attempts to create a session.
+The *Component Interaction Diagram* shows the inner workings of how each component in SplitLah interacts. 
+The diagram depicts a scenario when a user attempts to create a session.
 
 ### Manager Component
 ![Manager Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ManagerComponent.drawio.png)
@@ -106,17 +106,6 @@ they engage in during the outings.
 
 ## User Stories
 
-| Version | As a ...              | I want to ...                        | So that I can ...                                                            |
-|---------|-----------------------|--------------------------------------|------------------------------------------------------------------------------|
-| v1.0    | New user              | see usage instructions               | refer to them when I forget how to use the application                       |
-| v1.0    | Budget conscious user | create sessions                      | record the transactions of the outing                                        |
-| v1.0    | Budget conscious user | create activities                    | able to track the expenditure for each activity                              |
-| v1.0    | Budget conscious user | view an existing session             | view the full details of a session previously created                        |
-| v1.0    | Budget conscious user | view an existing activity            | view the cost breakdown of who paid and who was involved in the activity     |
-| v1.0    | Budget conscious user | list all existing sessions           | view all sessions previously created                                         |
-| v1.0    | Budget conscious user | list all activities in a session     | view all the activities that happened in the session                         |
-| v1.0    | Budget conscious user | settle all transactions of a session | see a summary of who needs to pay what amount to who for the entire session  |
-| v1.0    | {Placeholder}         | {Placeholder}                        | {Placeholder}                                                                |
 | Version | As a ...              | I want to ...                        | So that I can ...                                                           |
 |---------|-----------------------|--------------------------------------|-----------------------------------------------------------------------------|
 | v1.0    | New user              | see usage instructions               | refer to them when I forget how to use the application                      |
