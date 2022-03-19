@@ -78,4 +78,12 @@ class ActivityDeleteCommandTest {
         assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
     }
 
+    @Test
+    public void run_validCommand_activityListsSizeBecomesOne() throws InvalidDataException {
+        String userInput = "activity /delete /sid 1 /aid 1";
+        Command command = Parser.getCommand(userInput);
+        command.run(manager);
+        assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
+    }
+
 }
