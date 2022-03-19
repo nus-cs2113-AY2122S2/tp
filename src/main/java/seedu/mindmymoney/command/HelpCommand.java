@@ -27,7 +27,8 @@ public class HelpCommand extends Command {
      */
     public void executeCommand() {
         if (isFromUser) {
-            String helpPage = "---------------------------------------Help Page---------------------------------------\n"
+            String helpPage = "---------------------------------------Help Page--------------------------------"
+                    + "-------\n"
                     + "1. Listing all Expenditures: list\n"
                     + "2. Adding an Expenditure entry: add [DESCRIPTION] [AMOUNT]\n"
                     + "3. Adding an Expenditure entry with category: add [DESCRIPTION] -c [CATEGORY] [AMOUNT]\n"
