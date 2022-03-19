@@ -1,6 +1,12 @@
 package werkit;
 
-import commands.*;
+import commands.Command;
+import commands.ExitCommand;
+import commands.InvalidCommandException;
+import commands.WorkoutCommand;
+import commands.HelpCommand;
+import commands.ExerciseCommand;
+import commands.PlanCommand;
 import data.exercises.ExerciseList;
 import data.plans.Plan;
 import data.plans.PlanList;
@@ -42,7 +48,8 @@ public class Parser {
      * @param workoutList  An instance of the WorkoutList class.
      * @param fileManager  An instance of the FileManager class.
      */
-    public Parser(UI ui, ExerciseList exerciseList, WorkoutList workoutList, FileManager fileManager, PlanList planList) {
+    public Parser(UI ui, ExerciseList exerciseList, WorkoutList workoutList,
+                  FileManager fileManager, PlanList planList) {
         this.ui = ui;
         this.exerciseList = exerciseList;
         this.workoutList = workoutList;

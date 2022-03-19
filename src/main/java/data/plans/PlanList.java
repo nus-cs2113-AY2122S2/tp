@@ -15,9 +15,11 @@ public class PlanList {
     public PlanList(WorkoutList workoutList) {
         this.workoutList = workoutList;
     }
+
     public ArrayList<String> getPlansDisplayList() {
         return this.plansDisplayList;
     }
+
     public HashMap<String, Plan> getPlansHashMapList() {
         return this.plansHashMapList;
     }
@@ -116,8 +118,9 @@ public class PlanList {
      * plan is within the minimum and maximum number of workouts a plan can hold.
      * The range is 1 - 10 workouts.
      *
-     * @param numberOfWorkouts
-     * @return
+     * @param numberOfWorkouts The number of workouts to be added in a plan.
+     * @return True if the number of workouts to be added is within the min
+     *         and max range, else false.
      */
     public boolean checkMinMaxNumberOfWorkouts(int numberOfWorkouts) {
         return numberOfWorkouts > 0 && numberOfWorkouts <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN;
