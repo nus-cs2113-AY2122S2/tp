@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-
 /**
  * Represents a command that creates a Group object from user input and stores it in the Profile object.
  *
@@ -34,7 +33,6 @@ public class GroupCreateCommand extends Command {
 
     private String groupName;
     private String[] personNames;
-
 
     /**
      * Initializes a GroupCreateCommand.
@@ -64,7 +62,8 @@ public class GroupCreateCommand extends Command {
     /**
      * Checks if String object array of names has duplicated names.
      *
-     * @return true if it contains duplicates, false otherwise.
+     * @return true if it contains duplicates,
+     *         false otherwise.
      */
     private boolean hasNameDuplicates() {
         Set<String> nameSet = new HashSet<>();

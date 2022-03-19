@@ -19,7 +19,6 @@ public class Group {
     private static final String PERSON_LIST_HEADER = "Participants";
     private static final int OFFSET = 1;
 
-
     /**
      * Constructs a Group object.
      *

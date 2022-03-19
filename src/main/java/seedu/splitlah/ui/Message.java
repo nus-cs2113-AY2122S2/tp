@@ -241,6 +241,4 @@ public abstract class Message {
              "There is another group with the same Id.";
     public static final String ASSERT_GROUPCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
              "Name duplicates exists but not detected.";
-
-
 }
