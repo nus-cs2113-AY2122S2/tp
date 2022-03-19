@@ -49,6 +49,18 @@ public class Session {
         this.activityList = new ArrayList<>();
         this.group = null;
     }
+
+    public Session(String sessionName, int sessionId, LocalDate dateCreated, ArrayList<Person> personList,
+                   Group group) {
+        assert personList != null : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
+        assert personList.size() != 0 : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
+        this.sessionName = sessionName;
+        this.sessionId = sessionId;
+        this.dateCreated = dateCreated;
+        this.personList = personList;
+        this.activityList = new ArrayList<>();
+        this.group = group;
+    }
     
     /**
      * Returns the session's name.
