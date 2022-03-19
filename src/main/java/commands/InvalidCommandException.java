@@ -18,6 +18,8 @@ public class InvalidCommandException extends Exception {
             + "Do you mean 'workout /delete <workout number to delete>'?";
     public static final String INVALID_UPDATE_WORKOUT_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
             + "Do you mean 'workout /update <workout number to update> <new number of reps>'?";
+    public static final String INVALID_NEW_PLAN_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
+            + "Do you mean 'plan /new <plan name> /workouts <workout number(s) to add, separated by comma>'?";
 
     private String throwingClass;
 
