@@ -36,7 +36,7 @@ class AddCommandTest {
         ExpenditureList expenditureTestList = new ExpenditureList();
         String inputString = "";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString, expenditureTestList).executeCommand());
+            () -> new AddCommand(inputString, expenditureTestList).executeCommand());
     }
 
     /**
@@ -47,7 +47,7 @@ class AddCommandTest {
         ExpenditureList expenditureTestList = new ExpenditureList();
         String inputString = "expenditure deadbeef";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString, expenditureTestList).executeCommand());
+            () -> new AddCommand(inputString, expenditureTestList).executeCommand());
     }
 
     /**

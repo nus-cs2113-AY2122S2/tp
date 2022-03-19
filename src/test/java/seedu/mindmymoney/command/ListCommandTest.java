@@ -13,7 +13,7 @@ class ListCommandTest {
      * formatting
      */
     @Test
-    void listToString_normalInputs_expectString() throws MindMyMoneyException{
+    void listToString_normalInputs_expectString() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         String inputString = "expenditure 12345";
         new AddCommand(inputString, expenditureTestList).executeCommand();
