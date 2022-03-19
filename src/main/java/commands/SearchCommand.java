@@ -46,7 +46,7 @@ public class SearchCommand extends Command {
                 ArrayList<String> exerciseListToSearch = exerciseList.getExerciseList();
                 int count = 0;
                 for (int i = 0; i < exerciseListToSearch.size(); i++) {
-                    if (exerciseListToSearch.get(i).contains(userArguments)) {
+                    if (exerciseListToSearch.get(i).toLowerCase().contains(userArguments)) {
                         count += 1;
                         if (count == 1) {
                             System.out.println("The exercise(s) containing keywords"
