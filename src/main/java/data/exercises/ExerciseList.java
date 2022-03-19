@@ -21,6 +21,9 @@ public class ExerciseList {
         incrementNumberOfExercises();
     }
 
+    public ArrayList<String> getExerciseList() {
+        return exercisesList;
+    }
     /**
      * Prints the list of exercises starting with their index.
      */
