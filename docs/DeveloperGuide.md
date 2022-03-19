@@ -64,6 +64,11 @@ The diagram depicts a scenario when a user attempts to create a session.
 
 ### Manager Component
 ![Manager Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ManagerComponent.drawio.png)
+<br>
+The `Manager` class is initialized by the `Main` class when the application starts.
+It stores the `Profile`, `TextUI` and `Storage` objects. The `Profile` class helps to manage all data accesses 
+throughout the lifetime of the application. While the `Storage` helps to save what the `Profile` class has captured. 
+The `TextUI` class serves as an interface to read user inputs and print application outputs.
 
 ### Profile Component
 
