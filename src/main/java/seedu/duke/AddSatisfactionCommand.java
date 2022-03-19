@@ -62,7 +62,11 @@ public class AddSatisfactionCommand extends Command {
         if (splitInput.length == 0) {
             throw new EmptySatisfactionCustomerException();
         }
-        String customerName = splitInput[0].trim();
+        String customerName = "";
+        for (int i = 0; i < splitInput.length - 1; i++) {
+            customerName += splitInput[i] + " ";
+        }
+        customerName = customerName.trim();
         if (customerName.isEmpty()) {
             throw new EmptySatisfactionCustomerException();
         }
@@ -83,7 +87,7 @@ public class AddSatisfactionCommand extends Command {
         if (splitInput.length < 2) {
             throw new EmptySatisfactionValueException();
         }
-        String satisfactionString = splitInput[1].trim();
+        String satisfactionString = splitInput[splitInput.length - 1].trim();
         int satisfactionValue;
         try {
             satisfactionValue = Integer.parseInt(satisfactionString);

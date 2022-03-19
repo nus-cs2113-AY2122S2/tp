@@ -31,5 +31,7 @@ public class ViewSatisfactionsCommand extends Command {
                         ItemList itemList, Ui ui) {
         satisfactionList.viewSatisfactions();
     }
+
+    
 }
 
