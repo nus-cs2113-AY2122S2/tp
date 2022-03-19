@@ -24,6 +24,7 @@ public class ExerciseList {
     public ArrayList<String> getExerciseList() {
         return exercisesList;
     }
+
     /**
      * Prints the list of exercises starting with their index.
      */

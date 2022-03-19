@@ -50,7 +50,7 @@ public class SearchCommand extends Command {
                         if (count == 1) {
                             System.out.println("The exercise(s) containing keywords"
                                     + ui.getColorText(TextColor.COLOR_YELLOW, " [" + userArguments + "] ")
-                                    + "is(are) listed below." );
+                                    + "is(are) listed below.");
                             ui.printLine();
                         }
                         ui.printColorText(TextColor.COLOR_YELLOW, count + ". " + exerciseListToSearch.get(i));
