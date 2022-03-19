@@ -1,6 +1,6 @@
 package seedu.mindmymoney.command;
 
-import seedu.mindmymoney.constants.PrintStrings;
+import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
@@ -36,11 +36,10 @@ public class UpdateCommand extends Command {
      * feedback to standard output.
      */
     @Override
-    public void executeCommand() {
+    public void executeCommand() throws MindMyMoneyException {
         try {
             String description;
             String category = null;
-            System.out.print(PrintStrings.LINE);
             String[] parseUpdateInput = updateInput.split(" ", SPLIT_LIMIT);
 
             // get the index to update, amount, description
@@ -63,14 +62,14 @@ public class UpdateCommand extends Command {
             int indexToUpdate = Integer.parseInt(indexString) + LIST_INDEX_CORRECTION;
             Expenditure newExpenditure = new Expenditure(description, category, Integer.parseInt(amountString));
             itemList.set(indexToUpdate, newExpenditure);
-            System.out.printf("Successfully set expenditure %d to %s\n",
+            System.out.printf("Successfully set expenditure %d to %s\n" + System.lineSeparator(),
                     indexToUpdate - LIST_INDEX_CORRECTION, newExpenditure);
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Did you forget to input INDEX, DESCRIPTION or AMOUNT?");
+            throw new MindMyMoneyException("Did you forget to input INDEX, DESCRIPTION or AMOUNT?");
         } catch (NumberFormatException e) {
-            System.out.println("AMOUNT and INDEX must be a number");
-        } finally {
-            System.out.print(PrintStrings.LINE);
+            throw new MindMyMoneyException("AMOUNT and INDEX must be a number");
+        } catch (IndexOutOfBoundsException e) {
+            throw new MindMyMoneyException("Please input a valid index");
         }
     }
 }
