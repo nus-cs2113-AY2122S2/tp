@@ -175,7 +175,7 @@ public class StringConstants {
     public static final String SAVE_COMMAND_WORD = "save";
 
     /**
-     * For Module
+     * For Modules.
      */
     public static final String NOT_ENTERED = "-";
 

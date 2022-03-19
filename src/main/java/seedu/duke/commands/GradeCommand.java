@@ -21,6 +21,7 @@ public class GradeCommand extends Command {
     public String getModuleCode() {
         return moduleCode;
     }
+
     public String getModuleGrade() {
         return moduleGrade;
     }
