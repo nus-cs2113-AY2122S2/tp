@@ -7,7 +7,10 @@ import commands.WorkoutCommand;
 import commands.HelpCommand;
 import commands.ExerciseCommand;
 import commands.SearchCommand;
+import commands.PlanCommand;
 import data.exercises.ExerciseList;
+import data.plans.Plan;
+import data.plans.PlanList;
 import data.workouts.WorkoutList;
 import storage.FileManager;
 import storage.LogHandler;
@@ -15,6 +18,7 @@ import storage.LogHandler;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+import static commands.PlanCommand.DETAILS_ACTION_KEYWORD;
 import static commands.WorkoutCommand.CREATE_ACTION_KEYWORD;
 import static commands.WorkoutCommand.LIST_ACTION_KEYWORD;
 import static commands.WorkoutCommand.DELETE_ACTION_KEYWORD;
@@ -35,6 +39,7 @@ public class Parser {
     private UI ui;
     private ExerciseList exerciseList;
     private WorkoutList workoutList;
+    private PlanList planList;
     private FileManager fileManager;
     public static final int EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS = 2;
     public static final int EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS = 3;
@@ -48,11 +53,13 @@ public class Parser {
      * @param workoutList  An instance of the WorkoutList class.
      * @param fileManager  An instance of the FileManager class.
      */
-    public Parser(UI ui, ExerciseList exerciseList, WorkoutList workoutList, FileManager fileManager) {
+    public Parser(UI ui, ExerciseList exerciseList, WorkoutList workoutList,
+                  FileManager fileManager, PlanList planList) {
         this.ui = ui;
         this.exerciseList = exerciseList;
         this.workoutList = workoutList;
         this.fileManager = fileManager;
+        this.planList = planList;
 
         LogHandler.linkToFileLogger(logger);
     }
@@ -118,6 +125,8 @@ public class Parser {
             return createExerciseCommand(userInput);
         case SearchCommand.BASE_KEYWORD:
             return createSearchCommand(userInput);
+        case PlanCommand.BASE_KEYWORD:
+            return createPlanCommand(userInput);
         default:
             logger.log(Level.WARNING, "Unknown command entered by user.");
             throw new InvalidCommandException(className, InvalidCommandException.INVALID_COMMAND_ERROR_MSG);
@@ -249,5 +258,43 @@ public class Parser {
                     InvalidCommandException.INVALID_ACTION_ERROR_MSG);
         }
         return new SearchCommand(userInput, ui, exerciseList, actionKeyword, arguments);
+    }
+
+    /**
+     * Creates a new plan command with the appropriate parameters stored into the object.
+     *
+     * @param userInput The user's input.
+     * @return A PlanCommand object containing the parsed parameters obtained from the user's input.
+     * @throws ArrayIndexOutOfBoundsException If the user's input contains insufficient information to parse.
+     * @throws InvalidCommandException        If the user's input contains invalid or insufficient information
+     *                                        to parse.
+     */
+    public PlanCommand createPlanCommand(String userInput) throws
+            ArrayIndexOutOfBoundsException, InvalidCommandException {
+        // Determine the action the user has entered
+        String actionKeyword = userInput.split(" ", 3)[1];
+        String arguments = null;
+        String className = this.getClass().getSimpleName();
+        switch (actionKeyword) {
+        case CREATE_ACTION_KEYWORD:
+            if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+                logger.log(Level.WARNING, "User has entered an invalid create plan command action.");
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_NEW_PLAN_COMMAND_ERROR_MSG);
+            }
+            arguments = userInput.split(" ", 3)[2];
+            break;
+        case DELETE_ACTION_KEYWORD:
+            break;
+        case LIST_ACTION_KEYWORD:
+            break;
+        case DETAILS_ACTION_KEYWORD:
+            break;
+        default:
+            logger.log(Level.WARNING, "User has entered an invalid plan command action.");
+            throw new InvalidCommandException(className,
+                    InvalidCommandException.INVALID_ACTION_ERROR_MSG);
+        }
+        return new PlanCommand(userInput, fileManager, planList, actionKeyword, arguments);
     }
 }
