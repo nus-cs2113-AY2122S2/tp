@@ -20,6 +20,7 @@ public class SearchCommand extends Command {
 
     private String userAction;
     private String userArguments;
+    private int matchCount;
 
     private static Logger logger = Logger.getLogger(PlanCommand.class.getName());
 
@@ -30,6 +31,7 @@ public class SearchCommand extends Command {
         this.exerciseList = exerciseList;
         setUserAction(userAction);
         this.userArguments = userArguments.toLowerCase();
+        this.matchCount = 0;
 
         LogHandler.linkToFileLogger(logger);
     }
@@ -47,34 +49,41 @@ public class SearchCommand extends Command {
     }
 
     private void printSearchHeading() {
-        System.out.println("The exercise(s) containing keywords"
-                + ui.getColorText(TextColor.COLOR_YELLOW, " [" + userArguments + "] ")
-                + "is(are) listed below.");
-        ui.printLine();
+        if (matchCount == 1) {
+            System.out.println("The exercise(s) containing keywords"
+                    + ui.getColorText(TextColor.COLOR_YELLOW, " [" + userArguments + "] ")
+                    + "is(are) listed below.");
+            ui.printLine();
+        }
     }
 
-    public void findMatchExercise() {
+    private void incrementMatchCount() {
+        this.matchCount += 1;
+    }
+
+    public void searchExercise() {
         ArrayList<String> exerciseListToSearch = exerciseList.getExerciseList();
-        int count = 0;
-        for (String listToSearch : exerciseListToSearch) {
-            if (listToSearch.toLowerCase().contains(userArguments)) {
-                count += 1;
-                if (count == 1) {
-                    printSearchHeading();
-                }
-                ui.printColorText(TextColor.COLOR_YELLOW, count + ". " + listToSearch);
+        for (String exerciseToSearch : exerciseListToSearch) {
+            if (isMatchExercise(exerciseToSearch.toLowerCase())) {
+                incrementMatchCount();
+                printSearchHeading();
+                ui.printColorText(TextColor.COLOR_YELLOW, matchCount + ". " + exerciseToSearch);
             }
         }
-        if (count == 0) {
+        if (matchCount == 0) {
             System.out.println("Sorry, no matching exercise found.");
         }
+    }
+
+    public boolean isMatchExercise(String exercise) {
+        return exercise.contains(userArguments);
     }
 
     public void execute() {
         try {
             switch (userAction) {
             case SEARCH_EXERCISE_ACTION_KEYWORD:
-                findMatchExercise();
+                searchExercise();
                 break;
             default:
                 logger.log(Level.WARNING, "User has entered an invalid search exercise command action.");
