@@ -1,11 +1,13 @@
 package commands;
 
 import data.exercises.ExerciseList;
+import storage.LogHandler;
 import werkit.UI;
 import textcolors.TextColor;
 
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SearchCommand extends Command {
     public static final String BASE_KEYWORD = "search";
@@ -19,6 +21,8 @@ public class SearchCommand extends Command {
     private String userAction;
     private String userArguments;
 
+    private static Logger logger = Logger.getLogger(PlanCommand.class.getName());
+
     public SearchCommand(String userInput, UI ui, ExerciseList exerciseList,
                          String userAction, String userArguments) throws InvalidCommandException {
         super(userInput);
@@ -26,6 +30,8 @@ public class SearchCommand extends Command {
         this.exerciseList = exerciseList;
         setUserAction(userAction);
         this.userArguments = userArguments.toLowerCase();
+
+        LogHandler.linkToFileLogger(logger);
     }
 
     public void setUserAction(String userAction) throws InvalidCommandException {
@@ -34,6 +40,7 @@ public class SearchCommand extends Command {
             this.userAction = userAction;
             break;
         default:
+            logger.log(Level.WARNING, "User has entered an invalid search exercise command action.");
             String className = this.getClass().getSimpleName();
             throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
         }
@@ -70,6 +77,7 @@ public class SearchCommand extends Command {
                 findMatchExercise();
                 break;
             default:
+                logger.log(Level.WARNING, "User has entered an invalid search exercise command action.");
                 String className = this.getClass().getSimpleName();
                 throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
             }
