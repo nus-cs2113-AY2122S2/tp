@@ -1,6 +1,8 @@
 package data.plans;
 
 import commands.PlanCommand;
+import data.exercises.InvalidExerciseException;
+import data.workouts.InvalidWorkoutException;
 import data.workouts.Workout;
 import data.workouts.WorkoutList;
 
@@ -136,4 +138,22 @@ public class PlanList {
     public boolean checkWorkoutNumberWithinRange(int workoutNumber) {
         return workoutNumber > 0 && workoutNumber <= workoutList.getWorkoutsDisplayList().size();
     }
+
+    public void insertPlanIntoList(String planKey, Plan plan) throws InvalidWorkoutException {
+        boolean isExistingWorkout = true;
+        String className = this.getClass().getSimpleName();
+        var workoutData = plan.getWorkoutsInPlanList();
+        for (Workout workoutInPlanFile : workoutData) {
+            if (!workoutList.getWorkoutsHashMapList().containsKey(workoutInPlanFile.toString())) {
+                isExistingWorkout = false;
+                break;
+            }
+        }
+        if (!isExistingWorkout) {
+            throw new InvalidWorkoutException(className, InvalidWorkoutException.INVALID_WORKOUT_ERROR_MSG);
+        }
+        plansHashMapList.put(planKey, plan);
+        plansDisplayList.add(planKey);
+    }
+
 }
