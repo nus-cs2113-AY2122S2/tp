@@ -6,7 +6,7 @@ import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 
 /**
- * Represents a command which deletes a Group object.
+ * Represents a command that deletes a Group object.
  *
  * @author Tianle
  */
@@ -25,7 +25,7 @@ public class GroupDeleteCommand extends Command {
     private int groupId;
 
     /**
-     * Constructs an GroupDeleteCommand object.
+     * Constructs a GroupDeleteCommand object.
      *
      * @param groupId The unique identifier of the group.
      */
