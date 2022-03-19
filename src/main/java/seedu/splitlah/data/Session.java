@@ -20,7 +20,7 @@ public class Session {
     private LocalDate dateCreated;
     private ArrayList<Activity> activityList;
     private ArrayList<Person> personList;
-    // private Group group;
+    private Group group;
 
     // CONSTANTS
     private static final String ACTIVITY_LIST_HEADER =
@@ -47,6 +47,7 @@ public class Session {
         this.dateCreated = dateCreated;
         this.personList = personList;
         this.activityList = new ArrayList<>();
+        this.group = null;
     }
     
     /**
