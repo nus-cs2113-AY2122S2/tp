@@ -61,6 +61,11 @@ class ActivityDeleteCommandTest {
         String argsMissingSessionIdArgument = "activity /delete /sid /aid 1";
         Command activityWithMissingSessionIdArgument = Parser.getCommand(argsMissingSessionIdArgument);
         assertEquals(InvalidCommand.class, activityWithMissingSessionIdArgument.getClass());
+
+        // Case 3: Missing Activity Id argument only
+        String argsMissingActivityIdArgument = "activity /delete /sid 1 /aid";
+        Command activityWithMissingActivityIdArgument = Parser.getCommand(argsMissingActivityIdArgument);
+        assertEquals(InvalidCommand.class, activityWithMissingActivityIdArgument.getClass());
     }
 
     /**
