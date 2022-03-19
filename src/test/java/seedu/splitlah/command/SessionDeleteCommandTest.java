@@ -25,7 +25,7 @@ class SessionDeleteCommandTest {
     }
 
     /**
-     * Checks if session is deleted with a missing delimiter.
+     * Checks if session is not deleted with a missing delimiter.
      */
     @Test
     public void prepare_hasMissingDelimiter_InvalidCommand() {
@@ -35,7 +35,7 @@ class SessionDeleteCommandTest {
     }
 
     /**
-     * Checks if session is deleted with a missing argument.
+     * Checks if session is not deleted with a missing argument.
      */
     @Test
     public void prepare_hasMissingArgument_InvalidCommand() {
