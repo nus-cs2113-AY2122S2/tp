@@ -118,6 +118,10 @@ public class Session {
         return personList;
     }
 
+    public Group getGroup() {
+        return group;
+    }
+
     /**
      * Checks whether the Session object has an Activity object with the queried unique identifier.
      * 
