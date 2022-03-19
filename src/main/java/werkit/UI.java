@@ -1,5 +1,6 @@
 package werkit;
 
+import data.plans.Plan;
 import data.workouts.Workout;
 import storage.FileManager;
 import storage.LogHandler;
@@ -53,6 +54,9 @@ public class UI {
     public static final String NEW_WORKOUT_CREATED_MESSAGE = "Alright, the following workout has been created:";
     public static final String DELETED_WORKOUT_MESSAGE = "Alright, the following workout has been removed:";
     public static final String UPDATED_WORKOUT_MESSAGE = "Alright, the following workout has been updated:";
+    //Plan-related Message
+    public static final String NEW_PLAN_CREATED_MESSAGE = "Alright, the following plan has been created:";
+
     // IOException Error Message
     public static final String IOEXCEPTION_ERROR_MESSAGE = "[ERROR] The program has encountered an IOException "
             + "and needs to close. Sorry about that...";
@@ -393,5 +397,17 @@ public class UI {
         } else {
             System.out.println();
         }
+    }
+
+    /**
+     * Prints a message when a new plan has been created. The newly created plan will also be displayed.
+     *
+     * @param newPlan The Plan object that is newly created.
+     */
+    public void printNewPlanCreatedMessage(Plan newPlan) {
+        System.out.println(NEW_PLAN_CREATED_MESSAGE);
+        System.out.println();
+        System.out.println("\t" + newPlan.toString());
+        System.out.println();
     }
 }

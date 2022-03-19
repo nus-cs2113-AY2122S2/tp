@@ -4,6 +4,7 @@ import commands.Command;
 import commands.ExitCommand;
 import commands.InvalidCommandException;
 import data.exercises.ExerciseList;
+import data.plans.PlanList;
 import data.workouts.WorkoutList;
 import storage.FileManager;
 import storage.LogHandler;
@@ -24,6 +25,7 @@ public class WerkIt {
     private ExerciseList exerciseList;
     private WorkoutList workoutList;
     private FileManager fileManager;
+    private PlanList planList;
     private static Logger logger = Logger.getLogger(WerkIt.class.getName());
 
     /**
@@ -36,7 +38,8 @@ public class WerkIt {
         this.exerciseList = new ExerciseList();
         this.workoutList = new WorkoutList(getExerciseList());
         this.fileManager = new FileManager();
-        this.parser = new Parser(getUI(), getExerciseList(), getWorkoutList(), getFileManager());
+        this.planList = new PlanList(getWorkoutList());
+        this.parser = new Parser(getUI(), getExerciseList(), getWorkoutList(), getFileManager(), getPlanList());
 
         LogHandler.linkToFileLogger(logger);
         logger.log(Level.INFO, "Components instantiated.");
@@ -90,6 +93,15 @@ public class WerkIt {
      */
     public FileManager getFileManager() {
         return this.fileManager;
+    }
+
+    /**
+     * Gets the PlanList object stored in this WerkIt object.
+     *
+     * @return The PlanList object.
+     */
+    public PlanList getPlanList() {
+        return this.planList;
     }
 
     /**
