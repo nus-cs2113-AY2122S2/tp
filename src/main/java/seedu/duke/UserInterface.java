@@ -22,23 +22,16 @@ public class UserInterface {
                 // current implementation is just take 1st value for command
                 String command = userInput.split(" ")[0];
                 switch (command) {
-                case "add":
-                    String regex = "id/(?<id>\\d*) n/(?<name>.*) q/(?<qty>\\d*)"
-                            + " d/(?<desc>\\.*";
-                    Regex regexMatch = new Regex(userInput, regex);
-                    HashMap<String, String> matches = regexMatch.getGroupValues();
-                    Commands.addGood(matches.get("id"), matches.get("name"),
-                            matches.get("qty"), matches.get("desc"), userGoods);
-                    break;
                 case "view":
                     //using flags here to distinguish between different views????
-                    regex = "(?<flag>*[og])/ id/(?<id>\\d*)";
-                    regexMatch = new Regex(userInput, regex);
-                    matches = regexMatch.getGroupValues();
-                    if (matches.get("flag").equals("o")) {
-                        // view order with flag "o"
+                    String flag = userInput.split(" ")[1];
+                    String regex = "id/(?<id>\\d*)";
+                    Regex regexMatch = new Regex(userInput, regex);
+                    HashMap<String, String> matches = regexMatch.getGroupValues();
+                    if (flag == "-o") {
+                        // view order with flag "-o"
                         warehouse.viewOrder(matches.get("id"));
-                    } else if (matches.get("flag").equals("g")) {
+                    } else if (flag == "-g") {
                         // view good with flag "g"
                         warehouse.viewGood(matches.get("id"));
                     } else {
@@ -47,25 +40,57 @@ public class UserInterface {
                     }
                     break;
                 case "list":
-                    regex = "(?<flag>*[og])/ id/(?<id>\\d*)";
+                    flag = userInput.split(" ")[1];
+                    regex = "id/(?<id>\\d*)";
                     regexMatch = new Regex(userInput, regex);
                     matches = regexMatch.getGroupValues();
-                    if (matches.get("flag").equals("o")) {
-                        // list orders with flag "o"
+                    if (flag == "-o") {
+                        // list orders with flag "-o"
                         warehouse.listOrders();
-                    } else if (matches.get("flag").equals("g")) {
-                        // list goods with flag "g"
+                    } else if (flag == "-g") {
+                        // list goods with flag "-g"
                         warehouse.listGoods();
                     } else {
                         // wrong command exception
                         throw new WrongCommandException("view", true);
                     }
                     break;
+                case "add":
+                    flag = userInput.split(" ")[1];
+
+                    if (flag == "-o") {
+                        regex = "id/(?<id>\\d*) r/(?<r>.*) a/(?<address>.*)";
+                        regexMatch = new Regex(userInput, regex);
+                        matches = regexMatch.getGroupValues();
+                        warehouse.addOrder(matches.get("id"), matches.get("r"), matches.get("address"));
+
+                    } else if (flag == "-g") {
+                        regex = "oid/(?<oid>\\d*) gid/(?<gid>\\d*) n/(?<name>.*) q/(?<qty>\\d*)"
+                                + " d/(?<desc>\\.*";
+                        regexMatch = new Regex(userInput, regex);
+                        matches = regexMatch.getGroupValues();
+                        warehouse.addGoods(matches.get("oid"), matches.get("gid"), matches.get("name"),
+                                matches.get("qty"), matches.get("desc"));
+                    } else {
+                        throw new WrongCommandException("add", true);
+                    }
+                    break;
                 case "remove":
-                    String format = "id/(?<id>\\d*) q/(?<qty>\\d*)";
-                    regexMatch = new Regex(userInput, format);
-                    HashMap<String, String> inputValues = regexMatch.getGroupValues();
-                    Commands.removeGood(inputValues.get("id"), inputValues.get("qty"), userGoods);
+                    flag = userInput.split(" ")[1];
+
+                    if (flag == "-o") {
+                        regex = "id/(?<id>\\d*)";
+                        regexMatch = new Regex(userInput, regex);
+                        matches = regexMatch.getGroupValues();
+                        warehouse.removeOrder(matches.get("id"));
+                    } else if (flag == "-g") {
+                        regex = "id/(?<id>\\d*) q/(?<qty>\\d*)";
+                        regexMatch = new Regex(userInput, regex);
+                        matches = regexMatch.getGroupValues();
+                        warehouse.removeGoods(matches.get("id"), matches.get("qty"));
+                    } else {
+                        throw new WrongCommandException("remove", true);
+                    }
                     break;
                 case "total":
                     int total = warehouse.totalGoods();
@@ -77,7 +102,6 @@ public class UserInterface {
                 default:
                     //error exception here
                     throw new WrongCommandException("", false);
-                    break;
                 }
                 System.out.println("Another command?");
                 userInput = input.nextLine();
@@ -91,7 +115,7 @@ public class UserInterface {
                 System.out.println("No such command. Type help to see examples");
             }
         } catch (NullException nullException) {
-
+            //catch null exception here
         }
     }
 }

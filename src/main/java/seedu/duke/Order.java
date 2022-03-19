@@ -9,24 +9,30 @@ import java.util.ArrayList;
 
 public class Order {
     private int orderId;
-    private Receiver receiver;
-    private LocalDate orderDate;
+    private String receiver;
+    private String shippingAddress;
     private ArrayList<Good> userGoods = new ArrayList<>();
 
-    public Order(int orderId, Receiver receiver, LocalDate orderReceivedDate) {
+    public Order(int orderId, String receiver, String shippingAddress) {
         this.orderId = orderId;
         this.receiver = receiver;
-        this.orderDate = orderReceivedDate;
-    }
-
-    public Order(int orderId, Receiver receiver) {
-        this.orderId = orderId;
-        this.receiver = receiver;
-        this.orderDate = LocalDate.now();
+        this.shippingAddress = shippingAddress;
     }
 
     public int getId() {
         return orderId;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public ArrayList<Good> getUserGoods() {
+        return userGoods;
     }
 
     public ArrayList<Good> getGoods() {
@@ -34,7 +40,7 @@ public class Order {
     }
 
     public void addGood(String id, String name, String qty,
-                               String desc, ArrayList<Good> userGoods) throws WrongCommandException {
+                               String desc) throws WrongCommandException {
         if (id.isBlank() || name.isBlank() || qty.isBlank()) {
             throw new WrongCommandException("add", true);
         }
@@ -53,7 +59,7 @@ public class Order {
     }
 
     // Function to print grammar for statements to print
-    private static String checkPlural(int numberOfGoods) {
+    private String checkPlural(int numberOfGoods) {
         if (numberOfGoods <= 1) {
             return "is ";
         } else {
@@ -62,7 +68,7 @@ public class Order {
     }
 
 
-    private static void remove(int id, int qty, ArrayList<Good> userGoods)
+    private void remove(int id, int qty)
             throws LargeQuantityException, ItemDoesNotExistException {
 
         for (Good good : userGoods) {
@@ -90,7 +96,7 @@ public class Order {
         throw new ItemDoesNotExistException();
     }
 
-    public static void removeGood(String id, String qty, ArrayList<Good> userGoods)
+    public void removeGood(String id, String qty)
             throws WrongCommandException {
         if (id.isBlank() || qty.isBlank()) {
             throw new WrongCommandException("remove", true);
@@ -100,16 +106,30 @@ public class Order {
             int goodsId = Integer.parseInt(id);
             int goodsQty = Integer.parseInt(qty);
 
-            remove(goodsId, goodsQty, userGoods);
+            remove(goodsId, goodsQty);
 
         } catch (NumberFormatException e1) {
             throw new WrongCommandException("remove", true);
         } catch (ItemDoesNotExistException e2) {
-            System.out.println("The goods you are trying to remove are not on the current list. "
-                    + "Please try another id or add the goods first.");
+            System.out.println("The good you are trying to remove are not on the current list. "
+                    + "Please try another id first.");
         } catch (LargeQuantityException e3) {
             System.out.println("The quantity input is larger than the current quantity of the goods. "
                     + "Please enter the command again with a smaller quantity.");
         }
+    }
+
+    public boolean doesGoodExist(int goodId) {
+        for (Good good : userGoods) {
+            if (good.getId() == goodId) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public String toString() {
+        return String.format("%d - %s (%s)", orderId, receiver, shippingAddress);
     }
 }

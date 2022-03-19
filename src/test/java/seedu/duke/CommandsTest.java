@@ -12,34 +12,34 @@ class CommandsTest {
     public void addGoodTest() {
         //test 1, adding good normally - success
         ArrayList<Good> goodsArrayList = new ArrayList<>();
-        Commands.addGood("1", "chairs", "15", goodsArrayList);
+        Commands.addGood("1", "chairs", "15", "they are chairs", goodsArrayList);
         assertEquals(1, goodsArrayList.size());
 
-        /*
+
         //test 2, adding non-unique id with different name - fail, good is not added
         Commands.addGood("1", "tables", "15", goodsArrayList);
         assertEquals(1, goodsArrayList.size());
-        */
+
 
         goodsArrayList = new ArrayList<>();
         //test 3, blank inputs - fail, good is not added
-        Commands.addGood("1", "     ", "15", goodsArrayList);
+        Commands.addGood("1", "     ", "15", "no face, no name, no number", goodsArrayList);
         assertEquals(0, goodsArrayList.size());
 
         //test 4, empty inputs - fail, good is not added
-        Commands.addGood("1", "", "15", goodsArrayList);
+        Commands.addGood("1", "bananas", "15", "", goodsArrayList);
         assertEquals(0, goodsArrayList.size());
 
         //test 5, non-numerical inputs for id - fail, good is not added
-        Commands.addGood("hi", "chairs", "15", goodsArrayList);
+        Commands.addGood("hi", "chairs", "15", "hello", goodsArrayList);
         assertEquals(0, goodsArrayList.size());
     }
 
     @Test
     void removeGoodTest() {
         ArrayList<Good> goodsArrayList = new ArrayList<>();
-        Commands.addGood("1", "chairs", "15", goodsArrayList);
-        Commands.addGood("2", "table", "15", goodsArrayList);
+        Commands.addGood("1", "chairs", "15", "they are chairs", goodsArrayList);
+        Commands.addGood("2", "table", "15", "there are some table here", goodsArrayList);
 
         //test 1, delete all (15) chairs - success, only left tables in list
         Commands.removeGood("1", "15", goodsArrayList);
