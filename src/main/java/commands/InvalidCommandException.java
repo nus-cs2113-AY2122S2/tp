@@ -22,6 +22,8 @@ public class InvalidCommandException extends Exception {
             + "Do you mean 'search /exercise <exercise keyword>'?";
     public static final String INVALID_NEW_PLAN_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
             + "Do you mean 'plan /new <plan name> /workouts <workout number(s) to add, separated by comma>'?";
+    public static final String INVALID_PLAN_LIST_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
+            + "Do you mean 'plan /list?'";
 
     private String throwingClass;
 
