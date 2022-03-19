@@ -3,6 +3,7 @@ package seedu.duke.parsers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.function.Executable;
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.EditCommand;
@@ -10,12 +11,12 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.MarkCommand;
+import seedu.duke.commands.TagCommand;
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.NoSuchTaskException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
-import seedu.duke.parsers.ModHappyParser;
 import seedu.duke.tasks.Module;
+import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,6 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ModHappyParserTest {
     private ModHappyParser parser;
@@ -780,6 +783,18 @@ public class ModHappyParserTest {
     }
 
     @Test
+    public void parse_listCommandwithArgument_noExeceptionThrown() {
+        final String testString = "list test";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof ListCommand);
+            assertEquals("test", ((ListCommand) c).getArgument());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
     public void parse_exitCommand_parsedCorrectly() {
         final String testString = "exit";
         try {
@@ -802,7 +817,37 @@ public class ModHappyParserTest {
             fail();
         }
     }
+
+    @Test
+    public void parse_tagCommand_addTag_withTargetModule_parsedCorrectly() {
+        final String testString = "tag add 1 -m cs2113t tag description";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof TagCommand);
+            assertEquals("add", ((TagCommand) c).getTagOperation());
+            assertEquals("cs2113t", ((TagCommand) c).getTaskModule());
+            assertEquals("tag description", ((TagCommand) c).getTagDescription());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_tagCommand_invalidTagOperation_throwsParseException() {
+        final String testString = "tag invalidOp 1 tag description";
+        Command c = null;
+        try {
+            c = parser.parseCommand(testString);
+        } catch (ModHappyException e) {
+            fail();
+        }
+        assertTrue(c instanceof TagCommand);
+        assertEquals("invalidOp", ((TagCommand) c).getTagOperation());
+        assertEquals(null, ((TagCommand) c).getTaskModule());
+        assertEquals("tag description", ((TagCommand) c).getTagDescription());
+        Command finalC = c;
+        assertThrows(ParseException.class, () -> {
+            finalC.execute(new ModuleList());
+        });
+    }
 }
-
-
-

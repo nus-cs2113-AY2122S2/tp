@@ -8,6 +8,10 @@ public class ListCommand extends Command {
     private static final String LIST_MESSAGE = StringConstants.LIST_MESSAGE_TOP + LS + "%s";
     private String argument;
 
+    public String getArgument() {
+        return argument;
+    }
+
     public ListCommand(String argument) {
         this.argument = argument;
     }
