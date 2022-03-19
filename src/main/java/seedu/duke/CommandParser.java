@@ -14,6 +14,7 @@ public class CommandParser {
     private static final String ADD_AVAILABILITY_COMMAND = "Availability ";
     public static final String ADD_SATISFACTION_COMMAND = "Add Satisfaction";
     public static final String VIEW_SATISFACTIONS_COMMAND = "View Satisfactions";
+    public static final String AVERAGE_SATISFACTION_COMMAND = "average satisfaction";
     private static final String CHECK_IN = "check in";
     private static final String CHECK_OUT = "check out";
     private static final String CHECK_ROOM = "check room";
@@ -42,6 +43,8 @@ public class CommandParser {
             userCommand = new AddSatisfactionCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(VIEW_SATISFACTIONS_COMMAND)) {
             userCommand = new ViewSatisfactionsCommand();
+        } else if (commandString.startsWith(AVERAGE_SATISFACTION_COMMAND)) {
+            userCommand = new AverageSatisfactionCommand();
         } else if (commandString.startsWith(ADD_ITEM_COMMAND)) {
             commandStringWithoutCommand = commandString.replace(ADD_ITEM_COMMAND, "");
             userCommand = new AddItemCommand(commandStringWithoutCommand);
