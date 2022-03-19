@@ -49,12 +49,20 @@ public class SearchCommand extends Command {
     }
 
     private void printSearchHeading() {
-        if (matchCount == 1) {
+        if (isFirstMatch()) {
             System.out.println("The exercise(s) containing keywords"
                     + ui.getColorText(TextColor.COLOR_YELLOW, " [" + userArguments + "] ")
                     + "is(are) listed below.");
             ui.printLine();
         }
+    }
+
+    private int getMatchCount() {
+        return matchCount;
+    }
+
+    private boolean isFirstMatch() {
+        return getMatchCount() == 1;
     }
 
     private void incrementMatchCount() {
