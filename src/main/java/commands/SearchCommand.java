@@ -61,6 +61,10 @@ public class SearchCommand extends Command {
         this.matchCount += 1;
     }
 
+    private boolean isZeroMatch() {
+        return matchCount == 0;
+    }
+
     public void searchExercise() {
         ArrayList<String> exerciseListToSearch = exerciseList.getExerciseList();
         for (String exerciseToSearch : exerciseListToSearch) {
@@ -70,7 +74,7 @@ public class SearchCommand extends Command {
                 ui.printColorText(TextColor.COLOR_YELLOW, matchCount + ". " + exerciseToSearch);
             }
         }
-        if (matchCount == 0) {
+        if (isZeroMatch()) {
             System.out.println("Sorry, no matching exercise found.");
         }
     }
