@@ -2,6 +2,8 @@ package seedu.meetingjio.commands;
 
 import seedu.meetingjio.Timetable;
 
+import static seedu.meetingjio.common.ErrorMessages.ERROR_NON_EMPTY_LIST;
+
 public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
 
@@ -17,12 +19,12 @@ public class ClearCommand extends Command {
         for (int i = 0; i < numEntries; i++) {
             timetable.remove(0);
         }
-        printClearConfirmation();
-        return "";
+        assert (timetable.size() == 0) : ERROR_NON_EMPTY_LIST;
+        return printClearConfirmation();
     }
 
-    public static void printClearConfirmation() {
-        System.out.println("Your whole timetable has been cleared");
+    public static String printClearConfirmation() {
+        return "Your whole timetable has been cleared";
     }
 
 }
