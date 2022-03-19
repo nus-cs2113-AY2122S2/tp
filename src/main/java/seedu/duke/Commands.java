@@ -2,67 +2,32 @@ package seedu.duke;
 
 import util.exceptions.LargeQuantityException;
 import util.exceptions.ItemDoesNotExistException;
-import util.exceptions.NullException;
+import util.exceptions.WrongCommandException;
 
 import java.util.ArrayList;
 
 public class Commands {
 
-    public static void addGood(String id, String name, String qty, ArrayList<Goods> userGoods) {
+    public static void addGood(String id, String name, String qty,
+            String desc, ArrayList<Good> userGoods) throws WrongCommandException{
         if (id.isBlank() || name.isBlank() || qty.isBlank()) {
-            System.out.println("Please add a good in this format:\n"
-                    + "add id/id_of_good_as_number n/name_of_good q/quantity_of_good_as_number");
-            return;
+            throw new WrongCommandException("add", true);
         }
         try {
-            Goods goods = new Goods(
+            Good good = new Good(
                     Integer.parseInt(id),
                     name,
                     Integer.parseInt(qty),
-                    "Empty Description"); //description not yet added since not in UserGuide
-            userGoods.add(goods);
-            System.out.printf("%d %s Has been added\n", goods.getQuantity(), goods);
+                    desc);
+            userGoods.add(good);
+            System.out.printf("%d %s %s added\n", good.getQuantity(), good,
+                    checkPlural(good.getQuantity()));
         } catch (NumberFormatException e) {
-            // error handling here
-            System.out.println("Please add a good in this format:\n"
-                    + "add id/id_of_good_as_number n/name_of_good q/quantity_of_good_as_number");
+            throw new WrongCommandException("add", true);
         }
     }
 
-    public static void viewGood(String id, ArrayList<Goods> userGoods) {
-        try {
-            Integer idToBeViewed = Integer.parseInt(id);
-            for (Goods good : userGoods) {
-                if (idToBeViewed.equals(good.getId())) {
-                    System.out.println("Viewing item with id " + good.getId());
-                    System.out.println("Item name: " + good.getName());
-                    System.out.println("Item description: " + good.getDescription());
-                    System.out.println("Item quantity: " + good.getQuantity());
-                    return;
-                }
-            }
-            System.out.println("Could not find item with given id!");
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid format entered! Check format and try again!");
-        }
-    }
-
-    /*Prints all inventory in a numbered list in order of input*/
-    public static void listGoods(ArrayList<Goods> userGoods) {
-        //int numberOfUserGoods = userGoods.size();
-        if (userGoods.isEmpty()) {
-            System.out.println("There is no inventory in the warehouse.");
-            return;
-        }
-        System.out.println("List of inventory items:");
-        int counter = 0;
-        for (Goods good : userGoods) {
-            System.out.println((counter + 1) + ". " + good.getName());
-            counter++;
-        }
-    }
-
-    /*Function to print grammar for statements to print*/
+    // Function to print grammar for statements to print
     public static String checkPlural(int numberOfGoods) {
         if (numberOfGoods <= 1) {
             return "is ";
@@ -71,10 +36,10 @@ public class Commands {
         }
     }
 
-    private static void remove(int id, int qty, ArrayList<Goods> userGoods)
+    private static void remove(int id, int qty, ArrayList<Good> userGoods)
             throws LargeQuantityException, ItemDoesNotExistException {
 
-        for (Goods good : userGoods) {
+        for (Good good : userGoods) {
             if (good.getId() == id) {
                 if (qty > good.getQuantity()) {
                     throw new LargeQuantityException();
@@ -99,11 +64,10 @@ public class Commands {
         throw new ItemDoesNotExistException();
     }
 
-    public static void removeGood(String id, String qty, ArrayList<Goods> userGoods) {
+    public static void removeGood(String id, String qty, ArrayList<Good> userGoods)
+            throws WrongCommandException {
         if (id.isBlank() || qty.isBlank()) {
-            System.out.println("Please remove goods in this format:\n"
-                    + "remove id/id_of_good_as_number q/quantity_of_good_as_number");
-            return;
+            throw new WrongCommandException("remove", true);
         }
 
         try {
@@ -113,8 +77,7 @@ public class Commands {
             remove(goodsId, goodsQty, userGoods);
           
         } catch (NumberFormatException e1) {
-            System.out.println("Please remove goods in this format:\n"
-                    + "remove id/id_of_good_as_number q/quantity_of_good_as_number");
+            throw new WrongCommandException("remove", true);
         } catch (ItemDoesNotExistException e2) {
             System.out.println("The goods you are trying to remove are not on the current list. "
                     + "Please try another id or add the goods first.");
@@ -124,15 +87,64 @@ public class Commands {
         }
     }
 
+    public static void help() {
+        System.out.println("* Add good `add id/ID n/GOOD_NAME q/QUANTITY`\n"
+                + "* Remove good: `remove i/ID q/QUANTITY`\n"
+                + "* List all orders: `list o/`\n"
+                + "* List all goods: `list g/`\n"
+                + "* View order: `view o/ id/ORDER_ID`\n"
+                + "* View good: `view g/ id/GOOD_ID`\n"
+                + "* Total quantity of goods: `total`");
+    }
+
+    /*
+    public static void viewGood(String id, ArrayList<Goods> userGoods) {
+        try {
+            Integer idToBeViewed = Integer.parseInt(id);
+            for (Goods good : userGoods) {
+                if (idToBeViewed.equals(good.getId())) {
+                    System.out.println("Viewing item with id " + good.getId());
+                    System.out.println("Item name: " + good.getName());
+                    System.out.println("Item description: " + good.getDescription());
+                    System.out.println("Item quantity: " + good.getQuantity());
+                    return;
+                }
+            }
+            System.out.println("Could not find item with given id!");
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid format entered! Check format and try again!");
+        }
+    }
+    */
+
+    /*
+    // Prints all inventory in a numbered list in order of input
+    public static void listGoods(ArrayList<Goods> userGoods) {
+        //int numberOfUserGoods = userGoods.size();
+        if (userGoods.isEmpty()) {
+            System.out.println("There is no inventory in the warehouse.");
+            return;
+        }
+        System.out.println("List of inventory items:");
+        int counter = 0;
+        for (Goods good : userGoods) {
+            System.out.println((counter + 1) + ". " + good.getName());
+            counter++;
+        }
+    }
+    */
+
+    /*
     public static void totalGoods(ArrayList<Goods> userGoods) throws NullException {
         if (userGoods == null) {
             throw new NullException("userGoods");
 
         }
-        Integer total = 0;
+        int total = 0;
         for (Goods good: userGoods) {
             total += good.getQuantity();
         }
         System.out.println(String.format("There are %d goods in total.",total));
     }
+    */
 }
