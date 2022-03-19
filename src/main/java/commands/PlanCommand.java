@@ -117,6 +117,7 @@ public class PlanCommand extends Command {
                 getUI().printNewPlanCreatedMessage(newPlan);
                 break;
             case LIST_ACTION_KEYWORD:
+                getPlanList().listAllPlan();
                 break;
             case DETAILS_ACTION_KEYWORD:
                 break;
