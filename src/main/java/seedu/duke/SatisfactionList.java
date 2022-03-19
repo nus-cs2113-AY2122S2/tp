@@ -47,7 +47,22 @@ public class SatisfactionList {
                     + satisfaction.getSatisfactionValue());
             number += 1;
         }
+    }
 
+    /**
+     * Helper for AddSatisfactionCommand class.
+     * Check if the given customer already has a
+     * corresponding Satisfaction object in this satisfactionList.
+     * @param customerName The name of the given customer.
+     * @return A boolean value (true if the customer already has corresponding Satisfaction object, false otherwise).
+     */
+    public boolean isCustomerInSatisfactionList(String customerName) {
+        for (Satisfaction satisfaction : satisfactionList) {
+            if (customerName.equals(satisfaction.getCustomerName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
