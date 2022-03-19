@@ -119,6 +119,7 @@ public class PlanCommand extends Command {
                 getFileManager().writeNewPlanToFile(newPlan);
                 break;
             case LIST_ACTION_KEYWORD:
+                getPlanList().listAllPlan();
                 break;
             case DETAILS_ACTION_KEYWORD:
                 break;

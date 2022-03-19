@@ -109,7 +109,6 @@ public class PlanList {
             if (userPlanNameInputLowerCase.equals(getPlanName)) {
                 return true;
             }
-
         }
         return false;
     }
@@ -156,4 +155,23 @@ public class PlanList {
         plansDisplayList.add(planKey);
     }
 
+    /**
+     * Prints all the plan names that are stored in the plans list.
+     */
+    public void listAllPlan() {
+        if (getPlansDisplayList().size() <= 0) {
+            System.out.println("Oops! You have not created any plans yet!");
+            System.out.println("To create a new plan, enter 'plan /new <plan name> /workouts "
+                    + "\n<workout number(s) to add, separated by comma>'."
+                    + "\nAlternatively, enter 'help' for more information.");
+            return;
+        }
+
+        assert (getPlansDisplayList().size() > 0);
+        System.out.println("Here are all your plan(s).");
+        System.out.println("To view each plan in detail, enter 'plan /details <plan number in list>'.\n");
+        for (int i = 0; i < getPlansDisplayList().size(); i += 1) {
+            System.out.println((i + 1) + "." + getPlansDisplayList().get(i).toString());
+        }
+    }
 }

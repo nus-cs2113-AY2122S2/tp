@@ -294,6 +294,11 @@ public class Parser {
         case DELETE_ACTION_KEYWORD:
             break;
         case LIST_ACTION_KEYWORD:
+            if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
+                logger.log(Level.WARNING, "User has entered an invalid list plan command action.");
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_PLAN_LIST_COMMAND_ERROR_MSG);
+            }
             break;
         case DETAILS_ACTION_KEYWORD:
             break;
