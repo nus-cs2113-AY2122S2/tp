@@ -50,6 +50,16 @@ public class Session {
         this.group = null;
     }
 
+    /**
+     * Constructs a Session object with the specified information as a new session.
+     *
+     * @param sessionName The name of the session.
+     * @param sessionId   A unique identifier for the session.
+     * @param dateCreated A LocalDate object storing the date that the session occurs on.
+     * @param personList  A list of Person objects representing participants of the session.
+     * @param group       A Group object representing a group of persons participating in the session.
+     * @see Profile#getNewSessionId() for issuing a unique sessionId
+     */
     public Session(String sessionName, int sessionId, LocalDate dateCreated, ArrayList<Person> personList,
                    Group group) {
         assert personList != null : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
@@ -118,6 +128,11 @@ public class Session {
         return personList;
     }
 
+    /**
+     * Returns a Group object representing a group of persons participating in the session.
+     * 
+     * @return A Group object containing Person objects that are participating in the session.
+     */
     public Group getGroup() {
         return group;
     }
