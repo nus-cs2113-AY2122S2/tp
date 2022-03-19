@@ -39,27 +39,35 @@ public class SearchCommand extends Command {
         }
     }
 
+    private void printSearchHeading() {
+        System.out.println("The exercise(s) containing keywords"
+                + ui.getColorText(TextColor.COLOR_YELLOW, " [" + userArguments + "] ")
+                + "is(are) listed below.");
+        ui.printLine();
+    }
+
+    public void findMatchExercise() {
+        ArrayList<String> exerciseListToSearch = exerciseList.getExerciseList();
+        int count = 0;
+        for (String listToSearch : exerciseListToSearch) {
+            if (listToSearch.toLowerCase().contains(userArguments)) {
+                count += 1;
+                if (count == 1) {
+                    printSearchHeading();
+                }
+                ui.printColorText(TextColor.COLOR_YELLOW, count + ". " + listToSearch);
+            }
+        }
+        if (count == 0) {
+            System.out.println("Sorry, no matching exercise found.");
+        }
+    }
+
     public void execute() {
         try {
             switch (userAction) {
             case SEARCH_EXERCISE_ACTION_KEYWORD:
-                ArrayList<String> exerciseListToSearch = exerciseList.getExerciseList();
-                int count = 0;
-                for (int i = 0; i < exerciseListToSearch.size(); i++) {
-                    if (exerciseListToSearch.get(i).toLowerCase().contains(userArguments)) {
-                        count += 1;
-                        if (count == 1) {
-                            System.out.println("The exercise(s) containing keywords"
-                                    + ui.getColorText(TextColor.COLOR_YELLOW, " [" + userArguments + "] ")
-                                    + "is(are) listed below.");
-                            ui.printLine();
-                        }
-                        ui.printColorText(TextColor.COLOR_YELLOW, count + ". " + exerciseListToSearch.get(i));
-                    }
-                }
-                if (count == 0) {
-                    System.out.println("Sorry, no matching exercise found.");
-                }
+                findMatchExercise();
                 break;
             default:
                 String className = this.getClass().getSimpleName();
@@ -69,6 +77,5 @@ public class SearchCommand extends Command {
             System.out.println(e.getMessage());
             System.out.println("Please try again");
         }
-
     }
 }
