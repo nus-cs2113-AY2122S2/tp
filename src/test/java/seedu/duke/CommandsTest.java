@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
-import util.exceptions.ItemDoesNotExistException;
 
 import java.util.ArrayList;
 
@@ -12,7 +11,7 @@ class CommandsTest {
     @Test
     public void addGoodTest() {
         //test 1, adding good normally - success
-        ArrayList<Goods> goodsArrayList = new ArrayList<>();
+        ArrayList<Good> goodsArrayList = new ArrayList<>();
         Commands.addGood("1", "chairs", "15", goodsArrayList);
         assertEquals(1, goodsArrayList.size());
 
@@ -38,7 +37,7 @@ class CommandsTest {
 
     @Test
     void removeGoodTest() {
-        ArrayList<Goods> goodsArrayList = new ArrayList<>();
+        ArrayList<Good> goodsArrayList = new ArrayList<>();
         Commands.addGood("1", "chairs", "15", goodsArrayList);
         Commands.addGood("2", "table", "15", goodsArrayList);
 

@@ -64,11 +64,17 @@ Expected output:
 ### Getting a list of total inventory: `list`
 To get a list of names of every inventory item.
 
-Format: `list`
+Format: `list flag/`
+
+* The `flag` is either `o` or `g` to view either an order or good
 
 Example of usage:
 
-`list`
+This is to list all current orders
+`list o/`
+
+This is to list all current goods
+`list g/`
 
 Expected output: 
 ```
@@ -80,15 +86,23 @@ List of inventory items:
 ### Getting a description of inventory: `view`
 View the details of a specific good, based on its ID number.
 
-Format: `view id/ID`
+Format: `view flag/ id/ID`
 
-* The `ID` is an integer uniquely represent the items.
+* The `flag` is either `o` or `g` to view either an order or good
+* The `ID` is an integer uniquely representing the corresponding items.
 
 Example of usage:
 
-`view id/1`
+This is to view order with id 1
+`view o/ id/1`
+
+This is to view good with id 1
+`view g/ id/1`
 
 Expected output:
+```
+Viewing order with id 1
+```
 ```
 Viewing item with id 1
 Item name: chairs
@@ -112,8 +126,10 @@ There are 86 goods in total.
 
 ## Command Summary
 
-* Add goods `add id/ID n/GOOD_NAME q/QUANTITY`
-* Remove goods: `remove i/ID q/QUANTITY`
-* List goods: `list`
-* View goods: `view id/ID`
-* Total: `total`
+* Add good `add id/ID n/GOOD_NAME q/QUANTITY`
+* Remove good: `remove i/ID q/QUANTITY`
+* List all orders: `list o/`
+* List all goods: `list g/`
+* View order: `view o/ id/ORDER_ID`
+* View good: `view g/ id/GOOD_ID`
+* Total quantity of goods: `total`

@@ -6,14 +6,14 @@ package seedu.duke;
  * FOR NOW id we can manually input?
  * Ideas - id can track and give to the goods we add automatically
  */
-public class Goods {
+public class Good {
     private int id;
 
     private String name;
     private int quantity;
     private String description;
 
-    public Goods(int id, String name, int quantity, String description) {
+    public Good(int id, String name, int quantity, String description) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
@@ -41,6 +41,6 @@ public class Goods {
     }
 
     public String toString() {
-        return String.format("%s (%s)", name, description);
+        return String.format("%d- %s (%s)",id, name, description);
     }
 }
