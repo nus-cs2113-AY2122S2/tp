@@ -118,6 +118,7 @@ public class StringConstants {
     public static final String TASK_MODULE = "taskModule";
     public static final String MODULE_CODE = "moduleCode";
     public static final String MODULE_DESCRIPTION = "moduleDescription";
+    public static final String MODULAR_CREDIT = "modularCredit";
     public static final String TASK_NUMBER = "taskNumber";
     public static final String FLAG = "flag";
     public static final String TASK_INDEX = "taskIndex";

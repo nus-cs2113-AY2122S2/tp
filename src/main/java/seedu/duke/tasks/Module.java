@@ -9,16 +9,18 @@ public class Module {
 
     private String moduleCode;
     private String moduleDescription;
+    private int modularCredit;
     private final TaskList taskList;
 
-    public Module(String moduleCode) {
-        this(moduleCode, null);
+    public Module(String moduleCode, int modularCredit) {
+        this(moduleCode, null, modularCredit);
     }
 
-    public Module(String moduleCode, String moduleDescription) {
+    public Module(String moduleCode, String moduleDescription, int modularCredit) {
         this.moduleCode = moduleCode;
         this.moduleDescription = moduleDescription;
         this.taskList = new TaskList();
+        this.modularCredit = modularCredit;
     }
 
     public String getModuleCode() {
