@@ -60,6 +60,8 @@ public class FileManager {
         this.directoryPath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME);
         this.exerciseFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, EXERCISE_FILENAME);
         this.workoutFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, WORKOUT_FILENAME);
+
+        LogHandler.linkToFileLogger(logger);
     }
 
     /**

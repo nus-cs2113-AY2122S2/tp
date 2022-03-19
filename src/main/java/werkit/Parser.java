@@ -9,6 +9,7 @@ import commands.ExerciseCommand;
 import data.exercises.ExerciseList;
 import data.workouts.WorkoutList;
 import storage.FileManager;
+import storage.LogHandler;
 
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -47,6 +48,8 @@ public class Parser {
         this.exerciseList = exerciseList;
         this.workoutList = workoutList;
         this.fileManager = fileManager;
+
+        LogHandler.linkToFileLogger(logger);
     }
 
     /**

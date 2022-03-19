@@ -2,6 +2,7 @@ package werkit;
 
 import data.workouts.Workout;
 import storage.FileManager;
+import storage.LogHandler;
 import storage.UnknownFileException;
 import textcolors.TextColor;
 
@@ -58,6 +59,14 @@ public class UI {
 
     // Scanner object for reading in user input from standard input
     Scanner inputReader = new Scanner(System.in);
+
+    /**
+     * Constructs an instance of the UI class. The constructor will link the Logger object in this UI class
+     * to the log file as specified in the LogHandler class.
+     */
+    public UI() {
+        LogHandler.linkToFileLogger(logger);
+    }
 
     /**
      * Prints a line on the console based on the default parameters defined in this Java class.

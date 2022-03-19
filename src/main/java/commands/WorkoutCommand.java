@@ -6,6 +6,7 @@ import data.workouts.WorkoutOutOfRangeException;
 import data.workouts.Workout;
 import data.workouts.WorkoutList;
 import storage.FileManager;
+import storage.LogHandler;
 import werkit.UI;
 
 import java.io.IOException;
@@ -50,6 +51,8 @@ public class WorkoutCommand extends Command {
         this.workoutList = workoutList;
         setUserAction(userAction);
         this.userArguments = userArguments;
+
+        LogHandler.linkToFileLogger(logger);
     }
 
     /**

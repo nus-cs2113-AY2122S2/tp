@@ -3,6 +3,7 @@ package data.workouts;
 import commands.WorkoutCommand;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
+import storage.LogHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +31,8 @@ public class WorkoutList {
      */
     public WorkoutList(ExerciseList exerciseList) {
         this.exerciseList = exerciseList;
+
+        LogHandler.linkToFileLogger(logger);
     }
 
     /**

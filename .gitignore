@@ -13,6 +13,10 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# Text UI test files
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+# WerkIt! application resources
 werkItResources/
+werkItLogs/
