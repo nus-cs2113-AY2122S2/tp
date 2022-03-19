@@ -218,6 +218,12 @@ public abstract class Message {
             "An Activity object failed to be added into the list of activities because there are duplicate names in"
                     + "the involved list.";
 
+    // Activity Delete Command
+    public static final String ASSERT_ACTIVITYDELETE_SESSION_IS_NULL =
+            "Session is still not initialized.";
+    public static final String LOGGER_ACTIVITYDELETE_ACTIVITY_REMOVED =
+            "An Activity object was successfully deleted from the list of activities with Id: ";
+
     // Activity List Command
     public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =
             "There are currently no activities in this session.";
