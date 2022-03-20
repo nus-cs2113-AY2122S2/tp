@@ -22,7 +22,7 @@ public class GroupViewCommand extends Command {
     private static final String SEPARATOR = " | ";
 
     /**
-     * Initializes a SessionDeleteCommand.
+     * Initializes a GroupViewCommand.
      *
      * @param groupId An integer that represents the group unique identifier.
      */
@@ -30,6 +30,13 @@ public class GroupViewCommand extends Command {
         this.groupId = groupId;
     }
 
+    /**
+     * Prepares user arguments for the creation of a GroupViewCommand object.
+     *
+     * @param commandArgs A String object that represents the user's arguments.
+     * @return A GroupViewCommand object if group unique identifier was found in user arguments,
+     *         an InvalidCommand object otherwise.
+     */
     public static Command prepare(String commandArgs) {
         try {
             int groupId = Parser.parseGroupId(commandArgs);
