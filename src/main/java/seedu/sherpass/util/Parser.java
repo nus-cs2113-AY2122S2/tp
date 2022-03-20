@@ -282,7 +282,7 @@ public class Parser {
             String selection = splitInput[SHOW_OPTION_INDEX].trim();
             return parseShowCommandOptions(selection.toLowerCase());
         } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
-            System.out.println(ERROR_INVALID_INPUT_MESSAGE + HELP_MESSAGE_SPECIFIC_COMMAND);
+            System.out.println(ERROR_INVALID_INPUT_MESSAGE);
         }
         return null;
     }

@@ -8,7 +8,6 @@ import seedu.sherpass.util.Ui;
 import java.time.LocalDate;
 
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
-import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
 
 public class ShowCommand extends Command {
     public static final String COMMAND_WORD = "show";
@@ -47,7 +46,7 @@ public class ShowCommand extends Command {
             taskList.printAllTasks(ui);
             break;
         default:
-            ui.showToUser(ERROR_INVALID_INPUT_MESSAGE + HELP_MESSAGE_SPECIFIC_COMMAND);
+            ui.showToUser(ERROR_INVALID_INPUT_MESSAGE);
         }
     }
 }
