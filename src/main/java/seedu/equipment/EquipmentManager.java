@@ -18,6 +18,14 @@ public class EquipmentManager {
         }
     }
 
+    public void addEquipment(Equipment equipment) throws DuplicateSerialNumber {
+        if (!equipmentList.containsKey(equipment.getSerialNumber())) {
+            equipmentList.putIfAbsent(equipment.getSerialNumber(), equipment);
+        } else if (equipmentList.containsKey(equipment.getSerialNumber())) {
+            throw new DuplicateSerialNumber();
+        }
+    }
+
     public ArrayList<Equipment> checkEquipment(String itemName) {
         ArrayList<Equipment> listOfEquipments = new ArrayList<>();
         for (Equipment equipment : equipmentList.values()) {
