@@ -19,7 +19,7 @@ public class Session {
     private int sessionId;
     private LocalDate dateCreated;
     private ArrayList<Activity> activityList;
-    private ArrayList<Person> personList;
+    private PersonList personList;
     private Group group;
 
     // CONSTANTS
@@ -36,12 +36,12 @@ public class Session {
      * @param sessionName The name of the session.
      * @param sessionId   A unique identifier for the session.
      * @param dateCreated A LocalDate object storing the date that the session occurs on.
-     * @param personList  A list of Person objects representing participants of the session.
+     * @param personList  An ArrayList of Person objects representing participants of the session.
      * @see Profile#getNewSessionId() for issuing a unique sessionId
      */
-    public Session(String sessionName, int sessionId, LocalDate dateCreated, ArrayList<Person> personList) {
+    public Session(String sessionName, int sessionId, LocalDate dateCreated, PersonList personList) {
         assert personList != null : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
-        assert personList.size() != 0 : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
+        assert personList.getSize() != 0 : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
         this.sessionName = sessionName;
         this.sessionId = sessionId;
         this.dateCreated = dateCreated;
@@ -56,14 +56,14 @@ public class Session {
      * @param sessionName The name of the session.
      * @param sessionId   A unique identifier for the session.
      * @param dateCreated A LocalDate object storing the date that the session occurs on.
-     * @param personList  A list of Person objects representing participants of the session.
+     * @param personList  An ArrayList of Person objects representing participants of the session.
      * @param group       A Group object representing a group of persons participating in the session.
      * @see Profile#getNewSessionId() for issuing a unique sessionId
      */
-    public Session(String sessionName, int sessionId, LocalDate dateCreated, ArrayList<Person> personList,
+    public Session(String sessionName, int sessionId, LocalDate dateCreated, PersonList personList,
                    Group group) {
         assert personList != null : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
-        assert personList.size() != 0 : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
+        assert personList.getSize() != 0 : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
         this.sessionName = sessionName;
         this.sessionId = sessionId;
         this.dateCreated = dateCreated;
@@ -125,7 +125,7 @@ public class Session {
      * @return An ArrayList object containing Person objects that are part of the session.
      */
     public ArrayList<Person> getPersonList() {
-        return personList;
+        return personList.getPersonList();
     }
 
     /**
@@ -237,7 +237,7 @@ public class Session {
         try {
             return personList.get(index - ZERO_INDEXING_OFFSET);
         } catch (IndexOutOfBoundsException exception) {
-            throw new InvalidDataException(Message.ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST + personList.size());
+            throw new InvalidDataException(Message.ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST + personList.getSize());
         }
     }
 
@@ -254,7 +254,7 @@ public class Session {
             throw new InvalidDataException(Message.ERROR_SESSION_EMPTY_PERSON_LIST);
         }
 
-        for (Person person : personList) {
+        for (Person person : personList.getPersonList()) {
             if (person.getName().equalsIgnoreCase(name)) {
                 return person;
             }
@@ -285,7 +285,7 @@ public class Session {
      * @param person A Person object representing a participant of the session.
      */
     public void addPerson(Person person) {
-        personList.add(person);
+        personList.addPerson(person);
     }
 
     /**
@@ -318,7 +318,7 @@ public class Session {
         }
 
         StringBuilder summaryString = new StringBuilder(PERSON_LIST_HEADER);
-        for (int i = 0; i < personList.size(); i++) {
+        for (int i = 0; i < personList.getSize(); i++) {
             String personName = personList.get(i).getName();
             summaryString.append("\n ").append(i + ZERO_INDEXING_OFFSET).append(". ").append(personName);
         }
@@ -347,7 +347,7 @@ public class Session {
     public String getSessionSimplifiedString() {
         return sessionId + SUMMARY_STRING_SEPARATOR + sessionName + "\n "
                 + SUMMARY_STRING_SEPARATOR + dateCreated.format(Parser.DATE_FORMAT)
-                + SUMMARY_STRING_SEPARATOR + personList.size() + " participants"
+                + SUMMARY_STRING_SEPARATOR + personList.getSize() + " participants"
                 + SUMMARY_STRING_SEPARATOR + activityList.size() + " activities"
                 + SUMMARY_STRING_SEPARATOR + getGroupSummaryString();
     }
