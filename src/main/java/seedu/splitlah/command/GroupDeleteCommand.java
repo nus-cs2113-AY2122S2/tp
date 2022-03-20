@@ -38,7 +38,7 @@ public class GroupDeleteCommand extends Command {
      * Prepares user arguments for the creation of an GroupDeleteCommand object.
      *
      * @param commandArgs The user's arguments.
-     * @return An GroupDeleteCommand object if necessary parameters were found in user arguments,
+     * @return A GroupDeleteCommand object if necessary parameters were found in user arguments,
      *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
