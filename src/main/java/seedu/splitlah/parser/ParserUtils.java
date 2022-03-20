@@ -393,6 +393,14 @@ public class ParserUtils {
         return false;
     }
     
+    /**
+     * Checks if the provided String object representing the command type of the command input from the user,
+     * is a valid command type in SplitLah.
+     *
+     * @param commandType   A String object representing the command type of the command input from the user.
+     * @return true if the provided String object is a command type available in SplitLah,
+     *         false otherwise.
+     */
     private static boolean isValidCommandType(String commandType) {
         assert commandType != null : Message.ASSERT_PARSER_COMMAND_TYPE_NULL;
         
@@ -452,6 +460,15 @@ public class ParserUtils {
         }
     }
 
+    /**
+     * Returns a String object that represents a corresponding error message for the first error check to be failed,
+     * when checking for validity of the command type followed by the validity of the command arguments.
+     * 
+     * @param commandType   A String object representing the command type of the command input from the user.
+     * @param remainingArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return A String object with the first error check to be failed, if any, or
+     *         an empty String object if remainingArgs is empty or if none of the error checks fail.
+     */
     static String checkIfCommandIsValid(String commandType, String remainingArgs) {
         assert commandType != null : Message.ASSERT_PARSER_COMMAND_TYPE_NULL;
         assert remainingArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
