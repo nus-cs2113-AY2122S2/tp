@@ -43,7 +43,7 @@ public class SessionCreateCommand extends Command {
     private int groupId;
 
     /**
-     * Initializes a SessionCreateCommand.
+     * Default constructor, sets sessionName, personNames, data and groupId as specified by the provided value.
      *
      * @param sessionName A String object that represents the session name.
      * @param personNames A String object array that represents the involved persons for the session.
