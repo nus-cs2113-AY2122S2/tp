@@ -30,10 +30,6 @@ public class Order {
         return shippingAddress;
     }
 
-    public ArrayList<Good> getUserGoods() {
-        return userGoods;
-    }
-
     public ArrayList<Good> getGoods() {
         return userGoods;
     }

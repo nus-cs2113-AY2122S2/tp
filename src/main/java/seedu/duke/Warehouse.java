@@ -25,7 +25,7 @@ public class Warehouse {
                     System.out.println("Shipping address:" + order.getShippingAddress());
                     System.out.println("Items in the order:");
 
-                    ArrayList<Good> userGoods = order.getUserGoods();
+                    ArrayList<Good> userGoods = order.getGoods();
                     int i = 1;
                     for (Good good : userGoods) {
                         System.out.println("\t" + i + ". " + good);
@@ -104,6 +104,10 @@ public class Warehouse {
             }
         }
         return total;
+    }
+
+    public int totalOrder() {
+        return orderLists.size();
     }
 
     public void setCapacity(int capacity) {
