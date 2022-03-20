@@ -1,6 +1,8 @@
 package seedu.splitlah.command;
 
+import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
@@ -17,6 +19,9 @@ public class GroupViewCommand extends Command {
 
     private int groupId;
 
+    private static final String GROUP_ID_HEADER = "Group Id #";
+    private static final String SEPARATOR = " | ";
+
     public GroupViewCommand(int groupId) {
         this.groupId = groupId;
     }
@@ -32,6 +37,12 @@ public class GroupViewCommand extends Command {
 
     @Override
     public void run(Manager manager) {
-        
+        try {
+            Group group = manager.getProfile().getGroup(groupId);
+            String stringToBePrinted = GROUP_ID_HEADER + groupId + SEPARATOR + group.toString();
+            manager.getUi().printlnMessageWithDivider(stringToBePrinted);
+        } catch (InvalidDataException e) {
+            manager.getUi().printlnMessage(e.getMessage());
+        }
     }
 }
