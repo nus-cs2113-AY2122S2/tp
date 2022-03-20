@@ -3,6 +3,7 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
+import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
@@ -60,37 +61,6 @@ public class SessionCreateCommand extends Command {
         this.personNames = personNames;
         this.sessionDate = date;
         this.groupId = groupId;
-    }
-
-    /**
-     * Converts a String object array of names to a list of Person objects.
-     *
-     * @return An ArrayList of Person objects.
-     */
-    private ArrayList<Person> convertToListOfPerson() {
-        ArrayList<Person> personList = new ArrayList<>();
-        for (String name : personNames) {
-            Person newPerson = new Person(name);
-            personList.add(newPerson);
-        }
-        return personList;
-    }
-
-    /**
-     * Merges two ArrayList of persons into one ArrayList of persons.
-     *
-     * @param personList      An ArrayList of Person objects.
-     * @param groupPersonList An Arraylist of Person objects from Group object.
-     * @return  An ArrayList of Person objects.
-     */
-    private ArrayList<Person> mergeListOfPersons(ArrayList<Person> personList, ArrayList<Person> groupPersonList) {
-        ArrayList<Person> mergedList = personList;
-        for (Person person : groupPersonList) {
-            if (!mergedList.contains(person)) {
-                mergedList.add(person);
-            }
-        }
-        return mergedList;
     }
 
     /**
@@ -174,20 +144,20 @@ public class SessionCreateCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        ArrayList<Person> personList = new ArrayList<>();
+        PersonList personList = new PersonList();
         if (personNames != null) {
             boolean hasDuplicates = hasNameDuplicates();
             if (hasDuplicates) {
                 manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
                 return;
             }
-            personList = convertToListOfPerson();
+            personList.convertToPersonList(personNames);
         }
 
         if (groupId != -1) {
             try {
                 Group group = manager.getProfile().getGroup(groupId);
-                personList = mergeListOfPersons(personList, group.getPersonList());
+                personList.mergeListOfPersons(group.getPersonList());
             } catch (InvalidDataException dataException) {
                 manager.getUi().printlnMessage(dataException.getMessage());
                 return;
