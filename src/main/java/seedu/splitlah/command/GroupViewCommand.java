@@ -23,7 +23,7 @@ public class GroupViewCommand extends Command {
     private int groupId;
 
     /**
-     * Initializes a GroupViewCommand.
+     * Initializes a GroupViewCommand object.
      *
      * @param groupId An integer that represents the group unique identifier.
      */
