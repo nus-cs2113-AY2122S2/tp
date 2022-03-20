@@ -101,8 +101,16 @@ public abstract class Message {
             "The command contains one or more invalid delimiters. Please rectify and try again.";
     public static final String ERROR_PARSER_DUPLICATE_DELIMITERS =
             "The command contains one or more duplicate delimiters. Please rectify and try again.";
+    public static final String ASSERT_PARSER_COMMAND_TYPE_NULL =
+            "The command type cannot be null.";
     public static final String ASSERT_PARSER_COMMAND_ARGUMENTS_NULL =
             "The command arguments cannot be null.";
+    public static final String ASSERT_PARSER_TOKEN_INPUT_NULL =
+            "The token input cannot be null.";
+    public static final String ASSERT_PARSER_DELIMITER_NULL =
+            "The delimiter cannot be null.";
+    public static final String ASSERT_PARSER_PARAMETERS_NULL =
+            "The input parameters cannot be null.";
     public static final String ASSERT_PARSER_PLACES_NEGATIVE =
             "A number cannot have less than 0 digits before the integer position.";
 
