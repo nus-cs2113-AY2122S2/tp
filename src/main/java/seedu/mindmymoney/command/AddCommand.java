@@ -2,11 +2,20 @@ package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.data.ExpenditureList;
-import seedu.mindmymoney.helper.Functions;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
-import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM_IN_STRING;
-import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM_IN_STRING;
+import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
+import static seedu.mindmymoney.constants.Flags.flagOfDescription;
+import static seedu.mindmymoney.constants.Flags.flagOfExpenditure;
+import static seedu.mindmymoney.constants.Flags.flagOfCategory;
+import static seedu.mindmymoney.constants.Flags.flagOfAmount;
+import static seedu.mindmymoney.constants.Flags.flagOfTime;
+import static seedu.mindmymoney.constants.Flags.flagEndValue;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testAmount;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditure;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testCategory;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testDescription;
+import static seedu.mindmymoney.helper.TimeFunctions.convertTime;
 
 /**
  * Represents the Add command.
@@ -31,34 +40,40 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Sets the DESCRIPTION and AMOUNT fields in the users' expenditure and adds it into the list.
+     * Sets the EXPENDITURE, CATEGORY, DESCRIPTION, AMOUNT and TIME fields in the users' expenditure
+     * and adds it into the list.
+     *
+     * @throws MindMyMoneyException when inputs are invalid or flags are missing.
      */
     public void executeCommand() throws MindMyMoneyException {
-        try {
-            String category = null;
-            String[] parseAddInput = Functions.parseInput(addInput);
-            String description = parseAddInput[INDEX_OF_FIRST_ITEM_IN_STRING];
-            assert description != null : "Description should not be null";
+        String expenditure = null;
+        String category = null;
+        String description = null;
+        String amount = null;
+        String time = null;
+        int amountInt = 0;
 
-            if (parseAddInput[INDEX_OF_SECOND_ITEM_IN_STRING].contains("-c")) {
-                parseAddInput = Functions.parseInputWithCommandFlag(parseAddInput[INDEX_OF_SECOND_ITEM_IN_STRING]);
-                category = parseAddInput[INDEX_OF_FIRST_ITEM_IN_STRING];
-            }
+        expenditure = parseInputWithCommandFlag(addInput, flagOfExpenditure, flagOfCategory);
+        testExpenditure(expenditure);
+        category = parseInputWithCommandFlag(addInput, flagOfCategory, flagOfDescription);
+        testCategory(category);
+        description = parseInputWithCommandFlag(addInput, flagOfDescription, flagOfAmount);
+        testDescription(description);
+        amount = parseInputWithCommandFlag(addInput, flagOfAmount, flagOfTime);
+        testAmount(amount);
+        amountInt = Integer.parseInt(amount);
+        time = parseInputWithCommandFlag(addInput, flagOfTime, flagEndValue);
+        time = convertTime(time);
 
-            int amount = Integer.parseInt(parseAddInput[INDEX_OF_SECOND_ITEM_IN_STRING]);
-            assert amount >= 0 : "Amount should have a positive value";
-            expenditureList.add(new Expenditure(description, category, amount));
-            if (category == null) {
-                System.out.println("Successfully added " + description + " of $" + amount + " into the account");
-            } else {
-                System.out.println("Successfully added " + description + " of $" + amount + " from " + category
-                        + " into the account");
-            }
-            System.out.print(System.lineSeparator());
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new MindMyMoneyException("Did you forget to input DESCRIPTION or AMOUNT?");
-        } catch (NumberFormatException e) {
-            throw new MindMyMoneyException("AMOUNT must be a number");
-        }
+        expenditureList.add(new Expenditure(expenditure, category, description, amountInt, time));
+        System.out.println("Successfully added: \n\n"
+                + "Description: " + description + "\n"
+                + "Amount: $" + amount + "\n"
+                + "Category: " + category + "\n"
+                + "Payment method: " + expenditure + "\n"
+                + "Date: " + time + "\n\n"
+                + "into the account");
+        System.out.print(System.lineSeparator());
     }
+
 }

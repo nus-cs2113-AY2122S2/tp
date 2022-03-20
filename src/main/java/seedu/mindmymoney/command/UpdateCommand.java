@@ -60,7 +60,7 @@ public class UpdateCommand extends Command {
             }
             String amountString = expenditureDescription.substring(divisionIndex).strip();
             int indexToUpdate = Integer.parseInt(indexString) + LIST_INDEX_CORRECTION;
-            Expenditure newExpenditure = new Expenditure(description, category, Integer.parseInt(amountString));
+            Expenditure newExpenditure = new Expenditure(null, category, description, Integer.parseInt(amountString), null);
             itemList.set(indexToUpdate, newExpenditure);
             System.out.printf("Successfully set expenditure %d to %s\n" + System.lineSeparator(),
                     indexToUpdate - LIST_INDEX_CORRECTION, newExpenditure);

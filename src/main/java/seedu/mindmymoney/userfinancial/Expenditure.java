@@ -11,11 +11,15 @@ public class Expenditure {
     private String description;
     private int amount;
     private String category;
+    private String expenditure;
+    private String time;
 
-    public Expenditure(String description, String category, int amount) {
+    public Expenditure(String expenditure, String category, String description, int amount, String time) {
         setDescription(description);
         setAmount(amount);
         setCategory(category);
+        setExpenditure(expenditure);
+        setTime(time);
     }
 
     public void setAmount(int amount) {
@@ -42,12 +46,26 @@ public class Expenditure {
         return category;
     }
 
+    public void setExpenditure(String expenditure) {
+        this.expenditure = expenditure;
+    }
+
+    public String getExpenditure() {
+        return expenditure;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
     @Override
     public String toString() {
-        if (getCategory() == null) {
-            return getDescription() + " of $" + getAmount();
-        }
-        return getDescription() + " of $" + getAmount() + " from " + getCategory();
+        return getDescription() + " of $" + getAmount() + " from " + getCategory() + " paid by "
+                + getExpenditure() + " at " + getTime();
     }
 
     @Override
@@ -70,6 +88,7 @@ public class Expenditure {
 
     /**
      * Replaces all % with %%s. This is so the control sequences above function correctly.
+     *
      * @param s A string to escape.
      * @return The escaped string.
      */
@@ -79,6 +98,7 @@ public class Expenditure {
 
     /**
      * Replaces all %%s with %. This undoes escapeDataString.
+     *
      * @param s The string to unescape.
      * @return The unescaped string.
      */
@@ -88,6 +108,7 @@ public class Expenditure {
 
     /**
      * Returns a String representation of the expenditure meant for automated parsing.
+     *
      * @return A serialized expenditure
      */
     public String serialize() {
@@ -100,6 +121,7 @@ public class Expenditure {
      * Converts the output of Expenditure.serialize into an Expenditure. This method will
      * not work properly if the description contains the CONTROL_DELIMITER used internally
      * by the function, and such cases may be considered incorrect formatting.
+     *
      * @param serialized The serialized expenditure.
      * @return An Expenditure.
      * @throws MindMyMoneyException if formatting is incorrect.
@@ -112,7 +134,7 @@ public class Expenditure {
         try {
             int amount = Integer.parseInt(parts[1]);
             String escapedDescription = unescapeDataString(parts[0].strip());
-            return new Expenditure(escapedDescription, null, amount);
+            return new Expenditure(null, null, escapedDescription, amount, null);
         } catch (NumberFormatException e) {
             throw new MindMyMoneyException("Invalid format for expenditure amount");
         }

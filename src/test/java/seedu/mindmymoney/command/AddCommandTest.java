@@ -21,7 +21,7 @@ class AddCommandTest {
         String inputString = "expenditure 12345";
         new AddCommand(inputString, expenditureTestList).executeCommand();
         ArrayList<Expenditure> testList = new ArrayList<>();
-        testList.add(new Expenditure("expenditure", null, 12345));
+        testList.add(new Expenditure(null, null, "expenditure", 12345, null));
         String expectedOutput = getOutput(testList);
         String actualOutput = getOutput(expenditureTestList.expenditureListArray);
         assertEquals(expectedOutput, actualOutput);
@@ -36,7 +36,7 @@ class AddCommandTest {
         ExpenditureList expenditureTestList = new ExpenditureList();
         String inputString = "";
         assertThrows(MindMyMoneyException.class,
-            () -> new AddCommand(inputString, expenditureTestList).executeCommand());
+                () -> new AddCommand(inputString, expenditureTestList).executeCommand());
     }
 
     /**
@@ -47,7 +47,7 @@ class AddCommandTest {
         ExpenditureList expenditureTestList = new ExpenditureList();
         String inputString = "expenditure deadbeef";
         assertThrows(MindMyMoneyException.class,
-            () -> new AddCommand(inputString, expenditureTestList).executeCommand());
+                () -> new AddCommand(inputString, expenditureTestList).executeCommand());
     }
 
     /**
