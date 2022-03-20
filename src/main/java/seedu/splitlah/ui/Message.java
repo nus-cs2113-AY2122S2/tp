@@ -263,4 +263,6 @@ public abstract class Message {
             "Group Id is not initialized.";
     public static final String ASSERT_GROUPVIEW_INCORRECT_GROUP =
             "The group returned is incorrect.";
+    public static final String ASSERT_GROUPVIEW_GROUP_ID_LESS_THAN_ONE =
+            "Group unique identifier is less than one";
 }
