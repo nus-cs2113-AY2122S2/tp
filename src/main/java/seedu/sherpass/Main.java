@@ -59,7 +59,7 @@ public class Main {
             String fullCommand = ui.readCommand();
             ui.showLine();
 
-            Command c = Parser.parseCommand(fullCommand, taskList);
+            Command c = Parser.parseCommand(fullCommand, taskList, ui);
             if (c != null) {
                 c.execute(taskList, ui, storage);
                 isExit = ExitCommand.isExit(c);
