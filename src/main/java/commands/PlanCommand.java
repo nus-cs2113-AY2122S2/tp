@@ -7,6 +7,7 @@ import storage.FileManager;
 import storage.LogHandler;
 import werkit.UI;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -115,6 +116,7 @@ public class PlanCommand extends Command {
             case CREATE_ACTION_KEYWORD:
                 Plan newPlan = getPlanList().createAndAddPlan(getUserArguments());
                 getUI().printNewPlanCreatedMessage(newPlan);
+                getFileManager().writeNewPlanToFile(newPlan);
                 break;
             case LIST_ACTION_KEYWORD:
                 getPlanList().listAllPlan();
@@ -144,6 +146,9 @@ public class PlanCommand extends Command {
                     + "number was received.");
             System.out.println("Please try again. Alternatively, type 'help' if you need\n"
                     + "more information on the commands.");
+        } catch (IOException e) {
+            System.out.println(UI.IOEXCEPTION_ERROR_MESSAGE);
+            System.exit(-1);
         }
     }
 }

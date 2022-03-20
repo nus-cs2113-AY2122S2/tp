@@ -20,6 +20,10 @@ Checking for required directory and files...
 - The workout file 'workouts.txt' has been created in
   the WerkIt! resource directory.
 
+- The plan file was not found. It will be created.
+- The plan file 'plans.txt' has been created in
+  the WerkIt! resource directory.
+
 Loading saved file data...
 - Exercises file	[32mOK![0m
 ----------------------------------------------------------------------

@@ -118,11 +118,15 @@ public class WerkIt {
         assert (Files.exists(fileManager.getWorkoutFilePath()));
         assert (Files.exists(fileManager.getExerciseFilePath()));
         assert (Files.exists(fileManager.getWorkoutFilePath()));
+        assert (Files.exists(fileManager.getPlanFilePath()));
 
         getUI().printLoadingFileDataMessage();
         loadExerciseFile();
         if (getFileManager().isWasWorkoutsFileAlreadyMade()) {
             loadWorkoutFile();
+        }
+        if (getFileManager().isWasPlansFileAlreadyMade()) {
+            loadPlanFile();
         }
     }
 
@@ -195,6 +199,19 @@ public class WerkIt {
         isWorkoutFileLoadSuccessful = fileManager.loadWorkoutsFromFile(getWorkoutList());
         try {
             getUI().printFileLoadStatusMessage(FileManager.WORKOUT_FILENAME, isWorkoutFileLoadSuccessful);
+        } catch (UnknownFileException e) {
+            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, "Unknown file name was encountered.");
+        }
+
+        logger.log(Level.INFO, "Workout file data loaded.");
+    }
+
+    private void loadPlanFile() throws IOException {
+        boolean isPlanFileLoadSuccessful;
+        isPlanFileLoadSuccessful = fileManager.loadPlansFromFile(getPlanList());
+        try {
+            getUI().printFileLoadStatusMessage(FileManager.PLAN_FILENAME, isPlanFileLoadSuccessful);
         } catch (UnknownFileException e) {
             System.out.println(e.getMessage());
             logger.log(Level.WARNING, "Unknown file name was encountered.");
