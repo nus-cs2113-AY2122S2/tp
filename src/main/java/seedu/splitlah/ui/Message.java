@@ -257,4 +257,10 @@ public abstract class Message {
              "There is another group with the same Id.";
     public static final String ASSERT_GROUPCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
              "Name duplicates exists but not detected.";
+
+    // Group View Command
+    public static final String ASSERT_GROUPVIEW_GROUP_ID_NOT_INITIALIZED =
+            "Group Id is not initialized.";
+    public static final String ASSERT_GROUPVIEW_INCORRECT_GROUP =
+            "The group returned is incorrect.";
 }

@@ -5,6 +5,7 @@ import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.Message;
 
 public class GroupViewCommand extends Command {
 
@@ -27,6 +28,7 @@ public class GroupViewCommand extends Command {
      * @param groupId An integer that represents the group unique identifier.
      */
     public GroupViewCommand(int groupId) {
+        assert groupId > 0 : Message.ASSERT_GROUPVIEW_GROUP_ID_NOT_INITIALIZED;
         this.groupId = groupId;
     }
 
@@ -40,6 +42,7 @@ public class GroupViewCommand extends Command {
     public static Command prepare(String commandArgs) {
         try {
             int groupId = Parser.parseGroupId(commandArgs);
+            assert groupId > 0 : Message.ASSERT_GROUPVIEW_GROUP_ID_NOT_INITIALIZED;
             return new GroupViewCommand(groupId);
         } catch (InvalidFormatException e) {
             return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT);
@@ -56,7 +59,8 @@ public class GroupViewCommand extends Command {
     public void run(Manager manager) {
         try {
             Group group = manager.getProfile().getGroup(groupId);
-            String stringToBePrinted = GROUP_ID_HEADER + groupId + SEPARATOR + group.toString();
+            assert group.getGroupId() == groupId : Message.ASSERT_GROUPVIEW_INCORRECT_GROUP;
+            String stringToBePrinted = GROUP_ID_HEADER + groupId + SEPARATOR + group;
             manager.getUi().printlnMessageWithDivider(stringToBePrinted);
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
