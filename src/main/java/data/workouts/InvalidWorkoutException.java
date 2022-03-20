@@ -9,6 +9,7 @@ public class InvalidWorkoutException extends Exception {
             + "(Needs to be a value of at least 1.)";
     public static final String DUPLICATE_WORKOUT_ERROR_MSG = "Uh oh, there already is an existing workout with "
             + "an identical\nexercise name and number of repetitions.";
+    public static final String INVALID_WORKOUT_ERROR_MSG = "The workout given does not exist.";
 
     private String throwingClass;
 

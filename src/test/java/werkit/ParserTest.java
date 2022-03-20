@@ -6,10 +6,12 @@ import commands.HelpCommand;
 import commands.WorkoutCommand;
 import commands.InvalidCommandException;
 import data.exercises.ExerciseList;
+import data.plans.PlanList;
 import data.workouts.WorkoutList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import storage.FileManager;
+import storage.LogHandler;
 
 import java.io.IOException;
 
@@ -22,10 +24,12 @@ class ParserTest {
     private WorkoutList workoutList;
     private FileManager fileManager;
     private Parser parser;
+    private PlanList planList;
 
     @BeforeEach
     void setUp() {
-        this.parser = new Parser(ui, exerciseList, workoutList, fileManager);
+        LogHandler.startLogHandler();
+        this.parser = new Parser(ui, exerciseList, workoutList, fileManager, planList);
     }
 
     @Test

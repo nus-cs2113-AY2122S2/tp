@@ -4,8 +4,10 @@ import commands.Command;
 import commands.ExitCommand;
 import commands.InvalidCommandException;
 import data.exercises.ExerciseList;
+import data.plans.PlanList;
 import data.workouts.WorkoutList;
 import storage.FileManager;
+import storage.LogHandler;
 import storage.UnknownFileException;
 
 import java.io.IOException;
@@ -23,6 +25,7 @@ public class WerkIt {
     private ExerciseList exerciseList;
     private WorkoutList workoutList;
     private FileManager fileManager;
+    private PlanList planList;
     private static Logger logger = Logger.getLogger(WerkIt.class.getName());
 
     /**
@@ -35,7 +38,10 @@ public class WerkIt {
         this.exerciseList = new ExerciseList();
         this.workoutList = new WorkoutList(getExerciseList());
         this.fileManager = new FileManager();
-        this.parser = new Parser(getUI(), getExerciseList(), getWorkoutList(), getFileManager());
+        this.planList = new PlanList(getWorkoutList());
+        this.parser = new Parser(getUI(), getExerciseList(), getWorkoutList(), getFileManager(), getPlanList());
+
+        LogHandler.linkToFileLogger(logger);
         logger.log(Level.INFO, "Components instantiated.");
 
         getUI().printGreetings();
@@ -90,6 +96,15 @@ public class WerkIt {
     }
 
     /**
+     * Gets the PlanList object stored in this WerkIt object.
+     *
+     * @return The PlanList object.
+     */
+    public PlanList getPlanList() {
+        return this.planList;
+    }
+
+    /**
      * Checks if the required resource directory and files already exists in the user's filesystem. If not,
      * call the relevant method(s) to create the required directory and/or file(s).
      *
@@ -103,11 +118,15 @@ public class WerkIt {
         assert (Files.exists(fileManager.getWorkoutFilePath()));
         assert (Files.exists(fileManager.getExerciseFilePath()));
         assert (Files.exists(fileManager.getWorkoutFilePath()));
+        assert (Files.exists(fileManager.getPlanFilePath()));
 
         getUI().printLoadingFileDataMessage();
         loadExerciseFile();
         if (getFileManager().isWasWorkoutsFileAlreadyMade()) {
             loadWorkoutFile();
+        }
+        if (getFileManager().isWasPlansFileAlreadyMade()) {
+            loadPlanFile();
         }
     }
 
@@ -180,6 +199,19 @@ public class WerkIt {
         isWorkoutFileLoadSuccessful = fileManager.loadWorkoutsFromFile(getWorkoutList());
         try {
             getUI().printFileLoadStatusMessage(FileManager.WORKOUT_FILENAME, isWorkoutFileLoadSuccessful);
+        } catch (UnknownFileException e) {
+            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, "Unknown file name was encountered.");
+        }
+
+        logger.log(Level.INFO, "Workout file data loaded.");
+    }
+
+    private void loadPlanFile() throws IOException {
+        boolean isPlanFileLoadSuccessful;
+        isPlanFileLoadSuccessful = fileManager.loadPlansFromFile(getPlanList());
+        try {
+            getUI().printFileLoadStatusMessage(FileManager.PLAN_FILENAME, isPlanFileLoadSuccessful);
         } catch (UnknownFileException e) {
             System.out.println(e.getMessage());
             logger.log(Level.WARNING, "Unknown file name was encountered.");

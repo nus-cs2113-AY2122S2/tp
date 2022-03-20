@@ -1,7 +1,9 @@
 package werkit;
 
+import data.plans.Plan;
 import data.workouts.Workout;
 import storage.FileManager;
+import storage.LogHandler;
 import storage.UnknownFileException;
 import textcolors.TextColor;
 
@@ -43,21 +45,36 @@ public class UI {
     public static final String WORKOUT_FILE_NOT_FOUND_MSG = "- The workout file was not found. It will be created.";
     public static final String WORKOUT_FILE_CREATED_MSG = "- The workout file 'workouts.txt' has been created in\n"
             + "  the WerkIt! resource directory.";
+    public static final String PLAN_FILE_NOT_FOUND_MSG = "- The plan file was not found. It will be created.";
+    public static final String PLAN_FILE_CREATED_MSG = "- The plan file 'plans.txt' has been created in\n"
+            + "  the WerkIt! resource directory.";
     public static final String FILE_LOAD_OK = "OK!";
     public static final String FILE_LOAD_NOT_OK = "Not OK...";
     public static final String LOADING_FILE_DATA_MSG = "Loading saved file data...";
     public static final String EXERCISES_FILE_LOADED_MSG =  "- Exercises file\t%s\n";
     public static final String WORKOUTS_FILE_LOADED_MSG = "- Workouts file \t%s\n";
+    public static final String PLANS_FILE_LOADED_MSG = "- Plans file \t%s\n";
     // Workout-related messages
     public static final String NEW_WORKOUT_CREATED_MESSAGE = "Alright, the following workout has been created:";
     public static final String DELETED_WORKOUT_MESSAGE = "Alright, the following workout has been removed:";
     public static final String UPDATED_WORKOUT_MESSAGE = "Alright, the following workout has been updated:";
+    //Plan-related Message
+    public static final String NEW_PLAN_CREATED_MESSAGE = "Alright, the following plan has been created:";
+
     // IOException Error Message
     public static final String IOEXCEPTION_ERROR_MESSAGE = "[ERROR] The program has encountered an IOException "
             + "and needs to close. Sorry about that...";
 
     // Scanner object for reading in user input from standard input
     Scanner inputReader = new Scanner(System.in);
+
+    /**
+     * Constructs an instance of the UI class. The constructor will link the Logger object in this UI class
+     * to the log file as specified in the LogHandler class.
+     */
+    public UI() {
+        LogHandler.linkToFileLogger(logger);
+    }
 
     /**
      * Prints a line on the console based on the default parameters defined in this Java class.
@@ -304,6 +321,9 @@ public class UI {
         case FileManager.WORKOUT_FILENAME:
             messageToPrint = WORKOUTS_FILE_LOADED_MSG;
             break;
+        case FileManager.PLAN_FILENAME:
+            messageToPrint = PLANS_FILE_LOADED_MSG;
+            break;
         default:
             logger.log(Level.WARNING, "Unknown filename encountered.");
             throw new UnknownFileException(filename, UnknownFileException.UNKNOWN_FILE_MSG);
@@ -361,11 +381,20 @@ public class UI {
         System.out.println(WORKOUT_FILE_NOT_FOUND_MSG);
     }
 
+    public void printPlanFileNotFoundMessage() {
+        System.out.println();
+        System.out.println(PLAN_FILE_NOT_FOUND_MSG);
+    }
+
     /**
      * Prints a message to tell the user that the workout file has been successfully created.
      */
     public void printWorkoutFileCreatedMessage() {
         System.out.println(WORKOUT_FILE_CREATED_MSG);
+    }
+
+    public void printPlanFileCreatedMessage() {
+        System.out.println(PLAN_FILE_CREATED_MSG);
     }
 
     /**
@@ -384,5 +413,17 @@ public class UI {
         } else {
             System.out.println();
         }
+    }
+
+    /**
+     * Prints a message when a new plan has been created. The newly created plan will also be displayed.
+     *
+     * @param newPlan The Plan object that is newly created.
+     */
+    public void printNewPlanCreatedMessage(Plan newPlan) {
+        System.out.println(NEW_PLAN_CREATED_MESSAGE);
+        System.out.println();
+        System.out.println("\t" + newPlan.toString());
+        System.out.println();
     }
 }
