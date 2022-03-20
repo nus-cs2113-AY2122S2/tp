@@ -41,9 +41,7 @@ public class UserInterface {
                     break;
                 case "list":
                     flag = userInput.split(" ")[1];
-                    regex = "id/(?<id>\\d*)";
-                    regexMatch = new Regex(userInput, regex);
-                    matches = regexMatch.getGroupValues();
+
                     if (flag.equals("-o")) {
                         // list orders with flag "-o"
                         warehouse.listOrders();
@@ -63,10 +61,9 @@ public class UserInterface {
                         regexMatch = new Regex(userInput, regex);
                         matches = regexMatch.getGroupValues();
                         warehouse.addOrder(matches.get("id"), matches.get("r"), matches.get("address"));
-
                     } else if (flag.equals("-g")) {
                         regex = "oid/(?<oid>\\d*) gid/(?<gid>\\d*) n/(?<name>.*) q/(?<qty>\\d*)"
-                                + " d/(?<desc>\\.*";
+                                + " d/(?<desc>\\.*)";
                         regexMatch = new Regex(userInput, regex);
                         matches = regexMatch.getGroupValues();
                         warehouse.addGoods(matches.get("oid"), matches.get("gid"), matches.get("name"),
@@ -114,9 +111,12 @@ public class UserInterface {
             } else {
                 System.out.println("No such command. Type help to see examples");
             }
+
+            run();
         } catch (NullException nullException) {
             //catch null exception here
-        } finally {
+            System.out.println("Please enter the command again.");
+
             run();
         }
     }

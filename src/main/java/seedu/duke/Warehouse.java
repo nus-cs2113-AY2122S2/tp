@@ -28,7 +28,7 @@ public class Warehouse {
                     ArrayList<Good> userGoods = order.getUserGoods();
                     int i = 1;
                     for (Good good : userGoods) {
-                        System.out.println(i + ". " + good);
+                        System.out.println("\t" + i + ". " + good);
                         i++;
                     }
                     return;
@@ -46,10 +46,10 @@ public class Warehouse {
             for (Order order : orderLists) {
                 for (Good good : order.getGoods()) {
                     if (idToBeViewed.equals(good.getId())) {
-                        System.out.println("Viewing goods with id " + good.getId());
-                        System.out.println("Goods name: " + good.getName());
-                        System.out.println("Goods description: " + good.getDescription());
-                        System.out.println("Goods quantity: " + good.getQuantity());
+                        System.out.println("Viewing item with id " + good.getId());
+                        System.out.println("Item name: " + good.getName());
+                        System.out.println("Item description: " + good.getDescription());
+                        System.out.println("Item quantity: " + good.getQuantity());
                         return;
                     }
                 }
@@ -66,10 +66,10 @@ public class Warehouse {
             System.out.println("There are currently no orders.");
             return;
         }
-        System.out.println("List of inventory items:");
+        System.out.println("List of orders:");
         int counter = 0;
         for (Order order : orderLists) {
-            System.out.println((counter + 1) + ". " + order);
+            System.out.println("\t" + (counter + 1) + ". " + order);
             counter++;
         }
     }
@@ -81,12 +81,12 @@ public class Warehouse {
             System.out.println("There are no inventory in the warehouse.");
             return;
         }
-        System.out.println("List of inventory items:");
+        System.out.println("List of goods:");
         System.out.println("id | name");
         int counter = 0;
         for (Order order: orderLists) {
             for (Good good : order.getGoods()) {
-                System.out.println((counter + 1) + ". " + good);
+                System.out.println("\t" + (counter + 1) + ". " + good);
                 counter++;
             }
         }
@@ -123,7 +123,7 @@ public class Warehouse {
         }
     }
 
-    private Order findOrder(int orderId) throws ItemDoesNotExistException {
+    public Order findOrder(int orderId) throws ItemDoesNotExistException {
         for (Order order : orderLists) {
             if (order.getId() == orderId) {
                 return order;
@@ -194,6 +194,7 @@ public class Warehouse {
         try {
             int orderId = Integer.parseInt(id);
             orderLists.remove(findOrder(orderId));
+            System.out.println("Order " + id + " has been removed.");
         } catch (ItemDoesNotExistException e1) {
             System.out.println("The order you are trying to remove are not on the current list. "
                     + "Please try another id.");

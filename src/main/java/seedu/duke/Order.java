@@ -4,7 +4,6 @@ import util.exceptions.ItemDoesNotExistException;
 import util.exceptions.LargeQuantityException;
 import util.exceptions.WrongCommandException;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Order {
@@ -51,7 +50,7 @@ public class Order {
                     Integer.parseInt(qty),
                     desc);
             userGoods.add(good);
-            System.out.printf("%d %s %s added\n", good.getQuantity(), good,
+            System.out.printf("%d %s %s added\n", good.getQuantity(), good.getName(),
                     checkPlural(good.getQuantity()));
         } catch (NumberFormatException e) {
             throw new WrongCommandException("add", true);
