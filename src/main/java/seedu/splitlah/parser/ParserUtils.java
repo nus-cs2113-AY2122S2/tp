@@ -392,6 +392,38 @@ public class ParserUtils {
         }
         return false;
     }
+    
+    private static boolean isValidCommandType(String commandType) {
+        assert commandType != null : Message.ASSERT_PARSER_COMMAND_TYPE_NULL;
+        
+        switch (commandType.toLowerCase()) {
+        case SessionCreateCommand.COMMAND_TEXT:
+            // Fallthrough
+        case SessionDeleteCommand.COMMAND_TEXT:
+            // Fallthrough
+        case SessionSummaryCommand.COMMAND_TEXT:
+            // Fallthrough
+        case SessionListCommand.COMMAND_TEXT:
+            // Fallthrough
+        case ActivityCreateCommand.COMMAND_TEXT:
+            // Fallthrough
+        case ActivityDeleteCommand.COMMAND_TEXT:
+            // Fallthrough
+        case ActivityListCommand.COMMAND_TEXT:
+            // Fallthrough
+        case ActivityViewCommand.COMMAND_TEXT:
+            // Fallthrough
+        case GroupCreateCommand.COMMAND_TEXT:
+            // Fallthrough
+        case HelpCommand.COMMAND_TEXT:
+            // Fallthrough
+        case ExitCommand.COMMAND_TEXT:
+            // Fallthrough
+            return true;
+        default:
+            return false;
+        }
+    }
 
     /**
      * Returns a String object that represents a corresponding error message for the first error check to be failed,
