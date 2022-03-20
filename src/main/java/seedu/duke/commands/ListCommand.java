@@ -1,5 +1,7 @@
 package seedu.duke.commands;
 
+import java.util.Objects;
+
 import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.util.StringConstants;
@@ -22,7 +24,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(ModuleList moduleList) {
         StringBuilder res = new StringBuilder();
-        if (argument.isEmpty()) {
+        if (Objects.isNull(argument)) {
             for (Module m : moduleList.getModuleList()) {
                 res.append(m.printModuleTaskList()).append(LS);
             }

@@ -1,5 +1,7 @@
 package seedu.duke.commands;
 
+import java.util.Objects;
+
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.exceptions.NoSuchTagException;
@@ -9,8 +11,6 @@ import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
 import seedu.duke.util.StringConstants;
-
-import java.util.Objects;
 
 public class TagCommand extends Command {
 

@@ -1,11 +1,11 @@
 package seedu.duke.parsers;
 
+import java.util.HashMap;
+
 import seedu.duke.commands.Command;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.util.StringConstants;
-
-import java.util.HashMap;
 
 public class HelpParser extends Parser {
     private static final String COMMAND_AS_HELP_ARGUMENT = StringConstants.HELP_COMMAND_ARGUMENT;
