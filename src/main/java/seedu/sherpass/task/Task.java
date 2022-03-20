@@ -10,6 +10,17 @@ public class Task {
     protected boolean isDone;
     protected LocalDate byDate;
     protected LocalDate doOnDate;
+    // The index of the task with respect to being within
+    // the ArrayList<Task> tasks in TaskList class
+    // To add to constructor
+    private final int PLACEHOLDER_INDEX = 1;
+    protected int index = PLACEHOLDER_INDEX;
+
+    // Time period of the task when user blocks out the pocket of time
+    // in the timetable. Format has been hardcoded to be XXXX - XXXX,
+    // e.g. 1400 - 1500. To add to constructor
+    private final String PLACEHOLDER_TIME = "0900 - 1100";
+    protected String timePeriod = PLACEHOLDER_TIME;
 
     /**
      * Creates a constructor for the parent class of tasks, 'Task'.
@@ -22,6 +33,25 @@ public class Task {
         this.isDone = false;
         this.byDate = byDate;
         this.doOnDate = doOnDate;
+    }
+
+    /**
+     * Returns the index of a task with respect to its placement
+     * in the main task list.
+     * @return Index of a task
+     */
+    public int getIndex() {
+        return index;
+    }
+
+    /**
+     * Returns the time when the task is taking place.
+     * Format of time is in 24 hours.
+     *
+     * @return Returns a range of time when the task occurs.
+     */
+    public String getTimePeriod() {
+        return timePeriod;
     }
 
     /**
@@ -83,12 +113,30 @@ public class Task {
         return doOnDate;
     }
 
+    /**
+     * Returns the by date in String format.
+     *
+     * @return Returns if byDate contains a parsed date.
+     *         Otherwise, returns a blank string (no whitespace).
+     */
     public String getByDateString() {
-        return byDate.format(outputFormat);
+        if (byDate != null) {
+            return byDate.format(outputFormat);
+        }
+        return "";
     }
 
+    /**
+     * Returns the do on date in String format.
+     *
+     * @return Returns if doOnDate contains a parsed date.
+     *         Otherwise, returns a blank string (no whitespace).
+     */
     public String getDoOnDateString() {
-        return doOnDate.format(outputFormat);
+        if (doOnDate != null) {
+            return doOnDate.format(outputFormat);
+        }
+        return "";
     }
 
     /**
