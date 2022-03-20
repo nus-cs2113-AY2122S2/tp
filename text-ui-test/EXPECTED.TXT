@@ -15,8 +15,8 @@ Welcome to Splitlah!
 > Invalid command
 Please enter a valid command.
 > Invalid command
-Please include the following delimiter in your input: /n
-Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 …]
+The person list or group identifier delimiters are missing.
+Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 …] [</gid GROUP_ID>]
 > The session was created successfully.
 Session Id #1 --
 Name: Class outing 1

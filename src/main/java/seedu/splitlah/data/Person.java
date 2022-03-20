@@ -114,4 +114,14 @@ public class Person {
     public ArrayList<ActivityCost> getActivityCostList() {
         return activityCostList;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        Person person = (Person) object;
+        if (this.name.equalsIgnoreCase(person.getName())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

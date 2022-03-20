@@ -101,7 +101,7 @@ public abstract class Message {
             "The command contains one or more invalid delimiters. Please rectify and try again.";
     public static final String ERROR_PARSER_DUPLICATE_DELIMITERS =
             "The command contains one or more duplicate delimiters. Please rectify and try again.";
-    public static final String ASSERT_PARSER_COMMAND_ARGUMENTS_EMPTY =
+    public static final String ASSERT_PARSER_COMMAND_ARGUMENTS_NULL =
             "The command arguments cannot be null.";
     public static final String ASSERT_PARSER_PLACES_NEGATIVE =
             "A number cannot have less than 0 digits before the integer position.";
@@ -163,10 +163,16 @@ public abstract class Message {
             "Manager does not exist.";
 
     // Session Create Command
+    public static final String ERROR_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS =
+            "The person list or group identifier delimiters are missing.";
+    public static final String ASSERT_SESSIONCREATE_SESSION_NAME_NULL =
+            "Session name is empty but was not handled in prepare function.";
+    public static final String ASSERT_SESSIONCREATE_SESSION_DATE_NULL =
+            "Session data is empty but was not handled in prepare function.";
+    public static final String ASSERT_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS =
+            "The person list or group identifier delimiters are missing but was not handled in prepare function.";
     public static final String ASSERT_SESSIONCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
             "Name duplicates exist but not detected.";
-    public static final String ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY =
-            "The array of person names is empty but was not handled in prepare function.";
     public static final String LOGGER_SESSIONCREATE_SESSION_ADDED =
             "A session was added into the list of sessions with Id: ";
 

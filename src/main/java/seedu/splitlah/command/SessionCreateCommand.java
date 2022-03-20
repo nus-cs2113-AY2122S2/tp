@@ -1,14 +1,15 @@
 package seedu.splitlah.command;
 
+import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
-import seedu.splitlah.data.Person;
+import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Session;
+import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -23,7 +24,8 @@ public class SessionCreateCommand extends Command {
     public static final String COMMAND_TEXT = "session /create";
 
     public static final String COMMAND_FORMAT =
-            "Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 …]";
+            "Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 …] "
+                    + "[</gid GROUP_ID>]";
 
     private static final String COMMAND_SUCCESS =
             "The session was created successfully.\n";
@@ -31,12 +33,14 @@ public class SessionCreateCommand extends Command {
     public static final String[] COMMAND_DELIMITERS = { 
         Parser.NAME_DELIMITER,
         Parser.DATE_DELIMITER,
-        Parser.PERSON_LIST_DELIMITER
+        Parser.PERSON_LIST_DELIMITER,
+        Parser.GROUP_ID_DELIMITER
     };
 
     private String sessionName;
     private String[] personNames;
     private LocalDate sessionDate;
+    private int groupId;
 
     /**
      * Initializes a SessionCreateCommand.
@@ -44,31 +48,21 @@ public class SessionCreateCommand extends Command {
      * @param sessionName A String object that represents the session name.
      * @param personNames A String object array that represents the involved persons for the session.
      * @param date        A LocalDate object that represents the date of the session.
+     * @param groupId     An integer that represents the group unique identifier.
      */
-    public SessionCreateCommand(String sessionName, String[] personNames, LocalDate date) {
-        assert personNames != null : Message.ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY;
-        assert personNames.length != 0 : Message.ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY;
+    public SessionCreateCommand(String sessionName, String[] personNames, LocalDate date, int groupId) {
+        assert sessionName != null : Message.ASSERT_SESSIONCREATE_SESSION_NAME_NULL;
+        assert personNames != null || groupId != -1 :
+                Message.ASSERT_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS;
+        assert date != null : Message.ASSERT_SESSIONCREATE_SESSION_DATE_NULL;
         this.sessionName = sessionName;
         this.personNames = personNames;
         this.sessionDate = date;
+        this.groupId = groupId;
     }
 
     /**
-     * Converts a String object array of names to a list of Person objects.
-     *
-     * @return An ArrayList of Person objects.
-     */
-    private ArrayList<Person> convertToListOfPerson() {
-        ArrayList<Person> personList = new ArrayList<>();
-        for (String name : personNames) {
-            Person newPerson = new Person(name);
-            personList.add(newPerson);
-        }
-        return personList;
-    }
-
-    /**
-     * Checks if String object array of names has duplicated names.
+     * Checks if String array object of names has duplicated names.
      *
      * @return true if it contains duplicates, false otherwise.
      */
@@ -93,13 +87,45 @@ public class SessionCreateCommand extends Command {
      *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
-        assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_EMPTY;
+        assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
+
+        boolean hasPersonListDelimiter = false;
+        String [] parsedNames = null;
+        try {
+            parsedNames = Parser.parsePersonList(commandArgs);
+            hasPersonListDelimiter = true;
+        } catch (InvalidFormatException formatException) {
+            if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
+                    + Parser.PERSON_LIST_DELIMITER)) {
+                String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
+                return new InvalidCommand(invalidCommandMessage);
+            }
+        }
+
+        boolean hasGroupIdDelimiter = false;
+        int groupId = -1;
+        try {
+            groupId = Parser.parseGroupId(commandArgs);
+            hasGroupIdDelimiter = true;
+        } catch (InvalidFormatException formatException) {
+            if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
+                    + Parser.GROUP_ID_DELIMITER)) {
+                String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
+                return new InvalidCommand(invalidCommandMessage);
+            }
+        }
+
+        boolean isMissingBothDelimiters = !hasPersonListDelimiter && !hasGroupIdDelimiter;
+        if (isMissingBothDelimiters) {
+            String invalidCommandMessage = Message.ERROR_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS + "\n"
+                    + COMMAND_FORMAT;
+            return new InvalidCommand(invalidCommandMessage);
+        }
+
         try {
             String parsedSessionName = Parser.parseName(commandArgs);
-            String[] parsedNames = Parser.parsePersonList(commandArgs);
             LocalDate parsedSessionDate = Parser.parseLocalDate(commandArgs);
-
-            return new SessionCreateCommand(parsedSessionName, parsedNames, parsedSessionDate);
+            return new SessionCreateCommand(parsedSessionName, parsedNames, parsedSessionDate, groupId);
         } catch (InvalidFormatException formatException) {
             String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
             return new InvalidCommand(invalidCommandMessage);
@@ -116,14 +142,25 @@ public class SessionCreateCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        boolean hasDuplicates = hasNameDuplicates();
-        if (hasDuplicates) {
-            manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
-            return;
+        PersonList personList = new PersonList();
+        if (personNames != null) {
+            boolean hasDuplicates = hasNameDuplicates();
+            if (hasDuplicates) {
+                manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
+                return;
+            }
+            personList.convertToPersonList(personNames);
         }
-
-        // TODO: Check if string[] names are actual names.
-        ArrayList<Person> personList = convertToListOfPerson();
+        Group group = null;
+        if (groupId != -1) {
+            try {
+                group = manager.getProfile().getGroup(groupId);
+                personList.mergeListOfPersons(group.getPersonList());
+            } catch (InvalidDataException dataException) {
+                manager.getUi().printlnMessage(dataException.getMessage());
+                return;
+            }
+        }
 
         boolean isSessionExists = manager.getProfile().hasSessionName(sessionName);
         if (isSessionExists) {
@@ -131,9 +168,9 @@ public class SessionCreateCommand extends Command {
             return;
         }
         int newSessionId = manager.getProfile().getNewSessionId();
-        Session newSession = new Session(sessionName, newSessionId, sessionDate, personList);
+        Session newSession = new Session(sessionName, newSessionId, sessionDate, personList, group);
         manager.getProfile().addSession(newSession);
         manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + newSession);
-        manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONCREATE_SESSION_ADDED + newSessionId);
+        Manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONCREATE_SESSION_ADDED + newSessionId);
     }
 }
