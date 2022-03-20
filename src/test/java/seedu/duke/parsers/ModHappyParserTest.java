@@ -336,7 +336,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_module_noDescription_parsedCorrectly() {
-        final String testString = "add  \t /m modulecode /c 4 \t\t    ";
+        final String testString = "add  \t /m modulecode 4 \t\t    ";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -353,7 +353,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_module_invalidModularCredit() {
-        final String testString = "add  \t /m modulecode /c four \t\t    ";
+        final String testString = "add  \t /m modulecode four \t\t    ";
         try {
             parser.parseCommand(testString);
             fail();
@@ -379,7 +379,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_module_withDescription_parsedCorrectly() {
-        final String testString = "add  \t /m modu__lec_ode \t\t  /c 23  -d  \t \"i am a descrip\t -d-d tion\t \"\t  ";
+        final String testString = "add  \t /m modu__lec_ode \t\t  23  -d  \t \"i am a descrip\t -d-d tion\t \"\t  ";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -396,7 +396,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_module_withDescription_invalidModuleCode() {
-        final String testString = "add  \t /m module code \t\t    -d \t\t  \t \"i am a descrip\t -d-d tion\t \"\t  ";
+        final String testString = "add  \t /m module code \t\t  4  -d \t\t  \t \"i am a descrip\t -d-d tion\t \"\t  ";
         try {
             parser.parseCommand(testString);
             fail();
@@ -694,7 +694,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_gradeCommand_parsedCorrectly() {
-        final String testString = "grade /m CS2113T /g a+";
+        final String testString = "grade /m CS2113T a+";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof GradeCommand);
@@ -706,21 +706,8 @@ public class ModHappyParserTest {
     }
 
     @Test
-    public void parse_gradeCommand_invalidFlags() {
-        final String testString = "grade /m CS2113T /c A+";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
     public void parse_gradeCommand_invalidGrade() {
-        final String testString = "grade /m CS2113T /g F-";
+        final String testString = "grade /m CS2113T F-";
         try {
             parser.parseCommand(testString);
             fail();
@@ -733,7 +720,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_gradeCommand_wrongOrder() {
-        final String testString = "grade /g A- /m CS2113T";
+        final String testString = "grade A- /m CS2113T";
         try {
             parser.parseCommand(testString);
             fail();

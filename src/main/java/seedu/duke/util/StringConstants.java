@@ -175,9 +175,13 @@ public class StringConstants {
     public static final String SAVE_COMMAND_WORD = "save";
 
     /**
-     * For Modules.
+     * For Grades.
      */
-    public static final String NOT_ENTERED = "-";
+    public static final String DASH = "-";
+    public static final String PLUS = "+";
+    public static final String PLUS_STR = "PLUS";
+    public static final String MINUS_STR = "MINUS";
+    public static final String NOT_ENTERED_STR = "NOT_ENTERED";
 
 
     /**

@@ -8,13 +8,14 @@ import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.TaskList;
 import seedu.duke.util.StringConstants;
+import seedu.duke.util.NumberConstants;
 
 public class DeleteCommand extends Command {
 
     private static final String DELETE_MESSAGE = StringConstants.DELETE_MESSAGE;
 
     private String moduleCode;
-    private int taskIndex = -1;
+    private int taskIndex = NumberConstants.INVALID_TASK_INDEX;
     private String taskModule;
     private String result;
 
