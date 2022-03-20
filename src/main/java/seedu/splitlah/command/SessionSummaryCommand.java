@@ -216,7 +216,7 @@ public class SessionSummaryCommand extends Command {
      *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
-        assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_EMPTY;
+        assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
         try {
             int sessionId = Parser.parseSessionId(commandArgs);
             return new SessionSummaryCommand(sessionId);
