@@ -55,7 +55,7 @@ public class Main {
     private void initialiseLogger() {
         LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         LogManager.getLogManager().reset();
-        LOGGER.setLevel(Level.WARNING);
+        LOGGER.setLevel(Level.FINE);
         ConsoleHandler ch = new ConsoleHandler();
         ch.setLevel(Level.WARNING);
         LOGGER.addHandler(ch);
