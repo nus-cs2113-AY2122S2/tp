@@ -169,7 +169,7 @@ public class Warehouse {
             Order order = findOrderContainsGood(Integer.parseInt(goodId));
             order.removeGood(goodId, qty);
         } catch (NumberFormatException e1) {
-            throw new WrongCommandException("add", true);
+            throw new WrongCommandException("remove", true);
         } catch (ItemDoesNotExistException e2) {
             System.out.println("The order you are trying to remove the goods from is not on the current list. "
                     + "Please try removing goods from an existing order.");

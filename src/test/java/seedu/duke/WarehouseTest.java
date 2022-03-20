@@ -68,6 +68,13 @@ class WarehouseTest {
             assertEquals("add", e.getCommand());
             assertEquals(true, e.isCommand());
         }
+
+        //delete data created
+        try {
+            warehouse.removeOrder("101");
+        } catch (WrongCommandException e) {
+            fail();
+        }
     }
 
 
@@ -81,7 +88,7 @@ class WarehouseTest {
             warehouse.addGoods("101", "1", "Fairy dust", "6", "the unit of quantity is pack.");
             warehouse.addGoods("102", "2", "One Piece", "1", "The ultimate treasure.");
             warehouse.addGoods("102", "3", "Ace", "1", "with a hole");
-        } catch (WrongCommandException e) {
+        } catch (WrongCommandException e1) {
             fail();
         }
 
@@ -132,6 +139,14 @@ class WarehouseTest {
             assertEquals("remove", e1.getCommand());
             assertEquals(true, e1.isCommand());
         }
+
+        //delete data created
+        try {
+            warehouse.removeOrder("101");
+            warehouse.removeOrder("102");
+        } catch (WrongCommandException e) {
+            fail();
+        }
     }
 
     @Test
@@ -174,6 +189,13 @@ class WarehouseTest {
         } catch (WrongCommandException e) {
             assertEquals(true, e.isCommand());
             assertEquals("add", e.getCommand());
+        }
+
+        //delete data created
+        try {
+            warehouse.removeOrder("101");
+        } catch (WrongCommandException e) {
+            fail();
         }
     }
 
