@@ -63,8 +63,7 @@ public class GroupViewCommand extends Command {
         try {
             Group group = manager.getProfile().getGroup(groupId);
             assert group.getGroupId() == groupId : Message.ASSERT_GROUPVIEW_INCORRECT_GROUP;
-            String stringToBePrinted = GROUP_ID_HEADER + groupId + SEPARATOR + group;
-            manager.getUi().printlnMessageWithDivider(stringToBePrinted);
+            manager.getUi().printlnMessageWithDivider(group.toString());
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_GROUPVIEW_GROUP_VIEWED + groupId);
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
