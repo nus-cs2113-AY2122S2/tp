@@ -5,6 +5,7 @@ import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.util.logging.Level;
@@ -16,7 +17,7 @@ public class GroupViewCommand extends Command {
     public static final String COMMAND_FORMAT = "Syntax: group /view /gid [GROUP_ID]";
 
     public static final String[] COMMAND_DELIMITERS = {
-            Parser.GROUP_ID_DELIMITER
+            ParserUtils.GROUP_ID_DELIMITER
     };
 
     private int groupId;
