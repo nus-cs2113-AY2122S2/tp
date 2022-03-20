@@ -10,7 +10,6 @@ import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -116,8 +115,8 @@ public class SessionCreateCommand extends Command {
             }
         }
 
-        boolean hasBothMissingDelimiters = !hasPersonListDelimiter && !hasGroupIdDelimiter;
-        if (hasBothMissingDelimiters) {
+        boolean isMissingBothDelimiters = !hasPersonListDelimiter && !hasGroupIdDelimiter;
+        if (isMissingBothDelimiters) {
             String invalidCommandMessage = Message.ERROR_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS + "\n"
                     + COMMAND_FORMAT;
             return new InvalidCommand(invalidCommandMessage);
@@ -152,10 +151,10 @@ public class SessionCreateCommand extends Command {
             }
             personList.convertToPersonList(personNames);
         }
-
+        Group group = null;
         if (groupId != -1) {
             try {
-                Group group = manager.getProfile().getGroup(groupId);
+                group = manager.getProfile().getGroup(groupId);
                 personList.mergeListOfPersons(group.getPersonList());
             } catch (InvalidDataException dataException) {
                 manager.getUi().printlnMessage(dataException.getMessage());
@@ -169,7 +168,7 @@ public class SessionCreateCommand extends Command {
             return;
         }
         int newSessionId = manager.getProfile().getNewSessionId();
-        Session newSession = new Session(sessionName, newSessionId, sessionDate, personList);
+        Session newSession = new Session(sessionName, newSessionId, sessionDate, personList, group);
         manager.getProfile().addSession(newSession);
         manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + newSession);
         Manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONCREATE_SESSION_ADDED + newSessionId);

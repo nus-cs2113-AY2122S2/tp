@@ -24,26 +24,26 @@ public class PersonList {
     }
 
     /**
-     * Returns true if the ArrayList of Person objects is empty,
-     * otherwise false.
-     * @return
+     * Checks if ArrayList object of Person objects is empty.
+     * @return true if ArrayList object of Person objects is empty,
+     *         otherwise false.
      */
     public boolean isEmpty() {
         return personList.isEmpty();
     }
 
     /**
-     * Returns the Person object in the ArrayList of Person objects with the specified index.
+     * Returns the Person object in the ArrayList object of Person objects with the specified index.
      *
      * @param index An integer representing the index.
-     * @return A Person object.
+     * @return A Person object specified by its index in the ArrayList object.
      */
     public Person getPerson(int index) {
         return personList.get(index);
     }
 
     /**
-     * Adds a Person object into the ArrayList of Person objects on if it does not exist,
+     * Adds a Person object into the ArrayList object of Person objects on if it does not exist,
      * otherwise Person object is not added.
      *
      * @param person A Person object.
@@ -66,7 +66,7 @@ public class PersonList {
     /**
      * Converts a String object array of names to a list of Person objects.
      *
-     * @param personNames An ArrayList of Person objects.
+     * @param personNames A String object array of names.
      */
     public void convertToPersonList(String[] personNames) {
         for (String name : personNames) {
@@ -76,7 +76,7 @@ public class PersonList {
     }
 
     /**
-     * Merges an ArrayList of Person objects with existing ArrayList of Person objects.
+     * Merges an ArrayList object of Person objects with existing ArrayList object of Person objects.
      *
      * @param groupPersonList An ArrayList of Person objects.
      */
