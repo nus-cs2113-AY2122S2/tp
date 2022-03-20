@@ -298,4 +298,4 @@ first time. Your saved data should be in that directory.
 | Delete Workout | Format: `workout /delete <workout number to delete>`<br/>Example: `workout /delete 2`                                      |
 | Update Workout | Format: `workout /update <index of workout to be updated> <new number of repetitions>`<br/>Example: `workout /update 1 15` |
 | View Exercise  | Format: `exercise /list`<br/>Example: `exercise /list`                                                                     |
-| View Help      | Format: `helo`<br/>Example: `help`                                                                                         |
+| View Help      | Format: `help`<br/>Example: `help`                                                                                         |
