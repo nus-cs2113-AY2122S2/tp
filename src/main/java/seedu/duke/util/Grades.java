@@ -34,7 +34,7 @@ public enum Grades {
     CU(GRADE_POINT_ZERO),
     NOT_ENTERED(GRADE_POINT_ZERO);
 
-    final private double points;
+    private final double points;
     Grades(double points) {
         this.points = points;
     }
@@ -59,7 +59,7 @@ public enum Grades {
 
     public static Grades getGradeEnum(String moduleGrade) {
         for (Grades grade : Grades.values()) {
-            String gradeStr =grade.toString();
+            String gradeStr = grade.toString();
             if (moduleGrade.equals(gradeStr)) {
                 return grade;
             }
