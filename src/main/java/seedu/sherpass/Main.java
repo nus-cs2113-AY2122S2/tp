@@ -52,7 +52,7 @@ public class Main {
      */
     public void run() {
         ui.showWelcomeMessage();
-        reminder.showReminders();
+        Timetable.showScheduleByDay(LocalDate.now(), taskList, ui);
 
         boolean isExit = false;
         while (!isExit) {
