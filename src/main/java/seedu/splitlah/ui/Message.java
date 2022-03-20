@@ -171,10 +171,16 @@ public abstract class Message {
             "Manager does not exist.";
 
     // Session Create Command
+    public static final String ERROR_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS =
+            "The person list or group identifier delimiters are missing.";
+    public static final String ASSERT_SESSIONCREATE_SESSION_NAME_NULL =
+            "Session name is empty but was not handled in prepare function.";
+    public static final String ASSERT_SESSIONCREATE_SESSION_DATE_NULL =
+            "Session data is empty but was not handled in prepare function.";
+    public static final String ASSERT_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS =
+            "The person list or group identifier delimiters are missing but was not handled in prepare function.";
     public static final String ASSERT_SESSIONCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
             "Name duplicates exist but not detected.";
-    public static final String ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY =
-            "The array of person names is empty but was not handled in prepare function.";
     public static final String LOGGER_SESSIONCREATE_SESSION_ADDED =
             "A session was added into the list of sessions with Id: ";
 

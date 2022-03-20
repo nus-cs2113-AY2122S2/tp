@@ -6,6 +6,7 @@ import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.ExitCommand;
 import seedu.splitlah.command.GroupCreateCommand;
+import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.command.HelpCommand;
 import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.command.SessionCreateCommand;
@@ -380,6 +381,9 @@ public class ParserUtils {
         case GroupCreateCommand.COMMAND_TEXT:
             delimiterList = GroupCreateCommand.COMMAND_DELIMITERS;
             break;
+        case GroupDeleteCommand.COMMAND_TEXT:
+            delimiterList = GroupDeleteCommand.COMMAND_DELIMITERS;
+            break;
         default:
             return !remainingArgs.isEmpty();
         }
@@ -422,6 +426,8 @@ public class ParserUtils {
         case ActivityViewCommand.COMMAND_TEXT:
             // Fallthrough
         case GroupCreateCommand.COMMAND_TEXT:
+            // Fallthrough
+        case GroupDeleteCommand.COMMAND_TEXT:
             // Fallthrough
         case HelpCommand.COMMAND_TEXT:
             // Fallthrough

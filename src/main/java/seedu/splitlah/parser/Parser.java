@@ -13,6 +13,7 @@ import seedu.splitlah.command.SessionSummaryCommand;
 import seedu.splitlah.command.ExitCommand;
 import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.command.GroupCreateCommand;
+import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.ui.Message;
 
@@ -32,7 +33,7 @@ public class Parser {
     private static final int DELIMITERED_COMMAND_MIN_TOKEN_COUNT = 2;
     private static final int MINIMUM_SURCHARGE_PERCENT = 0;
     private static final int MAXIMUM_SURCHARGE_PERCENT = 100;
-
+    
     // MAIN PUBLIC PARSING FUNCTIONS
     /**
      * Returns a String object that represents a name, given the command arguments from user input, delimited by the
@@ -346,6 +347,8 @@ public class Parser {
             return ActivityViewCommand.prepare(remainingArgs);
         case GroupCreateCommand.COMMAND_TEXT:
             return GroupCreateCommand.prepare(remainingArgs);
+        case GroupDeleteCommand.COMMAND_TEXT:
+            return GroupDeleteCommand.prepare(remainingArgs);
         case HelpCommand.COMMAND_TEXT:
             return new HelpCommand();
         case ExitCommand.COMMAND_TEXT:

@@ -148,8 +148,8 @@ public class Group {
             return Message.ERROR_GROUP_EMPTY_PERSON_LIST;
         }
 
-        StringBuilder outputString = new StringBuilder(PERSON_LIST_HEADER);
-        outputString.append("Group Id: ").append(groupId);
+        StringBuilder outputString = new StringBuilder("Group Id ");
+        outputString.append("#").append(groupId).append("  --").append("\n").append("Participants: ");
         for (int i = 0; i < personList.size(); i++) {
             String personName = personList.get(i).getName();
             outputString.append("\n ").append(i + OFFSET).append(". ").append(personName);
