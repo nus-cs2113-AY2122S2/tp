@@ -47,13 +47,17 @@ public class SessionCreateCommand extends Command {
      * @param sessionName A String object that represents the session name.
      * @param personNames A String object array that represents the involved persons for the session.
      * @param date        A LocalDate object that represents the date of the session.
+     * @param groupId     An integer that represents the group unique identifier.
      */
-    public SessionCreateCommand(String sessionName, String[] personNames, LocalDate date) {
-        assert personNames != null : Message.ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY;
-        assert personNames.length != 0 : Message.ASSERT_SESSIONCREATE_PERSON_NAMES_ARRAY_EMPTY;
+    public SessionCreateCommand(String sessionName, String[] personNames, LocalDate date, int groupId) {
+        assert sessionName != null : Message.ASSERT_SESSIONCREATE_SESSION_NAME_NULL;
+        assert personNames != null || groupId != -1 :
+                Message.ASSERT_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS;
+        assert date != null : Message.ASSERT_SESSIONCREATE_SESSION_DATE_NULL;
         this.sessionName = sessionName;
         this.personNames = personNames;
         this.sessionDate = date;
+        this.groupId = groupId;
     }
 
     /**
