@@ -117,14 +117,45 @@ public class SessionCreateCommand extends Command {
      *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
-        assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_EMPTY;
         assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
+
+        boolean hasPersonListDelimiter = false;
+        String [] parsedNames = null;
+        try {
+            parsedNames = Parser.parsePersonList(commandArgs);
+            hasPersonListDelimiter = true;
+        } catch (InvalidFormatException formatException) {
+            if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
+                    + Parser.PERSON_LIST_DELIMITER)) {
+                String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
+                return new InvalidCommand(invalidCommandMessage);
+            }
+        }
+
+        boolean hasGroupIdDelimiter = false;
+        int groupId = -1;
+        try {
+            groupId = Parser.parseGroupId(commandArgs);
+            hasGroupIdDelimiter = true;
+        } catch (InvalidFormatException formatException) {
+            if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
+                    + Parser.GROUP_ID_DELIMITER)) {
+                String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
+                return new InvalidCommand(invalidCommandMessage);
+            }
+        }
+
+        boolean hasBothMissingDelimiters = !hasPersonListDelimiter && !hasGroupIdDelimiter;
+        if (hasBothMissingDelimiters) {
+            String invalidCommandMessage = Message.ERROR_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS + "\n"
+                    + COMMAND_FORMAT;
+            return new InvalidCommand(invalidCommandMessage);
+        }
+
         try {
             String parsedSessionName = Parser.parseName(commandArgs);
-            String[] parsedNames = Parser.parsePersonList(commandArgs);
             LocalDate parsedSessionDate = Parser.parseLocalDate(commandArgs);
-
-            return new SessionCreateCommand(parsedSessionName, parsedNames, parsedSessionDate);
+            return new SessionCreateCommand(parsedSessionName, parsedNames, parsedSessionDate, groupId);
         } catch (InvalidFormatException formatException) {
             String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
             return new InvalidCommand(invalidCommandMessage);
