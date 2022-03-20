@@ -7,6 +7,7 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
@@ -31,10 +32,10 @@ public class SessionCreateCommand extends Command {
             "The session was created successfully.\n";
 
     public static final String[] COMMAND_DELIMITERS = { 
-        Parser.NAME_DELIMITER,
-        Parser.DATE_DELIMITER,
-        Parser.PERSON_LIST_DELIMITER,
-        Parser.GROUP_ID_DELIMITER
+        ParserUtils.NAME_DELIMITER,
+        ParserUtils.DATE_DELIMITER,
+        ParserUtils.PERSON_LIST_DELIMITER,
+        ParserUtils.GROUP_ID_DELIMITER
     };
 
     private String sessionName;
@@ -96,7 +97,7 @@ public class SessionCreateCommand extends Command {
             hasPersonListDelimiter = true;
         } catch (InvalidFormatException formatException) {
             if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                    + Parser.PERSON_LIST_DELIMITER)) {
+                    + ParserUtils.PERSON_LIST_DELIMITER)) {
                 String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
                 return new InvalidCommand(invalidCommandMessage);
             }
@@ -109,7 +110,7 @@ public class SessionCreateCommand extends Command {
             hasGroupIdDelimiter = true;
         } catch (InvalidFormatException formatException) {
             if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                    + Parser.GROUP_ID_DELIMITER)) {
+                    + ParserUtils.GROUP_ID_DELIMITER)) {
                 String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
                 return new InvalidCommand(invalidCommandMessage);
             }

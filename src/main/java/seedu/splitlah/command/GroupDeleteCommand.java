@@ -4,6 +4,7 @@ import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 
 /**
  * Represents a command that deletes a Group object.
@@ -19,7 +20,7 @@ public class GroupDeleteCommand extends Command {
     private static final String SUCCESS_MESSAGE = "The group was deleted successfully.";
 
     public static final String[] COMMAND_DELIMITERS = {
-        Parser.GROUP_ID_DELIMITER,
+        ParserUtils.GROUP_ID_DELIMITER,
     };
 
     private int groupId;
