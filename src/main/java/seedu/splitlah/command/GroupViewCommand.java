@@ -46,6 +46,12 @@ public class GroupViewCommand extends Command {
         }
     }
 
+    /**
+     * Runs the command with the group unique identifier as provided by the user input and
+     * prints the details of the group.
+     *
+     * @param manager A Manager object that manages the TextUI and Profile object.
+     */
     @Override
     public void run(Manager manager) {
         try {
