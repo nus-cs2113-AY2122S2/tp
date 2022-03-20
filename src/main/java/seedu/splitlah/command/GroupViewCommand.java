@@ -7,6 +7,8 @@ import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
 
+import java.util.logging.Level;
+
 public class GroupViewCommand extends Command {
 
     public static final String COMMAND_TEXT = "group /view";
@@ -62,8 +64,10 @@ public class GroupViewCommand extends Command {
             assert group.getGroupId() == groupId : Message.ASSERT_GROUPVIEW_INCORRECT_GROUP;
             String stringToBePrinted = GROUP_ID_HEADER + groupId + SEPARATOR + group;
             manager.getUi().printlnMessageWithDivider(stringToBePrinted);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_GROUPVIEW_GROUP_VIEWED + groupId);
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_GROUPVIEW_GROUP_NOT_VIEWED + groupId);
         }
     }
 }
