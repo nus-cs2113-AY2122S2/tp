@@ -130,8 +130,8 @@ public class Timetable {
     public static void showScheduleByDay(LocalDate dateInput, TaskList taskList, Ui ui) {
         ArrayList<Task> filteredTasks = taskList.getFilteredTasksByDate(dateInput);
         if (filteredTasks.size() == 0) {
-            ui.showToUser("Looks like you do not have any tasks added.\n"
-                    + "Try adding some to generate your timetable.");
+            ui.showToUser("Looks like your schedule is empty for the day!\n"
+                    + "Try adding some tasks if you wish to generate a timetable.");
             return;
         }
         prepareTimetable(dateInput, filteredTasks, ui);

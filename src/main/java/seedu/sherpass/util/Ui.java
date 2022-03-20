@@ -71,7 +71,7 @@ public class Ui {
      */
     public void showWelcomeMessage() {
         String message = PARTITION_LINE + LS + WELCOME_MESSAGE_ONE
-                + LOGO + LS + WELCOME_MESSAGE_TWO + LS + PARTITION_LINE;
+                + LOGO + LS + PARTITION_LINE + LS + WELCOME_MESSAGE_TWO;
         showToUser(message);
     }
 
