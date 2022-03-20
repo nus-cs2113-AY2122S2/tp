@@ -1,5 +1,12 @@
 # Developer Guide
 
+## Design
+### Architecture
+Given below is a quick overview of the main components of Mod Happy and how they interact with one another.
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ch40gRv1-Mu/tp/branch-A-UML/docs/Components.puml)
+
+### Parser Component
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ch40gRv1-Mu/tp/branch-A-UML/docs/Parser.puml)
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
