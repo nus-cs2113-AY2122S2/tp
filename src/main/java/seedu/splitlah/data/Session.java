@@ -28,26 +28,6 @@ public class Session {
             "Participants";
     private static final String SUMMARY_STRING_SEPARATOR = " | ";
     private static final int ZERO_INDEXING_OFFSET = 1;
-    
-    /**
-     * Constructs a Session object with the specified information as a new session.
-     *
-     * @param sessionName The name of the session.
-     * @param sessionId   A unique identifier for the session.
-     * @param dateCreated A LocalDate object storing the date that the session occurs on.
-     * @param personList  An ArrayList of Person objects representing participants of the session.
-     * @see Profile#getNewSessionId() for issuing a unique sessionId
-     */
-    public Session(String sessionName, int sessionId, LocalDate dateCreated, PersonList personList) {
-        assert personList != null : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
-        assert personList.getSize() != 0 : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
-        this.sessionName = sessionName;
-        this.sessionId = sessionId;
-        this.dateCreated = dateCreated;
-        this.personList = personList;
-        this.activityList = new ArrayList<>();
-        this.group = null;
-    }
 
     /**
      * Constructs a Session object with the specified information as a new session.
@@ -55,7 +35,7 @@ public class Session {
      * @param sessionName The name of the session.
      * @param sessionId   A unique identifier for the session.
      * @param dateCreated A LocalDate object storing the date that the session occurs on.
-     * @param personList  An ArrayList of Person objects representing participants of the session.
+     * @param personList  An ArrayList object of Person objects representing participants of the session.
      * @param group       A Group object representing a group of persons participating in the session.
      * @see Profile#getNewSessionId() for issuing a unique sessionId
      */
