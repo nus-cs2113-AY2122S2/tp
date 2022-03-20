@@ -96,9 +96,9 @@ The tag name cannot contain whitespace.
 ### Listing all tasks/modules: `list`
 
 Displays a list of all tasks, some of which are grouped by module code while the rest fall under "general tasks" list.<br>
-If tag search string is provided, list will only display tasks containing tags that contain the search string. The tag search string cannot contain whitespace.
+If tag name is provided, list will only display tasks containing the tag name. The tag name cannot contain whitespace.
 
-Format: `list ["TAG_SEARCH_STRING"]`
+Format: `list ["TAG_NAME"]`
 
 ### Clearing the list: `reset`
 

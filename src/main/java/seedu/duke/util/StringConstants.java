@@ -95,10 +95,10 @@ public class StringConstants {
             + "Format to edit a task:   edit /t TASK_INDEX"
             + "(-n \"TASK_NAME\" or -d \"TASK_DESCRIPTION\" or -t \"ESTIMATED_WORKING_TIME\") [-m MODULE_CODE]";
     public static final String LIST_HELP = "Displays a list of all tasks, grouped by module code.\n"
-            + "If tag search string is provided, list will only display tasks containing tags that contain"
-            + "the search string. The tag search string cannot contain whitespace.\n"
+            + "If tag name is provided, list will only display tasks containing the tag name.\n"
+            + "The tag name cannot contain whitespace.\n"
             + "Format to list all tasks: list\n"
-            + "Format to list task containing a tag: list \"TAG_SEARCH_STRING\"";
+            + "Format to list task containing a tag: list \"TAG_NAME\"";
     public static final String MARK_HELP = "Mark a task with the given task number from the specified module."
             + "If no module code is given, the task to be marked will be drawn from the \"general tasks\" list.\n"
             + "Format to mark a task as completed:   mark /c TASK_NUMBER [-m MODULE_CODE]\n"
