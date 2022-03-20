@@ -61,7 +61,7 @@ public class SearchCommand extends Command {
             this.userAction = userAction;
             break;
         default:
-            logger.log(Level.WARNING, "User has entered an invalid search exercise command action.");
+            logger.log(Level.WARNING, "User has entered an invalid search command action.");
             String className = this.getClass().getSimpleName();
             throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
         }
@@ -80,7 +80,7 @@ public class SearchCommand extends Command {
             }
             break;
         default:
-            logger.log(Level.WARNING, "User has entered an invalid search exercise command action.");
+            logger.log(Level.WARNING, "User has entered an invalid search command action.");
             String className = this.getClass().getSimpleName();
             throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
         }
@@ -152,7 +152,7 @@ public class SearchCommand extends Command {
                 searchPlan();
                 break;
             default:
-                logger.log(Level.WARNING, "User has entered an invalid search exercise command action.");
+                logger.log(Level.WARNING, "User has entered an invalid search command action.");
                 String className = this.getClass().getSimpleName();
                 throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
             }
