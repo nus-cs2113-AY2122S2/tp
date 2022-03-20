@@ -17,13 +17,10 @@ public class GroupViewCommand extends Command {
     public static final String COMMAND_FORMAT = "Syntax: group /view /gid [GROUP_ID]";
 
     public static final String[] COMMAND_DELIMITERS = {
-            ParserUtils.GROUP_ID_DELIMITER
+        ParserUtils.GROUP_ID_DELIMITER
     };
 
     private int groupId;
-
-    private static final String GROUP_ID_HEADER = "Group Id #";
-    private static final String SEPARATOR = " | ";
 
     /**
      * Initializes a GroupViewCommand.
