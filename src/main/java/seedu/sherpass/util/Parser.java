@@ -26,6 +26,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.parseFormat;
+import static seedu.sherpass.constant.DateAndTimeFormat.inputFormat;
 
 import static seedu.sherpass.constant.Index.MARK_INDEX;
 import static seedu.sherpass.constant.Index.CUSTOM_COMMAND_INDEX;
@@ -65,10 +66,10 @@ public class Parser {
             LocalDate byDate = null;
             LocalDate doOnDate = null;
             if (!byDateString.equals("null")) {
-                byDate = LocalDate.parse(byDateString, parseFormat);
+                byDate = LocalDate.parse(byDateString, inputFormat);
             }
             if (!doOnDateString.equals("null")) {
-                doOnDate = LocalDate.parse(doOnDateString, parseFormat);
+                doOnDate = LocalDate.parse(doOnDateString, inputFormat);
             }
             parsedTask = new Task(description, byDate, doOnDate);
             String status = taskData.getString("status");
@@ -132,7 +133,7 @@ public class Parser {
             return null;
         }
         try {
-            return LocalDate.parse(rawTaskDate, parseFormat);
+            return LocalDate.parse(rawTaskDate, inputFormat);
         } catch (DateTimeParseException e) {
             return confirmInvalidDateFormat();
         }
