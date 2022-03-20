@@ -75,6 +75,23 @@ public class SessionCreateCommand extends Command {
     }
 
     /**
+     * Merges two ArrayList of persons into one ArrayList of persons.
+     *
+     * @param personList      An ArrayList of Person objects.
+     * @param groupPersonList An Arraylist of Person objects from Group object.
+     * @return  An ArrayList of Person objects.
+     */
+    private ArrayList<Person> mergeListOfPersons(ArrayList<Person> personList, ArrayList<Person> groupPersonList) {
+        ArrayList<Person> mergedList = personList;
+        for (Person person : groupPersonList) {
+            if (!mergedList.contains(person)) {
+                mergedList.add(person);
+            }
+        }
+        return mergedList;
+    }
+
+    /**
      * Checks if String object array of names has duplicated names.
      *
      * @return true if it contains duplicates, false otherwise.
