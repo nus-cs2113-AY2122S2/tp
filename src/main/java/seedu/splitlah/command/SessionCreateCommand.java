@@ -23,7 +23,8 @@ public class SessionCreateCommand extends Command {
     public static final String COMMAND_TEXT = "session /create";
 
     public static final String COMMAND_FORMAT =
-            "Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 …]";
+            "Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 …] "
+                    + "[</gid GROUP_ID>]";
 
     private static final String COMMAND_SUCCESS =
             "The session was created successfully.\n";
@@ -31,12 +32,14 @@ public class SessionCreateCommand extends Command {
     public static final String[] COMMAND_DELIMITERS = { 
         Parser.NAME_DELIMITER,
         Parser.DATE_DELIMITER,
-        Parser.PERSON_LIST_DELIMITER
+        Parser.PERSON_LIST_DELIMITER,
+        Parser.GROUP_ID_DELIMITER
     };
 
     private String sessionName;
     private String[] personNames;
     private LocalDate sessionDate;
+    private int groupId;
 
     /**
      * Initializes a SessionCreateCommand.
