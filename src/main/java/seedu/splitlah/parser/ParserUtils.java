@@ -451,4 +451,18 @@ public class ParserUtils {
             return "";
         }
     }
+
+    static String checkIfCommandIsValid(String commandType, String remainingArgs) {
+        assert commandType != null : Message.ASSERT_PARSER_COMMAND_TYPE_NULL;
+        assert remainingArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
+
+        if (commandType.isEmpty()) {
+            return Message.ERROR_PARSER_EMPTY_COMMAND;
+        }
+        
+        if (!isValidCommandType(commandType)) {
+            return Message.ERROR_PARSER_INVALID_COMMAND;
+        }
+        return checkIfArgumentsValidForCommand(commandType, remainingArgs);
+    }
 }
