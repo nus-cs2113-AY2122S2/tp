@@ -15,9 +15,9 @@ public class PersonList {
     }
 
     /**
-     * Returns the size of the ArrayList of Person objects.
+     * Returns the size of the ArrayList object of Person objects.
      *
-     * @return An integer that presents the size of the ArrayList of Person objects.
+     * @return An integer that presents the size of the ArrayList object of Person objects.
      */
     public int getSize() {
         return personList.size();
@@ -55,18 +55,18 @@ public class PersonList {
     }
 
     /**
-     * Returns the ArrayList of Person objects.
+     * Returns the ArrayList object of Person objects.
      *
-     * @return An ArrayList of Person objects.
+     * @return An ArrayList object of Person objects.
      */
     public ArrayList<Person> getPersonList() {
         return personList;
     }
 
     /**
-     * Converts a String object array of names to a list of Person objects.
+     * Converts a String array object of names to a list of Person objects.
      *
-     * @param personNames A String object array of names.
+     * @param personNames A String array object of names.
      */
     public void convertToPersonList(String[] personNames) {
         for (String name : personNames) {
@@ -78,7 +78,7 @@ public class PersonList {
     /**
      * Merges an ArrayList object of Person objects with existing ArrayList object of Person objects.
      *
-     * @param groupPersonList An ArrayList of Person objects.
+     * @param groupPersonList An ArrayList object of Person objects.
      */
     public void mergeListOfPersons(ArrayList<Person> groupPersonList) {
         for (Person person : groupPersonList) {

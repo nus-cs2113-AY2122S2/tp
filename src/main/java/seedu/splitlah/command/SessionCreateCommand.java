@@ -62,7 +62,7 @@ public class SessionCreateCommand extends Command {
     }
 
     /**
-     * Checks if String object array of names has duplicated names.
+     * Checks if String array object of names has duplicated names.
      *
      * @return true if it contains duplicates, false otherwise.
      */
