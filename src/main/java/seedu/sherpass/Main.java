@@ -62,7 +62,7 @@ public class Main {
 
         try {
             FileHandler fh = new FileHandler();
-            fh.setLevel(Level.FINE);
+            fh.setLevel(Level.ALL);
             LOGGER.addHandler(fh);
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "File logger not working", e);
