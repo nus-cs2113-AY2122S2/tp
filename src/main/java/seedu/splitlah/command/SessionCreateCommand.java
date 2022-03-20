@@ -94,7 +94,7 @@ public class SessionCreateCommand extends Command {
      *         an InvalidCommand object otherwise.
      */
     public static Command prepare(String commandArgs) {
-        assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_EMPTY;
+        assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
         try {
             String parsedSessionName = Parser.parseName(commandArgs);
             String[] parsedNames = Parser.parsePersonList(commandArgs);
