@@ -25,7 +25,7 @@ public class Storage {
                 equipmentManager.addEquipment(equipment);
             }
         } catch (IOException e) {
-            System.out.println("io1");
+            System.out.println("File not found! Creating new file...");
         }
     }
 
@@ -36,7 +36,7 @@ public class Storage {
             gson.toJson(equipments, writer);
             writer.close();
         } catch (IOException e) {
-            System.out.println("io2");
+            // Do ?
         }
     }
 }
