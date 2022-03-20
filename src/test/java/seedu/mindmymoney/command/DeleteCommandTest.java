@@ -37,7 +37,7 @@ class DeleteCommandTest {
      * Asserts if the index input is out of bounds.
      */
     @Test
-    void deleteCommand_wrongInputValue_expectException() {
+    void deleteCommand_wrongInputValue_expectException() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         String inputString = "expenditure 12345";
         new AddCommand(inputString, expenditureTestList).executeCommand();

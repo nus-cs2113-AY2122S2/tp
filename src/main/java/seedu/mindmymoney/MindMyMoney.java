@@ -3,6 +3,8 @@ package seedu.mindmymoney;
 import seedu.mindmymoney.command.Command;
 import seedu.mindmymoney.data.ExpenditureList;
 
+import java.io.File;
+
 /**
  * Represents the entry point of the MindMyMoney program. Initializes the program and starts interaction with the
  * user.
@@ -10,22 +12,28 @@ import seedu.mindmymoney.data.ExpenditureList;
 public class MindMyMoney {
     private final Ui ui;
     private ExpenditureList itemList;
+    private final Storage storage;
+    private static final String STORAGE_FILENAME = "list.txt";
 
     public MindMyMoney() {
         ui = new Ui();
-        itemList = new ExpenditureList();
+        storage = new Storage(new File(STORAGE_FILENAME));
     }
 
     public void run() {
         ui.printIntro();
-
-        while (true) {
+        itemList = storage.load();
+        boolean isExit = false;
+        while (!isExit) {
             try {
                 String input = ui.readInput();
                 Command commandType = Parser.parseCommand(input, itemList);
                 commandType.executeCommand();
+                storage.save(itemList);
+                isExit = commandType.isExit();
             } catch (MindMyMoneyException e) {
                 System.out.println(e.getMessage());
+                System.out.print(System.lineSeparator());
             }
         }
     }

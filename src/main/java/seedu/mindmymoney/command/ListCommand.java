@@ -24,7 +24,18 @@ public class ListCommand extends Command {
             }
             indexOfList++;
         }
+        assert listInString.length() != 0 : "Return string should be non-empty";
         return listInString;
+    }
+
+    /**
+     * Indicates whether the program should exit.
+     *
+     * @return Indication on whether the program should exit.
+     */
+    @Override
+    public boolean isExit() {
+        return false;
     }
 
     /**
@@ -37,8 +48,8 @@ public class ListCommand extends Command {
                     "Your list is currently empty! Please add some expenditures to your list first");
         } else {
             System.out.print(PrintStrings.LINE);
-            System.out.println(listToString());
-            System.out.print(PrintStrings.LINE);
+            System.out.print(listToString());
+            System.out.println(PrintStrings.LINE);
         }
     }
 }
