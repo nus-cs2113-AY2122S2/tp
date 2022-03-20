@@ -5,7 +5,6 @@ import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -235,7 +234,7 @@ public class Session {
         }
 
         try {
-            return personList.get(index - ZERO_INDEXING_OFFSET);
+            return personList.getPerson(index - ZERO_INDEXING_OFFSET);
         } catch (IndexOutOfBoundsException exception) {
             throw new InvalidDataException(Message.ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST + personList.getSize());
         }
@@ -319,7 +318,7 @@ public class Session {
 
         StringBuilder summaryString = new StringBuilder(PERSON_LIST_HEADER);
         for (int i = 0; i < personList.getSize(); i++) {
-            String personName = personList.get(i).getName();
+            String personName = personList.getPerson(i).getName();
             summaryString.append("\n ").append(i + ZERO_INDEXING_OFFSET).append(". ").append(personName);
         }
         return summaryString.toString();
