@@ -48,8 +48,8 @@ public class ListCommand extends Command {
                     "Your list is currently empty! Please add some expenditures to your list first");
         } else {
             System.out.print(PrintStrings.LINE);
-            System.out.println(listToString());
-            System.out.print(PrintStrings.LINE);
+            System.out.print(listToString());
+            System.out.println(PrintStrings.LINE);
         }
     }
 }

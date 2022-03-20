@@ -1,12 +1,14 @@
 package seedu.mindmymoney.command;
 
 import org.junit.jupiter.api.Test;
+import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
 
 class AddCommandTest {
@@ -14,7 +16,7 @@ class AddCommandTest {
      * Asserts if user is able to add an input.
      */
     @Test
-    void addCommand_oneInput_expectListUpdated() {
+    void addCommand_oneInput_expectListUpdated() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         String inputString = "expenditure 12345";
         new AddCommand(inputString, expenditureTestList).executeCommand();
@@ -30,28 +32,22 @@ class AddCommandTest {
      * Asserts if user is able to add am empty input.
      */
     @Test
-    void addCommand_missingInput_expectOriginalList() {
+    void addCommand_missingInput_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         String inputString = "";
-        ArrayList<Expenditure> testList = new ArrayList<>();
-        new AddCommand(inputString, expenditureTestList).executeCommand();
-        String expectedOutput = getOutput(testList);
-        String actualOutput = getOutput(expenditureTestList.expenditureListArray);
-        assertEquals(expectedOutput, actualOutput);
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, expenditureTestList).executeCommand());
     }
 
     /**
      * Asserts if user is able to add a non integer amount.
      */
     @Test
-    void addCommand_nonIntAmount_expectOriginalList() {
+    void addCommand_nonIntAmount_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         String inputString = "expenditure deadbeef";
-        ArrayList<Expenditure> testList = new ArrayList<>();
-        new AddCommand(inputString, expenditureTestList).executeCommand();
-        String expectedOutput = getOutput(testList);
-        String actualOutput = getOutput(expenditureTestList.expenditureListArray);
-        assertEquals(expectedOutput, actualOutput);
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, expenditureTestList).executeCommand());
     }
 
     /**

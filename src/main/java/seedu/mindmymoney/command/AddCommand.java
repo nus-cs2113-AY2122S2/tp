@@ -1,6 +1,6 @@
 package seedu.mindmymoney.command;
 
-import seedu.mindmymoney.constants.PrintStrings;
+import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.helper.Functions;
 import seedu.mindmymoney.userfinancial.Expenditure;
@@ -33,17 +33,18 @@ public class AddCommand extends Command {
     /**
      * Sets the DESCRIPTION and AMOUNT fields in the users' expenditure and adds it into the list.
      */
-    public void executeCommand() {
+    public void executeCommand() throws MindMyMoneyException {
         try {
             String category = null;
-            System.out.print(PrintStrings.LINE);
             String[] parseAddInput = Functions.parseInput(addInput);
             String description = parseAddInput[INDEX_OF_FIRST_ITEM_IN_STRING];
             assert description != null : "Description should not be null";
+
             if (parseAddInput[INDEX_OF_SECOND_ITEM_IN_STRING].contains("-c")) {
                 parseAddInput = Functions.parseInputWithCommandFlag(parseAddInput[INDEX_OF_SECOND_ITEM_IN_STRING]);
                 category = parseAddInput[INDEX_OF_FIRST_ITEM_IN_STRING];
             }
+
             int amount = Integer.parseInt(parseAddInput[INDEX_OF_SECOND_ITEM_IN_STRING]);
             assert amount >= 0 : "Amount should have a positive value";
             expenditureList.add(new Expenditure(description, category, amount));
@@ -53,11 +54,11 @@ public class AddCommand extends Command {
                 System.out.println("Successfully added " + description + " of $" + amount + " from " + category
                         + " into the account");
             }
+            System.out.print(System.lineSeparator());
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Did you forget to input DESCRIPTION or AMOUNT?" + e);
+            throw new MindMyMoneyException("Did you forget to input DESCRIPTION or AMOUNT?");
         } catch (NumberFormatException e) {
-            System.out.println("AMOUNT must be a number");
+            throw new MindMyMoneyException("AMOUNT must be a number");
         }
-        System.out.print(PrintStrings.LINE);
     }
 }
