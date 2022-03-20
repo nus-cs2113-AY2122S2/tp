@@ -3,7 +3,6 @@ package seedu.splitlah.parser;
 import org.junit.jupiter.api.Test;
 import seedu.splitlah.command.Command;
 import seedu.splitlah.command.InvalidCommand;
-import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.ui.Message;
 
@@ -138,7 +137,7 @@ class ParserTest {
             String output = Parser.parseName(argumentWithoutNameDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.NAME_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.NAME_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -154,7 +153,7 @@ class ParserTest {
             String output = Parser.parseName(argumentWithoutNameArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.NAME_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.NAME_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -185,7 +184,7 @@ class ParserTest {
             String[] output = Parser.parsePersonList(argumentWithoutPersonListDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.PERSON_LIST_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.PERSON_LIST_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -201,7 +200,7 @@ class ParserTest {
             String[] output = Parser.parsePersonList(argumentWithoutPersonListArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.PERSON_LIST_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.PERSON_LIST_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -235,7 +234,7 @@ class ParserTest {
             String[] output = Parser.parseInvolved(argumentWithoutInvolvedDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.INVOLVED_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.INVOLVED_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -251,7 +250,7 @@ class ParserTest {
             String[] output = Parser.parseInvolved(argumentWithoutInvolvedArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.INVOLVED_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.INVOLVED_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -285,7 +284,7 @@ class ParserTest {
             String output = Parser.parsePayer(argumentWithoutPayerDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.PAYER_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.PAYER_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -301,7 +300,7 @@ class ParserTest {
             String output = Parser.parsePayer(argumentWithoutPayerArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.PAYER_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.PAYER_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -348,7 +347,7 @@ class ParserTest {
             int output = Parser.parseSessionId(argumentWithoutSessionIdDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.SESSION_ID_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.SESSION_ID_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -364,7 +363,7 @@ class ParserTest {
             int output = Parser.parseSessionId(argumentWithoutSessionIdArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.SESSION_ID_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.SESSION_ID_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -380,7 +379,7 @@ class ParserTest {
             int output = Parser.parseSessionId(argumentWithNonIntArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + Parser.SESSION_ID_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + ParserUtils.SESSION_ID_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -427,7 +426,7 @@ class ParserTest {
             int output = Parser.parseActivityId(argumentWithoutActivityIdDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.ACTIVITY_ID_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.ACTIVITY_ID_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -443,7 +442,7 @@ class ParserTest {
             int output = Parser.parseActivityId(argumentWithoutActivityIdArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.ACTIVITY_ID_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.ACTIVITY_ID_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -459,7 +458,7 @@ class ParserTest {
             int output = Parser.parseActivityId(argumentWithNonIntArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + Parser.ACTIVITY_ID_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + ParserUtils.ACTIVITY_ID_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -506,7 +505,7 @@ class ParserTest {
             LocalDate output = Parser.parseLocalDate(argumentWithoutDateDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.DATE_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.DATE_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -522,7 +521,7 @@ class ParserTest {
             LocalDate output = Parser.parseLocalDate(argumentWithoutDateArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.DATE_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.DATE_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -587,7 +586,7 @@ class ParserTest {
             double output = Parser.parseTotalCost(argumentWithoutTotalCostDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.TOTAL_COST_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.TOTAL_COST_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -603,7 +602,7 @@ class ParserTest {
             double output = Parser.parseTotalCost(argumentWithoutTotalCostArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.TOTAL_COST_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.TOTAL_COST_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -619,7 +618,7 @@ class ParserTest {
             double output = Parser.parseTotalCost(argumentWithNonNumericArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + Parser.TOTAL_COST_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + ParserUtils.TOTAL_COST_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -722,7 +721,7 @@ class ParserTest {
             double[] output = Parser.parseCostList(argumentWithoutCostListDelimiter);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + Parser.COST_LIST_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + ParserUtils.COST_LIST_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -738,7 +737,7 @@ class ParserTest {
             double[] output = Parser.parseCostList(argumentWithoutCostListArguments);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.COST_LIST_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.COST_LIST_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -754,7 +753,7 @@ class ParserTest {
             double[] output = Parser.parseCostList(argumentWithNonNumericArguments);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + Parser.COST_LIST_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + ParserUtils.COST_LIST_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -859,7 +858,7 @@ class ParserTest {
             int output = Parser.parseGst(argumentWithoutGstArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.GST_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.GST_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -876,7 +875,7 @@ class ParserTest {
             int output = Parser.parseGst(argumentWithNonIntegerArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + Parser.GST_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + ParserUtils.GST_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -894,7 +893,7 @@ class ParserTest {
             int output = Parser.parseGst(argumentWithIntegerArgumentUnderRange);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_INVALID_GST_SURCHARGE + Parser.GST_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_INVALID_GST_SURCHARGE + ParserUtils.GST_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
 
@@ -905,7 +904,7 @@ class ParserTest {
             int output = Parser.parseGst(argumentWithIntegerArgumentAboveRange);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_INVALID_GST_SURCHARGE + Parser.GST_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_INVALID_GST_SURCHARGE + ParserUtils.GST_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -955,7 +954,7 @@ class ParserTest {
             int output = Parser.parseServiceCharge(argumentWithoutServiceChargeArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + Parser.SERVICE_CHARGE_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.SERVICE_CHARGE_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -972,7 +971,7 @@ class ParserTest {
             int output = Parser.parseServiceCharge(argumentWithNonIntegerArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + Parser.SERVICE_CHARGE_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + ParserUtils.SERVICE_CHARGE_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -990,7 +989,7 @@ class ParserTest {
             int output = Parser.parseServiceCharge(argumentWithIntegerArgumentUnderRange);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + Parser.SERVICE_CHARGE_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + ParserUtils.SERVICE_CHARGE_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
 
@@ -1001,7 +1000,7 @@ class ParserTest {
             int output = Parser.parseServiceCharge(argumentWithIntegerArgumentAboveRange);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + Parser.SERVICE_CHARGE_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + ParserUtils.SERVICE_CHARGE_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }

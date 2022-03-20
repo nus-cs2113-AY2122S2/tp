@@ -5,6 +5,7 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.util.logging.Level;
@@ -23,8 +24,8 @@ public class ActivityDeleteCommand extends Command {
     private static final String COMMAND_SUCCESS = "The activity was deleted successfully.";
 
     public static final String[] COMMAND_DELIMITERS = {
-        Parser.SESSION_ID_DELIMITER,
-        Parser.ACTIVITY_ID_DELIMITER 
+        ParserUtils.SESSION_ID_DELIMITER,
+        ParserUtils.ACTIVITY_ID_DELIMITER 
     };
     
     private int sessionId;

@@ -7,6 +7,7 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 import seedu.splitlah.util.PersonCostPair;
@@ -27,7 +28,7 @@ public class SessionSummaryCommand extends Command {
     public static final String COMMAND_FORMAT = "Syntax: session /summary /sid [SESSION_ID]";
 
     public static final String[] COMMAND_DELIMITERS = {
-        Parser.SESSION_ID_DELIMITER
+        ParserUtils.SESSION_ID_DELIMITER
     };
 
     private int sessionId;

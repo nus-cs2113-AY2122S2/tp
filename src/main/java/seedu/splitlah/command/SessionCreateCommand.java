@@ -5,6 +5,7 @@ import seedu.splitlah.data.Person;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
@@ -29,9 +30,9 @@ public class SessionCreateCommand extends Command {
             "The session was created successfully.\n";
 
     public static final String[] COMMAND_DELIMITERS = { 
-        Parser.NAME_DELIMITER,
-        Parser.DATE_DELIMITER,
-        Parser.PERSON_LIST_DELIMITER
+        ParserUtils.NAME_DELIMITER,
+        ParserUtils.DATE_DELIMITER,
+        ParserUtils.PERSON_LIST_DELIMITER
     };
 
     private String sessionName;
