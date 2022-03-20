@@ -1,8 +1,10 @@
 package seedu.splitlah.command;
 
+import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
 import seedu.splitlah.data.Session;
+import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
@@ -172,14 +174,25 @@ public class SessionCreateCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        boolean hasDuplicates = hasNameDuplicates();
-        if (hasDuplicates) {
-            manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
-            return;
+        ArrayList<Person> personList = new ArrayList<>();
+        if (personNames != null) {
+            boolean hasDuplicates = hasNameDuplicates();
+            if (hasDuplicates) {
+                manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
+                return;
+            }
+            personList = convertToListOfPerson();
         }
 
-        // TODO: Check if string[] names are actual names.
-        ArrayList<Person> personList = convertToListOfPerson();
+        if (groupId != -1) {
+            try {
+                Group group = manager.getProfile().getGroup(groupId);
+                personList = mergeListOfPersons(personList, group.getPersonList());
+            } catch (InvalidDataException dataException) {
+                manager.getUi().printlnMessage(dataException.getMessage());
+                return;
+            }
+        }
 
         boolean isSessionExists = manager.getProfile().hasSessionName(sessionName);
         if (isSessionExists) {
@@ -190,6 +203,6 @@ public class SessionCreateCommand extends Command {
         Session newSession = new Session(sessionName, newSessionId, sessionDate, personList);
         manager.getProfile().addSession(newSession);
         manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + newSession);
-        manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONCREATE_SESSION_ADDED + newSessionId);
+        Manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONCREATE_SESSION_ADDED + newSessionId);
     }
 }
