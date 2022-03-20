@@ -15,6 +15,10 @@ public class GroupViewCommand extends Command {
 
     private int groupId;
 
+    public GroupViewCommand(int groupId) {
+        this.groupId = groupId;
+    }
+
     @Override
     public void run(Manager manager) {
         
