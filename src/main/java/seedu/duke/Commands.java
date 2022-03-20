@@ -88,12 +88,14 @@ public class Commands {
     }
 
     public static void help() {
-        System.out.println("* Add good `add id/ID n/GOOD_NAME q/QUANTITY`\n"
-                + "* Remove good: `remove i/ID q/QUANTITY`\n"
-                + "* List all orders: `list o/`\n"
-                + "* List all goods: `list g/`\n"
-                + "* View order: `view o/ id/ORDER_ID`\n"
-                + "* View good: `view g/ id/GOOD_ID`\n"
+        System.out.println("* Add order `add -o id/ID r/RECEIVER a/SHIPPING_ADDRESS`\n"
+                + "* Add good `add -g oid/ORDER_ID gid/GOOD_ID n/NAME q/QUANTITY d/DESCRIPTION`\n"
+                + "* Remove order: `remove -o i/ID`\n"
+                + "* Remove good: `remove -g i/ID q/QUANTITY`\n"
+                + "* List all orders: `list -o`\n"
+                + "* List all goods: `list -g`\n"
+                + "* View order: `view -o id/ORDER_ID`\n"
+                + "* View good: `view -g id/GOOD_ID`\n"
                 + "* Total quantity of goods: `total`");
     }
 

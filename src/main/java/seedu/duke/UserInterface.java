@@ -28,11 +28,11 @@ public class UserInterface {
                     String regex = "id/(?<id>\\d*)";
                     Regex regexMatch = new Regex(userInput, regex);
                     HashMap<String, String> matches = regexMatch.getGroupValues();
-                    if (flag == "-o") {
+                    if (flag.equals("-o")) {
                         // view order with flag "-o"
                         warehouse.viewOrder(matches.get("id"));
-                    } else if (flag == "-g") {
-                        // view good with flag "g"
+                    } else if (flag.equals("-g")) {
+                        // view good with flag "-g"
                         warehouse.viewGood(matches.get("id"));
                     } else {
                         // wrong command exception
@@ -44,27 +44,27 @@ public class UserInterface {
                     regex = "id/(?<id>\\d*)";
                     regexMatch = new Regex(userInput, regex);
                     matches = regexMatch.getGroupValues();
-                    if (flag == "-o") {
+                    if (flag.equals("-o")) {
                         // list orders with flag "-o"
                         warehouse.listOrders();
-                    } else if (flag == "-g") {
+                    } else if (flag.equals("-g")) {
                         // list goods with flag "-g"
                         warehouse.listGoods();
                     } else {
                         // wrong command exception
-                        throw new WrongCommandException("view", true);
+                        throw new WrongCommandException("list", true);
                     }
                     break;
                 case "add":
                     flag = userInput.split(" ")[1];
 
-                    if (flag == "-o") {
+                    if (flag.equals("-o")) {
                         regex = "id/(?<id>\\d*) r/(?<r>.*) a/(?<address>.*)";
                         regexMatch = new Regex(userInput, regex);
                         matches = regexMatch.getGroupValues();
                         warehouse.addOrder(matches.get("id"), matches.get("r"), matches.get("address"));
 
-                    } else if (flag == "-g") {
+                    } else if (flag.equals("-g")) {
                         regex = "oid/(?<oid>\\d*) gid/(?<gid>\\d*) n/(?<name>.*) q/(?<qty>\\d*)"
                                 + " d/(?<desc>\\.*";
                         regexMatch = new Regex(userInput, regex);
@@ -78,12 +78,12 @@ public class UserInterface {
                 case "remove":
                     flag = userInput.split(" ")[1];
 
-                    if (flag == "-o") {
+                    if (flag.equals("-o")) {
                         regex = "id/(?<id>\\d*)";
                         regexMatch = new Regex(userInput, regex);
                         matches = regexMatch.getGroupValues();
                         warehouse.removeOrder(matches.get("id"));
-                    } else if (flag == "-g") {
+                    } else if (flag.equals("-g")) {
                         regex = "id/(?<id>\\d*) q/(?<qty>\\d*)";
                         regexMatch = new Regex(userInput, regex);
                         matches = regexMatch.getGroupValues();
@@ -116,6 +116,8 @@ public class UserInterface {
             }
         } catch (NullException nullException) {
             //catch null exception here
+        } finally {
+            run();
         }
     }
 }
