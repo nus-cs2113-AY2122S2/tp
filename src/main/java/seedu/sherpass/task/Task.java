@@ -13,14 +13,14 @@ public class Task {
     // The index of the task with respect to being within
     // the ArrayList<Task> tasks in TaskList class
     // To add to constructor
-    private final int PLACEHOLDER_INDEX = 1;
-    protected int index = PLACEHOLDER_INDEX;
+    private final int placeholderIndex = 1;
+    protected int index = placeholderIndex;
 
     // Time period of the task when user blocks out the pocket of time
     // in the timetable. Format has been hardcoded to be XXXX - XXXX,
     // e.g. 1400 - 1500. To add to constructor
-    private final String PLACEHOLDER_TIME = "0900 - 1100";
-    protected String timePeriod = PLACEHOLDER_TIME;
+    private final String placeholderTime = "0900 - 1100";
+    protected String timePeriod = placeholderTime;
 
     /**
      * Creates a constructor for the parent class of tasks, 'Task'.

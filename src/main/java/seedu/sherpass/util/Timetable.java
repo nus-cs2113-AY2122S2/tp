@@ -85,7 +85,7 @@ public class Timetable {
                 printRow("Day", "Time", "Mark Status",
                         "Task Description", "Do on Date",
                         taskLength, doOnDateLength, i, ui);
-            } else if (i == 2){
+            } else if (i == 2) {
                 printRow(day, filteredTasks.get(j).getTimePeriod(), filteredTasks.get(j).getStatusIcon(),
                         filteredTasks.get(j).getIndex() + ". " + filteredTasks.get(j).getDescription(),
                         filteredTasks.get(j).getDoOnDateString(), taskLength, doOnDateLength, i, ui);
@@ -138,7 +138,7 @@ public class Timetable {
     }
 
     private static LocalDate resetDateToMonday(String currentDate, Ui ui) {
-        switch(currentDate) {
+        switch (currentDate) {
         case "Mon":
             return LocalDate.now();
         case "Tue":
@@ -170,7 +170,7 @@ public class Timetable {
      */
     public static void showScheduleOfTheWeek(TaskList taskList, Ui ui) {
         LocalDate currentDate = resetDateToMonday(LocalDate.now().format(dayOnlyFormat), ui);
-        for (int i = 0; i < DAYS_IN_A_WEEK ; i++) {
+        for (int i = 0; i < DAYS_IN_A_WEEK; i++) {
             showScheduleByDay(currentDate, taskList, ui);
             assert (currentDate != null);
             currentDate.plus(1, ChronoUnit.DAYS);

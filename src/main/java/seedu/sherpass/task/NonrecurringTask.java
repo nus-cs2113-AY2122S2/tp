@@ -9,8 +9,8 @@ public class NonrecurringTask extends Task {
      * Accepts only task description
      *
      * @param description Description of task.
-     * @param byDate
-     * @param doOnDate
+     * @param byDate Date by which task is to be completed
+     * @param doOnDate Date user has set to complete the task
      */
     public NonrecurringTask(String description, LocalDate byDate, LocalDate doOnDate) {
         super(description, byDate, doOnDate);
