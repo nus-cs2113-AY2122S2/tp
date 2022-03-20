@@ -322,14 +322,12 @@ public class Parser {
             return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
         }
         
-        String errorMessage = checkIfArgumentsValidForCommand(commandType, remainingArgs);
+        String errorMessage = ParserUtils.checkIfCommandIsValid(commandType, remainingArgs);
         if (!errorMessage.isEmpty()) {
             return new InvalidCommand(errorMessage);
         }
 
         switch (commandType.toLowerCase()) {
-        case "":
-            return new InvalidCommand(Message.ERROR_PARSER_EMPTY_COMMAND);
         case SessionCreateCommand.COMMAND_TEXT:
             return SessionCreateCommand.prepare(remainingArgs);
         case SessionDeleteCommand.COMMAND_TEXT:
