@@ -1,7 +1,9 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.Message;
 
 public class GroupViewCommand extends Command {
 
@@ -17,6 +19,15 @@ public class GroupViewCommand extends Command {
 
     public GroupViewCommand(int groupId) {
         this.groupId = groupId;
+    }
+
+    public static Command prepare(String commandArgs) {
+        try {
+            int groupId = Parser.parseGroupId(commandArgs);
+            return new GroupViewCommand(groupId);
+        } catch (InvalidFormatException e) {
+            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT);
+        }
     }
 
     @Override
