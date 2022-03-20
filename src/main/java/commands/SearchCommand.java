@@ -84,7 +84,6 @@ public class SearchCommand extends Command {
             String className = this.getClass().getSimpleName();
             throw new InvalidCommandException(className, InvalidCommandException.INVALID_ACTION_ERROR_MSG);
         }
-
     }
 
     private void printHeadingMessage(String category) {
@@ -124,16 +123,14 @@ public class SearchCommand extends Command {
         }
     }
 
-    public boolean isMatch(String exercise) {
-        return exercise.contains(userArguments);
+    public boolean isMatch(String record) {
+        return record.contains(userArguments);
     }
 
     public void searchPlan() throws InvalidCommandException {
         var planListToSearch = planList.getPlansDisplayList();
         for (int i = 0; i < planListToSearch.size(); i++) {
             String planToBeCompared = planListToSearch.get(i).toLowerCase();
-            var planHash = planList.getPlanFromKey(planToBeCompared);
-            var workouts = planHash.getWorkoutsInPlanList();
             if (isMatch(planToBeCompared)) {
                 incrementMatchCount();
                 printSearchHeading();
