@@ -81,4 +81,18 @@ public class Ui {
     public void showGoodbyeMessage() {
         System.out.println(GOODBYE_MESSAGE);
     }
+
+    /**
+     * Returns a string of repeated characters.
+     *
+     * @param character The character to print.
+     * @param number The number of times to print that character.
+     * @return Returns a concatenated string of repeated characters.
+     */
+    public String getRepeatedCharacters(String character, int number) {
+        for (int i = 1; i < number; i++) {
+            character += character;
+        }
+        return character;
+    }
 }
