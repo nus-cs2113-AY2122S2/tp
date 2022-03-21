@@ -49,7 +49,7 @@ public class GeneralFunctions {
      * @param itemList The list to search in.
      * @return An ArrayList containing the found items.
      * @throws MindMyMoneyException if fieldToSearch is not in the list, amount is not a number
-     * and if the list of found items is empty.
+     and if the list of found items is empty.
      */
     public static ArrayList<Expenditure> findItemsInList(String searchTerm, String fieldToSearch,
                                                          ExpenditureList itemList) throws MindMyMoneyException {
