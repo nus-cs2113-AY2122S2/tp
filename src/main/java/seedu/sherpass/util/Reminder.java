@@ -3,8 +3,7 @@ package seedu.sherpass.util;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
-import java.time.LocalDate;
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -13,7 +12,7 @@ import static java.util.stream.Collectors.toList;
 public class Reminder {
     private Ui ui;
     private ArrayList<Task> tasks;
-    private LocalDate currentDate = LocalDate.now();
+    private LocalDateTime currentDate = LocalDateTime.now();
 
     /**
      * Create a constructor for the class Reminder.
@@ -61,7 +60,7 @@ public class Reminder {
      * with reference to user local machine date.
      */
     public void showWeeklyTask() {
-        LocalDate nextWeekDate = currentDate.plusDays(7);
+        LocalDateTime nextWeekDate = currentDate.plusDays(7);
 
         ArrayList<Task> filteredThisWeekTasks = (ArrayList<Task>) tasks.stream()
                 .filter((t) -> isBeforeDate(t.getByDate(), nextWeekDate))
@@ -80,17 +79,17 @@ public class Reminder {
         ui.showLine();
     }
 
-    private boolean isEqualDate(LocalDate currentDate, LocalDate compareDate) {
+    private boolean isEqualDate(LocalDateTime currentDate, LocalDateTime compareDate) {
         if (currentDate == null) {
             return false;
         }
-        return currentDate.isEqual(compareDate);
+        return currentDate.toLocalDate().isEqual(compareDate.toLocalDate());
     }
 
-    private boolean isBeforeDate(LocalDate currentDate, LocalDate compareDate) {
+    private boolean isBeforeDate(LocalDateTime currentDate, LocalDateTime compareDate) {
         if (currentDate == null) {
             return false;
         }
-        return currentDate.isBefore(compareDate);
+        return currentDate.toLocalDate().isBefore(compareDate.toLocalDate());
     }
 }

@@ -8,12 +8,12 @@ import seedu.sherpass.task.TaskList;
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class AddCommand extends Command {
     String toAddTaskContent;
-    LocalDate toAddTaskByDate;
-    LocalDate toAddTaskDoOnDate;
+    LocalDateTime toAddTaskByDate;
+    LocalDateTime toAddTaskDoOnDate;
 
     public static final String COMMAND_WORD = "add";
     public static final String MESSAGE_USAGE = "add: Adds a task into the task list.\n"
@@ -36,7 +36,7 @@ public class AddCommand extends Command {
      * @throws InvalidInputException  If task description is empty.
      * @throws InputRepeatedException If task has been added before.
      */
-    public AddCommand(String taskDescription, TaskList taskList, LocalDate byDate, LocalDate doOnDate)
+    public AddCommand(String taskDescription, TaskList taskList, LocalDateTime byDate, LocalDateTime doOnDate)
             throws InvalidInputException, InputRepeatedException {
         if (taskDescription.isBlank()) {
             throw new InvalidInputException();

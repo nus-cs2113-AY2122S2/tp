@@ -5,17 +5,17 @@ import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     int taskIndex;
     String taskDescription;
-    LocalDate byDate;
-    LocalDate doOnDate;
+    LocalDateTime byDate;
+    LocalDateTime doOnDate;
 
-    public EditCommand(int taskNumber, String taskDescription, LocalDate byDate, LocalDate doOnDate) {
+    public EditCommand(int taskNumber, String taskDescription, LocalDateTime byDate, LocalDateTime doOnDate) {
         this.taskIndex = taskNumber - 1;
         this.taskDescription = taskDescription;
         this.byDate = byDate;

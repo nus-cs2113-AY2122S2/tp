@@ -22,7 +22,7 @@ import seedu.sherpass.exception.InvalidTimeException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.parseFormat;
@@ -62,13 +62,13 @@ public class Parser {
             String description = taskData.getString("description");
             String byDateString = taskData.getString("by_date");
             String doOnDateString = taskData.getString("do_date");
-            LocalDate byDate = null;
-            LocalDate doOnDate = null;
+            LocalDateTime byDate = null;
+            LocalDateTime doOnDate = null;
             if (!byDateString.equals("null")) {
-                byDate = LocalDate.parse(byDateString, parseFormat);
+                byDate = LocalDateTime.parse(byDateString, parseFormat);
             }
             if (!doOnDateString.equals("null")) {
-                doOnDate = LocalDate.parse(doOnDateString, parseFormat);
+                doOnDate = LocalDateTime.parse(doOnDateString, parseFormat);
             }
             parsedTask = new Task(description, byDate, doOnDate);
             String status = taskData.getString("status");
@@ -99,7 +99,7 @@ public class Parser {
                 + HELP_MESSAGE_SPECIFIC_COMMAND);
     }
 
-    private static LocalDate confirmInvalidDateFormat() throws InvalidInputException {
+    private static LocalDateTime confirmInvalidDateFormat() throws InvalidInputException {
         Ui anotherUi = new Ui();
         anotherUi.showToUser("It seems that the date and time\nyou gave is not in the correct format.\n"
                 + "Would you like to re-enter a valid date and time? (Y/N)\n"
@@ -127,12 +127,12 @@ public class Parser {
         }
     }
 
-    private static LocalDate prepareTaskDate(String rawTaskDate) throws InvalidInputException {
+    private static LocalDateTime prepareTaskDate(String rawTaskDate) throws InvalidInputException {
         if (rawTaskDate.isBlank()) {
             return null;
         }
         try {
-            return LocalDate.parse(rawTaskDate, parseFormat);
+            return LocalDateTime.parse(rawTaskDate, parseFormat);
         } catch (DateTimeParseException e) {
             return confirmInvalidDateFormat();
         }
@@ -142,8 +142,8 @@ public class Parser {
     // Please add in constants to the magic literals
     private static Command prepareAdd(String[] splitInput, TaskList taskList) {
         String[] filteredTaskContent;
-        LocalDate byDate;
-        LocalDate doOnDate;
+        LocalDateTime byDate;
+        LocalDateTime doOnDate;
         try {
             if (!splitInput[TASK_CONTENT_INDEX].contains("/by")
                     && !splitInput[TASK_CONTENT_INDEX].contains("/do_on")) {
@@ -214,8 +214,8 @@ public class Parser {
 
         String[] splitEditInfo = fullEditInfo.split(" ");
         String descriptionToEdit;
-        LocalDate parsedByDateToEdit;
-        LocalDate parsedDoOnDateToEdit;
+        LocalDateTime parsedByDateToEdit;
+        LocalDateTime parsedDoOnDateToEdit;
 
         if (!splitEditInfo[0].trim().equals("/by") && !(splitEditInfo[0].trim().equals("/do_on"))) {
             descriptionToEdit = splitEditInfo[0];
@@ -229,7 +229,7 @@ public class Parser {
         return new EditCommand(taskNumberToEdit, descriptionToEdit, parsedByDateToEdit, parsedDoOnDateToEdit);
     }
 
-    private static LocalDate getParsedDateToEdit(String fullEditInfo, String keyword) throws InvalidInputException {
+    private static LocalDateTime getParsedDateToEdit(String fullEditInfo, String keyword) throws InvalidInputException {
 
         if (fullEditInfo.contains(keyword)) {
 

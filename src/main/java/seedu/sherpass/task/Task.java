@@ -1,15 +1,18 @@
 package seedu.sherpass.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-import static seedu.sherpass.constant.DateAndTimeFormat.outputFormat;
+import static seedu.sherpass.constant.DateAndTimeFormat.outputWithTimeFormat;
+import static seedu.sherpass.constant.DateAndTimeFormat.outputWithoutTimeFormat;
 
 public class Task {
 
     protected String description;
     protected boolean isDone;
-    protected LocalDate byDate;
-    protected LocalDate doOnDate;
+    protected boolean hasByTime;
+    protected boolean hasDoOnTime;
+    protected LocalDateTime byDate;
+    protected LocalDateTime doOnDate;
 
     /**
      * Creates a constructor for the parent class of tasks, 'Task'.
@@ -17,11 +20,13 @@ public class Task {
      *
      * @param description Description of task.
      */
-    public Task(String description, LocalDate byDate, LocalDate doOnDate) {
+    public Task(String description, LocalDateTime byDate, LocalDateTime doOnDate, boolean hasByTime, boolean hasDoOnTime) {
         this.description = description;
         this.isDone = false;
         this.byDate = byDate;
         this.doOnDate = doOnDate;
+        this.hasByTime = hasByTime;
+        this.hasDoOnTime = hasDoOnTime;
     }
 
     /**
@@ -75,20 +80,30 @@ public class Task {
      *
      * @return White space.
      */
-    public LocalDate getByDate() {
+    public LocalDateTime getByDate() {
         return byDate;
     }
 
-    public LocalDate getDoOnDate() {
+    public LocalDateTime getDoOnDate() {
         return doOnDate;
     }
 
     public String getByDateString() {
-        return byDate.format(outputFormat);
+        if (byDate == null) {
+            return "";
+        } else if (hasByTime) {
+            return byDate.format(outputWithTimeFormat);
+        }
+        return byDate.format(outputWithoutTimeFormat);
     }
 
     public String getDoOnDateString() {
-        return doOnDate.format(outputFormat);
+        if (doOnDate == null) {
+            return "";
+        } else if (hasDoOnTime) {
+            return doOnDate.format(outputWithTimeFormat);
+        }
+        return doOnDate.format(outputWithoutTimeFormat);
     }
 
     /**
@@ -114,11 +129,11 @@ public class Task {
         this.description = taskDescription;
     }
 
-    public void setByDate(LocalDate byDate) {
+    public void setByDate(LocalDateTime byDate) {
         this.byDate = byDate;
     }
 
-    public void setDoOnDate(LocalDate doOnDate) {
+    public void setDoOnDate(LocalDateTime doOnDate) {
         this.doOnDate = doOnDate;
     }
 }
