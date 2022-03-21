@@ -19,12 +19,12 @@ public class InvalidDataExceptionTest {
     }
 
     @Test
-    public void getMessage_withMessage_returnsMessage() {
+    public void getMessage_withMessageOnly_returnsMessage() {
         assertEquals("message", invalidDataExceptionWithMessage.getMessage());
     }
 
     @Test
-    public void getCause_withMessage_doesNotReturnCause() {
+    public void getCause_withMessageOnly_doesNotReturnCause() {
         Object cause = invalidDataExceptionWithMessage.getCause();
         assertNull(cause);
     }
