@@ -8,12 +8,14 @@ import seedu.sherpass.task.Task;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StorageTest {
+    private static final DateTimeFormatter parseWithTimeFormat = DateTimeFormatter.ofPattern("d/M/yyyy HH:mm");
 
     @Test
     public void writeSaveData_oneTask_expectFileCreated() {
@@ -24,7 +26,8 @@ class StorageTest {
         try {
             Storage storage = new Storage("data/test.json");
             TaskList tasks = new TaskList();
-            tasks.addTask("task_one", LocalDate.parse("2022-12-12"), null);
+            tasks.addTask("task_one", LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat),
+                    null);
             storage.writeSaveData(tasks);
         } catch (IOException exception) {
             exception.printStackTrace();
@@ -40,7 +43,7 @@ class StorageTest {
             TaskList actualList = new TaskList(storage.load());
             Task task = actualList.getTasks().get(0);
             assertEquals(task.getDescription(), "task_one");
-            assertEquals(task.getByDate(), LocalDate.parse("2022-12-12"));
+            assertEquals(task.getByDate(), LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat));
             assertEquals(task.getDoOnDate(), null);
             assertEquals(task.getStatusIcon(), " ");
         } catch (InvalidInputException | IOException | JSONException exception) {
