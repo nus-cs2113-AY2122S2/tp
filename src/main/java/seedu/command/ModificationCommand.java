@@ -2,6 +2,9 @@ package seedu.command;
 
 import java.util.ArrayList;
 
+/**
+ * Abstract class acting as parent class to AddCommand and UpdateCommand which have use for the same prepareModification method.
+ */
 public abstract class ModificationCommand extends Command {
     protected final ArrayList<String> commandStrings;
     protected String serialNumber;

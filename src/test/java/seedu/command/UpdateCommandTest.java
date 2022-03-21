@@ -67,7 +67,7 @@ class UpdateCommandTest {
     }
 
     @Test
-    void prepareUpdate_missingSlashDelimiter_assertionErrorThrown() throws AssertionError {
+    void prepareModification_missingSlashDelimiter_assertionErrorThrown() throws AssertionError {
         ArrayList<String> testArrayList = new ArrayList<>(Collections.singleton("thiswillnotwork"));
         try {
             updateCommand = new UpdateCommand(testArrayList);
@@ -77,16 +77,16 @@ class UpdateCommandTest {
     }
 
     @Test
-    void prepareUpdate_missingSerialNumber_exceptionThrown() throws IncompleteCommandException {
+    void prepareModification_missingSerialNumber_exceptionThrown() throws IncompleteCommandException {
         ArrayList<String> testArrayList = new ArrayList<>(Arrays.asList(
-                "n/Speaker B", "t/Speaker", "c/1000", "pf/Loud Technologies", "pd/2022-02-23"));
+                "n/Speaker B", "t/SPEAKER", "c/1000", "pf/Loud Technologies", "pd/2022-02-23"));
         updateCommand = new UpdateCommand(testArrayList);
         CommandResult expectedResult = new CommandResult("Serial Number is required to run this command");
         assertEquals(expectedResult, updateCommand.execute());
     }
 
     @Test
-    void prepareUpdate_mostRecentArgValueUsed_success() throws IncompleteCommandException {
+    void prepareModification_mostRecentArgValueUsed_success() throws IncompleteCommandException {
         ArrayList<String> testArrayList = new ArrayList<>(Arrays.asList(
                 "s/S1404115ASF", "n/Speaker B", "n/Speaker A"));
         UpdateCommand expectedCommand = new UpdateCommand(new ArrayList<>(

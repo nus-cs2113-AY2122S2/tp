@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AddCommandTest {
     AddCommand addCommand;
     ArrayList<String> userInput = new ArrayList<>(
-            Arrays.asList("Speaker B", "S1404115ASF", "SPEAKER", "1000", "Loud Technologies", "2022-02-23")
+            Arrays.asList("n/Speaker B", "s/S1404115ASF", "t/SPEAKER", "c/1000", "pf/Loud Technologies", "pd/2022-02-23")
     );
 
     @Test
@@ -40,7 +40,7 @@ class AddCommandTest {
     @Test
     void execute_incorrectCostFormat_exceptionThrown() {
         addCommand = new AddCommand(new ArrayList<>(
-                Arrays.asList("Speaker B", "S1404115ASF", "SPEAKER", "$1000", "Loud Technologies", "2022-02-23")
+                Arrays.asList("n/Speaker B", "s/S1404115ASF", "t/SPEAKER", "c/$1000", "pf/Loud Technologies", "pd/2022-02-23")
         ));
 
         CommandResult expectedResult = new CommandResult("Please enter numbers only for cost and omit symbols");
@@ -51,7 +51,7 @@ class AddCommandTest {
     @Test
     void execute_incorrectEnumType_exceptionThrown() {
         addCommand = new AddCommand(new ArrayList<>(
-                Arrays.asList("Speaker B", "S1404115ASF", "SPEAKERS", "1000", "Loud Technologies", "2022-02-23")
+                Arrays.asList("n/Speaker B", "s/S1404115ASF", "t/SPEAKERS", "c/1000", "pf/Loud Technologies", "pd/2022-02-23")
         ));
         addCommand.setEquipmentManager(new EquipmentManager());
         EquipmentManager equipmentManager = addCommand.equipmentManager;
@@ -79,5 +79,23 @@ class AddCommandTest {
 
         assertEquals(equipmentListOriginalSize + 1, equipmentManager.getEquipmentList().size());
         assertEquals(expectedEquipment, actualEquipment);
+    }
+
+    @Test
+    void checkAttributes_allAttributesSet_true() {
+        addCommand = new AddCommand(userInput);
+        boolean actualResult = addCommand.checkAttributes();
+
+        assertEquals(true, actualResult);
+    }
+
+    @Test
+    void checkAttributes_oneOrMoreNulls_false() {
+        addCommand = new AddCommand(new ArrayList<>(
+                Arrays.asList("n/Speaker B", "s/S1404115ASF", "t/SPEAKER", "pf/Loud Technologies")
+        ));
+        boolean actualResult = addCommand.checkAttributes();
+
+        assertEquals(false, actualResult);
     }
 }
