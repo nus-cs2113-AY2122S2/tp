@@ -2,6 +2,7 @@ package seedu.duke.controllers;
 
 import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.manager.OrderManager;
+import seedu.duke.entities.Order;
 
 public class OrderController extends Controller {
     private static final String[] CHOICES = {"Exit", "Display Menu",
@@ -38,7 +39,7 @@ public class OrderController extends Controller {
             getAllOrderPrice();
             break;
         case 6:
-            printReceipt();
+            printOrder();
             break;
         default:
             assert false: "Unknown choice!";
@@ -71,9 +72,9 @@ public class OrderController extends Controller {
         System.out.printf("Total value of all orders: %f. \n", orderManager.getAllOrderValue());
     }
 
-    private void printReceipt() {
-        System.out.println("These are all your orders receipts. \n");
-        orderManager.printReceipt();
+    private void printOrder() {
+        System.out.println("These is your order. \n");
+        Order.printOrder();
     }
 
     @Override
