@@ -25,7 +25,6 @@ public class SearchCommandTest {
         ExerciseList el = new ExerciseList();
         SearchCommand commandTest = new SearchCommand(userInput, ui, el, userAction, userArguments);
 
-
         assertEquals("search /exercise up", commandTest.getUserInput());
         assertEquals("/exercise", commandTest.getUserAction());
         assertEquals("up", commandTest.getUserArguments());
@@ -40,7 +39,6 @@ public class SearchCommandTest {
         UI ui = new UI();
         ExerciseList el = new ExerciseList();
         SearchCommand commandTest = new SearchCommand(userInput, ui, el, userAction, userArguments);
-
 
         assertEquals("search /plan gg", commandTest.getUserInput());
         assertEquals("/plan", commandTest.getUserAction());
