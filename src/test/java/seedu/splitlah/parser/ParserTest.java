@@ -1044,8 +1044,42 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Service charge delimiter and an integer representing the
-     * service charge is provided by the user but the integer is not within the valid range of [0, 100].
+     * Checks if an exception is properly thrown when the Service charge delimiter and positive numeric value are
+     * provided as arguments, but the parsed double has more than three digits before decimal point.
+     */
+    @Test
+    void parseServiceCharge_delimiterExistsArgumentDoubleWithMoreThanThreeDigitsBeforeDecimalPoint_exceptionThrown() {
+        String argumentWithDoubleArgumentMoreThan3DigitsBeforeDP =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 1000";
+        try {
+            double output = Parser.parseServiceCharge(argumentWithDoubleArgumentMoreThan3DigitsBeforeDP);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_PERCENTAGE_MORE_THAN_THREE_DIGITS_BEFORE_DP;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Service charge delimiter and positive numeric value are
+     * provided as arguments, but the parsed double has more than two decimal places.
+     */
+    @Test
+    void parseServiceCharge_delimiterExistsArgumentDoubleWithMoreThanTwoDecimalPlaces_exceptionThrown() {
+        String argumentWithDoubleArgumentMoreThan2DP =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 10.123";
+        try {
+            double output = Parser.parseServiceCharge(argumentWithDoubleArgumentMoreThan2DP);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_PERCENTAGE_NOT_TWO_DP;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the Service charge delimiter and a double representing the
+     * percentage service charge is provided by the user but the double is not within the valid range of [0, 100].
      */
     @Test
     void parseServiceCharge_delimiterExistsArgumentDoubleButNotInRange_exceptionThrown() {
