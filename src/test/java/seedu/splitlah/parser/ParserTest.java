@@ -993,7 +993,7 @@ class ParserTest {
 
     // parseServiceCharge()
     /**
-     * Checks if an integer representing a service charge percent value of 0 is properly returned 
+     * Checks if a double representing a service charge percent value of 0 is properly returned 
      * when the Service charge delimiter is not provided by the user.
      */
     @Test
@@ -1001,7 +1001,7 @@ class ParserTest {
         String argumentWithoutServiceChargeDelimiter =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         try {
-            int output = Parser.parseServiceCharge(argumentWithoutServiceChargeDelimiter);
+            double output = Parser.parseServiceCharge(argumentWithoutServiceChargeDelimiter);
             assertEquals(0, output);
         } catch (InvalidFormatException exception) {
             fail();
@@ -1017,7 +1017,7 @@ class ParserTest {
         String argumentWithoutServiceChargeArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc ";
         try {
-            int output = Parser.parseServiceCharge(argumentWithoutServiceChargeArgument);
+            double output = Parser.parseServiceCharge(argumentWithoutServiceChargeArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.SERVICE_CHARGE_DELIMITER;
@@ -1027,17 +1027,18 @@ class ParserTest {
 
     /**
      * Checks if an exception is properly thrown when the Service charge delimiter is provided by the user but the 
-     * argument following the Service charge delimiter cannot be parsed as an integer.
+     * argument following the Service charge delimiter cannot be parsed as a double.
      */
     @Test
-    void parseServiceCharge_delimiterExistsArgumentNotInteger_exceptionThrown() {
-        String argumentWithNonIntegerArgument =
+    void parseServiceCharge_delimiterExistsArgumentNotDouble_exceptionThrown() {
+        String argumentWithNonDoubleArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc apple";
         try {
-            int output = Parser.parseServiceCharge(argumentWithNonIntegerArgument);
+            double output = Parser.parseServiceCharge(argumentWithNonDoubleArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + ParserUtils.SERVICE_CHARGE_DELIMITER;
+            String errorMessage =
+                    Message.ERROR_PARSER_NON_PERCENTAGE_ARGUMENT + ParserUtils.SERVICE_CHARGE_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -1047,23 +1048,34 @@ class ParserTest {
      * service charge is provided by the user but the integer is not within the valid range of [0, 100].
      */
     @Test
-    void parseServiceCharge_delimiterExistsArgumentIntegerButNotInRange_exceptionThrown() {
+    void parseServiceCharge_delimiterExistsArgumentDoubleButNotInRange_exceptionThrown() {
         // Test values less than 0, negative values
-        String argumentWithIntegerArgumentUnderRange =
+        String argumentWithDoubleArgumentUnderRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc -1";
         try {
-            int output = Parser.parseServiceCharge(argumentWithIntegerArgumentUnderRange);
+            double output = Parser.parseServiceCharge(argumentWithDoubleArgumentUnderRange);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_PERCENTAGE_NEGATIVE;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+
+        // Test values greater than 100
+        String argumentWithDoubleArgumentAboveRange =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 101";
+        try {
+            double output = Parser.parseServiceCharge(argumentWithDoubleArgumentAboveRange);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + ParserUtils.SERVICE_CHARGE_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
 
-        // Test values greater than 100
-        String argumentWithIntegerArgumentAboveRange =
-                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 101";
+        // Test double values near 100
+        String argumentWithDoubleArgumentNearRange =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 100.01";
         try {
-            int output = Parser.parseServiceCharge(argumentWithIntegerArgumentAboveRange);
+            double output = Parser.parseServiceCharge(argumentWithDoubleArgumentNearRange);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + ParserUtils.SERVICE_CHARGE_DELIMITER;
@@ -1072,17 +1084,38 @@ class ParserTest {
     }
 
     /**
-     * Checks if an integer representing a service charge percent value is properly returned when the 
-     * Service charge delimiter and an argument with an integer value within the valid range of [0, 100]
+     * Checks if a double representing a service charge percent value is properly returned when the 
+     * Service charge delimiter and an argument with a double value within the valid range of [0, 100]
      * is provided by the user.
      */
     @Test
-    void parseServiceCharge_delimiterExistsArgumentIntegerWithinRange_serviceChargePercentage() {
-        String argumentWithIntegerArgumentInRange =
+    void parseServiceCharge_delimiterExistsArgumentDoubleWithinRange_serviceChargePercentage() {
+        // Test regular values
+        String argumentWithDoubleArgumentInRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 10";
         try {
-            int output = Parser.parseServiceCharge(argumentWithIntegerArgumentInRange);
+            double output = Parser.parseServiceCharge(argumentWithDoubleArgumentInRange);
             assertEquals(10, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+
+        // Test minimum allowed value
+        String argumentWithMinPercentageArgument =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 0";
+        try {
+            double output = Parser.parseServiceCharge(argumentWithMinPercentageArgument);
+            assertEquals(Parser.MINIMUM_SURCHARGE_PERCENT, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+
+        // Test maximum allowed value
+        String argumentWithMaxPercentageArgument =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 100";
+        try {
+            double output = Parser.parseServiceCharge(argumentWithMaxPercentageArgument);
+            assertEquals(Parser.MAXIMUM_SURCHARGE_PERCENT, output);
         } catch (InvalidFormatException exception) {
             fail();
         }
