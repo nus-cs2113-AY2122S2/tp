@@ -1,6 +1,5 @@
 package seedu.command;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.Pair;
@@ -8,7 +7,6 @@ import seedu.equipment.DuplicateSerialNumber;
 import seedu.equipment.EquipmentManager;
 import seedu.equipment.EquipmentType;
 import seedu.parser.IncompleteCommandException;
-import seedu.parser.Parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -95,7 +93,7 @@ class UpdateCommandTest {
                 Arrays.asList("s/S1404115ASF", "n/Speaker A")
         ));
         UpdateCommand actualCommand = new UpdateCommand(testArrayList);
-        actualCommand.prepareUpdate();
+        actualCommand.prepareModification();
         assertEquals(expectedCommand, actualCommand);
     }
 }
