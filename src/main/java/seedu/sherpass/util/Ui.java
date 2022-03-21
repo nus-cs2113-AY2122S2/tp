@@ -90,9 +90,10 @@ public class Ui {
      * @return Returns a concatenated string of repeated characters.
      */
     public String getRepeatedCharacters(String character, int number) {
-        for (int i = 1; i < number; i++) {
-            character += character;
+        String output = "";
+        for (int i = 0; i < number; i++) {
+            output += character;
         }
-        return character;
+        return output;
     }
 }
