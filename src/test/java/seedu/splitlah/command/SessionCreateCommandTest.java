@@ -42,11 +42,16 @@ class SessionCreateCommandTest {
         String argsMissingDateDelimiter = "session /create /n Class gathering /pl Alice Bob";
         Command sessionWithMissingDateDelimiter = Parser.getCommand(argsMissingDateDelimiter);
         assertEquals(InvalidCommand.class, sessionWithMissingDateDelimiter.getClass());
+    }
 
-        // Case 3: Missing /pl delimiter.
-        String argsMissingPersonListDelimiter = "session /create /n Class gathering /d 15-02-2022";
-        Command sessionWithMissingPersonListDelimiter = Parser.getCommand(argsMissingPersonListDelimiter);
-        assertEquals(InvalidCommand.class, sessionWithMissingPersonListDelimiter.getClass());
+    /**
+     * Checks if session is created when Person List and Group unique identifier delimiters are missing.
+     */
+    @Test
+    public void prepare_hasMissingPersonListAndGidDelimiter_InvalidCommand() {
+        String argsMissingPersonListAndGidDelimiters = "session /create /n Class gathering /d 15-02-2022";
+        Command sessionWithMissingPersonListAndGidDelimiter = Parser.getCommand(argsMissingPersonListAndGidDelimiters);
+        assertEquals(InvalidCommand.class,sessionWithMissingPersonListAndGidDelimiter.getClass());
     }
 
     /**
