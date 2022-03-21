@@ -33,13 +33,7 @@ public class EditCommand extends Command {
         if (doOnDate != null) {
             taskList.getTasks().get(taskIndex).setDoOnDate(doOnDate);
         }
-        printEditTaskMessage(taskList, taskIndex);
+        ui.printEditTaskMessage(taskList.getTasks().get(taskIndex).toString());
         storage.writeSaveData(taskList);
     }
-
-    private void printEditTaskMessage(TaskList taskList, int taskIndex) {
-        System.out.println("Ok, I've edited this task as such!"
-                + "\n  " + taskList.getTasks().get(taskIndex));
-    }
-
 }
