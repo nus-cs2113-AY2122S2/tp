@@ -91,7 +91,7 @@ public class DayList {
             info += String.format("%12s %3s %35s", covertDayNumberToDay(i), "|", schedulePrintList[i - 1]) + "\n";
         }
 
-        System.out.println(" \n                         WORKOUT SCHEDULE\n"
+        System.out.println("\n                         WORKOUT SCHEDULE\n"
                 + "----------------------------------------------------------------------\n"
                 + header + "\n" +  "----------------------------------------------------------------------\n"
                 + info
