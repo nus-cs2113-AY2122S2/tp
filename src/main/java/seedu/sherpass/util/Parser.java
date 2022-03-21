@@ -150,7 +150,7 @@ public class Parser {
      * @param argument The full argument given by the user
      * @return The value given by the user for a particular parameter
      */
-    private static String parseArgument(String parameter, String argument) {
+    public static String parseArgument(String parameter, String argument) {
         if (!argument.contains(parameter)) {
             return "";
         }
@@ -168,7 +168,7 @@ public class Parser {
         return result.toString().trim();
     }
 
-    private static String parseDescription(String fullArgument) {
+    public static String parseDescription(String fullArgument) {
         if (fullArgument.contains("/")) {
             if (fullArgument.indexOf("/") > 0) {
                 return fullArgument.substring(0, fullArgument.indexOf('/') - 1);
