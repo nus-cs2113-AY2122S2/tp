@@ -87,11 +87,11 @@ class SessionCreateCommandTest {
     }
 
     /**
-     * Checks if session is created successfully and session unique identifier tracker
-     * in Profile object is incremented.
+     * Checks if session is created successfully with Person List delimiter
+     * and session unique identifier tracker in Profile object is incremented.
      */
     @Test
-    public void run_validCommand_sessionIdIncremented() {
+    public void run_validCommandWithPersonListDelimiter_sessionIdIncremented() {
         String userInput = "session /create /n Class gathering /d 15-02-2022 /pl Alice Bob";
         Command command = Parser.getCommand(userInput);
         int currentSessionId = manager.getProfile().getSessionIdTracker();
