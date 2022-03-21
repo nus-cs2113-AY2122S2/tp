@@ -1,9 +1,7 @@
 package commands;
 
 import data.exercises.ExerciseList;
-import data.plans.Plan;
 import data.plans.PlanList;
-import data.workouts.WorkoutList;
 import storage.LogHandler;
 import werkit.UI;
 import textcolors.TextColor;
