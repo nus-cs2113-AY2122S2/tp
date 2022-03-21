@@ -98,8 +98,8 @@ public class Timetable {
             }
 
             if (i >= 2) {
-                colTwo = (colTwo.equals(filteredTasks.get(j).getTimePeriod())) ?
-                        BLANK_TIME_PERIOD : filteredTasks.get(j).getTimePeriod();
+                colTwo = (colTwo.equals(filteredTasks.get(j).getTimePeriod()))
+                        ? BLANK_TIME_PERIOD : filteredTasks.get(j).getTimePeriod();
                 colThree = filteredTasks.get(j).getStatusIcon();
                 colFour = (filteredTasks.get(j).getIndex() + "." + filteredTasks.get(j).getDescription());
                 colFive = filteredTasks.get(j).getDoOnDateString();
