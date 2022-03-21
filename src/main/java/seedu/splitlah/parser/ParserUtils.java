@@ -7,6 +7,7 @@ import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.ExitCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
+import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.command.HelpCommand;
 import seedu.splitlah.command.InvalidCommand;
@@ -432,6 +433,8 @@ public class ParserUtils {
         case GroupCreateCommand.COMMAND_TEXT:
             // Fallthrough
         case GroupDeleteCommand.COMMAND_TEXT:
+            // Fallthrough
+        case GroupListCommand.COMMAND_TEXT:
             // Fallthrough
         case GroupViewCommand.COMMAND_TEXT:
             // Fallthrough

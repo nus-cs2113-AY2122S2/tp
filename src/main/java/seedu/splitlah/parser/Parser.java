@@ -14,6 +14,7 @@ import seedu.splitlah.command.ExitCommand;
 import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
+import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.ui.Message;
@@ -350,6 +351,8 @@ public class Parser {
             return GroupCreateCommand.prepare(remainingArgs);
         case GroupDeleteCommand.COMMAND_TEXT:
             return GroupDeleteCommand.prepare(remainingArgs);
+        case GroupListCommand.COMMAND_TEXT:
+            return new GroupListCommand();
         case GroupViewCommand.COMMAND_TEXT:
             return GroupViewCommand.prepare(remainingArgs);
         case HelpCommand.COMMAND_TEXT:
