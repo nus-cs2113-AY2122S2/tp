@@ -118,8 +118,8 @@ Example of usage:
 1. Adds a new session named Class Outing with Alice and Bob involved on 15-03-2022.
    - `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob` <br>
    ![Session create command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[1].png)
-2. A [group](#creating-a-group-group-create) was previously created named *Friends* with Charlie and Mike. <br>
-   Adds a new session named Class Gathering with a group *Friends*, with addition an of Alice on 16-04-2022. 
+2. A [group](#creating-a-group-group-create) was previously created with group named *Friends* with Charlie and Mike. <br>
+   Adds a new session named Class Gathering consisting of a group named *Friends* and Alice, on 16-04-2022.
    - `session /create /n Glass Gathering /d 16-04-2022 /gid 1 /pl Alice` <br>
    ![Session create command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[2].png)
 <br>
