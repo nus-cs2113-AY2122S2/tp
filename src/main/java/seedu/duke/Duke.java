@@ -2,7 +2,7 @@ package seedu.duke;
 
 import seedu.command.Command;
 import seedu.command.CommandResult;
-import seedu.equipment.DuplicateSerialNumber;
+import seedu.equipment.DuplicateSerialNumberException;
 import seedu.equipment.EquipmentManager;
 import seedu.parser.Parser;
 import seedu.storage.Storage;
@@ -27,11 +27,7 @@ public class Duke {
                 "          |_|       |_|                                                         |___/";
         System.out.println("Hello from\n" + logo);
         Duke duke = new Duke();
-        try {
-            storage.loadData(equipmentInventory);
-        } catch (DuplicateSerialNumber e) {
-            // Do ?
-        }
+        storage.loadData(equipmentInventory);
         System.out.println("What do you want to do?");
         duke.runCommandLoop();
         storage.saveData(equipmentInventory);

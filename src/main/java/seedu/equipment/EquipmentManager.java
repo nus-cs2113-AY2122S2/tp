@@ -9,20 +9,21 @@ public class EquipmentManager {
     private final HashMap<String, Equipment> equipmentList = new HashMap<>();
 
     public void addEquipment(String itemName, String serialNumber, EquipmentType type, double cost,
-                             String purchasedFrom, String purchasedDate) throws DuplicateSerialNumber {
+                             String purchasedFrom, String purchasedDate) throws DuplicateSerialNumberException {
         if (!equipmentList.containsKey(serialNumber)) {
             Equipment equipment = new Equipment(itemName, serialNumber, type, cost, purchasedFrom, purchasedDate);
-            equipmentList.putIfAbsent(serialNumber, equipment);
+            equipmentList.put(serialNumber, equipment);
         } else if (equipmentList.containsKey(serialNumber)) {
-            throw new DuplicateSerialNumber();
+            throw new DuplicateSerialNumberException();
         }
     }
 
-    public void addEquipment(Equipment equipment) throws DuplicateSerialNumber {
-        if (!equipmentList.containsKey(equipment.getSerialNumber())) {
+    public void addEquipment(Equipment equipment) throws DuplicateSerialNumberException {
+        String serialNumber = equipment.getSerialNumber();
+        if (!equipmentList.containsKey(serialNumber)) {
             equipmentList.putIfAbsent(equipment.getSerialNumber(), equipment);
-        } else if (equipmentList.containsKey(equipment.getSerialNumber())) {
-            throw new DuplicateSerialNumber();
+        } else {
+            throw new DuplicateSerialNumberException();
         }
     }
 

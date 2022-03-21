@@ -2,11 +2,12 @@ package seedu.storage;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import seedu.equipment.DuplicateSerialNumber;
+import seedu.equipment.DuplicateSerialNumberException;
 import seedu.equipment.Equipment;
 import seedu.equipment.EquipmentManager;
-
-import java.io.*;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -14,10 +15,13 @@ import java.util.List;
 
 
 public class Storage {
+    public final String FILE_NOT_FOUND_ERROR_MESSAGE = "File not found! A new file will be created after this session.";
+    public final String SAVE_ERROR_MESSAGE = "An error occurred while saving!";
+    public final String DUPLICATE_SERIAL_NUMBER_ERROR = "Duplicate serial number found!";
     public final String path = "./equipments.json";
     private final Gson gson = new Gson();
 
-    public void loadData(EquipmentManager equipmentManager) throws DuplicateSerialNumber {
+    public void loadData(EquipmentManager equipmentManager) {
         try {
             Reader reader = Files.newBufferedReader(Path.of(path));
             List<Equipment> equipments = gson.fromJson(reader, new TypeToken<List<Equipment>>() {}.getType());
@@ -25,7 +29,9 @@ public class Storage {
                 equipmentManager.addEquipment(equipment);
             }
         } catch (IOException e) {
-            System.out.println("File not found! Creating new file...");
+            System.out.println(FILE_NOT_FOUND_ERROR_MESSAGE);
+        } catch (DuplicateSerialNumberException e) {
+            System.out.println(DUPLICATE_SERIAL_NUMBER_ERROR);
         }
     }
 
@@ -36,7 +42,7 @@ public class Storage {
             gson.toJson(equipments, writer);
             writer.close();
         } catch (IOException e) {
-            // Do ?
+            System.out.println(SAVE_ERROR_MESSAGE);
         }
     }
 }

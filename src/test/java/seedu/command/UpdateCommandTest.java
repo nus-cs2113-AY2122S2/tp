@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.Pair;
-import seedu.equipment.DuplicateSerialNumber;
+import seedu.equipment.DuplicateSerialNumberException;
 import seedu.equipment.EquipmentManager;
 import seedu.equipment.EquipmentType;
 import seedu.parser.IncompleteCommandException;
@@ -29,7 +29,7 @@ class UpdateCommandTest {
                     1000,
                     "Loud Technologies",
                     "2022-02-23");
-        } catch (DuplicateSerialNumber e) {
+        } catch (DuplicateSerialNumberException e) {
             fail();
         }
 
