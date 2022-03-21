@@ -31,7 +31,7 @@ public class SessionDeleteCommand extends Command {
     private int sessionId;
 
     /**
-     * Initializes a SessionDeleteCommand.
+     * Initializes a SessionDeleteCommand object.
      *
      * @param sessionId An integer that uniquely identifies a session.
      */

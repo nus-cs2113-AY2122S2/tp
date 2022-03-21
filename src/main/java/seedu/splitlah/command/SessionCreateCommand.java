@@ -11,8 +11,6 @@ import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -44,7 +42,7 @@ public class SessionCreateCommand extends Command {
     private int groupId;
 
     /**
-     * Initializes a SessionCreateCommand.
+     * Initializes a SessionCreateCommand object.
      *
      * @param sessionName A String object that represents the session name.
      * @param personNames A String object array that represents the involved persons for the session.
@@ -60,24 +58,6 @@ public class SessionCreateCommand extends Command {
         this.personNames = personNames;
         this.sessionDate = date;
         this.groupId = groupId;
-    }
-
-    /**
-     * Checks if String array object of names has duplicated names.
-     *
-     * @return true if it contains duplicates, false otherwise.
-     */
-    private boolean hasNameDuplicates() {
-        Set<String> nameSet = new HashSet<>();
-        for (String name : personNames) {
-            String nameToBeAdded = name.toLowerCase();
-            if (!nameSet.add(nameToBeAdded)) {
-                return true;
-            }
-        }
-        assert nameSet.size() == personNames.length :
-                Message.ASSERT_SESSIONCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED;
-        return false;
     }
 
     /**
@@ -134,7 +114,7 @@ public class SessionCreateCommand extends Command {
     }
 
     /**
-     * Runs the command to create a Session object to be stored in the list of sessions managed by the Profile Object.
+     * Runs the command to create a Session object to be stored in the list of sessions managed by the Profile object.
      * Checks if array of names has duplicates and if session name exists.
      * If check fails, no session is created and prints error message.
      * Else a session is created and prints success message.
@@ -145,7 +125,7 @@ public class SessionCreateCommand extends Command {
     public void run(Manager manager) {
         PersonList personList = new PersonList();
         if (personNames != null) {
-            boolean hasDuplicates = hasNameDuplicates();
+            boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
             if (hasDuplicates) {
                 manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
                 return;
