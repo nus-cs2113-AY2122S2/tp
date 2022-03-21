@@ -305,8 +305,8 @@ public class ActivityCreateCommand extends Command {
      * @return A double representing the extra charges.
      */
     private double getExtraCharges() {
-        double gstMultiplier = 1 + (double) gst / 100;
-        double serviceChargeMultiplier = 1 + (double) serviceCharge / 100;
+        double gstMultiplier = 1 + gst / 100;
+        double serviceChargeMultiplier = 1 + serviceCharge / 100;
         return gstMultiplier * serviceChargeMultiplier;
     }
 
