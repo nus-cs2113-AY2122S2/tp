@@ -26,7 +26,8 @@ public class GeneralFunctions {
      *
      * @return String array of user input.
      */
-    public static String parseInputWithCommandFlag(String input, String startingFlag, String endingFlag) throws MindMyMoneyException {
+    public static String parseInputWithCommandFlag(String input, String startingFlag, String endingFlag)
+            throws MindMyMoneyException {
         if (!(input.contains(startingFlag) && input.contains(endingFlag))) {
             throw new MindMyMoneyException("You are missing a flag!");
         }

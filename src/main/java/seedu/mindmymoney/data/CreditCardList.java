@@ -5,7 +5,7 @@ import seedu.mindmymoney.userfinancial.CreditCard;
 import java.util.ArrayList;
 
 /**
- * Container for Credit Cards
+ * Container for Credit Cards.
  */
 public class CreditCardList {
     public ArrayList<CreditCard> creditCardListArray;
@@ -21,7 +21,7 @@ public class CreditCardList {
     /**
      * Checks if the list is empty.
      *
-     * @return true if list is empty, false otherwise
+     * @return true if list is empty, false otherwise.
      */
     public boolean isEmpty() {
         return creditCardListArray.isEmpty();

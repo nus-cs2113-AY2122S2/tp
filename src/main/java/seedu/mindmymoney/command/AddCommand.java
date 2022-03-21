@@ -50,23 +50,16 @@ public class AddCommand extends Command {
      * @throws MindMyMoneyException when inputs are invalid or flags are missing.
      */
     public void executeCommand() throws MindMyMoneyException {
-        String expenditure = null;
-        String category = null;
-        String description = null;
-        String amount = null;
-        String time = null;
-        float amountInt = 0;
-
-        expenditure = parseInputWithCommandFlag(addInput, flagOfExpenditure, flagOfCategory);
+        String expenditure = parseInputWithCommandFlag(addInput, flagOfExpenditure, flagOfCategory);
         testExpenditure(expenditure, creditCardList);
-        category = parseInputWithCommandFlag(addInput, flagOfCategory, flagOfDescription);
+        String category = parseInputWithCommandFlag(addInput, flagOfCategory, flagOfDescription);
         testCategory(category);
-        description = parseInputWithCommandFlag(addInput, flagOfDescription, flagOfAmount);
+        String description = parseInputWithCommandFlag(addInput, flagOfDescription, flagOfAmount);
         testDescription(description);
-        amount = parseInputWithCommandFlag(addInput, flagOfAmount, flagOfTime);
+        String amount = parseInputWithCommandFlag(addInput, flagOfAmount, flagOfTime);
         testAmount(amount);
-        amountInt = Float.parseFloat(amount);
-        time = parseInputWithCommandFlag(addInput, flagOfTime, flagEndValue);
+        float amountInt = Float.parseFloat(amount);
+        String time = parseInputWithCommandFlag(addInput, flagOfTime, flagEndValue);
         time = convertTime(time);
 
         expenditureList.add(new Expenditure(expenditure, category, description, amountInt, time));

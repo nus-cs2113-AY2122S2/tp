@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static seedu.mindmymoney.helper.GeneralFunctions.findItemsInList;
 
 /**
- * Container for functions that help do calculations
+ * Container for functions that help do calculations.
  */
 public class Calculations {
 

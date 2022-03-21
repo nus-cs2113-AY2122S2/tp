@@ -2,12 +2,8 @@ package seedu.mindmymoney.helper;
 
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.constants.CategoryTypes;
-import seedu.mindmymoney.constants.ExpenditureTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.userfinancial.CreditCard;
-import seedu.mindmymoney.userfinancial.Expenditure;
-
-import java.util.Locale;
 
 /**
  * Input validation for Add Command.
@@ -53,7 +49,8 @@ public class AddCommandInputTests {
      * @param inputExpenditure User input of Expenditure.
      * @throws MindMyMoneyException when input is null or not a type of expenditure.
      */
-    public static void testExpenditure(String inputExpenditure, CreditCardList creditCardList) throws MindMyMoneyException {
+    public static void testExpenditure(String inputExpenditure, CreditCardList creditCardList)
+            throws MindMyMoneyException {
         if (inputExpenditure == null) {
             throw new MindMyMoneyException("Expenditure cannot be null!");
         }
@@ -80,7 +77,7 @@ public class AddCommandInputTests {
     }
 
     /**
-     * Checks if user input of category is null
+     * Checks if user input of category is null.
      *
      * @param inputDescription User input of Description.
      * @throws MindMyMoneyException when input is null.
@@ -92,7 +89,7 @@ public class AddCommandInputTests {
     }
 
     /**
-     * Checks if user input of amount is a positive number more than 0
+     * Checks if user input of amount is a positive number more than 0.
      *
      * @param inputAmount User input of Amount.
      * @throws MindMyMoneyException when input is less than or equal to 0 or null.
