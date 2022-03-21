@@ -9,6 +9,7 @@ import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
+import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
 public class MarkCommand extends Command {
@@ -38,7 +39,7 @@ public class MarkCommand extends Command {
      * @throws NoSuchTaskException if the user-supplied index is out of bounds
      */
     @Override
-    public CommandResult execute(ModuleList moduleList) throws ModHappyException {
+    public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
         Module targetModule = moduleList.getGeneralTasks();
         if (!Objects.isNull(taskModuleString)) {
             targetModule = moduleList.getModule(taskModuleString);
