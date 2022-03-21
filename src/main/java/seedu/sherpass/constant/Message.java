@@ -3,7 +3,7 @@ package seedu.sherpass.constant;
 public class Message {
     public static final String EMPTY_STRING = "";
     public static final String WELCOME_MESSAGE_ONE = "Welcome to\n";
-    public static final String WELCOME_MESSAGE_TWO = "How can I help you today?";
+    public static final String WELCOME_MESSAGE_TWO = "Here is your schedule for today:";
     public static final String WELCOME_MESSAGE_STUDY = "Gotcha! Entering study mode...\n"
             + "Done! To get started, enter one of the three default timers\n"
             + "using 'start <mode_number>':\n"
