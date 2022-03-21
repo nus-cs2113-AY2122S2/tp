@@ -10,6 +10,7 @@ import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.util.StringConstants;
 
 import static seedu.duke.util.StringConstants.SAVE_COMMAND_WORD;
+import static seedu.duke.util.StringConstants.TAG_COMMAND_WORD;
 
 /**
  * This Parser distinguishes between various command words.
@@ -63,10 +64,11 @@ public class ModHappyParser extends Parser {
         switch (commandWord) {
         case (EXIT_COMMAND_WORD):
         case (SAVE_COMMAND_WORD):
-        case (LIST_COMMAND_WORD):
         case(RESET_COMMAND_WORD):
             // Intentional fallthrough
             return new NoArgumentParser(commandWord);
+        case (LIST_COMMAND_WORD):
+            return new ListParser();
         case (ADD_COMMAND_WORD):
             return new AddParser();
         case (DELETE_COMMAND_WORD):
@@ -77,6 +79,8 @@ public class ModHappyParser extends Parser {
             return new EditParser();
         case (HELP_COMMAND_WORD):
             return new HelpParser();
+        case (TAG_COMMAND_WORD):
+            return new TagParser();
         case (GRADE_COMMAND_WORD):
             return new GradeParser();
         default:

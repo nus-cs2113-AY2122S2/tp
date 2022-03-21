@@ -1,5 +1,7 @@
 package seedu.duke.parsers;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,10 +13,9 @@ import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.GradeCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.MarkCommand;
-import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.commands.TagCommand;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
-import seedu.duke.parsers.ModHappyParser;
 import seedu.duke.tasks.Module;
 import seedu.duke.tasks.Task;
 
@@ -23,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ModHappyParserTest {
     private ModHappyParser parser;
@@ -834,13 +836,12 @@ public class ModHappyParserTest {
     }
 
     @Test
-    public void parse_listCommand_unnecessaryArgs() {
-        final String testString = "list blahblah";
+    public void parse_listCommandwithArgument_noExeceptionThrown() {
+        final String testString = "list \"test\"";
         try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof ListCommand);
+            assertEquals("test", ((ListCommand) c).getArgument());
         } catch (Exception e) {
             fail();
         }
@@ -869,7 +870,27 @@ public class ModHappyParserTest {
             fail();
         }
     }
+
+    @Test
+    public void parse_tagCommand_addTag_withTargetModule_parsedCorrectly() {
+        final String testString = "tag add 1 -m cs2113t \"tag\"";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof TagCommand);
+            assertEquals("add", ((TagCommand) c).getTagOperation());
+            assertEquals("cs2113t", ((TagCommand) c).getTaskModule());
+            assertEquals("tag", ((TagCommand) c).getTagDescription());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_tagCommand_invalidTagOperation_throwsParseException() {
+        final String testString = "tag invalidOp 1 \"tag\"";
+        AtomicReference<Command> c = null;
+        assertThrows(ParseException.class, () -> {
+            c.set(parser.parseCommand(testString));
+        });
+    }
 }
-
-
-
