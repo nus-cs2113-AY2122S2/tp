@@ -38,7 +38,7 @@ public class EditCommand extends Command {
      * @throws IndexOutOfBoundsException If the task index is out of bounds.
      */
     public EditCommand(TaskList taskList, int taskNumber, String taskDescription, LocalDate byDate, LocalDate doOnDate)
-            throws IndexOutOfBoundsException{
+            throws IndexOutOfBoundsException {
 
         if (!taskList.isTaskExist(taskNumber - 1)) {
             throw new IndexOutOfBoundsException();
