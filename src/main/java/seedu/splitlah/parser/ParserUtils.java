@@ -223,6 +223,20 @@ public class ParserUtils {
         return cost;
     }
 
+    /**
+     * Returns a double representing a percentage value, represented by the provided input String object.
+     *
+     * @param input     A String object that contains numeric characters or a single decimal point character,
+     *                  representing a percentage value.
+     * @param delimiter A String object that represents a demarcation of a specific argument in the command.
+     * @return An double representing a percentage value.
+     * @throws InvalidFormatException If the provided input String object contains characters other than numeric
+     *                                characters or a single decimal point character,
+     *                                and cannot be parsed as a double,
+     *                                if the double parsed from the input String object is not a positive value,
+     *                                if the parsed double has more than 2 decimal points, or
+     *                                if the parsed double has more than 3 digits before the decimal point.
+     */
     static double parsePercentageFromString(String input, String delimiter) throws InvalidFormatException {
         assert input != null : Message.ASSERT_PARSER_TOKEN_INPUT_NULL;
         assert delimiter != null : Message.ASSERT_PARSER_DELIMITER_NULL;
