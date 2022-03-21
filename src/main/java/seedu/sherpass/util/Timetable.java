@@ -9,6 +9,7 @@ import java.time.temporal.ChronoUnit;
 import java.time.LocalDate;
 
 import static seedu.sherpass.Main.LOGGER;
+
 import java.util.logging.Level;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.dayOnlyFormat;
@@ -78,32 +79,32 @@ public class Timetable {
     private static void printTimetable(String day, String date, ArrayList<Task> filteredTasks,
                                        Ui ui, int taskLength, int doOnDateLength, int partitionLength) {
         int j = 0;
+        String colOne;
+        String colTwo = "Time";
+        String colThree = "Mark Status";
+        String colFour = "Task Description";
+        String colFive = "Do on Date";
         for (int i = 0; i < filteredTasks.size() + TIMETABLE_SIZE_OFFSET; i++) {
-            if ((i == 0) || (i == filteredTasks.size() - 1)) {
+            if ((i == 0) || (i == filteredTasks.size() + TIMETABLE_SIZE_OFFSET - 1)) {
                 ui.showToUser(ui.getRepeatedCharacters("-", partitionLength));
+                continue;
             } else if (i == 1) {
-                printRow("Day", "Time", "Mark Status",
-                        "Task Description", "Do on Date",
-                        taskLength, doOnDateLength, i, ui);
+                colOne = "Day";
             } else if (i == 2) {
-                printRow(day, filteredTasks.get(j).getTimePeriod(), filteredTasks.get(j).getStatusIcon(),
-                        filteredTasks.get(j).getIndex() + ". " + filteredTasks.get(j).getDescription(),
-                        filteredTasks.get(j).getDoOnDateString(), taskLength, doOnDateLength, i, ui);
-                assert (j < filteredTasks.size());
-                j++;
-            } else if (i == 3) {
-                printRow(date, filteredTasks.get(j).getTimePeriod(), filteredTasks.get(j).getStatusIcon(),
-                        filteredTasks.get(j).getIndex() + ". " + filteredTasks.get(j).getDescription(),
-                        filteredTasks.get(j).getDoOnDateString(), taskLength, doOnDateLength, i, ui);
-                assert (j < filteredTasks.size());
-                j++;
+                colOne = day;
             } else {
-                printRow("", filteredTasks.get(j).getTimePeriod(), filteredTasks.get(j).getStatusIcon(),
-                        filteredTasks.get(j).getIndex() + ". " + filteredTasks.get(j).getDescription(),
-                        filteredTasks.get(j).getDoOnDateString(), taskLength, doOnDateLength, i, ui);
+                colOne = date;
+            }
+
+            if (i >= 2) {
+                colTwo = filteredTasks.get(j).getTimePeriod();
+                colThree = filteredTasks.get(j).getStatusIcon();
+                colFour = (filteredTasks.get(j).getIndex() + "." + filteredTasks.get(j).getDescription());
+                colFive = filteredTasks.get(j).getDoOnDateString();
                 assert (j < filteredTasks.size());
                 j++;
             }
+            printRow(colOne, colTwo, colThree, colFour, colFive, taskLength, doOnDateLength, i, ui);
         }
     }
 
