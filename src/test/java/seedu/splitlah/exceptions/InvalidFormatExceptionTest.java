@@ -7,15 +7,15 @@ import org.junit.jupiter.api.Test;
 
 public class InvalidFormatExceptionTest {
 
-    private InvalidDataException invalidFormatExceptionWithMessage;
-    private InvalidDataException invalidFormatExceptionWithMessageWithCause;
-    private InvalidDataException invalidFormatExceptionWithoutMessageWithoutCause;
+    private InvalidFormatException invalidFormatExceptionWithMessage;
+    private InvalidFormatException invalidFormatExceptionWithMessageWithCause;
+    private InvalidFormatException invalidFormatExceptionWithoutMessageWithoutCause;
 
     @BeforeEach
     public void setUp() {
-        this.invalidFormatExceptionWithMessage = new InvalidDataException("message");
-        this.invalidFormatExceptionWithMessageWithCause = new InvalidDataException("message", new Throwable("cause"));
-        this.invalidFormatExceptionWithoutMessageWithoutCause = new InvalidDataException();
+        this.invalidFormatExceptionWithMessage = new InvalidFormatException("message");
+        this.invalidFormatExceptionWithMessageWithCause = new InvalidFormatException("message", new Throwable("cause"));
+        this.invalidFormatExceptionWithoutMessageWithoutCause = new InvalidFormatException();
     }
 
     @Test
