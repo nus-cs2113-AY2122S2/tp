@@ -28,8 +28,9 @@ public class HelpCommandTest {
     void helpCommand_fromUser_expectHelpPage() {
         String helpPage = "---------------------------------------Help Page---------------------------------------\n"
                 + "1. Listing all Expenditures: list\n"
-                + "2. Adding an Expenditure entry: add [DESCRIPTION] [AMOUNT]\n"
-                + "3. Adding an Expenditure entry with category: add [DESCRIPTION] -c [CATEGORY] [AMOUNT]\n"
+                + "2. Adding an Expenditure entry: add /e [EXPENDITURE] /c [CATEGORY] "
+                + "/d [DESCRIPTION] /a [AMOUNT] /t [TIME]\n"
+                + "3. Calculating the total expenditure in a month: calculate /epm [MONTH]\n"
                 + "4. Updating an Expenditure entry: update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]\n"
                 + "5. Updating an Expenditure entry with category: update [INDEX] [NEW_DESCRIPTION] -c "
                 + "[NEW_CATEGORY] [NEW_AMOUNT]\n"
