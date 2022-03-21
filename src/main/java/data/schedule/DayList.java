@@ -11,8 +11,8 @@ import static data.schedule.InvalidScheduleException.INVALID_DAY;
 
 public class DayList {
     private PlanList planList;
-    private String[] scheduleList = new String[7]; //store all plan name for the day
-    private String[] schedulePrintList = new String[7]; //store all plan name for the day to be printed
+    private String[] scheduleList = new String[NUMBER_OF_SCHEDULE_DAYS]; //store all plan name for the day
+    private String[] schedulePrintList = new String[NUMBER_OF_SCHEDULE_DAYS]; //store all plan name for the day to be printed
     private Day[] dayList = new Day[7]; //store all created day object
     private static final int FIXED_LENGTH = 30;
     private static final int NUMBER_OF_SCHEDULE_DAYS = 7;
