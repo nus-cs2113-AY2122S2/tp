@@ -6,6 +6,11 @@ import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a command that displays the details of each Group object within a Profile object.
+ *
+ * @author Ivan
+ */
 public class GroupListCommand extends Command {
 
     public static final String COMMAND_TEXT = "group /list";
