@@ -9,6 +9,9 @@ import static seedu.mindmymoney.constants.Flags.flagOfExpenditurePerMonth;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM_IN_STRING;
 import static seedu.mindmymoney.helper.Calculations.calculateExpenditurePerMonth;
 
+/**
+ * Represents the Calculate command.
+ */
 public class CalculateCommand extends Command {
     private String calculateInput;
     public ExpenditureList expenditureList;

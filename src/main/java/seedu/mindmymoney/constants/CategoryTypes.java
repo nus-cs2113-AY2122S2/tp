@@ -1,7 +1,7 @@
 package seedu.mindmymoney.constants;
 
 /**
- * Container for Category types
+ * Container for Category types.
  */
 public enum CategoryTypes {
     Food,

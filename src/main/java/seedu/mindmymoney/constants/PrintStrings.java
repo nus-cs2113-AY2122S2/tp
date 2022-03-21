@@ -1,7 +1,7 @@
 package seedu.mindmymoney.constants;
 
 /**
- * Container for indexes used by handlers.
+ * Container for strings to be printed.
  */
 public class PrintStrings {
     private PrintStrings() {

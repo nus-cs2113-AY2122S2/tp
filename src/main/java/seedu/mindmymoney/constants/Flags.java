@@ -1,5 +1,8 @@
 package seedu.mindmymoney.constants;
 
+/**
+ * Container for flags used in commands.
+ */
 public class Flags {
     public static final String flagOfExpenditure = "/e";
     public static final String flagOfCategory = "/c";

@@ -4,10 +4,12 @@ import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.Expenditure;
-import seedu.mindmymoney.data.ExpenditureList;
 
 import java.util.ArrayList;
 
+/**
+ * Container for general functions used throughout the program.
+ */
 public class GeneralFunctions {
     /**
      * Separates the user input into the command and description for easy reference.
@@ -38,6 +40,16 @@ public class GeneralFunctions {
         return input;
     }
 
+    /**
+     * Finds an item in a given list provided the search term and the field to search in.
+     *
+     * @param searchTerm The matching term to search the list for.
+     * @param fieldToSearch The object in the list to search for.
+     * @param itemList The list to search in.
+     * @return An ArrayList containing the found items.
+     * @throws MindMyMoneyException if fieldToSearch is not in the list, amount is not a number
+     * and if the list of found items is empty.
+     */
     public static ArrayList<Expenditure> findItemsInList(String searchTerm, String fieldToSearch,
                                                          ExpenditureList itemList) throws MindMyMoneyException {
         ArrayList<Expenditure> foundItems = new ArrayList<>();
