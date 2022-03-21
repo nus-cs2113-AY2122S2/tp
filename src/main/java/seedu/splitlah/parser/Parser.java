@@ -221,15 +221,17 @@ public class Parser {
     }
 
     /**
-     * Returns an integer that represents the GST charge in percents, given the command arguments from user input, 
+     * Returns a double that represents the GST charge in percents, given the command arguments from user input, 
      * delimited by the GST delimiter.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
-     * @return An integer that represents a GST charge in percents.
+     * @return A double that represents a GST charge in percents.
      * @throws InvalidFormatException If no arguments representing a GST charge were provided after the 
      *                                GST delimiter,
-     *                                if the argument cannot be parsed as an integer, or
-     *                                if the parsed GST percentage is not in [0, 100].
+     *                                if the argument cannot be parsed as a double,
+     *                                if the parsed percentage has more than 2 decimal points,
+     *                                if the parsed percentage has more than 3 digits before the decimal point, or
+     *                                if the parsed percentage is not in [0, 100].
      */
     public static double parseGst(String commandArgs) throws InvalidFormatException {
         if (!ParserUtils.hasDelimiter(commandArgs, ParserUtils.GST_DELIMITER)) {
@@ -245,15 +247,17 @@ public class Parser {
     }
 
     /**
-     * Returns an integer that represents the service charge in percents, given the command arguments from user input, 
+     * Returns a double that represents the service charge in percents, given the command arguments from user input, 
      * delimited by the Service charge delimiter.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
-     * @return An integer that represents a service charge in percents.
+     * @return A double that represents a service charge in percents.
      * @throws InvalidFormatException If no arguments representing a service charge were provided after the 
      *                                Service charge delimiter,
-     *                                if the argument cannot be parsed as an integer, or
-     *                                if the parsed service charge percentage is not in [0, 100].
+     *                                if the argument cannot be parsed as a double,
+     *                                if the parsed percentage has more than 2 decimal points,
+     *                                if the parsed percentage has more than 3 digits before the decimal point, or
+     *                                if the parsed percentage is not in [0, 100].
      */
     public static double parseServiceCharge(String commandArgs) throws InvalidFormatException {
         if (!ParserUtils.hasDelimiter(commandArgs, ParserUtils.SERVICE_CHARGE_DELIMITER)) {
