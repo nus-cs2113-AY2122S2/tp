@@ -18,8 +18,8 @@ public class ExpenditureTest {
      */
     @Test
     void serialization_normalInput_correctDeserialization() {
-        Expenditure expenditure = new Expenditure("Test%!$+:/=-<%<%<of amount>%>9()&)* \t\n"
-                + "expenditure", null, 20);
+        Expenditure expenditure = new Expenditure("cash", "Food", "Test%!$+:/=-<%<%<of amount>%>9()&)* \t\n"
+                + "expenditure", 20, "2022-03");
         String serialized = expenditure.serialize();
         try {
             Expenditure deserialized = Expenditure.deserialize(serialized);

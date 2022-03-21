@@ -27,7 +27,7 @@ public class AddCommand extends Command {
     public ExpenditureList expenditureList;
     public CreditCardList creditCardList;
 
-    public AddCommand(String addInput, ExpenditureList expenditureList,CreditCardList creditCardList) {
+    public AddCommand(String addInput, ExpenditureList expenditureList, CreditCardList creditCardList) {
         this.addInput = addInput;
         this.expenditureList = expenditureList;
         this.creditCardList = creditCardList;

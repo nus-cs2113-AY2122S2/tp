@@ -71,6 +71,6 @@ public class CreditCardList {
      * @param item  The expenditure item to be updated.
      */
     public void set(int index, CreditCard item) {
-        creditCardListArray.set(index,item);
+        creditCardListArray.set(index, item);
     }
 }

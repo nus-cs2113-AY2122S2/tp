@@ -20,10 +20,11 @@ class AddCommandTest {
     void addCommand_oneInput_expectListUpdated() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
-        String inputString = "expenditure 12345";
+        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
         new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand();
         ArrayList<Expenditure> testList = new ArrayList<>();
-        testList.add(new Expenditure(null, null, "expenditure", 12345, null));
+        testList.add(new Expenditure("cash", "Personal", "Nike Shoes",
+                300, "2022-03"));
         String expectedOutput = getOutput(testList);
         String actualOutput = getOutput(expenditureTestList.expenditureListArray);
         assertEquals(expectedOutput, actualOutput);

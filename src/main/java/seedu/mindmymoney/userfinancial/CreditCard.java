@@ -9,7 +9,7 @@ public class CreditCard {
     private String nameOfCard;
     private float balance;
 
-    public CreditCard (String nameOfCard, double cashback, float monthlyCardLimit, float balance) {
+    public CreditCard(String nameOfCard, double cashback, float monthlyCardLimit, float balance) {
         setNameOfCard(nameOfCard);
         setCashback(cashback);
         setMonthlyCardLimit(monthlyCardLimit);
