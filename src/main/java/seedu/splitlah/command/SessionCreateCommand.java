@@ -24,7 +24,7 @@ public class SessionCreateCommand extends Command {
 
     public static final String COMMAND_FORMAT =
             "Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 …] "
-                    + "[</gid GROUP_ID>]";
+                    + "[</gid [GROUP_ID]>]";
 
     private static final String COMMAND_SUCCESS =
             "The session was created successfully.\n";
