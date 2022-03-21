@@ -85,6 +85,7 @@ public class Timetable {
         String colThree = "Mark Status";
         String colFour = "Task Description";
         String colFive = "Do on Date";
+
         for (int i = 0; i < filteredTasks.size() + TIMETABLE_SIZE_OFFSET; i++) {
             if ((i == 0) || (i == filteredTasks.size() + TIMETABLE_SIZE_OFFSET - 1)) {
                 ui.showToUser(ui.getRepeatedCharacters("-", partitionLength));
@@ -132,11 +133,16 @@ public class Timetable {
         int taskLength = findTaskLength(filteredTasks);
         int doOnDateLength = DATE_SPACE_FULL_LENGTH;
         int partitionLength = calcPartitionLength(taskLength, doOnDateLength);
-        if (filteredTasks.size() == 0) {
+        if (filteredTasks.isEmpty()) {
             printEmptyTimetable(ui, day, date, partitionLength);
             return;
         }
         printTimetable(day, date, filteredTasks, ui, taskLength, doOnDateLength, partitionLength);
+    }
+
+    public static void showTodaySchedule(TaskList taskList, Ui ui) {
+        ArrayList<Task> filteredTasks = taskList.getFilteredTasksByDate(LocalDate.now());
+        prepareTimetable(LocalDate.now(), filteredTasks, ui);
     }
 
     /**
