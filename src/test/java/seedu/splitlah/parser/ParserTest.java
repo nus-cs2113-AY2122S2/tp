@@ -881,8 +881,42 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the GST delimiter and an integer representing the GST 
-     * is provided by the user but the integer is not within the valid range of [0, 100].
+     * Checks if an exception is properly thrown when the GST delimiter and positive numeric value are
+     * provided as arguments, but the parsed double has more than three digits before decimal point.
+     */
+    @Test
+    void parseGst_delimiterExistsArgumentDoubleWithMoreThanThreeDigitsBeforeDecimalPoint_exceptionThrown() {
+        String argumentWithDoubleArgumentMoreThan3DigitsBeforeDP =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 1000 /sc 10";
+        try {
+            double output = Parser.parseGst(argumentWithDoubleArgumentMoreThan3DigitsBeforeDP);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_PERCENTAGE_MORE_THAN_THREE_DIGITS_BEFORE_DP;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the GST delimiter and positive numeric value are
+     * provided as arguments, but the parsed double has more than two decimal places.
+     */
+    @Test
+    void parseGst_delimiterExistsArgumentDoubleWithMoreThanTwoDecimalPlaces_exceptionThrown() {
+        String argumentWithDoubleArgumentMoreThan2DP =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 10.123 /sc 10";
+        try {
+            double output = Parser.parseGst(argumentWithDoubleArgumentMoreThan2DP);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_PERCENTAGE_NOT_TWO_DP;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when the GST delimiter and a double representing the GST 
+     * percentage is provided by the user but the double is not within the valid range of [0, 100].
      */
     @Test
     void parseGst_delimiterExistsArgumentDoubleButNotInRange_exceptionThrown() {
