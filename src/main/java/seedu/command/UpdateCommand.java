@@ -12,6 +12,7 @@ public class UpdateCommand extends Command {
             + "Parameters: s/SERIAL_NUMBER" + System.lineSeparator()
             + "Example: "
             + "update s/SM57-1";
+    public static final String UPDATE_FAILURE_MESSAGE = "Equipment was not updated successfully.";
     private String serialNumber;
 
     private String updateName = null;
@@ -40,7 +41,9 @@ public class UpdateCommand extends Command {
         }
 
         ArrayList<Pair<String, String>> updatePairs = generateUpdatePairs();
-        equipmentManager.updateEquipment(serialNumber, updatePairs);
+        if(!equipmentManager.updateEquipment(serialNumber, updatePairs)){
+            return new CommandResult(UPDATE_FAILURE_MESSAGE);
+        }
 
         return new CommandResult(String.format(successMessage, serialNumber, generateUpdateString()));
     }
