@@ -1,7 +1,6 @@
 package commands;
 
 import data.exercises.ExerciseList;
-import data.plans.Plan;
 import data.plans.PlanList;
 import storage.LogHandler;
 import werkit.UI;
@@ -49,6 +48,14 @@ public class SearchCommand extends Command {
         this.matchCount = 0;
 
         LogHandler.linkToFileLogger(logger);
+    }
+
+    public String getUserAction() {
+        return this.userAction;
+    }
+
+    public String getUserArguments() {
+        return this.userArguments;
     }
 
     public void setUserAction(String userAction) throws InvalidCommandException {
