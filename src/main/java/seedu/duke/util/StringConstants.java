@@ -221,7 +221,7 @@ public class StringConstants {
     public static final String HELP_COMMAND_WORD = "help";
     public static final String SAVE_COMMAND_WORD = "save";
     public static final String TAG_COMMAND_WORD = "tag";
-    public static final String OPTION_COMMAND_WORD = "option"
+    public static final String OPTION_COMMAND_WORD = "option";
 
     /**
      * For Grades.

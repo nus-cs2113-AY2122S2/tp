@@ -23,7 +23,7 @@ public class ListCommand extends Command {
      * Lists all tasks when no argument is provided. Otherwise, list only tasks with matching tag.
      */
     @Override
-    public CommandResult execute(ModuleList moduleList) {
+    public CommandResult execute(ModuleList moduleList, Configuration configuration) {
         StringBuilder res = new StringBuilder();
         if (Objects.isNull(argument)) {
             for (Module m : moduleList.getModuleList()) {
