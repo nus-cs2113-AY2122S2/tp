@@ -112,12 +112,28 @@ public class Timetable {
         return PARTITION_SPACE_OFFSET_LENGTH + taskLength + dateLength + PARTITION_PIPE_LINE_LENGTH;
     }
 
+    private static void printEmptyTimetable(Ui ui, String day, String date, int partitionLength) {
+        ui.showToUser(ui.getRepeatedCharacters("-", partitionLength));
+        ui.showToUser("|  Day       |  Time       |  Mark status |  Task Description    |  Do on date  |");
+        String thirdRow = "|  " + day + "       |  \t\t Your schedule is empty for the day!";
+        ui.showToUser(thirdRow + ui.getRepeatedCharacters(" ",
+                partitionLength - thirdRow.length() - 1));
+        String fourthRow = "|  " + date + " |";
+        ui.showToUser(fourthRow + ui.getRepeatedCharacters(" ",
+                partitionLength - fourthRow.length() - 1));
+        ui.showToUser(ui.getRepeatedCharacters("-", partitionLength));
+    }
+
     private static void prepareTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui ui) {
         String day = dateInput.format(dayOnlyFormat);
         String date = dateInput.format(dateOnlyFormat);
         int taskLength = findTaskLength(filteredTasks);
         int doOnDateLength = DATE_SPACE_FULL_LENGTH;
         int partitionLength = calcPartitionLength(taskLength, doOnDateLength);
+        if (filteredTasks.size() == 0) {
+            printEmptyTimetable(ui, day, date, partitionLength);
+            return;
+        }
         printTimetable(day, date, filteredTasks, ui, taskLength, doOnDateLength, partitionLength);
     }
 
@@ -130,11 +146,6 @@ public class Timetable {
      */
     public static void showScheduleByDay(LocalDate dateInput, TaskList taskList, Ui ui) {
         ArrayList<Task> filteredTasks = taskList.getFilteredTasksByDate(dateInput);
-        if (filteredTasks.size() == 0) {
-            ui.showToUser("Looks like your schedule is empty for the day!\n"
-                    + "Try adding some tasks if you wish to generate a timetable.");
-            return;
-        }
         prepareTimetable(dateInput, filteredTasks, ui);
     }
 
