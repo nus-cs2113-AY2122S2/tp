@@ -223,6 +223,29 @@ public class ParserUtils {
         return cost;
     }
 
+    static double parsePercentageFromString(String input, String delimiter) throws InvalidFormatException {
+        assert input != null : Message.ASSERT_PARSER_TOKEN_INPUT_NULL;
+        assert delimiter != null : Message.ASSERT_PARSER_DELIMITER_NULL;
+
+        double percentage;
+        try {
+            percentage = Double.parseDouble(input);
+        } catch (NumberFormatException exception) {
+            throw new InvalidFormatException(ParserErrors.getNonPercentageErrorMessage(delimiter));
+        }
+
+        if (percentage < 0) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_PERCENTAGE_NEGATIVE);
+        }
+        if (!hasAtMostTwoDecimalPlaces(input)) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_PERCENTAGE_NOT_TWO_DP);
+        }
+        if (!hasAtMostGivenIntegerPlaces(input, PERCENTAGE_ALLOWED_INTEGER_PLACES)) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_PERCENTAGE_MORE_THAN_THREE_DIGITS_BEFORE_DP);
+        }
+        return percentage;
+    }
+
     /**
      * Checks the provided String object which represents the command arguments for the existence of a specified
      * delimiter.
