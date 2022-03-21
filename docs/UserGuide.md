@@ -106,10 +106,19 @@ Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ..
 >- The `[SESSION_NAME]` should be unique across all active sessions.
 >- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
 
+> **⚠️Warning:**
+> - When using `/pl` and `/gid` delimiters together, if there is a duplicated name in `/pl` and 
+> specified group with `/gid`. The duplicate name would be removed, storing only 1 instance of it.
+>  - Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
+     includes Alice, only two names, Alice and Bob, would be saved.
+
 Example of usage:
 1. Adds a new session named Class Outing with Alice and Bob involved on 15-03-2022.
    - `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob` <br>
-   ![Session create command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand.png)
+   ![Session create command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[1].png)
+2. Adds a new session named Class Gathering with a group of friends, with addition of Alice on 16-04-2022.
+   - `session /create /n Glass Gathering /d 16-04-2022 /gid 1 /pl Alice` <br>
+   ![Session create command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[2].png)
 <br>
 <br>
 
