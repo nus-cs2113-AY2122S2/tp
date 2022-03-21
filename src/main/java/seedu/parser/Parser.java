@@ -20,29 +20,29 @@ public class Parser {
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s+(?<arguments>.+)");
     public static final Pattern ADD_COMMAND_FORMAT = Pattern.compile(
-            "n\\/(?<itemName>.+)" + "\\s+" +
-                    "sn\\/(?<serialNumber>.+)" + "\\s+" +
-                    "t\\/(?<equipmentType>.+)" + "\\s+" +
-                    "c\\/(?<cost>.+)" + "\\s+" +
-                    "pf\\/(?<purchasedFrom>.+)" + "\\s+" +
-                    "pd\\/(?<purchasedDate>.+)"
+            "n\\/(?<itemName>.+)" + "\\s+"
+                    + "s\\/(?<serialNumber>.+)" + "\\s+"
+                    + "t\\/(?<equipmentType>.+)" + "\\s+"
+                    + "c\\/(?<cost>.+)" + "\\s+"
+                    + "pf\\/(?<purchasedFrom>.+)" + "\\s+"
+                    + "pd\\/(?<purchasedDate>.+)"
     );
     public static final Pattern VIEW_COMMAND_FORMAT = Pattern.compile("n/(?<itemName>.+)");
     public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("s/(?<itemName>.+)");
     // ARGUMENT_FORMAT extracts first n-1 tags
     public static final Pattern ARGUMENT_FORMAT = Pattern.compile(
-            "((?:sn|n|t|c|pf|pd)\\/[\\w\\s\\-]+?)\\s+(?=sn|n|t|c|pf|pd)"
+            "((?:s|n|t|c|pf|pd)\\/[\\w\\s\\-]+?)\\s+(?=s|n|t|c|pf|pd)"
     );
     // ARGUMENT_TRAILING_FORMAT extracts last tag
     public static final Pattern ARGUMENT_TRAILING_FORMAT = Pattern.compile(
-            "(?<!\\w)(?:sn|n|t|c|pf|pd)\\/([\\w\\s\\-]+)"
+            "(?<!\\w)(?:s|n|t|c|pf|pd)\\/([\\w\\s\\-]+)"
     );
     public static final String MESSAGE_INCOMPLETE_COMMAND_MISSING_DELIMITER =
             "Please split your command into arguments with each argument seperated by spaces!";
-    public static final String INCORRECT_COMMAND_FORMAT = "Incorrect Command format!";
+    public static final String INCORRECT_COMMAND_FORMAT = "Incorrect Command format! Enter help for more information.";
 
     /**
-     * Interpret the command requested by the user and returns a corresponding Command object
+     * Interpret the command requested by the user and returns a corresponding Command object.
      *
      * @param userInput Raw string of input values
      * @return command of parent class Command with parameters specified
@@ -86,11 +86,13 @@ public class Parser {
                 return new IncorrectCommand(UpdateCommand.COMMAND_WORD + UpdateCommand.COMMAND_DESCRIPTION);
             }
         case ListCommand.COMMAND_WORD:
-            if (commandAndArgument.get(1).equals(null)) {
+            if (commandAndArgument.get(1) == null) {
                 return new ListCommand();
             } else {
                 return new ListCommand(new ArrayList<>(Collections.singleton(commandAndArgument.get(1))));
             }
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
         default:
             return new IncorrectCommand(INCORRECT_COMMAND_FORMAT);
@@ -101,7 +103,8 @@ public class Parser {
     /**
      * Break down a command into the command term to be parsed and the remainder of the arguments.
      * Assumes command term and remainder arguments are delimited by minimally one space.
-     * If first element is "list", remainder arguments can be empty, in which case a null second object will be passed in.
+     * If first element is "list", remainder arguments can be empty, in which case a null
+     * second object will be passed in.
      *
      * @param userInput String to be split into substrings
      * @return ArrayList of String, first element being the command term and the second element being arguments
@@ -115,6 +118,11 @@ public class Parser {
             resultArrayList.add(null);
             return resultArrayList;
         }
+        if (userInput.equals(HelpCommand.COMMAND_WORD)) {
+            resultArrayList.add("help");
+            resultArrayList.add(null);
+            return resultArrayList;
+        }
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput);
         // guard against no match
         if (!matcher.matches()) {
@@ -124,8 +132,9 @@ public class Parser {
         resultArrayList.add(matcher.group("arguments"));
         return resultArrayList;
     }
+
     /**
-     * Prepare arguments for AddCommand by splitting up the arguments into different parts
+     * Prepare arguments for AddCommand by splitting up the arguments into different parts.
      * <p>
      * Index:
      * 0. <code> equipmentName </code>: String of equipment name
@@ -158,7 +167,7 @@ public class Parser {
     }
 
     /**
-     * Prepare argument for CheckCommand by removing the preceding "n/" prefix
+     * Prepare argument for CheckCommand by removing the preceding "n/" prefix.
      *
      * @param args String to be split into substrings
      * @return ArrayList of one element (assumes rest of string is item name)
@@ -173,7 +182,7 @@ public class Parser {
     }
 
     /**
-     * Prepare argument for DeleteCommand by removing the preceding "s/" prefix
+     * Prepare argument for DeleteCommand by removing the preceding "s/" prefix.
      *
      * @param args String to be split into substrings
      * @return ArrayList of one element (assumes rest of string is serial number)
@@ -188,7 +197,7 @@ public class Parser {
     }
 
     /**
-     * Splits main arguments into split tags with each substring
+     * Splits main arguments into split tags with each substring.
      *
      * @param args String to be split into substrings
      * @return ArrayList of two elements

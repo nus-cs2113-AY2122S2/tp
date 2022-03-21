@@ -3,7 +3,7 @@ package seedu.command;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.equipment.DuplicateSerialNumber;
+import seedu.equipment.DuplicateSerialNumberException;
 import seedu.equipment.Equipment;
 import seedu.equipment.EquipmentManager;
 import seedu.equipment.EquipmentType;
@@ -21,7 +21,7 @@ class AddCommandTest {
     );
 
     @Test
-    void execute_duplicateSerialNumber_exceptionThrown() throws DuplicateSerialNumber {
+    void execute_duplicateSerialNumber_exceptionThrown() throws DuplicateSerialNumberException {
         addCommand = new AddCommand(userInput);
         addCommand.setEquipmentManager(new EquipmentManager());
         EquipmentManager equipmentManager = addCommand.equipmentManager;
@@ -38,7 +38,7 @@ class AddCommandTest {
     }
 
     @Test
-    void execute_incorrectCostFormat_exceptionThrown(){
+    void execute_incorrectCostFormat_exceptionThrown() {
         addCommand = new AddCommand(new ArrayList<>(
                 Arrays.asList("Speaker B", "S1404115ASF", "SPEAKER", "$1000", "Loud Technologies", "2022-02-23")
         ));
@@ -62,7 +62,7 @@ class AddCommandTest {
     }
 
     @Test
-    void addEquipment_validArrayListString_success() throws DuplicateSerialNumber {
+    void addEquipment_validArrayListString_success() throws DuplicateSerialNumberException {
         addCommand = new AddCommand(userInput);
         addCommand.setEquipmentManager(new EquipmentManager());
         EquipmentManager equipmentManager = addCommand.equipmentManager;

@@ -1,28 +1,33 @@
 package seedu.command;
 
 import seedu.Pair;
-import seedu.parser.IncompleteCommandException;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class UpdateCommand extends Command {
-    private final ArrayList<String> COMMAND_STRINGS;
+    private final ArrayList<String> commandStrings;
     public static final String COMMAND_WORD = "update";
     public static final String COMMAND_DESCRIPTION = ": Updates the equipment with the specified serial number. "
-            + "Parameters: s/SERIAL_NUMBER" + System.lineSeparator()
+            + System.lineSeparator()
+            + "Parameters: s/SERIAL_NUMBER(required) n/ITEM_NAME t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE"
+            + System.lineSeparator()
             + "Example: "
-            + "update s/SM57-1";
+            + "update s/SM57-1 n/SpeakerC c/2510 pd/2022-08-21";
     private String serialNumber;
 
-    private String updateName = null, purchaseDate = null, type = null, purchaseFrom = null, cost = null;
+    private String updateName = null;
+    private String purchaseDate = null;
+    private String type = null;
+    private String purchaseFrom = null;
+    private String cost = null;
 
 
     /**
      * constructor for UpdateCommand. Initialises successMessage and usageReminder from Command
      */
     public UpdateCommand(ArrayList<String> commandStrings) {
-        COMMAND_STRINGS = commandStrings;
+        this.commandStrings = commandStrings;
         successMessage = "Equipment successfully updated for serial number %1$s,"
                 + System.lineSeparator()
                 + "Updated details are: %2$s";
@@ -32,8 +37,9 @@ public class UpdateCommand extends Command {
     }
 
     public CommandResult execute() {
-        if (getSerialNumber() == null)
+        if (getSerialNumber() == null) {
             return new CommandResult(MISSING_SERIAL_NUMBER);
+        }
 
         ArrayList<Pair<String, String>> updatePairs = generateUpdatePairs();
         equipmentManager.updateEquipment(serialNumber, updatePairs);
@@ -90,7 +96,7 @@ public class UpdateCommand extends Command {
         return pairs;
     }
 
-    public String generateUpdateString(){
+    public String generateUpdateString() {
         String updateDetails = "";
         if (updateName != null) {
             updateDetails = updateDetails + System.lineSeparator() + "New name: " + updateName;
@@ -117,10 +123,9 @@ public class UpdateCommand extends Command {
      * Should multiple arguments specifying the same argument parameter (e.g. 'c/1000' and 'c/2000') be given,
      * the previous arguments passed in will be overwritten by the most recent parameter ('c/2000' in example).
      *
-     * @return Command object
      */
-    protected void prepareUpdate() {
-        for (String s : COMMAND_STRINGS) {
+    protected void prepareUpdate() throws AssertionError {
+        for (String s : commandStrings) {
             int delimiterPos = s.indexOf('/');
             // the case where delimiterPos = -1 is impossible as
             // ARGUMENT_FORMAT and ARGUMENT_TRAILING_FORMAT regex requires a '/'
@@ -143,7 +148,7 @@ public class UpdateCommand extends Command {
             case "c":
                 setCost(argValue);
                 break;
-            case "sn":
+            case "s":
                 setSerialNumber(argValue);
                 break;
             default:
@@ -155,10 +160,19 @@ public class UpdateCommand extends Command {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         UpdateCommand that = (UpdateCommand) o;
-        return serialNumber.equals(that.serialNumber) && Objects.equals(updateName, that.updateName) && Objects.equals(purchaseDate, that.purchaseDate) && Objects.equals(type, that.type) && Objects.equals(purchaseFrom, that.purchaseFrom) && Objects.equals(cost, that.cost);
+        return serialNumber.equals(that.serialNumber) &&
+                Objects.equals(updateName, that.updateName) &&
+                Objects.equals(purchaseDate, that.purchaseDate) &&
+                Objects.equals(type, that.type) &&
+                Objects.equals(purchaseFrom, that.purchaseFrom) &&
+                Objects.equals(cost, that.cost);
     }
 
     @Override
