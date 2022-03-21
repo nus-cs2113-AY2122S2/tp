@@ -20,6 +20,8 @@ public class GroupListCommand extends Command {
 
     private static final String GROUP_LIST_HEADER = "List of Groups";
 
+    private static final String GROUP_LIST_TITLE = "# | Name | Number of Persons";
+
     /**
      * Prints the list of groups previously created by the user.
      *
@@ -35,6 +37,7 @@ public class GroupListCommand extends Command {
         }
 
         manager.getUi().printlnMessageWithDashDivider(GROUP_LIST_HEADER);
+        manager.getUi().printlnMessage(GROUP_LIST_TITLE);
         int groupListSize = groupsToBePrinted.size();
         assert groupListSize > 0 : Message.ASSERT_GROUPLIST_GROUP_SIZE_LESS_THAN_ONE;
         for (int i = 0; i < groupListSize - 1; i++) {
