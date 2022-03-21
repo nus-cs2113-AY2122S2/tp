@@ -45,12 +45,9 @@ public class TaskList {
                 + "\nNow you have " + tasks.size() + " task(s) in the list.");
     }
 
-    public void addRecurringTask(RecurringTask newTask) {
+    public void addTask(Task newTask) {
         tasks.add(newTask);
-        System.out.println("Got it. I've added this task:\n  " + newTask
-                + "\nNow you have " + tasks.size() + " task(s) in the list.");
     }
-
 
     /**
      * Prints all available tasks in the task list.
@@ -171,7 +168,7 @@ public class TaskList {
      */
     public void printPendingTasks(Ui ui) {
         for (Task task : tasks) {
-            if (!task.isDone() && (task instanceof NonrecurringTask)) {
+            if (!task.isDone()) {
                 ui.showToUser(task.toString());
             }
         }

@@ -22,8 +22,6 @@ import static seedu.sherpass.constant.Index.INDENT_FACTOR;
 import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_1;
 import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_2;
 import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_3;
-import static seedu.sherpass.constant.Message.ERROR_DUPLICATE_TASK_MESSAGE_1;
-import static seedu.sherpass.constant.Message.ERROR_DUPLICATE_TASK_MESSAGE_2;
 import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
 
 public class Storage {
@@ -72,15 +70,13 @@ public class Storage {
         JSONArray tasks = new JSONArray();
         for (Task t : taskList.getTasks()) {
             JSONObject taskToStore = new JSONObject();
-            taskToStore.put("id", t.getIdentifier());
+            taskToStore.put("identifier", t.getIdentifier());
             taskToStore.put("status", t.getStatusIcon());
             taskToStore.put("by_date",
                     (t.getByDate() == null ? "null" : t.getByDate().format(inputWithTimeFormat)));
             taskToStore.put("do_date",
                     (t.getDoOnDate() == null ? "null" : t.getDoOnDate().format(inputWithTimeFormat)));
             taskToStore.put("description", t.getDescription());
-            taskToStore.put("recurring", t.isRecurring());
-            taskToStore.put("frequency", t.getFrequency());
             taskToStore.put("has_bytime", t.getHasByTime());
             taskToStore.put("has_dotime", t.getHasDoOnTime());
             tasks.put(taskToStore);
@@ -127,24 +123,10 @@ public class Storage {
             for (int i = 0; i < array.length(); i++) {
                 JSONObject taskData = array.getJSONObject(i);
                 Task newTask = Parser.parseSavedData(taskData);
-                if (!isDuplicateTask(taskList, newTask.getDescription())) {
-                    taskList.add(newTask);
-                } else {
-                    System.out.println(ERROR_DUPLICATE_TASK_MESSAGE_1 + newTask.getDescription()
-                        + ERROR_DUPLICATE_TASK_MESSAGE_2);
-                }
+                taskList.add(newTask);
             }
         }
         return taskList;
-    }
-
-    private boolean isDuplicateTask(ArrayList<Task> tasks, String description) {
-        for (Task t : tasks) {
-            if (t.getDescription().equals(description)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

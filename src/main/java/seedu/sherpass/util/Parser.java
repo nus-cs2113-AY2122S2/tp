@@ -32,7 +32,7 @@ import java.time.format.DateTimeParseException;
 
 import static seedu.sherpass.constant.CommandParameters.BY_DATE_DELIMITER;
 import static seedu.sherpass.constant.CommandParameters.DO_DATE_DELIMITER;
-
+import static seedu.sherpass.constant.CommandParameters.FREQUENCY_DELIMITER;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithoutTimeFormat;
 import static seedu.sherpass.constant.Index.MARK_INDEX;
@@ -70,8 +70,7 @@ public class Parser {
         try {
             boolean hasDoOnTime = taskData.getBoolean("has_dotime");
             boolean hasByTime = taskData.getBoolean("has_bytime");
-            String id = taskData.getString("id");
-            Frequency frequency = Frequency.valueOf(taskData.getString("frequency"));
+            int identifier = taskData.getInt("identifier");
             String description = taskData.getString("description");
             String byDateString = taskData.getString("by_date");
             String doOnDateString = taskData.getString("do_date");
@@ -83,11 +82,8 @@ public class Parser {
             if (!doOnDateString.equals("null")) {
                 doOnDate = LocalDateTime.parse(doOnDateString, inputWithTimeFormat);
             }
-            if (isRecurring) {
-                parsedTask = new Task(description, doOnDate, hasDoOnTime, frequency);
-            } else {
-                parsedTask = new Task(description, byDate, doOnDate);
-            }
+            parsedTask = new Task(description, byDate, doOnDate, hasByTime, hasDoOnTime);
+            parsedTask.setIdentifier(identifier);
             String status = taskData.getString("status");
             if (status.equals("X")) {
                 parsedTask.markAsDone();
@@ -149,14 +145,10 @@ public class Parser {
             return null;
         }
         try {
-<<<<<<< HEAD
             if (hasTime) {
-                return LocalDateTime.parse(rawTaskDate, parseWithTimeFormat);
+                return LocalDateTime.parse(rawTaskDate, inputWithTimeFormat);
             }
-            return LocalDate.parse(rawTaskDate, parseWithoutTimeFormat).atStartOfDay();
-=======
-            return LocalDate.parse(rawTaskDate, inputFormat);
->>>>>>> master
+            return LocalDate.parse(rawTaskDate, inputWithoutTimeFormat).atStartOfDay();
         } catch (DateTimeParseException e) {
             return confirmInvalidDateFormat();
         }
@@ -210,18 +202,19 @@ public class Parser {
         AddRecurringCommand newCommand = new AddRecurringCommand();
         newCommand.setTaskDescription(parseDescription(argument));
         String doOnDateString = parseArgument(DO_DATE_DELIMITER, argument);
-        if (newCommand.getTaskDescription().isBlank()) {
+        try {
+            newCommand.setFrequency(Frequency.valueOf(parseArgument(FREQUENCY_DELIMITER, argument).toUpperCase()));
+        } catch (IllegalArgumentException exception) {
             return new HelpCommand(AddRecurringCommand.COMMAND_WORD);
         }
-        if (doOnDateString.isBlank()) {
-            newCommand.setDoOnDate(null);
-            newCommand.setHasDoOnTime(false);
-        } else {
-            newCommand.setHasDoOnTime(hasTime(doOnDateString));
-            newCommand.setDoOnDate(prepareTaskDate(doOnDateString, newCommand.getHasDoOnTime()));
+        if (newCommand.getTaskDescription().isBlank() || doOnDateString.isBlank()) {
+            return new HelpCommand(AddRecurringCommand.COMMAND_WORD);
         }
-        return newCommand;
 
+        newCommand.setHasDoOnTime(hasTime(doOnDateString));
+        newCommand.setDoOnDate(prepareTaskDate(doOnDateString, newCommand.getHasDoOnTime()));
+
+        return newCommand;
     }
 
     private static Command prepareEditRecurring(String[] arguments) {

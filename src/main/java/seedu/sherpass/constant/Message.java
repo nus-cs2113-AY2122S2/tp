@@ -61,6 +61,4 @@ public class Message {
             + "\t'start <mode_number>'\n\n"
             + "or choose your own custom timer with\n"
             + "\t'start /custom <timer_duration>'";
-    public static final String ERROR_DUPLICATE_TASK_MESSAGE_1 = "Skipping task \"";
-    public static final String ERROR_DUPLICATE_TASK_MESSAGE_2 = "\" as it already exists!";
 }
