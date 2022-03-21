@@ -31,8 +31,8 @@ public class Parser {
     private static final String LOCALDATE_TODAY_INDICATOR = "today";
     private static final int COMMAND_WITH_ARGS_TOKEN_COUNT = 3;
     private static final int DELIMITERED_COMMAND_MIN_TOKEN_COUNT = 2;
-    private static final int MINIMUM_SURCHARGE_PERCENT = 0;
-    private static final int MAXIMUM_SURCHARGE_PERCENT = 100;
+    static final double MINIMUM_SURCHARGE_PERCENT = 0;
+    static final double MAXIMUM_SURCHARGE_PERCENT = 100;
     
     // MAIN PUBLIC PARSING FUNCTIONS
     /**
@@ -231,13 +231,13 @@ public class Parser {
      *                                if the argument cannot be parsed as an integer, or
      *                                if the parsed GST percentage is not in [0, 100].
      */
-    public static int parseGst(String commandArgs) throws InvalidFormatException {
+    public static double parseGst(String commandArgs) throws InvalidFormatException {
         if (!ParserUtils.hasDelimiter(commandArgs, ParserUtils.GST_DELIMITER)) {
             return 0;
         }
 
         String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.GST_DELIMITER);
-        int gst = ParserUtils.parseIntFromString(argument, ParserUtils.GST_DELIMITER);
+        double gst = ParserUtils.parsePercentageFromString(argument, ParserUtils.GST_DELIMITER);
         if (gst < MINIMUM_SURCHARGE_PERCENT || gst > MAXIMUM_SURCHARGE_PERCENT) {
             throw new InvalidFormatException(ParserErrors.getInvalidGstErrorMessage());
         }
@@ -255,13 +255,13 @@ public class Parser {
      *                                if the argument cannot be parsed as an integer, or
      *                                if the parsed service charge percentage is not in [0, 100].
      */
-    public static int parseServiceCharge(String commandArgs) throws InvalidFormatException {
+    public static double parseServiceCharge(String commandArgs) throws InvalidFormatException {
         if (!ParserUtils.hasDelimiter(commandArgs, ParserUtils.SERVICE_CHARGE_DELIMITER)) {
             return 0;
         }
 
         String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.SERVICE_CHARGE_DELIMITER);
-        int serviceCharge = ParserUtils.parseIntFromString(argument, ParserUtils.SERVICE_CHARGE_DELIMITER);
+        double serviceCharge = ParserUtils.parsePercentageFromString(argument, ParserUtils.SERVICE_CHARGE_DELIMITER);
         if (serviceCharge < MINIMUM_SURCHARGE_PERCENT || serviceCharge > MAXIMUM_SURCHARGE_PERCENT) {
             throw new InvalidFormatException(ParserErrors.getInvalidServiceChargeErrorMessage());
         }

@@ -52,8 +52,8 @@ public class ActivityCreateCommand extends Command {
     private String payer;
     private String[] involvedList;
     private double[] costList;
-    private int gst;
-    private int serviceCharge;
+    private double gst;
+    private double serviceCharge;
 
     private static final double ZERO_COST_PAID = 0;
     public static final double ZERO_COST_OWED = 0;
@@ -72,7 +72,7 @@ public class ActivityCreateCommand extends Command {
      * @param serviceCharge The service charge to be included for the cost of the activity.
      */
     public ActivityCreateCommand(int sessionId, String activityName, double totalCost, String payer,
-                                 String[] involvedList, double[] costList, int gst, int serviceCharge) {
+                                 String[] involvedList, double[] costList, double gst, double serviceCharge) {
         assert sessionId > 0 : Message.ASSERT_ACTIVITYCREATE_SESSION_ID_LESS_THAN_ONE;
         assert activityName != null : Message.ASSERT_ACTIVITYCREATE_ACTIVITY_NAME_MISSING;
         assert payer != null : Message.ASSERT_ACTIVITYCREATE_PAYER_NAME_MISSING;
@@ -101,8 +101,8 @@ public class ActivityCreateCommand extends Command {
         String[] involvedList;
         double totalCost = 0;
         double[] costList = null;
-        int gst;
-        int serviceCharge;
+        double gst;
+        double serviceCharge;
 
         try {
             sessionId = Parser.parseSessionId(commandArgs);
