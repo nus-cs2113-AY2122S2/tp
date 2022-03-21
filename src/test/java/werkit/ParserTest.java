@@ -5,6 +5,7 @@ import commands.ExitCommand;
 import commands.HelpCommand;
 import commands.WorkoutCommand;
 import commands.InvalidCommandException;
+import commands.PlanCommand;
 import data.exercises.ExerciseList;
 import data.plans.PlanList;
 import data.workouts.WorkoutList;
@@ -51,6 +52,7 @@ class ParserTest {
         assertThrows(InvalidCommandException.class, () -> parser.parseUserInput("workout /new | push up /reps 20"));
     }
 
+    //Workout tests
     @Test
     void createWorkoutCommand_validWorkoutCommand_expectSuccess() throws InvalidCommandException, IOException {
         assertTrue(parser.createWorkoutCommand("workout /new push up /reps 20") instanceof WorkoutCommand);
@@ -62,12 +64,14 @@ class ParserTest {
     @Test
     void createWorkoutCommand_invalidWorkoutCommand_exceptionThrown() {
         assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /new"));
+        assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /list extra"));
         assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /delete"));
         assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /update"));
         assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /test"));
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> parser.createWorkoutCommand("workout"));
     }
 
+    //Exercise tests
     @Test
     void createExerciseCommand_validExerciseCommand_expectSuccess() throws InvalidCommandException {
         assertTrue(parser.createExerciseCommand("exercise /list") instanceof ExerciseCommand);
@@ -77,5 +81,23 @@ class ParserTest {
     void createExerciseCommand_invalidExerciseCommand_exceptionThrown() {
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> parser.createExerciseCommand("exercise"));
         assertThrows(InvalidCommandException.class, () -> parser.createExerciseCommand("exercise /test"));
+        assertThrows(InvalidCommandException.class, () -> parser.createExerciseCommand("exercise /list extra"));
+    }
+
+    //Plan tests
+    @Test
+    void createPlanCommand_validPlanCommand_expectSuccess() throws InvalidCommandException {
+        assertTrue(parser.createPlanCommand("plan /new Random /workouts 1,2,3") instanceof PlanCommand);
+        assertTrue(parser.createPlanCommand("plan /new Random /workouts 1,1,1,1,1,1,1,1,1,1") instanceof PlanCommand);
+        assertTrue(parser.createPlanCommand("plan /new Random /workouts 2") instanceof PlanCommand);
+        assertTrue(parser.createPlanCommand("plan /list") instanceof PlanCommand);
+    }
+
+    @Test
+    void createPlanCommand_invalidPlanCommand_exceptionThrown() {
+        assertThrows(InvalidCommandException.class, () -> parser.createPlanCommand("plan /new"));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> parser.createPlanCommand("plan"));
+        assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("plan /test"));
+        assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("plan /list extra"));
     }
 }
