@@ -3,6 +3,7 @@ package seedu.splitlah.command;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -140,6 +141,34 @@ class SessionCreateCommandTest {
         command.run(manager);
         int testSessionId = manager.getProfile().getSessionIdTracker();
         assertEquals(currentSessionId + 1, testSessionId);
+    }
+
+
+    /**
+     * Checks if a session is created with Person List and Group unique identifier delimiter
+     * and list of persons stored in created session has size of 3.
+     */
+    @Test
+    public void run_validCommandWithPersonListAndGidDelimiter_personListIsThree() throws InvalidDataException {
+        String userInput = "session /create /n Class gathering /d 15-02-2022 /pl Charlie /gid 1";
+        Command command = Parser.getCommand(userInput);
+        command.run(manager);
+        int sizeOfPersonList = manager.getProfile().getSession(3).getPersonList().size();
+        assertEquals(3, sizeOfPersonList);
+    }
+
+    /**
+     * Checks if a session is created with Person List and Group unique identifier delimiter
+     * and list of persons stored in created session has size of 3 as name duplicates are removed.
+     */
+    @Test
+    public void run_validCommandWithPersonListAndGidDelimiterHavingDuplicateNames_personListIsThree()
+            throws InvalidDataException{
+        String userInput = "session /create /n Class gathering /d 15-02-2022 /pl alice Charlie /gid 1";
+        Command command = Parser.getCommand(userInput);
+        command.run(manager);
+        int sizeOfPersonList = manager.getProfile().getSession(3).getPersonList().size();
+        assertEquals(3, sizeOfPersonList);
     }
 
     /**
