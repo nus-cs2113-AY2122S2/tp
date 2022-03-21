@@ -25,7 +25,7 @@ public class GroupViewCommand extends Command {
     /**
      * Initializes a GroupViewCommand object.
      *
-     * @param groupId An integer that represents the group unique identifier.
+     * @param groupId An integer that represents the group unique identifier for the group to be viewed.
      */
     public GroupViewCommand(int groupId) {
         assert groupId > 0 : Message.ASSERT_GROUPVIEW_GROUP_ID_LESS_THAN_ONE;
