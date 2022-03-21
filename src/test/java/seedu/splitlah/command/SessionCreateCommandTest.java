@@ -98,6 +98,37 @@ class SessionCreateCommandTest {
     }
 
     /**
+     * Checks if session is created successfully with Group unique identifier delimiter
+     * and added into list of sessions.
+     */
+    @Test
+    public void run_validCommandWithGidDelimiter_sessionListSizeBecomesThree() {
+        String userInput = "session /create /n Class gathering /d 15-02-2022 /gid 1";
+        Command command = Parser.getCommand(userInput);
+
+        // Check if a SessionCreateCommand instance was returned.
+        assertEquals(SessionCreateCommand.class, command.getClass());
+        command.run(manager);
+
+        // Check if session was successfully added into the list of sessions.
+        assertEquals(3, manager.getProfile().getSessionList().size());
+    }
+
+    /**
+     * Checks if session is created successfully with Group unique identifier delimiter
+     * and session unique identifier tracker in Profile object is incremented.
+     */
+    @Test
+    public void run_validCommandWithGidDelimiter_sessionIdIncremented() {
+        String userInput = "session /create /n Class gathering /d 15-02-2022 /gid 1";
+        Command command = Parser.getCommand(userInput);
+        int currentSessionId = manager.getProfile().getSessionIdTracker();
+        command.run(manager);
+        int testSessionId = manager.getProfile().getSessionIdTracker();
+        assertEquals(currentSessionId + 1, testSessionId);
+    }
+
+    /**
      * Checks if a session is created with duplicated person names.
      */
     @Test
