@@ -14,6 +14,7 @@ import java.util.logging.Level;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.dayOnlyFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.dateOnlyFormat;
+import static seedu.sherpass.constant.TimetableConstant.BLANK_TIME_PERIOD;
 import static seedu.sherpass.constant.TimetableConstant.DATE_SPACE_FULL_LENGTH;
 import static seedu.sherpass.constant.TimetableConstant.DAYS_IN_A_WEEK;
 import static seedu.sherpass.constant.TimetableConstant.PARTITION_PIPE_LINE_LENGTH;
@@ -97,7 +98,8 @@ public class Timetable {
             }
 
             if (i >= 2) {
-                colTwo = filteredTasks.get(j).getTimePeriod();
+                colTwo = (colTwo.equals(filteredTasks.get(j).getTimePeriod())) ?
+                        BLANK_TIME_PERIOD : filteredTasks.get(j).getTimePeriod();
                 colThree = filteredTasks.get(j).getStatusIcon();
                 colFour = (filteredTasks.get(j).getIndex() + "." + filteredTasks.get(j).getDescription());
                 colFive = filteredTasks.get(j).getDoOnDateString();
