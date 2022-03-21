@@ -27,8 +27,8 @@
 Adds new goods or order.
 
 Format: 
-* Adding order: `add -o id/ID r/Receiver a/SHIPPING_ADDRESS`
-* Adding goods: `add -g oid/ORDER_ID gid/GOOD_ID n/NAME q/QUANTITY d/DESCRIPTION`
+* Adding order: `add o/ id/ID r/Receiver a/SHIPPING_ADDRESS`
+* Adding goods: `add g/ oid/ORDER_ID gid/GOOD_ID n/NAME q/QUANTITY d/DESCRIPTION`
 
 Note:
 * `ID`, `GID`and `OID` are an integer uniquely represent the items.
@@ -36,9 +36,9 @@ Note:
 
 Example of usage: 
 
-`add -o id/101 r/John Doe a/here`
+`add o/ id/101 r/John Doe a/here`
 
-`add -g oid/101 gid/102 n/tables q/15 d/this is a lot of tables.`
+`add g/ oid/101 gid/102 n/tables q/15 d/this is a lot of tables.`
 
 Expected Output
 ```
@@ -50,8 +50,8 @@ Order 101 is added
 Remove goods or order. 
 
 Format: 
-* Removing order: `remove -o id/ID`
-* Removing goods: `remove -g id/ID q/QUANTITY`
+* Removing order: `remove o/ id/ID`
+* Removing goods: `remove g/ id/ID q/QUANTITY`
 
 Note:
 * The `ID` is an integer uniquely represent the items.
@@ -59,9 +59,9 @@ Note:
 
 Example of usage:
 
-`remove -g id/102 q/2`
+`remove g/ id/102 q/2`
 
-`remove -o id/101`
+`remove o/ id/101`
 
 Expected output:
 
@@ -76,15 +76,15 @@ To get a list of names of every inventory item.
 Format: `list flag`
 
 Note:
-* The `flag` is either `-o` or `-g` to view either an order or good
+* The `flag` is either `o/` or `g/` to view either an order or good
 
 Example of usage:
 
 This is to list all current orders
-`list -o`
+`list o/`
 
 This is to list all current goods
-`list -g`
+`list g/`
 
 Expected output: 
 ```
@@ -100,16 +100,16 @@ View the details of a specific good, based on its ID number.
 Format: `view flag id/ID`
 
 Note:
-* The `flag` is either `-o` or `-g` to view either an order or good
+* The `flag` is either `o/` or `g/` to view either an order or good
 * The `ID` is an integer uniquely representing the corresponding items.
 
 Example of usage:
 
 This is to view order with id 1
-`view -o id/101`
+`view o/ id/101`
 
 This is to view good with id 1
-`view -g id/102`
+`view g/ id/102`
 
 Expected output:
 ```
@@ -142,12 +142,12 @@ There are 86 goods in total.
 
 ## Command Summary
 
-* Add order `add -o id/ID r/RECEIVER a/SHIPPING_ADDRESS`
-* Add good `add -g oid/ORDER_ID gid/GOOD_ID n/NAME q/QUANTITY d/DESCRIPTION`
-* Remove order: `remove -o i/ID`
-* Remove good: `remove -g i/ID q/QUANTITY`
-* List all orders: `list -o`
-* List all goods: `list -g`
-* View order: `view -o id/ORDER_ID`
-* View good: `view -g id/GOOD_ID`
+* Add order `add o/ id/ID r/RECEIVER a/SHIPPING_ADDRESS`
+* Add good `add g/ oid/ORDER_ID gid/GOOD_ID n/NAME q/QUANTITY d/DESCRIPTION`
+* Remove order: `remove o/ i/ID`
+* Remove good: `remove g/ i/ID q/QUANTITY`
+* List all orders: `list o/`
+* List all goods: `list g/`
+* View order: `view o/ id/ORDER_ID`
+* View good: `view g/ id/GOOD_ID`
 * Total quantity of goods: `total`
