@@ -65,10 +65,10 @@ public class SearchCommandTest {
         ExerciseList el = new ExerciseList();
 
         assertThrows(NullPointerException.class,
-                () -> new SearchCommand(userInput1, ui, el, userAction1, userArguments1));
+            () -> new SearchCommand(userInput1, ui, el, userAction1, userArguments1));
         assertThrows(NullPointerException.class,
-                () -> new SearchCommand(userInput2, ui, el, userAction2, userArguments2));
+            () -> new SearchCommand(userInput2, ui, el, userAction2, userArguments2));
         assertThrows(NullPointerException.class,
-                () -> new SearchCommand(userInput3, ui, el, userAction3, userArguments3));
+            () -> new SearchCommand(userInput3, ui, el, userAction3, userArguments3));
     }
 }
