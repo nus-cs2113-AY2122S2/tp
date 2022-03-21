@@ -192,7 +192,7 @@ public class ParserUtils {
      * @param input     A String object that contains numeric characters or a single decimal point character,
      *                  representing a cost value.
      * @param delimiter A String object that represents a demarcation of a specific argument in the command.
-     * @return An double representing a cost value.
+     * @return A double representing a cost value.
      * @throws InvalidFormatException If the provided input String object contains characters other than numeric
      *                                characters or a single decimal point character,
      *                                and cannot be parsed as a double,
@@ -229,7 +229,7 @@ public class ParserUtils {
      * @param input     A String object that contains numeric characters or a single decimal point character,
      *                  representing a percentage value.
      * @param delimiter A String object that represents a demarcation of a specific argument in the command.
-     * @return An double representing a percentage value.
+     * @return A double representing a percentage value.
      * @throws InvalidFormatException If the provided input String object contains characters other than numeric
      *                                characters or a single decimal point character,
      *                                and cannot be parsed as a double,
