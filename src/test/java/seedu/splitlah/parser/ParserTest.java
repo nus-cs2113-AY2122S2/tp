@@ -831,7 +831,7 @@ class ParserTest {
     
     // parseGst()
     /**
-     * Checks if an integer representing a GST percent value of 0 is properly returned 
+     * Checks if a double representing a GST percent value of 0 is properly returned 
      * when the GST delimiter is not provided by the user.
      */
     @Test
@@ -839,7 +839,7 @@ class ParserTest {
         String argumentWithoutGstDelimiter =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         try {
-            int output = Parser.parseGst(argumentWithoutGstDelimiter);
+            double output = Parser.parseGst(argumentWithoutGstDelimiter);
             assertEquals(0, output);
         } catch (InvalidFormatException exception) {
             fail();
@@ -855,7 +855,7 @@ class ParserTest {
         String argumentWithoutGstArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst /sc 10";
         try {
-            int output = Parser.parseGst(argumentWithoutGstArgument);
+            double output = Parser.parseGst(argumentWithoutGstArgument);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_MISSING_ARGUMENT + ParserUtils.GST_DELIMITER;
@@ -865,17 +865,17 @@ class ParserTest {
 
     /**
      * Checks if an exception is properly thrown when the GST delimiter is provided by the user but the 
-     * argument following the GST delimiter cannot be parsed as an integer.
+     * argument following the GST delimiter cannot be parsed as a double.
      */
     @Test
-    void parseGst_delimiterExistsArgumentNotInteger_exceptionThrown() {
-        String argumentWithNonIntegerArgument =
+    void parseGst_delimiterExistsArgumentNotDouble_exceptionThrown() {
+        String argumentWithNonDoubleArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst apple /sc 10";
         try {
-            int output = Parser.parseGst(argumentWithNonIntegerArgument);
+            double output = Parser.parseGst(argumentWithNonDoubleArgument);
             fail();
         } catch (InvalidFormatException exception) {
-            String errorMessage = Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + ParserUtils.GST_DELIMITER;
+            String errorMessage = Message.ERROR_PARSER_NON_PERCENTAGE_ARGUMENT + ParserUtils.GST_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
     }
@@ -885,23 +885,34 @@ class ParserTest {
      * is provided by the user but the integer is not within the valid range of [0, 100].
      */
     @Test
-    void parseGst_delimiterExistsArgumentIntegerButNotInRange_exceptionThrown() {
+    void parseGst_delimiterExistsArgumentDoubleButNotInRange_exceptionThrown() {
         // Test values less than 0, negative values
-        String argumentWithIntegerArgumentUnderRange =
+        String argumentWithDoubleArgumentUnderRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst -1 /sc 10";
         try {
-            int output = Parser.parseGst(argumentWithIntegerArgumentUnderRange);
+            double output = Parser.parseGst(argumentWithDoubleArgumentUnderRange);
+            fail();
+        } catch (InvalidFormatException exception) {
+            String errorMessage = Message.ERROR_PARSER_PERCENTAGE_NEGATIVE;
+            assertEquals(errorMessage, exception.getMessage());
+        }
+
+        // Test values greater than 100
+        String argumentWithDoubleArgumentAboveRange =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 101 /sc 10";
+        try {
+            double output = Parser.parseGst(argumentWithDoubleArgumentAboveRange);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_INVALID_GST_SURCHARGE + ParserUtils.GST_DELIMITER;
             assertEquals(errorMessage, exception.getMessage());
         }
-
-        // Test values greater than 100
-        String argumentWithIntegerArgumentAboveRange =
-                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 101 /sc 10";
+        
+        // Test double values near 100
+        String argumentWithDoubleArgumentNearRange =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 100.01 /sc 10";
         try {
-            int output = Parser.parseGst(argumentWithIntegerArgumentAboveRange);
+            double output = Parser.parseGst(argumentWithDoubleArgumentNearRange);
             fail();
         } catch (InvalidFormatException exception) {
             String errorMessage = Message.ERROR_PARSER_INVALID_GST_SURCHARGE + ParserUtils.GST_DELIMITER;
@@ -910,16 +921,37 @@ class ParserTest {
     }
 
     /**
-     * Checks if an integer representing a GST percent value is properly returned when the GST delimiter and
-     * an argument with an integer value within the valid range of [0, 100] is provided by the user.
+     * Checks if a double representing a GST percent value is properly returned when the GST delimiter and
+     * an argument with a double value within the valid range of [0, 100] is provided by the user.
      */
     @Test
-    void parseGst_delimiterExistsArgumentIntegerWithinRange_gstPercentage() {
-        String argumentWithIntegerArgumentInRange =
+    void parseGst_delimiterExistsArgumentDoubleWithinRange_gstPercentage() {
+        // Test regular values
+        String argumentWithDoubleArgumentInRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 10";
         try {
-            int output = Parser.parseGst(argumentWithIntegerArgumentInRange);
+            double output = Parser.parseGst(argumentWithDoubleArgumentInRange);
             assertEquals(7, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+        
+        // Test minimum allowed value
+        String argumentWithMinPercentageArgument = 
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 0 /sc 10";
+        try {
+            double output = Parser.parseGst(argumentWithMinPercentageArgument);
+            assertEquals(Parser.MINIMUM_SURCHARGE_PERCENT, output);
+        } catch (InvalidFormatException exception) {
+            fail();
+        }
+        
+        // Test maximum allowed value
+        String argumentWithMaxPercentageArgument =
+                "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 100 /sc 10";
+        try {
+            double output = Parser.parseGst(argumentWithMaxPercentageArgument);
+            assertEquals(Parser.MAXIMUM_SURCHARGE_PERCENT, output);
         } catch (InvalidFormatException exception) {
             fail();
         }
