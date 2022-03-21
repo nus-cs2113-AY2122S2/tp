@@ -10,6 +10,11 @@ import seedu.splitlah.ui.Message;
 
 import java.util.logging.Level;
 
+/**
+ * Represents a command that displays the full details of a Group object specified by the user.
+ *
+ * @author Ivan
+ */
 public class GroupViewCommand extends Command {
 
     public static final String COMMAND_TEXT = "group /view";
