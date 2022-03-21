@@ -29,7 +29,7 @@ public class GroupListCommand extends Command {
     public void run(Manager manager) {
         ArrayList<Group> groupsToBePrinted = manager.getProfile().getGroupList();
         if (groupsToBePrinted.isEmpty()) {
-            manager.getUi().printlnMessage(Message.ERROR_PROFILE_SESSION_LIST_EMPTY);
+            manager.getUi().printlnMessage(Message.ERROR_PROFILE_GROUP_LIST_EMPTY);
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_GROUPLIST_GROUPS_NOT_LISTED);
             return;
         }
