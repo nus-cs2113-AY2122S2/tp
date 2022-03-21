@@ -26,8 +26,8 @@ class ParserTest {
         CreditCardList cardList = new CreditCardList();
         Parser testParser = new Parser();
         assertTrue(testParser.parseCommand(testInput, testList, cardList) instanceof HelpCommand);
-        assert testParser.parseCommand(testInput, testList, cardList) instanceof HelpCommand : "testParser should return an "
-                + "instance of HelpCommand";
+        assert testParser.parseCommand(testInput, testList, cardList)
+                instanceof HelpCommand : "testParser should return an " + "instance of HelpCommand";
 
         testInput = "add description " + TEST_PRICE;
         assertTrue(testParser.parseCommand(testInput, testList, cardList) instanceof AddCommand);

@@ -24,7 +24,7 @@ class AddCommandTest {
         new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand();
         ArrayList<Expenditure> testList = new ArrayList<>();
         testList.add(new Expenditure("cash", "Personal", "Nike Shoes",
-                300, "2022-03"));
+            300, "2022-03"));
         String expectedOutput = getOutput(testList);
         String actualOutput = getOutput(expenditureTestList.expenditureListArray);
         assertEquals(expectedOutput, actualOutput);
@@ -40,7 +40,7 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         String inputString = "";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
     }
 
     /**
@@ -52,7 +52,7 @@ class AddCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         String inputString = "expenditure deadbeef";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
     }
 
     /**
@@ -64,7 +64,7 @@ class AddCommandTest {
     public String getOutput(ArrayList<Expenditure> list) {
         if (!list.isEmpty()) {
             return list.get(list.size() + LIST_INDEX_CORRECTION).getDescription()
-                    + list.get(list.size() + LIST_INDEX_CORRECTION).getAmount();
+                + list.get(list.size() + LIST_INDEX_CORRECTION).getAmount();
         }
         return "";
     }
