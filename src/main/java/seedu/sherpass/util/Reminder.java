@@ -3,17 +3,17 @@ package seedu.sherpass.util;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
-import java.time.LocalDate;
-
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.time.LocalDate;
 
 import static java.util.stream.Collectors.toList;
+
 
 public class Reminder {
     private Ui ui;
     private ArrayList<Task> tasks;
-    private LocalDate currentDate = LocalDate.now();
+    private LocalDate todayDate = LocalDate.now();
 
     /**
      * Create a constructor for the class Reminder.
@@ -40,15 +40,12 @@ public class Reminder {
      * with reference to user local machine date.
      */
     public void showDailyTask() {
-        ArrayList<Task> filteredDailyTasks = (ArrayList<Task>) tasks.stream()
-                .filter((t) -> isEqualDate(t.getByDate(), currentDate))
-                .filter((t) -> !t.isDone())
-                .collect(toList());
+        ArrayList<Task> filteredDailyTasks = getFilteredDailyTasks();
 
         if (filteredDailyTasks.isEmpty()) {
             ui.showToUser("Your schedule is empty today.");
         } else {
-            System.out.println("Schedule for today:");
+            ui.showToUser("Schedule for today:");
             for (Task task : filteredDailyTasks) {
                 System.out.println(task.toString());
             }
@@ -61,10 +58,10 @@ public class Reminder {
      * with reference to user local machine date.
      */
     public void showWeeklyTask() {
-        LocalDate nextWeekDate = currentDate.plusDays(7);
+        LocalDate nextWeekDate = todayDate.plusDays(7);
 
         ArrayList<Task> filteredThisWeekTasks = (ArrayList<Task>) tasks.stream()
-                .filter((t) -> isBeforeDate(t.getByDate(), nextWeekDate))
+                .filter((t) -> t.getByDate().isBefore(nextWeekDate))
                 .filter((t) -> !t.isDone())
                 .sorted(Comparator.comparing(Task::getByDate))
                 .collect(toList());
@@ -72,7 +69,7 @@ public class Reminder {
         if (filteredThisWeekTasks.isEmpty()) {
             ui.showToUser("You do not have any pending task for the week.");
         } else {
-            System.out.println("Tasks to be done within the week:");
+            ui.showToUser("Tasks to be done within the week:");
             for (Task task : filteredThisWeekTasks) {
                 System.out.println(task.toString());
             }
@@ -80,17 +77,43 @@ public class Reminder {
         ui.showLine();
     }
 
-    private boolean isEqualDate(LocalDate currentDate, LocalDate compareDate) {
-        if (currentDate == null) {
-            return false;
+    private void addDailyTaskToFilteredDailyTasks(ArrayList<Task> filteredDailyTasks, Task task) {
+        if (hasNoDeadline(task)) {
+            return;
+        } else if (task.getByDate().isEqual(todayDate)) {
+            filteredDailyTasks.add(task);
+        } else if (hasNoReminderDate(task)) {
+            return;
+        } else if (task.getDoOnDate().isEqual(todayDate)) {
+            filteredDailyTasks.add(task);
+        } else {
+            return;
         }
-        return currentDate.isEqual(compareDate);
     }
 
-    private boolean isBeforeDate(LocalDate currentDate, LocalDate compareDate) {
-        if (currentDate == null) {
+    private ArrayList<Task> getFilteredDailyTasks() {
+        ArrayList<Task> filteredDailyTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            addDailyTaskToFilteredDailyTasks(filteredDailyTasks, task);
+        }
+        return (ArrayList<Task>) filteredDailyTasks.stream()
+                .filter((t) -> !t.isDone())
+                .collect(toList());
+    }
+
+    private boolean hasNoDeadline(Task task) {
+        if (task.getByDate() == null) {
+            return true;
+        } else {
             return false;
         }
-        return currentDate.isBefore(compareDate);
+    }
+
+    private boolean hasNoReminderDate(Task task) {
+        if (task.getDoOnDate() == null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

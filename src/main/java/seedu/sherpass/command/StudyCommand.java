@@ -22,6 +22,7 @@ public class StudyCommand extends Command {
      * mode. Only one timer can be running at a time. User can leave Study mode by typing "leave".
      */
     private void enterStudyMode(Ui ui, TimerLogic timerLogic) {
+
         ui.showToUser(WELCOME_MESSAGE_STUDY);
         ui.showLine();
         String userInput = ui.readCommand();
