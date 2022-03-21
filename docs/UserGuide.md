@@ -23,6 +23,43 @@ optimized for use via a Command Line Interface (CLI).
 
 > **Heads up!** Your inputs cannot contain the pipe character `|`!
 
+---
+### Show all Exercises: `exercise /list`
+Lists down all exercises that are available for selection.
+
+Format: `exercise /list`
+
+**Example**
+```
+> exercise /list
+```
+**Expected Outcome**
+```
+------------------------------------------------------------
+There are 13 exercises available.
+Here is the list of exercises: 
+------------------------------------------------------------
+1. push up
+2. bicep curl
+3. pull up
+4. squat
+5. lunge
+6. hip thrust
+7. sit up
+8. crunch
+9. russian twist
+10. running
+11. swimming
+12. jumping jack
+13. burpee
+------------------------------------------------------------
+End of exercise list.
+------------------------------------------------------------
+```
+
+In the current exercise list, there are 13 exercises available.
+
+---
 ### Create a Workout: `workout /new`
 Creates a new workout.
 
@@ -166,6 +203,54 @@ Showed all workouts in list
 ```
 ---
 
+### View Help: `help`
+Lists all the commands with examples.
+
+Format: `help`
+
+**Example**
+```
+> help
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+	 To view all workouts, please enter:
+	 workout /list
+	 This will print all the existing workouts.
+----------------------------------------------------------------------
+	 To view all exercises available, please enter:
+	 exercise /list
+	 This will print all the exercises available.
+----------------------------------------------------------------------
+	 To add a workout, please enter: 
+	 workout /new <exercise name> /reps <no. of repetitions>
+	 Example: 
+	 workout /new push up /reps 10
+	 This will add a workout with 10 reps of push up.
+----------------------------------------------------------------------
+	 To delete a workout, please enter: 
+	 workout /delete <index>
+	 Example: 
+	 workout /delete 1
+	 This will delete the workout with index 1 if exists.
+----------------------------------------------------------------------
+	 To update a workout, please enter: 
+	 workout /update <index> <quantity>
+	 Example: 
+	 workout /update 1 15
+	 This will update the workout with index 1 to 15 reps if exists.
+----------------------------------------------------------------------
+	 To exit werkIt, please enter: 
+	 exit
+	 This will exit werkIt.
+----------------------------------------------------------------------
+```
+
+This will show a complete guide to use WeriIt.
+
+---
+
 ## WerkIt!'s Local Storage Information
 When you start WerkIt! for the first time, the following directory and files are created:
 
@@ -212,4 +297,5 @@ first time. Your saved data should be in that directory.
 | Create Workout | Format: `workout /new <exercise name> /reps <number of repetitions>`<br/>Example: `workout /new biceps curl /reps 1`       |
 | Delete Workout | Format: `workout /delete <workout number to delete>`<br/>Example: `workout /delete 2`                                      |
 | Update Workout | Format: `workout /update <index of workout to be updated> <new number of repetitions>`<br/>Example: `workout /update 1 15` |
-
+| View Exercise  | Format: `exercise /list`<br/>Example: `exercise /list`                                                                     |
+| View Help      | Format: `help`<br/>Example: `help`                                                                                         |
