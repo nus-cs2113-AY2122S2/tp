@@ -39,6 +39,9 @@ public class ShowCommand extends Command {
         case "todo":
             taskList.printPendingTasks(ui);
             break;
+        case "today":
+            Timetable.showTodaySchedule(taskList, ui);
+            break;
         case "week":
             Timetable.showScheduleOfTheWeek(taskList, ui);
             break;
