@@ -39,6 +39,7 @@ public class StringConstants {
      * For DeleteCommand.
      */
     public static final String DELETE_MESSAGE = "%s has been deleted.";
+    public static final String DELETE_ABORT = "Deletion has been cancelled.";
 
     /**
      * For GradeCommand.

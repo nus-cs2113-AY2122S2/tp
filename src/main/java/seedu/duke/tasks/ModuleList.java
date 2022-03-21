@@ -1,6 +1,7 @@
 package seedu.duke.tasks;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import seedu.duke.exceptions.NoSuchModuleException;
 
@@ -32,6 +33,15 @@ public class ModuleList {
             throw new NoSuchModuleException();
         }
         Module module = getModule(moduleCode);
+        String userConfirmation = "";
+        if (module.getTaskList().size() > 0) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println(moduleCode + " contains task(s). Are you sure you want to delete this?");
+            userConfirmation = scanner.nextLine();
+        }
+        if (userConfirmation.equalsIgnoreCase("no")) {
+            return null;
+        }
         list.remove(getModule(moduleCode));
         return module;
     }

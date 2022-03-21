@@ -13,6 +13,8 @@ import seedu.duke.util.NumberConstants;
 public class DeleteCommand extends Command {
 
     private static final String DELETE_MESSAGE = StringConstants.DELETE_MESSAGE;
+    private static final String DELETE_ABORT = StringConstants.DELETE_ABORT;
+
 
     private String moduleCode;
     private int taskIndex = NumberConstants.INVALID_TASK_INDEX;
@@ -65,7 +67,12 @@ public class DeleteCommand extends Command {
      * @param moduleList List from which the module is to be deleted from.
      */
     public void deleteModule(ModuleList moduleList) throws ModHappyException {
-        result = String.format(DELETE_MESSAGE, moduleList.removeModule(moduleCode));
+        Module removedModule = moduleList.removeModule(moduleCode);
+        if (Objects.isNull(removedModule)) {
+            result = DELETE_ABORT;
+        } else {
+            result = String.format(DELETE_MESSAGE, removedModule);
+        }
     }
 
     /**
