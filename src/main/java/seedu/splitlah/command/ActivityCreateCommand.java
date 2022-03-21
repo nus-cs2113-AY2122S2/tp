@@ -294,7 +294,7 @@ public class ActivityCreateCommand extends Command {
     }
 
     /**
-     * Returns a double representing the total cost by including the extra charges.
+     * Updates total cost by including the extra charges.
      * Extra charges may include gst and service charge.
      * Assumption: gst and service charge are non-negative integers.
      */
