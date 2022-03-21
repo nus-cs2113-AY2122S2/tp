@@ -2,13 +2,7 @@ package seedu.parser;
 
 import java.util.ArrayList;
 
-import seedu.command.AddCommand;
-import seedu.command.CheckCommand;
-import seedu.command.Command;
-import seedu.command.DeleteCommand;
-import seedu.command.IncorrectCommand;
-import seedu.command.ListCommand;
-import seedu.command.UpdateCommand;
+import seedu.command.*;
 
 import java.util.Collections;
 import java.util.regex.Matcher;
@@ -45,7 +39,7 @@ public class Parser {
     );
     public static final String MESSAGE_INCOMPLETE_COMMAND_MISSING_DELIMITER =
             "Please split your command into arguments with each argument seperated by spaces!";
-    public static final String INCORRECT_COMMAND_FORMAT = "Incorrect Command format!";
+    public static final String INCORRECT_COMMAND_FORMAT = "Incorrect Command format! Enter help for more information.";
 
     /**
      * Interpret the command requested by the user and returns a corresponding Command object.
@@ -97,6 +91,8 @@ public class Parser {
             } else {
                 return new ListCommand(new ArrayList<>(Collections.singleton(commandAndArgument.get(1))));
             }
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
         default:
             return new IncorrectCommand(INCORRECT_COMMAND_FORMAT);
@@ -119,6 +115,11 @@ public class Parser {
         userInput = userInput.trim();
         if (userInput.equals(ListCommand.COMMAND_WORD)) {
             resultArrayList.add("list");
+            resultArrayList.add(null);
+            return resultArrayList;
+        }
+        if (userInput.equals(HelpCommand.COMMAND_WORD)) {
+            resultArrayList.add("help");
             resultArrayList.add(null);
             return resultArrayList;
         }
