@@ -8,9 +8,11 @@ import commands.HelpCommand;
 import commands.ExerciseCommand;
 import commands.SearchCommand;
 import commands.PlanCommand;
+import commands.ScheduleCommand;
 import data.exercises.ExerciseList;
 import data.plans.Plan;
 import data.plans.PlanList;
+import data.schedule.DayList;
 import data.workouts.WorkoutList;
 import storage.FileManager;
 import storage.LogHandler;
@@ -19,6 +21,8 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import static commands.PlanCommand.DETAILS_ACTION_KEYWORD;
+import static commands.ScheduleCommand.CLEAR_ACTION_KEYWORD;
+import static commands.ScheduleCommand.CLEAR_ALL_ACTION_KEYWORD;
 import static commands.WorkoutCommand.CREATE_ACTION_KEYWORD;
 import static commands.WorkoutCommand.LIST_ACTION_KEYWORD;
 import static commands.WorkoutCommand.DELETE_ACTION_KEYWORD;
@@ -40,6 +44,7 @@ public class Parser {
     private ExerciseList exerciseList;
     private WorkoutList workoutList;
     private PlanList planList;
+    private DayList dayList;
     private FileManager fileManager;
     public static final int EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS = 2;
     public static final int EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS = 3;
@@ -54,12 +59,13 @@ public class Parser {
      * @param fileManager  An instance of the FileManager class.
      */
     public Parser(UI ui, ExerciseList exerciseList, WorkoutList workoutList,
-                  FileManager fileManager, PlanList planList) {
+                  FileManager fileManager, PlanList planList, DayList dayList) {
         this.ui = ui;
         this.exerciseList = exerciseList;
         this.workoutList = workoutList;
         this.fileManager = fileManager;
         this.planList = planList;
+        this.dayList = dayList;
 
         LogHandler.linkToFileLogger(logger);
     }
@@ -127,6 +133,8 @@ public class Parser {
             return createSearchCommand(userInput);
         case PlanCommand.BASE_KEYWORD:
             return createPlanCommand(userInput);
+        case ScheduleCommand.BASE_KEYWORD:
+            return createScheduleCommand(userInput);
         default:
             logger.log(Level.WARNING, "Unknown command entered by user.");
             throw new InvalidCommandException(className, InvalidCommandException.INVALID_COMMAND_ERROR_MSG);
@@ -308,5 +316,60 @@ public class Parser {
                     InvalidCommandException.INVALID_ACTION_ERROR_MSG);
         }
         return new PlanCommand(userInput, fileManager, planList, actionKeyword, arguments);
+    }
+
+    /**
+     * Creates a new schedule command with the appropriate parameters stored into the object.
+     *
+     * @param userInput The user's input.
+     * @return A ScheduleCommand object containing the parsed parameters obtained from the user's input.
+     * @throws ArrayIndexOutOfBoundsException If the user's input contains insufficient information to parse.
+     * @throws InvalidCommandException        If the user's input contains invalid or insufficient information
+     *                                        to parse.
+     */
+    public ScheduleCommand createScheduleCommand(String userInput) throws
+            ArrayIndexOutOfBoundsException, InvalidCommandException {
+        // Determine the action the user has entered
+        String actionKeyword = userInput.split(" ", 3)[1];
+        String arguments = null;
+        String className = this.getClass().getSimpleName();
+        switch (actionKeyword) {
+        case UPDATE_ACTION_KEYWORD:
+            if (userInput.split(" ", -1).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+                logger.log(Level.WARNING, "User has entered an invalid update schedule command action.");
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_SCHEDULE_UPDATE_COMMAND_ERROR_MSG);
+            }
+            arguments = userInput.split(" ", 3)[2];
+            break;
+        case LIST_ACTION_KEYWORD:
+            if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
+                logger.log(Level.WARNING, "User has entered an invalid list schedule command action.");
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_SCHEDULE_LIST_COMMAND_ERROR_MSG);
+            }
+            break;
+        case CLEAR_ACTION_KEYWORD:
+            if (userInput.split(" ", -1).length != EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+                logger.log(Level.WARNING, "User has entered an invalid clear schedule command action.");
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_SCHEDULE_CLEAR_COMMAND_ERROR_MSG);
+            }
+            arguments = userInput.split(" ", 3)[2];
+            System.out.println(arguments);
+            break;
+        case CLEAR_ALL_ACTION_KEYWORD:
+            if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
+                logger.log(Level.WARNING, "User has entered an invalid clear all schedule command action.");
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_SCHEDULE_CLEAR_ALL_COMMAND_ERROR_MSG);
+            }
+            break;
+        default:
+            logger.log(Level.WARNING, "User has entered an invalid schedule command action.");
+            throw new InvalidCommandException(className,
+                    InvalidCommandException.INVALID_ACTION_ERROR_MSG);
+        }
+        return new ScheduleCommand(userInput, fileManager, dayList, actionKeyword, arguments);
     }
 }

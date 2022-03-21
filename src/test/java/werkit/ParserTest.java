@@ -10,6 +10,7 @@ import commands.ExerciseCommand;
 import commands.PlanCommand;
 import data.exercises.ExerciseList;
 import data.plans.PlanList;
+import data.schedule.DayList;
 import data.workouts.WorkoutList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,11 +29,12 @@ class ParserTest {
     private FileManager fileManager;
     private Parser parser;
     private PlanList planList;
+    private DayList dayList;
 
     @BeforeEach
     void setUp() {
         LogHandler.startLogHandler();
-        this.parser = new Parser(ui, exerciseList, workoutList, fileManager, planList);
+        this.parser = new Parser(ui, exerciseList, workoutList, fileManager, planList, dayList);
     }
 
     @Test
