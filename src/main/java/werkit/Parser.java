@@ -356,7 +356,6 @@ public class Parser {
                         InvalidCommandException.INVALID_SCHEDULE_CLEAR_COMMAND_ERROR_MSG);
             }
             arguments = userInput.split(" ", 3)[2];
-            System.out.println(arguments);
             break;
         case CLEAR_ALL_ACTION_KEYWORD:
             if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
