@@ -77,8 +77,10 @@ public class Storage {
             taskToStore.put("recurring", t instanceof RecurringTask);
             taskToStore.put("has_bytime", t.getHasByTime());
             taskToStore.put("has_dotime", t.getHasDoOnTime());
-            taskToStore.put("by_date", (t.getByDate() == null ? "null" : t.getByDate().format(parseWithTimeFormat)));
-            taskToStore.put("do_date", (t.getDoOnDate() == null ? "null" : t.getDoOnDate().format(parseWithTimeFormat)));
+            taskToStore.put("by_date",
+                    (t.getByDate() == null ? "null" : t.getByDate().format(parseWithTimeFormat)));
+            taskToStore.put("do_date",
+                    (t.getDoOnDate() == null ? "null" : t.getDoOnDate().format(parseWithTimeFormat)));
             taskToStore.put("status", t.getStatusIcon());
             tasks.put(taskToStore);
         }

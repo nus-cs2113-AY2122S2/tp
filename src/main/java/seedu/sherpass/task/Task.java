@@ -20,7 +20,8 @@ public class Task {
      *
      * @param description Description of task.
      */
-    public Task(String description, LocalDateTime byDate, LocalDateTime doOnDate, boolean hasByTime, boolean hasDoOnTime) {
+    public Task(String description, LocalDateTime byDate, LocalDateTime doOnDate,
+                boolean hasByTime, boolean hasDoOnTime) {
         this.description = description;
         this.isDone = false;
         this.byDate = byDate;

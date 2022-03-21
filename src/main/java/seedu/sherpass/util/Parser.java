@@ -2,7 +2,20 @@ package seedu.sherpass.util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import seedu.sherpass.command.*;
+
+import seedu.sherpass.command.AddCommand;
+import seedu.sherpass.command.AddRecurringCommand;
+import seedu.sherpass.command.ClearCommand;
+import seedu.sherpass.command.Command;
+import seedu.sherpass.command.DeleteCommand;
+import seedu.sherpass.command.EditCommand;
+import seedu.sherpass.command.EditRecurringCommand;
+import seedu.sherpass.command.ExitCommand;
+import seedu.sherpass.command.HelpCommand;
+import seedu.sherpass.command.ListCommand;
+import seedu.sherpass.command.MarkCommand;
+import seedu.sherpass.command.StudyCommand;
+import seedu.sherpass.command.UnmarkCommand;
 
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
@@ -144,7 +157,7 @@ public class Parser {
     }
 
     /**
-     * Returns the value for a specific parameter
+     * Returns the value for a specific parameter.
      *
      * @param parameter The parameter to retrieve values from (e.g /by, /do)
      * @param argument The full argument given by the user
@@ -158,7 +171,7 @@ public class Parser {
         String rightSide = argument.substring(afterParameter);
         String[] splitArguments = rightSide.split(" ");
         StringBuilder result = new StringBuilder();
-        for(String s : splitArguments) {
+        for (String s : splitArguments) {
             if (s.charAt(0) == '/') {
                 break;
             }
@@ -172,8 +185,7 @@ public class Parser {
         if (fullArgument.contains("/")) {
             if (fullArgument.indexOf("/") > 0) {
                 return fullArgument.substring(0, fullArgument.indexOf('/') - 1);
-            }
-            else {
+            } else {
                 return "";
             }
         }
@@ -295,7 +307,8 @@ public class Parser {
             }
         }
         // tests to make sure the task description is the first input if it is present
-        String[] splitEditInfo = fullEditInfo.split("/by \\d{4}/\\d{2}/\\d{2}|/do_on \\d{4}/\\d{2}/\\d{2}");
+        String[] splitEditInfo = fullEditInfo.split(
+                "/by \\d{4}/\\d{2}/\\d{2}|/do_on \\d{4}/\\d{2}/\\d{2}");
         if (splitEditInfo.length > 1) {
             throw new WrongEditInfoFormatException();
         }
@@ -308,7 +321,8 @@ public class Parser {
         LocalDateTime parsedByDateToEdit;
         LocalDateTime parsedDoOnDateToEdit;
 
-        if (!splitEditInfo[0].trim().equals(BY_DATE_DELIMITER) && !(splitEditInfo[0].trim().equals(DO_DATE_DELIMITER))) {
+        if (!splitEditInfo[0].trim().equals(BY_DATE_DELIMITER)
+                && !(splitEditInfo[0].trim().equals(DO_DATE_DELIMITER))) {
             descriptionToEdit = splitEditInfo[0];
         } else {
             descriptionToEdit = EMPTY_STRING;
