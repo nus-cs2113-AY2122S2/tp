@@ -15,6 +15,7 @@ public class InvalidDataExceptionTest {
     public void setUp() {
         this.invalidDataExceptionWithMessage = new InvalidDataException("message");
         this.invalidDataExceptionWithMessageWithCause = new InvalidDataException("message", new Throwable("cause"));
+        this.invalidDataExceptionWithoutCauseWithoutMessage = new InvalidDataException();
     }
 
     @Test
@@ -35,7 +36,10 @@ public class InvalidDataExceptionTest {
 
     @Test
     public void getCause_withMessageWithCause_returnsCause() {
-        assertEquals(new Throwable("cause"), invalidDataExceptionWithMessageWithCause.getCause());
+        assertEquals(new Throwable("cause").getMessage(),
+                invalidDataExceptionWithMessageWithCause.getCause().getMessage());
+        assertEquals(new Throwable("cause").getCause(),
+                invalidDataExceptionWithMessageWithCause.getCause().getCause());
     }
 
     @Test
