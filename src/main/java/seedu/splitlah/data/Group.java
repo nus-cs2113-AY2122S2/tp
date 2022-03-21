@@ -144,7 +144,7 @@ public class Group {
      */
     public String getGroupSummary() {
         return groupId + SEPARATOR + groupName + SEPARATOR + getPersonCount()
-            + (getPersonCount() > 1 ? " persons" : " person" );
+            + (getPersonCount() > 1 ? " persons" : " person");
     }
 
     /**
