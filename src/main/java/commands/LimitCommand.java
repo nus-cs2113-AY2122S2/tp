@@ -20,9 +20,9 @@ public class LimitCommand extends Command {
         this.limit = limit;
     }
 
+    @Override
     public CommandResult execute() {
         limitMgr.setLimit(limit);
-        return new CommandResult(String.format(MESSAGE_SET_LIMIT_SUCCESS, "", limit));
+        return new CommandResult(String.format(MESSAGE_SET_LIMIT_SUCCESS, limit));
     }
-
 }
