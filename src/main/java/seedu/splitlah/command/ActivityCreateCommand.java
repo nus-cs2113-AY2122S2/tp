@@ -92,7 +92,7 @@ public class ActivityCreateCommand extends Command {
     /**
      * Prepares user arguments for activity create command.
      *
-     * @param commandArgs The user's arguments.
+     * @param commandArgs A String object representing the user's arguments.
      * @return An ActivityCreateCommand object if necessary parameters were found in user arguments,
      *         an InvalidCommand object otherwise.
      */
@@ -196,7 +196,8 @@ public class ActivityCreateCommand extends Command {
     /**
      * Adds all relevant activity costs to each involved person's list of activity costs.
      *
-     * @param involvedPersonList An ArrayList of Person objects representing the persons involved in the activity.
+     * @param involvedPersonList An ArrayList object containing Person objects
+     *                           each representing a person involved in the activity.
      * @param personPaid         A Person object representing the person who paid for the activity.
      * @param activityId         An integer that uniquely identifies an activity.
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
