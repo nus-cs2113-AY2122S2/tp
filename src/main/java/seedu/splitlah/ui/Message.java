@@ -87,6 +87,14 @@ public abstract class Message {
             "Please enter a value up to 2 decimal places for monetary value(s).";
     public static final String ERROR_PARSER_COST_MORE_THAN_TWELVE_DIGITS_BEFORE_DP =
             "Please enter a value up to 12 digits in dollars for monetary value(s).";
+    public static final String ERROR_PARSER_NON_PERCENTAGE_ARGUMENT =
+            "Please enter a valid percentage value after the delimiter: ";
+    public static final String ERROR_PARSER_PERCENTAGE_NEGATIVE =
+            "Please enter a non-negative percentage value.";
+    public static final String ERROR_PARSER_PERCENTAGE_NOT_TWO_DP =
+            "Please enter a value up to 2 decimal places for percentage values.";
+    public static final String ERROR_PARSER_PERCENTAGE_MORE_THAN_THREE_DIGITS_BEFORE_DP =
+            "Please enter a value up to 3 digits before the decimal point for percentage values.";
     public static final String ERROR_PARSER_INVALID_GST_SURCHARGE =
             "Please enter a valid GST surcharge in % in the range [0, 100] after the delimiter: ";
     public static final String ERROR_PARSER_INVALID_SERVICE_CHARGE =

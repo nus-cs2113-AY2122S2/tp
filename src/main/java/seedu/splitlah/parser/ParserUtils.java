@@ -41,6 +41,9 @@ public class ParserUtils {
     // MISC CONSTANTS
     static final String DELIMITER_INDICATOR = "/";
     private static final String NEXT_DELIMITER_INDICATOR = " /";
+    private static final int ZERO_INDEXING_OFFSET = 1;
+    private static final int PERCENTAGE_ALLOWED_INTEGER_PLACES = 3;
+    private static final int TWO_DECIMAL_PLACES = 2;
     static final String REGEX_WHITESPACES_DELIMITER = "\\s+";
     static final int INVALID_INDEX_INDICATOR = -1;
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -140,8 +143,8 @@ public class ParserUtils {
         if (indexOfDecimal == INVALID_INDEX_INDICATOR) {
             return true;
         }
-        int decimalPlaces = input.length() - indexOfDecimal - 1;
-        return decimalPlaces <= 2;
+        int decimalPlaces = input.length() - indexOfDecimal - ZERO_INDEXING_OFFSET;
+        return decimalPlaces <= TWO_DECIMAL_PLACES;
     }
 
     /**
@@ -191,7 +194,7 @@ public class ParserUtils {
      * @param input     A String object that contains numeric characters or a single decimal point character,
      *                  representing a cost value.
      * @param delimiter A String object that represents a demarcation of a specific argument in the command.
-     * @return An double representing a cost value.
+     * @return A double representing a cost value.
      * @throws InvalidFormatException If the provided input String object contains characters other than numeric
      *                                characters or a single decimal point character,
      *                                and cannot be parsed as a double,
@@ -220,6 +223,43 @@ public class ParserUtils {
             throw new InvalidFormatException(Message.ERROR_PARSER_COST_MORE_THAN_TWELVE_DIGITS_BEFORE_DP);
         }
         return cost;
+    }
+
+    /**
+     * Returns a double representing a percentage value, represented by the provided input String object.
+     *
+     * @param input     A String object that contains numeric characters or a single decimal point character,
+     *                  representing a percentage value.
+     * @param delimiter A String object that represents a demarcation of a specific argument in the command.
+     * @return A double representing a percentage value.
+     * @throws InvalidFormatException If the provided input String object contains characters other than numeric
+     *                                characters or a single decimal point character,
+     *                                and cannot be parsed as a double,
+     *                                if the double parsed from the input String object is not a positive value,
+     *                                if the parsed double has more than 2 decimal points, or
+     *                                if the parsed double has more than 3 digits before the decimal point.
+     */
+    static double parsePercentageFromString(String input, String delimiter) throws InvalidFormatException {
+        assert input != null : Message.ASSERT_PARSER_TOKEN_INPUT_NULL;
+        assert delimiter != null : Message.ASSERT_PARSER_DELIMITER_NULL;
+
+        double percentage;
+        try {
+            percentage = Double.parseDouble(input);
+        } catch (NumberFormatException exception) {
+            throw new InvalidFormatException(ParserErrors.getNonPercentageErrorMessage(delimiter));
+        }
+
+        if (percentage < 0) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_PERCENTAGE_NEGATIVE);
+        }
+        if (!hasAtMostTwoDecimalPlaces(input)) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_PERCENTAGE_NOT_TWO_DP);
+        }
+        if (!hasAtMostGivenIntegerPlaces(input, PERCENTAGE_ALLOWED_INTEGER_PLACES)) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_PERCENTAGE_MORE_THAN_THREE_DIGITS_BEFORE_DP);
+        }
+        return percentage;
     }
 
     /**
