@@ -9,8 +9,8 @@ import seedu.sherpass.command.DeleteCommand;
 import seedu.sherpass.command.EditCommand;
 import seedu.sherpass.command.ExitCommand;
 import seedu.sherpass.command.HelpCommand;
-import seedu.sherpass.command.ListCommand;
 import seedu.sherpass.command.MarkCommand;
+import seedu.sherpass.command.ShowCommand;
 import seedu.sherpass.command.StudyCommand;
 import seedu.sherpass.command.UnmarkCommand;
 
@@ -25,10 +25,11 @@ import seedu.sherpass.task.TaskList;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import static seedu.sherpass.constant.DateAndTimeFormat.parseFormat;
+import static seedu.sherpass.constant.DateAndTimeFormat.inputFormat;
 
 import static seedu.sherpass.constant.Index.MARK_INDEX;
 import static seedu.sherpass.constant.Index.CUSTOM_COMMAND_INDEX;
+import static seedu.sherpass.constant.Index.SHOW_OPTION_INDEX;
 import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
 import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
 import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
@@ -65,10 +66,10 @@ public class Parser {
             LocalDate byDate = null;
             LocalDate doOnDate = null;
             if (!byDateString.equals("null")) {
-                byDate = LocalDate.parse(byDateString, parseFormat);
+                byDate = LocalDate.parse(byDateString, inputFormat);
             }
             if (!doOnDateString.equals("null")) {
-                doOnDate = LocalDate.parse(doOnDateString, parseFormat);
+                doOnDate = LocalDate.parse(doOnDateString, inputFormat);
             }
             parsedTask = new Task(description, byDate, doOnDate);
             String status = taskData.getString("status");
@@ -132,7 +133,7 @@ public class Parser {
             return null;
         }
         try {
-            return LocalDate.parse(rawTaskDate, parseFormat);
+            return LocalDate.parse(rawTaskDate, inputFormat);
         } catch (DateTimeParseException e) {
             return confirmInvalidDateFormat();
         }
@@ -264,6 +265,28 @@ public class Parser {
         }
     }
 
+    private static Command parseShowCommandOptions(String selection) throws InvalidInputException {
+        if (selection.isBlank()) {
+            throw new InvalidInputException();
+        }
+        try {
+            LocalDate dayInput = LocalDate.parse(selection, inputFormat);
+            return new ShowCommand(dayInput, null);
+        } catch (DateTimeParseException e) {
+            return new ShowCommand(null, selection);
+        }
+    }
+
+    private static Command prepareShow(String[] splitInput) {
+        try {
+            String selection = splitInput[SHOW_OPTION_INDEX].trim();
+            return parseShowCommandOptions(selection.toLowerCase());
+        } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
+            System.out.println(ERROR_INVALID_INPUT_MESSAGE);
+        }
+        return null;
+    }
+
     /**
      * Parses the user command input.
      *
@@ -271,12 +294,10 @@ public class Parser {
      * @param taskList  Array of tasks.
      * @return Command type matching the user command.
      */
-    public static Command parseCommand(String userInput, TaskList taskList) {
+    public static Command parseCommand(String userInput, TaskList taskList, Ui ui) {
         String[] splitInput = userInput.split(" ", 2);
         String commandWord = splitInput[OPTIONS_INDEX].toLowerCase().trim();
         switch (commandWord) {
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
         case MarkCommand.COMMAND_WORD:
             return prepareMarkOrUnmark(splitInput, MarkCommand.COMMAND_WORD, taskList);
         case UnmarkCommand.COMMAND_WORD:
@@ -291,12 +312,14 @@ public class Parser {
             return new ClearCommand();
         case StudyCommand.COMMAND_WORD:
             return new StudyCommand();
+        case ShowCommand.COMMAND_WORD:
+            return prepareShow(splitInput);
         case HelpCommand.COMMAND_WORD:
             return prepareHelp(userInput);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         default:
-            System.out.println(ERROR_INVALID_INPUT_MESSAGE);
+            ui.showToUser(ERROR_INVALID_INPUT_MESSAGE);
             return null;
         }
     }

@@ -16,10 +16,10 @@ public class AddCommand extends Command {
     LocalDate toAddTaskDoOnDate;
 
     public static final String COMMAND_WORD = "add";
-    public static final String MESSAGE_USAGE = "add: Adds a task into the task list.\n"
-            + "A task contains a task description and an optional dates "
-            + "to finish the task by.\n\nTo execute the command,\nenter 'add <task_description> "
-            + "/by <task_due_date> /do_on <date_to_work_on_task>'.\n"
+    public static final String MESSAGE_USAGE = "Add: Adds a task into the task list.\n"
+            + "A task contains a task description and \nan optional date"
+            + "to finish the task by.\n\nTo execute the command, enter\n'add <task_description> "
+            + "/by <task_due_date>\n/do_on <date_to_work_on_task>'.\n\n"
             + "E.g. add do assignment /by 3/6/2022 /do_on 1/6/2022.\n\n"
             + "All task dates must be given in the format:\n"
             + "\t\td/M/yyyy , where\n"
