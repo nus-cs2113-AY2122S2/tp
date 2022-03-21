@@ -265,4 +265,16 @@ public abstract class Message {
              "There is another group with the same Id.";
     public static final String ASSERT_GROUPCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
              "Name duplicates exists but not detected.";
+
+    // Group View Command
+    public static final String ASSERT_GROUPVIEW_GROUP_ID_NOT_INITIALIZED =
+            "Group Id is not initialized.";
+    public static final String ASSERT_GROUPVIEW_INCORRECT_GROUP =
+            "The group returned is incorrect.";
+    public static final String ASSERT_GROUPVIEW_GROUP_ID_LESS_THAN_ONE =
+            "Group unique identifier is less than one";
+    public static final String LOGGER_GROUPVIEW_GROUP_VIEWED =
+            "A Group object was successfully viewed from the list of groups with Id: ";
+    public static final String LOGGER_GROUPVIEW_GROUP_NOT_VIEWED =
+            "A Group object was unable to be viewed from the list of groups with Id: ";
 }
