@@ -14,11 +14,16 @@ bill for each activity.
     * [Features](#features)
         * [Creating a session: `session /create`](#creating-a-session-session-create)
         * [Deleting a session: `session /delete`](#deleting-a-session-session-delete)
+        * [Viewing a session: `session /view`](#viewing-a-session--session-view)
         * [Listing all sessions: `session /list`](#listing-all-sessions-session-list)
         * [Creating an activity: `activity /create`](#creating-an-activity-activity-create)
         * [Viewing an activity: `activity /view`](#viewing-an-activity-activity-view)
         * [Listing all activities in a session: `activity /list`](#listing-all-activities-in-a-session-activity-list)
         * [Settling all transactions for a session: `session /summary`](#settling-all-transactions-for-a-session-session-summary)
+        * [Creating a group: `group /create`](#creating-a-group-group-create)
+        * [Deleting a group: `group /delete`](#deleting-a-group-group-delete)
+        * [Viewing a group: `group /view`](#viewing-a-group-group-view)
+        * [Listing all groups: `group /list`](#listing-all-groups-group-list)
         * [Exit](#exit)
     * [FAQ](#faq)
     * [Command Summary](#command-summary)
@@ -128,6 +133,8 @@ Example of usage:
    ![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
 <br>
 <br>
+
+### Viewing a session : `session /view`
 
 ### Listing all sessions: `session /list`
 
@@ -288,6 +295,11 @@ Example of usage:
    ![Session summary command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionSummaryCommand.png)
 <br>
 <br>
+
+### Creating a group: `group /create`
+### Deleting a group: `group /delete`
+### Viewing a group: `group /view`
+### Listing all groups: `group /list`
 
 ### Exit
 > Exits the application.
