@@ -19,6 +19,11 @@ public class GroupListCommand extends Command {
 
     private static final String GROUP_LIST_HEADER = "List of Groups";
 
+    /**
+     * Prints the list of groups previously created by the user.
+     *
+     * @param manager A manager object that gets the TextUI and Profile object to print the list of groups.
+     */
     @Override
     public void run(Manager manager) {
         /*
