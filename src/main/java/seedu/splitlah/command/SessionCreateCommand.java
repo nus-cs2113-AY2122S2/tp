@@ -113,7 +113,7 @@ public class SessionCreateCommand extends Command {
     }
 
     /**
-     * Runs the command to create a Session object to be stored in the list of sessions managed by the Profile Object.
+     * Runs the command to create a Session object to be stored in the list of sessions managed by the Profile object.
      * Checks if array of names has duplicates and if session name exists.
      * If check fails, no session is created and prints error message.
      * Else a session is created and prints success message.
