@@ -6,15 +6,14 @@ import java.time.LocalDateTime;
 import java.util.Random;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.outputWithTimeFormat;
+import static seedu.sherpass.constant.DateAndTimeFormat.outputWithoutTimeFormat;
 
 public class Task {
     protected String description;
     protected int identifier;
-    protected boolean isRecurring;
     protected boolean isDone;
     protected boolean hasByTime;
     protected boolean hasDoOnTime;
-    protected Frequency frequency;
     protected LocalDateTime byDate;
     protected LocalDateTime doOnDate;
 
@@ -36,26 +35,25 @@ public class Task {
      *
      * @param description Description of task.
      */
-    public Task(String description, LocalDateTime byDate, LocalDateTime doOnDate) {
+    public Task(String description, LocalDateTime byDate, LocalDateTime doOnDate,
+                boolean hasByTime, boolean hasDoOnTime) {
         this.identifier = new Random().nextInt(65535);
         this.description = description;
         this.byDate = byDate;
         this.doOnDate = doOnDate;
+        this.hasByTime = hasByTime;
+        this.hasDoOnTime = hasDoOnTime;
         this.isDone = false;
-        this.hasByTime = false;
-        this.hasDoOnTime = false;
-        this.frequency = null;
     }
 
-    public Task(String description, LocalDateTime doOnDate, boolean hasDoOnTime, Frequency frequency) {
+    public Task(String description, LocalDateTime doOnDate, boolean hasDoOnTime) {
         this.identifier = new Random().nextInt(65535);
         this.description = description;
         this.doOnDate = doOnDate;
         this.hasDoOnTime = hasDoOnTime;
-        this.frequency = frequency;
-        this.isDone = false;
-        this.hasByTime = false;
         this.byDate = null;
+        this.hasByTime = false;
+        this.isDone = false;
     }
 
     public int getIndex() {
@@ -121,7 +119,10 @@ public class Task {
      */
     public String getByDateString() {
         if (byDate != null) {
-            return byDate.format(outputWithTimeFormat);
+            if (hasByTime) {
+                return byDate.format(outputWithTimeFormat);
+            }
+            return byDate.format(outputWithoutTimeFormat);
         }
         return "";
     }
@@ -134,7 +135,10 @@ public class Task {
      */
     public String getDoOnDateString() {
         if (doOnDate != null) {
-            return doOnDate.format(outputWithTimeFormat);
+            if (hasDoOnTime) {
+                return doOnDate.format(outputWithTimeFormat);
+            }
+            return doOnDate.format(outputWithoutTimeFormat);
         }
         return "";
     }
@@ -180,18 +184,6 @@ public class Task {
 
     public void setHasDoOnTime(boolean hasDoOnTime) {
         this.hasDoOnTime = hasDoOnTime;
-    }
-
-    public boolean isRecurring() {
-        return isRecurring;
-    }
-
-    public Frequency getFrequency() {
-        return frequency;
-    }
-
-    public void setFrequency(Frequency frequency) {
-        this.frequency = frequency;
     }
 
     public int getIdentifier() {
