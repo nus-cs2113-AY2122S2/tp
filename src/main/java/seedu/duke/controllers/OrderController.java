@@ -42,7 +42,7 @@ public class OrderController extends Controller {
             printOrder();
             break;
         default:
-            assert false:"Unknown choice!";
+            assert false : "Unknown choice!";
             break;
         }
         System.out.println(this);
