@@ -12,17 +12,17 @@ import seedu.sherpass.command.EditCommand;
 import seedu.sherpass.command.EditRecurringCommand;
 import seedu.sherpass.command.ExitCommand;
 import seedu.sherpass.command.HelpCommand;
-import seedu.sherpass.command.ListCommand;
 import seedu.sherpass.command.MarkCommand;
+import seedu.sherpass.command.ShowCommand;
 import seedu.sherpass.command.StudyCommand;
 import seedu.sherpass.command.UnmarkCommand;
 
+import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.WrongEditInfoFormatException;
 import seedu.sherpass.exception.InvalidTimeException;
 
-import seedu.sherpass.task.RecurringTask;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
@@ -32,11 +32,12 @@ import java.time.format.DateTimeParseException;
 
 import static seedu.sherpass.constant.CommandParameters.BY_DATE_DELIMITER;
 import static seedu.sherpass.constant.CommandParameters.DO_DATE_DELIMITER;
-import static seedu.sherpass.constant.DateAndTimeFormat.parseWithTimeFormat;
-import static seedu.sherpass.constant.DateAndTimeFormat.parseWithoutTimeFormat;
 
+import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
+import static seedu.sherpass.constant.DateAndTimeFormat.inputWithoutTimeFormat;
 import static seedu.sherpass.constant.Index.MARK_INDEX;
 import static seedu.sherpass.constant.Index.CUSTOM_COMMAND_INDEX;
+import static seedu.sherpass.constant.Index.SHOW_OPTION_INDEX;
 import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
 import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
 import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
@@ -69,22 +70,23 @@ public class Parser {
         try {
             boolean hasDoOnTime = taskData.getBoolean("has_dotime");
             boolean hasByTime = taskData.getBoolean("has_bytime");
-            boolean isRecurring = taskData.getBoolean("recurring");
+            String id = taskData.getString("id");
+            Frequency frequency = Frequency.valueOf(taskData.getString("frequency"));
             String description = taskData.getString("description");
             String byDateString = taskData.getString("by_date");
             String doOnDateString = taskData.getString("do_date");
             LocalDateTime byDate = null;
             LocalDateTime doOnDate = null;
             if (!byDateString.equals("null")) {
-                byDate = LocalDateTime.parse(byDateString, parseWithTimeFormat);
+                byDate = LocalDateTime.parse(byDateString, inputWithTimeFormat);
             }
             if (!doOnDateString.equals("null")) {
-                doOnDate = LocalDateTime.parse(doOnDateString, parseWithTimeFormat);
+                doOnDate = LocalDateTime.parse(doOnDateString, inputWithTimeFormat);
             }
             if (isRecurring) {
-                parsedTask = new RecurringTask(description, doOnDate, hasDoOnTime);
+                parsedTask = new Task(description, doOnDate, hasDoOnTime, frequency);
             } else {
-                parsedTask = new Task(description, byDate, doOnDate, hasByTime, hasDoOnTime);
+                parsedTask = new Task(description, byDate, doOnDate);
             }
             String status = taskData.getString("status");
             if (status.equals("X")) {
@@ -147,10 +149,14 @@ public class Parser {
             return null;
         }
         try {
+<<<<<<< HEAD
             if (hasTime) {
                 return LocalDateTime.parse(rawTaskDate, parseWithTimeFormat);
             }
             return LocalDate.parse(rawTaskDate, parseWithoutTimeFormat).atStartOfDay();
+=======
+            return LocalDate.parse(rawTaskDate, inputFormat);
+>>>>>>> master
         } catch (DateTimeParseException e) {
             return confirmInvalidDateFormat();
         }
@@ -369,6 +375,28 @@ public class Parser {
         }
     }
 
+    private static Command parseShowCommandOptions(String selection) throws InvalidInputException {
+        if (selection.isBlank()) {
+            throw new InvalidInputException();
+        }
+        try {
+            LocalDate dayInput = LocalDate.parse(selection, inputWithoutTimeFormat);
+            return new ShowCommand(dayInput, null);
+        } catch (DateTimeParseException e) {
+            return new ShowCommand(null, selection);
+        }
+    }
+
+    private static Command prepareShow(String[] splitInput) {
+        try {
+            String selection = splitInput[SHOW_OPTION_INDEX].trim();
+            return parseShowCommandOptions(selection.toLowerCase());
+        } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
+            System.out.println(ERROR_INVALID_INPUT_MESSAGE);
+        }
+        return null;
+    }
+
     /**
      * Parses the user command input.
      *
@@ -376,12 +404,10 @@ public class Parser {
      * @param taskList  Array of tasks.
      * @return Command type matching the user command.
      */
-    public static Command parseCommand(String userInput, TaskList taskList) {
+    public static Command parseCommand(String userInput, TaskList taskList, Ui ui) {
         String[] splitInput = userInput.split(" ", 2);
         String commandWord = splitInput[OPTIONS_INDEX].toLowerCase().trim();
         switch (commandWord) {
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
         case MarkCommand.COMMAND_WORD:
             return prepareMarkOrUnmark(splitInput, MarkCommand.COMMAND_WORD, taskList);
         case UnmarkCommand.COMMAND_WORD:
@@ -400,12 +426,14 @@ public class Parser {
             return new ClearCommand();
         case StudyCommand.COMMAND_WORD:
             return new StudyCommand();
+        case ShowCommand.COMMAND_WORD:
+            return prepareShow(splitInput);
         case HelpCommand.COMMAND_WORD:
             return prepareHelp(userInput);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         default:
-            System.out.println(ERROR_INVALID_INPUT_MESSAGE);
+            ui.showToUser(ERROR_INVALID_INPUT_MESSAGE);
             return null;
         }
     }

@@ -3,7 +3,6 @@ package seedu.sherpass.task;
 import seedu.sherpass.util.Ui;
 
 import java.time.LocalDate;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -159,5 +158,22 @@ public class TaskList {
         }
         ui.showLine();
         ui.showToUser("Done! Now you have " + tasks.size() + " task(s) in the list.");
+    }
+
+
+    public ArrayList<Task> getFilteredTasksByDate(LocalDate dateInput) {
+        return null;
+    }
+
+    /**
+     * Prints tasks that are yet to be completed, i.e. marked as done.
+     * Printed tasks applies to non-recurring tasks.
+     */
+    public void printPendingTasks(Ui ui) {
+        for (Task task : tasks) {
+            if (!task.isDone() && (task instanceof NonrecurringTask)) {
+                ui.showToUser(task.toString());
+            }
+        }
     }
 }

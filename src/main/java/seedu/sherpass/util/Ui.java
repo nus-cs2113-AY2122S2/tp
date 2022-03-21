@@ -71,7 +71,7 @@ public class Ui {
      */
     public void showWelcomeMessage() {
         String message = PARTITION_LINE + LS + WELCOME_MESSAGE_ONE
-                + LOGO + LS + WELCOME_MESSAGE_TWO + LS + PARTITION_LINE;
+                + LOGO + LS + PARTITION_LINE + LS + WELCOME_MESSAGE_TWO;
         showToUser(message);
     }
 
@@ -85,5 +85,19 @@ public class Ui {
     public void printEditTaskMessage(String task) {
         System.out.println("Ok, I've edited this task as such!"
                 + "\n  " + task);
+    }
+
+    /**
+     * Returns a string of repeated characters.
+     *
+     * @param character The character to print.
+     * @param number The number of times to print that character.
+     * @return Returns a concatenated string of repeated characters.
+     */
+    public String getRepeatedCharacters(String character, int number) {
+        for (int i = 1; i < number; i++) {
+            character += character;
+        }
+        return character;
     }
 }
