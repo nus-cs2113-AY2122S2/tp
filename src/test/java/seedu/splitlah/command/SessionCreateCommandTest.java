@@ -222,7 +222,7 @@ class SessionCreateCommandTest {
     }
 
     /**
-     * Checks if a session is created when a group does not exist.
+     * Checks if a session is created when the specified group unique identifier does not exist.
      */
     @Test
     public void run_groupDoesNotExists_sessionListSizeRemainsTwo() {
