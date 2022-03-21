@@ -42,9 +42,9 @@ public class ModuleListStorageTest {
     @Test
     public void store_module_without_task_list_and_read() {
         try {
-            Module module1 = new Module("CS2113T", "d1");
-            Module module2 = new Module("CS2101", "d2");
-            Module module3 = new Module("CS2040", "d3");
+            Module module1 = new Module("CS2113T", "d1", 4);
+            Module module2 = new Module("CS2101", "d2", 4);
+            Module module3 = new Module("CS2040", "d3", 4);
             moduleList.add(module1);
             moduleList.add(module2);
             moduleList.add(module3);
@@ -67,9 +67,9 @@ public class ModuleListStorageTest {
             Task task1 = new Task("t1", "dt1", "2h");
             Task task2 = new Task("t2", "dt2", "3h");
             Task task3 = new Task("t3", "dt3", "4h");
-            Module module1 = new Module("CS2113T", "d1");
-            Module module2 = new Module("CS2101", "d2");
-            Module module3 = new Module("CS2040", "d3");
+            Module module1 = new Module("CS2113T", "d1", 4);
+            Module module2 = new Module("CS2101", "d2", 4);
+            Module module3 = new Module("CS2040", "d3", 4);
             module1.addTask(task1);
             module2.addTask(task2);
             module3.addTask(task3);
@@ -82,6 +82,7 @@ public class ModuleListStorageTest {
             for (int i = 0; i < list.size(); i++) {
                 assertEquals(list.get(i).getModuleCode(), moduleList.get(i).getModuleCode());
                 assertEquals(list.get(i).getModuleDescription(), moduleList.get(i).getModuleDescription());
+                assertEquals(list.get(i).getModularCredit(), moduleList.get(i).getModularCredit());
                 TaskList taskList1 = list.get(i).getTaskList();
                 TaskList taskList2 = moduleList.get(i).getTaskList();
                 assertEquals(taskList1.size(), taskList2.size());

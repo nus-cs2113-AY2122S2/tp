@@ -20,7 +20,6 @@ public class StringConstants {
 
     /**
      * For loading of data.
-     *
      */
     public static final String MODULE_DATA_LOAD_FAILED = "Failed to load module data. "
             + "Empty module list loaded instead.";
@@ -47,7 +46,14 @@ public class StringConstants {
      * For DeleteCommand.
      */
     public static final String DELETE_MESSAGE = "%s has been deleted.";
+    public static final String DELETE_ABORT = "Deletion has been cancelled.";
+    public static final String DELETE_CONFIRMATION = "%s contains task(s). Are you sure you want to delete this?";
 
+    /**
+     * For GradeCommand.
+     */
+    public static final String GRADE_ADDED_MESSAGE = "Your grade for %s has been added.";
+    public static final String GRADE_CHANGED_MESSAGE = "Your grade for %s has been changed.";
 
     /**
      * For EditCommand.
@@ -69,6 +75,7 @@ public class StringConstants {
      */
     public static final String LIST_MESSAGE_TOP = "Ok! Here are the task(s) in your list:";
     public static final String EMPTY_LIST = "(empty)";
+    public static final String LIST_ARGUMENT = "listArgument";
 
     /**
      * For MarkCommand.
@@ -91,7 +98,7 @@ public class StringConstants {
             + "Optional parameters are in square brackets: e.g. [-m MODULE_DESCRIPTION]";
     public static final String EXIT_HELP = "Exits the program.\nFormat to exit program: exit";
     public static final String ADD_HELP = "Adds a module or task as indicated by the command input.\n"
-            + "Format to add module: add /m MODULE_CODE [-d \"MODULE_DESCRIPTION\"]\n"
+            + "Format to add module: add /m MODULE_CODE /c MODULAR_CREDITS [-d \"MODULE_DESCRIPTION\"]\n"
             + "Format to add task:   add /t \"TASK_NAME\" [-d \"TASK_DESCRIPTION\"] [-t \"ESTIMATED_WORKING_TIME\"]"
             + " [-m MODULE_CODE]";
     public static final String DELETE_HELP = "Deletes a module or task as indicated by command input.\n"
@@ -100,9 +107,14 @@ public class StringConstants {
     public static final String EDIT_HELP = "Edits a module or task as indicated by command input.\n"
             + "Format to edit a module: edit /m MODULE_CODE -d \"MODULE_DESCRIPTION\"\n"
             + "Format to edit a task:   edit /t TASK_INDEX"
-            + "(-n \"TASK_NAME\" or -d \"TASK_DESCRIPTION\" or -t \"ESTIMATED_WORKING_TIME\") [-m MODULE_CODE]";
+            + " (-n \"TASK_NAME\" or -d \"TASK_DESCRIPTION\" or -t \"ESTIMATED_WORKING_TIME\") [-m MODULE_CODE]";
+    public static final String GRADE_HELP = "Adds/Changes the grade for the specified module.\n"
+            + "Format to add/change a grade: grade /m MODULE_CODE /g MODULE_GRADE";
     public static final String LIST_HELP = "Displays a list of all tasks, grouped by module code.\n"
-            + "Format to list all tasks: list";
+            + "If tag name is provided, list will only display tasks containing the tag name.\n"
+            + "The tag name cannot contain whitespace.\n"
+            + "Format to list all tasks: list\n"
+            + "Format to list task containing a tag: list \"TAG_NAME\"";
     public static final String MARK_HELP = "Mark a task with the given task number from the specified module."
             + "If no module code is given, the task to be marked will be drawn from the \"general tasks\" list.\n"
             + "Format to mark a task as completed:   mark /c TASK_NUMBER [-m MODULE_CODE]\n"
@@ -113,8 +125,12 @@ public class StringConstants {
             + "Format to save: save";
     public static final String HELP = "Displays help and format for selected command.\n"
             + "Format to display help for specific command: help COMMAND\n"
-            + "Available commands: exit, add, del, list, mark, save, help";
+            + "Available commands: exit, add, del, edit, grade, list, mark, save, help, reset, tag";
+    public static final String TAG_HELP = "Set a custom tag for your tasks. The tag cannot contain whitespace.\n"
+            + "Format to add a tag: tag add TASK_INDEX [-m MODULE_CODE] \"TAG_NAME\"\n"
+            + "Format to delete a tag: tag del TASK_INDEX [-m MODULE_CODE] \"TAG_NAME\"";
     public static final String HELP_EXCEPTION = "Sorry, but no help exists for that command.";
+    public static final String HELP_COMMAND_ARGUMENT = "command";
 
     public static final String OPTION_HELP = "Set customized configuration\n"
             + "Format to set an option: option CONFIGURATION_GROUP=NEW_VALUE\n"
@@ -145,6 +161,12 @@ public class StringConstants {
 
 
     /**
+     * For TagCommand.
+     */
+    public static final String ADD_TAG_MESSAGE = "%s has been tagged with %s.";
+    public static final String DEL_TAG_MESSAGE = "%s has %s tag removed.";
+
+    /**
      * For CommandResult.
      */
     public static final String ARRAYLIST_RESULT = "ArrayList";
@@ -162,6 +184,7 @@ public class StringConstants {
     public static final String ERROR_WRITE_FILE = "Error writing to file...";
     public static final String ERROR_READ_FILE = "Error reading from file...";
     public static final String ERROR_FILE_CREATE_FAIL = "Sorry, file creation failed...";
+    public static final String ERROR_NO_SUCH_TAG = "Sorry, no such tag exists ._.";
     public static final String ERROR_UNKNOWN_CONFIGURATION_GROUP = "Sorry, unknown configuration group\"";
     public static final String SUGGESTION_UNKNOWN_CONFIGURATION_GROUP = "Enter \"option\" to check legal "
             + "configuration group or enter \"help option\" to check usage of command \"option\"";
@@ -176,23 +199,39 @@ public class StringConstants {
     public static final String TASK_MODULE = "taskModule";
     public static final String MODULE_CODE = "moduleCode";
     public static final String MODULE_DESCRIPTION = "moduleDescription";
+    public static final String MODULAR_CREDIT = "modularCredit";
+    public static final String MODULE_GRADE = "moduleGrade";
     public static final String TASK_NUMBER = "taskNumber";
     public static final String FLAG = "flag";
     public static final String TASK_INDEX = "taskIndex";
     public static final String COMPLETED_FLAG = "/c";
     public static final String UNCOMPLETED_FLAG = "/u";
     public static final String ARGUMENT = "arguments";
+    public static final String TAG_NAME = "tagName";
+    public static final String TAG_OPERATION = "tagOperation";
     public static final String COMMAND_WORD = "commandWord";
     public static final String EXIT_COMMAND_WORD = "exit";
     public static final String ADD_COMMAND_WORD = "add";
     public static final String DELETE_COMMAND_WORD = "del";
     public static final String EDIT_COMMAND_WORD = "edit";
+    public static final String GRADE_COMMAND_WORD = "grade";
     public static final String LIST_COMMAND_WORD = "list";
     public static final String MARK_COMMAND_WORD = "mark";
     public static final String RESET_COMMAND_WORD = "reset";
     public static final String HELP_COMMAND_WORD = "help";
     public static final String SAVE_COMMAND_WORD = "save";
-    public static final String OPTION_COMMAND_WORD = "option";
+    public static final String TAG_COMMAND_WORD = "tag";
+    public static final String OPTION_COMMAND_WORD = "option"
+
+    /**
+     * For Grades.
+     */
+    public static final String DASH = "-";
+    public static final String PLUS = "+";
+    public static final String PLUS_STR = "PLUS";
+    public static final String MINUS_STR = "MINUS";
+    public static final String NOT_ENTERED_STR = "NOT_ENTERED";
+
 
 
     /**

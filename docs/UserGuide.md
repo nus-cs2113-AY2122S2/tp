@@ -83,10 +83,22 @@ Mark a task as completed or uncompleted with the given task number from the spec
   Example to mark a general task as uncompleted: `mark /u 1`<br>
   Example to mark a module task as uncompleted: `mark /u 1 -m CS2113T`<br><br>
 
+### Setting custom tags: `tag`
+
+Adds or deletes a tag from the task as indicated by the command argument. If no module code is given, the task will be drawn from the "general tasks" list.
+The tag name cannot contain whitespace.
+
+- Add a tag <br><br>
+  Format: `tag add TASK_INDEX [-m MODULE_CODE] "TAG_NAME"` <br><br>
+- Delete a tag <br><br>
+  Format: `tag del TASK_INDEX [-m MODULE_CODE] "TAG_NAME"` <br><br>
+
 ### Listing all tasks/modules: `list`
 
-Displays a list of all tasks, some of which are grouped by module code while the rest fall under "general tasks" list.<br><br>
-Format: `list`
+Displays a list of all tasks, some of which are grouped by module code while the rest fall under "general tasks" list.<br>
+If tag name is provided, list will only display tasks containing the tag name. The tag name cannot contain whitespace.
+
+Format: `list ["TAG_NAME"]`
 
 ### Clearing the list: `reset`
 
@@ -114,7 +126,7 @@ Format: `save`
 |   del   | `del /m MODULE_CODE del /t TASK_NUMBER [-m MODULE_CODE]`                                                                                                          |
 |  edit   | `edit /t TASK_INDEX (-n "TASK_NAME" or -d "TASK_DESCRIPTION" or -t "ESTIMATED_WORKING_TIME") [-m MODULE_CODE]` <br> `edit /m MODULE_CODE -d "MODULE_DESCRIPTION"` |
 |  mark   | `mark /c TASK_NUMBER [-m MODULE_CODE]`<br>`mark /u TASK_NUMBER [-m MODULE_CODE]`                                                                                  |
-|  list   | `list`                                                                                                                                                            |
+|  list   | `list ["TAG_NAME"]`                                                                                                                                               |
 |  reset  | `reset`                                                                                                                                                           |
 |  save   | `save`                                                                                                                                                            |
-
+|   tag   | `tag add [-m MODULE_CODE] "TAG_NAME"`<br>`tag del [-m MODULE_CODE] "TAG_NAME"`                                                                                    |
