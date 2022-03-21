@@ -40,7 +40,13 @@ public class TaskList {
      * @param taskRemindDate    Reminder date of the task
      */
     public void addTask(String taskDescription, LocalDateTime taskByDate, LocalDateTime taskRemindDate) {
-        Task newTask = new Task(taskDescription, taskByDate, taskRemindDate);
+        Task newTask = new Task(taskDescription, taskByDate, taskRemindDate, false, false);
+        tasks.add(newTask);
+        System.out.println("Got it. I've added this task:\n  " + newTask
+                + "\nNow you have " + tasks.size() + " task(s) in the list.");
+    }
+
+    public void addRecurringTask(RecurringTask newTask) {
         tasks.add(newTask);
         System.out.println("Got it. I've added this task:\n  " + newTask
                 + "\nNow you have " + tasks.size() + " task(s) in the list.");

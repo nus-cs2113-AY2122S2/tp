@@ -136,4 +136,20 @@ public class Task {
     public void setDoOnDate(LocalDateTime doOnDate) {
         this.doOnDate = doOnDate;
     }
+
+    public boolean getHasByTime() {
+        return hasByTime;
+    }
+
+    public void setHasByTime(boolean hasByTime) {
+        this.hasByTime = hasByTime;
+    }
+
+    public boolean getHasDoOnTime() {
+        return hasDoOnTime;
+    }
+
+    public void setHasDoOnTime(boolean hasDoOnTime) {
+        this.hasDoOnTime = hasDoOnTime;
+    }
 }

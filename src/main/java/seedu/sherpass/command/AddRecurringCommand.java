@@ -21,9 +21,27 @@ public class AddRecurringCommand extends Command {
             + "\t\td/M/yyyy [HH:mm] , where\n"
             + "year is in 4 digits, month and day in one or two digits.";
 
-    public AddRecurringCommand(String taskDescription, LocalDateTime doOnDate, boolean hasDoOnTime) {
+    public AddRecurringCommand() {
+
+    }
+
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
+    public void setTaskDescription(String taskDescription) {
         this.taskDescription = taskDescription;
+    }
+
+    public void setDoOnDate(LocalDateTime doOnDate) {
         this.doOnDate = doOnDate;
+    }
+
+    public boolean getHasDoOnTime() {
+        return hasDoOnTime;
+    }
+
+    public void setHasDoOnTime(boolean hasDoOnTime) {
         this.hasDoOnTime = hasDoOnTime;
     }
 

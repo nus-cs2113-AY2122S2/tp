@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import seedu.sherpass.exception.InvalidInputException;
+import seedu.sherpass.task.RecurringTask;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
@@ -16,6 +17,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import static seedu.sherpass.constant.DateAndTimeFormat.parseWithTimeFormat;
 import static seedu.sherpass.constant.Index.DIRECTORY_INDEX;
 import static seedu.sherpass.constant.Index.INDENT_FACTOR;
 import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_1;
@@ -24,9 +26,6 @@ import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_3
 import static seedu.sherpass.constant.Message.ERROR_DUPLICATE_TASK_MESSAGE_1;
 import static seedu.sherpass.constant.Message.ERROR_DUPLICATE_TASK_MESSAGE_2;
 import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
-
-import static seedu.sherpass.constant.DateAndTimeFormat.parseFormat;
-
 
 public class Storage {
     private String saveFilePath;
@@ -74,10 +73,13 @@ public class Storage {
         JSONArray tasks = new JSONArray();
         for (Task t : taskList.getTasks()) {
             JSONObject taskToStore = new JSONObject();
-            taskToStore.put("status", t.getStatusIcon());
-            taskToStore.put("by_date", (t.getByDate() == null ? "null" : t.getByDate().format(parseFormat)));
-            taskToStore.put("do_date", (t.getDoOnDate() == null ? "null" : t.getDoOnDate().format(parseFormat)));
             taskToStore.put("description", t.getDescription());
+            taskToStore.put("recurring", t instanceof RecurringTask);
+            taskToStore.put("has_bytime", t.getHasByTime());
+            taskToStore.put("has_dotime", t.getHasDoOnTime());
+            taskToStore.put("by_date", (t.getByDate() == null ? "null" : t.getByDate().format(parseWithTimeFormat)));
+            taskToStore.put("do_date", (t.getDoOnDate() == null ? "null" : t.getDoOnDate().format(parseWithTimeFormat)));
+            taskToStore.put("status", t.getStatusIcon());
             tasks.put(taskToStore);
         }
         json.put("tasks", tasks);

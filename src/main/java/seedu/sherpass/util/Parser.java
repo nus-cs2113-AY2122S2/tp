@@ -2,30 +2,25 @@ package seedu.sherpass.util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import seedu.sherpass.command.Command;
-import seedu.sherpass.command.AddCommand;
-import seedu.sherpass.command.ClearCommand;
-import seedu.sherpass.command.DeleteCommand;
-import seedu.sherpass.command.EditCommand;
-import seedu.sherpass.command.ExitCommand;
-import seedu.sherpass.command.HelpCommand;
-import seedu.sherpass.command.ListCommand;
-import seedu.sherpass.command.MarkCommand;
-import seedu.sherpass.command.StudyCommand;
-import seedu.sherpass.command.UnmarkCommand;
+import seedu.sherpass.command.*;
 
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.WrongEditInfoFormatException;
 import seedu.sherpass.exception.InvalidTimeException;
 
+import seedu.sherpass.task.RecurringTask;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-import static seedu.sherpass.constant.DateAndTimeFormat.parseFormat;
+import static seedu.sherpass.constant.CommandParameters.BY_DATE_DELIMITER;
+import static seedu.sherpass.constant.CommandParameters.DO_DATE_DELIMITER;
+import static seedu.sherpass.constant.DateAndTimeFormat.parseWithTimeFormat;
+import static seedu.sherpass.constant.DateAndTimeFormat.parseWithoutTimeFormat;
 
 import static seedu.sherpass.constant.Index.MARK_INDEX;
 import static seedu.sherpass.constant.Index.CUSTOM_COMMAND_INDEX;
@@ -59,18 +54,25 @@ public class Parser {
     public static Task parseSavedData(JSONObject taskData) throws InvalidInputException {
         Task parsedTask;
         try {
+            boolean hasDoOnTime = taskData.getBoolean("has_dotime");
+            boolean hasByTime = taskData.getBoolean("has_bytime");
+            boolean isRecurring = taskData.getBoolean("recurring");
             String description = taskData.getString("description");
             String byDateString = taskData.getString("by_date");
             String doOnDateString = taskData.getString("do_date");
             LocalDateTime byDate = null;
             LocalDateTime doOnDate = null;
             if (!byDateString.equals("null")) {
-                byDate = LocalDateTime.parse(byDateString, parseFormat);
+                byDate = LocalDateTime.parse(byDateString, parseWithTimeFormat);
             }
             if (!doOnDateString.equals("null")) {
-                doOnDate = LocalDateTime.parse(doOnDateString, parseFormat);
+                doOnDate = LocalDateTime.parse(doOnDateString, parseWithTimeFormat);
             }
-            parsedTask = new Task(description, byDate, doOnDate);
+            if (isRecurring) {
+                parsedTask = new RecurringTask(description, doOnDate, hasDoOnTime);
+            } else {
+                parsedTask = new Task(description, byDate, doOnDate, hasByTime, hasDoOnTime);
+            }
             String status = taskData.getString("status");
             if (status.equals("X")) {
                 parsedTask.markAsDone();
@@ -99,7 +101,7 @@ public class Parser {
                 + HELP_MESSAGE_SPECIFIC_COMMAND);
     }
 
-    private static LocalDateTime confirmInvalidDateFormat() throws InvalidInputException {
+    private static LocalDateTime confirmInvalidDateFormat() {
         Ui anotherUi = new Ui();
         anotherUi.showToUser("It seems that the date and time\nyou gave is not in the correct format.\n"
                 + "Would you like to re-enter a valid date and time? (Y/N)\n"
@@ -115,7 +117,7 @@ public class Parser {
                 anotherUi.showToUser("Enter valid date input:");
                 input = anotherUi.readCommand();
                 anotherUi.showLine();
-                return prepareTaskDate(input.trim());
+                return prepareTaskDate(input.trim(), false);
             }
             if (input.trim().equalsIgnoreCase("N")
                     || input.trim().equalsIgnoreCase("No")) {
@@ -127,17 +129,106 @@ public class Parser {
         }
     }
 
-    private static LocalDateTime prepareTaskDate(String rawTaskDate) throws InvalidInputException {
+    private static LocalDateTime prepareTaskDate(String rawTaskDate, boolean hasTime) {
         if (rawTaskDate.isBlank()) {
             return null;
         }
         try {
-            return LocalDateTime.parse(rawTaskDate, parseFormat);
+            if (hasTime) {
+                return LocalDateTime.parse(rawTaskDate, parseWithTimeFormat);
+            }
+            return LocalDate.parse(rawTaskDate, parseWithoutTimeFormat).atStartOfDay();
         } catch (DateTimeParseException e) {
             return confirmInvalidDateFormat();
         }
     }
 
+    /**
+     * Returns the value for a specific parameter
+     *
+     * @param parameter The parameter to retrieve values from (e.g /by, /do)
+     * @param argument The full argument given by the user
+     * @return The value given by the user for a particular parameter
+     */
+    private static String parseArgument(String parameter, String argument) {
+        if (!argument.contains(parameter)) {
+            return "";
+        }
+        int afterParameter = argument.indexOf(parameter) + parameter.length() + 1;
+        String rightSide = argument.substring(afterParameter);
+        String[] splitArguments = rightSide.split(" ");
+        StringBuilder result = new StringBuilder();
+        for(String s : splitArguments) {
+            if (s.charAt(0) == '/') {
+                break;
+            }
+            result.append(s);
+            result.append(" ");
+        }
+        return result.toString().trim();
+    }
+
+    private static String parseDescription(String fullArgument) {
+        if (fullArgument.contains("/")) {
+            if (fullArgument.indexOf("/") > 0) {
+                return fullArgument.substring(0, fullArgument.indexOf('/') - 1);
+            }
+            else {
+                return "";
+            }
+        }
+        return fullArgument;
+    }
+
+    private static boolean hasTime(String input) {
+        return (input.split(" ").length > 1);
+    }
+
+    private static Command prepareAddRecurring(String[] arguments) {
+        if (arguments.length < 2) {
+            return new HelpCommand(AddRecurringCommand.COMMAND_WORD);
+        }
+        String argument = arguments[1];
+        AddRecurringCommand newCommand = new AddRecurringCommand();
+        newCommand.setTaskDescription(parseDescription(argument));
+        String doOnDateString = parseArgument(DO_DATE_DELIMITER, argument);
+        if (newCommand.getTaskDescription().isBlank()) {
+            return new HelpCommand(AddRecurringCommand.COMMAND_WORD);
+        }
+        if (doOnDateString.isBlank()) {
+            newCommand.setDoOnDate(null);
+            newCommand.setHasDoOnTime(false);
+        } else {
+            newCommand.setHasDoOnTime(hasTime(doOnDateString));
+            newCommand.setDoOnDate(prepareTaskDate(doOnDateString, newCommand.getHasDoOnTime()));
+        }
+        return newCommand;
+
+    }
+
+    private static Command prepareEditRecurring(String[] arguments) {
+        if (arguments.length < 2) {
+            return new HelpCommand(AddRecurringCommand.COMMAND_WORD);
+        }
+        String argument = arguments[1];
+        EditRecurringCommand newCommand = new EditRecurringCommand();
+        String[] splitArguments = argument.split(" ", 2);
+        try {
+            newCommand.setIndex(Integer.parseInt(splitArguments[0]));
+            newCommand.setTaskDescription(parseDescription(splitArguments[1]));
+            String doOnDateString = parseArgument(DO_DATE_DELIMITER, splitArguments[1]);
+            if (doOnDateString.isBlank()) {
+                newCommand.setDoOnDate(null);
+                newCommand.setHasDoOnTime(false);
+            } else {
+                newCommand.setHasDoOnTime(hasTime(doOnDateString));
+                newCommand.setDoOnDate(prepareTaskDate(doOnDateString, newCommand.getHasDoOnTime()));
+            }
+        } catch (NumberFormatException | IndexOutOfBoundsException exception) {
+            return new HelpCommand(EditRecurringCommand.COMMAND_WORD);
+        }
+        return newCommand;
+    }
 
     // Please add in constants to the magic literals
     private static Command prepareAdd(String[] splitInput, TaskList taskList) {
@@ -145,20 +236,20 @@ public class Parser {
         LocalDateTime byDate;
         LocalDateTime doOnDate;
         try {
-            if (!splitInput[TASK_CONTENT_INDEX].contains("/by")
-                    && !splitInput[TASK_CONTENT_INDEX].contains("/do_on")) {
+            if (!splitInput[TASK_CONTENT_INDEX].contains(BY_DATE_DELIMITER)
+                    && !splitInput[TASK_CONTENT_INDEX].contains(DO_DATE_DELIMITER)) {
                 return new AddCommand(splitInput[TASK_CONTENT_INDEX], taskList, null, null);
             }
 
-            filteredTaskContent = splitInput[TASK_CONTENT_INDEX].split("/by", 2);
-            if (!splitInput[1].contains("/do_on")) {
-                byDate = prepareTaskDate(filteredTaskContent[1].trim());
+            filteredTaskContent = splitInput[TASK_CONTENT_INDEX].split(BY_DATE_DELIMITER, 2);
+            if (!splitInput[1].contains(DO_DATE_DELIMITER)) {
+                byDate = prepareTaskDate(filteredTaskContent[1].trim(), false);
                 return new AddCommand(filteredTaskContent[0].trim(), taskList, byDate, null);
             }
 
-            String[] filteredDates = filteredTaskContent[1].split("/do_on");
-            byDate = prepareTaskDate(filteredDates[0].trim());
-            doOnDate = prepareTaskDate(filteredDates[1].trim());
+            String[] filteredDates = filteredTaskContent[1].split(DO_DATE_DELIMITER);
+            byDate = prepareTaskDate(filteredDates[0].trim(), false);
+            doOnDate = prepareTaskDate(filteredDates[1].trim(), false);
             return new AddCommand(filteredTaskContent[0], taskList, byDate, doOnDate);
 
         } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
@@ -198,8 +289,8 @@ public class Parser {
 
     private static void checkCorrectEditInfoFormat(String fullEditInfo) throws WrongEditInfoFormatException {
         // tests to make sure the byDate is before the doOnDate
-        if (fullEditInfo.contains("/by") && fullEditInfo.contains("/do_on")) {
-            if (fullEditInfo.indexOf("/by") > fullEditInfo.indexOf("/do_on")) {
+        if (fullEditInfo.contains(BY_DATE_DELIMITER) && fullEditInfo.contains(DO_DATE_DELIMITER)) {
+            if (fullEditInfo.indexOf(BY_DATE_DELIMITER) > fullEditInfo.indexOf(DO_DATE_DELIMITER)) {
                 throw new WrongEditInfoFormatException();
             }
         }
@@ -217,14 +308,14 @@ public class Parser {
         LocalDateTime parsedByDateToEdit;
         LocalDateTime parsedDoOnDateToEdit;
 
-        if (!splitEditInfo[0].trim().equals("/by") && !(splitEditInfo[0].trim().equals("/do_on"))) {
+        if (!splitEditInfo[0].trim().equals(BY_DATE_DELIMITER) && !(splitEditInfo[0].trim().equals(DO_DATE_DELIMITER))) {
             descriptionToEdit = splitEditInfo[0];
         } else {
             descriptionToEdit = EMPTY_STRING;
         }
 
-        parsedByDateToEdit = getParsedDateToEdit(fullEditInfo, "/by");
-        parsedDoOnDateToEdit = getParsedDateToEdit(fullEditInfo, "/do_on");
+        parsedByDateToEdit = getParsedDateToEdit(fullEditInfo, BY_DATE_DELIMITER);
+        parsedDoOnDateToEdit = getParsedDateToEdit(fullEditInfo, DO_DATE_DELIMITER);
 
         return new EditCommand(taskNumberToEdit, descriptionToEdit, parsedByDateToEdit, parsedDoOnDateToEdit);
     }
@@ -240,7 +331,7 @@ public class Parser {
             // splits the substring and obtains the first word (which should be the date of format yyyy/MM/dd)
             String dateToEdit = fullEditInfo.substring(offsetForSubstring).split(" ")[0].trim();
 
-            return prepareTaskDate(dateToEdit);
+            return prepareTaskDate(dateToEdit, false);
         }
 
         return null;
@@ -283,8 +374,12 @@ public class Parser {
             return prepareMarkOrUnmark(splitInput, UnmarkCommand.COMMAND_WORD, taskList);
         case AddCommand.COMMAND_WORD:
             return prepareAdd(splitInput, taskList);
+        case AddRecurringCommand.COMMAND_WORD:
+            return prepareAddRecurring(splitInput);
         case EditCommand.COMMAND_WORD:
             return prepareEdit(splitInput);
+        case EditRecurringCommand.COMMAND_WORD:
+            return prepareEditRecurring(splitInput);
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(splitInput, taskList);
         case ClearCommand.COMMAND_WORD:
