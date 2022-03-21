@@ -276,7 +276,7 @@ public class ActivityCreateCommand extends Command {
     /**
      * Updates cost list by including the extra charges.
      * Extra charges may include gst and service charge.
-     * Assumption: gst and service charge are non-negative integers.
+     * Assumption: gst and service charge are non-negative values.
      */
     private void updateCostListWithExtraCharges() {
         double extraCharges = getExtraCharges();
@@ -297,7 +297,7 @@ public class ActivityCreateCommand extends Command {
     /**
      * Updates total cost by including the extra charges.
      * Extra charges may include gst and service charge.
-     * Assumption: gst and service charge are non-negative integers.
+     * Assumption: gst and service charge are non-negative values.
      */
     private void updateCostWithExtraCharges() {
         double extraCharges = getExtraCharges();
