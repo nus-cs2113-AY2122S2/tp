@@ -15,6 +15,7 @@ public class InvalidFormatExceptionTest {
     public void setUp() {
         this.invalidFormatExceptionWithMessage = new InvalidDataException("message");
         this.invalidFormatExceptionWithMessageWithCause = new InvalidDataException("message", new Throwable("cause"));
+        this.invalidFormatExceptionWithoutMessageWithoutCause = new InvalidDataException();
     }
 
     @Test
@@ -35,7 +36,10 @@ public class InvalidFormatExceptionTest {
 
     @Test
     public void getCause_withMessageWithCause_returnsCause() {
-        assertEquals(new Throwable("cause"), invalidFormatExceptionWithMessageWithCause.getCause());
+        assertEquals(new Throwable("cause").getMessage(),
+                invalidFormatExceptionWithMessageWithCause.getCause().getMessage());
+        assertEquals(new Throwable("cause").getCause(),
+                invalidFormatExceptionWithMessageWithCause.getCause().getCause());
     }
 
     @Test
