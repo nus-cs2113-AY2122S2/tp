@@ -145,7 +145,7 @@ class SessionCreateCommandTest {
 
 
     /**
-     * Checks if a session is created with Person List and Group unique identifier delimiter
+     * Checks if session is created with Person List and Group unique identifier delimiter
      * and list of persons stored in created session has size of 3.
      */
     @Test
@@ -158,7 +158,7 @@ class SessionCreateCommandTest {
     }
 
     /**
-     * Checks if a session is created with Person List and Group unique identifier delimiter
+     * Checks if session is created with Person List and Group unique identifier delimiter
      * and list of persons stored in created session has size of 3 as name duplicates are removed.
      */
     @Test
@@ -172,7 +172,7 @@ class SessionCreateCommandTest {
     }
 
     /**
-     * Checks if a session is created with duplicated person names.
+     * Checks if session is created with duplicated person names.
      */
     @Test
     public void run_hasOneNameDuplicate_sessionListSizeRemainsTwo() {
@@ -197,7 +197,7 @@ class SessionCreateCommandTest {
     }
 
     /**
-     * Checks if a session is created when a session with the same name exists.
+     * Checks if session is created when a session with the same name exists.
      */
     @Test
     public void run_hasSessionDuplicate_sessionListSizeRemainsTwo() {
@@ -222,7 +222,7 @@ class SessionCreateCommandTest {
     }
 
     /**
-     * Checks if a session is created when the specified group unique identifier does not exist.
+     * Checks if session is created when the specified group unique identifier does not exist.
      */
     @Test
     public void run_groupDoesNotExists_sessionListSizeRemainsTwo() {
