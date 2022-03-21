@@ -11,6 +11,10 @@ public class HelpCommand extends Command{
             + "Example: "
             + "help";
 
+    /**
+     * List all available commands and their usage examples.
+     * @return CommandResult with description of all available commands for users to use.
+     */
     public CommandResult execute() {
         return new CommandResult(AddCommand.COMMAND_WORD + AddCommand.COMMAND_DESCRIPTION
                 + System.lineSeparator()
