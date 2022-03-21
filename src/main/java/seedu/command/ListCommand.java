@@ -11,6 +11,17 @@ import java.util.ArrayList;
 public class ListCommand extends Command {
     private final ArrayList<String> commandStrings;
     public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_DESCRIPTION = ": Prints a list of all equipment in the inventory. "
+            + System.lineSeparator()
+            + "Parameters: NIL" + System.lineSeparator()
+            + "Example: "
+            + "list";
+    public static final String COMMAND_DESCRIPTION_WITH_TYPE =
+            "Prints a list of all equipment in the inventory of the specified type. "
+            + System.lineSeparator()
+            + "Parameters: t/Type" + System.lineSeparator()
+            + "Example: "
+            + "list MICROPHONE";
 
     /**
      * constructor for ListCommand with NO specified type. Initialises successMessage and usageReminder from Command
@@ -18,14 +29,7 @@ public class ListCommand extends Command {
     public ListCommand() {
         this.commandStrings = null;
         successMessage = "TOTAL QUANTITY OF EQUIPMENT: %1$d" + System.lineSeparator();
-        usageReminder = COMMAND_WORD + ": print a list of all equipment in the inventory. "
-                + "Parameters: NIL"
-                + "Example: "
-                + "list" + System.lineSeparator()
-                + COMMAND_WORD + " t/Type: print a list of all equipment in the inventory of the specified type"
-                + "Parameters: t/Type"
-                + "Example: "
-                + "list Microphone";
+        usageReminder = COMMAND_WORD + COMMAND_DESCRIPTION;
     }
 
     /**
@@ -36,14 +40,7 @@ public class ListCommand extends Command {
     public ListCommand(ArrayList<String> commandStrings) {
         this.commandStrings = commandStrings;
         successMessage = "TOTAL QUANTITY OF %1$s: %2$d" + System.lineSeparator();
-        usageReminder = COMMAND_WORD + ": print a list of all equipment in the inventory. "
-                + "Parameters: NIL"
-                + "Example: "
-                + "list" + System.lineSeparator()
-                + COMMAND_WORD + " t/Type: print a list of all equipment in the inventory of the specified type"
-                + "Parameters: t/Type"
-                + "Example: "
-                + "list Microphone";
+        usageReminder = COMMAND_WORD + COMMAND_DESCRIPTION_WITH_TYPE;
     }
 
     /**

@@ -12,6 +12,7 @@ public class AddCommand extends Command {
     private final ArrayList<String> commandStrings;
     public static final String COMMAND_WORD = "add";
     public static final String COMMAND_DESCRIPTION = ": Adds a Equipment to the equipmentInventory. "
+            + System.lineSeparator()
             + "Parameters: n/ITEM_NAME s/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE"
             + System.lineSeparator()
             + "Example: "
