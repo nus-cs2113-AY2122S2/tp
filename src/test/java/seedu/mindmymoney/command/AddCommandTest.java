@@ -2,6 +2,7 @@ package seedu.mindmymoney.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.mindmymoney.MindMyMoneyException;
+import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
@@ -18,8 +19,9 @@ class AddCommandTest {
     @Test
     void addCommand_oneInput_expectListUpdated() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
         String inputString = "expenditure 12345";
-        new AddCommand(inputString, expenditureTestList).executeCommand();
+        new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand();
         ArrayList<Expenditure> testList = new ArrayList<>();
         testList.add(new Expenditure(null, null, "expenditure", 12345, null));
         String expectedOutput = getOutput(testList);
@@ -34,9 +36,10 @@ class AddCommandTest {
     @Test
     void addCommand_missingInput_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
         String inputString = "";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString, expenditureTestList).executeCommand());
+                () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
     }
 
     /**
@@ -45,9 +48,10 @@ class AddCommandTest {
     @Test
     void addCommand_nonIntAmount_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
         String inputString = "expenditure deadbeef";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString, expenditureTestList).executeCommand());
+                () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
     }
 
     /**

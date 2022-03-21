@@ -1,6 +1,7 @@
 package seedu.mindmymoney;
 
 import seedu.mindmymoney.command.*;
+import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.helper.GeneralFunctions;
 
@@ -20,7 +21,7 @@ public class Parser {
      * @param itemList The list of expenditures.
      * @return Command object with respect to user's input.
      */
-    public static Command parseCommand(String input, ExpenditureList itemList) {
+    public static Command parseCommand(String input, ExpenditureList itemList, CreditCardList cardList) {
         try {
             String[] parsedInput = GeneralFunctions.parseInput(input);
             assert parsedInput[INDEX_OF_FIRST_ITEM_IN_STRING] != null : "First element in parsedInput is null";
@@ -31,7 +32,7 @@ public class Parser {
             case "bye":
                 return new ByeCommand();
             case "add":
-                return new AddCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING], itemList);
+                return new AddCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING], itemList, cardList);
             case "update":
                 return new UpdateCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING], itemList);
             case "list":

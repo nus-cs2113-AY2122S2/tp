@@ -1,7 +1,9 @@
 package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
+import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
+import seedu.mindmymoney.userfinancial.CreditCard;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
 import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
@@ -23,10 +25,12 @@ import static seedu.mindmymoney.helper.TimeFunctions.convertTime;
 public class AddCommand extends Command {
     private String addInput;
     public ExpenditureList expenditureList;
+    public CreditCardList creditCardList;
 
-    public AddCommand(String addInput, ExpenditureList expenditureList) {
+    public AddCommand(String addInput, ExpenditureList expenditureList,CreditCardList creditCardList) {
         this.addInput = addInput;
         this.expenditureList = expenditureList;
+        this.creditCardList = creditCardList;
     }
 
     /**
@@ -51,17 +55,17 @@ public class AddCommand extends Command {
         String description = null;
         String amount = null;
         String time = null;
-        int amountInt = 0;
+        float amountInt = 0;
 
         expenditure = parseInputWithCommandFlag(addInput, flagOfExpenditure, flagOfCategory);
-        testExpenditure(expenditure);
+        testExpenditure(expenditure, creditCardList);
         category = parseInputWithCommandFlag(addInput, flagOfCategory, flagOfDescription);
         testCategory(category);
         description = parseInputWithCommandFlag(addInput, flagOfDescription, flagOfAmount);
         testDescription(description);
         amount = parseInputWithCommandFlag(addInput, flagOfAmount, flagOfTime);
         testAmount(amount);
-        amountInt = Integer.parseInt(amount);
+        amountInt = Float.parseFloat(amount);
         time = parseInputWithCommandFlag(addInput, flagOfTime, flagEndValue);
         time = convertTime(time);
 

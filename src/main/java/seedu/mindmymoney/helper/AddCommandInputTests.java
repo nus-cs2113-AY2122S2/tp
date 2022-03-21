@@ -3,6 +3,11 @@ package seedu.mindmymoney.helper;
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.constants.CategoryTypes;
 import seedu.mindmymoney.constants.ExpenditureTypes;
+import seedu.mindmymoney.data.CreditCardList;
+import seedu.mindmymoney.userfinancial.CreditCard;
+import seedu.mindmymoney.userfinancial.Expenditure;
+
+import java.util.Locale;
 
 /**
  * Input validation for Add Command.
@@ -10,14 +15,17 @@ import seedu.mindmymoney.constants.ExpenditureTypes;
 public class AddCommandInputTests {
 
     /**
-     * Checks if input is in Expenditure Types.
+     * Checks if input is cash or a name of credit card.
      *
      * @param input the item to be checked.
      * @return true if item is in the list, false otherwise.
      */
-    public static boolean isExpenditureInList(String input) {
-        for (ExpenditureTypes str : ExpenditureTypes.values()) {
-            if (str.name().equals(input)) {
+    public static boolean isExpenditureInList(String input, CreditCardList creditCardList) {
+        if (input.equalsIgnoreCase("cash")) {
+            return true;
+        }
+        for (CreditCard str : creditCardList.creditCardListArray) {
+            if (str.getNameOfCard().equals(input)) {
                 return true;
             }
         }
@@ -45,12 +53,12 @@ public class AddCommandInputTests {
      * @param inputExpenditure User input of Expenditure.
      * @throws MindMyMoneyException when input is null or not a type of expenditure.
      */
-    public static void testExpenditure(String inputExpenditure) throws MindMyMoneyException {
+    public static void testExpenditure(String inputExpenditure, CreditCardList creditCardList) throws MindMyMoneyException {
         if (inputExpenditure == null) {
             throw new MindMyMoneyException("Expenditure cannot be null!");
         }
 
-        if (!isExpenditureInList(inputExpenditure)) {
+        if (!isExpenditureInList(inputExpenditure, creditCardList)) {
             throw new MindMyMoneyException("Input Cash or a Credit Card!");
         }
     }
@@ -102,7 +110,7 @@ public class AddCommandInputTests {
             throw new MindMyMoneyException("Amount must be a number");
         }
 
-        if(inputAmountAsInteger <= 0) {
+        if (inputAmountAsInteger <= 0) {
             throw new MindMyMoneyException("Amount must be more than 0");
         }
         assert inputAmountAsInteger >= 0 : "Amount should have a positive value";

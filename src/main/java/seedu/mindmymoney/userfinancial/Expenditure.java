@@ -9,12 +9,12 @@ import java.util.Objects;
  */
 public class Expenditure {
     private String description;
-    private int amount;
+    private float amount;
     private String category;
     private String expenditure;
     private String time;
 
-    public Expenditure(String expenditure, String category, String description, int amount, String time) {
+    public Expenditure(String expenditure, String category, String description, float amount, String time) {
         setDescription(description);
         setAmount(amount);
         setCategory(category);
@@ -22,11 +22,11 @@ public class Expenditure {
         setTime(time);
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 
-    public int getAmount() {
+    public float getAmount() {
         return amount;
     }
 
@@ -114,7 +114,7 @@ public class Expenditure {
     public String serialize() {
         return escapeDataString(description)
                 + CONTROL_DELIMITER
-                + escapeDataString(Integer.toString(amount));
+                + escapeDataString(Float.toString(amount));
     }
 
     /**
