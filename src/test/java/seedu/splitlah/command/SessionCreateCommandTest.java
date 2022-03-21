@@ -163,7 +163,7 @@ class SessionCreateCommandTest {
      */
     @Test
     public void run_validCommandWithPersonListAndGidDelimiterHavingDuplicateNames_personListIsThree()
-            throws InvalidDataException{
+            throws InvalidDataException {
         String userInput = "session /create /n Class gathering /d 15-02-2022 /pl alice Charlie /gid 1";
         Command command = Parser.getCommand(userInput);
         command.run(manager);
@@ -219,5 +219,16 @@ class SessionCreateCommandTest {
         command.run(manager);
         int testSessionId = manager.getProfile().getSessionIdTracker();
         assertEquals(currentSessionId, testSessionId);
+    }
+
+    /**
+     * Checks if a session is created when a group does not exist.
+     */
+    @Test
+    public void run_groupDoesNotExists_sessionListSizeRemainsTwo() {
+        String userInput = "session /create /n Class outing /d 15-02-2022 /gid 2";
+        Command command = Parser.getCommand(userInput);
+        command.run(manager);
+        assertEquals(2, manager.getProfile().getSessionList().size());
     }
 }
