@@ -41,6 +41,11 @@ public class StringConstants {
      */
     public static final String DELETE_MESSAGE = "%s has been deleted.";
 
+    /**
+     * For GradeCommand.
+     */
+    public static final String GRADE_ADDED_MESSAGE = "Your grade for %s has been added.";
+    public static final String GRADE_CHANGED_MESSAGE = "Your grade for %s has been changed.";
 
     /**
      * For EditCommand.
@@ -84,7 +89,7 @@ public class StringConstants {
             + "Optional parameters are in square brackets: e.g. [-m MODULE_DESCRIPTION]";
     public static final String EXIT_HELP = "Exits the program.\nFormat to exit program: exit";
     public static final String ADD_HELP = "Adds a module or task as indicated by the command input.\n"
-            + "Format to add module: add /m MODULE_CODE [-d \"MODULE_DESCRIPTION\"]\n"
+            + "Format to add module: add /m MODULE_CODE /c MODULAR_CREDITS [-d \"MODULE_DESCRIPTION\"]\n"
             + "Format to add task:   add /t \"TASK_NAME\" [-d \"TASK_DESCRIPTION\"] [-t \"ESTIMATED_WORKING_TIME\"]"
             + " [-m MODULE_CODE]";
     public static final String DELETE_HELP = "Deletes a module or task as indicated by command input.\n"
@@ -93,7 +98,9 @@ public class StringConstants {
     public static final String EDIT_HELP = "Edits a module or task as indicated by command input.\n"
             + "Format to edit a module: edit /m MODULE_CODE -d \"MODULE_DESCRIPTION\"\n"
             + "Format to edit a task:   edit /t TASK_INDEX"
-            + "(-n \"TASK_NAME\" or -d \"TASK_DESCRIPTION\" or -t \"ESTIMATED_WORKING_TIME\") [-m MODULE_CODE]";
+            + " (-n \"TASK_NAME\" or -d \"TASK_DESCRIPTION\" or -t \"ESTIMATED_WORKING_TIME\") [-m MODULE_CODE]";
+    public static final String GRADE_HELP = "Adds/Changes the grade for the specified module.\n"
+            + "Format to add/change a grade: grade /m MODULE_CODE /g MODULE_GRADE";
     public static final String LIST_HELP = "Displays a list of all tasks, grouped by module code.\n"
             + "Format to list all tasks: list";
     public static final String MARK_HELP = "Mark a task with the given task number from the specified module."
@@ -106,7 +113,7 @@ public class StringConstants {
             + "Format to save: save";
     public static final String HELP = "Displays help and format for selected command.\n"
             + "Format to display help for specific command: help COMMAND\n"
-            + "Available commands: exit, add, del, list, mark, save, help";
+            + "Available commands: exit, add, del, edit, grade, list, mark, save, help";
     public static final String HELP_EXCEPTION = "Sorry, but no help exists for that command.";
 
     /**
@@ -147,6 +154,8 @@ public class StringConstants {
     public static final String TASK_MODULE = "taskModule";
     public static final String MODULE_CODE = "moduleCode";
     public static final String MODULE_DESCRIPTION = "moduleDescription";
+    public static final String MODULAR_CREDIT = "modularCredit";
+    public static final String MODULE_GRADE = "moduleGrade";
     public static final String TASK_NUMBER = "taskNumber";
     public static final String FLAG = "flag";
     public static final String TASK_INDEX = "taskIndex";
@@ -158,11 +167,22 @@ public class StringConstants {
     public static final String ADD_COMMAND_WORD = "add";
     public static final String DELETE_COMMAND_WORD = "del";
     public static final String EDIT_COMMAND_WORD = "edit";
+    public static final String GRADE_COMMAND_WORD = "grade";
     public static final String LIST_COMMAND_WORD = "list";
     public static final String MARK_COMMAND_WORD = "mark";
     public static final String RESET_COMMAND_WORD = "reset";
     public static final String HELP_COMMAND_WORD = "help";
     public static final String SAVE_COMMAND_WORD = "save";
+
+    /**
+     * For Grades.
+     */
+    public static final String DASH = "-";
+    public static final String PLUS = "+";
+    public static final String PLUS_STR = "PLUS";
+    public static final String MINUS_STR = "MINUS";
+    public static final String NOT_ENTERED_STR = "NOT_ENTERED";
+
 
     /**
      * General strings.

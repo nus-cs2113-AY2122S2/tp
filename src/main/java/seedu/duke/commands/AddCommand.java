@@ -38,10 +38,10 @@ public class AddCommand extends Command {
     /**
      * Constructor for use with commands involving adding modules.
      */
-    public AddCommand(AddObjectType type, String moduleCode, String moduleDescription) {
+    public AddCommand(AddObjectType type, String moduleCode, String moduleDescription, int modularCredit) {
         assert type == AddObjectType.MODULE;
         typeToAdd = type;
-        newModule = new Module(moduleCode, moduleDescription);
+        newModule = new Module(moduleCode, moduleDescription, modularCredit);
     }
 
     public Task getNewTask() {
