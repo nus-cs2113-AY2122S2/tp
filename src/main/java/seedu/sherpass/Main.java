@@ -8,8 +8,8 @@ import seedu.sherpass.command.ExitCommand;
 import seedu.sherpass.exception.InvalidInputException;
 
 import seedu.sherpass.util.Parser;
-import seedu.sherpass.util.Reminder;
 import seedu.sherpass.util.Storage;
+import seedu.sherpass.util.Timetable;
 import seedu.sherpass.util.Ui;
 
 import seedu.sherpass.task.TaskList;
@@ -17,13 +17,19 @@ import seedu.sherpass.task.TaskList;
 import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 public class Main {
 
     private Storage storage;
     private TaskList taskList;
-    private Ui ui;
-    private Reminder reminder;
+    private final Ui ui;
+    public static Logger LOGGER;
 
     /**
      * Initialises the program.
@@ -44,22 +50,40 @@ public class Main {
             storage.handleCorruptedSave(ui);
             taskList = new TaskList();
         }
-        reminder = new Reminder(taskList, ui);
+    }
+
+    private void initialiseLogger() {
+        LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+        LogManager.getLogManager().reset();
+        LOGGER.setLevel(Level.FINE);
+        ConsoleHandler ch = new ConsoleHandler();
+        ch.setLevel(Level.WARNING);
+        LOGGER.addHandler(ch);
+
+        try {
+            FileHandler fh = new FileHandler();
+            fh.setLevel(Level.ALL);
+            LOGGER.addHandler(fh);
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "File logger not working", e);
+        }
+
     }
 
     /**
      * Runs the program.
      */
     public void run() {
+        initialiseLogger();
         ui.showWelcomeMessage();
-        reminder.showReminders();
+        //Timetable.showScheduleByDay(LocalDate.now(), taskList, ui);
 
         boolean isExit = false;
         while (!isExit) {
             String fullCommand = ui.readCommand();
             ui.showLine();
 
-            Command c = Parser.parseCommand(fullCommand, taskList);
+            Command c = Parser.parseCommand(fullCommand, taskList, ui);
             if (c != null) {
                 c.execute(taskList, ui, storage);
                 isExit = ExitCommand.isExit(c);
