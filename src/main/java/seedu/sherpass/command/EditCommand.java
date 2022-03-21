@@ -30,12 +30,19 @@ public class EditCommand extends Command {
      * Creates constructor for edit command.
      * Saves index of task to edit, task description, task due date, and date to work on task.
      *
+     * @param taskList           Task array.
      * @param taskNumber         Task number to edit.
      * @param taskDescription    Task Description to edit.
      * @param byDate             Task due date.
      * @param doOnDate           Date to work on task.
+     * @throws IndexOutOfBoundsException If the task index is out of bounds.
      */
-    public EditCommand(int taskNumber, String taskDescription, LocalDate byDate, LocalDate doOnDate) {
+    public EditCommand(TaskList taskList, int taskNumber, String taskDescription, LocalDate byDate, LocalDate doOnDate)
+            throws IndexOutOfBoundsException{
+
+        if (!taskList.isTaskExist(taskNumber - 1)) {
+            throw new IndexOutOfBoundsException();
+        }
         this.taskIndex = taskNumber - 1;
         this.taskDescription = taskDescription;
         this.byDate = byDate;

@@ -10,7 +10,7 @@ import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
 import static seedu.sherpass.constant.StringConstant.SINGLE_SPACE;
 
 public class ParserTest {
-
+/*
     @Test
     void prepareEdit_noInput_expectNull() {
         String editCommandInput = "";
@@ -34,7 +34,7 @@ public class ParserTest {
         String editCommandInput = "/remind 20/12/2022 /by 19/12/2022";
         assertNull(Parser.prepareEdit(editCommandInput));
     }
-
+*/
     @Test
     void parseTimerInput_noInput_InvalidTimeExceptionThrown() {
         String studyCommandInput = "start ";

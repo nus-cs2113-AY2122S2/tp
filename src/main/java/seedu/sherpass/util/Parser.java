@@ -235,9 +235,10 @@ public class Parser {
      * @param taskContent   User's input. Should be of the format:
      *                      [task_number] [task_description] /by [task_due_date] /do_on [date to work on task]
      *                      (the 3 attributes after task_number are optional)
+     * @param taskList      Task array.
      * @return A new Edit command. If user's input is invalid, return null.
      */
-    public static Command prepareEdit(String taskContent) {
+    public static Command prepareEdit(String taskContent, TaskList taskList) {
 
         String[] fullEditInfo = taskContent.trim().split(SINGLE_SPACE, 2);
 
@@ -246,7 +247,7 @@ public class Parser {
 
             int taskNumberToEdit = Integer.parseInt(fullEditInfo[TASK_NUMBER_INDEX]);
             checkCorrectAttributeInfoFormat(fullEditInfo[TASK_CONTENT_INDEX]);
-            return handleEdit(taskNumberToEdit, fullEditInfo[TASK_CONTENT_INDEX]);
+            return handleEdit(taskList, taskNumberToEdit, fullEditInfo[TASK_CONTENT_INDEX]);
 
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             printExceptionMessage(ERROR_INVALID_TASK_NUMBER_MESSAGE, EditCommand.COMMAND_WORD);
@@ -263,12 +264,15 @@ public class Parser {
      * Parses the user's input (to determine the task description, task due date, and date to work on task)
      * for the Edit command. Returns parsed command to the prepareEdit command.
      *
+     * @param taskList          Task array.
      * @param taskNumberToEdit  Index of task to edit.
      * @param fullEditInfo      User's input.
      * @return A new Edit command containing the parsed attributes.
      * @throws InvalidInputException If dates cannot be parsed by LocalDate.
+     * @throws IndexOutOfBoundsException If the task index is out of bounds
      */
-    public static Command handleEdit(int taskNumberToEdit, String fullEditInfo) throws InvalidInputException {
+    public static Command handleEdit(TaskList taskList, int taskNumberToEdit, String fullEditInfo)
+            throws InvalidInputException, IndexOutOfBoundsException {
 
         assert (!fullEditInfo.isBlank());
 
@@ -288,7 +292,7 @@ public class Parser {
         LocalDate parsedByDateToEdit = getParsedDateToEdit(fullEditInfo, BY_KEYWORD);
         LocalDate parsedDoOnDateToEdit = getParsedDateToEdit(fullEditInfo, DO_ON_KEYWORD);
 
-        return new EditCommand(taskNumberToEdit, descriptionToEdit, parsedByDateToEdit, parsedDoOnDateToEdit);
+        return new EditCommand(taskList, taskNumberToEdit, descriptionToEdit, parsedByDateToEdit, parsedDoOnDateToEdit);
     }
 
     /**
@@ -379,7 +383,7 @@ public class Parser {
         case AddCommand.COMMAND_WORD:
             return prepareAdd(taskContent, taskList);
         case EditCommand.COMMAND_WORD:
-            return prepareEdit(taskContent);
+            return prepareEdit(taskContent, taskList);
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(taskContent, taskList);
         case ClearCommand.COMMAND_WORD:
