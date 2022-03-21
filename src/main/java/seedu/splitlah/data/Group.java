@@ -16,8 +16,8 @@ public class Group {
     private String groupName;
     private int groupId;
 
-    private static final String PERSON_LIST_HEADER = "Participants";
     private static final int OFFSET = 1;
+    private static final String SEPARATOR = " | ";
 
     /**
      * Constructs a Group object.
@@ -135,6 +135,16 @@ public class Group {
      */
     public int getPersonCount() {
         return personList.size();
+    }
+
+    /**
+     * Returns a String object that contains groupId, groupName, and the number of persons involved in the group.
+     *
+     * @return A String object which summarises the group.
+     */
+    public String getGroupSummary() {
+        return groupId + SEPARATOR + groupName + SEPARATOR + getPersonCount()
+            + (getPersonCount() > 1 ? " persons" : " person");
     }
 
     /**
