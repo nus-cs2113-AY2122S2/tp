@@ -2,7 +2,6 @@ package seedu.splitlah.command;
 
 import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
-import seedu.splitlah.data.Person;
 import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
@@ -11,8 +10,6 @@ import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 
 /**
