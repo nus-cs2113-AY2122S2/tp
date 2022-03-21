@@ -1,6 +1,7 @@
 import commands.Command;
 import commands.CommandResult;
 import commands.ExitCommand;
+import manager.LimitManager;
 import manager.RecordManager;
 import ui.TextUi;
 import parser.Parser;
@@ -12,6 +13,7 @@ public class Spendvelope {
 
     private TextUi ui;
     private RecordManager recordMgr = new RecordManager();
+    private LimitManager limitMgr = new LimitManager();
 
     /**
      * Main entry-point for the java.duke.Duke application.
@@ -63,6 +65,7 @@ public class Spendvelope {
     private CommandResult executeCommand(Command command) {
         try {
             command.setData(recordMgr);
+            command.setLimitManager(limitMgr);
             CommandResult result = command.execute();
             return result;
         } catch (Exception e) {
