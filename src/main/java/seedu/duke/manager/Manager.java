@@ -28,10 +28,10 @@ public abstract class Manager {
     /**
      * Creates a Manager.
      *
-     * @param file Location of the database.
+     * @param file Name of the database file to store your required data (i.e. "employee.dat").
      */
     protected Manager(String file) {
-        this.file = file;
+        this.file = Path.of(DATABASE_DIRECTORY, file).toString();
     }
 
     /**
