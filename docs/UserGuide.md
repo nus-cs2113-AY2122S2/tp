@@ -73,6 +73,8 @@ displayed in an easy-to-read summary.
   - Example: `[SESSION_ID]`
 - Parameters with an ellipsis `...` indicate that the user can supply multiple values.
   - Example: `[COST1] [COST2] ...`
+- Parameters enclosed within `[<` and `>]` indicates that the arguments are optional.
+  - Example: `[</gst GST_PERCENT /sc SERVICE_CHARGE>]`
 
 ## Quick Start
 
@@ -93,7 +95,7 @@ displayed in an easy-to-read summary.
 > Creates a new session.<br>
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
-Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ...]`
+Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ...] [</gid [GROUD_ID]>]`
 
 * `[SESSION_NAME]` refers to the name of the session.
   * The session name is **case-insensitive**.
@@ -135,6 +137,9 @@ Format: `session /delete /sid [SESSION_ID]`
 > **💡 Note(s):**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
 >- A confirmation must be given before deletion takes place.
+
+> **⚠️Warning:**
+> - This action is irreversible, once the command has been entered, the session would be immediately deleted.
 
 Example of usage:
 1. Remove an existing session with a unique identifier of 1.
