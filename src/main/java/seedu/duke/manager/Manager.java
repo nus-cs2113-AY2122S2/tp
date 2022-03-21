@@ -12,8 +12,8 @@ import java.nio.file.Path;
 /**
  * Manager class provides the base functionality that all Managers in the application must implement.
  * Managers function as the 'Controller' in the application.
- * <p>
- * Provides base implementation and helper methods to load data from database files.
+ *
+ * <p>Provides base implementation and helper methods to load data from database files.
  */
 public abstract class Manager {
     /**
@@ -49,7 +49,7 @@ public abstract class Manager {
      * @return Object.
      * @throws Exception For any errors while reading.
      */
-    protected Object _load() throws Exception {
+    protected Object load() throws Exception {
         this.ensureDatabaseDirectoryExists();
 
         FileInputStream fis = new FileInputStream(this.file);
@@ -68,7 +68,7 @@ public abstract class Manager {
      * @param o Object to save.
      * @throws Exception For any errors while writing.
      */
-    protected void _save(Object o) throws Exception {
+    protected void save(Object o) throws Exception {
         this.ensureDatabaseDirectoryExists();
 
         FileOutputStream fos = new FileOutputStream(this.file);
