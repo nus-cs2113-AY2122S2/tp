@@ -33,7 +33,7 @@ public class OrderManager {
         return this.orders.size();
     }
 
-    public Order getOrder (int userInputInt) {
+    public Order getOrder(int userInputInt) {
         return this.orders.get(userInputInt);
     }
 
