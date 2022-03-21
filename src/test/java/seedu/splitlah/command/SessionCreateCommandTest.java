@@ -13,7 +13,7 @@ class SessionCreateCommandTest {
     Manager manager = new Manager();
 
     /**
-     * Creates 2 sessions that is stored and managed by the Manager object.
+     * Creates 2 sessions and 1 group that is stored and managed by the Manager object.
      */
     @BeforeEach
     void setUp() {
@@ -23,6 +23,9 @@ class SessionCreateCommandTest {
         createSessionOne.run(manager);
         Command createSessionTwo = Parser.getCommand(sessionTwoArgs);
         createSessionTwo.run(manager);
+        String groupArgs = "group /create /n Class1 /pl Alice Bob";
+        Command createGroup = Parser.getCommand(groupArgs);
+        createGroup.run(manager);
     }
 
     /**
