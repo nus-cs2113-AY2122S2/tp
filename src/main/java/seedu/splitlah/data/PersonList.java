@@ -93,7 +93,8 @@ public class PersonList {
     /**
      * Checks if String array object of names has duplicated names.
      *
-     * @return true if it contains duplicates, false otherwise.
+     * @return true if it contains duplicates,
+     *         false otherwise.
      */
     public static boolean hasNameDuplicates(String[] personNames) {
         Set<String> nameSet = new HashSet<>();
