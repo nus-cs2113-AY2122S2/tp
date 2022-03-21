@@ -19,12 +19,12 @@ public class InvalidFormatExceptionTest {
     }
 
     @Test
-    public void getMessage_withMessage_returnsMessage() {
+    public void getMessage_withMessageOnly_returnsMessage() {
         assertEquals("message", invalidFormatExceptionWithMessage.getMessage());
     }
 
     @Test
-    public void getCause_withMessage_doesNotReturnCause() {
+    public void getCause_withMessageOnly_doesNotReturnCause() {
         Object cause = invalidFormatExceptionWithMessage.getCause();
         assertNull(cause);
     }
