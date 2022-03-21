@@ -24,14 +24,13 @@ public class UserInterface {
                 switch (command) {
                 case "view":
                     //using flags here to distinguish between different views????
-                    String flag = userInput.split(" ")[1];
-                    String regex = "id/(?<id>\\d*)";
+                    String regex = "(?<flag>*[og])/ id/(?<id>\\d*)";
                     Regex regexMatch = new Regex(userInput, regex);
                     HashMap<String, String> matches = regexMatch.getGroupValues();
-                    if (flag.equals("-o")) {
+                    if (matches.get("flag").equals("o")) {
                         // view order with flag "-o"
                         warehouse.viewOrder(matches.get("id"));
-                    } else if (flag.equals("-g")) {
+                    } else if (matches.get("flag").equals("g")) {
                         // view good with flag "-g"
                         warehouse.viewGood(matches.get("id"));
                     } else {
@@ -40,13 +39,15 @@ public class UserInterface {
                     }
                     break;
                 case "list":
-                    flag = userInput.split(" ")[1];
+                    regex = "(?<flag>*[og])/";
+                    regexMatch = new Regex(userInput, regex);
+                    matches = regexMatch.getGroupValues();
 
-                    if (flag.equals("-o")) {
-                        // list orders with flag "-o"
+                    if (matches.get("flag").equals("9")) {
+                        // list orders with flag "o"
                         warehouse.listOrders();
-                    } else if (flag.equals("-g")) {
-                        // list goods with flag "-g"
+                    } else if (matches.get("flag").equals("g")) {
+                        // list goods with flag "g"
                         warehouse.listGoods();
                     } else {
                         // wrong command exception
@@ -54,14 +55,14 @@ public class UserInterface {
                     }
                     break;
                 case "add":
-                    flag = userInput.split(" ")[1];
+                    String flag = userInput.split(" ")[1];
 
-                    if (flag.equals("-o")) {
+                    if (flag.equals("o/")) {
                         regex = "id/(?<id>\\d*) r/(?<r>.*) a/(?<address>.*)";
                         regexMatch = new Regex(userInput, regex);
                         matches = regexMatch.getGroupValues();
                         warehouse.addOrder(matches.get("id"), matches.get("r"), matches.get("address"));
-                    } else if (flag.equals("-g")) {
+                    } else if (flag.equals("g/")) {
                         regex = "oid/(?<oid>\\d*) gid/(?<gid>\\d*) n/(?<name>.*) q/(?<qty>\\d*)"
                                 + " d/(?<desc>\\.*)";
                         regexMatch = new Regex(userInput, regex);
@@ -75,12 +76,12 @@ public class UserInterface {
                 case "remove":
                     flag = userInput.split(" ")[1];
 
-                    if (flag.equals("-o")) {
+                    if (flag.equals("o/")) {
                         regex = "id/(?<id>\\d*)";
                         regexMatch = new Regex(userInput, regex);
                         matches = regexMatch.getGroupValues();
                         warehouse.removeOrder(matches.get("id"));
-                    } else if (flag.equals("-g")) {
+                    } else if (flag.equals("g/")) {
                         regex = "id/(?<id>\\d*) q/(?<qty>\\d*)";
                         regexMatch = new Regex(userInput, regex);
                         matches = regexMatch.getGroupValues();
