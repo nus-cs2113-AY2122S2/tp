@@ -27,10 +27,8 @@ public class GroupListCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        /*
         ArrayList<Group> groupsToBePrinted = manager.getProfile().getGroupList();
         if (groupsToBePrinted.isEmpty()) {
-            assert groupsToBePrinted.size() == 0 : Message.ASSERT_GROUPLIST_GROUP_SIZE_NOT_ZERO;
             manager.getUi().printlnMessage(Message.ERROR_PROFILE_SESSION_LIST_EMPTY);
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_GROUPLIST_GROUPS_NOT_LISTED);
             return;
@@ -40,11 +38,10 @@ public class GroupListCommand extends Command {
         int groupListSize = groupsToBePrinted.size();
         assert groupListSize > 0 : Message.ASSERT_GROUPLIST_GROUP_SIZE_LESS_THAN_ONE;
         for (int i = 0; i < groupListSize - 1; i++) {
-            manager.getUi().printlnMessage(groupsToBePrinted.get(i).getGroupSimplifiedString());
+            manager.getUi().printlnMessage(groupsToBePrinted.get(i).getGroupSummary());
         }
-        String lastGroupToPrint = groupsToBePrinted.get(groupListSize - 1).getGroupSimplifiedString();
+        String lastGroupToPrint = groupsToBePrinted.get(groupListSize - 1).getGroupSummary();
         manager.getUi().printlnMessageWithDivider(lastGroupToPrint);
         Manager.getLogger().log(Level.FINEST, Message.LOGGER_GROUPLIST_GROUPS_LISTED);
-        */
     }
 }
