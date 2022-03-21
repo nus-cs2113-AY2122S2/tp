@@ -50,21 +50,21 @@ public class Timetable {
     }
 
     private static void printRow(String colOne, String colTwo, String colThree,
-                                   String colFour, String colFive,
-                                   int taskLength, int doOnDateLength, int iteration, Ui ui) {
+                                 String colFour, String colFive,
+                                 int taskLength, int doOnDateLength, int rowNumber, Ui ui) {
         String taskColumnBackWhiteSpace = ui.getRepeatedCharacters(" ",
                 calculateColBackWhiteSpace(taskLength, colFour));
         String doOnDateColumnBackWhiteSpace = ui.getRepeatedCharacters(" ",
                 calculateColBackWhiteSpace(doOnDateLength, colFive));
-        if (iteration == 1) {
+        if (rowNumber == 1) {
             ui.showToUser("|  " + colOne + "       |  " + colTwo + "       |  "
                     + colThree + " |  " + colFour + taskColumnBackWhiteSpace
                     + "|  " + colFive + doOnDateColumnBackWhiteSpace + "|");
-        } else if (iteration == 2) {
+        } else if (rowNumber == 2) {
             ui.showToUser("|  " + colOne + "       | " + colTwo + " |      "
                     + colThree + "       | " + colFour + taskColumnBackWhiteSpace
                     + "| " + colFive + doOnDateColumnBackWhiteSpace + "|");
-        }  else if (iteration == 3) {
+        } else if (rowNumber == 3) {
             ui.showToUser("| " + colOne + " | " + colTwo + " |      " + colThree
                     + "       |  " + colFour + taskColumnBackWhiteSpace + "|  "
                     + colFive + doOnDateColumnBackWhiteSpace + "|");
