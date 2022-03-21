@@ -73,13 +73,19 @@ class SessionCreateCommandTest {
         String argsMissingPersonListArgument = "session /create /n Class gathering /d 15-02-2022 /pl";
         Command sessionWithMissingPersonListArgument = Parser.getCommand(argsMissingPersonListArgument);
         assertEquals(InvalidCommand.class, sessionWithMissingPersonListArgument.getClass());
+
+        // Case 4: Missing Group unique identifier.
+        String argsMissingGidArgument = "session /create /n Class gathering /d 15-02-2022 /gid";
+        Command sessionWithMissingGidArgument = Parser.getCommand(argsMissingGidArgument);
+        assertEquals(InvalidCommand.class, sessionWithMissingGidArgument.getClass());
     }
 
     /**
-     * Checks if session is created successfully and added into list of sessions.
+     * Checks if session is created successfully with Person List delimiter
+     * and added into list of sessions.
      */
     @Test
-    public void run_validCommand_sessionListSizeBecomesThree() {
+    public void run_validCommandWithPersonListDelimiter_sessionListSizeBecomesThree() {
         String userInput = "session /create /n Class gathering /d 15-02-2022 /pl Alice Bob";
         Command command = Parser.getCommand(userInput);
 
