@@ -5,6 +5,7 @@ import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
@@ -27,8 +28,8 @@ public class GroupCreateCommand extends Command {
         "The group was created successfully.\n";
 
     public static final String[] COMMAND_DELIMITERS = {
-        Parser.NAME_DELIMITER,
-        Parser.PERSON_LIST_DELIMITER
+        ParserUtils.NAME_DELIMITER,
+        ParserUtils.PERSON_LIST_DELIMITER
     };
 
     private String groupName;

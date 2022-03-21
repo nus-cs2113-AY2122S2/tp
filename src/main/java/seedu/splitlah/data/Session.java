@@ -1,7 +1,7 @@
 package seedu.splitlah.data;
 
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
@@ -325,7 +325,7 @@ public class Session {
      */
     public String getSessionSimplifiedString() {
         return sessionId + SUMMARY_STRING_SEPARATOR + sessionName + "\n "
-                + SUMMARY_STRING_SEPARATOR + dateCreated.format(Parser.DATE_FORMAT)
+                + SUMMARY_STRING_SEPARATOR + dateCreated.format(ParserUtils.DATE_FORMAT)
                 + SUMMARY_STRING_SEPARATOR + personList.getSize() + " participants"
                 + SUMMARY_STRING_SEPARATOR + activityList.size() + " activities"
                 + SUMMARY_STRING_SEPARATOR + getGroupSummaryString();
@@ -340,7 +340,7 @@ public class Session {
     public String toString() {
         return "Session Id #" + sessionId + " --\n"
                 + "Name: " + sessionName + '\n'
-                + "Date: " + dateCreated.format(Parser.DATE_FORMAT) + '\n'
+                + "Date: " + dateCreated.format(ParserUtils.DATE_FORMAT) + '\n'
                 + getActivityListSummaryString() + '\n'
                 + getPersonListSummaryString() + '\n'
                 + getGroupSummaryString();

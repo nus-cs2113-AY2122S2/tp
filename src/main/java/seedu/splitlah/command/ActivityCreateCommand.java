@@ -7,6 +7,7 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
@@ -35,14 +36,14 @@ public class ActivityCreateCommand extends Command {
     private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
     
     public static final String[] COMMAND_DELIMITERS = { 
-        Parser.SESSION_ID_DELIMITER, 
-        Parser.NAME_DELIMITER, 
-        Parser.PAYER_DELIMITER, 
-        Parser.INVOLVED_DELIMITER, 
-        Parser.TOTAL_COST_DELIMITER, 
-        Parser.COST_LIST_DELIMITER,
-        Parser.GST_DELIMITER,
-        Parser.SERVICE_CHARGE_DELIMITER 
+        ParserUtils.SESSION_ID_DELIMITER, 
+        ParserUtils.NAME_DELIMITER, 
+        ParserUtils.PAYER_DELIMITER, 
+        ParserUtils.INVOLVED_DELIMITER, 
+        ParserUtils.TOTAL_COST_DELIMITER, 
+        ParserUtils.COST_LIST_DELIMITER,
+        ParserUtils.GST_DELIMITER,
+        ParserUtils.SERVICE_CHARGE_DELIMITER 
     };
 
     private int sessionId;
@@ -121,7 +122,7 @@ public class ActivityCreateCommand extends Command {
             totalCost = Parser.parseTotalCost(commandArgs);
         } catch (InvalidFormatException e) {
             if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                    + Parser.TOTAL_COST_DELIMITER)) {
+                    + ParserUtils.TOTAL_COST_DELIMITER)) {
                 return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
                         + "\n\t" + COMMAND_FORMAT_SECOND);
             }
@@ -132,7 +133,7 @@ public class ActivityCreateCommand extends Command {
             costList = Parser.parseCostList(commandArgs);
         } catch (InvalidFormatException e) {
             if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                    + Parser.COST_LIST_DELIMITER)) {
+                    + ParserUtils.COST_LIST_DELIMITER)) {
                 return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
                         + "\n\t" + COMMAND_FORMAT_SECOND);
             }
