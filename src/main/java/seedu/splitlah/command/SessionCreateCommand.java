@@ -2,6 +2,7 @@ package seedu.splitlah.command;
 
 import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Person;
 import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
@@ -59,24 +60,6 @@ public class SessionCreateCommand extends Command {
         this.personNames = personNames;
         this.sessionDate = date;
         this.groupId = groupId;
-    }
-
-    /**
-     * Checks if String array object of names has duplicated names.
-     *
-     * @return true if it contains duplicates, false otherwise.
-     */
-    private boolean hasNameDuplicates() {
-        Set<String> nameSet = new HashSet<>();
-        for (String name : personNames) {
-            String nameToBeAdded = name.toLowerCase();
-            if (!nameSet.add(nameToBeAdded)) {
-                return true;
-            }
-        }
-        assert nameSet.size() == personNames.length :
-                Message.ASSERT_SESSIONCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED;
-        return false;
     }
 
     /**
@@ -144,7 +127,7 @@ public class SessionCreateCommand extends Command {
     public void run(Manager manager) {
         PersonList personList = new PersonList();
         if (personNames != null) {
-            boolean hasDuplicates = hasNameDuplicates();
+            boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
             if (hasDuplicates) {
                 manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
                 return;
