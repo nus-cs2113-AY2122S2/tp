@@ -1,10 +1,12 @@
 package werkit;
 
-import commands.ExerciseCommand;
+
+import commands.InvalidCommandException;
+import commands.WorkoutCommand;
+import commands.SearchCommand;
 import commands.ExitCommand;
 import commands.HelpCommand;
-import commands.WorkoutCommand;
-import commands.InvalidCommandException;
+import commands.ExerciseCommand;
 import commands.PlanCommand;
 import data.exercises.ExerciseList;
 import data.plans.PlanList;
@@ -69,6 +71,29 @@ class ParserTest {
         assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /update"));
         assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /test"));
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> parser.createWorkoutCommand("workout"));
+    }
+
+    //Search tests
+    @Test
+    void createSearchCommand_validSearchCommand_expectSuccess() throws InvalidCommandException, IOException {
+        assertTrue(parser.createSearchCommand("search /exercise up") instanceof SearchCommand);
+        assertTrue(parser.createSearchCommand("search /exercise asdaskd") instanceof SearchCommand);
+        assertTrue(parser.createSearchCommand("search /plan cool") instanceof SearchCommand);
+        assertTrue(parser.createSearchCommand("search /plan asldasld") instanceof SearchCommand);
+    }
+
+    @Test
+    void createSearchCommand_invalidSearchCommand_exceptionThrown() {
+        assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search /new"));
+        assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search /list extra"));
+        assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search /delete"));
+        assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search /update"));
+        assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search /test"));
+        assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search /exercise"));
+        assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search /plan"));
+        assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search fasdjaks"));
+        assertThrows(InvalidCommandException.class, () -> parser.createSearchCommand("search -1"));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> parser.createSearchCommand("search"));
     }
 
     //Exercise tests
