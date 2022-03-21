@@ -41,6 +41,7 @@ public class ParserUtils {
     private static final String NEXT_DELIMITER_INDICATOR = " /";
     private static final int ZERO_INDEXING_OFFSET = 1;
     private static final int PERCENTAGE_ALLOWED_INTEGER_PLACES = 3;
+    private static final int TWO_DECIMAL_PLACES = 2;
     static final String REGEX_WHITESPACES_DELIMITER = "\\s+";
     static final int INVALID_INDEX_INDICATOR = -1;
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -129,7 +130,6 @@ public class ParserUtils {
      */
     private static boolean hasAtMostTwoDecimalPlaces(String input) {
         assert input != null : Message.ASSERT_PARSER_TOKEN_INPUT_NULL;
-        final int TWO_DECIMAL_PLACES = 2;
         
         try {
             double value = Double.parseDouble(input);
