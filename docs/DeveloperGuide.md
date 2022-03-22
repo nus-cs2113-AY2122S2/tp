@@ -43,7 +43,7 @@ is responsible for,
 
 **How the components interact with each other**
 
-{referring to AB-3, describe one encompasssing command such as `add /n Alice`}
+{referring to AB-3, describe one encompassing command such as `add /n Alice`}
 
 ### UI Component
 {For Huilin as she is most familiar}
@@ -55,7 +55,53 @@ is responsible for,
 {For Sizheng}
 
 ### Persons Component
-{For Weijun}
+
+#### \[Proposed] Logical grouping for different generation of person added
+
+##### Proposed implementation
+
+The proposed logical grouping of persons added is facilitated by `Family`. It holds 3 lists of `PersonList`, each one
+for a different generation. 
+Additionally, it implements the following operations:
+* `Family#list()` -- Lists a high level overview of income and expenditure of each generation.
+* `Family#remain()` -- Prints the total disposable income remaining for the family after everybody's income and   
+expenditures have been taken into account.
+* `Family#addParent()` -- Adds a person into the `parents` list.
+* `Family#addMyGen()` -- Adds a person into the `myGen` list.
+* `Family#addChild()` -- Adds a person into the `children` list.
+
+Given below is an example usage scenario and how a generation's high level finance overview is calculated.
+
+Step 1. The user launches the application. A `Family` object will be initialised with its 3 generational   
+`PersonList`s. They are `parents`, `myGen`, and `children`.
+-- Insert UML object diagram here
+
+Step 2. The user wishes to add a person, say `John Doe`, to the `children` list. The user executes   
+`add /n John Doe /g 3` command, adding a `Person` with `name` as `John Doe` to group 3, which is the `children`.
+-- Insert UML object diagram here
+
+Step 3. The user executes `addin /g 3 /u 1 /i ...` to add a new income to index 1 of the `children` list, who is   
+`John Doe`. This causes an income object to be added to the `IncomeList` of `John Doe`.
+-- Insert UML object diagram here
+
+Step 4. The user now decides to have an overview of his family's finances by executing the `list` command. The `list`  
+command will call `Family#list()`, which will go through each generation to sum up their incomes and expenditures and  
+print that out.
+-- Insert UML sequence diagram here
+
+#### Design considerations:
+**Aspect: How to sort persons into logical groups:**
+* **Alternative 1 \(current choice):** Have a `Family` object hold 3 `PersonList`s, one for each generation.
+    * Pros: Only requires storage of one instance of each income and expenditure.
+    * Cons: May have performance issues related to operations which work on every income and expenditure as it makes  
+  them deeply nested.
+* **Alternative 2:** Maintain the single `PersonList` with everyone inside, but give a tag to each `Person` to  
+indicate which generation they belong to
+    * Pros: Very low maintenance and changes required to existing code.
+    * Cons: Lack of abstraction, and that total income and expenditure for each generation would need to be   
+  stored until the entire list is iterated through before being able to print.
+
+
 
 ### Money Component
 {For Jiarong}
@@ -128,10 +174,10 @@ Maybe for Hans
 ---
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ...             | So that I can ...                                           |
+|---------|----------|---------------------------|-------------------------------------------------------------|
+| v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
+| v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
 
 ---
 ## Non-Functional Requirements
