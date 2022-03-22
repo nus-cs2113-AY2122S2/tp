@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static seedu.allonus.contacts.ContactParser.getFields;
 import static seedu.allonus.contacts.ContactParser.parseContact;
 
 public class ContactsManager {
@@ -31,6 +32,15 @@ public class ContactsManager {
     private static final String CONTACTS_ADD_SUCCESS_MESSAGE =
             "Got it. I've added this contact:\n  ";
 
+    private static final String CONTACTS_EDIT_INVALID_INDEX_MESSAGE =
+            "You can only edit with a valid number that's in the list :')";
+    private static final String CONTACTS_EDIT_NO_FIELDS_MESSAGE =
+            "You need to specify the contact field(s) you want to edit!";
+    private static final String CONTACTS_EDIT_EMPTY_FIELD_MESSAGE =
+            "You have provided an empty field: \"%s\"";
+    private static final String CONTACTS_EDIT_SUCCESS_MESSAGE =
+            "Okay, I've updated the information of this contact:\n  ";
+
     private static Logger logger = Logger.getLogger("");
     private static final int CONTACTS_LIST_MAX_SIZE = 100;
     private static final ArrayList<Contact> contactsList = new ArrayList<>(CONTACTS_LIST_MAX_SIZE);
@@ -55,7 +65,7 @@ public class ContactsManager {
      * @param userInput String of original user input.
      * @return ind Index of item.
      */
-    public static int parseNum(String userInput) {
+    private static int parseNum(String userInput) {
         String stringOfNum = userInput.split(" ", 0)[1];
         return Integer.parseInt(stringOfNum) - 1;
     }
@@ -104,6 +114,64 @@ public class ContactsManager {
                 + String.format(CONTACTS_UPDATED_LIST_SIZE_MESSAGE, contactsList.size()));
     }
 
+    /**
+     * Prints contacts that contain a certain keyword.
+     *
+     * @param userInput String of user input to parse.
+     */
+    private static void findContacts(String userInput) {
+        String[] commands = userInput.split(" ");
+        if (commands.length > 2) {
+            printFormat("Please only enter one keyword!");
+            return;
+        }
+        String keyword = commands[1];
+
+        String listAsString = "";
+        for (int i = 0; i < contactsList.size(); i++) {
+            Contact curr = contactsList.get(i);
+            String contactName = curr.getName();
+            if (contactName.contains(keyword)) {
+                listAsString = listAsString.concat(String.format(" %d. %s\n", i + 1, curr));
+            }
+        }
+        if (!listAsString.equals("")) {
+            printFormat("Here are the matching contacts in your list:\n" + listAsString);
+        } else {
+            printFormat("There are no contacts matching this keyword!");
+        }
+    }
+
+    private static void editContact(String userInput) {
+        Contact curr;
+        try {
+            int taskInd = parseNum(userInput);
+            curr = contactsList.get(taskInd);
+            assert taskInd >= 0;
+            assert taskInd <= contactsList.size();
+            assert taskInd < CONTACTS_LIST_MAX_SIZE;
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            printFormat(CONTACTS_EDIT_INVALID_INDEX_MESSAGE);
+            return;
+        }
+
+        ArrayList<String> fields = getFields(userInput);
+        if (fields.isEmpty()) {
+            printFormat(CONTACTS_EDIT_NO_FIELDS_MESSAGE);
+            return;
+        }
+
+        for (String field : fields) {
+            try {
+                String fieldContent = field.split("[nfetd]/")[1];
+                curr.setName(fieldContent);
+            } catch (IndexOutOfBoundsException e) {
+                printFormat(String.format(CONTACTS_EDIT_EMPTY_FIELD_MESSAGE, field));
+            }
+        }
+        printFormat(CONTACTS_EDIT_SUCCESS_MESSAGE + curr);
+    }
+
     public static void contactsRunner(TextUi ui) {
         contactsWelcome();
         String userInput;
@@ -118,6 +186,10 @@ public class ContactsManager {
                 deleteContact(userInput);
             } else if (userInput.startsWith("add")) {
                 addContact(userInput);
+            } else if (userInput.startsWith("find")) {
+                findContacts(userInput);
+            } else if (userInput.startsWith("edit")) {
+                editContact(userInput);
             } else {
                 printFormat(CONTACTS_INVALID_COMMAND_MESSAGE);
                 logger.log(Level.FINER, String.format("Invalid command to Contacts Manager: %s", userInput));

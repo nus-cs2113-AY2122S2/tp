@@ -8,11 +8,16 @@ import java.util.regex.Pattern;
 
 public class ContactParser {
 
-    private static final int MAX_NUMBER_OF_FIELDS = 5;
-    private static Logger logger = Logger.getLogger("");
+    private static final String CONTACTS_PARSER_INVALID_FIELD_MESSAGE =
+            "Invalid contact field(s)!";
 
-    private static ArrayList<String> getFields(String userInput) {
-        String regex = "[nfetd]/.*?(?=([nfetd]/|$))";
+    private static final String CONTACTS_DELIMITERS = "[nfetd]";
+
+    private static Logger logger = Logger.getLogger("");
+    private static final int MAX_NUMBER_OF_FIELDS = 5;
+
+    static ArrayList<String> getFields(String userInput) {
+        String regex = CONTACTS_DELIMITERS + "/.*?(?=(" + CONTACTS_DELIMITERS + "/|$))";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(userInput);
         ArrayList<String> fields = new ArrayList<>(MAX_NUMBER_OF_FIELDS);
@@ -20,19 +25,18 @@ public class ContactParser {
         while (matcher.find()) {
             fields.add(matcher.group().trim());
         }
-
         return fields;
     }
 
     private static void isValidField(String fieldContent) throws InvalidContactField {
         if (fieldContent.equals("")) {
             logger.log(Level.FINE, String.format("Invalid contact field: %s", fieldContent));
-            throw new InvalidContactField("Invalid contact field(s)!");
+            throw new InvalidContactField(CONTACTS_PARSER_INVALID_FIELD_MESSAGE);
         }
     }
 
     private static Contact parseContactFields(ArrayList<String> fields) throws InvalidContactField {
-        String regex = "(?<=[nfetd]/).*";
+        String regex = "(?<=" + CONTACTS_DELIMITERS + "/).*";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher;
         String name = null;
@@ -62,7 +66,7 @@ public class ContactParser {
                 break;
             default:
                 logger.log(Level.FINE, String.format("Invalid contact field: %s", field));
-                throw new InvalidContactField("Invalid contact field!");
+                throw new InvalidContactField(CONTACTS_PARSER_INVALID_FIELD_MESSAGE);
             }
         }
         assert !name.equals("");

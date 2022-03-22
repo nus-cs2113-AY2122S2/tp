@@ -102,6 +102,7 @@ public class ExpenseTracker {
      * @throws ExpenseException if an invalid keyword is supplied
      */
     public static void expenseRunner(TextUi ui) {
+        logger.setLevel(Level.SEVERE);
         expenseWelcome();
         String rawInput = ui.getUserInput();
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;

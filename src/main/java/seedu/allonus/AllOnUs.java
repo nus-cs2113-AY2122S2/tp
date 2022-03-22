@@ -19,6 +19,7 @@ public class AllOnUs {
     private TextUi ui;
     private static Logger logger = Logger.getLogger("MenuLog");
 
+
     /**
      * Displays the greeting message of this program.
      */
@@ -197,6 +198,7 @@ public class AllOnUs {
      * Main entry-point for the seedu.allonus.AllOnUs application.
      */
     public static void main(String[] args) {
+        logger.setLevel(Level.WARNING);
         greet();
 
         logger.log(Level.INFO, "Entering menu for the first time.");

@@ -2,7 +2,11 @@
 
 ## Introduction
 
-{Give a product intro}
+AlloNUS (“All On Us”) is an all-in-one platform
+for tracking your classes, expenses, and personal contacts
+optimized for use via a Command Line Interface (CLI).
+If you can type fast, AlloNUS can get your schedule, expenses,
+and contact management tasks done faster than traditional GUI apps.
 
 ## Quick Start
 
@@ -88,12 +92,12 @@ Adds a new module to the list of modules.
 
 Format: `add m/<MODULE_CODE> c/<CATEGORY> d/<DAY> t/<TIME>`
 
-| Parameter | Description |
-| ----------- | ----------- |
-| ```<MODULE_CODE> ```| Code for the module |
-| ```<CATEGORY> ```| Category of the module |
-| ```<DAY> ```| Class day of the week for the module |
-| ```<TIME> ```| Class timing for the module |
+| Parameter            | Description                          |
+|----------------------|--------------------------------------|
+| ```<MODULE_CODE> ``` | Code for the module                  |
+| ```<CATEGORY> ```    | Category of the module               |
+| ```<DAY> ```         | Class day of the week for the module |
+| ```<TIME> ```        | Class timing for the module          |
 
 Example of usage:
 
@@ -128,9 +132,9 @@ Deletes the specified module from the schedule.
 
 Format: `rm <index>`
 
-| Parameter | Description |
-| ----------- | ----------- |
-| ```<index> ```| Index of the module to be deleted |
+| Parameter      | Description                       |
+|----------------|-----------------------------------|
+| ```<index> ``` | Index of the module to be deleted |
 
 
 Example of usage:
@@ -149,16 +153,71 @@ Expected outcome:
 #### Adding a contact: `add`
 Adds a new contact to the list of contacts.
 
-Format: `add ...`
+Format: `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION`
 
-* ...
-* ...
+* Use the delimiters `n/`, `f/`, `e/`, `d/` to indicate the contact's name, faculty, email, and description respectively
+* You may indicate the fields in any order
 
 Example of usage:
 
-`...`
+`add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215`
 
-`...`
+OR 
+
+`add n/Jane Doe d/group mate for CS4215 e/e0334987@u.nus.edu f/SoC`
+
+
+Expected outcome:
+
+```
+Got it. I've added this contact:
+  Name: Jane Doe, Faculty: SoC, Email: e0334987@u.nus.edu, Description: group mate for CS4215
+Now you have N contacts in the list.
+```
+Where `N` depends on the length of the current contacts list.
+
+#### List all contacts: `list`
+Lists all contact information.
+
+Format: `list`
+
+Example of usage:
+
+`list`
+
+Expected outcome:
+
+```
+Here are the contacts in your list:
+ 1. Name: Jane Doe, Faculty: SoC, Email: e0334987@u.nus.edu, Description: group mate for CS4215
+ 2. Name: Lucy, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
+
+```
+
+#### Deleting a contact: `rm`
+Delete a contact from the current list of contacts.
+
+Format: `rm INDEX`
+
+* You can use the `list` command to see what index a contact corresponds to
+* `INDEX` must be a valid index number within the list, e.g.
+  * `rm 0` uses an invalid index, as the contacts list starts from 1
+  * `rm 7` uses an invalid index _if_ the contacts list has less than 7 entries
+  * `rm not a number` uses an invalid index, as `not a number` isn't a number
+
+Example of usage:
+
+`rm 1`
+
+Expected outcome:
+
+```
+Noted. I've removed this contact:
+  Name: Jane Doe, Faculty: SoC, Email: e0334987@u.nus.edu, Description: group mate for CS4215
+Now you have N contacts in the list.
+```
+Where `N` depends on the length of the current contacts list.
+
 
 ## FAQ
 
@@ -168,14 +227,14 @@ Example of usage:
 
 ## Command Summary
 
-| Action | Format, Examples |
-| ----------- | ----------- |
-| ```Add (Expense) ```| add d/DATE a/AMOUNT c/CATEGORY r/REMARK <br> E.g. add d/15/02/2022 a/500 c/Food r/At Supper Stretch |
-| ```Add (Module) ```| add m/MODULE_CODE c/CATEGORY d/DAY t/TIME <br> E.g. add m/CS2113 c/lec d/Friday t/4pm-6pm |
-| ```Add (Contact) ```| add n/NAME [f/FACULTY] [e/EMAIL] [t/TAGS] [d/DESCRIPTION] <br> e.g., add n/Jane Doe f/SoC e/e0334987@u.nus.edu t/classmate d/group mate for CS4215  |
-| ```Remove ```| rm INDEX |
-| ```List ```| list |
-| ```Return to Menu ```| menu |
-| ```Help ```| help |
-| ```Navigate ```| goto m/SECTION |
-| ```Exit ```| exit |
+| Action         | Format, Examples                                                                                                            |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Add (Expense)  | `add d/DATE a/AMOUNT c/CATEGORY r/REMARK` <br> E.g. `add d/15/02/2022 a/500 c/Food r/At Supper Stretch`                     |
+| Add (Module)   | `add m/MODULE_CODE c/CATEGORY d/DAY t/TIME` <br> E.g. `add m/CS2113 c/lec d/Friday t/4pm-6pm`                               |
+| Add (Contact)  | `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION` <br> e.g., `add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215` |
+| Remove         | `rm INDEX`                                                                                                                  |
+| List           | `list`                                                                                                                      |
+| Return to Menu | `menu`                                                                                                                      |
+| Help           | `help`                                                                                                                      |
+| Navigate       | `goto m/SECTION`                                                                                                            |
+| Exit           | `exit`                                                                                                                      |
