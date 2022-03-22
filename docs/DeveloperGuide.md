@@ -17,13 +17,19 @@ Given below is a quick overview of the main components of Mod Happy and how they
 
 ### Tag Feature
 
-####Implementation
-The tag command accepts a string from the user and adds it into `ArrayList<String>` of a `Task`.
+The tag command accepts a string from the user and adds it into `ArrayList<String> tags` of a `Task`.  
+
+Here is an example on adding a tag to a general task:  
+1) User inputs `tag add 2 "testTag"`. 
+2) `TagParser` will initialise `TagCommand` with add as `tagOperation` 2 as `taskIndex` and testTag as `tagDescription`, while `taskModule` is null.
+3) `TagCommand` then gets the relevant `Module`. If `taskModule` is null, `getGeneralTasks()` is called. Else, `getModule(taskModule)` is called instead.
+4) Next, `TagCommand` checks the `tagOperation`. If add, `addTag(targetModule)` is called. Else if del, `removeTag(targetModule)` is called. Else, it throws `ParseException`.
 
 Below is the sequence diagram of how the tag feature works:
-![Sequence Diagram]
-![Sequence Diagram]
-![Sequence Diagram]
+
+![Tag](https://user-images.githubusercontent.com/70083643/159427150-e5290460-83fd-4db7-a181-b0485cab2749.png)
+![GetModule](https://user-images.githubusercontent.com/70083643/159427175-6e177c73-a794-4ec0-bc07-1628c1b842ac.png)
+![ExecuteTagOp](https://user-images.githubusercontent.com/70083643/159427193-1748fdb5-17b1-4ded-9bf9-9a88b623f920.png)
 
 ## Product scope
 ### Target user profile
