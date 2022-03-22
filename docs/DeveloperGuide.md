@@ -43,7 +43,7 @@ is responsible for,
 
 **How the components interact with each other**
 
-{referring to AB-3, describe one encompasssing command such as `add /n Alice`}
+{referring to AB-3, describe one encompassing command such as `add /n Alice`}
 
 ### UI Component
 {For Huilin as she is most familiar}
