@@ -88,6 +88,21 @@ Step 4. The user now decides to have an overview of his family's finances by exe
 command will call `Family#list()`, which will go through each generation to sum up their incomes and expenditures and  
 print that out.
 -- Insert UML sequence diagram here
+
+#### Design considerations:
+**Aspect: How to sort persons into logical groups:**
+* **Alternative 1 \(current choice):** Have a `Family` object hold 3 `PersonList`s, one for each generation.
+    * Pros: Only requires storage of one instance of each income and expenditure.
+    * Cons: May have performance issues related to operations which work on every income and expenditure as it makes  
+  them deeply nested.
+* **Alternative 2:** Maintain the single `PersonList` with everyone inside, but give a tag to each `Person` to  
+indicate which generation they belong to
+    * Pros: Very low maintenance and changes required to existing code.
+    * Cons: Lack of abstraction, and that total income and expenditure for each generation would need to be   
+  stored until the entire list is iterated through before being able to print.
+
+
+
 ### Money Component
 {For Jiarong}
 
