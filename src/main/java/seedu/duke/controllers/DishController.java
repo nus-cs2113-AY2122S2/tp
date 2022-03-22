@@ -4,6 +4,7 @@ import seedu.duke.entities.Dish;
 import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.loggers.MainLogger;
 import seedu.duke.manager.DishManager;
+import seedu.duke.manager.DishStorageManager;
 
 /**
  * DishController (or MenuController if you like).
@@ -12,10 +13,12 @@ public class DishController extends Controller {
     private static final String[] CHOICES = {"Exit Menu", "List Dish", "Add Dish",
         "Delete Dish", "Change the price of a dish", "Change the name of a dish"};
     private final DishManager dishManager;
+    private final DishStorageManager dishStorageManager;
 
     public DishController() {
         super(CHOICES);
         dishManager = new DishManager();
+        dishStorageManager = new DishStorageManager(dishManager);
     }
 
     @Override

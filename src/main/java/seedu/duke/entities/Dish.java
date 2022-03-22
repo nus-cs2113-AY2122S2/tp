@@ -57,4 +57,8 @@ public class Dish {
     public String toString() {
         return name + " ---- " + (price == 0 ? "free" : ("$" + price));
     }
+
+    public boolean isValid() {
+        return isValidName(name) && price > 0;
+    }
 }
