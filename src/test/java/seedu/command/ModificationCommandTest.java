@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ModificationCommandTest {
     ModificationCommand modificationCommand;
@@ -19,7 +19,8 @@ class ModificationCommandTest {
             modificationCommand = new ModificationCommand(testArrayList);
             modificationCommand.prepareModification();
         } catch (AssertionError error) {
-            assertEquals("Each args will need to include minimally a '/' to split arg and value upon", error.getMessage());
+            assertEquals("Each args will need to include minimally a '/' to split arg and value upon",
+                    error.getMessage());
         }
     }
 

@@ -8,7 +8,8 @@ import seedu.equipment.EquipmentType;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class ListCommandTest {
     ListCommand listCommand;
@@ -32,7 +33,9 @@ class ListCommandTest {
         }
 
         CommandResult actualResult = listCommand.execute();
-        CommandResult expectedResult = new CommandResult("TOTAL QUANTITY OF SPEAKER: 1" + System.lineSeparator(), equipmentManager.listEquipment(EquipmentType.valueOf("SPEAKER")));
+        CommandResult expectedResult = new CommandResult(
+                "TOTAL QUANTITY OF SPEAKER: 1" + System.lineSeparator(),
+                equipmentManager.listEquipment(EquipmentType.valueOf("SPEAKER")));
 
         assertEquals(expectedResult, actualResult);
     }
@@ -54,7 +57,8 @@ class ListCommandTest {
         }
 
         CommandResult actualResult = listCommand.execute();
-        CommandResult expectedResult = new CommandResult("TOTAL QUANTITY OF EQUIPMENT: 1" + System.lineSeparator(), equipmentManager.listEquipment());
+        CommandResult expectedResult = new CommandResult("TOTAL QUANTITY OF EQUIPMENT: 1" + System.lineSeparator(),
+                equipmentManager.listEquipment());
 
         assertEquals(expectedResult, actualResult);
     }
