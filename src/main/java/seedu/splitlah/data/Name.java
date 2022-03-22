@@ -20,7 +20,7 @@ public class Name {
         this.name = name.strip();
     }
 
-    public String getName() {
+    public String getNameAsString() {
         return name;
     }
 }
