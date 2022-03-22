@@ -31,4 +31,11 @@ class GroupViewCommandTest {
         Command groupWithMissingGidArgument = Parser.getCommand(argMissingGidArgument);
         assertEquals(InvalidCommand.class, groupWithMissingGidArgument.getClass());
     }
+
+    @Test
+    void prepare_validCommand_GroupViewCommand() {
+        String groupArgs = "group /view /gid 1";
+        Command viewGroup = Parser.getCommand(groupArgs);
+        assertEquals(GroupViewCommand.class, viewGroup.getClass());
+    }
 }

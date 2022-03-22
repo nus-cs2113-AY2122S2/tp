@@ -179,5 +179,4 @@ class ActivityCreateCommandTest {
         int testActivityId = manager.getProfile().getActivityIdTracker();
         assertEquals(currentActivityId + 1, testActivityId);
     }
-
 }
