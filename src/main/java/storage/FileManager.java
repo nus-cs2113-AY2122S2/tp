@@ -3,6 +3,8 @@ package storage;
 import commands.WorkoutCommand;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
+import data.plans.Plan;
+import data.plans.PlanList;
 import data.workouts.InvalidWorkoutException;
 import data.workouts.Workout;
 import data.workouts.WorkoutList;
@@ -33,21 +35,25 @@ public class FileManager {
     public static final String DATA_DIRECTORY_NAME = "werkItResources";
     public static final String EXERCISE_FILENAME = "exercises.txt";
     public static final String WORKOUT_FILENAME = "workouts.txt";
+    public static final String PLAN_FILENAME = "plans.txt";
 
     // Delimiters for processing file data
     private static final String FILE_DATA_DELIMITER_REGEX = "\\|";
     private static final String FILE_DATA_DELIMITER = " | ";
+    private static final String FILE_DATA_DELIMITER_PLAN = ",";
 
     private UI ui = new UI();
     private Path directoryPath;
     private Path exerciseFilePath;
     private Path workoutFilePath;
+    private Path planFilePath;
 
     // These booleans indicate whether the directory and/or files already exist
     // prior to the current application's session.
     private boolean wasDirectoryAlreadyMade = false;
     private boolean wasExercisesFileAlreadyMade = false;
     private boolean wasWorkoutsFileAlreadyMade = false;
+    private boolean wasPlansFileAlreadyMade = false;
 
     private static Logger logger = Logger.getLogger(FileManager.class.getName());
 
@@ -60,6 +66,9 @@ public class FileManager {
         this.directoryPath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME);
         this.exerciseFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, EXERCISE_FILENAME);
         this.workoutFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, WORKOUT_FILENAME);
+        this.planFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, PLAN_FILENAME);
+
+        LogHandler.linkToFileLogger(logger);
     }
 
     /**
@@ -89,6 +98,10 @@ public class FileManager {
      */
     public Path getWorkoutFilePath() {
         return this.workoutFilePath;
+    }
+
+    public Path getPlanFilePath() {
+        return this.planFilePath;
     }
 
     /**
@@ -141,6 +154,10 @@ public class FileManager {
         return this.wasWorkoutsFileAlreadyMade;
     }
 
+    public boolean isWasPlansFileAlreadyMade() {
+        return this.wasPlansFileAlreadyMade;
+    }
+
     /**
      * Sets the status of whether the workout file already exists prior to the current session
      * of the application.
@@ -149,6 +166,10 @@ public class FileManager {
      */
     public void setWasWorkoutsFileAlreadyMade(boolean wasWorkoutsFileAlreadyMade) {
         this.wasWorkoutsFileAlreadyMade = wasWorkoutsFileAlreadyMade;
+    }
+
+    public void setWasPlansFileAlreadyMade(boolean wasPlansFileAlreadyMade) {
+        this.wasPlansFileAlreadyMade = wasPlansFileAlreadyMade;
     }
 
     /**
@@ -166,6 +187,9 @@ public class FileManager {
             return false;
         }
         if (!isWasWorkoutsFileAlreadyMade()) {
+            return false;
+        }
+        if (!isWasPlansFileAlreadyMade()) {
             return false;
         }
 
@@ -199,6 +223,13 @@ public class FileManager {
             ui.printWorkoutFileNotFoundMessage();
             createWorkoutFile();
             ui.printWorkoutFileCreatedMessage();
+        }
+
+        checkIfPlanFileAlreadyExists();
+        if (!isWasPlansFileAlreadyMade()) {
+            ui.printPlanFileNotFoundMessage();
+            createPlanFile();
+            ui.printPlanFileCreatedMessage();
         }
 
         assert (Files.exists(getDirectoryPath()));
@@ -265,6 +296,13 @@ public class FileManager {
         }
     }
 
+    public void checkIfPlanFileAlreadyExists() {
+        if (Files.exists(getPlanFilePath())) {
+            logger.log(Level.INFO, "Plan file already exists.");
+            setWasPlansFileAlreadyMade(true);
+        }
+    }
+
     /**
      * Creates the workout file of the application.
      *
@@ -272,6 +310,10 @@ public class FileManager {
      */
     public void createWorkoutFile() throws IOException {
         Files.createFile(getWorkoutFilePath());
+    }
+
+    public void createPlanFile() throws IOException {
+        Files.createFile(getPlanFilePath());
     }
 
     /**
@@ -316,6 +358,31 @@ public class FileManager {
         return hasNoErrorsDuringLoad;
     }
 
+    public boolean loadPlansFromFile(PlanList planList) throws IOException {
+        boolean hasNoErrorsDuringLoad = true;
+        Scanner planFileReader = new Scanner(getPlanFilePath());
+        while (planFileReader.hasNext()) {
+            try {
+                String planFileDataLine = planFileReader.nextLine();
+                String[] parsedPlanFileDataLine = parsePlansFileData(planFileDataLine);
+                addFilePlanToList(planList, parsedPlanFileDataLine);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("File data error: insufficient parameters in plan data.");
+                hasNoErrorsDuringLoad = false;
+            } catch (InvalidExerciseException | InvalidWorkoutException e) {
+                System.out.println("File data error:" + e.getMessage());
+                hasNoErrorsDuringLoad = false;
+            }
+        }
+
+        return hasNoErrorsDuringLoad;
+    }
+
+    public String[] parsePlansFileData(String fileDataLine) {
+        String[] parsedPlansData = fileDataLine.split(FILE_DATA_DELIMITER_REGEX, 2);
+        return parsedPlansData;
+    }
+
     /**
      * Where applicable, parses a line of data read from a resource file by splitting the data according
      * to the delimiters.
@@ -346,6 +413,21 @@ public class FileManager {
 
         String userArguments = workoutName + " " + WorkoutCommand.CREATE_ACTION_REPS_KEYWORD + " " + workoutReps;
         workoutList.createAndAddWorkout(userArguments);
+    }
+
+    public void addFilePlanToList(PlanList planList, String[] planFileDataLine)
+            throws ArrayIndexOutOfBoundsException, InvalidExerciseException, InvalidWorkoutException {
+        String planName = planFileDataLine[0].trim();
+        String workoutsInPlan = planFileDataLine[1].trim();
+        String[] individualWorkout = workoutsInPlan.split(FILE_DATA_DELIMITER_PLAN, -1);
+        ArrayList<Workout> workoutsToAddInPlanList = new ArrayList<Workout>();
+        for (int i = 0; i < individualWorkout.length; i++) {
+            String[] workoutDetail = individualWorkout[i].split(FILE_DATA_DELIMITER_REGEX);
+            workoutsToAddInPlanList.add(new Workout(workoutDetail[0].trim(),
+                    Integer.parseInt(workoutDetail[1].trim())));
+        }
+        Plan planToBeAdded = new Plan(planName, workoutsToAddInPlanList);
+        planList.insertPlanIntoList(planName, planToBeAdded);
     }
 
     /**
@@ -385,6 +467,34 @@ public class FileManager {
         return workoutInFileFormat.toString();
     }
 
+    public void writeNewPlanToFile(Plan newPlan) throws IOException, NullPointerException {
+        String planInFileFormat = convertPlanToFileDataFormat(newPlan);
+
+        FileWriter fileWriter = new FileWriter(getPlanFilePath().toString(), true);
+        fileWriter.append(planInFileFormat);
+        fileWriter.append(System.lineSeparator());
+        fileWriter.close();
+    }
+
+    public String convertPlanToFileDataFormat(Plan plan) throws NullPointerException {
+        if (plan == null) {
+            throw new NullPointerException("Plan object inputted into convertPlanToFileDataFormat() is null.");
+        }
+
+        StringBuilder planInFileFormat = new StringBuilder();
+        planInFileFormat.append(plan.getPlanName());
+        planInFileFormat.append(FILE_DATA_DELIMITER);
+        var workoutInPlan = plan.getWorkoutsInPlanList();
+        for (int i = 0; i < workoutInPlan.size(); i++) {
+            planInFileFormat.append(convertWorkoutToFileDataFormat(workoutInPlan.get(i)));
+            if (i != workoutInPlan.size() - 1) {
+                planInFileFormat.append(FILE_DATA_DELIMITER_PLAN);
+            }
+        }
+
+        return planInFileFormat.toString();
+    }
+
     /**
      * Rewrites the entire list of workouts stored in the WorkoutList object into the workout resource file.
      *
@@ -394,11 +504,13 @@ public class FileManager {
      *                              by this method.
      */
     public void rewriteAllWorkoutsToFile(WorkoutList workoutList) throws IOException, NullPointerException {
-        ArrayList<Workout> listOfWorkouts = workoutList.getWorkoutsList();
+        ArrayList<String> listOfWorkouts = workoutList.getWorkoutsDisplayList();
 
         FileWriter fileWriter = new FileWriter(getWorkoutFilePath().toString());
-        for (Workout workout : listOfWorkouts) {
-            String workoutInFileFormat = convertWorkoutToFileDataFormat(workout);
+        for (String workoutKey : listOfWorkouts) {
+            Workout workoutObject = workoutList.getWorkoutFromKey(workoutKey);
+            assert (workoutObject != null) : "Workout object is NULL";
+            String workoutInFileFormat = convertWorkoutToFileDataFormat(workoutObject);
             fileWriter.append(workoutInFileFormat);
             fileWriter.append(System.lineSeparator());
         }

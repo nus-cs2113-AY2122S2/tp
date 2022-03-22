@@ -4,6 +4,7 @@ import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import storage.LogHandler;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -13,11 +14,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class WorkoutListTest {
-    ExerciseList exerciseList = new ExerciseList();
-    WorkoutList wl = new WorkoutList(exerciseList);
+    ExerciseList exerciseList;
+    WorkoutList wl;
 
     @BeforeEach
     void setUp() {
+        LogHandler.startLogHandler();
+        exerciseList = new ExerciseList();
+        wl = new WorkoutList(exerciseList);
+
         exerciseList.addExerciseToList("push up");
         exerciseList.addExerciseToList("pull up");
         exerciseList.addExerciseToList("sit up");
@@ -72,9 +77,9 @@ class WorkoutListTest {
 
         int workoutNumberToDeleteInList = 2;
 
-        assertEquals("sit up (15 reps)", wl.getWorkoutsList().get(workoutNumberToDeleteInList - 1).toString());
+        assertEquals("sit up (15 reps)", wl.getWorkoutsDisplayList().get(workoutNumberToDeleteInList - 1).toString());
         wl.deleteWorkout(Integer.toString(workoutNumberToDeleteInList));
-        assertEquals("lunge (10 reps)", wl.getWorkoutsList().get(workoutNumberToDeleteInList - 1).toString());
+        assertEquals("lunge (10 reps)", wl.getWorkoutsDisplayList().get(workoutNumberToDeleteInList - 1).toString());
     }
 
     @Test
@@ -116,11 +121,11 @@ class WorkoutListTest {
         int newReps = 15;
         String updateArgument = Integer.toString(indexToUpdate) + " " + Integer.toString(newReps);
 
-        String workoutDetails = wl.getWorkoutsList().get(indexToUpdate - 1).toString();
+        String workoutDetails = wl.getWorkoutsDisplayList().get(indexToUpdate - 1).toString();
 
         assertEquals("lunge (10 reps)", workoutDetails);
         wl.updateWorkout(updateArgument);
-        workoutDetails = wl.getWorkoutsList().get(indexToUpdate - 1).toString();
+        workoutDetails = wl.getWorkoutsDisplayList().get(indexToUpdate - 1).toString();
         assertEquals("lunge (15 reps)", workoutDetails);
     }
 

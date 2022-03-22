@@ -1,3 +1,4 @@
+import storage.LogHandler;
 import werkit.UI;
 import werkit.WerkIt;
 
@@ -13,6 +14,8 @@ public class Main {
 
     public static void main(String[] args) {
         // Start up the WerkIt! application
+        LogHandler.startLogHandler();
+
         try {
             WerkIt werkIt = new WerkIt();
             werkIt.startContinuousUserPrompt();

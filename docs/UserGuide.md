@@ -23,6 +23,43 @@ optimized for use via a Command Line Interface (CLI).
 
 > **Heads up!** Your inputs cannot contain the pipe character `|`!
 
+---
+### Show all Exercises: `exercise /list`
+Lists down all exercises that are available for selection.
+
+Format: `exercise /list`
+
+**Example**
+```
+> exercise /list
+```
+**Expected Outcome**
+```
+------------------------------------------------------------
+There are 13 exercises available.
+Here is the list of exercises: 
+------------------------------------------------------------
+1. push up
+2. bicep curl
+3. pull up
+4. squat
+5. lunge
+6. hip thrust
+7. sit up
+8. crunch
+9. russian twist
+10. running
+11. swimming
+12. jumping jack
+13. burpee
+------------------------------------------------------------
+End of exercise list.
+------------------------------------------------------------
+```
+
+In the current exercise list, there are 13 exercises available.
+
+---
 ### Create a Workout: `workout /new`
 Creates a new workout.
 
@@ -50,7 +87,7 @@ A new workout of carrying out Russian twists 50 times will be created and added 
 
 ---
 ### Show all Workouts: `workout /list`
-List down all workouts that have been created and stored in the workout list.
+Lists down all workouts that have been created and stored in the workout list.
 
 Format: `workout /list`
 
@@ -118,6 +155,102 @@ Showed all workouts in list
 ```
 ---
 
+### Update a Workout: `workout /update`
+Modifies an existing workout from the workout list.<br>
+*Noted: Only the number of repetition can be changed.*
+
+Format: `workout /update <index of workout to update> <new number of repetitions>`
+
+| Parameters                     | Description                                               |
+|--------------------------------|-----------------------------------------------------------|
+| `<index of workout to update>` | The index of workout to be updated from the workout list. |
+| `<new number of repetitions>`  | The number of repetitions to be changed to.               |
+
+**Example**<br>
+Initially, the workout list contains the following workouts:
+```
+----------------------------------------------------------------------
+Showing workouts 1-3 of 3:
+1. push up (10 reps)
+2. sit up (10 reps)
+3. pull up (10 reps)
+Showed all workouts in list
+----------------------------------------------------------------------
+```
+To update workout with index 1 to 15 reps, enter the following command:
+```
+> workout /update 1 15
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+Alright, the following workout has been updated:
+
+	push up (15 reps)
+
+----------------------------------------------------------------------
+```
+Now the workout with index 1 (push up with 10 reps) is updated to push up with 15 reps.
+Now running the `workout /list` command again will show the workout list as follows:
+```
+----------------------------------------------------------------------
+Showing workouts 1-3 of 3:
+1. push up (15 reps)
+2. sit up (10 reps)
+3. pull up (10 reps)
+Showed all workouts in list
+----------------------------------------------------------------------
+```
+---
+
+### View Help: `help`
+Lists all the commands with examples.
+
+Format: `help`
+
+**Example**
+```
+> help
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+	 To view all workouts, please enter:
+	 workout /list
+	 This will print all the existing workouts.
+----------------------------------------------------------------------
+	 To view all exercises available, please enter:
+	 exercise /list
+	 This will print all the exercises available.
+----------------------------------------------------------------------
+	 To add a workout, please enter: 
+	 workout /new <exercise name> /reps <no. of repetitions>
+	 Example: 
+	 workout /new push up /reps 10
+	 This will add a workout with 10 reps of push up.
+----------------------------------------------------------------------
+	 To delete a workout, please enter: 
+	 workout /delete <index>
+	 Example: 
+	 workout /delete 1
+	 This will delete the workout with index 1 if exists.
+----------------------------------------------------------------------
+	 To update a workout, please enter: 
+	 workout /update <index> <quantity>
+	 Example: 
+	 workout /update 1 15
+	 This will update the workout with index 1 to 15 reps if exists.
+----------------------------------------------------------------------
+	 To exit werkIt, please enter: 
+	 exit
+	 This will exit werkIt.
+----------------------------------------------------------------------
+```
+
+This will show a complete guide to use WeriIt.
+
+---
+
 ## WerkIt!'s Local Storage Information
 When you start WerkIt! for the first time, the following directory and files are created:
 
@@ -159,9 +292,10 @@ first time. Your saved data should be in that directory.
 
 {Give a 'cheat sheet' of commands here}
 
-| Action         | Format and Example                                                                                                   |
-|:---------------|:---------------------------------------------------------------------------------------------------------------------|
-| Create Workout | Format: `workout /new <exercise name> /reps <number of repetitions>`<br/>Example: `workout /new biceps curl /reps 1` |
-| Delete Workout | Format: `workout /delete <workout number to delete>`<br/>Example: `workout /delete 2`                                |
-
-
+| Action         | Format and Example                                                                                                         |
+|:---------------|:---------------------------------------------------------------------------------------------------------------------------|
+| Create Workout | Format: `workout /new <exercise name> /reps <number of repetitions>`<br/>Example: `workout /new biceps curl /reps 1`       |
+| Delete Workout | Format: `workout /delete <workout number to delete>`<br/>Example: `workout /delete 2`                                      |
+| Update Workout | Format: `workout /update <index of workout to be updated> <new number of repetitions>`<br/>Example: `workout /update 1 15` |
+| View Exercise  | Format: `exercise /list`<br/>Example: `exercise /list`                                                                     |
+| View Help      | Format: `help`<br/>Example: `help`                                                                                         |

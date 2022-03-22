@@ -2,8 +2,10 @@ package commands;
 
 import data.exercises.ExerciseList;
 import data.workouts.WorkoutList;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import storage.FileManager;
+import storage.LogHandler;
 
 import java.io.IOException;
 
@@ -11,6 +13,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WorkoutCommandTest {
+    @BeforeEach
+    public void setUp() {
+        LogHandler.startLogHandler();
+    }
+
     @Test
     public void workoutCommand_normalWorkoutNewConstruction_constructSuccess() throws IOException,
             InvalidCommandException {

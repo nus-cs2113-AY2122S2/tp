@@ -3,8 +3,10 @@ package data.workouts;
 import commands.WorkoutCommand;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
+import storage.LogHandler;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -18,7 +20,8 @@ public class WorkoutList {
     public static final int MAX_DISPLAY = 10;
 
     private ExerciseList exerciseList;
-    private ArrayList<Workout> workoutsList = new ArrayList<>();
+    private HashMap<String, Workout> workoutsHashMapList = new HashMap<>();
+    private ArrayList<String> workoutsDisplayList = new ArrayList<>();
     private static Logger logger = Logger.getLogger(WorkoutList.class.getName());
 
     /**
@@ -28,15 +31,80 @@ public class WorkoutList {
      */
     public WorkoutList(ExerciseList exerciseList) {
         this.exerciseList = exerciseList;
+
+        LogHandler.linkToFileLogger(logger);
     }
 
     /**
-     * Gets the list of workouts.
+     * Gets the ArrayList of keys of Workout objects.
      *
-     * @return An ArrayList of Workouts.
+     * @return An ArrayList of keys of Workout objects.
      */
-    public ArrayList<Workout> getWorkoutsList() {
-        return this.workoutsList;
+    public ArrayList<String> getWorkoutsDisplayList() {
+        return this.workoutsDisplayList;
+    }
+
+    /**
+     * Gets the HashMap of Workout objects.
+     *
+     * @return A HashMap of Workout objects.
+     */
+    public HashMap<String, Workout> getWorkoutsHashMapList() {
+        return this.workoutsHashMapList;
+    }
+
+    /**
+     * Gets the Workout object based on its key as stored in the workoutsHashMapList.
+     *
+     * @param workoutKey The key that maps to the desired Workout object.
+     * @return The Workout object that is mapped to workoutKey.
+     */
+    public Workout getWorkoutFromKey(String workoutKey) {
+        return getWorkoutsHashMapList().get(workoutKey);
+    }
+
+    /**
+     * Retrieves the Workout object from the HashMap workoutsHashMapList based on the index number
+     * of the object stored in workoutsDisplayList. This index number is the number shown in
+     * 'workout /list'.
+     *
+     * @param indexNum The index number of the workout as shown in 'workout /list'.
+     * @return The Workout object that corresponds to the index number.
+     */
+    public Workout getWorkoutFromIndexNum(int indexNum) {
+        int elementNum = indexNum - 1;
+        assert (elementNum >= 0);
+        String keyValue = getWorkoutsDisplayList().get(elementNum);
+        Workout workoutObject = workoutsHashMapList.get(keyValue);
+        return workoutObject;
+    }
+
+    /**
+     * Updates an existing Workout object in workoutsHashMapList's with a new key. This should be called when
+     * a workout's repetition count has been updated. Once the Workout object has been reassigned to the new
+     * key, the former key will be removed. The ArrayList workoutsDisplayList will also be updated with the
+     * new key.
+     *
+     * @param existingKey    The existing key that maps to the updated Workout object.
+     * @param updatedWorkout The Workout object that has been updated.
+     */
+    public void updateWorkoutsHashMapList(String existingKey, Workout updatedWorkout) {
+        // Update key-value in workoutHashMapList
+        String newKey = updatedWorkout.toString();
+        getWorkoutsHashMapList().put(newKey, updatedWorkout);
+        getWorkoutsHashMapList().remove(existingKey);
+
+        // Update key in workoutsDisplayList
+        for (int i = 0; i < getWorkoutsDisplayList().size(); i += 1) {
+            String key = getWorkoutsDisplayList().get(i);
+            if (key.equals(existingKey)) {
+                getWorkoutsDisplayList().set(i, newKey);
+                break;
+            }
+        }
+
+        assert (!getWorkoutsDisplayList().contains(existingKey)) : "Old key should no longer "
+                + "exist in workoutsDisplayList.";
     }
 
     /**
@@ -86,7 +154,10 @@ public class WorkoutList {
         Workout newWorkout = new Workout(userExerciseInput, userRepsInput);
         logger.log(Level.INFO, "New workout created.");
 
-        workoutsList.add(newWorkout);
+        String newWorkoutKey = newWorkout.toString();
+        workoutsHashMapList.put(newWorkoutKey, newWorkout);
+
+        workoutsDisplayList.add(newWorkoutKey);
 
         return newWorkout;
     }
@@ -109,12 +180,12 @@ public class WorkoutList {
     public void listWorkout() {
         logger.entering(getClass().getName(), "listWorkout");
         int index = 0;
-        int totalPrints = workoutsList.size();
+        int totalPrints = workoutsDisplayList.size();
         String input = "";
 
         while (totalPrints > MAX_DISPLAY) {
             index = continuousPrinting(index, 10);
-            assert (index <= workoutsList.size());
+            assert (index <= workoutsDisplayList.size());
             totalPrints -= 10;
             while (!isInputYesOrNo(input)) {
                 System.out.println("Do you want to view more workouts? [yes/no]");
@@ -129,10 +200,11 @@ public class WorkoutList {
 
         if (totalPrints > 0) {
             continuousPrinting(index, totalPrints);
+            System.out.println();
             System.out.println("Showed all workouts in list");
             return;
         } else {
-            assert (workoutsList.size() == 0);
+            assert (workoutsDisplayList.size() == 0);
             System.out.println("The workout list is empty");
         }
         logger.exiting(getClass().getName(), "listWorkout");
@@ -143,10 +215,12 @@ public class WorkoutList {
      */
     public int continuousPrinting(int index, int noOfPrints) {
         System.out.println("Showing workouts " + (index + 1) + "-" + (index + noOfPrints)
-                + " of " + workoutsList.size() + ":");
-        assert (noOfPrints <= workoutsList.size());
+                + " of " + workoutsDisplayList.size() + ":");
+        System.out.println();
+        assert (noOfPrints <= workoutsDisplayList.size());
         for (int i = 0; i < noOfPrints; i++) {
-            System.out.println(index + 1 + ". " + workoutsList.get(index));
+            Workout workoutObject = getWorkoutFromIndexNum(index + 1);
+            System.out.println(index + 1 + ". " + workoutObject.toString());
             index += 1;
         }
         return index;
@@ -192,9 +266,11 @@ public class WorkoutList {
             throw new WorkoutOutOfRangeException(className, WorkoutOutOfRangeException.INDEX_VALUE_OUT_OF_RANGE);
         }
 
-        assert (indexToDelete > 0) && (indexToDelete <= workoutsList.size());
-        Workout deletedWorkout = workoutsList.get(indexToDelete - 1);
-        workoutsList.remove(indexToDelete - 1);
+        assert (indexToDelete > 0) && (indexToDelete <= workoutsDisplayList.size());
+        Workout deletedWorkout = getWorkoutFromIndexNum(indexToDelete);
+        workoutsDisplayList.remove(indexToDelete - 1);
+        String deletedWorkoutKey = deletedWorkout.toString();
+        getWorkoutsHashMapList().remove(deletedWorkoutKey);
         logger.exiting(getClass().getName(), "deleteWorkout");
         return deletedWorkout;
     }
@@ -207,7 +283,7 @@ public class WorkoutList {
      * @return true if index is within range, else false if out of range.
      */
     private boolean checkIndexIsWithinRange(int index) {
-        return index > 0 && index <= workoutsList.size();
+        return index > 0 && index <= workoutsDisplayList.size();
     }
 
     /**
@@ -245,8 +321,8 @@ public class WorkoutList {
             throw new InvalidWorkoutException(className, InvalidWorkoutException.INVALID_REPS_VALUE_ERROR_MSG);
         }
 
-        Workout updatedWorkout = workoutsList.get(indexToUpdate - 1);
-        String exerciseName = updatedWorkout.getExerciseName();
+        Workout workoutToUpdate = getWorkoutFromIndexNum(indexToUpdate);
+        String exerciseName = workoutToUpdate.getExerciseName();
         boolean isExistingWorkout = checkForExistingWorkout(exerciseName, newRepsValue);
 
         if (isExistingWorkout) {
@@ -256,9 +332,11 @@ public class WorkoutList {
         }
 
         assert (isIndexToUpdateValid && isNewRepsValueValid && !isExistingWorkout);
-        updatedWorkout.setRepetitions(newRepsValue);
-        logger.exiting(getClass().getName(), "updateWorkout");
-        return updatedWorkout;
+        String oldWorkoutKey = workoutToUpdate.toString();
+        workoutToUpdate.setRepetitions(newRepsValue);
+        updateWorkoutsHashMapList(oldWorkoutKey, workoutToUpdate);
+        logger.exiting(getClass().getName(), "Finished updating workout.");
+        return workoutToUpdate;
     }
 
     /**
@@ -272,7 +350,8 @@ public class WorkoutList {
      *         Otherwise, returns false.
      */
     public boolean checkForExistingWorkout(String exerciseName, int repetitionCount) {
-        for (Workout existingWorkout : getWorkoutsList()) {
+        for (String existingWorkoutKey : getWorkoutsDisplayList()) {
+            Workout existingWorkout = getWorkoutsHashMapList().get(existingWorkoutKey);
             boolean hasSameExerciseName = existingWorkout.getExerciseName().equals(exerciseName);
             boolean hasSameRepsCount = (existingWorkout.getRepetitions() == repetitionCount);
 
