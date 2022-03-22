@@ -5,7 +5,7 @@ skinparam shadowing false
 participant ":TagCommand" as TagCommand
 participant ":ModuleList" as ModuleList
 
-mainframe sd Check type of Task
+mainframe **sd** Get Module
 
 activate TagCommand
 
@@ -15,11 +15,11 @@ alt Objects.isNull(taskMod)
     return generalTasks:Module
 
 else else
-    TagCommand -> ModuleList: getModule(taskMod)
+    TagCommand -> ModuleList: getModule(taskModule:Module)
     activate ModuleList
 
     alt Objects.isNull(taskMod)
-        [<- ModuleList: exception
+        [<-- ModuleList: e:NoSuchModuleException
 
     end
 end
