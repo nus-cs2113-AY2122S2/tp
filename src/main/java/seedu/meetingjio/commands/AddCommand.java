@@ -40,7 +40,7 @@ public class AddCommand extends Command {
     public String execute(MasterTimetable masterTimetable) {
         try {
             Timetable timetable = masterTimetable.getByIndex(0); // changes needed
-            Event newEvent = new Lesson(name, title, day, startTime, endTime, mode);
+            Event newEvent = new Lesson(title, day, startTime, endTime, mode);
             timetable.add(newEvent);
             return addConfirmation(newEvent);
         } catch (DuplicateEventException dee) {
