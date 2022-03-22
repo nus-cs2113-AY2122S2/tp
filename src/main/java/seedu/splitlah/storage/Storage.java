@@ -20,13 +20,37 @@ public class Storage {
     public Storage() {
         profile = new Profile();
     }
+
+    /**
+     * Returns a Profile object.
+     * If not data was loaded, returns a new Profile object,
+     * otherwise, a Profile object with data from save file.
+     *
+     * @return A Project object.
+     */
     public Profile getProfile() {
         return profile;
     }
+
+    /**
+     * Checks to see if file directory for save file exists.
+     *
+     * @return true if file directory exists, or
+     *         true if it does not exist but can be created,
+     *         false if file directory does not exist and no directory was created.
+     */
     public boolean hasDataDirectory() {
         File directory = new File(FILE_DIRECTORY);
         return directory.exists() || directory.mkdir();
     }
+
+    /**
+     * Checks to see if file exists.
+     *
+     * @return true if file exists, or
+     *         true if it does not exist but can be created,
+     *         false if file does not exist and no file was created.
+     */
     public boolean hasDataFile() {
         File file = new File(FILE_FULL_PATH);
         try {
@@ -38,6 +62,13 @@ public class Storage {
         }
         return true;
     }
+
+    /**
+     * Saves the serialized Profile object into a file.
+     *
+     * @param profile A Profile object to be saved.
+     * @throws IOException if an I/O error occurs while writing to save file.
+     */
     public void saveProfileToFile(Profile profile) throws IOException {
         FileOutputStream file = new FileOutputStream(FILE_FULL_PATH);
         ObjectOutputStream out = new ObjectOutputStream(file);
@@ -45,6 +76,13 @@ public class Storage {
         out.close();
         file.close();
     }
+
+    /**
+     * Saves the data from the save file into the Profile object.
+     *
+     * @throws IOException            if an I/O error occurs while reading from the save file.
+     * @throws ClassNotFoundException if Class of a serialized object cannot be found
+     */
     public void loadStorage() throws IOException, ClassNotFoundException {
         FileInputStream file = new FileInputStream(FILE_FULL_PATH);
         ObjectInputStream in = new ObjectInputStream(file);
