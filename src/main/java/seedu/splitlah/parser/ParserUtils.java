@@ -12,8 +12,8 @@ import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.command.SessionCreateCommand;
 import seedu.splitlah.command.SessionDeleteCommand;
 import seedu.splitlah.command.SessionListCommand;
-import seedu.splitlah.command.SessionSummaryCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 import seedu.splitlah.ui.Message;
 
 import java.time.format.DateTimeFormatter;
@@ -415,8 +415,8 @@ public class ParserUtils {
         case SessionDeleteCommand.COMMAND_TEXT:
             delimiterList = SessionDeleteCommand.COMMAND_DELIMITERS;
             break;
-        case SessionSummaryCommand.COMMAND_TEXT:
-            delimiterList = SessionSummaryCommand.COMMAND_DELIMITERS;
+        case SessionSummaryCommandParser.COMMAND_TEXT:
+            delimiterList = SessionSummaryCommandParser.COMMAND_DELIMITERS;
             break;
         case GroupCreateCommand.COMMAND_TEXT:
             delimiterList = GroupCreateCommand.COMMAND_DELIMITERS;
@@ -453,7 +453,7 @@ public class ParserUtils {
             // Fallthrough
         case SessionDeleteCommand.COMMAND_TEXT:
             // Fallthrough
-        case SessionSummaryCommand.COMMAND_TEXT:
+        case SessionSummaryCommandParser.COMMAND_TEXT:
             // Fallthrough
         case SessionListCommand.COMMAND_TEXT:
             // Fallthrough
