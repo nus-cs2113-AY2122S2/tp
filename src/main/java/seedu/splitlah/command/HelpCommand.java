@@ -8,10 +8,6 @@ import seedu.splitlah.data.Manager;
  * @author Warren
  */
 public class HelpCommand extends Command {
-    
-    public static final String COMMAND_TEXT = "help";
-
-    public static final String COMMAND_FORMAT = "Syntax: help";
 
     /**
      * Prints a help message and displays all available commands.
