@@ -1,36 +1,37 @@
-package seedu.allonus.contacts;
+package seedu.allonus.contacts.entry;
 
 public class Contact {
-    private String name;
-    private String faculty;
-    private String email;
-    private String description;
 
-    public Contact(String name, String faculty, String email, String description) {
+    private Name name;
+    private Faculty faculty;
+    private Email email;
+    private Description description;
+
+    public Contact(Name name, Faculty faculty, Email email, Description description) {
         this.name = name;
         this.faculty = faculty;
         this.email = email;
         this.description = description;
     }
 
-    public String getName() {
+    public Name getName() {
         return name;
     }
 
-    public String getFaculty() {
+    public Faculty getFaculty() {
         return faculty;
     }
 
-    public String getEmail() {
+    public Email getEmail() {
         return email;
     }
 
-    public String getDescription() {
+    public Description getDescription() {
         return description;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.setField(name);
     }
 
     @Override

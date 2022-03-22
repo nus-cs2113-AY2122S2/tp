@@ -5,6 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.allonus.contacts.entry.Contact;
+import seedu.allonus.contacts.entry.Description;
+import seedu.allonus.contacts.entry.Email;
+import seedu.allonus.contacts.entry.Faculty;
+import seedu.allonus.contacts.entry.Name;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,10 +27,22 @@ public class ContactsManagerTest {
     @BeforeEach
     public void setUp() throws Exception {
 
-        aliceBetsy = new Contact("Alice Betsy", "FOS", "e1@u.nus.edu", "AB");
-        bobChaplin = new Contact("Bob Chaplin", "FASS", "e2@u.nus.edu", "BC");
-        charlieDouglas = new Contact("Charlie Douglas", "SDE", "e3@u.nus.edu", "CD");
-        davidElliot = new Contact("David Elliot", "SoC", "e4@u.nus.edu", "DE");
+        aliceBetsy = new Contact(new Name("Alice Betsy"),
+                new Faculty("FOS"),
+                new Email("e1@u.nus.edu"),
+                new Description("AB"));
+        bobChaplin = new Contact(new Name("Bob Chaplin"),
+                new Faculty("FASS"),
+                new Email("e2@u.nus.edu"),
+                new Description("BC"));
+        charlieDouglas = new Contact(new Name("Charlie Douglas"),
+                new Faculty("SDE"),
+                new Email("e3@u.nus.edu"),
+                new Description("CD"));
+        davidElliot = new Contact(new Name("David Elliot"),
+                new Faculty("SoC"),
+                new Email("e4@u.nus.edu"),
+                new Description("DE"));
 
         emptyContactsList = new ArrayList<>(CONTACTS_LIST_MAX_SIZE);
         defaultContactsList = new ArrayList<>(CONTACTS_LIST_MAX_SIZE);

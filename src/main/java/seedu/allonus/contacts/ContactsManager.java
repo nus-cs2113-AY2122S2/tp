@@ -1,5 +1,6 @@
 package seedu.allonus.contacts;
 
+import seedu.allonus.contacts.entry.Contact;
 import seedu.allonus.ui.TextUi;
 
 import java.util.ArrayList;
@@ -130,7 +131,7 @@ public class ContactsManager {
         String listAsString = "";
         for (int i = 0; i < contactsList.size(); i++) {
             Contact curr = contactsList.get(i);
-            String contactName = curr.getName();
+            String contactName = curr.getName().toString();
             if (contactName.contains(keyword)) {
                 listAsString = listAsString.concat(String.format(" %d. %s\n", i + 1, curr));
             }

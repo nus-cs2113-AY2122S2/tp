@@ -4,22 +4,39 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
+import seedu.allonus.contacts.entry.Contact;
+import seedu.allonus.contacts.entry.Description;
+import seedu.allonus.contacts.entry.Email;
+import seedu.allonus.contacts.entry.Faculty;
+import seedu.allonus.contacts.entry.Name;
 
 public class ContactTest {
-    Contact alice = new Contact("Alice", "FOS", "e1@u.nus.edu", "AB");
-    Contact bob = new Contact("Bob", "FASS", "e2@u.nus.edu", "BC");
-    Contact charlie = new Contact("Charlie", "SDE", "e3@u.nus.edu", "CD");
-    Contact david = new Contact("David", "SoC", "e4@u.nus.edu", "DE");
+    Contact alice = new Contact(new Name("Alice"),
+            new Faculty("FOS"),
+            new Email("e1@u.nus.edu"),
+            new Description("AB"));
+    Contact bob = new Contact(new Name("Bob"),
+            new Faculty("FASS"),
+            new Email("e2@u.nus.edu"),
+            new Description("BC"));
+    Contact charlie = new Contact(new Name("Charlie"),
+            new Faculty("SDE"),
+            new Email("e3@u.nus.edu"),
+            new Description("CD"));
+    Contact david = new Contact(new Name("David"),
+            new Faculty("SoC"),
+            new Email("e4@u.nus.edu"),
+            new Description("DE"));
 
     @Test
     public void getNameWorksForContacts() {
-        assertEquals("Alice", alice.getName());
-        assertEquals("Bob", bob.getName());
-        assertEquals("Charlie", charlie.getName());
-        assertEquals("David", david.getName());
+        assertEquals("Alice", alice.getName().toString());
+        assertEquals("Bob", bob.getName().toString());
+        assertEquals("Charlie", charlie.getName().toString());
+        assertEquals("David", david.getName().toString());
 
-        assertNotEquals("Alice", bob.getName());
-        assertNotEquals("Bob", charlie.getName());
+        assertNotEquals("Alice", bob.getName().toString());
+        assertNotEquals("Bob", charlie.getName().toString());
     }
 
     @Test
