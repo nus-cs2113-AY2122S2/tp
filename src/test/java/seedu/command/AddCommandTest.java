@@ -86,7 +86,7 @@ class AddCommandTest {
         addCommand = new AddCommand(userInput);
         boolean actualResult = addCommand.checkAttributes();
 
-        assertEquals(true, actualResult);
+        assertTrue(actualResult);
     }
 
     @Test
@@ -96,6 +96,6 @@ class AddCommandTest {
         ));
         boolean actualResult = addCommand.checkAttributes();
 
-        assertEquals(false, actualResult);
+        assertFalse(actualResult);
     }
 }

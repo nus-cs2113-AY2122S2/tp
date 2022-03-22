@@ -45,7 +45,7 @@ public abstract class ModificationCommand extends Command {
     }
 
     /**
-     * Set up UpdateCommand with arguments required to update a given item
+     * Set up ModificationCommand with arguments required to update a given item
      * <p>
      * Should multiple arguments specifying the same argument parameter (e.g. 'c/1000' and 'c/2000') be given,
      * the previous arguments passed in will be overwritten by the most recent parameter ('c/2000' in example).
