@@ -2,7 +2,14 @@ package seedu.parser;
 
 import java.util.ArrayList;
 
-import seedu.command.*;
+import seedu.command.AddCommand;
+import seedu.command.UpdateCommand;
+import seedu.command.ListCommand;
+import seedu.command.IncorrectCommand;
+import seedu.command.CheckCommand;
+import seedu.command.DeleteCommand;
+import seedu.command.HelpCommand;
+import seedu.command.Command;
 
 import java.util.Collections;
 import java.util.regex.Matcher;
@@ -135,8 +142,7 @@ public class Parser {
 
     /**
      * Prepare arguments for AddCommand by splitting up the arguments into different parts.
-     * <p>
-     * Index:
+     * <p>* Index:
      * 0. <code> equipmentName </code>: String of equipment name
      * 1. <code> serialNumber </code>: String of unique serial number
      * 2. <code> type </code>: String representation of enumerated class

@@ -1,6 +1,5 @@
 package seedu.ui;
 
-import seedu.command.Command;
 import seedu.command.CommandResult;
 import seedu.equipment.Equipment;
 
@@ -9,14 +8,17 @@ import seedu.equipment.Equipment;
  * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/ui/TextUi.java
  */
 public class TextUi {
-    private final static String LOGO = "                  _                            _                                               \n" +
-            "                  (_)                          | |                                              \n" +
-            "   ___  __ _ _   _ _ _ __  _ __ ___   ___ _ __ | |_ _ __ ___   __ _ _ __   __ _  __ _  ___ _ __ \n" +
-            "  / _ \\/ _` | | | | | '_ \\| '_ ` _ \\ / _ \\ '_ \\| __| '_ ` _ \\ / _` | '_ \\ / _` |/ _` |/ _ \\ '__|\n" +
-            " |  __/ (_| | |_| | | |_) | | | | | |  __/ | | | |_| | | | | | (_| | | | | (_| | (_| |  __/ |   \n" +
-            "  \\___|\\__, |\\__,_|_| .__/|_| |_| |_|\\___|_| |_|\\__|_| |_| |_|\\__,_|_| |_|\\__,_|\\__, |\\___|_|   \n" +
-            "          | |       | |                                                          __/ |          \n" +
-            "          |_|       |_|                                                         |___/";
+    private final static String LOGO = "                  _                            _"
+            + "                                               \n"
+            + "                  (_)                          | |                                              \n"
+            + "   ___  __ _ _   _ _ _ __  _ __ ___   ___ _ __ | |_ _ __ ___   __ _ _ __   __ _  __ _  ___ _ __ \n"
+            + "  / _ \\/ _` | | | | | '_ \\| '_ ` _ \\ / _ \\ '_ \\| __| '_ ` _ \\ / _` "
+            + "| '_ \\ / _` |/ _` |/ _ \\ '__|\n"
+            + " |  __/ (_| | |_| | | |_) | | | | | |  __/ | | | |_| | | | | | (_| | | | | (_| | (_| |  __/ |   \n"
+            + "  \\___|\\__, |\\__,_|_| .__/|_| |_| |_|\\___|_| "
+            + "|_|\\__|_| |_| |_|\\__,_|_| |_|\\__,_|\\__, |\\___|_|   \n"
+            + "          | |       | |                                                          __/ |          \n"
+            + "          |_|       |_|                                                         |___/";
 
     public void showWelcomeMessage() {
         System.out.println("Hello from" + System.lineSeparator() + LOGO);

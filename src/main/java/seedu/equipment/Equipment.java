@@ -92,11 +92,11 @@ public class Equipment {
 
     @Override
     public String toString() {
-        return  "serialNumber=" + serialNumber + "," +
-                "itemName=" + itemName + "," +
-                "type=" + type + "," +
-                "cost=" + cost + "," +
-                "purchasedFrom=" + purchasedFrom + "," +
-                "purchasedDate=" + purchasedDate;
+        return "serialNumber=" + serialNumber + ","
+                + "itemName=" + itemName + ","
+                + "type=" + type + ","
+                + "cost=" + cost + ","
+                + "purchasedFrom=" + purchasedFrom + ","
+                + "purchasedDate=" + purchasedDate;
     }
 }

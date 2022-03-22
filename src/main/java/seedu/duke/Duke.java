@@ -28,7 +28,7 @@ public class Duke {
     }
 
     /**
-     * Initialises the required objects and loads up the data from storage and show welcome message to user
+     * Initialises the required objects and loads up the data from storage and show welcome message to user.
      */
     private void start() {
         ui = new TextUi();

@@ -18,8 +18,8 @@ public class AddCommand extends ModificationCommand {
             + "Example: "
             + "add n/SpeakerB s/S1404115ASF t/Speaker c/1000 pf/Loud_Technologies pd/2022-02-23";
     public static final String DUPLICATE_ITEM_ERROR = "There is already an item with this serial number: %1$s";
-    public static final String ATTRIBUTE_NOT_SET_ERROR = "Unable to add. " +
-            "One or more than one of the attributes of Equipment is not specified.";
+    public static final String ATTRIBUTE_NOT_SET_ERROR = "Unable to add. "
+            + "One or more than one of the attributes of Equipment is not specified.";
 
     /**
      * constructor for AddCommand. Initialises successMessage and usageReminder from Command
@@ -75,8 +75,8 @@ public class AddCommand extends ModificationCommand {
      * @return boolean to indicate whether all attributes are set.
      */
     public boolean checkAttributes() {
-        if (equipmentName == null || serialNumber == null || type == null || cost == null ||
-                purchasedFrom == null || purchasedDate == null) {
+        if (equipmentName == null || serialNumber == null || type == null || cost == null
+                || purchasedFrom == null || purchasedDate == null) {
             return false;
         }
         return true;

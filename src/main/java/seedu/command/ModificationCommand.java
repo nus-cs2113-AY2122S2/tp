@@ -3,11 +3,12 @@ package seedu.command;
 import java.util.ArrayList;
 
 /**
- * Abstract class acting as parent class to AddCommand and UpdateCommand which have use for the same prepareModification method.
+ * Abstract class acting as parent class to AddCommand and UpdateCommand which have use for the
+ * same prepareModification method.
  */
 public class ModificationCommand extends Command {
-    public final String IMPLEMENTED_BY_CHILD = "Execute method for Modification should be implemented by " +
-            "child classes AddCommand and UpdateCommand";
+    public static final String IMPLEMENTED_BY_CHILD = "Execute method for Modification should be implemented by "
+            + "child classes AddCommand and UpdateCommand";
     protected final ArrayList<String> commandStrings;
     protected String serialNumber;
     protected String equipmentName = null;
@@ -50,8 +51,8 @@ public class ModificationCommand extends Command {
 
     /**
      * Set up ModificationCommand with arguments required to update a given item
-     * <p>
-     * Should multiple arguments specifying the same argument parameter (e.g. 'c/1000' and 'c/2000') be given,
+     *
+     * <p>Should multiple arguments specifying the same argument parameter (e.g. 'c/1000' and 'c/2000') be given,
      * the previous arguments passed in will be overwritten by the most recent parameter ('c/2000' in example).
      */
     protected void prepareModification() throws AssertionError {

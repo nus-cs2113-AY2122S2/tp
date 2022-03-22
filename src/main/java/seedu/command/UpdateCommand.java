@@ -43,7 +43,7 @@ public class UpdateCommand extends ModificationCommand {
         }
 
         ArrayList<Pair<String, String>> updatePairs = generateUpdatePairs();
-        if(!equipmentManager.updateEquipment(serialNumber, updatePairs)){
+        if (!equipmentManager.updateEquipment(serialNumber, updatePairs)) {
             return new CommandResult(UPDATE_FAILURE_MESSAGE);
         }
 
@@ -105,12 +105,12 @@ public class UpdateCommand extends ModificationCommand {
             return false;
         }
         UpdateCommand that = (UpdateCommand) o;
-        return serialNumber.equals(that.serialNumber) &&
-                Objects.equals(equipmentName, that.equipmentName) &&
-                Objects.equals(purchasedDate, that.purchasedDate) &&
-                Objects.equals(type, that.type) &&
-                Objects.equals(purchasedFrom, that.purchasedFrom) &&
-                Objects.equals(cost, that.cost);
+        return serialNumber.equals(that.serialNumber)
+                && Objects.equals(equipmentName, that.equipmentName)
+                && Objects.equals(purchasedDate, that.purchasedDate)
+                && Objects.equals(type, that.type)
+                && Objects.equals(purchasedFrom, that.purchasedFrom)
+                && Objects.equals(cost, that.cost);
     }
 
     @Override
