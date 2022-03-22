@@ -1,0 +1,9 @@
+@startuml
+Class TextUI{
+    + getUserCommand()
+    + showMessage(message: Object)
+}
+Scanner -* TextUI
+PrintStream <-- TextUI
+TextUI -* Main
+@enduml

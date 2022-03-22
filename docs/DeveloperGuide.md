@@ -1,5 +1,17 @@
 # Developer Guide
 
+## Design
+### Architecture
+Given below is a quick overview of the main components of Mod Happy and how they interact with one another.
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ch40gRv1-Mu/tp/branch-A-UML/docs/Components.puml)
+
+### UI Component
+![Class Diagram]()
+The `TextUi` component mainly exists as a standalone class and is made up of the built-in `Java.util.Scanner`.
+<br>The `TextUi` component
+
+### Parser Component
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ch40gRv1-Mu/tp/branch-A-UML/docs/Parser.puml)
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
