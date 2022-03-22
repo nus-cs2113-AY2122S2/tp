@@ -19,7 +19,7 @@ public class EquipmentManagerTest {
                 1000,
                 "Loud Technologies",
                 "2022-02-23");
-        ArrayList<Pair<String, String>> updates = new ArrayList<>();
+        ArrayList<Pair<String, ?>> updates = new ArrayList<>();
         updates.add(new Pair<>("itemName", "Speaker A"));
         updates.add(new Pair<>("type", "STAND"));
         updates.add(new Pair<>("cost", "2000"));
@@ -38,7 +38,7 @@ public class EquipmentManagerTest {
 
     @Test
     public void updateEquipment_keyNotFound() {
-        ArrayList<Pair<String, String>> updates = new ArrayList<>();
+        ArrayList<Pair<String, ?>> updates = new ArrayList<>();
         updates.add(new Pair<>("itemName", "Speaker A"));
         updates.add(new Pair<>("type", "STAND"));
         updates.add(new Pair<>("cost", "2000"));
@@ -57,7 +57,7 @@ public class EquipmentManagerTest {
                 1000,
                 "Loud Technologies",
                 "2022-02-23");
-        ArrayList<Pair<String, String>> updates = new ArrayList<>();
+        ArrayList<Pair<String, ?>> updates = new ArrayList<>();
         updates.add(new Pair<>("itemName", "Speaker A"));
         updates.add(new Pair<>("type", "INVALID EQUIPMENT TYPE"));
         updates.add(new Pair<>("cost", "2000"));

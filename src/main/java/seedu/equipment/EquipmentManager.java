@@ -59,32 +59,32 @@ public class EquipmentManager {
         return equipmentList;
     }
 
-    public boolean updateEquipment(String serialNumber, ArrayList<Pair<String, String>> updatePairs) {
+    public boolean updateEquipment(String serialNumber, ArrayList<Pair<String, ?>> updatePairs) {
         if (!equipmentList.containsKey(serialNumber)) {
             return false;
         }
         Equipment updatedEquipment = equipmentList.get(serialNumber);
-        for (Pair<String, String> updates : updatePairs) {
+        for (Pair<String, ?> updates : updatePairs) {
             String key = updates.getKey();
             switch (key) {
             case "itemName":
-                updatedEquipment.setItemName(updates.getValue());
+                updatedEquipment.setItemName((String) updates.getValue());
                 break;
             case "type":
                 try {
-                    updatedEquipment.setType(EquipmentType.valueOf(updates.getValue()));
+                    updatedEquipment.setType(EquipmentType.valueOf((String)updates.getValue()));
                 } catch (IllegalArgumentException e) {
                     return false;
                 }
                 break;
             case "cost":
-                updatedEquipment.setCost(Double.parseDouble(updates.getValue()));
+                updatedEquipment.setCost(Double.valueOf((String) updates.getValue()));
                 break;
             case "purchaseDate":
-                updatedEquipment.setPurchasedDate(updates.getValue());
+                updatedEquipment.setPurchasedDate((String) updates.getValue());
                 break;
             case "purchaseFrom":
-                updatedEquipment.setPurchasedFrom(updates.getValue());
+                updatedEquipment.setPurchasedFrom((String) updates.getValue());
                 break;
             default:
                 break;

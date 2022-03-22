@@ -35,7 +35,7 @@ public class UpdateCommand extends ModificationCommand {
             return new CommandResult(MISSING_SERIAL_NUMBER);
         }
 
-        ArrayList<Pair<String, String>> updatePairs = generateUpdatePairs();
+        ArrayList<Pair<String, ?>> updatePairs = generateUpdatePairs();
         if (!equipmentManager.updateEquipment(serialNumber, updatePairs)) {
             return new CommandResult(UPDATE_FAILURE_MESSAGE);
         }
@@ -47,8 +47,8 @@ public class UpdateCommand extends ModificationCommand {
         return serialNumber;
     }
 
-    public ArrayList<Pair<String, String>> generateUpdatePairs() {
-        ArrayList<Pair<String, String>> pairs = new ArrayList<>();
+    public ArrayList<Pair<String, ?>> generateUpdatePairs() {
+        ArrayList<Pair<String, ?>> pairs = new ArrayList<>();
         if (equipmentName != null) {
             pairs.add(new Pair<>("itemName", equipmentName));
         }

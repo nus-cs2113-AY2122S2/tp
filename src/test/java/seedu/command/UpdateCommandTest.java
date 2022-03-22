@@ -60,7 +60,7 @@ class UpdateCommandTest {
         expectedResult.add(new Pair<>("cost", "2000"));
         expectedResult.add(new Pair<>("purchasedDate", "2022-01-26"));
 
-        ArrayList<Pair<String, String>> actualResult = updateCommand.generateUpdatePairs();
+        ArrayList<Pair<String, ?>> actualResult = updateCommand.generateUpdatePairs();
 
         assertEquals(expectedResult, actualResult);
     }
