@@ -36,7 +36,9 @@ To add a doctor there are some parameters that you would have to provide:
 7. Specialisation
 
 You will have to follow the formatting given below when calling the command.
+
 Format: `add doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`
+
 Example: `add doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`
 
 #### `add patient`
@@ -51,7 +53,9 @@ To add a patient there are some parameters that you would have to provide:
 7. Date Of Admission (DOA)
 
 You will have to follow the formatting given below when calling the command.
+
 Format: `add patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`
+
 Example: `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`
 
 #### `add medicine`
@@ -64,7 +68,9 @@ To add a medicine there are some parameters that you would have to provide:
 5. Quantity
 
 You will have to follow the formatting given below when calling the command.
+
 Format: `add medicine /info [name],[dosage],[expiry date],[side effects],[quantity]`
+
 Example: `add medicine /info Paracetamol, 500, 2023-06-11, Slight headache, 10`
 
 ### Viewing: `view`
@@ -75,6 +81,7 @@ To view the records of all doctors in the application, you can simply call `view
 parameters. You could also give the NRIC as an additional parameter if you want to view a single doctor only.
 
 Format: `view doctor` or `view doctor /info [nric]`
+
 Example: `view doctor /info S1234567A`
 
 #### `view patient`
@@ -82,6 +89,7 @@ To view the records of all patients in the application, you can simply call `vie
 parameters. You could also give the NRIC as an additional parameter if you want to view a single patient only.
 
 Format: `view patient` or `view patient /info [nric]`
+
 Example: `view doctor /info S1234567A`
 
 #### `view medicine`
@@ -89,6 +97,7 @@ To view the records of all medicines in the application, you can simply call `vi
 parameters. You could also give the Name as an additional parameter if you want to view a single type of Medicine only.
 
 Format: `view medicine` or `view medicine /info [name]`
+
 Example: `view medicine /info Paracetamol`
 
 ### Deleting: `delete`
@@ -99,6 +108,7 @@ To delete an existing doctor in the application, you can use the `delete doctor`
 additional parameter which is the NRIC of the doctor.
 
 Format: `delete doctor /info [nric]`
+
 Example: `delete doctor /info S1234567A`
 
 #### `delete patient`
@@ -106,6 +116,7 @@ To delete an existing patient in the application, you can use the `delete patien
 additional parameter which is the NRIC of the patient.
 
 Format: `delete patient /info [nric]`
+
 Example: `delete patent /info S1234567A`
 
 #### `delete medicine`
@@ -113,6 +124,7 @@ To delete an existing medicine in the application, you can use the `delete medic
 additional parameter which is the Batch ID of the medicine.
 
 Format: `delete medicine /info [Batch ID]`
+
 Example: `delete medicine /info S234`
 
 ## FAQ
