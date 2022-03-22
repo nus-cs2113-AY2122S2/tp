@@ -30,7 +30,7 @@ class ActivityDeleteCommandTest {
     }
 
     /**
-     * Checks if an activity is not deleted with missing delimiters.
+     * Checks if an InvalidCommand is returned when there are delimiters not provided by the user.
      */
     @Test
     public void prepare_hasMissingDelimiter_InvalidCommand() {
@@ -51,7 +51,7 @@ class ActivityDeleteCommandTest {
     }
 
     /**
-     * Checks if an activity is not deleted with missing delimiters.
+     * Checks if an InvalidCommand is returned when there are arguments not provided by the user.
      */
     @Test
     public void prepare_hasMissingArgument_InvalidCommand() {
