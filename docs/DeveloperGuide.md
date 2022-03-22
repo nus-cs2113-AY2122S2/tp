@@ -82,6 +82,12 @@ class would return a unique identifier every time a new `Session`, `Activity` or
 ### Storage Component
 
 ### Parser Component
+The `Parser` component consists of the `Parser` class, `ParserUtils` class as well as the `ParserErrors` class.<br>
+The `Parser` class serves as a provides utility methods to parse commands and arguments from the user and
+return a `Command` object representing an instruction that the user has for SplitLah.
+It is the class in the `Parser` component that other external classes interact with.<br>
+On the other hand, the `ParserUtils` class provide supporting methods for `Parser` class to properly run,
+and `ParserErrors` class provide methods to produce custom error messages for the `Parser` package.
 
 ### Command Component
 
