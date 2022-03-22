@@ -100,7 +100,7 @@ The general workflow of the `Parser` component is as follows:
 4. The arguments are passed to the specified `XYZCommand#prepare()` method if there are any arguments. 
 Otherwise, the constructor is called. Both methods will create a new `XYZCommand` object. 
 (`XYZCommand` is a placeholder for specific subclass of the `Command` class, e.g. `SessionCreateCommand`)
-5. This `Command` object is then returned by the `getCommand()` method.
+5. This `Command` object is then returned by `Parser#getCommand()` method.
 
 ### Command Component
 
