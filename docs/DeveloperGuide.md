@@ -5,11 +5,13 @@
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ---
+
 # Design & implementation
 * ## [Implementation](#Implementation)
   * ### [Search](#Search)
     * [Search for exercise](#Search-for-exercise)
     * [Search for plan](#Search-for-plan)
+
 --------------------------------
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
@@ -47,6 +49,7 @@
 # Implementation
 
 ---
+
 ## Search
 ![SearchUML](https://github.com/a1021492980/tp/blob/branch-DG1/docs/uml/diagram/SearchClassUML.png?raw=true)
 <br>
