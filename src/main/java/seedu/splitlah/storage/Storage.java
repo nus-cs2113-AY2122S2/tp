@@ -38,5 +38,18 @@ public class Storage {
         }
         return true;
     }
+    public void saveProfileToFile(Profile profile) throws IOException {
+        FileOutputStream file = new FileOutputStream(FILE_FULL_PATH);
+        ObjectOutputStream out = new ObjectOutputStream(file);
+        out.writeObject(profile);
+        out.close();
+        file.close();
+    }
+    public void loadStorage() throws IOException, ClassNotFoundException {
+        FileInputStream file = new FileInputStream(FILE_FULL_PATH);
+        ObjectInputStream in = new ObjectInputStream(file);
+        profile = (Profile) in.readObject();
+        in.close();
+        file.close();
     }
 }
