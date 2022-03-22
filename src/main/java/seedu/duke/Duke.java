@@ -32,12 +32,13 @@ public class Duke {
 
     private void runCommandLoop() {
         Scanner in = new Scanner(System.in);
+        Parser parser = new Parser();
         String userCommand;
         Command command;
         CommandResult result;
         do {
             userCommand = in.nextLine();
-            command = new Parser().parseCommand(userCommand);
+            command = parser.parseCommand(userCommand);
             result = executeCommand(command);
             ui.showResultToUser(result);
         } while (!userCommand.equals("bye"));
