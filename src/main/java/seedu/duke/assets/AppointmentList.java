@@ -47,6 +47,14 @@ public class AppointmentList {
                 }
             }
             break;
+        default:
+            System.out.println("Invalid search criteria! The valid criteria are:");
+            System.out.println("patient name");
+            System.out.println("doctor name");
+            System.out.println("date");
+            System.out.println("nric");
+            System.out.println("Please try again!");
+            break;
         }
     }
 }

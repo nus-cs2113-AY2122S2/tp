@@ -45,17 +45,6 @@ public class Parser {
         }
     }
 
-    private static boolean validateAddDoctor(String[] parameters) {
-        boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
-        //validate full name cause specialization is also j a name
-        if (!validateFullName(parameters[6])) {
-            System.out.println("Specialization must be a name");
-            isValid = false;
-        }
-        return isValid;
-
-    }
-
     public static String[] parseAddMedicine(String parameters) {
         String[] medicineParameters = parameters.trim().split(",");
         for (int i = 0; i < medicineParameters.length; i++) {
@@ -66,6 +55,33 @@ public class Parser {
         } else {
             return null;
         }
+    }
+
+    public static String[] parseAddAppointment(String parameters) {
+        String[] addAppointmentParameters = parameters.trim().split(",");
+        for (int i = 0; i < addAppointmentParameters.length; i++ ) {
+            addAppointmentParameters[i] = addAppointmentParameters[i].trim();
+        }
+        if (addAppointmentParameters.length != 7) {
+            System.out.println("There is one or more parameters missing.");
+            return null;
+        }
+        if (validateAddAppointment(addAppointmentParameters)) {
+            return addAppointmentParameters;
+        } else {
+            return null;
+        }
+    }
+
+    private static boolean validateAddDoctor(String[] parameters) {
+        boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
+        //validate full name cause specialization is also j a name
+        if (!validateFullName(parameters[6])) {
+            System.out.println("Specialization must be a name");
+            isValid = false;
+        }
+        return isValid;
+
     }
 
     private static boolean validateAddPerson(String[] parameters) {
@@ -102,9 +118,31 @@ public class Parser {
 
     private static boolean validateAddPatient(String[] parameters) {
         boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
-        if (!validateAdmissionDate(parameters[6])) {
+        if (!validateDate(parameters[6], "patient")) {
             System.out.println("Date of birth must be in YYYY-MM-DD format. "
                     + "It cannot be before 1980-01-01 or be today and after.");
+            isValid = false;
+        }
+        return isValid;
+    }
+
+    private static boolean validateAddAppointment(String[] parameters) {
+        boolean isValid = true;
+        if (!validateFullName(parameters[0])) {
+            System.out.println("Patient name must contain only alphabets and no special characters.");
+            isValid = false;
+        }
+        if (!validateFullName(parameters[1])) {
+            System.out.println("Doctor name must contain only alphabets and no special characters.");
+            isValid = false;
+        }
+        if (!validateDate(parameters[2], "appointment")) {
+            System.out.println("Date of birth must be in YYYY-MM-DD format."
+                    + "It cannot be today or before.");
+            isValid = false;
+        }
+        if (!validateAppointmentDetails(parameters[3])) {
+            System.out.println("Appointment details cannot be empty. Please indicate some details.");
             isValid = false;
         }
         return isValid;
@@ -187,16 +225,18 @@ public class Parser {
         }
     }
 
-    private static boolean validateAdmissionDate(String admissionDateString) {
-        LocalDate admissionDate;
+    private static boolean validateDate(String inputDate, String type) {
+        LocalDate newDate;
         try {
-            admissionDate = LocalDate.parse(admissionDateString);
+            newDate = LocalDate.parse(inputDate);
         } catch (DateTimeParseException dateTimeParseException) {
             return false;
         }
         LocalDate today = LocalDate.now();
         LocalDate admissionDateLimit = LocalDate.parse("1980-01-01");
-        if (admissionDate.isAfter(admissionDateLimit) && admissionDate.isBefore(today)) {
+        if (type.equals("appointment") && newDate.isAfter(today)) {
+            return true;
+        } else if (type.equals("patient") && newDate.isAfter(admissionDateLimit) && newDate.isBefore(today)) {
             return true;
         } else {
             return false;
@@ -238,4 +278,11 @@ public class Parser {
         }
     }
 
+    private static boolean validateAppointmentDetails(String appointmentDetails) {
+        if (appointmentDetails.isBlank() || appointmentDetails.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
