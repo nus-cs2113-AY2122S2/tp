@@ -8,7 +8,9 @@ import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
+import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
+import seedu.duke.util.NumberConstants;
 
 public class EditCommand extends Command {
 
@@ -21,7 +23,7 @@ public class EditCommand extends Command {
 
     private String moduleCode;
     private String taskModule;
-    private int taskIndex = -1;
+    private int taskIndex = NumberConstants.INVALID_TASK_INDEX;
     private String taskParameter;
     private String result = "";
     private boolean isGeneralTask = false;
@@ -84,7 +86,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ModuleList moduleList) throws ModHappyException {
+    public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
         if (taskIndex < 0) {
             editModuleDescription(moduleList);
         } else {

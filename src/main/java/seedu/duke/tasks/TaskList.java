@@ -2,6 +2,7 @@ package seedu.duke.tasks;
 
 import java.util.ArrayList;
 
+import seedu.duke.exceptions.NoSuchTagException;
 import seedu.duke.exceptions.NoSuchTaskException;
 import seedu.duke.util.StringConstants;
 
@@ -45,6 +46,28 @@ public class TaskList {
         return task;
     }
 
+    public Task addTag(String tagDescription, int index) throws NoSuchTaskException {
+        if (index >= taskList.size() || index < 0) {
+            throw new NoSuchTaskException();
+        }
+        Task task = getTask(index);
+        ArrayList<String> tags = task.getTagList();
+        tags.add(tagDescription);
+        return task;
+    }
+
+    public Task deleteTag(String tagDescription, int index) throws NoSuchTaskException, NoSuchTagException {
+        if (index >= taskList.size() || index < 0) {
+            throw new NoSuchTaskException();
+        }
+        Task task = getTask(index);
+        ArrayList<String> tags = task.getTagList();
+        if (!tags.remove(tagDescription)) {
+            throw new NoSuchTagException();
+        }
+        return task;
+    }
+
     public ArrayList<Task> getList() {
         return taskList;
     }
@@ -80,4 +103,16 @@ public class TaskList {
         return res;
     }
 
+    public String getTasksWithTag(String indent, String tag) {
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).getTagList().contains(tag)) {
+                res.append(indent).append(String.format(ITEMIZE_FORMAT, i + 1, taskList.get(i)));
+            }
+            if (res.length() == 0) {
+                res.append(indent).append(EMPTY_LIST).append(LS);
+            }
+        }
+        return res.toString();
+    }
 }

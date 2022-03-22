@@ -5,6 +5,7 @@
 Given below is a quick overview of the main components of Mod Happy and how they interact with one another.
 ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ch40gRv1-Mu/tp/branch-A-UML/docs/Components.puml)
 
+
 ### UI Component
 ![Class Diagram]()
 The `TextUi` component mainly exists as a standalone class and is made up of the built-in `Java.util.Scanner`.

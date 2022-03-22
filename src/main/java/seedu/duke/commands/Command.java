@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.tasks.ModuleList;
+import seedu.duke.util.Configuration;
 
 /**
  * Parent class of all commands in Mod Happy.
@@ -9,5 +10,5 @@ import seedu.duke.tasks.ModuleList;
 public abstract class Command {
     protected static final String LS = System.lineSeparator();
 
-    public abstract CommandResult execute(ModuleList moduleList) throws ModHappyException;
+    public abstract CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException;
 }
