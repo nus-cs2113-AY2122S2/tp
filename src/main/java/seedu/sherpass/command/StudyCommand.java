@@ -8,7 +8,6 @@ import seedu.sherpass.util.Ui;
 
 import java.io.IOException;
 
-import static seedu.sherpass.constant.Index.OPTIONS_INDEX;
 import static seedu.sherpass.constant.Message.GOODBYE_MESSAGE_STUDY;
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_STUDY;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_STUDY;
@@ -24,7 +23,7 @@ public class StudyCommand extends Command {
      * Method is called when user chooses to enter Study mode. User is able to start, pause and stop a timer in Study
      * mode. Only one timer can be running at a time. User can leave Study mode by typing "leave".
      */
-    private void enterStudyMode(TaskList taskList, Ui ui, Storage storage, TimerLogic timerLogic) {
+    private void enterStudyMode(Ui ui, Storage storage, TimerLogic timerLogic) {
 
         ui.showToUser(WELCOME_MESSAGE_STUDY);
         ui.showLine();
@@ -32,7 +31,7 @@ public class StudyCommand extends Command {
         while (!userInput.contains("leave")) {
             ui.showLine();
             try {
-                parseStudyMode(taskList, ui, storage, userInput, timerLogic);
+                parseStudyMode(ui, storage, userInput, timerLogic);
             } catch (IOException e) {
                 ui.showToUser("IOException occurred.");
             }
@@ -52,7 +51,7 @@ public class StudyCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         TimerLogic timerLogic = new TimerLogic(taskList, ui);
-        enterStudyMode(taskList, ui, storage, timerLogic);
+        enterStudyMode(ui, storage, timerLogic);
         leaveStudyMode(ui, timerLogic);
     }
 }

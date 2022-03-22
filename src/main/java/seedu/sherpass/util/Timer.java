@@ -164,10 +164,6 @@ public class Timer extends Thread {
         return isTimerPaused;
     }
 
-    public int getTimeLeft() {
-        return timeLeft;
-    }
-
     /**
      * Resumes the timer by calling notify() on the waiting thread.
      */

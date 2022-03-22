@@ -86,6 +86,9 @@ public class TimerLogic {
 
     public void callStopTimer() {
         timer.stopTimer();
+        taskList.printAllTasks(ui);
+        ui.showToUser("Would you like to start another timer, mark a task as done, "
+                + "or leave the study session?");
     }
 
     /**
