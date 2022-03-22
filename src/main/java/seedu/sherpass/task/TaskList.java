@@ -59,7 +59,7 @@ public class TaskList {
             printIndex++;
         }
         ui.showLine();
-        System.out.println("A total of " + (printIndex - 1) + " item(s) have been found!");
+        System.out.println("You have " + (printIndex - 1) + " task(s) in your list.");
     }
 
 
