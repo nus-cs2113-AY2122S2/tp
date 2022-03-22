@@ -1,6 +1,10 @@
 package seedu.duke.parsers;
 
-import seedu.duke.commands.*;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.ExitCommand;
+import seedu.duke.commands.GpaCommand;
+import seedu.duke.commands.ResetCommand;
+import seedu.duke.commands.SaveCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 
