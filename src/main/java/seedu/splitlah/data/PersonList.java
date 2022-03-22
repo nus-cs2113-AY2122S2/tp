@@ -58,6 +58,12 @@ public class PersonList {
         }
     }
 
+    public void removePerson(Person person) {
+        if (personList.contains(person)) {
+            personList.remove(person);
+        }
+    }
+
     /**
      * Returns the ArrayList object of Person objects.
      *
