@@ -1,6 +1,7 @@
 package seedu.sherpass.util;
 
 import seedu.sherpass.exception.InvalidTimeException;
+import seedu.sherpass.task.TaskList;
 
 import static seedu.sherpass.constant.Message.ERROR_INVALID_TIMER_INPUT_MESSAGE;
 
@@ -8,13 +9,15 @@ public class TimerLogic {
 
     private static Ui ui;
     private static Timer timer;
+    private static TaskList taskList;
 
     /**
      * Creates a constructor for TimerLogic.
      *
      * @param ui UI
      */
-    public TimerLogic(Ui ui) {
+    public TimerLogic(TaskList taskList, Ui ui) {
+        TimerLogic.taskList = taskList;
         TimerLogic.ui = ui;
         timer = new Timer(ui);
     }

@@ -385,7 +385,12 @@ public class Parser {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
-            timerLogic.callStartTimer(parsedInput);
+            if (!timerLogic.isTimerRunning()) {
+                timerLogic.callResetTimer();
+                timerLogic.callStartTimer(parsedInput);
+            } else {
+                ui.showToUser("Your timer is already running!");
+            }
             break;
         case "pause":
             timerLogic.callPauseTimer();
@@ -395,6 +400,11 @@ public class Parser {
             break;
         case "stop":
             timerLogic.callStopTimer();
+            break;
+        case "mark":
+            if (!timerLogic.isTimerRunning()) {
+                ui.showToUser("Timer is not running.");
+            }
             break;
         default:
             ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);

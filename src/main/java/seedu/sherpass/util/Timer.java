@@ -8,7 +8,7 @@ import static seedu.sherpass.constant.TimerConstant.ONE_HOUR;
 
 public class Timer extends Thread {
 
-    private boolean isTimerRunning = false;
+    private volatile boolean isTimerRunning = false;
     private volatile boolean isTimerPaused = false;
     private boolean forcedStop = false;
     private boolean hasTimeLeft = false;
@@ -50,6 +50,7 @@ public class Timer extends Thread {
         if (timerRanOutOfTime()) {
             assert timeLeft <= NO_TIME_LEFT;
             isTimerRunning = false;
+            ui.showToUser("Time is up! Would you like to mark any tasks as done?");
             ui.showToUser("Time is up!");
             ui.showLine();
         }
