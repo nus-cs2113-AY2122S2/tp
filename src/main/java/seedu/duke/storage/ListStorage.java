@@ -17,6 +17,6 @@ import seedu.duke.exceptions.WriteException;
 public abstract class ListStorage<ModHappyT extends Object> extends JsonStorage<ArrayList<ModHappyT>> {
 
     @Override
-    public abstract ArrayList<ModHappyT> jsonReader(String path) throws ModHappyException;
+    public abstract ArrayList<ModHappyT> loadData(String path) throws ModHappyException;
 
 }

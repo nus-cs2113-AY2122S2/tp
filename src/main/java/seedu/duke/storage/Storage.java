@@ -13,7 +13,7 @@ public interface Storage<T extends Object> {
      * @param path json file path
      * @throws ModHappyException if an error was encountered during writing
      */
-    void jsonWriter(T object, String path) throws ModHappyException;
+    void writeData(T object, String path) throws ModHappyException;
 
     /**
      * Load and deserialize a type T object from json file.
@@ -21,7 +21,7 @@ public interface Storage<T extends Object> {
      * @return the unserialised object of type T
      * @throws ModHappyException if an error was encountered during reading
      */
-    T jsonReader(String path) throws ModHappyException;
+    T loadData(String path) throws ModHappyException;
 
     /**
      * Checks the existence of the storage file, and create if not exists.
