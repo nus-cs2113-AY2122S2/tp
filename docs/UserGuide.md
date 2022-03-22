@@ -74,11 +74,11 @@ For a task, you are able to change its name, description, or estimated working t
 Mark a task as completed or uncompleted with the given task number from the specified module. If no module code is given, the task to be marked will be drawn from the “general tasks” list.
 
 - Mark a task as completed <br><br>
-  Format: `mark /c TASK_INDEX [-m MODULE_CODE]` <br><br>
+  Format: `mark /c TASK_NUMBER [-m MODULE_CODE]` <br><br>
   Example to mark a general task as completed: `mark /c 1`<br>
   Example to mark a module task as completed: `mark /c 1 -m CS2113T`<br><br>
 - Mark a task as uncompleted <br><br>
-  Format: `mark /u TASK_INDEX [-m MODULE_CODE]` <br><br>
+  Format: `mark /u TASK_NUMBER [-m MODULE_CODE]` <br><br>
   Example to mark a general task as uncompleted: `mark /u 1`<br>
   Example to mark a module task as uncompleted: `mark /u 1 -m CS2113T`<br><br>
 
