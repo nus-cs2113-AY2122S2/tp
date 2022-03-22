@@ -184,7 +184,7 @@ public class TaskList {
      */
     public void printPendingTasks(Ui ui) {
         for (Task task : tasks) {
-            if (!task.isDone() && (task instanceof NonrecurringTask)) {
+            if (!task.isDone()) {
                 ui.showToUser(task.toString());
             }
         }
