@@ -136,7 +136,7 @@ public class StringConstants {
             + "Format to set an option: option CONFIGURATION_GROUP=NEW_VALUE\n"
             + "Format to check configuration seting: option\n"
             + "Format to check all legal values of a configuration group: option CONFIGURATION_GROUP\n\n"
-            + "Configuration group explain:\n";
+            + "List of configuration groups:\\n";
 
     /**
      * For SaveCommand.
