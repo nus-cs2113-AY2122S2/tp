@@ -1,5 +1,7 @@
 package seedu.sherpass.util;
 
+import seedu.sherpass.task.TaskList;
+
 import java.util.Scanner;
 
 import static seedu.sherpass.constant.Message.GOODBYE_MESSAGE;
@@ -69,10 +71,13 @@ public class Ui {
     /**
      * Prints a welcome message to greet the user.
      */
-    public void showWelcomeMessage() {
+    public void showWelcomeMessage(TaskList tasklist, Ui ui) {
         String message = PARTITION_LINE + LS + WELCOME_MESSAGE_ONE
                 + LOGO + LS + PARTITION_LINE + LS + WELCOME_MESSAGE_TWO;
         showToUser(message);
+        //Timetable.showTodaySchedule(tasklist, ui);
+        showToUser("What would you like to do next?");
+        showLine();
     }
 
     /**

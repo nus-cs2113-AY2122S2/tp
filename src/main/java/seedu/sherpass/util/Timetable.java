@@ -124,7 +124,6 @@ public class Timetable {
         ui.showToUser(fourthRow + ui.getRepeatedCharacters(" ",
                 partitionLength - fourthRow.length() - 1) + "|");
         ui.showToUser(ui.getRepeatedCharacters("-", partitionLength));
-        ui.showToUser("What would you like to do next?");
     }
 
     private static void prepareTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui ui) {
@@ -138,8 +137,6 @@ public class Timetable {
             return;
         }
         printTimetable(day, date, filteredTasks, ui, taskLength, doOnDateLength, partitionLength);
-        ui.showToUser("What would you like to do next?");
-        ui.showLine();
     }
 
     public static void showTodaySchedule(TaskList taskList, Ui ui) {
@@ -195,7 +192,7 @@ public class Timetable {
         for (int i = 0; i < DAYS_IN_A_WEEK; i++) {
             showScheduleByDay(currentDate, taskList, ui);
             assert (currentDate != null);
-            currentDate.plus(1, ChronoUnit.DAYS);
+            currentDate = currentDate.plus(1, ChronoUnit.DAYS);
         }
     }
 }

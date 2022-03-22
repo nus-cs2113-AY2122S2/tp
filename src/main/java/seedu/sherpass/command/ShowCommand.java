@@ -55,5 +55,6 @@ public class ShowCommand extends Command {
         default:
             ui.showToUser(ERROR_INVALID_INPUT_MESSAGE);
         }
+        ui.showToUser("What would you like to do next?");
     }
 }
