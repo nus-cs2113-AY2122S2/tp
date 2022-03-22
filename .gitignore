@@ -1,0 +1,7 @@
+.gradle/
+.idea/
+build/
+*.log
+out/artifacts/tp_jar/tp.jar
+text-ui-test/ACTUAL.TXT
+*.log.*
