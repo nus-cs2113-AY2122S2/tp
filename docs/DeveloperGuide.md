@@ -55,7 +55,20 @@ is responsible for,
 {For Sizheng}
 
 ### Persons Component
-{For Weijun}
+
+#### \[Proposed] Logical grouping for different generation of person added
+
+##### Proposed implementation
+
+The proposed logical grouping of persons added is facilitated by `Family`. It holds 3 lists of `PersonList`, each one
+for a different generation. 
+Additionally, it implements the following operations:
+* `Family#list()` -- Lists a high level overview of income and expenditure of each generation.
+* `Family#remain()` -- Prints the total disposable income remaining for the family after everybody's income and   
+expenditures have been taken into account.
+* `Family#addParent()` -- Adds a person into the `parents` list.
+* `Family#addMyGen()` -- Adds a person into the `myGen` list.
+* `Family#addChild()` -- Adds a person into the `children` list.
 
 ### Money Component
 {For Jiarong}
