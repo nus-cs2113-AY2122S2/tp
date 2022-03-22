@@ -21,6 +21,9 @@ class GroupViewCommandTest {
         createGroup.run(manager);
     }
 
+    /**
+     * Checks if a group is not viewed when a group is missing the Group unique identifier delimiter.
+     */
     @Test
     void prepare_MissingGidDelimiter_InvalidCommand() {
         String argMissingGidDelimiter = "group /view 1";
@@ -28,6 +31,9 @@ class GroupViewCommandTest {
         assertEquals(InvalidCommand.class, groupWithMissingGidDelimiter.getClass());
     }
 
+    /**
+     * Checks if a group is not viewed when a group is missing the Group unique identifier argument.
+     */
     @Test
     void prepare_MissingGidArgument_InvalidCommand() {
         String argMissingGidArgument = "group /view /gid";
@@ -35,6 +41,9 @@ class GroupViewCommandTest {
         assertEquals(InvalidCommand.class, groupWithMissingGidArgument.getClass());
     }
 
+    /**
+     * Checks if a group is viewed with a valid command.
+     */
     @Test
     void prepare_validCommand_GroupViewCommand() {
         String groupArgs = "group /view /gid 1";
