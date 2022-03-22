@@ -10,7 +10,7 @@ participant ":ModuleList" as ModuleList
 [->TagParser:parseCommand()
 create TagCommand
 activate TagParser
-TagParser -> TagCommand: TagCommand(tagOperation:string, taskIndex:int, taskModule:string, tagDescription:string)
+TagParser -> TagCommand: TagCommand(tagOperation:String, taskIndex:int, taskModule:String, tagDescription:String)
 activate TagCommand
 return
 [<- TagParser
