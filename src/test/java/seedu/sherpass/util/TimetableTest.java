@@ -1,6 +1,5 @@
 package seedu.sherpass.util;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
@@ -8,19 +7,37 @@ import seedu.sherpass.task.TaskList;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TimetableTest {
 
     @Test
-    @Disabled
-    void prepareTimetable_CurrentDate_expectTodayTimetable() {
+    void prepareTimetable_TodayDate_expectTodayTimetable() {
         ArrayList<Task> dummyList = new ArrayList<>();
         Ui ui = new Ui();
-        Task testTask = new Task("submit DG", LocalDate.now(), LocalDate.parse("29/3/2022"));
+        Task testTask = new Task("submit DG", LocalDate.now(), null);
         dummyList.add(testTask);
         TaskList testList = new TaskList(dummyList);
-        Timetable.showScheduleByDay(LocalDate.now(), testList, ui);
-        assertTrue(true);
+        ArrayList<Task> filteredList = testList.getFilteredTasksByDate(LocalDate.now());
+
+        Timetable actualTimetable = Timetable.prepareTimetable(LocalDate.now(), filteredList, ui);
+        Timetable expectTimetable = Timetable.prepareTimetable(LocalDate.now(), dummyList, ui);
+
+        assertEquals(expectTimetable, actualTimetable);
+    }
+
+    @Test
+    void prepareTimetable_TodayDate_expectEmptyTimetable() {
+        ArrayList<Task> testArrayList = new ArrayList<>();
+        Task testTask = new Task("testing", LocalDate.now().plusDays(1), null);
+        testArrayList.add(testTask);
+        TaskList actualTaskList = new TaskList(testArrayList);
+        ArrayList<Task> filteredList = actualTaskList.getFilteredTasksByDate(LocalDate.now());
+        Ui ui = new Ui();
+
+        Timetable actualTimetable = Timetable.prepareTimetable(LocalDate.now(), filteredList, ui);
+        Timetable expectTimetable = Timetable.prepareTimetable(LocalDate.now(), new ArrayList<>(), ui);
+
+        assertEquals(expectTimetable, actualTimetable);
     }
 }
