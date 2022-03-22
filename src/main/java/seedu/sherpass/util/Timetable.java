@@ -26,6 +26,15 @@ import static seedu.sherpass.constant.TimetableConstant.TIMETABLE_SIZE_OFFSET;
 import static seedu.sherpass.constant.TimetableConstant.WHITE_SPACE_FRONT_OFFSET_LENGTH;
 
 public class Timetable {
+    private LocalDate localDate;
+    private ArrayList<Task> tasks;
+    private Ui ui;
+
+    private Timetable(LocalDate localDate, ArrayList<Task> tasks, Ui ui) {
+        this.tasks = tasks;
+        this.localDate = localDate;
+        this.ui = ui;
+    }
 
     private static int findTaskDescriptionLength(ArrayList<Task> filteredTasks) {
         int max = 0;
@@ -126,7 +135,7 @@ public class Timetable {
                 partitionLength - fourthRow.length() - 1));
         ui.showToUser(ui.getRepeatedCharacters("-", partitionLength));
     }
-
+/*
     private static void prepareTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui ui) {
         String day = dateInput.format(dayOnlyFormat);
         String date = dateInput.format(dateOnlyFormat);
@@ -139,10 +148,29 @@ public class Timetable {
         }
         printTimetable(day, date, filteredTasks, ui, taskLength, doOnDateLength, partitionLength);
     }
+ */
+    public static Timetable prepareTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui ui) {
+        return new Timetable(dateInput, filteredTasks, ui);
+    }
+
+    private void printSchedule() {
+        String day = localDate.format(dayOnlyFormat);
+        String date = localDate.format(dateOnlyFormat);
+        int taskLength = findTaskLength(tasks);
+        int doOnDateLength = DATE_SPACE_FULL_LENGTH;
+        int partitionLength = calcPartitionLength(taskLength, doOnDateLength);
+
+        if (!tasks.isEmpty()) {
+            printTimetable(day, date, tasks, ui, taskLength, doOnDateLength, partitionLength);
+        } else {
+            printEmptyTimetable(ui, day, date, partitionLength);
+        }
+    }
 
     public static void showTodaySchedule(TaskList taskList, Ui ui) {
         ArrayList<Task> filteredTasks = taskList.getFilteredTasksByDate(LocalDate.now());
-        prepareTimetable(LocalDate.now(), filteredTasks, ui);
+        Timetable timetable = prepareTimetable(LocalDate.now(), filteredTasks, ui);
+        timetable.printSchedule();
     }
 
     /**
@@ -154,7 +182,8 @@ public class Timetable {
      */
     public static void showScheduleByDay(LocalDate dateInput, TaskList taskList, Ui ui) {
         ArrayList<Task> filteredTasks = taskList.getFilteredTasksByDate(dateInput);
-        prepareTimetable(dateInput, filteredTasks, ui);
+        Timetable timetable = prepareTimetable(dateInput, filteredTasks, ui);
+        timetable.printSchedule();
     }
 
     private static LocalDate resetDateToMonday(String currentDate, Ui ui) {
@@ -194,6 +223,25 @@ public class Timetable {
             showScheduleByDay(currentDate, taskList, ui);
             assert (currentDate != null);
             currentDate.plus(1, ChronoUnit.DAYS);
+        }
+    }
+
+    /**
+     * Compare the two timetable object
+     * and whether the arrayList in the timetable are equals.
+     *
+     * @param obj To check if the obj is equals to the given Timetable object.
+     * @return boolean object.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        } else if (obj instanceof Timetable) {
+            Timetable timetable = (Timetable) obj;
+            return timetable.tasks.equals(this.tasks);
+        } else {
+            return false;
         }
     }
 }
