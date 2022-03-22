@@ -11,10 +11,19 @@ Given below is a quick overview of the main components of Mod Happy and how they
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## Implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Tag Feature
+
+####Implementation
+The tag command accepts a string from the user and adds it into `ArrayList<String>` of a `Task`.
+
+Below is the sequence diagram of how the tag feature works:
+![Sequence Diagram]
+![Sequence Diagram]
+![Sequence Diagram]
 
 ## Product scope
 ### Target user profile

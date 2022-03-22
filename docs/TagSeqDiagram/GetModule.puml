@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam shadowing false
+participant ":TagCommand" as TagCommand
+participant ":ModuleList" as ModuleList
+
+mainframe sd Check type of Task
+
+activate TagCommand
+
+alt Objects.isNull(taskMod)
+    TagCommand -> ModuleList: getGeneralTasks()
+    activate ModuleList
+    return generalTasks:Module
+
+else else
+    TagCommand -> ModuleList: getModule(taskMod)
+    activate ModuleList
+
+    alt Objects.isNull(taskMod)
+        [<- ModuleList: exception
+
+    end
+end
+@enduml

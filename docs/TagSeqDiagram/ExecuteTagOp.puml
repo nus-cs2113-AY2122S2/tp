@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam shadowing false
+participant ":TagCommand" as TagCommand
+
+mainframe Execute Tag Operation
+
+activate TagCommand
+
+alt TagOp == add
+TagCommand -> TagCommand:addTag(TaskMod)
+activate TagCommand
+TagCommand ->] :getTaskList()
+TagCommand <-] ::TaskList
+TagCommand ->] :addTag(tag, taskIndex)
+TagCommand <-] ::Task
+return result
+
+else TagOp == del
+TagCommand -> TagCommand:removeTag(TaskMod)
+activate TagCommand
+TagCommand ->] :getTaskList()
+TagCommand <-] ::TaskList
+TagCommand ->] :delTag(tag, taskIndex)
+TagCommand <-] ::Task
+return result
+
+else else
+[<- TagCommand:exception
+
+end
+
+@enduml
