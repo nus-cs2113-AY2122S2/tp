@@ -98,8 +98,9 @@ The general workflow of the `Parser` component is as follows:
 2. The `Parser#getCommandType()` method is then called to decipher what command is to be carried out.
 3. Then, `Parser#getRemainingArgument()` method is run to extract the arguments of the input command.
 4. The arguments are passed to the specified `XYZCommand#prepare()` method if there are any arguments. 
-Otherwise, the constructor is called. Both methods will create a new `XYZCommand` object.
-5. This Command object is then returned by the `getCommand()` method.
+Otherwise, the constructor is called. Both methods will create a new `XYZCommand` object. 
+(`XYZCommand` is a placeholder for specific subclass of the `Command` class, e.g. `SessionCreateCommand`)
+5. This `Command` object is then returned by the `getCommand()` method.
 ### Command Component
 
 ## Implementation
