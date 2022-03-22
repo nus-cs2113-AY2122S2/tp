@@ -14,7 +14,7 @@ class ActivityDeleteCommandTest {
 
     /**
      * Creates a session that is stored and managed by the Manager object.
-     * Creates 2 activities in the new session that was created.
+     * Creates two activities in the new session that was created.
      */
     @BeforeEach
     void setUp() {
