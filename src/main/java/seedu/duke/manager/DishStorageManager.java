@@ -2,7 +2,6 @@ package seedu.duke.manager;
 
 import seedu.duke.entities.Dish;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class DishStorageManager extends Manager {
@@ -28,7 +27,7 @@ public class DishStorageManager extends Manager {
                 throw new Exception("Input elements broken");
             }
         }
-        dishManager.setDishes((ArrayList)list);
+        dishManager.setDishes((ArrayList) list);
     }
 
     @Override
