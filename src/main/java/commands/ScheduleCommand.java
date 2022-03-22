@@ -12,6 +12,9 @@ import werkit.UI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static data.schedule.InvalidScheduleException.INDEX_OUT_OF_BOUND;
+import static data.schedule.InvalidScheduleException.INPUT_NOT_NUMBER_FORMATTABLE;
+
 public class ScheduleCommand extends Command {
     public static final String BASE_KEYWORD = "schedule";
     public static final String UPDATE_ACTION_KEYWORD = "/update";
@@ -119,10 +122,11 @@ public class ScheduleCommand extends Command {
                 getUI().printNewScheduleCreatedMessage(newDay);
                 break;
             case LIST_ACTION_KEYWORD:
+                scheduleList.printSchedule();
                 break;
             case CLEAR_ACTION_KEYWORD:
                 break;
-            case CLEAR_ALL_ACTION_KEYWORD: ;
+            case CLEAR_ALL_ACTION_KEYWORD:
                 break;
             default:
                 String className = this.getClass().getSimpleName();
@@ -133,15 +137,10 @@ public class ScheduleCommand extends Command {
             System.out.println(e.getMessage());
             System.out.println("Please try again");
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Uh oh, it seems like too few arguments were entered.");
-            System.out.println("Please try again. Alternatively, type 'help' if you need\n"
-                    + "more information on the commands.");
+            System.out.println(INDEX_OUT_OF_BOUND);
         } catch (NumberFormatException e) {
             logger.log(Level.WARNING, "A non-formattable number was received!");
-            System.out.println("Uh oh, a number was expected in your input, but a non-formattable\n"
-                    + "number was received.");
-            System.out.println("Please try again. Alternatively, type 'help' if you need\n"
-                    + "more information on the commands.");
+            System.out.println(INPUT_NOT_NUMBER_FORMATTABLE);
         } catch (InvalidScheduleException e) {
             System.out.println(e.getMessage());
         }
