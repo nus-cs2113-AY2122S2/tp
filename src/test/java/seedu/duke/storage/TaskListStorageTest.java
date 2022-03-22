@@ -16,7 +16,7 @@ import seedu.duke.util.StringConstants;
 public class TaskListStorageTest {
     private TaskListStorage taskListStorage;
     private ArrayList<Task> taskList;
-    private final String path = StringConstants.TASK_PATH;
+    private final String path = StringConstants.TASK_TEST_PATH;
 
     @BeforeEach
     public void setUp() {
