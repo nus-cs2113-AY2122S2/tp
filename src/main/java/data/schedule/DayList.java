@@ -10,12 +10,14 @@ import java.util.logging.Logger;
 import static data.schedule.InvalidScheduleException.INVALID_DAY;
 
 public class DayList {
+    private static final int FIXED_LENGTH = 30;
+    private static final int NUMBER_OF_SCHEDULE_DAYS = 7;
+
     private PlanList planList;
     private String[] scheduleList = new String[NUMBER_OF_SCHEDULE_DAYS]; 
     private String[] schedulePrintList = new String[NUMBER_OF_SCHEDULE_DAYS];
-    private Day[] dayList = new Day[7]; //store all created day object
-    private static final int FIXED_LENGTH = 30;
-    private static final int NUMBER_OF_SCHEDULE_DAYS = 7;
+    private Day[] dayList = new Day[NUMBER_OF_SCHEDULE_DAYS]; //store all created day object
+
     private static Logger logger = Logger.getLogger(Parser.class.getName());
 
     public DayList(PlanList planList) {
@@ -30,11 +32,14 @@ public class DayList {
         return schedulePrintList;
     }
 
+    public Day[] getDayList() {
+        return this.dayList;
+    }
+
     public Day updateDay(String userArgument) throws ArrayIndexOutOfBoundsException, InvalidScheduleException {
         String className = this.getClass().getSimpleName();
         String[] userArgumentArray = userArgument.split(" ", -1);
         if (userArgumentArray.length > 2) {
-
             throw new ArrayIndexOutOfBoundsException();
         }
         int dayNumber = Integer.parseInt(userArgumentArray[0]);

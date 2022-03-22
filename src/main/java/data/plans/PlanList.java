@@ -169,9 +169,9 @@ public class PlanList {
 
         assert (getPlansDisplayList().size() > 0);
         System.out.println("Here are all your plan(s).");
-        System.out.println("To view each plan in detail, enter 'plan /details <plan number in list>'.\n");
+        System.out.println("To view each plan in detail, enter\n'plan /details <plan number in list>'.\n");
         for (int i = 0; i < getPlansDisplayList().size(); i += 1) {
-            System.out.println((i + 1) + "." + getPlansDisplayList().get(i).toString());
+            System.out.println((i + 1) + ". " + getPlansDisplayList().get(i).toString());
         }
     }
 }
