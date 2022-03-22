@@ -1,6 +1,8 @@
 package seedu.duke.entities;
 
-public class Dish {
+import java.io.Serializable;
+
+public class Dish implements Serializable {
     private String name;
     private double price;
 
