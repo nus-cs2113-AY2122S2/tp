@@ -22,7 +22,7 @@ class GroupViewCommandTest {
     }
 
     /**
-     * Checks if a group is not viewed when a group is missing the Group unique identifier delimiter.
+     * Checks if an InvalidCommand is returned when the Group Id delimiter is not provided by the user.
      */
     @Test
     void prepare_MissingGidDelimiter_InvalidCommand() {
@@ -32,7 +32,8 @@ class GroupViewCommandTest {
     }
 
     /**
-     * Checks if a group is not viewed when a group is missing the Group unique identifier argument.
+     * Checks if an InvalidCommand is returned when the Group Id delimiter is provided but no arguments
+     * following the Group Id delimiter are provided by the user.
      */
     @Test
     void prepare_MissingGidArgument_InvalidCommand() {
@@ -42,7 +43,8 @@ class GroupViewCommandTest {
     }
 
     /**
-     * Checks if a group is viewed with a valid command.
+     * Checks if a GroupViewCommand is returned when the Group Id delimiter and Group Id argument
+     * are provided by the user.
      */
     @Test
     void prepare_validCommand_GroupViewCommand() {
