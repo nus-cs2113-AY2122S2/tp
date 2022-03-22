@@ -24,6 +24,7 @@ bill for each activity.
         * [Deleting a group: `group /delete`](#deleting-a-group-group-delete)
         * [Viewing a group: `group /view`](#viewing-a-group-group-view)
         * [Listing all groups: `group /list`](#listing-all-groups-group-list)
+        * [Listing all available commands: `help`](#listing-all-available-commands-help)
         * [Exit](#exit)
     * [FAQ](#faq)
     * [Command Summary](#command-summary)
@@ -314,6 +315,7 @@ Example of usage:
 ### Deleting a group: `group /delete`
 ### Viewing a group: `group /view`
 ### Listing all groups: `group /list`
+### Listing all available commands: `help`
 
 ### Exit
 > Exits the application.
