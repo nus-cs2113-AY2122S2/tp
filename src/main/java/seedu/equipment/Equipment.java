@@ -77,12 +77,12 @@ public class Equipment {
             return false;
         }
         Equipment equipment = (Equipment) o;
-        return Double.compare(equipment.cost, cost) == 0 &&
-                itemName.equals(equipment.itemName) &&
-                serialNumber.equals(equipment.serialNumber) &&
-                type == equipment.type &&
-                purchasedFrom.equals(equipment.purchasedFrom) &&
-                purchasedDate.equals(equipment.purchasedDate);
+        return Double.compare(equipment.cost, cost) == 0
+                && itemName.equals(equipment.itemName)
+                && serialNumber.equals(equipment.serialNumber)
+                && type == equipment.type
+                && purchasedFrom.equals(equipment.purchasedFrom)
+                && purchasedDate.equals(equipment.purchasedDate);
     }
 
     @Override
@@ -92,12 +92,11 @@ public class Equipment {
 
     @Override
     public String toString() {
-        return  "itemName=" + itemName + "," + System.lineSeparator() +
-                "serialNumber=" + serialNumber + "," + System.lineSeparator() +
-                "type=" + type + "," + System.lineSeparator() +
-                "cost=" + cost + "," + System.lineSeparator() +
-                "purchasedFrom=" + purchasedFrom + "," + System.lineSeparator() +
-                "purchasedDate=" + purchasedDate + System.lineSeparator() + System.lineSeparator()
-                ;
+        return  "serialNumber=" + serialNumber + "," +
+                "itemName=" + itemName + "," +
+                "type=" + type + "," +
+                "cost=" + cost + "," +
+                "purchasedFrom=" + purchasedFrom + "," +
+                "purchasedDate=" + purchasedDate;
     }
 }
