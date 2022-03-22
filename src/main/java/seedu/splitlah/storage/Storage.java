@@ -23,8 +23,6 @@ public class Storage {
 
     /**
      * Returns a Profile object.
-     * If not data was loaded, returns a new Profile object,
-     * otherwise, a Profile object with data from save file.
      *
      * @return A Project object.
      */

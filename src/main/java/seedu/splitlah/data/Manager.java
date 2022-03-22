@@ -23,6 +23,7 @@ public class Manager {
 
     /**
      * Constructor to create a Manager object.
+     * Should only be called in Junit test files.
      */
     public Manager() {
         ui = new TextUI();
@@ -37,7 +38,9 @@ public class Manager {
     public Manager(boolean isUsingStorage) {
         ui = new TextUI();
         this.isUsingStorage = isUsingStorage;
-        initializeStorage();
+        if (isUsingStorage) {
+            initializeStorage();
+        }
     }
 
     /**
