@@ -14,13 +14,6 @@ public class UpdateCommand extends ModificationCommand {
             + System.lineSeparator()
             + "Example: "
             + "update s/SM57-1 n/SpeakerC c/2510 pd/2022-08-21";
-    private String serialNumber;
-
-    private String updateName = null;
-    private String purchaseDate = null;
-    private String type = null;
-    private String purchaseFrom = null;
-    private String cost = null;
 
 
     /**

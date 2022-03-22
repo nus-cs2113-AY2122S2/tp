@@ -8,7 +8,8 @@ import seedu.equipment.EquipmentType;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class DeleteCommandTest {
     DeleteCommand deleteCommand;
@@ -35,7 +36,8 @@ class DeleteCommandTest {
         assertEquals(1, equipmentListSize);
 
         CommandResult actualResult = deleteCommand.execute();
-        CommandResult expectedResult = new CommandResult("Equipment successfully deleted: Speaker B, serial number S1404115ASF");
+        CommandResult expectedResult =
+                new CommandResult("Equipment successfully deleted: Speaker B, serial number S1404115ASF");
 
         assertEquals(expectedResult, actualResult);
     }

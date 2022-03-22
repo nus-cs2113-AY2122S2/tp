@@ -47,7 +47,7 @@ public class AddCommand extends ModificationCommand {
         try {
             addEquipment(commandStrings);
         } catch (DuplicateSerialNumberException e) {
-            return new CommandResult(String.format(DUPLICATE_ITEM_ERROR, commandStrings.get(1)));
+            return new CommandResult(String.format(DUPLICATE_ITEM_ERROR, serialNumber));
         } catch (NullPointerException | NumberFormatException e) {
             return new CommandResult(INCORRECT_COST_FORMAT);
         } catch (IllegalArgumentException e) {
