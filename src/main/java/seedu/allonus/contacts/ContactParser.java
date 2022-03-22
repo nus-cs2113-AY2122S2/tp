@@ -16,7 +16,7 @@ public class ContactParser {
     private static Logger logger = Logger.getLogger("");
     private static final int MAX_NUMBER_OF_FIELDS = 5;
 
-    private static ArrayList<String> getFields(String userInput) {
+    static ArrayList<String> getFields(String userInput) {
         String regex = CONTACTS_DELIMITERS + "/.*?(?=(" + CONTACTS_DELIMITERS + "/|$))";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(userInput);

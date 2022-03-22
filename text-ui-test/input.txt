@@ -5,6 +5,8 @@ add n/Daniela Koh d/met at SoC canteen e/other_email@u.nus.edu f/FoS
 list
 find Daniela
 find Koh
+edit 2 n/Daniela Sim
+find Koh
 rm 1
 rm
 rm 0
