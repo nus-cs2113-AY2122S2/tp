@@ -13,12 +13,10 @@ public class DishController extends Controller {
     private static final String[] CHOICES = {"Exit Menu", "List Dish", "Add Dish",
         "Delete Dish", "Change the price of a dish", "Change the name of a dish"};
     private final DishManager dishManager;
-    private final DishStorageManager dishStorageManager;
 
     public DishController() {
         super(CHOICES);
         dishManager = new DishManager();
-        dishStorageManager = new DishStorageManager(dishManager);
     }
 
     @Override
@@ -33,6 +31,7 @@ public class DishController extends Controller {
         switch (choice) {
         case 0:
             System.out.println("Exiting Menu...");
+            dishManager.store();
             return true;
         case 1:
             listDishes();

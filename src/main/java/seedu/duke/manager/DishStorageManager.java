@@ -2,11 +2,11 @@ package seedu.duke.manager;
 
 import seedu.duke.entities.Dish;
 
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class DishStorageManager extends Manager {
-    private static final String FILE = "dish.txt";
+    private static final String FILE = "dish";
     private final DishManager dishManager;
 
     public DishStorageManager(DishManager m) {
@@ -18,21 +18,22 @@ public class DishStorageManager extends Manager {
     @Override
     protected void loadData() throws Exception {
         Object obj = load();
-        while (obj != null && obj instanceof Dish) {
-            Dish dish = (Dish) obj;
-            if (!dish.isValid()) {
-                throw new IOException("Input dish invalid");
-            }
-            dishManager.addDish(dish);
-            obj = load();
+        ArrayList<Object> list;
+        if (!(obj instanceof ArrayList)) {
+            throw new Exception("Input broken");
         }
+        list = (ArrayList<Object>) obj;
+        for (Object object : list) {
+            if (!(object instanceof Dish)) {
+                throw new Exception("Input elements broken");
+            }
+        }
+        dishManager.setDishes((ArrayList)list);
     }
 
     @Override
     public void saveData() throws Exception {
         ArrayList<Dish> list = dishManager.getDishes();
-        for (Dish dish : list) {
-            save(dish);
-        }
+        save(list);
     }
 }
