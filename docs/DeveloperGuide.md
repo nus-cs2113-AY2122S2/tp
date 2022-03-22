@@ -85,22 +85,22 @@ class would return a unique identifier every time a new `Session`, `Activity` or
 ![Parser Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ParserComponent.drawio.png)
 <br>
 The `Parser` component consists of the `Parser` class, `ParserUtils` class as well as the `ParserErrors` class.<br>
-The `Parser` class serves as a provides utility methods to parse commands and arguments from the user and
+The `Parser` class provides utility methods to parse commands and arguments from the user and
 return a `Command` object representing an instruction that the user has for SplitLah.
-It is the class in the `Parser` component that other external classes interact with.<br>
+`Parser` class is the only class in the `Parser` component that other external classes interact with.<br>
 On the other hand, the `ParserUtils` class provide supporting methods for `Parser` class to properly run,
-and `ParserErrors` class provide methods to produce custom error messages for the `Parser` package.
+and `ParserErrors` class provide methods to produce custom error messages for the `Parser` component.
 
 <!-- Insert Sequence Diagram -->
 
 The general workflow of the `Parser` component is as follows:
 1. When required to parse for a command, an input String object is passed to the `Parser#getCommand()` method.
-2. The `Parser#getCommandType()` method is then called to decipher what command is to be carried out.
-3. Then, `Parser#getRemainingArgument()` method is run to extract the arguments of the input command.
-4. The arguments are passed to the specified `XYZCommand#prepare()` method if there are any arguments. 
-Otherwise, the constructor is called. Both methods will create a new `XYZCommand` object. 
+2. The `Parser#getCommandType()` method is then called to decide what command is to be carried out given the input from the user.
+3. Then, `Parser#getRemainingArgument()` method is run to extract the arguments from the user input.
+4. The arguments are then passed to the specified `XYZCommand#prepare()` method if there are any arguments. 
+Otherwise, the constructor is called. Either methods will result in the creation of a new `XYZCommand` object. 
 (`XYZCommand` is a placeholder for specific subclass of the `Command` class, e.g. `SessionCreateCommand`)
-5. This `Command` object is then returned by `Parser#getCommand()` method.
+5. The created `XYZCommand` object is then returned by `Parser#getCommand()` method.
 
 ### Command Component
 
