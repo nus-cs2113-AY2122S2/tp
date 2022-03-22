@@ -91,6 +91,15 @@ It is the class in the `Parser` component that other external classes interact w
 On the other hand, the `ParserUtils` class provide supporting methods for `Parser` class to properly run,
 and `ParserErrors` class provide methods to produce custom error messages for the `Parser` package.
 
+<!-- Insert Sequence Diagram -->
+
+The general workflow of the `Parser` component is as follows:
+1. When required to parse for a command, an input String object is passed to the `Parser#getCommand()` method.
+2. The `Parser#getCommandType()` method is then called to decipher what command is to be carried out.
+3. Then, `Parser#getRemainingArgument()` method is run to extract the arguments of the input command.
+4. The arguments are passed to the specified `XYZCommand#prepare()` method if there are any arguments. 
+Otherwise, the constructor is called. Both methods will create a new `XYZCommand` object.
+5. This Command object is then returned by the `getCommand()` method.
 ### Command Component
 
 ## Implementation
