@@ -1,12 +1,10 @@
 package seedu.duke.parsers;
 
-import seedu.duke.commands.Command;
-import seedu.duke.commands.HelpCommand;
-import seedu.duke.commands.OptionCommand;
-import seedu.duke.exceptions.ModHappyException;
-
 import java.util.HashMap;
 
+import seedu.duke.commands.Command;
+import seedu.duke.commands.OptionCommand;
+import seedu.duke.exceptions.ModHappyException;
 
 public class OptionParser extends Parser {
 

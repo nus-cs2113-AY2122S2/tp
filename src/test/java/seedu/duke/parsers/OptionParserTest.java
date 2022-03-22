@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.exceptions.UnkownConfigurationGroupWord;
 import seedu.duke.util.Configuration;
 
