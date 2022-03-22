@@ -1,5 +1,7 @@
 package seedu.duke.assets;
 
+import seedu.duke.helper.UI;
+
 import java.util.ArrayList;
 
 
@@ -29,15 +31,15 @@ public class DoctorList {
     public void viewDoctor(String nric) {
         Doctor doctor = getDoctor(nric);
         if (doctor == null) {
-            System.out.println("Doctor doesn't exist please try again!");
+            UI.printParagraph("Doctor doesn't exist please try again!");
             return;
         }
-        System.out.println(doctor);
+        UI.printParagraph(doctor.toString());
     }
 
     //view all doctor
     public void viewDoctor() {
-        System.out.println(this);
+        UI.printParagraph(toString());
     }
 
     //get the number of doctors
@@ -55,7 +57,7 @@ public class DoctorList {
         if (getSizeDoctor() == 0) {
             return "There are no doctors.";
         }
-        String doctorName = " ";
+        String doctorName = "";
         int index = 1;
         for (Doctor doctor : this.doctors) {
             doctorName += String.format("%d. %s", index, doctor.toString());
