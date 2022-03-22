@@ -141,6 +141,7 @@ public class Timetable {
     }
 
     private void printSchedule() {
+        assert localDate != null;
         String day = localDate.format(dayOnlyFormat);
         String date = localDate.format(dateOnlyFormat);
         int taskLength = findTaskLength(tasks);
