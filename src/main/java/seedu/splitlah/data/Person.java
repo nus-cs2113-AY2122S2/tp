@@ -12,18 +12,28 @@ import java.util.ArrayList;
  */
 public class Person {
     
-    private final String name;
+    private final Name name;
     private ArrayList<ActivityCost> activityCostList;
+
+    /**
+     * Constructs a Person object.
+     * @param name
+     * @throws InvalidDataException
+     */
+    public Person(Name name) throws InvalidDataException {
+        this.activityCostList = new ArrayList<>();
+        this.name = name;
+    }
 
     /**
      * Constructs a Person object.
      *
      * @param name Name of the Person.
      */
-    public Person(String name) {
-        this.activityCostList = new ArrayList<>();
-        this.name = name;
+    public Person(String name) throws InvalidDataException {
+        this(new Name(name));
     }
+
 
     /**
      * Constructs an ActivityCost object and adds it to the list of ActivityCosts.
@@ -107,8 +117,12 @@ public class Person {
         throw new InvalidDataException(Message.ERROR_PERSON_ACTIVITY_NOT_FOUND + activityId);
     }
 
-    public String getName() {
+    public Name getName() {
         return name;
+    }
+
+    public String getNameAsString() {
+        return name.getName();
     }
 
     public ArrayList<ActivityCost> getActivityCostList() {
@@ -117,8 +131,14 @@ public class Person {
 
     @Override
     public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (!(object.getClass() == this.getClass())) {
+            return false;
+        }
         Person person = (Person) object;
-        if (this.name.equalsIgnoreCase(person.getName())) {
+        if (this.name.getName().equalsIgnoreCase(person.getName().getName())) {
             return true;
         } else {
             return false;
