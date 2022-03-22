@@ -5,7 +5,9 @@ import java.util.ArrayList;
 /**
  * Abstract class acting as parent class to AddCommand and UpdateCommand which have use for the same prepareModification method.
  */
-public abstract class ModificationCommand extends Command {
+public class ModificationCommand extends Command {
+    public final String IMPLEMENTED_BY_CHILD = "Execute method for Modification should be implemented by " +
+            "child classes AddCommand and UpdateCommand";
     protected final ArrayList<String> commandStrings;
     protected String serialNumber;
     protected String equipmentName = null;
@@ -18,7 +20,9 @@ public abstract class ModificationCommand extends Command {
         this.commandStrings = commandStrings;
     }
 
-    public abstract CommandResult execute();
+    public CommandResult execute() {
+        return new CommandResult(IMPLEMENTED_BY_CHILD);
+    }
 
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
