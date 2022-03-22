@@ -7,10 +7,10 @@
 ---
 
 # Design & implementation
-* ## [Implementation](#Implementation)
-  * ### [Search](#Search)
-    * [Search for exercise](#Search-for-exercise)
-    * [Search for plan](#Search-for-plan)
+* ## [Implementation](#implementation)
+  * ### [Search](#search)
+    * [Search for exercise](#search-for-exercise)
+    * [Search for plan](#search-for-plan)
 
 --------------------------------
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
