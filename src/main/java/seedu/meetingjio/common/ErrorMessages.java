@@ -42,4 +42,6 @@ public class ErrorMessages {
             + "This event will not be added to the timetable.";
     public static final String ERROR_INIT_FAILED = "Failed to initialise MeetingJio application. Exiting...";
     public static final String ERROR_INVALID_COMMAND = "Hi please input a valid command.";
+    public static final String ERROR_NON_EMPTY_LIST = "Failed to clear whole list";
+    public static final String ERROR_DELETE_COMMAND_FAILED = "Failed to delete element";
 }
