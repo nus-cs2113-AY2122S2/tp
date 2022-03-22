@@ -24,4 +24,11 @@ class GroupViewCommandTest {
         Command groupWithMissingGidDelimiter = Parser.getCommand(argMissingGidDelimiter);
         assertEquals(InvalidCommand.class, groupWithMissingGidDelimiter.getClass());
     }
+
+    @Test
+    void prepare_MissingGidArgument_InvalidCommand() {
+        String argMissingGidArgument = "group /view /gid";
+        Command groupWithMissingGidArgument = Parser.getCommand(argMissingGidArgument);
+        assertEquals(InvalidCommand.class, groupWithMissingGidArgument.getClass());
+    }
 }
