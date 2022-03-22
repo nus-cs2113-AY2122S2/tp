@@ -1,6 +1,8 @@
 package seedu.sherpass.util;
 
 
+import seedu.sherpass.task.TaskList;
+
 import static seedu.sherpass.constant.TimerConstant.TIME_INTERVAL;
 import static seedu.sherpass.constant.TimerConstant.NO_TIME_LEFT;
 import static seedu.sherpass.constant.TimerConstant.ONE_MINUTE;
@@ -13,6 +15,7 @@ public class Timer extends Thread {
     private boolean forcedStop = false;
     private boolean hasTimeLeft = false;
     private static Ui ui;
+    private static TaskList taskList;
     protected int timeLeft;
 
     /**
@@ -20,9 +23,10 @@ public class Timer extends Thread {
      *
      * @param ui UI
      */
-    public Timer(Ui ui) {
+    public Timer(TaskList taskList, Ui ui) {
         timeLeft = NO_TIME_LEFT;
         Timer.ui = ui;
+        Timer.taskList = taskList;
     }
 
     /**
@@ -51,7 +55,7 @@ public class Timer extends Thread {
             assert timeLeft <= NO_TIME_LEFT;
             isTimerRunning = false;
             ui.showToUser("Time is up! Would you like to mark any tasks as done?");
-            ui.showToUser("Time is up!");
+            taskList.printAllTasks(ui);
             ui.showLine();
         }
         this.interrupt();

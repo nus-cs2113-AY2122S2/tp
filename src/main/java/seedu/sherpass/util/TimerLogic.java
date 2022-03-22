@@ -19,7 +19,7 @@ public class TimerLogic {
     public TimerLogic(TaskList taskList, Ui ui) {
         TimerLogic.taskList = taskList;
         TimerLogic.ui = ui;
-        timer = new Timer(ui);
+        timer = new Timer(taskList, ui);
     }
 
     public boolean isTimerRunning() {
@@ -77,6 +77,6 @@ public class TimerLogic {
      *
      */
     public void callResetTimer() {
-        timer = new Timer(ui);
+        timer = new Timer(taskList, ui);
     }
 }

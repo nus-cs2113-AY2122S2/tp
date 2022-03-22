@@ -34,7 +34,8 @@ public class Message {
             + "3) Stop timer: stop\n"
             + "4) Pause timer: pause\n"
             + "5) Resume timer: resume\n"
-            + "6) Exit study mode: leave";
+            + "6) Exit study mode: leave\n"
+            + "7) Mark task as done: mark <task_index>";
 
     public static final String ERROR_INVALID_INPUT_MESSAGE = "Please key in an appropriate command.\n"
             + HELP_MESSAGE;

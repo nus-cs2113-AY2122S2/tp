@@ -22,6 +22,7 @@ import seedu.sherpass.exception.InvalidTimeException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -381,7 +382,7 @@ public class Parser {
      * @param rawUserInput Raw user input.
      * @param ui           UI.
      */
-    public static void parseStudyMode(String rawUserInput, Ui ui, TimerLogic timerLogic) {
+    public static void parseStudyMode(TaskList taskList, Ui ui, Storage storage, String rawUserInput,TimerLogic timerLogic) throws IOException {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
@@ -403,7 +404,14 @@ public class Parser {
             break;
         case "mark":
             if (!timerLogic.isTimerRunning()) {
-                ui.showToUser("Timer is not running.");
+                Command c = Parser.prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD, taskList);
+                if (c != null) {
+                    c.execute(taskList, ui, storage);
+                    ui.showToUser("Would you like to start another timer, mark another task as done, "
+                                    + "or leave the study session?");
+                }
+            } else {
+                ui.showToUser("You can't mark a task as done while timer is running!");
             }
             break;
         default:
