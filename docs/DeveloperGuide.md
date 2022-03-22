@@ -27,9 +27,9 @@ Here is an example on adding a tag to a general task:
 
 Below is the sequence diagram of how the tag feature works:
 
-![Tag](https://user-images.githubusercontent.com/70083643/159489546-574538e0-ee99-40c0-b373-1acc1542105d.png)
-![GetModule](https://user-images.githubusercontent.com/70083643/159489557-d82be092-7570-459c-b933-5d1497490b98.png)
-![ExecuteTagOp](https://user-images.githubusercontent.com/70083643/159489602-2a88ed8f-3227-4f06-bf4a-d1f743d60856.png)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/Tag.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/GetModule.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/ExecuteTagOp.puml)
 
 ## Product scope
 ### Target user profile
