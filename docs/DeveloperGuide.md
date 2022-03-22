@@ -21,9 +21,9 @@ Given below is a quick overview of the main components of Mod Happy and how they
 The tag command accepts a string from the user and adds it into `ArrayList<String>` of a `Task`.
 
 Below is the sequence diagram of how the tag feature works:
-![Sequence Diagram]
-![Sequence Diagram]
-![Sequence Diagram]
+![Tag](https://user-images.githubusercontent.com/70083643/159422057-e99fed0b-dd81-407b-94a2-186f372eba04.png)
+![GetModule](https://user-images.githubusercontent.com/70083643/159422213-f5b0c533-d904-4db0-9408-a1c21c03ad9b.png)
+![ExecuteTagOp](https://user-images.githubusercontent.com/70083643/159422225-91f779e0-2efa-42f9-8ee3-e6c612d46753.png)
 
 ## Product scope
 ### Target user profile
