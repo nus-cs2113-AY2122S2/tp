@@ -67,7 +67,7 @@ public class Parser {
         switch (commandAndArgument.get(0)) {
         case AddCommand.COMMAND_WORD:
             try {
-                args = prepareAdd(commandAndArgument.get(1));
+                args = extractArguments(commandAndArgument.get(1));
                 return new AddCommand(args);
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(AddCommand.COMMAND_WORD + AddCommand.COMMAND_DESCRIPTION);
