@@ -21,7 +21,7 @@ public class Group implements Serializable {
     private static final String SEPARATOR = " | ";
 
     /**
-     * Constructs a Group object.
+     * Initializes a Group object.
      *
      * @param groupName  A String object that represents the group's name.
      * @param groupId    An integer that uniquely identifies a group.

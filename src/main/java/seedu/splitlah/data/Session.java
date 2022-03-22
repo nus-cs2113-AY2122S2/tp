@@ -31,7 +31,7 @@ public class Session implements Serializable {
     private static final int ZERO_INDEXING_OFFSET = 1;
 
     /**
-     * Constructs a Session object with the specified information as a new session.
+     * Initializes a Session object.
      *
      * @param sessionName The name of the session.
      * @param sessionId   A unique identifier for the session.

@@ -23,7 +23,7 @@ public class Activity implements Serializable {
     private static final int ZERO_INDEXING_OFFSET = 1;
 
     /**
-     * Constructs an Activity object that stores the relevant information required for an Activity.
+     * Initializes an Activity object.
      *
      * @param activityId         An integer that uniquely identifies an activity.
      * @param activityName       A String object that represents the activity's name.

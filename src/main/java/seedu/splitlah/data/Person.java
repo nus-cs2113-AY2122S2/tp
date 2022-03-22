@@ -17,7 +17,7 @@ public class Person implements Serializable {
     private ArrayList<ActivityCost> activityCostList;
 
     /**
-     * Constructs a Person object.
+     * Initializes a Person object.
      *
      * @param name Name of the Person.
      */

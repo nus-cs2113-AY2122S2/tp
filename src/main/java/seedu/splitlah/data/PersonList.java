@@ -15,6 +15,9 @@ import java.util.Set;
 public class PersonList implements Serializable {
     private ArrayList<Person> personList;
 
+    /**
+     * Initializes a PersonList object.
+     */
     public PersonList() {
         this.personList = new ArrayList<>();
     }
