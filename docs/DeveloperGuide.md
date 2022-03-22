@@ -85,10 +85,21 @@ Maybe for Jiarong
 {Suggest to show the process from `parsing several delimiters` to `finding the
 income/expenditure` to `editing the value`.}
 
-### Listing Categorised Expenditures Feature
+### [Proposed] Listing Categorised Expenditures Feature
 
-Maybe for Sizheng
-{Suggest to show the process of iterating through lists to obtain the list of items in category}
+#### Proposed Implementation
+
+The proposed listing categorised expenditure feature is facilitated by `Categories`,
+`Money(temp)`, `MoneyList(temp)`  and `Family`. The `Categories` is an enumeration of keys
+that is used as the expenditure categories. The `Money(temp)` will have an additional integer 
+attribute that acts as an index to a category. Additionally, the following operations are 
+implemented:
+
+* `Categories#getLabel(index)` -- Returns the name of the category with this index. 
+* `Money(temp)#getCategory()` -- Returns the category index for this expense.
+* `MoneyList(temp)#getExpenseOfCategory(index)` -- Returns a list of expenditures having 
+category index matching the index argument.
+* `Family#listExpenseOfCategory(index)` -- Lists all expenses from the category index.
 
 ### Data Archiving
 
