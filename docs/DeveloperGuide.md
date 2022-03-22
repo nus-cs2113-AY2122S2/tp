@@ -157,6 +157,12 @@ tracked - parents and myGen.
 
 <image src="/images/ListCategorisedExpense0.png"/>
 
+Step 2. The user executes `listc` command to list all expenses in category `1`. The `listCat`
+command will be parsed and calls `Family#listExpenseOfCategory(1)` which would instantiate a
+temporary array list for storing the results of the upcoming search.
+
+<image src="/images/ListCategorisedExpense1.png"/>
+
 ### Data Archiving
 
 Maybe for Hans
