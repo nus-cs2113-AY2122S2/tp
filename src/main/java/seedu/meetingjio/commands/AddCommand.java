@@ -2,10 +2,11 @@ package seedu.meetingjio.commands;
 
 import seedu.meetingjio.events.Event;
 import seedu.meetingjio.events.Lesson;
-import seedu.meetingjio.Timetable;
+import seedu.meetingjio.timetables.MasterTimetable;
 
 import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
+import seedu.meetingjio.timetables.Timetable;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
@@ -32,12 +33,13 @@ public class AddCommand extends Command {
     /**
      * Execute Add command using the timetable provided.
      *
-     * @param timetable Timetable object initialised by program
+     * @param masterTimetable
      *
      */
     @Override
-    public String execute(Timetable timetable) {
+    public String execute(MasterTimetable masterTimetable) {
         try {
+            Timetable timetable = masterTimetable.getByIndex(0); // changes needed
             Event newEvent = new Lesson(name, title, day, startTime, endTime, mode);
             timetable.add(newEvent);
             return addConfirmation(newEvent);

@@ -1,6 +1,8 @@
 package seedu.meetingjio.commands;
 
-import seedu.meetingjio.Timetable;
+import seedu.meetingjio.timetables.MasterTimetable;
+import seedu.meetingjio.timetables.Timetable;
+
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EMPTY_LIST;
 
 public class ListCommand extends Command {
@@ -10,11 +12,12 @@ public class ListCommand extends Command {
      * List out all entries in the user's timetable.
      * If there are no lessons found, notify user accordingly.
      *
-     * @param timetable User's timetable containing a list of lessons
-     * @return String containing all of the user's lessons
+     *
+     * @param masterTimetable@return String containing all of the user's lessons
      */
     @Override
-    public String execute(Timetable timetable) {
+    public String execute(MasterTimetable masterTimetable) {
+        Timetable timetable = masterTimetable.getByIndex(0); // changes needed
         if (timetable.size() == 0) {
             return ERROR_EMPTY_LIST;
         }
