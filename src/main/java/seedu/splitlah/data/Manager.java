@@ -29,11 +29,21 @@ public class Manager {
         profile = new Profile();
     }
 
+    /**
+     * Constructor to create a Manager object with Storage enabled.
+     *
+     * @param isUsingStorage A boolean to enable usage of Storage object.
+     */
     public Manager(boolean isUsingStorage) {
         ui = new TextUI();
         this.isUsingStorage = isUsingStorage;
         initializeStorage();
     }
+
+    /**
+     * Initializes the Storage object to be managed by Manager object.
+     * Checks if save file can be found or created before retrieving data from the save file.
+     */
     private void initializeStorage() {
         storage = new Storage();
         boolean isDirectoryCreated = storage.hasDataDirectory();
@@ -46,6 +56,10 @@ public class Manager {
             loadFileSave();
         }
     }
+
+    /**
+     * Loads the data from the save file into the Profile object.
+     */
     private void loadFileSave() {
         try {
             storage.loadStorage();
@@ -58,6 +72,10 @@ public class Manager {
         }
         profile = storage.getProfile();
     }
+
+    /**
+     * Saves the Profile object into the storage file.
+     */
     public void saveProfile() {
         if (isUsingStorage) {
             try {
