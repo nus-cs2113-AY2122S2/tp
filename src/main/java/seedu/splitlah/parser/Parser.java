@@ -17,6 +17,8 @@ import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.parser.commandparser.HelpCommandParser;
+import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
@@ -333,38 +335,42 @@ public class Parser {
         if (!errorMessage.isEmpty()) {
             return new InvalidCommand(errorMessage);
         }
-
-        switch (commandType.toLowerCase()) {
-        case SessionCreateCommand.COMMAND_TEXT:
-            return SessionCreateCommand.prepare(remainingArgs);
-        case SessionDeleteCommand.COMMAND_TEXT:
-            return SessionDeleteCommand.prepare(remainingArgs);
-        case SessionSummaryCommand.COMMAND_TEXT:
-            return SessionSummaryCommand.prepare(remainingArgs);
-        case SessionListCommand.COMMAND_TEXT:
-            return new SessionListCommand();
-        case ActivityCreateCommand.COMMAND_TEXT:
-            return ActivityCreateCommand.prepare(remainingArgs);
-        case ActivityDeleteCommand.COMMAND_TEXT:
-            return ActivityDeleteCommand.prepare(remainingArgs);
-        case ActivityListCommand.COMMAND_TEXT:
-            return ActivityListCommand.prepare(remainingArgs);
-        case ActivityViewCommand.COMMAND_TEXT:
-            return ActivityViewCommand.prepare(remainingArgs);
-        case GroupCreateCommand.COMMAND_TEXT:
-            return GroupCreateCommand.prepare(remainingArgs);
-        case GroupDeleteCommand.COMMAND_TEXT:
-            return GroupDeleteCommand.prepare(remainingArgs);
-        case GroupListCommand.COMMAND_TEXT:
-            return new GroupListCommand();
-        case GroupViewCommand.COMMAND_TEXT:
-            return GroupViewCommand.prepare(remainingArgs);
-        case HelpCommand.COMMAND_TEXT:
-            return new HelpCommand();
-        case ExitCommand.COMMAND_TEXT:
-            return new ExitCommand();
-        default:
-            return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
+        
+        try {
+            switch (commandType.toLowerCase()) {
+            case SessionCreateCommand.COMMAND_TEXT:
+                return SessionCreateCommand.prepare(remainingArgs);
+            case SessionDeleteCommand.COMMAND_TEXT:
+                return SessionDeleteCommand.prepare(remainingArgs);
+            case SessionSummaryCommandParser.COMMAND_TEXT:
+                return new SessionSummaryCommandParser().getCommand(remainingArgs);
+            case SessionListCommand.COMMAND_TEXT:
+                return new SessionListCommand();
+            case ActivityCreateCommand.COMMAND_TEXT:
+                return ActivityCreateCommand.prepare(remainingArgs);
+            case ActivityDeleteCommand.COMMAND_TEXT:
+                return ActivityDeleteCommand.prepare(remainingArgs);
+            case ActivityListCommand.COMMAND_TEXT:
+                return ActivityListCommand.prepare(remainingArgs);
+            case ActivityViewCommand.COMMAND_TEXT:
+                return ActivityViewCommand.prepare(remainingArgs);
+            case GroupCreateCommand.COMMAND_TEXT:
+                return GroupCreateCommand.prepare(remainingArgs);
+            case GroupDeleteCommand.COMMAND_TEXT:
+                return GroupDeleteCommand.prepare(remainingArgs);
+            case GroupListCommand.COMMAND_TEXT:
+                return new GroupListCommand();
+            case GroupViewCommand.COMMAND_TEXT:
+                return GroupViewCommand.prepare(remainingArgs);
+            case HelpCommandParser.COMMAND_TEXT:
+                return new HelpCommandParser().getCommand(remainingArgs);
+            case ExitCommand.COMMAND_TEXT:
+                return new ExitCommand();
+            default:
+                return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
+            }
+        } catch (InvalidFormatException exception) {
+            return new InvalidCommand(exception.getMessage());
         }
     }
 }

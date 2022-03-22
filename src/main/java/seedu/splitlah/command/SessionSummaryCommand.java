@@ -22,14 +22,6 @@ import java.util.logging.Level;
  * @author Warren
  */
 public class SessionSummaryCommand extends Command {
-    
-    public static final String COMMAND_TEXT = "session /summary";
-
-    public static final String COMMAND_FORMAT = "Syntax: session /summary /sid [SESSION_ID]";
-
-    public static final String[] COMMAND_DELIMITERS = {
-        ParserUtils.SESSION_ID_DELIMITER
-    };
 
     private int sessionId;
 
@@ -209,25 +201,6 @@ public class SessionSummaryCommand extends Command {
     }
 
     /**
-     * Prepares user arguments for the creation of a SessionSummaryCommand object.
-     * 
-     * @param commandArgs A String object that represents the user's input arguments.
-     * @return A SessionSummaryCommand object if a valid integer representing a session's unique identifier is found
-     *         in the input arguments,
-     *         an InvalidCommand object otherwise.
-     */
-    public static Command prepare(String commandArgs) {
-        assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
-        try {
-            int sessionId = Parser.parseSessionId(commandArgs);
-            return new SessionSummaryCommand(sessionId);
-        } catch (InvalidFormatException exception) {
-            String invalidCommandMessage = exception.getMessage() + "\n" + COMMAND_FORMAT;
-            return new InvalidCommand(invalidCommandMessage);
-        }
-    }
-
-    /**
      * Runs the command with the session identifier as provided by the user input and prints a
      * summary of expenditure for the session specified by the session identifier.
      *
@@ -242,7 +215,7 @@ public class SessionSummaryCommand extends Command {
             session = profile.getSession(sessionId);
         } catch (InvalidDataException exception) {
             ui.printlnMessage(exception.getMessage());
-            manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONSUMMARY_SESSION_ID_NOT_FOUND + sessionId);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONSUMMARY_SESSION_ID_NOT_FOUND + sessionId);
             return;
         }
 
@@ -250,6 +223,6 @@ public class SessionSummaryCommand extends Command {
         ArrayList<PersonCostPair> personCostPairList = getPersonCostPairList(personList);
         String output = processAllTransactions(personCostPairList, session);
         ui.printlnMessageWithDivider(output);
-        manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONSUMMARY_SESSION_SUMMARY_PRINTED + sessionId);
+        Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONSUMMARY_SESSION_SUMMARY_PRINTED + sessionId);
     }
 }

@@ -5,11 +5,11 @@ import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.ExitCommand;
-import seedu.splitlah.command.HelpCommand;
 import seedu.splitlah.command.SessionCreateCommand;
 import seedu.splitlah.command.SessionDeleteCommand;
 import seedu.splitlah.command.SessionListCommand;
-import seedu.splitlah.command.SessionSummaryCommand;
+import seedu.splitlah.parser.commandparser.HelpCommandParser;
+import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 
 /**
  * Container of hardcoded messages.
@@ -54,9 +54,9 @@ public abstract class Message {
                     + "7.  View an existing activity's details\n"
                     + "        " + ActivityViewCommand.COMMAND_FORMAT + "\n"
                     + "8.  Show the summary of an existing session\n"
-                    + "        " + SessionSummaryCommand.COMMAND_FORMAT + "\n"
+                    + "        " + SessionSummaryCommandParser.COMMAND_FORMAT + "\n"
                     + "9.  Show this help menu\n"
-                    + "        " + HelpCommand.COMMAND_FORMAT + "\n"
+                    + "        " + HelpCommandParser.COMMAND_FORMAT + "\n"
                     + "10. Exit the program\n"
                     + "        " + ExitCommand.COMMAND_FORMAT;
     public static final String PROMPT_TEXTUI_REQUEST_CONFIRMATION =
