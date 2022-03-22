@@ -77,12 +77,12 @@ public class Equipment {
             return false;
         }
         Equipment equipment = (Equipment) o;
-        return Double.compare(equipment.cost, cost) == 0 &&
-                itemName.equals(equipment.itemName) &&
-                serialNumber.equals(equipment.serialNumber) &&
-                type == equipment.type &&
-                purchasedFrom.equals(equipment.purchasedFrom) &&
-                purchasedDate.equals(equipment.purchasedDate);
+        return Double.compare(equipment.cost, cost) == 0
+                && itemName.equals(equipment.itemName)
+                && serialNumber.equals(equipment.serialNumber)
+                && type == equipment.type
+                && purchasedFrom.equals(equipment.purchasedFrom)
+                && purchasedDate.equals(equipment.purchasedDate);
     }
 
     @Override

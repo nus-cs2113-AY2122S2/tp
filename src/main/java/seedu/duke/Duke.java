@@ -2,15 +2,18 @@ package seedu.duke;
 
 import seedu.command.Command;
 import seedu.command.CommandResult;
+import seedu.equipment.DuplicateSerialNumberException;
 import seedu.equipment.EquipmentManager;
 import seedu.parser.Parser;
 import seedu.ui.TextUi;
+import seedu.storage.Storage;
 
 import java.util.Scanner;
 
 public class Duke {
-    private EquipmentManager equipmentInventory = new EquipmentManager();
     private TextUi ui;
+    private static EquipmentManager equipmentInventory = new EquipmentManager();
+    private static Storage storage = new Storage();
 
     /**
      * Main entry-point for the java.duke.Duke application.
@@ -19,7 +22,9 @@ public class Duke {
         Duke duke = new Duke();
 
         duke.start();
+        storage.loadData(equipmentInventory);
         duke.runCommandLoop();
+        storage.saveData(equipmentInventory);
     }
 
     /**

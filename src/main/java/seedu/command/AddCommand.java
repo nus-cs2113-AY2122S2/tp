@@ -1,6 +1,6 @@
 package seedu.command;
 
-import seedu.equipment.DuplicateSerialNumber;
+import seedu.equipment.DuplicateSerialNumberException;
 import seedu.equipment.EquipmentType;
 
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ public class AddCommand extends Command {
     private final ArrayList<String> commandStrings;
     public static final String COMMAND_WORD = "add";
     public static final String COMMAND_DESCRIPTION = ": Adds a Equipment to the equipmentInventory. "
+            + System.lineSeparator()
             + "Parameters: n/ITEM_NAME s/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PURCHASED_DATE"
             + System.lineSeparator()
             + "Example: "
@@ -37,7 +38,7 @@ public class AddCommand extends Command {
     public CommandResult execute() {
         try {
             addEquipment(commandStrings);
-        } catch (DuplicateSerialNumber e) {
+        } catch (DuplicateSerialNumberException e) {
             return new CommandResult(String.format(DUPLICATE_ITEM_ERROR, commandStrings.get(1)));
         } catch (NullPointerException | NumberFormatException e) {
             return new CommandResult(INCORRECT_COST_FORMAT);
@@ -53,7 +54,7 @@ public class AddCommand extends Command {
      *
      * @param userInput ArrayList of String which contains the individual attributes of the equipment to be added
      */
-    public void addEquipment(ArrayList<String> userInput) throws DuplicateSerialNumber {
+    public void addEquipment(ArrayList<String> userInput) throws DuplicateSerialNumberException {
         String equipmentName = userInput.get(0);
         String serialNumber = userInput.get(1);
         EquipmentType type = EquipmentType.valueOf(userInput.get(2));
