@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Group {
 
-    private ArrayList<Person> personList;
+    private PersonList personList;
     private String groupName;
     private int groupId;
 
@@ -26,7 +26,7 @@ public class Group {
      * @param groupId    An integer that uniquely identifies a group.
      * @param personList An ArrayList object containing Person objects
      */
-    public Group(String groupName, int groupId, ArrayList<Person> personList) {
+    public Group(String groupName, int groupId, PersonList personList) {
         this.groupName = groupName;
         this.groupId = groupId;
         this.personList = personList;
@@ -56,7 +56,7 @@ public class Group {
      * @return An ArrayList object containing Person objects in the group.
      */
     public ArrayList<Person> getPersonList() {
-        return personList;
+        return personList.getPersonList();
     }
 
     /**
@@ -75,7 +75,7 @@ public class Group {
      * @param person A Person object.
      */
     public void addPerson(Person person) {
-        personList.add(person);
+        personList.addPerson(person);
     }
 
     /**
@@ -90,7 +90,7 @@ public class Group {
             return false;
         }
 
-        for (Person personInGroup : personList) {
+        for (Person personInGroup : personList.getPersonList()) {
             if (personInGroup.getName().equalsIgnoreCase(person.getName())) {
                 return true;
             }
@@ -109,7 +109,7 @@ public class Group {
         if (personList.isEmpty()) {
             throw new InvalidDataException(Message.ERROR_GROUP_EMPTY_PERSON_LIST);
         }
-        for (Person personInGroup : personList) {
+        for (Person personInGroup : personList.getPersonList()) {
             if (personInGroup.getName().equalsIgnoreCase(personName)) {
                 return personInGroup;
             }
@@ -125,7 +125,7 @@ public class Group {
      */
     public void removePerson(String personName) throws InvalidDataException {
         Person personToBeRemoved = getPersonFromGroup(personName);
-        personList.remove(personToBeRemoved);
+        personList.removePerson(personToBeRemoved);
     }
 
     /**
@@ -134,7 +134,7 @@ public class Group {
      * @return An integer object that represents that total number of participants in the group.
      */
     public int getPersonCount() {
-        return personList.size();
+        return personList.getSize();
     }
 
     /**
@@ -160,8 +160,8 @@ public class Group {
 
         StringBuilder outputString = new StringBuilder("Group Id ");
         outputString.append("#").append(groupId).append("  --").append("\n").append("Participants: ");
-        for (int i = 0; i < personList.size(); i++) {
-            String personName = personList.get(i).getName();
+        for (int i = 0; i < personList.getSize(); i++) {
+            String personName = personList.getPerson(i).getName();
             outputString.append("\n ").append(i + OFFSET).append(". ").append(personName);
         }
         return outputString.toString();
