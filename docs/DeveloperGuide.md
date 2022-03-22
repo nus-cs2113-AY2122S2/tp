@@ -186,6 +186,17 @@ a series of print to display the expenditures in this category.
 The following sequence diagram shows how the `listcat` operation works:
 > insert sequence diagram
 
+#### Design considerations:
+
+**Aspect: How to categorise expenses to be listed:**
+
+* **Alternative 1 (current choice):** Adding a category attribute to expenses.
+  * Pros: Easy to implement and less memory usage.
+  * Cons: May have performance issues as it needs to iterate through every person's expenditure.
+  
+* **Altertive 2:** Maintain an array list for each category and store a copy of expenses.
+  * Pros: Fast to print expenses in a category, no unnecessary look-ups.
+  * Cons: Poor memory management, needs to store twice as many expenditures. 
 
 ### Data Archiving
 
