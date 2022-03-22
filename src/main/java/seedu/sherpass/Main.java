@@ -76,7 +76,6 @@ public class Main {
     public void run() {
         initialiseLogger();
         ui.showWelcomeMessage();
-        // Timetable.showTodaySchedule(taskList, ui);
         // Timetable.showScheduleByDay(LocalDate.now(), taskList, ui);
 
         boolean isExit = false;

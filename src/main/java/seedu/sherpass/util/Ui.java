@@ -89,11 +89,11 @@ public class Ui {
      * @param number The number of times to print that character.
      * @return Returns a concatenated string of repeated characters.
      */
-    public String getRepeatedCharacters(String character, int number) {
-        String output = "";
+    public String getRepeatedCharacters(String character, long number) {
+        StringBuilder output = new StringBuilder();
         for (int i = 0; i < number; i++) {
-            output += character;
+            output.append(character);
         }
-        return output;
+        return output.toString();
     }
 }
