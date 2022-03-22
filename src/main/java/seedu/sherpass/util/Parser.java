@@ -382,7 +382,8 @@ public class Parser {
      * @param rawUserInput Raw user input.
      * @param ui           UI.
      */
-    public static void parseStudyMode(Ui ui, Storage storage, String rawUserInput,TimerLogic timerLogic) throws IOException {
+    public static void parseStudyMode(Ui ui, Storage storage, String rawUserInput
+            ,TimerLogic timerLogic) throws IOException {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
