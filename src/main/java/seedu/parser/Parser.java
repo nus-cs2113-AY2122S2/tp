@@ -142,6 +142,7 @@ public class Parser {
 
     /**
      * Prepare arguments for AddCommand by splitting up the arguments into different parts.
+     *
      * <p>* Index:
      * 0. <code> equipmentName </code>: String of equipment name
      * 1. <code> serialNumber </code>: String of unique serial number
