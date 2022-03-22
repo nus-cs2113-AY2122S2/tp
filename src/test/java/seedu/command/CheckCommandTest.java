@@ -9,7 +9,8 @@ import seedu.equipment.EquipmentType;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class CheckCommandTest {
     CheckCommand checkCommand;

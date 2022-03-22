@@ -12,12 +12,21 @@ import seedu.parser.Parser;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 
 class AddCommandTest {
     AddCommand addCommand;
     ArrayList<String> userInput = new ArrayList<>(
-            Arrays.asList("n/Speaker B", "s/S1404115ASF", "t/SPEAKER", "c/1000", "pf/Loud Technologies", "pd/2022-02-23")
+            Arrays.asList(
+                    "n/Speaker B",
+                    "s/S1404115ASF",
+                    "t/SPEAKER",
+                    "c/1000",
+                    "pf/Loud Technologies",
+                    "pd/2022-02-23")
     );
 
     @Test
@@ -32,7 +41,8 @@ class AddCommandTest {
                 "Loud Technologies",
                 "2022-02-23");
 
-        CommandResult expectedResult = new CommandResult("There is already an item with this serial number: S1404115ASF");
+        CommandResult expectedResult =
+                new CommandResult("There is already an item with this serial number: S1404115ASF");
         CommandResult actualResult = addCommand.execute();
         assertEquals(expectedResult, actualResult);
     }
@@ -40,7 +50,12 @@ class AddCommandTest {
     @Test
     void execute_incorrectCostFormat_exceptionThrown() {
         addCommand = new AddCommand(new ArrayList<>(
-                Arrays.asList("n/Speaker B", "s/S1404115ASF", "t/SPEAKER", "c/$1000", "pf/Loud Technologies", "pd/2022-02-23")
+                Arrays.asList("n/Speaker B",
+                        "s/S1404115ASF",
+                        "t/SPEAKER",
+                        "c/$1000",
+                        "pf/Loud Technologies",
+                        "pd/2022-02-23")
         ));
 
         CommandResult expectedResult = new CommandResult("Please enter numbers only for cost and omit symbols");
@@ -51,12 +66,18 @@ class AddCommandTest {
     @Test
     void execute_incorrectEnumType_exceptionThrown() {
         addCommand = new AddCommand(new ArrayList<>(
-                Arrays.asList("n/Speaker B", "s/S1404115ASF", "t/SPEAKERS", "c/1000", "pf/Loud Technologies", "pd/2022-02-23")
+                Arrays.asList("n/Speaker B",
+                        "s/S1404115ASF",
+                        "t/SPEAKERS",
+                        "c/1000",
+                        "pf/Loud Technologies",
+                        "pd/2022-02-23")
         ));
         addCommand.setEquipmentManager(new EquipmentManager());
         EquipmentManager equipmentManager = addCommand.equipmentManager;
 
-        CommandResult expectedResult = new CommandResult("Wrong type of equipment. The allowed types are: MICROPHONE, SPEAKER, STAND, CABLE");
+        CommandResult expectedResult = new CommandResult("Wrong type of equipment. "
+                + "The allowed types are: MICROPHONE, SPEAKER, STAND, CABLE");
         CommandResult actualResult = addCommand.execute();
         assertEquals(expectedResult, actualResult);
     }

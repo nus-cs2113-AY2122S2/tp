@@ -11,7 +11,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
 
@@ -202,7 +204,8 @@ class ParserTest {
         ArrayList<String> expectedResult = new ArrayList<>(Arrays.asList(
                 "x/Speaker B", "t/Speaker", "c/1000", "pf/Loud Technologies", "pd/2022-02-23"));
         try {
-            ArrayList<String> actualResult = parser.extractArguments("x/Speaker Bt/Speakerc/1000pf/Loud Technologiespd/2022-02-23");
+            ArrayList<String> actualResult = parser.extractArguments(
+                    "x/Speaker Bt/Speakerc/1000pf/Loud Technologiespd/2022-02-23");
             assertEquals(expectedResult, actualResult);
             fail();
         } catch (IncompleteCommandException e) {
@@ -212,7 +215,8 @@ class ParserTest {
 
     @Test
     void extractArguments_wrongArgTypesUsed_exceptionThrown() throws IncompleteCommandException {
-        Throwable exception = assertThrows(IncompleteCommandException.class, () -> parser.extractArguments("x/Speaker B a/Speaker b/1000 d/Loud Technologies e/2022-02-23"));
+        Throwable exception = assertThrows(IncompleteCommandException.class, () -> parser.extractArguments(
+                "x/Speaker B a/Speaker b/1000 d/Loud Technologies e/2022-02-23"));
         assertEquals("No parameters found!", exception.getMessage());
     }
 

@@ -1,6 +1,7 @@
 package seedu.command;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Abstract class acting as parent class to AddCommand and UpdateCommand which have use for the
@@ -19,6 +20,7 @@ public class ModificationCommand extends Command {
 
     public ModificationCommand(ArrayList<String> commandStrings) {
         this.commandStrings = commandStrings;
+        prepareModification();
     }
 
     public CommandResult execute() {
@@ -86,6 +88,27 @@ public class ModificationCommand extends Command {
                 System.out.println("`" + argValue + "` not accepted for type " + argType + ": Unrecognised Tag");
             }
         }
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ModificationCommand that = (ModificationCommand) o;
+        return serialNumber.equals(that.serialNumber)
+                && Objects.equals(equipmentName, that.equipmentName)
+                && Objects.equals(purchasedDate, that.purchasedDate)
+                && Objects.equals(type, that.type)
+                && Objects.equals(purchasedFrom, that.purchasedFrom)
+                && Objects.equals(cost, that.cost);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(serialNumber, equipmentName, purchasedDate, type, purchasedFrom, cost);
     }
 }
