@@ -157,11 +157,22 @@ tracked - parents and myGen.
 
 <image src="/images/ListCategorisedExpense0.png"/>
 
-Step 2. The user executes `listc` command to list all expenses in category `1`. The `listCat`
+Step 2. The user executes `listc /c 1` command to list all expenses in category `1`. The `listcat`
 command will be parsed and calls `Family#listExpenseOfCategory(1)` which would instantiate a
 temporary array list for storing the results of the upcoming search.
 
 <image src="/images/ListCategorisedExpense1.png"/>
+
+Step 3. After the temporary array list has been created, the generations being tracked will be
+iterated for `Person` objects. The `expenditureList` for a person would be retrieved during that
+person's iteration and `MoneyList(temp)#getExpenseOfCategory(1)` will be called as `expenditureList`
+extends `MoneyList(temp)`. This method then iterates through the list and calls
+`Money(temp)#getCategory()` on each expenditure, collecting and returning the expenditure if its
+category matches the given index. The returned expenditures are then appended to the temporary
+array list.
+
+<image src="/images/ListCategorisedExpense2.png"/>
+
 
 ### Data Archiving
 
