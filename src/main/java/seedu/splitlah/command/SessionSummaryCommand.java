@@ -37,7 +37,7 @@ public class SessionSummaryCommand extends Command {
     private static final double SMALL_DIFFERENCE_LIMIT = 0.0001;
 
     /**
-     * Default constructor, sets sessionId as specified by the provided value.
+     * Initializes a SessionSummaryCommand object.
      *
      * @param sessionId An integer that uniquely identifies a session.
      */

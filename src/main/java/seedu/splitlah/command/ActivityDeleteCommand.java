@@ -32,10 +32,10 @@ public class ActivityDeleteCommand extends Command {
     private int activityId;
 
     /**
-     * Constructs an ActivityDeleteCommand object.
+     * Initializes an ActivityDeleteCommand object.
      *
-     * @param sessionId  The id of the session.
-     * @param activityId The id of the activity.
+     * @param sessionId  An integer that uniquely identifies a session.
+     * @param activityId An integer that uniquely identifies an activity.
      */
     public ActivityDeleteCommand(int sessionId, int activityId) {
         assert sessionId > 0 : Message.ASSERT_ACTIVITYDELETE_SESSION_ID_NOT_INITIALIZED;
@@ -47,7 +47,7 @@ public class ActivityDeleteCommand extends Command {
     /**
      * Prepares user arguments for the creation of an ActivityDeleteCommand object.
      *
-     * @param commandArgs The user's arguments.
+     * @param commandArgs A String object representing the user's arguments.
      * @return An ActivityDeleteCommand object if necessary parameters were found in user arguments,
      *         an InvalidCommand object otherwise.
      */

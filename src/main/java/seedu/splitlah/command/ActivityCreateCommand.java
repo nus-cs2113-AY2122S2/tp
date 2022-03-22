@@ -18,6 +18,8 @@ import java.util.logging.Level;
 
 /**
  * Represents a command that creates an Activity object from user input and stores it in the Session object.
+ *
+ * @author Ivan
  */
 public class ActivityCreateCommand extends Command {
 
@@ -90,7 +92,7 @@ public class ActivityCreateCommand extends Command {
     /**
      * Prepares user arguments for activity create command.
      *
-     * @param commandArgs The user's arguments.
+     * @param commandArgs A String object representing the user's arguments.
      * @return An ActivityCreateCommand object if necessary parameters were found in user arguments,
      *         an InvalidCommand object otherwise.
      */
@@ -194,9 +196,10 @@ public class ActivityCreateCommand extends Command {
     /**
      * Adds all relevant activity costs to each involved person's list of activity costs.
      *
-     * @param involvedPersonList The list of persons involved in the activity.
-     * @param personPaid         The person who paid for the activity.
-     * @param activityId         The id of the activity.
+     * @param involvedPersonList An ArrayList object containing Person objects
+     *                           each representing a person involved in the activity.
+     * @param personPaid         A Person object representing the person who paid for the activity.
+     * @param activityId         An integer that uniquely identifies an activity.
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      */
     private void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, int activityId)
@@ -215,10 +218,11 @@ public class ActivityCreateCommand extends Command {
     /**
      * Checks if the Person object currently referred to represents the person who paid for the activity.
      *
-     * @param personPaid            The Person object representing the person who paid for the activity.
+     * @param personPaid            A Person object representing the person who paid for the activity.
      * @param hasAddedForPersonPaid A boolean representing whether the activity cost has been added for the person who
      *                              paid for the activity.
-     * @param person                The Person object currently referred to among the persons involved.
+     * @param person                A Person object representing the person currently referred to
+     *                              among the persons involved.
      * @return true if the Person object currently referred to represents the person who paid for the activity,
      *         hasAddedForPersonPaid otherwise.
      */
@@ -235,10 +239,11 @@ public class ActivityCreateCommand extends Command {
      * If it is, the cost paid is set to the total cost of the activity.
      * Else, the cost paid is set to 0.
      *
-     * @param personPaid      The person who paid for the activity.
-     * @param activityId      The id of the activity.
-     * @param indexOfCostOwed The index of the cost owed in the list of costs.
-     * @param person          The current person whose costs are added to the list of activity costs.
+     * @param personPaid      A Person object representing the person who paid for the activity.
+     * @param activityId      An integer that uniquely identifies an activity.
+     * @param indexOfCostOwed An integer representing the index of the cost owed in the list of costs.
+     * @param person          A person object representing the person whose costs are added to the
+     *                        list of activity costs.
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      */
     private void addCostOwedAndCostPaid(Person personPaid, int activityId, int indexOfCostOwed, Person person)
@@ -271,6 +276,7 @@ public class ActivityCreateCommand extends Command {
     /**
      * Updates cost list by including the extra charges.
      * Extra charges may include gst and service charge.
+     * Assumption: gst and service charge are non-negative values.
      */
     private void updateCostListWithExtraCharges() {
         double extraCharges = getExtraCharges();
@@ -280,8 +286,7 @@ public class ActivityCreateCommand extends Command {
     }
 
     /**
-     * Returns a double representing the total cost of the activity
-     * by summing up the costs owed by each person involved in the activity.
+     * Updates the total cost of the activity by summing up the costs in the list of costs.
      */
     private void calculateTotalCost() {
         for (double cost : costList) {
@@ -290,9 +295,9 @@ public class ActivityCreateCommand extends Command {
     }
 
     /**
-     * Returns a double representing the total cost by including the extra charges.
+     * Updates total cost by including the extra charges.
      * Extra charges may include gst and service charge.
-     * Assumption: gst and service charge are non-negative integers.
+     * Assumption: gst and service charge are non-negative values.
      */
     private void updateCostWithExtraCharges() {
         double extraCharges = getExtraCharges();
@@ -315,7 +320,7 @@ public class ActivityCreateCommand extends Command {
      * among the persons involved in the activity.
      * Divides the total cost by the number of people involved in the activity.
      *
-     * @param numberOfPeopleInvolved The number of people involved in the activity.
+     * @param numberOfPeopleInvolved An integer representing the number of people involved in the activity.
      * @return An array of doubles representing the costs of each person involved in the activity.
      */
     private double[] distributeCostEvenly(int numberOfPeopleInvolved) {

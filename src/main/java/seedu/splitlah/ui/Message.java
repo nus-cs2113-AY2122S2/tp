@@ -136,6 +136,10 @@ public abstract class Message {
     public static final String ERROR_PERSON_ACTIVITY_NOT_FOUND =
             "This person is not participating in the activity with Id: ";
 
+    // PersonList
+    public static final String ASSERT_PERSONLIST_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
+            "Name duplicates exist but not detected.";
+
     // Name
     public static final String ERROR_NAME_INVALID_NAME =
             "Invalid name. Names must contain only alphabetical characters.";
@@ -187,8 +191,6 @@ public abstract class Message {
             "Session data is empty but was not handled in prepare function.";
     public static final String ASSERT_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS =
             "The person list or group identifier delimiters are missing but was not handled in prepare function.";
-    public static final String ASSERT_SESSIONCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
-            "Name duplicates exist but not detected.";
     public static final String LOGGER_SESSIONCREATE_SESSION_ADDED =
             "A session was added into the list of sessions with Id: ";
 
@@ -273,4 +275,26 @@ public abstract class Message {
              "There is another group with the same Id.";
     public static final String ASSERT_GROUPCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
              "Name duplicates exists but not detected.";
+
+    // Group View Command
+    public static final String ASSERT_GROUPVIEW_GROUP_ID_NOT_INITIALIZED =
+            "Group Id is not initialized.";
+    public static final String ASSERT_GROUPVIEW_INCORRECT_GROUP =
+            "The group returned is incorrect.";
+    public static final String ASSERT_GROUPVIEW_GROUP_ID_LESS_THAN_ONE =
+            "Group unique identifier is less than one";
+    public static final String LOGGER_GROUPVIEW_GROUP_VIEWED =
+            "A Group object was successfully viewed from the list of groups with Id: ";
+    public static final String LOGGER_GROUPVIEW_GROUP_NOT_VIEWED =
+            "A Group object was unable to be viewed from the list of groups with Id: ";
+
+    // Group List Command
+    public static final String ASSERT_GROUPLIST_GROUP_SIZE_NOT_ZERO =
+            "The list of groups to be printed is not empty.";
+    public static final String ASSERT_GROUPLIST_GROUP_SIZE_LESS_THAN_ONE =
+            "The size of the list of groups to be printed is less than one.";
+    public static final String LOGGER_GROUPLIST_GROUPS_NOT_LISTED =
+            "There are no groups to be listed.";
+    public static final String LOGGER_GROUPLIST_GROUPS_LISTED =
+            "All the groups have been listed.";
 }
