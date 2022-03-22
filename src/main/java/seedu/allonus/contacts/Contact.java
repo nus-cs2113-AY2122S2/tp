@@ -29,6 +29,10 @@ public class Contact {
         return description;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         String contactPrinted = "Name: " + getName()
