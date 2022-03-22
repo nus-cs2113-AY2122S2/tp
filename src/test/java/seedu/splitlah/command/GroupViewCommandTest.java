@@ -13,7 +13,7 @@ class GroupViewCommandTest {
 
     @BeforeEach
     void setUp() {
-        String groupArgs = "group /view /gid 1";
+        String groupArgs = "group /create /n OP2 /pl Alice Bob Charlie";
         Command createGroup = Parser.getCommand(groupArgs);
         createGroup.run(manager);
     }
