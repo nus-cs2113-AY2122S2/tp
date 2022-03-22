@@ -3,6 +3,7 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
+import seedu.splitlah.data.PersonList;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
@@ -47,39 +48,6 @@ public class GroupCreateCommand extends Command {
     }
 
     /**
-     * Converts a String object array of names to a list of Person objects.
-     *
-     * @return An ArrayList of Person objects.
-     */
-    private ArrayList<Person> convertToListOfPerson() {
-        ArrayList<Person> personList = new ArrayList<>();
-        for (String name : personNames) {
-            Person newPerson = new Person(name);
-            personList.add(newPerson);
-        }
-        return personList;
-    }
-
-    /**
-     * Checks if String object array of names has duplicated names.
-     *
-     * @return true if it contains duplicates,
-     *         false otherwise.
-     */
-    private boolean hasNameDuplicates() {
-        Set<String> nameSet = new HashSet<>();
-        for (String name : personNames) {
-            String nameToBeAdded = name.toLowerCase();
-            if (!nameSet.add(nameToBeAdded)) {
-                return true;
-            }
-        }
-        assert nameSet.size() == personNames.length :
-            Message.ASSERT_GROUPCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED;
-        return false;
-    }
-
-    /**
      * Prepares user arguments for the creation of a GroupCreateCommand object.
      *
      * @param commandArgs A String object that represents the user's arguments.
@@ -107,13 +75,14 @@ public class GroupCreateCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        boolean hasDuplicates = hasNameDuplicates();
+        boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
         if (hasDuplicates) {
             manager.getUi().printlnMessage(Message.ERROR_GROUPCREATE_DUPLICATE_NAMES);
             return;
         }
 
-        ArrayList<Person> personList = convertToListOfPerson();
+        PersonList personList = new PersonList();
+        personList.convertToPersonList(personNames);
 
         boolean isGroupExists = manager.getProfile().hasGroupName(groupName);
 
