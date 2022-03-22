@@ -94,6 +94,7 @@ public class GroupCreateCommand extends Command {
 
         Group newGroup = new Group(groupName, newGroupId, personList);
         manager.getProfile().addGroup(newGroup);
+        manager.saveProfile();
         manager.getUi().printlnMessageWithDivider(SUCCESS_MESSAGE + newGroup);
     }
 }

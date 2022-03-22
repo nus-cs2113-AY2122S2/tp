@@ -356,6 +356,7 @@ public class ActivityCreateCommand extends Command {
             addAllActivityCost(involvedPersonList, personPaid, activityId);
             Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(activity);
+            manager.saveProfile();
             manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + activity);
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_ACTIVITY_ADDED + activityId);
         } catch (InvalidDataException e) {
