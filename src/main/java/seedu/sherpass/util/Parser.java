@@ -83,7 +83,7 @@ public class Parser {
         }
     }
 
-    private static Command prepareMarkOrUnmark(String[] parsedInput, String commandWord, TaskList taskList) {
+    public static Command prepareMarkOrUnmark(String[] parsedInput, String commandWord, TaskList taskList) {
         try {
             int markIndex = Integer.parseInt(parsedInput[MARK_INDEX]) - 1;
             if (commandWord.equals(MarkCommand.COMMAND_WORD)) {
@@ -386,12 +386,7 @@ public class Parser {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
-            if (!timerLogic.isTimerRunning()) {
-                timerLogic.callResetTimer();
-                timerLogic.callStartTimer(parsedInput);
-            } else {
-                ui.showToUser("Your timer is already running!");
-            }
+            timerLogic.callStartTimer(parsedInput);
             break;
         case "pause":
             timerLogic.callPauseTimer();
@@ -403,16 +398,7 @@ public class Parser {
             timerLogic.callStopTimer();
             break;
         case "mark":
-            if (!timerLogic.isTimerRunning()) {
-                Command c = Parser.prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD, taskList);
-                if (c != null) {
-                    c.execute(taskList, ui, storage);
-                    ui.showToUser("Would you like to start another timer, mark another task as done, "
-                                    + "or leave the study session?");
-                }
-            } else {
-                ui.showToUser("You can't mark a task as done while timer is running!");
-            }
+            timerLogic.markTask(storage, parsedInput);
             break;
         default:
             ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);

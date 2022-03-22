@@ -1,5 +1,7 @@
 package seedu.sherpass.util;
 
+import seedu.sherpass.command.Command;
+import seedu.sherpass.command.MarkCommand;
 import seedu.sherpass.exception.InvalidTimeException;
 import seedu.sherpass.task.TaskList;
 
@@ -26,17 +28,31 @@ public class TimerLogic {
         return timer.isTimerRunning();
     }
 
+    public void markTask(Storage storage, String[] parsedInput) {
+        if (!isTimerRunning()) {
+            Command c = Parser.prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD, taskList);
+            if (c != null) {
+                c.execute(taskList, ui, storage);
+                ui.showToUser("Would you like to start another timer, mark another task as done, "
+                        + "or leave the study session?");
+            }
+        } else {
+            ui.showToUser("You can't mark a task as done while timer is running!");
+        }
+    }
+
     /**
      * Creates a thread using timer.start() to start the timer with the user's specified duration.
      *
      * @param parsedInput Parsed input of the user
      */
     public void callStartTimer(String[] parsedInput) {
-        if (timer.getHasTimeLeft()) {
+        if (isTimerRunning()) {
             ui.showToUser("You already have a timer running!");
             return;
         }
         try {
+            callResetTimer();
             int duration = Parser.parseTimerInput(parsedInput);
             assert (duration > 0);
             timer.setDuration(duration);
