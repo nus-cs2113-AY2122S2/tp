@@ -59,18 +59,18 @@ Some getters/setters have been
 omitted from this class diagram.
 end note
 
-ModuleList -> "1..*" Module
+ModuleList --> "1..*" Module
 
-Module --> "1" TaskList
-TaskList -l> "*" Task
-Task --l> "1" TaskParameters
+Module -r> "1" TaskList
+TaskList -r> "*" Task
+Task --u> "1" TaskParameters
 
 class Main
 hide Main circle
 hide Main attributes
 hide Main methods
 
-Main ..> ModuleList
+Main --> "1" ModuleList
 
 class Command
 hide Command circle
