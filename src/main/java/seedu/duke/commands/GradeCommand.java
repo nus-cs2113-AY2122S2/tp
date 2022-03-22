@@ -6,6 +6,7 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
+import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 import seedu.duke.util.Grades;
 
@@ -33,7 +34,7 @@ public class GradeCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ModuleList moduleList) throws ModHappyException {
+    public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
         addGradeToModule(moduleList);
         return new CommandResult(result);
     }
