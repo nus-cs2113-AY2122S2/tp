@@ -39,11 +39,18 @@ public class Parser {
     public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("s/(?<itemName>.+)");
     // ARGUMENT_FORMAT extracts first n-1 tags
     public static final Pattern ARGUMENT_FORMAT = Pattern.compile(
-            "((?:s|n|t|c|pf|pd)\\/[\\w\\s\\-]+?)\\s+(?=s|n|t|c|pf|pd)"
+            "((?:s|n|t|c|pf|pd)" // argument tag
+                    + "\\/" // argument delimiter
+                    + "[\\w\\s\\-]+?)" // actual argument value
+                    + "\\s+" // argument space before next delimiter
+                    + "(?=s|n|t|c|pf|pd)" // next delimiter
     );
     // ARGUMENT_TRAILING_FORMAT extracts last tag
     public static final Pattern ARGUMENT_TRAILING_FORMAT = Pattern.compile(
-            "(?<!\\w)(?:s|n|t|c|pf|pd)\\/([\\w\\s\\-]+)"
+            "(?<!\\w)" // require a previous pattern
+                    + "(?:s|n|t|c|pf|pd)" // argument tag
+                    + "\\/" // argument delimiter
+                    + "([\\w\\s\\-]+)" // last argument value
     );
     public static final String MESSAGE_INCOMPLETE_COMMAND_MISSING_DELIMITER =
             "Please split your command into arguments with each argument seperated by spaces!";
