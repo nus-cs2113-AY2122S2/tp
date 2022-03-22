@@ -45,6 +45,8 @@
 # Implementation
 
 ## Search
+![SearchUML]()
+<br>
 When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
 `WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
 class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
