@@ -67,6 +67,7 @@ public class SessionDeleteCommand extends Command {
         try {
             session = manager.getProfile().getSession(sessionId);
             manager.getProfile().removeSession(session);
+            manager.saveProfile();
             manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
             manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
         } catch (InvalidDataException dataException) {

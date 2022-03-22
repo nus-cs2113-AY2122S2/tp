@@ -173,6 +173,20 @@ public abstract class Message {
     public static final String ERROR_PROFILE_GROUP_NOT_IN_LIST =
             "The group that you have specified was not found.";
 
+    // Storage
+    public static final String ERROR_STORAGE_FILE_NOT_FOUND =
+            "The data file was not found or has been corrupted. No saves were loaded into SplitLah.";
+    public static final String ERROR_STORAGE_PATH_LOCATION_CREATION_FAILED =
+            "A new data file could not be created. No data would be saved while using SplitLah.";
+    public static final String ERROR_STORAGE_DATA_NOT_SAVED =
+            "An error occurred while saving. No data was saved.";
+    public static final String ERROR_STORAGE_CLASS_EXCEPTION_ISSUE =
+            "It seems that something went wrong internally. No saves were loaded into SplitLah.";
+    public static final String LOGGER_STORAGE_CLASS_NOT_FOUND =
+            "An internal error of ClassNotFoundException has occurred.";
+    public static final String LOGGER_STORAGE_FILE_ERROR =
+            "There was an error in retrieving data from save file.";
+
     // Activity
     public static final String ERROR_ACTIVITY_INACCURATE_INVOLVED_LIST =
             "The list of involved persons list is inaccurate "

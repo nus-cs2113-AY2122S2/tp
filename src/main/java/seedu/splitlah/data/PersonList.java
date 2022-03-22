@@ -2,6 +2,7 @@ package seedu.splitlah.data;
 
 import seedu.splitlah.ui.Message;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +12,7 @@ import java.util.Set;
  *
  * @author Roy
  */
-public class PersonList {
+public class PersonList implements Serializable {
     private ArrayList<Person> personList;
 
     public PersonList() {

@@ -3,6 +3,7 @@ package seedu.splitlah.data;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  * 
  * @author Roy
  */
-public class Profile {
+public class Profile implements Serializable {
     
     private ArrayList<Session> sessionList;
     private ArrayList<Group> groupList;
