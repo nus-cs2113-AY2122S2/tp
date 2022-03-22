@@ -4,6 +4,7 @@ import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author Warren
  */
-public class Session {
+public class Session implements Serializable {
 
     private String sessionName;
     private int sessionId;

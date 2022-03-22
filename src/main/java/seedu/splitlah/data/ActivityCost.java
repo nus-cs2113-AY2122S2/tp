@@ -2,16 +2,15 @@ package seedu.splitlah.data;
 
 import seedu.splitlah.ui.Message;
 
-import java.util.Objects;
+import java.io.Serializable;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Represents the costs borne by a person for an activity.
  *
  * @author Saurav
  */
-public class ActivityCost {
+public class ActivityCost implements Serializable {
 
     private int activityId;
     private double costPaid;

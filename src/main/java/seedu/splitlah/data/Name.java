@@ -3,12 +3,14 @@ package seedu.splitlah.data;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 
+import java.io.Serializable;
+
 /**
  * Represents a name. Names must contain only alphabetical characters.
  *
  * @author Saurav
  */
-public class Name {
+public class Name implements Serializable {
 
     private final String name;
 
