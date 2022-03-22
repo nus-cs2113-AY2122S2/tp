@@ -38,6 +38,7 @@ public class Parser {
     );
     public static final Pattern VIEW_COMMAND_FORMAT = Pattern.compile("[Nn]/(?<itemName>.+)");
     public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("[Ss]/(?<serialNumber>.+)");
+    public static final Pattern TYPE_ENUM_FORMAT = Pattern.compile("[Tt]/(?<equipmentType>\\w+)");
     // ARGUMENT_FORMAT extracts first n-1 tags, for debugging: https://regex101.com/r/gwjHWD/3
     public static final Pattern MODIFICATION_ARGUMENT_FORMAT = Pattern.compile(
             "((?:[sntcSNTC]|[pP][fF]|[pP][dD])" // argument tag
@@ -170,11 +171,10 @@ public class Parser {
      *
      * <p>5. <code> purchasedDate </code>: String representation for now, possibility for future support
      *
-     * @deprecated Use extractArguments as it is more robust in conjunction with subclasses of ModificationCommand
      * @param args String to be split into substrings
      * @return ArrayList of arguments
      * @throws IncompleteCommandException if no match found
-     *
+     * @deprecated Use extractArguments as it is more robust in conjunction with subclasses of ModificationCommand
      */
     @Deprecated
     protected ArrayList<String> prepareAdd(String args) throws IncompleteCommandException {
@@ -253,6 +253,17 @@ public class Parser {
         } catch (IllegalStateException e) {
             throw new IncompleteCommandException("No parameters found!");
         }
+
+        for (int i = splitArguments.size() - 1; i >= 0; i--) {
+            String argumentPair = splitArguments.get(i);
+            Matcher matcher = TYPE_ENUM_FORMAT.matcher(argumentPair);
+            if (matcher.matches()) {
+                splitArguments.remove(argumentPair);
+                splitArguments.add("t/" + matcher.group("equipmentType").toUpperCase(Locale.ROOT));
+                return splitArguments;
+            }
+        }
+
         return splitArguments;
     }
 
