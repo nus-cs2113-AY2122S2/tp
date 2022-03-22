@@ -147,6 +147,16 @@ implemented:
 category index matching the index argument.
 * `Family#listExpenseOfCategory(index)` -- Lists all expenses from the category index.
 
+Below is an example usage scenario and how the expenses of a category will be printed.
+
+Step 1. Given that the application already has existing data and there are two people being tracked,
+Alice and Bob, and only Alice's expenses were added and categorised. Suppose that Alice is the main
+user and Bob is her father, then Alice would belong to the current generation and Bob would belong
+to the parent generation. In this case `Family` would be initialised with two generations being
+tracked - parents and myGen.
+
+<image src="/images/ListCategorisedExpense0.png"/>
+
 ### Data Archiving
 
 Maybe for Hans
