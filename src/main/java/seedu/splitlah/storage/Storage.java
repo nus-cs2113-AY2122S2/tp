@@ -23,5 +23,20 @@ public class Storage {
     public Profile getProfile() {
         return profile;
     }
+    public boolean hasDataDirectory() {
+        File directory = new File(FILE_DIRECTORY);
+        return directory.exists() || directory.mkdir();
+    }
+    public boolean hasDataFile() {
+        File file = new File(FILE_FULL_PATH);
+        try {
+            if (!file.exists() && !file.createNewFile()) {
+                return true;
+            }
+        } catch (IOException ioException) {
+            return false;
+        }
+        return true;
+    }
     }
 }
