@@ -20,5 +20,8 @@ public class Storage {
     public Storage() {
         profile = new Profile();
     }
+    public Profile getProfile() {
+        return profile;
+    }
     }
 }
