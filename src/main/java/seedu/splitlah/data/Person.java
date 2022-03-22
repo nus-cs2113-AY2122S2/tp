@@ -17,7 +17,8 @@ public class Person {
 
     /**
      * Constructs a Person object.
-     * @param name
+     *
+     * @param name Name object representing the name of the Person object to be created.
      * @throws InvalidDataException
      */
     public Person(Name name) throws InvalidDataException {
@@ -28,14 +29,14 @@ public class Person {
     /**
      * Constructs a Person object.
      *
-     * @param name Name of the Person.
+     * @param name String object representing the name of the Person object to be created.
      */
     public Person(String name) throws InvalidDataException {
         this(new Name(name));
     }
 
     /**
-     * Constructs an ActivityCost object and adds it to the list of ActivityCosts.
+     * Constructs an ActivityCost object and adds it to the list of ActivityCost objects.
      *
      * @param activityId An integer that uniquely identifies an activity.
      * @param costPaid   A double that represents the cost paid by a Person.
