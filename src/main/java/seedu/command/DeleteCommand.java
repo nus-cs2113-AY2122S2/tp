@@ -9,6 +9,7 @@ public class DeleteCommand extends Command {
     private final ArrayList<String> commandStrings;
     public static final String COMMAND_WORD = "delete";
     public static final String COMMAND_DESCRIPTION = ": Deletes the equipment with the specified serial number. "
+            + System.lineSeparator()
             + "Parameters: s/SERIAL_NUMBER" + System.lineSeparator()
             + "Example: "
             + "delete s/SM57-1";

@@ -3,12 +3,13 @@ package seedu.parser;
 import java.util.ArrayList;
 
 import seedu.command.AddCommand;
-import seedu.command.CheckCommand;
-import seedu.command.Command;
-import seedu.command.DeleteCommand;
-import seedu.command.IncorrectCommand;
-import seedu.command.ListCommand;
 import seedu.command.UpdateCommand;
+import seedu.command.ListCommand;
+import seedu.command.IncorrectCommand;
+import seedu.command.CheckCommand;
+import seedu.command.DeleteCommand;
+import seedu.command.HelpCommand;
+import seedu.command.Command;
 
 import java.util.Collections;
 import java.util.regex.Matcher;
@@ -45,7 +46,7 @@ public class Parser {
     );
     public static final String MESSAGE_INCOMPLETE_COMMAND_MISSING_DELIMITER =
             "Please split your command into arguments with each argument seperated by spaces!";
-    public static final String INCORRECT_COMMAND_FORMAT = "Incorrect Command format!";
+    public static final String INCORRECT_COMMAND_FORMAT = "Incorrect Command format! Enter help for more information.";
 
     /**
      * Interpret the command requested by the user and returns a corresponding Command object.
@@ -97,6 +98,8 @@ public class Parser {
             } else {
                 return new ListCommand(new ArrayList<>(Collections.singleton(commandAndArgument.get(1))));
             }
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
         default:
             return new IncorrectCommand(INCORRECT_COMMAND_FORMAT);
@@ -122,6 +125,11 @@ public class Parser {
             resultArrayList.add(null);
             return resultArrayList;
         }
+        if (userInput.equals(HelpCommand.COMMAND_WORD)) {
+            resultArrayList.add("help");
+            resultArrayList.add(null);
+            return resultArrayList;
+        }
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput);
         // guard against no match
         if (!matcher.matches()) {
@@ -134,8 +142,8 @@ public class Parser {
 
     /**
      * Prepare arguments for AddCommand by splitting up the arguments into different parts.
-     * <p>
-     * Index:
+     *
+     * <p>* Index:
      * 0. <code> equipmentName </code>: String of equipment name
      * 1. <code> serialNumber </code>: String of unique serial number
      * 2. <code> type </code>: String representation of enumerated class

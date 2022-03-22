@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class EquipmentManagerTest {
     @Test
-    public void updateEquipment_success() throws DuplicateSerialNumber {
+    public void updateEquipment_success() throws DuplicateSerialNumberException {
         EquipmentManager equipmentManager = new EquipmentManager();
         equipmentManager.addEquipment("Speaker B", "S1404115ASF", EquipmentType.valueOf("SPEAKER"), 1000, "Loud Technologies", "2022-02-23");
         ArrayList<Pair<String, String>> updates = new ArrayList<>();
@@ -38,7 +38,7 @@ public class EquipmentManagerTest {
     }
 
     @Test
-    public void updateEquipment_invalidEquipmentType() throws DuplicateSerialNumber {
+    public void updateEquipment_invalidEquipmentType() throws DuplicateSerialNumberException {
         EquipmentManager equipmentManager = new EquipmentManager();
         equipmentManager.addEquipment("Speaker B", "S1404115ASF", EquipmentType.valueOf("SPEAKER"), 1000, "Loud Technologies", "2022-02-23");
         ArrayList<Pair<String, String>> updates = new ArrayList<>();

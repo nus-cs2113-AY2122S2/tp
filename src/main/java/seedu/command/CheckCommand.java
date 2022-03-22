@@ -11,6 +11,7 @@ public class CheckCommand extends Command {
     private final ArrayList<String> commandStrings;
     public static final String COMMAND_WORD = "check";
     public static final String COMMAND_DESCRIPTION = ": Gives details of the equipment with the specified name. "
+            + System.lineSeparator()
             + "Parameters: n/ITEM_NAME" + System.lineSeparator()
             + "Example: "
             + "check n/MixerC";
@@ -27,7 +28,7 @@ public class CheckCommand extends Command {
     }
 
     /**
-     * Gives details of equipment specified by name
+     * Gives details of equipment specified by name.
      *
      * @return CommandResult with message from execution of this command
      */
