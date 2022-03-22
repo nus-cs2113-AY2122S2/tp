@@ -3,6 +3,8 @@
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+
+---
 # Design & implementation
 * ##[Implementation](#Implementation)
   * ###[Search](#Search)
@@ -44,9 +46,11 @@
 
 # Implementation
 
+---
 ## Search
 ![SearchUML](https://github.com/a1021492980/tp/blob/branch-DG1/docs/uml/diagram/SearchClassUML.png?raw=true)
 <br>
+
 When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
 `WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
 class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
@@ -80,3 +84,4 @@ method to `Parser#parseUserInput(String userInput)` method, and finally returned
 be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output 
 will either be a list of matching names of plan or 'Sorry, no matching plan found' if the user has entered the command 
 correctly.
+---
