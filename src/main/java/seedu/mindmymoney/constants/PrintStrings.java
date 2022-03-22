@@ -7,8 +7,8 @@ public abstract class PrintStrings {
     private PrintStrings() {
     }
 
-    public static final String LINE = "---------------------------------------"
-            + "------------------------------------------" + System.lineSeparator();
+    public static final String LINE = "----------------------"
+            + "-------------------------" + System.lineSeparator();
 
     public static final String[] tips = new String[] {"Set quantifiable financial goals",
         "Split your income into different bank accounts, such as a Savings and Expenses account",

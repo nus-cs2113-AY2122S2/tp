@@ -33,6 +33,7 @@ public class MindMyMoney {
                 isExit = commandType.isExit();
             } catch (MindMyMoneyException e) {
                 System.out.println(e.getMessage());
+                System.out.print(System.lineSeparator());
             }
         }
     }
