@@ -135,20 +135,7 @@ public class Timetable {
                 partitionLength - fourthRow.length() - 1));
         ui.showToUser(ui.getRepeatedCharacters("-", partitionLength));
     }
-/*
-    private static void prepareTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui ui) {
-        String day = dateInput.format(dayOnlyFormat);
-        String date = dateInput.format(dateOnlyFormat);
-        int taskLength = findTaskLength(filteredTasks);
-        int doOnDateLength = DATE_SPACE_FULL_LENGTH;
-        int partitionLength = calcPartitionLength(taskLength, doOnDateLength);
-        if (filteredTasks.isEmpty()) {
-            printEmptyTimetable(ui, day, date, partitionLength);
-            return;
-        }
-        printTimetable(day, date, filteredTasks, ui, taskLength, doOnDateLength, partitionLength);
-    }
- */
+
     public static Timetable prepareTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui ui) {
         return new Timetable(dateInput, filteredTasks, ui);
     }
