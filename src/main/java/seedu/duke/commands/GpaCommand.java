@@ -4,6 +4,7 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ModuleListEmptyException;
 import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
+import seedu.duke.util.Configuration;
 import seedu.duke.util.Grades;
 import seedu.duke.util.StringConstants;
 
@@ -47,7 +48,7 @@ public class GpaCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ModuleList moduleList) throws ModHappyException {
+    public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
         calculateGpa(moduleList);
         return new CommandResult(result);
     }
