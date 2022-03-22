@@ -1,3 +1,4 @@
+The data file was not found or has been corrupted. No saves were loaded into SplitLah.
 ============================================================
  $$$$$$\            $$\ $$\   $$\     $$\           $$\
 $$  $$\           $$ |\|  $$ |    $$ |          $$ |
