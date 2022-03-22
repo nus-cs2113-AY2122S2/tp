@@ -114,6 +114,25 @@ public class DayList {
         return planForDayWithPadding;
     }
 
+    public void clearDayPlan(String userArgument) throws InvalidScheduleException {
+        int dayNumber = Integer.parseInt(userArgument);
+        String className = this.getClass().getSimpleName();
+        if (!isDayValid(dayNumber)) {
+            logger.log(Level.WARNING, "User entered an invalid day number.");
+            throw new InvalidScheduleException(className, InvalidScheduleException.DAY_NUMBER_OUT_OF_RANGE);
+        }
+        scheduleList[dayNumber - 1] = null;
+        dayList[dayNumber - 1] = null;
+        System.out.println("Plan had been cleared for " + covertDayNumberToDay(dayNumber) + ".");
+    }
+
+    public void clearAllSchedule() {
+        for (int i = 0; i < NUMBER_OF_SCHEDULE_DAYS; i += 1) {
+            scheduleList[i] = null;
+            dayList[i] = null;
+        }
+    }
+
     public String covertDayNumberToDay(int dayNumber) {
         String day = "";
         try {
