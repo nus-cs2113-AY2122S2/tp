@@ -60,7 +60,7 @@ public class Parser {
         for (int i = 0; i < addAppointmentParameters.length; i++) {
             addAppointmentParameters[i] = addAppointmentParameters[i].trim();
         }
-        if (addAppointmentParameters.length != 5) {
+        if (addAppointmentParameters.length != 6) {
             System.out.println("There is one or more parameters missing.");
             return null;
         }
@@ -125,20 +125,30 @@ public class Parser {
 
     private static boolean validateAddAppointment(String[] parameters) {
         boolean isValid = true;
-        if (!validateFullName(parameters[0])) {
+        if (!validateNric(parameters[0])) {
+            System.out.println("Patient NRIC must start with a capital letter, "
+                    + "followed by 7 digits and end with a capital letter.");
+            isValid = false;
+        }
+        if (!validateFullName(parameters[1])) {
             System.out.println("Patient name must contain only alphabets and no special characters.");
             isValid = false;
         }
-        if (!validateFullName(parameters[2])) {
+        if (!validateNric(parameters[2])) {
+            System.out.println("Doctor NRIC must start with a capital letter, "
+                    + "followed by 7 digits and end with a capital letter.");
+            isValid = false;
+        }
+        if (!validateFullName(parameters[3])) {
             System.out.println("Doctor name must contain only alphabets and no special characters.");
             isValid = false;
         }
-        if (!validateDate(parameters[3], "appointment")) {
+        if (!validateDate(parameters[4], "appointment")) {
             System.out.println("Date of birth must be in YYYY-MM-DD format."
                     + "It cannot be today or before.");
             isValid = false;
         }
-        if (!validateAppointmentDetails(parameters[4])) {
+        if (!validateAppointmentDetails(parameters[5])) {
             System.out.println("Appointment details cannot be empty. Please indicate some details.");
             isValid = false;
         }

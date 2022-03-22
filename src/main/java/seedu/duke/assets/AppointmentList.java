@@ -11,7 +11,8 @@ public class AppointmentList {
 
     public void add(String[] addAppointmentParameters) {
         Appointment newAppointment = new Appointment(addAppointmentParameters[0], addAppointmentParameters[1],
-                addAppointmentParameters[2], addAppointmentParameters[3], addAppointmentParameters[4]);
+                addAppointmentParameters[2], addAppointmentParameters[3], addAppointmentParameters[4],
+                addAppointmentParameters[5]);
         appointments.add(newAppointment);
     }
 

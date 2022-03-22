@@ -148,14 +148,15 @@ public class Command {
         }
     }
 
-    public void addAppointment(AppointmentList appointmentList, PatientList patientList, String parameters) {
+    public void addAppointment(AppointmentList appointmentList, PatientList patientList,
+                               DoctorList doctorList, String parameters) {
         if (isNull(parameters)) {
             ui.printNullParametersMessage();
             return;
         }
         String[] addAppointmentParameters = Parser.parseAddAppointment(parameters);
         if (addAppointmentParameters == null) {
-            ui.printAddPatientExampleMessage();
+            ui.printAddAppointmentExampleMessage();
         } else {
             appointmentList.add(addAppointmentParameters);
             System.out.println("The above appointment has been added.");

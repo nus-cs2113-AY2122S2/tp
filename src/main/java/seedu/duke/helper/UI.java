@@ -105,6 +105,12 @@ public class UI {
         System.out.println("delete doctor /info 1");
     }
 
+    public void printAddAppointmentExampleMessage() {
+        System.out.println("Please note the error(s) mentioned above and try again!");
+        System.out.println("Here is an example. Please follow the input order:");
+        System.out.println("add appointment /info S1234567A, Thomas, S1234567A, Ben, 2023-01-01, Knee checkup");
+    }
+
     public void printNullParametersMessage() {
         System.out.println("Parameters missing or not detected. Please use /info for parameters.");
     }
