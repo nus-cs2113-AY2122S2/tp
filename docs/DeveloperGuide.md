@@ -84,4 +84,5 @@ method to `Parser#parseUserInput(String userInput)` method, and finally returned
 be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output 
 will either be a list of matching names of plan or 'Sorry, no matching plan found' if the user has entered the command 
 correctly.
+
 ---
