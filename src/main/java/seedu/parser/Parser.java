@@ -237,5 +237,9 @@ public class Parser {
         return argument.contains("/");
     }
 
+    private static String setArgumentTagsToLower(String argument) {
+        int slashIndex = argument.indexOf("/");
+        return argument.substring(0, slashIndex).toUpperCase(Locale.ROOT) + argument.substring(slashIndex);
+    }
 
 }
