@@ -47,10 +47,10 @@ public class PersonList {
     }
 
     /**
-     * Adds a Person object into the ArrayList object of Person objects on if it does not exist,
+     * Adds a Person object into the ArrayList object of Person objects if it does not exist,
      * otherwise Person object is not added.
      *
-     * @param person A Person object.
+     * @param person A Person object to be added.
      */
     public void addPerson(Person person) {
         if (!personList.contains(person)) {
@@ -58,6 +58,12 @@ public class PersonList {
         }
     }
 
+    /**
+     * Removes a Person object from the ArrayList object of Person objects if it exist,
+     * otherwise Person object is not removed.
+     *
+     * @param person A Person object to be removed.
+     */
     public void removePerson(Person person) {
         if (personList.contains(person)) {
             personList.remove(person);
