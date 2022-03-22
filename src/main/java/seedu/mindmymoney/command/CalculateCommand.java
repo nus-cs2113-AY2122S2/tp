@@ -5,7 +5,7 @@ import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.helper.GeneralFunctions;
 
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM_IN_STRING;
-import static seedu.mindmymoney.constants.Flags.flagOfExpenditurePerMonth;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENDITURE_PER_MONTH;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM_IN_STRING;
 import static seedu.mindmymoney.helper.Calculations.calculateExpenditurePerMonth;
 
@@ -42,7 +42,7 @@ public class CalculateCommand extends Command {
             assert parsedCalculateInput[INDEX_OF_FIRST_ITEM_IN_STRING] != null
                     : "First element in parsedCalculateInput is null";
             switch (parsedCalculateInput[INDEX_OF_FIRST_ITEM_IN_STRING].toLowerCase()) {
-            case flagOfExpenditurePerMonth:
+            case FLAG_OF_EXPENDITURE_PER_MONTH:
                 calculateExpenditurePerMonth(parsedCalculateInput[INDEX_OF_SECOND_ITEM_IN_STRING], expenditureList);
                 break;
             default:

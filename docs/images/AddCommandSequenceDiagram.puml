@@ -1,0 +1,45 @@
+@startuml
+!include Style.puml
+
+box AddCommand
+participant ":Parser" as Parser LOGIC_COLOR
+participant "Command:AddCommand" as AddCommand LOGIC_COLOR
+participant ":GeneralFunctions" as GeneralFunctions LOGIC_COLOR
+participant ":AddCommandInputTest" as AddCommandInputTest LOGIC_COLOR
+participant ":Expenditure" as Expenditure LOGIC_COLOR
+participant ":expenditureList" as expenditureList LOGIC_COLOR
+end box
+
+Parser -> AddCommand: AddCommand()#execute
+activate AddCommand
+
+
+AddCommand -> AddCommand: addInput,expenditureList,creditCardList
+activate AddCommand
+AddCommand --> AddCommand:
+deactivate AddCommand
+
+AddCommand -> GeneralFunctions: parseInputWithCommandFlag()
+activate GeneralFunctions
+
+GeneralFunctions --> AddCommand: expenditure, category, description, amount, time
+deactivate GeneralFunctions
+
+AddCommand -> AddCommandInputTest: test(expenditure, category, description, amount)
+AddCommandInputTest --> AddCommand
+
+create Expenditure
+AddCommand -> Expenditure: new Expenditure(expenditure, category, description, amount, time)
+activate Expenditure
+
+Expenditure --> AddCommand
+deactivate Expenditure
+
+AddCommand -> expenditureList: expenditureList.add(new Expenditure)
+activate expenditureList
+
+expenditureList --> AddCommand
+deactivate expenditureList
+
+AddCommand --> Parser: finishedMessage
+@enduml

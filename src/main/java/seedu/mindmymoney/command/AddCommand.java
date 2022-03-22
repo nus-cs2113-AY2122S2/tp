@@ -3,16 +3,15 @@ package seedu.mindmymoney.command;
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
-import seedu.mindmymoney.userfinancial.CreditCard;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
 import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
-import static seedu.mindmymoney.constants.Flags.flagOfDescription;
-import static seedu.mindmymoney.constants.Flags.flagOfExpenditure;
-import static seedu.mindmymoney.constants.Flags.flagOfCategory;
-import static seedu.mindmymoney.constants.Flags.flagOfAmount;
-import static seedu.mindmymoney.constants.Flags.flagOfTime;
-import static seedu.mindmymoney.constants.Flags.flagEndValue;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_DESCRIPTION;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENDITURE;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CATEGORY;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_AMOUNT;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_TIME;
+import static seedu.mindmymoney.constants.Flags.FLAG_END_VALUE;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testAmount;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditure;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testCategory;
@@ -50,16 +49,16 @@ public class AddCommand extends Command {
      * @throws MindMyMoneyException when inputs are invalid or flags are missing.
      */
     public void executeCommand() throws MindMyMoneyException {
-        String expenditure = parseInputWithCommandFlag(addInput, flagOfExpenditure, flagOfCategory);
+        String expenditure = parseInputWithCommandFlag(addInput, FLAG_OF_EXPENDITURE, FLAG_OF_CATEGORY);
         testExpenditure(expenditure, creditCardList);
-        String category = parseInputWithCommandFlag(addInput, flagOfCategory, flagOfDescription);
+        String category = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
         testCategory(category);
-        String description = parseInputWithCommandFlag(addInput, flagOfDescription, flagOfAmount);
+        String description = parseInputWithCommandFlag(addInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT);
         testDescription(description);
-        String amount = parseInputWithCommandFlag(addInput, flagOfAmount, flagOfTime);
+        String amount = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
         testAmount(amount);
         float amountInt = Float.parseFloat(amount);
-        String time = parseInputWithCommandFlag(addInput, flagOfTime, flagEndValue);
+        String time = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
         time = convertTime(time);
 
         expenditureList.add(new Expenditure(expenditure, category, description, amountInt, time));

@@ -68,7 +68,41 @@ add, delete and update`Expenditure`entries in a new`itemList`during testing with
 
 
 ## Implementation
+This section describes some noteworthy details on how certain features are implemented.
 
+### Add Command Feature
+#### Current Implementation
+The sequence diagram below shows the interactions of different subcomponents of the system when adding an expenditure
+to the list.  
+![add_command_sequence_diagram](images/Add_Command_Sequence_Diagram.png)  
+A key functionality of MindMyMoney is the ability to add and track user expenditure. A user can add in a new expenditure
+by specifying the payment type, the category, the description of the item, the cost of the item and the date and the 
+month purchased. 
+1. The `Parser` component parses user input and returns the new `AddCommand` object to the
+   `MindMyMoney`.
+2. `AddCommand` instantiates `addInput`, `expenditureList` and `creditCardList`.
+3. The application invokes `Addcommand#execute` to execute user instruction.
+4. During the execution, `Addcommand#execute` will parse through user input to obtain the `EXPENDITURE`, `CATEGORY`,
+   `DESCRIPTION`, `AMOUNT` and `TIME` fields.
+5. The `Addcommand` object instantiates a new `Expenditure` object with the aforementioned 5 fields and adds them 
+into the `ExpenditureList`.
+6. The `Addcommand` object prints a list to show the user what it has saved.
+
+#### Design considerations
+Aspect: How to ask user for the 5 fields of input
+* Alternative 1 (current choice): User is asked to put in all 5 fields at once, separated using flags.
+   * Pros: Faster input, user can enter an expenditure using a single input
+   * Cons: User must be able to remember all the flags and its sequence.
+
+* Alternative 2: User is asked iteratively to put in all 5 fields, prompted by a message after each input.
+   * Pros: Beginner friendly, easily understandable, no need to remember flags.
+   * Cons: Slower, implementation when user is familiar with the application.
+### Calculate Command feature
+
+To enable users to view their finances in a more meaningfully, MindMyMoney does calculations to present financial data
+that is actionable for the users.
+
+![calculate_command_sequence_diagram](images/gif_loading.gif)
 ## Product scope
 ### Target user profile
 

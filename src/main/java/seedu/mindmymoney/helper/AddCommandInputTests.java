@@ -5,6 +5,8 @@ import seedu.mindmymoney.constants.CategoryTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.userfinancial.CreditCard;
 
+import static seedu.mindmymoney.constants.ExpenditureTypes.cash;
+
 /**
  * Input validation for Add Command.
  */
@@ -17,7 +19,7 @@ public class AddCommandInputTests {
      * @return true if item is in the list, false otherwise.
      */
     public static boolean isExpenditureInList(String input, CreditCardList creditCardList) {
-        if (input.equalsIgnoreCase("cash")) {
+        if (input.equalsIgnoreCase(cash.toString())) {
             return true;
         }
         for (CreditCard str : creditCardList.creditCardListArray) {
@@ -110,6 +112,6 @@ public class AddCommandInputTests {
         if (inputAmountAsInteger <= 0) {
             throw new MindMyMoneyException("Amount must be more than 0");
         }
-        assert inputAmountAsInteger >= 0 : "Amount should have a positive value";
+        assert inputAmountAsInteger > 0 : "Amount should have a positive value";
     }
 }

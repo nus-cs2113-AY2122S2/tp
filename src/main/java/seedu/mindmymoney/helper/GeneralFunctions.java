@@ -27,7 +27,7 @@ public class GeneralFunctions {
      * @return String array of user input.
      */
     public static String parseInputWithCommandFlag(String input, String startingFlag, String endingFlag)
-            throws MindMyMoneyException {
+        throws MindMyMoneyException {
         if (!(input.contains(startingFlag) && input.contains(endingFlag))) {
             throw new MindMyMoneyException("You are missing a flag!");
         }
@@ -44,12 +44,12 @@ public class GeneralFunctions {
     /**
      * Finds an item in a given list provided the search term and the field to search in.
      *
-     * @param searchTerm The matching term to search the list for.
+     * @param searchTerm    The matching term to search the list for.
      * @param fieldToSearch The object in the list to search for.
-     * @param itemList The list to search in.
+     * @param itemList      The list to search in.
      * @return An ArrayList containing the found items.
      * @throws MindMyMoneyException if fieldToSearch is not in the list, amount is not a number
-     and if the list of found items is empty.
+     *                              and if the list of found items is empty.
      */
     public static ArrayList<Expenditure> findItemsInList(String searchTerm, String fieldToSearch,
                                                          ExpenditureList itemList) throws MindMyMoneyException {
