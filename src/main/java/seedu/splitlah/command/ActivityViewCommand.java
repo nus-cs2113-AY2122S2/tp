@@ -31,13 +31,20 @@ public class ActivityViewCommand extends Command {
     private static final String SESSION_ID_HEADER = "Session Id #";
     private static final String SEPARATOR = " | ";
 
+    /**
+     * Initializes an ActivityViewCommand object.
+     *
+     * @param sessionId  An integer that uniquely identifies a session.
+     * @param activityId An integer that uniquely identifies an activity.
+     */
     public ActivityViewCommand(int sessionId, int activityId) {
         this.sessionId = sessionId;
         this.activityId = activityId;
     }
 
     /**
-     * Runs the command.
+     * Runs the command with the session and activity unique identifier as provided by the user input and
+     * prints the details of the activity.
      * 
      * @param manager A Manager object that manages the TextUI and Profile object.
      */

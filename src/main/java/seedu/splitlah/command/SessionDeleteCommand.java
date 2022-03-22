@@ -57,7 +57,7 @@ public class SessionDeleteCommand extends Command {
     }
 
     /**
-     * Runs the command to delete a Session object to from the list of sessions managed by the Profile Object.
+     * Runs the command to delete a Session object from the list of sessions managed by a Manager Object.
      *
      * @param manager A Manager object that manages the TextUI and Profile object.
      */
@@ -69,7 +69,7 @@ public class SessionDeleteCommand extends Command {
             manager.getProfile().removeSession(session);
             manager.saveProfile();
             manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
-            manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
         } catch (InvalidDataException dataException) {
             manager.getUi().printlnMessage(dataException.getMessage());
         }

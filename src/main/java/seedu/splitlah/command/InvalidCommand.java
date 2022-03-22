@@ -1,6 +1,5 @@
 package seedu.splitlah.command;
 
-import java.lang.AssertionError;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.ui.Message;
 
@@ -13,10 +12,20 @@ public class InvalidCommand extends Command {
 
     private final String errorMessage;
 
+    /**
+     * Initializes a InvalidCommand object.
+     *
+     * @param errorMessage A String object that represents the error message.
+     */
     public InvalidCommand(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 
+    /**
+     * Runs the command to print the error message.
+     *
+     * @param manager A Manager object that manages the TextUI and Profile object.
+     */
     @Override
     public void run(Manager manager) {
         assert manager != null : Message.ASSERT_INVALIDCOMMAND_MANAGER_DOES_NOT_EXIST;

@@ -26,9 +26,9 @@ public class GroupDeleteCommand extends Command {
     private int groupId;
 
     /**
-     * Constructs a GroupDeleteCommand object.
+     * Initializes a GroupDeleteCommand object.
      *
-     * @param groupId The unique identifier of the group.
+     * @param groupId An integer that represents the group unique identifier for the group to be deleted.
      */
     public GroupDeleteCommand(int groupId) {
         // TODO: Add assert to check whether groupId is valid.

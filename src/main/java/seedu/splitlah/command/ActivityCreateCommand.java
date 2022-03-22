@@ -62,7 +62,7 @@ public class ActivityCreateCommand extends Command {
     private static final int NO_COST = 0;
 
     /**
-     * Constructor to create a ActivityCreateCommand object.
+     * Initializes a ActivityCreateCommand object.
      *
      * @param sessionId     An integer that uniquely identifies a session.
      * @param activityName  A String object that represents the Activity object's name.

@@ -20,7 +20,7 @@ public class SessionListCommand extends Command {
     private static final String SESSION_LIST_HEADER = "List of Sessions";
 
     /**
-     * Prints the list of sessions previously created by the user.
+     * Runs the command to list all existing sessions.
      *
      * @param manager A manager object that gets the TextUI and Profile object to print the list of sessions.
      */

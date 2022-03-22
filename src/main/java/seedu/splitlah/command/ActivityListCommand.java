@@ -30,13 +30,18 @@ public class ActivityListCommand extends Command {
     private static final String LIST_HEADER_PREPEND = "List of activities (Session Id #";
     private static final String LIST_CLOSER_POSTPEND = ")";
 
+    /**
+     * Initializes a ActivityListCommand object.
+     *
+     * @param sessionId An integer that uniquely identifies a session.
+     */
     public ActivityListCommand(int sessionId) {
         assert sessionId > 0 : Message.ASSERT_ACTIVITYLIST_SESSION_ID_LESS_THAN_ONE;
         this.sessionId = sessionId;
     }
 
     /**
-     * Runs the command.
+     * Runs the command to list all existing activities in a Session object.
      * 
      * @param manager A Manager object that manages the TextUI and Profile object.
      */
