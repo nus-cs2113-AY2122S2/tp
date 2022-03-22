@@ -531,7 +531,7 @@ public class FileManager {
         FileWriter fileWriter = new FileWriter(getPlanFilePath().toString());
         for (String planKey : listOfPlans) {
             Plan planObject = planList.getPlanFromKey(planKey);
-            //assert (planObject != null) : "Plan object is NULL";
+            assert (planObject != null) : "Plan object is NULL";
             String planInFileFormat = convertPlanToFileDataFormat(planObject);
             fileWriter.append(planInFileFormat);
             fileWriter.append(System.lineSeparator());
