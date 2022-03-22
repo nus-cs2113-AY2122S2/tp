@@ -1,7 +1,10 @@
 package seedu.splitlah.data;
 
+import seedu.splitlah.storage.Storage;
+import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,7 +15,10 @@ public class Manager {
     
     private TextUI ui;
     private Profile profile;
-    private static String LOGGER_FILE_NAME = "SplitLah";
+    private Storage storage;
+    private boolean isUsingStorage = false;
+
+    private static final String LOGGER_FILE_NAME = "SplitLah";
     public static Logger logger = Logger.getLogger(LOGGER_FILE_NAME);
 
     /**
@@ -23,6 +29,11 @@ public class Manager {
         profile = new Profile();
     }
 
+    public Manager(boolean isUsingStorage) {
+        ui = new TextUI();
+        this.isUsingStorage = isUsingStorage;
+        initializeStorage();
+    }
     /**
      * Returns a TextUI object for user inputs and outputs.
      *
