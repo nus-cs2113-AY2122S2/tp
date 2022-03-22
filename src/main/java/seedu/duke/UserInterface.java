@@ -24,7 +24,7 @@ public class UserInterface {
                 switch (command) {
                 case "add":
                     String regex = "id/(?<id>\\d*) n/(?<name>.*) q/(?<qty>\\d*)"
-                            + " d/(?<desc>\\.*";
+                            + " d/(?<desc>\\.*)";
                     Regex regexMatch = new Regex(userInput, regex);
                     HashMap<String, String> matches = regexMatch.getGroupValues();
                     Commands.addGood(matches.get("id"), matches.get("name"),
