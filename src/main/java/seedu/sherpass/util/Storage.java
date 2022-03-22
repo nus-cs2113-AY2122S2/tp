@@ -117,13 +117,11 @@ public class Storage {
         List<String> dataLines = Files.readAllLines(new File(saveFilePath).toPath());
         if (dataLines.size() > 0) {
             String dataString = String.join("", dataLines);
-            JSONObject dataJson = new JSONObject(dataString);
-            JSONArray array = dataJson.getJSONArray("tasks");
+            JSONArray taskArray = new JSONObject(dataString).getJSONArray("tasks");
 
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject taskData = array.getJSONObject(i);
-                Task newTask = Parser.parseSavedData(taskData);
-                taskList.add(newTask);
+            for (int i = 0; i < taskArray.length(); i++) {
+                JSONObject taskData = taskArray.getJSONObject(i);
+                taskList.add(Parser.parseSavedData(taskData));
             }
         }
         return taskList;

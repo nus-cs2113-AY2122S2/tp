@@ -241,6 +241,19 @@ public class Parser {
         return newCommand;
     }
 
+    private static Command prepareDeleteRecurring(String[] arguments) {
+        if (arguments.length < 2) {
+            return new HelpCommand(DeleteRecurringCommand.COMMAND_WORD);
+        }
+        DeleteRecurringCommand newCommand = new DeleteRecurringCommand();
+        try {
+            newCommand.setIndex(Integer.parseInt(arguments[1]));
+        } catch (NumberFormatException exception) {
+            return new HelpCommand(DeleteRecurringCommand.COMMAND_WORD);
+        }
+        return newCommand;
+    }
+
     // Please add in constants to the magic literals
     private static Command prepareAdd(String[] splitInput, TaskList taskList) {
         String[] filteredTaskContent;
@@ -415,6 +428,8 @@ public class Parser {
             return prepareEditRecurring(splitInput);
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(splitInput, taskList);
+        case DeleteRecurringCommand.COMMAND_WORD:
+            return prepareDeleteRecurring(splitInput);
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
         case StudyCommand.COMMAND_WORD:
