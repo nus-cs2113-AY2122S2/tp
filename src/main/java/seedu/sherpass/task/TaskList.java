@@ -154,9 +154,28 @@ public class TaskList {
         ui.showToUser("Done! Now you have " + tasks.size() + " task(s) in the list.");
     }
 
-
+    /**
+     * Return a filtered ArrayList of task according to the date specified.
+     *
+     * @param dateInput The specific date.
+     * @return The filtered ArrayList.
+     */
     public ArrayList<Task> getFilteredTasksByDate(LocalDate dateInput) {
-        return null;
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (hasNoDeadline(task)) {
+                continue;
+            } else if (task.getByDate().isEqual(dateInput)) {
+                filteredTasks.add(task);
+            } else {
+                continue;
+            }
+        }
+        return filteredTasks;
+    }
+
+    private boolean hasNoDeadline(Task task) {
+        return task.getByDate() == null;
     }
 
     /**
