@@ -1,0 +1,89 @@
+@startuml
+
+package data {
+    class ModuleList {
+        --
+        + addModule(Module m): Module
+        + removeModule(String moduleCode): Module
+        + getModule(String moduleCode): Module
+        + getGeneralTasks(): Module
+        + initialiseGeneralTasksFromTaskList(ArrayList<Task> list): void
+        + isModuleExists(String moduleCode): boolean
+    }
+
+    class Module {
+        - moduleCode: String
+        - moduleDescription: String
+        - isGeneralTask: boolean
+        - modularCredit: int
+        --
+        + addTask(Task task): void
+        + printModuleTaskList(): String
+        + printModuleTaskListWithTag(): String
+        + toString(): String
+    }
+
+    class TaskList {
+        --
+        + addTask(Task task): Task
+        + removeTask(int index): Task
+        + addTag(String tagDescription, int index): Task
+        + deleteTag(String tagDescription, int index): Task
+        + getAllTasks(String indent): String
+        + getTasksWithTag(String indent, String tag): String
+        + size(): int
+    }
+
+    class Task {
+        - taskName: String
+        - taskDescription: String
+        - isTaskDone: boolean
+        - workingTime: String
+        - tags: ArrayList<String>
+        --
+        + getTaskParameterStatus(): TaskParameters
+        + toString(): String
+    }
+
+    enum TaskParameters {
+        DESCRIPTION_AND_WORKING_TIME
+        DESCRIPTION_ONLY
+        WORKING_TIME_ONLY
+        NO_DESCRIPTION_OR_WORKING_TIME
+    }
+}
+
+note top of data
+Note:
+Some getters/setters have been
+omitted from this class diagram.
+end note
+
+ModuleList -> "1..*" Module
+
+Module --> "1" TaskList
+TaskList -l> "*" Task
+Task --l> "1" TaskParameters
+
+class Main
+hide Main circle
+hide Main attributes
+hide Main methods
+
+Main ..> ModuleList
+
+class Command
+hide Command circle
+hide Command attributes
+hide Command methods
+
+Command ..> ModuleList
+
+class Storage
+hide Storage circle
+hide Storage attributes
+hide Storage methods
+
+Storage ..> ModuleList
+
+@enduml

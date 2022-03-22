@@ -9,9 +9,6 @@ import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.util.StringConstants;
 
-import static seedu.duke.util.StringConstants.SAVE_COMMAND_WORD;
-import static seedu.duke.util.StringConstants.TAG_COMMAND_WORD;
-
 /**
  * This Parser distinguishes between various command words.
  */
