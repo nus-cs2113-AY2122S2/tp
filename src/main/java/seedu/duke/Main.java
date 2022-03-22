@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.io.File;
+
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.commands.ExitCommand;
@@ -13,7 +15,6 @@ import seedu.duke.ui.TextUi;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
-import java.io.File;
 
 public class Main {
     private final String modulePath = StringConstants.MODULE_PATH;

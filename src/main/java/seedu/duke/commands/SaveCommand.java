@@ -1,16 +1,16 @@
 package seedu.duke.commands;
 
+import java.util.ArrayList;
+
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.storage.ConfigurationStorage;
 import seedu.duke.storage.ModuleListStorage;
 import seedu.duke.storage.TaskListStorage;
 import seedu.duke.tasks.ModuleList;
-import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
-import java.util.ArrayList;
 
 public class SaveCommand extends Command {
 
