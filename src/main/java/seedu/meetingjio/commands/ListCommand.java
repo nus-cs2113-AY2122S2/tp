@@ -13,7 +13,8 @@ public class ListCommand extends Command {
      * If there are no lessons found, notify user accordingly.
      *
      *
-     * @param masterTimetable@return String containing all of the user's lessons
+     * @param masterTimetable MasterTimetable
+     * @return String containing all of the user's lessons
      */
     @Override
     public String execute(MasterTimetable masterTimetable) {
