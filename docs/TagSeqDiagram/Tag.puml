@@ -22,5 +22,5 @@ activate TagCommand
 ref over TagCommand, ModuleList: Get Module
 
 ref over TagCommand, ModuleList: Execute Tag Operation
-return result
+return CommandResult(result)
 @enduml

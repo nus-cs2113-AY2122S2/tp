@@ -21,6 +21,9 @@ else else
     alt Objects.isNull(taskMod)
         [<-- ModuleList: e:NoSuchModuleException
 
+    else else
+    return targetModule:Module
+
     end
 end
 @enduml

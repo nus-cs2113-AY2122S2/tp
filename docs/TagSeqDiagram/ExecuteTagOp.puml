@@ -11,19 +11,11 @@ activate TagCommand
 alt TagOp == add
 TagCommand -> TagCommand:addTag(targetModule:Module)
 activate TagCommand
-TagCommand ->] :getTaskList()
-TagCommand <-] ::TaskList
-TagCommand ->] :addTag(tagDescription:String, taskIndex:int)
-TagCommand <-] ::Task
 return result
 
 else TagOp == del
 TagCommand -> TagCommand:removeTag(targetModule:Module))
 activate TagCommand
-TagCommand ->] :getTaskList()
-TagCommand <-] ::TaskList
-TagCommand ->] :delTag(tagDescription:String, taskIndex:int)
-TagCommand <-] ::Task
 return result
 
 else else
