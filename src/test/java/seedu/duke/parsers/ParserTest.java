@@ -12,18 +12,18 @@ import seedu.duke.exceptions.ModHappyException;
 public class ParserTest extends Parser {
     public ParserTest() {
         // This can be replaced to any regex you want to test
-        commandFormat = "(?<commandWord>\\S+)\\s*(?<arguments>.*)";
-        groupNames.add("commandWord");
-        groupNames.add("arguments");
+        commandFormat = "\\s*(?<configurationGroupWord>[A-Z_]+)=(?<newValue>.*)";
+        groupNames.add("configurationGroupWord");
+        groupNames.add("newValue");
     }
 
     @Test
     public void checkRegex() {
-        final String testString = "add /m cs2113t -d \"11111\"123";
+        final String testString = "COMPLETED_TASK_SHOWN=true";
         try {
             parsedCommand = parseString(testString);
-            assertEquals("add", parsedCommand.get("commandWord"));
-            assertEquals("/m cs2113t -d \"11111\"123", parsedCommand.get("arguments"));
+            assertEquals("COMPLETED_TASK_SHOWN", parsedCommand.get("configurationGroupWord"));
+            assertEquals("true", parsedCommand.get("newValue"));
 
         } catch (Exception e) {
             fail();

@@ -80,6 +80,8 @@ public class ModHappyParser extends Parser {
             return new TagParser();
         case (GRADE_COMMAND_WORD):
             return new GradeParser();
+        case (OPTION_COMMAND_WORD):
+            return new OptionParser();
         default:
             throw new UnknownCommandException();
         }
