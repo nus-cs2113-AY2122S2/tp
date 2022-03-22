@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static seedu.allonus.contacts.ContactParser.getFields;
+import static seedu.allonus.contacts.ContactParser.getFieldStrings;
 import static seedu.allonus.contacts.ContactParser.parseContact;
+import static seedu.allonus.contacts.ContactParser.setContactFields;
+import static seedu.allonus.ui.TextUi.showToUser;
 
 public class ContactsManager {
 
@@ -37,8 +39,6 @@ public class ContactsManager {
             "You can only edit with a valid number that's in the list :')";
     private static final String CONTACTS_EDIT_NO_FIELDS_MESSAGE =
             "You need to specify the contact field(s) you want to edit!";
-    private static final String CONTACTS_EDIT_EMPTY_FIELD_MESSAGE =
-            "You have provided an empty field: \"%s\"";
     private static final String CONTACTS_EDIT_SUCCESS_MESSAGE =
             "Okay, I've updated the information of this contact:\n  ";
 
@@ -52,7 +52,7 @@ public class ContactsManager {
      * @param message Message to print.
      */
     public static void printFormat(String message) {
-        System.out.println(message);
+        showToUser(message);
     }
 
     private static void contactsWelcome() {
@@ -156,19 +156,15 @@ public class ContactsManager {
             return;
         }
 
-        ArrayList<String> fields = getFields(userInput);
-        if (fields.isEmpty()) {
+        ArrayList<String> fieldStrings = getFieldStrings(userInput);
+        if (fieldStrings.isEmpty()) {
             printFormat(CONTACTS_EDIT_NO_FIELDS_MESSAGE);
             return;
         }
-
-        for (String field : fields) {
-            try {
-                String fieldContent = field.split("[nfetd]/")[1];
-                curr.setName(fieldContent);
-            } catch (IndexOutOfBoundsException e) {
-                printFormat(String.format(CONTACTS_EDIT_EMPTY_FIELD_MESSAGE, field));
-            }
+        try {
+            setContactFields(curr, fieldStrings);
+        } catch (InvalidContactField e) {
+            printFormat(e.getMessage());
         }
         printFormat(CONTACTS_EDIT_SUCCESS_MESSAGE + curr);
     }
