@@ -12,6 +12,7 @@ import seedu.command.HelpCommand;
 import seedu.command.Command;
 
 import java.util.Collections;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -120,22 +121,26 @@ public class Parser {
     public ArrayList<String> splitCommandTerm(String userInput) throws IncompleteCommandException {
         ArrayList<String> resultArrayList = new ArrayList<>();
         userInput = userInput.trim();
-        if (userInput.equals(ListCommand.COMMAND_WORD)) {
-            resultArrayList.add("list");
+        // Checks for "list" command word first
+        if (userInput.toLowerCase(Locale.ROOT).equals(ListCommand.COMMAND_WORD)) {
+            resultArrayList.add(ListCommand.COMMAND_WORD);
             resultArrayList.add(null);
             return resultArrayList;
         }
-        if (userInput.equals(HelpCommand.COMMAND_WORD)) {
-            resultArrayList.add("help");
+        // Checks for "help" command word next
+        if (userInput.toLowerCase(Locale.ROOT).equals(HelpCommand.COMMAND_WORD)) {
+            resultArrayList.add(HelpCommand.COMMAND_WORD);
             resultArrayList.add(null);
             return resultArrayList;
         }
+        // Match terms against syntax
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput);
-        // guard against no match
+        // Guard against no match
         if (!matcher.matches()) {
             throw new IncompleteCommandException("Could not find space delimiter between command and arguments!");
         }
-        resultArrayList.add(matcher.group("commandWord"));
+        // Match and return ArrayList appropriately
+        resultArrayList.add(matcher.group("commandWord").toLowerCase(Locale.ROOT));
         resultArrayList.add(matcher.group("arguments"));
         return resultArrayList;
     }
