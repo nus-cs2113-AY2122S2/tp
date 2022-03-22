@@ -37,7 +37,7 @@ public class Parser {
     );
     public static final Pattern VIEW_COMMAND_FORMAT = Pattern.compile("n/(?<itemName>.+)");
     public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("s/(?<itemName>.+)");
-    // ARGUMENT_FORMAT extracts first n-1 tags
+    // ARGUMENT_FORMAT extracts first n-1 tags, for debugging: https://regex101.com/r/gwjHWD/1
     public static final Pattern ARGUMENT_FORMAT = Pattern.compile(
             "((?:s|n|t|c|pf|pd)" // argument tag
                     + "\\/" // argument delimiter
