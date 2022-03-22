@@ -1,6 +1,8 @@
 package seedu.duke.helper;
 
 
+import seedu.duke.assets.Appointment;
+import seedu.duke.assets.AppointmentList;
 import seedu.duke.assets.Doctor;
 import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.Medicine;
@@ -20,9 +22,11 @@ public class Storage {
     static final String PATH_DOC = "data/doctor.txt";
     static final String PATH_PAT = "data/patient.txt";
     static final String PATH_MED = "data/medicine.txt";
+    static final String PATH_APT = "data/appointment.txt";
     public DoctorList doctors = new DoctorList();
     public PatientList patients = new PatientList();
     public MedicineList medicines = new MedicineList();
+    public AppointmentList appointments = new AppointmentList();
 
     public Storage() {
         loadData();
@@ -58,11 +62,22 @@ public class Storage {
         }
     }
 
+    private void loadAppointmentData() throws FileNotFoundException {
+        File data = new File(PATH_APT);
+        Scanner reader = new Scanner(data);
+        while (reader.hasNext()) {
+            String line = reader.nextLine();
+            String[] parameters = line.split(",");
+            doctors.add(parameters);
+        }
+    }
+
     public void loadData() {
         try {
             loadDoctorData();
             loadPatientData();
             loadMedicineData();
+            loadAppointmentData();
         } catch (FileNotFoundException f) {
             System.out.println("No saved data found!");
         }
@@ -111,6 +126,27 @@ public class Storage {
         }
     }
 
+    private void saveAppointmentData() {
+        File appointmentFile = new File(PATH_APT);
+        if (!appointmentFile.exists()) {
+            try {
+                appointmentFile.createNewFile();
+            } catch (IOException ioException) {
+                System.out.println("appointment.txt cannot be created");
+                return;
+            }
+        }
+        try {
+            FileWriter dataWrite = new FileWriter(PATH_APT,false);
+            for (Appointment appointment : appointments.getList()) {
+                dataWrite.write(appointment.saveString() + "\n");
+            }
+            dataWrite.close();
+        } catch (IOException e) {
+            System.out.println("Unable to save data...");
+        }
+    }
+
     private void saveDoctorData() {
         File doctorFile = new File(PATH_DOC);
         if (!doctorFile.exists()) {
@@ -142,5 +178,6 @@ public class Storage {
         saveDoctorData();
         savePatientData();
         saveMedicineData();
+        saveAppointmentData();
     }
 }

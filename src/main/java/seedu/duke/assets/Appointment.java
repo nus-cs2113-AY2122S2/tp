@@ -44,4 +44,8 @@ public class Appointment {
     public String getAppointmentDetails() {
         return appointmentDetails;
     }
+
+    public String saveString() {
+        return patientName + patientNric + "," + doctorName + "," + appointmentDate + "," + appointmentDetails;
+    }
 }

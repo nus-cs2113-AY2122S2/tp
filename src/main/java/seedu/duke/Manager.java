@@ -50,6 +50,9 @@ public class Manager {
             case "view medicine":
                 command.viewMedicine(storage.medicines, parameters);
                 break;
+            case "add appointment":
+                command.addAppointment(storage.appointments, storage.patients, parameters);
+                break;
             case "help":
                 ui.printHelp();
                 break;

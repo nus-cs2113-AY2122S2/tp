@@ -5,9 +5,13 @@ import java.util.ArrayList;
 public class AppointmentList {
     private ArrayList<Appointment> appointments = new ArrayList<>();
 
+    public ArrayList<Appointment> getList() {
+        return appointments;
+    }
+
     public void add(String[] addAppointmentParameters) {
         Appointment newAppointment = new Appointment(addAppointmentParameters[0], addAppointmentParameters[1],
-                addAppointmentParameters[2], addAppointmentParameters[3], addAppointmentParameters[5]);
+                addAppointmentParameters[2], addAppointmentParameters[3], addAppointmentParameters[4]);
         appointments.add(newAppointment);
     }
 

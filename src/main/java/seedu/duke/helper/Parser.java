@@ -7,8 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-
-
     public static String[] commandParser(String userInput) {
         return userInput.trim().split("/info");
     }
@@ -59,10 +57,10 @@ public class Parser {
 
     public static String[] parseAddAppointment(String parameters) {
         String[] addAppointmentParameters = parameters.trim().split(",");
-        for (int i = 0; i < addAppointmentParameters.length; i++ ) {
+        for (int i = 0; i < addAppointmentParameters.length; i++) {
             addAppointmentParameters[i] = addAppointmentParameters[i].trim();
         }
-        if (addAppointmentParameters.length != 7) {
+        if (addAppointmentParameters.length != 5) {
             System.out.println("There is one or more parameters missing.");
             return null;
         }
@@ -81,7 +79,6 @@ public class Parser {
             isValid = false;
         }
         return isValid;
-
     }
 
     private static boolean validateAddPerson(String[] parameters) {
@@ -132,16 +129,16 @@ public class Parser {
             System.out.println("Patient name must contain only alphabets and no special characters.");
             isValid = false;
         }
-        if (!validateFullName(parameters[1])) {
+        if (!validateFullName(parameters[2])) {
             System.out.println("Doctor name must contain only alphabets and no special characters.");
             isValid = false;
         }
-        if (!validateDate(parameters[2], "appointment")) {
+        if (!validateDate(parameters[3], "appointment")) {
             System.out.println("Date of birth must be in YYYY-MM-DD format."
                     + "It cannot be today or before.");
             isValid = false;
         }
-        if (!validateAppointmentDetails(parameters[3])) {
+        if (!validateAppointmentDetails(parameters[4])) {
             System.out.println("Appointment details cannot be empty. Please indicate some details.");
             isValid = false;
         }
