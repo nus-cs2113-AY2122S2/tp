@@ -22,7 +22,7 @@ public abstract class Command {
      * Executes the command until termination or the exit command is called.
      *
      * @param userInput full user input
-     * @param MasterTimetable masterTimetable
+     * @param masterTimetable MasterTimetable 
      * @param in next user input
      */
     public static void executeCommand(String userInput, MasterTimetable masterTimetable, Scanner in) {
