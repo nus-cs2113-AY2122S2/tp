@@ -55,4 +55,8 @@ public class RecordManager {
     public List<Record> getAllRecords() {
         return records;
     }
+
+    public Record getRecordByIndex(int index) {
+        return records.get(index);
+    }
 }

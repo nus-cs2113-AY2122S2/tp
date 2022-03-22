@@ -21,11 +21,14 @@ public class DeleteCommand extends Command {
 
     public DeleteCommand(int index) {
         toDelete = index;
+
     }
 
     @Override
     public CommandResult execute() {
         try {
+            //update the total expense
+            super.totalExpense -= recordMgr.getRecordByIndex(toDelete).getPrice();
             recordMgr.deleteRecord(toDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, toDelete));
         } catch (IndexOutOfBoundsException ie) {
