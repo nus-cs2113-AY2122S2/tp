@@ -450,4 +450,5 @@ public class UI {
         System.out.println("To add plan for any day, enter:");
         printColorText(TextColor.COLOR_YELLOW, "schedule /update <day number [1-7]> <plan number>");
     }
+
 }
