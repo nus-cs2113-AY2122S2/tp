@@ -278,7 +278,7 @@ public class Parser {
         }
     }
 
-    private static Command prepareShow(String[] splitInput) {
+    public static Command prepareShow(String[] splitInput) {
         try {
             String selection = splitInput[SHOW_OPTION_INDEX].trim();
             return parseShowCommandOptions(selection.toLowerCase());
@@ -399,6 +399,9 @@ public class Parser {
             break;
         case "mark":
             timerLogic.markTask(storage, parsedInput);
+            break;
+        case "show":
+            timerLogic.showTasks(storage, parsedInput);
             break;
         default:
             ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);

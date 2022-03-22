@@ -28,16 +28,45 @@ public class TimerLogic {
         return timer.isTimerRunning();
     }
 
+    /**
+     * Marks a task as done, as specified in parsedInput.
+     * @param storage Storage.
+     * @param parsedInput parsedInput.
+     */
     public void markTask(Storage storage, String[] parsedInput) {
-        if (!isTimerRunning()) {
+        if (isTimerPausedOrStopped()) {
             Command c = Parser.prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD, taskList);
             if (c != null) {
                 c.execute(taskList, ui, storage);
-                ui.showToUser("Would you like to start another timer, mark another task as done, "
-                        + "or leave the study session?");
+                if (!isTimerRunning()) {
+                    ui.showToUser("Would you like to start another timer, mark another task as done, "
+                            + "or leave the study session?");
+                } else {
+                    ui.showToUser("Would you like to resume the timer, mark another task as done, "
+                            + "or leave the study session?");
+                }
             }
         } else {
             ui.showToUser("You can't mark a task as done while timer is running!");
+        }
+    }
+
+    public void showTasks(Storage storage, String[] parsedInput) {
+        if (isTimerPausedOrStopped()) {
+            Command c = Parser.prepareShow(parsedInput);
+            if (c != null) {
+                c.execute(taskList, ui, storage);
+                if (!isTimerRunning()) {
+                    ui.showToUser("Would you like to start another timer, mark a task as done, "
+                            + "or leave the study session?");
+                } else {
+                    ui.showToUser("Would you like to resume the timer, mark a task as done, "
+                            + "or leave the study session?");
+                }
+
+            }
+        } else {
+            ui.showToUser("You can't show tasks while timer is running!");
         }
     }
 
@@ -97,5 +126,12 @@ public class TimerLogic {
      */
     public void callResetTimer() {
         timer = new Timer(taskList, ui);
+    }
+
+    private boolean isTimerPausedOrStopped() {
+        if (!isTimerRunning() || timer.isTimerPaused()) {
+            return true;
+        }
+        return false;
     }
 }
