@@ -11,6 +11,9 @@ class GroupViewCommandTest {
 
     Manager manager = new Manager();
 
+    /**
+     * Creates a group that is stored and managed by the Profile object.
+     */
     @BeforeEach
     void setUp() {
         String groupArgs = "group /create /n OP2 /pl Alice Bob Charlie";
