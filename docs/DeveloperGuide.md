@@ -6,8 +6,8 @@
 
 ---
 # Design & implementation
-* ##[Implementation](#Implementation)
-  * ###[Search](#Search)
+* ## [Implementation](#Implementation)
+  * ### [Search](#Search)
     * [Search for exercise](#Search-for-exercise)
     * [Search for plan](#Search-for-plan)
 --------------------------------
