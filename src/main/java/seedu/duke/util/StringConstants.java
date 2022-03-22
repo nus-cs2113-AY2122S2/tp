@@ -43,12 +43,6 @@ public class StringConstants {
     public static final String DELETE_CONFIRMATION = "%s contains task(s). Are you sure you want to delete this?";
 
     /**
-     * For GradeCommand.
-     */
-    public static final String GRADE_ADDED_MESSAGE = "Your grade for %s has been added.";
-    public static final String GRADE_CHANGED_MESSAGE = "Your grade for %s has been changed.";
-
-    /**
      * For EditCommand.
      */
     public static final String EDIT_TASK_SUCCESS = "The %s of %s has been changed.";
@@ -62,6 +56,18 @@ public class StringConstants {
      * For ExitCommand.
      */
     public static final String READY_EXIT = "I am ready to exit *_*";
+
+
+    /**
+     * For GpaCommand.
+     */
+    public static final String GPA_MESSAGE = "Your GPA is %.02f! :)";
+
+    /**
+     * For GradeCommand.
+     */
+    public static final String GRADE_ADDED_MESSAGE = "Your grade for %s has been added.";
+    public static final String GRADE_CHANGED_MESSAGE = "Your grade for %s has been changed.";
 
     /**
      * For ListCommand.
@@ -159,6 +165,8 @@ public class StringConstants {
     public static final String ERROR_READ_FILE = "Error reading from file...";
     public static final String ERROR_FILE_CREATE_FAIL = "Sorry, file creation failed...";
     public static final String ERROR_NO_SUCH_TAG = "Sorry, no such tag exists ._.";
+    public static final String ERROR_MODULE_LIST_EMPTY = "Sorry, your module list is currently empty ._.\n"
+            + "Please add some modules!";
 
 
     /**
@@ -185,6 +193,7 @@ public class StringConstants {
     public static final String ADD_COMMAND_WORD = "add";
     public static final String DELETE_COMMAND_WORD = "del";
     public static final String EDIT_COMMAND_WORD = "edit";
+    public static final String GPA_COMMAND_WORD = "gpa";
     public static final String GRADE_COMMAND_WORD = "grade";
     public static final String LIST_COMMAND_WORD = "list";
     public static final String MARK_COMMAND_WORD = "mark";

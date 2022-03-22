@@ -1,7 +1,6 @@
 package seedu.duke.commands;
 
 import seedu.duke.tasks.ModuleList;
-import seedu.duke.ui.TextUi;
 import seedu.duke.util.StringConstants;
 
 public class ExitCommand extends Command {

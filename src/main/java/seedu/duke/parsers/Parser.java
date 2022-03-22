@@ -18,6 +18,7 @@ public abstract class Parser {
     protected static final String EXIT_COMMAND_WORD = StringConstants.EXIT_COMMAND_WORD;
     protected static final String ADD_COMMAND_WORD = StringConstants.ADD_COMMAND_WORD;
     protected static final String DELETE_COMMAND_WORD = StringConstants.DELETE_COMMAND_WORD;
+    protected static final String GPA_COMMAND_WORD = StringConstants.GPA_COMMAND_WORD;
     protected static final String GRADE_COMMAND_WORD = StringConstants.GRADE_COMMAND_WORD;
     protected static final String LIST_COMMAND_WORD = StringConstants.LIST_COMMAND_WORD;
     protected static final String MARK_COMMAND_WORD = StringConstants.MARK_COMMAND_WORD;
@@ -25,6 +26,7 @@ public abstract class Parser {
     protected static final String RESET_COMMAND_WORD = StringConstants.RESET_COMMAND_WORD;
     protected static final String HELP_COMMAND_WORD = StringConstants.HELP_COMMAND_WORD;
     protected static final String SAVE_COMMAND_WORD = StringConstants.SAVE_COMMAND_WORD;
+
 
     protected String commandFormat;
     protected HashMap<String, String> parsedCommand;
