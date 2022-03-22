@@ -197,7 +197,7 @@ public class Parser {
         if (!matcher.matches()) {
             throw new IncompleteCommandException("View command values are incomplete or missing!");
         }
-        return new ArrayList<>(Collections.singleton(matcher.group(1)));
+        return new ArrayList<>(Collections.singleton(matcher.group("itemName")));
     }
 
     /**
@@ -212,7 +212,7 @@ public class Parser {
         if (!matcher.matches()) {
             throw new IncompleteCommandException("Delete command values are incomplete or missing!");
         }
-        return new ArrayList<>(Collections.singleton(matcher.group(1)));
+        return new ArrayList<>(Collections.singleton(matcher.group("serialNumber")));
     }
 
     /**
