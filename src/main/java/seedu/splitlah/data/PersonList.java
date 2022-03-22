@@ -1,6 +1,10 @@
 package seedu.splitlah.data;
 
+import seedu.splitlah.ui.Message;
+
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represents a list of Person objects.
@@ -43,14 +47,26 @@ public class PersonList {
     }
 
     /**
-     * Adds a Person object into the ArrayList object of Person objects on if it does not exist,
+     * Adds a Person object into the ArrayList object of Person objects if it does not exist,
      * otherwise Person object is not added.
      *
-     * @param person A Person object.
+     * @param person A Person object to be added.
      */
     public void addPerson(Person person) {
         if (!personList.contains(person)) {
             personList.add(person);
+        }
+    }
+
+    /**
+     * Removes a Person object from the ArrayList object of Person objects if it exist,
+     * otherwise Person object is not removed.
+     *
+     * @param person A Person object to be removed.
+     */
+    public void removePerson(Person person) {
+        if (personList.contains(person)) {
+            personList.remove(person);
         }
     }
 
@@ -84,5 +100,24 @@ public class PersonList {
         for (Person person : groupPersonList) {
             addPerson(person);
         }
+    }
+
+    /**
+     * Checks if String array object of names has duplicated names.
+     *
+     * @return true if it contains duplicates,
+     *         false otherwise.
+     */
+    public static boolean hasNameDuplicates(String[] personNames) {
+        Set<String> nameSet = new HashSet<>();
+        for (String name : personNames) {
+            String nameToBeAdded = name.toLowerCase();
+            if (!nameSet.add(nameToBeAdded)) {
+                return true;
+            }
+        }
+        assert nameSet.size() == personNames.length :
+                Message.ASSERT_PERSONLIST_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED;
+        return false;
     }
 }

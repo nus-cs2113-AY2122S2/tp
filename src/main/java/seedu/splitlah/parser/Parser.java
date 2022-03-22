@@ -14,6 +14,7 @@ import seedu.splitlah.command.ExitCommand;
 import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
+import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.ui.Message;
@@ -32,8 +33,8 @@ public class Parser {
     private static final String LOCALDATE_TODAY_INDICATOR = "today";
     private static final int COMMAND_WITH_ARGS_TOKEN_COUNT = 3;
     private static final int DELIMITERED_COMMAND_MIN_TOKEN_COUNT = 2;
-    private static final int MINIMUM_SURCHARGE_PERCENT = 0;
-    private static final int MAXIMUM_SURCHARGE_PERCENT = 100;
+    static final double MINIMUM_SURCHARGE_PERCENT = 0;
+    static final double MAXIMUM_SURCHARGE_PERCENT = 100;
     
     // MAIN PUBLIC PARSING FUNCTIONS
     /**
@@ -222,23 +223,25 @@ public class Parser {
     }
 
     /**
-     * Returns an integer that represents the GST charge in percents, given the command arguments from user input, 
+     * Returns a double that represents the GST charge in percents, given the command arguments from user input, 
      * delimited by the GST delimiter.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
-     * @return An integer that represents a GST charge in percents.
+     * @return A double that represents a GST charge in percents.
      * @throws InvalidFormatException If no arguments representing a GST charge were provided after the 
      *                                GST delimiter,
-     *                                if the argument cannot be parsed as an integer, or
-     *                                if the parsed GST percentage is not in [0, 100].
+     *                                if the argument cannot be parsed as a double,
+     *                                if the parsed percentage has more than 2 decimal points,
+     *                                if the parsed percentage has more than 3 digits before the decimal point, or
+     *                                if the parsed percentage is not in [0, 100].
      */
-    public static int parseGst(String commandArgs) throws InvalidFormatException {
+    public static double parseGst(String commandArgs) throws InvalidFormatException {
         if (!ParserUtils.hasDelimiter(commandArgs, ParserUtils.GST_DELIMITER)) {
             return 0;
         }
 
         String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.GST_DELIMITER);
-        int gst = ParserUtils.parseIntFromString(argument, ParserUtils.GST_DELIMITER);
+        double gst = ParserUtils.parsePercentageFromString(argument, ParserUtils.GST_DELIMITER);
         if (gst < MINIMUM_SURCHARGE_PERCENT || gst > MAXIMUM_SURCHARGE_PERCENT) {
             throw new InvalidFormatException(ParserErrors.getInvalidGstErrorMessage());
         }
@@ -246,23 +249,25 @@ public class Parser {
     }
 
     /**
-     * Returns an integer that represents the service charge in percents, given the command arguments from user input, 
+     * Returns a double that represents the service charge in percents, given the command arguments from user input, 
      * delimited by the Service charge delimiter.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
-     * @return An integer that represents a service charge in percents.
+     * @return A double that represents a service charge in percents.
      * @throws InvalidFormatException If no arguments representing a service charge were provided after the 
      *                                Service charge delimiter,
-     *                                if the argument cannot be parsed as an integer, or
-     *                                if the parsed service charge percentage is not in [0, 100].
+     *                                if the argument cannot be parsed as a double,
+     *                                if the parsed percentage has more than 2 decimal points,
+     *                                if the parsed percentage has more than 3 digits before the decimal point, or
+     *                                if the parsed percentage is not in [0, 100].
      */
-    public static int parseServiceCharge(String commandArgs) throws InvalidFormatException {
+    public static double parseServiceCharge(String commandArgs) throws InvalidFormatException {
         if (!ParserUtils.hasDelimiter(commandArgs, ParserUtils.SERVICE_CHARGE_DELIMITER)) {
             return 0;
         }
 
         String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.SERVICE_CHARGE_DELIMITER);
-        int serviceCharge = ParserUtils.parseIntFromString(argument, ParserUtils.SERVICE_CHARGE_DELIMITER);
+        double serviceCharge = ParserUtils.parsePercentageFromString(argument, ParserUtils.SERVICE_CHARGE_DELIMITER);
         if (serviceCharge < MINIMUM_SURCHARGE_PERCENT || serviceCharge > MAXIMUM_SURCHARGE_PERCENT) {
             throw new InvalidFormatException(ParserErrors.getInvalidServiceChargeErrorMessage());
         }
@@ -350,6 +355,8 @@ public class Parser {
             return GroupCreateCommand.prepare(remainingArgs);
         case GroupDeleteCommand.COMMAND_TEXT:
             return GroupDeleteCommand.prepare(remainingArgs);
+        case GroupListCommand.COMMAND_TEXT:
+            return new GroupListCommand();
         case GroupViewCommand.COMMAND_TEXT:
             return GroupViewCommand.prepare(remainingArgs);
         case HelpCommand.COMMAND_TEXT:

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 /**
  * Represents an activity that was done during a group outing session.
+ *
+ * @author Ivan
  */
 public class Activity {
 
