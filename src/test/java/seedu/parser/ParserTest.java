@@ -1,15 +1,11 @@
 package seedu.parser;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import seedu.command.IncorrectCommand;
-import seedu.command.UpdateCommand;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.concurrent.atomic.AtomicReferenceArray;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -51,6 +47,8 @@ class ParserTest {
         }
     }
 
+    @Deprecated
+    @Disabled("extractArgument is a better replacement for prepareAdd")
     @Test
     void prepareAdd_addStringWithSpaces_success() throws IncompleteCommandException {
         ArrayList<String> expectedResult = new ArrayList<>(
@@ -61,6 +59,8 @@ class ParserTest {
         assertEquals(expectedResult, actualResult);
     }
 
+    @Deprecated
+    @Disabled("extractArgument is a better replacement for prepareAdd")
     @Test
     void prepareAdd_insufficientArguments_exceptionThrown() {
         ArrayList<String> unexpectedResult = new ArrayList<>(
@@ -76,6 +76,8 @@ class ParserTest {
         }
     }
 
+    @Deprecated
+    @Disabled("extractArgument is a better replacement for prepareAdd")
     @Test
     void prepareAdd_argumentEnteredTwice_exceptionThrown() {
         ArrayList<String> unexpectedResult = new ArrayList<>(
@@ -91,6 +93,8 @@ class ParserTest {
         }
     }
 
+    @Deprecated
+    @Disabled("extractArgument is a better replacement for prepareAdd")
     @Test
     void prepareAdd_argumentIncludesSlashA_exceptionThrown() {
         ArrayList<String> unexpectedResult = new ArrayList<>(
@@ -106,6 +110,8 @@ class ParserTest {
         }
     }
 
+    @Deprecated
+    @Disabled("extractArgument is a better replacement for prepareAdd")
     @Test
     void prepareAdd_argumentIncludesSlashB_exceptionThrown() {
         ArrayList<String> unexpectedResult = new ArrayList<>(
@@ -180,6 +186,34 @@ class ParserTest {
                 "s/S1404115ASF pf/Loud Technologies n/Speaker B",
                 "t/Speaker s/S1404115ASF",
                 "c/1000 pf/Loud Technologies s/S1404115ASF"
+        ));
+        ArrayList<ArrayList<String>> expectedResults = new ArrayList<>();
+        expectedResults.add(new ArrayList<>(Arrays.asList(
+                "s/S1404115ASF", "n/Speaker B", "t/Speaker", "c/1000", "pf/Loud Technologies", "pd/2022-02-23")));
+        expectedResults.add(new ArrayList<>(Arrays.asList(
+                "s/S1404115ASF", "c/1000")));
+        expectedResults.add(new ArrayList<>(Arrays.asList(
+                "s/S1404115ASF", "n/Speaker B")));
+        expectedResults.add(new ArrayList<>(Arrays.asList(
+                "s/S1404115ASF", "pf/Loud Technologies", "n/Speaker B")));
+        expectedResults.add(new ArrayList<>(Arrays.asList(
+                "t/Speaker", "s/S1404115ASF")));
+        expectedResults.add(new ArrayList<>(Arrays.asList(
+                "c/1000", "pf/Loud Technologies", "s/S1404115ASF")));
+        for (int i = 0; i < expectedResults.size(); i++) {
+            assertEquals(expectedResults.get(i), parser.extractArguments(testStrings.get(i)));
+        }
+    }
+
+    @Test
+    void extractArguments_mixedCaseText_success() throws IncompleteCommandException {
+        ArrayList<String> testStrings = new ArrayList<>(Arrays.asList(
+                "S/S1404115ASF n/Speaker B t/Speaker c/1000 Pf/Loud Technologies PD/2022-02-23",
+                "s/S1404115ASF     C/1000",
+                "s/S1404115ASF N/Speaker B        ",
+                "s/S1404115ASF pf/Loud Technologies n/Speaker B",
+                "t/Speaker S/S1404115ASF",
+                "c/1000 pF/Loud Technologies s/S1404115ASF"
         ));
         ArrayList<ArrayList<String>> expectedResults = new ArrayList<>();
         expectedResults.add(new ArrayList<>(Arrays.asList(

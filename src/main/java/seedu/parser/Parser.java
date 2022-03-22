@@ -27,6 +27,7 @@ public class Parser {
      * passed into arguments.
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)\\s+(?<arguments>.+)");
+    @Deprecated
     public static final Pattern ADD_COMMAND_FORMAT = Pattern.compile(
             "n\\/(?<itemName>.+)" + "\\s+"
                     + "s\\/(?<serialNumber>.+)" + "\\s+"
@@ -35,20 +36,20 @@ public class Parser {
                     + "pf\\/(?<purchasedFrom>.+)" + "\\s+"
                     + "pd\\/(?<purchasedDate>.+)"
     );
-    public static final Pattern VIEW_COMMAND_FORMAT = Pattern.compile("n/(?<itemName>.+)");
-    public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("s/(?<itemName>.+)");
-    // ARGUMENT_FORMAT extracts first n-1 tags, for debugging: https://regex101.com/r/gwjHWD/1
-    public static final Pattern ARGUMENT_FORMAT = Pattern.compile(
-            "((?:s|n|t|c|pf|pd)" // argument tag
+    public static final Pattern VIEW_COMMAND_FORMAT = Pattern.compile("[Nn]/(?<itemName>.+)");
+    public static final Pattern DELETE_COMMAND_FORMAT = Pattern.compile("[Ss]/(?<serialNumber>.+)");
+    // ARGUMENT_FORMAT extracts first n-1 tags, for debugging: https://regex101.com/r/gwjHWD/3
+    public static final Pattern MODIFICATION_ARGUMENT_FORMAT = Pattern.compile(
+            "((?:[sntcSNTC]|[pP][fF]|[pP][dD])" // argument tag
                     + "\\/" // argument delimiter
-                    + "[\\w\\s\\-]+?)" // actual argument value
+                    + "[\\w\\s\\-]+)" // actual argument value
                     + "\\s+" // argument space before next delimiter
-                    + "(?=s|n|t|c|pf|pd)" // next delimiter
+                    + "(?=[sntcSNTC]|[pP][fF]|[pP][dD])" // next delimiter
     );
     // ARGUMENT_TRAILING_FORMAT extracts last tag
-    public static final Pattern ARGUMENT_TRAILING_FORMAT = Pattern.compile(
+    public static final Pattern MODIFICATION_ARGUMENT_TRAILING_FORMAT = Pattern.compile(
             "(?<!\\w)" // require a previous pattern
-                    + "(?:s|n|t|c|pf|pd)" // argument tag
+                    + "(?:[sntcSNTC]|[pP][fF]|[pP][dD])" // argument tag
                     + "\\/" // argument delimiter
                     + "([\\w\\s\\-]+)" // last argument value
     );
@@ -155,18 +156,27 @@ public class Parser {
     /**
      * Prepare arguments for AddCommand by splitting up the arguments into different parts.
      *
-     * <p>* Index:
-     * 0. <code> equipmentName </code>: String of equipment name
-     * 1. <code> serialNumber </code>: String of unique serial number
-     * 2. <code> type </code>: String representation of enumerated class
-     * 3. <code> cost </code>: String representation of double value, "$" optional but "," delimiter forbidden
-     * 4. <code> purchasedFrom </code>: String of vendor name, suggest adhering to one consistent naming scheme
-     * 5. <code> purchasedDate </code>: String representation for now, possibility for future support
+     * <p>Index:
      *
+     * <p>0. <code> equipmentName </code>: String of equipment name
+     *
+     * <p>1. <code> serialNumber </code>: String of unique serial number
+     *
+     * <p>2. <code> type </code>: String representation of enumerated class
+     *
+     * <p>3. <code> cost </code>: String representation of double value, "$" optional but "," delimiter forbidden
+     *
+     * <p>4. <code> purchasedFrom </code>: String of vendor name, suggest adhering to one consistent naming scheme
+     *
+     * <p>5. <code> purchasedDate </code>: String representation for now, possibility for future support
+     *
+     * @deprecated Use extractArguments as it is more robust in conjunction with subclasses of ModificationCommand
      * @param args String to be split into substrings
      * @return ArrayList of arguments
      * @throws IncompleteCommandException if no match found
+     *
      */
+    @Deprecated
     protected ArrayList<String> prepareAdd(String args) throws IncompleteCommandException {
         final Matcher matcher = ADD_COMMAND_FORMAT.matcher(args.trim());
         // validate arg string format
@@ -224,16 +234,22 @@ public class Parser {
      */
     protected ArrayList<String> extractArguments(String args) throws IncompleteCommandException {
         int lastIndex = 0;
+        String argumentToAdd;
+        String argument;
         ArrayList<String> splitArguments = new ArrayList<>();
         try {
-            Matcher matcher = ARGUMENT_FORMAT.matcher(args.trim());
+            Matcher matcher = MODIFICATION_ARGUMENT_FORMAT.matcher(args.trim());
             while (matcher.find()) {
-                splitArguments.add(matcher.group().trim());
+                argument = matcher.group();
+                argumentToAdd = setArgumentTagsToLower(argument.trim());
+                splitArguments.add(argumentToAdd);
                 lastIndex = matcher.end();
             }
-            matcher.usePattern(ARGUMENT_TRAILING_FORMAT);
+            matcher.usePattern(MODIFICATION_ARGUMENT_TRAILING_FORMAT);
             matcher.find(lastIndex);
-            splitArguments.add(matcher.group().trim());
+            argument = matcher.group();
+            argumentToAdd = setArgumentTagsToLower(argument.trim());
+            splitArguments.add(argumentToAdd);
         } catch (IllegalStateException e) {
             throw new IncompleteCommandException("No parameters found!");
         }
@@ -246,7 +262,7 @@ public class Parser {
 
     private static String setArgumentTagsToLower(String argument) {
         int slashIndex = argument.indexOf("/");
-        return argument.substring(0, slashIndex).toUpperCase(Locale.ROOT) + argument.substring(slashIndex);
+        return argument.substring(0, slashIndex).toLowerCase(Locale.ROOT) + argument.substring(slashIndex);
     }
 
 }
