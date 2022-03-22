@@ -27,9 +27,9 @@ Here is an example on adding a tag to a general task:
 
 Below is the sequence diagram of how the tag feature works:
 
-![Tag](https://user-images.githubusercontent.com/70083643/159427150-e5290460-83fd-4db7-a181-b0485cab2749.png)
-![GetModule](https://user-images.githubusercontent.com/70083643/159427175-6e177c73-a794-4ec0-bc07-1628c1b842ac.png)
-![ExecuteTagOp](https://user-images.githubusercontent.com/70083643/159427193-1748fdb5-17b1-4ded-9bf9-9a88b623f920.png)
+![Tag](https://user-images.githubusercontent.com/70083643/159489546-574538e0-ee99-40c0-b373-1acc1542105d.png)
+![GetModule](https://user-images.githubusercontent.com/70083643/159489557-d82be092-7570-459c-b933-5d1497490b98.png)
+![ExecuteTagOp](https://user-images.githubusercontent.com/70083643/159489602-2a88ed8f-3227-4f06-bf4a-d1f743d60856.png)
 
 ## Product scope
 ### Target user profile
