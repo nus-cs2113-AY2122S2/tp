@@ -3,7 +3,7 @@ package seedu.mindmymoney.constants;
 /**
  * Container for strings to be printed.
  */
-public class PrintStrings {
+public abstract class PrintStrings {
     private PrintStrings() {
     }
 
