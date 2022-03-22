@@ -71,7 +71,7 @@ throughout the lifetime of the application. While the `Storage` helps to save wh
 The `TextUI` class serves as an interface to read user inputs and print application outputs.
 
 ### Profile Component
-![Profile Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ProfileComponent.drawio.png)
+![Profile Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/Profile%20Component.drawio.png)
 <br>
 The `Profile` class holds the list of sessions and groups that have been created by the user. 
 It also tracks the unique identifier for `Session`, `Activity` and `Group` classes. The `Profile`
@@ -101,6 +101,7 @@ The general workflow of the `Parser` component is as follows:
 Otherwise, the constructor is called. Both methods will create a new `XYZCommand` object. 
 (`XYZCommand` is a placeholder for specific subclass of the `Command` class, e.g. `SessionCreateCommand`)
 5. This `Command` object is then returned by the `getCommand()` method.
+
 ### Command Component
 
 ## Implementation
