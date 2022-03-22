@@ -27,7 +27,7 @@ class ActivityCreateCommandTest {
     }
 
     /**
-     * Checks if an activity is created when an activity is missing both cost and cost list.
+     * Checks if an InvalidCommand is returned when both cost and cost list are not provided by the user.
      */
     @Test
     public void prepare_hasMissingCostAndCostList_invalidCommand() {
@@ -37,7 +37,7 @@ class ActivityCreateCommandTest {
     }
 
     /**
-     * Checks if an activity is created when an activity has both cost and cost list.
+     * Checks if an InvalidCommand is returned when both cost and cost list are provided by the user.
      */
     @Test
     public void prepare_hasBothCostAndCostList_invalidCommand() {
@@ -47,7 +47,8 @@ class ActivityCreateCommandTest {
     }
 
     /**
-     * Checks if an activity is created when an activity has different length for involved list and cost list.
+     * Checks if an InvalidCommand is returned when cost list and involved list that are provided by the user
+     * are of different lengths.
      */
     @Test
     public void prepare_costListAndInvolvedListDifferentLength_invalidCommand() {
@@ -60,7 +61,7 @@ class ActivityCreateCommandTest {
     }
 
     /**
-     * Checks if activity is created with missing delimiters.
+     * Checks if an InvalidCommand is returned when there are delimiters not provided by the user.
      */
     @Test
     public void prepare_hasMissingDelimiter_InvalidCommand() {
@@ -86,7 +87,7 @@ class ActivityCreateCommandTest {
     }
 
     /**
-     * Checks if activity is created with missing arguments.
+     * Checks if an InvalidCommand is returned when there are arguments not provided by the user.
      */
     @Test
     public void prepare_hasMissingArguments_InvalidCommand() {
