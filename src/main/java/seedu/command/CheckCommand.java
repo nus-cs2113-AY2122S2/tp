@@ -28,7 +28,7 @@ public class CheckCommand extends Command {
     }
 
     /**
-     * Gives details of equipment specified by name
+     * Gives details of equipment specified by name.
      *
      * @return CommandResult with message from execution of this command
      */

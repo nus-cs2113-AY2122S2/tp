@@ -60,7 +60,7 @@ public class EquipmentManager {
     }
 
     public boolean updateEquipment(String serialNumber, ArrayList<Pair<String, String>> updatePairs) {
-        if (!equipmentList.containsKey(serialNumber)){
+        if (!equipmentList.containsKey(serialNumber)) {
             return false;
         }
         Equipment updatedEquipment = equipmentList.get(serialNumber);

@@ -3,7 +3,7 @@ package seedu.command;
 /**
  * Subclass of Command. Shows information of the available commands to users.
  */
-public class HelpCommand extends Command{
+public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
     public static final String COMMAND_DESCRIPTION = ": Shows details of available commands to users. "
             + System.lineSeparator()

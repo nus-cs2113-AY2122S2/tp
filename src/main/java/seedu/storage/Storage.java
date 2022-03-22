@@ -15,10 +15,11 @@ import java.util.List;
 
 
 public class Storage {
-    public final String FILE_NOT_FOUND_ERROR_MESSAGE = "File not found! A new file will be created after this session.";
-    public final String SAVE_ERROR_MESSAGE = "An error occurred while saving!";
-    public final String DUPLICATE_SERIAL_NUMBER_ERROR = "Duplicate serial number found!";
-    public final String path = "./equipments.json";
+    public static final String FILE_NOT_FOUND_ERROR_MESSAGE = "File not found! "
+            + "A new file will be created after this session.";
+    public static final String SAVE_ERROR_MESSAGE = "An error occurred while saving!";
+    public static final String DUPLICATE_SERIAL_NUMBER_ERROR = "Duplicate serial number found!";
+    public static final String path = "./equipments.json";
     private final Gson gson = new Gson();
 
     public void loadData(EquipmentManager equipmentManager) {
