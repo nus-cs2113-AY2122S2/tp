@@ -34,7 +34,6 @@ public class Person {
         this(new Name(name));
     }
 
-
     /**
      * Constructs an ActivityCost object and adds it to the list of ActivityCosts.
      *
