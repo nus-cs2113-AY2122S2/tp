@@ -1,7 +1,7 @@
 package seedu.mindmymoney.constants;
 
 /**
- * Container for fields in expenditure
+ * Container for fields in expenditure.
  */
 public enum ExpenditureFields {
     expenditure,
