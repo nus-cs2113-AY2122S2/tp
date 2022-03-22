@@ -1,15 +1,13 @@
 package seedu.meetingjio.events;
 
-public class Event {
-    private String name;
+public abstract class Event {
     private String title;
     public String day;
     public int startTime;
     public int endTime;
     private String mode;
 
-    public Event(String name, String title, String day, int startTime, int endTime, String mode) {
-        this.name = name;
+    public Event(String title, String day, int startTime, int endTime, String mode) {
         this.title = title;
         this.day = day;
         this.startTime = startTime;
@@ -23,9 +21,6 @@ public class Event {
             return false;
         }
         Event event = (Event) obj;
-        if (!name.equals(event.name)) {
-            return false;
-        }
         if (!title.equals(event.title)) {
             return false;
         }
@@ -41,7 +36,6 @@ public class Event {
         if (endTime != event.endTime) {
             return false;
         }
-        assert (name.equals(event.name)) : "The names are different";
         assert (title.equals(event.title)) : "The titles are different";
         assert (day.equals(event.day)) : "The days are different";
         assert (mode.equals(event.mode)) : "The modes are different";
@@ -52,8 +46,8 @@ public class Event {
 
     @Override
     public String toString() {
-        return String.format("NAME: %s\t\tTITLE: %s\t\tDAY: %s\t\tSTART: %04d\t\tEND: %04d\t\tMODE: %s",
-                            name, title, day, startTime, endTime, mode);
+        return String.format("\t\tTITLE: %s\t\tDAY: %s\t\tSTART: %04d\t\tEND: %04d\t\tMODE: %s",
+                            title, day, startTime, endTime, mode);
     }
 
     /**
@@ -67,9 +61,6 @@ public class Event {
         if (!day.equals(event.day)) {
             return false;
         }
-        if (!name.equals(event.name)) {
-            return false;
-        }
         boolean startTimeOverlap = event.startTime >= startTime
                 && event.startTime < endTime;
         boolean endTimeOverlap = event.endTime > startTime
@@ -78,7 +69,6 @@ public class Event {
                 && event.endTime >= endTime;
         if (startTimeOverlap || endTimeOverlap || totalOverlap) {
             assert day.equals(event.day) : "No overlap as events are on different days\n";
-            assert name.equals(event.name) : "No overlap as events are for different people\n";
             return true;
         }
         return false;

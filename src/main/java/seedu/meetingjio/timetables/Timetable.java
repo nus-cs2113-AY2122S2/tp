@@ -1,4 +1,4 @@
-package seedu.meetingjio;
+package seedu.meetingjio.timetables;
 
 import seedu.meetingjio.events.Event;
 import seedu.meetingjio.exceptions.DuplicateEventException;
@@ -7,9 +7,11 @@ import seedu.meetingjio.exceptions.OverlappingEventException;
 import java.util.ArrayList;
 
 public class Timetable {
+    private final String name;
     private final ArrayList<Event> list;
 
-    public Timetable() {
+    public Timetable(String name) {
+        this.name = name;
         this.list = new ArrayList<>();
     }
 
@@ -40,6 +42,14 @@ public class Timetable {
     public Event get(int eventIndex) {
         Event targetEvent = list.get(eventIndex);
         return targetEvent;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean nameEquals(String name) {
+        return this.name.equals(name);
     }
 
     public void clear() {
