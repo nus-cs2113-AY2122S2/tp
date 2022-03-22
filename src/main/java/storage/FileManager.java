@@ -516,4 +516,26 @@ public class FileManager {
         }
         fileWriter.close();
     }
+
+    /**
+     * Rewrites the entire list of plans stored in the PlanList object into the plan resource file.
+     *
+     * @param planList An instance of the PlanList class.
+     * @throws IOException          If the application is unable to open the plan resource file.
+     * @throws NullPointerException If a null object is given as a parameter for any of the methods called
+     *                              by this method.
+     */
+    public void rewriteAllPlansToFile(PlanList planList) throws IOException, NullPointerException {
+        ArrayList<String> listOfPlans = planList.getPlansDisplayList();
+
+        FileWriter fileWriter = new FileWriter(getPlanFilePath().toString());
+        for (String planKey : listOfPlans) {
+            Plan planObject = planList.getPlanFromKey(planKey);
+            //assert (planObject != null) : "Plan object is NULL";
+            String planInFileFormat = convertPlanToFileDataFormat(planObject);
+            fileWriter.append(planInFileFormat);
+            fileWriter.append(System.lineSeparator());
+        }
+        fileWriter.close();
+    }
 }

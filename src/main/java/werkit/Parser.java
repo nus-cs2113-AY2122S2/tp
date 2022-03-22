@@ -300,6 +300,12 @@ public class Parser {
             arguments = userInput.split(" ", 3)[2];
             break;
         case DELETE_ACTION_KEYWORD:
+            if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+                logger.log(Level.WARNING, "User has entered an invalid delete plan command action.");
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_DELETE_PLAN_COMMAND_ERROR_MSG);
+            }
+            arguments = userInput.split(" ", 3)[2];
             break;
         case LIST_ACTION_KEYWORD:
             if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {

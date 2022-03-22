@@ -5,9 +5,11 @@ import data.exercises.InvalidExerciseException;
 import data.workouts.InvalidWorkoutException;
 import data.workouts.Workout;
 import data.workouts.WorkoutList;
+import data.workouts.WorkoutOutOfRangeException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
 
 public class PlanList {
     public static final int MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN = 10;
@@ -173,5 +175,37 @@ public class PlanList {
         for (int i = 0; i < getPlansDisplayList().size(); i += 1) {
             System.out.println((i + 1) + "." + getPlansDisplayList().get(i).toString());
         }
+    }
+
+    /**
+     * Removes the intended plan in the plans list.
+     * The plan to delete is determined by the user who will
+     * indicate the index of plan to delete in the plan list.
+     *
+     * @param userArgument The argument entered by user, that is, the index of plan to delete.
+     * @return deletedPlan The plan object that is deleted from the plansDisplayList.
+     * @throws NumberFormatException If index of plan that user entered is not an integer.
+     * @throws InvalidPlanException If index of plan to delete is out of range.
+     */
+    public Plan deletePlan(String userArgument) throws NumberFormatException, InvalidPlanException {
+        int indexToDelete = Integer.parseInt(userArgument.trim());
+        String className = this.getClass().getSimpleName();
+
+        boolean isIndexToDeleteValid = checkIndexIsWithinRange(indexToDelete);
+
+        if (!isIndexToDeleteValid) {
+            throw new InvalidPlanException(className, InvalidPlanException.PLAN_INDEX_OUT_OF_RANGE);
+        }
+
+        assert (indexToDelete > 0) && (indexToDelete <= plansDisplayList.size());
+        Plan deletedPlan = getPlanFromIndexNum(indexToDelete);
+        String deletedPlanKey = deletedPlan.toString();
+        plansDisplayList.remove(indexToDelete - 1);
+        getPlansDisplayList().remove(deletedPlanKey);
+        return deletedPlan;
+    }
+
+    private boolean checkIndexIsWithinRange(int index) {
+        return index > 0 && index <= plansDisplayList.size();
     }
 }

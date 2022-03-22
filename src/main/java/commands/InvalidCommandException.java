@@ -24,6 +24,8 @@ public class InvalidCommandException extends Exception {
             + "Do you mean 'plan /new <plan name> /workouts <workout number(s) to add, separated by comma>'?";
     public static final String INVALID_PLAN_LIST_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
             + "Do you mean 'plan /list?'";
+    public static final String INVALID_DELETE_PLAN_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
+            + "Do you mean 'plan /delete <plan number to delete>'?";
     public static final String INVALID_SCHEDULE_UPDATE_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
             + "Do you mean 'schedule /update <day number [1-7]> <plan number>'";
     public static final String INVALID_SCHEDULE_LIST_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
