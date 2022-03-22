@@ -1,16 +1,16 @@
 goto m/Contacts_Manager
 invalid contacts command
-add n/Lucy f/SoC e/email@u.nus.edu d/group mate from cs2113
+add n/Lucy Koh f/SoC e/email@u.nus.edu d/group mate from cs2113
+add n/Daniela Koh d/met at SoC canteen e/other_email@u.nus.edu f/FoS
 list
+find Daniela
+find Koh
+rm 1
 rm
 rm 0
-rm 17
+rm 2
 rm1
 rm not_a_number
-rm 1
-list
-add n/Lucy d/group mate from cs2113 f/SoC e/email@u.nus.edu
-list
 rm 1
 list
 add n/Gen f/ e/ d/

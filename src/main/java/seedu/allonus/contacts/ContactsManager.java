@@ -55,7 +55,7 @@ public class ContactsManager {
      * @param userInput String of original user input.
      * @return ind Index of item.
      */
-    public static int parseNum(String userInput) {
+    private static int parseNum(String userInput) {
         String stringOfNum = userInput.split(" ", 0)[1];
         return Integer.parseInt(stringOfNum) - 1;
     }
@@ -104,6 +104,34 @@ public class ContactsManager {
                 + String.format(CONTACTS_UPDATED_LIST_SIZE_MESSAGE, contactsList.size()));
     }
 
+    /**
+     * Prints contacts that contain a certain keyword.
+     *
+     * @param userInput String of user input to parse.
+     */
+    private static void findContacts(String userInput) {
+        String[] commands = userInput.split(" ");
+        if (commands.length > 2) {
+            printFormat("Please only enter one keyword!");
+            return;
+        }
+        String keyword = commands[1];
+
+        String listAsString = "";
+        for (int i = 0; i < contactsList.size(); i++) {
+            Contact curr = contactsList.get(i);
+            String contactName = curr.getName();
+            if (contactName.contains(keyword)) {
+                listAsString = listAsString.concat(String.format(" %d. %s\n", i + 1, curr));
+            }
+        }
+        if (!listAsString.equals("")) {
+            printFormat("Here are the matching contacts in your list:\n" + listAsString);
+        } else {
+            printFormat("There are no contacts matching this keyword!");
+        }
+    }
+
     public static void contactsRunner(TextUi ui) {
         contactsWelcome();
         String userInput;
@@ -118,6 +146,8 @@ public class ContactsManager {
                 deleteContact(userInput);
             } else if (userInput.startsWith("add")) {
                 addContact(userInput);
+            } else if (userInput.startsWith("find")) {
+                findContacts(userInput);
             } else {
                 printFormat(CONTACTS_INVALID_COMMAND_MESSAGE);
                 logger.log(Level.FINER, String.format("Invalid command to Contacts Manager: %s", userInput));

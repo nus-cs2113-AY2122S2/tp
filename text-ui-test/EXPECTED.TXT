@@ -4,28 +4,32 @@ Welcome to Contacts Manager
 Please enter a valid command for the Contacts Manager!
 You can try "list", "add", or "rm"
 Got it. I've added this contact:
-  Name: Lucy, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
+  Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
 Now you have 1 contacts in the list.
-Here are the contacts in your list:
- 1. Name: Lucy, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
-
-You can only delete with a valid number that's in the list :')
-You can only delete with a valid number that's in the list :')
-You can only delete with a valid number that's in the list :')
-You can only delete with a valid number that's in the list :')
-You can only delete with a valid number that's in the list :')
-Noted. I've removed this contact:
-  Name: Lucy, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
-Now you have 0 contacts in the list.
-You haven't added any contacts to your list yet!
 Got it. I've added this contact:
-  Name: Lucy, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
-Now you have 1 contacts in the list.
+  Name: Daniela Koh, Faculty: FoS, Email: other_email@u.nus.edu, Description: met at SoC canteen
+Now you have 2 contacts in the list.
 Here are the contacts in your list:
- 1. Name: Lucy, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
+ 1. Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
+ 2. Name: Daniela Koh, Faculty: FoS, Email: other_email@u.nus.edu, Description: met at SoC canteen
+
+Here are the matching contacts in your list:
+ 2. Name: Daniela Koh, Faculty: FoS, Email: other_email@u.nus.edu, Description: met at SoC canteen
+
+Here are the matching contacts in your list:
+ 1. Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
+ 2. Name: Daniela Koh, Faculty: FoS, Email: other_email@u.nus.edu, Description: met at SoC canteen
 
 Noted. I've removed this contact:
-  Name: Lucy, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
+  Name: Lucy Koh, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
+Now you have 1 contacts in the list.
+You can only delete with a valid number that's in the list :')
+You can only delete with a valid number that's in the list :')
+You can only delete with a valid number that's in the list :')
+You can only delete with a valid number that's in the list :')
+You can only delete with a valid number that's in the list :')
+Noted. I've removed this contact:
+  Name: Daniela Koh, Faculty: FoS, Email: other_email@u.nus.edu, Description: met at SoC canteen
 Now you have 0 contacts in the list.
 You haven't added any contacts to your list yet!
 Invalid contact field(s)!
