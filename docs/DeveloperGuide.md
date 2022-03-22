@@ -173,6 +173,19 @@ array list.
 
 <image src="/images/ListCategorisedExpense2.png"/>
 
+Step 4. The iteration, collecting and appending to the temporary array list in step 3 is repeated 
+until every person has been iterated. Finally, `Categories#getLabel(1)` is called so that an
+appropriate message can be displayed to the user, stating the name of the category, following by
+a series of print to display the expenditures in this category.
+
+> :information_source: **Note:** If the `index` provided does not map to any existing categories,
+> then it can be observed that there will never be any results returned. The `listcat` command will
+> check the index provided using `Parser#checkValidCategory` before iterating `Family`. If the check
+> fails, an error message will be displayed to the user instead of continuing with the execution.
+
+The following sequence diagram shows how the `listcat` operation works:
+> insert sequence diagram
+
 
 ### Data Archiving
 
