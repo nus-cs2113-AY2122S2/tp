@@ -21,11 +21,11 @@ class HelpCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidCommand object is returned when additional arguments are appended to the 
+     * Checks if an InvalidCommand object is returned when additional irrelevant argument tokens are appended to the 
      * syntax of HelpCommand as input.
      */
     @Test
-    void getCommand_additionalArguments_InvalidCommand() {
+    void getCommand_extraIrrelevantTokens_InvalidCommand() {
         // Single additional token, no delimiters
         String helpWithAdditionalArguments = "help apple";
         Command command = Parser.getCommand(helpWithAdditionalArguments);

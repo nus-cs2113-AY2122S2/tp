@@ -71,10 +71,6 @@ public abstract class Message {
                     + "        " + HelpCommandParser.COMMAND_FORMAT + "\n"
                     + "14. Exit the program\n"
                     + "        " + ExitCommand.COMMAND_FORMAT;
-    public static final String PROMPT_TEXTUI_REQUEST_CONFIRMATION =
-            "Please enter Y/y/yes to confirm, or N/n/no otherwise.";
-    public static final String ERROR_TEXTUI_REENTER_INPUT =
-            "Invalid input. Please re-enter.";
     public static final String PROMPT_TEXTUI_AWAITING_INPUT =
             "> ";
 
