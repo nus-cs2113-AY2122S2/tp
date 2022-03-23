@@ -1,49 +1,68 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+!include style.puml
 
 Box
-    participant Main
-    participant ":ExitCommand" as ExitCommand
-    participant ":Storage" as Storage
-    participant ":PersonList" as PersonList
-    participant PlanITarium.txt
+    participant ":ExitCommand" as ExitCommand LOGIC_COLOR
+    participant ":Storage" as Storage STORAGE_COLOR
+    participant ":PersonList" as PersonList MODEL_COLOR
+    participant PlanITarium.txt STORAGE_COLOR_T3
 end box
 
-->> Main: execute `bye`
-Main ->> ExitCommand: exit()
-ExitCommand ->> Storage: saveData(:Family)
+
+-> ExitCommand: exit()
+activate ExitCommand
+ExitCommand -> Storage: saveData(:Family)
 activate Storage
 loop for all 3 family groups
-Storage->>PersonList: getPersonList()
+Storage -> PersonList: getPersonList()
 activate PersonList
-PersonList-->>Storage: :PersonList
+PersonList --> Storage: :PersonList
 deactivate PersonList
     loop until all items
-        Storage->>PersonList: getSaveName()
+        Storage -> PersonList: getSaveName()
+        activate PersonList
+        PersonList --> Storage: Name:Person
+        deactivate PersonList
+        Storage -> Storage: writeToFile()
+        activate Storage
+        Storage -> PlanITarium.txt
+        activate PlanITarium.txt
+        PlanITarium.txt --> Storage
+        deactivate PlanITarium.txt
+        Storage --> Storage
+        deactivate Storage
+        Storage -> PersonList: getIncomeList()
         activate Storage
         activate PersonList
-        PersonList-->>Storage: name:Person
+        PersonList --> Storage: :IncomeList
         deactivate PersonList
         deactivate Storage
-        Storage-->>PlanITarium.txt: writeToFile()
-        Storage->>PersonList: getIncomeList()
+        Storage -> Storage: writeToFile()
+        activate Storage
+        Storage -> PlanITarium.txt
+        activate PlanITarium.txt
+        PlanITarium.txt --> Storage
+        deactivate PlanITarium.txt
+        Storage --> Storage
+        deactivate Storage
+        Storage -> PersonList: getExpenditureList()
         activate Storage
         activate PersonList
-        PersonList-->>Storage: :IncomeList
+        PersonList --> Storage: :ExpenditureList
         deactivate PersonList
         deactivate Storage
-        Storage-->>PlanITarium.txt: writeToFile()
-        Storage->>PersonList: getExpenditureList()
+        Storage -> Storage: writeToFile()
         activate Storage
-        activate PersonList
-        PersonList-->>Storage: :ExpenditureList
-        deactivate PersonList
+        Storage -> PlanITarium.txt
+        activate PlanITarium.txt
+        PlanITarium.txt --> Storage
+        deactivate PlanITarium.txt
+        Storage --> Storage
         deactivate Storage
-        Storage-->>PlanITarium.txt: writeToFile()
     end
 end
-Storage -->> Main
+Storage --> ExitCommand
 deactivate Storage
-
-
+<--ExitCommand
+deactivate ExitCommand
 @enduml

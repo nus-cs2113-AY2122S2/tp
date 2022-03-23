@@ -74,7 +74,7 @@ The `Person` component,
 
 ### Storage Component
 **API: **
--- Insert puml diagram here
+<image src="images/StorageDiagram"/>
 The `Storage` component,
 
 * can save each person's data and their income and expenditure data when the program exits into a local file, and reads
@@ -294,7 +294,7 @@ the following operations:
 
 * `Storage#checkFileExists()` -- Checks if `PlanITarium.txt` file exists in the local hard drive, creates one if it 
   does not.
-* `Storage#saveData()` -- Writes `PersonList` record of each `Family` grouping into `PlanITarium.txt` file upon exit 
+* `Storage#saveData()` -- Writes `PersonList` record of each `Storage` grouping into `PlanITarium.txt` file upon exit 
   of the program.
 * `Storage#loadData()` -- Opens and reads `PlanITarium.txt` for any existing `PersonList` records and updates the
   `PersonList` data in the current session for each logical group in `Family`.
@@ -309,14 +309,14 @@ the local file `PlanITarium.txt` exists by calling `Storage#checkFileExists()` a
 in the local file will be read, parsed and added to the empty `PersonList` in `Storage` by calling `PersonList` adding 
 operations. The data in the `PersonList` will then be returned to `PersonList` for each `Family` grouping
 in the current session. The following sequence diagram shows how the loading operation works:
---insert load sequence here
+<image src="images/StorageLoadSequence"/>
 
 
 Step 3. The user then decides to exit the program by executing the command `bye`, `Storage#saveData` will be called.
 All data in the `Family` object will be written to the local file `PlanITarium.txt` in the format of
 `<group type> <user/operation> <Category> <Details>` which are to be read again when the program starts up. 
 The following Sequence diagram shows how the saving operation will work:
--- insert save sequence here
+image src="images/StorageSaveSequence"/>
 
 #### Design considerations:
 
