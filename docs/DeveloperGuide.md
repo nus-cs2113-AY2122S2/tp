@@ -55,7 +55,7 @@ The sequence diagram of `Storage#handleCorruptedSave()` is shown here:
 
 ### Value proposition
 
-Sherpas aims to help students to tackle their individual hectic schedules by means of a planner.
+Sherpass aims to help students to tackle their individual hectic schedules by means of a planner.
 Students can manage his/her time by adding their tasks into the application and get reminders
 when the tasks are due for completion. Students can also use the study timers within the study session
 to block out pockets of time for studying, so that they can better focus during study sessions.
