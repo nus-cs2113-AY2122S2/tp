@@ -61,7 +61,7 @@ public class UI {
     public static final String UPDATED_WORKOUT_MESSAGE = "Alright, the following workout has been updated:";
     //Plan-related Message
     public static final String NEW_PLAN_CREATED_MESSAGE = "Alright, the following plan has been created:";
-    public static final String NEW_DAY_CREATED_MESSAGE = "Alright, the following day schedule has been created:";
+    public static final String NEW_DAY_CREATED_MESSAGE = "Alright, the following plan schedule has been created:";
 
     // IOException Error Message
     public static final String IOEXCEPTION_ERROR_MESSAGE = "[ERROR] The program has encountered an IOException "
