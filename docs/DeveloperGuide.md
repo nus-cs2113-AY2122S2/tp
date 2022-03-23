@@ -78,6 +78,39 @@ track of time
   provided by Java has no way of pausing the timer, only stopping it.
 
 
+### Timetable 
+
+The **TimeTable** component prints the daily or weekly schedule that the user wishes to see. 
+
+The functionalities of the timetable include:
+- Prints a schedule specific to the date the user inputs 
+- Prints the schedule for the week the user is at
+- Prints the schedule of the day whenever the user starts up Sherpass.
+
+The **Timetable** is a class which interacts with the following components:
+1. Parser
+2. ShowCommand
+
+#### Parser Component
+
+The **Parser** is a class which parses the inputs which the user enters. 
+To activate the timetable, the user inputs commands that start with `show`
+This creates a **ShowCommand** object which will execute its method, thereby printing the timetable.
+
+#### ShowCommand Component
+
+Depending on the user input that was parsed by **Parser**, **ShowCommand** will call the 
+relative methods which prints the timetable.
+
+
+Below is a sequence diagram of what happens 
+as the user wishes to see the schedule (timetable) for 25th May 2022:
+
+![](images/showTodaySchedule.png)
+
+The sequence as shown above also happens in the same fashion as the user 
+requests to see the schedule for any day or the week the user is at.
+
 ### Loading saved files
 
 Class diagram of Storage:
@@ -134,10 +167,10 @@ to block out pockets of time for studying, so that they can better focus during 
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ...  | I want to ...             | So that I can ...                                           |
+|---------|-----------|---------------------------|-------------------------------------------------------------|
+| v1.0    | new user  | see usage instructions    | refer to them when I forget how to use the application      |
+| v2.0    | user      | find a to-do item by name | locate a to-do without having to go through the entire list |
 
 ## Non-Functional Requirements
 

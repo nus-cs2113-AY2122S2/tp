@@ -8,6 +8,7 @@ import seedu.sherpass.util.Ui;
 import java.time.LocalDate;
 
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
+import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_TWO;
 
 public class ShowCommand extends Command {
     public static final String COMMAND_WORD = "show";
@@ -31,19 +32,25 @@ public class ShowCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (dayInput != null) {
+            ui.showToUser("Here is the schedule you wanted:");
             Timetable.showScheduleByDay(dayInput, taskList, ui);
             return;
         }
 
         switch (selection) {
         case "todo":
+            ui.showToUser("Here are your pending tasks:");
             taskList.printPendingTasks(ui);
             break;
         case "today":
+            ui.showToUser(WELCOME_MESSAGE_TWO);
             Timetable.showTodaySchedule(taskList, ui);
+            ui.showToUser("What would you like to do next?");
             break;
         case "week":
+            ui.showToUser("Here is your schedule for the week:");
             Timetable.showScheduleOfTheWeek(taskList, ui);
+            ui.showToUser("What would you like to do next?");
             break;
         case "all":
             taskList.printAllTasks(ui);
