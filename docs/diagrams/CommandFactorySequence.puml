@@ -1,11 +1,12 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!include style.puml
 
-Box
-    participant Main
-    participant ":CommandFactory" as CommandFactory
-    participant ":Parser" as Parser
-    participant ":Command" as Command
+Box " "#WHITE
+    participant Main LOGIC_COLOR_T1
+    participant ":CommandFactory" as CommandFactory LOGIC_COLOR_T2
+    participant ":Parser" as Parser LOGIC_COLOR_T3
+    participant ":Command" as Command LOGIC_COLOR_T4
 
 end Box
 
