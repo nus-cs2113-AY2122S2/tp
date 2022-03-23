@@ -27,6 +27,7 @@ public class AddSatisfactionCommand extends Command {
      *                                   satisfaction value, or invalid satisfaction value).
      */
     public AddSatisfactionCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
+        commandStringWithoutCommand = commandStringWithoutCommand.toLowerCase(); // Move this to CommandParser later
         String customerName = "";
         int satisfactionValue = 0;
         try {
@@ -58,20 +59,11 @@ public class AddSatisfactionCommand extends Command {
      * @throws HotelLiteManagerException If there is an error in user input (the customer's name is empty).
      */
     private String extractCustomerName(String userInput) throws HotelLiteManagerException {
-        String[] splitInput = userInput.split(" ");
+        String[] splitInput = userInput.split("/");
         if (splitInput.length == 0) {
             throw new EmptySatisfactionCustomerException();
         }
-        String customerName = "";
-        // If customer's name consists of multiple words, concatenate those words to find full name
-        if (splitInput.length > 1) {
-            for (int i = 0; i < splitInput.length - 1; i++) {
-                customerName += splitInput[i] + " ";
-            }
-        } else { // Else, customer's name is one word
-            customerName = splitInput[0];
-        }
-        customerName = customerName.trim();
+        String customerName = splitInput[0].trim();
         if (customerName.isEmpty()) {
             throw new EmptySatisfactionCustomerException();
         }
@@ -88,11 +80,11 @@ public class AddSatisfactionCommand extends Command {
      *                                   empty or is not an integer between 1 and 5).
      */
     private int extractSatisfactionValue(String userInput) throws HotelLiteManagerException {
-        String[] splitInput = userInput.split(" ");
+        String[] splitInput = userInput.split("/");
         if (splitInput.length < 2) {
             throw new EmptySatisfactionValueException();
         }
-        String satisfactionString = splitInput[splitInput.length - 1].trim();
+        String satisfactionString = splitInput[1].trim();
         int satisfactionValue;
         try {
             satisfactionValue = Integer.parseInt(satisfactionString);

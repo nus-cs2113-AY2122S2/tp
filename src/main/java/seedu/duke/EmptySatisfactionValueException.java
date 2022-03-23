@@ -7,7 +7,8 @@ package seedu.duke;
 
 public class EmptySatisfactionValueException extends HotelLiteManagerException {
 
-    private static final String ERROR_MESSAGE = "Error! Satisfaction value cannot be empty.";
+    private static final String ERROR_MESSAGE = "Error! Satisfaction value cannot be empty."
+            + "Also ensure that there is a '/' separating the customer name from the satisfaction rating.";
 
     @Override
     public String getErrorMessage() {
