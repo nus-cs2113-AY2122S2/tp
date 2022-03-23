@@ -1,57 +1,55 @@
 @startuml
 participant User
+participant StudyCommand as ":StudyCommand"
+participant Parser as "<<class>>\nParser"
+participant TimerLogic as ":TimerLogic"
+participant Timer as ":Timer"
 
-User -> ":StudyCommand": start 1
-activate ":StudyCommand"
+User -> StudyCommand: start 1
+activate StudyCommand
 
-":StudyCommand" -> "<<class>>\nParser": parseStudyMode(start 1)
-activate "<<class>>\nParser"
+StudyCommand -> Parser: parseStudyMode(start 1)
+activate Parser
 
-"<<class>>\nParser" -> ":TimerLogic": callStartTimer()
-activate ":TimerLogic"
+Parser -> TimerLogic: callStartTimer()
+activate TimerLogic
 
-":TimerLogic" -> ":Timer": startTimer
-activate ":Timer"
+TimerLogic -> Timer: startTimer
+activate Timer
 
 par
-":Timer" -> ":Timer": start
-":Timer" --> ":TimerLogic"
+Timer -> Timer: start
+Timer --> TimerLogic
 end
 
 par
-":Timer" -> ":Timer": update
-":TimerLogic" --> "<<class>>\nParser"
+Timer -> Timer: update
+TimerLogic --> Parser
 end
 
-"<<class>>\nParser" --> ":StudyCommand"
-deactivate "<<class>>\nParser"
+Parser --> StudyCommand
+deactivate Parser
 
-":Timer" -> ":Timer": update
+Timer -> Timer: update
+StudyCommand --> User
+User -> StudyCommand: stop
+Timer -> Timer: update
 
-":StudyCommand" --> User
+StudyCommand -> Parser: parseStudyMode(stop)
+activate Parser
 
-User -> ":StudyCommand": stop
+Parser -> TimerLogic: callStopTimer()
+Timer -> Timer: update
+TimerLogic -> Timer: stopTimer
+Timer -> Timer: stop
 
-":Timer" -> ":Timer": update
+Timer --> TimerLogic
+deactivate Timer
 
-":StudyCommand" -> "<<class>>\nParser": parseStudyMode(stop)
-activate "<<class>>\nParser"
+TimerLogic --> Parser
 
-"<<class>>\nParser" -> ":TimerLogic": callStopTimer()
+Parser --> StudyCommand
+deactivate Parser
 
-":Timer" -> ":Timer": update
-
-":TimerLogic" -> ":Timer": stopTimer
-
-":Timer" -> ":Timer": stop
-
-":Timer" --> ":TimerLogic"
-deactivate ":Timer"
-
-":TimerLogic" --> "<<class>>\nParser"
-
-"<<class>>\nParser" --> ":StudyCommand"
-deactivate "<<class>>\nParser"
-
-":StudyCommand" --> User
+StudyCommand --> User
 @enduml
