@@ -9,18 +9,34 @@ import java.util.regex.Pattern;
 public class Validator {
 
     /* Validating person attributes */
+
+    /**
+     * Validates the nric in the format A1234567B
+     * @param nric
+     * @return true if matches
+     */
     private static boolean validateNric(String nric) {
         Pattern nricPattern = Pattern.compile("[A-Z][0-9]{7}[A-Z]");
         Matcher nricMatcher = nricPattern.matcher(nric);
         return nricMatcher.matches();
     }
 
+    /**
+     * Validate name is valid
+     * @param fullName
+     * @return true if valid
+     */
     private static boolean validateFullName(String fullName) {
         Pattern fullNamePattern = Pattern.compile("[a-zA-Z ]*");
         Matcher fullNameMatcher = fullNamePattern.matcher(fullName);
         return fullNameMatcher.matches();
     }
 
+    /**
+     * Validates age to be in the range of 1 to 120
+     * @param ageString
+     * @return true if valid
+     */
     private static boolean validateAge(String ageString) {
         int age;
         try {
@@ -28,25 +44,37 @@ public class Validator {
         } catch (NumberFormatException numberFormatException) {
             return false;
         }
-        if (1 <= age && age <= 120) {
-            return true;
-        } else {
-            return false;
-        }
+        //age must be within 1 and 120
+        return 1 <= age && age <= 120;
     }
 
+    /**
+     * Validates gender to be "M" or "F"
+     * @param gender
+     * @return true if valid
+     */
     private static boolean validateGender(String gender) {
         Pattern genderPattern = Pattern.compile("M|F");
         Matcher genderMatcher = genderPattern.matcher(gender);
         return genderMatcher.matches();
     }
 
+    /**
+     * Validates address
+     * @param address
+     * @return true if valid
+     */
     private static boolean validateAddress(String address) {
         Pattern addressPattern = Pattern.compile("[\\w\\-\\s'()#]*");
         Matcher addressMatcher = addressPattern.matcher(address);
         return addressMatcher.matches();
     }
 
+    /**
+     * Validates the date of birth to be between 1900 to today
+     * @param dobString
+     * @return true if valid
+     */
     private static boolean validateDob(String dobString) {
         LocalDate dob;
         try {
@@ -56,13 +84,15 @@ public class Validator {
         }
         LocalDate today = LocalDate.now();
         LocalDate dobLimit = LocalDate.parse("1900-01-01");
-        if (dob.isAfter(dobLimit) && dob.isBefore(today)) {
-            return true;
-        } else {
-            return false;
-        }
+        // dob is within the range of 1900 - today
+        return dob.isAfter(dobLimit) && dob.isBefore(today);
     }
 
+    /**
+     * Validate admission date to be after 1980 and before today
+     * @param admissionDateString
+     * @return
+     */
     private static boolean validateAdmissionDate(String admissionDateString) {
         LocalDate admissionDate;
         try {
@@ -72,11 +102,9 @@ public class Validator {
         }
         LocalDate today = LocalDate.now();
         LocalDate admissionDateLimit = LocalDate.parse("1980-01-01");
-        if (admissionDate.isAfter(admissionDateLimit) && admissionDate.isBefore(today)) {
-            return true;
-        } else {
-            return false;
-        }
+
+        // admission date is after 1980 and before today
+        return admissionDate.isAfter(admissionDateLimit) && admissionDate.isBefore(today);
     }
 
     /* Validating person */
@@ -114,7 +142,6 @@ public class Validator {
 
     static boolean validateAddDoctor(String[] parameters) {
         boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
-
         //validate full name cause specialization is also just a name
         if (validateFullName(parameters[6])) {
             UI.printParagraph("Specialization must be a name");
@@ -149,6 +176,11 @@ public class Validator {
         }
     }
 
+    /**
+     * Validate expiry to be at least six months from now
+     * @param expiry
+     * @return true if match
+     */
     private static boolean validateExpiry(String expiry) {
         try {
             LocalDate expiryDate = LocalDate.parse(expiry);
@@ -162,6 +194,11 @@ public class Validator {
         }
     }
 
+    /**
+     * Validate quantity to be integer and also more than zero
+     * @param quantity
+     * @return true if match
+     */
     private static boolean validateQuantity(String quantity) {
         try {
             int quantityInt = Integer.parseInt(quantity);
