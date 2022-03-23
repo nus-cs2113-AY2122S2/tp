@@ -218,14 +218,14 @@ income/expenditure` to `editing the value`.}
 #### Proposed Implementation
 
 The proposed listing categorised expenditure feature is facilitated by `Categories`,
-`Money(temp)`, `MoneyList(temp)`  and `Family`. The `Categories` is an enumeration of keys
-that is used as the expenditure categories. The `Money(temp)` will have an additional integer 
+`Expenditure`, `ExpenditureList`  and `Family`. The `Categories` is an enumeration of keys
+that is used as the expenditure categories. The `Expenditure` will have an additional integer 
 attribute that acts as an index to a category. Additionally, the following operations are 
 implemented:
 
 * `Categories#getLabel(index)` -- Returns the name of the category with this index. 
-* `Money(temp)#getCategory()` -- Returns the category index for this expense.
-* `MoneyList(temp)#getExpenseOfCategory(index)` -- Returns a list of expenditures having 
+* `Expenditure#getCategory()` -- Returns the category index for this expense.
+* `ExpenditureList#getExpenseOfCategory(index)` -- Returns a list of expenditures having 
 category index matching the index argument.
 * `Family#listExpenseOfCategory(index)` -- Lists all expenses from the category index.
 
@@ -239,7 +239,7 @@ tracked - parents and myGen.
 
 <image src="images/ListCategorisedExpense0.png"/>
 
-Step 2. The user executes `listc /c 1` command to list all expenses in category `1`. The `listcat`
+Step 2. The user executes `listcat /c 1` command to list all expenses in category `1`. The `listcat`
 command will be parsed and calls `Family#listExpenseOfCategory(1)` which would instantiate a
 temporary array list for storing the results of the upcoming search.
 
@@ -247,9 +247,9 @@ temporary array list for storing the results of the upcoming search.
 
 Step 3. After the temporary array list has been created, the generations being tracked will be
 iterated for `Person` objects. The `expenditureList` for a person would be retrieved during that
-person's iteration and `MoneyList(temp)#getExpenseOfCategory(1)` will be called as `expenditureList`
-extends `MoneyList(temp)`. This method then iterates through the list and calls
-`Money(temp)#getCategory()` on each expenditure, collecting and returning the expenditure if its
+person's iteration and `ExpenditureList#getExpenseOfCategory(1)` will be called as `expenditureList`
+extends `ExpenditureList`. This method then iterates through the list and calls
+`Expenditure#getCategory()` on each expenditure, collecting and returning the expenditure if its
 category matches the given index. The returned expenditures are then appended to the temporary
 array list.
 
@@ -265,8 +265,9 @@ a series of print to display the expenditures in this category.
 > check the index provided using `Parser#checkValidCategory` before iterating `Family`. If the check
 > fails, an error message will be displayed to the user instead of continuing with the execution.
 
-The following sequence diagram shows how the `listcat` operation works after the `ListCatCommand` has
-been created by [`CommandFactory`](#PlaceholderToCommandFactory):
+The following sequence diagram shows how the `listcat` operation works after a `ListCatCommand` 
+command object has been created by [`CommandFactory`](#Command-Execution):
+
 <image src="images/ListCategorisedExpenseSequence.png"/>
 
 #### Design considerations:
