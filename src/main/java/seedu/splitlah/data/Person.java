@@ -17,9 +17,9 @@ public class Person implements Serializable {
     private ArrayList<ActivityCost> activityCostList;
 
     /**
-     * Constructs a Person object from a Name object.
+     * Initializes a Person object.
      *
-     * @param name Name object representing the name of the Person object to be created.
+     * @param name A Name object representing the name of the Person object to be created.
      */
     public Person(Name name) {
         this.activityCostList = new ArrayList<>();

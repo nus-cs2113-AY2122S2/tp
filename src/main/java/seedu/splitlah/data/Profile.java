@@ -21,7 +21,7 @@ public class Profile implements Serializable {
     private int groupIdTracker;
 
     /**
-     * Constructor to create a Profile object.
+     * Initializes a Profile object.
      */
     public Profile() {
         this.sessionList = new ArrayList<>();

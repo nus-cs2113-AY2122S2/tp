@@ -62,16 +62,18 @@ public class ActivityCreateCommand extends Command {
     private static final int NO_COST = 0;
 
     /**
-     * Constructor to create a ActivityCreateCommand object.
+     * Initializes an ActivityCreateCommand object.
      *
      * @param sessionId     An integer that uniquely identifies a session.
      * @param activityName  A String object that represents the Activity object's name.
      * @param totalCost     A double that represents total cost of the activity.
-     * @param payer         The name of the person who paid for the activity.
-     * @param involvedList  The names of the persons who are involved in the activity.
-     * @param costList      The respective costs of each person involved in the activity.
-     * @param gst           The gst to be included for the cost of the activity.
-     * @param serviceCharge The service charge to be included for the cost of the activity.
+     * @param payer         A String object that represents the name of the person who paid for the activity.
+     * @param involvedList  An array of String objects that represents the names of the persons
+     *                      who are involved in the activity.
+     * @param costList      A double array object that represents the respective costs of
+     *                      each person involved in the activity.
+     * @param gst           A double that represents the gst to be included for the cost of the activity.
+     * @param serviceCharge A double that represents the service charge to be included for the cost of the activity.
      */
     public ActivityCreateCommand(int sessionId, String activityName, double totalCost, String payer,
                                  String[] involvedList, double[] costList, double gst, double serviceCharge) {
@@ -90,7 +92,7 @@ public class ActivityCreateCommand extends Command {
     }
 
     /**
-     * Prepares user arguments for activity create command.
+     * Prepares user arguments for the creation of an ActivityCreateCommand object.
      *
      * @param commandArgs A String object representing the user's arguments.
      * @return An ActivityCreateCommand object if necessary parameters were found in user arguments,
@@ -331,11 +333,11 @@ public class ActivityCreateCommand extends Command {
     }
 
     /**
-     * Runs the command to create an activity.
+     * Runs the command to create an Activity object to be stored in a Session object managed by the Profile object.
      * Gets relevant parameters to create an Activity object.
      * If no errors getting parameters, an Activity object is created and added to the session.
      *
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {

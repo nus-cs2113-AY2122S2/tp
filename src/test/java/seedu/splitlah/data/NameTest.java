@@ -1,6 +1,7 @@
 package seedu.splitlah.data;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import seedu.splitlah.exceptions.InvalidDataException;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
