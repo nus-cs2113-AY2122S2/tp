@@ -46,7 +46,7 @@ public abstract class Event {
 
     @Override
     public String toString() {
-        return String.format("\t\tTITLE: %s\t\tDAY: %s\t\tSTART: %04d\t\tEND: %04d\t\tMODE: %s",
+        return String.format("TITLE: %s\t\tDAY: %s\t\tSTART: %04d\t\tEND: %04d\t\tMODE: %s",
                             title, day, startTime, endTime, mode);
     }
 

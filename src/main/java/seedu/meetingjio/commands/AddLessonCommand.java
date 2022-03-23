@@ -12,8 +12,8 @@ import seedu.meetingjio.timetables.Timetable;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
 
-public class AddCommand extends Command {
-    public static final String COMMAND_WORD = "add";
+public class AddLessonCommand extends Command {
+    public static final String COMMAND_WORD = "add_lesson";
 
     private final String name;
     private final String title;
@@ -22,7 +22,7 @@ public class AddCommand extends Command {
     private final int endTime;
     private final String mode;
 
-    public AddCommand(String name, String title, String day, int startTime, int endTime, String mode) {
+    public AddLessonCommand(String name, String title, String day, int startTime, int endTime, String mode) {
         this.name = name;
         this.title = title;
         this.day = day;
