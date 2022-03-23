@@ -181,4 +181,57 @@ public class Validator {
         }
         return check;
     }
+
+    /* Validate appointment */
+    
+    private static boolean validateAppointmentDetails(String appointmentDetails) {
+        if (appointmentDetails.isBlank() || appointmentDetails.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private static boolean validateDate(String inputDate, String type) {
+        LocalDate newDate;
+        try {
+            newDate = LocalDate.parse(inputDate);
+        } catch (DateTimeParseException dateTimeParseException) {
+            return false;
+        }
+        LocalDate today = LocalDate.now();
+        LocalDate admissionDateLimit = LocalDate.parse("1980-01-01");
+        if (type.equals("appointment") && newDate.isAfter(today)) {
+            return true;
+        } else if (type.equals("patient") && newDate.isAfter(admissionDateLimit) && newDate.isBefore(today)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static void validateAddAppointment(String[] parameters) throws HalpmiException {
+        if (!validateNric(parameters[0])) {
+            throw new HalpmiException("Patient NRIC must start with a capital letter, " + "followed by 7 digits and end with a capital letter.");
+
+        }
+        if (!validateFullName(parameters[1])) {
+            throw new HalpmiException("Patient name must contain only alphabets and no special characters.");
+        }
+        if (!validateNric(parameters[2])) {
+            throw new HalpmiException("Doctor NRIC must start with a capital letter, "
+                    + "followed by 7 digits and end with a capital letter.");
+        }
+        if (!validateFullName(parameters[3])) {
+            throw new HalpmiException("Doctor name must contain only alphabets and no special characters.");
+        }
+        if (!validateDate(parameters[4], "appointment")) {
+            throw new HalpmiException("Date of birth must be in YYYY-MM-DD format."
+                    + "It cannot be today or before.");
+        }
+        if (!validateAppointmentDetails(parameters[5])) {
+            throw new HalpmiException("Appointment details cannot be empty. Please indicate some details.");
+
+        }
+    }
 }

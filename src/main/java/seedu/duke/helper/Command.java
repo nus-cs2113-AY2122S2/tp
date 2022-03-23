@@ -1,5 +1,6 @@
 package seedu.duke.helper;
 
+import seedu.duke.assets.AppointmentList;
 import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
@@ -100,6 +101,18 @@ public class Command {
             UI.printParagraph("The medicine record at index " + index + " has been deleted.");
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             ui.printDeleteMedicineExampleMessage(medicineList);
+        }
+    }
+
+    public void addAppointment(AppointmentList appointmentList, PatientList patientList,
+                               DoctorList doctorList, String parameters) {
+        try {
+            String[] addAppointmentParameters = Parser.parseAddAppointment(parameters);
+            appointmentList.add(addAppointmentParameters);
+            UI.printParagraph("The above appointment has been added.");
+        } catch (HalpmiException e) {
+            UI.printParagraph(e.toString());
+            ui.printAddAppointmentExampleMessage();
         }
     }
 }

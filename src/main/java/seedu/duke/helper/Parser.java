@@ -2,9 +2,8 @@ package seedu.duke.helper;
 
 import seedu.duke.exception.HalpmiException;
 
+
 public class Parser {
-
-
     public static String[] commandParser(String userInput) {
         return userInput.trim().split("/info");
     }
@@ -12,7 +11,6 @@ public class Parser {
     private static String[] minParameterCheck(String parameters, int length) throws HalpmiException {
         try {
             String[] parametersArray = parameters.split(",");
-
             if (parametersArray.length != length) {
                 throw new HalpmiException("There is one or more parameters missing");
             }
@@ -42,5 +40,12 @@ public class Parser {
         Validator.validateMedicine(medicineParameters);
         return medicineParameters;
     }
+
+    public static String[] parseAddAppointment(String parameters) throws HalpmiException {
+        String[] addAppointmentParameters = minParameterCheck(parameters, 6);
+        Validator.validateAddAppointment(addAppointmentParameters);
+        return addAppointmentParameters;
+    }
+
 
 }
