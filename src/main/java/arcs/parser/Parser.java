@@ -1,15 +1,17 @@
 package arcs.parser;
 
 
-import arcs.commands.AddRouteCommand;
+import arcs.commands.route.AddRouteCommand;
+import arcs.commands.route.DeleteRouteCommand;
+import arcs.commands.route.FindRouteCommand;
+import arcs.commands.route.FlightRouteCommand;
+import arcs.commands.route.ListRouteCommand;
 import arcs.commands.Command;
 import arcs.commands.ExitCommand;
-import arcs.commands.ListRouteCommand;
-import arcs.commands.DeleteRouteCommand;
-import arcs.commands.FindRouteCommand;
 import arcs.commands.UndefinedCommand;
 
 public class Parser {
+
     public Command parseCommand(String userInput) {
         String[] fullInput = userInput.split(" ", 2);
         String commandWord = fullInput[0];
@@ -20,9 +22,6 @@ public class Parser {
         case AddRouteCommand.COMMAND_WORD:
             command = prepareAddRoute(argumentLine);
             break;
-        case ExitCommand.COMMAND_WORD:
-            command = new ExitCommand();
-            break;
         case ListRouteCommand.COMMAND_WORD:
             command = new ListRouteCommand();
             break;
@@ -31,6 +30,9 @@ public class Parser {
             break;
         case FindRouteCommand.COMMAND_WORD:
             command = prepareFindRouteCommand(argumentLine);
+            break;
+        case ExitCommand.COMMAND_WORD:
+            command = new ExitCommand();
             break;
         default:
             command = new UndefinedCommand();
@@ -142,4 +144,5 @@ public class Parser {
         }
         return new FindRouteCommand(date, to, from, time);
     }
+
 }

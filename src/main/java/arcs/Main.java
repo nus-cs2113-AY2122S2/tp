@@ -1,19 +1,24 @@
 package arcs;
 
-import arcs.commands.Command;
 import arcs.commands.CommandResult;
 import arcs.data.RouteManager;
 import arcs.parser.Parser;
 import arcs.storage.RouteFileManager;
-import arcs.ui.Ui;
+import arcs.commands.Command;
+import arcs.ui.MainUi;
 
 import java.io.IOException;
 
 
 public class Main {
-    private Ui ui;
+    private MainUi mainUi;
     private RouteManager routeManager;
-    private Parser parser;
+
+    /**
+     * Parser object.
+     */
+    private final Parser parser;
+
     private RouteFileManager routeFileManager;
 
     /**
@@ -23,33 +28,39 @@ public class Main {
         new Main().run();
     }
 
-    public void run() {
-        ui = new Ui();
+    public Main() {
+        // Initialize ui, logic and storage classes
+        mainUi = new MainUi();
         parser = new Parser();
+        routeFileManager = new RouteFileManager();
         loadData();
-        Command command;
-        ui.showWelcomeMessage();
 
+    }
+
+
+    public void run() {
+        Command command;
+        mainUi.displayWelcomeMessage();
 
         do {
-            ui.showDivider();
-            String userCommandText = ui.getUserCommand();
+            String userCommandText = mainUi.getUserCommand();
             command = parser.parseCommand(userCommandText);
             command.setData(routeManager);
             CommandResult result = command.execute();
-            ui.showResultToUser(result);
+            mainUi.displayResultToUser(result);
+            mainUi.displayLineDivider();
         } while (!command.isExit());
 
         saveData();
-        ui.showExitMessage();
+        mainUi.displayExitMessage();
     }
 
     public void loadData() {
-        routeFileManager = new RouteFileManager();
+
         try {
             routeManager = new RouteManager(routeFileManager.loadData());
         } catch (IOException e) {
-            ui.showToUser(e.getMessage());
+            mainUi.displayMessages(e.getMessage());
             routeManager = new RouteManager();
         }
     }
@@ -58,7 +69,7 @@ public class Main {
         try {
             routeFileManager.saveData(routeManager.getAllRoutes());
         } catch (IOException e) {
-            ui.showToUser(e.getMessage());
+            mainUi.displayMessages(e.getMessage());
         }
     }
 }
