@@ -82,6 +82,21 @@ The above sequence diagram shows the operation of how the add goods method will 
 
 For more examples of how a user can use a command, refer to the [UserGuide](/UserGuide.md)
 
+### Remove Goods Method
+#### Description
+Remove Goods belongs as part of the Commands Class. It is used to remove a certain amount of goods from the inventory.
+#### Operation
+![removeGood diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/removeGood.puml)
+The above sequence diagram shows the operation of how the add goods method will be called.
+1. The User input will be read by the User Interface Class
+2. The User Interface Class will then match the command keyword `remove`
+3. The Regex Class will then be called to match the rest of the user's input to find the values required to remove goods from the inventory.
+4. Afterwards, the User Interface class will call removeGood() method from the Commands Class
+5. This method will then 
+6. The addGood() method will then add the Good to the Collections storing the Good Objects currently in the WareHouse
+
+For more examples of how a user can use a command, refer to the [UserGuide](/UserGuide.md)
+
 ### List Goods Method
 #### Description
 The list method belongs to the Command Class. It is used to display the list of existing goods in the warehouse to the

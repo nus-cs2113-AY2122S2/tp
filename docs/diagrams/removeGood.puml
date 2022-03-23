@@ -14,7 +14,7 @@ regex -> ui -- : Hashmap of results
 
 deactivate regex
 
-ui -> command ++ : removeGood(id, name, quantity, description, userGoods)
+ui -> command ++ : removeGood(id, quantity, userGoods)
 alt quantity input <= existing quantity
     command -> good ++ : reduce quantity of goods
     opt quantity input = existing quantity
