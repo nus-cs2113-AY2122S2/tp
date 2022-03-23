@@ -10,7 +10,7 @@ import seedu.splitlah.parser.ParserUtils;
 
 
 /**
- * Represents a command which displays the details of an Activity object specified by user input in a Session object.
+ * Represents a command which displays the full details of an Activity object in a Session object.
  * 
  * @author Tianle
  */
@@ -46,7 +46,7 @@ public class ActivityViewCommand extends Command {
      * Runs the command with the session and activity unique identifier as provided by the user input and
      * prints the details of the activity.
      * 
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {

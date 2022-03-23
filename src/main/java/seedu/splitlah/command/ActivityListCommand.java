@@ -31,7 +31,7 @@ public class ActivityListCommand extends Command {
     private static final String LIST_CLOSER_POSTPEND = ")";
 
     /**
-     * Initializes a ActivityListCommand object.
+     * Initializes an ActivityListCommand object.
      *
      * @param sessionId An integer that uniquely identifies a session.
      */
@@ -41,9 +41,9 @@ public class ActivityListCommand extends Command {
     }
 
     /**
-     * Runs the command to list all existing activities in a Session object.
+     * Runs the command to list all existing activities in a Session object managed by the Profile Object.
      * 
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {
@@ -69,7 +69,7 @@ public class ActivityListCommand extends Command {
     }
 
     /**
-     * Prepares user argument for activity list command.
+     * Prepares user arguments for the creation of an ActivityListCommand object.
      *
      * @param  commandArgs A String object that represents the user's arguments.
      * @return An ActivityListCommand object if sessionId was found in user argument,

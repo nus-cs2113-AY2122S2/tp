@@ -20,9 +20,9 @@ public class SessionListCommand extends Command {
     private static final String SESSION_LIST_HEADER = "List of Sessions";
 
     /**
-     * Runs the command to list all existing sessions.
+     * Runs the command to list all existing sessions managed by the Profile Object.
      *
-     * @param manager A manager object that gets the TextUI and Profile object to print the list of sessions.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {

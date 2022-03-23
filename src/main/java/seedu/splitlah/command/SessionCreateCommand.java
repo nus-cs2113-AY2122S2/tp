@@ -45,7 +45,7 @@ public class SessionCreateCommand extends Command {
      * Initializes a SessionCreateCommand object.
      *
      * @param sessionName A String object that represents the session name.
-     * @param personNames A String object array that represents the involved persons for the session.
+     * @param personNames An array of String objects that represents the involved persons for the session.
      * @param date        A LocalDate object that represents the date of the session.
      * @param groupId     An integer that represents the group unique identifier.
      */
@@ -119,7 +119,7 @@ public class SessionCreateCommand extends Command {
      * If check fails, no session is created and prints error message.
      * Else a session is created and prints success message.
      *
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {

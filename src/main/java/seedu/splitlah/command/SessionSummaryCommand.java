@@ -201,7 +201,7 @@ public class SessionSummaryCommand extends Command {
      * Runs the command with the session identifier as provided by the user input and prints a
      * summary of expenditure for the session specified by the session identifier.
      *
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {
