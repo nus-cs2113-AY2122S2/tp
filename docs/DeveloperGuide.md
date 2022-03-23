@@ -13,12 +13,36 @@ The assignment of housekeeper to a room is facilitated by `AssignHousekeeperComm
 Map<Room, Housekeeper> map = new HashMap<>();
 ``
 
-The following class diagram exhibits how `AssignHousekeeperCommand` 
-and `AssignmentMap` fit into the larger structure of the application.
+The following steps exhibit how `AssignHousekeeperCommand` 
+and `AssignmentMap` fit together in the structure and how the mechanism for adding an assinment behaves at each step.
 
+__Step 1.__ The user launches the application. In the `Duke` class, an empty instance of the `AssignmentMap` class,
+called `assignmentMap`, is created.
 
-To understand the interaction between objects of these classes in order to actually add an entry into the hash map inside an `AssignmentMap`, refer to the sequence diagram below.
+![Step 1](team/aiman_assignment/step1.png)
 
+__Step 2.__ The user types the command `Assign Susan ## 301`. In the `Duke` class, a `Command` object
+is created by invoking the `CommandParser` class's constructor on the user input. The details of this
+step are further described below.
+
+![Step 2 Object Diagram](team/aiman_assignment/step2.png)
+
+__Step 3.__ The `CommandParser` class replaces the `Assign Susan ## 301` in the user input with an empty string,
+leaving just `Susan ## 301`. Then, an instance of `AssignHousekeeperCommand` is created which extends `Command`.
+
+![Step 3 Object Diagram](team/aiman_assignment/step3.png)
+
+__Step 4.__ The `assignHousekeeperCommand` object parses the name of the housekeeper and the ID of the room and send both to the the `assignmentMap`.
+
+![Step 4 Object Diagram](team/aiman_assignment/step4.png)
+
+__Step 5.__ The `assignmentMap` looks for the appropriate `Room` object for `301` in the `RoomList` and then looks for the appropriate `Housekeeper` object for `Susan`. It then adds both to the hashmap contained inside itself.
+
+![Step 5 Object Diagram](team/aiman_assignment/step5.png)
+
+__Interaction__ To understand the interaction between objects of these classes in order to actually add an entry into the hash map inside an `AssignmentMap`, refer to the sequence diagram below.
+
+![Step Sequence Diagram](team/aiman_assignment/sequence.png)
 
 The command object passes on the ID of the room and the name of the housekeeper to the `AssignmentMap` object after parsing the input appropriately. The `addAssignment` function first locates the appropriate `Room` object from `RoomList`, and then looks for the `Housekeeper` object in the `HousekeeperList` and finally adds the mapping to the hash map.
 
