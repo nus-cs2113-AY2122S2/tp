@@ -58,7 +58,7 @@ is responsible for,
 
 The **API** of this component is specified in `Family.java`, `PersonList.java` and `Person.java`.
 
-<image src="images/PersonsComponent.png" width="300"></image>
+<image src="images/PersonsComponent.png"></image>
 
 The list of persons consists of a `Family` that is made up of generational `PersonList`s. Each `PersonList` holds a  
 list of `Person`s who belong to that generation.
@@ -111,7 +111,8 @@ Given below is an example usage scenario and how a generation's high level finan
 
 Step 1. The user launches the application. A `Family` object will be initialised with its 3 generational   
 `PersonList`s. They are `parents`, `myGen`, and `children`.
--- Insert UML object diagram here
+
+<image src="images/PersonStep1.png"></image>
 
 Step 2. The user wishes to add a person, say `John Doe`, to the `children` list. The user executes   
 `add /n John Doe /g 3` command, adding a `Person` with `name` as `John Doe` to group 3, which is the `children`.

@@ -2,9 +2,9 @@
 !include style.puml
 
 Package "Person" <<Rectangle>> {
-    Class Family MODEL_COLOR
-    Class PersonList MODEL_COLOR_T1
-    Class Person  MODEL_COLOR_T2
+    class Family MODEL_COLOR
+    class PersonList MODEL_COLOR_T1
+    class Person  MODEL_COLOR_T2
 }
 
 Family "1" -down[#grey]-> "3" PersonList
