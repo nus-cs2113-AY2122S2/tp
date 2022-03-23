@@ -6,7 +6,14 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+Here is a quick overview of the design of the application:
+
+![](diagrams/class/all.png)
+
+Note that the diagram does not include all entities, controllers, and managers
+present in the programme. It is only meant to give a quick overview of the project structure.
+
+The later parts of this guide looks into detail each specific part of the programme.
 
 ### Controllers
 A `Controller` is defined as the user-facing part of the programme. It is in charge of getting

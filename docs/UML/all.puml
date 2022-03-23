@@ -1,0 +1,68 @@
+@startuml
+abstract class Manager {
+-{static}DATABASE_DIRECTORY : String
+-file : String
+#Manager(file : String)
+-ensureDatabaseDirectoryExists() : void
+#load() : Object
+#save(o : Object) : void
+#{abstract}loadData() : void
++{abstract}saveData() : void
+}
+
+class StaffManager {
++StaffManager()
+#loadData() : void
++saveData() : void
+}
+
+abstract class Controller {
+#choices : String[]
++Controller(choices : String[])
++takeControl() : void
+#getChoice() : int
+#{abstract}optionSwitcher() : bool
+}
+
+class StaffController {
+-{static}CHOICES : String[]
+-staffManager : StaffManager
++StaffController()
+#optionSwitcher() : bool
+-findStaff() : void
+-addStaff() : void
+-deleteStaff() : void
+}
+
+class Staff {
+    -staffId: int
+    -staffName: String
+    -position: String
+    -salary: double
+    +Staff(int, String, String, double)
+    +isValidName(String): boolean
+    +getStaffId(): int
+    +setStaffId(int): void
+    +getStaffName(): String
+    +setStaffName(String): void
+    +getPosition(): String
+    +setPosition(String): void
+    +getSalary(): double
+    +setSalary(double): void
+    +toString(): String
+}
+
+class InputParser {
++{static}TERMINATOR : String = "-"
+-{static}scanner : Scanner
++{static}getString(msg : String) : String
++{static}getInteger(msg : String) : int
++{static}getDouble(msg : String) : double
+}
+
+Manager <|--- StaffManager
+StaffManager <--* StaffController
+Controller <|--- StaffController
+Controller ..> InputParser
+StaffManager --> "0..*" Staff : staffs
+@enduml
