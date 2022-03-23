@@ -46,6 +46,8 @@ class ParserTest {
             fail();
         } catch (AssertionError e) {
             assertEquals("User input should not be null", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -63,6 +65,8 @@ class ParserTest {
             fail();
         } catch (AssertionError e) {
             assertEquals("User input should not be null", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -74,7 +78,7 @@ class ParserTest {
             fail();
         } catch (MissingDelimiterException e) {
             assertEquals("Missing delimiter `/n`", e.getMessage());
-        } catch (DuplicateDelimiterException e) {
+        } catch (Exception e) {
             fail();
         }
         try {
@@ -83,7 +87,7 @@ class ParserTest {
             fail();
         } catch (DuplicateDelimiterException e) {
             assertEquals("Too many delimiter `/n`", e.getMessage());
-        } catch (MissingDelimiterException e) {
+        } catch (Exception e) {
             fail();
         }
     }
@@ -102,6 +106,8 @@ class ParserTest {
             fail();
         } catch (AssertionError e) {
             assertEquals("User input should not be null", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -113,7 +119,7 @@ class ParserTest {
             fail();
         } catch (MissingDelimiterException e) {
             assertEquals("Missing delimiter `/u`", e.getMessage());
-        } catch (DuplicateDelimiterException e) {
+        } catch (Exception e) {
             fail();
         }
         try {
@@ -122,7 +128,7 @@ class ParserTest {
             fail();
         } catch (DuplicateDelimiterException e) {
             assertEquals("Too many delimiter `/u`", e.getMessage());
-        } catch (MissingDelimiterException e) {
+        } catch (Exception e) {
             fail();
         }
     }
@@ -141,6 +147,8 @@ class ParserTest {
             fail();
         } catch (AssertionError e) {
             assertEquals("User input should not be null", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -152,7 +160,7 @@ class ParserTest {
             fail();
         } catch (MissingDelimiterException e) {
             assertEquals("Missing delimiter `/d`", e.getMessage());
-        } catch (DuplicateDelimiterException e) {
+        } catch (Exception e) {
             fail();
         }
         try {
@@ -161,7 +169,7 @@ class ParserTest {
             fail();
         } catch (DuplicateDelimiterException e) {
             assertEquals("Too many delimiter `/d`", e.getMessage());
-        } catch (MissingDelimiterException e) {
+        } catch (Exception e) {
             fail();
         }
     }
@@ -180,6 +188,8 @@ class ParserTest {
             fail();
         } catch (AssertionError e) {
             assertEquals("User input should not be null", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -191,7 +201,7 @@ class ParserTest {
             fail();
         } catch (MissingDelimiterException e) {
             assertEquals("Missing delimiter `/i`", e.getMessage());
-        } catch (DuplicateDelimiterException e) {
+        } catch (Exception e) {
             fail();
         }
         try {
@@ -200,7 +210,7 @@ class ParserTest {
             fail();
         } catch (DuplicateDelimiterException e) {
             assertEquals("Too many delimiter `/i`", e.getMessage());
-        } catch (MissingDelimiterException e) {
+        } catch (Exception e) {
             fail();
         }
     }
@@ -219,6 +229,8 @@ class ParserTest {
             fail();
         } catch (AssertionError e) {
             assertEquals("User input should not be null", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -230,7 +242,7 @@ class ParserTest {
             fail();
         } catch (MissingDelimiterException e) {
             assertEquals("Missing delimiter `/e`", e.getMessage());
-        } catch (DuplicateDelimiterException e) {
+        } catch (Exception e) {
             fail();
         }
         try {
@@ -239,7 +251,7 @@ class ParserTest {
             fail();
         } catch (DuplicateDelimiterException e) {
             assertEquals("Too many delimiter `/e`", e.getMessage());
-        } catch (MissingDelimiterException e) {
+        } catch (Exception e) {
             fail();
         }
     }
@@ -258,6 +270,8 @@ class ParserTest {
             fail();
         } catch (AssertionError e) {
             assertEquals("User input should not be null", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -269,7 +283,7 @@ class ParserTest {
             fail();
         } catch (MissingDelimiterException e) {
             assertEquals("Missing delimiter `/r`", e.getMessage());
-        } catch (DuplicateDelimiterException e) {
+        } catch (Exception e) {
             fail();
         }
         try {
@@ -278,7 +292,7 @@ class ParserTest {
             fail();
         } catch (DuplicateDelimiterException e) {
             assertEquals("Too many delimiter `/r`", e.getMessage());
-        } catch (MissingDelimiterException e) {
+        } catch (Exception e) {
             fail();
         }
     }
@@ -297,7 +311,7 @@ class ParserTest {
             fail();
         } catch (AssertionError e) {
             assertEquals("Money input should not be null", e.getMessage());
-        } catch (InvalidMoneyException e) {
+        } catch (Exception e) {
             fail();
         }
     }
@@ -310,6 +324,8 @@ class ParserTest {
             fail();
         } catch (InvalidMoneyException e) {
             assertEquals("Invalid money value: `-10.50`", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -321,6 +337,8 @@ class ParserTest {
             fail();
         } catch (InvalidMoneyException e) {
             assertEquals("Invalid money value: `hundred`", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -342,6 +360,8 @@ class ParserTest {
             fail();
         } catch (AssertionError e) {
             assertEquals("User index should not be null", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -354,6 +374,8 @@ class ParserTest {
             fail();
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `Alice`", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -364,16 +386,20 @@ class ParserTest {
         try {
             String tooLow = "0";
             Parser.getValidUserIndex(tooLow, personList);
-
+            fail();
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `0`", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
         try {
             String tooLow = "2";
             Parser.getValidUserIndex(tooLow, personList);
-
+            fail();
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `2`", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -399,6 +425,8 @@ class ParserTest {
             fail();
         } catch (AssertionError e) {
             assertEquals("Expenditure index should not be null", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -414,6 +442,8 @@ class ParserTest {
             fail();
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `Alice`", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -429,6 +459,8 @@ class ParserTest {
 
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `0`", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
         try {
             String tooLow = "2";
@@ -436,6 +468,8 @@ class ParserTest {
 
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `2`", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -461,6 +495,8 @@ class ParserTest {
             fail();
         } catch (AssertionError e) {
             assertEquals("Income index should not be null", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -476,6 +512,8 @@ class ParserTest {
             fail();
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `Alice`", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 
@@ -488,16 +526,20 @@ class ParserTest {
         try {
             String tooLow = "0";
             Parser.getValidIncomeIndex(tooLow, person);
-
+            fail();
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `0`", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
         try {
             String tooLow = "2";
             Parser.getValidIncomeIndex(tooLow, person);
-
+            fail();
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `2`", e.getMessage());
+        } catch (Exception e) {
+            fail();
         }
     }
 }
