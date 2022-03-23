@@ -3,6 +3,7 @@ package seedu.duke.helper;
 import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
+import seedu.duke.exception.HalpmiException;
 
 
 public class Command {
@@ -21,23 +22,19 @@ public class Command {
     }
 
     public void addPatient(PatientList patientList, String parameters) {
-        if (isNull(parameters)) {
-            ui.printNullParametersMessage();
-            ui.printAddPatientExampleMessage();
-            return;
-        }
-        String[] addPatientParameters = Parser.parseAddPatient(parameters);
-        if (addPatientParameters == null) {
-            ui.printAddPatientExampleMessage();
-        } else {
+        try {
+            String[] addPatientParameters = Parser.parseAddPatient(parameters);
             patientList.add(addPatientParameters);
-            ui.printParagraph("The patient above has been added.");
+            UI.printParagraph("The patient above has been added.");
+        } catch(HalpmiException e) {
+            UI.printParagraph(e.toString());
+            ui.printAddPatientExampleMessage();
         }
     }
 
     public void deletePatient(PatientList patientList, String stringIndex) {
         if (patientList.getSize() == 0) {
-            ui.printParagraph("There is nothing to delete in patientList.");
+            UI.printParagraph("There is nothing to delete in patientList.");
             return;
         }
         int index;
@@ -49,7 +46,7 @@ public class Command {
         }
         if (1 <= index && index <= patientList.getSize()) {
             patientList.removePatient(index - 1);
-            ui.printParagraph("The patient with the above index number has been removed.");
+            UI.printParagraph("The patient with the above index number has been removed.");
         } else {
             ui.printDeletePatientExampleMessage(patientList);
         }
@@ -73,7 +70,7 @@ public class Command {
         }
         if (1 <= indexDoctor && indexDoctor <= doctorList.getSizeDoctor()) {
             doctorList.removeDoctor(indexDoctor - 1);
-            ui.printParagraph("The doctor with the specified index has been removed.");
+            UI.printParagraph("The doctor with the specified index has been removed.");
         } else {
             ui.printDeleteDoctorErrorMessage(doctorList);
         }
@@ -82,18 +79,18 @@ public class Command {
 
     public void addMedicine(MedicineList medicineList, String parameters) {
         if (isNull(parameters)) {
-            ui.printParagraph("Invalid format. Please follow the below example and try again.\n"
+            UI.printParagraph("Invalid format. Please follow the below example and try again.\n"
                     + "add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
             return;
         }
         String[] parameterArray = Parser.parseAddMedicine(parameters);
         if (parameterArray == null) {
-            ui.printParagraph("There are missing parameters. Please follow the below example and try again.\n"
+            UI.printParagraph("There are missing parameters. Please follow the below example and try again.\n"
                     + "add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
             return;
         }
         medicineList.add(parameterArray);
-        ui.printParagraph("Medicine has been added");
+        UI.printParagraph("Medicine has been added");
     }
 
     public void viewMedicine(MedicineList medicineList, String parameters) {
@@ -103,28 +100,24 @@ public class Command {
             try {
                 int index = Integer.parseInt(parameters);
                 if (index < 1 || medicineList.size() < index) {
-                    ui.printParagraph("Index is out of range.");
+                    UI.printParagraph("Index is out of range.");
                     return;
                 }
                 medicineList.viewMedicine(index);
             } catch (NumberFormatException e) {
-                ui.printParagraph("Index is out of range.");
+                UI.printParagraph("Index is out of range.");
             }
         }
     }
 
     public void addDoctor(DoctorList doctorList, String parameters) {
-        if (isNull(parameters)) {
-            ui.printNullParametersMessage();
-            ui.printAddDoctorExampleMessage();
-            return;
-        }
-        String[] addDoctorParameters = Parser.parseAddDoctor(parameters);
-        if (addDoctorParameters == null) {
-            ui.printAddPatientExampleMessage();
-        } else {
+        try {
+            String[] addDoctorParameters = Parser.parseAddDoctor(parameters);
             doctorList.add(addDoctorParameters);
-            ui.printParagraph("The doctor above has been added.");
+            UI.printParagraph("The doctor above has been added.");
+        } catch(HalpmiException e) {
+            UI.printParagraph(e.toString());
+            ui.printAddDoctorExampleMessage();
         }
     }
 
