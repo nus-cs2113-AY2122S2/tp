@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+show members
+hide empty members
+
+title After user adds a person
+
+package " " {
+    class family as "__family:Family__" MODEL_COLOR
+    class parents as "__parents:PersonList__" MODEL_COLOR_T1
+    class myGen as "__myGen:PersonList__" MODEL_COLOR_T1
+    class children as "__children:PersonList__" MODEL_COLOR_T1
+    class john as "__:Person__" MODEL_COLOR_T2 {
+        name = "John Doe"
+    }
+}
+
+family -down[#grey]-> parents
+family -down[#grey]-> myGen
+family -down[#grey]-> children
+children -down[#grey]-> john
+
+@enduml
