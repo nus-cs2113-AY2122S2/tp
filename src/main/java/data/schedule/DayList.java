@@ -36,6 +36,16 @@ public class DayList {
         return this.dayList;
     }
 
+    /**
+     * Add/Update a plan to a particular day of the week. User specify the plan (plan number) that they
+     * want to add to a particular day (day number). A day object will be created if the day object does not exist,
+     * otherwise the day object will be updated to reflect the latest changes.
+     *
+     * @param userArgument Day number and plan number to be added into the schedule.
+     * @return newDay Day object created with the day number and plan name specified by user.
+     * @throws ArrayIndexOutOfBoundsException If userArgument contains insufficient arguments and parsing fails.
+     * @throws InvalidScheduleException If the schedule parameters specified in userArgument is invalid.
+     */
     public Day updateDay(String userArgument) throws ArrayIndexOutOfBoundsException, InvalidScheduleException {
         String className = this.getClass().getSimpleName();
         String[] userArgumentArray = userArgument.split(" ", -1);
@@ -68,6 +78,15 @@ public class DayList {
         return newDay;
     }
 
+    /**
+     * Checks if the provided day number is valid. A day number is valid if it falls
+     * between 1 and 7. Day number 1 refers to Monday, Day number 2 refers to Tuesday
+     * and so on till Day number 7 referring to Sunday, the last day of the week.
+     *
+     * @param dayNumber The day number entered by user to check for validity.
+     * @return True if the day number falls between 1 to 7.
+     *         Otherwise, returns false.
+     */
     public Boolean isDayValid(int dayNumber) {
         if (dayNumber < 1 || dayNumber > NUMBER_OF_SCHEDULE_DAYS) {
             return false;
@@ -75,6 +94,14 @@ public class DayList {
         return true;
     }
 
+    /**
+     * Checks if the provided plan number is valid. A plan number is valid if it falls between
+     * the index range of the plan list.
+     *
+     * @param planNumber The plan number entered by user to check for validity.
+     * @return True if the plan number specified exist in the plans list.
+     *      *         Otherwise, returns false.
+     */
     public Boolean isPlanValid(int planNumber) {
         if (planNumber < 1 || planNumber > planList.getPlansDisplayList().size()) {
             return false;
@@ -82,6 +109,10 @@ public class DayList {
         return true;
     }
 
+    /**
+     * Print out all the plans scheduled for the week. One week consists of 7 days.
+     * If no plan is scheduled for any of the day, it is considered as rest day.
+     */
     public void printSchedule() {
         for (int i = 0; i < NUMBER_OF_SCHEDULE_DAYS; i += 1) {
             if (scheduleList[i] == null) {
@@ -105,6 +136,12 @@ public class DayList {
         );
     }
 
+    /**
+     * Pad the plan name with empty spaces at the front of the plan name as well as the back of the plan name.
+     *
+     * @param planForDay Plan name scheduled for a particular day.
+     * @return planForDayWith Plan name scheduled for a particular day with added empty spaces at the front and back.
+     */
     public String padWithSpaces(String planForDay) {
         String prePadded = "";
         String postPadded = "";
@@ -121,6 +158,13 @@ public class DayList {
         return planForDayWithPadding;
     }
 
+    /**
+     * Clear the plan for a specific day. The plan scheduled for the day will be cleared/reset.
+     * When a plan is clear/reset, the day will set to be a rest day.
+     *
+     * @param userArgument Day number to be reset/cleared.
+     * @throws InvalidScheduleException If the day number specified in userArgument is invalid.
+     */
     public void clearDayPlan(String userArgument) throws InvalidScheduleException {
         int dayNumber = Integer.parseInt(userArgument);
         String className = this.getClass().getSimpleName();
@@ -133,6 +177,10 @@ public class DayList {
         System.out.println("Plan had been cleared for " + covertDayNumberToDay(dayNumber) + ".");
     }
 
+    /**
+     * Clear all the plans schdeule for the week. Reset the schedule list to default.
+     * All plans for the week will be set as rest day.
+     */
     public void clearAllSchedule() {
         for (int i = 0; i < NUMBER_OF_SCHEDULE_DAYS; i += 1) {
             scheduleList[i] = null;
@@ -142,6 +190,15 @@ public class DayList {
         }
     }
 
+    /**
+     * Covert the day number to its english meaning. For example,
+     * day number 1 will be converted to Monday,
+     * day number 2 will be converted to Tuesday,
+     * and so on till day number 7 which will be converted to Sunday.
+     *
+     * @param dayNumber Day number to be converted to its String equivalent.
+     * @return day English meaning of the day number specified.
+     */
     public String covertDayNumberToDay(int dayNumber) {
         String day = "";
         assert (dayNumber > 0 && dayNumber <= NUMBER_OF_SCHEDULE_DAYS);
