@@ -41,7 +41,7 @@ public class AddCommand extends Command {
     public String execute(MasterTimetable masterTimetable) {
         Timetable timetable;
         try {
-           timetable  = masterTimetable.getByName(name);
+            timetable  = masterTimetable.getByName(name);
         } catch (TimetableNotFoundException tnfe) {
             timetable = new Timetable(name);
             masterTimetable.add(timetable);
