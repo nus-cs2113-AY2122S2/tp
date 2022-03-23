@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Good {
+-id : int
+-name : String
+-quantity : int
+-description : String
++int getId()
++int getQuantity()
++int setQuantity()
++String getDescription()
++String getName()
++String toString()
+}
+
+@enduml

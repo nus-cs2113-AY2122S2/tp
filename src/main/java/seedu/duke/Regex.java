@@ -22,7 +22,6 @@ import java.util.regex.Pattern;
 public class Regex {
     private static String input;
     private static String regex;
-    private ArrayList<String> groupNames;
     private HashMap<String, String> groupValues;
 
     public Regex(String input, String regex) {
@@ -40,7 +39,7 @@ public class Regex {
      * Current implementation is just to put no value with
      * corresponding keys
      */
-    public static HashMap<String,String> findMatch() {
+     private HashMap<String,String> findMatch() {
         HashMap<String, String> hashMap = new HashMap<>();
         ArrayList<String> groupNames = findGroup(regex);
         Matcher matcher = regexMatching(regex, input);
@@ -65,7 +64,7 @@ public class Regex {
      * @param input Given input to match regex against
      * @return Matcher class after matching the input with regex
      */
-    public static Matcher regexMatching(String regex, String input) {
+     private Matcher regexMatching(String regex, String input) {
         Pattern pattern = Pattern.compile(regex);
         return pattern.matcher(input);
     }
@@ -77,7 +76,7 @@ public class Regex {
      * @param regex the regex pattern used
      * @return ArrayList of group names
      */
-    private static ArrayList<String> findGroup(String regex) {
+    private ArrayList<String> findGroup(String regex) {
         ArrayList<String> groups = new ArrayList<>();
         String[] groupNames = regex.split("\\(?<");
 
