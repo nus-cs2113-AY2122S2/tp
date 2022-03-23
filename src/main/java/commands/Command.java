@@ -3,7 +3,7 @@ package commands;
 import common.Messages;
 import manager.LimitManager;
 import manager.RecordManager;
-import data.record.Record;
+import records.Record;
 
 import java.util.List;
 

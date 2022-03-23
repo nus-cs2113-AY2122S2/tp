@@ -1,4 +1,4 @@
-package data.exception;
+package exception;
 
 /**
  * Signals an error caused by duplicate data where there should be none.

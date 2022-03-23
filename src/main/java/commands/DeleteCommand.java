@@ -1,7 +1,6 @@
 package commands;
 
 import common.Messages;
-import data.record.Record;
 
 /**
  * Deletes a record identified using it's last displayed index from the RecordBook.

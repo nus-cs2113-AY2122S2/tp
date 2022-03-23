@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import commands.CommandResult;
 
-import data.record.Record;
+import records.Record;
 
 import static common.Messages.MESSAGE_GOODBYE;
 import static common.Messages.MESSAGE_WELCOME;
@@ -41,7 +41,7 @@ public class TextUi {
      * Returns the instance of <code>TextUi</code> if it has been created. Else, creates and returns an instance of
      * <code>TextUi</code> using the System Input Stream and Output Stream.
      *
-     * @return TextUi object.
+     * @return TextUi object
      */
     public static TextUi getTextUiInstance () {
         if (textUiInstance == null) {
@@ -54,7 +54,7 @@ public class TextUi {
      * Returns the instance of <code>TextUi</code> if it has been created. Else, creates and returns an instance of
      * <code>TextUi</code> using the specified Input Stream and Output Stream.
      *
-     * @return TextUi object.
+     * @return TextUi object
      */
     public static TextUi getTextUiInstance (InputStream in, PrintStream out) {
         if (textUiInstance == null) {
@@ -67,8 +67,8 @@ public class TextUi {
      * Returns true if the user input line should be ignored.
      * Input should be ignored if it is parsed as a comment, is only whitespace, or is empty.
      *
-     * @param rawInputLine Full raw user input line.
-     * @return <code>true</code> if the entire user input line should be ignored.
+     * @param rawInputLine Full raw user input line
+     * @return <code>true</code> if the entire user input line should be ignored
      */
     private boolean shouldIgnore(String rawInputLine) {
         return rawInputLine.trim().isEmpty() || isCommentLine(rawInputLine);
@@ -77,8 +77,8 @@ public class TextUi {
     /**
      * Returns true if the user input line is a comment line.
      *
-     * @param rawInputLine Full raw user input line.
-     * @return <code>true</code> if input line is a comment.
+     * @param rawInputLine Full raw user input line
+     * @return <code>true</code> if input line is a comment
      */
     private boolean isCommentLine(String rawInputLine) {
         assert COMMENT_LINE_FORMAT_REGEX instanceof String : "COMMENT_LINE_FORMAT_REGEX should be a String";
@@ -91,7 +91,7 @@ public class TextUi {
      * Ignores empty, pure whitespace, and comment lines.
      * Echos the command back to the user.
      *
-     * @return Command (full line) entered by the user.
+     * @return Command (full line) entered by the user
      */
     public String getUserCommand() {
         assert USER_COMMAND_REQUEST instanceof String : "USERCOMMANDREQUEST should be a String";
@@ -111,7 +111,7 @@ public class TextUi {
     /**
      * Generates and prints the welcome message upon the start of the application.
      *
-     * @param version Current version of the application.
+     * @param version Current version of the application
      */
     public void showWelcomeMessage(String version) {
         showToUser(

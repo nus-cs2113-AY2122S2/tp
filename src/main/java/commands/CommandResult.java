@@ -1,6 +1,6 @@
 package commands;
 
-import data.record.Record;
+import records.Record;
 
 import java.util.List;
 

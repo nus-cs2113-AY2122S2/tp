@@ -1,6 +1,6 @@
 package manager;
 
-import data.record.Record;
+import records.Record;
 
 import java.util.ArrayList;
 import java.util.List;

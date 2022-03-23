@@ -1,4 +1,4 @@
-package data.exception;
+package exception;
 
 public class RecordNotFoundException extends Exception{
         /**

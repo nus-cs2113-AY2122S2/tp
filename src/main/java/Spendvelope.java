@@ -57,8 +57,8 @@ public class Spendvelope {
     /**
      * Executes the command and returns the result.
      *
-     * @param command user command
-     * @return result of the command
+     * @param command User command
+     * @return Result of the command
      */
     private CommandResult executeCommand(Command command) {
         try {

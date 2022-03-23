@@ -1,8 +1,5 @@
 package commands;
 
-import common.Messages;
-import data.record.Record;
-
 public class LimitCommand extends Command {
 
     public static final String COMMAND_WORD = "set";

@@ -1,9 +1,9 @@
 package commands;
 
-import data.exception.IllegalValueException;
-import data.record.Product;
-import data.record.Record;
-import data.record.Subscription;
+import exception.IllegalValueException;
+import records.Product;
+import records.Record;
+import records.Subscription;
 
 
 /**
@@ -14,8 +14,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a record to the RecordManager.\n"
-            + "Parameters: i/ITEM_NAME p/PRICE t/CATEGORY (if product is added) d/DATE "
-            + "r/RENEWAL (if subscription is added)\n"
+            + "Parameters: i/ITEM_NAME p/PRICE d/DATE t/CATEGORY (if product) r/RENEWAL (if subscription)\n"
             + "Example: " + COMMAND_WORD
             + " product i/handphone cover p/$10 t/accessory d/14022022\n"
             +  "Example: " + COMMAND_WORD

@@ -1,4 +1,4 @@
-package data.record;
+package records;
 
 public abstract class Record {
 
