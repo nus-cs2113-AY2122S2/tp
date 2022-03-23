@@ -25,7 +25,7 @@ class ParserTest {
     void validateMedicineTest() {
         String[] userInputArray = {"paracetamol", "500", "2023-02-02", "Headaches", "500"};
         String userInput = "paracetamol,500,2023-02-02,Headaches,500";
-        assertEquals(true, Parser.validateMedicine(userInputArray));
+        assertEquals(true, Validator.validateMedicine(userInputArray));
     }
 
     @Test
