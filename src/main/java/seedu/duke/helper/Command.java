@@ -26,7 +26,7 @@ public class Command {
             String[] addPatientParameters = Parser.parseAddPatient(parameters);
             patientList.add(addPatientParameters);
             UI.printParagraph("The patient above has been added.");
-        } catch(HalpmiException e) {
+        } catch (HalpmiException e) {
             UI.printParagraph(e.toString());
             ui.printAddPatientExampleMessage();
         }
@@ -47,8 +47,7 @@ public class Command {
     public void viewDoctor(DoctorList doctorList, String nric) {
         if (isNull(nric)) {
             doctorList.viewDoctor();
-        }
-        else {
+        } else {
             doctorList.viewDoctor(nric);
         }
     }
@@ -78,8 +77,7 @@ public class Command {
     public void viewMedicine(MedicineList medicineList, String parameters) {
         if (isNull(parameters)) {
             medicineList.viewMedicine();
-        }
-        else {
+        } else {
             medicineList.viewMedicine(parameters);
         }
     }
@@ -89,7 +87,7 @@ public class Command {
             String[] addDoctorParameters = Parser.parseAddDoctor(parameters);
             doctorList.add(addDoctorParameters);
             UI.printParagraph("The doctor above has been added.");
-        } catch(HalpmiException e) {
+        } catch (HalpmiException e) {
             UI.printParagraph(e.toString());
             ui.printAddDoctorExampleMessage();
         }
@@ -98,7 +96,7 @@ public class Command {
     public void deleteMedicine(MedicineList medicineList, String stringIndex) {
         try {
             int index = Integer.parseInt(stringIndex);
-            medicineList.deleteMedicine(index -1);
+            medicineList.deleteMedicine(index - 1);
             UI.printParagraph("The medicine record at index " + index + " has been deleted.");
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             ui.printDeleteMedicineExampleMessage(medicineList);
