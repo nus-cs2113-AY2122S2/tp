@@ -10,11 +10,11 @@ public class OrderController extends Controller {
         "Get total value of current order",
         "Get total value of all orders in the list", "Print receipt"
     };
-    private OrderManager orderManager;
+    private DishController dishController = new DishController();
+    private OrderManager orderManager = new OrderManager(dishController);
 
     public OrderController() {
         super(CHOICES);
-        orderManager = new OrderManager();
     }
 
     @Override
@@ -27,7 +27,7 @@ public class OrderController extends Controller {
             System.out.println("Implement me to view menu :D");
             break;
         case 2:
-            addOrder();
+            addOrder(dishController);
             break;
         case 3:
             deleteOrder();
@@ -49,9 +49,9 @@ public class OrderController extends Controller {
         return false;
     }
 
-    private void addOrder() throws OperationTerminationException {
+    private void addOrder(DishController dishController) throws OperationTerminationException {
         int index = InputParser.getInteger("Enter dishes you want to order (enter '-' to exit): ");
-        DishManager dishManager = new DishManager();
+        DishManager dishManager = dishController.getDishManager();
         assert index < dishManager.getDishes().size() : "Index out of bound!";
         while (true) {
             try {

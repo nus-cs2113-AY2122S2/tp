@@ -1,5 +1,6 @@
 package seedu.duke.manager;
 
+import seedu.duke.controllers.DishController;
 import seedu.duke.entities.Dish;
 import seedu.duke.entities.Order;
 
@@ -10,12 +11,11 @@ import java.util.ArrayList;
  */
 public class OrderManager {
     private ArrayList<Order> orders;
-    private DishManager dishManager = new DishManager();
     private ArrayList<Dish> dishes;
 
-    public OrderManager() {
+    public OrderManager(DishController dishController) {
         this.orders = new ArrayList<Order>();
-        this.dishes = dishManager.getDishes();
+        this.dishes = dishController.getDishManager().getDishes();
     }
 
     /**
