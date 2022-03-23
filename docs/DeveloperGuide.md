@@ -107,7 +107,14 @@ indicate which generation they belong to
 {For Jiarong}
 
 ### Storage Component
-{For Hans}
+**API: **
+-- Insert puml diagram here
+The `Storage` component,
+
+* can save each person's data and their income and expenditure data when the program exits into a local file, and reads
+  them back into corresponding objects when the program runs again.
+* depends on the classes in the `Person` component (because the `Storage` component's job is to save/retrieve objects
+  to the `Person`)
 
 ---
 ## Implementation
