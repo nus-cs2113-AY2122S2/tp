@@ -111,6 +111,7 @@ relative methods which prints the timetable.
 
 When the **ShowCommand** is being executed, it will retrieve a filtered list
 of task by the date that is define in the **ShowCommand** from the **TaskList** component. 
+The filtered list will represent the schedule that the user has on that date given. 
 
 
 Below is a sequence diagram of what happens 
