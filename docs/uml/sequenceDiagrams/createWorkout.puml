@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../Style.puml
+
+autonumber
+
+title Sequence Diagram of `workout /new` Command
+
+actor   User
+participant "werkIt:WerkIt" AS WerkIt
+participant "ui:UI" AS UI1
+participant "parser:Parser" AS Parser
+participant "newCommand\n:WorkoutCommand" AS newCommand
+participant "workoutList\n:WorkoutList" AS WorkoutList
+participant "ui:UI" AS UI2
+participant "fileManager:FileManager" as FileManager
+
+activate WerkIt
+WerkIt -> UI1 : getUserInput()
+activate UI1
+User -> UI1 : `workout /new` command
+WerkIt <-- UI1 : userInputTrimmed:String
+deactivate UI1
+
+WerkIt -> Parser : parseUserInput(userInput)
+activate Parser
+WerkIt <-- Parser : :Command
+deactivate Parser
+
+WerkIt -> newCommand : execute()
+activate newCommand
+newCommand -> WorkoutList : createAndAddWorkout(userArguments)
+activate WorkoutList
+ref over WorkoutList
+Create new Workout
+and add it to list.
+end
+newCommand <-- WorkoutList : "newWorkout:Workout"
+deactivate WorkoutList
+
+newCommand -> UI2 : printNewWorkoutCreatedMessage(newWorkout)
+activate UI2
+User <-- UI2 : New workout created message
+newCommand <-- UI2
+deactivate UI2
+
+newCommand -> FileManager : writeNewWorkoutToFile(newWorkout)
+activate FileManager
+ref over FileManager
+Write new Workout data
+into file on user's system.
+end
+newCommand <-- FileManager
+deactivate FileManager
+
+WerkIt <-- newCommand
+deactivate newCommand
+
+destroy newCommand
+@enduml

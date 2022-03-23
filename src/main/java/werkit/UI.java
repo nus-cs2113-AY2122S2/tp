@@ -65,6 +65,7 @@ public class UI {
     public static final String UPDATED_WORKOUT_MESSAGE = "Alright, the following workout has been updated:";
     //Plan-related Message
     public static final String NEW_PLAN_CREATED_MESSAGE = "Alright, the following plan has been created:";
+    public static final String DELETED_PLAN_MESSAGE = "Alright, the following plan has been removed:";
     public static final String NEW_DAY_CREATED_MESSAGE = "Alright, the following plan schedule has been created:";
 
     // IOException Error Message
@@ -449,6 +450,18 @@ public class UI {
         System.out.println(NEW_PLAN_CREATED_MESSAGE);
         System.out.println();
         System.out.println("\t" + newPlan.toString());
+        System.out.println();
+    }
+
+    /**
+     * Prints a message when a plan has been deleted and shows the deleted workout.
+     *
+     * @param deletedPlan The plan to be deleted.
+     */
+    public void printDeletePlanMessage(Plan deletedPlan) {
+        System.out.println(DELETED_PLAN_MESSAGE);
+        System.out.println();
+        System.out.println("\t" + deletedPlan.toString());
         System.out.println();
     }
 

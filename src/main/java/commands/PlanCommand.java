@@ -124,6 +124,9 @@ public class PlanCommand extends Command {
             case DETAILS_ACTION_KEYWORD:
                 break;
             case DELETE_ACTION_KEYWORD:
+                Plan deletedPlan = getPlanList().deletePlan(getUserArguments());
+                getUI().printDeletePlanMessage(deletedPlan);
+                getFileManager().rewriteAllPlansToFile(getPlanList());
                 break;
             default:
                 String className = this.getClass().getSimpleName();
