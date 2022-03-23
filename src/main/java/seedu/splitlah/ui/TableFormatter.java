@@ -3,7 +3,7 @@ package seedu.splitlah.ui;
 import java.util.ArrayList;
 
 /**
- * Represents a Table Formatter that creates a dynamic table that can be updated to add or remove columns and rows,
+ * Represents a Table Formatter that creates a dynamic table that can be updated to add or remove rows,
  * and prints a neatly formatted table.
  *
  * @author Saurav
