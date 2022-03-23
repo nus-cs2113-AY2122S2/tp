@@ -54,7 +54,7 @@ public class AddCommand extends ModificationCommand {
             return new CommandResult(INCORRECT_ENUM_TYPE);
         }
 
-        return new CommandResult(String.format(successMessage, commandStrings.get(0), commandStrings.get(1)));
+        return new CommandResult(String.format(successMessage, equipmentName, serialNumber));
     }
 
     /**
