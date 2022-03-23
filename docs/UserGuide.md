@@ -256,7 +256,7 @@ Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 >- The session with a unique identifier of `[SESSION_ID]` and the activity with a unique identifier of `[ACTIVITY_ID]` have to exist before the activity can be viewed.
 
 
-Examples of usage:
+Example of usage:
 1. Views an activity with a unique identifier of 2 in a session with a session unique identifier of 2.
     - `activity /view /sid 2 /aid 2` <br>
       ![Activity view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityViewCommand.png)
@@ -277,7 +277,7 @@ Format: `activity /list /sid [SESSION_ID]`
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its activities can be listed.
 
 
-Examples of usage:
+Example of usage:
 1. Lists all activities in a session with a unique identifier of 2.
     - `activity /list /sid 2`
       <br>
@@ -326,6 +326,14 @@ Format: `group /view /gid [GROUP_ID]`
 
 > **💡 Note(s):**
 >- The group with a unique identifier of `[GROUP_ID]` has to exist before the group can be viewed.
+
+
+Example of usage:
+1. Views a group with a unique identifier of 1.
+    - `group /view /gid 1` <br>
+    ![Group view command Screenshot]()
+<br>     
+<br>
 
 ### Listing all groups: `group /list`
 
