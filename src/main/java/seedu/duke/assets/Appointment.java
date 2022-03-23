@@ -1,5 +1,7 @@
 package seedu.duke.assets;
 
+import seedu.duke.helper.UI;
+
 public class Appointment {
     protected String patientNric;
     protected String patientName;
@@ -19,12 +21,11 @@ public class Appointment {
     }
 
     public void show() {
-        System.out.println("-------------------------");
-        System.out.println("Patient: " + patientName + " (" + patientNric + ")");
-        System.out.println("Doctor: " + doctorName + " (" + doctorNric + ")");
-        System.out.println("Appointment date: " + appointmentDate);
-        System.out.println("Appointment details: " + appointmentDetails);
-        System.out.println("-------------------------");
+        UI.printParagraph("Patient: " + patientName + " (" + patientNric + ")\n"
+                + "Doctor: " + doctorName + " (" + doctorNric + ")\n"
+                + "Appointment date: " + appointmentDate + "\n"
+                + "Appointment details: " + appointmentDetails);
+        UI.printNewLineSeparator();
     }
 
     public String getPatientNric() {
