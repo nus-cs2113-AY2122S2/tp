@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Command
+class AddCommand
+
+Command <|-- AddCommand
+Command <|-- ExitCommand
+AddCommand <.. CommandResult
+ExitCommand <.. CommandResult
+
+abstract class Command {
++execute():CommandResult
+}
+
+class AddCommand {
++addCommand()
++execute():CommandResult
+}
+
+class ExitCommand {
++execute():CommandResult
+}
+
+class CommandResult {
++CommandResult()
++toString()
+}
+
+@enduml
