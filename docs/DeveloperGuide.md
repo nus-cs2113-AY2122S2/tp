@@ -56,16 +56,34 @@ is responsible for,
 
 ### Persons Component
 
-#### \[Proposed] Logical grouping for different generation of person added
 
-##### Proposed implementation
+### Money Component
+{For Jiarong}
+
+### Storage Component
+{For Hans}
+
+---
+## Implementation
+
+This section describes some noteworthy details on how certain features are implemented.
+
+### Command Execution
+
+Maybe for Huilin
+{Suggest to show the process from `user input` to `input parsing` to `command factory`
+then actual execution}
+
+### \[Proposed] Logical grouping for different generation of person added
+
+#### Proposed implementation
 
 The proposed logical grouping of persons added is facilitated by `Family`. It holds 3 lists of `PersonList`, each one
-for a different generation. 
+for a different generation.
 Additionally, it implements the following operations:
 * `Family#list()` -- Lists a high level overview of income and expenditure of each generation.
 * `Family#remain()` -- Prints the total disposable income remaining for the family after everybody's income and   
-expenditures have been taken into account.
+  expenditures have been taken into account.
 * `Family#addParent()` -- Adds a person into the `parents` list.
 * `Family#addMyGen()` -- Adds a person into the `myGen` list.
 * `Family#addChild()` -- Adds a person into the `children` list.
@@ -92,38 +110,14 @@ print that out.
 #### Design considerations:
 **Aspect: How to sort persons into logical groups:**
 * **Alternative 1 \(current choice):** Have a `Family` object hold 3 `PersonList`s, one for each generation.
-    * Pros: Only requires storage of one instance of each income and expenditure.
-    * Cons: May have performance issues related to operations which work on every income and expenditure as it makes  
-  them deeply nested.
+  * Pros: Only requires storage of one instance of each income and expenditure.
+  * Cons: May have performance issues related to operations which work on every income and expenditure as it makes  
+    them deeply nested.
 * **Alternative 2:** Maintain the single `PersonList` with everyone inside, but give a tag to each `Person` to  
-indicate which generation they belong to
-    * Pros: Very low maintenance and changes required to existing code.
-    * Cons: Lack of abstraction, and that total income and expenditure for each generation would need to be   
-  stored until the entire list is iterated through before being able to print.
-
-
-
-### Money Component
-{For Jiarong}
-
-### Storage Component
-{For Hans}
-
----
-## Implementation
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### Command Execution
-
-Maybe for Huilin
-{Suggest to show the process from `user input` to `input parsing` to `command factory`
-then actual execution}
-
-### Add Grouped User Feature
-
-Maybe for Weijun
-{Suggest to show the process to `add a new Person` to a logical group i.e. Children}
+  indicate which generation they belong to
+  * Pros: Very low maintenance and changes required to existing code.
+  * Cons: Lack of abstraction, and that total income and expenditure for each generation would need to be   
+    stored until the entire list is iterated through before being able to print.
 
 ### Edit Values Feature 
 
