@@ -119,6 +119,11 @@ Otherwise, the constructor is called. Either methods will result in the creation
 ### Remove a group
 ### View a group
 ### List groups
+The sequence diagram below models the interactions between various entities in the system
+when the user invokes the `group /list` command.
+<br>
+![List Groups Sequence Diagram Screenshot]()
+<br>
 
 
 ## Product scope
