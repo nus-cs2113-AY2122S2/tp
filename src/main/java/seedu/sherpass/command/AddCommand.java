@@ -17,19 +17,17 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
     public static final String MESSAGE_USAGE = "Add: Adds a task into the task list.\n"
-            + "A task contains a task description and optional dates to finish the task by.\n\n"
-            + "To execute the command,\nenter 'add <task_description> "
-            + "/by <task_due_date> /do_on <date_to_work_on_task>'.\n\n"
-            + "Examples:\n\tadd do assignment /by 3/6/2022 /do_on 1/6/2022\n"
-            + "\tadd project /by 5/6/2022\n\tadd attend lecture /do_on 23/6/2022\n"
-            + "\tadd survive uni\n\n"
+            + "A task contains a task description and \nan optional date"
+            + "to finish the task by.\n\nTo execute the command, enter\n'add <task_description> "
+            + "/by <task_due_date>\n/do_on <date_to_work_on_task>'.\n\n"
+            + "E.g. add do assignment /by 3/6/2022 /do_on 1/6/2022.\n\n"
             + "All task dates must be given in the format:\n"
             + "\t\td/M/yyyy , where\n"
             + "year is in 4 digits, month and day in one or two digits.";
 
+
     /**
-     * Creates constructor for add command.
-     * Saves task description, task due date, and date to work on task.
+     * Creates constructor for add command. Saves task description.
      *
      * @param taskDescription    Task Description to add.
      * @param taskList           Task array.

@@ -12,7 +12,6 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.sherpass.constant.StringConstant.SINGLE_SPACE;
 
 class StorageTest {
 
@@ -43,7 +42,7 @@ class StorageTest {
             assertEquals(task.getDescription(), "task_one");
             assertEquals(task.getByDate(), LocalDate.parse("2022-12-12"));
             assertEquals(task.getDoOnDate(), null);
-            assertEquals(task.getStatusIcon(), SINGLE_SPACE);
+            assertEquals(task.getStatusIcon(), " ");
         } catch (InvalidInputException | IOException | JSONException exception) {
             exception.printStackTrace();
         }

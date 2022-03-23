@@ -21,16 +21,16 @@ public class DeleteCommand extends Command {
     /**
      * Creates constructor for delete command.
      *
-     * @param taskContent Contains task description to search for
+     * @param parsedInput Contains task description to search for
      * @param taskList    Task array.
      * @throws InvalidInputException If input task description is empty.
      */
-    public DeleteCommand(String taskContent, TaskList taskList) throws InvalidInputException {
-        if (taskContent.isBlank()) {
+    public DeleteCommand(String[] parsedInput, TaskList taskList) throws InvalidInputException {
+        if (parsedInput[DELETE_INDEX].isBlank()) {
             throw new InvalidInputException();
         }
-        if (taskList.isTaskExist(Integer.parseInt(taskContent) - 1)) {
-            deleteIndex = Integer.parseInt(taskContent) - 1;
+        if (taskList.isTaskExist(Integer.parseInt(parsedInput[DELETE_INDEX]) - 1)) {
+            deleteIndex = Integer.parseInt(parsedInput[DELETE_INDEX]) - 1;
         }
     }
 

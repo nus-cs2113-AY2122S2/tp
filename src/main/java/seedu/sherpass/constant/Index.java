@@ -4,12 +4,7 @@ public class Index {
     public static final int DELETE_INDEX = 1;
     public static final int OPTIONS_INDEX = 0;
     public static final int MARK_INDEX = 1;
-    public static final int TASK_NUMBER_INDEX = 0;
-    public static final int TASK_DESCRIPTION_INDEX = 0;
     public static final int TASK_CONTENT_INDEX = 1;
-    public static final int BY_DATE_INDEX = 1;
-    public static final int DO_ON_DATE_INDEX = 2;
-    public static final int FIRST_SUBSTRING_INDEX = 0;
     public static final int HELP_OPTIONS_INDEX = 1;
     public static final int DIRECTORY_INDEX = 0;
     public static final int STUDY_COMMAND_INDEX = 0;
@@ -22,4 +17,5 @@ public class Index {
     public static final int DEFAULT_TIMER_ZERO = 30;
     public static final int INDENT_FACTOR = 4;
     public static final int CUSTOM_COMMAND_INDEX = 0;
+    public static final int SHOW_OPTION_INDEX = 1;
 }

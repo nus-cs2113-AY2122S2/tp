@@ -35,11 +35,11 @@ public class TaskList {
      * Adds a new task to the current array of tasks.
      *
      * @param taskDescription Description of the task.
-     * @param taskByDate      Due date of the task
-     * @param taskDoOnDate    Date to work on the task
+     * @param taskByDate        Due date of the task
+     * @param taskRemindDate    Reminder date of the task
      */
-    public void addTask(String taskDescription, LocalDate taskByDate, LocalDate taskDoOnDate) {
-        Task newTask = new Task(taskDescription, taskByDate, taskDoOnDate);
+    public void addTask(String taskDescription, LocalDate taskByDate, LocalDate taskRemindDate) {
+        Task newTask = new Task(taskDescription, taskByDate, taskRemindDate);
         tasks.add(newTask);
         System.out.println("Got it. I've added this task:\n  " + newTask
                 + "\nNow you have " + tasks.size() + " task(s) in the list.");
@@ -48,22 +48,18 @@ public class TaskList {
 
     /**
      * Prints all available tasks in the task list.
+     *
+     * @param ui Ui class for printing of messages.
      */
-    public void printAllTasks() {
-        if (!tasks.isEmpty()) {
-            if (tasks.size() > 1) {
-                System.out.println("Here are the " + tasks.size() + " tasks in your list:");
-            } else {
-                System.out.println("Here is the 1 task in your list:");
-            }
-            int printIndex = 1;
-            for (Task task : tasks) {
-                System.out.println(printIndex + ". " + task);
-                printIndex++;
-            }
-        } else {
-            System.out.println("There are no tasks in your list.");
+    public void printAllTasks(Ui ui) {
+        int printIndex = 1;
+        System.out.println("Here are the tasks in your list:");
+        for (Task task : tasks) {
+            System.out.println(printIndex + ". " + task);
+            printIndex++;
         }
+        ui.showLine();
+        System.out.println("A total of " + (printIndex - 1) + " item(s) have been found!");
     }
 
 
@@ -125,11 +121,11 @@ public class TaskList {
      * Returns a boolean value denoting the existence of a task
      * within the task array.
      *
-     * @param taskIndex Index of a task. Corresponds to its placement in task array.
+     * @param deleteIndex Index of a task. Corresponds to its placement in task array.
      * @return Returns true if task exists in task array. False otherwise.
      */
-    public boolean isTaskExist(int taskIndex) {
-        return tasks.get(taskIndex) != null;
+    public boolean isTaskExist(int deleteIndex) {
+        return tasks.get(deleteIndex) != null;
     }
 
     /**
@@ -156,5 +152,22 @@ public class TaskList {
         }
         ui.showLine();
         ui.showToUser("Done! Now you have " + tasks.size() + " task(s) in the list.");
+    }
+
+
+    public ArrayList<Task> getFilteredTasksByDate(LocalDate dateInput) {
+        return null;
+    }
+
+    /**
+     * Prints tasks that are yet to be completed, i.e. marked as done.
+     * Printed tasks applies to non-recurring tasks.
+     */
+    public void printPendingTasks(Ui ui) {
+        for (Task task : tasks) {
+            if (!task.isDone() && (task instanceof NonrecurringTask)) {
+                ui.showToUser(task.toString());
+            }
+        }
     }
 }

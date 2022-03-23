@@ -25,7 +25,7 @@ import static seedu.sherpass.constant.Message.ERROR_DUPLICATE_TASK_MESSAGE_1;
 import static seedu.sherpass.constant.Message.ERROR_DUPLICATE_TASK_MESSAGE_2;
 import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
 
-import static seedu.sherpass.constant.DateAndTimeFormat.parseFormat;
+import static seedu.sherpass.constant.DateAndTimeFormat.inputFormat;
 
 
 public class Storage {
@@ -75,8 +75,8 @@ public class Storage {
         for (Task t : taskList.getTasks()) {
             JSONObject taskToStore = new JSONObject();
             taskToStore.put("status", t.getStatusIcon());
-            taskToStore.put("by_date", (t.getByDate() == null ? "null" : t.getByDate().format(parseFormat)));
-            taskToStore.put("do_date", (t.getDoOnDate() == null ? "null" : t.getDoOnDate().format(parseFormat)));
+            taskToStore.put("by_date", (t.getByDate() == null ? "null" : t.getByDate().format(inputFormat)));
+            taskToStore.put("do_date", (t.getDoOnDate() == null ? "null" : t.getDoOnDate().format(inputFormat)));
             taskToStore.put("description", t.getDescription());
             tasks.put(taskToStore);
         }
@@ -126,7 +126,7 @@ public class Storage {
                     taskList.add(newTask);
                 } else {
                     System.out.println(ERROR_DUPLICATE_TASK_MESSAGE_1 + newTask.getDescription()
-                        + ERROR_DUPLICATE_TASK_MESSAGE_2);
+                            + ERROR_DUPLICATE_TASK_MESSAGE_2);
                 }
             }
         }
