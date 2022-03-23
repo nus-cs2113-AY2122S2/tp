@@ -6,7 +6,7 @@ import seedu.duke.loggers.MainLogger;
 
 public class StaffController extends Controller {
     private static final String[] CHOICES = {
-        "Exit Staff Menu", "Find Staff", "Add Staff", "Delete Staff"
+        "Exit Staff Menu", "Print Staff", "Find Staff", "Add Staff", "Delete Staff"
     };
     private final StaffManager staffManager;
 
@@ -21,25 +21,41 @@ public class StaffController extends Controller {
     @Override
     protected boolean optionSwitcher(int choice) throws OperationTerminationException {
         switch (choice) {
+        case 0:
+            MainLogger.logInfo(this, "Exiting Staff Menu");
+            System.out.println("Exiting Staff Menu...");
+            try {
+                staffManager.saveData();
+            } catch (Exception e) {
+                System.out.println("There was an error saving Staff data!\n");
+                MainLogger.logWarning(this, "Error saving Staff data!");
+            }
+            return true;
         case 1:
-            findStaff();
+            printStaff();
             break;
         case 2:
-            addStaff();
+            findStaff();
             break;
         case 3:
+            addStaff();
+            break;
+        case 4:
             deleteStaff();
             break;
-        case 0:
-            MainLogger.logInfo(this, "Exiting staff Menu");
-            System.out.println("Exiting Staff Menu...");
-            return true;
         default:
             System.out.println("Unknown choice!");
             break;
         }
         System.out.println(this);
         return false;
+    }
+
+
+
+    private void printStaff() throws OperationTerminationException {
+        MainLogger.logInfo(this, "Printing staff");
+        staffManager.printStaff();
     }
 
     /**
