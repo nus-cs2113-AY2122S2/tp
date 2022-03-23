@@ -3,6 +3,8 @@
 
 class Command
 
+Command ->
+
 abstract class AbstractList
 abstract AbstractCollection
 interface List

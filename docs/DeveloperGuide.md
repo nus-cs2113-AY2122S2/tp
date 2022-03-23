@@ -15,12 +15,14 @@ How the Manager class works:
 * When `Duke` class instantiates a `Manager` object and calls `runLoop` method, the program will execute a while loop
 * The while loop only halts when `isTerminated` boolean becomes true. The programme exits
 * In the while loop, there is a switch statement. It calls a `Command/UI` method based on a commandWord
-
+* The commandWord determines which method is called
 
 ### Command component
 
-How the Manager class works:
-
+![CommandUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/CommandUML.png)
+How the Command class works:
+* The `Manager` class calls specific methods in `Command` class
+* Each method in the `Command` class would call on an `asset` class method which will manipulate the attributes inside it
 
 ## Product scope
 ### Target user profile
@@ -43,7 +45,8 @@ How the Manager class works:
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+Scalability may not be feasible for the current version
+Future versions would be scaled with the help of cloud infrastructure
 
 ## Glossary
 
