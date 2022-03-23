@@ -5,11 +5,8 @@ import seedu.splitlah.command.ActivityCreateCommand;
 import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
-import seedu.splitlah.command.HelpCommand;
 import seedu.splitlah.command.SessionCreateCommand;
 import seedu.splitlah.command.SessionDeleteCommand;
-import seedu.splitlah.command.SessionListCommand;
-import seedu.splitlah.command.SessionSummaryCommand;
 import seedu.splitlah.command.ExitCommand;
 import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.command.GroupCreateCommand;
@@ -18,6 +15,7 @@ import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
+import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 import seedu.splitlah.ui.Message;
 
@@ -344,8 +342,8 @@ public class Parser {
                 return SessionDeleteCommand.prepare(remainingArgs);
             case SessionSummaryCommandParser.COMMAND_TEXT:
                 return new SessionSummaryCommandParser().getCommand(remainingArgs);
-            case SessionListCommand.COMMAND_TEXT:
-                return new SessionListCommand();
+            case SessionListCommandParser.COMMAND_TEXT:
+                return new SessionListCommandParser().getCommand(remainingArgs);
             case ActivityCreateCommand.COMMAND_TEXT:
                 return ActivityCreateCommand.prepare(remainingArgs);
             case ActivityDeleteCommand.COMMAND_TEXT:

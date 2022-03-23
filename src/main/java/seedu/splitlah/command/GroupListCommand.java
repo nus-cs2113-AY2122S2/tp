@@ -23,9 +23,9 @@ public class GroupListCommand extends Command {
     private static final String GROUP_LIST_TITLE = "# | Name | Number of Persons";
 
     /**
-     * Prints the list of groups previously created by the user.
+     * Runs the command to list all existing groups managed by the Profile Object.
      *
-     * @param manager A manager object that gets the TextUI and Profile object to print the list of groups.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {

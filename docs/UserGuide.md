@@ -134,7 +134,7 @@ Example of usage:
 Format: `session /delete /sid [SESSION_ID]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with `session /list` command.
+    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 
 > **💡 Note:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
@@ -177,7 +177,7 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 /cl [COST1 COST2 ...] [OPTIONAL_ARGUMENTS]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with `session /list` command.
+    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 * `[ACTIVITY_NAME]` refers to the name of the activity.
     * The activity name is **case-insensitive**.
 * `[PERSON_PAID]` refers to the person who paid for the activity.
@@ -223,9 +223,9 @@ Examples of usage:
 Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with `session /list` command.
+    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 * `[ACTIVITY_ID]` refers to the unique identifier of the activity.
-    * The unique identifier for an activity can be retrieved with `activity /list` command.
+    * The unique identifier for an activity can be retrieved with [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
 
 > **💡 Note(s):**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity in that session can be removed.
@@ -235,7 +235,7 @@ Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 Example of usage:
 1. Remove an existing activity with a unique identifier of 1 from a session with a unique <br> identifier of 2.
    - `activity /delete /sid 2 /aid 1` <br>
-   ![Activity delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityDeleteCommand.png)
+   ![Activity delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityDeleteCommand.PNG)
 <br>
 <br>
 
@@ -256,7 +256,7 @@ Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 >- The session with a unique identifier of `[SESSION_ID]` and the activity with a unique identifier of `[ACTIVITY_ID]` have to exist before the activity can be viewed.
 
 
-Examples of usage:
+Example of usage:
 1. Views an activity with a unique identifier of 2 in a session with a session unique identifier of 2.
     - `activity /view /sid 2 /aid 2` <br>
       ![Activity view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityViewCommand.png)
@@ -277,7 +277,7 @@ Format: `activity /list /sid [SESSION_ID]`
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its activities can be listed.
 
 
-Examples of usage:
+Example of usage:
 1. Lists all activities in a session with a unique identifier of 2.
     - `activity /list /sid 2`
       <br>
@@ -295,7 +295,7 @@ Examples of usage:
 Format: `session /summary /sid [SESSION_ID]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with `session /list` command.
+    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 
 > **💡 Note:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
@@ -314,8 +314,45 @@ Example of usage:
 ### Creating a group: `group /create`
 ### Deleting a group: `group /delete`
 ### Viewing a group: `group /view`
+
+> Display details about a group.<br>
+> A group represents one or more individuals.
+> It is used as a shortcut in several commands for identifying a group of individual persons.
+
+Format: `group /view /gid [GROUP_ID]`
+
+* `[GROUP_ID]` refers to the unique identifier of the group.
+    * The unique identifier for a group can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
+
+> **💡 Note(s):**
+>- The group with a unique identifier of `[GROUP_ID]` has to exist before the group can be viewed.
+
+
+Example of usage:
+1. Views a group with a unique identifier of 1.
+    - `group /view /gid 1` <br>
+    ![Group view command Screenshot]()
+<br>     
+<br>
+
 ### Listing all groups: `group /list`
+
+> List all active groups. Deleted groups will not be listed.<br>
+> A group represents one or more individuals.
+> It is used as a shortcut in several commands for identifying a group of individual persons.
+
+Format: `group /list`
+
+Example of usage:
+
+![Group list command Screenshot]()
+<br>
+<br>
+
 ### Listing all available commands: `help`
+> Displays all available SplitLah commands and their syntax.
+
+Format: `help`
 
 ### Exit
 > Exits the application.

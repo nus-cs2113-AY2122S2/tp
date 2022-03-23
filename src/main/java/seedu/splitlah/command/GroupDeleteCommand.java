@@ -7,7 +7,7 @@ import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 
 /**
- * Represents a command that deletes a Group object.
+ * Represents a command which deletes a Group object from a list of groups managed by the Profile object.
  *
  * @author Tianle
  */
@@ -26,9 +26,9 @@ public class GroupDeleteCommand extends Command {
     private int groupId;
 
     /**
-     * Constructs a GroupDeleteCommand object.
+     * Initializes a GroupDeleteCommand object.
      *
-     * @param groupId The unique identifier of the group.
+     * @param groupId An integer that represents the group unique identifier for the group to be deleted.
      */
     public GroupDeleteCommand(int groupId) {
         // TODO: Add assert to check whether groupId is valid.
@@ -52,9 +52,9 @@ public class GroupDeleteCommand extends Command {
     }
 
     /**
-     * Runs the command to delete a Group object.
+     * Runs the command to delete a Group object from the list of groups managed by a Manager Object.
      *
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {

@@ -31,10 +31,10 @@ public class Session implements Serializable {
     private static final int ZERO_INDEXING_OFFSET = 1;
 
     /**
-     * Constructs a Session object with the specified information as a new session.
+     * Initializes a Session object.
      *
-     * @param sessionName The name of the session.
-     * @param sessionId   A unique identifier for the session.
+     * @param sessionName A String object that represents the name of the session.
+     * @param sessionId   An integer that uniquely identifies a session.
      * @param dateCreated A LocalDate object storing the date that the session occurs on.
      * @param personList  An ArrayList object of Person objects representing participants of the session.
      * @param group       A Group object representing a group of persons participating in the session.
@@ -120,7 +120,7 @@ public class Session implements Serializable {
     /**
      * Checks whether the Session object has an Activity object with the queried unique identifier.
      * 
-     * @param activityId An integer that uniquely identifies an Activity object in the profile.
+     * @param activityId An integer that uniquely identifies an activity.
      * @return true if the Session object has an Activity object with a unique identifier matching the query,
      *         false otherwise.
      */
@@ -140,7 +140,7 @@ public class Session implements Serializable {
     /**
      * Returns an Activity object specified by a numerical identifier that uniquely identifies the activity.
      *
-     * @param activityId An integer that uniquely identifies an Activity object in the profile.
+     * @param activityId An integer that uniquely identifies an activity.
      * @return An Activity object in the Session class specified by activityId
      * @throws InvalidDataException if activityList is empty or activityList does not contain an Activity object
      *                              with the specified activityId
@@ -163,7 +163,7 @@ public class Session implements Serializable {
      * from the Session. Additionally, removes all ActivityCost objects with the same activityId from all Person
      * objects involved in the activity.
      *
-     * @param activityId An integer that uniquely identifies an Activity object in the profile.
+     * @param activityId An integer that uniquely identifies an activity.
      * @throws InvalidDataException if activityList is empty or activityList does not contain an Activity object
      *                              with the specified activityId
      */
@@ -205,7 +205,7 @@ public class Session implements Serializable {
     /**
      * Returns a Person object specified by a numerical index that identifies the Person.
      *
-     * @param index A numerical index that identifies a Person object in the session.
+     * @param index An integer that represents a numerical index that identifies a Person object in the session.
      * @return A Person object in the Session class specified by index.
      * @throws InvalidDataException if personList is empty or index is not in [1, personList.size()].
      */
@@ -224,7 +224,7 @@ public class Session implements Serializable {
     /**
      * Returns a Person object with a name that matches the queried name.
      *
-     * @param name A query name used to search for a Person object.
+     * @param name A String object that represents a query name used to search for a Person object.
      * @return A Person object in the Session class that has a matching name.
      * @throws InvalidDataException If personList is empty or 
      *                              if no Person object in personList matches queried name.

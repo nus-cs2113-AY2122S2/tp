@@ -11,7 +11,7 @@ import seedu.splitlah.ui.Message;
 import java.util.logging.Level;
 
 /**
- * Represents a command that deletes a Session object indicated by the user input from a Profile object.
+ * Represents a command which deletes a Session object from a list of sessions managed by the Profile object.
  *
  * @author Roy
  */
@@ -57,9 +57,9 @@ public class SessionDeleteCommand extends Command {
     }
 
     /**
-     * Runs the command to delete a Session object to from the list of sessions managed by the Profile Object.
+     * Runs the command to delete a Session object from the list of sessions managed by a Manager Object.
      *
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {
@@ -69,7 +69,7 @@ public class SessionDeleteCommand extends Command {
             manager.getProfile().removeSession(session);
             manager.saveProfile();
             manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
-            manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
         } catch (InvalidDataException dataException) {
             manager.getUi().printlnMessage(dataException.getMessage());
         }

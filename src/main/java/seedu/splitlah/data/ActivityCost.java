@@ -17,7 +17,7 @@ public class ActivityCost implements Serializable {
     private double costOwed;
 
     /**
-     * Constructs an ActivityCost object.
+     * Initializes an ActivityCost object.
      * Assumption: Every field is non-negative.
      *
      * @param activityId An integer that uniquely identifies an activity.

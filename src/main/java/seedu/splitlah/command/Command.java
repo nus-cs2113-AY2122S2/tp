@@ -12,7 +12,7 @@ public abstract class Command {
     /**
      * Runs the command with the information parsed from the user input, using the specified
      * Profile and TextUI objects.
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     public abstract void run(Manager manager);
 
