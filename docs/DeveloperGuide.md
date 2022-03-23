@@ -44,6 +44,27 @@ String name = matches.get("name");
 String quantity = matches.get("qty");
 String description = matches.get("desc");
 ```
+### Commands Class
+#### Description
+The Commands Class is the class which contains all the available commands that can be used in the Simplst CLI application.
+![Commands Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/CommandsClass.puml)
+
+More about how each feature is run can be seen in each of the methods that can be found below.
+
+### View Good Method
+#### Description
+View Good belongs as part of the Commands Class. It is used when a user would like to know more information about an inventory item has an item id linked to it in the warehouse.
+
+#### Operation
+![View Good Sequence Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/viewGood.puml)
+
+The above sequence diagram shows the operation of how the view good method will be called.
+1. The User input will be read by the User Interface Class
+2. The User Interface Class will then match the command keyword `view`
+3. The Regex Class will then be call to match the rest of the user's input to find the id required for retrieving information of the inverntory.
+4. The User Interface Class will call the viewGood() method from the Commands Class
+5. This method will retrieve information of an inventory item by searching through the userGoods array list for the corresponding id.
+6. The information retrieved will then be formatted and returned to screen for the user the see the information.
 
 ### Add Goods Method
 #### Description
@@ -59,7 +80,7 @@ The above sequence diagram shows the operation of how the add goods method will 
 5. This method will then call the constructor of the Good class, creating a new instance of the Good Object
 6. The addGood() method will then add the Good to the Collections storing the Good Objects currently in the WareHouse
 
-For more examples of how a user will add a good, refer to the [UserGuide](/UserGuide.md)
+For more examples of how a user can use a command, refer to the [UserGuide](/UserGuide.md)
 
 ### List Goods Method
 #### Description
