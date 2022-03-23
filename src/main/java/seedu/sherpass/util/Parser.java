@@ -77,10 +77,10 @@ public class Parser {
             String doOnEndDateString = taskData.getString("do_date_end");
             String frequencyString = taskData.getString("frequency");
 
-            Frequency repeatFrequency = frequencyString.isBlank() ?
-                    null : Frequency.valueOf(frequencyString);
-            LocalDateTime byDate = (byDateString.isBlank() ?
-                    null : LocalDateTime.parse(byDateString, inputWithTimeFormat));
+            Frequency repeatFrequency = frequencyString.isBlank()
+                    ? null : Frequency.valueOf(frequencyString);
+            LocalDateTime byDate = (byDateString.isBlank()
+                    ? null : LocalDateTime.parse(byDateString, inputWithTimeFormat));
             LocalDateTime doOnStartDateTime = LocalDateTime.parse(doOnStartDateString, inputWithTimeFormat);
             LocalDateTime doOnEndDateTime = LocalDateTime.parse(doOnEndDateString, inputWithTimeFormat);
 

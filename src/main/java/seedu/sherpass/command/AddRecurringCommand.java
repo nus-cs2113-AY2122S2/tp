@@ -87,8 +87,7 @@ public class AddRecurringCommand extends Command {
             }
             doOnEndDateTime = doOnStartDateTime.plusSeconds(duration);
             newTask = new Task(identifier, taskDescription, null, doOnStartDateTime, doOnEndDateTime, frequency);
-        }
-        while (newTask.getDoOnStartDateTime().isBefore(endDate));
+        } while (newTask.getDoOnStartDateTime().isBefore(endDate));
 
         ui.showToUser("Got it. I've added " + count + " tasks:\n " + addedTaskString
                 + "\nNow you have " + taskList.getTasks().size() + " task(s) in the list.");

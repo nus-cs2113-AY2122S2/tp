@@ -164,8 +164,8 @@ public class TaskList {
         Random generator = new Random();
         int candidate;
         do {
-           candidate = generator.nextInt(2^16);
-        } while(identifierList.contains(candidate));
+            candidate = generator.nextInt(65536);
+        } while (identifierList.contains(candidate));
         return candidate;
     }
 

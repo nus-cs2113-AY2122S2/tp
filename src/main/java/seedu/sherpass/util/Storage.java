@@ -78,7 +78,7 @@ public class Storage {
                     (t.getDoOnStartDateTime() == null ? " " : t.getDoOnStartDateTime().format(inputWithTimeFormat)));
             taskToStore.put("do_date_end",
                     (t.getDoOnStartDateTime() == null ? " " : t.getDoOnEndDateTime().format(inputWithTimeFormat)));
-            taskToStore.put("frequency", (t.getRepeatFrequency() == null ? " ": t.getRepeatFrequency().toString()));
+            taskToStore.put("frequency", (t.getRepeatFrequency() == null ? " " : t.getRepeatFrequency().toString()));
             taskToStore.put("description", t.getDescription());
             tasks.put(taskToStore);
         }
