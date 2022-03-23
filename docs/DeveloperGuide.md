@@ -124,7 +124,19 @@ when the user invokes the `group /list` command.
 <br>
 ![List Groups Sequence Diagram Screenshot]()
 <br>
-
+<br>
+The general workflow of the `group /list` command is as follows:
+1. The user input provided is passed to `Splitlah`.
+2. `Splitlah` then parses the input by using methods in the `Parser` class.
+3. `GroupListCommand#run()` method is then invoked to run the `group /list` command.
+4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile()` is called
+before the list of groups can be retrieved.
+5. To retrieve the groups from the profile retrieved, `Profile#getGroupList()` method is executed,
+where a list of `Group` objects are returned.
+6. Once the list is retrieved, `GroupListCommand` class checks if the list is empty.
+   1. If the list is empty, a message indicating that the list is empty is printed
+   using the method `TextUi#printEmptyList()`.
+   2. If the list is not empty, the groups are printed using the method `TextUi#printList()`.
 
 ## Product scope
 ### Target user profile
