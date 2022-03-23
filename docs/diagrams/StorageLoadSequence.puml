@@ -11,10 +11,10 @@ end box
 
 
 
--> Main: runs PlanITarium
+-> Main: initialisePlanitarium()
 activate Main
 create Storage
-Main -> Storage: Initialise Storage Object
+Main -> Storage: new()
 activate Storage
 Storage --> Main: :Storage
 deactivate Storage
@@ -48,10 +48,10 @@ loop until all logic groups are loaded
     loop Until all items
         Family -> PersonList: addPerson(:Person)
         activate PersonList
-        PersonList --> Family: :PersonList
+        PersonList --> Family
         deactivate PersonList
     end
-    Family --> Storage: :Family
+    Family --> Storage:
     deactivate Family
     Storage --> Storage
     deactivate Storage
