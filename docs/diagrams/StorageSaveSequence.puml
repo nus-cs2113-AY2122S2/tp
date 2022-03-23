@@ -21,7 +21,7 @@ deactivate PersonList
     loop until all items
         Storage -> PersonList: getSaveName()
         activate PersonList
-        activate PersonList
+        PersonList --> Storage: Name:Person
         deactivate PersonList
         Storage -> Storage: writeToFile()
         activate Storage
