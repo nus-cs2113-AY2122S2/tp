@@ -10,7 +10,9 @@ import java.util.ArrayList;
  */
 public class TableFormatter {
 
-    private final int MINIMUMPADDING = 2;
+    // KEY CONSTANTS
+    private static final int MINIMUMPADDING = 2;
+
     private TableFormatterRow columnHeaders;
     private ArrayList<TableFormatterRow> rows;
     private String tableName = null;
@@ -38,7 +40,7 @@ public class TableFormatter {
      * @return true if a new TableFormatterRow object was successfully created and added to the TableFormatter object.
      *         false if the number of String objects supplied did not match the number of columns.
      */
-    public boolean addRowWithValidation(String... rowItems) {
+    public boolean addRow(String... rowItems) {
         if (rowItems.length != getRowLength()) {
             return false;
         }
@@ -46,6 +48,21 @@ public class TableFormatter {
         return true;
     }
 
+    /**
+     * Deletes a row from the table by index. Rows start from 0.
+     * @param row An int representing the row number.
+     * @return true if the row was successfully deleted.
+     *         false if the row index was invalid. No row will be deleted.
+     */
+    public boolean deleteRow(int row) {
+        if (row >= rows.size()) {
+            return false;
+        }
+        rows.remove(row);
+        return true;
+    }
+
+    
     /**
      * Calculates maximum width of the specified column. The first column is column 0.
      *
@@ -108,19 +125,6 @@ public class TableFormatter {
         return (tableWidth + (MINIMUMPADDING * columnWidths.length));
     }
 
-    @Override
-    public String toString() {
-        int[] columnWidths = calculateAllColumnWidths();
-        StringBuilder formattedTable = new StringBuilder();
-        appendTableNameIfExists(formattedTable);
-        formattedTable.append("-".repeat(calculateTableWidth(columnWidths))).append("\n");
-        formattedTable.append(decorateRow(columnHeaders, columnWidths)).append("\n");
-        formattedTable.append("-".repeat(calculateTableWidth(columnWidths))).append("\n");
-        appendRowsToFormattedTableString(columnWidths, formattedTable);
-        formattedTable.append("=".repeat(calculateTableWidth(columnWidths)));
-        return String.valueOf(formattedTable);
-    }
-
     private void appendRowsToFormattedTableString(int[] columnWidths, StringBuilder formattedTable) {
         for (TableFormatterRow row : rows) {
             formattedTable.append(decorateRow(row, columnWidths));
@@ -132,5 +136,18 @@ public class TableFormatter {
         if (tableName != null) {
             formattedTable.append(tableName).append("\n");
         }
+    }
+
+    @Override
+    public String toString() {
+        int[] columnWidths = calculateAllColumnWidths();
+        StringBuilder formattedTable = new StringBuilder();
+        appendTableNameIfExists(formattedTable);
+        formattedTable.append("-".repeat(calculateTableWidth(columnWidths) + MINIMUMPADDING)).append("\n");
+        formattedTable.append(decorateRow(columnHeaders, columnWidths)).append("\n");
+        formattedTable.append("-".repeat(calculateTableWidth(columnWidths) + MINIMUMPADDING)).append("\n");
+        appendRowsToFormattedTableString(columnWidths, formattedTable);
+        formattedTable.append("=".repeat(calculateTableWidth(columnWidths) + MINIMUMPADDING));
+        return String.valueOf(formattedTable);
     }
 }

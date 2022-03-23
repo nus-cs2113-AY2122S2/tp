@@ -20,6 +20,7 @@ public class TableFormatterRow {
      * @param index The location of the row item.
      * @return A String object representing the row item.
      */
+
     public String getItem(int index) {
         return rowItems.get(index);
     }

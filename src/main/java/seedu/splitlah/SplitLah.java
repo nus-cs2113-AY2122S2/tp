@@ -4,8 +4,6 @@ import seedu.splitlah.command.Command;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
-//
-import seedu.splitlah.ui.TableFormatter;
 
 import java.util.logging.Level;
 
@@ -17,14 +15,6 @@ public class SplitLah {
     Manager manager;
 
     public static void main(String[] args) {
-        // tableformattertest
-        TableFormatter table = new TableFormatter("#", "2", "3");
-        table.addTableName("tablename");
-        table.addRowWithValidation("saurav", "student", "splitlah");
-        table.addRowWithValidation("warren", "student", "splitlah");
-        table.addRowWithValidation("roy", "a", "posb");
-        table.addRowWithValidation("kasdfjlajfd", "fdlkjsaflj;", "dsalkfj;fdkl");
-        System.out.println(table.toString());
         new SplitLah().run();
     }
 
