@@ -1,0 +1,11 @@
+@startuml
+
+hide attributes
+hide methods
+
+ModuleList --> "*" Module
+ModuleList --> "1" TaskList
+Module -l> "1" TaskList
+TaskList -l> "*" Task
+
+@enduml
