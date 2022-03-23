@@ -37,6 +37,12 @@ Main -> instanceShowCommand: execute(taskList, ui, storage)
 activate instanceShowCommand
 instanceShowCommand -> Timetable: showScheduleByDay(dateInput, filteredtasks, ui)
 activate Timetable
+
+Timetable -> TaskList: getFilteredTasksByDate(dateInput)
+activate TaskList
+TaskList --> Timetable: filteredTasks
+deactivate TaskList
+
 Timetable -> Timetable: prepareTimetable(dateInput, filtererdTasks, ui)
 activate Timetable
 Timetable -> Timetable: printTimetable(day, date, filteredTasks, ui, taskLength, doOnDateLength, partitionLength)
