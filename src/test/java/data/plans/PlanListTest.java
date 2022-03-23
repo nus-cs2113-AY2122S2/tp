@@ -64,6 +64,8 @@ class PlanListTest {
     void createAndAddPlan_validPlansAdded_expectValidPlans() throws InvalidPlanException {
         planList.createAndAddPlan("Plan 1 /workouts 1,5,4,3");
         planList.createAndAddPlan("Plan 2 /workouts 1,5,4,3,1,1,1");
+        planList.createAndAddPlan("Plan 3 /workouts 1, 3, 4");
+        planList.createAndAddPlan("Plan 4 /workouts 1,1, 5,2");
 
         for (int i = 0; i < planList.getPlansDisplayList().size(); i += 1) {
             assertEquals("Plan " + (i + 1), planList.getPlansDisplayList().get(i).toString());
