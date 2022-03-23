@@ -151,7 +151,9 @@ Running the `workout /list` command will show the workout list as follows:
 ```
 ----------------------------------------------------------------------
 Showing workouts 1-1 of 1:
+
 1. russian twist (50 reps)
+
 Showed all workouts in list
 ----------------------------------------------------------------------
 ```
@@ -197,9 +199,11 @@ Now running the `workout /list` command again will show the workout list as foll
 ```
 ----------------------------------------------------------------------
 Showing workouts 1-3 of 3:
+
 1. push up (15 reps)
 2. sit up (10 reps)
 3. pull up (10 reps)
+
 Showed all workouts in list
 ----------------------------------------------------------------------
 ```
@@ -446,7 +450,9 @@ When you start WerkIt! for the first time, the following directory and files are
 ```
 werkItResources/        // Primary resource directory for WerkIt!
     ├── exercises.txt   // Text file containing a list of exercises
-    └── workouts.txt    // Text file containing a list of user-created workouts
+    ├── workouts.txt    // Text file containing a list of user-created workouts
+    ├── plans.txt       // Text file containing a list of user-created plans
+    └── schedule.txt    // Text file containing a 7-day schedule of user-assigned plans for each day
 ```
 
 Do note that the directory (and by extension, the files) will be created in your terminal's
