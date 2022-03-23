@@ -1,16 +1,25 @@
 package seedu.mindmymoney.helper;
 
 import seedu.mindmymoney.MindMyMoneyException;
+import seedu.mindmymoney.constants.ExpenditureFields;
 import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
 import java.util.ArrayList;
 
+import static seedu.mindmymoney.constants.ExpenditureFields.*;
+
 /**
  * Container for general functions used throughout the program.
  */
 public class GeneralFunctions {
+    private static final String e = expenditure.toString();
+    private static final String c = category.toString();
+    private static final String d = description.toString();
+    private static final String a = amount.toString();
+    private static final String t = time.toString();
+
     /**
      * Separates the user input into the command and description for easy reference.
      *
@@ -55,41 +64,22 @@ public class GeneralFunctions {
                                                          ExpenditureList itemList) throws MindMyMoneyException {
         ArrayList<Expenditure> foundItems = new ArrayList<>();
         try {
-            switch (fieldToSearch.toLowerCase()) {
-            case "expenditure":
-                for (Expenditure item : itemList.expenditureListArray) {
-                    if (item.getExpenditure().contains(searchTerm)) {
-                        foundItems.add(item);
-                    }
-                }
+            ExpenditureFields fieldToSearchAsEnumType = ExpenditureFields.valueOf(fieldToSearch.toLowerCase());
+            switch (fieldToSearchAsEnumType) {
+            case expenditure:
+                foundItems = findMatchingExpenditure(searchTerm, foundItems, itemList);
                 break;
-            case "category":
-                for (Expenditure item : itemList.expenditureListArray) {
-                    if (item.getCategory().contains(searchTerm)) {
-                        foundItems.add(item);
-                    }
-                }
+            case category:
+                foundItems = findMatchingCategory(searchTerm, foundItems, itemList);
                 break;
-            case "description":
-                for (Expenditure item : itemList.expenditureListArray) {
-                    if (item.getDescription().contains(searchTerm)) {
-                        foundItems.add(item);
-                    }
-                }
+            case description:
+                foundItems = findMatchingDescription(searchTerm, foundItems, itemList);
                 break;
-            case "amount":
-                for (Expenditure item : itemList.expenditureListArray) {
-                    if (item.getAmount() == Integer.parseInt(searchTerm)) {
-                        foundItems.add(item);
-                    }
-                }
+            case amount:
+                foundItems = findMatchingAmount(searchTerm, foundItems, itemList);
                 break;
-            case "time":
-                for (Expenditure item : itemList.expenditureListArray) {
-                    if (item.getTime().contains(searchTerm)) {
-                        foundItems.add(item);
-                    }
-                }
+            case time:
+                foundItems = findMatchingTime(searchTerm, foundItems, itemList);
                 break;
             default:
                 throw new MindMyMoneyException("Input a valid search field!");
@@ -102,5 +92,95 @@ public class GeneralFunctions {
         } catch (NumberFormatException e) {
             throw new MindMyMoneyException("AMOUNT must be a number");
         }
+    }
+
+    /**
+     * Searches for matching items in Expenditure field of itemList and returns a list of found items.
+     *
+     * @param searchTerm String to search for.
+     * @param foundItems List to store items found.
+     * @param itemList   List to search in.
+     * @return foundItems, updated with new items found.
+     */
+    public static ArrayList<Expenditure> findMatchingExpenditure(String searchTerm, ArrayList<Expenditure> foundItems,
+                                                                 ExpenditureList itemList) {
+        for (Expenditure item : itemList.expenditureListArray) {
+            if (item.getExpenditure().contains(searchTerm)) {
+                foundItems.add(item);
+            }
+        }
+        return foundItems;
+    }
+
+    /**
+     * Searches for matching items in Category field of itemList and returns a list of found items.
+     *
+     * @param searchTerm String to search for.
+     * @param foundItems List to store items found.
+     * @param itemList   List to search in.
+     * @return foundItems, updated with new items found.
+     */
+    public static ArrayList<Expenditure> findMatchingCategory(String searchTerm, ArrayList<Expenditure> foundItems,
+                                                              ExpenditureList itemList) {
+        for (Expenditure item : itemList.expenditureListArray) {
+            if (item.getCategory().contains(searchTerm)) {
+                foundItems.add(item);
+            }
+        }
+        return foundItems;
+    }
+
+    /**
+     * Searches for matching items in Description field of itemList and returns a list of found items.
+     *
+     * @param searchTerm String to search for.
+     * @param foundItems List to store items found.
+     * @param itemList   List to search in.
+     * @return foundItems, updated with new items found.
+     */
+    public static ArrayList<Expenditure> findMatchingDescription(String searchTerm, ArrayList<Expenditure> foundItems,
+                                                                 ExpenditureList itemList) {
+        for (Expenditure item : itemList.expenditureListArray) {
+            if (item.getDescription().contains(searchTerm)) {
+                foundItems.add(item);
+            }
+        }
+        return foundItems;
+    }
+
+    /**
+     * Searches for matching items in Amount field of itemList and returns a list of found items.
+     *
+     * @param searchTerm String to search for.
+     * @param foundItems List to store items found.
+     * @param itemList   List to search in.
+     * @return foundItems, updated with new items found.
+     */
+    public static ArrayList<Expenditure> findMatchingAmount(String searchTerm, ArrayList<Expenditure> foundItems,
+                                                            ExpenditureList itemList) {
+        for (Expenditure item : itemList.expenditureListArray) {
+            if (item.getAmount() == Float.parseFloat(searchTerm)) {
+                foundItems.add(item);
+            }
+        }
+        return foundItems;
+    }
+
+    /**
+     * Searches for matching items in Time field of itemList and returns a list of found items.
+     *
+     * @param searchTerm String to search for.
+     * @param foundItems List to store items found.
+     * @param itemList   List to search in.
+     * @return foundItems, updated with new items found.
+     */
+    public static ArrayList<Expenditure> findMatchingTime(String searchTerm, ArrayList<Expenditure> foundItems,
+                                                          ExpenditureList itemList) {
+        for (Expenditure item : itemList.expenditureListArray) {
+            if (item.getTime().contains(searchTerm)) {
+                foundItems.add(item);
+            }
+        }
+        return foundItems;
     }
 }
