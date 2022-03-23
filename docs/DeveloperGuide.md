@@ -4,6 +4,16 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
+##Architecture
+
+#Timetable
+![img.png](img.png)
+
+The *Timetable* component has the following functionalities:
+  - Prints the daily or weekly schedule of the user
+  - The timetable schedule is represented in a table form as shown below
+![timetable format](team/timetable format.png)
+
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
@@ -20,10 +30,6 @@
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
 ## Non-Functional Requirements
 
