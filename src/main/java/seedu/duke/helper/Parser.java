@@ -10,15 +10,19 @@ public class Parser {
     }
 
     private static String[] minParameterCheck(String parameters, int length) throws HalpmiException {
-        String[] parametersArray = parameters.split(",");
-        if (parametersArray.length != length) {
+        try {
+            String[] parametersArray = parameters.split(",");
+
+            if (parametersArray.length != length) {
+                throw new HalpmiException("There is one or more parameters missing");
+            }
+            for (int i = 0; i < parametersArray.length; i++) {
+                parametersArray[i] = parametersArray[i].trim();
+            }
+            return parametersArray;
+        } catch (Exception e) {
             throw new HalpmiException("There is one or more parameters missing");
         }
-
-        for (int i = 0; i < parametersArray.length; i++) {
-            parametersArray[i] = parametersArray[i].trim();
-        }
-        return parametersArray;
     }
 
     public static String[] parseAddPatient(String parameters) throws HalpmiException {
@@ -33,17 +37,10 @@ public class Parser {
         return  addDoctorParameters;
     }
 
-
-    public static String[] parseAddMedicine(String parameters) {
-        String[] medicineParameters = parameters.trim().split(",");
-        for (int i = 0; i < medicineParameters.length; i++) {
-            medicineParameters[i] = medicineParameters[i].trim();
-        }
-        if (medicineParameters.length == 5 && Validator.validateMedicine(medicineParameters)) {
-            return medicineParameters;
-        } else {
-            return null;
-        }
+    public static String[] parseAddMedicine(String parameters) throws HalpmiException {
+        String[] medicineParameters = minParameterCheck(parameters, 5);
+        Validator.validateMedicine(medicineParameters);
+        return medicineParameters;
     }
 
 }

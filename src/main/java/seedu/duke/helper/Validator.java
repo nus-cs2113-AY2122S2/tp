@@ -143,7 +143,7 @@ public class Validator {
     static void validateAddDoctor(String[] parameters) throws HalpmiException {
        validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
         //validate full name cause specialization is also just a name
-        if (validateFullName(parameters[6])) {
+        if (!validateFullName(parameters[6])) {
             throw new HalpmiException("Specialization must be a name");
         }
     }

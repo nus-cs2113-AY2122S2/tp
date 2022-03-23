@@ -33,68 +33,51 @@ public class Command {
     }
 
     public void deletePatient(PatientList patientList, String stringIndex) {
-        if (patientList.getSize() == 0) {
-            UI.printParagraph("There is nothing to delete in patientList.");
-            return;
-        }
         int index;
         try {
             index = Integer.parseInt(stringIndex);
-        } catch (NumberFormatException numberFormatException) {
-            ui.printDeletePatientExampleMessage(patientList);
-            return;
-        }
-        if (1 <= index && index <= patientList.getSize()) {
             patientList.removePatient(index - 1);
-            UI.printParagraph("The patient with the above index number has been removed.");
-        } else {
+            UI.printParagraph("The patient with the specified index has been removed.");
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             ui.printDeletePatientExampleMessage(patientList);
         }
+
     }
 
     public void viewDoctor(DoctorList doctorList, String nric) {
-        if (nric == null) {
+        if (isNull(nric)) {
             doctorList.viewDoctor();
-            return;
         }
-        doctorList.viewDoctor(nric);
+        else {
+            doctorList.viewDoctor(nric);
+        }
     }
 
     public void deleteDoctor(DoctorList doctorList, String stringIndex) {
-        int indexDoctor;
+        int index;
         try {
-            indexDoctor = Integer.parseInt(stringIndex);
-        } catch (NumberFormatException numberFormatException) {
-            ui.printDeleteDoctorErrorMessage(doctorList);
-            return;
-        }
-        if (1 <= indexDoctor && indexDoctor <= doctorList.getSizeDoctor()) {
-            doctorList.removeDoctor(indexDoctor - 1);
-            UI.printParagraph("The doctor with the specified index has been removed.");
-        } else {
+            index = Integer.parseInt(stringIndex);
+            doctorList.removeDoctor(index - 1);
+            UI.printParagraph("The patient with the above index number has been removed.");
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             ui.printDeleteDoctorErrorMessage(doctorList);
         }
     }
 
 
     public void addMedicine(MedicineList medicineList, String parameters) {
-        if (isNull(parameters)) {
-            UI.printParagraph("Invalid format. Please follow the below example and try again.\n"
-                    + "add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
-            return;
+        try {
+            String[] addMedicineParameters = Parser.parseAddMedicine(parameters);
+            medicineList.add(addMedicineParameters);
+            UI.printParagraph("Medicine has been added");
+        } catch (HalpmiException e) {
+            UI.printParagraph(e.toString());
+            ui.printAddMedicineExampleMessage();;
         }
-        String[] parameterArray = Parser.parseAddMedicine(parameters);
-        if (parameterArray == null) {
-            UI.printParagraph("There are missing parameters. Please follow the below example and try again.\n"
-                    + "add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
-            return;
-        }
-        medicineList.add(parameterArray);
-        UI.printParagraph("Medicine has been added");
     }
 
     public void viewMedicine(MedicineList medicineList, String parameters) {
-        if (parameters == null) {
+        if (isNull(parameters)) {
             medicineList.viewMedicine();
         } else {
             try {
@@ -122,16 +105,8 @@ public class Command {
     }
 
     public void deleteMedicine(MedicineList medicineList, String stringIndex) {
-        if (isNull(stringIndex)) {
-            ui.printParagraph("Parameter missing.");
-            return;
-        }
         try {
             int index = Integer.parseInt(stringIndex);
-            if (index < 1 || index > medicineList.size()) {
-                ui.printParagraph("Number is not within range.");
-                return;
-            }
             medicineList.delete(index);
             ui.printParagraph("The medicine record at index " + index + " has been deleted.");
         } catch (NumberFormatException numberFormatException) {

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
+import seedu.duke.exception.HalpmiException;
 
 import java.util.logging.Logger;
 
@@ -38,7 +39,7 @@ class ParserTest {
 
     @Test
     @DisplayName("parseAddPatient method in Parser Class")
-    void addPatientTest_userInputFormat_expectFormatCorrectlyValidated() {
+    void addPatientTest_userInputFormat_expectFormatCorrectlyValidated() throws HalpmiException {
         String userInput = "S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15";
         String[] expectedOutput = {"S1234567A", "John Doe", "23", "M", "10 Baker Street",
             "1999-12-31", "2021-02-15"};

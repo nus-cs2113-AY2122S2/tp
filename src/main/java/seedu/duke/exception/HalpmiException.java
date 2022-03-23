@@ -5,5 +5,8 @@ public class HalpmiException extends Exception{
         super(message);
     }
 
-
+    @Override
+    public String toString() {
+        return getMessage();
+    }
 }

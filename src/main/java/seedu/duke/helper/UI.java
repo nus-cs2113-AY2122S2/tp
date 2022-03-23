@@ -94,6 +94,11 @@ public class UI {
         printParagraph("Parameters missing or not detected. Please use /info for parameters.");
     }
 
+    public void printAddMedicineExampleMessage() {
+        printParagraph("Invalid format. Please follow the below example and try again.\n"
+                + "add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
+    }
+
     public static void printPrompt() {
         System.out.print("You: ");
     }
