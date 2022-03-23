@@ -127,7 +127,8 @@ Step 3. The user executes `addin /g 3 /u 1 /i ...` to add a new income to index 
 Step 4. The user now decides to have an overview of his family's finances by executing the `list` command. The `list`  
 command will call `Family#list()`, which will go through each generation to sum up their incomes and expenditures and  
 print that out.
--- Insert UML sequence diagram here
+
+<image src="images/PersonStep4.png"></image>
 
 #### Design considerations:
 **Aspect: How to sort persons into logical groups:**

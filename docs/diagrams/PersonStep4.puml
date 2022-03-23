@@ -1,0 +1,22 @@
+@startuml
+autonumber
+
+title When user calls "list""
+
+box
+participant ":Command" as Command
+participant ":Family" as Family
+collections ":PersonList" as PersonList
+
+Command -> Family : list()
+loop for all 3 generaltional lists
+    Family -> PersonList : getTotalIncome()
+    Family <-- PersonList : income:int
+    Family -> PersonList : getTotalExpenditure()
+    Family <-- PersonList : expenditure:int
+end
+Command <-- Family
+
+end box
+
+@enduml
