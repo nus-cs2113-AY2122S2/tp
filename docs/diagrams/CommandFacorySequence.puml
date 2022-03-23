@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Box
+    participant Main
+    participant ":CommandFactory" as CommandFactory
+    participant ":Parser" as Parser
+    participant ":Command" as Command
+
+end Box
+
+-> Main: userInput
+activate Main
+Main -> CommandFactory: getCommand(userInput, PersonList)
+activate CommandFactory
+CommandFactory -> Parser: parseKeywords(userInput)
+activate Parser
+Parser --> CommandFactory: return
+deactivate Parser
+CommandFactory --> Main: return
+deactivate CommandFactory
+Main -> Command: execute()
+activate Command
+@enduml
