@@ -12,8 +12,6 @@ user -> ui ++ : "remove id/id q/quantity"
 ui -> regex  ++: Regex(regex, input)
 regex -> ui -- : Hashmap of results
 
-deactivate regex
-
 ui -> command ++ : removeGood(id, quantity, userGoods)
 alt quantity input <= existing quantity
     command -> good ++ : reduce quantity of goods
