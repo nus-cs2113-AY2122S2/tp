@@ -26,12 +26,13 @@ public class Main {
     private final String taskLoadSuccessMessage = StringConstants.TASK_DATA_LOAD_SUCCESS;
     private final String configurationLoadSuccessMessage = StringConstants.CONFIGURATION_DATA_LOAD_SUCCESS;
     private final String configurationLoadErrorMessage = StringConstants.CONFIGURATION_DATA_LOAD_FAILED;
+    private final String noConfigFileMessage = StringConstants.NO_CONFIG_DATA_FILE;
 
 
     private TextUi ui;
     private ModHappyParser modHappyParser;
     private ModuleList moduleList;
-    private seedu.duke.util.Configuration configuration;
+    private Configuration configuration;
 
     /**
      * Main entry-point for the application.
@@ -98,7 +99,7 @@ public class Main {
         if (configurationDataFile.exists()) {
             ConfigurationStorage configurationStorage = new ConfigurationStorage();
             try {
-                configuration = (Configuration) configurationStorage.jsonReader(configurationPath);
+                configuration = configurationStorage.jsonReader(configurationPath);
                 ui.showUnformattedMessage(configurationLoadSuccessMessage);
             } catch (ModHappyException e) {
                 ui.showUnformattedMessage(e);
@@ -106,6 +107,7 @@ public class Main {
             }
         } else {
             configuration = new Configuration();
+            ui.showUnformattedMessage(noConfigFileMessage);
         }
     }
 

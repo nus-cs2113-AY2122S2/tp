@@ -5,38 +5,44 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.UnkownConfigurationGroupWord;
-
-
-
-
-import static java.util.Map.entry;
+import seedu.duke.exceptions.UnknownConfigurationGroupWord;
 
 public class Configuration {
 
+    private static final String INDENT = StringConstants.INDENT;
+    private static final String LS = StringConstants.LS;
+
+    private static final String TRUE = StringConstants.TRUE;
+    private static final String FALSE = StringConstants.FALSE;
+    private static final String DESCRIPTION_FORMAT = StringConstants.DESCRIPTION_FORMAT;
+
+    private static final String COMPLETED_TASKS_SHOWN_NAME = StringConstants.COMPLETED_TASKS_SHOWN_NAME;
+    private static final String COMPLETED_TASKS_SHOWN_EXPLAIN = StringConstants.COMPLETED_TASKS_SHOWN_EXPLAIN;
+    private static final String COMPLETED_TASKS_SHOWN_TRUE = StringConstants.COMPLETED_TASKS_SHOWN_TRUE;
+    private static final String COMPLETED_TASKS_SHOWN_FALSE = StringConstants.COMPLETED_TASKS_SHOWN_FALSE;
+
     // Legal configuration groups.
     public enum ConfigurationGroup {
-        COMPLETED_TASK_SHOWN;
+        COMPLETED_TASKS_SHOWN;
     }
 
     // Each configuration group shall have a default value.
-    private static final String DEFAULT_VALUE_COMPLETED_TASK_SHOWN = "false";
+    private static final String DEFAULT_VALUE_COMPLETED_TASK_SHOWN = FALSE;
 
     // Each configuration group shall have a well defined legal values set.
-    public static final HashSet<String> LEGAL_VALUE_OF_COMPLETED_TASK_SHOWN =
-            new HashSet<>(Arrays.asList("true", "false"));
+    public static final HashSet<String> LEGAL_VALUE_OF_COMPLETED_TASK_SHOWN = new HashSet<>(Arrays.asList(TRUE, FALSE));
 
     // Add the explanation of the configuration group here for help.
     public static final HashSet<String> EXPLAIN_CONFIGURE_GROUP =
             new HashSet<>(Arrays.asList(
-                    "COMPLETED_TASK_SHOWN: decide whether to show completed tasks."
+                    String.format(DESCRIPTION_FORMAT, COMPLETED_TASKS_SHOWN_NAME, COMPLETED_TASKS_SHOWN_EXPLAIN)
             ));
 
     // Add the explanation of each legal values of a configuration group.
     public static final HashSet<String> EXPLAIN_LEGAL_VALUE_OF_COMPLETED_TASK_SHOWN =
             new HashSet<>(Arrays.asList(
-                    "true: Show completed tasks",
-                    "false: Hide completed tasks"
+                    String.format(DESCRIPTION_FORMAT, TRUE, COMPLETED_TASKS_SHOWN_TRUE),
+                    String.format(DESCRIPTION_FORMAT, FALSE, COMPLETED_TASKS_SHOWN_FALSE)
             ));
 
     // A HashSet integrating legal values set for all configuration groups.
@@ -45,38 +51,22 @@ public class Configuration {
     public static final HashMap<ConfigurationGroup, HashSet<String>> EXPLAIN_LEGAL_VALUES = new HashMap<>();
 
     // HashSet storing all current configuration settings.
-    public HashMap<ConfigurationGroup, String> configurationGroupHashMap = new HashMap<>();
+    public HashMap<ConfigurationGroup, String> configurationGroupHashMap;
 
 
     public Configuration() {
-        this.configurationGroupHashMap = new HashMap<>();
-        LEGAL_VALUES.put(ConfigurationGroup.COMPLETED_TASK_SHOWN, LEGAL_VALUE_OF_COMPLETED_TASK_SHOWN);
-        EXPLAIN_LEGAL_VALUES.put(ConfigurationGroup.COMPLETED_TASK_SHOWN, EXPLAIN_LEGAL_VALUE_OF_COMPLETED_TASK_SHOWN);
+        configurationGroupHashMap = new HashMap<>();
+        LEGAL_VALUES.put(ConfigurationGroup.COMPLETED_TASKS_SHOWN, LEGAL_VALUE_OF_COMPLETED_TASK_SHOWN);
+        EXPLAIN_LEGAL_VALUES.put(ConfigurationGroup.COMPLETED_TASKS_SHOWN, EXPLAIN_LEGAL_VALUE_OF_COMPLETED_TASK_SHOWN);
 
         // Shall set the value of each configuration group to default
-        this.configurationGroupHashMap.put(ConfigurationGroup.COMPLETED_TASK_SHOWN, DEFAULT_VALUE_COMPLETED_TASK_SHOWN);
+        configurationGroupHashMap.put(ConfigurationGroup.COMPLETED_TASKS_SHOWN, DEFAULT_VALUE_COMPLETED_TASK_SHOWN);
     }
 
 
     public Configuration(HashMap<ConfigurationGroup, String> configurationGroupStringHashMap) {
         this();
-        this.configurationGroupHashMap = configurationGroupStringHashMap;
-    }
-
-    /**
-     * Gets the explanation of each configuration group.
-     * @return Explanation report of each configuration group.
-     */
-    public String getConfigurationGroupExplain() {
-        String listResult = "";
-        int count = 1;
-        for (String explain : EXPLAIN_CONFIGURE_GROUP) {
-            listResult += Integer.toString(count) + StringConstants.INDENT;
-            listResult += explain;
-            listResult += StringConstants.LS;
-            count += 1;
-        }
-        return listResult;
+        configurationGroupHashMap = configurationGroupStringHashMap;
     }
 
     /**
@@ -88,9 +78,7 @@ public class Configuration {
         HashSet<String> valueOfConfigureGroup = EXPLAIN_LEGAL_VALUES.get(configureGroup);
         String listResult = "";
         for (String explain : valueOfConfigureGroup) {
-            listResult += StringConstants.INDENT;
-            listResult += explain;
-            listResult += StringConstants.LS;
+            listResult += INDENT + explain + LS;
         }
         return listResult;
     }
@@ -102,11 +90,7 @@ public class Configuration {
     public String getConfigurationsReport() {
         String listResult = "";
         for (ConfigurationGroup group : ConfigurationGroup.values()) {
-            listResult += StringConstants.INDENT;
-            listResult += group;
-            listResult += StringConstants.COLON;
-            listResult += configurationGroupHashMap.get(group);
-            listResult += StringConstants.LS;
+            listResult += INDENT + String.format(DESCRIPTION_FORMAT, group, configurationGroupHashMap.get(group)) + LS;
         }
         return listResult;
     }
@@ -115,14 +99,8 @@ public class Configuration {
      * Gets current configuration value of a given configuration group.
      * @param group Given configuration group.
      * @return Current configuration value of a given configuration group.
-     * @throws ModHappyException The given configuration group is illegal or fail to read.
      */
-    public String getConfigurationValue(ConfigurationGroup group) throws ModHappyException {
-        try {
-            return configurationGroupHashMap.get(group);
-        } catch (Exception e) {
-            throw new UnkownConfigurationGroupWord(group.toString());
-        }
+    public String getConfigurationValue(ConfigurationGroup group) {
+        return configurationGroupHashMap.get(group);
     }
-
 }

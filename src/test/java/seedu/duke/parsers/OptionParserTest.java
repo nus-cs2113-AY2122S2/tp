@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import seedu.duke.exceptions.UnkownConfigurationGroupWord;
+import seedu.duke.exceptions.UnknownConfigurationGroupWord;
 import seedu.duke.util.Configuration;
 
 
@@ -22,7 +22,7 @@ public class OptionParserTest {
     }
 
     @Test
-    public void parse_empty_argument() {
+    public void parse_emptyArgument() {
         final String testString = "";
         try {
             optionParser.parseCommand(testString);
@@ -34,11 +34,11 @@ public class OptionParserTest {
     }
 
     @Test
-    public void parse_legal_configuration_group_word_only_argument() {
-        final String testString = "COMPLETED_TASK_SHOWN";
+    public void parse_configName() {
+        final String testString = "COMPLETED_TASKS_SHOWN";
         try {
             optionParser.parseCommand(testString);
-            assertEquals("COMPLETED_TASK_SHOWN", optionParser.parsedCommand.get("configurationGroupWord"));
+            assertEquals("COMPLETED_TASKS_SHOWN", optionParser.parsedCommand.get("configurationGroupWord"));
             assertNull(optionParser.parsedCommand.get("newValue"));
         } catch (Exception e) {
             fail();
@@ -46,11 +46,11 @@ public class OptionParserTest {
     }
 
     @Test
-    public void parse_legal_configuration_group_word_and_new_value_argument() {
-        final String testString = "COMPLETED_TASK_SHOWN=true";
+    public void parse_configNameAndValue() {
+        final String testString = "COMPLETED_TASKS_SHOWN=true";
         try {
             optionParser.parseCommand(testString);
-            assertEquals("COMPLETED_TASK_SHOWN", optionParser.parsedCommand.get("configurationGroupWord"));
+            assertEquals("COMPLETED_TASKS_SHOWN", optionParser.parsedCommand.get("configurationGroupWord"));
             assertEquals("true", optionParser.parsedCommand.get("newValue"));
         } catch (Exception e) {
             fail();
@@ -58,12 +58,12 @@ public class OptionParserTest {
     }
 
     @Test
-    public void parse_illegal_configuration_group_word_only_argument() {
+    public void parseIllegal_badConfigName() {
         final String testString = "ILLEGAL_TASK_SHOWN";
         try {
             optionParser.parseCommand(testString);
             fail();
-        } catch (UnkownConfigurationGroupWord e) {
+        } catch (UnknownConfigurationGroupWord e) {
             return;
         } catch (Exception e) {
             fail();
@@ -71,17 +71,15 @@ public class OptionParserTest {
     }
 
     @Test
-    public void parse_legal_configuration_group_word_with_illegal_new_value_argument() {
-        final String testString = "COMPLETED_TASK_SHOWN=true1";
+    public void parseIllegal_configNameAndBadValue() {
+        final String testString = "COMPLETED_TASKS_SHOWN=true1";
         try {
             optionParser.parseCommand(testString);
             fail();
-        } catch (UnkownConfigurationGroupWord e) {
+        } catch (UnknownConfigurationGroupWord e) {
             return;
         } catch (Exception e) {
             fail();
         }
     }
-
-
 }

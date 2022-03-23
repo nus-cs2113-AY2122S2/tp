@@ -67,7 +67,7 @@ public class HelpCommand extends Command {
         case TAG_COMMAND_WORD:
             return new CommandResult(TAG_HELP);
         case OPTION_COMMAND_WORD:
-            return new CommandResult(OPTION_HELP + "\n" + configuration.getConfigurationGroupExplain());
+            return new CommandResult(OPTION_HELP);
         default:
             throw new ModHappyException(HELP_EXCEPTION);
         }

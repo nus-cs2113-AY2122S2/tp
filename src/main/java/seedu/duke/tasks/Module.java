@@ -80,12 +80,12 @@ public class Module {
     /**
      * Formats the module and all tasks associated with it as a string.
      */
-    public String printModuleTaskList() {
-        return this + LS + taskList.getAllTasks(INDENT);
+    public String printModuleTaskList(boolean showCompletedTasks) {
+        return this + LS + taskList.getAllTasks(INDENT, showCompletedTasks);
     }
 
-    public String printModuleTaskListWithTag(String tag) {
-        return this + LS + taskList.getTasksWithTag(INDENT, tag);
+    public String printModuleTaskListWithTag(String tag, boolean showCompletedTasks) {
+        return this + LS + taskList.getTasksWithTag(INDENT, tag, showCompletedTasks);
     }
 
     /**

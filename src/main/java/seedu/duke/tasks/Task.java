@@ -79,6 +79,10 @@ public class Task {
         }
     }
 
+    public boolean getTaskDone() {
+        return isTaskDone;
+    }
+
     /**
      * Sets the completion status of the task.
      * @param status new task completion status

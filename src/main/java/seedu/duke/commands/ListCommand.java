@@ -24,17 +24,19 @@ public class ListCommand extends Command {
      */
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) {
+        boolean showCompletedTasks = Boolean.parseBoolean(configuration.getConfigurationValue(
+                Configuration.ConfigurationGroup.COMPLETED_TASKS_SHOWN));
         StringBuilder res = new StringBuilder();
         if (Objects.isNull(argument)) {
             for (Module m : moduleList.getModuleList()) {
-                res.append(m.printModuleTaskList()).append(LS);
+                res.append(m.printModuleTaskList(showCompletedTasks)).append(LS);
             }
-            res.append(moduleList.getGeneralTasks().printModuleTaskList());
+            res.append(moduleList.getGeneralTasks().printModuleTaskList(showCompletedTasks));
         } else {
             for (Module m : moduleList.getModuleList()) {
-                res.append(m.printModuleTaskListWithTag(argument)).append(LS);
+                res.append(m.printModuleTaskListWithTag(argument, showCompletedTasks)).append(LS);
             }
-            res.append(moduleList.getGeneralTasks().printModuleTaskListWithTag(argument));
+            res.append(moduleList.getGeneralTasks().printModuleTaskListWithTag(argument, showCompletedTasks));
         }
         return new CommandResult(String.format(LIST_MESSAGE, res));
     }

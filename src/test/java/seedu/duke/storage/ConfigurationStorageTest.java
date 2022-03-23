@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.duke.util.Configuration.ConfigurationGroup.COMPLETED_TASK_SHOWN;
+import static seedu.duke.util.Configuration.ConfigurationGroup.COMPLETED_TASKS_SHOWN;
 
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
@@ -25,10 +25,10 @@ public class ConfigurationStorageTest {
     }
 
     @Test
-    public void modify_configuration_store_and_read() {
+    public void modifyConfig_saveAndReload() {
         try {
-            assertEquals("false", configuration.getConfigurationValue(COMPLETED_TASK_SHOWN));
-            configuration.configurationGroupHashMap.put(COMPLETED_TASK_SHOWN, "true");
+            assertEquals("false", configuration.getConfigurationValue(COMPLETED_TASKS_SHOWN));
+            configuration.configurationGroupHashMap.put(COMPLETED_TASKS_SHOWN, "true");
             configurationStorage.jsonWriter(configuration, path);
             Configuration loadedConfiguration = (Configuration) configurationStorage.jsonReader(path);
             assertEquals(configuration.getConfigurationsReport(), loadedConfiguration.getConfigurationsReport());

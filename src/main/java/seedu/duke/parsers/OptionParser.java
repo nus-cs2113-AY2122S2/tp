@@ -8,7 +8,7 @@ import seedu.duke.exceptions.ModHappyException;
 
 public class OptionParser extends Parser {
 
-    private static final String OPTION_FORMAT = "(\\s*(?<configurationGroupWord>[A-Z_]+)(=(?<newValue>.*))?)?";
+    private static final String OPTION_FORMAT = "(\\s*(?<configurationGroupWord>[A-Z_]+)(\\s*=\\s*(?<newValue>.*))?)?";
     private static final String CONFIGURATION_GROUP_WORD = "configurationGroupWord";
     private static final String NEW_VALUE = "newValue";
 

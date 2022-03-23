@@ -75,7 +75,7 @@ public class TagCommand extends Command {
      */
     private void addTag(Module targetModule) throws ModHappyException {
         TaskList taskList = targetModule.getTaskList();
-        result  = String.format(ADD_TAG_MESSAGE, taskList.addTag(tagDescription, taskIndex), tagDescription);
+        result  = String.format(ADD_TAG_MESSAGE, tagDescription, taskList.addTag(tagDescription, taskIndex));
     }
 
     /**
@@ -86,6 +86,6 @@ public class TagCommand extends Command {
     private void removeTag(Module targetModule) throws ModHappyException {
         TaskList taskList = targetModule.getTaskList();
         Task task = taskList.deleteTag(tagDescription, taskIndex);
-        result = String.format(DEL_TAG_MESSAGE, task, tagDescription);
+        result = String.format(DEL_TAG_MESSAGE, tagDescription, task);
     }
 }
