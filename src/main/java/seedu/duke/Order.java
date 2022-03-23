@@ -44,7 +44,7 @@ public class Order {
             int qty = Integer.parseInt(qtyStr);
 
             if (doesGoodExist(id)) {
-                addExistingGood(id, qty);
+                addExistingGood(id, name, qty);
                 return;
             }
 
@@ -53,6 +53,9 @@ public class Order {
             System.out.printf("%d %s %s added\n", good.getQuantity(), good.getName(),
                     checkPlural(good.getQuantity()));
         } catch (NumberFormatException e) {
+            throw new WrongCommandException("add", true);
+        } catch (ItemDoesNotExistException itemDoesNotExistException) {
+            System.out.println("ID has been used but with a different name");
             throw new WrongCommandException("add", true);
         }
     }
@@ -137,11 +140,17 @@ public class Order {
         return null;
     }
 
-    private void addExistingGood(int gid, int qty) {
+    private void addExistingGood(int gid, String name, int qty) throws ItemDoesNotExistException {
         Good good = findGood(gid);
         if (good != null) {
+            if (!good.getName().equals(name)) {
+                throw new ItemDoesNotExistException();
+            }
             int oldQty = good.getQuantity();
             good.setQuantity(oldQty + qty);
+            System.out.printf("%d more %s added, total quantity of %s is now %d\n",
+                    qty, good.getName(),
+                    good.getName(), good.getQuantity());
         }
     }
 
