@@ -141,7 +141,7 @@ of repetitions. For example, 20 repetitions of the Russian twist is considered a
 
 ### Delete Existing Workout
 Class diagram for Delete Workout:
-![Delete Workout UML](uml/classDiagrams/images/DeleteWorkout.PNG)
+![Delete Workout UML](uml/classDiagrams/images/DeleteWorkout.png)
 <br>
 <br>
 Sequence diagram for Delete Workout:
@@ -167,8 +167,29 @@ the UI will print a success message and call the `FileManager#rewriteAllWorkouts
 #### Delete existing workout command
 Format: `workout /delete <workout number in workout list>`
 
+### List Workout
+![SearchUML](uml/classDiagrams/images/listWorkout.png)
+<br>
+user's command. If the user's command type is to list the workouts created, i.e. `workout /list`, the
+`Parser#parseUserInput(String userInput)` method will parse the 'workout' base word and proceed to create workout related
+command using `Parser#createWorkoutCommand(String userInput)` method. This method will further evaluate the
+workout action, in this case, `/list` and call the constructor of `WorkoutCommand` class by passing relevant parameters related to the
+WorkoutCommand constructor. If the workout action is null or incorrect, an InvalidCommandException will be thrown. Once the workout command is created,
+this workout command is executed via the `WorkoutCommand#execute()` method. As it is executed, the method will check the
+type of action to be executed, in this case, list. It will then list the workouts created and stored in the workoutList using the `WorkoutList#listWorkout()`
+method which will call `WorkoutList#continuousPrinting(int index, int noOfPrints)` method to determine
+the number of workouts to be printed. The maximum number of workouts to be displayed at a time is 10 workouts. If there are more than
+10 workouts stored in the workoutList, it will prompt the user to enter 'yes' or 'no' to determine the continuation of the printings.
+`isInputYesOrNo(String answer)` method is executed when user enter the answer for the continuation of printing.
+If the answer given by the user is neither 'yes' nor 'no', user will be prompt to enter their option again until they give the expected input.
+When 'yes' is entered, the printing will continue and `WorkoutList#continuousPrinting(int index, int noOfPrints)` method will be executed again.
+Otherwise, `WorkoutList#listWorkout()` method will be terminated.
+
+#### List workouts command
+Format: `workout /list`
+
 ### Search
-![SearchUML](uml/classDiagrams/images/SearchClassUML.png)
+![SearchUML](uml/classDiagrams/images/SearchClass.png)
 <br>
 
 When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
