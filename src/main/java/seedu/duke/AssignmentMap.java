@@ -16,7 +16,9 @@ public class AssignmentMap {
         for (Room r : roomList.getRoomList()) {
             if (r.getRoomId() == Integer.parseInt(roomID)) {
                 room = r;
-                if (housekeeperExists(name, housekeeperList, room)) return;
+                if (housekeeperExists(name, housekeeperList, room)) {
+                    return;
+                }
                 throw new InvalidHousekeeperProfile();
             }
         }
