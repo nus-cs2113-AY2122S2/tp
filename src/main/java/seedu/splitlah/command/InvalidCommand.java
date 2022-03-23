@@ -13,7 +13,7 @@ public class InvalidCommand extends Command {
     private final String errorMessage;
 
     /**
-     * Initializes a InvalidCommand object.
+     * Initializes an InvalidCommand object.
      *
      * @param errorMessage A String object that represents the error message.
      */
@@ -24,7 +24,7 @@ public class InvalidCommand extends Command {
     /**
      * Runs the command to print the error message.
      *
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {
