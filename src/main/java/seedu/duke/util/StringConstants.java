@@ -6,6 +6,10 @@ public class StringConstants {
      */
     public static final String TASK_PATH = "data/task.json";
     public static final String MODULE_PATH = "data/module.json";
+    public static final String CONFIGURATION_PATH = "data/configuration.json";
+    public static final String TASK_TEST_PATH = "data/test/task.json";
+    public static final String MODULE_TEST_PATH = "data/test/module.json";
+    public static final String CONFIGURATION_TEST_PATH = "data/test/configuration.json";
 
     /**
      * For start and exit of program.
@@ -23,6 +27,9 @@ public class StringConstants {
     public static final String TASK_DATA_LOAD_FAILED = "Failed to load general task data. "
             + "Empty list of general tasks loaded instead.";
     public static final String TASK_DATA_LOAD_SUCCESS = "Successfully loaded general task data!";
+    public static final String CONFIGURATION_DATA_LOAD_FAILED = "Failed to load configuration data. "
+            + "Empty list of general tasks loaded instead.";
+    public static final String CONFIGURATION_DATA_LOAD_SUCCESS = "Successfully loaded configuration data!";
 
 
     /**
@@ -125,6 +132,12 @@ public class StringConstants {
     public static final String HELP_EXCEPTION = "Sorry, but no help exists for that command.";
     public static final String HELP_COMMAND_ARGUMENT = "command";
 
+    public static final String OPTION_HELP = "Set customized configuration\n"
+            + "Format to set an option: option CONFIGURATION_GROUP=NEW_VALUE\n"
+            + "Format to check configuration seting: option\n"
+            + "Format to check all legal values of a configuration group: option CONFIGURATION_GROUP\n\n"
+            + "List of configuration groups:\\n";
+
     /**
      * For SaveCommand.
      */
@@ -134,6 +147,18 @@ public class StringConstants {
     public static final String TASK_DATA_SAVE_FAILED = "Failed to write general task data to file. "
             + "Your general tasks were NOT saved!";
     public static final String TASK_DATA_SAVE_SUCCESS = "General tasks written to file.";
+    public static final String CONFIGURATION_DATA_SAVE_FAILED = "Failed to write configuration data to file. "
+            + "Your configuration were NOT saved!";
+    public static final String CONFIGURATION_DATA_SAVE_SUCCESS = "Configuration to file.";
+
+
+    /**
+     * For OptionCommand.
+     */
+    public static final String OPTION_SET_SUCCESS = "Configuration set: ";
+    public static final String OPTION_CHECK_CONFIGURATIONS = "Configuration group: ";
+    //public static final String OPTION_EXPLAIN_CONFIGURATION_VALUE_EXPLAIN = "Configuration group: ";
+
 
     /**
      * For TagCommand.
@@ -147,6 +172,7 @@ public class StringConstants {
     public static final String ARRAYLIST_RESULT = "ArrayList";
     public static final String STRING_RESULT = "String";
 
+
     /**
      * For exceptions.
      */
@@ -159,6 +185,9 @@ public class StringConstants {
     public static final String ERROR_READ_FILE = "Error reading from file...";
     public static final String ERROR_FILE_CREATE_FAIL = "Sorry, file creation failed...";
     public static final String ERROR_NO_SUCH_TAG = "Sorry, no such tag exists ._.";
+    public static final String ERROR_UNKNOWN_CONFIGURATION_GROUP = "Sorry, unknown configuration group\"";
+    public static final String SUGGESTION_UNKNOWN_CONFIGURATION_GROUP = "Enter \"option\" to check legal "
+            + "configuration group or enter \"help option\" to check usage of command \"option\"";
 
 
     /**
@@ -192,6 +221,7 @@ public class StringConstants {
     public static final String HELP_COMMAND_WORD = "help";
     public static final String SAVE_COMMAND_WORD = "save";
     public static final String TAG_COMMAND_WORD = "tag";
+    public static final String OPTION_COMMAND_WORD = "option";
 
     /**
      * For Grades.
@@ -203,6 +233,7 @@ public class StringConstants {
     public static final String NOT_ENTERED_STR = "NOT_ENTERED";
 
 
+
     /**
      * General strings.
      */
@@ -210,5 +241,6 @@ public class StringConstants {
     public static final String INDENT = "    ";
     public static final String NULL_STRING = "";
     public static final String LS = System.lineSeparator();
+    public static final String COLON = ":";
     public static final String LINE = "____________________________________________________________";
 }

@@ -25,6 +25,8 @@ public abstract class Parser {
     protected static final String RESET_COMMAND_WORD = StringConstants.RESET_COMMAND_WORD;
     protected static final String HELP_COMMAND_WORD = StringConstants.HELP_COMMAND_WORD;
     protected static final String SAVE_COMMAND_WORD = StringConstants.SAVE_COMMAND_WORD;
+    protected static final String TAG_COMMAND_WORD = StringConstants.TAG_COMMAND_WORD;
+    protected static final String OPTION_COMMAND_WORD = StringConstants.OPTION_COMMAND_WORD;
 
     protected String commandFormat;
     protected HashMap<String, String> parsedCommand;
