@@ -1,7 +1,11 @@
 package seedu.duke.manager;
 
+import com.sun.tools.javac.Main;
 import seedu.duke.entities.Dish;
+import seedu.duke.loggers.MainLogger;
 
+import java.io.EOFException;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +13,19 @@ import java.util.List;
  * DishManager.
  */
 public class DishManager {
-    private final List<Dish> dishes;
+    private List<Dish> dishes;
+    private final DishStorageManager dishStorageManager;
 
     public DishManager() {
         dishes = new ArrayList<>();
+        dishStorageManager = new DishStorageManager(this);
+        try {
+            dishStorageManager.loadData();
+        } catch (Exception e) {
+            MainLogger.logWarning(this, e.toString());
+            MainLogger.logWarning(this, "Start with an empty menu");
+            dishes.clear();
+        }
     }
 
     /**
@@ -99,5 +112,25 @@ public class DishManager {
      */
     public ArrayList<Dish> getDishes() {
         return new ArrayList<>(dishes);
+    }
+
+    public void store() {
+        try {
+            dishStorageManager.saveData();
+        } catch (Exception e) {
+            MainLogger.logWarning(this, e.toString());
+            MainLogger.logWarning(this, "Store an empty menu");
+            // maybe a method to empty the file
+            dishes.clear();
+            try {
+                dishStorageManager.saveData();
+            } catch (Exception ee) {
+                assert false;
+            }
+        }
+    }
+
+    public void setDishes(ArrayList<Dish> list) {
+        dishes = list;
     }
 }

@@ -9,4 +9,8 @@ public class MainLogger {
     public static void logInfo(Object o, String msg) {
         logger.log(Level.INFO, String.format("%s: %s", o.getClass().getSimpleName(), msg));
     }
+
+    public static void logWarning(Object o, String msg) {
+        logger.log(Level.WARNING, String.format("%s: %s", o.getClass().getSimpleName(), msg));
+    }
 }
