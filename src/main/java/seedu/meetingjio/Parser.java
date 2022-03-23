@@ -1,12 +1,7 @@
 package seedu.meetingjio;
 
-import seedu.meetingjio.commands.Command;
-import seedu.meetingjio.commands.AddCommand;
-import seedu.meetingjio.commands.ClearCommand;
-import seedu.meetingjio.commands.HelpCommand;
-import seedu.meetingjio.commands.DeleteCommand;
-import seedu.meetingjio.commands.ListCommand;
-import seedu.meetingjio.commands.CommandResult;
+import seedu.meetingjio.commands.*;
+import seedu.meetingjio.commands.AddLessonCommand;
 import seedu.meetingjio.exceptions.InvalidDayException;
 import seedu.meetingjio.exceptions.MissingValueException;
 import seedu.meetingjio.exceptions.InvalidTimeException;
@@ -44,7 +39,7 @@ public class Parser {
 
     public Command parseCommand() {
         switch (command) {
-        case AddCommand.COMMAND_WORD:
+        case AddLessonCommand.COMMAND_WORD:
             return prepareAdd();
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -63,9 +58,9 @@ public class Parser {
     /**
      * Collate the user's input and verify the validity of the input value of each parameter.
      * Invalid inputs will be identified.
-     * If input is valid, AddCommand class is returned.
+     * If input is valid, AddLessonCommand class is returned.
      *
-     * @return AddCommand if input is valid
+     * @return AddLessonCommand if input is valid
      *         CommandResult if input is invalid, with the error description as a parameter
      */
     public Command prepareAdd() {
@@ -84,7 +79,7 @@ public class Parser {
 
             String name = eventDescription[NAME_INDEX];
             String title = eventDescription[TITLE_INDEX];
-            return new AddCommand(name, title, day, startTime, endTime, mode);
+            return new AddLessonCommand(name, title, day, startTime, endTime, mode);
 
         } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS);
