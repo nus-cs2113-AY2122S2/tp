@@ -16,7 +16,9 @@ The **Timetable** component has the following functionalities:
 ![timetable format](images/timetable format.png)
 
 The sequence diagram when the user type "show today" is shown below
-![timetable UML](images/Timetable_UML.png)
+![timetable UML](images/Timetable_SequenceDiagram_ShowToday.png)
+
+When the user call "Show <date>",  
 
 ## Design & implementation
 
