@@ -21,29 +21,16 @@ public class Parser {
         return parametersArray;
     }
 
-    public static String[] parseAddPatient(String parameters) {
+    public static String[] parseAddPatient(String parameters) throws HalpmiException {
         String[] addPatientParameters = minParameterCheck(parameters, 7);
-        if (Validator.validateAddPatient(addPatientParameters)) {
-            return addPatientParameters;
-        } else {
-            return null;
-        }
+        Validator.validateAddPatient(addPatientParameters);
+        return addPatientParameters;
     }
 
-    public static String[] parseAddDoctor(String parameters) {
-        String[] addDoctorParameters = parameters.split(",");
-        for (int i = 0; i < addDoctorParameters.length; i++) {
-            addDoctorParameters[i] = addDoctorParameters[i].trim();
-        }
-        if (addDoctorParameters.length != 7) {
-            UI.printParagraph("There is one or more parameters missing.");
-            return null;
-        }
-        if (Validator.validateAddDoctor(addDoctorParameters)) {
-            return addDoctorParameters;
-        } else {
-            return null;
-        }
+    public static String[] parseAddDoctor(String parameters) throws HalpmiException {
+        String[] addDoctorParameters = minParameterCheck(parameters, 7);
+        Validator.validateAddDoctor(addDoctorParameters);
+        return  addDoctorParameters;
     }
 
 

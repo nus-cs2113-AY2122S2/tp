@@ -1,5 +1,7 @@
 package seedu.duke.helper;
 
+import seedu.duke.exception.HalpmiException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
@@ -108,57 +110,50 @@ public class Validator {
     }
 
     /* Validating person */
-    private static boolean validateAddPerson(String[] parameters) {
-        boolean isValid = true;
+    private static void validateAddPerson(String[] parameters) throws HalpmiException {
         if (!validateNric(parameters[0])) {
-            UI.printParagraph("NRIC must start with a capital letter, "
+            throw new HalpmiException("NRIC must start with a capital letter, "
                     + "followed by 7 digits and end with a capital letter.");
-            isValid = false;
         }
-        if (validateFullName(parameters[1])) {
-            UI.printParagraph("Full name must contain only alphabets and no special characters.");
-            isValid = false;
+        if (!validateFullName(parameters[1])) {
+            throw new HalpmiException("Full name must contain only alphabets and no special characters.");
+
         }
         if (!validateAge(parameters[2])) {
-            UI.printParagraph("Age must be between 1 and 120 inclusive.");
-            isValid = false;
+            throw new HalpmiException("Age must be between 1 and 120 inclusive.");
+
         }
         if (!validateGender(parameters[3])) {
-            UI.printParagraph("Gender must be a single character: M or F.");
-            isValid = false;
+            throw new HalpmiException("Gender must be a single character: M or F.");
+
         }
         if (!validateAddress(parameters[4])) {
-            UI.printParagraph("Address must be alphanumeric. "
+            throw new HalpmiException("Address must be alphanumeric. "
                     + "Only these specific special characters are allowed: ' ( ) #");
-            isValid = false;
+
         }
         if (!validateDob(parameters[5])) {
-            UI.printParagraph("Date of birth must be in YYYY-MM-DD format. "
+            throw new HalpmiException("Date of birth must be in YYYY-MM-DD format. "
                     + "It cannot be before 1900-01-01 or be today and after.");
-            isValid = false;
+
         }
-        return isValid;
+
     }
 
-    static boolean validateAddDoctor(String[] parameters) {
-        boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
+    static void validateAddDoctor(String[] parameters) throws HalpmiException {
+       validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
         //validate full name cause specialization is also just a name
         if (validateFullName(parameters[6])) {
-            UI.printParagraph("Specialization must be a name");
-            isValid = false;
+            throw new HalpmiException("Specialization must be a name");
         }
-        return isValid;
-
     }
 
-    static boolean validateAddPatient(String[] parameters) {
-        boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
+    static void validateAddPatient(String[] parameters) throws HalpmiException {
+    validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
         if (!validateAdmissionDate(parameters[6])) {
-            UI.printParagraph("Date of birth must be in YYYY-MM-DD format. "
+            throw new HalpmiException("Date of birth must be in YYYY-MM-DD format. "
                     + "It cannot be before 1980-01-01 or be today and after.");
-            isValid = false;
         }
-        return isValid;
     }
 
 
