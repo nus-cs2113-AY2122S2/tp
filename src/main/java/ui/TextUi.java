@@ -1,48 +1,51 @@
 package ui;
 
-import static common.Messages.MESSAGE_GOODBYE;
-import static common.Messages.MESSAGE_WELCOME;
-
 import java.io.InputStream;
 import java.io.PrintStream;
+
 import java.util.List;
 import java.util.Scanner;
 
 import commands.CommandResult;
+
 import data.record.Record;
+
+import static common.Messages.MESSAGE_GOODBYE;
+import static common.Messages.MESSAGE_WELCOME;
+import static constants.TextUIConstants.COMMENT_LINE_FORMAT_REGEX;
+import static constants.TextUIConstants.DIVIDER;
+import static constants.TextUIConstants.LINE_PREFIX;
+import static constants.TextUIConstants.LS;
 
 /**
  * Text UI of the application.
  */
 public class TextUi {
-
-    /** Offset required to convert between 1-indexing and 0-indexing.  */
-    public static final int DISPLAYED_INDEX_OFFSET = 1;
-
-    /** A decorative prefix added to the beginning of lines printed by RecordBook */
-    private static final String LINE_PREFIX = "|| ";
-
-    /** A platform independent line separator. */
-    private static final String LS = System.lineSeparator();
-
-    private static final String DIVIDER = "===================================================";
-
-    /** Format of indexed list item */
-    private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
-
-    /** Format of a comment input line. Comment lines are silently consumed when reading user input. */
-    private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
-
+    private static TextUi textUiInstance;
     private final Scanner in;
     private final PrintStream out;
 
-    public TextUi() {
+    private TextUi() {
         this(System.in, System.out);
     }
 
-    public TextUi(InputStream in, PrintStream out) {
+    private TextUi(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
+    }
+
+    public static TextUi getTextUiInstance () {
+        if (textUiInstance == null) {
+            textUiInstance = new TextUi();
+        }
+        return textUiInstance;
+    }
+
+    public static TextUi getTextUiInstance (InputStream in, PrintStream out) {
+        if (textUiInstance == null) {
+            textUiInstance = new TextUi(in, out);
+        }
+        return textUiInstance;
     }
 
     /**
