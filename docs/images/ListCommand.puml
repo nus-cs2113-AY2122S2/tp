@@ -1,0 +1,17 @@
+@startuml
+!include Style.puml
+'https://plantuml.com/sequence-diagram
+box ListCommand
+participant ":Parser" as Parser LOGIC_COLOR_T1
+participant "Command:ListCommand" as ListCommand LOGIC_COLOR_T1
+end box
+activate ListCommand
+ListCommand -> ListCommand: listToString()
+activate ListCommand
+ListCommand --> ListCommand: listInString:String
+deactivate ListCommand
+
+ListCommand --> Parser
+deactivate ListCommand
+
+@enduml
