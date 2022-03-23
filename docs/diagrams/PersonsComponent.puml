@@ -1,0 +1,14 @@
+@startuml
+!include style.puml
+
+Package "Person" <<Rectangle>> {
+    class Family MODEL_COLOR
+    class PersonList MODEL_COLOR_T1
+    class Person  MODEL_COLOR_T2
+}
+
+Family "1" -down[#grey]-> "3" PersonList
+
+PersonList "1" -down[#grey]-> "*" Person
+
+@enduml
