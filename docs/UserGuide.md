@@ -225,7 +225,7 @@ Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 * `[SESSION_ID]` refers to the unique identifier of the session.
     * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 * `[ACTIVITY_ID]` refers to the unique identifier of the activity.
-    * The unique identifier for an activity can be retrieved with `activity /list` command.
+    * The unique identifier for an activity can be retrieved with [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
 
 > **💡 Note(s):**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity in that session can be removed.
