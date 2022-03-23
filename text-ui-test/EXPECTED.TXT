@@ -24,6 +24,10 @@ Checking for required directory and files...
 - The plan file 'plans.txt' has been created in
   the WerkIt! resource directory.
 
+- The schedule file was not found. It will be created.
+- The schedule file 'schedule.txt' has been
+  created in the WerkIt! resource directory.
+
 Loading saved file data...
 - Exercises file	[32mOK![0m
 ----------------------------------------------------------------------

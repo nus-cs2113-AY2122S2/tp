@@ -46,10 +46,10 @@ class PlanListTest {
         planList.createAndAddPlan("Plan 3 /workouts 1,5,4,3");
         String expectedOutput =
                 "Here are all your plan(s).\n"
-                        + "To view each plan in detail, enter 'plan /details <plan number in list>'.\n"
-                        + "1.Plan 1\n"
-                        + "2.Plan 2\n"
-                        + "3.Plan 3\n";
+                        + "To view each plan in detail, enter\n'plan /details <plan number in list>'.\n"
+                        + "1. Plan 1\n"
+                        + "2. Plan 2\n"
+                        + "3. Plan 3\n";
         expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
         ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(consoleOutput);

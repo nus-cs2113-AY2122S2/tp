@@ -9,6 +9,7 @@ import storage.FileManager;
 import storage.LogHandler;
 import werkit.UI;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,6 +72,15 @@ public class ScheduleCommand extends Command {
     }
 
     /**
+     * Gets the instance of the DayList class.
+     *
+     * @return An instance of the DayList class.
+     */
+    public DayList getScheduleList() {
+        return this.scheduleList;
+    }
+
+    /**
      * Gets the action of the workout command specified by the user.
      *
      * @return A string containing the action specified by the user.
@@ -120,6 +130,7 @@ public class ScheduleCommand extends Command {
             case UPDATE_ACTION_KEYWORD:
                 Day newDay = scheduleList.updateDay(getUserArguments());
                 getUI().printNewScheduleCreatedMessage(newDay);
+                getFileManager().rewriteAllDaysScheduleToFile(getScheduleList());
                 break;
             case LIST_ACTION_KEYWORD:
                 scheduleList.printSchedule();
@@ -146,6 +157,9 @@ public class ScheduleCommand extends Command {
             System.out.println(INPUT_NOT_NUMBER_FORMATTABLE);
         } catch (InvalidScheduleException e) {
             System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(UI.IOEXCEPTION_ERROR_MESSAGE);
+            System.exit(-1);
         }
     }
 }
