@@ -5,42 +5,66 @@ import seedu.duke.entities.Order;
 
 import java.util.ArrayList;
 
-
+/**
+ * OrderManager.
+ */
 public class OrderManager {
-    private final ArrayList<Order> orders;
-    private final DishManager dishManager = new DishManager();
-    private final ArrayList<Dish> dishes;
+    private ArrayList<Order> orders;
+    private DishManager dishManager = new DishManager();
+    private ArrayList<Dish> dishes;
 
     public OrderManager() {
         this.orders = new ArrayList<Order>();
         this.dishes = dishManager.getDishes();
     }
 
+    /**
+     * Add the created order to the order list.
+     *
+     * @param order the created order.
+     */
     public void addOrder(Order order) {
         this.orders.add(order);
     }
 
-    public int addDishToOrder(Object inputObj) {
+    /**
+     * Add dish by index to the order.
+     *
+     * @param dishIdx the index of the dish.
+     * @return size of the order list.
+     */
+    public int addDishToOrder(int dishIdx) {
         Order order = null;
-        if (inputObj instanceof Integer && ((Integer) inputObj <= this.dishes.size())) {
-            int dishIdx = (Integer) inputObj;
-            Dish dish = this.dishes.get(dishIdx);
-            order.addDishToOrder(dish);
-        } else {
-            System.out.println("Please enter a valid input: number of dish in the menu.");
-        }
+        Dish dish = this.dishes.get(dishIdx);
+        order.addDishToOrder(dish);
         addOrder(order);
         return this.orders.size();
     }
 
+    /**
+     * Remove an order from the order list.
+     *
+     * @param userInputInt user input index.
+     */
     public void deleteOrder(int userInputInt) {
         this.orders.remove(userInputInt);
     }
 
+    /**
+     * Get the sum of prices of the dishes in the order.
+     *
+     * @param userInputInt user input index.
+     * @return total value of this order.
+     */
     public double getOrderPrice(int userInputInt) {
         return this.orders.get(userInputInt).getTotalPrice();
     }
 
+    /**
+     * Get revenue, total value of all orders.
+     *
+     * @return total value of all orders.
+     */
     public double getAllOrderValue() {
         double total = 0;
         for (int i = 0; i < this.orders.size(); i++) {
@@ -49,6 +73,9 @@ public class OrderManager {
         return total;
     }
 
+    /**
+     * Generate report.
+     */
     public void printReceipt() {
         if (this.orders.size() == 0) {
             System.out.println("No orders!");
@@ -60,6 +87,25 @@ public class OrderManager {
             System.out.println("Total price:" + order.getTotalPrice());
         }
         System.out.println("Total revenue:" + this.getAllOrderValue());
+    }
+
+    /**
+     * Get all orders as ArrayList.
+     *
+     * @return
+     */
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
+
+    /**
+     * Get all dishes of a specific order.
+     *
+     * @param orderIdx user input: order index.
+     * @return
+     */
+    public ArrayList<Dish> getDishesFromOrder(int orderIdx) {
+        return this.dishes;
     }
 
 }

@@ -5,7 +5,7 @@ import java.util.List;
 public class Order {
     private List<Dish> dishes;
 
-    public Order(List<Dish> asList) {
+    public Order(List<Dish> dishList) {
 
     }
 
@@ -32,4 +32,7 @@ public class Order {
         return totalPrice;
     }
 
+    public List<Dish> getDishes() {
+        return dishes;
+    }
 }

@@ -1,6 +1,7 @@
 package seedu.duke.controllers;
 
 import seedu.duke.exceptions.OperationTerminationException;
+import seedu.duke.manager.DishManager;
 import seedu.duke.manager.OrderManager;
 
 public class OrderController extends Controller {
@@ -9,7 +10,7 @@ public class OrderController extends Controller {
         "Get total value of current order",
         "Get total value of all orders in the list", "Print receipt"
     };
-    private final OrderManager orderManager;
+    private OrderManager orderManager;
 
     public OrderController() {
         super(CHOICES);
@@ -49,22 +50,35 @@ public class OrderController extends Controller {
     }
 
     private void addOrder() throws OperationTerminationException {
-        String userInput = InputParser.getString("Enter dishes you want to order (enter '-' to exit): ");
+        int index = InputParser.getInteger("Enter dishes you want to order (enter '-' to exit): ");
+        DishManager dishManager = new DishManager();
+        assert index < dishManager.getDishes().size() : "Index out of bound!";
         while (true) {
-            Object inputObj = userInput;
-            int size = orderManager.addDishToOrder(inputObj);
-            userInput = InputParser.getString("You’ve already added " + size + " dish(es), some more: \n");
+            try {
+                int size = orderManager.addDishToOrder(index);
+                index = InputParser.getInteger("You’ve already added " + size + " dish(es), some more: \n");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Please enter a valid dish index.");
+            }
         }
     }
 
     private void deleteOrder() throws OperationTerminationException {
-        int userInputInt = InputParser.getInteger("Enter the order you want to delete: ");
-        orderManager.deleteOrder(userInputInt);
+        try {
+            int userInputInt = InputParser.getInteger("Enter the order you want to delete: ");
+            orderManager.deleteOrder(userInputInt);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Please enter a valid index.");
+        }
     }
 
     private void getOrderPrice() throws OperationTerminationException {
-        int userInputInt = InputParser.getInteger("Enter the order you want to get price: ");
-        System.out.printf("Total value of all orders: %f. \n", orderManager.getOrderPrice(userInputInt));
+        try {
+            int userInputInt = InputParser.getInteger("Enter the order you want to get price: ");
+            System.out.printf("Total value of all orders: %f. \n", orderManager.getOrderPrice(userInputInt));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Please enter a valid index.");
+        }
     }
 
     private void getAllOrderPrice() {
