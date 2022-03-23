@@ -16,10 +16,9 @@ import static constants.TextUIConstants.COMMENT_LINE_FORMAT_REGEX;
 import static constants.TextUIConstants.DIVIDER;
 import static constants.TextUIConstants.LINE_PREFIX;
 import static constants.TextUIConstants.LS;
+import static constants.TextUIConstants.USERCOMMANDREQUEST;
 
-/**
- * Text UI of the application.
- */
+/** Text UI of the application. */
 public class TextUi {
     private static TextUi textUiInstance;
     private final Scanner in;
@@ -73,10 +72,11 @@ public class TextUi {
      * Prompts for the command and reads the text entered by the user.
      * Ignores empty, pure whitespace, and comment lines.
      * Echos the command back to the user.
+     *
      * @return command (full line) entered by the user
      */
     public String getUserCommand() {
-        out.print(LINE_PREFIX + "Enter command: ");
+        out.print(USERCOMMANDREQUEST);
         String fullInputLine = in.nextLine();
 
         // silently consume all ignored lines
@@ -90,6 +90,7 @@ public class TextUi {
 
     /**
      * Generates and prints the welcome message upon the start of the application.
+     *
      * @param version current version of the application.
      */
     public void showWelcomeMessage(String version) {

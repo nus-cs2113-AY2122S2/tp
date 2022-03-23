@@ -17,4 +17,6 @@ public class TextUIConstants {
 
     /** Format of a comment input line. Comment lines are silently consumed when reading user input. */
     public static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
+
+    public static final String USERCOMMANDREQUEST = LINE_PREFIX + "Enter command: ";
 }
