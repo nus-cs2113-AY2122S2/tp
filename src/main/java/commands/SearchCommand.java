@@ -20,6 +20,9 @@ public class SearchCommand extends Command {
     public static final String SEARCH_WORKOUT_ACTION_KEYWORD = "/workout";
     public static final String SEARCH_PLAN_ACTION_KEYWORD = "/plan";
     public static final String SEARCH_ALL_ACTION_KEYWORD = "/all";
+    public static final String CATEGORY_EXERCISE = "exercise";
+    public static final String CATEGORY_WORKOUT = "workout";
+    public static final String CATEGORY_PLAN = "plan";
 
     private UI ui;
     private ExerciseList exerciseList;
@@ -167,17 +170,17 @@ public class SearchCommand extends Command {
         switch (userAction) {
         case SEARCH_EXERCISE_ACTION_KEYWORD:
             if (isFirstMatch()) {
-                printHeadingMessage("exercise");
+                printHeadingMessage(CATEGORY_EXERCISE);
             }
             break;
         case SEARCH_PLAN_ACTION_KEYWORD:
             if (isFirstMatch()) {
-                printHeadingMessage("plan");
+                printHeadingMessage(CATEGORY_PLAN);
             }
             break;
         case SEARCH_WORKOUT_ACTION_KEYWORD:
             if (isFirstMatch()) {
-                printHeadingMessage("workout");
+                printHeadingMessage(CATEGORY_WORKOUT);
             }
             break;
         default:
@@ -249,6 +252,9 @@ public class SearchCommand extends Command {
         return matchCount == 0;
     }
 
+    /**
+     * Sets the matchCount to zero.
+     */
     private void clearMatchCount() {
         this.matchCount = 0;
     }
@@ -267,9 +273,18 @@ public class SearchCommand extends Command {
             }
         }
         if (isZeroMatch()) {
-            System.out.println("Sorry, no matching exercise found.");
+            printNotFoundMessage(CATEGORY_EXERCISE);
         }
         clearMatchCount();
+    }
+
+    /**
+     * Prints message when no matching result is found.
+     *
+     * @param category The category that will be searched.
+     */
+    public void printNotFoundMessage(String category) {
+        System.out.println("Sorry, no matching " + category +" found.");
     }
 
     /**
@@ -297,15 +312,16 @@ public class SearchCommand extends Command {
             }
         }
         if (isZeroMatch()) {
-            System.out.println("Sorry, no matching plan found.");
+            printNotFoundMessage(CATEGORY_PLAN);
         }
         clearMatchCount();
     }
 
     /**
      * Parses the number of reps of a given workout.
-     * @param workoutDisplayName    the workout name to be parsed.
-     * @return                      the integer value of reps.
+     *
+     * @param workoutDisplayName    The workout name to be parsed.
+     * @return                      The integer value of reps.
      */
     public int parseWorkoutReps(String workoutDisplayName) {
         var beginningOfReps = workoutDisplayName.indexOf("(") + 1;
@@ -314,6 +330,13 @@ public class SearchCommand extends Command {
         return Integer.parseInt(reps);
     }
 
+    /**
+     * Returns true if the int value of userArguments is the same as quantity.
+     *
+     * @param quantity                  Number of reps of a workout.
+     * @return                          True if the int value of userArguments is the same as quantity.
+     * @throws NumberFormatException    If userArguments cannot be parsed to integer.
+     */
     public boolean isMatchQuantity(int quantity) throws NumberFormatException {
         return quantity == Integer.parseInt(userArguments);
     }
@@ -344,25 +367,27 @@ public class SearchCommand extends Command {
             }
         }
         if (isZeroMatch()) {
-            System.out.println("Sorry, no matching workout found.");
+            printNotFoundMessage(CATEGORY_WORKOUT);
         }
         clearMatchCount();
     }
 
     /**
      * Prints the relevant exercises, workouts and plans that match the userArguments.
+     *
      * @throws InvalidCommandException  If the action specified by the user is invalid.
      */
     public void searchAll() throws InvalidCommandException {
-        setUserAction("/exercise");
+        setUserAction(SEARCH_EXERCISE_ACTION_KEYWORD);
         searchExercise();
         ui.printLine();
-        setUserAction("/workout");
+        setUserAction(SEARCH_WORKOUT_ACTION_KEYWORD);
         searchWorkout();
         ui.printLine();
-        setUserAction("/plan");
+        setUserAction(SEARCH_PLAN_ACTION_KEYWORD);
         searchPlan();
-        setUserAction("/all");
+        setUserAction(SEARCH_ALL_ACTION_KEYWORD);
+        clearMatchCount();
     }
 
     /**
