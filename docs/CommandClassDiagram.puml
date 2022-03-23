@@ -6,8 +6,8 @@ package command {
 
     Command <|-- DeleteCommand
     Command <|-- ExitCommand
-    DeleteCommand <.. CommandResult
-    ExitCommand <.. CommandResult
+    DeleteCommand ..> CommandResult :creates >
+    ExitCommand ..> CommandResult :creates >
 
     abstract class Command {
         +execute():CommandResult {abstract}
@@ -22,13 +22,12 @@ package command {
     +execute():CommandResult
     }
 
-
     class ExitCommand {
     +execute():CommandResult
     }
 
     class CommandResult {
-    +CommandResult()
+    +CommandResult(result:String)
     +toString()
     }
 }
