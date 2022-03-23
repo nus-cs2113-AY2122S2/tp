@@ -1,7 +1,6 @@
-No saved data found!
+HalpMi: No saved data found!
 -------------------------
-Welcome! This is the Hospital Management System.
-Please type in your input:
+HalpMi: Welcome! This is the Hospital Management System.
+        Please type in your input
 You: -------------------------
-Goodbye! Exiting the programme.
-Terminated
+HalpMi: Goodbye! Exiting the programme.

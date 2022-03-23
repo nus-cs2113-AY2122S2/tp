@@ -1,5 +1,7 @@
 package seedu.duke.assets;
 
+import seedu.duke.helper.UI;
+
 import java.util.ArrayList;
 
 public class MedicineList {
@@ -16,8 +18,8 @@ public class MedicineList {
         medicines.add(newMedicine);
     }
 
-    public void getMedicineInfo(Medicine medicine) {
-        System.out.println(Integer.toString(medicine.getMedicineId()) + ": "
+    public String getMedicineInfo(Medicine medicine) {
+        return (Integer.toString(medicine.getMedicineId()) + ": "
                 + medicine.getMedicineName() + ", "
                 + Integer.toString(medicine.getDosage()) + ", " + medicine.getExpiry() + ", "
                 + medicine.getSideEffects() + ", " + Integer.toString(medicine.getQuantity()));
@@ -25,13 +27,14 @@ public class MedicineList {
 
     public void viewMedicine() {
         if (size() == 0) {
-            System.out.println("There are no medicines currently.");
+            UI.printParagraph("There are no medicines currently.");
             return;
         }
+        UI.printParagraph("Here is the list of medicines");
         for (Medicine medicine : medicines) {
-            getMedicineInfo(medicine);
+            UI.printCont(getMedicineInfo(medicine));
         }
-        System.out.println("There are a total of " + Integer.toString(medicines.size())
+        UI.printCont("There are a total of " + Integer.toString(medicines.size())
                 + " in the system.");
     }
 

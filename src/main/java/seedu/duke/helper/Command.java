@@ -32,13 +32,13 @@ public class Command {
             ui.printAddPatientExampleMessage();
         } else {
             patientList.add(addPatientParameters);
-            System.out.println("The patient above has been added.");
+            ui.printParagraph("The patient above has been added.");
         }
     }
 
     public void deletePatient(PatientList patientList, String stringIndex) {
         if (patientList.getSize() == 0) {
-            System.out.println("There is nothing to delete in patientList.");
+            ui.printParagraph("There is nothing to delete in patientList.");
             return;
         }
         int index;
@@ -50,7 +50,7 @@ public class Command {
         }
         if (1 <= index && index <= patientList.getSize()) {
             patientList.removePatient(index - 1);
-            System.out.println("The patient with the above index number has been removed.");
+            ui.printParagraph("The patient with the above index number has been removed.");
         } else {
             ui.printDeletePatientExampleMessage(patientList);
         }
@@ -74,7 +74,7 @@ public class Command {
         }
         if (1 <= indexDoctor && indexDoctor <= doctorList.getSizeDoctor()) {
             doctorList.removeDoctor(indexDoctor - 1);
-            System.out.println("The doctor with the specified index has been removed.");
+            ui.printParagraph("The doctor with the specified index has been removed.");
         } else {
             ui.printDeleteDoctorErrorMessage(doctorList);
         }
@@ -83,18 +83,18 @@ public class Command {
 
     public void addMedicine(MedicineList medicineList, String parameters) {
         if (isNull(parameters)) {
-            System.out.println("Invalid format. Please follow the below example and try again.");
-            System.out.println("add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
+            ui.printParagraph("Invalid format. Please follow the below example and try again.\n"
+                    + "add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
             return;
         }
         String[] parameterArray = Parser.parseAddMedicine(parameters);
         if (parameterArray == null) {
-            System.out.println("There are missing parameters. Please follow the below example and try again.");
-            System.out.println("add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
+            ui.printParagraph("There are missing parameters. Please follow the below example and try again.\n"
+                    + "add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
             return;
         }
         medicineList.add(parameterArray);
-        System.out.println("Medicine has been added");
+        ui.printParagraph("Medicine has been added");
     }
 
     public void viewMedicine(MedicineList medicineList, String parameters) {
@@ -104,12 +104,12 @@ public class Command {
             try {
                 int index = Integer.parseInt(parameters);
                 if (index < 1 || medicineList.size() < index) {
-                    System.out.println("Index is out of range.");
+                    ui.printParagraph("Index is out of range.");
                     return;
                 }
                 medicineList.viewMedicine(index);
             } catch (NumberFormatException e) {
-                System.out.println("Index is out of range.");
+                ui.printParagraph("Index is out of range.");
             }
         }
     }
@@ -125,25 +125,25 @@ public class Command {
             ui.printAddPatientExampleMessage();
         } else {
             doctorList.add(addDoctorParameters);
-            System.out.println("The doctor above has been added.");
+            ui.printParagraph("The doctor above has been added.");
         }
     }
 
     public void deleteMedicine(MedicineList medicineList, String stringIndex) {
         if (isNull(stringIndex)) {
-            System.out.println("Parameter missing.");
+            ui.printParagraph("Parameter missing.");
             return;
         }
         try {
             int index = Integer.parseInt(stringIndex);
             if (index < 1 || index > medicineList.size()) {
-                System.out.println("Number is not within range.");
+                ui.printParagraph("Number is not within range.");
                 return;
             }
             medicineList.delete(index);
-            System.out.println("The medicine record at index " + index + " has been deleted.");
+            ui.printParagraph("The medicine record at index " + index + " has been deleted.");
         } catch (NumberFormatException numberFormatException) {
-            System.out.println("Parameter given is not a number.");
+            ui.printParagraph("Parameter given is not a number.");
         }
     }
 }
