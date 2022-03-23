@@ -1,6 +1,7 @@
 package seedu.duke.manager;
 
 
+import seedu.duke.entities.Dish;
 import seedu.duke.entities.Staff;
 import seedu.duke.loggers.MainLogger;
 
@@ -10,24 +11,40 @@ import java.util.List;
 /**
  * StaffManager is a class which stores/handles/manages many Staffs.
  */
-public class StaffManager {
-    private final List<Staff> staffs;
+public class StaffManager extends Manager {
+    private ArrayList<Staff> staffs;
+    private static final String STORAGE_FILE = "staff.dat";
 
     /**
-     * Create StaffManager with an empty arraylist of Staffs.
+     * Create StaffManager and load Staffs.
      */
     public StaffManager() {
-        staffs = new ArrayList<>();
+        super(STORAGE_FILE);
+        try {
+            this.loadData();
+        } catch (Exception e) {
+            MainLogger.logWarning(this, e.toString());
+            MainLogger.logWarning(this, "Start with no staffs");
+            staffs.clear();
+        }
     }
 
-    public List<Staff> getStaffs() {
+    public ArrayList<Staff> getStaff() {
         return staffs;
+    }
+
+    public void loadStaff(Staff staff) {
+        staffs.add(staff);
     }
 
     /**
      * Print all the Staffs.
      */
-    public void printStaffs() {
+    public void printStaff() {
+        if (staffs.size() == 0) {
+            System.out.println("There is no staff");
+            return;
+        }
         for (int i = 0; i < staffs.size(); i++) {
             System.out.println((i + 1) + ". " + staffs.get(i));
         }
@@ -66,7 +83,7 @@ public class StaffManager {
             if (staffId == staff.getStaffId()) {
                 if (printMsg) {
                     MainLogger.logInfo(this, "Successful search for staff.");
-                    System.out.println(staff + " found!");
+                    System.out.println("Staff found: \n" + staff);
                 }
                 return staff;
             }
@@ -102,5 +119,19 @@ public class StaffManager {
      */
     public int getNumOfStaffs() {
         return staffs.size();
+    }
+
+    @Override
+    protected void loadData() throws Exception {
+        this.staffs = new ArrayList<>();
+        ArrayList<?> list = (ArrayList<?>) this.load();
+        for (Object object : list) {
+            this.loadStaff((Staff) object);
+        }
+    }
+
+    @Override
+    public void saveData() throws Exception {
+        this.save(this.staffs);
     }
 }
