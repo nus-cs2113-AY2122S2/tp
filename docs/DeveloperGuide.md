@@ -140,7 +140,13 @@ In _WerkIt!_, a workout is defined as an exercise paired with a number that repr
 of repetitions. For example, 20 repetitions of the Russian twist is considered a workout. 
 
 ### Delete Existing Workout
-![SearchUML](uml/classDiagrams/images/DeleteWorkout.PNG)
+Class diagram for Delete Workout:
+![Delete Workout UML](uml/classDiagrams/images/DeleteWorkout.PNG)
+<br>
+<br>
+Sequence diagram for Delete Workout:
+![Delete Workout Sequence Diagram](uml/sequenceDiagrams/images/deleteWorkout.png)
+<br>
 <br>
 
 When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
@@ -158,6 +164,8 @@ in addition, checks whether the workout number supplied is a valid integer and i
 is not met, the NumberFormatException and WorkoutOutOfRangeException is thrown accordingly. Once the existing workout is successfully deleted,
 the UI will print a success message and call the `FileManager#rewriteAllWorkoutsToFile(getWorkoutList())` method to save the changes.
 
+#### Delete existing workout command
+Format: `workout /delete <workout number in workout list>`
 
 ### Search
 ![SearchUML](uml/classDiagrams/images/SearchClassUML.png)
