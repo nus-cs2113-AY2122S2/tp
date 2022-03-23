@@ -7,7 +7,7 @@
 
 ## Design & Implementation
 ### Architecture
-Given below is a quick overview of the main components of Mod Happy and how they interact with one another.
+Given below is a quick overview of the main components of Mod Happy and how they interact with one another.  
 ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Components.puml)
 
 ### Parser Component
@@ -36,6 +36,24 @@ list is simply represented as a `TaskList` instead of a full-fledged `Module`.
 > 
 > While this model is arguably closer to real life, the program logic would have to operate on different object types depending on whether a given `Task` belongs to a user-created Module or the default General Tasks list. This was deemed to increase coupling and introduce too much unnecessary clutter to the code, hence it was not used.
 
+### Command Component
+
+The command Component is charge of executing the user-intended operation after receiving information from Parser on the user's input.  
+
+All commands inherit the abstract `Command` class, with an `execute` method that returns the result of command execution as a string. 
+
+Commands can be classified into two broad categories:
+- Commands that accepts user arguments (e.g. `DeleteCommand`)
+- Commands that do not accept arguments (e.g. `ExitCommand`)
+
+Each command has their respective `Parser` classes that call the matching command constructors. (`ListCommand` has `ListParser`)
+
+Here is a simplified class diagram illustrating two example commands:  
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/CommandClassDiagram.puml)
+
+#### How it works
+The type of action that a command executes is dependent on which constructor is called and values passed to it by the respective parser.
+
 ## Implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
@@ -52,9 +70,9 @@ Here is an example on adding a tag to a general task:
 
 Below is the sequence diagram of how the tag feature works:
 
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/Tag.puml)
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/GetModule.puml)
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/CheckAndRunTagOperation.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/Tag.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/GetModule.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/CheckAndRunTagOperation.puml)
 
 ## Product scope
 ### Target user profile

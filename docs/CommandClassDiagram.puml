@@ -1,30 +1,42 @@
 @startuml
 'https://plantuml.com/class-diagram
+package command {
+    abstract class Command
+    class DeleteCommand
 
-abstract class Command
-class AddCommand
+    Command <|-- DeleteCommand
+    Command <|-- ExitCommand
+    DeleteCommand <.. CommandResult
+    ExitCommand <.. CommandResult
 
-Command <|-- AddCommand
-Command <|-- ExitCommand
-AddCommand <.. CommandResult
-ExitCommand <.. CommandResult
+    abstract class Command {
+        +execute():CommandResult {abstract}
+    }
 
-abstract class Command {
-+execute():CommandResult
+    class DeleteCommand {
+    -moduleCode:String
+    -taskModule:String
+    -taskIndex:int
+    +DeleteCommand(moduleCode:String)
+    +DeleteCommand(taskIndex:int, taskModule:String)
+    +execute():CommandResult
+    }
+
+
+    class ExitCommand {
+    +execute():CommandResult
+    }
+
+    class CommandResult {
+    +CommandResult()
+    +toString()
+    }
 }
 
-class AddCommand {
-+addCommand()
-+execute():CommandResult
-}
-
-class ExitCommand {
-+execute():CommandResult
-}
-
-class CommandResult {
-+CommandResult()
-+toString()
-}
+note top of command
+Note:
+This class diagram only describes
+two commands for simplicity.
+end note
 
 @enduml
