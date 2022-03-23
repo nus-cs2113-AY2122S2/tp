@@ -1,4 +1,4 @@
-'https://www.lucidchart.com/pages/ER-diagram-symbols-and-meaning
+git 'https://www.lucidchart.com/pages/ER-diagram-symbols-and-meaning
 @startuml
 
 entity "Inventory" as inv {
