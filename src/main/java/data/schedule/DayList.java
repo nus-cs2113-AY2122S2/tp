@@ -135,6 +135,7 @@ public class DayList {
 
     public String covertDayNumberToDay(int dayNumber) {
         String day = "";
+        assert (dayNumber > 0 && dayNumber <= NUMBER_OF_SCHEDULE_DAYS);
         try {
             switch (dayNumber) {
             case 1:
