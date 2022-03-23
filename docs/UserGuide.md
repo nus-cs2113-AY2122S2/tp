@@ -84,6 +84,7 @@ Alright, the following workout has been created:
 ----------------------------------------------------------------------
 ```
 A new workout of carrying out Russian twists 50 times will be created and added to the application's list of workouts.
+
 ---
 ### Show all Workouts in one go: `workout /listall`
 Lists down all workouts that have been created and stored in the workout list at the time the command is executed.
