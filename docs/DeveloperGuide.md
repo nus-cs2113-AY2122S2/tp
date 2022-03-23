@@ -95,7 +95,7 @@ In _WerkIt!_, a workout is defined as an exercise paired with a number that repr
 of repetitions. For example, 20 repetitions of the Russian twist is considered a workout. 
 
 ### Search
-![SearchUML](https://github.com/a1021492980/tp/blob/branch-DG1/docs/uml/diagram/SearchClassUML.png?raw=true)
+![SearchUML](uml/classDiagrams/images/SearchClassUML.png)
 <br>
 
 When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
