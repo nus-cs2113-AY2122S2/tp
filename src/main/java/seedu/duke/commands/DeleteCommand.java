@@ -4,9 +4,9 @@ import java.util.Objects;
 
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.NoSuchModuleException;
-import seedu.duke.tasks.Module;
-import seedu.duke.tasks.ModuleList;
-import seedu.duke.tasks.TaskList;
+import seedu.duke.data.Module;
+import seedu.duke.data.ModuleList;
+import seedu.duke.data.TaskList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 import seedu.duke.util.NumberConstants;

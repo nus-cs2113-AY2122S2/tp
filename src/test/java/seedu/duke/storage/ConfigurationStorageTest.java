@@ -4,10 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.duke.util.Configuration.ConfigurationGroup.COMPLETED_TASKS_SHOWN;
 
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
+import static seedu.duke.util.Configuration.ConfigurationGroup.COMPLETED_TASKS_SHOWN;
 
 
 

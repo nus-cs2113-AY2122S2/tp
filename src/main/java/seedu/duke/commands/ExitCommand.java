@@ -1,7 +1,6 @@
 package seedu.duke.commands;
 
-import seedu.duke.tasks.ModuleList;
-import seedu.duke.ui.TextUi;
+import seedu.duke.data.ModuleList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 

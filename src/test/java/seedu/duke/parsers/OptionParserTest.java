@@ -9,8 +9,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import seedu.duke.exceptions.UnknownConfigurationGroupWord;
 import seedu.duke.util.Configuration;
 
-
-
 public class OptionParserTest {
     private OptionParser optionParser;
     private Configuration configuration;

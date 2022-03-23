@@ -2,14 +2,14 @@ package seedu.duke.commands;
 
 import java.util.Objects;
 
-import seedu.duke.tasks.Module;
-import seedu.duke.tasks.ModuleList;
+import seedu.duke.data.Module;
+import seedu.duke.data.ModuleList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
 public class ListCommand extends Command {
-    private static final String LIST_MESSAGE = StringConstants.LIST_MESSAGE_TOP + LS + "%s";
-    private String argument;
+    private static final String LIST_MESSAGE = StringConstants.LIST_MESSAGE;
+    private final String argument;
 
     public String getArgument() {
         return argument;
@@ -21,6 +21,7 @@ public class ListCommand extends Command {
 
     /**
      * Lists all tasks when no argument is provided. Otherwise, list only tasks with matching tag.
+     * Depending on config settings, completed tasks may be hidden from the output.
      */
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) {

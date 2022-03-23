@@ -1,4 +1,4 @@
-package seedu.duke.tasks;
+package seedu.duke.data;
 
 /**
  * Enum for describing which attributes of the Task object are populated.

@@ -1,13 +1,11 @@
 package seedu.duke.parsers;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.duke.commands.Command;
-import seedu.duke.exceptions.ModHappyException;
 
 public class ParserTest extends Parser {
     public ParserTest() {
@@ -28,13 +26,11 @@ public class ParserTest extends Parser {
         } catch (Exception e) {
             fail();
         }
-
     }
 
 
     @Override
-    public Command parseCommand(String userInput) throws ModHappyException {
+    public Command parseCommand(String userInput) {
         return null;
-
     }
 }

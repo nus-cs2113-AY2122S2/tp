@@ -16,8 +16,8 @@ import seedu.duke.commands.MarkCommand;
 import seedu.duke.commands.TagCommand;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.exceptions.UnknownCommandException;
-import seedu.duke.tasks.Module;
-import seedu.duke.tasks.Task;
+import seedu.duke.data.Module;
+import seedu.duke.data.Task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

@@ -14,7 +14,7 @@ import com.google.gson.GsonBuilder;
 
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ReadException;
-import seedu.duke.tasks.Task;
+import seedu.duke.data.Task;
 
 /**
  * A data access object managing the loading and saving of TaskList instances.

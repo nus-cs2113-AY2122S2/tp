@@ -1,4 +1,4 @@
-package seedu.duke.tasks;
+package seedu.duke.data;
 
 import java.util.ArrayList;
 
@@ -57,7 +57,7 @@ public class TaskList {
         return task;
     }
 
-    public Task deleteTag(String tagDescription, int index) throws NoSuchTaskException, NoSuchTagException {
+    public Task removeTag(String tagDescription, int index) throws NoSuchTaskException, NoSuchTagException {
         if (index >= taskList.size() || index < 0) {
             throw new NoSuchTaskException();
         }
@@ -92,6 +92,7 @@ public class TaskList {
     /**
      * Formats all tasks in the task list as a pretty printed string.
      * @param indent string representing the indentation level for each task item
+     * @param showCompletedTasks whether completed tasks should be listed
      */
     public String getAllTasks(String indent, boolean showCompletedTasks) {
         StringBuilder res = new StringBuilder();
@@ -112,6 +113,12 @@ public class TaskList {
         return res.toString();
     }
 
+    /**
+     * Formats all tasks in the task list with a matching tag as a pretty printed string.
+     * @param indent string representing the indentation level for each task item
+     * @param tag the tag to be matched
+     * @param showCompletedTasks whether completed tasks should be listed
+     */
     public String getTasksWithTag(String indent, String tag, boolean showCompletedTasks) {
         StringBuilder res = new StringBuilder();
         int numHiddenTasks = 0;
@@ -131,5 +138,9 @@ public class TaskList {
             }
         }
         return res.toString();
+    }
+
+    public void reset() {
+        taskList.clear();
     }
 }

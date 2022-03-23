@@ -4,9 +4,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.UnknownConfigurationGroupWord;
-
 public class Configuration {
 
     private static final String INDENT = StringConstants.INDENT;

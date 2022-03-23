@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import seedu.duke.tasks.Module;
-import seedu.duke.tasks.Task;
-import seedu.duke.tasks.TaskList;
+import seedu.duke.data.Module;
+import seedu.duke.data.Task;
+import seedu.duke.data.TaskList;
 import seedu.duke.util.StringConstants;
 
 

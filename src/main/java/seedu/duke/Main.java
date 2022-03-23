@@ -10,7 +10,7 @@ import seedu.duke.parsers.ModHappyParser;
 import seedu.duke.storage.ConfigurationStorage;
 import seedu.duke.storage.ModuleListStorage;
 import seedu.duke.storage.TaskListStorage;
-import seedu.duke.tasks.ModuleList;
+import seedu.duke.data.ModuleList;
 import seedu.duke.ui.TextUi;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;

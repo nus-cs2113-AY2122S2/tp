@@ -48,7 +48,8 @@ public class StringConstants {
      */
     public static final String DELETE_MESSAGE = "%s has been deleted.";
     public static final String DELETE_ABORT = "Deletion has been cancelled.";
-    public static final String DELETE_CONFIRMATION = "%s contains task(s). Are you sure you want to delete this?";
+    public static final String DELETE_CONFIRMATION = "%s contains task(s).\n"
+            + "Are you sure you want to delete this? (yes/no)";
 
     /**
      * For GradeCommand.
@@ -74,7 +75,7 @@ public class StringConstants {
     /**
      * For ListCommand.
      */
-    public static final String LIST_MESSAGE_TOP = "Ok! Here are the task(s) in your list:";
+    public static final String LIST_MESSAGE = "Ok! Here are the task(s) in your list:\n%s";
     public static final String EMPTY_LIST = "(empty)";
     public static final String HIDDEN_TASKS_COUNT = "--- %d completed task(s) hidden ---";
     public static final String LIST_ARGUMENT = "listArgument";

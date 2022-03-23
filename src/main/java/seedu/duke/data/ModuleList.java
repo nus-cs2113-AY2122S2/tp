@@ -1,4 +1,4 @@
-package seedu.duke.tasks;
+package seedu.duke.data;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,7 +9,7 @@ import seedu.duke.util.StringConstants;
 
 public class ModuleList {
     private ArrayList<Module> list;
-    private Module generalTasks;
+    private final Module generalTasks;
 
     private static final String DELETE_CONFIRMATION = StringConstants.DELETE_CONFIRMATION;
 
@@ -54,14 +54,6 @@ public class ModuleList {
     }
 
     /**
-     * Returns the module stored at the given index in the module list.
-     * @param index the index of the module
-     */
-    public Module getModule(int index) {
-        return list.get(index);
-    }
-
-    /**
      * Returns the module in the module list with the given module code.
      * @param moduleCode The module code to search for
      * @return the associated module if it exists, or null if it does not.
@@ -89,6 +81,11 @@ public class ModuleList {
 
     public void initialiseGeneralTasksFromTaskList(ArrayList<Task> generalTaskList) {
         generalTasks.setTaskArrayList(generalTaskList);
+    }
+
+    public void reset() {
+        list.clear();
+        generalTasks.getTaskList().reset();
     }
 
     /**
