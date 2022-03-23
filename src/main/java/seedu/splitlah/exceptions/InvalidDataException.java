@@ -11,7 +11,7 @@ public class InvalidDataException extends Exception {
     private final Throwable cause;
 
     /**
-     * Initializes a InvalidDataException object.
+     * Initializes an InvalidDataException object.
      * Use this to store another exception (such as a Java exception) inside this exception to access it later.
      *
      * @param message A String object containing a description of the error.
