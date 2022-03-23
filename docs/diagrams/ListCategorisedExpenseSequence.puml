@@ -1,14 +1,14 @@
 @startuml
 !include style.puml
 
-box " " #WHITE
+box " "
     participant "c:ListCatCommand" as Commands LOGIC_COLOR
     participant "<color:coral><<class>>\nParser" as Parser LOGIC_COLOR_T4
     participant ":Family" as Family MODEL_COLOR
     participant ":PersonList" as PList MODEL_COLOR
     participant ":Person" as Person MODEL_COLOR
     participant ":ExpenditureList" as MList MODEL_COLOR_T3
-    participant ":Expense" as Money MODEL_COLOR_T3
+    participant ":Expenditure" as Money MODEL_COLOR_T3
     participant "<color:coral><<class>>\nUI" as UI UI_COLOR_T3
 end box
 
@@ -30,7 +30,7 @@ loop for each Generation
     PList --> Family
     deactivate PList
 
-    loop for each Person
+    loop #honeydew for each Person
         Family -> Person : getPerson()
         activate Person
         Person --> Family : p
