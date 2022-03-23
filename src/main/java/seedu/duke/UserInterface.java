@@ -17,21 +17,29 @@ public class UserInterface {
         Scanner input = new Scanner(System.in);
         String userInput = input.nextLine();
 
-        try {
-            while (!userInput.equals("bye")) {
-                // current implementation is just take 1st value for command
+        // setting Warehouse capacity
+        boolean isSet = false;
+        do {
+            Regex capacity = new Regex(userInput, "(?<cap>\\d*)");
+            isSet = warehouse.setCapacity(capacity.getGroupValues().get("cap"));
+            userInput = input.nextLine();
+        } while (!isSet);
+
+        while (!userInput.equals("bye")) {
+            // current implementation is just take 1st value for command
+            try {
                 String command = userInput.split(" ")[0];
                 switch (command) {
                 case "view":
                     //using flags here to distinguish between different views????
-                    String regex = "(?<flag>*[og])/ id/(?<id>\\d*)";
+                    String regex = "(?<flag>[og])/ id/(?<id>\\d*)";
                     Regex regexMatch = new Regex(userInput, regex);
                     HashMap<String, String> matches = regexMatch.getGroupValues();
                     if (matches.get("flag").equals("o")) {
-                        // view order with flag "-o"
+                        // view order with flag "o/"
                         warehouse.viewOrder(matches.get("id"));
                     } else if (matches.get("flag").equals("g")) {
-                        // view good with flag "-g"
+                        // view good with flag "g/"
                         warehouse.viewGood(matches.get("id"));
                     } else {
                         // wrong command exception
@@ -39,15 +47,15 @@ public class UserInterface {
                     }
                     break;
                 case "list":
-                    regex = "(?<flag>*[og])/";
+                    regex = "(?<flag>[og])/";
                     regexMatch = new Regex(userInput, regex);
                     matches = regexMatch.getGroupValues();
 
-                    if (matches.get("flag").equals("9")) {
-                        // list orders with flag "o"
+                    if (matches.get("flag").equals("o")) {
+                        // list orders with flag "o/"
                         warehouse.listOrders();
                     } else if (matches.get("flag").equals("g")) {
-                        // list goods with flag "g"
+                        // list goods with flag "g/"
                         warehouse.listGoods();
                     } else {
                         // wrong command exception
@@ -55,18 +63,14 @@ public class UserInterface {
                     }
                     break;
                 case "add":
-                    String flag = userInput.split(" ")[1];
+                    regex = "(?<flag>[og])/ oid/(?<oid>\\d*) gid/(?<gid>\\d*) r/(?<r>.*) a/(?<address>.*)"
+                            + "n/(?<name>.*) q/(?<qty>\\d*) d/(?<desc>.*)";
+                    regexMatch = new Regex(userInput, regex);
+                    matches = regexMatch.getGroupValues();
 
-                    if (flag.equals("o/")) {
-                        regex = "id/(?<id>\\d*) r/(?<r>.*) a/(?<address>.*)";
-                        regexMatch = new Regex(userInput, regex);
-                        matches = regexMatch.getGroupValues();
+                    if (matches.get("flag").equals("o")) {
                         warehouse.addOrder(matches.get("id"), matches.get("r"), matches.get("address"));
-                    } else if (flag.equals("g/")) {
-                        regex = "oid/(?<oid>\\d*) gid/(?<gid>\\d*) n/(?<name>.*) q/(?<qty>\\d*)"
-                                + " d/(?<desc>\\.*)";
-                        regexMatch = new Regex(userInput, regex);
-                        matches = regexMatch.getGroupValues();
+                    } else if (matches.get("flag").equals("g")) {
                         warehouse.addGoods(matches.get("oid"), matches.get("gid"), matches.get("name"),
                                 matches.get("qty"), matches.get("desc"));
                     } else {
@@ -74,17 +78,13 @@ public class UserInterface {
                     }
                     break;
                 case "remove":
-                    flag = userInput.split(" ")[1];
+                    regex = "(?<flag>[og])/ id/(?<id>\\d*) q/(?<qty>\\d*)";
+                    regexMatch = new Regex(userInput, regex);
+                    matches = regexMatch.getGroupValues();
 
-                    if (flag.equals("o/")) {
-                        regex = "id/(?<id>\\d*)";
-                        regexMatch = new Regex(userInput, regex);
-                        matches = regexMatch.getGroupValues();
+                    if (matches.get("flag").equals("o")) {
                         warehouse.removeOrder(matches.get("id"));
-                    } else if (flag.equals("g/")) {
-                        regex = "id/(?<id>\\d*) q/(?<qty>\\d*)";
-                        regexMatch = new Regex(userInput, regex);
-                        matches = regexMatch.getGroupValues();
+                    } else if (matches.get("flag").equals("g")) {
                         warehouse.removeGoods(matches.get("id"), matches.get("qty"));
                     } else {
                         throw new WrongCommandException("remove", true);
@@ -101,24 +101,22 @@ public class UserInterface {
                     //error exception here
                     throw new WrongCommandException("", false);
                 }
-                System.out.println("Another command?");
-                userInput = input.nextLine();
+            } catch (WrongCommandException wrongCommandException) {
+                if (wrongCommandException.isCommand()) {
+                    String wrongCommand = wrongCommandException.getCommand();
+                    System.out.printf("%s command was used wrongly. Type help to see examples\n",
+                            wrongCommand);
+                    Commands.help();
+                } else {
+                    System.out.println("No such command. Type help to see examples");
+                    Commands.help();
+                }
+            } catch (NullException nullException) {
+                //catch null exception here
+                System.out.println("Please enter the command again.");
             }
-        } catch (WrongCommandException wrongCommandException) {
-            if (wrongCommandException.isCommand()) {
-                String wrongCommand = wrongCommandException.getCommand();
-                System.out.printf("%s command was used wrongly. Type help to see examples\n",
-                        wrongCommand);
-            } else {
-                System.out.println("No such command. Type help to see examples");
-            }
-
-            run();
-        } catch (NullException nullException) {
-            //catch null exception here
-            System.out.println("Please enter the command again.");
-
-            run();
+            System.out.println("Another command?");
+            userInput = input.nextLine();
         }
     }
 }
