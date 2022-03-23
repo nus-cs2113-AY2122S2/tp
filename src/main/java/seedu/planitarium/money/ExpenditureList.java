@@ -10,6 +10,7 @@ public class ExpenditureList extends MoneyList {
     private ArrayList<Expenditure> expenditureArrayList;
     private int numberOfExpenditures;
 
+    private static final String LOG_CLASS_NAME = ExpenditureList.class.getSimpleName();
     private static final String LOG_ADD_EXP = "addExpenditure()";
     private static final String LOG_GET_EXP_VAL = "getExpenditureValue()";
     private static final String LOG_GET_NUM_EXP = "getNumberOfExpenditures()";

@@ -10,6 +10,7 @@ public class IncomeList extends MoneyList {
     private ArrayList<Income> incomeArrayList;
     private int numberOfIncomes;
 
+    private static final String LOG_CLASS_NAME = IncomeList.class.getSimpleName();
     private static final String LOG_ADD_INC = "addIncome()";
     private static final String LOG_GET_INC_VAL = "getIncomeValue()";
     private static final String LOG_GET_NUM_INC = "getNumberOfIncomes()";
