@@ -1,6 +1,8 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+hide footbox
+
 participant User as User
 participant Main as Main
 participant "<font color=red>**<<class>>** \nParser" as Parser
