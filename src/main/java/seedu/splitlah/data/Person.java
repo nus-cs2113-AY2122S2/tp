@@ -13,21 +13,46 @@ import java.util.ArrayList;
  */
 public class Person implements Serializable {
     
-    private final String name;
+    private Name name;
     private ArrayList<ActivityCost> activityCostList;
 
     /**
-     * Constructs a Person object.
+     * Constructs a Person object from a Name object.
      *
-     * @param name Name of the Person.
+     * @param name Name object representing the name of the Person object to be created.
      */
-    public Person(String name) {
+    public Person(Name name) {
         this.activityCostList = new ArrayList<>();
         this.name = name;
     }
 
     /**
-     * Constructs an ActivityCost object and adds it to the list of ActivityCosts.
+     * Constructs a Person object from a String object.
+     *
+     * @param name String object representing the name of the Person object to be created.
+     */
+    public Person(String name) {
+        this.activityCostList = new ArrayList<>();
+        this.name = new Name(name);
+    }
+
+    /**
+     * Constructs a Person object from a String object. If the String object provided is not a valid name,
+     * returns null instead.
+     *
+     * @param name A String object representing a name.
+     * @return a Person object if the name provided is valid.
+     *         null if the name provided is invalid.
+     */
+    public static Person createPersonFromString(String name) {
+        if (Name.validateName(name)) {
+            return new Person(name);
+        }
+        return null;
+    }
+
+    /**
+     * Constructs an ActivityCost object and adds it to the list of ActivityCost objects.
      *
      * @param activityId An integer that uniquely identifies an activity.
      * @param costPaid   A double that represents the cost paid by a Person.
@@ -109,6 +134,10 @@ public class Person implements Serializable {
     }
 
     public String getName() {
+        return name.getNameAsString();
+    }
+
+    public Name getNameAsNameObject() {
         return name;
     }
 
@@ -118,11 +147,13 @@ public class Person implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        Person person = (Person) object;
-        if (this.name.equalsIgnoreCase(person.getName())) {
-            return true;
-        } else {
+        if (object == null) {
             return false;
         }
+        if (!(object.getClass() == this.getClass())) {
+            return false;
+        }
+        Person person = (Person) object;
+        return this.name.getNameAsString().equalsIgnoreCase(person.getName());
     }
 }
