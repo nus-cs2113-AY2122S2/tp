@@ -49,7 +49,7 @@ public class Timetable {
     }
 
     private static long calculateColBackWhiteSpace(long maxDescriptionLength,
-                                                  String description) {
+                                                   String description) {
         return maxDescriptionLength - (description.length() + WHITE_SPACE_FRONT_OFFSET_LENGTH);
     }
 
@@ -79,6 +79,10 @@ public class Timetable {
         }
     }
 
+    private static boolean isDuplicate(String currentString, String prevString, boolean isOriginal) {
+        return currentString.equals(prevString) || !isOriginal;
+    }
+
     private static void printTimetable(String day, String date, ArrayList<Task> filteredTasks,
                                        Ui ui, long taskLength, long doOnDateLength, long partitionLength) {
         int j = 0;
@@ -87,7 +91,7 @@ public class Timetable {
         String colThree = "Mark Status";
         String colFour = "Task Description";
         String colFive = "Do on Date";
-
+        boolean isOriginal = true;
         for (int i = 0; i < filteredTasks.size() + TIMETABLE_SIZE_OFFSET; i++) {
             if ((i == 0) || (i == filteredTasks.size() + TIMETABLE_SIZE_OFFSET - 1)) {
                 ui.showToUser(ui.getRepeatedCharacters("-", partitionLength));
@@ -96,12 +100,15 @@ public class Timetable {
 
             colOne = (i == 1) ? "Day" : ((i == 2) ? day : date);
             if (i >= 2) {
-                colTwo = (j < filteredTasks.size()) ? ((colTwo.equals(filteredTasks.get(j).getTimePeriod()))
+                colTwo = (j < filteredTasks.size())
+                        ? (isDuplicate(filteredTasks.get(j).getTimePeriod(), colTwo, isOriginal)
                         ? BLANK_TIME_PERIOD : filteredTasks.get(j).getTimePeriod()) : BLANK_TIME_PERIOD;
+                isOriginal = j < filteredTasks.size()
+                        && (!isDuplicate(filteredTasks.get(j).getTimePeriod(), colTwo, isOriginal));
                 colThree = (j < filteredTasks.size()) ? filteredTasks.get(j).getStatusIcon() : BLANK_MARK_STATUS;
                 colFour = (j < filteredTasks.size())
                         ? (filteredTasks.get(j).getIndex() + ". " + filteredTasks.get(j).getDescription())
-                        : ui.getRepeatedCharacters(" ", taskLength  - STRING_COMPARE_OFFSET);
+                        : ui.getRepeatedCharacters(" ", taskLength - STRING_COMPARE_OFFSET);
                 colFive = (j < filteredTasks.size()) ? filteredTasks.get(j).getDoOnDateString(true)
                         : ui.getRepeatedCharacters(" ", doOnDateLength - STRING_COMPARE_OFFSET);
                 j++;
