@@ -15,14 +15,13 @@ public class Patient extends Person {
 
     @Override
     public String toString() {
-        return "Patient{"
-                + "NRIC='" + getNric() + '\''
+        return  "NRIC='" + getNric() + '\''
                 + ", Full Name='" + getFullName() + '\''
                 + ", Age=" + getAge()
                 + ", Gender=" + getGender()
                 + ", Address='" + getAddress()
                 + '\'' + ", DOB='" + getDob() + '\''
-                + ", DateOfAdmission='" + getDateAdmission() + '\'' + '}';
+                + ", DateOfAdmission='" + getDateAdmission() + '\'';
     }
 
     public String saveString() {

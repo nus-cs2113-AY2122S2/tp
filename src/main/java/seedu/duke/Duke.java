@@ -9,6 +9,5 @@ public class Duke {
         assert true : "dummy assertion set to pass";
         Manager manager = new Manager();
         manager.runLoop();
-        System.out.println("Terminated");
     }
 }
