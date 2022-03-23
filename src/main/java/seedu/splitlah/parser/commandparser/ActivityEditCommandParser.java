@@ -27,7 +27,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
             activityId = Parser.parseActivityId(commandArgs);
             sessionId = Parser.parseSessionId(commandArgs);
         } catch (InvalidFormatException exception) {
-            String invalidCommandMessage = exception.getMessage();
+            throw exception;
         }
 
         try {
