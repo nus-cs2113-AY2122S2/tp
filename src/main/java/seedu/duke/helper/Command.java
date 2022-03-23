@@ -115,4 +115,15 @@ public class Command {
             ui.printAddAppointmentExampleMessage();
         }
     }
+
+    public void findAppointment(AppointmentList appointmentList, String parameters) {
+        try {
+            String[] findAppointmentParameters = Parser.parseFindAppointment(parameters);
+            String criteria = findAppointmentParameters[0];
+            String input = findAppointmentParameters[1];
+            appointmentList.find(criteria, input);
+        } catch (HalpmiException e) {
+            UI.printParagraph(e.toString());
+        }
+    }
 }
