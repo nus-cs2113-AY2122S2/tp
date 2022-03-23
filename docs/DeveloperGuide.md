@@ -155,13 +155,13 @@ user and Bob is her father, then Alice would belong to the current generation an
 to the parent generation. In this case `Family` would be initialised with two generations being
 tracked - parents and myGen.
 
-<image src="/images/ListCategorisedExpense0.png"/>
+<image src="images/ListCategorisedExpense0.png"/>
 
 Step 2. The user executes `listc /c 1` command to list all expenses in category `1`. The `listcat`
 command will be parsed and calls `Family#listExpenseOfCategory(1)` which would instantiate a
 temporary array list for storing the results of the upcoming search.
 
-<image src="/images/ListCategorisedExpense1.png"/>
+<image src="images/ListCategorisedExpense1.png"/>
 
 Step 3. After the temporary array list has been created, the generations being tracked will be
 iterated for `Person` objects. The `expenditureList` for a person would be retrieved during that
@@ -171,7 +171,7 @@ extends `MoneyList(temp)`. This method then iterates through the list and calls
 category matches the given index. The returned expenditures are then appended to the temporary
 array list.
 
-<image src="/images/ListCategorisedExpense2.png"/>
+<image src="images/ListCategorisedExpense2.png"/>
 
 Step 4. The iteration, collecting and appending to the temporary array list in step 3 is repeated 
 until every person has been iterated. Finally, `Categories#getLabel(1)` is called so that an
@@ -185,7 +185,7 @@ a series of print to display the expenditures in this category.
 
 The following sequence diagram shows how the `listcat` operation works after the `ListCatCommand` has
 been created by [`CommandFactory`](#PlaceholderToCommandFactory):
-<image src="/images/ListCategorisedExpenseSequence.png"/>
+<image src="images/ListCategorisedExpenseSequence.png"/>
 
 #### Design considerations:
 
