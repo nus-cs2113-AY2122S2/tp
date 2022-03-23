@@ -11,12 +11,15 @@ activate Main
 Main -> Parser: parseCommand(show today, tasklist, ui)
 Parser -> Parser: prepareShow(today)
 Parser -> Parser: parseShowCommandOptions(today)
-Parser -> ShowCommand: newShowCommand(null, today)
+create ShowCommand
+Parser -> ShowCommand: ShowCommand(null, today)
 Main -> ShowCommand: execute(tasklist, ui, storage)
 ShowCommand -> Timetable: showTodaySchedule(taskList, ui)
 Timetable -> Timetable: prepareTimetable(date, filteredTask, ui)
+activate Timetable
 Timetable -> Timetable: printTimetable(date, filteredTask, ui)
 Timetable --> Main
+deactivate Timetable
 Main --> User
 
 @enduml
