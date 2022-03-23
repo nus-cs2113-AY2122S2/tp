@@ -1,6 +1,6 @@
 package seedu.planitarium.money;
 
-public class Income extends Money{
+public class Income extends Money {
 
     /**
      * Initialise a new income object.
