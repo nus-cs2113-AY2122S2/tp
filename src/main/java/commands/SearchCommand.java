@@ -81,6 +81,18 @@ public class SearchCommand extends Command {
         LogHandler.linkToFileLogger(logger);
     }
 
+    /**
+     * Constructs a new instance of the SearchCommand. Constructed when the user enters a
+     *  search command for all types.
+     * @param userInput     The user's full original input.
+     * @param ui            An instance of the ui class.
+     * @param exerciseList  An instance of the ExerciseList class.
+     * @param workoutList   An instance of the WorkoutList class.
+     * @param planList      An instance of the PlanList class.
+     * @param userAction    The action that was parsed from the user's input.
+     * @param userArguments The arguments that are accompanied by the user action.
+     * @throws InvalidCommandException  If the command entered by the user is incorrect.
+     */
     public SearchCommand(String userInput, UI ui, ExerciseList exerciseList, WorkoutList workoutList, PlanList planList,
                          String userAction, String userArguments) throws InvalidCommandException {
         super(userInput);
@@ -101,7 +113,7 @@ public class SearchCommand extends Command {
      *
      * @param userInput     The user's full original input.
      * @param ui            An instance of the ui class.
-     * @param workoutList   An instance of the PlanList class.
+     * @param workoutList   An instance of the WorkoutList class.
      * @param userAction    The action that was parsed from the user's input.
      * @param userArguments The arguments that are accompanied by the user action.
      * @throws InvalidCommandException  If the command entered by the user is incorrect.
@@ -284,7 +296,7 @@ public class SearchCommand extends Command {
      * @param category The category that will be searched.
      */
     public void printNotFoundMessage(String category) {
-        System.out.println("Sorry, no matching " + category +" found.");
+        System.out.println("Sorry, no matching " + category + " found.");
     }
 
     /**
