@@ -257,6 +257,9 @@ objects. Now, to manipulate the `Workout` object (e.g. `workout /update`),
 2. The key of the `Workout` object is obtained from the ArrayList of keys (`workoutsDisplayList`).
 3. The `Workout` object is obtained from the HashMap (`workoutsHashMapList`).
 
+Note that the user will not have any direct interactions with the HashMap implementation and it should be transparent
+to him/her.
+
 ---
 
 ### Search
