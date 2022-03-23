@@ -7,82 +7,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validator {
-    static boolean validateAddDoctor(String[] parameters) {
-        boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
-        //validate full name cause specialization is also j a name
-        if (!validateFullName(parameters[6])) {
-            UI.printParagraph("Specialization must be a name");
-            isValid = false;
-        }
-        return isValid;
 
-    }
-
-    private static boolean validateAddPerson(String[] parameters) {
-        boolean isValid = true;
-        if (!validateNric(parameters[0])) {
-            UI.printParagraph("NRIC must start with a capital letter, "
-                    + "followed by 7 digits and end with a capital letter.");
-            isValid = false;
-        }
-        if (!validateFullName(parameters[1])) {
-            UI.printParagraph("Full name must contain only alphabets and no special characters.");
-            isValid = false;
-        }
-        if (!validateAge(parameters[2])) {
-            UI.printParagraph("Age must be between 1 and 120 inclusive.");
-            isValid = false;
-        }
-        if (!validateGender(parameters[3])) {
-            UI.printParagraph("Gender must be a single character: M or F.");
-            isValid = false;
-        }
-        if (!validateAddress(parameters[4])) {
-            UI.printParagraph("Address must be alphanumeric. "
-                    + "Only these specific special characters are allowed: ' ( ) #");
-            isValid = false;
-        }
-        if (!validateDob(parameters[5])) {
-            UI.printParagraph("Date of birth must be in YYYY-MM-DD format. "
-                    + "It cannot be before 1900-01-01 or be today and after.");
-            isValid = false;
-        }
-        return isValid;
-    }
-
-    static boolean validateAddPatient(String[] parameters) {
-        boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
-        if (!validateAdmissionDate(parameters[6])) {
-            UI.printParagraph("Date of birth must be in YYYY-MM-DD format. "
-                    + "It cannot be before 1980-01-01 or be today and after.");
-            isValid = false;
-        }
-        return isValid;
-    }
-
-    public static boolean validateMedicine(String[] parameters) {
-        boolean check = true;
-        for (int i = 0; i < 5; i++) {
-            switch (i) {
-            case 0:
-                check = validateMedicineName(parameters[i]);
-                break;
-            case 1:
-                check = check && validateDosage(parameters[i]);
-                break;
-            case 2:
-                check = check && validateExpiry(parameters[i]);
-                break;
-            case 4:
-                check = check && validateQuantity(parameters[i]);
-                break;
-            default:
-                break;
-            }
-        }
-        return check;
-    }
-
+    /* Validating person attributes */
     private static boolean validateNric(String nric) {
         Pattern nricPattern = Pattern.compile("[A-Z][0-9]{7}[A-Z]");
         Matcher nricMatcher = nricPattern.matcher(nric);
@@ -153,6 +79,63 @@ public class Validator {
         }
     }
 
+    /* Validating person */
+    private static boolean validateAddPerson(String[] parameters) {
+        boolean isValid = true;
+        if (!validateNric(parameters[0])) {
+            UI.printParagraph("NRIC must start with a capital letter, "
+                    + "followed by 7 digits and end with a capital letter.");
+            isValid = false;
+        }
+        if (!validateFullName(parameters[1])) {
+            UI.printParagraph("Full name must contain only alphabets and no special characters.");
+            isValid = false;
+        }
+        if (!validateAge(parameters[2])) {
+            UI.printParagraph("Age must be between 1 and 120 inclusive.");
+            isValid = false;
+        }
+        if (!validateGender(parameters[3])) {
+            UI.printParagraph("Gender must be a single character: M or F.");
+            isValid = false;
+        }
+        if (!validateAddress(parameters[4])) {
+            UI.printParagraph("Address must be alphanumeric. "
+                    + "Only these specific special characters are allowed: ' ( ) #");
+            isValid = false;
+        }
+        if (!validateDob(parameters[5])) {
+            UI.printParagraph("Date of birth must be in YYYY-MM-DD format. "
+                    + "It cannot be before 1900-01-01 or be today and after.");
+            isValid = false;
+        }
+        return isValid;
+    }
+
+    static boolean validateAddDoctor(String[] parameters) {
+        boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
+
+        //validate full name cause specialization is also just a name
+        if (!validateFullName(parameters[6])) {
+            UI.printParagraph("Specialization must be a name");
+            isValid = false;
+        }
+        return isValid;
+
+    }
+
+    static boolean validateAddPatient(String[] parameters) {
+        boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
+        if (!validateAdmissionDate(parameters[6])) {
+            UI.printParagraph("Date of birth must be in YYYY-MM-DD format. "
+                    + "It cannot be before 1980-01-01 or be today and after.");
+            isValid = false;
+        }
+        return isValid;
+    }
+
+
+    /* Validate medicine attributes */
     private static boolean validateMedicineName(String medicineName) {
         return medicineName.matches("[a-zA-z]+");
     }
@@ -186,5 +169,29 @@ public class Validator {
         } catch (NumberFormatException numberFormatException) {
             return false;
         }
+    }
+
+    /* Validate medicine */
+    public static boolean validateMedicine(String[] parameters) {
+        boolean check = true;
+        for (int i = 0; i < 5; i++) {
+            switch (i) {
+            case 0:
+                check = validateMedicineName(parameters[i]);
+                break;
+            case 1:
+                check = check && validateDosage(parameters[i]);
+                break;
+            case 2:
+                check = check && validateExpiry(parameters[i]);
+                break;
+            case 4:
+                check = check && validateQuantity(parameters[i]);
+                break;
+            default:
+                break;
+            }
+        }
+        return check;
     }
 }
