@@ -232,6 +232,9 @@ Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 >- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be removed.
 >- A confirmation must be given before deletion takes place.
 
+> **⚠️Warning:**
+> - This action is irreversible, once the command has been entered, the activity would be immediately deleted.
+
 Example of usage:
 1. Remove an existing activity with a unique identifier of 1 from a session with a unique <br> identifier of 2.
    - `activity /delete /sid 2 /aid 1` <br>
