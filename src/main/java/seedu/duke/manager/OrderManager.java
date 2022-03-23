@@ -45,7 +45,7 @@ public class OrderManager {
     }
 
     public double getOrderPrice(int orderIndex) {
-        return this.orders.get(orderIndex).getTotalPrice();
+        return this.getOrder(orderIndex).getTotalPrice();
     }
 
     public double getAllOrderValue() {
