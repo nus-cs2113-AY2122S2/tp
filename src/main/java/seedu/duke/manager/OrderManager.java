@@ -34,7 +34,7 @@ public class OrderManager {
     }
 
     public Order getOrder(int orderIndex) throws IndexOutOfBoundsException {
-        if (orders.size() < orderIndex) {
+        if (orderIndex < 0 || orders.size() <= orderIndex) {
             throw new IndexOutOfBoundsException();
         }
         return this.orders.get(orderIndex);
