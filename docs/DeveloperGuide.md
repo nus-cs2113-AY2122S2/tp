@@ -6,6 +6,78 @@
 
 ## Design & implementation
 
+### Study session implementation
+
+The study session consists of 4 main components:
+
+- Parser class
+- StudyCommand class
+- TimerLogic class
+- Timer class
+
+The `StudyCommand` component
+- Accepts user inputs in the study session
+- Facilitates interaction between Parser and TimerLogic
+
+The `TimerLogic` component
+- Manages the timer component when study session is launched
+- Handles the logic for the timer (e.g. keeps track of state of Timer component)
+- Calls made to Timer component methods are made through this method
+
+The `Timer` component
+- Inherits from `Thread` class
+- Keeps track of time left when user calls for a timer
+- Can be paused, resumed and stopped
+- Prints to standard output the time remaining in regular intervals
+- Thread is automatically interrupted when time runs out
+
+#### `Timer` implementation
+
+Sherpass’ implementation of the timer function in the study session is through the `Timer` class, which inherits 
+from Java’s `Thread` class. When the timer is started by the user, the `Timer` class starts a thread which keeps 
+track of time by sleeping for 1 second, then updating the time left, until the time left in the timer reaches 
+zero, which then interrupts the thread. Starting the timer as a thread allows us to accept user commands like 
+pause and stop for the timer through `StudyCommand` and `TimerLogic`, while `Timer` executes in the background and 
+prints the time remaining at regular intervals.
+
+Given below is an example usage scenario when the user enters the study timer, starts and stops the timer.
+
+Step 1. The user executes the `study` command and enters the study session through the `Parser` component, which 
+executes the `StudyCommand`. `StudyCommand` then initialises an instance of `TimerLogic`, which handles the execution
+and logic of user commands during the study session, while the `StudyCommand` accepts the user’s input when the 
+user is in the study session.
+
+Sequence diagram for `Timer` when user starts and stops a timer:
+![TimerUML](https://user-images.githubusercontent.com/69501969/159708222-a01e9885-1f6e-4e16-8e82-97e9529ab412.png)
+
+The diagram above depicts the process when user calls start and stop (in step 2 and 3 below). All the methods
+called by Timer are in parallel with other commands, since `Timer` is in a separate thread. For simplicity’s
+sake, parallel frames for the remainder of methods called by `Timer` are omitted.
+
+Step 2. The user executes `start 1` command to start a 45 minute timer. The input goes through `StudyCommand`, 
+where the Parser is called to parse the command. After parsing, `Parser` calls the method corresponding to 
+the user’s command (`start`) in `TimerLogic`. `TimerLogic` then handles the logic and initialises an instance of
+`Timer` (spawn a thread). `Timer` then automatically updates itself while waiting for the user to issue commands.
+
+Step 3. The user executes the `stop` command to stop the timer. The same process is followed by using `Parser` to
+parse the command in the study mode, which calls on the respective `callStopTimer` method in `TimerLogic`. Within the
+`callStopTimer` method is a call to a method in `Timer` to stop the timer. Control goes back to the user for further 
+commands.
+
+#### Design considerations for Timer class
+- Current implementation: Create `Timer` from scratch, using the sleep function of threads to keep 
+track of time
+  - Pros: Same overhead of needing to track the time left of the timer
+  - Pros: No need to follow Java’s `Timer` class syntax, which can be confusing at times
+  - Pros: Implementation is simple and straight-forward
+  - Cons: Have to manage how we interrupt the thread after stopping the timer
+- Alternative: Using Java's `Timer` class
+  - Pros: The way of keeping track of the time has already been implemented
+  - Pros: Using a standard library usually makes the program less prone to various errors
+  - Cons: Still have to implement a way to keep track of time for our purposes of pausing a timer, since the library 
+  provided by Java has no way of pausing the timer, only stopping it.
+
+
 ### Loading saved files
 
 Class diagram of Storage:
@@ -51,7 +123,7 @@ The sequence diagram of `Storage#handleCorruptedSave()` is shown here:
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+Students from CEG and SOC
 
 ### Value proposition
 
