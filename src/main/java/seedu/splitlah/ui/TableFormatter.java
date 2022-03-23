@@ -125,6 +125,12 @@ public class TableFormatter {
         return (tableWidth + (MINIMUMPADDING * columnWidths.length));
     }
 
+    /**
+     * Formats all rows in this TableFormatter object, decorates them and appends them to a table String object.
+     *
+     * @param columnWidths int array containing the maximum width of each column.
+     * @param formattedTable A StringBuilder object representing the formatted table without the rows.
+     */
     private void appendRowsToFormattedTableString(int[] columnWidths, StringBuilder formattedTable) {
         for (TableFormatterRow row : rows) {
             formattedTable.append(decorateRow(row, columnWidths));
@@ -132,6 +138,11 @@ public class TableFormatter {
         }
     }
 
+    /**
+     * Appends the name of this TableFormatter object to the table StringBuilder object if a name has been set.
+     *
+     * @param formattedTable a StringBuilder object representing the formatted table.
+     */
     private void appendTableNameIfExists(StringBuilder formattedTable) {
         if (tableName != null) {
             formattedTable.append(tableName).append("\n");
