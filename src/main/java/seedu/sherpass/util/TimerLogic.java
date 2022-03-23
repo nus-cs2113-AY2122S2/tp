@@ -35,38 +35,43 @@ public class TimerLogic {
      */
     public void markTask(Storage storage, String[] parsedInput) {
         if (isTimerPausedOrStopped()) {
-            Command c = Parser.prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD, taskList);
-            if (c != null) {
-                c.execute(taskList, ui, storage);
-                if (!isTimerRunning()) {
-                    ui.showToUser("Would you like to start another timer, mark another task as done, "
-                            + "or leave the study session?");
-                } else {
-                    ui.showToUser("Would you like to resume the timer, mark another task as done, "
-                            + "or leave the study session?");
-                }
-            }
+            executeMark(storage, parsedInput);
         } else {
             ui.showToUser("You can't mark a task as done while timer is running!");
         }
     }
 
+    private void executeMark(Storage storage, String[] parsedInput) {
+        Command c = Parser.prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD, taskList);
+        if (c != null) {
+            c.execute(taskList, ui, storage);
+            printAvailableCommands();
+        }
+    }
+
+    private void printAvailableCommands() {
+        if (!isTimerRunning()) {
+            ui.showToUser("Would you like to start another timer, mark a task as done, "
+                    + "or leave the study session?");
+        } else {
+            ui.showToUser("Would you like to resume the timer, mark a task as done, "
+                    + "or leave the study session?");
+        }
+    }
+
     public void showTasks(Storage storage, String[] parsedInput) {
         if (isTimerPausedOrStopped()) {
-            Command c = Parser.prepareShow(parsedInput);
-            if (c != null) {
-                c.execute(taskList, ui, storage);
-                if (!isTimerRunning()) {
-                    ui.showToUser("Would you like to start another timer, mark a task as done, "
-                            + "or leave the study session?");
-                } else {
-                    ui.showToUser("Would you like to resume the timer, mark a task as done, "
-                            + "or leave the study session?");
-                }
-
-            }
+            executeShow(storage, parsedInput);
         } else {
             ui.showToUser("You can't show tasks while timer is running!");
+        }
+    }
+
+    private void executeShow(Storage storage, String[] parsedInput) {
+        Command c = Parser.prepareShow(parsedInput);
+        if (c != null) {
+            c.execute(taskList, ui, storage);
+            printAvailableCommands();
         }
     }
 
