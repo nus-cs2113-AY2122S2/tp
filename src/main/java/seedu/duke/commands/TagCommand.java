@@ -85,7 +85,6 @@ public class TagCommand extends Command {
      */
     private void removeTag(Module targetModule) throws ModHappyException {
         TaskList taskList = targetModule.getTaskList();
-        Task task = taskList.deleteTag(tagDescription, taskIndex);
-        result = String.format(DEL_TAG_MESSAGE, task, tagDescription);
+        result = String.format(DEL_TAG_MESSAGE, taskList.deleteTag(tagDescription, taskIndex), tagDescription);
     }
 }
