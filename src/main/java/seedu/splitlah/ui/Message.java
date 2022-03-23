@@ -264,6 +264,18 @@ public abstract class Message {
             "An Activity object failed to be added into the list of activities because there are duplicate names in"
                     + "the involved list.";
 
+    // Activity Edit Command
+    public static final String LOGGER_ACTIVITYEDIT_SESSION_ID_NOT_FOUND =
+            "Session was not found with unique identifier of:";
+    public static final String ASSERT_ACTIVITYEDIT_COMMAND_ARGS_NULL =
+            "The command arguments cannot be null.";
+   public static final String ASSERT_ACTIVITYEDIT_MANAGER_DOES_NOT_EXIST =
+            "Manager does not exist.";
+    public static final String ASSERT_ACTIVITYEDIT_SESSIONID_MISSING =
+            "Session Id missing.";
+    public static final String ASSERT_ACTIVITYEDIT_ACTIVITYID_MISSING =
+            "Activity Id missing.";
+
     // Activity Delete Command
     public static final String ASSERT_ACTIVITYDELETE_SESSION_IS_NULL =
             "Session is still not initialized.";
