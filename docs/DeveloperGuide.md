@@ -183,8 +183,9 @@ a series of print to display the expenditures in this category.
 > check the index provided using `Parser#checkValidCategory` before iterating `Family`. If the check
 > fails, an error message will be displayed to the user instead of continuing with the execution.
 
-The following sequence diagram shows how the `listcat` operation works:
-> insert sequence diagram
+The following sequence diagram shows how the `listcat` operation works after the `ListCatCommand` has
+been created by [`CommandFactory`](#PlaceholderToCommandFactory):
+<image src="/images/ListCategorisedExpenseSequence.png"/>
 
 #### Design considerations:
 
