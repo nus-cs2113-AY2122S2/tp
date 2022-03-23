@@ -68,6 +68,8 @@ public class CommandHandler {
 
         String projectName = "";
 
+
+
         for (int i = 1; i < commands.length; i++) {
             if (i != 1) {
                 projectName += " ";
@@ -147,4 +149,5 @@ public class CommandHandler {
         }
         return todoString;
     }
+
 }
