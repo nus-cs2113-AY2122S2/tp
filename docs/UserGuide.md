@@ -312,7 +312,49 @@ Example of usage:
 <br>
 
 ### Creating a group: `group /create`
+
+> Creates a new group . <br>
+> A group represents one or more individuals. It is used as a shortcut in several commands for identifying a group of individual persons.<br>
+
+Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
+
+* `[GROUP_NAME]` refers to the name of the group.
+    * The group name is **case-insensitive**.
+* `[NAME1 NAME2 ...]` refers to a list of persons involved in the activity.
+    * Each individual name is **case-insensitive**.
+
+> **💡 Note(s):**
+>- The `[GROUP_NAME]` should be unique across all groups.
+>- Each name in `[NAME1 NAME2 ...]` for the group should be unique.
+
+
+Examples of usage:
+1. Adds a new group named group1, with alice and bob involved.
+    - `group /create /n group1 /pl alice bob` <br>
+      ![Group create command Screenshot]()
+      <br>
+      <br>
+
 ### Deleting a group: `group /delete`
+> Deletes a existing group.<br>
+> A group represents one or more individuals. It is used as a shortcut in several commands for identifying a group of individual persons.<br>
+
+Format: `group /delete /gid [GROUP_ID]`
+
+* `[GROUP_ID]` refers to the unique identifier of the group.
+    * The unique identifier for a group can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
+
+> **💡 Note(s):**
+>- A session with a unique identifier of `[GROUP_ID]` has to exist before it can be removed.
+
+Example of usage:
+1. Remove an existing group with a unique identifier of 1.
+    - `group /delete /gid 1` <br>
+      ![Group delete command Screenshot]()
+      <br>
+      <br>
+
+
 ### Viewing a group: `group /view`
 
 > Display details about a group.<br>
