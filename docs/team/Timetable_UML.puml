@@ -1,0 +1,25 @@
+!define LOGIC_COLOR #3333C4
+!define LOGIC_COLOR_T1 #7777DB
+
+@startuml
+
+skinparam Shadowing false
+skinparam BoxPadding 10
+
+User -> Main: show today
+activate Main
+Main -> Parser: parseCommand(show today, tasklist, ui)
+Parser -> Parser: prepareShow(today)
+Parser -> Parser: parseShowCommandOptions(today)
+Parser -> ShowCommand: newShowCommand(null, today)
+Main -> ShowCommand: execute(tasklist, ui, storage)
+ShowCommand -> Timetable: showTodaySchedule(taskList, ui)
+activate Timetable
+Timetable -> Timetable: prepareTimetable(date, filteredTask, ui)
+Timetable -> Timetable: printSchedule()
+Timetable --> Main
+deactivate Timetable
+Main --> User
+
+@enduml
+
