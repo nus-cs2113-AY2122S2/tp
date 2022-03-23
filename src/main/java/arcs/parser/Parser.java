@@ -12,6 +12,7 @@ import arcs.commands.UndefinedCommand;
 public class Parser {
 
     public Command parseCommand(String userInput) {
+        assert userInput != null: "User input is null";
         String[] fullInput = userInput.split(" ", 2);
         String commandWord = fullInput[0];
         String argumentLine = fullInput.length > 1 ? fullInput[1].trim() : null;
