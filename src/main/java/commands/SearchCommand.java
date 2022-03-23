@@ -84,6 +84,7 @@ public class SearchCommand extends Command {
     /**
      * Constructs a new instance of the SearchCommand. Constructed when the user enters a
      * search command for all types.
+     *
      * @param userInput     The user's full original input.
      * @param ui            An instance of the ui class.
      * @param exerciseList  An instance of the ExerciseList class.
@@ -233,6 +234,7 @@ public class SearchCommand extends Command {
 
     /**
      * Returns the number of matching results.
+     *
      * @return  The number of matching results.
      */
     private int getMatchCount() {
