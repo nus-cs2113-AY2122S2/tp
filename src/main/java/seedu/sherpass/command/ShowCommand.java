@@ -8,7 +8,6 @@ import seedu.sherpass.util.Ui;
 import java.time.LocalDate;
 
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
-import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_ONE;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_TWO;
 
 public class ShowCommand extends Command {
