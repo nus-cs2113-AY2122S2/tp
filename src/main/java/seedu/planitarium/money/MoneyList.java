@@ -22,8 +22,5 @@ public abstract class MoneyList {
      * Creates a new Money Object.
      */
     public MoneyList() {
-        this.moneyArrayList = new ArrayList<>();
-        logger = new ProjectLogger(LOG_CLASS_NAME, LOG_FILE_PATH);
-        logger.getLogger().log(Level.INFO, LOG_INIT);
     }
 }
