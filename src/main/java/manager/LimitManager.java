@@ -15,7 +15,7 @@ public class LimitManager {
      * @return LimitManager object
      */
     public static LimitManager getLimitManagerInstance() {
-        if (limitManager != null) {
+        if (limitManager == null) {
             limitManager = new LimitManager();
         }
         return limitManager;
@@ -23,15 +23,18 @@ public class LimitManager {
 
     /**
      * Set limit to specified value.
+     *
      * @param limit New limit value
      */
     public void setLimit(double limit) {
         this.limit = limit;
     }
 
-    /** Warning message to user. */
-    public void displayWarning(){
-        System.out.println("WARNING: You have exceeded the spending limit of " + limit + "!!");
+    /**
+     * @return Limit value.
+     */
+    public double getLimit() {
+        return limit;
     }
 
     /**

@@ -1,8 +1,10 @@
 package commands;
 
 import common.Messages;
+
 import manager.LimitManager;
 import manager.RecordManager;
+
 import records.Record;
 
 import java.util.List;
@@ -13,7 +15,6 @@ import java.util.List;
 public class Command {
     protected RecordManager recordMgr;
     protected LimitManager limitMgr;
-    private int index = -1;
     static protected double totalExpense = 0;
 
     public Command() {
@@ -22,11 +23,11 @@ public class Command {
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of records.
      *
-     * @param recordsDisplayed used to generate summary
-     * @return summary message for records displayed
+     * @param recordsDisplayed Used to generate summary
+     * @return Summary message for records displayed
      */
     protected static String getMessageForRecordListSummary(List<Record> recordsDisplayed) {
-        return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, recordsDisplayed.size());
+        return String.format(Messages.MESSAGE_RECORD_LISTED_OVERVIEW, recordsDisplayed.size());
     }
 
     /**
@@ -42,6 +43,12 @@ public class Command {
     public void setData(RecordManager recordMgr) {
         this.recordMgr = recordMgr;
     }
+
+    /**
+     * Supplies the limit the command with operate with.
+     *
+     * @param limitMgr The manager of the limit
+     */
     public void setLimitManager(LimitManager limitMgr) {
         this.limitMgr = limitMgr;
     }

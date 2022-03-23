@@ -17,7 +17,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static common.Messages.MESSAGE_INVALID_RECORD_DISPLAYED_INDEX;
 
 import static constants.ParserConstants.PARAMETER_DELIMITER_DATE;
 import static constants.ParserConstants.PARAMETER_DELIMITER_ITEM_NAME;
@@ -224,12 +224,12 @@ public class Parser {
      */
     private Command prepareDeleteCommand(String args) {
         try {
-            final int targetIndex = (int) parseArgsAsDisplayedIndex(args);
+            final int targetIndex = (int) parseArgsAsDisplayedIndex(args) - 1;
             return new DeleteCommand(targetIndex);
         } catch (ParseException pe) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
-            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            return new IncorrectCommand(MESSAGE_INVALID_RECORD_DISPLAYED_INDEX);
         }
     }
 
@@ -246,7 +246,7 @@ public class Parser {
         } catch (ParseException pe) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LimitCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
-            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            return new IncorrectCommand(MESSAGE_INVALID_RECORD_DISPLAYED_INDEX);
         }
     }
 

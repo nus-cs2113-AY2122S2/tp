@@ -1,6 +1,7 @@
 package commands;
 
 import exception.IllegalValueException;
+
 import records.Product;
 import records.Record;
 import records.Subscription;
@@ -10,9 +11,10 @@ import records.Subscription;
  * Adds a record to the RecordManager.
  */
 public class AddCommand extends Command {
-
+    /** Keyword to trigger add command. */
     public static final String COMMAND_WORD = "add";
 
+    /** Help message for add command. */
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a record to the RecordManager.\n"
             + "Parameters: i/ITEM_NAME p/PRICE d/DATE t/CATEGORY (if product) r/RENEWAL (if subscription)\n"
             + "Example: " + COMMAND_WORD
@@ -20,8 +22,10 @@ public class AddCommand extends Command {
             +  "Example: " + COMMAND_WORD
             + " subscription i/Netflips p/$10 d/14022022 r/14032022";
 
+    /** Success message for add command. */
     private static final String MESSAGE_SUCCESS = "New record added: %1$s";
 
+    /** Record to add to the list of records. */
     private Record toAdd;
 
     /**
@@ -32,7 +36,7 @@ public class AddCommand extends Command {
     public void AddProductCommand(String name, double price,
                       String date, String productType) throws IllegalValueException {
         this.toAdd = new Product(name, price, date, productType);
-        super.totalExpense += price;
+        totalExpense += price;
 
     }
 
@@ -44,15 +48,25 @@ public class AddCommand extends Command {
     public void AddSubscriptionCommand(String name, double price,
                              String date, String renewal) throws IllegalValueException {
         this.toAdd = new Subscription(name, price, date, renewal);
-        super.totalExpense += price;
+        totalExpense += price;
     }
 
+    /**
+     * Executes the command and returns the result.
+     *
+     * @return Result of the command
+     */
     @Override
     public CommandResult execute() {
-        System.out.println("||Total expense: " + totalExpense);
-        if (limitMgr.ifExceedLimit(super.totalExpense)) limitMgr.displayWarning();
         recordMgr.addRecord(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+
+        String newTotalExpense = "\nTotal expense: " + totalExpense;
+
+        if (limitMgr.ifExceedLimit(totalExpense)) {
+            String warning = "\nWARNING: You have exceeded the spending limit of " + limitMgr.getLimit() + "!!";
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + newTotalExpense + warning);
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + newTotalExpense);
     }
 
 }

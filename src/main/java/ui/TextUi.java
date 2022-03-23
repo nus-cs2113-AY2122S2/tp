@@ -104,7 +104,7 @@ public class TextUi {
             fullInputLine = in.nextLine();
         }
 
-        showToUser("[Command entered:" + fullInputLine + "]");
+        showToUser("[Command entered: " + fullInputLine + "]");
         return fullInputLine;
     }
 
@@ -143,7 +143,7 @@ public class TextUi {
 
         if (resultRecords != null) {
             for (int resultCount = 0; resultCount < resultRecords.size(); resultCount++) {
-                System.out.println(LINE_PREFIX + resultCount + 1 + ". " + resultRecords.get(resultCount).toString());
+                System.out.println(LINE_PREFIX + (resultCount + 1) + ". " + resultRecords.get(resultCount).toString());
             }
         }
 
