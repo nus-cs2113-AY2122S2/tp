@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram'
+hide footbox
+actor user
+participant ":Main"
+participant ":ui"
+participant ":parser"
+participant ":command"
+participant ":ClearCommand"
+
+
+
+user -> ":ui" : "clear"
+":ui" --> ":Main" : get UserInput
+":Main" -> ":parser" : parseCommand("clear")
+":parser" -> ":command" : parseCommand("clear")
+":command" -> ":ClearCommand" :executeCommand(userInput,MasterTimetable)
+":command" --> ":parser" : ClearCommand
+":ClearCommand" -> ":ClearCommand" : execute()
+":ClearCommand" --> ":command" : CommandOutput
+":command" --> ":parser" : CommandOutput
+":parser" -> ":ui" : CommandOutput
+":ui" -> ":ui" : printConfirmation()
+":ui" --> ":Main"
+@enduml

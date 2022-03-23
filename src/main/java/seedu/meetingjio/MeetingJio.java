@@ -19,14 +19,14 @@ public class MeetingJio {
     /** Starts the interaction with the user. */
     public static void main(String[] args) {
         start();
-        String name = in.nextLine();
+        String name = in.nextLine().trim();
         System.out.println(MESSAGE_DIVIDER);
         System.out.println("Hello! " + name);
         TextUi.showHelpHint();
         System.out.println(MESSAGE_DIVIDER);
 
         MasterTimetable masterTimetable = new MasterTimetable();
-        String userInput = in.nextLine();
+        String userInput = in.nextLine().trim();
         Command.executeCommand(userInput, masterTimetable, in);
         TextUi.showGoodByeMessage();
     }
