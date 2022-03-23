@@ -315,7 +315,11 @@ Example of usage:
 ### Deleting a group: `group /delete`
 ### Viewing a group: `group /view`
 ### Listing all groups: `group /list`
+
 ### Listing all available commands: `help`
+> Displays all available SplitLah commands and their syntax.
+
+Format: `help`
 
 ### Exit
 > Exits the application.
