@@ -33,16 +33,16 @@ public class OrderManager {
         return this.orders.size();
     }
 
-    public Order getOrder(int userInputInt) {
-        return this.orders.get(userInputInt);
+    public Order getOrder(int orderIndex) {
+        return this.orders.get(orderIndex);
     }
 
-    public void deleteOrder(int userInputInt) {
-        this.orders.remove(userInputInt);
+    public void deleteOrder(int orderIndex) {
+        this.orders.remove(orderIndex);
     }
 
-    public double getOrderPrice(int userInputInt) {
-        return this.orders.get(userInputInt).getTotalPrice();
+    public double getOrderPrice(int orderIndex) {
+        return this.orders.get(orderIndex).getTotalPrice();
     }
 
     public double getAllOrderValue() {
