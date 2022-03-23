@@ -1,5 +1,8 @@
 package data.plans;
 
+/**
+ * Thrown to indicate that the Plan being created has some invalid parameters.
+ */
 public class InvalidPlanException extends Exception {
     // Pre-defined error messages
     public static final String DUPLICATE_PLAN_NAME_ERROR_MSG = "Uh oh, there already is an existing plan with "

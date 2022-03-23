@@ -1,38 +1,75 @@
 package data.plans;
 
 import commands.PlanCommand;
-import data.exercises.InvalidExerciseException;
 import data.workouts.InvalidWorkoutException;
 import data.workouts.Workout;
 import data.workouts.WorkoutList;
-import data.workouts.WorkoutOutOfRangeException;
+import storage.LogHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
+/**
+ * This class represents an instance of a list of plans entered by the user.
+ * It contains functionality to validate the user's inputs as well as allow the user to
+ * create, list and delete plans.
+ */
 public class PlanList {
     public static final int MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN = 10;
     private WorkoutList workoutList;
     private HashMap<String, Plan> plansHashMapList = new HashMap<>();
     private ArrayList<String> plansDisplayList = new ArrayList<>();
+    private static Logger logger = Logger.getLogger(PlanList.class.getName());
 
+    /**
+     * Constructs an instance of the PlanList class.
+     *
+     * @param workoutList An instance of the WorkoutList class.
+     */
     public PlanList(WorkoutList workoutList) {
         this.workoutList = workoutList;
+        LogHandler.linkToFileLogger(logger);
     }
 
+    /**
+     * Gets the ArrayList of keys of Plan objects.
+     * The keys of Plan objects are their unique plan names.
+     *
+     * @return An ArrayList of keys of Plan objects.
+     */
     public ArrayList<String> getPlansDisplayList() {
         return this.plansDisplayList;
     }
 
+    /**
+     * Gets the HashMap of Plan objects.
+     *
+     * @return A HashMap of Plan objects.
+     */
     public HashMap<String, Plan> getPlansHashMapList() {
         return this.plansHashMapList;
     }
 
+    /**
+     * Gets the Plan object based on its key as stored in the plansHashMapList.
+     *
+     * @param planKey The key that maps to the desired Plan object.
+     * @return The Plan object that is mapped to planKey.
+     */
     public Plan getPlanFromKey(String planKey) {
         return getPlansHashMapList().get(planKey);
     }
 
+    /**
+     * Retrieves the Plan object from the HashMap plansHashMapList based on the index number
+     * of the object stored in plansDisplayList. This index number is the number shown in
+     * 'plan /list'.
+     *
+     * @param indexNum The index number of the plan as shown in 'plan /list'.
+     * @return The Plan object that corresponds to the index number.
+     */
     public Plan getPlanFromIndexNum(int indexNum) {
         int elementNum = indexNum - 1;
         assert (elementNum >= 0);
@@ -61,6 +98,7 @@ public class PlanList {
         String className = this.getClass().getSimpleName();
         boolean hasSamePlanName = checkForExistingPlanName(userPlanNameInput);
         if (hasSamePlanName) {
+            logger.log(Level.WARNING, "Plan name is invalid.");
             throw new InvalidPlanException(className, InvalidPlanException.DUPLICATE_PLAN_NAME_ERROR_MSG);
         }
 
@@ -69,8 +107,10 @@ public class PlanList {
         int numberOfWorkoutsInAPlan = userWorkoutNumbersString.split(",").length;
         boolean isAppropriateNumberOfWorkouts = checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan);
         if (!isAppropriateNumberOfWorkouts) {
+            logger.log(Level.WARNING, "Number of workouts to add in a plan is invalid.");
             throw new InvalidPlanException(className, InvalidPlanException.MIN_MAX_WORKOUTS_IN_A_PLAN);
         }
+        assert (numberOfWorkoutsInAPlan > 0 && numberOfWorkoutsInAPlan <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN);
 
         ArrayList<Workout> workoutsToAddInAPlanList = new ArrayList<Workout>();
         for (int i = 0; i < numberOfWorkoutsInAPlan; i += 1) {
@@ -78,16 +118,19 @@ public class PlanList {
 
             boolean isWithinWorkoutListRange = checkWorkoutNumberWithinRange(workoutNumberInteger);
             if (!isWithinWorkoutListRange) {
+                logger.log(Level.WARNING, "Workout number to add in the plan is invalid.");
                 throw new InvalidPlanException(className, InvalidPlanException.WORKOUT_NUMBER_OUT_OF_RANGE);
             }
-
             assert (workoutNumberInteger > 0) && (workoutNumberInteger <= workoutList.getWorkoutsDisplayList().size());
+
             String workoutToAddKey = workoutList.getWorkoutsDisplayList().get(workoutNumberInteger - 1);
             Workout workoutToAddObject = workoutList.getWorkoutFromKey(workoutToAddKey);
             workoutsToAddInAPlanList.add(workoutToAddObject);
         }
 
         Plan newPlan = new Plan(userPlanNameInput, workoutsToAddInAPlanList);
+        logger.log(Level.INFO, "New plan created.");
+
         String newPlanKey = newPlan.toString();
         plansHashMapList.put(newPlanKey, newPlan);
         plansDisplayList.add(newPlanKey);
@@ -106,7 +149,7 @@ public class PlanList {
     public boolean checkForExistingPlanName(String userPlanNameInput) {
         String userPlanNameInputLowerCase = userPlanNameInput.toLowerCase();
         for (int i = 0; i < plansDisplayList.size(); i += 1) {
-            String getPlanName = plansDisplayList.get(i).toString().toLowerCase();
+            String getPlanName = plansDisplayList.get(i).toLowerCase();
 
             if (userPlanNameInputLowerCase.equals(getPlanName)) {
                 return true;
@@ -130,7 +173,7 @@ public class PlanList {
 
     /**
      * This method checks whether the workout number supplied
-     * is within the range of the current workout list.
+     * is within the range of the current workout list (in workout /list).
      *
      * @param workoutNumber The workout number to check.
      * @return True if workout number is within the range of the workout list,
@@ -162,8 +205,8 @@ public class PlanList {
      */
     public void listAllPlan() {
         if (getPlansDisplayList().size() <= 0) {
-            System.out.println("Oops! You have not created any plans yet!");
-            System.out.println("To create a new plan, enter 'plan /new <plan name> /workouts "
+            System.out.println("Oops! You have not created any plans yet!"
+                    + "\nTo create a new plan, enter 'plan /new <plan name> /workouts "
                     + "\n<workout number(s) to add, separated by comma>'."
                     + "\nAlternatively, enter 'help' for more information.");
             return;
@@ -173,7 +216,7 @@ public class PlanList {
         System.out.println("Here are all your plan(s).");
         System.out.println("To view each plan in detail, enter\n'plan /details <plan number in list>'.\n");
         for (int i = 0; i < getPlansDisplayList().size(); i += 1) {
-            System.out.println((i + 1) + ". " + getPlansDisplayList().get(i).toString());
+            System.out.println((i + 1) + ". " + getPlansDisplayList().get(i));
         }
     }
 
