@@ -112,7 +112,7 @@ public class Warehouse {
     public boolean setCapacity(String input) {
         try {
             int capacity = Integer.parseInt(input);
-            assert(capacity > 0);
+            assert capacity > 0;
 
             if (capacity < totalGoods()) {
                 throw new LargeQuantityException();
