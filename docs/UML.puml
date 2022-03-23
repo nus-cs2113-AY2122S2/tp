@@ -9,6 +9,7 @@ class Duke {
 class MainController {
 
 }
+MainController <.. Duke
 Controller <|-- MainController
 DishController "1" <-- MainController: have <
 
@@ -80,7 +81,7 @@ class Staff {
     +toString(): String
 }
 
-class StringManager {
+class StaffManager {
     -staffs: ArrayList<Staff>
     +StaffManager()
     +getStaffs(): ArrayList<Staff>
