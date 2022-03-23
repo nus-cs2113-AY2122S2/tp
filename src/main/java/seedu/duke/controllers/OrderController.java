@@ -71,7 +71,7 @@ public class OrderController extends Controller {
         System.out.printf("Total value of all orders: %f. \n", orderManager.getAllOrderValue());
     }
 
-    private void printOrder() throws OperationTerminationException {
+    private void printOrder() throws OperationTerminationException, IndexOutOfBoundsException {
         int userInputInt = InputParser.getInteger("Enter the order you want to display: ");
         System.out.println("These is your order. \n");
         orderManager.getOrder(userInputInt).printOrder();
