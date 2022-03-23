@@ -29,12 +29,12 @@ public class StaffManager extends Manager {
         }
     }
 
-    public ArrayList<Staff> getStaffs() {
+    public ArrayList<Staff> getStaff() {
         return staffs;
     }
 
-    public void setStaffs(ArrayList<Staff> staffs) {
-        this.staffs = staffs;
+    public void loadStaff(Staff staff) {
+        staffs.add(staff);
     }
 
     /**
@@ -125,7 +125,9 @@ public class StaffManager extends Manager {
     protected void loadData() throws Exception {
         this.staffs = new ArrayList<>();
         ArrayList<?> list = (ArrayList<?>) this.load();
-        this.setStaffs((ArrayList<Staff>) list);
+        for (Object object : list) {
+            this.loadStaff((Staff) object);
+        }
     }
 
     @Override
