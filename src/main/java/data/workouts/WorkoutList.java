@@ -227,7 +227,11 @@ public class WorkoutList {
     }
 
     /**
-     * Prints workouts stored in workout list.
+     * Prints noOfPrints workouts stored in workout list .
+     *
+     * @param index of workouts stored in workoutList.
+     * @param noOfPrints number of workouts to be printed.
+     * @return index the next workout index to be printed.
      */
     public int continuousPrinting(int index, int noOfPrints) {
         System.out.println("Showing workouts " + (index + 1) + "-" + (index + noOfPrints)
