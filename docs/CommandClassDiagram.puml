@@ -36,7 +36,8 @@ package command {
 note top of command
 Note:
 This class diagram only describes
-two commands for simplicity.
+two commands in the two different
+categories for simplicity.
 end note
 
 @enduml
