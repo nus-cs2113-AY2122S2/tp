@@ -81,8 +81,8 @@ month purchased.
 1. The `Parser` component parses user input and returns the new `AddCommand` object to the
    `MindMyMoney`.
 2. `AddCommand` instantiates `addInput`, `expenditureList` and `creditCardList`.
-3. The application invokes `Addcommand#execute` to execute user instruction.
-4. During the execution, `Addcommand#execute` will parse through user input to obtain the `EXPENDITURE`, `CATEGORY`,
+3. The application invokes `Addcommand.execute` to execute user instruction.
+4. During the execution, `Addcommand.execute` will parse through user input to obtain the `EXPENDITURE`, `CATEGORY`,
    `DESCRIPTION`, `AMOUNT` and `TIME` fields.
 5. The `Addcommand` object instantiates a new `Expenditure` object with the aforementioned 5 fields and adds them 
 into the `ExpenditureList`.
