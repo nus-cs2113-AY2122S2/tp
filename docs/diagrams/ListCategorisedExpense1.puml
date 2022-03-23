@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+show members
+hide empty members
+
+title After command "listcat /c 1"
+
+package " " {
+    class temp as "__tempList:MoneyList(temp)__"
+    class Fam as "__family:Family__"
+    class MyGen as "__myGen:PersonList__"
+    class Parent as "__parent:PersonList__"
+    class Alice as "__Alice:Person__"
+    class Bob as "__Bob:Person__"
+    class List as "__ExpenditureList:MoneyList(temp)__"
+    class List2 as "__ExpenditureList:MoneyList(temp)__"
+    class Exp0 as "__Expenditure0:Money(temp)__" #LIGHTGREEN {
+        description = "Lunch"
+        category = 1
+    }
+    class Exp1 as "__Expenditure1:Money(temp)__" #LIGHTGREEN {
+        description = "Dinner"
+        category = 1
+    }
+    class Exp2 as "__Expenditure2:Money(temp)__" #LIGHTGREEN {
+        description = "Movies"
+        category = 5
+    }
+    class Exp3 as "__Expenditure3:Money(temp)__" #LIGHTGREEN {
+        description = "Electric Bills"
+        category = 2
+    }
+
+}
+
+Fam -right-> Parent
+Fam -down-> MyGen
+
+Parent -right-> Bob
+MyGen -> Alice
+
+Alice -> List
+Bob -> List2
+
+Exp0 -up[#GREEN]-> List
+Exp1 -up[#GREEN]-> List
+Exp2 -up[#GREEN]-> List
+Exp3 -up[#GREEN]-> List
+
+Exp0 -right[HIDDEN]> Exp1
+Exp1 -right[HIDDEN]> Exp2
+Exp2 -right[HIDDEN]> Exp3
+
+@end

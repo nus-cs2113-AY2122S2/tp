@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+!include style.puml
+
+Package " "<<Rectangle>>{
+
+    Class Storage STORAGE_COLOR
+    Class PersonList MODEL_COLOR
+    Class Person MODEL_COLOR
+    Class Money MODEL_COLOR_T3
+    Class IncomeList MODEL_COLOR_T3
+    Class ExpenditureList MODEL_COLOR_T3
+
+}
+
+Class "<$documents>" as File UI_COLOR_T1
+Storage -right[STORAGE_COLOR].> File
+Storage -down[STORAGE_COLOR].>PersonList
+PersonList -down[MODEL_COLOR]->Person
+Person -down[MODEL_COLOR]->Money
+Money -down[MODEL_COLOR]->IncomeList
+Money -down[MODEL_COLOR]->ExpenditureList
+
+@enduml

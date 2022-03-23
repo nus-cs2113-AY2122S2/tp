@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Box
+    participant Main
+    participant ":ExitCommand" as ExitCommand
+    participant ":Storage" as Storage
+    participant ":PersonList" as PersonList
+    participant PlanITarium.txt
+end box
+
+->> Main: execute `bye`
+Main ->> ExitCommand: exit()
+ExitCommand ->> Storage: saveData(:Family)
+activate Storage
+loop for all 3 family groups
+Storage->>PersonList: getPersonList()
+activate PersonList
+PersonList-->>Storage: :PersonList
+deactivate PersonList
+    loop until all items
+        Storage->>PersonList: getSaveName()
+        activate Storage
+        activate PersonList
+        PersonList-->>Storage: name:Person
+        deactivate PersonList
+        deactivate Storage
+        Storage-->>PlanITarium.txt: writeToFile()
+        Storage->>PersonList: getIncomeList()
+        activate Storage
+        activate PersonList
+        PersonList-->>Storage: :IncomeList
+        deactivate PersonList
+        deactivate Storage
+        Storage-->>PlanITarium.txt: writeToFile()
+        Storage->>PersonList: getExpenditureList()
+        activate Storage
+        activate PersonList
+        PersonList-->>Storage: :ExpenditureList
+        deactivate PersonList
+        deactivate Storage
+        Storage-->>PlanITarium.txt: writeToFile()
+    end
+end
+Storage -->> Main
+deactivate Storage
+
+
+@enduml
