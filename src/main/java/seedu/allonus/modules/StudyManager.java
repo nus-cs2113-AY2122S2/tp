@@ -177,6 +177,7 @@ public class StudyManager {
             moduleCategory = validateModuleCategory(moduleCategory);
             moduleToEdit.setCategory(moduleCategory);
         } catch (ModuleCategoryException e) {
+            printMessage("Category of the module was not of the correct form");
         }
     }
 
@@ -260,9 +261,9 @@ public class StudyManager {
 
     private void listMatches(ArrayList<Module> matches) {
         System.out.println("    Here are the matching tasks in your list:");
-        int i=1;
-        for(Module m: matches) {
-            System.out.println((i++ ) +": " + m);
+        int i = 1;
+        for (Module m: matches) {
+            System.out.println((i++) + ": " + m);
         }
     }
 
