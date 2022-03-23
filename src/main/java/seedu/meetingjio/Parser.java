@@ -30,7 +30,7 @@ public class Parser {
     private static final int STARTTIME_INDEX = 3;
     private static final int ENDTIME_INDEX = 4;
     private static final int MODE_INDEX = 5;
-    private static final String[] HEADINGS = {"n/", "l/", "d/", "st/", "et/", "m/"};
+    private static final String[] HEADINGS = {"n/", "t/", "d/", "st/", "et/", "m/"};
 
     public Parser(String input) {
         this.command = getCommandFromInput(input);
@@ -194,23 +194,28 @@ public class Parser {
 
     private String[] splitArguments() {
         String[] eventDescription = new String[6];
+        String[] splitArguments = arguments.split(" ");
         int index = -1;
-        for (String str : arguments.split(" ")) {
-            if (checkHeadings(str) == -1) {
+        for (String str : splitArguments) {
+            if (containHeadings(str) == -1) {
                 eventDescription[index] += " " + str;
                 eventDescription[index] = eventDescription[index].trim();
             } else {
-                index = checkHeadings(str);
+                index = containHeadings(str);
                 eventDescription[index] = str.substring(str.indexOf("/") + 1);
             }
         }
         return eventDescription;
     }
 
-    private int checkHeadings(String str) {
+    private int containHeadings(String str) {
         for (int i = 0; i < HEADINGS.length; i++) {
             if (str.contains(HEADINGS[i])) {
-                return i;
+                int headingLength = HEADINGS[i].length();
+                String subStr = str.substring(0, headingLength);
+                if (subStr.equals(HEADINGS[i])) {
+                    return i;
+                }
             }
             assert !str.contains(HEADINGS[i]) :
                     String.format("String contains %s", HEADINGS[i]);
