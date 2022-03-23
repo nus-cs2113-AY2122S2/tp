@@ -10,9 +10,9 @@ import seedu.splitlah.data.Manager;
 public class HelpCommand extends Command {
 
     /**
-     * Prints a help message and displays all available commands.
+     * Runs the command to print help messages and displays all available commands.
      *
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {

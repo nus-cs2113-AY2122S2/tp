@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Represents a manager that manages the UI and Profile objects of the application.
+ * Represents a manager that manages the UI, Profile and Storage objects of the application.
  */
 public class Manager {
     
@@ -22,7 +22,7 @@ public class Manager {
     public static Logger logger = Logger.getLogger(LOGGER_FILE_NAME);
 
     /**
-     * Constructor to create a Manager object.
+     * Initializes a Manager object.
      * Should only be called in Junit test files.
      */
     public Manager() {
@@ -31,7 +31,7 @@ public class Manager {
     }
 
     /**
-     * Constructor to create a Manager object with Storage enabled.
+     * Initializes a SessionDeleteCommand object with Storage enabled.
      *
      * @param isUsingStorage A boolean to enable usage of Storage object.
      */
@@ -99,7 +99,7 @@ public class Manager {
     }
 
     /**
-     * Returns a Profile object that stores user created sessions.
+     * Returns a Profile object that stores user created sessions and groups.
      *
      * @return A Profile object.
      */

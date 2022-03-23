@@ -2,16 +2,11 @@ package seedu.splitlah.command;
 
 import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
-import seedu.splitlah.data.Person;
 import seedu.splitlah.data.PersonList;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Represents a command that creates a Group object from user input and stores it in the Profile object.
@@ -37,10 +32,10 @@ public class GroupCreateCommand extends Command {
     private String[] personNames;
 
     /**
-     * Initializes a GroupCreateCommand.
+     * Initializes a GroupCreateCommand object.
      *
      * @param groupName   A String object that represents the group name.
-     * @param personNames A String object array that represents the involved persons for the group.
+     * @param personNames An array of String objects that represents the involved persons for the group.
      */
     public GroupCreateCommand(String groupName, String[] personNames) {
         this.groupName = groupName;
@@ -71,7 +66,7 @@ public class GroupCreateCommand extends Command {
      * If check fails, no group will be created and prints error message.
      * Else a group is created and prints success message.
      *
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {
