@@ -110,7 +110,7 @@ public class StringConstants {
     public static final String EDIT_HELP = "Edits a module or task as indicated by command input.\n"
             + "Format to edit a module: edit /m MODULE_CODE -d \"MODULE_DESCRIPTION\"\n"
             + "Format to edit a task:   edit /t TASK_INDEX"
-            + " (-n \"TASK_NAME\" or -d \"TASK_DESCRIPTION\" or -t \"ESTIMATED_WORKING_TIME\") [-m MODULE_CODE]";
+            + " (-n \"TASK_NAME\" | -d \"TASK_DESCRIPTION\" | -t \"ESTIMATED_WORKING_TIME\") [-m MODULE_CODE]";
     public static final String GRADE_HELP = "Adds/Changes the grade for the specified module.\n"
             + "Format to add/change a grade: grade /m MODULE_CODE /g MODULE_GRADE";
     public static final String LIST_HELP = "Displays a list of all tasks, grouped by module code.\n"
@@ -138,7 +138,7 @@ public class StringConstants {
     public static final String OPTION_HELP = "View and edit program configuration options.\n"
             + "Format to view all available configs: option\n"
             + "Format to view details for a specific config option: option CONFIG_NAME\n\n"
-            + "Format to set a config option: option CONFIG_NAME=NEW_VALUE";
+            + "Format to set a config option: option CONFIG_NAME = NEW_VALUE";
 
     /**
      * For SaveCommand.

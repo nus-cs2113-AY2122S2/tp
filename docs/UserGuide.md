@@ -35,6 +35,35 @@ Displays help for the indicated command. If no command word is supplied, a gener
 
 Format: `help [COMMAND_WORD]`
 
+### Accessing options: `option`
+
+Allows you to view and change user preferences. This command has three different formats, each of which serve a different purpose.
+
+- **Viewing available configuration options**
+  
+  Lists the names and current statuses of all available configuration options.<br><br>
+  Format: `option`<br><br>
+- **Viewing details of a specific configuration option**
+
+  Displays a short description of the supplied configuration option as well as its corresponding accepted values.<br><br>
+  Format: `option CONFIG_NAME`<br><br>
+  Example: `option SHOW_COMPLETED_TASKS`<br><br>
+- **Editing a specific configuration option**
+
+  Sets the value of the specified configuration option to the one you specify (if it is valid).<br><br>
+  Format: `option CONFIG_NAME = NEW_VALUE`<br><br>
+  Example: `option SHOW_COMPLETED_TASKS = false`
+  > 📔 <span style="color:#00bb00">**NOTE:**</span>
+  >
+  > The whitespace around the `=` is optional. In other words, `option SHOW_COMPLETED_TASKS=false` is also a valid command input.
+
+The following configuration options currently exist:
+
+| Config name          | Description                                                                                                 | Accepted values                                                                |
+|----------------------|-------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| SHOW_COMPLETED_TASKS | Determines whether tasks marked as completed are shown by the `list` command.<br>**Default value: `false`** | `true`: **All** tasks are shown.<br>`false`: Only uncompleted tasks are shown. |  
+
+
 ### Adding a task/module: `add`
 
 Adds an object as indicated by the command argument.
@@ -123,9 +152,13 @@ Example: `tag add 1 -m CS2113T "project"`
 
 ### Listing all tasks/modules: `list`
 
-Displays a list of all tasks, grouped by module code. General tasks are displayed separately.
+Displays a list of tasks, grouped by module code. General tasks are displayed separately.
 
 If a tag name is provided, only tasks with the associated tag will be shown.
+
+> 📔 <span style="color:#00bb00">**NOTE:**</span>
+> 
+> If the `SHOW_COMPLETED_TASKS` option is set to `false`, any tasks marked as completed will be omitted from the displayed list. The number of hidden tasks is given at the bottom of each group.
 
 Format: `list ["TAG_NAME"]`
 
