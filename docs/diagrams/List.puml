@@ -1,0 +1,8 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+alt [no goods]
+else [goods exists]
+UserInterface -> Good : listGoods()
+
+@enduml

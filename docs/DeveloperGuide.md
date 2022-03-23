@@ -5,8 +5,16 @@
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Design
-
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Good Class
+####Description
+The goods class keeps track of the various inventory that will be input into the system through the commands class.
+The diagram below shows the model component of the good class.
+![Good Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Good.puml)
+
+The Goods class allows for the creation of good objects which has the following attributes: id, name, quantity and 
+description. Each attribute can be obtained using public get methods, and the attribute quantity can be set using the public set method.
+
 
 ## Implementation
 ### Regex Class
@@ -52,6 +60,13 @@ The above sequence diagram shows the operation of how the add goods method will 
 6. The addGood() method will then add the Good to the Collections storing the Good Objects currently in the WareHouse
 
 For more examples of how a user will add a good, refer to the [UserGuide](/UserGuide.md)
+
+### List Goods Method
+#### Description
+The list method belongs to the Command Class. It is used to display the list of existing goods in the warehouse to the
+user.
+
+![List sequence Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/List.puml)
 
 
 ## Product scope
