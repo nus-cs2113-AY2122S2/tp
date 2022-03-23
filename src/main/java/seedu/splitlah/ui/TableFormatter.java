@@ -96,6 +96,7 @@ public class TableFormatter {
 
     /**
      * Calculates total table width from a given int array containing column widths.
+     *
      * @param columnWidths
      * @return The total width of the table.
      */
