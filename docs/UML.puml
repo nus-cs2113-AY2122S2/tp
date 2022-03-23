@@ -1,0 +1,65 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+
+class Duke {
+
+}
+
+class MainController {
+
+}
+Controller <|-- MainController
+DishController "1" <-- MainController: have <
+
+abstract class Controller {
+
+}
+
+
+class Dish {
+    -name: String
+    -price: double
+    +Dish(String, double)
+    +getName(): String
+    +setName(): void
+    +getPrice(): double
+    +setPrice(double): void
+    +toString(): String
+    -isValidName(String): boolean
+    -toTitleCase(String): String
+}
+
+class DishManager {
+    -dishes: ArrayList<Dish>
+    +DishManager()
+    +addDish(Dish): void
+    +deleteDish(int): void
+    +printDishes(): void
+    +setName(int, String): void
+    +setPrice(int, double): void
+    +getNumOfDishes(): int
+    -throwIfIndexNotValid(int): void
+}
+Controller <|-- DishController
+
+
+class DishController {
+    -CHOICES: String[]
+    -dishManager: DishManager
+    +DishController()
+    -addDish(): void
+    -changeName(): void
+    -changePrice(): void
+    -deleteDish(): void
+    -listDishes(): void
+    #optionSwicher(int): boolean
+    +takeControl(): void
+}
+
+
+Dish "0..*" <-- DishManager: manages <
+
+DishManager "1" <-- DishController: have <
+
+@enduml
