@@ -3,12 +3,15 @@ package seedu.splitlah.data;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Represents an activity that was done during a group outing session.
+ *
+ * @author Ivan
  */
-public class Activity {
+public class Activity implements Serializable {
 
     private int activityId;
     private String activityName;

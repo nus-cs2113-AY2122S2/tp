@@ -6,6 +6,7 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 
 
 /**
@@ -17,7 +18,12 @@ public class ActivityViewCommand extends Command {
 
     public static final String COMMAND_TEXT = "activity /view";
 
-    private static final String COMMAND_FORMAT = "Syntax: activity /view /sid <SESSIONID> /aid <ACTIVITYID>";
+    public static final String COMMAND_FORMAT = "Syntax: activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]";
+
+    public static final String[] COMMAND_DELIMITERS = { 
+        ParserUtils.SESSION_ID_DELIMITER,
+        ParserUtils.ACTIVITY_ID_DELIMITER
+    };
 
     private int sessionId;
     private int activityId;

@@ -1,14 +1,17 @@
 package seedu.splitlah.data;
 
-import java.util.Objects;
+import seedu.splitlah.ui.Message;
+
+import java.io.Serializable;
+import java.util.logging.Level;
 
 /**
  * Represents the costs borne by a person for an activity.
  *
  * @author Saurav
  */
-public class ActivityCost {
-    
+public class ActivityCost implements Serializable {
+
     private int activityId;
     private double costPaid;
     private double costOwed;
@@ -22,6 +25,7 @@ public class ActivityCost {
      * @param costOwed   A double that represents the cost owed by a Person object.
      */
     public ActivityCost(int activityId, double costPaid, double costOwed) {
+        Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_ALL_PARAMS);
         this.activityId = activityId;
         this.costPaid = costPaid;
         this.costOwed = costOwed;
@@ -35,6 +39,7 @@ public class ActivityCost {
      */
     public ActivityCost(int activityId) {
         this(activityId, 0, 0);
+        Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_ACTIVITYID);
     }
 
     /**
@@ -44,6 +49,7 @@ public class ActivityCost {
         this.activityId = -1;
         this.costPaid = 0;
         this.costOwed = 0;
+        Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_DEFAULT_PARAMS);
     }
 
     public int getActivityId() {

@@ -12,11 +12,16 @@ import seedu.splitlah.command.SessionListCommand;
 import seedu.splitlah.command.SessionSummaryCommand;
 import seedu.splitlah.command.ExitCommand;
 import seedu.splitlah.command.InvalidCommand;
+import seedu.splitlah.command.GroupCreateCommand;
+import seedu.splitlah.command.GroupDeleteCommand;
+import seedu.splitlah.command.GroupListCommand;
+import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.parser.commandparser.HelpCommandParser;
+import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -25,261 +30,13 @@ import java.time.format.DateTimeParseException;
  * @author Warren
  */
 public class Parser {
-    
-    // DELIMITERS
-    private static final String NAME_DELIMITER = "/n";
-    private static final String PERSON_LIST_DELIMITER = "/pl";
-    private static final String INVOLVED_DELIMITER = "/i";
-    private static final String PAYER_DELIMITER = "/p";
-    private static final String SESSION_ID_DELIMITER = "/sid";
-    private static final String ACTIVITY_ID_DELIMITER = "/aid";
-    private static final String GROUP_ID_DELIMITER = "/gid";
-    private static final String DATE_DELIMITER = "/d";
-    private static final String TOTAL_COST_DELIMITER = "/c";
-    private static final String COST_LIST_DELIMITER = "/cl";
-    private static final String GST_DELIMITER = "/gst";
-    private static final String SERVICE_CHARGE_DELIMITER = "/sc";
 
-    // MISC CONSTANTS
-    private static final String DELIMITER_INDICATOR = "/";
-    private static final String NEXT_DELIMITER_INDICATOR = " /";
-    private static final String REGEX_WHITESPACES_DELIMITER = "\\s+";
+    // KEY CONSTANTS
     private static final String LOCALDATE_TODAY_INDICATOR = "today";
-    private static final int INVALID_INDEX_INDICATOR = -1;
     private static final int COMMAND_WITH_ARGS_TOKEN_COUNT = 3;
     private static final int DELIMITERED_COMMAND_MIN_TOKEN_COUNT = 2;
-    private static final int MINIMUM_SURCHARGE_PERCENT = 0;
-    private static final int MAXIMUM_SURCHARGE_PERCENT = 100;
-    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
-    // ERROR REPORTING FUNCTIONS
-    /**
-     * Returns a String object containing an error message for a specified delimiter that is missing.
-     * 
-     * @param delimiter A String object that represents a demarcation of a specific argument in the command. 
-     * @return A String object representing an error message for missing a specified delimiter in the input command.
-     */
-    private static String getMissingDelimiterErrorMessage(String delimiter) {
-        return Message.ERROR_PARSER_DELIMITER_NOT_FOUND + delimiter;
-    }
-
-    /**
-     * Returns a String object containing an error message for a missing argument that should follow after a specified
-     * delimiter in the command input by the user.
-     *
-     * @param delimiter A String object that represents a demarcation of a specific argument in the command.
-     * @return A String object representing an error message for missing an argument in the input command.
-     */
-    private static String getMissingArgumentErrorMessage(String delimiter) {
-        return Message.ERROR_PARSER_MISSING_ARGUMENT + delimiter;
-    }
-
-    /**
-     * Returns a String object containing an error message when the parser is not able to read an input String object
-     * as an integer.
-     *
-     * @param delimiter A String object that represents a demarcation of a specific argument in the command.
-     * @return A String object representing an error message for a non-integer input.
-     */
-    private static String getNonIntegerErrorMessage(String delimiter) {
-        return Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + delimiter;
-    }
-
-    /**
-     * Returns a String object containing an error message when the parser is not able to read an input String object
-     * as a double.
-     *
-     * @param delimiter A String object that represents a demarcation of a specific argument in the command.
-     * @return A String object representing an error message for a non-double input.
-     */
-    private static String getNonMonetaryErrorMessage(String delimiter) {
-        return Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + delimiter;
-    }
-
-    /**
-     * Returns a String object containing an error message when the parser is not able to parse an input String object
-     * as a valid Goods and Services Tax (GST) in percents.
-     *
-     * @return A String object representing an error message for an invalid GST input.
-     */
-    private static String getInvalidGstErrorMessage() {
-        return Message.ERROR_PARSER_INVALID_GST_SURCHARGE + GST_DELIMITER;
-    }
-
-    /**
-     * Returns a String object containing an error message when the parser is not able to parse an input String object
-     * as a valid service charge in percents.
-     *
-     * @return A String object representing an error message for an invalid service charge input.
-     */
-    private static String getInvalidServiceChargeErrorMessage() {
-        return Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + SERVICE_CHARGE_DELIMITER;
-    }
-
-    // SUPPORTING FUNCTIONS
-
-    /**
-     * Returns a String object that represents an argument in the command that follows a specified delimiter.
-     * 
-     * @param commandArgs A String object containing the arguments portion of the entire command input from the user. 
-     * @param delimiter   A String object that represents a demarcation of a specific argument in the command.
-     * @return A String object that represents an argument demarcated by the specified delimiter in the command.
-     * @throws InvalidFormatException If the specified delimiter is not found in the arguments of the command, or
-     *                                if a specified delimiter is found but no argument follows the delimiter.
-     */
-    private static String getArgumentFromDelimiter(String commandArgs, String delimiter) throws InvalidFormatException {
-        int delimiterIndex = commandArgs.indexOf(delimiter);
-        if (delimiterIndex == INVALID_INDEX_INDICATOR) {
-            throw new InvalidFormatException(getMissingDelimiterErrorMessage(delimiter));
-        }
-        int argumentIndex = delimiterIndex + delimiter.length();
-        int endingIndex = commandArgs.indexOf(NEXT_DELIMITER_INDICATOR, argumentIndex);
-        String output;
-        if (endingIndex == INVALID_INDEX_INDICATOR) {
-            output = commandArgs.substring(argumentIndex).trim();
-        } else {
-            output = commandArgs.substring(argumentIndex, endingIndex).trim();
-        }
-
-        if (output.isEmpty()) {
-            throw new InvalidFormatException(getMissingArgumentErrorMessage(delimiter));
-        }
-        return output;
-    }
-
-    /**
-     * Returns an integer represented by the provided input String object.
-     * 
-     * @param input     A String object that contains numeric characters only and represents an integer.
-     * @param delimiter A String object that represents a demarcation of a specific argument in the command.
-     * @return An integer represented by the input String object.
-     * @throws InvalidFormatException If the provided input String object contains non-numeric characters and cannot
-     *                                be parsed as an integer.
-     */
-    private static int parseIntFromString(String input, String delimiter) throws InvalidFormatException {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException exception) {
-            throw new InvalidFormatException(getNonIntegerErrorMessage(delimiter));
-        }
-    }
-
-    /**
-     * Returns an integer representing a unique identifier number, represented by the provided input String object.
-     * 
-     * @param input     A String object that contains numeric characters only and represents a unique identifier number.
-     * @param delimiter A String object that represents a demarcation of a specific argument in the command.
-     * @return An integer representing a unique identifier number.
-     * @throws InvalidFormatException If the provided input String object contains non-numeric characters and cannot be
-     *                                parsed as an integer, or
-     *                                if the integer parsed from the input String object is not a positive integer.
-     */
-    private static int parseIdFromString(String input, String delimiter) throws InvalidFormatException {
-        int idVal = parseIntFromString(input, delimiter);
-        if (idVal <= 0) {
-            throw new InvalidFormatException(Message.ERROR_PARSER_ID_VALUE_NOT_POSITIVE);
-        }
-        return idVal;
-    }
-
-    /**
-     * Returns a double representing a cost value, represented by the provided input String object.
-     *
-     * @param input     A String object that contains numeric characters or a single decimal point character,
-     *                  representing a cost value.
-     * @param delimiter A String object that represents a demarcation of a specific argument in the command.
-     * @return An double representing a cost value.
-     * @throws InvalidFormatException If the provided input String object contains characters other than numeric
-     *                                characters or a single decimal point character, and cannot be parsed as a double.
-     */
-    private static double parseCostFromString(String input, String delimiter) throws InvalidFormatException {
-        try {
-            return Double.parseDouble(input);
-        } catch (NumberFormatException exception) {
-            throw new InvalidFormatException(getNonMonetaryErrorMessage(delimiter));
-        }
-    }
-
-    /**
-     * Checks the provided String object which represents the command arguments for the existence of a specified
-     * delimiter.
-     * 
-     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
-     * @param delimiter   A String object that represents a demarcation of a specific argument in the command.
-     * @return true if the String object representing the command arguments contains the specified delimiter,
-     *         false otherwise.
-     */
-    private static boolean hasDelimiter(String commandArgs, String delimiter) {
-        int delimiterIndex = commandArgs.indexOf(delimiter);
-        return delimiterIndex != INVALID_INDEX_INDICATOR;
-    }
-
-    /**
-     * Checks if the provided String object, which represents a single token in the command arguments, is a delimiter
-     * that is used in any of the commands available in SplitLah.
-     * 
-     * @param token A String object representing a sequence of characters that are isolated by whitespaces in the
-     *              command arguments.
-     * @return true if the provided String object is a delimiter used in any of the commands available in SplitLah,
-     *         false otherwise.
-     */
-    private static boolean isValidDelimiter(String token) {
-        if (token == null) {
-            return false;
-        }
-        
-        switch (token) {
-        case NAME_DELIMITER:
-            // Fallthrough
-        case PERSON_LIST_DELIMITER:
-            // Fallthrough
-        case INVOLVED_DELIMITER:
-            // Fallthrough
-        case PAYER_DELIMITER:
-            // Fallthrough
-        case SESSION_ID_DELIMITER:
-            // Fallthrough
-        case ACTIVITY_ID_DELIMITER:
-            // Fallthrough
-        case GROUP_ID_DELIMITER:
-            // Fallthrough
-        case DATE_DELIMITER:
-            // Fallthrough
-        case TOTAL_COST_DELIMITER:
-            // Fallthrough
-        case COST_LIST_DELIMITER:
-            // Fallthrough
-        case GST_DELIMITER:
-            // Fallthrough
-        case SERVICE_CHARGE_DELIMITER:
-            return true;
-        default:
-            return false;
-        }
-    }
-
-    /**
-     * Checks whether the provided String object which represents the command arguments contains any invalid
-     * delimiters.
-     * 
-     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
-     * @return true if there are tokens in the command arguments that contains a forward slash character ('/') but is
-     *         not a valid delimiter used in any commands in SplitLah,
-     *         false otherwise.
-     */
-    private static boolean containsInvalidDelimiters(String commandArgs) {
-        if (commandArgs == null) {
-            return false;
-        }
-        
-        String[] argumentTokens = commandArgs.split(REGEX_WHITESPACES_DELIMITER);
-        for (String token : argumentTokens) {
-            if (token.contains(DELIMITER_INDICATOR) && !isValidDelimiter(token)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    static final double MINIMUM_SURCHARGE_PERCENT = 0;
+    static final double MAXIMUM_SURCHARGE_PERCENT = 100;
     
     // MAIN PUBLIC PARSING FUNCTIONS
     /**
@@ -292,7 +49,7 @@ public class Parser {
      *                                if no arguments representing a name were provided after the Name delimiter.
      */
     public static String parseName(String commandArgs) throws InvalidFormatException {
-        return getArgumentFromDelimiter(commandArgs, NAME_DELIMITER);
+        return ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.NAME_DELIMITER);
     }
 
     /**
@@ -306,8 +63,8 @@ public class Parser {
      *                                Person list delimiter.
      */
     public static String[] parsePersonList(String commandArgs) throws InvalidFormatException {
-        String argument = getArgumentFromDelimiter(commandArgs, PERSON_LIST_DELIMITER);
-        return argument.split(REGEX_WHITESPACES_DELIMITER);
+        String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.PERSON_LIST_DELIMITER);
+        return argument.split(ParserUtils.REGEX_WHITESPACES_DELIMITER);
     }
 
     /**
@@ -321,8 +78,8 @@ public class Parser {
      *                                Involved delimiter.
      */
     public static String[] parseInvolved(String commandArgs) throws InvalidFormatException {
-        String argument = getArgumentFromDelimiter(commandArgs, INVOLVED_DELIMITER);
-        return argument.split(REGEX_WHITESPACES_DELIMITER);
+        String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.INVOLVED_DELIMITER);
+        return argument.split(ParserUtils.REGEX_WHITESPACES_DELIMITER);
     }
 
     /**
@@ -331,11 +88,16 @@ public class Parser {
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A String object that represents a name of a payer.
-     * @throws InvalidFormatException If the Payer delimiter is not found in the command arguments, or
-     *                                if no arguments representing a name were provided after the Payer delimiter.
+     * @throws InvalidFormatException If the Payer delimiter is not found in the command arguments,
+     *                                if no arguments representing a name were provided after the Payer delimiter, or
+     *                                if the argument contains more than a single name.
      */
     public static String parsePayer(String commandArgs) throws InvalidFormatException {
-        return getArgumentFromDelimiter(commandArgs, PAYER_DELIMITER);
+        String payer = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.PAYER_DELIMITER);
+        if (payer.indexOf(' ') != ParserUtils.INVALID_INDEX_INDICATOR) {
+            throw new InvalidFormatException(Message.ERROR_PARSER_MORE_THAN_ONE_PAYER);
+        }
+        return payer;
     }
 
     /**
@@ -344,13 +106,15 @@ public class Parser {
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents a session unique identifier.
-     * @throws InvalidFormatException If the Session ID delimiter is not found in the command arguments, or
+     * @throws InvalidFormatException If the Session ID delimiter is not found in the command arguments,
      *                                if no arguments representing a session unique identifier were provided after the 
-     *                                Session ID delimiter.
+     *                                Session ID delimiter,
+     *                                if the parsed argument cannot be parsed as an integer, or
+     *                                if the integer parsed from the argument is not a positive integer.
      */
     public static int parseSessionId(String commandArgs) throws InvalidFormatException {
-        String argument = getArgumentFromDelimiter(commandArgs, SESSION_ID_DELIMITER);
-        return parseIdFromString(argument, SESSION_ID_DELIMITER);
+        String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.SESSION_ID_DELIMITER);
+        return ParserUtils.parseIdFromString(argument, ParserUtils.SESSION_ID_DELIMITER);
     }
 
     /**
@@ -359,13 +123,32 @@ public class Parser {
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents an activity unique identifier.
-     * @throws InvalidFormatException If the Activity ID delimiter is not found in the command arguments, or
+     * @throws InvalidFormatException If the Activity ID delimiter is not found in the command arguments,
      *                                if no arguments representing an activity unique identifier were provided after 
-     *                                the Activity ID delimiter.
+     *                                the Activity ID delimiter,
+     *                                if the parsed argument cannot be parsed as an integer, or
+     *                                if the integer parsed from the argument is not a positive integer.
      */
     public static int parseActivityId(String commandArgs) throws InvalidFormatException {
-        String argument = getArgumentFromDelimiter(commandArgs, ACTIVITY_ID_DELIMITER);
-        return parseIdFromString(argument, ACTIVITY_ID_DELIMITER);
+        String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.ACTIVITY_ID_DELIMITER);
+        return ParserUtils.parseIdFromString(argument, ParserUtils.ACTIVITY_ID_DELIMITER);
+    }
+
+    /**
+     * Returns an integer that represents a group unique identifier, given the command arguments from user input, 
+     * delimited by the Group ID delimiter.
+     *
+     * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
+     * @return An integer that represents a group unique identifier.
+     * @throws InvalidFormatException If the Group ID delimiter is not found in the command arguments,
+     *                                if no arguments representing a group unique identifier were provided after 
+     *                                the Group ID delimiter,
+     *                                if the parsed argument cannot be parsed as an integer, or
+     *                                if the integer parsed from the argument is not a positive integer.
+     */
+    public static int parseGroupId(String commandArgs) throws InvalidFormatException {
+        String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.GROUP_ID_DELIMITER);
+        return ParserUtils.parseIdFromString(argument, ParserUtils.GROUP_ID_DELIMITER);
     }
 
     /**
@@ -382,17 +165,17 @@ public class Parser {
      *                                'DD-MM-YYYY'.
      */
     public static LocalDate parseLocalDate(String commandArgs) throws InvalidFormatException {
-        if (!hasDelimiter(commandArgs, DATE_DELIMITER)) {
-            throw new InvalidFormatException(getMissingDelimiterErrorMessage(DATE_DELIMITER));
+        if (!ParserUtils.hasDelimiter(commandArgs, ParserUtils.DATE_DELIMITER)) {
+            throw new InvalidFormatException(ParserErrors.getMissingDelimiterErrorMessage(ParserUtils.DATE_DELIMITER));
         }
 
-        String argument = getArgumentFromDelimiter(commandArgs, DATE_DELIMITER);
+        String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.DATE_DELIMITER);
         if (argument.equalsIgnoreCase(LOCALDATE_TODAY_INDICATOR)) {
             return LocalDate.now();
         }
         
         try {
-            return LocalDate.parse(argument, DATE_FORMAT);
+            return LocalDate.parse(argument, ParserUtils.DATE_FORMAT);
         } catch (DateTimeParseException exception) {
             throw new InvalidFormatException(Message.ERROR_PARSER_INVALID_DATE_FORMAT);
         }
@@ -406,12 +189,15 @@ public class Parser {
      * @return A double that represents a single total cost.
      * @throws InvalidFormatException If the Total cost delimiter is not found in the command arguments,
      *                                if no arguments representing a total cost were provided after the 
-     *                                Total cost delimiter, or
-     *                                if the arguments cannot be parsed as a double.
+     *                                Total cost delimiter,
+     *                                if the arguments cannot be parsed as a double,
+     *                                if the parsed cost value is not positive,
+     *                                if the parsed cost value has more than 2 decimal points, or
+     *                                if the parsed cost value has more than 12 digits before the decimal point.
      */
     public static double parseTotalCost(String commandArgs) throws InvalidFormatException {
-        String argument = getArgumentFromDelimiter(commandArgs, TOTAL_COST_DELIMITER);
-        return parseCostFromString(argument, TOTAL_COST_DELIMITER);
+        String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.TOTAL_COST_DELIMITER);
+        return ParserUtils.parseCostFromString(argument, ParserUtils.TOTAL_COST_DELIMITER);
     }
 
     /**
@@ -422,71 +208,75 @@ public class Parser {
      * @return A double array object that represents a list of cost values.
      * @throws InvalidFormatException If the Cost list delimiter is not found in the command arguments,
      *                                if no arguments representing a list of cost values were provided after the 
-     *                                Cost list delimiter, or
-     *                                if any token in the argument cannot be parsed as a double.
+     *                                Cost list delimiter,
+     *                                if any token in the argument cannot be parsed as a double, or
+     *                                if any cost value parsed is not positive,
+     *                                if any parsed cost value has more than 2 decimal points, or
+     *                                if any parsed cost value has more than 12 digits before the decimal point.
      */
     public static double[] parseCostList(String commandArgs) throws InvalidFormatException {
-        String argument = getArgumentFromDelimiter(commandArgs, COST_LIST_DELIMITER);
-        String[] costStrings = argument.split(REGEX_WHITESPACES_DELIMITER);
+        String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.COST_LIST_DELIMITER);
+        String[] costStrings = argument.split(ParserUtils.REGEX_WHITESPACES_DELIMITER);
         double[] costs = new double[costStrings.length];
         for (int i = 0; i < costStrings.length; i++) {
-            costs[i] = parseCostFromString(costStrings[i], COST_LIST_DELIMITER);
+            costs[i] = ParserUtils.parseCostFromString(costStrings[i], ParserUtils.COST_LIST_DELIMITER);
         }
         return costs;
     }
 
     /**
-     * Returns an integer that represents the GST charge in percents, given the command arguments from user input, 
+     * Returns a double that represents the GST charge in percents, given the command arguments from user input, 
      * delimited by the GST delimiter.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
-     * @return An integer that represents a GST charge in percents.
-     * @throws InvalidFormatException If the GST delimiter is not found in the command arguments,
-     *                                if no arguments representing a GST charge were provided after the 
+     * @return A double that represents a GST charge in percents.
+     * @throws InvalidFormatException If no arguments representing a GST charge were provided after the 
      *                                GST delimiter,
-     *                                if the argument cannot be parsed as an integer, or
-     *                                if the parsed GST percentage is not in [0, 100].
+     *                                if the argument cannot be parsed as a double,
+     *                                if the parsed percentage has more than 2 decimal points,
+     *                                if the parsed percentage has more than 3 digits before the decimal point, or
+     *                                if the parsed percentage is not in [0, 100].
      */
-    public static int parseGst(String commandArgs) throws InvalidFormatException {
-        if (!hasDelimiter(commandArgs, GST_DELIMITER)) {
+    public static double parseGst(String commandArgs) throws InvalidFormatException {
+        if (!ParserUtils.hasDelimiter(commandArgs, ParserUtils.GST_DELIMITER)) {
             return 0;
         }
 
-        String argument = getArgumentFromDelimiter(commandArgs, GST_DELIMITER);
-        int gst = parseIntFromString(argument, GST_DELIMITER);
+        String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.GST_DELIMITER);
+        double gst = ParserUtils.parsePercentageFromString(argument, ParserUtils.GST_DELIMITER);
         if (gst < MINIMUM_SURCHARGE_PERCENT || gst > MAXIMUM_SURCHARGE_PERCENT) {
-            throw new InvalidFormatException(getInvalidGstErrorMessage());
+            throw new InvalidFormatException(ParserErrors.getInvalidGstErrorMessage());
         }
         return gst;
     }
 
     /**
-     * Returns an integer that represents the service charge in percents, given the command arguments from user input, 
+     * Returns a double that represents the service charge in percents, given the command arguments from user input, 
      * delimited by the Service charge delimiter.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
-     * @return An integer that represents a service charge in percents.
-     * @throws InvalidFormatException If the Service charge delimiter is not found in the command arguments,
-     *                                if no arguments representing a service charge were provided after the 
+     * @return A double that represents a service charge in percents.
+     * @throws InvalidFormatException If no arguments representing a service charge were provided after the 
      *                                Service charge delimiter,
-     *                                if the argument cannot be parsed as an integer, or
-     *                                if the parsed service charge percentage is not in [0, 100].
+     *                                if the argument cannot be parsed as a double,
+     *                                if the parsed percentage has more than 2 decimal points,
+     *                                if the parsed percentage has more than 3 digits before the decimal point, or
+     *                                if the parsed percentage is not in [0, 100].
      */
-    public static int parseServiceCharge(String commandArgs) throws InvalidFormatException {
-        if (!hasDelimiter(commandArgs, SERVICE_CHARGE_DELIMITER)) {
+    public static double parseServiceCharge(String commandArgs) throws InvalidFormatException {
+        if (!ParserUtils.hasDelimiter(commandArgs, ParserUtils.SERVICE_CHARGE_DELIMITER)) {
             return 0;
         }
 
-        String argument = getArgumentFromDelimiter(commandArgs, SERVICE_CHARGE_DELIMITER);
-        int serviceCharge = parseIntFromString(argument, SERVICE_CHARGE_DELIMITER);
+        String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.SERVICE_CHARGE_DELIMITER);
+        double serviceCharge = ParserUtils.parsePercentageFromString(argument, ParserUtils.SERVICE_CHARGE_DELIMITER);
         if (serviceCharge < MINIMUM_SURCHARGE_PERCENT || serviceCharge > MAXIMUM_SURCHARGE_PERCENT) {
-            throw new InvalidFormatException(getInvalidServiceChargeErrorMessage());
+            throw new InvalidFormatException(ParserErrors.getInvalidServiceChargeErrorMessage());
         }
         return serviceCharge;
     }
     
     // COMMAND PARSING METHODS
-
     /**
      * Returns a String object containing the arguments portion of the entire command input from the user.<br>
      * E.g. Returns "/n Lunch /d 11-03-2022 /pl Warren Ivan Roy" where
@@ -497,7 +287,8 @@ public class Parser {
      *         an empty String object otherwise.
      */
     public static String getRemainingArgument(String commandString) {
-        String[] commandTokens = commandString.trim().split(REGEX_WHITESPACES_DELIMITER, COMMAND_WITH_ARGS_TOKEN_COUNT);
+        String[] commandTokens =
+                commandString.trim().split(ParserUtils.REGEX_WHITESPACES_DELIMITER, COMMAND_WITH_ARGS_TOKEN_COUNT);
         if (commandTokens.length < COMMAND_WITH_ARGS_TOKEN_COUNT) {
             return "";
         }
@@ -514,11 +305,12 @@ public class Parser {
      *         null otherwise.
      */
     public static String getCommandType(String commandString) {
-        String[] commandTokens = commandString.trim().split(REGEX_WHITESPACES_DELIMITER, COMMAND_WITH_ARGS_TOKEN_COUNT);
+        String[] commandTokens =
+                commandString.trim().split(ParserUtils.REGEX_WHITESPACES_DELIMITER, COMMAND_WITH_ARGS_TOKEN_COUNT);
         
         if (commandTokens.length < DELIMITERED_COMMAND_MIN_TOKEN_COUNT) {
             return commandTokens[0];
-        } else if (!commandTokens[1].startsWith(DELIMITER_INDICATOR)) {
+        } else if (!commandTokens[1].startsWith(ParserUtils.DELIMITER_INDICATOR)) {
             return null;
         }
         return commandTokens[0] + " " + commandTokens[1];
@@ -539,35 +331,46 @@ public class Parser {
             return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
         }
         
-        if (containsInvalidDelimiters(remainingArgs)) {
-            return new InvalidCommand(Message.ERROR_PARSER_INVALID_DELIMITERS);
+        String errorMessage = ParserUtils.checkIfCommandIsValid(commandType, remainingArgs);
+        if (!errorMessage.isEmpty()) {
+            return new InvalidCommand(errorMessage);
         }
-
-        switch (commandType.toLowerCase()) {
-        case "":
-            return new InvalidCommand(Message.ERROR_PARSER_EMPTY_COMMAND);
-        case SessionCreateCommand.COMMAND_TEXT:
-            return SessionCreateCommand.prepare(remainingArgs);
-        case SessionDeleteCommand.COMMAND_TEXT:
-            return SessionDeleteCommand.prepare(remainingArgs);
-        case SessionSummaryCommand.COMMAND_TEXT:
-            return SessionSummaryCommand.prepare(remainingArgs);
-        case SessionListCommand.COMMAND_TEXT:
-            return new SessionListCommand();
-        case ActivityCreateCommand.COMMAND_TEXT:
-            return ActivityCreateCommand.prepare(remainingArgs);
-        case ActivityDeleteCommand.COMMAND_TEXT:
-            return ActivityDeleteCommand.prepare(remainingArgs);
-        case ActivityListCommand.COMMAND_TEXT:
-            return ActivityListCommand.prepare(remainingArgs);
-        case ActivityViewCommand.COMMAND_TEXT:
-            return ActivityViewCommand.prepare(remainingArgs);
-        case HelpCommand.COMMAND_TEXT:
-            return new HelpCommand();
-        case ExitCommand.COMMAND_TEXT:
-            return new ExitCommand();
-        default:
-            return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
+        
+        try {
+            switch (commandType.toLowerCase()) {
+            case SessionCreateCommand.COMMAND_TEXT:
+                return SessionCreateCommand.prepare(remainingArgs);
+            case SessionDeleteCommand.COMMAND_TEXT:
+                return SessionDeleteCommand.prepare(remainingArgs);
+            case SessionSummaryCommandParser.COMMAND_TEXT:
+                return new SessionSummaryCommandParser().getCommand(remainingArgs);
+            case SessionListCommand.COMMAND_TEXT:
+                return new SessionListCommand();
+            case ActivityCreateCommand.COMMAND_TEXT:
+                return ActivityCreateCommand.prepare(remainingArgs);
+            case ActivityDeleteCommand.COMMAND_TEXT:
+                return ActivityDeleteCommand.prepare(remainingArgs);
+            case ActivityListCommand.COMMAND_TEXT:
+                return ActivityListCommand.prepare(remainingArgs);
+            case ActivityViewCommand.COMMAND_TEXT:
+                return ActivityViewCommand.prepare(remainingArgs);
+            case GroupCreateCommand.COMMAND_TEXT:
+                return GroupCreateCommand.prepare(remainingArgs);
+            case GroupDeleteCommand.COMMAND_TEXT:
+                return GroupDeleteCommand.prepare(remainingArgs);
+            case GroupListCommand.COMMAND_TEXT:
+                return new GroupListCommand();
+            case GroupViewCommand.COMMAND_TEXT:
+                return GroupViewCommand.prepare(remainingArgs);
+            case HelpCommandParser.COMMAND_TEXT:
+                return new HelpCommandParser().getCommand(remainingArgs);
+            case ExitCommand.COMMAND_TEXT:
+                return new ExitCommand();
+            default:
+                return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
+            }
+        } catch (InvalidFormatException exception) {
+            return new InvalidCommand(exception.getMessage());
         }
     }
 }

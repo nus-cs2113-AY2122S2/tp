@@ -7,12 +7,14 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 import seedu.splitlah.util.PersonCostPair;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 /**
  * Represents a command object that produces a summary of expenditure for a specified Session object.
@@ -20,10 +22,6 @@ import java.util.ArrayList;
  * @author Warren
  */
 public class SessionSummaryCommand extends Command {
-    
-    public static final String COMMAND_TEXT = "session /summary";
-
-    private static final String COMMAND_FORMAT = "Syntax: session /summary /sid <SESSIONID>";
 
     private int sessionId;
 
@@ -39,7 +37,7 @@ public class SessionSummaryCommand extends Command {
     private static final double SMALL_DIFFERENCE_LIMIT = 0.0001;
 
     /**
-     * Default constructor, sets sessionId as specified by the provided value.
+     * Initializes a SessionSummaryCommand object.
      *
      * @param sessionId An integer that uniquely identifies a session.
      */
@@ -203,25 +201,6 @@ public class SessionSummaryCommand extends Command {
     }
 
     /**
-     * Prepares user arguments for the creation of a SessionSummaryCommand object.
-     * 
-     * @param commandArgs A String object that represents the user's input arguments.
-     * @return A SessionSummaryCommand object if a valid integer representing a session's unique identifier is found
-     *         in the input arguments,
-     *         an InvalidCommand object otherwise.
-     */
-    public static Command prepare(String commandArgs) {
-        assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_EMPTY;
-        try {
-            int sessionId = Parser.parseSessionId(commandArgs);
-            return new SessionSummaryCommand(sessionId);
-        } catch (InvalidFormatException exception) {
-            String invalidCommandMessage = exception.getMessage() + "\n" + COMMAND_FORMAT;
-            return new InvalidCommand(invalidCommandMessage);
-        }
-    }
-
-    /**
      * Runs the command with the session identifier as provided by the user input and prints a
      * summary of expenditure for the session specified by the session identifier.
      *
@@ -236,6 +215,7 @@ public class SessionSummaryCommand extends Command {
             session = profile.getSession(sessionId);
         } catch (InvalidDataException exception) {
             ui.printlnMessage(exception.getMessage());
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONSUMMARY_SESSION_ID_NOT_FOUND + sessionId);
             return;
         }
 
@@ -243,5 +223,6 @@ public class SessionSummaryCommand extends Command {
         ArrayList<PersonCostPair> personCostPairList = getPersonCostPairList(personList);
         String output = processAllTransactions(personCostPairList, session);
         ui.printlnMessageWithDivider(output);
+        Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONSUMMARY_SESSION_SUMMARY_PRINTED + sessionId);
     }
 }

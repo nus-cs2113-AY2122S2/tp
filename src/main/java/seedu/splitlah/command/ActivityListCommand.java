@@ -6,9 +6,11 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 /**
  * Represents a command which displays the details of each Activity object within a Session object.
@@ -17,14 +19,19 @@ public class ActivityListCommand extends Command {
 
     public static final String COMMAND_TEXT = "activity /list";
 
-    private static final String COMMAND_FORMAT = "Syntax: activity /list /sid <SESSION_ID>";
+    public static final String COMMAND_FORMAT = "Syntax: activity /list /sid [SESSION_ID]";
+
+    public static final String[] COMMAND_DELIMITERS = {
+        ParserUtils.SESSION_ID_DELIMITER
+    };
 
     private int sessionId;
 
-    private static final String LIST_HEADER_PREPEND = "Activity List (Session Id #";
+    private static final String LIST_HEADER_PREPEND = "List of activities (Session Id #";
     private static final String LIST_CLOSER_POSTPEND = ")";
 
     public ActivityListCommand(int sessionId) {
+        assert sessionId > 0 : Message.ASSERT_ACTIVITYLIST_SESSION_ID_LESS_THAN_ONE;
         this.sessionId = sessionId;
     }
 
@@ -38,18 +45,21 @@ public class ActivityListCommand extends Command {
         try {
             Session sessionToBePrinted = manager.getProfile().getSession(sessionId);
             ArrayList<Activity> activityListToBePrinted = sessionToBePrinted.getActivityList();
-
+            int activityListSize = activityListToBePrinted.size();
             if (activityListToBePrinted.isEmpty()) {
                 manager.getUi().printlnMessage(Message.ERROR_ACTIVITYLIST_ACTIVITY_EMPTY);
                 return;
             }
 
-            manager.getUi().printlnMessage(LIST_HEADER_PREPEND + sessionId + LIST_CLOSER_POSTPEND);
-            for (Activity activity : activityListToBePrinted) {
-                manager.getUi().printlnMessage(activity.getActivitySummaryString());
+            manager.getUi().printlnMessageWithDashDivider(LIST_HEADER_PREPEND + sessionId + LIST_CLOSER_POSTPEND);
+            for (int i = 0; i < activityListSize - 1; i++) {
+                manager.getUi().printlnMessage(activityListToBePrinted.get(i).getActivitySummaryString());
             }
+            String lastActivityToPrint = activityListToBePrinted.get(activityListSize - 1).getActivitySummaryString();
+            manager.getUi().printlnMessageWithDivider(lastActivityToPrint);
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
+            manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYLIST_SESSION_ID_NOT_FOUND + sessionId);
         }
     }
 
