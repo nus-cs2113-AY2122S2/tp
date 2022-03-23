@@ -32,7 +32,39 @@ manipulation.
 A `Manager` is defined as the data management part of the programme. It is in charge of manipulating underlying data and
 takes care of data integrity.
 
+All managers are derived from the base abstract class `Manager`. This base class provides simple methods for reading and
+saving data from the filesystem. A derived `Manager` must pass the name of the file where its underlying data is stored
+to the `Manager` superclass.
 
+The base class provides two methods for simple read/write operations:
+- `protected Object load() throws Exception`
+  - This method returns a simple `Object` read from the specified file. The class makes no assumption as to the
+  type of object being read. As such, further processing must be done, which will be touched on below.
+- `protected void save(Object o) throws Exception`
+  - This method saves the provided object into the specified file. It is capable of saving **any** type of Java object,
+  on the condition that it **must be serializable**. For saving complex data structures such as `ArrayLists`, it is generally
+  a good idea to also make sure that any contained objects are also serializable.
+
+Because the `load()` and `save(Object o)` methods are simple, they are generally not useful without further processing.
+As such, the `Manager` class has two other abstract methods, which extended managers must implement:
+- `protected abstract void loadData() throws Exception`
+  - Extended managers must override this method to deserialize any read objects properly. This is to ensure that
+  corrupted data is found at this phase of the programme to prevent any future errors. A good example is listed below.
+  Note that it makes use of the provided `load()` function to first read the simple `Object`, then does further
+  processing on it:
+  ```java
+    @Override
+    protected void loadData() throws Exception {
+        this.dishes = new ArrayList<>();
+        ArrayList<?> list = (ArrayList<?>) this.load();
+        for (Object object : list) {
+            this.addDish((Dish) object);
+        }
+    }
+  ```
+- `public abstract void saveData() throws Exception`
+  - This is a convenience method for doing any pre- / post-processing on any data you may want to save. Of course, you should
+  also call the `save(Object o)` method finally.
 
 ### Menu (dishes) Management
 
