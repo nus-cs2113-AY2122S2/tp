@@ -269,7 +269,7 @@ public abstract class Message {
             "Session was not found with unique identifier of:";
     public static final String ASSERT_ACTIVITYEDIT_COMMAND_ARGS_NULL =
             "The command arguments cannot be null.";
-   public static final String ASSERT_ACTIVITYEDIT_MANAGER_DOES_NOT_EXIST =
+    public static final String ASSERT_ACTIVITYEDIT_MANAGER_DOES_NOT_EXIST =
             "Manager does not exist.";
     public static final String ASSERT_ACTIVITYEDIT_SESSIONID_MISSING =
             "Session Id missing.";
