@@ -3,7 +3,8 @@ package seedu.splitlah.data;
 import org.junit.jupiter.api.Test;
 import seedu.splitlah.exceptions.InvalidDataException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class NameTest {
 
@@ -19,6 +20,6 @@ public class NameTest {
 
     @Test
     public void validateName_nameIsAlphaOnly_returnsTrue() {
-        assertFalse(Name.validateName("sam"));
+        assertTrue(Name.validateName("sam"));
     }
 }
