@@ -317,8 +317,8 @@ public class SearchCommand extends Command {
      */
     public void searchPlan() throws InvalidCommandException {
         var planListToSearch = planList.getPlansDisplayList();
-        for (int i = 0; i < planListToSearch.size(); i++) {
-            String planToBeCompared = planListToSearch.get(i).toLowerCase();
+        for (String planToSearch : planListToSearch) {
+            String planToBeCompared = planToSearch.toLowerCase();
             if (isMatch(planToBeCompared)) {
                 incrementMatchCount();
                 printSearchHeading();
@@ -361,8 +361,8 @@ public class SearchCommand extends Command {
      */
     public void searchWorkout() throws InvalidCommandException {
         var workoutListToSearch = workoutList.getWorkoutsDisplayList();
-        for (int i = 0; i < workoutListToSearch.size(); i++) {
-            String workoutToBeCompared = workoutListToSearch.get(i).toLowerCase();
+        for (String workoutToSearch : workoutListToSearch) {
+            String workoutToBeCompared = workoutToSearch.toLowerCase();
             var reps = parseWorkoutReps(workoutToBeCompared);
             var beginningOfReps = workoutToBeCompared.indexOf("(");
             var exerciseName = workoutToBeCompared.substring(0, beginningOfReps).trim();
