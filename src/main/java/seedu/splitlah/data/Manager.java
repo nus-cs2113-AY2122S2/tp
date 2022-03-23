@@ -99,7 +99,7 @@ public class Manager {
     }
 
     /**
-     * Returns a Profile object that stores user created sessions.
+     * Returns a Profile object that stores user created sessions and groups.
      *
      * @return A Profile object.
      */

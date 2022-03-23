@@ -124,7 +124,7 @@ public class Activity implements Serializable {
      * Returns a String object representing the name of the persons involved in the activity and the cost that each
      * person owed for the activity in a proper format.
      *
-     * @return a String object that representing the name and costs of each person involved in the activity.
+     * @return A String object that representing the name and costs of each person involved in the activity.
      * @throws InvalidDataException If there is no activity found or if the person in the involvedPersonsList
      *                              did not participate in the activity.
      */

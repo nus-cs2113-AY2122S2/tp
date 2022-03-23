@@ -86,7 +86,7 @@ public class PersonList implements Serializable {
     /**
      * Converts a String array object of names to a list of Person objects.
      *
-     * @param personNames A String array object of names.
+     * @param personNames An array of String objects of names.
      */
     public void convertToPersonList(String[] personNames) {
         for (String name : personNames) {
@@ -109,6 +109,7 @@ public class PersonList implements Serializable {
     /**
      * Checks if String array object of names has duplicated names.
      *
+     * @param personNames An array of String objects of names.
      * @return true if it contains duplicates,
      *         false otherwise.
      */
