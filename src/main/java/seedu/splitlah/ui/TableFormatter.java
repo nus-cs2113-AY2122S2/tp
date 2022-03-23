@@ -51,7 +51,7 @@ public class TableFormatter {
     /**
      * Deletes a row from the table by index. Rows start from 0.
      *
-     * @param row An int representing the row number.
+     * @param row An integer representing the row number.
      * @return true if the row was successfully deleted.
      *         false if the row index was invalid. No row will be deleted.
      */
@@ -82,7 +82,7 @@ public class TableFormatter {
     /**
      * Calculates all column widths in the table and returns them in an array object.
      *
-     * @return An int array containing the maximum column widths of each column in order.
+     * @return An integer array containing the maximum column widths of each column in order.
      */
     private int[] calculateAllColumnWidths() {
         int[] columnWidths = new int[columnHeaders.getRowLength()];
@@ -96,7 +96,7 @@ public class TableFormatter {
      * Pads and formats a row with decorative characters.
      *
      * @param row A TableFormatterRow object to be formatted.
-     * @param columnWidths An int array object containing the maximum column widths of the table.
+     * @param columnWidths An integer array object containing the maximum column widths of the table.
      * @return A String object containing the formatted and decorated row.
      */
     private String decorateRow(TableFormatterRow row, int[] columnWidths) {
@@ -112,9 +112,9 @@ public class TableFormatter {
     }
 
     /**
-     * Calculates total table width from a given int array containing column widths.
+     * Calculates total table width from a given integer array containing column widths.
      *
-     * @param columnWidths An int array object representing the widths of each column.
+     * @param columnWidths An integer array object representing the widths of each column.
      * @return The total width of the table.
      */
     private int calculateTableWidth(int[] columnWidths) {
@@ -128,7 +128,7 @@ public class TableFormatter {
     /**
      * Formats all rows in this TableFormatter object, decorates them and appends them to a table String object.
      *
-     * @param columnWidths int array containing the maximum width of each column.
+     * @param columnWidths integer array containing the maximum width of each column.
      * @param formattedTable A StringBuilder object representing the formatted table without the rows.
      */
     private void appendRowsToFormattedTableString(int[] columnWidths, StringBuilder formattedTable) {
