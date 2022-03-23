@@ -136,7 +136,9 @@ where a list of `Group` objects are returned.
 6. Once the list is retrieved, `GroupListCommand` class checks if the list is empty.
    1. If the list is empty, a message indicating that the list is empty is printed
    using the method `TextUi#printEmptyList()`.
-   2. If the list is not empty, the groups are printed using the method `TextUi#printList()`.
+   2. If the list is not empty, `GroupListCommand` will loop from the first to the second last group, 
+   calling `TextUi#printlnMessage()` to print out the summary of each group.
+   Then, the last group is printed with a divider below it, using the method `TextUi#printlnMessageWithDivider()`.
 
 ## Product scope
 ### Target user profile
