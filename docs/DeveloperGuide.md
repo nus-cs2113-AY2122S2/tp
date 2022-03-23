@@ -10,7 +10,7 @@
 
 Class diagram of Storage:
 
-![](C:\Users\Daryl\Desktop\tp\docs\images\StorageClass.png)
+![](images/StorageClass.png)
 
 (_Note: some methods and attributes of `TaskList`,`Ui` and `Parser` are omitted here_)
 
@@ -29,14 +29,14 @@ there is no need for any parameters in the `Storage#load()`. Since a save file w
 constructor of `Storage` if no such file exists, there should not be any issue with a missing save file.
 
 The sequence diagram of `Storage#load()` is shown here:
-![](C:\Users\Daryl\Desktop\tp\docs\images\StorageLoadSD.png)
+![](images/StorageLoadSD.png)
 
 In the event where the save file cannot be parsed by `JSONObject`, the function `Storage#handleCorruptedSave()`
 will be invoked. The user will get to choose to create a new save file or exit the program for manual inspection.
 
 The sequence diagram of `Storage#handleCorruptedSave()` is shown here:
 
-![](C:\Users\Daryl\Desktop\tp\docs\images\StorageCorruptedSD.png)
+![](images/StorageCorruptedSD.png)
 
 #### Design considerations for the format of the save file
 - JSON (current choice)
