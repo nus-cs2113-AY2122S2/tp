@@ -216,7 +216,8 @@ public class ExpenseTracker {
     }
 
     /**
-     * Begins executing the Delete method invoked by user's input
+     * Begins executing the Delete method invoked by user's input.
+     *
      * @param rawInput the user's input itself
      */
     private static void executeRemove(String rawInput) {
@@ -239,7 +240,8 @@ public class ExpenseTracker {
     }
 
     /**
-     * Begins executing the Add method invoked due to user's input
+     * Begins executing the Add method invoked due to user's input.
+     *
      * @param rawInput the user's input itself
      */
     private static void executeAdd(String rawInput) {
@@ -257,6 +259,7 @@ public class ExpenseTracker {
 
     /**
      * Begins executing the Find method invoked due to user's input.
+     *
      * @param rawInput the user's input itself
      */
     private static void executeFind(String rawInput) {
@@ -272,7 +275,8 @@ public class ExpenseTracker {
 
     /**
      * Begins executing the Edit method invoked due to user's input.
-     * @param ui ui object to collect user's inputs
+     *
+     * @param ui       ui object to collect user's inputs
      * @param rawInput the user's input itself
      */
     private static void executeEdit(TextUi ui, String rawInput) {
