@@ -46,7 +46,7 @@ The tag command accepts a string from the user and adds it into `ArrayList<Strin
 
 Here is an example on adding a tag to a general task:  
 1) User inputs `tag add 2 "testTag"`. <br>
-2) `TagParser` will initialise `TagCommand` with add as `tagOperation` 2 as `taskIndex` and testTag as `tagDescription`, while `taskModule` is null. <br>
+2) `TagParser` will initialise `TagCommand` with add as `tagOperation`, 2 as `taskIndex` and testTag as `tagDescription`, while `taskModule` is null. <br>
 3) `TagCommand` then gets the relevant `Module`. If `taskModule` is null, `getGeneralTasks()` is called. Else, `getModule(taskModule)` is called instead. <br>
 4) Next, `TagCommand` checks the `tagOperation`. If add, `addTag(targetModule)` is called. Else if del, `removeTag(targetModule)` is called. Else, it throws `ParseException`. <br>
 
@@ -70,7 +70,7 @@ Here is an example on how to calculate GPA:
 6) After calculations, `result` is being returned by `calculateGpa()` as a String. <br>
 
 Below is the sequence diagram of how the GPA feature works:
-
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Yzkkk/tp/branch-PR-DeveloperGuide/docs/GPASeqDiagram/GPA.puml)
 
 
 ## Product scope
