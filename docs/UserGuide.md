@@ -345,7 +345,7 @@ Format: `group /delete /gid [GROUP_ID]`
     * The unique identifier for a group can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
 
 > **💡 Note(s):**
->- A session with a unique identifier of `[GROUP_ID]` has to exist before it can be removed.
+>- A group with a unique identifier of `[GROUP_ID]` has to exist before it can be removed.
 
 Example of usage:
 1. Remove an existing group with a unique identifier of 1.
