@@ -116,8 +116,8 @@ Step 1. The user launches the application. A `Family` object will be initialised
 
 Step 2. The user wishes to add a person, say `John Doe`, to the `children` list. The user executes   
 `add /n John Doe /g 3` command, adding a `Person` with `name` as `John Doe` to group 3, which is the `children`.
--- Insert UML object diagram here
 
+<image src="images/PersonStep2.png"></image>
 
 Step 3. The user executes `addin /g 3 /u 1 /i ...` to add a new income to index 1 of the `children` list, who is   
 `John Doe`. This causes an income object to be added to the `IncomeList` of `John Doe`.
