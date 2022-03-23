@@ -1,5 +1,7 @@
 package seedu.duke.assets;
 
+import seedu.duke.helper.UI;
+
 import java.util.ArrayList;
 
 public class PatientList {
@@ -18,14 +20,14 @@ public class PatientList {
     public void viewPatient(String nric) {
         Patient patient = getPatient(nric);
         if (patient == null) {
-            System.out.println("There is no such patient");
+            UI.printParagraph("There is no such patient");
             return;
         }
-        System.out.println(getPatient(nric).toString());
+        UI.printParagraph(getPatient(nric).toString());
     }
 
     public void viewPatient() {
-        System.out.println(this);
+        UI.printParagraph(toString());
     }
 
     public void add(String[] addPatientParameters) {
