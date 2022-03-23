@@ -149,12 +149,12 @@ is to add a income for the person whose uid is 1, and the description of this in
 
 When `PlanITarium` receives such input, it will pass the input to `CommandFactory`. The `CommandFactory` will call 
 `Parser` to parse the input into several components according to the indicator. The `Parser` will then return the type 
-of command to `CommandFactory`. According to the type, `CommandFacroty` will return a command object to `PlanITarium`. 
+of command to `CommandFactory`. According to the type, `CommandFactory` will return a command object to `PlanITarium`. 
 After receiving the command, `PlanITarium` will call `execute()` of command object to execute the command. 
 
 The following diagram is the sequence diagram of this entire process. 
 
-<image src="images/CommandFactorySequence.png"/>
+<image src="images/CommandFactorySequence.png">
 
 Following operations are implemented:
 * `CommandFactory#getCommand(userInput, personList)` -- Return the command that is needed to be executed 
