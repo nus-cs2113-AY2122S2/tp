@@ -6,20 +6,6 @@
 
 ##Architecture
 
-#Timetable
-Class diagram of Timetable:
-
-
-The **Timetable** component has the following functionalities:
-  - Prints the daily or weekly schedule of the user
-  - The timetable schedule is represented in a table form as shown below
-![timetable format](images/timetable format.png)
-
-The sequence diagram when the user type "show today" is shown below
-![timetable UML](images/Timetable_SequenceDiagram_ShowToday.png)
-
-When the user call "Show <date>",  
-
 ## Design & implementation
 
 ### Study session implementation
@@ -102,10 +88,13 @@ The functionalities of the timetable include:
 - Prints a schedule specific to the date the user inputs 
 - Prints the schedule for the week the user is at
 - Prints the schedule of the day whenever the user starts up Sherpass.
+- The timetable schedule is represented in a table form as shown below
+  ![timetable format](images/timetable format.png)
 
 The **Timetable** is a class which interacts with the following components:
 1. Parser
 2. ShowCommand
+3. TaskList
 
 #### Parser Component
 
@@ -118,6 +107,11 @@ This creates a **ShowCommand** object which will execute its method, thereby pri
 Depending on the user input that was parsed by **Parser**, **ShowCommand** will call the 
 relative methods which prints the timetable.
 
+#### TaskList Component
+
+When the **ShowCommand** is being executed, it will retrieve a filtered list
+of task by the date that is define in the **ShowCommand** from the **TaskList** component. 
+
 
 Below is a sequence diagram of what happens 
 as the user wishes to see the schedule (timetable) for 25th May 2022:
@@ -126,6 +120,7 @@ as the user wishes to see the schedule (timetable) for 25th May 2022:
 
 The sequence as shown above also happens in the same fashion as the user 
 requests to see the schedule for any day or the week the user is at.
+
 
 ### Loading saved files
 
