@@ -122,7 +122,7 @@ Otherwise, the constructor is called. Either methods will result in the creation
 The sequence diagram below models the interactions between various entities in the system
 when the user invokes the `group /list` command.
 <br>
-![List Groups Sequence Diagram Screenshot]()
+![List Groups Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupListCommand.drawio.png)
 <br>
 <br>
 The general workflow of the `group /list` command is as follows:
