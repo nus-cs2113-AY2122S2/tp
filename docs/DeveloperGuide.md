@@ -45,10 +45,10 @@ list is simply represented as a `TaskList` instead of a full-fledged `Module`.
 The tag command accepts a string from the user and adds it into `ArrayList<String> tags` of a `Task`.  
 
 Here is an example on adding a tag to a general task:  
-1) User inputs `tag add 2 "testTag"`. 
-2) `TagParser` will initialise `TagCommand` with add as `tagOperation` 2 as `taskIndex` and testTag as `tagDescription`, while `taskModule` is null.
-3) `TagCommand` then gets the relevant `Module`. If `taskModule` is null, `getGeneralTasks()` is called. Else, `getModule(taskModule)` is called instead.
-4) Next, `TagCommand` checks the `tagOperation`. If add, `addTag(targetModule)` is called. Else if del, `removeTag(targetModule)` is called. Else, it throws `ParseException`.
+1) User inputs `tag add 2 "testTag"`. <br>
+2) `TagParser` will initialise `TagCommand` with add as `tagOperation` 2 as `taskIndex` and testTag as `tagDescription`, while `taskModule` is null. <br>
+3) `TagCommand` then gets the relevant `Module`. If `taskModule` is null, `getGeneralTasks()` is called. Else, `getModule(taskModule)` is called instead. <br>
+4) Next, `TagCommand` checks the `tagOperation`. If add, `addTag(targetModule)` is called. Else if del, `removeTag(targetModule)` is called. Else, it throws `ParseException`. <br>
 
 Below is the sequence diagram of how the tag feature works:
 
@@ -56,7 +56,25 @@ Below is the sequence diagram of how the tag feature works:
 ![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/GetModule.puml)
 ![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/CheckAndRunTagOperation.puml)
 
+### GPA Feature
+
+The gpa command takes in a single command word `gpa` and no other arguments from the user (unlike the tag command above), and returns user's GPA in 2 decimal places.
+
+Here is an example on how to calculate GPA:
+
+1) User inputs `gpa`. <br>
+2) `NoArgumentParser` will take in command word `gpa`, enter a switch block and return `GpaCommand()`. <br>
+3) `GpaCommand()` will execute `calculateGpa()` which has a parameter of type `ModuleList`. <br>
+4) If `moduleList` is null, throw `ModuleListEmptyException()`.  <br>
+5) Else, proceed with a loop. For all modules in `moduleList`, get the respective `mc`, `modularGrade` and `modularGradePoint`. <br>
+6) After calculations, `result` is being returned by `calculateGpa()` as a String. <br>
+
+Below is the sequence diagram of how the GPA feature works:
+
+
+
 ## Product scope
+
 ### Target user profile
 
 {Describe the target user profile}
