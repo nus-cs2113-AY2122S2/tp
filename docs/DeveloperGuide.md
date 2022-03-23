@@ -80,6 +80,7 @@ Step 2. The user wishes to add a person, say `John Doe`, to the `children` list.
 `add /n John Doe /g 3` command, adding a `Person` with `name` as `John Doe` to group 3, which is the `children`.
 -- Insert UML object diagram here
 
+
 Step 3. The user executes `addin /g 3 /u 1 /i ...` to add a new income to index 1 of the `children` list, who is   
 `John Doe`. This causes an income object to be added to the `IncomeList` of `John Doe`.
 -- Insert UML object diagram here
@@ -107,7 +108,14 @@ indicate which generation they belong to
 {For Jiarong}
 
 ### Storage Component
-{For Hans}
+**API: **
+-- Insert puml diagram here
+The `Storage` component,
+
+* can save each person's data and their income and expenditure data when the program exits into a local file, and reads 
+  them back into corresponding objects when the program runs again.
+* depends on the classes in the `Person` component (because the `Storage` component's job is to save/retrieve objects
+  to the `Person`)
 
 ---
 ## Implementation
@@ -138,8 +146,54 @@ Maybe for Sizheng
 
 ### Data Archiving
 
-Maybe for Hans
-{Suggest to show the saving and loading process}
+#### \[Proposed]Saving and loading feature
+
+##### Proposed implementation
+
+The proposed saving and loading mechanism is facilitated by `Family`. It loads records of `PersonList` for each logical 
+grouping inside family from a local file, process the data and adds the record to `Family` for the current session. 
+Saves the `PersonList` record of each `Family` grouping back into the local file upon exit of the program. It implements 
+the following operations:
+
+* `Storage#checkFileExists()` -- Checks if `PlanITarium.txt` file exists in the local hard drive, creates one if it 
+  does not.
+* `Storage#saveData()` -- Writes `PersonList` record of each `Family` grouping into `PlanITarium.txt` file upon exit 
+  of the program.
+* `Storage#loadData()` -- Opens and reads `PlanITarium.txt` for any existing `PersonList` records and updates the
+  `PersonList` data in the current session for each logical group in `Family`.
+
+Given below is an example scenario and how the save and load mechanism behaves at each step.
+
+Step 1. The user launches the application. A `Storage` object will be initialised with an empty `PersonList` for each
+`Family` grouping. The following sequence diagram shows how the `Storage` object is initialised
+
+Step 2. The program will create a new `PersonList` for the session which calls `Storage#loadData()`, causing a check if 
+the local file `PlanITarium.txt` exists by calling `Storage#checkFileExists()` and creates one if it does not. The data 
+in the local file will be read, parsed and added to the empty `PersonList` in `Storage` by calling `PersonList` adding 
+operations. The data in the `PersonList` will then be returned to `PersonList` for each `Family` grouping
+in the current session. The following sequence diagram shows how the loading operation works:
+--insert load sequence here
+
+
+Step 3. The user then decides to exit the program by executing the command `bye`, `Storage#saveData` will be called.
+All data in the `Family` object will be written to the local file `PlanITarium.txt` in the format of
+`<group type> <user/operation> <Category> <Details>` which are to be read again when the program starts up. 
+The following Sequence diagram shows how the saving operation will work:
+-- insert save sequence here
+
+#### Design considerations:
+
+**Aspect: When saving of data is executed:**
+
+* **Alternative 1 (current choice):** Saving occurs just before the program exits.
+  * Pros: Better performance as it only needs to iterate through every person's data once
+  * Cons: Data will not be saved if the program crashes or exits unintentionally.
+
+* **Alternative 2:** Saves the current data of each Person after every addition, deletion or update operation.
+  * Pros: The local file will constantly be updated and lowers the risk of losing records
+  * Cons: May have performance issue as it needs to iterate through every person's data to be saved after each 
+    operation.
+
 
 ---
 ## Documentation
