@@ -46,3 +46,10 @@ NUS Students who wish to meet as a group (be it for project meetings or to eat t
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+
+##Clear Command
+The clear command is one of the commands the user can execute to clear the whole list. 
+
+![ClearCommandSequenceDiagram](diagrams/ClearCommandSequenceDiagram.png)
+Here is the sequence when the command `clear` is executed.
