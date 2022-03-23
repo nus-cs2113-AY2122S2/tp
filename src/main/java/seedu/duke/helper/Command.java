@@ -4,6 +4,7 @@ import seedu.duke.assets.AppointmentList;
 import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
+import seedu.duke.exception.HalpmiException;
 
 
 public class Command {
@@ -22,143 +23,96 @@ public class Command {
     }
 
     public void addPatient(PatientList patientList, String parameters) {
-        if (isNull(parameters)) {
-            ui.printNullParametersMessage();
-            ui.printAddPatientExampleMessage();
-            return;
-        }
-        String[] addPatientParameters = Parser.parseAddPatient(parameters);
-        if (addPatientParameters == null) {
-            ui.printAddPatientExampleMessage();
-        } else {
+        try {
+            String[] addPatientParameters = Parser.parseAddPatient(parameters);
             patientList.add(addPatientParameters);
-            ui.printParagraph("The patient above has been added.");
+            UI.printParagraph("The patient above has been added.");
+        } catch (HalpmiException e) {
+            UI.printParagraph(e.toString());
+            ui.printAddPatientExampleMessage();
         }
     }
 
     public void deletePatient(PatientList patientList, String stringIndex) {
-        if (patientList.getSize() == 0) {
-            ui.printParagraph("There is nothing to delete in patientList.");
-            return;
-        }
         int index;
         try {
             index = Integer.parseInt(stringIndex);
-        } catch (NumberFormatException numberFormatException) {
-            ui.printDeletePatientExampleMessage(patientList);
-            return;
-        }
-        if (1 <= index && index <= patientList.getSize()) {
             patientList.removePatient(index - 1);
-            ui.printParagraph("The patient with the above index number has been removed.");
-        } else {
+            UI.printParagraph("The patient with the specified index has been removed.");
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             ui.printDeletePatientExampleMessage(patientList);
         }
+
     }
 
     public void viewDoctor(DoctorList doctorList, String nric) {
-        if (nric == null) {
+        if (isNull(nric)) {
             doctorList.viewDoctor();
-            return;
+        } else {
+            doctorList.viewDoctor(nric);
         }
-        doctorList.viewDoctor(nric);
     }
 
     public void deleteDoctor(DoctorList doctorList, String stringIndex) {
-        int indexDoctor;
+        int index;
         try {
-            indexDoctor = Integer.parseInt(stringIndex);
-        } catch (NumberFormatException numberFormatException) {
-            ui.printDeleteDoctorErrorMessage(doctorList);
-            return;
-        }
-        if (1 <= indexDoctor && indexDoctor <= doctorList.getSizeDoctor()) {
-            doctorList.removeDoctor(indexDoctor - 1);
-            ui.printParagraph("The doctor with the specified index has been removed.");
-        } else {
+            index = Integer.parseInt(stringIndex);
+            doctorList.removeDoctor(index - 1);
+            UI.printParagraph("The patient with the above index number has been removed.");
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
             ui.printDeleteDoctorErrorMessage(doctorList);
         }
     }
 
-
     public void addMedicine(MedicineList medicineList, String parameters) {
-        if (isNull(parameters)) {
-            ui.printParagraph("Invalid format. Please follow the below example and try again.\n"
-                    + "add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
-            return;
+        try {
+            String[] addMedicineParameters = Parser.parseAddMedicine(parameters);
+            medicineList.add(addMedicineParameters);
+            UI.printParagraph("Medicine has been added");
+        } catch (HalpmiException e) {
+            UI.printParagraph(e.toString());
+            ui.printAddMedicineExampleMessage();;
         }
-        String[] parameterArray = Parser.parseAddMedicine(parameters);
-        if (parameterArray == null) {
-            ui.printParagraph("There are missing parameters. Please follow the below example and try again.\n"
-                    + "add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
-            return;
-        }
-        medicineList.add(parameterArray);
-        ui.printParagraph("Medicine has been added");
     }
 
     public void viewMedicine(MedicineList medicineList, String parameters) {
-        if (parameters == null) {
+        if (isNull(parameters)) {
             medicineList.viewMedicine();
         } else {
-            try {
-                int index = Integer.parseInt(parameters);
-                if (index < 1 || medicineList.size() < index) {
-                    ui.printParagraph("Index is out of range.");
-                    return;
-                }
-                medicineList.viewMedicine(index);
-            } catch (NumberFormatException e) {
-                ui.printParagraph("Index is out of range.");
-            }
+            medicineList.viewMedicine(parameters);
         }
     }
 
     public void addDoctor(DoctorList doctorList, String parameters) {
-        if (isNull(parameters)) {
-            ui.printNullParametersMessage();
-            ui.printAddDoctorExampleMessage();
-            return;
-        }
-        String[] addDoctorParameters = Parser.parseAddDoctor(parameters);
-        if (addDoctorParameters == null) {
-            ui.printAddPatientExampleMessage();
-        } else {
+        try {
+            String[] addDoctorParameters = Parser.parseAddDoctor(parameters);
             doctorList.add(addDoctorParameters);
-            ui.printParagraph("The doctor above has been added.");
+            UI.printParagraph("The doctor above has been added.");
+        } catch (HalpmiException e) {
+            UI.printParagraph(e.toString());
+            ui.printAddDoctorExampleMessage();
         }
     }
 
     public void deleteMedicine(MedicineList medicineList, String stringIndex) {
-        if (isNull(stringIndex)) {
-            ui.printParagraph("Parameter missing.");
-            return;
-        }
         try {
             int index = Integer.parseInt(stringIndex);
-            if (index < 1 || index > medicineList.size()) {
-                ui.printParagraph("Number is not within range.");
-                return;
-            }
-            medicineList.delete(index);
-            ui.printParagraph("The medicine record at index " + index + " has been deleted.");
-        } catch (NumberFormatException numberFormatException) {
-            ui.printParagraph("Parameter given is not a number.");
+            medicineList.deleteMedicine(index - 1);
+            UI.printParagraph("The medicine record at index " + index + " has been deleted.");
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            ui.printDeleteMedicineExampleMessage(medicineList);
         }
     }
 
     public void addAppointment(AppointmentList appointmentList, PatientList patientList,
                                DoctorList doctorList, String parameters) {
-        if (isNull(parameters)) {
-            ui.printNullParametersMessage();
-            return;
-        }
-        String[] addAppointmentParameters = Parser.parseAddAppointment(parameters);
-        if (addAppointmentParameters == null) {
-            ui.printAddAppointmentExampleMessage();
-        } else {
+        try {
+            String[] addAppointmentParameters = Parser.parseAddAppointment(parameters);
             appointmentList.add(addAppointmentParameters);
             UI.printParagraph("The above appointment has been added.");
+        } catch (HalpmiException e) {
+            UI.printParagraph(e.toString());
+            ui.printAddAppointmentExampleMessage();
         }
     }
 }

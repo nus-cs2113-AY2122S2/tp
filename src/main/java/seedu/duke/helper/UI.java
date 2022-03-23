@@ -1,6 +1,7 @@
 package seedu.duke.helper;
 
 import seedu.duke.assets.DoctorList;
+import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
 
 import java.util.Scanner;
@@ -100,6 +101,11 @@ public class UI {
         UI.printParagraph("Parameters missing or not detected. Please use /info for parameters.");
     }
 
+    public void printAddMedicineExampleMessage() {
+        printParagraph("Invalid format. Please follow the below example and try again.\n"
+                + "add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
+    }
+
     public static void printPrompt() {
         System.out.print("You: ");
     }
@@ -116,5 +122,10 @@ public class UI {
     public static void printCont(String sentence) {
         System.out.print("        ");
         System.out.println(sentence);
+    }
+
+    public void printDeleteMedicineExampleMessage(MedicineList medicineList) {
+        printParagraph("Please input a positive number up to " + medicineList.getSize() + " only.\n"
+                + "Here is an example:\ndelete patient /info 1");
     }
 }

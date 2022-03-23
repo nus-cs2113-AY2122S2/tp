@@ -4,11 +4,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
+import seedu.duke.exception.HalpmiException;
 
 import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class ParserTest {
@@ -25,12 +26,12 @@ class ParserTest {
     void validateMedicineTest() {
         String[] userInputArray = {"paracetamol", "500", "2023-02-02", "Headaches", "500"};
         String userInput = "paracetamol,500,2023-02-02,Headaches,500";
-        assertEquals(true, Parser.validateMedicine(userInputArray));
+        assertTrue(Validator.validateMedicine(userInputArray));
     }
 
     @Test
     @DisplayName("parseAddMedicine method in Parser Class")
-    void parseAddMedicineTest() {
+    void parseAddMedicineTest() throws HalpmiException {
         String userInput = "paracetamol,500,2023-02-02,Headaches,500";
         String[] userInputArray = {"paracetamol", "500", "2023-02-02", "Headaches", "500"};
         assertArrayEquals(userInputArray, Parser.parseAddMedicine(userInput));
@@ -38,7 +39,7 @@ class ParserTest {
 
     @Test
     @DisplayName("parseAddPatient method in Parser Class")
-    void addPatientTest_userInputFormat_expectFormatCorrectlyValidated() {
+    void addPatientTest_userInputFormat_expectFormatCorrectlyValidated() throws HalpmiException {
         String userInput = "S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15";
         String[] expectedOutput = {"S1234567A", "John Doe", "23", "M", "10 Baker Street",
             "1999-12-31", "2021-02-15"};
