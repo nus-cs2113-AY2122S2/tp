@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam shadowing false
+participant ":TagParser" as TagParser
+participant ":TagCommand" as TagCommand
+participant ":ModuleList" as ModuleList
+
+[->TagParser:parseCommand()
+create TagCommand
+activate TagParser
+TagParser -> TagCommand: TagCommand(tagOperation:String, taskIndex:int, taskModule:String, tagDescription:String)
+activate TagCommand
+return
+[<- TagParser
+deactivate TagParser
+
+[->TagCommand:execute()
+activate TagCommand
+
+ref over TagCommand, ModuleList: Get Module
+
+ref over TagCommand, ModuleList: Check and Run Tag Operation
+return CommandResult(result)
+@enduml

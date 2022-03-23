@@ -40,6 +40,21 @@ list is simply represented as a `TaskList` instead of a full-fledged `Module`.
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Tag Feature
+
+The tag command accepts a string from the user and adds it into `ArrayList<String> tags` of a `Task`.  
+
+Here is an example on adding a tag to a general task:  
+1) User inputs `tag add 2 "testTag"`. 
+2) `TagParser` will initialise `TagCommand` with add as `tagOperation` 2 as `taskIndex` and testTag as `tagDescription`, while `taskModule` is null.
+3) `TagCommand` then gets the relevant `Module`. If `taskModule` is null, `getGeneralTasks()` is called. Else, `getModule(taskModule)` is called instead.
+4) Next, `TagCommand` checks the `tagOperation`. If add, `addTag(targetModule)` is called. Else if del, `removeTag(targetModule)` is called. Else, it throws `ParseException`.
+
+Below is the sequence diagram of how the tag feature works:
+
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/Tag.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/GetModule.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/CheckAndRunTagOperation.puml)
 
 ## Product scope
 ### Target user profile
