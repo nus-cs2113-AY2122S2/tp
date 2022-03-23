@@ -14,7 +14,7 @@ class WerkIt {
 + startContinuousUserPrompt()
 }
 
-class Command {
+abstract Command {
 
 }
 
