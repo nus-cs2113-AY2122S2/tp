@@ -8,7 +8,7 @@ import seedu.duke.exceptions.ParseException;
 import seedu.duke.util.StringConstants;
 
 public class ModuleList {
-    public ArrayList<Module> list;
+    private ArrayList<Module> list;
     private Module generalTasks;
 
     private static final String DELETE_CONFIRMATION = StringConstants.DELETE_CONFIRMATION;

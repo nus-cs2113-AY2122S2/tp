@@ -1,5 +1,7 @@
 package seedu.duke.commands;
 
+import java.util.Objects;
+
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ModuleListEmptyException;
 import seedu.duke.tasks.Module;
@@ -7,8 +9,6 @@ import seedu.duke.tasks.ModuleList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.Grades;
 import seedu.duke.util.StringConstants;
-
-import java.util.Objects;
 
 public class GpaCommand extends Command {
 
@@ -23,7 +23,7 @@ public class GpaCommand extends Command {
     private double sumOfProduct = 0.0; // product of modular grade point and mc
 
     public void calculateGpa(ModuleList moduleList) throws ModHappyException {
-        if (Objects.isNull(moduleList.list)) {
+        if (Objects.isNull(moduleList.getModuleList())) {
             throw new ModuleListEmptyException();
         }
         for (Module m : moduleList.getModuleList()) {

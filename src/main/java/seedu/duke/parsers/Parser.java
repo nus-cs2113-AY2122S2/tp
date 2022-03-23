@@ -10,7 +10,6 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.util.StringConstants;
 
-
 /**
  * Represents a Parser that parse a {@code Command}.
  */
