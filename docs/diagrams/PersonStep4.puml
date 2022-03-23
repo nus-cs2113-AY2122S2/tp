@@ -1,21 +1,32 @@
 @startuml
 autonumber
+hide footbox
 
-title When user calls "list""
+title When user calls "list"
 
 box
 participant ":Command" as Command
 participant ":Family" as Family
-collections ":PersonList" as PersonList
+participant ":PersonList" as PersonList
 
+[-> Command : execute(list)
+activate Command
 Command -> Family : list()
+activate Family
 loop for all 3 generaltional lists
     Family -> PersonList : getTotalIncome()
+    activate PersonList
     Family <-- PersonList : income:int
+    deactivate PersonList
     Family -> PersonList : getTotalExpenditure()
+    activate PersonList
     Family <-- PersonList : expenditure:int
+    deactivate PersonList
 end
 Command <-- Family
+deactivate Family
+[<--Command
+deactivate Command
 
 end box
 
