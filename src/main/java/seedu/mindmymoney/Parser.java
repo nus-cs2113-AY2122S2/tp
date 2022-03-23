@@ -24,7 +24,7 @@ public class Parser {
      * Returns a Command object with respect to their input. The command object can then be executed to perform
      * the said command.
      *
-     * @param input    The command to be parsed.
+     * @param input The command to be parsed.
      * @param itemList The list of expenditures.
      * @return Command object with respect to user's input.
      */
