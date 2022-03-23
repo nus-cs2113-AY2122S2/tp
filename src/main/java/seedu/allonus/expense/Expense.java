@@ -11,6 +11,22 @@ public class Expense {
     static  Logger logger;
     private static int noOfItems = 0;
 
+    public String getDate() {
+        return date;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
     public void setDate(String date) {
         this.date = date;
     }

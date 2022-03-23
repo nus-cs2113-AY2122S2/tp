@@ -3,6 +3,7 @@ package seedu.allonus.expense;
 
 import seedu.allonus.ui.TextUi;
 
+import java.lang.reflect.Executable;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -10,6 +11,7 @@ import java.util.logging.Level;
 import static seedu.allonus.expense.ExpenseParser.parseDeleteExpense;
 import static seedu.allonus.expense.ExpenseParser.parseEditExpense;
 import static seedu.allonus.expense.ExpenseParser.parseNewExpense;
+import static seedu.allonus.expense.ExpenseParser.parseFindExpense;
 
 /**
  * The core function of the expense tracker, which executes user commands based on keywords.
@@ -57,6 +59,7 @@ public class ExpenseTracker {
     public static final String NEW_AMOUNT_VALUE_SET = "New amount value set!";
     public static final String NEW_CATEGORY_VALUE_SET = "New category value set!";
     public static final String MSG_NEW_VALUE_CANNOT_BE_EMPTY = "New value cannot be empty!";
+    public static final String NO_TASKS_FOUND = "No tasks found!";
 
     private static void expenseWelcome() {
         System.out.println(EXPENSE_WELCOME_MESSAGE);
@@ -123,7 +126,7 @@ public class ExpenseTracker {
      * @param ui    ui object to collect user's inputs
      * @throws IndexOutOfBoundsException if the expense record is not found
      */
-    private static void editExpense(ArrayList<Expense> list, int index, TextUi ui) throws IndexOutOfBoundsException {
+    private static void editExpense(ArrayList<Expense> list, int index, TextUi ui) {
         Expense toBeEdited = list.get(index - 1);
         System.out.println(CHOSEN_EXPENSE_TO_EDIT + toBeEdited);
         System.out.println(CHOSEN_FIELD_TO_EDIT);
@@ -188,6 +191,30 @@ public class ExpenseTracker {
     }
 
     /**
+     * Looks through the list of expense records and prints out the records that contain a specified keyword.
+     *
+     * @param list         list of expenses itself
+     * @param stringToFind keyword to look for within each expense record
+     */
+    private static void findExpense(ArrayList<Expense> list, String stringToFind) {
+        boolean isFound = false;
+        stringToFind = stringToFind.toLowerCase();
+        for (Expense expense : list) {
+            String expenseCategory = expense.getCategory().toLowerCase();
+            String expenseDate = expense.getDate().toLowerCase();
+            String expenseRemark = expense.getRemark().toLowerCase();
+            if (expenseCategory.contains(stringToFind) || expenseDate.contains(stringToFind)
+                    || expenseRemark.contains(stringToFind)) {
+                isFound = true;
+                System.out.println("Here are the matching expense records:\n" + expense);
+            }
+        }
+        if (!isFound) {
+            System.out.println(NO_TASKS_FOUND);
+        }
+    }
+
+    /**
      * Determines which command to execute depending on the keyword supplied.
      *
      * @param ui the user input itself
@@ -242,6 +269,7 @@ public class ExpenseTracker {
                 } else {
                     try {
                         index = parseEditExpense(rawInput);
+                        editExpense(expenseList, index, ui);
                     } catch (IndexOutOfBoundsException e) {
                         logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
                         System.out.println(MSG_EMPTY_INDEX);
@@ -249,7 +277,16 @@ public class ExpenseTracker {
                         logger.log(Level.WARNING, LOG_INVALID_INDEX_TYPE);
                         System.out.println(MSG_INVALID_INDEX_TYPE);
                     }
-                    editExpense(expenseList, index, ui);
+                }
+                break;
+            case ("find"):
+                String stringToFind;
+                try {
+                    stringToFind = parseFindExpense(rawInput);
+                    findExpense(expenseList, stringToFind);
+                } catch (IndexOutOfBoundsException e) {
+                    logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
+                    System.out.println("Keyword cannot be empty!");
                 }
                 break;
             default:
@@ -262,4 +299,6 @@ public class ExpenseTracker {
         logger.log(Level.INFO, LOG_RETURN_TO_MENU_INTENT);
         return;
     }
+
+
 }

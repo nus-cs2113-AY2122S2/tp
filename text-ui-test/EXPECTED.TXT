@@ -47,10 +47,12 @@ Menu:
 Welcome to Expense Tracker
 You haven't added any expenses to your list yet!
 Added Date | 18.00 | Category | This is a remark
+Added 24/3/2022 | 9.50 | Movie | Jujutsu Kaisen
 Some fields are empty! Try again!
 Some fields are empty! Try again!
 Here are the expenses you have made so far:
  1. Date | 18.00 | Category | This is a remark
+ 2. 24/3/2022 | 9.50 | Movie | Jujutsu Kaisen
 
 Selected item does not exist in the list
 Here is the expense record you have chosen to edit:
@@ -62,9 +64,14 @@ Here is the newly edited expense record:
 Date | 20.00 | Category | This is a remark
 Here are the expenses you have made so far:
  1. Date | 20.00 | Category | This is a remark
+ 2. 24/3/2022 | 9.50 | Movie | Jujutsu Kaisen
 
+Here are the matching expense records:
+24/3/2022 | 9.50 | Movie | Jujutsu Kaisen
 Deleted entry: Date | 20.00 | Category | This is a remark
-You haven't added any expenses to your list yet!
+Here are the expenses you have made so far:
+ 1. 24/3/2022 | 9.50 | Movie | Jujutsu Kaisen
+
 Welcome back to the main menu
 Menu:
 Welcome to Modules Tracker, where you can track all your classes.
