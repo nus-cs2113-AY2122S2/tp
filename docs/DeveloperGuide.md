@@ -58,7 +58,7 @@ is responsible for,
 
 The **API** of this component is specified in `Family.java`, `PersonList.java` and `Person.java`.
 
--- Insert UML class diagram here
+<image src="images/PersonsComponent.png" width="300"></image>
 
 The list of persons consists of a `Family` that is made up of generational `PersonList`s. Each `PersonList` holds a  
 list of `Person`s who belong to that generation.
