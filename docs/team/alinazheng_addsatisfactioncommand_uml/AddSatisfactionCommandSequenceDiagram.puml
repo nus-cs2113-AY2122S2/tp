@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+'autonumber
+'
+'Alice -> Bob: Authentication Request
+'Bob --> Alice: Authentication Response
+'
+'Alice -> Bob: Another authentication Request
+'Alice <-- Bob: another authentication Response
+Duke -->> SatisfactionList ** : SatisfactionList()
+User -> Duke ++: run()
+Duke -->> CommandParser ** : CommandParser()
+User -> Duke ++ : add satisfaction Bob 5
+Duke -> CommandParser ++ : parse(add satisfaction Bob 5)
+CommandParser ->> AddSatisfactionCommand ** : AddSatisfactionCommand()
+AddSatisfactionCommand -> AddSatisfactionCommand ++ : extractCustomerName()
+AddSatisfactionCommand -> AddSatisfactionCommand ++ : extractSatisfactionValue()
+AddSatisfactionCommand -->> Satisfaction ** : Satisfaction(Bob, 5)
+Duke -> AddSatisfactionCommand ++ : execute(SatisfactionList)
+AddSatisfactionCommand -> SatisfactionList ++: addSatisfaction(Satisfaction)
+@enduml
