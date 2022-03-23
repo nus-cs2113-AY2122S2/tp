@@ -320,6 +320,14 @@ Example of usage:
 > A group represents one or more individuals.
 > It is used as a shortcut in several commands for identifying a group of individual persons.
 
+Format: `group /list`
+
+Example of usage:
+
+![Group list command Screenshot]()
+<br>
+<br>
+
 ### Listing all available commands: `help`
 
 ### Exit
