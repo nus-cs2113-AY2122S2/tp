@@ -92,8 +92,10 @@ The above sequence diagram shows the operation of how the add goods method will 
 2. The User Interface Class will then match the command keyword `remove`
 3. The Regex Class will then be called to match the rest of the user's input to find the values required to remove goods from the inventory.
 4. Afterwards, the User Interface class will call removeGood() method from the Commands Class
-5. This method will then 
-6. The addGood() method will then add the Good to the Collections storing the Good Objects currently in the WareHouse
+5. This method will then reduce the quantity of a type of goods if the quantity input is not larger than the existing quantity. If the quantity input is the same as the existing quantity, the goods object will be removed from the inventory.
+6. The UI will show a message of format
+    > `quantity` `name` have been removed
+to show that the operation is successful.
 
 For more examples of how a user can use a command, refer to the [UserGuide](/UserGuide.md)
 
