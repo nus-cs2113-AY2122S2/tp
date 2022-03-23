@@ -9,6 +9,7 @@ class Duke {
 class MainController {
 
 }
+MainController <.. Duke
 Controller <|-- MainController
 DishController "1" <-- MainController: have <
 
@@ -63,4 +64,54 @@ Dish "0..*" <-- DishManager: manages <
 DishManager "1" <-- DishController: have <
 
 DishController .-> Dish
+
+class Staff {
+    -staffId: int
+    -staffName: String
+    -position: String
+    -salary: double
+    +Staff(int, String, String, double)
+    +isValidName(String): boolean
+    +getStaffId(): int
+    +setStaffId(int): void
+    +getStaffName(): String
+    +setStaffName(String): void
+    +getPosition(): String
+    +setPosition(String): void
+    +getSalary(): double
+    +setSalary(double): void
+    +toString(): String
+}
+
+class StaffManager {
+    -staffs: ArrayList<Staff>
+    +StaffManager()
+    +getStaffs(): ArrayList<Staff>
+    +printStaffs(): void
+    +printDishes(): void
+    +addStaff(int, String, String, double): void
+    +findStaffById(int, boolean): Staff
+    +deleteStaffById(int): void
+    +getNumOfStaff(): int
+}
+
+class StaffController {
+    -CHOICES: String[]
+    -staffManager: StaffManager
+    +StaffController()
+    #optionSwicher(int): boolean
+    -findStaff(): void
+    -addStaff(): void
+    -deleteStaff(): void
+    +takeControl(): void
+}
+
+Controller <|-- StaffController
+
+StaffController "1" <-- MainController: have <
+
+Staff "0..*" <-- StaffManager: manages <
+
+StaffManager "1" <-- StaffController: have <
+
 @enduml
