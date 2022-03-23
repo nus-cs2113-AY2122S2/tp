@@ -13,7 +13,6 @@ public class MainUi {
      */
     static final Scanner scannerIn = new Scanner(System.in);
 
-    private static final String lineDivider = ("==================================================");
 
     /**
      * Shows message to user.
@@ -38,7 +37,7 @@ public class MainUi {
     }
 
     public void displayLineDivider() {
-        System.out.println(lineDivider);
+        System.out.println(Messages.lineDivider);
     }
 
     /**
@@ -59,7 +58,6 @@ public class MainUi {
         fullInputLine = fullInputLine.trim();
         return fullInputLine;
     }
-
 
     public void displayResultToUser(CommandResult result) {
         System.out.println(result.getFeedbackToUser());

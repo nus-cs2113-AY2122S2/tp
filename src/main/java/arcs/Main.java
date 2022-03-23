@@ -11,15 +11,14 @@ import java.io.IOException;
 
 
 public class Main {
-    private MainUi mainUi;
-    private RouteManager routeManager;
 
+    private RouteManager routeManager;
+    private MainUi mainUi;
+    private RouteFileManager routeFileManager;
     /**
      * Parser object.
      */
     private final Parser parser;
-
-    private RouteFileManager routeFileManager;
 
     /**
      * Main entry-point for the ARCS application.
@@ -34,9 +33,7 @@ public class Main {
         parser = new Parser();
         routeFileManager = new RouteFileManager();
         loadData();
-
     }
-
 
     public void run() {
         Command command;

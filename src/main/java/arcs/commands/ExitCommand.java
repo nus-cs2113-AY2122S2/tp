@@ -1,6 +1,5 @@
 package arcs.commands;
 
-import arcs.ui.MainUi;
 
 public class ExitCommand extends Command {
     /**

@@ -1,8 +1,7 @@
 package arcs.commands;
 
-import arcs.data.Route;
 import arcs.data.RouteManager;
-import arcs.data.exception.ArcsException;
+
 
 public abstract class Command {
 
@@ -13,9 +12,8 @@ public abstract class Command {
         this.routeManager = routeManager;
     }
 
-
     /**
-     * Returns applications's exit status.
+     * Returns application's exit status.
      *
      * @return Exit status.
      */
@@ -34,4 +32,5 @@ public abstract class Command {
      * Executes command.
      */
     public abstract CommandResult execute();
+
 }
