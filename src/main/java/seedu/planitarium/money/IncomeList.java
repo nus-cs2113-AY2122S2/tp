@@ -10,6 +10,9 @@ public class IncomeList extends MoneyList {
     private ArrayList<Income> incomeArrayList;
     private int numberOfIncomes;
 
+    private static final String LOG_CLASS_NAME = IncomeList.class.getSimpleName();
+    private static final String LOG_FILE_PATH = LOG_CLASS_NAME + ".log";
+    private static final String LOG_INIT = "Logger for " + LOG_CLASS_NAME + " initialised.";
     private static final String LOG_ADD_INC = "addIncome()";
     private static final String LOG_GET_INC_VAL = "getIncomeValue()";
     private static final String LOG_GET_NUM_INC = "getNumberOfIncomes()";
@@ -110,5 +113,9 @@ public class IncomeList extends MoneyList {
         for (Income item : incomeArrayList) {
             System.out.println(listIndex++ + ". " + item);
         }
+    }
+
+    public ArrayList<Income> getIncomeArrayList() {
+        return incomeArrayList;
     }
 }

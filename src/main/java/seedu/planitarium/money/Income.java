@@ -11,4 +11,8 @@ public class Income extends Money {
         super(description, amount);
     }
 
+    @Override
+    public String toString() {
+        return "i " + description + " - " + amount;
+    }
 }
