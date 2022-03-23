@@ -183,9 +183,11 @@ public class TaskList {
      * Printed tasks applies to non-recurring tasks.
      */
     public void printPendingTasks(Ui ui) {
+        int printIndex = 1;
         for (Task task : tasks) {
             if (!task.isDone()) {
-                ui.showToUser(task.toString());
+                ui.showToUser(printIndex + ". " + task.toString());
+                printIndex++;
             }
         }
     }

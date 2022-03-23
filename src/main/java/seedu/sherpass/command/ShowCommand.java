@@ -40,14 +40,18 @@ public class ShowCommand extends Command {
 
         switch (selection) {
         case "todo":
+            ui.showToUser("Here are your pending tasks:");
             taskList.printPendingTasks(ui);
             break;
         case "today":
             ui.showToUser(WELCOME_MESSAGE_TWO);
             Timetable.showTodaySchedule(taskList, ui);
+            ui.showToUser("What would you like to do next?");
             break;
         case "week":
+            ui.showToUser("Here is your schedule for the week:");
             Timetable.showScheduleOfTheWeek(taskList, ui);
+            ui.showToUser("What would you like to do next?");
             break;
         case "all":
             taskList.printAllTasks(ui);
@@ -55,6 +59,5 @@ public class ShowCommand extends Command {
         default:
             ui.showToUser(ERROR_INVALID_INPUT_MESSAGE);
         }
-        ui.showToUser("What would you like to do next?");
     }
 }
