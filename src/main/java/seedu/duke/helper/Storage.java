@@ -132,7 +132,7 @@ public class Storage {
             try {
                 appointmentFile.createNewFile();
             } catch (IOException ioException) {
-                System.out.println("appointment.txt cannot be created");
+                UI.printParagraph("appointment.txt cannot be created");
                 return;
             }
         }
@@ -143,7 +143,7 @@ public class Storage {
             }
             dataWrite.close();
         } catch (IOException e) {
-            System.out.println("Unable to save data...");
+            UI.printParagraph("Unable to save data...");
         }
     }
 
