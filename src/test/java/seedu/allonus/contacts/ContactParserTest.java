@@ -15,17 +15,19 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.allonus.contacts.ContactParser.getFieldStrings;
+import static seedu.allonus.contacts.ContactParser.parseContact;
+import static seedu.allonus.contacts.ContactParser.setContactFields;
 
 class ContactParserTest {
 
-    private ContactParser defaultContactParser = new ContactParser();
-    private String aliceString = "n/Alice f/FOS e/e1@u.nus.edu d/AB";
-    private String bobString = "n/Bob f/FASS e/e2@u.nus.edu d/BC";
-    private String charlieString = "f/SDE d/CD n/Charlie e/e3@u.nus.edu";
-    private String davidString = "e/e4@u.nus.edu f/SoC d/DE n/David";
+    private static final String aliceString = "n/Alice f/FOS e/e1@u.nus.edu d/AB";
+    private static final String bobString = "n/Bob f/FASS e/e2@u.nus.edu d/BC";
+    private static final String charlieString = "f/SDE d/CD n/Charlie e/e3@u.nus.edu";
+    private static final String davidString = "e/e4@u.nus.edu f/SoC d/DE n/David";
 
-    private String invalidNameString = "n/ f/valid e/valid d/valid";
-    private String invalidFacultyString = "n/valid e/valid d/valid f/";
+    private static final String invalidNameString = "n/ f/valid e/valid d/valid";
+    private static final String invalidFacultyString = "n/valid e/valid d/valid f/";
 
     Contact charlie = new Contact(new Name("Charlie"),
             new Faculty("SDE"),
@@ -36,15 +38,15 @@ class ContactParserTest {
             new Email("e4@u.nus.edu"),
             new Description("DE"));
 
-    private ArrayList<String> aliceFields =
+    private static final ArrayList<String> aliceFields =
             new ArrayList<>(Arrays.asList("n/Alice", "f/FOS", "e/e1@u.nus.edu", "d/AB"));
-    private ArrayList<String> bobFields =
+    private static final ArrayList<String> bobFields =
             new ArrayList<>(Arrays.asList("n/Bob", "f/FASS", "e/e2@u.nus.edu", "d/BC"));
 
     @Test
     void getFieldStringsWorks() {
-        ArrayList<String> parsedFieldsOfAlice = defaultContactParser.getFieldStrings(aliceString);
-        ArrayList<String> parsedFieldsOfBob = defaultContactParser.getFieldStrings(bobString);
+        ArrayList<String> parsedFieldsOfAlice = getFieldStrings(aliceString);
+        ArrayList<String> parsedFieldsOfBob = getFieldStrings(bobString);
 
         for (String field : parsedFieldsOfAlice) {
             assertTrue(aliceFields.contains(field));
@@ -55,11 +57,11 @@ class ContactParserTest {
     }
 
     @Test
-    void setContactFieldsWorks() throws InvalidContactField {
+    void setContactFields_validFields_setsSuccessfully() throws InvalidContactField {
         Contact testContact = new Contact(new Name(""), new Faculty(""),
                 new Email(""), new Description(""));
 
-        defaultContactParser.setContactFields(testContact, bobFields);
+        setContactFields(testContact, bobFields);
         assertTrue(bobFields.contains("n/" + testContact.getName().toString()));
         assertTrue(bobFields.contains("f/" + testContact.getFaculty().toString()));
         assertTrue(bobFields.contains("e/" + testContact.getEmail().toString()));
@@ -67,9 +69,20 @@ class ContactParserTest {
     }
 
     @Test
+    void setContactFields_invalidFields_throwsInvalidContactField() {
+        Contact testContact = new Contact(new Name(""), new Faculty(""),
+                new Email(""), new Description(""));
+
+        assertThrows(InvalidContactField.class, () ->
+                setContactFields(testContact, getFieldStrings(invalidNameString)));
+        assertThrows(InvalidContactField.class, () ->
+                setContactFields(testContact, getFieldStrings(invalidFacultyString)));
+    }
+
+    @Test
     void parseContact_validString_parsesNormally() throws InvalidContactField {
-        Contact parsedCharlie = defaultContactParser.parseContact(charlieString);
-        Contact parsedDavid = defaultContactParser.parseContact(davidString);
+        Contact parsedCharlie = parseContact(charlieString);
+        Contact parsedDavid = parseContact(davidString);
 
         assertEquals(parsedCharlie.toString(), charlie.toString());
         assertEquals(parsedDavid.toString(), david.toString());
@@ -80,7 +93,7 @@ class ContactParserTest {
 
     @Test
     void parseContact_invalidString_throwsInvalidContactField() {
-        assertThrows(InvalidContactField.class, () -> defaultContactParser.parseContact(invalidNameString));
-        assertThrows(InvalidContactField.class, () -> defaultContactParser.parseContact(invalidFacultyString));
+        assertThrows(InvalidContactField.class, () -> parseContact(invalidNameString));
+        assertThrows(InvalidContactField.class, () -> parseContact(invalidFacultyString));
     }
 }

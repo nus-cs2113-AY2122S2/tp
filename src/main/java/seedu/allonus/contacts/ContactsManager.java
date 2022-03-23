@@ -42,7 +42,7 @@ public class ContactsManager {
     private static final String CONTACTS_EDIT_SUCCESS_MESSAGE =
             "Okay, I've updated the information of this contact:\n  ";
 
-    private static Logger logger = Logger.getLogger("");
+    private static final Logger logger = Logger.getLogger("");
     private static final int CONTACTS_LIST_MAX_SIZE = 100;
     private static final ArrayList<Contact> contactsList = new ArrayList<>(CONTACTS_LIST_MAX_SIZE);
 
@@ -58,17 +58,6 @@ public class ContactsManager {
     private static void contactsWelcome() {
         printFormat(CONTACTS_WELCOME_MESSAGE);
         logger.log(Level.FINER, "Entering Contacts Manager");
-    }
-
-    /**
-     * Returns index of item in the list using number given by user.
-     *
-     * @param userInput String of original user input.
-     * @return ind Index of item.
-     */
-    private static int parseNum(String userInput) {
-        String stringOfNum = userInput.split(" ", 0)[1];
-        return Integer.parseInt(stringOfNum) - 1;
     }
 
     private static void listContacts() {
@@ -88,7 +77,7 @@ public class ContactsManager {
     private static void deleteContact(String userInput) {
         Contact curr;
         try {
-            int taskInd = parseNum(userInput);
+            int taskInd = ContactParser.parseNum(userInput);
             curr = contactsList.get(taskInd);
             assert taskInd < contactsList.size();
             contactsList.remove(taskInd);
@@ -146,7 +135,7 @@ public class ContactsManager {
     private static void editContact(String userInput) {
         Contact curr;
         try {
-            int taskInd = parseNum(userInput);
+            int taskInd = ContactParser.parseNum(userInput);
             curr = contactsList.get(taskInd);
             assert taskInd >= 0;
             assert taskInd <= contactsList.size();

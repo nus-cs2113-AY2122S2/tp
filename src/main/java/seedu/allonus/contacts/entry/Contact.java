@@ -2,10 +2,10 @@ package seedu.allonus.contacts.entry;
 
 public class Contact {
 
-    private Name name;
-    private Faculty faculty;
-    private Email email;
-    private Description description;
+    private final Name name;
+    private final Faculty faculty;
+    private final Email email;
+    private final Description description;
 
     public Contact(Name name, Faculty faculty, Email email, Description description) {
         this.name = name;
@@ -30,16 +30,11 @@ public class Contact {
         return description;
     }
 
-    public void setName(String name) {
-        this.name.setField(name);
-    }
-
     @Override
     public String toString() {
-        String contactPrinted = "Name: " + getName()
+        return "Name: " + getName()
                 +  ", Faculty: " + getFaculty()
                 + ", Email: " + getEmail()
                 + ", Description: " + getDescription();
-        return contactPrinted;
     }
 }

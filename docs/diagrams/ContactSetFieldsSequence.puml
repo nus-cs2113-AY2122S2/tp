@@ -1,0 +1,25 @@
+@startuml
+!include Style.puml
+
+participant "contactsManager:ContactsManager"
+participant  "ContactParser" <<class>>
+participant "contact:Contact"
+participant ":Field"
+
+"contactsManager:ContactsManager" -> "ContactParser" : setContactFields(contact, fieldStrings)
+activate "ContactParser"
+
+loop for each fieldString in fieldStrings
+    ref over "ContactParser", "contact:Contact" : get Field object to be updated
+
+    "ContactParser" -> ":Field" : setField(fieldString)
+    activate ":Field"
+
+    ":Field" --> "ContactParser"
+    deactivate ":Field"
+end
+
+"ContactParser" --> "contactsManager:ContactsManager"
+deactivate "ContactParser"
+
+@enduml

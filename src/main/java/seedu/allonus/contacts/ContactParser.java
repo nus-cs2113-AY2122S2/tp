@@ -26,6 +26,17 @@ public class ContactParser {
     private static Logger logger = Logger.getLogger("");
     private static final int MAX_NUMBER_OF_FIELDS = 5;
 
+    /**
+     * Returns index of item in the list using number given by user.
+     *
+     * @param userInput String of original user input.
+     * @return ind Index of item.
+     */
+    static int parseNum(String userInput) {
+        String stringOfNum = userInput.split(" ", 0)[1];
+        return Integer.parseInt(stringOfNum) - 1;
+    }
+
     static ArrayList<String> getFieldStrings(String userInput) {
         String regex = CONTACTS_DELIMITERS + ".*?(?=(" + CONTACTS_DELIMITERS + "|$))";
         Pattern pattern = Pattern.compile(regex);
