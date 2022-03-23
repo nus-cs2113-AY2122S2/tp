@@ -10,6 +10,8 @@ public class InvalidCommandException extends Exception {
             + "in your input.";
     public static final String INVALID_WORKOUT_LIST_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
             + "Do you mean 'workout /list?'";
+    public static final String INVALID_WORKOUT_LIST_ALL_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
+            + "Do you mean 'workout /listall?'";
     public static final String INVALID_EXERCISE_LIST_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"
             + "Do you mean 'exercise /list?'";
     public static final String INVALID_NEW_WORKOUT_COMMAND_ERROR_MSG = "Uh oh, the command entered is wrong.\n"

@@ -139,8 +139,57 @@ for subsequent prompts.
 In _WerkIt!_, a workout is defined as an exercise paired with a number that represents the number
 of repetitions. For example, 20 repetitions of the Russian twist is considered a workout. 
 
+### Delete Existing Workout
+Class diagram for Delete Workout:
+![Delete Workout UML](uml/classDiagrams/images/DeleteWorkout.png)
+<br>
+<br>
+Sequence diagram for Delete Workout:
+![Delete Workout Sequence Diagram](uml/sequenceDiagrams/images/deleteWorkout.png)
+<br>
+<br>
+
+When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
+`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
+class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
+user's command. If the user's command type is to delete an existing workout, i.e. `workout /delete <workout number>`, the
+`Parser#parseUserInput(String userInput)` method will parse the 'workout' base word and proceed to create workout related
+command using `Parser#createWorkoutCommand(String userInput)` method. This method will further evaluate the
+workout action, in this case, `/delete` and call the constructor of `WorkoutCommand` class by passing relevant parameters related to the
+WorkoutCommand constructor. If the workout action is null or incorrect, an InvalidCommandException will be thrown. If the `<workout number>`
+parameter is also not specified, the same InvalidCommandException is thrown. Once the workout command is created,
+this workout command is executed via the `WorkoutCommand#execute()` method. As it is executed, the method will check the type of action to be executed, in this case,
+delete. It will then remove the existing workout using the `WorkoutList#deleteWorkout(getUserArguments())` method. The deleteWorkout method
+in addition, checks whether the workout number supplied is a valid integer and is within the range of the workout list. If both condition
+is not met, the NumberFormatException and WorkoutOutOfRangeException is thrown accordingly. Once the existing workout is successfully deleted,
+the UI will print a success message and call the `FileManager#rewriteAllWorkoutsToFile(getWorkoutList())` method to save the changes.
+
+#### Delete existing workout command
+Format: `workout /delete <workout number in workout list>`
+
+### List Workout
+![SearchUML](uml/classDiagrams/images/listWorkout.png)
+<br>
+user's command. If the user's command type is to list the workouts created, i.e. `workout /list`, the
+`Parser#parseUserInput(String userInput)` method will parse the 'workout' base word and proceed to create workout related
+command using `Parser#createWorkoutCommand(String userInput)` method. This method will further evaluate the
+workout action, in this case, `/list` and call the constructor of `WorkoutCommand` class by passing relevant parameters related to the
+WorkoutCommand constructor. If the workout action is null or incorrect, an InvalidCommandException will be thrown. Once the workout command is created,
+this workout command is executed via the `WorkoutCommand#execute()` method. As it is executed, the method will check the
+type of action to be executed, in this case, list. It will then list the workouts created and stored in the workoutList using the `WorkoutList#listWorkout()`
+method which will call `WorkoutList#continuousPrinting(int index, int noOfPrints)` method to determine
+the number of workouts to be printed. The maximum number of workouts to be displayed at a time is 10 workouts. If there are more than
+10 workouts stored in the workoutList, it will prompt the user to enter 'yes' or 'no' to determine the continuation of the printings.
+`isInputYesOrNo(String answer)` method is executed when user enter the answer for the continuation of printing.
+If the answer given by the user is neither 'yes' nor 'no', user will be prompt to enter their option again until they give the expected input.
+When 'yes' is entered, the printing will continue and `WorkoutList#continuousPrinting(int index, int noOfPrints)` method will be executed again.
+Otherwise, `WorkoutList#listWorkout()` method will be terminated.
+
+#### List workouts command
+Format: `workout /list`
+
 ### Search
-![SearchUML](uml/classDiagrams/images/SearchClassUML.png)
+![SearchUML](uml/classDiagrams/images/SearchClass.png)
 <br>
 
 When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
@@ -210,20 +259,20 @@ correctly.
   | Plan Name | Contains |
   | --- | --- |
   | Grow my Biceps | Barbell curls (3 reps), push ups (10 reps), deadlift (2 reps) |
-  | Whole Body! | Crunches (10 reps), jumping jack (3 reps), lift ups (4 reps), pull ups (3 reps), planking (2 reps), leg cycle (2 reps)
+  | Whole Body! | Crunches (10 reps), jumping jack (3 reps), lift ups (4 reps), pull ups (3 reps), planking (2 reps), leg cycle (2 reps)|
 
 * **Schedule** - Consists of Days 1 to 7. Users will add or modify a plan to that particular day
 of their schedule. For instance, the user's daily schedule can look like this:
 
   | Day | Plan Name      |
-  | --- |---------------- |
+  |----------------|---------------- |
   | Day 1 | Grow my Biceps |
-  | Day 2 |                |
+  | Day 2 | Rest Day       |
   | Day 3 | Whole Body!    |
   | Day 4 | Leg Day        |
   | Day 5 | Grow my Biceps |
-  | Day 6 | Whole Body! |
-  | Day 7 | |
+  | Day 6 | Whole Body!    |
+  | Day 7 | Rest Day       |
 
 
 ## Instructions for manual testing

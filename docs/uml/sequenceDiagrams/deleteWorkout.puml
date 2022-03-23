@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../Style.puml
+
+autonumber
+
+title Sequence Diagram of `workout /delete` Command
+
+actor   User
+participant "werkIt:WerkIt" AS WerkIt
+participant "ui:UI" AS UI1
+participant "parser:Parser" AS Parser
+participant "deleteCommand\n:WorkoutCommand" AS deleteCommand
+participant "workoutList\n:WorkoutList" AS WorkoutList
+participant "ui:UI" AS UI2
+participant "fileManager:FileManager" as FileManager
+
+activate WerkIt
+WerkIt -> UI1 : getUserInput()
+activate UI1
+User -> UI1 : `workout /delete` command
+WerkIt <-- UI1 : userInputTrimmed:String
+deactivate UI1
+
+WerkIt -> Parser : parseUserInput(userInput)
+activate Parser
+WerkIt <-- Parser : :Command
+deactivate Parser
+
+WerkIt -> deleteCommand : execute()
+activate deleteCommand
+deleteCommand -> WorkoutList : deleteWorkout(userArguments)
+activate WorkoutList
+ref over WorkoutList
+Delete existing workout
+specified by user.
+end
+deleteCommand <-- WorkoutList : "deletedWorkout:Workout"
+deactivate WorkoutList
+
+deleteCommand -> UI2 : printDeleteWorkoutMessage(deletedWorkout)
+activate UI2
+User <-- UI2 : Existing workout removed
+deleteCommand <-- UI2
+deactivate UI2
+
+deleteCommand -> FileManager : rewriteAllWorkoutsToFile(workoutList)
+activate FileManager
+ref over FileManager
+Rewrite the modified workoutList data
+(workout removed) into file on user's system
+end
+deleteCommand <-- FileManager
+deactivate FileManager
+
+WerkIt <-- deleteCommand
+deactivate deleteCommand
+
+destroy deleteCommand
+@enduml

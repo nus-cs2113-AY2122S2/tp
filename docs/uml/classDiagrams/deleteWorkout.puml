@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+Main - WerkIt
+WerkIt --> UI
+WerkIt --> Parser
+
+Command <|- WorkoutCommand
+Parser ..> Command
+WorkoutCommand --> WorkoutList
+WorkoutCommand --> FileManager
+
+class WerkIt {
++ startContinuousUserPrompt()
+}
+
+abstract Command {
+
+}
+
+class Main {
+
+}
+
+class WorkoutCommand {
++ void execute()
++ WorkoutList getWorkoutList()
++ FileManager getFileManager()
+}
+
+class UI {
+# String getUserInput()
++ void printDeleteWorkoutMessage(Workout deletedWorkout)
+}
+
+class Parser {
++ Command parseUserInput(String userInput)
++ WorkoutCommand createWorkoutCommand(String userInput)
+}
+
+class WorkoutList {
++ Workout deleteWorkout(String userArgument)
+- boolean checkIndexIsWithinRange(int index)
+}
+
+class FileManager {
++ void rewriteAllWorkoutsToFile(WorkoutList workoutList)
+}
+@enduml

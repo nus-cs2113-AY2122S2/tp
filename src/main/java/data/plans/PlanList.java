@@ -74,7 +74,7 @@ public class PlanList {
 
         ArrayList<Workout> workoutsToAddInAPlanList = new ArrayList<Workout>();
         for (int i = 0; i < numberOfWorkoutsInAPlan; i += 1) {
-            int workoutNumberInteger = Integer.parseInt(userWorkoutNumbersString.split(",")[i]);
+            int workoutNumberInteger = Integer.parseInt(userWorkoutNumbersString.split(",")[i].trim());
 
             boolean isWithinWorkoutListRange = checkWorkoutNumberWithinRange(workoutNumberInteger);
             if (!isWithinWorkoutListRange) {
