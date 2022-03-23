@@ -161,6 +161,7 @@ public class Validator {
 
     /* Validate medicine */
     public static boolean validateMedicine(String[] parameters) {
+        assert parameters.length == 6 : "Validate failed to check parameter length";
         boolean check = true;
         for (int i = 0; i < 5; i++) {
             switch (i) {
