@@ -17,8 +17,12 @@ import static constants.TextUIConstants.DIVIDER;
 import static constants.TextUIConstants.LINE_PREFIX;
 import static constants.TextUIConstants.LS;
 import static constants.TextUIConstants.USERCOMMANDREQUEST;
+import static constants.TextUIConstants.echoCommand;
 
-/** Text UI of the application. */
+/**
+ * Text UI of the application.
+ * This is a Singleton class.
+ */
 public class TextUi {
     private static TextUi textUiInstance;
     private final Scanner in;
@@ -33,6 +37,12 @@ public class TextUi {
         this.out = out;
     }
 
+    /**
+     * Returns the instance of <code>TextUi</code> if it has been created. Else, creates and returns an instance of
+     * <code>TextUi</code> using the System Input Stream and Output Stream.
+     *
+     * @return TextUi object.
+     */
     public static TextUi getTextUiInstance () {
         if (textUiInstance == null) {
             textUiInstance = new TextUi();
@@ -40,6 +50,12 @@ public class TextUi {
         return textUiInstance;
     }
 
+    /**
+     * Returns the instance of <code>TextUi</code> if it has been created. Else, creates and returns an instance of
+     * <code>TextUi</code> using the specified Input Stream and Output Stream.
+     *
+     * @return TextUi object.
+     */
     public static TextUi getTextUiInstance (InputStream in, PrintStream out) {
         if (textUiInstance == null) {
             textUiInstance = new TextUi(in, out);
@@ -51,8 +67,8 @@ public class TextUi {
      * Returns true if the user input line should be ignored.
      * Input should be ignored if it is parsed as a comment, is only whitespace, or is empty.
      *
-     * @param rawInputLine full raw user input line.
-     * @return true if the entire user input line should be ignored.
+     * @param rawInputLine Full raw user input line.
+     * @return <code>true</code> if the entire user input line should be ignored.
      */
     private boolean shouldIgnore(String rawInputLine) {
         return rawInputLine.trim().isEmpty() || isCommentLine(rawInputLine);
@@ -61,8 +77,8 @@ public class TextUi {
     /**
      * Returns true if the user input line is a comment line.
      *
-     * @param rawInputLine full raw user input line.
-     * @return true if input line is a comment.
+     * @param rawInputLine Full raw user input line.
+     * @return <code>true</code> if input line is a comment.
      */
     private boolean isCommentLine(String rawInputLine) {
         return rawInputLine.trim().matches(COMMENT_LINE_FORMAT_REGEX);
@@ -73,7 +89,7 @@ public class TextUi {
      * Ignores empty, pure whitespace, and comment lines.
      * Echos the command back to the user.
      *
-     * @return command (full line) entered by the user
+     * @return Command (full line) entered by the user.
      */
     public String getUserCommand() {
         out.print(USERCOMMANDREQUEST);
@@ -84,14 +100,14 @@ public class TextUi {
             fullInputLine = in.nextLine();
         }
 
-        showToUser("[Command entered:" + fullInputLine + "]");
+        showToUser(echoCommand(fullInputLine));
         return fullInputLine;
     }
 
     /**
      * Generates and prints the welcome message upon the start of the application.
      *
-     * @param version current version of the application.
+     * @param version Current version of the application.
      */
     public void showWelcomeMessage(String version) {
         showToUser(
@@ -102,12 +118,13 @@ public class TextUi {
                 DIVIDER);
     }
 
+    /** Prints the goodbye message upon the end of the application. */
     public void showGoodbyeMessage() {
         showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
     }
 
 
-    /** Shows message(s) to the user */
+    /** Shows message(s) to the user. */
     public void showToUser(String... message) {
         for (String m : message) {
             out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
@@ -125,6 +142,5 @@ public class TextUi {
         }
         showToUser(result.getFeedbackToUser(), DIVIDER);
     }
-
 }
 
