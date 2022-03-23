@@ -13,8 +13,17 @@ public class MasterTimetable {
 
     public Timetable getByName(String name) throws TimetableNotFoundException {
         for (Timetable timetable : timetables) {
-            if (timetable.nameEquals(name)) {
+            if (name.equals(timetable.getName())) {
                 return timetable;
+            }
+        }
+        throw new TimetableNotFoundException();
+    }
+
+    public void removeByName(String name) throws TimetableNotFoundException {
+        for (Timetable timetable : timetables) {
+            if (name.equals(timetable.getName())) {
+                timetables.remove(timetable);
             }
         }
         throw new TimetableNotFoundException();
@@ -22,5 +31,13 @@ public class MasterTimetable {
 
     public Timetable getByIndex(int index) {
         return timetables.get(index);
+    }
+
+    public void removeByIndex(int index) {
+        timetables.remove(index);
+    }
+
+    public void add(Timetable timetable) {
+        timetables.add(timetable);
     }
 }

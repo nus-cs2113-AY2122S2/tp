@@ -2,6 +2,7 @@ package seedu.meetingjio.commands;
 
 import seedu.meetingjio.events.Event;
 import seedu.meetingjio.events.Lesson;
+import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.timetables.MasterTimetable;
 
 import seedu.meetingjio.exceptions.DuplicateEventException;
@@ -33,16 +34,22 @@ public class AddCommand extends Command {
     /**
      * Execute Add command using the timetable provided.
      *
-     * @param masterTimetable
+     * @param masterTimetable MasterTimetable
      *
      */
     @Override
     public String execute(MasterTimetable masterTimetable) {
+        Timetable timetable;
         try {
-            Timetable timetable = masterTimetable.getByIndex(0); // changes needed
+            timetable  = masterTimetable.getByName(name);
+        } catch (TimetableNotFoundException tnfe) {
+            timetable = new Timetable(name);
+            masterTimetable.add(timetable);
+        }
+        try {
             Event newEvent = new Lesson(title, day, startTime, endTime, mode);
             timetable.add(newEvent);
-            return addConfirmation(newEvent);
+            return addConfirmation(newEvent, name);
         } catch (DuplicateEventException dee) {
             return ERROR_DUPLICATE_EVENT;
         } catch (OverlappingEventException oee) {
@@ -56,8 +63,8 @@ public class AddCommand extends Command {
      * @param event Event that inform user that said event has been event
      *
      */
-    private String addConfirmation(Event event) {
-        return "The following event has been added to your timetable:\n"
-                + event;
+    private String addConfirmation(Event event, String name) {
+        return String.format("The following event has been added to %s's timetable:\n%s",
+                name, event);
     }
 }
