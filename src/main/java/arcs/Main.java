@@ -2,33 +2,23 @@ package arcs;
 
 import arcs.commands.CommandResult;
 import arcs.data.RouteManager;
-import arcs.data.menu.MenuItemList;
 import arcs.parser.Parser;
 import arcs.storage.RouteFileManager;
-import arcs.ui.MainUi;
-import arcs.ui.MenuUi;
-import arcs.data.menu.MenuItem;
 import arcs.commands.Command;
-import arcs.commands.ExitCommand;
-import arcs.data.exception.ArcsException;
+import arcs.ui.MainUi;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 
 public class Main {
 
-    private MainUi mainUi;
-    private MenuUi menuUi;
-    private MenuItemList menuItemList;
     private RouteManager routeManager;
-
+    private MainUi mainUi;
+    private RouteFileManager routeFileManager;
     /**
      * Parser object.
      */
     private final Parser parser;
-
-    private RouteFileManager routeFileManager;
 
     /**
      * Main entry-point for the ARCS application.
@@ -38,64 +28,36 @@ public class Main {
     }
 
     public Main() {
+        // Initialize ui, logic and storage classes
+        mainUi = new MainUi();
         parser = new Parser();
-        mainUi = new MainUi(parser);
+        routeFileManager = new RouteFileManager();
         loadData();
-        ArrayList<MenuItem> menuItems = new ArrayList<>();
-        menuItemList = new MenuItemList(menuItems);
-
     }
 
     public void run() {
-        mainUi.displayWelcomeMessage();
-        Command command = new ExitCommand(mainUi);
-        while (!command.isExit()) {
-            try {
-                if (command.isAtMainMenu()) {
-                    command = parser.parseMainMenuInput(mainUi.readCommand(), mainUi, menuItemList,
-                            routeManager);
-                }
-                //command.execute();
-                CommandResult result = command.execute();
-                if (result != null) {
-                    mainUi.showResultToUser(result);
-                }
-            } catch (ArcsException e) {
-                mainUi.displayMessage(e.getMessage());
-            } finally {
-                mainUi.printLineDivider();
-            }
-        }
-        saveData();
-    }
-
-    /*public void run() {
-        ui = new Ui();
-        parser = new Parser();
-        loadData();
         Command command;
-        ui.showWelcomeMessage();
-
+        mainUi.displayWelcomeMessage();
 
         do {
-            ui.showDivider();
-            String userCommandText = ui.getUserCommand();
+            String userCommandText = mainUi.getUserCommand();
             command = parser.parseCommand(userCommandText);
             command.setData(routeManager);
             CommandResult result = command.execute();
-            ui.showResultToUser(result);
+            mainUi.displayResultToUser(result);
+            mainUi.displayLineDivider();
         } while (!command.isExit());
 
         saveData();
-        ui.showExitMessage();
-    }*/
+        mainUi.displayExitMessage();
+    }
 
     public void loadData() {
-        routeFileManager = new RouteFileManager();
+
         try {
             routeManager = new RouteManager(routeFileManager.loadData());
         } catch (IOException e) {
-            mainUi.showToUser(e.getMessage());
+            mainUi.displayMessages(e.getMessage());
             routeManager = new RouteManager();
         }
     }
@@ -104,7 +66,7 @@ public class Main {
         try {
             routeFileManager.saveData(routeManager.getAllRoutes());
         } catch (IOException e) {
-            mainUi.showToUser(e.getMessage());
+            mainUi.displayMessages(e.getMessage());
         }
     }
 }

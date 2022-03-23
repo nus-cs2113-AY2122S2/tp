@@ -1,22 +1,19 @@
 package arcs.commands;
 
-import arcs.ui.MainUi;
 
 public class ExitCommand extends Command {
     /**
      * Command word to trigger this command.
      */
-    public static final String COMMAND_WORD = "3";
+    public static final String COMMAND_WORD = "exit";
+    private static final String EXIT_MESSAGE = "Exiting the system ...";
 
-    final MainUi ui;
 
     /**
      * Initializes command for execution.
-     *
-     * @param ui Ui object.
      */
-    public ExitCommand(MainUi ui) {
-        this.ui = ui;
+    public ExitCommand() {
+        setIsExit();
     }
 
     /**
@@ -24,8 +21,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        setIsExit();
-        ui.printExitMessage();
-        return null;
+        return new CommandResult(EXIT_MESSAGE);
     }
 }

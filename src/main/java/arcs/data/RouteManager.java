@@ -30,6 +30,7 @@ public class RouteManager {
     }
 
     public Route deleteRoute(int index) throws ArcsException {
+        assert routes != null : "Routes is null";
         if (index <= 0 || index > routes.size()) {
             throw new ArcsException("Index out of bound.");
         }
