@@ -13,10 +13,13 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a record to the RecordManager. "
-            + "Parameters: add i/ITEM_NAME p/PRICE c/CATEGORY d/DATE" + System.lineSeparator()
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a record to the RecordManager.\n"
+            + "Parameters: i/ITEM_NAME p/PRICE t/CATEGORY (if product is added) d/DATE "
+            + "r/RENEWAL (if subscription is added)\n"
             + "Example: " + COMMAND_WORD
-            + " product i/handphone cover p/$10 t/accessory d/14022022";
+            + " product i/handphone cover p/$10 t/accessory d/14022022\n"
+            +  "Example: " + COMMAND_WORD
+            + " subscription i/Netflips p/$10 d/14022022 r/14032022";
 
     private static final String MESSAGE_SUCCESS = "New record added: %1$s";
 

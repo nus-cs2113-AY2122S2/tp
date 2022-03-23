@@ -14,11 +14,11 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute() {
         return new CommandResult(
-                AddCommand.MESSAGE_USAGE + System.lineSeparator()
-                + DeleteCommand.MESSAGE_USAGE + System.lineSeparator()
-                + ListCommand.MESSAGE_USAGE + System.lineSeparator()
-                + HelpCommand.MESSAGE_USAGE + System.lineSeparator()
-                + ExitCommand.MESSAGE_USAGE + System.lineSeparator()
+                AddCommand.MESSAGE_USAGE + "\n\n"
+                + DeleteCommand.MESSAGE_USAGE + "\n\n"
+                + ListCommand.MESSAGE_USAGE + "\n\n"
+                + HelpCommand.MESSAGE_USAGE + "\n\n"
+                + ExitCommand.MESSAGE_USAGE + "\n\n"
                 + LimitCommand.MESSAGE_USAGE
         );
     }

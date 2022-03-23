@@ -127,7 +127,6 @@ public class TextUi {
         showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
     }
 
-
     /** Shows message(s) to the user. */
     public void showToUser(String... message) {
         for (String m : message) {

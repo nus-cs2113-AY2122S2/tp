@@ -8,6 +8,7 @@ import commands.HelpCommand;
 import commands.IncorrectCommand;
 import commands.ListCommand;
 import commands.LimitCommand;
+
 import data.exception.IllegalValueException;
 
 import java.util.Locale;
@@ -17,24 +18,17 @@ import java.util.regex.Pattern;
 import static common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
-/**
- * Parses user input.
- */
+/** Parses user input. */
 public class Parser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
-     * @return the command based on the user input
+     * @param userInput Full user input string. String should not be empty.
+     * @return Command based on the user input.
      */
     public Command parseCommand(String userInput) {
         // splits the command word from rest of the input
         String[] words = userInput.trim().split(" ", 2);
-
-//        // check
-//        if (words.length == 0) {
-//            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
-//        }
 
         final String commandWord = words[0].toLowerCase(Locale.ENGLISH);
 
