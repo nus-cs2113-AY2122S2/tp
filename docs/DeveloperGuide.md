@@ -1,10 +1,81 @@
-# Developer Guide
+# WerkIt! Developer Guide
+
+## Table of Contents
+* [Acknowledgements](#acknowledgements)
+* [Design](#design)
+* [Implementation](#implementation)
+* [Product Scope](#product-scope)
+* [User Stories](#user-stories)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+* [Instructions for Manual Testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
+The following websites and codebases were referenced and adapted for our project:
 
 * AddressBook-Level2 project ([Website](https://se-education.org/addressbook-level2/) | 
 [GitHub](https://github.com/se-edu/addressbook-level2))
-* Team Member Alan Low's iP codebase ([GitHub](https://github.com/alanlowzies/ip))
+* Team Member Alan Low's individual project (iP) codebase ([GitHub](https://github.com/alanlowzies/ip))
+
+## Setting Up your Development Environment
+### Requirements
+- [ ] Java JDK version 11
+- [ ] An IDE of your choice, though IntelliJ IDEA is recommended as this project is developed
+with this IDE.
+
+> Note: IDE-related references in this developer guide IDE will be tailored for IntelliJ IDEA. 
+
+### Setting Up
+1. Fork the [WerkIt! GitHub repository](https://github.com/AY2122S2-CS2113T-T09-2/tp).
+2. Clone your fork to your machine.
+3. Set up your local repo in your IDE.
+    - Ensure that the project in your IDE is configured to run on Java JDK version 11. 
+    - A guide on setting your project to use JDK 11 in your IntelliJ IDEA IDE can be found 
+[here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
+4. Run `Main.java`. If you have set up your environment correctly, you should see the following
+output in your terminal: 
+```
+======================================================================
+ __        __        _    ___ _   _ 
+ \ \      / /__ _ __| | _|_ _| |_| |
+  \ \ /\ / / _ \ '__| |/ /| || __| |
+   \ V  V /  __/ |  |   < | || |_|_|
+    \_/\_/ \___|_|  |_|\_\___|\__(_)
+                                    
+Welcome to WerkIt!, your personal exercise planner.
+----------------------------------------------------------------------
+Checking for required directory and files...
+- The required data directory was not found. It will be created.
+- The WerkIt! resource directory has been created in
+  your terminal's current working directory.
+
+- The exercise file was not found. It will be created.
+- The exercise file 'exercises.txt' has been created in
+  the WerkIt! resource directory.
+
+- The workout file was not found. It will be created.
+- The workout file 'workouts.txt' has been created in
+  the WerkIt! resource directory.
+
+- The plan file was not found. It will be created.
+- The plan file 'plans.txt' has been created in
+  the WerkIt! resource directory.
+
+- The schedule file was not found. It will be created.
+- The schedule file 'schedule.txt' has been
+  created in the WerkIt! resource directory.
+
+Loading saved file data...
+- Exercises file	OK!
+----------------------------------------------------------------------
+Now then, what can I do for you today?
+(Need help? Type 'help' for a guide!)
+----------------------------------------------------------------------
+>
+```
+5. Type `exit` to exit the program.
+
+You are now ready to begin developing!
 
 ## Design 
 ### Overview
@@ -88,19 +159,3 @@ correctly.
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
-
-# Design
-
----
-
-<br>
-
----
-
-# Implementation
-
----
-
-
-
----
