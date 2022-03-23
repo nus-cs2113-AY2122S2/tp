@@ -134,7 +134,7 @@ Example of usage:
 Format: `session /delete /sid [SESSION_ID]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with `session /list` command.
+    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 
 > **💡 Note:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
@@ -177,7 +177,7 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 /cl [COST1 COST2 ...] [OPTIONAL_ARGUMENTS]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with `session /list` command.
+    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 * `[ACTIVITY_NAME]` refers to the name of the activity.
     * The activity name is **case-insensitive**.
 * `[PERSON_PAID]` refers to the person who paid for the activity.
@@ -223,7 +223,7 @@ Examples of usage:
 Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with `session /list` command.
+    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 * `[ACTIVITY_ID]` refers to the unique identifier of the activity.
     * The unique identifier for an activity can be retrieved with `activity /list` command.
 
@@ -295,7 +295,7 @@ Example of usage:
 Format: `session /summary /sid [SESSION_ID]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with `session /list` command.
+    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 
 > **💡 Note:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
