@@ -139,6 +139,28 @@ for subsequent prompts.
 In _WerkIt!_, a workout is defined as an exercise paired with a number that represents the number
 of repetitions. For example, 20 repetitions of the Russian twist is considered a workout. 
 
+### List Workout
+![List Workout Class Diagram](uml/classDiagrams/images/listWorkout.png)
+</br>
+
+When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
+`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
+class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
+user's command. If the user's command type is to list the workouts created, i.e. `workout /list`, the
+`Parser#parseUserInput(String userInput)` method will parse the 'workout' base word and proceed to create workout related
+command using `Parser#createWorkoutCommand(String userInput)` method. This method will further evaluate the
+workout action, in this case, `/list` and call the constructor of `WorkoutCommand` class by passing relevant parameters related to the
+WorkoutCommand constructor. If the workout action is null or incorrect, an InvalidCommandException will be thrown. Once the workout command is created,
+this workout command is executed via the `WorkoutCommand#execute()` method. As it is executed, the method will check the 
+type of action to be executed, in this case, list. It will then list the workouts created and stored in the workoutList using the `WorkoutList#listWorkout()` 
+method which will call `WorkoutList#continuousPrinting(int index, int noOfPrints)` method to determine 
+the number of workouts to be printed. The maximum number of workouts to be displayed at a time is 10 workouts. If there are more than 
+10 workouts stored in the workoutList, it will prompt the user to enter 'yes' or 'no' to determine the continuation of the printings.
+`isInputYesOrNo(String answer)` method is executed when user enter the answer for the continuation of printing. 
+If the answer given by the user is neither 'yes' nor 'no', user will be prompt to enter their option again until they give the expected input. 
+When 'yes' is entered, the printing will continue and `WorkoutList#continuousPrinting(int index, int noOfPrints)` method will be executed again.
+Otherwise, `WorkoutList#listWorkout()` method will be terminated.
+
 ### Search
 ![SearchUML](uml/classDiagrams/images/SearchClassUML.png)
 <br>
@@ -216,14 +238,14 @@ correctly.
 of their schedule. For instance, the user's daily schedule can look like this:
 
   | Day | Plan Name      |
-  | --- |---------------- |
+  |----------------|---------------- |
   | Day 1 | Grow my Biceps |
-  | Day 2 |                |
+  | Day 2 | Rest Day       |
   | Day 3 | Whole Body!    |
   | Day 4 | Leg Day        |
   | Day 5 | Grow my Biceps |
-  | Day 6 | Whole Body! |
-  | Day 7 | |
+  | Day 6 | Whole Body!    |
+  | Day 7 | Rest Day       |
 
 
 ## Instructions for manual testing

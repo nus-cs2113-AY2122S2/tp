@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+title Class Diagram of `workout /list` Command
+
+Main - WerkIt
+WerkIt --> UI
+WerkIt --> Parser
+
+Command <|- WorkoutCommand
+Parser ..> Command
+WorkoutCommand --> WorkoutList
+
+class WerkIt {
++ startContinuousUserPrompt()
+}
+
+abstract Command {
+
+}
+
+class Main {
+
+}
+
+class WorkoutCommand {
++ userAction : string
++ userArgument : string
++ execute() : void
++  getWorkoutList() : workoutList
+}
+
+class UI {
+# getUserInput() : string
+}
+
+class Parser {
++ parseUserInput(String userInput) : command
++ createWorkoutCommand(String userInput) : workoutCommand
+}
+
+class WorkoutList {
++ workoutsDisplayList : arrayList<string>
++ listWorkout() : void
++ continuousPrinting(int index, int noOfPrints) : int
++ isInputYesOrNo(String answer) : boolean
+}
+@enduml
