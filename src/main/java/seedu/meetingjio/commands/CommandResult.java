@@ -1,6 +1,6 @@
 package seedu.meetingjio.commands;
 
-import seedu.meetingjio.Timetable;
+import seedu.meetingjio.timetables.MasterTimetable;
 
 /**
  * Represents the result of a command execution.
@@ -14,7 +14,7 @@ public class CommandResult extends Command {
     }
 
     @Override
-    public String execute(Timetable timetable) {
+    public String execute(MasterTimetable masterTimetable) {
         return feedbackToUser;
     }
 }

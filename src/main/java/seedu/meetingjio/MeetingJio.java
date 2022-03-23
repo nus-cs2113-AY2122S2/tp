@@ -2,6 +2,8 @@ package seedu.meetingjio;
 
 import java.util.Scanner;
 import seedu.meetingjio.commands.Command;
+import seedu.meetingjio.timetables.MasterTimetable;
+import seedu.meetingjio.timetables.Timetable;
 import seedu.meetingjio.ui.TextUi;
 import static seedu.meetingjio.common.Messages.MESSAGE_DIVIDER;
 
@@ -23,9 +25,9 @@ public class MeetingJio {
         TextUi.showHelpHint();
         System.out.println(MESSAGE_DIVIDER);
 
-        Timetable timetable = new Timetable();
+        MasterTimetable masterTimetable = new MasterTimetable();
         String userInput = in.nextLine();
-        Command.executeCommand(userInput, timetable, in);
+        Command.executeCommand(userInput, masterTimetable, in);
         TextUi.showGoodByeMessage();
     }
 
