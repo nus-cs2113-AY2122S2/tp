@@ -1,4 +1,4 @@
-package seedu.planitarium.expenditure;
+package seedu.planitarium.money;
 
 
 public class Expenditure {

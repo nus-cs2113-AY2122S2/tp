@@ -1,6 +1,7 @@
 package seedu.planitarium.income;
 
 import org.junit.jupiter.api.Test;
+import seedu.planitarium.money.IncomeList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

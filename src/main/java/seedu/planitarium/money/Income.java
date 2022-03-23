@@ -1,4 +1,4 @@
-package seedu.planitarium.income;
+package seedu.planitarium.money;
 
 public class Income {
     protected String description;

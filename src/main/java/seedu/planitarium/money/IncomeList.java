@@ -1,4 +1,4 @@
-package seedu.planitarium.income;
+package seedu.planitarium.money;
 
 import seedu.planitarium.ProjectLogger;
 
