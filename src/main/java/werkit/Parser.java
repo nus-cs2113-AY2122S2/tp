@@ -24,6 +24,7 @@ import static commands.PlanCommand.DETAILS_ACTION_KEYWORD;
 import static commands.ScheduleCommand.CLEAR_ACTION_KEYWORD;
 import static commands.ScheduleCommand.CLEAR_ALL_ACTION_KEYWORD;
 import static commands.WorkoutCommand.CREATE_ACTION_KEYWORD;
+import static commands.WorkoutCommand.LIST_ALL_ACTION_KEYWORD;
 import static commands.WorkoutCommand.LIST_ACTION_KEYWORD;
 import static commands.WorkoutCommand.DELETE_ACTION_KEYWORD;
 import static commands.WorkoutCommand.UPDATE_ACTION_KEYWORD;
@@ -204,6 +205,13 @@ public class Parser {
                 logger.log(Level.WARNING, "User has entered an invalid list workout command action.");
                 throw new InvalidCommandException(className,
                         InvalidCommandException.INVALID_WORKOUT_LIST_COMMAND_ERROR_MSG);
+            }
+            break;
+        case LIST_ALL_ACTION_KEYWORD:
+            if (userInput.split(" ", -1).length > EXPECTED_NUMBER_OF_PARAMETERS_NO_ARGUMENTS) {
+                logger.log(Level.WARNING, "User has entered an invalid listall workout command action.");
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_WORKOUT_LIST_ALL_COMMAND_ERROR_MSG);
             }
             break;
         default:
