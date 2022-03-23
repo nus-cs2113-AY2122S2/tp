@@ -3,6 +3,11 @@ package seedu.splitlah.ui;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Represents a row of items in a TableFormatter object.
+ *
+ * @author Saurav
+ */
 public class TableFormatterRow {
 
     private ArrayList<String> rowItems;
