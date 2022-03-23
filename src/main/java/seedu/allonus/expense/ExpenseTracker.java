@@ -60,6 +60,8 @@ public class ExpenseTracker {
     public static final String NEW_CATEGORY_VALUE_SET = "New category value set!";
     public static final String MSG_NEW_VALUE_CANNOT_BE_EMPTY = "New value cannot be empty!";
     public static final String NO_TASKS_FOUND = "No tasks found!";
+    public static final String MSG_MATCHING_EXPENSES = "Here are the matching expense records:\n";
+    public static final String MENU_STRING = "menu";
 
     private static void expenseWelcome() {
         System.out.println(EXPENSE_WELCOME_MESSAGE);
@@ -124,7 +126,6 @@ public class ExpenseTracker {
      * @param list  list of expenses itself
      * @param index the index of the item to be edited
      * @param ui    ui object to collect user's inputs
-     * @throws IndexOutOfBoundsException if the expense record is not found
      */
     private static void editExpense(ArrayList<Expense> list, int index, TextUi ui) {
         Expense toBeEdited = list.get(index - 1);
@@ -206,7 +207,7 @@ public class ExpenseTracker {
             if (expenseCategory.contains(stringToFind) || expenseDate.contains(stringToFind)
                     || expenseRemark.contains(stringToFind)) {
                 isFound = true;
-                System.out.println("Here are the matching expense records:\n" + expense);
+                System.out.println(MSG_MATCHING_EXPENSES + expense);
             }
         }
         if (!isFound) {
@@ -215,9 +216,89 @@ public class ExpenseTracker {
     }
 
     /**
+     * Begins executing the Delete method invoked by user's input
+     * @param rawInput the user's input itself
+     */
+    private static void executeRemove(String rawInput) {
+        int index = -1;
+        try {
+            index = parseDeleteExpense(rawInput);
+        } catch (IndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, LOG_EMPTY_INDEX);
+            System.out.println(MSG_EMPTY_INDEX);
+        } catch (NumberFormatException e) {
+            logger.log(Level.WARNING, LOG_INVALID_INDEX_TYPE);
+            System.out.println(MSG_INVALID_INDEX_TYPE);
+        }
+        try {
+            deleteExpense(expenseList, index);
+        } catch (IndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
+            System.out.println(MSG_ITEM_NOT_FOUND);
+        }
+    }
+
+    /**
+     * Begins executing the Add method invoked due to user's input
+     * @param rawInput the user's input itself
+     */
+    private static void executeAdd(String rawInput) {
+        try {
+            String[] newExpense = parseNewExpense(rawInput);
+            assert newExpense != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
+            Expense e = new Expense(newExpense[DATE_INDEX], newExpense[AMOUNT_INDEX],
+                    newExpense[CATEGORY_INDEX], newExpense[REMARKS_INDEX]);
+            addExpense(expenseList, e);
+        } catch (IndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, LOG_EMPTY_FIELDS);
+            System.out.println(MSG_EMPTY_FIELDS);
+        }
+    }
+
+    /**
+     * Begins executing the Find method invoked due to user's input.
+     * @param rawInput the user's input itself
+     */
+    private static void executeFind(String rawInput) {
+        String stringToFind = "";
+        try {
+            stringToFind = parseFindExpense(rawInput);
+        } catch (IndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
+            System.out.println("Keyword cannot be empty!");
+        }
+        findExpense(expenseList, stringToFind);
+    }
+
+    /**
+     * Begins executing the Edit method invoked due to user's input.
+     * @param ui ui object to collect user's inputs
+     * @param rawInput the user's input itself
+     */
+    private static void executeEdit(TextUi ui, String rawInput) {
+        int index;
+        index = -1;
+        int noOfItems = Expense.getNoOfItems();
+        if (noOfItems == 0) {
+            System.out.println(MSG_EMPTY_LIST);
+        } else {
+            try {
+                index = parseEditExpense(rawInput);
+            } catch (IndexOutOfBoundsException e) {
+                logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
+                System.out.println(MSG_EMPTY_INDEX);
+            } catch (NumberFormatException e) {
+                logger.log(Level.WARNING, LOG_INVALID_INDEX_TYPE);
+                System.out.println(MSG_INVALID_INDEX_TYPE);
+            }
+            editExpense(expenseList, index, ui);
+        }
+    }
+
+    /**
      * Determines which command to execute depending on the keyword supplied.
      *
-     * @param ui the user input itself
+     * @param ui ui object to collect user's inputs
      * @throws ExpenseException if an invalid keyword is supplied
      */
     public static void expenseRunner(TextUi ui) {
@@ -226,68 +307,22 @@ public class ExpenseTracker {
         String rawInput = ui.getUserInput();
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;
         String keyWord = rawInput.split(" ", SPLIT_INTO_HALF)[KEYWORD_INDEX].trim().toLowerCase();
-        while (!(keyWord.equals("menu"))) {
+        while (!(keyWord.equals(MENU_STRING))) {
             switch (keyWord) {
             case ("list"):
                 listExpenses();
                 break;
             case ("rm"):
-                int index = -1;
-                try {
-                    index = parseDeleteExpense(rawInput);
-                } catch (IndexOutOfBoundsException e) {
-                    logger.log(Level.WARNING, LOG_EMPTY_INDEX);
-                    System.out.println(MSG_EMPTY_INDEX);
-                } catch (NumberFormatException e) {
-                    logger.log(Level.WARNING, LOG_INVALID_INDEX_TYPE);
-                    System.out.println(MSG_INVALID_INDEX_TYPE);
-                }
-                try {
-                    deleteExpense(expenseList, index);
-                } catch (IndexOutOfBoundsException e) {
-                    logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
-                    System.out.println(MSG_ITEM_NOT_FOUND);
-                }
+                executeRemove(rawInput);
                 break;
             case ("add"):
-                try {
-                    String[] newExpense = parseNewExpense(rawInput);
-                    assert newExpense != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
-                    Expense e = new Expense(newExpense[DATE_INDEX], newExpense[AMOUNT_INDEX],
-                            newExpense[CATEGORY_INDEX], newExpense[REMARKS_INDEX]);
-                    addExpense(expenseList, e);
-                } catch (IndexOutOfBoundsException e) {
-                    logger.log(Level.WARNING, LOG_EMPTY_FIELDS);
-                    System.out.println(MSG_EMPTY_FIELDS);
-                }
+                executeAdd(rawInput);
                 break;
             case ("edit"):
-                index = -1;
-                int noOfItems = Expense.getNoOfItems();
-                if (noOfItems == 0) {
-                    System.out.println(MSG_EMPTY_LIST);
-                } else {
-                    try {
-                        index = parseEditExpense(rawInput);
-                        editExpense(expenseList, index, ui);
-                    } catch (IndexOutOfBoundsException e) {
-                        logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
-                        System.out.println(MSG_EMPTY_INDEX);
-                    } catch (NumberFormatException e) {
-                        logger.log(Level.WARNING, LOG_INVALID_INDEX_TYPE);
-                        System.out.println(MSG_INVALID_INDEX_TYPE);
-                    }
-                }
+                executeEdit(ui, rawInput);
                 break;
             case ("find"):
-                String stringToFind;
-                try {
-                    stringToFind = parseFindExpense(rawInput);
-                    findExpense(expenseList, stringToFind);
-                } catch (IndexOutOfBoundsException e) {
-                    logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
-                    System.out.println("Keyword cannot be empty!");
-                }
+                executeFind(rawInput);
                 break;
             default:
                 logger.log(Level.WARNING, LOG_INVALID_COMMANDS);
@@ -299,6 +334,4 @@ public class ExpenseTracker {
         logger.log(Level.INFO, LOG_RETURN_TO_MENU_INTENT);
         return;
     }
-
-
 }

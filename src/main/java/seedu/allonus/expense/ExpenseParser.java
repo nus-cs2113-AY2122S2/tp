@@ -80,7 +80,6 @@ public class ExpenseParser {
             throw new IndexOutOfBoundsException();
         }
         return result;
-
     }
 
     /**
