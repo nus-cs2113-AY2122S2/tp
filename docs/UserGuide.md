@@ -97,13 +97,15 @@ Format: `workout /list`
 ```
 **Expected Outcome**
 ```
-------------------------------------------------------------
+----------------------------------------------------------------------
 Showing workouts 1-3 of 3:
+
 1. push up (10 reps)
 2. sit up (10 reps)
 3. pull up (10 reps)
+
 Showed all workouts in list
-------------------------------------------------------------
+----------------------------------------------------------------------
 ```
 
 In the current workout list, there are a total of 3 workouts. All the workouts have been listed. 
