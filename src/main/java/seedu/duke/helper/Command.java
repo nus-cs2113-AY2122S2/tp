@@ -64,7 +64,6 @@ public class Command {
         }
     }
 
-
     public void addMedicine(MedicineList medicineList, String parameters) {
         try {
             String[] addMedicineParameters = Parser.parseAddMedicine(parameters);
@@ -79,17 +78,9 @@ public class Command {
     public void viewMedicine(MedicineList medicineList, String parameters) {
         if (isNull(parameters)) {
             medicineList.viewMedicine();
-        } else {
-            try {
-                int index = Integer.parseInt(parameters);
-                if (index < 1 || medicineList.size() < index) {
-                    UI.printParagraph("Index is out of range.");
-                    return;
-                }
-                medicineList.viewMedicine(index);
-            } catch (NumberFormatException e) {
-                UI.printParagraph("Index is out of range.");
-            }
+        }
+        else {
+            medicineList.viewMedicine(parameters);
         }
     }
 
@@ -108,9 +99,9 @@ public class Command {
         try {
             int index = Integer.parseInt(stringIndex);
             medicineList.deleteMedicine(index -1);
-            ui.printParagraph("The medicine record at index " + index + " has been deleted.");
-        } catch (NumberFormatException numberFormatException) {
-            ui.printParagraph("Parameter given is not a number.");
+            UI.printParagraph("The medicine record at index " + index + " has been deleted.");
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            ui.printDeleteMedicineExampleMessage(medicineList);
         }
     }
 }

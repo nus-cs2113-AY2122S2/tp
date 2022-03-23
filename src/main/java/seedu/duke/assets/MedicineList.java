@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class MedicineList {
     private ArrayList<Medicine> medicines = new ArrayList<>();
 
-    public int size() {
+    public int getSize() {
         return medicines.size();
     }
 
@@ -26,7 +26,7 @@ public class MedicineList {
     }
 
     public void viewMedicine() {
-        if (size() == 0) {
+        if (getSize() == 0) {
             UI.printParagraph("There are no medicines currently.");
             return;
         }
@@ -38,8 +38,10 @@ public class MedicineList {
                 + " in the system.");
     }
 
-    public void viewMedicine(int parameters) {
-        getMedicineInfo(medicines.get(parameters - 1));
+    //todo please change logic
+    public void viewMedicine(String parameters) {
+        int index = Integer.parseInt(parameters)
+        getMedicineInfo(medicines.get(index - 1));
     }
 
     /*
@@ -59,5 +61,6 @@ public class MedicineList {
     public ArrayList<Medicine> getList() {
         return medicines;
     }
+
 
 }

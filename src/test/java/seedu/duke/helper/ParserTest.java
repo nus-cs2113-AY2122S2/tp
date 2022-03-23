@@ -31,7 +31,7 @@ class ParserTest {
 
     @Test
     @DisplayName("parseAddMedicine method in Parser Class")
-    void parseAddMedicineTest() {
+    void parseAddMedicineTest() throws HalpmiException {
         String userInput = "paracetamol,500,2023-02-02,Headaches,500";
         String[] userInputArray = {"paracetamol", "500", "2023-02-02", "Headaches", "500"};
         assertArrayEquals(userInputArray, Parser.parseAddMedicine(userInput));
