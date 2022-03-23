@@ -64,7 +64,11 @@ public class MainUi {
     public void displayResultToUser(CommandResult result) {
         System.out.println(result.getFeedbackToUser());
         // Show routes information if it exists
-        ArrayList<String> routesInfo = result.getRoutesInfo();
+        showRouteInfo(result);
+    }
+
+    private void showRouteInfo(CommandResult commandResult) {
+        ArrayList<String> routesInfo = commandResult.getRoutesInfo();
         if (routesInfo != null) {
             for (int i = 1; i <= routesInfo.size(); i++) {
                 System.out.println(i + ".");
