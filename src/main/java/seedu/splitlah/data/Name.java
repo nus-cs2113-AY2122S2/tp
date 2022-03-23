@@ -13,14 +13,15 @@ public class Name {
 
     private final String name;
 
-    public Name(String name) throws InvalidDataException {
-        if (!name.strip().matches("[a-zA-Z]+")) {
-            throw new InvalidDataException(Message.ERROR_NAME_INVALID_NAME);
-        }
+    public Name(String name) {
         this.name = name.strip();
     }
 
     public String getNameAsString() {
         return name;
+    }
+
+    public static boolean validateName(String name) {
+        return name.strip().matches("[a-zA-Z]+");
     }
 }

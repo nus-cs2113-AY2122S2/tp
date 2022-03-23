@@ -16,7 +16,7 @@ public class Person {
     private ArrayList<ActivityCost> activityCostList;
 
     /**
-     * Constructs a Person object.
+     * Constructs a Person object from a Name object.
      *
      * @param name Name object representing the name of the Person object to be created.
      */
@@ -26,17 +26,28 @@ public class Person {
     }
 
     /**
-     * Constructs a Person object.
+     * Constructs a Person object from a String object.
      *
      * @param name String object representing the name of the Person object to be created.
      */
     public Person(String name) {
-        try {
-            this.activityCostList = new ArrayList<>();
-            this.name = new Name(name);
-        } catch (InvalidDataException e) {
-            e.printStackTrace();
+        this.activityCostList = new ArrayList<>();
+        this.name = new Name(name);
+    }
+
+    /**
+     * Constructs a Person object from a String object. If the String object provided is not a valid name,
+     * returns null instead.
+     *
+     * @param name A String object representing a name.
+     * @return a Person object if the name provided is valid.
+     *         null if the name provided is invalid.
+     */
+    public static Person createPersonFromString(String name) {
+        if (Name.validateName(name)) {
+            return new Person(name);
         }
+        return null;
     }
 
     /**
