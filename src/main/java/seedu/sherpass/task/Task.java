@@ -3,19 +3,18 @@ package seedu.sherpass.task;
 import seedu.sherpass.enums.Frequency;
 
 import java.time.LocalDateTime;
-import java.util.Random;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.outputWithTimeFormat;
-import static seedu.sherpass.constant.DateAndTimeFormat.outputWithoutTimeFormat;
 
 public class Task {
     protected String description;
     protected int identifier;
     protected boolean isDone;
-    protected boolean hasByTime;
-    protected boolean hasDoOnTime;
     protected LocalDateTime byDate;
-    protected LocalDateTime doOnDate;
+    protected LocalDateTime doOnStartDateTime;
+    protected LocalDateTime doOnEndDateTime;
+    protected Frequency repeatFrequency;
+
 
     // The index of the task with respect to being within
     // the ArrayList<Task> tasks in TaskList class
@@ -35,25 +34,15 @@ public class Task {
      *
      * @param description Description of task.
      */
-    public Task(String description, LocalDateTime byDate, LocalDateTime doOnDate,
-                boolean hasByTime, boolean hasDoOnTime) {
-        this.identifier = new Random().nextInt(65535);
+    public Task(int identifier, String description, LocalDateTime byDate,
+                LocalDateTime doOnStartDateTime, LocalDateTime doOnEndDateTime, Frequency repeatFrequency) {
+        this.identifier = identifier;
         this.description = description;
         this.byDate = byDate;
-        this.doOnDate = doOnDate;
-        this.hasByTime = hasByTime;
-        this.hasDoOnTime = hasDoOnTime;
+        this.doOnStartDateTime = doOnStartDateTime;
+        this.doOnEndDateTime = doOnEndDateTime;
         this.isDone = false;
-    }
-
-    public Task(String description, LocalDateTime doOnDate, boolean hasDoOnTime) {
-        this.identifier = new Random().nextInt(65535);
-        this.description = description;
-        this.doOnDate = doOnDate;
-        this.hasDoOnTime = hasDoOnTime;
-        this.byDate = null;
-        this.hasByTime = false;
-        this.isDone = false;
+        this.repeatFrequency = repeatFrequency;
     }
 
     public int getIndex() {
@@ -107,8 +96,8 @@ public class Task {
         return byDate;
     }
 
-    public LocalDateTime getDoOnDate() {
-        return doOnDate;
+    public LocalDateTime getDoOnStartDateTime() {
+        return doOnStartDateTime;
     }
 
     /**
@@ -119,10 +108,7 @@ public class Task {
      */
     public String getByDateString() {
         if (byDate != null) {
-            if (hasByTime) {
-                return byDate.format(outputWithTimeFormat);
-            }
-            return byDate.format(outputWithoutTimeFormat);
+            return byDate.format(outputWithTimeFormat);
         }
         return "";
     }
@@ -134,11 +120,8 @@ public class Task {
      *         Otherwise, returns a blank string (no whitespace).
      */
     public String getDoOnDateString() {
-        if (doOnDate != null) {
-            if (hasDoOnTime) {
-                return doOnDate.format(outputWithTimeFormat);
-            }
-            return doOnDate.format(outputWithoutTimeFormat);
+        if (doOnStartDateTime != null) {
+            return doOnStartDateTime.format(outputWithTimeFormat);
         }
         return "";
     }
@@ -156,7 +139,7 @@ public class Task {
         if (this.byDate != null) {
             result += " (by: " + getByDateString() + ")";
         }
-        if (this.doOnDate != null) {
+        if (this.doOnStartDateTime != null) {
             result += " (reminder on: " + getDoOnDateString() + ")";
         }
         return result;
@@ -170,20 +153,16 @@ public class Task {
         this.byDate = byDate;
     }
 
-    public void setDoOnDate(LocalDateTime doOnDate) {
-        this.doOnDate = doOnDate;
+    public void setDoOnStartDateTime(LocalDateTime doOnStartDateTime) {
+        this.doOnStartDateTime = doOnStartDateTime;
     }
 
-    public boolean getHasByTime() {
-        return hasByTime;
+    public void setDoOnEndDateTime(LocalDateTime doOnEndDateTime) {
+        this.doOnEndDateTime = doOnEndDateTime;
     }
 
-    public boolean getHasDoOnTime() {
-        return hasDoOnTime;
-    }
-
-    public void setHasDoOnTime(boolean hasDoOnTime) {
-        this.hasDoOnTime = hasDoOnTime;
+    public LocalDateTime getDoOnEndDateTime() {
+        return doOnEndDateTime;
     }
 
     public int getIdentifier() {
@@ -192,5 +171,13 @@ public class Task {
 
     public void setIdentifier(int identifier) {
         this.identifier = identifier;
+    }
+
+    public Frequency getRepeatFrequency() {
+        return repeatFrequency;
+    }
+
+    public void setRepeatFrequency(Frequency repeatFrequency) {
+        this.repeatFrequency = repeatFrequency;
     }
 }
