@@ -93,6 +93,20 @@ How the Command class works:
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Find appointments with selected criteria
+This feature is a method within `AppointmentList`. `AppointmentList` contains an arraylist
+of `Appointment` as a private element. `AppointmentList` methods invoked interacts with this
+list, possibly making changes in the process.
+
+Currently, `AppointmentList` has the following methods:
+* `AppointmentList#add` -- Appends a new `Appointment` to the list.
+* `AppointmentList#showAll` -- Text display of all appointments in the list.
+* `AppointmentList#find` -- Find selected appointments using the criteria given.
+
+The methods are exposed in the `Manager#runLoop` method where user input is parsed.
+
+Below is an example describing the behaviour of the `find` feature.
+
 #### Design considerations:
 
 ---------------------------------------------------------------------------------------------------------------
@@ -100,7 +114,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ###Target user profile:
 
-* has a need to manage a significant number of contacts
+* lightweight appli
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -113,11 +127,11 @@ Manage contacts faster than a typical mouse/GUI driven app
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| Priority | As a ... | I want to ... | So that I can ... |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
+| `* * *`  | new user                                   | import or export data          | share with others when needed and make backup copies                                                                       |
+| `* *`    | user                                       | find appointments based on selected criteria | filter out the appointments that I want to know about                                   |
 | `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
 | `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
