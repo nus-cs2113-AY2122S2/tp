@@ -107,7 +107,7 @@ public class Command {
     public void deleteMedicine(MedicineList medicineList, String stringIndex) {
         try {
             int index = Integer.parseInt(stringIndex);
-            medicineList.delete(index);
+            medicineList.deleteMedicine(index -1);
             ui.printParagraph("The medicine record at index " + index + " has been deleted.");
         } catch (NumberFormatException numberFormatException) {
             ui.printParagraph("Parameter given is not a number.");

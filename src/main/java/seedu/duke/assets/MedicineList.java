@@ -52,8 +52,8 @@ public class MedicineList {
         }
     }
     */
-    public void delete(int number) {
-        medicines.remove(number - 1);
+    public void deleteMedicine(int index) {
+        medicines.remove(index);
     }
 
     public ArrayList<Medicine> getList() {
