@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class MainLogger {
     private static MainLogger instance = null;
@@ -15,6 +16,7 @@ public class MainLogger {
             logger = Logger.getLogger("R.I.P.");
             Files.createDirectories(Path.of("logs"));
             FileHandler handler = new FileHandler(Path.of("logs", "application.log").toString(), true);
+            handler.setFormatter(new SimpleFormatter());
             logger.addHandler(handler);
             logger.setUseParentHandlers(false);
 
