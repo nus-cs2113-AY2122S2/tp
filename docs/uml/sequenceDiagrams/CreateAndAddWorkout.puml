@@ -55,7 +55,7 @@ wl -> wl : checkForExistingWorkout(userExerciseInput, userRepsInput)
 activate wl
 return :boolean
 
-opt hasSameExerciseName
+opt hasSameExerciseNameAndReps
 create ":InvalidWorkoutException" AS iwe2
 wl -> iwe2 : throw new InvalidWorkoutException
 activate iwe2
