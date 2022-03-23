@@ -8,8 +8,7 @@ import seedu.duke.exception.HalpmiException;
 
 import java.util.logging.Logger;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class ParserTest {
@@ -26,7 +25,7 @@ class ParserTest {
     void validateMedicineTest() {
         String[] userInputArray = {"paracetamol", "500", "2023-02-02", "Headaches", "500"};
         String userInput = "paracetamol,500,2023-02-02,Headaches,500";
-        assertEquals(true, Validator.validateMedicine(userInputArray));
+        assertTrue(Validator.validateMedicine(userInputArray));
     }
 
     @Test

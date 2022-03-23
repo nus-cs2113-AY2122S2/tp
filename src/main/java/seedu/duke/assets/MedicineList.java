@@ -38,9 +38,9 @@ public class MedicineList {
                 + " in the system.");
     }
 
-    //todo please change logic
+    //todo: please change logic
     public void viewMedicine(String parameters) {
-        int index = Integer.parseInt(parameters)
+        int index = Integer.parseInt(parameters);
         getMedicineInfo(medicines.get(index - 1));
     }
 
