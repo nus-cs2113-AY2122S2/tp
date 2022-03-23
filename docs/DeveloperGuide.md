@@ -6,8 +6,21 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+#### Assign a housekeeper to a room
+The assignment of housekeeper to a room is facilitated by `AssignHousekeeperCommand`. This command objects uses `AssignmentMap`, which keeps a `HashMap`, to help us map a `Room` object to a `Housekeeper` object. 
 
+``
+Map<Room, Housekeeper> map = new HashMap<>();
+``
+
+The following class diagram exhibits how `AssignHousekeeperCommand` 
+and `AssignmentMap` fit into the larger structure of the application.
+
+
+To understand the interaction between objects of these classes in order to actually add an entry into the hash map inside an `AssignmentMap`, refer to the sequence diagram below.
+
+
+The command object passes on the ID of the room and the name of the housekeeper to the `AssignmentMap` object after parsing the input appropriately. The `addAssignment` function first locates the appropriate `Room` object from `RoomList`, and then looks for the `Housekeeper` object in the `HousekeeperList` and finally adds the mapping to the hash map.
 
 ## Product scope
 ### Target user profile
