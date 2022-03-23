@@ -1,7 +1,13 @@
 package seedu.meetingjio;
 
-import seedu.meetingjio.commands.*;
+import seedu.meetingjio.commands.Command;
 import seedu.meetingjio.commands.AddLessonCommand;
+import seedu.meetingjio.commands.HelpCommand;
+import seedu.meetingjio.commands.ListCommand;
+import seedu.meetingjio.commands.DeleteCommand;
+import seedu.meetingjio.commands.ClearCommand;
+import seedu.meetingjio.commands.CommandResult;
+
 import seedu.meetingjio.exceptions.InvalidDayException;
 import seedu.meetingjio.exceptions.MissingValueException;
 import seedu.meetingjio.exceptions.InvalidTimeException;
