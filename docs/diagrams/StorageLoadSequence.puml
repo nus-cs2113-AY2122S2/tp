@@ -1,47 +1,61 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+!include style.puml
 
 Box
-    participant Main
-    participant ":Storage" as Storage
-    participant ":Family" as Family
-    participant ":PersonList" as PersonList
+    participant Main UI_COLOR
+    participant ":Storage" as Storage STORAGE_COLOR
+    participant ":Family" as Family MODEL_COLOR
+    participant ":PersonList" as PersonList MODEL_COLOR
+    participant ":File" as File STORAGE_COLOR_T2
 end box
 
 
-->> Main: runs PlanITarium
-Main ->> Storage: Initialise Storage Object
-Storage -->> Main: :Storage
-Main ->> Storage: loadData()
+-> Main: runs PlanITarium
+activate Main
+Main -> Storage: Initialise Storage Object
+activate Storage
+Storage --> Main: :Storage
+deactivate Storage
+Main -> Storage: loadData()
 activate Storage
 alt fileExists
 else #pink notExist
-    Storage->>Storage : createNewFile()
+    Storage -> File : createNewFile()
+    activate File
+    File --> Storage
+    deactivate File
 end
-
-Storage->> Family: new()
+Storage -> Family: new()
 activate Family
-Family-->>Storage
+Family --> Storage : :Family
+deactivate Family
 loop until all logic groups are loaded
-
-    Family->>PersonList: new()
+    Storage -> Storage: readSaveFile()
+    activate Storage
+    Storage -> Storage :addCorrespondingInfo()
+    activate Storage
+    Storage -> Family : addPersonList(:PersonList)
+    activate Family
+    Family -> PersonList: new()
     activate PersonList
-    PersonList-->>Family: :PersonList
+    PersonList --> Family: :PersonList
     deactivate PersonList
-    loop until all items
-        Storage->>Storage: readSaveFile()
-        activate Storage
-        Storage->>Family: addCorrespondingInfo()
-        Family ->> PersonList: addPersonList()
+    loop Until all items
+        Family -> PersonList: addPerson(:Person)
         activate PersonList
-        PersonList-->>Family:
+        PersonList --> Family: :PersonList
         deactivate PersonList
-        Family-->>Storage
-        deactivate Family
     end
+    Family --> Storage: :Family
+    deactivate Family
+    Storage --> Storage
+    deactivate Storage
+    Storage --> Storage
     deactivate Storage
 end
-Storage-->>Main: :Family
+Storage --> Main: :Family
 deactivate Storage
+<-- Main
+deactivate Main
 
 @enduml
