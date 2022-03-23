@@ -94,7 +94,7 @@ public class TextUi {
      * @return Command (full line) entered by the user
      */
     public String getUserCommand() {
-        assert USER_COMMAND_REQUEST instanceof String : "USERCOMMANDREQUEST should be a String";
+        assert USER_COMMAND_REQUEST instanceof String : "USER_COMMAND_REQUEST should be a String";
 
         out.print(USER_COMMAND_REQUEST);
         String fullInputLine = in.nextLine();
