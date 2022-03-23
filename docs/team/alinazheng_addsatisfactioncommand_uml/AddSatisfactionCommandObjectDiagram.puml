@@ -31,6 +31,8 @@ Satisfaction : name = "satisfaction"
 Duke --> SatisfactionList
 Duke ..> CommandParser
 Duke ..> Command
+CommandParser ..> AddSatisfactionCommand
+
 
 AddSatisfactionCommand --> Satisfaction
 AddSatisfactionCommand --|> Command
