@@ -20,9 +20,10 @@ public class TableFormatterRow {
         return rowItems.size();
     }
     /**
-     * Returns an item located at a specific index in a TableFormatterRow object. Row items start at index 0.
+     * Returns a String object representing a specific row item in a TableFormatterRow object.
+     * Row items start at index 0.
      *
-     * @param index The location of the row item.
+     * @param index An integer that represents location of the row item.
      * @return A String object representing the row item.
      */
 
@@ -31,35 +32,35 @@ public class TableFormatterRow {
     }
 
     /**
-     * Returns an item located at a specific index in a TableFormatterRow object with spaces to pad it on both sides.
+     * Returns a String object representing a specific row item in a TableFormatterRow object, padded with whitespace.
      * Row items start at index 0.
      *
-     * @param index The location of the row item.
-     * @param padding The number of padding spaces to append to the row item.
+     * @param index An integer that represents the location of the row item.
+     * @param widthToAlignTo An integer that represents the total width that the item should be padded to align to.
      * @return A String object representing the padded row item.
      */
-    private String padRowItem(int index, int padding) {
+    private String padRowItem(int index, int widthToAlignTo) {
         StringBuilder paddedItem = new StringBuilder();
         if (index != 0) {
             paddedItem = new StringBuilder(" ");
         }
         paddedItem.append(rowItems.get(index));
-        int paddingNecessary = padding - rowItems.get(index).length();
+        int paddingNecessary = widthToAlignTo - rowItems.get(index).length();
         assert paddingNecessary >= 0;
         paddedItem.append(" ".repeat(paddingNecessary));
         return String.valueOf(paddedItem.append(" "));
     }
 
     /**
-     * Returns an ArrayList object containing each row item padded according to the array object passed into the method.
+     * Returns an ArrayList object containing each row item padded according to the integer array object passed into the method.
      *
-     * @param padding An array specifying how much each row item should be padded.
+     * @param  columnWidths An integer array object specifying the width each row item should be aligned to.
      * @return An ArrayList object containing each padded row item of this row.
      */
-    public ArrayList<String> padRow(int[] padding) {
+    public ArrayList<String> padRow(int[] columnWidths) {
         ArrayList<String> paddedRow = new ArrayList<>();
-        for (int rowItem = 0; rowItem < padding.length; ++rowItem) {
-            paddedRow.add(padRowItem(rowItem, padding[rowItem]));
+        for (int rowItemIndex = 0; rowItemIndex < columnWidths.length; ++rowItemIndex) {
+            paddedRow.add(padRowItem(rowItemIndex, columnWidths[rowItemIndex]));
         }
         return paddedRow;
     }

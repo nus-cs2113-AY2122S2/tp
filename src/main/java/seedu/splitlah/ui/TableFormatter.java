@@ -66,23 +66,23 @@ public class TableFormatter {
     /**
      * Calculates maximum width of the specified column. The first column is column 0.
      *
-     * @param column The column number.
-     * @return The maximum width of the specified column.
+     * @param column An integer representing the column number.
+     * @return An integer representing the maximum width of the specified column.
      */
     private int calculateColumnWidth(int column) {
         int maxColumnWidth = 0;
         int headerLength = columnHeaders.getItem(column).length();
-        for (int rowNumber = 0; rowNumber < rows.size(); ++rowNumber) {
-            int rowLength = rows.get(rowNumber).getItem(column).length();
-            maxColumnWidth = Math.max(Math.max(maxColumnWidth, rowLength), headerLength);
+        for (TableFormatterRow row : rows) {
+            int rowLength = row.getItem(column).length();
+            maxColumnWidth = Math.max(maxColumnWidth, rowLength);
         }
-        return maxColumnWidth;
+        return Math.max(maxColumnWidth, headerLength);
     }
 
     /**
-     * Calculates all column widths in the table and returns them in an array object.
+     * Calculates all column widths in the table and returns them in an integer array object.
      *
-     * @return An integer array containing the maximum column widths of each column in order.
+     * @return An integer array object containing the maximum column widths of each column in order.
      */
     private int[] calculateAllColumnWidths() {
         int[] columnWidths = new int[columnHeaders.getRowLength()];
@@ -102,9 +102,9 @@ public class TableFormatter {
     private String decorateRow(TableFormatterRow row, int[] columnWidths) {
         ArrayList<String> paddedRow = row.padRow(columnWidths);
         StringBuilder decoratedRow = new StringBuilder();
-        for (int rowItem = 0; rowItem < columnWidths.length; ++rowItem) {
-            decoratedRow.append(paddedRow.get(rowItem));
-            if (rowItem < columnWidths.length - 1) {
+        for (int rowIndex = 0; rowIndex < columnWidths.length; ++rowIndex) {
+            decoratedRow.append(paddedRow.get(rowIndex));
+            if (rowIndex < columnWidths.length - 1) {
                 decoratedRow.append("|");
             }
         }
@@ -112,7 +112,7 @@ public class TableFormatter {
     }
 
     /**
-     * Calculates total table width from a given integer array containing column widths.
+     * Calculates total table width from a given integer array object containing column widths.
      *
      * @param columnWidths An integer array object representing the widths of each column.
      * @return The total width of the table.
@@ -128,7 +128,7 @@ public class TableFormatter {
     /**
      * Formats all rows in this TableFormatter object, decorates them and appends them to a table String object.
      *
-     * @param columnWidths integer array containing the maximum width of each column.
+     * @param columnWidths integer array object containing the maximum width of each column.
      * @param formattedTable A StringBuilder object representing the formatted table without the rows.
      */
     private void appendRowsToFormattedTableString(int[] columnWidths, StringBuilder formattedTable) {
@@ -141,7 +141,7 @@ public class TableFormatter {
     /**
      * Appends the name of this TableFormatter object to the table StringBuilder object if a name has been set.
      *
-     * @param formattedTable a StringBuilder object representing the formatted table.
+     * @param formattedTable A StringBuilder object representing the formatted table.
      */
     private void appendTableNameIfExists(StringBuilder formattedTable) {
         if (tableName != null) {
