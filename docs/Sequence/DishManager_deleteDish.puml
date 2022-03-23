@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+hide footbox
+
+actor user
+participant "__:DishManager__" as dishmanager
+participant "__dishes:ArrayList<Dish>__" as dishes
+participant "__:Dish__" as dish
+
+activate dishmanager
+activate dishes
+activate dish
+
+user -> dishmanager: deleteDish(index)
+
+dishmanager -> dishmanager: throwIfIndexNotValid(index)
+activate dishmanager
+
+dishmanager -> dishes: size()
+dishes --> dishmanager
+
+group alt [index > size]
+dishmanager --> user: IndexOutOfBoundsException
+end
+
+dishmanager -> dishmanager
+deactivate dishmanager
+
+dishmanager -> dishes: remove(index)
+dishes --> dishmanager: dish
+deactivate dish
+destroy dish
+dishmanager --> user
+@enduml
