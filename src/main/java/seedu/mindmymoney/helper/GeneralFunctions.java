@@ -18,11 +18,6 @@ import static seedu.mindmymoney.constants.ExpenditureFields.time;
  * Container for general functions used throughout the program.
  */
 public class GeneralFunctions {
-    private static final String e = expenditure.toString();
-    private static final String c = category.toString();
-    private static final String d = description.toString();
-    private static final String a = amount.toString();
-    private static final String t = time.toString();
 
     /**
      * Separates the user input into the command and description for easy reference.
