@@ -49,12 +49,16 @@ public class UI {
     public static final String PLAN_FILE_NOT_FOUND_MSG = "- The plan file was not found. It will be created.";
     public static final String PLAN_FILE_CREATED_MSG = "- The plan file 'plans.txt' has been created in\n"
             + "  the WerkIt! resource directory.";
+    public static final String SCHEDULE_FILE_NOT_FOUND_MSG = "- The schedule file was not found. It will be created.";
+    public static final String SCHEDULE_FILE_CREATED_MSG = "- The schedule file 'schedule.txt' has been\n"
+            + "  created in the WerkIt! resource directory.";
     public static final String FILE_LOAD_OK = "OK!";
     public static final String FILE_LOAD_NOT_OK = "Not OK...";
     public static final String LOADING_FILE_DATA_MSG = "Loading saved file data...";
     public static final String EXERCISES_FILE_LOADED_MSG =  "- Exercises file\t%s\n";
     public static final String WORKOUTS_FILE_LOADED_MSG = "- Workouts file \t%s\n";
-    public static final String PLANS_FILE_LOADED_MSG = "- Plans file \t%s\n";
+    public static final String PLANS_FILE_LOADED_MSG = "- Plans file \t\t%s\n";
+    public static final String SCHEDULE_FILE_LOADED_MSG = "- Schedule file \t%s\n";
     // Workout-related messages
     public static final String NEW_WORKOUT_CREATED_MESSAGE = "Alright, the following workout has been created:";
     public static final String DELETED_WORKOUT_MESSAGE = "Alright, the following workout has been removed:";
@@ -62,7 +66,7 @@ public class UI {
     //Plan-related Message
     public static final String NEW_PLAN_CREATED_MESSAGE = "Alright, the following plan has been created:";
     public static final String DELETED_PLAN_MESSAGE = "Alright, the following plan has been removed:";
-    public static final String NEW_DAY_CREATED_MESSAGE = "Alright, the following day schedule has been created:";
+    public static final String NEW_DAY_CREATED_MESSAGE = "Alright, the following plan schedule has been created:";
 
     // IOException Error Message
     public static final String IOEXCEPTION_ERROR_MESSAGE = "[ERROR] The program has encountered an IOException "
@@ -327,6 +331,9 @@ public class UI {
         case FileManager.PLAN_FILENAME:
             messageToPrint = PLANS_FILE_LOADED_MSG;
             break;
+        case FileManager.SCHEDULE_FILENAME:
+            messageToPrint = SCHEDULE_FILE_LOADED_MSG;
+            break;
         default:
             logger.log(Level.WARNING, "Unknown filename encountered.");
             throw new UnknownFileException(filename, UnknownFileException.UNKNOWN_FILE_MSG);
@@ -384,11 +391,6 @@ public class UI {
         System.out.println(WORKOUT_FILE_NOT_FOUND_MSG);
     }
 
-    public void printPlanFileNotFoundMessage() {
-        System.out.println();
-        System.out.println(PLAN_FILE_NOT_FOUND_MSG);
-    }
-
     /**
      * Prints a message to tell the user that the workout file has been successfully created.
      */
@@ -396,8 +398,29 @@ public class UI {
         System.out.println(WORKOUT_FILE_CREATED_MSG);
     }
 
+    public void printPlanFileNotFoundMessage() {
+        System.out.println();
+        System.out.println(PLAN_FILE_NOT_FOUND_MSG);
+    }
+
     public void printPlanFileCreatedMessage() {
         System.out.println(PLAN_FILE_CREATED_MSG);
+    }
+
+    /**
+     * Prints a message to tell the user that the schedule file is not found on the user's system
+     * and a new one will be created.
+     */
+    public void printScheduleFileNotFoundMessage() {
+        System.out.println();
+        System.out.println(SCHEDULE_FILE_NOT_FOUND_MSG);
+    }
+
+    /**
+     * Prints a message to tell the user that the schedule file has been successfully created.
+     */
+    public void printScheduleFileCreatedMessage() {
+        System.out.println(SCHEDULE_FILE_CREATED_MSG);
     }
 
     /**

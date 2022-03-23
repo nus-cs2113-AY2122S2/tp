@@ -125,10 +125,10 @@ public class WerkIt {
         getFileManager().checkAndCreateDirectoriesAndFiles();
         getUI().printEmptyLineOrStatus(fileManager.checkIfAllDirectoryAndFilesExists());
 
-        assert (Files.exists(fileManager.getWorkoutFilePath()));
-        assert (Files.exists(fileManager.getExerciseFilePath()));
-        assert (Files.exists(fileManager.getWorkoutFilePath()));
-        assert (Files.exists(fileManager.getPlanFilePath()));
+        assert (Files.exists(fileManager.getWorkoutFilePath())) : "Workout file does not exist.";
+        assert (Files.exists(fileManager.getExerciseFilePath())) : "Exercise file does not exist.";
+        assert (Files.exists(fileManager.getPlanFilePath())) : "Plan file does not exist.";
+        assert (Files.exists(fileManager.getScheduleFilePath())) : "Schedule file does not exist.";
 
         getUI().printLoadingFileDataMessage();
         loadExerciseFile();
@@ -137,6 +137,9 @@ public class WerkIt {
         }
         if (getFileManager().isWasPlansFileAlreadyMade()) {
             loadPlanFile();
+        }
+        if (getFileManager().isWasScheduleFileAlreadyMade()) {
+            loadScheduleFile();
         }
     }
 
@@ -227,6 +230,25 @@ public class WerkIt {
             logger.log(Level.WARNING, "Unknown file name was encountered.");
         }
 
-        logger.log(Level.INFO, "Workout file data loaded.");
+        logger.log(Level.INFO, "Plan file data loaded.");
+    }
+
+    /**
+     * Loads the schedule file's data that is stored in the user's filesystem into the current
+     * session's list of workouts.
+     *
+     * @throws IOException If the application is unable to open the workout file.
+     */
+    private void loadScheduleFile() throws IOException {
+        boolean isScheduleFileLoadSuccessful;
+        isScheduleFileLoadSuccessful = fileManager.loadScheduleFromFile(getDayList());
+        try {
+            getUI().printFileLoadStatusMessage(FileManager.SCHEDULE_FILENAME, isScheduleFileLoadSuccessful);
+        } catch (UnknownFileException e) {
+            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, "Unknown file name was encountered.");
+        }
+
+        logger.log(Level.INFO, "Schedule file data loaded.");
     }
 }

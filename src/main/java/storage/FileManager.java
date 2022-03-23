@@ -5,6 +5,9 @@ import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
 import data.plans.Plan;
 import data.plans.PlanList;
+import data.schedule.Day;
+import data.schedule.DayList;
+import data.schedule.InvalidScheduleException;
 import data.workouts.InvalidWorkoutException;
 import data.workouts.Workout;
 import data.workouts.WorkoutList;
@@ -36,6 +39,7 @@ public class FileManager {
     public static final String EXERCISE_FILENAME = "exercises.txt";
     public static final String WORKOUT_FILENAME = "workouts.txt";
     public static final String PLAN_FILENAME = "plans.txt";
+    public static final String SCHEDULE_FILENAME = "schedule.txt";
 
     // Delimiters for processing file data
     private static final String FILE_DATA_DELIMITER_REGEX = "\\|";
@@ -47,6 +51,7 @@ public class FileManager {
     private Path exerciseFilePath;
     private Path workoutFilePath;
     private Path planFilePath;
+    private Path scheduleFilePath;
 
     // These booleans indicate whether the directory and/or files already exist
     // prior to the current application's session.
@@ -54,6 +59,7 @@ public class FileManager {
     private boolean wasExercisesFileAlreadyMade = false;
     private boolean wasWorkoutsFileAlreadyMade = false;
     private boolean wasPlansFileAlreadyMade = false;
+    private boolean wasScheduleFileAlreadyMade = false;
 
     private static Logger logger = Logger.getLogger(FileManager.class.getName());
 
@@ -67,6 +73,7 @@ public class FileManager {
         this.exerciseFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, EXERCISE_FILENAME);
         this.workoutFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, WORKOUT_FILENAME);
         this.planFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, PLAN_FILENAME);
+        this.scheduleFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, SCHEDULE_FILENAME);
 
         LogHandler.linkToFileLogger(logger);
     }
@@ -102,6 +109,16 @@ public class FileManager {
 
     public Path getPlanFilePath() {
         return this.planFilePath;
+    }
+
+    /**
+     * Gets the Paths object that stores the URI of the WerkIt! data file containing
+     * the schedule.
+     *
+     * @return A Paths object with the URI of the application's schedule file.
+     */
+    public Path getScheduleFilePath() {
+        return this.scheduleFilePath;
     }
 
     /**
@@ -154,10 +171,6 @@ public class FileManager {
         return this.wasWorkoutsFileAlreadyMade;
     }
 
-    public boolean isWasPlansFileAlreadyMade() {
-        return this.wasPlansFileAlreadyMade;
-    }
-
     /**
      * Sets the status of whether the workout file already exists prior to the current session
      * of the application.
@@ -168,8 +181,32 @@ public class FileManager {
         this.wasWorkoutsFileAlreadyMade = wasWorkoutsFileAlreadyMade;
     }
 
+    public boolean isWasPlansFileAlreadyMade() {
+        return this.wasPlansFileAlreadyMade;
+    }
+
     public void setWasPlansFileAlreadyMade(boolean wasPlansFileAlreadyMade) {
         this.wasPlansFileAlreadyMade = wasPlansFileAlreadyMade;
+    }
+
+    /**
+     * Gets the status of whether the schedule file already exists prior to the current session
+     * of the application.
+     *
+     * @return Returns true if the schedule file already exists. Otherwise, returns false.
+     */
+    public boolean isWasScheduleFileAlreadyMade() {
+        return this.wasScheduleFileAlreadyMade;
+    }
+
+    /**
+     * Sets the status of whether the schedule file already exists prior to the current session
+     * of the application.
+     *
+     * @param wasScheduleFileAlreadyMade The status of the schedule file's existence.
+     */
+    public void setWasScheduleFileAlreadyMade(boolean wasScheduleFileAlreadyMade) {
+        this.wasScheduleFileAlreadyMade = wasScheduleFileAlreadyMade;
     }
 
     /**
@@ -190,6 +227,9 @@ public class FileManager {
             return false;
         }
         if (!isWasPlansFileAlreadyMade()) {
+            return false;
+        }
+        if (!isWasScheduleFileAlreadyMade()) {
             return false;
         }
 
@@ -232,9 +272,18 @@ public class FileManager {
             ui.printPlanFileCreatedMessage();
         }
 
-        assert (Files.exists(getDirectoryPath()));
-        assert (Files.exists(getExerciseFilePath()));
-        assert (Files.exists(getWorkoutFilePath()));
+        checkIfScheduleFileAlreadyExists();
+        if (!isWasScheduleFileAlreadyMade()) {
+            ui.printScheduleFileNotFoundMessage();
+            createScheduleFile();
+            ui.printScheduleFileCreatedMessage();
+        }
+
+        assert (Files.exists(getDirectoryPath())) : "Directory does not exist, but it should.";
+        assert (Files.exists(getExerciseFilePath())) : "Exercise file does not exist, but it should.";
+        assert (Files.exists(getWorkoutFilePath())) : "Workout file does not exist, but it should.";
+        // TODO: assert for plans (Haofeng?)
+        assert (Files.exists(getScheduleFilePath())) : "Schedule file does not exist, but it should.";
     }
 
     /**
@@ -255,6 +304,7 @@ public class FileManager {
      */
     public void createDataDirectory() throws IOException {
         Files.createDirectory(getDirectoryPath());
+        logger.log(Level.INFO, "A new data directory was created.");
     }
 
     /**
@@ -275,6 +325,7 @@ public class FileManager {
      */
     public void createExerciseFile() throws IOException {
         Files.createFile(getExerciseFilePath());
+        logger.log(Level.INFO, "A new exercise file was created.");
 
         // Populate file with default exercises
         FileWriter fileWriter = new FileWriter(getExerciseFilePath().toString());
@@ -296,13 +347,6 @@ public class FileManager {
         }
     }
 
-    public void checkIfPlanFileAlreadyExists() {
-        if (Files.exists(getPlanFilePath())) {
-            logger.log(Level.INFO, "Plan file already exists.");
-            setWasPlansFileAlreadyMade(true);
-        }
-    }
-
     /**
      * Creates the workout file of the application.
      *
@@ -310,10 +354,31 @@ public class FileManager {
      */
     public void createWorkoutFile() throws IOException {
         Files.createFile(getWorkoutFilePath());
+        logger.log(Level.INFO, "A new workout file was created.");
+    }
+
+    public void checkIfPlanFileAlreadyExists() {
+        if (Files.exists(getPlanFilePath())) {
+            logger.log(Level.INFO, "Plan file already exists.");
+            setWasPlansFileAlreadyMade(true);
+        }
     }
 
     public void createPlanFile() throws IOException {
         Files.createFile(getPlanFilePath());
+        logger.log(Level.INFO, "A new plan file was created.");
+    }
+
+    public void checkIfScheduleFileAlreadyExists() {
+        if (Files.exists(getScheduleFilePath())) {
+            logger.log(Level.INFO, "Schedule file already exists.");
+            setWasScheduleFileAlreadyMade(true);
+        }
+    }
+
+    public void createScheduleFile() throws IOException {
+        Files.createFile(getScheduleFilePath());
+        logger.log(Level.INFO, "A new schedule file was created.");
     }
 
     /**
@@ -330,8 +395,7 @@ public class FileManager {
     }
 
     /**
-     * Reads the workouts from the local workout file and stores them into an ArrayList in a
-     * WorkoutList object.
+     * Reads the workouts from the local workout file and stores them into a WorkoutList object.
      *
      * @param workoutList An instance of the WorkoutList class.
      * @return Returns true if all workouts have been loaded into the application successfully.
@@ -350,7 +414,7 @@ public class FileManager {
                 System.out.println("File data error: insufficient parameters in workout data.");
                 hasNoErrorsDuringLoad = false;
             } catch (InvalidExerciseException | InvalidWorkoutException e) {
-                System.out.println("File data error:" + e.getMessage());
+                System.out.println("File data error: " + e.getMessage());
                 hasNoErrorsDuringLoad = false;
             }
         }
@@ -370,7 +434,36 @@ public class FileManager {
                 System.out.println("File data error: insufficient parameters in plan data.");
                 hasNoErrorsDuringLoad = false;
             } catch (InvalidExerciseException | InvalidWorkoutException e) {
-                System.out.println("File data error:" + e.getMessage());
+                System.out.println("File data error: " + e.getMessage());
+                hasNoErrorsDuringLoad = false;
+            }
+        }
+
+        return hasNoErrorsDuringLoad;
+    }
+
+    /**
+     * Reads the days and corresponding plans from the local schedule file and stores the
+     * parsed data into a DayList object.
+     *
+     * @param dayList The DayList object to store the day schedule in.
+     * @return Returns true if the entire schedule is loaded into the application successfully.
+     *         Otherwise, returns false.
+     * @throws IOException If the method is unable to open the schedule file.
+     */
+    public boolean loadScheduleFromFile(DayList dayList) throws IOException {
+        boolean hasNoErrorsDuringLoad = true;
+        Scanner scheduleFileReader = new Scanner(getScheduleFilePath());
+        while (scheduleFileReader.hasNext()) {
+            try {
+                String scheduleFileDataLine = scheduleFileReader.nextLine();
+                String[] parsedScheduleFileDataLine = parseFileDataLine(scheduleFileDataLine);
+                addFileScheduleToList(dayList, parsedScheduleFileDataLine);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("File data error: insufficient parameters in plan data.");
+                hasNoErrorsDuringLoad = false;
+            } catch (InvalidScheduleException e) {
+                System.out.println("File data error: " + e.getMessage());
                 hasNoErrorsDuringLoad = false;
             }
         }
@@ -396,8 +489,8 @@ public class FileManager {
     }
 
     /**
-     * Adds a parsed workout data that is read from the resource file into the current application
-     * session's list of workouts.
+     * Adds a parsed workout data that is read from the resource file 'workouts.txt' into
+     * the current application session's list of workouts.
      *
      * @param workoutList         An instance of the WorkoutList class.
      * @param workoutFileDataLine An array of the parsed workout data read from the resource file.
@@ -428,6 +521,24 @@ public class FileManager {
         }
         Plan planToBeAdded = new Plan(planName, workoutsToAddInPlanList);
         planList.insertPlanIntoList(planName, planToBeAdded);
+    }
+
+    /**
+     * Adds a parsed day schedule data that is read from the resource file 'schedule.txt' into
+     * the current application session's schedule of the days.
+     *
+     * @param dayList              An instance of the DayList class.
+     * @param scheduleFileDataLine An array of the parsed day schedule data read from the resource file.
+     * @throws ArrayIndexOutOfBoundsException If the parsed data contains insufficient information.
+     * @throws InvalidScheduleException       If the parsed data contains invalid day schedule data or format.
+     */
+    public void addFileScheduleToList(DayList dayList, String[] scheduleFileDataLine)
+            throws ArrayIndexOutOfBoundsException, InvalidScheduleException {
+        String dayNumber = scheduleFileDataLine[0];
+        String planName = scheduleFileDataLine[1];
+
+        String userArguments = dayNumber + " " + planName;
+        dayList.updateDay(userArguments);
     }
 
     /**
@@ -537,5 +648,47 @@ public class FileManager {
             fileWriter.append(System.lineSeparator());
         }
         fileWriter.close();
+    }
+
+    /**
+     * Rewrites the entire list of Days and their corresponding plans stored in the DayList object into
+     * the schedule resource file.
+     *
+     * @param dayList An instance of the DayList class.
+     * @throws IOException If the application is unable to open the schedule resource file.
+     */
+    public void rewriteAllDaysScheduleToFile(DayList dayList) throws IOException {
+        Day[] listOfDaysPlans = dayList.getDayList();
+
+        FileWriter fileWriter = new FileWriter(getScheduleFilePath().toString());
+        for (int i = 0; i < listOfDaysPlans.length; i += 1) {
+            if (listOfDaysPlans[i] == null) {
+                // Day has no plan, nothing to write to the file. Proceed to the next Day.
+                continue;
+            }
+            assert (listOfDaysPlans[i] != null) : "Element referenced is null, but it should not be.";
+            String dayScheduleInFileFormat = convertDayScheduleToFileDataFormat(listOfDaysPlans[i]);
+            fileWriter.append(dayScheduleInFileFormat);
+            fileWriter.append(System.lineSeparator());
+        }
+        fileWriter.close();
+    }
+
+    /**
+     * Converts the data stored in the Day object into a string that will be written to the
+     * schedule resource file.
+     *
+     * @param day The Day object whose data will be written to the schedule resource file.
+     * @return A string representing the Day object data.
+     */
+    public String convertDayScheduleToFileDataFormat(Day day) {
+        assert (day != null) : "Day object is null, but it should not be.";
+
+        StringBuilder dayScheduleInFileFormat = new StringBuilder();
+        dayScheduleInFileFormat.append(day.getDayNumber());
+        dayScheduleInFileFormat.append(FILE_DATA_DELIMITER);
+        dayScheduleInFileFormat.append(day.getPlanForThisDay());
+
+        return dayScheduleInFileFormat.toString();
     }
 }
