@@ -55,7 +55,7 @@ public class TableFormatterRow {
      * Returns an ArrayList object containing each row item padded according to the integer array object
      * passed into the method.
      *
-     * @param  columnWidths An integer array object specifying the width each row item should be aligned to.
+     * @param columnWidths An integer array object specifying the width each row item should be aligned to.
      * @return An ArrayList object containing each padded row item of this row.
      */
     public ArrayList<String> padRow(int[] columnWidths) {
