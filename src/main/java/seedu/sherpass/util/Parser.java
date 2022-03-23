@@ -65,25 +65,25 @@ public class Parser {
      * @return Task containing the saved data for adding into program's task array.
      * @throws InvalidInputException If saved data is missing content, i.e. task description or date.
      */
-    public static Task parseSavedData(JSONObject taskData) throws InvalidInputException {
+    public static Task parseSaveData(JSONObject taskData) throws InvalidInputException {
         Task parsedTask;
         try {
-            boolean hasDoOnTime = taskData.getBoolean("has_dotime");
-            boolean hasByTime = taskData.getBoolean("has_bytime");
             int identifier = taskData.getInt("identifier");
             String description = taskData.getString("description");
             String byDateString = taskData.getString("by_date");
-            String doOnDateString = taskData.getString("do_date");
-            LocalDateTime byDate = null;
-            LocalDateTime doOnDate = null;
-            if (!byDateString.equals("null")) {
-                byDate = LocalDateTime.parse(byDateString, inputWithTimeFormat);
-            }
-            if (!doOnDateString.equals("null")) {
-                doOnDate = LocalDateTime.parse(doOnDateString, inputWithTimeFormat);
-            }
-            parsedTask = new Task(description, byDate, doOnDate, hasByTime, hasDoOnTime);
-            parsedTask.setIdentifier(identifier);
+            String doOnStartDateString = taskData.getString("do_date_start");
+            String doOnEndDateString = taskData.getString("do_date_end");
+            String frequencyString = taskData.getString("frequency");
+
+            Frequency repeatFrequency = frequencyString.isBlank() ?
+                    null : Frequency.valueOf(frequencyString);
+            LocalDateTime byDate = (byDateString.isBlank() ?
+                    null : LocalDateTime.parse(byDateString, inputWithTimeFormat));
+            LocalDateTime doOnStartDateTime = LocalDateTime.parse(doOnStartDateString, inputWithTimeFormat);
+            LocalDateTime doOnEndDateTime = LocalDateTime.parse(doOnEndDateString, inputWithTimeFormat);
+
+            parsedTask = new Task(identifier, description, byDate, doOnStartDateTime,
+                    doOnEndDateTime, repeatFrequency);
             String status = taskData.getString("status");
             if (status.equals("X")) {
                 parsedTask.markAsDone();

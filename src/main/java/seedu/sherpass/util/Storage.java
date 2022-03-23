@@ -25,7 +25,7 @@ import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_3
 import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
 
 public class Storage {
-    private String saveFilePath;
+    private final String saveFilePath;
 
     /**
      * Creates a constructor for the class Storage.
@@ -49,7 +49,7 @@ public class Storage {
     }
 
     // Wipes the existing file
-    private void wipeSavedData() {
+    private void wipeSaveData() {
         try {
             FileWriter fw = new FileWriter(saveFilePath);
             fw.close();
@@ -73,12 +73,13 @@ public class Storage {
             taskToStore.put("identifier", t.getIdentifier());
             taskToStore.put("status", t.getStatusIcon());
             taskToStore.put("by_date",
-                    (t.getByDate() == null ? "null" : t.getByDate().format(inputWithTimeFormat)));
-            taskToStore.put("do_date",
-                    (t.getDoOnDate() == null ? "null" : t.getDoOnDate().format(inputWithTimeFormat)));
+                    (t.getByDate() == null ? " " : t.getByDate().format(inputWithTimeFormat)));
+            taskToStore.put("do_date_start",
+                    (t.getDoOnStartDateTime() == null ? " " : t.getDoOnStartDateTime().format(inputWithTimeFormat)));
+            taskToStore.put("do_date_end",
+                    (t.getDoOnStartDateTime() == null ? " " : t.getDoOnEndDateTime().format(inputWithTimeFormat)));
+            taskToStore.put("frequency", (t.getRepeatFrequency() == null ? " ": t.getRepeatFrequency().toString()));
             taskToStore.put("description", t.getDescription());
-            taskToStore.put("has_bytime", t.getHasByTime());
-            taskToStore.put("has_dotime", t.getHasDoOnTime());
             tasks.put(taskToStore);
         }
         json.put("tasks", tasks);
@@ -121,7 +122,7 @@ public class Storage {
 
             for (int i = 0; i < taskArray.length(); i++) {
                 JSONObject taskData = taskArray.getJSONObject(i);
-                taskList.add(Parser.parseSavedData(taskData));
+                taskList.add(Parser.parseSaveData(taskData));
             }
         }
         return taskList;
@@ -148,7 +149,7 @@ public class Storage {
         assert response.equalsIgnoreCase("y") || response.equalsIgnoreCase("n");
 
         if (response.equalsIgnoreCase("y")) {
-            wipeSavedData();
+            wipeSaveData();
         } else {
             ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_3);
             System.exit(1);
