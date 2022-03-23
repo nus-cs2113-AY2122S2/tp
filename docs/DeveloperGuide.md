@@ -131,6 +131,16 @@ print that out.
   * Cons: Lack of abstraction, and that total income and expenditure for each generation would need to be   
     stored until the entire list is iterated through before being able to print.
 
+**Aspect: How many levels of information to show**
+* **Alternative 1 \(current choice):** Each class shows information suiting their level i.e., `Family#list()` shows  
+  an overview of each `PersonList`'s total income and expenditure.
+  * Pros: Users will be able to choose how much information they want to see.
+  * Cons: The user would be unable to view all the information with a single command.
+* **Alternative 2:** Only have a single `Family#list()` which gives detailed information of each `Person`'s income   
+  and expenditures.
+  * Pros: Only 1 command is required to show all information.
+  * Cons: If the user only wants a high level overview, the user could be hit with information overload.
+
 ### Edit Values Feature 
 
 Maybe for Jiarong
