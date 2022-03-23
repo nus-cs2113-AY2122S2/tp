@@ -119,7 +119,29 @@ Otherwise, the constructor is called. Either methods will result in the creation
 ### Remove a group
 ### View a group
 ### List groups
+**API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
 
+The sequence diagram below models the interactions between various entities in the system
+when the user invokes the `group /list` command.
+<br>
+<br>
+![List Groups Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupListCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `group /list` command is as follows:
+1. The user input provided is passed to `Splitlah`.
+2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `GroupListCommand` object.
+3. `GroupListCommand#run()` method is then invoked to run the `group /list` command.
+4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile()` is called
+before the list of groups can be retrieved.
+5. To retrieve the groups from the profile retrieved, `Profile#getGroupList()` method is executed,
+where a list of `Group` objects are returned.
+6. Once the list is retrieved, `GroupListCommand` class checks if the list is empty.
+   1. If the list is empty, a message indicating that the list is empty is printed
+   using the method `TextUi#printlnMessage()`.
+   2. If the list is not empty, `GroupListCommand` will loop from the first to the second last group, 
+   calling `TextUi#printlnMessage()` to print out the summary of each group.
+   Then, the last group is printed with a divider below it, using the method `TextUi#printlnMessageWithDivider()`.
 
 ## Product scope
 ### Target user profile
