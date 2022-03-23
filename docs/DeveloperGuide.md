@@ -24,6 +24,11 @@ input loops). The new class then implements this abstract method at the least:
   - This method is responsible for selecting the corresponding action to the user's selected choice.
   For more information and examples, refer to the `Controller` class' documentation, and `MainController` class for an
   example implementation.
+<div align="center">
+  
+![](diagrams/class/controllers.png)
+
+</div>
 
 By itself, `Controllers` are not useful. They should usually have an underlying `Manager` class for data storage and
 manipulation.
