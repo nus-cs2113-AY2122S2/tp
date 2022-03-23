@@ -87,7 +87,7 @@ public class Validator {
                     + "followed by 7 digits and end with a capital letter.");
             isValid = false;
         }
-        if (!validateFullName(parameters[1])) {
+        if (validateFullName(parameters[1])) {
             UI.printParagraph("Full name must contain only alphabets and no special characters.");
             isValid = false;
         }
@@ -116,7 +116,7 @@ public class Validator {
         boolean isValid = validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
 
         //validate full name cause specialization is also just a name
-        if (!validateFullName(parameters[6])) {
+        if (validateFullName(parameters[6])) {
             UI.printParagraph("Specialization must be a name");
             isValid = false;
         }
