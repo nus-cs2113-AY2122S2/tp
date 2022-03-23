@@ -9,7 +9,6 @@ import seedu.sherpass.exception.InvalidInputException;
 
 import seedu.sherpass.util.Parser;
 import seedu.sherpass.util.Storage;
-import seedu.sherpass.util.Timetable;
 import seedu.sherpass.util.Ui;
 
 import seedu.sherpass.task.TaskList;
@@ -17,7 +16,6 @@ import seedu.sherpass.task.TaskList;
 import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
