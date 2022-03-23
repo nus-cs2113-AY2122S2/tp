@@ -315,6 +315,11 @@ Example of usage:
 ### Deleting a group: `group /delete`
 ### Viewing a group: `group /view`
 ### Listing all groups: `group /list`
+
+> List all active groups. Deleted groups will not be listed.<br>
+> A group represents one or more individuals.
+> It is used as a shortcut in several commands for identifying a group of individual persons.
+
 ### Listing all available commands: `help`
 
 ### Exit
