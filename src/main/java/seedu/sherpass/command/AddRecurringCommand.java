@@ -8,10 +8,13 @@ import seedu.sherpass.util.Ui;
 
 import java.time.LocalDateTime;
 
+import static java.time.temporal.ChronoUnit.SECONDS;
+import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
+
 public class AddRecurringCommand extends Command {
     private String taskDescription;
-    private LocalDateTime doOnDate;
-    private boolean hasDoOnTime;
+    private LocalDateTime doOnStartDateTime;
+    private LocalDateTime doOnEndDateTime;
     private Frequency frequency;
 
     public static final String COMMAND_WORD = "addrecurring";
@@ -35,16 +38,12 @@ public class AddRecurringCommand extends Command {
         this.taskDescription = taskDescription;
     }
 
-    public void setDoOnDate(LocalDateTime doOnDate) {
-        this.doOnDate = doOnDate;
+    public void setDoOnStartDateTime(LocalDateTime doOnStartDateTime) {
+        this.doOnStartDateTime = doOnStartDateTime;
     }
 
-    public boolean getHasDoOnTime() {
-        return hasDoOnTime;
-    }
-
-    public void setHasDoOnTime(boolean hasDoOnTime) {
-        this.hasDoOnTime = hasDoOnTime;
+    public void setDoOnEndDateTime(LocalDateTime doOnEndDateTime) {
+        this.doOnEndDateTime = doOnEndDateTime;
     }
 
     public void setFrequency(Frequency frequency) {
@@ -53,39 +52,44 @@ public class AddRecurringCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        Task newTask = new Task(taskDescription, doOnDate, hasDoOnTime);
-        int identifier = newTask.getIdentifier();
-        LocalDateTime startDate = doOnDate;
+        if (doOnStartDateTime.isAfter(doOnEndDateTime)) {
+            ui.showToUser(ERROR_START_AFTER_END_TIME_MESSAGE);
+            return;
+        }
+        int identifier = taskList.generateIdentifier();
+        Task newTask = new Task(identifier, taskDescription, null,
+                doOnStartDateTime, doOnEndDateTime, frequency);
+        long duration = doOnStartDateTime.until(doOnEndDateTime, SECONDS);
         LocalDateTime endDate;
-        int count = 0;
+
         if (frequency == Frequency.DAILY) {
-            endDate = startDate.plusMonths(1);
-            do {
-                ++count;
-                taskList.addTask(newTask);
-                startDate = startDate.plusDays(1);
-                newTask = new Task(taskDescription, startDate, hasDoOnTime);
-                newTask.setIdentifier(identifier);
-            } while (newTask.getDoOnDate().isBefore(endDate));
+            endDate = doOnStartDateTime.plusMonths(1);
         } else if (frequency == Frequency.WEEKLY) {
-            endDate = startDate.plusMonths(2);
-            do {
-                ++count;
-                taskList.addTask(newTask);
-                startDate = startDate.plusWeeks(1);
-                newTask = new Task(taskDescription, startDate, hasDoOnTime);
-            } while (newTask.getDoOnDate().isBefore(endDate));
+            endDate = doOnStartDateTime.plusMonths(2);
         } else {
-            endDate = startDate.plusYears(1);
-            do {
-                ++count;
-                taskList.addTask(newTask);
-                startDate = startDate.plusMonths(1);
-                newTask = new Task(taskDescription, startDate, hasDoOnTime);
-            } while (newTask.getDoOnDate().isBefore(endDate));
+            endDate = doOnStartDateTime.plusYears(1);
         }
 
-        ui.showToUser("Got it. I've added " + count + " tasks:\n " + newTask
+        int count = 0;
+        StringBuilder addedTaskString = new StringBuilder();
+        do {
+            ++count;
+            taskList.addTask(newTask);
+            addedTaskString.append(newTask);
+            addedTaskString.append("\n ");
+            if (frequency == Frequency.DAILY) {
+                doOnStartDateTime = doOnStartDateTime.plusDays(1);
+            } else if (frequency == Frequency.WEEKLY) {
+                doOnStartDateTime = doOnStartDateTime.plusWeeks(1);
+            } else {
+                doOnStartDateTime = doOnStartDateTime.plusMonths(1);
+            }
+            doOnEndDateTime = doOnStartDateTime.plusSeconds(duration);
+            newTask = new Task(identifier, taskDescription, null, doOnStartDateTime, doOnEndDateTime, frequency);
+        }
+        while (newTask.getDoOnStartDateTime().isBefore(endDate));
+
+        ui.showToUser("Got it. I've added " + count + " tasks:\n " + addedTaskString
                 + "\nNow you have " + taskList.getTasks().size() + " task(s) in the list.");
         storage.writeSaveData(taskList);
     }

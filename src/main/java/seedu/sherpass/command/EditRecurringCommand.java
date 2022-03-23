@@ -1,16 +1,20 @@
 package seedu.sherpass.command;
 
+import seedu.sherpass.enums.Frequency;
+import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
 import java.time.LocalDateTime;
 
+import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
+
 public class EditRecurringCommand extends Command {
     private int index;
     private String taskDescription;
-    private LocalDateTime doOnDate;
-    private boolean hasDoOnTime;
+    private LocalDateTime doOnStartDateTime;
+    private LocalDateTime doOnEndDateTime;
 
     public static final String COMMAND_WORD = "editrecurring";
     public static final String MESSAGE_USAGE = "editrecurring: Edit a recurring task in the task list.\n"
@@ -35,16 +39,16 @@ public class EditRecurringCommand extends Command {
         this.taskDescription = taskDescription;
     }
 
-    public void setDoOnDate(LocalDateTime doOnDate) {
-        this.doOnDate = doOnDate;
+    public void setDoOnStartDateTime(LocalDateTime doOnStartDateTime) {
+        this.doOnStartDateTime = doOnStartDateTime;
     }
 
-    public boolean getHasDoOnTime() {
-        return hasDoOnTime;
+    public void setDoOnEndDateTime(LocalDateTime doOnEndDateTime) {
+        this.doOnEndDateTime = doOnEndDateTime;
     }
 
-    public void setHasDoOnTime(boolean hasDoOnTime) {
-        this.hasDoOnTime = hasDoOnTime;
+    public String getTaskDescription() {
+        return taskDescription;
     }
 
     @Override
@@ -52,15 +56,42 @@ public class EditRecurringCommand extends Command {
         if (index > taskList.getTasks().size() || index < 0) {
             ui.showToUser("Invalid index!");
             return;
+        } else if (doOnStartDateTime != null && doOnStartDateTime.isAfter(doOnEndDateTime)) {
+            ui.showToUser(ERROR_START_AFTER_END_TIME_MESSAGE);
+            return;
         }
-        if (!taskDescription.isBlank()) {
-            taskList.getTasks().get(index).setTaskDescription(taskDescription);
+
+        Frequency repeatFrequency = taskList.getTasks().get(index).getRepeatFrequency();
+        int oldIdentifier = taskList.getTasks().get(index).getIdentifier();
+        int newIdentifier = taskList.generateIdentifier();
+        int editCount = 0;
+        StringBuilder editedTaskString = new StringBuilder();
+
+        for (int i = index; i < taskList.getTasks().size(); i++) {
+            Task t = taskList.getTasks().get(i);
+            if (t.getIdentifier() == oldIdentifier) {
+                if (!taskDescription.isBlank()) {
+                    t.setTaskDescription(taskDescription);
+                }
+                if (doOnStartDateTime != null) {
+                    if (repeatFrequency == Frequency.DAILY) {
+                        t.setDoOnStartDateTime(doOnStartDateTime.plusDays(editCount));
+                        t.setDoOnEndDateTime(doOnEndDateTime.plusDays(editCount));
+                    } else if (repeatFrequency == Frequency.WEEKLY) {
+                        t.setDoOnStartDateTime(doOnStartDateTime.plusWeeks(editCount));
+                        t.setDoOnEndDateTime(doOnEndDateTime.plusWeeks(editCount));
+                    } else {
+                        t.setDoOnStartDateTime(doOnStartDateTime.plusMonths(editCount));
+                        t.setDoOnEndDateTime(doOnEndDateTime.plusMonths(editCount));
+                    }
+                }
+                ++editCount;
+                t.setIdentifier(newIdentifier);
+                editedTaskString.append(t);
+                editedTaskString.append("\n ");
+            }
         }
-        if (doOnDate != null) {
-            taskList.getTasks().get(index).setDoOnDate(doOnDate);
-            taskList.getTasks().get(index).setHasDoOnTime(hasDoOnTime);
-        }
-        ui.printEditTaskMessage(taskList.getTasks().get(index).toString());
+        ui.printEditTaskMessage(editedTaskString.toString());
         storage.writeSaveData(taskList);
     }
 }

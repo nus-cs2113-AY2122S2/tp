@@ -1,5 +1,6 @@
 package seedu.sherpass.command;
 
+import seedu.sherpass.task.Task;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
@@ -58,7 +59,11 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.addTask(toAddTaskContent, toAddTaskByDate, toAddTaskDoOnDate);
+        Task newTask = new Task(taskList.generateIdentifier(),  toAddTaskContent, toAddTaskByDate,
+                toAddTaskDoOnDate, toAddTaskDoOnDate, null);
+        taskList.addTask(newTask);
+        ui.showToUser("Got it. I've added " + taskList.getTasks().size() + " tasks:\n " + newTask
+                + "\nNow you have " + taskList.getTasks().size() + " task(s) in the list.");
         storage.writeSaveData(taskList);
     }
 }

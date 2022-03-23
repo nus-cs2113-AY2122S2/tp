@@ -31,7 +31,7 @@ public class EditCommand extends Command {
             taskList.getTasks().get(taskIndex).setByDate(byDate);
         }
         if (doOnDate != null) {
-            taskList.getTasks().get(taskIndex).setDoOnDate(doOnDate);
+            taskList.getTasks().get(taskIndex).setDoOnStartDateTime(doOnDate);
         }
         ui.printEditTaskMessage(taskList.getTasks().get(taskIndex).toString());
         storage.writeSaveData(taskList);

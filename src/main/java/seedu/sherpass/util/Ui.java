@@ -84,7 +84,7 @@ public class Ui {
 
     public void printEditTaskMessage(String task) {
         System.out.println("Ok, I've edited this task as such!"
-                + "\n  " + task);
+                + "\n " + task);
     }
 
     /**

@@ -1,6 +1,5 @@
 package seedu.sherpass.command;
 
-import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;

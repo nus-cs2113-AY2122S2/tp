@@ -3,7 +3,6 @@ package seedu.sherpass.util;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
-import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -84,7 +83,7 @@ public class Reminder {
             filteredDailyTasks.add(task);
         } else if (hasNoReminderDate(task)) {
             return;
-        } else if (task.getDoOnDate().toLocalDate().isEqual(todayDate)) {
+        } else if (task.getDoOnStartDateTime().toLocalDate().isEqual(todayDate)) {
             filteredDailyTasks.add(task);
         } else {
             return;
@@ -110,7 +109,7 @@ public class Reminder {
     }
 
     private boolean hasNoReminderDate(Task task) {
-        if (task.getDoOnDate() == null) {
+        if (task.getDoOnStartDateTime() == null) {
             return true;
         } else {
             return false;

@@ -3,11 +3,13 @@ package seedu.sherpass.task;
 import seedu.sherpass.util.Ui;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
 
 public class TaskList {
     private ArrayList<Task> tasks;
+    private HashSet<Integer> identifierList;
 
     /**
      * Creates a constructor for the class TaskList.
@@ -16,9 +18,12 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> savedTasks) {
         tasks = savedTasks;
+        identifierList = new HashSet<>();
+        refreshIdentifier();
     }
 
     public TaskList() {
+        identifierList = new HashSet<>();
         tasks = new ArrayList<>();
     }
 
@@ -34,19 +39,11 @@ public class TaskList {
     /**
      * Adds a new task to the current array of tasks.
      *
-     * @param taskDescription Description of the task.
-     * @param taskByDate        Due date of the task
-     * @param taskRemindDate    Reminder date of the task
+     * @param newTask The new task to be added to the array.
      */
-    public void addTask(String taskDescription, LocalDateTime taskByDate, LocalDateTime taskRemindDate) {
-        Task newTask = new Task(taskDescription, taskByDate, taskRemindDate, false, false);
-        tasks.add(newTask);
-        System.out.println("Got it. I've added this task:\n  " + newTask
-                + "\nNow you have " + tasks.size() + " task(s) in the list.");
-    }
-
     public void addTask(Task newTask) {
         tasks.add(newTask);
+        identifierList.add(newTask.getIdentifier());
     }
 
     /**
@@ -157,6 +154,20 @@ public class TaskList {
         ui.showToUser("Done! Now you have " + tasks.size() + " task(s) in the list.");
     }
 
+    private void refreshIdentifier() {
+        for (Task t : tasks) {
+            identifierList.add(t.getIdentifier());
+        }
+    }
+
+    public int generateIdentifier() {
+        Random generator = new Random();
+        int candidate;
+        do {
+           candidate = generator.nextInt(2^16);
+        } while(identifierList.contains(candidate));
+        return candidate;
+    }
 
     public ArrayList<Task> getFilteredTasksByDate(LocalDate dateInput) {
         return null;
