@@ -28,6 +28,10 @@ public class ActivityEditCommand extends Command {
     private String payer;
     private String[] involvedList;
     private Double totalCost;
+    // Unsupported for now as no getter functions exist
+    // double[] costList = null;
+    // double gst;
+    // double serviceCharge;
 
     /**
      * Constructs an ActivityEditCommand object.
