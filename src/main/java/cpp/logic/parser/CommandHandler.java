@@ -3,7 +3,7 @@ package cpp.projects.commandhandler;
 import cpp.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.exceptions.NegativeIndexException;
-import cpp.projects.ProjectList;
+import cpp.model.ProjectList;
 import cpp.response.Response;
 
 import java.util.Arrays;
@@ -37,7 +37,6 @@ public class CommandHandler {
             projectName = getProjectName(commands);
             projectList.deleteProject(projectName);
             break;
-        case "listprojects":
         case "listproject": //view all project(s) by name
             listProjects(projectList);
             break;
@@ -61,42 +60,6 @@ public class CommandHandler {
             break;
         }
 
-    }
-
-    private void addProject(ProjectList projectList, String[] commands) throws IllegalCommandException {
-        assert (projectList != null && commands != null) : "Cannot add to project list.";
-        if (commands.length < Constants.TWO_ARGUMENTS) {
-            throw new IllegalCommandException(Constants.MESSAGE_INVALID_ADDPROJECT_COMMAND_FORMAT);
-        }
-
-        String projectName = "";
-
-
-
-        for (int i = 1; i < commands.length; i++) {
-            if (i != 1) {
-                projectName += " ";
-            }
-            projectName += commands[i];
-        }
-        projectList.addProject(projectName);
-    }
-
-    private void deleteProject(ProjectList projectList, String[] commands) throws IllegalCommandException {
-        assert (projectList != null && commands != null) : "Cannot delete from project list.";
-        if (commands.length < Constants.TWO_ARGUMENTS) {
-            throw new IllegalCommandException(Constants.MESSAGE_INVALID_DELETEPROJECT_COMMAND_FORMAT);
-        }
-
-        String projectName = "";
-
-        for (int i = 1; i < commands.length; i++) {
-            if (i != 1) {
-                projectName += " ";
-            }
-            projectName += commands[i];
-        }
-        projectList.deleteProject(projectName);
     }
 
     private String getProjectName(String[] userInput) {
