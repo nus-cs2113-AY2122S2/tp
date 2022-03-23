@@ -10,8 +10,10 @@ Box
 end box
 
 
+
 -> Main: runs PlanITarium
 activate Main
+create Storage
 Main -> Storage: Initialise Storage Object
 activate Storage
 Storage --> Main: :Storage
@@ -20,11 +22,13 @@ Main -> Storage: loadData()
 activate Storage
 alt fileExists
 else #pink notExist
+    create File
     Storage -> File : createNewFile()
     activate File
     File --> Storage
     deactivate File
 end
+create Family
 Storage -> Family: new()
 activate Family
 Family --> Storage : :Family
@@ -36,6 +40,7 @@ loop until all logic groups are loaded
     activate Storage
     Storage -> Family : addPersonList(:PersonList)
     activate Family
+    create PersonList
     Family -> PersonList: new()
     activate PersonList
     PersonList --> Family: :PersonList
