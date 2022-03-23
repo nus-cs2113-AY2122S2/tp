@@ -50,7 +50,7 @@ String description = matches.get("desc");
 Add Goods belongs as part of the Commands Class. It is used to add a Good Object into the Collection of Goods Objects currently in the Warehouse.
 
 #### Operation
-![Regex Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Regex.puml)
+![Regex Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/addGood.puml)
 The above sequence diagram shows the operation of how the add goods method will be called. 
 1. The User input will be read by the User Interface Class
 2. The User Interface Class will then match the command keyword `add`
