@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+class Commands {
+    + addGood(id, name, qty)
+    + removeGood(id, qty, userGoods)
+    + listGoods(userGoods)
+    + viewGood(id, userGoods)
+    + totalGoods((userGoods)
+    + checkPlural(numberOfGoods)
+    - remove(id, qty, userGoods)
+}
+
+@enduml

@@ -7,12 +7,11 @@
 
 * [Quick start] [#Quick Start]
 * [Features] [#Features]
-  * [Adding inventory items:] `add` [#Adding inventory items:]
-  * [Removing inventory items:] `remove`[#Removing inventory items:]
-  * [Getting a list of total inventory:] `list` [#Getting a list of total inventory:]
-  * [Getting a view of inventory:] `view` [#Getting a view of chosen inventory:]
-  * [Getting the total number of inventory in the warehouse:] `total` [#Getting the total number of inventory 
-  in the warehouse:]
+  * [Adding inventory items:](#adding-inventory-items-add) `add` 
+  * [Removing inventory items:](#removing-inventory-items-remove) `remove`
+  * [Getting a list of total inventory:](#getting-a-list-of-total-inventory-list) `list` 
+  * [Getting a view of inventory:](#getting-a-description-of-inventory-view) `view`
+  * [Getting the total number of inventory in the warehouse:](#getting-the-total-number-of-inventory-in-the-warehouse-total) `total` 
 
 ## Quick Start
 

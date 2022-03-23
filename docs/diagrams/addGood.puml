@@ -1,0 +1,24 @@
+@startuml
+' !include Style.puml  '
+
+Actor ":User" as user
+participant ":UserInterface" as ui
+participant ":Regex" as regex
+participant ":Command" as command
+participant ":Good" as good
+
+user -> ui ++ : "add id/id n/name q/quantity d/description"
+create regex
+ui -> regex  ++: Regex(regex, input)
+ref over regex : regex matching
+ui -> regex ++ : regex.getGroupValues()
+regex --> ui -- : HashMap of results
+deactivate regex
+ui -> command ++ : addGood(id, name, quantity, description, userGoods)
+create good
+command -> good ++ : Good(id, name, quantity, description)
+good --> command -- : new Good
+command --> ui -- : add good to userGoods
+ui --> user : " `quantity` of `name` added "
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant dummyClass as dummyClass
+participant Regex as regex
+
+create regex
+dummyClass -> regex
+activate regex
+regex -> regex ++ : findMatch()
+regex -> regex ++ : findGroup(regex)
+regex --> regex -- : List of regex groups
+regex -> regex ++ : regexMatching(regex, input)
+regex --> regex -- : Matcher
+regex --> regex -- : HashMap of results stored into groupValues
+dummyClass -> regex : Regex.getGroupValues()
+regex --> dummyClass : groupValues
+deactivate regex
+@enduml
