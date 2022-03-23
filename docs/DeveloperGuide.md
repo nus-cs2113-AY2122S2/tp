@@ -7,16 +7,15 @@ Given below is a quick overview of the main components of Mod Happy and how they
 
 
 ### UI Component
-**API**: [TextUi.java](https://github.com/AY2122S2-CS2113T-T10-3/tp/tree/master/src/main/java/seedu/duke/ui/TextUi.java) <br><br>
-![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heekit73098/tp/branch-DG/docs/UI.puml)
-<br><br>
+**API**: [TextUi.java](https://github.com/AY2122S2-CS2113T-T10-3/tp/tree/master/src/main/java/seedu/duke/ui/TextUi.java) <br>
+
 The `TextUi` component exists as part of the `Main` class and is made up of the built-in `Java.util.Scanner` class.
 It does not interact with any other classes or components and serves strictly as the gateway for the
 user to interact with the application.
 <br>
 The `TextUi` component:
 - Listens and grabs the user's input from the standard input using an `Java.util.Scanner` object.
-- Displays any command results and error messages on the standard output using a built-in `Java.io.PrintStream` object `System.out`.
+- Displays any command results and error messages on the standard output using the built-in `Java.io.PrintStream` object `Java.System.out`.
 
 ### Parser Component
 ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ch40gRv1-Mu/tp/branch-A-UML/docs/Parser.puml)
