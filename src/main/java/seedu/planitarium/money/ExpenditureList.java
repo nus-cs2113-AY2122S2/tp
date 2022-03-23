@@ -1,23 +1,28 @@
-package seedu.planitarium.expenditure;
+package seedu.planitarium.money;
 
 import seedu.planitarium.ProjectLogger;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-public class ExpenditureList {
-    private static int BASE_INDEX = 1;
+public class ExpenditureList extends MoneyList {
+
     private ArrayList<Expenditure> expenditureArrayList;
     private int numberOfExpenditures;
-    private ProjectLogger logger;
+
+    private static final String LOG_ADD_EXP = "addExpenditure()";
+    private static final String LOG_GET_EXP_VAL = "getExpenditureValue()";
+    private static final String LOG_GET_NUM_EXP = "getNumberOfExpenditures()";
+    private static final String LOG_GET_TOTAL_EXP = "getTotalExpenditure()";
+    private static final String LOG_PRINT_LIST = "printExpenditureList()";
 
     /**
      * Creates a new ExpenditureList object.
      */
     public ExpenditureList() {
         this.expenditureArrayList = new ArrayList<>();
-        logger = new ProjectLogger(ExpenditureList.class.getName(), "ExpenditureList.log");
-        logger.getLogger().log(Level.INFO, "Logger for ExpenditureList initialised.");
+        logger = new ProjectLogger(LOG_CLASS_NAME, LOG_FILE_PATH);
+        logger.getLogger().log(Level.INFO, LOG_INIT);
     }
 
     /**
@@ -27,9 +32,10 @@ public class ExpenditureList {
      * @param amount The cost for this expenditure
      */
     public void addExpenditure(String description, double amount) {
-        logger.getLogger().log(Level.INFO, "addExpenditure() called");
+        logger.getLogger().log(Level.INFO, LOG_ADD_EXP);
         assert (description != null);
-        logger.getLogger().log(Level.INFO, "Passed addExpenditure() assertions");
+        assert (amount >= 0);
+        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
         this.expenditureArrayList.add(new Expenditure(description, amount));
         numberOfExpenditures++;
     }
@@ -41,10 +47,10 @@ public class ExpenditureList {
      * @return The cost of the expenditure
      */
     public double getExpenditureValue(int index) {
-        logger.getLogger().log(Level.INFO, "getExpenditureValue() called");
-        assert (index >= BASE_INDEX);
+        logger.getLogger().log(Level.INFO, LOG_GET_EXP_VAL);
+        assert (index > ARRAY_INDEX);
         assert (index <= numberOfExpenditures);
-        logger.getLogger().log(Level.INFO, "Passed getExpenditureValue() assertions");
+        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
         return expenditureArrayList.get(index - 1).getAmount();
     }
 
@@ -54,10 +60,10 @@ public class ExpenditureList {
      * @param index The index of the expenditure on the person's expenditure list
      */
     public void remove(int index) {
-        logger.getLogger().log(Level.INFO, "remove() called");
-        assert (index >= BASE_INDEX);
+        logger.getLogger().log(Level.INFO, LOG_REMOVE);
+        assert (index > ARRAY_INDEX);
         assert (index <= numberOfExpenditures);
-        logger.getLogger().log(Level.INFO, "Passed remove() assertions");
+        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
         expenditureArrayList.remove(index - 1);
         numberOfExpenditures--;
     }
@@ -68,7 +74,7 @@ public class ExpenditureList {
      * @return The total cost of all expenditure in the list
      */
     public double getTotalExpenditure() {
-        logger.getLogger().log(Level.INFO, "getTotalExpenditure() called");
+        logger.getLogger().log(Level.INFO, LOG_GET_TOTAL_EXP);
         double totalAmount = 0;
         for (Expenditure item : expenditureArrayList) {
             totalAmount += item.amount;
@@ -80,8 +86,8 @@ public class ExpenditureList {
      * Prints all expenditure entry in the person's list.
      */
     public void printExpenditureList() {
-        logger.getLogger().log(Level.INFO, "printExpenditureList() called");
-        int listIndex = BASE_INDEX;
+        logger.getLogger().log(Level.INFO, LOG_PRINT_LIST);
+        int listIndex = 1;
         for (Expenditure item : expenditureArrayList) {
             System.out.println(listIndex++ + ". " + item);
         }
@@ -92,7 +98,7 @@ public class ExpenditureList {
      * @return The number of expenditure entries
      */
     public int getNumberOfExpenditures() {
-        logger.getLogger().log(Level.INFO, "getNumberOfExpenditure() called");
+        logger.getLogger().log(Level.INFO, LOG_GET_NUM_EXP);
         return numberOfExpenditures;
     }
 
@@ -104,10 +110,10 @@ public class ExpenditureList {
      * @return The description of the expenditure
      */
     public String getDescription(int index) {
-        logger.getLogger().log(Level.INFO, "getDescription() called");
-        assert (index >= BASE_INDEX);
+        logger.getLogger().log(Level.INFO, LOG_DESC);
+        assert (index > ARRAY_INDEX);
         assert (index <= numberOfExpenditures);
-        logger.getLogger().log(Level.INFO, "Passed getDescription() Assertions");
+        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
         return expenditureArrayList.get(index - 1).getDescription();
     }
 }

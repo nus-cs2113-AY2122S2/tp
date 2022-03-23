@@ -1,8 +1,8 @@
 //@@author Teanweijun
 package seedu.planitarium.person;
 
-import seedu.planitarium.income.IncomeList;
-import seedu.planitarium.expenditure.ExpenditureList;
+import seedu.planitarium.money.IncomeList;
+import seedu.planitarium.money.ExpenditureList;
 
 public class Person {
     protected String name;
