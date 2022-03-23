@@ -10,13 +10,13 @@ participant System as "<<class>>\nSystem"
 loop input not y or n
     Storage -> UI ++:readCommand()
     UI --> Storage --: input
+end
     alt input = n
         Storage -> System ++: exit()
         return
     else
         Storage -> Storage ++: wipeSaveData()
         return
-    end
 end
 return
 
