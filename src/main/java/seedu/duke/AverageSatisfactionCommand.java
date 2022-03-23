@@ -2,22 +2,21 @@ package seedu.duke;
 
 /**
  * Class that implements execution behavior for user command
- * "View Satisfactions." Contains override of execution
- * method in Command class that prints out the information of the Satisfaction objects
- * in the given satisfactionList (i.e. prints out each Satisfaction object's
- * corresponding customer name and satisfaction value).
+ * "average satisfaction." Contains override of execution
+ * method in Command class that calculations the average
+ * customer satisfaction rating of the given list of Satisfaction
+ * objects.
  */
 
-public class ViewSatisfactionsCommand extends Command {
+public class AverageSatisfactionCommand extends Command {
 
     /**
      * Override of execute command in Command class.
-     * Prints out the information of the Satisfaction objects
-     * in the given satisfactionList (i.e. prints out each Satisfaction object's
-     * corresponding customer name and satisfaction value).
+     * Calculates the average customer satisfaction rating of the
+     * given satisfactionList.
      *
      * @param housekeeperList  The list of housekeeper recorded. N/A for this class, but
-     *      *                  must be included for the execution override.
+     *                         must be included for the execution override.
      * @param satisfactionList The given list of Satisfaction objects.
      * @param roomList         The given list of Room objects. N/A for this class, but
      *                         must be included for the execution override.
@@ -29,9 +28,7 @@ public class ViewSatisfactionsCommand extends Command {
     public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
                         AssignmentMap assignmentMap, RoomList roomList,
                         ItemList itemList, Ui ui) {
-        satisfactionList.viewSatisfactions();
+        System.out.println("Average customer satisfaction: " + satisfactionList.calculateAverageSatisfaction());
     }
 
-    
 }
-

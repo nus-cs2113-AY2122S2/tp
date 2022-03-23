@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AssignmentMap {
+
     Map<Room, Housekeeper> map = new HashMap<>();
 
     Room room;

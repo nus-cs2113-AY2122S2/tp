@@ -27,6 +27,7 @@ public class AddSatisfactionCommand extends Command {
      *                                   satisfaction value, or invalid satisfaction value).
      */
     public AddSatisfactionCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
+        commandStringWithoutCommand = commandStringWithoutCommand.toLowerCase(); // Move this to CommandParser later
         String customerName = "";
         int satisfactionValue = 0;
         try {
@@ -58,7 +59,7 @@ public class AddSatisfactionCommand extends Command {
      * @throws HotelLiteManagerException If there is an error in user input (the customer's name is empty).
      */
     private String extractCustomerName(String userInput) throws HotelLiteManagerException {
-        String[] splitInput = userInput.split(" ");
+        String[] splitInput = userInput.split("/");
         if (splitInput.length == 0) {
             throw new EmptySatisfactionCustomerException();
         }
@@ -79,7 +80,7 @@ public class AddSatisfactionCommand extends Command {
      *                                   empty or is not an integer between 1 and 5).
      */
     private int extractSatisfactionValue(String userInput) throws HotelLiteManagerException {
-        String[] splitInput = userInput.split(" ");
+        String[] splitInput = userInput.split("/");
         if (splitInput.length < 2) {
             throw new EmptySatisfactionValueException();
         }
@@ -96,6 +97,7 @@ public class AddSatisfactionCommand extends Command {
         return satisfactionValue;
     }
 
+
     @Override
     /**
      * Override of execute command in Command class.
@@ -111,6 +113,9 @@ public class AddSatisfactionCommand extends Command {
     public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
                         AssignmentMap assignmentMap, RoomList roomList,
                         ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
+        if (satisfactionList.isCustomerInSatisfactionList(satisfaction.getCustomerName())) {
+            throw new RepeatCustomerException();
+        }
         satisfactionList.addSatisfaction(satisfaction);
         ui.printAddSatisfactionAcknowledgementMessage(satisfactionList, satisfaction);
 
