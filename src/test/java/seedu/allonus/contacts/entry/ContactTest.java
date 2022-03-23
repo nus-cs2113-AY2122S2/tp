@@ -1,14 +1,9 @@
-package seedu.allonus.contacts;
+package seedu.allonus.contacts.entry;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
-import seedu.allonus.contacts.entry.Contact;
-import seedu.allonus.contacts.entry.Description;
-import seedu.allonus.contacts.entry.Email;
-import seedu.allonus.contacts.entry.Faculty;
-import seedu.allonus.contacts.entry.Name;
 
 public class ContactTest {
     Contact alice = new Contact(new Name("Alice"),
@@ -37,6 +32,39 @@ public class ContactTest {
 
         assertNotEquals("Alice", bob.getName().toString());
         assertNotEquals("Bob", charlie.getName().toString());
+    }
+
+    @Test
+    public void getFacultyWorksForContacts() {
+        assertEquals("FOS", alice.getFaculty().toString());
+        assertEquals("FASS", bob.getFaculty().toString());
+        assertEquals("SDE", charlie.getFaculty().toString());
+        assertEquals("SoC", david.getFaculty().toString());
+
+        assertNotEquals("FOS", bob.getFaculty().toString());
+        assertNotEquals("FASS", charlie.getFaculty().toString());
+    }
+
+    @Test
+    public void getEmailWorksForContacts() {
+        assertEquals("e1@u.nus.edu", alice.getEmail().toString());
+        assertEquals("e2@u.nus.edu", bob.getEmail().toString());
+        assertEquals("e3@u.nus.edu", charlie.getEmail().toString());
+        assertEquals("e4@u.nus.edu", david.getEmail().toString());
+
+        assertNotEquals("e1@u.nus.edu", bob.getEmail().toString());
+        assertNotEquals("e2@u.nus.edu", charlie.getEmail().toString());
+    }
+
+    @Test
+    public void getDescriptionWorksForContacts() {
+        assertEquals("AB", alice.getDescription().toString());
+        assertEquals("BC", bob.getDescription().toString());
+        assertEquals("CD", charlie.getDescription().toString());
+        assertEquals("DE", david.getDescription().toString());
+
+        assertNotEquals("AB", bob.getDescription().toString());
+        assertNotEquals("BC", charlie.getDescription().toString());
     }
 
     @Test
