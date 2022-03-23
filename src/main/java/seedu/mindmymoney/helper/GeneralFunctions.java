@@ -8,12 +8,6 @@ import seedu.mindmymoney.userfinancial.Expenditure;
 
 import java.util.ArrayList;
 
-import static seedu.mindmymoney.constants.ExpenditureFields.expenditure;
-import static seedu.mindmymoney.constants.ExpenditureFields.category;
-import static seedu.mindmymoney.constants.ExpenditureFields.description;
-import static seedu.mindmymoney.constants.ExpenditureFields.amount;
-import static seedu.mindmymoney.constants.ExpenditureFields.time;
-
 /**
  * Container for general functions used throughout the program.
  */
@@ -63,22 +57,22 @@ public class GeneralFunctions {
                                                          ExpenditureList itemList) throws MindMyMoneyException {
         ArrayList<Expenditure> foundItems = new ArrayList<>();
         try {
-            ExpenditureFields fieldToSearchAsEnumType = ExpenditureFields.valueOf(fieldToSearch.toLowerCase());
+            ExpenditureFields fieldToSearchAsEnumType = ExpenditureFields.valueOf(fieldToSearch);
             switch (fieldToSearchAsEnumType) {
-            case expenditure:
-                foundItems = findMatchingExpenditure(searchTerm, foundItems, itemList);
+            case EXPENDITURE:
+                findMatchingExpenditure(searchTerm, foundItems, itemList);
                 break;
-            case category:
-                foundItems = findMatchingCategory(searchTerm, foundItems, itemList);
+            case CATEGORY:
+                findMatchingCategory(searchTerm, foundItems, itemList);
                 break;
-            case description:
-                foundItems = findMatchingDescription(searchTerm, foundItems, itemList);
+            case DESCRIPTION:
+                findMatchingDescription(searchTerm, foundItems, itemList);
                 break;
-            case amount:
-                foundItems = findMatchingAmount(searchTerm, foundItems, itemList);
+            case AMOUNT:
+                findMatchingAmount(searchTerm, foundItems, itemList);
                 break;
-            case time:
-                foundItems = findMatchingTime(searchTerm, foundItems, itemList);
+            case TIME:
+                findMatchingTime(searchTerm, foundItems, itemList);
                 break;
             default:
                 throw new MindMyMoneyException("Input a valid search field!");

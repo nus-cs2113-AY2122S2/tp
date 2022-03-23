@@ -5,7 +5,7 @@ import seedu.mindmymoney.constants.CategoryTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.userfinancial.CreditCard;
 
-import static seedu.mindmymoney.constants.ExpenditureTypes.cash;
+import static seedu.mindmymoney.constants.ExpenditureTypes.CASH;
 
 /**
  * Input validation for Add Command.
@@ -19,7 +19,7 @@ public class AddCommandInputTests {
      * @return true if item is in the list, false otherwise.
      */
     public static boolean isExpenditureInList(String input, CreditCardList creditCardList) {
-        if (input.equalsIgnoreCase(cash.toString())) {
+        if (input.equalsIgnoreCase(CASH.toString())) {
             return true;
         }
         for (CreditCard str : creditCardList.creditCardListArray) {
@@ -38,7 +38,7 @@ public class AddCommandInputTests {
      */
     public static boolean isCategoryInList(String input) {
         for (CategoryTypes str : CategoryTypes.values()) {
-            if (str.name().equals(input)) {
+            if (str.name().equalsIgnoreCase(input)) {
                 return true;
             }
         }

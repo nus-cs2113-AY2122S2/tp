@@ -1,7 +1,7 @@
 package seedu.mindmymoney;
 
 import seedu.mindmymoney.command.AddCommand;
-import seedu.mindmymoney.command.CalculateCommand;
+import seedu.mindmymoney.command.CalculateInputCommand;
 import seedu.mindmymoney.command.Command;
 import seedu.mindmymoney.command.HelpCommand;
 import seedu.mindmymoney.command.ByeCommand;
@@ -47,7 +47,7 @@ public class Parser {
             case "delete":
                 return new DeleteCommand(input, itemList);
             case "calculate":
-                return new CalculateCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING], itemList);
+                return new CalculateInputCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING], itemList);
             default:
                 return new HelpCommand(false);
             }

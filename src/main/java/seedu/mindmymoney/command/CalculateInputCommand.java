@@ -12,11 +12,11 @@ import static seedu.mindmymoney.helper.Calculations.calculateExpenditurePerMonth
 /**
  * Represents the Calculate command.
  */
-public class CalculateCommand extends Command {
+public class CalculateInputCommand extends Command {
     private String calculateInput;
     public ExpenditureList expenditureList;
 
-    public CalculateCommand(String calculateInput, ExpenditureList expenditureList) {
+    public CalculateInputCommand(String calculateInput, ExpenditureList expenditureList) {
         this.calculateInput = calculateInput;
         this.expenditureList = expenditureList;
     }

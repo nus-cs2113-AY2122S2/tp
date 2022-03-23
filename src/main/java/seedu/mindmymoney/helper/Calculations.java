@@ -6,7 +6,7 @@ import seedu.mindmymoney.userfinancial.Expenditure;
 
 import java.util.ArrayList;
 
-import static seedu.mindmymoney.constants.ExpenditureFields.time;
+import static seedu.mindmymoney.constants.ExpenditureFields.TIME;
 import static seedu.mindmymoney.helper.GeneralFunctions.findItemsInList;
 
 /**
@@ -23,7 +23,7 @@ public class Calculations {
      */
     public static void calculateExpenditurePerMonth(String input, ExpenditureList expenditureList)
             throws MindMyMoneyException {
-        ArrayList<Expenditure> foundItems = findItemsInList(input, time.toString(), expenditureList);
+        ArrayList<Expenditure> foundItems = findItemsInList(input, TIME.toString(), expenditureList);
         int sumOfExpenditure = 0;
         for (Expenditure item : foundItems) {
             sumOfExpenditure += item.getAmount();
