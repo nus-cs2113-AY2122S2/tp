@@ -6,9 +6,9 @@ import cpp.exceptions.NegativeIndexException;
 import cpp.projects.ProjectList;
 import cpp.response.Response;
 
-public class CommandHandler {
+import java.util.Arrays;
 
-    private String[] commands;
+public class CommandHandler {
 
     /**
      * Constructs new CommandHandler object.
@@ -25,14 +25,17 @@ public class CommandHandler {
      * @param userInput Command entered by user
      */
     public void handleUserInput(ProjectList projectList, String userInput) throws IllegalCommandException {
-        commands = userInput.split(" ");
+        String[] commands = userInput.split(" ");
+        String projectName;
 
         switch (commands[0].toLowerCase()) {
         case "addproject": //add a project into list
-            addProject(projectList, commands);
+            projectName = getProjectName(commands);
+            projectList.addProject(projectName);
             break;
         case "deleteproject": //delete a project based on its name
-            deleteProject(projectList, commands);
+            projectName = getProjectName(commands);
+            projectList.deleteProject(projectName);
             break;
         case "listprojects":
         case "listproject": //view all project(s) by name
@@ -94,6 +97,15 @@ public class CommandHandler {
             projectName += commands[i];
         }
         projectList.deleteProject(projectName);
+    }
+
+    private String getProjectName(String[] userInput) {
+        assert (userInput.length >= Constants.TWO_ARGUMENTS) : "You must provide the name for the project!";
+        // get the splited version of project name
+        String[] splitedName = Arrays.copyOfRange(userInput, 1, userInput.length);
+        String projectName = String.join(" ", splitedName);
+        return projectName;
+
     }
 
     private void listProjects(ProjectList projectList) {
