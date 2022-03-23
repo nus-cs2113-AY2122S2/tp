@@ -19,6 +19,7 @@ public class SearchCommand extends Command {
     public static final String SEARCH_EXERCISE_ACTION_KEYWORD = "/exercise";
     public static final String SEARCH_WORKOUT_ACTION_KEYWORD = "/workout";
     public static final String SEARCH_PLAN_ACTION_KEYWORD = "/plan";
+    public static final String SEARCH_ALL_ACTION_KEYWORD = "/all";
 
     private UI ui;
     private ExerciseList exerciseList;
@@ -69,6 +70,20 @@ public class SearchCommand extends Command {
                              String userAction, String userArguments) throws InvalidCommandException {
         super(userInput);
         this.ui = ui;
+        this.planList = planList;
+        setUserAction(userAction);
+        this.userArguments = userArguments.toLowerCase();
+        this.matchCount = 0;
+
+        LogHandler.linkToFileLogger(logger);
+    }
+
+    public SearchCommand(String userInput, UI ui, ExerciseList exerciseList, WorkoutList workoutList, PlanList planList,
+                         String userAction, String userArguments) throws InvalidCommandException {
+        super(userInput);
+        this.ui = ui;
+        this.exerciseList = exerciseList;
+        this.workoutList = workoutList;
         this.planList = planList;
         setUserAction(userAction);
         this.userArguments = userArguments.toLowerCase();
@@ -132,6 +147,8 @@ public class SearchCommand extends Command {
         case SEARCH_PLAN_ACTION_KEYWORD:
             //Fallthrough
         case SEARCH_EXERCISE_ACTION_KEYWORD:
+            //Fallthrough
+        case SEARCH_ALL_ACTION_KEYWORD:
             this.userAction = userAction;
             break;
         default:
@@ -162,6 +179,7 @@ public class SearchCommand extends Command {
             if (isFirstMatch()) {
                 printHeadingMessage("workout");
             }
+            break;
         default:
             logger.log(Level.WARNING, "User has entered an invalid search command action.");
             String className = this.getClass().getSimpleName();
@@ -175,10 +193,27 @@ public class SearchCommand extends Command {
      * @param category The category that will be searched.
      */
     private void printHeadingMessage(String category) {
-        System.out.println("The " + category + "(s)" + " containing keywords"
-                + ui.getColorText(TextColor.COLOR_YELLOW, " [" + userArguments + "] ")
-                + "is(are) listed below.");
-        ui.printLine();
+        switch (userAction) {
+        case SEARCH_WORKOUT_ACTION_KEYWORD:
+            try {
+                Integer.parseInt(userArguments);
+                System.out.println("The " + category + "(s) with "
+                        + ui.getColorText(TextColor.COLOR_YELLOW, "reps = " + userArguments)
+                        + " is(are) listed below.");
+                ui.printLine();
+            } catch (NumberFormatException e) {
+                System.out.println("The " + category + "(s)" + " containing keywords"
+                        + ui.getColorText(TextColor.COLOR_YELLOW, " [" + userArguments + "] ")
+                        + "is(are) listed below.");
+                ui.printLine();
+            }
+            break;
+        default:
+            System.out.println("The " + category + "(s)" + " containing keywords"
+                    + ui.getColorText(TextColor.COLOR_YELLOW, " [" + userArguments + "] ")
+                    + "is(are) listed below.");
+            ui.printLine();
+        }
     }
 
     /**
@@ -214,6 +249,10 @@ public class SearchCommand extends Command {
         return matchCount == 0;
     }
 
+    private void clearMatchCount() {
+        this.matchCount = 0;
+    }
+
     /**
      * Prints all the matching exercises if there exist at least one matching exercise, prints
      * "Sorry, no matching exercise found." if no matching exercise could be found.
@@ -230,6 +269,7 @@ public class SearchCommand extends Command {
         if (isZeroMatch()) {
             System.out.println("Sorry, no matching exercise found.");
         }
+        clearMatchCount();
     }
 
     /**
@@ -259,6 +299,23 @@ public class SearchCommand extends Command {
         if (isZeroMatch()) {
             System.out.println("Sorry, no matching plan found.");
         }
+        clearMatchCount();
+    }
+
+    /**
+     * Parses the number of reps of a given workout.
+     * @param workoutDisplayName    the workout name to be parsed.
+     * @return                      the integer value of reps.
+     */
+    public int parseWorkoutReps(String workoutDisplayName) {
+        var beginningOfReps = workoutDisplayName.indexOf("(") + 1;
+        var endingOfReps = workoutDisplayName.indexOf(" reps)");
+        var reps = workoutDisplayName.substring(beginningOfReps, endingOfReps).trim();
+        return Integer.parseInt(reps);
+    }
+
+    public boolean isMatchQuantity(int quantity) throws NumberFormatException {
+        return quantity == Integer.parseInt(userArguments);
     }
 
     /**
@@ -269,15 +326,43 @@ public class SearchCommand extends Command {
         var workoutListToSearch = workoutList.getWorkoutsDisplayList();
         for (int i = 0; i < workoutListToSearch.size(); i++) {
             String workoutToBeCompared = workoutListToSearch.get(i).toLowerCase();
-            if (isMatch(workoutToBeCompared)) {
-                incrementMatchCount();
-                printSearchHeading();
-                ui.printColorText(TextColor.COLOR_YELLOW, matchCount + ". " + workoutToBeCompared);
+            var reps = parseWorkoutReps(workoutToBeCompared);
+            var beginningOfReps = workoutToBeCompared.indexOf("(");
+            var exerciseName = workoutToBeCompared.substring(0, beginningOfReps).trim();
+            try {
+                if (isMatchQuantity(reps)) {
+                    incrementMatchCount();
+                    printSearchHeading();
+                    ui.printColorText(TextColor.COLOR_YELLOW, matchCount + ". " + workoutToBeCompared);
+                }
+            } catch (NumberFormatException e) {
+                if (isMatch(exerciseName)) {
+                    incrementMatchCount();
+                    printSearchHeading();
+                    ui.printColorText(TextColor.COLOR_YELLOW, matchCount + ". " + workoutToBeCompared);
+                }
             }
         }
         if (isZeroMatch()) {
-            System.out.println("Sorry, no matching plan found.");
+            System.out.println("Sorry, no matching workout found.");
         }
+        clearMatchCount();
+    }
+
+    /**
+     * Prints the relevant exercises, workouts and plans that match the userArguments.
+     * @throws InvalidCommandException  If the action specified by the user is invalid.
+     */
+    public void searchAll() throws InvalidCommandException {
+        setUserAction("/exercise");
+        searchExercise();
+        ui.printLine();
+        setUserAction("/workout");
+        searchWorkout();
+        ui.printLine();
+        setUserAction("/plan");
+        searchPlan();
+        setUserAction("/all");
     }
 
     /**
@@ -297,6 +382,9 @@ public class SearchCommand extends Command {
                 break;
             case SEARCH_WORKOUT_ACTION_KEYWORD:
                 searchWorkout();
+                break;
+            case SEARCH_ALL_ACTION_KEYWORD:
+                searchAll();
                 break;
             default:
                 logger.log(Level.WARNING, "User has entered an invalid search command action.");
