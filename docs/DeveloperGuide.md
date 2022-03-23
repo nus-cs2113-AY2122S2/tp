@@ -7,12 +7,16 @@
 ##Architecture
 
 #Timetable
-![img.png](img.png)
+Class diagram of Timetable:
 
-The *Timetable* component has the following functionalities:
+
+The **Timetable** component has the following functionalities:
   - Prints the daily or weekly schedule of the user
   - The timetable schedule is represented in a table form as shown below
-![timetable format](team/timetable format.png)
+![timetable format](images/timetable format.png)
+
+The sequence diagram when the user type "show today" is shown below
+![timetable UML](images/Timetable_UML.png)
 
 ## Design & implementation
 
