@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Box
+    participant Main
+    participant ":Storage" as Storage
+    participant ":Family" as Family
+    participant ":PersonList" as PersonList
+end box
+
+
+->> Main: runs PlanITarium
+Main ->> Storage: Initialise Storage Object
+Storage -->> Main: :Storage
+Main ->> Storage: loadData()
+activate Storage
+alt fileExists
+else #pink notExist
+    Storage->>Storage : createNewFile()
+end
+
+Storage->> Family: new()
+activate Family
+Family-->>Storage
+loop until all logic groups are loaded
+
+    Family->>PersonList: new()
+    activate PersonList
+    PersonList-->>Family: :PersonList
+    deactivate PersonList
+    loop until all items
+        Storage->>Storage: readSaveFile()
+        activate Storage
+        Storage->>Family: addCorrespondingInfo()
+        Family ->> PersonList: addPersonList()
+        activate PersonList
+        PersonList-->>Family:
+        deactivate PersonList
+        Family-->>Storage
+        deactivate Family
+    end
+    deactivate Storage
+end
+Storage-->>Main: :Family
+deactivate Storage
+
+@enduml
