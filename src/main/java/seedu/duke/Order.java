@@ -34,17 +34,21 @@ public class Order {
         return userGoods;
     }
 
-    public void addGood(String id, String name, String qty,
+    public void addGood(String idStr, String name, String qtyStr,
                                String desc) throws WrongCommandException {
-        if (id.isBlank() || name.isBlank() || qty.isBlank()) {
+        if (idStr.isBlank() || name.isBlank() || qtyStr.isBlank()) {
             throw new WrongCommandException("add", true);
         }
         try {
-            Good good = new Good(
-                    Integer.parseInt(id),
-                    name,
-                    Integer.parseInt(qty),
-                    desc);
+            int id = Integer.parseInt(idStr);
+            int qty = Integer.parseInt(qtyStr);
+
+            if (doesGoodExist(id)) {
+                addExistingGood(id, qty);
+                return;
+            }
+
+            Good good = new Good(id, name, qty, desc);
             userGoods.add(good);
             System.out.printf("%d %s %s added\n", good.getQuantity(), good.getName(),
                     checkPlural(good.getQuantity()));
@@ -61,7 +65,6 @@ public class Order {
             return "are ";
         }
     }
-
 
     private void remove(int id, int qty)
             throws LargeQuantityException, ItemDoesNotExistException {
@@ -122,6 +125,24 @@ public class Order {
         }
 
         return false;
+    }
+
+    private Good findGood(int goodId) {
+        for (Good good : userGoods) {
+            if (good.getId() == goodId) {
+                return good;
+            }
+        }
+
+        return null;
+    }
+
+    private void addExistingGood(int gid, int qty) {
+        Good good = findGood(gid);
+        if (good != null) {
+            int oldQty = good.getQuantity();
+            good.setQuantity(oldQty + qty);
+        }
     }
 
     public String toString() {
