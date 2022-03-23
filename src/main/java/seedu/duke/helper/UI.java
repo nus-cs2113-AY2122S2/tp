@@ -90,8 +90,14 @@ public class UI {
                 + "Here is an example:\ndelete doctor /info 1");
     }
 
+    public void printAddAppointmentExampleMessage() {
+        printParagraph("Please note the error(s) mentioned above and try again!\n"
+                + "Here is an example. Please follow the input order:\n"
+                + "add appointment /info S1234567A, Thomas, S1234567A, Ben, 2023-01-01, Knee checkup");
+    }
+
     public void printNullParametersMessage() {
-        printParagraph("Parameters missing or not detected. Please use /info for parameters.");
+        UI.printParagraph("Parameters missing or not detected. Please use /info for parameters.");
     }
 
     public static void printPrompt() {

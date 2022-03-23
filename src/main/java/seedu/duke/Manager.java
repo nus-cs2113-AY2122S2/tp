@@ -1,8 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.assets.DoctorList;
-import seedu.duke.assets.MedicineList;
-import seedu.duke.assets.PatientList;
 import seedu.duke.helper.Command;
 import seedu.duke.helper.Storage;
 import seedu.duke.helper.UI;
@@ -52,6 +49,9 @@ public class Manager {
                 break;
             case "view medicine":
                 command.viewMedicine(storage.medicines, parameters);
+                break;
+            case "add appointment":
+                command.addAppointment(storage.appointments, storage.patients, storage.doctors, parameters);
                 break;
             case "help":
                 ui.printHelp();
