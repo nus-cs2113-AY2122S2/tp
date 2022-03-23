@@ -40,6 +40,7 @@ public class DayList {
         String className = this.getClass().getSimpleName();
         String[] userArgumentArray = userArgument.split(" ", -1);
         if (userArgumentArray.length > 2) {
+            logger.log(Level.WARNING, "User entered more parameters than expected.");
             throw new ArrayIndexOutOfBoundsException();
         }
         int dayNumber = Integer.parseInt(userArgumentArray[0]);
@@ -52,6 +53,7 @@ public class DayList {
             logger.log(Level.WARNING, "User entered an invalid plan number.");
             throw new InvalidScheduleException(className, InvalidScheduleException.INVALID_PLAN);
         }
+        assert (isPlanValid(planNumber) && isDayValid(dayNumber));
         String planToAddKey = planList.getPlansDisplayList().get(planNumber - 1); //plan name
         Plan planToAdd = planList.getPlanFromKey(planToAddKey); //plan hash value
         Day newDay;
@@ -135,11 +137,14 @@ public class DayList {
         for (int i = 0; i < NUMBER_OF_SCHEDULE_DAYS; i += 1) {
             scheduleList[i] = null;
             dayList[i] = null;
+            assert (scheduleList[i] == null);
+            assert (dayList[i] == null);
         }
     }
 
     public String covertDayNumberToDay(int dayNumber) {
         String day = "";
+        assert (dayNumber > 0 && dayNumber <= NUMBER_OF_SCHEDULE_DAYS);
         try {
             switch (dayNumber) {
             case 1:
