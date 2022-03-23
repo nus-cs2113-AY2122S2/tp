@@ -1,4 +1,5 @@
 package arcs.data;
+
 import arcs.data.exception.DuplicateDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ public class RouteManagerTest {
         }
 
         DuplicateDataException thrown = Assertions
-                .assertThrows(DuplicateDataException.class, ()->{
+                .assertThrows(DuplicateDataException.class, () -> {
                     routeManager.addRoute(duplicateRoute);
                 }, "DuplicateDataException error was expected");
         Assertions.assertEquals("Sorry! The flight ID is already occupied.", thrown.getMessage());

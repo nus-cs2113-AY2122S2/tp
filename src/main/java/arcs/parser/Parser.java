@@ -4,7 +4,6 @@ package arcs.parser;
 import arcs.commands.route.AddRouteCommand;
 import arcs.commands.route.DeleteRouteCommand;
 import arcs.commands.route.FindRouteCommand;
-import arcs.commands.route.FlightRouteCommand;
 import arcs.commands.route.ListRouteCommand;
 import arcs.commands.Command;
 import arcs.commands.ExitCommand;
@@ -46,7 +45,7 @@ public class Parser {
             return new AddRouteCommand(null, null, null, null, null, 0);
         }
         String[] args = argumentLine.split(" ");
-        String fId = null;
+        String flightId = null;
         String date = null;
         String time = null;
         String from = null;
@@ -65,7 +64,7 @@ public class Parser {
             String value = argSplit[1].trim();
             switch (field) {
             case "fid":
-                fId = value;
+                flightId = value;
                 break;
             case "fd":
                 date = value;
@@ -86,7 +85,7 @@ public class Parser {
                 break;
             }
         }
-        return new AddRouteCommand(fId, date, time, from, to, capacity);
+        return new AddRouteCommand(flightId, date, time, from, to, capacity);
     }
 
     public Command prepareDeleteRouteCommand(String argumentLine) {
