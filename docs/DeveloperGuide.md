@@ -84,10 +84,55 @@ You are now ready to begin developing!
 
 ## Implementation
 ### Overview
+* [Getting User Input Continuously](#getting-user-input-continuously)
+* [Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)
 * [Create New Workout](#create-new-workout)
 * [Search](#search)
   * [Search for Exercise](#search-for-exercise)
   * [Search for Plan](#search-for-plan)
+
+### Getting User Input Continuously
+Once `WerkIt` has finished loading any saved file data on the user's system, it will call 
+`WerkIt#startContinuousUserPrompt()`. This method will call on `UI#printUserInputPrompt()` to print a prompt message
+to the terminal and `UI#getUserInput()` to wait and capture the user's input. The input will be captured with the aid 
+of Java's built-in `Scanner` class.
+
+Once the user has entered an input, `UI#getUserInput()` trims any preceding and trailing whitespaces before returning 
+the user's input as a `String` object to `WerkIt#startContinuousUserPrompt()`. Then, 
+`WerkIt#startContinuousUserPrompt()` calls `Parser#parseUserInput()` to parse the user's input and create a
+an object that is a subclass of the `Command` class. If there is no issue with the formatting of the user's input,
+this subclass-of-`Command` object is returned to `WerkIt#startContinuousUserPrompt()`.
+
+> A detailed implementation of the parsing and creation of subclass-of-`Command` object process can be found in
+'[Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)'.
+
+Next, `WerkIt#startContinuousUserPrompt()` calls on the `execute()` method of the subclass-of-`Command` object to
+perform the user's requested action. If the execution goes smoothly, this completes the user's inputted command.
+This process is repeated until the user enters `exit`, which will terminate the loop, call `UI#printGoodbye()` to
+print a goodbye message to the user, before handing control back to `Main#main` to end the program.
+
+#### Design Considerations
+* `WerkIt#startContinuousUserPompt()` has a boolean flag `isFirstPrompt`. This flag allows WerkIt to
+print a different prompt each time the application starts up, before defaulting to a different prompt message
+for subsequent prompts.
+   * When the user starts the application, `isFirstPrompt` is set to `true` and thus, the prompt will be
+  ```
+  ----------------------------------------------------------------------
+  Now then, what can I do for you today?
+  (Need help? Type 'help' for a guide!)
+  ----------------------------------------------------------------------
+  >
+  ```
+  * Subsequent prompts in that app's session will be
+  ```
+  ----------------------------------------------------------------------
+  What's next?
+  ----------------------------------------------------------------------
+  >
+  ```
+
+### Parsing User Input and Getting the Right Command
+**_TODO_**: Explain how the app parses user input and determines which `Command` subclass object to instantiate.
 
 ### Create New Workout
 ![Create Workout Sequence Diagram](uml/sequenceDiagrams/images/createWorkout.png)
