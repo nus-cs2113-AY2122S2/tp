@@ -13,6 +13,9 @@ class HelpCommandParserTest {
     
     Manager manager = new Manager();
 
+    /**
+     * Checks if a HelpCommand object is correctly returned when the command is correctly entered.
+     */
     @Test
     void getCommand_validUserInput_HelpCommand() {
         String validUserInput = "help";
@@ -20,6 +23,10 @@ class HelpCommandParserTest {
         assertEquals(HelpCommand.class, command.getClass());
     }
 
+    /**
+     * Checks if an InvalidCommand object is returned when additional arguments are appended to the 
+     * syntax of HelpCommand as input.
+     */
     @Test
     void getCommand_additionalArguments_InvalidCommand() {
         // Single additional token, no delimiters
