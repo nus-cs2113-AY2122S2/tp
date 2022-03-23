@@ -135,9 +135,29 @@ for subsequent prompts.
 **_TODO_**: Explain how the app parses user input and determines which `Command` subclass object to instantiate.
 
 ### Create New Workout
-![Create Workout Sequence Diagram](uml/sequenceDiagrams/images/createWorkout.png)
-In _WerkIt!_, a workout is defined as an exercise paired with a number that represents the number
-of repetitions. For example, 20 repetitions of the Russian twist is considered a workout. 
+
+A summary of the general procedure of a new workout being inputted and stored into WerkIt! is as follows:
+1. User enters the command `workout /new <workout name> /reps <number of repetitions>`.
+2. A new `Workout` object is created and stored in the application.
+3. The success response is printed to the user through the terminal.
+4. The new `Workout` object data is written to the resource file `workouts.txt`.
+
+The following sequence illustrates how the `workout /new` command works in greater detail:
+> To simplify the sequence diagram, some method invocations that deemed to be trivial 
+> have been removed from the sequence diagram. Reference frames will be elaborated further 
+> down this section.
+
+![Create Workout Sequence Diagram](uml/sequenceDiagrams/images/CreateWorkout.png)
+
+Steps 1 to 3 waits for the user to enter a new command, which in this case is the `workout /new` command,
+and returns the user input in a `String` object to `WerkIt#startContinuousUserPrompt()`. 
+
+In Steps 4 and 5, `Parser#parseUserInput()` parses the user input to obtain a `WorkoutCommand` object that is upcasted 
+to a `Command` object on return to `WerkIt#startContinuousUserPrompt()`. In Step 6, `WorkoutCommand#execute()` is called
+and because this is a `workout /new` command, the method will call `WorkoutList#createAndAddWorkout()`.
+
+The following sequence diagram is the detailed procedure for `WorkoutList#createAndAddWorkout()`:
+![createAndAddWorkout() Sequence Diagram](uml/sequenceDiagrams/images/CreateAndAddWorkout.png)
 
 ### Search
 ![SearchUML](uml/classDiagrams/images/SearchClassUML.png)
@@ -207,23 +227,23 @@ correctly.
 * **Plan** - A set of workouts
     * Example:
 
-  | Plan Name | Contains |
-  | --- | --- |
-  | Grow my Biceps | Barbell curls (3 reps), push ups (10 reps), deadlift (2 reps) |
-  | Whole Body! | Crunches (10 reps), jumping jack (3 reps), lift ups (4 reps), pull ups (3 reps), planking (2 reps), leg cycle (2 reps)
+| Plan Name | Contains |
+| --- | --- |
+| Grow my Biceps | Barbell curls (3 reps), push ups (10 reps), deadlift (2 reps) |
+| Whole Body! | Crunches (10 reps), jumping jack (3 reps), lift ups (4 reps), pull ups (3 reps), planking (2 reps), leg cycle (2 reps) |
 
 * **Schedule** - Consists of Days 1 to 7. Users will add or modify a plan to that particular day
 of their schedule. For instance, the user's daily schedule can look like this:
 
-  | Day | Plan Name      |
-  | --- |---------------- |
-  | Day 1 | Grow my Biceps |
-  | Day 2 |                |
-  | Day 3 | Whole Body!    |
-  | Day 4 | Leg Day        |
-  | Day 5 | Grow my Biceps |
-  | Day 6 | Whole Body! |
-  | Day 7 | |
+| Day | Plan Name      |
+| --- |---------------- |
+| Day 1 | Grow my Biceps |
+| Day 2 |                |
+| Day 3 | Whole Body!    |
+| Day 4 | Leg Day        |
+| Day 5 | Grow my Biceps |
+| Day 6 | Whole Body! |
+| Day 7 | |
 
 
 ## Instructions for manual testing

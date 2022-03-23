@@ -1,0 +1,83 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../Style.puml
+
+autonumber 7.1
+
+participant "workoutList\n:WorkoutList" AS wl
+participant "exerciseList\n:ExerciseList" AS el
+
+activate wl
+group sd Write new Workout data into file on user's system.
+wl -> ":String" : userArgument.split("/reps").trim()
+activate ":String"
+return :String
+deactivate ":String"
+wl -> ":String" : userArgument.split("/reps").trim()
+activate ":String"
+return :String
+deactivate ":String"
+
+wl -> ":Integer" :parseInt(userRepsInputString)
+activate ":Integer"
+return :int
+deactivate ":Integer"
+
+wl -> el : checkIfExerciseExists(userExerciseInput)
+activate el
+return :boolean
+deactivate el
+
+wl -> wl : checkIfRepsValueIsValid(userRepsInput)
+activate wl
+return :boolean
+
+
+wl -> wl : getClass().getSimpleName()
+activate wl
+return : :String
+
+opt !isExerciseValid
+create ":InvalidExerciseException" AS iee
+wl -> iee : throw new InvalidExerciseException
+activate iee
+return
+end
+
+opt !isRepsValueValid
+create ":InvalidWorkoutException" AS iwe
+wl -> iwe : throw new InvalidWorkoutException
+activate iwe
+return
+end
+
+wl -> wl : checkForExistingWorkout(userExerciseInput, userRepsInput)
+activate wl
+return :boolean
+
+opt hasSameExerciseName
+create ":InvalidWorkoutException" AS iwe2
+wl -> iwe2 : throw new InvalidWorkoutException
+activate iwe2
+return
+end
+
+create "newWorkout:Workout" AS newWorkout
+wl -> newWorkout : new Workout(userExerciseInput, userRepsInput)
+activate newWorkout
+return newWorkout:Workout
+
+wl -> newWorkout : toString()
+activate newWorkout
+return :String
+
+wl -> "workoutsHashMapList\n:HashMap" : put(newWorkoutKey, newWorkout)
+activate "workoutsHashMapList\n:HashMap"
+return
+
+wl -> "workoutDisplayList\n:ArrayList<String>" : add(newWorkoutKey)
+activate "workoutDisplayList\n:ArrayList<String>"
+return
+
+end
+@enduml
