@@ -201,7 +201,7 @@ public class PlanList {
         Plan deletedPlan = getPlanFromIndexNum(indexToDelete);
         String deletedPlanKey = deletedPlan.toString();
         plansDisplayList.remove(indexToDelete - 1);
-        getPlansDisplayList().remove(deletedPlanKey);
+        getPlansHashMapList().remove(deletedPlanKey);
         return deletedPlan;
     }
 
