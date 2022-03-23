@@ -12,4 +12,9 @@ public class Expenditure extends Money {
     public Expenditure(String description, double amount) {
         super(description, amount);
     }
+
+    @Override
+    public String toString() {
+        return "e " + description + " - " + amount;
+    }
 }
