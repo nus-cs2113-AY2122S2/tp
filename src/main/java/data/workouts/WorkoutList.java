@@ -211,7 +211,26 @@ public class WorkoutList {
     }
 
     /**
-     * Prints workouts stored in workout list.
+     * Prints all workouts stored in workout list at once.
+     */
+    public void listAllWorkout() {
+        int index = 1;
+        System.out.println("Showing workouts " + (index) + "-" + workoutsDisplayList.size()
+                + " of " + workoutsDisplayList.size() + ":");
+        while (index <= workoutsDisplayList.size()) {
+            Workout workoutObject = getWorkoutFromIndexNum(index);
+            System.out.println(index + ". " + workoutObject.toString());
+            index += 1;
+        }
+        System.out.println("Showed all workouts in list");
+    }
+
+    /**
+     * Prints noOfPrints workouts stored in workout list .
+     *
+     * @param index of workouts stored in workoutList.
+     * @param noOfPrints number of workouts to be printed.
+     * @return index the next workout index to be printed.
      */
     public int continuousPrinting(int index, int noOfPrints) {
         System.out.println("Showing workouts " + (index + 1) + "-" + (index + noOfPrints)
