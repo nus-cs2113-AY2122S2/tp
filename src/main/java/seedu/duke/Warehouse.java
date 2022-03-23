@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Warehouse {
     private int capacity;
-    private static ArrayList<Order> orderLists = new ArrayList<Order>();
+    private static ArrayList<Order> orderLists = new ArrayList<>();
 
     public Warehouse(int capacity) {
         this.capacity = capacity;
@@ -96,7 +96,6 @@ public class Warehouse {
         if (orderLists == null) {
             throw new NullException("userGoods");
         }
-        assert (orderLists != null);
         int total = 0;
         for (Order order: orderLists) {
             for (Good good: order.getGoods()) {
@@ -110,21 +109,27 @@ public class Warehouse {
         return orderLists.size();
     }
 
-    public void setCapacity(int capacity) {
+    public boolean setCapacity(String input) {
         try {
+            int capacity = Integer.parseInt(input);
+            assert(capacity > 0);
+
             if (capacity < totalGoods()) {
                 throw new LargeQuantityException();
             }
             this.capacity = capacity;
             System.out.printf("Current Warehouse capacity is %d\n", capacity);
+            return true;
         } catch (NullException nullException) {
-            orderLists = new ArrayList<Order>();
-            this.capacity = capacity;
-            System.out.printf("Current Warehouse capacity is %d\n", capacity);
+            orderLists = new ArrayList<>();
+            return setCapacity(input);
         } catch (LargeQuantityException largeQuantityException) {
             System.out.println("Current total goods in the warehouse is more"
                     + " than input capacity");
+        } catch (NumberFormatException numberFormatException) {
+            System.out.println("Please set the Warehouse capacity again.");
         }
+        return false;
     }
 
     public Order findOrder(int orderId) throws ItemDoesNotExistException {
