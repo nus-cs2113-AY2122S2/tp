@@ -314,6 +314,11 @@ Example of usage:
 ### Creating a group: `group /create`
 ### Deleting a group: `group /delete`
 ### Viewing a group: `group /view`
+
+> Display details about a group.<br>
+> A group represents one or more individuals.
+> It is used as a shortcut in several commands for identifying a group of individual persons.
+
 ### Listing all groups: `group /list`
 
 > List all active groups. Deleted groups will not be listed.<br>
