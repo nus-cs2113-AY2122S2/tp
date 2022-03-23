@@ -24,9 +24,11 @@ input loops). The new class then implements this abstract method at the least:
   - This method is responsible for selecting the corresponding action to the user's selected choice.
   For more information and examples, refer to the `Controller` class' documentation, and `MainController` class for an
   example implementation.
+
+Here is the typical design for the Controller:
 <div align="center">
   
-![](diagrams/class/controllers.png)
+![](diagrams/class/controller.png)
 
 </div>
 
@@ -70,6 +72,14 @@ As such, the `Manager` class has two other abstract methods, which extended mana
 - `public abstract void saveData() throws Exception`
   - This is a convenience method for doing any pre- / post-processing on any data you may want to save. Of course, you should
   also call the `save(Object o)` method finally.
+
+
+Here is the typical design of a manager:
+<div align="center">
+
+![](diagrams/class/manager.png)
+
+</div>
 
 ### Menu (dishes) Management
 

@@ -1,0 +1,32 @@
+@startuml
+abstract class Manager {
+-{static}DATABASE_DIRECTORY : String
+-file : String
+#Manager(file : String)
+-ensureDatabaseDirectoryExists() : void
+#load() : Object
+#save(o : Object) : void
+#{abstract}loadData() : void
++{abstract}saveData() : void
+}
+
+class StaffManager {
+-staffs: List<Staff>
++StaffManager()
+#loadData() : void
++saveData() : void
+}
+
+class StaffController {
+-{static}CHOICES : String[]
+-staffManager : StaffManager
++StaffController()
+#optionSwitcher() : bool
+-findStaff() : void
+-addStaff() : void
+-deleteStaff() : void
+}
+
+Manager <|--- StaffManager
+StaffManager <--* StaffController
+@enduml
