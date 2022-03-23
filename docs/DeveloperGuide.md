@@ -16,6 +16,7 @@ Step 2: After checking the user command is "bye", Duke will
 call Ui#sayGoodbye to print Goodbye message
 
 The following sequence diagram shows how the exit operation works:
+
 ![](ByeCommand.png)
 
 ## Product scope
