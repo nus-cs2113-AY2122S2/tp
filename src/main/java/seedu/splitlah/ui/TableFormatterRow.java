@@ -38,10 +38,9 @@ public class TableFormatterRow {
         if (index != 0) {
             paddedItem = new StringBuilder(" ");
         }
-        assert(index != 0);
         paddedItem.append(rowItems.get(index));
         int paddingNecessary = padding - rowItems.get(index).length();
-        assert(paddingNecessary >= 0);
+        assert paddingNecessary >= 0;
         paddedItem.append(" ".repeat(paddingNecessary));
         return String.valueOf(paddedItem.append(" "));
     }
