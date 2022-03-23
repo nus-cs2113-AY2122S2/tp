@@ -36,7 +36,7 @@ public class Parser {
     }
 
     public static String[] parseAddMedicine(String parameters) throws HalpmiException {
-        String[] medicineParameters = minParameterCheck(parameters, 5);
+        String[] medicineParameters = minParameterCheck(parameters, 6);
         Validator.validateMedicine(medicineParameters);
         return medicineParameters;
     }

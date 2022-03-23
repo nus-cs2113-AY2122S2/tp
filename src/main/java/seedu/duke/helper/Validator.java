@@ -164,16 +164,16 @@ public class Validator {
         boolean check = true;
         for (int i = 0; i < 5; i++) {
             switch (i) {
-            case 0:
+            case 1:
                 check = validateMedicineName(parameters[i]);
                 break;
-            case 1:
+            case 2:
                 check = check && validateDosage(parameters[i]);
                 break;
-            case 2:
+            case 3:
                 check = check && validateExpiry(parameters[i]);
                 break;
-            case 4:
+            case 5:
                 check = check && validateQuantity(parameters[i]);
                 break;
             default:
