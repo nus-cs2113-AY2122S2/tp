@@ -12,7 +12,7 @@ activate TagCommand
 alt Objects.isNull(taskMod)
     TagCommand -> ModuleList: getGeneralTasks()
     activate ModuleList
-    return generalTasks:Module
+    return targetModule:Module
 
 else else
     TagCommand -> ModuleList: getModule(taskModule:Module)

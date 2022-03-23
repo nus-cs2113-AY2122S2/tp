@@ -20,6 +20,6 @@ activate TagCommand
 
 ref over TagCommand, ModuleList: Get Module
 
-ref over TagCommand, ModuleList: Execute Tag Operation
+ref over TagCommand, ModuleList: Check and Run Tag Operation
 return CommandResult(result)
 @enduml

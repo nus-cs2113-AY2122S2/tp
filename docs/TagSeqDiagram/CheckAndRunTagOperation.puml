@@ -4,7 +4,7 @@
 skinparam shadowing false
 participant ":TagCommand" as TagCommand
 
-mainframe **sd** Execute Tag Operation
+mainframe **sd** Check and Run Tag Operation
 
 activate TagCommand
 
