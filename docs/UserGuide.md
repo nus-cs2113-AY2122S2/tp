@@ -319,6 +319,14 @@ Example of usage:
 > A group represents one or more individuals.
 > It is used as a shortcut in several commands for identifying a group of individual persons.
 
+Format: `group /view /gid [GROUP_ID]`
+
+* `[GROUP_ID]` refers to the unique identifier of the group.
+    * The unique identifier for a group can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
+
+> **💡 Note(s):**
+>- The group with a unique identifier of `[GROUP_ID]` has to exist before the group can be viewed.
+
 ### Listing all groups: `group /list`
 
 > List all active groups. Deleted groups will not be listed.<br>
