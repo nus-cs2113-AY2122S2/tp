@@ -10,7 +10,7 @@ public enum Category {
     HOME_AND_UTIL("Home and Utilities"),
     HEALTH_AND_MEDICAL("Health and Medical"),
     TRANSPORT("Transportation"),
-    FUN("Fun and Entertainment");
+    ENTERTAINMENT("Fun and Entertainment");
 
     private static final ArrayList<String> LABELS = new ArrayList<>(Stream
             .of(Category.values())
