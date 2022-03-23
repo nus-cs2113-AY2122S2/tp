@@ -202,7 +202,194 @@ Showed all workouts in list
 ----------------------------------------------------------------------
 ```
 ---
+### Update Schedule: `schedule /update`
+Update the plan schedule for a particular day of the week.
 
+Format: `schedule /update <day number> <plan number>`
+
+
+| Parameters      | Description                                                                                                        |
+|-----------------|--------------------------------------------------------------------------------------------------------------------|
+| `<day number>`  | Day number is within the range of 1 to 7. Day number 1 represent Monday, day number 2 represent Tuesday and so on. |
+| `<plan number>` | The plan number to be added for the day.                                                                           |
+
+**Example**
+
+Assume, the plan list contains the following plans:
+```
+----------------------------------------------------------------------
+Here are all your plan(s).
+To view each plan in detail, enter 'plan /details <plan number in list>'.
+
+1.arms
+2.stronger arms
+----------------------------------------------------------------------
+```
+To update the plan schedule for Monday with plan 1, enter the following command:
+```
+> schedule /update 1 1
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+Alright, the following plan schedule has been created:
+
+	Monday -- arms
+
+----------------------------------------------------------------------
+```
+---
+### View Schedule: `schedule /list`
+Display all the plans scheduled for the week.
+
+Format: `schedule /list`
+
+**Example**
+
+To view all the plans scheduled for the week, enter the following command:
+```
+> schedule /list
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+
+                         WORKOUT SCHEDULE
+----------------------------------------------------------------------
+     Day       |            Plan Name
+----------------------------------------------------------------------
+      Monday   |              arms                          
+     Tuesday   |            rest day                      
+   Wednesday   |            rest day                      
+    Thursday   |            rest day                      
+      Friday   |            rest day                      
+    Saturday   |            rest day                      
+      Sunday   |            rest day                      
+
+----------------------------------------------------------------------
+```
+On default, if no plan is being scheduled for the day it is a rest day. From the expected outcome, 
+only arms workout plan is scheduled for Monday.
+---
+
+### Clear Schedule For A Day: `schedule /clear`
+Remove a plan for a particular day of the week.
+
+Format: `schedule /clear <day number>`
+
+| Parameters      | Description                                                                                                        |
+|-----------------|--------------------------------------------------------------------------------------------------------------------|
+| `<day number>`  | Day number is within the range of 1 to 7. Day number 1 represent Monday, day number 2 represent Tuesday and so on. |                                                                    |
+
+
+**Example**
+
+Assume, the schedule for the week contains the following plans:
+```
+----------------------------------------------------------------------
+
+                         WORKOUT SCHEDULE
+----------------------------------------------------------------------
+     Day       |            Plan Name
+----------------------------------------------------------------------
+      Monday   |              arms                          
+     Tuesday   |            rest day                      
+   Wednesday   |            rest day                      
+    Thursday   |            rest day                      
+      Friday   |            rest day                      
+    Saturday   |            rest day                      
+      Sunday   |            rest day                      
+
+----------------------------------------------------------------------
+```
+To clear the plans scheduled for Monday, enter the following command:
+```
+> schedule /clear 1
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+Plan had been cleared for Monday.
+----------------------------------------------------------------------
+```
+After a plan had been cleared for a particular day, the day will be reset to be a rest day.
+To view the changes enter command ```schedule /list```. 
+```
+----------------------------------------------------------------------
+
+                         WORKOUT SCHEDULE
+----------------------------------------------------------------------
+     Day       |            Plan Name
+----------------------------------------------------------------------
+      Monday   |            rest day                      
+     Tuesday   |            rest day                      
+   Wednesday   |            rest day                      
+    Thursday   |            rest day                      
+      Friday   |            rest day                      
+    Saturday   |            rest day                      
+      Sunday   |            rest day                      
+
+----------------------------------------------------------------------
+```
+---
+### Clear Schedule For The Week: `schedule /clearall`
+Remove all plans scheduled for the week.
+
+Format: `schedule /clearall`
+
+**Example**
+
+Assume, the schedule for the week contains the following plans:
+```
+----------------------------------------------------------------------
+
+                         WORKOUT SCHEDULE
+----------------------------------------------------------------------
+     Day       |            Plan Name
+----------------------------------------------------------------------
+      Monday   |              arms                          
+     Tuesday   |            rest day                      
+   Wednesday   |         stronger arms                 
+    Thursday   |            rest day                      
+      Friday   |            rest day                      
+    Saturday   |         stronger arms                 
+      Sunday   |            rest day                      
+
+----------------------------------------------------------------------
+```
+To clear all plans scheduled for the week, enter the following command:
+```
+> schedule /clearall
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+Schedule had been cleared and reset.
+There is no plan scheduled for any day.
+To add plan for any day, enter:
+schedule /update <day number [1-7]> <plan number>
+----------------------------------------------------------------------
+```
+After a plan had been cleared for a particular day, the day will be reset to be a rest day.
+To view the changes enter command ```schedule /list```.
+```
+----------------------------------------------------------------------
+
+                         WORKOUT SCHEDULE
+----------------------------------------------------------------------
+     Day       |            Plan Name
+----------------------------------------------------------------------
+      Monday   |            rest day                      
+     Tuesday   |            rest day                      
+   Wednesday   |            rest day                      
+    Thursday   |            rest day                      
+      Friday   |            rest day                      
+    Saturday   |            rest day                      
+      Sunday   |            rest day                      
+
+----------------------------------------------------------------------
+```
+---
 ### View Help: `help`
 Lists all the commands with examples.
 
