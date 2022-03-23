@@ -83,7 +83,7 @@ public class Command {
         try {
             String[] addMedicineParameters = Parser.parseAddMedicine(parameters);
             medicineList.editMedicine(addMedicineParameters);
-            assert medicineList.search(addMedicineParameters[0]) != null: "Continued to Edit although med not exist.";
+            assert medicineList.search(addMedicineParameters[0]) != null : "Continued to Edit although med not exist.";
             UI.printParagraph("Medicine has been edited");
         } catch (HalpmiException e) {
             UI.printParagraph(e.toString());
