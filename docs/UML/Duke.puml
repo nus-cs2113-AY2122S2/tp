@@ -63,6 +63,8 @@ Dish "0..*" <-- DishManager: manages <
 
 DishManager "1" <-- DishController: have <
 
+DishController .-> Dish
+
 class Staff {
     -staffId: int
     -staffName: String

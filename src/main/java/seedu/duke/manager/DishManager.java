@@ -1,31 +1,41 @@
 package seedu.duke.manager;
 
-import com.sun.tools.javac.Main;
 import seedu.duke.entities.Dish;
 import seedu.duke.loggers.MainLogger;
 
-import java.io.EOFException;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * DishManager.
  */
-public class DishManager {
+public class DishManager extends Manager {
     private List<Dish> dishes;
-    private final DishStorageManager dishStorageManager;
+    private static final String STORAGE_FILE = "dish.dat";
 
     public DishManager() {
-        dishes = new ArrayList<>();
-        dishStorageManager = new DishStorageManager(this);
+        super(STORAGE_FILE);
         try {
-            dishStorageManager.loadData();
+            this.loadData();
         } catch (Exception e) {
             MainLogger.logWarning(this, e.toString());
             MainLogger.logWarning(this, "Start with an empty menu");
             dishes.clear();
         }
+    }
+
+    @Override
+    protected void loadData() throws Exception {
+        this.dishes = new ArrayList<>();
+        ArrayList<?> list = (ArrayList<?>) this.load();
+        for (Object object : list) {
+            this.addDish((Dish) object);
+        }
+    }
+
+    @Override
+    public void saveData() throws Exception {
+        this.save(this.dishes);
     }
 
     /**
@@ -112,25 +122,5 @@ public class DishManager {
      */
     public ArrayList<Dish> getDishes() {
         return new ArrayList<>(dishes);
-    }
-
-    public void store() {
-        try {
-            dishStorageManager.saveData();
-        } catch (Exception e) {
-            MainLogger.logWarning(this, e.toString());
-            MainLogger.logWarning(this, "Store an empty menu");
-            // maybe a method to empty the file
-            dishes.clear();
-            try {
-                dishStorageManager.saveData();
-            } catch (Exception ee) {
-                assert false;
-            }
-        }
-    }
-
-    public void setDishes(ArrayList<Dish> list) {
-        dishes = list;
     }
 }
