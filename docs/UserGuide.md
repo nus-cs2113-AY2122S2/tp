@@ -19,7 +19,7 @@ If you do not have Java already installed...
 
 Once you are sure that you have Java installed, you can download the latest version of HALPMI from the releases.
 
-## Features 
+## Features
 
 ### Adding: `add`
 Adds a new entry into the app. This entry can be either a doctor, patient or medicine.
@@ -117,7 +117,7 @@ additional parameter which is the NRIC of the patient.
 
 Format: `delete patient /info [nric]`
 
-Example: `delete patent /info S1234567A`
+Example: `delete patient /info S1234567A`
 
 #### `delete medicine`
 To delete an existing medicine in the application, you can use the `delete medicine` command. This command requires an
@@ -127,14 +127,31 @@ Format: `delete medicine /info [Batch ID]`
 
 Example: `delete medicine /info S234`
 
+#### `find doctor "by parameter"` (to be updated)
+
+#### `find patient "by parameter"` (to be updated)
+
+#### `find medicine "by parameter"` (to be updated)
+
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Question**: How do I transfer my data to another computer?
 
-**A**: {your answer here}
+**Answer**: {your answer here}
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
+| Action             | Format, Examples |
+| ------------------ | ---------------- |
+| `add doctor`       | `add doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`<br />e.g. `add doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology` |
+| `add patient`      | `add patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`<br />e.g. `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15` |
+| `add medicine`     | `add medicine /info [name],[dosage],[expiry date],[side effects],[quantity]`<br />e.g. `add medicine /info Paracetamol, 500, 2023-06-11, Slight headache, 10` |
+| `view doctor`      | `view medicine` or `view medicine /info [name]`<br />e.g. `view medicine /info Paracetamol`|
+| `view patient`     | `view patient` or `view patient /info [nric]`<br />e.g. `view doctor /info S1234567A`|
+| `view medicine`    | `view medicine` or `view medicine /info [name]`<br />e.g. `view medicine /info Paracetamol`|
+| `delete doctor`    | `delete doctor /info [nric]`<br />e.g. `delete doctor /info S1234567A` |
+| `delete patient`   | `delete patient /info [nric]`<br />e.g. `delete patient /info S1234567A`|
+| `delete medicine`  | `delete medicine /info [Batch ID]`<br />e.g. `delete medicine /info S234` |
+| `to be updated`    | `to be updated` |
 
 * Add todo `todo n/TODO_NAME d/DEADLINE`

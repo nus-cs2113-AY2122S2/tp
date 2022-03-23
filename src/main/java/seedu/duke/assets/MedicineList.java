@@ -25,6 +25,7 @@ public class MedicineList {
 
     public void viewMedicine() {
         if (size() == 0) {
+            assert size() == 0 : "Size is not 0";
             System.out.println("There are no medicines currently.");
             return;
         }
