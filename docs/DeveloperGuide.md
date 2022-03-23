@@ -44,7 +44,8 @@ by `AddSatisfactionCommand`. The constructor parses user input to create a `Sati
 attributes storing the customer's name and their satisfaction rating, represented as an integer from 1 to 5). 
 `AddSatisfactionCommand` extends `Command` and contains an override of the `Command` class's execute method.
 This execute method adds the `Satisfaction` object created from parsing user command into `satisfactionList`, the 
-current list of `Satisfaction` objects. Additionally, it implements the following operations:
+object of type `SatisfactionList` that stores the `Satisfaction` objects. Additionally, it implements the 
+following operations:
 * `AddSatisfactionCommand#extractCustomerName(String userInput)`: Extracts the customer's name (a string) from the 
    provided string of user input. 
 * `AddSatisfactionCommand#extractSatisfactionValue(String userInput)`: Extracts the customer's satisfaction rating
@@ -55,21 +56,47 @@ current list of `Satisfaction` objects. Additionally, it implements the followin
 
 Given below is an example usage scenario and how the mechanism for adding a satisfaction behaves at each step. 
 
-Step 1. The user launches the application. In the `Duke` class, an empty instance of the `SatisfactionList` 
-class is created. 
+Step 1. The user launches the application. In the `Duke` class, an empty instance of the `SatisfactionList` class, 
+called `satisfactionList`, is created. 
+
+```plantuml 
+@startuml 
+testdot
+@enduml
+```
 
 Step 2. The user types the command `add satisfaction Bob 5`. In the `Duke` class, a `Command` object 
 is created by invoking the `CommandParser` class's constructor on the user input. The details of this 
 step are further described below. 
+```plantuml
+@startuml
+object Duke
+@enduml
+```
 
 Step 3. The `CommandParser` class replaces the `add satisfaction` in the user input with an empty string,
 leaving just `Bob 5`. Then, the `AddSatisfactionCommand` class's constructor is invoked with `Bob 5`. 
+```plantuml
+@startuml
+object Duke
+@enduml
+```
 
 Step 4. The `AddSatisfactionCommand` class's constructor parses `Bob 5`, extracting the customer name `Bob` using the
 `AddSatisfactionCommand#extractCustomerName(String userInput)` method and extracting the customer satisfaction rating 
 `5`using the `AddSatisfactionCommand#extractSatisfactionValue(String userInput)` method. The `AddSatisfactionCommand` 
 class constructor then invokes the `Satisfaction` class's constructor to create a new `Satisfaction` object, passing in
 customer name `Bob` and satisfaction rating `5`. 
+```plantuml
+@startuml
+object Duke
+@enduml
+```
 
 Step 5. When the `AddSatisfactionCommand` object is executed in the `Duke` class, the `Satisfaction` objected
-created in the `AddSatisfactionCommand` class is added to the given `satisfactionList`. 
+created in the `AddSatisfactionCommand` class is added to `satisfactionList`. 
+```plantuml
+@startuml
+object Duke
+@enduml
+```

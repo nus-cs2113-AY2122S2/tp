@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/object-diagram
+'object London
+'object Washington
+'object Berlin
+'object NewYork
+'
+'map CapitalCity {
+' UK *-> London
+' USA *--> Washington
+' Germany *---> Berlin
+'}
+'
+'NewYork --> CapitalCity::USA
+
+object Duke
+object SatisfactionList
+SatisfactionList : name = "satisfactionList"
+
+object Command
+Command : name = "command"
+
+object CommandParser
+CommandParser : name = "commandParser"
+
+object AddSatisfactionCommand
+
+object Satisfaction
+Satisfaction : name = "satisfaction"
+
+Duke --> SatisfactionList
+Duke ..> CommandParser
+Duke ..> Command
+
+AddSatisfactionCommand --> Satisfaction
+AddSatisfactionCommand --|> Command
+
+SatisfactionList ..> Satisfaction
+
+@enduml
+
+
+
