@@ -28,13 +28,16 @@ public class Parser {
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
-        String[] words = userInput.trim().split(" ", 2);  // split the input into command and arguments
-        if (words.length == 0) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
-        }
+        // splits the command word from rest of the input
+        String[] words = userInput.trim().split(" ", 2);
+
+//        // check
+//        if (words.length == 0) {
+//            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+//        }
 
         final String commandWord = words[0].toLowerCase(Locale.ENGLISH);
-        final String arguments = userInput.replaceFirst(commandWord, "").trim();
+        final String arguments = words[1].trim();
 
         switch (commandWord) {
         case AddCommand.COMMAND_WORD:
@@ -67,19 +70,21 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareAddCommand(String args) {
-        String[] words = args.trim().split(" ", 2);  // split the input into command and arguments
+        // splits the Record type from the rest of the input
+        String[] words = args.trim().split(" ", 2);
 
         if (words.length == 0) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String category = words[0].toLowerCase(Locale.ENGLISH); //either product or subscription
+        // category will have value of either "product" or "subscription"
+        final String category = words[0].toLowerCase(Locale.ENGLISH);
         String arguments = words[1].trim();
 
         // product has "t/PRODUCT TYPE"
         // subscription has "r/RENEWAL"
 
-        // check that the common fields "i/ITEM_NAME p/PRICE d/DATE" are present
+        // checks that the common fields "i/ITEM_NAME p/PRICE d/DATE" are present
         if (!arguments.contains("i/") || !arguments.contains("p/") || !arguments.contains("d/")) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -112,7 +117,7 @@ public class Parser {
 
         switch (category) {
         case "product":
-            //make sure that the user input a product type
+            // checks that "t/PRODUCT_TYPE" is present
             if (!arguments.contains("t/")) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
@@ -125,19 +130,19 @@ public class Parser {
 
             addCmd = new AddCommand();
             try {
-                addCmd.AddProductCommand(name, price, date, productType); //here the function should return a command
+                addCmd.AddProductCommand(name, price, date, productType);
             } catch (IllegalValueException e) {
                 return new IncorrectCommand("Adding product went wrong!");
             }
             break;
 
         case "subscription":
-            //make sure that the user input a renewal date
+            // checks that "r/RENEWAL" is present
             if (!arguments.contains("r/")) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
 
-            // extracts product type
+            // extracts renewal date
             Pattern renewalDatePattern = Pattern.compile("r/.*?(?=( [ipdtr]/)|$)");
             matcher = renewalDatePattern.matcher(arguments);
             matcher.find();
@@ -145,13 +150,15 @@ public class Parser {
 
             addCmd = new AddCommand();
             try {
-                addCmd.AddSubscriptionCommand(name, price, date, renewalDate); //do i split AddCommand into Add subscription command and Add product Command
+                addCmd.AddSubscriptionCommand(name, price, date, renewalDate);
             } catch (IllegalValueException e) {
                 return new IncorrectCommand("Adding subscription went wrong!");
             }
             break;
+
         default:
-            return new IncorrectCommand("Something went wrong!");
+            return new IncorrectCommand("Incorrect Record type supplied! " +
+                    "Try \"add product\" or \"add subscription\"");
         }
 
         return addCmd;
