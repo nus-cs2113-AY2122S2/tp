@@ -19,8 +19,8 @@ The following websites and codebases were referenced and adapted for our project
 
 ## Setting Up your Development Environment
 ### Requirements
-- [ ] Java JDK version 11
-- [ ] An IDE of your choice, though IntelliJ IDEA is recommended as this project is developed
+- [X] Java JDK version 11
+- [X] An IDE of your choice, though IntelliJ IDEA is recommended as this project is developed
 with this IDE.
 
 > Note: IDE-related references in this developer guide IDE will be tailored for IntelliJ IDEA. 
