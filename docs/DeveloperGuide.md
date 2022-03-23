@@ -90,6 +90,7 @@ You are now ready to begin developing!
   * [Search for Plan](#search-for-plan)
 
 ### Create New Workout
+![Create Workout Sequence Diagram](uml/sequenceDiagrams/images/createWorkout.png)
 In _WerkIt!_, a workout is defined as an exercise paired with a number that represents the number
 of repetitions. For example, 20 repetitions of the Russian twist is considered a workout. 
 
