@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+hide footbox
+
+actor user
+participant "__:DishManager__" as dishmanager
+participant "__dishes:ArrayList<Dish>__" as dishes
+participant "__:Dish__" as dish
+participant "__System.out:PrintStream__" as out
+
+activate dishmanager
+activate dishes
+activate dish
+activate out
+
+user -> dishmanager: printDishes()
+group loop [for each dish]
+dishmanager -> dishes: get(index)
+dishes --> dishmanager: dish
+dishmanager -> dish: toString()
+dish --> dishmanager: dish_string
+dishmanager -> out: println(dish_string)
+out --> dishmanager
+end
+dishmanager --> user
+
+@enduml
