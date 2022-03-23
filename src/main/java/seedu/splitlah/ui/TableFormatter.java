@@ -62,7 +62,6 @@ public class TableFormatter {
         return true;
     }
 
-    
     /**
      * Calculates maximum width of the specified column. The first column is column 0.
      *
