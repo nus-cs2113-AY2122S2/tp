@@ -26,11 +26,9 @@ input loops). The new class then implements this abstract method at the least:
   example implementation.
 
 Here is the typical design for the Controller:
-<div align="center">
-  
+
 ![](diagrams/class/controller.png)
 
-</div>
 
 By itself, `Controllers` are not useful. They should usually have an underlying `Manager` class for data storage and
 manipulation.
@@ -75,11 +73,9 @@ As such, the `Manager` class has two other abstract methods, which extended mana
 
 
 Here is the typical design of a manager:
-<div align="center">
 
 ![](diagrams/class/manager.png)
 
-</div>
 
 ### Menu (dishes) Management
 
