@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+alt add patient
+    Manager -> Command: addPatient
+    Command -> PatientList: add
+else delete patient
+    Manager -> Command: deletePatient
+    Command -> PatientList: removePatient
+else view patient
+    Manager -> Command: viewPatient
+    Command -> PatientList: viewPatient
+else add doctor
+    Manager -> Command: addDoctor
+    Command -> DoctorList: add
+else delete doctor
+    Manager -> Command: deleteDoctor
+    Command -> DoctorList: removeDoctor
+else view doctor
+    Manager -> Command: viewDoctor
+    Command -> DoctorList: viewDoctor
+else add medicine
+    Manager -> Command: addMedicine
+    Command -> MedicineList: add
+else delete medicine
+    Manager -> Command: deleteMedicine
+    Command -> MedicineList: delete
+else view medicine
+    Manager -> Command: viewMedicine
+    Command -> MedicineList: viewMedicine
+end
+@enduml

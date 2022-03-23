@@ -27,7 +27,7 @@
 --------------------------------------------------------------------------------------------------------------------
 ## **Acknowledgements**
 
-* Design and Structure of Developer Guide referenced from the 
+* Design and Structure of Developer Guide referenced from the
 [AB3-Developer Guide](http://se-education.org/addressbook-level3/DeveloperGuide.html).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ Given below is a quick overview of main components and how they interact with ea
 **`Main`** has single method called `main` that initialises a new instance of a Manager class, and calls the `runLoop()`
 method belonging to the Manager object.
 
-[**`Assets`**](#asset-classes): Refers to a collection of classes that are the main assets of the application. 
+[**`Assets`**](#asset-classes): Refers to a collection of classes that are the main assets of the application.
 
 The rest of the App consists of three components.
 
@@ -64,8 +64,21 @@ The rest of the App consists of three components.
 
 ### Manager component
 
+![ManagerUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ManagerUML.png)
+<br>
+How the Manager class works:
+* When `Duke` class instantiates a `Manager` object and calls `runLoop` method, the program will execute a while loop
+* The while loop only halts when `isTerminated` boolean becomes true. The programme exits
+* In the while loop, there is a switch statement. It calls a `Command/UI` method based on a commandWord
+* The commandWord determines which method is called
+
 ### Helper Classes
 #### `Command`
+
+![CommandUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/CommandUML.png)
+How the Command class works:
+* The `Manager` class calls specific methods in `Command` class
+* Each method in the `Command` class would call on an `asset` class method which will manipulate the attributes inside it
 
 #### `Parser`
 

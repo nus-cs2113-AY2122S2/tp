@@ -12,7 +12,7 @@ public class Doctor extends Person {
     public String getSpecialization() {
         return specialization;
     }
-    
+
     // @override toString()
 
     public String saveString() {
