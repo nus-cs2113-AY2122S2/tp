@@ -8,7 +8,11 @@ import seedu.mindmymoney.userfinancial.Expenditure;
 
 import java.util.ArrayList;
 
-import static seedu.mindmymoney.constants.ExpenditureFields.*;
+import static seedu.mindmymoney.constants.ExpenditureFields.expenditure;
+import static seedu.mindmymoney.constants.ExpenditureFields.category;
+import static seedu.mindmymoney.constants.ExpenditureFields.description;
+import static seedu.mindmymoney.constants.ExpenditureFields.amount;
+import static seedu.mindmymoney.constants.ExpenditureFields.time;
 
 /**
  * Container for general functions used throughout the program.
