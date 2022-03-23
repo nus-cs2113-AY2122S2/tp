@@ -350,6 +350,9 @@ Example of usage:
 <br>
 
 ### Listing all available commands: `help`
+> Displays all available SplitLah commands and their syntax.
+
+Format: `help`
 
 ### Exit
 > Exits the application.

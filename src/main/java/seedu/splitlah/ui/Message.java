@@ -5,6 +5,10 @@ import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.ExitCommand;
+import seedu.splitlah.command.GroupCreateCommand;
+import seedu.splitlah.command.GroupDeleteCommand;
+import seedu.splitlah.command.GroupListCommand;
+import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.command.SessionCreateCommand;
 import seedu.splitlah.command.SessionDeleteCommand;
 import seedu.splitlah.command.SessionListCommand;
@@ -49,20 +53,24 @@ public abstract class Message {
                     + "                " + ActivityCreateCommand.COMMAND_FORMAT_SECOND + "\n"
                     + "5.  Delete an existing activity\n"
                     + "        " + ActivityDeleteCommand.COMMAND_FORMAT + "\n"
-                    + "6.  List all existing activities\n"
-                    + "        " + ActivityListCommand.COMMAND_FORMAT + "\n"
-                    + "7.  View an existing activity's details\n"
+                    + "6.  View an existing activity's details\n"
                     + "        " + ActivityViewCommand.COMMAND_FORMAT + "\n"
+                    + "7.  List all existing activities\n"
+                    + "        " + ActivityListCommand.COMMAND_FORMAT + "\n"
                     + "8.  Show the summary of an existing session\n"
                     + "        " + SessionSummaryCommandParser.COMMAND_FORMAT + "\n"
-                    + "9.  Show this help menu\n"
+                    + "9.  Create a new group\n"
+                    + "        " + GroupCreateCommand.COMMAND_FORMAT + "\n"
+                    + "10. Delete an existing group\n"
+                    + "        " + GroupDeleteCommand.COMMAND_FORMAT + "\n"
+                    + "11. View an existing group's details\n"
+                    + "        " + GroupViewCommand.COMMAND_FORMAT + "\n"
+                    + "12. List all existing groups\n"
+                    + "        " + GroupListCommand.COMMAND_FORMAT + "\n"
+                    + "13.  Show this help menu\n"
                     + "        " + HelpCommandParser.COMMAND_FORMAT + "\n"
-                    + "10. Exit the program\n"
+                    + "14. Exit the program\n"
                     + "        " + ExitCommand.COMMAND_FORMAT;
-    public static final String PROMPT_TEXTUI_REQUEST_CONFIRMATION =
-            "Please enter Y/y/yes to confirm, or N/n/no otherwise.";
-    public static final String ERROR_TEXTUI_REENTER_INPUT =
-            "Invalid input. Please re-enter.";
     public static final String PROMPT_TEXTUI_AWAITING_INPUT =
             "> ";
 
