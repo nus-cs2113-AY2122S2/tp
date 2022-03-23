@@ -50,6 +50,7 @@ public class TableFormatter {
 
     /**
      * Deletes a row from the table by index. Rows start from 0.
+     *
      * @param row An int representing the row number.
      * @return true if the row was successfully deleted.
      *         false if the row index was invalid. No row will be deleted.
