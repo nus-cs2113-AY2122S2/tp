@@ -17,12 +17,12 @@ class CategoryTest {
 
     @Test
     void getLabel_enumLabelExists_success() {
-        String output1 = Category.OTHERS.getLabel();
-        String output2 = Category.FOOD_AND_DRINKS.getLabel();
-        String output3 = Category.HOME_AND_UTIL.getLabel();
-        String output4 = Category.HEALTH_AND_MEDICAL.getLabel();
-        String output5 = Category.TRANSPORT.getLabel();
-        String output6 = Category.ENTERTAINMENT.getLabel();
+        final String output1 = Category.OTHERS.getLabel();
+        final String output2 = Category.FOOD_AND_DRINKS.getLabel();
+        final String output3 = Category.HOME_AND_UTIL.getLabel();
+        final String output4 = Category.HEALTH_AND_MEDICAL.getLabel();
+        final String output5 = Category.TRANSPORT.getLabel();
+        final String output6 = Category.ENTERTAINMENT.getLabel();
 
         assertEquals(LABEL_OTHERS, output1);
         assertEquals(LABEL_FOOD_AND_DRINKS, output2);
@@ -51,12 +51,12 @@ class CategoryTest {
 
     @Test
     void getLabelForIndex_isExpectedLabel_success() {
-        String output1 = Category.getLabelForIndex(0);
-        String output2 = Category.getLabelForIndex(1);
-        String output3 = Category.getLabelForIndex(2);
-        String output4 = Category.getLabelForIndex(3);
-        String output5 = Category.getLabelForIndex(4);
-        String output6 = Category.getLabelForIndex(5);
+        final String output1 = Category.getLabelForIndex(0);
+        final String output2 = Category.getLabelForIndex(1);
+        final String output3 = Category.getLabelForIndex(2);
+        final String output4 = Category.getLabelForIndex(3);
+        final String output5 = Category.getLabelForIndex(4);
+        final String output6 = Category.getLabelForIndex(5);
 
         assertEquals(LABEL_OTHERS, output1);
         assertEquals(LABEL_FOOD_AND_DRINKS, output2);
