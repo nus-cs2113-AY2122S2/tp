@@ -8,6 +8,5 @@ public class Duke {
     public static void main(String[] args) {
         Manager manager = new Manager();
         manager.runLoop();
-        System.out.println("Terminated");
     }
 }

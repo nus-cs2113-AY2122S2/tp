@@ -36,5 +36,12 @@ class ParserTest {
         assertArrayEquals(userInputArray, Parser.parseAddMedicine(userInput));
     }
 
-
+    @Test
+    @DisplayName("parseAddPatient method in Parser Class")
+    void addPatientTest_userInputFormat_expectFormatCorrectlyValidated() {
+        String userInput = "S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15";
+        String[] expectedOutput = {"S1234567A", "John Doe", "23", "M", "10 Baker Street",
+            "1999-12-31", "2021-02-15"};
+        assertArrayEquals(expectedOutput, Parser.parseAddPatient(userInput));
+    }
 }

@@ -1,19 +1,6 @@
-No saved data found!
+HalpMi: No saved data found!
 -------------------------
-Welcome! This is the Hospital Management System.
-Please type in your input:
-You: Medicine has been added
-You: There are missing parameters. Please follow the below example and try again.
-add medicine /info Paracetamol,500,2023-12-12,Headaches,10
-You: There are missing parameters. Please follow the below example and try again.
-add medicine /info Paracetamol,500,2023-12-12,Headaches,10
-You: There are missing parameters. Please follow the below example and try again.
-add medicine /info Paracetamol,500,2023-12-12,Headaches,10
-You: There are missing parameters. Please follow the below example and try again.
-add medicine /info Paracetamol,500,2023-12-12,Headaches,10
-You: There are missing parameters. Please follow the below example and try again.
-add medicine /info Paracetamol,500,2023-12-12,Headaches,10
-You: The patient above has been added.
+HalpMi: Welcome! This is the Hospital Management System.
+        Please type in your input
 You: -------------------------
-Goodbye! Exiting the programme.
-Terminated
+HalpMi: Goodbye! Exiting the programme.

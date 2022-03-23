@@ -79,7 +79,7 @@ public class Storage {
             loadMedicineData();
             loadAppointmentData();
         } catch (FileNotFoundException f) {
-            System.out.println("No saved data found!");
+            UI.printParagraph("No saved data found!");
         }
 
     }
@@ -90,7 +90,7 @@ public class Storage {
             try {
                 medicineFile.createNewFile();
             } catch (IOException ioException) {
-                System.out.println("medicine.txt cannot be created");
+                UI.printParagraph("medicine.txt cannot be created");
                 return;
             }
         }
@@ -101,7 +101,7 @@ public class Storage {
             }
             dataWrite.close();
         } catch (IOException e) {
-            System.out.println("Unable to save data...");
+            UI.printParagraph("Unable to save data...");
         }
     }
 
@@ -111,7 +111,7 @@ public class Storage {
             try {
                 patientFile.createNewFile();
             } catch (IOException ioException) {
-                System.out.println("patient.txt cannot be created");
+                UI.printParagraph("patient.txt cannot be created");
                 return;
             }
         }
@@ -122,7 +122,7 @@ public class Storage {
             }
             dataWrite.close();
         } catch (IOException e) {
-            System.out.println("Unable to save data...");
+            UI.printParagraph("Unable to save data...");
         }
     }
 
@@ -153,7 +153,7 @@ public class Storage {
             try {
                 doctorFile.createNewFile();
             } catch (IOException ioException) {
-                System.out.println("doctor.txt cannot be created");
+                UI.printParagraph("doctor.txt cannot be created");
                 return;
             }
         }
@@ -164,7 +164,7 @@ public class Storage {
             }
             dataWrite.close();
         } catch (IOException e) {
-            System.out.println("Unable to save data...");
+            UI.printParagraph("Unable to save data...");
         }
     }
 
@@ -173,7 +173,7 @@ public class Storage {
         try {
             dir.mkdir();
         } catch (SecurityException s) {
-            System.out.println("Cannot Create Dir");
+            UI.printParagraph("Cannot Create Dir");
         }
         saveDoctorData();
         savePatientData();

@@ -17,7 +17,7 @@ public class Parser {
             addPatientParameters[i] = addPatientParameters[i].trim();
         }
         if (addPatientParameters.length != 7) {
-            System.out.println("There is one or more parameters missing.");
+            UI.printParagraph("There is one or more parameters missing.");
             return null;
         }
         if (validateAddPatient(addPatientParameters)) {
@@ -33,7 +33,7 @@ public class Parser {
             addDoctorParameters[i] = addDoctorParameters[i].trim();
         }
         if (addDoctorParameters.length != 7) {
-            System.out.println("There is one or more parameters missing.");
+            UI.printParagraph("There is one or more parameters missing.");
             return null;
         }
         if (validateAddDoctor(addDoctorParameters)) {
@@ -84,29 +84,29 @@ public class Parser {
     private static boolean validateAddPerson(String[] parameters) {
         boolean isValid = true;
         if (!validateNric(parameters[0])) {
-            System.out.println("NRIC must start with a capital letter, "
+            UI.printParagraph("NRIC must start with a capital letter, "
                     + "followed by 7 digits and end with a capital letter.");
             isValid = false;
         }
         if (!validateFullName(parameters[1])) {
-            System.out.println("Full name must contain only alphabets and no special characters.");
+            UI.printParagraph("Full name must contain only alphabets and no special characters.");
             isValid = false;
         }
         if (!validateAge(parameters[2])) {
-            System.out.println("Age must be between 1 and 120 inclusive.");
+            UI.printParagraph("Age must be between 1 and 120 inclusive.");
             isValid = false;
         }
         if (!validateGender(parameters[3])) {
-            System.out.println("Gender must be a single character: M or F.");
+            UI.printParagraph("Gender must be a single character: M or F.");
             isValid = false;
         }
         if (!validateAddress(parameters[4])) {
-            System.out.println("Address must be alphanumeric. "
+            UI.printParagraph("Address must be alphanumeric. "
                     + "Only these specific special characters are allowed: ' ( ) #");
             isValid = false;
         }
         if (!validateDob(parameters[5])) {
-            System.out.println("Date of birth must be in YYYY-MM-DD format. "
+            UI.printParagraph("Date of birth must be in YYYY-MM-DD format. "
                     + "It cannot be before 1900-01-01 or be today and after.");
             isValid = false;
         }

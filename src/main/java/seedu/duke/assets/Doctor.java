@@ -22,14 +22,13 @@ public class Doctor extends Person {
 
     @Override
     public String toString() {
-        return "Doctor {"
-                + "Nric='" + getNric() + '\''
+        return  "Nric='" + getNric() + '\''
                 + ", Full Name='" + getFullName() + '\''
                 + ", Age=" + getAge()
                 + ", Gender=" + getGender()
                 + ", Address='" + getAddress()
                 + '\'' + ", DOB='" + getDob() + '\''
-                + ", Specialization='" + getSpecialization() + '\'' + '}';
+                + ", Specialization='" + getSpecialization() + '\'';
     }
 
 }
