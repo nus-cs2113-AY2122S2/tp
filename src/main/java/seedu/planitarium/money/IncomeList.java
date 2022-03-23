@@ -111,4 +111,8 @@ public class IncomeList extends MoneyList {
             System.out.println(listIndex++ + ". " + item);
         }
     }
+
+    public ArrayList<Income> getIncomeArrayList() {
+        return incomeArrayList;
+    }
 }

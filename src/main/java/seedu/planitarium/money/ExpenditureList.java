@@ -116,4 +116,8 @@ public class ExpenditureList extends MoneyList {
         logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
         return expenditureArrayList.get(index - 1).getDescription();
     }
+
+    public ArrayList<Expenditure> getExpenditureArrayList() {
+        return expenditureArrayList;
+    }
 }
