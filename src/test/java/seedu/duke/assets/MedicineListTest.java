@@ -10,7 +10,7 @@ class MedicineListTest {
     void checkSize_arrayOfMedicines_expectedNumber() {
         MedicineList medicineList = new MedicineList();
         int currentNumber = 0;
-        assertEquals(currentNumber, medicineList.size());
+        assertEquals(currentNumber, medicineList.getSize());
     }
 
     @Test
