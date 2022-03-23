@@ -24,7 +24,7 @@ public class MedicineList {
         return null;
     }
 
-    public void add(String[] parameterArray) throws DuplicateEntryException{
+    public void add(String[] parameterArray) throws DuplicateEntryException {
         if (search(parameterArray[0]) != null) {
             throw new DuplicateEntryException();
         }
@@ -67,11 +67,12 @@ public class MedicineList {
                 UI.printCont(getMedicineInfo(medicine));
                 hasRecord = true;
             }
-         }
+        }
         if (!hasRecord) {
             UI.printCont("No matching medicine found!");
         }
     }
+
     public void deleteMedicine(String medicineId) throws NotFoundException {
         for (int i = 0; i < getSize(); i++) {
             if (medicines.get(i).getMedicineId().equals(medicineId)) {
