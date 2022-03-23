@@ -89,9 +89,64 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Command Execution
 
-Maybe for Huilin
-{Suggest to show the process from `user input` to `input parsing` to `command factory`
-then actual execution}
+In PlanITarium, a command usually have following format:
+
+```md
+[command type][indicator][description]
+```
+
+For example,
+
+```md
+add \n Alice
+```
+
+is to add a person whose name is Alice. `add` here is the command type to add a person, and `\n` is the indicator of 
+the name of person.
+
+There may be several indicators for every input, such as
+
+```md
+addin \i 200 \d salary \u 1
+```
+
+is to add a income for the person whose uid is 1, and the description of this income is salary.
+
+When `PlanITarium` receives such input, it will pass the input to `CommandFactory`. The `CommandFactory` will call 
+`Parser` to parse the input into several components according to the indicator. The `Parser` will then return the type 
+of command to `CommandFactory`. According to the type, `CommandFactory` will return a command object to `PlanITarium`. 
+After receiving the command, `PlanITarium` will call `execute()` of command object to execute the command. 
+
+The following diagram is the sequence diagram of this entire process. 
+
+<image src="images/CommandFactorySequence.png">
+
+Following operations are implemented:
+* `CommandFactory#getCommand(userInput, personList)` -- Return the command that is needed to be executed 
+corresponding to the user input
+* `Parser#getKeyword(userInput)` -- Return the keyword of the type of command
+* `Command#execute()` -- Execute the command
+
+Below is and example usage scenario and how Alice is added to the `PersonList`
+
+Step 1. given that user input is
+
+```md
+add \n Alice
+```
+
+and this string will be passed to `CommandFactory` together with `personList` that contains all the people who had been
+added previously by calling `getCommand()`.
+
+Step 2. The `CommandFactory` will pass the input to `Parser` to parse the keyword by calling `Parser.parseKeywords`, 
+and the `Parser` should return `add` as keyword.
+
+Step 3. The `CommandFactory` will then match the keyword to the type of command. In this case, `add` is corresponding 
+to `AddPersonCommand`. The `CommandFactory` will then create a new `AddPersonCommand` with `userInput` and `personList`,
+and return this object to `PlanITarium`. 
+
+Step 4. `PlanITarium` will then execute this command by calling `execute()`. Alice will then be added to the 
+`personList`.
 
 ### \[Proposed] Logical grouping for different generation of person added
 

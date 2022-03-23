@@ -10,6 +10,9 @@ public class ExpenditureList extends MoneyList {
     private ArrayList<Expenditure> expenditureArrayList;
     private int numberOfExpenditures;
 
+    private static final String LOG_CLASS_NAME = ExpenditureList.class.getSimpleName();
+    private static final String LOG_FILE_PATH = LOG_CLASS_NAME + ".log";
+    private static final String LOG_INIT = "Logger for " + LOG_CLASS_NAME + " initialised.";
     private static final String LOG_ADD_EXP = "addExpenditure()";
     private static final String LOG_GET_EXP_VAL = "getExpenditureValue()";
     private static final String LOG_GET_NUM_EXP = "getNumberOfExpenditures()";
@@ -115,5 +118,9 @@ public class ExpenditureList extends MoneyList {
         assert (index <= numberOfExpenditures);
         logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
         return expenditureArrayList.get(index - 1).getDescription();
+    }
+
+    public ArrayList<Expenditure> getExpenditureArrayList() {
+        return expenditureArrayList;
     }
 }
