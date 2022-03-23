@@ -1,26 +1,17 @@
-package seedu.planitarium.income;
+package seedu.planitarium.money;
 
 import seedu.planitarium.ProjectLogger;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-public class IncomeList {
+public class IncomeList extends MoneyList {
 
     private ArrayList<Income> incomeArrayList;
     private int numberOfIncomes;
 
-    private ProjectLogger logger;
-
-    public static final int ARRAY_INDEX = 0;
-    private static final String LOG_CLASS_NAME = IncomeList.class.getSimpleName();
-    private static final String LOG_FILE_PATH = LOG_CLASS_NAME + ".log";
-    private static final String LOG_INIT = "Logger for " + LOG_CLASS_NAME + " initialised.";
-    private static final String LOG_ASSERT_PASSED = "Assertion passed.";
     private static final String LOG_ADD_INC = "addIncome()";
     private static final String LOG_GET_INC_VAL = "getIncomeValue()";
-    private static final String LOG_REMOVE = "remove()";
-    private static final String LOG_DESC = "getDescription()";
     private static final String LOG_GET_NUM_INC = "getNumberOfIncomes()";
     private static final String LOG_GET_TOTAL_INC = "getTotalIncome()";
     private static final String LOG_PRINT_LIST = "printIncomeList()";
