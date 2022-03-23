@@ -16,6 +16,6 @@ public class Lesson extends Event {
 
     @Override
     public String toString() {
-        return "LESSON " + super.toString();
+        return "[L] " + super.toString();
     }
 }

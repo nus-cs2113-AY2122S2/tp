@@ -27,31 +27,31 @@
 //    @BeforeEach
 //    public void setUp() {
 //        timetable = new Timetable();
-//        addCommand = new AddCommand(
+//        addCommand = new AddLessonCommand(
 //                "John", "CS2113", "Monday",
 //                1200, 1300, "online"
 //        );
-//        addCommandStartTimeOverlap = new AddCommand(
+//        addCommandStartTimeOverlap = new AddLessonCommand(
 //                "John", "CS2113", "Monday",
 //                1200, 1400, "online"
 //        );
-//        addCommandEndTimeOverlap = new AddCommand(
+//        addCommandEndTimeOverlap = new AddLessonCommand(
 //                "John", "CS2113", "Monday",
 //                1100, 1300, "online"
 //        );
-//        addCommandDifferentEventSameTime = new AddCommand(
+//        addCommandDifferentEventSameTime = new AddLessonCommand(
 //                "John", "CS2113T", "Monday",
 //                1200, 1300, "online"
 //        );
-//        addCommandTotalOverlap = new AddCommand(
+//        addCommandTotalOverlap = new AddLessonCommand(
 //                "John", "CS2113", "Monday",
 //                1000, 1600, "online"
 //        );
-//        addCommandOverlapDifferentDay = new AddCommand(
+//        addCommandOverlapDifferentDay = new AddLessonCommand(
 //                "John", "CS2113", "Friday",
 //                1200, 1300, "online"
 //        );
-//        addCommandOverlapDifferentName = new AddCommand(
+//        addCommandOverlapDifferentName = new AddLessonCommand(
 //                "Johnny", "CS2113", "Monday",
 //                1200, 1300, "online"
 //        );

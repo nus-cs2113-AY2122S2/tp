@@ -48,10 +48,6 @@ public class Timetable {
         return name;
     }
 
-    public boolean nameEquals(String name) {
-        return this.name.equals(name);
-    }
-
     public void clear() {
         list.clear();
     }
