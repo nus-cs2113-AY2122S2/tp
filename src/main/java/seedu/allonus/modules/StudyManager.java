@@ -44,6 +44,10 @@ public class StudyManager {
                 deleteModule(userInput);
             } else if (userInput.startsWith("add")) {
                 addModule(userInput);
+            } else if (userInput.startsWith("edit")) {
+                editModule(userInput,ui);
+            } else if (userInput.startsWith("find")) {
+                findModule(userInput);
             } else {
                 printMessage("Sorry I did not get that!");
             }
@@ -84,8 +88,8 @@ public class StudyManager {
      */
     public void deleteModule(String userInput) {
         try {
-            String moduleNumber = userInput.replace("rm ","");
-            int moduleIndex = Integer.parseInt(moduleNumber) - 1;
+            String moduleIndexString = userInput.replace("rm ","");
+            int moduleIndex = Integer.parseInt(moduleIndexString) - 1;
             if (modulesList.get(moduleIndex) != null) {
                 Module removedModule = modulesList.get(moduleIndex);
                 modulesList.remove(moduleIndex);
@@ -105,6 +109,77 @@ public class StudyManager {
         }
 
     }
+
+    public void editModule(String userInput, TextUi ui) {
+        try {
+            String moduleIndexString = userInput.replace("edit ", "");
+            int moduleIndex = Integer.parseInt(moduleIndexString) - 1;
+            if (modulesList.get(moduleIndex) != null) {
+                Module moduleToEdit = modulesList.get(moduleIndex);
+                printMessage("Here is the module that you have chosen to edit:");
+                printMessage(moduleToEdit.toString());
+                printMessage("Choose the part that you would like to edit: ");
+                boolean isEditFinished = false;
+                String editUserInput;
+                while (isEditFinished == false) {
+                    editUserInput = ui.getUserInput();
+                    if (editUserInput.startsWith("category")) {
+                        editModuleCategory(moduleToEdit, editUserInput);
+                        printMessage(moduleToEdit.toString());
+                    } else if (editUserInput.startsWith("code")) {
+                        editModuleCode(moduleToEdit, editUserInput);
+                        printMessage(moduleToEdit.toString());
+                    } else if (editUserInput.startsWith("day")) {
+                        editModuleDay(moduleToEdit, editUserInput);
+                        printMessage(moduleToEdit.toString());
+                    } else if (editUserInput.startsWith("time")) {
+                        editModuleTime(moduleToEdit, editUserInput);
+                        printMessage(moduleToEdit.toString());
+                    } else {
+                        printMessage("Your Module was successfully edited! Here are the changes");
+                        printMessage(moduleToEdit.toString());
+                        isEditFinished = true;
+                    }
+                }
+                printMessage("Exiting the edit mode");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, "wrong index for edit");
+            if (modulesList.size() == 0) {
+                printMessage("There are no modules to edit!");
+            } else {
+                printMessage(" Oops there are only " + modulesList.size() + " modules left in your schedule");
+            }
+        } catch (NumberFormatException e) {
+            logger.log(Level.WARNING, "no index number specified for edit");
+            printMessage("Please enter the index of the module you would like to edit");
+        }
+    }
+
+    private void editModuleTime(Module moduleToEdit, String editUserInput) {
+        String moduleTime = editUserInput.replace("time ","");
+        moduleToEdit.setTimeSlot(moduleTime);
+    }
+
+    private void editModuleDay(Module moduleToEdit, String editUserInput) {
+        String moduleDay = editUserInput.replace("day ","");
+        moduleToEdit.setDay(moduleDay);
+    }
+
+    private void editModuleCode(Module moduleToEdit, String editUserInput) {
+        String moduleCode = editUserInput.replace("code ","");
+        moduleToEdit.setModuleCode(moduleCode);
+    }
+
+    private void editModuleCategory(Module moduleToEdit, String editUserInput) {
+        String moduleCategory = editUserInput.replace("category ","");
+        try {
+            moduleCategory = validateModuleCategory(moduleCategory);
+            moduleToEdit.setCategory(moduleCategory);
+        } catch (ModuleCategoryException e) {
+        }
+    }
+
 
     /**
      * Adds a new module to the module list.
@@ -168,6 +243,30 @@ public class StudyManager {
         }
     }
 
+    public void findModule(String userInput) {
+        String moduleKeyword = userInput.replace("find ","");
+        ArrayList<Module> matches = new ArrayList<>();
+        for (Module m: modulesList) {
+            if (m.toString().contains(moduleKeyword)) {
+                matches.add(m);
+            }
+        }
+        if (matches.size() == 0) {
+            printMessage("There are no modules that match \"" + moduleKeyword + "\"");
+        } else {
+            listMatches(matches);
+        }
+    }
+
+    private void listMatches(ArrayList<Module> matches) {
+        System.out.println("    Here are the matching tasks in your list:");
+        int i=1;
+        for(Module m: matches) {
+            System.out.println((i++ ) +": " + m);
+        }
+    }
+
+
     /**
      * Validates the attributes for a new module.
      * Throws relevant exceptions for the respective missing attributes.
@@ -221,26 +320,31 @@ public class StudyManager {
                 throw new ModuleCategoryException();
             } else {
                 category = parameters[1].substring(2);
-                switch (category) {
-                case "lec":
-                    category = "Lecture";
-                    break;
-                case "tut":
-                    category = "Tutorial";
-                    break;
-                case "exam":
-                    category = "Exam";
-                    break;
-                default:
-                    printMessage("Category has to be one of lec,tut or exam");
-                    throw new ModuleCategoryException();
-                }
-                assert (category == "Lecture" || category == "Tutorial" || category == "Exam") : "category is not one"
-                        + " of lec, tut or exam";
+                category = validateModuleCategory(category);
             }
         } catch (IndexOutOfBoundsException e) {
             throw new ModuleCategoryException();
         }
+        return category;
+    }
+
+    private String validateModuleCategory(String category) throws ModuleCategoryException {
+        switch (category) {
+        case "lec":
+            category = "Lecture";
+            break;
+        case "tut":
+            category = "Tutorial";
+            break;
+        case "exam":
+            category = "Exam";
+            break;
+        default:
+            printMessage("Category has to be one of lec,tut or exam");
+            throw new ModuleCategoryException();
+        }
+        assert (category == "Lecture" || category == "Tutorial" || category == "Exam") : "category is not one"
+                + " of lec, tut or exam";
         return category;
     }
 
@@ -283,5 +387,6 @@ public class StudyManager {
         }
         return time;
     }
+
 }
 

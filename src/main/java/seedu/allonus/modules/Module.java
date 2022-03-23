@@ -25,6 +25,22 @@ public class Module {
         this.timeSlot = timeSlot;
     }
 
+    public void setModuleCode(String moduleCode) {
+        this.moduleCode = moduleCode;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public void setTimeSlot(String timeSlot) {
+        this.timeSlot = timeSlot;
+    }
+
     public String getModuleCode() {
         return moduleCode;
     }
