@@ -28,6 +28,10 @@ add d/ a/ c/ r/
 add m/
 list
 rm -1
+edit 1
+amount 20.00
+done
+list
 rm 1
 list
 menu

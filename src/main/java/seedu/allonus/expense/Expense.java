@@ -11,6 +11,22 @@ public class Expense {
     static  Logger logger;
     private static int noOfItems = 0;
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
     public static void setNoOfItems(int noOfItems) {
         Expense.noOfItems = noOfItems;
     }
@@ -28,7 +44,7 @@ public class Expense {
 
     @Override
     public String toString() {
-        return date + "|" + amount + "|" + category + "|" + remark;
+        return date + " | " + amount + " | " + category + " | " + remark;
     }
 
 }

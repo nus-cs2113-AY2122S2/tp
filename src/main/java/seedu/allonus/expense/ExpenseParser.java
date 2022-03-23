@@ -15,6 +15,7 @@ public class ExpenseParser {
     public static final int LEFT_SIDE = 0;
     public static final int ZERO = 0;
     public static final int INDEX_TO_BE_DELETED = 1;
+    public static final int INDEX_TO_BE_EDITED = 1;
 
     /**
      * Determines the content of the user input by splitting it into fields depending on the delimiters
@@ -79,6 +80,13 @@ public class ExpenseParser {
         assert userInput != null : ASSERT_INPUT_NOT_NULL;
         String[] rawInput = userInput.split(" ", SPLIT_IN_HALF);
         int result = Integer.parseInt(rawInput[INDEX_TO_BE_DELETED]);
+        return result;
+    }
+
+    public static int parseEditExpense(String userInput) throws IndexOutOfBoundsException, NumberFormatException {
+        assert userInput != null : ASSERT_INPUT_NOT_NULL;
+        String[] rawInput = userInput.split(" ", SPLIT_IN_HALF);
+        int result = Integer.parseInt(rawInput[INDEX_TO_BE_EDITED]);
         return result;
     }
 }

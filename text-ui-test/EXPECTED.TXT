@@ -46,14 +46,25 @@ Welcome back to the main menu
 Menu:
 Welcome to Expense Tracker
 You haven't added any expenses to your list yet!
-Added Date|18.00|Category|This is a remark
+Added Date | 18.00 | Category | This is a remark
 Some fields are empty! Try again!
 Some fields are empty! Try again!
 Here are the expenses you have made so far:
- 1. Date|18.00|Category|This is a remark
+ 1. Date | 18.00 | Category | This is a remark
 
 Selected item does not exist in the list
-Deleted entry: Date|18.00|Category|This is a remark
+Here is the expense record you have chosen to edit:
+Date | 18.00 | Category | This is a remark
+Which field would you like to edit? Enter [field] [newValue] or enter 'DONE' when you have finished editing:
+New amount value set!
+Editing complete!
+Here is the newly edited expense record:
+Date | 20.00 | Category | This is a remark
+Invalid command!
+Here are the expenses you have made so far:
+ 1. Date | 20.00 | Category | This is a remark
+
+Deleted entry: Date | 20.00 | Category | This is a remark
 You haven't added any expenses to your list yet!
 Welcome back to the main menu
 Menu:
