@@ -19,6 +19,7 @@ public class CsProjPlanner {
      * Main entry-point for the CSProjPlanner application.
      */
     public static void main(String[] args) {
+        assert (0 == 1) : "dummy assertion set to fail";
         logger.log(Level.INFO, "going to receive user input");
         String input;
         Scanner in = new Scanner(System.in);
