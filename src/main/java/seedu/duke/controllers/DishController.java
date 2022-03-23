@@ -30,7 +30,12 @@ public class DishController extends Controller {
         switch (choice) {
         case 0:
             System.out.println("Exiting Dish Menu...");
-            dishManager.store();
+            try {
+                dishManager.saveData();
+            } catch (Exception e) {
+                System.out.println("There was an error saving Dish data!\n");
+                MainLogger.logWarning(this, "Error saving Dish data!");
+            }
             return true;
         case 1:
             listDishes();
