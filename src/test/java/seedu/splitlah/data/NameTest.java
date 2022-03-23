@@ -1,20 +1,24 @@
 package seedu.splitlah.data;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import seedu.splitlah.exceptions.InvalidDataException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class NameTest {
 
     @Test
-    public void constructor_nameHasNumbers_throwsException() throws InvalidDataException {
-        assertThrows(InvalidDataException.class, () -> new Name("sam99"));
+    public void validateName_nameHasNumbers_returnsFalse() {
+        assertFalse(Name.validateName("sam99"));
     }
 
     @Test
-    public void constructor_nameHasSymbols_throwsException() throws InvalidDataException {
-        assertThrows(InvalidDataException.class, () -> new Name("s@m9.9"));
+    public void validateName_nameHasSymbols_returnsFalse() throws InvalidDataException {
+        assertFalse(Name.validateName("s@m."));
+    }
+
+    @Test
+    public void validateName_nameIsAlphaOnly_returnsTrue() {
+        assertFalse(Name.validateName("sam"));
     }
 }
