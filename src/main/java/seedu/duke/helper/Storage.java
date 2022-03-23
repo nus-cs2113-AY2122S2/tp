@@ -68,7 +68,7 @@ public class Storage {
         while (reader.hasNext()) {
             String line = reader.nextLine();
             String[] parameters = line.split(",");
-            doctors.add(parameters);
+            appointments.add(parameters);
         }
     }
 

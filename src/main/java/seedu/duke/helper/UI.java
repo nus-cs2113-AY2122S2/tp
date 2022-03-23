@@ -106,29 +106,29 @@ public class UI {
     }
 
     public void printAddAppointmentExampleMessage() {
-        System.out.println("Please note the error(s) mentioned above and try again!");
-        System.out.println("Here is an example. Please follow the input order:");
-        System.out.println("add appointment /info S1234567A, Thomas, S1234567A, Ben, 2023-01-01, Knee checkup");
+        printParagraph("Please note the error(s) mentioned above and try again!\n"
+                + "Here is an example. Please follow the input order:\n"
+                + "add appointment /info S1234567A, Thomas, S1234567A, Ben, 2023-01-01, Knee checkup");
     }
 
     public void printNullParametersMessage() {
-        System.out.println("Parameters missing or not detected. Please use /info for parameters.");
+        UI.printParagraph("Parameters missing or not detected. Please use /info for parameters.");
     }
 
     public void printPrompt() {
         System.out.print("You: ");
     }
 
-    public void printParagraph(String paragraph) {
-        System.out.print("HalpMi: ");
+    public static void printParagraph(String paragraph) {
         String[] arrayOfSentences = paragraph.split("\n");
-        for (String s : arrayOfSentences) {
+        System.out.println("HalpMi: " + arrayOfSentences[0]);
+        for (int i = 1; i < arrayOfSentences.length; i++) {
             System.out.print("        ");
-            System.out.println(s);
+            System.out.println(arrayOfSentences[i]);
         }
     }
 
-    public void printCont(String sentence) {
+    public static void printCont(String sentence) {
         System.out.print("        ");
         System.out.println(sentence);
     }

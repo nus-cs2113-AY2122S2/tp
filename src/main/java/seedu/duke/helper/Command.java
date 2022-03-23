@@ -159,7 +159,7 @@ public class Command {
             ui.printAddAppointmentExampleMessage();
         } else {
             appointmentList.add(addAppointmentParameters);
-            System.out.println("The above appointment has been added.");
+            UI.printParagraph("The above appointment has been added.");
         }
     }
 }

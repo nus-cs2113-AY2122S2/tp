@@ -61,7 +61,7 @@ public class Parser {
             addAppointmentParameters[i] = addAppointmentParameters[i].trim();
         }
         if (addAppointmentParameters.length != 6) {
-            System.out.println("There is one or more parameters missing.");
+            UI.printParagraph("There is one or more parameters missing.");
             return null;
         }
         if (validateAddAppointment(addAppointmentParameters)) {
