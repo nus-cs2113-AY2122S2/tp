@@ -139,6 +139,26 @@ for subsequent prompts.
 In _WerkIt!_, a workout is defined as an exercise paired with a number that represents the number
 of repetitions. For example, 20 repetitions of the Russian twist is considered a workout. 
 
+### Delete Existing Workout
+![SearchUML](uml/classDiagrams/images/DeleteWorkout.PNG)
+<br>
+
+When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
+`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
+class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
+user's command. If the user's command type is to delete an existing workout, i.e. `workout /delete <workout number>`, the
+`Parser#parseUserInput(String userInput)` method will parse the 'workout' base word and proceed to create workout related
+command using `Parser#createWorkoutCommand(String userInput)` method. This method will further evaluate the
+workout action, in this case, `/delete` and call the constructor of `WorkoutCommand` class by passing relevant parameters related to the
+WorkoutCommand constructor. If the workout action is null or incorrect, an InvalidCommandException will be thrown. If the `<workout number>`
+parameter is also not specified, the same InvalidCommandException is thrown. Once the workout command is created,
+this workout command is executed via the `WorkoutCommand#execute()` method. As it is executed, the method will check the type of action to be executed, in this case, 
+delete. It will then remove the existing workout using the `WorkoutList#deleteWorkout(getUserArguments())` method. The deleteWorkout method
+in addition, checks whether the workout number supplied is a valid integer and is within the range of the workout list. If both condition
+is not met, the NumberFormatException and WorkoutOutOfRangeException is thrown accordingly. Once the existing workout is successfully deleted,
+the UI will print a success message and call the `FileManager#rewriteAllWorkoutsToFile(getWorkoutList())` method to save the changes.
+
+
 ### Search
 ![SearchUML](uml/classDiagrams/images/SearchClassUML.png)
 <br>
