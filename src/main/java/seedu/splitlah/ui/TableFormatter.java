@@ -97,7 +97,7 @@ public class TableFormatter {
     /**
      * Calculates total table width from a given int array containing column widths.
      *
-     * @param columnWidths
+     * @param columnWidths An int array object representing the widths of each column.
      * @return The total width of the table.
      */
     private int calculateTableWidth(int[] columnWidths) {
