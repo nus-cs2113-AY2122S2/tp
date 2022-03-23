@@ -25,30 +25,30 @@ class HelpCommandParserTest {
      * syntax of HelpCommand as input.
      */
     @Test
-    void getCommand_extraIrrelevantTokens_InvalidCommand() {
+    void getCommand_withIrrelevantTokens_InvalidCommand() {
         // Single additional token, no delimiters
-        String helpWithAdditionalArguments = "help apple";
-        Command command = Parser.getCommand(helpWithAdditionalArguments);
+        String helpWithIrrelevantArguments = "help apple";
+        Command command = Parser.getCommand(helpWithIrrelevantArguments);
         assertEquals(InvalidCommand.class, command.getClass());
 
         // Single additional token, with delimiters
-        helpWithAdditionalArguments = "help /apple";
-        command = Parser.getCommand(helpWithAdditionalArguments);
+        helpWithIrrelevantArguments = "help /apple";
+        command = Parser.getCommand(helpWithIrrelevantArguments);
         assertEquals(InvalidCommand.class, command.getClass());
 
         // Two additional tokens, without delimiters
-        helpWithAdditionalArguments = "help apple orange";
-        command = Parser.getCommand(helpWithAdditionalArguments);
+        helpWithIrrelevantArguments = "help apple orange";
+        command = Parser.getCommand(helpWithIrrelevantArguments);
         assertEquals(InvalidCommand.class, command.getClass());
 
         // Two additional tokens, one delimiters
-        helpWithAdditionalArguments = "help /apple orange";
-        command = Parser.getCommand(helpWithAdditionalArguments);
+        helpWithIrrelevantArguments = "help /apple orange";
+        command = Parser.getCommand(helpWithIrrelevantArguments);
         assertEquals(InvalidCommand.class, command.getClass());
 
         // Three additional tokens, two delimiters
-        helpWithAdditionalArguments = "help /apple /sid 1";
-        command = Parser.getCommand(helpWithAdditionalArguments);
+        helpWithIrrelevantArguments = "help /apple /sid 1";
+        command = Parser.getCommand(helpWithIrrelevantArguments);
         assertEquals(InvalidCommand.class, command.getClass());
     }
 }
