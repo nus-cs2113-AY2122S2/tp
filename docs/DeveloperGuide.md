@@ -121,7 +121,8 @@ Step 2. The user wishes to add a person, say `John Doe`, to the `children` list.
 
 Step 3. The user executes `addin /g 3 /u 1 /i ...` to add a new income to index 1 of the `children` list, who is   
 `John Doe`. This causes an income object to be added to the `IncomeList` of `John Doe`.
--- Insert UML object diagram here
+
+<image src="images/PersonStep3.png"></image>
 
 Step 4. The user now decides to have an overview of his family's finances by executing the `list` command. The `list`  
 command will call `Family#list()`, which will go through each generation to sum up their incomes and expenditures and  
