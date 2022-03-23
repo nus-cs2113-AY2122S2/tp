@@ -4,7 +4,7 @@
 @startuml
 
 skinparam Shadowing false
-skinparam BoxPadding 10
+participant "Timetable" as Timetable <<Class>>
 
 User -> Main: show today
 activate Main
@@ -14,11 +14,9 @@ Parser -> Parser: parseShowCommandOptions(today)
 Parser -> ShowCommand: newShowCommand(null, today)
 Main -> ShowCommand: execute(tasklist, ui, storage)
 ShowCommand -> Timetable: showTodaySchedule(taskList, ui)
-activate Timetable
 Timetable -> Timetable: prepareTimetable(date, filteredTask, ui)
-Timetable -> Timetable: printSchedule()
+Timetable -> Timetable: printTimetable(date, filteredTask, ui)
 Timetable --> Main
-deactivate Timetable
 Main --> User
 
 @enduml
