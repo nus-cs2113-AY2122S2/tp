@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+Main - WerkIt
+WerkIt - Parser
+WerkIt - UI
+Command <|- SearchCommand
+SearchCommand - Parser
+SearchCommand - WerkIt
+class WerkIt {
++ startContinuousUserPrompt()
+}
+
+class Command {
+
+}
+
+class Main {
+
+}
+
+class SearchCommand {
++ execute()
+}
+
+class UI {
++ getUserInput()
+}
+
+class Parser {
++ parseUserInput(String userInput)
++ SearchCommand createSearchCommand(String userInput)
+}
+
+
+@enduml
