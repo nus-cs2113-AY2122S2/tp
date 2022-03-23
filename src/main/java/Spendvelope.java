@@ -15,7 +15,7 @@ import static constants.SpendvelopeConstants.VERSION;
 public class Spendvelope {
     private TextUi ui;
     private RecordManager recordMgr = new RecordManager();
-    private LimitManager limitMgr = new LimitManager();
+    private LimitManager limitMgr = LimitManager.getLimitManagerInstance();
 
     /** Main entry-point for the application. */
     public static void main(String[] args) {

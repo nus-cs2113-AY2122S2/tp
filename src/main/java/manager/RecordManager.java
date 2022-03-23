@@ -38,17 +38,6 @@ public class RecordManager {
     }
 
     /**
-     * Displays each record in the record list.
-     */
-    public void showRecords() {
-        int recordNum = 0;
-
-        for (Record record : records) {
-            System.out.println(++recordNum + record.toString());
-        }
-    }
-
-    /**
      * @return List of records
      */
     public List<Record> getAllRecords() {
