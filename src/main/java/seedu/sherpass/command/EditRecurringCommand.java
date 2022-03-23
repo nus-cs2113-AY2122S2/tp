@@ -18,13 +18,13 @@ public class EditRecurringCommand extends Command {
 
     public static final String COMMAND_WORD = "editrecurring";
     public static final String MESSAGE_USAGE = "editrecurring: Edit a recurring task in the task list.\n"
-            + "A recurring task contains the index of the task to be edited.\n"
-            + "You can edit the task description and the date of the task."
-            + "\n\nTo execute the command,\nenter 'editrecurring INDEX [TASK_DESCRIPTION] [/do DATE]'.\n"
-            + "E.g. editrecurring 1 weekly revision /do 21/3/2022 09:00\n\n"
-            + "All task dates must be given in the format: d/M/yyyy [HH:mm] , where\n"
-            + "year is in 4 digits, month and day in one or two digits."
-            + "\nTime can also be optionally specified.";
+            + "You can edit the task description and the datetime of the task."
+            + "\n\nTo execute the command,\nenter 'editrecurring INDEX "
+            + "[TASK_DESCRIPTION] [/do DATE /start START_TIME /end END_TIME]'.\n"
+            + "E.g. editrecurring 1 weekly revision /do 21/3/2022 /start 09:00 /end 10:00\n\n"
+            + "DATE must be given in the format: d/M/yyyy, where\n"
+            + "year is in 4 digits, month and day in one or two digits.\n"
+            + "TIME must be given in the format: HH:mm.";
 
 
     public EditRecurringCommand() {

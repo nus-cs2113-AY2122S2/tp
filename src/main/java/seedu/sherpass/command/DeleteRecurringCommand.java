@@ -8,14 +8,9 @@ public class DeleteRecurringCommand extends Command {
     private int index;
 
     public static final String COMMAND_WORD = "deleterecurring";
-    public static final String MESSAGE_USAGE = "deleterecurring: Edit a recurring task in the task list.\n"
-            + "A recurring task contains the index of the task to be edited.\n"
-            + "You can edit the task description and the date of the task."
-            + "\n\nTo execute the command,\nenter 'editrecurring INDEX [TASK_DESCRIPTION] [/do DATE]'.\n"
-            + "E.g. editrecurring 1 weekly revision /do 21/3/2022 09:00\n\n"
-            + "All task dates must be given in the format: d/M/yyyy [HH:mm] , where\n"
-            + "year is in 4 digits, month and day in one or two digits."
-            + "\nTime can also be optionally specified.";
+    public static final String MESSAGE_USAGE = "deleterecurring: delete a recurring task in the task list.\n"
+            + "The index of the recurring task must be specified.\n"
+            + "\n\nTo execute the command,\nenter 'deleterecurring INDEX'.\n";
 
     public DeleteRecurringCommand() {
 
