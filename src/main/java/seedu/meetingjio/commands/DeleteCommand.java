@@ -1,7 +1,8 @@
 package seedu.meetingjio.commands;
 
 import seedu.meetingjio.events.Event;
-import seedu.meetingjio.Timetable;
+import seedu.meetingjio.timetables.MasterTimetable;
+import seedu.meetingjio.timetables.Timetable;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DELETE_COMMAND_FAILED;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
@@ -18,10 +19,11 @@ public class DeleteCommand extends Command {
     /**
      * Execute delete command using the timetable provided.
      *
-     * @param timetable Timetable object initialised by programme
+     * @param masterTimetable MasterTimetable
      *
      */
-    public String execute(Timetable timetable) {
+    public String execute(MasterTimetable masterTimetable) {
+        Timetable timetable = masterTimetable.getByIndex(0); // changes needed
         int size = timetable.size();
         try {
             Event event = timetable.get(index - 1);

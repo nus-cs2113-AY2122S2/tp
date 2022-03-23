@@ -1,6 +1,7 @@
 package seedu.meetingjio.commands;
 
-import seedu.meetingjio.Timetable;
+import seedu.meetingjio.timetables.MasterTimetable;
+
 import static seedu.meetingjio.common.Messages.MESSAGE_HELP;
 
 /**
@@ -11,7 +12,7 @@ public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
 
     @Override
-    public String execute(Timetable timetable) {
+    public String execute(MasterTimetable masterTimetable) {
         return MESSAGE_HELP;
     }
 }
