@@ -1,8 +1,12 @@
 package seedu.duke.assets;
 
+
+import seedu.duke.exception.DuplicateEntryException;
+import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class MedicineList {
     private ArrayList<Medicine> medicines = new ArrayList<>();
@@ -11,15 +15,27 @@ public class MedicineList {
         return medicines.size();
     }
 
-    public void add(String[] parameterArray) {
-        Medicine newMedicine = new Medicine(medicines.size() + 1, parameterArray[0],
-                Integer.parseInt(parameterArray[1]), parameterArray[2], parameterArray[3],
-                Integer.parseInt(parameterArray[4]));
+    public Medicine search(String medicineId) {
+        for (Medicine medicine: medicines) {
+            if (medicine.getMedicineId().equals(medicineId)) {
+                return medicine;
+            }
+        }
+        return null;
+    }
+
+    public void add(String[] parameterArray) throws DuplicateEntryException{
+        if (search(parameterArray[0]) != null) {
+            throw new DuplicateEntryException();
+        }
+        Medicine newMedicine = new Medicine(parameterArray[0], parameterArray[1],
+                Integer.parseInt(parameterArray[2]), parameterArray[3], parameterArray[4],
+                Integer.parseInt(parameterArray[5]));
         medicines.add(newMedicine);
     }
 
     public String getMedicineInfo(Medicine medicine) {
-        return (Integer.toString(medicine.getMedicineId()) + ": "
+        return (medicine.getMedicineId() + ": "
                 + medicine.getMedicineName() + ", "
                 + Integer.toString(medicine.getDosage()) + ", " + medicine.getExpiry() + ", "
                 + medicine.getSideEffects() + ", " + Integer.toString(medicine.getQuantity()));
@@ -40,22 +56,40 @@ public class MedicineList {
 
     //todo: please change logic
     public void viewMedicine(String parameters) {
-        int index = Integer.parseInt(parameters);
-        getMedicineInfo(medicines.get(index - 1));
-    }
-
-    /*
-    public void viewMedicine(String parameters) {
-        if (parameters.equals("name")) {
-            for (Medicine medicine : medicines) {
-                System.out.println(Integer.toString(medicine.getMedicineId()) + ": "
-                        + medicine.getMedicineName());
+        if (getSize() == 0) {
+            UI.printParagraph("There are no medicines matching the given name.");
+            return;
+        }
+        UI.printParagraph("Here is the list of batches of " + parameters + ":");
+        boolean hasRecord = false;
+        for (Medicine medicine : medicines) {
+            if (medicine.getMedicineName().equals(parameters)) {
+                UI.printCont(getMedicineInfo(medicine));
+                hasRecord = true;
             }
+         }
+        if (!hasRecord) {
+            UI.printCont("No matching medicine found!");
         }
     }
-    */
-    public void deleteMedicine(int index) {
-        medicines.remove(index);
+    public void deleteMedicine(String medicineId) throws NotFoundException {
+        for (int i = 0; i < getSize(); i++) {
+            if (medicines.get(i).getMedicineId().equals(medicineId)) {
+                medicines.remove(i);
+                return;
+            }
+        }
+        throw new NotFoundException();
+    }
+
+    public void editMedicine(String[] parameterArray) throws NotFoundException {
+        if (search(parameterArray[0]) != null) {
+            Medicine medicine = search(parameterArray[0]);
+            medicine.edit(parameterArray[1], Integer.parseInt(parameterArray[2]), parameterArray[3], parameterArray[4],
+                    Integer.parseInt(parameterArray[5]));
+            return;
+        }
+        throw new NotFoundException();
     }
 
     public ArrayList<Medicine> getList() {
