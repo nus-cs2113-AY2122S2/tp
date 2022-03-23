@@ -1,14 +1,14 @@
 package seedu.duke.assets;
 
 public class Medicine {
-    private int medicineId;
+    private String medicineId;
     private String medicineName;
     private int dosage; //in milligrams
     private String expiry;
     private String sideEffects;
     private int quantity;
 
-    public Medicine(int medicineId, String medicineName, int dosage, String expiry,
+    public Medicine(String medicineId, String medicineName, int dosage, String expiry,
                     String sideEffects, int quantity) {
         this.medicineId = medicineId;
         this.medicineName = medicineName;
@@ -18,12 +18,21 @@ public class Medicine {
         this.quantity = quantity;
     }
 
+    public void edit(String medicineName, int dosage, String expiry,
+                     String sideEffects, int quantity) {
+        this.medicineName = medicineName;
+        this.dosage = dosage;
+        this.expiry = expiry;
+        this.sideEffects = sideEffects;
+        this.quantity = quantity;
+    }
+
     public String saveString() {
-        return medicineName + "," + dosage + "," + expiry
+        return medicineId + "," + medicineName + "," + dosage + "," + expiry
                 + "," + sideEffects + "," + quantity;
     }
 
-    public int getMedicineId() {
+    public String getMedicineId() {
         return medicineId;
     }
 
