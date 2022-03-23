@@ -1,6 +1,8 @@
 package seedu.duke.entities;
 
-public class Dish {
+import java.io.Serializable;
+
+public class Dish implements Serializable {
     private String name;
     private double price;
 
@@ -56,5 +58,9 @@ public class Dish {
 
     public String toString() {
         return name + " ---- " + (price == 0 ? "free" : ("$" + price));
+    }
+
+    public boolean isValid() {
+        return isValidName(name) && price > 0;
     }
 }

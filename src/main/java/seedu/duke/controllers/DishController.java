@@ -4,6 +4,7 @@ import seedu.duke.entities.Dish;
 import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.loggers.MainLogger;
 import seedu.duke.manager.DishManager;
+import seedu.duke.manager.DishStorageManager;
 
 /**
  * DishController (or MenuController if you like).
@@ -27,31 +28,37 @@ public class DishController extends Controller {
 
     @Override
     protected boolean optionSwitcher(int choice) throws OperationTerminationException {
-        switch (choice) {
-        case 0:
-            System.out.println("Exiting Menu...");
-            return true;
-        case 1:
-            listDishes();
-            break;
-        case 2:
-            addDish();
-            break;
-        case 3:
-            deleteDish();
-            break;
-        case 4:
-            changePrice();
-            break;
-        case 5:
-            changeName();
-            break;
-        default:
-            System.out.println("Unknown choice!");
-            break;
+        try {
+            switch (choice) {
+            case 0:
+                System.out.println("Exiting Menu...");
+                dishManager.store();
+                return true;
+            case 1:
+                listDishes();
+                break;
+            case 2:
+                addDish();
+                break;
+            case 3:
+                deleteDish();
+                break;
+            case 4:
+                changePrice();
+                break;
+            case 5:
+                changeName();
+                break;
+            default:
+                System.out.println("Unknown choice!");
+                break;
+            }
+            System.out.println(this);
+            return false;
+        } catch (OperationTerminationException e) {
+            dishManager.store();
+            throw e;
         }
-        System.out.println(this);
-        return false;
     }
 
     private void listDishes() {
