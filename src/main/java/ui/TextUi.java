@@ -12,12 +12,12 @@ import data.record.Record;
 
 import static common.Messages.MESSAGE_GOODBYE;
 import static common.Messages.MESSAGE_WELCOME;
+
 import static constants.TextUIConstants.COMMENT_LINE_FORMAT_REGEX;
 import static constants.TextUIConstants.DIVIDER;
 import static constants.TextUIConstants.LINE_PREFIX;
 import static constants.TextUIConstants.LS;
-import static constants.TextUIConstants.USERCOMMANDREQUEST;
-import static constants.TextUIConstants.echoCommand;
+import static constants.TextUIConstants.USER_COMMAND_REQUEST;
 
 /**
  * Text UI of the application.
@@ -81,6 +81,8 @@ public class TextUi {
      * @return <code>true</code> if input line is a comment.
      */
     private boolean isCommentLine(String rawInputLine) {
+        assert COMMENT_LINE_FORMAT_REGEX instanceof String : "COMMENT_LINE_FORMAT_REGEX should be a String";
+
         return rawInputLine.trim().matches(COMMENT_LINE_FORMAT_REGEX);
     }
 
@@ -92,7 +94,9 @@ public class TextUi {
      * @return Command (full line) entered by the user.
      */
     public String getUserCommand() {
-        out.print(USERCOMMANDREQUEST);
+        assert USER_COMMAND_REQUEST instanceof String : "USERCOMMANDREQUEST should be a String";
+
+        out.print(USER_COMMAND_REQUEST);
         String fullInputLine = in.nextLine();
 
         // silently consume all ignored lines
@@ -100,7 +104,7 @@ public class TextUi {
             fullInputLine = in.nextLine();
         }
 
-        showToUser(echoCommand(fullInputLine));
+        showToUser("[Command entered:" + fullInputLine + "]");
         return fullInputLine;
     }
 
@@ -137,9 +141,13 @@ public class TextUi {
      */
     public void showResultToUser(CommandResult result) {
         final List<Record> resultRecords = result.getRelevantRecords();
+
         if (resultRecords != null) {
-            System.out.println(resultRecords);
+            for (int resultCount = 0; resultCount < resultRecords.size(); resultCount++) {
+                System.out.println(LINE_PREFIX + resultCount + 1 + ". " + resultRecords.get(resultCount).toString());
+            }
         }
+
         showToUser(result.getFeedbackToUser(), DIVIDER);
     }
 }

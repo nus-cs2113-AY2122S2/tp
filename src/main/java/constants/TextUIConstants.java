@@ -14,15 +14,5 @@ public class TextUIConstants {
     public static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
 
     /** Requests user for command. */
-    public static final String USERCOMMANDREQUEST = LINE_PREFIX + "Enter command: ";
-
-    /**
-     * Wraps and echoes command.
-     *
-     * @param command Command to wrap and echo.
-     * @return String of the wrapped command.
-     */
-    public static String echoCommand(String command) {
-        return "[Command entered:" + command + "]";
-    }
+    public static final String USER_COMMAND_REQUEST = LINE_PREFIX + "Enter command: ";
 }

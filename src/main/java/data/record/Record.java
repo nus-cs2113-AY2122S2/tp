@@ -20,6 +20,6 @@ public abstract class Record {
         this.price = price;
     }
     public String toString(){
-        return name+", price = "+price+", date = "+date;
+        return name + ", price = " + price + ", date = " + date;
     }
 }
