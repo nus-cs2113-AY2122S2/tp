@@ -56,6 +56,18 @@ is responsible for,
 
 ### Persons Component
 
+The **API** of this component is specified in `Family.java`, `PersonList.java` and `Person.java`.
+
+-- Insert UML class diagram here
+
+The list of persons consists of a `Family` that is made up of generational `PersonList`s. Each `PersonList` holds a  
+list of `Person`s who belong to that generation.
+
+The `Person` component,
+* Stores the logical grouping of persons added i.e., all `Person` objects must belong to one of the `PersonList`s.
+* Stores the total number of `Person`s in the `Family`, as well as each of the generational `PersonList`s.
+* Depends on the `Money` component to help keep track of each `Person`'s income and expenditure as each `Person`   
+  contains an `IncomeList` and `ExpenditureList`.
 
 ### Money Component
 {For Jiarong}
