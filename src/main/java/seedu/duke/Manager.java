@@ -29,12 +29,8 @@ public class Manager {
             Status status = null;
             try {
                 status = executeCommand(commandWord,parameters);
-            } catch (HalpmiException e) {
-                e.printStackTrace();
-            } catch (NotFoundException e) {
-                e.printStackTrace();
-            } catch (DuplicateEntryException e) {
-                e.printStackTrace();
+            } catch (HalpmiException | NotFoundException | DuplicateEntryException e) {
+                ui.printParagraph(e.toString());
             }
             ui.print(status);
             storage.saveData();
@@ -83,7 +79,8 @@ public class Manager {
             status = command.execute(storage.medicines);
             break;
         case "edit medicine":
-            //command.editMedicine(storage.medicines,parameters);
+            command = Parser.parseEditMedicine(parameters);
+            status = command.execute(storage.medicines);
             break;
         case "add appointment":
             //command.addAppointment(storage.appointments, storage.patients, storage.doctors, parameters);
