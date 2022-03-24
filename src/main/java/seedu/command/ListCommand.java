@@ -57,7 +57,13 @@ public class ListCommand extends Command {
             return new CommandResult(String.format(successMessage, listSize), equipmentArrayList);
         }
 
-        EquipmentType typeToList = EquipmentType.valueOf(commandStrings.get(0));
+        EquipmentType typeToList;
+        try {
+            typeToList = EquipmentType.valueOf(commandStrings.get(0));
+        } catch (IllegalArgumentException e) {
+            return new CommandResult(INCORRECT_ENUM_TYPE);
+        }
+
         equipmentArrayList = equipmentManager.listEquipment(typeToList);
         listSize = equipmentArrayList.size();
         return new CommandResult(String.format(successMessage, typeToList, listSize), equipmentArrayList);
