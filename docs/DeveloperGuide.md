@@ -54,10 +54,27 @@ the program also allows for faster searching and editing than a GUI design once 
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ...                    | I want to ...                                             | So that I can ...                                                                 |
+|---------|-----------------------------|-----------------------------------------------------------|-----------------------------------------------------------------------------------|
+| v1.0    | new or experienced user     | add a task to the planner                                 | better organize my project                                                        |
+| v1.0    | user with existing projects | delete a project from the planner                         | remove projects that are already completed                                        |
+| v1.0    | user with existing projects | add a to-do to a project                                  | get a clear outline of what needs to be done                                      |
+| v1.0    | student user                | add  a deadline for my project                            | keep track of due dates                                                           | 
+| v1.0    | student user                | view the details (to-do list and deadlines) of my project | see what needs to be done and when to do it                                       |
+| v1.0    | student user                | mark a to-do as done                                      | keep track of already completed tasks                                             |
+| v1.0    | student user                | mark a to-do as not done                                  | fix mistakes of marking unfinished tasks                                          |
+| v1.0    | new user                    | access a help command                                     | familiarize myself with using the planner                                         |
+| v1.0    | student user                | exit the application                                      | close my planner when I am finished                                               |
+| ------  |                             |                                                           |                                                                                   |
+| v2.0    | student user                | add any web links/URLs                                    | keep track of relevant resources online                                           |
+| v2.0    | student user                | have quick access to my project's Github repo             | best keep track of my project lifecycle                                           |
+| v2.0    | student user                | list the programming languages/frameworks my project uses | know what languages/frameworks focus on and study                                 |
+| v2.0    | student user                | check what needs to be done within 24 hours               | focus on the most time-sensitive tasks                                            |
+| v2.0    | user with group projects    | assign tasks to members in a group                        | keep track of who is responsible for which part of the project                    |
+| v2.0    | user with group projects    | add members to a project                                  | remember who my group members are                                                 |
+| v2.0    | student user                | add a deadline to a to-do                                 | know the deadlines for each individual to-do                                      |
+| v2.0    | student user                | view my to-dos in order of due date                       | so that I know what I may need to work on first                                   |
+| v2.0    | student user                | save my project information in a file                     | keep a backup and also save my projects/schedules for the next time I use the app |
 
 ## Non-Functional Requirements
 
