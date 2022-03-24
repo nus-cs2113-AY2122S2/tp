@@ -1,0 +1,115 @@
+@startuml
+abstract class Manager {
+-{static}DATABASE_DIRECTORY : String
+-file : String
+#Manager(file : String)
+-ensureDatabaseDirectoryExists() : void
+#load() : Object
+#save(o : Object) : void
+#{abstract}loadData() : void
++{abstract}saveData() : void
+}
+
+class StaffManager {
++StaffManager()
+#loadData() : void
++saveData() : void
+}
+
+abstract class Controller {
+#choices : String[]
++Controller(choices : String[])
++takeControl() : void
+#getChoice() : int
+#{abstract}optionSwitcher() : bool
+}
+
+class StaffController {
+-{static}CHOICES : String[]
+-staffManager : StaffManager
++StaffController()
+#optionSwitcher() : bool
+-findStaff() : void
+-addStaff() : void
+-deleteStaff() : void
+}
+
+class Staff {
+    -staffId: int
+    -staffName: String
+    -position: String
+    -salary: double
+    +Staff(int, String, String, double)
+    +isValidName(String): boolean
+    +getStaffId(): int
+    +setStaffId(int): void
+    +getStaffName(): String
+    +setStaffName(String): void
+    +getPosition(): String
+    +setPosition(String): void
+    +getSalary(): double
+    +setSalary(double): void
+    +toString(): String
+}
+
+class InputParser {
++{static}TERMINATOR : String = "-"
+-{static}scanner : Scanner
++{static}getString(msg : String) : String
++{static}getInteger(msg : String) : int
++{static}getDouble(msg : String) : double
+}
+
+class Dish {
+    -name: String
+    -price: double
+    +Dish(String, double)
+    +getName(): String
+    +setName(): void
+    +getPrice(): double
+    +setPrice(double): void
+    +toString(): String
+    -isValidName(String): boolean
+    -toTitleCase(String): String
+}
+
+class DishManager {
+    +DishManager()
+    +addDish(Dish): void
+    +deleteDish(int): void
+    +printDishes(): void
+    +setName(int, String): void
+    +setPrice(int, double): void
+    +getNumOfDishes(): int
+    -throwIfIndexNotValid(int): void
+}
+
+class DishController {
+    -{static}CHOICES: String[]
+    -dishManager: DishManager
+    #loadData(): void
+    +saveData(): void
+    +DishController()
+    -addDish(): void
+    -changeName(): void
+    -changePrice(): void
+    -deleteDish(): void
+    -listDishes(): void
+    #optionSwicher(int): boolean
+    +takeControl(): void
+}
+
+'Staff relations
+Manager <|--- StaffManager
+StaffManager <--* StaffController
+Controller <|--- StaffController
+Controller ..> InputParser
+StaffManager --> "0..*" Staff : staffs
+
+'Dish relations
+Manager <|-- DishManager
+Controller <|-- DishController
+Dish "0..*\ndishes" <-- DishManager: manages <
+DishManager "1\ndishManager" <--* DishController
+DishController .-> Dish
+@enduml

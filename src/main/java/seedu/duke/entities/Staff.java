@@ -1,6 +1,8 @@
 package seedu.duke.entities;
 
-public class Staff {
+import java.io.Serializable;
+
+public class Staff implements Serializable {
 
     private int staffId;
     private String staffName;
@@ -23,7 +25,7 @@ public class Staff {
     }
 
     private static boolean isValidName(String name) {
-        return !(name == null || name == "");
+        return !(name == null || name.equals(""));
     }
 
     public int getStaffId() {

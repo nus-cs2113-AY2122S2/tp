@@ -15,7 +15,7 @@ public class DishController extends Controller {
 
     public DishController() {
         super(CHOICES);
-        dishManager = new DishManager();
+        dishManager = DishManager.getInstance();
     }
 
     @Override
@@ -29,7 +29,13 @@ public class DishController extends Controller {
     protected boolean optionSwitcher(int choice) throws OperationTerminationException {
         switch (choice) {
         case 0:
-            System.out.println("Exiting Menu...");
+            System.out.println("Exiting Dish Menu...");
+            try {
+                dishManager.saveData();
+            } catch (Exception e) {
+                System.out.println("There was an error saving Dish data!\n");
+                MainLogger.logWarning(this, "Error saving Dish data!");
+            }
             return true;
         case 1:
             listDishes();
@@ -57,7 +63,7 @@ public class DishController extends Controller {
     private void listDishes() {
         MainLogger.logInfo(this, "User is listing dishes");
         System.out.println("Listing dishes...");
-        dishManager.printDishes();
+        System.out.println(dishManager.printDishes());
     }
 
     private void changeName() throws OperationTerminationException {

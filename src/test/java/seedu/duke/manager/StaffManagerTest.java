@@ -1,7 +1,6 @@
 package seedu.duke.manager;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.entities.Staff;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
