@@ -92,9 +92,18 @@ The functionalities of the timetable include:
 
 ![](images/timetableFormat.png)
 
-Note: The task number in the timetable as shown follows the index of a task
+#### Task index of a task in timetable
+
+The task number in the timetable as shown follows the index of a task
 in the overall task list, i.e. the list containing all tasks added/edited. 
 This allows a more intuitive approach towards adding/editing/deleting/marking/unmarking of tasks.
+
+#### Time and Day column in timetable
+
+The **Time** and **Day** in the timetable follows the doOnDate attribute of a task.
+Concept wise, this treats the doOnDate as the date and time when the task occurs,
+or the date and time the user has set out to accomplish the task.
+
 
 The **Timetable** is a class which interacts with the following components:
 1. Parser
@@ -104,7 +113,7 @@ The **Timetable** is a class which interacts with the following components:
 #### Parser Component
 
 The **Parser** is a class which parses the inputs which the user enters. 
-To activate the timetable, the user inputs commands that start with `show`
+To activate the timetable, the user inputs commands that start with `show`.
 This creates a **ShowCommand** object which will execute its method, thereby printing the timetable.
 
 #### ShowCommand Component
@@ -114,10 +123,10 @@ relative methods which prints the timetable.
 
 #### TaskList Component
 
-When the **ShowCommand** is being executed, it will retrieve a filtered list
-of task by the date that is define in the **ShowCommand** from the **TaskList** component. 
-The filtered list will represent the schedule that the user has on that date given. 
-The list is assumed to be sorted previously when the user adds/edits a task.
+As **ShowCommand** is being executed, it will retrieve a filtered list
+of task by the date that is defined in the **ShowCommand** from the **TaskList** component. 
+The filtered list represents the schedule that the user has on that given date. 
+The list is assumed to be sorted previously when the user added/edited a task.
 
 Below is a sequence diagram of what happens 
 as the user wishes to see the schedule (timetable) for 25th May 2022:
