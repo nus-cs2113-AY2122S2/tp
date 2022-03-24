@@ -1,33 +1,88 @@
+//@@author ibrahimisramos
+
 package seedu.meetingjio.commands;
 
+import seedu.meetingjio.exceptions.MissingValueException;
+import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
 
-import static seedu.meetingjio.common.ErrorMessages.ERROR_NON_EMPTY_LIST;
+import java.util.logging.Level;
 
-//@@author ibrahimisramos
+import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_TIMETABLE_NOT_FOUND_TO_DELETE;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_EXCEPTION_NOT_HANDLED;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_NON_EMPTY_LIST;
+import static seedu.meetingjio.timetables.MasterTimetable.timetables;
+
 public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
+    private final String name;
+
+    public ClearCommand(String name) {
+        this.name = name;
+    }
 
     /**
      * Execute clear command using the timetable provided.
      *
-     * @param masterTimetable
+     * @param masterTimetable masterTimetable is the timetable list initialised
      *
      */
     @Override
     public String execute(MasterTimetable masterTimetable) {
-        Timetable timetable = masterTimetable.getByIndex(0); // changes needed
+        String user = this.name;
+        try {
+            if (user.length() == 0) {
+                throw new MissingValueException();
+            } else if (user.equalsIgnoreCase("all")) {
+                return clearAll(masterTimetable);
+            } else {
+                return clearTimetableUser(user);
+            }
+        } catch (MissingValueException mve) {
+            return ERROR_UNSPECIFIED_LIST;
+        }
+
+    }
+
+    private String clearTimetableUser(String user) {
+        Timetable timetable;
+        try {
+            timetable  = MasterTimetable.getByName(this.name);
+            clearTimetable(timetable);
+        } catch (TimetableNotFoundException tnfe) {
+            return ERROR_TIMETABLE_NOT_FOUND_TO_DELETE;
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
+            return ERROR_EXCEPTION_NOT_HANDLED;
+        }
+        return printClearConfirmation(user);
+    }
+
+    private String clearAll(MasterTimetable masterTimetable) {
+        int numTimetables = timetables.size();
+        for (int i = 0; i < numTimetables; i++) {
+            Timetable timetable = masterTimetable.getByIndex(i);
+            clearTimetable(timetable);
+        }
+        return printAllClearConfirmation();
+    }
+
+    private void clearTimetable(Timetable timetable) {
         int numEntries = timetable.size();
         for (int i = 0; i < numEntries; i++) {
             timetable.remove(0);
         }
         assert (timetable.size() == 0) : ERROR_NON_EMPTY_LIST;
-        return printClearConfirmation();
     }
 
-    public static String printClearConfirmation() {
-        return "Your whole timetable has been cleared";
+    public static String printClearConfirmation(String user) {
+        return user + "'s timetable has been cleared";
+    }
+
+    public static String printAllClearConfirmation() {
+        return "All records of everyone's timetable has been cleared";
     }
 
 }
