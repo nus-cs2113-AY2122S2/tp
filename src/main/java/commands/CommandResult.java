@@ -36,25 +36,11 @@ public class CommandResult {
     }
 
     /**
-     * Constructs a <code>CommandResult</code> object.
-     *
-     * @param feedbackToUser Message to display to user
-     * @param relevantRecords List of records to display to user
-     * @param relevantRecords1
-     */
-    public CommandResult(String feedbackToUser, List<Record> relevantRecords, double relevantRecords1) {
-        this.feedbackToUser = feedbackToUser;
-        this.relevantRecords = relevantRecords;
-        this.relevantRecords1 = relevantRecords1;
-    }
-
-    /**
      * Returns a list of records that was produced by the command, if any.
      */
     public List<Record> getRelevantRecords() {
         return relevantRecords;
     }
-
 
     /**
      * Returns the number that was changed by the command, if any.

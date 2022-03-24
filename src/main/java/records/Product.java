@@ -1,7 +1,7 @@
 package records;
 
 public class Product extends Record {
-    private String productType;
+    private final String productType;
 
     /**
      * Constructs a <code>Product</code> object.

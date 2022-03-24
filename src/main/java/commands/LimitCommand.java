@@ -14,7 +14,7 @@ public class LimitCommand extends Command {
     private static final String MESSAGE_SET_LIMIT_SUCCESS = "Limit Set: %1$s";
 
     /** New limit value */
-    private double limit;
+    private final double limit;
 
     /**
      * Constructs a <code>LimitCommand</code> object.

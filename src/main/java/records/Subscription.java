@@ -2,7 +2,7 @@ package records;
 
 /** Record of subscription to services. */
 public class Subscription extends Record {
-    private String renewal;
+    private final String renewal;
 
     /**
      * Constructs a <code>Subscription</code> object.

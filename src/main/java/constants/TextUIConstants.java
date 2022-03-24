@@ -8,6 +8,7 @@ public class TextUIConstants {
     /** A platform independent line separator. */
     public static final String LS = System.lineSeparator();
 
+    /** A user visible line separator. */
     public static final String DIVIDER = "===================================================";
 
     /** Format of a comment input line. Comment lines are silently consumed when reading user input. */

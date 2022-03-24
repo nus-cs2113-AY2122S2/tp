@@ -13,9 +13,9 @@ import static constants.SpendvelopeConstants.VERSION;
 
 /** Main class for the Spendvelope app. */
 public class Spendvelope {
-    private TextUi ui;
-    private RecordManager recordMgr = new RecordManager();
-    private LimitManager limitMgr = LimitManager.getLimitManagerInstance();
+    private final TextUi ui = TextUi.getTextUiInstance();
+    private final RecordManager recordMgr = new RecordManager();
+    private final LimitManager limitMgr = LimitManager.getLimitManagerInstance();
 
     /** Main entry-point for the application. */
     public static void main(String[] args) {
@@ -31,7 +31,6 @@ public class Spendvelope {
 
     /** Sets up the required objects, and prints the welcome message. */
     private void start() {
-        this.ui = TextUi.getTextUiInstance();
         ui.showWelcomeMessage(VERSION);
     }
 
@@ -53,7 +52,6 @@ public class Spendvelope {
         } while (!ExitCommand.isExit(command));
     }
 
-
     /**
      * Executes the command and returns the result.
      *
@@ -72,6 +70,4 @@ public class Spendvelope {
             throw new RuntimeException(e);
         }
     }
-
-
 }

@@ -8,7 +8,6 @@ import records.Product;
 import records.Record;
 import records.Subscription;
 
-
 /**
  * Adds a record to the RecordManager.
  */
@@ -69,5 +68,4 @@ public class AddCommand extends Command {
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + newTotalExpense);
     }
-
 }

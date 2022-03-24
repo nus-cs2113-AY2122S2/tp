@@ -1,9 +1,9 @@
 package records;
 
 public abstract class Record {
-    protected double price;
-    protected String name;
-    protected String date;
+    protected final double price;
+    protected final String name;
+    protected final String date;
 
     /**
      * Constructs a <code>Record</code> object.

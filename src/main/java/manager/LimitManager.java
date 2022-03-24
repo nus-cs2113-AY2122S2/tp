@@ -43,7 +43,7 @@ public class LimitManager {
      * @param total Value to check against limit
      * @return <code>true</code> if value is greater than limit
      */
-    public boolean ifExceedLimit(double total){
+    public boolean isExceedLimit(double total){
         if (total>this.limit) {
             return true;
         } else {
