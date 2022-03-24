@@ -87,9 +87,12 @@ You are now ready to begin developing!
 * [Getting User Input Continuously](#getting-user-input-continuously)
 * [Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)
 * [Create New Workout](#create-new-workout)
+    * [Design Considerations](#design-considerations-for-creating-a-new-workout) 
 * [Search](#search)
   * [Search for Exercise](#search-for-exercise)
   * [Search for Plan](#search-for-plan)
+
+---
 
 ### Getting User Input Continuously
 Once `WerkIt` has finished loading any saved file data on the user's system, it will call 
@@ -131,13 +134,133 @@ for subsequent prompts.
   >
   ```
 
+---
+
 ### Parsing User Input and Getting the Right Command
 **_TODO_**: Explain how the app parses user input and determines which `Command` subclass object to instantiate.
 
+---
+
 ### Create New Workout
-![Create Workout Sequence Diagram](uml/sequenceDiagrams/images/createWorkout.png)
-In _WerkIt!_, a workout is defined as an exercise paired with a number that represents the number
-of repetitions. For example, 20 repetitions of the Russian twist is considered a workout. 
+
+A summary of the general procedure of a new workout being inputted and stored into WerkIt! is as follows:
+1. User enters the command `workout /new <workout name> /reps <number of repetitions>`.
+2. A new `Workout` object is created and stored in the application.
+3. The success response is printed to the user through the terminal.
+4. The new `Workout` object data is written to the resource file `workouts.txt`.
+
+The following sequence illustrates how the `workout /new` command works in greater detail:
+> To simplify the sequence diagram, some method invocations that deemed to be trivial 
+> have been removed from the sequence diagram. Reference frames will be elaborated further 
+> down this section.
+
+![Create Workout Sequence Diagram](uml/sequenceDiagrams/images/CreateWorkout.png)
+
+(Steps 1 to 3) The program waits for the user to enter a new command, which in this case is the `workout /new` command,
+and returns the user input in a `String` object to `WerkIt#startContinuousUserPrompt()`. 
+
+(Steps 4 and 5) `Parser#parseUserInput()` parses the user input to obtain a `WorkoutCommand` object that is upcasted 
+to a `Command` object on return to `WerkIt#startContinuousUserPrompt()`. In Step 6, `WorkoutCommand#execute()` is called
+and because this is a `workout /new` command, the method will call `WorkoutList#createAndAddWorkout()`.
+
+The following sequence diagram is the detailed procedure for Step 7's `WorkoutList#createAndAddWorkout()`:
+![createAndAddWorkout() Sequence Diagram](uml/sequenceDiagrams/images/CreateAndAddWorkout.png)
+
+> Note: Logging-related method calls in `WorkoutList#createAndAddWorkout()` have been omitted in an effort to simplify 
+> the sequence diagram.
+
+(Steps 7.1 to 7.6) The `String#split()`, `String#trim()`, and `Integer#parseInt()` methods are used to parse the 
+argument given to `WorkoutList#createAndAddWorkout()` to obtain the following information required to create the 
+`Workout` object:
+1. Name of the exercise
+2. Number of repetitions associated with the exercise in (1).
+
+(Steps 7.7 to 7.20) Validity checks of the user input are carried out to ensure that the data entered is valid as a
+new `Workout` object. The requirements for a valid new `Workout` object is as follows:
+- [x] The exercise name must exist in `ExerciseList`'s `exerciseList`, which is an `ArrayList<String>` of exercise 
+names.
+- [x] The repetition value must be a non-negative integer greater than 0.
+- [x] The (exercise name, repetition value) must not already exist in the list of workouts maintained in
+`WorkoutList`. For example, if a workout of 20 reps of push-ups is already stored in the list,
+it cannot be created again.
+
+If any of the three requirements are not met, either an `InvalidExerciseException` or an
+`InvalidWorkoutException` is thrown, and the entire workout creation process is aborted.
+
+If the above checks pass, Step 7.21 will create the new `Workout` object with the user-specified exercise name and 
+repetition value. Once that is done, Step 7.23 will generate the key of the `Workout` object (see the 
+[Design Considerations](#design-considerations-for-creating-a-new-workout) section for more details of the `HashMap`
+implementation), before storing the key-`Workout` pair in `workoutsHashMapList` stored in `WorkoutList` in Step 7.25.
+In Step 7.27, the key of the newly-created `Workout` object is added to the `workoutsDisplayList` `ArrayList<String>`
+stored in `WorkoutList`. This ArrayList will be used for displaying the workouts when the command `workout /list` is 
+entered by the user. This is the final step of the `WorkoutList#createAndAddWorkout()`.
+
+(Step 9) Upon returning to `WorkoutCommand`, `UI#printNewWorkoutCreatedMessage()` is called to display a response to
+the user via the terminal. The following is an example of a response after the user entered `workout /new russian twist 
+/reps 50`:
+```
+----------------------------------------------------------------------
+Alright, the following workout has been created:
+
+	russian twist (50 reps)
+
+----------------------------------------------------------------------
+```
+
+(Step 12) `FileManager#writeNewWorkoutToFile` is called to write the newly-created `Workout` object's data into 
+`workouts.txt` which is stored on the user's local filesystem.
+
+This completes the process of adding a new workout to WerkIt!
+
+#### Design Considerations for Creating a New Workout
+##### HashMaps - Motivation
+Back in Version 1.0 of WerkIt!, workouts were stored in an ArrayList of `Workout` objects. In that version, plans
+and schedules were not yet implemented and thus there was no real issues, since we can easily use index numbers
+shown in `workout /list` to reference workouts when the user enters `workout /update` and `workout /delete` commands.
+
+As an example, here is a list of workouts as shown when `workout /list` is used:
+```
+----------------------------------------------------------------------
+> workout /list
+----------------------------------------------------------------------
+Showing workouts 1-3 of 3:
+
+1. push up (10 reps)
+2. sit up (10 reps)
+3. pull up (10 reps)
+
+Showed all workouts in list
+----------------------------------------------------------------------
+```
+
+Thus, if we want to update the workout with 10 reps of push-ups, we can enter `workout /update 1 15` to update 
+the repetition value to 15.
+
+However, when we were designing and preparing for Version 2.0, we discovered that this **relative referencing** of
+workouts by their indices pose a potentially cumbersome issue when implementing the plans and schedule features. If
+we were to continue using relative indexing to reference workouts in plans, the effort needed to maintain the 
+references in plans can become unnecessary complex.
+
+For example, using the same list of workouts we have above, suppose we have a plan that includes workout indices
+1 and 3 (10 push-ups and 10 pull-ups). Now, suppose the user decides to delete workout index 2 (10 sit-ups), this
+means that the 10 pull-ups will now have an index number of 2. Thus, if we were to continue using relative indexing
+to reference workouts in plans, there is a greater risk of making wrong references, and the amount of additional
+code to update these references can become too complex.
+
+##### Usage of HashMap
+Thus, we have decided to use a HashMap on top of the existing ArrayList to store `Workout` objects. This will allow 
+workouts to be referenced by their unique keys when creating plans and schedules, while allowing the user to continue
+using the convenience of relative indexing for `workout /update` and `workout /delete` commands. The ArrayList of 
+`Workout` objects from before is now converted into an ArrayList of Strings that will keep the keys of the `Workout` 
+objects. Now, to manipulate the `Workout` object (e.g. `workout /update`),
+1. User enters the index number of the workout he/she wants to update (as seen in `workout /list`).
+2. The key of the `Workout` object is obtained from the ArrayList of keys (`workoutsDisplayList`).
+3. The `Workout` object is obtained from the HashMap (`workoutsHashMapList`).
+
+Note that the user will not have any direct interactions with the HashMap implementation and it should be transparent
+to him/her.
+
+---
 
 ### Delete Existing Workout
 Class diagram for Delete Workout:
@@ -256,23 +379,23 @@ correctly.
 * **Plan** - A set of workouts
     * Example:
 
-  | Plan Name | Contains |
-  | --- | --- |
-  | Grow my Biceps | Barbell curls (3 reps), push ups (10 reps), deadlift (2 reps) |
-  | Whole Body! | Crunches (10 reps), jumping jack (3 reps), lift ups (4 reps), pull ups (3 reps), planking (2 reps), leg cycle (2 reps)|
+| Plan Name | Contains |
+| --- | --- |
+| Grow my Biceps | Barbell curls (3 reps), push ups (10 reps), deadlift (2 reps) |
+| Whole Body! | Crunches (10 reps), jumping jack (3 reps), lift ups (4 reps), pull ups (3 reps), planking (2 reps), leg cycle (2 reps) |
 
 * **Schedule** - Consists of Days 1 to 7. Users will add or modify a plan to that particular day
 of their schedule. For instance, the user's daily schedule can look like this:
 
-  | Day | Plan Name      |
-  |----------------|---------------- |
-  | Day 1 | Grow my Biceps |
-  | Day 2 | Rest Day       |
-  | Day 3 | Whole Body!    |
-  | Day 4 | Leg Day        |
-  | Day 5 | Grow my Biceps |
-  | Day 6 | Whole Body!    |
-  | Day 7 | Rest Day       |
+| Day | Plan Name      |
+| --- |---------------- |
+| Day 1 | Grow my Biceps |
+| Day 2 | Rest Day       |
+| Day 3 | Whole Body!    |
+| Day 4 | Leg Day        |
+| Day 5 | Grow my Biceps |
+| Day 6 | Whole Body!    |
+| Day 7 | Rest Day       |
 
 
 ## Instructions for manual testing
