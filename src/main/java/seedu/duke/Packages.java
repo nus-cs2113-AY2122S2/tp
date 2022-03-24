@@ -1,12 +1,15 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+//Packages include arrayList packages to hold all TravelPackages
 
 public class Packages {
     private ArrayList<TravelPackage> packages;
+    private ArrayList<Reservation> reservations;
 
-    public Packages(ArrayList<TravelPackage> packages) {
-        this.packages = packages;
+    public Packages() {
+        packages = new ArrayList<>();
+        reservations = new ArrayList<>();
     }
 
     public int getSize() {
@@ -23,5 +26,23 @@ public class Packages {
 
     public void removePackage(int index) {
         packages.remove(index);
+    }
+
+    public Reservation getReservation(int index) {
+        return reservations.get(index);
+    }
+
+    public int getReservationSize() {
+        return reservations.size();
+    }
+
+    public void addReservation(Reservation newReservation) {
+        reservations.add(newReservation);
+        System.out.println("RESERVATION ADDED");
+
+    }
+
+    public void removeReservation(int index) {
+        reservations.remove(index);
     }
 }
