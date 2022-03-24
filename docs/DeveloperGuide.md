@@ -118,9 +118,43 @@ Otherwise, the constructor is called. Either methods will result in the creation
 ## Implementation
 
 ### Add a session
+**API reference:** [`SessionCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionCreateCommand.java)
+
+The sequence diagram below models the interactions between various entities in the system
+when the user invokes the `session /create` command.
+<br>
+<br>
+![Create Session Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SessionCreateCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `session /create` command is as follows:
+
 ### Remove a session
 ### View a session
 ### List sessions
+**API reference:** [`SessionListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
+
+The sequence diagram below models the interactions between various entities in the system
+when the user invokes the `session /list` command.
+<br>
+<br>
+![List Sessions Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SessionListCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `session /list` command is as follows:
+1. The user input provided is passed to `Splitlah`.
+2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `SessionListCommand` object.
+3. `SessionListCommand.run` method is then invoked to run the `session /list` command.
+4. The list of sessions are stored in a `Profile` object, hence `Manager.getProfile` is called.
+5. To retrieve the sessions from the profile retrieved, `Profile.getSessionList` is executed,
+   where a list of `Session` objects are returned.
+6. Once the list is retrieved, `SessionListCommand` class checks if the list is empty.
+  1. If the list is empty, a message indicating that the list is empty is printed
+     using `TextUi.printlnMessage`.
+  2. If the list is not empty, `SessionListCommand` will loop from the first to the second last session,
+     calling `TextUi.printlnMessage()` to print out a brief overview of each session.
+     Then, the last group is printed with a divider below it, using the method `TextUi.printlnMessageWithDivider()`.
+
 ### Settle a session
 ### Add an activity
 ### Remove an activity
