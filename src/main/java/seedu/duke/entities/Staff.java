@@ -24,6 +24,10 @@ public class Staff implements Serializable {
         setSalary(salary);
     }
 
+    private static boolean isValidName(String name) {
+        return !(name == null || name.length() == 0);
+    }
+
     public int getStaffId() {
         return staffId;
     }
@@ -41,10 +45,10 @@ public class Staff implements Serializable {
     }
 
     public void setStaffName(String staffName) throws IllegalArgumentException {
-        if (staffName.isEmpty()) {
+        if (!isValidName(staffName)) {
             throw new IllegalArgumentException("Staff name cannot be null.");
         }
-        assert !(staffName.isEmpty()) : "Staff name should not be empty.";
+        assert isValidName(staffName) : "Staff name should not be null.";
         this.staffName = staffName;
     }
 
@@ -53,10 +57,10 @@ public class Staff implements Serializable {
     }
 
     public void setPosition(String position) {
-        if (position.isEmpty()) {
+        if (!isValidName(position)) {
             throw new IllegalArgumentException("Staff position cannot be null.");
         }
-        assert !(position.isEmpty()) : "Position should not be null.";
+        assert isValidName(position) : "Position should not be null.";
         this.position = position;
     }
 
