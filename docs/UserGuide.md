@@ -16,7 +16,7 @@ Mod Happy is a command line application designed to help you manage your academi
 
 ### Explanation of notation
 
-- User-supplied input parameters are indicated by fully capitalised field names. For instance, in `del /m MODULE_CODE`, you would replace `MODULE_CODE` with the module code of the module you wish to delete (e.g. `del /m CS2113T`).
+- User-supplied input parameters are indicated by fully capitalised field names. For instance, in `del mod MODULE_CODE`, you would replace `MODULE_CODE` with the module code of the module you wish to delete (e.g. `del mod CS2113T`).
 - When multiple parameters are indicated within round brackets and separated with `|`, exactly one parameter must be chosen. For example, `mark (c | u)` means either one of `mark c` or `mark u`.
 - Parameters indicated within square brackets, such as `[-m "MODULE_DESCRIPTION"]`, are optional. The part of the command enclosed within these brackets may be omitted if you wish.
 > 📔 <span style="color:#00bb00">**NOTE:**</span>
