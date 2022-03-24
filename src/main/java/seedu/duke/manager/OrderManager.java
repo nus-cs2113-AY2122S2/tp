@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public class OrderManager {
     private ArrayList<Order> orders;
+    private final DishManager dishManager = DishManager.getInstance();
     private ArrayList<Dish> dishes;
 
     public OrderManager(DishController dishController) {
