@@ -78,6 +78,13 @@ It also tracks the unique identifier for `Session`, `Activity` and `Group` class
 class would return a unique identifier every time a new `Session`, `Activity` or `Group` is created. 
 
 ### TextUI Component
+![TextUI Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/TextUI%20Component.drawio.png)
+<br>
+The `TextUI` class is initialized by the `Manager` class when the application starts.
+It stores a `Scanner` and `PrintStream` object supplied upon initialization to read and write to the user interface.
+It offers methods to print application output to and read user input from these object for other classes to use.
+The `TextUI` class allows other classes to implement their read and write logic in an interface-agnostic way as long as
+they make use of methods from `TextUI`.
 
 ### Storage Component
 
