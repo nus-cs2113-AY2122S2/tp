@@ -13,6 +13,7 @@ import seedu.splitlah.command.SessionCreateCommand;
 import seedu.splitlah.command.SessionDeleteCommand;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 
 /**
@@ -49,8 +50,8 @@ public abstract class Message {
                     + "3.  List all existing sessions\n"
                     + "        " + SessionListCommandParser.COMMAND_FORMAT + "\n"
                     + "4.  Create a new activity\n"
-                    + "        Syntax: " + ActivityCreateCommand.COMMAND_FORMAT_FIRST + "\n"
-                    + "                " + ActivityCreateCommand.COMMAND_FORMAT_SECOND + "\n"
+                    + "        Syntax: " + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n"
+                    + "                " + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND + "\n"
                     + "5.  Delete an existing activity\n"
                     + "        " + ActivityDeleteCommand.COMMAND_FORMAT + "\n"
                     + "6.  View an existing activity's details\n"

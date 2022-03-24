@@ -23,18 +23,6 @@ import java.util.logging.Level;
  */
 public class ActivityCreateCommand extends Command {
 
-    public static final String COMMAND_TEXT = "activity /create";
-
-    private static final String COMMAND_FORMAT = "Syntax:\n\t";
-
-    public static final String COMMAND_FORMAT_FIRST =
-            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
-                    + "/co <TOTAL_COST> [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
-
-    public static final String COMMAND_FORMAT_SECOND =
-            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
-                    + "/cl [COST1 COST2…] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
-
     private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
     
     public static final String[] COMMAND_DELIMITERS = { 
@@ -89,91 +77,6 @@ public class ActivityCreateCommand extends Command {
         this.costList = costList;
         this.gst = gst;
         this.serviceCharge = serviceCharge;
-    }
-
-    /**
-     * Prepares user arguments for the creation of an ActivityCreateCommand object.
-     *
-     * @param commandArgs A String object representing the user's arguments.
-     * @return An ActivityCreateCommand object if necessary parameters were found in user arguments,
-     *         an InvalidCommand object otherwise.
-     */
-    public static Command prepare(String commandArgs) {
-        int sessionId;
-        String activityName;
-        String payer;
-        String[] involvedList;
-        double totalCost = 0;
-        double[] costList = null;
-        double gst;
-        double serviceCharge;
-
-        try {
-            sessionId = Parser.parseSessionId(commandArgs);
-            activityName = Parser.parseName(commandArgs);
-            payer = Parser.parsePayer(commandArgs);
-            involvedList = Parser.parseInvolved(commandArgs);
-        } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t"
-                    + COMMAND_FORMAT_SECOND);
-        }
-
-        boolean isMissingCost = false;
-        boolean isMissingCostList = false;
-        boolean hasDifferentLength = false;
-
-        try {
-            totalCost = Parser.parseTotalCost(commandArgs);
-        } catch (InvalidFormatException e) {
-            if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                    + ParserUtils.TOTAL_COST_DELIMITER)) {
-                return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
-                        + "\n\t" + COMMAND_FORMAT_SECOND);
-            }
-            isMissingCost = true;
-        }
-
-        try {
-            costList = Parser.parseCostList(commandArgs);
-        } catch (InvalidFormatException e) {
-            if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                    + ParserUtils.COST_LIST_DELIMITER)) {
-                return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
-                        + "\n\t" + COMMAND_FORMAT_SECOND);
-            }
-            isMissingCostList = true;
-        }
-
-        boolean hasMissingCostAndMissingCostList = isMissingCostList && isMissingCost;
-        if (hasMissingCostAndMissingCostList) {
-            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
-                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
-        }
-
-        boolean hasBothCostAndCostList = !isMissingCostList && !isMissingCost;
-        if (hasBothCostAndCostList) {
-            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
-                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
-        }
-
-        if (isMissingCost) {
-            hasDifferentLength = involvedList.length != costList.length;
-        }
-        if (hasDifferentLength) {
-            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
-                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
-        }
-
-        try {
-            gst = Parser.parseGst(commandArgs);
-            serviceCharge = Parser.parseServiceCharge(commandArgs);
-        } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
-                    + "\n\t" + COMMAND_FORMAT_SECOND);
-        }
-
-        return new ActivityCreateCommand(sessionId, activityName, totalCost, payer, involvedList, costList, gst,
-                serviceCharge);
     }
 
     /**
