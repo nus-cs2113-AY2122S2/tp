@@ -100,15 +100,15 @@ These functions are "delegated" to `ArrayLise<Dish>`, which is associated with `
 
 For example, `printDishes()`, iterates through `dishes` and calls `get(int)` method (`setPrice(int, double)`, `setName(int, String)` also call `get(int)`):
 
-![](Sequence/DishManager_printDishes.png)
+![](diagrams/sqeuence/DishManager_printDishes.png)
 
 `deleteDish(int)` calls `remove(int)`:
 
-![](Sequence/DishManager_deleteDish.png)
+![](diagrams/sqeuence/DishManager_deleteDish.png)
 
 `addDish(Dish)` calls `add(Dish)`:
 
-![](Sequence/DishManager_addDish.png)
+![](diagrams/sqeuence/DishManager_addDish.png)
 
 
 
