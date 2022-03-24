@@ -9,7 +9,6 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 import seedu.duke.common.Messages;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class InvMgr {
@@ -23,6 +22,7 @@ public class InvMgr {
      * @param filePath File path of the user's inventory list file
      * */
     public InvMgr(String filePath) {
+        assert filePath != null : "File path cannot be a null string!";
         ui = new Ui();
         try {
             storage = new Storage(filePath);
@@ -36,7 +36,7 @@ public class InvMgr {
     /**
      * Greets the user and processes the user's inputs until the user issues an exit command.
      * */
-    public void run() {
+    private void run() {
         ui.showWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
@@ -45,10 +45,12 @@ public class InvMgr {
                 Command inputCommand = Parser.parse(command);
                 inputCommand.execute(itemList, ui);
                 isExit = inputCommand.isExit();
+                storage.writeData(itemList.getItemArrayList());
             } catch (InvMgrException e) {
                 ui.showError(e);
             }
         }
+        assert false : "Execution should never reach this point!";
     }
 
     /**

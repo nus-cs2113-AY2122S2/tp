@@ -1,29 +1,32 @@
 package seedu.duke.data;
 
-import seedu.duke.exceptions.InvMgrException;
-
 import java.util.ArrayList;
 
 public class ItemList {
-    private ArrayList<Item> itemList;
+
+    private ArrayList<Item> itemArrayList;
 
     public ItemList(ArrayList<Item> itemList) {
-        this.itemList = itemList;
+        this.itemArrayList = itemList;
     }
 
     public void addItem(Item item) {
-        this.itemList.add(item);
+        this.itemArrayList.add(item);
     }
 
     public Item removeItem(int index) {
-        return this.itemList.remove(index);
+        return this.itemArrayList.remove(index);
     }
 
     public Item getItem(int index) {
-        return this.itemList.get(index);
+        return this.itemArrayList.get(index);
     }
 
     public int getSize() {
-        return this.itemList.size();
+        return this.itemArrayList.size();
+    }
+
+    public ArrayList<Item> getItemArrayList() {
+        return itemArrayList;
     }
 }

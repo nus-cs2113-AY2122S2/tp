@@ -11,6 +11,12 @@ import seedu.duke.ui.Ui;
  */
 public class AddCommand extends Command {
     private final Item itemToAdd;
+    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_NAME = "Add Item";
+    public static final String USAGE_MESSAGE = "Adds an item to the inventory list";
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " [item name] [item quantity]";
+    public static final String HELP_MESSAGE = COMMAND_NAME + ":\n" + "[Function] " + USAGE_MESSAGE + ":\n"
+            + "[Command Format] " + COMMAND_FORMAT + "\n";
 
     /**
      * Creates an AddCommand to add the specified {@code Item}.

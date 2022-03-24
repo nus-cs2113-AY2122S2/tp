@@ -15,6 +15,14 @@ public class Item {
         return description;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
     /**
      * Returns a boolean indicating if an Item contains the search term in the item name.
      *
