@@ -1,0 +1,35 @@
+@startuml
+skinparam classAttributeIconSize 0
+class InvMgr
+class Ui
+
+package common <<Rectangle>> {
+    class Messages
+    class InvMgrException
+}
+
+package commands <<Rectangle>> {
+    class Command
+}
+
+class InvMgr {
+    - storage: Storage
+    - itemList: ItemList
+    - run(): void
+    - main(String[] args): void
+}
+
+class Ui {
+    - scanner: Scanner
+    + showMessages(String...message): void
+    + showWelcomeMessage(): void
+    + showDivider(): void
+    + showError(InvMgrException e)(): void
+    + getRawUserInput(): String
+}
+
+InvMgr --> "1" Ui
+Ui ..> InvMgrException
+Ui ..> Messages
+Command ..> Ui
+@enduml
