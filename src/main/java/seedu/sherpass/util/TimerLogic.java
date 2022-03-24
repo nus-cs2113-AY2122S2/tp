@@ -1,6 +1,7 @@
 package seedu.sherpass.util;
 
 import seedu.sherpass.exception.InvalidTimeException;
+import seedu.sherpass.util.parser.TimerParser;
 
 import static seedu.sherpass.constant.Message.ERROR_INVALID_TIMER_INPUT_MESSAGE;
 
@@ -34,7 +35,7 @@ public class TimerLogic {
             return;
         }
         try {
-            int duration = Parser.parseTimerInput(parsedInput);
+            int duration = TimerParser.parseTimerInput(parsedInput);
             assert (duration > 0);
             timer.setDuration(duration);
             timer.start();
