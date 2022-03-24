@@ -7,9 +7,6 @@ import storage.FileManager;
 import storage.LogHandler;
 import storage.UnknownFileException;
 import textcolors.TextColor;
-import static commands.SearchCommand.SEARCH_EXERCISE_ACTION_KEYWORD;
-import static commands.SearchCommand.SEARCH_WORKOUT_ACTION_KEYWORD;
-import static commands.SearchCommand.SEARCH_PLAN_ACTION_KEYWORD;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
