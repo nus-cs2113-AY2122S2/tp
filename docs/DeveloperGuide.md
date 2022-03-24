@@ -22,6 +22,7 @@ The following diagram shows a sequence diagram of the program when it is run.
 4. The loop stops when the user types `exit`.
 
 ###Parser Component
+
 ![ParserClassDiagram](img/ParserClassDiagram.png)
 
 The diagram above shows the class diagram of how the `Parser` component works.
