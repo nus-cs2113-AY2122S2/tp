@@ -70,6 +70,10 @@ public class Ui {
 
     /**
      * Prints a welcome message to greet the user.
+     * Shows the user the timetable and the number of pending tasks.
+     *
+     * @param tasklist List of task in array representation
+     * @param ui User interface
      */
     public void showWelcomeMessage(TaskList tasklist, Ui ui) {
         String welcomeMessage = PARTITION_LINE + LS + WELCOME_MESSAGE_ONE

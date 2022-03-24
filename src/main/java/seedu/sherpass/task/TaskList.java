@@ -177,6 +177,8 @@ public class TaskList {
     /**
      * Prints tasks that are yet to be completed, i.e. marked as done.
      * Printed tasks applies to non-recurring tasks.
+     *
+     * @param ui User interface
      */
     public void printPendingTasks(Ui ui) {
         int printIndex = 1;
