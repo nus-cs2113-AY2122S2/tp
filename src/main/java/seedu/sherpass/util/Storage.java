@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
+import seedu.sherpass.util.parser.StorageParser;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -121,7 +122,7 @@ public class Storage {
 
             for (int i = 0; i < array.length(); i++) {
                 JSONObject taskData = array.getJSONObject(i);
-                Task newTask = Parser.parseSavedData(taskData);
+                Task newTask = StorageParser.parseSavedData(taskData);
                 if (!isDuplicateTask(taskList, newTask.getDescription())) {
                     taskList.add(newTask);
                 } else {
