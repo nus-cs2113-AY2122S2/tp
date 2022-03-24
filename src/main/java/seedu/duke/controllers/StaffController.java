@@ -51,11 +51,18 @@ public class StaffController extends Controller {
         return false;
     }
 
-
-
+    /**
+     * Prints out every staff in the records.
+     *
+     * @throws OperationTerminationException When user inputs terminator.
+     */
     private void printStaff() throws OperationTerminationException {
         MainLogger.logInfo(this, "Printing staff");
-        staffManager.printStaff();
+        try {
+            staffManager.printStaff();
+        } catch (IllegalStateException e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -67,7 +74,11 @@ public class StaffController extends Controller {
         MainLogger.logInfo(this, "Finding staff");
         System.out.println("Finding staff...");
         int staffId = InputParser.getInteger("ID of staff: ");
-        staffManager.findByStaffId(staffId, true);
+        try{
+            staffManager.findByStaffId(staffId, true);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -82,7 +93,11 @@ public class StaffController extends Controller {
         final String staffName = InputParser.getString("Name of staff: ");
         final String position = InputParser.getString("Position of staff: ");
         final double salary = InputParser.getDouble("Salary of staff: ");
-        staffManager.addStaff(staffId, staffName, position, salary);
+        try{
+            staffManager.addStaff(staffId, staffName, position, salary);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -94,7 +109,11 @@ public class StaffController extends Controller {
         MainLogger.logInfo(this, "Deleting staff");
         System.out.println("Deleting staff...");
         final int staffId = InputParser.getInteger("ID of staff: ");
-        staffManager.deleteByStaffId(staffId);
+        try {
+            staffManager.deleteByStaffId(staffId);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
     }
 
     /**

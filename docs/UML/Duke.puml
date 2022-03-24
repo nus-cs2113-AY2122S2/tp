@@ -34,6 +34,8 @@ class Dish {
 class DishManager {
     -dishes: ArrayList<Dish>
     +DishManager()
+    +loadData(): void
+    +saveData(): void
     +addDish(Dish): void
     +deleteDish(int): void
     +printDishes(): void
@@ -93,6 +95,8 @@ class StaffManager {
     +findStaffById(int, boolean): Staff
     +deleteStaffById(int): void
     +getNumOfStaff(): int
+    +loadData(): void
+    +saveData(): void
 }
 
 class StaffController {

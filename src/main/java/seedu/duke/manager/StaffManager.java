@@ -40,10 +40,9 @@ public class StaffManager extends Manager {
     /**
      * Print all the Staffs.
      */
-    public void printStaff() {
+    public void printStaff() throws IllegalStateException {
         if (staffs.size() == 0) {
-            System.out.println("There is no staff");
-            return;
+            throw new IllegalStateException("There is no staff.");
         }
         for (int i = 0; i < staffs.size(); i++) {
             System.out.println((i + 1) + ". " + staffs.get(i));
@@ -58,10 +57,10 @@ public class StaffManager extends Manager {
      * @param position  Job position of the Staff.
      * @param salary    Salary of the Staff.
      */
-    public void addStaff(int staffId, String staffName, String position, double salary) {
+    public void addStaff(int staffId, String staffName, String position, double salary) throws IllegalArgumentException {
         if (findByStaffId(staffId, false) != null) {
             MainLogger.logInfo(this, "Failed to add staff: Staff with same ID already exists.");
-            System.out.println("Staff with the same ID already exists, use another ID...");
+            throw new IllegalArgumentException("Staff with the same ID already exists, use another ID...");
         }
         MainLogger.logInfo(this, "Successful addition of staff");
         staffs.add(new Staff(staffId, staffName, position, salary));
@@ -73,11 +72,10 @@ public class StaffManager extends Manager {
      * @param staffId  ID of the Staff.
      * @param printMsg Boolean to determine if found message should be printed.
      */
-    public Staff findByStaffId(int staffId, boolean printMsg) {
+    public Staff findByStaffId(int staffId, boolean printMsg) throws IllegalArgumentException {
         if (staffId <= 0) {
             MainLogger.logInfo(this, "Invalid input for ID.");
-            System.out.println("Staff ID cannot be zero or negative.");
-            return null;
+            throw new IllegalArgumentException("Staff ID cannot be zero or negative.");
         }
         for (Staff staff : staffs) {
             if (staffId == staff.getStaffId()) {
@@ -100,7 +98,7 @@ public class StaffManager extends Manager {
      *
      * @param staffId ID of the Staff
      */
-    public void deleteByStaffId(int staffId) {
+    public void deleteByStaffId(int staffId) throws IllegalArgumentException {
         Staff staff = findByStaffId(staffId, false);
         if (staff != null) {
             staffs.remove(staff);
@@ -108,7 +106,7 @@ public class StaffManager extends Manager {
             System.out.println(staff + " had been deleted from our staff records.");
         } else {
             MainLogger.logInfo(this, "Failed to delete staff: No staff with matching ID.");
-            System.out.println("No staff from our staff records has a matching ID.");
+            throw new IllegalArgumentException("No staff from our staff records has a matching ID.");
         }
     }
 

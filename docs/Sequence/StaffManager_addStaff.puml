@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+hide footbox
+
+actor user
+participant "__:StaffController__" as staffcontroller
+participant "__:StaffManager__" as staffmanager
+participant "__:Staff__" as staff
+
+
+user -> staffcontroller: addStaff(id, name, position, salary)
+activate staffcontroller
+staffcontroller -> staffmanager: addStaff(id, name, position, salary)
+activate staffmanager
+staffmanager --> staff
+activate staff
+staffmanager --> user
+
+@enduml
