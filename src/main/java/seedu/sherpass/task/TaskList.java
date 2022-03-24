@@ -169,8 +169,28 @@ public class TaskList {
         return candidate;
     }
 
+    /**
+     * Return a filtered ArrayList of task according to the date specified.
+     *
+     * @param dateInput The specific date.
+     * @return The filtered ArrayList.
+     */
     public ArrayList<Task> getFilteredTasksByDate(LocalDate dateInput) {
-        return null;
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (hasNoDeadline(task)) {
+                continue;
+            } else if (task.getByDate().toLocalDate().isEqual(dateInput)) {
+                filteredTasks.add(task);
+            } else {
+                continue;
+            }
+        }
+        return filteredTasks;
+    }
+
+    private boolean hasNoDeadline(Task task) {
+        return task.getByDate() == null;
     }
 
     /**
@@ -178,9 +198,11 @@ public class TaskList {
      * Printed tasks applies to non-recurring tasks.
      */
     public void printPendingTasks(Ui ui) {
+        int printIndex = 1;
         for (Task task : tasks) {
             if (!task.isDone()) {
-                ui.showToUser(task.toString());
+                ui.showToUser(printIndex + ". " + task.toString());
+                printIndex++;
             }
         }
     }

@@ -3,7 +3,6 @@ package seedu.sherpass.task;
 import seedu.sherpass.enums.Frequency;
 
 import java.time.LocalDateTime;
-
 import static seedu.sherpass.constant.DateAndTimeFormat.outputWithTimeFormat;
 
 public class Task {
@@ -175,9 +174,5 @@ public class Task {
 
     public Frequency getRepeatFrequency() {
         return repeatFrequency;
-    }
-
-    public void setRepeatFrequency(Frequency repeatFrequency) {
-        this.repeatFrequency = repeatFrequency;
     }
 }
