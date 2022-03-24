@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include Style.puml
+
+participant "AllOnUs" <<class>>
+participant ":AllOnUs"
+participant "ui:TextUi"
+participant "contactsManager:ContactsManager"
+participant "studyManager:StudyManager"
+participant "expenseTracker:ExpenseTracker"
+
+
+-> "AllOnUs"++ : main()
+"AllOnUs" -> ":AllOnUs"++: run()
+
+loop true
+    ":AllOnUs" -> "ui:TextUi"++ : getUserInput()
+    "ui:TextUi" --> ":AllOnUs" -- :
+    ":AllOnUs" -> "AllOnUs"++ : is*Command()
+    "AllOnUs" --> ":AllOnUs"--
+    ref over "contactsManager:ContactsManager", "studyManager:StudyManager", "expenseTracker:ExpenseTracker","AllOnUs",":AllOnUs": Enter appropriate section or exit depending on user input
+
+end
+":AllOnUs" --> "AllOnUs"--
+"AllOnUs" -> "AllOnUs"++ : exit()
+"AllOnUs" --> "AllOnUs" --:
+<--"AllOnUs" --:
+
+
+deactivate "AllOnUs"
+
+@enduml

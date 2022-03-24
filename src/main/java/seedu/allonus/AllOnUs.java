@@ -1,3 +1,5 @@
+//@@author OzairHasan
+
 package seedu.allonus;
 
 import seedu.allonus.contacts.ContactsManager;
@@ -31,10 +33,9 @@ public class AllOnUs {
     /**
      * Carries out termination of the program.
      */
-    private void exit() {
+    private static void exit() {
         System.out.println("Goodbye! Hope to see you again...");
         logger.log(Level.INFO, "Exiting program.");
-        System.exit(0);
     }
 
     /**
@@ -147,7 +148,7 @@ public class AllOnUs {
 
             if (isExitCommand(userInput)) {
                 logger.log(Level.INFO, "User entered exit command.");
-                exit();
+                break;
             } else if (isHelpCommand(userInput)) {
                 logger.log(Level.INFO, "User entered help command.");
                 displayHelp();
@@ -177,6 +178,7 @@ public class AllOnUs {
                 continue;
             }
         }
+        assert userInput != "exit" : "Loop broke without an exit command from user.";
     }
 
     /**
@@ -203,5 +205,8 @@ public class AllOnUs {
 
         logger.log(Level.INFO, "Entering menu for the first time.");
         new AllOnUs().run();
+        exit();
     }
 }
+
+//@@author

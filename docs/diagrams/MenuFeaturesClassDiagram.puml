@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!include Style.puml
+
+class AllOnUs
+AllOnUs : <u>+main()
+AllOnUs : <u>+is*Command()
+AllOnUs : <u>+greet()
+AllOnUs : <u>+exit()
+AllOnUs : +run()
+
+class Logger
+
+class TextUi
+TextUi : +getUserInput()
+
+class ContactsManager
+
+class ExpenseTracker
+
+class StudyManager
+
+AllOnUs --> "1" Logger
+AllOnUs --> "1" StudyManager
+AllOnUs --> "1" ContactsManager
+AllOnUs --> "1" TextUi
+AllOnUs --> "1" ExpenseTracker
+
+
+
+
+@enduml
