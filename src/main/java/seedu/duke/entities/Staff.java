@@ -1,6 +1,8 @@
 package seedu.duke.entities;
 
-public class Staff {
+import java.io.Serializable;
+
+public class Staff implements Serializable {
 
     private int staffId;
     private String staffName;
