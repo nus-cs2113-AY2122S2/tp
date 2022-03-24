@@ -1,0 +1,18 @@
+@startuml
+
+hide footbox
+skinparam SequenceReferenceBackgroundColor pink
+
+participant ":InvMgr" as InvMgr
+participant "storage:Storage" as Storage
+
+activate InvMgr
+    create Storage
+    InvMgr -> Storage : Storage(filePath)
+    activate Storage
+        Storage -> Storage : validatePathExists(filePath)
+        activate Storage
+        return dataPath: Path
+    return
+
+@enduml
