@@ -27,8 +27,8 @@ public class TaskListStorageTest {
     @Test
     public void store_empty_module_list_and_read() {
         try {
-            taskListStorage.jsonWriter(taskList, path);
-            ArrayList<Task> list = taskListStorage.jsonReader(path);
+            taskListStorage.writeData(taskList, path);
+            ArrayList<Task> list = taskListStorage.loadData(path);
             assertTrue(list.containsAll(taskList) && taskList.containsAll(list));
         } catch (Exception e) {
             e.printStackTrace();
@@ -45,8 +45,8 @@ public class TaskListStorageTest {
             taskList.add(task1);
             taskList.add(task2);
             taskList.add(task3);
-            taskListStorage.jsonWriter(taskList, path);
-            ArrayList<Task> list = taskListStorage.jsonReader(path);
+            taskListStorage.writeData(taskList, path);
+            ArrayList<Task> list = taskListStorage.loadData(path);
             assertEquals(list.size(), taskList.size());
             for (int i = 0; i < list.size(); i++) {
                 assertEquals(list.get(i).getTaskName(), taskList.get(i).getTaskName());

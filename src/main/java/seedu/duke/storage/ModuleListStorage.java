@@ -28,7 +28,7 @@ public class ModuleListStorage extends ListStorage<Module> {
      * @throws ModHappyException if an error was encountered during reading
      */
     @Override
-    public ArrayList<Module> jsonReader(String path) throws ModHappyException {
+    public ArrayList<Module> loadData(String path) throws ModHappyException {
         Gson gson = new GsonBuilder().create();
         Path file = new File(path).toPath();
         try {
