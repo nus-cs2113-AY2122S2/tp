@@ -1,0 +1,18 @@
+@startuml
+mainframe sd get Field object to be updated
+alt Update to the name field
+    "ContactParser" -> "contact:Contact" : getName()
+    "contact:Contact" --> "ContactParser" : Name object
+else Update to the faculty field
+    "ContactParser" -> "contact:Contact" : getFaculty()
+    "contact:Contact" --> "ContactParser" : Faculty object
+else Update to the email field
+    "ContactParser" -> "contact:Contact" : getEmail()
+    "contact:Contact" --> "ContactParser" : Email object
+else Update to the description field
+    "ContactParser" -> "contact:Contact" : getDescription()
+    "contact:Contact" --> "ContactParser" : Description object
+else Unrecognized/invalid field
+    "ContactParser" -> ":InvalidContactField" : throw InvalidContactField exception
+end
+@enduml

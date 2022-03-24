@@ -9,6 +9,9 @@ import java.util.Scanner;
  * reads command line use input.
  */
 public class TextUi {
+
+    private static final String DIVIDER = "---------------------------------------------------";
+
     private final Scanner in;
 
     public TextUi() {
@@ -29,5 +32,11 @@ public class TextUi {
     public String getUserInput() throws IllegalStateException, NoSuchElementException {
         String userInput = in.nextLine();
         return userInput;
+    }
+
+    public static void showToUser(String message) {
+        System.out.println(DIVIDER);
+        System.out.println(message);
+        System.out.println(DIVIDER);
     }
 }

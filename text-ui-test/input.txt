@@ -5,8 +5,9 @@ add n/Daniela Koh d/met at SoC canteen e/other_email@u.nus.edu f/FoS
 list
 find Daniela
 find Koh
-edit 2 n/Daniela Sim
+edit 2 e/new_email@gmail.com f/FoE n/Daniela Sim
 find Koh
+list
 rm 1
 rm
 rm 0
@@ -24,10 +25,16 @@ menu
 goto m/Expense_Tracker
 list
 add d/Date a/18.00 c/Category r/This is a remark
+add d/24/3/2022 a/9.50 c/Movie r/Jujutsu Kaisen
 add d/ a/ c/ r/
 add m/
 list
 rm -1
+edit 1
+amount 20.00
+done
+list
+find juju
 rm 1
 list
 menu
