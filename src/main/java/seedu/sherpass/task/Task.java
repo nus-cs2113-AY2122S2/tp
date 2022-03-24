@@ -120,9 +120,9 @@ public class Task {
      * @return Returns if byDate contains a parsed date.
      *         Otherwise, returns a blank string (no whitespace).
      */
-    public String getByDateString() {
+    public String getByDateString(boolean isDateOnly) {
         if (byDate != null) {
-            return byDate.format(outputFormat);
+            return (isDateOnly) ? byDate.format(dateOnlyFormat) : byDate.format(outputFormat);
         }
         return "";
     }
@@ -133,9 +133,9 @@ public class Task {
      * @return Returns if doOnDate contains a parsed date.
      *         Otherwise, returns a blank string (no whitespace).
      */
-    public String getDoOnDateString(boolean isDateOnly) {
+    public String getDoOnDateString() {
         if (doOnDate != null) {
-            return ((isDateOnly) ? doOnDate.format(dateOnlyFormat) : doOnDate.format(outputFormat));
+            return doOnDate.format(outputFormat);
         }
         return "";
     }
@@ -153,10 +153,10 @@ public class Task {
     public String toString() {
         String result = "[" + this.getStatusIcon() + "] " + this.getDescription();
         if (this.byDate != null) {
-            result += " (by: " + getByDateString() + ")";
+            result += " (by: " + getByDateString(false) + ")";
         }
         if (this.doOnDate != null) {
-            result += " (reminder on: " + getDoOnDateString(false) + ")";
+            result += " (reminder on: " + getDoOnDateString() + ")";
         }
         return result;
     }
