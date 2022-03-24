@@ -36,7 +36,7 @@ Example of usage:
 `...`
 
 ### Expense Tracker Features
-####List out all expenses: `list`
+#### List out all expenses: `list`
 Lists out all currently tracked expenses in a list using the keyword `list`. Each entry shows
 its current index in the list, followed by the date, amount, category and any remarks for each expense 
 made.
@@ -68,7 +68,7 @@ Format: `add d/DATE a/AMOUNT c/CATEGORY r/REMARKS`
 ```
 Added 15/3/2022|9.50|Movie|Spiderman: No Way Home
 ```
-####Delete an expense: `rm`
+#### Delete an expense: `rm`
 Deletes a specific expense record that currently exists in the list using its index. Users may choose
 to `list` out the expenses first before deleting to verify its index. After deleting an expense
 record, it will be shown before it is removed from the list.
@@ -83,6 +83,54 @@ Format:
 **Expected outcome:**
 ```
 Deleted entry: 14/3/2022|4.30|Food|Chicken rice for lunch
+```
+#### Editing an expense: `edit`
+Edits an existing expense in the list of expenses. Users may choose to `list` out the expenses first 
+before editing to verify its index. After the record is extracted, users need to choose
+which field to edit in that record. After editing an expense
+record, the newly edited record will be shown to the user.
+
+Format: 
+`edit INDEX`
+
+`[FIELD] [NEW VALUE]`
+
+**Example of usage:**
+
+`edit 1`
+
+`category movie`
+
+**Expected Outcome:**
+```
+Here is the expense record you have chosen to edit:
+Date | 18.00 | Category | This is a remark
+Which field would you like to edit? Enter [field] [newValue] or enter 'DONE' when you have finished editing:
+< category movie
+New category value set!
+< done
+Editing complete!
+Here is the newly edited expense record:
+Date | 20.00 | Movie | This is a remark
+```
+
+#### Look for an expense: `find`
+Looks for a specific expense record by using a user-specified keyword.
+Only the Category, Date and Remarks fields will be considered when looking for an expense record.
+- The keyword is case-insensitive
+- Partial matches on the keyword are also returned
+
+Format:
+`find KEYWORD`
+
+**Example of usage:**
+
+`find juju`
+
+**Expected outcome:**
+```
+Here are the matching expense records:
+24/3/2022 | 9.50 | Movie | Jujutsu Kaisen
 ```
 
 ### Study Manager Features
