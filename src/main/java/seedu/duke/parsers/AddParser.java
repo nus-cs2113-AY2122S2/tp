@@ -35,7 +35,7 @@ public class AddParser extends Parser {
      * (\s+-t\s+\"(?<estimatedWorkingTime>[^\"]+)\")?    -- matches [-t "estimatedWorkingTime"] if present. Optional
      *                                                   -- None of the above fields accept " as a valid character.
      *
-     * mod\s+(?<moduleCode>\w+?)                          -- matches [task moduleCode]
+     * mod\s+(?<moduleCode>\w+?)                          -- matches [mod moduleCode]
      *                                                      Same as above, note that moduleCode does not require "",
      *                                                      but must also be a single word composed of [a-zA-Z0-9_].
      *
