@@ -39,7 +39,7 @@
 The *Architecture Diagram* shown above illustrates the high-level design of the SplitLah application.
 
 **Overview of components**
-* `Main`
+* `SplitLah [Main]`
     * On app launch: Creates an instance of a `Manager` and runs the command loop.
 * `Manager`
     * On creation: Initializes the Profile, TextUI and Storage components.
@@ -59,13 +59,24 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
 **Interaction between components**
 ![Component Interaction Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ComponentInteraction.drawio.png)
 <br>
-The *Component Interaction Diagram* shows the inner workings of how each component in SplitLah interacts. 
+The *Component Interaction Diagram* shows the inner workings of how each component in SplitLah interacts.
 The diagram depicts a scenario when a user attempts to create a session.
+
+
+
+### SplitLah Component
+![SplitLah Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SplitLahComponent.drawio.png)
+<br>
+The `SplitLah` component is the application's main class. Its job is to initialize an instance of `Manager` when the
+application starts. After initialization, it would then proceed to run a loop which would prompt the user for a 
+command. When it receives a command from the user, it would invoke the `parser` and retrieved the command for SplitLah
+to run. Upon using the `Exit` command, SplitLah would then exit from the command loop and end the application.
+
 
 ### Manager Component
 ![Manager Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ManagerComponent.drawio.png)
 <br>
-The `Manager` class is initialized by the `Main` class when the application starts.
+The `Manager` class is initialized by the `SplitLah` class (the main class) when the application starts.
 It stores the `Profile`, `TextUI` and `Storage` objects. The `Profile` class helps to manage all data accesses 
 throughout the lifetime of the application. While the `Storage` helps to save what the `Profile` class has captured. 
 The `TextUI` class serves as an interface to read user inputs and print application outputs.
