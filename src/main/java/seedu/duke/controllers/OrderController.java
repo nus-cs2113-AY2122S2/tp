@@ -4,8 +4,6 @@ import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.manager.DishManager;
 import seedu.duke.manager.OrderManager;
 
-import java.util.ArrayList;
-
 public class OrderController extends Controller {
     private static final String[] CHOICES = {"Exit", "Display Menu",
         "Create an order", "Delete an order",
@@ -13,6 +11,7 @@ public class OrderController extends Controller {
         "Get total value of all orders in the list", "Print receipt"
     };
     private final OrderManager orderManager = OrderManager.getInstance();
+    private final DishManager dishManager = DishManager.getInstance();
 
     public OrderController() {
         super(CHOICES);
@@ -25,7 +24,7 @@ public class OrderController extends Controller {
             System.out.println("Exiting menu...");
             return true;
         case 1:
-            orderManager.getDishManager().printDishes();
+            dishManager.printDishes();
             break;
         case 2:
             addNewOrder();
@@ -51,12 +50,11 @@ public class OrderController extends Controller {
     }
 
     private void addNewOrder() throws OperationTerminationException {
-        ArrayList<Integer> dishIdxList = new ArrayList<Integer>();
         int index = InputParser.getInteger("Enter dishes you want to order (enter negative number to exit): ");
         int createdOrderIdx = orderManager.getOrderCount();
         try {
             while (index >= 0) {
-                orderManager.addDishToOrder(index, createdOrderIdx);
+                orderManager.addDishToOrder(index, createdOrderIdx, dishManager);
                 index = InputParser.getInteger("You have " + orderManager.getOrders().get(createdOrderIdx).getDishCount() + " dish(es), some more: \n");
             }
         } catch (IndexOutOfBoundsException e) {

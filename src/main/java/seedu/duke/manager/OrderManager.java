@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class OrderManager extends Manager {
     private static OrderManager singleton = null;
     private List<Order> orders;
-    private final DishManager dishManager = DishManager.getInstance();
 
     private static final String ORDER_STORAGE_FILE = "order.dat";
 
@@ -71,7 +70,7 @@ public class OrderManager extends Manager {
      * @param dishIdx the index of the dish.
      * @return size of the order list.
      */
-    public void addDishToOrder(int dishIdx, int orderIdx) {
+    public void addDishToOrder(int dishIdx, int orderIdx, DishManager dishManager) {
         ArrayList<Dish> dishes = dishManager.getDishes();
         Dish dish = dishes.get(dishIdx);
 
@@ -157,11 +156,6 @@ public class OrderManager extends Manager {
      */
     public ArrayList<Dish> getDishesFromOrder(int orderIdx) {
         return new ArrayList<>(orders.get(orderIdx).getDishes());
-    }
-
-
-    public DishManager getDishManager() {
-        return dishManager;
     }
 
     public int getOrderCount() {
