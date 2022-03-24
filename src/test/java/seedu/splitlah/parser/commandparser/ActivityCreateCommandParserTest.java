@@ -231,5 +231,31 @@ class ActivityCreateCommandParserTest {
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
                     + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
         }
+
+        // Case 7: Missing gst
+        String inputMissingGstArgument = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30 /gst";
+        String argsMissingGstArgument = Parser.getRemainingArgument(inputMissingGstArgument);
+        try {
+            activityCreateCommandParser.getCommand(argsMissingGstArgument);
+            fail();
+        } catch (InvalidFormatException e) {
+            assertEquals(e.getMessage(), Message.ERROR_PARSER_MISSING_ARGUMENT + "/gst"
+                    + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+        }
+
+        // Case 8: Missing service charge
+        String inputMissingScArgument = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30 /sc";
+        String argsMissingScArgument = Parser.getRemainingArgument(inputMissingScArgument);
+        try {
+            activityCreateCommandParser.getCommand(argsMissingScArgument);
+            fail();
+        } catch (InvalidFormatException e) {
+            assertEquals(e.getMessage(), Message.ERROR_PARSER_MISSING_ARGUMENT + "/sc"
+                    + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+        }
     }
 }
