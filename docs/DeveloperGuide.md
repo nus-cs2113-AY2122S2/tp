@@ -89,6 +89,7 @@ The functionalities of the timetable include:
 - Prints the schedule for the week the user is at
 - Prints the schedule of the day whenever the user starts up Sherpass.
 - The timetable schedule is represented in a table form as shown below:
+
 ![](images/timetableFormat.png)
 
 Note: The task number in the timetable as shown follows the index of a task
