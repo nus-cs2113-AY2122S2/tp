@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+skinparam shadowing false
+participant ":NoArgumentParser" as NoArgumentParser
+participant ":GpaCommand" as GpaCommand
+participant ":ModuleList" as ModuleList
+participant ":Module" as Module
+
+[->NoArgumentParser : parseCommand()
+create GpaCommand
+
+activate NoArgumentParser
+NoArgumentParser -> GpaCommand
+activate GpaCommand
+return
+return
+deactivate NoArgumentParser
+
+[->GpaCommand:execute()
+
+activate GpaCommand
+GpaCommand -> ModuleList : getModule()
+
+alt moduleList not empty
+
+activate ModuleList
+
+loop for all modules in moduleList
+
+return m:Module
+ModuleList -> Module : ArrayList<Module> list
+GpaCommand -> Module : getModularCredit()
+activate Module
+GpaCommand -> Module : getModuleGrade()
+return modularCredit: int, moduleGrade: Grades
+
+end
+
+else empty moduleList
+[<- ModuleList : e: ModuleListEmptyException
+end
+
+return CommandResult(result)
+
+@enduml
