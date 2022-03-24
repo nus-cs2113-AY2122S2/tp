@@ -24,7 +24,8 @@ public class Project {
     }
 
     /**
-     * Marks a t/odo at specific index as done.
+     * Marks a todo at specific index as done.
+     *
      * @param index the target index
      */
     public void markTodoAsDone(int index) {
@@ -88,8 +89,7 @@ public class Project {
     /**
      * Displays all details of the project.
      */
-    public void print() {
-        System.out.println(Constants.SEPARATOR);
+    public void printDetails() {
         System.out.print("Project Name: " + getTitle() + "\n");
         System.out.print("Deadline: " + getDeadline() + "\n");
         int count = 1;

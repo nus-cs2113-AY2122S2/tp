@@ -2,11 +2,14 @@ help
 addproject cs2113
 addDeadline cs2113 17/03/2022
 addDeadline cs3245 24/03/2022
+todo 1 set up iP repo
+todo fork iP
 listprojects
 addproject gex1005
 listprojects
 deleteproject cs2113
 listprojects
+mark 1 1
 blah
 exit
 

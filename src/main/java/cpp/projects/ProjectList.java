@@ -73,11 +73,12 @@ public class ProjectList {
 
     /**
      * Add a todo to one project in projectList.
+     *
      * @param indexString Index of the project
      * @param todoString The todo task the user wants to add to the project
      */
-
     public void addTodoToProject(String indexString, String todoString) {
+        assert (todoString != null && todoString != "") : "Cannot add todo string to a project.";
         int index;
         try {
             index = Integer.parseInt(indexString);
@@ -88,19 +89,19 @@ public class ProjectList {
             return;
         }
 
-        Project targetProject = new Project();
+        Project targetProject;
         targetProject = projectList.get(index - 1);
-
+        assert targetProject != null : "The target project does not exist!";
         targetProject.addTodo(todoString);
 
     }
 
     /**
      * Marks a todo in a project as done.
+     *
      * @param indexStringProj Index of the project.
      * @param indexStringTodo Index of the todo.
      */
-
     public void markTodoAsDone(String indexStringProj, String indexStringTodo) throws NegativeIndexException {
         int indexProj;
         int indexTodo;
@@ -133,16 +134,14 @@ public class ProjectList {
      * @param deadline Deadline for the project
      */
     public void addDeadline(String title, String deadline) {
+        assert (title != null && title != "" && deadline != null && deadline != "") : "Cannot add deadline.";
         System.out.println(Constants.SEPARATOR);
-        boolean isAdded = false;
-        for (Project project : projectList) {
-            if (project.getTitle().equals(title)) {
-                project.setDeadline(deadline);
-                System.out.println("Deadline added to " + project.getTitle() + ": " + deadline);
-                isAdded = true;
-            }
-        }
-        if (!isAdded) {
+        int index = findProjectIndex(title);
+        if (index != Constants.PROJECT_NOT_FOUND) {
+            Project project = projectList.get(index);
+            project.setDeadline(deadline);
+            System.out.println("Deadline added to " + project.getTitle() + ": " + deadline);
+        } else {
             System.out.println("Sorry! There was no project with that name.");
         }
         System.out.println(Constants.SEPARATOR);
@@ -159,6 +158,7 @@ public class ProjectList {
     }
 
     private int findProjectIndex(String name) {
+        assert (name != null && name != "") : "Cannot findProjectIndex.";
         int count = 0;
 
         for (Project project : projectList) {
@@ -176,13 +176,14 @@ public class ProjectList {
      * @param title Name of the project
      */
     public void view(String title) {
+        assert (title != null && title != "") : "Cannot view the project";
         System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(title);
         if (index == Constants.PROJECT_NOT_FOUND) { //project not found
             System.out.println("Sorry! There was no project with that name.");
         } else {
             Project project = projectList.get(index);
-            project.print();
+            project.printDetails();
         }
         System.out.println(Constants.SEPARATOR);
     }
