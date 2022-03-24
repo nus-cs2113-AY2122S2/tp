@@ -20,4 +20,12 @@ public class Index {
     public static final int SHOW_OPTION_INDEX = 1;
     public static final int INVALID_INDEX = -1;
     public static final int ZERO_INDEX_OFFSET = 1;
+    public static final int WHITESPACE_OFFSET = 1;
+    public static final int SLASH_OFFSET = 1;
+    public static final int START_OF_STRING = 0;
+    public static final int SPLIT_TWO_PART_LIMIT = 2;
+    public static final int SPLIT_FIRST_PART_INDEX = 0;
+    public static final int SPLIT_SECOND_PART_INDEX = 1;
+    public static final int EXPECTED_EDITRECURRING_ARG_LENGTH = 2;
+
 }

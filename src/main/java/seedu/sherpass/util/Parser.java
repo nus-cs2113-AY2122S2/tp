@@ -44,21 +44,29 @@ import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ONE;
 import static seedu.sherpass.constant.Index.DEFAULT_TIMER_THREE;
 import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
 import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ZERO;
+import static seedu.sherpass.constant.Index.EXPECTED_EDITRECURRING_ARG_LENGTH;
 import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
 import static seedu.sherpass.constant.Index.INVALID_INDEX;
 import static seedu.sherpass.constant.Index.MARK_INDEX;
 import static seedu.sherpass.constant.Index.OPTIONS_INDEX;
 import static seedu.sherpass.constant.Index.SHOW_OPTION_INDEX;
+import static seedu.sherpass.constant.Index.SLASH_OFFSET;
+import static seedu.sherpass.constant.Index.SPLIT_FIRST_PART_INDEX;
+import static seedu.sherpass.constant.Index.SPLIT_SECOND_PART_INDEX;
+import static seedu.sherpass.constant.Index.SPLIT_TWO_PART_LIMIT;
+import static seedu.sherpass.constant.Index.START_OF_STRING;
 import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
 import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
 import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
+import static seedu.sherpass.constant.Index.WHITESPACE_OFFSET;
 import static seedu.sherpass.constant.Index.ZERO_INDEX_OFFSET;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
-import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
-import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_STUDY_INPUT_MESSAGE;
+import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
+import static seedu.sherpass.constant.Message.WHITESPACE;
 
 public class Parser {
 
@@ -146,7 +154,7 @@ public class Parser {
 
     public static LocalDateTime prepareTaskDate(String taskDate, String time) {
         try {
-            return LocalDateTime.parse(taskDate + " " + time, inputWithTimeFormat);
+            return LocalDateTime.parse(taskDate + WHITESPACE + time, inputWithTimeFormat);
         } catch (DateTimeParseException e) {
             return null;
         }
@@ -163,21 +171,21 @@ public class Parser {
         if (!argument.contains(parameter)) {
             return EMPTY_STRING;
         }
-        int afterParameter = argument.indexOf(parameter) + parameter.length() + 1;
-        String rightSide = argument.substring(afterParameter);
-        String[] splitArguments = rightSide.split(" ", 2);
-        return splitArguments[0];
+        int indexAfterParameter = argument.indexOf(parameter) + parameter.length() + WHITESPACE_OFFSET;
+        String stringAfterParameter = argument.substring(indexAfterParameter);
+        String[] splitArguments = stringAfterParameter.split(WHITESPACE, SPLIT_TWO_PART_LIMIT);
+        return splitArguments[SPLIT_FIRST_PART_INDEX];
     }
 
     public static String parseDescription(String fullArgument) {
         if (fullArgument.contains("/")) {
-            if (fullArgument.indexOf("/") > 0) {
-                return fullArgument.substring(0, fullArgument.indexOf('/') - 1);
+            if (fullArgument.indexOf("/") > START_OF_STRING) {
+                return fullArgument.substring(START_OF_STRING, fullArgument.indexOf('/') - SLASH_OFFSET);
             } else {
                 return EMPTY_STRING;
             }
         }
-        return fullArgument;
+        return fullArgument.trim();
     }
 
     public static String removeRecurringDelimiter(String argument) {
@@ -185,7 +193,7 @@ public class Parser {
             return argument;
         }
         String[] splitStrings = argument.split(FREQUENCY_DELIMITER);
-        return String.join(" ", splitStrings).trim();
+        return String.join(WHITESPACE, splitStrings).trim();
     }
 
     private static Command prepareAddRecurring(String argument) {
@@ -213,14 +221,14 @@ public class Parser {
             return new HelpCommand(AddCommand.COMMAND_WORD);
         }
         String argumentWithoutRepeat = removeRecurringDelimiter(argument);
-        String[] splitIndexAndOthers = argumentWithoutRepeat.split(" ", 2);
+        String[] splitIndexAndOthers = argumentWithoutRepeat.split(WHITESPACE, SPLIT_TWO_PART_LIMIT);
 
-        if (splitIndexAndOthers.length < 2) {
+        if (splitIndexAndOthers.length < EXPECTED_EDITRECURRING_ARG_LENGTH) {
             return new HelpCommand(EditCommand.COMMAND_WORD);
         }
 
-        String indexString = splitIndexAndOthers[0];
-        String descAndDateString = splitIndexAndOthers[1];
+        String indexString = splitIndexAndOthers[SPLIT_FIRST_PART_INDEX];
+        String descAndDateString = splitIndexAndOthers[SPLIT_SECOND_PART_INDEX];
 
         EditRecurringCommand newCommand = new EditRecurringCommand();
         newCommand.setTaskDescription(parseDescription(descAndDateString));
