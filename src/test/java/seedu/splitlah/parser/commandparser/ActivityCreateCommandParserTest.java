@@ -58,7 +58,6 @@ class ActivityCreateCommandParserTest {
      */
     @Test
     public void getCommand_costListAndInvolvedListDifferentLength_InvalidFormatExceptionThrown() {
-
         ActivityCreateCommandParser activityCreateCommandParser = new ActivityCreateCommandParser();
 
         //Case 1: Involved list longer than cost list
@@ -89,29 +88,64 @@ class ActivityCreateCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidCommand object is returned when there are delimiters not provided by the user.
+     * Checks if an InvalidFormatException is thrown when missing delimiters are provided by the user
+     * and if the exception message is correct.
      */
     @Test
     public void getCommand_hasMissingDelimiter_InvalidCommand() {
+        ActivityCreateCommandParser activityCreateCommandParser = new ActivityCreateCommandParser();
+
         // Case 1: Missing /sid delimiter
-        String argsMissingSessionIdDelimiter = "activity /create /n Dinner /p Alice /i Alice Bob Charlie /co 15";
-        Command sessionWithMissingSessionIdDelimiter = Parser.getCommand(argsMissingSessionIdDelimiter);
-        assertEquals(InvalidCommand.class, sessionWithMissingSessionIdDelimiter.getClass());
+        String inputMissingSessionIdDelimiter = "activity /create /n Dinner /p Alice /i Alice Bob Charlie /co 15";
+        String argsMissingSessionIdDelimiter = Parser.getRemainingArgument(inputMissingSessionIdDelimiter);
+        try {
+            activityCreateCommandParser.getCommand(argsMissingSessionIdDelimiter);
+            fail();
+        } catch (InvalidFormatException e) {
+            assertEquals(e.getMessage(), Message.ERROR_PARSER_DELIMITER_NOT_FOUND + "/sid"
+                    + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+        }
 
         // Case 2: Missing /n delimiter
-        String argsMissingNameDelimiter = "activity /create /sid 1 /p Alice /i Alice Bob Charlie /co 15";
-        Command sessionWithMissingNameDelimiter = Parser.getCommand(argsMissingNameDelimiter);
-        assertEquals(InvalidCommand.class, sessionWithMissingNameDelimiter.getClass());
+        String inputMissingNameDelimiter = "activity /create /sid 1 /p Alice /i Alice Bob Charlie /co 15";
+        String argsMissingNameDelimiter = Parser.getRemainingArgument(inputMissingNameDelimiter);
+        try {
+            activityCreateCommandParser.getCommand(argsMissingNameDelimiter);
+            fail();
+        } catch (InvalidFormatException e) {
+            assertEquals(e.getMessage(), Message.ERROR_PARSER_DELIMITER_NOT_FOUND + "/n"
+                    + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+        }
 
         // Case 3: Missing /p delimiter
-        String argsMissingPayerDelimiter = "activity /create /sid 1 /n Dinner /i Alice Bob Charlie /co 15";
-        Command sessionWithMissingPayerDelimiter = Parser.getCommand(argsMissingPayerDelimiter);
-        assertEquals(InvalidCommand.class, sessionWithMissingPayerDelimiter.getClass());
+        String inputMissingPayerDelimiter = "activity /create /sid 1 /n Dinner /i Alice Bob Charlie /co 15";
+        String argsMissingPayerDelimiter = Parser.getRemainingArgument(inputMissingPayerDelimiter);
+        try {
+            activityCreateCommandParser.getCommand(argsMissingPayerDelimiter);
+            fail();
+        } catch (InvalidFormatException e) {
+            assertEquals(e.getMessage(), Message.ERROR_PARSER_DELIMITER_NOT_FOUND + "/p"
+                    + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+        }
 
         // Case 4: Missing /i delimiter
-        String argsMissingInvolvedListDelimiter = "activity /create /sid 1 /n Dinner /p Alice /co 15";
-        Command activityWithMissingInvolvedListDelimiter = Parser.getCommand(argsMissingInvolvedListDelimiter);
-        assertEquals(InvalidCommand.class, activityWithMissingInvolvedListDelimiter.getClass());
+        String inputMissingInvolvedListDelimiter = "activity /create /sid 1 /n Dinner /p Alice /co 15";
+        String argsMissingInvolvedListDelimiter = Parser.getRemainingArgument(inputMissingInvolvedListDelimiter);
+        try {
+            activityCreateCommandParser.getCommand(argsMissingInvolvedListDelimiter);
+            fail();
+        } catch (InvalidFormatException e) {
+            assertEquals(e.getMessage(), Message.ERROR_PARSER_DELIMITER_NOT_FOUND + "/i"
+                    + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+        }
     }
 
     /**
