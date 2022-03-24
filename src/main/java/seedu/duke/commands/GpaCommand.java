@@ -3,7 +3,7 @@ package seedu.duke.commands;
 import java.util.Objects;
 
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.ModuleListEmptyException;
+import seedu.duke.exceptions.GPANotComputableException;
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.util.Configuration;
@@ -18,7 +18,7 @@ public class GpaCommand extends Command {
 
     public void calculateGpa(ModuleList moduleList) throws ModHappyException {
         if (Objects.isNull(moduleList.getModuleList())) {
-            throw new ModuleListEmptyException();
+            throw new GPANotComputableException();
         }
         int totalMc = 0;
         double weightedSum = 0.0;

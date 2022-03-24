@@ -194,8 +194,8 @@ public class StringConstants {
     public static final String ERROR_NO_SUCH_TAG = "Sorry, no such tag exists ._.";
     public static final String ERROR_UNKNOWN_CONFIGURATION_GROUP = "Sorry, no config named \"%s\" exists.\n"
             + "View all available config settings with \"option\".";
-    public static final String ERROR_MODULE_LIST_EMPTY = "Sorry, your module list is currently empty ._.\n"
-            + "Please add some modules!";
+    public static final String ERROR_MODULE_LIST_EMPTY = "Sorry, you have 0 MCs counted towards your GPA ._.\n"
+            + "Please add some modules or grades!";
 
 
     /**

@@ -1,52 +1,61 @@
 # Developer Guide
 
+Mod Happy is a command-line-based application that helps students manage their academics. This developer guide serves to detail
+
 ## Acknowledgements
 
 - Some foundational source code was adapted from [addressbook-level2](https://github.com/se-edu/addressbook-level2).
 - Google's [GSON library](https://github.com/google/gson) was used to facilitate serialisation and deserialisation of data stored in the data file.
 
 ## Design
-### Architecture
-Given below is a quick overview of the main components of Mod Happy and how they interact with one another.  
+
+The following architecture diagram provides a high level overview of the main components of Mod Happy and how they interact with one another.
+
 ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Components.puml)
-#### Main components of the architecture
 
-`Main`  is responsible for,
-* Att app launch: sets up the components in the correct order and connects them, and calls storage to load data.
-* Running time: connects UI and ModHappy Parser to get corresponding Command and execute; handles exceptions.
-* At shut down: invokes ExitCommand and execute pre-ending methods.
-  Commons represents a collection of classes used by multiple other components.
+The `Main` class is responsible for handling program initialisation, termination, as well as the application's main execution logic.
 
-#### The rest of the App consists of five components.
+Mod Happy's components are summarised below:
 
-* `UI`: The UI of the App.
-* `Parser`: The interpretor that takes user input and returns corresponding commands.
-* `Command`: Command executor that supports various orders from users.
-* `Data`: Various data types for managing users' modules and tasks.
-* `Storage`: Reads data from, and writes data to, the hard disk.
+* `UI`: Manages the application's text UI.
+* `Parser`: Interprets user input and returns corresponding `Command` objects.
+* `Command`: Handles command execution logic.
+* `Data`: Manages module and task data in program memory.
+* `Storage`: Reads data from, and writes data to Mod Happy's data storage files.
 
 ### UI Component
-**API**: [TextUi.java](https://github.com/AY2122S2-CS2113T-T10-3/tp/tree/master/src/main/java/seedu/duke/ui/TextUi.java) <br>
 
-The `TextUi` component exists as part of the `Main` class and is made up of the built-in `Java.util.Scanner` class.
-It does not interact with any other classes or components and serves strictly as the gateway for the
-user to interact with the application.
-<br>
-The `TextUi` component:
-- Listens and grabs the user's input from the standard input using an `Java.util.Scanner` object.
-- Displays any command results and error messages on the standard output using the built-in `Java.io.PrintStream` object `Java.System.out`.
+The `TextUi` class serves strictly as intermediary between the user and the program, and does not directly interact with any components other than the `Main` class. It fulfils the following roles:
+
+- Listens for and grabs the user's input using a `Scanner`, and returns it to `Main` as a string for further processing.
+- Displays any command results or status and error messages to the user.
 
 ### Parser Component
+
 ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Parser.puml)
-How the parsing works:
-1. All XYZParser(XYZ is a placeholder e.g.  AddParser) and ModHappyParser interited from Parser class, which defines parseString() method that can parse based on well defined command Regular expression(Regex) and command groups. XYZParser parses user input in multiple-layer manner to suport complex and extendable commands.
-2. When called upon to parse a user command input, the ModHappyParser class, which serves as a general singleton parser of Mod Happy,  creates an XYZParser
-3. XYZParser further parses the user input and will return corresponding Command objects.
+
+The `Parser` component serves to interpret user input and construct the relevant `Command` objects to be returned to `Main` for execution later on. This component comprises the following classes:
+
+* `Parser`, which is an abstract class serving as the parent of all other classes in this component. This class implements basic parsing functionality through the use of regular expressions and the built-in `Pattern` class. This functionality is modified by its child classes to suit their own purposes.
+* `ModHappyParser`, which identifies the command word present in the user input and invokes the relevant command-specific parser.
+* A variety of command-specific parsers (e.g. `AddParser` for the `add` command), referred to in this guide as `XYZParser` for simplicity. These classes perform further parsing on any command-specific arguments, constructing and returning the corresponding `XYZCommand` object.
+
+> 📔 <span style="color:#00bb00">**NOTE:**</span>
+> 
+> `NoArgumentParser` is an exception to the above; instead of being associated with a single command type, it is responsible for handling all commands which do not accept any arguments.
+
+The following details how the `Parser` component works at runtime:
+
+1. A single `ModHappyParser` instance is initialised by `Main` during at the start of the program.
+2. Each time the user inputs a command, `ModHappyParser`'s `parseCommand()` method with the input as the parameter.
+3. `ModHappyParser` identifies the relevant command-specific parser `XYZParser` and passes on the remaining unparsed arguments to its `parseCommand()` method.
+4. `XYZParser` parses the remaining command arguments and uses them to construct an `XYZCommand` instance, which is subsequently returned to `Main`.
+
 ### Data Component
 
-The data component is responsible for the storage and manipulation of tasks and modules, as well as their associated attributes.
+The `Data` component is responsible for the storage and manipulation of tasks and modules as well as their associated attributes in program memory.
 
-The following partial class diagram illustrates the general organisation of this component.
+The following partial class diagram illustrates the structure of this component.
 
 ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Data.puml)
 
@@ -54,7 +63,7 @@ The `ModuleList` class serves as the main data storage class for the program, an
 * A `Module` object representing the General Tasks list. This `Module` is instantiated upon `ModuleList`'s creation and is meant to be the "default" module for all uncategorised or miscellaneous tasks.
 * An `ArrayList` containing all user-created modules.
 
-The `Module` class serves as a wrapper around a `TaskList`, providing additional attributes including the module code and module description. Within the context of Mod Happy, modules can be viewed as task categories with names, descriptions and other attributes. For this reason, the General Tasks list is implemented as a `Module` under the hood.
+The `Module` class serves as a wrapper around a `TaskList`, providing additional attributes including the module code and module description. Within the context of Mod Happy, modules can be viewed as task categories with names, descriptions and other attributes; for this reason, the General Tasks list is implemented as a `Module` under the hood.
 
 > 📔 <span style="color:#00bb00">**NOTE:**</span>
 >
@@ -68,33 +77,29 @@ list is simply represented as a `TaskList` instead of a full-fledged `Module`.
 
 ### Command Component
 
-The command Component is charge of executing the user-intended operation after receiving information from Parser on the user's input.  
+The `Command` component is in charge of actually executing the operations requested by the user.
 
-All commands inherit the abstract `Command` class, with an `execute` method that returns the result of command execution as a string. 
+The following partial class diagram illustrates the structure of this component:
 
-Commands can be classified into two broad categories:
-- Commands that accepts user arguments (e.g. `DeleteCommand`)
-- Commands that do not accept arguments (e.g. `ExitCommand`)
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/CommandClassDiagram.puml)
 
-Each command has their respective `Parser` classes that call the matching command constructors. (e.g. `ListCommand` has `ListParser`)
+All commands inherit the abstract `Command` class and must contain an `execute()` method. The program logic that must be executed to fulfil the requested command is implemented in this method. Additionally, `execute()` returns any command output to be displayed to the user as feedback.
 
-Here is a simplified class diagram illustrating two example commands:  
-![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/CommandClassDiagram.puml)
-
-How the command executes:  
-The type of action that a command executes is dependent on which constructor is called and values passed to it by the respective parser.
+`Command` instances are generated by their corresponding `Parser` classes (e.g. `AddCommand` is constructed by `AddParser`) and executed by `Main`.
 
 ### Storage Component
-**API**: [Storage.java](https://github.com/AY2122S2-CS2113T-T10-3/tp/tree/master/src/main/java/seedu/duke/storage/Storage.java) <br>
 
-The storage interface is implemented by JsonStorage in Mod Happy, which reads and loads data in json format.  
-Here is a class diagram on `Storage`:
+The `Storage` component is responsible for the saving and loading of program data from and to its data files. The following class diagram illustrates the structure of this component:
 
 ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Storage.puml)
 
-How data is saved and loaded:  
-ListStorage saves an ArrayList of any class that extends Object in json format, and loads them back into corresponding objects. (e.g. ModuleListStorage, TaskListStorage inherit from ListStorage).  
-There is navigability to Storage from Main and SaveCommand, which handles the load and write data to/from disk respectively.
+Several type-specific classes exist, each overseeing the storage of a different type of user data: 
+
+* `ConfigurationStorage` handles the saving and loading of user preferences. This data is stored in the `data/configuration.json` file.
+* `TaskListStorage` handles the saving and loading of the General Tasks list as an `ArrayList<Task>` instance. This data is stored in the `data/tasks.json` file.
+* `ModuleListStorage` handles the saving and loading of all user-created modules as well as the tasks associated with them as an `ArrayList<Module>` instance. This data is stored in the `data/modules.json` file.
+
+All write operations rely on the general purpose `writeData()` method of the abstract class `JsonStorage`. However, read operations are implemented in each type-specific class; the `readData()` methods of these classes reconstruct the original object from the serialised data and return them.
 
 ## Implementation
 
@@ -104,17 +109,19 @@ This section describes some details on how some features are implemented.
 
 ### Tag Feature
 
-The tag command accepts a string from the user and adds it into `ArrayList<String> tags` of a `Task`.  
-
+The tag command accepts a string from the user and adds it into the `tags` attribute (an `ArrayList<String>`) of the specified `Task`.
 
 Here is an example on adding a tag to a general task:  
 
 1. User inputs `tag add 2 "testTag"`. 
-2. `TagParser` will initialise `TagCommand` with add as `tagOperation` 2 as `taskIndex` and testTag as `tagDescription`, while `taskModule` is null.
-3. `TagCommand` then gets the relevant `Module`. If `taskModule` is null, `getGeneralTasks()` is called. Else, `getModule(taskModule)` is called instead.
-4. Next, `TagCommand` checks the `tagOperation`. If add, `addTag(targetModule)` is called. Else if del, `removeTag(targetModule)` is called. Else, it throws `ParseException`.
+2. `ModHappyParser` identifies the command word as `tag` and passes `add 2 "testTag"` to `TagParser`.
+3. `TagParser` instantiates a `TagCommand` with `tagOperation = "add"`, `taskIndex = 2`, `tagDescription = "testTag"` and `taskModule = null`. This is returned to `Main`.
+4. `Main` calls the `execute()` method of the `TagCommand` instance.
+5. `TagCommand` first gets the relevant `Module`. Since `taskModule` is null, `getGeneralTasks()` is called and the General Tasks `Module` is retrieved.
+6. Next, `TagCommand` checks the `tagOperation`. As its value is `add`, `addTag(targetModule)` is called.
+7. Finally, command feedback is returned to `Main`, indicating that the operation was successful.
 
-Below is the sequence diagram of how the tag feature works:
+The following sequence diagram illustrates the above process:
 
 ![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/Tag.puml)
 ![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/GetModule.puml)
@@ -122,19 +129,20 @@ Below is the sequence diagram of how the tag feature works:
 
 ### GPA Feature
 
-The gpa command takes in a single command word `gpa` and no other arguments from the user (unlike the tag command above), and returns user's GPA in 2 decimal places.
+The `gpa` command takes in a single command word `gpa` and no other arguments from the user, returning the user's GPA to 2 decimal places.
 
 Here is an example on how to calculate GPA:
 
 1. User inputs `gpa`.
-2. `NoArgumentParser` will take in command word `gpa`, enter a switch block and return `GpaCommand()`.
-3. `GpaCommand()` will execute `calculateGpa()` which has a parameter of type `ModuleList`.
-4. If `moduleList` is null, throw `ModuleListEmptyException()`.  
-5. Else, proceed with a loop. For all modules in `moduleList`, get the respective `mc`, `modularGrade` and `modularGradePoint`.
-6. After calculations, `result` is being returned by `calculateGpa()` as a String.
+2. `ModHappyParser` identifies the command word as `gpa`. Since `gpa` takes no arguments, `gpa` is passed to `NoArgumentParser`.
+3. `NoArgumentParser` returns an instance of `GpaCommand` to `Main`.
+4. `Main` calls the `execute()` method of the `GpaCommand` instance.
+5. `execute()` invokes `calculateGpa()`, which performs the actual GPA computation.
+6. After calculating the GPA, a command feedback string is generated and returned as a string.
 
 Below is the sequence diagram of how the GPA feature works:
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Yzkkk/tp/branch-PR-DeveloperGuide/docs/GPASeqDiagram/GPA.puml)
+
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/GPASeqDiagram/GPA.puml)
 
 
 ## Product scope
