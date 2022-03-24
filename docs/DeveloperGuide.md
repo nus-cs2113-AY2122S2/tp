@@ -52,6 +52,9 @@ Deleting a project functions very similarly to Adding a project.
 
 **Step5.** The `Project` object will create a `Todo` object and add it to the `ArrayList<Todo>` in `Project` class.  
 
+
+### Proposed Features
+
 ![image info](./UmlDiagrams/CommandParser.png)  
 
 The proposed parse command feature makes use of CommandParser and its subclasses, and Command and its subclasses.  
@@ -69,7 +72,7 @@ Given below is an example usage scenario and how the command parser behaves at e
 
 
 
-### Proposed Features
+
 
 #### Parse Command Feature
 
