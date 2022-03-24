@@ -55,8 +55,8 @@ public class OrderController extends Controller {
         try {
             while (index >= 0) {
                 orderManager.addDishToOrder(index, createdOrderIdx, dishManager);
-                index = InputParser.getInteger("You have " +
-                        orderManager.getOrders().get(createdOrderIdx).getDishCount()
+                index = InputParser.getInteger("You have "
+                        + orderManager.getOrders().get(createdOrderIdx).getDishCount()
                         + " dish(es), some more: \n");
             }
         } catch (IndexOutOfBoundsException e) {

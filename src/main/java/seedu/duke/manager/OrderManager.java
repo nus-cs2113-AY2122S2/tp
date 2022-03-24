@@ -67,9 +67,9 @@ public class OrderManager extends Manager {
     /**
      * add dish to an order.
      *
-     * @param dishIdx
-     * @param orderIdx
-     * @param dishManager
+     * @param dishIdx index of dish.
+     * @param orderIdx index of order.
+     * @param dishManager dishmanager instance.
      */
     public void addDishToOrder(int dishIdx, int orderIdx, DishManager dishManager) {
         ArrayList<Dish> dishes = dishManager.getDishes();
