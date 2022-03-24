@@ -9,31 +9,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ListCommandTest {
 
     private MasterTimetable masterTimetable;
-    private String ANSWER_1;
-    private String ANSWER_2;
-    private String ANSWER_3;
+    private String answer_1;
+    private String answer_2;
+    private String answer_3;
     private Command addCommand;
     private Command addCommandSameUser;
     private Command addCommandDifferentUser;
 
     /**
      * Set up a Master Timetable object and multiple Add Commands to populate the timetables in the
-     * MasterTimetable with different users. 
+     * MasterTimetable with different users.
      */
     @BeforeEach
     public void setUp() {
         masterTimetable = new MasterTimetable();
 
-        ANSWER_1 = "1.[L] TITLE: CS2113\t\tDAY: Monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n" +
-                "2.[L] TITLE: CS2102\t\tDAY: Monday\t\tSTART: 1300\t\tEND: 1400\t\tMODE: online";
+        answer_1 = "1.[L] TITLE: CS2113\t\tDAY: Monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n"
+                + "2.[L] TITLE: CS2102\t\tDAY: Monday\t\tSTART: 1300\t\tEND: 1400\t\tMODE: online";
 
-        ANSWER_2 = "1.[L] TITLE: CS2113\t\tDAY: Monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
+        answer_2 = "1.[L] TITLE: CS2113\t\tDAY: Monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
 
-        ANSWER_3 = "John\n" +
-                "1.[L] TITLE: CS2113\t\tDAY: Monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n" +
-                "2.[L] TITLE: CS2102\t\tDAY: Monday\t\tSTART: 1300\t\tEND: 1400\t\tMODE: online\n" +
-                "Peter\n" +
-                "1.[L] TITLE: CS2113\t\tDAY: Monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
+        answer_3 = "John\n"
+                + "1.[L] TITLE: CS2113\t\tDAY: Monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online\n"
+                + "2.[L] TITLE: CS2102\t\tDAY: Monday\t\tSTART: 1300\t\tEND: 1400\t\tMODE: online\n"
+                + "Peter\n"
+                + "1.[L] TITLE: CS2113\t\tDAY: Monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
 
         addCommand = new AddLessonCommand(
                 "John", "CS2113", "Monday",
@@ -64,10 +64,10 @@ public class ListCommandTest {
     @Test
     public void listCommand_specificUser() {
         ListCommand listCommand1 = new ListCommand("John");
-        assertEquals(ANSWER_1, listCommand1.execute(masterTimetable));
+        assertEquals(answer_1, listCommand1.execute(masterTimetable));
 
         ListCommand listCommand2 = new ListCommand("Peter");
-        assertEquals(ANSWER_2, listCommand2.execute(masterTimetable));
+        assertEquals(answer_2, listCommand2.execute(masterTimetable));
     }
 
     /**
@@ -77,7 +77,7 @@ public class ListCommandTest {
     @Test
     public void listCommand_allUsers() {
         ListCommand listCommand3 = new ListCommand("all");
-        assertEquals(ANSWER_3, listCommand3.execute(masterTimetable));
+        assertEquals(answer_3, listCommand3.execute(masterTimetable));
     }
 
 }
