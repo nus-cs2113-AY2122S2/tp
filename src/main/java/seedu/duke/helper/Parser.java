@@ -45,6 +45,7 @@ public class Parser {
 
     public static Command parseDeletePatient(String parameters) throws HalpmiException {
         String[] deletePatientParameters = minParameterCheck(parameters,1);
+        Validator.validateNric(parameters);
         return new DeletePatientCommand(deletePatientParameters);
     }
 
@@ -68,6 +69,7 @@ public class Parser {
 
     public static Command parseDeleteDoctor(String parameters) throws HalpmiException {
         String[] deleteDoctorParameters = minParameterCheck(parameters,1);
+        Validator.validateNric(parameters);
         return new DeleteDoctorCommand(deleteDoctorParameters);
     }
 
