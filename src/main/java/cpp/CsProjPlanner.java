@@ -1,8 +1,8 @@
 package cpp;
 
 import cpp.exceptions.IllegalCommandException;
-import cpp.projects.commandhandler.CommandHandler;
-import cpp.projects.ProjectList;
+import cpp.logic.CommandHandler;
+import cpp.model.ProjectList;
 import cpp.response.Response;
 import java.util.Scanner;
 import java.util.logging.Level;

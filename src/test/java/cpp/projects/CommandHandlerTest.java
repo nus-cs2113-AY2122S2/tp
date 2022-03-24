@@ -1,11 +1,10 @@
 package cpp.projects;
 
 import cpp.exceptions.IllegalCommandException;
-import cpp.projects.commandhandler.CommandHandler;
+import cpp.model.ProjectList;
+import cpp.logic.CommandHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
