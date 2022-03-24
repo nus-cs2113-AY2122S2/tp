@@ -1,0 +1,28 @@
+@startuml
+actor user
+
+user -> ":MeetingJio" ++ : "list"
+":MeetingJio" -> ":scanner" ++: nextLine()
+":scanner" --> ":MeetingJio" --: userInput
+":MeetingJio" -> ":command" ++: executeCommand(userInput)
+create ":parser"
+":command" -> ":parser" ++: new parser(userInput)
+":parser" -> ":parser" : getCommandFromInput(userInput)
+":parser" -> ":parser" : getArgumentsFromInput(userInput)
+":parser" --> ":command" --: parser
+":command" -> ":parser" ++: parseCommand()
+create ":listCommand"
+":parser" -> ":listCommand" ++: new ListCommand()
+":listCommand" --> ":parser" --: ListCommand
+":parser" --> ":command" --: ListCommand
+":command" -> ":listCommand" ++: execute()
+":listCommand" --> ":command" --: str
+":command" -> ":System" ++: print(str)
+":System" --> ":command" --:
+":command" -> ":scanner"++ : nextLine()
+@enduml
+
+
+
+
+
