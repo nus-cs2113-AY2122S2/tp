@@ -17,6 +17,7 @@ public class UserInterface {
         Scanner input = new Scanner(System.in);
         String userInput = input.nextLine();
 
+        /*
         // setting Warehouse capacity
         boolean isSet = false;
         do {
@@ -24,6 +25,7 @@ public class UserInterface {
             isSet = warehouse.setCapacity(capacity.getGroupValues().get("cap"));
             userInput = input.nextLine();
         } while (!isSet);
+        */
 
         while (!userInput.equals("bye")) {
             // current implementation is just take 1st value for command
