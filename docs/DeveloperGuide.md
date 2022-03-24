@@ -396,6 +396,15 @@ command object has been created by [`CommandFactory`](#Command-Execution):
   * Pros: Fast to print expenses in a category, no unnecessary look-ups.
   * Cons: Poor memory management, needs to store twice as many expenditures. 
 
+### Parser Implementation
+{Placeholder}
+
+#### Implementation
+{Placeholder}
+
+#### Design Consideration
+{Placeholder}
+
 ### Data Archiving
 
 #### \[Proposed]Saving and loading feature
