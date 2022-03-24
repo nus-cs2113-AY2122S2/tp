@@ -12,55 +12,68 @@ import seedu.splitlah.ui.Message;
  */
 public class ActivityEditCommandParser implements CommandParser<ActivityEditCommand> {
 
+    private final String COMMAND_TEXT = "activity /edit";
+
+    private static final String COMMAND_FORMAT = "Syntax:\n\t";
+
+    private final String COMMAND_FORMAT_FIRST =
+            "activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
+                    + "/co <TOTAL_COST> [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
+
+    private final String COMMAND_FORMAT_SECOND =
+            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
+                    + "/cl [COST1 COST2…] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
+
     @Override
     public ActivityEditCommand getCommand(String commandArgs) throws InvalidFormatException {
-
-        int sessionId = -1;
-        int activityId = -1;
-        String activityName = null;
-        String payer = null;
-        String[] involvedList = null;
-        Double totalCost = null;
+        int sessionId;
+        int activityId;
+        String activityName;
+        String payer;
+        String[] involvedList;
+        double totalCost;
+        double[] costList;
+        double gst;
+        double serviceCharge;
         assert commandArgs != null : Message.ASSERT_ACTIVITYEDIT_COMMAND_ARGS_NULL;
 
         try {
             activityId = Parser.parseActivityId(commandArgs);
             sessionId = Parser.parseSessionId(commandArgs);
-        } catch (InvalidFormatException exception) {
-            throw exception;
-        }
-
-        try {
             activityName = Parser.parseName(commandArgs);
-        } catch (InvalidFormatException exception) {
-            // do nothing...
-        }
-
-        try {
             payer = Parser.parsePayer(commandArgs);
-        } catch (InvalidFormatException exception) {
-            // do nothing...
-        }
-
-        try {
             involvedList = Parser.parseInvolved(commandArgs);
         } catch (InvalidFormatException exception) {
-            // do nothing...
+            throw (new InvalidFormatException(exception.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST +
+                    "\n\t" + COMMAND_FORMAT_SECOND));
         }
 
         try {
             totalCost = Parser.parseTotalCost(commandArgs);
-        } catch (InvalidFormatException exception) {
-            // do nothing...
+        } catch (InvalidFormatException e) {
+            totalCost = -1;
         }
 
         try {
-            totalCost = Parser.parseTotalCost(commandArgs);
-        } catch (InvalidFormatException exception) {
-            // do nothing...
+            costList = Parser.parseCostList(commandArgs);
+        } catch (InvalidFormatException e) {
+            costList = null;
         }
 
-        return new ActivityEditCommand(sessionId, activityId, activityName, payer, involvedList, totalCost);
+        try {
+            gst = Parser.parseGst(commandArgs);
+        } catch (InvalidFormatException e) {
+            throw new InvalidFormatException(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
+                    + "\n\t" + COMMAND_FORMAT_SECOND);
+        }
 
+        try {
+            serviceCharge = Parser.parseServiceCharge(commandArgs);
+        } catch (InvalidFormatException e) {
+            throw new InvalidFormatException(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
+                    + "\n\t" + COMMAND_FORMAT_SECOND);
+        }
+
+        return new ActivityEditCommand(sessionId, activityId, activityName, payer, involvedList, totalCost, costList, gst, serviceCharge);
     }
 }
