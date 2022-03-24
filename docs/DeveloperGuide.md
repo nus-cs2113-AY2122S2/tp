@@ -20,10 +20,15 @@
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ...                               | I want to ...                                   | So that I can ...                                            |
+|---------|----------------------------------------|-------------------------------------------------|--------------------------------------------------------------|
+| v1.0    | Manager                                | Add a new item to the inventory                 | Update my inventory                                          |
+| v1.0    | Manager                                | Remove an item from the inventory               | Update my inventory                                          |
+| v1.0    | Stocktaker                             | list out all my items                           | View all my items at a glance                                |
+| v1.0    | New user                               | List out all possible commands                  | I can familiarise myself with using the system               |
+| v1.0    | User who has not seen items physically | Get the description of a particular item        | I can visualise the item better to know if it is what i need |
+| v1.0    | As a frequent/first time user          | Write to a file containing the entire inventory | Save my inventory data to a file                             |
+| v1.0    | Stocktaker                             | Read from and load an inventory file data       | To work on and view the data                                 |
 
 ## Non-Functional Requirements
 
