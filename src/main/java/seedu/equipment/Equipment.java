@@ -10,6 +10,16 @@ public class Equipment {
     private String purchasedFrom;
     private String purchasedDate;
 
+    /**
+     * Constructor for the Equipment object.
+     *
+     * @param itemName Name of the equipment in String.
+     * @param serialNumber Unique serial number of equipment in String.
+     * @param type Type of the equipment in EquipmentType enum.
+     * @param cost Cost of the equipment in double.
+     * @param purchasedFrom Where the equipment was purchased in String.
+     * @param purchasedDate When the equipment was purchased in String.
+     */
     public Equipment(String itemName, String serialNumber, EquipmentType type, double cost, String purchasedFrom,
                      String purchasedDate) {
         this.itemName = itemName;

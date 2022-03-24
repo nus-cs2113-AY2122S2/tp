@@ -22,6 +22,11 @@ public class Storage {
     public static final String path = "./equipments.json";
     private final Gson gson = new Gson();
 
+    /**
+     * Loads data from ./equipments.json
+     *
+     * @param equipmentManager EquipmentManager object to put all the Equipments in ./equipments.json.
+     */
     public void loadData(EquipmentManager equipmentManager) {
         try {
             Reader reader = Files.newBufferedReader(Path.of(path));
@@ -36,6 +41,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the Equipments in equipmentManager into a json file.
+     *
+     * @param equipmentManager EquipmentManager object with Equipments that will be saved to the json file.
+     */
     public void saveData(EquipmentManager equipmentManager) {
         List<Equipment> equipments = new ArrayList<>(equipmentManager.getEquipmentList().values());
         try {
