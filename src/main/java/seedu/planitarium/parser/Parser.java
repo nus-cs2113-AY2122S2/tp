@@ -29,6 +29,8 @@ public class Parser {
     public static final String DELIMITER_CATEGORY_INDEX = "/c";
     public static final String DELIMITER_GROUP_INDEX = "/g";
     public static final String EMPTY_STRING = "";
+    public static final String RECURRING_STATUS_FALSE = "F";
+    public static final String RECURRING_STATUS_TRUE = "T";
 
     public static final int INDEX_KEYWORD = 0;
     public static final int INDEX_LEFT_NOT_EXIST = 0;
@@ -48,6 +50,9 @@ public class Parser {
     private static final String ASSERT_USER_INDEX_NOT_NULL = "User index should not be null";
     private static final String ASSERT_EXPENDITURE_INDEX_NOT_NULL = "Expenditure index should not be null";
     private static final String ASSERT_INCOME_INDEX_NOT_NULL = "Income index should not be null";
+    private static final String ASSERT_STATUS_NOT_NULL = "Recurring status should not be null";
+    private static final String ASSERT_CATEGORY_NOT_NULL = "Category should not be null";
+    private static final String ASSERT_GROUP_NOT_NULL = "Grouping should not be null";
 
     private static final String LOG_PARSED_VALUES = "User input '%s' parsed out as '%s'";
     private static final String LOG_VALID_MONEY = "Converted the string '%s' into '%.2f'";
@@ -357,6 +362,21 @@ public class Parser {
             logger.getLogger().log(Level.WARNING, String.format(LOG_INVALID_INDEX, incomeIndex));
             throw new InvalidIndexException(incomeIndex);
         }
+    }
+
+    /**
+     * Returns a valid recurrence status for expenses.
+     *
+     * @param statusText The recurring expense status.
+     * @return Recurring status 'T' or 'F'
+     */
+    public static String getValidRecurringStatus(String statusText) {
+        assert (statusText != null) : ASSERT_STATUS_NOT_NULL;
+        String status = RECURRING_STATUS_FALSE;
+        if (statusText.equalsIgnoreCase(RECURRING_STATUS_TRUE)) {
+            status = RECURRING_STATUS_TRUE;
+        }
+        return status;
     }
 
     /**
