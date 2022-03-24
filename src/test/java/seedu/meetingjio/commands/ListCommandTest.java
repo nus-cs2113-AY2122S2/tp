@@ -6,6 +6,10 @@ import seedu.meetingjio.timetables.MasterTimetable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import static seedu.meetingjio.common.ErrorMessages.ERROR_EMPTY_MASTER_TIMETABLE;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
+
 public class ListCommandTest {
 
     private MasterTimetable masterTimetable;
@@ -17,8 +21,8 @@ public class ListCommandTest {
     private Command addCommandDifferentUser;
 
     /**
-     * Set up a Master Timetable object and multiple Add Commands to populate the timetables in the
-     * MasterTimetable with different users.
+     * Set up a Master Timetable object and multiple Add Commands
+     * Prepare the expected output when list command is used after each Add Command
      */
     @BeforeEach
     public void setUp() {
@@ -50,12 +54,37 @@ public class ListCommandTest {
                 1200, 1300, "online"
         );
 
-        addCommand.execute(masterTimetable);
-        addCommandSameUser.execute(masterTimetable);
-        addCommandDifferentUser.execute(masterTimetable);
-
     }
 
+    /**
+     * Test method to ensure that the programme continues running as expected when the user inputs
+     * list all when the Master Timetable is empty.
+     */
+    @Test
+    public void listCommand_emptyMasterTimetable() {
+        ListCommand listCommand = new ListCommand("all");
+        assertEquals(ERROR_EMPTY_MASTER_TIMETABLE, listCommand.execute(masterTimetable));
+    }
+
+    /**
+     * Test method to ensure that the programme continues running as expected when the user inputs
+     * list without any input.
+     */
+    @Test
+    public void listCommand_noValue() {
+        ListCommand listCommand = new ListCommand("");
+        assertEquals(ERROR_UNSPECIFIED_LIST, listCommand.execute(masterTimetable));
+    }
+
+    /**
+     * Test method to ensure that the programme continues running as expected when the user wishes
+     * to list the timetable of a user that does not exist.
+     */
+    @Test
+    public void listCommand_noUser() {
+        ListCommand listCommand = new ListCommand("John");
+        assertEquals(ERROR_INVALID_USER, listCommand.execute(masterTimetable));
+    }
 
     /**
      * Test method to ensure that the program only lists the timetable of a specific user
@@ -63,6 +92,10 @@ public class ListCommandTest {
      */
     @Test
     public void listCommand_specificUser() {
+        addCommand.execute(masterTimetable);
+        addCommandSameUser.execute(masterTimetable);
+        addCommandDifferentUser.execute(masterTimetable);
+
         ListCommand listCommand1 = new ListCommand("John");
         assertEquals(answerJohn, listCommand1.execute(masterTimetable));
 
@@ -76,8 +109,12 @@ public class ListCommandTest {
      */
     @Test
     public void listCommand_allUsers() {
-        ListCommand listCommand3 = new ListCommand("all");
-        assertEquals(answerAll, listCommand3.execute(masterTimetable));
+        addCommand.execute(masterTimetable);
+        addCommandSameUser.execute(masterTimetable);
+        addCommandDifferentUser.execute(masterTimetable);
+
+        ListCommand listCommand = new ListCommand("all");
+        assertEquals(answerAll, listCommand.execute(masterTimetable));
     }
 
 }

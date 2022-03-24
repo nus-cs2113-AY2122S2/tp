@@ -11,9 +11,9 @@ public class MasterTimetable {
         this.timetables = new ArrayList<>();
     }
 
-    public Timetable getByName(String name) throws TimetableNotFoundException {
+    public static Timetable getByName(String name) throws TimetableNotFoundException {
         for (Timetable timetable : timetables) {
-            if (name.equals(timetable.getName())) {
+            if (name.equalsIgnoreCase(timetable.getName())) {
                 return timetable;
             }
         }
@@ -22,7 +22,7 @@ public class MasterTimetable {
 
     public void removeByName(String name) throws TimetableNotFoundException {
         for (Timetable timetable : timetables) {
-            if (name.equals(timetable.getName())) {
+            if (name.equalsIgnoreCase(timetable.getName())) {
                 timetables.remove(timetable);
             }
         }
@@ -39,15 +39,6 @@ public class MasterTimetable {
 
     public void add(Timetable timetable) {
         timetables.add(timetable);
-    }
-
-    public static void checkUserExist(String user) throws TimetableNotFoundException {
-        for (Timetable timetable : timetables) {
-            if (user.equals(timetable.getName())) {
-                return;
-            }
-        }
-        throw new TimetableNotFoundException();
     }
 
 }

@@ -1,9 +1,14 @@
 package seedu.meetingjio.commands;
 
+import seedu.meetingjio.exceptions.MissingValueException;
+import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
 
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EMPTY_LIST;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_EMPTY_MASTER_TIMETABLE;
 import static seedu.meetingjio.timetables.MasterTimetable.timetables;
 
 public class ListCommand extends Command {
@@ -26,10 +31,18 @@ public class ListCommand extends Command {
     @Override
     public String execute(MasterTimetable masterTimetable) {
         String user = this.name;
-        if (user.equals("all")) {
-            return listAll();
+        try {
+            if (user.length() == 0) {
+                throw new MissingValueException();
+            } else if (user.equalsIgnoreCase("all")) {
+                return listAll();
+            } else {
+                return listUser(user);
+            }
+        } catch (MissingValueException mve) {
+            return ERROR_UNSPECIFIED_LIST;
         }
-        return listUser(user);
+
     }
 
     private String listAll() {
@@ -41,15 +54,19 @@ public class ListCommand extends Command {
             str += listUser(user);
             str += '\n';
         }
+        if (str.length() == 0) {
+            return ERROR_EMPTY_MASTER_TIMETABLE;
+        }
+        assert str.length() - 1 >= 0 : ERROR_EMPTY_MASTER_TIMETABLE;
         return str.substring(0, str.length() - 1); //remove last newline character
     }
 
     private String listUser(String user) {
-        Timetable timetable = null;
-        for (Timetable t : timetables) {
-            if (user.equals(t.getName())) {
-                timetable = t;
-            }
+        Timetable timetable;
+        try {
+            timetable = MasterTimetable.getByName(user);
+        } catch (TimetableNotFoundException tnfe) {
+            return ERROR_INVALID_USER;
         }
         if (timetable.size() == 0) {
             return ERROR_EMPTY_LIST;

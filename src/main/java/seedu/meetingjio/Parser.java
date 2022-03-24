@@ -53,7 +53,7 @@ public class Parser {
         case AddLessonCommand.COMMAND_WORD:
             return prepareAdd();
         case ListCommand.COMMAND_WORD:
-            return prepareList();
+            return new ListCommand(arguments.trim());
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete();
         case ClearCommand.COMMAND_WORD:
@@ -63,24 +63,6 @@ public class Parser {
         default:
             String feedback = ERROR_INVALID_COMMAND + '\n' + MESSAGE_HELP;
             return new CommandResult(feedback);
-        }
-    }
-
-    public Command prepareList() {
-        try {
-            String user = arguments.trim();
-            if (user.length() == 0) {
-                throw new MissingValueException();
-            }
-            if (user.equals("all")) {
-                return new ListCommand("all");
-            }
-            MasterTimetable.checkUserExist(user);
-            return new ListCommand(user);
-        } catch (TimetableNotFoundException tnfe) {
-            return new CommandResult(ERROR_INVALID_USER);
-        } catch (MissingValueException mve) {
-            return new CommandResult(ERROR_UNSPECIFIED_LIST);
         }
     }
 
