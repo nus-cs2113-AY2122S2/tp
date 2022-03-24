@@ -14,7 +14,10 @@ public class CheckRoomCommand extends Command {
      * @param commandStringWithoutCommand contains the information of room number.
      */
     public CheckRoomCommand(String commandStringWithoutCommand) {
-        roomId = Integer.parseInt(commandStringWithoutCommand.trim());
+        String command = commandStringWithoutCommand.trim();
+        System.out.println("command " + command.isEmpty());
+        assert (!command.isEmpty()) : "Assertion Failed! There is no room number within the Commmand.";
+        roomId = Integer.parseInt(command);
     }
 
     @Override
