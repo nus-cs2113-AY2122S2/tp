@@ -703,7 +703,6 @@ class ParserTest {
         assertEquals("F", Parser.getValidRecurringStatus(randomStatus));
     }
 
-
     @Test
     void getValidCategoryIndex_validUserIndex_success() throws InvalidIndexException {
         String input = "1";
@@ -753,6 +752,60 @@ class ParserTest {
             fail();
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `7`", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    void getValidGroupIndex_validUserIndex_success() throws InvalidIndexException {
+        String input = "1";
+        int output = Parser.getValidGroupIndex(input);
+        assertEquals(1, output);
+    }
+
+    @Test
+    void getValidGroupIndex_nullInput_assertThrown() {
+        try {
+            Parser.getValidGroupIndex(null);
+            fail();
+        } catch (AssertionError e) {
+            assertEquals("Group index should not be null", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    void getValidGroupIndex_notNumber_exceptionThrown() {
+        try {
+            String input = "myGen";
+            Parser.getValidGroupIndex(input);
+            fail();
+        } catch (InvalidIndexException e) {
+            assertEquals("Invalid index: `myGen`", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    void getValidGroupIndex_indexOutOfRange_exceptionThrown() {
+        try {
+            String tooLow = "0";
+            Parser.getValidGroupIndex(tooLow);
+            fail();
+        } catch (InvalidIndexException e) {
+            assertEquals("Invalid index: `0`", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+        try {
+            String tooLow = "4";
+            Parser.getValidGroupIndex(tooLow);
+            fail();
+        } catch (InvalidIndexException e) {
+            assertEquals("Invalid index: `4`", e.getMessage());
         } catch (Exception e) {
             fail();
         }

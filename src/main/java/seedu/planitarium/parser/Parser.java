@@ -405,6 +405,27 @@ public class Parser {
     }
 
     /**
+     * Returns a valid group index that is within group quantity bounds.
+     *
+     * @param groupIndex A logical group's lookup index.
+     * @return A valid group index.
+     * @throws InvalidIndexException if index is not a valid integer or out of bounds.
+     */
+    public static int getValidGroupIndex(String groupIndex) throws InvalidIndexException {
+        assert (groupIndex != null) : ASSERT_GROUP_NOT_NULL;
+        try {
+            int checkIndex = Integer.parseInt(groupIndex);
+            checkTooHighIndex(checkIndex, MAX_GROUP_INDEX);
+            checkTooLowIndex(checkIndex, MIN_GROUP_INDEX);
+            logger.getLogger().log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
+            return checkIndex;
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            logger.getLogger().log(Level.WARNING, String.format(LOG_INVALID_INDEX, groupIndex));
+            throw new InvalidIndexException(groupIndex);
+        }
+    }
+
+    /**
      * Returns without exception if an index is not lower than minimum accepted index value.
      *
      * @param checkIndex The index to be checked for invalid boundary.
