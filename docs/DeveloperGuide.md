@@ -390,14 +390,14 @@ the local file `PlanITarium.txt` exists by calling `Storage#checkFileExists()` a
 in the local file will be read, parsed and added to the empty `PersonList` in `Storage` by calling `PersonList` adding 
 operations. The data in the `PersonList` will then be returned to `PersonList` for each `Family` grouping
 in the current session. The following sequence diagram shows how the loading operation works:
-<image src="images/StorageLoadSequence"/>
+<image src="images/StorageLoadSequence.png"/>
 
 
 Step 3. The user then decides to exit the program by executing the command `bye`, `Storage#saveData` will be called.
 All data in the `Family` object will be written to the local file `PlanITarium.txt` in the format of
 `<group type> <user/operation> <Category> <Details>` which are to be read again when the program starts up. 
 The following Sequence diagram shows how the saving operation will work:
-image src="images/StorageSaveSequence"/>
+<image src="images/StorageSaveSequence.png"/>
 
 #### Design considerations:
 
