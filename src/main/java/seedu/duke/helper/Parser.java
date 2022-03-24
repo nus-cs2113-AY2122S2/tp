@@ -22,23 +22,66 @@ public class Parser {
             throw new HalpmiException("There is one or more parameters missing");
         }
     }
+    private static boolean isNull(String string) {
+        return string == null;
+    }
 
-    public static String[] parseAddPatient(String parameters) throws HalpmiException {
+    public static Command parseAddPatient(String parameters) throws HalpmiException {
         String[] addPatientParameters = minParameterCheck(parameters, 7);
         Validator.validateAddPatient(addPatientParameters);
-        return addPatientParameters;
+        return new AddPatientCommand(addPatientParameters);
     }
 
-    public static String[] parseAddDoctor(String parameters) throws HalpmiException {
+    public static Command parseDeletePatient(String parameters) throws HalpmiException {
+        String[] deletePatientParameters = minParameterCheck(parameters,1);
+        return new DeletePatientCommand(deletePatientParameters);
+    }
+
+    public static Command parseViewPatient(String parameters) throws HalpmiException {
+        if (isNull(parameters)) {
+            return new ViewPatientCommand(null);
+        }
+        String[] viewPatientParameters = minParameterCheck(parameters,1);
+        return new ViewPatientCommand(viewPatientParameters);
+    }
+
+    public static Command parseAddDoctor(String parameters) throws HalpmiException {
         String[] addDoctorParameters = minParameterCheck(parameters, 7);
         Validator.validateAddDoctor(addDoctorParameters);
-        return  addDoctorParameters;
+        return  new AddDoctorCommand(addDoctorParameters);
     }
 
-    public static String[] parseAddMedicine(String parameters) throws HalpmiException {
+    public static Command parseDeleteDoctor(String parameters) throws HalpmiException {
+        String[] deleteDoctorParameters = minParameterCheck(parameters,1);
+        return new DeleteDoctorCommand(deleteDoctorParameters);
+    }
+
+    public static Command parseViewDoctor(String parameters) throws HalpmiException {
+        if (isNull(parameters)) {
+            return new ViewDoctorCommand(null);
+        }
+        String[] viewDoctorParameters = minParameterCheck(parameters,1);
+        return new ViewDoctorCommand(viewDoctorParameters);
+    }
+
+
+    public static Command parseAddMedicine(String parameters) throws HalpmiException {
         String[] medicineParameters = minParameterCheck(parameters, 6);
         Validator.validateMedicine(medicineParameters);
-        return medicineParameters;
+        return new AddMedicineCommand(medicineParameters);
+    }
+
+    public static Command parseDeleteMedicine(String parameters) throws HalpmiException {
+        String[] deleteMedicineParameters = minParameterCheck(parameters,1);
+        return new DeletePatientCommand(deleteMedicineParameters);
+    }
+
+    public static Command parseViewMedicine(String parameters) throws HalpmiException {
+        if (isNull(parameters)) {
+            return new ViewMedicineCommand(null);
+        }
+        String[] viewMedicineParameters = minParameterCheck(parameters,1);
+        return new ViewMedicineCommand(viewMedicineParameters);
     }
 
     public static String[] parseAddAppointment(String parameters) throws HalpmiException {
