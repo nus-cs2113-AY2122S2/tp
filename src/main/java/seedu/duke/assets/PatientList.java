@@ -1,10 +1,12 @@
 package seedu.duke.assets;
 
+import seedu.duke.exception.DuplicateEntryException;
+import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
 
 import java.util.ArrayList;
 
-public class PatientList {
+public class PatientList extends List {
 
     private ArrayList<Patient> patients = new ArrayList<>();
 
@@ -17,7 +19,7 @@ public class PatientList {
         return null;
     }
 
-    public void viewPatient(String nric) {
+    public void view(String nric) {
         Patient patient = getPatient(nric);
         if (patient == null) {
             UI.printParagraph("There is no such patient");
@@ -26,11 +28,19 @@ public class PatientList {
         UI.printParagraph(getPatient(nric).toString());
     }
 
-    public void viewPatient() {
+    public void view() {
         UI.printParagraph(toString());
     }
 
-    public void add(String[] addPatientParameters) {
+    @Override
+    public void edit(String[] parameters) throws NotFoundException {
+
+    }
+
+    public void add(String[] addPatientParameters) throws DuplicateEntryException {
+        if (getPatient(addPatientParameters[0]) != null) {
+            throw new DuplicateEntryException("Patient with given NRIC already exists!");
+        }
         Patient newPatient = new Patient(addPatientParameters[0],addPatientParameters[1],
                 Integer.parseInt(addPatientParameters[2]), addPatientParameters[3].charAt(0),
                 addPatientParameters[4],addPatientParameters[5], addPatientParameters[6]);
@@ -41,8 +51,14 @@ public class PatientList {
         return patients.size();
     }
 
-    public void removePatient(int index) {
-        patients.remove(index);
+    public void remove(String nric) throws NotFoundException {
+        for (int i = 0; i < getSize(); i++) {
+            if (patients.get(i).getNric().equals(nric)) {
+                patients.remove(i);
+                return;
+            }
+        }
+        throw new NotFoundException("There are no patients with given NRIC!");
     }
 
     public ArrayList<Patient> getList() {
