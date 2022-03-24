@@ -19,8 +19,8 @@ public class MarkParser extends Parser {
     private static final String UNCOMPLETED_FLAG = StringConstants.UNCOMPLETED_FLAG;
 
     // Unescaped regex for testing:
-    // (?<flag>\/(c|u))\s+(?<taskIndex>\d+)(\s+-m\s+(?<taskModule>\w+))?
-    private static final String MARK_FORMAT = "(?<flag>\\/(c|u))\\s+(?<taskIndex>\\d+)(\\s+-m\\s+(?<taskModule>\\w+))?";
+    // (?<flag>(c|u))\s+(?<taskIndex>\d+)(\s+-m\s+(?<taskModule>\w+))?
+    private static final String MARK_FORMAT = "(?<flag>(c|u))\\s+(?<taskIndex>\\d+)(\\s+-m\\s+(?<taskModule>\\w+))?";
 
     public MarkParser() {
         super();

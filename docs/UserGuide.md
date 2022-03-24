@@ -16,8 +16,8 @@ Mod Happy is a command line application designed to help you manage your academi
 
 ### Explanation of notation
 
-- User-supplied input parameters are indicated by fully capitalised field names. For instance, in `del /m MODULE_CODE`, you would replace `MODULE_CODE` with the module code of the module you wish to delete (e.g. `del /m CS2113T`).
-- When multiple parameters are indicated within round brackets and separated with `|`, exactly one parameter must be chosen. For example, `mark (/c | /u)` means either one of `mark /c` or `mark /u`.
+- User-supplied input parameters are indicated by fully capitalised field names. For instance, in `del mod MODULE_CODE`, you would replace `MODULE_CODE` with the module code of the module you wish to delete (e.g. `del mod CS2113T`).
+- When multiple parameters are indicated within round brackets and separated with `|`, exactly one parameter must be chosen. For example, `mark (c | u)` means either one of `mark c` or `mark u`.
 - Parameters indicated within square brackets, such as `[-m "MODULE_DESCRIPTION"]`, are optional. The part of the command enclosed within these brackets may be omitted if you wish.
 > 📔 <span style="color:#00bb00">**NOTE:**</span>
 > 
@@ -39,75 +39,75 @@ Format: `help [COMMAND_WORD]`
 
 Adds an object as indicated by the command argument.
 
-- **Add module: `add /m`**
-  
-  Adds a module to the list of modules tracked by Mod Happy. You may optionally specify a short description for the module.<br>
+- **Add module: `add mod`**
+
+  Adds a module to the list of modules tracked by Mod Happy. You have to indicate the number of modular credits and optionally specify a short description for the module.<br>
   > ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
   >
   > The module code must be a single word, and can only consist of alphanumeric characters as well as the underscore `_`.
 
-  Format: `add /m MODULE_CODE [-d "MODULE_DESCRIPTION"]`<br><br>
-  Example: `add /m CS2113T -d "Software Engineering"`<br><br>
+  Format: `add mod MODULE_CODE MODULAR_CREDITS [-d "MODULE_DESCRIPTION"]`<br><br>
+  Example: `add mod CS2113T 4 -d "Software Engineering"`<br><br>
   
   > 📔 <span style="color:#00bb00">**NOTE:**</span>
   > 
   > Module codes are case-sensitive. Mod Happy treats `CS2113T` and `cs2113t` as two different modules!
-- **Add task: `add /t`**
+- **Add task: `add task`**
   
   Adds a task to the list of tasks tracked under the specified module code. If no module code is supplied, the task is added to the General Tasks list, which is not associated with any module.<br><br>
 
   You may optionally specify a short description for the task, as well as the estimated for the time to be spent working on it.<br><br>
 
-  Format: `add /t "TASK_NAME" [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”] [-m MODULE_CODE]`<br><br>
-  Example (general task without any parameters): `add /t "Review PR"`<br>
-  Example (module task with parameters): `add /t "iP Level-0" -d "Greet user and exit" -t "1 hour" -m CS2113T`
+  Format: `add task "TASK_NAME" [-m MODULE_CODE] [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”]`<br><br>
+  Example (general task without any parameters): `add task "Review PR"`<br>
+  Example (module task with parameters): `add task "iP Level-0" -m CS2113T -d "Greet user and exit" -t "1 hour" `
 
 ### Deleting a task/module: `del`
 
 Deletes an object as indicated by the command argument.
 
-- **Delete module: `del /m`**
+- **Delete module: `del mod`**
 
   Deletes the specified module from the list of modules tracked by Mod Happy.<br><br>
-  Format: `del /m MODULE_CODE`<br><br>
-  Example: `del /m CS2113T`<br><br>
-- **Delete task: `del /t`**
+  Format: `del mod MODULE_CODE`<br><br>
+  Example: `del mod CS2113T`<br><br>
+- **Delete task: `del task`**
 
   Deletes the task with the specified number from the list of tasks associated with the provided module code. If no module code is provided, the task is removed from the General Tasks list.<br><br>
-  Format: `del /t TASK_NUMBER [-m MODULE_CODE]`<br><br>
-  Example (general task): `del /t 1`<br>
-  Example (module task): `del /t 1 -m CS2113T`<br><br>
+  Format: `del task TASK_NUMBER [-m MODULE_CODE]`<br><br>
+  Example (general task): `del task 1`<br>
+  Example (module task): `del task 1 -m CS2113T`<br><br>
 
 ### Editing a task/module: `edit`
 
 Edits an object's parameter as indicated by the command arguments.<br>
 
-- **Edit module: `edit /m`**
+- **Edit module: `edit mod`**
 
   The module to be edited is specified with its module code. Only the module description is editable after the module is created.<br><br>
-  Format: `edit /m MODULE_CODE -d "MODULE_DESCRIPTION"` <br><br>
-  Example: `edit /m CS2113T -d "Software Engineering & OOP"`<br><br>
-- **Edit task: `edit /t`**
+  Format: `edit mod MODULE_CODE -d "MODULE_DESCRIPTION"` <br><br>
+  Example: `edit mod CS2113T -d "Software Engineering & OOP"`<br><br>
+- **Edit task: `edit task`**
 
   The task to be edited is specified using its task number and associated module code; if no module code is specified, the task is drawn from the General Tasks list. The task name, description, and estimated working time are editable, but the task cannot be associated with a different module.<br><br>
-  Format: `edit /t TASK_INDEX (-n "TASK_NAME" | -d "TASK_DESCRIPTION" | -t "ESTIMATED_WORKING_TIME") [-m MODULE_CODE]`
+  Format: `edit task TASK_NUMBER [-m MODULE_CODE] (-n "TASK_NAME" | -d "TASK_DESCRIPTION" | -t "ESTIMATED_WORKING_TIME")`
   <br><br>
-  Example: `edit /t 1 -n "CS2113T Tutorial 2" -m CS2113T` <br><br>
+  Example: `edit task 1 -m CS2113T -n "CS2113T Tutorial 2"` <br><br>
   > 📔 <span style="color:#00bb00">**NOTE:**</span>
   >
   > Only one parameter can be edited per command. The following input is not allowed:
   >
-  > `edit /t 2 -n "CS2113T Tutorial 1" -d "Draw class diagram" -m CS2113T`
+  > `edit task 2 -m CS2113T -n "CS2113T Tutorial 1" -d "Draw class diagram"`
 
 ### Marking a task: `mark`
 
 Marks the specified task as completed or uncompleted. The task to be marked is specified using its task number and associated module code; if no module code is specified, the task is drawn from the General Tasks list.
 
-The `/c` flag indicates that the task will be marked as completed, while the `/u` flag marks the task as uncompleted.
+The `c` flag indicates that the task will be marked as completed, while the `u` flag marks the task as uncompleted.
 
-Format: `mark (/c | /u) TASK_INDEX [-m MODULE_CODE]`<br><br>
-Example (mark general task as completed): `mark /c 1`<br>
-Example (mark module task as uncompleted): `mark /u 1 -m CS2113T`
+Format: `mark (c | u) TASK_INDEX [-m MODULE_CODE]`<br><br>
+Example (mark general task as completed): `mark c 1`<br>
+Example (mark module task as uncompleted): `mark u 1 -m CS2113T`
 
 ### Managing custom tags: `tag`
 
@@ -128,6 +128,19 @@ Displays a list of all tasks, grouped by module code. General tasks are displaye
 If a tag name is provided, only tasks with the associated tag will be shown.
 
 Format: `list ["TAG_NAME"]`
+
+### Adding/Changing a grade to a module: `grade`
+
+Adds/Changes a grade to a module specified by its module code.
+
+Format: `grade MODULE_CODE MODULE_GRADE`
+
+> 📔 <span style="color:#00bb00">**NOTE:**</span>
+>
+> Only the following grades are supported (case-insensitive):<br>
+> A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS, CU
+
+Example: `grade CS2113T A+`
 
 ### Resetting the program: `reset`
 
@@ -153,15 +166,15 @@ Format: `save`
 
 ## Command Summary
 
-
-| Command | Format                                                                                                                                                                               |
-|:-------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|  help   | `help [COMMAND_WORD]`                                                                                                                                                                |
-|   add   | `add /m MODULE_CODE [-d "MODULE_DESCRIPTION"]`<br>`add /t "TASK_NAME" [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”] [-m MODULE_CODE]`                                        |
-|   del   | `del /m MODULE_CODE`<br>`del /t TASK_NUMBER [-m MODULE_CODE]`                                                                                                                        |
-|  edit   | <code>edit /t TASK_INDEX (-n "TASK_NAME" &#124; -d "TASK_DESCRIPTION" &#124; -t "ESTIMATED_WORKING_TIME") [-m MODULE_CODE]</code> <br> `edit /m MODULE_CODE -d "MODULE_DESCRIPTION"` |
-|  mark   | <code>mark (/c &#124; /u) TASK_NUMBER [-m MODULE_CODE]</code>                                                                                                                        |
-|   tag   | <code>tag (add &#124; del) [-m MODULE_CODE] "TAG_NAME"</code>                                                                                                                        |
-|  list   | `list ["TAG_NAME"]`                                                                                                                                                                  |
-|  reset  | `reset`                                                                                                                                                                              |
-|  save   | `save`                                                                                                                                                                               |
+| Command | Format                                                                                                                                                                                   |
+|:-------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  help   | `help [COMMAND_WORD]`                                                                                                                                                                    |
+|   add   | `add mod MODULE_CODE MODULAR_CREDITS [-d "MODULE_DESCRIPTION"]`<br>`add task "TASK_NAME" [-m MODULE_CODE] [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”]`                         |
+|   del   | `del mod MODULE_CODE`<br>`del task TASK_NUMBER [-m MODULE_CODE]`                                                                                                                         |
+|  edit   | <code>edit task TASK_NUMBER [-m MODULE_CODE] (-n "TASK_NAME" &#124; -d "TASK_DESCRIPTION" &#124; -t "ESTIMATED_WORKING_TIME")</code> <br> `edit mod MODULE_CODE -d "MODULE_DESCRIPTION"` |
+|  mark   | <code>mark (c &#124; u) TASK_NUMBER [-m MODULE_CODE]</code>                                                                                                                              |
+|   tag   | <code>tag (add &#124; del) [-m MODULE_CODE] "TAG_NAME"</code>                                                                                                                            |
+|  list   | `list ["TAG_NAME"]`                                                                                                                                                                      |
+|  grade  | `grade MODULE_CODE MODULE_GRADE`                                                                                                                                                         |
+|  reset  | `reset`                                                                                                                                                                                  |
+|  save   | `save`                                                                                                                                                                                   |

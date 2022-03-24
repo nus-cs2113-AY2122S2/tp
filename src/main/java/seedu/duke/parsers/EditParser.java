@@ -18,12 +18,16 @@ public class EditParser extends Parser {
     private static final String MODULE_DESCRIPTION = StringConstants.MODULE_DESCRIPTION;
     private static final String TASK_MODULE = StringConstants.TASK_MODULE;
     private static final String TASK_NAME = StringConstants.TASK_NAME;
-
-    private static final String EDIT_FORMAT = "(/t\\s+(?<taskNumber>\\d+)"
-            + "(?=\\s+-n\\s+\\\"[^\\\"]+\\\"|\\s+-d\\s+\\\"[^\\\"]+\\\"|\\s+-t\\s+\\\"[^\\\"]+\\\")"
-            + "(\\s+-n\\s+\\\"((?<taskName>[^\\\"]+)\\\")?|\\s+-d\\s+\\\"((?<taskDescription>[^\\\"]+)\\\")?"
-            + "|(\\s+-t\\s+\\\"(?<estimatedWorkingTime>[^\\\"]+)\\\")?))(\\s+-m\\s+(?<taskModule>\\w+))?"
-            + "|(/m\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)))(\\s+(-d\\s+\\\"(?<moduleDescription>.+)\\\")))";
+    // Unescaped regex for testing
+    // (task\s+(?<taskNumber>\d+)(\s+-m\s+(?<taskModule>\w+))?(?=\s+-n\s+\"[^\"]+\"|
+    // \s+-d\s+\"[^\"]+\"|\s+-t\s+\"[^\"]+\")(\s+-n\s+\"((?<taskName>[^\"]+)\")?|\s+-d\s+\"
+    // ((?<taskDescription>[^\"]+)\")?|(\s+-t\s+\"(?<estimatedWorkingTime>[^\"]+)\")?))|(mod\s+
+    // (?<moduleCode>\w+?(?=(\s+-d\s+)))(\s+(-d\s+\"(?<moduleDescription>.+)\")))
+    private static final String EDIT_FORMAT = "(task\\s+(?<taskNumber>\\d+)(\\s+-m\\s+(?<taskModule>\\w+))?"
+            + "(?=\\s+-n\\s+\\\"[^\\\"]+\\\"|\\s+-d\\s+\\\"[^\\\"]+\\\"|\\s+-t\\s+\\\"[^\\\"]+\\\")(\\s+-n\\s+\\\""
+            + "((?<taskName>[^\\\"]+)\\\")?|\\s+-d\\s+\\\"((?<taskDescription>[^\\\"]+)\\\")?|(\\s+-t\\s+\\\""
+            + "(?<estimatedWorkingTime>[^\\\"]+)\\\")?))|(mod\\s+(?<moduleCode>\\w+?(?=(\\s+-d\\s+)))(\\s+(-d\\s+\\\""
+            + "(?<moduleDescription>.+)\\\")))";
 
     public EditParser() {
         super();

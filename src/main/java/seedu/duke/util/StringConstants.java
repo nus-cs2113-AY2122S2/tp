@@ -212,8 +212,8 @@ public class StringConstants {
     public static final String TASK_NUMBER = "taskNumber";
     public static final String FLAG = "flag";
     public static final String TASK_INDEX = "taskIndex";
-    public static final String COMPLETED_FLAG = "/c";
-    public static final String UNCOMPLETED_FLAG = "/u";
+    public static final String COMPLETED_FLAG = "c";
+    public static final String UNCOMPLETED_FLAG = "u";
     public static final String ARGUMENT = "arguments";
     public static final String TAG_NAME = "tagName";
     public static final String TAG_OPERATION = "tagOperation";
