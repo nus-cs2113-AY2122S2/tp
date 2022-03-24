@@ -287,7 +287,7 @@ public class SearchCommand extends Command {
             }
         }
         if (isZeroMatch()) {
-            printNotFoundMessage(CATEGORY_EXERCISE);
+            ui.printSearchNotFoundMessage(CATEGORY_EXERCISE);
         }
         clearMatchCount();
     }
@@ -326,7 +326,7 @@ public class SearchCommand extends Command {
             }
         }
         if (isZeroMatch()) {
-            printNotFoundMessage(CATEGORY_PLAN);
+            ui.printSearchNotFoundMessage(CATEGORY_PLAN);
         }
         clearMatchCount();
     }
@@ -381,7 +381,7 @@ public class SearchCommand extends Command {
             }
         }
         if (isZeroMatch()) {
-            printNotFoundMessage(CATEGORY_WORKOUT);
+            ui.printSearchNotFoundMessage(CATEGORY_WORKOUT);
         }
         clearMatchCount();
     }
