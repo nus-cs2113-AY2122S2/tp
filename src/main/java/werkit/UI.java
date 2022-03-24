@@ -268,8 +268,8 @@ public class UI {
         printColorText(TextColor.COLOR_YELLOW, "\t workout /new <exercise name> /reps <no. of repetitions>");
         System.out.println("\t Example: ");
         printColorText(TextColor.COLOR_YELLOW, "\t workout /new push up /reps 10");
-        System.out.println("\t This will add a workout with " + getColorText(TextColor.COLOR_YELLOW, "10 reps") +
-                " of " + getColorText(TextColor.COLOR_YELLOW, "push up"));
+        System.out.println("\t This will add a workout with " + getColorText(TextColor.COLOR_YELLOW, "10 reps")
+                + " of " + getColorText(TextColor.COLOR_YELLOW, "push up"));
     }
 
     /**
@@ -280,8 +280,8 @@ public class UI {
         printColorText(TextColor.COLOR_YELLOW, "\t workout /delete <index of workout>");
         System.out.println("\t Example: ");
         printColorText(TextColor.COLOR_YELLOW, "\t workout /delete 1");
-        System.out.println("\t This will delete the workout with index " +
-                getColorText(TextColor.COLOR_YELLOW, "1") + " if exists.");
+        System.out.println("\t This will delete the workout with index "
+                + getColorText(TextColor.COLOR_YELLOW, "1") + " if exists.");
     }
 
     /**
@@ -292,9 +292,9 @@ public class UI {
         printColorText(TextColor.COLOR_YELLOW, "\t workout /update <index of workout> <quantity>");
         System.out.println("\t Example: ");
         printColorText(TextColor.COLOR_YELLOW, "\t workout /update 1 15");
-        System.out.println("\t This will update the workout with index " +
-                getColorText(TextColor.COLOR_YELLOW, "1") + " to " +
-                getColorText(TextColor.COLOR_YELLOW, "15 reps") + " if exists.");
+        System.out.println("\t This will update the workout with index "
+                + getColorText(TextColor.COLOR_YELLOW, "1") + " to "
+                + getColorText(TextColor.COLOR_YELLOW, "15 reps") + " if exists.");
     }
 
     /**
@@ -510,8 +510,8 @@ public class UI {
      */
     public void printPlanAddHelp() {
         System.out.println("\t To add a plan, please enter: ");
-        printColorText(TextColor.COLOR_YELLOW, "\t plan /new <plan name> /workouts" +
-                " <workout index(s) separated by ','>");
+        printColorText(TextColor.COLOR_YELLOW, "\t plan /new <plan name> /workouts"
+                + " <workout index(s) separated by ','>");
         System.out.println("\t Example: ");
         printWorkoutExample();
         printPlanAddExample();
@@ -521,8 +521,9 @@ public class UI {
      * Prints workout list examples.
      */
     public void printWorkoutExample() {
-        System.out.println("\t The workout list upon entering " +
-                getColorText(TextColor.COLOR_YELLOW, "workout /list") + ", contains the\n \t following workouts:");
+        System.out.println("\t The workout list upon entering "
+                + getColorText(TextColor.COLOR_YELLOW, "workout /list")
+                + ", contains the\n \t following workouts:");
         printColorText(TextColor.COLOR_YELLOW, "\t 1. push up (10 reps)");
         printColorText(TextColor.COLOR_YELLOW, "\t 2. sit up (10 reps)");
         printColorText(TextColor.COLOR_YELLOW, "\t 3. pull up (10 reps)");
@@ -534,18 +535,18 @@ public class UI {
     public void printPlanAddExample() {
         System.out.println("\t To create a new plan, enter the following command:");
         printColorText(TextColor.COLOR_YELLOW, "\t plan /new Grow My Muscles /workouts 1, 2");
-        System.out.println("\t A new plan named " + getColorText(TextColor.COLOR_YELLOW, "Grow My Muscles") +
-                " with workout index " + getColorText(TextColor.COLOR_YELLOW, "1") + " and " +
-                getColorText(TextColor.COLOR_YELLOW, "2\n") +
-                "\t will be created and added to the application's list of plans.");
+        System.out.println("\t A new plan named " + getColorText(TextColor.COLOR_YELLOW, "Grow My Muscles")
+                + " with workout index " + getColorText(TextColor.COLOR_YELLOW, "1") + " and "
+                + getColorText(TextColor.COLOR_YELLOW, "2\n")
+                + "\t will be created and added to the application's list of plans.");
     }
 
     /**
      * Prints the example plan list to be used in schedule update help message.
      */
     public void printPlanExample() {
-        System.out.println("\t The plan list upon entering " +
-                getColorText(TextColor.COLOR_YELLOW, "plan /list") + ", contains the\n \t following plans:");
+        System.out.println("\t The plan list upon entering "
+                + getColorText(TextColor.COLOR_YELLOW, "plan /list") + ", contains the\n \t following plans:");
         printColorText(TextColor.COLOR_YELLOW, "\t 1. arms");
         printColorText(TextColor.COLOR_YELLOW, "\t 2. stronger arms");
         printColorText(TextColor.COLOR_YELLOW, "\t 3. Grow My Muscles");
@@ -577,12 +578,12 @@ public class UI {
         printColorText(TextColor.COLOR_YELLOW, "\t schedule /update <day index [1-7]> <plan index in the list>");
         System.out.println("\t Example: ");
         printPlanExample();
-        System.out.println("\t To update the plan schedule for Monday with plan 1," +
-                " enter the\n \t following command:");
+        System.out.println("\t To update the plan schedule for Monday with plan 1,"
+                + " enter the\n \t following command:");
         printColorText(TextColor.COLOR_YELLOW, "\t schedule /update 1 1");
-        System.out.println("\t This will update the schedule of " +
-                getColorText(TextColor.COLOR_YELLOW, "Monday") +
-                " with a plan named " + getColorText(TextColor.COLOR_YELLOW, "arms") + ".");
+        System.out.println("\t This will update the schedule of "
+                + getColorText(TextColor.COLOR_YELLOW, "Monday")
+                + " with a plan named " + getColorText(TextColor.COLOR_YELLOW, "arms") + ".");
     }
 
     /**
@@ -604,8 +605,8 @@ public class UI {
         printColorText(TextColor.COLOR_YELLOW, "\t plan /delete <index of plan>");
         System.out.println("\t Example: ");
         printColorText(TextColor.COLOR_YELLOW, "\t plan /delete 1");
-        System.out.println("\t This will delete the plan with index " +
-                getColorText(TextColor.COLOR_YELLOW, "1") + " if exists.");
+        System.out.println("\t This will delete the plan with index "
+                + getColorText(TextColor.COLOR_YELLOW, "1") + " if exists.");
     }
 
     /**
@@ -616,8 +617,8 @@ public class UI {
         printColorText(TextColor.COLOR_YELLOW, "\t search /exercise <exercise keyword>");
         System.out.println("\t Example: ");
         printColorText(TextColor.COLOR_YELLOW, "\t search /exercise up");
-        System.out.println("\t This will show the exercise(s) containing keyword " +
-                getColorText(TextColor.COLOR_YELLOW, "up") + " if exist.");
+        System.out.println("\t This will show the exercise(s) containing keyword "
+                + getColorText(TextColor.COLOR_YELLOW, "up") + " if exist.");
     }
 
     /**
@@ -628,11 +629,11 @@ public class UI {
         printColorText(TextColor.COLOR_YELLOW, "\t search /workout <exercise keyword or number of reps>");
         System.out.println("\t Example: ");
         printColorText(TextColor.COLOR_YELLOW, "\t search /workout up");
-        System.out.println("\t This will show the workout(s) containing exercise with keyword\n\t " +
-                getColorText(TextColor.COLOR_YELLOW, "up") + " if exist.");
+        System.out.println("\t This will show the workout(s) containing exercise with keyword\n\t "
+                + getColorText(TextColor.COLOR_YELLOW, "up") + " if exist.");
         printColorText(TextColor.COLOR_YELLOW, "\t search /workout 15");
-        System.out.println("\t This will show the workout(s) with " +
-                getColorText(TextColor.COLOR_YELLOW, "reps = 15") + " if exist.");
+        System.out.println("\t This will show the workout(s) with "
+                + getColorText(TextColor.COLOR_YELLOW, "reps = 15") + " if exist.");
     }
 
     /**
@@ -643,8 +644,8 @@ public class UI {
         printColorText(TextColor.COLOR_YELLOW, "\t search /plan <plan keyword>");
         System.out.println("\t Example: ");
         printColorText(TextColor.COLOR_YELLOW, "\t search /plan grow");
-        System.out.println("\t This will show the plan(s) containing keyword " +
-                getColorText(TextColor.COLOR_YELLOW, "grow") + " if exist.");
+        System.out.println("\t This will show the plan(s) containing keyword "
+                + getColorText(TextColor.COLOR_YELLOW, "grow") + " if exist.");
     }
 
     /**
