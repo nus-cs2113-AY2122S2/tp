@@ -3,6 +3,7 @@ package seedu.duke.helper;
 import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
+import seedu.duke.status.Status;
 
 import java.util.Scanner;
 
@@ -87,7 +88,7 @@ public class UI {
     }
 
     public void printDeleteDoctorErrorMessage(DoctorList doctorList) {
-        printParagraph("Please input a positive number up to " + doctorList.getSizeDoctor() + " only.\n"
+        printParagraph("Please input a positive number up to " + doctorList.getSize() + " only.\n"
                 + "Here is an example:\ndelete doctor /info 1");
     }
 
@@ -132,5 +133,8 @@ public class UI {
     public void printDeleteMedicineExampleMessage(MedicineList medicineList) {
         printParagraph("Please input a positive number up to " + medicineList.getSize() + " only.\n"
                 + "Here is an example:\ndelete patient /info 1");
+    }
+
+    public void print(Status status) {
     }
 }
