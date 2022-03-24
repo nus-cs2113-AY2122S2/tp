@@ -1,6 +1,9 @@
 package seedu.splitlah.parser.commandparser;
 
 import org.junit.jupiter.api.Test;
+import seedu.splitlah.command.ActivityCreateCommand;
+import seedu.splitlah.command.Command;
+import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
@@ -256,6 +259,28 @@ class ActivityCreateCommandParserTest {
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
                     + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+        }
+    }
+
+    /**
+     * Checks if an ActivityCreateCommand object is correctly returned when the command is correctly entered.
+     */
+    @Test
+    public void getCommand_validUserInput_ActivityCreateCommand() {
+        Manager manager = new Manager();
+
+        String sessionInput = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob Charlie";
+        Command createSession = Parser.getCommand(sessionInput);
+        createSession.run(manager);
+
+        String validUserInput = "activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        String validArguments = Parser.getRemainingArgument(validUserInput);
+        ActivityCreateCommandParser activityCreateCommandParser = new ActivityCreateCommandParser();
+        try {
+            Command command = activityCreateCommandParser.getCommand(validArguments);
+            assertEquals(ActivityCreateCommand.class, command.getClass());
+        } catch (InvalidFormatException e) {
+            fail();
         }
     }
 }
