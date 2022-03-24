@@ -320,6 +320,48 @@ class ParserTest {
     }
 
     @Test
+    void parseRecurringStatus_delimiterExist_success()
+            throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
+        String input = "addout /u 1 /e 10 /d Dinner /p t";
+        String output = Parser.parseRecurringStatus(input);
+        assertEquals("t", output);
+    }
+
+    @Test
+    void parseRecurringStatus_nullInput_assertThrown() {
+        try {
+            Parser.parseRecurringStatus(null);
+            fail();
+        } catch (AssertionError e) {
+            assertEquals("User input should not be null", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    void parseRecurringStatus_delimiterIssues_exceptionThrown() {
+        try {
+            String noDelimiter = "addout /u 1 /e 10 /d Dinner t";
+            Parser.parseRecurringStatus(noDelimiter);
+            fail();
+        } catch (MissingDelimiterException e) {
+            assertEquals("Missing delimiter `/p`", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+        try {
+            String tooManyDelimiter = "addout /u 1 /e 10 /d Dinner /p t /p f";
+            Parser.parseRecurringStatus(tooManyDelimiter);
+            fail();
+        } catch (DuplicateDelimiterException e) {
+            assertEquals("Too many delimiter `/p`", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
     void getValidMoney_positiveDouble_success() throws InvalidMoneyException {
         String input = "10.50";
         Double output = Parser.getValidMoney(input);

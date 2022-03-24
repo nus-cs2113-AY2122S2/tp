@@ -210,6 +210,24 @@ public class Parser {
     }
 
     /**
+     * Returns the recurring status from user input.
+     *
+     * @param userInput The user's full input text.
+     * @return The recurring status.
+     * @throws MissingDelimiterException   if user input does not contain delimiter for recurring status.
+     * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
+     * @throws EmptyStringException        if string after the delimiter is blank.
+     */
+    public static String parseRecurringStatus(String userInput)
+            throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
+        assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
+        checkContainsOnlyOneDelimiter(userInput, DELIMITER_RECURRING_STATUS);
+        String status = parseDelimitedTerm(userInput, DELIMITER_RECURRING_STATUS, DELIMITER_BACK).trim();
+        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, status));
+        return status;
+    }
+
+    /**
      * Returns a valid double that is a monetary value.
      *
      * @param amount Text to be checked.
