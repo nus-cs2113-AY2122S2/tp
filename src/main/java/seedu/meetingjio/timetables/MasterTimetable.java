@@ -5,7 +5,7 @@ import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import java.util.ArrayList;
 
 public class MasterTimetable {
-    private final ArrayList<Timetable> timetables;
+    public static ArrayList<Timetable> timetables;
 
     public MasterTimetable() {
         this.timetables = new ArrayList<>();
@@ -40,4 +40,14 @@ public class MasterTimetable {
     public void add(Timetable timetable) {
         timetables.add(timetable);
     }
+
+    public static void checkUserExist(String user) throws TimetableNotFoundException {
+        for (Timetable timetable : timetables) {
+            if (user.equals(timetable.getName())) {
+                return;
+            }
+        }
+        throw new TimetableNotFoundException();
+    }
+
 }

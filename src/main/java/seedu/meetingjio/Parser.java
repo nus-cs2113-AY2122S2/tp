@@ -16,6 +16,8 @@ import seedu.meetingjio.exceptions.InvalidModeException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import seedu.meetingjio.timetables.MasterTimetable;
+
 import static seedu.meetingjio.common.Messages.MESSAGE_HELP;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS;
@@ -24,6 +26,7 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_COMMAND;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
 
 public class Parser {
     private final String command;
@@ -48,7 +51,7 @@ public class Parser {
         case AddLessonCommand.COMMAND_WORD:
             return prepareAdd();
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return prepareList();
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete();
         case ClearCommand.COMMAND_WORD:
@@ -60,6 +63,20 @@ public class Parser {
             return new CommandResult(feedback);
         }
     }
+
+    public Command prepareList() {
+        try {
+            String user = arguments;
+            MasterTimetable.checkUserExist(user);
+            return new ListCommand(user);
+        } catch (TimetableNotFoundException tnfe) {
+            if (arguments.equals("all")) {
+                return new ListCommand("all");
+            }
+            return new CommandResult(ERROR_INVALID_USER);
+        }
+    }
+
 
     /**
      * Collate the user's input and verify the validity of the input value of each parameter.

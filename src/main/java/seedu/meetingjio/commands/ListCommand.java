@@ -4,9 +4,16 @@ import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EMPTY_LIST;
+import static seedu.meetingjio.timetables.MasterTimetable.timetables;
 
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
+
+    private final String name;
+
+    public ListCommand(String name) {
+        this.name = name;
+    }
 
     /**
      * List out all entries in the user's timetable.
@@ -18,7 +25,32 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(MasterTimetable masterTimetable) {
-        Timetable timetable = masterTimetable.getByIndex(0); // changes needed
+        String user = this.name;
+        if (user.equals("all")) {
+            return listAll();
+        }
+        return listUser(user);
+    }
+
+    private String listAll() {
+        String str = "";
+        for (Timetable timetable : timetables) {
+            String user = timetable.getName();
+            str += user;
+            str += '\n';
+            str += listUser(user);
+            str += '\n';
+        }
+        return str.substring(0, str.length() - 1); //remove last newline character
+    }
+
+    private String listUser(String user) {
+        Timetable timetable = null;
+        for (Timetable t : timetables) {
+            if (user.equals(t.getName())) {
+                timetable = t;
+            }
+        }
         if (timetable.size() == 0) {
             return ERROR_EMPTY_LIST;
         }
@@ -33,4 +65,6 @@ public class ListCommand extends Command {
         }
         return str;
     }
+
+
 }
