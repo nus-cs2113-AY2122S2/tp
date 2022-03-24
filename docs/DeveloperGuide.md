@@ -5,7 +5,7 @@
 - Some foundational source code was adapted from [addressbook-level2](https://github.com/se-edu/addressbook-level2).
 - Google's [GSON library](https://github.com/google/gson) was used to facilitate serialisation and deserialisation of data stored in the data file.
 
-## Design & Implementation
+## Design
 ### Architecture
 Given below is a quick overview of the main components of Mod Happy and how they interact with one another.  
 ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Components.puml)
