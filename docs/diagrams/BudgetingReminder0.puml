@@ -1,0 +1,15 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+show members
+
+title On First Load
+
+package {
+    class State1 as "__expense:Expense__" {
+        budget = "$300"
+        noOfItems = 0
+        }
+}
+@end

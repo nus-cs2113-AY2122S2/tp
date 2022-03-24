@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+package Expense{
+
+    package "Parser" #F4F6F6{
+        Class "ExpenseParser" as ExpenseParser
+    }
+
+    package "Command" #lightblue {
+        Class "Expense Tracker" as ExpenseTracker
+    }
+
+    package "Internal" #grey {
+        Class "Expense" as Expense
+    }
+    package "Storage" #F4F6F6{
+        Class "ExpenseStorage" as ExpenseStorage
+
+    }
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> ExpenseTracker
+ExpenseTracker -down--> "*" Expense
+ExpenseTracker -right-> "ExpenseParser"
+ExpenseTracker -left-> "ExpenseStorage"
+
+@enduml

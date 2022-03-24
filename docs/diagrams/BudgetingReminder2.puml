@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+show members
+
+title Attempting to add 1 more expense record which exceeds budget
+
+package {
+
+    class expenseRecord1 as "__expenseRecord1:Expense__" {
+    amount = $100
+    }
+    class expenseRecord2 as "__expenseRecord2:Expense__" {
+        amount = $100
+    }
+
+
+    class rootExpense as "__expense:Expense__" {
+         budget = "$100"
+         noOfItems = 0
+    }
+    rootExpense -down-> expenseRecord1
+    rootExpense -down-> expenseRecord2
+    class expenseRecord3 as "__expenseRecord3:Expense__" #RED {
+        amount = $200
+    }
+    note top
+        This expense record will not
+        be added as budget exceeded
+    end note
+}
+
+@end
