@@ -562,6 +562,15 @@ public class UI {
     }
 
     /**
+     * Prints help message for 'plan /details' command.
+     */
+    public void printPlanDetailsHelp() {
+        System.out.println("\t To view each plan in detail, please enter:");
+        printColorText(TextColor.COLOR_YELLOW, "\t plan /details <plan index in list>");
+        System.out.println("\t This will print all the workouts in the plan of given index.");
+    }
+
+    /**
      * Prints help message for 'schedule /list' command.
      */
     public void printScheduleListHelp() {
@@ -685,6 +694,8 @@ public class UI {
      */
     public void printPlanHelp() {
         printPlanListHelp();
+        printLine();
+        printPlanDetailsHelp();
         printLine();
         printPlanAddHelp();
         printLine();
