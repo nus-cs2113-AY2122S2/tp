@@ -21,14 +21,14 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
                     + "/cl [COST1 COST2…] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
     public static final String[] COMMAND_DELIMITERS = {
-            ParserUtils.SESSION_ID_DELIMITER,
-            ParserUtils.NAME_DELIMITER,
-            ParserUtils.PAYER_DELIMITER,
-            ParserUtils.INVOLVED_DELIMITER,
-            ParserUtils.TOTAL_COST_DELIMITER,
-            ParserUtils.COST_LIST_DELIMITER,
-            ParserUtils.GST_DELIMITER,
-            ParserUtils.SERVICE_CHARGE_DELIMITER
+        ParserUtils.SESSION_ID_DELIMITER,
+        ParserUtils.NAME_DELIMITER,
+        ParserUtils.PAYER_DELIMITER,
+        ParserUtils.INVOLVED_DELIMITER,
+        ParserUtils.TOTAL_COST_DELIMITER,
+        ParserUtils.COST_LIST_DELIMITER,
+        ParserUtils.GST_DELIMITER,
+        ParserUtils.SERVICE_CHARGE_DELIMITER
     };
 
     /**
