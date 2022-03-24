@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+mainframe sd Enter appropriate section or exit depending on user input
+activate ":AllOnUs"
+activate "AllOnUs <<class>>"
+alt Enter contacts manager
+    ":AllOnUs" -> "contactsManager:ContactsManager" ++: contactsRunner()
+    "contactsManager:ContactsManager" --> ":AllOnUs" --
+else Enter study manager
+    ":AllOnUs" -> "studyManager:StudyManager" ++: studyManagerRunner()
+    "studyManager:StudyManager" --> ":AllOnUs" --
+else Enter expense tracker
+    ":AllOnUs" -> "expenseTracker:ExpenseTracker" ++: expenseRunner()
+    "expenseTracker:ExpenseTracker" --> ":AllOnUs" --
+else Get help
+    ":AllOnUs" -> "AllOnUs <<class>>"++: displayHelp()
+    "AllOnUs <<class>>" --> ":AllOnUs" --
+else Unrecognizable or empty command
+
+else exit
+
+end
+@enduml

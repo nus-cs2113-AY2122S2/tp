@@ -31,10 +31,9 @@ public class AllOnUs {
     /**
      * Carries out termination of the program.
      */
-    private void exit() {
+    private static void exit() {
         System.out.println("Goodbye! Hope to see you again...");
         logger.log(Level.INFO, "Exiting program.");
-        System.exit(0);
     }
 
     /**
@@ -147,7 +146,7 @@ public class AllOnUs {
 
             if (isExitCommand(userInput)) {
                 logger.log(Level.INFO, "User entered exit command.");
-                exit();
+                break;
             } else if (isHelpCommand(userInput)) {
                 logger.log(Level.INFO, "User entered help command.");
                 displayHelp();
@@ -203,5 +202,6 @@ public class AllOnUs {
 
         logger.log(Level.INFO, "Entering menu for the first time.");
         new AllOnUs().run();
+        exit();
     }
 }

@@ -1,0 +1,4 @@
+@startuml
+skinparam guillemet false
+skinparam classAttributeIconSize 0
+@enduml
