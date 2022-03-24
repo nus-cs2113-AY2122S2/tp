@@ -1,11 +1,15 @@
 package seedu.duke;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 /**
  * Extract name and age of housekeeper from user input and record it into the housekeeper list.
  */
 public class AddHousekeeperCommand extends Command {
     private Housekeeper housekeeper;
     private static final String AGE_INDICATE = "~";
+    private static Logger logger = Logger.getLogger("housekeeperLogger");
 
     /**
      * Creates a new housekeeper profile consisting of their name and age which would be recorded
@@ -16,6 +20,7 @@ public class AddHousekeeperCommand extends Command {
      */
     public AddHousekeeperCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
         if (commandStringWithoutCommand.isEmpty()) {
+            logger.log(Level.WARNING, "Housekeeper command usage is found to be wrong.");
             throw new InvalidHousekeeperProfile();
         }
         Housekeeper housekeeper = extractDetails(commandStringWithoutCommand);
@@ -34,6 +39,7 @@ public class AddHousekeeperCommand extends Command {
             throws InvalidAgeException, InvalidHousekeeperProfile {
         boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(AGE_INDICATE);
         if (isSymbolIncorrect) {
+            logger.log(Level.WARNING, "Housekeeper command usage is found to be wrong.");
             throw new InvalidHousekeeperProfile();
         }
         String[] input;
@@ -44,6 +50,7 @@ public class AddHousekeeperCommand extends Command {
             inputName = input[0];
             inputAge = input[1];
         } catch (ArrayIndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, "Housekeeper command is found to be empty.");
             throw new InvalidHousekeeperProfile();
         }
         int ageNumber;

@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Identifies the name and availability of the housekeeper and update availability into the
  * housekeeper list.
@@ -8,7 +11,7 @@ public class AddAvailabilityCommand extends Command {
     private String name;
     private String availability;
     private static final String AVAILABILITY_INDICATE = "@";
-    private static final int ONLY_ONE_FIELD_ENTERED = 1;
+    private static Logger logger = Logger.getLogger("housekeeperLogger");
 
     public AddAvailabilityCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
         String[] input;
@@ -22,6 +25,7 @@ public class AddAvailabilityCommand extends Command {
             inputName = input[0].trim();
             inputAvailability = input[1].trim();
         } catch (ArrayIndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, "Availability Housekeeper command is found to be empty.");
             throw new InvalidAvailabilityException();
         }
         String name = checkValidExtract(inputName);
@@ -56,6 +60,7 @@ public class AddAvailabilityCommand extends Command {
     private String[] extractInput(String commandStringWithoutCommand) throws HotelLiteManagerException {
         boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(AVAILABILITY_INDICATE);
         if (isSymbolIncorrect) {
+            logger.log(Level.WARNING, "Availability Housekeeper command usage is wrong.");
             throw new InvalidAvailabilityException();
         }
         String[] input = commandStringWithoutCommand.split(AVAILABILITY_INDICATE);
