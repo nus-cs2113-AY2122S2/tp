@@ -1,6 +1,7 @@
 package seedu.planitarium.commands;
 
 import seedu.planitarium.exceptions.DuplicateDelimiterException;
+import seedu.planitarium.exceptions.EmptyStringException;
 import seedu.planitarium.exceptions.MissingDelimiterException;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.PersonList;
@@ -14,7 +15,7 @@ public class AddPersonCommand extends Command {
     protected String name;
 
     public AddPersonCommand(String userInput, PersonList personList)
-                throws MissingDelimiterException, DuplicateDelimiterException {
+            throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         super(userInput, personList);
         this.name = Parser.parseName(userInput);
     }

@@ -5,6 +5,7 @@ import seedu.planitarium.exceptions.DuplicateDelimiterException;
 import seedu.planitarium.exceptions.InvalidIndexException;
 import seedu.planitarium.exceptions.InvalidMoneyException;
 import seedu.planitarium.exceptions.MissingDelimiterException;
+import seedu.planitarium.exceptions.EmptyStringException;
 import seedu.planitarium.person.Person;
 import seedu.planitarium.person.PersonList;
 
@@ -14,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 class ParserTest {
 
     @Test
-    void parseDelimitedTerm_delimitedTerm_success() {
-        String input1 = "";
+    void parseDelimitedTerm_delimitedTerm_success() throws EmptyStringException {
+        String input1 = "a";
         String input2 = "add /n bill";
         String delimiter = "/n";
         String delimiterBack = "/e";
@@ -25,6 +26,21 @@ class ParserTest {
 
         String output2 = Parser.parseDelimitedTerm(input2, delimiter, delimiterBack);
         assertEquals("bill", output2);
+    }
+
+    @Test
+    void parseDelimitedTerm_emptyTerm_exceptionThrown() {
+        try {
+            String input = "add /n  /e";
+            String delimiter = "/n";
+            String delimiterBack = "/e";
+
+            Parser.parseDelimitedTerm(input, delimiter, delimiterBack);
+        } catch (EmptyStringException e) {
+            assertEquals("Empty string after `/n` detected", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     @Test
@@ -52,7 +68,8 @@ class ParserTest {
     }
 
     @Test
-    void parseName_delimiterExist_success() throws DuplicateDelimiterException, MissingDelimiterException {
+    void parseName_delimiterExist_success()
+            throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         String input = "add /n bill";
         String output = Parser.parseName(input);
         assertEquals("bill", output);
@@ -61,7 +78,7 @@ class ParserTest {
     @Test
     void parseName_nullInput_assertThrown() {
         try {
-            Parser.parseKeyword(null);
+            Parser.parseName(null);
             fail();
         } catch (AssertionError e) {
             assertEquals("User input should not be null", e.getMessage());
@@ -93,14 +110,15 @@ class ParserTest {
     }
 
     @Test
-    void parseUserIndex_delimiterExist_success() throws DuplicateDelimiterException, MissingDelimiterException {
+    void parseUserIndex_delimiterExist_success()
+            throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         String input = "addin /u 1 /d Gift /i 100";
         String output = Parser.parseUserIndex(input);
         assertEquals("1", output);
     }
 
     @Test
-    void parseUserIndex_nullInput_assertThrown() throws DuplicateDelimiterException, MissingDelimiterException {
+    void parseUserIndex_nullInput_assertThrown() {
         try {
             Parser.parseUserIndex(null);
             fail();
@@ -134,14 +152,15 @@ class ParserTest {
     }
 
     @Test
-    void parseDescription_delimiterExist_success() throws DuplicateDelimiterException, MissingDelimiterException {
+    void parseDescription_delimiterExist_success()
+            throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         String input = "addin /u 1 /d Gift /i 100";
         String output = Parser.parseDescription(input);
         assertEquals("Gift", output);
     }
 
     @Test
-    void parseDescription_nullInput_assertThrown() throws DuplicateDelimiterException, MissingDelimiterException {
+    void parseDescription_nullInput_assertThrown() {
         try {
             Parser.parseDescription(null);
             fail();
@@ -175,14 +194,15 @@ class ParserTest {
     }
 
     @Test
-    void parseIncome_delimiterExist_success() throws DuplicateDelimiterException, MissingDelimiterException {
+    void parseIncome_delimiterExist_success()
+            throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         String input = "addin /u 1 /d Gift /i 100";
         String output = Parser.parseIncome(input);
         assertEquals("100", output);
     }
 
     @Test
-    void parseIncome_nullInput_assertThrown() throws DuplicateDelimiterException, MissingDelimiterException {
+    void parseIncome_nullInput_assertThrown() {
         try {
             Parser.parseIncome(null);
             fail();
@@ -216,14 +236,15 @@ class ParserTest {
     }
 
     @Test
-    void parseExpenditure_delimiterExist_success() throws DuplicateDelimiterException, MissingDelimiterException {
+    void parseExpenditure_delimiterExist_success()
+            throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         String input = "addout /u 1 /d Food /e 10.50";
         String output = Parser.parseExpenditure(input);
         assertEquals("10.50", output);
     }
 
     @Test
-    void parseExpenditure_nullInput_assertThrown() throws DuplicateDelimiterException, MissingDelimiterException {
+    void parseExpenditure_nullInput_assertThrown() {
         try {
             Parser.parseExpenditure(null);
             fail();
@@ -257,7 +278,8 @@ class ParserTest {
     }
 
     @Test
-    void parseRecordIndex_delimiterExist_success() throws DuplicateDelimiterException, MissingDelimiterException {
+    void parseRecordIndex_delimiterExist_success()
+            throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         String input = "deletein /u 1 /r 2";
         String output = Parser.parseRecordIndex(input);
         assertEquals("2", output);
@@ -266,7 +288,7 @@ class ParserTest {
     @Test
     void parseRecordIndex_nullInput_assertThrown() {
         try {
-            Parser.parseKeyword(null);
+            Parser.parseRecordIndex(null);
             fail();
         } catch (AssertionError e) {
             assertEquals("User input should not be null", e.getMessage());
@@ -353,7 +375,7 @@ class ParserTest {
     }
 
     @Test
-    void getValidUserIndex_nullInput_assertThrown() throws InvalidIndexException {
+    void getValidUserIndex_nullInput_assertThrown() {
         try {
             PersonList personList = new PersonList();
             Parser.getValidUserIndex(null, personList);
@@ -416,7 +438,7 @@ class ParserTest {
     }
 
     @Test
-    void getValidExpenditureIndex_nullInput_assertThrown() throws InvalidIndexException {
+    void getValidExpenditureIndex_nullInput_assertThrown() {
         try {
             PersonList personList = new PersonList();
             personList.addPerson("Alice");
@@ -486,7 +508,7 @@ class ParserTest {
     }
 
     @Test
-    void getValidIncomeIndex_nullInput_assertThrown() throws InvalidIndexException {
+    void getValidIncomeIndex_nullInput_assertThrown() {
         try {
             PersonList personList = new PersonList();
             personList.addPerson("Alice");
