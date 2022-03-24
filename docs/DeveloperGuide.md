@@ -7,12 +7,41 @@
 
 ## Design & Implementation
 ### Architecture
-Given below is a quick overview of the main components of Mod Happy and how they interact with one another.
+Given below is a quick overview of the main components of Mod Happy and how they interact with one another.  
 ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Components.puml)
+#### Main components of the architecture
+
+`Main`  is responsible for,
+* Att app launch: sets up the components in the correct order and connects them, and calls storage to load data.
+* Running time: connects UI and ModHappy Parser to get corresponding Command and execute; handles exceptions.
+* At shut down: invokes ExitCommand and execute pre-ending methods.
+  Commons represents a collection of classes used by multiple other components.
+
+#### The rest of the App consists of five components.
+
+* `UI`: The UI of the App.
+* `Parser`: The interpretor that takes user input and returns corresponding commands.
+* `Command`: Command executor that supports various orders from users.
+* `Data`: Various data types for managing users' modules and tasks.
+* `Storage`: Reads data from, and writes data to, the hard disk.
+
+### UI Component
+**API**: [TextUi.java](https://github.com/AY2122S2-CS2113T-T10-3/tp/tree/master/src/main/java/seedu/duke/ui/TextUi.java) <br>
+
+The `TextUi` component exists as part of the `Main` class and is made up of the built-in `Java.util.Scanner` class.
+It does not interact with any other classes or components and serves strictly as the gateway for the
+user to interact with the application.
+<br>
+The `TextUi` component:
+- Listens and grabs the user's input from the standard input using an `Java.util.Scanner` object.
+- Displays any command results and error messages on the standard output using the built-in `Java.io.PrintStream` object `Java.System.out`.
 
 ### Parser Component
 ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Parser.puml)
-
+How the parsing works:
+1. All XYZParser(XYZ is a placeholder e.g.  AddParser) and ModHappyParser interited from Parser class, which defines parseString() method that can parse based on well defined command Regular expression(Regex) and command groups. XYZParser parses user input in multiple-layer manner to suport complex and extendable commands.
+2. When called upon to parse a user command input, the ModHappyParser class, which serves as a general singleton parser of Mod Happy,  creates an XYZParser
+3. XYZParser further parses the user input and will return corresponding Command objects.
 ### Data Component
 
 The data component is responsible for the storage and manipulation of tasks and modules, as well as their associated attributes.
@@ -28,16 +57,44 @@ The `ModuleList` class serves as the main data storage class for the program, an
 The `Module` class serves as a wrapper around a `TaskList`, providing additional attributes including the module code and module description. Within the context of Mod Happy, modules can be viewed as task categories with names, descriptions and other attributes. For this reason, the General Tasks list is implemented as a `Module` under the hood.
 
 > 📔 <span style="color:#00bb00">**NOTE:**</span>
-> 
+>
 > An alternative method of implementing `ModuleList` is shown below, where the default General Tasks
 list is simply represented as a `TaskList` instead of a full-fledged `Module`.
 >
 > ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/DataAlternative.puml)
-> 
+>
 > While this model is arguably closer to real life, the program logic would have to operate on different object types depending on whether a given `Task` belongs to a user-created Module or the default General Tasks list. This was deemed to increase coupling and introduce too much unnecessary clutter to the code, hence it was not used.
 
 
-### Command Class
+### Command Component
+
+The command Component is charge of executing the user-intended operation after receiving information from Parser on the user's input.  
+
+All commands inherit the abstract `Command` class, with an `execute` method that returns the result of command execution as a string. 
+
+Commands can be classified into two broad categories:
+- Commands that accepts user arguments (e.g. `DeleteCommand`)
+- Commands that do not accept arguments (e.g. `ExitCommand`)
+
+Each command has their respective `Parser` classes that call the matching command constructors. (e.g. `ListCommand` has `ListParser`)
+
+Here is a simplified class diagram illustrating two example commands:  
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/CommandClassDiagram.puml)
+
+How the command executes:  
+The type of action that a command executes is dependent on which constructor is called and values passed to it by the respective parser.
+
+### Storage Component
+**API**: [Storage.java](https://github.com/AY2122S2-CS2113T-T10-3/tp/tree/master/src/main/java/seedu/duke/storage/Storage.java) <br>
+
+The storage interface is implemented by JsonStorage in Mod Happy, which reads and loads data in json format.  
+Here is a class diagram on `Storage`:
+
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Storage.puml)
+
+How data is saved and loaded:  
+ListStorage saves an ArrayList of any class that extends Object in json format, and loads them back into corresponding objects. (e.g. ModuleListStorage, TaskListStorage inherit from ListStorage).  
+There is navigability to Storage from Main and SaveCommand, which handles the load and write data to/from disk respectively.
 
 ## Implementation
 
@@ -49,17 +106,18 @@ This section describes some details on how some features are implemented.
 
 The tag command accepts a string from the user and adds it into `ArrayList<String> tags` of a `Task`.  
 
-Here is an example on adding a tag to a general task:
-1. User inputs `tag add 2 "testTag"`.
-2. `TagParser` will initialise `TagCommand` with add as `tagOperation`, 2 as `taskIndex` and testTag as `tagDescription`, while `taskModule` is null.
+
+Here is an example on adding a tag to a general task:  
+1. User inputs `tag add 2 "testTag"`. 
+2. `TagParser` will initialise `TagCommand` with add as `tagOperation` 2 as `taskIndex` and testTag as `tagDescription`, while `taskModule` is null.
 3. `TagCommand` then gets the relevant `Module`. If `taskModule` is null, `getGeneralTasks()` is called. Else, `getModule(taskModule)` is called instead.
 4. Next, `TagCommand` checks the `tagOperation`. If add, `addTag(targetModule)` is called. Else if del, `removeTag(targetModule)` is called. Else, it throws `ParseException`.
 
 Below is the sequence diagram of how the tag feature works:
 
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/Tag.puml)
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/GetModule.puml)
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/CheckAndRunTagOperation.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/Tag.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/GetModule.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/CheckAndRunTagOperation.puml)
 
 ### GPA Feature
 

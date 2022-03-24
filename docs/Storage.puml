@@ -1,0 +1,63 @@
+@startuml
+skinparam arrowThickness 1.1
+
+package storage {
+    interface Storage <T extends Object> {
+        --
+        + writeData(T object, String path):void
+        + loadData(String path):T
+        + createTargetFile(String path):void
+
+    }
+
+    abstract class JsonStorage <T extends Object> implements Storage{
+       --
+       + writeData(T object, String path):void
+       + {abstract} loadData(String path):T
+       + createTargetFile(String path):void
+    }
+
+    class ListStorage <ArrayList<T extends Object>> extends JsonStorage{
+       --
+       + loadData(String path):ArrayList<T>
+       + writeData(ArrayList<T> object, String path):void
+    }
+
+
+    class ConfigurationStorage <Configuration> extends JsonStorage{
+       --
+       + loadData(String path):Configuration
+       + writeData(Configuration object, String path):void
+    }
+
+    class ModuleListStorage <ArrayList<Module>> extends ListStorage{
+       --
+       + loadData(String path):ArrayList<Module>
+       + writeData(ArrayList<Module> object, String path):void
+    }
+
+    class TaskListStorage <ArrayList<Task>> extends ListStorage{
+       --
+       + loadData(String path):ArrayList<Task>
+       + writeData(ArrayList<Task> object, String path):void
+    }
+
+}
+
+Class Main
+hide Main circle
+hide Main attributes
+hide Main methods
+
+Class SaveCommand
+hide SaveCommand circle
+hide SaveCommand attributes
+hide SaveCommand methods
+
+Main--> Storage
+SaveCommand --> Storage
+
+
+
+
+@enduml
