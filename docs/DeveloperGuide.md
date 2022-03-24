@@ -33,6 +33,21 @@
 
 ### Contacts
 
+#### Contacts Parser Component
+**API:** `ContactsParser.java`
+
+The Sequence Diagram below illustrates interactions between classes of objects
+for the static `setContactFields(contact, fieldStrings)` API call.
+
+![](images/ContactSetFieldsSequence.png)
+
+For each string in the array `fieldStrings`, the method identifies
+which contact field the string corresponds to, get a reference to the 
+Field object from `contact`, and then uses the polymorphic `setField()`
+call to update the value of the corresponding field of `contact`.
+
+![](images/ContactSetFieldsSequenceSubdiagram.png)
+
 ## Non-Functional Requirements
 
 {Give non-functional requirements}
