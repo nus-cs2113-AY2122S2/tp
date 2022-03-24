@@ -34,6 +34,7 @@ with this IDE.
 [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
 4. Run `Main.java`. If you have set up your environment correctly, you should see the following
 output in your terminal: 
+
 ```
 ======================================================================
  __        __        _    ___ _   _ 
@@ -73,6 +74,7 @@ Now then, what can I do for you today?
 ----------------------------------------------------------------------
 >
 ```
+
 5. Type `exit` to exit the program.
 
 You are now ready to begin developing!
