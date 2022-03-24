@@ -7,7 +7,7 @@
 
 ## Design & Implementation
 ### Architecture
-Given below is a quick overview of the main components of Mod Happy and how they interact with one another.
+Given below is a quick overview of the main components of Mod Happy and how they interact with one another.  
 ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Components.puml)
 #### Main components of the architecture
 
@@ -65,13 +65,36 @@ list is simply represented as a `TaskList` instead of a full-fledged `Module`.
 >
 > While this model is arguably closer to real life, the program logic would have to operate on different object types depending on whether a given `Task` belongs to a user-created Module or the default General Tasks list. This was deemed to increase coupling and introduce too much unnecessary clutter to the code, hence it was not used.
 
+### Command Component
+
+The command Component is charge of executing the user-intended operation after receiving information from Parser on the user's input.  
+
+All commands inherit the abstract `Command` class, with an `execute` method that returns the result of command execution as a string. 
+
+Commands can be classified into two broad categories:
+- Commands that accepts user arguments (e.g. `DeleteCommand`)
+- Commands that do not accept arguments (e.g. `ExitCommand`)
+
+Each command has their respective `Parser` classes that call the matching command constructors. (e.g. `ListCommand` has `ListParser`)
+
+Here is a simplified class diagram illustrating two example commands:  
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/CommandClassDiagram.puml)
+
+How the command executes:  
+The type of action that a command executes is dependent on which constructor is called and values passed to it by the respective parser.
+
 ### Storage Component
-**API** : Storage.java
-![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/branch-A-Storage-puml/docs/Storage.puml)
-The Storage component,
-* Storage interface is implemented by JsonStorage in Mod Happy, which will read and load data to and from json famat.
-* ListStorage can save a ArrayList of any class that extends Object in json format, and read them back into corresponding objects. (e.g ModuleListStorage, TaskListStorage inherit from ListStorage)
-* There are navigability to Storage from Main and SaveComand, which handles the load and write data to/from disk respectively.
+**API**: [Storage.java](https://github.com/AY2122S2-CS2113T-T10-3/tp/tree/master/src/main/java/seedu/duke/storage/Storage.java) <br>
+
+The storage interface is implemented by JsonStorage in Mod Happy, which reads and loads data in json format.  
+Here is a class diagram on `Storage`:
+
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Storage.puml)
+
+How data is saved and loaded:  
+ListStorage saves an ArrayList of any class that extends Object in json format, and loads them back into corresponding objects. (e.g. ModuleListStorage, TaskListStorage inherit from ListStorage).  
+There is navigability to Storage from Main and SaveCommand, which handles the load and write data to/from disk respectively.
+
 ## Implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
@@ -81,16 +104,16 @@ The Storage component,
 The tag command accepts a string from the user and adds it into `ArrayList<String> tags` of a `Task`.  
 
 Here is an example on adding a tag to a general task:  
-1) User inputs `tag add 2 "testTag"`. 
-2) `TagParser` will initialise `TagCommand` with add as `tagOperation` 2 as `taskIndex` and testTag as `tagDescription`, while `taskModule` is null.
-3) `TagCommand` then gets the relevant `Module`. If `taskModule` is null, `getGeneralTasks()` is called. Else, `getModule(taskModule)` is called instead.
-4) Next, `TagCommand` checks the `tagOperation`. If add, `addTag(targetModule)` is called. Else if del, `removeTag(targetModule)` is called. Else, it throws `ParseException`.
+1. User inputs `tag add 2 "testTag"`. 
+2. `TagParser` will initialise `TagCommand` with add as `tagOperation` 2 as `taskIndex` and testTag as `tagDescription`, while `taskModule` is null.
+3. `TagCommand` then gets the relevant `Module`. If `taskModule` is null, `getGeneralTasks()` is called. Else, `getModule(taskModule)` is called instead.
+4. Next, `TagCommand` checks the `tagOperation`. If add, `addTag(targetModule)` is called. Else if del, `removeTag(targetModule)` is called. Else, it throws `ParseException`.
 
 Below is the sequence diagram of how the tag feature works:
 
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/Tag.puml)
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/GetModule.puml)
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/CheckAndRunTagOperation.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/Tag.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/GetModule.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/CheckAndRunTagOperation.puml)
 
 ## Product scope
 ### Target user profile
