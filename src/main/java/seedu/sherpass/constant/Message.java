@@ -37,6 +37,10 @@ public class Message {
             + "6) Exit study mode: leave";
 
     public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after end time!";
+    public static final String ERROR_EMPTY_DESCRIPTION_MESSAGE = "Description cannot be blank!";
+    public static final String ERROR_EMPTY_TASKLIST_MESSAGE = "The task list is empty!";
+    public static final String ERROR_INVALID_FREQUENCY_MESSAGE = "Invalid frequency!";
+    public static final String ERROR_INVALID_INDEX_MESSAGE = "Invalid index!";
 
     public static final String ERROR_INVALID_INPUT_MESSAGE = "Please key in an appropriate command.\n"
             + HELP_MESSAGE;

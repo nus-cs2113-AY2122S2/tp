@@ -9,6 +9,10 @@ import seedu.sherpass.util.Ui;
 
 import java.time.LocalDateTime;
 
+import static seedu.sherpass.constant.Message.EMPTY_STRING;
+import static seedu.sherpass.constant.Message.ERROR_EMPTY_DESCRIPTION_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_EMPTY_TASKLIST_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
 
 public class EditRecurringCommand extends Command {
@@ -48,20 +52,24 @@ public class EditRecurringCommand extends Command {
         this.doOnEndDateTime = doOnEndDateTime;
     }
 
-    public String getTaskDescription() {
-        return taskDescription;
+    private String isValidArgument(TaskList taskList) {
+        if (taskDescription.isBlank()) {
+            return ERROR_EMPTY_DESCRIPTION_MESSAGE;
+        } else if (doOnStartDateTime != null && doOnStartDateTime.isAfter(doOnEndDateTime)) {
+            return ERROR_START_AFTER_END_TIME_MESSAGE;
+        } else if (taskList.getTasks().size() == 0) {
+            return ERROR_EMPTY_TASKLIST_MESSAGE;
+        } else if (!taskList.isTaskExist(index)) {
+            return ERROR_INVALID_INDEX_MESSAGE;
+        }
+        return EMPTY_STRING;
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        if (taskList.getTasks().isEmpty()) {
-            ui.showToUser("Task list is empty!");
-            return;
-        } else if (!taskList.isTaskExist(index)) {
-            ui.showToUser("Invalid index!");
-            return;
-        } else if (doOnStartDateTime != null && doOnStartDateTime.isAfter(doOnEndDateTime)) {
-            ui.showToUser(ERROR_START_AFTER_END_TIME_MESSAGE);
+        String error = isValidArgument(taskList);
+        if (!error.isBlank()) {
+            ui.showToUser(error);
             return;
         }
 

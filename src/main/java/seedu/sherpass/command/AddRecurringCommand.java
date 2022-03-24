@@ -9,6 +9,8 @@ import seedu.sherpass.util.Ui;
 
 import java.time.LocalDateTime;
 
+import static seedu.sherpass.constant.Message.ERROR_EMPTY_DESCRIPTION_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_FREQUENCY_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
 
 public class AddRecurringCommand extends Command {
@@ -31,10 +33,6 @@ public class AddRecurringCommand extends Command {
 
     }
 
-    public String getTaskDescription() {
-        return taskDescription;
-    }
-
     public void setTaskDescription(String taskDescription) {
         this.taskDescription = taskDescription;
     }
@@ -51,10 +49,22 @@ public class AddRecurringCommand extends Command {
         this.frequency = frequency;
     }
 
+    private String isValidArgument() {
+        if (taskDescription.isBlank()) {
+            return ERROR_EMPTY_DESCRIPTION_MESSAGE;
+        } else if (doOnStartDateTime.isAfter(doOnEndDateTime)) {
+            return ERROR_START_AFTER_END_TIME_MESSAGE;
+        } else if (frequency == null) {
+            return ERROR_INVALID_FREQUENCY_MESSAGE;
+        }
+        return "";
+    }
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        if (doOnStartDateTime.isAfter(doOnEndDateTime)) {
-            ui.showToUser(ERROR_START_AFTER_END_TIME_MESSAGE);
+        String error = isValidArgument();
+        if (!error.isBlank()) {
+            ui.showToUser(error);
             return;
         }
         int identifier = taskList.generateIdentifier();

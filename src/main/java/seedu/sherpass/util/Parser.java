@@ -195,16 +195,12 @@ public class Parser {
         String doOnDateString = parseArgument(DO_DATE_DELIMITER, argument);
         String startTimeString = parseArgument(START_TIME_DELIMITER, argument);
         String endTimeString = parseArgument(END_TIME_DELIMITER, argument);
-        if (newCommand.getTaskDescription().isBlank() || doOnDateString.isBlank()
-                || startTimeString.isBlank() || endTimeString.isBlank()) {
-            return new HelpCommand(AddRecurringCommand.COMMAND_WORD);
-        }
+        newCommand.setDoOnStartDateTime(prepareTaskDate(doOnDateString, startTimeString));
+        newCommand.setDoOnEndDateTime(prepareTaskDate(doOnDateString, endTimeString));
         try {
-            newCommand.setDoOnStartDateTime(prepareTaskDate(doOnDateString, startTimeString));
-            newCommand.setDoOnEndDateTime(prepareTaskDate(doOnDateString, endTimeString));
             newCommand.setFrequency(Frequency.valueOf(parseArgument(FREQUENCY_DELIMITER, argument).toUpperCase()));
         } catch (IllegalArgumentException exception) {
-            return new HelpCommand(AddRecurringCommand.COMMAND_WORD);
+            newCommand.setFrequency(null);
         }
 
         return newCommand;
@@ -215,29 +211,26 @@ public class Parser {
             return new HelpCommand(AddRecurringCommand.COMMAND_WORD);
         }
         String[] splitIndexAndOthers = argument.split(" ", 2);
+
         if (splitIndexAndOthers.length < 2) {
             return new HelpCommand(EditRecurringCommand.COMMAND_WORD);
         }
 
+        String indexString = splitIndexAndOthers[0];
+        String descAndDateString = splitIndexAndOthers[1];
+
         EditRecurringCommand newCommand = new EditRecurringCommand();
-        newCommand.setTaskDescription(parseDescription(splitIndexAndOthers[1]));
-        String doOnDateString = parseArgument(DO_DATE_DELIMITER, splitIndexAndOthers[1]);
-        String startTimeString = parseArgument(START_TIME_DELIMITER, splitIndexAndOthers[1]);
-        String endTimeString = parseArgument(END_TIME_DELIMITER, splitIndexAndOthers[1]);
-        if (newCommand.getTaskDescription().isBlank() && doOnDateString.isBlank()) {
-            return new HelpCommand(EditRecurringCommand.COMMAND_WORD);
-        } else if (!doOnDateString.isBlank() && (startTimeString.isBlank() || endTimeString.isBlank())) {
-            return new HelpCommand(EditRecurringCommand.COMMAND_WORD);
-        }
+        newCommand.setTaskDescription(parseDescription(descAndDateString));
+        String doOnDateString = parseArgument(DO_DATE_DELIMITER, descAndDateString);
+        String startTimeString = parseArgument(START_TIME_DELIMITER, descAndDateString);
+        String endTimeString = parseArgument(END_TIME_DELIMITER, descAndDateString);
         try {
-            newCommand.setIndex(Integer.parseInt(splitIndexAndOthers[0]));
-            if (!doOnDateString.isBlank()) {
-                newCommand.setDoOnStartDateTime(prepareTaskDate(doOnDateString, startTimeString));
-                newCommand.setDoOnEndDateTime(prepareTaskDate(doOnDateString, endTimeString));
-            }
+            newCommand.setIndex(Integer.parseInt(indexString));
         } catch (NumberFormatException notNumberException) {
-            return new HelpCommand(EditRecurringCommand.COMMAND_WORD);
+            newCommand.setIndex(-1);
         }
+        newCommand.setDoOnStartDateTime(prepareTaskDate(doOnDateString, startTimeString));
+        newCommand.setDoOnEndDateTime(prepareTaskDate(doOnDateString, endTimeString));
         return newCommand;
     }
 
@@ -249,7 +242,7 @@ public class Parser {
         try {
             newCommand.setIndex(Integer.parseInt(argument));
         } catch (NumberFormatException exception) {
-            return new HelpCommand(DeleteRecurringCommand.COMMAND_WORD);
+            newCommand.setIndex(-1);
         }
         return newCommand;
     }
