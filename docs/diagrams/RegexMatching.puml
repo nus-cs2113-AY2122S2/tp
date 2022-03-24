@@ -11,9 +11,9 @@ regex -> regex ++ : findMatch()
 regex -> regex ++ : findGroup(regex)
 regex --> regex -- : List of regex groups
 regex -> regex ++ : regexMatching(regex, input)
-regex --> regex -- : Matcher
-regex --> regex -- : HashMap of results stored into groupValues
+regex --> regex -- : :Matcher
+regex --> regex -- : :HashMap
 dummyClass -> regex : Regex.getGroupValues()
-regex --> dummyClass : groupValues
+regex --> dummyClass : :HashMap
 deactivate regex
 @enduml

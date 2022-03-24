@@ -1,0 +1,160 @@
+package seedu.duke;
+
+import util.exceptions.ItemDoesNotExistException;
+import util.exceptions.LargeQuantityException;
+import util.exceptions.WrongCommandException;
+
+import java.util.ArrayList;
+
+public class Order {
+    private int orderId;
+    private String receiver;
+    private String shippingAddress;
+    private ArrayList<Good> userGoods = new ArrayList<>();
+
+    public Order(int orderId, String receiver, String shippingAddress) {
+        this.orderId = orderId;
+        this.receiver = receiver;
+        this.shippingAddress = shippingAddress;
+    }
+
+    public int getId() {
+        return orderId;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public ArrayList<Good> getGoods() {
+        return userGoods;
+    }
+
+    public void addGood(String idStr, String name, String qtyStr,
+                               String desc) throws WrongCommandException {
+        if (idStr.isBlank() || name.isBlank() || qtyStr.isBlank()) {
+            throw new WrongCommandException("add", true);
+        }
+        try {
+            int id = Integer.parseInt(idStr);
+            int qty = Integer.parseInt(qtyStr);
+
+            if (doesGoodExist(id)) {
+                addExistingGood(id, name, qty);
+                return;
+            }
+
+            Good good = new Good(id, name, qty, desc);
+            userGoods.add(good);
+            System.out.printf("%d %s %s added\n", good.getQuantity(), good.getName(),
+                    checkPlural(good.getQuantity()));
+        } catch (NumberFormatException e) {
+            throw new WrongCommandException("add", true);
+        } catch (ItemDoesNotExistException itemDoesNotExistException) {
+            System.out.println("ID has been used but with a different name");
+            throw new WrongCommandException("add", true);
+        }
+    }
+
+    // Function to print grammar for statements to print
+    private String checkPlural(int numberOfGoods) {
+        if (numberOfGoods <= 1) {
+            return "is ";
+        } else {
+            return "are ";
+        }
+    }
+
+    private void remove(int id, int qty)
+            throws LargeQuantityException, ItemDoesNotExistException {
+
+        for (Good good : userGoods) {
+            if (good.getId() == id) {
+                if (qty > good.getQuantity()) {
+                    throw new LargeQuantityException();
+                }
+
+                good.setQuantity(good.getQuantity() - qty);
+
+                if (qty < 2) {
+                    System.out.println(qty + " " + good.getName() + " has been removed.");
+                } else {
+                    System.out.println(qty + " " + good.getName() + " have been removed.");
+                }
+
+                if (good.getQuantity() == 0) {
+                    userGoods.remove(good);
+                }
+
+                return;
+            }
+        }
+
+        throw new ItemDoesNotExistException();
+    }
+
+    public void removeGood(String id, String qty)
+            throws WrongCommandException {
+        if (id.isBlank() || qty.isBlank()) {
+            throw new WrongCommandException("remove", true);
+        }
+
+        try {
+            int goodsId = Integer.parseInt(id);
+            int goodsQty = Integer.parseInt(qty);
+
+            remove(goodsId, goodsQty);
+
+        } catch (NumberFormatException e1) {
+            throw new WrongCommandException("remove", true);
+        } catch (ItemDoesNotExistException e2) {
+            System.out.println("The good you are trying to remove are not on the current list. "
+                    + "Please try another id first.");
+        } catch (LargeQuantityException e3) {
+            System.out.println("The quantity input is larger than the current quantity of the goods. "
+                    + "Please enter the command again with a smaller quantity.");
+        }
+    }
+
+    public boolean doesGoodExist(int goodId) {
+        for (Good good : userGoods) {
+            if (good.getId() == goodId) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private Good findGood(int goodId) {
+        for (Good good : userGoods) {
+            if (good.getId() == goodId) {
+                return good;
+            }
+        }
+
+        return null;
+    }
+
+    private void addExistingGood(int gid, String name, int qty) throws ItemDoesNotExistException {
+        Good good = findGood(gid);
+        if (good != null) {
+            if (!good.getName().equals(name)) {
+                throw new ItemDoesNotExistException();
+            }
+            int oldQty = good.getQuantity();
+            good.setQuantity(oldQty + qty);
+            System.out.printf("%d more %s added, total quantity of %s is now %d\n",
+                    qty, good.getName(),
+                    good.getName(), good.getQuantity());
+        }
+    }
+
+    public String toString() {
+        return String.format("%d - %s (%s)", orderId, receiver, shippingAddress);
+    }
+}

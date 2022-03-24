@@ -38,8 +38,8 @@ public class Regex {
      * @throws //If no match is found should throw something?
      * Current implementation is just to put no value with
      * corresponding keys
-     */
-     private HashMap<String,String> findMatch() {
+    */
+    private HashMap<String,String> findMatch() {
         HashMap<String, String> hashMap = new HashMap<>();
         ArrayList<String> groupNames = findGroup(regex);
         Matcher matcher = regexMatching(regex, input);
@@ -64,7 +64,7 @@ public class Regex {
      * @param input Given input to match regex against
      * @return Matcher class after matching the input with regex
      */
-     private Matcher regexMatching(String regex, String input) {
+    private Matcher regexMatching(String regex, String input) {
         Pattern pattern = Pattern.compile(regex);
         return pattern.matcher(input);
     }
