@@ -760,6 +760,10 @@ Format: `help`
 	 plan /list
 	 This will print all the existing plans.
 ----------------------------------------------------------------------
+	 To view each plan in detail, please enter:
+	 plan /details <plan index in list>
+	 This will print all the workouts in the plan of given index.
+----------------------------------------------------------------------
 	 To add a plan, please enter: 
 	 plan /new <plan name> /workouts <workout index(s) separated by ','>
 	 Example: 
