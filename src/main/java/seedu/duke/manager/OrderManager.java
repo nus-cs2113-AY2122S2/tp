@@ -65,23 +65,22 @@ public class OrderManager extends Manager {
 
 
     /**
-     * Add dish by index to the order.
+     * add dish to an order.
      *
-     * @param dishIdx the index of the dish.
-     * @return size of the order list.
+     * @param dishIdx
+     * @param orderIdx
+     * @param dishManager
      */
     public void addDishToOrder(int dishIdx, int orderIdx, DishManager dishManager) {
         ArrayList<Dish> dishes = dishManager.getDishes();
         Dish dish = dishes.get(dishIdx);
-
         if (orderIdx == this.orders.size()) {
             Order order = null;
             order = new Order(Arrays.asList(new Dish(dish.getName(), dish.getPrice())));
             this.orders.add(order);
-        }
-        else {
+        } else {
             Order order = new Order();
-            for(Dish existingDish : this.orders.get(orderIdx).getDishes()) {
+            for (Dish existingDish : this.orders.get(orderIdx).getDishes()) {
                 order.addDish(new Dish(existingDish.getName(), existingDish.getPrice()));
             }
             order.addDish(dish);
