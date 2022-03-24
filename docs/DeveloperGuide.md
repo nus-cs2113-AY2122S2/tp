@@ -82,9 +82,8 @@ class would return a unique identifier every time a new `Session`, `Activity` or
 <br>
 The `TextUI` class is initialized by the `Manager` class when the application starts.
 It stores a `Scanner` and `PrintStream` object supplied upon initialization to read and write to the user interface.
-It offers methods to print application output to and read user input from these object for other classes to use.
-The `TextUI` class allows other classes to implement their read and write logic in an interface-agnostic way as long as
-they make use of methods from `TextUI`.
+It offers methods to print application output to and read user input from these objects for other classes to use.
+As TextUI handles all input and output streams, these streams can be changed without affecting the rest of the program.
 
 ### Storage Component
 
