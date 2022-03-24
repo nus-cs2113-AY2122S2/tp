@@ -15,9 +15,9 @@ public class DeleteParser extends Parser {
     public static final String MODULE_CODE = StringConstants.MODULE_CODE;
 
     // Unescaped regex for testing:
-    // (/t\s+(?<taskNumber>\d+)(\s+-m\s+(?<taskModule>\w+))?|/m\s+(?<moduleCode>\w+))
-    private static final String DELETE_FORMAT = "(/t\\s+(?<taskNumber>\\d+)(\\s+-m\\s+(?<taskModule>\\w+))?"
-            + "|/m\\s+(?<moduleCode>\\w+))";
+    // (task\s+(?<taskNumber>\d+)(\s+-m\s+(?<taskModule>\w+))?|mod\s+(?<moduleCode>\w+))
+    private static final String DELETE_FORMAT = "(task\\s+(?<taskNumber>\\d+)(\\s+-m\\s+(?<taskModule>\\w+))?|"
+            + "mod\\s+(?<moduleCode>\\w+))";
 
     public DeleteParser() {
         super();

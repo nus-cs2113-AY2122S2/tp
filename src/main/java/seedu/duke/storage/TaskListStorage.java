@@ -28,7 +28,7 @@ public class TaskListStorage extends ListStorage<Task> {
      * @throws ModHappyException if an error was encountered during reading
      */
     @Override
-    public ArrayList<Task> jsonReader(String path) throws ModHappyException {
+    public ArrayList<Task> loadData(String path) throws ModHappyException {
         Gson gson = new GsonBuilder().create();
         Path file = new File(path).toPath();
         try {

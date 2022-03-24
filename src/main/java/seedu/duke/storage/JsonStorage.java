@@ -17,7 +17,7 @@ public abstract class JsonStorage<T extends Object> implements Storage<T> {
      * @throws ModHappyException if an error was encountered during writing
      */
     @Override
-    public void jsonWriter(T object, String path) throws ModHappyException {
+    public void writeData(T object, String path) throws ModHappyException {
         try {
             createTargetFile(path);
             FileOutputStream fos = new FileOutputStream(path);
@@ -53,6 +53,6 @@ public abstract class JsonStorage<T extends Object> implements Storage<T> {
     }
 
     @Override
-    public abstract T jsonReader(String path) throws ModHappyException;
+    public abstract T loadData(String path) throws ModHappyException;
 
 }

@@ -52,12 +52,6 @@ public class StringConstants {
             + "Are you sure you want to delete this? (yes/no)";
 
     /**
-     * For GradeCommand.
-     */
-    public static final String GRADE_ADDED_MESSAGE = "Your grade for %s has been added.";
-    public static final String GRADE_CHANGED_MESSAGE = "Your grade for %s has been changed.";
-
-    /**
      * For EditCommand.
      */
     public static final String EDIT_TASK_SUCCESS = "The %s of %s has been changed.";
@@ -71,6 +65,18 @@ public class StringConstants {
      * For ExitCommand.
      */
     public static final String READY_EXIT = "I am ready to exit *_*";
+
+
+    /**
+     * For GpaCommand.
+     */
+    public static final String GPA_MESSAGE = "Your GPA is %.02f! :)";
+
+    /**
+     * For GradeCommand.
+     */
+    public static final String GRADE_ADDED_MESSAGE = "Your grade for %s has been added.";
+    public static final String GRADE_CHANGED_MESSAGE = "Your grade for %s has been changed.";
 
     /**
      * For ListCommand.
@@ -188,6 +194,8 @@ public class StringConstants {
     public static final String ERROR_NO_SUCH_TAG = "Sorry, no such tag exists ._.";
     public static final String ERROR_UNKNOWN_CONFIGURATION_GROUP = "Sorry, no config named \"%s\" exists.\n"
             + "View all available config settings with \"option\".";
+    public static final String ERROR_MODULE_LIST_EMPTY = "Sorry, your module list is currently empty ._.\n"
+            + "Please add some modules!";
 
 
     /**
@@ -204,8 +212,8 @@ public class StringConstants {
     public static final String TASK_NUMBER = "taskNumber";
     public static final String FLAG = "flag";
     public static final String TASK_INDEX = "taskIndex";
-    public static final String COMPLETED_FLAG = "/c";
-    public static final String UNCOMPLETED_FLAG = "/u";
+    public static final String COMPLETED_FLAG = "c";
+    public static final String UNCOMPLETED_FLAG = "u";
     public static final String ARGUMENT = "arguments";
     public static final String TAG_NAME = "tagName";
     public static final String TAG_OPERATION = "tagOperation";
@@ -214,6 +222,7 @@ public class StringConstants {
     public static final String ADD_COMMAND_WORD = "add";
     public static final String DELETE_COMMAND_WORD = "del";
     public static final String EDIT_COMMAND_WORD = "edit";
+    public static final String GPA_COMMAND_WORD = "gpa";
     public static final String GRADE_COMMAND_WORD = "grade";
     public static final String LIST_COMMAND_WORD = "list";
     public static final String MARK_COMMAND_WORD = "mark";
@@ -224,7 +233,7 @@ public class StringConstants {
     public static final String OPTION_COMMAND_WORD = "option";
 
     /**
-     * For Grades.
+     * For grades.
      */
     public static final String DASH = "-";
     public static final String PLUS = "+";
@@ -252,6 +261,5 @@ public class StringConstants {
     public static final String INDENT = "    ";
     public static final String NULL_STRING = "";
     public static final String LS = System.lineSeparator();
-    public static final String COLON = ":";
     public static final String LINE = "____________________________________________________________";
 }

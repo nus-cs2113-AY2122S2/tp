@@ -2,6 +2,7 @@ package seedu.duke.parsers;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.ExitCommand;
+import seedu.duke.commands.GpaCommand;
 import seedu.duke.commands.ResetCommand;
 import seedu.duke.commands.SaveCommand;
 import seedu.duke.exceptions.ModHappyException;
@@ -26,6 +27,8 @@ public class NoArgumentParser extends Parser {
         switch (myCommandWord) {
         case (EXIT_COMMAND_WORD):
             return new ExitCommand();
+        case (GPA_COMMAND_WORD):
+            return new GpaCommand();
         case (RESET_COMMAND_WORD):
             return new ResetCommand();
         case (SAVE_COMMAND_WORD):

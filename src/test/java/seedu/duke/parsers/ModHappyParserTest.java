@@ -49,7 +49,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_noDescription_parsedCorrectly() {
-        final String testString = "add /t \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d \"  ";
+        final String testString = "add task \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d \"  ";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -67,7 +67,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_withDescription_parsedCorrectly() {
-        final String testString = "add /t \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d \"  "
+        final String testString = "add task \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d \"  "
                 + "-d \"-d-d-d /t /m -d -d  \"";
         try {
             Command c = parser.parseCommand(testString);
@@ -86,7 +86,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_withWorkingTime_parsedCorrectly() {
-        final String testString = "add /t \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d \"  "
+        final String testString = "add task \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d \"  "
                 + "-t \"-d-d-d /t /m -d -d  \"";
         try {
             Command c = parser.parseCommand(testString);
@@ -105,7 +105,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_withTargetModule_parsedCorrectly() {
-        final String testString = "add /t \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d \"  "
+        final String testString = "add task \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d \"  "
                 + "-m cs2113t";
         try {
             Command c = parser.parseCommand(testString);
@@ -124,7 +124,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_withTargetModule_invalidModuleCode() {
-        final String testString = "add /t \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d \"  "
+        final String testString = "add task \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d \"  "
                 + "-m cs 2113 t";
         try {
             parser.parseCommand(testString);
@@ -138,7 +138,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_withDescription_withWorkingTime_parsedCorrectly() {
-        final String testString = "add /t \"/t/t/t/t-d\" -d \"-d-d-d /t /m -d -d  \" "
+        final String testString = "add task \"/t/t/t/t-d\" -d \"-d-d-d /t /m -d -d  \" "
                 + "-t \"-t-t-t t-t-t /t/t -d -d -d \"";
         try {
             Command c = parser.parseCommand(testString);
@@ -157,7 +157,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_withDescription_withWorkingTime_wrongOrder() {
-        final String testString = "add /t \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d\"   "
+        final String testString = "add task \"/t/t/t/t-d-d-d-d-d -d/t/t-d-d-d-d -d-d-d\"   "
                 + "-t \"-t-t-t t-t-t /t/t -d -d -d \" "
                 + "-d \"-d-d-d /t /m -d -d  \" ";
         try {
@@ -172,8 +172,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_withDescription_withTargetModule_parsedCorrectly() {
-        final String testString = "add /t \"/t/t/t/t-d\" -d \"-d-d-d /t /m -d -d  \" "
-                + "-m cs2113t";
+        final String testString = "add task \"/t/t/t/t-d\" -m cs2113t -d \"-d-d-d /t /m -d -d  \" ";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -191,8 +190,8 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_withDescription_withTargetModule_wrongOrder() {
-        final String testString = "add /t \"/t/t/t/t-d\" -m cs2113t "
-                + "-d \"-d-d-d /t /m -d -d  \"";
+        final String testString = "add task \"/t/t/t/t-d\" -m cs2113t "
+                + "-t \"-d-t-m -d -t -t\" -d \"-d-d-d /t /m -d -d  \"";
         try {
             parser.parseCommand(testString);
             fail();
@@ -205,8 +204,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_withWorkingTime_withTargetModule_parsedCorrectly() {
-        final String testString = "add /t \"/t/t/t/t-d\" -t \"-d-d-d /t /m -d -d  \" "
-                + "-m cs2113t    ";
+        final String testString = "add task \"/t/t/t/t-d\" -m cs2113t -t \"-d-d-d /t /m -d -d  \" ";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -224,8 +222,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_withWorkingTime_withTargetModule_wrongOrder() {
-        final String testString = "add /t \"/t/t/t/t-d\" -m cs2113t "
-                + "-t \"-d-d-d /t /m -d -d  \"";
+        final String testString = "add task \"/t/t/t/t-d\" -t \"-d-d-d /t /m -d -d  \" -m cs2113t ";
         try {
             parser.parseCommand(testString);
             fail();
@@ -238,8 +235,8 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_withDescription_withWorkingTime_withTargetModule_parsedCorrectly() {
-        final String testString = "add /t \"/t/t/t/t-d\" -d \"-d-d-t-m /m -m -d -t  \" -t \"-d-d-d /t /m -d -d  \" "
-                + "-m cs2113t";
+        final String testString = "add task \"/t/t/t/t-d\" -m cs2113t -d \"-d-d-t-m /m -m -d -t  \" "
+                + "-t \"-d-d-d /t /m -d -d  \" ";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -257,7 +254,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_withDescription_withWorkingTime_withTargetModule_wrongOrder1() {
-        final String testString = "add /t \"/t/t/t/t-d\" -t \"-d-d-t-m /m -m -d -t  \" -d \"-d-d-d /t /m -d -d  \" "
+        final String testString = "add task \"/t/t/t/t-d\" -t \"-d-d-t-m /m -m -d -t  \" -d \"-d-d-d /t /m -d -d  \" "
                 + "-m cs2113t";
         try {
             parser.parseCommand(testString);
@@ -271,7 +268,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_withDescription_withWorkingTime_withTargetModule_wrongOrder2() {
-        final String testString = "add /t \"/t/t/t/t-d\" -t \"-d-d-t-m /m -m -d -t  \" -m cs2113t"
+        final String testString = "add task \"/t/t/t/t-d\" -t \"-d-d-t-m /m -m -d -t  \" -m cs2113t"
                 + "-d \"-d-d-d /t /m -d -d  \" ";
         try {
             parser.parseCommand(testString);
@@ -285,8 +282,8 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_withDescription_withWorkingTime_withTargetModule_wrongOrder3() {
-        final String testString = "add /t \"/t/t/t/t-d\" -m cs2113t   -d \"-d -d-t-t -t -m -m -m /m/m\""
-                + "  -t \" -d-d -t /m -m -m-d -t -m\"";
+        final String testString = "add task \"/t/t/t/t-d\" -m cs2113t  -t \" -d-d -t /m -m -m-d -t -m\""
+                + " -d \"-d -d-t-t -t -m -m -m /m/m\"";
         try {
             parser.parseCommand(testString);
             fail();
@@ -299,7 +296,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_duplicateTaskDescription() {
-        final String testString = "add /t 000 -d \"123\" -t \"456\" -d \"789\"";
+        final String testString = "add task 000 -d \"123\" -t \"456\" -d \"789\"";
         try {
             parser.parseCommand(testString);
             fail();
@@ -312,7 +309,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_duplicateWorkingTime() {
-        final String testString = "add /t 000 -t \"123\" -d \"456\" -t \"789\"";
+        final String testString = "add task 000 -t \"123\" -d \"456\" -t \"789\"";
         try {
             parser.parseCommand(testString);
             fail();
@@ -325,7 +322,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_invalidInput() {
-        final String testString = "add /t 000 -d \"123\" -t \"456\" invalid";
+        final String testString = "add task 000 -d \"123\" -t \"456\" invalid";
         try {
             parser.parseCommand(testString);
             fail();
@@ -338,7 +335,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_module_noDescription_parsedCorrectly() {
-        final String testString = "add  \t /m modulecode 4 \t\t    ";
+        final String testString = "add  \t mod modulecode 4 \t\t    ";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -355,7 +352,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_module_invalidModularCredit() {
-        final String testString = "add  \t /m modulecode four \t\t    ";
+        final String testString = "add  \t mod modulecode four \t\t    ";
         try {
             parser.parseCommand(testString);
             fail();
@@ -368,7 +365,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_module_noDescription_invalidModuleCode() {
-        final String testString = "add  \t /m module code /c 4 \t\t    ";
+        final String testString = "add  \t mod module code /c 4 \t\t    ";
         try {
             parser.parseCommand(testString);
             fail();
@@ -381,7 +378,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_module_withDescription_parsedCorrectly() {
-        final String testString = "add  \t /m modu__lec_ode \t\t  23  -d  \t \"i am a descrip\t -d-d tion\t \"\t  ";
+        final String testString = "add  \t mod modu__lec_ode \t\t  23  -d  \t \"i am a descrip\t -d-d tion\t \"\t  ";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof AddCommand);
@@ -398,7 +395,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_module_withDescription_invalidModuleCode() {
-        final String testString = "add  \t /m module code \t\t  4  -d \t\t  \t \"i am a descrip\t -d-d tion\t \"\t  ";
+        final String testString = "add  \t mod module code \t\t  4  -d \t\t  \t \"i am a descrip\t -d-d tion\t \"\t  ";
         try {
             parser.parseCommand(testString);
             fail();
@@ -411,7 +408,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_module_withDescription_invalidInput() {
-        final String testString = "add /m cs2113t /c 4 -d \"11111\"123";
+        final String testString = "add mod cs2113t 4 -d \"11111\"123";
         try {
             parser.parseCommand(testString);
             fail();
@@ -450,7 +447,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_withModuleOnly_noModuleProvided() {
-        final String testString = "add /m";
+        final String testString = "add mod";
         try {
             parser.parseCommand(testString);
             fail();
@@ -463,7 +460,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_withTaskOnly_noTaskProvided() {
-        final String testString = "add /t";
+        final String testString = "add task";
         try {
             parser.parseCommand(testString);
             fail();
@@ -476,7 +473,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_deleteCommand_withTaskOnly_parsedCorrectly() {
-        final String testString = "del /t 1";
+        final String testString = "del task 1";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof DeleteCommand);
@@ -488,7 +485,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_deleteCommand_withTaskOnly_integerOverflow() {
-        final String testString = "del /t 2147483648";
+        final String testString = "del task 2147483648";
         try {
             parser.parseCommand(testString);
             fail();
@@ -501,7 +498,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_deleteCommand_withModuleOnly_parsedCorrectly() {
-        final String testString = "del /m CS2113T";
+        final String testString = "del mod CS2113T";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof DeleteCommand);
@@ -513,7 +510,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_deleteCommand_withTask_withTargetModule_parsedCorrectly() {
-        final String testString = "del /t 1 -m cs2113t";
+        final String testString = "del task 1 -m cs2113t";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof DeleteCommand);
@@ -526,7 +523,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_deleteCommand_withTask_withTargetModule_invalidModuleCode() {
-        final String testString = "del /t 1 -m cs 2113 t";
+        final String testString = "del task 1 -m cs 2113 t";
         try {
             parser.parseCommand(testString);
             fail();
@@ -565,7 +562,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_deleteCommand_withModuleOnly_noModuleProvided() {
-        final String testString = "del /m";
+        final String testString = "del mod";
         try {
             parser.parseCommand(testString);
             fail();
@@ -578,7 +575,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_deleteCommand_withTaskOnly_noIndexProvided() {
-        final String testString = "del /t";
+        final String testString = "del task";
         try {
             parser.parseCommand(testString);
             fail();
@@ -591,7 +588,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_deleteCommand_withTaskOnly_notANumber() {
-        final String testString = "del /t iamnotanumber";
+        final String testString = "del task iamnotanumber";
         try {
             parser.parseCommand(testString);
             fail();
@@ -604,7 +601,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_deleteCommand_unnecessaryArgs() {
-        final String testString = "del /t 1 blahblah";
+        final String testString = "del task 1 blahblah";
         try {
             parser.parseCommand(testString);
             fail();
@@ -617,7 +614,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_editCommand_task_unnecessaryArgs() {
-        final String testString = "edit /t 1 blahblah";
+        final String testString = "edit task 1 blahblah";
         try {
             parser.parseCommand(testString);
             fail();
@@ -630,7 +627,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_editCommand_task_parsedCorrectly() {
-        final String testString = "edit /t 1 -n \"changed\" -m cs2113t";
+        final String testString = "edit task 1 -m cs2113t -n \"changed\" ";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof EditCommand);
@@ -644,7 +641,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_editCommand_task_noOptionalFlags() {
-        final String testString = "edit /t 1";
+        final String testString = "edit task 1";
         try {
             parser.parseCommand(testString);
             fail();
@@ -657,7 +654,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_editCommand_module_wrongFlag() {
-        final String testString = "edit /m cs2113t -t \"111\"";
+        final String testString = "edit mod cs2113t -t \"111\"";
         try {
             parser.parseCommand(testString);
             fail();
@@ -670,7 +667,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_editCommand_task_notANumber() {
-        final String testString = "edit /t two -t \"111\"";
+        final String testString = "edit task two -t \"111\"";
         try {
             parser.parseCommand(testString);
             fail();
@@ -683,7 +680,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_editCommand_task_tooManyFlags() {
-        final String testString = "edit /t 2 -d \"123\" -t \"111\" -m cs2113t";
+        final String testString = "edit task 2 -m cs2113t -d \"123\" -t \"111\" ";
         try {
             parser.parseCommand(testString);
             fail();
@@ -696,7 +693,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_gradeCommand_parsedCorrectly() {
-        final String testString = "grade /m CS2113T a+";
+        final String testString = "grade CS2113T a+";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof GradeCommand);
@@ -709,7 +706,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_gradeCommand_invalidGrade() {
-        final String testString = "grade /m CS2113T F-";
+        final String testString = "grade CS2113T F-";
         try {
             parser.parseCommand(testString);
             fail();
@@ -722,7 +719,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_gradeCommand_wrongOrder() {
-        final String testString = "grade A- /m CS2113T";
+        final String testString = "grade A- CS2113T";
         try {
             parser.parseCommand(testString);
             fail();
@@ -735,7 +732,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_markCommand_noModule_parsedCorrectly() {
-        final String testString = "mark /c 3";
+        final String testString = "mark c 3";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof MarkCommand);
@@ -748,7 +745,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_markCommand_withModule_parsedCorrectly() {
-        final String testString = "mark /c 3 -m cs2113t";
+        final String testString = "mark c 3 -m cs2113t";
         try {
             Command c = parser.parseCommand(testString);
             assertTrue(c instanceof MarkCommand);
@@ -761,7 +758,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_markCommand_invalidFlag() {
-        final String testString = "mark /a 1";
+        final String testString = "mark a 1";
         try {
             parser.parseCommand(testString);
             fail();
@@ -787,7 +784,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_markCommand_noIndexProvided() {
-        final String testString = "mark /c";
+        final String testString = "mark c";
         try {
             parser.parseCommand(testString);
             fail();
@@ -800,7 +797,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_markCommand_notANumber() {
-        final String testString = "mark /c iamnotanumber";
+        final String testString = "mark c iamnotanumber";
         try {
             parser.parseCommand(testString);
             fail();
@@ -813,7 +810,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_markCommand_unnecessaryArgs() {
-        final String testString = "mark /c 1 blahblah";
+        final String testString = "mark c 1 blahblah";
         try {
             parser.parseCommand(testString);
             fail();

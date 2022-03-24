@@ -15,8 +15,8 @@ public class GradeParser extends Parser {
     public static final String MODULE_GRADE = StringConstants.MODULE_GRADE;
 
     // Unescaped regex for testing:
-    // (/m\s+(?<moduleCode>\w+)(\s+(?<moduleGrade>(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U))))
-    private static final String GRADE_FORMAT = "(/m\\s+(?<moduleCode>\\w+)(\\s+"
+    // ((?<moduleCode>\w+)(\s+(?<moduleGrade>(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U))))
+    private static final String GRADE_FORMAT = "((?<moduleCode>\\w+)(\\s+"
             + "(?<moduleGrade>(?i)(CU|CS|[A-B][+-]?|[C-D][+]?|F|S|U))))";
 
     public GradeParser() {

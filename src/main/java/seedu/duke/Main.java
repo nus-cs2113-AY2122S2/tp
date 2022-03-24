@@ -1,14 +1,18 @@
 package seedu.duke;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.commands.ExitCommand;
+import seedu.duke.data.Module;
+import seedu.duke.data.Task;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.parsers.ModHappyParser;
 import seedu.duke.storage.ConfigurationStorage;
 import seedu.duke.storage.ModuleListStorage;
+import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskListStorage;
 import seedu.duke.data.ModuleList;
 import seedu.duke.ui.TextUi;
@@ -33,6 +37,7 @@ public class Main {
     private ModHappyParser modHappyParser;
     private ModuleList moduleList;
     private Configuration configuration;
+    private Storage modHappyStorage;
 
     /**
      * Main entry-point for the application.
@@ -75,9 +80,9 @@ public class Main {
     private void loadDataFromFile() {
         File moduleDataFile = new File(modulePath);
         if (moduleDataFile.exists()) {
-            ModuleListStorage moduleListStorage = new ModuleListStorage();
+            modHappyStorage = new ModuleListStorage();
             try {
-                moduleList.setModuleList(moduleListStorage.jsonReader(modulePath));
+                moduleList.setModuleList((ArrayList<Module>) modHappyStorage.loadData(modulePath));
                 ui.showUnformattedMessage(moduleLoadSuccessMessage);
             } catch (ModHappyException e) {
                 ui.showUnformattedMessage(e);
@@ -86,9 +91,9 @@ public class Main {
         }
         File taskDataFile = new File(taskPath);
         if (taskDataFile.exists()) {
-            TaskListStorage taskListStorage = new TaskListStorage();
+            modHappyStorage = new TaskListStorage();
             try {
-                moduleList.initialiseGeneralTasksFromTaskList(taskListStorage.jsonReader(taskPath));
+                moduleList.initialiseGeneralTasksFromTaskList((ArrayList<Task>) modHappyStorage.loadData(taskPath));
                 ui.showUnformattedMessage(taskLoadSuccessMessage);
             } catch (ModHappyException e) {
                 ui.showUnformattedMessage(e);
@@ -97,9 +102,9 @@ public class Main {
         }
         File configurationDataFile = new File(configurationPath);
         if (configurationDataFile.exists()) {
-            ConfigurationStorage configurationStorage = new ConfigurationStorage();
+            modHappyStorage = new ConfigurationStorage();
             try {
-                configuration = configurationStorage.jsonReader(configurationPath);
+                configuration = (Configuration) modHappyStorage.loadData(configurationPath);
                 ui.showUnformattedMessage(configurationLoadSuccessMessage);
             } catch (ModHappyException e) {
                 ui.showUnformattedMessage(e);
