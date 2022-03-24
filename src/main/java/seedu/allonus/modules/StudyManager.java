@@ -21,77 +21,77 @@ public class StudyManager {
     /**
      * Study manager messages and commands.
      */
-    public static final String UNKNOWN_INPUT_MESSAGE = "Sorry I did not get that!";
-    public static final String MENU_COMMAND = "menu";
-    public static final String LIST_COMMAND = "list";
-    public static final String DELETE_COMMAND = "rm";
-    public static final String ADD_COMMAND = "add";
-    public static final String EDIT_COMMAND = "edit";
-    public static final String FIND_COMMAND = "find";
-    public static final String MODULE_TIME_DELIMITER = "t/";
-    public static final String MODULE_DAY_DELIMITER = "d/";
-    public static final String MODULE_CODE_DELIMITER = "m/";
-    public static final String MODULE_CATEGORY_DELIMITER = "c/";
-    public static final String MODULE_CATEGORY_LEC = "Lecture";
-    public static final String MODULE_CATEGORY_TUT = "Tutorial";
-    public static final String MODULE_CATEGORY_EXAM = "Exam";
+    private static final String UNKNOWN_INPUT_MESSAGE = "Sorry I did not get that!";
+    private static final String MENU_COMMAND = "menu";
+    private static final String LIST_COMMAND = "list";
+    private static final String DELETE_COMMAND = "rm";
+    private static final String ADD_COMMAND = "add";
+    private static final String EDIT_COMMAND = "edit";
+    private static final String FIND_COMMAND = "find";
+    private static final String MODULE_TIME_DELIMITER = "t/";
+    private static final String MODULE_DAY_DELIMITER = "d/";
+    private static final String MODULE_CODE_DELIMITER = "m/";
+    private static final String MODULE_CATEGORY_DELIMITER = "c/";
+    private static final String MODULE_CATEGORY_LEC = "Lecture";
+    private static final String MODULE_CATEGORY_TUT = "Tutorial";
+    private static final String MODULE_CATEGORY_EXAM = "Exam";
     private static final String WELCOME_MESSAGE = "Welcome to Modules Tracker, where you can track all your "
             + "classes.";
 
     /**
      * Edit module messages.
      */
-    public static final String EDIT_MODULE_OPENING_MESSAGE = "Here is the module that you have chosen to edit:";
-    public static final String EDIT_MODULE_CHOOSE_MESSAGE = "Choose the part that you would like to edit: ";
-    public static final String EDIT_MODULE_SUCCESS_MESSAGE = "Your Module was successfully edited! "
+    private static final String EDIT_MODULE_OPENING_MESSAGE = "Here is the module that you have chosen to edit:";
+    private static final String EDIT_MODULE_CHOOSE_MESSAGE = "Choose the part that you would like to edit: ";
+    private static final String EDIT_MODULE_SUCCESS_MESSAGE = "Your Module was successfully edited! "
             + "Here are the changes";
-    public static final String EDIT_MODULE_EXIT_MESSAGE = "Exiting the edit mode";
-    public static final String EDIT_NO_MODULES_ERROR = "There are no modules to edit!";
-    public static final String EDIT_NO_INDEX_ERROR = "Please enter the index of the module you would like to edit";
-    public static final String LOGGER_WRONG_EDIT_INDEX = "wrong index for edit";
-    public static final String LOGGER_NO_EDIT_INDEX = "no index number specified for edit";
+    private static final String EDIT_MODULE_EXIT_MESSAGE = "Exiting the edit mode";
+    private static final String EDIT_NO_MODULES_ERROR = "There are no modules to edit!";
+    private static final String EDIT_NO_INDEX_ERROR = "Please enter the index of the module you would like to edit";
+    private static final String LOGGER_WRONG_EDIT_INDEX = "wrong index for edit";
+    private static final String LOGGER_NO_EDIT_INDEX = "no index number specified for edit";
 
     /**
      * Delete module messages.
      */
-    public static final String DELETE_MODULE_SUCCESS_MESSAGE = "Noted I have removed this module from your schedule:";
-    public static final String DELETE_NO_MODULES_ERROR = "There are no modules to delete!";
-    public static final String DELETE_NO_INDEX_ERROR = "Please enter the index of the module you would like to delete";
-    public static final String LOGGER_WRONG_INDEX_DELETE = "wrong index for delete";
-    public static final String LOGGER_NO_INDEX_DELETE = "no index number specified for delete";
+    private static final String DELETE_MODULE_SUCCESS_MESSAGE = "Noted I have removed this module from your schedule:";
+    private static final String DELETE_NO_MODULES_ERROR = "There are no modules to delete!";
+    private static final String DELETE_NO_INDEX_ERROR = "Please enter the index of the module you would like to delete";
+    private static final String LOGGER_WRONG_INDEX_DELETE = "wrong index for delete";
+    private static final String LOGGER_NO_INDEX_DELETE = "no index number specified for delete";
 
     /**
      * Add module messages.
      */
-    public static final String ADD_MODULE_SUCCESS_MESSAGE = "Okay, I have added a new module to the schedule";
-    public static final String ADD_WRONG_FORMAT_MESSAGE = "Please ensure that your input follows the form:";
-    public static final String ADD_SAMPLE_FORMAT_MESSAGE = "add m/CS2113 c/lec d/Thursday t/2pm-4pm";
-    public static final String LOGGER_WRONG_ADD_FORMAT = "Wrong format for add module";
-    public static final String LOGGER_MISSING_DAY_IN_ADD = "Day was not specified for add module";
-    public static final String LOGGER_MISSING_CAT_IN_ADD = "Category was not specified for add module";
-    public static final String LOGGER_MISSING_TIME_IN_ADD = "Time was not specified for add module";
-    public static final String LOGGER_MISSING_CODE_IN_ADD = "Code was not specified for add module";
+    private static final String ADD_MODULE_SUCCESS_MESSAGE = "Okay, I have added a new module to the schedule";
+    private static final String ADD_WRONG_FORMAT_MESSAGE = "Please ensure that your input follows the form:";
+    private static final String ADD_SAMPLE_FORMAT_MESSAGE = "add m/CS2113 c/lec d/Thursday t/2pm-4pm";
+    private static final String LOGGER_WRONG_ADD_FORMAT = "Wrong format for add module";
+    private static final String LOGGER_MISSING_DAY_IN_ADD = "Day was not specified for add module";
+    private static final String LOGGER_MISSING_CAT_IN_ADD = "Category was not specified for add module";
+    private static final String LOGGER_MISSING_TIME_IN_ADD = "Time was not specified for add module";
+    private static final String LOGGER_MISSING_CODE_IN_ADD = "Code was not specified for add module";
 
     /**
      * Find modules messages.
      */
-    public static final String FIND_NO_MATCHES_MESSAGE = "There are no modules that match";
-    public static final String FIND_LIST_MATCHES_MESSAGE = "Here are the matching tasks in your list:";
+    private static final String FIND_NO_MATCHES_MESSAGE = "There are no modules that match";
+    private static final String FIND_LIST_MATCHES_MESSAGE = "Here are the matching tasks in your list:";
 
     /**
      * List modules messages.
      */
-    public static final String EMPTY_MODULE_LIST_MESAGE = "There are no modules in your list yet!";
-    public static final String LIST_MODULES_MESSAGE = "Here are the modules in your schedule:";
+    private static final String EMPTY_MODULE_LIST_MESAGE = "There are no modules in your list yet!";
+    private static final String LIST_MODULES_MESSAGE = "Here are the modules in your schedule:";
 
     /**
      * Messages for exceptions and errors.
      */
-    public static final String MISSING_MODULE_DAY_MESSAGE = "Please enter the day of your module";
-    public static final String MISSING_MODULE_CATEGORY_MESSAGE = "Please enter the category of your module";
-    public static final String MISSING_MODULE_TIME_MESSAGE = "Please enter the time of your module's class";
-    public static final String MISSING_MODULE_CODE_MESSAGE = "Please enter the code for your module";
-    public static final String WRONG_CATEGORY_FORMAT_MESSAGE = "Category has to be one of lec,tut or exam";
+    private static final String MISSING_MODULE_DAY_MESSAGE = "Please enter the day of your module";
+    private static final String MISSING_MODULE_CATEGORY_MESSAGE = "Please enter the category of your module";
+    private static final String MISSING_MODULE_TIME_MESSAGE = "Please enter the time of your module's class";
+    private static final String MISSING_MODULE_CODE_MESSAGE = "Please enter the code for your module";
+    private static final String WRONG_CATEGORY_FORMAT_MESSAGE = "Category has to be one of lec,tut or exam";
 
     private static Logger logger = Logger.getLogger("mylogger");
 
