@@ -825,6 +825,13 @@ Format: `help`
 	 search /plan grow
 	 This will show the plan(s) containing keyword grow if exist.
 ----------------------------------------------------------------------
+	 To search for everything related to the keyword, please enter: 
+	 search /all <keyword>
+	 Example: 
+	 search /all a
+	 This will show the exercise(s), workout(s) and plan(s) containing
+	 keyword a if exist.
+----------------------------------------------------------------------
 ----------------------------------------------------------------------
 	 To exit werkIt, please enter: 
 	 exit
