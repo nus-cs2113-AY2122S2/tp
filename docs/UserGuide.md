@@ -313,7 +313,7 @@ Example of usage:
 
 ### Creating a group: `group /create`
 
-> Creates a new group . <br>
+> Creates a new group. <br>
 > A group represents one or more individuals. It is used as a shortcut in several commands for identifying a group of individual persons.<br>
 
 Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
@@ -328,7 +328,7 @@ Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
 >- Each name in `[NAME1 NAME2 ...]` for the group should be unique.
 
 
-Examples of usage:
+Example of usage:
 1. Adds a new group named group1, with alice and bob involved.
     - `group /create /n group1 /pl alice bob` <br>
       ![Group create command Screenshot]()
@@ -346,6 +346,9 @@ Format: `group /delete /gid [GROUP_ID]`
 
 > **💡 Note(s):**
 >- A group with a unique identifier of `[GROUP_ID]` has to exist before it can be removed.
+
+> **⚠️Warning:**
+> - This action is irreversible, once the command has been entered, the session would be immediately deleted.
 
 Example of usage:
 1. Remove an existing group with a unique identifier of 1.
