@@ -1,5 +1,5 @@
 @startuml
-!include style.puml
+!include Style.puml
 
 box LOGIC_COLOR_T1
 participant ":ExpenseTracker" as ExpenseTracker LOGIC_COLOR
