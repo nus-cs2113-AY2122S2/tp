@@ -61,7 +61,7 @@ public class StaffController extends Controller {
         try {
             staffManager.printStaff();
         } catch (IllegalStateException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -77,7 +77,7 @@ public class StaffController extends Controller {
         try {
             staffManager.findByStaffId(staffId, true);
         } catch (IllegalArgumentException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -96,7 +96,7 @@ public class StaffController extends Controller {
         try {
             staffManager.addStaff(staffId, staffName, position, salary);
         } catch (IllegalArgumentException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
@@ -112,7 +112,7 @@ public class StaffController extends Controller {
         try {
             staffManager.deleteByStaffId(staffId);
         } catch (IllegalArgumentException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
