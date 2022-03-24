@@ -179,6 +179,14 @@ public class Parser {
         return fullArgument;
     }
 
+    public static String removeRecurringDelimiter(String argument) {
+        if (!argument.contains(FREQUENCY_DELIMITER)) {
+            return argument;
+        }
+        String[] splitStrings = argument.split(FREQUENCY_DELIMITER);
+        return String.join(" ", splitStrings).trim();
+    }
+
     private static Command prepareAddRecurring(String argument) {
         if (argument.isBlank()) {
             return new HelpCommand(AddRecurringCommand.COMMAND_WORD);
@@ -204,6 +212,8 @@ public class Parser {
             return new HelpCommand(AddRecurringCommand.COMMAND_WORD);
         }
         String[] splitIndexAndOthers = argument.split(" ", 2);
+        String argumentWithoutRepeat = removeRecurringDelimiter(argument);
+        String[] splitIndexAndOthers = argumentWithoutRepeat.split(" ", 2);
 
         if (splitIndexAndOthers.length < 2) {
             return new HelpCommand(EditRecurringCommand.COMMAND_WORD);
@@ -231,6 +241,7 @@ public class Parser {
         if (argument.isBlank()) {
             return new HelpCommand(DeleteRecurringCommand.COMMAND_WORD);
         }
+        String argumentWithoutRepeat = removeRecurringDelimiter(argument);
         DeleteRecurringCommand newCommand = new DeleteRecurringCommand();
         try {
             newCommand.setIndex(Integer.parseInt(argument));
@@ -409,17 +420,21 @@ public class Parser {
         case UnmarkCommand.COMMAND_WORD:
             return prepareMarkOrUnmark(splitInput, UnmarkCommand.COMMAND_WORD, taskList);
         case AddCommand.COMMAND_WORD:
+            if (commandArg.contains(FREQUENCY_DELIMITER)) {
+                return prepareAddRecurring(commandArg);
+            }
             return prepareAdd(splitInput, taskList);
-        case AddRecurringCommand.COMMAND_WORD:
-            return prepareAddRecurring(commandArg);
         case EditCommand.COMMAND_WORD:
+            if (commandArg.contains(FREQUENCY_DELIMITER)) {
+                return prepareEditRecurring(commandArg);
+            }
             return prepareEdit(splitInput);
-        case EditRecurringCommand.COMMAND_WORD:
-            return prepareEditRecurring(commandArg);
         case DeleteCommand.COMMAND_WORD:
+            if (commandArg.contains(FREQUENCY_DELIMITER)) {
+                return prepareDeleteRecurring(commandArg);
+            }
             return prepareDelete(splitInput, taskList);
-        case DeleteRecurringCommand.COMMAND_WORD:
-            return prepareDeleteRecurring(commandArg);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
         case StudyCommand.COMMAND_WORD:
