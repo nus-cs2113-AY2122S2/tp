@@ -1,8 +1,6 @@
 package seedu.splitlah.parser.commandparser;
 
 import org.junit.jupiter.api.Test;
-import seedu.splitlah.command.Command;
-import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
@@ -149,38 +147,89 @@ class ActivityCreateCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidCommand object is returned when there are arguments not provided by the user.
+     * Checks if an InvalidFormatException is thrown when missing arguments are provided by the user
+     * and if the exception message is correct.
      */
     @Test
     public void getCommand_hasMissingArguments_InvalidCommand() {
+        ActivityCreateCommandParser activityCreateCommandParser = new ActivityCreateCommandParser();
+
         // Case 1: Missing session ID
-        String argsMissingSessionIdArgument = "activity /create /sid /n Dinner /p Alice /i Alice Bob Charlie /co 15";
-        Command sessionWithMissingSessionIdArgument = Parser.getCommand(argsMissingSessionIdArgument);
-        assertEquals(InvalidCommand.class, sessionWithMissingSessionIdArgument.getClass());
+        String inputMissingSessionIdArgument = "activity /create /sid /n Dinner /p Alice /i Alice Bob Charlie /co 15";
+        String argsMissingSessionIdArgument = Parser.getRemainingArgument(inputMissingSessionIdArgument);
+        try {
+            activityCreateCommandParser.getCommand(argsMissingSessionIdArgument);
+            fail();
+        } catch (InvalidFormatException e) {
+            assertEquals(e.getMessage(), Message.ERROR_PARSER_MISSING_ARGUMENT + "/sid"
+                    + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+        }
 
         // Case 2: Missing Activity Name
-        String argsMissingNameArgument = "activity /create /sid 1 /n /p Alice /i Alice Bob Charlie /co 15";
-        Command sessionWithMissingNameArgument = Parser.getCommand(argsMissingNameArgument);
-        assertEquals(InvalidCommand.class, sessionWithMissingNameArgument.getClass());
+        String inputMissingNameArgument = "activity /create /sid 1 /n /p Alice /i Alice Bob Charlie /co 15";
+        String argsMissingNameArgument = Parser.getRemainingArgument(inputMissingNameArgument);
+        try {
+            activityCreateCommandParser.getCommand(argsMissingNameArgument);
+            fail();
+        } catch (InvalidFormatException e) {
+            assertEquals(e.getMessage(), Message.ERROR_PARSER_MISSING_ARGUMENT + "/n"
+                    + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+        }
 
         // Case 3: Missing Payer
-        String argsMissingPayerArgument = "activity /create /sid 1 /n Dinner /p /i Alice Bob Charlie /co 15";
-        Command sessionWithMissingPayerArgument = Parser.getCommand(argsMissingPayerArgument);
-        assertEquals(InvalidCommand.class, sessionWithMissingPayerArgument.getClass());
+        String inputMissingPayerArgument = "activity /create /sid 1 /n Dinner /p /i Alice Bob Charlie /co 15";
+        String argsMissingPayerArgument = Parser.getRemainingArgument(inputMissingPayerArgument);
+        try {
+            activityCreateCommandParser.getCommand(argsMissingPayerArgument);
+            fail();
+        } catch (InvalidFormatException e) {
+            assertEquals(e.getMessage(), Message.ERROR_PARSER_MISSING_ARGUMENT + "/p"
+                    + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+        }
 
         // Case 4: Missing involved list
-        String argsMissingInvolvedListArgument = "activity /create /sid 1 /n Dinner /p Alice /i /co 15";
-        Command activityWithMissingInvolvedListArgument = Parser.getCommand(argsMissingInvolvedListArgument);
-        assertEquals(InvalidCommand.class, activityWithMissingInvolvedListArgument.getClass());
+        String inputMissingInvolvedListArgument = "activity /create /sid 1 /n Dinner /p Alice /i /co 15";
+        String argsMissingInvolvedListArgument = Parser.getRemainingArgument(inputMissingInvolvedListArgument);
+        try {
+            activityCreateCommandParser.getCommand(argsMissingInvolvedListArgument);
+            fail();
+        } catch (InvalidFormatException e) {
+            assertEquals(e.getMessage(), Message.ERROR_PARSER_MISSING_ARGUMENT + "/i"
+                    + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+        }
 
         // Case 5: Missing total cost
-        String argsMissingTotalCostArgument = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co";
-        Command activityWithMissingTotalCostArgument = Parser.getCommand(argsMissingTotalCostArgument);
-        assertEquals(InvalidCommand.class, activityWithMissingTotalCostArgument.getClass());
+        String inputMissingTotalCostArgument = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co";
+        String argsMissingTotalCostArgument = Parser.getRemainingArgument(inputMissingTotalCostArgument);
+        try {
+            activityCreateCommandParser.getCommand(argsMissingTotalCostArgument);
+            fail();
+        } catch (InvalidFormatException e) {
+            assertEquals(e.getMessage(), Message.ERROR_PARSER_MISSING_ARGUMENT + "/co"
+                    + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+        }
 
         // Case 6: Missing cost list
-        String argsMissingCostListArgument = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /cl";
-        Command activityWithMissingCostListArgument = Parser.getCommand(argsMissingCostListArgument);
-        assertEquals(InvalidCommand.class, activityWithMissingCostListArgument.getClass());
+        String inputMissingCostListArgument = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /cl";
+        String argsMissingCostListArgument = Parser.getRemainingArgument(inputMissingCostListArgument);
+        try {
+            activityCreateCommandParser.getCommand(argsMissingCostListArgument);
+            fail();
+        } catch (InvalidFormatException e) {
+            assertEquals(e.getMessage(), Message.ERROR_PARSER_MISSING_ARGUMENT + "/cl"
+                    + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+        }
     }
 }
