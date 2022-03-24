@@ -53,17 +53,39 @@ class ActivityCreateCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidCommand object is returned when cost list and involved list that are provided by the user
-     * are of different lengths.
+     * Checks if an InvalidFormatException is thrown when the cost list and involved list that are provided by the user
+     * are of different lengths and if the exception message is correct.
      */
     @Test
-    public void getCommand_costListAndInvolvedListDifferentLength_InvalidCommand() {
-        String firstUserInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /cl 10 10";
-        Command firstCommand = Parser.getCommand(firstUserInput);
-        assertEquals(InvalidCommand.class, firstCommand.getClass());
-        String secondUserInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob /cl 10 10 10";
-        Command secondCommand = Parser.getCommand(secondUserInput);
-        assertEquals(InvalidCommand.class, secondCommand.getClass());
+    public void getCommand_costListAndInvolvedListDifferentLength_InvalidFormatExceptionThrown() {
+
+        ActivityCreateCommandParser activityCreateCommandParser = new ActivityCreateCommandParser();
+
+        //Case 1: Involved list longer than cost list
+        String userInputOne = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /cl 10 10";
+        String argumentsOne = Parser.getRemainingArgument(userInputOne);
+        try {
+            activityCreateCommandParser.getCommand(argumentsOne);
+            fail();
+        } catch (InvalidFormatException e) {
+            assertEquals(e.getMessage(), Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
+                    + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+        }
+
+        //Case 2: Involved list shorter than cost list
+        String userInputTwo = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob /cl 10 10 10";
+        String argumentsTwo = Parser.getRemainingArgument(userInputTwo);
+        try {
+            activityCreateCommandParser.getCommand(argumentsTwo);
+            fail();
+        } catch (InvalidFormatException e) {
+            assertEquals(e.getMessage(), Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
+                    + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+        }
     }
 
     /**
