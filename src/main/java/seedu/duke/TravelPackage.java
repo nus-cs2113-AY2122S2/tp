@@ -42,6 +42,11 @@ public class TravelPackage {
                 + this.hotel;
     }
 
+    public String toSave(){
+        return name + " | " + Integer.toString(nextId) + " | " + Integer.toString(id) + " | " + //startDate, endDate
+                hotel  + " | " + Double.toString(price)  + " | " + country  + " | " + Integer.toString(maxParticipants) + " | " + Integer.toString(numParticipants);
+    }
+
 
     
 

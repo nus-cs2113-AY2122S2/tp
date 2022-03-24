@@ -11,7 +11,8 @@ public class Duke {
     }
 
     public static void run() {
-        Packages packages = new Packages();
+        Storage storage = new Storage("packages.txt", "reservations.txt");
+        Packages packages = storage.convertFileToList();
         boolean endProgram = false;
         System.out.println("Welcome to Travel Agency Booking Reservation System!");
         Scanner sc = new Scanner(System.in);
@@ -21,6 +22,8 @@ public class Duke {
             command.execute(packages);
             endProgram = command.getIsExit();
         }
+        storage.convertListToFile(packages);
+
     }
 
 }
