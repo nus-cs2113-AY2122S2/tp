@@ -15,7 +15,7 @@ In this project, we have referenced the following materials:
 > to learn how to create and edit diagrams.
 
 ### Architecture
-<image src="images/ArchitectureDiagram.png" width="300"/>
+<img src="images/ArchitectureDiagram.png" width="300"/>
 
 The ***Architecture Diagram*** given above shows the high-level design of PlanITarium.
 
@@ -43,19 +43,18 @@ is responsible for,
 
 **How the components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact for the scenrio where the user
-issues the command `add /n Alice /g 1`.
+The slightly simplified *Sequence Diagram* below shows how the components interact for the scenrio where the user
+issues the command `add /n Alice /g 2`.
 
 <img src="images/ArchitectureSequenceDiagram.png"/>
 
 Each of the main components shown in the diagram above defined and implemented in a class
-with the same name as its component.
+with the same name as its component. The section below provides a more in-depth details on how the
+components interact with one another.
 
 Each component may have several other classes underneath it, belonging to the same logical grouping,
 to reduce coupling. For example, the `MoneyList` component is defined as an abstract class that
 is extended by `IncomeList` and `ExpenditureList`.
-
-The sections below provides more details on each component.
 
 ### UI Component
 {For Huilin as she is most familiar}
@@ -66,7 +65,27 @@ The sections below provides more details on each component.
 ### Parser Component
 **Class:** [`Parser.java`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/Parser.java)
 
+<img src="images/ParserClassDiagram.png"/>
 
+How the `Parser` component is used:
+
+1. When the `Commands` component receives a user input, the `Parser` is called upon to parse the
+type of command to be executed. 
+2. This will result in the keyword of the command to be returned as a string.
+3. When necessary, the `Parser` will be called upon to parse more terms for `Commands` to obtain
+the details required for the command execution (i.e. `parseGroupIndex(input)` for `add /n Alice /g 2`).
+4. The parser will also be called upon thereafter to validate and typecast the previously obtained
+details (i.e. `getValidGroupIndex(indexString)` to check that the provided index corresponds to an
+existing group index).
+
+The Sequence Diagram below illustrates the interactions in the `Parser` component for a command
+execution. Let `userInput` be the command string `deletein /u 1 /g 2 /r 1`.
+
+<img src="images/ParserSequenceDiagram.png"/>
+
+> :information_source: **Note:** Several self-invocations, alternate paths and optional paths have
+> been omitted from the above Sequence Diagram. Please refer to the 
+> [`Parser Implementation`](#Parser-Implementation) below for a detailed view. 
 
 ### Family Component
 
@@ -332,13 +351,13 @@ user and Bob is her father, then Alice would belong to the current generation an
 to the parent generation. In this case `Family` would be initialised with two generations being
 tracked - parents and myGen.
 
-<image src="images/ListCategorisedExpense0.png"/>
+<img src="images/ListCategorisedExpense0.png"/>
 
 Step 2. The user executes `listcat /c 1` command to list all expenses in category `1`. The `listcat`
 command will be parsed and calls `Family#listExpenseOfCategory(1)` which would instantiate a
 temporary array list for storing the results of the upcoming search.
 
-<image src="images/ListCategorisedExpense1.png"/>
+<img src="images/ListCategorisedExpense1.png"/>
 
 Step 3. After the temporary array list has been created, the generations being tracked will be
 iterated for `Person` objects. The `expenditureList` for a person would be retrieved during that
@@ -348,7 +367,7 @@ extends `ExpenditureList`. This method then iterates through the list and calls
 category matches the given index. The returned expenditures are then appended to the temporary
 array list.
 
-<image src="images/ListCategorisedExpense2.png"/>
+<img src="images/ListCategorisedExpense2.png"/>
 
 Step 4. The iteration, collecting and appending to the temporary array list in step 3 is repeated 
 until every person has been iterated. Finally, `Categories#getLabel(1)` is called so that an
@@ -363,7 +382,7 @@ a series of print to display the expenditures in this category.
 The following sequence diagram shows how the `listcat` operation works after a `ListCatCommand` 
 command object has been created by [`CommandFactory`](#Command-Execution):
 
-<image src="images/ListCategorisedExpenseSequence.png"/>
+<img src="images/ListCategorisedExpenseSequence.png"/>
 
 #### Design considerations:
 
