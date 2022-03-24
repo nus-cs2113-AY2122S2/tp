@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../Style.puml
+
+autonumber
+
+title Sequence Diagram of `plan /new` Command
+
+actor   User
+participant "werkIt:WerkIt" AS WerkIt
+participant "ui:UI" AS UI1
+participant "parser:Parser" AS Parser
+participant "newCommand\n:PlanCommand" AS newCommand
+participant "planList\n:PlanList" AS PlanList
+participant "ui:UI" AS UI2
+participant "fileManager:FileManager" as FileManager
+
+activate WerkIt
+WerkIt -> UI1 : getUserInput()
+activate UI1
+User -> UI1 : `plan /new` command
+WerkIt <-- UI1 : userInputTrimmed:String
+deactivate UI1
+
+WerkIt -> Parser : parseUserInput(userInput)
+activate Parser
+WerkIt <-- Parser : :Command
+deactivate Parser
+
+WerkIt -> newCommand : execute()
+activate newCommand
+newCommand -> PlanList : createAndAddPlan(userArgument)
+activate PlanList
+ref over PlanList
+Create new Plan
+and add it to list.
+end
+newCommand <-- PlanList : "newPlan:Plan"
+deactivate PlanList
+
+newCommand -> UI2 : printNewPlanCreatedMessage(newPlan)
+activate UI2
+User <-- UI2 : New plan created message
+newCommand <-- UI2
+deactivate UI2
+
+newCommand -> FileManager : writeNewPlanToFile(newPlan)
+activate FileManager
+ref over FileManager
+Write new Plan data
+into file on user's system.
+end
+newCommand <-- FileManager
+deactivate FileManager
+
+WerkIt <-- newCommand
+deactivate newCommand
+
+destroy newCommand
+@enduml

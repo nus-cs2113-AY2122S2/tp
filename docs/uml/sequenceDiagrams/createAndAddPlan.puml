@@ -1,0 +1,97 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../Style.puml
+
+autonumber 7.1
+
+participant "planList\n:PlanList" AS wl
+participant "workoutList\n:WorkoutList" AS el
+
+activate wl
+group sd Write new Plan data into file on user's system.
+wl -> ":String" : userArgument.split("/workouts").trim()
+activate ":String"
+return userPlanNameInput:String
+deactivate ":String"
+
+wl -> wl : checkForExistingPlanName(userPlanNameInput)
+activate wl
+return :boolean
+
+opt hasSamePlanName
+create ":InvalidPlanException" AS ipe
+wl -> ipe : throw new InvalidPlanException
+activate ipe
+return
+end
+
+wl -> ":String" : userArgument.split("/workouts").trim()
+activate ":String"
+return userWorkoutNumbersString:String
+deactivate ":String"
+
+wl -> ":Integer" : userWorkoutNumbersString.split(",").length
+activate ":Integer"
+return numberOfWorkoutsInAPlan:Integer
+deactivate ":Integer"
+
+wl -> wl : checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan)
+activate wl
+return :boolean
+
+opt !isAppropriateNumberOfWorkouts
+create ":InvalidPlanException" AS ipe
+wl -> ipe : throw new InvalidPlanException
+activate ipe
+return
+end
+
+create "workoutsToAddInAPlanList:ArrayList<Workout>" AS wtoadd
+wl -> wtoadd : new
+activate wtoadd
+return
+
+loop until all workouts to be added in a plan is added (numberOfWorkoutsInAPlan)
+wl -> ":Integer" : parseInt(userWorkoutNumbersString.split(",")[i].trim())
+activate ":Integer"
+return workoutNumberInteger:Integer
+deactivate ":Integer"
+wl -> wl : checkWorkoutNumberWithinRange(workoutNumberInteger)
+activate wl
+return :boolean
+opt !isWithinWorkoutListRange
+create ":InvalidPlanException" AS ipe
+wl -> ipe : throw new InvalidPlanException
+activate ipe
+return
+end
+wl -> el : getWorkoutsDisplayList().get(workoutNumberInteger - 1)
+activate el
+return workoutToAddKey:String
+wl -> el : getWorkoutFromKey(workoutToAddKey)
+activate el
+return workoutToAddObject:Workout
+wl -> wtoadd : add(workoutToAddObject)
+activate wtoadd
+return
+end
+
+create "newPlan:Plan" AS newPlan
+wl -> newPlan : new Plan(userPlanNameInput, workoutsToAddInAPlanList)
+activate newPlan
+return newPlan:Plan
+
+wl -> newPlan : toString()
+activate newPlan
+return newPlanKey:String
+
+wl -> "plansHashMapList\n:HashMap" : put(newPlanKey, newPlan)
+activate "plansHashMapList\n:HashMap"
+return
+
+wl -> "plansDisplayList\n:ArrayList<String>" : add(newPlanKey)
+activate "plansDisplayList\n:ArrayList<String>"
+return
+
+end
+@enduml
