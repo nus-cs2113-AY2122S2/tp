@@ -1,22 +1,58 @@
 package seedu.duke.manager;
 
-import seedu.duke.controllers.DishController;
+import java.util.Arrays;
+import java.util.List;
 import seedu.duke.entities.Dish;
 import seedu.duke.entities.Order;
+import seedu.duke.loggers.MainLogger;
 
 import java.util.ArrayList;
 
 /**
  * OrderManager.
  */
-public class OrderManager {
-    private final ArrayList<Order> orders;
+public class OrderManager extends Manager {
+    private static OrderManager singleton = null;
+    private List<Order> orders;
     private final DishManager dishManager = DishManager.getInstance();
-    private final ArrayList<Dish> dishes;
 
-    public OrderManager(DishController dishController) {
-        this.orders = new ArrayList<Order>();
-        this.dishes = dishController.getDishManager().getDishes();
+    private static final String ORDER_STORAGE_FILE = "order.dat";
+
+    private OrderManager() {
+        super(ORDER_STORAGE_FILE);
+        try {
+            this.loadData();
+        } catch (Exception e) {
+            MainLogger.logWarning(this, e.toString());
+            MainLogger.logWarning(this, "Start with an empty order");
+            orders.clear();
+        }
+    }
+
+    public static OrderManager getInstance() {
+        if (singleton != null) {
+            return singleton;
+        }
+        singleton = new OrderManager();
+        return singleton;
+    }
+
+    public static void resetInstance() {
+        singleton = null;
+    }
+
+    @Override
+    protected void loadData() throws Exception {
+        this.orders = new ArrayList<>();
+        ArrayList<?> list = (ArrayList<?>) this.load();
+        for (Object object : list) {
+            this.addOrder((Order) object);
+        }
+    }
+
+    @Override
+    public void saveData() throws Exception {
+        this.save(this.orders);
     }
 
     /**
@@ -28,18 +64,32 @@ public class OrderManager {
         this.orders.add(order);
     }
 
+
     /**
      * Add dish by index to the order.
      *
      * @param dishIdx the index of the dish.
      * @return size of the order list.
      */
-    public int addDishToOrder(int dishIdx) {
-        Order order = null;
-        Dish dish = this.dishes.get(dishIdx);
-        order.addDishToOrder(dish);
-        addOrder(order);
-        return this.orders.size();
+    public void addDishToOrder(int dishIdx, int orderIdx) {
+        ArrayList<Dish> dishes = dishManager.getDishes();
+        Dish dish = dishes.get(dishIdx);
+
+        if (orderIdx == this.orders.size()) {
+            Order order = null;
+            order = new Order(Arrays.asList(new Dish(dish.getName(), dish.getPrice())));
+            this.orders.add(order);
+        }
+        else {
+            Order order = new Order();
+            for(Dish existingDish : this.orders.get(orderIdx).getDishes()) {
+                order.addDish(new Dish(existingDish.getName(), existingDish.getPrice()));
+            }
+            order.addDish(dish);
+            this.orders.set(orderIdx, order);
+        }
+        System.out.println("Added successfully!\n");
+
     }
 
     /**
@@ -82,7 +132,7 @@ public class OrderManager {
             System.out.println("No orders!");
         }
         for (Order order : orders) {
-            for (Dish dish : dishes) {
+            for (Dish dish : order.getDishes()) {
                 System.out.println(dish.toString());
             }
             System.out.println("Total price:" + order.getTotalPrice());
@@ -96,7 +146,7 @@ public class OrderManager {
      * @return
      */
     public ArrayList<Order> getOrders() {
-        return orders;
+        return new ArrayList<>(orders);
     }
 
     /**
@@ -106,7 +156,16 @@ public class OrderManager {
      * @return
      */
     public ArrayList<Dish> getDishesFromOrder(int orderIdx) {
-        return this.dishes;
+        return new ArrayList<>(orders.get(orderIdx).getDishes());
+    }
+
+
+    public DishManager getDishManager() {
+        return dishManager;
+    }
+
+    public int getOrderCount() {
+        return this.orders.size();
     }
 
 }

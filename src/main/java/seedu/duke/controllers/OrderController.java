@@ -4,14 +4,15 @@ import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.manager.DishManager;
 import seedu.duke.manager.OrderManager;
 
+import java.util.ArrayList;
+
 public class OrderController extends Controller {
     private static final String[] CHOICES = {"Exit", "Display Menu",
         "Create an order", "Delete an order",
         "Get total value of current order",
         "Get total value of all orders in the list", "Print receipt"
     };
-    private DishController dishController = new DishController();
-    private OrderManager orderManager = new OrderManager(dishController);
+    private final OrderManager orderManager = OrderManager.getInstance();
 
     public OrderController() {
         super(CHOICES);
@@ -24,10 +25,10 @@ public class OrderController extends Controller {
             System.out.println("Exiting menu...");
             return true;
         case 1:
-            System.out.println("Implement me to view menu :D");
+            orderManager.getDishManager().printDishes();
             break;
         case 2:
-            addOrder(dishController);
+            addNewOrder();
             break;
         case 3:
             deleteOrder();
@@ -49,18 +50,21 @@ public class OrderController extends Controller {
         return false;
     }
 
-    private void addOrder(DishController dishController) throws OperationTerminationException {
-        int index = InputParser.getInteger("Enter dishes you want to order (enter '-' to exit): ");
-        DishManager dishManager = dishController.getDishManager();
-        assert index < dishManager.getDishes().size() : "Index out of bound!";
-        while (true) {
-            try {
-                int size = orderManager.addDishToOrder(index);
-                index = InputParser.getInteger("You’ve already added " + size + " dish(es), some more: \n");
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("Please enter a valid dish index.");
-            }
+    private void addNewOrder() throws OperationTerminationException {
+        ArrayList<Integer> dishIdxList = new ArrayList<Integer>();
+        int index = InputParser.getInteger("Enter dishes you want to order (enter negative number to exit): ");
+        int createdOrderIdx = orderManager.getOrderCount();
+//        try {
+            while (index >= 0) {
+                orderManager.addDishToOrder(index, createdOrderIdx);
+                index = InputParser.getInteger("You have " + orderManager.getOrders().get(createdOrderIdx).getDishCount() + " dish(es), some more: \n");
+//            }
+//        } catch (UnsupportedOperationException e) {
+//            System.out.println("Please enter a valid dish index and try again.");
+//        } catch (IndexOutOfBoundsException e) {
+//            System.out.println("Please enter a valid dish index and try again.");
         }
+
     }
 
     private void deleteOrder() throws OperationTerminationException {
@@ -68,16 +72,16 @@ public class OrderController extends Controller {
             int userInputInt = InputParser.getInteger("Enter the order you want to delete: ");
             orderManager.deleteOrder(userInputInt);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Please enter a valid index.");
+            System.out.println("Please enter a valid order index.");
         }
     }
 
     private void getOrderPrice() throws OperationTerminationException {
         try {
             int userInputInt = InputParser.getInteger("Enter the order you want to get price: ");
-            System.out.printf("Total value of all orders: %f. \n", orderManager.getOrderPrice(userInputInt));
+            System.out.printf("Total value of this order: %f. \n", orderManager.getOrderPrice(userInputInt));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Please enter a valid index.");
+            System.out.println("Please enter a valid order index.");
         }
     }
 

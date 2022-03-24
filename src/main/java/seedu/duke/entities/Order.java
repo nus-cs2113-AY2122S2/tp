@@ -1,15 +1,18 @@
 package seedu.duke.entities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Order {
-    private List<Dish> dishes;
+public class Order implements Serializable {
+    private ArrayList<Dish> dishes = new ArrayList<Dish>();
 
     public Order(List<Dish> dishList) {
-
+        this.dishes = new ArrayList<>(dishList);
     }
 
     public Order() {
+        this.dishes = new ArrayList<Dish>();
     }
 
     public void addDishToOrder(Dish dish) {
@@ -33,6 +36,18 @@ public class Order {
     }
 
     public List<Dish> getDishes() {
-        return dishes;
+        return this.dishes;
+    }
+
+    public void addDish(Dish dish) {
+        this.dishes.add(dish);
+    }
+
+    public int getDishCount() {
+        if (this.dishes.size() > 0) {
+            return this.dishes.size();
+        }
+        return -1;
+
     }
 }
