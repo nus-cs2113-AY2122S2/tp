@@ -13,7 +13,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 class ActivityCreateCommandParserTest {
 
     /**
-     * Checks if an InvalidCommand object is returned when both cost and cost list are not provided by the user.
+     * Checks if an InvalidFormatException is thrown when both cost and cost list are not provided by the user
+     * and if the exception message is correct.
      */
     @Test
     public void getCommand_hasMissingCostAndCostList_InvalidFormatExceptionThrown() {
@@ -32,13 +33,23 @@ class ActivityCreateCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidCommand object is returned when both cost and cost list are provided by the user.
+     * Checks if an InvalidFormatException is thrown when both cost and cost list are provided by the user
+     * and if the exception message is correct.
      */
     @Test
-    public void getCommand_hasBothCostAndCostList_InvalidCommand() {
+    public void getCommand_hasBothCostAndCostList_InvalidFormatExceptionThrown() {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30 /cl 10 10 10";
-        Command command = Parser.getCommand(userInput);
-        assertEquals(InvalidCommand.class, command.getClass());
+        String arguments = Parser.getRemainingArgument(userInput);
+        ActivityCreateCommandParser activityCreateCommandParser = new ActivityCreateCommandParser();
+        try {
+            activityCreateCommandParser.getCommand(arguments);
+            fail();
+        } catch (InvalidFormatException e) {
+            assertEquals(e.getMessage(), Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
+                    + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+        }
     }
 
     /**
