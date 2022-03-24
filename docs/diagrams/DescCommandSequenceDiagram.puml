@@ -1,0 +1,41 @@
+@startuml
+
+skinparam sequenceStereotypeFontColor red
+
+Participant ":InvMgr" as InvMgr
+Participant "Parser" as Parser <<class>>
+Participant "inputCommand:DescCommand" as DescCommand
+Participant "itemList:ItemList" as ItemList
+Participant "ui:Ui" as Ui
+Participant "storage:Storage" as Storage
+
+InvMgr -> InvMgr: run
+activate InvMgr
+    InvMgr -> Parser: parse("desc 1")
+    activate Parser
+        create DescCommand
+        Parser -> DescCommand: DescCommand(descIndex:int)
+        activate DescCommand
+            return
+
+        return inputCommand: DescCommand
+
+    InvMgr -> DescCommand: execute(itemList:ItemList, ui:Ui)
+    activate DescCommand
+        DescCommand -> ItemList: getItem(index:int)
+        activate ItemList
+            return item:Item
+
+        DescCommand -> Ui: showMessages(message:String)
+        activate Ui
+            return
+
+        return
+
+    InvMgr -> Storage: writeData(ArrayList)
+    activate Storage
+        return
+
+deactivate InvMgr
+
+@enduml
