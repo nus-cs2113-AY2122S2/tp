@@ -18,7 +18,7 @@ public class GroupCreateCommand extends Command {
     public static final String COMMAND_TEXT = "group /create";
 
     public static final String COMMAND_FORMAT =
-        "Syntax: group /create /n [GROUP_NAME] /pl [NAME1 NAME2 …]";
+        "Syntax: group /create /n [GROUP_NAME] /pl [NAME1 NAME2...]";
 
     private static final String SUCCESS_MESSAGE =
         "The group was created successfully.\n";

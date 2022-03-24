@@ -61,9 +61,9 @@ public class GroupDeleteCommand extends Command {
         try {
             manager.getProfile().removeGroup(groupId);
             manager.saveProfile();
-            manager.getUi().printlnMessage(SUCCESS_MESSAGE);
+            manager.getUi().printlnMessageWithDivider(SUCCESS_MESSAGE);
         } catch (InvalidDataException e) {
-            manager.getUi().printlnMessage(e.getMessage());
+            manager.getUi().printlnMessageWithDivider(e.getMessage());
         }
     }
 }

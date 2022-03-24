@@ -28,11 +28,11 @@ public class ActivityCreateCommand extends Command {
     private static final String COMMAND_FORMAT = "Syntax:\n\t";
 
     public static final String COMMAND_FORMAT_FIRST =
-            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
+            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] "
                     + "/co <TOTAL_COST> [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
     public static final String COMMAND_FORMAT_SECOND =
-            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
+            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] "
                     + "/cl [COST1 COST2…] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
     private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
