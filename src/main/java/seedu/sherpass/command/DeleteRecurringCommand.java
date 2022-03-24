@@ -26,7 +26,10 @@ public class DeleteRecurringCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        if (index > taskList.getTasks().size() || index < 0) {
+        if (taskList.getTasks().isEmpty()) {
+            ui.showToUser("Task list is empty!");
+            return;
+        } else if (!taskList.isTaskExist(index)) {
             ui.showToUser("Invalid index!");
             return;
         }

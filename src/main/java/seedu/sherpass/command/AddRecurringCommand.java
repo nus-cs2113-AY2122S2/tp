@@ -3,12 +3,12 @@ package seedu.sherpass.command;
 import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
+import seedu.sherpass.util.CommonLogic;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
 import java.time.LocalDateTime;
 
-import static java.time.temporal.ChronoUnit.SECONDS;
 import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
 
 public class AddRecurringCommand extends Command {
@@ -60,16 +60,7 @@ public class AddRecurringCommand extends Command {
         int identifier = taskList.generateIdentifier();
         Task newTask = new Task(identifier, taskDescription, null,
                 doOnStartDateTime, doOnEndDateTime, frequency);
-        long duration = doOnStartDateTime.until(doOnEndDateTime, SECONDS);
-        LocalDateTime endDate;
-
-        if (frequency == Frequency.DAILY) {
-            endDate = doOnStartDateTime.plusMonths(1);
-        } else if (frequency == Frequency.WEEKLY) {
-            endDate = doOnStartDateTime.plusMonths(2);
-        } else {
-            endDate = doOnStartDateTime.plusYears(1);
-        }
+        LocalDateTime endDate = CommonLogic.getEndDateForRecurrence(doOnStartDateTime, frequency);
 
         int count = 0;
         StringBuilder addedTaskString = new StringBuilder();
@@ -78,14 +69,8 @@ public class AddRecurringCommand extends Command {
             taskList.addTask(newTask);
             addedTaskString.append(newTask);
             addedTaskString.append("\n ");
-            if (frequency == Frequency.DAILY) {
-                doOnStartDateTime = doOnStartDateTime.plusDays(1);
-            } else if (frequency == Frequency.WEEKLY) {
-                doOnStartDateTime = doOnStartDateTime.plusWeeks(1);
-            } else {
-                doOnStartDateTime = doOnStartDateTime.plusMonths(1);
-            }
-            doOnEndDateTime = doOnStartDateTime.plusSeconds(duration);
+            doOnStartDateTime = CommonLogic.incrementDate(doOnStartDateTime, frequency);
+            doOnEndDateTime = CommonLogic.incrementDate(doOnEndDateTime, frequency);
             newTask = new Task(identifier, taskDescription, null, doOnStartDateTime, doOnEndDateTime, frequency);
         } while (newTask.getDoOnStartDateTime().isBefore(endDate));
 

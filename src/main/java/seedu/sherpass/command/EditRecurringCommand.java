@@ -3,6 +3,7 @@ package seedu.sherpass.command;
 import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
+import seedu.sherpass.util.CommonLogic;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
@@ -53,7 +54,10 @@ public class EditRecurringCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        if (index > taskList.getTasks().size() || index < 0) {
+        if (taskList.getTasks().isEmpty()) {
+            ui.showToUser("Task list is empty!");
+            return;
+        } else if (!taskList.isTaskExist(index)) {
             ui.showToUser("Invalid index!");
             return;
         } else if (doOnStartDateTime != null && doOnStartDateTime.isAfter(doOnEndDateTime)) {
@@ -64,7 +68,6 @@ public class EditRecurringCommand extends Command {
         Frequency repeatFrequency = taskList.getTasks().get(index).getRepeatFrequency();
         int oldIdentifier = taskList.getTasks().get(index).getIdentifier();
         int newIdentifier = taskList.generateIdentifier();
-        int editCount = 0;
         StringBuilder editedTaskString = new StringBuilder();
 
         for (int i = index; i < taskList.getTasks().size(); i++) {
@@ -74,18 +77,9 @@ public class EditRecurringCommand extends Command {
                     t.setTaskDescription(taskDescription);
                 }
                 if (doOnStartDateTime != null) {
-                    if (repeatFrequency == Frequency.DAILY) {
-                        t.setDoOnStartDateTime(doOnStartDateTime.plusDays(editCount));
-                        t.setDoOnEndDateTime(doOnEndDateTime.plusDays(editCount));
-                    } else if (repeatFrequency == Frequency.WEEKLY) {
-                        t.setDoOnStartDateTime(doOnStartDateTime.plusWeeks(editCount));
-                        t.setDoOnEndDateTime(doOnEndDateTime.plusWeeks(editCount));
-                    } else {
-                        t.setDoOnStartDateTime(doOnStartDateTime.plusMonths(editCount));
-                        t.setDoOnEndDateTime(doOnEndDateTime.plusMonths(editCount));
-                    }
+                    t.setDoOnStartDateTime(CommonLogic.incrementDate(doOnStartDateTime, repeatFrequency));
+                    t.setDoOnEndDateTime(CommonLogic.incrementDate(doOnEndDateTime, repeatFrequency));
                 }
-                ++editCount;
                 t.setIdentifier(newIdentifier);
                 editedTaskString.append(t);
                 editedTaskString.append("\n ");
