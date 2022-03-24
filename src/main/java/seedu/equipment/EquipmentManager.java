@@ -98,7 +98,8 @@ public class EquipmentManager {
      * Updates are given in the form of ArrayList of Pairs.
      *
      * @param serialNumber Serial number of Equipment in String.
-     * @param updatePairs Updates for Equipment with key being an Equipment attribute and value being the updated attribute.
+     * @param updatePairs Updates for Equipment with key being an Equipment
+     *                    attribute and value being the updated attribute.
      * @return Boolean value based on whether the update succeeded or not.
      */
     public boolean updateEquipment(String serialNumber, ArrayList<Pair<String, String>> updatePairs) {
