@@ -1,0 +1,73 @@
+@startuml
+
+hide footbox
+
+participant User as User
+participant Main as Main
+participant "<font color=red>**<<class>>** \nParser" as Parser
+participant "c:ShowCommand" as ShowCommand
+participant "<font color=red>**<<class>>** \nTimetable" as Timetable
+
+User -> Main: "show 25/5/2022"
+
+activate Main
+
+Main -> Parser: parseCommand("show 25/5/2022": String)
+activate Parser
+Parser -> Parser: prepareShow({"show", "25/5/2022"}:String[])
+activate Parser
+Parser --> Parser: :String
+deactivate Parser
+
+Parser -> Parser: parseShowCommandOptions("25/5/2022": String)
+activate Parser
+create ShowCommand
+Parser ->  ShowCommand: new ShowCommand(:LocalDate, null:String)
+activate ShowCommand
+ShowCommand --> Parser: :ShowCommand
+deactivate ShowCommand
+Parser --> Parser: :ShowCommand
+deactivate Parser
+
+Parser --> Main: :ShowCommand
+deactivate Parser
+
+destroy Parser
+
+Main -> ShowCommand: execute(taskList: TaskList, ui: Ui, storage: Storage)
+activate ShowCommand
+ShowCommand -> Timetable: showScheduleByDay(dateInput: LocalDate, filteredtasks: ArrayList<Task>, ui: Ui)
+activate Timetable
+
+Timetable -> TaskList: getFilteredTasksByDate(dateInput: LocalDate)
+activate TaskList
+TaskList --> Timetable: filteredTasks: ArrayList<Task>
+deactivate TaskList
+destroy TaskList
+
+Timetable -> Timetable: prepareTimetable(dateInput: LocalDate, filtererdTasks: ArrayList<Task>, ui: Ui)
+activate Timetable
+Timetable -> Timetable: printTimetable(day: String, date: String, filteredTasks: ArrayList<Task>, ui: Ui, taskLength: long, doOnDateLength: long, partitionLength: long)
+activate Timetable
+Timetable -> Timetable: printRow(colOne: String, colTwo: String, colThree: String, colFour: String, colFive: String, taskLength: long, doOnDateLength: long, i: int, ui: Ui)
+activate Timetable
+deactivate Timetable
+Timetable --> Timetable
+deactivate Timetable
+Timetable --> Timetable
+deactivate Timetable
+Timetable --> Timetable
+
+Timetable --> ShowCommand
+deactivate Timetable
+destroy Timetable
+
+ShowCommand --> Main
+deactivate ShowCommand
+destroy ShowCommand
+
+Main --> User
+deactivate Main
+
+
+@enduml

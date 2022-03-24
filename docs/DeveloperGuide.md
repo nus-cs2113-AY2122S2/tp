@@ -88,8 +88,12 @@ The functionalities of the timetable include:
 - Prints a schedule specific to the date the user inputs 
 - Prints the schedule for the week the user is at
 - Prints the schedule of the day whenever the user starts up Sherpass.
-- The timetable schedule is represented in a table form as shown below
-  ![timetable format](images/timetable format.png)
+- The timetable schedule is represented in a table form as shown below:
+![](images/timetableFormat.png)
+
+Note: The task number in the timetable as shown follows the index of a task
+in the overall task list, i.e. the list containing all tasks added/edited. 
+This allows a more intuitive approach towards adding/editing/deleting/marking/unmarking of tasks.
 
 The **Timetable** is a class which interacts with the following components:
 1. Parser
@@ -112,15 +116,28 @@ relative methods which prints the timetable.
 When the **ShowCommand** is being executed, it will retrieve a filtered list
 of task by the date that is define in the **ShowCommand** from the **TaskList** component. 
 The filtered list will represent the schedule that the user has on that date given. 
-
+The list is assumed to be sorted previously when the user adds/edits a task.
 
 Below is a sequence diagram of what happens 
 as the user wishes to see the schedule (timetable) for 25th May 2022:
 
-![](images/showTodaySchedule.png)
+![](images/showScheduleForADate.png)
 
 The sequence as shown above also happens in the same fashion as the user 
 requests to see the schedule for any day or the week the user is at.
+
+The timetable for the current day is also shown to user as the user starts up
+the program.
+
+#### Design considerations for Timetable class
+- Current Implementation: Printing of timetable from scratch.
+  - Pros: Easy to implement as timetable is generated based on request and input.
+  - Pros: Adaptive as the timetable is only generated when needed and formatting is taken care of while generating it.
+  - Cons: Significant time may be taken as timetable will have to be created from scratch. The delay may be extended if user has a lot of tasks.
+
+- Alternative Implementation: Having a few templates, before choosing the suitable template and editing it if needed.
+  - Pros: Reduces computation time
+  - Cons: Increases memory usage
 
 
 ### Loading saved files
