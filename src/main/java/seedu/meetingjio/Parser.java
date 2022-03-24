@@ -12,6 +12,7 @@ import seedu.meetingjio.exceptions.InvalidDayException;
 import seedu.meetingjio.exceptions.MissingValueException;
 import seedu.meetingjio.exceptions.InvalidTimeException;
 import seedu.meetingjio.exceptions.InvalidModeException;
+import seedu.meetingjio.exceptions.TimetableNotFoundException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,7 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_COMMAND;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST;
 
 public class Parser {
     private final String command;
@@ -66,14 +68,19 @@ public class Parser {
 
     public Command prepareList() {
         try {
-            String user = arguments;
+            String user = arguments.trim();
+            if (user.length() == 0) {
+                throw new MissingValueException();
+            }
+            if (user.equals("all")) {
+                return new ListCommand("all");
+            }
             MasterTimetable.checkUserExist(user);
             return new ListCommand(user);
         } catch (TimetableNotFoundException tnfe) {
-            if (arguments.equals("all")) {
-                return new ListCommand("all");
-            }
             return new CommandResult(ERROR_INVALID_USER);
+        } catch (MissingValueException mve) {
+            return new CommandResult(ERROR_UNSPECIFIED_LIST);
         }
     }
 
