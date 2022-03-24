@@ -79,12 +79,11 @@ public class CommandHandler {
         // get the splited version of project name
         if (userInput.length < Constants.TWO_ARGUMENTS) {
             System.out.println(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
-            return;
+        } else {
+            String[] splitedName = Arrays.copyOfRange(userInput, 1, userInput.length);
+            String projectName = String.join(" ", splitedName);
+            return projectName;
         }
-        String[] splitedName = Arrays.copyOfRange(userInput, 1, userInput.length);
-        String projectName = String.join(" ", splitedName);
-        return projectName;
-
     }
 
     private void listProjects(ProjectList projectList) {
