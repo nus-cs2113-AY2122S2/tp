@@ -17,7 +17,7 @@ activate Commands
 
 Commands -> Parser : parseCategory(listcat /c 1)
 activate Parser
-Parser --> Commands : 1
+Parser --> Commands : 1:int
 deactivate Parser
 
 
@@ -33,7 +33,7 @@ loop for each Generation
     loop #honeydew for each Person
         Family -> Person : getPerson()
         activate Person
-        Person --> Family : p
+        Person --> Family : :Person
         deactivate Person
 
         Family -> MList : getExpenseOfCategory(1)
@@ -46,7 +46,7 @@ loop for each Generation
             deactivate Money
         end
 
-        MList --> Family : ArrayList<Expenditure>
+        MList --> Family : :ArrayList<Expenditure>
         deactivate MList
     end
 end
