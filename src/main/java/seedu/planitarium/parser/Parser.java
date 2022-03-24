@@ -5,6 +5,7 @@ import seedu.planitarium.exceptions.DuplicateDelimiterException;
 import seedu.planitarium.exceptions.InvalidIndexException;
 import seedu.planitarium.exceptions.InvalidMoneyException;
 import seedu.planitarium.exceptions.MissingDelimiterException;
+import seedu.planitarium.exceptions.EmptyStringException;
 import seedu.planitarium.person.Person;
 import seedu.planitarium.person.PersonList;
 
@@ -64,8 +65,10 @@ public class Parser {
      * @param delimiterLeft  The delimiter on the left of term.
      * @param delimiterRight The delimiter on the right of term.
      * @return A non-delimiter-surrounded term.
+     * @throws EmptyStringException if string after the left delimiter is blank.
      */
-    public static String parseDelimitedTerm(String text, String delimiterLeft, String delimiterRight) {
+    public static String parseDelimitedTerm(String text, String delimiterLeft, String delimiterRight)
+            throws EmptyStringException {
         String[] firstParse = text.split(delimiterLeft, LIMIT_TWO_TOKENS);
         String leftRemoved;
         if (firstParse.length == LIMIT_TWO_TOKENS) {
@@ -74,10 +77,12 @@ public class Parser {
             leftRemoved = firstParse[INDEX_LEFT_NOT_EXIST];
         }
         String[] secondParse = leftRemoved.split(delimiterRight, LIMIT_TWO_TOKENS);
-        String rightRemoved = secondParse[INDEX_RIGHT_REMOVED];
-
+        String rightRemoved = secondParse[INDEX_RIGHT_REMOVED].trim();
+        if (rightRemoved.isBlank()) {
+            throw new EmptyStringException(delimiterLeft);
+        }
         assert rightRemoved != null : ASSERT_OUTPUT_NOT_NULL;
-        return rightRemoved.trim();
+        return rightRemoved;
     }
 
     /**
@@ -100,8 +105,10 @@ public class Parser {
      * @return Person's name.
      * @throws MissingDelimiterException   if user input does not contain delimiter for name.
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
+     * @throws EmptyStringException        if string after the delimiter is blank.
      */
-    public static String parseName(String userInput) throws MissingDelimiterException, DuplicateDelimiterException {
+    public static String parseName(String userInput)
+            throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsOnlyOneDelimiter(userInput, DELIMITER_NAME);
         String name = parseDelimitedTerm(userInput, DELIMITER_NAME, DELIMITER_BACK).trim();
@@ -116,9 +123,10 @@ public class Parser {
      * @return Person's user index.
      * @throws MissingDelimiterException   if user input does not contain delimiter for user index.
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
+     * @throws EmptyStringException        if string after the delimiter is blank.
      */
     public static String parseUserIndex(String userInput)
-            throws MissingDelimiterException, DuplicateDelimiterException {
+            throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsOnlyOneDelimiter(userInput, DELIMITER_USER_INDEX);
         String userIndex = parseDelimitedTerm(userInput, DELIMITER_USER_INDEX, DELIMITER_BACK).trim();
@@ -133,9 +141,10 @@ public class Parser {
      * @return An item's description.
      * @throws MissingDelimiterException   if user input does not contain delimiter for description.
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
+     * @throws EmptyStringException        if string after the delimiter is blank.
      */
     public static String parseDescription(String userInput)
-            throws MissingDelimiterException, DuplicateDelimiterException {
+            throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsOnlyOneDelimiter(userInput, DELIMITER_DESCRIPTION);
         String description = parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION, DELIMITER_BACK).trim();
@@ -150,9 +159,10 @@ public class Parser {
      * @return Person's added income.
      * @throws MissingDelimiterException   if user input does not contain delimiter for income.
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
+     * @throws EmptyStringException        if string after the delimiter is blank.
      */
     public static String parseIncome(String userInput)
-            throws MissingDelimiterException, DuplicateDelimiterException {
+            throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsOnlyOneDelimiter(userInput, DELIMITER_INCOME);
         String income = parseDelimitedTerm(userInput, DELIMITER_INCOME, DELIMITER_BACK).trim();
@@ -167,9 +177,10 @@ public class Parser {
      * @return Person's expenditure amount.
      * @throws MissingDelimiterException   if user input does not contain delimiter for expenditure.
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
+     * @throws EmptyStringException        if string after the delimiter is blank.
      */
     public static String parseExpenditure(String userInput)
-            throws MissingDelimiterException, DuplicateDelimiterException {
+            throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsOnlyOneDelimiter(userInput, DELIMITER_EXPENDITURE);
         String expenditure = parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK).trim();
@@ -184,9 +195,10 @@ public class Parser {
      * @return A record's index.
      * @throws MissingDelimiterException   if user input does not contain delimiter for record index.
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
+     * @throws EmptyStringException        if string after the delimiter is blank.
      */
     public static String parseRecordIndex(String userInput)
-            throws MissingDelimiterException, DuplicateDelimiterException {
+            throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         checkContainsOnlyOneDelimiter(userInput, DELIMITER_RECORD_INDEX);
         String record = parseDelimitedTerm(userInput, DELIMITER_RECORD_INDEX, DELIMITER_BACK).trim();
