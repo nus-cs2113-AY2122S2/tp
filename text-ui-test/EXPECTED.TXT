@@ -2,6 +2,7 @@
 Welcome to Inventory Manager! What can I do for you today?
 ===================================================
 To find out more about my functions and how to call them, key in 'help'.
+
 ===================================================
 Enter command: 
 bye
