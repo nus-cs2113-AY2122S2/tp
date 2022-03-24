@@ -12,12 +12,13 @@ public class TimerLogic {
     private static Ui ui;
     private static Timer timer;
     private static TaskList taskList;
-    private boolean isTimerRunning;
+    protected boolean isTimerRunning = false;
 
     /**
      * Creates a constructor for TimerLogic.
      *
      * @param ui UI
+     * @param taskList taskList
      */
     public TimerLogic(TaskList taskList, Ui ui) {
         TimerLogic.taskList = taskList;
@@ -92,6 +93,7 @@ public class TimerLogic {
                 assert (duration > 0);
                 ((Countdown) timer).setDuration(duration);
             }
+            isTimerRunning = true;
             timer.start();
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException | InvalidTimeException e) {
             ui.showToUser(ERROR_INVALID_TIMER_INPUT_MESSAGE);
@@ -122,10 +124,19 @@ public class TimerLogic {
     }
 
     public void callStopTimer() {
-        timer.stopTimer();
-        taskList.printAllTasks(ui);
-        ui.showToUser("Would you like to start another timer, mark a task as done, "
-                + "or leave the study session?");
+        if (isTimerRunning) {
+            timer.stopTimer();
+            isTimerRunning = updateIsTimerRunning();
+            taskList.printAllTasks(ui);
+            ui.showToUser("Would you like to start another timer, mark a task as done, "
+                    + "or leave the study session?");
+            return;
+        }
+        ui.showToUser("You don't have a timer running!");
+    }
+
+    private boolean updateIsTimerRunning() {
+        return timer.isTimerRunning();
     }
 
     /**
