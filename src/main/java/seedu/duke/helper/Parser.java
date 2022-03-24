@@ -32,6 +32,7 @@ public class Parser {
             throw new HalpmiException("There is one or more parameters missing");
         }
     }
+
     private static boolean isNull(String string) {
         return string == null;
     }
@@ -56,7 +57,7 @@ public class Parser {
     }
 
     public static Command parseEditPatient(String parameters) throws HalpmiException {
-       return null;
+        return null;
     }
 
     public static Command parseAddDoctor(String parameters) throws HalpmiException {

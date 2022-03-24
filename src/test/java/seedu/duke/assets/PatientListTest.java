@@ -1,12 +1,13 @@
 package seedu.duke.assets;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exception.DuplicateEntryException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PatientListTest {
     @Test
-    void checkPatientConstructorAndList_onePatientInput_OnePatientInList() {
+    void checkPatientConstructorAndList_onePatientInput_OnePatientInList() throws DuplicateEntryException {
         String testNric = "S1234567A";
         String testFullName = "Tan Wei Li";
         String testAge = "20";

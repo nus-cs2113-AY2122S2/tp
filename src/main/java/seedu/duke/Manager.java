@@ -41,7 +41,8 @@ public class Manager {
         }
     }
 
-    private Status executeCommand(String commandWord, String parameters) throws HalpmiException, NotFoundException, DuplicateEntryException {
+    private Status executeCommand(String commandWord, String parameters) throws HalpmiException, NotFoundException,
+            DuplicateEntryException {
         Command command;
         Status status = null;
         switch (commandWord) {

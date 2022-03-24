@@ -18,7 +18,7 @@ public abstract class  Command {
         this.parameterArray = parameterArray;
     }
 
-    public abstract Status execute (List list) throws DuplicateEntryException, NotFoundException;
+    public abstract Status execute(List list) throws DuplicateEntryException, NotFoundException;
 
 //    private boolean isNull(String string) {
 //        return string == null;
@@ -91,7 +91,7 @@ public abstract class  Command {
 //        try {
 //            String[] addMedicineParameters = Parser.parseAddMedicine(parameters);
 //            medicineList.editMedicine(addMedicineParameters);
-//            assert medicineList.search(addMedicineParameters[0]) != null : "Continued to Edit although med not exist.";
+//
 //            UI.printParagraph("Medicine has been edited");
 //        } catch (HalpmiException e) {
 //            UI.printParagraph(e.toString());

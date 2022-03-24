@@ -7,9 +7,7 @@ import seedu.duke.helper.UI;
 import java.util.ArrayList;
 
 
-public class DoctorList extends List{
-
-
+public class DoctorList extends List {
 
     private ArrayList<Doctor> doctors = new ArrayList<>();
 
@@ -42,15 +40,17 @@ public class DoctorList extends List{
         UI.printParagraph(doctor.toString());
     }
 
+    //view all doctor
+    public void view() {
+        UI.printParagraph(toString());
+    }
+
+
     @Override
     public void edit(String[] parameters) throws NotFoundException {
 
     }
 
-    //view all doctor
-    public void view() {
-        UI.printParagraph(toString());
-    }
 
     //get the number of doctors
     public int getSize() {

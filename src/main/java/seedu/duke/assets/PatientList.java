@@ -6,7 +6,7 @@ import seedu.duke.helper.UI;
 
 import java.util.ArrayList;
 
-public class PatientList extends List{
+public class PatientList extends List {
 
     private ArrayList<Patient> patients = new ArrayList<>();
 
@@ -28,13 +28,13 @@ public class PatientList extends List{
         UI.printParagraph(getPatient(nric).toString());
     }
 
+    public void view() {
+        UI.printParagraph(toString());
+    }
+
     @Override
     public void edit(String[] parameters) throws NotFoundException {
 
-    }
-
-    public void view() {
-        UI.printParagraph(toString());
     }
 
     public void add(String[] addPatientParameters) throws DuplicateEntryException {

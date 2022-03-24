@@ -4,7 +4,7 @@ import seedu.duke.assets.List;
 import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.status.Status;
 
-public class AddDoctorCommand extends Command{
+public class AddDoctorCommand extends Command {
 
     public AddDoctorCommand(String[] parameterArray) {
         super(parameterArray);

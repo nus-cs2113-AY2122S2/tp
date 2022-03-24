@@ -4,7 +4,7 @@ import seedu.duke.assets.List;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.status.Status;
 
-public class DeleteMedicineCommand extends Command{
+public class DeleteMedicineCommand extends Command {
 
     public DeleteMedicineCommand(String[] parameterArray) {
         super(parameterArray);

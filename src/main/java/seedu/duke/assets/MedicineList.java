@@ -8,7 +8,7 @@ import seedu.duke.helper.UI;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-public class MedicineList extends List{
+public class MedicineList extends List {
     private ArrayList<Medicine> medicines = new ArrayList<>();
 
     public int getSize() {

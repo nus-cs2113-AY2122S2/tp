@@ -3,7 +3,7 @@ package seedu.duke.helper.command;
 import seedu.duke.assets.List;
 import seedu.duke.status.Status;
 
-public class ViewPatientCommand extends Command{
+public class ViewPatientCommand extends Command {
 
     public ViewPatientCommand(String[] parameterArray) {
         super(parameterArray);
