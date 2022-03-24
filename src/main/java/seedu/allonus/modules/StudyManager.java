@@ -16,6 +16,50 @@ import java.util.logging.Logger;
  * Represents the class that will handle Modules created by the user.
  */
 public class StudyManager {
+
+    public static final String EDIT_MODULE_OPENING_MESSAGE = "Here is the module that you have chosen to edit:";
+    public static final String EDIT_MODULE_CHOOSE_MESSAGE = "Choose the part that you would like to edit: ";
+    public static final String EDIT_MODULE_SUCCESS_MESSAGE = "Your Module was successfully edited! "
+            + "Here are the changes";
+    public static final String EDIT_MODULE_EXIT_MESSAGE = "Exiting the edit mode";
+    public static final String EDIT_NO_MODULES_ERROR = "There are no modules to edit!";
+    public static final String EDIT_NO_INDEX_ERROR = "Please enter the index of the module you would like to edit";
+    public static final String UNKNOWN_INPUT_MESSAGE = "Sorry I did not get that!";
+    public static final String MENU_COMMAND = "menu";
+    public static final String LIST_COMMAND = "list";
+    public static final String DELETE_COMMAND = "rm";
+    public static final String ADD_COMMAND = "add";
+    public static final String EDIT_COMMAND = "edit";
+    public static final String FIND_COMMAND = "find";
+    public static final String DELETE_MODULE_SUCCESS_MESSAGE = "Noted I have removed this module from your schedule:";
+    public static final String DELETE_NO_MODULES_ERROR = "There are no modules to delete!";
+    public static final String DELETE_NO_INDEX_ERROR = "Please enter the index of the module you would like to delete";
+    public static final String LOGGER_WRONG_EDIT_INDEX = "wrong index for edit";
+    public static final String LOGGER_NO_EDIT_INDEX = "no index number specified for edit";
+    public static final String MODULE_TIME_DELIMITER = "t/";
+    public static final String MODULE_DAY_DELIMITER = "d/";
+    public static final String MODULE_CODE_DELIMITER = "m/";
+    public static final String MODULE_CATEGORY_DELIMITER = "c/";
+    public static final String LOGGER_WRONG_INDEX_DELETE = "wrong index for delete";
+    public static final String LOGGER_NO_INDEX_DELETE = "no index number specified for delete";
+    public static final String ADD_MODULE_SUCCESS_MESSAGE = "Okay, I have added a new module to the schedule";
+    public static final String MISSING_MODULE_DAY_MESSAGE = "Please enter the day of your module";
+    public static final String MISSING_MODULE_CATEGORY_MESSAGE = "Please enter the category of your module";
+    public static final String MISSING_MODULE_TIME_MESSAGE = "Please enter the time of your module's class";
+    public static final String MISSING_MODULE_CODE_MESSAGE = "Please enter the code for your module";
+    public static final String ADD_WRONG_FORMAT_MESSAGE = "Please ensure that your input follows the form:";
+    public static final String ADD_SAMPLE_FORMAT_MESSAGE = "add m/CS2113 c/lec d/Thursday t/2pm-4pm";
+    public static final String LOGGER_WRONG_ADD_FORMAT = "Wrong format for add module";
+    public static final String LOGGER_MISSING_DAY_IN_ADD = "Day was not specified for add module";
+    public static final String LOGGER_MISSING_CAT_IN_ADD = "Category was not specified for add module";
+    public static final String LOGGER_MISSING_TIME_IN_ADD = "Time was not specified for add module";
+    public static final String LOGGER_MISSING_CODE_IN_ADD = "Code was not specified for add module";
+    public static final String WRONG_CATEGORY_FORMAT_MESSAGE = "Category has to be one of lec,tut or exam";
+    public static final String FIND_NO_MATCHES_MESSAGE = "There are no modules that match";
+    public static final String FIND_LIST_MATCHES_MESSAGE = "Here are the matching tasks in your list:";
+    public static final String MODULE_CATEGORY_LEC = "Lecture";
+    public static final String MODULE_CATEGORY_TUT = "Tutorial";
+    public static final String MODULE_CATEGORY_EXAM = "Exam";
     private static ArrayList<Module> modulesList = new ArrayList<>();
     private static final String WELCOME_MESSAGE = "Welcome to Modules Tracker, where you can track all your "
             + "classes.";
@@ -36,20 +80,20 @@ public class StudyManager {
         boolean isRunning = true;
         while (isRunning) {
             userInput = ui.getUserInput();
-            if (userInput.equals("menu")) {
+            if (userInput.equals(MENU_COMMAND)) {
                 isRunning = false;
-            } else if (userInput.equals("list")) {
+            } else if (userInput.equals(LIST_COMMAND)) {
                 listModules();
-            } else if (userInput.startsWith("rm")) {
+            } else if (userInput.startsWith(DELETE_COMMAND)) {
                 deleteModule(userInput);
-            } else if (userInput.startsWith("add")) {
+            } else if (userInput.startsWith(ADD_COMMAND)) {
                 addModule(userInput);
-            } else if (userInput.startsWith("edit")) {
+            } else if (userInput.startsWith(EDIT_COMMAND)) {
                 editModule(userInput,ui);
-            } else if (userInput.startsWith("find")) {
+            } else if (userInput.startsWith(FIND_COMMAND)) {
                 findModule(userInput);
             } else {
-                printMessage("Sorry I did not get that!");
+                printMessage(UNKNOWN_INPUT_MESSAGE);
             }
         }
     }
@@ -93,21 +137,26 @@ public class StudyManager {
             if (modulesList.get(moduleIndex) != null) {
                 Module removedModule = modulesList.get(moduleIndex);
                 modulesList.remove(moduleIndex);
-                printMessage("Noted I have removed this module from your schedule:");
+                printMessage(DELETE_MODULE_SUCCESS_MESSAGE);
                 printMessage(removedModule.toString());
             }
         } catch (IndexOutOfBoundsException e) {
-            logger.log(Level.WARNING, "wrong index for delete");
+            logger.log(Level.WARNING, LOGGER_WRONG_INDEX_DELETE);
             if (modulesList.size() == 0) {
-                printMessage("There are no modules to delete!");
+                printMessage(DELETE_NO_MODULES_ERROR);
             } else {
-                printMessage(" Oops there are only " + modulesList.size() + " modules left in your schedule");
+                printListSizeErrorMessage();
             }
         } catch (NumberFormatException e) {
-            logger.log(Level.WARNING, "no index number specified for delete");
-            printMessage("Please enter the index of the module you would like to delete");
+            logger.log(Level.WARNING, LOGGER_NO_INDEX_DELETE);
+            printMessage(DELETE_NO_INDEX_ERROR);
         }
 
+    }
+
+    private void printListSizeErrorMessage() {
+        String listSizeError = "Oops there are only " + modulesList.size() + " modules left in your schedule";
+        printMessage(listSizeError);
     }
 
     public void editModule(String userInput, TextUi ui) {
@@ -115,69 +164,73 @@ public class StudyManager {
             String moduleIndexString = userInput.replace("edit ", "");
             int moduleIndex = Integer.parseInt(moduleIndexString) - 1;
             if (modulesList.get(moduleIndex) != null) {
-                Module moduleToEdit = modulesList.get(moduleIndex);
-                printMessage("Here is the module that you have chosen to edit:");
-                printMessage(moduleToEdit.toString());
-                printMessage("Choose the part that you would like to edit: ");
-                boolean isEditFinished = false;
-                String editUserInput;
-                while (isEditFinished == false) {
-                    editUserInput = ui.getUserInput();
-                    if (editUserInput.startsWith("category")) {
-                        editModuleCategory(moduleToEdit, editUserInput);
-                        printMessage(moduleToEdit.toString());
-                    } else if (editUserInput.startsWith("code")) {
-                        editModuleCode(moduleToEdit, editUserInput);
-                        printMessage(moduleToEdit.toString());
-                    } else if (editUserInput.startsWith("day")) {
-                        editModuleDay(moduleToEdit, editUserInput);
-                        printMessage(moduleToEdit.toString());
-                    } else if (editUserInput.startsWith("time")) {
-                        editModuleTime(moduleToEdit, editUserInput);
-                        printMessage(moduleToEdit.toString());
-                    } else {
-                        printMessage("Your Module was successfully edited! Here are the changes");
-                        printMessage(moduleToEdit.toString());
-                        isEditFinished = true;
-                    }
-                }
-                printMessage("Exiting the edit mode");
+                editModuleRunner(ui, moduleIndex);
             }
         } catch (IndexOutOfBoundsException e) {
-            logger.log(Level.WARNING, "wrong index for edit");
+            logger.log(Level.WARNING, LOGGER_WRONG_EDIT_INDEX);
             if (modulesList.size() == 0) {
-                printMessage("There are no modules to edit!");
+                printMessage(EDIT_NO_MODULES_ERROR);
             } else {
-                printMessage(" Oops there are only " + modulesList.size() + " modules left in your schedule");
+                printListSizeErrorMessage();
             }
         } catch (NumberFormatException e) {
-            logger.log(Level.WARNING, "no index number specified for edit");
-            printMessage("Please enter the index of the module you would like to edit");
+            logger.log(Level.WARNING, LOGGER_NO_EDIT_INDEX);
+            printMessage(EDIT_NO_INDEX_ERROR);
         }
     }
 
+    private void editModuleRunner(TextUi ui, int moduleIndex) {
+        Module moduleToEdit = modulesList.get(moduleIndex);
+        printMessage(EDIT_MODULE_OPENING_MESSAGE);
+        printMessage(moduleToEdit.toString());
+        printMessage(EDIT_MODULE_CHOOSE_MESSAGE);
+        boolean isEditFinished = false;
+        String editUserInput;
+        while (isEditFinished == false) {
+            editUserInput = ui.getUserInput();
+            if (editUserInput.startsWith(MODULE_CATEGORY_DELIMITER)) {
+                editModuleCategory(moduleToEdit, editUserInput);
+            } else if (editUserInput.startsWith(MODULE_CODE_DELIMITER)) {
+                editModuleCode(moduleToEdit, editUserInput);
+            } else if (editUserInput.startsWith(MODULE_DAY_DELIMITER)) {
+                editModuleDay(moduleToEdit, editUserInput);
+            } else if (editUserInput.startsWith(MODULE_TIME_DELIMITER)) {
+                editModuleTime(moduleToEdit, editUserInput);
+            } else {
+                printMessage(EDIT_MODULE_SUCCESS_MESSAGE);
+                printMessage(moduleToEdit.toString());
+                isEditFinished = true;
+            }
+        }
+        printMessage(EDIT_MODULE_EXIT_MESSAGE);
+    }
+
     private void editModuleTime(Module moduleToEdit, String editUserInput) {
-        String moduleTime = editUserInput.replace("time ","");
+        String moduleTime = editUserInput.replace(MODULE_TIME_DELIMITER,"");
         moduleToEdit.setTimeSlot(moduleTime);
+        printMessage(moduleToEdit.toString());
     }
 
     private void editModuleDay(Module moduleToEdit, String editUserInput) {
-        String moduleDay = editUserInput.replace("day ","");
+        String moduleDay = editUserInput.replace(MODULE_DAY_DELIMITER,"");
         moduleToEdit.setDay(moduleDay);
+        printMessage(moduleToEdit.toString());
     }
 
     private void editModuleCode(Module moduleToEdit, String editUserInput) {
-        String moduleCode = editUserInput.replace("code ","");
+        String moduleCode = editUserInput.replace(MODULE_CODE_DELIMITER,"");
         moduleToEdit.setModuleCode(moduleCode);
+        printMessage(moduleToEdit.toString());
     }
 
     private void editModuleCategory(Module moduleToEdit, String editUserInput) {
-        String moduleCategory = editUserInput.replace("category ","");
+        String moduleCategory = editUserInput.replace(MODULE_CATEGORY_DELIMITER,"");
         try {
             moduleCategory = validateModuleCategory(moduleCategory);
             moduleToEdit.setCategory(moduleCategory);
+            printMessage(moduleToEdit.toString());
         } catch (ModuleCategoryException e) {
-            printMessage("Category of the module was not of the correct form");
+            printMessage(e.getMessage());
         }
     }
 
@@ -193,7 +246,7 @@ public class StudyManager {
             return;
         }
         modulesList.add(newModule);
-        printMessage("Okay, I have added a new module to the schedule");
+        printMessage(ADD_MODULE_SUCCESS_MESSAGE);
         printMessage(newModule.toString());
 
     }
@@ -210,10 +263,6 @@ public class StudyManager {
             String[] rawInput = userInput.split(" ", 2);
             String[] parameters = rawInput[1].split(" ", 4);
             String[] checkedParameters = validateAddInputs(parameters);
-            // String module = parameters[0].substring(2);
-            // String category = parameters[1].substring(2);
-            // String day = parameters[2].substring(2);
-            // String time = parameters[3].substring(2);
             String module = checkedParameters[0];
             String category = checkedParameters[1];
             String day = checkedParameters[2];
@@ -221,31 +270,32 @@ public class StudyManager {
 
             return new Module(module, category, day, time);
         } catch (IndexOutOfBoundsException e) {
-            logger.log(Level.WARNING, "Wrong format for add module");
-            printMessage("Please ensure that your input follows the form:");
-            printMessage("add m/CS2113 c/lec d/Thursday t/2pm-4pm");
+            logger.log(Level.WARNING, LOGGER_WRONG_ADD_FORMAT);
+            printMessage(ADD_WRONG_FORMAT_MESSAGE);
+            printMessage(ADD_SAMPLE_FORMAT_MESSAGE);
             return null;
         } catch (ModuleDayException e) {
-            logger.log(Level.WARNING, "Day was not specified for add module");
-            printMessage("Please enter the day of your module");
+            logger.log(Level.WARNING, LOGGER_MISSING_DAY_IN_ADD);
+            printMessage(e.getMessage());
             return null;
         } catch (ModuleCategoryException e) {
-            logger.log(Level.WARNING, "Category was not specified for add module");
-            printMessage("Please enter the category of your module");
+            e.getMessage();
+            logger.log(Level.WARNING, LOGGER_MISSING_CAT_IN_ADD);
+            printMessage(e.getMessage());
             return null;
         } catch (ModuleTimeException e) {
-            logger.log(Level.WARNING, "Time was not specified for add module");
-            printMessage("Please enter the time of your module's class");
+            logger.log(Level.WARNING, LOGGER_MISSING_TIME_IN_ADD);
+            printMessage(e.getMessage());
             return null;
         } catch (ModuleCodeException e) {
-            logger.log(Level.WARNING, "Code was not specified for add module");
-            printMessage("Please enter the code for your module");
+            logger.log(Level.WARNING, LOGGER_MISSING_CODE_IN_ADD);
+            printMessage(e.getMessage());
             return null;
         }
     }
 
     public void findModule(String userInput) {
-        String moduleKeyword = userInput.replace("find ","");
+        String moduleKeyword = userInput.replace(FIND_COMMAND,"");
         ArrayList<Module> matches = new ArrayList<>();
         for (Module m: modulesList) {
             if (m.toString().contains(moduleKeyword)) {
@@ -253,14 +303,14 @@ public class StudyManager {
             }
         }
         if (matches.size() == 0) {
-            printMessage("There are no modules that match \"" + moduleKeyword + "\"");
+            printMessage(FIND_NO_MATCHES_MESSAGE + " \"" + moduleKeyword + "\"");
         } else {
             listMatches(matches);
         }
     }
 
     private void listMatches(ArrayList<Module> matches) {
-        System.out.println("    Here are the matching tasks in your list:");
+        System.out.println(FIND_LIST_MATCHES_MESSAGE);
         int i = 1;
         for (Module m: matches) {
             System.out.println((i++) + ": " + m);
@@ -297,13 +347,13 @@ public class StudyManager {
     private String moduleCodeChecker(String[] parameters) throws ModuleCodeException {
         String module;
         try {
-            if (parameters[0].substring(2).equals("") || !parameters[0].substring(0, 2).equals("m/")) {
-                throw new ModuleCodeException();
+            if (parameters[0].substring(2).equals("") || !parameters[0].substring(0, 2).equals(MODULE_CODE_DELIMITER)) {
+                throw new ModuleCodeException(MISSING_MODULE_CODE_MESSAGE);
             } else {
                 module = parameters[0].substring(2);
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new ModuleCodeException();
+            throw new ModuleCodeException(MISSING_MODULE_CODE_MESSAGE);
         }
         return module;
     }
@@ -317,14 +367,15 @@ public class StudyManager {
     private String moduleCategoryChecker(String[] parameters) throws ModuleCategoryException {
         String category;
         try {
-            if (parameters[1].substring(2).equals("") || !parameters[1].substring(0, 2).equals("c/")) {
-                throw new ModuleCategoryException();
+            if (parameters[1].substring(2).equals("")
+                    || !parameters[1].substring(0, 2).equals(MODULE_CATEGORY_DELIMITER)) {
+                throw new ModuleCategoryException(MISSING_MODULE_CATEGORY_MESSAGE);
             } else {
                 category = parameters[1].substring(2);
                 category = validateModuleCategory(category);
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new ModuleCategoryException();
+            throw new ModuleCategoryException(MISSING_MODULE_CATEGORY_MESSAGE);
         }
         return category;
     }
@@ -332,20 +383,19 @@ public class StudyManager {
     private String validateModuleCategory(String category) throws ModuleCategoryException {
         switch (category) {
         case "lec":
-            category = "Lecture";
+            category = MODULE_CATEGORY_LEC;
             break;
         case "tut":
-            category = "Tutorial";
+            category = MODULE_CATEGORY_TUT;
             break;
         case "exam":
-            category = "Exam";
+            category = MODULE_CATEGORY_EXAM;
             break;
         default:
-            printMessage("Category has to be one of lec,tut or exam");
-            throw new ModuleCategoryException();
+            throw new ModuleCategoryException(WRONG_CATEGORY_FORMAT_MESSAGE);
         }
-        assert (category == "Lecture" || category == "Tutorial" || category == "Exam") : "category is not one"
-                + " of lec, tut or exam";
+        assert (category.equals(MODULE_CATEGORY_LEC) || category.equals(MODULE_CATEGORY_TUT)
+                || category.equals(MODULE_CATEGORY_EXAM)) : WRONG_CATEGORY_FORMAT_MESSAGE;
         return category;
     }
 
@@ -358,13 +408,13 @@ public class StudyManager {
     private String moduleDayChecker(String[] parameters) throws ModuleDayException {
         String day;
         try {
-            if (parameters[2].substring(2).equals("") || !parameters[2].substring(0, 2).equals("d/")) {
-                throw new ModuleDayException();
+            if (parameters[2].substring(2).equals("") || !parameters[2].substring(0, 2).equals(MODULE_DAY_DELIMITER)) {
+                throw new ModuleDayException(MISSING_MODULE_DAY_MESSAGE);
             } else {
                 day = parameters[2].substring(2);
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new ModuleDayException();
+            throw new ModuleDayException(MISSING_MODULE_DAY_MESSAGE);
         }
         return day;
     }
@@ -378,13 +428,13 @@ public class StudyManager {
     private String moduleTimeChecker(String[] parameters) throws ModuleTimeException {
         String time;
         try {
-            if (parameters[3].substring(2).equals("") || !parameters[3].substring(0, 2).equals("t/")) {
-                throw new ModuleTimeException();
+            if (parameters[3].substring(2).equals("") || !parameters[3].substring(0, 2).equals(MODULE_TIME_DELIMITER)) {
+                throw new ModuleTimeException(MISSING_MODULE_TIME_MESSAGE);
             } else {
                 time = parameters[3].substring(2);
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new ModuleTimeException();
+            throw new ModuleTimeException(MISSING_MODULE_TIME_MESSAGE);
         }
         return time;
     }
