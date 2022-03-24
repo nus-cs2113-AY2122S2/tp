@@ -25,11 +25,13 @@ public class AppointmentList {
     }
 
     public void find(String criteria, String input) {
+        boolean noResults = true;
         switch (criteria) {
         case "patient name":
             for (int i = 0; i < appointments.size(); i++) {
                 if (appointments.get(i).getPatientName().equals(input)) {
                     appointments.get(i).show();
+                    noResults = false;
                 }
             }
             break;
@@ -37,6 +39,7 @@ public class AppointmentList {
             for (int i = 0; i < appointments.size(); i++) {
                 if (appointments.get(i).getDoctorName().equals(input)) {
                     appointments.get(i).show();
+                    noResults = false;
                 }
             }
             break;
@@ -44,6 +47,7 @@ public class AppointmentList {
             for (int i = 0; i < appointments.size(); i++) {
                 if (appointments.get(i).getAppointmentDate().equals(input)) {
                     appointments.get(i).show();
+                    noResults = false;
                 }
             }
             break;
@@ -51,6 +55,7 @@ public class AppointmentList {
             for (int i = 0; i < appointments.size(); i++) {
                 if (appointments.get(i).getPatientNric().equals(input)) {
                     appointments.get(i).show();
+                    noResults = false;
                 }
             }
             break;
@@ -62,7 +67,12 @@ public class AppointmentList {
                     + "date\n"
                     + "nric\n"
                     + "Please try again!");
+            noResults = false;
             break;
+        }
+        if (noResults) {
+            UI.printParagraph("Search complete.\n"
+                    + "No appointments found matching the search criteria.");
         }
     }
 }

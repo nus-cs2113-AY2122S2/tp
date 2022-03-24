@@ -47,5 +47,8 @@ public class Parser {
         return addAppointmentParameters;
     }
 
-
+    public static String[] parseFindAppointment(String parameters) throws HalpmiException {
+        String[] findAppointmentParameters = minParameterCheck(parameters, 2);
+        return findAppointmentParameters;
+    }
 }

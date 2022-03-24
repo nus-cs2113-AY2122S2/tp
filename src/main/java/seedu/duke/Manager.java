@@ -56,6 +56,9 @@ public class Manager {
             case "add appointment":
                 command.addAppointment(storage.appointments, storage.patients, storage.doctors, parameters);
                 break;
+            case "find appointment":
+                command.findAppointment(storage.appointments, parameters);
+                break;
             case "help":
                 ui.printHelp();
                 break;
