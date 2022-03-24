@@ -32,13 +32,26 @@
 
 ###Parser Component
 ![ParserClassDiagram](img/ParserClassDiagram.png)
-How the `Parser` component works:
 
-The parse method in `Parser` is called from `InvMgr`, and takes in the raw user input as a String.
-The method then checks through a logic gate whether the user input is valid, and returns 
+The diagram above shows the class diagram of how the `Parser` component works.
+
+1. The `parse(userInput)` method in `Parser` is called from `InvMgr`, and takes in the raw user input. 
+2. The method checks through a logic gate whether the user input is valid, and returns 
 a `Command` class based on the user input.
 
+###ListCommand
+![ListCommandSequenceDiagram](img/ListCommandSequenceDiagram.png)
 
+The following diagram shows the sequence diagram of the listing of items in `itemList`.
+
+The user starts by typing a list command.
+
+1. `InvMgr` calls `parse("list")` method in `Parser` class, which returns a ListCommand object.
+2. `InvMgr` calls `execute(itemList, ui)` method in `ListCommand` object.
+3. `ListCommand` loops through every `Item` in `itemList` and prints them line by line 
+and numbers them.
+
+The `ListCommand` class is created by the `Parser` class when the user inputs
 ## Non-Functional Requirements
 
 {Give non-functional requirements}
