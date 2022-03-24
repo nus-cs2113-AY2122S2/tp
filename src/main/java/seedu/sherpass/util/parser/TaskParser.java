@@ -1,6 +1,12 @@
 package seedu.sherpass.util.parser;
 
-import seedu.sherpass.command.*;
+import seedu.sherpass.command.AddCommand;
+import seedu.sherpass.command.Command;
+import seedu.sherpass.command.DeleteCommand;
+import seedu.sherpass.command.EditCommand;
+import seedu.sherpass.command.MarkCommand;
+import seedu.sherpass.command.ShowCommand;
+import seedu.sherpass.command.UnmarkCommand;
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.WrongEditInfoFormatException;
@@ -11,8 +17,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.inputFormat;
-import static seedu.sherpass.constant.Index.*;
-import static seedu.sherpass.constant.Message.*;
+import static seedu.sherpass.constant.Index.MARK_INDEX;
+import static seedu.sherpass.constant.Index.SHOW_OPTION_INDEX;
+import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
+import static seedu.sherpass.constant.Message.EMPTY_STRING;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
+import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
 
 public class TaskParser {
 
