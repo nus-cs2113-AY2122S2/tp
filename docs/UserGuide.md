@@ -238,7 +238,7 @@ Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 Example of usage:
 1. Remove an existing activity with a unique identifier of 1 from a session with a unique <br> identifier of 2.
    - `activity /delete /sid 2 /aid 1` <br>
-   ![Activity delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityDeleteCommand.PNG)
+   ![Activity delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityDeleteCommand.png)
 <br>
 <br>
 
@@ -282,11 +282,8 @@ Format: `activity /list /sid [SESSION_ID]`
 
 Example of usage:
 1. Lists all activities in a session with a unique identifier of 2.
-    - `activity /list /sid 2`
-      <br>
+    - `activity /list /sid 2` <br>
       ![Activity list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityListCommand.png)
-      <br>
-
 <br>     
 <br>
 
@@ -332,11 +329,11 @@ Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
 
 
 Example of usage:
-1. Adds a new group named group1, with alice and bob involved.
-    - `group /create /n group1 /pl alice bob` <br>
-      ![Group create command Screenshot]()
-      <br>
-      <br>
+1. Adds a new group named Uni Friends, with Alice and Bob involved.
+    - `group /create /n Uni Friends /pl Alice Bob` <br>
+      ![Group create command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupCreateCommand.png)
+<br>
+<br>
 
 ### Deleting a group: `group /delete`
 > Deletes a existing group.<br>
@@ -356,9 +353,9 @@ Format: `group /delete /gid [GROUP_ID]`
 Example of usage:
 1. Remove an existing group with a unique identifier of 1.
     - `group /delete /gid 1` <br>
-      ![Group delete command Screenshot]()
-      <br>
-      <br>
+      ![Group delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupDeleteCommand.png)
+<br>
+<br>
 
 
 ### Viewing a group: `group /view`
@@ -375,11 +372,10 @@ Format: `group /view /gid [GROUP_ID]`
 > **💡 Note(s):**
 >- The group with a unique identifier of `[GROUP_ID]` has to exist before the group can be viewed.
 
-
 Example of usage:
 1. Views a group with a unique identifier of 1.
     - `group /view /gid 1` <br>
-    ![Group view command Screenshot]()
+    ![Group view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupViewCommand.png)
 <br>     
 <br>
 
@@ -393,7 +389,7 @@ Format: `group /list`
 
 Example of usage:
 
-![Group list command Screenshot]()
+![Group list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupListCommand.png)
 <br>
 <br>
 
@@ -401,6 +397,11 @@ Example of usage:
 > Displays all available SplitLah commands and their syntax.
 
 Format: `help`
+
+Example of usage:
+![Group delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/HelpCommand.png)
+<br>
+<br>
 
 ### Exit
 > Exits the application.
