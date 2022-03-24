@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+skinparam arrowColor #BLACK
+
+box Parser LOGIC_COLOR_T1
+Participant "<color:maroon><<Class>>\nParser" as Parser LOGIC_COLOR_T2
+end box
+
+box Family MODEL_COLOR_T1
+Participant Family as ":Family" MODEL_COLOR
+Participant PLIST as "myGen:PersonList" MODEL_COLOR
+Participant Person as "Alice:Person" MODEL_COLOR
+end box
+
+box MoneyList #INDIANRED
+Participant ILIST as ":IncomeList" #FIREBRICK
+end box
+
+[-> Parser : parseKeyword(userInput)
+activate Parser
+Parser -->[ : "deletein":String
+deactivate Parser
+
+[-[hidden]> Parser
+
+[-> Parser : parseUserIndex(userInput) 
+activate Parser
+Parser -->[ : "1":String
+deactivate Parser
+
+[-> Parser : parseGroupIndex(userInput) 
+activate Parser
+Parser -->[ : "2":String
+deactivate Parser
+
+[-> Parser : parseRecordIndex(userInput)
+activate Parser
+Parser -->[ : "1":String
+deactivate Parser
+
+[-> Parser : getValidGroupIndex("1")
+activate Parser
+Parser -> Family : getNumberOfGroups()
+activate Family
+Family --> Parser
+deactivate Family
+Parser -->[ : 1:int
+deactivate Parser
+
+[-> Parser : getValidUserIndex("2", myGen)
+activate Parser
+Parser -> PLIST : getNumberOfMembers()
+activate PLIST
+PLIST --> Parser
+deactivate PLIST
+Parser -->[ : 2:int
+deactivate Parser
+
+[-> Parser : getValidIncomeIndex("1", Alice)
+activate Parser
+Parser -> Person : getNumberOfIncomes()
+activate Person
+Person -> ILIST : getNumberOfIncomes()
+activate ILIST
+ILIST --> Person
+deactivate ILIST
+Person --> Parser
+deactivate Person
+Parser -->[ : 1:int
+deactivate Parser
+
+@enduml
+
