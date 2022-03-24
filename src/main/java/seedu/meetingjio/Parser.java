@@ -183,8 +183,9 @@ public class Parser {
      */
     public Command prepareDelete() {
         try {
-            int index = Integer.parseInt(arguments);
-            return new DeleteCommand(index);
+            String name = getParametersByIndexFromInput(0,arguments);
+            int index = Integer.parseInt(getParametersByIndexFromInput(1,arguments));
+            return new DeleteCommand(name,index);
         } catch (NumberFormatException nfe) {
             logger.log(Level.INFO, "Invalid index to delete Error detected.");
             return new CommandResult(ERROR_INVALID_INDEX_FORMAT);
@@ -193,6 +194,10 @@ public class Parser {
 
     private String getCommandFromInput(String input) {
         return input.split(" ")[0].trim().toLowerCase();
+    }
+
+    private String getParametersByIndexFromInput(int index,String input) {
+        return input.split(" ")[index].trim().toLowerCase();
     }
 
     private String getArgumentsFromInput(String input) {
