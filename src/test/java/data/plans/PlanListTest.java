@@ -40,6 +40,23 @@ class PlanListTest {
     }
 
     @Test
+    void listAllPlan_expectNoPlanPrints() throws InvalidPlanException {
+        String expectedOutput =
+                "Oops! You have not created any plans yet!"
+                        + "\nTo create a new plan, enter 'plan /new <plan name> /workouts "
+                        + "\n<workout number(s) to add, separated by comma>'."
+                        + "\nAlternatively, enter 'help' for more information.";
+        expectedOutput = expectedOutput.replaceAll("\n", "").replaceAll("\r", "");
+        ByteArrayOutputStream consoleOutput = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(consoleOutput);
+        System.setOut(ps);
+        planList.listAllPlan();
+        System.out.flush();
+        String consoleOutputs = consoleOutput.toString().replaceAll("\n", "").replaceAll("\r", "");
+        assertEquals(expectedOutput, consoleOutputs);
+    }
+
+    @Test
     void listAllPlan_expectThreePrints() throws InvalidPlanException {
         planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
         planList.createAndAddPlan("Plan 2 /workouts 1");
@@ -64,6 +81,8 @@ class PlanListTest {
     void createAndAddPlan_validPlansAdded_expectValidPlans() throws InvalidPlanException {
         planList.createAndAddPlan("Plan 1 /workouts 1,5,4,3");
         planList.createAndAddPlan("Plan 2 /workouts 1,5,4,3,1,1,1");
+        planList.createAndAddPlan("Plan 3 /workouts 1, 3, 4");
+        planList.createAndAddPlan("Plan 4 /workouts 1,1, 5,2");
 
         for (int i = 0; i < planList.getPlansDisplayList().size(); i += 1) {
             assertEquals("Plan " + (i + 1), planList.getPlansDisplayList().get(i).toString());

@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * A class that will handle the commands relating to plan.
+ */
 public class PlanCommand extends Command {
     public static final String BASE_KEYWORD = "plan";
     public static final String CREATE_ACTION_KEYWORD = "/new";
@@ -28,6 +31,17 @@ public class PlanCommand extends Command {
 
     private static Logger logger = Logger.getLogger(PlanCommand.class.getName());
 
+    /**
+     * Constructs a new instance of the PlanCommand. Constructed when the user enters a
+     * plan-related command.
+     *
+     * @param userInput The user's full original input.
+     * @param fileManager An instance of the FileManager class.
+     * @param planList An instance of the PlanList class.
+     * @param userAction The action that was parsed from the user's input.
+     * @param userArguments The arguments that are accompanied by the user action.
+     * @throws InvalidCommandException If the command entered by the user is incorrect.
+     */
     public PlanCommand(String userInput, FileManager fileManager, PlanList planList,
                        String userAction, String userArguments) throws InvalidCommandException {
         super(userInput);
@@ -67,7 +81,7 @@ public class PlanCommand extends Command {
     }
 
     /**
-     * Gets the action of the workout command specified by the user.
+     * Gets the action of the plan command specified by the user.
      *
      * @return A string containing the action specified by the user.
      */
@@ -108,7 +122,11 @@ public class PlanCommand extends Command {
         return this.userArguments;
     }
 
-
+    /**
+     * Executes a plan-related command based on the action and arguments that is stored in the
+     * class fields. If the action and/or arguments specified are invalid, this method will handle the
+     * exceptions and print appropriate responses.
+     */
     @Override
     public void execute() {
         try {

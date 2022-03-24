@@ -116,6 +116,7 @@ class ParserTest {
     void createPlanCommand_validPlanCommand_expectSuccess() throws InvalidCommandException {
         assertTrue(parser.createPlanCommand("plan /new Random /workouts 1,2,3") instanceof PlanCommand);
         assertTrue(parser.createPlanCommand("plan /new Random /workouts 1,1,1,1,1,1,1,1,1,1") instanceof PlanCommand);
+        assertTrue(parser.createPlanCommand("plan /new Random /workouts 1, 3, 2") instanceof PlanCommand);
         assertTrue(parser.createPlanCommand("plan /new Random /workouts 2") instanceof PlanCommand);
         assertTrue(parser.createPlanCommand("plan /list") instanceof PlanCommand);
     }

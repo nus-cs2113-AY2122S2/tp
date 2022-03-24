@@ -21,6 +21,7 @@ public class WorkoutCommand extends Command {
     public static final String CREATE_ACTION_KEYWORD = "/new";
     public static final String CREATE_ACTION_REPS_KEYWORD = "/reps";
     public static final String LIST_ACTION_KEYWORD = "/list";
+    public static final String LIST_ALL_ACTION_KEYWORD = "/listall";
     public static final String DELETE_ACTION_KEYWORD = "/delete";
     public static final String UPDATE_ACTION_KEYWORD = "/update";
 
@@ -104,6 +105,8 @@ public class WorkoutCommand extends Command {
             // Fallthrough
         case LIST_ACTION_KEYWORD:
             // Fallthrough
+        case LIST_ALL_ACTION_KEYWORD:
+            // Fallthrough
         case DELETE_ACTION_KEYWORD:
             // Fallthrough
         case UPDATE_ACTION_KEYWORD:
@@ -140,6 +143,9 @@ public class WorkoutCommand extends Command {
                 break;
             case LIST_ACTION_KEYWORD:
                 getWorkoutList().listWorkout();
+                break;
+            case LIST_ALL_ACTION_KEYWORD:
+                getWorkoutList().listAllWorkout();
                 break;
             case DELETE_ACTION_KEYWORD:
                 Workout deletedWorkout = getWorkoutList().deleteWorkout(getUserArguments());
