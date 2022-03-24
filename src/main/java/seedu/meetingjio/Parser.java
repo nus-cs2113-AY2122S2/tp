@@ -12,9 +12,12 @@ import seedu.meetingjio.exceptions.InvalidDayException;
 import seedu.meetingjio.exceptions.MissingValueException;
 import seedu.meetingjio.exceptions.InvalidTimeException;
 import seedu.meetingjio.exceptions.InvalidModeException;
+import seedu.meetingjio.exceptions.TimetableNotFoundException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import seedu.meetingjio.timetables.MasterTimetable;
 
 import static seedu.meetingjio.common.Messages.MESSAGE_HELP;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
@@ -24,6 +27,8 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_COMMAND;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST;
 
 public class Parser {
     private final String command;
@@ -48,7 +53,7 @@ public class Parser {
         case AddLessonCommand.COMMAND_WORD:
             return prepareAdd();
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommand(arguments.trim());
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete();
         case ClearCommand.COMMAND_WORD:
@@ -60,6 +65,7 @@ public class Parser {
             return new CommandResult(feedback);
         }
     }
+
 
     /**
      * Collate the user's input and verify the validity of the input value of each parameter.
