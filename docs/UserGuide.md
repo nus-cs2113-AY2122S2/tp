@@ -13,8 +13,8 @@ users who can type fast will be able to plan out their tasks in a much quicker f
   - Add tasks: [`add`]() or [`addrecurring`](#adding-a-recurring-task-addrecurring)
   - Delete tasks: [`delete`]() or [`deleterecurring`](#deleting-a-recurring-task-deleterecurring)
   - Edit tasks: [`edit`]() or [`editrecurring`](#editing-a-recurring-task-editrecurring)
-  - List tasks: [`show`]()
-  - Clear all tasks: [`clear`]()
+  - Show tasks: [`show`](#generating-a-timetable-show-today--show-date--show-week)
+  - Clear all tasks: [`clear`](#clearing-all-tasks-clear)
   - Study session
     - Enter study session: [`study`]()
     - Start timer: [`start`]()
@@ -31,7 +31,8 @@ users who can type fast will be able to plan out their tasks in a much quicker f
 2. Download the latest version of `Sherpass` 
 from [here](https://github.com/AY2122S2-CS2113T-T09-1/tp/releases/tag/v1.0-Release).
 3. Copy the jar file to the folder you want to use as the home folder for Sherpass.
-4. Start the application from a terminal using `java -jar Sherpass.jar`
+4. Open a terminal and navigate to the folder containing the jar file.
+5. Start the application on the terminal using `java -jar Sherpass.jar`
 
 ## Features 
 
@@ -40,7 +41,7 @@ from [here](https://github.com/AY2122S2-CS2113T-T09-1/tp/releases/tag/v1.0-Relea
 You can add your tasks into Sherpass and get a detailed outline of your schedule. Using this schedule, you won't
 have to worry ever again about forgetting tasks and missing deadlines!
 
-Sherpass also allows you to easily add recurring tasks (e.g classes). Simply refer to the command details for
+Sherpass also allows you to easily add recurring tasks (e.g. classes). Simply refer to the command details for
 more information.
 
 ### Study sessions
@@ -52,6 +53,7 @@ TBD
 - Words in UPPER_CASE are the parameters to be supplied by the user.
 - Items in square brackets are optional
 - Extraneous parameters for commands that do not take in parameters (such as show, stop, exit) will be ignored
+
 ### Adding a recurring task: `addrecurring`
 Adds a recurring task to your list of tasks.
 - All tasks will have the same task description.
@@ -95,6 +97,45 @@ After command: `editrecurring 1 /do 25/3/2022 /start 18:00 /end 20:00`
 
 ![afteredit](images/afteredit.png)
 
+### Generating a timetable: `show today` / `show <date>` / `show week`
+Creates a schedule listing out your tasks for the day or the week.
+
+Upon startup, Sherpass also shows your schedule for the day.
+
+Format:
+- To see the timetable for the day: `show today`
+- To see the timetable for a specific day: `show <date>`, where the date is in the format d/M/YYYY.
+  E.g. `show 25/3/2022` shows the schedule for 25th March 2022
+- To see the timetable for the week you are in: `show week`
+
+Below is an example of the timetable that is being generated from the given date
+25/3/2022:
+
+![](images/timetableFormat.png)
+
+### Getting a detailed list: `show all` / `show todo`
+
+Other than getting a timetable, Sherpass also allows you
+to view all the tasks that have been added/edited/deleted.
+
+Format:
+- To view all the tasks that exist in your list: `show all`
+- To view all the tasks that are yet to be completed: `show todo` 
+
+Below are some sample outputs using `show all` and `show todo` respectively
+
+Show all tasks:
+![](images/showAllTasks.JPG)
+
+Show pending tasks:
+![](images/showPendingTasks.png)
+
+
+### Clearing all tasks: `clear`
+To save the trouble of deleting tasks one by one if you wish to delete all of them,
+Sherpass allows you to do so using `clear`
+
+Note: Be sure to use `clear` only when you want to remove all the tasks in your list.
 
 ### Saving your tasks
 
@@ -119,15 +160,16 @@ rectify the problem or allow Sherpass to create a new save file
 
 ## Command Summary
 
-| Action                | Format,Examples                                                                                                                                                                                |
-|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|                       |                                                                                                                                                                                                |
-|                       |                                                                                                                                                                                                |
-|                       |                                                                                                                                                                                                |
-| Add recurring task    | `addrecurring TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME /repeat FREQUENCY`<br/>e.g. `addrecurring attend cs2113t lecture /do 25/2/2022 /start 16:00 /end 18:00 /repeat WEEKLY` |
-| Delete recurring task | `deleterecurring TASK_NUMBER`                                                                                                                                                                  |
-| Edit recurring task   | `editrecurring TASK_NUMBER [TASK_DESCRIPTION] [/do DATE /start TIME /end TIME]`<br/>e.g.`editrecurring 1 /do 25/3/2022 /start 18:00 /end 20:00`                                                |
-|                       |                                                                                                                                                                                                |
-|                       |                                                                                                                                                                                                |
-|                       |                                                                                                                                                                                                |
+| Action                 | Format,Examples                                                                                                                                                                                |
+|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Generate timetable     | `show today` / `show <date>` / `show week`                                                                                                                                                     |
+| List all tasks         | `show all`                                                                                                                                                                                     |
+| List all pending tasks | `show todo`                                                                                                                                                                                    |
+| Clear all tasks        | `clear`                                                                                                                                                                                        |
+| Add recurring task     | `addrecurring TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME /repeat FREQUENCY`<br/>e.g. `addrecurring attend cs2113t lecture /do 25/2/2022 /start 16:00 /end 18:00 /repeat WEEKLY` |
+| Delete recurring task  | `deleterecurring TASK_NUMBER`                                                                                                                                                                  |
+| Edit recurring task    | `editrecurring TASK_NUMBER [TASK_DESCRIPTION] [/do DATE /start TIME /end TIME]`<br/>e.g.`editrecurring 1 /do 25/3/2022 /start 18:00 /end 20:00`                                                |
+|                        |                                                                                                                                                                                                |
+|                        |                                                                                                                                                                                                |
+|                        |                                                                                                                                                                                                |
 
