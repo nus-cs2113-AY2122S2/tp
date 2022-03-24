@@ -312,9 +312,8 @@ The following sequence illustrates how the `workout /delete` command works in gr
 > have been removed from the sequence diagram. Reference frames will be elaborated further
 > down this section.
 
-![Delete Workout Sequence Diagram](uml/sequenceDiagrams/images/DeleteWorkout.png)
-<br>
-<br>
+![Delete Workout Sequence Diagram](uml/sequenceDiagrams/images/deleteWorkout.png)
+<br><br>
 
 (Steps 1 to 3) The program waits for the user's input, which in this case, is the `workout /delete <workout number to delete>` command. 
 An example of a valid command is `workout /delete 1`. Once the command is entered, the UI class will return the user input in a `String` object
@@ -325,10 +324,12 @@ Upon parsing of the input, a `WorkoutCommand` object is obtained. This `WorkoutC
 to the `WerkIt` object. It will then execute the workout command by calling the `WorkoutCommand#execute()` method.
 <br><br>
 (Step 7) The `WorkoutCommand#execute()` method identifies that the workout action is of type `delete` due to the workout command that 
-was supplied (`workout /delete` <workout number to delete>). It then calls the appropriate method, `WorkoutList#deleteWorkout(userArguments)`,
+was supplied (`workout /delete <workout number to delete>`). It then calls the appropriate method, `WorkoutList#deleteWorkout(userArguments)`,
 in order to perform the deletion of the workout. <br><br>
 The following sequence diagram is the detailed procedure for Step 7's `WorkoutList#deleteWorkout(userArguments)`:
+<br><br>
 ![Delete Workout Detailed Sequence Diagram](uml/sequenceDiagrams/images/deleteWorkoutDetailed.png)
+
 <br><br>
 (Steps 7.1 to 7.2) The `Integer#parseInt()` method is called to parse the argument given to `WorkoutList#deleteWorkout(userArgument)`.
 In this case, the user argument for `workout /delete` is the workout number of the workout to be deleted in the workout list.
