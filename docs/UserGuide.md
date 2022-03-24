@@ -86,8 +86,34 @@ Alright, the following workout has been created:
 A new workout of carrying out Russian twists 50 times will be created and added to the application's list of workouts.
 
 ---
-### Show all Workouts: `workout /list`
-Lists down all workouts that have been created and stored in the workout list.
+### Show all Workouts in one go: `workout /listall`
+Lists down all workouts that have been created and stored in the workout list at the time the command is executed.
+
+Format: `workout /listall`
+
+**Example**
+```
+> workout /listall
+```
+**Expected Outcome**
+```
+------------------------------------------------------------
+Showing workouts 1-3 of 3:
+1. push up (10 reps)
+2. sit up (10 reps)
+3. pull up (10 reps)
+Showed all workouts in list
+------------------------------------------------------------
+```
+
+In the current workout list, there are a total of 3 workouts. All the workouts have been listed.
+If there are 20 workouts in the list, all the 20 workouts will be displayed together. 
+
+---
+### Show specific number of Workouts: `workout /list`
+Lists down a specific number of workouts that have been created and stored in the workout list at a time.
+The maximum number of workouts that will be displayed at a time is 10 workouts. If there are more
+workouts in the list, user will be prompt for continuation of printing.
 
 Format: `workout /list`
 
