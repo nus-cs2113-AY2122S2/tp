@@ -401,7 +401,7 @@ public class ParserUtils {
         String[] delimiterList;
         switch (commandType) {
         case ActivityCreateCommandParser.COMMAND_TEXT:
-            delimiterList = ActivityCreateCommand.COMMAND_DELIMITERS;
+            delimiterList = ActivityCreateCommandParser.COMMAND_DELIMITERS;
             break;
         case ActivityDeleteCommand.COMMAND_TEXT:
             delimiterList = ActivityDeleteCommand.COMMAND_DELIMITERS;
@@ -463,7 +463,7 @@ public class ParserUtils {
             // Fallthrough
         case SessionListCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case ActivityCreateCommand.COMMAND_TEXT:
+        case ActivityCreateCommandParser.COMMAND_TEXT:
             // Fallthrough
         case ActivityDeleteCommand.COMMAND_TEXT:
             // Fallthrough

@@ -24,17 +24,6 @@ import java.util.logging.Level;
 public class ActivityCreateCommand extends Command {
 
     private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
-    
-    public static final String[] COMMAND_DELIMITERS = { 
-        ParserUtils.SESSION_ID_DELIMITER, 
-        ParserUtils.NAME_DELIMITER, 
-        ParserUtils.PAYER_DELIMITER, 
-        ParserUtils.INVOLVED_DELIMITER, 
-        ParserUtils.TOTAL_COST_DELIMITER, 
-        ParserUtils.COST_LIST_DELIMITER,
-        ParserUtils.GST_DELIMITER,
-        ParserUtils.SERVICE_CHARGE_DELIMITER 
-    };
 
     private int sessionId;
     private String activityName;

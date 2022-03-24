@@ -22,6 +22,17 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
             "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
                     + "/cl [COST1 COST2…] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
+    public static final String[] COMMAND_DELIMITERS = {
+            ParserUtils.SESSION_ID_DELIMITER,
+            ParserUtils.NAME_DELIMITER,
+            ParserUtils.PAYER_DELIMITER,
+            ParserUtils.INVOLVED_DELIMITER,
+            ParserUtils.TOTAL_COST_DELIMITER,
+            ParserUtils.COST_LIST_DELIMITER,
+            ParserUtils.GST_DELIMITER,
+            ParserUtils.SERVICE_CHARGE_DELIMITER
+    };
+
     /**
      * Prepares user arguments for the creation of an ActivityCreateCommand object.
      *
