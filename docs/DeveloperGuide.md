@@ -108,6 +108,7 @@ The tag command accepts a string from the user and adds it into `ArrayList<Strin
 
 
 Here is an example on adding a tag to a general task:  
+
 1. User inputs `tag add 2 "testTag"`. 
 2. `TagParser` will initialise `TagCommand` with add as `tagOperation` 2 as `taskIndex` and testTag as `tagDescription`, while `taskModule` is null.
 3. `TagCommand` then gets the relevant `Module`. If `taskModule` is null, `getGeneralTasks()` is called. Else, `getModule(taskModule)` is called instead.
