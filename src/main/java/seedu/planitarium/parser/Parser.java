@@ -246,6 +246,24 @@ public class Parser {
     }
 
     /**
+     * Returns the group index from user input.
+     *
+     * @param userInput The user's full input text.
+     * @return The group index.
+     * @throws MissingDelimiterException   if user input does not contain delimiter for group index.
+     * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
+     * @throws EmptyStringException        if string after the delimiter is blank.
+     */
+    public static String parseGroupIndex(String userInput)
+            throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
+        assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
+        checkContainsOnlyOneDelimiter(userInput, DELIMITER_GROUP_INDEX);
+        String group = parseDelimitedTerm(userInput, DELIMITER_GROUP_INDEX, DELIMITER_BACK).trim();
+        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, group));
+        return group;
+    }
+
+    /**
      * Returns a valid double that is a monetary value.
      *
      * @param amount Text to be checked.

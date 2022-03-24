@@ -404,6 +404,48 @@ class ParserTest {
     }
 
     @Test
+    void parseGroupIndex_delimiterExist_success()
+            throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
+        String input = "add /n Alice /g 2";
+        String output = Parser.parseGroupIndex(input);
+        assertEquals("2", output);
+    }
+
+    @Test
+    void parseGroupIndex_nullInput_assertThrown() {
+        try {
+            Parser.parseGroupIndex(null);
+            fail();
+        } catch (AssertionError e) {
+            assertEquals("User input should not be null", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    void parseGroupIndex_delimiterIssues_exceptionThrown() {
+        try {
+            String noDelimiter = "add /n Alice";
+            Parser.parseGroupIndex(noDelimiter);
+            fail();
+        } catch (MissingDelimiterException e) {
+            assertEquals("Missing delimiter `/g`", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+        try {
+            String tooManyDelimiter = "add /n Alice /g 2 /g 3";
+            Parser.parseGroupIndex(tooManyDelimiter);
+            fail();
+        } catch (DuplicateDelimiterException e) {
+            assertEquals("Too many delimiter `/g`", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
     void getValidMoney_positiveDouble_success() throws InvalidMoneyException {
         String input = "10.50";
         Double output = Parser.getValidMoney(input);
