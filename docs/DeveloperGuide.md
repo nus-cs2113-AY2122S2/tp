@@ -1,8 +1,76 @@
+# Developer Guide
+
+---
+## Acknowledgements
+In this project, we have referenced the following materials:
+* [AB-3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+* [PlantUML Tutorial at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html)
+* [Our individual projects](AboutUs.md)
+
+---
+## Design
+
+> :information_source: **Note:** The `.puml` files used to create diagrams in this document
+> can be found in the diagrams folder. Refer to the above [PlantUML Tutorial](#Acknowledgements)
+> to learn how to create and edit diagrams.
+
+### Architecture
+<image src="images/ArchitectureDiagram.png" width="300"/>
+
+The ***Architecture Diagram*** given above shows the high-level design of PlanITarium.
+
+Given below is a quick overview of the main components and how they interact.
+
+**Main components of the Architecture**
+
+[`Main`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/PlanITarium.java)
+is responsible for,
+* At launch, initialize the components in an appropriate manner and calls Storage to read data if any.
+* Read user's commands from standard input for command execution.
+* At shut down, invokes shutdown sequence and calls Storage to save its current data.
+
+[`UI`](#UI-Component) is responsible for the UI of PlanITarium.
+
+[`Commands`](#Commands-Component) is responsible for the execution of commands.
+
+[`Parser`](#Parser-Component) is responsible for parsing and validating user input.
+
+[`Family`](#Persons-Component) is responsible for holding the user data of PlanITarium in memory.
+
+[`Money`](#Money-Component) is responsible for holding the monetary information in memory.
+
+[`Storage`](#Storage-Component) is responsible for reading and writing data to the hard disk.
+
+**How the components interact with each other**
+
+The *Sequence Diagram* below shows how the components interact for the scenrio where the user
+issues the command `add /n Alice /g 1`.
+
+<img src="images/ArchitectureSequenceDiagram.png"/>
+
+Each of the main components shown in the diagram above defined and implemented in a class
+with the same name as its component.
+
+Each component may have several other classes underneath it, belonging to the same logical grouping,
+to reduce coupling. For example, the `MoneyList` component is defined as an abstract class that
+is extended by `IncomeList` and `ExpenditureList`.
+
+The sections below provides more details on each component.
+
+### UI Component
+{For Huilin as she is most familiar}
+
+### Commands Component
+{For Huilin}
+
+### Parser Component
+**Class:** [`Parser.java`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/Parser.java)
 
 
-### Persons Component
 
-The **API** of this component is specified in `Family.java`, `PersonList.java` and `Person.java`.
+### Family Component
+
+The **Class** of this component is specified in `Family.java`, `PersonList.java` and `Person.java`.
 
 <image src="images/PersonsComponent.png"></image>
 
@@ -15,11 +83,11 @@ The `Person` component,
 * Depends on the `Money` component to help keep track of each `Person`'s income and expenditure as each `Person`   
   contains an `IncomeList` and `ExpenditureList`.
 
-### Money Component
+### MoneyList Component
 {For Jiarong}
 
 ### Storage Component
-**API: **
+**Class: **
 <image src="images/StorageDiagram"/>
 The `Storage` component,
 
