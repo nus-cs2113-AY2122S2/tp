@@ -25,6 +25,7 @@ public class Parser {
     public static final String DELIMITER_RECORD_INDEX = "/r";
     public static final String DELIMITER_BACK = "/[ruined]";
     // public static final String DELIMITER_MONEY = ".";
+    public static final String DELIMITER_CATEGORY_INDEX = "/c";
     public static final String EMPTY_STRING = "";
 
     public static final int INDEX_KEYWORD = 0;
