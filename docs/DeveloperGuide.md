@@ -167,6 +167,30 @@ The general workflow of the `session /list` command is as follows:
 ### View an activity
 ### List activities
 ### Add a group
+**API reference:** [`GroupCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupCreateCommand.java)
+
+The sequence diagram below models the interactions between various entities in the system
+when the user invokes the `group /create` command.
+<br>
+<br>
+![Create Group Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupCreateCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `group /create` command is as follows:
+1. The user input provided is passed to `Splitlah`.
+2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `GroupCreateCommand` object.
+3. `GroupCreateCommand#prepare` method is then invoked to obtain the group name and name list of people involved in the group. 
+    A new GroupCreateCommand object will be returned if both were found in the group, an InvalidCommand otherwise.
+4. If a GroupCreateCommand object is returned, `GroupCreateCommand#run` method is invoked to run the `group /create` command.
+5. Once the command starts to run, `GroupCreateCommand`class checks if there are duplicates in the name list 
+6. If there are duplicates, a message indicating that name list contains duplicates is printed using `TextUi#printlnMessage`. 
+7. If there are no duplicates, `GroupCreateCommand` class converts each of the names into a `Person` object.
+8. `GroupCreateCommand` class then checks whether there are existing groups with the group name.
+9. If existing groups with the group name are found, a message indicating that another group with the same name is printed using `TextUi#printlnMessage`
+10. If no existing groups with the group name are found, `GroupCreateCommand` class generates a new groupId and create a new `Group` object using the group name, name list, and groupId. 
+11. The list of `Group` object are managed by a `Profile` object, hence `Manager#getProfile#addGroup` is called to store the Group object in the Profile.
+12. The `GroupCreateCommand` class prints a message indicating that a group is successfully created and stored in `Parser` class.
+
 ### Remove a group
 ### View a group
 ### List groups
