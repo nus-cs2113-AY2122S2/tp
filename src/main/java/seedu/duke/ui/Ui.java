@@ -11,7 +11,7 @@ import seedu.duke.exceptions.InvMgrException;
  * */
 public class Ui {
 
-    private final Scanner scanner;
+    private Scanner scanner;
 
     public Ui() {
         scanner = new Scanner(System.in);

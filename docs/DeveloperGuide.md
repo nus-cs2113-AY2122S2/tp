@@ -139,3 +139,13 @@ The following sequence diagram shows how the data file is saved. Typically, this
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+## UI Component
+![](img/UiClassDiagram.png)
+
+The `UI` component consists of a single `Ui` class.
+
+The `UI` component
+- Displays salutations, prompts for user input, error messages and results of queries.
+- Reads in user inputs
+- Depends on the `Messages` and `InvMgrException` classes in the `Common` component. It displays messages stored in the `Messages` class and displays an error message whenever `InvMgrException` is invoked. 
