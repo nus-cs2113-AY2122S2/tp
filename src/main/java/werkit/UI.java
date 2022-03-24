@@ -190,12 +190,12 @@ public class UI {
      * Prints a message when a workout has been updated.
      * Shows updated workout.
      *
-     * @param updateWorkout The workout that is updated.
+     * @param updatedWorkout The workout that is updated.
      */
-    public void printUpdateWorkoutMessage(Workout updateWorkout) {
+    public void printUpdateWorkoutMessage(Workout updatedWorkout) {
         System.out.println(UPDATED_WORKOUT_MESSAGE);
         System.out.println();
-        System.out.println("\t" + updateWorkout.toString());
+        System.out.println("\t" + updatedWorkout.toString());
         System.out.println();
     }
 
