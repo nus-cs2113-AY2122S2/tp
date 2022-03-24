@@ -160,7 +160,15 @@ public class Timetable {
         prepareTimetable(dateInput, filteredTasks, ui);
     }
 
-    private static LocalDate resetDateToMonday(String currentDate, Ui ui) {
+    /**
+     * Returns the LocalDate object with its day set to Monday.
+     *
+     *
+     * @param currentDate The current date
+     * @param ui User interface
+     * @return Returns LocalDate with the day of Monday
+     */
+    public static LocalDate resetDateToMonday(String currentDate, Ui ui) {
         switch (currentDate) {
         case "Mon":
             return LocalDate.now();
