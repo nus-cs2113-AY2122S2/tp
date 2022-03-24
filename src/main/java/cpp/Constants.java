@@ -9,6 +9,7 @@ public class Constants {
     public static final String NEGATIVE_INDEX = "The index is a negative number! \n";
     public static final String NON_INTEGER_INDEX = "The index is not an integer! \n";
     public static final String INDEX_OUT_OF_RANGE = "The target index is not found in the list. \n";
+    public static final String UNKNOWN_COMMAND = SEPARATOR + "\n Unknown Command. \n" + SEPARATOR;
     public static final String MESSAGE_INVALID_TODO_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be: \n"
             + "todo [project_index] [todo_description]";

@@ -61,8 +61,7 @@ public class CommandHandler {
             Response.printHelp();
             break;
         default:
-            Response.printDefault();
-            break;
+            throw new IllegalCommandException(Constants.UNKNOWN_COMMAND);
         }
 
         //System.out.println("Execute result: ", executeResult);
