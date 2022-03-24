@@ -12,6 +12,7 @@ public class TimerLogic {
     private static Ui ui;
     private static Timer timer;
     private static TaskList taskList;
+    private boolean isTimerRunning;
 
     /**
      * Creates a constructor for TimerLogic.
@@ -21,7 +22,6 @@ public class TimerLogic {
     public TimerLogic(TaskList taskList, Ui ui) {
         TimerLogic.taskList = taskList;
         TimerLogic.ui = ui;
-        timer = new Timer(taskList, ui);
     }
 
     public boolean isTimerRunning() {
@@ -81,15 +81,17 @@ public class TimerLogic {
      * @param parsedInput Parsed input of the user
      */
     public void callStartTimer(String[] parsedInput) {
-        if (isTimerRunning()) {
+        if (isTimerRunning) {
             ui.showToUser("You already have a timer running!");
             return;
         }
         try {
-            callResetTimer();
-            int duration = Parser.parseTimerInput(parsedInput);
-            assert (duration > 0);
-            timer.setDuration(duration);
+            callResetTimer(parsedInput);
+            if (timer instanceof Countdown) {
+                int duration = Parser.parseTimerInput(parsedInput);
+                assert (duration > 0);
+                ((Countdown) timer).setDuration(duration);
+            }
             timer.start();
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException | InvalidTimeException e) {
             ui.showToUser(ERROR_INVALID_TIMER_INPUT_MESSAGE);
@@ -99,19 +101,20 @@ public class TimerLogic {
     public void callPauseTimer() {
         if (timer.isTimerPaused()) {
             ui.showToUser("The timer is already paused!");
-        } else if (!timer.getHasTimeLeft()) {
-            ui.showToUser("The timer has already finished!");
-        } else {
-            assert timer.isTimerRunning();
-            timer.pauseTimer();
+            return;
         }
+        if (timer.getIsStopped()) {
+            ui.showToUser("The timer has already finished!");
+            return;
+        }
+        assert timer.isTimerRunning();
+        timer.pauseTimer();
     }
 
     public void callResumeTimer() {
-        if (timer.isTimerPaused() && timer.getHasTimeLeft()) {
+        if (timer.isTimerPaused()) {
             timer.resumeTimer();
         } else if (timer.isTimerRunning()) {
-            assert timer.getHasTimeLeft();
             ui.showToUser("The timer is still running!");
         } else {
             ui.showToUser("There is no timer running currently!");
@@ -129,8 +132,13 @@ public class TimerLogic {
      * Resets the timer by creating a new timer object, which can then be started by the user.
      *
      */
-    public void callResetTimer() {
-        timer = new Timer(taskList, ui);
+    public void callResetTimer(String[] parsedInput) {
+        String parameter = Parser.parseStudyParameter(parsedInput);
+        if (parameter.equals("stopwatch")) {
+            timer = new Stopwatch(taskList, ui);
+            return;
+        }
+        timer = new Countdown(taskList, ui);
     }
 
     private boolean isTimerPausedOrStopped() {

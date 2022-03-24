@@ -31,6 +31,7 @@ import static seedu.sherpass.constant.DateAndTimeFormat.inputFormat;
 import static seedu.sherpass.constant.Index.MARK_INDEX;
 import static seedu.sherpass.constant.Index.CUSTOM_COMMAND_INDEX;
 import static seedu.sherpass.constant.Index.SHOW_OPTION_INDEX;
+import static seedu.sherpass.constant.Index.STUDY_PARAMETER_INDEX;
 import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
 import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
 import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
@@ -407,5 +408,12 @@ public class Parser {
         default:
             ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);
         }
+    }
+
+    public static String parseStudyParameter(String[] parsedInput) {
+        if (parsedInput[STUDY_PARAMETER_INDEX].equals("stopwatch")) {
+            return "stopwatch";
+        }
+        return "countdown";
     }
 }
