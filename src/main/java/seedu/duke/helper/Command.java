@@ -17,6 +17,7 @@ public abstract class  Command {
         this.parameterArray = parameterArray;
     }
 
+    public abstract void execute (List list) throws DuplicateEntryException, NotFoundException;
 
 //    private boolean isNull(String string) {
 //        return string == null;
