@@ -347,8 +347,9 @@ To view all the plans scheduled for the week, enter the following command:
 
 ----------------------------------------------------------------------
 ```
-On default, if no plan is being scheduled for the day it is a rest day. From the expected outcome, 
+By default, if no plan is being scheduled for the day it is a rest day. From the expected outcome, 
 only arms workout plan is scheduled for Monday.
+
 ---
 
 ### Clear Schedule For A Day: `schedule /clear`
