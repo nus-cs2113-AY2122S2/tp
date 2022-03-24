@@ -57,7 +57,7 @@ public class DishManager extends Manager {
     public String printDishes() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < dishes.size(); i++) {
-            builder.append(String.format("%d. %s\n", i+1, dishes.get(i)));
+            builder.append(String.format("%d. %s\n", i + 1, dishes.get(i)));
         }
         builder.deleteCharAt(builder.length() - 1);
         return builder.toString();
