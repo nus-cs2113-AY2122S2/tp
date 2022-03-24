@@ -40,7 +40,7 @@ public class Storage {
         this.dataPath = getAbsolutePath(filePath);
     }
 
-    public ArrayList<Item> loadData() throws InvMgrException {
+    public ArrayList<Item> load() throws InvMgrException {
         ArrayList<Item> bufferTaskList;
 
         Gson gson = new Gson();
@@ -66,7 +66,7 @@ public class Storage {
      * @param itemList the ArrayList of items to write to the data file
      * @throws InvMgrException for any IO exceptions while writing
      */
-    public void writeData(ArrayList<Item> itemList) throws InvMgrException {
+    public void save(ArrayList<Item> itemList) throws InvMgrException {
         if (itemList == null) {
             throw new NullPointerException();
         }
