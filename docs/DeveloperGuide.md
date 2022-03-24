@@ -56,12 +56,10 @@ list is simply represented as a `TaskList` instead of a full-fledged `Module`.
 
 ### Storage Component
 **API** : Storage.java
-![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/Ch40gRv1-Mu/tp/branch-A-Storage-puml/docs/Storage.puml)
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/branch-A-Storage-puml/docs/Storage.puml)
 The Storage component,
 * Storage interface is implemented by JsonStorage in Mod Happy, which will read and load data to and from json famat.
-* ListStorage can save a ArrayList of any class that extends Object in json format, and read them back into corresponding objects.
-* ModuleListStorage, TaskListStorage inherit from ListStorage, and they manage the write/load of ModuleList and TaskList to/from disk respectively
-* ConfigurationStorage in inherits directly from JsonStorage, and it manage the write/load of Configuration
+* ListStorage can save a ArrayList of any class that extends Object in json format, and read them back into corresponding objects. (e.g ModuleListStorage, TaskListStorage inherit from ListStorage)
 * There are navigability to Storage from Main and SaveComand, which handles the load and write data to/from disk respectively.
 ## Implementation
 
