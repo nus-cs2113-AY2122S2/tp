@@ -415,7 +415,7 @@ The following sequence diagram is the detailed procedure for Step 7's `PlanList#
 (Steps 7.1 to 7.6) The user argument of the `PlanList#createAndAddPlan(userArgument)` method is split to obtain
 the name of the plan to create. Before adding the plan, this method will call the
 `PlanList#checkForExistingPlanName(userPlanNameInput)` to ensure all plan names are unique in the application.
-If the plan to create contains an existing plan name, an `InvalidPlanException` will be thrown.
+If the plan to create is an existing plan name, an `InvalidPlanException` will be thrown.
 <br><br>
 (Steps 7.7 to 7.14) The user argument of the `PlanList#createAndAddPlan(userArgument)` method is split to obtain
 the number of workouts to be added into the new plan. Before adding the
@@ -427,9 +427,9 @@ an `InvalidPlanException` will be thrown.
 (Steps 7.15 to 7.16) An ArrayList of Workout object is created to store the workouts to be added into the new plan.
 <br><br>
 (Steps 7.17 to 7.28) As the workout numbers in the user argument (e.g. "1, 2, 3") is of type `String`, 
-the loop will split (by comma) and convert the number string into an `Integer`. The `PlanList#createAndAddPlan(userArgument)` method
+the loop will split (by comma) and convert each number string into an `Integer`. The `PlanList#createAndAddPlan(userArgument)` method
 will then call the `PlanList#checkWorkoutNumberWithinRange(workoutNumberInteger)` method to ensure that each
-workout to be added is within the application's workout list. Once the check is done, the `Workout` object
+workout index is within the application's workout list range. Once the check is done, the `Workout` object
 is fetched from the application's workout list based on the workout index to be added in the plan. The `Workout` object is then
 added into the `ArrayList` that was created in Step 7.15. The loop will continue until all workouts to be added in the new plan
 is added into that `ArrayList`.
@@ -451,7 +451,7 @@ Alright, the following plan has been created:
 ----------------------------------------------------------------------
 ```
 (Steps 12 to 13) `FileManager#writeNewPlanToFile(newPlan)` is called to write the newly-created `Plan` object's data into
-`plans.txt` which is stored on the user's local filesystem.
+`plans.txt`, which is stored on the user's local filesystem.
 <br><br>
 This completes the process of adding a new plan to WerkIt!
 
