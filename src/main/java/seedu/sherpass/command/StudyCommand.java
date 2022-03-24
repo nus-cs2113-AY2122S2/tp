@@ -5,11 +5,11 @@ import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.TimerLogic;
 import seedu.sherpass.util.Ui;
+import seedu.sherpass.util.parser.TimerParser;
 
 import static seedu.sherpass.constant.Message.GOODBYE_MESSAGE_STUDY;
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_STUDY;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_STUDY;
-import static seedu.sherpass.util.Parser.parseStudyMode;
 
 public class StudyCommand extends Command {
     public static final String COMMAND_WORD = "study";
@@ -28,7 +28,7 @@ public class StudyCommand extends Command {
         String userInput = ui.readCommand();
         while (!userInput.contains("leave")) {
             ui.showLine();
-            parseStudyMode(userInput, ui, timerLogic);
+            TimerParser.parseStudyMode(userInput, ui, timerLogic);
             ui.showLine();
             userInput = ui.readCommand();
             if (userInput.contains("start") && !timerLogic.isTimerRunning()) {
