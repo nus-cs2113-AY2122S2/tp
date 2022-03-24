@@ -17,6 +17,11 @@ The study session consists of 4 main components:
 - TimerLogic class
 - Timer class
 
+The `Parser` component
+- Parses user inputs in the main session and the study session
+- Ensures the input adheres to the allowed command inputs, 
+i.e. program will ask the user to key in a new input if it does not recognise the inputs given.
+
 The `StudyCommand` component
 - Accepts user inputs in the study session
 - Facilitates interaction between Parser and TimerLogic
