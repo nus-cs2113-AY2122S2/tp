@@ -2,6 +2,7 @@ package seedu.mindmymoney.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.mindmymoney.MindMyMoneyException;
+import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
@@ -23,10 +24,11 @@ class DeleteCommandTest {
     @Test
     void deleteCommand_oneInput_expectListUpdated() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
-        String inputString = "expenditure 12345";
+        CreditCardList creditCardTestList = new CreditCardList();
+        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
         ArrayList<Expenditure> testList = new ArrayList<>();
-        new AddCommand(inputString, expenditureTestList).executeCommand();
-        testList.add(new Expenditure("expenditure", "Food",12345));
+        new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand();
+        testList.add(new Expenditure("cash", "Personal", "Nike Shoes", 300, "2022-03"));
         String deleteInputString = "delete 1";
         new DeleteCommand(deleteInputString, expenditureTestList).executeCommand();
         testList.remove(0);
@@ -39,8 +41,9 @@ class DeleteCommandTest {
     @Test
     void deleteCommand_wrongInputValue_expectException() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
-        String inputString = "expenditure 12345";
-        new AddCommand(inputString, expenditureTestList).executeCommand();
+        CreditCardList creditCardTestList = new CreditCardList();
+        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
+        new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand();
         String deleteInputString = "delete 0";
         assertThrows(MindMyMoneyException.class,
             () -> new DeleteCommand(deleteInputString, expenditureTestList).executeCommand());
@@ -76,7 +79,6 @@ class DeleteCommandTest {
 
     /**
      * Asserts if user is able to delete from an empty list.
-     *
      */
     @Test
     void deleteCommand_addToEmptyList_expectException() {

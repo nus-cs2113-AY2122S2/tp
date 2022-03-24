@@ -78,6 +78,7 @@ to the list.
 A key functionality of MindMyMoney is the ability to add and track user expenditure. A user can add in a new expenditure
 by specifying the payment type, the category, the description of the item, the cost of the item and the date and the
 month purchased.
+
 1. The `Parser` component parses user input and returns the new `AddCommand` object to the
    `MindMyMoney`.
 2. `AddCommand` instantiates `addInput`, `expenditureList` and `creditCardList`.
@@ -91,12 +92,13 @@ month purchased.
 #### Design considerations
 Aspect: How to ask user for the 5 fields of input
 * Alternative 1 (current choice): User is asked to put in all 5 fields at once, separated using flags.
-    * Pros: Faster input, user can enter an expenditure using a single input
+    * Pros: Faster input, user can enter an expenditure using a single input.
     * Cons: User must be able to remember all the flags and its sequence.
 
 * Alternative 2: User is asked iteratively to put in all 5 fields, prompted by a message after each input.
     * Pros: Beginner friendly, easily understandable, no need to remember flags.
     * Cons: Slower, implementation when user is familiar with the application.
+
 ### Calculate Command feature
 
 To enable users to view their finances in a more meaningfully, MindMyMoney does calculations to present financial data
