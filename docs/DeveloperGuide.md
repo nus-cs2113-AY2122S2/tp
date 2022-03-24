@@ -395,7 +395,7 @@ in the current session. The following sequence diagram shows how the loading ope
 
 Step 3. The user then decides to exit the program by executing the command `bye`, `Storage#saveData` will be called.
 All data in the `Family` object will be written to the local file `PlanITarium.txt` in the format of
-`<group type> <user/operation> <Category> <Details>` which are to be read again when the program starts up. 
+`<group type> <user/operation> <Category> <Info>` which are to be read again when the program starts up. 
 The following Sequence diagram shows how the saving operation will work:
 <image src="images/StorageSaveSequence.png"/>
 
