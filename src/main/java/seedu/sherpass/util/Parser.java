@@ -52,6 +52,7 @@ import static seedu.sherpass.constant.Index.SHOW_OPTION_INDEX;
 import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
 import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
 import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
+import static seedu.sherpass.constant.Index.ZERO_INDEX_OFFSET;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE;
@@ -143,11 +144,11 @@ public class Parser {
         }
     }
 
-    private static LocalDateTime prepareTaskDate(String taskDate, String time) {
+    public static LocalDateTime prepareTaskDate(String taskDate, String time) {
         try {
             return LocalDateTime.parse(taskDate + " " + time, inputWithTimeFormat);
         } catch (DateTimeParseException e) {
-            return confirmInvalidDateFormat();
+            return null;
         }
     }
 
