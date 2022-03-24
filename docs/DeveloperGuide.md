@@ -6,7 +6,17 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Command
+![CommandClassDiagram](img/CommandClassDiagram.png)
+The following diagram shows the class diagram for `Command`.
+
+`Command` is an abstract class that sets certain commonalities that is implemented across all types of commands - `AddCommand`, `DescCommand`, `ListCommand`, `DeleteCommand`, `HelpCommand`, `ExitCommand`. Each of these classes have to override the `Command`'s `execute()` method as each command has a different execution. For example, `AddCommand` will be focused on adding an item to an inventory list whereas `DescCommand` will be about retrieving information from the inventory list.
+
+### Description Command
+![DescCommandSequenceDiagram](img/DescCommandSequenceDiagram.png)
+The following diagram shows the sequence diagram for retrieving the description of an item.
+
+For a user who is unaware of what an item is about, he/she can enter the command eg. `desc 2` command to extract the description for the second item in the inventory list. This command is interpreted by the `Parser` and a `DescCommand` is returned to `InvMgr`. `InvMgr` calls the execute command of `DescCommand` which retrieves the item's information from the `ItemList` and then outputs them into the `Ui` for the user to see.
 
 ### Add Command
 ![AddCommandSequenceDiagram](img/AddCommandSequenceDiagram.png)
