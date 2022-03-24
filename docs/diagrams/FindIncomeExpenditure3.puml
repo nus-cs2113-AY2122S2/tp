@@ -5,14 +5,14 @@ skinparam ClassBorderColor #000000
 show members
 hide empty members
 
-title Initial State
+title After iterating Alice's ExpenditureList
 
 package " " {
+    class temp as "__tempExpList:MoneyList(temp)__"
     class Fam as "__family:Family__"
     class MyGen as "__myGen:PersonList__"
     class Alice as "__Alice:Person__"
     class List as "__ExpenditureList:MoneyList(temp)__"
-    class List2 as "__IncomeList:MoneyList(temp)__"
     class Exp0 as "__Expenditure0:Money(temp)__" #LIGHTGREEN {
         description = "Lunch"
         category = 2
@@ -29,10 +29,10 @@ package " " {
         description = "Electric Bills"
         category = 1
     }
-    class Inc0 as "__Income0:Money(temp)__" #LIGHTGREEN {
-        description = "Bills Rebate"
+    class Exp4 as "__Expenditure3:Money(temp)__" #LIGHTGREEN {
+        description = "Electric Bills"
+        category = 1
     }
-
 }
 
 Fam -down-> MyGen
@@ -40,17 +40,18 @@ Fam -down-> MyGen
 MyGen -> Alice
 
 Alice -down-> List
-Alice -down-> List2
 
 Exp0 -up[#GREEN]-> List
 Exp1 -up[#GREEN]-> List
 Exp2 -up[#GREEN]-> List
 Exp3 -up[#GREEN]-> List
-Inc0 -up[#GREEN]-> List2
+
+Exp4 -down[#GREEN]-> temp
+
+temp-[HIDDEN]>Fam
 
 Exp0 -right[HIDDEN]> Exp1
 Exp1 -right[HIDDEN]> Exp2
 Exp2 -right[HIDDEN]> Exp3
-
 
 @end

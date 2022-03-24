@@ -5,9 +5,11 @@ skinparam ClassBorderColor #000000
 show members
 hide empty members
 
-title Initial State
+title After command "find /d Bills /c 1"
 
 package " " {
+    class temp as "__tempExpList:MoneyList(temp)__"
+    class temp2 as "__tempIncList:MoneyList(temp)__"
     class Fam as "__family:Family__"
     class MyGen as "__myGen:PersonList__"
     class Alice as "__Alice:Person__"
@@ -32,7 +34,6 @@ package " " {
     class Inc0 as "__Income0:Money(temp)__" #LIGHTGREEN {
         description = "Bills Rebate"
     }
-
 }
 
 Fam -down-> MyGen
@@ -51,6 +52,5 @@ Inc0 -up[#GREEN]-> List2
 Exp0 -right[HIDDEN]> Exp1
 Exp1 -right[HIDDEN]> Exp2
 Exp2 -right[HIDDEN]> Exp3
-
 
 @end

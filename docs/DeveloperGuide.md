@@ -230,8 +230,8 @@ having category index matching the index argument and description matching the e
 description.
 * `MoneyList(temp)#searchIncome(description)` -- Returns a list of income having description 
 matching the income's description.
-* `Family#listExpenseOfCategory(description, index)` -- Lists all expenses from the category index.
-* `Family#listIncome(description)` -- Lists all income with matching description.
+* `Family#listExpenseSearch(description, index)` -- Lists all expenses matching the criteria.
+* `Family#listIncomeSearch(description)` -- Lists all income with matching description.
 
 Below is an example usage scenario and how the expenses of a category will be printed.
 
@@ -241,16 +241,16 @@ generation being tracked - myGen.
 
 <image src="images/FindIncomeExpenditure1.png"/>
 
-Step 2. The user executes `find /d Salary /c 1` command to search for income and expenditures
-with descriptions containing "Salary". The `find` command will be parsed and calls
-`Family#listExpenseOfCategory(description, index)` and `Family#listIncome(description)` which 
+Step 2. The user executes `find /d Bills /c 1` command to search for income and expenditures
+with descriptions containing "Bills". The `find` command will be parsed and calls
+`Family#listExpenseSearch("Bills", 1)` and `Family#listSearch("Bills")` which 
 would instantiate 2 temporary array list for storing the results of the upcoming search.
 
 <image src="images/FindIncomeExpenditure2.png"/>
 
 Step 3. After the temporary array list for expenditure has been created, the existing generation 
 will be iterated for `Person` objects. The `expenditureList` for a person would be retrieved 
-during that person's iteration and `MoneyList(temp)#searchExpenseOfCategory("Salary", 1)` will be called 
+during that person's iteration and `MoneyList(temp)#searchExpense("Bills", 1)` will be called 
 as `expenditureList` extends `MoneyList(temp)`. This method then iterates through the list and calls 
 `Money(temp)#getCategory()` and `Money(temp)#getDescription()` on each expenditure, collecting and 
 returning the expenditure if its category matches the given index and description matches the given
@@ -260,7 +260,7 @@ description. The returned expenditures are then appended to the temporary array 
 
 Step 4. After the temporary array list for income has been created, the existing generation
 will be iterated for `Person` objects. The `incomeList` for a person would be retrieved
-during that person's iteration and `MoneyList(temp)#searchIncome("Salary")` will be called
+during that person's iteration and `MoneyList(temp)#searchIncome("Bills")` will be called
 as `incomeList` extends `MoneyList(temp)`. This method then iterates through the list and calls
 `Money(temp)#getDescription()` on each income, collecting and returning the income if its description 
 matches the given description. The returned incomes are then appended to the temporary array list.
