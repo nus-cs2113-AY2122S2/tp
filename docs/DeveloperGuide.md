@@ -86,8 +86,17 @@ You are now ready to begin developing!
 ### Overview
 * [Getting User Input Continuously](#getting-user-input-continuously)
 * [Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)
-* [Create New Workout](#create-new-workout)
+* [Exercise](#exercise)
+* [Workout](#workout)
+  * [Create New Workout](#create-new-workout)
     * [Design Considerations](#design-considerations-for-creating-a-new-workout) 
+  * [List Workout](#list-workout)
+  * [Delete Existing Workout](#delete-existing-workout)
+    * [Design Considerations](#design-considerations-for-deleting-existing-workout)
+* [Plan](#plan)
+  * [Create A New Plan](#create-a-new-plan)
+  * [List Plans](#list-plans)
+* [Schedule](#schedule)
 * [Search](#search)
   * [Search for Exercise](#search-for-exercise)
   * [Search for Plan](#search-for-plan)
@@ -141,7 +150,11 @@ for subsequent prompts.
 
 ---
 
-### Create New Workout
+### Exercise
+
+---
+### Workout
+#### Create New Workout
 
 A summary of the general procedure of a new workout being inputted and stored into WerkIt! is as follows:
 1. User enters the command `workout /new <workout name> /reps <number of repetitions>`.
@@ -212,8 +225,8 @@ Alright, the following workout has been created:
 
 This completes the process of adding a new workout to WerkIt!
 
-#### Design Considerations for Creating a New Workout
-##### HashMaps - Motivation
+##### Design Considerations for Creating a New Workout
+###### HashMaps - Motivation
 Back in Version 1.0 of WerkIt!, workouts were stored in an ArrayList of `Workout` objects. In that version, plans
 and schedules were not yet implemented and thus there was no real issues, since we can easily use index numbers
 shown in `workout /list` to reference workouts when the user enters `workout /update` and `workout /delete` commands.
@@ -247,7 +260,7 @@ means that the 10 pull-ups will now have an index number of 2. Thus, if we were 
 to reference workouts in plans, there is a greater risk of making wrong references, and the amount of additional
 code to update these references can become too complex.
 
-##### Usage of HashMap
+###### Usage of HashMap
 Thus, we have decided to use a HashMap on top of the existing ArrayList to store `Workout` objects. This will allow 
 workouts to be referenced by their unique keys when creating plans and schedules, while allowing the user to continue
 using the convenience of relative indexing for `workout /update` and `workout /delete` commands. The ArrayList of 
@@ -262,35 +275,7 @@ to him/her.
 
 ---
 
-### Delete Existing Workout
-Class diagram for Delete Workout:
-![Delete Workout UML](uml/classDiagrams/images/DeleteWorkout.png)
-<br>
-<br>
-Sequence diagram for Delete Workout:
-![Delete Workout Sequence Diagram](uml/sequenceDiagrams/images/deleteWorkout.png)
-<br>
-<br>
-
-When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
-`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
-class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
-user's command. If the user's command type is to delete an existing workout, i.e. `workout /delete <workout number>`, the
-`Parser#parseUserInput(String userInput)` method will parse the 'workout' base word and proceed to create workout related
-command using `Parser#createWorkoutCommand(String userInput)` method. This method will further evaluate the
-workout action, in this case, `/delete` and call the constructor of `WorkoutCommand` class by passing relevant parameters related to the
-WorkoutCommand constructor. If the workout action is null or incorrect, an InvalidCommandException will be thrown. If the `<workout number>`
-parameter is also not specified, the same InvalidCommandException is thrown. Once the workout command is created,
-this workout command is executed via the `WorkoutCommand#execute()` method. As it is executed, the method will check the type of action to be executed, in this case,
-delete. It will then remove the existing workout using the `WorkoutList#deleteWorkout(getUserArguments())` method. The deleteWorkout method
-in addition, checks whether the workout number supplied is a valid integer and is within the range of the workout list. If both condition
-is not met, the NumberFormatException and WorkoutOutOfRangeException is thrown accordingly. Once the existing workout is successfully deleted,
-the UI will print a success message and call the `FileManager#rewriteAllWorkoutsToFile(getWorkoutList())` method to save the changes.
-
-#### Delete existing workout command
-Format: `workout /delete <workout number in workout list>`
-
-### List Workout
+#### List Workout
 ![SearchUML](uml/classDiagrams/images/listWorkout.png)
 <br>
 user's command. If the user's command type is to list the workouts created, i.e. `workout /list`, the
@@ -308,9 +293,99 @@ If the answer given by the user is neither 'yes' nor 'no', user will be prompt t
 When 'yes' is entered, the printing will continue and `WorkoutList#continuousPrinting(int index, int noOfPrints)` method will be executed again.
 Otherwise, `WorkoutList#listWorkout()` method will be terminated.
 
-#### List workouts command
+##### List workouts command
 Format: `workout /list`
 
+---
+
+#### Delete Existing Workout
+A summary of the general procedure of an existing workout being removed from WerkIt! is as follows:
+1. User enters the command `workout /delete <workout number in workout list>`.
+2. The workout with the corresponding workout number in the workout list (can be determined by entering `workout /list`) is removed from the application's workout list.
+3. The success response is printed to the user through the terminal.
+4. The resource file `workouts.txt`, is rewritten according to the application's workout list that has been modified.
+
+The following sequence illustrates how the `workout /delete` command works in greater detail:
+> To simplify the sequence diagram, some method invocations that deemed to be trivial
+> have been removed from the sequence diagram. Reference frames will be elaborated further
+> down this section.
+
+![Delete Workout Sequence Diagram](uml/sequenceDiagrams/images/DeleteWorkout.png)
+<br>
+<br>
+
+(Steps 1 to 3) The program waits for the user's input, which in this case, is the `workout /delete <workout number to delete>` command. 
+An example of a valid command is `workout /delete 1`. Once the command is entered, the UI class will return the user input in a `String` object
+to the `WerkIt` object.
+<br><br>
+(Steps 4 to 6) After the user input is received, the `WerkIt` object will call the `Parser#parseUserInput()` method to parse the user input.
+Upon parsing of the input, a `WorkoutCommand` object is obtained. This `WorkoutCommand` object is upcasted to a `Command` object on return
+to the `WerkIt` object. It will then execute the workout command by calling the `WorkoutCommand#execute()` method.
+<br><br>
+(Step 7) The `WorkoutCommand#execute()` method identifies that the workout action is of type `delete` due to the workout command that 
+was supplied (`workout /delete` <workout number to delete>). It then calls the appropriate method, `WorkoutList#deleteWorkout(userArguments)`,
+in order to perform the deletion of the workout. <br><br>
+The following sequence diagram is the detailed procedure for Step 7's `WorkoutList#deleteWorkout(userArguments)`:
+![Delete Workout Detailed Sequence Diagram](uml/sequenceDiagrams/images/deleteWorkoutDetailed.png)
+<br><br>
+(Steps 7.1 to 7.2) The `Integer#parseInt()` method is called to parse the argument given to `WorkoutList#deleteWorkout(userArgument)`.
+In this case, the user argument for `workout /delete` is the workout number of the workout to be deleted in the workout list.
+<br><br>
+(Steps 7.3 to 7.6) The `WorkoutList#deleteWorkout(userArgument)` method will then proceed to check whether the workout to be deleted
+is within the range of the workout list, by calling out the `WorkoutList#checkIndexIsWithinRange(indexToDelete)` method. If index to delete
+is within the range of the workout list, the method returns true, else it will return false.
+If the method returns false (indicating that workout number to delete is not within the range), then the `WorkoutOutOfRangeException` is thrown.
+<br><br>
+(Steps 7.7 to 7.8) The `WorkoutList#deleteWorkout(userArgument)` method will then fetch the `Workout` object to be deleted
+by calling the `WorkoutList#getWorkoutFromIndexNum(indexToDelete)` method.
+<br><br>
+(Steps 7.9 to 7.12) The `Workout` object to be deleted is subsequently removed from the ArrayList and HashMap which stores the
+application's workout list.
+<br><br>
+(Step 8) The `WorkoutList#deleteWorkout(userArgument)` method returns the deleted `Workout` object to `WorkoutCommand`.
+<br><br>
+(Steps 9 to 11) Upon returning to the `WorkoutCommand`, the `UI#printDeleteWorkoutMessage(deletedWorkout)` is called
+to display the workout that has been deleted to the user via the terminal. The following is an example 
+of a success deletion message after the user deleted a valid workout from the application's workout list
+(e.g. `workout /delete 1`):
+```
+----------------------------------------------------------------------
+Alright, the following workout has been removed:
+
+	push up (20 reps)
+
+----------------------------------------------------------------------
+```
+(Steps 12 to 13) The `FileManager#writeNewWorkoutToFile(workoutList)` is called to rewrite
+the `workouts.txt` file according to the newly modified application's workout list.
+<br><br>
+This completes the process of deleting an existing workout in WerkIt!
+
+##### Design Considerations for Deleting Existing Workout
+###### Rewrite All Workout To File
+Currently, the WerkIt! program will rewrite all workout to the resource file, `resource.txt`, when the delete workout
+function is executed. Such implementation may have performance issues as the program needs to rewrite the whole
+file with the modified workout list whenever a workout is deleted in the application.
+<br><br>
+An alternative considered was to find the workout to be deleted in the resource file, and then
+remove that workout. This is a faster implementation, however, more complicated due to the way
+the workouts are formatted and stored in the `workouts.txt` file.
+<br><br>
+Hence, to simplify the coding part, the team decided to implement our current implementation - that
+is, to rewrite all workout to the resource file whenever a workout is deleted.
+
+---
+
+### Plan
+
+#### Create A New Plan
+
+#### List Plans
+
+---
+### Schedule
+
+---
 ### Search
 ![SearchUML](uml/classDiagrams/images/SearchClass.png)
 <br>
