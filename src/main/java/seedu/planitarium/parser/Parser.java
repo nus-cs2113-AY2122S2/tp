@@ -1,6 +1,7 @@
 package seedu.planitarium.parser;
 
 import seedu.planitarium.ProjectLogger;
+import seedu.planitarium.category.Category;
 import seedu.planitarium.exceptions.DuplicateDelimiterException;
 import seedu.planitarium.exceptions.InvalidIndexException;
 import seedu.planitarium.exceptions.InvalidMoneyException;
@@ -41,6 +42,9 @@ public class Parser {
     public static final int MIN_USER_INDEX = 1;
     public static final int MIN_EXPENDITURE_INDEX = 1;
     public static final int MIN_INCOME_INDEX = 1;
+    public static final int MIN_CATEGORY_INDEX = 1;
+    public static final int MAX_GROUP_INDEX = 3;
+    public static final int MIN_GROUP_INDEX = 1;
     public static final double MONEY_ZERO = 0.0;
 
     private static final String ASSERT_INPUT_NOT_NULL = "User input should not be null";
@@ -51,8 +55,8 @@ public class Parser {
     private static final String ASSERT_EXPENDITURE_INDEX_NOT_NULL = "Expenditure index should not be null";
     private static final String ASSERT_INCOME_INDEX_NOT_NULL = "Income index should not be null";
     private static final String ASSERT_STATUS_NOT_NULL = "Recurring status should not be null";
-    private static final String ASSERT_CATEGORY_NOT_NULL = "Category should not be null";
-    private static final String ASSERT_GROUP_NOT_NULL = "Grouping should not be null";
+    private static final String ASSERT_CATEGORY_NOT_NULL = "Category index should not be null";
+    private static final String ASSERT_GROUP_NOT_NULL = "Group index should not be null";
 
     private static final String LOG_PARSED_VALUES = "User input '%s' parsed out as '%s'";
     private static final String LOG_VALID_MONEY = "Converted the string '%s' into '%.2f'";
@@ -368,7 +372,7 @@ public class Parser {
      * Returns a valid recurrence status for expenses.
      *
      * @param statusText The recurring expense status.
-     * @return Recurring status 'T' or 'F'
+     * @return Recurring status 'T' or 'F'.
      */
     public static String getValidRecurringStatus(String statusText) {
         assert (statusText != null) : ASSERT_STATUS_NOT_NULL;
@@ -377,6 +381,27 @@ public class Parser {
             status = RECURRING_STATUS_TRUE;
         }
         return status;
+    }
+
+    /**
+     * Returns a valid category index that is within category quantity bounds.
+     *
+     * @param categoryIndex A category's lookup index.
+     * @return A valid category index.
+     * @throws InvalidIndexException if index is not a valid integer or out of bounds.
+     */
+    public static int getValidCategoryIndex(String categoryIndex) throws InvalidIndexException {
+        assert (categoryIndex != null) : ASSERT_CATEGORY_NOT_NULL;
+        try {
+            int checkIndex = Integer.parseInt(categoryIndex);
+            checkTooHighIndex(checkIndex, Category.getNumOfCategories());
+            checkTooLowIndex(checkIndex, MIN_CATEGORY_INDEX);
+            logger.getLogger().log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
+            return checkIndex;
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            logger.getLogger().log(Level.WARNING, String.format(LOG_INVALID_INDEX, categoryIndex));
+            throw new InvalidIndexException(categoryIndex);
+        }
     }
 
     /**

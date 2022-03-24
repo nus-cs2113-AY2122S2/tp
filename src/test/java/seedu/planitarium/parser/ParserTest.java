@@ -702,4 +702,59 @@ class ParserTest {
         String randomStatus = "abc123";
         assertEquals("F", Parser.getValidRecurringStatus(randomStatus));
     }
+
+
+    @Test
+    void getValidCategoryIndex_validUserIndex_success() throws InvalidIndexException {
+        String input = "1";
+        int output = Parser.getValidCategoryIndex(input);
+        assertEquals(1, output);
+    }
+
+    @Test
+    void getValidCategoryIndex_nullInput_assertThrown() {
+        try {
+            Parser.getValidCategoryIndex(null);
+            fail();
+        } catch (AssertionError e) {
+            assertEquals("Category index should not be null", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    void getValidCategoryIndex_notNumber_exceptionThrown() {
+        try {
+            String input = "Others";
+            Parser.getValidCategoryIndex(input);
+            fail();
+        } catch (InvalidIndexException e) {
+            assertEquals("Invalid index: `Others`", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    void getValidCategoryIndex_indexOutOfRange_exceptionThrown() {
+        try {
+            String tooLow = "0";
+            Parser.getValidCategoryIndex(tooLow);
+            fail();
+        } catch (InvalidIndexException e) {
+            assertEquals("Invalid index: `0`", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+        try {
+            String tooLow = "7";
+            Parser.getValidCategoryIndex(tooLow);
+            fail();
+        } catch (InvalidIndexException e) {
+            assertEquals("Invalid index: `7`", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }
