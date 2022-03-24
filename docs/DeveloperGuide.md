@@ -71,3 +71,13 @@ The `StudyManager` component,
    4. Other incorrect delete commands to try: `rm`, `rm 100000` 
       1. Expected: Error message similar to step 3.
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+2. Adding a module to the list.
+   1. Requires module code, category, day and time.
+   2. Test case: `add m/CS2113 c/lec d/Thursday t/2pm-4pm`
+      1. Expected: Module is added to the list and details are shown on the console.
+   3. Test case: `add m/CS2113`
+      1. Expected: No module is added to the list. Error details are shown on console.
+   4. Other incorrect add commands to try: `add`, `add c/lec t/4pm-6pm`
+      1. Or any commands that exclude one of the four requirements to add module.
+      2. Expected: Error messge similar to above.

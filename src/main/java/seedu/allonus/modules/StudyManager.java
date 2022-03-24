@@ -162,7 +162,7 @@ public class StudyManager {
      */
     public void deleteModule(String userInput) {
         try {
-            String moduleIndexString = userInput.replace("rm ","");
+            String moduleIndexString = userInput.replace(DELETE_COMMAND + " ","");
             int moduleIndex = Integer.parseInt(moduleIndexString) - 1;
             if (modulesList.get(moduleIndex) != null) {
                 Module removedModule = modulesList.get(moduleIndex);
@@ -191,7 +191,7 @@ public class StudyManager {
 
     public void editModule(String userInput, TextUi ui) {
         try {
-            String moduleIndexString = userInput.replace("edit ", "");
+            String moduleIndexString = userInput.replace(EDIT_COMMAND + " ", "");
             int moduleIndex = Integer.parseInt(moduleIndexString) - 1;
             if (modulesList.get(moduleIndex) != null) {
                 editModuleRunner(ui, moduleIndex);
@@ -325,7 +325,7 @@ public class StudyManager {
     }
 
     public void findModule(String userInput) {
-        String moduleKeyword = userInput.replace(FIND_COMMAND,"");
+        String moduleKeyword = userInput.replace(FIND_COMMAND + " ","");
         ArrayList<Module> matches = new ArrayList<>();
         for (Module m: modulesList) {
             if (m.toString().contains(moduleKeyword)) {
