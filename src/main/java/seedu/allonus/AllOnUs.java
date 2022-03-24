@@ -1,4 +1,5 @@
 //@@author OzairHasan
+
 package seedu.allonus;
 
 import seedu.allonus.contacts.ContactsManager;
