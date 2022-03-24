@@ -37,20 +37,21 @@ import static seedu.sherpass.constant.CommandParameters.FREQUENCY_DELIMITER;
 import static seedu.sherpass.constant.CommandParameters.START_TIME_DELIMITER;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithoutTimeFormat;
-import static seedu.sherpass.constant.Index.MARK_INDEX;
 import static seedu.sherpass.constant.Index.CUSTOM_COMMAND_INDEX;
-import static seedu.sherpass.constant.Index.SHOW_OPTION_INDEX;
-import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
-import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
-import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
-import static seedu.sherpass.constant.Index.OPTIONS_INDEX;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ZERO;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ONE;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_THREE;
 import static seedu.sherpass.constant.Index.CUSTOM_TIMER_INDEX;
 import static seedu.sherpass.constant.Index.DEFAULT_TIMER_INDEX;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ONE;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_THREE;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ZERO;
+import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
+import static seedu.sherpass.constant.Index.INVALID_INDEX;
+import static seedu.sherpass.constant.Index.MARK_INDEX;
+import static seedu.sherpass.constant.Index.OPTIONS_INDEX;
+import static seedu.sherpass.constant.Index.SHOW_OPTION_INDEX;
 import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
+import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
+import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE;
@@ -159,7 +160,7 @@ public class Parser {
      */
     public static String parseArgument(String parameter, String argument) {
         if (!argument.contains(parameter)) {
-            return "";
+            return EMPTY_STRING;
         }
         int afterParameter = argument.indexOf(parameter) + parameter.length() + 1;
         String rightSide = argument.substring(afterParameter);
@@ -180,7 +181,7 @@ public class Parser {
             if (fullArgument.indexOf("/") > 0) {
                 return fullArgument.substring(0, fullArgument.indexOf('/') - 1);
             } else {
-                return "";
+                return EMPTY_STRING;
             }
         }
         return fullArgument;
@@ -227,7 +228,7 @@ public class Parser {
         try {
             newCommand.setIndex(Integer.parseInt(indexString));
         } catch (NumberFormatException notNumberException) {
-            newCommand.setIndex(-1);
+            newCommand.setIndex(INVALID_INDEX);
         }
         newCommand.setDoOnStartDateTime(prepareTaskDate(doOnDateString, startTimeString));
         newCommand.setDoOnEndDateTime(prepareTaskDate(doOnDateString, endTimeString));
@@ -242,7 +243,7 @@ public class Parser {
         try {
             newCommand.setIndex(Integer.parseInt(argument));
         } catch (NumberFormatException exception) {
-            newCommand.setIndex(-1);
+            newCommand.setIndex(INVALID_INDEX);
         }
         return newCommand;
     }
