@@ -74,7 +74,7 @@ public class StaffController extends Controller {
         MainLogger.logInfo(this, "Finding staff");
         System.out.println("Finding staff...");
         int staffId = InputParser.getInteger("ID of staff: ");
-        try{
+        try {
             staffManager.findByStaffId(staffId, true);
         } catch (IllegalArgumentException e) {
             System.out.println(e);
@@ -93,7 +93,7 @@ public class StaffController extends Controller {
         final String staffName = InputParser.getString("Name of staff: ");
         final String position = InputParser.getString("Position of staff: ");
         final double salary = InputParser.getDouble("Salary of staff: ");
-        try{
+        try {
             staffManager.addStaff(staffId, staffName, position, salary);
         } catch (IllegalArgumentException e) {
             System.out.println(e);

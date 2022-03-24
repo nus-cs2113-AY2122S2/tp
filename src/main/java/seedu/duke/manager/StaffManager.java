@@ -57,7 +57,8 @@ public class StaffManager extends Manager {
      * @param position  Job position of the Staff.
      * @param salary    Salary of the Staff.
      */
-    public void addStaff(int staffId, String staffName, String position, double salary) throws IllegalArgumentException {
+    public void addStaff(int staffId, String staffName, String position, double salary)
+            throws IllegalArgumentException {
         if (findByStaffId(staffId, false) != null) {
             MainLogger.logInfo(this, "Failed to add staff: Staff with same ID already exists.");
             throw new IllegalArgumentException("Staff with the same ID already exists, use another ID...");
