@@ -30,6 +30,15 @@
 | v1.0    | As a frequent/first time user          | Write to a file containing the entire inventory | Save my inventory data to a file                             |
 | v1.0    | Stocktaker                             | Read from and load an inventory file data       | To work on and view the data                                 |
 
+###Parser Component
+![ParserClassDiagram](img/ParserClassDiagram.png)
+How the `Parser` component works:
+
+The parse method in `Parser` is called from `InvMgr`, and takes in the raw user input as a String.
+The method then checks through a logic gate whether the user input is valid, and returns 
+a `Command` class based on the user input.
+
+
 ## Non-Functional Requirements
 
 {Give non-functional requirements}
