@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * OrderManager.
  */
 public class OrderManager {
-    private ArrayList<Order> orders;
+    private final ArrayList<Order> orders;
     private final DishManager dishManager = DishManager.getInstance();
-    private ArrayList<Dish> dishes;
+    private final ArrayList<Dish> dishes;
 
     public OrderManager(DishController dishController) {
         this.orders = new ArrayList<Order>();
