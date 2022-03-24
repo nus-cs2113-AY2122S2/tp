@@ -52,10 +52,6 @@ Deleting a project functions very similarly to Adding a project.
 
 **Step5.** The `Project` object will create a `Todo` object and add it to the `ArrayList<Todo>` in `Project` class.  
 
-
-### Proposed Features
-
-#### Parse Command Feature
 ![image info](./UmlDiagrams/CommandParser.png)  
 
 The proposed parse command feature makes use of CommandParser and its subclasses, and Command and its subclasses.  
@@ -69,8 +65,13 @@ Given below is an example usage scenario and how the command parser behaves at e
 
 **Step 3.** `CommandParser` will check if the input can be parsed into a valid command. If it fails, it will throw exceptions. After parsing the user’s input, `CommandParser` will create a new `Command` object and return it back to `CommandHandler`.  
 
-**Step 4.** `CommandHandler` will call `executeCommand()` in its own class to execute the returned command.
+**Step 4.** `CommandHandler` will call `executeCommand()` in its own class to execute the returned command.  
 
+
+
+### Proposed Features
+
+#### Parse Command Feature
 
 ## Product scope
 ### Target user profile
