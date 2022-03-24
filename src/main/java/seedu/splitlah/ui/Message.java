@@ -1,6 +1,5 @@
 package seedu.splitlah.ui;
 
-import seedu.splitlah.command.ActivityCreateCommand;
 import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;

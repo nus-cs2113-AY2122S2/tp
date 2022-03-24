@@ -1,8 +1,6 @@
 package seedu.splitlah.parser.commandparser;
 
 import seedu.splitlah.command.ActivityCreateCommand;
-import seedu.splitlah.command.Command;
-import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;

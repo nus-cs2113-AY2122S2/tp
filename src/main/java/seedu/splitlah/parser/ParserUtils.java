@@ -1,6 +1,5 @@
 package seedu.splitlah.parser;
 
-import seedu.splitlah.command.ActivityCreateCommand;
 import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
@@ -11,7 +10,6 @@ import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.command.SessionCreateCommand;
 import seedu.splitlah.command.SessionDeleteCommand;
-import seedu.splitlah.command.SessionListCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;

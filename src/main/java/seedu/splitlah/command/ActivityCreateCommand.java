@@ -5,9 +5,6 @@ import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
-import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
