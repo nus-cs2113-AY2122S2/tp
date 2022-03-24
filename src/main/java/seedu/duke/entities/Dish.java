@@ -29,7 +29,7 @@ public class Dish implements Serializable {
     }
 
     private static boolean isValidName(String name) {
-        return !(name == null || name == "");
+        return !(name == null || name.length() == 0);
     }
 
     public String getName() {
