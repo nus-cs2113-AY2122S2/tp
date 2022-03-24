@@ -6,6 +6,21 @@
 
 ## Design
 
+### Application Launch
+
+The following diagram shows a sequence diagram of the program when it is run.
+
+![ApplicationLaunchSequenceDiagram](img/ApplicationLaunchSequenceDiagram.png)
+
+1. `InvMgr` does a setup by creating the required `Ui`, `Storage`, and `ItemList` objects.
+2. To create the `ItemList` object, `load()` from `Storage` must be called. The resulting `ArrayList<Item>` from `load()` is used to create the `ItemList` object.
+3. Then, `InvMgr` will continuously loop, doing the following:
+   i. `InvMgr` will call upon `Ui` to get input from the user.
+   ii. `InvMgr` passes the user input to `Parser.parse(command)`.
+   iii. `Parser.parse(command)` returns a `Command` object.
+   iv. `InvMgr` calls upon the `execute()` method of the returned `Command` object
+4. The loop stops when the user types `exit`.
+
 ###Parser Component
 ![ParserClassDiagram](img/ParserClassDiagram.png)
 
