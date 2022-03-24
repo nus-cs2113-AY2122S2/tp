@@ -33,7 +33,17 @@ public class ScheduleCommand extends Command {
 
     private static Logger logger = Logger.getLogger(commands.ScheduleCommand.class.getName());
 
-
+    /**
+     * Constructs a new instance of the ScheduleCommand. Constructed when the user enters a
+     * schedule-related command.
+     *
+     * @param userInput     The user's full original input.
+     * @param fileManager   An instance of the FileManager class.
+     * @param scheduleList   An instance of the DayList class.
+     * @param userAction    The action that was parsed from the user's input.
+     * @param userArguments The arguments that are accompanied by the user action.
+     * @throws InvalidCommandException If the command entered by the user is incorrect.
+     */
     public ScheduleCommand(String userInput, FileManager fileManager, DayList scheduleList,
                            String userAction, String userArguments) throws InvalidCommandException {
         super(userInput);
@@ -122,7 +132,11 @@ public class ScheduleCommand extends Command {
         return this.userArguments;
     }
 
-
+    /**
+     * Executes a schedule-related command based on the action and arguments that is stored in the
+     * class fields. If the action and/or arguments specified are invalid, this method will handle the
+     * exceptions and print appropriate responses.
+     */
     @Override
     public void execute() {
         try {

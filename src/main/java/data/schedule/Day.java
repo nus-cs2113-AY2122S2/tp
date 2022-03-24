@@ -5,6 +5,9 @@ import data.plans.Plan;
 
 import static data.schedule.InvalidScheduleException.INVALID_DAY;
 
+/**
+ * This class represents a Day, which is a day scheduled with a specified plan.
+ */
 public class Day {
     private int dayNumber;
     private Plan planForThisDay;

@@ -102,14 +102,14 @@ Alright, the following workout has been created:
 A new workout of carrying out Russian twists 50 times will be created and added to the application's list of workouts.
 
 ---
-### Show all Workouts: `workout /list`
-Lists down all workouts that have been created and stored in the workout list.
+### Show all Workouts in one go: `workout /listall`
+Lists down all workouts that have been created and stored in the workout list at the time the command is executed.
 
-Format: `workout /list`
+Format: `workout /listall`
 
 **Example**
 ```
-> workout /list
+> workout /listall
 ```
 **Expected Outcome**
 ```
@@ -120,6 +120,34 @@ Showing workouts 1-3 of 3:
 3. pull up (10 reps)
 Showed all workouts in list
 ------------------------------------------------------------
+```
+
+In the current workout list, there are a total of 3 workouts. All the workouts have been listed.
+If there are 20 workouts in the list, all the 20 workouts will be displayed together. 
+
+---
+### Show specific number of Workouts: `workout /list`
+Lists down a specific number of workouts that have been created and stored in the workout list at a time.
+The maximum number of workouts that will be displayed at a time is 10 workouts. If there are more
+workouts in the list, user will be prompt for continuation of printing.
+
+Format: `workout /list`
+
+**Example**
+```
+> workout /list
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+Showing workouts 1-3 of 3:
+
+1. push up (10 reps)
+2. sit up (10 reps)
+3. pull up (10 reps)
+
+Showed all workouts in list
+----------------------------------------------------------------------
 ```
 
 In the current workout list, there are a total of 3 workouts. All the workouts have been listed. 
@@ -165,7 +193,9 @@ Running the `workout /list` command will show the workout list as follows:
 ```
 ----------------------------------------------------------------------
 Showing workouts 1-1 of 1:
+
 1. russian twist (50 reps)
+
 Showed all workouts in list
 ----------------------------------------------------------------------
 ```
@@ -211,9 +241,11 @@ Now running the `workout /list` command again will show the workout list as foll
 ```
 ----------------------------------------------------------------------
 Showing workouts 1-3 of 3:
+
 1. push up (15 reps)
 2. sit up (10 reps)
 3. pull up (10 reps)
+
 Showed all workouts in list
 ----------------------------------------------------------------------
 ```
@@ -524,7 +556,9 @@ When you start WerkIt! for the first time, the following directory and files are
 ```
 werkItResources/        // Primary resource directory for WerkIt!
     ├── exercises.txt   // Text file containing a list of exercises
-    └── workouts.txt    // Text file containing a list of user-created workouts
+    ├── workouts.txt    // Text file containing a list of user-created workouts
+    ├── plans.txt       // Text file containing a list of user-created plans
+    └── schedule.txt    // Text file containing a 7-day schedule of user-assigned plans for each day
 ```
 
 Do note that the directory (and by extension, the files) will be created in your terminal's
@@ -557,7 +591,7 @@ first time. Your saved data should be in that directory.
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
+Below is a summary of all the commands available in the WerkIt! application.
 
 | Action         | Format and Example                                                                                                                 |
 |:---------------|:-----------------------------------------------------------------------------------------------------------------------------------|
