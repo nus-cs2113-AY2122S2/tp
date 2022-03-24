@@ -224,15 +224,20 @@ public class UI {
      * Prints the help messages. To be updated.
      */
     public void printHelpMessage() {
-        printListHelp();
+        printExerciseHelp();
         printLine();
-        printExerciseListHelp();
         printLine();
-        printWorkoutAddHelp();
+        printWorkoutHelp();
         printLine();
-        printWorkoutDeleteHelp();
         printLine();
-        printWorkoutUpdateHelp();
+        printPlanHelp();
+        printLine();
+        printLine();
+        printScheduleHelp();
+        printLine();
+        printLine();
+        printSearchHelp();
+        printLine();
         printLine();
         printExitHelp();
     }
@@ -249,7 +254,7 @@ public class UI {
     /**
      * Prints help message for 'list' command.
      */
-    public void printListHelp() {
+    public void printWorkoutListHelp() {
         System.out.println("\t To view all workouts, please enter:");
         printColorText(TextColor.COLOR_YELLOW, "\t workout /list");
         System.out.println("\t This will print all the existing workouts.");
@@ -263,7 +268,8 @@ public class UI {
         printColorText(TextColor.COLOR_YELLOW, "\t workout /new <exercise name> /reps <no. of repetitions>");
         System.out.println("\t Example: ");
         printColorText(TextColor.COLOR_YELLOW, "\t workout /new push up /reps 10");
-        System.out.println("\t This will add a workout with 10 reps of push up.");
+        System.out.println("\t This will add a workout with " + getColorText(TextColor.COLOR_YELLOW, "10 reps")
+                + " of " + getColorText(TextColor.COLOR_YELLOW, "push up"));
     }
 
     /**
@@ -271,10 +277,11 @@ public class UI {
      */
     public void printWorkoutDeleteHelp() {
         System.out.println("\t To delete a workout, please enter: ");
-        printColorText(TextColor.COLOR_YELLOW, "\t workout /delete <index>");
+        printColorText(TextColor.COLOR_YELLOW, "\t workout /delete <index of workout>");
         System.out.println("\t Example: ");
         printColorText(TextColor.COLOR_YELLOW, "\t workout /delete 1");
-        System.out.println("\t This will delete the workout with index 1 if exists.");
+        System.out.println("\t This will delete the workout with index "
+                + getColorText(TextColor.COLOR_YELLOW, "1") + " if exists.");
     }
 
     /**
@@ -282,10 +289,12 @@ public class UI {
      */
     public void printWorkoutUpdateHelp() {
         System.out.println("\t To update a workout, please enter: ");
-        printColorText(TextColor.COLOR_YELLOW, "\t workout /update <index> <quantity>");
+        printColorText(TextColor.COLOR_YELLOW, "\t workout /update <index of workout> <quantity>");
         System.out.println("\t Example: ");
         printColorText(TextColor.COLOR_YELLOW, "\t workout /update 1 15");
-        System.out.println("\t This will update the workout with index 1 to 15 reps if exists.");
+        System.out.println("\t This will update the workout with index "
+                + getColorText(TextColor.COLOR_YELLOW, "1") + " to "
+                + getColorText(TextColor.COLOR_YELLOW, "15 reps") + " if exists.");
     }
 
     /**
@@ -494,5 +503,226 @@ public class UI {
      */
     public void printSearchNotFoundMessage(String category) {
         System.out.println("Sorry, no matching " + category + " found.");
+    }
+
+    /**
+     * Prints help message for 'plan /new' command.
+     */
+    public void printPlanAddHelp() {
+        System.out.println("\t To add a plan, please enter: ");
+        printColorText(TextColor.COLOR_YELLOW, "\t plan /new <plan name> /workouts"
+                + " <workout index(s) separated by ','>");
+        System.out.println("\t Example: ");
+        printWorkoutExample();
+        printPlanAddExample();
+    }
+
+    /**
+     * Prints workout list examples.
+     */
+    public void printWorkoutExample() {
+        System.out.println("\t The workout list upon entering "
+                + getColorText(TextColor.COLOR_YELLOW, "workout /list")
+                + ", contains the\n \t following workouts:");
+        printColorText(TextColor.COLOR_YELLOW, "\t 1. push up (10 reps)");
+        printColorText(TextColor.COLOR_YELLOW, "\t 2. sit up (10 reps)");
+        printColorText(TextColor.COLOR_YELLOW, "\t 3. pull up (10 reps)");
+    }
+
+    /**
+     * Prints the example of adding plans.
+     */
+    public void printPlanAddExample() {
+        System.out.println("\t To create a new plan, enter the following command:");
+        printColorText(TextColor.COLOR_YELLOW, "\t plan /new Grow My Muscles /workouts 1, 2");
+        System.out.println("\t A new plan named " + getColorText(TextColor.COLOR_YELLOW, "Grow My Muscles")
+                + " with workout index " + getColorText(TextColor.COLOR_YELLOW, "1") + " and "
+                + getColorText(TextColor.COLOR_YELLOW, "2\n")
+                + "\t will be created and added to the application's list of plans.");
+    }
+
+    /**
+     * Prints the example plan list to be used in schedule update help message.
+     */
+    public void printPlanExample() {
+        System.out.println("\t The plan list upon entering "
+                + getColorText(TextColor.COLOR_YELLOW, "plan /list") + ", contains the\n \t following plans:");
+        printColorText(TextColor.COLOR_YELLOW, "\t 1. arms");
+        printColorText(TextColor.COLOR_YELLOW, "\t 2. stronger arms");
+        printColorText(TextColor.COLOR_YELLOW, "\t 3. Grow My Muscles");
+    }
+
+    /**
+     * Prints help message for 'plan /list' command.
+     */
+    public void printPlanListHelp() {
+        System.out.println("\t To view all plans, please enter:");
+        printColorText(TextColor.COLOR_YELLOW, "\t plan /list");
+        System.out.println("\t This will print all the existing plans.");
+    }
+
+    /**
+     * Prints help message for 'plan /details' command.
+     */
+    public void printPlanDetailsHelp() {
+        System.out.println("\t To view each plan in detail, please enter:");
+        printColorText(TextColor.COLOR_YELLOW, "\t plan /details <plan index in list>");
+        System.out.println("\t This will print all the workouts in the plan of given index.");
+    }
+
+    /**
+     * Prints help message for 'schedule /list' command.
+     */
+    public void printScheduleListHelp() {
+        System.out.println("\t To view the schedule, please enter:");
+        printColorText(TextColor.COLOR_YELLOW, "\t schedule /list");
+        System.out.println("\t This will print the schedule.");
+    }
+
+    /**
+     * Prints help message for 'schedule /update' command.
+     */
+    public void printScheduleUpdateHelp() {
+        System.out.println("\t To update schedule, please enter: ");
+        printColorText(TextColor.COLOR_YELLOW, "\t schedule /update <day index [1-7]> <plan index in the list>");
+        System.out.println("\t Example: ");
+        printPlanExample();
+        System.out.println("\t To update the plan schedule for Monday with plan 1,"
+                + " enter the\n \t following command:");
+        printColorText(TextColor.COLOR_YELLOW, "\t schedule /update 1 1");
+        System.out.println("\t This will update the schedule of "
+                + getColorText(TextColor.COLOR_YELLOW, "Monday")
+                + " with a plan named " + getColorText(TextColor.COLOR_YELLOW, "arms") + ".");
+    }
+
+    /**
+     * Prints help message for 'schedule /clear' and 'schedule /clearall' commands.
+     */
+    public void printScheduleClearHelp() {
+        System.out.println("\t To clear schedule, please enter: ");
+        printColorText(TextColor.COLOR_YELLOW, "\t schedule /clear <day index [1-7]>");
+        System.out.println("\t This will clear the schedule for the given day.");
+        printColorText(TextColor.COLOR_YELLOW, "\t schedule /clearall");
+        System.out.println("\t This will clear the schedule for everyday.");
+    }
+
+    /**
+     * Prints help message for 'plan /delete' command.
+     */
+    public void printPlanDeleteHelp() {
+        System.out.println("\t To delete a plan, please enter: ");
+        printColorText(TextColor.COLOR_YELLOW, "\t plan /delete <index of plan>");
+        System.out.println("\t Example: ");
+        printColorText(TextColor.COLOR_YELLOW, "\t plan /delete 1");
+        System.out.println("\t This will delete the plan with index "
+                + getColorText(TextColor.COLOR_YELLOW, "1") + " if exists.");
+    }
+
+    /**
+     * Prints help message for 'search /exercise' command.
+     */
+    public void printSearchExerciseHelp() {
+        System.out.println("\t To search for exercise(s), please enter: ");
+        printColorText(TextColor.COLOR_YELLOW, "\t search /exercise <exercise keyword>");
+        System.out.println("\t Example: ");
+        printColorText(TextColor.COLOR_YELLOW, "\t search /exercise up");
+        System.out.println("\t This will show the exercise(s) containing keyword "
+                + getColorText(TextColor.COLOR_YELLOW, "up") + " if exist.");
+    }
+
+    /**
+     * Prints help message for 'search /workout' command.
+     */
+    public void printSearchWorkoutHelp() {
+        System.out.println("\t To search for workout(s), please enter: ");
+        printColorText(TextColor.COLOR_YELLOW, "\t search /workout <exercise keyword or number of reps>");
+        System.out.println("\t Example: ");
+        printColorText(TextColor.COLOR_YELLOW, "\t search /workout up");
+        System.out.println("\t This will show the workout(s) containing exercise with keyword\n\t "
+                + getColorText(TextColor.COLOR_YELLOW, "up") + " if exist.");
+        printColorText(TextColor.COLOR_YELLOW, "\t search /workout 15");
+        System.out.println("\t This will show the workout(s) with "
+                + getColorText(TextColor.COLOR_YELLOW, "reps = 15") + " if exist.");
+    }
+
+    /**
+     * Prints help message for 'search /plan' command.
+     */
+    public void printSearchPlanHelp() {
+        System.out.println("\t To search for plan(s), please enter: ");
+        printColorText(TextColor.COLOR_YELLOW, "\t search /plan <plan keyword>");
+        System.out.println("\t Example: ");
+        printColorText(TextColor.COLOR_YELLOW, "\t search /plan grow");
+        System.out.println("\t This will show the plan(s) containing keyword "
+                + getColorText(TextColor.COLOR_YELLOW, "grow") + " if exist.");
+    }
+
+    /**
+     * Prints help message for 'search /all' command.
+     */
+    public void printSearchAllHelp() {
+        System.out.println("\t To search for everything related to the keyword, please enter: ");
+        printColorText(TextColor.COLOR_YELLOW, "\t search /all <keyword>");
+        System.out.println("\t Example: ");
+        printColorText(TextColor.COLOR_YELLOW, "\t search /all a");
+        System.out.println("\t This will show the exercise(s), workout(s) and plan(s) containing\n\t keyword "
+                + getColorText(TextColor.COLOR_YELLOW, "a") + " if exist.");
+    }
+
+    /**
+     * Prints all exercise related help messages.
+     */
+    public void printExerciseHelp() {
+        printExerciseListHelp();
+    }
+
+    /**
+     * Prints all workout related help messages.
+     */
+    public void printWorkoutHelp() {
+        printWorkoutListHelp();
+        printLine();
+        printWorkoutAddHelp();
+        printLine();
+        printWorkoutDeleteHelp();
+        printLine();
+        printWorkoutUpdateHelp();
+    }
+
+    /**
+     * Prints all plan related help messages.
+     */
+    public void printPlanHelp() {
+        printPlanListHelp();
+        printLine();
+        printPlanDetailsHelp();
+        printLine();
+        printPlanAddHelp();
+        printLine();
+        printPlanDeleteHelp();
+    }
+
+    /**
+     * Prints all schedule related help messages.
+     */
+    public void printScheduleHelp() {
+        printScheduleListHelp();
+        printLine();
+        printScheduleUpdateHelp();
+        printLine();
+        printScheduleClearHelp();
+    }
+
+    /**
+     * Prints all search related help messages.
+     */
+    public void printSearchHelp() {
+        printSearchExerciseHelp();
+        printLine();
+        printSearchWorkoutHelp();
+        printLine();
+        printSearchPlanHelp();
+        printLine();
+        printSearchAllHelp();
     }
 }
