@@ -79,10 +79,10 @@ public class ActivityDeleteCommand extends Command {
             assert session != null : Message.ASSERT_ACTIVITYDELETE_SESSION_IS_NULL;
             session.removeActivity(activityId);
             manager.saveProfile();
-            manager.getUi().printlnMessage(COMMAND_SUCCESS);
+            manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYDELETE_ACTIVITY_REMOVED + activityId);
         } catch (InvalidDataException e) {
-            manager.getUi().printlnMessage(e.getMessage());
+            manager.getUi().printlnMessageWithDivider(e.getMessage());
         }
     }
 }
