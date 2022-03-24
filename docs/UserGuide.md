@@ -626,6 +626,94 @@ The plan(s) containing keywords [e] is(are) listed below.
 2. legs
 ----------------------------------------------------------------------
 ```
+
+---
+
+### Search For All: `search /all`
+Find all exercises, workouts and plans containing the specified keywords.
+
+Format: `search /all <keyword>`
+
+**Example**
+
+Assume, the exercise list contains the following exercises:
+```
+----------------------------------------------------------------------
+1. push up
+2. bicep curl
+3. pull up
+4. squat
+5. lunge
+6. hip thrust
+7. sit up
+8. crunch
+9. russian twist
+10. running
+11. swimming
+12. jumping jack
+13. burpee
+----------------------------------------------------------------------
+```
+and the workout list contains the following workouts:
+```
+----------------------------------------------------------------------
+1. pull up (10 reps)
+2. push up (1455 reps)
+3. crunch (10 reps)
+4. squat (25 reps)
+----------------------------------------------------------------------
+```
+and the plan list contains the following plans:
+```
+----------------------------------------------------------------------
+1. grow my muscles
+2. arms
+3. legs
+----------------------------------------------------------------------
+```
+To search for everything containing keywords "a", enter the following
+command:
+```
+> search /all a
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+The exercise(s) containing keywords [a] is(are) listed below.
+----------------------------------------------------------------------
+1. squat
+2. russian twist
+3. jumping jack
+----------------------------------------------------------------------
+The workout(s) containing keywords [a] is(are) listed below.
+----------------------------------------------------------------------
+1. squat (25 reps)
+----------------------------------------------------------------------
+The plan(s) containing keywords [a] is(are) listed below.
+----------------------------------------------------------------------
+1. arms
+----------------------------------------------------------------------
+```
+
+To search for everything containing keywords 10, enter the following
+command:
+```
+> search /all 10
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+Sorry, no matching exercise found.
+----------------------------------------------------------------------
+The workout(s) with reps = 10 is(are) listed below.
+----------------------------------------------------------------------
+1. pull up (10 reps)
+2. crunch (10 reps)
+----------------------------------------------------------------------
+Sorry, no matching plan found.
+----------------------------------------------------------------------
+```
+
 ---
 
 ### View Help: `help`
