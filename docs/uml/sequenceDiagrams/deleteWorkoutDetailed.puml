@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../Style.puml
+
+autonumber 7.1
+
+participant "workoutList\n:WorkoutList" AS wl
+
+activate wl
+wl -> ":Integer" :parseInt(userArgument)
+activate ":Integer"
+return indextoDelete:int
+deactivate ":Integer"
+
+wl -> wl :checkIndexIsWithinRange(indexToDelete)
+activate wl
+return :boolean
+
+opt !isIndexToDeleteValid
+create ":WorkoutOutOfRangeException" AS wre
+wl -> wre : throw new WorkoutOutOfRangeException
+activate wre
+return
+end
+
+wl -> wl :getWorkoutFromIndexNum(indexToDelete)
+activate wl
+return deletedWorkout:Workout
+
+wl -> "workoutsDisplayList:\nArrayList<String>" :remove(indexToDelete - 1)
+activate "workoutsDisplayList:\nArrayList<String>"
+return
+deactivate "workoutsDisplayList:\nArrayList<String>"
+
+wl -> "workoutsHashMapList:\nHashMap" :remove(deletedWorkout)
+activate "workoutsHashMapList:\nHashMap"
+return
+deactivate "workoutsHashMapList:\nHashMap"
+
+@enduml
