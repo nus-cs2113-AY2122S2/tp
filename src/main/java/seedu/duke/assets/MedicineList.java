@@ -8,7 +8,7 @@ import seedu.duke.helper.UI;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-public class MedicineList {
+public class MedicineList extends List{
     private ArrayList<Medicine> medicines = new ArrayList<>();
 
     public int getSize() {
@@ -41,7 +41,7 @@ public class MedicineList {
                 + medicine.getSideEffects() + ", " + Integer.toString(medicine.getQuantity()));
     }
 
-    public void viewMedicine() {
+    public void view() {
         if (getSize() == 0) {
             UI.printParagraph("There are no medicines currently.");
             return;
@@ -55,7 +55,7 @@ public class MedicineList {
     }
 
     //todo: please change logic
-    public void viewMedicine(String parameters) {
+    public void view(String parameters) {
         if (getSize() == 0) {
             UI.printParagraph("There are no medicines matching the given name.");
             return;
@@ -73,7 +73,7 @@ public class MedicineList {
         }
     }
 
-    public void deleteMedicine(String medicineId) throws NotFoundException {
+    public void remove(String medicineId) throws NotFoundException {
         for (int i = 0; i < getSize(); i++) {
             if (medicines.get(i).getMedicineId().equals(medicineId)) {
                 medicines.remove(i);

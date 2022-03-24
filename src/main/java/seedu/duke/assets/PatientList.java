@@ -1,10 +1,11 @@
 package seedu.duke.assets;
 
+import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
 
 import java.util.ArrayList;
 
-public class PatientList {
+public class PatientList extends List{
 
     private ArrayList<Patient> patients = new ArrayList<>();
 
@@ -17,7 +18,7 @@ public class PatientList {
         return null;
     }
 
-    public void viewPatient(String nric) {
+    public void view(String nric) {
         Patient patient = getPatient(nric);
         if (patient == null) {
             UI.printParagraph("There is no such patient");
@@ -26,7 +27,7 @@ public class PatientList {
         UI.printParagraph(getPatient(nric).toString());
     }
 
-    public void viewPatient() {
+    public void view() {
         UI.printParagraph(toString());
     }
 
@@ -41,8 +42,14 @@ public class PatientList {
         return patients.size();
     }
 
-    public void removePatient(int index) {
-        patients.remove(index);
+    public void remove(String nric) throws NotFoundException {
+        for (int i = 0; i < getSize(); i++) {
+            if (patients.get(i).getNric().equals(nric)) {
+                patients.remove(i);
+                return;
+            }
+        }
+        throw new NotFoundException();
     }
 
     public ArrayList<Patient> getList() {
