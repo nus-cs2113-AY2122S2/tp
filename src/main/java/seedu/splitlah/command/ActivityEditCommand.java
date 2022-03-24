@@ -119,8 +119,12 @@ public class ActivityEditCommand extends Command {
             Activity oldActivity = session.getActivity(activityId);
             fillEmptyActivityFields(oldActivity);
             session.removeActivity(activityId);
-            session.addActivity(new Activity(activityId, activityName, totalCost,
-                    new Person(payer), getPersonListFromNameList(involvedList)));
+            Person personPaid = session.getPersonByName(payer);
+            ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
+            int activityId = manager.getProfile().getNewActivityId();
+            addAllActivityCost(involvedPersonList, personPaid, activityId);
+            Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
+            session.addActivity(activity);
         } catch (InvalidDataException e) {
             e.printStackTrace();
         }
