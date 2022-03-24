@@ -77,7 +77,6 @@ public class TimetableTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         System.setOut(new PrintStream(outContent));
-        Ui ui = new Ui();
         ArrayList<Task> dummyList =  new  ArrayList<>();
         dummyList.add(new Task("A significantly long task description",
                 null, LocalDate.now()));
@@ -87,6 +86,7 @@ public class TimetableTest {
                 null, LocalDate.now()));
         dummyList.add(new Task("One more task to add",
                 null, LocalDate.now()));
+        Ui ui = new Ui();
         Timetable.showTodaySchedule(new TaskList(dummyList), ui);
         String expectedOutput = "----------------------------------------------------------"
                 + "-------------------------------------------------" + System.lineSeparator()
