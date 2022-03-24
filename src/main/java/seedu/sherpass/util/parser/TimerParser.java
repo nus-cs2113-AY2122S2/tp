@@ -4,8 +4,15 @@ import seedu.sherpass.exception.InvalidTimeException;
 import seedu.sherpass.util.TimerLogic;
 import seedu.sherpass.util.Ui;
 
-import static seedu.sherpass.constant.Index.*;
+import static seedu.sherpass.constant.Index.CUSTOM_COMMAND_INDEX;
+import static seedu.sherpass.constant.Index.CUSTOM_TIMER_INDEX;
 import static seedu.sherpass.constant.Index.DEFAULT_TIMER_INDEX;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ONE;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_THREE;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
+import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ZERO;
+import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
+import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_STUDY_INPUT_MESSAGE;
 
 public class TimerParser {
