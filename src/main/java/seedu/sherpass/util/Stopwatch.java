@@ -9,7 +9,7 @@ public class Stopwatch extends Timer {
 
     private int timeElapsed;
 
-    public Stopwatch (TaskList taskList, Ui ui) {
+    public Stopwatch(TaskList taskList, Ui ui) {
         super(taskList, ui);
         timeElapsed = 0;
     }
@@ -58,7 +58,7 @@ public class Stopwatch extends Timer {
     }
 
     private void printTimeElapsed() {
-        if (timeElapsed> ONE_MINUTE) {
+        if (timeElapsed > ONE_MINUTE) {
             if (timeElapsed % ONE_MINUTE == 0) {
                 int minutesLeft = timeElapsed / ONE_MINUTE;
                 ui.showToUser(minutesLeft + " minutes have passed.");
