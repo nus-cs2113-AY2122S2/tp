@@ -1,0 +1,53 @@
+@startuml
+
+package parsers {
+    abstract class Parser {
+        commandFormat: String
+        groupNames: HashSet<String>
+        parsedCommand: HashMap<String, String>
+        --
+        + parseString(String str): HashMap<String, String>
+    }
+
+    class XYZParser {
+        + parseCommand(String userInput): Command
+    }
+
+    class ModHappyParser {
+        - getCommandParser(String commandWord): Parser
+        + parseCommand(String userInput): Command
+    }
+}
+
+note top of XYZParser
+    XYZParser is any command-specific
+    parser (e.g. AddParser, TagParser)
+end note
+
+Parser <|-u- ModHappyParser
+XYZParser <. ModHappyParser: uses <
+ModHappyParser <-u- Main
+
+hide Main circle
+hide Main methods
+hide Main attributes
+
+Parser <|-- XYZParser
+
+abstract class Command {
+}
+hide Command methods
+hide Command attributes
+
+XYZCommand <.u. ModHappyParser: returns <
+Command <|-- XYZCommand
+
+hide XYZCommand methods
+hide XYZCommand attributes
+
+note bottom of XYZCommand
+    XYZCommand is any command
+    (e.g. AddCommand, TagCommand)
+end note
+
+@enduml

@@ -2,12 +2,70 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- Some foundational source code was adapted from [addressbook-level2](https://github.com/se-edu/addressbook-level2).
+- Google's [GSON library](https://github.com/google/gson) was used to facilitate serialisation and deserialisation of data stored in the data file.
 
-## Design & implementation
+## Design & Implementation
+### Architecture
+Given below is a quick overview of the main components of Mod Happy and how they interact with one another.
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Components.puml)
+
+### UI Component
+**API**: [TextUi.java](https://github.com/AY2122S2-CS2113T-T10-3/tp/tree/master/src/main/java/seedu/duke/ui/TextUi.java) <br>
+
+The `TextUi` component exists as part of the `Main` class and is made up of the built-in `Java.util.Scanner` class.
+It does not interact with any other classes or components and serves strictly as the gateway for the
+user to interact with the application.
+<br>
+The `TextUi` component:
+- Listens and grabs the user's input from the standard input using an `Java.util.Scanner` object.
+- Displays any command results and error messages on the standard output using the built-in `Java.io.PrintStream` object `Java.System.out`.
+
+### Parser Component
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Parser.puml)
+
+### Data Component
+
+The data component is responsible for the storage and manipulation of tasks and modules, as well as their associated attributes.
+
+The following partial class diagram illustrates the general organisation of this component.
+
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/Data.puml)
+
+The `ModuleList` class serves as the main data storage class for the program, and is always instantiated when the program is started. It holds:
+* A `Module` object representing the General Tasks list. This `Module` is instantiated upon `ModuleList`'s creation and is meant to be the "default" module for all uncategorised or miscellaneous tasks.
+* An `ArrayList` containing all user-created modules.
+
+The `Module` class serves as a wrapper around a `TaskList`, providing additional attributes including the module code and module description. Within the context of Mod Happy, modules can be viewed as task categories with names, descriptions and other attributes. For this reason, the General Tasks list is implemented as a `Module` under the hood.
+
+> 📔 <span style="color:#00bb00">**NOTE:**</span>
+> 
+> An alternative method of implementing `ModuleList` is shown below, where the default General Tasks
+list is simply represented as a `TaskList` instead of a full-fledged `Module`.
+>
+> ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/DataAlternative.puml)
+> 
+> While this model is arguably closer to real life, the program logic would have to operate on different object types depending on whether a given `Task` belongs to a user-created Module or the default General Tasks list. This was deemed to increase coupling and introduce too much unnecessary clutter to the code, hence it was not used.
+
+## Implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Tag Feature
+
+The tag command accepts a string from the user and adds it into `ArrayList<String> tags` of a `Task`.  
+
+Here is an example on adding a tag to a general task:  
+1) User inputs `tag add 2 "testTag"`. 
+2) `TagParser` will initialise `TagCommand` with add as `tagOperation` 2 as `taskIndex` and testTag as `tagDescription`, while `taskModule` is null.
+3) `TagCommand` then gets the relevant `Module`. If `taskModule` is null, `getGeneralTasks()` is called. Else, `getModule(taskModule)` is called instead.
+4) Next, `TagCommand` checks the `tagOperation`. If add, `addTag(targetModule)` is called. Else if del, `removeTag(targetModule)` is called. Else, it throws `ParseException`.
+
+Below is the sequence diagram of how the tag feature works:
+
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/Tag.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/GetModule.puml)
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ngys117/tp/branch-PR-DeveloperGuide/docs/TagSeqDiagram/CheckAndRunTagOperation.puml)
 
 ## Product scope
 ### Target user profile
@@ -36,3 +94,7 @@
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Below are instructions to perform manual testing of the application. Please refer to the User Guide for more details on the usage of the various commands.
+
+### Launch and exit
+

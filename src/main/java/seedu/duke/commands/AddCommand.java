@@ -8,6 +8,7 @@ import seedu.duke.tasks.Module;
 import seedu.duke.tasks.ModuleList;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.TaskList;
+import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
 public class AddCommand extends Command {
@@ -38,10 +39,10 @@ public class AddCommand extends Command {
     /**
      * Constructor for use with commands involving adding modules.
      */
-    public AddCommand(AddObjectType type, String moduleCode, String moduleDescription) {
+    public AddCommand(AddObjectType type, String moduleCode, String moduleDescription, int modularCredit) {
         assert type == AddObjectType.MODULE;
         typeToAdd = type;
-        newModule = new Module(moduleCode, moduleDescription);
+        newModule = new Module(moduleCode, moduleDescription, modularCredit);
     }
 
     public Task getNewTask() {
@@ -60,7 +61,7 @@ public class AddCommand extends Command {
      * Adds the specified task or module.
      */
     @Override
-    public CommandResult execute(ModuleList moduleList) throws ModHappyException {
+    public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
         String res = "";
         if (typeToAdd == AddObjectType.TASK) {
             Module targetModule = moduleList.getGeneralTasks();

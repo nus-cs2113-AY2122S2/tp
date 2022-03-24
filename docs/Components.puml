@@ -1,0 +1,12 @@
+@startuml
+actor user
+user --> [Ui]
+[Ui] --> [Main]
+[Main] --> [Parser]
+[Parser] --> [Command]: produces >
+[Main] --> [Command]: executes >
+[Command] --> [Main]: returns feedback to >
+[Command] --> [Storage]: writes to >
+[Command] --> [Data]: manipulates >
+[Main] --> [Storage]: reads from >
+@enduml

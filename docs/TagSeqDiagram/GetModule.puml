@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam shadowing false
+participant ":TagCommand" as TagCommand
+participant ":ModuleList" as ModuleList
+
+mainframe **sd** Get Module
+
+activate TagCommand
+
+alt Objects.isNull(taskMod)
+    TagCommand -> ModuleList: getGeneralTasks()
+    activate ModuleList
+    return targetModule:Module
+
+else else
+    TagCommand -> ModuleList: getModule(taskModule:Module)
+    activate ModuleList
+
+    alt Objects.isNull(taskMod)
+        [<-- ModuleList: e:NoSuchModuleException
+
+    else else
+    return targetModule:Module
+
+    end
+end
+@enduml
