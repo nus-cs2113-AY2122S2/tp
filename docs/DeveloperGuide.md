@@ -15,12 +15,22 @@ The diagram above shows the class diagram of how the `Parser` component works.
 2. The method checks through a logic gate whether the user input is valid, and returns 
 a `Command` class based on the user input.
 
-### Command
+### Command Component
 ![CommandClassDiagram](img/CommandClassDiagram.png)
 The following diagram shows the class diagram for `Command`.
 
 `Command` is an abstract class that sets certain commonalities that is implemented across all types of commands - `AddCommand`, `DescCommand`, `ListCommand`, `DeleteCommand`, `HelpCommand`, `ExitCommand`. Each of these classes have to override the `Command`'s `execute()` method as each command has a different execution. For example, `AddCommand` will be focused on adding an item to an inventory list whereas `DescCommand` will be about retrieving information from the inventory list.
 
+### Storage Component
+
+The following diagram shows the class diagram for `Storage`.
+
+![StorageClassDiagram](img/StorageClassDiagram.png)
+
+1. `Storage` has `save()` and `load()` methods. These are called by `InvMgr` when needed.
+2. `save(itemList)` writes the contents of an `itemList` to a file.
+3. `load(itemList)` loads a JSON file into an `itemList`.
+4. Gson is used to serialise and deserialise the `itemList` of type `ArrayList<Item>`.
 
 ## Implementation
 
@@ -73,7 +83,7 @@ The user starts by typing a list command.
 
 #### Initialisation
 
-The following sequence diagram shows how `Storage` is initialised when the program first launches.
+The following diagram shows the sequence diagram illustrating how `Storage` is initialised when the program first launches.
 
 ![StorageInitialisationSequenceDiagram](img/StorageInitialisationSequenceDiagram.png)
 
@@ -84,7 +94,7 @@ The following sequence diagram shows how `Storage` is initialised when the progr
 
 #### Loading data
 
-The following sequence diagram shows how the data file is loaded. Typically, this is only run once when the program first launches.
+The following diagram shows the sequence diagram illustrating how the data file is loaded. Typically, this is only run once when the program first launches.
 
 ![StorageLoadSequenceDiagram](img/StorageLoadSequenceDiagram.png)
 
@@ -97,7 +107,7 @@ The following sequence diagram shows how the data file is loaded. Typically, thi
 
 #### Saving data
 
-The following sequence diagram shows how the data file is saved. Typically, this is done after each `Command` is run.
+The following diagram shows the sequence diagram illustrating how the data file is saved. Typically, this is done after each `Command` is run.
 
 ![StorageSaveSequenceDiagram](img/StorageSaveSequenceDiagram.png)
 
