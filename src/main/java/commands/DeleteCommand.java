@@ -1,6 +1,7 @@
 package commands;
 
 import common.Messages;
+import manager.ExpenseManager;
 
 /**
  * Deletes a record identified using it's last displayed index from the RecordBook.
@@ -39,7 +40,7 @@ public class DeleteCommand extends Command {
     public CommandResult execute() {
         try {
             // updates the total expense
-            totalExpense -= recordMgr.getRecordByIndex(toDelete).getPrice();
+            ExpenseManager.subtractFromExpense(recordMgr.getRecordByIndex(toDelete).getPrice());
 
             recordMgr.deleteRecord(toDelete);
 

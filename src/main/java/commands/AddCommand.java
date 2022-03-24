@@ -2,6 +2,8 @@ package commands;
 
 import exception.IllegalValueException;
 
+import manager.ExpenseManager;
+
 import records.Product;
 import records.Record;
 import records.Subscription;
@@ -36,8 +38,7 @@ public class AddCommand extends Command {
     public void AddProductCommand(String name, double price,
                       String date, String productType) throws IllegalValueException {
         this.toAdd = new Product(name, price, date, productType);
-        totalExpense += price;
-
+        ExpenseManager.addToExpense(price);
     }
 
     /**
@@ -48,7 +49,7 @@ public class AddCommand extends Command {
     public void AddSubscriptionCommand(String name, double price,
                              String date, String renewal) throws IllegalValueException {
         this.toAdd = new Subscription(name, price, date, renewal);
-        totalExpense += price;
+        ExpenseManager.addToExpense(price);
     }
 
     /**
@@ -60,9 +61,9 @@ public class AddCommand extends Command {
     public CommandResult execute() {
         recordMgr.addRecord(toAdd);
 
-        String newTotalExpense = "\nTotal expense: " + totalExpense;
+        String newTotalExpense = "\nTotal expense: " + ExpenseManager.getTotalExpense();
 
-        if (limitMgr.ifExceedLimit(totalExpense)) {
+        if (limitMgr.isExceedLimit(ExpenseManager.getTotalExpense())) {
             String warning = "\nWARNING: You have exceeded the spending limit of " + limitMgr.getLimit() + "!!";
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + newTotalExpense + warning);
         }
