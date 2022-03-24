@@ -362,6 +362,48 @@ class ParserTest {
     }
 
     @Test
+    void parseCategoryIndex_delimiterExist_success()
+            throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
+        String input = "addout /u 1 /e 10 /d Dinner /p t /c 2";
+        String output = Parser.parseCategoryIndex(input);
+        assertEquals("2", output);
+    }
+
+    @Test
+    void parseCategoryIndex_nullInput_assertThrown() {
+        try {
+            Parser.parseCategoryIndex(null);
+            fail();
+        } catch (AssertionError e) {
+            assertEquals("User input should not be null", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    void parseCategoryIndex_delimiterIssues_exceptionThrown() {
+        try {
+            String noDelimiter = "addout /u 1 /e 10 /d Dinner /p t";
+            Parser.parseCategoryIndex(noDelimiter);
+            fail();
+        } catch (MissingDelimiterException e) {
+            assertEquals("Missing delimiter `/c`", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+        try {
+            String tooManyDelimiter = "addout /u 1 /e 10 /d Dinner /p t /c 2 /c 6";
+            Parser.parseCategoryIndex(tooManyDelimiter);
+            fail();
+        } catch (DuplicateDelimiterException e) {
+            assertEquals("Too many delimiter `/c`", e.getMessage());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
     void getValidMoney_positiveDouble_success() throws InvalidMoneyException {
         String input = "10.50";
         Double output = Parser.getValidMoney(input);

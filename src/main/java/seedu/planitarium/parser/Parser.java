@@ -228,6 +228,24 @@ public class Parser {
     }
 
     /**
+     * Returns the category index from user input.
+     *
+     * @param userInput The user's full input text.
+     * @return The category index.
+     * @throws MissingDelimiterException   if user input does not contain delimiter for category index.
+     * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
+     * @throws EmptyStringException        if string after the delimiter is blank.
+     */
+    public static String parseCategoryIndex(String userInput)
+            throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
+        assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
+        checkContainsOnlyOneDelimiter(userInput, DELIMITER_CATEGORY_INDEX);
+        String category = parseDelimitedTerm(userInput, DELIMITER_CATEGORY_INDEX, DELIMITER_BACK).trim();
+        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, category));
+        return category;
+    }
+
+    /**
      * Returns a valid double that is a monetary value.
      *
      * @param amount Text to be checked.
