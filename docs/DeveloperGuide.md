@@ -30,7 +30,7 @@ Given below is a quick overview of the main components of Mod Happy and how they
 How the parsing works:
 1. All XYZParser(XYZ is a placeholder e.g.  AddParser) and ModHappyParser interited from Parser class, which defines parseString() method that can parse based on well defined command Regular expression(Regex) and command groups. XYZParser parses user input in multiple-layer manner to suport complex and extendable commands.
 2. When called upon to parse a user command input, the ModHappyParser class, which serves as a general singleton parser of Mod Happy,  creates an XYZParser
-3. XYZParser further parses the user input and will return corresponding Command objects or shunt the user input into its sub-parser and pass the output up .
+3. XYZParser further parses the user input and will return corresponding Command objects.
 ### Data Component
 
 The data component is responsible for the storage and manipulation of tasks and modules, as well as their associated attributes.
