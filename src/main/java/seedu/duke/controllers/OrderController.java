@@ -54,15 +54,13 @@ public class OrderController extends Controller {
         ArrayList<Integer> dishIdxList = new ArrayList<Integer>();
         int index = InputParser.getInteger("Enter dishes you want to order (enter negative number to exit): ");
         int createdOrderIdx = orderManager.getOrderCount();
-//        try {
+        try {
             while (index >= 0) {
                 orderManager.addDishToOrder(index, createdOrderIdx);
                 index = InputParser.getInteger("You have " + orderManager.getOrders().get(createdOrderIdx).getDishCount() + " dish(es), some more: \n");
-//            }
-//        } catch (UnsupportedOperationException e) {
-//            System.out.println("Please enter a valid dish index and try again.");
-//        } catch (IndexOutOfBoundsException e) {
-//            System.out.println("Please enter a valid dish index and try again.");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Please enter a valid dish index and try again.");
         }
 
     }
