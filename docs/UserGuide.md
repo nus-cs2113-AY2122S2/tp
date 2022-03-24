@@ -399,7 +399,8 @@ Example of usage:
 Format: `help`
 
 Example of usage:
-![Group delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/HelpCommand.png)
+
+![Help command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/HelpCommand.png)
 <br>
 <br>
 
