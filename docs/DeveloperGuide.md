@@ -72,15 +72,13 @@ The source can be found in [command](https://github.com/AY2122S2-CS2113T-T10-4/t
 <br/> Fig 5 - Command Diagram
 
 The Command component consists of `Command` abstract class, `AddCommand`, `ByeCommand`, `DeleteCommand`, `HelpCommand`
-, `ListCommand`and `UpdateCommand` class.
+, `ListCommand`and `UpdateCommand` that extends the `Command` class.
 
 The Command component:
-- `Command` class is an abstract class and `AddCommand`, `ByeCommand`, `DeleteCommand`, `HelpCommand`, `ListCommand`
-and `UpdateCommand`extends the `Command` class.
-- Parser.parseCommand() creates the different kinds of command that can be executed. Only 1 command object can be 
-created at any given time.
-- In each command class, there is a .executeCommand() method that executes what it needs to do and throws exceptions 
-when an exception is caught.
+- Provides all the Command classes which can be instantiated by `Parser.parseCommand()`. The Command objects can then be 
+executed. Only 1 Command object can be created.
+- Includes a `.executeCommand()` method in each Command classes which performs the relevant command and throws 
+exceptions if an error is encountered. The error is then handled.
 
 ### Storage component 
 The source can be found in [Storage.java](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/Storage.java)
@@ -91,10 +89,10 @@ The source can be found in [Storage.java](https://github.com/AY2122S2-CS2113T-T1
 The Storage component consists of `Storage` class.
 
 The Storage component:
-- When the program starts up, the `MMM` class will initialise a `Storage` object. The `Storage` class consists of load() 
-and save() functions. 
-- At the same time, `MMM` will call the load function and load any data that is stored on local storage.
-- When the program exits, `MMM` will call the save function and store remaining data onto local storage.
+- `MMM` class initialises a `Storage` object upon start up. The `Storage` class consists of 
+`load()` and `save()` methods. 
+- Concurrently, `MMM` will call the `load()` method and load any data that is stored on the hard disk.
+- `MMM` calls the `save()` method and stores remaining data onto the hard disk when the program exits.
 
 
 ## Implementation
