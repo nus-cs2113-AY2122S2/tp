@@ -57,7 +57,7 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete();
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearCommand(arguments.trim());
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         default:
@@ -234,8 +234,8 @@ public class Parser {
                     return i;
                 }
             }
-            assert !str.contains(HEADINGS[i]) :
-                    String.format("String contains %s", HEADINGS[i]);
+            //assert !str.contains(HEADINGS[i]) :
+            //        String.format("String contains %s", HEADINGS[i]);
         }
         return -1;
     }
