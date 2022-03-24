@@ -6,6 +6,15 @@
 
 ## Design & implementation
 
+###Parser Component
+![ParserClassDiagram](img/ParserClassDiagram.png)
+
+The diagram above shows the class diagram of how the `Parser` component works.
+
+1. The `parse(userInput)` method in `Parser` is called from `InvMgr`, and takes in the raw user input. 
+2. The method checks through a logic gate whether the user input is valid, and returns 
+a `Command` class based on the user input.
+
 ### Command
 ![CommandClassDiagram](img/CommandClassDiagram.png)
 The following diagram shows the class diagram for `Command`.
@@ -45,6 +54,18 @@ The user starts by typing an add command. The example used in the diagram above 
 4. The `run()` method calls on the `execute()` function in the `DeleteCommand` which will delete the item with that index from the `ItemList` using its `removeItem()` method.
 5. `DeleteCommand` will converse with `Ui` to show a message that the item has been removed. In this case, the item to add will be printed as the name of the item, followed by " has been deleted.".
 
+###ListCommand
+![ListCommandSequenceDiagram](img/ListCommandSequenceDiagram.png)
+
+The following diagram shows the sequence diagram of the listing of items in `itemList`.
+
+The user starts by typing a list command.
+
+1. `InvMgr` calls `parse("list")` method in `Parser` class, which returns a ListCommand object.
+2. `InvMgr` calls `execute(itemList, ui)` method in `ListCommand` object.
+3. `ListCommand` loops through every `Item` in `itemList` and prints them line by line 
+and numbers them.
+
 ## Product scope
 ### Target user profile
 
@@ -66,28 +87,7 @@ The user starts by typing an add command. The example used in the diagram above 
 | v1.0    | As a frequent/first time user          | Write to a file containing the entire inventory | Save my inventory data to a file                             |
 | v1.0    | Stocktaker                             | Read from and load an inventory file data       | To work on and view the data                                 |
 
-###Parser Component
-![ParserClassDiagram](img/ParserClassDiagram.png)
 
-The diagram above shows the class diagram of how the `Parser` component works.
-
-1. The `parse(userInput)` method in `Parser` is called from `InvMgr`, and takes in the raw user input. 
-2. The method checks through a logic gate whether the user input is valid, and returns 
-a `Command` class based on the user input.
-
-###ListCommand
-![ListCommandSequenceDiagram](img/ListCommandSequenceDiagram.png)
-
-The following diagram shows the sequence diagram of the listing of items in `itemList`.
-
-The user starts by typing a list command.
-
-1. `InvMgr` calls `parse("list")` method in `Parser` class, which returns a ListCommand object.
-2. `InvMgr` calls `execute(itemList, ui)` method in `ListCommand` object.
-3. `ListCommand` loops through every `Item` in `itemList` and prints them line by line 
-and numbers them.
-
-The `ListCommand` class is created by the `Parser` class when the user inputs
 ## Non-Functional Requirements
 
 {Give non-functional requirements}
