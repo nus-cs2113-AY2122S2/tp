@@ -3,9 +3,12 @@ package seedu.parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import seedu.command.Command;
+import seedu.command.ListCommand;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -262,5 +265,15 @@ class ParserTest {
                 "x/Speaker B a/Speaker b/1000 d/Loud Technologies e/2022-02-23"));
         assertEquals("No parameters found!", exception.getMessage());
     }
+
+    @Test
+    void parseCommand_listEnumTypeConvertedToUpper_success() throws IncompleteCommandException {
+        Command testCommand = parser.parseCommand("list spEAker");
+        Command expectedCommand = new ListCommand(new ArrayList<>(Collections.singleton("SPEAKER")));
+        assertEquals(expectedCommand, testCommand);
+    }
+
+
+
 
 }

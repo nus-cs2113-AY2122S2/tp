@@ -106,7 +106,8 @@ public class Parser {
             if (commandAndArgument.get(1) == null) {
                 return new ListCommand();
             } else {
-                return new ListCommand(new ArrayList<>(Collections.singleton(commandAndArgument.get(1))));
+                args = new ArrayList<>(Collections.singleton(commandAndArgument.get(1).toUpperCase(Locale.ROOT)));
+                return new ListCommand(args);
             }
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
