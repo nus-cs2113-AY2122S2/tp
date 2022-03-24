@@ -22,6 +22,19 @@ The user starts by typing an add command. The example used in the diagram above 
 5. The `run()` method calls on the `execute()` function in the `AddCommand` which will add the generated item to the `ItemList` using its `addItem()` method.
 6. `AddCommand` will converse with `Ui` to show a message that the item has been added. In this case, the item to add will be printed as the name of the item, followed by " has been added!".
 
+### Delete Command
+![DeleteCommandSequenceDiagram](img/DeleteCommandSequenceDiagram.png)
+
+The following diagram shows the sequence diagram of the addition of an item.
+
+The user starts by typing an add command. The example used in the diagram above is the addition of an item with the index `1`, based on the list when the user types the `list` command.
+
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. Within `parse()`, the string is identified to start with the word `delete`, and executes the code within the case. The case finds the index of the item by splitting the string and indexing it.
+3. `parse()` generates a new `AddCommand` using the index which is returned to the `run()` method.
+4. The `run()` method calls on the `execute()` function in the `DeleteCommand` which will delete the item with that index from the `ItemList` using its `removeItem()` method.
+5. `DeleteCommand` will converse with `Ui` to show a message that the item has been removed. In this case, the item to add will be printed as the name of the item, followed by " has been deleted.".
+
 ## Product scope
 ### Target user profile
 
