@@ -1,0 +1,27 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class InvMgr {
+    - storage: Storage
+    - itemList: ItemList
+    - ui: Ui
+    + main()
+    - run()
+}
+
+class Storage {
+    - filePath:String
+    - dataPath: Path
+    + load(): ArrayList<Item>
+    + save(itemList: ItemList)
+    - validatePathExists(filePath: String)
+
+}
+
+package ItemList <<Rectangle>> {
+
+}
+
+InvMgr -right-> "1" Storage
+Storage -[dashed]down-> ItemList : serializes >
+@enduml
