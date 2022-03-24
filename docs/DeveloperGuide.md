@@ -91,16 +91,19 @@ return a `Command` object representing an instruction that the user has for Spli
 On the other hand, the `ParserUtils` class provide supporting methods for `Parser` class to properly run,
 and `ParserErrors` class provide methods to produce custom error messages for the `Parser` component.
 
-<!-- Insert Sequence Diagram -->
-
 The general workflow of the `Parser` component is as follows:
-1. When required to parse for a command, an input String object is passed to the `Parser#getCommand()` method.
-2. The `Parser#getCommandType()` method is then called to decide what command is to be carried out given the input from the user.
-3. Then, `Parser#getRemainingArgument()` method is run to extract the arguments from the user input.
-4. The arguments are then passed to the specified `XYZCommand#prepare()` method if there are any arguments. 
-Otherwise, the constructor is called. Either methods will result in the creation of a new `XYZCommand` object. 
-(`XYZCommand` is a placeholder for specific subclass of the `Command` class, e.g. `SessionCreateCommand`)
-5. The created `XYZCommand` object is then returned by `Parser#getCommand()` method.
+1. When required to parse for a command, the running `SplitLah` object will pass a String object containing
+   the input of the user to `Parser` class.
+2. `Parser` class instantiates a new `XYZCommandParser` object corresponding to the user input 
+   and passes the user input to it.
+   (`XYZCommand` is a placeholder for specific subclass of the `Command` class, e.g. `SessionCreateCommand`)
+3. The `XYZCommandParser` object will then, using parse methods from `Parser` class, extract all the
+   arguments from the user input.
+   1. Each of these parse methods in `Parser` class then calls utility methods from `ParserUtils` class
+      to return a parsed value.
+4. All relevant arguments that are parsed will them be used to create a new `XYZCommand `object which is
+   then returned to the `Parser` class.
+5. The created `XYZCommand` object is then returned to the `SplitLah` object to be run.
 
 ### Command Component
 
