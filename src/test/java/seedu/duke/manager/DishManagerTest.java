@@ -11,7 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class DishManagerTest {
     @Test
     void deleteDish_IndexNotValid_ThrowIllegalArgumentException() {
-        DishManager dishManager = new DishManager();
+        DishManager.resetInstance();
+        DishManager dishManager = DishManager.getInstance();
         dishManager.addDish(new Dish("A", 1));
         dishManager.addDish(new Dish("B", 0));
         dishManager.addDish(new Dish("C", 30));
@@ -31,7 +32,8 @@ class DishManagerTest {
 
     @Test
     void setPrice_IndexNotValidOrPriceNotValid_Throw() {
-        DishManager dishManager = new DishManager();
+        DishManager.resetInstance();
+        DishManager dishManager = DishManager.getInstance();
         dishManager.addDish(new Dish("A", 1));
         dishManager.addDish(new Dish("B", 0));
         dishManager.addDish(new Dish("C", 30));
@@ -47,7 +49,8 @@ class DishManagerTest {
 
     @Test
     void setName_IndexNotValidOrNameNotValid_Throw() {
-        DishManager dishManager = new DishManager();
+        DishManager.resetInstance();
+        DishManager dishManager = DishManager.getInstance();
         dishManager.addDish(new Dish("A", 1));
         dishManager.addDish(new Dish("B", 0));
         dishManager.addDish(new Dish("C", 30));

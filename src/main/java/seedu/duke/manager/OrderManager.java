@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class OrderManager {
     private final ArrayList<Order> orders;
-    private final DishManager dishManager = new DishManager();
+    private final DishManager dishManager = DishManager.getInstance();
     private final ArrayList<Dish> dishes;
 
     public OrderManager() {

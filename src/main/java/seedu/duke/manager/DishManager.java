@@ -10,10 +10,11 @@ import java.util.List;
  * DishManager.
  */
 public class DishManager extends Manager {
+    private static DishManager singleton = null;
     private List<Dish> dishes;
     private static final String STORAGE_FILE = "dish.dat";
 
-    public DishManager() {
+    private DishManager() {
         super(STORAGE_FILE);
         try {
             this.loadData();
@@ -22,6 +23,18 @@ public class DishManager extends Manager {
             MainLogger.logWarning(this, "Start with an empty menu");
             dishes.clear();
         }
+    }
+
+    public static DishManager getInstance() {
+        if (singleton != null) {
+            return singleton;
+        }
+        singleton = new DishManager();
+        return singleton;
+    }
+
+    public static void resetInstance() {
+        singleton = null;
     }
 
     @Override
@@ -41,14 +54,13 @@ public class DishManager extends Manager {
     /**
      * Print all the dishes/menu.
      */
-    public void printDishes() {
-        if (dishes.size() == 0) {
-            System.out.println("There is no dish in the list");
-            return;
-        }
+    public String printDishes() {
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < dishes.size(); i++) {
-            System.out.println((i + 1) + ". " + dishes.get(i));
+            builder.append(String.format("%d. %s\n", i+1, dishes.get(i)));
         }
+        builder.deleteCharAt(builder.length() - 1);
+        return builder.toString();
     }
 
     /**

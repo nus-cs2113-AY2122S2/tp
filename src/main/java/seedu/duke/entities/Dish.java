@@ -20,16 +20,16 @@ public class Dish implements Serializable {
     private static String toTitleCase(String givenString) {
         assert (isValidName(givenString));
         String[] arr = givenString.split(" ");
-        StringBuffer sb = new StringBuffer();
+        StringBuffer stringBuffer = new StringBuffer();
         for (int i = 0; i < arr.length; i++) {
-            sb.append(Character.toUpperCase(arr[i].charAt(0)))
+            stringBuffer.append(Character.toUpperCase(arr[i].charAt(0)))
                     .append(arr[i].substring(1)).append(" ");
         }
-        return sb.toString().trim();
+        return stringBuffer.toString().trim();
     }
 
     private static boolean isValidName(String name) {
-        return !(name == null || name == "");
+        return !(name == null || name.equals(""));
     }
 
     public String getName() {
