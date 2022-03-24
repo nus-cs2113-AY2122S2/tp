@@ -213,6 +213,87 @@ Maybe for Jiarong
 {Suggest to show the process from `parsing several delimiters` to `finding the
 income/expenditure` to `editing the value`.}
 
+### [Proposed] Find feature
+
+#### Proposed Implementation
+
+The proposed find feature is facilitated by `Categories`, `Money(temp)`, `MoneyList(temp)`
+and `Family`. The `Categories` is an enumeration of keys that is used as the expenditure
+categories. The `Money(temp)` will have an additional integer attribute that acts as an
+index to a category. Additionally, the following operations are implemented:
+
+* `Categories#getLabel(index)` -- Returns the name of the category with this index.
+* `Money(temp)#getCategory()` -- Returns the category index for this money object.
+* `Money(temp)#getDescription()` -- Returns the description for this money object.
+* `MoneyList(temp)#searchExpense(description, index)` -- Returns a list of expenditures 
+having category index matching the index argument and description matching the expenditure's
+description.
+* `MoneyList(temp)#searchIncome(description)` -- Returns a list of income having description 
+matching the income's description.
+* `Family#listExpenseOfCategory(description, index)` -- Lists all expenses from the category index.
+* `Family#listIncome(description)` -- Lists all income with matching description.
+
+Below is an example usage scenario and how the expenses of a category will be printed.
+
+Step 1. Given that the application already has existing data and there is one person being tracked,
+Alice, who belongs to the current generation. In this case `Family` would be initialised with one 
+generation being tracked - myGen.
+
+<image src="images/FindIncomeExpenditure1.png"/>
+
+Step 2. The user executes `find /d Salary /c 1` command to search for income and expenditures
+with descriptions containing "Salary". The `find` command will be parsed and calls
+`Family#listExpenseOfCategory(description, index)` and `Family#listIncome(description)` which 
+would instantiate 2 temporary array list for storing the results of the upcoming search.
+
+<image src="images/FindIncomeExpenditure2.png"/>
+
+Step 3. After the temporary array list for expenditure has been created, the existing generation 
+will be iterated for `Person` objects. The `expenditureList` for a person would be retrieved 
+during that person's iteration and `MoneyList(temp)#searchExpenseOfCategory("Salary", 1)` will be called 
+as `expenditureList` extends `MoneyList(temp)`. This method then iterates through the list and calls 
+`Money(temp)#getCategory()` and `Money(temp)#getDescription()` on each expenditure, collecting and 
+returning the expenditure if its category matches the given index and description matches the given
+description. The returned expenditures are then appended to the temporary array list.
+
+<image src="images/FindIncomeExpenditure3.png"/>
+
+Step 4. After the temporary array list for income has been created, the existing generation
+will be iterated for `Person` objects. The `incomeList` for a person would be retrieved
+during that person's iteration and `MoneyList(temp)#searchIncome("Salary")` will be called
+as `incomeList` extends `MoneyList(temp)`. This method then iterates through the list and calls
+`Money(temp)#getDescription()` on each income, collecting and returning the income if its description 
+matches the given description. The returned incomes are then appended to the temporary array list.
+
+<image src="images/FindIncomeExpenditure4.png"/>
+
+Step 5. The iteration, collecting and appending to the temporary array list in step 3 and 4 is repeated
+until every person has been iterated. Finally, `Categories#getLabel(1)` is called so that an
+appropriate message can be displayed to the user, stating the name of the category, following by
+a series of print to display the expenditures in this category.
+
+> :information_source: **Note:** If the `index` provided does not map to any existing categories,
+> then it can be observed that there will never be any results returned. The `find` command will
+> check the index provided using `Parser#checkValidCategory` before iterating `Family`. If the check
+> fails, an error message will be displayed to the user instead of continuing with the execution.
+
+The following sequence diagram shows how the `find` operation works after the `FindCommand` has
+been created by [`CommandFactory`](#PlaceholderToCommandFactory):
+<image src="images/FindIncomeExpenditureSequence.png"/>
+
+#### Design considerations:
+
+**Aspect: How to search through income and expenditures to be listed:**
+
+* **Alternative 1 (current choice):** Maintain an individual array list for found income and expenditure
+  * Pros: Easy and fast access of found results, no additional logic needed to separate income
+    from expenditure
+  * Cons: Additional memory management, needs to manage 2 array list.
+  
+* **Alternative 2 :** Maintain a single array list for both found income and expenditure
+  * Pros: Easy to implement and less memory usage.
+  * Cons: Additional logic check is needed to print the income and expenditure in a well formatted way
+
 ### [Proposed] Listing Categorised Expenditures Feature
 
 #### Proposed Implementation
