@@ -491,7 +491,7 @@ public class UI {
     }
 
     /**
-     * Prints message when no matching result is found.
+     * Prints message when no matching result is found under search command.
      *
      * @param category The category that will be searched.
      */
