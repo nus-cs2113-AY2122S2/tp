@@ -6,6 +6,9 @@ import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
+/**
+ * Represents a command parser that is able to parse user arguments into an ActivityCreateCommand object.
+ */
 public class ActivityCreateCommandParser implements CommandParser<ActivityCreateCommand> {
 
     public static final String COMMAND_TEXT = "activity /create";
@@ -32,11 +35,12 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
     };
 
     /**
-     * Prepares user arguments for the creation of an ActivityCreateCommand object.
+     * Returns a ActivityCreateCommand object after parsing the input arguments from the user.
      *
-     * @param commandArgs A String object representing the user's arguments.
-     * @return An ActivityCreateCommand object if necessary parameters were found in user arguments,
-     *         an InvalidCommand object otherwise.
+     * @param commandArgs A String object representing arguments provided by the user.
+     * @return An ActivityCreateCommand object if all necessary parameters required are found in the input arguments.
+     * @throws InvalidFormatException If at least one of the necessary parameters cannot be found
+     *                                in the input arguments.
      */
     @Override
     public ActivityCreateCommand getCommand(String commandArgs) throws InvalidFormatException {
