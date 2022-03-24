@@ -48,7 +48,9 @@ Given below is an example usage scenario and how the command parser behaves at e
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+CSProjPlanner provides a project management and scheduling system geared toward Computer Science students and utilises a text UI interface. 
+While providing CS students a convenient way to keep track and store all relevant information, links, and deadlines for their projects, 
+the program also allows for faster searching and editing than a GUI design once the user is familiar with the commands—a concept CS students are far too familiar with.
 
 ## User Stories
 
