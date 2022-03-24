@@ -4,92 +4,92 @@
 
 autonumber 7.1
 
-participant "planList\n:PlanList" AS wl
-participant "workoutList\n:WorkoutList" AS el
+participant "planList\n:PlanList" AS pl
+participant "workoutList\n:WorkoutList" AS wl
 
-activate wl
+activate pl
 group sd Write new Plan data into file on user's system.
-wl -> ":String" : userArgument.split("/workouts").trim()
+pl -> ":String" : userArgument.split("/workouts").trim()
 activate ":String"
 return userPlanNameInput:String
 deactivate ":String"
 
-wl -> wl : checkForExistingPlanName(userPlanNameInput)
-activate wl
+pl -> pl : checkForExistingPlanName(userPlanNameInput)
+activate pl
 return :boolean
 
 opt hasSamePlanName
 create ":InvalidPlanException" AS ipe
-wl -> ipe : throw new InvalidPlanException
+pl -> ipe : throw new InvalidPlanException
 activate ipe
 return
 end
 
-wl -> ":String" : userArgument.split("/workouts").trim()
+pl -> ":String" : userArgument.split("/workouts").trim()
 activate ":String"
 return userWorkoutNumbersString:String
 deactivate ":String"
 
-wl -> ":Integer" : userWorkoutNumbersString.split(",").length
+pl -> ":Integer" : userWorkoutNumbersString.split(",").length
 activate ":Integer"
 return numberOfWorkoutsInAPlan:Integer
 deactivate ":Integer"
 
-wl -> wl : checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan)
-activate wl
+pl -> pl : checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan)
+activate pl
 return :boolean
 
 opt !isAppropriateNumberOfWorkouts
 create ":InvalidPlanException" AS ipe
-wl -> ipe : throw new InvalidPlanException
+pl -> ipe : throw new InvalidPlanException
 activate ipe
 return
 end
 
 create "workoutsToAddInAPlanList:ArrayList<Workout>" AS wtoadd
-wl -> wtoadd : new
+pl -> wtoadd : new
 activate wtoadd
 return
 
 loop until all workouts to be added in a plan is added (numberOfWorkoutsInAPlan)
-wl -> ":Integer" : parseInt(userWorkoutNumbersString.split(",")[i].trim())
+pl -> ":Integer" : parseInt(userWorkoutNumbersString.split(",")[i].trim())
 activate ":Integer"
 return workoutNumberInteger:Integer
 deactivate ":Integer"
-wl -> wl : checkWorkoutNumberWithinRange(workoutNumberInteger)
-activate wl
+pl -> pl : checkWorkoutNumberWithinRange(workoutNumberInteger)
+activate pl
 return :boolean
 opt !isWithinWorkoutListRange
 create ":InvalidPlanException" AS ipe
-wl -> ipe : throw new InvalidPlanException
+pl -> ipe : throw new InvalidPlanException
 activate ipe
 return
 end
-wl -> el : getWorkoutsDisplayList().get(workoutNumberInteger - 1)
-activate el
+pl -> wl : getWorkoutsDisplayList().get(workoutNumberInteger - 1)
+activate wl
 return workoutToAddKey:String
-wl -> el : getWorkoutFromKey(workoutToAddKey)
-activate el
+pl -> wl : getWorkoutFromKey(workoutToAddKey)
+activate wl
 return workoutToAddObject:Workout
-wl -> wtoadd : add(workoutToAddObject)
+pl -> wtoadd : add(workoutToAddObject)
 activate wtoadd
 return
 end
 
 create "newPlan:Plan" AS newPlan
-wl -> newPlan : new Plan(userPlanNameInput, workoutsToAddInAPlanList)
+pl -> newPlan : new Plan(userPlanNameInput, workoutsToAddInAPlanList)
 activate newPlan
 return newPlan:Plan
 
-wl -> newPlan : toString()
+pl -> newPlan : toString()
 activate newPlan
 return newPlanKey:String
 
-wl -> "plansHashMapList\n:HashMap" : put(newPlanKey, newPlan)
+pl -> "plansHashMapList\n:HashMap" : put(newPlanKey, newPlan)
 activate "plansHashMapList\n:HashMap"
 return
 
-wl -> "plansDisplayList\n:ArrayList<String>" : add(newPlanKey)
+pl -> "plansDisplayList\n:ArrayList<String>" : add(newPlanKey)
 activate "plansDisplayList\n:ArrayList<String>"
 return
 
