@@ -19,16 +19,6 @@ public class AddRecurringCommand extends Command {
     private LocalDateTime doOnEndDateTime;
     private Frequency frequency;
 
-    public static final String COMMAND_WORD = "addrecurring";
-    public static final String MESSAGE_USAGE = "addrecurring: Adds a recurring task into the task list.\n"
-            + "A recurring task contains a task description, date with the start and end time."
-            + "\n\nTo execute the command,\nenter 'addrecurring TASK_DESCRIPTION /do TASK_DATE /start START_TIME"
-            + " /end END_TIME.\n"
-            + "E.g. addrecurring weekly revision /do 1/6/2022 /start 13:00 /end 14:00\n\n"
-            + "All task dates must be given in the format:\n"
-            + "\t\td/M/yyyy, where year is in 4 digits, month and day in one or two digits.\n"
-            + "Time must be given in HH:mm format.";
-
     public AddRecurringCommand() {
 
     }

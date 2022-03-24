@@ -21,23 +21,12 @@ public class EditRecurringCommand extends Command {
     private LocalDateTime doOnStartDateTime;
     private LocalDateTime doOnEndDateTime;
 
-    public static final String COMMAND_WORD = "editrecurring";
-    public static final String MESSAGE_USAGE = "editrecurring: Edit a recurring task in the task list.\n"
-            + "You can edit the task description and the datetime of the task."
-            + "\n\nTo execute the command,\nenter 'editrecurring INDEX "
-            + "[TASK_DESCRIPTION] [/do DATE /start START_TIME /end END_TIME]'.\n"
-            + "E.g. editrecurring 1 weekly revision /do 21/3/2022 /start 09:00 /end 10:00\n\n"
-            + "DATE must be given in the format: d/M/yyyy, where\n"
-            + "year is in 4 digits, month and day in one or two digits.\n"
-            + "TIME must be given in the format: HH:mm.";
-
-
     public EditRecurringCommand() {
 
     }
 
     public void setIndex(int index) {
-        this.index = index - 1;
+        this.index = index;
     }
 
     public void setTaskDescription(String taskDescription) {

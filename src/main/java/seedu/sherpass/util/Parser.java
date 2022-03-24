@@ -189,7 +189,7 @@ public class Parser {
 
     private static Command prepareAddRecurring(String argument) {
         if (argument.isBlank()) {
-            return new HelpCommand(AddRecurringCommand.COMMAND_WORD);
+            return new HelpCommand(AddCommand.COMMAND_WORD);
         }
         AddRecurringCommand newCommand = new AddRecurringCommand();
         newCommand.setTaskDescription(parseDescription(argument));
@@ -209,14 +209,13 @@ public class Parser {
 
     private static Command prepareEditRecurring(String argument) {
         if (argument.isBlank()) {
-            return new HelpCommand(AddRecurringCommand.COMMAND_WORD);
+            return new HelpCommand(AddCommand.COMMAND_WORD);
         }
-        String[] splitIndexAndOthers = argument.split(" ", 2);
         String argumentWithoutRepeat = removeRecurringDelimiter(argument);
         String[] splitIndexAndOthers = argumentWithoutRepeat.split(" ", 2);
 
         if (splitIndexAndOthers.length < 2) {
-            return new HelpCommand(EditRecurringCommand.COMMAND_WORD);
+            return new HelpCommand(EditCommand.COMMAND_WORD);
         }
 
         String indexString = splitIndexAndOthers[0];
@@ -228,7 +227,7 @@ public class Parser {
         String startTimeString = parseArgument(START_TIME_DELIMITER, descAndDateString);
         String endTimeString = parseArgument(END_TIME_DELIMITER, descAndDateString);
         try {
-            newCommand.setIndex(Integer.parseInt(indexString));
+            newCommand.setIndex(Integer.parseInt(indexString) - ZERO_INDEX_OFFSET);
         } catch (NumberFormatException notNumberException) {
             newCommand.setIndex(INVALID_INDEX);
         }
@@ -239,12 +238,12 @@ public class Parser {
 
     private static Command prepareDeleteRecurring(String argument) {
         if (argument.isBlank()) {
-            return new HelpCommand(DeleteRecurringCommand.COMMAND_WORD);
+            return new HelpCommand(DeleteCommand.COMMAND_WORD);
         }
         String argumentWithoutRepeat = removeRecurringDelimiter(argument);
         DeleteRecurringCommand newCommand = new DeleteRecurringCommand();
         try {
-            newCommand.setIndex(Integer.parseInt(argument));
+            newCommand.setIndex(Integer.parseInt(argumentWithoutRepeat) - ZERO_INDEX_OFFSET);
         } catch (NumberFormatException exception) {
             newCommand.setIndex(INVALID_INDEX);
         }
