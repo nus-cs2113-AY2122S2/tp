@@ -25,20 +25,20 @@ __Step 2.__ The user types the command `Assign Susan ## 301`. In the `Duke` clas
 is created by invoking the `CommandParser` class's constructor on the user input. The details of this
 step are further described below.
 
-![Step 2 Object Diagram](team/aiman_assignment/step2.png)
+![Step 2](team/aiman_assignment/step2.png)
 
 __Step 3.__ The `CommandParser` class replaces the `Assign Susan ## 301` in the user input with an empty string,
 leaving just `Susan ## 301`. Then, an instance of `AssignHousekeeperCommand` is created which extends `Command`.
 
-![Step 3 Object Diagram](team/aiman_assignment/step3.png)
+![Step 3](team/aiman_assignment/step3.png)
 
 __Step 4.__ The `assignHousekeeperCommand` object parses the name of the housekeeper and the ID of the room and send both to the the `assignmentMap`.
 
-![Step 4 Object Diagram](team/aiman_assignment/step4.png)
+![Step 4](team/aiman_assignment/step4.png)
 
 __Step 5.__ The `assignmentMap` looks for the appropriate `Room` object for `301` in the `RoomList` and then looks for the appropriate `Housekeeper` object for `Susan`. It then adds both to the hashmap contained inside itself.
 
-![Step 5 Object Diagram](team/aiman_assignment/step5.png)
+![Step 5](team/aiman_assignment/step5.png)
 
 __Interaction__ To understand the interaction between objects of these classes in order to actually add an entry into the hash map inside an `AssignmentMap`, refer to the sequence diagram below.
 
