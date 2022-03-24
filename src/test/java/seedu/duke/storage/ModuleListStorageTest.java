@@ -30,8 +30,8 @@ public class ModuleListStorageTest {
     @Test
     public void store_empty_module_list_and_read() {
         try {
-            moduleListStorage.jsonWriter(moduleList, path);
-            ArrayList<Module> list = moduleListStorage.jsonReader(path);
+            moduleListStorage.writeData(moduleList, path);
+            ArrayList<Module> list = moduleListStorage.loadData(path);
             assertTrue(list.containsAll(moduleList) && moduleList.containsAll(list));
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,8 +48,8 @@ public class ModuleListStorageTest {
             moduleList.add(module1);
             moduleList.add(module2);
             moduleList.add(module3);
-            moduleListStorage.jsonWriter(moduleList, path);
-            ArrayList<Module> list = moduleListStorage.jsonReader(path);
+            moduleListStorage.writeData(moduleList, path);
+            ArrayList<Module> list = moduleListStorage.loadData(path);
             assertEquals(list.size(), moduleList.size());
             for (int i = 0; i < list.size(); i++) {
                 assertEquals(list.get(i).getModuleCode(), moduleList.get(i).getModuleCode());
@@ -76,8 +76,8 @@ public class ModuleListStorageTest {
             moduleList.add(module1);
             moduleList.add(module2);
             moduleList.add(module3);
-            moduleListStorage.jsonWriter(moduleList, path);
-            ArrayList<Module> list = moduleListStorage.jsonReader(path);
+            moduleListStorage.writeData(moduleList, path);
+            ArrayList<Module> list = moduleListStorage.loadData(path);
             assertEquals(list.size(), moduleList.size());
             for (int i = 0; i < list.size(); i++) {
                 assertEquals(list.get(i).getModuleCode(), moduleList.get(i).getModuleCode());

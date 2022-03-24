@@ -25,7 +25,7 @@ import seedu.duke.util.Configuration;
 
 public class ConfigurationStorage extends JsonStorage<Configuration> {
     @Override
-    public Configuration jsonReader(String path) throws ModHappyException {
+    public Configuration loadData(String path) throws ModHappyException {
         Gson gson = new GsonBuilder().create();
         Path file = new File(path).toPath();
         try {

@@ -29,8 +29,8 @@ public class ConfigurationStorageTest {
         try {
             assertEquals("false", configuration.getConfigurationValue(COMPLETED_TASK_SHOWN));
             configuration.configurationGroupHashMap.put(COMPLETED_TASK_SHOWN, "true");
-            configurationStorage.jsonWriter(configuration, path);
-            Configuration loadedConfiguration = (Configuration) configurationStorage.jsonReader(path);
+            configurationStorage.writeData(configuration, path);
+            Configuration loadedConfiguration = (Configuration) configurationStorage.loadData(path);
             assertEquals(configuration.getConfigurationsReport(), loadedConfiguration.getConfigurationsReport());
         } catch (Exception e) {
             e.printStackTrace();
