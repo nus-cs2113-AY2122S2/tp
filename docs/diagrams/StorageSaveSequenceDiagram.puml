@@ -16,7 +16,7 @@ activate InvMgr
         activate Gson
         return
 
-        Storage -> Gson : to(itemList)
+        Storage -> Gson : toJson(itemList)
         activate Gson
         return serializedItems: String
 
@@ -25,6 +25,6 @@ activate InvMgr
             into dataFile
         end ref
 
-    return itemList: ArrayList<Item>
+    return
 
 @enduml

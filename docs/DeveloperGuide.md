@@ -4,7 +4,7 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## Design
 
 ###Parser Component
 ![ParserClassDiagram](img/ParserClassDiagram.png)
@@ -20,6 +20,9 @@ a `Command` class based on the user input.
 The following diagram shows the class diagram for `Command`.
 
 `Command` is an abstract class that sets certain commonalities that is implemented across all types of commands - `AddCommand`, `DescCommand`, `ListCommand`, `DeleteCommand`, `HelpCommand`, `ExitCommand`. Each of these classes have to override the `Command`'s `execute()` method as each command has a different execution. For example, `AddCommand` will be focused on adding an item to an inventory list whereas `DescCommand` will be about retrieving information from the inventory list.
+
+
+## Implementation
 
 ### Description Command
 ![DescCommandSequenceDiagram](img/DescCommandSequenceDiagram.png)
@@ -54,7 +57,7 @@ The user starts by typing an add command. The example used in the diagram above 
 4. The `run()` method calls on the `execute()` function in the `DeleteCommand` which will delete the item with that index from the `ItemList` using its `removeItem()` method.
 5. `DeleteCommand` will converse with `Ui` to show a message that the item has been removed. In this case, the item to add will be printed as the name of the item, followed by " has been deleted.".
 
-###ListCommand
+### List Command
 ![ListCommandSequenceDiagram](img/ListCommandSequenceDiagram.png)
 
 The following diagram shows the sequence diagram of the listing of items in `itemList`.
@@ -63,8 +66,45 @@ The user starts by typing a list command.
 
 1. `InvMgr` calls `parse("list")` method in `Parser` class, which returns a ListCommand object.
 2. `InvMgr` calls `execute(itemList, ui)` method in `ListCommand` object.
-3. `ListCommand` loops through every `Item` in `itemList` and prints them line by line 
-and numbers them.
+3. `ListCommand` loops through every `Item` in `itemList` and prints them line by line
+   and numbers them.
+
+### Storage
+
+#### Initialisation
+
+The following sequence diagram shows how `Storage` is initialised when the program first launches.
+
+![StorageInitialisationSequenceDiagram](img/StorageInitialisationSequenceDiagram.png)
+
+1. `InvMgr` calls the `Storage(filePath)` constructor to create a `Storage` object. `filePath` is a `String` indicating where the data file to be loaded is found.
+2. `Storage(filePath)` will check if the file at `filePath` exists. If it does, it returns a `Path` object pointing to the data file.
+3. If not, the relevant files and subdirectories are created before returning the corresponding `Path` object.
+4. The new `Storage` object will have its `dataPath` attribute set to the `Path` object earlier, and its `filePath` attribute set to the `filePath` passed into the constructor.
+
+#### Loading data
+
+The following sequence diagram shows how the data file is loaded. Typically, this is only run once when the program first launches.
+
+![StorageLoadSequenceDiagram](img/StorageLoadSequenceDiagram.png)
+
+1. `InvMgr` calls the `load()` method of `storage`.
+2. `storage` initialises `Gson()` as `gson`, a library used to serialize and deserialize JSON objects into their relevant Java objects.
+3. `storage` will then load the contents of the file at `dataPath` into the `wholeJsonData` `String`. The exact details are not shown in the diagram.
+4. `storage` then calls the `fromJson(wholeJsonData)` method of `gson`.
+5. An `ArrayList<Item>` may be returned by `fromJson()` method. If it is not, a new empty list is created.
+6. `storage` returns `ArrayList<Item>` to `InvMgr`. This will be used to create the `ItemList`, but will not be shown here.
+
+#### Saving data
+
+The following sequence diagram shows how the data file is saved. Typically, this is done after each `Command` is run.
+
+![StorageSaveSequenceDiagram](img/StorageSaveSequenceDiagram.png)
+
+1. `InvMgr` calls the `save(itemList)` method of `storage`.
+2. `storage` initialises `Gson()` as `gson`, a library used to serialize and deserialize JSON objects into their relevant Java objects.
+3. `storage` calls the `toJson(itemList)` method of `gson`. This returns a `String` named `serializedItems` which contains the JSON String representing `itemList`.
+4. `storage` then writes `serializedItems` to the file at `dataFile`.
 
 ## Product scope
 ### Target user profile
