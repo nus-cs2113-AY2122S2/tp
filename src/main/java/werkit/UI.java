@@ -487,4 +487,12 @@ public class UI {
         printColorText(TextColor.COLOR_YELLOW, "schedule /update <day number [1-7]> <plan number>");
     }
 
+    /**
+     * Prints message when no matching result is found under search command.
+     *
+     * @param category The category that will be searched.
+     */
+    public void printSearchNotFoundMessage(String category) {
+        System.out.println("Sorry, no matching " + category + " found.");
+    }
 }
