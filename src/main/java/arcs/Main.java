@@ -1,7 +1,7 @@
 package arcs;
 
 import arcs.commands.CommandResult;
-import arcs.data.RouteManager;
+import arcs.data.Route.RouteManager;
 import arcs.parser.Parser;
 import arcs.storage.RouteFileManager;
 import arcs.commands.Command;

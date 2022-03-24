@@ -1,6 +1,6 @@
 package arcs.storage;
 
-import arcs.data.Route;
+import arcs.data.Route.Route;
 
 import java.io.File;
 import java.io.FileWriter;

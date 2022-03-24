@@ -1,6 +1,6 @@
 package arcs.commands;
 
-import arcs.data.RouteManager;
+import arcs.data.Route.RouteManager;
 
 
 public abstract class Command {

@@ -1,4 +1,4 @@
-package arcs.data;
+package arcs.data.Route;
 
 public class Route {
     private String flightID;

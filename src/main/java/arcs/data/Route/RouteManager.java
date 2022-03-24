@@ -1,5 +1,6 @@
-package arcs.data;
+package arcs.data.Route;
 
+import arcs.data.Route.Route;
 import arcs.data.exception.ArcsException;
 import arcs.data.exception.DuplicateDataException;
 
