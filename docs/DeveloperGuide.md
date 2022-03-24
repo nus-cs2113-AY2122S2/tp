@@ -8,6 +8,37 @@
 
 ### Implemented Features
 
+#### Add a Project
+![image info](./UmlDiagrams/addProject.png)
+
+**Step1.** When `CommandHandler` receives a user input starting with string "addproject", it will call `getProjectName`, which will return the project name. If the user did not provide at least 2 arguments, they will recieve a message and this command won't execute.
+
+**Step2.** Once this project name is returned, `CommandHandler` will call the `addProject` method from `ProjectList` with the project Name as a parameter
+
+**Step3.** `ProjectList` will self-call the `add` method, using a constructor to a new `Project` object as a parameter
+
+**Step4.** This new `Project` object is returned to the ProjectList, added, and the output "[projectName] added." is given to the user.
+
+#### Delete a Project
+![image info](./UmlDiagrams/deleteProject.png)
+
+Deleting a project functions very similarly to Adding a project.
+
+**Step1.** When `CommandHandler` receives a user input starting with string "addproject", it will call `getProjectName`, which will return the project name. If the user did not provide at least 2 arguments, they will recieve a message and this command won't execute.
+
+**Step2.** Once this project name is returned, `CommandHandler` will call the `deleteProject` method from `ProjectList` with the project Name as a parameter.
+
+**Step3.** `ProjectList` will self-call the findProjectIndex method, which will take the project name as a parameter.
+
+**Step4.** The findProjectIndex method will call `getTitle` with the project name as a parameter.
+
+**Step5.** the `findProjectIndex` method is called on every Project in the ProjectList until it finds the correct one. If it doesn't, the user is given an according error message.
+
+**Step6.** The index of the project is returned, and `ProjectList` will self-call the remove(index) method, removing the project from the planner.
+
+
+
+
 #### Todo feature
 ![image info](./UmlDiagrams/Todo.png)  
 
