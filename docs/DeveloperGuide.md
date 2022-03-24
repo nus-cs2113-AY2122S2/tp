@@ -78,6 +78,8 @@ As such, the `Manager` class has two other abstract methods, which extended mana
   - This is a convenience method for doing any pre- / post-processing on any data you may want to save. Of course, you should
   also call the `save(Object o)` method finally.
 
+Note that loading and saving is only done once. Loading is done once upon programme start-up, and saving is done
+when the user exits the menu gracefully.
 
 Here is the typical design of a manager:
 
