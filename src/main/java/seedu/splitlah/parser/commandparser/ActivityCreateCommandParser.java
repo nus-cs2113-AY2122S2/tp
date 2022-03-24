@@ -13,7 +13,7 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
 
     public static final String COMMAND_TEXT = "activity /create";
 
-    private static final String COMMAND_FORMAT = "Syntax:\n\t";
+    public static final String COMMAND_FORMAT = "Syntax:\n\t";
 
     public static final String COMMAND_FORMAT_FIRST =
             "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
