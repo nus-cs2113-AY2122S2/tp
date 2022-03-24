@@ -11,7 +11,8 @@ public class Message {
             + "2) 1 hour\n"
             + "3) 1.5 hours\n\n"
             + "For testing purposes, you may start a 30s timer\nwith mode number 0.\n"
-            + "Otherwise, feel free to choose your own timer with\n'start /custom <timer_duration>'.";
+            + "Feel free to choose your own timer with\n'start /custom <timer_duration>'.\n"
+            + "Otherwise, you can start a stopwatch with 'start stopwatch'.";
     public static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon! :)";
     public static final String GOODBYE_MESSAGE_STUDY = "Leaving study session...\n"
             + "Welcome back to the main session! How can I help you?";
