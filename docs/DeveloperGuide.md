@@ -83,7 +83,7 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 **Step 5.** If the index of the project was found, call that specific Project’s `setDeadline()` method and update the deadline.
 
-![image info](./UmlDiagrams/AddDeadline.png)
+![image info](./UmlDiagrams/AddDeadline.jpg)
 
 ### Proposed Features
 
