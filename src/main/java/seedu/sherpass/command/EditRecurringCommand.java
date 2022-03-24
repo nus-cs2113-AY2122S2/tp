@@ -3,17 +3,11 @@ package seedu.sherpass.command;
 import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.util.CommonLogic;
+import seedu.sherpass.task.TaskLogic;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
 import java.time.LocalDateTime;
-
-import static seedu.sherpass.constant.Message.EMPTY_STRING;
-import static seedu.sherpass.constant.Message.ERROR_EMPTY_DESCRIPTION_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_EMPTY_TASKLIST_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
 
 public class EditRecurringCommand extends Command {
     private int index;
@@ -41,22 +35,10 @@ public class EditRecurringCommand extends Command {
         this.doOnEndDateTime = doOnEndDateTime;
     }
 
-    private String isValidArgument(TaskList taskList) {
-        if (taskDescription.isBlank()) {
-            return ERROR_EMPTY_DESCRIPTION_MESSAGE;
-        } else if (doOnStartDateTime != null && doOnStartDateTime.isAfter(doOnEndDateTime)) {
-            return ERROR_START_AFTER_END_TIME_MESSAGE;
-        } else if (taskList.getTasks().size() == 0) {
-            return ERROR_EMPTY_TASKLIST_MESSAGE;
-        } else if (!taskList.isTaskExist(index)) {
-            return ERROR_INVALID_INDEX_MESSAGE;
-        }
-        return EMPTY_STRING;
-    }
-
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        String error = isValidArgument(taskList);
+        String error = TaskLogic.checkValidEditArgument(taskDescription, doOnStartDateTime, doOnEndDateTime,
+                taskList, index);
         if (!error.isBlank()) {
             ui.showToUser(error);
             return;
@@ -74,8 +56,8 @@ public class EditRecurringCommand extends Command {
                     t.setTaskDescription(taskDescription);
                 }
                 if (doOnStartDateTime != null) {
-                    t.setDoOnStartDateTime(CommonLogic.incrementDate(doOnStartDateTime, repeatFrequency));
-                    t.setDoOnEndDateTime(CommonLogic.incrementDate(doOnEndDateTime, repeatFrequency));
+                    t.setDoOnStartDateTime(TaskLogic.incrementDate(doOnStartDateTime, repeatFrequency));
+                    t.setDoOnEndDateTime(TaskLogic.incrementDate(doOnEndDateTime, repeatFrequency));
                 }
                 t.setIdentifier(newIdentifier);
                 editedTaskString.append(t);
