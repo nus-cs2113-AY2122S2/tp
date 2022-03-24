@@ -649,6 +649,18 @@ public class UI {
     }
 
     /**
+     * Prints help message for 'search /all' command.
+     */
+    public void printSearchAllHelp() {
+        System.out.println("\t To search for everything related to the keyword, please enter: ");
+        printColorText(TextColor.COLOR_YELLOW, "\t search /all <keyword>");
+        System.out.println("\t Example: ");
+        printColorText(TextColor.COLOR_YELLOW, "\t search /all a");
+        System.out.println("\t This will show the exercise(s), workout(s) and plan(s) containing\n\t keyword "
+                + getColorText(TextColor.COLOR_YELLOW, "a") + " if exist.");
+    }
+
+    /**
      * Prints all exercise related help messages.
      */
     public void printExerciseHelp() {
@@ -699,5 +711,7 @@ public class UI {
         printSearchWorkoutHelp();
         printLine();
         printSearchPlanHelp();
+        printLine();
+        printSearchAllHelp();
     }
 }
