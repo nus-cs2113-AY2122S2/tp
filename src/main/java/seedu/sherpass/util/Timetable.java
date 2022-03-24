@@ -26,9 +26,10 @@ import static seedu.sherpass.constant.TimetableConstant.TIMETABLE_SIZE_OFFSET;
 import static seedu.sherpass.constant.TimetableConstant.WHITE_SPACE_FRONT_OFFSET_LENGTH;
 
 public class Timetable {
-    private LocalDate localDate;
-    private ArrayList<Task> tasks;
-    private Ui ui;
+    private static Timetable timetable;
+    private static LocalDate localDate;
+    private static ArrayList<Task> tasks;
+    private static Ui ui;
 
     private Timetable(LocalDate localDate, ArrayList<Task> tasks, Ui ui) {
         this.tasks = tasks;
@@ -137,7 +138,18 @@ public class Timetable {
     }
 
     public static Timetable prepareTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui ui) {
-        return new Timetable(dateInput, filteredTasks, ui);
+        if (timetable == null) {
+            timetable = new Timetable(dateInput, filteredTasks, ui);
+        } else {
+            timetable.setTimetable(dateInput, filteredTasks, ui);
+        }
+        return timetable;
+    }
+
+    private void setTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui userInterface) {
+        localDate = dateInput;
+        tasks = filteredTasks;
+        ui = userInterface;
     }
 
     private void printSchedule() {
@@ -210,7 +222,7 @@ public class Timetable {
         for (int i = 0; i < DAYS_IN_A_WEEK; i++) {
             showScheduleByDay(currentDate, taskList, ui);
             assert (currentDate != null);
-            currentDate.plus(1, ChronoUnit.DAYS);
+            currentDate = currentDate.plus(1, ChronoUnit.DAYS);
         }
     }
 
