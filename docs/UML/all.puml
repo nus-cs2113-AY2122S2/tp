@@ -65,4 +65,54 @@ StaffManager <--* StaffController
 Controller <|--- StaffController
 Controller ..> InputParser
 StaffManager --> "0..*" Staff : staffs
+
+
+class Dish {
+    -name: String
+    -price: double
+    +Dish(String, double)
+    +getName(): String
+    +setName(): void
+    +getPrice(): double
+    +setPrice(double): void
+    +toString(): String
+    -isValidName(String): boolean
+    -toTitleCase(String): String
+}
+
+class DishManager {
+    +DishManager()
+    +addDish(Dish): void
+    +deleteDish(int): void
+    +printDishes(): void
+    +setName(int, String): void
+    +setPrice(int, double): void
+    +getNumOfDishes(): int
+    -throwIfIndexNotValid(int): void
+}
+Manager <|-- DishManager
+
+class DishController {
+    -{static}CHOICES: String[]
+    -dishManager: DishManager
+    #loadData(): void
+    +saveData(): void
+    +DishController()
+    -addDish(): void
+    -changeName(): void
+    -changePrice(): void
+    -deleteDish(): void
+    -listDishes(): void
+    #optionSwicher(int): boolean
+    +takeControl(): void
+}
+Controller <|-- DishController
+
+
+Dish "0..*\ndishes" <-- DishManager: manages <
+
+DishManager "1\ndishManager" <--* DishController
+
+DishController .-> Dish
+
 @enduml
