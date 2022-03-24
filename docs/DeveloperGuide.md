@@ -29,7 +29,7 @@ The user starts by typing an add command. The example used in the diagram above 
 
 #### Initialisation
 
-The following sequence diagram shows how Storage is initialised when the program first launches.
+The following sequence diagram shows how `Storage` is initialised when the program first launches.
 
 ![StorageInitialisationSequenceDiagram](img/StorageInitialisationSequenceDiagram.png)
 
@@ -39,6 +39,8 @@ The following sequence diagram shows how Storage is initialised when the program
 4. The new `Storage` object will have its `dataPath` attribute set to the `Path` object earlier, and its `filePath` attribute set to the `filePath` passed into the constructor.
 
 #### Loading data
+
+The following sequence diagram shows how the data file is loaded. Typically, this is only run once when the program first launches.
 
 ![StorageLoadSequenceDiagram](img/StorageLoadSequenceDiagram.png)
 
@@ -50,6 +52,8 @@ The following sequence diagram shows how Storage is initialised when the program
 6. `storage` returns `ArrayList<Item>` to `InvMgr`. This will be used to create the `ItemList`, but will not be shown here.
 
 #### Saving data
+
+The following sequence diagram shows how the data file is saved. Typically, this is done after each Command is run.
 
 ![StorageSaveSequenceDiagram](img/StorageSaveSequenceDiagram.png)
 
