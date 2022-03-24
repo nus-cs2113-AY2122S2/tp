@@ -2,6 +2,7 @@ package seedu.sherpass.task;
 
 import java.time.LocalDate;
 
+import static seedu.sherpass.constant.DateAndTimeFormat.dateOnlyFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.outputFormat;
 
 public class Task {
@@ -132,12 +133,14 @@ public class Task {
      * @return Returns if doOnDate contains a parsed date.
      *         Otherwise, returns a blank string (no whitespace).
      */
-    public String getDoOnDateString() {
+    public String getDoOnDateString(boolean isDateOnly) {
         if (doOnDate != null) {
-            return doOnDate.format(outputFormat);
+            return ((isDateOnly) ? doOnDate.format(dateOnlyFormat) : doOnDate.format(outputFormat));
         }
         return "";
     }
+
+
 
     /**
      * Returns a string version of the task content.
@@ -153,7 +156,7 @@ public class Task {
             result += " (by: " + getByDateString() + ")";
         }
         if (this.doOnDate != null) {
-            result += " (reminder on: " + getDoOnDateString() + ")";
+            result += " (reminder on: " + getDoOnDateString(false) + ")";
         }
         return result;
     }
