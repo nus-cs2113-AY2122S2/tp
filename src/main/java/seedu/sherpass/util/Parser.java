@@ -164,16 +164,8 @@ public class Parser {
         }
         int afterParameter = argument.indexOf(parameter) + parameter.length() + 1;
         String rightSide = argument.substring(afterParameter);
-        String[] splitArguments = rightSide.split(" ");
-        StringBuilder result = new StringBuilder();
-        for (String s : splitArguments) {
-            if (s.charAt(0) == '/') {
-                break;
-            }
-            result.append(s);
-            result.append(" ");
-        }
-        return result.toString().trim();
+        String[] splitArguments = rightSide.split(" ", 2);
+        return splitArguments[0];
     }
 
     public static String parseDescription(String fullArgument) {
