@@ -20,6 +20,10 @@ optimized for use via a Command Line Interface (CLI).
   * [View Schedule: `schedule /list`](#view-schedule-schedule-list)
   * [Clear Schedule For A Day: `schedule /clear`](#clear-schedule-for-a-day-schedule-clear)
   * [Clear Schedule For The Week: `schedule /clearall`](#clear-schedule-for-the-week-schedule-clearall)
+  * [Search For Exercise: `search /exercise`](#search-for-exercise-search-exercise)
+  * [Search For Workout: `search /workout`](#search-for-workout-search-workout)
+  * [Search For Plan: `search /plan`](#search-for-plan-search-plan)
+  * [Search For All: `search /all`](#search-for-all-search-all)
   * [View Help: `help`](#view-help-help)
 * [WerkIt!'s Local Storage Information](#werkits-local-storage-information)
 * [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
@@ -502,6 +506,216 @@ To view the changes enter command ```schedule /list```.
 ----------------------------------------------------------------------
 ```
 ---
+
+### Search For Exercise: `search /exercise`
+Find all exercises containing the specified keywords.
+
+Format: `search /exercise <exercise keyword>`
+
+**Example**
+
+Assume, the exercise list contains the following exercises:
+```
+----------------------------------------------------------------------
+1. push up
+2. bicep curl
+3. pull up
+4. squat
+5. lunge
+6. hip thrust
+7. sit up
+8. crunch
+9. russian twist
+10. running
+11. swimming
+12. jumping jack
+13. burpee
+----------------------------------------------------------------------
+```
+To search for exercises containing keywords "up", enter the following command:
+```
+> search /exercise up
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+The exercise(s) containing keywords [up] is(are) listed below.
+----------------------------------------------------------------------
+1. push up
+2. pull up
+3. sit up
+----------------------------------------------------------------------
+```
+
+---
+
+### Search For Workout: `search /workout`
+Find all workouts containing the specified keywords or number of reps.
+
+Format: `search /workout <exercise keyword or number of reps>`
+
+**Example**
+
+Assume, the workout list contains the following workouts:
+```
+----------------------------------------------------------------------
+1. pull up (10 reps)
+2. push up (1455 reps)
+3. crunch (10 reps)
+4. squat (25 reps)
+----------------------------------------------------------------------
+```
+To search for workouts containing keywords "a", enter the following command:
+```
+> search /workout a
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+The workout(s) containing keywords [a] is(are) listed below.
+----------------------------------------------------------------------
+1. squat (25 reps)
+----------------------------------------------------------------------
+```
+
+To search for workouts with number of reps = 10, enter the following command:
+```
+> search /workout 10
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+The workout(s) with reps = 10 is(are) listed below.
+----------------------------------------------------------------------
+1. pull up (10 reps)
+2. crunch (10 reps)
+----------------------------------------------------------------------
+
+```
+---
+
+### Search For Plan: `search /plan`
+Find all plans containing the specified keywords.
+
+Format: `search /plan <plan keyword>`
+
+**Example**
+
+Assume, the plan list contains the following plans:
+```
+----------------------------------------------------------------------
+Here are all your plan(s).
+To view each plan in detail, enter
+'plan /details <plan number in list>'.
+
+1. grow my muscles
+2. arms
+3. legs
+----------------------------------------------------------------------
+```
+To search for plans containing keywords "e", enter the following command:
+```
+> search /plan e
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+The plan(s) containing keywords [e] is(are) listed below.
+----------------------------------------------------------------------
+1. grow my muscles
+2. legs
+----------------------------------------------------------------------
+```
+
+---
+
+### Search For All: `search /all`
+Find all exercises, workouts and plans containing the specified keywords.
+
+Format: `search /all <keyword>`
+
+**Example**
+
+Assume, the exercise list contains the following exercises:
+```
+----------------------------------------------------------------------
+1. push up
+2. bicep curl
+3. pull up
+4. squat
+5. lunge
+6. hip thrust
+7. sit up
+8. crunch
+9. russian twist
+10. running
+11. swimming
+12. jumping jack
+13. burpee
+----------------------------------------------------------------------
+```
+and the workout list contains the following workouts:
+```
+----------------------------------------------------------------------
+1. pull up (10 reps)
+2. push up (1455 reps)
+3. crunch (10 reps)
+4. squat (25 reps)
+----------------------------------------------------------------------
+```
+and the plan list contains the following plans:
+```
+----------------------------------------------------------------------
+1. grow my muscles
+2. arms
+3. legs
+----------------------------------------------------------------------
+```
+To search for everything containing keywords "a", enter the following
+command:
+```
+> search /all a
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+The exercise(s) containing keywords [a] is(are) listed below.
+----------------------------------------------------------------------
+1. squat
+2. russian twist
+3. jumping jack
+----------------------------------------------------------------------
+The workout(s) containing keywords [a] is(are) listed below.
+----------------------------------------------------------------------
+1. squat (25 reps)
+----------------------------------------------------------------------
+The plan(s) containing keywords [a] is(are) listed below.
+----------------------------------------------------------------------
+1. arms
+----------------------------------------------------------------------
+```
+
+To search for everything containing keywords 10, enter the following
+command:
+```
+> search /all 10
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+Sorry, no matching exercise found.
+----------------------------------------------------------------------
+The workout(s) with reps = 10 is(are) listed below.
+----------------------------------------------------------------------
+1. pull up (10 reps)
+2. crunch (10 reps)
+----------------------------------------------------------------------
+Sorry, no matching plan found.
+----------------------------------------------------------------------
+```
+
+---
+
 ### View Help: `help`
 Lists all the commands with examples.
 
@@ -514,31 +728,114 @@ Format: `help`
 **Expected Outcome**
 ```
 ----------------------------------------------------------------------
-	 To view all workouts, please enter:
-	 workout /list
-	 This will print all the existing workouts.
-----------------------------------------------------------------------
 	 To view all exercises available, please enter:
 	 exercise /list
 	 This will print all the exercises available.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+	 To view all workouts, please enter:
+	 workout /list
+	 This will print all the existing workouts.
 ----------------------------------------------------------------------
 	 To add a workout, please enter: 
 	 workout /new <exercise name> /reps <no. of repetitions>
 	 Example: 
 	 workout /new push up /reps 10
-	 This will add a workout with 10 reps of push up.
+	 This will add a workout with 10 reps of push up
 ----------------------------------------------------------------------
 	 To delete a workout, please enter: 
-	 workout /delete <index>
+	 workout /delete <index of workout>
 	 Example: 
 	 workout /delete 1
 	 This will delete the workout with index 1 if exists.
 ----------------------------------------------------------------------
 	 To update a workout, please enter: 
-	 workout /update <index> <quantity>
+	 workout /update <index of workout> <quantity>
 	 Example: 
 	 workout /update 1 15
 	 This will update the workout with index 1 to 15 reps if exists.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+	 To view all plans, please enter:
+	 plan /list
+	 This will print all the existing plans.
+----------------------------------------------------------------------
+	 To view each plan in detail, please enter:
+	 plan /details <plan index in list>
+	 This will print all the workouts in the plan of given index.
+----------------------------------------------------------------------
+	 To add a plan, please enter: 
+	 plan /new <plan name> /workouts <workout index(s) separated by ','>
+	 Example: 
+	 The workout list upon entering workout /list, contains the
+ 	 following workouts:
+	 1. push up (10 reps)
+	 2. sit up (10 reps)
+	 3. pull up (10 reps)
+	 To create a new plan, enter the following command:
+	 plan /new Grow My Muscles /workouts 1, 2
+	 A new plan named Grow My Muscles with workout index 1 and 2
+	 will be created and added to the application's list of plans.
+----------------------------------------------------------------------
+	 To delete a plan, please enter: 
+	 plan /delete <index of plan>
+	 Example: 
+	 plan /delete 1
+	 This will delete the plan with index 1 if exists.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+	 To view the schedule, please enter:
+	 schedule /list
+	 This will print the schedule.
+----------------------------------------------------------------------
+	 To update schedule, please enter: 
+	 schedule /update <day index [1-7]> <plan index in the list>
+	 Example: 
+	 The plan list upon entering plan /list, contains the
+ 	 following plans:
+	 1. arms
+	 2. stronger arms
+	 3. Grow My Muscles
+	 To update the plan schedule for Monday with plan 1, enter the
+ 	 following command:
+	 schedule /update 1 1
+	 This will update the schedule of Monday with a plan named arms.
+----------------------------------------------------------------------
+	 To clear schedule, please enter: 
+	 schedule /clear <day index [1-7]>
+	 This will clear the schedule for the given day.
+	 schedule /clearall
+	 This will clear the schedule for everyday.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+	 To search for exercise(s), please enter: 
+	 search /exercise <exercise keyword>
+	 Example: 
+	 search /exercise up
+	 This will show the exercise(s) containing keyword up if exist.
+----------------------------------------------------------------------
+	 To search for workout(s), please enter: 
+	 search /workout <exercise keyword or number of reps>
+	 Example: 
+	 search /workout up
+	 This will show the workout(s) containing exercise with keyword
+	 up if exist.
+	 search /workout 15
+	 This will show the workout(s) with reps = 15 if exist.
+----------------------------------------------------------------------
+	 To search for plan(s), please enter: 
+	 search /plan <plan keyword>
+	 Example: 
+	 search /plan grow
+	 This will show the plan(s) containing keyword grow if exist.
+----------------------------------------------------------------------
+	 To search for everything related to the keyword, please enter: 
+	 search /all <keyword>
+	 Example: 
+	 search /all a
+	 This will show the exercise(s), workout(s) and plan(s) containing
+	 keyword a if exist.
+----------------------------------------------------------------------
 ----------------------------------------------------------------------
 	 To exit werkIt, please enter: 
 	 exit
