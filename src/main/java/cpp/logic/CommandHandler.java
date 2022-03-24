@@ -42,6 +42,7 @@ public class CommandHandler {
             projectName = getProjectName(commands);
             projectList.deleteProject(projectName);
             break;
+        case "listprojects":
         case "listproject": //view all project(s) by name
             listProjects(projectList);
             break;
