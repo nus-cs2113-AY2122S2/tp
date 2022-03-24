@@ -12,12 +12,12 @@ create regex
 ui -> regex  ++: Regex(regex, input)
 ref over regex : regex matching
 ui -> regex ++ : regex.getGroupValues()
-regex --> ui -- : HashMap of results
+regex --> ui -- : :HashMap
 deactivate regex
 ui -> command ++ : addGood(id, name, quantity, description, userGoods)
 create good
 command -> good ++ : Good(id, name, quantity, description)
-good --> command -- : new Good
+good --> command -- : good:Good
 command --> ui -- : add good to userGoods
 ui --> user : " `quantity` of `name` added "
 

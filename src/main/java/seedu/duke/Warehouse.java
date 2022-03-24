@@ -1,13 +1,15 @@
 package seedu.duke;
 
+import util.exceptions.ItemDoesNotExistException;
 import util.exceptions.LargeQuantityException;
 import util.exceptions.NullException;
+import util.exceptions.WrongCommandException;
 
 import java.util.ArrayList;
 
 public class Warehouse {
     private int capacity;
-    private static ArrayList<Order> orderLists = new ArrayList<Order>();
+    private static ArrayList<Order> orderLists = new ArrayList<>();
 
     public Warehouse(int capacity) {
         this.capacity = capacity;
@@ -18,6 +20,17 @@ public class Warehouse {
             Integer idToBeViewed = Integer.parseInt(orderId);
             for (Order order : orderLists) {
                 if (idToBeViewed.equals(order.getId())) {
+                    System.out.println("Viewing order with id " + order.getId());
+                    System.out.println("Receiver: " + order.getReceiver());
+                    System.out.println("Shipping address:" + order.getShippingAddress());
+                    System.out.println("Items in the order:");
+
+                    ArrayList<Good> userGoods = order.getGoods();
+                    int i = 1;
+                    for (Good good : userGoods) {
+                        System.out.println("\t" + i + ". " + good);
+                        i++;
+                    }
                     return;
                 }
             }
@@ -53,10 +66,10 @@ public class Warehouse {
             System.out.println("There are currently no orders.");
             return;
         }
-        System.out.println("List of inventory items:");
+        System.out.println("List of orders:");
         int counter = 0;
         for (Order order : orderLists) {
-            System.out.println((counter + 1) + ". " + order);
+            System.out.println("\t" + (counter + 1) + ". " + order);
             counter++;
         }
     }
@@ -68,12 +81,12 @@ public class Warehouse {
             System.out.println("There are no inventory in the warehouse.");
             return;
         }
-        System.out.println("List of inventory items:");
+        System.out.println("List of goods:");
         System.out.println("id | name");
         int counter = 0;
         for (Order order: orderLists) {
             for (Good good : order.getGoods()) {
-                System.out.println((counter + 1) + ". " + good);
+                System.out.println("\t" + (counter + 1) + ". " + good);
                 counter++;
             }
         }
@@ -83,7 +96,6 @@ public class Warehouse {
         if (orderLists == null) {
             throw new NullException("userGoods");
         }
-        assert(orderLists != null);
         int total = 0;
         for (Order order: orderLists) {
             for (Good good: order.getGoods()) {
@@ -93,20 +105,110 @@ public class Warehouse {
         return total;
     }
 
-    public void setCapacity(int capacity) {
+    public int totalOrder() {
+        return orderLists.size();
+    }
+
+    public boolean setCapacity(String input) {
         try {
+            int capacity = Integer.parseInt(input);
+            assert capacity > 0;
+
             if (capacity < totalGoods()) {
                 throw new LargeQuantityException();
             }
             this.capacity = capacity;
             System.out.printf("Current Warehouse capacity is %d\n", capacity);
+            return true;
         } catch (NullException nullException) {
-            orderLists = new ArrayList<Order>();
-            this.capacity = capacity;
-            System.out.printf("Current Warehouse capacity is %d\n", capacity);
+            orderLists = new ArrayList<>();
+            return setCapacity(input);
         } catch (LargeQuantityException largeQuantityException) {
             System.out.println("Current total goods in the warehouse is more"
                     + " than input capacity");
+        } catch (NumberFormatException numberFormatException) {
+            System.out.println("Please set the Warehouse capacity again.");
+        }
+        return false;
+    }
+
+    public Order findOrder(int orderId) throws ItemDoesNotExistException {
+        for (Order order : orderLists) {
+            if (order.getId() == orderId) {
+                return order;
+            }
+        }
+
+        throw new ItemDoesNotExistException();
+    }
+
+    private Order findOrderContainsGood(int goodId) throws ItemDoesNotExistException {
+        for (Order order : orderLists) {
+            if (order.doesGoodExist(goodId)) {
+                return order;
+            }
+        }
+
+        throw new ItemDoesNotExistException();
+    }
+
+    public void addGoods(String orderId, String goodId, String name, String qty, String desc)
+            throws WrongCommandException {
+        if (orderId.isBlank()) {
+            throw new WrongCommandException("add", true);
+        }
+
+        try {
+            Order order = findOrder(Integer.parseInt(orderId));
+            order.addGood(goodId, name, qty, desc);
+        } catch (NumberFormatException e1) {
+            throw new WrongCommandException("add", true);
+        } catch (ItemDoesNotExistException e2) {
+            System.out.println("The order you are trying to add the goods to is not on the current list. "
+                    + "Please try adding goods to an existing order or creating a new one.");
+        }
+    }
+
+    public void removeGoods(String goodId, String qty) throws WrongCommandException {
+        try {
+            Order order = findOrderContainsGood(Integer.parseInt(goodId));
+            order.removeGood(goodId, qty);
+        } catch (NumberFormatException e1) {
+            throw new WrongCommandException("remove", true);
+        } catch (ItemDoesNotExistException e2) {
+            System.out.println("The order you are trying to remove the goods from is not on the current list. "
+                    + "Please try removing goods from an existing order.");
+        }
+    }
+
+    public void addOrder(String id, String receiver, String shippingAddress) throws WrongCommandException {
+        if (id.isBlank() || receiver.isBlank() || shippingAddress.isBlank()) {
+            throw new WrongCommandException("add", true);
+        }
+
+        try {
+            Order order = new Order(Integer.parseInt(id), receiver, shippingAddress);
+            orderLists.add(order);
+            System.out.println("Order " + id + " is added");
+        } catch (NumberFormatException e) {
+            throw new WrongCommandException("add", true);
+        }
+    }
+
+    public void removeOrder(String id) throws WrongCommandException {
+        if (id.isBlank()) {
+            throw new WrongCommandException("remove", true);
+        }
+
+        try {
+            int orderId = Integer.parseInt(id);
+            orderLists.remove(findOrder(orderId));
+            System.out.println("Order " + id + " has been removed.");
+        } catch (ItemDoesNotExistException e1) {
+            System.out.println("The order you are trying to remove are not on the current list. "
+                    + "Please try another id.");
+        } catch (NumberFormatException e2) {
+            throw new WrongCommandException("remove", true);
         }
     }
 }
