@@ -20,6 +20,18 @@ Below is an example showing the usage of `AddHousekeeperCommand`.
 3. The execute method in `AddHousekeeperCommand` will be performed. It first checks with the housekeeperList if the name of the housekeeper to be added has been recorded into the list. If it has not been recorded, housekeeperList would then add this new user into the records. Ui will be called to print a confirmation to show that the housekeeper has been entered into the list.
 5. If housekeeper exist, the housekeeper profile would not be added into the list.
 
+#### Add Item Command
+The objective of the AddItemCommand is to allow the user to add a new item to the list of items found within the inventory. It takes in the user input and spilt it up into two parts which are the name of the item to be added and its pax. These two information would then be used to create an Item Object and the Item Object would be saved into a list of items.
+
+Below is the partial class diagram detailing the design of the Add Item Command Class as well as its interactions with the various other classes required to execute the Add Item Command.
+![alt text](team/SiewYangZhi_addItemCommand/AddItemCommandClassDiagram.png)
+- Step 1: When the user enters the command `Add Item Toilet Roll / 15`, the `Duke` class would pass the user input to the `Command Parser` Class.
+- Step 2: The `Command Parser` Class would run the `parse` method and create an `AddItemCommand` object containing and `Item` object which is made up of the name of the item to add as well as its pax which are found within the user input.
+- Step 3: The `AddItemCommand` class would be passed back to the `Duke` class.
+- Step 4: The `execute` method of the `AddItemCommand` class would be run and the the `ItemList` Object would be called and the `AddItemCommand` object would pass its Item object to the `ItemList` Object's `addItemToList` method.
+- Step 5: The addItemToList method would then add the `Item` object to its ArrayList of `Items` called listOfItems.
+- Step 6: The `AddItemCommand` then call the `UI` and execute the `UI`'s `printAddItemAcknowledgementMessage` method which would print an acknowledgement message to the user informing him that the item has been added into the item list.
+
 ## Implementation
 
 #### Assign a housekeeper to a room
@@ -146,6 +158,21 @@ Step 5: The execute method will derive the housekeeper name, `susan` which would
 
 ![class](team/falicia_addHousekeeperCommand/sequenceAddHousekeeperCommandv2.jpg)
 
+#### Add Item Command
+The add item to a list of items in the invetory mechanism is facilated by 'AddItemCommand'. It extends 'Command' and implements the following operations:
+- `AddItemCommand#extractItemName` - Extracts the name of the item to add from the user input.
+- `AddItemCommand#extractPax` - Extracts the pax of the item to add from the user input.
+- `AddItemCommand#execute` - Adds the item into the list of items.
+- `AddItemCommand#getItem` - Extracts the item saved within the AddItemCommand object.
+
+![alt text](team/SiewYangZhi_addItemCommand/AddItemCommandSequenceDiagram.png)
+The sequence diagram above showcases an example usage scenario of the Add Item Command and how the Add Item mechanisms behaves at each step:
+- Step 1: The user executes the `Add Item Toilet Roll / 15` command to add a new item which is `Toilet Roll` that has a pax of `15` into the inventory. `CommandParser#parse` is called and the user input `Add Item Toilet Roll /15` is passed to it.
+- Step 2: `CommandParser#parse` would identify the user input as an Add Item Command by searching for the keyword `Add Item` within the user input. It would then remove `Add Item` from the user input causing the user input to be just `Toilet Roll / 15`. `CommandParser#parse` would then call the constructor of `AddItemCommand` and pass it `Toilet Roll / 15`.
+- Step 3: The constructor of `AddItemCommand` would call `AddItemCommand#extractItemName` and `AddItemCommand#extractPax` respectively to extract out `Toilet Roll` and `15`. The constructor of `AddItemCommand` would then call the constructor of `Item` which would create an `Item` object containing `Toilet Roll` and `15`. The `Item` object would then be returned to the constructor of `AddItemCommand`.  An `AddItemCommand` object with the `Item` object would be created and passed back to `CommandParser#parse`.
+- Step 4: `CommandParser#parse` would then call `AddItemCommand#execute` which would call `AddItemCommand#getItem` to extract out the item currently saved within the `AddItemCommand` object.
+- Step 5: `AddItemCommand#execute` would then call `ItemList#addItemToList` and pass it the item object.This results in the `Item` object being added into the `ItemList`.
+- Step 6: `AddItemCommand#execute` would then call `Ui#printAddItemAcknowledgementMessage` which would print out an acknowledgement message informing the user that the item has been succesfully added into the item list.
 ### check room information by level
 
 
@@ -196,3 +223,4 @@ Step 5: The `excute` method will then call `printRoom(int level, RoomList roomLi
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
