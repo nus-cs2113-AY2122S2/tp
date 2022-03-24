@@ -23,9 +23,11 @@ public class Parser {
     public static final String DELIMITER_INCOME = "/i";
     public static final String DELIMITER_EXPENDITURE = "/e";
     public static final String DELIMITER_RECORD_INDEX = "/r";
-    public static final String DELIMITER_BACK = "/[ruined]";
+    public static final String DELIMITER_BACK = "/[cringedup]";
     // public static final String DELIMITER_MONEY = ".";
+    public static final String DELIMITER_RECURRING_STATUS = "/p";
     public static final String DELIMITER_CATEGORY_INDEX = "/c";
+    public static final String DELIMITER_GROUP_INDEX = "/g";
     public static final String EMPTY_STRING = "";
 
     public static final int INDEX_KEYWORD = 0;
