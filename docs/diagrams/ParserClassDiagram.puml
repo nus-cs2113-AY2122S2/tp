@@ -1,0 +1,27 @@
+@startuml
+
+!include style.puml
+skinparam arrowColor LOGIC_COLOR_T3
+
+Package "Parser" as P {
+    Class Parser LOGIC_COLOR_T2
+}
+
+package Commands {
+Class HiddenModel #TRANSPARENT
+}
+
+package Family {
+Class HiddenModel2 #TRANSPARENT
+}
+
+package MoneyList {
+Class HiddenModel3 #TRANSPARENT
+}
+
+Commands .U.> Parser : parses >
+
+Parser -.> Family
+Parser -.> MoneyList
+
+@enduml
