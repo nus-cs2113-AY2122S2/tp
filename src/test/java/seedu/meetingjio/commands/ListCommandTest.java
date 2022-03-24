@@ -21,8 +21,8 @@ public class ListCommandTest {
     private Command addCommandDifferentUser;
 
     /**
-     * Set up a Master Timetable object and multiple Add Commands
-     * Prepare the expected output when list command is used after each Add Command
+     * Set up a Master Timetable object and multiple Add Commands.
+     * Prepare the expected output when list command is used after each Add Command.
      */
     @BeforeEach
     public void setUp() {
