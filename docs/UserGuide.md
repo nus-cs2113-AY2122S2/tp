@@ -90,7 +90,7 @@ Edits an object's parameter as indicated by the command arguments.<br>
 - **Edit task: `edit task`**
 
   The task to be edited is specified using its task number and associated module code; if no module code is specified, the task is drawn from the General Tasks list. The task name, description, and estimated working time are editable, but the task cannot be associated with a different module.<br><br>
-  Format: `edit task TASK_INDEX [-m MODULE_CODE] (-n "TASK_NAME" | -d "TASK_DESCRIPTION" | -t "ESTIMATED_WORKING_TIME")`
+  Format: `edit task TASK_NUMBER [-m MODULE_CODE] (-n "TASK_NAME" | -d "TASK_DESCRIPTION" | -t "ESTIMATED_WORKING_TIME")`
   <br><br>
   Example: `edit task 1 -m CS2113T -n "CS2113T Tutorial 2"` <br><br>
   > 📔 <span style="color:#00bb00">**NOTE:**</span>
@@ -166,15 +166,15 @@ Format: `save`
 
 ## Command Summary
 
-| Command | Format                                                                                                                                                                                  |
-|:-------:|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|  help   | `help [COMMAND_WORD]`                                                                                                                                                                   |
-|   add   | `add mod MODULE_CODE MODULAR_CREDITS [-d "MODULE_DESCRIPTION"]`<br>`add task "TASK_NAME" [-m MODULE_CODE] [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”]`                        |
-|   del   | `del mod MODULE_CODE`<br>`del task TASK_NUMBER [-m MODULE_CODE]`                                                                                                                        |
-|  edit   | <code>edit task TASK_INDEX [-m MODULE_CODE] (-n "TASK_NAME" &#124; -d "TASK_DESCRIPTION" &#124; -t "ESTIMATED_WORKING_TIME")</code> <br> `edit mod MODULE_CODE -d "MODULE_DESCRIPTION"` |
-|  mark   | <code>mark (c &#124; u) TASK_NUMBER [-m MODULE_CODE]</code>                                                                                                                             |
-|   tag   | <code>tag (add &#124; del) [-m MODULE_CODE] "TAG_NAME"</code>                                                                                                                           |
-|  list   | `list ["TAG_NAME"]`                                                                                                                                                                     |
-|  grade  | `grade MODULE_CODE MODULE_GRADE`                                                                                                                                                        |
-|  reset  | `reset`                                                                                                                                                                                 |
-|  save   | `save`                                                                                                                                                                                  |
+| Command | Format                                                                                                                                                                                   |
+|:-------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  help   | `help [COMMAND_WORD]`                                                                                                                                                                    |
+|   add   | `add mod MODULE_CODE MODULAR_CREDITS [-d "MODULE_DESCRIPTION"]`<br>`add task "TASK_NAME" [-m MODULE_CODE] [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”]`                         |
+|   del   | `del mod MODULE_CODE`<br>`del task TASK_NUMBER [-m MODULE_CODE]`                                                                                                                         |
+|  edit   | <code>edit task TASK_NUMBER [-m MODULE_CODE] (-n "TASK_NAME" &#124; -d "TASK_DESCRIPTION" &#124; -t "ESTIMATED_WORKING_TIME")</code> <br> `edit mod MODULE_CODE -d "MODULE_DESCRIPTION"` |
+|  mark   | <code>mark (c &#124; u) TASK_NUMBER [-m MODULE_CODE]</code>                                                                                                                              |
+|   tag   | <code>tag (add &#124; del) [-m MODULE_CODE] "TAG_NAME"</code>                                                                                                                            |
+|  list   | `list ["TAG_NAME"]`                                                                                                                                                                      |
+|  grade  | `grade MODULE_CODE MODULE_GRADE`                                                                                                                                                         |
+|  reset  | `reset`                                                                                                                                                                                  |
+|  save   | `save`                                                                                                                                                                                   |
