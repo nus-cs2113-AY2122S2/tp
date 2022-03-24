@@ -60,7 +60,7 @@ certain tasks, feel free to start another productive session!
 
 ## Command Guide
 
-###Notes on command input format:
+### Notes on command input format:
 - Words in UPPER_CASE are the parameters to be supplied by the user.
 - Items in square brackets are optional
 - Extraneous parameters for commands that do not take in parameters (such as show, stop, exit) will be ignored
@@ -136,9 +136,11 @@ Format:
 Below are some sample outputs using `show all` and `show todo` respectively
 
 Show all tasks:
+
 ![](images/showAllTasks.JPG)
 
 Show pending tasks:
+
 ![](images/showPendingTasks.png)
 
 
