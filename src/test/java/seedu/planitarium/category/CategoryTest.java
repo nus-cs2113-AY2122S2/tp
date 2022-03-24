@@ -94,4 +94,9 @@ class CategoryTest {
         assertEquals(Category.TRANSPORT, Category.valueOf(NAME_TRANSPORT));
         assertEquals(Category.ENTERTAINMENT, Category.valueOf(NAME_ENTERTAINMENT));
     }
+
+    @Test
+    void getNumOfCategories_isExpectedNum_success() {
+        assertEquals(6, Category.getNumOfCategories());
+    }
 }
