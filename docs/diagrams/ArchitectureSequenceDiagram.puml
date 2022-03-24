@@ -19,7 +19,7 @@ activate Commands
 Commands -> Parser : parseKeyword("add /n Alice /g 2")
 
 activate Parser
-Parser --> Commands : "add":String
+Parser --> Commands
 deactivate Parser
 
 Commands --> Main : :AddPersonCommand
@@ -28,19 +28,9 @@ deactivate Commands
 Main -> Commands : execute()
 activate Commands
 
-Commands -> Parser : parseName("add /n Alice /g 2")
+Commands -> Parser : //parse various details//
 activate Parser
-Parser --> Commands : "Alice":String
-deactivate Parser
-
-Commands -> Parser : parseGroupIndex("add /n Alice /g 2")
-activate Parser
-Parser --> Commands : "2":String
-deactivate Parser
-
-Commands -> Parser : getValidGroupIndex("2")
-activate Parser
-Parser --> Commands : 2:int
+Parser --> Commands
 deactivate Parser
 
 Commands -> Family : addMyGen("Alice")
