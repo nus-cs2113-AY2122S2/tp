@@ -5,15 +5,15 @@ import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import java.util.ArrayList;
 
 public class MasterTimetable {
-    private final ArrayList<Timetable> timetables;
+    public static ArrayList<Timetable> timetables;
 
     public MasterTimetable() {
         this.timetables = new ArrayList<>();
     }
 
-    public Timetable getByName(String name) throws TimetableNotFoundException {
+    public static Timetable getByName(String name) throws TimetableNotFoundException {
         for (Timetable timetable : timetables) {
-            if (name.equals(timetable.getName())) {
+            if (name.equalsIgnoreCase(timetable.getName())) {
                 return timetable;
             }
         }
@@ -22,7 +22,7 @@ public class MasterTimetable {
 
     public void removeByName(String name) throws TimetableNotFoundException {
         for (Timetable timetable : timetables) {
-            if (name.equals(timetable.getName())) {
+            if (name.equalsIgnoreCase(timetable.getName())) {
                 timetables.remove(timetable);
             }
         }
@@ -40,4 +40,5 @@ public class MasterTimetable {
     public void add(Timetable timetable) {
         timetables.add(timetable);
     }
+
 }

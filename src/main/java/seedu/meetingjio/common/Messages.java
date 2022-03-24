@@ -27,15 +27,17 @@ public class Messages {
     public static final String MESSAGE_ADD_FORMAT = "To add a lesson: add n/[Name] l/[Lesson] "
             + "d/[Day] st/[StartTime] et/[EndTime] m/[Mode]\n";
     public static final String MESSAGE_DELETE_FORMAT = "To delete a lesson: delete [Index]\n";
-    public static final String MESSAGE_LIST_FORMAT = "To list all lessons: list\n";
+    public static final String MESSAGE_LIST_ALL_FORMAT = "To list all lessons: list all\n";
+    public static final String MESSAGE_LIST_USER_FORMAT = "To list a user's lessons: list[user]\n";
     public static final String MESSAGE_CLEAR_FORMAT = "To clear all entries: clear\n";
     public static final String MESSAGE_EXIT_FORMAT = "To exit the application: exit\n";
     public static final String MESSAGE_HELP = "Here is the list of commands available:\n"
             + MESSAGE_DIVIDER + "\n"
             + "1. " + MESSAGE_ADD_FORMAT
             + "2. " + MESSAGE_DELETE_FORMAT
-            + "3. " + MESSAGE_LIST_FORMAT
-            + "4. " + MESSAGE_CLEAR_FORMAT
-            + "5. " + MESSAGE_EXIT_FORMAT
+            + "3. " + MESSAGE_LIST_ALL_FORMAT
+            + "4. " + MESSAGE_LIST_USER_FORMAT
+            + "5. " + MESSAGE_CLEAR_FORMAT
+            + "6. " + MESSAGE_EXIT_FORMAT
             + MESSAGE_DIVIDER;
 }

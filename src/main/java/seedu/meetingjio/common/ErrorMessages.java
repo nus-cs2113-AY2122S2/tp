@@ -44,4 +44,7 @@ public class ErrorMessages {
     public static final String ERROR_INVALID_COMMAND = "Hi please input a valid command.";
     public static final String ERROR_NON_EMPTY_LIST = "Failed to clear whole list";
     public static final String ERROR_DELETE_COMMAND_FAILED = "Failed to delete element";
+    public static final String ERROR_INVALID_USER = "User does not exist";
+    public static final String ERROR_UNSPECIFIED_LIST = "Please specify which timetable to print";
+    public static final String ERROR_EMPTY_MASTER_TIMETABLE = "The Master Timetable has no populated timetables!";
 }
