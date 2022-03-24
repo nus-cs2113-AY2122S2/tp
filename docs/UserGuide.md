@@ -348,7 +348,7 @@ Format: `group /delete /gid [GROUP_ID]`
 >- A group with a unique identifier of `[GROUP_ID]` has to exist before it can be removed.
 
 > **⚠️Warning:**
-> - This action is irreversible, once the command has been entered, the session would be immediately deleted.
+> - This action is irreversible, once the command has been entered, the group would be immediately deleted.
 
 Example of usage:
 1. Remove an existing group with a unique identifier of 1.
