@@ -1,6 +1,16 @@
 package seedu.duke.helper;
 
 import seedu.duke.exception.HalpmiException;
+import seedu.duke.helper.command.AddDoctorCommand;
+import seedu.duke.helper.command.AddMedicineCommand;
+import seedu.duke.helper.command.AddPatientCommand;
+import seedu.duke.helper.command.Command;
+import seedu.duke.helper.command.DeleteDoctorCommand;
+import seedu.duke.helper.command.DeletePatientCommand;
+import seedu.duke.helper.command.EditMedicineCommand;
+import seedu.duke.helper.command.ViewDoctorCommand;
+import seedu.duke.helper.command.ViewMedicineCommand;
+import seedu.duke.helper.command.ViewPatientCommand;
 
 
 public class Parser {
@@ -45,6 +55,10 @@ public class Parser {
         return new ViewPatientCommand(viewPatientParameters);
     }
 
+    public static Command parseEditPatient(String parameters) throws HalpmiException {
+       return null;
+    }
+
     public static Command parseAddDoctor(String parameters) throws HalpmiException {
         String[] addDoctorParameters = minParameterCheck(parameters, 7);
         Validator.validateAddDoctor(addDoctorParameters);
@@ -62,6 +76,10 @@ public class Parser {
         }
         String[] viewDoctorParameters = minParameterCheck(parameters,1);
         return new ViewDoctorCommand(viewDoctorParameters);
+    }
+
+    public static Command parseEditDoctor(String parameters) throws HalpmiException {
+        return null;
     }
 
 
@@ -82,6 +100,12 @@ public class Parser {
         }
         String[] viewMedicineParameters = minParameterCheck(parameters,1);
         return new ViewMedicineCommand(viewMedicineParameters);
+    }
+
+    public static Command parseEditMedicine(String parameters) throws HalpmiException {
+        String[] medicineParameters = minParameterCheck(parameters, 6);
+        Validator.validateMedicine(medicineParameters);
+        return new EditMedicineCommand(medicineParameters);
     }
 
     public static String[] parseAddAppointment(String parameters) throws HalpmiException {
