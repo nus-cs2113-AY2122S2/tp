@@ -22,6 +22,7 @@ import seedu.sherpass.exception.InvalidTimeException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -30,6 +31,7 @@ import static seedu.sherpass.constant.DateAndTimeFormat.inputFormat;
 import static seedu.sherpass.constant.Index.MARK_INDEX;
 import static seedu.sherpass.constant.Index.CUSTOM_COMMAND_INDEX;
 import static seedu.sherpass.constant.Index.SHOW_OPTION_INDEX;
+import static seedu.sherpass.constant.Index.STUDY_PARAMETER_INDEX;
 import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
 import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
 import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
@@ -82,7 +84,7 @@ public class Parser {
         }
     }
 
-    private static Command prepareMarkOrUnmark(String[] parsedInput, String commandWord, TaskList taskList) {
+    public static Command prepareMarkOrUnmark(String[] parsedInput, String commandWord, TaskList taskList) {
         try {
             int markIndex = Integer.parseInt(parsedInput[MARK_INDEX]) - 1;
             if (commandWord.equals(MarkCommand.COMMAND_WORD)) {
@@ -277,7 +279,7 @@ public class Parser {
         }
     }
 
-    private static Command prepareShow(String[] splitInput) {
+    public static Command prepareShow(String[] splitInput) {
         try {
             String selection = splitInput[SHOW_OPTION_INDEX].trim();
             return parseShowCommandOptions(selection.toLowerCase());
@@ -381,7 +383,8 @@ public class Parser {
      * @param rawUserInput Raw user input.
      * @param ui           UI.
      */
-    public static void parseStudyMode(String rawUserInput, Ui ui, TimerLogic timerLogic) {
+    public static void parseStudyMode(Ui ui, Storage storage, String rawUserInput,
+                                      TimerLogic timerLogic) throws IOException {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
@@ -396,8 +399,21 @@ public class Parser {
         case "stop":
             timerLogic.callStopTimer();
             break;
+        case "mark":
+            timerLogic.markTask(storage, parsedInput);
+            break;
+        case "show":
+            timerLogic.showTasks(storage, parsedInput);
+            break;
         default:
             ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);
         }
+    }
+
+    public static String parseStudyParameter(String[] parsedInput) {
+        if (parsedInput[STUDY_PARAMETER_INDEX].equals("stopwatch")) {
+            return "stopwatch";
+        }
+        return "countdown";
     }
 }

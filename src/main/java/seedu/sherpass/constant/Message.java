@@ -11,7 +11,8 @@ public class Message {
             + "2) 1 hour\n"
             + "3) 1.5 hours\n\n"
             + "For testing purposes, you may start a 30s timer\nwith mode number 0.\n"
-            + "Otherwise, feel free to choose your own timer with\n'start /custom <timer_duration>'.";
+            + "Feel free to choose your own timer with\n'start /custom <timer_duration>'.\n"
+            + "Otherwise, you can start a stopwatch with 'start stopwatch'.";
     public static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon! :)";
     public static final String GOODBYE_MESSAGE_STUDY = "Leaving study session...\n"
             + "Welcome back to the main session! How can I help you?";
@@ -34,7 +35,8 @@ public class Message {
             + "3) Stop timer: stop\n"
             + "4) Pause timer: pause\n"
             + "5) Resume timer: resume\n"
-            + "6) Exit study mode: leave";
+            + "6) Exit study mode: leave\n"
+            + "7) Mark task as done: mark <task_index>";
 
     public static final String ERROR_INVALID_INPUT_MESSAGE = "Please key in an appropriate command.\n"
             + HELP_MESSAGE;
