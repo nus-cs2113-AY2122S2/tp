@@ -9,7 +9,8 @@
 ### Implemented Features
 
 #### Todo feature
-![image info](./UmlDiagrams/Todo.png)
+![image info](./UmlDiagrams/Todo.png)  
+
 **Step1.** When `CommandHandler` receives a user input starting with string “todo”, it will call `toDo()` function to parse the user input into the index of the target `Project` object and one description string.  
 
 **Step2.** If the number of provided arguments is less than the required number, the `toDo()` function will throw an `IllegalCommand` exception and return.  
@@ -24,19 +25,20 @@
 ### Proposed Features
 
 #### Parse Command Feature
-![image info](./UmlDiagrams/CommandParser.png)
+![image info](./UmlDiagrams/CommandParser.png)  
+
 The proposed parse command feature makes use of CommandParser and its subclasses, and Command and its subclasses.  
 In the version 1.0 we simply used CommandHandler to parse user input for different commands, which may lead to violation of single responsibility principle. The proposed implementation will implement one command parser for each command (e.g. AddProjectCommand will have a paser named AddProjectCommandParser).  
 
 Given below is an example usage scenario and how the command parser behaves at each step.
 
-**Step 1.** The user inputs command. The command is retrieved by handleUserInput() in CommandHandler.  
+**Step 1.** The user inputs command. The command is retrieved by `handleUserInput()` in `CommandHandler`.  
 
-**Step 2.** handleUserInput() will check command type and create a new CommandParser object and call parse() in CommandPaser.  
+**Step 2.** `handleUserInput()` will check command type and create a new `CommandParser` object and call `parse()` in `CommandParser`.  
 
-**Step 3.** CommandParser will check if the input can be parsed into a valid command. If it fails, it will throw exceptions. After parsing the user’s input, CommandParser will create a new Command object and return it back to CommandHandler.  
+**Step 3.** `CommandParser` will check if the input can be parsed into a valid command. If it fails, it will throw exceptions. After parsing the user’s input, `CommandParser` will create a new `Command` object and return it back to `CommandHandler`.  
 
-**Step 4.** CommandHandler will call executeCommand() in its own class to execute the returned command.
+**Step 4.** `CommandHandler` will call `executeCommand()` in its own class to execute the returned command.
 
 
 ## Product scope
