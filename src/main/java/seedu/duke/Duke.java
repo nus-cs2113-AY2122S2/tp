@@ -17,9 +17,14 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (!endProgram) {
             System.out.println("Please enter command: ");
-            Command command = Parser.parse(sc.nextLine());
-            command.execute(packages);
-            endProgram = command.getIsExit();
+            try {
+                Command command = Parser.parse(sc.nextLine());
+                command.execute(packages);
+                endProgram = command.getIsExit();
+            } catch (Exception ex) {
+                System.out.println("Wrong format. All available" +
+                        " commands can be seen with the 'help' command");
+            }
         }
     }
 

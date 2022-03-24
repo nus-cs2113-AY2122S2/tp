@@ -36,3 +36,6 @@
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+## Feature - Help Command 
+Aim: Displays a list of all available commands that the user can refer to as a guide

@@ -7,6 +7,7 @@ import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.PackagesCommand;
 import seedu.duke.command.ErrorCommand;
 import seedu.duke.command.ReservationCommand;
+import seedu.duke.command.HelpCommand;
 
 public class Parser {
     public static Command parse(String input) {
@@ -25,7 +26,8 @@ public class Parser {
         switch (commandType) {
         case "bye":
             return new ByeCommand();
-
+        case "help":
+            return new HelpCommand();
         case "add": //only can have spaces between variables - what if hotel has 2 words?
             final int nameIndex = 1;
             final int startIndex = 2;
