@@ -17,6 +17,7 @@ public enum Category {
             .map(Category::getLabel)
             .collect(Collectors.toList())
     );
+    private static final int NumOfCategories = LABELS.size();
     private final String label;
 
     /**
@@ -54,5 +55,14 @@ public enum Category {
      */
     public static String getLabelForIndex(int index) {
         return LABELS.get(index);
+    }
+
+    /**
+     * Returns the number of categories present in the enum.
+     *
+     * @return The number of categories.
+     */
+    public static int getNumOfCategories() {
+        return NumOfCategories;
     }
 }
