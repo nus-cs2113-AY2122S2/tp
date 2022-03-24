@@ -1,9 +1,3 @@
-/'
- 'Commonly used styles and colors across diagrams.
- 'Refer to https://plantuml-documentation.readthedocs.io/en/latest for a more
- 'comprehensive list of skinparams.
- '/
-
 
 'T1 through T4 are shades of the original color from lightest to darkest
 
@@ -74,3 +68,5 @@ skinparam packageStyle Rectangle
 hide footbox
 hide members
 hide circle
+
+

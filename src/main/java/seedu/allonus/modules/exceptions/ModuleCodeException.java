@@ -1,7 +1,10 @@
 package seedu.allonus.modules.exceptions;
 
 /**
- * Signiifies a missing module code.
+ * Signifies a missing module code.
  */
-public class ModuleCodeException extends Exception{
+public class ModuleCodeException extends Exception {
+    public ModuleCodeException(String message) {
+        super(message);
+    }
 }

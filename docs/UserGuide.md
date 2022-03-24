@@ -20,20 +20,116 @@ and contact management tasks done faster than traditional GUI apps.
 {Give detailed description of each feature}
 
 ### Main Menu Features
+####Navigating from menu to section of interest: `goto`
+Allows access to subsections of the application, namely, to the expense tracker, contacts manager and task manager.
 
-#### ...
-...
+Format: `goto m/SECTION`
 
-Format: `add ...`
+**Examples of usage:**
+* `goto m/Expense_Tracker`
+* `goto m/Study_Manager`
+* `goto m/Contacts_Manager`
 
-* ...
-* ...
+**Expected outcome:**
+For expense tracker,
+```
+Welcome to Expense Tracker
+```
 
-Example of usage:
+For study manager,
+```
+Welcome to Modules Tracker, where you can track all your classes.
+```
 
-`...`
+For contacts manager,
+```
+Welcome to Contacts Manager
+```
 
-`...`
+####Going back to menu: `menu`
+Allows navigation back to the menu section of the application.
+
+Format: `menu`
+
+**Example of usage:**
+user types in the `menu` command from another section:
+`menu`
+which results in:
+```
+Welcome back to the main menu
+Menu:
+```
+
+####Getting guidance on the usage of the application: `help`
+Displays user guide for menu.
+
+Format: `help`
+
+**Example of usage:**
+User enters `help` when in main menu:
+`help`
+which results in:
+```
+Going from menu to section of interest:
+
+Allows access to subsections of the application, namely, to the expense tracker, contacts manager and task manager.
+
+Format: goto m/SECTION
+
+Examples:
+
+- goto m/Expense_Tracker
+- goto m/Study_Manager
+- goto m/Contacts_Manager
+
+
+Going back to menu:
+
+Allows navigation back to the menu section of the application. 
+
+Format: menu
+
+Example:
+
+- menu
+
+
+Getting guidance on the usage of the application:
+
+Displays user guide.
+
+Format: help
+
+Example:
+
+- help
+
+
+Exiting the application:
+
+Terminates the application.
+
+Format: exit
+
+Example:
+
+- exit
+Menu:
+```
+
+####Exiting the application: `exit`
+Terminates the application.
+
+Format: `exit`
+
+**Example of usage:**
+User enters `exit`:
+`exit`
+which results in:
+```
+Goodbye! Hope to see you again...
+```
+
 
 ### Expense Tracker Features
 #### List out all expenses: `list`
@@ -83,6 +179,54 @@ Format:
 **Expected outcome:**
 ```
 Deleted entry: 14/3/2022|4.30|Food|Chicken rice for lunch
+```
+#### Editing an expense: `edit`
+Edits an existing expense in the list of expenses. Users may choose to `list` out the expenses first 
+before editing to verify its index. After the record is extracted, users need to choose
+which field to edit in that record. After editing an expense
+record, the newly edited record will be shown to the user.
+
+Format: 
+`edit INDEX`
+
+`[FIELD] [NEW VALUE]`
+
+**Example of usage:**
+
+`edit 1`
+
+`category movie`
+
+**Expected Outcome:**
+```
+Here is the expense record you have chosen to edit:
+Date | 18.00 | Category | This is a remark
+Which field would you like to edit? Enter [field] [newValue] or enter 'DONE' when you have finished editing:
+< category movie
+New category value set!
+< done
+Editing complete!
+Here is the newly edited expense record:
+Date | 20.00 | Movie | This is a remark
+```
+
+#### Look for an expense: `find`
+Looks for a specific expense record by using a user-specified keyword.
+Only the Category, Date and Remarks fields will be considered when looking for an expense record.
+- The keyword is case-insensitive
+- Partial matches on the keyword are also returned
+
+Format:
+`find KEYWORD`
+
+**Example of usage:**
+
+`find juju`
+
+**Expected outcome:**
+```
+Here are the matching expense records:
+24/3/2022 | 9.50 | Movie | Jujutsu Kaisen
 ```
 
 ### Study Manager Features

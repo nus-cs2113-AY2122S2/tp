@@ -1,16 +1,24 @@
 package seedu.allonus.expense;
 
+
 import seedu.allonus.ui.TextUi;
+
+import java.lang.reflect.Executable;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+
 import static seedu.allonus.expense.ExpenseParser.parseDeleteExpense;
+import static seedu.allonus.expense.ExpenseParser.parseEditExpense;
 import static seedu.allonus.expense.ExpenseParser.parseNewExpense;
+import static seedu.allonus.expense.ExpenseParser.parseFindExpense;
 
 /**
  * The core function of the expense tracker, which executes user commands based on keywords.
  */
 public class ExpenseTracker {
+    public static final String INCORRECT_NUMBER_OF_FIELDS = "Incorrect number of fields!";
+    public static final String NEW_REMARKS_VALUE_SET = "New remarks value set!";
     private static final String EXPENSE_WELCOME_MESSAGE = "Welcome to Expense Tracker";
     private static final ArrayList<Expense> expenseList = new ArrayList<>();
     public static final String ASSERT_NUMBER_OF_ITEMS_NON_NEGATIVE =
@@ -41,6 +49,19 @@ public class ExpenseTracker {
     public static final String LOG_INVALID_COMMANDS = "User entered invalid commands";
     public static final String MSG_INVALID_COMMANDS = "Invalid command!";
     public static final String LOG_RETURN_TO_MENU_INTENT = "User wants to return to the main menu";
+    public static final String CHOSEN_EXPENSE_TO_EDIT = "Here is the expense record you have chosen to edit:\n";
+    public static final String CHOSEN_FIELD_TO_EDIT = "Which field would you like to edit? "
+            +
+            "Enter [field] [newValue] or enter 'DONE' when you have finished editing:";
+    public static final String EDITING_COMPLETE = "Editing complete!";
+    public static final String NEWLY_EDITED_EXPENSE_RECORD = "Here is the newly edited expense record:\n";
+    public static final String NEW_DATE_VALUE_SET = "New date value set!";
+    public static final String NEW_AMOUNT_VALUE_SET = "New amount value set!";
+    public static final String NEW_CATEGORY_VALUE_SET = "New category value set!";
+    public static final String MSG_NEW_VALUE_CANNOT_BE_EMPTY = "New value cannot be empty!";
+    public static final String NO_TASKS_FOUND = "No tasks found!";
+    public static final String MSG_MATCHING_EXPENSES = "Here are the matching expense records:\n";
+    public static final String MENU_STRING = "menu";
 
     private static void expenseWelcome() {
         System.out.println(EXPENSE_WELCOME_MESSAGE);
@@ -61,6 +82,7 @@ public class ExpenseTracker {
             return;
         }
         String listAsString = "";
+
         for (int i = ZERO; i < noOfItems; i++) {
             Expense curr = expenseList.get(i);
             assert curr != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
@@ -71,7 +93,8 @@ public class ExpenseTracker {
 
     /**
      * Deletes a record from the list of expenses.
-     * @param list list of expenses itself
+     *
+     * @param list  list of expenses itself
      * @param index the index of the item to be deleted
      * @throws IndexOutOfBoundsException if the expense record is not found
      */
@@ -85,8 +108,9 @@ public class ExpenseTracker {
 
     /**
      * Adds a record into the list of expenses.
+     *
      * @param list list of expenses itself
-     * @param e the expense object itself to be added
+     * @param e    the expense object itself to be added
      */
     private static void addExpense(ArrayList<Expense> list, Expense e) {
         logger.log(Level.INFO, LOG_ADD_INTENT);
@@ -97,8 +121,188 @@ public class ExpenseTracker {
     }
 
     /**
+     * Edits an existing expense record using its index chosen by the user.
+     *
+     * @param list  list of expenses itself
+     * @param index the index of the item to be edited
+     * @param ui    ui object to collect user's inputs
+     */
+    private static void editExpense(ArrayList<Expense> list, int index, TextUi ui) {
+        Expense toBeEdited = list.get(index - 1);
+        System.out.println(CHOSEN_EXPENSE_TO_EDIT + toBeEdited);
+        System.out.println(CHOSEN_FIELD_TO_EDIT);
+        String fieldToEdit;
+        boolean isFinishedEditing = false;
+        while (!isFinishedEditing) {
+            fieldToEdit = ui.getUserInput();
+            if (fieldToEdit.trim().equalsIgnoreCase("done")) {
+                isFinishedEditing = true;
+                System.out.println(EDITING_COMPLETE);
+                System.out.println(NEWLY_EDITED_EXPENSE_RECORD + toBeEdited);
+            } else {
+                try {
+                    editField(fieldToEdit, toBeEdited);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(INCORRECT_NUMBER_OF_FIELDS);
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Edits a specific field of a chosen expense record based on user's input.
+     *
+     * @param fieldToEdit the field chosen by the user to edit
+     * @param toBeEdited  the expense record object to be edited
+     * @throws IndexOutOfBoundsException if new value is missing (without spaces)
+     */
+    private static void editField(String fieldToEdit, Expense toBeEdited) throws IndexOutOfBoundsException {
+        String[] newFields = fieldToEdit.split(" ");
+        String field = newFields[0];
+        String newValue = newFields[1].trim();
+        if (newValue.length() == 0) {
+            System.out.println(MSG_NEW_VALUE_CANNOT_BE_EMPTY);
+            return;
+        } else {
+            switch (field) {
+            case ("date"):
+                toBeEdited.setDate(newFields[1]);
+                System.out.println(NEW_DATE_VALUE_SET);
+                break;
+            case ("amount"):
+                toBeEdited.setAmount(newFields[1]);
+                System.out.println(NEW_AMOUNT_VALUE_SET);
+                break;
+            case ("category"):
+                toBeEdited.setCategory(newFields[1]);
+                System.out.println(NEW_CATEGORY_VALUE_SET);
+                break;
+            case ("remarks"):
+                toBeEdited.setRemark(newFields[1]);
+                System.out.println(NEW_REMARKS_VALUE_SET);
+                break;
+            case ("done"):
+                return;
+            default:
+                System.out.println(MSG_INVALID_COMMANDS);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Looks through the list of expense records and prints out the records that contain a specified keyword.
+     *
+     * @param list         list of expenses itself
+     * @param stringToFind keyword to look for within each expense record
+     */
+    private static void findExpense(ArrayList<Expense> list, String stringToFind) {
+        boolean isFound = false;
+        stringToFind = stringToFind.toLowerCase();
+        for (Expense expense : list) {
+            String expenseCategory = expense.getCategory().toLowerCase();
+            String expenseDate = expense.getDate().toLowerCase();
+            String expenseRemark = expense.getRemark().toLowerCase();
+            if (expenseCategory.contains(stringToFind) || expenseDate.contains(stringToFind)
+                    || expenseRemark.contains(stringToFind)) {
+                isFound = true;
+                System.out.println(MSG_MATCHING_EXPENSES + expense);
+            }
+        }
+        if (!isFound) {
+            System.out.println(NO_TASKS_FOUND);
+        }
+    }
+
+    /**
+     * Begins executing the Delete method invoked by user's input.
+     *
+     * @param rawInput the user's input itself
+     */
+    private static void executeRemove(String rawInput) {
+        int index = -1;
+        try {
+            index = parseDeleteExpense(rawInput);
+        } catch (IndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, LOG_EMPTY_INDEX);
+            System.out.println(MSG_EMPTY_INDEX);
+        } catch (NumberFormatException e) {
+            logger.log(Level.WARNING, LOG_INVALID_INDEX_TYPE);
+            System.out.println(MSG_INVALID_INDEX_TYPE);
+        }
+        try {
+            deleteExpense(expenseList, index);
+        } catch (IndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
+            System.out.println(MSG_ITEM_NOT_FOUND);
+        }
+    }
+
+    /**
+     * Begins executing the Add method invoked due to user's input.
+     *
+     * @param rawInput the user's input itself
+     */
+    private static void executeAdd(String rawInput) {
+        try {
+            String[] newExpense = parseNewExpense(rawInput);
+            assert newExpense != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
+            Expense e = new Expense(newExpense[DATE_INDEX], newExpense[AMOUNT_INDEX],
+                    newExpense[CATEGORY_INDEX], newExpense[REMARKS_INDEX]);
+            addExpense(expenseList, e);
+        } catch (IndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, LOG_EMPTY_FIELDS);
+            System.out.println(MSG_EMPTY_FIELDS);
+        }
+    }
+
+    /**
+     * Begins executing the Find method invoked due to user's input.
+     *
+     * @param rawInput the user's input itself
+     */
+    private static void executeFind(String rawInput) {
+        String stringToFind = "";
+        try {
+            stringToFind = parseFindExpense(rawInput);
+        } catch (IndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
+            System.out.println("Keyword cannot be empty!");
+        }
+        findExpense(expenseList, stringToFind);
+    }
+
+    /**
+     * Begins executing the Edit method invoked due to user's input.
+     *
+     * @param ui       ui object to collect user's inputs
+     * @param rawInput the user's input itself
+     */
+    private static void executeEdit(TextUi ui, String rawInput) {
+        int index;
+        index = -1;
+        int noOfItems = Expense.getNoOfItems();
+        if (noOfItems == 0) {
+            System.out.println(MSG_EMPTY_LIST);
+        } else {
+            try {
+                index = parseEditExpense(rawInput);
+            } catch (IndexOutOfBoundsException e) {
+                logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
+                System.out.println(MSG_EMPTY_INDEX);
+            } catch (NumberFormatException e) {
+                logger.log(Level.WARNING, LOG_INVALID_INDEX_TYPE);
+                System.out.println(MSG_INVALID_INDEX_TYPE);
+            }
+            editExpense(expenseList, index, ui);
+        }
+    }
+
+    /**
      * Determines which command to execute depending on the keyword supplied.
-     * @param ui the user input itself
+     *
+     * @param ui ui object to collect user's inputs
      * @throws ExpenseException if an invalid keyword is supplied
      */
     public static void expenseRunner(TextUi ui) {
@@ -106,41 +310,23 @@ public class ExpenseTracker {
         expenseWelcome();
         String rawInput = ui.getUserInput();
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;
-        String keyWord = rawInput.split(" ", SPLIT_INTO_HALF)[KEYWORD_INDEX].trim();
-        while (!(keyWord.equals("menu"))) {
+        String keyWord = rawInput.split(" ", SPLIT_INTO_HALF)[KEYWORD_INDEX].trim().toLowerCase();
+        while (!(keyWord.equals(MENU_STRING))) {
             switch (keyWord) {
             case ("list"):
                 listExpenses();
                 break;
             case ("rm"):
-                int index = -1;
-                try {
-                    index = parseDeleteExpense(rawInput);
-                } catch (IndexOutOfBoundsException e) {
-                    logger.log(Level.WARNING, LOG_EMPTY_INDEX);
-                    System.out.println(MSG_EMPTY_INDEX);
-                } catch (NumberFormatException e) {
-                    logger.log(Level.WARNING, LOG_INVALID_INDEX_TYPE);
-                    System.out.println(MSG_INVALID_INDEX_TYPE);
-                }
-                try {
-                    deleteExpense(expenseList, index);
-                } catch (IndexOutOfBoundsException e) {
-                    logger.log(Level.WARNING, LOG_INDEX_OUT_OF_BOUNDS);
-                    System.out.println(MSG_ITEM_NOT_FOUND);
-                }
+                executeRemove(rawInput);
                 break;
             case ("add"):
-                try {
-                    String[] newExpense = parseNewExpense(rawInput);
-                    assert newExpense != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
-                    Expense e = new Expense(newExpense[DATE_INDEX], newExpense[AMOUNT_INDEX],
-                            newExpense[CATEGORY_INDEX], newExpense[REMARKS_INDEX]);
-                    addExpense(expenseList, e);
-                } catch (IndexOutOfBoundsException e) {
-                    logger.log(Level.WARNING, LOG_EMPTY_FIELDS);
-                    System.out.println(MSG_EMPTY_FIELDS);
-                }
+                executeAdd(rawInput);
+                break;
+            case ("edit"):
+                executeEdit(ui, rawInput);
+                break;
+            case ("find"):
+                executeFind(rawInput);
                 break;
             default:
                 logger.log(Level.WARNING, LOG_INVALID_COMMANDS);
