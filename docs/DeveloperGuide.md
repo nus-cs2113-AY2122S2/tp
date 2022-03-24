@@ -39,7 +39,7 @@ The source code can be found in [Ui.java](https://github.com/AY2122S2-CS2113T-T1
 ![ui_diagram](images/ui_diagram.png)
 <br/> Fig 3 - Ui Diagram
 
-The UI consists of a`Ui`and`PrintStrings`class.
+The UI component consists of a`Ui`and`PrintStrings`class.
 
 The UI component:
 - Prints the welcome banner and message on startup, as well as a financial tip from the`PrintStrings`class.
@@ -55,7 +55,7 @@ The source code can be found in [Parser.java](https://github.com/AY2122S2-CS2113
 ![parser_diagram](images/parser_diagram.png)
 <br/> Fig 4 - Parser Diagram
 
-The Parser consists of a`Parser`, `Functions`, `ExpenditureList` and `Expenditure`class
+The Parser component consists of a`Parser`, `Functions`, `ExpenditureList` and `Expenditure`class
 
 The Parser component:
 - Receives user's input and splits it into the Command Type and Description using the`Functions`class.
@@ -65,6 +65,34 @@ The Parser component:
 We pass in the`itemList`to the`Command`object instead of using a global variable to ease testing. This way, we can 
 add, delete and update`Expenditure`entries in a new`itemList`during testing without affecting the actual`itemList`.
 
+### Command component 
+The source can be found in [command](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command)
+
+![command_diagram](images/command_diagram.png)
+<br/> Fig 5 - Command Diagram
+
+The Command component consists of `Command` abstract class, `AddCommand`, `ByeCommand`, `DeleteCommand`, `HelpCommand`
+, `ListCommand`and `UpdateCommand` that extends the `Command` class.
+
+The Command component:
+- Provides all the Command classes which can be instantiated by `Parser.parseCommand()`. The Command objects can then be 
+executed. Only 1 Command object can be created.
+- Includes a `.executeCommand()` method in each Command classes which performs the relevant command and throws 
+exceptions if an error is encountered. The error is then handled.
+
+### Storage component 
+The source can be found in [Storage.java](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/Storage.java)
+
+![storage_diagram](images/storage_diagram.png)
+<br/> Fig 6 - Storage Diagram
+
+The Storage component consists of `Storage` class.
+
+The Storage component:
+- `MMM` class initialises a `Storage` object upon start up. The `Storage` class consists of 
+`load()` and `save()` methods. 
+- Concurrently, `MMM` will call the `load()` method and load any data that is stored on the hard disk.
+- `MMM` calls the `save()` method and stores remaining data onto the hard disk when the program exits.
 
 
 ## Implementation
