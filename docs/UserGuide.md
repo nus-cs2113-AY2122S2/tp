@@ -205,8 +205,6 @@ Examples of usage:
    for both Bob and herself which will be split equally between them later on.
    - `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /co 10` <br>
    ![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
-<br>
-<br>
 2. Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid for both
    Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.
    - `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7` <br>
