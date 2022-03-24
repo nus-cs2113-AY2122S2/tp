@@ -9,6 +9,7 @@ import seedu.duke.assets.Medicine;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.Patient;
 import seedu.duke.assets.PatientList;
+import seedu.duke.exception.DuplicateEntryException;
 
 
 import java.io.File;
@@ -38,7 +39,11 @@ public class Storage {
         while (reader.hasNext()) {
             String line = reader.nextLine();
             String[] parameters = line.split(",");
-            medicines.add(parameters);
+            try {
+                medicines.add(parameters);
+            } catch (DuplicateEntryException e) {
+                continue;
+            }
         }
     }
 

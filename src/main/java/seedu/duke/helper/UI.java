@@ -103,7 +103,12 @@ public class UI {
 
     public void printAddMedicineExampleMessage() {
         printParagraph("Invalid format. Please follow the below example and try again.\n"
-                + "add medicine /info Paracetamol,500,2023-12-12,Headaches,10");
+                + "add medicine /info s231, Paracetamol,500,2023-12-12,Headaches,10");
+    }
+
+    public void printEditMedicineExampleMessage() {
+        printParagraph("Invalid format. Please follow the below example and try again.\n"
+                + "edit medicine /info s231, Paracetamol,500,2023-12-12,Headaches,10");
     }
 
     public static void printPrompt() {

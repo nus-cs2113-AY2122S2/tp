@@ -24,16 +24,16 @@ class ParserTest {
     @Test
     @DisplayName("validateMedicine method in Parser Class")
     void validateMedicineTest() {
-        String[] userInputArray = {"paracetamol", "500", "2023-02-02", "Headaches", "500"};
-        String userInput = "paracetamol,500,2023-02-02,Headaches,500";
+        String[] userInputArray = {"123", "paracetamol", "500", "2023-02-02", "Headaches", "500"};
+        String userInput = "123,paracetamol,500,2023-02-02,Headaches,500";
         assertTrue(Validator.validateMedicine(userInputArray));
     }
 
     @Test
     @DisplayName("parseAddMedicine method in Parser Class")
     void parseAddMedicineTest() throws HalpmiException {
-        String userInput = "paracetamol,500,2023-02-02,Headaches,500";
-        String[] userInputArray = {"paracetamol", "500", "2023-02-02", "Headaches", "500"};
+        String userInput = "123,paracetamol,500,2023-02-02,Headaches,500";
+        String[] userInputArray = {"123", "paracetamol", "500", "2023-02-02", "Headaches", "500"};
         assertArrayEquals(userInputArray, Parser.parseAddMedicine(userInput));
     }
 

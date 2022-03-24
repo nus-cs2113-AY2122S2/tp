@@ -4,7 +4,9 @@ import seedu.duke.assets.AppointmentList;
 import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.PatientList;
+import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.HalpmiException;
+import seedu.duke.exception.NotFoundException;
 
 
 public class Command {
@@ -72,6 +74,22 @@ public class Command {
         } catch (HalpmiException e) {
             UI.printParagraph(e.toString());
             ui.printAddMedicineExampleMessage();;
+        } catch (DuplicateEntryException duplicateEntry) {
+            ui.printParagraph("There already exists a medicine with the stated Batch ID!");
+        }
+    }
+
+    public void editMedicine(MedicineList medicineList, String parameters) {
+        try {
+            String[] addMedicineParameters = Parser.parseAddMedicine(parameters);
+            medicineList.editMedicine(addMedicineParameters);
+            assert medicineList.search(addMedicineParameters[0]) != null : "Continued to Edit although med not exist.";
+            UI.printParagraph("Medicine has been edited");
+        } catch (HalpmiException e) {
+            UI.printParagraph(e.toString());
+            ui.printEditMedicineExampleMessage();;
+        } catch (NotFoundException notFoundException) {
+            ui.printParagraph("There does not exist a medicine with the stated Batch ID!");
         }
     }
 
@@ -94,13 +112,14 @@ public class Command {
         }
     }
 
-    public void deleteMedicine(MedicineList medicineList, String stringIndex) {
+    public void deleteMedicine(MedicineList medicineList, String medicineId) {
         try {
-            int index = Integer.parseInt(stringIndex);
-            medicineList.deleteMedicine(index - 1);
-            UI.printParagraph("The medicine record at index " + index + " has been deleted.");
+            medicineList.deleteMedicine(medicineId);
+            UI.printParagraph("The medicine with Batch ID: " + medicineId + " has been deleted.");
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             ui.printDeleteMedicineExampleMessage(medicineList);
+        } catch (NotFoundException notFoundException) {
+            UI.printParagraph("Given Batch ID was not found in the Medicine Inventory.");
         }
     }
 
