@@ -3,6 +3,7 @@ package seedu.splitlah.data;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  * 
  * @author Roy
  */
-public class Profile {
+public class Profile implements Serializable {
     
     private ArrayList<Session> sessionList;
     private ArrayList<Group> groupList;
@@ -20,12 +21,14 @@ public class Profile {
     private int groupIdTracker;
 
     /**
-     * Constructor to create a Profile object.
+     * Initializes a Profile object.
      */
     public Profile() {
         this.sessionList = new ArrayList<>();
+        this.groupList = new ArrayList<>();
         this.sessionIdTracker = 1;
         this.activityIdTracker = 1;
+        this.groupIdTracker = 1;
     }
 
     /**
@@ -96,12 +99,11 @@ public class Profile {
     }
 
     /**
-     * Removes a Session object with the specified session unique identifier from the list of sessions.
+     * Removes a Session object from the list of sessions.
      *
-     * @param sessionId An integer that uniquely identifies a session.
+     * @param sessionToBeRemoved A Session Object to be deleted.
      */
-    public void removeSession(int sessionId) throws InvalidDataException {
-        Session sessionToBeRemoved = getSession(sessionId);
+    public void removeSession(Session sessionToBeRemoved) {
         sessionList.remove(sessionToBeRemoved);
     }
 

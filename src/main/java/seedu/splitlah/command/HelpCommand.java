@@ -8,15 +8,11 @@ import seedu.splitlah.data.Manager;
  * @author Warren
  */
 public class HelpCommand extends Command {
-    
-    public static final String COMMAND_TEXT = "help";
-
-    public static final String COMMAND_FORMAT = "Syntax: help";
 
     /**
-     * Prints a help message and displays all available commands.
+     * Runs the command to print help messages and displays all available commands.
      *
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {

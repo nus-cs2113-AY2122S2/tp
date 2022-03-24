@@ -59,19 +59,48 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
 **Interaction between components**
 ![Component Interaction Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ComponentInteraction.drawio.png)
 <br>
-The *Component Interaction Diagram* shows the inner workings of how each component in SplitLah interacts. The diagram 
-depicts a scenario when a user attempts to create a session.
+The *Component Interaction Diagram* shows the inner workings of how each component in SplitLah interacts. 
+The diagram depicts a scenario when a user attempts to create a session.
 
 ### Manager Component
 ![Manager Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ManagerComponent.drawio.png)
+<br>
+The `Manager` class is initialized by the `Main` class when the application starts.
+It stores the `Profile`, `TextUI` and `Storage` objects. The `Profile` class helps to manage all data accesses 
+throughout the lifetime of the application. While the `Storage` helps to save what the `Profile` class has captured. 
+The `TextUI` class serves as an interface to read user inputs and print application outputs.
 
 ### Profile Component
+![Profile Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/Profile%20Component.drawio.png)
+<br>
+The `Profile` class holds the list of sessions and groups that have been created by the user. 
+It also tracks the unique identifier for `Session`, `Activity` and `Group` classes. The `Profile`
+class would return a unique identifier every time a new `Session`, `Activity` or `Group` is created. 
 
 ### TextUI Component
 
 ### Storage Component
 
 ### Parser Component
+![Parser Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ParserComponent.drawio.png)
+<br>
+The `Parser` component consists of the `Parser` class, `ParserUtils` class as well as the `ParserErrors` class.<br>
+The `Parser` class provides utility methods to parse commands and arguments from the user and
+return a `Command` object representing an instruction that the user has for SplitLah.
+`Parser` class is the only class in the `Parser` component that other external classes interact with.<br>
+On the other hand, the `ParserUtils` class provide supporting methods for `Parser` class to properly run,
+and `ParserErrors` class provide methods to produce custom error messages for the `Parser` component.
+
+<!-- Insert Sequence Diagram -->
+
+The general workflow of the `Parser` component is as follows:
+1. When required to parse for a command, an input String object is passed to the `Parser#getCommand()` method.
+2. The `Parser#getCommandType()` method is then called to decide what command is to be carried out given the input from the user.
+3. Then, `Parser#getRemainingArgument()` method is run to extract the arguments from the user input.
+4. The arguments are then passed to the specified `XYZCommand#prepare()` method if there are any arguments. 
+Otherwise, the constructor is called. Either methods will result in the creation of a new `XYZCommand` object. 
+(`XYZCommand` is a placeholder for specific subclass of the `Command` class, e.g. `SessionCreateCommand`)
+5. The created `XYZCommand` object is then returned by `Parser#getCommand()` method.
 
 ### Command Component
 
@@ -90,7 +119,29 @@ depicts a scenario when a user attempts to create a session.
 ### Remove a group
 ### View a group
 ### List groups
+**API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
 
+The sequence diagram below models the interactions between various entities in the system
+when the user invokes the `group /list` command.
+<br>
+<br>
+![List Groups Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupListCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `group /list` command is as follows:
+1. The user input provided is passed to `Splitlah`.
+2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `GroupListCommand` object.
+3. `GroupListCommand#run()` method is then invoked to run the `group /list` command.
+4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile()` is called
+before the list of groups can be retrieved.
+5. To retrieve the groups from the profile retrieved, `Profile#getGroupList()` method is executed,
+where a list of `Group` objects are returned.
+6. Once the list is retrieved, `GroupListCommand` class checks if the list is empty.
+   1. If the list is empty, a message indicating that the list is empty is printed
+   using the method `TextUi#printlnMessage()`.
+   2. If the list is not empty, `GroupListCommand` will loop from the first to the second last group, 
+   calling `TextUi#printlnMessage()` to print out the summary of each group.
+   Then, the last group is printed with a divider below it, using the method `TextUi#printlnMessageWithDivider()`.
 
 ## Product scope
 ### Target user profile
@@ -106,17 +157,17 @@ they engage in during the outings.
 
 ## User Stories
 
-| Version | As a ...              | I want to ...                        | So that I can ...                                                            |
-|---------|-----------------------|--------------------------------------|------------------------------------------------------------------------------|
-| v1.0    | New user              | see usage instructions               | refer to them when I forget how to use the application                       |
-| v1.0    | Budget conscious user | create sessions                      | record the transactions of the outing                                        |
-| v1.0    | Budget conscious user | create activities                    | able to track the expenditure for each activity                              |
-| v1.0    | Budget conscious user | view an existing session             | view the full details of a session previously created                        |
-| v1.0    | Budget conscious user | view an existing activity            | view the cost breakdown of who paid and who was involved in the activity     |
-| v1.0    | Budget conscious user | list all existing sessions           | view all sessions previously created                                         |
-| v1.0    | Budget conscious user | list all activities in a session     | view all the activities that happened in the session                         |
-| v1.0    | Budget conscious user | settle all transactions of a session | see a summary of who needs to pay what amount to who for the entire session  |
-| v1.0    | {Placeholder}         | {Placeholder}                        | {Placeholder}                                                                |
+| Version | As a ...              | I want to ...                        | So that I can ...                                                           |
+|---------|-----------------------|--------------------------------------|-----------------------------------------------------------------------------|
+| v1.0    | New user              | see usage instructions               | refer to them when I forget how to use the application                      |
+| v1.0    | Budget conscious user | create sessions                      | record the transactions of the outing                                       |
+| v1.0    | Budget conscious user | create activities                    | able to track the expenditure for each activity                             |
+| v1.0    | Budget conscious user | view an existing session             | view the full details of a session previously created                       |
+| v1.0    | Budget conscious user | view an existing activity            | view the cost breakdown of who paid and who was involved in the activity    |
+| v1.0    | Budget conscious user | list all existing sessions           | view all sessions previously created                                        |
+| v1.0    | Budget conscious user | list all activities in a session     | view all the activities that happened in the session                        |
+| v1.0    | Budget conscious user | settle all transactions of a session | see a summary of who needs to pay what amount to who for the entire session |
+| v1.0    | User                  | exit the application                 | stop tracking                                                               |
 
 ## Non-Functional Requirements
 1. The application should be able to work in any operating systems with `Java 11` installed.

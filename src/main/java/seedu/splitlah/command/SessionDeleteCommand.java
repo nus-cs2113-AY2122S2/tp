@@ -1,15 +1,17 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.util.logging.Level;
 
 /**
- * Represents a command that deletes a Session object indicated by the user input from a Profile object.
+ * Represents a command which deletes a Session object from a list of sessions managed by the Profile object.
  *
  * @author Roy
  */
@@ -19,21 +21,17 @@ public class SessionDeleteCommand extends Command {
 
     public static final String COMMAND_FORMAT = "Syntax: session /delete /sid [SESSION_ID]";
 
-    private static final String COMMAND_CONFIRMATION = "Are you sure you want to delete session id: ";
-
-    private static final String COMMAND_ABORT = "Okay! Session was not deleted.";
-
     private static final String COMMAND_SUCCESS =
             "The session was deleted successfully.";
 
     public static final String[] COMMAND_DELIMITERS = {
-        Parser.SESSION_ID_DELIMITER
+        ParserUtils.SESSION_ID_DELIMITER
     };
 
     private int sessionId;
 
     /**
-     * Initializes a SessionDeleteCommand.
+     * Initializes a SessionDeleteCommand object.
      *
      * @param sessionId An integer that uniquely identifies a session.
      */
@@ -59,27 +57,19 @@ public class SessionDeleteCommand extends Command {
     }
 
     /**
-     * Runs the command to delete a Session object to from the list of sessions managed by the Profile Object.
+     * Runs the command to delete a Session object from the list of sessions managed by a Manager Object.
      *
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {
-        String confirmationPrompt = COMMAND_CONFIRMATION + sessionId + "?";
-        boolean isSessionExists = manager.getProfile().hasSessionId(sessionId);
-        if (!isSessionExists) {
-            manager.getUi().printlnMessage(Message.ERROR_PROFILE_SESSION_NOT_IN_LIST);
-            return;
-        }
+        Session session = null;
         try {
-            boolean isConfirmed = manager.getUi().getUserConfirmation(confirmationPrompt);
-            if (isConfirmed) {
-                manager.getProfile().removeSession(sessionId);
-                manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
-                manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
-            } else {
-                manager.getUi().printlnMessageWithDivider(COMMAND_ABORT);
-            }
+            session = manager.getProfile().getSession(sessionId);
+            manager.getProfile().removeSession(session);
+            manager.saveProfile();
+            manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
         } catch (InvalidDataException dataException) {
             manager.getUi().printlnMessage(dataException.getMessage());
         }

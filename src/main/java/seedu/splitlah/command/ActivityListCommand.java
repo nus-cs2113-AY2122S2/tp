@@ -6,6 +6,7 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class ActivityListCommand extends Command {
     public static final String COMMAND_FORMAT = "Syntax: activity /list /sid [SESSION_ID]";
 
     public static final String[] COMMAND_DELIMITERS = {
-        Parser.SESSION_ID_DELIMITER
+        ParserUtils.SESSION_ID_DELIMITER
     };
 
     private int sessionId;
@@ -29,15 +30,20 @@ public class ActivityListCommand extends Command {
     private static final String LIST_HEADER_PREPEND = "List of activities (Session Id #";
     private static final String LIST_CLOSER_POSTPEND = ")";
 
+    /**
+     * Initializes an ActivityListCommand object.
+     *
+     * @param sessionId An integer that uniquely identifies a session.
+     */
     public ActivityListCommand(int sessionId) {
         assert sessionId > 0 : Message.ASSERT_ACTIVITYLIST_SESSION_ID_LESS_THAN_ONE;
         this.sessionId = sessionId;
     }
 
     /**
-     * Runs the command.
+     * Runs the command to list all existing activities in a Session object managed by the Profile Object.
      * 
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {
@@ -63,7 +69,7 @@ public class ActivityListCommand extends Command {
     }
 
     /**
-     * Prepares user argument for activity list command.
+     * Prepares user arguments for the creation of an ActivityListCommand object.
      *
      * @param  commandArgs A String object that represents the user's arguments.
      * @return An ActivityListCommand object if sessionId was found in user argument,

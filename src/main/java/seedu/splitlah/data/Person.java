@@ -3,6 +3,7 @@ package seedu.splitlah.data;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -10,23 +11,48 @@ import java.util.ArrayList;
  * 
  * @author Saurav
  */
-public class Person {
+public class Person implements Serializable {
     
-    private final String name;
+    private Name name;
     private ArrayList<ActivityCost> activityCostList;
 
     /**
-     * Constructs a Person object.
+     * Initializes a Person object.
      *
-     * @param name Name of the Person.
+     * @param name A Name object representing the name of the Person object to be created.
      */
-    public Person(String name) {
+    public Person(Name name) {
         this.activityCostList = new ArrayList<>();
         this.name = name;
     }
 
     /**
-     * Constructs an ActivityCost object and adds it to the list of ActivityCosts.
+     * Constructs a Person object from a String object.
+     *
+     * @param name String object representing the name of the Person object to be created.
+     */
+    public Person(String name) {
+        this.activityCostList = new ArrayList<>();
+        this.name = new Name(name);
+    }
+
+    /**
+     * Constructs a Person object from a String object. If the String object provided is not a valid name,
+     * returns null instead.
+     *
+     * @param name A String object representing a name.
+     * @return a Person object if the name provided is valid.
+     *         null if the name provided is invalid.
+     */
+    public static Person createPersonFromString(String name) {
+        if (Name.validateName(name)) {
+            return new Person(name);
+        }
+        return null;
+    }
+
+    /**
+     * Constructs an ActivityCost object and adds it to the list of ActivityCost objects.
      *
      * @param activityId An integer that uniquely identifies an activity.
      * @param costPaid   A double that represents the cost paid by a Person.
@@ -108,10 +134,26 @@ public class Person {
     }
 
     public String getName() {
+        return name.getNameAsString();
+    }
+
+    public Name getNameAsNameObject() {
         return name;
     }
 
     public ArrayList<ActivityCost> getActivityCostList() {
         return activityCostList;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (!(object.getClass() == this.getClass())) {
+            return false;
+        }
+        Person person = (Person) object;
+        return this.name.getNameAsString().equalsIgnoreCase(person.getName());
     }
 }

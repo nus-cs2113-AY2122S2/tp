@@ -27,30 +27,31 @@ class ActivityCreateCommandTest {
     }
 
     /**
-     * Checks if an activity is created when an activity is missing both cost and cost list.
+     * Checks if an InvalidCommand object is returned when both cost and cost list are not provided by the user.
      */
     @Test
-    public void prepare_hasMissingCostAndCostList_invalidCommand() {
+    public void prepare_hasMissingCostAndCostList_InvalidCommand() {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie";
         Command command = Parser.getCommand(userInput);
         assertEquals(InvalidCommand.class, command.getClass());
     }
 
     /**
-     * Checks if an activity is created when an activity has both cost and cost list.
+     * Checks if an InvalidCommand object is returned when both cost and cost list are provided by the user.
      */
     @Test
-    public void prepare_hasBothCostAndCostList_invalidCommand() {
+    public void prepare_hasBothCostAndCostList_InvalidCommand() {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30 /cl 10 10 10";
         Command command = Parser.getCommand(userInput);
         assertEquals(InvalidCommand.class, command.getClass());
     }
 
     /**
-     * Checks if an activity is created when an activity has different length for involved list and cost list.
+     * Checks if an InvalidCommand object is returned when cost list and involved list that are provided by the user
+     * are of different lengths.
      */
     @Test
-    public void prepare_costListAndInvolvedListDifferentLength_invalidCommand() {
+    public void prepare_costListAndInvolvedListDifferentLength_InvalidCommand() {
         String firstUserInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /cl 10 10";
         Command firstCommand = Parser.getCommand(firstUserInput);
         assertEquals(InvalidCommand.class, firstCommand.getClass());
@@ -60,7 +61,7 @@ class ActivityCreateCommandTest {
     }
 
     /**
-     * Checks if activity is created with missing delimiters.
+     * Checks if an InvalidCommand object is returned when there are delimiters not provided by the user.
      */
     @Test
     public void prepare_hasMissingDelimiter_InvalidCommand() {
@@ -86,7 +87,7 @@ class ActivityCreateCommandTest {
     }
 
     /**
-     * Checks if activity is created with missing arguments.
+     * Checks if an InvalidCommand object is returned when there are arguments not provided by the user.
      */
     @Test
     public void prepare_hasMissingArguments_InvalidCommand() {
@@ -179,5 +180,4 @@ class ActivityCreateCommandTest {
         int testActivityId = manager.getProfile().getActivityIdTracker();
         assertEquals(currentActivityId + 1, testActivityId);
     }
-
 }

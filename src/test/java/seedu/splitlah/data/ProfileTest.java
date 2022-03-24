@@ -16,7 +16,7 @@ class ProfileTest {
     Manager manager = new Manager();
 
     /**
-     * Creates 2 sessions that is stored and managed by the Manager object.
+     * Creates two sessions that is stored and managed by the Manager object.
      */
     @BeforeEach
     void setUp() {

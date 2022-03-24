@@ -12,7 +12,7 @@ class SessionDeleteCommandTest {
     Manager manager = new Manager();
 
     /**
-     * Creates 2 sessions that is stored and managed by the Manager object.
+     * Creates two sessions that is stored and managed by the Manager object.
      */
     @BeforeEach
     void setUp() {
@@ -25,13 +25,39 @@ class SessionDeleteCommandTest {
     }
 
     /**
-     * Checks if session is deleted with a missing delimiter.
+     * Checks if session is not deleted with a missing delimiter.
      */
     @Test
     public void prepare_hasMissingDelimiter_InvalidCommand() {
-        String argsMissingSidDelimiter = "session /delete";
+        String argsMissingSidDelimiter = "session /delete sid 1";
         Command sessionWithMissingSidDelimiter = Parser.getCommand(argsMissingSidDelimiter);
         assertEquals(InvalidCommand.class, sessionWithMissingSidDelimiter.getClass());
+    }
+
+    /**
+     * Checks if session is not deleted with a missing argument.
+     */
+    @Test
+    public void prepare_hasMissingArgument_InvalidCommand() {
+        String argsMissingSidDelimiter = "session /delete /sid";
+        Command sessionWithMissingSidDelimiter = Parser.getCommand(argsMissingSidDelimiter);
+        assertEquals(InvalidCommand.class, sessionWithMissingSidDelimiter.getClass());
+    }
+
+    /**
+     * Checks if session is deleted successfully and removed from list of sessions.
+     */
+    @Test
+    public void run_validCommand_sessionListSizeBecomesOne() {
+        String userInput = "session /delete /sid 1";
+        Command command = Parser.getCommand(userInput);
+
+        // Check if a SessionDeleteCommand instance was returned.
+        assertEquals(SessionDeleteCommand.class, command.getClass());
+        command.run(manager);
+
+        // Check if session was successfully removed from the list of sessions.
+        assertEquals(1, manager.getProfile().getSessionList().size());
     }
 
     /**
