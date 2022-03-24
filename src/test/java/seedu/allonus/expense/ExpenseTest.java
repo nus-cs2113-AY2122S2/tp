@@ -1,7 +1,6 @@
 package seedu.allonus.expense;
 
 import org.junit.jupiter.api.Test;
-import seedu.allonus.contacts.Contact;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
