@@ -1,0 +1,21 @@
+@startuml
+abstract class Controller {
+#choices : String[]
++Controller(choices : String[])
++takeControl() : void
+#getChoice() : int
+#{abstract}optionSwitcher() : bool
+}
+
+class MainController {
+-{static}CHOICES : String[]
+-controllers : Controller[]
++MainController()
+#optionSwitcher() : bool
+-enterDishMenu() : void
+-enterOrderMenu() : void
+-enterStaffMenu() : void
+}
+
+Controller <|--- MainController
+@enduml
