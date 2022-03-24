@@ -1,5 +1,6 @@
 package seedu.duke.assets;
 
+import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
 
@@ -27,11 +28,19 @@ public class PatientList extends List{
         UI.printParagraph(getPatient(nric).toString());
     }
 
+    @Override
+    public void edit(String[] parameters) throws NotFoundException {
+
+    }
+
     public void view() {
         UI.printParagraph(toString());
     }
 
-    public void add(String[] addPatientParameters) {
+    public void add(String[] addPatientParameters) throws DuplicateEntryException {
+        if (getPatient(addPatientParameters[0]) != null) {
+            throw new DuplicateEntryException();
+        }
         Patient newPatient = new Patient(addPatientParameters[0],addPatientParameters[1],
                 Integer.parseInt(addPatientParameters[2]), addPatientParameters[3].charAt(0),
                 addPatientParameters[4],addPatientParameters[5], addPatientParameters[6]);

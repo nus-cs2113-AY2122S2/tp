@@ -83,7 +83,7 @@ public class MedicineList extends List{
         throw new NotFoundException();
     }
 
-    public void editMedicine(String[] parameterArray) throws NotFoundException {
+    public void edit(String[] parameterArray) throws NotFoundException {
         if (search(parameterArray[0]) != null) {
             Medicine medicine = search(parameterArray[0]);
             medicine.edit(parameterArray[1], Integer.parseInt(parameterArray[2]), parameterArray[3], parameterArray[4],

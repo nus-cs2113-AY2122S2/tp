@@ -42,6 +42,11 @@ public class DoctorList extends List{
         UI.printParagraph(doctor.toString());
     }
 
+    @Override
+    public void edit(String[] parameters) throws NotFoundException {
+
+    }
+
     //view all doctor
     public void view() {
         UI.printParagraph(toString());
@@ -65,14 +70,14 @@ public class DoctorList extends List{
 
     @Override
     public String toString() {
-        if (getSizeDoctor() == 0) {
+        if (getSize() == 0) {
             return "There are no doctors.";
         }
         String doctorName = "";
         int index = 1;
         for (Doctor doctor : this.doctors) {
             doctorName += String.format("%d. %s", index, doctor.toString());
-            if (index != this.getSizeDoctor()) {
+            if (index != this.getSize()) {
                 doctorName += "\n";
             }
             index++;
