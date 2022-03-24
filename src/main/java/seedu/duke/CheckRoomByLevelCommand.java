@@ -35,22 +35,29 @@ public class CheckRoomByLevelCommand extends Command {
                         AssignmentMap assignmentMap, RoomList roomList,
                         ItemList itemList, Ui ui)
             throws InvalidLevelException {
-        boolean isValidLevel = false;
-        for (Room room : roomList.getRoomList()) {
-            if (room.getLevel() == level) {
-                isValidLevel = true;
-                break;
-            }
-        }
+
+        boolean isValidLevel = isValidLevel(level,roomList);
         if (!isValidLevel) {
             throw new InvalidLevelException();
         }
+        printRoom(level, roomList);
+    }
 
+    private void printRoom(int level, RoomList roomList) {
         System.out.println(TABLE_HEAD);
         for (Room room : roomList.getRoomList()) {
             if (room.getLevel() == level) {
                 System.out.println(room);
             }
         }
+    }
+
+    private boolean isValidLevel(int level, RoomList roomList) {
+        for (Room room : roomList.getRoomList()) {
+            if (room.getLevel() == level) {
+                return true;
+            }
+        }
+        return false;
     }
 }

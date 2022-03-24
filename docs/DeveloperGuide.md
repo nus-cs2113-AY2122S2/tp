@@ -173,7 +173,28 @@ The sequence diagram above showcases an example usage scenario of the Add Item C
 - Step 4: `CommandParser#parse` would then call `AddItemCommand#execute` which would call `AddItemCommand#getItem` to extract out the item currently saved within the `AddItemCommand` object.
 - Step 5: `AddItemCommand#execute` would then call `ItemList#addItemToList` and pass it the item object.This results in the `Item` object being added into the `ItemList`.
 - Step 6: `AddItemCommand#execute` would then call `Ui#printAddItemAcknowledgementMessage` which would print out an acknowledgement message informing the user that the item has been succesfully added into the item list.
+### check room information by level
 
+
+The checking room information by level mechanism is facilitated `CheckRoomByLevelCommand`. It extends command. Additionally, it implements the following operations:
+* `CheckRoomByLevelCommand#isValidLevel(int level, RoomList roomList)` - Checks if the level number is valid
+* `CheckRoomByLevelCommand#printRoom(int level, RoomList roomlist)` - Prints all room information ar target level
+
+
+Given below is an example usage scenario of how `CheckRoomByLevelCommand` behaves at each step.
+
+Step 1: User launches the application for the first time. The status of all room will be vacant
+
+Step 2: User give a command `check level 2`. The `CommandParser` runs phase which will return a new `CheckRoomByLevelCommand`.
+and it will parse the parameter after replace command `check level` to ``.
+
+Step 3: The `CheckRoomByLevelCommand` will now contain `2`.
+
+Step 4: The `execute` method will call `isValidLevel(int level, RoomList roomList)` method to check if the level number is valid.
+
+Step 5: The `excute` method will then call `printRoom(int level, RoomList roomList)` method to print room information at target level.
+
+![sequence diagram](team/xunyi_checkroombylevelcommand_uml/checkRoomByLevel_Squence.png)
 
 ## Product scope
 ### Target user profile

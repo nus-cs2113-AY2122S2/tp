@@ -18,9 +18,9 @@ public class CommandParser {
     private static final String CHECK_IN = "check in";
     private static final String CHECK_OUT = "check out";
     private static final String CHECK_ROOM = "check room";
-    private static final String CHECK_ALL_ROOM = "check all room";
-    private static final String CHECK_ROOM_BY_LEVEL = "check level room";
-    private static final String CHECK_BY_CATEGORY = "check category room";
+    private static final String CHECK_ALL_ROOM = "check all";
+    private static final String CHECK_ROOM_BY_LEVEL = "check level";
+    private static final String CHECK_BY_CATEGORY = "check category";
     private static final String UPDATE_ITEM_PAX_COMMAND = "Update Item Pax";
     private static final String ASSIGN_HOUSEKEEPER = "Assign";
     public static final String VIEW_HOUSEKEEPER_COMMAND = "View Recorded Housekeeper";
