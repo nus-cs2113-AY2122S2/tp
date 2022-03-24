@@ -2,12 +2,12 @@
 !include Style.puml
 
 box AddCommand
-participant ":Parser" as Parser LOGIC_COLOR
-participant "Command:AddCommand" as AddCommand LOGIC_COLOR
-participant ":GeneralFunctions" as GeneralFunctions LOGIC_COLOR
-participant ":AddCommandInputTest" as AddCommandInputTest LOGIC_COLOR
-participant ":Expenditure" as Expenditure LOGIC_COLOR
-participant ":expenditureList" as expenditureList LOGIC_COLOR
+participant ":Parser" as Parser LOGIC_COLOR_T1
+participant "Command:AddCommand" as AddCommand LOGIC_COLOR_T1
+participant ":GeneralFunctions" as GeneralFunctions LOGIC_COLOR_T1
+participant ":AddCommandInputTest" as AddCommandInputTest LOGIC_COLOR_T1
+participant ":Expenditure" as Expenditure LOGIC_COLOR_T1
+participant ":expenditureList" as expenditureList LOGIC_COLOR_T1
 end box
 
 Parser -> AddCommand: AddCommand()#execute
