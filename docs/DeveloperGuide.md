@@ -154,6 +154,7 @@ for subsequent prompts.
 ### Exercise
 
 ---
+
 ### Workout
 #### Create New Workout
 
@@ -364,7 +365,7 @@ This completes the process of deleting an existing workout in WerkIt!
 
 ##### Design Considerations for Deleting Existing Workout
 ###### Rewrite All Workout To File
-Currently, the WerkIt! program will rewrite all workout to the resource file, `resource.txt`, when the delete workout
+Currently, the WerkIt! program will rewrite all workout to the resource file, `workouts.txt`, when the delete workout
 function is executed. Such implementation may have performance issues as the program needs to rewrite the whole
 file with the modified workout list whenever a workout is deleted in the application.
 <br><br>
