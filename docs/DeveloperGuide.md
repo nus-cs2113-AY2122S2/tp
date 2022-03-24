@@ -28,7 +28,7 @@ step are further described below.
 ![Step 2](team/aiman_assignment/step2.png)
 
 __Step 3.__ The `CommandParser` class replaces the `Assign Susan ## 301` in the user input with an empty string,
-leaving just `Susan ## 301`. Then, an instance of `AssignHousekeeperCommand` is created which extends `Command`.
+leaving just `Susan ## 301`. Then, an instance of `AssignHousekeeperCommand` is created which extends the class `Command`.
 
 ![Step 3](team/aiman_assignment/step3.png)
 
