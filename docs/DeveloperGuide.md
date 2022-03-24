@@ -180,14 +180,14 @@ The general workflow of the `group /create` command is as follows:
 1. The user input provided is passed to `Splitlah`.
 2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `GroupCreateCommand` object.
 3. A `GroupCreateCommand#run` method is then invoked to run the group /create command.
-4. Once the command starts to run, `GroupCreateCommand`class checks if there are duplicates in the name list 
+4. Once the command starts to run, `GroupCreateCommand`class checks if there are duplicates in the name list.
 5. If there are duplicates, a message indicating that name list contains duplicates is printed using `TextUi#printlnMessage`. 
 6. If there are no duplicates, `GroupCreateCommand` class converts each of the names into a `Person` object.
-7. `GroupCreateCommand` class then checks if there is an existing group with the same group name.
-8. If existing groups with the group name are found, a message indicating that another group with the same name is printed using `TextUi#printlnMessage`
+7. `GroupCreateCommand` class then checks if there is an existing group with the same group name. 
+8. If existing groups with the group name are found, a message indicating that another group with the same name is printed using `TextUi#printlnMessage`.
 9. `GroupCreateCommand` class create a new `Group` object using the group name, name list, and groupId. 
-10. The list of `Group` object are managed by a `Profile` object, hence `Manager#getProfile#addGroup` is called to store the new Group object in the Profile.
-11. The `GroupCreateCommand` class prints a message indicating that a group has been successfully created.
+10. The list of `Group` objects are managed by a `Profile` object, hence `Manager#getProfile#addGroup` is called to store the new Group object in the Profile.
+11. The `GroupCreateCommand` class then prints a message indicating that a group has been successfully created.
 
 ### Remove a group
 ### View a group
