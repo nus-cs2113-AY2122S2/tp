@@ -25,7 +25,7 @@ public class Staff implements Serializable {
     }
 
     private static boolean isValidName(String name) {
-        return !(name == null || name.equals("");
+        return !(name == null || name.equals(""));
     }
 
     public int getStaffId() {
