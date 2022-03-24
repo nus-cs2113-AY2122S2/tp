@@ -1,19 +1,20 @@
-package seedu.duke.helper;
+package seedu.duke.helper.command;
 
 import seedu.duke.assets.List;
-import seedu.duke.assets.PatientList;
+import seedu.duke.status.Status;
 
 public class ViewPatientCommand extends Command{
 
-    ViewPatientCommand(String[] parameterArray) {
+    public ViewPatientCommand(String[] parameterArray) {
         super(parameterArray);
     }
 
-    public void execute(List patientList) {
+    public Status execute(List patientList) {
         if (parameterArray == null) {
             patientList.view();
         } else {
             patientList.view(parameterArray[0]);
         }
+        return Status.VIEW_SUCCESS;
     }
 }

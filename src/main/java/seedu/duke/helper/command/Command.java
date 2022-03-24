@@ -1,4 +1,4 @@
-package seedu.duke.helper;
+package seedu.duke.helper.command;
 
 import seedu.duke.assets.AppointmentList;
 import seedu.duke.assets.DoctorList;
@@ -8,6 +8,7 @@ import seedu.duke.assets.PatientList;
 import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
+import seedu.duke.status.Status;
 
 
 public abstract class  Command {
@@ -17,7 +18,7 @@ public abstract class  Command {
         this.parameterArray = parameterArray;
     }
 
-    public abstract void execute (List list) throws DuplicateEntryException, NotFoundException;
+    public abstract Status execute (List list) throws DuplicateEntryException, NotFoundException;
 
 //    private boolean isNull(String string) {
 //        return string == null;

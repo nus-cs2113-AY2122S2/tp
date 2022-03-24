@@ -1,8 +1,8 @@
-package seedu.duke.helper;
+package seedu.duke.helper.command;
 
 import seedu.duke.assets.List;
-import seedu.duke.assets.PatientList;
 import seedu.duke.exception.DuplicateEntryException;
+import seedu.duke.status.Status;
 
 public class AddPatientCommand extends Command{
 
@@ -10,7 +10,8 @@ public class AddPatientCommand extends Command{
         super(parameterArray);
     }
 
-    public void execute(List patientList) throws DuplicateEntryException {
+    public Status execute(List patientList) throws DuplicateEntryException {
         patientList.add(this.parameterArray);
+        return Status.ADD_PATIENT_SUCCESS;
     }
 }
