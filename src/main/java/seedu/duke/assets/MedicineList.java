@@ -26,7 +26,7 @@ public class MedicineList extends List {
 
     public void add(String[] parameterArray) throws DuplicateEntryException {
         if (search(parameterArray[0]) != null) {
-            throw new DuplicateEntryException();
+            throw new DuplicateEntryException("Medicine with given Batch ID already exists!");
         }
         Medicine newMedicine = new Medicine(parameterArray[0], parameterArray[1],
                 Integer.parseInt(parameterArray[2]), parameterArray[3], parameterArray[4],
@@ -80,7 +80,7 @@ public class MedicineList extends List {
                 return;
             }
         }
-        throw new NotFoundException();
+        throw new NotFoundException("There are no medicines with given Batch ID!");
     }
 
     public void edit(String[] parameterArray) throws NotFoundException {
@@ -90,7 +90,7 @@ public class MedicineList extends List {
                     Integer.parseInt(parameterArray[5]));
             return;
         }
-        throw new NotFoundException();
+        throw new NotFoundException("There are no medicines with given Batch ID!");
     }
 
     public ArrayList<Medicine> getList() {

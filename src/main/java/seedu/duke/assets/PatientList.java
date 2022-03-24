@@ -39,7 +39,7 @@ public class PatientList extends List {
 
     public void add(String[] addPatientParameters) throws DuplicateEntryException {
         if (getPatient(addPatientParameters[0]) != null) {
-            throw new DuplicateEntryException();
+            throw new DuplicateEntryException("Patient with given NRIC already exists!");
         }
         Patient newPatient = new Patient(addPatientParameters[0],addPatientParameters[1],
                 Integer.parseInt(addPatientParameters[2]), addPatientParameters[3].charAt(0),
@@ -58,7 +58,7 @@ public class PatientList extends List {
                 return;
             }
         }
-        throw new NotFoundException();
+        throw new NotFoundException("There are no patients with given NRIC!");
     }
 
     public ArrayList<Patient> getList() {

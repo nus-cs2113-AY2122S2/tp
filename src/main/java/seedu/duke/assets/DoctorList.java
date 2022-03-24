@@ -22,7 +22,7 @@ public class DoctorList extends List {
 
     public void add(String[] addDoctorParameters) throws DuplicateEntryException {
         if (getDoctor(addDoctorParameters[0]) != null) {
-            throw new DuplicateEntryException();
+            throw new DuplicateEntryException("Doctor with given NRIC already exists!");
         }
         Doctor newDoctor = new Doctor(addDoctorParameters[0],addDoctorParameters[1],
                 Integer.parseInt(addDoctorParameters[2]), addDoctorParameters[3].charAt(0),
@@ -65,7 +65,7 @@ public class DoctorList extends List {
                 return;
             }
         }
-        throw new NotFoundException();
+        throw new NotFoundException("There are no doctors with given NRIC!");
     }
 
     @Override
