@@ -1,3 +1,4 @@
+//@@author OzairHasan
 package seedu.allonus;
 
 import seedu.allonus.contacts.ContactsManager;
@@ -176,6 +177,7 @@ public class AllOnUs {
                 continue;
             }
         }
+        assert userInput != "exit" : "Loop broke without an exit command from user.";
     }
 
     /**
@@ -205,3 +207,5 @@ public class AllOnUs {
         exit();
     }
 }
+
+//@@author

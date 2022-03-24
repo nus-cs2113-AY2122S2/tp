@@ -20,20 +20,116 @@ and contact management tasks done faster than traditional GUI apps.
 {Give detailed description of each feature}
 
 ### Main Menu Features
+####Navigating from menu to section of interest: `goto`
+Allows access to subsections of the application, namely, to the expense tracker, contacts manager and task manager.
 
-#### ...
-...
+Format: `goto m/SECTION`
 
-Format: `add ...`
+**Examples of usage:**
+* `goto m/Expense_Tracker`
+* `goto m/Study_Manager`
+* `goto m/Contacts_Manager`
 
-* ...
-* ...
+**Expected outcome:**
+For expense tracker,
+```
+Welcome to Expense Tracker
+```
 
-Example of usage:
+For study manager,
+```
+Welcome to Modules Tracker, where you can track all your classes.
+```
 
-`...`
+For contacts manager,
+```
+Welcome to Contacts Manager
+```
 
-`...`
+####Going back to menu: `menu`
+Allows navigation back to the menu section of the application.
+
+Format: `menu`
+
+**Example of usage:**
+user types in the `menu` command from another section:
+`menu`
+which results in:
+```
+Welcome back to the main menu
+Menu:
+```
+
+####Getting guidance on the usage of the application: `help`
+Displays user guide for menu.
+
+Format: `help`
+
+**Example of usage:**
+User enters `help` when in main menu:
+`help`
+which results in:
+```
+Going from menu to section of interest:
+
+Allows access to subsections of the application, namely, to the expense tracker, contacts manager and task manager.
+
+Format: goto m/SECTION
+
+Examples:
+
+- goto m/Expense_Tracker
+- goto m/Study_Manager
+- goto m/Contacts_Manager
+
+
+Going back to menu:
+
+Allows navigation back to the menu section of the application. 
+
+Format: menu
+
+Example:
+
+- menu
+
+
+Getting guidance on the usage of the application:
+
+Displays user guide.
+
+Format: help
+
+Example:
+
+- help
+
+
+Exiting the application:
+
+Terminates the application.
+
+Format: exit
+
+Example:
+
+- exit
+Menu:
+```
+
+####Exiting the application: `exit`
+Terminates the application.
+
+Format: `exit`
+
+**Example of usage:**
+User enters `exit`:
+`exit`
+which results in:
+```
+Goodbye! Hope to see you again...
+```
+
 
 ### Expense Tracker Features
 ####List out all expenses: `list`
