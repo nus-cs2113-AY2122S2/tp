@@ -104,14 +104,14 @@ Upon startup, Sherpass also shows your schedule for the day.
 
 Format:
 - To see the timetable for the day: `show today`
-- To see the timetable for a specific day: `show <date>`, where the date is in the format d/M/YYYY.
+- To see the timetable for a specific day: `show <date>`, where the date is in the format `d/M/YYYY`.
   E.g. `show 25/3/2022` shows the schedule for 25th March 2022
 - To see the timetable for the week you are in: `show week`
 
 Below is an example of the timetable that is being generated from the given date
 25/3/2022:
 
-![](images/timetableFormat.png)
+![ShowDateTimetableFormat](images/showDateTimetableFormat.PNG)
 
 ### Getting a detailed list: `show all` / `show todo`
 
