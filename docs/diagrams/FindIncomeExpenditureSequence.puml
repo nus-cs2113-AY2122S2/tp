@@ -1,0 +1,81 @@
+@startuml
+!include style.puml
+
+box " " #WHITE
+    participant "c:FindCommand" as Commands LOGIC_COLOR
+    participant "<color:coral><<class>>\nParser" as Parser LOGIC_COLOR_T4
+    participant ":Family" as Family MODEL_COLOR
+    participant ":PersonList" as PList MODEL_COLOR
+    participant ":Person" as Person MODEL_COLOR
+    participant ":ExpenditureList" as EList MODEL_COLOR_T3
+    participant ":Expense" as Exp MODEL_COLOR_T3
+    participant ":IncomeList" as IList MODEL_COLOR_T3
+    participant ":Income" as Inc MODEL_COLOR_T3
+    participant "<color:coral><<class>>\nUI" as UI UI_COLOR_T3
+end box
+
+[-> Commands : execute(find /d Bills /c 1)
+activate Commands
+
+Commands -> Parser : parseCategory(find /d Bills /c 1)
+activate Parser
+Parser --> Commands : 1
+Parser --> Commands : "Bills"
+deactivate Parser
+
+Commands -> Family : listExpenseSearch("Bills", 1)
+activate Family
+
+loop for each Generation
+    Family -> PList : getPersonList()
+    activate PList
+    PList --> Family
+    deactivate PList
+
+    loop for each Person
+        Family -> Person : getPerson()
+        activate Person
+        Person --> Family : p
+        deactivate Person
+
+        Family -> EList : searchExpense("Bills", 1)
+        activate EList
+
+        loop for each expense
+            EList -> Exp : getCategory()
+            activate Exp
+            EList -> Exp : Description()
+            Exp --> EList
+            deactivate Exp
+        end
+
+        EList --> Family : ArrayList<Expenditure>
+        deactivate EList
+
+        Family -> IList : searchIncome("Bills")
+        activate IList
+
+        loop for each Income
+            IList -> Inc : getDescription()
+            activate Inc
+            Inc --> IList
+            deactivate Inc
+        end
+
+        IList --> Family : ArrayList<Income>
+        deactivate IList
+
+    end
+end
+
+Family -> UI : printMsg()
+activate UI
+UI --> Family
+deactivate UI
+
+Family --> Commands
+deactivate Family
+
+[<--Commands
+deactivate Commands
+@enduml
