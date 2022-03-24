@@ -1,0 +1,39 @@
+@startuml
+
+Participant ":InvMgr" as InvMgr
+Participant ":Parser" as Parser
+Participant "inputCommand:DescCommand" as DescCommand
+Participant "itemList:ItemList" as ItemList
+Participant "ui:Ui" as Ui
+Participant "storage:Storage" as Storage
+
+InvMgr -> InvMgr: run
+activate InvMgr
+    InvMgr -> Parser: parse("desc 1")
+    activate Parser
+        create DescCommand
+        Parser -> DescCommand: DescCommand(descIndex)
+        activate DescCommand
+            return
+
+        return inputCommand: DescCommand
+
+    InvMgr -> DescCommand: execute()
+    activate DescCommand
+        DescCommand -> ItemList: getItem(index)
+        activate ItemList
+            return item:Item
+
+        DescCommand -> Ui: showMessages(message)
+        activate Ui
+            return
+
+        return
+
+    InvMgr -> Storage: writeData(ArrayList)
+    activate Storage
+        return
+
+deactivate InvMgr
+
+@enduml
