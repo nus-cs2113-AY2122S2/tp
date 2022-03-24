@@ -16,6 +16,7 @@ import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.ui.Message;
 
 import java.time.format.DateTimeFormatter;
@@ -399,7 +400,7 @@ public class ParserUtils {
         
         String[] delimiterList;
         switch (commandType) {
-        case ActivityCreateCommand.COMMAND_TEXT:
+        case ActivityCreateCommandParser.COMMAND_TEXT:
             delimiterList = ActivityCreateCommand.COMMAND_DELIMITERS;
             break;
         case ActivityDeleteCommand.COMMAND_TEXT:
