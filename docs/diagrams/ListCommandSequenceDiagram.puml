@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+skinparam guillemet false
+skinparam sequenceStereotypeFontColor red
+skinparam sequenceStereotypeFontStyle bold
+
+Participant ":InvMgr" as invmgr
+Participant "Parser" as parser <<class>>
+Participant ":ListCommand" as lstcmd
+Participant "itemList:ItemList" as itmlst
+Participant "ui:Ui" as ui
+
+activate invmgr
+
+-> invmgr
+invmgr -> parser:parse("list")
+activate parser
+
+create lstcmd
+parser -> lstcmd
+activate lstcmd
+return
+
+return inputCommand:ListCommand
+
+invmgr -> lstcmd:execute(itemList: ItemList, ui: Ui)
+
+activate lstcmd
+loop int i = 0; i < itemList.getSize(); i++
+    lstcmd -> itmlst:getItem(i)
+    activate itmlst
+    return
+
+    lstcmd -> ui:showMessages(String.valueOf(i + 1) + "." + itemList.getItem(i))
+    activate ui
+    return 
+
+end
+return
+destroy lstcmd
+
+@enduml
