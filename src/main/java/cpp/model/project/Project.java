@@ -1,6 +1,4 @@
-package cpp.projects;
-
-import cpp.Constants;
+package cpp.model.project;
 
 import java.util.ArrayList;
 

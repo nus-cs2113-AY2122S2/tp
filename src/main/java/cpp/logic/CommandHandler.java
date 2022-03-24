@@ -1,9 +1,13 @@
-package cpp.projects.commandhandler;
+package cpp.logic;
 
 import cpp.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.exceptions.NegativeIndexException;
-import cpp.projects.ProjectList;
+import cpp.logic.commands.Command;
+import cpp.logic.parser.AddProjectCommandParser;
+import cpp.logic.parser.AddTodoCommandParser;
+import cpp.logic.parser.MarkCommandParser;
+import cpp.model.ProjectList;
 import cpp.response.Response;
 
 import java.util.Arrays;
@@ -27,6 +31,7 @@ public class CommandHandler {
     public void handleUserInput(ProjectList projectList, String userInput) throws IllegalCommandException {
         String[] commands = userInput.split(" ");
         String projectName;
+        String executeResult;
 
         switch (commands[0].toLowerCase()) {
         case "addproject": //add a project into list
@@ -42,10 +47,10 @@ public class CommandHandler {
             listProjects(projectList);
             break;
         case "todo":
-            toDo(projectList, commands);
+            executeResult = executeCommand(projectList, new AddTodoCommandParser().parse(commands));
             break;
         case "mark":
-            mark(projectList, commands);
+            executeResult = executeCommand(projectList, new MarkCommandParser().parse(commands));
             break;
         case "adddeadline":
             addDeadline(projectList, commands);
@@ -57,10 +62,16 @@ public class CommandHandler {
             Response.printHelp();
             break;
         default:
-            Response.printDefault();
-            break;
+            throw new IllegalCommandException(Constants.UNKNOWN_COMMAND);
         }
 
+        //System.out.println("Execute result: ", executeResult);
+
+    }
+
+    private String executeCommand(ProjectList projectList, Command command) {
+        assert (command != null) : "The command should not be null.";
+        return command.execute(projectList);
     }
 
     private String getProjectName(String[] userInput) {
@@ -69,32 +80,12 @@ public class CommandHandler {
         String[] splitedName = Arrays.copyOfRange(userInput, 1, userInput.length);
         String projectName = String.join(" ", splitedName);
         return projectName;
+
     }
 
     private void listProjects(ProjectList projectList) {
         assert (projectList != null) : "Cannot print projects.";
         projectList.printProject();
-    }
-
-    private void toDo(ProjectList projectList, String[] commands) throws IllegalCommandException {
-        assert (projectList != null && commands != null) : "Cannot add todo to a project.";
-        if (commands.length < Constants.THREE_ARGUMENTS) {
-            throw new IllegalCommandException(Constants.MESSAGE_INVALID_TODO_COMMAND_FORMAT);
-        }
-        String todoString = parseTodoString(commands);
-        projectList.addTodoToProject(commands[1], todoString);
-    }
-
-    private void mark(ProjectList projectList, String[] commands) throws IllegalCommandException {
-        assert (projectList != null && commands != null) : "Cannot mark a todo.";
-        if (commands.length < Constants.THREE_ARGUMENTS) {
-            throw new IllegalCommandException(Constants.MESSAGE_INVALID_MARK_COMMAND_FORMAT);
-        }
-        try {
-            projectList.markTodoAsDone(commands[1], commands[2]);
-        } catch (NegativeIndexException e) {
-            System.out.println("The target index is a negative number. Please enter a positive integer.");
-        }
     }
 
     private void addDeadline(ProjectList projectList, String[] commands) throws IllegalCommandException {
@@ -124,4 +115,5 @@ public class CommandHandler {
         }
         return todoString;
     }
+
 }
