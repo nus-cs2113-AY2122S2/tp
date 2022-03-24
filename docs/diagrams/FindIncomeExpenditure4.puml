@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+show members
+hide empty members
+
+title After iterating Alice's IncomeList
+
+package " " {
+    class temp as "__tempIncList:MoneyList(temp)__"
+    class Fam as "__family:Family__"
+    class MyGen as "__myGen:PersonList__"
+    class Alice as "__Alice:Person__"
+    class List as "__IncomeList:MoneyList(temp)__"
+    class Inc0 as "__Income0:Money(temp)__" #LIGHTGREEN {
+        description = "Bills Rebate"
+    }
+    class Inc1 as "__Income0:Money(temp)__" #LIGHTGREEN {
+        description = "Bills Rebate"
+    }
+}
+
+Fam -down-> MyGen
+
+MyGen -> Alice
+
+Alice -down-> List
+
+Inc0 -up[#GREEN]-> List
+Inc1 -up[#GREEN]-> temp
+
+temp-[HIDDEN]>Fam
+
+@end
