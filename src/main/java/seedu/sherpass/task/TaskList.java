@@ -121,11 +121,16 @@ public class TaskList {
      * Returns a boolean value denoting the existence of a task
      * within the task array.
      *
-     * @param deleteIndex Index of a task. Corresponds to its placement in task array.
+     * @param index Index of a task. Corresponds to its placement in task array.
      * @return Returns true if task exists in task array. False otherwise.
      */
-    public boolean isTaskExist(int deleteIndex) {
-        return tasks.get(deleteIndex) != null;
+    public boolean isTaskExist(int index) {
+        try {
+            tasks.get(index);
+            return true;
+        } catch (IndexOutOfBoundsException exception) {
+            return false;
+        }
     }
 
     /**
