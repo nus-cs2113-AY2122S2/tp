@@ -97,6 +97,6 @@ class CategoryTest {
 
     @Test
     void getNumOfCategories_isExpectedNum_success() {
-        assertEquals(6, Category.getNumOfCategories());
+        assertEquals(6, Category.getNumberOfCategories());
     }
 }

@@ -394,7 +394,7 @@ public class Parser {
         assert (categoryIndex != null) : ASSERT_CATEGORY_NOT_NULL;
         try {
             int checkIndex = Integer.parseInt(categoryIndex);
-            checkTooHighIndex(checkIndex, Category.getNumOfCategories());
+            checkTooHighIndex(checkIndex, Category.getNumberOfCategories());
             checkTooLowIndex(checkIndex, MIN_CATEGORY_INDEX);
             logger.getLogger().log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;

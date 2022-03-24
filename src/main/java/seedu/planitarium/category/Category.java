@@ -62,7 +62,7 @@ public enum Category {
      *
      * @return The number of categories.
      */
-    public static int getNumOfCategories() {
+    public static int getNumberOfCategories() {
         return NumOfCategories;
     }
 }
