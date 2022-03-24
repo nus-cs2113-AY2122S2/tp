@@ -14,11 +14,13 @@ import java.util.logging.Level;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.dayOnlyFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.dateOnlyFormat;
+import static seedu.sherpass.constant.TimetableConstant.BLANK_MARK_STATUS;
 import static seedu.sherpass.constant.TimetableConstant.BLANK_TIME_PERIOD;
 import static seedu.sherpass.constant.TimetableConstant.DATE_SPACE_FULL_LENGTH;
 import static seedu.sherpass.constant.TimetableConstant.DAYS_IN_A_WEEK;
 import static seedu.sherpass.constant.TimetableConstant.PARTITION_PIPE_LINE_LENGTH;
 import static seedu.sherpass.constant.TimetableConstant.PARTITION_SPACE_OFFSET_LENGTH;
+import static seedu.sherpass.constant.TimetableConstant.STRING_COMPARE_OFFSET;
 import static seedu.sherpass.constant.TimetableConstant.TASK_SPACE_COMPARE_LENGTH;
 import static seedu.sherpass.constant.TimetableConstant.TASK_SPACE_FULL_LENGTH;
 import static seedu.sherpass.constant.TimetableConstant.TASK_SPACE_COMPARE_OFFSET_LENGTH;
@@ -46,14 +48,14 @@ public class Timetable {
         return TASK_SPACE_FULL_LENGTH;
     }
 
-    private static int calculateColBackWhiteSpace(int maxDescriptionLength,
-                                                  String description) {
+    private static long calculateColBackWhiteSpace(long maxDescriptionLength,
+                                                   String description) {
         return maxDescriptionLength - (description.length() + WHITE_SPACE_FRONT_OFFSET_LENGTH);
     }
 
     private static void printRow(String colOne, String colTwo, String colThree,
                                  String colFour, String colFive,
-                                 int taskLength, int doOnDateLength, int rowNumber, Ui ui) {
+                                 long taskLength, long doOnDateLength, int rowNumber, Ui ui) {
         String taskColumnBackWhiteSpace = ui.getRepeatedCharacters(" ",
                 calculateColBackWhiteSpace(taskLength, colFour));
         String doOnDateColumnBackWhiteSpace = ui.getRepeatedCharacters(" ",
@@ -64,8 +66,8 @@ public class Timetable {
                     + "|  " + colFive + doOnDateColumnBackWhiteSpace + "|");
         } else if (rowNumber == 2) {
             ui.showToUser("|  " + colOne + "       | " + colTwo + " |      "
-                    + colThree + "       | " + colFour + taskColumnBackWhiteSpace
-                    + "| " + colFive + doOnDateColumnBackWhiteSpace + "|");
+                    + colThree + "       |  " + colFour + taskColumnBackWhiteSpace
+                    + "|  " + colFive + doOnDateColumnBackWhiteSpace + "|");
         } else if (rowNumber == 3) {
             ui.showToUser("| " + colOne + " | " + colTwo + " |      " + colThree
                     + "       |  " + colFour + taskColumnBackWhiteSpace + "|  "
@@ -77,62 +79,66 @@ public class Timetable {
         }
     }
 
+    private static boolean isDuplicate(String currentString, String prevString, boolean isOriginal) {
+        return currentString.equals(prevString) || !isOriginal;
+    }
+
     private static void printTimetable(String day, String date, ArrayList<Task> filteredTasks,
-                                       Ui ui, int taskLength, int doOnDateLength, int partitionLength) {
+                                       Ui ui, long taskLength, long doOnDateLength, long partitionLength) {
         int j = 0;
         String colOne;
         String colTwo = "Time";
         String colThree = "Mark Status";
         String colFour = "Task Description";
         String colFive = "Do on Date";
-
+        boolean isOriginal = true;
         for (int i = 0; i < filteredTasks.size() + TIMETABLE_SIZE_OFFSET; i++) {
             if ((i == 0) || (i == filteredTasks.size() + TIMETABLE_SIZE_OFFSET - 1)) {
                 ui.showToUser(ui.getRepeatedCharacters("-", partitionLength));
                 continue;
-            } else if (i == 1) {
-                colOne = "Day";
-            } else if (i == 2) {
-                colOne = day;
-            } else {
-                colOne = date;
             }
 
+            colOne = (i == 1) ? "Day" : ((i == 2) ? day : date);
             if (i >= 2) {
-                colTwo = (colTwo.equals(filteredTasks.get(j).getTimePeriod()))
-                        ? BLANK_TIME_PERIOD : filteredTasks.get(j).getTimePeriod();
-                colThree = filteredTasks.get(j).getStatusIcon();
-                colFour = (filteredTasks.get(j).getIndex() + "." + filteredTasks.get(j).getDescription());
-                colFive = filteredTasks.get(j).getDoOnDateString();
-                assert (j < filteredTasks.size());
+                colTwo = (j < filteredTasks.size())
+                        ? (isDuplicate(filteredTasks.get(j).getTimePeriod(), colTwo, isOriginal)
+                        ? BLANK_TIME_PERIOD : filteredTasks.get(j).getTimePeriod()) : BLANK_TIME_PERIOD;
+                isOriginal = j < filteredTasks.size()
+                        && (!isDuplicate(filteredTasks.get(j).getTimePeriod(), colTwo, isOriginal));
+                colThree = (j < filteredTasks.size()) ? filteredTasks.get(j).getStatusIcon() : BLANK_MARK_STATUS;
+                colFour = (j < filteredTasks.size())
+                        ? (filteredTasks.get(j).getIndex() + ". " + filteredTasks.get(j).getDescription())
+                        : ui.getRepeatedCharacters(" ", taskLength - STRING_COMPARE_OFFSET);
+                colFive = (j < filteredTasks.size()) ? filteredTasks.get(j).getDoOnDateString(true)
+                        : ui.getRepeatedCharacters(" ", doOnDateLength - STRING_COMPARE_OFFSET);
                 j++;
             }
             printRow(colOne, colTwo, colThree, colFour, colFive, taskLength, doOnDateLength, i, ui);
         }
     }
 
-    private static int calcPartitionLength(int taskLength, int dateLength) {
+    private static long calcPartitionLength(long taskLength, long dateLength) {
         return PARTITION_SPACE_OFFSET_LENGTH + taskLength + dateLength + PARTITION_PIPE_LINE_LENGTH;
     }
 
-    private static void printEmptyTimetable(Ui ui, String day, String date, int partitionLength) {
+    private static void printEmptyTimetable(Ui ui, String day, String date, long partitionLength) {
         ui.showToUser(ui.getRepeatedCharacters("-", partitionLength));
         ui.showToUser("|  Day       |  Time       |  Mark status |  Task Description    |  Do on date  |");
-        String thirdRow = "|  " + day + "       |  \t\t Your schedule is empty for the day!";
+        String thirdRow = "|  " + day + "       |             Your schedule is empty for the day!";
         ui.showToUser(thirdRow + ui.getRepeatedCharacters(" ",
-                partitionLength - thirdRow.length() - 1));
-        String fourthRow = "|  " + date + " |";
+                partitionLength - thirdRow.length() - 1) + "|");
+        String fourthRow = "| " + date + " |";
         ui.showToUser(fourthRow + ui.getRepeatedCharacters(" ",
-                partitionLength - fourthRow.length() - 1));
+                partitionLength - fourthRow.length() - 1) + "|");
         ui.showToUser(ui.getRepeatedCharacters("-", partitionLength));
     }
 
     private static void prepareTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui ui) {
         String day = dateInput.format(dayOnlyFormat);
         String date = dateInput.format(dateOnlyFormat);
-        int taskLength = findTaskLength(filteredTasks);
-        int doOnDateLength = DATE_SPACE_FULL_LENGTH;
-        int partitionLength = calcPartitionLength(taskLength, doOnDateLength);
+        long taskLength = findTaskLength(filteredTasks);
+        long doOnDateLength = DATE_SPACE_FULL_LENGTH;
+        long partitionLength = calcPartitionLength(taskLength, doOnDateLength);
         if (filteredTasks.isEmpty()) {
             printEmptyTimetable(ui, day, date, partitionLength);
             return;
@@ -193,7 +199,7 @@ public class Timetable {
         for (int i = 0; i < DAYS_IN_A_WEEK; i++) {
             showScheduleByDay(currentDate, taskList, ui);
             assert (currentDate != null);
-            currentDate.plus(1, ChronoUnit.DAYS);
+            currentDate = currentDate.plus(1, ChronoUnit.DAYS);
         }
     }
 }
