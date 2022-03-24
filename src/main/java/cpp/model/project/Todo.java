@@ -1,4 +1,4 @@
-package cpp.projects;
+package cpp.model.project;
 
 /**
  * Represents a todo in a project.

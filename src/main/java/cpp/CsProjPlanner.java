@@ -1,8 +1,8 @@
 package cpp;
 
 import cpp.exceptions.IllegalCommandException;
-import cpp.projects.commandhandler.CommandHandler;
-import cpp.projects.ProjectList;
+import cpp.logic.CommandHandler;
+import cpp.model.ProjectList;
 import cpp.response.Response;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -20,6 +20,7 @@ public class CsProjPlanner {
      */
     public static void main(String[] args) {
         assert (0 == 1) : "dummy assertion set to fail";
+
         logger.log(Level.INFO, "going to receive user input");
         String input;
         Scanner in = new Scanner(System.in);

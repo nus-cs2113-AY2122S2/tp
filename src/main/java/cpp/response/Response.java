@@ -51,4 +51,25 @@ public class Response {
         System.out.println("Unknown command.");
         System.out.println(Constants.SEPARATOR);
     }
+
+    public static String addProjectSuccessfully(String name) {
+        return ("The project " + name + "has been added successfully.");
+    }
+
+    public static String addTodoSuccessfully(String todo) {
+        return ("Todo " + todo + "has been added successfully.");
+    }
+
+    public static String addTodoUnsuccessfully(String todo) {
+        return ("Unsuccessful to add todo " + todo + " Please check the target todo index.");
+    }
+
+    public static String markTodoSuccessfully() {
+        return ("Todo has been marked as done.");
+    }
+
+    public static String markTodoUnsuccessfully() {
+        return ("Unsuccessful operation. Please check the target indexes.");
+    }
+
 }

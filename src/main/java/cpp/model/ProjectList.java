@@ -1,7 +1,8 @@
-package cpp.projects;
+package cpp.model;
 
 import cpp.Constants;
 import cpp.exceptions.NegativeIndexException;
+import cpp.model.project.Project;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,20 @@ public class ProjectList {
         }
         System.out.println(Constants.SEPARATOR);
     }
+
+    /*
+    public void addProject(Project project) {
+        System.out.println(Constants.SEPARATOR);
+        int index = findProjectIndex(project.getTitle());
+        if (index == Constants.PROJECT_NOT_FOUND) { //this is a new project
+            projectList.add(project);
+            System.out.println(project.getTitle() + " added.");
+        } else {
+            System.out.println("Failed to add " + project.getTitle() + ". You have added this project before!");
+        }
+        System.out.println(Constants.SEPARATOR);
+    }
+     */
 
     /**
      * Deletes a Project from projectList.
@@ -96,6 +111,17 @@ public class ProjectList {
 
     }
 
+    public void addTodoToProject(int index, String todoString) throws IndexOutOfBoundsException {
+        assert (todoString != null && todoString != "") : "Cannot add todo string to a project.";
+        if (index > projectList.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        Project targetProject;
+        targetProject = projectList.get(index - 1);
+        assert targetProject != null : "The target project does not exist!";
+        targetProject.addTodo(todoString);
+    }
+
     /**
      * Marks a todo in a project as done.
      *
@@ -124,6 +150,16 @@ public class ProjectList {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("The index is out or range.");
         }
+
+    }
+
+    public void markTodoAsDone(int indexProj, int indexTodo) throws IndexOutOfBoundsException {
+        if (indexProj > projectList.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        Project targetProject = projectList.get(indexProj - 1);
+
+        targetProject.markTodoAsDone(indexTodo);
 
     }
 
