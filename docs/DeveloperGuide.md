@@ -109,6 +109,12 @@ The general workflow of the `Parser` component is as follows:
 
 ## Implementation
 
+### Parsing of Commands
+**API reference:** [`Parser.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/Parser.java)
+
+The sequence diagram below models the interactions between various entities within the Parser component and
+the Command component when any user input is provided to SplitLah.
+
 ### Add a session
 ### Remove a session
 ### View a session
