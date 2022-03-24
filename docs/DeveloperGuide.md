@@ -6,6 +6,22 @@
 
 ## Design & implementation
 
+## Design
+
+### Add Housekeeper Command
+
+The objective of the `AddHousekeeperCommand` is to take in user input and spilt it into two parts which is the name and age of a Housekeeper. These details make up parts of the Housekeeper profile. With the name and age derived, these information will be added into a new Housekeeper object, which will be recorded into the list of housekeeper. The class diagram below depicts how the `AddHousekeeperCommand` interacts with other classes.
+
+![class](team/falicia_addHousekeeperCommand/classAddHousekeeper.jpg)
+
+Below is an exmaple showing the usage of AddHousekeeperCommand.
+1. Command given from the user: `add housekeeper susan / 33`. This command meant to add a new housekeeper called susan who is 33 years old.
+2. The parse method from CommandParser will run paarse to create AddHousekeeperCommand and would be return to Duke.
+3. The excute method in AddHousekeeperCommand will be performed. It first checks with the housekeeperList if the name of the houskeeper to be added has been recorded into the list. If it has not been recorded, housekeeperList would then add this new user into the records. Ui will be called to print a confirmation to show that the housekeeper has been entered into the list.
+5. If housekeeper exist, the housekeeper profile would not added into the list.
+
+## Implementation
+
 #### Assign a housekeeper to a room
 The assignment of housekeeper to a room is facilitated by `AssignHousekeeperCommand`. This command objects uses `AssignmentMap`, which keeps a `HashMap`, to help us map a `Room` object to a `Housekeeper` object. 
 
@@ -107,6 +123,28 @@ entity that created those instances, but those are not indicated in the diagram.
 
 ![Sequence Diagram](team/alinazheng_addsatisfactioncommand_uml/AlinaZheng_AddSatisfaction_SequenceDiagram.png)
 
+### Add Housekeeper feature
+
+
+The add housekeeper mechanism is facilitated by `AddHousekeeperCommand`. It extends command. Additionally, it implements the following operations:
+* `AddHousekeeperCommand#extractDetails()`— Stores the name and age of the new Housekeeper
+* `AddHousekeeperCommand#extractName()`— Derive the name of the Housekeeper
+* `AddHousekeeperCommand#extractAge()`— Derive the age of Housekeeper and cast it into an integer
+* `AddHousekeeperCommand#execute()` — Excutes the addition of new housekeeper into list
+
+Given below is an example usage scenario of how AddHousekeeperCommand behaves at each step.
+
+Step 1: User launches the application for the first time. The list of housekeeper in records is empty.
+
+Step 2: User give an add housekeeper command `add housekeeper sally / 40`. The input will be splited by the delimiter `/` to derive `sally` and `40`. The `CommandParser` runs parse which will return a new `AddHousekeeperCommand`.
+
+Step 3: `AddHousekeeperCommand#extractDetails()` will call `AddHousekeeperCommand#extractName()` and `AddHousekeeperCommand#extractAge()` to derive `sally` and `40`.
+
+Step 4: The `AddHousekeeperCommand` will now contain `sally` and `40`.
+
+Step 5: The execute method will derive the housekeeper name, `susan` which would call `HousekeeperList#hasNameAdded()` to verify if name has been recorded. If name is not in records, `HousekeeperList#addHousekeeper()` would be called to add the housekeeper, `sally` and `40` into the housekeeperList.
+
+![class](team/falicia_addHousekeeperCommand/sequenceAddHousekeeper.jpg)
 
 
 ## Product scope
