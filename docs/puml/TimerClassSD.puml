@@ -1,0 +1,55 @@
+@startuml
+participant User
+participant StudyCommand as ":StudyCommand"
+participant Parser as "<<class>>\nParser"
+participant TimerLogic as ":TimerLogic"
+participant Timer as ":Timer"
+
+User -> StudyCommand: start 1
+activate StudyCommand
+
+StudyCommand -> Parser: parseStudyMode(start 1)
+activate Parser
+
+Parser -> TimerLogic: callStartTimer()
+activate TimerLogic
+
+TimerLogic -> Timer: startTimer
+activate Timer
+
+par
+Timer -> Timer: start
+Timer --> TimerLogic
+end
+
+par
+Timer -> Timer: update
+TimerLogic --> Parser
+end
+
+Parser --> StudyCommand
+deactivate Parser
+
+Timer -> Timer: update
+StudyCommand --> User
+User -> StudyCommand: stop
+Timer -> Timer: update
+
+StudyCommand -> Parser: parseStudyMode(stop)
+activate Parser
+
+Parser -> TimerLogic: callStopTimer()
+Timer -> Timer: update
+TimerLogic -> Timer: stopTimer
+Timer -> Timer: stop
+
+Timer --> TimerLogic
+deactivate Timer
+
+TimerLogic --> Parser
+
+Parser --> StudyCommand
+deactivate Parser
+
+StudyCommand --> User
+@enduml
