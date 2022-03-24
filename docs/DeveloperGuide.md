@@ -1,6 +1,6 @@
 # Developer Guide
 
-Mod Happy is a command-line-based application that helps students manage their academics. This developer guide serves to detail
+Mod Happy is a command-line-based application that helps students manage their academics.
 
 ## Acknowledgements
 
@@ -111,6 +111,14 @@ This section describes some details on how some features are implemented.
 
 The tag command accepts a string from the user and adds it into the `tags` attribute (an `ArrayList<String>`) of the specified `Task`.
 
+The following sequence diagram illustrates the process:
+
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/Tag.puml)
+
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/GetModule.puml)
+
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/CheckAndRunTagOperation.puml)
+
 Here is an example on adding a tag to a general task:  
 
 1. User inputs `tag add 2 "testTag"`. 
@@ -120,12 +128,6 @@ Here is an example on adding a tag to a general task:
 5. `TagCommand` first gets the relevant `Module`. Since `taskModule` is null, `getGeneralTasks()` is called and the General Tasks `Module` is retrieved.
 6. Next, `TagCommand` checks the `tagOperation`. As its value is `add`, `addTag(targetModule)` is called.
 7. Finally, command feedback is returned to `Main`, indicating that the operation was successful.
-
-The following sequence diagram illustrates the above process:
-
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/Tag.puml)
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/GetModule.puml)
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/TagSeqDiagram/CheckAndRunTagOperation.puml)
 
 ### GPA Feature
 
@@ -137,13 +139,12 @@ Here is an example on how to calculate GPA:
 2. `ModHappyParser` identifies the command word as `gpa`. Since `gpa` takes no arguments, `gpa` is passed to `NoArgumentParser`.
 3. `NoArgumentParser` returns an instance of `GpaCommand` to `Main`.
 4. `Main` calls the `execute()` method of the `GpaCommand` instance.
-5. `execute()` invokes `calculateGpa()`, which performs the actual GPA computation.
+5. `execute()` invokes `calculateGpa()`, which performs the actual GPA computation by iterating through the provided `moduleList`.
 6. After calculating the GPA, a command feedback string is generated and returned as a string.
 
 Below is the sequence diagram of how the GPA feature works:
 
 ![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/GPASeqDiagram/GPA.puml)
-
 
 ## Product scope
 

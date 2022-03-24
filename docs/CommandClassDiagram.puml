@@ -10,25 +10,25 @@ package command {
     ExitCommand ..> CommandResult :creates >
 
     abstract class Command {
-        +execute():CommandResult {abstract}
+        +execute(): CommandResult {abstract}
     }
 
     class DeleteCommand {
-    -moduleCode:String
-    -taskModule:String
-    -taskIndex:int
-    +DeleteCommand(moduleCode:String)
-    +DeleteCommand(taskIndex:int, taskModule:String)
-    +execute():CommandResult
+    -moduleCode: String
+    -taskModule: String
+    -taskIndex: int
+    +DeleteCommand(String moduleCode)
+    +DeleteCommand(int taskIndex, String taskModule)
+    +execute(): CommandResult
     }
 
     class ExitCommand {
-    +execute():CommandResult
+    +execute(): CommandResult
     }
 
     class CommandResult {
-    +CommandResult(result:String)
-    +toString()
+    +CommandResult(String result)
+    +toString(): String
     }
 }
 

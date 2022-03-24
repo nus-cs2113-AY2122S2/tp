@@ -17,9 +17,6 @@ public class GpaCommand extends Command {
     private String result;
 
     public void calculateGpa(ModuleList moduleList) throws ModHappyException {
-        if (Objects.isNull(moduleList.getModuleList())) {
-            throw new GPANotComputableException();
-        }
         int totalMc = 0;
         double weightedSum = 0.0;
         for (Module m : moduleList.getModuleList()) {
@@ -38,6 +35,9 @@ public class GpaCommand extends Command {
                 totalMc += mc;
                 weightedSum += modularGradePoint * mc;
             }
+        }
+        if (totalMc == 0) {
+            throw new GPANotComputableException();
         }
         double gpa = weightedSum / (double) totalMc;
         result = String.format(GPA_MESSAGE, gpa);

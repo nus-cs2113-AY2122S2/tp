@@ -1,46 +1,39 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-autonumber
 skinparam shadowing false
+participant ":ModHappyParser" as ModHappyParser
 participant ":NoArgumentParser" as NoArgumentParser
 participant ":GpaCommand" as GpaCommand
-participant ":ModuleList" as ModuleList
-participant ":Module" as Module
 
-[->NoArgumentParser : parseCommand()
-create GpaCommand
+note right of ModHappyParser
+Some methods are omitted from this diagram.
+end note
 
+[->ModHappyParser:parseCommand(userInput)
+activate ModHappyParser
+create NoArgumentParser
+ModHappyParser -> NoArgumentParser: NoArgumentParser()
 activate NoArgumentParser
-NoArgumentParser -> GpaCommand
+return
+
+ModHappyParser -> NoArgumentParser: parseCommand(commandWord)
+activate NoArgumentParser
+create GpaCommand
+NoArgumentParser -> GpaCommand: GpaCommand()
 activate GpaCommand
 return
 return
-deactivate NoArgumentParser
+return
 
-[->GpaCommand:execute()
+destroy NoArgumentParser
 
+[->GpaCommand:execute(moduleList, configuration)
 activate GpaCommand
-GpaCommand -> ModuleList : getModule()
 
-alt moduleList not empty
-
-activate ModuleList
-
-loop for all modules in moduleList
-
-return m:Module
-ModuleList -> Module : ArrayList<Module> list
-GpaCommand -> Module : getModularCredit()
-activate Module
-GpaCommand -> Module : getModuleGrade()
-return modularCredit: int, moduleGrade: Grades
-
-end
-
-else empty moduleList
-[<- ModuleList : e: ModuleListEmptyException
-end
+GpaCommand -> GpaCommand: calculateGpa()
+activate GpaCommand
+deactivate GpaCommand
 
 return CommandResult(result)
 
