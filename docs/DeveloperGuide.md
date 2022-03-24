@@ -137,6 +137,29 @@ the Command component when any user input is provided to SplitLah.
 4. With the corresponding `XYZCommandParser` object instantiated, `Parser` will call the `getCommand` method
    of `XYZCommandParser`. This process will be explained in further detail in the sequence diagrams below.
 <br>
+![Reference Frame Command Parser Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefCommandParser.drawio.png)
+![Reference Frame ParseABC Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefParseABC.drawio.png)
+![Reference Frame InvalidCommand Instantiation Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefInvalidCommand.drawio.png)
+<br>
+5. After `XYZCommandParser#getCommand` is called, `XYZCommandParser` will prepare to create a `XYZCommand` object. 
+   To begin with, it will parse all the remaining arguments using `ParseABC` methods from the `Parser` class.
+   (`ParseABC` is a placeholder for specific methods in `Parser` class, 
+   e.g. `Parser#parseName` and `Parser#parseSessionId`)
+   * For example, `SessionCreateCommandParser` has to call `parsePersonList`, `parseGroupId`, `parseName` and
+      `parseLocalDate` from `Parser` class in order to get the details to create a `Session` object.
+   * If an exception is encountered, `XYZCommandParser` will handle the exception accordingly, and if necessary,
+      throw an exception back to `Parser` class, resulting in an `InvalidCommand` object being created and returned.
+6. In detail, when `Parser#parseABC` is called, `Parser` class will call the method `getArgumentFromDelimiter` from
+   `ParserUtils` class, which will return the respective object being parsed.
+   * For example, when `SessionCreateCommandParser` calls `Parser#parsePersonList`,
+      `ParserUtils#getArgumentFromDelimiter` is called. After returning a `String` object containing the arguments to
+      `Parser` class, `Parser` class returns a `String[]` object to `SessionCreateCommandParser`.
+   * Any exception encountered by `ParserUtils` class is propagated back to `XYZCommandParser` to be handled.
+7. After all necessary information is parsed, `XYZCommandParser` instantiates a new `XYZCommand` object and passes
+   all parsed information to it through the constructor.
+8. The newly instantiated `XYZCommand` object is then returned from `XYZCommandParser` to `Parser` class,
+   and finally back to `SplitLah` to be run.
+   * At this point, the `XYZCommandParser` object is no longer referenced.
 
 ### Add a session
 ### Remove a session
