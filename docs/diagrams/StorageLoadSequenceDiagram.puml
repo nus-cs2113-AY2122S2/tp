@@ -1,0 +1,31 @@
+@startuml
+
+hide footbox
+skinparam SequenceReferenceBackgroundColor pink
+
+participant ":InvMgr" as InvMgr
+participant "storage:Storage" as Storage
+participant "gson:Gson" as Gson
+
+activate InvMgr
+    InvMgr -> Storage : load()
+    activate Storage
+
+        create Gson
+        Storage -> Gson : Gson()
+        activate Gson
+        return
+
+        ref over Storage
+            Read dataFile into
+            wholeJsonData: String
+        end ref
+
+        Storage -> Gson : fromJson(wholeJsonData)
+        activate Gson
+        return
+
+    return itemList: ArrayList<Item>
+
+
+@enduml

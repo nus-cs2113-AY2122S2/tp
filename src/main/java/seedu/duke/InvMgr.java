@@ -26,7 +26,7 @@ public class InvMgr {
         ui = new Ui();
         try {
             storage = new Storage(filePath);
-            itemList = new ItemList(storage.loadData());
+            itemList = new ItemList(storage.load());
         } catch (InvMgrException e) {
             ui.showMessages(Messages.ERROR_MESSAGE);
             itemList = new ItemList(new ArrayList<Item>());
@@ -45,7 +45,7 @@ public class InvMgr {
                 Command inputCommand = Parser.parse(command);
                 inputCommand.execute(itemList, ui);
                 isExit = inputCommand.isExit();
-                storage.writeData(itemList.getItemArrayList());
+                storage.save(itemList.getItemArrayList());
             } catch (InvMgrException e) {
                 ui.showError(e);
             }

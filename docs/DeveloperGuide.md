@@ -7,18 +7,43 @@
 ## Design & implementation
 
 ### Command
+![CommandClassDiagram](img/CommandClassDiagram.png)
+The following diagram shows the class diagram for `Command`.
+
 `Command` is an abstract class that sets certain commonalities that is implemented across all types of commands - `AddCommand`, `DescCommand`, `ListCommand`, `DeleteCommand`, `HelpCommand`, `ExitCommand`. Each of these classes have to override the `Command`'s `execute()` method as each command has a different execution. For example, `AddCommand` will be focused on adding an item to an inventory list whereas `DescCommand` will be about retrieving information from the inventory list.
 
-This is illustrated with the class diagram for `Command` below.
+### Description Command
+![DescCommandSequenceDiagram](img/DescCommandSequenceDiagram.png)
+The following diagram shows the sequence diagram for retrieving the description of an item.
 
-![CommandClassDiagram](img/CommandClassDiagram.png)
-
-### DescCommand
 For a user who is unaware of what an item is about, he/she can enter the command eg. `desc 2` command to extract the description for the second item in the inventory list. This command is interpreted by the `Parser` and a `DescCommand` is returned to `InvMgr`. `InvMgr` calls the execute command of `DescCommand` which retrieves the item's information from the `ItemList` and then outputs them into the `Ui` for the user to see.
 
-This is illustrated with the sequence diagram for `DescCommand` below.
+### Add Command
+![AddCommandSequenceDiagram](img/AddCommandSequenceDiagram.png)
 
-![DescCommandSequenceDiagram](img/DescCommandSequenceDiagram.png)
+The following diagram shows the sequence diagram of the addition of an item.
+
+The user starts by typing an add command. The example used in the diagram above is the addition of an item with the name `Paper Cup`, quantity of `25` and description of `100ml paper cups`. The full command is `add n/Paper Cup q/25 d/100ml paper cups`.
+
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. Within `parse()`, the string is identified to start with the word `add`, and executes the code within the case. The case attempts to create an item using the string by self-invoking `createItem()`.
+3. `createItem()` extracts the relevant arguments from the input string and generates a new `Item` which is returned to the `parse()` case block.
+4. `parse()` uses the `Item` to generate a new `AddCommand` which is returned to the `run()` method.
+5. The `run()` method calls on the `execute()` function in the `AddCommand` which will add the generated item to the `ItemList` using its `addItem()` method.
+6. `AddCommand` will converse with `Ui` to show a message that the item has been added. In this case, the item to add will be printed as the name of the item, followed by " has been added!".
+
+### Delete Command
+![DeleteCommandSequenceDiagram](img/DeleteCommandSequenceDiagram.png)
+
+The following diagram shows the sequence diagram of the addition of an item.
+
+The user starts by typing an add command. The example used in the diagram above is the addition of an item with the index `1`, based on the list when the user types the `list` command.
+
+1. The `run()` method within `InvMgr` calls the static method `parse()` in the `Parser` class, providing the entire string of input entered by the user.
+2. Within `parse()`, the string is identified to start with the word `delete`, and executes the code within the case. The case finds the index of the item by splitting the string and indexing it.
+3. `parse()` generates a new `AddCommand` using the index which is returned to the `run()` method.
+4. The `run()` method calls on the `execute()` function in the `DeleteCommand` which will delete the item with that index from the `ItemList` using its `removeItem()` method.
+5. `DeleteCommand` will converse with `Ui` to show a message that the item has been removed. In this case, the item to add will be printed as the name of the item, followed by " has been deleted.".
 
 ## Product scope
 ### Target user profile
