@@ -2,7 +2,7 @@ package seedu.duke.exception;
 
 public class DuplicateEntryException extends Exception {
 
-    public DuplicateEntryException (String message) {
+    public DuplicateEntryException(String message) {
         super(message);
     }
 
