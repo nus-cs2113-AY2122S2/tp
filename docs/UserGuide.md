@@ -73,9 +73,9 @@ displayed in an easy-to-read summary.
 - Parameters enclosed in [ ] must be supplied by the user. 
   - Example: `[SESSION_ID]`
 - Parameters with an ellipsis `...` indicate that the user can supply multiple values.
-  - Example: `[COST1] [COST2] ...`
+  - Example: `[COST1 COST2 ...]`
 - Parameters enclosed within `[<` and `>]` indicates that the arguments are optional.
-  - Example: `[</gst GST_PERCENT /sc SERVICE_CHARGE>]`
+  - Example: `[</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
 
 ## Quick Start
 
@@ -171,10 +171,10 @@ Example of usage:
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
-/co [TOTAL_COST] [OPTIONAL_ARGUMENTS]`
+/co [TOTAL_COST] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
 
 Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
-/cl [COST1 COST2 ...] [OPTIONAL_ARGUMENTS]`
+/cl [COST1 COST2 ...] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
     * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.

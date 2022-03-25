@@ -44,8 +44,8 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
             payer = Parser.parsePayer(commandArgs);
             involvedList = Parser.parseInvolved(commandArgs);
         } catch (InvalidFormatException exception) {
-            throw (new InvalidFormatException(exception.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST +
-                    "\n\t" + COMMAND_FORMAT_SECOND));
+            throw (new InvalidFormatException(exception.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
+                    + "\n\t" + COMMAND_FORMAT_SECOND));
         }
 
         try {

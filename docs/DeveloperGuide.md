@@ -108,20 +108,77 @@ return a `Command` object representing an instruction that the user has for Spli
 On the other hand, the `ParserUtils` class provide supporting methods for `Parser` class to properly run,
 and `ParserErrors` class provide methods to produce custom error messages for the `Parser` component.
 
-<!-- Insert Sequence Diagram -->
-
 The general workflow of the `Parser` component is as follows:
-1. When required to parse for a command, an input String object is passed to the `Parser#getCommand()` method.
-2. The `Parser#getCommandType()` method is then called to decide what command is to be carried out given the input from the user.
-3. Then, `Parser#getRemainingArgument()` method is run to extract the arguments from the user input.
-4. The arguments are then passed to the specified `XYZCommand#prepare()` method if there are any arguments. 
-Otherwise, the constructor is called. Either methods will result in the creation of a new `XYZCommand` object. 
-(`XYZCommand` is a placeholder for specific subclass of the `Command` class, e.g. `SessionCreateCommand`)
-5. The created `XYZCommand` object is then returned by `Parser#getCommand()` method.
+1. When required to parse for a command, the running `SplitLah` object will pass a String object containing
+   the user input to `Parser` class.
+2. `Parser` class instantiates a new `XYZCommandParser` object corresponding to the user input 
+   and passes the user input to it.
+   (`XYZCommand` is a placeholder for specific subclass of the `Command` class, e.g. `SessionCreateCommand`)
+3. The `XYZCommandParser` object will then use parse methods from `Parser` class to extract all the
+   arguments from the user input.
+   1. Each of these parse methods in `Parser` class then calls utility methods from `ParserUtils` class
+      to return a parsed value.
+4. All relevant arguments that are parsed will then be used to create a new `XYZCommand `object which is
+   then returned to the `Parser` class.
+5. The created `XYZCommand` object is then returned to the `SplitLah` object to be run.
 
 ### Command Component
 
 ## Implementation
+
+### Parsing of Commands
+**API reference:** [`Parser.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/parser/Parser.java)
+
+The sequence diagram below models the interactions between various entities within the Parser component and
+the Command component when any user input is provided to SplitLah.
+<br>
+<br>
+![Reference Frame Parser Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefParser.drawio.png)
+<br>
+<br>
+1. When `SplitLah` reads a user input, `SplitLah` will call the `Parser#getCommand` method and pass the
+   user input as the argument.
+2. Given the user input, `Parser` class first decomposes the user input into two separate components, the command type
+   and the remaining arguments.
+   This is done using the two methods `Parser#getCommandType` and `Parser#getRemainingArguments` respectively.<br>
+   Where the input is `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob`, the command type will be
+   `session /create` and the remaining arguments would be `/n Class Outing /d 15-03-2022 /pl Alice Bob`.
+   1. If the command type is of invalid syntax, the method `Parser#getCommandType` returns null.
+      If the command type is null, `Parser` class creates and returns an `InvalidCommand` object to `SplitLah`.
+   2. Next, to check whether the command type and remaining arguments are valid, `Parser` class calls the method
+      `Parser#checkIfCommandIsValid`. If either command type or remaining arguments are invalid, an error
+      message is returned by the method, which is then used to return an `InvalidCommand` object to `SplitLah`.
+3. Depending on the command type, `Parser` class instantiates an appropriate `XYZCommandParser` object. For example,
+   for a command type of `"session /create"` a `SessionCreateCommandParser` object is instantiated.
+   If `Parser` class does not recognise the command type, an `InvalidCommand` object is created and returned immediately.
+4. With the corresponding `XYZCommandParser` object instantiated, `Parser` class will call the `getCommand` method
+   of `XYZCommandParser`. This process will be explained in further detail in the sequence diagrams below.
+
+![Reference Frame Command Parser Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefCommandParser.drawio.png)
+
+![Reference Frame ParseABC Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefParseABC.drawio.png)
+
+![Reference Frame InvalidCommand Instantiation Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefInvalidCommand.drawio.png)
+
+5. After `XYZCommandParser#getCommand` is called, `XYZCommandParser` will prepare to create a `XYZCommand` object. 
+   To begin with, it will parse all the remaining arguments using `ParseABC` methods from the `Parser` class.
+   (`ParseABC` is a placeholder for specific methods in `Parser` class, 
+   e.g. `Parser#parseName` and `Parser#parseSessionId`)
+   * For example, `SessionCreateCommandParser` has to call `parsePersonList`, `parseGroupId`, `parseName` and
+      `parseLocalDate` from `Parser` class in order to get the details to create a `Session` object.
+   * If an exception is encountered, `XYZCommandParser` will handle the exception accordingly, and if necessary,
+      throw an exception back to `Parser` class, resulting in an `InvalidCommand` object being created and returned.
+6. In detail, when `Parser#parseABC` is called, `Parser` class will call the method `getArgumentFromDelimiter` from
+   `ParserUtils` class, which will return the respective object being parsed.
+   * For example, when `SessionCreateCommandParser` calls `Parser#parsePersonList`,
+      `ParserUtils#getArgumentFromDelimiter` is called. After returning a `String` object containing the arguments to
+      `Parser` class, `Parser` class returns a `String[]` object to `SessionCreateCommandParser` after processing the
+      arguments.
+   * Any exception encountered by `ParserUtils` class is propagated back to `XYZCommandParser` to be handled.
+7. After all necessary information is parsed, `XYZCommandParser` instantiates a new `XYZCommand` object and passes
+   all parsed information to it through the constructor.
+8. The newly instantiated `XYZCommand` object is then returned from `XYZCommandParser` to `Parser` class,
+   and finally back to `SplitLah` to be run.
 
 ### Add a session
 **API reference:** [`SessionCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionCreateCommand.java)
@@ -167,6 +224,28 @@ The general workflow of the `session /list` command is as follows:
 ### View an activity
 ### List activities
 ### Add a group
+**API reference:** [`GroupCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupCreateCommand.java)
+
+The sequence diagram below models the interactions between various entities in the system
+when the user invokes the `group /create` command.
+<br>
+<br>
+![Create Group Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupCreateCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `group /create` command is as follows:
+1. The user input provided is passed to `Splitlah`.
+2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `GroupCreateCommand` object.
+3. A `GroupCreateCommand#run` method is then invoked to run the group /create command.
+4. Once the command starts to run, `GroupCreateCommand`class checks if there are duplicates in the name list.
+5. If there are duplicates, a message indicating that name list contains duplicates is printed using `TextUi#printlnMessage`. 
+6. If there are no duplicates, `GroupCreateCommand` class converts each of the names into a `Person` object.
+7. `GroupCreateCommand` class then checks if there is an existing group with the same group name. 
+8. If existing groups with the group name are found, a message indicating that another group with the same name is printed using `TextUi#printlnMessage`.
+9. `GroupCreateCommand` class create a new `Group` object using the group name, name list, and groupId. 
+10. The list of `Group` objects are managed by a `Profile` object, hence `Manager#getProfile#addGroup` is called to store the new Group object in the Profile.
+11. The `GroupCreateCommand` class then prints a message indicating that a group has been successfully created.
+
 ### Remove a group
 ### View a group
 ### List groups
