@@ -4,14 +4,34 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design 
+# 1. Overview
+MeetingJio is a program for **finding potential time slots for team meetings based on everyone’s availability**.
+
+# 2. Design 
+
+## 2.1 Architecture
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
-## Implementation
+## 2.2 Events
+
+## 2.3 Timetables
+
+## 2.4 Commands
+
+# 3. Implementation
 This section describes some noteworthy details on how certain features are implemented.
 
-### Data Saving Feature
+## 3.1 Add Feature
+`add_lesson` allows users to add lessons to their own timetables
+`add_meeting` allows users to add meetings to all timetables
+
+The following sequence diagram shows how the `add_lesson` operation generally works.
+
+The following sequence diagram shows how the `add_lesson` operation works in detail.
+![AddLessonCommandSequenceDiagram](diagrams/AddLessonCommandSequenceDiagram.png)
+
+## 3.2 Data Saving Feature
 
 The save mechanism is facilitated by Storage. It creates a text file in the local machine and writes all the elements 
 in the MasterTimetable and Timetable to the text file in human-readable format.
