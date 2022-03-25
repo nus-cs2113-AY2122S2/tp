@@ -389,19 +389,18 @@ class will catch the user input, and it will be sent to `Parser#parseUserInput(S
 user's command. If the user's command type is to update an existing workout, 
 i.e. `workout /update <index of workout> <new number of repetitions>`, the `Parser#parseUserInput(String userInput)` 
 method will parse the 'workout' base word and proceed to create workout related command using 
-`Parser#createWorkoutCommand(String userInput)` method. This method will further evaluate the action belongs to workout,
+`Parser#createWorkoutCommand(String userInput)` method. This method will further evaluate the workout action,
 in this case, `/update` and call the constructor of `WorkoutCommand` class by passing relevant parameters related to the
 WorkoutCommand constructor. If the workout action is null or incorrect, an InvalidCommandException will be thrown. 
 If either `<index of workout>` or `<new number of repetitions>` parameter is also not specified, the same 
 InvalidCommandException is thrown. Once the workout command is created, this workout command is executed 
 via the `WorkoutCommand#execute()` method. As it is executed, the method will check the type of action to be executed, 
 in this case, update. It will then update the existing workout using the `WorkoutList#updateWorkout(getUserArguments())` 
-method. The updateWorkout method in addition, checks whether the given index of workout is a valid integer 
-and is within the range of the workout list as well as checks the workout to be updated to is 
-exists in the current workouts list. If either check is failed, `WorkoutOutOfRangeException` or 
-`InvalidWorkoutException` will be thrown correspondingly. Otherwise, workout will be updated successfully. 
-Then, `UI` will print a success message and call the `FileManager#rewriteAllWorkoutsToFile(getWorkoutList())` 
-method to save the changes.
+method. The updateWorkout method in addition, checks whether the given index of workout is a valid integer
+and is within the range of the workout list. It also checks whether the workout to update exists in the current workout 
+list. If either check is failed, `WorkoutOutOfRangeException` or `InvalidWorkoutException` will be thrown 
+correspondingly. Otherwise, workout will be updated successfully. Then, `UI` will print a success message and call 
+the `FileManager#rewriteAllWorkoutsToFile(getWorkoutList())` method to save the changes.
 
 ##### Update workouts command
 Format: `workout /update`
