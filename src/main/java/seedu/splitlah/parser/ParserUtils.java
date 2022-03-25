@@ -523,7 +523,7 @@ public class ParserUtils {
      * @return A String object with the first error check to be failed, if any, or
      *         an empty String object if remainingArgs is empty or if none of the error checks fail.
      */
-    static String checkIfCommandIsValid(String commandType, String remainingArgs) {
+    public static String checkIfCommandIsValid(String commandType, String remainingArgs) {
         assert commandType != null : Message.ASSERT_PARSER_COMMAND_TYPE_NULL;
         assert remainingArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
 

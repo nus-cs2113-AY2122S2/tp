@@ -6,12 +6,15 @@ import seedu.splitlah.command.Command;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class ActivityCreateCommandParserTest {
+
+    private static final String COMMAND_TYPE = ActivityCreateCommandParser.COMMAND_TEXT;
 
     /**
      * Checks if an InvalidFormatException is thrown when both cost and cost list are not provided by the user
@@ -21,6 +24,11 @@ class ActivityCreateCommandParserTest {
     public void getCommand_hasMissingCostAndCostList_InvalidFormatExceptionThrown() {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie";
         String arguments = Parser.getRemainingArgument(userInput);
+        String errorMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, arguments);
+        if (!errorMessage.isEmpty()) {
+            fail();
+        }
+
         ActivityCreateCommandParser activityCreateCommandParser = new ActivityCreateCommandParser();
         try {
             activityCreateCommandParser.getCommand(arguments);
@@ -42,6 +50,11 @@ class ActivityCreateCommandParserTest {
     public void getCommand_hasBothCostAndCostList_InvalidFormatExceptionThrown() {
         String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30 /cl 10 10 10";
         String arguments = Parser.getRemainingArgument(userInput);
+        String errorMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, arguments);
+        if (!errorMessage.isEmpty()) {
+            fail();
+        }
+
         ActivityCreateCommandParser activityCreateCommandParser = new ActivityCreateCommandParser();
         try {
             activityCreateCommandParser.getCommand(arguments);
@@ -66,6 +79,11 @@ class ActivityCreateCommandParserTest {
         //Case 1: Involved list longer than cost list
         String userInputOne = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /cl 10 10";
         String argumentsOne = Parser.getRemainingArgument(userInputOne);
+        String errorMessageOne = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argumentsOne);
+        if (!errorMessageOne.isEmpty()) {
+            fail();
+        }
+
         try {
             activityCreateCommandParser.getCommand(argumentsOne);
             fail();
@@ -80,6 +98,11 @@ class ActivityCreateCommandParserTest {
         //Case 2: Involved list shorter than cost list
         String userInputTwo = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob /cl 10 10 10";
         String argumentsTwo = Parser.getRemainingArgument(userInputTwo);
+        String errorMessageTwo = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argumentsTwo);
+        if (!errorMessageTwo.isEmpty()) {
+            fail();
+        }
+
         try {
             activityCreateCommandParser.getCommand(argumentsTwo);
             fail();
@@ -103,6 +126,11 @@ class ActivityCreateCommandParserTest {
         // Case 1: Missing /sid delimiter
         String inputMissingSessionIdDelimiter = "activity /create /n Dinner /p Alice /i Alice Bob Charlie /co 15";
         String argsMissingSessionIdDelimiter = Parser.getRemainingArgument(inputMissingSessionIdDelimiter);
+        String errorMessageOne = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingSessionIdDelimiter);
+        if (!errorMessageOne.isEmpty()) {
+            fail();
+        }
+
         try {
             activityCreateCommandParser.getCommand(argsMissingSessionIdDelimiter);
             fail();
@@ -117,6 +145,11 @@ class ActivityCreateCommandParserTest {
         // Case 2: Missing /n delimiter
         String inputMissingNameDelimiter = "activity /create /sid 1 /p Alice /i Alice Bob Charlie /co 15";
         String argsMissingNameDelimiter = Parser.getRemainingArgument(inputMissingNameDelimiter);
+        String errorMessageTwo = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingNameDelimiter);
+        if (!errorMessageTwo.isEmpty()) {
+            fail();
+        }
+
         try {
             activityCreateCommandParser.getCommand(argsMissingNameDelimiter);
             fail();
@@ -131,6 +164,11 @@ class ActivityCreateCommandParserTest {
         // Case 3: Missing /p delimiter
         String inputMissingPayerDelimiter = "activity /create /sid 1 /n Dinner /i Alice Bob Charlie /co 15";
         String argsMissingPayerDelimiter = Parser.getRemainingArgument(inputMissingPayerDelimiter);
+        String errorMessageThree = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingPayerDelimiter);
+        if (!errorMessageThree.isEmpty()) {
+            fail();
+        }
+
         try {
             activityCreateCommandParser.getCommand(argsMissingPayerDelimiter);
             fail();
@@ -145,6 +183,11 @@ class ActivityCreateCommandParserTest {
         // Case 4: Missing /i delimiter
         String inputMissingInvolvedListDelimiter = "activity /create /sid 1 /n Dinner /p Alice /co 15";
         String argsMissingInvolvedListDelimiter = Parser.getRemainingArgument(inputMissingInvolvedListDelimiter);
+        String errorMessageFour = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingInvolvedListDelimiter);
+        if (!errorMessageFour.isEmpty()) {
+            fail();
+        }
+
         try {
             activityCreateCommandParser.getCommand(argsMissingInvolvedListDelimiter);
             fail();
@@ -168,6 +211,11 @@ class ActivityCreateCommandParserTest {
         // Case 1: Missing session ID
         String inputMissingSessionIdArgument = "activity /create /sid /n Dinner /p Alice /i Alice Bob Charlie /co 15";
         String argsMissingSessionIdArgument = Parser.getRemainingArgument(inputMissingSessionIdArgument);
+        String errorMessageOne = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingSessionIdArgument);
+        if (!errorMessageOne.isEmpty()) {
+            fail();
+        }
+
         try {
             activityCreateCommandParser.getCommand(argsMissingSessionIdArgument);
             fail();
@@ -182,6 +230,11 @@ class ActivityCreateCommandParserTest {
         // Case 2: Missing Activity Name
         String inputMissingNameArgument = "activity /create /sid 1 /n /p Alice /i Alice Bob Charlie /co 15";
         String argsMissingNameArgument = Parser.getRemainingArgument(inputMissingNameArgument);
+        String errorMessageTwo = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingNameArgument);
+        if (!errorMessageTwo.isEmpty()) {
+            fail();
+        }
+
         try {
             activityCreateCommandParser.getCommand(argsMissingNameArgument);
             fail();
@@ -196,6 +249,11 @@ class ActivityCreateCommandParserTest {
         // Case 3: Missing Payer
         String inputMissingPayerArgument = "activity /create /sid 1 /n Dinner /p /i Alice Bob Charlie /co 15";
         String argsMissingPayerArgument = Parser.getRemainingArgument(inputMissingPayerArgument);
+        String errorMessageThree = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingPayerArgument);
+        if (!errorMessageThree.isEmpty()) {
+            fail();
+        }
+
         try {
             activityCreateCommandParser.getCommand(argsMissingPayerArgument);
             fail();
@@ -210,6 +268,11 @@ class ActivityCreateCommandParserTest {
         // Case 4: Missing involved list
         String inputMissingInvolvedListArgument = "activity /create /sid 1 /n Dinner /p Alice /i /co 15";
         String argsMissingInvolvedListArgument = Parser.getRemainingArgument(inputMissingInvolvedListArgument);
+        String errorMessageFour = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingInvolvedListArgument);
+        if (!errorMessageFour.isEmpty()) {
+            fail();
+        }
+
         try {
             activityCreateCommandParser.getCommand(argsMissingInvolvedListArgument);
             fail();
@@ -224,6 +287,11 @@ class ActivityCreateCommandParserTest {
         // Case 5: Missing total cost
         String inputMissingTotalCostArgument = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co";
         String argsMissingTotalCostArgument = Parser.getRemainingArgument(inputMissingTotalCostArgument);
+        String errorMessageFive = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingTotalCostArgument);
+        if (!errorMessageFive.isEmpty()) {
+            fail();
+        }
+
         try {
             activityCreateCommandParser.getCommand(argsMissingTotalCostArgument);
             fail();
@@ -238,6 +306,11 @@ class ActivityCreateCommandParserTest {
         // Case 6: Missing cost list
         String inputMissingCostListArgument = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /cl";
         String argsMissingCostListArgument = Parser.getRemainingArgument(inputMissingCostListArgument);
+        String errorMessageSix = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingCostListArgument);
+        if (!errorMessageSix.isEmpty()) {
+            fail();
+        }
+
         try {
             activityCreateCommandParser.getCommand(argsMissingCostListArgument);
             fail();
@@ -252,6 +325,11 @@ class ActivityCreateCommandParserTest {
         // Case 7: Missing gst
         String inputMissingGstArgument = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30 /gst";
         String argsMissingGstArgument = Parser.getRemainingArgument(inputMissingGstArgument);
+        String errorMessageSeven = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingGstArgument);
+        if (!errorMessageSeven.isEmpty()) {
+            fail();
+        }
+
         try {
             activityCreateCommandParser.getCommand(argsMissingGstArgument);
             fail();
@@ -266,6 +344,11 @@ class ActivityCreateCommandParserTest {
         // Case 8: Missing service charge
         String inputMissingScArgument = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30 /sc";
         String argsMissingScArgument = Parser.getRemainingArgument(inputMissingScArgument);
+        String errorMessageEight = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingScArgument);
+        if (!errorMessageEight.isEmpty()) {
+            fail();
+        }
+
         try {
             activityCreateCommandParser.getCommand(argsMissingScArgument);
             fail();
@@ -291,6 +374,11 @@ class ActivityCreateCommandParserTest {
 
         String validUserInput = "activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         String validArguments = Parser.getRemainingArgument(validUserInput);
+        String errorMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, validArguments);
+        if (!errorMessage.isEmpty()) {
+            fail();
+        }
+
         ActivityCreateCommandParser activityCreateCommandParser = new ActivityCreateCommandParser();
         try {
             Command command = activityCreateCommandParser.getCommand(validArguments);
