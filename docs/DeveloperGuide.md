@@ -8,6 +8,15 @@
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### Update patient information
+Step 1:Patient inform the nurse of their change in personal information. Nurse will open up the Duke system and request to submit the change. Duke will call the Parser#etPatientInfo() to update the patient information. 
+
+Step 2:
+The parser will call the database storing patient information to update the change.
+
+The flow is presented in the sequence diagram (will be included later after pull request is permitted):
+
+
 ### Exit program
 Step 1: User type "bye" as input to exit the program. Duke will call Parser#getCommand()
 to return the user command received.
@@ -19,7 +28,17 @@ The following sequence diagram shows how the exit operation works:
 
 ![](ByeCommand.png)
 
+### Delete Doctor
+Step 1: User types "delete" to delete a specific doctor from the system
+This will be passed into Duke. Duke will pass the comment to the parser,
+which will parse through the command to remove the doctor.
+
+Step 2: The parser will call on deleteDoctor to the doctor list.
+The doctor list acts as a database storage containing the information of a list of doctors.
+Once the doctor is removed from the doctor list, the system informs the user that the doctor is successfully removed
+
 ## Product scope
+Use in all hospitals in Singapore
 ### Target user profile
 Hospital admin staff
 
