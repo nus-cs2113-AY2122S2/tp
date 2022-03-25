@@ -3,6 +3,7 @@ package seedu.parser;
 import java.util.ArrayList;
 
 import seedu.command.AddCommand;
+import seedu.command.ModificationCommand;
 import seedu.command.UpdateCommand;
 import seedu.command.ListCommand;
 import seedu.command.IncorrectCommand;
@@ -80,6 +81,10 @@ public class Parser {
                 return new AddCommand(args);
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(AddCommand.COMMAND_WORD + AddCommand.COMMAND_DESCRIPTION);
+            } catch (NumberFormatException e) {
+                return new IncorrectCommand(ModificationCommand.INVALID_COST_MESSAGE);
+            } catch (IllegalArgumentException e) {
+                return new IncorrectCommand(ModificationCommand.INVALID_TYPE_MESSAGE);
             }
         case CheckCommand.COMMAND_WORD:
             try {
@@ -101,6 +106,10 @@ public class Parser {
                 return new UpdateCommand(args);
             } catch (IncompleteCommandException e) {
                 return new IncorrectCommand(UpdateCommand.COMMAND_WORD + UpdateCommand.COMMAND_DESCRIPTION);
+            } catch (NumberFormatException e) {
+                return new IncorrectCommand(ModificationCommand.INVALID_COST_MESSAGE);
+            } catch (IllegalArgumentException e) {
+                return new IncorrectCommand(ModificationCommand.INVALID_TYPE_MESSAGE);
             }
         case ListCommand.COMMAND_WORD:
             if (commandAndArgument.get(1) == null) {

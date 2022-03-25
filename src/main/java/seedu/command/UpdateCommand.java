@@ -41,7 +41,7 @@ public class UpdateCommand extends ModificationCommand {
             return new CommandResult(MISSING_SERIAL_NUMBER);
         }
 
-        ArrayList<Pair<String, String>> updatePairs = generateUpdatePairs();
+        ArrayList<Pair<String, ?>> updatePairs = generateUpdatePairs();
         if (!equipmentManager.updateEquipment(serialNumber, updatePairs)) {
             return new CommandResult(UPDATE_FAILURE_MESSAGE);
         }
@@ -59,13 +59,14 @@ public class UpdateCommand extends ModificationCommand {
      * By using pair, we are able to update only the values that have been specified to be updated.
      * @return ArrayList of the Pair of update values and their matching attributes.
      */
-    public ArrayList<Pair<String, String>> generateUpdatePairs() {
-        ArrayList<Pair<String, String>> pairs = new ArrayList<>();
+    public ArrayList<Pair<String, ?>> generateUpdatePairs() {
+        ArrayList<Pair<String, ?>> pairs = new ArrayList<>();
+  
         if (equipmentName != null) {
             pairs.add(new Pair<>("itemName", equipmentName));
         }
-        if (type != null) {
-            pairs.add(new Pair<>("type", type));
+        if (equipmentType != null) {
+            pairs.add(new Pair<>("type", equipmentType));
         }
         if (cost != null) {
             pairs.add(new Pair<>("cost", cost));
@@ -89,8 +90,8 @@ public class UpdateCommand extends ModificationCommand {
         if (equipmentName != null) {
             updateDetails = updateDetails + System.lineSeparator() + "New name: " + equipmentName;
         }
-        if (type != null) {
-            updateDetails = updateDetails + System.lineSeparator() + "New type: " + type;
+        if (equipmentType != null) {
+            updateDetails = updateDetails + System.lineSeparator() + "New type: " + equipmentType;
         }
         if (cost != null) {
             updateDetails = updateDetails + System.lineSeparator() + "New cost: " + cost;
@@ -117,13 +118,13 @@ public class UpdateCommand extends ModificationCommand {
         return serialNumber.equals(that.serialNumber)
                 && Objects.equals(equipmentName, that.equipmentName)
                 && Objects.equals(purchasedDate, that.purchasedDate)
-                && Objects.equals(type, that.type)
+                && Objects.equals(equipmentType, that.equipmentType)
                 && Objects.equals(purchasedFrom, that.purchasedFrom)
                 && Objects.equals(cost, that.cost);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(serialNumber, equipmentName, purchasedDate, type, purchasedFrom, cost);
+        return Objects.hash(serialNumber, equipmentName, purchasedDate, equipmentType, purchasedFrom, cost);
     }
 }

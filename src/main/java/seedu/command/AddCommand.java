@@ -63,10 +63,8 @@ public class AddCommand extends ModificationCommand {
      * @param userInput ArrayList of String which contains the individual attributes of the equipment to be added
      */
     public void addEquipment(ArrayList<String> userInput) throws DuplicateSerialNumberException {
-        EquipmentType type = EquipmentType.valueOf(this.type);
-        double cost = Double.parseDouble(this.cost);
 
-        Equipment newEquipment = new Equipment(equipmentName, serialNumber, type, cost, purchasedFrom, purchasedDate);
+        Equipment newEquipment = new Equipment(equipmentName, serialNumber, equipmentType, cost, purchasedFrom, purchasedDate);
         equipmentManager.addEquipment(newEquipment);
     }
 
@@ -75,7 +73,7 @@ public class AddCommand extends ModificationCommand {
      * @return boolean to indicate whether all attributes are set.
      */
     public boolean checkAttributes() {
-        if (equipmentName == null || serialNumber == null || type == null || cost == null
+        if (equipmentName == null || serialNumber == null || equipmentType == null || cost == null
                 || purchasedFrom == null || purchasedDate == null) {
             return false;
         }

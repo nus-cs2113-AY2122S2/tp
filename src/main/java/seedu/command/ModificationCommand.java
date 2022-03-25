@@ -1,22 +1,26 @@
 package seedu.command;
 
+import seedu.equipment.EquipmentType;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- * Abstract class acting as parent class to AddCommand and UpdateCommand which have use for the
- * same prepareModification method.
+ * Parent class to AddCommand and UpdateCommand which have use for the same prepareModification method.
  */
 public class ModificationCommand extends Command {
     public static final String IMPLEMENTED_BY_CHILD = "Execute method for Modification should be implemented by "
             + "child classes AddCommand and UpdateCommand";
+    public static final String INVALID_TYPE_MESSAGE = "Equipment Type needs to be one of:" + System.lineSeparator()
+            + EquipmentType.getAllTypes();
+    public static final String INVALID_COST_MESSAGE = "Cost needs to be able to be parsed to a double";
     protected final ArrayList<String> commandStrings;
     protected String serialNumber;
     protected String equipmentName = null;
     protected String purchasedDate = null;
-    protected String type = null;
+    protected EquipmentType equipmentType = null;
     protected String purchasedFrom = null;
-    protected String cost = null;
+    protected Double cost = null;
 
     public ModificationCommand(ArrayList<String> commandStrings) {
         this.commandStrings = commandStrings;
@@ -39,15 +43,15 @@ public class ModificationCommand extends Command {
         this.purchasedDate = purchasedDate;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setEquipmentType(EquipmentType equipmentType) {
+        this.equipmentType = equipmentType;
     }
 
     public void setPurchasedFrom(String purchasedFrom) {
         this.purchasedFrom = purchasedFrom;
     }
 
-    public void setCost(String cost) {
+    public void setCost(Double cost) {
         this.cost = cost;
     }
 
@@ -56,8 +60,12 @@ public class ModificationCommand extends Command {
      *
      * <p>Should multiple arguments specifying the same argument parameter (e.g. 'c/1000' and 'c/2000') be given,
      * the previous arguments passed in will be overwritten by the most recent parameter ('c/2000' in example).
+     *
+     * @throws NumberFormatException if cost is invalid
+     * @throws IllegalArgumentException if EquipmentType is invalid
+     *
      */
-    protected void prepareModification() throws AssertionError {
+    protected void prepareModification() throws AssertionError, NumberFormatException, IllegalArgumentException {
         for (String s : commandStrings) {
             int delimiterPos = s.indexOf('/');
             // the case where delimiterPos = -1 is impossible as
@@ -73,13 +81,13 @@ public class ModificationCommand extends Command {
                 setPurchasedDate(argValue);
                 break;
             case "t":
-                setType(argValue);
+                setEquipmentType(EquipmentType.valueOf(argValue));
                 break;
             case "pf":
                 setPurchasedFrom(argValue);
                 break;
             case "c":
-                setCost(argValue);
+                setCost(Double.valueOf(argValue));
                 break;
             case "s":
                 setSerialNumber(argValue);
@@ -102,13 +110,13 @@ public class ModificationCommand extends Command {
         return serialNumber.equals(that.serialNumber)
                 && Objects.equals(equipmentName, that.equipmentName)
                 && Objects.equals(purchasedDate, that.purchasedDate)
-                && Objects.equals(type, that.type)
+                && Objects.equals(equipmentType, that.equipmentType)
                 && Objects.equals(purchasedFrom, that.purchasedFrom)
                 && Objects.equals(cost, that.cost);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(serialNumber, equipmentName, purchasedDate, type, purchasedFrom, cost);
+        return Objects.hash(serialNumber, equipmentName, purchasedDate, equipmentType, purchasedFrom, cost);
     }
 }
