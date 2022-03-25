@@ -37,6 +37,8 @@ Step 2: The parser will call on deleteDoctor to the doctor list.
 The doctor list acts as a database storage containing the information of a list of doctors.
 Once the doctor is removed from the doctor list, the system informs the user that the doctor is successfully removed
 
+![](DeleteDoctor.jpg)
+
 ## Product scope
 Use in all hospitals in Singapore
 ### Target user profile
