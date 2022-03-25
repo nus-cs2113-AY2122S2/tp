@@ -15,7 +15,7 @@ import static seedu.sherpass.util.Parser.parseStudyMode;
 
 public class StudyCommand extends Command {
     public static final String COMMAND_WORD = "study";
-    public static final String COMMAND_USAGE = "Study: Enters a study session.\n\n"
+    public static final String MESSAGE_USAGE = "Study: Enters a study session.\n\n"
             + "User can access timer features while in a study session.\n\n"
             + HELP_MESSAGE_STUDY;
 
@@ -41,7 +41,7 @@ public class StudyCommand extends Command {
     }
 
     public void leaveStudyMode(Ui ui, TimerLogic timerLogic) {
-        if (timerLogic.isTimerRunning()) {
+        if (timerLogic.getIsTimerRunning()) {
             timerLogic.callStopTimer();
         }
         ui.showLine();

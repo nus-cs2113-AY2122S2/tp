@@ -2,6 +2,7 @@ package seedu.sherpass.constant;
 
 public class Message {
     public static final String EMPTY_STRING = "";
+    public static final String WHITESPACE = " ";
     public static final String WELCOME_MESSAGE_ONE = "Welcome to\n";
     public static final String WELCOME_MESSAGE_TWO = "Here is your schedule for today:";
     public static final String WELCOME_MESSAGE_STUDY = "Gotcha! Entering study mode...\n"
@@ -21,7 +22,7 @@ public class Message {
     public static final String HELP_MESSAGE_SPECIFIC_COMMAND = "\n\nFor more information on "
             + "the command you wish to execute,\nenter 'help <command>' e.g. help add";
     public static final String HELP_MESSAGE_QUICK_START_COMMAND = "Command input quick start guide:\n"
-            + "1) List: list\n"
+            + "1) Show: show today/week/<date>/all/todo\n"
             + "2) Mark: mark <list_index>\n"
             + "3) Unmark: unmark <list_index>\n"
             + "4) Add: add <task_description> /by <task_due_date> /do_on <date_to_work_on_task>\n"
@@ -37,6 +38,14 @@ public class Message {
             + "5) Resume timer: resume\n"
             + "6) Exit study mode: leave\n"
             + "7) Mark task as done: mark <task_index>";
+
+    public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after end time!";
+    public static final String ERROR_EMPTY_DESCRIPTION_MESSAGE = "Description cannot be blank!";
+    public static final String ERROR_EMPTY_TASKLIST_MESSAGE = "The task list is empty!";
+    public static final String ERROR_MISSING_EDIT_ARGUMENT_MESSAGE = "Missing task description or date argument!";
+    public static final String ERROR_INVALID_FREQUENCY_MESSAGE = "Invalid frequency!";
+    public static final String ERROR_INVALID_INDEX_MESSAGE = "Invalid index!";
+    public static final String ERROR_INVALID_DATETIME_MESSAGE = "Invalid date time format!";
 
     public static final String ERROR_INVALID_INPUT_MESSAGE = "Please key in an appropriate command.\n"
             + HELP_MESSAGE;
@@ -63,6 +72,4 @@ public class Message {
             + "\t'start <mode_number>'\n\n"
             + "or choose your own custom timer with\n"
             + "\t'start /custom <timer_duration>'";
-    public static final String ERROR_DUPLICATE_TASK_MESSAGE_1 = "Skipping task \"";
-    public static final String ERROR_DUPLICATE_TASK_MESSAGE_2 = "\" as it already exists!";
 }
