@@ -1,4 +1,4 @@
-//@@author Teanweijun
+//@@author teanweijun
 
 package seedu.planitarium;
 
