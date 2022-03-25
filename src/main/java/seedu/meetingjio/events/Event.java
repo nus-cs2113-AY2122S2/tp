@@ -82,7 +82,7 @@ public abstract class Event {
      */
     public int getDay() {
         int numericDay = 0;
-        switch(day) {
+        switch (day) {
         case "monday":
             numericDay = 1;
             break;
@@ -103,6 +103,8 @@ public abstract class Event {
             break;
         case "sunday":
             numericDay = 7;
+            break;
+        default:
             break;
         }
         return numericDay;

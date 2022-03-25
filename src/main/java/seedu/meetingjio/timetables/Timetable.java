@@ -85,14 +85,14 @@ public class Timetable {
      * As there will be no overlap between each event's timing, checking which event's startTime is earlier is
      * sufficient to determine which event comes first if both occur on the same day.
      *
-     * @param E1 The first event to be compared
-     * @param E2 The second event to be compared
+     * @param event1 The first event to be compared
+     * @param event2 The second event to be compared
      * @return true if Event E1 comes earlier than Event E2, false otherwise
      */
-    private boolean isEarlier(Event E1, Event E2) {
-        if (E1.getDay() < E2.getDay()) {
+    private boolean isEarlier(Event event1, Event event2) {
+        if (event1.getDay() < event2.getDay()) {
             return true;
-        } else if (E1.getDay() == E2.getDay() && E1.startTime < E2.startTime) {
+        } else if (event1.getDay() == event2.getDay() && event1.startTime < event2.startTime) {
             return true;
         }
         return false;
