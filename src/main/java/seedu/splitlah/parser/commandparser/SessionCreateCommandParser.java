@@ -1,6 +1,5 @@
 package seedu.splitlah.parser.commandparser;
 
-import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.command.SessionCreateCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
@@ -31,9 +30,9 @@ public class SessionCreateCommandParser implements CommandParser<SessionCreateCo
      * Returns a SessionCreateCommand object after parsing the input arguments from the user.
      *
      * @param commandArgs A String object representing arguments provided by the user.
-     * @return A SessionCreateCommand object if all necessary parameters required are found in the input arguments.
-     * @throws InvalidFormatException If at least one of the necessary parameters cannot be found
-     *                                in the input arguments.
+     * @return A SessionCreateCommand object if all necessary arguments required for the SessionCreateCommand object
+     *         to function are found in the input arguments.
+     * @throws InvalidFormatException If at least one of the necessary arguments cannot be found in the input arguments.
      */
     @Override
     public SessionCreateCommand getCommand(String commandArgs) throws InvalidFormatException {
