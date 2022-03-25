@@ -26,8 +26,7 @@ public class SessionCreateCommand extends Command {
             "Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...] "
                     + "[</gid [GROUP_ID]>]";
 
-    private static final String COMMAND_SUCCESS =
-            "The session was created successfully.\n";
+    private static final String COMMAND_SUCCESS = "The session was created successfully.";
 
     public static final String[] COMMAND_DELIMITERS = { 
         ParserUtils.NAME_DELIMITER,
