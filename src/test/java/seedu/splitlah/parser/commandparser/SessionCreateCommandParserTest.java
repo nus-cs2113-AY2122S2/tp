@@ -59,8 +59,8 @@ public class SessionCreateCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidFormatException is thrown when missing delimiters are detected in the user input
-     * and if the exception message is correct.
+     * Checks if an InvalidFormatException with the correct message is thrown
+     * when missing delimiters are detected in the user input.
      */
     @Test
     public void getCommand_hasMissingDelimiter_InvalidFormatExceptionThrown() {
@@ -100,8 +100,8 @@ public class SessionCreateCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidFormatException is thrown when missing arguments are detected in the user input
-     * and if the exception message is correct.
+     * Checks if an InvalidFormatException with the correct message is thrown
+     * when missing arguments are detected in the user input.
      */
     @Test
     public void getCommand_hasMissingArguments_InvalidFormatExceptionThrown() {
@@ -173,8 +173,8 @@ public class SessionCreateCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidFormatException is thrown when missing person list and groupId delimiters
-     * are detected in the user input, and if the exception message is correct.
+     * Checks if an InvalidFormatException with the correct message is thrown
+     * when missing person list and groupId delimiters are detected in the user input.
      */
     @Test
     public void getCommand_hasMissingPersonListAndGidDelimiter_InvalidFormatExceptionThrown() {
