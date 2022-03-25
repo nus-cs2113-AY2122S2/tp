@@ -44,11 +44,8 @@ public class Main {
         do {
             String userCommandText = mainUi.getUserCommand();
             command = parser.parseCommand(userCommandText);
-            System.out.println("Im here 1");
             command.setData(routeManager, menuItemManager);
-            System.out.println("Im here 2");
             CommandResult result = command.execute();
-            System.out.println("Im here 3");
             mainUi.displayResultToUser(result);
             mainUi.displayLineDivider();
             mainUi.displayGetNextUserCommand();
