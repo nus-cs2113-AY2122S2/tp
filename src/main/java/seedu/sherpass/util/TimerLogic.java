@@ -12,7 +12,7 @@ public class TimerLogic {
     private static Ui ui;
     private static Timer timer;
     private static TaskList taskList;
-    protected boolean isTimerRunning = false;
+    protected boolean isTimerInitialised = false;
 
     /**
      * Creates a constructor for TimerLogic.
@@ -23,10 +23,6 @@ public class TimerLogic {
     public TimerLogic(TaskList taskList, Ui ui) {
         TimerLogic.taskList = taskList;
         TimerLogic.ui = ui;
-    }
-
-    public boolean isTimerRunning() {
-        return timer.isTimerRunning();
     }
 
     /**
@@ -51,7 +47,7 @@ public class TimerLogic {
     }
 
     private void printAvailableCommands() {
-        if (!isTimerRunning()) {
+        if (!isTimerInitialised) {
             ui.showToUser("Would you like to start another timer, mark a task as done, "
                     + "or leave the study session?");
         } else {
@@ -61,7 +57,7 @@ public class TimerLogic {
     }
 
     public void showTasks(Storage storage, String[] parsedInput) {
-        if (isTimerPausedOrStopped()) {
+        if (!isTimerInitialised) {
             executeShow(storage, parsedInput);
         } else {
             ui.showToUser("You can't show tasks while timer is running!");
@@ -82,7 +78,7 @@ public class TimerLogic {
      * @param parsedInput Parsed input of the user
      */
     public void callStartTimer(String[] parsedInput) {
-        if (isTimerRunning) {
+        if (isTimerInitialised) {
             ui.showToUser("You already have a timer running!");
             return;
         }
@@ -93,7 +89,7 @@ public class TimerLogic {
                 assert (duration > 0);
                 ((Countdown) timer).setDuration(duration);
             }
-            isTimerRunning = true;
+            isTimerInitialised = true;
             timer.start();
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException | InvalidTimeException e) {
             ui.showToUser(ERROR_INVALID_TIMER_INPUT_MESSAGE);
@@ -101,6 +97,10 @@ public class TimerLogic {
     }
 
     public void callPauseTimer() {
+        if (!isTimerInitialised) {
+            ui.showToUser("There is no timer running.");
+            return;
+        }
         if (timer.isTimerPaused()) {
             ui.showToUser("The timer is already paused!");
             return;
@@ -114,6 +114,10 @@ public class TimerLogic {
     }
 
     public void callResumeTimer() {
+        if (!isTimerInitialised) {
+            ui.showToUser("There is no timer running.");
+            return;
+        }
         if (timer.isTimerPaused()) {
             timer.resumeTimer();
         } else if (timer.isTimerRunning()) {
@@ -124,9 +128,9 @@ public class TimerLogic {
     }
 
     public void callStopTimer() {
-        if (isTimerRunning) {
+        if (isTimerInitialised) {
             timer.stopTimer();
-            isTimerRunning = updateIsTimerRunning();
+            isTimerInitialised = updateIsTimerRunning();
             taskList.printAllTasks(ui);
             ui.showToUser("Would you like to start another timer, mark a task as done, "
                     + "or leave the study session?");
@@ -153,7 +157,20 @@ public class TimerLogic {
     }
 
     private boolean isTimerPausedOrStopped() {
-        if (!isTimerRunning() || timer.isTimerPaused()) {
+        if (!isTimerInitialised) {
+            return true;
+        }
+        if (timer.isTimerPaused()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean getIsTimerRunning() {
+        if (!isTimerInitialised) {
+            return false;
+        }
+        if (timer.isTimerRunning) {
             return true;
         }
         return false;
