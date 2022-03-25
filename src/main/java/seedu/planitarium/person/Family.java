@@ -73,4 +73,27 @@ public class Family {
             children.addPerson(name);
         }
     }
+
+    /**
+     * Removes a person from the array list specified by the group index.
+     *
+     * @param index The index of the person to be removed
+     * @param group The index of the group to remove from
+     */
+    public void removePerson(int index, int group) {
+        String infoString = "Entering removePerson()";
+        logger.getLogger().log(Level.INFO, infoString);
+        assert(group >= 1);
+        assert(group <= 3);
+        infoString = "Index assertions passed in addPerson()";
+        logger.getLogger().log(Level.INFO, infoString);
+        switch(group) {
+        case Constants.PARENTS:
+            parents.removePerson(index);
+        case Constants.MY_GEN:
+            myGen.removePerson(index);
+        case Constants.CHILDREN:
+            children.removePerson(index);
+        }
+    }
 }
