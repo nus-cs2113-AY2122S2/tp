@@ -145,11 +145,13 @@ The following diagram shows the sequence diagram illustrating how the data file 
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+CCA Clubs that require assistance in inventory management, especially for fast typists who prefer CLI over GUI.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+1. Centralised management of resources that ensures accurate and timely allocation of equipment to students
+2. Increases the ease and efficiency of resource management
+3. More organised
 
 ## User Stories
 
