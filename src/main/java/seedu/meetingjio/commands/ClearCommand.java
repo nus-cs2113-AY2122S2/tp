@@ -13,7 +13,6 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_TIMETABLE_NOT_FOUND_TO_DELETE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EXCEPTION_NOT_HANDLED;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_NON_EMPTY_LIST;
-import static seedu.meetingjio.timetables.MasterTimetable.timetables;
 
 public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
@@ -38,7 +37,7 @@ public class ClearCommand extends Command {
             } else if (user.equalsIgnoreCase("all")) {
                 return clearAll(masterTimetable);
             } else {
-                return clearTimetableUser(user);
+                return clearTimetableUser(user, masterTimetable);
             }
         } catch (MissingValueException mve) {
             return ERROR_UNSPECIFIED_LIST;
@@ -46,10 +45,10 @@ public class ClearCommand extends Command {
 
     }
 
-    private String clearTimetableUser(String user) {
+    private String clearTimetableUser(String user, MasterTimetable masterTimetable) {
         Timetable timetable;
         try {
-            timetable  = MasterTimetable.getByName(this.name);
+            timetable  = masterTimetable.getByName(this.name);
             clearTimetable(timetable);
         } catch (TimetableNotFoundException tnfe) {
             return ERROR_TIMETABLE_NOT_FOUND_TO_DELETE;
@@ -61,7 +60,7 @@ public class ClearCommand extends Command {
     }
 
     private String clearAll(MasterTimetable masterTimetable) {
-        int numTimetables = timetables.size();
+        int numTimetables = masterTimetable.getSize();
         for (int i = 0; i < numTimetables; i++) {
             Timetable timetable = masterTimetable.getByIndex(i);
             clearTimetable(timetable);
