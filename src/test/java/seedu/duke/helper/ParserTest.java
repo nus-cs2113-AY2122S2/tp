@@ -283,6 +283,33 @@ class ParserTest {
         }
     }
 
+    @Test
+    void parseEditMedicineTest() {
+        String parameter = "S123,Paracetamol,500,2025-02-02,Headaches,100";
+        String[] parameterArray = { "S123","Paracetamol","500","2025-02-02","Headaches","100"};
+        try {
+            assertArrayEquals(parameterArray,Parser.parseEditMedicine(parameter).parameterArray);
+        } catch (HalpmiException e) {
+            fail("Should not be throwing exception");
+        }
+    }
 
+    @Test
+    void parseEditMedicineInvalidParamTest() {
+        String[] parameters = {"S123,Paracetamol1,500,2025-02-02,Headaches,100",
+                "S123,Paracetamol,-1,2025-02-02,Headaches,100",
+                "S123,Paracetamol,50b,2025-02-02,Headaches,100",
+                "S123,Paracetamol,500,2025-24-02,Headaches,100",
+                "S123,Paracetamol,500,2025-02-02,Headaches"};
+
+        for (String s : parameters) {
+            try {
+                Parser.parseAddMedicine(s);
+                fail("Should be throwing exception! Failed for: " + s);
+            } catch (HalpmiException e) {
+                assert true;
+            }
+        }
+    }
 
 }
