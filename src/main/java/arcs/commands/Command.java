@@ -1,5 +1,6 @@
 package arcs.commands;
 
+import arcs.data.menuitems.MenuItemManager;
 import arcs.data.RouteManager;
 
 
@@ -7,9 +8,11 @@ public abstract class Command {
 
     protected boolean isExit = false;
     protected RouteManager routeManager;
+    protected MenuItemManager menuItemManager;
 
-    public void setData(RouteManager routeManager) {
+    public void setData(RouteManager routeManager, MenuItemManager menuItemManager) {
         this.routeManager = routeManager;
+        this.menuItemManager = menuItemManager;
     }
 
     /**
