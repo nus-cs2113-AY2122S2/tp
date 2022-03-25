@@ -6,6 +6,7 @@ import seedu.splitlah.command.SessionCreateCommand;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,18 +14,23 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class SessionCreateCommandParserTest {
 
+    private static final String COMMAND_TYPE = SessionCreateCommandParser.COMMAND_TEXT;
+
     /**
      * Checks if a SessionCreateCommand object is correctly returned when the user input is valid.
      */
     @Test
     public void getCommand_validUserInput_SessionCreateCommand() {
         // Case 1: Create a session with /pl to indicate people involved in a session.
-        String validUserInput = "session /create /n Class gathering /d 15-02-2022 /pl Alice Bob";
-        String validArguments = Parser.getRemainingArgument(validUserInput);
-
+        String validUserInputOne = "session /create /n Class gathering /d 15-02-2022 /pl Alice Bob";
+        String validArgumentsOne = Parser.getRemainingArgument(validUserInputOne);
+        String errorMessageOne = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, validArgumentsOne);
+        if(!errorMessageOne.isEmpty()) {
+            fail();
+        }
         try {
             SessionCreateCommandParser sessionCreateCommandParser = new SessionCreateCommandParser();
-            Command sessionCreateCommand = sessionCreateCommandParser.getCommand(validArguments);
+            Command sessionCreateCommand = sessionCreateCommandParser.getCommand(validArgumentsOne);
             assertEquals(sessionCreateCommand.getClass(), SessionCreateCommand.class);
         } catch (InvalidFormatException invalidFormatException) {
             fail();
@@ -38,7 +44,10 @@ public class SessionCreateCommandParserTest {
 
         String validUserInputTwo = "session /create /n Class gathering /d 15-02-2022 /gid 1";
         String validArgumentsTwo = Parser.getRemainingArgument(validUserInputTwo);
-
+        String errorMessageTwo = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, validArgumentsTwo);
+        if(!errorMessageTwo.isEmpty()) {
+            fail();
+        }
         try {
             SessionCreateCommandParser sessionCreateCommandParser = new SessionCreateCommandParser();
             Command sessionCreateCommand = sessionCreateCommandParser.getCommand(validArgumentsTwo);
@@ -60,6 +69,10 @@ public class SessionCreateCommandParserTest {
         // Case 1: Missing /n delimiter.
         String inputMissingNameDelimiter = "session /create /d 15-02-2022 /pl Alice Bob";
         String argsMissingNameDelimiter = Parser.getRemainingArgument(inputMissingNameDelimiter);
+        String errorNameMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingNameDelimiter);
+        if(!errorNameMessage.isEmpty()) {
+            fail();
+        }
         try {
             sessionCreateCommandParser.getCommand(argsMissingNameDelimiter);
             fail();
@@ -72,6 +85,10 @@ public class SessionCreateCommandParserTest {
         // Case 2: Missing /d delimiter.
         String inputMissingDateDelimiter = "session /create /n Class gathering /pl Alice Bob";
         String argsMissingDateDelimiter = Parser.getRemainingArgument(inputMissingDateDelimiter);
+        String errorDateMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingDateDelimiter);
+        if(!errorDateMessage.isEmpty()) {
+            fail();
+        }
         try {
             sessionCreateCommandParser.getCommand(argsMissingDateDelimiter);
             fail();
@@ -93,6 +110,10 @@ public class SessionCreateCommandParserTest {
         // Case 1: Missing Session name.
         String inputMissingNameArgument = "session /create /n /d 15-02-2022 /pl Alice Bob";
         String argsMissingNameArgument = Parser.getRemainingArgument(inputMissingNameArgument);
+        String errorNameMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingNameArgument);
+        if(!errorNameMessage.isEmpty()) {
+            fail();
+        }
         try {
             sessionCreateCommandParser.getCommand(argsMissingNameArgument);
             fail();
@@ -105,6 +126,10 @@ public class SessionCreateCommandParserTest {
         // Case 2: Missing Session Date.
         String inputMissingDateArgument = "session /create /n Class gathering /d /pl Alice Bob";
         String argsMissingDateArgument = Parser.getRemainingArgument(inputMissingDateArgument);
+        String errorDateMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingDateArgument);
+        if(!errorDateMessage.isEmpty()) {
+            fail();
+        }
         try {
             sessionCreateCommandParser.getCommand(argsMissingDateArgument);
             fail();
@@ -117,6 +142,10 @@ public class SessionCreateCommandParserTest {
         // Case 3: Missing List of persons.
         String inputMissingPersonListArgument = "session /create /n Class gathering /d 15-02-2022 /pl";
         String argsMissingPersonListArgument = Parser.getRemainingArgument(inputMissingPersonListArgument);
+        String errorPersonListMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingPersonListArgument);
+        if(!errorPersonListMessage.isEmpty()) {
+            fail();
+        }
         try {
             sessionCreateCommandParser.getCommand(argsMissingPersonListArgument);
             fail();
@@ -129,6 +158,10 @@ public class SessionCreateCommandParserTest {
         // Case 4: Missing Group unique identifier.
         String inputMissingGidArgument = "session /create /n Class gathering /d 15-02-2022 /gid";
         String argsMissingGidArgument = Parser.getRemainingArgument(inputMissingGidArgument);
+        String errorGidMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingGidArgument);
+        if(!errorGidMessage.isEmpty()) {
+            fail();
+        }
         try {
             sessionCreateCommandParser.getCommand(argsMissingGidArgument);
             fail();
@@ -150,6 +183,10 @@ public class SessionCreateCommandParserTest {
         String inputMissingPersonListAndGidDelimiters = "session /create /n Class gathering /d 15-02-2022";
         String argsWithMissingPersonListAndGidDelimiter =
                 Parser.getRemainingArgument(inputMissingPersonListAndGidDelimiters);
+        String errorMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsWithMissingPersonListAndGidDelimiter);
+        if(!errorMessage.isEmpty()) {
+            fail();
+        }
         try {
             sessionCreateCommandParser.getCommand(argsWithMissingPersonListAndGidDelimiter);
             fail();
