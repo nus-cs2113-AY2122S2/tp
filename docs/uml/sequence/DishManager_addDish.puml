@@ -5,17 +5,17 @@ autonumber
 hide footbox
 
 actor user
-participant "__:DishManager__" as dishmanager
-participant "__dishes:ArrayList<Dish>__" as dishes
-participant "__:Dish__" as dish
-
-activate dishmanager
-activate dishes
-activate dish
+participant ":DishManager" as dishmanager
+participant "dishes:ArrayList<Dish>" as dishes
+participant "dish:Dish" as dish
 
 user -> dishmanager: addDish(dish)
+activate dishmanager
 dishmanager -> dishes: add(dish)
+activate dishes
 dishes --> dishmanager
+deactivate dishes
 dishmanager --> user
+deactivate dishmanager
 
 @enduml
