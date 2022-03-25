@@ -106,6 +106,22 @@ user.
 
 ![List sequence Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/List.puml)
 
+### Total Goods Method
+#### Description
+Total Goods belongs as part of the Commands Class. It is used to show the total quantity of Goods Objects currently in the Warehouse.
+
+#### Operation
+![Regex Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/totalGoods.puml)
+The above sequence diagram shows the operation of how the add goods method will be called.
+1. The User input will be read by the User Interface Class
+2. The User Interface Class will then match the command keyword `total`
+3. Afterwards, the User Interface class will call totalGoods() method from the Commands Class
+4. This method will then iterate through orderLists and sum up each quantity of each Good object in each order.
+5. The totalGoods() method will return an integer of the number of goods in the warehouse. 
+
+For more examples of how a user can use a command, refer to the [UserGuide](/UserGuide.md)
+
+
 
 ## Product scope
 ### Target user profile
