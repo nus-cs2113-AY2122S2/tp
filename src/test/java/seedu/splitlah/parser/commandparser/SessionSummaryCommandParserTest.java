@@ -38,10 +38,11 @@ class SessionSummaryCommandParserTest {
     }
 
     /**
-     * Checks if an exception is thrown if the Session ID delimiter is not provided by the user.
+     * Checks if an InvalidFormatException with the correct message is thrown
+     * when the Session ID delimiter is not provided by the user.
      */
     @Test
-    void getCommand_missingSessionIdDelimiter_exceptionThrown() {
+    void getCommand_missingSessionIdDelimiter_InvalidFormatExceptionThrown() {
         String userInputMissingSessionIdDelimiter = "session /summary";
         String remainingArgs = Parser.getRemainingArgument(userInputMissingSessionIdDelimiter);
         String errorMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, remainingArgs);
@@ -61,10 +62,11 @@ class SessionSummaryCommandParserTest {
     }
 
     /**
-     * Checks if an exception is thrown if the session unique identifier argument is not provided by the user.
+     * Checks if an InvalidFormatException with the correct message is thrown
+     * when the session unique identifier argument is not provided by the user.
      */
     @Test
-    void getCommand_missingSessionIdArgument_exceptionThrown() {
+    void getCommand_missingSessionIdArgument_InvalidFormatExceptionThrown() {
         String userInputMissingSessionIdArgument = "session /summary /sid";
         String remainingArgs = Parser.getRemainingArgument(userInputMissingSessionIdArgument);
         String errorMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, remainingArgs);
@@ -84,10 +86,11 @@ class SessionSummaryCommandParserTest {
     }
 
     /**
-     * Checks if an exception is thrown if the session unique identifier argument provided by the user is non-numeric.
+     * Checks if an InvalidFormatException with the correct message is thrown
+     * when the session unique identifier argument provided by the user is non-numeric.
      */
     @Test
-    void getCommand_sessionIdArgumentNonNumeric_exceptionThrown() {
+    void getCommand_sessionIdArgumentNonNumeric_InvalidFormatExceptionThrown() {
         String userInputSessionIdArgumentNonNumeric = "session /summary /sid apple";
         String remainingArgs = Parser.getRemainingArgument(userInputSessionIdArgumentNonNumeric);
         String errorMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, remainingArgs);
@@ -107,10 +110,11 @@ class SessionSummaryCommandParserTest {
     }
 
     /**
-     * Checks if an exception is thrown if the session unique identifier argument provided by the user is not positive.
+     * Checks if an InvalidFormatException with the correct message is thrown
+     * when the session unique identifier argument provided by the user is not positive.
      */
     @Test
-    void getCommand_sessionIdArgumentNotPositive_exceptionThrown() {
+    void getCommand_sessionIdArgumentNotPositive_InvalidFormatExceptionThrown() {
         // sessionId = 0
         String userInputSessionIdArgumentZero = "session /summary /sid 0";
         String remainingArgs = Parser.getRemainingArgument(userInputSessionIdArgumentZero);

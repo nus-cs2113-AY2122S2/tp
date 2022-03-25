@@ -203,10 +203,11 @@ class ParserTest {
 
     //  parseName()
     /**
-     * Checks if an exception is properly thrown when the Name delimiter is not provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown
+     * when the Name delimiter is not provided by the user.
      */
     @Test
-    void parseName_missingDelimiter_exceptionThrown() {
+    void parseName_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutNameDelimiter = "n Class outing /d 23-02-2022 /pl Alice Alice Bob";
         try {
             String output = Parser.parseName(argumentWithoutNameDelimiter);
@@ -218,11 +219,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Name delimiter is provided but no arguments
-     * following the Name delimiter are provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown 
+     * when the Name delimiter is provided but no arguments following the Name delimiter are provided by the user.
      */
     @Test
-    void parseName_delimiterExistsWithoutArgument_exceptionThrown() {
+    void parseName_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutNameArgument = "/n /d 23-02-2022 /pl Alice Alice Bob";
         try {
             String output = Parser.parseName(argumentWithoutNameArgument);
@@ -250,10 +251,11 @@ class ParserTest {
 
     // parsePersonList()
     /**
-     * Checks if an exception is properly thrown when the Person list delimiter is not provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown
+     * when the Person list delimiter is not provided by the user.
      */
     @Test
-    void parsePersonList_missingDelimiter_exceptionThrown() {
+    void parsePersonList_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutPersonListDelimiter = "/n Class outing /d 23-02-2022 pl Alice Alice Bob";
         try {
             String[] output = Parser.parsePersonList(argumentWithoutPersonListDelimiter);
@@ -265,11 +267,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Person list delimiter is provided but no arguments
-     * following the Person list delimiter are provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Person list delimiter
+     * is provided but no arguments following the Person list delimiter are provided by the user.
      */
     @Test
-    void parsePersonList_delimiterExistsWithoutArgument_exceptionThrown() {
+    void parsePersonList_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutPersonListArgument = "/n Class outing /d 23-02-2022 /pl";
         try {
             String[] output = Parser.parsePersonList(argumentWithoutPersonListArgument);
@@ -300,10 +302,11 @@ class ParserTest {
     
     // parseInvolved()
     /**
-     * Checks if an exception is properly thrown when the Involved delimiter is not provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown 
+     * when the Involved delimiter is not provided by the user.
      */
     @Test
-    void parseInvolved_missingDelimiter_exceptionThrown() {
+    void parseInvolved_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutInvolvedDelimiter = "/sid 1 /n Lunch /p Alice i Alice Bob Charlie /co 15";
         try {
             String[] output = Parser.parseInvolved(argumentWithoutInvolvedDelimiter);
@@ -315,11 +318,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Involved delimiter is provided but no arguments
-     * following the Involved delimiter are provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Involved delimiter
+     * is provided but no arguments following the Involved delimiter are provided by the user.
      */
     @Test
-    void parseInvolved_delimiterExistsWithoutArgument_exceptionThrown() {
+    void parseInvolved_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutInvolvedArgument = "/sid 1 /n Lunch /p Alice /i /co 15";
         try {
             String[] output = Parser.parseInvolved(argumentWithoutInvolvedArgument);
@@ -350,10 +353,11 @@ class ParserTest {
 
     // parsePayer()
     /**
-     * Checks if an exception is properly thrown when the Payer delimiter is not provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown
+     * when the Payer delimiter is not provided by the user.
      */
     @Test
-    void parsePayer_missingDelimiter_exceptionThrown() {
+    void parsePayer_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutPayerDelimiter = "/sid 1 /n Lunch p Alice /i Alice Bob Charlie /co 15";
         try {
             String output = Parser.parsePayer(argumentWithoutPayerDelimiter);
@@ -365,11 +369,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Payer delimiter is provided but no arguments
-     * following the Payer delimiter are provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Payer delimiter
+     * is provided but no arguments following the Payer delimiter are provided by the user.
      */
     @Test
-    void parsePayer_delimiterExistsWithoutArgument_exceptionThrown() {
+    void parsePayer_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutPayerArgument = "/sid 1 /n Lunch /p /i Alice Bob Charlie /co 15";
         try {
             String output = Parser.parsePayer(argumentWithoutPayerArgument);
@@ -381,11 +385,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Payer delimiter is provided but multiple names are
-     * provided following the Payer delimiter.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Payer delimiter
+     * is provided but multiple names are provided following the Payer delimiter.
      */
     @Test
-    void parsePayer_delimiterExistsMultiplePayers_exceptionThrown() {
+    void parsePayer_delimiterExistsMultiplePayers_InvalidFormatExceptionThrown() {
         String argumentWithoutPayerArgument = "/sid 1 /n Lunch /p Alice Bob /i Alice Bob Charlie /co 15";
         try {
             String output = Parser.parsePayer(argumentWithoutPayerArgument);
@@ -413,10 +417,11 @@ class ParserTest {
 
     // parseSessionId()
     /**
-     * Checks if an exception is properly thrown when the Session Id delimiter is not provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown
+     * when the Session Id delimiter is not provided by the user.
      */
     @Test
-    void parseSessionId_missingDelimiter_exceptionThrown() {
+    void parseSessionId_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutSessionIdDelimiter = "sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         try {
             int output = Parser.parseSessionId(argumentWithoutSessionIdDelimiter);
@@ -428,11 +433,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Session Id delimiter is provided but no arguments
-     * following the delimiter are provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Session Id delimiter
+     * is provided but no arguments following the delimiter are provided by the user.
      */
     @Test
-    void parseSessionId_delimiterExistsWithoutArgument_exceptionThrown() {
+    void parseSessionId_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutSessionIdArgument = "/sid  /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         try {
             int output = Parser.parseSessionId(argumentWithoutSessionIdArgument);
@@ -444,11 +449,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Session Id delimiter is provided but a non-integer
-     * argument is provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Session Id delimiter
+     * is provided but a non-integer argument is provided by the user.
      */
     @Test
-    void parseSessionId_delimiterExistsArgumentNotInteger_exceptionThrown() {
+    void parseSessionId_delimiterExistsArgumentNotInteger_InvalidFormatExceptionThrown() {
         String argumentWithNonIntArgument = "/sid a1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         try {
             int output = Parser.parseSessionId(argumentWithNonIntArgument);
@@ -460,11 +465,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Session Id delimiter is provided but a negative integer
-     * argument is provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Session Id delimiter
+     * is provided but a negative integer argument is provided by the user.
      */
     @Test
-    void parseSessionId_delimiterExistsArgumentNegativeInteger_exceptionThrown() {
+    void parseSessionId_delimiterExistsArgumentNegativeInteger_InvalidFormatExceptionThrown() {
         String argumentWithNegativeIntArgument = "/sid -9 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
         try {
             int output = Parser.parseSessionId(argumentWithNegativeIntArgument);
@@ -492,10 +497,11 @@ class ParserTest {
 
     // parseActivityId()
     /**
-     * Checks if an exception is properly thrown when the Activity Id delimiter is not provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown
+     * when the Activity Id delimiter is not provided by the user.
      */
     @Test
-    void parseActivityId_missingDelimiter_exceptionThrown() {
+    void parseActivityId_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutActivityIdDelimiter = "/sid 1 aid 5";
         try {
             int output = Parser.parseActivityId(argumentWithoutActivityIdDelimiter);
@@ -507,11 +513,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Activity Id delimiter is provided but no arguments
-     * following the delimiter are provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Activity Id delimiter
+     * is provided but no arguments following the delimiter are provided by the user.
      */
     @Test
-    void parseActivityId_delimiterExistsWithoutArgument_exceptionThrown() {
+    void parseActivityId_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutActivityIdArgument = "/sid 1 /aid ";
         try {
             int output = Parser.parseActivityId(argumentWithoutActivityIdArgument);
@@ -523,11 +529,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Activity Id delimiter is provided but a non-integer
-     * argument is provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Activity Id delimiter
+     * is provided but a non-integer argument is provided by the user.
      */
     @Test
-    void parseActivityId_delimiterExistsArgumentNotInteger_exceptionThrown() {
+    void parseActivityId_delimiterExistsArgumentNotInteger_InvalidFormatExceptionThrown() {
         String argumentWithNonIntArgument = "/sid 1 /aid a5";
         try {
             int output = Parser.parseActivityId(argumentWithNonIntArgument);
@@ -539,11 +545,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Activity Id delimiter is provided but a negative integer
-     * argument is provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Activity Id delimiter
+     * is provided but a negative integer argument is provided by the user.
      */
     @Test
-    void parseActivityId_delimiterExistsArgumentNegativeInteger_exceptionThrown() {
+    void parseActivityId_delimiterExistsArgumentNegativeInteger_InvalidFormatExceptionThrown() {
         String argumentWithNegativeIntArgument = "/sid 1 /aid -5";
         try {
             int output = Parser.parseActivityId(argumentWithNegativeIntArgument);
@@ -571,10 +577,11 @@ class ParserTest {
 
     // parseLocalDate()
     /**
-     * Checks if an exception is properly thrown when the Date delimiter is not provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown
+     * when the Date delimiter is not provided by the user.
      */
     @Test
-    void parseLocalDate_missingDelimiter_exceptionThrown() {
+    void parseLocalDate_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutDateDelimiter = "/n Class outing d 23-02-2022 /pl Alice Alice Bob";
         try {
             LocalDate output = Parser.parseLocalDate(argumentWithoutDateDelimiter);
@@ -586,11 +593,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Date delimiter is provided but no arguments
-     * following the Date delimiter are provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Date delimiter
+     * is provided but no arguments following the Date delimiter are provided by the user.
      */
     @Test
-    void parseLocalDate_delimiterExistsWithoutArgument_exceptionThrown() {
+    void parseLocalDate_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutDateArgument = "/n Class outing /d /pl Alice Alice Bob";
         try {
             LocalDate output = Parser.parseLocalDate(argumentWithoutDateArgument);
@@ -602,11 +609,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Date delimiter is provided by the user but the argument
-     * following the Date delimiter is a date of invalid formatting.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Date delimiter
+     * is provided by the user but the argument following the Date delimiter is a date of invalid formatting.
      */
     @Test
-    void parseLocalDate_invalidDateFormatting_exceptionThrown() {
+    void parseLocalDate_invalidDateFormatting_InvalidFormatExceptionThrown() {
         String argumentWithInvalidDateFormatting = "/n Class outing /d 2022-03-04 /pl Alice Alice Bob";
         try {
             LocalDate output = Parser.parseLocalDate(argumentWithInvalidDateFormatting);
@@ -652,10 +659,11 @@ class ParserTest {
 
     // parseTotalCost()
     /**
-     * Checks if an exception is properly thrown when the Total cost delimiter is not provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown
+     * when the Total cost delimiter is not provided by the user.
      */
     @Test
-    void parseTotalCost_missingDelimiter_exceptionThrown() {
+    void parseTotalCost_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutTotalCostDelimiter = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie co 15";
         try {
             double output = Parser.parseTotalCost(argumentWithoutTotalCostDelimiter);
@@ -667,11 +675,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Total cost delimiter is provided but no arguments
-     * following the Total cost delimiter are provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Total cost delimiter
+     * is provided but no arguments following the Total cost delimiter are provided by the user.
      */
     @Test
-    void parseTotalCost_delimiterExistsWithoutArgument_exceptionThrown() {
+    void parseTotalCost_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutTotalCostArgument = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co ";
         try {
             double output = Parser.parseTotalCost(argumentWithoutTotalCostArgument);
@@ -683,11 +691,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Total cost delimiter is provided by the user but the 
-     * argument following the Total cost delimiter is non-numeric.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Total cost delimiter
+     * is provided by the user but the argument following the Total cost delimiter is non-numeric.
      */
     @Test
-    void parseTotalCost_delimiterExistsArgumentNotNumeric_exceptionThrown() {
+    void parseTotalCost_delimiterExistsArgumentNotNumeric_InvalidFormatExceptionThrown() {
         String argumentWithNonNumericArgument = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co apple";
         try {
             double output = Parser.parseTotalCost(argumentWithNonNumericArgument);
@@ -699,11 +707,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Total cost delimiter is provided by the user but the
-     * argument following the Total cost delimiter is a negative numeric value.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Total cost delimiter
+     * is provided by the user but the argument following the Total cost delimiter is a negative numeric value.
      */
     @Test
-    void parseTotalCost_delimiterExistsArgumentNegative_exceptionThrown() {
+    void parseTotalCost_delimiterExistsArgumentNegative_InvalidFormatExceptionThrown() {
         String argumentWithNegativeArgument = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co -1.24";
         try {
             double output = Parser.parseTotalCost(argumentWithNegativeArgument);
@@ -715,11 +723,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Total cost delimiter and a positive numeric value are
-     * provided as arguments, but the numeric value has more than two decimal places.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Total cost delimiter
+     * and a positive numeric value are provided as arguments, but the numeric value has more than two decimal places.
      */
     @Test
-    void parseTotalCost_delimiterExistsArgumentPositiveMoreThanTwoDecimalPlaces_exceptionThrown() {
+    void parseTotalCost_delimiterExistsArgumentPositiveMoreThanTwoDecimalPlaces_InvalidFormatExceptionThrown() {
         String argumentWithPositiveArgumentMoreThan2DP = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 1.2444";
         try {
             double output = Parser.parseTotalCost(argumentWithPositiveArgumentMoreThan2DP);
@@ -731,11 +739,12 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Total cost delimiter and a positive numeric value are
-     * provided as arguments, but the numeric value has more than twelve digits before decimal point.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Total cost delimiter
+     * and a positive numeric value are provided as arguments, but the numeric value has more than twelve digits
+     * before the decimal point.
      */
     @Test
-    void parseTotalCost_delimiterExistsArgumentPositiveMoreThanTwelveDigitsBeforeDecimalPoint_exceptionThrown() {
+    void parseTotalCost_delimiterExistsArgumentPositiveMoreThan12DigitsBeforeDP_InvalidFormatExceptionThrown() {
         String argumentWithPositiveArgumentMoreThan12DigitsBeforeDP =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 1234567890123.1";
         try {
@@ -787,10 +796,11 @@ class ParserTest {
 
     // parseCostList()
     /**
-     * Checks if an exception is properly thrown when the Cost list delimiter is not provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown
+     * when the Cost list delimiter is not provided by the user.
      */
     @Test
-    void parseCostList_missingDelimiter_exceptionThrown() {
+    void parseCostList_missingDelimiter_InvalidFormatExceptionThrown() {
         String argumentWithoutCostListDelimiter = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie cl 10 10 10";
         try {
             double[] output = Parser.parseCostList(argumentWithoutCostListDelimiter);
@@ -802,11 +812,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Cost list delimiter is provided but no arguments
-     * following the Cost list delimiter are provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Cost list delimiter
+     * is provided but no arguments following the Cost list delimiter are provided by the user.
      */
     @Test
-    void parseCostList_delimiterExistsWithoutArgument_exceptionThrown() {
+    void parseCostList_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutCostListArguments = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl ";
         try {
             double[] output = Parser.parseCostList(argumentWithoutCostListArguments);
@@ -818,11 +828,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Cost list delimiter is provided by the user but the 
-     * arguments following the Cost list delimiter are non-numeric.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Cost list delimiter
+     * is provided by the user but the arguments following the Cost list delimiter are non-numeric.
      */
     @Test
-    void parseCostList_delimiterExistsArgumentsNotNumeric_exceptionThrown() {
+    void parseCostList_delimiterExistsArgumentsNotNumeric_InvalidFormatExceptionThrown() {
         String argumentWithNonNumericArguments = "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl apple orange";
         try {
             double[] output = Parser.parseCostList(argumentWithNonNumericArguments);
@@ -834,11 +844,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Cost list delimiter is provided by the user but the 
-     * argument following the Cost list delimiter contain negative numeric values.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Cost list delimiter
+     * is provided by the user but the argument following the Cost list delimiter contain negative numeric values.
      */
     @Test
-    void parseCostList_delimiterExistsCostsNegative_exceptionThrown() {
+    void parseCostList_delimiterExistsCostsNegative_InvalidFormatExceptionThrown() {
         String argumentWithNegativeArguments =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl 10 -10 10";
         try {
@@ -851,11 +861,11 @@ class ParserTest {
     }
     
     /**
-     * Checks if an exception is properly thrown when the Cost list delimiter and positive numeric values are
-     * provided as arguments, but some numeric values has more than two decimal places.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Cost list delimiter
+     * and positive numeric values are provided as arguments, but some numeric values has more than two decimal places.
      */
     @Test
-    void parseCostList_delimiterExistsArgumentPositiveMoreThanTwoDecimalPlaces_exceptionThrown() {
+    void parseCostList_delimiterExistsArgumentPositiveMoreThanTwoDecimalPlaces_InvalidFormatExceptionThrown() {
         String argumentWithPositiveArgumentsMoreThan2DP =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl 1.2444 15.30 20";
         try {
@@ -868,11 +878,12 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Cost list delimiter and positive numeric values are
-     * provided as arguments, but some numeric values has more than twelve digits before decimal point.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Cost list delimiter
+     * and positive numeric values are provided as arguments, but some numeric values has more than twelve digits
+     * before the decimal point.
      */
     @Test
-    void parseCostList_delimiterExistsArgumentPositiveMoreThanTwelveDigitsBeforeDecimalPoint_exceptionThrown() {
+    void parseCostList_delimiterExistsArgumentPositiveMoreThan12DigitsBeforeDP_InvalidFormatExceptionThrown() {
         String argumentWithPositiveArgumentsMoreThan12DigitsBeforeDP =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /cl 1234567890123.1 15.30 20";
         try {
@@ -922,11 +933,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the GST delimiter is provided but no arguments
-     * following the GST delimiter are provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the GST delimiter
+     * is provided but no arguments following the GST delimiter are provided by the user.
      */
     @Test
-    void parseGst_delimiterExistsWithoutArgument_exceptionThrown() {
+    void parseGst_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutGstArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst /sc 10";
         try {
@@ -939,11 +950,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the GST delimiter is provided by the user but the 
-     * argument following the GST delimiter cannot be parsed as a double.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the GST delimiter
+     * is provided by the user but the argument following the GST delimiter cannot be parsed as a double.
      */
     @Test
-    void parseGst_delimiterExistsArgumentNotDouble_exceptionThrown() {
+    void parseGst_delimiterExistsArgumentNotDouble_InvalidFormatExceptionThrown() {
         String argumentWithNonDoubleArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst apple /sc 10";
         try {
@@ -956,11 +967,12 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the GST delimiter and positive numeric value are
-     * provided as arguments, but the parsed double has more than three digits before decimal point.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the GST delimiter
+     * and positive numeric value are provided as arguments, but the parsed double has more than three digits
+     * before the decimal point.
      */
     @Test
-    void parseGst_delimiterExistsArgumentDoubleWithMoreThanThreeDigitsBeforeDecimalPoint_exceptionThrown() {
+    void parseGst_delimiterExistsArgumentDoubleWithMoreThan3DigitsBeforeDP_InvalidFormatExceptionThrown() {
         String argumentWithDoubleArgumentMoreThan3DigitsBeforeDP =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 1000 /sc 10";
         try {
@@ -973,11 +985,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the GST delimiter and positive numeric value are
-     * provided as arguments, but the parsed double has more than two decimal places.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the GST delimiter
+     * and positive numeric value are provided as arguments, but the parsed double has more than two decimal places.
      */
     @Test
-    void parseGst_delimiterExistsArgumentDoubleWithMoreThanTwoDecimalPlaces_exceptionThrown() {
+    void parseGst_delimiterExistsArgumentDoubleWithMoreThan2DP_InvalidFormatExceptionThrown() {
         String argumentWithDoubleArgumentMoreThan2DP =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 10.123 /sc 10";
         try {
@@ -990,11 +1002,12 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the GST delimiter and a double representing the GST 
-     * percentage is provided by the user but the double is not within the valid range of [0, 100].
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the GST delimiter
+     * and a double representing the GST percentage is provided by the user but the double is not within
+     * the valid range of [0, 100].
      */
     @Test
-    void parseGst_delimiterExistsArgumentDoubleButNotInRange_exceptionThrown() {
+    void parseGst_delimiterExistsArgumentDoubleButNotInRange_InvalidFormatExceptionThrown() {
         // Test values less than 0, negative values
         String argumentWithDoubleArgumentUnderRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst -1 /sc 10";
@@ -1084,11 +1097,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Service charge delimiter is provided but no arguments
-     * following the Service charge delimiter are provided by the user.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Service charge delimiter
+     * is provided but no arguments following the Service charge delimiter are provided by the user.
      */
     @Test
-    void parseServiceCharge_delimiterExistsWithoutArgument_exceptionThrown() {
+    void parseServiceCharge_delimiterExistsWithoutArgument_InvalidFormatExceptionThrown() {
         String argumentWithoutServiceChargeArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc ";
         try {
@@ -1101,11 +1114,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Service charge delimiter is provided by the user but the 
-     * argument following the Service charge delimiter cannot be parsed as a double.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Service charge delimiter
+     * is provided by the user but the argument following the Service charge delimiter cannot be parsed as a double.
      */
     @Test
-    void parseServiceCharge_delimiterExistsArgumentNotDouble_exceptionThrown() {
+    void parseServiceCharge_delimiterExistsArgumentNotDouble_InvalidFormatExceptionThrown() {
         String argumentWithNonDoubleArgument =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc apple";
         try {
@@ -1119,11 +1132,12 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Service charge delimiter and positive numeric value are
-     * provided as arguments, but the parsed double has more than three digits before decimal point.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Service charge delimiter
+     * and positive numeric value are provided as arguments, but the parsed double has more than three digits
+     * before the decimal point.
      */
     @Test
-    void parseServiceCharge_delimiterExistsArgumentDoubleWithMoreThanThreeDigitsBeforeDecimalPoint_exceptionThrown() {
+    void parseServiceCharge_delimiterExistsArgumentDoubleWithMoreThan3DigitsBeforeDP_InvalidFormatExceptionThrown() {
         String argumentWithDoubleArgumentMoreThan3DigitsBeforeDP =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 1000";
         try {
@@ -1136,11 +1150,11 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Service charge delimiter and positive numeric value are
-     * provided as arguments, but the parsed double has more than two decimal places.
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Service charge delimiter
+     * and positive numeric value are provided as arguments, but the parsed double has more than two decimal places.
      */
     @Test
-    void parseServiceCharge_delimiterExistsArgumentDoubleWithMoreThanTwoDecimalPlaces_exceptionThrown() {
+    void parseServiceCharge_delimiterExistsArgumentDoubleWithMoreThan2DP_InvalidFormatExceptionThrown() {
         String argumentWithDoubleArgumentMoreThan2DP =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc 10.123";
         try {
@@ -1153,11 +1167,12 @@ class ParserTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when the Service charge delimiter and a double representing the
-     * percentage service charge is provided by the user but the double is not within the valid range of [0, 100].
+     * Checks if an InvalidFormatException with the correct message is properly thrown when the Service charge delimiter
+     * and a double representing the percentage service charge is provided by the user but the double is not
+     * within the valid range of [0, 100].
      */
     @Test
-    void parseServiceCharge_delimiterExistsArgumentDoubleButNotInRange_exceptionThrown() {
+    void parseServiceCharge_delimiterExistsArgumentDoubleButNotInRange_InvalidFormatExceptionThrown() {
         // Test values less than 0, negative values
         String argumentWithDoubleArgumentUnderRange =
                 "/sid 3 /n Lunch /p Alice /i Alice Bob Charlie /co 15 /gst 7 /sc -1";
