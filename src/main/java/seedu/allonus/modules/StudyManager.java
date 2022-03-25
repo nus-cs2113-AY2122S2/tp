@@ -1,10 +1,12 @@
 package seedu.allonus.modules;
 
 
-import seedu.allonus.modules.exceptions.ModuleCategoryException;
 import seedu.allonus.modules.exceptions.ModuleCodeException;
+import seedu.allonus.modules.exceptions.ModuleCategoryException;
 import seedu.allonus.modules.exceptions.ModuleDayException;
 import seedu.allonus.modules.exceptions.ModuleTimeException;
+import seedu.allonus.modules.exceptions.InvalidFindInputException;
+
 import seedu.allonus.ui.TextUi;
 
 import java.util.ArrayList;
@@ -17,10 +19,11 @@ import java.util.logging.Logger;
  */
 public class StudyManager {
 
+
     private static ArrayList<Module> modulesList = new ArrayList<>();
 
     /**
-     * Study manager messages and commands.
+     * Study manager messages, commands and constants.
      */
     private static final String UNKNOWN_INPUT_MESSAGE = "Sorry I did not get that!";
     private static final String MENU_COMMAND = "menu";
@@ -41,6 +44,8 @@ public class StudyManager {
     private static final String CATEGORY_EXAM_SHORTHAND = "exam";
     private static final String WELCOME_MESSAGE = "Welcome to Modules Tracker, where you can track all your "
             + "classes.";
+    public static final String STRING_SPACE_CHARACTER = " ";
+    public static final String EMPTY_STRING = "";
 
     /**
      * Edit module messages.
@@ -80,12 +85,13 @@ public class StudyManager {
      * Find modules messages.
      */
     private static final String FIND_NO_MATCHES_MESSAGE = "There are no modules that match";
-    private static final String FIND_LIST_MATCHES_MESSAGE = "Here are the matching tasks in your list:";
+    private static final String FIND_LIST_MATCHES_MESSAGE = "Here are the matching modules in your list:";
+    private static final String LOGGER_NO_FIND_QUERY = "no search query was entered for find";
 
     /**
      * List modules messages.
      */
-    private static final String EMPTY_MODULE_LIST_MESAGE = "There are no modules in your list yet!";
+    private static final String EMPTY_MODULE_LIST_MESSAGE = "There are no modules in your list yet!";
     private static final String LIST_MODULES_MESSAGE = "Here are the modules in your schedule:";
 
     /**
@@ -149,7 +155,7 @@ public class StudyManager {
      */
     public void listModules() {
         if (modulesList.size() == 0) {
-            printMessage(EMPTY_MODULE_LIST_MESAGE);
+            printMessage(EMPTY_MODULE_LIST_MESSAGE);
             return;
         }
         printMessage(LIST_MODULES_MESSAGE);
@@ -166,7 +172,7 @@ public class StudyManager {
      */
     public void deleteModule(String userInput) {
         try {
-            String moduleIndexString = userInput.replace(DELETE_COMMAND + " ","");
+            String moduleIndexString = userInput.replace(DELETE_COMMAND + " ",EMPTY_STRING);
             int moduleIndex = Integer.parseInt(moduleIndexString) - 1;
             if (modulesList.get(moduleIndex) != null) {
                 Module removedModule = modulesList.get(moduleIndex);
@@ -195,7 +201,7 @@ public class StudyManager {
 
     public void editModule(String userInput, TextUi ui) {
         try {
-            String moduleIndexString = userInput.replace(EDIT_COMMAND + " ", "");
+            String moduleIndexString = userInput.replace(EDIT_COMMAND + " ", EMPTY_STRING);
             int moduleIndex = Integer.parseInt(moduleIndexString) - 1;
             if (modulesList.get(moduleIndex) != null) {
                 editModuleRunner(ui, moduleIndex);
@@ -240,25 +246,25 @@ public class StudyManager {
     }
 
     private void editModuleTime(Module moduleToEdit, String editUserInput) {
-        String moduleTime = editUserInput.replace(MODULE_TIME_DELIMITER,"");
+        String moduleTime = editUserInput.replace(MODULE_TIME_DELIMITER,EMPTY_STRING);
         moduleToEdit.setTimeSlot(moduleTime);
         printMessage(moduleToEdit.toString());
     }
 
     private void editModuleDay(Module moduleToEdit, String editUserInput) {
-        String moduleDay = editUserInput.replace(MODULE_DAY_DELIMITER,"");
+        String moduleDay = editUserInput.replace(MODULE_DAY_DELIMITER,EMPTY_STRING);
         moduleToEdit.setDay(moduleDay);
         printMessage(moduleToEdit.toString());
     }
 
     private void editModuleCode(Module moduleToEdit, String editUserInput) {
-        String moduleCode = editUserInput.replace(MODULE_CODE_DELIMITER,"");
+        String moduleCode = editUserInput.replace(MODULE_CODE_DELIMITER,EMPTY_STRING);
         moduleToEdit.setModuleCode(moduleCode);
         printMessage(moduleToEdit.toString());
     }
 
     private void editModuleCategory(Module moduleToEdit, String editUserInput) {
-        String moduleCategory = editUserInput.replace(MODULE_CATEGORY_DELIMITER,"");
+        String moduleCategory = editUserInput.replace(MODULE_CATEGORY_DELIMITER,EMPTY_STRING);
         try {
             moduleCategory = validateModuleCategory(moduleCategory);
             moduleToEdit.setCategory(moduleCategory);
@@ -329,18 +335,37 @@ public class StudyManager {
     }
 
     public void findModule(String userInput) {
-        String moduleKeyword = userInput.replace(FIND_COMMAND + " ","");
+        try {
+            String moduleKeyword = validateFindQuery(userInput);
+            ArrayList<Module> matches = getFindMatches(moduleKeyword);
+            if (matches.size() == 0) {
+                printMessage(FIND_NO_MATCHES_MESSAGE + " \"" + moduleKeyword + "\"");
+            } else {
+                listMatches(matches);
+            }
+        } catch (InvalidFindInputException e) {
+            logger.log(Level.WARNING, LOGGER_NO_FIND_QUERY);
+            printMessage(e.getMessage());
+        }
+    }
+
+    private ArrayList<Module> getFindMatches(String moduleKeyword) {
         ArrayList<Module> matches = new ArrayList<>();
-        for (Module m: modulesList) {
+        for (Module m : modulesList) {
             if (m.toString().contains(moduleKeyword)) {
                 matches.add(m);
             }
         }
-        if (matches.size() == 0) {
-            printMessage(FIND_NO_MATCHES_MESSAGE + " \"" + moduleKeyword + "\"");
-        } else {
-            listMatches(matches);
+        return matches;
+    }
+
+    private String validateFindQuery(String userInput) throws InvalidFindInputException {
+        String moduleKeyword = userInput.replace(FIND_COMMAND + STRING_SPACE_CHARACTER, EMPTY_STRING);
+        if (moduleKeyword.equals(STRING_SPACE_CHARACTER) || moduleKeyword.equals(EMPTY_STRING)
+                || !userInput.contains(" ")) {
+            throw new InvalidFindInputException("You have not entered a search keyword to find modules!");
         }
+        return moduleKeyword;
     }
 
     private void listMatches(ArrayList<Module> matches) {
@@ -381,7 +406,8 @@ public class StudyManager {
     private String moduleCodeChecker(String[] parameters) throws ModuleCodeException {
         String module;
         try {
-            if (parameters[0].substring(2).equals("") || !parameters[0].substring(0, 2).equals(MODULE_CODE_DELIMITER)) {
+            if (parameters[0].substring(2).equals(EMPTY_STRING)
+                    || !parameters[0].substring(0, 2).equals(MODULE_CODE_DELIMITER)) {
                 throw new ModuleCodeException(MISSING_MODULE_CODE_MESSAGE);
             } else {
                 module = parameters[0].substring(2);
@@ -401,7 +427,7 @@ public class StudyManager {
     private String moduleCategoryChecker(String[] parameters) throws ModuleCategoryException {
         String category;
         try {
-            if (parameters[1].substring(2).equals("")
+            if (parameters[1].substring(2).equals(EMPTY_STRING)
                     || !parameters[1].substring(0, 2).equals(MODULE_CATEGORY_DELIMITER)) {
                 throw new ModuleCategoryException(MISSING_MODULE_CATEGORY_MESSAGE);
             } else {
@@ -442,7 +468,8 @@ public class StudyManager {
     private String moduleDayChecker(String[] parameters) throws ModuleDayException {
         String day;
         try {
-            if (parameters[2].substring(2).equals("") || !parameters[2].substring(0, 2).equals(MODULE_DAY_DELIMITER)) {
+            if (parameters[2].substring(2).equals(EMPTY_STRING)
+                    || !parameters[2].substring(0, 2).equals(MODULE_DAY_DELIMITER)) {
                 throw new ModuleDayException(MISSING_MODULE_DAY_MESSAGE);
             } else {
                 day = parameters[2].substring(2);
@@ -462,7 +489,8 @@ public class StudyManager {
     private String moduleTimeChecker(String[] parameters) throws ModuleTimeException {
         String time;
         try {
-            if (parameters[3].substring(2).equals("") || !parameters[3].substring(0, 2).equals(MODULE_TIME_DELIMITER)) {
+            if (parameters[3].substring(2).equals(EMPTY_STRING)
+                    || !parameters[3].substring(0, 2).equals(MODULE_TIME_DELIMITER)) {
                 throw new ModuleTimeException(MISSING_MODULE_TIME_MESSAGE);
             } else {
                 time = parameters[3].substring(2);
