@@ -25,7 +25,7 @@ public class SessionCreateCommandParserTest {
         String validUserInputOne = "session /create /n Class gathering /d 15-02-2022 /pl Alice Bob";
         String validArgumentsOne = Parser.getRemainingArgument(validUserInputOne);
         String errorMessageOne = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, validArgumentsOne);
-        if(!errorMessageOne.isEmpty()) {
+        if (!errorMessageOne.isEmpty()) {
             fail();
         }
         try {
@@ -45,7 +45,7 @@ public class SessionCreateCommandParserTest {
         String validUserInputTwo = "session /create /n Class gathering /d 15-02-2022 /gid 1";
         String validArgumentsTwo = Parser.getRemainingArgument(validUserInputTwo);
         String errorMessageTwo = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, validArgumentsTwo);
-        if(!errorMessageTwo.isEmpty()) {
+        if (!errorMessageTwo.isEmpty()) {
             fail();
         }
         try {
@@ -70,7 +70,7 @@ public class SessionCreateCommandParserTest {
         String inputMissingNameDelimiter = "session /create /d 15-02-2022 /pl Alice Bob";
         String argsMissingNameDelimiter = Parser.getRemainingArgument(inputMissingNameDelimiter);
         String errorNameMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingNameDelimiter);
-        if(!errorNameMessage.isEmpty()) {
+        if (!errorNameMessage.isEmpty()) {
             fail();
         }
         try {
@@ -86,7 +86,7 @@ public class SessionCreateCommandParserTest {
         String inputMissingDateDelimiter = "session /create /n Class gathering /pl Alice Bob";
         String argsMissingDateDelimiter = Parser.getRemainingArgument(inputMissingDateDelimiter);
         String errorDateMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingDateDelimiter);
-        if(!errorDateMessage.isEmpty()) {
+        if (!errorDateMessage.isEmpty()) {
             fail();
         }
         try {
@@ -111,7 +111,7 @@ public class SessionCreateCommandParserTest {
         String inputMissingNameArgument = "session /create /n /d 15-02-2022 /pl Alice Bob";
         String argsMissingNameArgument = Parser.getRemainingArgument(inputMissingNameArgument);
         String errorNameMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingNameArgument);
-        if(!errorNameMessage.isEmpty()) {
+        if (!errorNameMessage.isEmpty()) {
             fail();
         }
         try {
@@ -127,7 +127,7 @@ public class SessionCreateCommandParserTest {
         String inputMissingDateArgument = "session /create /n Class gathering /d /pl Alice Bob";
         String argsMissingDateArgument = Parser.getRemainingArgument(inputMissingDateArgument);
         String errorDateMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingDateArgument);
-        if(!errorDateMessage.isEmpty()) {
+        if (!errorDateMessage.isEmpty()) {
             fail();
         }
         try {
@@ -143,7 +143,7 @@ public class SessionCreateCommandParserTest {
         String inputMissingPersonListArgument = "session /create /n Class gathering /d 15-02-2022 /pl";
         String argsMissingPersonListArgument = Parser.getRemainingArgument(inputMissingPersonListArgument);
         String errorPersonListMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingPersonListArgument);
-        if(!errorPersonListMessage.isEmpty()) {
+        if (!errorPersonListMessage.isEmpty()) {
             fail();
         }
         try {
@@ -159,7 +159,7 @@ public class SessionCreateCommandParserTest {
         String inputMissingGidArgument = "session /create /n Class gathering /d 15-02-2022 /gid";
         String argsMissingGidArgument = Parser.getRemainingArgument(inputMissingGidArgument);
         String errorGidMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingGidArgument);
-        if(!errorGidMessage.isEmpty()) {
+        if (!errorGidMessage.isEmpty()) {
             fail();
         }
         try {
@@ -184,7 +184,7 @@ public class SessionCreateCommandParserTest {
         String argsWithMissingPersonListAndGidDelimiter =
                 Parser.getRemainingArgument(inputMissingPersonListAndGidDelimiters);
         String errorMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsWithMissingPersonListAndGidDelimiter);
-        if(!errorMessage.isEmpty()) {
+        if (!errorMessage.isEmpty()) {
             fail();
         }
         try {
