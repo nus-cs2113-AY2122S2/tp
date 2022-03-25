@@ -32,7 +32,8 @@ class ParserTest {
                 "S1234567A,JOHN,2B,M,SINGAPORE,1999-01-01,2022-01-01",
                 "S1234567A,JOHN,23,T,SINGAPORE,1999-01-01,2022-01-01",
                 "S1234567A,JOHN,23,M,SINGAPORE,1999,2022-01-01",
-                "S1234567A,JOHN,23,M,SINGAPORE,1999-01-01,2022-100-01"};
+                "S1234567A,JOHN,23,M,SINGAPORE,1999-01-01,2022-100-01",
+                "S1234567A,JOHN,23,M,SINGAPORE,1999-01-01,2022-01-01,123"};
         for (String s : parameters) {
             try {
                 Parser.parseAddPatient(s);
@@ -61,7 +62,8 @@ class ParserTest {
                 "S1234567A,JOHN,2B,M,SINGAPORE,1999-01-01,Paediatrics",
                 "S1234567A,JOHN,23,T,SINGAPORE,1999-01-01,Paediatrics",
                 "S1234567A,JOHN,23,M,SINGAPORE,1999,Paediatrics",
-                "S1234567A,JOHN,23,M,SINGAPORE,1999-01-01,Paediatrics1"};
+                "S1234567A,JOHN,23,M,SINGAPORE,1999-01-01,Paediatrics1",
+                "S1234567A,JOHN,23,M,SINGAPORE,1999-01-01"};
         for (String s : parameters) {
             try {
                 Parser.parseAddDoctor(s);
@@ -88,8 +90,8 @@ class ParserTest {
         String[] parameters = {"S123,Paracetamol1,500,2025-02-02,Headaches,100",
                 "S123,Paracetamol,-1,2025-02-02,Headaches,100",
                 "S123,Paracetamol,50b,2025-02-02,Headaches,100",
-                "S123,Paracetamol,500,2025-24-02,Headaches,100"
-            };
+                "S123,Paracetamol,500,2025-24-02,Headaches,100",
+                "S123,Paracetamol,500,2025-02-02,Headaches"};
 
         for (String s : parameters) {
             try {
