@@ -125,4 +125,17 @@ public class PersonList {
             person.listExpenditure();
         }
     }
+
+    /**
+     * Adds an income to the list of incomes of the specified person.
+     *
+     * @param index The index of the person
+     * @param description The source of the income
+     * @param amount The value of the income
+     */
+    public void addIncome(int index, String description, double amount) {
+        String infoString = "Method addIncome() called";
+        logger.getLogger().log(Level.INFO, infoString);
+        getPerson(index).addIncome(description, amount);
+    }
 }

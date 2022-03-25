@@ -55,7 +55,7 @@ public class Family {
      * Returns the array list specified.
      *
      * @param group The index of the group to return
-     * @return The array list specified by group
+     * @return The array list specified by the group index
      */
     private PersonList getList(int group) {
         String infoString = "Entering getList()";
@@ -98,5 +98,19 @@ public class Family {
         String infoString = "Method removePerson() called";
         logger.getLogger().log(Level.INFO, infoString);
         getList(group).removePerson(index);
+    }
+
+    /**
+     * Adds an income to the list of incomes of a person in the array list specified by the group index.
+     *
+     * @param index The index of the person in the group
+     * @param group The index of the group to find the person
+     * @param description The source of the income
+     * @param amount The value of the income
+     */
+    public void addIncome(int index, int group, String description, double amount) {
+        String infoString = "Method addIncome() called";
+        logger.getLogger().log(Level.INFO, infoString);
+        getList(group).addIncome(index, description, amount);
     }
 }
