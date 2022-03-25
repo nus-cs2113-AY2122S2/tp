@@ -15,7 +15,7 @@ public class StaffController extends Controller {
      */
     public StaffController() {
         super(CHOICES);
-        this.staffManager = new StaffManager();
+        this.staffManager = StaffManager.getInstance();
     }
 
     @Override
