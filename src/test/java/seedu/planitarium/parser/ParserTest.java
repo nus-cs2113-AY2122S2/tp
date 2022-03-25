@@ -10,6 +10,7 @@ import seedu.planitarium.person.Person;
 import seedu.planitarium.person.PersonList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
@@ -294,8 +295,8 @@ class ParserTest {
     void parseRecurringStatus_delimiterExist_success()
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         String input = "addout /u 1 /e 10 /d Dinner /p t";
-        String output = Parser.parseRecurringStatus(input);
-        assertEquals("t", output);
+        boolean output = Parser.parseRecurringStatus(input);
+        assertTrue(output);
     }
 
     @Test
@@ -527,7 +528,7 @@ class ParserTest {
         PersonList personList = new PersonList();
         personList.addPerson("Alice");
         Person person = personList.getPerson(1);
-        person.addExpend("Food", 10.5);
+        person.addExpend("Food", 10.5, false);
 
         String input = "1";
         int output = Parser.getValidExpenditureIndex(input, person);
@@ -571,7 +572,7 @@ class ParserTest {
         PersonList personList = new PersonList();
         personList.addPerson("Alice");
         Person person = personList.getPerson(1);
-        person.addExpend("Food", 10.5);
+        person.addExpend("Food", 10.5, false);
         try {
             String tooLow = "0";
             Parser.getValidExpenditureIndex(tooLow, person);
@@ -597,7 +598,7 @@ class ParserTest {
         PersonList personList = new PersonList();
         personList.addPerson("Alice");
         Person person = personList.getPerson(1);
-        person.addIncome("Gift", 100);
+        person.addIncome("Gift", 100, false);
 
         String input = "1";
         int output = Parser.getValidIncomeIndex(input, person);
@@ -641,7 +642,7 @@ class ParserTest {
         PersonList personList = new PersonList();
         personList.addPerson("Alice");
         Person person = personList.getPerson(1);
-        person.addIncome("Gift", 100);
+        person.addIncome("Gift", 100, false);
         try {
             String tooLow = "0";
             Parser.getValidIncomeIndex(tooLow, person);

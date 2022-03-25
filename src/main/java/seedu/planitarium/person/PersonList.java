@@ -10,7 +10,7 @@ import java.util.logging.Level;
 public class PersonList {
     private ArrayList<Person> personList;
     private int numberOfMembers;
-    private ProjectLogger logger;
+    private static ProjectLogger logger;
     private static final int SINGULAR = 1;
 
     /**

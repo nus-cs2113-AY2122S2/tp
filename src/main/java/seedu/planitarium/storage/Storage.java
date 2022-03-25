@@ -21,6 +21,7 @@ public class Storage {
     private static final String ADD_INCOME = "i";
     private static final int GET_TYPE = 0;
     private static final int END_OF_TYPE = 1;
+    private static final int DELIMIT_COUNT = 3;
 
     private static File saveFile;
     private static int numberOfPerson = 0;
@@ -70,6 +71,7 @@ public class Storage {
 
         String description;
         Double amount;
+        boolean isPermanent;
         switch (type) {
         case ADD_USER:
             personDataList.addPerson(info);
@@ -78,12 +80,14 @@ public class Storage {
         case ADD_INCOME:
             description = parseInfoGetDescription(info);
             amount = parseInfoGetAmount(info);
-            personDataList.getPerson(numberOfPerson).addIncome(description, amount);
+            isPermanent = parseInfoGetPermanent(info);
+            personDataList.getPerson(numberOfPerson).addIncome(description, amount, isPermanent);
             break;
         case ADD_EXPENDITURE:
             description = parseInfoGetDescription(info);
             amount = parseInfoGetAmount(info);
-            personDataList.getPerson(numberOfPerson).addExpend(description, amount);
+            isPermanent = parseInfoGetPermanent(info);
+            personDataList.getPerson(numberOfPerson).addExpend(description, amount, isPermanent);
             break;
         default:
             break;
@@ -91,13 +95,18 @@ public class Storage {
     }
 
     private static String parseInfoGetDescription(String info) {
-        String[] inputInfo = info.split(INFO_DELIMITER, 2);
+        String[] inputInfo = info.split(INFO_DELIMITER, DELIMIT_COUNT);
         return inputInfo[0];
     }
 
     private static Double parseInfoGetAmount(String info) {
-        String[] inputInfo = info.split(INFO_DELIMITER, 2);
+        String[] inputInfo = info.split(INFO_DELIMITER, DELIMIT_COUNT);
         return Double.valueOf(inputInfo[1].trim());
+    }
+
+    private static boolean parseInfoGetPermanent(String info) {
+        String[] inputInfo = info.split(INFO_DELIMITER, DELIMIT_COUNT);
+        return Boolean.valueOf(inputInfo[2].trim());
     }
 
     /**
