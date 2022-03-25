@@ -10,32 +10,31 @@ In this project, we have referenced the following materials:
 ---
 ## Design
 
-> :information_source: **Note:** The `.puml` files used to create diagrams in this document 
-> can be found in the diagrams folder. Refer to the above [PlantUML Tutorial](#Acknowledgements)
-> to learn how to create and edit diagrams.
-
 ### Architecture
-<image src="images/ArchitectureDiagram.png" width="300"/>
 
-The ***Architecture Diagram*** given above shows the high-level design of PlanITarium.
+The ***Architecture Diagram*** given below shows the high-level design of PlanITarium.
 
-Given below is a quick overview of the main components and how they interact.
+<img src="images/ArchitectureDiagram.png" width="300"/>
 
-**Main components of the Architecture**
+> :information_source: **Note:** The that `.puml` files used to create diagrams in this document
+> can be found in the diagrams folder. Refer to the above [PlantUML Tutorial](#Acknowledgements)
+> to learn how to create and edit these diagrams when necessary.
 
-[`Main`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/PlanITarium.java) 
+**Overview of components in the Architecture**
+
+[`Main`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/PlanITarium.java)
 is responsible for,
-* At launch, initialize the components in an appropriate manner and calls Storage to read data if any. 
+* At launch, initialize the components in an appropriate manner and calls Storage to read data if any.
 * Read user's commands from standard input for command execution.
-* At shut down, invokes shutdown sequence and calls Storage to save its current data. 
+* At shut down, invokes shutdown sequence and calls Storage to save its current data.
 
 [`UI`](#UI-Component) is responsible for the UI of PlanITarium.
 
-[`Commands`](#Commands-Component) is responsible for the execution of commands.
+[`Commands`](#Commands-Component) is responsible for handling and executing of commands.
 
 [`Parser`](#Parser-Component) is responsible for parsing and validating user input.
 
-[`Persons`](#Persons-Component) is responsible for holding the user data of PlanITarium in memory.
+[`Family`](#Persons-Component) is responsible for holding the user data of PlanITarium in memory.
 
 [`Money`](#Money-Component) is responsible for holding the monetary information in memory.
 
@@ -43,7 +42,18 @@ is responsible for,
 
 **How the components interact with each other**
 
-{referring to AB-3, describe one encompassing command such as `add /n Alice`}
+The slightly simplified *Sequence Diagram* below shows how the components interact for the scenrio where the user
+issues the command `add /n Alice /g 2`.
+
+<img src="images/ArchitectureSequenceDiagram.png"/>
+
+Each of the main components shown in the diagram above is defined and implemented in a class
+with the same name as its component. The section below provides a more in-depth details on how the
+components interact with one another.
+
+Each component may have several other classes underneath it, belonging to the same logical grouping,
+to reduce coupling. For example, the `MoneyList` component is defined as an abstract class that
+is extended by `IncomeList` and `ExpenditureList`.
 
 ### UI Component
 {For Huilin as she is most familiar}
@@ -52,11 +62,45 @@ is responsible for,
 {For Huilin}
 
 ### Parser Component
-{For Sizheng}
+**Class:** [`Parser.java`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/Parser.java)
 
-### Persons Component
+<img src="images/ParserClassDiagram.png"/>
 
-The **API** of this component is specified in `Family.java`, `PersonList.java` and `Person.java`.
+The `Parser` component consists of the `Parser` class, `ParserUtility` class and several 
+`Exception` classes.
+
+The `Parser` class provides methods which helps to parse the user input into its respective terms
+(i.e. name) and returns them as a string, and also methods which helps to validate the terms and
+returns the appropriately typed object to the `Commands` component. The `Parser` class interacts
+the `ParserUtility` class which provides supporting methods for parsing and validating. Both classes
+interacts and throws exceptions as required.
+
+How the `Parser` component is used:
+
+1. When the `Commands` component receives a user input, the `Parser` is called upon to parse the
+type of command to be executed.
+2. This will result in the keyword of the command to be returned as a string.
+3. When necessary, the `Parser` will be called upon to parse more terms for the `Commands` component
+to obtain the details required for the command execution (i.e. `parseGroupIndex("add /n Alice /g 2")`
+to get group 2). The `ParserUtility` assists the parsing during this process.
+4. The parser will also be called upon thereafter to check and return a valid typecasted object
+to be used for the command execution (i.e. `getValidGroupIndex(indexString)` to check that the
+index provided corresponds to an existing group). The `ParserUtility` is also called here to assist
+with the validation process.
+
+The Sequence Diagram below illustrates the interactions in the `Parser` component for a command
+execution. Let `userInput` be the command string `deletein /u 1 /g 2 /r 1` and the minimum index
+`minIdx` that is supported by PlanITarium be `1`.
+
+<img src="images/ParserSequenceDiagram.png"/>
+
+> :information_source: **Note:** Several alternate paths and optional paths have been omitted from the above
+> Sequence Diagram. All paths that can be taken but not shown are undesirable outcomes which would
+> result in an exception thrown.
+
+### Family Component
+
+The **Class** of this component is specified in `Family.java`, `PersonList.java` and `Person.java`.
 
 <image src="images/PersonsComponent.png"></image>
 
@@ -69,12 +113,15 @@ The `Person` component,
 * Depends on the `Money` component to help keep track of each `Person`'s income and expenditure as each `Person`   
   contains an `IncomeList` and `ExpenditureList`.
 
-### Money Component
+### MoneyList Component
 {For Jiarong}
 
 ### Storage Component
-**API: **
+
+**Class:**
+
 <image src="images/StorageDiagram.png"/>
+
 The `Storage` component,
 
 * can save each person's data and their income and expenditure data when the program exits into a local file, and reads
@@ -318,13 +365,13 @@ user and Bob is her father, then Alice would belong to the current generation an
 to the parent generation. In this case `Family` would be initialised with two generations being
 tracked - parents and myGen.
 
-<image src="images/ListCategorisedExpense0.png"/>
+<img src="images/ListCategorisedExpense0.png"/>
 
 Step 2. The user executes `listcat /c 1` command to list all expenses in category `1`. The `listcat`
 command will be parsed and calls `Family#listExpenseOfCategory(1)` which would instantiate a
 temporary array list for storing the results of the upcoming search.
 
-<image src="images/ListCategorisedExpense1.png"/>
+<img src="images/ListCategorisedExpense1.png"/>
 
 Step 3. After the temporary array list has been created, the generations being tracked will be
 iterated for `Person` objects. The `expenditureList` for a person would be retrieved during that
@@ -334,7 +381,7 @@ extends `ExpenditureList`. This method then iterates through the list and calls
 category matches the given index. The returned expenditures are then appended to the temporary
 array list.
 
-<image src="images/ListCategorisedExpense2.png"/>
+<img src="images/ListCategorisedExpense2.png"/>
 
 Step 4. The iteration, collecting and appending to the temporary array list in step 3 is repeated 
 until every person has been iterated. Finally, `Categories#getLabel(1)` is called so that an
@@ -349,7 +396,7 @@ a series of print to display the expenditures in this category.
 The following sequence diagram shows how the `listcat` operation works after a `ListCatCommand` 
 command object has been created by [`CommandFactory`](#Command-Execution):
 
-<image src="images/ListCategorisedExpenseSequence.png"/>
+<img src="images/ListCategorisedExpenseSequence.png"/>
 
 #### Design considerations:
 
@@ -361,7 +408,7 @@ command object has been created by [`CommandFactory`](#Command-Execution):
   
 * **Altertive 2:** Maintain an array list for each category and store a copy of expenses.
   * Pros: Fast to print expenses in a category, no unnecessary look-ups.
-  * Cons: Poor memory management, needs to store twice as many expenditures. 
+  * Cons: Poor memory management, needs to store twice as many expenditures.
 
 ### Data Archiving
 
