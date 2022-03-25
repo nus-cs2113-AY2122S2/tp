@@ -125,11 +125,11 @@ The management of staff is handled by `StaffManager`, which implements following
 
 For example `addStaff(int staffId, String staffName, String position, double salary)` calls `add(Staff)` to add a `Staff` from `ArrayList<Staff>`:
 
-
+![](diagrams/sqeuence/StaffManager_addStaff.png)
 
 And `deleteStaff(int)` calls `remove(int)` to remove a `Staff` from `ArrayList<Staff>`:
 
-
+![](diagrams/sqeuence/StaffManager_deleteStaff.png)
 
 
 ## Product scope
