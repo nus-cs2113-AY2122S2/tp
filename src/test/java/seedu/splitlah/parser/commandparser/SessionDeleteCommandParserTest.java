@@ -1,6 +1,9 @@
 package seedu.splitlah.parser.commandparser;
 
 import org.junit.jupiter.api.Test;
+import seedu.splitlah.command.Command;
+import seedu.splitlah.command.SessionDeleteCommand;
+import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
@@ -12,6 +15,32 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class SessionDeleteCommandParserTest {
 
     private static final String COMMAND_TYPE = SessionDeleteCommandParser.COMMAND_TEXT;
+
+    /**
+     * Checks if a SessionDeleteCommand object is correctly returned when the user input is valid.
+     */
+    @Test
+    public void getCommand_validUserInput_SessionDeleteCommand() {
+        Manager manager = new Manager();
+        String sessionInput = "session /create /n Class outing /pl Alice Bob /d today";
+        Command createSession = Parser.getCommand(sessionInput);
+        createSession.run(manager);
+
+        String validUserInput = "session /delete /sid 1";
+        String validArguments = Parser.getRemainingArgument(validUserInput);
+        String errorMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, validArguments);
+        if (!errorMessage.isEmpty()) {
+            fail();
+        }
+        try {
+            SessionDeleteCommandParser sessionDeleteCommandParser = new SessionDeleteCommandParser();
+            Command sessionDeleteCommand = sessionDeleteCommandParser.getCommand(validArguments);
+            sessionDeleteCommand.run(manager);
+            assertEquals(SessionDeleteCommand.class, sessionDeleteCommand.getClass());
+        } catch (InvalidFormatException invalidFormatException) {
+            fail();
+        }
+    }
 
     /**
      * Checks if an InvalidFormatException with the correct message is thrown
