@@ -1,5 +1,5 @@
-git 'https://www.lucidchart.com/pages/ER-diagram-symbols-and-meaning
-@startuml
+'https://www.lucidchart.com/pages/ER-diagram-symbols-and-meaning
+@startuml ER
 
 entity "Inventory" as inv {
   * inventory_id : number <<generated>>
