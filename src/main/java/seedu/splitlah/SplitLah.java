@@ -18,9 +18,9 @@ import java.util.logging.Level;
  * Initializes SplitLah and starts interacting with the user.
  */
 public class SplitLah {
-    static Manager manager;
+    Manager manager;
 
-    public static void main(String[] args) throws InvalidDataException {
+    public static void main(String[] args) {
         new SplitLah().run();
     }
 
