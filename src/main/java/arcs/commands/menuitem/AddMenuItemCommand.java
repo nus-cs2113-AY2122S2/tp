@@ -76,11 +76,10 @@ public class AddMenuItemCommand extends Command {
         if (!incorrectFields.isEmpty()) {
             return new CommandResult(INCORRECT_FIELD_MESSAGE, incorrectFields);
         }
-        CommandResult result;
         System.out.println(toAdd.toString());
         menuItemManager.addMenuItem(toAdd);
         System.out.println("here22222");
-        result = new CommandResult(SUCCESS_MESSAGE + System.lineSeparator()
+        CommandResult result = new CommandResult(SUCCESS_MESSAGE + System.lineSeparator()
                 + toAdd.getMenuItemInfo());
         return result;
     }
