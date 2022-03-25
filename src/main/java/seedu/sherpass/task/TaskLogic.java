@@ -3,6 +3,7 @@ package seedu.sherpass.task;
 import seedu.sherpass.enums.Frequency;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_EMPTY_DESCRIPTION_MESSAGE;
@@ -68,5 +69,26 @@ public class TaskLogic {
             return ERROR_INVALID_INDEX_MESSAGE;
         }
         return EMPTY_STRING;
+    }
+    public static ArrayList<Task> prepareTasks(int identifier, String taskDescription, LocalDateTime doOnStartDateTime,
+            LocalDateTime doOnEndDateTime, Frequency frequency) {
+        ArrayList<Task> newTasks = new ArrayList<>();
+        LocalDateTime lastRecurrenceDate = getEndDateForRecurrence(doOnStartDateTime, frequency);
+        Task newTask = new Task(identifier, taskDescription, null,
+                doOnStartDateTime, doOnEndDateTime, frequency);
+        do {
+            newTasks.add(newTask);
+            newTask = prepareNextTask(newTask);
+        } while (newTask.getDoOnStartDateTime().isBefore(lastRecurrenceDate));
+
+        return newTasks;
+    }
+    private static Task prepareNextTask(Task currentTask) {
+        LocalDateTime newStartDate = incrementDate(currentTask.getDoOnStartDateTime(),
+                currentTask.getRepeatFrequency());
+        LocalDateTime newEndDate = incrementDate(currentTask.getDoOnEndDateTime(),
+                currentTask.getRepeatFrequency());
+        return new Task(currentTask.getIdentifier(), currentTask.getDescription(), null,
+                newStartDate, newEndDate, currentTask.getRepeatFrequency());
     }
 }

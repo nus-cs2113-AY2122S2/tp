@@ -8,6 +8,7 @@ import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class AddRecurringCommand extends Command {
     private String taskDescription;
@@ -42,25 +43,18 @@ public class AddRecurringCommand extends Command {
             ui.showToUser(error);
             return;
         }
+
         int identifier = taskList.generateIdentifier();
-        Task newTask = new Task(identifier, taskDescription, null,
+        ArrayList<Task> newTasks = TaskLogic.prepareTasks(identifier, taskDescription,
                 doOnStartDateTime, doOnEndDateTime, frequency);
-        LocalDateTime endDate = TaskLogic.getEndDateForRecurrence(doOnStartDateTime, frequency);
-
-        int count = 0;
         StringBuilder addedTaskString = new StringBuilder();
-        do {
-            ++count;
-            taskList.addTask(newTask);
-            addedTaskString.append(newTask);
+        for (Task t : newTasks) {
+            taskList.addTask(t);
+            addedTaskString.append(newTasks);
             addedTaskString.append("\n ");
-            doOnStartDateTime = TaskLogic.incrementDate(doOnStartDateTime, frequency);
-            doOnEndDateTime = TaskLogic.incrementDate(doOnEndDateTime, frequency);
-            newTask = new Task(identifier, taskDescription, null, doOnStartDateTime, doOnEndDateTime, frequency);
-        } while (newTask.getDoOnStartDateTime().isBefore(endDate));
-
-        ui.showToUser("Got it. I've added " + count + " tasks:\n " + addedTaskString
-                + "\nNow you have " + taskList.getTasks().size() + " task(s) in the list.");
+        }
+        ui.showToUser("Got it. I've added " + newTasks.size() + " tasks:\n " + addedTaskString.toString().trim()
+                + "\nNow you have " + taskList.getSize() + " task(s) in the list.");
         storage.writeSaveData(taskList);
     }
 }

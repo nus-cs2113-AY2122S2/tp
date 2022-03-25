@@ -44,13 +44,13 @@ public class EditRecurringCommand extends Command {
             return;
         }
 
-        Frequency repeatFrequency = taskList.getTasks().get(index).getRepeatFrequency();
-        int oldIdentifier = taskList.getTasks().get(index).getIdentifier();
+        Frequency repeatFrequency = taskList.getTask(index).getRepeatFrequency();
+        int oldIdentifier = taskList.getTask(index).getIdentifier();
         int newIdentifier = taskList.generateIdentifier();
         StringBuilder editedTaskString = new StringBuilder();
 
-        for (int i = index; i < taskList.getTasks().size(); i++) {
-            Task t = taskList.getTasks().get(i);
+        for (int i = index; i < taskList.getSize(); i++) {
+            Task t = taskList.getTask(i);
             if (t.getIdentifier() == oldIdentifier) {
                 if (!taskDescription.isBlank()) {
                     t.setTaskDescription(taskDescription);

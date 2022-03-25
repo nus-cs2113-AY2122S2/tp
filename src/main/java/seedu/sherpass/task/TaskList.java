@@ -133,6 +133,14 @@ public class TaskList {
         }
     }
 
+    public int getSize() {
+        return tasks.size();
+    }
+
+    public Task getTask(int index) {
+        return tasks.get(index);
+    }
+
     /**
      * Deletes a task given its index. Index corresponds to its placement
      * in task array.

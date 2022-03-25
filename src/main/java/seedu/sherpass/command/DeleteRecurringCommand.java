@@ -20,8 +20,6 @@ public class DeleteRecurringCommand extends Command {
         this.index = index;
     }
 
-
-
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         String error = TaskLogic.checkValidDeleteArgument(taskList, index);
@@ -30,13 +28,13 @@ public class DeleteRecurringCommand extends Command {
             return;
         }
 
-        int identifier = taskList.getTasks().get(index).getIdentifier();
+        int identifier = taskList.getTask(index).getIdentifier();
         int count = 0;
         for (int i = taskList.getTasks().size() - 1; i >= 0; i--) {
             if (i < index) {
                 break;
             }
-            if (taskList.getTasks().get(i).getIdentifier() == identifier) {
+            if (taskList.getTask(i).getIdentifier() == identifier) {
                 taskList.getTasks().remove(i);
                 ++count;
             }
