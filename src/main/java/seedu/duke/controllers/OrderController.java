@@ -34,10 +34,10 @@ public class OrderController extends Controller {
             deleteOrder();
             break;
         case 4:
-            getOrderPrice();
+            displayOrderPrice();
             break;
         case 5:
-            getAllOrderPrice();
+            displayAllOrderPrice();
             break;
         case 6:
             printReceipt();
@@ -76,7 +76,7 @@ public class OrderController extends Controller {
         }
     }
 
-    private void getOrderPrice() throws OperationTerminationException {
+    private void displayOrderPrice() throws OperationTerminationException {
         try {
             int userInputInt = InputParser.getInteger("Enter the order you want to get price: ");
             System.out.printf("Total value of this order: %f. \n", orderManager.getOrderPrice(userInputInt));
@@ -85,7 +85,7 @@ public class OrderController extends Controller {
         }
     }
 
-    private void getAllOrderPrice() {
+    private void displayAllOrderPrice() {
         System.out.printf("Total value of all orders: %f. \n", orderManager.getAllOrderValue());
     }
 
