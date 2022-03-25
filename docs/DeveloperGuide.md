@@ -109,7 +109,7 @@ This section describes some details on how some features are implemented.
 
 ### Tag Feature
 
-The tag command accepts a string from the user and adds it into the `tags` attribute (an `ArrayList<String>`) of the specified `Task`.
+The tag feature allows the user to add user-created one-word tags to each task, so that tasks can be filtered for easily. Each task stores its tags in an `ArrayList<String>`.
 
 The following sequence diagram illustrates the process:
 
@@ -131,7 +131,7 @@ Here is an example on adding a tag to a general task:
 
 ### GPA Feature
 
-The `gpa` command takes in a single command word `gpa` and no other arguments from the user, returning the user's GPA to 2 decimal places.
+The GPA feature computes the user's GPA to 2 decimal places, based on the inputted grades and modular credits of each module currently stored in the program.
 
 Here is an example on how to calculate GPA:
 

@@ -1,9 +1,7 @@
 package seedu.duke.commands;
 
-import java.util.Objects;
-
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.GPANotComputableException;
+import seedu.duke.exceptions.GpaNotComputableException;
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.util.Configuration;
@@ -37,7 +35,7 @@ public class GpaCommand extends Command {
             }
         }
         if (totalMc == 0) {
-            throw new GPANotComputableException();
+            throw new GpaNotComputableException();
         }
         double gpa = weightedSum / (double) totalMc;
         result = String.format(GPA_MESSAGE, gpa);
