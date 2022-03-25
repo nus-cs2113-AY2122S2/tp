@@ -43,7 +43,7 @@ public class SessionCreateCommandParserTest {
             SessionCreateCommandParser sessionCreateCommandParser = new SessionCreateCommandParser();
             Command sessionCreateCommand = sessionCreateCommandParser.getCommand(validArgumentsTwo);
             sessionCreateCommand.run(manager);
-            assertEquals(sessionCreateCommand.getClass(), SessionCreateCommand.class);
+            assertEquals(SessionCreateCommand.class, sessionCreateCommand.getClass());
         } catch (InvalidFormatException invalidFormatException) {
             fail();
         }
@@ -66,7 +66,7 @@ public class SessionCreateCommandParserTest {
         } catch (InvalidFormatException invalidFormatException) {
             String messageToTest = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + "/n"
                     + "\n" + SessionCreateCommandParser.COMMAND_FORMAT;
-            assertEquals(messageToTest ,invalidFormatException.getMessage());
+            assertEquals(messageToTest, invalidFormatException.getMessage());
         }
 
         // Case 2: Missing /d delimiter.
@@ -78,7 +78,7 @@ public class SessionCreateCommandParserTest {
         } catch (InvalidFormatException invalidFormatException) {
             String messageToTest = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + "/d"
                     + "\n" + SessionCreateCommandParser.COMMAND_FORMAT;
-            assertEquals(messageToTest ,invalidFormatException.getMessage());
+            assertEquals(messageToTest, invalidFormatException.getMessage());
         }
     }
 
@@ -99,7 +99,7 @@ public class SessionCreateCommandParserTest {
         } catch (InvalidFormatException invalidFormatException) {
             String messageToTest = Message.ERROR_PARSER_MISSING_ARGUMENT + "/n"
                     + "\n" + SessionCreateCommandParser.COMMAND_FORMAT;
-            assertEquals(messageToTest ,invalidFormatException.getMessage());
+            assertEquals(messageToTest, invalidFormatException.getMessage());
         }
 
         // Case 2: Missing Session Date.
@@ -111,7 +111,7 @@ public class SessionCreateCommandParserTest {
         } catch (InvalidFormatException invalidFormatException) {
             String messageToTest = Message.ERROR_PARSER_MISSING_ARGUMENT + "/d"
                     + "\n" + SessionCreateCommandParser.COMMAND_FORMAT;
-            assertEquals(messageToTest ,invalidFormatException.getMessage());
+            assertEquals(messageToTest, invalidFormatException.getMessage());
         }
 
         // Case 3: Missing List of persons.
@@ -123,7 +123,7 @@ public class SessionCreateCommandParserTest {
         } catch (InvalidFormatException invalidFormatException) {
             String messageToTest = Message.ERROR_PARSER_MISSING_ARGUMENT + "/pl"
                     + "\n" + SessionCreateCommandParser.COMMAND_FORMAT;
-            assertEquals(messageToTest ,invalidFormatException.getMessage());
+            assertEquals(messageToTest, invalidFormatException.getMessage());
         }
 
         // Case 4: Missing Group unique identifier.
@@ -135,7 +135,7 @@ public class SessionCreateCommandParserTest {
         } catch (InvalidFormatException invalidFormatException) {
             String messageToTest = Message.ERROR_PARSER_MISSING_ARGUMENT + "/gid"
                     + "\n" + SessionCreateCommandParser.COMMAND_FORMAT;
-            assertEquals(messageToTest ,invalidFormatException.getMessage());
+            assertEquals(messageToTest, invalidFormatException.getMessage());
         }
     }
 
@@ -156,7 +156,7 @@ public class SessionCreateCommandParserTest {
         } catch (InvalidFormatException invalidFormatException) {
             String messageToTest = Message.ERROR_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS
                     + "\n" + SessionCreateCommandParser.COMMAND_FORMAT;
-            assertEquals(messageToTest ,invalidFormatException.getMessage());
+            assertEquals(messageToTest, invalidFormatException.getMessage());
         }
     }
 }
