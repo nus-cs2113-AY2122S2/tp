@@ -10,7 +10,7 @@ import java.util.logging.Level;
 public class PersonList {
     private ArrayList<Person> personList;
     private int numberOfMembers;
-    private ProjectLogger logger;
+    private static ProjectLogger logger = new ProjectLogger(PersonList.class.getName(), "PersonList.log");
     private static final int SINGULAR = 1;
 
     /**
@@ -19,8 +19,7 @@ public class PersonList {
     public PersonList() {
         personList = new ArrayList<>();
         numberOfMembers = 0;
-        logger = new ProjectLogger(PersonList.class.getName(), "PersonList.log");
-        String infoString = "Logger for PersonList initialised";
+        String infoString = "New PersonList constructed";
         logger.getLogger().log(Level.INFO, infoString);
     }
 
