@@ -242,7 +242,8 @@ public class Parser {
 
         String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.GST_DELIMITER);
         double gst = ParserUtils.parsePercentageFromString(argument, ParserUtils.GST_DELIMITER);
-        if (gst < MINIMUM_SURCHARGE_PERCENT || gst > MAXIMUM_SURCHARGE_PERCENT) {
+        assert gst >= 0 : Message.ASSERT_PARSER_PERCENTAGE_NEGATIVE;
+        if (gst > MAXIMUM_SURCHARGE_PERCENT) {
             throw new InvalidFormatException(ParserErrors.getInvalidGstErrorMessage());
         }
         return gst;
@@ -268,7 +269,8 @@ public class Parser {
 
         String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.SERVICE_CHARGE_DELIMITER);
         double serviceCharge = ParserUtils.parsePercentageFromString(argument, ParserUtils.SERVICE_CHARGE_DELIMITER);
-        if (serviceCharge < MINIMUM_SURCHARGE_PERCENT || serviceCharge > MAXIMUM_SURCHARGE_PERCENT) {
+        assert serviceCharge >= 0 : Message.ASSERT_PARSER_PERCENTAGE_NEGATIVE;
+        if (serviceCharge > MAXIMUM_SURCHARGE_PERCENT) {
             throw new InvalidFormatException(ParserErrors.getInvalidServiceChargeErrorMessage());
         }
         return serviceCharge;
