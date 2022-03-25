@@ -17,8 +17,7 @@ public class ValidMenuItemPriceChecker implements RawInputChecker{
         if (matcher.matches()) {
             double priceAsFloat = Double.parseDouble(price);
             return !(priceAsFloat <= 0);
-        }
-        else {
+        } else {
             return false;
         }
     }
