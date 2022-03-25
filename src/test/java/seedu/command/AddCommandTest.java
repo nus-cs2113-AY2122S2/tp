@@ -76,8 +76,7 @@ class AddCommandTest {
         addCommand.setEquipmentManager(new EquipmentManager());
         EquipmentManager equipmentManager = addCommand.equipmentManager;
 
-        CommandResult expectedResult = new CommandResult("Wrong type of equipment. "
-                + "The allowed types are: MICROPHONE, SPEAKER, STAND, CABLE");
+        CommandResult expectedResult = new CommandResult(ModificationCommand.INVALID_TYPE_MESSAGE);
         CommandResult actualResult = addCommand.execute();
         assertEquals(expectedResult, actualResult);
     }

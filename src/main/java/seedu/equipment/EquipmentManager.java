@@ -72,13 +72,13 @@ public class EquipmentManager {
                 break;
             case "type":
                 try {
-                    updatedEquipment.setType(EquipmentType.valueOf((String)updates.getValue()));
+                    updatedEquipment.setType((EquipmentType) updates.getValue());
                 } catch (IllegalArgumentException e) {
                     return false;
                 }
                 break;
             case "cost":
-                updatedEquipment.setCost(Double.valueOf((String) updates.getValue()));
+                updatedEquipment.setCost((Double) updates.getValue());
                 break;
             case "purchaseDate":
                 updatedEquipment.setPurchasedDate((String) updates.getValue());

@@ -52,8 +52,8 @@ public class UpdateCommand extends ModificationCommand {
         if (equipmentName != null) {
             pairs.add(new Pair<>("itemName", equipmentName));
         }
-        if (type != null) {
-            pairs.add(new Pair<>("type", type));
+        if (equipmentType != null) {
+            pairs.add(new Pair<>("type", equipmentType));
         }
         if (cost != null) {
             pairs.add(new Pair<>("cost", cost));
@@ -73,8 +73,8 @@ public class UpdateCommand extends ModificationCommand {
         if (equipmentName != null) {
             updateDetails = updateDetails + System.lineSeparator() + "New name: " + equipmentName;
         }
-        if (type != null) {
-            updateDetails = updateDetails + System.lineSeparator() + "New type: " + type;
+        if (equipmentType != null) {
+            updateDetails = updateDetails + System.lineSeparator() + "New type: " + equipmentType;
         }
         if (cost != null) {
             updateDetails = updateDetails + System.lineSeparator() + "New cost: " + cost;
@@ -101,13 +101,13 @@ public class UpdateCommand extends ModificationCommand {
         return serialNumber.equals(that.serialNumber)
                 && Objects.equals(equipmentName, that.equipmentName)
                 && Objects.equals(purchasedDate, that.purchasedDate)
-                && Objects.equals(type, that.type)
+                && Objects.equals(equipmentType, that.equipmentType)
                 && Objects.equals(purchasedFrom, that.purchasedFrom)
                 && Objects.equals(cost, that.cost);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(serialNumber, equipmentName, purchasedDate, type, purchasedFrom, cost);
+        return Objects.hash(serialNumber, equipmentName, purchasedDate, equipmentType, purchasedFrom, cost);
     }
 }
