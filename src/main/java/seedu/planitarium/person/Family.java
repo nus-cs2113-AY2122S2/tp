@@ -24,4 +24,53 @@ public class Family {
         logger.getLogger().log(Level.INFO, infoString);
     }
 
+    /**
+     * Returns the parents array list.
+     *
+     * @return The parents array list
+     */
+    public PersonList getParents() {
+        return parents;
+    }
+
+    /**
+     * Returns the myGen array list.
+     *
+     * @return The myGen array list
+     */
+    public PersonList getMyGen() {
+        return myGen;
+    }
+
+    /**
+     * Returns the children array list.
+     *
+     * @return The children array list
+     */
+    public PersonList getChildren() {
+        return children;
+    }
+
+    /**
+     * Adds a person to the array list specified by the group index.
+     *
+     * @param name The name of the person to be added
+     * @param group The index of the group to add to
+     */
+    public void addPerson(String name, int group) {
+        String infoString = "Entering addPerson()";
+        assert(group >= 1);
+        assert(group <= 3);
+        logger.getLogger().log(Level.INFO, infoString);
+        infoString = "Index assertions passed in addPerson()";
+        logger.getLogger().log(Level.INFO, infoString);
+        switch(group) {
+        case Constants.PARENTS:
+            parents.addPerson(name);
+        case Constants.MY_GEN:
+            myGen.addPerson(name);
+        case Constants.CHILDREN:
+            children.addPerson(name);
+        }
+    }
 }
