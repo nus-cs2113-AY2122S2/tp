@@ -85,6 +85,8 @@ public class Storage {
             amount = parseInfoGetAmount(info);
             personDataList.getPerson(numberOfPerson).addExpend(description, amount);
             break;
+        default:
+            break;
         }
     }
 
@@ -98,7 +100,7 @@ public class Storage {
         return Double.valueOf(inputInfo[1].trim());
     }
 
-/**
+    /**
     public static void saveData(PersonList dataToBeSavedList) throws IOException {
         FileWriter writeToFile = new FileWriter(filePath);
         for (Person person : dataToBeSavedList.getPersonList()) {
@@ -112,7 +114,8 @@ public class Storage {
         }
         writeToFile.close();
     }
-*/
+    */
+    
     public static PersonList loadData() {
         checkFileExists();
         readSaveFile();
