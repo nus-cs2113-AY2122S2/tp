@@ -1,24 +1,23 @@
 package seedu.duke.manager;
 
 
-import seedu.duke.entities.Dish;
 import seedu.duke.entities.Staff;
 import seedu.duke.loggers.MainLogger;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * StaffManager is a class which stores/handles/manages many Staffs.
  */
 public class StaffManager extends Manager {
+    private static StaffManager singleton = null;
     private ArrayList<Staff> staffs;
     private static final String STORAGE_FILE = "staff.dat";
 
     /**
      * Create StaffManager and load Staffs.
      */
-    public StaffManager() {
+    private StaffManager() {
         super(STORAGE_FILE);
         try {
             this.loadData();
@@ -27,6 +26,18 @@ public class StaffManager extends Manager {
             MainLogger.logWarning(this, "Start with no staffs");
             staffs.clear();
         }
+    }
+
+    public static StaffManager getInstance() {
+        if (singleton != null) {
+            return singleton;
+        }
+        singleton = new StaffManager();
+        return singleton;
+    }
+
+    public static void resetInstance() {
+        singleton = null;
     }
 
     public ArrayList<Staff> getStaff() {
