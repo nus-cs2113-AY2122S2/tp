@@ -66,25 +66,37 @@ is extended by `IncomeList` and `ExpenditureList`.
 
 <img src="images/ParserClassDiagram.png"/>
 
+The `Parser` component consists of the `Parser` class, `ParserUtility` class and several 
+`Exception` classes.
+
+The `Parser` class provides methods which helps to parse the user input into its respective terms
+(i.e. name) and returns them as a string, and also methods which helps to validate the terms and
+returns the appropriately typed object to the `Commands` component. The `Parser` class interacts
+the `ParserUtility` class which provides supporting methods for parsing and validating. Both classes
+interacts and throws exceptions as required.
+
 How the `Parser` component is used:
 
 1. When the `Commands` component receives a user input, the `Parser` is called upon to parse the
-type of command to be executed. 
+type of command to be executed.
 2. This will result in the keyword of the command to be returned as a string.
-3. When necessary, the `Parser` will be called upon to parse more terms for `Commands` to obtain
-the details required for the command execution (i.e. `parseGroupIndex(input)` for `add /n Alice /g 2`).
-4. The parser will also be called upon thereafter to validate and typecast the previously obtained
-details (i.e. `getValidGroupIndex(indexString)` to check that the provided index corresponds to an
-existing group index).
+3. When necessary, the `Parser` will be called upon to parse more terms for the `Commands` component
+to obtain the details required for the command execution (i.e. `parseGroupIndex("add /n Alice /g 2")`
+to get group 2). The `ParserUtility` assists the parsing during this process.
+4. The parser will also be called upon thereafter to check and return a valid typecasted object
+to be used for the command execution (i.e. `getValidGroupIndex(indexString)` to check that the
+index provided corresponds to an existing group). The `ParserUtility` is also called here to assist
+with the validation process.
 
 The Sequence Diagram below illustrates the interactions in the `Parser` component for a command
-execution. Let `userInput` be the command string `deletein /u 1 /g 2 /r 1`.
+execution. Let `userInput` be the command string `deletein /u 1 /g 2 /r 1` and the minimum index
+`minIdx` that is supported by PlanITarium be `1`.
 
 <img src="images/ParserSequenceDiagram.png"/>
 
-> :information_source: **Note:** Several self-invocations, alternate paths and optional paths have
-> been omitted from the above Sequence Diagram. Please refer to the 
-> [`Parser Implementation`](#Parser-Implementation) below for a detailed view. 
+> :information_source: **Note:** Several alternate paths and optional paths have been omitted from the above
+> Sequence Diagram. All paths that can be taken but not shown are undesirable outcomes which would
+> result in an exception thrown.
 
 ### Family Component
 
@@ -396,16 +408,7 @@ command object has been created by [`CommandFactory`](#Command-Execution):
   
 * **Altertive 2:** Maintain an array list for each category and store a copy of expenses.
   * Pros: Fast to print expenses in a category, no unnecessary look-ups.
-  * Cons: Poor memory management, needs to store twice as many expenditures. 
-
-### Parser Implementation
-{Placeholder}
-
-#### Implementation
-{Placeholder}
-
-#### Design Consideration
-{Placeholder}
+  * Cons: Poor memory management, needs to store twice as many expenditures.
 
 ### Data Archiving
 
