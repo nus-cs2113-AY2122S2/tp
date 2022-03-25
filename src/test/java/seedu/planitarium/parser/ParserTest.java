@@ -15,35 +15,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 class ParserTest {
 
     @Test
-    void parseDelimitedTerm_delimitedTerm_success() throws EmptyStringException {
-        String input1 = "a";
-        String input2 = "add /n bill";
-        String delimiter = "/n";
-        String delimiterBack = "/e";
-
-        String output1 = Parser.parseDelimitedTerm(input1, delimiter, delimiterBack);
-        assertEquals(input1, output1);
-
-        String output2 = Parser.parseDelimitedTerm(input2, delimiter, delimiterBack);
-        assertEquals("bill", output2);
-    }
-
-    @Test
-    void parseDelimitedTerm_emptyTerm_exceptionThrown() {
-        try {
-            String input = "add /n  /e";
-            String delimiter = "/n";
-            String delimiterBack = "/e";
-
-            Parser.parseDelimitedTerm(input, delimiter, delimiterBack);
-        } catch (EmptyStringException e) {
-            assertEquals("Empty string after `/n` detected", e.getMessage());
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
     void parseKeyword_keywordExist_success() {
         String input1 = "";
         String input2 = "add /n bill";
