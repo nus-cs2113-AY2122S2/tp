@@ -12,6 +12,7 @@ import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.helper.GeneralFunctions;
 
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM_IN_STRING;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM_IN_STRING;
 
@@ -35,7 +36,7 @@ public class Parser {
 
             switch (parsedInput[INDEX_OF_FIRST_ITEM_IN_STRING].toLowerCase()) {
             case "help":
-                return new HelpCommand(true);
+                return new HelpCommand(true, parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING]);
             case "bye":
                 return new ByeCommand();
             case "add":
@@ -49,11 +50,11 @@ public class Parser {
             case "calculate":
                 return new CalculateInputCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING], itemList);
             default:
-                return new HelpCommand(false);
+                return new HelpCommand(false, FLAG_OF_EXPENSES);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Missing input after command!");
         }
-        return new HelpCommand(false);
+        return new HelpCommand(false, FLAG_OF_EXPENSES);
     }
 }
