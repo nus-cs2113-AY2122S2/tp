@@ -147,17 +147,17 @@ public class Timetable {
     }
 
     private void printSchedule() {
-        assert localDate != null;
+        // assert localDate != null;
         String day = localDate.format(dayOnlyFormat);
         String date = localDate.format(dateOnlyFormat);
-        int taskLength = findTaskLength(tasks);
-        int doOnDateLength = DATE_SPACE_FULL_LENGTH;
+        long taskLength = findTaskLength(tasks);
+        long doOnDateLength = DATE_SPACE_FULL_LENGTH;
         long partitionLength = calcPartitionLength(taskLength, doOnDateLength);
 
         if (!tasks.isEmpty()) {
-            printEmptyTimetable(ui, day, date, partitionLength);
-        } else {
             printTimetable(day, date, tasks, ui, taskLength, doOnDateLength, partitionLength);
+        } else {
+            printEmptyTimetable(ui, day, date, partitionLength);
         }
     }
 
