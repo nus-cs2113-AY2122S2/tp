@@ -65,6 +65,6 @@ public abstract class Money {
      */
     @Override
     public String toString() {
-        return  description + ": $" + String.format("%.2f", amount);
+        return  description + ": $" + String.format("%.2f", amount) + " - Recurring: " + isPermanent;
     }
 }

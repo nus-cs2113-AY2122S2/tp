@@ -15,6 +15,6 @@ public class Expenditure extends Money {
     }
 
     public String saveString() {
-        return "e " + description + " - " + amount;
+        return "e " + description + " - " + amount + " - " + isPermanent;
     }
 }

@@ -14,6 +14,6 @@ public class Income extends Money {
     }
 
     public String saveString() {
-        return "i " + description + " - " + amount;
+        return "i " + description + " - " + amount + " - " + isPermanent;
     }
 }
