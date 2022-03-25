@@ -163,32 +163,40 @@ public class TaskList {
     public ArrayList<Task> getFilteredTasksByDate(LocalDate dateInput) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task task : tasks) {
-            if (hasNoDeadline(task)) {
-                continue;
-            } else if (task.getByDate().isEqual(dateInput)) {
+            if (hasDoOnDate(task) && task.getDoOnDate().isEqual(dateInput)) {
                 filteredTasks.add(task);
-            } else {
-                continue;
             }
         }
         return filteredTasks;
     }
 
-    private boolean hasNoDeadline(Task task) {
-        return task.getByDate() == null;
+    private boolean hasDoOnDate(Task task) {
+        return task.getDoOnDate() != null;
     }
 
     /**
      * Prints tasks that are yet to be completed, i.e. marked as done.
      * Printed tasks applies to non-recurring tasks.
+     *
+     * @param ui User interface
      */
     public void printPendingTasks(Ui ui) {
         int printIndex = 1;
         for (Task task : tasks) {
             if (!task.isDone()) {
-                ui.showToUser(printIndex + ". " + task.toString());
+                ui.showToUser(printIndex + ". " + task);
                 printIndex++;
             }
         }
+    }
+
+    public int getPendingTasksCount() {
+        int count = 0;
+        for (Task task : tasks) {
+            if (!task.isDone()) {
+                count++;
+            }
+        }
+        return count;
     }
 }

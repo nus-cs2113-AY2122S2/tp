@@ -21,7 +21,7 @@ public class Message {
     public static final String HELP_MESSAGE_SPECIFIC_COMMAND = "\n\nFor more information on "
             + "the command you wish to execute,\nenter 'help <command>' e.g. help add";
     public static final String HELP_MESSAGE_QUICK_START_COMMAND = "Command input quick start guide:\n"
-            + "1) List: list\n"
+            + "1) Show: show today/week/<date>/all/todo\n"
             + "2) Mark: mark <list_index>\n"
             + "3) Unmark: unmark <list_index>\n"
             + "4) Add: add <task_description> /by <task_due_date> /do_on <date_to_work_on_task>\n"

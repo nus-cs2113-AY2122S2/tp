@@ -294,6 +294,7 @@ public class Parser {
      *
      * @param userInput User command.
      * @param taskList  Array of tasks.
+     * @param ui User interface which interacts with user
      * @return Command type matching the user command.
      */
     public static Command parseCommand(String userInput, TaskList taskList, Ui ui) {
@@ -382,6 +383,7 @@ public class Parser {
      *
      * @param rawUserInput Raw user input.
      * @param ui           UI.
+     * @param timerLogic Logic class to handle timer functions
      */
     public static void parseStudyMode(Ui ui, Storage storage, String rawUserInput,
                                       TimerLogic timerLogic) throws IOException {
