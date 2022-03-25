@@ -1,16 +1,11 @@
 package seedu.splitlah.command;
 
-import seedu.splitlah.data.Activity;
-import seedu.splitlah.data.Person;
 import seedu.splitlah.data.Profile;
-import seedu.splitlah.data.Session;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
-import seedu.splitlah.util.PersonCostPair;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 
 /**
@@ -22,12 +17,12 @@ public class ActivityEditCommand extends Command {
 
     public static final String COMMAND_TEXT = "activity /edit";
 
-    private int sessionId;
     private int activityId;
-    private String activityName;
-    private String payer;
-    private String[] involvedList;
-    private Double totalCost;
+    private final int sessionId;
+    private final String activityName;
+    private final String payer;
+    private final String[] involvedList;
+    private final Double totalCost;
     double[] costList;
     double gst;
     double serviceCharge;
@@ -35,8 +30,8 @@ public class ActivityEditCommand extends Command {
     /**
      * Constructs an ActivityEditCommand object.
      *
-     * @param sessionId    An integer that uniquely identifies a session.
      * @param activityId   An integer that uniquely identifies an activity.
+     * @param sessionId    An integer that uniquely identifies a session.
      * @param activityName A string that represents the Activity object's name.
      * @param payer        A String that represents the person who paid for the activity.
      * @param involvedList An array of String objects representing the participants in the activity.
@@ -48,7 +43,6 @@ public class ActivityEditCommand extends Command {
         assert activityId != -1 : Message.ASSERT_ACTIVITYEDIT_ACTIVITYID_MISSING;
         this.activityId = activityId;
         this.sessionId = sessionId;
-        this.activityId = activityId;
         this.activityName = activityName;
         this.payer = payer;
         this.involvedList = involvedList;
@@ -72,7 +66,8 @@ public class ActivityEditCommand extends Command {
             profile.getSession(sessionId).removeActivity(activityId);
             ActivityCreateCommand activityCreateCommand = new ActivityCreateCommand(activityId, sessionId, activityName, totalCost,
                     payer, involvedList, costList, gst, serviceCharge);
-        } catch (InvalidDataException e) {
+            activityCreateCommand.run(manager);
+        } catch (Exception e) {
             manager.getUi().printlnMessage(e.getMessage());
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY +
                     "\n" + e.getMessage());
@@ -81,4 +76,3 @@ public class ActivityEditCommand extends Command {
 }
 
 
-}
