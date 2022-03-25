@@ -4,8 +4,6 @@ import seedu.splitlah.command.Command;
 import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
-import seedu.splitlah.command.SessionCreateCommand;
-import seedu.splitlah.command.SessionDeleteCommand;
 import seedu.splitlah.command.ExitCommand;
 import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.command.GroupCreateCommand;
@@ -13,6 +11,7 @@ import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
@@ -366,7 +365,7 @@ public class Parser {
                 return GroupViewCommand.prepare(remainingArgs);
             case HelpCommandParser.COMMAND_TEXT:
                 return new HelpCommandParser().getCommand(remainingArgs);
-            case ExitCommand.COMMAND_TEXT:
+            case ExitCommandParser.COMMAND_TEXT:
                 return new ExitCommand();
             default:
                 return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
