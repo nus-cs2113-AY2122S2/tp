@@ -48,7 +48,7 @@ public class Storage {
         }
     }
 
-    private static ArrayList<String> readSaveFile() {
+    private static void readSaveFile() {
         try {
             File readFile = new File(filePath);
             Scanner in = new Scanner(readFile);
@@ -58,7 +58,6 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
     }
 
     private static void processLine(String dataLine) {
