@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Actor ":User" as user
+participant ":UserInterface" as ui
+participant ":Command" as command
+
+user -> ui ++ : total
+ui -> command ++ : totalGoods()
+command -> ui -- : Number of goods available
+ui -> user -- : Information presented in a proper format
+@enduml
