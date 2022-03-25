@@ -36,7 +36,7 @@ public class FindMenuItemTypeCommand extends Command {
 
     private void checkValidType() {
         ValidMenuItemTypeChecker validMenuItemTypeChecker = new ValidMenuItemTypeChecker();
-        if(!validMenuItemTypeChecker.isValid(type)) {
+        if (!validMenuItemTypeChecker.isValid(type)) {
             incorrectFields.add("Menu Item Type");
         }
     }
