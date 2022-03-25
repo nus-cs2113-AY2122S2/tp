@@ -42,10 +42,11 @@ public class ActivityEditCommand extends Command {
      * @param involvedList An array of String objects representing the participants in the activity.
      * @param totalCost    A Double representing the total cost of the activity.
      */
-    public ActivityEditCommand(int sessionId, int activityId, String activityName, String payer, String[] involvedList,
+    public ActivityEditCommand(int activityId, int sessionId, String activityName, String payer, String[] involvedList,
         Double totalCost, double[] costList, double gst, double serviceCharge) {
         assert sessionId != -1 : Message.ASSERT_ACTIVITYEDIT_SESSIONID_MISSING;
         assert activityId != -1 : Message.ASSERT_ACTIVITYEDIT_ACTIVITYID_MISSING;
+        this.activityId = activityId;
         this.sessionId = sessionId;
         this.activityId = activityId;
         this.activityName = activityName;
@@ -69,13 +70,13 @@ public class ActivityEditCommand extends Command {
         TextUI ui = manager.getUi();
         try {
             profile.getSession(sessionId).removeActivity(activityId);
+            ActivityCreateCommand activityCreateCommand = new ActivityCreateCommand(activityId, sessionId, activityName, totalCost,
+                    payer, involvedList, costList, gst, serviceCharge);
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY +
                     "\n" + e.getMessage());
         }
-        ActivityCreateCommand activityCreateCommand = new ActivityCreateCommand(sessionId, activityName, totalCost,
-                payer, involvedList, costList, gst, serviceCharge);
     }
 }
 

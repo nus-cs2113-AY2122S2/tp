@@ -21,20 +21,6 @@ public class SplitLah {
     static Manager manager;
 
     public static void main(String[] args) throws InvalidDataException {
-        String sessionArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob Charlie";
-        manager = new Manager();
-        Command createSession = Parser.getCommand(sessionArgs);
-        createSession.run(manager);
-        String activityOneArgs = "activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
-        Command createActivityOne = Parser.getCommand(activityOneArgs);
-        createActivityOne.run(manager);
-        String activityTwoArgs = "activity /create /sid 1 /n Lunch /p Alice /i Bob Charlie /cl 5 5";
-        Command createActivityTwo = Parser.getCommand(activityTwoArgs);
-        createActivityTwo.run(manager);
-        String edit = "activity /edit /sid 1 /aid 1 /p Bob /co 30";
-        Command editCommand = new ActivityEditCommand(1, 1, null, "Bob", null, 30.0);
-        editCommand.run(manager);
-        System.out.println(manager.getProfile().getSession(0).getActivityList());
         new SplitLah().run();
     }
 

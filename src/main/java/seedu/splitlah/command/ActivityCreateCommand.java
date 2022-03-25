@@ -36,6 +36,7 @@ public class ActivityCreateCommand extends Command {
                     + "/cl [COST1 COST2…] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
     private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
+    private static final String EDIT_SUCCESS = "The activity was edited successfully.\n";
     
     public static final String[] COMMAND_DELIMITERS = { 
         ParserUtils.SESSION_ID_DELIMITER, 
@@ -392,7 +393,11 @@ public class ActivityCreateCommand extends Command {
             Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(activity);
             manager.saveProfile();
-            manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + activity);
+            if (activityId != -1) {
+                manager.getUi().printlnMessageWithDivider(EDIT_SUCCESS + activity);
+            } else {
+                manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + activity);
+            }
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_ACTIVITY_ADDED + activityId);
         } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
