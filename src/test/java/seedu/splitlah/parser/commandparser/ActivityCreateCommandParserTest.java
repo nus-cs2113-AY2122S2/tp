@@ -17,7 +17,7 @@ class ActivityCreateCommandParserTest {
     private static final String COMMAND_TYPE = ActivityCreateCommandParser.COMMAND_TEXT;
 
     /**
-     * Checks if an InvalidFormatException is thrown when both cost and cost list are not provided by the user
+     * Checks if an InvalidFormatException is thrown when both cost and cost list are not provided by the user,
      * and if the exception message is correct.
      */
     @Test
@@ -43,7 +43,7 @@ class ActivityCreateCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidFormatException is thrown when both cost and cost list are provided by the user
+     * Checks if an InvalidFormatException is thrown when both cost and cost list are provided by the user,
      * and if the exception message is correct.
      */
     @Test
@@ -70,7 +70,7 @@ class ActivityCreateCommandParserTest {
 
     /**
      * Checks if an InvalidFormatException is thrown when the cost list and involved list that are provided by the user
-     * are of different lengths and if the exception message is correct.
+     * are of different lengths, and if the exception message is correct.
      */
     @Test
     public void getCommand_costListAndInvolvedListDifferentLength_InvalidFormatExceptionThrown() {
@@ -116,7 +116,7 @@ class ActivityCreateCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidFormatException is thrown when missing delimiters are detected in the user input
+     * Checks if an InvalidFormatException is thrown when missing delimiters are detected in the user input,
      * and if the exception message is correct.
      */
     @Test
@@ -201,7 +201,7 @@ class ActivityCreateCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidFormatException is thrown when missing arguments are detected in the user input
+     * Checks if an InvalidFormatException is thrown when missing arguments are detected in the user input,
      * and if the exception message is correct.
      */
     @Test
