@@ -359,7 +359,7 @@ Alright, the following workout has been removed:
 
 ----------------------------------------------------------------------
 ```
-(Steps 12 to 13) The `FileManager#writeNewWorkoutToFile(workoutList)` is called to rewrite
+(Steps 12 to 13) The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
 the `workouts.txt` file according to the newly modified application's workout list.
 <br><br>
 This completes the process of deleting an existing workout in WerkIt!
@@ -380,8 +380,82 @@ is, to rewrite all workout to the resource file whenever a workout is deleted.
 ---
 
 ### Plan
-
 #### Create A New Plan
+
+A summary of the general procedure of a new plan being created and stored in WerkIt! is as follows:
+1. User enters the command `plan /new <plan name> /workouts <workout numbers in workout list separated by comma>`.
+2. A new `Plan` object is created and stored in the application.
+3. The success response is printed to the user through the terminal.
+4. The new `Plan` object data is written to the resource file `plans.txt`.
+
+The following sequence illustrates how the `plan /new` command works in greater detail:
+> To simplify the sequence diagram, some method invocations that deemed to be trivial
+> have been removed from the sequence diagram. Reference frames will be elaborated further
+> down this section.
+
+![Create Plan Sequence Diagram](uml/sequenceDiagrams/images/createPlan.png)
+<br><br>
+
+(Steps 1 to 3) The program waits for the user's input, which in this case, is the `plan /new <plan name> /workouts <workout numbers in workout list separated by comma>` command.
+An example of a valid command is `plan /new Grow Biceps /workouts 1, 2, 3`. Once the command is entered, the UI class will return the user input in a `String` object
+to the `WerkIt` object.
+<br><br>
+(Steps 4 to 6) After the user input is received, the `WerkIt` object will call the `Parser#parseUserInput()` method to parse the user input.
+Upon parsing of the input, a `PlanCommand` object is obtained. This `PlanCommand` object is upcasted to a `Command` object on return
+to the `WerkIt` object. It will then execute the plan command by calling the `PlanCommand#execute()` method.
+<br><br>
+(Step 7) The `PlanCommand#execute()` method identifies that the plan action is of type `new` due to the plan command that
+was supplied (`plan /new <plan name> /workouts <workout numbers in workout list separated by comma>`). 
+It then calls the appropriate method, `PlanList#createAndAddPlan(userArgument)`, in order to create a new plan. <br><br>
+The following sequence diagram is the detailed procedure for Step 7's `PlanList#createAndAddPlan(userArgument)`:
+<br><br>
+![Create And Add Plan Detailed Sequence Diagram](uml/sequenceDiagrams/images/createAndAddPlan.png)
+
+<br><br>
+(Steps 7.1 to 7.6) The user argument of the `PlanList#createAndAddPlan(userArgument)` method is split to obtain
+the name of the plan to create. Before adding the plan, this method will call the
+`PlanList#checkForExistingPlanName(userPlanNameInput)` to ensure all plan names are unique in the application.
+If the plan to create is an existing plan name, an `InvalidPlanException` will be thrown.
+<br><br>
+(Steps 7.7 to 7.14) The user argument of the `PlanList#createAndAddPlan(userArgument)` method is split to obtain
+the number of workouts to be added into the new plan. Before adding the
+plan, this method will call the `PlanList#checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan)` to ensure
+that the number of workouts to be added into the new plan does not exceed 10 workouts, and there should minimally
+be 1 workout in a plan. If the plan to create does not meet the minimum and maximum workouts requirement,
+an `InvalidPlanException` will be thrown.
+<br><br>
+(Steps 7.15 to 7.16) An ArrayList of Workout object is created to store the workouts to be added into the new plan.
+<br><br>
+(Steps 7.17 to 7.28) As the workout numbers in the user argument (e.g. "1, 2, 3") is of type `String`, 
+the loop will split (by comma) and convert each number string into an `Integer`. The `PlanList#createAndAddPlan(userArgument)` method
+will then call the `PlanList#checkWorkoutNumberWithinRange(workoutNumberInteger)` method to ensure that each
+workout index is within the application's workout list range. Once the check is done, the `Workout` object
+is fetched from the application's workout list based on the workout index to be added in the plan. The `Workout` object is then
+added into the `ArrayList` that was created in Step 7.15. The loop will continue until all workouts to be added in the new plan
+is added into that `ArrayList`.
+<br><br>
+(Steps 7.29 to 7.36) With the unique plan name and the `ArrayList` (obtained in previous steps) containing the workouts to be added into the plan,
+a new `Plan` object is created. This new `Plan` object is then added to the application's plan list.
+<br><br>
+(Step 8) The `PlanList#createAndAddPlan(userArgument)` method returns the new `Plan` object to `PlanCommand`.
+<br><br>
+(Steps 9 to 11) Upon returning to the `PlanCommand`, the `UI#printNewPlanCreatedMessage(newPlan)` is called
+to display the plan that has been created to the user via the terminal. The following is an example
+of a success plan creation message (e.g. after entering `plan /new Grow My Muscles /workouts 1, 2, 3`):
+```
+----------------------------------------------------------------------
+Alright, the following plan has been created:
+
+	Grow My Muscles
+
+----------------------------------------------------------------------
+```
+(Steps 12 to 13) `FileManager#writeNewPlanToFile(newPlan)` is called to write the newly-created `Plan` object's data into
+`plans.txt`, which is stored on the user's local filesystem.
+<br><br>
+This completes the process of adding a new plan to WerkIt!
+
+---
 
 #### List Plans
 
