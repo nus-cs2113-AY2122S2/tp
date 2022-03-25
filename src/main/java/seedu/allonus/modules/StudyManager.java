@@ -16,6 +16,7 @@ import java.util.logging.Logger;
  * Represents the class that will handle Modules created by the user.
  */
 public class StudyManager {
+
     private static ArrayList<Module> modulesList = new ArrayList<>();
 
     /**
@@ -35,6 +36,9 @@ public class StudyManager {
     private static final String MODULE_CATEGORY_LEC = "Lecture";
     private static final String MODULE_CATEGORY_TUT = "Tutorial";
     private static final String MODULE_CATEGORY_EXAM = "Exam";
+    private static final String CATEGORY_LECTURE_SHORTHAND = "lec";
+    private static final String CATEGORY_TUTORIAL_SHORTHAND = "tut";
+    private static final String CATEGORY_EXAM_SHORTHAND = "exam";
     private static final String WELCOME_MESSAGE = "Welcome to Modules Tracker, where you can track all your "
             + "classes.";
 
@@ -411,21 +415,21 @@ public class StudyManager {
     }
 
     private String validateModuleCategory(String category) throws ModuleCategoryException {
+        assert (category.equals(CATEGORY_LECTURE_SHORTHAND) || category.equals(CATEGORY_TUTORIAL_SHORTHAND)
+                || category.equals(CATEGORY_EXAM_SHORTHAND)) : WRONG_CATEGORY_FORMAT_MESSAGE;
         switch (category) {
-        case "lec":
+        case CATEGORY_LECTURE_SHORTHAND:
             category = MODULE_CATEGORY_LEC;
             break;
-        case "tut":
+        case CATEGORY_TUTORIAL_SHORTHAND:
             category = MODULE_CATEGORY_TUT;
             break;
-        case "exam":
+        case CATEGORY_EXAM_SHORTHAND:
             category = MODULE_CATEGORY_EXAM;
             break;
         default:
             throw new ModuleCategoryException(WRONG_CATEGORY_FORMAT_MESSAGE);
         }
-        assert (category.equals(MODULE_CATEGORY_LEC) || category.equals(MODULE_CATEGORY_TUT)
-                || category.equals(MODULE_CATEGORY_EXAM)) : WRONG_CATEGORY_FORMAT_MESSAGE;
         return category;
     }
 
