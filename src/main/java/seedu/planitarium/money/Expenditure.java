@@ -11,7 +11,6 @@ public class Expenditure extends Money {
      */
     public Expenditure(String description, double amount, boolean isPermanent) {
         super(description, amount, isPermanent);
-        this.initDate = LocalDate.now();
     }
 
     public String saveString() {
