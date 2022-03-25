@@ -150,4 +150,17 @@ public class PersonList {
         logger.getLogger().log(Level.INFO, infoString);
         getPerson(personIndex).deleteIncome(incomeIndex);
     }
+
+    /**
+     * Adds an expenditure to the list of expenditures of the specified person.
+     *
+     * @param personIndex The index of the person
+     * @param description The reason for the expenditure
+     * @param amount The value of the expenditure
+     */
+    public void addExpend(int personIndex, String description, double amount) {
+        String infoString = "Method addIncome() called";
+        logger.getLogger().log(Level.INFO, infoString);
+        getPerson(personIndex).addIncome(description, amount);
+    }
 }

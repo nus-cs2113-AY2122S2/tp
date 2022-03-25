@@ -23,34 +23,7 @@ public class Family {
         String infoString = "Logger for PersonList initialised";
         logger.getLogger().log(Level.INFO, infoString);
     }
-
-    /**
-     * Returns the parents array list.
-     *
-     * @return The parents array list
-     */
-    public PersonList getParents() {
-        return parents;
-    }
-
-    /**
-     * Returns the myGen array list.
-     *
-     * @return The myGen array list
-     */
-    public PersonList getMyGen() {
-        return myGen;
-    }
-
-    /**
-     * Returns the children array list.
-     *
-     * @return The children array list
-     */
-    public PersonList getChildren() {
-        return children;
-    }
-
+    
     /**
      * Returns the array list specified.
      *
@@ -125,5 +98,19 @@ public class Family {
         String infoString = "Method deleteIncome() called";
         logger.getLogger().log(Level.INFO, infoString);
         getList(group).deleteIncome(personIndex, incomeIndex);
+    }
+
+    /**
+     * Adds an expenditure to the list of expenditures of a person in the array list specified by the group index.
+     *
+     * @param personIndex The index of the person in the group
+     * @param group The index of the group to find the person
+     * @param description The reason for the expenditure
+     * @param amount The value of the expenditure
+     */
+    public void addExpend(int personIndex, int group, String description, double amount) {
+        String infoString = "Method addExpend() called";
+        logger.getLogger().log(Level.INFO, infoString);
+        getList(group).addExpend(personIndex, description, amount);
     }
 }
