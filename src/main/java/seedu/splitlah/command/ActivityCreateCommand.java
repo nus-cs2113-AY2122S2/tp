@@ -48,6 +48,7 @@ public class ActivityCreateCommand extends Command {
         ParserUtils.SERVICE_CHARGE_DELIMITER 
     };
 
+    private int activityId;
     private int sessionId;
     private String activityName;
     private double totalCost;
@@ -81,6 +82,38 @@ public class ActivityCreateCommand extends Command {
         assert activityName != null : Message.ASSERT_ACTIVITYCREATE_ACTIVITY_NAME_MISSING;
         assert payer != null : Message.ASSERT_ACTIVITYCREATE_PAYER_NAME_MISSING;
         assert involvedList != null : Message.ASSERT_ACTIVITYCREATE_INVOLVED_LIST_ARRAY_NULL;
+        this.activityId = -1;
+        this.sessionId = sessionId;
+        this.activityName = activityName;
+        this.totalCost = totalCost;
+        this.payer = payer;
+        this.involvedList = involvedList;
+        this.costList = costList;
+        this.gst = gst;
+        this.serviceCharge = serviceCharge;
+    }
+
+    /**
+     * Initializes an ActivityCreateCommand object.
+     *
+     * @param sessionId     An integer that uniquely identifies a session.
+     * @param activityName  A String object that represents the Activity object's name.
+     * @param totalCost     A double that represents total cost of the activity.
+     * @param payer         A String object that represents the name of the person who paid for the activity.
+     * @param involvedList  An array of String objects that represents the names of the persons
+     *                      who are involved in the activity.
+     * @param costList      A double array object that represents the respective costs of
+     *                      each person involved in the activity.
+     * @param gst           A double that represents the gst to be included for the cost of the activity.
+     * @param serviceCharge A double that represents the service charge to be included for the cost of the activity.
+     */
+    public ActivityCreateCommand(int activityId, int sessionId, String activityName, double totalCost, String payer,
+                                 String[] involvedList, double[] costList, double gst, double serviceCharge) {
+        assert sessionId > 0 : Message.ASSERT_ACTIVITYCREATE_SESSION_ID_LESS_THAN_ONE;
+        assert activityName != null : Message.ASSERT_ACTIVITYCREATE_ACTIVITY_NAME_MISSING;
+        assert payer != null : Message.ASSERT_ACTIVITYCREATE_PAYER_NAME_MISSING;
+        assert involvedList != null : Message.ASSERT_ACTIVITYCREATE_INVOLVED_LIST_ARRAY_NULL;
+        this.activityId = activityId;
         this.sessionId = sessionId;
         this.activityName = activityName;
         this.totalCost = totalCost;
