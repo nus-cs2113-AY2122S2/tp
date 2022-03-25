@@ -17,8 +17,8 @@ class ActivityCreateCommandParserTest {
     private static final String COMMAND_TYPE = ActivityCreateCommandParser.COMMAND_TEXT;
 
     /**
-     * Checks if an InvalidFormatException is thrown when both cost and cost list are not provided by the user,
-     * and if the exception message is correct.
+     * Checks if an InvalidFormatException with the correct message is thrown
+     * when both cost and cost list are not provided by the user.
      */
     @Test
     public void getCommand_hasMissingCostAndCostList_InvalidFormatExceptionThrown() {
@@ -43,8 +43,8 @@ class ActivityCreateCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidFormatException is thrown when both cost and cost list are provided by the user,
-     * and if the exception message is correct.
+     * Checks if an InvalidFormatException with the correct message is thrown
+     * when both cost and cost list are provided by the user.
      */
     @Test
     public void getCommand_hasBothCostAndCostList_InvalidFormatExceptionThrown() {
@@ -69,8 +69,8 @@ class ActivityCreateCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidFormatException is thrown when the cost list and involved list that are provided by the user
-     * are of different lengths, and if the exception message is correct.
+     * Checks if an InvalidFormatException with the correct message is thrown
+     * when the cost list and involved list that are provided by the user are of different lengths.
      */
     @Test
     public void getCommand_costListAndInvolvedListDifferentLength_InvalidFormatExceptionThrown() {
@@ -116,8 +116,8 @@ class ActivityCreateCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidFormatException is thrown when missing delimiters are detected in the user input,
-     * and if the exception message is correct.
+     * Checks if an InvalidFormatException with the correct message is thrown
+     * when missing delimiters are detected in the user input.
      */
     @Test
     public void getCommand_hasMissingDelimiter_InvalidFormatExceptionThrown() {
@@ -201,8 +201,8 @@ class ActivityCreateCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidFormatException is thrown when missing arguments are detected in the user input,
-     * and if the exception message is correct.
+     * Checks if an InvalidFormatException with the correct message is thrown
+     * when missing arguments are detected in the user input.
      */
     @Test
     public void getCommand_hasMissingArguments_InvalidFormatExceptionThrown() {
