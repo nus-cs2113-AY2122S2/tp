@@ -81,6 +81,9 @@ How the Command class works:
 * Each method in the `Command` class would call on an `asset` class method which will manipulate the attributes inside it
 
 #### `Parser`
+The parser parses the description of the command. It first calls the validator class to validate the parameters and then returns a command.
+
+
 
 #### `Storage`
 
