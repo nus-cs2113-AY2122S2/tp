@@ -1,6 +1,7 @@
 package seedu.duke.controllers;
 
 import seedu.duke.exceptions.OperationTerminationException;
+import seedu.duke.manager.DishManager;
 import seedu.duke.manager.OrderManager;
 
 public class OrderController extends Controller {
@@ -9,11 +10,11 @@ public class OrderController extends Controller {
         "Get total value of current order",
         "Get total value of all orders in the list", "Print receipt"
     };
-    private final OrderManager orderManager;
+    private final OrderManager orderManager = OrderManager.getInstance();
+    private final DishManager dishManager = DishManager.getInstance();
 
     public OrderController() {
         super(CHOICES);
-        orderManager = new OrderManager();
     }
 
     @Override
@@ -23,10 +24,10 @@ public class OrderController extends Controller {
             System.out.println("Exiting menu...");
             return true;
         case 1:
-            System.out.println("Implement me to view menu :D");
+            dishManager.printDishes();
             break;
         case 2:
-            addOrder();
+            addNewOrder();
             break;
         case 3:
             deleteOrder();
@@ -48,23 +49,38 @@ public class OrderController extends Controller {
         return false;
     }
 
-    private void addOrder() throws OperationTerminationException {
-        String userInput = InputParser.getString("Enter dishes you want to order (enter '-' to exit): ");
-        while (true) {
-            Object inputObj = userInput;
-            int size = orderManager.addDishToOrder(inputObj);
-            userInput = InputParser.getString("You’ve already added " + size + " dish(es), some more: \n");
+    private void addNewOrder() throws OperationTerminationException {
+        int index = InputParser.getInteger("Enter dishes you want to order (enter negative number to exit): ");
+        int createdOrderIdx = orderManager.getOrderCount();
+        try {
+            while (index >= 0) {
+                orderManager.addDishToOrder(index, createdOrderIdx, dishManager);
+                index = InputParser.getInteger("You have "
+                        + orderManager.getOrders().get(createdOrderIdx).getDishCount()
+                        + " dish(es), some more: \n");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Please enter a valid dish index and try again.");
         }
+
     }
 
     private void deleteOrder() throws OperationTerminationException {
-        int userInputInt = InputParser.getInteger("Enter the order you want to delete: ");
-        orderManager.deleteOrder(userInputInt);
+        try {
+            int userInputInt = InputParser.getInteger("Enter the order you want to delete: ");
+            orderManager.deleteOrder(userInputInt);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Please enter a valid order index.");
+        }
     }
 
     private void getOrderPrice() throws OperationTerminationException {
-        int userInputInt = InputParser.getInteger("Enter the order you want to get price: ");
-        System.out.printf("Total value of all orders: %f. \n", orderManager.getOrderPrice(userInputInt));
+        try {
+            int userInputInt = InputParser.getInteger("Enter the order you want to get price: ");
+            System.out.printf("Total value of this order: %f. \n", orderManager.getOrderPrice(userInputInt));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Please enter a valid order index.");
+        }
     }
 
     private void getAllOrderPrice() {

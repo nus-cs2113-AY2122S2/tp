@@ -116,4 +116,8 @@ public class DishController extends Controller {
             System.out.println("Please make sure the name is not empty and price is positive");
         }
     }
+
+    public DishManager getDishManager() {
+        return dishManager;
+    }
 }
