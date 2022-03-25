@@ -58,6 +58,12 @@ public class Family {
      * @return The array list specified by group
      */
     private PersonList getList(int group) {
+        String infoString = "Entering getList()";
+        logger.getLogger().log(Level.INFO, infoString);
+        assert(group >= 1);
+        assert(group <= 3);
+        infoString = "Index assertions passed in getList()";
+        logger.getLogger().log(Level.INFO, infoString);
         PersonList toReturn = null;
         switch(group) {
         case Constants.PARENTS:
@@ -77,11 +83,7 @@ public class Family {
      * @param group The index of the group to add to
      */
     public void addPerson(String name, int group) {
-        String infoString = "Entering addPerson()";
-        logger.getLogger().log(Level.INFO, infoString);
-        assert(group >= 1);
-        assert(group <= 3);
-        infoString = "Index assertions passed in addPerson()";
+        String infoString = "Method addPerson() called";
         logger.getLogger().log(Level.INFO, infoString);
         getList(group).addPerson(name);
     }
@@ -93,11 +95,7 @@ public class Family {
      * @param group The index of the group to remove from
      */
     public void removePerson(int index, int group) {
-        String infoString = "Entering removePerson()";
-        logger.getLogger().log(Level.INFO, infoString);
-        assert(group >= 1);
-        assert(group <= 3);
-        infoString = "Index assertions passed in addPerson()";
+        String infoString = "Method removePerson() called";
         logger.getLogger().log(Level.INFO, infoString);
         getList(group).removePerson(index);
     }
