@@ -12,6 +12,7 @@ import seedu.splitlah.command.SessionCreateCommand;
 import seedu.splitlah.command.SessionDeleteCommand;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
+import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
@@ -45,7 +46,7 @@ public abstract class Message {
     public static final String MESSAGE_TEXTUI_HELP_MENU =
             "HELP MENU --\n"
                     + "1.  Create a new session\n"
-                    + "        " + SessionCreateCommand.COMMAND_FORMAT + "\n"
+                    + "        " + SessionCreateCommandParser.COMMAND_FORMAT + "\n"
                     + "2.  Delete an existing session\n"
                     + "        " + SessionDeleteCommandParser.COMMAND_FORMAT + "\n"
                     + "3.  List all existing sessions\n"

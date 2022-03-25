@@ -14,6 +14,7 @@ import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
+import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
@@ -337,8 +338,8 @@ public class Parser {
         
         try {
             switch (commandType.toLowerCase()) {
-            case SessionCreateCommand.COMMAND_TEXT:
-                return SessionCreateCommand.prepare(remainingArgs);
+            case SessionCreateCommandParser.COMMAND_TEXT:
+                return new SessionCreateCommandParser().getCommand(remainingArgs);
             case SessionDeleteCommandParser.COMMAND_TEXT:
                 return new SessionDeleteCommandParser().getCommand(remainingArgs);
             case SessionSummaryCommandParser.COMMAND_TEXT:
