@@ -42,6 +42,7 @@ class SessionDeleteCommandTest {
         // Check if session was successfully removed from the list of sessions.
         assertEquals(1, manager.getProfile().getSessionList().size());
 
+        // Check if session still exists.
         try {
             manager.getProfile().getSession(1);
             fail();
