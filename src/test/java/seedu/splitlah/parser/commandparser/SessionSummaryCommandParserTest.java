@@ -16,6 +16,9 @@ class SessionSummaryCommandParserTest {
 
     private static final String COMMAND_TYPE = SessionSummaryCommandParser.COMMAND_TEXT;
 
+    /**
+     * Checks if a SessionSummaryCommand object is correctly returned when the command is correctly entered.
+     */
     @Test
     void getCommand_validUserInput_SessionSummaryCommand() {
         String validUserInput = "session /summary /sid 1";
@@ -34,6 +37,9 @@ class SessionSummaryCommandParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is thrown if the Session ID delimiter is not provided by the user.
+     */
     @Test
     void getCommand_missingSessionIdDelimiter_exceptionThrown() {
         String userInputMissingSessionIdDelimiter = "session /summary";
@@ -54,6 +60,9 @@ class SessionSummaryCommandParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is thrown if the session unique identifier argument is not provided by the user.
+     */
     @Test
     void getCommand_missingSessionIdArgument_exceptionThrown() {
         String userInputMissingSessionIdArgument = "session /summary /sid";
@@ -74,6 +83,9 @@ class SessionSummaryCommandParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is thrown if the session unique identifier argument provided by the user is non-numeric.
+     */
     @Test
     void getCommand_sessionIdArgumentNonNumeric_exceptionThrown() {
         String userInputSessionIdArgumentNonNumeric = "session /summary /sid apple";
@@ -94,6 +106,9 @@ class SessionSummaryCommandParserTest {
         }
     }
 
+    /**
+     * Checks if an exception is thrown if the session unique identifier argument provided by the user is not positive.
+     */
     @Test
     void getCommand_sessionIdArgumentNotPositive_exceptionThrown() {
         // sessionId = 0
