@@ -10,18 +10,17 @@ In this project, we have referenced the following materials:
 ---
 ## Design
 
-> :information_source: **Note:** The `.puml` files used to create diagrams in this document
-> can be found in the diagrams folder. Refer to the above [PlantUML Tutorial](#Acknowledgements)
-> to learn how to create and edit diagrams.
-
 ### Architecture
+
+The ***Architecture Diagram*** given below shows the high-level design of PlanITarium.
+
 <img src="images/ArchitectureDiagram.png" width="300"/>
 
-The ***Architecture Diagram*** given above shows the high-level design of PlanITarium.
+> :information_source: **Note:** The that `.puml` files used to create diagrams in this document
+> can be found in the diagrams folder. Refer to the above [PlantUML Tutorial](#Acknowledgements)
+> to learn how to create and edit these diagrams when necessary.
 
-Given below is a quick overview of the main components and how they interact.
-
-**Main components of the Architecture**
+**Overview of components in the Architecture**
 
 [`Main`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/PlanITarium.java)
 is responsible for,
@@ -31,7 +30,7 @@ is responsible for,
 
 [`UI`](#UI-Component) is responsible for the UI of PlanITarium.
 
-[`Commands`](#Commands-Component) is responsible for the execution of commands.
+[`Commands`](#Commands-Component) is responsible for handling and executing of commands.
 
 [`Parser`](#Parser-Component) is responsible for parsing and validating user input.
 
@@ -48,7 +47,7 @@ issues the command `add /n Alice /g 2`.
 
 <img src="images/ArchitectureSequenceDiagram.png"/>
 
-Each of the main components shown in the diagram above defined and implemented in a class
+Each of the main components shown in the diagram above is defined and implemented in a class
 with the same name as its component. The section below provides a more in-depth details on how the
 components interact with one another.
 
