@@ -41,6 +41,6 @@ public class Good {
     }
 
     public String toString() {
-        return String.format("%d- %s (%s)",id, name, description);
+        return String.format("%d - %s (%s)",id, name, description);
     }
 }

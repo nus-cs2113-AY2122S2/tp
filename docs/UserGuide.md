@@ -23,49 +23,59 @@
 ## Features
 
 ### Adding inventory items: `add`
-Adds a new item to the list of todo items.
+Adds new goods or order.
 
-Format: `add id/ID n/GOOD_NAME q/QUANTITY`
+Format: 
+* Adding order: `add o/ id/ID r/Receiver a/SHIPPING_ADDRESS`
+* Adding goods: `add g/ oid/ORDER_ID gid/GOOD_ID n/NAME q/QUANTITY d/DESCRIPTION`
 
-* The `ID` is an integer uniquely represent the items.
+Note:
+* `ID`, `GID`and `OID` are an integer uniquely represent the items.
 * The `QUANTITY` is a non-negative integer.
 
 Example of usage: 
 
-`add id/101 n/chairs q/100`
+`add o/ id/101 r/John Doe a/here`
 
-`add id/102 n/tables q/15`
+`add g/ oid/101 gid/102 n/tables q/15 d/this is a lot of tables.`
 
 Expected Output
 ```
-100 chairs (Empty Description) Has been added
-15 tables (Empty Description) Has been added
+Order 101 is added
+15 tables (This is a lot of tables.) Has been added
 ```
 
 ### Removing inventory items: `remove`
-Adds a new item to the list of todo items.
+Remove goods or order. 
 
-Format: `remove i/ID q/QUANTITY`
+Format: 
+* Removing order: `remove o/ id/ID`
+* Removing goods: `remove g/ id/ID q/QUANTITY`
 
+Note:
 * The `ID` is an integer uniquely represent the items.
 * The `QUANTITY` is a non-negative integer.
 
 Example of usage:
 
-`remove id/101 q/2`
+`remove g/ id/102 q/2`
+
+`remove o/ id/101`
 
 Expected output:
 
 ```
-2 chairs have been removed.
+2 tables have been removed.
+Order 101 has been removed.
 ```
 
 ### Getting a list of total inventory: `list`
 To get a list of names of every inventory item.
 
-Format: `list flag/`
+Format: `list flag`
 
-* The `flag` is either `o` or `g` to view either an order or good
+Note:
+* The `flag` is either `o/` or `g/` to view either an order or good
 
 Example of usage:
 
@@ -77,35 +87,41 @@ This is to list all current goods
 
 Expected output: 
 ```
-List of inventory items:
-    1. Chairs
-    2. Wooden Tables
+List of orders:
+    1. 101 - John Doe (here)
+List of goods:
+    1. 102 - tables
 ```
 
 ### Getting a description of inventory: `view`
 View the details of a specific good, based on its ID number.
 
-Format: `view flag/ id/ID`
+Format: `view flag id/ID`
 
-* The `flag` is either `o` or `g` to view either an order or good
+Note:
+* The `flag` is either `o/` or `g/` to view either an order or good
 * The `ID` is an integer uniquely representing the corresponding items.
 
 Example of usage:
 
 This is to view order with id 1
-`view o/ id/1`
+`view o/ id/101`
 
 This is to view good with id 1
-`view g/ id/1`
+`view g/ id/102`
 
 Expected output:
 ```
-Viewing order with id 1
+Viewing order with id 101
+Receiver: John Doe
+Shipping address: here
+Items in the order:
+    1. 102 - tables
 ```
 ```
-Viewing item with id 1
-Item name: chairs
-Item description: Empty Description
+Viewing item with id 102
+Item name: tables
+Item description: This is a lot of tables
 Item quantity: 86
 ```
 
@@ -125,8 +141,10 @@ There are 86 goods in total.
 
 ## Command Summary
 
-* Add good `add id/ID n/GOOD_NAME q/QUANTITY`
-* Remove good: `remove i/ID q/QUANTITY`
+* Add order `add o/ id/ID r/RECEIVER a/SHIPPING_ADDRESS`
+* Add good `add g/ oid/ORDER_ID gid/GOOD_ID n/NAME q/QUANTITY d/DESCRIPTION`
+* Remove order: `remove o/ i/ID`
+* Remove good: `remove g/ i/ID q/QUANTITY`
 * List all orders: `list o/`
 * List all goods: `list g/`
 * View order: `view o/ id/ORDER_ID`

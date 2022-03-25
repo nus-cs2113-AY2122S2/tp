@@ -2,8 +2,6 @@ package seedu.duke;
 
 import util.exceptions.NullException;
 
-import java.util.Scanner;
-
 /**
  * Main entry-point for the java.duke.Duke application.
  */
