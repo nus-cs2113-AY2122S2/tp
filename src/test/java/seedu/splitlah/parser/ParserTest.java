@@ -2,7 +2,10 @@ package seedu.splitlah.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.splitlah.command.Command;
+import seedu.splitlah.command.HelpCommand;
 import seedu.splitlah.command.InvalidCommand;
+import seedu.splitlah.command.SessionListCommand;
+import seedu.splitlah.command.SessionSummaryCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.ui.Message;
 
@@ -15,6 +18,22 @@ import static org.junit.jupiter.api.Assertions.fail;
 class ParserTest {
 
     // getCommand()
+    @Test
+    void getCommand_validInput_validCommand() {
+        // TODO: update with all Command subclasses after their CommandParser is complete
+        String sessionSummaryCommandInput = "session /summary /sid 1";
+        Command command = Parser.getCommand(sessionSummaryCommandInput);
+        assertEquals(SessionSummaryCommand.class, command.getClass());
+        
+        String sessionListCommandInput = "session /list";
+        command = Parser.getCommand(sessionListCommandInput);
+        assertEquals(SessionListCommand.class, command.getClass());
+        
+        String helpCommandInput = "help";
+        command = Parser.getCommand(helpCommandInput);
+        assertEquals(HelpCommand.class, command.getClass());
+    }
+    
     /**
      * Checks if an InvalidCommand is returned when an empty String object is provided by the user.
      */
@@ -35,6 +54,48 @@ class ParserTest {
         assertEquals(InvalidCommand.class, command.getClass());
     }
 
+    @Test
+    void getCommand_singleTokenCommandsWithIrrelevantTokens_InvalidCommand() {
+        // Single additional token, no delimiters
+        String helpWithIrrelevantArguments = "help apple";
+        Command command = Parser.getCommand(helpWithIrrelevantArguments);
+        assertEquals(InvalidCommand.class, command.getClass());
+
+        // Single additional token, with delimiters
+        helpWithIrrelevantArguments = "help /apple";
+        command = Parser.getCommand(helpWithIrrelevantArguments);
+        assertEquals(InvalidCommand.class, command.getClass());
+
+        // Two additional tokens, without delimiters
+        helpWithIrrelevantArguments = "help apple orange";
+        command = Parser.getCommand(helpWithIrrelevantArguments);
+        assertEquals(InvalidCommand.class, command.getClass());
+
+        // Two additional tokens, one delimiters
+        helpWithIrrelevantArguments = "help /apple orange";
+        command = Parser.getCommand(helpWithIrrelevantArguments);
+        assertEquals(InvalidCommand.class, command.getClass());
+
+        // Three additional tokens, two delimiters
+        helpWithIrrelevantArguments = "help /apple /sid 1";
+        command = Parser.getCommand(helpWithIrrelevantArguments);
+        assertEquals(InvalidCommand.class, command.getClass());
+    }
+
+    @Test
+    void getCommand_duplicateValidDelimiters_InvalidCommand() {
+        String inputWithDuplicateValidDelimiters = "session /create /n Class outing /d today /pl Alice /d 25-03-2022";
+        Command command = Parser.getCommand(inputWithDuplicateValidDelimiters);
+        assertEquals(InvalidCommand.class, command.getClass());
+    }
+
+    @Test
+    void getCommand_invalidDelimiterForCommand_InvalidCommand() {
+        String inputWithInvalidDelimiter = "session /create /n Outing /d today /pl Alice /co 20";
+        Command command = Parser.getCommand(inputWithInvalidDelimiter);
+        assertEquals(InvalidCommand.class, command.getClass());
+    }
+    
     // getCommandType()
     /**
      * Checks if an empty String object is returned as the command string
@@ -65,7 +126,7 @@ class ParserTest {
      */
     @Test
     void getCommandType_doubleTokenNoDelimiterInput_null() {
-        String doubleTokenWithNoDelimiterString = "help apple";
+        String doubleTokenWithNoDelimiterString = "session create";
         String output = Parser.getCommandType(doubleTokenWithNoDelimiterString);
         assertNull(output);
     }
