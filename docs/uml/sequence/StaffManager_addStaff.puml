@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+hide footbox
+
+actor user
+participant "__:StaffController__" as staffcontroller
+participant "__:StaffManager__" as staffmanager
+participant "__:Staff__" as staff
+
+
+user -> staffcontroller: addStaff()
+activate staffcontroller
+
+staffcontroller -> staffmanager: addStaff(int staffId, String name, String position, double salary)
+activate staffmanager
+
+staffmanager -> staffmanager : findStaff(int staffId)
+activate staffmanager
+staffmanager --> staffmanager
+deactivate staffmanager
+
+opt staff id already used
+staffmanager --> staffcontroller : IllegalArgumentException
+end
+
+staffmanager -> staff ** : Staff(int staffId, String name, String position, double salary)
+activate staff
+
+alt invalid arguments
+staff --> staffmanager : IllegalArgumentException
+staffmanager --> staffcontroller : IllegalArgumentException
+else valid arguments
+staff --> staffmanager
+end
+@enduml
