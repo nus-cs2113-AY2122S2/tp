@@ -38,7 +38,6 @@ public class MainUi {
      */
     public void displayWelcomeMessage() {
         System.out.println(Messages.WELCOME);
-        System.out.println(Messages.REQUEST_USER_COMMAND);
     }
 
     public void displayLineDivider() {
