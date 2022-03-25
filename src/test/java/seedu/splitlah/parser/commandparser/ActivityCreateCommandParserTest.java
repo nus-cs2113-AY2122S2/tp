@@ -26,10 +26,11 @@ class ActivityCreateCommandParserTest {
             activityCreateCommandParser.getCommand(arguments);
             fail();
         } catch (InvalidFormatException e) {
-            assertEquals(e.getMessage(), Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
+            String messageToTest = Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
-                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND;
+            assertEquals(messageToTest, e.getMessage());
         }
     }
 
@@ -46,10 +47,11 @@ class ActivityCreateCommandParserTest {
             activityCreateCommandParser.getCommand(arguments);
             fail();
         } catch (InvalidFormatException e) {
-            assertEquals(e.getMessage(), Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
+            String messageToTest = Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
-                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND;
+            assertEquals(messageToTest, e.getMessage());
         }
     }
 
@@ -68,10 +70,11 @@ class ActivityCreateCommandParserTest {
             activityCreateCommandParser.getCommand(argumentsOne);
             fail();
         } catch (InvalidFormatException e) {
-            assertEquals(e.getMessage(), Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
+            String messageToTest = Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
-                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND;
+            assertEquals(messageToTest, e.getMessage());
         }
 
         //Case 2: Involved list shorter than cost list
@@ -81,10 +84,11 @@ class ActivityCreateCommandParserTest {
             activityCreateCommandParser.getCommand(argumentsTwo);
             fail();
         } catch (InvalidFormatException e) {
-            assertEquals(e.getMessage(), Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
+            String messageToTest = Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
-                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND;
+            assertEquals(messageToTest, e.getMessage());
         }
     }
 
@@ -93,7 +97,7 @@ class ActivityCreateCommandParserTest {
      * and if the exception message is correct.
      */
     @Test
-    public void getCommand_hasMissingDelimiter_InvalidCommand() {
+    public void getCommand_hasMissingDelimiter_InvalidFormatExceptionThrown() {
         ActivityCreateCommandParser activityCreateCommandParser = new ActivityCreateCommandParser();
 
         // Case 1: Missing /sid delimiter
@@ -103,10 +107,11 @@ class ActivityCreateCommandParserTest {
             activityCreateCommandParser.getCommand(argsMissingSessionIdDelimiter);
             fail();
         } catch (InvalidFormatException e) {
-            assertEquals(e.getMessage(), Message.ERROR_PARSER_DELIMITER_NOT_FOUND + "/sid"
+            String messageToTest = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + "/sid"
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
-                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND;
+            assertEquals(messageToTest, e.getMessage());
         }
 
         // Case 2: Missing /n delimiter
@@ -116,10 +121,11 @@ class ActivityCreateCommandParserTest {
             activityCreateCommandParser.getCommand(argsMissingNameDelimiter);
             fail();
         } catch (InvalidFormatException e) {
-            assertEquals(e.getMessage(), Message.ERROR_PARSER_DELIMITER_NOT_FOUND + "/n"
+            String messageToTest = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + "/n"
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
-                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND;
+            assertEquals(messageToTest, e.getMessage());
         }
 
         // Case 3: Missing /p delimiter
@@ -129,10 +135,11 @@ class ActivityCreateCommandParserTest {
             activityCreateCommandParser.getCommand(argsMissingPayerDelimiter);
             fail();
         } catch (InvalidFormatException e) {
-            assertEquals(e.getMessage(), Message.ERROR_PARSER_DELIMITER_NOT_FOUND + "/p"
+            String messageToTest = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + "/p"
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
-                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND;
+            assertEquals(messageToTest, e.getMessage());
         }
 
         // Case 4: Missing /i delimiter
@@ -142,10 +149,11 @@ class ActivityCreateCommandParserTest {
             activityCreateCommandParser.getCommand(argsMissingInvolvedListDelimiter);
             fail();
         } catch (InvalidFormatException e) {
-            assertEquals(e.getMessage(), Message.ERROR_PARSER_DELIMITER_NOT_FOUND + "/i"
+            String messageToTest = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + "/i"
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
-                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND;
+            assertEquals(messageToTest, e.getMessage());
         }
     }
 
@@ -154,7 +162,7 @@ class ActivityCreateCommandParserTest {
      * and if the exception message is correct.
      */
     @Test
-    public void getCommand_hasMissingArguments_InvalidCommand() {
+    public void getCommand_hasMissingArguments_InvalidFormatExceptionThrown() {
         ActivityCreateCommandParser activityCreateCommandParser = new ActivityCreateCommandParser();
 
         // Case 1: Missing session ID
@@ -164,10 +172,11 @@ class ActivityCreateCommandParserTest {
             activityCreateCommandParser.getCommand(argsMissingSessionIdArgument);
             fail();
         } catch (InvalidFormatException e) {
-            assertEquals(e.getMessage(), Message.ERROR_PARSER_MISSING_ARGUMENT + "/sid"
+            String messageToTest = Message.ERROR_PARSER_MISSING_ARGUMENT + "/sid"
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
-                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND;
+            assertEquals(messageToTest, e.getMessage());
         }
 
         // Case 2: Missing Activity Name
@@ -177,10 +186,11 @@ class ActivityCreateCommandParserTest {
             activityCreateCommandParser.getCommand(argsMissingNameArgument);
             fail();
         } catch (InvalidFormatException e) {
-            assertEquals(e.getMessage(), Message.ERROR_PARSER_MISSING_ARGUMENT + "/n"
+            String messageToTest = Message.ERROR_PARSER_MISSING_ARGUMENT + "/n"
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
-                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND;
+            assertEquals(messageToTest, e.getMessage());
         }
 
         // Case 3: Missing Payer
@@ -190,10 +200,11 @@ class ActivityCreateCommandParserTest {
             activityCreateCommandParser.getCommand(argsMissingPayerArgument);
             fail();
         } catch (InvalidFormatException e) {
-            assertEquals(e.getMessage(), Message.ERROR_PARSER_MISSING_ARGUMENT + "/p"
+            String messageToTest = Message.ERROR_PARSER_MISSING_ARGUMENT + "/p"
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
-                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND;
+            assertEquals(messageToTest, e.getMessage());
         }
 
         // Case 4: Missing involved list
@@ -203,10 +214,11 @@ class ActivityCreateCommandParserTest {
             activityCreateCommandParser.getCommand(argsMissingInvolvedListArgument);
             fail();
         } catch (InvalidFormatException e) {
-            assertEquals(e.getMessage(), Message.ERROR_PARSER_MISSING_ARGUMENT + "/i"
+            String messageToTest = Message.ERROR_PARSER_MISSING_ARGUMENT + "/i"
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
-                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND;
+            assertEquals(messageToTest, e.getMessage());
         }
 
         // Case 5: Missing total cost
@@ -216,10 +228,11 @@ class ActivityCreateCommandParserTest {
             activityCreateCommandParser.getCommand(argsMissingTotalCostArgument);
             fail();
         } catch (InvalidFormatException e) {
-            assertEquals(e.getMessage(), Message.ERROR_PARSER_MISSING_ARGUMENT + "/co"
+            String messageToTest = Message.ERROR_PARSER_MISSING_ARGUMENT + "/co"
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
-                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND;
+            assertEquals(messageToTest, e.getMessage());
         }
 
         // Case 6: Missing cost list
@@ -229,10 +242,11 @@ class ActivityCreateCommandParserTest {
             activityCreateCommandParser.getCommand(argsMissingCostListArgument);
             fail();
         } catch (InvalidFormatException e) {
-            assertEquals(e.getMessage(), Message.ERROR_PARSER_MISSING_ARGUMENT + "/cl"
+            String messageToTest = Message.ERROR_PARSER_MISSING_ARGUMENT + "/cl"
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
-                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND;
+            assertEquals(messageToTest, e.getMessage());
         }
 
         // Case 7: Missing gst
@@ -242,10 +256,11 @@ class ActivityCreateCommandParserTest {
             activityCreateCommandParser.getCommand(argsMissingGstArgument);
             fail();
         } catch (InvalidFormatException e) {
-            assertEquals(e.getMessage(), Message.ERROR_PARSER_MISSING_ARGUMENT + "/gst"
+            String messageToTest = Message.ERROR_PARSER_MISSING_ARGUMENT + "/gst"
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
-                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND;
+            assertEquals(messageToTest, e.getMessage());
         }
 
         // Case 8: Missing service charge
@@ -255,10 +270,11 @@ class ActivityCreateCommandParserTest {
             activityCreateCommandParser.getCommand(argsMissingScArgument);
             fail();
         } catch (InvalidFormatException e) {
-            assertEquals(e.getMessage(), Message.ERROR_PARSER_MISSING_ARGUMENT + "/sc"
+            String messageToTest = Message.ERROR_PARSER_MISSING_ARGUMENT + "/sc"
                     + "\n" + ActivityCreateCommandParser.COMMAND_FORMAT
                     + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n\t"
-                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND);
+                    + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND;
+            assertEquals(messageToTest, e.getMessage());
         }
     }
 
