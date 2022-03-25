@@ -16,4 +16,5 @@ public class Flags {
     public static final String FLAG_OF_CARD_LIMIT = "/cl";
     public static final String FLAG_OF_CARD_BALANCE = "/bal";
     public static final String FLAG_OF_CREDIT_CARD = "/cc";
+    public static final String FLAG_OF_EXPENSES = "/expenses";
 }

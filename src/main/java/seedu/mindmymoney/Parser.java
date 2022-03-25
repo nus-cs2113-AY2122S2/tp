@@ -43,7 +43,7 @@ public class Parser {
             case "update":
                 return new UpdateCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING], itemList, cardList);
             case "list":
-                return new ListCommand(itemList, cardList);
+                return new ListCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING], itemList, cardList);
             case "delete":
                 return new DeleteCommand(input, itemList, cardList);
             case "calculate":
