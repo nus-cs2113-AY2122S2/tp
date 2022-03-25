@@ -205,8 +205,6 @@ Examples of usage:
    for both Bob and herself which will be split equally between them later on.
    - `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /co 10` <br>
    ![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
-<br>
-<br>
 2. Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid for both
    Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.
    - `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7` <br>
@@ -238,7 +236,7 @@ Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 Example of usage:
 1. Remove an existing activity with a unique identifier of 1 from a session with a unique <br> identifier of 2.
    - `activity /delete /sid 2 /aid 1` <br>
-   ![Activity delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityDeleteCommand.PNG)
+   ![Activity delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityDeleteCommand.png)
 <br>
 <br>
 
@@ -282,11 +280,8 @@ Format: `activity /list /sid [SESSION_ID]`
 
 Example of usage:
 1. Lists all activities in a session with a unique identifier of 2.
-    - `activity /list /sid 2`
-      <br>
+    - `activity /list /sid 2` <br>
       ![Activity list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityListCommand.png)
-      <br>
-
 <br>     
 <br>
 
@@ -315,7 +310,52 @@ Example of usage:
 <br>
 
 ### Creating a group: `group /create`
+
+> Creates a new group. <br>
+> A group represents one or more individuals. It is used as a shortcut in several commands for identifying a group of individual persons.<br>
+
+Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
+
+* `[GROUP_NAME]` refers to the name of the group.
+    * The group name is **case-insensitive**.
+* `[NAME1 NAME2 ...]` refers to a list of persons involved in the activity.
+    * Each individual name is **case-insensitive**.
+
+> **💡 Note(s):**
+>- The `[GROUP_NAME]` should be unique across all groups.
+>- Each name in `[NAME1 NAME2 ...]` for the group should be unique.
+
+
+Example of usage:
+1. Adds a new group named Uni Friends, with Alice and Bob involved.
+    - `group /create /n Uni Friends /pl Alice Bob` <br>
+      ![Group create command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupCreateCommand.png)
+<br>
+<br>
+
 ### Deleting a group: `group /delete`
+> Deletes a existing group.<br>
+> A group represents one or more individuals. It is used as a shortcut in several commands for identifying a group of individual persons.<br>
+
+Format: `group /delete /gid [GROUP_ID]`
+
+* `[GROUP_ID]` refers to the unique identifier of the group.
+    * The unique identifier for a group can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
+
+> **💡 Note(s):**
+>- A group with a unique identifier of `[GROUP_ID]` has to exist before it can be removed.
+
+> **⚠️Warning:**
+> - This action is irreversible, once the command has been entered, the group would be immediately deleted.
+
+Example of usage:
+1. Remove an existing group with a unique identifier of 1.
+    - `group /delete /gid 1` <br>
+      ![Group delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupDeleteCommand.png)
+<br>
+<br>
+
+
 ### Viewing a group: `group /view`
 
 > Display details about a group.<br>
@@ -330,11 +370,10 @@ Format: `group /view /gid [GROUP_ID]`
 > **💡 Note(s):**
 >- The group with a unique identifier of `[GROUP_ID]` has to exist before the group can be viewed.
 
-
 Example of usage:
 1. Views a group with a unique identifier of 1.
     - `group /view /gid 1` <br>
-    ![Group view command Screenshot]()
+    ![Group view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupViewCommand.png)
 <br>     
 <br>
 
@@ -348,7 +387,7 @@ Format: `group /list`
 
 Example of usage:
 
-![Group list command Screenshot]()
+![Group list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupListCommand.png)
 <br>
 <br>
 
@@ -356,6 +395,12 @@ Example of usage:
 > Displays all available SplitLah commands and their syntax.
 
 Format: `help`
+
+Example of usage:
+
+![Help command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/HelpCommand.png)
+<br>
+<br>
 
 ### Exit
 > Exits the application.
@@ -378,7 +423,7 @@ Format: `exit`
 | List all sessions                        | Format: `session /list`                                                                                                                                                                                            |
 | Create activity and split costs evenly   | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2 …] /co [TOTAL_COST]`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /co 7.5`           |
 | Create activity and split costs manually | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2 …] /cl [COST1] [COST2]...`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /cl 1 1 5.5` |
-| Delete an existing activity              | Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`<br><br>Example: 'activity /delete /sid 2 /aid 1'                                                                                                   |
+| Delete an existing activity              | Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`<br><br>Example: `activity /delete /sid 2 /aid 1`                                                                                                   |
 | View an existing activity                | Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]` <br><br>Example: `activity /view /sid 1 /aid 1`                                                                                                      |
 | List all activities                      | Format: `activity /list /sid [SESSION_ID]` <br><br>Example: `activity /list /sid 1`                                                                                                                                |
 | Show session summary                     | Format: `session /summary /sid [SESSION_ID]`<br><br>Example: `session /summary /sid 1`                                                                                                                             |

@@ -39,7 +39,7 @@
 The *Architecture Diagram* shown above illustrates the high-level design of the SplitLah application.
 
 **Overview of components**
-* `Main`
+* `SplitLah [Main]`
     * On app launch: Creates an instance of a `Manager` and runs the command loop.
 * `Manager`
     * On creation: Initializes the Profile, TextUI and Storage components.
@@ -59,13 +59,24 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
 **Interaction between components**
 ![Component Interaction Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ComponentInteraction.drawio.png)
 <br>
-The *Component Interaction Diagram* shows the inner workings of how each component in SplitLah interacts. 
+The *Component Interaction Diagram* shows the inner workings of how each component in SplitLah interacts.
 The diagram depicts a scenario when a user attempts to create a session.
+
+
+
+### SplitLah Component
+![SplitLah Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SplitLahComponent.drawio.png)
+<br>
+The `SplitLah` component is the application's main class. Its job is to initialize an instance of `Manager` when the
+application starts. After initialization, it would then proceed to run a loop which would prompt the user for a 
+command. When it receives a command from the user, it would invoke the `parser` and retrieve the command for SplitLah
+to run. Upon using the `Exit` command, SplitLah would then exit from the command loop and end the application.
+
 
 ### Manager Component
 ![Manager Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ManagerComponent.drawio.png)
 <br>
-The `Manager` class is initialized by the `Main` class when the application starts.
+The `Manager` class is initialized by the `SplitLah` class (the main class) when the application starts.
 It stores the `Profile`, `TextUI` and `Storage` objects. The `Profile` class helps to manage all data accesses 
 throughout the lifetime of the application. While the `Storage` helps to save what the `Profile` class has captured. 
 The `TextUI` class serves as an interface to read user inputs and print application outputs.
@@ -78,6 +89,12 @@ It also tracks the unique identifier for `Session`, `Activity` and `Group` class
 class would return a unique identifier every time a new `Session`, `Activity` or `Group` is created. 
 
 ### TextUI Component
+![TextUI Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/TextUI%20Component.drawio.png)
+<br>
+The `TextUI` class is initialized by the `Manager` class when the application starts.
+It stores a `Scanner` and `PrintStream` object supplied upon initialization to read and write to the user interface.
+It offers methods to print application output to and read user input from these objects for other classes to use.
+As TextUI handles all input and output streams, these streams can be changed without affecting the rest of the program.
 
 ### Storage Component
 
@@ -107,9 +124,43 @@ Otherwise, the constructor is called. Either methods will result in the creation
 ## Implementation
 
 ### Add a session
+**API reference:** [`SessionCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionCreateCommand.java)
+
+The sequence diagram below models the interactions between various entities in the system
+when the user invokes the `session /create` command.
+<br>
+<br>
+![Create Session Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SessionCreateCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `session /create` command is as follows:
+
 ### Remove a session
 ### View a session
 ### List sessions
+**API reference:** [`SessionListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
+
+The sequence diagram below models the interactions between various entities in the system
+when the user invokes the `session /list` command.
+<br>
+<br>
+![List Sessions Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SessionListCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `session /list` command is as follows:
+1. The user input provided is passed to `Splitlah`.
+2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `SessionListCommand` object.
+3. `SessionListCommand#run` method is then invoked to run the `session /list` command.
+4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called.
+5. To retrieve the sessions from profile, `Profile#getSessionList` is executed,
+   where a list of `Session` objects are returned.
+6. Once the list is retrieved, `SessionListCommand` class checks if the list is empty.
+  1. If the list is empty, a message indicating that the list is empty is printed
+     using `TextUi#printlnMessage`.
+  2. If the list is not empty, `SessionListCommand` will loop from the first to the second last session,
+     calling `TextUi#printlnMessage()` to print out a brief overview of each session.
+     Then, the last group is printed with a divider below it, using the method `TextUi#printlnMessageWithDivider()`.
+
 ### Settle a session
 ### Add an activity
 ### Remove an activity
