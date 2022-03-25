@@ -1,15 +1,21 @@
 package seedu.sherpass.task;
 
-import java.time.LocalDate;
+import seedu.sherpass.enums.Frequency;
 
-import static seedu.sherpass.constant.DateAndTimeFormat.outputFormat;
+import java.time.LocalDateTime;
+import static seedu.sherpass.constant.DateAndTimeFormat.outputWithTimeFormat;
+import static seedu.sherpass.constant.Message.EMPTY_STRING;
 
 public class Task {
-
     protected String description;
+    protected int identifier;
     protected boolean isDone;
-    protected LocalDate byDate;
-    protected LocalDate doOnDate;
+    protected LocalDateTime byDate;
+    protected LocalDateTime doOnStartDateTime;
+    protected LocalDateTime doOnEndDateTime;
+    protected Frequency repeatFrequency;
+
+
     // The index of the task with respect to being within
     // the ArrayList<Task> tasks in TaskList class
     // To add to constructor
@@ -28,18 +34,17 @@ public class Task {
      *
      * @param description Description of task.
      */
-    public Task(String description, LocalDate byDate, LocalDate doOnDate) {
+    public Task(int identifier, String description, LocalDateTime byDate,
+                LocalDateTime doOnStartDateTime, LocalDateTime doOnEndDateTime, Frequency repeatFrequency) {
+        this.identifier = identifier;
         this.description = description;
-        this.isDone = false;
         this.byDate = byDate;
-        this.doOnDate = doOnDate;
+        this.doOnStartDateTime = doOnStartDateTime;
+        this.doOnEndDateTime = doOnEndDateTime;
+        this.isDone = false;
+        this.repeatFrequency = repeatFrequency;
     }
 
-    /**
-     * Returns the index of a task with respect to its placement
-     * in the main task list.
-     * @return Index of a task
-     */
     public int getIndex() {
         return index;
     }
@@ -54,21 +59,10 @@ public class Task {
         return timePeriod;
     }
 
-    /**
-     * Returns task description.
-     *
-     * @return task description.
-     */
     public String getDescription() {
         return description;
     }
 
-
-    /**
-     * Returns mark status of task.
-     *
-     * @return Returns true if task has been marked. False otherwise.
-     */
     public boolean isDone() {
         return isDone;
     }
@@ -82,17 +76,10 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-
-    /**
-     * Marks task as done.
-     */
     public void markAsDone() {
         isDone = true;
     }
 
-    /**
-     * Marks task as undone.
-     */
     public void markAsUndone() {
         isDone = false;
     }
@@ -105,12 +92,12 @@ public class Task {
      *
      * @return White space.
      */
-    public LocalDate getByDate() {
+    public LocalDateTime getByDate() {
         return byDate;
     }
 
-    public LocalDate getDoOnDate() {
-        return doOnDate;
+    public LocalDateTime getDoOnStartDateTime() {
+        return doOnStartDateTime;
     }
 
     /**
@@ -121,9 +108,9 @@ public class Task {
      */
     public String getByDateString() {
         if (byDate != null) {
-            return byDate.format(outputFormat);
+            return byDate.format(outputWithTimeFormat);
         }
-        return "";
+        return EMPTY_STRING;
     }
 
     /**
@@ -133,8 +120,8 @@ public class Task {
      *         Otherwise, returns a blank string (no whitespace).
      */
     public String getDoOnDateString() {
-        if (doOnDate != null) {
-            return doOnDate.format(outputFormat);
+        if (doOnStartDateTime != null) {
+            return doOnStartDateTime.format(outputWithTimeFormat);
         }
         return "";
     }
@@ -152,7 +139,7 @@ public class Task {
         if (this.byDate != null) {
             result += " (by: " + getByDateString() + ")";
         }
-        if (this.doOnDate != null) {
+        if (this.doOnStartDateTime != null) {
             result += " (reminder on: " + getDoOnDateString() + ")";
         }
         return result;
@@ -162,11 +149,31 @@ public class Task {
         this.description = taskDescription;
     }
 
-    public void setByDate(LocalDate byDate) {
+    public void setByDate(LocalDateTime byDate) {
         this.byDate = byDate;
     }
 
-    public void setDoOnDate(LocalDate doOnDate) {
-        this.doOnDate = doOnDate;
+    public void setDoOnStartDateTime(LocalDateTime doOnStartDateTime) {
+        this.doOnStartDateTime = doOnStartDateTime;
+    }
+
+    public void setDoOnEndDateTime(LocalDateTime doOnEndDateTime) {
+        this.doOnEndDateTime = doOnEndDateTime;
+    }
+
+    public LocalDateTime getDoOnEndDateTime() {
+        return doOnEndDateTime;
+    }
+
+    public int getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(int identifier) {
+        this.identifier = identifier;
+    }
+
+    public Frequency getRepeatFrequency() {
+        return repeatFrequency;
     }
 }
