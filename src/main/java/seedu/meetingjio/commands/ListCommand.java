@@ -9,7 +9,6 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EMPTY_LIST;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EMPTY_MASTER_TIMETABLE;
-import static seedu.meetingjio.timetables.MasterTimetable.timetables;
 
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
@@ -35,9 +34,9 @@ public class ListCommand extends Command {
             if (user.length() == 0) {
                 throw new MissingValueException();
             } else if (user.equalsIgnoreCase("all")) {
-                return listAll();
+                return listAll(masterTimetable);
             } else {
-                return listUser(user);
+                return listUser(user, masterTimetable);
             }
         } catch (MissingValueException mve) {
             return ERROR_UNSPECIFIED_LIST;
@@ -45,26 +44,39 @@ public class ListCommand extends Command {
 
     }
 
-    private String listAll() {
-        String str = "";
-        for (Timetable timetable : timetables) {
-            String user = timetable.getName();
-            str += user;
-            str += '\n';
-            str += listUser(user);
-            str += '\n';
-        }
+    /**
+     * This method gets the masterTimetable to call the collateAll method to get the combined timetables of everyone.
+     * If the masterTimetable is empty (eg when 'list all' is the user's first input), the programme should inform
+     * the user gracefully.
+     * The returned string needs to be truncated at the end otherwise there will be an extra newline character.
+     *
+     * @param masterTimetable The Master Timetable containing everyone's timetables
+     * @return truncatedString A string containing the labelled timetables of everyone, without the newline
+     *     character at the end. If the string has no contents, an error message is shown to inform the user
+     *     accordingly.
+     */
+    private String listAll(MasterTimetable masterTimetable) {
+        String str = masterTimetable.collateAll(masterTimetable);
         if (str.length() == 0) {
             return ERROR_EMPTY_MASTER_TIMETABLE;
         }
         assert str.length() - 1 >= 0 : ERROR_EMPTY_MASTER_TIMETABLE;
-        return str.substring(0, str.length() - 1); //remove last newline character
+        String truncatedString = str.substring(0, str.length() - 1);
+        return truncatedString;
     }
 
-    private String listUser(String user) {
+    /**
+     * This method is called if the user only wants to list a specific user's timetable.
+     *
+     * @param user The target user whose timetable is to be shown
+     * @param masterTimetable The Master Timetable containing everyone's timetables
+     * @return str The string containing the user's timetable. If the user does not exist, or the user's timetable is
+     *     empty, an appropriate error message will be shown to inform the user accordingly.
+     */
+    public static String listUser(String user, MasterTimetable masterTimetable) {
         Timetable timetable;
         try {
-            timetable = MasterTimetable.getByName(user);
+            timetable = masterTimetable.getByName(user);
         } catch (TimetableNotFoundException tnfe) {
             return ERROR_INVALID_USER;
         }
