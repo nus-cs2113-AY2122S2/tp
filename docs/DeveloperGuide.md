@@ -23,10 +23,11 @@ MeetingJio is a program for **finding potential time slots for team meetings bas
 This section describes some noteworthy details on how certain features are implemented.
 
 ## 3.1 Add Feature
-`add_lesson` allows users to add lessons to their own timetables
-`add_meeting` allows users to add meetings to all timetables
+`add_lesson` allows users to create a new lesson and add it to their own timetables
+`add_meeting` allows users to create a new meeting and add it to all the existing timetables
 
 The following sequence diagram shows how the `add_lesson` operation generally works.
+![AddLessonSequenceDiagram](diagrams/AddLessonSequenceDiagram.png)
 
 The following sequence diagram shows how the `add_lesson` operation works in detail.
 ![AddLessonCommandSequenceDiagram](diagrams/AddLessonCommandSequenceDiagram.png)
