@@ -7,7 +7,7 @@ import util.exceptions.NullException;
 
 import java.util.ArrayList;
 
-public class Commands {
+public class  Commands {
 
     public static void help() {
         System.out.println("* Add good `add id/ID n/GOOD_NAME q/QUANTITY`\n"
