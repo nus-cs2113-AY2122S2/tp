@@ -1,4 +1,4 @@
-package command;
+package seedu.planitarium.command;
 
 import org.junit.jupiter.api.Assertions;
 import seedu.planitarium.commands.AddPersonCommand;
