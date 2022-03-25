@@ -3,7 +3,7 @@ package arcs.data.validitychecker;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ValidMenuItemPriceChecker implements RawInputChecker{
+public class ValidMenuItemPriceChecker implements RawInputChecker {
     private static final String regPriceExp = "[0-9]+([,.][0-9]{1,2})?";
 
     final Pattern pattern = Pattern.compile(regPriceExp);
