@@ -117,4 +117,17 @@ public class ListCommandTest {
         assertEquals(answerAll, listCommand.execute(masterTimetable));
     }
 
+    /**
+     * Test method to ensure that the program lists the user's timetable such that events in the timetable are sorted
+     * based on each event's day and time.
+     */
+    @Test
+    public void listCommand_checkSort() {
+        addCommandSameUser.execute(masterTimetable);
+        addCommand.execute(masterTimetable);
+
+        ListCommand listCommand = new ListCommand("John");
+        assertEquals(answerJohn, listCommand.execute(masterTimetable));
+    }
+
 }
