@@ -265,6 +265,8 @@ public abstract class Message {
                     + "the involved list.";
 
     // Activity Edit Command
+    public static final String LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY =
+            "An Activity object failed to be edited.";
     public static final String LOGGER_ACTIVITYEDIT_SESSION_ID_NOT_FOUND =
             "Session was not found with unique identifier of:";
     public static final String ASSERT_ACTIVITYEDIT_COMMAND_ARGS_NULL =

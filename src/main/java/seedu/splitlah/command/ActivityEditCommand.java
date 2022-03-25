@@ -67,7 +67,13 @@ public class ActivityEditCommand extends Command {
         assert manager != null : Message.ASSERT_ACTIVITYEDIT_MANAGER_DOES_NOT_EXIST;
         Profile profile = manager.getProfile();
         TextUI ui = manager.getUi();
-        
+        try {
+            profile.getSession(sessionId).removeActivity(activityId);
+        } catch (InvalidDataException e) {
+            manager.getUi().printlnMessage(e.getMessage());
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY +
+                    "\n" + e.getMessage());
+        }
         ActivityCreateCommand activityCreateCommand = new ActivityCreateCommand(sessionId, activityName, totalCost,
                 payer, involvedList, costList, gst, serviceCharge);
     }
