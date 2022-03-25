@@ -1,8 +1,11 @@
 package seedu.sherpass.util.parser;
 
 import seedu.sherpass.exception.InvalidTimeException;
+import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.TimerLogic;
 import seedu.sherpass.util.Ui;
+
+import java.io.IOException;
 
 import static seedu.sherpass.constant.Index.CUSTOM_COMMAND_INDEX;
 import static seedu.sherpass.constant.Index.CUSTOM_TIMER_INDEX;
@@ -12,6 +15,7 @@ import static seedu.sherpass.constant.Index.DEFAULT_TIMER_THREE;
 import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
 import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ZERO;
 import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
+import static seedu.sherpass.constant.Index.STUDY_PARAMETER_INDEX;
 import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_STUDY_INPUT_MESSAGE;
 
@@ -22,8 +26,10 @@ public class TimerParser {
      *
      * @param rawUserInput Raw user input.
      * @param ui           UI.
+     * @param timerLogic Logic class to handle timer functions
      */
-    public static void parseStudyMode(String rawUserInput, Ui ui, TimerLogic timerLogic) {
+    public static void parseStudyMode(Ui ui, Storage storage, String rawUserInput,
+                                      TimerLogic timerLogic) throws IOException {
         String[] parsedInput = rawUserInput.trim().split(" ", 2);
         switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
         case "start":
@@ -37,6 +43,12 @@ public class TimerParser {
             break;
         case "stop":
             timerLogic.callStopTimer();
+            break;
+        case "mark":
+            timerLogic.markTask(storage, parsedInput);
+            break;
+        case "show":
+            timerLogic.showTasks(storage, parsedInput);
             break;
         default:
             ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);
@@ -92,5 +104,12 @@ public class TimerParser {
 
     private static boolean isValidDuration(int duration) {
         return duration > 0;
+    }
+
+    public static String parseStudyParameter(String[] parsedInput) {
+        if (parsedInput[STUDY_PARAMETER_INDEX].equals("stopwatch")) {
+            return "stopwatch";
+        }
+        return "countdown";
     }
 }

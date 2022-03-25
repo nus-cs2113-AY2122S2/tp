@@ -15,6 +15,7 @@ import seedu.sherpass.command.UnmarkCommand;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Ui;
 
+import static seedu.sherpass.constant.CommandParameters.FREQUENCY_DELIMITER;
 import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
 import static seedu.sherpass.constant.Index.OPTIONS_INDEX;
 
@@ -37,21 +38,35 @@ public class Parser {
      *
      * @param userInput User command.
      * @param taskList  Array of tasks.
+     * @param ui User interface which interacts with user
      * @return Command type matching the user command.
      */
     public static Command parseCommand(String userInput, TaskList taskList, Ui ui) {
         String[] splitInput = userInput.split(" ", 2);
         String commandWord = splitInput[OPTIONS_INDEX].toLowerCase().trim();
+        String commandArg = "";
+        if (splitInput.length > 1) {
+            commandArg = splitInput[1];
+        }
         switch (commandWord) {
         case MarkCommand.COMMAND_WORD:
             return TaskParser.prepareMarkOrUnmark(splitInput, MarkCommand.COMMAND_WORD, taskList);
         case UnmarkCommand.COMMAND_WORD:
             return TaskParser.prepareMarkOrUnmark(splitInput, UnmarkCommand.COMMAND_WORD, taskList);
         case AddCommand.COMMAND_WORD:
+            if (commandArg.contains(FREQUENCY_DELIMITER)) {
+                return TaskParser.prepareAddRecurring(commandArg);
+            }
             return TaskParser.prepareAdd(splitInput, taskList);
         case EditCommand.COMMAND_WORD:
+            if (commandArg.contains(FREQUENCY_DELIMITER)) {
+                return TaskParser.prepareEditRecurring(commandArg);
+            }
             return TaskParser.prepareEdit(splitInput);
         case DeleteCommand.COMMAND_WORD:
+            if (commandArg.contains(FREQUENCY_DELIMITER)) {
+                return TaskParser.prepareDeleteRecurring(commandArg);
+            }
             return TaskParser.prepareDelete(splitInput, taskList);
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

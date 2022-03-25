@@ -2,13 +2,14 @@ package seedu.sherpass.util.parser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.task.Task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-import static seedu.sherpass.constant.DateAndTimeFormat.inputFormat;
+import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
 
 public class StorageParser {
 
@@ -19,21 +20,25 @@ public class StorageParser {
      * @return Task containing the saved data for adding into program's task array.
      * @throws InvalidInputException If saved data is missing content, i.e. task description or date.
      */
-    public static Task parseSavedData(JSONObject taskData) throws InvalidInputException {
+    public static Task parseSaveData(JSONObject taskData) throws InvalidInputException {
         Task parsedTask;
         try {
+            int identifier = taskData.getInt("identifier");
             String description = taskData.getString("description");
             String byDateString = taskData.getString("by_date");
-            String doOnDateString = taskData.getString("do_date");
-            LocalDate byDate = null;
-            LocalDate doOnDate = null;
-            if (!byDateString.equals("null")) {
-                byDate = LocalDate.parse(byDateString, inputFormat);
-            }
-            if (!doOnDateString.equals("null")) {
-                doOnDate = LocalDate.parse(doOnDateString, inputFormat);
-            }
-            parsedTask = new Task(description, byDate, doOnDate);
+            String doOnStartDateString = taskData.getString("do_date_start");
+            String doOnEndDateString = taskData.getString("do_date_end");
+            String frequencyString = taskData.getString("frequency");
+
+            Frequency repeatFrequency = frequencyString.isBlank()
+                    ? null : Frequency.valueOf(frequencyString);
+            LocalDateTime byDate = (byDateString.isBlank()
+                    ? null : LocalDateTime.parse(byDateString, inputWithTimeFormat));
+            LocalDateTime doOnStartDateTime = LocalDateTime.parse(doOnStartDateString, inputWithTimeFormat);
+            LocalDateTime doOnEndDateTime = LocalDateTime.parse(doOnEndDateString, inputWithTimeFormat);
+
+            parsedTask = new Task(identifier, description, byDate, doOnStartDateTime,
+                    doOnEndDateTime, repeatFrequency);
             String status = taskData.getString("status");
             if (status.equals("X")) {
                 parsedTask.markAsDone();

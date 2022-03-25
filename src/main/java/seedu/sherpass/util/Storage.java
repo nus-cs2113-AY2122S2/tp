@@ -17,20 +17,16 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
 import static seedu.sherpass.constant.Index.DIRECTORY_INDEX;
 import static seedu.sherpass.constant.Index.INDENT_FACTOR;
 import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_1;
 import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_2;
 import static seedu.sherpass.constant.Message.ERROR_CORRUPT_SAVED_FILE_MESSAGE_3;
-import static seedu.sherpass.constant.Message.ERROR_DUPLICATE_TASK_MESSAGE_1;
-import static seedu.sherpass.constant.Message.ERROR_DUPLICATE_TASK_MESSAGE_2;
 import static seedu.sherpass.constant.Message.ERROR_IO_FAILURE_MESSAGE;
 
-import static seedu.sherpass.constant.DateAndTimeFormat.inputFormat;
-
-
 public class Storage {
-    private String saveFilePath;
+    private final String saveFilePath;
 
     /**
      * Creates a constructor for the class Storage.
@@ -54,7 +50,7 @@ public class Storage {
     }
 
     // Wipes the existing file
-    private void wipeSavedData() {
+    private void wipeSaveData() {
         try {
             FileWriter fw = new FileWriter(saveFilePath);
             fw.close();
@@ -75,9 +71,15 @@ public class Storage {
         JSONArray tasks = new JSONArray();
         for (Task t : taskList.getTasks()) {
             JSONObject taskToStore = new JSONObject();
+            taskToStore.put("identifier", t.getIdentifier());
             taskToStore.put("status", t.getStatusIcon());
-            taskToStore.put("by_date", (t.getByDate() == null ? "null" : t.getByDate().format(inputFormat)));
-            taskToStore.put("do_date", (t.getDoOnDate() == null ? "null" : t.getDoOnDate().format(inputFormat)));
+            taskToStore.put("by_date",
+                    (t.getByDate() == null ? " " : t.getByDate().format(inputWithTimeFormat)));
+            taskToStore.put("do_date_start",
+                    (t.getDoOnStartDateTime() == null ? " " : t.getDoOnStartDateTime().format(inputWithTimeFormat)));
+            taskToStore.put("do_date_end",
+                    (t.getDoOnStartDateTime() == null ? " " : t.getDoOnEndDateTime().format(inputWithTimeFormat)));
+            taskToStore.put("frequency", (t.getRepeatFrequency() == null ? " " : t.getRepeatFrequency().toString()));
             taskToStore.put("description", t.getDescription());
             tasks.put(taskToStore);
         }
@@ -117,30 +119,14 @@ public class Storage {
         List<String> dataLines = Files.readAllLines(new File(saveFilePath).toPath());
         if (dataLines.size() > 0) {
             String dataString = String.join("", dataLines);
-            JSONObject dataJson = new JSONObject(dataString);
-            JSONArray array = dataJson.getJSONArray("tasks");
+            JSONArray taskArray = new JSONObject(dataString).getJSONArray("tasks");
 
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject taskData = array.getJSONObject(i);
-                Task newTask = StorageParser.parseSavedData(taskData);
-                if (!isDuplicateTask(taskList, newTask.getDescription())) {
-                    taskList.add(newTask);
-                } else {
-                    System.out.println(ERROR_DUPLICATE_TASK_MESSAGE_1 + newTask.getDescription()
-                        + ERROR_DUPLICATE_TASK_MESSAGE_2);
-                }
+            for (int i = 0; i < taskArray.length(); i++) {
+                JSONObject taskData = taskArray.getJSONObject(i);
+                taskList.add(StorageParser.parseSaveData(taskData));
             }
         }
         return taskList;
-    }
-
-    private boolean isDuplicateTask(ArrayList<Task> tasks, String description) {
-        for (Task t : tasks) {
-            if (t.getDescription().equals(description)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
@@ -164,7 +150,7 @@ public class Storage {
         assert response.equalsIgnoreCase("y") || response.equalsIgnoreCase("n");
 
         if (response.equalsIgnoreCase("y")) {
-            wipeSavedData();
+            wipeSaveData();
         } else {
             ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_3);
             System.exit(1);

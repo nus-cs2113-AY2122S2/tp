@@ -17,6 +17,11 @@ The study session consists of 4 main components:
 - TimerLogic class
 - Timer class
 
+The `Parser` component
+- Parses user inputs in the main session and the study session
+- Ensures the input adheres to the allowed command inputs, 
+i.e. program will ask the user to key in a new input if it does not recognise the inputs given.
+
 The `StudyCommand` component
 - Accepts user inputs in the study session
 - Facilitates interaction between Parser and TimerLogic
@@ -88,8 +93,22 @@ The functionalities of the timetable include:
 - Prints a schedule specific to the date the user inputs 
 - Prints the schedule for the week the user is at
 - Prints the schedule of the day whenever the user starts up Sherpass.
-- The timetable schedule is represented in a table form as shown below
-  ![timetable format](images/timetable format.png)
+- The timetable schedule is represented in a table form as shown below:
+
+![](images/timetableFormat.png)
+
+#### Task index of a task in timetable
+
+The task number in the timetable as shown follows the index of a task
+in the overall task list, i.e. the list containing all tasks added/edited. 
+This allows a more intuitive approach towards adding/editing/deleting/marking/unmarking of tasks.
+
+#### Time and Day column in timetable
+
+The **Time** and **Day** in the timetable follows the doOnDate attribute of a task.
+Concept wise, this treats the doOnDate as the date and time when the task occurs,
+or the date and time the user has set out to accomplish the task.
+
 
 The **Timetable** is a class which interacts with the following components:
 1. Parser
@@ -99,7 +118,7 @@ The **Timetable** is a class which interacts with the following components:
 #### Parser Component
 
 The **Parser** is a class which parses the inputs which the user enters. 
-To activate the timetable, the user inputs commands that start with `show`
+To activate the timetable, the user inputs commands that start with `show`.
 This creates a **ShowCommand** object which will execute its method, thereby printing the timetable.
 
 #### ShowCommand Component
@@ -109,18 +128,31 @@ relative methods which prints the timetable.
 
 #### TaskList Component
 
-When the **ShowCommand** is being executed, it will retrieve a filtered list
-of task by the date that is define in the **ShowCommand** from the **TaskList** component. 
-The filtered list will represent the schedule that the user has on that date given. 
-
+As **ShowCommand** is being executed, it will retrieve a filtered list
+of task by the date that is defined in the **ShowCommand** from the **TaskList** component. 
+The filtered list represents the schedule that the user has on that given date. 
+The list is assumed to be sorted previously when the user added/edited a task.
 
 Below is a sequence diagram of what happens 
 as the user wishes to see the schedule (timetable) for 25th May 2022:
 
-![](images/showTodaySchedule.png)
+![](images/showScheduleForADate.png)
 
 The sequence as shown above also happens in the same fashion as the user 
 requests to see the schedule for any day or the week the user is at.
+
+The timetable for the current day is also shown to user as the user starts up
+the program.
+
+#### Design considerations for Timetable class
+- Current Implementation: Printing of timetable from scratch.
+  - Pros: Easy to implement as timetable is generated based on request and input.
+  - Pros: Adaptive as the timetable is only generated when needed and formatting is taken care of while generating it.
+  - Cons: Significant time may be taken as timetable will have to be created from scratch. The delay may be extended if user has a lot of tasks.
+
+- Alternative Implementation: Having a few templates, before choosing the suitable template and editing it if needed.
+  - Pros: Reduces computation time
+  - Cons: Increases memory usage
 
 
 ### Loading saved files
