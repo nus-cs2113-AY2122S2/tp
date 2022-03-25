@@ -206,7 +206,7 @@ public class Parser {
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_RECURRING_STATUS);
         String status = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_RECURRING_STATUS, DELIMITER_BACK).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, status));
-        if (status.equalsIgnoreCase("t")){
+        if (status.equalsIgnoreCase("t")) {
             return true;
         }
         return false;
