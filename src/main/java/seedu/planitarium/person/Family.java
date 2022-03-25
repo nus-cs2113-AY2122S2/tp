@@ -23,7 +23,7 @@ public class Family {
         String infoString = "Logger for PersonList initialised";
         logger.getLogger().log(Level.INFO, infoString);
     }
-    
+
     /**
      * Returns the array list specified.
      *
@@ -88,7 +88,7 @@ public class Family {
     }
 
     /**
-     * Removes an income from the lsit of incomes of a person in the array list specified by the group index.
+     * Removes an income from the list of incomes of a person in the array list specified by the group index.
      *
      * @param personIndex The index of the person in the group
      * @param group The index of the group to find the person
@@ -112,5 +112,18 @@ public class Family {
         String infoString = "Method addExpend() called";
         logger.getLogger().log(Level.INFO, infoString);
         getList(group).addExpend(personIndex, description, amount);
+    }
+
+    /**
+     * Removes an expenditure from the list of expenditures of a person in the array list specified by the group index.
+     *
+     * @param personIndex The index of the person in the group
+     * @param group The index of the group to find the person
+     * @param expendIndex The index of the expenditure to be removed
+     */
+    public void deleteExpend(int personIndex, int group, int expendIndex) {
+        String infoString = "Method deleteExpend() called";
+        logger.getLogger().log(Level.INFO, infoString);
+        getList(group).deleteExpend(personIndex, expendIndex);
     }
 }

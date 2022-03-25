@@ -146,7 +146,7 @@ public class PersonList {
      * @param incomeIndex The index of the income to be removed
      */
     public void deleteIncome(int personIndex, int incomeIndex) {
-        String infoString = "Method removeIncome() called";
+        String infoString = "Method deleteIncome() called";
         logger.getLogger().log(Level.INFO, infoString);
         getPerson(personIndex).deleteIncome(incomeIndex);
     }
@@ -162,5 +162,17 @@ public class PersonList {
         String infoString = "Method addIncome() called";
         logger.getLogger().log(Level.INFO, infoString);
         getPerson(personIndex).addIncome(description, amount);
+    }
+
+    /**
+     * Removes an expenditure from the list of expenditures of the specified person.
+     *
+     * @param personIndex The index of the person
+     * @param expendIndex The index of the income to be removed
+     */
+    public void deleteExpend(int personIndex, int expendIndex) {
+        String infoString = "Method deleteIncome() called";
+        logger.getLogger().log(Level.INFO, infoString);
+        getPerson(personIndex).deleteIncome(expendIndex);
     }
 }
