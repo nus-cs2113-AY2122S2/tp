@@ -63,7 +63,7 @@ public class SessionCreateCommandParserTest {
      * and if the exception message is correct.
      */
     @Test
-    public void getCommand_hasMissingDelimiter_exceptionThrown() {
+    public void getCommand_hasMissingDelimiter_InvalidFormatExceptionThrown() {
         SessionCreateCommandParser sessionCreateCommandParser = new SessionCreateCommandParser();
 
         // Case 1: Missing /n delimiter.
@@ -104,7 +104,7 @@ public class SessionCreateCommandParserTest {
      * and if the exception message is correct.
      */
     @Test
-    public void getCommand_hasMissingArguments_exceptionThrown() {
+    public void getCommand_hasMissingArguments_InvalidFormatExceptionThrown() {
         SessionCreateCommandParser sessionCreateCommandParser = new SessionCreateCommandParser();
 
         // Case 1: Missing Session name.
@@ -177,7 +177,7 @@ public class SessionCreateCommandParserTest {
      * are detected in the user input, and if the exception message is correct.
      */
     @Test
-    public void getCommand_hasMissingPersonListAndGidDelimiter_exceptionThrown() {
+    public void getCommand_hasMissingPersonListAndGidDelimiter_InvalidFormatExceptionThrown() {
         SessionCreateCommandParser sessionCreateCommandParser = new SessionCreateCommandParser();
 
         String inputMissingPersonListAndGidDelimiters = "session /create /n Class gathering /d 15-02-2022";
