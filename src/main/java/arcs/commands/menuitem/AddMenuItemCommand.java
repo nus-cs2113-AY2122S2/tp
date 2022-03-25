@@ -23,10 +23,8 @@ public class AddMenuItemCommand extends Command {
     private static final String INCORRECT_FIELD_MESSAGE = "These fields are incorrect";
 
     public AddMenuItemCommand(String name, String type, String price) throws IllegalArgumentException {
-        System.out.println("reach here -1");
         checkEmptyField(name, type, price);
         checkFieldValidity(type,price);
-        System.out.println("reached here 0");
         try {
             this.toAdd = new MenuItem(name, type, price);
         } catch (IllegalArgumentException e) {
@@ -78,7 +76,6 @@ public class AddMenuItemCommand extends Command {
         }
         System.out.println(toAdd.toString());
         menuItemManager.addMenuItem(toAdd);
-        System.out.println("here22222");
         CommandResult result = new CommandResult(SUCCESS_MESSAGE + System.lineSeparator()
                 + toAdd.getMenuItemInfo());
         return result;
