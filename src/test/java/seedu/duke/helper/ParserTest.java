@@ -1,15 +1,14 @@
 package seedu.duke.helper;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
+
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInfo;
+
 import seedu.duke.exception.HalpmiException;
-import seedu.duke.helper.command.AddPatientCommand;
 
-import java.util.logging.Logger;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 class ParserTest {
@@ -28,12 +27,12 @@ class ParserTest {
     @Test
     void parseAddPatientInvalidParamTest() {
         String[] parameters = {"S1234567,JOHN,23,M,SINGAPORE,1999-01-01,2022-01-01",
-                "S1234567A,JOHN1,23,M,SINGAPORE,1999-01-01,2022-01-01",
-                "S1234567A,JOHN,2B,M,SINGAPORE,1999-01-01,2022-01-01",
-                "S1234567A,JOHN,23,T,SINGAPORE,1999-01-01,2022-01-01",
-                "S1234567A,JOHN,23,M,SINGAPORE,1999,2022-01-01",
-                "S1234567A,JOHN,23,M,SINGAPORE,1999-01-01,2022-100-01",
-                "S1234567A,JOHN,23,M,SINGAPORE,1999-01-01,2022-01-01,123"};
+            "S1234567A,JOHN1,23,M,SINGAPORE,1999-01-01,2022-01-01",
+            "S1234567A,JOHN,2B,M,SINGAPORE,1999-01-01,2022-01-01",
+            "S1234567A,JOHN,23,T,SINGAPORE,1999-01-01,2022-01-01",
+            "S1234567A,JOHN,23,M,SINGAPORE,1999,2022-01-01",
+            "S1234567A,JOHN,23,M,SINGAPORE,1999-01-01,2022-100-01",
+            "S1234567A,JOHN,23,M,SINGAPORE,1999-01-01,2022-01-01,123"};
         for (String s : parameters) {
             try {
                 Parser.parseAddPatient(s);
@@ -58,12 +57,12 @@ class ParserTest {
     @Test
     void parseAddDoctorInvalidParamTest() {
         String[] parameters = {"S1234567,JOHN,23,M,SINGAPORE,1999-01-01,Paediatrics",
-                "S1234567A,JOHN1,23,M,SINGAPORE,1999-01-01,Paediatrics",
-                "S1234567A,JOHN,2B,M,SINGAPORE,1999-01-01,Paediatrics",
-                "S1234567A,JOHN,23,T,SINGAPORE,1999-01-01,Paediatrics",
-                "S1234567A,JOHN,23,M,SINGAPORE,1999,Paediatrics",
-                "S1234567A,JOHN,23,M,SINGAPORE,1999-01-01,Paediatrics1",
-                "S1234567A,JOHN,23,M,SINGAPORE,1999-01-01"};
+            "S1234567A,JOHN1,23,M,SINGAPORE,1999-01-01,Paediatrics",
+            "S1234567A,JOHN,2B,M,SINGAPORE,1999-01-01,Paediatrics",
+            "S1234567A,JOHN,23,T,SINGAPORE,1999-01-01,Paediatrics",
+            "S1234567A,JOHN,23,M,SINGAPORE,1999,Paediatrics",
+            "S1234567A,JOHN,23,M,SINGAPORE,1999-01-01,Paediatrics1",
+            "S1234567A,JOHN,23,M,SINGAPORE,1999-01-01"};
         for (String s : parameters) {
             try {
                 Parser.parseAddDoctor(s);
@@ -88,10 +87,10 @@ class ParserTest {
     @Test
     void parseAddMedicineInvalidParamTest() {
         String[] parameters = {"S123,Paracetamol1,500,2025-02-02,Headaches,100",
-                "S123,Paracetamol,-1,2025-02-02,Headaches,100",
-                "S123,Paracetamol,50b,2025-02-02,Headaches,100",
-                "S123,Paracetamol,500,2025-24-02,Headaches,100",
-                "S123,Paracetamol,500,2025-02-02,Headaches"};
+            "S123,Paracetamol,-1,2025-02-02,Headaches,100",
+            "S123,Paracetamol,50b,2025-02-02,Headaches,100",
+            "S123,Paracetamol,500,2025-24-02,Headaches,100",
+            "S123,Paracetamol,500,2025-02-02,Headaches"};
 
         for (String s : parameters) {
             try {
@@ -297,10 +296,10 @@ class ParserTest {
     @Test
     void parseEditMedicineInvalidParamTest() {
         String[] parameters = {"S123,Paracetamol1,500,2025-02-02,Headaches,100",
-                "S123,Paracetamol,-1,2025-02-02,Headaches,100",
-                "S123,Paracetamol,50b,2025-02-02,Headaches,100",
-                "S123,Paracetamol,500,2025-24-02,Headaches,100",
-                "S123,Paracetamol,500,2025-02-02,Headaches"};
+            "S123,Paracetamol,-1,2025-02-02,Headaches,100",
+            "S123,Paracetamol,50b,2025-02-02,Headaches,100",
+            "S123,Paracetamol,500,2025-24-02,Headaches,100",
+            "S123,Paracetamol,500,2025-02-02,Headaches"};
 
         for (String s : parameters) {
             try {

@@ -7,7 +7,8 @@ import seedu.duke.assets.PatientList;
 import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.NotFoundException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 class DeletePatientCommandTest {
 

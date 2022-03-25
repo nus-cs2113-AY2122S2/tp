@@ -5,7 +5,8 @@ import seedu.duke.assets.MedicineList;
 import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.NotFoundException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 class EditMedicineCommandTest {
 

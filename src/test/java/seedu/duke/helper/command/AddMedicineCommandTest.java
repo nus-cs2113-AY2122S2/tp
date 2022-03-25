@@ -5,7 +5,8 @@ import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.exception.DuplicateEntryException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.duke.status.Status.ADD_DOCTOR_SUCCESS;
 import static seedu.duke.status.Status.ADD_MEDICINE_SUCCESS;
 
