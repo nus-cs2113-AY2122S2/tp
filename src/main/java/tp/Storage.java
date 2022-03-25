@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private static final String root = System.getProperty("user.dir");
-    private static final Path filePath = Paths.get(root, "data", "duke.txt");
-    private static final Path dirPath = Paths.get(root, "data");
+    private static final String ROOT = System.getProperty("user.dir");
+    private static final Path FILEPATH = Paths.get(root, "data", "duke.txt");
+    //private static final Path DIRPATH = Paths.get(root, "data");
 
     public Storage() throws IHospitalException {
         try {
