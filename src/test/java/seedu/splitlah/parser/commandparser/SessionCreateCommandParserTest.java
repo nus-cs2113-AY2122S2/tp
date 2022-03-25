@@ -174,7 +174,7 @@ public class SessionCreateCommandParserTest {
 
     /**
      * Checks if an InvalidFormatException is thrown when missing person list and groupId delimiters
-     * are detected in the user input and if the exception message is correct.
+     * are detected in the user input, and if the exception message is correct.
      */
     @Test
     public void getCommand_hasMissingPersonListAndGidDelimiter_exceptionThrown() {
