@@ -4,10 +4,55 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+# 1. Overview
+MeetingJio is a program for **finding potential time slots for team meetings based on everyone’s availability**.
+
+# 2. Design 
+
+## 2.1 Architecture
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+## 2.2 Events
+
+## 2.3 Timetables
+
+## 2.4 Commands
+
+# 3. Implementation
+This section describes some noteworthy details on how certain features are implemented.
+
+## 3.1 Add Feature
+`add_lesson` allows users to create a new lesson and add it to their own timetables
+`add_meeting` allows users to create a new meeting and add it to all the existing timetables
+
+The following sequence diagram shows how the `add_lesson` operation generally works.
+![AddLessonSequenceDiagram](diagrams/AddLessonSequenceDiagram.png)
+
+The following sequence diagram shows how the `add_lesson` operation works in detail.
+![AddLessonCommandSequenceDiagram](diagrams/AddLessonCommandSequenceDiagram.png)
+
+## 3.2 Data Saving Feature
+
+The save mechanism is facilitated by Storage. It creates a text file in the local machine and writes all the elements 
+in the MasterTimetable and Timetable to the text file in human-readable format.
+
+Given below is the steps on how the save operation works.
+
+Step 1: When the user exits the application. The Storage.SaveData will be initialized. 
+
+Step 2: It will check for the existence of the data file. If the file is not found, it will create the file.
+        Else do nothing.
+
+Step 3: After creating the file, a for loop will be called to iterate through all elements in the MasterTimetable and Timetable list,
+        and write them into the data file.
+
+Step 4: A message will be shown to the user, informing him that the data has been saved successfully. For any exception
+        encountered along the way, an error message will be displayed.
+
+The following sequence diagram shows how the save operation works:
+
+![SaveSequenceDiagram](diagrams/SaveSequenceDiagram.png)
 
 ## Product scope
 ### Target user profile
