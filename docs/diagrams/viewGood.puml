@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Actor ":User" as user
+participant ":UserInterface" as ui
+participant ":Regex" as regex
+participant ":Command" as command
+
+user -> ui ++ : view id/id
+ui -> regex ++ : Regex(userInput, regex).getGroupValues()
+regex -> ui -- : Hashmap of results
+ui -> command ++ : viewGood(id, userGoods)
+command -> ui -- : Information of good based on id
+ui -> user -- : Information presented in a proper format
+@enduml

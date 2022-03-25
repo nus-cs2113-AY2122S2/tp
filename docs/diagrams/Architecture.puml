@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+
+Actor User as user USER_COLOR
+Participant ":UI" as ui UI_COLOR
+Participant ":Command" as command COMMANDS_COLOR
+Participant ":GOOD" as good GOOD_COLOR
+
+user -[USER_COLOR]> ui : "remove id/1"
+activate ui UI_COLOR
+
+ui -[UI_COLOR]> command : removeGood(p)
+activate command COMMANDS_COLOR
+command -[COMMANDS_COLOR]-> ui
+deactivate command
+
+command -[COMMANDS_COLOR]> storage : saveAddressBook(addressBook)
+activate storage STORAGE_COLOR
+
+GOOD --[GOOD_COLOR]> ui
+
+ui--[UI_COLOR]> user
+deactivate ui
+
+storage -[STORAGE_COLOR]> storage : Save to file
+activate storage STORAGE_COLOR_T1
+storage --[STORAGE_COLOR]> storage
+deactivate storage
+
+@enduml
