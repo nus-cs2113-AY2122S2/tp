@@ -32,6 +32,7 @@ public class SessionDeleteCommandParserTest {
         if (!errorMessage.isEmpty()) {
             fail();
         }
+        
         try {
             SessionDeleteCommandParser sessionDeleteCommandParser = new SessionDeleteCommandParser();
             Command sessionDeleteCommand = sessionDeleteCommandParser.getCommand(validArguments);
