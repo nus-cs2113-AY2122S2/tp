@@ -12,11 +12,7 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_USAGE = "Delete: Deletes a task in the task list.\n"
-            + "To delete a specific task, enter 'delete <list_index>'.\n\n Here, "
-            + "'list_index' denotes the index of a task \n based on the task list under the command 'list'.\n"
-            + "\nE.g., 'delete 2' deletes the second task in the task list.\n\n"
-            + "Note: You can only delete one task per command input.";
-
+            + "Usage: delete TASK_NUMBER [/repeat]";
 
     /**
      * Creates constructor for delete command.
