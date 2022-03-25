@@ -5,9 +5,6 @@ import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
-import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
@@ -20,21 +17,8 @@ import java.util.logging.Level;
  */
 public class SessionCreateCommand extends Command {
 
-    public static final String COMMAND_TEXT = "session /create";
-
-    public static final String COMMAND_FORMAT =
-            "Syntax: session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2...] "
-                    + "[</gid [GROUP_ID]>]";
-
     private static final String COMMAND_SUCCESS =
             "The session was created successfully.\n";
-
-    public static final String[] COMMAND_DELIMITERS = { 
-        ParserUtils.NAME_DELIMITER,
-        ParserUtils.DATE_DELIMITER,
-        ParserUtils.PERSON_LIST_DELIMITER,
-        ParserUtils.GROUP_ID_DELIMITER
-    };
 
     private String sessionName;
     private String[] personNames;
@@ -58,59 +42,6 @@ public class SessionCreateCommand extends Command {
         this.personNames = personNames;
         this.sessionDate = date;
         this.groupId = groupId;
-    }
-
-    /**
-     * Prepares user arguments for the creation of a SessionCreateCommand object.
-     *
-     * @param commandArgs A String object that represents the user's arguments.
-     * @return A SessionCreateCommand object if session name, session date and person list were found in user arguments,
-     *         an InvalidCommand object otherwise.
-     */
-    public static Command prepare(String commandArgs) {
-        assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
-
-        boolean hasPersonListDelimiter = false;
-        String [] parsedNames = null;
-        try {
-            parsedNames = Parser.parsePersonList(commandArgs);
-            hasPersonListDelimiter = true;
-        } catch (InvalidFormatException formatException) {
-            if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                    + ParserUtils.PERSON_LIST_DELIMITER)) {
-                String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
-                return new InvalidCommand(invalidCommandMessage);
-            }
-        }
-
-        boolean hasGroupIdDelimiter = false;
-        int groupId = -1;
-        try {
-            groupId = Parser.parseGroupId(commandArgs);
-            hasGroupIdDelimiter = true;
-        } catch (InvalidFormatException formatException) {
-            if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                    + ParserUtils.GROUP_ID_DELIMITER)) {
-                String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
-                return new InvalidCommand(invalidCommandMessage);
-            }
-        }
-
-        boolean isMissingBothDelimiters = !hasPersonListDelimiter && !hasGroupIdDelimiter;
-        if (isMissingBothDelimiters) {
-            String invalidCommandMessage = Message.ERROR_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS + "\n"
-                    + COMMAND_FORMAT;
-            return new InvalidCommand(invalidCommandMessage);
-        }
-
-        try {
-            String parsedSessionName = Parser.parseName(commandArgs);
-            LocalDate parsedSessionDate = Parser.parseLocalDate(commandArgs);
-            return new SessionCreateCommand(parsedSessionName, parsedNames, parsedSessionDate, groupId);
-        } catch (InvalidFormatException formatException) {
-            String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
-            return new InvalidCommand(invalidCommandMessage);
-        }
     }
 
     /**
