@@ -12,6 +12,17 @@ public class EquipmentManager {
         this.equipmentList = new HashMap<>();
     }
 
+    /**
+     * Creates an Equipment object using the parameters and adds it to the equipmentList.
+     *
+     * @param itemName Name of the equipment in String.
+     * @param serialNumber Unique serial number of equipment in String.
+     * @param type Type of the equipment in EquipmentType enum.
+     * @param cost Cost of the equipment in double.
+     * @param purchasedFrom Where the equipment was purchased in String.
+     * @param purchasedDate When the equipment was purchased in String.
+     * @throws DuplicateSerialNumberException If the serial number exists in equipmentList.
+     */
     public void addEquipment(String itemName, String serialNumber, EquipmentType type, double cost,
                              String purchasedFrom, String purchasedDate) throws DuplicateSerialNumberException {
         if (!equipmentList.containsKey(serialNumber)) {
@@ -22,6 +33,12 @@ public class EquipmentManager {
         }
     }
 
+    /**
+     * Adds the Equipment object into the equipmentList.
+     *
+     * @param equipment Equipment object.
+     * @throws DuplicateSerialNumberException If the serial number exists in equipmentList.
+     */
     public void addEquipment(Equipment equipment) throws DuplicateSerialNumberException {
         String serialNumber = equipment.getSerialNumber();
         if (!equipmentList.containsKey(serialNumber)) {
@@ -31,6 +48,12 @@ public class EquipmentManager {
         }
     }
 
+    /**
+     * Searches the equipmentList for Equipments with the item name given.
+     *
+     * @param itemName Name of Equipment in String.
+     * @return An ArrayList of Equipments with the same item name as the parameter.
+     */
     public ArrayList<Equipment> checkEquipment(String itemName) {
         ArrayList<Equipment> listOfEquipments = new ArrayList<>();
         for (Equipment equipment : equipmentList.values()) {
@@ -41,10 +64,21 @@ public class EquipmentManager {
         return listOfEquipments;
     }
 
+    /**
+     * Creates an ArrayList of all Equipment Objects.
+     *
+     * @return An ArrayList of all Equipment Objects in equipmentList.
+     */
     public ArrayList<Equipment> listEquipment() {
         return new ArrayList<>(equipmentList.values());
     }
 
+    /**
+     * Creates an ArrayList of all Equipment with the specified EquipmentType.
+     *
+     * @param type Type of equipment in EquipmentType enum.
+     * @return An ArrayList of Equipment Objects with the specified type in equipmentList.
+     */
     public ArrayList<Equipment> listEquipment(EquipmentType type) {
         ArrayList<Equipment> listOfEquipments = new ArrayList<>();
         for (Equipment equipment : equipmentList.values()) {
@@ -59,6 +93,15 @@ public class EquipmentManager {
         return equipmentList;
     }
 
+    /**
+     * Updates the Equipment corresponding to the serial number given.
+     * Updates are given in the form of ArrayList of Pairs.
+     *
+     * @param serialNumber Serial number of Equipment in String.
+     * @param updatePairs Updates for Equipment with key being an Equipment
+     *                    attribute and value being the updated attribute.
+     * @return Boolean value based on whether the update succeeded or not.
+     */
     public boolean updateEquipment(String serialNumber, ArrayList<Pair<String, String>> updatePairs) {
         if (!equipmentList.containsKey(serialNumber)) {
             return false;
@@ -93,6 +136,11 @@ public class EquipmentManager {
         return true;
     }
 
+    /**
+     * Deletes the Equipment with the given serial number.
+     *
+     * @param serialNumber Serial number of Equipment in String.
+     */
     public void deleteEquipment(String serialNumber) {
         equipmentList.remove(serialNumber);
     }

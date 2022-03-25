@@ -95,6 +95,20 @@ The *Sequence Diagram* below shows how the objects/classes interact with each ot
 
 Step 6. It is not shown in the sequence diagram but ultimately when the CommandResult is returned to `Duke`, the output of the `CommandResult` gets printed out and displayed to the user.
 
+### EquipmentManager
+
+The **`EquipmentManager`**, as the name suggests, manages all the equipment that the user has.
+When initialised, it creates a HashMap called **`equipmentList`** which is used to save the equipment with their serial numbers as their keys.
+The **`EquipmentManager`** has several methods which allow manipulation to said HashMap such as **`addEquipment`**, **`checkEquipment`**, **`listEquipment`**, **`updateEquipment`**, and **`deleteEquipment`**.
+These methods are used during the execution of each of the **`Command`** class.
+* **`addEquipment`** — Adds an **`Equipment`** to the **`equipmentList`**.
+* **`checkEquipment`** — Returns the **`Equipment`** in **`equipmentList`** that has the given **`itemName`**.
+* **`listEquipment`** — Returns an ArrayList of all the **`Equipment`** in **`equipmentList`**.
+* **`updateEquipment`** — Updates the specified **`Equipment`** with the corresponding updates given in the ArrayList of pairs.
+* **`deleteEquipment`** — Deletes the specified **`Equipment`**.
+
+The **`EquipmentManager`** is implemented as the main storage unit of all the equipments during the execution of the program.
+
 --------------------------------------------------------------------------------------------------------------------
 ## Product scope
 ### Target user profile
