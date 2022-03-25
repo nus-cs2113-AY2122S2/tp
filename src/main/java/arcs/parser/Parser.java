@@ -172,12 +172,10 @@ public class Parser {
         if (argumentLine == null || argumentLine.isEmpty()) {
             return new AddMenuItemCommand(null,null,null);
         }
-        System.out.println("here3");
         String[] args = argumentLine.split(" ");
         String menuItemName = null;
         String menuItemType = null;
         String menuItemPrice = null;
-        System.out.println("here4");
         for (String arg: args) {
             arg = arg.trim();
             if (arg.isEmpty()) {
