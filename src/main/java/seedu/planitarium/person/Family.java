@@ -41,10 +41,13 @@ public class Family {
         switch(group) {
         case Constants.PARENTS:
             toReturn = parents;
+            break;
         case Constants.MY_GEN:
             toReturn = myGen;
+            break;
         case Constants.CHILDREN:
             toReturn = children;
+            break;
         }
         return toReturn;
     }
@@ -125,5 +128,31 @@ public class Family {
         String infoString = "Method deleteExpend() called";
         logger.getLogger().log(Level.INFO, infoString);
         getList(group).deleteExpend(personIndex, expendIndex);
+    }
+
+    /**
+     * Lists the disposable incomes of each generation.
+     */
+    public void list() {
+        String infoString = "Method list() called";
+        logger.getLogger().log(Level.INFO, infoString);
+        System.out.println("Here are your disposable incomes by group:");
+        for (int i = 0; i < Constants.NUM_GROUPS; i++) {
+            PersonList personList = getList(i);
+            double disposable = personList.getRemain();
+            String generation = null;
+            switch(i) {
+            case Constants.PARENTS:
+                generation = "Parents";
+                break;
+            case Constants.MY_GEN:
+                generation = "My generation";
+                break;
+            case Constants.CHILDREN:
+                generation = "Children";
+                break;
+            }
+            System.out.println((i + 1) + ". " + generation + ": " + disposable);
+        }
     }
 }

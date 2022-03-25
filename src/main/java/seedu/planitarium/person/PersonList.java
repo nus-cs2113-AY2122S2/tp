@@ -100,16 +100,18 @@ public class PersonList {
     }
 
     /**
-     * Prints the total remaining disposable income of persons in the array list.
+     * Returns the total remaining disposable income of persons in the array list.
+     *
+     * @return Total disposable income
      */
-    public void printRemain() {
+    public double getRemain() {
         String infoString = "Method getRemain() called";
         logger.getLogger().log(Level.INFO, infoString);
         double sum = 0;
         for (Person person: this.getPersonList()) {
             sum += person.getDisposable();
         }
-        System.out.println("Your family has a remaining balance of $" + sum);
+        return sum;
     }
 
     /**
