@@ -1,6 +1,5 @@
 package seedu.splitlah.parser;
 
-import seedu.splitlah.command.ActivityCreateCommand;
 import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
@@ -11,11 +10,11 @@ import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.command.SessionCreateCommand;
 import seedu.splitlah.command.SessionDeleteCommand;
-import seedu.splitlah.command.SessionListCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.ui.Message;
 
 import java.time.format.DateTimeFormatter;
@@ -399,8 +398,8 @@ public class ParserUtils {
         
         String[] delimiterList;
         switch (commandType) {
-        case ActivityCreateCommand.COMMAND_TEXT:
-            delimiterList = ActivityCreateCommand.COMMAND_DELIMITERS;
+        case ActivityCreateCommandParser.COMMAND_TEXT:
+            delimiterList = ActivityCreateCommandParser.COMMAND_DELIMITERS;
             break;
         case ActivityDeleteCommand.COMMAND_TEXT:
             delimiterList = ActivityDeleteCommand.COMMAND_DELIMITERS;
@@ -462,7 +461,7 @@ public class ParserUtils {
             // Fallthrough
         case SessionListCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case ActivityCreateCommand.COMMAND_TEXT:
+        case ActivityCreateCommandParser.COMMAND_TEXT:
             // Fallthrough
         case ActivityDeleteCommand.COMMAND_TEXT:
             // Fallthrough
@@ -524,7 +523,7 @@ public class ParserUtils {
      * @return A String object with the first error check to be failed, if any, or
      *         an empty String object if remainingArgs is empty or if none of the error checks fail.
      */
-    static String checkIfCommandIsValid(String commandType, String remainingArgs) {
+    public static String checkIfCommandIsValid(String commandType, String remainingArgs) {
         assert commandType != null : Message.ASSERT_PARSER_COMMAND_TYPE_NULL;
         assert remainingArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
 

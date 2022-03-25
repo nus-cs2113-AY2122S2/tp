@@ -1,7 +1,6 @@
 package seedu.splitlah.parser;
 
 import seedu.splitlah.command.Command;
-import seedu.splitlah.command.ActivityCreateCommand;
 import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
@@ -17,6 +16,7 @@ import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
@@ -344,8 +344,8 @@ public class Parser {
                 return new SessionSummaryCommandParser().getCommand(remainingArgs);
             case SessionListCommandParser.COMMAND_TEXT:
                 return new SessionListCommandParser().getCommand(remainingArgs);
-            case ActivityCreateCommand.COMMAND_TEXT:
-                return ActivityCreateCommand.prepare(remainingArgs);
+            case ActivityCreateCommandParser.COMMAND_TEXT:
+                return new ActivityCreateCommandParser().getCommand(remainingArgs);
             case ActivityDeleteCommand.COMMAND_TEXT:
                 return ActivityDeleteCommand.prepare(remainingArgs);
             case ActivityListCommand.COMMAND_TEXT:

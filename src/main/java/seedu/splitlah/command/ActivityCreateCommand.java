@@ -3,17 +3,13 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
+import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
-import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -22,31 +18,8 @@ import java.util.logging.Level;
  * @author Ivan
  */
 public class ActivityCreateCommand extends Command {
-
-    public static final String COMMAND_TEXT = "activity /create";
-
-    private static final String COMMAND_FORMAT = "Syntax:\n\t";
-
-    public static final String COMMAND_FORMAT_FIRST =
-            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] "
-                    + "/co <TOTAL_COST> [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
-
-    public static final String COMMAND_FORMAT_SECOND =
-            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] "
-                    + "/cl [COST1 COST2…] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
-
+  
     private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
-    
-    public static final String[] COMMAND_DELIMITERS = { 
-        ParserUtils.SESSION_ID_DELIMITER, 
-        ParserUtils.NAME_DELIMITER, 
-        ParserUtils.PAYER_DELIMITER, 
-        ParserUtils.INVOLVED_DELIMITER, 
-        ParserUtils.TOTAL_COST_DELIMITER, 
-        ParserUtils.COST_LIST_DELIMITER,
-        ParserUtils.GST_DELIMITER,
-        ParserUtils.SERVICE_CHARGE_DELIMITER 
-    };
 
     private int sessionId;
     private String activityName;
@@ -72,7 +45,7 @@ public class ActivityCreateCommand extends Command {
      *                      who are involved in the activity.
      * @param costList      A double array object that represents the respective costs of
      *                      each person involved in the activity.
-     * @param gst           A double that represents the gst to be included for the cost of the activity.
+     * @param gst           A double that represents the GST percentage to be included for the cost of the activity.
      * @param serviceCharge A double that represents the service charge to be included for the cost of the activity.
      */
     public ActivityCreateCommand(int sessionId, String activityName, double totalCost, String payer,
@@ -89,110 +62,6 @@ public class ActivityCreateCommand extends Command {
         this.costList = costList;
         this.gst = gst;
         this.serviceCharge = serviceCharge;
-    }
-
-    /**
-     * Prepares user arguments for the creation of an ActivityCreateCommand object.
-     *
-     * @param commandArgs A String object representing the user's arguments.
-     * @return An ActivityCreateCommand object if necessary parameters were found in user arguments,
-     *         an InvalidCommand object otherwise.
-     */
-    public static Command prepare(String commandArgs) {
-        int sessionId;
-        String activityName;
-        String payer;
-        String[] involvedList;
-        double totalCost = 0;
-        double[] costList = null;
-        double gst;
-        double serviceCharge;
-
-        try {
-            sessionId = Parser.parseSessionId(commandArgs);
-            activityName = Parser.parseName(commandArgs);
-            payer = Parser.parsePayer(commandArgs);
-            involvedList = Parser.parseInvolved(commandArgs);
-        } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t"
-                    + COMMAND_FORMAT_SECOND);
-        }
-
-        boolean isMissingCost = false;
-        boolean isMissingCostList = false;
-        boolean hasDifferentLength = false;
-
-        try {
-            totalCost = Parser.parseTotalCost(commandArgs);
-        } catch (InvalidFormatException e) {
-            if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                    + ParserUtils.TOTAL_COST_DELIMITER)) {
-                return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
-                        + "\n\t" + COMMAND_FORMAT_SECOND);
-            }
-            isMissingCost = true;
-        }
-
-        try {
-            costList = Parser.parseCostList(commandArgs);
-        } catch (InvalidFormatException e) {
-            if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                    + ParserUtils.COST_LIST_DELIMITER)) {
-                return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
-                        + "\n\t" + COMMAND_FORMAT_SECOND);
-            }
-            isMissingCostList = true;
-        }
-
-        boolean hasMissingCostAndMissingCostList = isMissingCostList && isMissingCost;
-        if (hasMissingCostAndMissingCostList) {
-            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
-                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
-        }
-
-        boolean hasBothCostAndCostList = !isMissingCostList && !isMissingCost;
-        if (hasBothCostAndCostList) {
-            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
-                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
-        }
-
-        if (isMissingCost) {
-            hasDifferentLength = involvedList.length != costList.length;
-        }
-        if (hasDifferentLength) {
-            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
-                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
-        }
-
-        try {
-            gst = Parser.parseGst(commandArgs);
-            serviceCharge = Parser.parseServiceCharge(commandArgs);
-        } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
-                    + "\n\t" + COMMAND_FORMAT_SECOND);
-        }
-
-        return new ActivityCreateCommand(sessionId, activityName, totalCost, payer, involvedList, costList, gst,
-                serviceCharge);
-    }
-
-    /**
-     * Checks if String object array of names has duplicated names.
-     *
-     * @return true if it contains duplicates,
-     *         false otherwise.
-     */
-    private boolean hasNameDuplicates() {
-        Set<String> nameSet = new HashSet<>();
-        for (String name : involvedList) {
-            String nameToBeAdded = name.toLowerCase();
-            if (!nameSet.add(nameToBeAdded)) {
-                return true;
-            }
-        }
-        assert nameSet.size() == involvedList.length :
-                Message.ASSERT_ACTIVITYCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED;
-        return false;
     }
 
     /**
@@ -277,8 +146,8 @@ public class ActivityCreateCommand extends Command {
 
     /**
      * Updates cost list by including the extra charges.
-     * Extra charges may include gst and service charge.
-     * Assumption: gst and service charge are non-negative values.
+     * Extra charges may include GST and service charge.
+     * Assumption: GST and service charge are non-negative values.
      */
     private void updateCostListWithExtraCharges() {
         double extraCharges = getExtraCharges();
@@ -298,8 +167,8 @@ public class ActivityCreateCommand extends Command {
 
     /**
      * Updates total cost by including the extra charges.
-     * Extra charges may include gst and service charge.
-     * Assumption: gst and service charge are non-negative values.
+     * Extra charges may include GST and service charge.
+     * Assumption: GST and service charge are non-negative values.
      */
     private void updateCostWithExtraCharges() {
         double extraCharges = getExtraCharges();
@@ -341,7 +210,7 @@ public class ActivityCreateCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        boolean hasDuplicates = hasNameDuplicates();
+        boolean hasDuplicates = PersonList.hasNameDuplicates(involvedList);
         if (hasDuplicates) {
             manager.getUi().printlnMessage(Message.ERROR_ACTIVITYCREATE_DUPLICATE_NAME);
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST);
