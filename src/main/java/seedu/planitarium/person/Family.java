@@ -91,26 +91,39 @@ public class Family {
     /**
      * Removes a person from the array list specified by the group index.
      *
-     * @param index The index of the person to be removed
-     * @param group The index of the group to remove from
+     * @param personIndex The personIndex of the person to be removed
+     * @param group The personIndex of the group to remove from
      */
-    public void removePerson(int index, int group) {
+    public void deletePerson(int personIndex, int group) {
         String infoString = "Method removePerson() called";
         logger.getLogger().log(Level.INFO, infoString);
-        getList(group).removePerson(index);
+        getList(group).deletePerson(personIndex);
     }
 
     /**
      * Adds an income to the list of incomes of a person in the array list specified by the group index.
      *
-     * @param index The index of the person in the group
+     * @param personIndex The index of the person in the group
      * @param group The index of the group to find the person
      * @param description The source of the income
      * @param amount The value of the income
      */
-    public void addIncome(int index, int group, String description, double amount) {
+    public void addIncome(int personIndex, int group, String description, double amount) {
         String infoString = "Method addIncome() called";
         logger.getLogger().log(Level.INFO, infoString);
-        getList(group).addIncome(index, description, amount);
+        getList(group).addIncome(personIndex, description, amount);
+    }
+
+    /**
+     * Removes an income from the lsit of incomes of a person in the array list specified by the group index.
+     *
+     * @param personIndex The index of the person in the group
+     * @param group The index of the group to find the person
+     * @param incomeIndex The index of the income to be removed
+     */
+    public void deleteIncome(int personIndex, int group, int incomeIndex) {
+        String infoString = "Method deleteIncome() called";
+        logger.getLogger().log(Level.INFO, infoString);
+        getList(group).deleteIncome(personIndex, incomeIndex);
     }
 }

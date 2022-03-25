@@ -85,7 +85,7 @@ public class PersonList {
      *
      * @param index The index of the person to be removed
      */
-    public void removePerson(int index) {
+    public void deletePerson(int index) {
         String infoString = "Entering removePerson()";
         logger.getLogger().log(Level.INFO, infoString);
         assert (index >= SINGULAR);
@@ -129,13 +129,25 @@ public class PersonList {
     /**
      * Adds an income to the list of incomes of the specified person.
      *
-     * @param index The index of the person
+     * @param personIndex The index of the person
      * @param description The source of the income
      * @param amount The value of the income
      */
-    public void addIncome(int index, String description, double amount) {
+    public void addIncome(int personIndex, String description, double amount) {
         String infoString = "Method addIncome() called";
         logger.getLogger().log(Level.INFO, infoString);
-        getPerson(index).addIncome(description, amount);
+        getPerson(personIndex).addIncome(description, amount);
+    }
+
+    /**
+     * Removes an income from the list of incomes of the specified person.
+     *
+     * @param personIndex The index of the person
+     * @param incomeIndex The index of the income to be removed
+     */
+    public void deleteIncome(int personIndex, int incomeIndex) {
+        String infoString = "Method removeIncome() called";
+        logger.getLogger().log(Level.INFO, infoString);
+        getPerson(personIndex).deleteIncome(incomeIndex);
     }
 }
