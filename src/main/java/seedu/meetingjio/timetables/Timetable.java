@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Timetable {
     private final String name;
-    private final ArrayList<Event> list;
+    private ArrayList<Event> list;
 
     public Timetable(String name) {
         this.name = name;
@@ -77,6 +77,52 @@ public class Timetable {
             }
         }
         return false;
+    }
+
+    /**
+     * Given 2 events, this method is used to compare which event comes first.
+     * This is harnessed by tapping on the getDay method for the Event class, to compare the events' day.
+     * As there will be no overlap between each event's timing, checking which event's startTime is earlier is
+     * sufficient to determine which event comes first if both occur on the same day.
+     *
+     * @param E1 The first event to be compared
+     * @param E2 The second event to be compared
+     * @return true if Event E1 comes earlier than Event E2, false otherwise
+     */
+    private boolean isEarlier(Event E1, Event E2) {
+        if (E1.getDay() < E2.getDay()) {
+            return true;
+        } else if (E1.getDay() == E2.getDay() && E1.startTime < E2.startTime) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * This sorting algorithm works by adding the very first event in the timetable's list to the temporary ArrayList.
+     * There will be no error expected as prior to this method, it has already been asserted that there is at least one
+     * event in the timetable's list.
+     * Subsequently, the next event in the timetable's list will be compared with each event in the temporary ArrayList,
+     * and inserted at the appropriate index.
+     * This will continue until there are no more events left in the timetable's list.
+     * Finally, the timetable's list will be replaced with the temporary ArrayList, which is a sorted version of the
+     * timetable's list.
+     */
+    public void sort() {
+        ArrayList<Event> tempList = new ArrayList<>();
+        tempList.add(list.get(0));
+        for (int i = 1; i < list.size(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (isEarlier(list.get(i), tempList.get(j))) {
+                    tempList.add(j, list.get(i));
+                    break;
+                }
+            }
+            if (tempList.size() == i) {
+                tempList.add(list.get(i));
+            }
+        }
+        list = tempList;
     }
 
 }

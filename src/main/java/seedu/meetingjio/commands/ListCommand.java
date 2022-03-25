@@ -11,6 +11,7 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EMPTY_MASTER_TIMETABLE;
 
 public class ListCommand extends Command {
+
     public static final String COMMAND_WORD = "list";
 
     private final String name;
@@ -20,12 +21,12 @@ public class ListCommand extends Command {
     }
 
     /**
-     * List out all entries in the user's timetable.
-     * If there are no lessons found, notify user accordingly.
-     *
+     * Given the name of a user, list out all entries in the user's timetable.
+     * If the supplied parameter is 'all', list out all entries in everyone's timetable.
+     * If no parameter is supplied, programme should inform the user and continue running normally.
      *
      * @param masterTimetable MasterTimetable
-     * @return String containing all of the user's lessons
+     * @return String containing the user's lessons or all users' lessons
      */
     @Override
     public String execute(MasterTimetable masterTimetable) {
@@ -67,6 +68,9 @@ public class ListCommand extends Command {
 
     /**
      * This method is called if the user only wants to list a specific user's timetable.
+     * This method is also called by the Master Timetable method collateAll, which calls listUser for all users.
+     * While executing this method, the timetable is sorted based on the event's day and timing to allow the user to
+     * quickly see his/her events easily.
      *
      * @param user The target user whose timetable is to be shown
      * @param masterTimetable The Master Timetable containing everyone's timetables
@@ -84,6 +88,7 @@ public class ListCommand extends Command {
             return ERROR_EMPTY_LIST;
         }
         assert timetable.size() > 0 : ERROR_EMPTY_LIST;
+        timetable.sort();
         String str = "";
         for (int i = 0; i < timetable.size(); i++) {
             int listIndex = i + 1;
