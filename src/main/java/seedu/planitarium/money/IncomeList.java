@@ -2,6 +2,7 @@ package seedu.planitarium.money;
 
 import seedu.planitarium.ProjectLogger;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
@@ -34,26 +35,13 @@ public class IncomeList extends MoneyList {
      * @param description The description of the user's income
      * @param amount The income amount
      */
-    public void addIncome(String description, double amount) {
+    public void addIncome(String description, double amount, boolean isPermanent) {
         logger.getLogger().log(Level.INFO, LOG_ADD_INC);
         assert (description != null);
         assert (amount >= 0);
         logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
-        this.incomeArrayList.add(new Income(description, amount));
+        this.incomeArrayList.add(new Income(description, amount, isPermanent));
         numberOfIncomes++;
-    }
-
-    /**
-     * Returns the amount of an income object in the list.
-     * @param index The index of the income on the person's income list
-     * @return The income amount
-     */
-    public double getIncomeValue(int index) {
-        logger.getLogger().log(Level.INFO, LOG_GET_INC_VAL);
-        assert (index > ARRAY_INDEX);
-        assert (index <= numberOfIncomes);
-        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
-        return incomeArrayList.get(index - 1).getAmount();
     }
 
     /**
@@ -67,29 +55,6 @@ public class IncomeList extends MoneyList {
         logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
         incomeArrayList.remove(index - 1);
         numberOfIncomes--;
-    }
-
-    /**
-     * Returns the description of an income object from a
-     * person's Income list.
-     * @param index The index of the income on the list
-     * @return The description of the income
-     */
-    public String getDescription(int index) {
-        logger.getLogger().log(Level.INFO, LOG_DESC);
-        assert (index > ARRAY_INDEX);
-        assert (index <= numberOfIncomes);
-        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
-        return incomeArrayList.get(index - 1).getDescription();
-    }
-
-    /**
-     * Returns the number of income in the person's income list.
-     * @return The number of income
-     */
-    public int getNumberOfIncomes() {
-        logger.getLogger().log(Level.INFO, LOG_GET_NUM_INC);
-        return numberOfIncomes;
     }
 
     /**
@@ -114,6 +79,58 @@ public class IncomeList extends MoneyList {
         for (Income item : incomeArrayList) {
             System.out.println(listIndex++ + ". " + item);
         }
+    }
+
+    /**
+     * Returns the number of income in the person's income list.
+     * @return The number of income
+     */
+    public int getNumberOfIncomes() {
+        logger.getLogger().log(Level.INFO, LOG_GET_NUM_INC);
+        return numberOfIncomes;
+    }
+
+    /**
+     * Returns the amount of an income object in the list.
+     * @param index The index of the income on the person's income list
+     * @return The income amount
+     */
+    public double getIncomeValue(int index) {
+        logger.getLogger().log(Level.INFO, LOG_GET_INC_VAL);
+        assert (index > ARRAY_INDEX);
+        assert (index <= numberOfIncomes);
+        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
+        return incomeArrayList.get(index - 1).getAmount();
+    }
+
+    /**
+     * Returns the description of an income object from a
+     * person's Income list.
+     * @param index The index of the income on the list
+     * @return The description of the income
+     */
+    public String getDescription(int index) {
+        logger.getLogger().log(Level.INFO, LOG_DESC);
+        assert (index > ARRAY_INDEX);
+        assert (index <= numberOfIncomes);
+        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
+        return incomeArrayList.get(index - 1).getDescription();
+    }
+
+    public LocalDate getInitDate(int index) {
+        logger.getLogger().log(Level.INFO, LOG_DATE);
+        assert (index > ARRAY_INDEX);
+        assert (index <= numberOfIncomes);
+        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
+        return incomeArrayList.get(index - 1).getInitDate();
+    }
+
+    public boolean isPermanent(int index) {
+        logger.getLogger().log(Level.INFO, LOG_PERM);
+        assert (index > ARRAY_INDEX);
+        assert (index <= numberOfIncomes);
+        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
+        return incomeArrayList.get(index - 1).isPermanent();
     }
 
     public ArrayList<Income> getIncomeArrayList() {
