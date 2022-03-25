@@ -44,15 +44,34 @@ public class ListCommand extends Command {
 
     }
 
+    /**
+     * This method gets the masterTimetable to call the collateAll method to get the combined timetables of everyone.
+     * If the masterTimetable is empty (eg when 'list all' is the user's first input), the programme should inform
+     * the user gracefully.
+     * The returned string needs to be truncated at the end otherwise there will be an extra newline character.
+     *
+     * @param masterTimetable The Master Timetable containing everyone's timetables
+     * @return truncatedString A string containing the labelled timetables of everyone, without the newline
+     * character at the end. If the string has no contents, an error message is shown to inform the user accordingly.
+     */
     private String listAll(MasterTimetable masterTimetable) {
-        String str = masterTimetable.printAll(masterTimetable);
+        String str = masterTimetable.collateAll(masterTimetable);
         if (str.length() == 0) {
             return ERROR_EMPTY_MASTER_TIMETABLE;
         }
         assert str.length() - 1 >= 0 : ERROR_EMPTY_MASTER_TIMETABLE;
-        return str.substring(0, str.length() - 1); //remove last newline character
+        String truncatedString = str.substring(0, str.length() - 1);
+        return truncatedString;
     }
 
+    /**
+     * This method is called if the user only wants to list a specific user's timetable.
+     *
+     * @param user The target user whose timetable is to be shown
+     * @param masterTimetable The Master Timetable containing everyone's timetables
+     * @return str The string containing the user's timetable. If the user does not exist, or the user's timetable is
+     * empty, an appropriate error message will be shown to inform the user accordingly.
+     */
     public static String listUser(String user, MasterTimetable masterTimetable) {
         Timetable timetable;
         try {
