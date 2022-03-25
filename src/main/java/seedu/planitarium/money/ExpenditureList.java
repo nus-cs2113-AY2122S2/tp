@@ -12,6 +12,8 @@ public class ExpenditureList extends MoneyList {
 
     private static final String LOG_CLASS_NAME = ExpenditureList.class.getSimpleName();
     private static final String LOG_FILE_PATH = LOG_CLASS_NAME + ".log";
+    protected static final ProjectLogger logger = new ProjectLogger(LOG_CLASS_NAME, LOG_FILE_PATH);
+
     private static final String LOG_INIT = "Logger for " + LOG_CLASS_NAME + " initialised.";
     private static final String LOG_ADD_EXP = "addExpenditure()";
     private static final String LOG_GET_EXP_VAL = "getExpenditureValue()";
@@ -24,7 +26,6 @@ public class ExpenditureList extends MoneyList {
      */
     public ExpenditureList() {
         this.expenditureArrayList = new ArrayList<>();
-        logger = new ProjectLogger(LOG_CLASS_NAME, LOG_FILE_PATH);
         logger.getLogger().log(Level.INFO, LOG_INIT);
     }
 

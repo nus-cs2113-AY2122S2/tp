@@ -4,8 +4,6 @@ import seedu.planitarium.ProjectLogger;
 
 public abstract class MoneyList {
 
-    protected ProjectLogger logger;
-
     public static final int ARRAY_INDEX = 0;
     protected static final String LOG_ASSERT_PASSED = "Assertion passed.";
     protected static final String LOG_REMOVE = "remove()";
