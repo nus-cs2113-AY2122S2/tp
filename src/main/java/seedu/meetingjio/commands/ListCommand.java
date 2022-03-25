@@ -9,7 +9,6 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EMPTY_LIST;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EMPTY_MASTER_TIMETABLE;
-import static seedu.meetingjio.timetables.MasterTimetable.timetables;
 
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
@@ -35,9 +34,9 @@ public class ListCommand extends Command {
             if (user.length() == 0) {
                 throw new MissingValueException();
             } else if (user.equalsIgnoreCase("all")) {
-                return listAll();
+                return listAll(masterTimetable);
             } else {
-                return listUser(user);
+                return listUser(user, masterTimetable);
             }
         } catch (MissingValueException mve) {
             return ERROR_UNSPECIFIED_LIST;
@@ -45,15 +44,8 @@ public class ListCommand extends Command {
 
     }
 
-    private String listAll() {
-        String str = "";
-        for (Timetable timetable : timetables) {
-            String user = timetable.getName();
-            str += user;
-            str += '\n';
-            str += listUser(user);
-            str += '\n';
-        }
+    private String listAll(MasterTimetable masterTimetable) {
+        String str = masterTimetable.printAll(masterTimetable);
         if (str.length() == 0) {
             return ERROR_EMPTY_MASTER_TIMETABLE;
         }
@@ -61,10 +53,10 @@ public class ListCommand extends Command {
         return str.substring(0, str.length() - 1); //remove last newline character
     }
 
-    private String listUser(String user) {
+    public static String listUser(String user, MasterTimetable masterTimetable) {
         Timetable timetable;
         try {
-            timetable = MasterTimetable.getByName(user);
+            timetable = masterTimetable.getByName(user);
         } catch (TimetableNotFoundException tnfe) {
             return ERROR_INVALID_USER;
         }
