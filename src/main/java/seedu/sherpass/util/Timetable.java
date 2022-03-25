@@ -116,7 +116,7 @@ public class Timetable {
                 colFour = (j < filteredTasks.size())
                         ? (filteredTasks.get(j).getIndex() + ". " + filteredTasks.get(j).getDescription())
                         : ui.getRepeatedCharacters(" ", taskLength - STRING_COMPARE_OFFSET);
-                colFive = (j < filteredTasks.size()) ? filteredTasks.get(j).getByDateString()
+                colFive = (j < filteredTasks.size()) ? filteredTasks.get(j).getByDateWithoutTimeString()
                         : ui.getRepeatedCharacters(" ", byDateLength - STRING_COMPARE_OFFSET);
                 j++;
             }
