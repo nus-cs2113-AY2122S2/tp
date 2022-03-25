@@ -1,5 +1,6 @@
 package seedu.duke.controllers;
 
+import seedu.duke.entities.Dish;
 import seedu.duke.exceptions.OperationTerminationException;
 import seedu.duke.manager.DishManager;
 import seedu.duke.manager.OrderManager;
@@ -54,7 +55,8 @@ public class OrderController extends Controller {
         int createdOrderIdx = orderManager.getOrderCount();
         try {
             while (index >= 0) {
-                orderManager.addDishToOrder(index, createdOrderIdx, dishManager);
+                Dish dish = dishManager.getDishes().get(index);
+                orderManager.addDishToOrder(dish, createdOrderIdx);
                 index = InputParser.getInteger("You have "
                         + orderManager.getOrders().get(createdOrderIdx).getDishCount()
                         + " dish(es), some more: \n");
