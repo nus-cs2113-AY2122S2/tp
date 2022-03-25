@@ -60,14 +60,27 @@ public class Ui {
         }
     }
 
+    private void showReminderMessage(TaskList taskList, Ui ui) {
+        int pendingTaskCount = taskList.getPendingTasksCount();
+        if (pendingTaskCount > 0) {
+            ui.showToUser("You have " + pendingTaskCount + " pending task(s).\n"
+                    + "Head over to the study session with 'study' to complete them.");
+        }
+    }
+
     /**
      * Prints a welcome message to greet the user.
+     * Shows the user the timetable and the number of pending tasks.
+     *
+     * @param tasklist List of task in array representation
+     * @param ui User interface
      */
     public void showWelcomeMessage(TaskList tasklist, Ui ui) {
         String welcomeMessage = PARTITION_LINE + LS + WELCOME_MESSAGE_ONE
                 + LOGO + LS + PARTITION_LINE + LS + WELCOME_MESSAGE_TWO;
         showToUser(welcomeMessage);
-        //Timetable.showTodaySchedule(tasklist, ui);
+        Timetable.showTodaySchedule(tasklist, ui);
+        showReminderMessage(tasklist, ui);
         showLine();
     }
 

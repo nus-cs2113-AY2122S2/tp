@@ -29,7 +29,7 @@ public class HelpCommand extends Command {
         String[] helpCommands = {MarkCommand.COMMAND_WORD, UnmarkCommand.COMMAND_WORD,
             AddCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD,
             StudyCommand.COMMAND_WORD, ExitCommand.COMMAND_WORD,
-            EditCommand.COMMAND_WORD};
+            EditCommand.COMMAND_WORD, ShowCommand.MESSAGE_USAGE};
         for (String helpCommand : helpCommands) {
             ui.showLine();
             showSpecificHelpCommand(ui, helpCommand);
@@ -57,8 +57,11 @@ public class HelpCommand extends Command {
         case ClearCommand.COMMAND_WORD:
             ui.showToUser(ClearCommand.MESSAGE_USAGE);
             break;
+        case ShowCommand.COMMAND_WORD:
+            ui.showToUser(ShowCommand.MESSAGE_USAGE);
+            break;
         case StudyCommand.COMMAND_WORD:
-            ui.showToUser(StudyCommand.COMMAND_USAGE);
+            ui.showToUser(StudyCommand.MESSAGE_USAGE);
             break;
         case ExitCommand.COMMAND_WORD:
             ui.showToUser(ExitCommand.MESSAGE_USAGE);

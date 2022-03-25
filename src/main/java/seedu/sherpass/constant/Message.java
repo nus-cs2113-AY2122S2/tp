@@ -12,7 +12,8 @@ public class Message {
             + "2) 1 hour\n"
             + "3) 1.5 hours\n\n"
             + "For testing purposes, you may start a 30s timer\nwith mode number 0.\n"
-            + "Otherwise, feel free to choose your own timer with\n'start /custom <timer_duration>'.";
+            + "Feel free to choose your own timer with\n'start /custom <timer_duration>'.\n"
+            + "Otherwise, you can start a stopwatch with 'start stopwatch'.";
     public static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon! :)";
     public static final String GOODBYE_MESSAGE_STUDY = "Leaving study session...\n"
             + "Welcome back to the main session! How can I help you?";
@@ -21,7 +22,7 @@ public class Message {
     public static final String HELP_MESSAGE_SPECIFIC_COMMAND = "\n\nFor more information on "
             + "the command you wish to execute,\nenter 'help <command>' e.g. help add";
     public static final String HELP_MESSAGE_QUICK_START_COMMAND = "Command input quick start guide:\n"
-            + "1) List: list\n"
+            + "1) Show: show today/week/<date>/all/todo\n"
             + "2) Mark: mark <list_index>\n"
             + "3) Unmark: unmark <list_index>\n"
             + "4) Add: add <task_description> /by <task_due_date> /do_on <date_to_work_on_task>\n"
@@ -35,7 +36,8 @@ public class Message {
             + "3) Stop timer: stop\n"
             + "4) Pause timer: pause\n"
             + "5) Resume timer: resume\n"
-            + "6) Exit study mode: leave";
+            + "6) Exit study mode: leave\n"
+            + "7) Mark task as done: mark <task_index>";
 
     public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after end time!";
     public static final String ERROR_EMPTY_DESCRIPTION_MESSAGE = "Description cannot be blank!";

@@ -4,6 +4,7 @@ import seedu.sherpass.enums.Frequency;
 
 import java.time.LocalDateTime;
 import static seedu.sherpass.constant.DateAndTimeFormat.outputWithTimeFormat;
+import static seedu.sherpass.constant.Message.EMPTY_STRING;
 
 public class Task {
     protected String description;
@@ -109,7 +110,7 @@ public class Task {
         if (byDate != null) {
             return byDate.format(outputWithTimeFormat);
         }
-        return "";
+        return EMPTY_STRING;
     }
 
     /**
