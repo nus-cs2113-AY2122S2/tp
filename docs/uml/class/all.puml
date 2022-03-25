@@ -100,7 +100,6 @@ class DishController {
 }
 
 class Order {
-    -dishes: ArrayList<Dish>
     +Order(List<Dish>)
     +Order()
     +removeDishFromOrderByIndex(int): void
@@ -157,5 +156,6 @@ Controller <|-- OrderController
 Order "0..*\norders" <-- OrderManager: manages <
 OrderManager "1\norderManager" <--* OrderController
 OrderManager .. DishManager
+Order .. Dish
 
 @enduml
