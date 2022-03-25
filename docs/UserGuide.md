@@ -75,7 +75,7 @@ displayed in an easy-to-read summary.
 - Parameters with an ellipsis `...` indicate that the user can supply multiple values.
   - Example: `[COST1 COST2 ...]`
 - Parameters enclosed within `[<` and `>]` indicates that the arguments are optional.
-  - Example: `[</gst [GST_PERCENT]>] [</sc [SERVICE_CHARGE]>]`
+  - Example: `[</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
 
 ## Quick Start
 

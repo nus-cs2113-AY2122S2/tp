@@ -45,7 +45,7 @@ public class ActivityCreateCommand extends Command {
      *                      who are involved in the activity.
      * @param costList      A double array object that represents the respective costs of
      *                      each person involved in the activity.
-     * @param gst           A double that represents the gst to be included for the cost of the activity.
+     * @param gst           A double that represents the GST percentage to be included for the cost of the activity.
      * @param serviceCharge A double that represents the service charge to be included for the cost of the activity.
      */
     public ActivityCreateCommand(int sessionId, String activityName, double totalCost, String payer,
@@ -146,8 +146,8 @@ public class ActivityCreateCommand extends Command {
 
     /**
      * Updates cost list by including the extra charges.
-     * Extra charges may include gst and service charge.
-     * Assumption: gst and service charge are non-negative values.
+     * Extra charges may include GST and service charge.
+     * Assumption: GST and service charge are non-negative values.
      */
     private void updateCostListWithExtraCharges() {
         double extraCharges = getExtraCharges();
@@ -167,8 +167,8 @@ public class ActivityCreateCommand extends Command {
 
     /**
      * Updates total cost by including the extra charges.
-     * Extra charges may include gst and service charge.
-     * Assumption: gst and service charge are non-negative values.
+     * Extra charges may include GST and service charge.
+     * Assumption: GST and service charge are non-negative values.
      */
     private void updateCostWithExtraCharges() {
         double extraCharges = getExtraCharges();
