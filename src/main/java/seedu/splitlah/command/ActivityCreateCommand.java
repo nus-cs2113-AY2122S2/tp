@@ -3,14 +3,13 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
+import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -63,25 +62,6 @@ public class ActivityCreateCommand extends Command {
         this.costList = costList;
         this.gst = gst;
         this.serviceCharge = serviceCharge;
-    }
-
-    /**
-     * Checks if String object array of names has duplicated names.
-     *
-     * @return true if it contains duplicates,
-     *         false otherwise.
-     */
-    private boolean hasNameDuplicates() {
-        Set<String> nameSet = new HashSet<>();
-        for (String name : involvedList) {
-            String nameToBeAdded = name.toLowerCase();
-            if (!nameSet.add(nameToBeAdded)) {
-                return true;
-            }
-        }
-        assert nameSet.size() == involvedList.length :
-                Message.ASSERT_ACTIVITYCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED;
-        return false;
     }
 
     /**
@@ -230,7 +210,7 @@ public class ActivityCreateCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        boolean hasDuplicates = hasNameDuplicates();
+        boolean hasDuplicates = PersonList.hasNameDuplicates(involvedList);
         if (hasDuplicates) {
             manager.getUi().printlnMessage(Message.ERROR_ACTIVITYCREATE_DUPLICATE_NAME);
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST);
