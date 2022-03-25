@@ -2,8 +2,11 @@
 !include style.puml
 skinparam arrowColor #BLACK
 
+Title : Execute(userInput) for "deletein /u 1 /g 2 /r 1"
+
 box Parser LOGIC_COLOR_T1
-Participant "<color:maroon><<Class>>\nParser" as Parser LOGIC_COLOR_T2
+Participant "<color:pink><<Class>>\nParser" as Parser LOGIC_COLOR_T4
+Participant "<color:pink><<Class>>\nParserUtility" as UParser LOGIC_COLOR_T2
 end box
 
 box Family MODEL_COLOR_T1
@@ -18,23 +21,37 @@ end box
 
 [-> Parser : parseKeyword(userInput)
 activate Parser
+Parser -> UParser : parseDelimitedTerm(userInput, " ")
+activate UParser
+UParser --> Parser
+deactivate UParser
 Parser -->[ : "deletein":String
 deactivate Parser
 
-[-[hidden]> Parser
-
 [-> Parser : parseUserIndex(userInput) 
 activate Parser
+Parser -> UParser : parseDelimitedTerm(userInput, "/u")
+activate UParser
+UParser --> Parser
+deactivate UParser
 Parser -->[ : "1":String
 deactivate Parser
 
 [-> Parser : parseGroupIndex(userInput) 
 activate Parser
+Parser -> UParser : parseDelimitedTerm(userInput, "/g")
+activate UParser
+UParser --> Parser
+deactivate UParser
 Parser -->[ : "2":String
 deactivate Parser
 
 [-> Parser : parseRecordIndex(userInput)
 activate Parser
+Parser -> UParser : parseDelimitedTerm(userInput, "/r")
+activate UParser
+UParser --> Parser
+deactivate UParser
 Parser -->[ : "1":String
 deactivate Parser
 
@@ -42,8 +59,16 @@ deactivate Parser
 activate Parser
 Parser -> Family : getNumberOfGroups()
 activate Family
-Family --> Parser
+Family --> Parser : maxIdx:int
 deactivate Family
+Parser -> UParser : checkTooHighIndex(1, maxIdx)
+activate UParser
+UParser --> Parser
+deactivate UParser
+Parser -> UParser : checkTooLowIndex(1, minIdx)
+activate UParser
+UParser --> Parser
+deactivate UParser
 Parser -->[ : 1:int
 deactivate Parser
 
@@ -51,8 +76,16 @@ deactivate Parser
 activate Parser
 Parser -> PLIST : getNumberOfMembers()
 activate PLIST
-PLIST --> Parser
+PLIST --> Parser : maxIdx:int
 deactivate PLIST
+Parser -> UParser : checkTooHighIndex(2, maxIdx)
+activate UParser
+UParser --> Parser
+deactivate UParser
+Parser -> UParser : checkTooLowIndex(2, minIdx)
+activate UParser
+UParser --> Parser
+deactivate UParser
 Parser -->[ : 2:int
 deactivate Parser
 
@@ -64,8 +97,16 @@ Person -> ILIST : getNumberOfIncomes()
 activate ILIST
 ILIST --> Person
 deactivate ILIST
-Person --> Parser
+Person --> Parser  : maxIdx:int
 deactivate Person
+Parser -> UParser : checkTooHighIndex(1, maxIdx)
+activate UParser
+UParser --> Parser
+deactivate UParser
+Parser -> UParser : checkTooLowIndex(1, minIdx)
+activate UParser
+UParser --> Parser
+deactivate UParser
 Parser -->[ : 1:int
 deactivate Parser
 
