@@ -18,7 +18,7 @@ pl -> pl : checkPlanNameValidity(userPlanNameInput)
 activate pl
 return :boolean
 
-opt hasValidPlanName
+opt !hasValidPlanName
 create ":InvalidPlanException" AS ipe
 pl -> ipe : throw new InvalidPlanException
 activate ipe
