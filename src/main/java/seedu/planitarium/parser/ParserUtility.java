@@ -85,7 +85,8 @@ public class ParserUtility {
      *
      * @param userInput User input to be checked.
      * @param delimiter A delimiter used to separate details.
-     * @throws MissingDelimiterException if user input does not contain the delimiter.
+     * @throws MissingDelimiterException   if user input does not contain the delimiter.
+     * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
      */
     protected static void checkContainsOnlyOneDelimiter(String userInput, String delimiter)
             throws MissingDelimiterException, DuplicateDelimiterException {
