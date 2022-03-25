@@ -18,6 +18,7 @@ import java.util.logging.Logger;
  */
 public class PlanList {
     public static final int MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN = 10;
+    public static final String RESERVED_PLAN_NAME = "rest day";
     private WorkoutList workoutList;
     private HashMap<String, Plan> plansHashMapList = new HashMap<>();
     private ArrayList<String> plansDisplayList = new ArrayList<>();
@@ -149,7 +150,7 @@ public class PlanList {
      */
     public boolean checkPlanNameValidity(String userPlanNameInput) {
         String userPlanNameInputLowerCase = userPlanNameInput.toLowerCase();
-        if (userPlanNameInputLowerCase.equals("rest day")) {
+        if (userPlanNameInputLowerCase.equals(RESERVED_PLAN_NAME)) {
             return false;
         }
 
