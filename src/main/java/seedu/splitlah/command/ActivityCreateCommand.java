@@ -18,7 +18,7 @@ import java.util.logging.Level;
  * @author Ivan
  */
 public class ActivityCreateCommand extends Command {
-
+  
     private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
 
     private int sessionId;
