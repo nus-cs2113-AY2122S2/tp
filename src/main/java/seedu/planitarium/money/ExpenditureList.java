@@ -40,7 +40,6 @@ public class ExpenditureList extends MoneyList {
         logger.getLogger().log(Level.INFO, LOG_ADD_EXP);
         assert (description != null);
         assert (amount >= 0);
-        assert
         logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
         this.expenditureArrayList.add(new Expenditure(description, amount, isPermanent));
         numberOfExpenditures++;
