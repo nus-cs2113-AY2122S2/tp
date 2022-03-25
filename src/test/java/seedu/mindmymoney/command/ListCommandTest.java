@@ -19,12 +19,12 @@ class ListCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
         new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand();
-        String listInString = new ListCommand(expenditureTestList).listToString();
+        String listInString = new ListCommand(expenditureTestList).expenditureListToString();
         assertEquals("1. $300.0 on Nike Shoes from Personal\n", listInString);
 
         String inputString2 = "/e cash /c Food /d Cream Pie /a 69 /t 2022-03";
         new AddCommand(inputString2, expenditureTestList, creditCardTestList).executeCommand();
-        listInString = new ListCommand(expenditureTestList).listToString();
+        listInString = new ListCommand(expenditureTestList).expenditureListToString();
         assertEquals("1. $300.0 on Nike Shoes from Personal\n"
                 + "2. $69.0 on Cream Pie from Food\n", listInString);
     }

@@ -3,7 +3,6 @@ package seedu.mindmymoney;
 import seedu.mindmymoney.command.Command;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
-import seedu.mindmymoney.userfinancial.CreditCard;
 
 import java.io.File;
 

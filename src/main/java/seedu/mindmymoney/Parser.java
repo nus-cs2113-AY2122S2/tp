@@ -41,11 +41,11 @@ public class Parser {
             case "add":
                 return new AddCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING], itemList, cardList);
             case "update":
-                return new UpdateCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING], itemList);
+                return new UpdateCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING], itemList, cardList);
             case "list":
-                return new ListCommand(itemList);
+                return new ListCommand(itemList, cardList);
             case "delete":
-                return new DeleteCommand(input, itemList);
+                return new DeleteCommand(input, itemList, cardList);
             case "calculate":
                 return new CalculateInputCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING], itemList);
             default:
