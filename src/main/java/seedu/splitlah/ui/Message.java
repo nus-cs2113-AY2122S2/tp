@@ -129,6 +129,8 @@ public abstract class Message {
             "The input parameters cannot be null.";
     public static final String ASSERT_PARSER_PLACES_NEGATIVE =
             "A number cannot have less than 0 digits before the integer position.";
+    public static final String ASSERT_PARSER_PERCENTAGE_NEGATIVE =
+            "A parsed percentage value cannot be negative.";
 
     // ActivityCost
     public static final String LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_DEFAULT_PARAMS =

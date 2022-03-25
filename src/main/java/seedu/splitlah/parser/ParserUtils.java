@@ -235,7 +235,7 @@ public class ParserUtils {
      * @throws InvalidFormatException If the provided input String object contains characters other than numeric
      *                                characters or a single decimal point character,
      *                                and cannot be parsed as a double,
-     *                                if the double parsed from the input String object is not a positive value,
+     *                                if the double parsed from the input String object is a negative value,
      *                                if the parsed double has more than 2 decimal points, or
      *                                if the parsed double has more than 3 digits before the decimal point.
      */
