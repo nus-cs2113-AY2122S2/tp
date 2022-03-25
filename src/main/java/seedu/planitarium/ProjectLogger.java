@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import seedu.planitarium.ui.UI;
+import seedu.planitarium.global.UI;
 
 public class ProjectLogger {
     private Logger logger;

@@ -6,7 +6,7 @@ import java.util.Scanner;
 import seedu.planitarium.commands.Command;
 import seedu.planitarium.commands.CommandFactory;
 import seedu.planitarium.person.PersonList;
-import seedu.planitarium.ui.UI;
+import seedu.planitarium.global.UI;
 
 public class PlanITarium {
     protected Scanner userInput;
