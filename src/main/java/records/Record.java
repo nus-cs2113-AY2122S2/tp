@@ -18,9 +18,19 @@ public abstract class Record {
         this.date = date;
     }
 
-    /** Return price of the record */
+    /** Returns price of the record */
     public double getPrice() {
         return price;
+    }
+
+    /** Returns name of the record */
+    public String getName() {
+        return name;
+    }
+
+    /** Returns date of the record */
+    public String getDate() {
+        return date;
     }
 
     /**

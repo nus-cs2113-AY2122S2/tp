@@ -16,6 +16,11 @@ public class Product extends Record {
         this.productType = productType;
     }
 
+    /** Returns product type of the record */
+    public String getProductType() {
+        return productType;
+    }
+
     /**
      * @return String information of the product
      */

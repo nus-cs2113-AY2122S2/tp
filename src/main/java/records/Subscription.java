@@ -17,6 +17,11 @@ public class Subscription extends Record {
         this.renewal = renewal;
     }
 
+    /** Returns renewal information of the record */
+    public String getRenewal() {
+        return renewal;
+    }
+
     /**
      * @return String information of the subscription
      */

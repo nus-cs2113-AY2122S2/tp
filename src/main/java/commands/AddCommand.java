@@ -29,6 +29,10 @@ public class AddCommand extends Command {
     /** Record to add to the list of records. */
     private Record toAdd;
 
+    protected Record getToAdd() {
+        return toAdd;
+    }
+
     /**
      * Convenience constructor using raw values.
      *
@@ -37,7 +41,6 @@ public class AddCommand extends Command {
     public void AddProductCommand(String name, double price,
                       String date, String productType) throws IllegalValueException {
         this.toAdd = new Product(name, price, date, productType);
-        ExpenseManager.addToExpense(price);
     }
 
     /**
@@ -59,6 +62,8 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute() {
         recordMgr.addRecord(toAdd);
+
+        ExpenseManager.addToExpense(toAdd.getPrice());
 
         String newTotalExpense = "\nTotal expense: " + ExpenseManager.getTotalExpense();
 
