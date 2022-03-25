@@ -20,7 +20,7 @@ public class MenuItemManager {
         this.menuItems = menuItems;
     }
 
-    public void addMenuItem(MenuItem newMenuItem){
+    public void addMenuItem(MenuItem newMenuItem) {
         menuItems.add(newMenuItem);
     }
 
