@@ -12,15 +12,15 @@ import seedu.splitlah.ui.Message;
  */
 public class ActivityEditCommandParser implements CommandParser<ActivityEditCommand> {
 
-    private final String COMMAND_TEXT = "activity /edit";
+    private static final String COMMAND_TEXT = "activity /edit";
 
     private static final String COMMAND_FORMAT = "Syntax:\n\t";
 
-    private final String COMMAND_FORMAT_FIRST =
+    private static final String COMMAND_FORMAT_FIRST =
             "activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
                     + "/co <TOTAL_COST> [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
-    private final String COMMAND_FORMAT_SECOND =
+    private static final String COMMAND_FORMAT_SECOND =
             "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
                     + "/cl [COST1 COST2…] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
@@ -74,6 +74,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
                     + "\n\t" + COMMAND_FORMAT_SECOND);
         }
 
-        return new ActivityEditCommand(sessionId, activityId, activityName, payer, involvedList, totalCost, costList, gst, serviceCharge);
+        return new ActivityEditCommand(sessionId, activityId, activityName, payer, involvedList, totalCost,
+                costList, gst, serviceCharge);
     }
 }

@@ -64,13 +64,13 @@ public class ActivityEditCommand extends Command {
         TextUI ui = manager.getUi();
         try {
             profile.getSession(sessionId).removeActivity(activityId);
-            ActivityCreateCommand activityCreateCommand = new ActivityCreateCommand(activityId, sessionId, activityName, totalCost,
-                    payer, involvedList, costList, gst, serviceCharge);
+            ActivityCreateCommand activityCreateCommand = new ActivityCreateCommand(activityId, sessionId,
+                    activityName, totalCost, payer, involvedList, costList, gst, serviceCharge);
             activityCreateCommand.run(manager);
         } catch (Exception e) {
             manager.getUi().printlnMessage(e.getMessage());
-            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY +
-                    "\n" + e.getMessage());
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY
+                    + "\n" + e.getMessage());
         }
     }
 }
