@@ -23,18 +23,18 @@ public class AddMenuItemCommand extends Command {
     private static final String INCORRECT_FIELD_MESSAGE = "These fields are incorrect";
 
     public AddMenuItemCommand(String name, String type, String price) throws IllegalArgumentException {
-            System.out.println("reach here -1");
-            checkEmptyField(name, type, price);
-            checkFieldValidity(type,price);
-            System.out.println("reached here 0");
-            try {
-                this.toAdd = new MenuItem(name, type, price);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid type");
-            } catch (NullPointerException e) {
-                System.out.println("Invalid command");
-            }
-            System.out.println("reach here");
+        System.out.println("reach here -1");
+        checkEmptyField(name, type, price);
+        checkFieldValidity(type,price);
+        System.out.println("reached here 0");
+        try {
+            this.toAdd = new MenuItem(name, type, price);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid type");
+        } catch (NullPointerException e) {
+            System.out.println("Invalid command");
+        }
+        System.out.println("reach here");
     }
 
     private void checkFieldValidity(String type, String price) {
@@ -77,15 +77,11 @@ public class AddMenuItemCommand extends Command {
             return new CommandResult(INCORRECT_FIELD_MESSAGE, incorrectFields);
         }
         CommandResult result;
-        System.out.println("inside execute");
-
-            System.out.println("here1111");
-            System.out.println(toAdd.toString());
-            menuItemManager.addMenuItem(toAdd);
-            System.out.println("here22222");
-            result = new CommandResult(SUCCESS_MESSAGE + System.lineSeparator()
-                    + toAdd.getMenuItemInfo());
-
+        System.out.println(toAdd.toString());
+        menuItemManager.addMenuItem(toAdd);
+        System.out.println("here22222");
+        result = new CommandResult(SUCCESS_MESSAGE + System.lineSeparator()
+                + toAdd.getMenuItemInfo());
         return result;
     }
 }
