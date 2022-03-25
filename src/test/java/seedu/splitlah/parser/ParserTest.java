@@ -18,6 +18,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 class ParserTest {
 
     // getCommand()
+    /**
+     * Checks if valid objects of subclasses of Command class are returned when valid inputs are provided by the user.
+     */
     @Test
     void getCommand_validInput_validCommand() {
         // TODO: update with all Command subclasses after their CommandParser is complete
@@ -54,6 +57,10 @@ class ParserTest {
         assertEquals(InvalidCommand.class, command.getClass());
     }
 
+    /**
+     * Checks if an InvalidCommand object is returned when additional irrelevant argument tokens are appended to the 
+     * single token commands (e.g. "help", "exit") as input.
+     */
     @Test
     void getCommand_singleTokenCommandsWithIrrelevantTokens_InvalidCommand() {
         // Single additional token, no delimiters
@@ -82,6 +89,9 @@ class ParserTest {
         assertEquals(InvalidCommand.class, command.getClass());
     }
 
+    /**
+     * Checks if an InvalidCommand object is returned when duplicate valid delimiters are provided by the user.
+     */
     @Test
     void getCommand_duplicateValidDelimiters_InvalidCommand() {
         String inputWithDuplicateValidDelimiters = "session /create /n Class outing /d today /pl Alice /d 25-03-2022";
@@ -89,6 +99,10 @@ class ParserTest {
         assertEquals(InvalidCommand.class, command.getClass());
     }
 
+    /**
+     * Checks if an InvalidCommand object is returned when delimiters not belonging to
+     * commands are provided by the user.
+     */
     @Test
     void getCommand_invalidDelimiterForCommand_InvalidCommand() {
         String inputWithInvalidDelimiter = "session /create /n Outing /d today /pl Alice /co 20";
