@@ -290,7 +290,48 @@ Expected outcome:
     Noted I have removed this module from your schedule:
     [Module] CS2113 Lecture: Thursday, 2pm-4pm
 
+#### Editing a module: `edit`
+Edits an existing module in the schedule.
 
+Format: `edit <index>`
+
+`m/<MODULE_CODE>`
+
+`c/<CATEGORY>`
+
+`d/<DAY>`
+
+`t/<TIME>`
+
+`done`
+
+| Parameter      | Description                       |
+|----------------|-----------------------------------|
+| ```<index> ``` | Index of the module to be edited |
+| ```<MODULE_CODE> ``` | New code for the module                  |
+| ```<CATEGORY> ```    | New category of the module               |
+| ```<DAY> ```         | New class day of the week for the module |
+| ```<TIME> ```        | New class timing for the module          |
+
+Example of usage:
+
+    edit 1
+    m/CS3244
+    done
+
+Expected outcome:
+
+    Here is the module that you have chosen to edit:
+    [Module] CS2113 Lecture: Thursday, 2pm-4pm
+    Choose the part that you would like to edit:
+    m/CS3244
+    [Module] CS3244 Lecture: Thursday, 2pm-4pm
+    done
+    Your Module was successfully edited! Here are the changes
+    [Module] CS3244 Lecture: Thursday, 2pm-4pm
+    Exiting the edit mode
+
+The existing module has been edited to change the module code from CS2113 to CS3244.
 
 ### Contacts Tracker Features
 
