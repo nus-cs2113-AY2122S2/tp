@@ -95,8 +95,7 @@ public class TaskList {
      */
     public void unmarkTask(int markIndex) {
         tasks.get(markIndex).markAsUndone();
-        System.out.println("Ok, I've marked this task as"
-                + " not done yet:\n  " + tasks.get(markIndex));
+        System.out.println("Ok, I've marked this task as" + " not done yet:\n  " + tasks.get(markIndex));
     }
 
 
