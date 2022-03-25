@@ -115,7 +115,7 @@ public class PersonList {
     }
 
     /**
-     * Lists the names of everyone in the array list, followed by their list of income and expenditure.
+     * Lists the names of everyone in the array list and their list of income and expenditure.
      */
     public void list() {
         String infoString = "Method list() called";

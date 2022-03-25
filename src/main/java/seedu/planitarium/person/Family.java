@@ -67,8 +67,8 @@ public class Family {
     /**
      * Removes a person from the array list specified by the group index.
      *
-     * @param personIndex The personIndex of the person to be removed
-     * @param group The personIndex of the group to remove from
+     * @param personIndex The index of the person to be removed
+     * @param group The index of the group to remove from
      */
     public void deletePerson(int personIndex, int group) {
         String infoString = "Method removePerson() called";
@@ -154,5 +154,31 @@ public class Family {
             }
             System.out.println((i + 1) + ". " + generation + ": " + disposable);
         }
+    }
+
+    /**
+     * Lists the names of everyone in the array list specified by the group index and
+     * their list of income and expenditure.
+     *
+     * @param group The index of the group to print
+     */
+    public void detailList(int group) {
+        String infoString = "Method detailList() called";
+        logger.getLogger().log(Level.INFO, infoString);
+        PersonList personList = getList(group);
+        String generation = null;
+        switch (group) {
+        case Constants.PARENTS:
+            generation = "Parents";
+            break;
+        case Constants.MY_GEN:
+            generation = "My generation";
+            break;
+        case Constants.CHILDREN:
+            generation = "Children";
+            break;
+        }
+        System.out.println("For " + generation + ":");
+        personList.list();
     }
 }
