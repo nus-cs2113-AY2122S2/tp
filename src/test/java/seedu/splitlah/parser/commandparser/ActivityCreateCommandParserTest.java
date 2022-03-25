@@ -93,7 +93,7 @@ class ActivityCreateCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidFormatException is thrown when missing delimiters are provided by the user
+     * Checks if an InvalidFormatException is thrown when missing delimiters are detected in the user input
      * and if the exception message is correct.
      */
     @Test
@@ -158,7 +158,7 @@ class ActivityCreateCommandParserTest {
     }
 
     /**
-     * Checks if an InvalidFormatException is thrown when missing arguments are provided by the user
+     * Checks if an InvalidFormatException is thrown when missing arguments are detected in the user input
      * and if the exception message is correct.
      */
     @Test
