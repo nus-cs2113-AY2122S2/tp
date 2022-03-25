@@ -4,6 +4,7 @@ import seedu.equipment.Equipment;
 import seedu.equipment.EquipmentType;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Subclass of Command. Handles listing of all equipment or listing of equipment of specified type.
@@ -57,9 +58,38 @@ public class ListCommand extends Command {
             return new CommandResult(String.format(successMessage, listSize), equipmentArrayList);
         }
 
-        EquipmentType typeToList = EquipmentType.valueOf(commandStrings.get(0));
+        EquipmentType typeToList;
+        try {
+            typeToList = EquipmentType.valueOf(commandStrings.get(0));
+        } catch (IllegalArgumentException e) {
+            return new CommandResult(INCORRECT_ENUM_TYPE);
+        }
+
         equipmentArrayList = equipmentManager.listEquipment(typeToList);
         listSize = equipmentArrayList.size();
         return new CommandResult(String.format(successMessage, typeToList, listSize), equipmentArrayList);
+    }
+
+    /**
+     * Implement equals for JUnit comparisons
+     * Source: https://www.geeksforgeeks.org/overriding-equals-method-in-java/
+     * @param o Any object
+     * @return If two commands are the same
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ListCommand that = (ListCommand) o;
+        return Objects.equals(commandStrings, that.commandStrings);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(commandStrings);
     }
 }

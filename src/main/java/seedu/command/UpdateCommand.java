@@ -29,6 +29,12 @@ public class UpdateCommand extends ModificationCommand {
         prepareModification();
     }
 
+    /**
+     * Updates the equipment of specified serial number with the given update values.
+     * @return different CommandResult is returned depending on situation. The different CommandResult
+     *         represent the situations where serial number is not specified, update of equipment failed
+     *         or update is successful.
+     */
     @Override
     public CommandResult execute() {
         if (getSerialNumber() == null) {
@@ -47,8 +53,15 @@ public class UpdateCommand extends ModificationCommand {
         return serialNumber;
     }
 
+    /**
+     * Generates an ArrayList of Pair.
+     * Pair is a class that was implemented to match each attribute to its value.
+     * By using pair, we are able to update only the values that have been specified to be updated.
+     * @return ArrayList of the Pair of update values and their matching attributes.
+     */
     public ArrayList<Pair<String, ?>> generateUpdatePairs() {
         ArrayList<Pair<String, ?>> pairs = new ArrayList<>();
+  
         if (equipmentName != null) {
             pairs.add(new Pair<>("itemName", equipmentName));
         }
@@ -68,6 +81,10 @@ public class UpdateCommand extends ModificationCommand {
         return pairs;
     }
 
+    /**
+     * Generates the String which specifies which attributes have been updated.
+     * @return String containing update details.
+     */
     public String generateUpdateString() {
         String updateDetails = "";
         if (equipmentName != null) {
