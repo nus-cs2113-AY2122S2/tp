@@ -1,11 +1,19 @@
----
-layout: page
-title: Developer Guide
----
-* Table of Contents
-  {:toc}
+# Table of Content
 
---------------------------------------------------------------------------------------------------------------------
+- [Acknowledgements](#acknowledgements)
+- [Design and Implementation](#**Design-and-Implementation**)
+  - [Architecture](#Architecture)
+  - [Parser](#Parser)
+  - [Update feature](#Update-feature)
+  - [EquipmentManager](#EquipmentManager)
+- [Product scope](#Product scope)
+  - [Target user profile](#Target-user-profile)
+  - [Value proposition](#Value-proposition)
+- [User stories](#User-Stories)
+- [NonFunctional requirements](#NonFunctional Requirements)
+- [Glossary](#Glossary)
+- [Instructions for manual testing](#Instructions-for-manual-testing)
+
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
@@ -128,7 +136,7 @@ The **`EquipmentManager`** is implemented as the main storage unit of all the eq
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
 --------------------------------------------------------------------------------------------------------------------
-## Non-Functional Requirements
+## NonFunctional Requirements
 
 {Give non-functional requirements}
 
