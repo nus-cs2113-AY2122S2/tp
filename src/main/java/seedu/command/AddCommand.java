@@ -64,7 +64,8 @@ public class AddCommand extends ModificationCommand {
      */
     public void addEquipment(ArrayList<String> userInput) throws DuplicateSerialNumberException {
 
-        Equipment newEquipment = new Equipment(equipmentName, serialNumber, equipmentType, cost, purchasedFrom, purchasedDate);
+        Equipment newEquipment = new Equipment(equipmentName, serialNumber, equipmentType, cost, purchasedFrom,
+                purchasedDate);
         equipmentManager.addEquipment(newEquipment);
     }
 
