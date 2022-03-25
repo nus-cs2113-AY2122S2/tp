@@ -91,6 +91,11 @@ public class Ui {
         System.out.println(GOODBYE_MESSAGE);
     }
 
+    public void printEditTaskMessage(String task) {
+        System.out.println("Ok, I've edited this task as such!"
+                + "\n " + task);
+    }
+
     /**
      * Returns a string of repeated characters.
      *

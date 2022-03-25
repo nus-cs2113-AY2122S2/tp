@@ -3,11 +3,13 @@ package seedu.sherpass.task;
 import seedu.sherpass.util.Ui;
 
 import java.time.LocalDate;
-
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Random;
 
 public class TaskList {
     private ArrayList<Task> tasks;
+    private HashSet<Integer> identifierList;
 
     /**
      * Creates a constructor for the class TaskList.
@@ -16,9 +18,12 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> savedTasks) {
         tasks = savedTasks;
+        identifierList = new HashSet<>();
+        refreshIdentifier();
     }
 
     public TaskList() {
+        identifierList = new HashSet<>();
         tasks = new ArrayList<>();
     }
 
@@ -34,17 +39,12 @@ public class TaskList {
     /**
      * Adds a new task to the current array of tasks.
      *
-     * @param taskDescription Description of the task.
-     * @param taskByDate        Due date of the task
-     * @param taskRemindDate    Reminder date of the task
+     * @param newTask The new task to be added to the array.
      */
-    public void addTask(String taskDescription, LocalDate taskByDate, LocalDate taskRemindDate) {
-        Task newTask = new Task(taskDescription, taskByDate, taskRemindDate);
+    public void addTask(Task newTask) {
         tasks.add(newTask);
-        System.out.println("Got it. I've added this task:\n  " + newTask
-                + "\nNow you have " + tasks.size() + " task(s) in the list.");
+        identifierList.add(newTask.getIdentifier());
     }
-
 
     /**
      * Prints all available tasks in the task list.
@@ -95,8 +95,7 @@ public class TaskList {
      */
     public void unmarkTask(int markIndex) {
         tasks.get(markIndex).markAsUndone();
-        System.out.println("Ok, I've marked this task as"
-                + " not done yet:\n  " + tasks.get(markIndex));
+        System.out.println("Ok, I've marked this task as" + " not done yet:\n  " + tasks.get(markIndex));
     }
 
 
@@ -121,11 +120,24 @@ public class TaskList {
      * Returns a boolean value denoting the existence of a task
      * within the task array.
      *
-     * @param deleteIndex Index of a task. Corresponds to its placement in task array.
+     * @param index Index of a task. Corresponds to its placement in task array.
      * @return Returns true if task exists in task array. False otherwise.
      */
-    public boolean isTaskExist(int deleteIndex) {
-        return tasks.get(deleteIndex) != null;
+    public boolean isTaskExist(int index) {
+        try {
+            tasks.get(index);
+            return true;
+        } catch (IndexOutOfBoundsException exception) {
+            return false;
+        }
+    }
+
+    public int getSize() {
+        return tasks.size();
+    }
+
+    public Task getTask(int index) {
+        return tasks.get(index);
     }
 
     /**
@@ -154,6 +166,21 @@ public class TaskList {
         ui.showToUser("Done! Now you have " + tasks.size() + " task(s) in the list.");
     }
 
+    private void refreshIdentifier() {
+        for (Task t : tasks) {
+            identifierList.add(t.getIdentifier());
+        }
+    }
+
+    public int generateIdentifier() {
+        Random generator = new Random();
+        int candidate;
+        do {
+            candidate = generator.nextInt(65536);
+        } while (identifierList.contains(candidate));
+        return candidate;
+    }
+
     /**
      * Return a filtered ArrayList of task according to the date specified.
      *
@@ -163,7 +190,7 @@ public class TaskList {
     public ArrayList<Task> getFilteredTasksByDate(LocalDate dateInput) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
         for (Task task : tasks) {
-            if (hasDoOnDate(task) && task.getDoOnDate().isEqual(dateInput)) {
+            if (hasDoOnDate(task) && task.getDoOnStartDateTime().toLocalDate().isEqual(dateInput)) {
                 filteredTasks.add(task);
             }
         }
@@ -171,7 +198,7 @@ public class TaskList {
     }
 
     private boolean hasDoOnDate(Task task) {
-        return task.getDoOnDate() != null;
+        return task.getDoOnStartDateTime() != null;
     }
 
     /**

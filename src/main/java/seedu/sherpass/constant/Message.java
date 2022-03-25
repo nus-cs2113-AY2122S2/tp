@@ -2,6 +2,7 @@ package seedu.sherpass.constant;
 
 public class Message {
     public static final String EMPTY_STRING = "";
+    public static final String WHITESPACE = " ";
     public static final String WELCOME_MESSAGE_ONE = "Welcome to\n";
     public static final String WELCOME_MESSAGE_TWO = "Here is your schedule for today:";
     public static final String WELCOME_MESSAGE_STUDY = "Gotcha! Entering study mode...\n"
@@ -38,6 +39,14 @@ public class Message {
             + "6) Exit study mode: leave\n"
             + "7) Mark task as done: mark <task_index>";
 
+    public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after end time!";
+    public static final String ERROR_EMPTY_DESCRIPTION_MESSAGE = "Description cannot be blank!";
+    public static final String ERROR_EMPTY_TASKLIST_MESSAGE = "The task list is empty!";
+    public static final String ERROR_MISSING_EDIT_ARGUMENT_MESSAGE = "Missing task description or date argument!";
+    public static final String ERROR_INVALID_FREQUENCY_MESSAGE = "Invalid frequency!";
+    public static final String ERROR_INVALID_INDEX_MESSAGE = "Invalid index!";
+    public static final String ERROR_INVALID_DATETIME_MESSAGE = "Invalid date time format!";
+
     public static final String ERROR_INVALID_INPUT_MESSAGE = "Please key in an appropriate command.\n"
             + HELP_MESSAGE;
     public static final String ERROR_INVALID_STUDY_INPUT_MESSAGE = "Please key in an appropriate command.\n"
@@ -63,6 +72,4 @@ public class Message {
             + "\t'start <mode_number>'\n\n"
             + "or choose your own custom timer with\n"
             + "\t'start /custom <timer_duration>'";
-    public static final String ERROR_DUPLICATE_TASK_MESSAGE_1 = "Skipping task \"";
-    public static final String ERROR_DUPLICATE_TASK_MESSAGE_2 = "\" as it already exists!";
 }
