@@ -13,6 +13,7 @@ import seedu.splitlah.command.SessionDeleteCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
+import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
@@ -414,8 +415,8 @@ public class ParserUtils {
         case SessionCreateCommandParser.COMMAND_TEXT:
             delimiterList = SessionCreateCommandParser.COMMAND_DELIMITERS;
             break;
-        case SessionDeleteCommand.COMMAND_TEXT:
-            delimiterList = SessionDeleteCommand.COMMAND_DELIMITERS;
+        case SessionDeleteCommandParser.COMMAND_TEXT:
+            delimiterList = SessionDeleteCommandParser.COMMAND_DELIMITERS;
             break;
         case SessionSummaryCommandParser.COMMAND_TEXT:
             delimiterList = SessionSummaryCommandParser.COMMAND_DELIMITERS;
@@ -456,7 +457,7 @@ public class ParserUtils {
         switch (commandType.toLowerCase()) {
         case SessionCreateCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case SessionDeleteCommand.COMMAND_TEXT:
+        case SessionDeleteCommandParser.COMMAND_TEXT:
             // Fallthrough
         case SessionSummaryCommandParser.COMMAND_TEXT:
             // Fallthrough

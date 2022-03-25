@@ -17,9 +17,8 @@ import java.util.logging.Level;
  */
 public class SessionCreateCommand extends Command {
 
-    private static final String COMMAND_SUCCESS =
-            "The session was created successfully.\n";
-
+    private static final String COMMAND_SUCCESS = "The session was created successfully.";
+  
     private String sessionName;
     private String[] personNames;
     private LocalDate sessionDate;
@@ -83,7 +82,7 @@ public class SessionCreateCommand extends Command {
         Session newSession = new Session(sessionName, newSessionId, sessionDate, personList, group);
         manager.getProfile().addSession(newSession);
         manager.saveProfile();
-        manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + newSession);
+        manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + newSession);
         Manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONCREATE_SESSION_ADDED + newSessionId);
     }
 }

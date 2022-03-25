@@ -89,7 +89,7 @@ class ProfileTest {
      * a specified session unique identifier is not found.
      */
     @Test
-    public void getSession_invalidSessionId_exceptionThrown() {
+    public void getSession_invalidSessionId_InvalidDataExceptionThrown() {
         int sessionIdToTest = 10;
         try {
             manager.getProfile().getSession(sessionIdToTest);
