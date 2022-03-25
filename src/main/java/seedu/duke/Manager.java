@@ -17,7 +17,9 @@ public class Manager {
      * Main application loop that holds switch case statement.
      */
     public void runLoop() {
+        ui.printLogo();
         ui.printGreeting();
+
         while (!isTerminated) {
             ui.printPrompt();
             String commandWord = ui.readCommand();

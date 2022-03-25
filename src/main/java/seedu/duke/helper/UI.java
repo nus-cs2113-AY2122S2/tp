@@ -20,6 +20,8 @@ public class UI {
         return parser.commandParser(userInput)[0].trim();
     }
 
+
+
     public String readParameters() {
         String[] userInputArray = parser.commandParser(userInput);
         if (userInputArray.length == 1) {
@@ -36,6 +38,18 @@ public class UI {
         printNewLineSeparator();
         printParagraph("Welcome! This is the Hospital Management System.\n"
                 + "Please type in your input");
+    }
+
+    public void printLogo(){
+        String logo = "------------------------------\n"
++ "██╗░░██╗░█████╗░██╗░░░░░██████╗░███╗░░░███╗██╗ \n"
++ "██║░░██║██╔══██╗██║░░░░░██╔══██╗████╗░████║██║ \n"
++ "███████║███████║██║░░░░░██████╔╝██╔████╔██║██║ \n"
++ "██╔══██║██╔══██║██║░░░░░██╔═══╝░██║╚██╔╝██║██║ \n"
++ "██║░░██║██║░░██║███████╗██║░░░░░██║░╚═╝░██║██║ \n"
++ "╚═╝░░╚═╝╚═╝░░╚═╝╚══════╝╚═╝░░░░░╚═╝░░░░░╚═╝╚═╝";
+
+        System.out.println(logo);
     }
 
     public void printHelp() {
