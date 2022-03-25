@@ -3,6 +3,7 @@ package seedu.mindmymoney.command;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.mindmymoney.MindMyMoneyException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -25,7 +26,7 @@ public class HelpCommandTest {
      * Asserts that the help page will be printed when the user requests for it.
      */
     @Test
-    void helpCommand_fromUser_expectHelpPage() {
+    void helpCommand_fromUser_expectHelpPage() throws MindMyMoneyException {
         String helpPage = "---------------------------------------Help Page---------------------------------------\n"
                 + "1. Listing all Expenditures: list\n"
                 + "2. Adding an Expenditure entry: add /e [EXPENDITURE] /c [CATEGORY] "
@@ -38,7 +39,7 @@ public class HelpCommandTest {
                 + "7. Exiting the program: bye\n"
                 + "---------------------------------------------------------------------------------------\n";
 
-        new HelpCommand(true).executeCommand();
+        new HelpCommand(true, "/expenses").executeCommand();
         assertEquals(helpPage.trim(), capturedOut.toString().trim());
     }
 
@@ -46,11 +47,11 @@ public class HelpCommandTest {
      * Asserts that the error message will be printed if an invalid command is received.
      */
     @Test
-    void helpCommand_notFromUser_expectErrorMessage() {
+    void helpCommand_notFromUser_expectErrorMessage() throws MindMyMoneyException {
         String errorMessage = "Invalid command! Type \"help\" to see the list of supported commands"
                 + System.lineSeparator();
 
-        new HelpCommand(false).executeCommand();
+        new HelpCommand(false, "/expenses").executeCommand();
         assertEquals(errorMessage.trim(), capturedOut.toString().trim());
     }
 

@@ -19,12 +19,12 @@ class ListCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
         new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand();
-        String listInString = new ListCommand(expenditureTestList).expenditureListToString();
+        String listInString = new ListCommand("/expenses", expenditureTestList, creditCardTestList).expenditureListToString();
         assertEquals("1. $300.0 on Nike Shoes from Personal\n", listInString);
 
         String inputString2 = "/e cash /c Food /d Cream Pie /a 69 /t 2022-03";
         new AddCommand(inputString2, expenditureTestList, creditCardTestList).executeCommand();
-        listInString = new ListCommand(expenditureTestList).expenditureListToString();
+        listInString = new ListCommand("/expenses", expenditureTestList, creditCardTestList).expenditureListToString();
         assertEquals("1. $300.0 on Nike Shoes from Personal\n"
                 + "2. $69.0 on Cream Pie from Food\n", listInString);
     }
@@ -35,7 +35,8 @@ class ListCommandTest {
     @Test
     void listCommand_emptyList_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
-        ListCommand listCommandTest = new ListCommand(expenditureTestList);
+        CreditCardList creditCardTestList = new CreditCardList();
+        ListCommand listCommandTest = new ListCommand("/expenses", expenditureTestList, creditCardTestList);
         assertThrows(MindMyMoneyException.class, () -> listCommandTest.executeCommand());
     }
 }
