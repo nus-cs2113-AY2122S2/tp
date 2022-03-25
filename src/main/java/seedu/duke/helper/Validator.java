@@ -12,7 +12,7 @@ public class Validator {
 
     /* Validating person attributes */
 
-    private static void validateNric(String nric) throws HalpmiException {
+    public static void validateNric(String nric) throws HalpmiException {
         Pattern nricPattern = Pattern.compile("[A-Z][0-9]{7}[A-Z]");
         Matcher nricMatcher = nricPattern.matcher(nric);
         if (!nricMatcher.matches()) {
@@ -160,7 +160,7 @@ public class Validator {
     }
 
     /* Validate medicine */
-    public static boolean validateMedicine(String[] parameters) {
+    public static void validateMedicine(String[] parameters) throws HalpmiException{
         assert parameters.length == 6 : "Validate failed to check parameter length";
         boolean check = true;
         for (int i = 0; i < 5; i++) {
@@ -181,7 +181,9 @@ public class Validator {
                 break;
             }
         }
-        return check;
+        if (!check) {
+            throw new HalpmiException("Some Parameters are invalid!");
+        }
     }
 
     /* Validate appointment */

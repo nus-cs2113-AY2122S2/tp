@@ -53,7 +53,12 @@ public class Storage {
         while (reader.hasNext()) {
             String line = reader.nextLine();
             String[] parameters = line.split(",");
-            patients.add(parameters);
+            try {
+                patients.add(parameters);
+            } catch (DuplicateEntryException e) {
+                continue;
+            }
+
         }
     }
 
@@ -63,7 +68,11 @@ public class Storage {
         while (reader.hasNext()) {
             String line = reader.nextLine();
             String[] parameters = line.split(",");
-            doctors.add(parameters);
+            try {
+                doctors.add(parameters);
+            } catch (DuplicateEntryException e) {
+                continue;
+            }
         }
     }
 

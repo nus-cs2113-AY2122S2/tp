@@ -8,7 +8,7 @@ import seedu.duke.helper.UI;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-public class MedicineList {
+public class MedicineList extends List {
     private ArrayList<Medicine> medicines = new ArrayList<>();
 
     public int getSize() {
@@ -26,7 +26,7 @@ public class MedicineList {
 
     public void add(String[] parameterArray) throws DuplicateEntryException {
         if (search(parameterArray[0]) != null) {
-            throw new DuplicateEntryException();
+            throw new DuplicateEntryException("Medicine with given Batch ID already exists!");
         }
         Medicine newMedicine = new Medicine(parameterArray[0], parameterArray[1],
                 Integer.parseInt(parameterArray[2]), parameterArray[3], parameterArray[4],
@@ -41,7 +41,7 @@ public class MedicineList {
                 + medicine.getSideEffects() + ", " + Integer.toString(medicine.getQuantity()));
     }
 
-    public void viewMedicine() {
+    public void view() {
         if (getSize() == 0) {
             UI.printParagraph("There are no medicines currently.");
             return;
@@ -55,7 +55,7 @@ public class MedicineList {
     }
 
     //todo: please change logic
-    public void viewMedicine(String parameters) {
+    public void view(String parameters) {
         if (getSize() == 0) {
             UI.printParagraph("There are no medicines matching the given name.");
             return;
@@ -73,24 +73,24 @@ public class MedicineList {
         }
     }
 
-    public void deleteMedicine(String medicineId) throws NotFoundException {
+    public void remove(String medicineId) throws NotFoundException {
         for (int i = 0; i < getSize(); i++) {
             if (medicines.get(i).getMedicineId().equals(medicineId)) {
                 medicines.remove(i);
                 return;
             }
         }
-        throw new NotFoundException();
+        throw new NotFoundException("There are no medicines with given Batch ID!");
     }
 
-    public void editMedicine(String[] parameterArray) throws NotFoundException {
+    public void edit(String[] parameterArray) throws NotFoundException {
         if (search(parameterArray[0]) != null) {
             Medicine medicine = search(parameterArray[0]);
             medicine.edit(parameterArray[1], Integer.parseInt(parameterArray[2]), parameterArray[3], parameterArray[4],
                     Integer.parseInt(parameterArray[5]));
             return;
         }
-        throw new NotFoundException();
+        throw new NotFoundException("There are no medicines with given Batch ID!");
     }
 
     public ArrayList<Medicine> getList() {
