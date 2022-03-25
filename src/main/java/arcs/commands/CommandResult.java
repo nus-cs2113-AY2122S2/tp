@@ -4,22 +4,22 @@ import java.util.ArrayList;
 
 public class CommandResult {
     private String feedbackToUser;
-    private ArrayList<String> routesInfo = null;
+    private ArrayList<String> commandInfo = null;
 
     public CommandResult(String feedbackToUser) {
         this.feedbackToUser = feedbackToUser;
     }
 
-    public CommandResult(String feedbackToUser, ArrayList<String> routesInfo) {
+    public CommandResult(String feedbackToUser, ArrayList<String> commandInfo) {
         this.feedbackToUser = feedbackToUser;
-        this.routesInfo = routesInfo;
+        this.commandInfo = commandInfo;
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
-    public ArrayList<String> getRoutesInfo() {
-        return routesInfo;
+    public ArrayList<String> getCommandInfo() {
+        return commandInfo;
     }
 }

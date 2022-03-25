@@ -29,6 +29,10 @@ public class MainUi {
         }
     }
 
+    public void displayGetNextUserCommand() {
+        System.out.println(Messages.REQUEST_USER_COMMAND);
+    }
+
     /**
      * Prints welcome message.
      */
@@ -61,16 +65,16 @@ public class MainUi {
 
     public void displayResultToUser(CommandResult result) {
         System.out.println(result.getFeedbackToUser());
-        // Show routes information if it exists
-        showRouteInfo(result);
+        // Show information if it exists
+        showCommandInfo(result);
     }
 
-    private void showRouteInfo(CommandResult commandResult) {
-        ArrayList<String> routesInfo = commandResult.getRoutesInfo();
-        if (routesInfo != null) {
-            for (int i = 1; i <= routesInfo.size(); i++) {
-                System.out.println(i + ".");
-                System.out.println(routesInfo.get(i - 1));
+    private void showCommandInfo(CommandResult commandResult) {
+        ArrayList<String> commandInfo = commandResult.getCommandInfo();
+        if (commandInfo != null) {
+            for (int i = 1; i <= commandInfo.size(); i++) {
+                System.out.print(i + ".");
+                System.out.println(commandInfo.get(i - 1));
             }
         }
     }

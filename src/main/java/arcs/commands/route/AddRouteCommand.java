@@ -3,7 +3,6 @@ package arcs.commands.route;
 import arcs.commands.Command;
 import arcs.commands.CommandResult;
 import arcs.data.Route;
-import arcs.data.exception.ArcsException;
 import arcs.data.exception.DuplicateDataException;
 
 import java.util.ArrayList;

@@ -1,6 +1,11 @@
 package arcs.parser;
 
 
+import arcs.commands.menuitem.FindMenuItemTypeCommand;
+import arcs.commands.menuitem.FindMenuItemNameCommand;
+import arcs.commands.menuitem.AddMenuItemCommand;
+import arcs.commands.menuitem.ListMenuItemsCommand;
+import arcs.commands.menuitem.DeleteMenuItemCommand;
 import arcs.commands.route.AddRouteCommand;
 import arcs.commands.route.DeleteRouteCommand;
 import arcs.commands.route.FindRouteCommand;
@@ -11,7 +16,10 @@ import arcs.commands.UndefinedCommand;
 
 public class Parser {
 
+
     public Command parseCommand(String userInput) {
+
+
         assert userInput != null : "User input is null";
         String[] fullInput = userInput.split(" ", 2);
         String commandWord = fullInput[0];
@@ -30,6 +38,21 @@ public class Parser {
             break;
         case FindRouteCommand.COMMAND_WORD:
             command = prepareFindRouteCommand(argumentLine);
+            break;
+        case AddMenuItemCommand.COMMAND_WORD:
+            command = prepareAddMenuItem(argumentLine);
+            break;
+        case DeleteMenuItemCommand.COMMAND_WORD:
+            command = prepareDeleteMenuItemCommand(argumentLine);
+            break;
+        case ListMenuItemsCommand.COMMAND_WORD:
+            command = new ListMenuItemsCommand();
+            break;
+        case FindMenuItemNameCommand.COMMAND_WORD:
+            command = new FindMenuItemNameCommand(argumentLine);
+            break;
+        case FindMenuItemTypeCommand.COMMAND_WORD:
+            command = new FindMenuItemTypeCommand(argumentLine);
             break;
         case ExitCommand.COMMAND_WORD:
             command = new ExitCommand();
@@ -145,4 +168,56 @@ public class Parser {
         return new FindRouteCommand(date, to, from, time);
     }
 
+    public Command prepareAddMenuItem(String argumentLine) {
+        if (argumentLine == null || argumentLine.isEmpty()) {
+            return new AddMenuItemCommand(null,null,null);
+        }
+        String[] args = argumentLine.split(" ");
+        String menuItemName = null;
+        String menuItemType = null;
+        String menuItemPrice = null;
+        for (String arg: args) {
+            arg = arg.trim();
+            if (arg.isEmpty()) {
+                continue;
+            }
+            String[] argSplit = arg.split("/", 2);
+            if (argSplit.length < 2) {
+                continue;
+            }
+            String field = argSplit[0].trim();
+            String value = argSplit[1].trim();
+            switch (field) {
+            case "name":
+                menuItemName = value;
+                //replace underscore separator with space
+                menuItemName = menuItemName.replace("_", " ");
+                break;
+            case "type":
+                menuItemType = value;
+                break;
+            case "price":
+                menuItemPrice = value;
+                break;
+            default:
+                break;
+            }
+        }
+        System.out.println("here..");
+        return new AddMenuItemCommand(menuItemName,menuItemType,menuItemPrice);
+    }
+
+    public Command prepareDeleteMenuItemCommand(String argumentLine) {
+        if (argumentLine == null || argumentLine.isEmpty()) {
+            return new UndefinedCommand("Index is not specified");
+        }
+        Command result;
+        try {
+            int index = Integer.parseInt(argumentLine);
+            result = new DeleteMenuItemCommand(index);
+        } catch (NumberFormatException e) {
+            result = new UndefinedCommand("Index should be an integer.");
+        }
+        return result;
+    }
 }

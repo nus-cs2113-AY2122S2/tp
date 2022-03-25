@@ -1,6 +1,7 @@
 package arcs;
 
 import arcs.commands.CommandResult;
+import arcs.data.menuitems.MenuItemManager;
 import arcs.data.RouteManager;
 import arcs.parser.Parser;
 import arcs.storage.RouteFileManager;
@@ -13,6 +14,7 @@ import java.io.IOException;
 public class Main {
 
     private RouteManager routeManager;
+    private MenuItemManager menuItemManager;
     private MainUi mainUi;
     private RouteFileManager routeFileManager;
     /**
@@ -40,9 +42,10 @@ public class Main {
         mainUi.displayWelcomeMessage();
 
         do {
+            mainUi.displayGetNextUserCommand();
             String userCommandText = mainUi.getUserCommand();
             command = parser.parseCommand(userCommandText);
-            command.setData(routeManager);
+            command.setData(routeManager, menuItemManager);
             CommandResult result = command.execute();
             mainUi.displayResultToUser(result);
             mainUi.displayLineDivider();
@@ -56,6 +59,7 @@ public class Main {
 
         try {
             routeManager = new RouteManager(routeFileManager.loadData());
+            menuItemManager = new MenuItemManager();
         } catch (IOException e) {
             mainUi.displayMessages(e.getMessage());
             routeManager = new RouteManager();
