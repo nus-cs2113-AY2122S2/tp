@@ -40,12 +40,12 @@ public class AddCommand extends Command {
     }
 
     /**
-     *
      * Finds addInput string if it contains CREDIT_CARD flag.
      */
     private boolean hasCreditCardFlag() {
         return addInput.contains(FLAG_OF_CREDIT_CARD);
     }
+
     /**
      * Indicates whether the program should exit.
      *
@@ -89,7 +89,7 @@ public class AddCommand extends Command {
 
     /**
      * Inserts a CreditCard object into user's list of credit card(s).
-     * @throws MindMyMoneyException
+     * @throws MindMyMoneyException Exception thrown when input is invalid
      */
     public void addCreditCard() throws MindMyMoneyException {
         //Parse data from input
@@ -113,7 +113,7 @@ public class AddCommand extends Command {
         System.out.print(System.lineSeparator());
     }
 
-    public void executeCommand() throws MindMyMoneyException{
+    public void executeCommand() throws MindMyMoneyException {
         if (hasCreditCardFlag()) {
             System.out.println(hasCreditCardFlag());
             addCreditCard();

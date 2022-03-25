@@ -6,7 +6,12 @@ import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.CreditCard;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
-import static seedu.mindmymoney.constants.Flags.*;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_NAME;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CASHBACK;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_LIMIT;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_BALANCE;
+import static seedu.mindmymoney.constants.Flags.FLAG_END_VALUE;
 import static seedu.mindmymoney.constants.Indexes.SPLIT_LIMIT;
 import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM_IN_STRING;
@@ -87,9 +92,9 @@ public class UpdateCommand extends Command {
 
     /**
      * Updates a Credit Card entry in user's credit card list.
-     * @throws MindMyMoneyException
+     * @throws MindMyMoneyException Exception thrown when incorrect input is given
      */
-    public void updateCreditCard () throws MindMyMoneyException {
+    public void updateCreditCard() throws MindMyMoneyException {
         try {
             String[] parseUpdateInput = updateInput.split(" ");
 
