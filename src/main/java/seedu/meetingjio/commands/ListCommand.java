@@ -52,7 +52,8 @@ public class ListCommand extends Command {
      *
      * @param masterTimetable The Master Timetable containing everyone's timetables
      * @return truncatedString A string containing the labelled timetables of everyone, without the newline
-     * character at the end. If the string has no contents, an error message is shown to inform the user accordingly.
+     *     character at the end. If the string has no contents, an error message is shown to inform the user
+     *     accordingly.
      */
     private String listAll(MasterTimetable masterTimetable) {
         String str = masterTimetable.collateAll(masterTimetable);
@@ -70,7 +71,7 @@ public class ListCommand extends Command {
      * @param user The target user whose timetable is to be shown
      * @param masterTimetable The Master Timetable containing everyone's timetables
      * @return str The string containing the user's timetable. If the user does not exist, or the user's timetable is
-     * empty, an appropriate error message will be shown to inform the user accordingly.
+     *     empty, an appropriate error message will be shown to inform the user accordingly.
      */
     public static String listUser(String user, MasterTimetable masterTimetable) {
         Timetable timetable;
