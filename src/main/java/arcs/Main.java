@@ -42,13 +42,13 @@ public class Main {
         mainUi.displayWelcomeMessage();
 
         do {
+            mainUi.displayGetNextUserCommand();
             String userCommandText = mainUi.getUserCommand();
             command = parser.parseCommand(userCommandText);
             command.setData(routeManager, menuItemManager);
             CommandResult result = command.execute();
             mainUi.displayResultToUser(result);
             mainUi.displayLineDivider();
-            mainUi.displayGetNextUserCommand();
         } while (!command.isExit());
 
         saveData();
