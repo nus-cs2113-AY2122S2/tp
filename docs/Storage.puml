@@ -4,43 +4,43 @@ skinparam arrowThickness 1.1
 package storage {
     interface Storage <T extends Object> {
         --
-        + writeData(T object, String path): void
-        + loadData(String path): T
-        + createTargetFile(String path): void
+        + writeData(object: T, path: String): void
+        + loadData(path: String): T
+        + createTargetFile(path: String): void
 
     }
 
     abstract class JsonStorage <T extends Object> implements Storage {
        --
-       + writeData(T object, String path): void
-       + {abstract} loadData(String path): T
-       + createTargetFile(String path): void
+       + writeData(object: T, path: String): void
+       + {abstract} loadData(path: String): T
+       + createTargetFile(path: String): void
     }
 
     abstract class ListStorage <ModHappyT extends Object> extends JsonStorage {
        --
-       + {abstract} loadData(String path): ArrayList<ModHappyT>
+       + {abstract} loadData(path: String): ArrayList<ModHappyT>
     }
 
     ListStorage ..> JsonStorage : <<bind>>\nT -> ArrayList<ModHappyT>
 
     class ConfigurationStorage extends JsonStorage {
        --
-       + loadData(String path): Configuration
+       + loadData(path: String): Configuration
     }
 
     ConfigurationStorage ..> JsonStorage : <<bind>>\nT -> Configuration
 
     class ModuleListStorage extends ListStorage {
        --
-       + loadData(String path): ArrayList<Module>
+       + loadData(path: String): ArrayList<Module>
     }
 
     ModuleListStorage ..> ListStorage : <<bind>>\nModHappyT -> Module
 
     class TaskListStorage extends ListStorage {
        --
-       + loadData(String path):ArrayList<Task>
+       + loadData(path: String):ArrayList<Task>
     }
 
     TaskListStorage ..> ListStorage : <<bind>>\nModHappyT -> Task
@@ -63,8 +63,5 @@ hide SaveCommand methods
 
 Main--> Storage
 SaveCommand --> Storage
-
-
-
 
 @enduml

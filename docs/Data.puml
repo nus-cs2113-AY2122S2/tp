@@ -3,12 +3,12 @@
 package data {
     class ModuleList {
         --
-        + addModule(Module m): Module
-        + removeModule(String moduleCode): Module
-        + getModule(String moduleCode): Module
+        + addModule(m: Module): Module
+        + removeModule(moduleCode: String): Module
+        + getModule(moduleCode: String): Module
         + getGeneralTasks(): Module
-        + initialiseGeneralTasksFromTaskList(ArrayList<Task> list): void
-        + isModuleExists(String moduleCode): boolean
+        + initialiseGeneralTasksFromTaskList(list: ArrayList<Task>): void
+        + isModuleExists(moduleCode: String): boolean
     }
 
     class Module {
@@ -17,7 +17,7 @@ package data {
         - isGeneralTask: boolean
         - modularCredit: int
         --
-        + addTask(Task task): void
+        + addTask(task: Task): void
         + printModuleTaskList(): String
         + printModuleTaskListWithTag(): String
         + toString(): String
@@ -25,12 +25,12 @@ package data {
 
     class TaskList {
         --
-        + addTask(Task task): Task
-        + removeTask(int index): Task
-        + addTag(String tagDescription, int index): Task
-        + deleteTag(String tagDescription, int index): Task
-        + getAllTasks(String indent): String
-        + getTasksWithTag(String indent, String tag): String
+        + addTask(task: Task): Task
+        + removeTask(index: int): Task
+        + addTag(tagDescription: String, index: int): Task
+        + deleteTag(tagDescription: String, index: int): Task
+        + getAllTasks(indent: String): String
+        + getTasksWithTag(indent: String, tag: String): String
         + size(): int
     }
 

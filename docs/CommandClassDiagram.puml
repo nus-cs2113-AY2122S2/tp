@@ -17,8 +17,8 @@ package command {
     -moduleCode: String
     -taskModule: String
     -taskIndex: int
-    +DeleteCommand(String moduleCode)
-    +DeleteCommand(int taskIndex, String taskModule)
+    +DeleteCommand(moduleCode: String)
+    +DeleteCommand(taskModule: String, index: int)
     +execute(): CommandResult
     }
 
@@ -27,7 +27,7 @@ package command {
     }
 
     class CommandResult {
-    +CommandResult(String result)
+    +CommandResult(result: String)
     +toString(): String
     }
 }
