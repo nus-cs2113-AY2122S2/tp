@@ -50,7 +50,7 @@ public class AddRecurringCommand extends Command {
         StringBuilder addedTaskString = new StringBuilder();
         for (Task t : newTasks) {
             taskList.addTask(t);
-            addedTaskString.append(newTasks);
+            addedTaskString.append(t);
             addedTaskString.append("\n ");
         }
         ui.showToUser("Got it. I've added " + newTasks.size() + " tasks:\n " + addedTaskString.toString().trim()
