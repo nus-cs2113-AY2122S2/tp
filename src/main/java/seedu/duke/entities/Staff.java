@@ -17,7 +17,7 @@ public class Staff implements Serializable {
      * @param position  Job position of the Staff.
      * @param salary    Salary of the Staff.
      */
-    public Staff(int staffId, String staffName, String position, double salary) {
+    public Staff(int staffId, String staffName, String position, double salary) throws IllegalArgumentException {
         setStaffId(staffId);
         setStaffName(staffName);
         setPosition(position);
@@ -25,17 +25,16 @@ public class Staff implements Serializable {
     }
 
     private static boolean isValidName(String name) {
-        return !(name == null || name.equals(""));
+        return !(name == null || name.length() == 0);
     }
 
     public int getStaffId() {
         return staffId;
     }
 
-    public void setStaffId(int staffId) {
+    public void setStaffId(int staffId) throws IllegalArgumentException {
         if (staffId <= 0) {
-            System.out.println("Staff ID cannot be zero or negative.");
-            return;
+            throw new IllegalArgumentException("Staff ID cannot be zero or negative.");
         }
         assert staffId > 0 : "Staff ID should be more than 0.";
         this.staffId = staffId;
@@ -45,10 +44,9 @@ public class Staff implements Serializable {
         return staffName;
     }
 
-    public void setStaffName(String staffName) {
+    public void setStaffName(String staffName) throws IllegalArgumentException {
         if (!isValidName(staffName)) {
-            System.out.println("Staff name cannot be null.");
-            return;
+            throw new IllegalArgumentException("Staff name cannot be null.");
         }
         assert isValidName(staffName) : "Staff name should not be null.";
         this.staffName = staffName;
@@ -60,8 +58,7 @@ public class Staff implements Serializable {
 
     public void setPosition(String position) {
         if (!isValidName(position)) {
-            System.out.println("Staff name cannot be null.");
-            return;
+            throw new IllegalArgumentException("Staff position cannot be null.");
         }
         assert isValidName(position) : "Position should not be null.";
         this.position = position;
@@ -73,8 +70,7 @@ public class Staff implements Serializable {
 
     public void setSalary(double salary) {
         if (salary <= 0) {
-            System.out.println("Salary cannot be zero or negative.");
-            return;
+            throw new IllegalArgumentException("Salary cannot be 0 or negative.");
         }
         assert salary > 0 : "Salary should be more than 0.";
         this.salary = salary;
