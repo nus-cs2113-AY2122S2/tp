@@ -48,7 +48,6 @@ public class Parser {
     public static final double MONEY_ZERO = 0.0;
 
     protected static final String ASSERT_INPUT_NOT_NULL = "User input should not be null";
-    protected static final String ASSERT_OUTPUT_NOT_NULL = "Parsed output should not be null";
     protected static final String ASSERT_MONEY_NOT_NULL = "Money input should not be null";
     // protected static final String ASSERT_MONEY_NON_NEGATIVE = "Money output should be non-negative";
     protected static final String ASSERT_USER_INDEX_NOT_NULL = "User index should not be null";
@@ -96,7 +95,7 @@ public class Parser {
             throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_NAME);
-        String name = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_NAME, DELIMITER_BACK).trim();
+        String name = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_NAME).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, name));
         return name;
     }
@@ -114,7 +113,7 @@ public class Parser {
             throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_USER_INDEX);
-        String userIndex = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_USER_INDEX, DELIMITER_BACK).trim();
+        String userIndex = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_USER_INDEX).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, userIndex));
         return userIndex;
     }
@@ -132,7 +131,7 @@ public class Parser {
             throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_DESCRIPTION);
-        String description = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION, DELIMITER_BACK).trim();
+        String description = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, description));
         return description;
     }
@@ -150,7 +149,7 @@ public class Parser {
             throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_INCOME);
-        String income = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_INCOME, DELIMITER_BACK).trim();
+        String income = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_INCOME).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, income));
         return income;
     }
@@ -168,7 +167,7 @@ public class Parser {
             throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_EXPENDITURE);
-        String expenditure = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK).trim();
+        String expenditure = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, expenditure));
         return expenditure;
     }
@@ -186,7 +185,7 @@ public class Parser {
             throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_RECORD_INDEX);
-        String record = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_RECORD_INDEX, DELIMITER_BACK).trim();
+        String record = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_RECORD_INDEX).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, record));
         return record;
     }
@@ -204,7 +203,7 @@ public class Parser {
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_RECURRING_STATUS);
-        String status = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_RECURRING_STATUS, DELIMITER_BACK).trim();
+        String status = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_RECURRING_STATUS).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, status));
         return status;
     }
@@ -222,7 +221,7 @@ public class Parser {
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_CATEGORY_INDEX);
-        String category = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_CATEGORY_INDEX, DELIMITER_BACK).trim();
+        String category = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_CATEGORY_INDEX).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, category));
         return category;
     }
@@ -240,7 +239,7 @@ public class Parser {
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_GROUP_INDEX);
-        String group = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_GROUP_INDEX, DELIMITER_BACK).trim();
+        String group = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_GROUP_INDEX).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, group));
         return group;
     }

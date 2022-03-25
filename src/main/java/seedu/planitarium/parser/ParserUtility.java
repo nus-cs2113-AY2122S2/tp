@@ -15,11 +15,10 @@ public class ParserUtility {
      *
      * @param text           The text containing the term to be parsed.
      * @param delimiterLeft  The delimiter on the left of term.
-     * @param delimiterRight The delimiter on the right of term.
      * @return A non-delimiter-surrounded term.
      * @throws EmptyStringException if string after the left delimiter is blank.
      */
-    protected static String parseDelimitedTerm(String text, String delimiterLeft, String delimiterRight)
+    protected static String parseDelimitedTerm(String text, String delimiterLeft)
             throws EmptyStringException {
         String[] firstParse = text.split(delimiterLeft, Parser.LIMIT_TWO_TOKENS);
         String leftRemoved;
@@ -28,12 +27,11 @@ public class ParserUtility {
         } else {
             leftRemoved = firstParse[Parser.INDEX_LEFT_NOT_EXIST];
         }
-        String[] secondParse = leftRemoved.split(delimiterRight, Parser.LIMIT_TWO_TOKENS);
+        String[] secondParse = leftRemoved.split(Parser.DELIMITER_BACK, Parser.LIMIT_TWO_TOKENS);
         String rightRemoved = secondParse[Parser.INDEX_RIGHT_REMOVED].trim();
         if (rightRemoved.isBlank()) {
             throw new EmptyStringException(delimiterLeft);
         }
-        assert rightRemoved != null : Parser.ASSERT_OUTPUT_NOT_NULL;
         return rightRemoved;
     }
 
