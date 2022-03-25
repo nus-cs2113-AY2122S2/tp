@@ -12,17 +12,17 @@ activate TagCommand
 alt Objects.isNull(taskMod)
     TagCommand -> ModuleList: getGeneralTasks()
     activate ModuleList
-    return targetModule:Module
+    return
 
 else else
-    TagCommand -> ModuleList: getModule(taskModule:Module)
+    TagCommand -> ModuleList: getModule(taskModule)
     activate ModuleList
 
     alt Objects.isNull(taskMod)
-        [<-- ModuleList:  e:NoSuchModuleException
+        [<-- ModuleList:   throw NoSuchModuleException
 
     else else
-    return targetModule:Module
+    return targetModule
 
     end
 end

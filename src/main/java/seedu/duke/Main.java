@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.commands.ExitCommand;
+import seedu.duke.data.Module;
+import seedu.duke.data.Task;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.parsers.ModHappyParser;
 import seedu.duke.storage.ConfigurationStorage;
 import seedu.duke.storage.ModuleListStorage;
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskListStorage;
-import seedu.duke.tasks.Module;
-import seedu.duke.tasks.ModuleList;
-import seedu.duke.tasks.Task;
+import seedu.duke.data.ModuleList;
 import seedu.duke.ui.TextUi;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
@@ -30,12 +30,13 @@ public class Main {
     private final String taskLoadSuccessMessage = StringConstants.TASK_DATA_LOAD_SUCCESS;
     private final String configurationLoadSuccessMessage = StringConstants.CONFIGURATION_DATA_LOAD_SUCCESS;
     private final String configurationLoadErrorMessage = StringConstants.CONFIGURATION_DATA_LOAD_FAILED;
+    private final String noConfigFileMessage = StringConstants.NO_CONFIG_DATA_FILE;
 
 
     private TextUi ui;
     private ModHappyParser modHappyParser;
     private ModuleList moduleList;
-    private seedu.duke.util.Configuration configuration;
+    private Configuration configuration;
     private Storage modHappyStorage;
 
     /**
@@ -111,6 +112,7 @@ public class Main {
             }
         } else {
             configuration = new Configuration();
+            ui.showUnformattedMessage(noConfigFileMessage);
         }
     }
 

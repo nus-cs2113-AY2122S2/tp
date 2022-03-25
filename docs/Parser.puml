@@ -6,16 +6,16 @@ package parsers {
         groupNames: HashSet<String>
         parsedCommand: HashMap<String, String>
         --
-        + parseString(String str): HashMap<String, String>
+        + parseString(str: String): HashMap<String, String>
     }
 
     class XYZParser {
-        + parseCommand(String userInput): Command
+        + parseCommand(userInput: String): Command
     }
 
     class ModHappyParser {
-        - getCommandParser(String commandWord): Parser
-        + parseCommand(String userInput): Command
+        - getCommandParser(commandWord: String): Parser
+        + parseCommand(userInput: String): Command
     }
 }
 

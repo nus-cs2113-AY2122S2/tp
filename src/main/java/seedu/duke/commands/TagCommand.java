@@ -4,12 +4,11 @@ import java.util.Objects;
 
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.NoSuchModuleException;
-import seedu.duke.exceptions.NoSuchTagException;
 import seedu.duke.exceptions.ParseException;
-import seedu.duke.tasks.Module;
-import seedu.duke.tasks.ModuleList;
-import seedu.duke.tasks.Task;
-import seedu.duke.tasks.TaskList;
+import seedu.duke.data.Module;
+import seedu.duke.data.ModuleList;
+import seedu.duke.data.Task;
+import seedu.duke.data.TaskList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
@@ -75,7 +74,7 @@ public class TagCommand extends Command {
      */
     private void addTag(Module targetModule) throws ModHappyException {
         TaskList taskList = targetModule.getTaskList();
-        result  = String.format(ADD_TAG_MESSAGE, taskList.addTag(tagDescription, taskIndex), tagDescription);
+        result  = String.format(ADD_TAG_MESSAGE, tagDescription, taskList.addTag(tagDescription, taskIndex));
     }
 
     /**
@@ -85,6 +84,7 @@ public class TagCommand extends Command {
      */
     private void removeTag(Module targetModule) throws ModHappyException {
         TaskList taskList = targetModule.getTaskList();
-        result = String.format(DEL_TAG_MESSAGE, taskList.deleteTag(tagDescription, taskIndex), tagDescription);
+        Task task = taskList.removeTag(tagDescription, taskIndex);
+        result = String.format(DEL_TAG_MESSAGE, tagDescription, task);
     }
 }

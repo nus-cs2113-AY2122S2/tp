@@ -2,19 +2,18 @@ package seedu.duke.commands;
 
 import java.util.Objects;
 
-import static seedu.duke.util.StringConstants.OPTION_CHECK_CONFIGURATIONS;
-import static seedu.duke.util.StringConstants.OPTION_SET_SUCCESS;
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.UnkownConfigurationGroupWord;
-import seedu.duke.tasks.ModuleList;
+import seedu.duke.exceptions.UnknownConfigurationGroupWord;
+import seedu.duke.data.ModuleList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
 public class OptionCommand extends Command {
+    private static final String OPTION_CHECK_CONFIGURATIONS = StringConstants.OPTION_CHECK_CONFIGURATIONS;
+    private static final String OPTION_SET_SUCCESS = StringConstants.OPTION_SET_SUCCESS;
 
     private Configuration.ConfigurationGroup configurationGroup = null;
     private String newValue = null;
-
 
     public OptionCommand(String configurationGroupWord, String newValue) throws ModHappyException {
         if (!Objects.isNull(configurationGroupWord)) {
@@ -26,14 +25,13 @@ public class OptionCommand extends Command {
                             && Configuration.LEGAL_VALUES.get(configurationGroup).contains(newValue)) {
                         this.newValue = newValue;
                     } else {
-                        throw new UnkownConfigurationGroupWord(configurationGroupWord + " " + newValue);
+                        throw new UnknownConfigurationGroupWord(configurationGroupWord + " " + newValue);
                     }
                 }
             } catch (Exception e) {
-                throw new UnkownConfigurationGroupWord(configurationGroupWord);
+                throw new UnknownConfigurationGroupWord(configurationGroupWord);
             }
         }
-
     }
 
     @Override

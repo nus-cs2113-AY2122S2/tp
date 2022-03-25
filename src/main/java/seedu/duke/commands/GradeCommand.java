@@ -4,17 +4,15 @@ import java.util.Objects;
 
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.NoSuchModuleException;
-import seedu.duke.tasks.Module;
-import seedu.duke.tasks.ModuleList;
+import seedu.duke.data.Module;
+import seedu.duke.data.ModuleList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 import seedu.duke.util.Grades;
 
 public class GradeCommand extends Command {
-
     private static final String GRADE_ADDED_MESSAGE = StringConstants.GRADE_ADDED_MESSAGE;
     private static final String GRADE_CHANGED_MESSAGE = StringConstants.GRADE_CHANGED_MESSAGE;
-    private static final String NOT_ENTERED = StringConstants.NOT_ENTERED_STR;
 
     private final String moduleCode;
     private final String moduleGrade;
@@ -35,27 +33,24 @@ public class GradeCommand extends Command {
 
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
-        addGradeToModule(moduleList);
+        Module targetModule = moduleList.getModule(moduleCode);
+        addGradeToModule(targetModule);
         return new CommandResult(result);
     }
 
     /**
-     * Adds/Changes grade to specified module from moduleList.
-     *
-     * @param moduleList List from which the module which grade is to be added/changed.
+     * Sets grade of the specified module.
      */
-    public void addGradeToModule(ModuleList moduleList) throws ModHappyException {
-        Module targetModule = moduleList.getModule(moduleCode);
-        if (Objects.isNull(targetModule)) {
+    public void addGradeToModule(Module m) throws ModHappyException {
+        if (Objects.isNull(m)) {
             throw new NoSuchModuleException();
         }
-        boolean hasGrade = !Objects.equals(targetModule.getModuleGrade(), Grades.NOT_ENTERED);
+        boolean hasGrade = !Objects.equals(m.getModuleGrade(), Grades.NOT_ENTERED);
         if (hasGrade) {
             result = String.format(GRADE_CHANGED_MESSAGE, moduleCode);
         } else {
             result = String.format(GRADE_ADDED_MESSAGE, moduleCode);
         }
-        targetModule.setModuleGrade(moduleGrade);
+        m.setModuleGrade(moduleGrade);
     }
-
 }

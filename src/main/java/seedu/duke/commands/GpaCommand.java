@@ -1,11 +1,9 @@
 package seedu.duke.commands;
 
-import java.util.Objects;
-
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.ModuleListEmptyException;
-import seedu.duke.tasks.Module;
-import seedu.duke.tasks.ModuleList;
+import seedu.duke.exceptions.GpaNotComputableException;
+import seedu.duke.data.Module;
+import seedu.duke.data.ModuleList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.Grades;
 import seedu.duke.util.StringConstants;
@@ -15,21 +13,12 @@ public class GpaCommand extends Command {
     private static final String GPA_MESSAGE = StringConstants.GPA_MESSAGE;
 
     private String result;
-    private int mc;
-    private double modularGradePoint;
-    private Grades modularGrade;
-    private float gpa = 0;
-    private int totalMc = 0;
-    private double sumOfProduct = 0.0; // product of modular grade point and mc
 
     public void calculateGpa(ModuleList moduleList) throws ModHappyException {
-        if (Objects.isNull(moduleList.getModuleList())) {
-            throw new ModuleListEmptyException();
-        }
+        int totalMc = 0;
+        double weightedSum = 0.0;
         for (Module m : moduleList.getModuleList()) {
-            mc = m.getModularCredit();
-            modularGradePoint = m.getModuleGrade().getPoints();
-            modularGrade = m.getModuleGrade();
+            Grades modularGrade = m.getModuleGrade();
             switch (modularGrade) {
             case CS:
             case CU:
@@ -39,11 +28,16 @@ public class GpaCommand extends Command {
                 // Intentional fallthrough
                 break;
             default:
+                int mc = m.getModularCredit();
+                double modularGradePoint = m.getModuleGrade().getPoints();
                 totalMc += mc;
-                sumOfProduct += modularGradePoint * mc;
-                gpa = (float) (sumOfProduct / totalMc);
+                weightedSum += modularGradePoint * mc;
             }
         }
+        if (totalMc == 0) {
+            throw new GpaNotComputableException();
+        }
+        double gpa = weightedSum / (double) totalMc;
         result = String.format(GPA_MESSAGE, gpa);
     }
 

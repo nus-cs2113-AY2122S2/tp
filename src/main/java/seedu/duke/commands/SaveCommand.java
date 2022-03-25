@@ -2,13 +2,15 @@ package seedu.duke.commands;
 
 import java.util.ArrayList;
 
+import seedu.duke.data.Module;
+import seedu.duke.data.Task;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.storage.ConfigurationStorage;
 import seedu.duke.storage.ModuleListStorage;
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskListStorage;
-import seedu.duke.tasks.ModuleList;
-import seedu.duke.tasks.TaskList;
+import seedu.duke.data.ModuleList;
+import seedu.duke.data.TaskList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
@@ -25,7 +27,7 @@ public class SaveCommand extends Command {
             // Master Task List
             storage = new TaskListStorage();
             TaskList taskList = moduleList.getGeneralTasks().getTaskList();
-            ArrayList<seedu.duke.tasks.Task> taskArrayList = taskList.getTaskList();
+            ArrayList<Task> taskArrayList = taskList.getTaskList();
             storage.writeData(taskArrayList, StringConstants.TASK_PATH);
             writeStatus += StringConstants.TASK_DATA_SAVE_SUCCESS + StringConstants.LS;
         } catch (ModHappyException e) {
@@ -34,7 +36,7 @@ public class SaveCommand extends Command {
         }
         try {
             storage = new ModuleListStorage();
-            ArrayList<seedu.duke.tasks.Module> moduleArrayList = moduleList.getModuleList();
+            ArrayList<Module> moduleArrayList = moduleList.getModuleList();
             storage.writeData(moduleArrayList, StringConstants.MODULE_PATH);
             writeStatus += StringConstants.MODULE_DATA_SAVE_SUCCESS + StringConstants.LS;
         } catch (ModHappyException e) {

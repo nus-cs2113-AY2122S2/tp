@@ -10,33 +10,32 @@ package command {
     ExitCommand ..> CommandResult :creates >
 
     abstract class Command {
-        +execute():CommandResult {abstract}
+        +execute(): CommandResult {abstract}
     }
 
     class DeleteCommand {
-    -moduleCode:String
-    -taskModule:String
-    -taskIndex:int
-    +DeleteCommand(moduleCode:String)
-    +DeleteCommand(taskIndex:int, taskModule:String)
-    +execute():CommandResult
+    -moduleCode: String
+    -taskModule: String
+    -taskIndex: int
+    +DeleteCommand(moduleCode: String)
+    +DeleteCommand(taskModule: String, index: int)
+    +execute(): CommandResult
     }
 
     class ExitCommand {
-    +execute():CommandResult
+    +execute(): CommandResult
     }
 
     class CommandResult {
-    +CommandResult(result:String)
-    +toString()
+    +CommandResult(result: String)
+    +toString(): String
     }
 }
 
 note top of command
 Note:
-This class diagram only describes
-two commands in the two different
-categories for simplicity.
+This class diagram only illustrates two
+example command types for simplicity.
 end note
 
 @enduml

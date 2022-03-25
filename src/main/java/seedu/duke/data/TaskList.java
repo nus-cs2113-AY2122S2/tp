@@ -1,4 +1,4 @@
-package seedu.duke.tasks;
+package seedu.duke.data;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,7 @@ public class TaskList {
     private static final String LS = StringConstants.LS;
     private static final String ITEMIZE_FORMAT = "%d. %s" + LS;
     private static final String EMPTY_LIST = StringConstants.EMPTY_LIST;
+    private static final String HIDDEN_TASKS_COUNT = StringConstants.HIDDEN_TASKS_COUNT;
 
     private ArrayList<Task> taskList;
 
@@ -56,7 +57,7 @@ public class TaskList {
         return task;
     }
 
-    public Task deleteTag(String tagDescription, int index) throws NoSuchTaskException, NoSuchTagException {
+    public Task removeTag(String tagDescription, int index) throws NoSuchTaskException, NoSuchTagException {
         if (index >= taskList.size() || index < 0) {
             throw new NoSuchTaskException();
         }
@@ -91,28 +92,55 @@ public class TaskList {
     /**
      * Formats all tasks in the task list as a pretty printed string.
      * @param indent string representing the indentation level for each task item
+     * @param showCompletedTasks whether completed tasks should be listed
      */
-    public String getAllTasks(String indent) {
-        String res = "";
+    public String getAllTasks(String indent, boolean showCompletedTasks) {
+        StringBuilder res = new StringBuilder();
+        int numHiddenTasks = 0;
         for (int i = 0; i < taskList.size(); i++) {
-            res += indent + String.format(ITEMIZE_FORMAT, i + 1, taskList.get(i));
+            if (showCompletedTasks || !taskList.get(i).getTaskDone()) {
+                res.append(indent).append(String.format(ITEMIZE_FORMAT, i + 1, taskList.get(i)));
+            } else {
+                numHiddenTasks++;
+            }
         }
         if (res.length() == 0) {
-            res = indent + EMPTY_LIST + LS;
+            res.append(indent).append(EMPTY_LIST).append(LS);
         }
-        return res;
+        if (!showCompletedTasks && numHiddenTasks > 0) {
+            res.append(indent).append(String.format(HIDDEN_TASKS_COUNT, numHiddenTasks)).append(LS);
+        }
+        return res.toString();
     }
 
-    public String getTasksWithTag(String indent, String tag) {
+    /**
+     * Formats all tasks in the task list with a matching tag as a pretty printed string.
+     * @param indent string representing the indentation level for each task item
+     * @param tag the tag to be matched
+     * @param showCompletedTasks whether completed tasks should be listed
+     */
+    public String getTasksWithTag(String indent, String tag, boolean showCompletedTasks) {
         StringBuilder res = new StringBuilder();
+        int numHiddenTasks = 0;
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).getTagList().contains(tag)) {
-                res.append(indent).append(String.format(ITEMIZE_FORMAT, i + 1, taskList.get(i)));
+                if (showCompletedTasks || !taskList.get(i).getTaskDone()) {
+                    res.append(indent).append(String.format(ITEMIZE_FORMAT, i + 1, taskList.get(i)));
+                } else {
+                    numHiddenTasks++;
+                }
             }
             if (res.length() == 0) {
                 res.append(indent).append(EMPTY_LIST).append(LS);
             }
+            if (!showCompletedTasks && numHiddenTasks > 0) {
+                res.append(indent).append(String.format(HIDDEN_TASKS_COUNT, numHiddenTasks)).append(LS);
+            }
         }
         return res.toString();
+    }
+
+    public void reset() {
+        taskList.clear();
     }
 }

@@ -1,8 +1,8 @@
-package seedu.duke.tasks;
-
-import seedu.duke.util.StringConstants;
+package seedu.duke.data;
 
 import java.util.ArrayList;
+
+import seedu.duke.util.StringConstants;
 
 public class Task {
     public static final String ICON_UNCOMPLETED = StringConstants.ICON_UNCOMPLETED;
@@ -24,9 +24,9 @@ public class Task {
     public Task(String taskName, String taskDescription, String workingTime) {
         this.taskName = taskName;
         this.taskDescription = taskDescription;
-        this.isTaskDone = false;
         this.workingTime = workingTime;
-        this.taskParameters = getTaskParameterStatus();
+        isTaskDone = false;
+        taskParameters = getTaskParameterStatus();
         tags = new ArrayList<>();
     }
 
@@ -47,13 +47,13 @@ public class Task {
     }
 
     public void setTaskDescription(String description) {
-        this.taskDescription = description;
-        this.taskParameters = getTaskParameterStatus();
+        taskDescription = description;
+        taskParameters = getTaskParameterStatus();
     }
 
     public void setWorkingTime(String workingTime) {
         this.workingTime = workingTime;
-        this.taskParameters = getTaskParameterStatus();
+        taskParameters = getTaskParameterStatus();
     }
 
     public void setTaskName(String taskName) {
@@ -77,6 +77,10 @@ public class Task {
         } else {
             return TaskParameters.NO_DESCRIPTION_OR_WORKING_TIME;
         }
+    }
+
+    public boolean getTaskDone() {
+        return isTaskDone;
     }
 
     /**

@@ -15,7 +15,7 @@ import com.google.gson.GsonBuilder;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ReadException;
 
-import seedu.duke.tasks.Module;
+import seedu.duke.data.Module;
 
 /**
  * A data access object managing the loading and saving of ModuleList instances.

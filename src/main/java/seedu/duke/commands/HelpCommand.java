@@ -1,7 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.tasks.ModuleList;
+import seedu.duke.data.ModuleList;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
@@ -67,7 +67,7 @@ public class HelpCommand extends Command {
         case TAG_COMMAND_WORD:
             return new CommandResult(TAG_HELP);
         case OPTION_COMMAND_WORD:
-            return new CommandResult(OPTION_HELP + "\n" + configuration.getConfigurationGroupExplain());
+            return new CommandResult(OPTION_HELP);
         default:
             throw new ModHappyException(HELP_EXCEPTION);
         }

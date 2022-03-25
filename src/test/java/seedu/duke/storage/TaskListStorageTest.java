@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import seedu.duke.tasks.Task;
+import seedu.duke.data.Task;
 import seedu.duke.util.StringConstants;
 
 
