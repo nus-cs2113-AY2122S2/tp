@@ -18,6 +18,7 @@ import java.util.logging.Logger;
  */
 public class PlanList {
     public static final int MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN = 10;
+    public static final String RESERVED_PLAN_NAME = "rest day";
     private WorkoutList workoutList;
     private HashMap<String, Plan> plansHashMapList = new HashMap<>();
     private ArrayList<String> plansDisplayList = new ArrayList<>();
@@ -96,10 +97,10 @@ public class PlanList {
         String userPlanNameInput = userArgument.split(PlanCommand.CREATE_ACTION_WORKOUTS_KEYWORD)[0].trim();
 
         String className = this.getClass().getSimpleName();
-        boolean hasSamePlanName = checkForExistingPlanName(userPlanNameInput);
-        if (hasSamePlanName) {
+        boolean hasValidPlanName = checkPlanNameValidity(userPlanNameInput);
+        if (!hasValidPlanName) {
             logger.log(Level.WARNING, "Plan name is invalid.");
-            throw new InvalidPlanException(className, InvalidPlanException.DUPLICATE_PLAN_NAME_ERROR_MSG);
+            throw new InvalidPlanException(className, InvalidPlanException.INVALID_PLAN_NAME_ERROR_MSG);
         }
 
         String userWorkoutNumbersString = userArgument.split(PlanCommand.CREATE_ACTION_WORKOUTS_KEYWORD)[1].trim();
@@ -140,22 +141,27 @@ public class PlanList {
     /**
      * Checks if the provided plan details already exists in the ArrayList of plans. A plan
      * is considered to already exist in the list if the plan name matches an existing plan
-     * name in the ArrayList.
+     * name in the ArrayList. Additionally, checks if the plan name is called "rest day".
+     * If it is, do not allow a plan called "rest day" as it is used in the schedule feature.
      *
      * @param userPlanNameInput The plan name entered by user to check.
      * @return True if an existing plan with the same plan name exists in the plans list.
      *         Otherwise, returns false.
      */
-    public boolean checkForExistingPlanName(String userPlanNameInput) {
+    public boolean checkPlanNameValidity(String userPlanNameInput) {
         String userPlanNameInputLowerCase = userPlanNameInput.toLowerCase();
+        if (userPlanNameInputLowerCase.equals(RESERVED_PLAN_NAME)) {
+            return false;
+        }
+
         for (int i = 0; i < plansDisplayList.size(); i += 1) {
             String getPlanName = plansDisplayList.get(i).toLowerCase();
 
             if (userPlanNameInputLowerCase.equals(getPlanName)) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     /**
