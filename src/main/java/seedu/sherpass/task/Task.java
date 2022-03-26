@@ -3,6 +3,8 @@ package seedu.sherpass.task;
 import seedu.sherpass.enums.Frequency;
 
 import java.time.LocalDateTime;
+
+import static seedu.sherpass.constant.DateAndTimeFormat.dateOnlyFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.outputWithTimeFormat;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 
@@ -109,6 +111,13 @@ public class Task {
     public String getByDateString() {
         if (byDate != null) {
             return byDate.format(outputWithTimeFormat);
+        }
+        return EMPTY_STRING;
+    }
+
+    public String getByDateWithoutTimeString() {
+        if (byDate != null) {
+            return byDate.format(dateOnlyFormat);
         }
         return EMPTY_STRING;
     }

@@ -32,9 +32,10 @@ import static seedu.sherpass.constant.TimetableConstant.TIMETABLE_SIZE_OFFSET_TW
 import static seedu.sherpass.constant.TimetableConstant.WHITE_SPACE_FRONT_OFFSET_LENGTH;
 
 public class Timetable {
-    private LocalDate localDate;
-    private ArrayList<Task> tasks;
-    private Ui ui;
+    private static Timetable timetable;
+    private static LocalDate localDate;
+    private static ArrayList<Task> tasks;
+    private static Ui ui;
 
     private Timetable(LocalDate localDate, ArrayList<Task> tasks, Ui ui) {
         this.tasks = tasks;
@@ -117,7 +118,7 @@ public class Timetable {
                 colFour = (j < filteredTasks.size())
                         ? (filteredTasks.get(j).getIndex() + ". " + filteredTasks.get(j).getDescription())
                         : ui.getRepeatedCharacters(" ", taskLength - STRING_COMPARE_OFFSET);
-                colFive = (j < filteredTasks.size()) ? filteredTasks.get(j).getByDateString()
+                colFive = (j < filteredTasks.size()) ? filteredTasks.get(j).getByDateWithoutTimeString()
                         : ui.getRepeatedCharacters(" ", byDateLength - STRING_COMPARE_OFFSET);
                 j++;
             }
@@ -140,25 +141,15 @@ public class Timetable {
                 partitionLength - fourthRow.length() - 1) + "|");
         ui.showToUser(ui.getRepeatedCharacters("-", partitionLength));
     }
-/*
-    private static void prepareTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui ui) {
-        String day = dateInput.format(dayOnlyFormat);
-        String date = dateInput.format(dateOnlyFormat);
-        long taskLength = findTaskLength(filteredTasks);
-        long byDateLength = DATE_SPACE_FULL_LENGTH;
-        long partitionLength = calcPartitionLength(taskLength, byDateLength);
-        if (filteredTasks.isEmpty()) {
-            printEmptyTimetable(ui, day, date, partitionLength);
-            return;
-        }
-        printTimetable(day, date, filteredTasks, ui, taskLength, byDateLength, partitionLength);
-    }
- */
-    public static Timetable prepareTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui ui) {
-        return new Timetable(dateInput, filteredTasks, ui);
+
+    private void setTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui userInterface) {
+        localDate = dateInput;
+        tasks = filteredTasks;
+        ui = userInterface;
     }
 
     private void printSchedule() {
+        // assert localDate != null;
         String day = localDate.format(dayOnlyFormat);
         String date = localDate.format(dateOnlyFormat);
         long taskLength = findTaskLength(tasks);
@@ -170,6 +161,15 @@ public class Timetable {
         } else {
             printEmptyTimetable(ui, day, date, partitionLength);
         }
+    }
+
+    public static Timetable prepareTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui ui) {
+        if (timetable == null) {
+            timetable = new Timetable(dateInput, filteredTasks, ui);
+        } else {
+            timetable.setTimetable(dateInput, filteredTasks, ui);
+        }
+        return timetable;
     }
 
     public static void showTodaySchedule(TaskList taskList, Ui ui) {
