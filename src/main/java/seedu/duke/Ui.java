@@ -101,5 +101,12 @@ public class Ui {
                 + recentSatisfaction.getSatisfactionValue() + " has been added to the list of Satisfactions.");
         System.out.printf("There are currently %d items within the inventory.\n", satisfactionList.getSize());
     }
+
+    public void printDeleteItemAcknowledgementMessage(Item updatedItem, ItemList listOfItems) {
+        String itemName = updatedItem.getName();
+        assert (!itemName.isEmpty()) : "Assertion Failed! Updated item has an empty item name.";
+        System.out.printf("%s has been removed from the Item List.\n", itemName);
+        System.out.printf("There are currently %d items within the Item List.\n", listOfItems.getSize());
+    }
 }
 

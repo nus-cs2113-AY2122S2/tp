@@ -31,4 +31,7 @@ Add Housekeeper ~
 Add Housekeeper KO  13
 Availability @
 Availability lucy M
+Delete Item Toilet Roll
+Delete Item Table
+Delete Item
 bye

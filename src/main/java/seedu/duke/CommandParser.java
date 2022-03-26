@@ -10,6 +10,8 @@ public class CommandParser {
     private static final String BYE = "bye";
     private static final String ADD_ITEM_COMMAND = "Add Item";
     private static final String VIEW_ITEM_LIST_COMMAND = "View Item In Inventory";
+    private static final String DELETE_ITEM_COMMAND = "Delete Item";
+    private static final String UPDATE_ITEM_PAX_COMMAND = "Update Item Pax";
     private static final String ADD_HOUSEKEEPER_COMMAND = "Add Housekeeper ";
     private static final String ADD_AVAILABILITY_COMMAND = "Availability ";
     public static final String ADD_SATISFACTION_COMMAND = "Add Satisfaction";
@@ -21,17 +23,17 @@ public class CommandParser {
     private static final String CHECK_ALL_ROOM = "check all";
     private static final String CHECK_ROOM_BY_LEVEL = "check level";
     private static final String CHECK_BY_CATEGORY = "check category";
-    private static final String UPDATE_ITEM_PAX_COMMAND = "Update Item Pax";
     private static final String ASSIGN_HOUSEKEEPER = "Assign";
     public static final String VIEW_HOUSEKEEPER_COMMAND = "View Recorded Housekeeper";
 
     /**
      * Parses the user-provided command and creates the relevant Command object.
+     *
      * @param commandString User input to be parsed and turned into a Command object.
      * @return The relevant Command object created based on the user input.
-     * @throws WrongCommandException If the user input cannot be recognized as a Command object.
+     * @throws WrongCommandException     If the user input cannot be recognized as a Command object.
      * @throws HotelLiteManagerException If there is an error in user input that prevents it from being parsed into
-     *     the relevant Command object.
+     *                                   the relevant Command object.
      */
     public Command parse(String commandString) throws WrongCommandException, HotelLiteManagerException {
         Command userCommand = null;
@@ -50,6 +52,9 @@ public class CommandParser {
             userCommand = new AddItemCommand(commandStringWithoutCommand);
         } else if (commandString.equals(VIEW_ITEM_LIST_COMMAND)) {
             userCommand = new ViewItemListCommand();
+        } else if (commandString.startsWith(DELETE_ITEM_COMMAND)) {
+            commandStringWithoutCommand = commandString.replace(DELETE_ITEM_COMMAND, "");
+            userCommand = new DeleteItemCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith((ADD_HOUSEKEEPER_COMMAND))) {
             commandStringWithoutCommand = commandString.replace(ADD_HOUSEKEEPER_COMMAND, "");
             userCommand = new AddHousekeeperCommand(commandStringWithoutCommand);
