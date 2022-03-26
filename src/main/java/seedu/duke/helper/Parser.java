@@ -1,7 +1,18 @@
 package seedu.duke.helper;
 
 import seedu.duke.exception.HalpmiException;
-import seedu.duke.helper.command.*;
+import seedu.duke.helper.command.AddAppointmentCommand;
+import seedu.duke.helper.command.AddDoctorCommand;
+import seedu.duke.helper.command.AddMedicineCommand;
+import seedu.duke.helper.command.AddPatientCommand;
+import seedu.duke.helper.command.Command;
+import seedu.duke.helper.command.DeleteDoctorCommand;
+import seedu.duke.helper.command.DeletePatientCommand;
+import seedu.duke.helper.command.EditMedicineCommand;
+import seedu.duke.helper.command.ViewAppointmentCommand;
+import seedu.duke.helper.command.ViewDoctorCommand;
+import seedu.duke.helper.command.ViewMedicineCommand;
+import seedu.duke.helper.command.ViewPatientCommand;
 
 
 public class Parser {

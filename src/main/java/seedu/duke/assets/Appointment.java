@@ -9,8 +9,8 @@ public class Appointment {
     protected String appointmentDate;
     protected String appointmentDetails;
 
-    public Appointment(String appointmentId, String patientName, String patientNric, String doctorName,
-                       String doctorNric, String appointmentDate, String appointmentDetails) {
+    public Appointment(String appointmentId, String patientNric, String patientName, String doctorNric,
+                       String doctorName, String appointmentDate, String appointmentDetails) {
         this.appointmentId = appointmentId;
         this.patientName = patientName;
         this.patientNric = patientNric;

@@ -10,8 +10,12 @@ public class ViewAppointmentCommand extends Command {
     }
 
     public Status execute(List appointmentList) throws NotFoundException {
-        String parameters = String.join(",",parameterArray);
-        appointmentList.view(parameters);
+        if (parameterArray == null) {
+            appointmentList.view();
+        } else {
+            String parameters = String.join(",",parameterArray);
+            appointmentList.view(parameters);
+        }
         return Status.FIND_APPOINTMENT_SUCCESS;
     }
 }

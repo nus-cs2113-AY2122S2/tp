@@ -24,7 +24,6 @@ public class AppointmentList extends List {
                 addAppointmentParameters[2], addAppointmentParameters[3], addAppointmentParameters[4],
                 addAppointmentParameters[5], addAppointmentParameters[6]);
         appointments.add(newAppointment);
-        appointments.toString();
     }
 
     @Override
@@ -35,8 +34,8 @@ public class AppointmentList extends List {
                 return;
             }
         }
-        throw new NotFoundException("There is no appointments with the given appointment id.\n" +
-                "Please search by patient's nric or doctor's nric to find out the correct id if needed.");
+        throw new NotFoundException("There is no appointments with the given appointment id.\n"
+                + "Please search by patient's nric or doctor's nric to find out the correct id if needed.");
     }
 
     @Override
@@ -51,7 +50,6 @@ public class AppointmentList extends List {
 
     @Override
     public void view(String parameters) {
-        System.out.println("ALL APPOINTMENTS: " + appointments.toString());
         String[] parametersArray = parameters.split(",");
         String criteria = parametersArray[0].trim();
         String input = parametersArray[1].trim();
@@ -88,7 +86,6 @@ public class AppointmentList extends List {
         case "nric":
             for (int i = 0; i < appointments.size(); i++) {
                 if (appointments.get(i).getPatientNric().equals(input)) {
-                    System.out.println(appointments.get(i).toString());
                     foundAppointments.add(appointments.get(i));
                 }
             }
