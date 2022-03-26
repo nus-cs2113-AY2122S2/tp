@@ -94,7 +94,7 @@ public class Family {
     public void addPerson(String name, int group) {
         String infoString = "Method addPerson() called";
         logger.log(Level.INFO, infoString);
-        getList(group).addPerson(name);
+        getList(group).addPerson(name, Constants.FOR_USER);
     }
 
     /**

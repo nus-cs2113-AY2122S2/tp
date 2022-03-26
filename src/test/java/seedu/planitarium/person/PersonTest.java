@@ -3,6 +3,7 @@
 package seedu.planitarium.person;
 
 import org.junit.jupiter.api.Test;
+import seedu.planitarium.global.Constants;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,7 +32,7 @@ class PersonTest {
     public void addIncome_invalidDescription_assertionError() {
         Person person = new Person(VALID_NAME);
         try {
-            person.addIncome(null, VALID_AMOUNT, false);
+            person.addIncome(null, VALID_AMOUNT, false, Constants.FOR_USER);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());
@@ -53,7 +54,7 @@ class PersonTest {
     public void addExpend_invalidDescription_assertionError() {
         Person person = new Person(VALID_NAME);
         try {
-            person.addExpend(null, VALID_AMOUNT, false);
+            person.addExpend(null, VALID_AMOUNT, false, Constants.FOR_USER);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());

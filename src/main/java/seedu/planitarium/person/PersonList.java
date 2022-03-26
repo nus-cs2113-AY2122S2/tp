@@ -3,6 +3,7 @@
 package seedu.planitarium.person;
 
 import seedu.planitarium.ProjectLogger;
+import seedu.planitarium.global.Constants;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -66,8 +67,9 @@ public class PersonList {
      * Adds a person to the array list.
      *
      * @param name The name of the person to be added
+     * @param isSilent Whether to print confirmation
      */
-    public void addPerson(String name) {
+    public void addPerson(String name, boolean isSilent) {
         String infoString = "Entering addPerson()";
         logger.log(Level.INFO, infoString);
         assert (name != null);
@@ -76,6 +78,9 @@ public class PersonList {
         Person person = new Person(name);
         personList.add(person);
         numberOfMembers++;
+        if (isSilent) {
+            return;
+        }
         System.out.println(name + " has been successfully added");
     }
 
@@ -159,7 +164,7 @@ public class PersonList {
         String infoString = "Method addIncome() called";
         logger.log(Level.INFO, infoString);
         int listIndex = personIndex - 1;
-        getPerson(listIndex).addIncome(description, amount, isPermanent);
+        getPerson(listIndex).addIncome(description, amount, isPermanent, Constants.FOR_USER);
     }
 
     /**
@@ -187,7 +192,7 @@ public class PersonList {
         String infoString = "Method addIncome() called";
         logger.log(Level.INFO, infoString);
         int listIndex = personIndex - 1;
-        getPerson(listIndex).addIncome(description, amount, isPermanent);
+        getPerson(listIndex).addIncome(description, amount, isPermanent, Constants.FOR_USER);
     }
 
     /**
