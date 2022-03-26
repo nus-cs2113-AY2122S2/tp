@@ -5,11 +5,13 @@ import seedu.duke.helper.command.AddAppointmentCommand;
 import seedu.duke.helper.command.AddDoctorCommand;
 import seedu.duke.helper.command.AddMedicineCommand;
 import seedu.duke.helper.command.AddPatientCommand;
+import seedu.duke.helper.command.ClearExpiredMedicineCommand;
 import seedu.duke.helper.command.Command;
 import seedu.duke.helper.command.DeleteDoctorCommand;
 import seedu.duke.helper.command.DeleteMedicineCommand;
 import seedu.duke.helper.command.DeletePatientCommand;
 import seedu.duke.helper.command.EditMedicineCommand;
+import seedu.duke.helper.command.UpdateMedicineInventoryCommand;
 import seedu.duke.helper.command.ViewAppointmentCommand;
 import seedu.duke.helper.command.ViewDoctorCommand;
 import seedu.duke.helper.command.ViewMedicineCommand;
@@ -114,6 +116,20 @@ public class Parser {
         String[] medicineParameters = minParameterCheck(parameters, 6);
         Validator.validateMedicine(medicineParameters);
         return new EditMedicineCommand(medicineParameters);
+    }
+
+    public static Command parseUpdateMedicineStock(String parameters) throws HalpmiException {
+        if (!isNull(parameters)) {
+            throw new HalpmiException("The update medicines command does not take in any parameters!");
+        }
+        return new UpdateMedicineInventoryCommand();
+    }
+
+    public static Command parseClearExpiredMedicine(String parameters) throws HalpmiException {
+        if (!isNull(parameters)) {
+            throw new HalpmiException("The clear old medicines command does not take in any parameters!");
+        }
+        return new ClearExpiredMedicineCommand();
     }
 
     public static Command parseAddAppointment(String parameters) throws HalpmiException {
