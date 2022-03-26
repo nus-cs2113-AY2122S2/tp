@@ -19,13 +19,13 @@ your favourite personal expenditure tracker.
 1. Ensure that you are running Java 11 on your device.
 2. Down the latest `PlanITarium.jar` from [releases](https://github.com/AY2122S2-CS2113T-T10-2/tp/releases).
 3. Move the file into a folder that you want to use as the _home folder_.
-4. Open a terminal in the home folder and run `java -jar PlanITarium.jar`.
+4. Open a terminal in the _home folder_ and run `java -jar PlanITarium.jar`.
 5. Type your commands into the terminal and press [Enter] to execute it.
 6. Refer to [Features](#features) below for details on each command.
 
 ## Quick Notes
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.
+* Words in `UPPER_CASE` are the parameters to be supplied by you.
     * Example: `add /n NAME /g GROUP_INDEX` where `NAME` and `GROUP_INDEX` are the parameters.
 * A forward slash `/`, appended by a letter, denotes a delimiter that is used to indicate a parameter used for the
   command. Each delimiter is used to indicate one parameter. The documentation for the commands will specify the
