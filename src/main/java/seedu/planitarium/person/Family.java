@@ -224,4 +224,17 @@ public class Family {
         logger.log(Level.INFO, infoString);
         return getList(group).getNumberOfIncomes(personIndex);
     }
+
+    /**
+     * Returns the number of expenditures of a person in the array list specified by the group index.
+     *
+     * @param personIndex The index of the person
+     * @param group The index of the group
+     * @return The number of expenditures of the person in the array list specified
+     */
+    public int getNumberOfExpenditures(int personIndex, int group) {
+        String infoString = "Method getNumberOfExpenditures() called";
+        logger.log(Level.INFO, infoString);
+        return getList(group).getNumberOfExpenditures(personIndex);
+    }
 }

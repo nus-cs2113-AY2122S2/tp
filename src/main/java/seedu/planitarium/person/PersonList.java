@@ -219,5 +219,21 @@ public class PersonList {
         int listIndex = personIndex - 1;
         return personList.get(listIndex).getNumberOfIncomes();
     }
+
+    /**
+     * Returns the number of expenditures of the specified person.
+     *
+     * @param personIndex The index of the person
+     * @return The number of incomes of the person
+     */
+    public int getNumberOfExpenditures(int personIndex) {
+        String infoString = "Entering getNumberOfExpenditures()";
+        logger.log(Level.INFO, infoString);
+        assert (personIndex >= SINGULAR);
+        assert (personIndex <= numberOfMembers);
+        infoString = "Index assertions passed in getNumberOfExpenditures()";
+        logger.log(Level.INFO, infoString);
+        int listIndex = personIndex - 1;
+        return personList.get(listIndex).getNumberOfExpenditures();
     }
 }
