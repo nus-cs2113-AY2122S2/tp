@@ -94,7 +94,7 @@ public class UserInterface {
                     if (matches.get("flag").equals("o")) {
                         warehouse.removeOrder(matches.get("id"));
                     } else if (matches.get("flag").equals("g")) {
-                        String regexGood = "(id/(?<id>\\d*) q/(?<qty>\\d*)";
+                        String regexGood = "id/(?<id>\\d*) q/(?<qty>\\d*)";
                         HashMap<String,String> regexGoodMatch = new
                                 Regex(userInput, regexGood).getGroupValues();
                         warehouse.removeGoods(regexGoodMatch.get("id"), regexGoodMatch.get("qty"));
