@@ -47,6 +47,44 @@ public class UserInterface {
                     break;
                 case "remove":
                     userInputIsRemove(userInput);
+                    /*
+                    regex = "(?<flag>[og])/";
+                    regexMatch = new Regex(userInput, regex);
+                    matches = regexMatch.getGroupValues();
+
+                    if (matches.get("flag").equals("o")) {
+                        String regexOrder = "oid/(?<oid>\\d*) r/(?<recv>.*) a/(?<address>.*)";
+                        HashMap<String,String> regexOrderMatches = new
+                                Regex(userInput, regexOrder).getGroupValues();
+                        warehouse.addOrder(regexOrderMatches.get("oid"), regexOrderMatches.get("recv"),
+                                regexOrderMatches.get("address"));
+                    } else if (matches.get("flag").equals("g")) {
+                        String regexGood = "oid/(?<oid>\\d*) gid/(?<gid>\\d*)"
+                                + " n/(?<name>.*) q/(?<qty>\\d*) d/(?<desc>.*)";
+                        HashMap<String,String> regexGoodMatch = new
+                                Regex(userInput, regexGood).getGroupValues();
+                        warehouse.addGoods(regexGoodMatch.get("oid"), regexGoodMatch.get("gid"),
+                                regexGoodMatch.get("name"), regexGoodMatch.get("qty"), regexGoodMatch.get("desc"));
+                    } else {
+                        throw new WrongCommandException("add", true);
+                    }
+                    break;
+                case "remove":
+                    regex = "(?<flag>[og])/ id/(?<id>\\d*)";
+                    regexMatch = new Regex(userInput, regex);
+                    matches = regexMatch.getGroupValues();
+
+                    if (matches.get("flag").equals("o")) {
+                        warehouse.removeOrder(matches.get("id"));
+                    } else if (matches.get("flag").equals("g")) {
+                        String regexGood = "id/(?<id>\\d*) q/(?<qty>\\d*)";
+                        HashMap<String,String> regexGoodMatch = new
+                                Regex(userInput, regexGood).getGroupValues();
+                        warehouse.removeGoods(regexGoodMatch.get("id"), regexGoodMatch.get("qty"));
+                    } else {
+                        throw new WrongCommandException("remove", true);
+                    }
+                    */
                     break;
                 case "total":
                     userInputIsTotal(userInput);
