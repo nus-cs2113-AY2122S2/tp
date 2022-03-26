@@ -27,19 +27,19 @@ public class AddSatisfactionCommandTest {
     @Test
     public void commandParser_addCommandWithEmptySatisfactionCustomer_exceptionThrown() {
         assertThrows(EmptySatisfactionCustomerException.class, ()
-            -> new CommandParser().parse("Add Satisfaction"));
+            -> new CommandParser().parse("Add Satisfaction / 4"));
     }
 
     @Test
     public void commandParser_addCommandWithEmptySatisfactionValue_exceptionThrown() {
         assertThrows(EmptySatisfactionValueException.class, ()
-            -> new CommandParser().parse("Add Satisfaction Bob"));
+            -> new CommandParser().parse("Add Satisfaction Bob / "));
     }
 
     @Test
-    public void commandParser_addCommandWithSlashAndEmptySatisfactionValue_exceptionThrown() {
-        assertThrows(EmptySatisfactionValueException.class, ()
-            -> new CommandParser().parse("Add Satisfaction Bob /"));
+    public void commandParser_addCommandWithNoSlash_exceptionThrown() {
+        assertThrows(InvalidCommandException.class, ()
+            -> new CommandParser().parse("Add Satisfaction Bob 5"));
     }
 
     @Test
@@ -47,12 +47,5 @@ public class AddSatisfactionCommandTest {
         assertThrows(InvalidSatisfactionValueException.class, ()
             -> new CommandParser().parse("Add Satisfaction Joe / -1"));
     }
-
-    @Test
-    public void commandParser_addSatisfactionCommandWithoutSlash_exceptionThrown() {
-        assertThrows(EmptySatisfactionValueException.class, ()
-            -> new CommandParser().parse("Add Satisfaction Joe 3"));
-    }
-
 
 }

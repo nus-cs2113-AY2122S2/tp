@@ -16,9 +16,9 @@ public class AddHousekeeperPerformanceCommand extends Command {
     }
 
     public String extractHousekeeperName(String userInput) throws HotelLiteManagerException {
-        if (userInput.isEmpty()) {
-            throw new EmptyHousekeeperPerformanceNameException();
-        }
+//        if (userInput.isEmpty()) {
+//            throw new EmptyHousekeeperPerformanceNameException();
+//        }
         String[] splitInput = userInput.split("/");
         String housekeeperName = splitInput[0].trim();
         if (housekeeperName.isEmpty()) {
