@@ -44,8 +44,8 @@ public class SessionViewCommand extends Command {
         Session session;
         try {
             session = profile.getSession(sessionId);
-            System.out.println(VIEW_HEADER_PREPEND + sessionId + VIEW_HEADER_POSTPEND);
-            System.out.println(session);
+            ui.printlnMessage(VIEW_HEADER_PREPEND + sessionId + VIEW_HEADER_POSTPEND);
+            ui.printlnMessage(session.toString());
         } catch (InvalidDataException e) {
             ui.printlnMessage(e.getMessage());
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONVIEW_SESSION_VIEW_FAILED + "\n"
