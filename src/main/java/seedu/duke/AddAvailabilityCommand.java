@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -87,22 +88,14 @@ public class AddAvailabilityCommand extends Command {
      * Get the Name of the housekeeper and verify that housekeeper is in records. If in records, add
      * his/her availability into housekeeper list.
      *
-     * @param housekeeperList  The list of housekeeper recorded.
-     * @param satisfactionList The given list of Satisfaction objects.
-     * @param roomList         The given list of Room objects. N/A for this class, but
-     *                         must be included for the execution override.
-     * @param listOfItems      The given list of Item objects. N/A for this class, but
-     *                         must be included for the execution override.
      * @param ui               The user interface for this execution method.
      */
     @Override
-    public void execute(HousekeeperList housekeeperList, HousekeeperPerformanceList housekeeperPerformanceList,
-                        SatisfactionList satisfactionList,
-                        AssignmentMap assignmentMap, RoomList roomList,
-                        ItemList listOfItems, Ui ui) throws UserExistException {
+    public void execute(ListContainer listContainer, Ui ui) throws UserExistException {
         String availability = getAvailability();
         String name = getName();
         ui.printMessage("Added " + name + " availability into records");
+        HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.searchAvailability(name, availability);
     }
 }
