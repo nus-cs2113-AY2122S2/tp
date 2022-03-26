@@ -1,6 +1,8 @@
 package arcs;
 
 import arcs.commands.CommandResult;
+import arcs.data.Customer.Customer;
+import arcs.data.Customer.CustomerManager;
 import arcs.data.route.RouteManager;
 import arcs.data.flightbooking.FlightBookingManager;
 import arcs.data.menuitems.MenuItemManager;
@@ -19,6 +21,7 @@ public class Main {
     private MainUi mainUi;
     private RouteFileManager routeFileManager;
     private FlightBookingManager flightBookingManager;
+    private CustomerManager customerManager;
     /**
      * Parser object.
      */
@@ -38,6 +41,7 @@ public class Main {
         routeFileManager = new RouteFileManager();
         loadData();
         flightBookingManager = new FlightBookingManager();
+        customerManager = new CustomerManager();
     }
 
     public void run() {
@@ -48,7 +52,8 @@ public class Main {
             mainUi.displayGetNextUserCommand();
             String userCommandText = mainUi.getUserCommand();
             command = parser.parseCommand(userCommandText);
-            command.setData(routeManager, flightBookingManager, menuItemManager);
+            command.setData(routeManager, flightBookingManager,
+                    menuItemManager, customerManager);
             CommandResult result = command.execute();
             mainUi.displayResultToUser(result);
             mainUi.displayLineDivider();
