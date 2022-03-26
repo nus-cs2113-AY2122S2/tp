@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 
 /**
- * Represents a command object that edits an Activity.
+ * Represents a command object that edits an Activity object.
  *
  * @author Saurav
  */
