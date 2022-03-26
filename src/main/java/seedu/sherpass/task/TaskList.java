@@ -2,6 +2,7 @@ package seedu.sherpass.task;
 
 import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.util.Ui;
+import seedu.sherpass.util.parser.TaskParser;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -220,8 +221,8 @@ public class TaskList {
      * @param index Index of a task. Corresponds to its placement in task array.
      * @return Returns true if task exists in task array. False otherwise.
      */
-    public boolean isTaskExist(int index) {
-        return index >= 0 && index < tasks.size();
+    public boolean isTaskNotExist(int index) {
+        return index < 0 || index >= tasks.size();
     }
 
     public int getSize() {
@@ -237,12 +238,21 @@ public class TaskList {
      * in task array.
      *
      * @param deleteIndex Index of a task to search for.
+     * @param ui User Interface
      */
-    public void removeTask(int deleteIndex) {
+    public void removeTask(int deleteIndex, Ui ui) {
         Task taskToBeRemoved = tasks.get(deleteIndex);
-        tasks.remove(deleteIndex);
-        System.out.println("Okay. I've removed this task:\n  " + taskToBeRemoved
-                + "\nNow you have " + tasks.size() + " task(s) in the list.");
+        String repeatKeyWord = "";
+        if (!TaskParser.isValidFreq(taskToBeRemoved.getRepeatFrequency())) {
+            tasks.remove(deleteIndex);
+        } else {
+            repeatKeyWord = "repeated";
+            int identifier = taskToBeRemoved.getIdentifier();
+            tasks.removeIf(task -> task.getIdentifier() == identifier);
+        }
+        updateIndex();
+        ui.showToUser("Okay. I've removed this " + repeatKeyWord + " task:\n  "
+                + taskToBeRemoved + "\nNow you have " + tasks.size() + " task(s) in the list.");
     }
 
     /**

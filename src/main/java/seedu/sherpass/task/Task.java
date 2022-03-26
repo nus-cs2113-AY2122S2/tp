@@ -10,7 +10,7 @@ import static seedu.sherpass.constant.Message.EMPTY_STRING;
 
 public class Task {
     protected String description;
-    protected Integer identifier;
+    protected int identifier;
     protected boolean isDone;
     protected LocalDateTime byDate;
     protected LocalDateTime doOnStartDateTime;
@@ -26,7 +26,7 @@ public class Task {
      * @param identifier Identity number of a repeated task.
      * @param description Description of task.
      */
-    public Task(Integer identifier, String description, LocalDateTime byDate,
+    public Task(int identifier, String description, LocalDateTime byDate,
                 LocalDateTime doOnStartDateTime, LocalDateTime doOnEndDateTime,
                 Frequency repeatFrequency, int index) {
         this.identifier = identifier;
@@ -166,7 +166,7 @@ public class Task {
         return doOnEndDateTime;
     }
 
-    public Integer getIdentifier() {
+    public int getIdentifier() {
         return identifier;
     }
 

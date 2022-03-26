@@ -269,11 +269,12 @@ public class TaskParser {
         return null;
     }
 
-    protected static Command prepareDelete(String[] parsedInput, TaskList taskList) {
+    protected static Command prepareDelete(String argument, TaskList taskList, Ui ui) {
         try {
-            return new DeleteCommand(parsedInput, taskList);
+            int deleteIndex = Integer.parseInt(argument) - 1;
+            return new DeleteCommand(deleteIndex, taskList);
         } catch (IndexOutOfBoundsException | InvalidInputException | NumberFormatException e) {
-            System.out.println(ERROR_INVALID_DELETE_INDEX_MESSAGE + HELP_MESSAGE_SPECIFIC_COMMAND);
+            ui.showToUser(ERROR_INVALID_DELETE_INDEX_MESSAGE + HELP_MESSAGE_SPECIFIC_COMMAND);
         }
         return null;
     }
@@ -355,8 +356,6 @@ public class TaskParser {
          */
         return null;
     }
-
-
 
 
 }

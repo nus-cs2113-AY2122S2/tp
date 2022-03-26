@@ -5,8 +5,6 @@ import seedu.sherpass.util.Ui;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.exception.InvalidInputException;
 
-import static seedu.sherpass.constant.Index.DELETE_INDEX;
-
 public class DeleteCommand extends Command {
     private int deleteIndex;
 
@@ -17,17 +15,15 @@ public class DeleteCommand extends Command {
     /**
      * Creates constructor for delete command.
      *
-     * @param parsedInput Contains task description to search for
+     * @param deleteIndex Contains task description to search for
      * @param taskList    Task array.
      * @throws InvalidInputException If input task description is empty.
      */
-    public DeleteCommand(String[] parsedInput, TaskList taskList) throws InvalidInputException {
-        if (parsedInput[DELETE_INDEX].isBlank()) {
+    public DeleteCommand(int deleteIndex, TaskList taskList) throws InvalidInputException {
+        if (taskList.isTaskNotExist(deleteIndex)) {
             throw new InvalidInputException();
         }
-        if (taskList.isTaskExist(Integer.parseInt(parsedInput[DELETE_INDEX]) - 1)) {
-            deleteIndex = Integer.parseInt(parsedInput[DELETE_INDEX]) - 1;
-        }
+        this.deleteIndex = deleteIndex;
     }
 
     /**
@@ -39,7 +35,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.removeTask(deleteIndex);
+        taskList.removeTask(deleteIndex, ui);
         storage.writeSaveData(taskList);
     }
 }
