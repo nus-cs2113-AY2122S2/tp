@@ -223,6 +223,12 @@ The general workflow of the `session /list` command is as follows:
 
 The sequence diagram below models the interaction between various entities in the system
 when the user invokes the `session /summary` command
+<br>
+<br>
+![Session Summary Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SessionSummaryCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `session /summary` command is as follows:
 
 ### Add an activity
 ### Remove an activity
