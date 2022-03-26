@@ -24,10 +24,10 @@ public class DeleteItemCommand extends Command {
     }
 
     @Override
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList, AssignmentMap assignmentMap,
-                        RoomList roomList, ItemList listOfItems, Ui ui) throws HotelLiteManagerException,
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException,
             WrongCommandException {
         Item itemToDelete = getItem();
+        ItemList listOfItems = listContainer.getItemList();
         listOfItems.deleteItemInList(itemToDelete);
         ui.printDeleteItemAcknowledgementMessage(itemToDelete, listOfItems);
     }
