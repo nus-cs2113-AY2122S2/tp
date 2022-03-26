@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ExitCommandParserTest {
+
     private static final String COMMAND_TYPE = ExitCommandParser.COMMAND_TEXT;
 
     /**
