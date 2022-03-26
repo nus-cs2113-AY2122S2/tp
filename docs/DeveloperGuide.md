@@ -154,11 +154,11 @@ the Command component when any user input is provided to SplitLah.
 4. With the corresponding `XYZCommandParser` object instantiated, `Parser` class will call the `getCommand` method
    of `XYZCommandParser`. This process will be explained in further detail in the sequence diagrams below.
 
-![Reference Frame Command Parser Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefCommandParser.drawio.png)
+   ![Reference Frame Command Parser Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefCommandParser.drawio.png)
 
-![Reference Frame ParseABC Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefParseABC.drawio.png)
+   ![Reference Frame ParseABC Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefParseABC.drawio.png)
 
-![Reference Frame InvalidCommand Instantiation Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefInvalidCommand.drawio.png)
+   ![Reference Frame InvalidCommand Instantiation Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefInvalidCommand.drawio.png)
 
 5. After `XYZCommandParser#getCommand` is called, `XYZCommandParser` will prepare to create a `XYZCommand` object. 
    To begin with, it will parse all the remaining arguments using `ParseABC` methods from the `Parser` class.
