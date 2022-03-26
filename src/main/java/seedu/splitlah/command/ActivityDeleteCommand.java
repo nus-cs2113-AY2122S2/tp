@@ -5,6 +5,7 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.util.logging.Level;
@@ -23,18 +24,18 @@ public class ActivityDeleteCommand extends Command {
     private static final String COMMAND_SUCCESS = "The activity was deleted successfully.";
 
     public static final String[] COMMAND_DELIMITERS = {
-        Parser.SESSION_ID_DELIMITER,
-        Parser.ACTIVITY_ID_DELIMITER 
+        ParserUtils.SESSION_ID_DELIMITER,
+        ParserUtils.ACTIVITY_ID_DELIMITER 
     };
     
     private int sessionId;
     private int activityId;
 
     /**
-     * Constructs an ActivityDeleteCommand object.
+     * Initializes an ActivityDeleteCommand object.
      *
-     * @param sessionId  The id of the session.
-     * @param activityId The id of the activity.
+     * @param sessionId  An integer that uniquely identifies a session.
+     * @param activityId An integer that uniquely identifies an activity.
      */
     public ActivityDeleteCommand(int sessionId, int activityId) {
         assert sessionId > 0 : Message.ASSERT_ACTIVITYDELETE_SESSION_ID_NOT_INITIALIZED;
@@ -46,7 +47,7 @@ public class ActivityDeleteCommand extends Command {
     /**
      * Prepares user arguments for the creation of an ActivityDeleteCommand object.
      *
-     * @param commandArgs The user's arguments.
+     * @param commandArgs A String object representing the user's arguments.
      * @return An ActivityDeleteCommand object if necessary parameters were found in user arguments,
      *         an InvalidCommand object otherwise.
      */
@@ -61,13 +62,14 @@ public class ActivityDeleteCommand extends Command {
     }
 
     /**
-     * Runs the command to delete an Activity object from the list of activities managed by a Session Object.
+     * Runs the command to delete an Activity object from the list of activities in a Session object
+     * managed by the Profile object.
      * Gets the Session object using a unique session identifier.
      * Requests for confirmation from user to delete the Activity object.
      * If user confirms, proceeds to remove activity from a Session object,
      * the command aborts otherwise.
      *
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {
@@ -76,10 +78,11 @@ public class ActivityDeleteCommand extends Command {
             session = manager.getProfile().getSession(sessionId);
             assert session != null : Message.ASSERT_ACTIVITYDELETE_SESSION_IS_NULL;
             session.removeActivity(activityId);
-            manager.getUi().printlnMessage(COMMAND_SUCCESS);
+            manager.saveProfile();
+            manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYDELETE_ACTIVITY_REMOVED + activityId);
         } catch (InvalidDataException e) {
-            manager.getUi().printlnMessage(e.getMessage());
+            manager.getUi().printlnMessageWithDivider(e.getMessage());
         }
     }
 }

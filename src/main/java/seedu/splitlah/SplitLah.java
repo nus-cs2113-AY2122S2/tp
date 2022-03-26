@@ -20,7 +20,7 @@ public class SplitLah {
 
     /** Sets up the required objects for application.  */
     public SplitLah() {
-        manager = new Manager();
+        manager = new Manager(true);
     }
 
     /** Runs the program until it terminates.  */
@@ -49,5 +49,6 @@ public class SplitLah {
             command = Parser.getCommand(userInput);
             command.run(manager);
         } while (!Command.isExitCommand(command));
+        manager.saveProfile();
     }
 }

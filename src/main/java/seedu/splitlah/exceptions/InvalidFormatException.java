@@ -11,7 +11,7 @@ public class InvalidFormatException extends Exception {
     private final Throwable cause;
 
     /**
-     * Constructor that includes a message and an exception.
+     * Initializes an InvalidFormatException object.
      * Use this to store another exception (such as a Java exception) inside this exception to access it later.
      *
      * @param message A String object containing a description of the error.

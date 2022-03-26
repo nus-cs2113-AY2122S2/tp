@@ -16,7 +16,7 @@ class ProfileTest {
     Manager manager = new Manager();
 
     /**
-     * Creates 2 sessions that is stored and managed by the Manager object.
+     * Creates two sessions that is stored and managed by the Manager object.
      */
     @BeforeEach
     void setUp() {
@@ -89,7 +89,7 @@ class ProfileTest {
      * a specified session unique identifier is not found.
      */
     @Test
-    public void getSession_invalidSessionId_exceptionThrown() {
+    public void getSession_invalidSessionId_InvalidDataExceptionThrown() {
         int sessionIdToTest = 10;
         try {
             manager.getProfile().getSession(sessionIdToTest);
