@@ -76,7 +76,24 @@ class ActivityDeleteCommandParserTest {
             activityDeleteCommandParser.getCommand(argsMissingSessionIdArgument);
             fail();
         } catch (InvalidFormatException e) {
-            String messageToTest = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + "/aid"
+            String messageToTest = Message.ERROR_PARSER_MISSING_ARGUMENT + "/sid"
+                    + "\n" + ActivityDeleteCommandParser.COMMAND_FORMAT;
+            assertEquals(messageToTest, e.getMessage());
+        }
+
+        // Case : Missing activity ID
+        String inputMissingActivityIdArgument = "activity /delete /sid 1 /aid";
+        String argsMissingActivityIdArgument = Parser.getRemainingArgument(inputMissingActivityIdArgument);
+        String errorMessageTwo = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingActivityIdArgument);
+        if (!errorMessageTwo.isEmpty()) {
+            fail();
+        }
+
+        try {
+            activityDeleteCommandParser.getCommand(argsMissingActivityIdArgument);
+            fail();
+        } catch (InvalidFormatException e) {
+            String messageToTest = Message.ERROR_PARSER_MISSING_ARGUMENT + "/aid"
                     + "\n" + ActivityDeleteCommandParser.COMMAND_FORMAT;
             assertEquals(messageToTest, e.getMessage());
         }
