@@ -3,11 +3,11 @@ package seedu.splitlah.ui;
 import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
-import seedu.splitlah.command.ExitCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
+import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
@@ -70,7 +70,7 @@ public abstract class Message {
                     + "13.  Show this help menu\n"
                     + "        " + HelpCommandParser.COMMAND_FORMAT + "\n"
                     + "14. Exit the program\n"
-                    + "        " + ExitCommand.COMMAND_FORMAT;
+                    + "        " + ExitCommandParser.COMMAND_FORMAT;
     public static final String PROMPT_TEXTUI_AWAITING_INPUT =
             "> ";
 
