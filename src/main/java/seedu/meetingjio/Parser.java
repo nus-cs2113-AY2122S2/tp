@@ -1,12 +1,6 @@
 package seedu.meetingjio;
 
-import seedu.meetingjio.commands.Command;
-import seedu.meetingjio.commands.AddLessonCommand;
-import seedu.meetingjio.commands.HelpCommand;
-import seedu.meetingjio.commands.ListCommand;
-import seedu.meetingjio.commands.DeleteCommand;
-import seedu.meetingjio.commands.ClearCommand;
-import seedu.meetingjio.commands.CommandResult;
+import seedu.meetingjio.commands.*;
 
 import seedu.meetingjio.exceptions.InvalidDayException;
 import seedu.meetingjio.exceptions.MissingValueException;
@@ -55,6 +49,8 @@ public class Parser {
             return new ClearCommand(arguments.trim());
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+        case AddMeetingCommand.COMMAND_WORD:
+            return prepareAddMeeting();
         default:
             String feedback = ERROR_INVALID_COMMAND + '\n' + MESSAGE_HELP;
             return new CommandResult(feedback);
@@ -233,5 +229,39 @@ public class Parser {
             //        String.format("String contains %s", HEADINGS[i]);
         }
         return -1;
+    }
+
+    public Command prepareAddMeeting() {
+        try {
+            String[] eventDescription = splitArguments();
+            checkNonNullValues(eventDescription);
+
+            String day = eventDescription[DAY_INDEX].toLowerCase();
+            int startTime = Integer.parseInt(eventDescription[STARTTIME_INDEX]);
+            int endTime = Integer.parseInt(eventDescription[ENDTIME_INDEX]);
+            String mode = eventDescription[MODE_INDEX].toLowerCase();
+
+            checkDay(day);
+            checkTime(startTime, endTime);
+            checkMode(mode);
+
+            //String name = eventDescription[NAME_INDEX];
+            String title = eventDescription[TITLE_INDEX];
+            return new AddMeetingCommand(title, day, startTime, endTime, mode);
+
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
+            return new CommandResult(ERROR_MISSING_PARAMETERS);
+        } catch (MissingValueException mve) {
+            return new CommandResult(ERROR_MISSING_VALUES);
+        } catch (InvalidTimeException | NumberFormatException ite) {
+            return new CommandResult(ERROR_INVALID_TIME);
+        } catch (InvalidDayException ide) {
+            return new CommandResult(ERROR_INVALID_DAY);
+        } catch (InvalidModeException ime) {
+            return new CommandResult(ERROR_INVALID_MODE);
+        } catch (AssertionError ae) {
+            logger.log(Level.INFO, "Assertion Error");
+            return new CommandResult(ae.getMessage());
+        }
     }
 }

@@ -125,4 +125,11 @@ public class Timetable {
         list = tempList;
     }
 
+    public ArrayList<Event> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<Event> list) {
+        this.list = list;
+    }
 }

@@ -1,5 +1,7 @@
 package seedu.meetingjio.timetables;
 
+import seedu.meetingjio.events.Event;
+import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.commands.ListCommand;
 
@@ -7,9 +9,11 @@ import java.util.ArrayList;
 
 public class MasterTimetable {
     private final ArrayList<Timetable> timetables;
+    private final ArrayList<Meeting> meetingList;
 
     public MasterTimetable() {
         this.timetables = new ArrayList<>();
+        this.meetingList = new ArrayList<>();
     }
 
     public Timetable getByName(String name) throws TimetableNotFoundException {
@@ -68,4 +72,20 @@ public class MasterTimetable {
         return timetables.size();
     }
 
+    public boolean checkIfEveryoneFree(MasterTimetable masterTimetable, Meeting meeting) {
+        for (Timetable timetable : timetables) {
+            if (checkIfMeetingClashesWithTimetable(timetable,meeting)){
+                return false;
+            }
+        }
+        return true;
+    }
+    private boolean checkIfMeetingClashesWithTimetable(Timetable timetable,Meeting meeting){
+        for (Event event : timetable.getList()){
+            if (meeting.overlaps(event)){
+                return false;
+            }
+        }
+        return true;
+    }
 }
