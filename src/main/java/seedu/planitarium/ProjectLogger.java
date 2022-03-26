@@ -1,4 +1,4 @@
-//@@author Teanweijun
+//@@author teanweijun
 
 package seedu.planitarium;
 
@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import seedu.planitarium.ui.UI;
+import seedu.planitarium.global.UI;
 
 public class ProjectLogger {
     private Logger logger;
@@ -24,10 +24,6 @@ public class ProjectLogger {
         }
     }
 
-    public Logger getLogger() {
-        return this.logger;
-    }
-
     /**
      * Initialize a logger for the program.
      * 
@@ -40,5 +36,9 @@ public class ProjectLogger {
         fh.setFormatter(new SimpleFormatter());
         fh.setLevel(Level.ALL);
         this.logger.addHandler(fh);
+    }
+
+    public void log(Level level, String message) {
+        logger.log(level, message);
     }
 }

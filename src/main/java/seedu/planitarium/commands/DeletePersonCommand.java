@@ -22,7 +22,7 @@ public class DeletePersonCommand extends Command {
     public void execute() throws UnknownException {
         assert (uid < 1) : USER_INDEX_NOT_VALID;
         assert (personList != null) : PERSONLIST_NOT_NULL;
-        personList.removePerson(uid);
+        personList.deletePerson(uid);
     }
 
 }

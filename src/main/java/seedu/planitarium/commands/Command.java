@@ -1,7 +1,7 @@
 package seedu.planitarium.commands;
 
 import seedu.planitarium.person.PersonList;
-import seedu.planitarium.ui.UI;
+import seedu.planitarium.global.UI;
 
 public class Command {
 
