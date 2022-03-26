@@ -75,7 +75,9 @@ public class Parser {
     }
 
     public static Command parseEditDoctor(String parameters) throws HalpmiException {
-        return null;
+        String[] doctorParameters = minParameterCheck(parameters, 7);
+        Validator.validateAddDoctor(doctorParameters);
+        return new EditDoctorCommand(doctorParameters);
     }
 
 
@@ -109,11 +111,13 @@ public class Parser {
         Validator.validateAddAppointment(addAppointmentParameters);
         return addAppointmentParameters;
     }
-
+/*
     public static Command parseFindPatient(String parameters) throws HalpmiException {
         String[] findPatientParameters = minParameterCheck(parameters, 2);
         return new FindPatientCommand(findPatientParameters);
     }
+
+ */
     public static String[] parseFindAppointment(String parameters) throws HalpmiException {
         String[] findAppointmentParameters = minParameterCheck(parameters, 2);
         return findAppointmentParameters;

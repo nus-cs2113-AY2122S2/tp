@@ -15,6 +15,17 @@ public class Doctor extends Person {
 
     // @override toString()
 
+    public void edit(String fullName, int age, String address, char gender, String dob,
+                     String specialization) {
+        //this.nric = nric;
+        this.fullName = fullName;
+        this.age = age;
+        this.gender = gender;
+        this.address = address;
+        this.dob = dob;
+        this.specialization = specialization;
+    }
+
     public String saveString() {
         return nric + "," + fullName + "," + age + "," + address + "," + gender
                 + "," +  dob + "," + specialization;
