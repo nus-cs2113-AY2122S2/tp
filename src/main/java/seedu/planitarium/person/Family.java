@@ -12,6 +12,7 @@ public class Family {
     private PersonList myGen;
     private PersonList children;
     private static ProjectLogger logger = new ProjectLogger(Family.class.getName(), "Family.log");
+    private static final String INDEX_ERROR_MESSAGE = "Invalid index passed in";
 
     /**
      * Constructs a new Family object.
@@ -33,12 +34,12 @@ public class Family {
     private PersonList getList(int group) {
         String infoString = "Entering getList()";
         logger.log(Level.INFO, infoString);
-        assert(group >= 1);
-        assert(group <= 3);
+        assert (group >= 1);
+        assert (group <= 3);
         infoString = "Index assertions passed in getList()";
         logger.log(Level.INFO, infoString);
         PersonList toReturn = null;
-        switch(group) {
+        switch (group) {
         case Constants.PARENTS:
             toReturn = parents;
             break;
@@ -48,6 +49,8 @@ public class Family {
         case Constants.CHILDREN:
             toReturn = children;
             break;
+        default:
+            logger.log(Level.SEVERE, INDEX_ERROR_MESSAGE);
         }
         return toReturn;
     }
@@ -61,12 +64,12 @@ public class Family {
     private String getGenerationName(int group) {
         String infoString = "Entering getGenerationName()";
         logger.log(Level.INFO, infoString);
-        assert(group >= 1);
-        assert(group <= 3);
+        assert (group >= 1);
+        assert (group <= 3);
         infoString = "Index assertions passed in getGenerationName()";
         logger.log(Level.INFO, infoString);
         String toReturn = null;
-        switch(group) {
+        switch (group) {
         case Constants.PARENTS:
             toReturn = "Parents";
             break;
@@ -76,6 +79,8 @@ public class Family {
         case Constants.CHILDREN:
             toReturn = "Children";
             break;
+        default:
+            logger.log(Level.SEVERE, INDEX_ERROR_MESSAGE);
         }
         return toReturn;
     }
@@ -173,10 +178,10 @@ public class Family {
             double expenditure = personList.getTotalExpenditure();
             double disposable = personList.getRemain();
             String generation = getGenerationName(i);
-            System.out.println((i + 1) + ". " + generation + ":" + System.lineSeparator() +
-                    "Income: $" + income + System.lineSeparator() +
-                    "Expenditure: $" + expenditure + System.lineSeparator() +
-                    "Disposable: $" + disposable);
+            System.out.println((i + 1) + ". " + generation + ":" + System.lineSeparator()
+                    + "Income: $" + income + System.lineSeparator()
+                    + "Expenditure: $" + expenditure + System.lineSeparator()
+                    + "Disposable: $" + disposable);
         }
     }
 

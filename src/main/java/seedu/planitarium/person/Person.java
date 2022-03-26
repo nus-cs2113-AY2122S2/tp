@@ -49,10 +49,9 @@ public class Person {
         assert (description != null);
         this.incomeList.addIncome(description, amount, isPermanent);
         if (isPermanent) {
-            System.out.println("A recurring income of " + amount + " from " + description + " has been added to " +
-                    this.name);
-        }
-        else {
+            System.out.println("A recurring income of " + amount + " from " + description + " has been added to "
+                    + this.name);
+        } else {
             System.out.println("An income of " + amount + " from " + description + " has been added to " + this.name);
         }
     }
@@ -82,12 +81,11 @@ public class Person {
         assert (description != null);
         expenditureList.addExpenditure(description, amount, isPermanent);
         if (isPermanent) {
-            System.out.println("A recurring expenditure of " + amount + " for " + description + " has been added to " +
-                    this.name);
-        }
-        else {
-            System.out.println("An expenditure of " + amount + " for " + description + " has been added to " +
-                    this.name);
+            System.out.println("A recurring expenditure of " + amount + " for " + description + " has been added to "
+                    + this.name);
+        } else {
+            System.out.println("An expenditure of " + amount + " for " + description + " has been added to "
+                    + this.name);
         }
     }
 
