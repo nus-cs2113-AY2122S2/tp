@@ -37,17 +37,17 @@ public class PersonList {
     /**
      * Returns the person specified by the given index.
      *
-     * @param index The index of the person
+     * @param personIndex The index of the person
      * @return The person with the index
      */
-    public Person getPerson(int index) {
+    public Person getPerson(int personIndex) {
         String infoString = "Entering getPerson()";
         logger.log(Level.INFO, infoString);
-        assert (index >= SINGULAR);
-        assert (index <= numberOfMembers);
+        assert (personIndex >= SINGULAR);
+        assert (personIndex <= numberOfMembers);
         infoString = "Index assertions passed in getPerson()";
         logger.log(Level.INFO, infoString);
-        int listIndex = index - 1;
+        int listIndex = personIndex - 1;
         return personList.get(listIndex);
     }
 
@@ -82,16 +82,16 @@ public class PersonList {
     /**
      * Removes a person from the array list.
      *
-     * @param index The index of the person to be removed
+     * @param personIndex The index of the person to be removed
      */
-    public void deletePerson(int index) {
+    public void deletePerson(int personIndex) {
         String infoString = "Entering removePerson()";
         logger.log(Level.INFO, infoString);
-        assert (index >= SINGULAR);
-        assert (index <= numberOfMembers);
+        assert (personIndex >= SINGULAR);
+        assert (personIndex <= numberOfMembers);
         infoString = "Index assertions passed in removePerson()";
         logger.log(Level.INFO, infoString);
-        int listIndex = index - 1;
+        int listIndex = personIndex - 1;
         String name = personList.get(listIndex).getName();
         personList.remove(listIndex);
         numberOfMembers--;
@@ -101,7 +101,7 @@ public class PersonList {
     /**
      * Returns the total remaining disposable income of persons in the array list.
      *
-     * @return Total disposable income
+     * @return The total disposable income
      */
     public double getRemain() {
         String infoString = "Method getRemain() called";
@@ -158,7 +158,8 @@ public class PersonList {
     public void addIncome(int personIndex, String description, double amount, boolean isPermanent) {
         String infoString = "Method addIncome() called";
         logger.log(Level.INFO, infoString);
-        getPerson(personIndex).addIncome(description, amount, isPermanent);
+        int listIndex = personIndex - 1;
+        getPerson(listIndex).addIncome(description, amount, isPermanent);
     }
 
     /**
@@ -170,7 +171,8 @@ public class PersonList {
     public void deleteIncome(int personIndex, int incomeIndex) {
         String infoString = "Method deleteIncome() called";
         logger.log(Level.INFO, infoString);
-        getPerson(personIndex).deleteIncome(incomeIndex);
+        int listIndex = personIndex - 1;
+        getPerson(listIndex).deleteIncome(incomeIndex);
     }
 
     /**
@@ -184,7 +186,8 @@ public class PersonList {
     public void addExpend(int personIndex, String description, double amount, boolean isPermanent) {
         String infoString = "Method addIncome() called";
         logger.log(Level.INFO, infoString);
-        getPerson(personIndex).addIncome(description, amount, isPermanent);
+        int listIndex = personIndex - 1;
+        getPerson(listIndex).addIncome(description, amount, isPermanent);
     }
 
     /**
@@ -196,6 +199,8 @@ public class PersonList {
     public void deleteExpend(int personIndex, int expendIndex) {
         String infoString = "Method deleteIncome() called";
         logger.log(Level.INFO, infoString);
-        getPerson(personIndex).deleteIncome(expendIndex);
+        int listIndex = personIndex - 1;
+        getPerson(listIndex).deleteIncome(expendIndex);
+    }
     }
 }

@@ -194,9 +194,21 @@ public class Family {
     public void list(int group) {
         String infoString = "Method detailList() called";
         logger.log(Level.INFO, infoString);
-        PersonList personList = getList(group);
         String generation = getGenerationName(group);
         System.out.println("For " + generation + ":");
+        PersonList personList = getList(group);
         personList.list();
+    }
+
+    /**
+     * Returns the number of members in the array list specified by the group index.
+     *
+     * @param group The index of the group
+     * @return The number of members in the array list specified
+     */
+    public int getNumberOfMembers(int group) {
+        String infoString = "Method getNumberOfMembers() called";
+        logger.log(Level.INFO, infoString);
+        return getList(group).getNumberOfMembers();
     }
 }
