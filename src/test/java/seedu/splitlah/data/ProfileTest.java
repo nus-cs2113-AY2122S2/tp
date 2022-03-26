@@ -128,4 +128,146 @@ class ProfileTest {
             assertEquals(invalidDataException.getMessage(), Message.ERROR_PROFILE_SESSION_NOT_IN_LIST);
         }
     }
+
+    /**
+     * Checks if an exception is properly thrown when list of session is empty.
+     */
+    @Test
+    public void getSession_sessionListEmpty_InvalidDataExceptionThrown() {
+        int sessionIdToTest = 1;
+        try {
+            Session retrievedSession = manager.getProfile().getSession(sessionIdToTest);
+            fail();
+        } catch (InvalidDataException invalidDataException) {
+            assertEquals(invalidDataException.getMessage(), Message.ERROR_PROFILE_SESSION_LIST_EMPTY);
+        }
+    }
+
+    /**
+     * Checks if method returns true when a Group object with the specified group name is found.
+     */
+    @Test
+    public void hasGroupName_inputContainsExistingGroupName_true() {
+        String groupArgs = "group /create /n Project members /pl Alice Bob Charlie";
+        Command createGroup = Parser.getCommand(groupArgs);
+        createGroup.run(manager);
+
+        String groupNameToTest = "Project members";
+        boolean isExists = manager.getProfile().hasGroupName(groupNameToTest);
+        assertTrue(isExists);
+    }
+
+    /**
+     * Checks if method returns false when a Group object with the specified group name is not found.
+     */
+    @Test
+    public void hasGroupName_inputContainsNonExistingGroupName_false() {
+        String groupArgs = "group /create /n Project members /pl Alice Bob Charlie";
+        Command createGroup = Parser.getCommand(groupArgs);
+        createGroup.run(manager);
+
+        String groupNameToTest = "High school Friends";
+        boolean isExists = manager.getProfile().hasGroupName(groupNameToTest);
+        assertFalse(isExists);
+    }
+
+    /**
+     * Checks if method returns false when the list of group is empty.
+     */
+    @Test
+    public void hasGroupName_groupListEmpty_false() {
+        String groupNameToTest = "Project members";
+        boolean isExists = manager.getProfile().hasGroupName(groupNameToTest);
+        assertFalse(isExists);
+    }
+
+    /**
+     * Checks if method returns true when a Group object with the specified group unique identifier is found.
+     */
+    @Test
+    public void hasGroupId_inputContainsExistingGroupId_true() {
+        String groupArgs = "group /create /n Project members /pl Alice Bob Charlie";
+        Command createGroup = Parser.getCommand(groupArgs);
+        createGroup.run(manager);
+
+        int groupIdToTest = 1;
+        boolean isExists = manager.getProfile().hasGroupId(groupIdToTest);
+        assertTrue(isExists);
+    }
+
+    /**
+     * Checks if method returns false when a Group object with the specified group unique identifier is not found.
+     */
+    @Test
+    public void hasGroupId_inputContainsNonExistingGroupId_false() {
+        String groupArgs = "group /create /n Project members /pl Alice Bob Charlie";
+        Command createGroup = Parser.getCommand(groupArgs);
+        createGroup.run(manager);
+
+        int groupIdToTest = 10;
+        boolean isExists = manager.getProfile().hasGroupId(groupIdToTest);
+        assertFalse(isExists);
+    }
+
+    /**
+     * Checks if method returns false when the list of group is empty.
+     */
+    @Test
+    public void hasGroupId_groupListEmpty_false() {
+        int groupIdToTest = 1;
+        boolean isExists = manager.getProfile().hasGroupId(groupIdToTest);
+        assertFalse(isExists);
+    }
+
+    /**
+     * Checks if the correct Group object is properly returned when a Group object with
+     * the specified group unique identifier is found.
+     */
+    @Test
+    public void getGroup_validGroupId_groupReturned() {
+        String groupArgs = "group /create /n Project members /pl Alice Bob Charlie";
+        Command createGroup = Parser.getCommand(groupArgs);
+        createGroup.run(manager);
+
+        int groupIdToTest = 1;
+        try {
+            Group retrievedGroup = manager.getProfile().getGroup(groupIdToTest);
+            assertEquals(groupIdToTest, retrievedGroup.getGroupId());
+        } catch (InvalidDataException invalidDataException) {
+            fail();
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when a Group object with
+     * a specified group unique identifier is not found.
+     */
+    @Test
+    public void getGroup_invalidGroupId_InvalidDataExceptionThrown() {
+        String groupArgs = "group /create /n Project members /pl Alice Bob Charlie";
+        Command createGroup = Parser.getCommand(groupArgs);
+        createGroup.run(manager);
+
+        int groupIdToTest = 10;
+        try {
+            manager.getProfile().getGroup(groupIdToTest);
+            fail();
+        } catch (InvalidDataException invalidDataException) {
+            assertEquals(invalidDataException.getMessage(), Message.ERROR_PROFILE_GROUP_NOT_IN_LIST);
+        }
+    }
+
+    /**
+     * Checks if an exception is properly thrown when list of group is empty.
+     */
+    @Test
+    public void getGroup_groupListEmpty_InvalidDataExceptionThrown() {
+        int groupIdToTest = 1;
+        try {
+            Group retrievedGroup = manager.getProfile().getGroup(groupIdToTest);
+            fail();
+        } catch (InvalidDataException invalidDataException) {
+            assertEquals(invalidDataException.getMessage(), Message.ERROR_PROFILE_GROUP_LIST_EMPTY);
+        }
+    }
 }
