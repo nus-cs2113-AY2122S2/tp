@@ -35,14 +35,14 @@ your favourite personal expenditure tracker.
     * Example: `add /n Alice /g 2`, `add /g 2 /n Alice`
 * Parameters enclosed in angle brackets and separated by a vertical bar `|` indicate that they have fixed values.
     * Example: `/p <T|F>` where the values accepted are `T` or `F`
-* If the forward slash `/` is required to be used by the user, enclose it with an extra spacing.
+* If you wish to use a forward slash `/` in the description field, input it enclosed in whitespaces.
     * Example: `Bought on / off switch` as a description
 
 ## Features
 
 ### Adding a person: `add`
 
-Adds a person to the list to track finance
+> Adds a person to the list to track finance
 
 Format: `add /n NAME /g GROUP_INDEX`
 
@@ -54,7 +54,7 @@ Example of usage:
 
 ### Removing a person: `delete`
 
-Deletes a person from the list to track finance
+> Deletes a person from the list to track finance
 
 Format: `delete /u USER_INDEX /g GROUP_INDEX`
 
@@ -114,7 +114,7 @@ Example of usage:
 
 ### Editing an income: `editin`
 
-Edit an income under a stated user
+> Edit an income under a stated user
 
 Format: `editin /u USER_INDEX /g GROUP_INDEX /r INCOME_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
 
@@ -126,7 +126,7 @@ Example of usage:
 
 ### Adding an expenditure: `addout`
 
-Adds an expenditure under a stated user
+> Adds an expenditure under a stated user
 
 Format: `addout /u USER_INDEX /g GROUP_INDEX /e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
 
@@ -138,7 +138,7 @@ Example of usgae:
 
 ### Deleting an expenditure: `deleteout`
 
-Deletes an expenditure under a stated user
+> Deletes an expenditure under a stated user
 
 Format: `deleteout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX`
 
@@ -150,7 +150,7 @@ Example of usage:
 
 ### Editing an expenditure: `editout`
 
-Edit an expenditure under a stated user
+> Edit an expenditure under a stated user
 
 Format:    `editout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX /i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
 
@@ -162,7 +162,7 @@ Example of usage:
 
 ### Showing Remaining: `remain`
 
-Shows the difference between total income and total expenditure.
+> Shows the difference between total income and total expenditure.
 
 Format: `remain`
 
@@ -176,7 +176,7 @@ Format:    `list`
 
 ### Listing all records by group: `list`
 
-Shows a list of income, expenditures, and remain, by group
+> Shows a list of income, expenditures, and remain, by group
 
 Format: `list /g GROUP_INDEX`
 
@@ -188,7 +188,7 @@ Example of usage:
 
 ### Searching: `find`
 
-Search for a string throughout all income and expenditure objects
+> Search for a string throughout all income and expenditure objects
 
 Format:    `find /d USER_STRING /c CATEGORY_INDEX`
 
@@ -200,7 +200,7 @@ Example of usgae:
 
 ### Listing categories: `listcat`
 
-Shows a list of categories
+> Shows a list of categories
 
 Format:    `listcat`
 
@@ -208,7 +208,7 @@ Format:    `listcat`
 
 ### Exit: `bye`
 
-Exits the program.
+> Exits the program.
 
 Format:    bye
 
