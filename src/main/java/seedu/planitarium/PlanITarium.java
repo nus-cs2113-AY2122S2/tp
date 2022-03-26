@@ -5,15 +5,15 @@ import java.util.Scanner;
 
 import seedu.planitarium.commands.Command;
 import seedu.planitarium.commands.CommandFactory;
-import seedu.planitarium.person.PersonList;
+import seedu.planitarium.person.Family;
 import seedu.planitarium.global.UI;
 
 public class PlanITarium {
     protected Scanner userInput;
     protected Command command;
-    protected PersonList personList = new PersonList();
+    protected Family family = new Family();
     protected CommandFactory commandFactory = new CommandFactory();
-    protected static ProjectLogger logger;
+    protected static ProjectLogger logger = new ProjectLogger(PlanITarium.class.getName(), "PlanITarium.log");
 
     public static void main(String[] args) {
         initialisePlanitarium();
