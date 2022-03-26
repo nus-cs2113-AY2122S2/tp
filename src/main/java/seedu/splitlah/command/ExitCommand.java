@@ -9,10 +9,6 @@ import seedu.splitlah.data.Manager;
  */
 public class ExitCommand extends Command {
 
-    public static final String COMMAND_TEXT = "exit";
-
-    public static final String COMMAND_FORMAT = "Syntax: exit";
-
     /**
      * Runs the command to print a farewell message.
      *

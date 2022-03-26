@@ -12,13 +12,14 @@ import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityEditCommandParser;
+import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 import seedu.splitlah.parser.commandparser.SessionViewCommandParser;
-
 import seedu.splitlah.ui.Message;
 
 import java.time.LocalDate;
@@ -26,7 +27,7 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Represents a parser that interprets the user input into data that can be understood by the program.
- * 
+ *
  * @author Warren
  */
 public class Parser {
@@ -37,12 +38,12 @@ public class Parser {
     private static final int DELIMITERED_COMMAND_MIN_TOKEN_COUNT = 2;
     static final double MINIMUM_SURCHARGE_PERCENT = 0;
     static final double MAXIMUM_SURCHARGE_PERCENT = 100;
-    
+
     // MAIN PUBLIC PARSING FUNCTIONS
     /**
      * Returns a String object that represents a name, given the command arguments from user input, delimited by the
      * Name delimiter.
-     * 
+     *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A String object that represents a name.
      * @throws InvalidFormatException If the Name delimiter is not found in the command arguments, or
@@ -59,7 +60,7 @@ public class Parser {
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A String array object that represents a list of names.
      * @throws InvalidFormatException If the Person list delimiter is not found in the command arguments, or
-     *                                if no arguments representing a list of names were provided after the 
+     *                                if no arguments representing a list of names were provided after the
      *                                Person list delimiter.
      */
     public static String[] parsePersonList(String commandArgs) throws InvalidFormatException {
@@ -74,7 +75,7 @@ public class Parser {
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A String array object that represents a list of names of involved persons.
      * @throws InvalidFormatException If the Involved delimiter is not found in the command arguments, or
-     *                                if no arguments representing a list of names were provided after the 
+     *                                if no arguments representing a list of names were provided after the
      *                                Involved delimiter.
      */
     public static String[] parseInvolved(String commandArgs) throws InvalidFormatException {
@@ -83,7 +84,7 @@ public class Parser {
     }
 
     /**
-     * Returns a String object that represents a name of a payer, given the command arguments from user input, 
+     * Returns a String object that represents a name of a payer, given the command arguments from user input,
      * delimited by the Payer delimiter.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
@@ -101,13 +102,13 @@ public class Parser {
     }
 
     /**
-     * Returns an integer that represents a session unique identifier, given the command arguments from user input, 
+     * Returns an integer that represents a session unique identifier, given the command arguments from user input,
      * delimited by the Session ID delimiter.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents a session unique identifier.
      * @throws InvalidFormatException If the Session ID delimiter is not found in the command arguments,
-     *                                if no arguments representing a session unique identifier were provided after the 
+     *                                if no arguments representing a session unique identifier were provided after the
      *                                Session ID delimiter,
      *                                if the parsed argument cannot be parsed as an integer, or
      *                                if the integer parsed from the argument is not a positive integer.
@@ -118,13 +119,13 @@ public class Parser {
     }
 
     /**
-     * Returns an integer that represents an activity unique identifier, given the command arguments from user input, 
+     * Returns an integer that represents an activity unique identifier, given the command arguments from user input,
      * delimited by the Activity ID delimiter.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents an activity unique identifier.
      * @throws InvalidFormatException If the Activity ID delimiter is not found in the command arguments,
-     *                                if no arguments representing an activity unique identifier were provided after 
+     *                                if no arguments representing an activity unique identifier were provided after
      *                                the Activity ID delimiter,
      *                                if the parsed argument cannot be parsed as an integer, or
      *                                if the integer parsed from the argument is not a positive integer.
@@ -135,13 +136,13 @@ public class Parser {
     }
 
     /**
-     * Returns an integer that represents a group unique identifier, given the command arguments from user input, 
+     * Returns an integer that represents a group unique identifier, given the command arguments from user input,
      * delimited by the Group ID delimiter.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return An integer that represents a group unique identifier.
      * @throws InvalidFormatException If the Group ID delimiter is not found in the command arguments,
-     *                                if no arguments representing a group unique identifier were provided after 
+     *                                if no arguments representing a group unique identifier were provided after
      *                                the Group ID delimiter,
      *                                if the parsed argument cannot be parsed as an integer, or
      *                                if the integer parsed from the argument is not a positive integer.
@@ -152,14 +153,14 @@ public class Parser {
     }
 
     /**
-     * Returns a LocalDate object that represents a date, given the command arguments from user input, 
+     * Returns a LocalDate object that represents a date, given the command arguments from user input,
      * delimited by the Date delimiter.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A LocalDate object that represents a date specified by the argument in the format of 'DD-MM-YYYY' or
      *         the current date if the argument following the Date delimiter indicates "today".
      * @throws InvalidFormatException If the Date delimiter is not found in the command arguments,
-     *                                if no arguments representing a date were provided after the 
+     *                                if no arguments representing a date were provided after the
      *                                Date delimiter, or
      *                                if the argument provided does not indicate "today" nor follow the date format of
      *                                'DD-MM-YYYY'.
@@ -173,7 +174,7 @@ public class Parser {
         if (argument.equalsIgnoreCase(LOCALDATE_TODAY_INDICATOR)) {
             return LocalDate.now();
         }
-        
+
         try {
             return LocalDate.parse(argument, ParserUtils.DATE_FORMAT);
         } catch (DateTimeParseException exception) {
@@ -182,13 +183,13 @@ public class Parser {
     }
 
     /**
-     * Returns a double that represents a single total cost, given the command arguments from user input, 
+     * Returns a double that represents a single total cost, given the command arguments from user input,
      * delimited by the Total cost delimiter.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A double that represents a single total cost.
      * @throws InvalidFormatException If the Total cost delimiter is not found in the command arguments,
-     *                                if no arguments representing a total cost were provided after the 
+     *                                if no arguments representing a total cost were provided after the
      *                                Total cost delimiter,
      *                                if the arguments cannot be parsed as a double,
      *                                if the parsed cost value is not positive,
@@ -201,13 +202,13 @@ public class Parser {
     }
 
     /**
-     * Returns a double array object that represents a list of cost values, given the command arguments from 
+     * Returns a double array object that represents a list of cost values, given the command arguments from
      * user input, delimited by the Cost list delimiter.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A double array object that represents a list of cost values.
      * @throws InvalidFormatException If the Cost list delimiter is not found in the command arguments,
-     *                                if no arguments representing a list of cost values were provided after the 
+     *                                if no arguments representing a list of cost values were provided after the
      *                                Cost list delimiter,
      *                                if any token in the argument cannot be parsed as a double, or
      *                                if any cost value parsed is not positive,
@@ -225,12 +226,12 @@ public class Parser {
     }
 
     /**
-     * Returns a double that represents the GST charge in percents, given the command arguments from user input, 
+     * Returns a double that represents the GST charge in percents, given the command arguments from user input,
      * delimited by the GST delimiter.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A double that represents a GST charge in percents.
-     * @throws InvalidFormatException If no arguments representing a GST charge were provided after the 
+     * @throws InvalidFormatException If no arguments representing a GST charge were provided after the
      *                                GST delimiter,
      *                                if the argument cannot be parsed as a double,
      *                                if the parsed percentage has more than 2 decimal points,
@@ -252,12 +253,12 @@ public class Parser {
     }
 
     /**
-     * Returns a double that represents the service charge in percents, given the command arguments from user input, 
+     * Returns a double that represents the service charge in percents, given the command arguments from user input,
      * delimited by the Service charge delimiter.
      *
      * @param commandArgs A String object containing the arguments portion of the entire command input from the user.
      * @return A double that represents a service charge in percents.
-     * @throws InvalidFormatException If no arguments representing a service charge were provided after the 
+     * @throws InvalidFormatException If no arguments representing a service charge were provided after the
      *                                Service charge delimiter,
      *                                if the argument cannot be parsed as a double,
      *                                if the parsed percentage has more than 2 decimal points,
@@ -277,13 +278,13 @@ public class Parser {
         }
         return serviceCharge;
     }
-    
+
     // COMMAND PARSING METHODS
     /**
      * Returns a String object containing the arguments portion of the entire command input from the user.<br>
      * E.g. Returns "/n Lunch /d 11-03-2022 /pl Warren Ivan Roy" where
      *      commandString = "session /create /n Lunch /d 11-03-2022 /pl Warren Ivan Roy"
-     * 
+     *
      * @param commandString A String object that contains the entire command input provided by the user.
      * @return A String object containing the arguments portion of the entire command input from the user if any,
      *         an empty String object otherwise.
@@ -309,7 +310,7 @@ public class Parser {
     public static String getCommandType(String commandString) {
         String[] commandTokens =
                 commandString.trim().split(ParserUtils.REGEX_WHITESPACES_DELIMITER, COMMAND_WITH_ARGS_TOKEN_COUNT);
-        
+
         if (commandTokens.length < DELIMITERED_COMMAND_MIN_TOKEN_COUNT) {
             return commandTokens[0];
         } else if (!commandTokens[1].startsWith(ParserUtils.DELIMITER_INDICATOR)) {
@@ -320,7 +321,7 @@ public class Parser {
 
     /**
      * Returns a Command object that corresponds to the String object representing the input provided by the user.
-     * 
+     *
      * @param input A String object representing the input entered by the user of SplitLah.
      * @return A Command object that performs the task specified by the user if the syntax of the input is valid,
      *         an InvalidCommand object that prints an error message otherwise.
@@ -332,12 +333,12 @@ public class Parser {
         if (commandType == null) {
             return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
         }
-        
+
         String errorMessage = ParserUtils.checkIfCommandIsValid(commandType, remainingArgs);
         if (!errorMessage.isEmpty()) {
             return new InvalidCommand(errorMessage);
         }
-        
+
         try {
             switch (commandType.toLowerCase()) {
             case SessionCreateCommandParser.COMMAND_TEXT:
@@ -358,6 +359,8 @@ public class Parser {
                 return ActivityListCommand.prepare(remainingArgs);
             case ActivityViewCommand.COMMAND_TEXT:
                 return ActivityViewCommand.prepare(remainingArgs);
+            case ActivityEditCommandParser.COMMAND_TEXT:
+                return new ActivityEditCommandParser().getCommand(remainingArgs);
             case GroupCreateCommand.COMMAND_TEXT:
                 return GroupCreateCommand.prepare(remainingArgs);
             case GroupDeleteCommand.COMMAND_TEXT:
@@ -368,8 +371,8 @@ public class Parser {
                 return GroupViewCommand.prepare(remainingArgs);
             case HelpCommandParser.COMMAND_TEXT:
                 return new HelpCommandParser().getCommand(remainingArgs);
-            case ExitCommand.COMMAND_TEXT:
-                return new ExitCommand();
+            case ExitCommandParser.COMMAND_TEXT:
+                return new ExitCommandParser().getCommand(remainingArgs);
             default:
                 return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
             }

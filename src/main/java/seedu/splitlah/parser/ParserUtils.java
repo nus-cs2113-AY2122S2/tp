@@ -3,14 +3,12 @@ package seedu.splitlah.parser;
 import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
-import seedu.splitlah.command.ExitCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
-import seedu.splitlah.command.SessionCreateCommand;
-import seedu.splitlah.command.SessionDeleteCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
@@ -481,7 +479,7 @@ public class ParserUtils {
             // Fallthrough
         case HelpCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case ExitCommand.COMMAND_TEXT:
+        case ExitCommandParser.COMMAND_TEXT:
             // Fallthrough
             return true;
         default:

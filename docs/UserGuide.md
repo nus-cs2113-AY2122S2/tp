@@ -1,8 +1,13 @@
 # User Guide
 
-SplitLah is a CLI program that lets users split bills proportionally amongst themselves after a group outing. SplitLah does
-the work of calculating how much each participant must pay across multiple activities, and keeps track of who paid the total
-bill for each activity.
+SplitLah is a desktop app with a Command Line Interface (CLI) for splitting bills amongst users after a group outing.
+Your group outings can consist of several activities with different people paying the bill for each activity; SplitLah
+does the work of calculating how much each participant owes and whom they must pay at the end of the activity. You will
+no longer have to waste time doing these calculations by hand, leaving you with more time to spend with your friends.
+SplitLah consolidates all debts intelligently so they can be paid off with the fewest number of transactions possible,
+so you spend less time making pointless transactions. SplitLah remembers this information by saving all activities and
+transactions to the disk, so you can look up past activities anytime. If you can type fast, SplitLah can manage your
+outings faster than apps using a Graphical User Interface (GUI).
 
 ## Contents
 * [User Guide](#user-guide)
@@ -32,16 +37,21 @@ bill for each activity.
 ## Introduction
 Value proposition:
 
-- Allows users to keep track of several activities and their participants.
-- Split costs evenly or independently depending on what is required.
-- Combines all payments due together for easy settlement of payments.
+- Keeps track of several activities and their participants.
+- Keeps track of several sessions independently, each with their own activities and participants.
+- Keeps track of who paid the bill for each activity.
+- Splits costs evenly or independently depending on what the user requires.
+- Consolidates debts intelligently so they can be settled with as few transactions as possible.
 - Can be operated quickly by an experienced typist.
+- Command format is consistent, intuitive and flexible in the order of arguments supplied by the user, making SplitLah
+easy to use.
 
 Target users:
 
 - People who go on group outings often and split bills.
 - People who dislike manually calculating how much people owe across several activities.
 - People who go on group outings where different people pay for different activities, making bill-splitting harder.
+- People who want to manage outings with multiple social circles in one app.
 
 ## How SplitLah works
 - An activity represents a single group activity, paid for by one person. An activity stores a list of its participants,
@@ -70,7 +80,7 @@ displayed in an easy-to-read summary.
 - A forward slash `/` indicates a delimiter and is used to separate commands into parts.
   Each command's documentation specifies the required delimiters and their purpose.
   - Example: `/n`, `/sid`
-- Parameters enclosed in [ ] must be supplied by the user. 
+- Parameters enclosed in `[ ]` must be supplied by the user. 
   - Example: `[SESSION_ID]`
 - Parameters with an ellipsis `...` indicate that the user can supply multiple values.
   - Example: `[COST1 COST2 ...]`
@@ -105,7 +115,7 @@ Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ..
 * `[NAME1 NAME2 ...]` refers to a list of persons involved in the session.
   * Each individual name is **case-insensitive**.
 
-> **💡 Note(s):**
+> **💡 Notes:**
 >- The `[SESSION_NAME]` should be unique across all active sessions.
 >- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
 
@@ -153,7 +163,7 @@ Example of usage:
 
 ### Listing all sessions: `session /list`
 
-> List all active sessions. Deleted sessions will not be listed.<br>
+> Displays all active sessions. Deleted sessions will not be listed.<br>
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `session /list`
@@ -186,8 +196,9 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
     * Each individual name is **case-insensitive**.
 * `[TOTAL_COST]` refers to the total cost of the activity.
 * `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
+  * Example: `/i Alice Bob /cl 10 20` means that Alice's portion cost $10 while Bob's portion cost $20.
 
-> **💡 Note(s):**
+> **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to 
 > it.
 >- The `[ACTIVITY_NAME]` should be unique across all activities.
@@ -225,7 +236,7 @@ Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 * `[ACTIVITY_ID]` refers to the unique identifier of the activity.
     * The unique identifier for an activity can be retrieved with [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
 
-> **💡 Note(s):**
+> **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity in that session can be removed.
 >- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be removed.
 >- A confirmation must be given before deletion takes place.
@@ -253,7 +264,7 @@ Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 * `[ACTIVITY_ID]` refers to the unique identifier of the activity. 
     * The unique identifier for an activity can be retrieved with [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
 
-> **💡 Note(s):**
+> **💡 Note:**
 >- The session with a unique identifier of `[SESSION_ID]` and the activity with a unique identifier of `[ACTIVITY_ID]` have to exist before the activity can be viewed.
 
 
@@ -266,7 +277,7 @@ Example of usage:
 
 ### Listing all activities in a session: `activity /list`
 
-> Allows user to view all existing activities in a particular session.<br>
+> Displays all existing activities in a particular session.<br>
 > An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
@@ -274,7 +285,7 @@ Format: `activity /list /sid [SESSION_ID]`
 * `[SESSION_ID]` refers to the unique identifier of the session.
     * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 
-> **💡 Note(s):**
+> **💡 Note:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its activities can be listed.
 
 
@@ -321,7 +332,7 @@ Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
 * `[NAME1 NAME2 ...]` refers to a list of persons involved in the activity.
     * Each individual name is **case-insensitive**.
 
-> **💡 Note(s):**
+> **💡 Notes:**
 >- The `[GROUP_NAME]` should be unique across all groups.
 >- Each name in `[NAME1 NAME2 ...]` for the group should be unique.
 
@@ -342,7 +353,7 @@ Format: `group /delete /gid [GROUP_ID]`
 * `[GROUP_ID]` refers to the unique identifier of the group.
     * The unique identifier for a group can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
 
-> **💡 Note(s):**
+> **💡 Note:**
 >- A group with a unique identifier of `[GROUP_ID]` has to exist before it can be removed.
 
 > **⚠️Warning:**
@@ -367,7 +378,7 @@ Format: `group /view /gid [GROUP_ID]`
 * `[GROUP_ID]` refers to the unique identifier of the group.
     * The unique identifier for a group can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
 
-> **💡 Note(s):**
+> **💡 Note:**
 >- The group with a unique identifier of `[GROUP_ID]` has to exist before the group can be viewed.
 
 Example of usage:
@@ -379,7 +390,7 @@ Example of usage:
 
 ### Listing all groups: `group /list`
 
-> List all active groups. Deleted groups will not be listed.<br>
+> Displays all active groups. Deleted groups will not be listed.<br>
 > A group represents one or more individuals.
 > It is used as a shortcut in several commands for identifying a group of individual persons.
 

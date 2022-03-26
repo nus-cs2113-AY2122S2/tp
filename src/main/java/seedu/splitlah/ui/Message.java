@@ -3,11 +3,11 @@ package seedu.splitlah.ui;
 import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
-import seedu.splitlah.command.ExitCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
+import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
@@ -70,7 +70,7 @@ public abstract class Message {
                     + "13.  Show this help menu\n"
                     + "        " + HelpCommandParser.COMMAND_FORMAT + "\n"
                     + "14. Exit the program\n"
-                    + "        " + ExitCommand.COMMAND_FORMAT;
+                    + "        " + ExitCommandParser.COMMAND_FORMAT;
     public static final String PROMPT_TEXTUI_AWAITING_INPUT =
             "> ";
 
@@ -230,7 +230,7 @@ public abstract class Message {
     public static final String ASSERT_SESSIONSUMMARY_PAYER_EXPECTS_FROM_RECEIVER =
             "Payer has a greater total cost than receiver.";
     public static final String LOGGER_SESSIONSUMMARY_SESSION_ID_NOT_FOUND =
-            "A session summary was not produced as a Session object with the following Id was not found :";
+            "A session summary was not produced as a Session object with the following Id was not found: ";
     public static final String LOGGER_SESSIONSUMMARY_SESSION_SUMMARY_PRINTED =
             "A session summary has been successful produced for the Session object with the following Id: ";
 
@@ -271,6 +271,41 @@ public abstract class Message {
     public static final String LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST =
             "An Activity object failed to be added into the list of activities because there are duplicate names in"
                     + "the involved list.";
+
+    // Activity Edit Command
+    public static final String LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY =
+            "An Activity object failed to be edited.";
+    public static final String LOGGER_ACTIVITYEDIT_SESSION_ID_NOT_FOUND =
+            "Session was not found with unique identifier of:";
+    public static final String ASSERT_ACTIVITYEDIT_COMMAND_ARGS_NULL =
+            "The command arguments cannot be null.";
+    public static final String ASSERT_ACTIVITYEDIT_MANAGER_DOES_NOT_EXIST =
+            "Manager does not exist.";
+    public static final String ASSERT_ACTIVITYEDIT_SESSIONID_MISSING =
+            "Session Id missing.";
+    public static final String ASSERT_ACTIVITYEDIT_ACTIVITYID_MISSING =
+            "Activity Id missing.";
+    public static final String ASSERT_ACTIVITYEDIT_SESSIONID_LESS_THAN_ONE =
+            "Session ID is less than or equals to zero.";
+    public static final String ASSERT_ACTIVITYEDIT_ACTIVITY_NAME_MISSING =
+            "Activity name is missing.";
+    public static final String ASSERT_ACTIVITYEDIT_PAYER_NAME_MISSING =
+            "Payer's name is missing.";
+    public static final String ASSERT_ACTIVITYEDIT_INVOLVED_LIST_ARRAY_NULL =
+            "Involved list array does not contain the list of names of the persons involved in the activity.";
+    public static final String ACTIVITYEDIT_DUPLICATE_NAME =
+            "There are duplicate names in the persons involved for the activity you are trying to create. "
+                    + "Please rectify and try again.";
+    public static final String LOGGER_ACTIVITYEDIT_DUPLICATE_NAMES_IN_INVOLVED_LIST =
+            "An Activity object failed to be added into the list of activities because there are duplicate names in"
+                    + "the involved list.";
+    public static final String ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL =
+            "Cost list array does not contain the respective costs of the persons involved in the activity.";
+    public static final String ASSERT_ACTIVITYEDIT_TOTAL_COST_LESS_THAN_ONE =
+            "Total cost is less than or equals to zero.";
+    public static final String LOGGER_ACTIVITYEDIT_ACTIVITY_EDITED =
+            "An Activity object was succesfully edited in the list of activities with Id: ";
+
 
     // Activity Delete Command
     public static final String ASSERT_ACTIVITYDELETE_SESSION_IS_NULL =
