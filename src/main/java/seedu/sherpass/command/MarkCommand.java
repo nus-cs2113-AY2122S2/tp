@@ -1,6 +1,5 @@
 package seedu.sherpass.command;
 
-import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
@@ -24,7 +23,7 @@ public class MarkCommand extends Command {
      * @param taskList  Task array.
      */
     public MarkCommand(int markIndex, TaskList taskList) throws IndexOutOfBoundsException {
-        if (!taskList.isTaskExist(markIndex)) {
+        if (taskList.isTaskNotExist(markIndex)) {
             throw new IndexOutOfBoundsException();
         }
         this.markIndex = markIndex;

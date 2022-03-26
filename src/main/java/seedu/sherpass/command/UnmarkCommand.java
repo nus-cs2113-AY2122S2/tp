@@ -23,7 +23,7 @@ public class UnmarkCommand extends Command {
      * @param taskList  Task array.
      */
     public UnmarkCommand(int markIndex, TaskList taskList) throws IndexOutOfBoundsException {
-        if (!taskList.isTaskExist(markIndex)) {
+        if (taskList.isTaskNotExist(markIndex)) {
             throw new IndexOutOfBoundsException();
         }
         this.markIndex = markIndex;
