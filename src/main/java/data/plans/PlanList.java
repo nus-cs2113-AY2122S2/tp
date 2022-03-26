@@ -232,19 +232,19 @@ public class PlanList {
      * Prints the plan details, workouts in the plan.
      */
     public void listPlanDetails(String userArgument, UI ui) throws NumberFormatException {
-        int indexOfPlan =  Integer.parseInt(userArgument.trim());
+        int indexOfPlan = Integer.parseInt(userArgument.trim());
         Plan planToViewDetails = getPlanFromIndexNum(indexOfPlan);
         String planName = getPlansDisplayList().get(indexOfPlan - 1);
 
-        ArrayList<Workout> workoutsInPlan = planToViewDetails.getWorkoutsInPlanList();
-        int numberOfWorkoutsInPlan = workoutsInPlan.size();
+        ArrayList<Workout> workoutsInPlanList = planToViewDetails.getWorkoutsInPlanList();
+        int numberOfWorkoutsInPlan = workoutsInPlanList.size();
         assert (numberOfWorkoutsInPlan <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN && numberOfWorkoutsInPlan > 0);
 
         System.out.println("Here are the " + numberOfWorkoutsInPlan + " workouts in ["
                 + ui.getColorText(TextColor.COLOR_YELLOW, planName) + "].");
 
         for (int i = 0; i < numberOfWorkoutsInPlan; i++) {
-            System.out.println((i + 1) + ". " + workoutsInPlan.get(i).toString());
+            System.out.println((i + 1) + ". " + workoutsInPlanList.get(i).toString());
         }
     }
 
