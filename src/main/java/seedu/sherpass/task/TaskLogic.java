@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_EMPTY_DESCRIPTION_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_EMPTY_TASKLIST_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_EMPTY_TASK_LIST_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_DATETIME_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_FREQUENCY_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INDEX_MESSAGE;
@@ -91,7 +91,7 @@ public class TaskLogic {
         } else if (isEditDate && doOnStartDateTime.isAfter(doOnEndDateTime)) {
             return ERROR_START_AFTER_END_TIME_MESSAGE;
         } else if (taskList.getTasks().size() == 0) {
-            return ERROR_EMPTY_TASKLIST_MESSAGE;
+            return ERROR_EMPTY_TASK_LIST_MESSAGE;
         } else if (!taskList.isTaskExist(index)) {
             return ERROR_INVALID_INDEX_MESSAGE;
         }
@@ -107,7 +107,7 @@ public class TaskLogic {
      */
     public static String checkValidDeleteArgument(TaskList taskList, int index) {
         if (taskList.getTasks().size() == 0) {
-            return ERROR_EMPTY_TASKLIST_MESSAGE;
+            return ERROR_EMPTY_TASK_LIST_MESSAGE;
         } else if (!taskList.isTaskExist(index)) {
             return ERROR_INVALID_INDEX_MESSAGE;
         }
@@ -129,7 +129,7 @@ public class TaskLogic {
         ArrayList<Task> newTasks = new ArrayList<>();
         LocalDateTime lastRecurrenceDate = getEndDateForRecurrence(doOnStartDateTime, frequency);
         Task newTask = new Task(identifier, taskDescription, null,
-                doOnStartDateTime, doOnEndDateTime, frequency);
+                doOnStartDateTime, doOnEndDateTime, frequency, 0);
         do {
             newTasks.add(newTask);
             newTask = prepareNextTask(newTask);
@@ -150,6 +150,6 @@ public class TaskLogic {
         LocalDateTime newEndDate = incrementDate(currentTask.getDoOnEndDateTime(),
                 currentTask.getRepeatFrequency());
         return new Task(currentTask.getIdentifier(), currentTask.getDescription(), null,
-                newStartDate, newEndDate, currentTask.getRepeatFrequency());
+                newStartDate, newEndDate, currentTask.getRepeatFrequency(), 0);
     }
 }

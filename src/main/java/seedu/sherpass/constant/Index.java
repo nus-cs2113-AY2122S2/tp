@@ -28,5 +28,6 @@ public class Index {
     public static final int SPLIT_FIRST_PART_INDEX = 0;
     public static final int SPLIT_SECOND_PART_INDEX = 1;
     public static final int EXPECTED_EDITRECURRING_ARG_LENGTH = 2;
+    public static final int COMMAND_CONTENT_INDEX = 1;
 
 }

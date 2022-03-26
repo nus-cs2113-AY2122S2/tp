@@ -3,39 +3,32 @@ package seedu.sherpass.task;
 import seedu.sherpass.enums.Frequency;
 
 import java.time.LocalDateTime;
+
+import static seedu.sherpass.constant.DateAndTimeFormat.dateOnlyFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.outputWithTimeFormat;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 
 public class Task {
     protected String description;
-    protected int identifier;
+    protected Integer identifier;
     protected boolean isDone;
     protected LocalDateTime byDate;
     protected LocalDateTime doOnStartDateTime;
     protected LocalDateTime doOnEndDateTime;
     protected Frequency repeatFrequency;
 
-
-    // The index of the task with respect to being within
-    // the ArrayList<Task> tasks in TaskList class
-    // To add to constructor
-    private final int placeholderIndex = 1;
-    protected int index = placeholderIndex;
-
-    // Time period of the task when user blocks out the pocket of time
-    // in the timetable. Format has been hardcoded to be XXXX - XXXX,
-    // e.g. 1400 - 1500. To add to constructor
-    private final String placeholderTime = "0900 - 1100";
-    protected String timePeriod = placeholderTime;
+    protected int index;
 
     /**
      * Creates a constructor for the parent class of tasks, 'Task'.
      * Accepts only task description
      *
+     * @param identifier Identity number of a repeated task.
      * @param description Description of task.
      */
-    public Task(int identifier, String description, LocalDateTime byDate,
-                LocalDateTime doOnStartDateTime, LocalDateTime doOnEndDateTime, Frequency repeatFrequency) {
+    public Task(Integer identifier, String description, LocalDateTime byDate,
+                LocalDateTime doOnStartDateTime, LocalDateTime doOnEndDateTime,
+                Frequency repeatFrequency, int index) {
         this.identifier = identifier;
         this.description = description;
         this.byDate = byDate;
@@ -43,20 +36,26 @@ public class Task {
         this.doOnEndDateTime = doOnEndDateTime;
         this.isDone = false;
         this.repeatFrequency = repeatFrequency;
+        this.index = index;
     }
 
     public int getIndex() {
         return index;
     }
 
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
     /**
-     * Returns the time when the task is taking place.
+     * Returns the time range for when the task is taking place.
      * Format of time is in 24 hours.
      *
      * @return Returns a range of time when the task occurs.
      */
     public String getTimePeriod() {
-        return timePeriod;
+        return doOnStartDateTime.toLocalTime().toString()
+                + " - " + doOnEndDateTime.toLocalTime().toString();
     }
 
     public String getDescription() {
@@ -119,11 +118,12 @@ public class Task {
      * @return Returns if doOnDate contains a parsed date.
      *         Otherwise, returns a blank string (no whitespace).
      */
-    public String getDoOnDateString() {
+    public String getDoOnDateString(boolean isDateOnly) {
         if (doOnStartDateTime != null) {
-            return doOnStartDateTime.format(outputWithTimeFormat);
+            return (isDateOnly) ? doOnStartDateTime.format(dateOnlyFormat)
+                    : doOnStartDateTime.format(outputWithTimeFormat);
         }
-        return "";
+        return EMPTY_STRING;
     }
 
     /**
@@ -140,7 +140,8 @@ public class Task {
             result += " (by: " + getByDateString() + ")";
         }
         if (this.doOnStartDateTime != null) {
-            result += " (reminder on: " + getDoOnDateString() + ")";
+            result += " (to do on: " + getDoOnDateString(false) + " - "
+                    + doOnEndDateTime.toLocalTime().toString() + ")";
         }
         return result;
     }
@@ -165,7 +166,7 @@ public class Task {
         return doOnEndDateTime;
     }
 
-    public int getIdentifier() {
+    public Integer getIdentifier() {
         return identifier;
     }
 
