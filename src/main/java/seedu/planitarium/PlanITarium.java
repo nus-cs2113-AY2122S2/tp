@@ -27,7 +27,7 @@ public class PlanITarium {
         userInput = new Scanner(System.in);
         while (true) {
             try {
-                command = commandFactory.getCommand(userInput.nextLine(), personList);
+                command = commandFactory.getCommand(userInput.nextLine(), family);
                 logger.log(Level.INFO, "Next line has been read");
                 System.out.println(UI.HORI_LINE);
                 command.execute();
@@ -42,7 +42,6 @@ public class PlanITarium {
      * Initializes the program with logger.
      */
     private static void initialisePlanitarium() {
-        logger = new ProjectLogger(PlanITarium.class.getName(), "PlanITarium.log");
         logger.log(Level.INFO, "Logger initialised");
         UI.printWelcomeMessage();
     }
