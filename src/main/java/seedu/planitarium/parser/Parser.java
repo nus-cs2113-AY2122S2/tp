@@ -9,6 +9,7 @@ import seedu.planitarium.exceptions.InvalidIndexException;
 import seedu.planitarium.exceptions.InvalidMoneyException;
 import seedu.planitarium.exceptions.MissingDelimiterException;
 import seedu.planitarium.exceptions.EmptyStringException;
+import seedu.planitarium.global.Constants;
 import seedu.planitarium.person.Person;
 import seedu.planitarium.person.PersonList;
 
@@ -26,28 +27,12 @@ public class Parser {
     public static final String DELIMITER_INCOME = "/i";
     public static final String DELIMITER_EXPENDITURE = "/e";
     public static final String DELIMITER_RECORD_INDEX = "/r";
-    public static final String DELIMITER_BACK = "/[cringedup]";
-    // public static final String DELIMITER_MONEY = ".";
     public static final String DELIMITER_RECURRING_STATUS = "/p";
     public static final String DELIMITER_CATEGORY_INDEX = "/c";
     public static final String DELIMITER_GROUP_INDEX = "/g";
+    public static final String DELIMITER_BACK = "/[cringedup]";
     public static final String EMPTY_STRING = "";
-    public static final String RECURRING_STATUS_FALSE = "F";
-    public static final String RECURRING_STATUS_TRUE = "T";
-
-    public static final int INDEX_KEYWORD = 0;
-    public static final int INDEX_LEFT_NOT_EXIST = 0;
-    public static final int INDEX_LEFT_REMOVED = 1;
-    public static final int INDEX_RIGHT_REMOVED = 0;
-    public static final int LIMIT_TWO_TOKENS = 2;
-    // public static final int LIMIT_TWO_DECIMAL = 2;
-    public static final int MIN_USER_INDEX = 1;
-    public static final int MIN_EXPENDITURE_INDEX = 1;
-    public static final int MIN_INCOME_INDEX = 1;
-    public static final int MIN_CATEGORY_INDEX = 1;
-    public static final int MAX_GROUP_INDEX = 3;
-    public static final int MIN_GROUP_INDEX = 1;
-    public static final double MONEY_ZERO = 0.0;
+    // public static final String DELIMITER_MONEY = ".";
 
     protected static final String ASSERT_INPUT_NOT_NULL = "User input should not be null";
     protected static final String ASSERT_MONEY_NOT_NULL = "Money input should not be null";
@@ -55,7 +40,6 @@ public class Parser {
     protected static final String ASSERT_USER_INDEX_NOT_NULL = "User index should not be null";
     protected static final String ASSERT_EXPENDITURE_INDEX_NOT_NULL = "Expenditure index should not be null";
     protected static final String ASSERT_INCOME_INDEX_NOT_NULL = "Income index should not be null";
-    protected static final String ASSERT_STATUS_NOT_NULL = "Recurring status should not be null";
     protected static final String ASSERT_CATEGORY_NOT_NULL = "Category index should not be null";
     protected static final String ASSERT_GROUP_NOT_NULL = "Group index should not be null";
 
@@ -70,7 +54,6 @@ public class Parser {
     protected static final String LOG_MISSING_DELIMITER = "User input '%s' is missing delimiter '%s'";
     protected static final String LOG_TOO_MANY_DELIMITER = "User input '%s' has too many delimiters '%s'";
 
-
     /**
      * Returns command keyword from user input.
      *
@@ -79,7 +62,7 @@ public class Parser {
      */
     public static String parseKeyword(String userInput) {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        String keyword = userInput.split(DELIMITER_SPACE)[INDEX_KEYWORD].trim();
+        String keyword = userInput.split(DELIMITER_SPACE)[Constants.INDEX_KEYWORD].trim();
         logger.log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, keyword));
         return keyword;
     }
@@ -196,7 +179,7 @@ public class Parser {
      * Returns the recurring status from user input.
      *
      * @param userInput The user's full input text.
-     * @return The recurring status.
+     * @return The recurring status in boolean.
      * @throws MissingDelimiterException   if user input does not contain delimiter for recurring status.
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
      * @throws EmptyStringException        if string after the delimiter is blank.
@@ -207,10 +190,7 @@ public class Parser {
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_RECURRING_STATUS);
         String status = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_RECURRING_STATUS).trim();
         logger.log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, status));
-        if (status.equalsIgnoreCase("t")) {
-            return true;
-        }
-        return false;
+        return status.equalsIgnoreCase("t");
     }
 
     /**
@@ -289,7 +269,7 @@ public class Parser {
         try {
             int checkIndex = Integer.parseInt(userIndex);
             ParserUtility.checkTooHighIndex(checkIndex, personList.getNumberOfMembers());
-            ParserUtility.checkTooLowIndex(checkIndex, MIN_USER_INDEX);
+            ParserUtility.checkTooLowIndex(checkIndex, Constants.MIN_USER_INDEX);
             logger.log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -311,7 +291,7 @@ public class Parser {
         try {
             int checkIndex = Integer.parseInt(expenditureIndex);
             ParserUtility.checkTooHighIndex(checkIndex, person.getNumberOfExpenditures());
-            ParserUtility.checkTooLowIndex(checkIndex, MIN_EXPENDITURE_INDEX);
+            ParserUtility.checkTooLowIndex(checkIndex, Constants.MIN_EXPENDITURE_INDEX);
             logger.log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -333,28 +313,13 @@ public class Parser {
         try {
             int checkIndex = Integer.parseInt(incomeIndex);
             ParserUtility.checkTooHighIndex(checkIndex, person.getNumberOfIncomes());
-            ParserUtility.checkTooLowIndex(checkIndex, MIN_INCOME_INDEX);
+            ParserUtility.checkTooLowIndex(checkIndex, Constants.MIN_INCOME_INDEX);
             logger.log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, String.format(LOG_INVALID_INDEX, incomeIndex));
             throw new InvalidIndexException(incomeIndex);
         }
-    }
-
-    /**
-     * Returns a valid recurrence status for expenses.
-     *
-     * @param statusText The recurring expense status.
-     * @return Recurring status 'T' or 'F'.
-     */
-    public static String getValidRecurringStatus(String statusText) {
-        assert (statusText != null) : ASSERT_STATUS_NOT_NULL;
-        String status = RECURRING_STATUS_FALSE;
-        if (statusText.equalsIgnoreCase(RECURRING_STATUS_TRUE)) {
-            status = RECURRING_STATUS_TRUE;
-        }
-        return status;
     }
 
     /**
@@ -369,7 +334,7 @@ public class Parser {
         try {
             int checkIndex = Integer.parseInt(categoryIndex);
             ParserUtility.checkTooHighIndex(checkIndex, Category.getNumberOfCategories());
-            ParserUtility.checkTooLowIndex(checkIndex, MIN_CATEGORY_INDEX);
+            ParserUtility.checkTooLowIndex(checkIndex, Constants.MIN_CATEGORY_INDEX);
             logger.log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -389,8 +354,8 @@ public class Parser {
         assert (groupIndex != null) : ASSERT_GROUP_NOT_NULL;
         try {
             int checkIndex = Integer.parseInt(groupIndex);
-            ParserUtility.checkTooHighIndex(checkIndex, MAX_GROUP_INDEX);
-            ParserUtility.checkTooLowIndex(checkIndex, MIN_GROUP_INDEX);
+            ParserUtility.checkTooHighIndex(checkIndex, Constants.NUM_GROUPS);
+            ParserUtility.checkTooLowIndex(checkIndex, Constants.MIN_GROUP_INDEX);
             logger.log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -398,5 +363,4 @@ public class Parser {
             throw new InvalidIndexException(groupIndex);
         }
     }
-
 }

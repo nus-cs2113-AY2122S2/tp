@@ -675,18 +675,6 @@ class ParserTest {
     }
 
     @Test
-    void getValidRecurringStatus_validStatus_success() {
-        String falseStatus = "f";
-        assertEquals("F", Parser.getValidRecurringStatus(falseStatus));
-
-        String trueStatus = "T";
-        assertEquals("T", Parser.getValidRecurringStatus(trueStatus));
-
-        String randomStatus = "abc123";
-        assertEquals("F", Parser.getValidRecurringStatus(randomStatus));
-    }
-
-    @Test
     void getValidCategoryIndex_validUserIndex_success() throws InvalidIndexException {
         String input = "1";
         int output = Parser.getValidCategoryIndex(input);
