@@ -43,11 +43,18 @@ public class Person {
      *
      * @param description The source of the income
      * @param amount The value of the income
+     * @param isPermanent Whether the income is recurring
      */
     public void addIncome(String description, double amount, boolean isPermanent) {
         assert (description != null);
         this.incomeList.addIncome(description, amount, isPermanent);
-        System.out.println("An income of " + amount + " from " + description + " has been added to " + this.name);
+        if (isPermanent) {
+            System.out.println("A recurring income of " + amount + " from " + description + " has been added to " +
+                    this.name);
+        }
+        else {
+            System.out.println("An income of " + amount + " from " + description + " has been added to " + this.name);
+        }
     }
 
     /**

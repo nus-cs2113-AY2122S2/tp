@@ -83,11 +83,12 @@ public class Family {
      * @param group The index of the group to find the person
      * @param description The source of the income
      * @param amount The value of the income
+     * @param isPermanent Whether the income is recurring
      */
-    public void addIncome(int personIndex, int group, String description, double amount) {
+    public void addIncome(int personIndex, int group, String description, double amount, boolean isPermanent) {
         String infoString = "Method addIncome() called";
         logger.getLogger().log(Level.INFO, infoString);
-        getList(group).addIncome(personIndex, description, amount);
+        getList(group).addIncome(personIndex, description, amount, isPermanent);
     }
 
     /**
