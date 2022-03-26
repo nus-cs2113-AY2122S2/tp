@@ -1,4 +1,4 @@
-package arcs.data.Customer;
+package arcs.data.customer;
 
 public class Customer {
     private String ic;

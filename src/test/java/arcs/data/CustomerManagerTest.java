@@ -1,8 +1,8 @@
 package arcs.data;
 
 
-import arcs.data.Customer.Customer;
-import arcs.data.Customer.CustomerManager;
+import arcs.data.customer.Customer;
+import arcs.data.customer.CustomerManager;
 import arcs.data.exception.DuplicateDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -37,6 +37,7 @@ public class CustomerManagerTest {
         } catch (DuplicateDataException e) {
             System.out.println(e.getMessage());
         }
-        Assertions.assertEquals(customer1.getCustomerInfo(), customerManager.getAllCustomers().get(0).getCustomerInfo());
+        Assertions.assertEquals(customer1.getCustomerInfo(),
+                customerManager.getAllCustomers().get(0).getCustomerInfo());
     }
 }

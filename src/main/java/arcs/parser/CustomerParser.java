@@ -22,7 +22,8 @@ public class CustomerParser {
         return new AddCustomerCommand(ic, name, phone, email);
     }
 
-    private static String parseField(String argumentLine, int startIdx, int fieldA, int fieldB, int fieldC, int offset) {
+    private static String parseField(String argumentLine, int startIdx,
+                                     int fieldA, int fieldB, int fieldC, int offset) {
         String value = null;
         if (startIdx != -1) {
             int icEndIdx = argumentLine.length();

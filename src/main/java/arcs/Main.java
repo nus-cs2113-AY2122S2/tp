@@ -1,8 +1,7 @@
 package arcs;
 
 import arcs.commands.CommandResult;
-import arcs.data.Customer.Customer;
-import arcs.data.Customer.CustomerManager;
+import arcs.data.customer.CustomerManager;
 import arcs.data.route.RouteManager;
 import arcs.data.flightbooking.FlightBookingManager;
 import arcs.data.menuitems.MenuItemManager;

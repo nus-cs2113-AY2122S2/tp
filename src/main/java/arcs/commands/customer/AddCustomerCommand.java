@@ -2,7 +2,7 @@ package arcs.commands.customer;
 
 import arcs.commands.Command;
 import arcs.commands.CommandResult;
-import arcs.data.Customer.Customer;
+import arcs.data.customer.Customer;
 import arcs.data.exception.DuplicateDataException;
 
 import java.util.ArrayList;
@@ -39,8 +39,8 @@ public class AddCustomerCommand extends Command  {
 
         try {
             customerManager.addCustomer(toAdd);
-            return new CommandResult(SUCCESS_MESSAGE +
-                    System.lineSeparator() + toAdd.getCustomerInfo());
+            return new CommandResult(SUCCESS_MESSAGE
+                    + System.lineSeparator() + toAdd.getCustomerInfo());
         } catch (DuplicateDataException e) {
             return new CommandResult(DUPLICATE_MESSAGE);
         }
@@ -62,7 +62,7 @@ public class AddCustomerCommand extends Command  {
     }
 
     public void checkInvalidField(String ic, String phone, String email) {
-        assert ic != null && phone != null && email != null: "Customer field is null.";
+        assert ic != null && phone != null && email != null : "Customer field is null.";
         if (!Customer.isValidIc(ic)) {
             invalidFields.add("IC");
         }

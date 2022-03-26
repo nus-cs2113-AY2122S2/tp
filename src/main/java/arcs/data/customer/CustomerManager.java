@@ -1,4 +1,4 @@
-package arcs.data.Customer;
+package arcs.data.customer;
 
 import arcs.data.exception.DuplicateDataException;
 
