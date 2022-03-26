@@ -238,7 +238,7 @@ public class PlanList {
 
         ArrayList<Workout> workoutsInPlanList = planToViewDetails.getWorkoutsInPlanList();
         int numberOfWorkoutsInPlan = workoutsInPlanList.size();
-        assert (numberOfWorkoutsInPlan <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN && numberOfWorkoutsInPlan > 0);
+        assert ((numberOfWorkoutsInPlan <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN) && (numberOfWorkoutsInPlan > 0));
 
         System.out.println("Here are the " + numberOfWorkoutsInPlan + " workouts in ["
                 + ui.getColorText(TextColor.COLOR_YELLOW, planName) + "].");
