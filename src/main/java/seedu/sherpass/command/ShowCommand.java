@@ -2,7 +2,7 @@ package seedu.sherpass.command;
 
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Storage;
-import seedu.sherpass.util.Timetable;
+import seedu.sherpass.util.timetable.Timetable;
 import seedu.sherpass.util.Ui;
 
 import java.time.LocalDate;
