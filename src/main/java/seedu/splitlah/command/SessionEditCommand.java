@@ -8,7 +8,7 @@ import seedu.splitlah.data.Manager;
  * @author Roy
  */
 public class SessionEditCommand extends Command {
-    
+
     /**
      * Runs the command to edit an existing Session object from the list of sessions managed by a Manager Object.
      *
