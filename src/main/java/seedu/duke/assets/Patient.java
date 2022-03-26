@@ -23,19 +23,6 @@ public class Patient extends Person {
         this.dob = dob;
         this.dateAdmission = dateAdmission;
     }
-/*
-    @Override
-    public String toString() {
-        return  "NRIC='" + getNric() + '\''
-                + ", Full Name='" + getFullName() + '\''
-                + ", Age=" + getAge()
-                + ", Gender=" + getGender()
-                + ", Address='" + getAddress()
-                + '\'' + ", DOB='" + getDob() + '\''
-                + ", DateOfAdmission='" + getDateAdmission() + '\'';
-    }
-
- */
 
     public String getPatientNric() {
         return nric;
@@ -57,7 +44,7 @@ public class Patient extends Person {
         return address;
     }
 
-    public String getPatientDOB() {
+    public String getPatientDob() {
         return dob;
     }
 

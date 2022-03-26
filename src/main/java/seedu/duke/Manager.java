@@ -15,7 +15,7 @@ import seedu.duke.status.Status;
 public class Manager {
     UI ui = new UI();
     private boolean isTerminated = false;
-    private Storage storage = new Storage();
+    private final Storage storage = new Storage();
 
     /**
      * Main application loop that holds switch case statement.
@@ -25,14 +25,14 @@ public class Manager {
         ui.printGreeting();
 
         while (!isTerminated) {
-            ui.printPrompt();
+            UI.printPrompt();
             String commandWord = ui.readCommand();
             String parameters = ui.readParameters();
             Status status = null;
             try {
-                status = executeCommand(commandWord,parameters);
+                status = executeCommand(commandWord, parameters);
             } catch (HalpmiException | NotFoundException | DuplicateEntryException e) {
-                ui.printParagraph(e.toString());
+                UI.printParagraph(e.toString());
             }
             //ui.print(status);
             storage.saveData();
@@ -56,7 +56,6 @@ public class Manager {
             command = Parser.parseViewPatient(parameters);
             status = command.execute(storage.patients);
             break;
-
         case "edit patient":
             command = Parser.parseEditPatient(parameters);
             status = command.execute(storage.patients);

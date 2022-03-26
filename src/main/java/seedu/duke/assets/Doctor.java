@@ -17,12 +17,12 @@ public class Doctor extends Person {
 
     public String saveString() {
         return nric + "," + fullName + "," + age + "," + address + "," + gender
-                + "," +  dob + "," + specialization;
+                + "," + dob + "," + specialization;
     }
 
     @Override
     public String toString() {
-        return  "Nric='" + getNric() + '\''
+        return "Nric='" + getNric() + '\''
                 + ", Full Name='" + getFullName() + '\''
                 + ", Age=" + getAge()
                 + ", Address='" + getAddress()

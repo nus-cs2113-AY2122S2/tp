@@ -160,7 +160,7 @@ public class Validator {
     }
 
     /* Validate medicine */
-    public static void validateMedicine(String[] parameters) throws HalpmiException{
+    public static void validateMedicine(String[] parameters) throws HalpmiException {
         assert parameters.length == 6 : "Validate failed to check parameter length";
         boolean check = true;
         for (int i = 0; i < 5; i++) {

@@ -26,7 +26,7 @@ public class MedicineList extends List {
     }
 
     public Medicine search(String medicineId) {
-        for (Medicine medicine: medicines) {
+        for (Medicine medicine : medicines) {
             if (medicine.getMedicineId().equals(medicineId)) {
                 return medicine;
             }
@@ -44,7 +44,7 @@ public class MedicineList extends List {
         medicines.add(newMedicine);
     }
 
-    public void find(String[] command){
+    public void find(String[] command) {
     }
 
     public String getMedicineInfo(Medicine medicine) {
@@ -64,8 +64,9 @@ public class MedicineList extends List {
         }
         CommandLineTable medicineTable = new CommandLineTable();
         medicineTable.setShowVerticalLines(true);
-        medicineTable.setHeaders("MedicineId", "MedicineName","Dosage", "Expiry", "SideEffects", "Quantity");
-        medicineTable.addRow(medicine.getMedicineId(), medicine.getMedicineName(), String.valueOf(medicine.getDosage()),
+        medicineTable.setHeaders("MedicineId", "MedicineName", "Dosage", "Expiry", "SideEffects", "Quantity");
+        medicineTable.addRow(medicine.getMedicineId(), medicine.getMedicineName(),
+                String.valueOf(medicine.getDosage()),
                 medicine.getExpiry(), medicine.getSideEffects(), String.valueOf(medicine.getQuantity()));
         medicineTable.print();
     }
@@ -74,11 +75,13 @@ public class MedicineList extends List {
         CommandLineTable medicineTable = new CommandLineTable();
         //st.setRightAlign(true);//if true then cell text is right aligned
         medicineTable.setShowVerticalLines(true);
-        medicineTable.setHeaders("MedicineId", "MedicineName","Dosage", "Expiry", "SideEffects", "Quantity");
+        medicineTable.setHeaders("MedicineId", "MedicineName", "Dosage", "Expiry", "SideEffects", "Quantity");
 
-        for(Medicine medicine: medicines){
-            medicineTable.addRow(medicine.getMedicineId(), medicine.getMedicineName(), String.valueOf(medicine.getDosage()),
-                    medicine.getExpiry(), medicine.getSideEffects(), String.valueOf(medicine.getQuantity()));
+        for (Medicine medicine : medicines) {
+            medicineTable.addRow(medicine.getMedicineId(), medicine.getMedicineName(),
+                    String.valueOf(medicine.getDosage()),
+                    medicine.getExpiry(), medicine.getSideEffects(),
+                    String.valueOf(medicine.getQuantity()));
         }
         medicineTable.print();
     }
@@ -107,6 +110,4 @@ public class MedicineList extends List {
     public ArrayList<Medicine> getList() {
         return medicines;
     }
-
-
 }
