@@ -113,6 +113,26 @@ public class PersonList {
         return sum;
     }
 
+    public double getTotalIncome() {
+        String infoString = "Method getTotalIncome() called";
+        logger.getLogger().log(Level.INFO, infoString);
+        double sum = 0;
+        for (Person person: this.getPersonList()) {
+            sum += person.getTotalIncome();
+        }
+        return sum;
+    }
+
+    public double getTotalExpenditure() {
+        String infoString = "Method getTotalExpend() called";
+        logger.getLogger().log(Level.INFO, infoString);
+        double sum = 0;
+        for (Person person: this.getPersonList()) {
+            sum += person.getTotalExpenditure();
+        }
+        return sum;
+    }
+
     /**
      * Lists the names of everyone in the array list and their list of income and expenditure.
      */

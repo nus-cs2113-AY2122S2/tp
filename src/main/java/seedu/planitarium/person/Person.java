@@ -127,7 +127,7 @@ public class Person {
      *
      * @return Total value of expenditures
      */
-    private double getTotalExpenditure() {
+    public double getTotalExpenditure() {
         return expenditureList.getTotalExpenditure();
     }
 
@@ -136,7 +136,7 @@ public class Person {
      *
      * @return Total value of incomes
      */
-    private double getTotalIncome() {
+    public double getTotalIncome() {
         return incomeList.getTotalIncome();
     }
 

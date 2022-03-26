@@ -53,6 +53,34 @@ public class Family {
     }
 
     /**
+     * Returns how to address the array list specified.
+     *
+     * @param group The index of the group to address
+     * @return The way to address the array list specified
+     */
+    private String getGenerationName(int group) {
+        String infoString = "Entering getGenerationName()";
+        logger.getLogger().log(Level.INFO, infoString);
+        assert(group >= 1);
+        assert(group <= 3);
+        infoString = "Index assertions passed in getGenerationName()";
+        logger.getLogger().log(Level.INFO, infoString);
+        String toReturn = null;
+        switch(group) {
+        case Constants.PARENTS:
+            toReturn = "Parents";
+            break;
+        case Constants.MY_GEN:
+            toReturn = "My generation";
+            break;
+        case Constants.CHILDREN:
+            toReturn = "Children";
+            break;
+        }
+        return toReturn;
+    }
+
+    /**
      * Adds a person to the array list specified by the group index.
      *
      * @param name The name of the person to be added
@@ -141,20 +169,14 @@ public class Family {
         System.out.println("Here are your disposable incomes by group:");
         for (int i = 0; i < Constants.NUM_GROUPS; i++) {
             PersonList personList = getList(i);
+            double income = personList.getTotalIncome();
+            double expenditure = personList.getTotalExpenditure();
             double disposable = personList.getRemain();
-            String generation = null;
-            switch(i) {
-            case Constants.PARENTS:
-                generation = "Parents";
-                break;
-            case Constants.MY_GEN:
-                generation = "My generation";
-                break;
-            case Constants.CHILDREN:
-                generation = "Children";
-                break;
-            }
-            System.out.println((i + 1) + ". " + generation + ": " + disposable);
+            String generation = getGenerationName(i);
+            System.out.println((i + 1) + ". " + generation + ":" + System.lineSeparator() +
+                    "Income: $" + income + System.lineSeparator() +
+                    "Expenditure: $" + expenditure + System.lineSeparator() +
+                    "Disposable: $" + disposable);
         }
     }
 
@@ -168,18 +190,7 @@ public class Family {
         String infoString = "Method detailList() called";
         logger.getLogger().log(Level.INFO, infoString);
         PersonList personList = getList(group);
-        String generation = null;
-        switch (group) {
-        case Constants.PARENTS:
-            generation = "Parents";
-            break;
-        case Constants.MY_GEN:
-            generation = "My generation";
-            break;
-        case Constants.CHILDREN:
-            generation = "Children";
-            break;
-        }
+        String generation = getGenerationName(group);
         System.out.println("For " + generation + ":");
         personList.list();
     }
