@@ -62,14 +62,14 @@ public class ActivityEditCommand extends Command {
         assert manager != null : Message.ASSERT_ACTIVITYEDIT_MANAGER_DOES_NOT_EXIST;
         try {
             manager.getProfile().getSession(sessionId).removeActivity(activityId);
-            ActivityCreateCommand activityCreateCommand = new ActivityCreateCommand(activityId, sessionId,
-                    activityName, totalCost, payer, involvedList, costList, gst, serviceCharge);
-            activityCreateCommand.run(manager);
-        } catch (Exception e) {
+        } catch (InvalidDataException e) {
             manager.getUi().printlnMessage(e.getMessage());
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY
                     + "\n" + e.getMessage());
         }
+        ActivityCreateCommand activityCreateCommand = new ActivityCreateCommand(activityId, sessionId,
+                activityName, totalCost, payer, involvedList, costList, gst, serviceCharge);
+        activityCreateCommand.run(manager);
     }
 }
 
