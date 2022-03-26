@@ -90,8 +90,7 @@ public class OrderController extends Controller {
     private void printOrder() throws OperationTerminationException {
         try {
             int userInputInt = InputParser.getInteger("Enter the order you want to display: ");
-            System.out.println("These is your order. \n");
-            orderManager.getOrder(userInputInt).printOrder();
+            System.out.println("These is your order. \n" + orderManager.getOrder(userInputInt).toString());
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Invalid order index");
         }

@@ -35,12 +35,15 @@ public class Order implements Serializable {
         return totalPrice;
     }
 
-    public void printOrder() {
+    @Override
+    public String toString() {
+        String orderString = null;
         assert this.dishes.size() != 0 : "No orders!";
         for (Dish dish : dishes) {
-            System.out.println(dish.toString());
+            orderString += dish.toString() + "\n";
         }
-        System.out.println("Total price:" + this.getTotalPrice());
+        orderString = orderString + "Total Price" + this.getTotalPrice();
+        return orderString;
     }
 
     public List<Dish> getDishes() {
