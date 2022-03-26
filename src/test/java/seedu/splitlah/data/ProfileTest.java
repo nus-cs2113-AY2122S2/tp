@@ -37,6 +37,8 @@ class ProfileTest {
         String sessionNameToTest = "School gathering";
         boolean isExists = manager.getProfile().hasSessionName(sessionNameToTest);
         assertEquals(false, isExists);
+        assertFalse(isExists);
+        assertFalse(isExists);
     }
 
     /**
@@ -47,6 +49,7 @@ class ProfileTest {
         int sessionIdToTest = 1;
         boolean isExists = manager.getProfile().hasSessionId(sessionIdToTest);
         assertEquals(true, isExists);
+        assertTrue(isExists);
     }
 
     /**
@@ -57,8 +60,10 @@ class ProfileTest {
         int sessionIdToTest = 10;
         boolean isExists = manager.getProfile().hasSessionId(sessionIdToTest);
         assertEquals(false, isExists);
+        assertFalse(isExists);
     }
 
+        assertFalse(isExists);
 
     /**
      * Checks if the correct Session object is properly returned when a Session object with
