@@ -39,7 +39,7 @@ public class OrderController extends Controller {
             getAllOrderPrice();
             break;
         case 6:
-            printReceipt();
+            printOrder();
             break;
         default:
             System.out.println("Unknown choice!");
@@ -87,9 +87,13 @@ public class OrderController extends Controller {
         System.out.printf("Total value of all orders: %f. \n", orderManager.getAllOrderValue());
     }
 
-    private void printReceipt() {
-        System.out.println("These are all your orders receipts. \n");
-        orderManager.printReceipt();
+    private void printOrder() throws OperationTerminationException {
+        try {
+            int userInputInt = InputParser.getInteger("Enter the order you want to display: ");
+            System.out.println("These is your order. \n" + orderManager.getOrder(userInputInt));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Invalid order index");
+        }
     }
 
     @Override
