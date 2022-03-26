@@ -3,7 +3,6 @@ package seedu.sherpass.task;
 import seedu.sherpass.enums.Frequency;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_EMPTY_DESCRIPTION_MESSAGE;
@@ -92,64 +91,9 @@ public class TaskLogic {
             return ERROR_START_AFTER_END_TIME_MESSAGE;
         } else if (taskList.getTasks().size() == 0) {
             return ERROR_EMPTY_TASK_LIST_MESSAGE;
-        } else if (!taskList.isTaskExist(index)) {
+        } else if (taskList.isTaskNotExist(index)) {
             return ERROR_INVALID_INDEX_MESSAGE;
         }
         return EMPTY_STRING;
-    }
-
-    /**
-     * Returns error message if any parameters are invalid.
-     *
-     * @param taskList The task list that is going to be modified
-     * @param index    The index of the task in the task list
-     * @return Error messages if parameters are invalid, empty string if valid
-     */
-    public static String checkValidDeleteArgument(TaskList taskList, int index) {
-        if (taskList.getTasks().size() == 0) {
-            return ERROR_EMPTY_TASK_LIST_MESSAGE;
-        } else if (!taskList.isTaskExist(index)) {
-            return ERROR_INVALID_INDEX_MESSAGE;
-        }
-        return EMPTY_STRING;
-    }
-
-    /**
-     * Returns an arraylist of recurring tasks.
-     *
-     * @param identifier        The identifier to distinguish this recurrence
-     * @param taskDescription   The description of the recurring tasks
-     * @param doOnStartDateTime The start date and time of the first occurrence
-     * @param doOnEndDateTime   The end date and time of the first occurrence
-     * @param frequency         How often the task recurs
-     * @return Arraylist of Task
-     */
-    public static ArrayList<Task> prepareTasks(int identifier, String taskDescription, LocalDateTime doOnStartDateTime,
-                                               LocalDateTime doOnEndDateTime, Frequency frequency) {
-        ArrayList<Task> newTasks = new ArrayList<>();
-        LocalDateTime lastRecurrenceDate = getEndDateForRecurrence(doOnStartDateTime, frequency);
-        Task newTask = new Task(identifier, taskDescription, null,
-                doOnStartDateTime, doOnEndDateTime, frequency, 0);
-        do {
-            newTasks.add(newTask);
-            newTask = prepareNextTask(newTask);
-        } while (newTask.getDoOnStartDateTime().isBefore(lastRecurrenceDate));
-
-        return newTasks;
-    }
-
-    /**
-     * Returns the next occurrence of a recurring task.
-     *
-     * @param currentTask The i-th task
-     * @return The i+1 task
-     */
-    private static Task prepareNextTask(Task currentTask) {
-        LocalDateTime newStartDate = incrementDate(currentTask.getDoOnStartDateTime(),
-                currentTask.getRepeatFrequency());
-        LocalDateTime newEndDate = incrementDate(currentTask.getDoOnEndDateTime(),
-                currentTask.getRepeatFrequency());
-        return new Task(currentTask.getIdentifier(), currentTask.getDescription(), null,
-                newStartDate, newEndDate, currentTask.getRepeatFrequency(), 0);
     }
 }
