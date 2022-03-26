@@ -234,6 +234,12 @@ public abstract class Message {
     public static final String LOGGER_SESSIONSUMMARY_SESSION_SUMMARY_PRINTED =
             "A session summary has been successful produced for the Session object with the following Id: ";
 
+    // Session View Command
+    public static final String LOGGER_SESSIONVIEW_SESSION_VIEW_FAILED =
+            "A session could not be viewed.";
+    public static final String LOGGER_SESSIONVIEW_SESSION_VIEWED =
+            "A session with the following Id was viewed: ";
+
     // Activity Create Command
     public static final String ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH =
             "There is a mismatch between persons involved and the costs for each person. Please rectify and try again.";
