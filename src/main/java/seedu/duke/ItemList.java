@@ -61,8 +61,8 @@ public class ItemList {
         Item currentItem;
         String currentItemName;
         ArrayList<Item> listOfItems = getListOfItems();
-        for (int i = 0; i < listOfItems.size(); i++) {
-            currentItem = listOfItems.get(i);
+        for (int itemIndex = 0; itemIndex < listOfItems.size(); itemIndex++) {
+            currentItem = listOfItems.get(itemIndex);
             currentItemName = currentItem.getName();
             if (currentItemName.equals(nameOfItemToUpdate)) {
                 currentItem.setPax(paxOfItemToUpdate);
@@ -72,6 +72,28 @@ public class ItemList {
         if (isItemFound == false) {
             itemLogger.log(Level.WARNING, "The item whose pax is to be updated cannot be found within the Item "
                     + "List. Exception thrown.");
+            throw new ItemNotFoundException();
+        }
+    }
+
+    public void deleteItemInList(Item item) throws ItemNotFoundException {
+        String nameOfItemToDelete = item.getName();
+        assert (!nameOfItemToDelete.isEmpty()) : "Assertion Failed! Name of the item to delete is empty.";
+        boolean isItemFound = false;
+        Item currentItem;
+        String currentItemName;
+        ArrayList<Item> listOfItems = getListOfItems();
+        for (int itemIndex = 0; itemIndex < listOfItems.size(); itemIndex++) {
+            currentItem = listOfItems.get(itemIndex);
+            currentItemName = currentItem.getName();
+            if (currentItemName.equals(nameOfItemToDelete)) {
+                listOfItems.remove(itemIndex);
+                isItemFound = true;
+            }
+        }
+        if (isItemFound == false) {
+            itemLogger.log(Level.WARNING, "The item to delete cannot be found within the Item List. Exception "
+                    + "thrown.");
             throw new ItemNotFoundException();
         }
     }

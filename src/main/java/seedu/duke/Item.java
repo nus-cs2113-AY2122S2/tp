@@ -13,6 +13,10 @@ public class Item {
         setPax(pax);
     }
 
+    public Item(String name) {
+        setName(name);
+    }
+
     public String getName() {
         return name;
     }
