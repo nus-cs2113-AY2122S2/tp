@@ -1,6 +1,7 @@
-package seedu.sherpass.util;
+package seedu.sherpass.timer;
 
 import seedu.sherpass.task.TaskList;
+import seedu.sherpass.util.Ui;
 
 import static seedu.sherpass.constant.TimerConstant.ONE_MINUTE;
 import static seedu.sherpass.constant.TimerConstant.STOPWATCH_TIME_INTERVAL;
