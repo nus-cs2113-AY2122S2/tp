@@ -5,7 +5,7 @@ import seedu.mindmymoney.constants.CategoryTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.userfinancial.CreditCard;
 
-import static seedu.mindmymoney.constants.ExpenditureTypes.CASH;
+import static seedu.mindmymoney.constants.Payment_Method.CASH;
 
 /**
  * Input validation for Add Command.
@@ -48,16 +48,16 @@ public class AddCommandInputTests {
     /**
      * Checks if user input of expenditure is null or not a type of expenditure.
      *
-     * @param inputExpenditure User input of Expenditure.
+     * @param inputPaymentMethod User input of Expenditure.
      * @throws MindMyMoneyException when input is null or not a type of expenditure.
      */
-    public static void testExpenditure(String inputExpenditure, CreditCardList creditCardList)
+    public static void testPaymentMethod(String inputPaymentMethod, CreditCardList creditCardList)
             throws MindMyMoneyException {
-        if (inputExpenditure == null) {
+        if (inputPaymentMethod == null) {
             throw new MindMyMoneyException("Expenditure cannot be null!");
         }
 
-        if (!isExpenditureInList(inputExpenditure, creditCardList)) {
+        if (!isExpenditureInList(inputPaymentMethod, creditCardList)) {
             throw new MindMyMoneyException("Input Cash or a Credit Card!");
         }
     }
@@ -97,14 +97,14 @@ public class AddCommandInputTests {
      * @throws MindMyMoneyException when input is less than or equal to 0 or null.
      */
     public static void testAmount(String inputAmount) throws MindMyMoneyException {
-        int inputAmountAsInteger = 0;
+        float inputAmountAsInteger = 0;
 
         if (inputAmount == null) {
             throw new MindMyMoneyException("Amount cannot be empty!");
         }
 
         try {
-            inputAmountAsInteger = Integer.parseInt(inputAmount);
+            inputAmountAsInteger = Float.parseFloat(inputAmount);
         } catch (NumberFormatException e) {
             throw new MindMyMoneyException("Amount must be a number");
         }

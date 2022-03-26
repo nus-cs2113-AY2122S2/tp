@@ -7,6 +7,7 @@ import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Container for general functions used throughout the program.
@@ -175,5 +176,15 @@ public class GeneralFunctions {
             }
         }
         return foundItems;
+    }
+
+    /**
+     * Sets the string to lower case and then capitalise the first character in string
+     * @param str String to be capitalised
+     * @return Capitalised string
+     */
+    public static String capitalise(String str) {
+        str = str.toLowerCase();
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 }
