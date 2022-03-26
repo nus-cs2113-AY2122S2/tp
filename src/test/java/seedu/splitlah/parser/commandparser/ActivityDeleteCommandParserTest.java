@@ -1,6 +1,9 @@
 package seedu.splitlah.parser.commandparser;
 
 import org.junit.jupiter.api.Test;
+import seedu.splitlah.command.ActivityDeleteCommand;
+import seedu.splitlah.command.Command;
+import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
@@ -96,6 +99,36 @@ class ActivityDeleteCommandParserTest {
             String messageToTest = Message.ERROR_PARSER_MISSING_ARGUMENT + "/aid"
                     + "\n" + ActivityDeleteCommandParser.COMMAND_FORMAT;
             assertEquals(messageToTest, e.getMessage());
+        }
+    }
+
+    /**
+     * Checks if an ActivityDeleteCommand object is correctly returned when the command is correctly entered.
+     */
+    @Test
+    public void getCommand_validUserInput_ActivityCreateCommand() {
+        Manager manager = new Manager();
+
+        String sessionInput = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob Charlie";
+        Command createSession = Parser.getCommand(sessionInput);
+        createSession.run(manager);
+        String activityInput = "activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
+        Command createActivity = Parser.getCommand(activityInput);
+        createActivity.run(manager);
+
+        String validUserInput = "activity /delete /sid 1 /aid 1";
+        String validArguments = Parser.getRemainingArgument(validUserInput);
+        String errorMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, validArguments);
+        if (!errorMessage.isEmpty()) {
+            fail();
+        }
+
+        ActivityDeleteCommandParser activityDeleteCommandParser = new ActivityDeleteCommandParser();
+        try {
+            Command command = activityDeleteCommandParser.getCommand(validArguments);
+            assertEquals(ActivityDeleteCommand.class, command.getClass());
+        } catch (InvalidFormatException e) {
+            fail();
         }
     }
 
