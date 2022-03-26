@@ -3,7 +3,7 @@ package seedu.sherpass.command;
 import seedu.sherpass.task.TaskList;
 
 import seedu.sherpass.util.Storage;
-import seedu.sherpass.util.TimerLogic;
+import seedu.sherpass.timer.TimerLogic;
 import seedu.sherpass.util.Ui;
 
 import java.io.IOException;
@@ -39,6 +39,7 @@ public class StudyCommand extends Command {
             userInput = ui.readCommand();
         }
     }
+
 
     public void leaveStudyMode(Ui ui, TimerLogic timerLogic) {
         if (timerLogic.getIsTimerRunning()) {
