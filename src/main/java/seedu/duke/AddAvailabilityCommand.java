@@ -96,7 +96,8 @@ public class AddAvailabilityCommand extends Command {
      * @param ui               The user interface for this execution method.
      */
     @Override
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
+    public void execute(HousekeeperList housekeeperList, HousekeeperPerformanceList housekeeperPerformanceList,
+                        SatisfactionList satisfactionList,
                         AssignmentMap assignmentMap, RoomList roomList,
                         ItemList listOfItems, Ui ui) throws UserExistException {
         String availability = getAvailability();

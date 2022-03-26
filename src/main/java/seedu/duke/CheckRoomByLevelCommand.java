@@ -31,7 +31,8 @@ public class CheckRoomByLevelCommand extends Command {
      * @throws InvalidLevelException if the level is invalid.
      */
 
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
+    public void execute(HousekeeperList housekeeperList, HousekeeperPerformanceList housekeeperPerformanceList,
+                        SatisfactionList satisfactionList,
                         AssignmentMap assignmentMap, RoomList roomList,
                         ItemList itemList, Ui ui)
             throws InvalidLevelException {

@@ -1,16 +1,71 @@
 package seedu.duke;
 
+import java.util.Locale;
+
 public class AddHousekeeperPerformanceCommand extends Command {
     private HousekeeperPerformance housekeeperPerformance;
 
-    public void AddHousekeeperPerformanceCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
-
+    public AddHousekeeperPerformanceCommand(String userInput) throws HotelLiteManagerException {
+//        userInput = userInput.toLowerCase();
+//        String housekeeperName = "";
+//        int housekeeperRating = 0;
+//        try {
+//            housekeeperName = extractHousekeeperName(userInput);
+//            housekeeperRating = extractHousekeeperRating(userInput);
+//        } catch (EmptyHousekeeperPerformanceNameException e) {
+//
+//        }
+//        HousekeeperPerformance housekeeperPerformance = new HousekeeperPerformance(housekeeperName, housekeeperRating);
+//        setHousekeeperPerformance(housekeeperPerformance);
+        if (!userInput.contains("/")) {
+            throw new InvalidCommandException();
+        }
+        String housekeeperName = extractHousekeeperName(userInput);
+        int housekeeperRating = extractHousekeeperRating(userInput);
+        HousekeeperPerformance housekeeperPerformance = new HousekeeperPerformance(housekeeperName, housekeeperRating);
+        setHousekeeperPerformance(housekeeperPerformance);
     }
 
+    public String extractHousekeeperName(String userInput) throws HotelLiteManagerException {
+        if (userInput.isEmpty()) {
+            throw new EmptyHousekeeperPerformanceNameException();
+        }
+        String[] splitInput = userInput.split("/");
+        String housekeeperName = splitInput[0].trim();
+        if (housekeeperName.isEmpty()) {
+            throw new EmptyHousekeeperPerformanceNameException();
+        }
+        return housekeeperName;
+    }
+
+    public int extractHousekeeperRating(String userInput) throws HotelLiteManagerException {
+        String[] splitInput = userInput.split("/");
+        String ratingString = splitInput[1].trim();
+        int ratingValue;
+        try {
+            ratingValue = Integer.parseInt(ratingString);
+        } catch (NumberFormatException e) {
+            throw new InvalidSatisfactionValueException();
+        }
+        if (ratingValue < 1 || ratingValue > 5) {
+            throw new InvalidSatisfactionValueException();
+        }
+        return ratingValue;
+    }
+
+    public HousekeeperPerformance getHousekeeperPerformance() {
+        return housekeeperPerformance;
+    }
+
+    public void setHousekeeperPerformance(HousekeeperPerformance housekeeperPerformance) {
+        this.housekeeperPerformance = housekeeperPerformance;
+    }
+
+
     @Override
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
-                        AssignmentMap assignmentMap, RoomList roomList,
-                        ItemList itemList, Ui ui) {
+    public void execute(HousekeeperList housekeeperList, HousekeeperPerformanceList housekeeperPerformanceList,
+                        SatisfactionList satisfactionList, AssignmentMap assignmentMap, RoomList roomList,
+                        ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException{
 
     }
 

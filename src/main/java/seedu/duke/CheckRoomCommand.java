@@ -31,7 +31,8 @@ public class CheckRoomCommand extends Command {
      * @param itemList The given list of Item objects.
      * @param ui The user interface for this execution method.
      */
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
+    public void execute(HousekeeperList housekeeperList, HousekeeperPerformanceList housekeeperPerformanceList,
+                        SatisfactionList satisfactionList,
                         AssignmentMap assignmentMap, RoomList roomList,
                         ItemList itemList, Ui ui) throws InvalidRoomNumberException {
         for (Room room : roomList.getRoomList()) {

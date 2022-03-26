@@ -11,6 +11,7 @@ public class CommandParser {
     private static final String ADD_ITEM_COMMAND = "Add Item";
     private static final String VIEW_ITEM_LIST_COMMAND = "View Item In Inventory";
     private static final String ADD_HOUSEKEEPER_COMMAND = "Add Housekeeper ";
+    private static final String ADD_PERFORMANCE_COMMAND = "add housekeeper performance";
     private static final String ADD_AVAILABILITY_COMMAND = "Availability ";
     public static final String ADD_SATISFACTION_COMMAND = "Add Satisfaction";
     public static final String VIEW_SATISFACTIONS_COMMAND = "View Satisfactions";
@@ -53,7 +54,11 @@ public class CommandParser {
         } else if (commandString.startsWith((ADD_HOUSEKEEPER_COMMAND))) {
             commandStringWithoutCommand = commandString.replace(ADD_HOUSEKEEPER_COMMAND, "");
             userCommand = new AddHousekeeperCommand(commandStringWithoutCommand);
-        } else if (commandString.startsWith(CHECK_IN)) {
+        } else if (commandString.startsWith(ADD_PERFORMANCE_COMMAND)) {
+            commandStringWithoutCommand = commandString.replace(ADD_PERFORMANCE_COMMAND, "");
+            userCommand = new AddHousekeeperPerformanceCommand(commandStringWithoutCommand);
+        }
+        else if (commandString.startsWith(CHECK_IN)) {
             commandStringWithoutCommand = commandString.replace(CHECK_IN, "");
             userCommand = new CheckInCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(CHECK_OUT)) {

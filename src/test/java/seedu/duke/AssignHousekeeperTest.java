@@ -14,11 +14,13 @@ public class AssignHousekeeperTest {
         ItemList itemList = new ItemList();
         AssignmentMap assignmentMap = new AssignmentMap();
         Ui ui = new Ui();
+        HousekeeperPerformanceList housekeeperPerformanceList = new HousekeeperPerformanceList();
         SatisfactionList satisfactionList = new SatisfactionList();
         HousekeeperList housekeeperList = new HousekeeperList();
         String inputCommand = "301";
         CheckInCommand checkInCommand = new CheckInCommand(inputCommand);
-        checkInCommand.execute(housekeeperList, satisfactionList, assignmentMap, inputRoomList, itemList, ui);
+        checkInCommand.execute(housekeeperList, housekeeperPerformanceList, satisfactionList,
+                assignmentMap, inputRoomList, itemList, ui);
         Room expectedRoom = null;
         for (Room room : inputRoomList.getRoomList()) {
             if (room.getRoomId() == 301) {
