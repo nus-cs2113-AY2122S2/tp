@@ -73,7 +73,7 @@ public class Parser {
         case StudyCommand.COMMAND_WORD:
             return new StudyCommand();
         case ShowCommand.COMMAND_WORD:
-            return TaskParser.prepareShow(splitInput);
+            return TimetableParser.prepareShow(splitInput);
         case HelpCommand.COMMAND_WORD:
             return prepareHelp(userInput);
         case ExitCommand.COMMAND_WORD:
