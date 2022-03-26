@@ -16,7 +16,7 @@ class ProfileTest {
     Manager manager = new Manager();
 
     /**
-     * Checks if method returns true when a Session object with the specified session name is found.
+     * Checks if the hasSessionName method returns true when a Session object with the specified session name is found.
      */
     @Test
     public void hasSessionName_inputContainsExistingSessionName_true() {
@@ -30,7 +30,8 @@ class ProfileTest {
     }
 
     /**
-     * Checks if method returns false when a Session object with the specified session name is not found.
+     * Checks if the hasSessionName method returns false when a Session object
+     * with the specified session name is not found.
      */
     @Test
     public void hasSessionName_inputContainsNonExistingSessionName_false() {
@@ -44,7 +45,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if method returns false when the list of session is empty.
+     * Checks if the hasSessionName method returns false when the list of session is empty.
      */
     @Test
     public void hasSessionName_sessionListEmpty_false() {
@@ -54,7 +55,8 @@ class ProfileTest {
     }
 
     /**
-     * Checks if method returns true when a Session object with the specified session unique identifier is found.
+     * Checks if the hasSessionId method returns true when a Session object
+     * with the specified session unique identifier is found.
      */
     @Test
     public void hasSessionId_inputContainsExistingSessionId_true() {
@@ -68,7 +70,8 @@ class ProfileTest {
     }
 
     /**
-     * Checks if method returns false when a Session object with the specified session unique identifier is not found.
+     * Checks if the hasSessionId method returns false when a Session object
+     * with the specified session unique identifier is not found.
      */
     @Test
     public void hasSessionId_inputContainsNonExistingSessionId_false() {
@@ -82,7 +85,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if method returns false when the list of session is empty.
+     * Checks if the hasSessionId method returns false when the list of session is empty.
      */
     @Test
     public void hasSessionId_sessionListEmpty_false() {
@@ -111,7 +114,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when a Session object with
+     * Checks if an InvalidDataException with the correct message is properly thrown when a Session object with
      * a specified session unique identifier is not found.
      */
     @Test
@@ -130,7 +133,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when list of session is empty.
+     * Checks if an InvalidDataException with the correct message is properly thrown list of session is empty.
      */
     @Test
     public void getSession_sessionListEmpty_InvalidDataExceptionThrown() {
@@ -144,7 +147,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if method returns true when a Group object with the specified group name is found.
+     * Checks if the hasGroupName method returns true when a Group object with the specified group name is found.
      */
     @Test
     public void hasGroupName_inputContainsExistingGroupName_true() {
@@ -158,7 +161,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if method returns false when a Group object with the specified group name is not found.
+     * Checks if the hasGroupName method returns false when a Group object with the specified group name is not found.
      */
     @Test
     public void hasGroupName_inputContainsNonExistingGroupName_false() {
@@ -172,7 +175,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if method returns false when the list of group is empty.
+     * Checks if the hasGroupName method returns false when the list of group is empty.
      */
     @Test
     public void hasGroupName_groupListEmpty_false() {
@@ -182,7 +185,8 @@ class ProfileTest {
     }
 
     /**
-     * Checks if method returns true when a Group object with the specified group unique identifier is found.
+     * Checks if the hasGroupId method returns true when a Group object
+     * with the specified group unique identifier is found.
      */
     @Test
     public void hasGroupId_inputContainsExistingGroupId_true() {
@@ -196,7 +200,8 @@ class ProfileTest {
     }
 
     /**
-     * Checks if method returns false when a Group object with the specified group unique identifier is not found.
+     * Checks if the hasGroupId method returns false when a Group object
+     * with the specified group unique identifier is not found.
      */
     @Test
     public void hasGroupId_inputContainsNonExistingGroupId_false() {
@@ -210,7 +215,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if method returns false when the list of group is empty.
+     * Checks if the hasGroupId method returns false when the list of group is empty.
      */
     @Test
     public void hasGroupId_groupListEmpty_false() {
@@ -239,7 +244,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when a Group object with
+     * Checks if an InvalidDataException with the correct message is properly thrown when a Group object with
      * a specified group unique identifier is not found.
      */
     @Test
@@ -258,7 +263,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if an exception is properly thrown when list of group is empty.
+     * Checks if an InvalidDataException with the correct message is properly thrown when list of group is empty.
      */
     @Test
     public void getGroup_groupListEmpty_InvalidDataExceptionThrown() {
@@ -272,7 +277,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if session unique identifier is incremented.
+     * Checks if sessionId is incremented when getNewSessionId method is called.
      */
     @Test
     public void getNewSessionId_functionCalled_sessionIdIncrementedByOne() {
@@ -282,7 +287,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if activity unique identifier is incremented.
+     * Checks if activityId is incremented when getNewActivityId method is called.
      */
     @Test
     public void getNewActivityId_functionCalled_activityIdIncrementedByOne() {
@@ -292,7 +297,7 @@ class ProfileTest {
     }
 
     /**
-     * Checks if group unique identifier is incremented.
+     * Checks if groupId is incremented when getNewGroupId method is called.
      */
     @Test
     public void getNewGroupId_functionCalled_groupIdIncrementedByOne() {
