@@ -70,7 +70,7 @@ displayed in an easy-to-read summary.
 - A forward slash `/` indicates a delimiter and is used to separate commands into parts.
   Each command's documentation specifies the required delimiters and their purpose.
   - Example: `/n`, `/sid`
-- Parameters enclosed in [ ] must be supplied by the user. 
+- Parameters enclosed in `[ ]` must be supplied by the user. 
   - Example: `[SESSION_ID]`
 - Parameters with an ellipsis `...` indicate that the user can supply multiple values.
   - Example: `[COST1 COST2 ...]`
@@ -186,6 +186,7 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
     * Each individual name is **case-insensitive**.
 * `[TOTAL_COST]` refers to the total cost of the activity.
 * `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
+  * Example: `/i Alice Bob /cl 10 20` means that Alice's portion cost $10 while Bob's portion cost $20.
 
 > **💡 Note(s):**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to 
@@ -253,7 +254,7 @@ Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 * `[ACTIVITY_ID]` refers to the unique identifier of the activity. 
     * The unique identifier for an activity can be retrieved with [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
 
-> **💡 Note(s):**
+> **💡 Note:**
 >- The session with a unique identifier of `[SESSION_ID]` and the activity with a unique identifier of `[ACTIVITY_ID]` have to exist before the activity can be viewed.
 
 
@@ -266,7 +267,7 @@ Example of usage:
 
 ### Listing all activities in a session: `activity /list`
 
-> Allows user to view all existing activities in a particular session.<br>
+> To view all existing activities in a particular session.<br>
 > An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
@@ -274,7 +275,7 @@ Format: `activity /list /sid [SESSION_ID]`
 * `[SESSION_ID]` refers to the unique identifier of the session.
     * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 
-> **💡 Note(s):**
+> **💡 Note:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its activities can be listed.
 
 
@@ -342,7 +343,7 @@ Format: `group /delete /gid [GROUP_ID]`
 * `[GROUP_ID]` refers to the unique identifier of the group.
     * The unique identifier for a group can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
 
-> **💡 Note(s):**
+> **💡 Note:**
 >- A group with a unique identifier of `[GROUP_ID]` has to exist before it can be removed.
 
 > **⚠️Warning:**
@@ -367,7 +368,7 @@ Format: `group /view /gid [GROUP_ID]`
 * `[GROUP_ID]` refers to the unique identifier of the group.
     * The unique identifier for a group can be retrieved with [`group /list`](#listing-all-groups-group-list) command.
 
-> **💡 Note(s):**
+> **💡 Note:**
 >- The group with a unique identifier of `[GROUP_ID]` has to exist before the group can be viewed.
 
 Example of usage:
