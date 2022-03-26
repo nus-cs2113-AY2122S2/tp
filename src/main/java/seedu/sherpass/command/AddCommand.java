@@ -11,16 +11,18 @@ import seedu.sherpass.util.parser.TaskParser;
 import java.time.LocalDateTime;
 
 
-import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_START_AFTER_END_TIME_MESSAGE;
 
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String MESSAGE_USAGE = "Add: Adds a task into the task list.\n"
-            + "Usage: add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME /repeat\n"
+            + "Usage: add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME /repeat FREQUENCY\n"
             + "       add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/by DEADLINE]\n\n"
-            + "where DATE is in d/M/yyyy and time in HH:mm\n"
-            + "E.g., 3/5/2022 as date, and 10:00 as time";
+            + "DATE must be given in the format: d/M/yyyy, where\n"
+            + "year is in 4 digits, month and day in one or two digits.\n"
+            + "TIME must be given in the format: HH:mm.\n"
+            + "FREQUENCY can either be daily, weekly, or a monthly repeat of the task.\n"
+            + "DEADLINE is in the format d/M/yyyy [TIME_TO_COMPLETE_BY]";
 
     private String taskDescription;
     private LocalDateTime doOnStartDateTime;
@@ -56,7 +58,7 @@ public class AddCommand extends Command {
                     doOnStartDateTime, doOnEndDateTime, frequency, 0);
             taskList.addTask(newTask, true, ui);
         } else {
-            newTask = new Task(null, taskDescription, byDate,
+            newTask = new Task(-1, taskDescription, byDate,
                     doOnStartDateTime, doOnEndDateTime, null, 0);
             taskList.addTask(newTask, false, ui);
         }
