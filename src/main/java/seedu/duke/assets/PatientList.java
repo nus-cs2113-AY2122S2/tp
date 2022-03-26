@@ -3,8 +3,10 @@ package seedu.duke.assets;
 import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
+import seedu.duke.helper.command.CommandLineTable;
 
 import java.util.ArrayList;
+
 
 public class PatientList extends List {
 
@@ -19,44 +21,107 @@ public class PatientList extends List {
         return null;
     }
 
-    public void view(String nric) {
-        Patient patient = getPatient(nric);
-        if (patient == null) {
-            UI.printParagraph("There is no such patient");
-            return;
+    public void find(String[] command){
+    }
+
+
+    public Patient search(String nric) {
+        for (Patient patient : patients) {
+            if (patient.getPatientNric().equals(nric)) {
+                return patient;
+            }
         }
-        UI.printParagraph(getPatient(nric).toString());
-    }
-
-    public void view() {
-        UI.printParagraph(toString());
-    }
-
-    @Override
-    public void edit(String[] parameters) throws NotFoundException {
-
+        return null;
     }
 
     public void add(String[] addPatientParameters) throws DuplicateEntryException {
         if (getPatient(addPatientParameters[0]) != null) {
             throw new DuplicateEntryException("Patient with given NRIC already exists!");
         }
-        Patient newPatient = new Patient(addPatientParameters[0],addPatientParameters[1],
-                Integer.parseInt(addPatientParameters[2]), addPatientParameters[3].charAt(0),
-                addPatientParameters[4],addPatientParameters[5], addPatientParameters[6]);
+        Patient newPatient = new Patient(addPatientParameters[0], addPatientParameters[1],
+                Integer.parseInt(addPatientParameters[2]),
+                addPatientParameters[3], addPatientParameters[4].charAt(0), addPatientParameters[5],
+                addPatientParameters[6]);
         patients.add(newPatient);
+
+    }
+
+    public String getPatientInfo(Patient patient) {
+        return (patient.getPatientNric() + ": "
+                + patient.getPatientName() + ", "
+                + Integer.toString(patient.getPatientAge()) + ", " + patient.getPatientAddress() + ", "
+                + patient.getPatientGender() + ", " + patient.getPatientDOB() + ", " + patient.getDateOfAdmission());
     }
 
     public int getSize() {
         return patients.size();
     }
+/*
+    public void view() {
+        if (getSize() == 0) {
+            UI.printParagraph("There are no patients currently.");
+            return;
+        }
+        UI.printParagraph("Here is the list of patients");
 
+        for (Patient patient : patients) {
+            UI.printCont(getPatientInfo(patient));
+
+        }
+        UI.printParagraph(toString());
+        UI.printCont("There are a total of " + Integer.toString(patients.size())
+                + " in the system.");
+    }
+*/
+    //view particular patient
+    public void view(String nric) {
+        Patient patient = getPatient(nric);
+        if (patient == null) {
+            UI.printParagraph("Patient doesn't exist please try again!");
+            return;
+        }
+        CommandLineTable patientTable = new CommandLineTable();
+        patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
+        patientTable.setHeaders("Nric", "FullName","Age", "Address", "Gender", "Dob",
+                "DateAdmission");
+        patientTable.addRow(patient.getPatientNric(), patient.getPatientName(), String.valueOf(patient.getPatientAge()),
+                patient.getPatientAddress(), String.valueOf(patient.getPatientGender()), patient.getPatientDOB(),
+                patient.getDateOfAdmission());
+        patientTable.print();
+    }
+
+
+
+    //view all patients
+    public void view(){
+        CommandLineTable patientTable = new CommandLineTable();
+        //st.setRightAlign(true);//if true then cell text is right aligned
+        patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
+        patientTable.setHeaders("Nric", "FullName","Age", "Address", "Gender", "Dob",
+                "DateAdmission");
+        for(Patient patient: patients){
+            patientTable.addRow(patient.getPatientNric(), patient.getPatientName(), String.valueOf(patient.getPatientAge()),
+                    patient.getPatientAddress(), String.valueOf(patient.getPatientGender()), patient.getPatientDOB(),
+            patient.getDateOfAdmission());
+        }
+        patientTable.print();
+    }
     public void remove(String nric) throws NotFoundException {
         for (int i = 0; i < getSize(); i++) {
             if (patients.get(i).getNric().equals(nric)) {
                 patients.remove(i);
                 return;
             }
+        }
+        throw new NotFoundException("There are no patients with given NRIC!");
+    }
+
+    public void edit(String[] parameterArray) throws NotFoundException {
+        if (search(parameterArray[0]) != null) {
+            Patient patient = search(parameterArray[0]);
+            patient.edit(parameterArray[1], Integer.parseInt(parameterArray[2]), parameterArray[3],
+                    (parameterArray[4].charAt(0)), parameterArray[5], parameterArray[6]);
+            return;
         }
         throw new NotFoundException("There are no patients with given NRIC!");
     }
@@ -81,4 +146,7 @@ public class PatientList extends List {
         }
         return output;
     }
+
+
 }
+
