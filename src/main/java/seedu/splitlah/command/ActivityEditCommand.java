@@ -60,10 +60,8 @@ public class ActivityEditCommand extends Command {
     @Override
     public void run(Manager manager) {
         assert manager != null : Message.ASSERT_ACTIVITYEDIT_MANAGER_DOES_NOT_EXIST;
-        Profile profile = manager.getProfile();
-        TextUI ui = manager.getUi();
         try {
-            profile.getSession(sessionId).removeActivity(activityId);
+            manager.getProfile().getSession(sessionId).removeActivity(activityId);
             ActivityCreateCommand activityCreateCommand = new ActivityCreateCommand(activityId, sessionId,
                     activityName, totalCost, payer, involvedList, costList, gst, serviceCharge);
             activityCreateCommand.run(manager);
