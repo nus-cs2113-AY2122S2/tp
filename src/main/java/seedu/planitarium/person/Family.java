@@ -21,7 +21,7 @@ public class Family {
         myGen = new PersonList();
         children = new PersonList();
         String infoString = "Logger for PersonList initialised";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
     }
 
     /**
@@ -32,11 +32,11 @@ public class Family {
      */
     private PersonList getList(int group) {
         String infoString = "Entering getList()";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         assert(group >= 1);
         assert(group <= 3);
         infoString = "Index assertions passed in getList()";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         PersonList toReturn = null;
         switch(group) {
         case Constants.PARENTS:
@@ -60,11 +60,11 @@ public class Family {
      */
     private String getGenerationName(int group) {
         String infoString = "Entering getGenerationName()";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         assert(group >= 1);
         assert(group <= 3);
         infoString = "Index assertions passed in getGenerationName()";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         String toReturn = null;
         switch(group) {
         case Constants.PARENTS:
@@ -88,7 +88,7 @@ public class Family {
      */
     public void addPerson(String name, int group) {
         String infoString = "Method addPerson() called";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         getList(group).addPerson(name);
     }
 
@@ -100,7 +100,7 @@ public class Family {
      */
     public void deletePerson(int personIndex, int group) {
         String infoString = "Method removePerson() called";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         getList(group).deletePerson(personIndex);
     }
 
@@ -115,7 +115,7 @@ public class Family {
      */
     public void addIncome(int personIndex, int group, String description, double amount, boolean isPermanent) {
         String infoString = "Method addIncome() called";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         getList(group).addIncome(personIndex, description, amount, isPermanent);
     }
 
@@ -128,7 +128,7 @@ public class Family {
      */
     public void deleteIncome(int personIndex, int group, int incomeIndex) {
         String infoString = "Method deleteIncome() called";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         getList(group).deleteIncome(personIndex, incomeIndex);
     }
 
@@ -143,7 +143,7 @@ public class Family {
      */
     public void addExpend(int personIndex, int group, String description, double amount, boolean isPermanent) {
         String infoString = "Method addExpend() called";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         getList(group).addExpend(personIndex, description, amount, isPermanent);
     }
 
@@ -156,7 +156,7 @@ public class Family {
      */
     public void deleteExpend(int personIndex, int group, int expendIndex) {
         String infoString = "Method deleteExpend() called";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         getList(group).deleteExpend(personIndex, expendIndex);
     }
 
@@ -165,7 +165,7 @@ public class Family {
      */
     public void list() {
         String infoString = "Method list() called";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         System.out.println("Here are your disposable incomes by group:");
         for (int i = 0; i < Constants.NUM_GROUPS; i++) {
             PersonList personList = getList(i);
@@ -188,7 +188,7 @@ public class Family {
      */
     public void detailList(int group) {
         String infoString = "Method detailList() called";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         PersonList personList = getList(group);
         String generation = getGenerationName(group);
         System.out.println("For " + generation + ":");

@@ -27,7 +27,7 @@ public class IncomeList extends MoneyList {
      */
     public IncomeList() {
         this.incomeArrayList = new ArrayList<>();
-        logger.getLogger().log(Level.INFO, LOG_INIT);
+        logger.log(Level.INFO, LOG_INIT);
     }
 
     /**
@@ -36,10 +36,10 @@ public class IncomeList extends MoneyList {
      * @param amount The income amount
      */
     public void addIncome(String description, double amount, boolean isPermanent) {
-        logger.getLogger().log(Level.INFO, LOG_ADD_INC);
+        logger.log(Level.INFO, LOG_ADD_INC);
         assert (description != null);
         assert (amount >= 0);
-        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
+        logger.log(Level.INFO, LOG_ASSERT_PASSED);
         this.incomeArrayList.add(new Income(description, amount, isPermanent));
         numberOfIncomes++;
     }
@@ -49,10 +49,10 @@ public class IncomeList extends MoneyList {
      * @param index The index of the income on the person's income list
      */
     public void remove(int index) {
-        logger.getLogger().log(Level.INFO, LOG_REMOVE);
+        logger.log(Level.INFO, LOG_REMOVE);
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfIncomes);
-        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
+        logger.log(Level.INFO, LOG_ASSERT_PASSED);
         incomeArrayList.remove(index - 1);
         numberOfIncomes--;
     }
@@ -62,7 +62,7 @@ public class IncomeList extends MoneyList {
      * @return The total amount of all income in the list
      */
     public double getTotalIncome() {
-        logger.getLogger().log(Level.INFO, LOG_GET_TOTAL_INC);
+        logger.log(Level.INFO, LOG_GET_TOTAL_INC);
         double totalAmount = 0;
         for (Income item : incomeArrayList) {
             totalAmount += item.amount;
@@ -74,7 +74,7 @@ public class IncomeList extends MoneyList {
      * Prints all income in the person's income list.
      */
     public void printIncomeList() {
-        logger.getLogger().log(Level.INFO, LOG_PRINT_LIST);
+        logger.log(Level.INFO, LOG_PRINT_LIST);
         int listIndex = 1;
         for (Income item : incomeArrayList) {
             System.out.println(listIndex++ + ". " + item);
@@ -86,7 +86,7 @@ public class IncomeList extends MoneyList {
      * @return The number of income
      */
     public int getNumberOfIncomes() {
-        logger.getLogger().log(Level.INFO, LOG_GET_NUM_INC);
+        logger.log(Level.INFO, LOG_GET_NUM_INC);
         return numberOfIncomes;
     }
 
@@ -96,10 +96,10 @@ public class IncomeList extends MoneyList {
      * @return The income amount
      */
     public double getIncomeValue(int index) {
-        logger.getLogger().log(Level.INFO, LOG_GET_INC_VAL);
+        logger.log(Level.INFO, LOG_GET_INC_VAL);
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfIncomes);
-        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
+        logger.log(Level.INFO, LOG_ASSERT_PASSED);
         return incomeArrayList.get(index - 1).getAmount();
     }
 
@@ -110,26 +110,26 @@ public class IncomeList extends MoneyList {
      * @return The description of the income
      */
     public String getDescription(int index) {
-        logger.getLogger().log(Level.INFO, LOG_DESC);
+        logger.log(Level.INFO, LOG_DESC);
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfIncomes);
-        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
+        logger.log(Level.INFO, LOG_ASSERT_PASSED);
         return incomeArrayList.get(index - 1).getDescription();
     }
 
     public LocalDate getInitDate(int index) {
-        logger.getLogger().log(Level.INFO, LOG_DATE);
+        logger.log(Level.INFO, LOG_DATE);
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfIncomes);
-        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
+        logger.log(Level.INFO, LOG_ASSERT_PASSED);
         return incomeArrayList.get(index - 1).getInitDate();
     }
 
     public boolean isPermanent(int index) {
-        logger.getLogger().log(Level.INFO, LOG_PERM);
+        logger.log(Level.INFO, LOG_PERM);
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfIncomes);
-        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
+        logger.log(Level.INFO, LOG_ASSERT_PASSED);
         return incomeArrayList.get(index - 1).isPermanent();
     }
 

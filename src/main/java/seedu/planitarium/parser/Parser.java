@@ -79,7 +79,7 @@ public class Parser {
     public static String parseKeyword(String userInput) {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         String keyword = userInput.split(DELIMITER_SPACE)[INDEX_KEYWORD].trim();
-        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, keyword));
+        logger.log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, keyword));
         return keyword;
     }
 
@@ -97,7 +97,7 @@ public class Parser {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_NAME);
         String name = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_NAME, DELIMITER_BACK).trim();
-        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, name));
+        logger.log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, name));
         return name;
     }
 
@@ -115,7 +115,7 @@ public class Parser {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_USER_INDEX);
         String userIndex = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_USER_INDEX, DELIMITER_BACK).trim();
-        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, userIndex));
+        logger.log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, userIndex));
         return userIndex;
     }
 
@@ -133,7 +133,7 @@ public class Parser {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_DESCRIPTION);
         String description = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION, DELIMITER_BACK).trim();
-        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, description));
+        logger.log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, description));
         return description;
     }
 
@@ -151,7 +151,7 @@ public class Parser {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_INCOME);
         String income = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_INCOME, DELIMITER_BACK).trim();
-        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, income));
+        logger.log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, income));
         return income;
     }
 
@@ -169,7 +169,7 @@ public class Parser {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_EXPENDITURE);
         String expenditure = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK).trim();
-        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, expenditure));
+        logger.log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, expenditure));
         return expenditure;
     }
 
@@ -187,7 +187,7 @@ public class Parser {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_RECORD_INDEX);
         String record = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_RECORD_INDEX, DELIMITER_BACK).trim();
-        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, record));
+        logger.log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, record));
         return record;
     }
 
@@ -205,7 +205,7 @@ public class Parser {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_RECURRING_STATUS);
         String status = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_RECURRING_STATUS, DELIMITER_BACK).trim();
-        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, status));
+        logger.log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, status));
         if (status.equalsIgnoreCase("t")) {
             return true;
         }
@@ -226,7 +226,7 @@ public class Parser {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_CATEGORY_INDEX);
         String category = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_CATEGORY_INDEX, DELIMITER_BACK).trim();
-        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, category));
+        logger.log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, category));
         return category;
     }
 
@@ -244,7 +244,7 @@ public class Parser {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_GROUP_INDEX);
         String group = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_GROUP_INDEX, DELIMITER_BACK).trim();
-        logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, group));
+        logger.log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, group));
         return group;
     }
 
@@ -267,10 +267,10 @@ public class Parser {
             //        throw new NumberFormatException();
             //    }
             //}
-            logger.getLogger().log(Level.INFO, String.format(LOG_VALID_MONEY, amount, checkMoney));
+            logger.log(Level.INFO, String.format(LOG_VALID_MONEY, amount, checkMoney));
             return checkMoney;
         } catch (NumberFormatException e) {
-            logger.getLogger().log(Level.WARNING, String.format(LOG_INVALID_MONEY, amount));
+            logger.log(Level.WARNING, String.format(LOG_INVALID_MONEY, amount));
             throw new InvalidMoneyException(amount);
         }
     }
@@ -289,10 +289,10 @@ public class Parser {
             int checkIndex = Integer.parseInt(userIndex);
             ParserUtility.checkTooHighIndex(checkIndex, personList.getNumberOfMembers());
             ParserUtility.checkTooLowIndex(checkIndex, MIN_USER_INDEX);
-            logger.getLogger().log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
+            logger.log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            logger.getLogger().log(Level.WARNING, String.format(LOG_INVALID_INDEX, userIndex));
+            logger.log(Level.WARNING, String.format(LOG_INVALID_INDEX, userIndex));
             throw new InvalidIndexException(userIndex);
         }
     }
@@ -311,10 +311,10 @@ public class Parser {
             int checkIndex = Integer.parseInt(expenditureIndex);
             ParserUtility.checkTooHighIndex(checkIndex, person.getNumberOfExpenditures());
             ParserUtility.checkTooLowIndex(checkIndex, MIN_EXPENDITURE_INDEX);
-            logger.getLogger().log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
+            logger.log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            logger.getLogger().log(Level.WARNING, String.format(LOG_INVALID_INDEX, expenditureIndex));
+            logger.log(Level.WARNING, String.format(LOG_INVALID_INDEX, expenditureIndex));
             throw new InvalidIndexException(expenditureIndex);
         }
     }
@@ -333,10 +333,10 @@ public class Parser {
             int checkIndex = Integer.parseInt(incomeIndex);
             ParserUtility.checkTooHighIndex(checkIndex, person.getNumberOfIncomes());
             ParserUtility.checkTooLowIndex(checkIndex, MIN_INCOME_INDEX);
-            logger.getLogger().log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
+            logger.log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            logger.getLogger().log(Level.WARNING, String.format(LOG_INVALID_INDEX, incomeIndex));
+            logger.log(Level.WARNING, String.format(LOG_INVALID_INDEX, incomeIndex));
             throw new InvalidIndexException(incomeIndex);
         }
     }
@@ -369,10 +369,10 @@ public class Parser {
             int checkIndex = Integer.parseInt(categoryIndex);
             ParserUtility.checkTooHighIndex(checkIndex, Category.getNumberOfCategories());
             ParserUtility.checkTooLowIndex(checkIndex, MIN_CATEGORY_INDEX);
-            logger.getLogger().log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
+            logger.log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            logger.getLogger().log(Level.WARNING, String.format(LOG_INVALID_INDEX, categoryIndex));
+            logger.log(Level.WARNING, String.format(LOG_INVALID_INDEX, categoryIndex));
             throw new InvalidIndexException(categoryIndex);
         }
     }
@@ -390,10 +390,10 @@ public class Parser {
             int checkIndex = Integer.parseInt(groupIndex);
             ParserUtility.checkTooHighIndex(checkIndex, MAX_GROUP_INDEX);
             ParserUtility.checkTooLowIndex(checkIndex, MIN_GROUP_INDEX);
-            logger.getLogger().log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
+            logger.log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            logger.getLogger().log(Level.WARNING, String.format(LOG_INVALID_INDEX, groupIndex));
+            logger.log(Level.WARNING, String.format(LOG_INVALID_INDEX, groupIndex));
             throw new InvalidIndexException(groupIndex);
         }
     }

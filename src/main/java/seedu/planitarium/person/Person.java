@@ -26,7 +26,7 @@ public class Person {
         incomeList = new IncomeList();
         expenditureList = new ExpenditureList();
         String infoString = "New Person constructed";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
     }
 
     /**
