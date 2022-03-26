@@ -3,9 +3,6 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
-import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.util.logging.Level;
@@ -47,9 +44,8 @@ public class ActivityDeleteCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        Session session = null;
         try {
-            session = manager.getProfile().getSession(sessionId);
+            Session session = manager.getProfile().getSession(sessionId);
             assert session != null : Message.ASSERT_ACTIVITYDELETE_SESSION_IS_NULL;
             session.removeActivity(activityId);
             manager.saveProfile();
