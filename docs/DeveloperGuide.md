@@ -274,8 +274,8 @@ when the user invokes the `group /create` command.
 The general workflow of the `group /create` command is as follows:
 1. The user input provided is passed to `Splitlah`.
 2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `GroupCreateCommand` object.
-3. A `GroupCreateCommand#run` method is then invoked to run the group /create command.
-4. Once the command starts to run, `GroupCreateCommand`class checks if there are duplicates in the name list.
+3. A `GroupCreateCommand#run` method is then invoked to run the `group /create` command.
+4. Once the command starts to run, `GroupCreateCommand` class checks if there are duplicates in the name list.
 5. If there are duplicates, a message indicating that name list contains duplicates is printed using `TextUi#printlnMessage`. 
 6. If there are no duplicates, `GroupCreateCommand` class converts each of the names into a `Person` object.
 7. `GroupCreateCommand` class then checks if there is an existing group with the same group name. 
