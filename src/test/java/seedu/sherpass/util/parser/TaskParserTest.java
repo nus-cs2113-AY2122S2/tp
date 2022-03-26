@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
+import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_EMPTY_ADD_COMMANDS_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_FREQUENCY_MESSAGE;
 import static seedu.sherpass.constant.Message.WHITESPACE;
@@ -29,17 +30,18 @@ public class TaskParserTest {
     }
 
     @Test
-    void parseArgument_invalidParameter_InvalidInputExceptionThrown() {
+    void parseArgument_invalidParameter_expectEmptyString() throws InvalidInputException {
         String date = "foo /by 21/12/2022 09:00";
-        assertThrows(InvalidInputException.class,
-            () -> TaskParser.parseArgument("/do", date));
+        String actualOutput = TaskParser.parseArgument("/do", date);
+        assertEquals(EMPTY_STRING, actualOutput);
     }
+
 
     @Test
     void parseDescription_validDescription_expectFoo() throws InvalidInputException  {
         String input = "foo /by 21/12/2022";
         String expected = "foo";
-        String result = TaskParser.parseDescription(input);
+        String result = TaskParser.parseDescription(input, false);
         assertEquals(result, expected);
     }
 
@@ -47,7 +49,7 @@ public class TaskParserTest {
     void parseDescription_emptyDescription_expectInvalidInputException() {
         String input = "/by 21/12/2022";
         assertThrows(InvalidInputException.class,
-            () -> TaskParser.parseDescription(input));
+            () -> TaskParser.parseDescription(input, false));
     }
 
     @Test
