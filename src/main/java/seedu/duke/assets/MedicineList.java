@@ -6,7 +6,6 @@ import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
 
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
 public class MedicineList extends List {
     private ArrayList<Medicine> medicines = new ArrayList<>();
@@ -96,6 +95,4 @@ public class MedicineList extends List {
     public ArrayList<Medicine> getList() {
         return medicines;
     }
-
-
 }
