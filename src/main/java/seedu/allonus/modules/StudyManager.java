@@ -199,6 +199,11 @@ public class StudyManager {
         printMessage(listSizeError);
     }
 
+    /**
+     * Edits a module in the list.
+     * @param userInput String containing edit command and module index.
+     * @param ui Captures user input on console.
+     */
     public void editModule(String userInput, TextUi ui) {
         try {
             String moduleIndexString = userInput.replace(EDIT_COMMAND + " ", EMPTY_STRING);
@@ -221,12 +226,10 @@ public class StudyManager {
 
     private void editModuleRunner(TextUi ui, int moduleIndex) {
         Module moduleToEdit = modulesList.get(moduleIndex);
-        printMessage(EDIT_MODULE_OPENING_MESSAGE);
-        printMessage(moduleToEdit.toString());
-        printMessage(EDIT_MODULE_CHOOSE_MESSAGE);
+        printEditWelcomeMessage(moduleToEdit);
         boolean isEditFinished = false;
         String editUserInput;
-        while (isEditFinished == false) {
+        while (!isEditFinished) {
             editUserInput = ui.getUserInput();
             if (editUserInput.startsWith(MODULE_CATEGORY_DELIMITER)) {
                 editModuleCategory(moduleToEdit, editUserInput);
@@ -236,13 +239,21 @@ public class StudyManager {
                 editModuleDay(moduleToEdit, editUserInput);
             } else if (editUserInput.startsWith(MODULE_TIME_DELIMITER)) {
                 editModuleTime(moduleToEdit, editUserInput);
-            } else {
+            } else if (editUserInput.equals("done")) {
                 printMessage(EDIT_MODULE_SUCCESS_MESSAGE);
                 printMessage(moduleToEdit.toString());
                 isEditFinished = true;
+            } else {
+                printMessage(UNKNOWN_INPUT_MESSAGE);
             }
         }
         printMessage(EDIT_MODULE_EXIT_MESSAGE);
+    }
+
+    private void printEditWelcomeMessage(Module moduleToEdit) {
+        printMessage(EDIT_MODULE_OPENING_MESSAGE);
+        printMessage(moduleToEdit.toString());
+        printMessage(EDIT_MODULE_CHOOSE_MESSAGE);
     }
 
     private void editModuleTime(Module moduleToEdit, String editUserInput) {
@@ -319,7 +330,7 @@ public class StudyManager {
             printMessage(e.getMessage());
             return null;
         } catch (ModuleCategoryException e) {
-            e.getMessage();
+            printMessage(e.getMessage());
             logger.log(Level.WARNING, LOGGER_MISSING_CAT_IN_ADD);
             printMessage(e.getMessage());
             return null;
@@ -334,9 +345,14 @@ public class StudyManager {
         }
     }
 
+    /**
+     * Finds a module in the list using a find query.
+     * @param userInput String containing the find command and find query.
+     */
     public void findModule(String userInput) {
         try {
             String moduleKeyword = validateFindQuery(userInput);
+            moduleKeyword = moduleKeyword.toLowerCase();
             ArrayList<Module> matches = getFindMatches(moduleKeyword);
             if (matches.size() == 0) {
                 printMessage(FIND_NO_MATCHES_MESSAGE + " \"" + moduleKeyword + "\"");
@@ -352,18 +368,29 @@ public class StudyManager {
     private ArrayList<Module> getFindMatches(String moduleKeyword) {
         ArrayList<Module> matches = new ArrayList<>();
         for (Module m : modulesList) {
-            if (m.toString().contains(moduleKeyword)) {
+            String moduleStringLowerCase = m.toString().toLowerCase();
+            if (moduleStringLowerCase.contains(moduleKeyword)) {
                 matches.add(m);
             }
         }
         return matches;
     }
 
+    /**
+     * Validates find query entered by user and throws an error if the input is invalid.
+     * @param userInput User input that contains find command and search query.
+     * @return valid module keyword to be used as search query.
+     * @throws InvalidFindInputException for empty spaces and special characters in find query.
+     */
     private String validateFindQuery(String userInput) throws InvalidFindInputException {
         String moduleKeyword = userInput.replace(FIND_COMMAND + STRING_SPACE_CHARACTER, EMPTY_STRING);
         if (moduleKeyword.equals(STRING_SPACE_CHARACTER) || moduleKeyword.equals(EMPTY_STRING)
                 || !userInput.contains(" ")) {
             throw new InvalidFindInputException("You have not entered a search keyword to find modules!");
+        } else if (moduleKeyword.equals(":") || moduleKeyword.equals("[") || moduleKeyword.equals("]")
+                || moduleKeyword.equals(",") || moduleKeyword.equals("-")) {
+            throw new InvalidFindInputException("You have entered a special character."
+                    + " Please refine your search query!");
         }
         return moduleKeyword;
     }
