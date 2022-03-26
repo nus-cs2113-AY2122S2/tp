@@ -315,7 +315,8 @@ public class WorkoutList {
      * @return updatedWorkout The workout object which has been updated.
      * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
      * @throws NumberFormatException          If workout index and number of reps could not be parsed into an integer.
-     * @throws InvalidWorkoutException        If number of repetition is not valid or workout number to update is out of range.
+     * @throws InvalidWorkoutException        If number of repetition is not valid or workout number to update
+     *                                        is out of range.
      */
     public Workout updateWorkout(String userArgument) throws ArrayIndexOutOfBoundsException,
             NumberFormatException, InvalidWorkoutException {
