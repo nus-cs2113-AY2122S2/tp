@@ -160,12 +160,6 @@ Example of usage:
 
 <br/>
 
-### Showing Remaining: `remain`
-
-> Shows the difference between total income and total expenditure.
-
-Format: `remain`
-
 ### Listing all records by person: `list`
 
 Shows a list of all income, expenditures input, by person.
