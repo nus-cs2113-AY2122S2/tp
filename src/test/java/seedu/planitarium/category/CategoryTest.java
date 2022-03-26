@@ -2,6 +2,8 @@ package seedu.planitarium.category;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -98,5 +100,24 @@ class CategoryTest {
     @Test
     void getNumOfCategories_isExpectedNum_success() {
         assertEquals(6, Category.getNumberOfCategories());
+    }
+
+    @Test
+    void listCategories() {
+        PrintStream original = System.out;
+        ByteArrayOutputStream newOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOut));
+
+        String expected = "1. Others" + System.lineSeparator() +
+                "2. Food and Drinks" + System.lineSeparator() +
+                "3. Home and Utilities" + System.lineSeparator() +
+                "4. Health and Medical" + System.lineSeparator() +
+                "5. Transportation" + System.lineSeparator() +
+                "6. Fun and Entertainment" + System.lineSeparator();
+
+        Category.listCategories();
+        assertEquals(expected, newOut.toString());
+
+        System.setOut(original);
     }
 }
