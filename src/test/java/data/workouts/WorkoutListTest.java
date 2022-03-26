@@ -90,7 +90,7 @@ class WorkoutListTest {
         wl.createAndAddWorkout("lunge /reps 10");
 
         int workoutNumberToDeleteInList = 5;
-        assertThrows(WorkoutOutOfRangeException.class,
+        assertThrows(InvalidWorkoutException.class,
             () -> wl.deleteWorkout(Integer.toString(workoutNumberToDeleteInList)));
 
     }
@@ -111,7 +111,7 @@ class WorkoutListTest {
 
     @Test
     void updateWorkout_validInputArgument_expectSuccessUpdate() throws InvalidWorkoutException,
-            InvalidExerciseException, WorkoutOutOfRangeException {
+            InvalidExerciseException {
         wl.createAndAddWorkout("push up /reps 11");
         wl.createAndAddWorkout("sit up /reps 15");
         wl.createAndAddWorkout("lunge /reps 10");
@@ -154,7 +154,7 @@ class WorkoutListTest {
         int newReps = 15;
         String updateArgument = indexToUpdate + " " + Integer.toString(newReps);
 
-        assertThrows(WorkoutOutOfRangeException.class,
+        assertThrows(InvalidWorkoutException.class,
             () -> wl.updateWorkout(updateArgument));
     }
 
