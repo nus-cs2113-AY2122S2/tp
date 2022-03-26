@@ -140,7 +140,7 @@ public class Validator {
     private static boolean validateExpiry(String expiry) {
         try {
             LocalDate expiryDate = LocalDate.parse(expiry);
-            LocalDate minimumDate = LocalDate.now().plusMonths(6);
+            LocalDate minimumDate = LocalDate.now();
             if (expiryDate.isBefore(minimumDate)) {
                 return false;
             }
