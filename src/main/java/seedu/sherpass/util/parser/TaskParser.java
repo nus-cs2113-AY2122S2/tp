@@ -3,7 +3,6 @@ package seedu.sherpass.util.parser;
 import seedu.sherpass.command.AddCommand;
 import seedu.sherpass.command.Command;
 import seedu.sherpass.command.DeleteCommand;
-import seedu.sherpass.command.DeleteRecurringCommand;
 import seedu.sherpass.command.EditCommand;
 import seedu.sherpass.command.EditRecurringCommand;
 import seedu.sherpass.command.HelpCommand;
@@ -37,7 +36,7 @@ import static seedu.sherpass.constant.DateAndTimeFormat.inputWithoutTimeFormat;
 import static seedu.sherpass.constant.Index.SHOW_OPTION_INDEX;
 
 
-import static seedu.sherpass.constant.Index.EXPECTED_EDITRECURRING_ARG_LENGTH;
+import static seedu.sherpass.constant.Index.EXPECTED_EDIT_RECURRING_ARG_LENGTH;
 import static seedu.sherpass.constant.Index.INVALID_INDEX;
 import static seedu.sherpass.constant.Index.SLASH_OFFSET;
 import static seedu.sherpass.constant.Index.SPLIT_FIRST_PART_INDEX;
@@ -55,6 +54,7 @@ import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE
 import static seedu.sherpass.constant.Message.ERROR_INVALID_FREQUENCY_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
+import static seedu.sherpass.constant.Message.ERROR_MULTIPLE_ARGS_MESSAGE;
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
 import static seedu.sherpass.constant.Message.WHITESPACE;
 
@@ -71,10 +71,6 @@ public class TaskParser {
      */
     public static String parseArgument(String parameter, String argument)
             throws InvalidInputException {
-        if (!argument.contains(parameter) && !parameter.equals(FREQUENCY_DELIMITER)
-                && !parameter.equals(BY_DATE_DELIMITER)) {
-            throw new InvalidInputException(ERROR_EMPTY_ADD_COMMANDS_MESSAGE);
-        }
         if (!argument.contains(parameter)) {
             return EMPTY_STRING;
         }
@@ -88,7 +84,7 @@ public class TaskParser {
         return splitArguments[SPLIT_FIRST_PART_INDEX];
     }
 
-    public static String parseDescription(String fullArgument) throws InvalidInputException {
+    public static String parseDescription(String fullArgument, boolean isAdd) throws InvalidInputException {
         String taskDescription = " ";
         if (fullArgument.contains("/") && fullArgument.indexOf("/") > START_OF_STRING) {
             taskDescription = fullArgument.substring(START_OF_STRING, fullArgument.indexOf('/') - SLASH_OFFSET);
@@ -113,15 +109,27 @@ public class TaskParser {
 
 
     public static boolean isValidFreq(Frequency frequency) {
-        return frequency != null;
+        return (frequency != null) &&
+                (frequency.equals(Frequency.DAILY)
+                        || frequency.equals(Frequency.WEEKLY)
+                        || frequency.equals(Frequency.MONTHLY));
     }
 
     private static void prepareTaskContent(AddCommand newCommand, String argument)
             throws IllegalArgumentException, InvalidInputException, ArrayIndexOutOfBoundsException {
-        String taskDescription = parseDescription(argument);
+        if (argument.isBlank()) {
+            throw new InvalidInputException(ERROR_EMPTY_ADD_COMMANDS_MESSAGE);
+        }
+        if (argument.contains(FREQUENCY_DELIMITER) && argument.contains(BY_DATE_DELIMITER)) {
+            throw new InvalidInputException(ERROR_MULTIPLE_ARGS_MESSAGE);
+        }
+        String taskDescription = parseDescription(argument, true);
         String doOnDateString = parseArgument(DO_DATE_DELIMITER, argument);
         String startTimeString = parseArgument(START_TIME_DELIMITER, argument);
         String endTimeString = parseArgument(END_TIME_DELIMITER, argument);
+        if (doOnDateString.isBlank() || startTimeString.isBlank() || endTimeString.isBlank()) {
+            throw new InvalidInputException(ERROR_EMPTY_ADD_COMMANDS_MESSAGE);
+        }
         newCommand.setTaskContent(taskDescription,
                 prepareTaskDate(doOnDateString + WHITESPACE, startTimeString, inputWithTimeFormat),
                 prepareTaskDate(doOnDateString + WHITESPACE, endTimeString, inputWithTimeFormat));
@@ -144,27 +152,22 @@ public class TaskParser {
     }
 
     public static Command prepareAdd(String argument, Ui ui) {
-        if (argument.isBlank()) {
-            return new HelpCommand(AddCommand.COMMAND_WORD);
-        }
         AddCommand newCommand = new AddCommand();
         try {
             prepareTaskContent(newCommand, argument);
         } catch (IllegalArgumentException exception) {
             if (argument.contains(FREQUENCY_DELIMITER)) {
-                ui.showToUser(ERROR_INVALID_FREQUENCY_MESSAGE);
-                ui.showLine();
-                return new HelpCommand(AddCommand.COMMAND_WORD);
+                ui.showToUser(ERROR_INVALID_FREQUENCY_MESSAGE + "\n"
+                        + HELP_MESSAGE_SPECIFIC_COMMAND);
             }
             prepareByDate(newCommand, argument, ui);
         } catch (InvalidInputException e) {
-            ui.showToUser(e.getMessage());
-            ui.showLine();
-            return new HelpCommand(AddCommand.COMMAND_WORD);
+            ui.showToUser(e.getMessage() + "\n" + HELP_MESSAGE_SPECIFIC_COMMAND);
+            return null;
         } catch (IndexOutOfBoundsException e) {
-            ui.showToUser(ERROR_EMPTY_ADD_COMMANDS_MESSAGE);
-            ui.showLine();
-            return new HelpCommand(AddCommand.COMMAND_WORD);
+            ui.showToUser(ERROR_EMPTY_ADD_COMMANDS_MESSAGE + "\n"
+                    + HELP_MESSAGE_SPECIFIC_COMMAND);
+            return null;
         }
         return newCommand;
     }
@@ -184,7 +187,6 @@ public class TaskParser {
     }
 
 
-
     public static String removeRecurringDelimiter(String argument) {
         if (!argument.contains(FREQUENCY_DELIMITER)) {
             return argument;
@@ -201,7 +203,7 @@ public class TaskParser {
         String argumentWithoutRepeat = removeRecurringDelimiter(argument);
         String[] splitIndexAndOthers = argumentWithoutRepeat.split(WHITESPACE, SPLIT_TWO_PART_LIMIT);
 
-        if (splitIndexAndOthers.length < EXPECTED_EDITRECURRING_ARG_LENGTH) {
+        if (splitIndexAndOthers.length < EXPECTED_EDIT_RECURRING_ARG_LENGTH) {
             return new HelpCommand(EditCommand.COMMAND_WORD);
         }
 
@@ -210,7 +212,7 @@ public class TaskParser {
 
         EditRecurringCommand newCommand = new EditRecurringCommand();
         try {
-            newCommand.setTaskDescription(parseDescription(descAndDateString));
+            newCommand.setTaskDescription(parseDescription(descAndDateString, false));
             String doOnDateString = parseArgument(DO_DATE_DELIMITER, descAndDateString);
             String startTimeString = parseArgument(START_TIME_DELIMITER, descAndDateString);
             String endTimeString = parseArgument(END_TIME_DELIMITER, descAndDateString);
