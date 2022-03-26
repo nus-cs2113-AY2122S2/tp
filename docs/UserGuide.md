@@ -1,29 +1,5 @@
 # User Guide
 
-## Contents
-
-* [Contents](#contents)
-* [Introduction](#introduction)
-* [Quick Start](#quick-start)
-* [Quick Notes](#quick-notes)
-* [Features](#features)
-    * [Add a person](#adding-a-person-add)
-    * [Remove a person](#removing-a-person-delete)
-    * [Add an income](#adding-an-income-addin)
-    * [Delete an income](#deleting-an-income-deletein)
-    * [Edit an income](#editing-an-income-editin)
-    * [Add an expenditure](#adding-an-expenditure-addout)
-    * [Delete an expenditure](#deleting-an-expenditure-deleteout)
-    * [Edit an expenditure](#editing-an-expenditure-editout)
-    * [Remain](#showing-remaining-remain)
-    * [List records by person](#listing-all-records-by-person-list)
-    * [List records by group](#listing-all-records-by-group-list)
-    * [Search](#searching-find)
-    * [List categories](#listing-categories-listcat)
-    * [Exit](#exit-bye)
-* [FAQ](#faq)
-* [Command Summary](#command-summary)
-
 ## Introduction
 
 PlanITarium is a CLI application that helps you and your family to track your finances. It allows you to add individuals
@@ -40,16 +16,16 @@ your favourite personal expenditure tracker.
 
 ## Quick Start
 
-1. Ensure that you have Java 11 or above installed.
+1. Ensure that you are running Java 11 on your device.
 2. Down the latest `PlanITarium.jar` from [releases](https://github.com/AY2122S2-CS2113T-T10-2/tp/releases).
 3. Move the file into a folder that you want to use as the _home folder_.
-4. Open a terminal in the home folder and run `java -jar PlanITarium.jar`.
+4. Open a terminal in the _home folder_ and run `java -jar PlanITarium.jar`.
 5. Type your commands into the terminal and press [Enter] to execute it.
 6. Refer to [Features](#features) below for details on each command.
 
 ## Quick Notes
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.
+* Words in `UPPER_CASE` are the parameters to be supplied by you.
     * Example: `add /n NAME /g GROUP_INDEX` where `NAME` and `GROUP_INDEX` are the parameters.
 * A forward slash `/`, appended by a letter, denotes a delimiter that is used to indicate a parameter used for the
   command. Each delimiter is used to indicate one parameter. The documentation for the commands will specify the
@@ -59,14 +35,22 @@ your favourite personal expenditure tracker.
     * Example: `add /n Alice /g 2`, `add /g 2 /n Alice`
 * Parameters enclosed in angle brackets and separated by a vertical bar `|` indicate that they have fixed values.
     * Example: `/p <T|F>` where the values accepted are `T` or `F`
-* If the forward slash `/` is required to be used by the user, enclose it with an extra spacing.
+* If you wish to use a forward slash `/` in the description field, input it enclosed in whitespaces.
     * Example: `Bought on / off switch` as a description
 
 ## Features
 
+### Viewing all commands: `help`
+
+> Shows a list of available commands
+
+Format: `help`
+
+<br/>
+
 ### Adding a person: `add`
 
-Adds a person to the list to track finance
+> Adds a person to the list to track finance
 
 Format: `add /n NAME /g GROUP_INDEX`
 
@@ -78,9 +62,14 @@ Example of usage:
 
 ### Removing a person: `delete`
 
-Deletes a person from the list to track finance
+> Deletes a person from the list to track finance
 
 Format: `delete /u USER_INDEX /g GROUP_INDEX`
+
+* `USER_INDEX` refers to an index that is mapped to that individual.
+  * The index can be obtained from the [list](#listing-all-records-by-person-list) command.
+* `GROUP_INDEX` refers to an index that is mapped to the group that individual belongs to.
+  * The index can be obtained from the [list](#listing-all-records-by-group-list) command.
 
 Example of usage:
 
@@ -138,7 +127,7 @@ Example of usage:
 
 ### Editing an income: `editin`
 
-Edit an income under a stated user
+> Edit an income under a stated user
 
 Format: `editin /u USER_INDEX /g GROUP_INDEX /r INCOME_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
 
@@ -150,7 +139,7 @@ Example of usage:
 
 ### Adding an expenditure: `addout`
 
-Adds an expenditure under a stated user
+> Adds an expenditure under a stated user
 
 Format: `addout /u USER_INDEX /g GROUP_INDEX /e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
 
@@ -162,7 +151,7 @@ Example of usgae:
 
 ### Deleting an expenditure: `deleteout`
 
-Deletes an expenditure under a stated user
+> Deletes an expenditure under a stated user
 
 Format: `deleteout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX`
 
@@ -174,7 +163,7 @@ Example of usage:
 
 ### Editing an expenditure: `editout`
 
-Edit an expenditure under a stated user
+> Edit an expenditure under a stated user
 
 Format:    `editout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX /i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
 
@@ -184,57 +173,65 @@ Example of usage:
 
 <br/>
 
-### Showing Remaining: `remain`
+### Listing all records by group: `list`
 
-Shows the difference between total income and total expenditure.
+> Shows a list of the total incomes, expenditures and remaining of each group
 
-Format: `remain`
+Format: `list`
 
-### Listing all records by person: `list`
+Example of usage:
 
-Shows a list of all income, expenditures input, by person.
-
-Format:    `list`
+![list-command-screenshot]() <!-- this is a placeholder -->
 
 <br/>
 
-### Listing all records by group: `list`
+### Listing all records by person: `list`
 
-Shows a list of income, expenditures, and remain, by group
+> Shows a list of incomes and expenditures, in a group
 
 Format: `list /g GROUP_INDEX`
+
+* `GROUP_INDEX` refers to an index that is mapped to the group that individual belongs to.
+  * The index can be obtained from the [list](#listing-all-records-by-group-list) command.
 
 Example of usage:
 
 `list /g 1`
 
+![detail_list-command-screenshot]() <!-- this is a placeholder -->
+
 <br/>
 
 ### Searching: `find`
 
-Search for a string throughout all income and expenditure objects
+> Search for a string throughout all income and expenditure objects
 
-Format:    `find /d USER_STRING /c CATEGORY_INDEX`
+Format: `find /d USER_STRING /c CATEGORY_INDEX`
 
-Example of usgae:
+* `USER_STRING` refers to the keyword which you want to look for.
+  * Keywords are case-sensitive and inclusive. So a search for `brush` will successfully look for `toothbrush`.
+
+Example of usage:
 
 `find /d Candy /c 1`
+
+![find-command-screenshot]() <!-- this is a placeholder -->
 
 <br/>
 
 ### Listing categories: `listcat`
 
-Shows a list of categories
+> Shows a list of categories
 
-Format:    `listcat`
+Format: `listcat`
 
 <br/>
 
 ### Exit: `bye`
 
-Exits the program.
+> Exits the program.
 
-Format:    bye
+Format: `bye`
 
 ## FAQ
 
@@ -244,22 +241,25 @@ Format:    bye
 
 ## Command Summary
 
-| Command                | Format |
-|------------------------|--------|
-| Add a person           | test   |
-| Remove a person        |        |
-| Add an income          |        |
-| Delete an income       |        |
-| Edit an income         |        |
-| Add an expenditure     |        |
-| Delete an expenditure  |        |
-| Edit an expenditure    |        |
-| Show remain            |        |
-| List records by person |        |
-| List records by group  |        |
-| List categories        |        |
-| Exit                   |        |
-| Show all commands      |        |
+To keep things simple, we will omit the parameter description for you.
+To view each command in detail, refer to the [features](#features) section.
+
+| Command                                                       | Format                                             |
+|---------------------------------------------------------------|----------------------------------------------------|
+| [Add a person](#adding-a-person-add)                          | add /n __ /g __                                    |
+| [Remove a person](#removing-a-person-delete)                  | delete /u __ /g __                                 |
+| [Add an income](#adding-an-income-addin)                      | addin /u__ /g __ /i __ /d __ /c __ /p __           |
+| [Delete an income](#deleting-an-income-deletein)              | deletein /u __ /g __ /r __                         |
+| [Edit an income](#editing-an-income-editin)                   | editin /u __ /g __ /r __ /i __ /d __ /c __  /p __  |
+| [Add an expenditure](#adding-an-expenditure-addout)           | addout /u__ /g __ /e __ /d __ /c __ /p __          |
+| [Delete an expenditure](#deleting-an-expenditure-deleteout)   | deleteout /u __ /g __ /r __                        |
+| [Edit an expenditure](#editing-an-expenditure-editout)        | editout /u __ /g __ /r __ /e __ /d __ /c __  /p __ |
+| [List records by group](#listing-all-records-by-group-list)   | list                                               |
+| [List records by person](#listing-all-records-by-person-list) | list /g __                                         |
+| [Search](#searching-find)                                     | find /d __ /c __                                   | 
+| [List categories](#listing-categories-listcat)                | listcat                                            |
+| [Exit](#exit-bye)                                             | bye                                                |
+| [Show all commands](#viewing-all-commands-help)               | help                                               |
 
 
 
@@ -267,12 +267,10 @@ Format:    bye
 * Remove a person `delete /u USER_INDEX /g GROUP_INDEX`
 * Add an income `addin /u USER_INDEX /g GROUP_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
 * Delete an income `deletein /u USER_INDEX /g GROUP_INDEX /r INCOME_INDEX`
-* Edit an
-  income `editin /u USER_INDEX /g GROUP_INDEX /r INCOME_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
+* Edit an income `editin /u USER_INDEX /g GROUP_INDEX /r INCOME_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
 * Add an expenditure `addout /u USER_INDEX /g GROUP_INDEX /e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
 * Delete an expenditure `deleteout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX`
-* Edit an
-  expenditure `editout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX /i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
+* Edit an expenditure `editout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX /i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
 * Show remain `remain`
 * List records by person `list`
 * List records by group `list /g GROUP_INDEX`
