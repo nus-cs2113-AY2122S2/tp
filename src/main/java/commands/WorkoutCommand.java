@@ -2,7 +2,6 @@ package commands;
 
 import data.exercises.InvalidExerciseException;
 import data.workouts.InvalidWorkoutException;
-import data.workouts.WorkoutOutOfRangeException;
 import data.workouts.Workout;
 import data.workouts.WorkoutList;
 import storage.FileManager;
