@@ -1,8 +1,10 @@
+//@@author 1szheng
 package seedu.planitarium.parser;
 
 import seedu.planitarium.exceptions.DuplicateDelimiterException;
 import seedu.planitarium.exceptions.EmptyStringException;
 import seedu.planitarium.exceptions.MissingDelimiterException;
+import seedu.planitarium.global.Constants;
 
 import java.util.logging.Level;
 
@@ -13,22 +15,22 @@ public class ParserUtility {
     /**
      * Returns the term surrounded by two delimiters.
      *
-     * @param text           The text containing the term to be parsed.
-     * @param delimiterLeft  The delimiter on the left of term.
+     * @param text          The text containing the term to be parsed.
+     * @param delimiterLeft The delimiter on the left of term.
      * @return A non-delimiter-surrounded term.
      * @throws EmptyStringException if string after the left delimiter is blank.
      */
     protected static String parseDelimitedTerm(String text, String delimiterLeft)
             throws EmptyStringException {
-        String[] firstParse = text.split(delimiterLeft, Parser.LIMIT_TWO_TOKENS);
+        String[] firstParse = text.split(delimiterLeft, Constants.LIMIT_TWO_TOKENS);
         String leftRemoved;
-        if (firstParse.length == Parser.LIMIT_TWO_TOKENS) {
-            leftRemoved = firstParse[Parser.INDEX_LEFT_REMOVED];
+        if (firstParse.length == Constants.LIMIT_TWO_TOKENS) {
+            leftRemoved = firstParse[Constants.INDEX_LEFT_REMOVED];
         } else {
-            leftRemoved = firstParse[Parser.INDEX_LEFT_NOT_EXIST];
+            leftRemoved = firstParse[Constants.INDEX_LEFT_NOT_EXIST];
         }
-        String[] secondParse = leftRemoved.split(Parser.DELIMITER_BACK, Parser.LIMIT_TWO_TOKENS);
-        String rightRemoved = secondParse[Parser.INDEX_RIGHT_REMOVED].trim();
+        String[] secondParse = leftRemoved.split(Parser.DELIMITER_BACK, Constants.LIMIT_TWO_TOKENS);
+        String rightRemoved = secondParse[Constants.INDEX_RIGHT_REMOVED].trim();
         if (rightRemoved.isBlank()) {
             throw new EmptyStringException(delimiterLeft);
         }
@@ -42,7 +44,7 @@ public class ParserUtility {
      * @throws NumberFormatException if the value provided is negative.
      */
     protected static void checkNegativeMoney(double checkMoney) throws NumberFormatException {
-        if (Double.compare(checkMoney, Parser.MONEY_ZERO) < 0) {
+        if (Double.compare(checkMoney, Constants.MONEY_ZERO) < 0) {
             throw new NumberFormatException(THROW_NEGATIVE_MONEY);
         }
     }
