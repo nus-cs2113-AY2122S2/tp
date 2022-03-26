@@ -1,8 +1,12 @@
 package seedu.splitlah.command;
 
-import seedu.splitlah.data.*;
+import seedu.splitlah.data.Activity;
+import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Person;
+import seedu.splitlah.data.Profile;
+import seedu.splitlah.data.Session;
+import seedu.splitlah.data.PersonList;
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 
@@ -18,8 +22,7 @@ import java.util.logging.Level;
 public class ActivityCreateCommand extends Command {
   
     private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
-    private static final String EDIT_SUCCESS = "The activity was edited successfully.\n";
-    
+
     private int activityId;
     private final int sessionId;
     private final String activityName;
@@ -54,38 +57,6 @@ public class ActivityCreateCommand extends Command {
         assert activityName != null : Message.ASSERT_ACTIVITYCREATE_ACTIVITY_NAME_MISSING;
         assert payer != null : Message.ASSERT_ACTIVITYCREATE_PAYER_NAME_MISSING;
         assert involvedList != null : Message.ASSERT_ACTIVITYCREATE_INVOLVED_LIST_ARRAY_NULL;
-        this.activityId = -1;
-        this.sessionId = sessionId;
-        this.activityName = activityName;
-        this.totalCost = totalCost;
-        this.payer = payer;
-        this.involvedList = involvedList;
-        this.costList = costList;
-        this.gst = gst;
-        this.serviceCharge = serviceCharge;
-    }
-
-    /**
-     * Initializes an ActivityCreateCommand object.
-     *
-     * @param sessionId     An integer that uniquely identifies a session.
-     * @param activityName  A String object that represents the Activity object's name.
-     * @param totalCost     A double that represents total cost of the activity.
-     * @param payer         A String object that represents the name of the person who paid for the activity.
-     * @param involvedList  An array of String objects that represents the names of the persons
-     *                      who are involved in the activity.
-     * @param costList      A double array object that represents the respective costs of
-     *                      each person involved in the activity.
-     * @param gst           A double that represents the gst to be included for the cost of the activity.
-     * @param serviceCharge A double that represents the service charge to be included for the cost of the activity.
-     */
-    public ActivityCreateCommand(int activityId, int sessionId, String activityName, double totalCost, String payer,
-                                 String[] involvedList, double[] costList, double gst, double serviceCharge) {
-        assert sessionId > 0 : Message.ASSERT_ACTIVITYCREATE_SESSION_ID_LESS_THAN_ONE;
-        assert activityName != null : Message.ASSERT_ACTIVITYCREATE_ACTIVITY_NAME_MISSING;
-        assert payer != null : Message.ASSERT_ACTIVITYCREATE_PAYER_NAME_MISSING;
-        assert involvedList != null : Message.ASSERT_ACTIVITYCREATE_INVOLVED_LIST_ARRAY_NULL;
-        this.activityId = activityId;
         this.sessionId = sessionId;
         this.activityName = activityName;
         this.totalCost = totalCost;
@@ -243,7 +214,6 @@ public class ActivityCreateCommand extends Command {
     @Override
     public void run(Manager manager) {
         boolean hasDuplicates = PersonList.hasNameDuplicates(involvedList);
-        boolean isEditCommand = (activityId != -1);
         if (hasDuplicates) {
             manager.getUi().printlnMessage(Message.ERROR_ACTIVITYCREATE_DUPLICATE_NAME);
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST);
@@ -258,18 +228,12 @@ public class ActivityCreateCommand extends Command {
             Session session = profile.getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
-            if (isEditCommand) {
-                activityId = profile.getNewActivityId();
-            }
+            activityId = profile.getNewActivityId();
             addAllActivityCost(involvedPersonList, personPaid, activityId);
             Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(activity);
             manager.saveProfile();
-            if (isEditCommand) {
-                ui.printlnMessageWithDivider(EDIT_SUCCESS + activity);
-            } else {
-                ui.printlnMessageWithDivider(COMMAND_SUCCESS + activity);
-            }
+            ui.printlnMessageWithDivider(COMMAND_SUCCESS + activity);
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_ACTIVITY_ADDED + activityId);
         } catch (InvalidDataException e) {
             ui.printlnMessage(e.getMessage());
