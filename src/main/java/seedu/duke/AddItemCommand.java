@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.StringTokenizer;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -8,10 +9,8 @@ import java.util.logging.Level;
  * to add as well as its pax.
  */
 public class AddItemCommand extends Command {
-    private static final String ITEM_NAME_INDICATOR = "/Name:";
-    private static final int ITEM_NAME_INDICATOR_LENGTH = 6;
-    private static final String ITEM_PAX_INDICATOR = "/Pax:";
-    private static final int ITEM_PAX_INDICATOR_LENGTH = 5;
+    private static final String DELIMITER = "/";
+    private static final int NUMBER_OF_PARTS_IN_COMMAND = 2;
     private Item item;
     private static Logger itemLogger = Logger.getLogger("itemLogger");
 
@@ -26,14 +25,21 @@ public class AddItemCommand extends Command {
      *                                   empty.
      */
     public AddItemCommand(String userInput) throws HotelLiteManagerException {
-        boolean isValidAddItemCommand = userInput.contains(ITEM_NAME_INDICATOR)
-                && userInput.contains(ITEM_PAX_INDICATOR);
-        if (!isValidAddItemCommand) {
+        if (userInput.startsWith(DELIMITER)) {
+            itemLogger.log(Level.WARNING, "Detected an empty item name for AddItemCommand. Exception thrown.");
+            throw new EmptyItemNameException();
+        }
+        if (userInput.endsWith(DELIMITER)) {
+            itemLogger.log(Level.WARNING, "Detected an empty item name for AddItemCommand. Exception thrown.");
+            throw new EmptyItemPaxException();
+        }
+        StringTokenizer tokens = new StringTokenizer(userInput, DELIMITER);
+        if (tokens.countTokens() != NUMBER_OF_PARTS_IN_COMMAND) {
             itemLogger.log(Level.WARNING, "Invalid formatting for AddItemCommand detected. Exception thrown.");
             throw new InvalidCommandException();
         }
-        int itemPax = extractItemPax(userInput);
-        String itemName = extractItemName(userInput);
+        String itemName = extractItemName(tokens);
+        int itemPax = extractItemPax(tokens);
         Item item = new Item(itemName, itemPax);
         setItem(item);
     }
@@ -41,14 +47,12 @@ public class AddItemCommand extends Command {
     /**
      * Returns the item name extracted from the user input.
      *
-     * @param userInput The user's input.
+     * @param tokens String tokens of the user input.
      * @return The item name within the user input.
      * @throws HotelLiteManagerException if item name is empty.
      */
-    private String extractItemName(String userInput) throws HotelLiteManagerException {
-        int itemNameStartingPosition = userInput.indexOf(ITEM_NAME_INDICATOR) + ITEM_NAME_INDICATOR_LENGTH;
-        int itemPaxIndicatorPosition = userInput.indexOf(ITEM_PAX_INDICATOR);
-        String itemName = userInput.substring(itemNameStartingPosition, itemPaxIndicatorPosition);
+    private String extractItemName(StringTokenizer tokens) throws HotelLiteManagerException {
+        String itemName = tokens.nextToken();
         itemName = itemName.trim();
         if (itemName.isEmpty()) {
             itemLogger.log(Level.WARNING, "Detected an empty item name for AddItemCommand. Exception thrown.");
@@ -60,20 +64,19 @@ public class AddItemCommand extends Command {
     /**
      * Returns the item pax extracted from the user input.
      *
-     * @param userInput The user's input.
+     * @param token A string token containing the user input after the delimiter.
      * @return The item pax within the user input.
      * @throws HotelLiteManagerException if item pax is empty or invalid.
      */
-    private int extractItemPax(String userInput) throws HotelLiteManagerException {
+
+    private int extractItemPax(StringTokenizer token) throws HotelLiteManagerException {
         int itemPax;
-        String itemPaxStringVersion;
-        int stringEndingPosition = userInput.length();
-        int itemPaxStartingPosition = userInput.indexOf(ITEM_PAX_INDICATOR) + ITEM_PAX_INDICATOR_LENGTH;
-        if (itemPaxStartingPosition == stringEndingPosition) {
+        String itemPaxStringVersion = token.nextToken();
+        itemPaxStringVersion = itemPaxStringVersion.trim();
+        if (itemPaxStringVersion.isEmpty()) {
             itemLogger.log(Level.WARNING, "Detected an empty item name for AddItemCommand. Exception thrown.");
             throw new EmptyItemPaxException();
         }
-        itemPaxStringVersion = userInput.substring(itemPaxStartingPosition);
         try {
             itemPax = Integer.parseInt(itemPaxStringVersion);
         } catch (NumberFormatException e) {
@@ -93,7 +96,7 @@ public class AddItemCommand extends Command {
      * Returns an acknowledgement message to inform the user that the item has been added to the item list as well
      * as the number of items within the item list.
      *
-     * @param ui               The object that deals with user interface for the program.
+     * @param ui The object that deals with user interface for the program.
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      */
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, WrongCommandException {

@@ -8,10 +8,10 @@ package seedu.duke;
 public class CommandParser {
 
     private static final String BYE = "bye";
-    private static final String ADD_ITEM_COMMAND = "Add Item";
+    private static final String ADD_ITEM_COMMAND = "Add Item ";
     private static final String VIEW_ITEM_LIST_COMMAND = "View Item In Inventory";
-    private static final String DELETE_ITEM_COMMAND = "Delete Item";
-    private static final String UPDATE_ITEM_PAX_COMMAND = "Update Item Pax";
+    private static final String DELETE_ITEM_COMMAND = "Delete Item ";
+    private static final String UPDATE_ITEM_PAX_COMMAND = "Update Item Pax ";
     private static final String ADD_HOUSEKEEPER_COMMAND = "Add Housekeeper ";
     private static final String ADD_PERFORMANCE_COMMAND = "add housekeeper performance";
     private static final String ADD_AVAILABILITY_COMMAND = "Availability ";
@@ -91,7 +91,7 @@ public class CommandParser {
             commandStringWithoutCommand = commandString.replace(ASSIGN_HOUSEKEEPER, "");
             userCommand = new AssignHousekeeperCommand(commandStringWithoutCommand);
         } else {
-            throw new WrongCommandException("Invalid Command");
+            throw new WrongCommandException("Error! Invalid Command.");
         }
         return userCommand;
     }
