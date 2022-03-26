@@ -243,6 +243,7 @@ public class ActivityCreateCommand extends Command {
     @Override
     public void run(Manager manager) {
         boolean hasDuplicates = PersonList.hasNameDuplicates(involvedList);
+        boolean isEditCommand = (activityId != -1);
         if (hasDuplicates) {
             manager.getUi().printlnMessage(Message.ERROR_ACTIVITYCREATE_DUPLICATE_NAME);
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST);
@@ -257,14 +258,14 @@ public class ActivityCreateCommand extends Command {
             Session session = profile.getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
-            if (activityId == -1) {
+            if (isEditCommand) {
                 activityId = profile.getNewActivityId();
             }
             addAllActivityCost(involvedPersonList, personPaid, activityId);
             Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(activity);
             manager.saveProfile();
-            if (activityId != -1) {
+            if (isEditCommand) {
                 ui.printlnMessageWithDivider(EDIT_SUCCESS + activity);
             } else {
                 ui.printlnMessageWithDivider(COMMAND_SUCCESS + activity);

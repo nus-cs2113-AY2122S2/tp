@@ -15,8 +15,6 @@ import java.util.logging.Level;
  */
 public class ActivityEditCommand extends Command {
 
-    public static final String COMMAND_TEXT = "activity /edit";
-
     private int activityId;
     private final int sessionId;
     private final String activityName;
