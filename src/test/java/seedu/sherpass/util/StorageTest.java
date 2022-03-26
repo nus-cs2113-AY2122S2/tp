@@ -19,6 +19,7 @@ class StorageTest {
 
     @Test
     public void writeSaveData_oneTask_expectFileCreated() {
+        Ui ui = new Ui();
         File testFile = new File("data/test.json");
         if (testFile.exists()) {
             testFile.delete();
@@ -28,8 +29,8 @@ class StorageTest {
             TaskList tasks = new TaskList();
             Task newTask = new Task(1,"task_one",
                     LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat),null,
-                    null, null);
-            tasks.addTask(newTask);
+                    null, null, 0);
+            tasks.addTask(newTask, false, ui);
             storage.writeSaveData(tasks);
         } catch (IOException exception) {
             exception.printStackTrace();
