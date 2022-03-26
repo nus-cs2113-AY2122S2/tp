@@ -55,7 +55,7 @@ public class Timetable {
     }
 
     /**
-     * Generate a timetable for today
+     * Generate a timetable for today.
      *
      * @param taskList Representation of an array of tasks.
      * @param ui       The user interface which interacts with the user.
@@ -66,7 +66,7 @@ public class Timetable {
     }
 
     /**
-     * Generate a timetable for tomorrow
+     * Generate a timetable for tomorrow.
      *
      * @param taskList Representation of an array of tasks.
      * @param ui       The user interface which interacts with the user.
@@ -140,6 +140,7 @@ public class Timetable {
     public static void showMaySchedule(TaskList taskList, Ui ui) {
         TimetableLogic.showMonthlySchedule(taskList, ui, MAY);
     }
+
     public static void showJuneSchedule(TaskList taskList, Ui ui) {
         TimetableLogic.showMonthlySchedule(taskList, ui, JUNE);
     }
@@ -159,9 +160,11 @@ public class Timetable {
     public static void showOctoberSchedule(TaskList taskList, Ui ui) {
         TimetableLogic.showMonthlySchedule(taskList, ui, OCTOBER);
     }
+
     public static void showNovemberSchedule(TaskList taskList, Ui ui) {
         TimetableLogic.showMonthlySchedule(taskList, ui, NOVEMBER);
     }
+
     public static void showDecemberSchedule(TaskList taskList, Ui ui) {
         TimetableLogic.showMonthlySchedule(taskList, ui, DECEMBER);
     }
