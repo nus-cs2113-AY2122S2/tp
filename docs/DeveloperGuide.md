@@ -219,6 +219,11 @@ The general workflow of the `session /list` command is as follows:
      Then, the last group is printed with a divider below it, using the method `TextUi#printlnMessageWithDivider()`.
 
 ### Settle a session
+**API reference:** [`SessionSummaryCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionSummaryCommand.java)
+
+The sequence diagram below models the interaction between various entities in the system
+when the user invokes the `session /summary` command
+
 ### Add an activity
 ### Remove an activity
 ### View an activity
