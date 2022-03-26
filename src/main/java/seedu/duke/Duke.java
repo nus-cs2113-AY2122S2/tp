@@ -1,25 +1,23 @@
 package seedu.duke;
 
+import java.util.List;
+
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    SatisfactionList satisfactionList = new SatisfactionList();
-    HousekeeperList housekeeperList = new HousekeeperList();
-    AssignmentMap assignmentMap = new AssignmentMap();
 
     private void run() {
         CommandParser commandParser = new CommandParser();
-        ItemList listOfItems = new ItemList();
+        ListContainer listContainer = new ListContainer();
         boolean shouldExitProgram = false;
         Ui ui = new Ui();
-        RoomList roomList = new RoomList();
         String userInput;
         while (!shouldExitProgram) {
             try {
                 userInput = ui.readUserInput();
                 Command command = commandParser.parse(userInput);
-                command.execute(housekeeperList, satisfactionList, assignmentMap, roomList, listOfItems, ui);
+                command.execute(listContainer, ui);
                 shouldExitProgram = command.isExit();
             } catch (WrongCommandException error) {
                 System.out.println(error.getMessage());

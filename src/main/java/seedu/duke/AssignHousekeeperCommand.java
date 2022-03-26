@@ -67,20 +67,14 @@ public class AssignHousekeeperCommand extends Command {
     /**
      * Get the Name of the housekeeper and verify that housekeeper is in records. If in records, add
      * his/her availability into housekeeper list.
-     *
-     * @param housekeeperList  The list of housekeeper recorded.
-     * @param satisfactionList The given list of Satisfaction objects.
-     * @param roomList         The given list of Room objects. N/A for this class, but
-     *                         must be included for the execution override.
-     * @param listOfItems      The given list of Item objects. N/A for this class, but
-     *                         must be included for the execution override.
      * @param ui               The user interface for this execution method.
      */
     @Override
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
-                        AssignmentMap assignmentMap, RoomList roomList,
-                        ItemList listOfItems, Ui ui)
+    public void execute(ListContainer listContainer, Ui ui)
             throws InvalidRoomNumberException, InvalidHousekeeperProfile {
+        AssignmentMap assignmentMap = listContainer.getAssignmentMap();
+        HousekeeperList housekeeperList = listContainer.getHousekeeperList();
+        RoomList roomList = listContainer.getRoomList();
         String roomID = getroomID();
         assert !roomID.isEmpty() : "ID should not be empty";
         String name = getName();

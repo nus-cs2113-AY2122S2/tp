@@ -10,15 +10,12 @@ public class AssignHousekeeperTest {
 
     @Test
     public void commandParser_addCommandNameAvailability_success() throws Exception {
-        RoomList inputRoomList = new RoomList();
-        ItemList itemList = new ItemList();
-        AssignmentMap assignmentMap = new AssignmentMap();
+        ListContainer listContainer = new ListContainer();
         Ui ui = new Ui();
-        SatisfactionList satisfactionList = new SatisfactionList();
-        HousekeeperList housekeeperList = new HousekeeperList();
         String inputCommand = "301";
         CheckInCommand checkInCommand = new CheckInCommand(inputCommand);
-        checkInCommand.execute(housekeeperList, satisfactionList, assignmentMap, inputRoomList, itemList, ui);
+        checkInCommand.execute(listContainer, ui);
+        RoomList inputRoomList = listContainer.getRoomList();
         Room expectedRoom = null;
         for (Room room : inputRoomList.getRoomList()) {
             if (room.getRoomId() == 301) {

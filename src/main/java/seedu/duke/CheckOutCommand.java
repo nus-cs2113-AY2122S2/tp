@@ -20,11 +20,9 @@ public class CheckOutCommand extends Command {
      * @param ui The user interface for this execution method.
      * @throws InvalidRoomNumberException if the room number is not in the room list.
      */
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
-                        AssignmentMap assignmentMap, RoomList list,
-                        ItemList itemList, Ui ui) throws InvalidRoomNumberException {
-        this.roomList = list;
-        for (Room room : list.getRoomList()) {
+    public void execute(ListContainer listContainer, Ui ui) throws InvalidRoomNumberException {
+        this.roomList = listContainer.getRoomList();
+        for (Room room : roomList.getRoomList()) {
             if (room.getRoomId() == roomId) {
                 room.checkOut();
                 // haven't implement ui
