@@ -6,6 +6,7 @@ import seedu.planitarium.money.ExpenditureList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class ExpenditureListTest {
@@ -17,14 +18,14 @@ class ExpenditureListTest {
     @BeforeEach
     public void setUp() {
         personOne = new ExpenditureList();
-        personOne.addExpenditure("Food", 20);
-        personOne.addExpenditure("Transport", 5);
+        personOne.addExpenditure("Food", 20, false);
+        personOne.addExpenditure("Transport", 5, false);
     }
 
     @Test
     public void addExpenditure_newExpenditure_existsInExpenditure() {
         ExpenditureList personTwo = new ExpenditureList();
-        personTwo.addExpenditure("clothes", 30);
+        personTwo.addExpenditure("clothes", 30, false);
         String description = "clothes";
         double amount = 30;
         assertEquals(description, personTwo.getDescription(VALID_INDEX));
@@ -45,6 +46,13 @@ class ExpenditureListTest {
         double getAmount = personOne.getExpenditureValue(VALID_INDEX);
         assertEquals(inputAmount, getAmount);
     }
+
+    @Test
+    public void getPermanent_validIndex_expectFalse() {
+        boolean isPermanent = personOne.isPermanent(VALID_INDEX);
+        assertFalse(isPermanent);
+    }
+
 
     @Test
     public void remove_expenditureExists_removesNormally() {
@@ -88,7 +96,7 @@ class ExpenditureListTest {
     public void addExpenditure_nullDescription_expectAssertionError() {
         ExpenditureList testList = new ExpenditureList();
         try {
-            testList.addExpenditure(null, 24);
+            testList.addExpenditure(null, 24, false);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());

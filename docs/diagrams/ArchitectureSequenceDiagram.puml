@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+
+Actor User USER_COLOR
+Participant Main #grey
+Participant Commands LOGIC_COLOR
+Participant "<color:maroon><<Class>>\nParser" as Parser LOGIC_COLOR_T2
+Participant Family MODEL_COLOR
+Participant MoneyList MODEL_COLOR_T3
+Participant UI UI_COLOR
+Participant Storage STORAGE_COLOR
+
+User -> Main : "add /n Alice /g 2"
+
+activate Main
+Main -> Commands : getCommand("add /n Alice /g 2")
+
+activate Commands
+Commands -> Parser : parseKeyword("add /n Alice /g 2")
+
+activate Parser
+Parser --> Commands
+deactivate Parser
+
+Commands --> Main : :AddPersonCommand
+deactivate Commands
+
+Main -> Commands : execute()
+activate Commands
+
+Commands -> Parser : //parse various details//
+activate Parser
+Parser --> Commands
+deactivate Parser
+
+Commands -> Family : addMyGen("Alice")
+activate Family
+
+Family -> Family : Person("Alice")
+activate Family
+
+Family -> MoneyList : IncomeList()
+activate MoneyList
+MoneyList --> Family
+deactivate MoneyList
+
+Family -> MoneyList : ExpenseList()
+activate MoneyList
+MoneyList --> Family
+deactivate MoneyList
+
+Family --> Family
+deactivate Family
+
+Family --> Commands
+deactivate Family
+
+Commands -> UI : printMsg()
+activate UI
+UI --> Commands
+deactivate UI
+
+Commands -> Storage : saveData()
+activate Storage
+Storage --> Commands
+deactivate Storage
+
+Commands --> Main
+deactivate Commands
+
+Main --> User
+
+@enduml
+

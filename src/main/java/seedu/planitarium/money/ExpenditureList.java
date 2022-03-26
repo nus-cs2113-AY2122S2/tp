@@ -2,6 +2,7 @@ package seedu.planitarium.money;
 
 import seedu.planitarium.ProjectLogger;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
@@ -12,6 +13,8 @@ public class ExpenditureList extends MoneyList {
 
     private static final String LOG_CLASS_NAME = ExpenditureList.class.getSimpleName();
     private static final String LOG_FILE_PATH = LOG_CLASS_NAME + ".log";
+    protected static final ProjectLogger logger = new ProjectLogger(LOG_CLASS_NAME, LOG_FILE_PATH);
+
     private static final String LOG_INIT = "Logger for " + LOG_CLASS_NAME + " initialised.";
     private static final String LOG_ADD_EXP = "addExpenditure()";
     private static final String LOG_GET_EXP_VAL = "getExpenditureValue()";
@@ -24,7 +27,6 @@ public class ExpenditureList extends MoneyList {
      */
     public ExpenditureList() {
         this.expenditureArrayList = new ArrayList<>();
-        logger = new ProjectLogger(LOG_CLASS_NAME, LOG_FILE_PATH);
         logger.getLogger().log(Level.INFO, LOG_INIT);
     }
 
@@ -34,27 +36,13 @@ public class ExpenditureList extends MoneyList {
      * @param description The description of what the user had spent on
      * @param amount The cost for this expenditure
      */
-    public void addExpenditure(String description, double amount) {
+    public void addExpenditure(String description, double amount, boolean isPermanent) {
         logger.getLogger().log(Level.INFO, LOG_ADD_EXP);
         assert (description != null);
         assert (amount >= 0);
         logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
-        this.expenditureArrayList.add(new Expenditure(description, amount));
+        this.expenditureArrayList.add(new Expenditure(description, amount, isPermanent));
         numberOfExpenditures++;
-    }
-
-    /**
-     * Returns the cost of a specific expenditure based on its index on the list.
-     *
-     * @param index The index of the expenditure on the person's expenditure list
-     * @return The cost of the expenditure
-     */
-    public double getExpenditureValue(int index) {
-        logger.getLogger().log(Level.INFO, LOG_GET_EXP_VAL);
-        assert (index > ARRAY_INDEX);
-        assert (index <= numberOfExpenditures);
-        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
-        return expenditureArrayList.get(index - 1).getAmount();
     }
 
     /**
@@ -106,6 +94,20 @@ public class ExpenditureList extends MoneyList {
     }
 
     /**
+     * Returns the cost of a specific expenditure based on its index on the list.
+     *
+     * @param index The index of the expenditure on the person's expenditure list
+     * @return The cost of the expenditure
+     */
+    public double getExpenditureValue(int index) {
+        logger.getLogger().log(Level.INFO, LOG_GET_EXP_VAL);
+        assert (index > ARRAY_INDEX);
+        assert (index <= numberOfExpenditures);
+        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
+        return expenditureArrayList.get(index - 1).getAmount();
+    }
+
+    /**
      * Returns the description of a specified expenditure index based on the
      * person's expenditure list.
      *
@@ -118,6 +120,22 @@ public class ExpenditureList extends MoneyList {
         assert (index <= numberOfExpenditures);
         logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
         return expenditureArrayList.get(index - 1).getDescription();
+    }
+
+    public LocalDate getInitDate(int index) {
+        logger.getLogger().log(Level.INFO, LOG_DATE);
+        assert (index > ARRAY_INDEX);
+        assert (index <= numberOfExpenditures);
+        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
+        return expenditureArrayList.get(index - 1).getInitDate();
+    }
+
+    public boolean isPermanent(int index) {
+        logger.getLogger().log(Level.INFO, LOG_PERM);
+        assert (index > ARRAY_INDEX);
+        assert (index <= numberOfExpenditures);
+        logger.getLogger().log(Level.INFO, LOG_ASSERT_PASSED);
+        return expenditureArrayList.get(index - 1).isPermanent();
     }
 
     public ArrayList<Expenditure> getExpenditureArrayList() {

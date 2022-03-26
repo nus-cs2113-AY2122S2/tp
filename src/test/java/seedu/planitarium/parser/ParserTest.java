@@ -10,38 +10,10 @@ import seedu.planitarium.person.Person;
 import seedu.planitarium.person.PersonList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
-
-    @Test
-    void parseDelimitedTerm_delimitedTerm_success() throws EmptyStringException {
-        String input1 = "a";
-        String input2 = "add /n bill";
-        String delimiter = "/n";
-        String delimiterBack = "/e";
-
-        String output1 = Parser.parseDelimitedTerm(input1, delimiter, delimiterBack);
-        assertEquals(input1, output1);
-
-        String output2 = Parser.parseDelimitedTerm(input2, delimiter, delimiterBack);
-        assertEquals("bill", output2);
-    }
-
-    @Test
-    void parseDelimitedTerm_emptyTerm_exceptionThrown() {
-        try {
-            String input = "add /n  /e";
-            String delimiter = "/n";
-            String delimiterBack = "/e";
-
-            Parser.parseDelimitedTerm(input, delimiter, delimiterBack);
-        } catch (EmptyStringException e) {
-            assertEquals("Empty string after `/n` detected", e.getMessage());
-        } catch (Exception e) {
-            fail();
-        }
-    }
 
     @Test
     void parseKeyword_keywordExist_success() {
@@ -323,8 +295,8 @@ class ParserTest {
     void parseRecurringStatus_delimiterExist_success()
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         String input = "addout /u 1 /e 10 /d Dinner /p t";
-        String output = Parser.parseRecurringStatus(input);
-        assertEquals("t", output);
+        boolean output = Parser.parseRecurringStatus(input);
+        assertTrue(output);
     }
 
     @Test
@@ -556,7 +528,7 @@ class ParserTest {
         PersonList personList = new PersonList();
         personList.addPerson("Alice");
         Person person = personList.getPerson(1);
-        person.addExpend("Food", 10.5);
+        person.addExpend("Food", 10.5, false);
 
         String input = "1";
         int output = Parser.getValidExpenditureIndex(input, person);
@@ -600,7 +572,7 @@ class ParserTest {
         PersonList personList = new PersonList();
         personList.addPerson("Alice");
         Person person = personList.getPerson(1);
-        person.addExpend("Food", 10.5);
+        person.addExpend("Food", 10.5, false);
         try {
             String tooLow = "0";
             Parser.getValidExpenditureIndex(tooLow, person);
@@ -626,7 +598,7 @@ class ParserTest {
         PersonList personList = new PersonList();
         personList.addPerson("Alice");
         Person person = personList.getPerson(1);
-        person.addIncome("Gift", 100);
+        person.addIncome("Gift", 100, false);
 
         String input = "1";
         int output = Parser.getValidIncomeIndex(input, person);
@@ -670,7 +642,7 @@ class ParserTest {
         PersonList personList = new PersonList();
         personList.addPerson("Alice");
         Person person = personList.getPerson(1);
-        person.addIncome("Gift", 100);
+        person.addIncome("Gift", 100, false);
         try {
             String tooLow = "0";
             Parser.getValidIncomeIndex(tooLow, person);

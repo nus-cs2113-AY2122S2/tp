@@ -13,9 +13,9 @@ import seedu.planitarium.person.PersonList;
 import java.util.logging.Level;
 
 public class Parser {
-    private static final String className = Parser.class.getSimpleName();
-    private static final String fileName = className + ".log";
-    private static final ProjectLogger logger = new ProjectLogger(className, fileName);
+    protected static final String className = Parser.class.getSimpleName();
+    protected static final String fileName = className + ".log";
+    protected static final ProjectLogger logger = new ProjectLogger(className, fileName);
 
     public static final String DELIMITER_SPACE = " ";
     public static final String DELIMITER_NAME = "/n";
@@ -47,55 +47,28 @@ public class Parser {
     public static final int MIN_GROUP_INDEX = 1;
     public static final double MONEY_ZERO = 0.0;
 
-    private static final String ASSERT_INPUT_NOT_NULL = "User input should not be null";
-    private static final String ASSERT_OUTPUT_NOT_NULL = "Parsed output should not be null";
-    private static final String ASSERT_MONEY_NOT_NULL = "Money input should not be null";
-    // private static final String ASSERT_MONEY_NON_NEGATIVE = "Money output should be non-negative";
-    private static final String ASSERT_USER_INDEX_NOT_NULL = "User index should not be null";
-    private static final String ASSERT_EXPENDITURE_INDEX_NOT_NULL = "Expenditure index should not be null";
-    private static final String ASSERT_INCOME_INDEX_NOT_NULL = "Income index should not be null";
-    private static final String ASSERT_STATUS_NOT_NULL = "Recurring status should not be null";
-    private static final String ASSERT_CATEGORY_NOT_NULL = "Category index should not be null";
-    private static final String ASSERT_GROUP_NOT_NULL = "Group index should not be null";
+    protected static final String ASSERT_INPUT_NOT_NULL = "User input should not be null";
+    protected static final String ASSERT_OUTPUT_NOT_NULL = "Parsed output should not be null";
+    protected static final String ASSERT_MONEY_NOT_NULL = "Money input should not be null";
+    // protected static final String ASSERT_MONEY_NON_NEGATIVE = "Money output should be non-negative";
+    protected static final String ASSERT_USER_INDEX_NOT_NULL = "User index should not be null";
+    protected static final String ASSERT_EXPENDITURE_INDEX_NOT_NULL = "Expenditure index should not be null";
+    protected static final String ASSERT_INCOME_INDEX_NOT_NULL = "Income index should not be null";
+    protected static final String ASSERT_STATUS_NOT_NULL = "Recurring status should not be null";
+    protected static final String ASSERT_CATEGORY_NOT_NULL = "Category index should not be null";
+    protected static final String ASSERT_GROUP_NOT_NULL = "Group index should not be null";
 
-    private static final String LOG_PARSED_VALUES = "User input '%s' parsed out as '%s'";
-    private static final String LOG_VALID_MONEY = "Converted the string '%s' into '%.2f'";
-    private static final String LOG_INVALID_MONEY = "Invalid money of '%s' caught";
-    private static final String LOG_VALID_INDEX = "Valid index '%d' being returned";
-    private static final String LOG_INVALID_INDEX = "Invalid index of '%s' caught";
-    private static final String LOG_INDEX_TOO_LOW = "Input index '%d' is less than the minimum index of '%d'";
-    private static final String LOG_INDEX_TOO_HIGH = "Input index '%d' is more than the maximum index of '%d'";
-    private static final String LOG_CHECK_INDEX_BOUNDS = "Checking index '%d' for bounds violation";
-    private static final String LOG_MISSING_DELIMITER = "User input '%s' is missing delimiter '%s'";
-    private static final String LOG_TOO_MANY_DELIMITER = "User input '%s' has too many delimiters '%s'";
+    protected static final String LOG_PARSED_VALUES = "User input '%s' parsed out as '%s'";
+    protected static final String LOG_VALID_MONEY = "Converted the string '%s' into '%.2f'";
+    protected static final String LOG_INVALID_MONEY = "Invalid money of '%s' caught";
+    protected static final String LOG_VALID_INDEX = "Valid index '%d' being returned";
+    protected static final String LOG_INVALID_INDEX = "Invalid index of '%s' caught";
+    protected static final String LOG_INDEX_TOO_LOW = "Input index '%d' is less than the minimum index of '%d'";
+    protected static final String LOG_INDEX_TOO_HIGH = "Input index '%d' is more than the maximum index of '%d'";
+    protected static final String LOG_CHECK_INDEX_BOUNDS = "Checking index '%d' for bounds violation";
+    protected static final String LOG_MISSING_DELIMITER = "User input '%s' is missing delimiter '%s'";
+    protected static final String LOG_TOO_MANY_DELIMITER = "User input '%s' has too many delimiters '%s'";
 
-
-    /**
-     * Returns the term surrounded by two delimiters.
-     *
-     * @param text           The text containing the term to be parsed.
-     * @param delimiterLeft  The delimiter on the left of term.
-     * @param delimiterRight The delimiter on the right of term.
-     * @return A non-delimiter-surrounded term.
-     * @throws EmptyStringException if string after the left delimiter is blank.
-     */
-    public static String parseDelimitedTerm(String text, String delimiterLeft, String delimiterRight)
-            throws EmptyStringException {
-        String[] firstParse = text.split(delimiterLeft, LIMIT_TWO_TOKENS);
-        String leftRemoved;
-        if (firstParse.length == LIMIT_TWO_TOKENS) {
-            leftRemoved = firstParse[INDEX_LEFT_REMOVED];
-        } else {
-            leftRemoved = firstParse[INDEX_LEFT_NOT_EXIST];
-        }
-        String[] secondParse = leftRemoved.split(delimiterRight, LIMIT_TWO_TOKENS);
-        String rightRemoved = secondParse[INDEX_RIGHT_REMOVED].trim();
-        if (rightRemoved.isBlank()) {
-            throw new EmptyStringException(delimiterLeft);
-        }
-        assert rightRemoved != null : ASSERT_OUTPUT_NOT_NULL;
-        return rightRemoved;
-    }
 
     /**
      * Returns command keyword from user input.
@@ -122,8 +95,8 @@ public class Parser {
     public static String parseName(String userInput)
             throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        checkContainsOnlyOneDelimiter(userInput, DELIMITER_NAME);
-        String name = parseDelimitedTerm(userInput, DELIMITER_NAME, DELIMITER_BACK).trim();
+        ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_NAME);
+        String name = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_NAME, DELIMITER_BACK).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, name));
         return name;
     }
@@ -140,8 +113,8 @@ public class Parser {
     public static String parseUserIndex(String userInput)
             throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        checkContainsOnlyOneDelimiter(userInput, DELIMITER_USER_INDEX);
-        String userIndex = parseDelimitedTerm(userInput, DELIMITER_USER_INDEX, DELIMITER_BACK).trim();
+        ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_USER_INDEX);
+        String userIndex = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_USER_INDEX, DELIMITER_BACK).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, userIndex));
         return userIndex;
     }
@@ -158,8 +131,8 @@ public class Parser {
     public static String parseDescription(String userInput)
             throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        checkContainsOnlyOneDelimiter(userInput, DELIMITER_DESCRIPTION);
-        String description = parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION, DELIMITER_BACK).trim();
+        ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_DESCRIPTION);
+        String description = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_DESCRIPTION, DELIMITER_BACK).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, description));
         return description;
     }
@@ -176,8 +149,8 @@ public class Parser {
     public static String parseIncome(String userInput)
             throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        checkContainsOnlyOneDelimiter(userInput, DELIMITER_INCOME);
-        String income = parseDelimitedTerm(userInput, DELIMITER_INCOME, DELIMITER_BACK).trim();
+        ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_INCOME);
+        String income = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_INCOME, DELIMITER_BACK).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, income));
         return income;
     }
@@ -194,8 +167,8 @@ public class Parser {
     public static String parseExpenditure(String userInput)
             throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        checkContainsOnlyOneDelimiter(userInput, DELIMITER_EXPENDITURE);
-        String expenditure = parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK).trim();
+        ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_EXPENDITURE);
+        String expenditure = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_EXPENDITURE, DELIMITER_BACK).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, expenditure));
         return expenditure;
     }
@@ -212,8 +185,8 @@ public class Parser {
     public static String parseRecordIndex(String userInput)
             throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        checkContainsOnlyOneDelimiter(userInput, DELIMITER_RECORD_INDEX);
-        String record = parseDelimitedTerm(userInput, DELIMITER_RECORD_INDEX, DELIMITER_BACK).trim();
+        ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_RECORD_INDEX);
+        String record = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_RECORD_INDEX, DELIMITER_BACK).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, record));
         return record;
     }
@@ -227,13 +200,16 @@ public class Parser {
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
      * @throws EmptyStringException        if string after the delimiter is blank.
      */
-    public static String parseRecurringStatus(String userInput)
+    public static boolean parseRecurringStatus(String userInput)
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        checkContainsOnlyOneDelimiter(userInput, DELIMITER_RECURRING_STATUS);
-        String status = parseDelimitedTerm(userInput, DELIMITER_RECURRING_STATUS, DELIMITER_BACK).trim();
+        ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_RECURRING_STATUS);
+        String status = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_RECURRING_STATUS, DELIMITER_BACK).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, status));
-        return status;
+        if (status.equalsIgnoreCase("t")) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -248,8 +224,8 @@ public class Parser {
     public static String parseCategoryIndex(String userInput)
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        checkContainsOnlyOneDelimiter(userInput, DELIMITER_CATEGORY_INDEX);
-        String category = parseDelimitedTerm(userInput, DELIMITER_CATEGORY_INDEX, DELIMITER_BACK).trim();
+        ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_CATEGORY_INDEX);
+        String category = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_CATEGORY_INDEX, DELIMITER_BACK).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, category));
         return category;
     }
@@ -266,8 +242,8 @@ public class Parser {
     public static String parseGroupIndex(String userInput)
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
-        checkContainsOnlyOneDelimiter(userInput, DELIMITER_GROUP_INDEX);
-        String group = parseDelimitedTerm(userInput, DELIMITER_GROUP_INDEX, DELIMITER_BACK).trim();
+        ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_GROUP_INDEX);
+        String group = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_GROUP_INDEX, DELIMITER_BACK).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, group));
         return group;
     }
@@ -283,10 +259,7 @@ public class Parser {
         assert (amount != null) : ASSERT_MONEY_NOT_NULL;
         try {
             double checkMoney = Double.parseDouble(amount);
-            if (Double.compare(checkMoney, MONEY_ZERO) < 0) {
-                // to be caught immediately within this method
-                throw new NumberFormatException();
-            }
+            ParserUtility.checkNegativeMoney(checkMoney);
             //if (amount.contains(DELIMITER_MONEY)) {
             //    String decimalPlace = parseDelimitedTerm(amount, DELIMITER_MONEY, DELIMITER_BACK);
             //    if (decimalPlace.length() > LIMIT_TWO_DECIMAL) {
@@ -314,8 +287,8 @@ public class Parser {
         assert (userIndex != null) : ASSERT_USER_INDEX_NOT_NULL;
         try {
             int checkIndex = Integer.parseInt(userIndex);
-            checkTooHighIndex(checkIndex, personList.getNumberOfMembers());
-            checkTooLowIndex(checkIndex, MIN_USER_INDEX);
+            ParserUtility.checkTooHighIndex(checkIndex, personList.getNumberOfMembers());
+            ParserUtility.checkTooLowIndex(checkIndex, MIN_USER_INDEX);
             logger.getLogger().log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -336,8 +309,8 @@ public class Parser {
         assert (expenditureIndex != null) : ASSERT_EXPENDITURE_INDEX_NOT_NULL;
         try {
             int checkIndex = Integer.parseInt(expenditureIndex);
-            checkTooHighIndex(checkIndex, person.getNumberOfExpenditures());
-            checkTooLowIndex(checkIndex, MIN_EXPENDITURE_INDEX);
+            ParserUtility.checkTooHighIndex(checkIndex, person.getNumberOfExpenditures());
+            ParserUtility.checkTooLowIndex(checkIndex, MIN_EXPENDITURE_INDEX);
             logger.getLogger().log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -358,8 +331,8 @@ public class Parser {
         assert (incomeIndex != null) : ASSERT_INCOME_INDEX_NOT_NULL;
         try {
             int checkIndex = Integer.parseInt(incomeIndex);
-            checkTooHighIndex(checkIndex, person.getNumberOfIncomes());
-            checkTooLowIndex(checkIndex, MIN_INCOME_INDEX);
+            ParserUtility.checkTooHighIndex(checkIndex, person.getNumberOfIncomes());
+            ParserUtility.checkTooLowIndex(checkIndex, MIN_INCOME_INDEX);
             logger.getLogger().log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -394,8 +367,8 @@ public class Parser {
         assert (categoryIndex != null) : ASSERT_CATEGORY_NOT_NULL;
         try {
             int checkIndex = Integer.parseInt(categoryIndex);
-            checkTooHighIndex(checkIndex, Category.getNumOfCategories());
-            checkTooLowIndex(checkIndex, MIN_CATEGORY_INDEX);
+            ParserUtility.checkTooHighIndex(checkIndex, Category.getNumberOfCategories());
+            ParserUtility.checkTooLowIndex(checkIndex, MIN_CATEGORY_INDEX);
             logger.getLogger().log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -415,8 +388,8 @@ public class Parser {
         assert (groupIndex != null) : ASSERT_GROUP_NOT_NULL;
         try {
             int checkIndex = Integer.parseInt(groupIndex);
-            checkTooHighIndex(checkIndex, MAX_GROUP_INDEX);
-            checkTooLowIndex(checkIndex, MIN_GROUP_INDEX);
+            ParserUtility.checkTooHighIndex(checkIndex, MAX_GROUP_INDEX);
+            ParserUtility.checkTooLowIndex(checkIndex, MIN_GROUP_INDEX);
             logger.getLogger().log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -425,56 +398,4 @@ public class Parser {
         }
     }
 
-    /**
-     * Returns without exception if an index is not lower than minimum accepted index value.
-     *
-     * @param checkIndex The index to be checked for invalid boundary.
-     * @param minIndex   The minimum value that an index can be.
-     * @throws IndexOutOfBoundsException if provided index is less than indicated minimum.
-     */
-    private static void checkTooLowIndex(int checkIndex, int minIndex) throws IndexOutOfBoundsException {
-        logger.getLogger().log(Level.INFO, String.format(LOG_CHECK_INDEX_BOUNDS, checkIndex));
-        if (checkIndex < minIndex) {
-            logger.getLogger().log(Level.WARNING, String.format(LOG_INDEX_TOO_LOW, checkIndex, minIndex));
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
-    /**
-     * Returns without exception if an index is not higher than current maximum index value.
-     *
-     * @param checkIndex The index to be checked for invalid boundary.
-     * @param maxIndex   The maximum value that an index can be.
-     * @throws IndexOutOfBoundsException if provided index is more than indicated maximum.
-     */
-    private static void checkTooHighIndex(int checkIndex, int maxIndex) throws IndexOutOfBoundsException {
-        logger.getLogger().log(Level.INFO, String.format(LOG_CHECK_INDEX_BOUNDS, checkIndex));
-        if (checkIndex > maxIndex) {
-            logger.getLogger().log(Level.WARNING, String.format(LOG_INDEX_TOO_HIGH, checkIndex, maxIndex));
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
-    /**
-     * Returns without exception if user input contains one occurrence of a given delimiter.
-     *
-     * @param userInput User input to be checked.
-     * @param delimiter A delimiter used to separate details.
-     * @throws MissingDelimiterException if user input does not contain the delimiter.
-     */
-    private static void checkContainsOnlyOneDelimiter(String userInput, String delimiter)
-            throws MissingDelimiterException, DuplicateDelimiterException {
-        int inputLengthWithDelimiter = userInput.length();
-        int inputLengthNoDelimiter = userInput.replace(delimiter, EMPTY_STRING).length();
-        int lengthOfDelimiter = delimiter.length();
-
-        if ((inputLengthWithDelimiter - inputLengthNoDelimiter) < lengthOfDelimiter) {
-            logger.getLogger().log(Level.WARNING, String.format(LOG_MISSING_DELIMITER, userInput, delimiter));
-            throw new MissingDelimiterException(delimiter);
-        }
-        if ((inputLengthWithDelimiter - inputLengthNoDelimiter) > lengthOfDelimiter) {
-            logger.getLogger().log(Level.WARNING, String.format(LOG_TOO_MANY_DELIMITER, userInput, delimiter));
-            throw new DuplicateDelimiterException(delimiter);
-        }
-    }
 }

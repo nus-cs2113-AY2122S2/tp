@@ -44,9 +44,9 @@ public class Person {
      * @param description The source of the income
      * @param amount The value of the income
      */
-    public void addIncome(String description, double amount) {
+    public void addIncome(String description, double amount, boolean isPermanent) {
         assert (description != null);
-        this.incomeList.addIncome(description, amount);
+        this.incomeList.addIncome(description, amount, isPermanent);
         System.out.println("An income of " + amount + " from " + description + " has been added to " + this.name);
     }
 
@@ -70,9 +70,9 @@ public class Person {
      * @param description The reason for the expenditure
      * @param amount The value of the expenditure
      */
-    public void addExpend(String description, double amount) {
+    public void addExpend(String description, double amount, boolean isPermanent) {
         assert (description != null);
-        expenditureList.addExpenditure(description, amount);
+        expenditureList.addExpenditure(description, amount, isPermanent);
         System.out.println("An expenditure of " + amount + " for " + description + " has been added to " + this.name);
     }
 
