@@ -1,15 +1,18 @@
 package arcs.commands;
 
-import arcs.data.Route.RouteManager;
+import arcs.data.flightbooking.FlightBookingManager;
+import arcs.data.route.RouteManager;
 
 
 public abstract class Command {
 
     protected boolean isExit = false;
     protected RouteManager routeManager;
+    protected FlightBookingManager flightBookingManager;
 
-    public void setData(RouteManager routeManager) {
+    public void setData(RouteManager routeManager, FlightBookingManager flightBookingManager) {
         this.routeManager = routeManager;
+        this.flightBookingManager = flightBookingManager;
     }
 
     /**
