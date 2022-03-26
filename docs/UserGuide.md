@@ -33,7 +33,12 @@ your favourite personal expenditure tracker.
     * Example: `/n`, `/u`, `/i`
 * The delimiter-parameter pair can be provided in any preferred order.
     * Example: `add /n Alice /g 2`, `add /g 2 /n Alice`
-* Parameters enclosed in angle brackets and separated by a vertical bar `|` indicate that they have fixed values.
+* Delimiters and parameters not enclosed in any brackets are compulsory.
+    * Example: `add /n NAME /g GROUP_INDEX` where you must specify the name and group.
+* Delimiters and parameters enclosed in square brackets `[]` indicate that they are optional.
+    * Example: `editout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX [/d DESCRIPTION]
+      [/e EXPENDITURE] [/c CATEGORY_INDEX] [/p <T|F>]`
+* Parameters enclosed in angle brackets `<>` and separated by a vertical bar `|` indicate that they have fixed values.
     * Example: `/p <T|F>` where the values accepted are `T` or `F`
 * If you wish to use a forward slash `/` in the description field, input it enclosed in whitespaces.
     * Example: `Bought on / off switch` as a description
@@ -67,9 +72,9 @@ Example of usage:
 Format: `delete /u USER_INDEX /g GROUP_INDEX`
 
 * `USER_INDEX` refers to an index that is mapped to that individual.
-  * The index can be obtained from the [list](#listing-all-records-by-person-list) command.
+    * The index can be obtained from the [list](#listing-all-records-by-person-list) command.
 * `GROUP_INDEX` refers to an index that is mapped to the group that individual belongs to.
-  * The index can be obtained from the [list](#listing-all-records-by-group-list) command.
+    * The index can be obtained from the [list](#listing-all-records-by-group-list) command.
 
 Example of usage:
 
@@ -129,7 +134,7 @@ Example of usage:
 
 > Edit an income under a stated user
 
-Format: `editin /u USER_INDEX /g GROUP_INDEX /r INCOME_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
+Format: `editin /u USER_INDEX /g GROUP_INDEX /r INCOME_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>`
 
 Example of usage:
 
@@ -139,37 +144,84 @@ Example of usage:
 
 ### Adding an expenditure: `addout`
 
-> Adds an expenditure under a stated user
+> Adds an expenditure description and its value to a specific individual
 
-Format: `addout /u USER_INDEX /g GROUP_INDEX /e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
+Format: `addout /u USER_INDEX /g GROUP_INDEX /e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>`
+
+* `USER_INDEX` refers to an index that is mapped to that individual.
+    * The index can be obtained from the [list](#listing-all-records-by-person-list) command.
+* `GROUP_INDEX` refers to an index that is mapped to the group that individual belongs to.
+    * The index can be obtained from the [list](#listing-all-records-by-group-list) command.
+* `DESCRIPTION` refers to the name or description of the expenditure.
+    * Duplicate descriptions are allowed and each record will be differentiated by an index.
+* `EXPENDITURE` refers to the monetary value of the expenditure.
+    * No currency symbols should be included and values are in at most 2 decimal places.
+* `CATEGORY_INDEX` refers to the category of the expenditure.
+    * The index of each category can be obtained from the [listcat](#listing-categories-listcat) command.
+* `<T|F>` refers to the setting of expenditure to be recurring or not recurring.
+    * Input the character `t` to set the expenditure to be recurring, character `f` for not recurring.
 
 Example of usgae:
 
-`addout /u 1 /g 1 /e 20 /d candy /c 1 /p t`
+* Adding a spending of $20 on a piece of candy to an individual with the user index of 1, in group 1 and type of
+  expenditure in category 1.
+    * Suppose that the user index 1 belong to Alice, group 3 to be children, category 1 to be Food and Drinks, and this
+      expenditure is recurring.
+        * `addout /u 1 /g 3 /e 20 /d candy /c 1 /p t`
+
+  ![addout-command-screenshot]() <!-- this is a placeholder -->
 
 <br/>
 
 ### Deleting an expenditure: `deleteout`
 
-> Deletes an expenditure under a stated user
+> Deletes an expenditure description and its value from a specific individual
 
 Format: `deleteout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX`
 
+* `USER_INDEX` refers to an index that is mapped to that individual.
+    * The index can be obtained from the [list](#listing-all-records-by-person-list) command.
+* `GROUP_INDEX` refers to an index that is mapped to the group that individual belongs to.
+    * The index can be obtained from the [list](#listing-all-records-by-group-list) command.
+* `EXPENDITURE_INDEX` refers to an index that is mapped to a specific expenditure of an individual.
+    * The index can be obtained from the [list](#listing-all-records-by-person-list) command.
+
 Example of usage:
 
-`deleteout /u 1 /g 1 /r 2`
+* Deleting the previous entry, spending of $20 on Candy, from Alice in group 3.
+    * Suppose that the previous expenditure entry was given an index of 2
+    * `deleteout /u 1 /g 3 /r 2`
+
+  ![deleteout-command-screenshot]() <!-- this is a placeholder -->
 
 <br/>
 
 ### Editing an expenditure: `editout`
 
-> Edit an expenditure under a stated user
+> Edits an expenditure description, its value, its category index and its recurring status of a specific individual.
 
-Format:    `editout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX /i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
+Format: `editout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX /i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>`
+* `USER_INDEX` refers to an index that is mapped to that individual.
+    * The index can be obtained from the [list](#listing-all-records-by-person-list) command.
+* `GROUP_INDEX` refers to an index that is mapped to the group that individual belongs to.
+    * The index can be obtained from the [list](#listing-all-records-by-group-list) command.
+* `DESCRIPTION` refers to the name or description of the expenditure.
+    * Duplicate descriptions are allowed and each record will be differentiated by an index.
+* `EXPENDITURE` refers to the monetary value of the expenditure.
+    * No currency symbols should be included and values are in at most 2 decimal places.
+* `CATEGORY_INDEX` refers to the category of the expenditure.
+    * The index of each category can be obtained from the [listcat](#listing-categories-listcat) command.
+* `<T|F>` refers to the setting of expenditure to be recurring or not recurring.
+    * Input the character `t` to set the expenditure to be recurring, character `f` for not recurring.
 
 Example of usage:
 
-`editout /u 1 /g 1 /r 1 /i 30 /d sugar /c 1 /p t`
+* Edits an expenditure entry to have a description of sugar with value of $30, to be in category 1 and set to be
+  recurring.
+    * Suppose that the entry was given a user index of 1, in group 3 with an expenditure index of 1.
+    * `editout /u 1 /g 3 /r 1 /i 30 /d sugar /c 1 /p t`
+
+  ![editout-command-screenshot]() <!-- this is a placeholder -->
 
 <br/>
 
@@ -192,7 +244,7 @@ Example of usage:
 Format: `list /g GROUP_INDEX`
 
 * `GROUP_INDEX` refers to an index that is mapped to the group that individual belongs to.
-  * The index can be obtained from the [list](#listing-all-records-by-group-list) command.
+    * The index can be obtained from the [list](#listing-all-records-by-group-list) command.
 
 Example of usage:
 
@@ -209,7 +261,7 @@ Example of usage:
 Format: `find /d USER_STRING /c CATEGORY_INDEX`
 
 * `USER_STRING` refers to the keyword which you want to look for.
-  * Keywords are case-sensitive and inclusive. So a search for `brush` will successfully look for `toothbrush`.
+    * Keywords are case-sensitive and inclusive. So a search for `brush` will successfully look for `toothbrush`.
 
 Example of usage:
 
@@ -241,8 +293,8 @@ Format: `bye`
 
 ## Command Summary
 
-To keep things simple, we will omit the parameter description for you.
-To view each command in detail, refer to the [features](#features) section.
+To keep things simple, we will omit the parameter description for you. To view each command in detail, refer to
+the [features](#features) section.
 
 | Command                                                       | Format                                             |
 |---------------------------------------------------------------|----------------------------------------------------|
@@ -261,16 +313,16 @@ To view each command in detail, refer to the [features](#features) section.
 | [Exit](#exit-bye)                                             | bye                                                |
 | [Show all commands](#viewing-all-commands-help)               | help                                               |
 
-
-
 * Add a person `add /n NAME /g GROUP_INDEX`
 * Remove a person `delete /u USER_INDEX /g GROUP_INDEX`
-* Add an income `addin /u USER_INDEX /g GROUP_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
+* Add an income `addin /u USER_INDEX /g GROUP_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>`
 * Delete an income `deletein /u USER_INDEX /g GROUP_INDEX /r INCOME_INDEX`
-* Edit an income `editin /u USER_INDEX /g GROUP_INDEX /r INCOME_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
-* Add an expenditure `addout /u USER_INDEX /g GROUP_INDEX /e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
+* Edit an
+  income `editin /u USER_INDEX /g GROUP_INDEX /r INCOME_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>`
+* Add an expenditure `addout /u USER_INDEX /g GROUP_INDEX /e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>`
 * Delete an expenditure `deleteout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX`
-* Edit an expenditure `editout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX /i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
+* Edit an
+  expenditure `editout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX /i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>`
 * Show remain `remain`
 * List records by person `list`
 * List records by group `list /g GROUP_INDEX`
