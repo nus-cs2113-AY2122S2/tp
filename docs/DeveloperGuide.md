@@ -111,7 +111,7 @@ For example, `printDishes()`, iterates through `dishes` and calls `get(int)` met
 ![](diagrams/sqeuence/DishManager_addDish.png)
 
 
-<<<<<<< HEAD
+
 ### Order Management
 
 The management of menu is functioned by `OrderManager`, which implements following methods:
@@ -132,7 +132,7 @@ For example, `getOrder(int)`, iterates through `orders` and calls `get(int)` met
 
 
 `getOrderPrice(int)` calls `getTotalPrice()` and method `getAllOrderValue()` also calls `getTotalPrice()`:
-=======
+
 ### Staff Management
 
 The management of staff is handled by `StaffManager`, which implements following methods:
