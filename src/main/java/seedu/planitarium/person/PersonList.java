@@ -202,5 +202,22 @@ public class PersonList {
         int listIndex = personIndex - 1;
         getPerson(listIndex).deleteIncome(expendIndex);
     }
+
+    /**
+     * Returns the number of incomes of the specified person.
+     *
+     * @param personIndex The index of the person
+     * @return The number of incomes of the person
+     */
+    public int getNumberOfIncomes(int personIndex) {
+        String infoString = "Entering getNumberOfIncomes()";
+        logger.log(Level.INFO, infoString);
+        assert (personIndex >= SINGULAR);
+        assert (personIndex <= numberOfMembers);
+        infoString = "Index assertions passed in getNumberOfIncomes()";
+        logger.log(Level.INFO, infoString);
+        int listIndex = personIndex - 1;
+        return personList.get(listIndex).getNumberOfIncomes();
+    }
     }
 }

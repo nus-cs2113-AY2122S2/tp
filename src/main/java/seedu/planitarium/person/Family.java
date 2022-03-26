@@ -211,4 +211,17 @@ public class Family {
         logger.log(Level.INFO, infoString);
         return getList(group).getNumberOfMembers();
     }
+
+    /**
+     * Returns the number of incomes of a person in the array list specified by the group index.
+     *
+     * @param personIndex The index of the person
+     * @param group The index of the group
+     * @return The number of incomes of the person in the array list specified
+     */
+    public int getNumberOfIncomes(int personIndex, int group) {
+        String infoString = "Method getNumberOfIncomes() called";
+        logger.log(Level.INFO, infoString);
+        return getList(group).getNumberOfIncomes(personIndex);
+    }
 }
