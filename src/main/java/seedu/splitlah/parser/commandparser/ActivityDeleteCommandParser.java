@@ -17,8 +17,8 @@ public class ActivityDeleteCommandParser implements CommandParser<ActivityDelete
     public static final String COMMAND_FORMAT = "Syntax: activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]";
 
     public static final String[] COMMAND_DELIMITERS = {
-            ParserUtils.SESSION_ID_DELIMITER,
-            ParserUtils.ACTIVITY_ID_DELIMITER
+        ParserUtils.SESSION_ID_DELIMITER,
+        ParserUtils.ACTIVITY_ID_DELIMITER
     };
 
     /**
