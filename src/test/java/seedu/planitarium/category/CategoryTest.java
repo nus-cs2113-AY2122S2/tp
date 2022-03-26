@@ -24,6 +24,8 @@ class CategoryTest {
     private static final String NAME_TRANSPORT = "TRANSPORT";
     private static final String NAME_ENTERTAINMENT = "ENTERTAINMENT";
 
+    private static final PrintStream ORIGINAL_OUT = System.out;
+
     @Test
     void getLabel_enumLabelExists_success() {
         final String output1 = Category.OTHERS.getLabel();
@@ -104,20 +106,16 @@ class CategoryTest {
 
     @Test
     void listCategories() {
-        PrintStream original = System.out;
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOut));
 
-        String expected = "1. Others" + System.lineSeparator() +
-                "2. Food and Drinks" + System.lineSeparator() +
-                "3. Home and Utilities" + System.lineSeparator() +
-                "4. Health and Medical" + System.lineSeparator() +
-                "5. Transportation" + System.lineSeparator() +
-                "6. Fun and Entertainment" + System.lineSeparator();
+        String expected = "1. Others" + System.lineSeparator() + "2. Food and Drinks" + System.lineSeparator()
+                + "3. Home and Utilities" + System.lineSeparator() + "4. Health and Medical" + System.lineSeparator()
+                + "5. Transportation" + System.lineSeparator() + "6. Fun and Entertainment" + System.lineSeparator();
 
         Category.listCategories();
         assertEquals(expected, newOut.toString());
 
-        System.setOut(original);
+        System.setOut(ORIGINAL_OUT);
     }
 }
