@@ -2,7 +2,6 @@ package commands;
 
 import data.exercises.InvalidExerciseException;
 import data.workouts.InvalidWorkoutException;
-import data.workouts.WorkoutOutOfRangeException;
 import data.workouts.Workout;
 import data.workouts.WorkoutList;
 import storage.FileManager;
@@ -185,10 +184,6 @@ public class WorkoutCommand extends Command {
                     + "number was received.");
             System.out.println("Please try again. Alternatively, type 'help' if you need\n"
                     + "more information on the commands.");
-
-        } catch (WorkoutOutOfRangeException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Please try again.");
 
         } catch (IOException e) {
             System.out.println(UI.IOEXCEPTION_ERROR_MESSAGE);
