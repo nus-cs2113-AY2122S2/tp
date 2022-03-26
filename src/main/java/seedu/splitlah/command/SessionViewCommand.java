@@ -1,16 +1,13 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
-import seedu.splitlah.data.Person;
 import seedu.splitlah.data.Profile;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
-import seedu.splitlah.util.PersonCostPair;
 
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.logging.Level;
 
 /**
@@ -53,7 +50,7 @@ public class SessionViewCommand extends Command {
             System.out.println(session);
         } catch (InvalidDataException exception) {
             ui.printlnMessage(exception.getMessage());
-            Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONVEIW_SESSION_ID_NOT_FOUND + sessionId);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONVIEW_SESSION_VIEW_FAILED + sessionId);
             return;
         }
 

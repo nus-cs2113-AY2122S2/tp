@@ -235,8 +235,8 @@ public abstract class Message {
             "A session summary has been successful produced for the Session object with the following Id: ";
 
     // Session View Command
-    public static final String LOGGER_SESSIONVIEW_SESSION_ID_NOT_FOUND =
-            "The session could not be viewed as a Session object with the following Id was not found: ";
+    public static final String LOGGER_SESSIONVIEW_SESSION_VIEW_FAILED =
+            "A session could not be viewed.";
 
     // Activity Create Command
     public static final String ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH =
