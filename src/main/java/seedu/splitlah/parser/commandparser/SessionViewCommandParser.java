@@ -13,10 +13,10 @@ public class SessionViewCommandParser implements CommandParser<SessionViewComman
     public static final String COMMAND_FORMAT = "Syntax: session /view /sid [SESSION_ID]";
 
     /**
-     * Returns a SessionSummaryCommand object after parsing the input arguments from the user.
+     * Returns a SessionViewCommand object after parsing the input arguments from the user.
      *
      * @param commandArgs A String object representing arguments provided by the user.
-     * @return A SessionSummaryCommand object if a valid integer representing a session's unique identifier is found
+     * @return A SessionViewCommand object if a valid integer representing a session's unique identifier is found
      *         in the input arguments.
      * @throws InvalidFormatException If a valid integer representing a session's unique identifier cannot be found
      *                                in the input arguments.
