@@ -28,7 +28,7 @@ public class TimetableTest {
         ArrayList<Task> dummyList = new ArrayList<>();
         Ui ui = new Ui();
 
-        Task testTask = new Task(null,"submit DG",
+        Task testTask = new Task(-1,"submit DG",
                 LocalDateTime.parse("29/3/2022", inputTimeIndependentFormat),
                 LocalDateTime.parse(LocalDate.now().format(dateOnlyFormat) + " 09:00", inputWithTimeFormat),
                 LocalDateTime.parse(LocalDate.now().format(dateOnlyFormat) + " 11:00", inputWithTimeFormat),

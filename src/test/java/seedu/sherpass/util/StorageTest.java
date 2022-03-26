@@ -27,7 +27,7 @@ class StorageTest {
         try {
             Storage storage = new Storage("data/test.json");
             TaskList tasks = new TaskList();
-            Task newTask = new Task(1,"task_one",
+            Task newTask = new Task(-1,"task_one",
                     LocalDateTime.parse("12/12/2022 12:00", parseWithTimeFormat),null,
                     null, null, 0);
             tasks.addTask(newTask, false, ui);
