@@ -100,10 +100,14 @@ public class TimetableLogic {
 
         int year = LocalDate.now().getYear();
 
-        if (month.getValue() - currentMonth.getValue() < 0) {
+        if (isRequestedMonthAfterCurrentMonth(month, currentMonth)) {
             return LocalDate.of(year + 1, month, 1);
         } else {
             return LocalDate.of(year, month, 1);
         }
+    }
+
+    private static boolean isRequestedMonthAfterCurrentMonth(Month month, Month currentMonth) {
+        return month.getValue() - currentMonth.getValue() < 0;
     }
 }
