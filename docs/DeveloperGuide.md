@@ -154,11 +154,11 @@ the Command component when any user input is provided to SplitLah.
 4. With the corresponding `XYZCommandParser` object instantiated, `Parser` class will call the `getCommand` method
    of `XYZCommandParser`. This process will be explained in further detail in the sequence diagrams below.
 
-![Reference Frame Command Parser Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefCommandParser.drawio.png)
+   ![Reference Frame Command Parser Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefCommandParser.drawio.png)
 
-![Reference Frame ParseABC Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefParseABC.drawio.png)
+   ![Reference Frame ParseABC Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefParseABC.drawio.png)
 
-![Reference Frame InvalidCommand Instantiation Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefInvalidCommand.drawio.png)
+   ![Reference Frame InvalidCommand Instantiation Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefInvalidCommand.drawio.png)
 
 5. After `XYZCommandParser#getCommand` is called, `XYZCommandParser` will prepare to create a `XYZCommand` object. 
    To begin with, it will parse all the remaining arguments using `ParseABC` methods from the `Parser` class.
@@ -183,7 +183,7 @@ the Command component when any user input is provided to SplitLah.
 ### Add a session
 **API reference:** [`SessionCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionCreateCommand.java)
 
-The sequence diagram below models the interactions between various entities in the system
+The sequence diagram below models the interactions between various entities in SplitLah
 when the user invokes the `session /create` command.
 <br>
 <br>
@@ -197,7 +197,7 @@ The general workflow of the `session /create` command is as follows:
 ### List sessions
 **API reference:** [`SessionListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
 
-The sequence diagram below models the interactions between various entities in the system
+The sequence diagram below models the interactions between various entities in SplitLah
 when the user invokes the `session /list` command.
 <br>
 <br>
@@ -219,6 +219,44 @@ The general workflow of the `session /list` command is as follows:
      Then, the last group is printed with a divider below it, using the method `TextUi#printlnMessageWithDivider()`.
 
 ### Settle a session
+**API reference:** [`SessionSummaryCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionSummaryCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `session /summary` command
+<br>
+<br>
+![Session Summary Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SessionSummaryCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `session /summary` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionSummaryCommand` object.
+3. A `SessionSummaryCommand#run` method is then invoked to run the `session /summary` command.
+4. The `Profile` object that stores all sessions is obtained with the `Manager#getProfile` method.
+5. The `TextUI` object that handles all reading and printing operations with the user interface
+   is obtained with the `Manager#getUi` method.
+6. From the `Profile` object obtained, the `Profile#getSession` method is invoked with the session unique identifier
+   parsed from the user input to obtain the `Session` object that we want to settle all transactions for.
+7. An `ArrayList<Person>` object containing all persons participating in the session is then obtained with
+   the `Session#getPersonList` method.
+8. With the list of participants, an `ArrayList<PersonCostPair>` object is obtained with the
+   `SessionSummaryCommand#getPersonCostPairList` method.
+   * This method first calculates all costs borne by each person in the list of participants, 
+     then creates a `PersonCostPair` object that stores both the `Person` object and the cost borne by that person.
+9. With both the `Session` object and the `ArrayList<PersonCostPair>` object, the method
+   `SessionSummaryCommand#processAllTransactions` is called.
+   * This method sorts all the `PersonCostPair` objects by their cost, then matches each debt to be paid with a debt
+     to be collected between all persons. Each of such matches is referred to as a transaction.
+     The matching process is repeated until no more transactions can be made,
+     i.e. all debts are paid and all debts are collected.
+   * A `String` object containing information regarding all transactions that have to be made is then returned.
+   * If no transactions are required to be made, a message explaining that no transactions are required to be made
+     is returned instead.
+   * For the sake of brevity, the specifics of the method `SessionSumamryCommand#processAllTransactions` is omitted
+     from the sequence diagram.
+10. Finally, with the `TextUI` object, the method `printlnMessageWithDivider` is called to print the message
+    obtained from the `SessionSummaryCommand#processAllTransactions` method.
+
 ### Add an activity
 ### Remove an activity
 ### View an activity
@@ -226,7 +264,7 @@ The general workflow of the `session /list` command is as follows:
 ### Add a group
 **API reference:** [`GroupCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupCreateCommand.java)
 
-The sequence diagram below models the interactions between various entities in the system
+The sequence diagram below models the interactions between various entities in SplitLah
 when the user invokes the `group /create` command.
 <br>
 <br>
@@ -236,8 +274,8 @@ when the user invokes the `group /create` command.
 The general workflow of the `group /create` command is as follows:
 1. The user input provided is passed to `Splitlah`.
 2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `GroupCreateCommand` object.
-3. A `GroupCreateCommand#run` method is then invoked to run the group /create command.
-4. Once the command starts to run, `GroupCreateCommand`class checks if there are duplicates in the name list.
+3. A `GroupCreateCommand#run` method is then invoked to run the `group /create` command.
+4. Once the command starts to run, `GroupCreateCommand` class checks if there are duplicates in the name list.
 5. If there are duplicates, a message indicating that name list contains duplicates is printed using `TextUi#printlnMessage`. 
 6. If there are no duplicates, `GroupCreateCommand` class converts each of the names into a `Person` object.
 7. `GroupCreateCommand` class then checks if there is an existing group with the same group name. 
@@ -251,7 +289,7 @@ The general workflow of the `group /create` command is as follows:
 ### List groups
 **API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
 
-The sequence diagram below models the interactions between various entities in the system
+The sequence diagram below models the interactions between various entities in SplitLah
 when the user invokes the `group /list` command.
 <br>
 <br>

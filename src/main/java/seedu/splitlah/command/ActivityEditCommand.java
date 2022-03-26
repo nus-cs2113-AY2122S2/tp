@@ -15,21 +15,20 @@ import java.util.Arrays;
 import java.util.logging.Level;
 
 /**
- * Represents a command that creates an Activity object from user input and stores it in the Session object.
+ * Represents a command object that edits an Activity.
  *
- * @author Ivan
+ * @author Saurav
  */
-public class ActivityCreateCommand extends Command {
-  
-    private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
+public class ActivityEditCommand extends Command {
 
+    private static final String COMMAND_SUCCESS = "The activity was edited successfully.\n";
     private int activityId;
     private final int sessionId;
     private final String activityName;
     private double totalCost;
     private final String payer;
     private final String[] involvedList;
-    private double[] costList;
+    double[] costList;
     private final double gst;
     private final double serviceCharge;
 
@@ -38,9 +37,10 @@ public class ActivityCreateCommand extends Command {
     private static final int NO_COST = 0;
 
     /**
-     * Initializes an ActivityCreateCommand object.
+     * Initializes an ActivityEditCommand object.
      *
      * @param sessionId     An integer that uniquely identifies a session.
+     * @param activityId    An integer that uniquely identifies a session.
      * @param activityName  A String object that represents the Activity object's name.
      * @param totalCost     A double that represents total cost of the activity.
      * @param payer         A String object that represents the name of the person who paid for the activity.
@@ -51,17 +51,19 @@ public class ActivityCreateCommand extends Command {
      * @param gst           A double that represents the GST percentage to be included for the cost of the activity.
      * @param serviceCharge A double that represents the service charge to be included for the cost of the activity.
      */
-    public ActivityCreateCommand(int sessionId, String activityName, double totalCost, String payer,
-                                 String[] involvedList, double[] costList, double gst, double serviceCharge) {
-        assert sessionId > 0 : Message.ASSERT_ACTIVITYCREATE_SESSION_ID_LESS_THAN_ONE;
-        assert activityName != null : Message.ASSERT_ACTIVITYCREATE_ACTIVITY_NAME_MISSING;
-        assert payer != null : Message.ASSERT_ACTIVITYCREATE_PAYER_NAME_MISSING;
-        assert involvedList != null : Message.ASSERT_ACTIVITYCREATE_INVOLVED_LIST_ARRAY_NULL;
+    public ActivityEditCommand(int sessionId, int activityId, String activityName, String payer, String[] involvedList,
+                               Double totalCost, double[] costList, double gst, double serviceCharge) {
+        assert sessionId > 0 : Message.ASSERT_ACTIVITYEDIT_SESSIONID_LESS_THAN_ONE;
+        assert activityName != null : Message.ASSERT_ACTIVITYEDIT_ACTIVITY_NAME_MISSING;
+        assert payer != null : Message.ASSERT_ACTIVITYEDIT_PAYER_NAME_MISSING;
+        assert involvedList != null : Message.ASSERT_ACTIVITYEDIT_INVOLVED_LIST_ARRAY_NULL;
+        assert activityId != -1 : Message.ASSERT_ACTIVITYEDIT_ACTIVITYID_MISSING;
+        this.activityId = activityId;
         this.sessionId = sessionId;
         this.activityName = activityName;
-        this.totalCost = totalCost;
         this.payer = payer;
         this.involvedList = involvedList;
+        this.totalCost = totalCost;
         this.costList = costList;
         this.gst = gst;
         this.serviceCharge = serviceCharge;
@@ -205,41 +207,40 @@ public class ActivityCreateCommand extends Command {
     }
 
     /**
-     * Runs the command to create an Activity object to be stored in a Session object managed by the Profile object.
-     * Gets relevant parameters to create an Activity object.
-     * If no errors getting parameters, an Activity object is created and added to the session.
+     * Runs the command with the session identifier and activity identifier as provided by the user input.
      *
-     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage objects.
      */
     @Override
     public void run(Manager manager) {
         boolean hasDuplicates = PersonList.hasNameDuplicates(involvedList);
+        TextUI ui = manager.getUi();
         if (hasDuplicates) {
-            manager.getUi().printlnMessage(Message.ERROR_ACTIVITYCREATE_DUPLICATE_NAME);
-            Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST);
+            ui.printlnMessage(Message.ACTIVITYEDIT_DUPLICATE_NAME);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_DUPLICATE_NAMES_IN_INVOLVED_LIST);
             return;
         }
-        TextUI ui = manager.getUi();
         try {
             updateCostAndCostList();
-            assert costList != null : Message.ASSERT_ACTIVITYCREATE_COST_LIST_ARRAY_NULL;
-            assert totalCost > 0 : Message.ASSERT_ACTIVITYCREATE_TOTAL_COST_LESS_THAN_ONE;
+            assert costList != null : Message.ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL;
+            assert totalCost > 0 : Message.ASSERT_ACTIVITYEDIT_TOTAL_COST_LESS_THAN_ONE;
             Profile profile = manager.getProfile();
             Session session = profile.getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
-            activityId = profile.getNewActivityId();
             addAllActivityCost(involvedPersonList, personPaid, activityId);
-            Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
-            session.addActivity(activity);
+            Activity editedActivity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
+            session.removeActivity(activityId);
+            session.addActivity(editedActivity);
             manager.saveProfile();
-            ui.printlnMessageWithDivider(COMMAND_SUCCESS + activity);
-            Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_ACTIVITY_ADDED + activityId);
+            ui.printlnMessageWithDivider(COMMAND_SUCCESS + editedActivity);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_ACTIVITY_EDITED  + activityId);
         } catch (InvalidDataException e) {
             ui.printlnMessage(e.getMessage());
-            Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_FAILED_ADDING_ACTIVITY
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY
                     + "\n" + e.getMessage());
         }
     }
-
 }
+
+
