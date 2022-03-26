@@ -15,8 +15,8 @@ public class ParserUtility {
     /**
      * Returns the term surrounded by two delimiters.
      *
-     * @param text           The text containing the term to be parsed.
-     * @param delimiterLeft  The delimiter on the left of term.
+     * @param text          The text containing the term to be parsed.
+     * @param delimiterLeft The delimiter on the left of term.
      * @return A non-delimiter-surrounded term.
      * @throws EmptyStringException if string after the left delimiter is blank.
      */

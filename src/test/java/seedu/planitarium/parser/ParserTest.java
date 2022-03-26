@@ -479,7 +479,7 @@ class ParserTest {
         personList.addPerson("Alice");
 
         String input = "1";
-        int output = Parser.getValidUserIndex(input, personList);
+        int output = Parser.getValidUserIndex(input, personList.getNumberOfMembers());
         assertEquals(1, output);
     }
 
@@ -487,7 +487,7 @@ class ParserTest {
     void getValidUserIndex_nullInput_assertThrown() {
         try {
             PersonList personList = new PersonList();
-            Parser.getValidUserIndex(null, personList);
+            Parser.getValidUserIndex(null, personList.getNumberOfMembers());
             fail();
         } catch (AssertionError e) {
             assertEquals("User index should not be null", e.getMessage());
@@ -501,7 +501,7 @@ class ParserTest {
         try {
             PersonList personList = new PersonList();
             String input = "Alice";
-            Parser.getValidUserIndex(input, personList);
+            Parser.getValidUserIndex(input, personList.getNumberOfMembers());
             fail();
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `Alice`", e.getMessage());
@@ -516,7 +516,7 @@ class ParserTest {
         personList.addPerson("Alice");
         try {
             String tooLow = "0";
-            Parser.getValidUserIndex(tooLow, personList);
+            Parser.getValidUserIndex(tooLow, personList.getNumberOfMembers());
             fail();
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `0`", e.getMessage());
@@ -525,7 +525,7 @@ class ParserTest {
         }
         try {
             String tooLow = "2";
-            Parser.getValidUserIndex(tooLow, personList);
+            Parser.getValidUserIndex(tooLow, personList.getNumberOfMembers());
             fail();
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `2`", e.getMessage());
@@ -535,14 +535,14 @@ class ParserTest {
     }
 
     @Test
-    void getValidExpenditureIndex_validUserIndex_success() throws InvalidIndexException {
+    void getValidExpenditureIndex_validExpenditureIndex_success() throws InvalidIndexException {
         PersonList personList = new PersonList();
         personList.addPerson("Alice");
         Person person = personList.getPerson(1);
         person.addExpend("Food", 10.5, false);
 
         String input = "1";
-        int output = Parser.getValidExpenditureIndex(input, person);
+        int output = Parser.getValidExpenditureIndex(input, person.getNumberOfExpenditures());
         assertEquals(1, output);
     }
 
@@ -552,7 +552,7 @@ class ParserTest {
             PersonList personList = new PersonList();
             personList.addPerson("Alice");
             Person person = personList.getPerson(1);
-            Parser.getValidExpenditureIndex(null, person);
+            Parser.getValidExpenditureIndex(null, person.getNumberOfExpenditures());
             fail();
         } catch (AssertionError e) {
             assertEquals("Expenditure index should not be null", e.getMessage());
@@ -569,7 +569,7 @@ class ParserTest {
             Person person = personList.getPerson(1);
 
             String input = "Alice";
-            Parser.getValidExpenditureIndex(input, person);
+            Parser.getValidExpenditureIndex(input, person.getNumberOfExpenditures());
             fail();
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `Alice`", e.getMessage());
@@ -586,7 +586,7 @@ class ParserTest {
         person.addExpend("Food", 10.5, false);
         try {
             String tooLow = "0";
-            Parser.getValidExpenditureIndex(tooLow, person);
+            Parser.getValidExpenditureIndex(tooLow, person.getNumberOfExpenditures());
 
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `0`", e.getMessage());
@@ -595,7 +595,7 @@ class ParserTest {
         }
         try {
             String tooLow = "2";
-            Parser.getValidExpenditureIndex(tooLow, person);
+            Parser.getValidExpenditureIndex(tooLow, person.getNumberOfExpenditures());
 
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `2`", e.getMessage());
@@ -605,14 +605,14 @@ class ParserTest {
     }
 
     @Test
-    void getValidIncomeIndex_validUserIndex_success() throws InvalidIndexException {
+    void getValidIncomeIndex_validIncomeIndex_success() throws InvalidIndexException {
         PersonList personList = new PersonList();
         personList.addPerson("Alice");
         Person person = personList.getPerson(1);
         person.addIncome("Gift", 100, false);
 
         String input = "1";
-        int output = Parser.getValidIncomeIndex(input, person);
+        int output = Parser.getValidIncomeIndex(input, person.getNumberOfIncomes());
         assertEquals(1, output);
     }
 
@@ -622,7 +622,7 @@ class ParserTest {
             PersonList personList = new PersonList();
             personList.addPerson("Alice");
             Person person = personList.getPerson(1);
-            Parser.getValidIncomeIndex(null, person);
+            Parser.getValidIncomeIndex(null, person.getNumberOfIncomes());
             fail();
         } catch (AssertionError e) {
             assertEquals("Income index should not be null", e.getMessage());
@@ -639,7 +639,7 @@ class ParserTest {
             Person person = personList.getPerson(1);
 
             String input = "Alice";
-            Parser.getValidIncomeIndex(input, person);
+            Parser.getValidIncomeIndex(input, person.getNumberOfIncomes());
             fail();
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `Alice`", e.getMessage());
@@ -656,7 +656,7 @@ class ParserTest {
         person.addIncome("Gift", 100, false);
         try {
             String tooLow = "0";
-            Parser.getValidIncomeIndex(tooLow, person);
+            Parser.getValidIncomeIndex(tooLow, person.getNumberOfIncomes());
             fail();
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `0`", e.getMessage());
@@ -665,7 +665,7 @@ class ParserTest {
         }
         try {
             String tooLow = "2";
-            Parser.getValidIncomeIndex(tooLow, person);
+            Parser.getValidIncomeIndex(tooLow, person.getNumberOfIncomes());
             fail();
         } catch (InvalidIndexException e) {
             assertEquals("Invalid index: `2`", e.getMessage());
@@ -675,7 +675,7 @@ class ParserTest {
     }
 
     @Test
-    void getValidCategoryIndex_validUserIndex_success() throws InvalidIndexException {
+    void getValidCategoryIndex_validCategoryIndex_success() throws InvalidIndexException {
         String input = "1";
         int output = Parser.getValidCategoryIndex(input);
         assertEquals(1, output);
@@ -729,7 +729,7 @@ class ParserTest {
     }
 
     @Test
-    void getValidGroupIndex_validUserIndex_success() throws InvalidIndexException {
+    void getValidGroupIndex_validGroupIndex_success() throws InvalidIndexException {
         String input = "1";
         int output = Parser.getValidGroupIndex(input);
         assertEquals(1, output);

@@ -259,16 +259,16 @@ public class Parser {
     /**
      * Returns a valid integer user index that is within membership quantity bounds.
      *
-     * @param userIndex  Person's user index.
-     * @param personList A list of Persons.
+     * @param userIndex       Person's user index.
+     * @param numberOfMembers The number of people in a logical grouping.
      * @return A valid integer user index.
      * @throws InvalidIndexException if amount is not a valid integer or out of bounds.
      */
-    public static int getValidUserIndex(String userIndex, PersonList personList) throws InvalidIndexException {
+    public static int getValidUserIndex(String userIndex, int numberOfMembers) throws InvalidIndexException {
         assert (userIndex != null) : ASSERT_USER_INDEX_NOT_NULL;
         try {
             int checkIndex = Integer.parseInt(userIndex);
-            ParserUtility.checkTooHighIndex(checkIndex, personList.getNumberOfMembers());
+            ParserUtility.checkTooHighIndex(checkIndex, numberOfMembers);
             ParserUtility.checkTooLowIndex(checkIndex, Constants.MIN_USER_INDEX);
             logger.log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
@@ -281,16 +281,17 @@ public class Parser {
     /**
      * Returns a valid expenditure index that is within expenditure quantity bounds.
      *
-     * @param expenditureIndex Person's expenditure lookup index.
-     * @param person           Person who may have expenditures.
+     * @param expenditureIndex     Person's expenditure lookup index.
+     * @param numberOfExpenditures The number of expenditures of a Person.
      * @return A valid expenditure index.
      * @throws InvalidIndexException if index is not a valid integer or out of bounds.
      */
-    public static int getValidExpenditureIndex(String expenditureIndex, Person person) throws InvalidIndexException {
+    public static int getValidExpenditureIndex(String expenditureIndex, int numberOfExpenditures)
+            throws InvalidIndexException {
         assert (expenditureIndex != null) : ASSERT_EXPENDITURE_INDEX_NOT_NULL;
         try {
             int checkIndex = Integer.parseInt(expenditureIndex);
-            ParserUtility.checkTooHighIndex(checkIndex, person.getNumberOfExpenditures());
+            ParserUtility.checkTooHighIndex(checkIndex, numberOfExpenditures);
             ParserUtility.checkTooLowIndex(checkIndex, Constants.MIN_EXPENDITURE_INDEX);
             logger.log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
@@ -303,16 +304,16 @@ public class Parser {
     /**
      * Returns a valid income index that is within income quantity bounds.
      *
-     * @param incomeIndex Person's income lookup index.
-     * @param person      Person who may have incomes.
+     * @param incomeIndex     Person's income lookup index.
+     * @param numberOfIncomes The number of incomes of a Person.
      * @return A valid income index.
      * @throws InvalidIndexException if index is not a valid integer or out of bounds.
      */
-    public static int getValidIncomeIndex(String incomeIndex, Person person) throws InvalidIndexException {
+    public static int getValidIncomeIndex(String incomeIndex, int numberOfIncomes) throws InvalidIndexException {
         assert (incomeIndex != null) : ASSERT_INCOME_INDEX_NOT_NULL;
         try {
             int checkIndex = Integer.parseInt(incomeIndex);
-            ParserUtility.checkTooHighIndex(checkIndex, person.getNumberOfIncomes());
+            ParserUtility.checkTooHighIndex(checkIndex, numberOfIncomes);
             ParserUtility.checkTooLowIndex(checkIndex, Constants.MIN_INCOME_INDEX);
             logger.log(Level.INFO, String.format(LOG_VALID_INDEX, checkIndex));
             return checkIndex;
