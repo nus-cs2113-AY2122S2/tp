@@ -29,6 +29,7 @@ public class StorageParser {
             String doOnStartDateString = taskData.getString("do_date_start");
             String doOnEndDateString = taskData.getString("do_date_end");
             String frequencyString = taskData.getString("frequency");
+            int index = taskData.getInt("index");
 
             Frequency repeatFrequency = frequencyString.isBlank()
                     ? null : Frequency.valueOf(frequencyString);
@@ -37,14 +38,15 @@ public class StorageParser {
             LocalDateTime doOnStartDateTime = LocalDateTime.parse(doOnStartDateString, inputWithTimeFormat);
             LocalDateTime doOnEndDateTime = LocalDateTime.parse(doOnEndDateString, inputWithTimeFormat);
 
+
             parsedTask = new Task(identifier, description, byDate, doOnStartDateTime,
-                    doOnEndDateTime, repeatFrequency);
+                    doOnEndDateTime, repeatFrequency, index);
             String status = taskData.getString("status");
             if (status.equals("X")) {
                 parsedTask.markAsDone();
             }
             return parsedTask;
-        } catch (JSONException | DateTimeParseException exception) {
+        } catch (JSONException | DateTimeParseException | NumberFormatException exception) {
             throw new InvalidInputException(exception.getMessage());
         }
     }
