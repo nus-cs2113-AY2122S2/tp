@@ -236,7 +236,7 @@ public class ActivityEditCommand extends Command {
             ui.printlnMessageWithDivider(COMMAND_SUCCESS + editedActivity);
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_ACTIVITY_EDITED  + activityId);
         } catch (InvalidDataException e) {
-            manager.getUi().printlnMessage(e.getMessage());
+            ui.printlnMessage(e.getMessage());
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY
                     + "\n" + e.getMessage());
         }
