@@ -53,6 +53,6 @@ public class SessionViewCommand extends Command {
             return;
         }
 
-        Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONSUMMARY_SESSION_SUMMARY_PRINTED + sessionId);
+        Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONVIEW_SESSION_VIEWED + sessionId);
     }
 }
