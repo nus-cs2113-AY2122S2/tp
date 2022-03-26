@@ -41,7 +41,7 @@ public class StudyCommand extends Command {
     }
 
     public void leaveStudyMode(Ui ui, TimerLogic timerLogic) {
-        if (timerLogic.isTimerRunning()) {
+        if (timerLogic.getIsTimerRunning()) {
             timerLogic.callStopTimer();
         }
         ui.showLine();
