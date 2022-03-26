@@ -3,6 +3,10 @@ package seedu.sherpass.util;
 import seedu.sherpass.command.Command;
 import seedu.sherpass.command.MarkCommand;
 import seedu.sherpass.exception.InvalidTimeException;
+
+import seedu.sherpass.util.parser.TaskParser;
+import seedu.sherpass.util.parser.TimerParser;
+
 import seedu.sherpass.task.TaskList;
 
 import static seedu.sherpass.constant.Message.ERROR_INVALID_TIMER_INPUT_MESSAGE;
@@ -39,7 +43,7 @@ public class TimerLogic {
     }
 
     private void executeMark(Storage storage, String[] parsedInput) {
-        Command c = Parser.prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD, taskList);
+        Command c = TaskParser.prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD, taskList);
         if (c != null) {
             c.execute(taskList, ui, storage);
             printAvailableCommands();
@@ -65,7 +69,7 @@ public class TimerLogic {
     }
 
     private void executeShow(Storage storage, String[] parsedInput) {
-        Command c = Parser.prepareShow(parsedInput);
+        Command c = TaskParser.prepareShow(parsedInput);
         if (c != null) {
             c.execute(taskList, ui, storage);
             printAvailableCommands();
@@ -85,7 +89,7 @@ public class TimerLogic {
         try {
             callResetTimer(parsedInput);
             if (timer instanceof Countdown) {
-                int duration = Parser.parseTimerInput(parsedInput);
+                int duration = TimerParser.parseTimerInput(parsedInput);
                 assert (duration > 0);
                 ((Countdown) timer).setDuration(duration);
             }
@@ -148,7 +152,7 @@ public class TimerLogic {
      *
      */
     public void callResetTimer(String[] parsedInput) {
-        String parameter = Parser.parseStudyParameter(parsedInput);
+        String parameter = TimerParser.parseStudyParameter(parsedInput);
         if (parameter.equals("stopwatch")) {
             timer = new Stopwatch(taskList, ui);
             return;
