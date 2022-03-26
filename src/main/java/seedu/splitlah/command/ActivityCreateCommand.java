@@ -23,17 +23,6 @@ public class ActivityCreateCommand extends Command {
     private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
     private static final String EDIT_SUCCESS = "The activity was edited successfully.\n";
     
-    public static final String[] COMMAND_DELIMITERS = { 
-        ParserUtils.SESSION_ID_DELIMITER, 
-        ParserUtils.NAME_DELIMITER, 
-        ParserUtils.PAYER_DELIMITER, 
-        ParserUtils.INVOLVED_DELIMITER, 
-        ParserUtils.TOTAL_COST_DELIMITER, 
-        ParserUtils.COST_LIST_DELIMITER,
-        ParserUtils.GST_DELIMITER,
-        ParserUtils.SERVICE_CHARGE_DELIMITER
-    };
-
     private int activityId;
     private final int sessionId;
     private final String activityName;
