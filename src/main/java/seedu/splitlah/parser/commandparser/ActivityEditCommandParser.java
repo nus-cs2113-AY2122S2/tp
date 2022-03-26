@@ -24,6 +24,14 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
             "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
                     + "/cl [COST1 COST2…] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
+    /**
+     * Returns an ActivityEditCommand object from the supplied command arguments.
+     *
+     * @param commandArgs A String object representing arguments provided by the user.
+     * @return An ActivityEditCommand object if all necessary parameters required are found in the input arguments.
+     * @throws InvalidFormatException If at least one of the necessary parameters cannot be found
+     *                                in the input arguments.
+     */
     @Override
     public ActivityEditCommand getCommand(String commandArgs) throws InvalidFormatException {
         int sessionId;
