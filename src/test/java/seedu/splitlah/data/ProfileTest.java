@@ -278,7 +278,7 @@ class ProfileTest {
     public void getNewSessionId_functionCalled_sessionIdIncrementedByOne() {
         int sessionIdToTest = manager.getProfile().getSessionIdTracker();
         manager.getProfile().getNewSessionId();
-        assertEquals(sessionIdToTest+1, manager.getProfile().getSessionIdTracker());
+        assertEquals(sessionIdToTest + 1, manager.getProfile().getSessionIdTracker());
     }
 
     /**
@@ -288,7 +288,7 @@ class ProfileTest {
     public void getNewActivityId_functionCalled_activityIdIncrementedByOne() {
         int activityIdToTest = manager.getProfile().getActivityIdTracker();
         manager.getProfile().getNewActivityId();
-        assertEquals(activityIdToTest+1, manager.getProfile().getActivityIdTracker());
+        assertEquals(activityIdToTest + 1, manager.getProfile().getActivityIdTracker());
     }
 
     /**
@@ -298,6 +298,6 @@ class ProfileTest {
     public void getNewGroupId_functionCalled_groupIdIncrementedByOne() {
         int groupIdToTest = manager.getProfile().getGroupIdTracker();
         manager.getProfile().getNewGroupId();
-        assertEquals(groupIdToTest+1, manager.getProfile().getGroupIdTracker());
+        assertEquals(groupIdToTest + 1, manager.getProfile().getGroupIdTracker());
     }
 }
