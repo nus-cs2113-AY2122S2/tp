@@ -1,21 +1,20 @@
 package seedu.duke.manager;
 
-import java.util.Arrays;
-import java.util.List;
 import seedu.duke.entities.Dish;
 import seedu.duke.entities.Order;
 import seedu.duke.loggers.MainLogger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * OrderManager.
  */
 public class OrderManager extends Manager {
+    private static final String ORDER_STORAGE_FILE = "order.dat";
     private static OrderManager singleton = null;
     private List<Order> orders;
-
-    private static final String ORDER_STORAGE_FILE = "order.dat";
 
     private OrderManager() {
         super(ORDER_STORAGE_FILE);
@@ -67,8 +66,9 @@ public class OrderManager extends Manager {
     /**
      * add dish to an order.
      *
-     * @param dish the dish to be added.
-     * @param orderIdx the index of the created order.
+     * @param dishIdx     index of dish.
+     * @param orderIdx    index of order.
+     * @param dishManager dishmanager instance.
      */
     public void addDishToOrder(Dish dish, int orderIdx) {
         if (orderIdx == this.orders.size()) {
@@ -85,6 +85,13 @@ public class OrderManager extends Manager {
         }
         System.out.println("Added successfully!\n");
 
+    }
+
+    public Order getOrder(int orderIndex) throws IndexOutOfBoundsException {
+        if (orderIndex < 0 || orders.size() <= orderIndex) {
+            throw new IndexOutOfBoundsException();
+        }
+        return this.orders.get(orderIndex);
     }
 
     /**
@@ -157,5 +164,4 @@ public class OrderManager extends Manager {
     public int getOrderCount() {
         return this.orders.size();
     }
-
 }

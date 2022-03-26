@@ -27,6 +27,17 @@ public class Order implements Serializable {
         return totalPrice;
     }
 
+    @Override
+    public String toString() {
+        String orderString = null;
+        assert this.dishes.size() != 0 : "No orders!";
+        for (Dish dish : dishes) {
+            orderString += dish.toString() + "\n";
+        }
+        orderString = orderString + "Total Price" + this.getTotalPrice();
+        return orderString;
+    }
+
     public List<Dish> getDishes() {
         return this.dishes;
     }
