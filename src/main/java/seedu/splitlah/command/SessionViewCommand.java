@@ -16,11 +16,11 @@ import java.util.logging.Level;
  */
 public class SessionViewCommand extends Command {
 
-    private int sessionId;
+    private final int sessionId;
 
     // MISC CONSTANTS
-    private static final String SUMMARY_HEADER_PREPEND = "-- (Session Id #";
-    private static final String SUMMARY_HEADER_POSTPEND = ") --";
+    private static final String VIEW_HEADER_PREPEND = "-- (Session Id #";
+    private static final String VIEW_HEADER_POSTPEND = ") --";
 
     /**
      * Initializes a SessionSummaryCommand object.
@@ -44,6 +44,7 @@ public class SessionViewCommand extends Command {
         Session session;
         try {
             session = profile.getSession(sessionId);
+            System.out.println(VIEW_HEADER_PREPEND + sessionId + VIEW_HEADER_POSTPEND);
             System.out.println(session);
         } catch (InvalidDataException e) {
             ui.printlnMessage(e.getMessage());
