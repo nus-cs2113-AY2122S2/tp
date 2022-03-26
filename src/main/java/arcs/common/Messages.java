@@ -5,4 +5,5 @@ public class Messages {
     public static final String BYE = "Thank you for using ARCS system." + System.lineSeparator() + "Good bye!";
     public static final String appLogo = "-- ARCS --";
     public static final String lineDivider = ("==================================================");
+    public static final String REQUEST_USER_COMMAND = "What can I do for you?";
 }

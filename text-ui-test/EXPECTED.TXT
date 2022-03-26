@@ -1,4 +1,5 @@
 Hello! Welcome to ARCS system.
+What can I do for you?
 Exiting the system ...
 ==================================================
 Your data has been saved!

@@ -1,8 +1,9 @@
 package arcs;
 
 import arcs.commands.CommandResult;
-import arcs.data.flightbooking.FlightBookingManager;
 import arcs.data.route.RouteManager;
+import arcs.data.flightbooking.FlightBookingManager;
+import arcs.data.menuitems.MenuItemManager;
 import arcs.parser.Parser;
 import arcs.storage.RouteFileManager;
 import arcs.commands.Command;
@@ -14,6 +15,7 @@ import java.io.IOException;
 public class Main {
 
     private RouteManager routeManager;
+    private MenuItemManager menuItemManager;
     private MainUi mainUi;
     private RouteFileManager routeFileManager;
     private FlightBookingManager flightBookingManager;
@@ -43,9 +45,10 @@ public class Main {
         mainUi.displayWelcomeMessage();
 
         do {
+            mainUi.displayGetNextUserCommand();
             String userCommandText = mainUi.getUserCommand();
             command = parser.parseCommand(userCommandText);
-            command.setData(routeManager, flightBookingManager);
+            command.setData(routeManager, flightBookingManager, menuItemManager);
             CommandResult result = command.execute();
             mainUi.displayResultToUser(result);
             mainUi.displayLineDivider();
@@ -59,6 +62,7 @@ public class Main {
 
         try {
             routeManager = new RouteManager(routeFileManager.loadData());
+            menuItemManager = new MenuItemManager();
         } catch (IOException e) {
             mainUi.displayMessages(e.getMessage());
             routeManager = new RouteManager();
