@@ -1,16 +1,7 @@
 package seedu.duke.helper;
 
 import seedu.duke.exception.HalpmiException;
-import seedu.duke.helper.command.AddDoctorCommand;
-import seedu.duke.helper.command.AddMedicineCommand;
-import seedu.duke.helper.command.AddPatientCommand;
-import seedu.duke.helper.command.Command;
-import seedu.duke.helper.command.DeleteDoctorCommand;
-import seedu.duke.helper.command.DeletePatientCommand;
-import seedu.duke.helper.command.EditMedicineCommand;
-import seedu.duke.helper.command.ViewDoctorCommand;
-import seedu.duke.helper.command.ViewMedicineCommand;
-import seedu.duke.helper.command.ViewPatientCommand;
+import seedu.duke.helper.command.*;
 
 
 public class Parser {
@@ -58,7 +49,9 @@ public class Parser {
     }
 
     public static Command parseEditPatient(String parameters) throws HalpmiException {
-        return null;
+        String[] patientParameters = minParameterCheck(parameters, 7);
+        Validator.validateAddPatient(patientParameters);
+        return new EditPatientCommand(patientParameters);
     }
 
     public static Command parseAddDoctor(String parameters) throws HalpmiException {
@@ -117,6 +110,10 @@ public class Parser {
         return addAppointmentParameters;
     }
 
+    public static Command parseFindPatient(String parameters) throws HalpmiException {
+        String[] findPatientParameters = minParameterCheck(parameters, 2);
+        return new FindPatientCommand(findPatientParameters);
+    }
     public static String[] parseFindAppointment(String parameters) throws HalpmiException {
         String[] findAppointmentParameters = minParameterCheck(parameters, 2);
         return findAppointmentParameters;

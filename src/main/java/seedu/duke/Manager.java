@@ -34,7 +34,7 @@ public class Manager {
             } catch (HalpmiException | NotFoundException | DuplicateEntryException e) {
                 ui.printParagraph(e.toString());
             }
-            ui.print(status);
+            //ui.print(status);
             storage.saveData();
         }
     }
@@ -54,6 +54,15 @@ public class Manager {
             break;
         case "view patient":
             command = Parser.parseViewPatient(parameters);
+            status = command.execute(storage.patients);
+            break;
+
+        case "edit patient":
+            command = Parser.parseEditPatient(parameters);
+            status = command.execute(storage.patients);
+            break;
+        case "find patient":
+            command = Parser.parseFindPatient(parameters);
             status = command.execute(storage.patients);
             break;
         case "add doctor":
