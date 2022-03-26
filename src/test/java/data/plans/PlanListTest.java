@@ -90,10 +90,12 @@ class PlanListTest {
     }
 
     @Test
-    void createAndAddPlan_samePlanName_expectInvalidPlanException() throws InvalidPlanException {
+    void createAndAddPlan_invalidPlanName_expectInvalidPlanException() throws InvalidPlanException {
         planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
         assertThrows(InvalidPlanException.class,
             () -> planList.createAndAddPlan("Plan 1 /workouts 2,2,2"));
+        assertThrows(InvalidPlanException.class,
+            () -> planList.createAndAddPlan("rest day /workouts 3,2,3"));
     }
 
     @Test

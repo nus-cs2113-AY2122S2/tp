@@ -23,15 +23,15 @@ import java.util.logging.Level;
 import static commands.PlanCommand.DETAILS_ACTION_KEYWORD;
 import static commands.ScheduleCommand.CLEAR_ACTION_KEYWORD;
 import static commands.ScheduleCommand.CLEAR_ALL_ACTION_KEYWORD;
+import static commands.SearchCommand.SEARCH_PLAN_ACTION_KEYWORD;
+import static commands.SearchCommand.SEARCH_EXERCISE_ACTION_KEYWORD;
+import static commands.SearchCommand.SEARCH_WORKOUT_ACTION_KEYWORD;
+import static commands.SearchCommand.SEARCH_ALL_ACTION_KEYWORD;
 import static commands.WorkoutCommand.CREATE_ACTION_KEYWORD;
 import static commands.WorkoutCommand.LIST_ALL_ACTION_KEYWORD;
 import static commands.WorkoutCommand.LIST_ACTION_KEYWORD;
 import static commands.WorkoutCommand.DELETE_ACTION_KEYWORD;
 import static commands.WorkoutCommand.UPDATE_ACTION_KEYWORD;
-import static commands.SearchCommand.SEARCH_EXERCISE_ACTION_KEYWORD;
-import static commands.SearchCommand.SEARCH_WORKOUT_ACTION_KEYWORD;
-import static commands.SearchCommand.SEARCH_PLAN_ACTION_KEYWORD;
-
 
 
 /**
@@ -227,6 +227,15 @@ public class Parser {
         return newCommand;
     }
 
+    /**
+     * Creates a new exercise command with the appropriate parameters stored into the object.
+     *
+     * @param userInput The user's input.
+     * @return A ExerciseCommand object containing the parsed parameters obtained from the user's input.
+     * @throws ArrayIndexOutOfBoundsException If the user's input contains insufficient information to parse.
+     * @throws InvalidCommandException        If the user's input contains invalid or insufficient information
+     *                                        to parse.
+     */
     public ExerciseCommand createExerciseCommand(String userInput) throws
             InvalidCommandException, ArrayIndexOutOfBoundsException {
         logger.entering(getClass().getName(), "createExerciseCommand");
@@ -250,10 +259,25 @@ public class Parser {
 
     }
 
+    /**
+     * Creates a new help command.
+     *
+     * @param userInput The user's input.
+     * @return A HelpCommand object.
+     */
     public HelpCommand createHelpCommand(String userInput) {
         return new HelpCommand(userInput);
     }
 
+    /**
+     * Creates a new search command with the appropriate parameters stored into the object.
+     *
+     * @param userInput The user's input.
+     * @return A SearchCommand object containing the parsed parameters obtained from the user's input.
+     * @throws ArrayIndexOutOfBoundsException If the user's input contains insufficient information to parse.
+     * @throws InvalidCommandException        If the user's input contains invalid or insufficient information
+     *                                        to parse.
+     */
     public SearchCommand createSearchCommand(String userInput) throws
             InvalidCommandException, ArrayIndexOutOfBoundsException {
         String actionKeyword = userInput.split(" ", 3)[1];
@@ -266,16 +290,32 @@ public class Parser {
                 throw new InvalidCommandException(className,
                         InvalidCommandException.INVALID_SEARCH_EXERCISE_COMMAND_ERROR_MSG);
             }
-            arguments = userInput.split(" ", 3)[2];
+            arguments = userInput.split(" ", 3)[2].trim();
             return new SearchCommand(userInput, ui, exerciseList, actionKeyword, arguments);
         case SEARCH_PLAN_ACTION_KEYWORD:
             if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
                 logger.log(Level.WARNING, "User has entered an invalid search plan command action.");
                 throw new InvalidCommandException(className,
-                        InvalidCommandException.INVALID_SEARCH_EXERCISE_COMMAND_ERROR_MSG);
+                        InvalidCommandException.INVALID_SEARCH_PLAN_COMMAND_ERROR_MSG);
             }
-            arguments = userInput.split(" ", 3)[2];
+            arguments = userInput.split(" ", 3)[2].trim();
             return new SearchCommand(userInput, ui, planList, actionKeyword, arguments);
+        case SEARCH_WORKOUT_ACTION_KEYWORD:
+            if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+                logger.log(Level.WARNING, "User has entered an invalid search workout command action.");
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_SEARCH_WORKOUT_COMMAND_ERROR_MSG);
+            }
+            arguments = userInput.split(" ", 3)[2].trim();
+            return new SearchCommand(userInput, ui, workoutList, actionKeyword, arguments);
+        case SEARCH_ALL_ACTION_KEYWORD:
+            if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+                logger.log(Level.WARNING, "User has entered an invalid search all command action.");
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_SEARCH_ALL_COMMAND_ERROR_MSG);
+            }
+            arguments = userInput.split(" ", 3)[2].trim();
+            return new SearchCommand(userInput, ui, exerciseList, workoutList, planList, actionKeyword, arguments);
         default:
             logger.log(Level.WARNING, "User has entered an invalid search command action.");
             throw new InvalidCommandException(className,

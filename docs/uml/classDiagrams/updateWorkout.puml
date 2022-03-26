@@ -1,0 +1,59 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+title Class Diagram of `workout /update` Command
+
+Main - WerkIt
+WerkIt --> UI
+WerkIt --> Parser
+
+Command <|- WorkoutCommand
+Parser ..> Command
+WorkoutCommand --> WorkoutList
+WorkoutCommand --> FileManager
+
+class WerkIt {
++ startContinuousUserPrompt()
+}
+
+abstract Command {
+
+}
+
+class Main {
+
+}
+
+class WorkoutCommand {
++ {static} UPDATE_ACTION_KEYWORD : String
+- userAction : String
+- userArguments : String
++ execute() : void
++ getWorkoutList() : WorkoutList
++ FileManager getFileManager()
+}
+
+class UI {
+# getUserInput() : String
++ printUpdateWorkoutMessage(updatedWorkout : Workout) : void
+
+}
+
+class Parser {
++ parseUserInput(userInput : String) : Command
++ createWorkoutCommand(userInput : String) : WorkoutCommand
+- checkInputForIllegalCharacters((userInput : String) : boolean
+}
+
+class WorkoutList {
++ updateWorkout(userArgument : String) : Workout
+- checkIndexIsWithinRange(index : int) : boolean
++ getWorkoutFromIndexNum(indexNum : int) : Workout
++ checkForExistingWorkout(exerciseName : String, repetitionCount : int) : boolean
+}
+
+class FileManager {
++ rewriteAllWorkoutsToFile(workoutList : WorkoutList) : void
+}
+
+@enduml

@@ -34,45 +34,46 @@ with this IDE.
 [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
 4. Run `Main.java`. If you have set up your environment correctly, you should see the following
 output in your terminal: 
-```
-======================================================================
- __        __        _    ___ _   _ 
- \ \      / /__ _ __| | _|_ _| |_| |
-  \ \ /\ / / _ \ '__| |/ /| || __| |
-   \ V  V /  __/ |  |   < | || |_|_|
-    \_/\_/ \___|_|  |_|\_\___|\__(_)
-                                    
-Welcome to WerkIt!, your personal exercise planner.
-----------------------------------------------------------------------
-Checking for required directory and files...
-- The required data directory was not found. It will be created.
-- The WerkIt! resource directory has been created in
-  your terminal's current working directory.
 
-- The exercise file was not found. It will be created.
-- The exercise file 'exercises.txt' has been created in
-  the WerkIt! resource directory.
+    ```
+    ======================================================================
+     __        __        _    ___ _   _ 
+     \ \      / /__ _ __| | _|_ _| |_| |
+      \ \ /\ / / _ \ '__| |/ /| || __| |
+       \ V  V /  __/ |  |   < | || |_|_|
+        \_/\_/ \___|_|  |_|\_\___|\__(_)
 
-- The workout file was not found. It will be created.
-- The workout file 'workouts.txt' has been created in
-  the WerkIt! resource directory.
+    Welcome to WerkIt!, your personal exercise planner.
+    ----------------------------------------------------------------------
+    Checking for required directory and files...
+    - The required data directory was not found. It will be created.
+    - The WerkIt! resource directory has been created in
+      your terminal's current working directory.
 
-- The plan file was not found. It will be created.
-- The plan file 'plans.txt' has been created in
-  the WerkIt! resource directory.
+    - The exercise file was not found. It will be created.
+    - The exercise file 'exercises.txt' has been created in
+      the WerkIt! resource directory.
 
-- The schedule file was not found. It will be created.
-- The schedule file 'schedule.txt' has been
-  created in the WerkIt! resource directory.
+    - The workout file was not found. It will be created.
+    - The workout file 'workouts.txt' has been created in
+      the WerkIt! resource directory.
 
-Loading saved file data...
-- Exercises file	OK!
-----------------------------------------------------------------------
-Now then, what can I do for you today?
-(Need help? Type 'help' for a guide!)
-----------------------------------------------------------------------
->
-```
+    - The plan file was not found. It will be created.
+    - The plan file 'plans.txt' has been created in
+      the WerkIt! resource directory.
+
+    - The schedule file was not found. It will be created.
+    - The schedule file 'schedule.txt' has been
+      created in the WerkIt! resource directory.
+
+    Loading saved file data...
+    - Exercises file	OK!
+    ----------------------------------------------------------------------
+    Now then, what can I do for you today?
+    (Need help? Type 'help' for a guide!)
+    ----------------------------------------------------------------------
+    >
+    ```
 5. Type `exit` to exit the program.
 
 You are now ready to begin developing!
@@ -86,10 +87,23 @@ You are now ready to begin developing!
 ### Overview
 * [Getting User Input Continuously](#getting-user-input-continuously)
 * [Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)
-* [Create New Workout](#create-new-workout)
+* [Exercise](#exercise)
+* [Workout](#workout)
+  * [Create New Workout](#create-new-workout)
+    * [Design Considerations](#design-considerations-for-creating-a-new-workout) 
+  * [List Workout](#list-workout)
+  * [Delete Existing Workout](#delete-existing-workout)
+    * [Design Considerations](#design-considerations-for-deleting-existing-workout)
+  * [Update Workout](#update-workout)
+* [Plan](#plan)
+  * [Create A New Plan](#create-a-new-plan)
+  * [List Plans](#list-plans)
+* [Schedule](#schedule)
 * [Search](#search)
   * [Search for Exercise](#search-for-exercise)
   * [Search for Plan](#search-for-plan)
+
+---
 
 ### Getting User Input Continuously
 Once `WerkIt` has finished loading any saved file data on the user's system, it will call 
@@ -131,43 +145,140 @@ for subsequent prompts.
   >
   ```
 
+---
+
 ### Parsing User Input and Getting the Right Command
 **_TODO_**: Explain how the app parses user input and determines which `Command` subclass object to instantiate.
 
-### Create New Workout
-![Create Workout Sequence Diagram](uml/sequenceDiagrams/images/createWorkout.png)
-In _WerkIt!_, a workout is defined as an exercise paired with a number that represents the number
-of repetitions. For example, 20 repetitions of the Russian twist is considered a workout. 
+---
 
-### Delete Existing Workout
-Class diagram for Delete Workout:
-![Delete Workout UML](uml/classDiagrams/images/DeleteWorkout.png)
-<br>
-<br>
-Sequence diagram for Delete Workout:
-![Delete Workout Sequence Diagram](uml/sequenceDiagrams/images/deleteWorkout.png)
-<br>
-<br>
+### Exercise
 
-When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
-`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
-class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to analyse the
-user's command. If the user's command type is to delete an existing workout, i.e. `workout /delete <workout number>`, the
-`Parser#parseUserInput(String userInput)` method will parse the 'workout' base word and proceed to create workout related
-command using `Parser#createWorkoutCommand(String userInput)` method. This method will further evaluate the
-workout action, in this case, `/delete` and call the constructor of `WorkoutCommand` class by passing relevant parameters related to the
-WorkoutCommand constructor. If the workout action is null or incorrect, an InvalidCommandException will be thrown. If the `<workout number>`
-parameter is also not specified, the same InvalidCommandException is thrown. Once the workout command is created,
-this workout command is executed via the `WorkoutCommand#execute()` method. As it is executed, the method will check the type of action to be executed, in this case,
-delete. It will then remove the existing workout using the `WorkoutList#deleteWorkout(getUserArguments())` method. The deleteWorkout method
-in addition, checks whether the workout number supplied is a valid integer and is within the range of the workout list. If both condition
-is not met, the NumberFormatException and WorkoutOutOfRangeException is thrown accordingly. Once the existing workout is successfully deleted,
-the UI will print a success message and call the `FileManager#rewriteAllWorkoutsToFile(getWorkoutList())` method to save the changes.
+---
 
-#### Delete existing workout command
-Format: `workout /delete <workout number in workout list>`
+### Workout
+#### Create New Workout
 
-### List Workout
+A summary of the general procedure of a new workout being inputted and stored into WerkIt! is as follows:
+1. User enters the command `workout /new <workout name> /reps <number of repetitions>`.
+2. A new `Workout` object is created and stored in the application.
+3. The success response is printed to the user through the terminal.
+4. The new `Workout` object data is written to the resource file `workouts.txt`.
+
+The following sequence illustrates how the `workout /new` command works in greater detail:
+> To simplify the sequence diagram, some method invocations that deemed to be trivial 
+> have been removed from the sequence diagram. Reference frames will be elaborated further 
+> down this section.
+
+![Create Workout Sequence Diagram](uml/sequenceDiagrams/images/CreateWorkout.png)
+
+(Steps 1 to 3) The program waits for the user to enter a new command, which in this case is the `workout /new` command,
+and returns the user input in a `String` object to `WerkIt#startContinuousUserPrompt()`. 
+
+(Steps 4 and 5) `Parser#parseUserInput()` parses the user input to obtain a `WorkoutCommand` object that is upcasted 
+to a `Command` object on return to `WerkIt#startContinuousUserPrompt()`. In Step 6, `WorkoutCommand#execute()` is called
+and because this is a `workout /new` command, the method will call `WorkoutList#createAndAddWorkout()`.
+
+The following sequence diagram is the detailed procedure for Step 7's `WorkoutList#createAndAddWorkout()`:
+![createAndAddWorkout() Sequence Diagram](uml/sequenceDiagrams/images/CreateAndAddWorkout.png)
+
+> Note: Logging-related method calls in `WorkoutList#createAndAddWorkout()` have been omitted in an effort to simplify 
+> the sequence diagram.
+
+(Steps 7.1 to 7.6) The `String#split()`, `String#trim()`, and `Integer#parseInt()` methods are used to parse the 
+argument given to `WorkoutList#createAndAddWorkout()` to obtain the following information required to create the 
+`Workout` object:
+1. Name of the exercise
+2. Number of repetitions associated with the exercise in (1).
+
+(Steps 7.7 to 7.20) Validity checks of the user input are carried out to ensure that the data entered is valid as a
+new `Workout` object. The requirements for a valid new `Workout` object is as follows:
+- [x] The exercise name must exist in `ExerciseList`'s `exerciseList`, which is an `ArrayList<String>` of exercise 
+names.
+- [x] The repetition value must be a non-negative integer greater than 0.
+- [x] The (exercise name, repetition value) must not already exist in the list of workouts maintained in
+`WorkoutList`. For example, if a workout of 20 reps of push-ups is already stored in the list,
+it cannot be created again.
+
+If any of the three requirements are not met, either an `InvalidExerciseException` or an
+`InvalidWorkoutException` is thrown, and the entire workout creation process is aborted.
+
+If the above checks pass, Step 7.21 will create the new `Workout` object with the user-specified exercise name and 
+repetition value. Once that is done, Step 7.23 will generate the key of the `Workout` object (see the 
+[Design Considerations](#design-considerations-for-creating-a-new-workout) section for more details of the `HashMap`
+implementation), before storing the key-`Workout` pair in `workoutsHashMapList` stored in `WorkoutList` in Step 7.25.
+In Step 7.27, the key of the newly-created `Workout` object is added to the `workoutsDisplayList` `ArrayList<String>`
+stored in `WorkoutList`. This ArrayList will be used for displaying the workouts when the command `workout /list` is 
+entered by the user. This is the final step of the `WorkoutList#createAndAddWorkout()`.
+
+(Step 9) Upon returning to `WorkoutCommand`, `UI#printNewWorkoutCreatedMessage()` is called to display a response to
+the user via the terminal. The following is an example of a response after the user entered `workout /new russian twist 
+/reps 50`:
+```
+----------------------------------------------------------------------
+Alright, the following workout has been created:
+
+	russian twist (50 reps)
+
+----------------------------------------------------------------------
+```
+
+(Step 12) `FileManager#writeNewWorkoutToFile` is called to write the newly-created `Workout` object's data into 
+`workouts.txt` which is stored on the user's local filesystem.
+
+This completes the process of adding a new workout to WerkIt!
+
+##### Design Considerations for Creating a New Workout
+###### HashMaps - Motivation
+Back in Version 1.0 of WerkIt!, workouts were stored in an ArrayList of `Workout` objects. In that version, plans
+and schedules were not yet implemented and thus there was no real issues, since we can easily use index numbers
+shown in `workout /list` to reference workouts when the user enters `workout /update` and `workout /delete` commands.
+
+As an example, here is a list of workouts as shown when `workout /list` is used:
+```
+----------------------------------------------------------------------
+> workout /list
+----------------------------------------------------------------------
+Showing workouts 1-3 of 3:
+
+1. push up (10 reps)
+2. sit up (10 reps)
+3. pull up (10 reps)
+
+Showed all workouts in list
+----------------------------------------------------------------------
+```
+
+Thus, if we want to update the workout with 10 reps of push-ups, we can enter `workout /update 1 15` to update 
+the repetition value to 15.
+
+However, when we were designing and preparing for Version 2.0, we discovered that this **relative referencing** of
+workouts by their indices pose a potentially cumbersome issue when implementing the plans and schedule features. If
+we were to continue using relative indexing to reference workouts in plans, the effort needed to maintain the 
+references in plans can become unnecessary complex.
+
+For example, using the same list of workouts we have above, suppose we have a plan that includes workout indices
+1 and 3 (10 push-ups and 10 pull-ups). Now, suppose the user decides to delete workout index 2 (10 sit-ups), this
+means that the 10 pull-ups will now have an index number of 2. Thus, if we were to continue using relative indexing
+to reference workouts in plans, there is a greater risk of making wrong references, and the amount of additional
+code to update these references can become too complex.
+
+###### Usage of HashMap
+Thus, we have decided to use a HashMap on top of the existing ArrayList to store `Workout` objects. This will allow 
+workouts to be referenced by their unique keys when creating plans and schedules, while allowing the user to continue
+using the convenience of relative indexing for `workout /update` and `workout /delete` commands. The ArrayList of 
+`Workout` objects from before is now converted into an ArrayList of Strings that will keep the keys of the `Workout` 
+objects. Now, to manipulate the `Workout` object (e.g. `workout /update`),
+1. User enters the index number of the workout he/she wants to update (as seen in `workout /list`).
+2. The key of the `Workout` object is obtained from the ArrayList of keys (`workoutsDisplayList`).
+3. The `Workout` object is obtained from the HashMap (`workoutsHashMapList`).
+
+Note that the user will not have any direct interactions with the HashMap implementation and it should be transparent
+to him/her.
+
+---
+
+#### List Workout
 ![SearchUML](uml/classDiagrams/images/listWorkout.png)
 <br>
 user's command. If the user's command type is to list the workouts created, i.e. `workout /list`, the
@@ -185,9 +296,201 @@ If the answer given by the user is neither 'yes' nor 'no', user will be prompt t
 When 'yes' is entered, the printing will continue and `WorkoutList#continuousPrinting(int index, int noOfPrints)` method will be executed again.
 Otherwise, `WorkoutList#listWorkout()` method will be terminated.
 
-#### List workouts command
+##### List workouts command
 Format: `workout /list`
 
+---
+
+#### Delete Existing Workout
+A summary of the general procedure of an existing workout being removed from WerkIt! is as follows:
+1. User enters the command `workout /delete <workout number in workout list>`.
+2. The workout with the corresponding workout number in the workout list (can be determined by entering `workout /list`) is removed from the application's workout list.
+3. The success response is printed to the user through the terminal.
+4. The resource file `workouts.txt`, is rewritten according to the application's workout list that has been modified.
+
+The following sequence illustrates how the `workout /delete` command works in greater detail:
+> To simplify the sequence diagram, some method invocations that deemed to be trivial
+> have been removed from the sequence diagram. Reference frames will be elaborated further
+> down this section.
+
+![Delete Workout Sequence Diagram](uml/sequenceDiagrams/images/deleteWorkout.png)
+<br><br>
+
+(Steps 1 to 3) The program waits for the user's input, which in this case, is the `workout /delete <workout number to delete>` command. 
+An example of a valid command is `workout /delete 1`. Once the command is entered, the UI class will return the user input in a `String` object
+to the `WerkIt` object.
+<br><br>
+(Steps 4 to 6) After the user input is received, the `WerkIt` object will call the `Parser#parseUserInput()` method to parse the user input.
+Upon parsing of the input, a `WorkoutCommand` object is obtained. This `WorkoutCommand` object is upcasted to a `Command` object on return
+to the `WerkIt` object. It will then execute the workout command by calling the `WorkoutCommand#execute()` method.
+<br><br>
+(Step 7) The `WorkoutCommand#execute()` method identifies that the workout action is of type `delete` due to the workout command that 
+was supplied (`workout /delete <workout number to delete>`). It then calls the appropriate method, `WorkoutList#deleteWorkout(userArguments)`,
+in order to perform the deletion of the workout. <br><br>
+The following sequence diagram is the detailed procedure for Step 7's `WorkoutList#deleteWorkout(userArguments)`:
+<br><br>
+![Delete Workout Detailed Sequence Diagram](uml/sequenceDiagrams/images/deleteWorkoutDetailed.png)
+
+<br><br>
+(Steps 7.1 to 7.2) The `Integer#parseInt()` method is called to parse the argument given to `WorkoutList#deleteWorkout(userArgument)`.
+In this case, the user argument for `workout /delete` is the workout number of the workout to be deleted in the workout list.
+<br><br>
+(Steps 7.3 to 7.6) The `WorkoutList#deleteWorkout(userArgument)` method will then proceed to check whether the workout to be deleted
+is within the range of the workout list, by calling out the `WorkoutList#checkIndexIsWithinRange(indexToDelete)` method. If index to delete
+is within the range of the workout list, the method returns true, else it will return false.
+If the method returns false (indicating that workout number to delete is not within the range), then the `WorkoutOutOfRangeException` is thrown.
+<br><br>
+(Steps 7.7 to 7.8) The `WorkoutList#deleteWorkout(userArgument)` method will then fetch the `Workout` object to be deleted
+by calling the `WorkoutList#getWorkoutFromIndexNum(indexToDelete)` method.
+<br><br>
+(Steps 7.9 to 7.12) The `Workout` object to be deleted is subsequently removed from the ArrayList and HashMap which stores the
+application's workout list.
+<br><br>
+(Step 8) The `WorkoutList#deleteWorkout(userArgument)` method returns the deleted `Workout` object to `WorkoutCommand`.
+<br><br>
+(Steps 9 to 11) Upon returning to the `WorkoutCommand`, the `UI#printDeleteWorkoutMessage(deletedWorkout)` is called
+to display the workout that has been deleted to the user via the terminal. The following is an example 
+of a success deletion message after the user deleted a valid workout from the application's workout list
+(e.g. `workout /delete 1`):
+```
+----------------------------------------------------------------------
+Alright, the following workout has been removed:
+
+	push up (20 reps)
+
+----------------------------------------------------------------------
+```
+(Steps 12 to 13) The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
+the `workouts.txt` file according to the newly modified application's workout list.
+<br><br>
+This completes the process of deleting an existing workout in WerkIt!
+
+##### Design Considerations for Deleting Existing Workout
+###### Rewrite All Workout To File
+Currently, the WerkIt! program will rewrite all workout to the resource file, `workouts.txt`, when the delete workout
+function is executed. Such implementation may have performance issues as the program needs to rewrite the whole
+file with the modified workout list whenever a workout is deleted in the application.
+<br><br>
+An alternative considered was to find the workout to be deleted in the resource file, and then
+remove that workout. This is a faster implementation, however, more complicated due to the way
+the workouts are formatted and stored in the `workouts.txt` file.
+<br><br>
+Hence, to simplify the coding part, the team decided to implement our current implementation - that
+is, to rewrite all workout to the resource file whenever a workout is deleted.
+
+---
+
+#### Update Workout
+![Update Workout Class Diagram](uml/classDiagrams/images/updateWorkout.png)
+<br><br>
+When WerkIt is running, the `WerkIt` class will keep prompting the user to enter command through the
+`WerkIt#startContinuousUserPrompt()` method. After the user has entered command, The `UI#getUserInput()` method in `UI`
+class will catch the user input, and it will be sent to `Parser#parseUserInput(String userInput)` method to identify the
+user's command. If the user's command type is to update an existing workout, 
+i.e. `workout /update <index of workout> <new number of repetitions>`, the `Parser#parseUserInput(String userInput)` 
+method will parse the 'workout' base word and proceed to create workout related command using 
+`Parser#createWorkoutCommand(String userInput)` method. This method will further evaluate the workout action,
+in this case, `/update` and call the constructor of `WorkoutCommand` class by passing relevant parameters related to the
+WorkoutCommand constructor. If the workout action is null or incorrect, an InvalidCommandException will be thrown. 
+If either `<index of workout>` or `<new number of repetitions>` parameter is also not specified, the same 
+InvalidCommandException is thrown. Once the workout command is created, this workout command is executed 
+via the `WorkoutCommand#execute()` method. As it is executed, the method will check the type of action to be executed, 
+in this case, update. It will then update the existing workout using the `WorkoutList#updateWorkout(getUserArguments())` 
+method. The updateWorkout method in addition, checks whether the given index of workout is a valid integer
+and is within the range of the workout list. It also checks whether the workout to update exists in the current workout 
+list. If either check is failed, `WorkoutOutOfRangeException` or `InvalidWorkoutException` will be thrown 
+correspondingly. Otherwise, workout will be updated successfully. Then, `UI` will print a success message and call 
+the `FileManager#rewriteAllWorkoutsToFile(getWorkoutList())` method to save the changes.
+
+##### Update workouts command
+Format: `workout /update`
+
+---
+
+### Plan
+#### Create A New Plan
+
+A summary of the general procedure of a new plan being created and stored in WerkIt! is as follows:
+1. User enters the command `plan /new <plan name> /workouts <workout numbers in workout list separated by comma>`.
+2. A new `Plan` object is created and stored in the application.
+3. The success response is printed to the user through the terminal.
+4. The new `Plan` object data is written to the resource file `plans.txt`.
+
+The following sequence illustrates how the `plan /new` command works in greater detail:
+> To simplify the sequence diagram, some method invocations that deemed to be trivial
+> have been removed from the sequence diagram. Reference frames will be elaborated further
+> down this section.
+
+![Create Plan Sequence Diagram](uml/sequenceDiagrams/images/createPlan.png)
+<br><br>
+
+(Steps 1 to 3) The program waits for the user's input, which in this case, is the `plan /new <plan name> /workouts <workout numbers in workout list separated by comma>` command.
+An example of a valid command is `plan /new Grow Biceps /workouts 1, 2, 3`. Once the command is entered, the UI class will return the user input in a `String` object
+to the `WerkIt` object.
+<br><br>
+(Steps 4 to 6) After the user input is received, the `WerkIt` object will call the `Parser#parseUserInput()` method to parse the user input.
+Upon parsing of the input, a `PlanCommand` object is obtained. This `PlanCommand` object is upcasted to a `Command` object on return
+to the `WerkIt` object. It will then execute the plan command by calling the `PlanCommand#execute()` method.
+<br><br>
+(Step 7) The `PlanCommand#execute()` method identifies that the plan action is of type `new` due to the plan command that
+was supplied (`plan /new <plan name> /workouts <workout numbers in workout list separated by comma>`). 
+It then calls the appropriate method, `PlanList#createAndAddPlan(userArgument)`, in order to create a new plan. <br><br>
+The following sequence diagram is the detailed procedure for Step 7's `PlanList#createAndAddPlan(userArgument)`:
+<br><br>
+![Create And Add Plan Detailed Sequence Diagram](uml/sequenceDiagrams/images/createAndAddPlan.png)
+
+<br><br>
+(Steps 7.1 to 7.6) The user argument of the `PlanList#createAndAddPlan(userArgument)` method is split to obtain
+the name of the plan to create. Before adding the plan, this method will call the
+`PlanList#checkForExistingPlanName(userPlanNameInput)` to ensure all plan names are unique in the application.
+If the plan to create is an existing plan name, an `InvalidPlanException` will be thrown.
+<br><br>
+(Steps 7.7 to 7.14) The user argument of the `PlanList#createAndAddPlan(userArgument)` method is split to obtain
+the number of workouts to be added into the new plan. Before adding the
+plan, this method will call the `PlanList#checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan)` to ensure
+that the number of workouts to be added into the new plan does not exceed 10 workouts, and there should minimally
+be 1 workout in a plan. If the plan to create does not meet the minimum and maximum workouts requirement,
+an `InvalidPlanException` will be thrown.
+<br><br>
+(Steps 7.15 to 7.16) An ArrayList of Workout object is created to store the workouts to be added into the new plan.
+<br><br>
+(Steps 7.17 to 7.28) As the workout numbers in the user argument (e.g. "1, 2, 3") is of type `String`, 
+the loop will split (by comma) and convert each number string into an `Integer`. The `PlanList#createAndAddPlan(userArgument)` method
+will then call the `PlanList#checkWorkoutNumberWithinRange(workoutNumberInteger)` method to ensure that each
+workout index is within the application's workout list range. Once the check is done, the `Workout` object
+is fetched from the application's workout list based on the workout index to be added in the plan. The `Workout` object is then
+added into the `ArrayList` that was created in Step 7.15. The loop will continue until all workouts to be added in the new plan
+is added into that `ArrayList`.
+<br><br>
+(Steps 7.29 to 7.36) With the unique plan name and the `ArrayList` (obtained in previous steps) containing the workouts to be added into the plan,
+a new `Plan` object is created. This new `Plan` object is then added to the application's plan list.
+<br><br>
+(Step 8) The `PlanList#createAndAddPlan(userArgument)` method returns the new `Plan` object to `PlanCommand`.
+<br><br>
+(Steps 9 to 11) Upon returning to the `PlanCommand`, the `UI#printNewPlanCreatedMessage(newPlan)` is called
+to display the plan that has been created to the user via the terminal. The following is an example
+of a success plan creation message (e.g. after entering `plan /new Grow My Muscles /workouts 1, 2, 3`):
+```
+----------------------------------------------------------------------
+Alright, the following plan has been created:
+
+	Grow My Muscles
+
+----------------------------------------------------------------------
+```
+(Steps 12 to 13) `FileManager#writeNewPlanToFile(newPlan)` is called to write the newly-created `Plan` object's data into
+`plans.txt`, which is stored on the user's local filesystem.
+<br><br>
+This completes the process of adding a new plan to WerkIt!
+
+---
+
+#### List Plans
+
+---
+### Schedule
+
+---
 ### Search
 ![SearchUML](uml/classDiagrams/images/SearchClass.png)
 <br>
@@ -256,23 +559,23 @@ correctly.
 * **Plan** - A set of workouts
     * Example:
 
-  | Plan Name | Contains |
-  | --- | --- |
-  | Grow my Biceps | Barbell curls (3 reps), push ups (10 reps), deadlift (2 reps) |
-  | Whole Body! | Crunches (10 reps), jumping jack (3 reps), lift ups (4 reps), pull ups (3 reps), planking (2 reps), leg cycle (2 reps)|
+| Plan Name | Contains |
+| --- | --- |
+| Grow my Biceps | Barbell curls (3 reps), push ups (10 reps), deadlift (2 reps) |
+| Whole Body! | Crunches (10 reps), jumping jack (3 reps), lift ups (4 reps), pull ups (3 reps), planking (2 reps), leg cycle (2 reps) |
 
 * **Schedule** - Consists of Days 1 to 7. Users will add or modify a plan to that particular day
 of their schedule. For instance, the user's daily schedule can look like this:
 
-  | Day | Plan Name      |
-  |----------------|---------------- |
-  | Day 1 | Grow my Biceps |
-  | Day 2 | Rest Day       |
-  | Day 3 | Whole Body!    |
-  | Day 4 | Leg Day        |
-  | Day 5 | Grow my Biceps |
-  | Day 6 | Whole Body!    |
-  | Day 7 | Rest Day       |
+| Day | Plan Name      |
+| --- |---------------- |
+| Day 1 | Grow my Biceps |
+| Day 2 | Rest Day       |
+| Day 3 | Whole Body!    |
+| Day 4 | Leg Day        |
+| Day 5 | Grow my Biceps |
+| Day 6 | Whole Body!    |
+| Day 7 | Rest Day       |
 
 
 ## Instructions for manual testing

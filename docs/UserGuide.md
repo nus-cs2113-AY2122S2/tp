@@ -6,8 +6,28 @@ WerkIt! is an application for managing workout routines,
 optimized for use via a Command Line Interface (CLI).
 ---
 
-* Table of Contents
-  {:toc}
+## Table of Contents
+* [Quick Start Guide](#quick-start-guide)
+* [Features](#features)
+  * [Show all Exercises: `exercise /list`](#show-all-exercises-exercise-list)
+  * [Create a Workout: `workout /new`](#create-a-workout-workout-new)
+  * [Show all Workouts: `workout /list`](#show-all-workouts-workout-list)
+  * [Delete a Workout: `workout /delete`](#delete-a-workout-workout-delete)
+  * [Update a Workout: `workout /update`](#update-a-workout-workout-update)
+  * [Create a Plan: `plan /new`](#create-a-plan-plan-new)
+  * [List A Plan: `plan /list`](#list-a-plan-plan-list)
+  * [Update Schedule: `schedule /update`](#update-schedule-schedule-update)
+  * [View Schedule: `schedule /list`](#view-schedule-schedule-list)
+  * [Clear Schedule For A Day: `schedule /clear`](#clear-schedule-for-a-day-schedule-clear)
+  * [Clear Schedule For The Week: `schedule /clearall`](#clear-schedule-for-the-week-schedule-clearall)
+  * [Search For Exercise: `search /exercise`](#search-for-exercise-search-exercise)
+  * [Search For Workout: `search /workout`](#search-for-workout-search-workout)
+  * [Search For Plan: `search /plan`](#search-for-plan-search-plan)
+  * [Search For All: `search /all`](#search-for-all-search-all)
+  * [View Help: `help`](#view-help-help)
+* [WerkIt!'s Local Storage Information](#werkits-local-storage-information)
+* [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
+* [Command Summary](#command-summary)
 
 ## Quick Start Guide
 
@@ -84,6 +104,7 @@ Alright, the following workout has been created:
 ----------------------------------------------------------------------
 ```
 A new workout of carrying out Russian twists 50 times will be created and added to the application's list of workouts.
+
 ---
 ### Show all Workouts in one go: `workout /listall`
 Lists down all workouts that have been created and stored in the workout list at the time the command is executed.
@@ -122,13 +143,15 @@ Format: `workout /list`
 ```
 **Expected Outcome**
 ```
-------------------------------------------------------------
+----------------------------------------------------------------------
 Showing workouts 1-3 of 3:
+
 1. push up (10 reps)
 2. sit up (10 reps)
 3. pull up (10 reps)
+
 Showed all workouts in list
-------------------------------------------------------------
+----------------------------------------------------------------------
 ```
 
 In the current workout list, there are a total of 3 workouts. All the workouts have been listed. 
@@ -174,7 +197,9 @@ Running the `workout /list` command will show the workout list as follows:
 ```
 ----------------------------------------------------------------------
 Showing workouts 1-1 of 1:
+
 1. russian twist (50 reps)
+
 Showed all workouts in list
 ----------------------------------------------------------------------
 ```
@@ -220,12 +245,77 @@ Now running the `workout /list` command again will show the workout list as foll
 ```
 ----------------------------------------------------------------------
 Showing workouts 1-3 of 3:
+
 1. push up (15 reps)
+2. sit up (10 reps)
+3. pull up (10 reps)
+
+Showed all workouts in list
+----------------------------------------------------------------------
+```
+---
+### Create a Plan: `plan /new`
+Creates a new plan, which consists of a plan name and the workout(s) added.
+
+Format: `plan /new <plan name> /workouts <workout number(s) separated by comma>`
+
+| Parameters                               | Description                                                                                                                                                                                              |
+|------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `<plan name>`                            | The name of the plan. Plan name must be unique.                                                                                                                                                          |
+| `<workout number(s) separated by comma>` | The workout(s) that will be added in this new plan. <ul><li>Maximum number of workouts per plan is 10.</li><li>Workouts to be added can be repeated.</li><li>`workout /list` to view workouts.</li></ul> |
+
+**Example**<br>
+The workout list upon entering `workout /list`, contains the following workouts:
+```
+----------------------------------------------------------------------
+Showing workouts 1-3 of 3:
+1. push up (10 reps)
 2. sit up (10 reps)
 3. pull up (10 reps)
 Showed all workouts in list
 ----------------------------------------------------------------------
 ```
+To create a new plan, enter the following command:
+```
+> plan /new Grow My Muscles /workouts 1, 2, 3, 1
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+Alright, the following plan has been created:
+
+	Grow My Muscles
+
+----------------------------------------------------------------------
+```
+A new plan containing the workouts the user had specified earlier will be created and added to the application's list of plans.
+
+---
+### List A Plan: `plan /list`
+Displays all available plan names in the application's plan list.
+
+Format: `plan /list`
+
+**Example**<br>
+To list the plan names, enter the following command:
+```
+> plan /list
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+Here are all your plan(s).
+To view each plan in detail, enter
+'plan /details <plan number in list>'.
+
+1. Plan A
+2. Plan B
+3. Grow My Muscles
+
+----------------------------------------------------------------------
+```
+In the current plans list above, there are 3 plans available.
+
 ---
 ### Update Schedule: `schedule /update`
 Update the plan schedule for a particular day of the week.
@@ -293,8 +383,9 @@ To view all the plans scheduled for the week, enter the following command:
 
 ----------------------------------------------------------------------
 ```
-On default, if no plan is being scheduled for the day it is a rest day. From the expected outcome, 
+By default, if no plan is being scheduled for the day it is a rest day. From the expected outcome, 
 only arms workout plan is scheduled for Monday.
+
 ---
 
 ### Clear Schedule For A Day: `schedule /clear`
@@ -415,6 +506,216 @@ To view the changes enter command ```schedule /list```.
 ----------------------------------------------------------------------
 ```
 ---
+
+### Search For Exercise: `search /exercise`
+Find all exercises containing the specified keywords.
+
+Format: `search /exercise <exercise keyword>`
+
+**Example**
+
+Assume, the exercise list contains the following exercises:
+```
+----------------------------------------------------------------------
+1. push up
+2. bicep curl
+3. pull up
+4. squat
+5. lunge
+6. hip thrust
+7. sit up
+8. crunch
+9. russian twist
+10. running
+11. swimming
+12. jumping jack
+13. burpee
+----------------------------------------------------------------------
+```
+To search for exercises containing keywords "up", enter the following command:
+```
+> search /exercise up
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+The exercise(s) containing keywords [up] is(are) listed below.
+----------------------------------------------------------------------
+1. push up
+2. pull up
+3. sit up
+----------------------------------------------------------------------
+```
+
+---
+
+### Search For Workout: `search /workout`
+Find all workouts containing the specified keywords or number of reps.
+
+Format: `search /workout <exercise keyword or number of reps>`
+
+**Example**
+
+Assume, the workout list contains the following workouts:
+```
+----------------------------------------------------------------------
+1. pull up (10 reps)
+2. push up (1455 reps)
+3. crunch (10 reps)
+4. squat (25 reps)
+----------------------------------------------------------------------
+```
+To search for workouts containing keywords "a", enter the following command:
+```
+> search /workout a
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+The workout(s) containing keywords [a] is(are) listed below.
+----------------------------------------------------------------------
+1. squat (25 reps)
+----------------------------------------------------------------------
+```
+
+To search for workouts with number of reps = 10, enter the following command:
+```
+> search /workout 10
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+The workout(s) with reps = 10 is(are) listed below.
+----------------------------------------------------------------------
+1. pull up (10 reps)
+2. crunch (10 reps)
+----------------------------------------------------------------------
+
+```
+---
+
+### Search For Plan: `search /plan`
+Find all plans containing the specified keywords.
+
+Format: `search /plan <plan keyword>`
+
+**Example**
+
+Assume, the plan list contains the following plans:
+```
+----------------------------------------------------------------------
+Here are all your plan(s).
+To view each plan in detail, enter
+'plan /details <plan number in list>'.
+
+1. grow my muscles
+2. arms
+3. legs
+----------------------------------------------------------------------
+```
+To search for plans containing keywords "e", enter the following command:
+```
+> search /plan e
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+The plan(s) containing keywords [e] is(are) listed below.
+----------------------------------------------------------------------
+1. grow my muscles
+2. legs
+----------------------------------------------------------------------
+```
+
+---
+
+### Search For All: `search /all`
+Find all exercises, workouts and plans containing the specified keywords.
+
+Format: `search /all <keyword>`
+
+**Example**
+
+Assume, the exercise list contains the following exercises:
+```
+----------------------------------------------------------------------
+1. push up
+2. bicep curl
+3. pull up
+4. squat
+5. lunge
+6. hip thrust
+7. sit up
+8. crunch
+9. russian twist
+10. running
+11. swimming
+12. jumping jack
+13. burpee
+----------------------------------------------------------------------
+```
+and the workout list contains the following workouts:
+```
+----------------------------------------------------------------------
+1. pull up (10 reps)
+2. push up (1455 reps)
+3. crunch (10 reps)
+4. squat (25 reps)
+----------------------------------------------------------------------
+```
+and the plan list contains the following plans:
+```
+----------------------------------------------------------------------
+1. grow my muscles
+2. arms
+3. legs
+----------------------------------------------------------------------
+```
+To search for everything containing keywords "a", enter the following
+command:
+```
+> search /all a
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+The exercise(s) containing keywords [a] is(are) listed below.
+----------------------------------------------------------------------
+1. squat
+2. russian twist
+3. jumping jack
+----------------------------------------------------------------------
+The workout(s) containing keywords [a] is(are) listed below.
+----------------------------------------------------------------------
+1. squat (25 reps)
+----------------------------------------------------------------------
+The plan(s) containing keywords [a] is(are) listed below.
+----------------------------------------------------------------------
+1. arms
+----------------------------------------------------------------------
+```
+
+To search for everything containing keywords 10, enter the following
+command:
+```
+> search /all 10
+```
+**Expected Outcome**
+```
+----------------------------------------------------------------------
+Sorry, no matching exercise found.
+----------------------------------------------------------------------
+The workout(s) with reps = 10 is(are) listed below.
+----------------------------------------------------------------------
+1. pull up (10 reps)
+2. crunch (10 reps)
+----------------------------------------------------------------------
+Sorry, no matching plan found.
+----------------------------------------------------------------------
+```
+
+---
+
 ### View Help: `help`
 Lists all the commands with examples.
 
@@ -427,31 +728,114 @@ Format: `help`
 **Expected Outcome**
 ```
 ----------------------------------------------------------------------
-	 To view all workouts, please enter:
-	 workout /list
-	 This will print all the existing workouts.
-----------------------------------------------------------------------
 	 To view all exercises available, please enter:
 	 exercise /list
 	 This will print all the exercises available.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+	 To view all workouts, please enter:
+	 workout /list
+	 This will print all the existing workouts.
 ----------------------------------------------------------------------
 	 To add a workout, please enter: 
 	 workout /new <exercise name> /reps <no. of repetitions>
 	 Example: 
 	 workout /new push up /reps 10
-	 This will add a workout with 10 reps of push up.
+	 This will add a workout with 10 reps of push up
 ----------------------------------------------------------------------
 	 To delete a workout, please enter: 
-	 workout /delete <index>
+	 workout /delete <index of workout>
 	 Example: 
 	 workout /delete 1
 	 This will delete the workout with index 1 if exists.
 ----------------------------------------------------------------------
 	 To update a workout, please enter: 
-	 workout /update <index> <quantity>
+	 workout /update <index of workout> <quantity>
 	 Example: 
 	 workout /update 1 15
 	 This will update the workout with index 1 to 15 reps if exists.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+	 To view all plans, please enter:
+	 plan /list
+	 This will print all the existing plans.
+----------------------------------------------------------------------
+	 To view each plan in detail, please enter:
+	 plan /details <plan index in list>
+	 This will print all the workouts in the plan of given index.
+----------------------------------------------------------------------
+	 To add a plan, please enter: 
+	 plan /new <plan name> /workouts <workout index(s) separated by ','>
+	 Example: 
+	 The workout list upon entering workout /list, contains the
+ 	 following workouts:
+	 1. push up (10 reps)
+	 2. sit up (10 reps)
+	 3. pull up (10 reps)
+	 To create a new plan, enter the following command:
+	 plan /new Grow My Muscles /workouts 1, 2
+	 A new plan named Grow My Muscles with workout index 1 and 2
+	 will be created and added to the application's list of plans.
+----------------------------------------------------------------------
+	 To delete a plan, please enter: 
+	 plan /delete <index of plan>
+	 Example: 
+	 plan /delete 1
+	 This will delete the plan with index 1 if exists.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+	 To view the schedule, please enter:
+	 schedule /list
+	 This will print the schedule.
+----------------------------------------------------------------------
+	 To update schedule, please enter: 
+	 schedule /update <day index [1-7]> <plan index in the list>
+	 Example: 
+	 The plan list upon entering plan /list, contains the
+ 	 following plans:
+	 1. arms
+	 2. stronger arms
+	 3. Grow My Muscles
+	 To update the plan schedule for Monday with plan 1, enter the
+ 	 following command:
+	 schedule /update 1 1
+	 This will update the schedule of Monday with a plan named arms.
+----------------------------------------------------------------------
+	 To clear schedule, please enter: 
+	 schedule /clear <day index [1-7]>
+	 This will clear the schedule for the given day.
+	 schedule /clearall
+	 This will clear the schedule for everyday.
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+	 To search for exercise(s), please enter: 
+	 search /exercise <exercise keyword>
+	 Example: 
+	 search /exercise up
+	 This will show the exercise(s) containing keyword up if exist.
+----------------------------------------------------------------------
+	 To search for workout(s), please enter: 
+	 search /workout <exercise keyword or number of reps>
+	 Example: 
+	 search /workout up
+	 This will show the workout(s) containing exercise with keyword
+	 up if exist.
+	 search /workout 15
+	 This will show the workout(s) with reps = 15 if exist.
+----------------------------------------------------------------------
+	 To search for plan(s), please enter: 
+	 search /plan <plan keyword>
+	 Example: 
+	 search /plan grow
+	 This will show the plan(s) containing keyword grow if exist.
+----------------------------------------------------------------------
+	 To search for everything related to the keyword, please enter: 
+	 search /all <keyword>
+	 Example: 
+	 search /all a
+	 This will show the exercise(s), workout(s) and plan(s) containing
+	 keyword a if exist.
+----------------------------------------------------------------------
 ----------------------------------------------------------------------
 	 To exit werkIt, please enter: 
 	 exit
@@ -469,7 +853,9 @@ When you start WerkIt! for the first time, the following directory and files are
 ```
 werkItResources/        // Primary resource directory for WerkIt!
     ├── exercises.txt   // Text file containing a list of exercises
-    └── workouts.txt    // Text file containing a list of user-created workouts
+    ├── workouts.txt    // Text file containing a list of user-created workouts
+    ├── plans.txt       // Text file containing a list of user-created plans
+    └── schedule.txt    // Text file containing a 7-day schedule of user-assigned plans for each day
 ```
 
 Do note that the directory (and by extension, the files) will be created in your terminal's
@@ -502,12 +888,14 @@ first time. Your saved data should be in that directory.
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
+Below is a summary of all the commands available in the WerkIt! application.
 
-| Action         | Format and Example                                                                                                         |
-|:---------------|:---------------------------------------------------------------------------------------------------------------------------|
-| Create Workout | Format: `workout /new <exercise name> /reps <number of repetitions>`<br/>Example: `workout /new biceps curl /reps 1`       |
-| Delete Workout | Format: `workout /delete <workout number to delete>`<br/>Example: `workout /delete 2`                                      |
-| Update Workout | Format: `workout /update <index of workout to be updated> <new number of repetitions>`<br/>Example: `workout /update 1 15` |
-| View Exercise  | Format: `exercise /list`<br/>Example: `exercise /list`                                                                     |
-| View Help      | Format: `help`<br/>Example: `help`                                                                                         |
+| Action         | Format and Example                                                                                                                 |
+|:---------------|:-----------------------------------------------------------------------------------------------------------------------------------|
+| Create Workout | Format: `workout /new <exercise name> /reps <number of repetitions>`<br/>Example: `workout /new biceps curl /reps 1`               |
+| Delete Workout | Format: `workout /delete <workout number to delete>`<br/>Example: `workout /delete 2`                                              |
+| Update Workout | Format: `workout /update <index of workout to be updated> <new number of repetitions>`<br/>Example: `workout /update 1 15`         |
+| View Exercise  | Format: `exercise /list`<br/>Example: `exercise /list`                                                                             |
+| Create Plan    | Format: `plan /new <plan name> /workouts <workout number(s) separated by comma>`<br/>Example: `plan /new Plan A /workouts 1, 2, 3` |
+| List Plan      | Format: `plan /list`                                                                                                               |
+| View Help      | Format: `help`<br/>Example: `help`                                                                                                 |

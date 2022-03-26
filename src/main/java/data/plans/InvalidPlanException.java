@@ -5,8 +5,7 @@ package data.plans;
  */
 public class InvalidPlanException extends Exception {
     // Pre-defined error messages
-    public static final String DUPLICATE_PLAN_NAME_ERROR_MSG = "Uh oh, there already is an existing plan with "
-            + "an identical\nplan name.";
+    public static final String INVALID_PLAN_NAME_ERROR_MSG = "Uh oh, the plan name is invalid.";
     public static final String WORKOUT_NUMBER_OUT_OF_RANGE = "Uh oh, the index specified is out of range.\n"
             + "(Index specified needs to be within the number of workouts)";
     public static final String MIN_MAX_WORKOUTS_IN_A_PLAN = "Uh oh, number of workouts specified is out of range.\n"
