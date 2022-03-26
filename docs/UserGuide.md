@@ -16,7 +16,7 @@ your favourite personal expenditure tracker.
 
 ## Quick Start
 
-1. Ensure that you have Java 11 or above installed.
+1. Ensure that you are running Java 11 on your device.
 2. Down the latest `PlanITarium.jar` from [releases](https://github.com/AY2122S2-CS2113T-T10-2/tp/releases).
 3. Move the file into a folder that you want to use as the _home folder_.
 4. Open a terminal in the home folder and run `java -jar PlanITarium.jar`.
