@@ -3,6 +3,7 @@
 package seedu.planitarium.person;
 
 import seedu.planitarium.ProjectLogger;
+import seedu.planitarium.category.Category;
 import seedu.planitarium.global.Constants;
 
 import java.util.logging.Level;
@@ -145,11 +146,13 @@ public class Family {
      * @param description The reason for the expenditure
      * @param amount The value of the expenditure
      * @param isPermanent Whether the expenditure is recurring
+     * @param category The category of the expenditure
      */
-    public void addExpend(int personIndex, int group, String description, double amount, boolean isPermanent) {
+    public void addExpend(int personIndex, int group, String description, double amount, boolean isPermanent,
+                          Category category) {
         String infoString = "Method addExpend() called";
         logger.log(Level.INFO, infoString);
-        getList(group).addExpend(personIndex, description, amount, isPermanent);
+        getList(group).addExpend(personIndex, description, amount, isPermanent, category);
     }
 
     /**

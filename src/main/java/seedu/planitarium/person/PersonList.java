@@ -3,6 +3,7 @@
 package seedu.planitarium.person;
 
 import seedu.planitarium.ProjectLogger;
+import seedu.planitarium.category.Category;
 import seedu.planitarium.global.Constants;
 
 import java.util.ArrayList;
@@ -163,8 +164,7 @@ public class PersonList {
     public void addIncome(int personIndex, String description, double amount, boolean isPermanent) {
         String infoString = "Method addIncome() called";
         logger.log(Level.INFO, infoString);
-        int listIndex = personIndex - 1;
-        getPerson(listIndex).addIncome(description, amount, isPermanent, Constants.FOR_USER);
+        getPerson(personIndex).addIncome(description, amount, isPermanent, Constants.FOR_USER);
     }
 
     /**
@@ -176,8 +176,7 @@ public class PersonList {
     public void deleteIncome(int personIndex, int incomeIndex) {
         String infoString = "Method deleteIncome() called";
         logger.log(Level.INFO, infoString);
-        int listIndex = personIndex - 1;
-        getPerson(listIndex).deleteIncome(incomeIndex);
+        getPerson(personIndex).deleteIncome(incomeIndex);
     }
 
     /**
@@ -187,12 +186,12 @@ public class PersonList {
      * @param description The reason for the expenditure
      * @param amount The value of the expenditure
      * @param isPermanent Whether the expenditure is recurring
+     * @param category The category of the expenditure
      */
-    public void addExpend(int personIndex, String description, double amount, boolean isPermanent) {
-        String infoString = "Method addIncome() called";
+    public void addExpend(int personIndex, String description, double amount, boolean isPermanent, Category category) {
+        String infoString = "Method addExpend() called";
         logger.log(Level.INFO, infoString);
-        int listIndex = personIndex - 1;
-        getPerson(listIndex).addIncome(description, amount, isPermanent, Constants.FOR_USER);
+        getPerson(personIndex).addExpend(description, amount, isPermanent, Constants.FOR_USER, category);
     }
 
     /**
@@ -204,8 +203,7 @@ public class PersonList {
     public void deleteExpend(int personIndex, int expendIndex) {
         String infoString = "Method deleteIncome() called";
         logger.log(Level.INFO, infoString);
-        int listIndex = personIndex - 1;
-        getPerson(listIndex).deleteIncome(expendIndex);
+        getPerson(personIndex).deleteIncome(expendIndex);
     }
 
     /**

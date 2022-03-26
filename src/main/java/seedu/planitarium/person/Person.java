@@ -3,6 +3,7 @@
 package seedu.planitarium.person;
 
 import seedu.planitarium.ProjectLogger;
+import seedu.planitarium.category.Category;
 import seedu.planitarium.global.Constants;
 import seedu.planitarium.money.IncomeList;
 import seedu.planitarium.money.ExpenditureList;
@@ -81,10 +82,11 @@ public class Person {
      * @param amount The value of the expenditure
      * @param isPermanent Whether the expenditure is recurring
      * @param isSilent Whether to print confirmation
+     * @param category The category of the expenditure
      */
-    public void addExpend(String description, double amount, boolean isPermanent, boolean isSilent) {
+    public void addExpend(String description, double amount, boolean isPermanent, boolean isSilent, Category category) {
         assert (description != null);
-        expenditureList.addExpenditure(description, amount, isPermanent);
+        expenditureList.addExpenditure(description, amount, isPermanent, category);
         if (isSilent) {
             return;
         }
