@@ -24,10 +24,6 @@ public class ProjectLogger {
         }
     }
 
-    public Logger getLogger() {
-        return this.logger;
-    }
-
     /**
      * Initialize a logger for the program.
      * 
@@ -40,5 +36,9 @@ public class ProjectLogger {
         fh.setFormatter(new SimpleFormatter());
         fh.setLevel(Level.ALL);
         this.logger.addHandler(fh);
+    }
+
+    public void log(Level level, String message) {
+        logger.log(level, message);
     }
 }
