@@ -269,11 +269,11 @@ public class WorkoutList {
      *
      * @param userArgument The argument entered by user, that is, the workout number to delete.
      * @return deletedWorkout, the workout object that is deleted from the workoutsList.
-     * @throws WorkoutOutOfRangeException If workout number to delete is out of range.
      * @throws NumberFormatException If workout number could not be parsed into an integer.
      * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
+     * @throws InvalidWorkoutException        If workout number to delete is out of range.
      */
-    public Workout deleteWorkout(String userArgument) throws WorkoutOutOfRangeException,
+    public Workout deleteWorkout(String userArgument) throws InvalidWorkoutException,
             NumberFormatException, ArrayIndexOutOfBoundsException {
         logger.entering(getClass().getName(), "deleteWorkout");
         int indexToDelete = Integer.parseInt(userArgument.trim());
@@ -282,7 +282,7 @@ public class WorkoutList {
         boolean isIndexToDeleteValid = checkIndexIsWithinRange(indexToDelete);
         if (!isIndexToDeleteValid) {
             logger.log(Level.WARNING, "Workout number to delete is out of range!");
-            throw new WorkoutOutOfRangeException(className, WorkoutOutOfRangeException.INDEX_VALUE_OUT_OF_RANGE);
+            throw new InvalidWorkoutException(className, InvalidWorkoutException.INDEX_VALUE_OUT_OF_RANGE);
         }
 
         assert (indexToDelete > 0) && (indexToDelete <= workoutsDisplayList.size());
@@ -315,11 +315,10 @@ public class WorkoutList {
      * @return updatedWorkout The workout object which has been updated.
      * @throws ArrayIndexOutOfBoundsException For operations which involves index checking.
      * @throws NumberFormatException          If workout index and number of reps could not be parsed into an integer.
-     * @throws WorkoutOutOfRangeException     If workout index is out of total number of workout in workoutsList.
-     * @throws InvalidWorkoutException        If the value of repetition is not valid.
+     * @throws InvalidWorkoutException        If number of repetition is not valid or workout number to update is out of range.
      */
     public Workout updateWorkout(String userArgument) throws ArrayIndexOutOfBoundsException,
-            NumberFormatException, WorkoutOutOfRangeException, InvalidWorkoutException {
+            NumberFormatException, InvalidWorkoutException {
         logger.entering(getClass().getName(), "updateWorkout");
         String[] updateDetails = userArgument.split(" ", 2);
         String indexToUpdateString = updateDetails[0].trim();
@@ -333,7 +332,7 @@ public class WorkoutList {
 
         if (!isIndexToUpdateValid) {
             logger.log(Level.WARNING, "Workout index to update is out of range!");
-            throw new WorkoutOutOfRangeException(className, WorkoutOutOfRangeException.INDEX_VALUE_OUT_OF_RANGE);
+            throw new InvalidWorkoutException(className, InvalidWorkoutException.INDEX_VALUE_OUT_OF_RANGE);
         }
         if (!isNewRepsValueValid) {
             logger.log(Level.WARNING, "Repetition value is invalid.");

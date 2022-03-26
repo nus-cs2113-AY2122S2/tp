@@ -5,6 +5,8 @@ import data.workouts.InvalidWorkoutException;
 import data.workouts.Workout;
 import data.workouts.WorkoutList;
 import storage.LogHandler;
+import textcolors.TextColor;
+import werkit.UI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -223,6 +225,26 @@ public class PlanList {
         System.out.println("To view each plan in detail, enter\n'plan /details <plan number in list>'.\n");
         for (int i = 0; i < getPlansDisplayList().size(); i += 1) {
             System.out.println((i + 1) + ". " + getPlansDisplayList().get(i));
+        }
+    }
+
+    /**
+     * Prints the plan details, workouts in the plan.
+     */
+    public void listPlanDetails(String userArgument, UI ui) throws NumberFormatException {
+        int indexOfPlan =  Integer.parseInt(userArgument.trim());
+        Plan planToViewDetails = getPlanFromIndexNum(indexOfPlan);
+        String planName = getPlansDisplayList().get(indexOfPlan - 1);
+
+        ArrayList<Workout> workoutsInPlan = planToViewDetails.getWorkoutsInPlanList();
+        int numberOfWorkoutsInPlan = workoutsInPlan.size();
+        assert (numberOfWorkoutsInPlan <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN && numberOfWorkoutsInPlan > 0);
+
+        System.out.println("Here are the " + numberOfWorkoutsInPlan + " workouts in ["
+                + ui.getColorText(TextColor.COLOR_YELLOW, planName) + "].");
+
+        for (int i = 0; i < numberOfWorkoutsInPlan; i++) {
+            System.out.println((i + 1) + ". " + workoutsInPlan.get(i).toString());
         }
     }
 

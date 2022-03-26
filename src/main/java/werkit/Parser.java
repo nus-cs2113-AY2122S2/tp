@@ -363,6 +363,12 @@ public class Parser {
             }
             break;
         case DETAILS_ACTION_KEYWORD:
+            if (userInput.split(" ", 3).length < EXPECTED_NUMBER_OF_PARAMETERS_WITH_ARGUMENTS) {
+                logger.log(Level.WARNING, "User has entered an invalid plan details command action.");
+                throw new InvalidCommandException(className,
+                        InvalidCommandException.INVALID_PLAN_DETAILS_COMMAND_ERROR_MSG);
+            }
+            arguments = userInput.split(" ", 3)[2];
             break;
         default:
             logger.log(Level.WARNING, "User has entered an invalid plan command action.");

@@ -68,8 +68,7 @@ class WorkoutListTest {
 
     @Test
     void deleteWorkout_validIndexToDelete_expectDeleteWorkout() throws
-            InvalidWorkoutException, InvalidExerciseException,
-            WorkoutOutOfRangeException {
+            InvalidWorkoutException, InvalidExerciseException {
 
         wl.createAndAddWorkout("push up /reps 11");
         wl.createAndAddWorkout("sit up /reps 15");
@@ -145,7 +144,7 @@ class WorkoutListTest {
     }
 
     @Test
-    void updateWorkout_workoutIndexOutOfRange_expectWorkoutOutOfRangeException() throws InvalidWorkoutException,
+    void updateWorkout_workoutIndexOutOfRange_expectInvalidWorkoutException() throws InvalidWorkoutException,
             InvalidExerciseException {
         wl.createAndAddWorkout("push up /reps 11");
         wl.createAndAddWorkout("sit up /reps 15");

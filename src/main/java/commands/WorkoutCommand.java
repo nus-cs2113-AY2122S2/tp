@@ -186,10 +186,6 @@ public class WorkoutCommand extends Command {
             System.out.println("Please try again. Alternatively, type 'help' if you need\n"
                     + "more information on the commands.");
 
-        } catch (WorkoutOutOfRangeException e) {
-            System.out.println(e.getMessage());
-            System.out.println("Please try again.");
-
         } catch (IOException e) {
             System.out.println(UI.IOEXCEPTION_ERROR_MESSAGE);
             System.exit(-1);
