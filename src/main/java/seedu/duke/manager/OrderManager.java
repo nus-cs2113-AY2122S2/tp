@@ -65,10 +65,8 @@ public class OrderManager extends Manager {
 
     /**
      * add dish to an order.
-     *
-     * @param dishIdx     index of dish.
-     * @param orderIdx    index of order.
-     * @param dishManager dishmanager instance.
+     * @param dish dish element.
+     * @param orderIdx index of the order.
      */
     public void addDishToOrder(Dish dish, int orderIdx) {
         if (orderIdx == this.orders.size()) {
