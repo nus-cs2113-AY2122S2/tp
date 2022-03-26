@@ -12,7 +12,7 @@ import java.util.logging.Level;
 /**
  * Represents a command object that produces a summary of expenditure for a specified Session object.
  *
- * @author Warren
+ * @author Saurav
  */
 public class SessionViewCommand extends Command {
 
