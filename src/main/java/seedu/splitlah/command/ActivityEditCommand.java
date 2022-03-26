@@ -216,7 +216,7 @@ public class ActivityEditCommand extends Command {
         boolean hasDuplicates = PersonList.hasNameDuplicates(involvedList);
         TextUI ui = manager.getUi();
         if (hasDuplicates) {
-            manager.getUi().printlnMessage(Message.ACTIVITYEDIT_DUPLICATE_NAME);
+            ui.printlnMessage(Message.ACTIVITYEDIT_DUPLICATE_NAME);
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_DUPLICATE_NAMES_IN_INVOLVED_LIST);
             return;
         }
