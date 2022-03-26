@@ -1,6 +1,5 @@
 package seedu.splitlah.parser;
 
-// import
 import seedu.splitlah.command.Command;
 import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
