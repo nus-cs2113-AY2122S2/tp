@@ -16,6 +16,14 @@ public class ActivityDeleteCommandParser implements CommandParser<ActivityDelete
             ParserUtils.ACTIVITY_ID_DELIMITER
     };
 
+    /**
+     * Returns a ActivityDeleteCommand object after parsing the input arguments from the user.
+     *
+     * @param commandArgs A String object representing arguments provided by the user.
+     * @return An ActivityDeleteCommand object if all necessary parameters required are found in the input arguments.
+     * @throws InvalidFormatException If at least one of the necessary parameters cannot be found
+     *                                in the input arguments.
+     */
     @Override
     public ActivityDeleteCommand getCommand(String commandArgs) throws InvalidFormatException {
         try {
