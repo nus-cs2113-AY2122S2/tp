@@ -1,14 +1,19 @@
 package seedu.sherpass.util.timetable;
 
 import seedu.sherpass.task.Task;
+import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Ui;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
 import static seedu.sherpass.Main.LOGGER;
+
+import static seedu.sherpass.constant.DateAndTimeFormat.dayOnlyFormat;
+
 import static seedu.sherpass.constant.TimetableConstant.PARTITION_PIPE_LINE_LENGTH;
 import static seedu.sherpass.constant.TimetableConstant.PARTITION_SPACE_OFFSET_LENGTH;
 import static seedu.sherpass.constant.TimetableConstant.TASK_SPACE_COMPARE_LENGTH;
@@ -49,32 +54,56 @@ public class TimetableLogic {
      * Returns the LocalDate object with its day set to Monday.
      *
      *
-     * @param currentDate The current date
+     * @param localDate The date that is given
      * @param ui User interface
      * @return Returns LocalDate with the day of Monday
      */
-    public static LocalDate resetDateToMonday(String currentDate, Ui ui) {
+    public static LocalDate resetDateToMonday(LocalDate localDate, Ui ui) {
+        String currentDate = localDate.format(dayOnlyFormat);
         switch (currentDate) {
         case "Mon":
-            return LocalDate.now();
+            return localDate;
         case "Tue":
-            return LocalDate.now().minus(1, ChronoUnit.DAYS);
+            return localDate.minus(1, ChronoUnit.DAYS);
         case "Wed":
-            return LocalDate.now().minus(2, ChronoUnit.DAYS);
+            return localDate.minus(2, ChronoUnit.DAYS);
         case "Thu":
-            return LocalDate.now().minus(3, ChronoUnit.DAYS);
+            return localDate.minus(3, ChronoUnit.DAYS);
         case "Fri":
-            return LocalDate.now().minus(4, ChronoUnit.DAYS);
+            return localDate.minus(4, ChronoUnit.DAYS);
         case "Sat":
-            return LocalDate.now().minus(5, ChronoUnit.DAYS);
+            return localDate.minus(5, ChronoUnit.DAYS);
         case "Sun":
-            return LocalDate.now().minus(6, ChronoUnit.DAYS);
+            return localDate.minus(6, ChronoUnit.DAYS);
         default:
             ui.showToUser("Oops! There seems to be some error\n"
                     + "while running the system.\n"
                     + "Please contact the developers for help.\n");
             LOGGER.log(Level.WARNING, "Input that caused the error: " + currentDate);
             return null;
+        }
+    }
+
+    public static void showMonthlySchedule(TaskList taskList, Ui ui, Month month) {
+        LocalDate firstDayOfMonth = TimetableLogic.getFirstDayOfMonth(month);
+        ArrayList<Task> monthlySchedule = taskList.getFilteredTasksByMonth(firstDayOfMonth);
+
+        if (monthlySchedule.isEmpty()) {
+            ui.showToUser(String.format("Your schedule is empty for %s", month));
+        } else {
+            taskList.printTaskList(monthlySchedule, ui);
+        }
+    }
+
+    protected static LocalDate getFirstDayOfMonth(Month month) {
+        Month currentMonth = LocalDate.now().getMonth();
+
+        int year = LocalDate.now().getYear();
+
+        if (month.getValue() - currentMonth.getValue() < 0) {
+            return LocalDate.of(year + 1, month, 1);
+        } else {
+            return LocalDate.of(year, month, 1);
         }
     }
 }
