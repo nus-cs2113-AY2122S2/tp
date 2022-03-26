@@ -25,7 +25,7 @@ public class CommandParser {
     private static final String CHECK_ROOM_BY_LEVEL = "check level";
     private static final String CHECK_BY_CATEGORY = "check category";
     private static final String ASSIGN_HOUSEKEEPER = "Assign";
-    public static final String VIEW_HOUSEKEEPER_COMMAND = "View Recorded Housekeeper";
+    private static final String VIEW_HOUSEKEEPER_COMMAND = "View Recorded Housekeeper";
 
     /**
      * Parses the user-provided command and creates the relevant Command object.

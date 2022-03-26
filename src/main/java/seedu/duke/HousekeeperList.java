@@ -33,7 +33,7 @@ public class HousekeeperList {
     public boolean hasNameAdded(String name) {
         String convertNameToLowerCase = name.toLowerCase();
         ArrayList<Housekeeper> housekeeperFound = (ArrayList<Housekeeper>) housekeeperList.stream()
-                .filter((t) -> t.getName().toLowerCase().contains(convertNameToLowerCase))
+                .filter((t) -> t.getName().toLowerCase().equals(convertNameToLowerCase))
                 .collect(toList());
         if (housekeeperFound.size() >= 1) {
             return true;

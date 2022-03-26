@@ -9,6 +9,8 @@ import java.util.logging.Level;
 public class AddHousekeeperCommand extends Command {
     private Housekeeper housekeeper;
     private static final String AGE_INDICATE = "~";
+    private static final int MIN_AGE_ACCEPTED = 21;
+    private static final int MAX_AGE_ACCEPTED = 60;
     private static Logger logger = Logger.getLogger("housekeeperLogger");
 
     /**
@@ -36,7 +38,7 @@ public class AddHousekeeperCommand extends Command {
      * @throws InvalidHousekeeperProfile Command enter regarding the housekeeper profile is wrong.
      */
     private Housekeeper extractDetails(String commandStringWithoutCommand)
-            throws InvalidAgeException, InvalidHousekeeperProfile {
+            throws InvalidAgeException, InvalidHousekeeperProfile, UnderAgeException, OverAgeException {
         boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(AGE_INDICATE);
         if (isSymbolIncorrect) {
             logger.log(Level.WARNING, "Housekeeper command usage is found to be wrong.");
@@ -69,7 +71,7 @@ public class AddHousekeeperCommand extends Command {
      * @return Valid age.
      * @throws InvalidAgeException When age given is not valid.
      */
-    private int extractAge(String inputAge) throws InvalidAgeException {
+    private int extractAge(String inputAge) throws InvalidAgeException, UnderAgeException, OverAgeException {
         int ageNumber;
         String age;
         try {
@@ -83,6 +85,13 @@ public class AddHousekeeperCommand extends Command {
             throw new InvalidAgeException();
         }
         assert (!age.isEmpty()) : "Age should not be empty.";
+        if (ageNumber < MIN_AGE_ACCEPTED) {
+            throw new UnderAgeException();
+        }
+        if (ageNumber > MAX_AGE_ACCEPTED) {
+            throw new OverAgeException();
+        }
+        assert (ageNumber >= MIN_AGE_ACCEPTED & ageNumber <= MAX_AGE_ACCEPTED ) : "Age range is invalid.";
         return ageNumber;
     }
 
