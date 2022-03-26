@@ -1,8 +1,10 @@
 # User Guide
 
-SplitLah is a CLI program that lets users split bills proportionally amongst themselves after a group outing. SplitLah does
-the work of calculating how much each participant must pay across multiple activities, and keeps track of who paid the total
-bill for each activity.
+SplitLah is a desktop app with a Command Line Interface (CLI) for splitting bills amongst users after a group outing.
+Group outings can consist of several activities with different people paying the bill for each one—but SplitLah does
+the work of calculating how much each participant owes and whom they must pay at the end of the outing.
+SplitLah consolidates all debts intelligently so they can be paid off with the fewest number of transactions possible. 
+If you can type fast, SplitLah can manage your outings faster than apps using a Graphical User Interface (GUI).
 
 ## Contents
 * [User Guide](#user-guide)
@@ -32,16 +34,21 @@ bill for each activity.
 ## Introduction
 Value proposition:
 
-- Allows users to keep track of several activities and their participants.
-- Split costs evenly or independently depending on what is required.
-- Combines all payments due together for easy settlement of payments.
+- Keeps track of several activities and their participants.
+- Keeps track of several sessions independently, each with their own activities and participants.
+- Keeps track of who paid the bill for each activity.
+- Splits costs evenly or independently depending on what the user requires.
+- Consolidates debts intelligently so they can be settled with as few transactions as possible.
 - Can be operated quickly by an experienced typist.
+- Command format is consistent, intuitive and flexible in the order of arguments supplied by the user, making SplitLah
+easy to use.
 
 Target users:
 
 - People who go on group outings often and split bills.
 - People who dislike manually calculating how much people owe across several activities.
 - People who go on group outings where different people pay for different activities, making bill-splitting harder.
+- People who want to manage outings with multiple social circles in one app.
 
 ## How SplitLah works
 - An activity represents a single group activity, paid for by one person. An activity stores a list of its participants,
