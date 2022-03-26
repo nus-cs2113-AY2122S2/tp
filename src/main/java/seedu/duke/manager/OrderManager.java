@@ -88,14 +88,7 @@ public class OrderManager extends Manager {
         System.out.println("Added successfully!\n");
 
     }
-
-    /**
-     * get order from order list.
-     *
-     * @param orderIndex    index of order
-     * @throws IndexOutOfBoundsException if orderIndex is not valid
-     * @return the specific order
-     */
+    
     public Order getOrder(int orderIndex) throws IndexOutOfBoundsException {
         if (orderIndex < 0 || orders.size() <= orderIndex) {
             throw new IndexOutOfBoundsException();
