@@ -311,4 +311,45 @@ class ParserTest {
         }
     }
 
+    @Test
+    void parseUpdateMedicineStockTest() {
+        try {
+            Parser.parseUpdateMedicineStock(null);
+            assert true;
+        } catch (HalpmiException e) {
+            fail("Should not be throwing exception!");
+        }
+    }
+
+    @Test
+    void parseUpdateMedicineStockInvalidParamTest() {
+        try {
+            Parser.parseUpdateMedicineStock("");
+            fail("Should be throwing exception!");
+        } catch (HalpmiException e) {
+            assert true;
+        }
+    }
+
+    @Test
+    void parseClearExpiredMedicineTest() {
+        try {
+            Parser.parseClearExpiredMedicine(null);
+            assert true;
+        } catch (HalpmiException e) {
+            fail("Should not be throwing exception!");
+        }
+    }
+
+    @Test
+    void parseClearExpiredMedicineInvalidParamTest() {
+        try {
+            Parser.parseClearExpiredMedicine("");
+            fail("Should be throwing exception!");
+        } catch (HalpmiException e) {
+            assert true;
+        }
+    }
+
+
 }
