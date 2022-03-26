@@ -34,10 +34,22 @@ class ProfileTest {
      */
     @Test
     public void hasSessionName_inputContainsNonExistingSessionName_false() {
+        String sessionOneArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob";
+        Command createSessionOne = Parser.getCommand(sessionOneArgs);
+        createSessionOne.run(manager);
+
         String sessionNameToTest = "School gathering";
         boolean isExists = manager.getProfile().hasSessionName(sessionNameToTest);
-        assertEquals(false, isExists);
         assertFalse(isExists);
+    }
+
+    /**
+     * Checks if method returns false when the list of session is empty.
+     */
+    @Test
+    public void hasSessionName_sessionListEmpty_false() {
+        String sessionNameToTest = "Class gathering";
+        boolean isExists = manager.getProfile().hasSessionName(sessionNameToTest);
         assertFalse(isExists);
     }
 
@@ -46,9 +58,12 @@ class ProfileTest {
      */
     @Test
     public void hasSessionId_inputContainsExistingSessionId_true() {
+        String sessionArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob";
+        Command createSession = Parser.getCommand(sessionArgs);
+        createSession.run(manager);
+
         int sessionIdToTest = 1;
         boolean isExists = manager.getProfile().hasSessionId(sessionIdToTest);
-        assertEquals(true, isExists);
         assertTrue(isExists);
     }
 
@@ -57,13 +72,24 @@ class ProfileTest {
      */
     @Test
     public void hasSessionId_inputContainsNonExistingSessionId_false() {
+        String sessionArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob";
+        Command createSession = Parser.getCommand(sessionArgs);
+        createSession.run(manager);
+
         int sessionIdToTest = 10;
         boolean isExists = manager.getProfile().hasSessionId(sessionIdToTest);
-        assertEquals(false, isExists);
         assertFalse(isExists);
     }
 
+    /**
+     * Checks if method returns false when the list of session is empty.
+     */
+    @Test
+    public void hasSessionId_sessionListEmpty_false() {
+        int sessionIdToTest = 1;
+        boolean isExists = manager.getProfile().hasSessionId(sessionIdToTest);
         assertFalse(isExists);
+    }
 
     /**
      * Checks if the correct Session object is properly returned when a Session object with
@@ -71,6 +97,10 @@ class ProfileTest {
      */
     @Test
     public void getSession_validSessionId_sessionReturned() {
+        String sessionArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob";
+        Command createSession = Parser.getCommand(sessionArgs);
+        createSession.run(manager);
+
         int sessionIdToTest = 1;
         try {
             Session retrievedSession = manager.getProfile().getSession(sessionIdToTest);
@@ -86,6 +116,10 @@ class ProfileTest {
      */
     @Test
     public void getSession_invalidSessionId_InvalidDataExceptionThrown() {
+        String sessionArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob";
+        Command createSession = Parser.getCommand(sessionArgs);
+        createSession.run(manager);
+
         int sessionIdToTest = 10;
         try {
             manager.getProfile().getSession(sessionIdToTest);
