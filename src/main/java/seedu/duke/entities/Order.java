@@ -15,16 +15,8 @@ public class Order implements Serializable {
         this.dishes = new ArrayList<Dish>();
     }
 
-    public void addDishToOrder(Dish dish) {
-        this.dishes.add(dish);
-    }
-
     public void removeDishFromOrderByIndex(int i) {
         this.dishes.remove(i);
-    }
-
-    public int getOrderLength() {
-        return this.dishes.size();
     }
 
     public double getTotalPrice() {
