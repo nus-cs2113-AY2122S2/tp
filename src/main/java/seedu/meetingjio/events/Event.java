@@ -74,4 +74,40 @@ public abstract class Event {
         return false;
     }
 
+    /**
+     * Convert the day of an event to its corresponding number.
+     * This method is used to evaluate which event comes first for the sorting algorithm.
+     *
+     * @return numericDay Integer that corresponds to the day of the event
+     */
+    public int getDay() {
+        int numericDay = 0;
+        switch (day) {
+        case "monday":
+            numericDay = 1;
+            break;
+        case "tuesday":
+            numericDay = 2;
+            break;
+        case "wednesday":
+            numericDay = 3;
+            break;
+        case "thursday":
+            numericDay = 4;
+            break;
+        case "friday":
+            numericDay = 5;
+            break;
+        case "saturday":
+            numericDay = 6;
+            break;
+        case "sunday":
+            numericDay = 7;
+            break;
+        default:
+            break;
+        }
+        return numericDay;
+    }
+
 }

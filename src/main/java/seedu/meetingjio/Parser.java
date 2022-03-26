@@ -12,12 +12,9 @@ import seedu.meetingjio.exceptions.InvalidDayException;
 import seedu.meetingjio.exceptions.MissingValueException;
 import seedu.meetingjio.exceptions.InvalidTimeException;
 import seedu.meetingjio.exceptions.InvalidModeException;
-import seedu.meetingjio.exceptions.TimetableNotFoundException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import seedu.meetingjio.timetables.MasterTimetable;
 
 import static seedu.meetingjio.common.Messages.MESSAGE_HELP;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
@@ -27,8 +24,6 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_COMMAND;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST;
 
 public class Parser {
     private final String command;
@@ -57,7 +52,7 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete();
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ClearCommand(arguments.trim());
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         default:
@@ -183,8 +178,9 @@ public class Parser {
      */
     public Command prepareDelete() {
         try {
-            int index = Integer.parseInt(arguments);
-            return new DeleteCommand(index);
+            String name = getParametersByIndexFromInput(0,arguments);
+            int index = Integer.parseInt(getParametersByIndexFromInput(1,arguments));
+            return new DeleteCommand(name,index);
         } catch (NumberFormatException nfe) {
             logger.log(Level.INFO, "Invalid index to delete Error detected.");
             return new CommandResult(ERROR_INVALID_INDEX_FORMAT);
@@ -193,6 +189,10 @@ public class Parser {
 
     private String getCommandFromInput(String input) {
         return input.split(" ")[0].trim().toLowerCase();
+    }
+
+    private String getParametersByIndexFromInput(int index,String input) {
+        return input.split(" ")[index].trim().toLowerCase();
     }
 
     private String getArgumentsFromInput(String input) {
@@ -229,8 +229,8 @@ public class Parser {
                     return i;
                 }
             }
-            assert !str.contains(HEADINGS[i]) :
-                    String.format("String contains %s", HEADINGS[i]);
+            //assert !str.contains(HEADINGS[i]) :
+            //        String.format("String contains %s", HEADINGS[i]);
         }
         return -1;
     }

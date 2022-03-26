@@ -1,9 +1,14 @@
 package seedu.meetingjio.commands;
 
 import seedu.meetingjio.events.Event;
+import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
 
+import java.util.logging.Level;
+
+import static seedu.meetingjio.common.ErrorMessages.ERROR_TIMETABLE_NOT_FOUND_TO_DELETE;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_EXCEPTION_NOT_HANDLED;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DELETE_COMMAND_FAILED;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
 
@@ -11,9 +16,11 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     private final int index;
+    private final String name;
 
-    public DeleteCommand(int index) {
+    public DeleteCommand(String name,int index) {
         this.index = index;
+        this.name = name;
     }
 
     /**
@@ -23,7 +30,15 @@ public class DeleteCommand extends Command {
      *
      */
     public String execute(MasterTimetable masterTimetable) {
-        Timetable timetable = masterTimetable.getByIndex(0); // changes needed
+        Timetable timetable;
+        try {
+            timetable  = masterTimetable.getByName(this.name);
+        } catch (TimetableNotFoundException tnfe) {
+            return ERROR_TIMETABLE_NOT_FOUND_TO_DELETE;
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
+            return ERROR_EXCEPTION_NOT_HANDLED;
+        }
         int size = timetable.size();
         try {
             Event event = timetable.get(index - 1);
