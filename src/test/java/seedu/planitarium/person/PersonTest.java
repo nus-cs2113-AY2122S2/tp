@@ -14,7 +14,7 @@ class PersonTest {
     public void addIncome_invalidDescription_assertionError() {
         Person person = new Person(VALID_NAME);
         try {
-            person.addIncome(null, VALID_AMOUNT);
+            person.addIncome(null, VALID_AMOUNT, false);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());
@@ -36,7 +36,7 @@ class PersonTest {
     public void addExpend_invalidDescription_assertionError() {
         Person person = new Person(VALID_NAME);
         try {
-            person.addExpend(null, VALID_AMOUNT);
+            person.addExpend(null, VALID_AMOUNT, false);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());

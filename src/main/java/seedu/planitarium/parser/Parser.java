@@ -199,13 +199,16 @@ public class Parser {
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
      * @throws EmptyStringException        if string after the delimiter is blank.
      */
-    public static String parseRecurringStatus(String userInput)
+    public static boolean parseRecurringStatus(String userInput)
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_RECURRING_STATUS);
         String status = ParserUtility.parseDelimitedTerm(userInput, DELIMITER_RECURRING_STATUS).trim();
         logger.getLogger().log(Level.INFO, String.format(LOG_PARSED_VALUES, userInput, status));
-        return status;
+        if (status.equalsIgnoreCase("t")) {
+            return true;
+        }
+        return false;
     }
 
     /**
