@@ -236,9 +236,9 @@ public class TaskList {
         for (Task task : tasks) {
             if (hasDoOnDate(task) && task.getDoOnStartDateTime().toLocalDate().isEqual(firstDayOfMonth)) {
                 filteredTasks.add(task);
-            } else if (hasDoOnDate(task) &&
-                    (task.getDoOnStartDateTime().toLocalDate().isAfter(firstDayOfMonth) &&
-                    task.getDoOnStartDateTime().toLocalDate().isBefore(firstDayOfNextMonth))) {
+            } else if (hasDoOnDate(task)
+                    && (task.getDoOnStartDateTime().toLocalDate().isAfter(firstDayOfMonth)
+                    && task.getDoOnStartDateTime().toLocalDate().isBefore(firstDayOfNextMonth))) {
                 filteredTasks.add(task);
             }
         }
