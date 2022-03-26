@@ -12,7 +12,7 @@ import seedu.splitlah.ui.Message;
  */
 public class ActivityEditCommandParser implements CommandParser<ActivityEditCommand> {
 
-    private static final String COMMAND_TEXT = "activity /edit";
+    public static final String COMMAND_TEXT = "activity /edit";
 
     private static final String COMMAND_FORMAT = "Syntax:\n\t";
 

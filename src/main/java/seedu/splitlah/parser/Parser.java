@@ -4,7 +4,6 @@ import seedu.splitlah.command.Command;
 import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
-import seedu.splitlah.command.ActivityEditCommand;
 import seedu.splitlah.command.SessionCreateCommand;
 import seedu.splitlah.command.SessionDeleteCommand;
 import seedu.splitlah.command.ExitCommand;
@@ -359,7 +358,7 @@ public class Parser {
                 return ActivityListCommand.prepare(remainingArgs);
             case ActivityViewCommand.COMMAND_TEXT:
                 return ActivityViewCommand.prepare(remainingArgs);
-            case ActivityEditCommand.COMMAND_TEXT:
+            case ActivityEditCommandParser.COMMAND_TEXT:
                 return new ActivityEditCommandParser().getCommand(remainingArgs);
             case GroupCreateCommand.COMMAND_TEXT:
                 return GroupCreateCommand.prepare(remainingArgs);
