@@ -39,6 +39,8 @@ public class Message {
             + "6) Exit study mode: leave\n"
             + "7) Mark task as done: mark <task_index>";
 
+    public static final String WAITING_FOR_USER_NEXT_INPUT = "What would you like to do next?";
+
     public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after end time!";
     public static final String ERROR_EMPTY_DESCRIPTION_MESSAGE = "Description cannot be blank!";
     public static final String ERROR_EMPTY_TASKLIST_MESSAGE = "The task list is empty!";
