@@ -4,6 +4,7 @@ import util.exceptions.LargeQuantityException;
 import util.exceptions.ItemDoesNotExistException;
 import util.exceptions.WrongCommandException;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Commands {
@@ -96,7 +97,14 @@ public class Commands {
                 + "* List all goods: `list g/`\n"
                 + "* View order: `view o/ id/ORDER_ID`\n"
                 + "* View good: `view g/ id/GOOD_ID`\n"
-                + "* Total quantity of goods: `total`");
+                + "* Total quantity of goods: `total g/`\n"
+                + "* Total quantity of orders: `total o/`\n"
+                + "* Storage capacity of warehouse: `storage-capacity`");
+    }
+
+    public static void storageCapacity(int totalGoods, int warehouseCapacity){
+        double percentageCapacity = (totalGoods / warehouseCapacity) * 100;
+        System.out.println("Storage capacity: " + percentageCapacity + '%');
     }
 
     /*
