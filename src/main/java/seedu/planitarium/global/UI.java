@@ -1,4 +1,4 @@
-package seedu.planitarium.ui;
+package seedu.planitarium.global;
 
 /**
  * Prints messages with horizontal lines.

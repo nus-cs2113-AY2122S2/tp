@@ -55,9 +55,9 @@ public class ParserUtility {
      * @throws IndexOutOfBoundsException if provided index is less than indicated minimum.
      */
     protected static void checkTooLowIndex(int checkIndex, int minIndex) throws IndexOutOfBoundsException {
-        Parser.logger.getLogger().log(Level.INFO, String.format(Parser.LOG_CHECK_INDEX_BOUNDS, checkIndex));
+        Parser.logger.log(Level.INFO, String.format(Parser.LOG_CHECK_INDEX_BOUNDS, checkIndex));
         if (checkIndex < minIndex) {
-            Parser.logger.getLogger().log(Level.WARNING, String.format(Parser.LOG_INDEX_TOO_LOW, checkIndex, minIndex));
+            Parser.logger.log(Level.WARNING, String.format(Parser.LOG_INDEX_TOO_LOW, checkIndex, minIndex));
             throw new IndexOutOfBoundsException();
         }
     }
@@ -70,9 +70,9 @@ public class ParserUtility {
      * @throws IndexOutOfBoundsException if provided index is more than indicated maximum.
      */
     protected static void checkTooHighIndex(int checkIndex, int maxIndex) throws IndexOutOfBoundsException {
-        Parser.logger.getLogger().log(Level.INFO, String.format(Parser.LOG_CHECK_INDEX_BOUNDS, checkIndex));
+        Parser.logger.log(Level.INFO, String.format(Parser.LOG_CHECK_INDEX_BOUNDS, checkIndex));
         if (checkIndex > maxIndex) {
-            Parser.logger.getLogger().log(
+            Parser.logger.log(
                     Level.WARNING, String.format(Parser.LOG_INDEX_TOO_HIGH, checkIndex, maxIndex));
             throw new IndexOutOfBoundsException();
         }
@@ -93,12 +93,12 @@ public class ParserUtility {
         int lengthOfDelimiter = delimiter.length();
 
         if ((inputLengthWithDelimiter - inputLengthNoDelimiter) < lengthOfDelimiter) {
-            Parser.logger.getLogger().log(
+            Parser.logger.log(
                     Level.WARNING, String.format(Parser.LOG_MISSING_DELIMITER, userInput, delimiter));
             throw new MissingDelimiterException(delimiter);
         }
         if ((inputLengthWithDelimiter - inputLengthNoDelimiter) > lengthOfDelimiter) {
-            Parser.logger.getLogger().log(
+            Parser.logger.log(
                     Level.WARNING, String.format(Parser.LOG_TOO_MANY_DELIMITER, userInput, delimiter));
             throw new DuplicateDelimiterException(delimiter);
         }

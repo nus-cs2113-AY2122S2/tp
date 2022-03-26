@@ -1,4 +1,4 @@
-//@@author Teanweijun
+//@@author teanweijun
 
 package seedu.planitarium.person;
 
@@ -10,7 +10,7 @@ import java.util.logging.Level;
 public class PersonList {
     private ArrayList<Person> personList;
     private int numberOfMembers;
-    private static ProjectLogger logger;
+    private static ProjectLogger logger = new ProjectLogger(PersonList.class.getName(), "PersonList.log");
     private static final int SINGULAR = 1;
 
     /**
@@ -19,9 +19,8 @@ public class PersonList {
     public PersonList() {
         personList = new ArrayList<>();
         numberOfMembers = 0;
-        logger = new ProjectLogger(PersonList.class.getName(), "PersonList.log");
-        String infoString = "Logger for PersonList initialised";
-        logger.getLogger().log(Level.INFO, infoString);
+        String infoString = "New PersonList constructed";
+        logger.log(Level.INFO, infoString);
     }
 
     /**
@@ -31,7 +30,7 @@ public class PersonList {
      */
     public ArrayList<Person> getPersonList() {
         String infoString = "Method getPersonList() called";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         return personList;
     }
 
@@ -43,11 +42,11 @@ public class PersonList {
      */
     public Person getPerson(int index) {
         String infoString = "Entering getPerson()";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         assert (index >= SINGULAR);
         assert (index <= numberOfMembers);
         infoString = "Index assertions passed in getPerson()";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         int listIndex = index - 1;
         return personList.get(listIndex);
     }
@@ -59,7 +58,7 @@ public class PersonList {
      */
     public int getNumberOfMembers() {
         String infoString = "Method getNumberOfMembers() called";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         return numberOfMembers;
     }
 
@@ -70,10 +69,10 @@ public class PersonList {
      */
     public void addPerson(String name) {
         String infoString = "Entering addPerson()";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         assert (name != null);
         infoString = "Non-null assertion passed in addPerson()";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         Person person = new Person(name);
         personList.add(person);
         numberOfMembers++;
@@ -85,13 +84,13 @@ public class PersonList {
      *
      * @param index The index of the person to be removed
      */
-    public void removePerson(int index) {
+    public void deletePerson(int index) {
         String infoString = "Entering removePerson()";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         assert (index >= SINGULAR);
         assert (index <= numberOfMembers);
         infoString = "Index assertions passed in removePerson()";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         int listIndex = index - 1;
         String name = personList.get(listIndex).getName();
         personList.remove(listIndex);
@@ -100,29 +99,103 @@ public class PersonList {
     }
 
     /**
-     * Prints the total remaining disposable income of persons in the array list.
+     * Returns the total remaining disposable income of persons in the array list.
+     *
+     * @return Total disposable income
      */
-    public void printRemain() {
+    public double getRemain() {
         String infoString = "Method getRemain() called";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         double sum = 0;
         for (Person person: this.getPersonList()) {
             sum += person.getDisposable();
         }
-        System.out.println("Your family has a remaining balance of $" + sum);
+        return sum;
+    }
+
+    public double getTotalIncome() {
+        String infoString = "Method getTotalIncome() called";
+        logger.log(Level.INFO, infoString);
+        double sum = 0;
+        for (Person person: this.getPersonList()) {
+            sum += person.getTotalIncome();
+        }
+        return sum;
+    }
+
+    public double getTotalExpenditure() {
+        String infoString = "Method getTotalExpend() called";
+        logger.log(Level.INFO, infoString);
+        double sum = 0;
+        for (Person person: this.getPersonList()) {
+            sum += person.getTotalExpenditure();
+        }
+        return sum;
     }
 
     /**
-     * Lists the names of everyone in the array list, followed by their list of income and expenditure.
+     * Lists the names of everyone in the array list and their list of income and expenditure.
      */
     public void list() {
         String infoString = "Method list() called";
-        logger.getLogger().log(Level.INFO, infoString);
+        logger.log(Level.INFO, infoString);
         for (int i = 0; i < numberOfMembers; i++) {
             Person person = personList.get(i);
             System.out.println((i + 1) + ". " + person.getName());
             person.listIncome();
             person.listExpenditure();
         }
+    }
+
+    /**
+     * Adds an income to the list of incomes of the specified person.
+     *
+     * @param personIndex The index of the person
+     * @param description The source of the income
+     * @param amount The value of the income
+     * @param isPermanent Whether the income is recurring
+     */
+    public void addIncome(int personIndex, String description, double amount, boolean isPermanent) {
+        String infoString = "Method addIncome() called";
+        logger.log(Level.INFO, infoString);
+        getPerson(personIndex).addIncome(description, amount, isPermanent);
+    }
+
+    /**
+     * Removes an income from the list of incomes of the specified person.
+     *
+     * @param personIndex The index of the person
+     * @param incomeIndex The index of the income to be removed
+     */
+    public void deleteIncome(int personIndex, int incomeIndex) {
+        String infoString = "Method deleteIncome() called";
+        logger.log(Level.INFO, infoString);
+        getPerson(personIndex).deleteIncome(incomeIndex);
+    }
+
+    /**
+     * Adds an expenditure to the list of expenditures of the specified person.
+     *
+     * @param personIndex The index of the person
+     * @param description The reason for the expenditure
+     * @param amount The value of the expenditure
+     * @param isPermanent Whether the expenditure is recurring
+     */
+    public void addExpend(int personIndex, String description, double amount, boolean isPermanent) {
+        String infoString = "Method addIncome() called";
+        logger.log(Level.INFO, infoString);
+        getPerson(personIndex).addIncome(description, amount, isPermanent);
+    }
+
+    /**
+     * Removes an expenditure from the list of expenditures of the specified person.
+     *
+     * @param personIndex The index of the person
+     * @param expendIndex The index of the income to be removed
+     */
+    public void deleteExpend(int personIndex, int expendIndex) {
+        String infoString = "Method deleteIncome() called";
+        logger.log(Level.INFO, infoString);
+        getPerson(personIndex).deleteIncome(expendIndex);
     }
 }
