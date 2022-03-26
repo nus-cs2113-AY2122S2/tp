@@ -17,7 +17,7 @@ public class UserInterface {
         Scanner input = new Scanner(System.in);
         String userInput = input.nextLine();
 
-        /*
+
         // setting Warehouse capacity
         boolean isSet = false;
         do {
@@ -25,7 +25,7 @@ public class UserInterface {
             isSet = warehouse.setCapacity(capacity.getGroupValues().get("cap"));
             userInput = input.nextLine();
         } while (!isSet);
-        */
+
 
         while (!userInput.equals("bye")) {
             // current implementation is just take 1st value for command
@@ -34,37 +34,20 @@ public class UserInterface {
                 switch (command) {
                 case "view":
                     //using flags here to distinguish between different views????
-                    String regex = "(?<flag>[og])/ id/(?<id>\\d*)";
-                    Regex regexMatch = new Regex(userInput, regex);
-                    HashMap<String, String> matches = regexMatch.getGroupValues();
-                    if (matches.get("flag").equals("o")) {
-                        // view order with flag "o/"
-                        warehouse.viewOrder(matches.get("id"));
-                    } else if (matches.get("flag").equals("g")) {
-                        // view good with flag "g/"
-                        warehouse.viewGood(matches.get("id"));
-                    } else {
-                        // wrong command exception
-                        throw new WrongCommandException("view", true);
-                    }
+                    userInputIsView(userInput);
+                    String regex;
+                    Regex regexMatch;
+                    HashMap<String, String> matches;
                     break;
                 case "list":
-                    regex = "(?<flag>[og])/";
-                    regexMatch = new Regex(userInput, regex);
-                    matches = regexMatch.getGroupValues();
-
-                    if (matches.get("flag").equals("o")) {
-                        // list orders with flag "o/"
-                        warehouse.listOrders();
-                    } else if (matches.get("flag").equals("g")) {
-                        // list goods with flag "g/"
-                        warehouse.listGoods();
-                    } else {
-                        // wrong command exception
-                        throw new WrongCommandException("list", true);
-                    }
+                    userInputIsList(userInput);
                     break;
                 case "add":
+                    userInputIsAdd(userInput);
+                    break;
+                case "remove":
+                    userInputIsRemove(userInput);
+                    /*
                     regex = "(?<flag>[og])/";
                     regexMatch = new Regex(userInput, regex);
                     matches = regexMatch.getGroupValues();
@@ -101,13 +84,16 @@ public class UserInterface {
                     } else {
                         throw new WrongCommandException("remove", true);
                     }
+                    */
                     break;
                 case "total":
-                    int total = warehouse.totalGoods();
-                    System.out.printf("There are %d goods in total.\n", total);
+                    userInputIsTotal(userInput);
                     break;
                 case "help":
-                    Commands.help();
+                    userInputIsHelp();
+                    break;
+                case "storage-capacity":
+                    userInputIsStorageCapacity();
                     break;
                 default:
                     //error exception here
@@ -118,10 +104,10 @@ public class UserInterface {
                     String wrongCommand = wrongCommandException.getCommand();
                     System.out.printf("%s command was used wrongly. Type help to see examples\n",
                             wrongCommand);
-                    Commands.help();
+                    userInputIsHelp();
                 } else {
                     System.out.println("No such command. Type help to see examples");
-                    Commands.help();
+                    userInputIsHelp();
                 }
             } catch (NullException nullException) {
                 //catch null exception here
@@ -131,4 +117,104 @@ public class UserInterface {
             userInput = input.nextLine();
         }
     }
+
+    private void userInputIsStorageCapacity() throws NullException {
+        int totalGoods = warehouse.totalGoods();
+        int warehouseCapacity = warehouse.getCapacity();
+        Commands.storageCapacity(totalGoods, warehouseCapacity);
+    }
+
+    private void userInputIsHelp() {
+        Commands.help();
+    }
+
+    private void userInputIsTotal(String userInput) throws NullException, WrongCommandException {
+        String regex = "(?<flag>[og])/ id/(?<id>\\d*)";
+        Regex regexMatch = new Regex(userInput, regex);
+        HashMap<String, String> matches = regexMatch.getGroupValues();
+        if (matches.get("flag").equals("o")) {
+            // get total orders with flag "o/"
+            int totalOrders = warehouse.totalOrder();
+            System.out.printf("There are %d goods in total.\n", totalOrders);
+        } else if (matches.get("flag").equals("g")) {
+            // get total goods with flag "g/"
+            warehouse.totalGoods();
+        } else {
+            // wrong command exception
+            throw new WrongCommandException("total", true);
+        }
+    }
+
+    private void userInputIsRemove(String userInput) throws WrongCommandException {
+        HashMap<String, String> matches;
+        String regex;
+        Regex regexMatch;
+        regex = "(?<flag>[og])/ id/(?<id>\\d*) q/(?<qty>\\d*)";
+        regexMatch = new Regex(userInput, regex);
+        matches = regexMatch.getGroupValues();
+
+        if (matches.get("flag").equals("o")) {
+            warehouse.removeOrder(matches.get("id"));
+        } else if (matches.get("flag").equals("g")) {
+            warehouse.removeGoods(matches.get("id"), matches.get("qty"));
+        } else {
+            throw new WrongCommandException("remove", true);
+        }
+    }
+
+    private void userInputIsAdd(String userInput) throws WrongCommandException {
+        Regex regexMatch;
+        HashMap<String, String> matches;
+        String regex;
+        regex = "(?<flag>[og])/ oid/(?<oid>\\d*) gid/(?<gid>\\d*) r/(?<r>.*) a/(?<address>.*)"
+                + "n/(?<name>.*) q/(?<qty>\\d*) d/(?<desc>.*)";
+        regexMatch = new Regex(userInput, regex);
+        matches = regexMatch.getGroupValues();
+
+        if (matches.get("flag").equals("o")) {
+            warehouse.addOrder(matches.get("id"), matches.get("r"), matches.get("address"));
+        } else if (matches.get("flag").equals("g")) {
+            warehouse.addGoods(matches.get("oid"), matches.get("gid"), matches.get("name"),
+                    matches.get("qty"), matches.get("desc"));
+        } else {
+            throw new WrongCommandException("add", true);
+        }
+    }
+
+    private void userInputIsList(String userInput) throws WrongCommandException {
+        HashMap<String, String> matches;
+        Regex regexMatch;
+        String regex;
+        regex = "(?<flag>[og])/";
+        regexMatch = new Regex(userInput, regex);
+        matches = regexMatch.getGroupValues();
+
+        if (matches.get("flag").equals("o")) {
+            // list orders with flag "o/"
+            warehouse.listOrders();
+        } else if (matches.get("flag").equals("g")) {
+            // list goods with flag "g/"
+            warehouse.listGoods();
+        } else {
+            // wrong command exception
+            throw new WrongCommandException("list", true);
+        }
+    }
+
+    private void userInputIsView(String userInput) throws WrongCommandException {
+        String regex = "(?<flag>[og])/ id/(?<id>\\d*)";
+        Regex regexMatch = new Regex(userInput, regex);
+        HashMap<String, String> matches = regexMatch.getGroupValues();
+        if (matches.get("flag").equals("o")) {
+            // view order with flag "o/"
+            warehouse.viewOrder(matches.get("id"));
+        } else if (matches.get("flag").equals("g")) {
+            // view good with flag "g/"
+            warehouse.viewGood(matches.get("id"));
+        } else {
+            // wrong command exception
+            throw new WrongCommandException("view", true);
+        }
+    }
+
 }
