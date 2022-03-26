@@ -172,7 +172,7 @@ public class Family {
      * Lists the disposable incomes of each generation.
      */
     public void overview() {
-        String infoString = "Method list() called";
+        String infoString = "Method overview() called";
         logger.log(Level.INFO, infoString);
         System.out.println("Here are your disposable incomes by group:");
         for (int i = 0; i < Constants.NUM_GROUPS; i++) {
@@ -195,7 +195,7 @@ public class Family {
      * @param group The index of the group to print
      */
     public void list(int group) {
-        String infoString = "Method detailList() called";
+        String infoString = "Method list() called";
         logger.log(Level.INFO, infoString);
         String generation = getGenerationName(group);
         System.out.println("For " + generation + ":");
