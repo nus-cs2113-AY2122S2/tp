@@ -153,7 +153,7 @@ Example of usage:
 
 ### Listing all sessions: `session /list`
 
-> List all active sessions. Deleted sessions will not be listed.<br>
+> Displays all active sessions. Deleted sessions will not be listed.<br>
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `session /list`
@@ -267,7 +267,7 @@ Example of usage:
 
 ### Listing all activities in a session: `activity /list`
 
-> To view all existing activities in a particular session.<br>
+> Displays all existing activities in a particular session.<br>
 > An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
@@ -380,7 +380,7 @@ Example of usage:
 
 ### Listing all groups: `group /list`
 
-> List all active groups. Deleted groups will not be listed.<br>
+> Displays all active groups. Deleted groups will not be listed.<br>
 > A group represents one or more individuals.
 > It is used as a shortcut in several commands for identifying a group of individual persons.
 
