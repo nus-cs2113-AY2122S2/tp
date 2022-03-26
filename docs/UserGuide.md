@@ -553,6 +553,11 @@ Find all exercises containing the specified keywords.
 
 Format: `search /exercise <exercise keyword>`
 
+| Parameters           | Description                                                         |
+|----------------------|---------------------------------------------------------------------|
+| `<exercise keyword>` | The keyword to be matched when searching through the exercise list. |
+
+
 **Example**
 
 Assume, the exercise list contains the following exercises:
@@ -594,6 +599,11 @@ The exercise(s) containing keywords [up] is(are) listed below.
 Find all workouts containing the specified keywords or number of reps.
 
 Format: `search /workout <exercise keyword or number of reps>`
+
+
+| Parameters                             | Description                                                                  |
+|----------------------------------------|------------------------------------------------------------------------------|
+| `<exercise keyword or number of reps>` | The keyword or number to be matched when searching through the workout list. |
 
 **Example**
 
@@ -640,6 +650,11 @@ Find all plans containing the specified keywords.
 
 Format: `search /plan <plan keyword>`
 
+| Parameters       | Description                                                     |
+|------------------|-----------------------------------------------------------------|
+| `<plan keyword>` | The keyword to be matched when searching through the plan list. |
+
+
 **Example**
 
 Assume, the plan list contains the following plans:
@@ -674,6 +689,11 @@ The plan(s) containing keywords [e] is(are) listed below.
 Find all exercises, workouts and plans containing the specified keywords.
 
 Format: `search /all <keyword>`
+
+| Parameters  | Description                                                         |
+|-------------|---------------------------------------------------------------------|
+| `<keyword>` | The keyword to be matched when searching through the all the lists. |
+
 
 **Example**
 
@@ -947,7 +967,7 @@ Below is a summary of all the commands available in the WerkIt! application.
 | Clear Schedule For A Day                     | <br /> Format: `schedule /clear <day number [1-7]>`<br/>Example: `schedule /clear 3` <br /> <br />                                                      |
 | Clear All Schedule                           | <br /> Format: `schedule /clearall` <br /> <br />                                                                                                       |
 | Search For Exercise                          | <br /> Format: `search /exercise <exercise keyword>` <br/>Example: `search /exercise up` <br /> <br />                                                  |
-| Search For Workout                           | <br /> Format: `search /workout <exercise keyword or number of repetitions>`  <br/>Example: `search /workout push` <br /> <br />                        |
+| Search For Workout                           | <br /> Format: `search /workout <exercise keyword or number of reps>`  <br/>Example: `search /workout push` <br /> <br />                               |
 | Search For Plan                              | <br /> Format: `search /plan <plan keyword>` <br/>Example: `search /plan arms` <br /> <br />                                                            |
 | Search For ALL                               | <br /> Format: `search /all <keyword>` <br/>Example: `search /all 10` <br /> <br />                                                                     |
 | View Help                                    | <br /> Format: `help`<br/>Example: `help`  <br /> <br />                                                                                                |
