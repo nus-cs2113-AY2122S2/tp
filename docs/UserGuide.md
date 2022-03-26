@@ -168,7 +168,7 @@ Example of usage:
 
 <br/>
 
-### Listing all records by person: `list`
+### Listing all records by group: `list`
 
 > Shows a list of the total incomes, expenditures and remaining of each group
 
@@ -180,7 +180,7 @@ Example of usage:
 
 <br/>
 
-### Listing all records by group: `list`
+### Listing all records by person: `list`
 
 > Shows a list of incomes and expenditures, in a group
 
@@ -236,21 +236,22 @@ Format: `bye`
 To keep things simple, we will omit the parameter description for you.
 To view each command in detail, refer to the [features](#features) section.
 
-| Command                | Format                                             |
-|------------------------|----------------------------------------------------|
-| Add a person           | add /n __ /g __                                    |
-| Remove a person        | delete /u __ /g __                                 |
-| Add an income          | addin /u__ /g __ /i __ /d __ /c __ /p __           |
-| Delete an income       | deletein /u __ /g __ /r __                         |
-| Edit an income         | editin /u __ /g __ /r __ /i __ /d __ /c __  /p __  |
-| Add an expenditure     | addout /u__ /g __ /e __ /d __ /c __ /p __          |
-| Delete an expenditure  | deleteout /u __ /g __ /r __                        |
-| Edit an expenditure    | editout /u __ /g __ /r __ /e __ /d __ /c __  /p __ |
-| List records by group  | list                                               |
-| List records by person | list /g __                                         |
-| List categories        | listcat                                            |
-| Exit                   | bye                                                |
-| Show all commands      | help                                               |
+| Command                                                       | Format                                             |
+|---------------------------------------------------------------|----------------------------------------------------|
+| [Add a person](#adding-a-person-add)                          | add /n __ /g __                                    |
+| [Remove a person](#removing-a-person-delete)                  | delete /u __ /g __                                 |
+| [Add an income](#adding-an-income-addin)                      | addin /u__ /g __ /i __ /d __ /c __ /p __           |
+| [Delete an income](#deleting-an-income-deletein)              | deletein /u __ /g __ /r __                         |
+| [Edit an income](#editing-an-income-editin)                   | editin /u __ /g __ /r __ /i __ /d __ /c __  /p __  |
+| [Add an expenditure](#adding-an-expenditure-addout)           | addout /u__ /g __ /e __ /d __ /c __ /p __          |
+| [Delete an expenditure](#deleting-an-expenditure-deleteout)   | deleteout /u __ /g __ /r __                        |
+| [Edit an expenditure](#editing-an-expenditure-editout)        | editout /u __ /g __ /r __ /e __ /d __ /c __  /p __ |
+| [List records by group](#listing-all-records-by-group-list)   | list                                               |
+| [List records by person](#listing-all-records-by-person-list) | list /g __                                         |
+| [Search](#searching-find)                                     | find /d __ /c __                                   | 
+| [List categories](#listing-categories-listcat)                | listcat                                            |
+| [Exit](#exit-bye)                                             | bye                                                |
+| [Show all commands](#viewing-all-commands-help)               | help                                               |
 
 
 
