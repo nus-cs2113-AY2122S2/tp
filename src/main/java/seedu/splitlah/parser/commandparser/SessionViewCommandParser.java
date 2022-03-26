@@ -6,6 +6,11 @@ import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
 
+/**
+ * Represents a command parser that views a Session object.
+ *
+ * @author Saurav
+ */
 public class SessionViewCommandParser implements CommandParser<SessionViewCommand> {
 
     public static final String COMMAND_TEXT = "session /view";
