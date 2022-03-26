@@ -91,7 +91,7 @@ public class AddHousekeeperCommand extends Command {
         if (ageNumber > MAX_AGE_ACCEPTED) {
             throw new OverAgeException();
         }
-        assert (ageNumber >= MIN_AGE_ACCEPTED & ageNumber <= MAX_AGE_ACCEPTED ) : "Age range is invalid.";
+        assert (ageNumber >= MIN_AGE_ACCEPTED & ageNumber <= MAX_AGE_ACCEPTED) : "Age range is invalid.";
         return ageNumber;
     }
 
