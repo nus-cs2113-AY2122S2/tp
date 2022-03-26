@@ -270,4 +270,34 @@ class ProfileTest {
             assertEquals(invalidDataException.getMessage(), Message.ERROR_PROFILE_GROUP_LIST_EMPTY);
         }
     }
+
+    /**
+     * Checks if session unique identifier is incremented.
+     */
+    @Test
+    public void getNewSessionId_functionCalled_sessionIdIncrementedByOne() {
+        int sessionIdToTest = manager.getProfile().getSessionIdTracker();
+        manager.getProfile().getNewSessionId();
+        assertEquals(sessionIdToTest+1, manager.getProfile().getSessionIdTracker());
+    }
+
+    /**
+     * Checks if activity unique identifier is incremented.
+     */
+    @Test
+    public void getNewActivityId_functionCalled_activityIdIncrementedByOne() {
+        int activityIdToTest = manager.getProfile().getActivityIdTracker();
+        manager.getProfile().getNewActivityId();
+        assertEquals(activityIdToTest+1, manager.getProfile().getActivityIdTracker());
+    }
+
+    /**
+     * Checks if group unique identifier is incremented.
+     */
+    @Test
+    public void getNewGroupId_functionCalled_groupIdIncrementedByOne() {
+        int groupIdToTest = manager.getProfile().getGroupIdTracker();
+        manager.getProfile().getNewGroupId();
+        assertEquals(groupIdToTest+1, manager.getProfile().getGroupIdTracker());
+    }
 }
