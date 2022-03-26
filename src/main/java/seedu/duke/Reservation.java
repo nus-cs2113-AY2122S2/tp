@@ -43,4 +43,8 @@ public class Reservation {
                 + "Contact No.    " + getContactNumber() + "\n"
                 + "Pax            " + getNumOfPax() + "\n";
     }
+
+    public String toSave(){
+        return Integer.toString(reservationID) + " | " + customerName + " | " + contactNumber  + " | " + packageID  + " | " + Integer.toString(numOfPax);
+    }
 }
