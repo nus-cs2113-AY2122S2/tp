@@ -237,7 +237,7 @@ The general workflow of the `session /summary` command is as follows:
    is obtained with the `Manager#getUi` method.
 6. From the `Profile` object obtained, the `Profile#getSession` method is invoked with the session unique identifier
    parsed from the user input to obtain the `Session` object that we want to settle all transactions for.
-7. A `ArrayList<Person>` object containing all persons participating in the session is then obtained with
+7. An `ArrayList<Person>` object containing all persons participating in the session is then obtained with
    the `Session#getPersonList` method.
 8. With the list of participants, an `ArrayList<PersonCostPair>` object is obtained with the
    `SessionSummaryCommand#getPersonCostPairList` method.
@@ -245,7 +245,7 @@ The general workflow of the `session /summary` command is as follows:
      then creates a `PersonCostPair` object that stores both the `Person` object and the cost borne by that person.
 9. With both the `Session` object and the `ArrayList<PersonCostPair>` object, the method
    `SessionSummaryCommand#processAllTransactions` is called.
-   * This method sorts all the `PersonCostPair` objects by their cost, then matches each debt to be paid to a debt
+   * This method sorts all the `PersonCostPair` objects by their cost, then matches each debt to be paid with a debt
      to be collected between all persons. Each of such matches is referred to as a transaction.
      The matching process is repeated until no more transactions can be made,
      i.e. all debts are paid and all debts are collected.
