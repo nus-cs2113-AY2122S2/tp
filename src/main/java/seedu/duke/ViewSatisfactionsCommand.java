@@ -16,20 +16,11 @@ public class ViewSatisfactionsCommand extends Command {
      * in the given satisfactionList (i.e. prints out each Satisfaction object's
      * corresponding customer name and satisfaction value).
      *
-     * @param housekeeperList  The list of housekeeper recorded. N/A for this class, but
-     *      *                  must be included for the execution override.
-     * @param satisfactionList The given list of Satisfaction objects.
-     * @param roomList         The given list of Room objects. N/A for this class, but
-     *                         must be included for the execution override.
-     * @param itemList         The given list of Item objects. N/A for this class, but
-     *                         must be included for the execution override.
      * @param ui               The user interface for this execution method.
      */
     @Override
-    public void execute(HousekeeperList housekeeperList, HousekeeperPerformanceList housekeeperPerformanceList,
-                        SatisfactionList satisfactionList,
-                        AssignmentMap assignmentMap, RoomList roomList,
-                        ItemList itemList, Ui ui) {
+    public void execute(ListContainer listContainer, Ui ui) {
+        SatisfactionList satisfactionList = listContainer.getSatisfactionList();
         satisfactionList.viewSatisfactions();
     }
 

@@ -52,10 +52,8 @@ public class CheckRoomByCatCommand extends Command {
      * @param itemList The given list of Item objects.
      * @param ui The user interface for this execution method.
      */
-    public void execute(HousekeeperList housekeeperList, HousekeeperPerformanceList housekeeperPerformanceList,
-                        SatisfactionList satisfactionList,
-                        AssignmentMap assignmentMap, RoomList roomList,
-                        ItemList itemList, Ui ui) {
+    public void execute(ListContainer listContainer, Ui ui) {
+        RoomList roomList = listContainer.getRoomList();
         System.out.println(TABLE_HEAD);
         for (Room room : roomList.getRoomList()) {
             if (room.getType() == type) {

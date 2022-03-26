@@ -49,9 +49,8 @@ public class AddHousekeeperPerformanceCommand extends Command {
 
 
     @Override
-    public void execute(HousekeeperList housekeeperList, HousekeeperPerformanceList housekeeperPerformanceList,
-                        SatisfactionList satisfactionList, AssignmentMap assignmentMap, RoomList roomList,
-                        ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, WrongCommandException {
+        HousekeeperPerformanceList housekeeperPerformanceList = listContainer.getHousekeeperPerformanceList();
         housekeeperPerformanceList.addHousekeeperPerformance(housekeeperPerformance);
         ui.printAddHousekeeperPerformanceAcknowledgementMessage(housekeeperPerformanceList, housekeeperPerformance);
         housekeeperPerformanceList.viewPerformances();

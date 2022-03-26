@@ -19,9 +19,8 @@ public class ViewItemListCommand extends Command {
      * @param ui               The object that deals with user interface for the program.
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      */
-    public void execute(HousekeeperList housekeeperList, HousekeeperPerformanceList housekeeperPerformanceList,
-                        SatisfactionList satisfactionList,
-                        AssignmentMap assignmentMap, RoomList roomList, ItemList listOfItems, Ui ui) {
+    public void execute(ListContainer listContainer, Ui ui) {
+        ItemList listOfItems = listContainer.getItemList();
         ui.printItemList(listOfItems);
     }
 }
