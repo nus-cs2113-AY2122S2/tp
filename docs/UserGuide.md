@@ -1,29 +1,5 @@
 # User Guide
 
-## Contents
-
-* [Contents](#contents)
-* [Introduction](#introduction)
-* [Quick Start](#quick-start)
-* [Quick Notes](#quick-notes)
-* [Features](#features)
-    * [Add a person](#adding-a-person-add)
-    * [Remove a person](#removing-a-person-delete)
-    * [Add an income](#adding-an-income-addin)
-    * [Delete an income](#deleting-an-income-deletein)
-    * [Edit an income](#editing-an-income-editin)
-    * [Add an expenditure](#adding-an-expenditure-addout)
-    * [Delete an expenditure](#deleting-an-expenditure-deleteout)
-    * [Edit an expenditure](#editing-an-expenditure-editout)
-    * [Remain](#showing-remaining-remain)
-    * [List records by person](#listing-all-records-by-person-list)
-    * [List records by group](#listing-all-records-by-group-list)
-    * [Search](#searching-find)
-    * [List categories](#listing-categories-listcat)
-    * [Exit](#exit-bye)
-* [FAQ](#faq)
-* [Command Summary](#command-summary)
-
 ## Introduction
 
 PlanITarium is a CLI application that helps you and your family to track your finances. It allows you to add individuals
