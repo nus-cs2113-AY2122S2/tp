@@ -271,28 +271,6 @@ public class TaskParser {
         return null;
     }
 
-    public static Command prepareShow(String[] splitInput) {
-        try {
-            String selection = splitInput[SHOW_OPTION_INDEX].trim();
-            return parseShowCommandOptions(selection.toLowerCase());
-        } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
-            System.out.println(ERROR_INVALID_INPUT_MESSAGE);
-        }
-        return null;
-    }
-
-    private static Command parseShowCommandOptions(String selection) throws InvalidInputException {
-        if (selection.isBlank()) {
-            throw new InvalidInputException();
-        }
-        try {
-            LocalDate dayInput = LocalDate.parse(selection, inputWithoutTimeFormat);
-            return new ShowCommand(dayInput, null);
-        } catch (DateTimeParseException e) {
-            return new ShowCommand(null, selection);
-        }
-    }
-
     private static void checkCorrectEditInfoFormat(String fullEditInfo) throws WrongEditInfoFormatException {
         // tests to make sure the byDate is before the doOnDate
         if (fullEditInfo.contains(BY_DATE_DELIMITER) && fullEditInfo.contains(DO_DATE_DELIMITER)) {
