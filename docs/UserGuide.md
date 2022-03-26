@@ -105,7 +105,7 @@ Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ..
 * `[NAME1 NAME2 ...]` refers to a list of persons involved in the session.
   * Each individual name is **case-insensitive**.
 
-> **💡 Note(s):**
+> **💡 Notes:**
 >- The `[SESSION_NAME]` should be unique across all active sessions.
 >- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
 
@@ -188,7 +188,7 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 * `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
   * Example: `/i Alice Bob /cl 10 20` means that Alice's portion cost $10 while Bob's portion cost $20.
 
-> **💡 Note(s):**
+> **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to 
 > it.
 >- The `[ACTIVITY_NAME]` should be unique across all activities.
@@ -226,7 +226,7 @@ Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 * `[ACTIVITY_ID]` refers to the unique identifier of the activity.
     * The unique identifier for an activity can be retrieved with [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
 
-> **💡 Note(s):**
+> **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity in that session can be removed.
 >- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be removed.
 >- A confirmation must be given before deletion takes place.
@@ -322,7 +322,7 @@ Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
 * `[NAME1 NAME2 ...]` refers to a list of persons involved in the activity.
     * Each individual name is **case-insensitive**.
 
-> **💡 Note(s):**
+> **💡 Notes:**
 >- The `[GROUP_NAME]` should be unique across all groups.
 >- Each name in `[NAME1 NAME2 ...]` for the group should be unique.
 
