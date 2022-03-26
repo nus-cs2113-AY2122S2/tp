@@ -31,7 +31,7 @@ public class UpdateItemCommandTest {
 
     @Test
     public void commandParser_updateItemPaxCommandWithEmptyItemNameAndPax_exceptionThrown() {
-        assertThrows(InvalidCommandException.class, () -> new CommandParser().parse("Update Item Pax"));
+        assertThrows(InvalidCommandException.class, () -> new CommandParser().parse("Update Item Pax "));
     }
 
     @Test
