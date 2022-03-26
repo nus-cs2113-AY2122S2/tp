@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -59,14 +60,52 @@ public class Storage {
 
 
     /**
-     * Parses the save file
+     * Calls the functions to read packages and reservations saved files
      *
-     * @return ArrayList of tasks
+     * @return Packages object for Control class
      */
-    public Packages convertFileToList() {
-        Packages p = new Packages();
-        File pFile = new File(packages_filePath);
+    public Packages createPackages() {
+        ArrayList<Reservation> r = parseReservationFile();
+        ArrayList<TravelPackage> t = parseTravelPackageFile();
+        Packages p = new Packages(t, r);
+        return p;
+    }
+
+    /**
+     * Parses the saved reservation file
+     *
+     * @return Arraylist of Reservations
+     */
+    public ArrayList<Reservation> parseReservationFile(){
         File rFile = new File(reservations_filePath);
+        ArrayList<Reservation> r = new ArrayList<>();
+        try {
+            Scanner s = new Scanner(rFile);
+            while (s.hasNext()) {
+                String currentLine = s.nextLine();
+                String[] arrayElements = currentLine.split("\\|");
+                int reservationID = Integer.parseInt(arrayElements[0].trim());
+                String packageID = arrayElements[1].trim();
+                String customerName = arrayElements[2].trim();
+                String customerNum = arrayElements[3].trim();
+                int numPax = Integer.parseInt(arrayElements[4].trim());
+                Reservation newReservation = new Reservation(reservationID, packageID, customerName, customerNum, numPax);
+                r.add(newReservation);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+        return r;
+    }
+
+    /**
+     * Parses the saved travel packages file
+     *
+     * @return Arraylist of TravelPackage
+     */
+    public ArrayList<TravelPackage> parseTravelPackageFile() {
+        ArrayList<TravelPackage> t = new ArrayList<>();
+        File pFile = new File(packages_filePath);
         try {
             Scanner s = new Scanner(pFile);
             while (s.hasNext()) {
@@ -80,30 +119,12 @@ public class Storage {
                 String country = arrayElements[5].trim();
                 int vacancies = Integer.parseInt(arrayElements[6].trim());
                 TravelPackage newPackage = new TravelPackage(name, new Date(start), new Date(end), hotel, price, country, vacancies);
-                p.addPackage(newPackage);
+                t.add(newPackage);
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
-        try {
-            Scanner s = new Scanner(rFile);
-            while (s.hasNext()) {
-                String currentLine = s.nextLine();
-                String[] arrayElements = currentLine.split("\\|");
-                int reservationID = Integer.parseInt(arrayElements[0].trim());
-                String packageID = arrayElements[1].trim();
-                String custName = arrayElements[2].trim();
-                String custNum = arrayElements[3].trim();
-                int numPax = Integer.parseInt(arrayElements[4].trim());
-                Reservation newReservation = new Reservation(reservationID, packageID, custName, custNum, numPax);
-                p.addReservation(newReservation);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        return p;
+        return t;
     }
-
-
 }
 

@@ -8,8 +8,13 @@ public class Packages {
     private ArrayList<Reservation> reservations;
 
     public Packages() {
-        packages = new ArrayList<>();
-        reservations = new ArrayList<>();
+        this.packages = new ArrayList<>();
+        this.reservations = new ArrayList<>();
+    }
+
+    public Packages(ArrayList<TravelPackage> t, ArrayList<Reservation> r){
+        this.packages = t;
+        this.reservations = r;
     }
 
     public int getSize() {

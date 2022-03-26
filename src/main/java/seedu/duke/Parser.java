@@ -7,6 +7,7 @@ import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.PackagesCommand;
 import seedu.duke.command.ErrorCommand;
 import seedu.duke.command.ReservationCommand;
+import seedu.duke.command.WrongFormatCommand;
 
 public class Parser {
     public static Command parse(String input) {
@@ -27,21 +28,26 @@ public class Parser {
             return new ByeCommand();
 
         case "add": //only can have spaces between variables - what if hotel has 2 words?
-            final int nameIndex = 1;
-            final int startIndex = 2;
-            final int endIndex = 3;
-            final int hotelIndex = 4;
-            final int priceIndex = 5;
-            final int countryIndex = 6;
-            final int vacanciesIndex = 7;
-            name = inputArray[nameIndex];
-            start = Integer.parseInt(inputArray[startIndex]);
-            end = Integer.parseInt(inputArray[endIndex]);
-            hotel = inputArray[hotelIndex];
-            price = Double.parseDouble(inputArray[priceIndex]);
-            country = inputArray[countryIndex];
-            vacancies = Integer.parseInt(inputArray[vacanciesIndex]);
-            return new AddCommand(name, start, end, hotel, price, country, vacancies);
+            if (inputArray.length != 8){
+                return new WrongFormatCommand(input);
+            }
+            else{
+                final int nameIndex = 1;
+                final int startIndex = 2;
+                final int endIndex = 3;
+                final int hotelIndex = 4;
+                final int priceIndex = 5;
+                final int countryIndex = 6;
+                final int vacanciesIndex = 7;
+                name = inputArray[nameIndex];
+                start = Integer.parseInt(inputArray[startIndex]);
+                end = Integer.parseInt(inputArray[endIndex]);
+                hotel = inputArray[hotelIndex];
+                price = Double.parseDouble(inputArray[priceIndex]);
+                country = inputArray[countryIndex];
+                vacancies = Integer.parseInt(inputArray[vacanciesIndex]);
+                return new AddCommand(name, start, end, hotel, price, country, vacancies);
+            }
         case "delete":
             id = inputArray[1];
             return new DeleteCommand(id);
