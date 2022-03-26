@@ -5,10 +5,12 @@ import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MedicineList extends List {
     private ArrayList<Medicine> medicines = new ArrayList<>();
+    private ArrayList<Medicine> expiredMedicines = new ArrayList<>();
 
     public int getSize() {
         return medicines.size();
@@ -90,6 +92,39 @@ public class MedicineList extends List {
             return;
         }
         throw new NotFoundException("There are no medicines with given Batch ID!");
+    }
+
+    public void viewExpired() {
+        if (expiredMedicines.size() == 0) {
+            UI.printParagraph("There are no expired medicines as of today!");
+            return;
+        }
+        UI.printParagraph("Here is the list of medicines that have expired and\n"
+                + "have been moved to the expired list!\nThis list will be cleared upon exit of app!");
+        for (Medicine medicine: expiredMedicines) {
+            UI.printCont(getMedicineInfo(medicine));
+        }
+    }
+
+    public void updateStock() {
+        for (int i = 0; i < medicines.size(); i++) {
+            LocalDate date = LocalDate.parse(medicines.get(i).getExpiry());
+            LocalDate today = LocalDate.now();
+            if (date.isBefore(today)) {
+                expiredMedicines.add(medicines.get(i));
+                medicines.remove(i);
+            }
+        }
+        viewExpired();
+    }
+
+    public void clearStock() {
+        if (expiredMedicines.size() == 0) {
+            UI.printParagraph("There are no expired medicines in the expired list!");
+            return;
+        }
+        expiredMedicines.clear();
+        UI.printParagraph("Expired medicines in the expired list has been cleared!");
     }
 
     public ArrayList<Medicine> getList() {
