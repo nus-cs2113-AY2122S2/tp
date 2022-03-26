@@ -38,6 +38,7 @@ public class PatientList extends List {
     }
 
     public void add(String[] addPatientParameters) throws DuplicateEntryException {
+        int numberOfPatientsBefore = patients.size();
         if (getPatient(addPatientParameters[0]) != null) {
             throw new DuplicateEntryException("Patient with given NRIC already exists!");
         }
@@ -45,6 +46,7 @@ public class PatientList extends List {
                 Integer.parseInt(addPatientParameters[2]), addPatientParameters[3].charAt(0),
                 addPatientParameters[4],addPatientParameters[5], addPatientParameters[6]);
         patients.add(newPatient);
+        assert patients.size() == numberOfPatientsBefore + 1;
     }
 
     public int getSize() {
@@ -52,9 +54,11 @@ public class PatientList extends List {
     }
 
     public void remove(String nric) throws NotFoundException {
+        int numberOfPatientsBefore = patients.size();
         for (int i = 0; i < getSize(); i++) {
             if (patients.get(i).getNric().equals(nric)) {
                 patients.remove(i);
+                assert patients.size() == numberOfPatientsBefore - 1;
                 return;
             }
         }
@@ -79,6 +83,7 @@ public class PatientList extends List {
             }
             number++;
         }
+        assert !output.isEmpty();
         return output;
     }
 }
