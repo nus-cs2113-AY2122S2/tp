@@ -5,6 +5,11 @@ import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 
+/**
+ * Represents a command parser that is able to parse user arguments into an ActivityDeleteCommand object.
+ *
+ * @author Ivan
+ */
 public class ActivityDeleteCommandParser implements CommandParser<ActivityDeleteCommand> {
 
     public static final String COMMAND_TEXT = "activity /delete";
