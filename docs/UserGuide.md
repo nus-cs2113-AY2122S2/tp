@@ -40,6 +40,14 @@ your favourite personal expenditure tracker.
 
 ## Features
 
+### Viewing all commands: `help`
+
+> Shows a list of available commands
+
+Format: `help`
+
+<br/>
+
 ### Adding a person: `add`
 
 > Adds a person to the list to track finance
@@ -162,21 +170,30 @@ Example of usage:
 
 ### Listing all records by person: `list`
 
-Shows a list of all income, expenditures input, by person.
+> Shows a list of the total incomes, expenditures and remaining of each group
 
-Format:    `list`
+Format: `list`
+
+Example of usage:
+
+![list-command-screenshot]() <!-- this is a placeholder -->
 
 <br/>
 
 ### Listing all records by group: `list`
 
-> Shows a list of income, expenditures, and remain, by group
+> Shows a list of incomes and expenditures, in a group
 
 Format: `list /g GROUP_INDEX`
+
+* `GROUP_INDEX` refers to an index that is mapped to the group that individual belongs to.
+  * The index can be obtained from the [list](#listing-all-records-by-group-list) command.
 
 Example of usage:
 
 `list /g 1`
+
+![detail_list-command-screenshot]() <!-- this is a placeholder -->
 
 <br/>
 
@@ -184,11 +201,13 @@ Example of usage:
 
 > Search for a string throughout all income and expenditure objects
 
-Format:    `find /d USER_STRING /c CATEGORY_INDEX`
+Format: `find /d USER_STRING /c CATEGORY_INDEX`
 
-Example of usgae:
+Example of usage:
 
 `find /d Candy /c 1`
+
+![find-command-screenshot]() <!-- this is a placeholder -->
 
 <br/>
 
@@ -196,7 +215,7 @@ Example of usgae:
 
 > Shows a list of categories
 
-Format:    `listcat`
+Format: `listcat`
 
 <br/>
 
@@ -204,7 +223,7 @@ Format:    `listcat`
 
 > Exits the program.
 
-Format:    bye
+Format: `bye`
 
 ## FAQ
 
@@ -214,22 +233,24 @@ Format:    bye
 
 ## Command Summary
 
-| Command                | Format |
-|------------------------|--------|
-| Add a person           | test   |
-| Remove a person        |        |
-| Add an income          |        |
-| Delete an income       |        |
-| Edit an income         |        |
-| Add an expenditure     |        |
-| Delete an expenditure  |        |
-| Edit an expenditure    |        |
-| Show remain            |        |
-| List records by person |        |
-| List records by group  |        |
-| List categories        |        |
-| Exit                   |        |
-| Show all commands      |        |
+To keep things simple, we will omit the parameter description for you.
+To view each command in detail, refer to the [features](#features) section.
+
+| Command                | Format                                             |
+|------------------------|----------------------------------------------------|
+| Add a person           | add /n __ /g __                                    |
+| Remove a person        | delete /u __ /g __                                 |
+| Add an income          | addin /u__ /g __ /i __ /d __ /c __ /p __           |
+| Delete an income       | deletein /u __ /g __ /r __                         |
+| Edit an income         | editin /u __ /g __ /r __ /i __ /d __ /c __  /p __  |
+| Add an expenditure     | addout /u__ /g __ /e __ /d __ /c __ /p __          |
+| Delete an expenditure  | deleteout /u __ /g __ /r __                        |
+| Edit an expenditure    | editout /u __ /g __ /r __ /e __ /d __ /c __  /p __ |
+| List records by group  | list                                               |
+| List records by person | list /g __                                         |
+| List categories        | listcat                                            |
+| Exit                   | bye                                                |
+| Show all commands      | help                                               |
 
 
 
@@ -237,12 +258,10 @@ Format:    bye
 * Remove a person `delete /u USER_INDEX /g GROUP_INDEX`
 * Add an income `addin /u USER_INDEX /g GROUP_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
 * Delete an income `deletein /u USER_INDEX /g GROUP_INDEX /r INCOME_INDEX`
-* Edit an
-  income `editin /u USER_INDEX /g GROUP_INDEX /r INCOME_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
+* Edit an income `editin /u USER_INDEX /g GROUP_INDEX /r INCOME_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
 * Add an expenditure `addout /u USER_INDEX /g GROUP_INDEX /e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
 * Delete an expenditure `deleteout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX`
-* Edit an
-  expenditure `editout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX /i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
+* Edit an expenditure `editout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX /i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p (t/f)`
 * Show remain `remain`
 * List records by person `list`
 * List records by group `list /g GROUP_INDEX`
