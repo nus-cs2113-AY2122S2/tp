@@ -29,7 +29,7 @@ public class Storage {
     private static PersonList personDataList = new PersonList();
 
     /**
-     * Constructs a new storage object
+     * Constructs a new storage object.
      */
     public Storage() {
         filePath = FILE_DIR + FILE_SEPARATOR + FILE_NAME;
