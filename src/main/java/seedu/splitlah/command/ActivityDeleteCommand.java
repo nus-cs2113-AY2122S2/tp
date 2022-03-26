@@ -36,23 +36,6 @@ public class ActivityDeleteCommand extends Command {
     }
 
     /**
-     * Prepares user arguments for the creation of an ActivityDeleteCommand object.
-     *
-     * @param commandArgs A String object representing the user's arguments.
-     * @return An ActivityDeleteCommand object if necessary parameters were found in user arguments,
-     *         an InvalidCommand object otherwise.
-     */
-    public static Command prepare(String commandArgs) {
-        try {
-            int sessionId = Parser.parseSessionId(commandArgs);
-            int activityId = Parser.parseActivityId(commandArgs);
-            return new ActivityDeleteCommand(sessionId, activityId);
-        } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT);
-        }
-    }
-
-    /**
      * Runs the command to delete an Activity object from the list of activities in a Session object
      * managed by the Profile object.
      * Gets the Session object using a unique session identifier.
