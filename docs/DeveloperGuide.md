@@ -229,6 +229,33 @@ when the user invokes the `session /summary` command
 <br>
 <br>
 The general workflow of the `session /summary` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionSummaryCommand` object.
+3. A `SessionSummaryCommand#run` method is then invoked to run the `session /summary` command.
+4. The `Profile` object that stores all sessions is obtained with the `Manager#getProfile` method.
+5. The `TextUI` object that handles all reading and printing operations with the user interface
+   is obtained with the `Manager#getUi` method.
+6. From the `Profile` object obtained, the `Profile#getSession` method is invoked with the session unique identifier
+   parsed from the user input to obtain the `Session` object that we want to settle all transactions for.
+7. A `ArrayList<Person>` object containing all persons participating in the session is then obtained with
+   the `Session#getPersonList` method.
+8. With the list of participants, an `ArrayList<PersonCostPair>` object is obtained with the
+   `SessionSummaryCommand#getPersonCostPairList` method.
+   * This method first calculates all costs borne by each person in the list of participants, 
+     then creates a `PersonCostPair` object that stores both the `Person` object and the cost borne by that person.
+9. With both the `Session` object and the `ArrayList<PersonCostPair>` object, the method
+   `SessionSummaryCommand#processAllTransactions` is called.
+   * This method sorts all the `PersonCostPair` objects by their cost, then matches each debt to be paid to a debt
+     to be collected between all persons. Each of such matches is referred to as a transaction.
+     The matching process is repeated until no more transactions can be made,
+     i.e. all debts are paid and all debts are collected.
+   * A `String` object containing information regarding all transactions that have to be made is then returned.
+   * If no transactions are required to be made, a message explaining that no transactions are required to be made
+     is returned instead.
+   * For the sake of brevity, the specifics of the method `SessionSumamryCommand#processAllTransactions` is omitted
+     from the sequence diagram.
+10. Finally, with the `TextUI` object, the method `printlnMessageWithDivider` is called to print the message
+    obtained from the `SessionSummaryCommand#processAllTransactions` method.
 
 ### Add an activity
 ### Remove an activity
