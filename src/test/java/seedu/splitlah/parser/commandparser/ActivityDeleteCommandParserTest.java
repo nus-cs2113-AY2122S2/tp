@@ -39,6 +39,23 @@ class ActivityDeleteCommandParserTest {
                     + "\n" + ActivityDeleteCommandParser.COMMAND_FORMAT;
             assertEquals(messageToTest, e.getMessage());
         }
+
+        // Case 2: Missing /aid delimiter
+        String inputMissingActivityIdDelimiter = "activity /delete /sid 1";
+        String argsMissingActivityIdDelimiter = Parser.getRemainingArgument(inputMissingActivityIdDelimiter);
+        String errorMessageTwo = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingActivityIdDelimiter);
+        if (!errorMessageTwo.isEmpty()) {
+            fail();
+        }
+
+        try {
+            activityDeleteCommandParser.getCommand(argsMissingActivityIdDelimiter);
+            fail();
+        } catch (InvalidFormatException e) {
+            String messageToTest = Message.ERROR_PARSER_DELIMITER_NOT_FOUND + "/aid"
+                    + "\n" + ActivityDeleteCommandParser.COMMAND_FORMAT;
+            assertEquals(messageToTest, e.getMessage());
+        }
     }
 
     /**
