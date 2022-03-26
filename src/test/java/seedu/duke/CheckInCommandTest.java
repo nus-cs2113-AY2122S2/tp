@@ -18,12 +18,14 @@ class CheckInCommandTest {
         RoomList inputRoomList = new RoomList();
         ItemList itemList = new ItemList();
         AssignmentMap assignmentMap = new AssignmentMap();
+        HousekeeperPerformanceList housekeeperPerformanceList = new HousekeeperPerformanceList();
         Ui ui = new Ui();
         SatisfactionList satisfactionList = new SatisfactionList();
         HousekeeperList housekeeperList = new HousekeeperList();
         String inputCommand = "301";
         CheckInCommand checkInCommand = new CheckInCommand(inputCommand);
-        checkInCommand.execute(housekeeperList, satisfactionList, assignmentMap, inputRoomList, itemList, ui);
+        checkInCommand.execute(housekeeperList, housekeeperPerformanceList, satisfactionList, assignmentMap,
+                inputRoomList, itemList, ui);
         Room expectedRoom = null;
         for (Room room : inputRoomList.getRoomList()) {
             if (room.getRoomId() == 301) {
@@ -43,10 +45,12 @@ class CheckInCommandTest {
         AssignmentMap assignmentMap = new AssignmentMap();
         SatisfactionList satisfactionList = new SatisfactionList();
         HousekeeperList housekeeperList = new HousekeeperList();
+        HousekeeperPerformanceList housekeeperPerformanceList = new HousekeeperPerformanceList();
         String inputCommand = "601";
         CheckInCommand checkInCommand = new CheckInCommand(inputCommand);
         Room expectedRoom = null;
         assertThrows(InvalidRoomNumberException.class,
-            () -> checkInCommand.execute(housekeeperList, satisfactionList, assignmentMap, inputRoomList,itemList,ui));
+            () -> checkInCommand.execute(housekeeperList, housekeeperPerformanceList, satisfactionList,
+                    assignmentMap, inputRoomList,itemList,ui));
     }
 }

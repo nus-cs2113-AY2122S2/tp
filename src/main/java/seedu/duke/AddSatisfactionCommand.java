@@ -15,34 +15,25 @@ import java.util.logging.Level;
 
 public class AddSatisfactionCommand extends Command {
     private Satisfaction satisfaction;
-    private Ui ui = new Ui();
     private static Logger logger = Logger.getLogger("satisfactionLogger");
 
     /**
      * Extracts the customer name and satisfaction value from user input,
      * uses these two values to create a corresponding Satisfaction object.
      *
-     * @param commandStringWithoutCommand The user input (should be of form "[customerName] [satisfactionValue]").
+     * @param userInput The user input (should be of form "[customerName] [satisfactionValue]").
      * @throws HotelLiteManagerException If there is an error in user input (e.g. empty customer name, empty
      *                                   satisfaction value, or invalid satisfaction value).
      */
-    public AddSatisfactionCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
-        commandStringWithoutCommand = commandStringWithoutCommand.toLowerCase(); // Move this to CommandParser later
-        String customerName = "";
-        int satisfactionValue = 0;
-        try {
-            customerName = extractCustomerName(commandStringWithoutCommand);
-            satisfactionValue = extractSatisfactionValue(commandStringWithoutCommand);
-        } catch (EmptySatisfactionCustomerException e) {
-            logger.log(Level.WARNING, "Customer name was found to be empty.");
-            throw new EmptySatisfactionCustomerException();
-        } catch (EmptySatisfactionValueException e) {
-            logger.log(Level.WARNING, "Satisfaction value was found to be empty.");
-            throw new EmptySatisfactionValueException();
-        } catch (InvalidSatisfactionValueException e) {
-            logger.log(Level.WARNING, "Satisfaction value was found to be invalid.");
-            throw new InvalidSatisfactionValueException();
+    public AddSatisfactionCommand(String userInput) throws HotelLiteManagerException {
+        userInput = userInput.toLowerCase();
+        if (!userInput.contains("/")) {
+            logger.log(Level.WARNING, "A '/' character is needed to separate the housekeeper's name "
+                    + "from their rating.");
+            throw new InvalidCommandException();
         }
+        String customerName = extractCustomerName(userInput);
+        int satisfactionValue = extractSatisfactionValue(userInput);
         assert (!customerName.isEmpty()) : "The customer's name should be non-empty.";
         assert (satisfactionValue <= 5 && satisfactionValue >= 1) : "The satisfaction value must be an integer between"
                 + "1 and 5.";
@@ -60,9 +51,6 @@ public class AddSatisfactionCommand extends Command {
      */
     private String extractCustomerName(String userInput) throws HotelLiteManagerException {
         String[] splitInput = userInput.split("/");
-        if (splitInput.length == 0) {
-            throw new EmptySatisfactionCustomerException();
-        }
         String customerName = splitInput[0].trim();
         if (customerName.isEmpty()) {
             throw new EmptySatisfactionCustomerException();
@@ -110,8 +98,8 @@ public class AddSatisfactionCommand extends Command {
      *                 must be included for the execution override.
      * @param ui The user interface for this execution method.
      */
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
-                        AssignmentMap assignmentMap, RoomList roomList,
+    public void execute(HousekeeperList housekeeperList, HousekeeperPerformanceList housekeeperPerformanceList,
+                        SatisfactionList satisfactionList, AssignmentMap assignmentMap, RoomList roomList,
                         ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
         if (satisfactionList.isCustomerInSatisfactionList(satisfaction.getCustomerName())) {
             throw new RepeatCustomerException();

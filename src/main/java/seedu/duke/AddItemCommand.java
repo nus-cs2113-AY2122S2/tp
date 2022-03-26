@@ -104,9 +104,9 @@ public class AddItemCommand extends Command {
      * @param ui               The object that deals with user interface for the program.
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      */
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
-                        AssignmentMap assignmentMap, RoomList roomList, ItemList listOfItems, Ui ui) throws
-            HotelLiteManagerException, WrongCommandException {
+    public void execute(HousekeeperList housekeeperList, HousekeeperPerformanceList housekeeperPerformanceList,
+                        SatisfactionList satisfactionList, AssignmentMap assignmentMap, RoomList roomList,
+                        ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
         Item item = getItem();
         assert (item != null) : "Assertion Failed! There is no item within the AddItemCommand object.";
         listOfItems.addItemToList(item);

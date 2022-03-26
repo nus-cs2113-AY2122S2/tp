@@ -20,7 +20,8 @@ public class CheckOutCommand extends Command {
      * @param ui The user interface for this execution method.
      * @throws InvalidRoomNumberException if the room number is not in the room list.
      */
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
+    public void execute(HousekeeperList housekeeperList, HousekeeperPerformanceList housekeeperPerformanceList,
+                        SatisfactionList satisfactionList,
                         AssignmentMap assignmentMap, RoomList list,
                         ItemList itemList, Ui ui) throws InvalidRoomNumberException {
         this.roomList = list;

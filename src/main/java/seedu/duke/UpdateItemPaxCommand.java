@@ -109,7 +109,8 @@ public class UpdateItemPaxCommand extends Command {
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      */
     @Override
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
+    public void execute(HousekeeperList housekeeperList, HousekeeperPerformanceList housekeeperPerformanceList,
+                        SatisfactionList satisfactionList,
                         AssignmentMap assignmentMap, RoomList roomList,
                         ItemList listOfItems, Ui ui) throws HotelLiteManagerException {
         assert (item != null) : "Assertion Failed! There is no item within the UpdateItemPaxCommand object.";

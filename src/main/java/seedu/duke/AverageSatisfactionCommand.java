@@ -20,14 +20,14 @@ public class AverageSatisfactionCommand extends Command {
      * @param satisfactionList The given list of Satisfaction objects.
      * @param roomList         The given list of Room objects. N/A for this class, but
      *                         must be included for the execution override.
-     * @param itemList         The given list of Item objects. N/A for this class, but
+     * @param listOfItems      The given list of Item objects. N/A for this class, but
      *                         must be included for the execution override.
      * @param ui               The user interface for this execution method.
      */
     @Override
-    public void execute(HousekeeperList housekeeperList, SatisfactionList satisfactionList,
-                        AssignmentMap assignmentMap, RoomList roomList,
-                        ItemList itemList, Ui ui) {
+    public void execute(HousekeeperList housekeeperList, HousekeeperPerformanceList housekeeperPerformanceList,
+                        SatisfactionList satisfactionList, AssignmentMap assignmentMap, RoomList roomList,
+                        ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
         System.out.println("Average customer satisfaction: " + satisfactionList.calculateAverageSatisfaction());
     }
 
