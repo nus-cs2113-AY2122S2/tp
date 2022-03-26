@@ -3,27 +3,49 @@
 ## Introduction
 
 WerkIt! is an application for managing workout routines,
-optimized for use via a Command Line Interface (CLI).
+optimized for use via a Command Line Interface (CLI). This application is for you if you wish to
+have an application to keep track of your workouts and have a system to store your workout routines.
+
+You will be able to create, view, update and delete the workouts and plans you have created and stored them in the application.
+You will also be able to schedule your workout plans for a week (7 days).
+
+### Terminology 
+Please take note of these few terms. It is explained as below:
+
+| Term     | Description                                                                                                              |
+|----------|--------------------------------------------------------------------------------------------------------------------------|
+| Exercise | A single unit of exercise. <br/>Example: "push up", "pull up", "sit up"                                                  |
+| Workout  | An exercise with a quantity. <br/>Example: "5 push up", "5 pull up", "10 sit up"                                         |
+| Plan     | A set of workouts. <br/>Example: A plan named, "Arms" will contains "5 push ups, 5 pull ups"                             |
+| Schedule | Plan schedule for a day. The schedule is set for a week. <br/>Example: Arms plan will be added to Monday in the schedule |
+
+
 ---
 
 ## Table of Contents
 * [Quick Start Guide](#quick-start-guide)
 * [Features](#features)
-  * [Show all Exercises: `exercise /list`](#show-all-exercises-exercise-list)
-  * [Create a Workout: `workout /new`](#create-a-workout-workout-new)
-  * [Show all Workouts: `workout /list`](#show-all-workouts-workout-list)
-  * [Delete a Workout: `workout /delete`](#delete-a-workout-workout-delete)
-  * [Update a Workout: `workout /update`](#update-a-workout-workout-update)
-  * [Create a Plan: `plan /new`](#create-a-plan-plan-new)
-  * [List A Plan: `plan /list`](#list-a-plan-plan-list)
-  * [Update Schedule: `schedule /update`](#update-schedule-schedule-update)
-  * [View Schedule: `schedule /list`](#view-schedule-schedule-list)
-  * [Clear Schedule For A Day: `schedule /clear`](#clear-schedule-for-a-day-schedule-clear)
-  * [Clear Schedule For The Week: `schedule /clearall`](#clear-schedule-for-the-week-schedule-clearall)
-  * [Search For Exercise: `search /exercise`](#search-for-exercise-search-exercise)
-  * [Search For Workout: `search /workout`](#search-for-workout-search-workout)
-  * [Search For Plan: `search /plan`](#search-for-plan-search-plan)
-  * [Search For All: `search /all`](#search-for-all-search-all)
+  * [Exercise And Workout Features](#exercise-and-workout-features)
+    * [Show All Exercises: `exercise /list`](#show-all-exercises-exercise-list)
+    * [Create A Workout: `workout /new`](#create-a-workout-workout-new)
+    * [Show All Workouts: `workout /listall`](#show-all-workouts-in-one-go)
+    * [Show Specific Number Of Workouts: `workout /list`](#show-specific-number-of-Workouts-workout-list)
+    * [Delete A Workout: `workout /delete`](#delete-a-workout-workout-delete)
+    * [Update A Workout: `workout /update`](#update-a-workout-workout-update)
+  * [Plan Features](#plan-features)
+    * [Create A Plan: `plan /new`](#create-a-plan-plan-new)
+    * [List A Plan: `plan /list`](#list-a-plan-plan-list)
+    * [Show Details Of Plan]
+  * [Schedule Features](#schedule-features)
+    * [Update Schedule: `schedule /update`](#update-schedule-schedule-update)
+    * [View Schedule: `schedule /list`](#view-schedule-schedule-list)
+    * [Clear Schedule For A Day: `schedule /clear`](#clear-schedule-for-a-day-schedule-clear)
+    * [Clear Schedule For The Week: `schedule /clearall`](#clear-schedule-for-the-week-schedule-clearall)
+  * [Search Features](#search-features)
+    * [Search For Exercise: `search /exercise`](#search-for-exercise-search-exercise)
+    * [Search For Workout: `search /workout`](#search-for-workout-search-workout)
+    * [Search For Plan: `search /plan`](#search-for-plan-search-plan)
+    * [Search For All: `search /all`](#search-for-all-search-all)
   * [View Help: `help`](#view-help-help)
 * [WerkIt!'s Local Storage Information](#werkits-local-storage-information)
 * [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
@@ -38,12 +60,29 @@ optimized for use via a Command Line Interface (CLI).
 5. Run the WerkIt! application with the command: `java -jar WerkIt.jar`.
 
 ---
-
 ## Features 
+In this section, features of the application can be classified into 4 main categories. They are: <br>
+* [Exercise and Workout Features](#exercise-and-workout-features)
+* [Plan Features](#plan-features) 
+* [Schedule Features](#schedule-features)
+* [Search Features](#search-features)
 
-> **Heads up!** Your inputs cannot contain the pipe character `|`!
+Each feature is being run by a specific command format. When the command format is matched, 
+the command will then be processed by the application and produce the intended outcome. The format of the commands
+contains two types of formatting.
+
+| Format         | Parameters                                                                                                                               |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| `<condition>`  | Contents enclosed between "<>" are the parameters needed for the command to be valid. <br /> Not all commands have conditions to be met. |
+| `/commandType` | Content after "/" is to classify the command type. <br/> Such as classifying it to be a workout/ plan/ schedule/ search command          |
+
+
+
+> :exclamation: **Heads up!** Your inputs cannot contain the pipe character `|`!
 
 ---
+## Exercise And Workout Features
+
 ### Show all Exercises: `exercise /list`
 Lists down all exercises that are available for selection.
 
@@ -130,10 +169,11 @@ In the current workout list, there are a total of 3 workouts. All the workouts h
 If there are 20 workouts in the list, all the 20 workouts will be displayed together. 
 
 ---
+
 ### Show specific number of Workouts: `workout /list`
 Lists down a specific number of workouts that have been created and stored in the workout list at a time.
 The maximum number of workouts that will be displayed at a time is 10 workouts. If there are more
-workouts in the list, user will be prompt for continuation of printing.
+workouts in the list, you will be prompt to give permission to continue the printing.
 
 Format: `workout /list`
 
@@ -204,7 +244,6 @@ Showed all workouts in list
 ----------------------------------------------------------------------
 ```
 ---
-
 ### Update a Workout: `workout /update`
 Modifies an existing workout from the workout list.<br>
 *Noted: Only the number of repetition can be changed.*
@@ -254,6 +293,7 @@ Showed all workouts in list
 ----------------------------------------------------------------------
 ```
 ---
+## Plan Features
 ### Create a Plan: `plan /new`
 Creates a new plan, which consists of a plan name and the workout(s) added.
 
@@ -288,7 +328,7 @@ Alright, the following plan has been created:
 
 ----------------------------------------------------------------------
 ```
-A new plan containing the workouts the user had specified earlier will be created and added to the application's list of plans.
+A new plan containing the workouts you had specified earlier will be created and added to the application's list of plans.
 
 ---
 ### List A Plan: `plan /list`
@@ -317,6 +357,7 @@ To view each plan in detail, enter
 In the current plans list above, there are 3 plans available.
 
 ---
+## Schedule Features
 ### Update Schedule: `schedule /update`
 Update the plan schedule for a particular day of the week.
 
@@ -506,7 +547,7 @@ To view the changes enter command ```schedule /list```.
 ----------------------------------------------------------------------
 ```
 ---
-
+## Search Features
 ### Search For Exercise: `search /exercise`
 Find all exercises containing the specified keywords.
 
@@ -715,7 +756,7 @@ Sorry, no matching plan found.
 ```
 
 ---
-
+## Help Feature
 ### View Help: `help`
 Lists all the commands with examples.
 
@@ -843,7 +884,7 @@ Format: `help`
 ----------------------------------------------------------------------
 ```
 
-This will show a complete guide to use WeriIt.
+This will show a complete guide to use WerkIt.
 
 ---
 
@@ -890,12 +931,23 @@ first time. Your saved data should be in that directory.
 
 Below is a summary of all the commands available in the WerkIt! application.
 
-| Action         | Format and Example                                                                                                                 |
-|:---------------|:-----------------------------------------------------------------------------------------------------------------------------------|
-| Create Workout | Format: `workout /new <exercise name> /reps <number of repetitions>`<br/>Example: `workout /new biceps curl /reps 1`               |
-| Delete Workout | Format: `workout /delete <workout number to delete>`<br/>Example: `workout /delete 2`                                              |
-| Update Workout | Format: `workout /update <index of workout to be updated> <new number of repetitions>`<br/>Example: `workout /update 1 15`         |
-| View Exercise  | Format: `exercise /list`<br/>Example: `exercise /list`                                                                             |
-| Create Plan    | Format: `plan /new <plan name> /workouts <workout number(s) separated by comma>`<br/>Example: `plan /new Plan A /workouts 1, 2, 3` |
-| List Plan      | Format: `plan /list`                                                                                                               |
-| View Help      | Format: `help`<br/>Example: `help`                                                                                                 |
+| Action                                       | Format and Example                                                                                                                                      |
+|:---------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| List Exercise                                | <br /> Format: `exercise /list` <br/>Example: `exercise /list` <br /> <br />                                                                            |
+| Create Workout                               | <br /> Format: `workout /new <exercise name> /reps <number of repetitions>`<br/>Example: `workout /new biceps curl /reps 1`  <br /> <br />              |
+| Delete Workout                               | <br /> Format: `workout /delete <workout number to delete>`<br/>Example: `workout /delete 2`  <br /> <br />                                             |
+| Update Workout                               | <br /> Format: `workout /update <index of workout to be updated> <new number of repetitions>`<br/>Example: `workout /update 1 15`   <br /> <br />       |
+| List Workouts (Display at most 10 at a time) | <br /> Format: `workout /list` <br/>Example: `workout /list` <br /> <br />                                                                              |
+| List All Workouts                            | <br /> Format: `workout /listall` <br/>Example: `workout /listall` <br /> <br />                                                                        |
+| Create Plan                                  | <br /> Format: `plan /new <plan name> /workouts <workout number(s) separated by comma>`<br/>Example: `plan /new Plan A /workouts 1, 2, 3` <br /> <br /> |
+| List Plan                                    | <br /> Format: `plan /list` <br /> <br />                                                                                                               |
+| List Details Of Plan                         | <br /> Format: [to be updated]  <br /> <br />                                                                                                           |
+| Update Schedule                              | <br /> Format: `schedule /update <day number [1-7]> <plan number>`<br/>Example: `schedule /update 2 4` <br /> <br />                                    |
+| List Schedule                                | <br /> Format: `schedule /list` <br /> <br />                                                                                                           |
+| Clear Schedule For A Day                     | <br /> Format: `schedule /clear <day number [1-7]>`<br/>Example: `schedule /clear 3` <br /> <br />                                                      |
+| Clear All Schedule                           | <br /> Format: `schedule /clearall` <br /> <br />                                                                                                       |
+| Search For Exercise                          | <br /> Format: `search /exercise <exercise keyword>` <br/>Example: `search /exercise up` <br /> <br />                                                  |
+| Search For Workout                           | <br /> Format: `search /workout <exercise keyword or number of repetitions>`  <br/>Example: `search /workout push` <br /> <br />                        |
+| Search For Plan                              | <br /> Format: `search /plan <plan keyword>` <br/>Example: `search /plan arms` <br /> <br />                                                            |
+| Search For ALL                               | <br /> Format: `search /all <keyword>` <br/>Example: `search /all 10` <br /> <br />                                                                     |
+| View Help                                    | <br /> Format: `help`<br/>Example: `help`  <br /> <br />                                                                                                |
