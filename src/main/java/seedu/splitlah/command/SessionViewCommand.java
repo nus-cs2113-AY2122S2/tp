@@ -7,7 +7,6 @@ import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
 
-import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 
 /**
@@ -20,10 +19,8 @@ public class SessionViewCommand extends Command {
     private int sessionId;
 
     // MISC CONSTANTS
-    private static final String SUMMARY_HEADER_PREPEND = "(Session Id #";
+    private static final String SUMMARY_HEADER_PREPEND = "-- (Session Id #";
     private static final String SUMMARY_HEADER_POSTPEND = ") --";
-    private static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    private static final int ZERO_INDEXING_OFFSET = 1;
 
     /**
      * Initializes a SessionSummaryCommand object.
