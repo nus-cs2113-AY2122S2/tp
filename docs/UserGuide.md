@@ -1,8 +1,8 @@
 # User Guide
 
 SplitLah is a desktop app with a Command Line Interface (CLI) for splitting bills amongst users after a group outing.
-Group outings can consist of several activities with different people paying the bill for each one—but SplitLah does
-the work of calculating how much each participant owes and whom they must pay at the end of the outing.
+Group outings can consist of several activities with different people paying the bill for each activity, but SplitLah
+does the work of calculating how much each participant owes and whom they must pay at the end of the outing.
 SplitLah consolidates all debts intelligently so they can be paid off with the fewest number of transactions possible. 
 If you can type fast, SplitLah can manage your outings faster than apps using a Graphical User Interface (GUI).
 
