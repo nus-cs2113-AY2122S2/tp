@@ -76,11 +76,19 @@ public class Person {
      *
      * @param description The reason for the expenditure
      * @param amount The value of the expenditure
+     * @param isPermanent Whether the expenditure is recurring
      */
     public void addExpend(String description, double amount, boolean isPermanent) {
         assert (description != null);
         expenditureList.addExpenditure(description, amount, isPermanent);
-        System.out.println("An expenditure of " + amount + " for " + description + " has been added to " + this.name);
+        if (isPermanent) {
+            System.out.println("A recurring expenditure of " + amount + " for " + description + " has been added to " +
+                    this.name);
+        }
+        else {
+            System.out.println("An expenditure of " + amount + " for " + description + " has been added to " +
+                    this.name);
+        }
     }
 
     /**

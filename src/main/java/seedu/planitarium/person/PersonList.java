@@ -159,11 +159,12 @@ public class PersonList {
      * @param personIndex The index of the person
      * @param description The reason for the expenditure
      * @param amount The value of the expenditure
+     * @param isPermanent Whether the expenditure is recurring
      */
-    public void addExpend(int personIndex, String description, double amount) {
+    public void addExpend(int personIndex, String description, double amount, boolean isPermanent) {
         String infoString = "Method addIncome() called";
         logger.getLogger().log(Level.INFO, infoString);
-        getPerson(personIndex).addIncome(description, amount);
+        getPerson(personIndex).addIncome(description, amount, isPermanent);
     }
 
     /**

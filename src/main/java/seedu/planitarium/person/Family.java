@@ -111,11 +111,12 @@ public class Family {
      * @param group The index of the group to find the person
      * @param description The reason for the expenditure
      * @param amount The value of the expenditure
+     * @param isPermanent Whether the expenditure is recurring
      */
-    public void addExpend(int personIndex, int group, String description, double amount) {
+    public void addExpend(int personIndex, int group, String description, double amount, boolean isPermanent) {
         String infoString = "Method addExpend() called";
         logger.getLogger().log(Level.INFO, infoString);
-        getList(group).addExpend(personIndex, description, amount);
+        getList(group).addExpend(personIndex, description, amount, isPermanent);
     }
 
     /**
