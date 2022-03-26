@@ -183,7 +183,7 @@ the Command component when any user input is provided to SplitLah.
 ### Add a session
 **API reference:** [`SessionCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionCreateCommand.java)
 
-The sequence diagram below models the interactions between various entities in the system
+The sequence diagram below models the interactions between various entities in SplitLah
 when the user invokes the `session /create` command.
 <br>
 <br>
@@ -197,7 +197,7 @@ The general workflow of the `session /create` command is as follows:
 ### List sessions
 **API reference:** [`SessionListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionListCommand.java)
 
-The sequence diagram below models the interactions between various entities in the system
+The sequence diagram below models the interactions between various entities in SplitLah
 when the user invokes the `session /list` command.
 <br>
 <br>
@@ -221,7 +221,7 @@ The general workflow of the `session /list` command is as follows:
 ### Settle a session
 **API reference:** [`SessionSummaryCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionSummaryCommand.java)
 
-The sequence diagram below models the interaction between various entities in the system
+The sequence diagram below models the interactions between various entities in SplitLah
 when the user invokes the `session /summary` command
 <br>
 <br>
@@ -264,7 +264,7 @@ The general workflow of the `session /summary` command is as follows:
 ### Add a group
 **API reference:** [`GroupCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupCreateCommand.java)
 
-The sequence diagram below models the interactions between various entities in the system
+The sequence diagram below models the interactions between various entities in SplitLah
 when the user invokes the `group /create` command.
 <br>
 <br>
@@ -289,7 +289,7 @@ The general workflow of the `group /create` command is as follows:
 ### List groups
 **API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
 
-The sequence diagram below models the interactions between various entities in the system
+The sequence diagram below models the interactions between various entities in SplitLah
 when the user invokes the `group /list` command.
 <br>
 <br>
