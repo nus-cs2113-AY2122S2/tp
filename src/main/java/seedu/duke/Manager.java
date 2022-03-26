@@ -95,6 +95,7 @@ public class Manager {
             break;
         case "bye":
             status = Status.END_APP;
+            System.out.println("Terminated");
             isTerminated = true;
             break;
         default:

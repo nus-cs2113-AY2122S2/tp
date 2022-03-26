@@ -12,7 +12,7 @@ public class Validator {
 
     /* Validating person attributes */
 
-    private static void validateNric(String nric) throws HalpmiException {
+    public static void validateNric(String nric) throws HalpmiException {
         Pattern nricPattern = Pattern.compile("[A-Z][0-9]{7}[A-Z]");
         Matcher nricMatcher = nricPattern.matcher(nric);
         if (!nricMatcher.matches()) {

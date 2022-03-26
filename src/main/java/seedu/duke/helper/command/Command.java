@@ -7,7 +7,7 @@ import seedu.duke.status.Status;
 
 
 public abstract class  Command {
-    protected String[] parameterArray;
+    public String[] parameterArray;
 
     Command(String[] parameterArray) {
         this.parameterArray = parameterArray;
