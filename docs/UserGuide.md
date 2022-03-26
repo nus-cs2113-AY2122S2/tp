@@ -66,6 +66,11 @@ Example of usage:
 
 Format: `delete /u USER_INDEX /g GROUP_INDEX`
 
+* `USER_INDEX` refers to an index that is mapped to that individual.
+  * The index can be obtained from the [list](#listing-all-records-by-person-list) command.
+* `GROUP_INDEX` refers to an index that is mapped to the group that individual belongs to.
+  * The index can be obtained from the [list](#listing-all-records-by-group-list) command.
+
 Example of usage:
 
 `delete /u 1 /g 1`
@@ -202,6 +207,9 @@ Example of usage:
 > Search for a string throughout all income and expenditure objects
 
 Format: `find /d USER_STRING /c CATEGORY_INDEX`
+
+* `USER_STRING` refers to the keyword which you want to look for.
+  * Keywords are case-sensitive and inclusive. So a search for `brush` will successfully look for `toothbrush`.
 
 Example of usage:
 
