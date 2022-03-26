@@ -65,4 +65,14 @@ public enum Category {
     public static int getNumberOfCategories() {
         return NumOfCategories;
     }
+
+    /**
+     * Prints all the expense categories and their indexes.
+     */
+    public static void listCategories() {
+        int index = 1;
+        for (String label : LABELS) {
+            System.out.println(index++ + ". " + label);
+        }
+    }
 }

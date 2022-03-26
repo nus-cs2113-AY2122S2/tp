@@ -12,15 +12,15 @@ class ParserUtilityTest {
     void parseDelimitedTerm_delimitedTerm_success() throws EmptyStringException {
         String input1 = "add";
         String delimiter1 = "/n";
-        String output1 = ParserUtility.parseDelimitedTerm(input1, delimiter1, Parser.DELIMITER_BACK);
+        String output1 = ParserUtility.parseDelimitedTerm(input1, delimiter1);
         assertEquals(input1, output1);
 
         String input2 = "add /n bill";
-        String output2 = ParserUtility.parseDelimitedTerm(input2, delimiter1, Parser.DELIMITER_BACK);
+        String output2 = ParserUtility.parseDelimitedTerm(input2, delimiter1);
         assertEquals("bill", output2);
 
         String input3 = "add /n bill /g 1";
-        String output3 = ParserUtility.parseDelimitedTerm(input3, delimiter1, Parser.DELIMITER_BACK);
+        String output3 = ParserUtility.parseDelimitedTerm(input3, delimiter1);
         assertEquals("bill", output3);
     }
 
@@ -30,7 +30,7 @@ class ParserUtilityTest {
             String input = "add /n  /e";
             String delimiter = "/n";
 
-            ParserUtility.parseDelimitedTerm(input, delimiter, Parser.DELIMITER_BACK);
+            ParserUtility.parseDelimitedTerm(input, delimiter);
         } catch (EmptyStringException e) {
             assertEquals("Empty string after `/n` detected", e.getMessage());
         } catch (Exception e) {

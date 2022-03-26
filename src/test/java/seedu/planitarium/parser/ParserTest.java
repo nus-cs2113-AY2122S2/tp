@@ -11,6 +11,7 @@ import seedu.planitarium.person.PersonList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
@@ -294,9 +295,17 @@ class ParserTest {
     @Test
     void parseRecurringStatus_delimiterExist_success()
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
-        String input = "addout /u 1 /e 10 /d Dinner /p t";
-        boolean output = Parser.parseRecurringStatus(input);
-        assertTrue(output);
+        String input1 = "addout /u 1 /e 10 /d Dinner /p t";
+        assertTrue(Parser.parseRecurringStatus(input1));
+
+        String input2 = "addout /u 1 /e 10 /d Dinner /p T";
+        assertTrue(Parser.parseRecurringStatus(input2));
+
+        String input3 = "addout /u 1 /e 10 /d Dinner /p F";
+        assertFalse(Parser.parseRecurringStatus(input3));
+
+        String input4 = "addout /u 1 /e 10 /d Dinner /p abc123";
+        assertFalse(Parser.parseRecurringStatus(input4));
     }
 
     @Test
