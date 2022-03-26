@@ -1,13 +1,10 @@
 package seedu.splitlah.command;
 
-import seedu.splitlah.data.Activity;
-import seedu.splitlah.data.Manager;
-import seedu.splitlah.data.Person;
-import seedu.splitlah.data.PersonList;
-import seedu.splitlah.data.Session;
+import seedu.splitlah.data.*;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TextUI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -251,28 +248,30 @@ public class ActivityCreateCommand extends Command {
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST);
             return;
         }
+        TextUI ui = manager.getUi();
         try {
             updateCostAndCostList();
             assert costList != null : Message.ASSERT_ACTIVITYCREATE_COST_LIST_ARRAY_NULL;
             assert totalCost > 0 : Message.ASSERT_ACTIVITYCREATE_TOTAL_COST_LESS_THAN_ONE;
-            Session session = manager.getProfile().getSession(sessionId);
+            Profile profile = manager.getProfile();
+            Session session = profile.getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
             if (activityId == -1) {
-                activityId = manager.getProfile().getNewActivityId();
+                activityId = profile.getNewActivityId();
             }
             addAllActivityCost(involvedPersonList, personPaid, activityId);
             Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(activity);
             manager.saveProfile();
             if (activityId != -1) {
-                manager.getUi().printlnMessageWithDivider(EDIT_SUCCESS + activity);
+                ui.printlnMessageWithDivider(EDIT_SUCCESS + activity);
             } else {
-                manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + activity);
+                ui.printlnMessageWithDivider(COMMAND_SUCCESS + activity);
             }
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_ACTIVITY_ADDED + activityId);
         } catch (InvalidDataException e) {
-            manager.getUi().printlnMessage(e.getMessage());
+            ui.printlnMessage(e.getMessage());
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_FAILED_ADDING_ACTIVITY
                     + "\n" + e.getMessage());
         }
