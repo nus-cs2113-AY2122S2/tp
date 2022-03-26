@@ -1,6 +1,6 @@
-Invalid Command
-Invalid Command
-Invalid Command
+Error! Invalid Command.
+Error! Invalid Command.
+Error! Invalid Command.
 Error! Invalid Command -> Availability NAME @ INT AGE
 Noted!
 [ sgg ]: 17, <Enter Availability>
@@ -48,5 +48,5 @@ Error! Invalid Command -> Availability NAME @ M,T,W,T,F,S,S
 Toilet Roll has been removed from the Item List.
 There are currently 1 items within the Item List.
 Error! Item not found in inventory.
-Error! Item Name cannot be empty.
+Error! Invalid Command.
 see u again!
