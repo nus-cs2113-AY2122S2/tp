@@ -4,18 +4,16 @@ import seedu.splitlah.command.Command;
 import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
-import seedu.splitlah.command.ActivityEditCommand;
-import seedu.splitlah.command.SessionCreateCommand;
-import seedu.splitlah.command.SessionDeleteCommand;
-import seedu.splitlah.command.ExitCommand;
 import seedu.splitlah.command.InvalidCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
+import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
@@ -245,7 +243,8 @@ public class Parser {
 
         String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.GST_DELIMITER);
         double gst = ParserUtils.parsePercentageFromString(argument, ParserUtils.GST_DELIMITER);
-        if (gst < MINIMUM_SURCHARGE_PERCENT || gst > MAXIMUM_SURCHARGE_PERCENT) {
+        assert gst >= 0 : Message.ASSERT_PARSER_PERCENTAGE_NEGATIVE;
+        if (gst > MAXIMUM_SURCHARGE_PERCENT) {
             throw new InvalidFormatException(ParserErrors.getInvalidGstErrorMessage());
         }
         return gst;
@@ -271,7 +270,8 @@ public class Parser {
 
         String argument = ParserUtils.getArgumentFromDelimiter(commandArgs, ParserUtils.SERVICE_CHARGE_DELIMITER);
         double serviceCharge = ParserUtils.parsePercentageFromString(argument, ParserUtils.SERVICE_CHARGE_DELIMITER);
-        if (serviceCharge < MINIMUM_SURCHARGE_PERCENT || serviceCharge > MAXIMUM_SURCHARGE_PERCENT) {
+        assert serviceCharge >= 0 : Message.ASSERT_PARSER_PERCENTAGE_NEGATIVE;
+        if (serviceCharge > MAXIMUM_SURCHARGE_PERCENT) {
             throw new InvalidFormatException(ParserErrors.getInvalidServiceChargeErrorMessage());
         }
         return serviceCharge;
@@ -341,8 +341,8 @@ public class Parser {
             switch (commandType.toLowerCase()) {
             case SessionCreateCommandParser.COMMAND_TEXT:
                 return new SessionCreateCommandParser().getCommand(remainingArgs);
-            case SessionDeleteCommand.COMMAND_TEXT:
-                return SessionDeleteCommand.prepare(remainingArgs);
+            case SessionDeleteCommandParser.COMMAND_TEXT:
+                return new SessionDeleteCommandParser().getCommand(remainingArgs);
             case SessionSummaryCommandParser.COMMAND_TEXT:
                 return new SessionSummaryCommandParser().getCommand(remainingArgs);
             case SessionListCommandParser.COMMAND_TEXT:
@@ -367,8 +367,8 @@ public class Parser {
                 return GroupViewCommand.prepare(remainingArgs);
             case HelpCommandParser.COMMAND_TEXT:
                 return new HelpCommandParser().getCommand(remainingArgs);
-            case ExitCommand.COMMAND_TEXT:
-                return new ExitCommand();
+            case ExitCommandParser.COMMAND_TEXT:
+                return new ExitCommandParser().getCommand(remainingArgs);
             default:
                 return new InvalidCommand(Message.ERROR_PARSER_INVALID_COMMAND);
             }

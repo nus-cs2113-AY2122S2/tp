@@ -3,16 +3,15 @@ package seedu.splitlah.parser;
 import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
-import seedu.splitlah.command.ExitCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
-import seedu.splitlah.command.SessionCreateCommand;
-import seedu.splitlah.command.SessionDeleteCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
+import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
@@ -235,7 +234,7 @@ public class ParserUtils {
      * @throws InvalidFormatException If the provided input String object contains characters other than numeric
      *                                characters or a single decimal point character,
      *                                and cannot be parsed as a double,
-     *                                if the double parsed from the input String object is not a positive value,
+     *                                if the double parsed from the input String object is a negative value,
      *                                if the parsed double has more than 2 decimal points, or
      *                                if the parsed double has more than 3 digits before the decimal point.
      */
@@ -414,8 +413,8 @@ public class ParserUtils {
         case SessionCreateCommandParser.COMMAND_TEXT:
             delimiterList = SessionCreateCommandParser.COMMAND_DELIMITERS;
             break;
-        case SessionDeleteCommand.COMMAND_TEXT:
-            delimiterList = SessionDeleteCommand.COMMAND_DELIMITERS;
+        case SessionDeleteCommandParser.COMMAND_TEXT:
+            delimiterList = SessionDeleteCommandParser.COMMAND_DELIMITERS;
             break;
         case SessionSummaryCommandParser.COMMAND_TEXT:
             delimiterList = SessionSummaryCommandParser.COMMAND_DELIMITERS;
@@ -456,7 +455,7 @@ public class ParserUtils {
         switch (commandType.toLowerCase()) {
         case SessionCreateCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case SessionDeleteCommand.COMMAND_TEXT:
+        case SessionDeleteCommandParser.COMMAND_TEXT:
             // Fallthrough
         case SessionSummaryCommandParser.COMMAND_TEXT:
             // Fallthrough
@@ -480,7 +479,7 @@ public class ParserUtils {
             // Fallthrough
         case HelpCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case ExitCommand.COMMAND_TEXT:
+        case ExitCommandParser.COMMAND_TEXT:
             // Fallthrough
             return true;
         default:
