@@ -238,7 +238,8 @@ public class PlanList {
 
         ArrayList<Workout> workoutsInPlanList = planToViewDetails.getWorkoutsInPlanList();
         int numberOfWorkoutsInPlan = workoutsInPlanList.size();
-        assert ((numberOfWorkoutsInPlan <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN) && (numberOfWorkoutsInPlan > 0));
+        assert ((numberOfWorkoutsInPlan <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN) && (numberOfWorkoutsInPlan > 0)) :
+                "Total number of workouts is not valid.";
 
         System.out.println("Here are the " + numberOfWorkoutsInPlan + " workouts in ["
                 + ui.getColorText(TextColor.COLOR_YELLOW, planName) + "].");
@@ -278,5 +279,54 @@ public class PlanList {
 
     private boolean checkIndexIsWithinRange(int index) {
         return index > 0 && index <= plansDisplayList.size();
+    }
+
+    private boolean checkWorkoutInPlan(String workoutToCheck, Plan plan) {
+        ArrayList<Workout> workoutsInPlanList = plan.getWorkoutsInPlanList();
+        String workoutInPlanDetails;
+        for (Workout workoutsInPlan : workoutsInPlanList) {
+            workoutInPlanDetails = workoutsInPlan.toString();
+            if (workoutToCheck.equals(workoutInPlanDetails)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private ArrayList<Integer> findPlanContainsDeletedWorkout(String workoutToCheck) {
+        Plan planObject;
+        boolean isWorkoutInPlan = false;
+        ArrayList<Integer> planWithDeletedWorkout = new ArrayList<Integer>();
+        for (int i = 1; i <= getPlansDisplayList().size(); i++) {
+            planObject = getPlanFromIndexNum(i);
+            isWorkoutInPlan = checkWorkoutInPlan(workoutToCheck, planObject);
+            if (isWorkoutInPlan) {
+                planWithDeletedWorkout.add(i);
+            }
+        }
+        if (isWorkoutInPlan) {
+            System.out.println(workoutToCheck + " is found in:\n");
+        }
+        return planWithDeletedWorkout;
+    }
+
+    public void deletePlanContainsDeletedWorkout(String workoutToCheck) throws ArrayIndexOutOfBoundsException,
+            InvalidPlanException {
+        ArrayList<Integer> planWithDeletedWorkout = findPlanContainsDeletedWorkout(workoutToCheck);
+        if (planWithDeletedWorkout.size() <= 0) {
+            return;
+        }
+        for (int planNumber : planWithDeletedWorkout) {
+            System.out.println("\t" + getPlansDisplayList().get(planNumber - 1));
+            assert (checkIndexIsWithinRange(planNumber)) : "Plan number is out of range.";
+        }
+        int totalNumberOfPlanToDelete = planWithDeletedWorkout.size();
+        for (int i = 0; i < totalNumberOfPlanToDelete; i++) {
+            if (i == 0) {
+                System.out.println("\nThe following plan has been removed:\n");
+            }
+            System.out.println((i + 1) + ". " + getPlansDisplayList().get(planWithDeletedWorkout.get(i) - i - 1));
+            deletePlan(Integer.toString(planWithDeletedWorkout.get(i) - i));
+        }
     }
 }

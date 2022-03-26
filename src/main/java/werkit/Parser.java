@@ -219,7 +219,7 @@ public class Parser {
             throw new InvalidCommandException(className,
                     InvalidCommandException.INVALID_ACTION_ERROR_MSG);
         }
-        return new WorkoutCommand(userInput, fileManager, workoutList, actionKeyword, arguments);
+        return new WorkoutCommand(userInput, fileManager, workoutList, planList, actionKeyword, arguments);
     }
 
     public ExitCommand createExitCommand(String userInput) {
