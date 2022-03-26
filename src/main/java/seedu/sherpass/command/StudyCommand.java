@@ -11,7 +11,7 @@ import java.io.IOException;
 import static seedu.sherpass.constant.Message.GOODBYE_MESSAGE_STUDY;
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_STUDY;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_STUDY;
-import static seedu.sherpass.util.Parser.parseStudyMode;
+import static seedu.sherpass.util.parser.TimerParser.parseStudyMode;
 
 public class StudyCommand extends Command {
     public static final String COMMAND_WORD = "study";

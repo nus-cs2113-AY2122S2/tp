@@ -1,32 +1,24 @@
-package seedu.sherpass.util;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+package seedu.sherpass.util.parser;
 
 import seedu.sherpass.command.AddCommand;
 import seedu.sherpass.command.AddRecurringCommand;
-import seedu.sherpass.command.ClearCommand;
 import seedu.sherpass.command.Command;
 import seedu.sherpass.command.DeleteCommand;
 import seedu.sherpass.command.DeleteRecurringCommand;
 import seedu.sherpass.command.EditCommand;
 import seedu.sherpass.command.EditRecurringCommand;
-import seedu.sherpass.command.ExitCommand;
 import seedu.sherpass.command.HelpCommand;
 import seedu.sherpass.command.MarkCommand;
 import seedu.sherpass.command.ShowCommand;
-import seedu.sherpass.command.StudyCommand;
 import seedu.sherpass.command.UnmarkCommand;
+
 import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.exception.InputRepeatedException;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.exception.WrongEditInfoFormatException;
-import seedu.sherpass.exception.InvalidTimeException;
-
-import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
+import seedu.sherpass.util.Ui;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -38,77 +30,28 @@ import static seedu.sherpass.constant.CommandParameters.FREQUENCY_DELIMITER;
 import static seedu.sherpass.constant.CommandParameters.START_TIME_DELIMITER;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithoutTimeFormat;
-import static seedu.sherpass.constant.Index.CUSTOM_COMMAND_INDEX;
+
+import static seedu.sherpass.constant.Index.MARK_INDEX;
 import static seedu.sherpass.constant.Index.SHOW_OPTION_INDEX;
-import static seedu.sherpass.constant.Index.STUDY_PARAMETER_INDEX;
 import static seedu.sherpass.constant.Index.TASK_CONTENT_INDEX;
-import static seedu.sherpass.constant.Index.TIMER_FORMAT_INDEX;
-import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
-import static seedu.sherpass.constant.Index.OPTIONS_INDEX;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ZERO;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_ONE;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_TWO;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_THREE;
-
-import static seedu.sherpass.constant.Index.CUSTOM_TIMER_INDEX;
-import static seedu.sherpass.constant.Index.DEFAULT_TIMER_INDEX;
-
 import static seedu.sherpass.constant.Index.EXPECTED_EDITRECURRING_ARG_LENGTH;
 import static seedu.sherpass.constant.Index.INVALID_INDEX;
-import static seedu.sherpass.constant.Index.MARK_INDEX;
 import static seedu.sherpass.constant.Index.SLASH_OFFSET;
 import static seedu.sherpass.constant.Index.SPLIT_FIRST_PART_INDEX;
 import static seedu.sherpass.constant.Index.SPLIT_SECOND_PART_INDEX;
 import static seedu.sherpass.constant.Index.SPLIT_TWO_PART_LIMIT;
 import static seedu.sherpass.constant.Index.START_OF_STRING;
-import static seedu.sherpass.constant.Index.STUDY_COMMAND_INDEX;
 import static seedu.sherpass.constant.Index.WHITESPACE_OFFSET;
 import static seedu.sherpass.constant.Index.ZERO_INDEX_OFFSET;
+
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_INVALID_STUDY_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
 import static seedu.sherpass.constant.Message.WHITESPACE;
 
-public class Parser {
-
-    /**
-     * Returns a task object parsed from the data file.
-     *
-     * @param taskData The data of a task in JSON.
-     * @return Task containing the saved data for adding into program's task array.
-     * @throws InvalidInputException If saved data is missing content, i.e. task description or date.
-     */
-    public static Task parseSaveData(JSONObject taskData) throws InvalidInputException {
-        Task parsedTask;
-        try {
-            int identifier = taskData.getInt("identifier");
-            String description = taskData.getString("description");
-            String byDateString = taskData.getString("by_date");
-            String doOnStartDateString = taskData.getString("do_date_start");
-            String doOnEndDateString = taskData.getString("do_date_end");
-            String frequencyString = taskData.getString("frequency");
-
-            Frequency repeatFrequency = frequencyString.isBlank()
-                    ? null : Frequency.valueOf(frequencyString);
-            LocalDateTime byDate = (byDateString.isBlank()
-                    ? null : LocalDateTime.parse(byDateString, inputWithTimeFormat));
-            LocalDateTime doOnStartDateTime = LocalDateTime.parse(doOnStartDateString, inputWithTimeFormat);
-            LocalDateTime doOnEndDateTime = LocalDateTime.parse(doOnEndDateString, inputWithTimeFormat);
-
-            parsedTask = new Task(identifier, description, byDate, doOnStartDateTime,
-                    doOnEndDateTime, repeatFrequency);
-            String status = taskData.getString("status");
-            if (status.equals("X")) {
-                parsedTask.markAsDone();
-            }
-            return parsedTask;
-        } catch (JSONException | DateTimeParseException exception) {
-            throw new InvalidInputException(exception.getMessage());
-        }
-    }
+public class TaskParser {
 
     public static Command prepareMarkOrUnmark(String[] parsedInput, String commandWord, TaskList taskList) {
         try {
@@ -200,7 +143,7 @@ public class Parser {
         return String.join(WHITESPACE, splitStrings).trim();
     }
 
-    private static Command prepareAddRecurring(String argument) {
+    protected static Command prepareAddRecurring(String argument) {
         if (argument.isBlank()) {
             return new HelpCommand(AddCommand.COMMAND_WORD);
         }
@@ -220,7 +163,7 @@ public class Parser {
         return newCommand;
     }
 
-    private static Command prepareEditRecurring(String argument) {
+    protected static Command prepareEditRecurring(String argument) {
         if (argument.isBlank()) {
             return new HelpCommand(AddCommand.COMMAND_WORD);
         }
@@ -249,7 +192,7 @@ public class Parser {
         return newCommand;
     }
 
-    private static Command prepareDeleteRecurring(String argument) {
+    protected static Command prepareDeleteRecurring(String argument) {
         if (argument.isBlank()) {
             return new HelpCommand(DeleteCommand.COMMAND_WORD);
         }
@@ -264,7 +207,7 @@ public class Parser {
     }
 
     // Please add in constants to the magic literals
-    private static Command prepareAdd(String[] splitInput, TaskList taskList) {
+    protected static Command prepareAdd(String[] splitInput, TaskList taskList) {
         String[] filteredTaskContent;
         LocalDateTime byDate;
         LocalDateTime doOnDate;
@@ -294,11 +237,10 @@ public class Parser {
         return null;
     }
 
-    private static Command prepareEdit(String[] splitInput) {
-
+    protected static Command prepareEdit(String[] splitInput) {
         String[] fullEditInfo = splitInput[1].trim().split(" ", 2);
 
-        //7 possibilities of editing, incorrect format of inputs are rejected
+        // 7 possibilities of editing, incorrect format of inputs are rejected
         try {
 
             int taskNumberToEdit = Integer.parseInt(fullEditInfo[0]);
@@ -320,6 +262,37 @@ public class Parser {
         return null;
     }
 
+    protected static Command prepareDelete(String[] parsedInput, TaskList taskList) {
+        try {
+            return new DeleteCommand(parsedInput, taskList);
+        } catch (IndexOutOfBoundsException | InvalidInputException | NumberFormatException e) {
+            System.out.println(ERROR_INVALID_DELETE_INDEX_MESSAGE + HELP_MESSAGE_SPECIFIC_COMMAND);
+        }
+        return null;
+    }
+
+    public static Command prepareShow(String[] splitInput) {
+        try {
+            String selection = splitInput[SHOW_OPTION_INDEX].trim();
+            return parseShowCommandOptions(selection.toLowerCase());
+        } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
+            System.out.println(ERROR_INVALID_INPUT_MESSAGE);
+        }
+        return null;
+    }
+
+    private static Command parseShowCommandOptions(String selection) throws InvalidInputException {
+        if (selection.isBlank()) {
+            throw new InvalidInputException();
+        }
+        try {
+            LocalDate dayInput = LocalDate.parse(selection, inputWithoutTimeFormat);
+            return new ShowCommand(dayInput, null);
+        } catch (DateTimeParseException e) {
+            return new ShowCommand(null, selection);
+        }
+    }
+
     private static void checkCorrectEditInfoFormat(String fullEditInfo) throws WrongEditInfoFormatException {
         // tests to make sure the byDate is before the doOnDate
         if (fullEditInfo.contains(BY_DATE_DELIMITER) && fullEditInfo.contains(DO_DATE_DELIMITER)) {
@@ -336,7 +309,6 @@ public class Parser {
     }
 
     private static Command handleEdit(int taskNumberToEdit, String fullEditInfo) throws InvalidInputException {
-
         String[] splitEditInfo = fullEditInfo.split(" ");
         String descriptionToEdit;
         LocalDateTime parsedByDateToEdit;
@@ -356,7 +328,6 @@ public class Parser {
     }
 
     private static LocalDateTime getParsedDateToEdit(String fullEditInfo, String keyword) throws InvalidInputException {
-
         if (fullEditInfo.contains(keyword)) {
 
             int offsetForKeyword = keyword.length() + 1;
@@ -368,191 +339,6 @@ public class Parser {
 
             return prepareTaskDate(dateToEdit, "00:00");
         }
-
         return null;
-    }
-
-    private static Command prepareDelete(String[] parsedInput, TaskList taskList) {
-        try {
-            return new DeleteCommand(parsedInput, taskList);
-        } catch (IndexOutOfBoundsException | InvalidInputException | NumberFormatException e) {
-            System.out.println(ERROR_INVALID_DELETE_INDEX_MESSAGE + HELP_MESSAGE_SPECIFIC_COMMAND);
-        }
-        return null;
-    }
-
-    private static Command prepareHelp(String userInput) {
-        try {
-            String[] parsedInput = userInput.split(" ", 2);
-            return new HelpCommand(parsedInput[HELP_OPTIONS_INDEX]);
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            return new HelpCommand("show help list");
-        }
-    }
-
-    private static Command parseShowCommandOptions(String selection) throws InvalidInputException {
-        if (selection.isBlank()) {
-            throw new InvalidInputException();
-        }
-        try {
-            LocalDate dayInput = LocalDate.parse(selection, inputWithoutTimeFormat);
-            return new ShowCommand(dayInput, null);
-        } catch (DateTimeParseException e) {
-            return new ShowCommand(null, selection);
-        }
-    }
-
-    public static Command prepareShow(String[] splitInput) {
-        try {
-            String selection = splitInput[SHOW_OPTION_INDEX].trim();
-            return parseShowCommandOptions(selection.toLowerCase());
-        } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
-            System.out.println(ERROR_INVALID_INPUT_MESSAGE);
-        }
-        return null;
-    }
-
-    /**
-     * Parses the user command input.
-     *
-     * @param userInput User command.
-     * @param taskList  Array of tasks.
-     * @param ui User interface which interacts with user
-     * @return Command type matching the user command.
-     */
-    public static Command parseCommand(String userInput, TaskList taskList, Ui ui) {
-        String[] splitInput = userInput.split(" ", 2);
-        String commandWord = splitInput[OPTIONS_INDEX].toLowerCase().trim();
-        String commandArg = "";
-        if (splitInput.length > 1) {
-            commandArg = splitInput[1];
-        }
-        switch (commandWord) {
-        case MarkCommand.COMMAND_WORD:
-            return prepareMarkOrUnmark(splitInput, MarkCommand.COMMAND_WORD, taskList);
-        case UnmarkCommand.COMMAND_WORD:
-            return prepareMarkOrUnmark(splitInput, UnmarkCommand.COMMAND_WORD, taskList);
-        case AddCommand.COMMAND_WORD:
-            if (commandArg.contains(FREQUENCY_DELIMITER)) {
-                return prepareAddRecurring(commandArg);
-            }
-            return prepareAdd(splitInput, taskList);
-        case EditCommand.COMMAND_WORD:
-            if (commandArg.contains(FREQUENCY_DELIMITER)) {
-                return prepareEditRecurring(commandArg);
-            }
-            return prepareEdit(splitInput);
-        case DeleteCommand.COMMAND_WORD:
-            if (commandArg.contains(FREQUENCY_DELIMITER)) {
-                return prepareDeleteRecurring(commandArg);
-            }
-            return prepareDelete(splitInput, taskList);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-        case StudyCommand.COMMAND_WORD:
-            return new StudyCommand();
-        case ShowCommand.COMMAND_WORD:
-            return prepareShow(splitInput);
-        case HelpCommand.COMMAND_WORD:
-            return prepareHelp(userInput);
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-        default:
-            ui.showToUser(ERROR_INVALID_INPUT_MESSAGE);
-            return null;
-        }
-    }
-
-    /**
-     * Parses the default timer modes.
-     *
-     * @param defaultTimerChoice Mode number.
-     * @return Returns the duration of the timer mode selected in seconds.
-     * @throws InvalidTimeException If defaultTimerChoice does not match
-     *                              with the given choices.
-     */
-    private static int selectDefaultTimer(String defaultTimerChoice) throws InvalidTimeException {
-        switch (defaultTimerChoice) {
-        case "0":
-            return DEFAULT_TIMER_ZERO;
-        case "1":
-            return DEFAULT_TIMER_ONE;
-        case "2":
-            return DEFAULT_TIMER_TWO;
-        case "3":
-            return DEFAULT_TIMER_THREE;
-        default:
-            throw new InvalidTimeException();
-        }
-    }
-
-    private static boolean isValidDuration(int duration) {
-        return duration > 0;
-    }
-
-    /**
-     * Parses input to the timer.
-     *
-     * @param parsedInput Parsed input.
-     * @return Returns duration of custom timer input, or the duration of
-     *         selected default timer mode in seconds.
-     * @throws InvalidTimeException If timer input less than or equals to 0 or there is
-     *                              multiple timer inputs.
-     */
-    public static int parseTimerInput(String[] parsedInput) throws InvalidTimeException {
-        if (parsedInput[TIMER_FORMAT_INDEX].trim().contains("/custom")) {
-            if (parsedInput[TIMER_FORMAT_INDEX].trim().indexOf("/custom") != CUSTOM_COMMAND_INDEX) {
-                throw new InvalidTimeException();
-            }
-            String[] customTimerInput = parsedInput[TIMER_FORMAT_INDEX].split("/custom", 2);
-            int customDuration = Integer.parseInt(customTimerInput[CUSTOM_TIMER_INDEX].trim());
-            if (!isValidDuration(customDuration)) {
-                throw new InvalidTimeException();
-            }
-            return customDuration;
-        }
-        return selectDefaultTimer(parsedInput[DEFAULT_TIMER_INDEX].trim());
-    }
-
-    /**
-     * Parses commands for study mode.
-     *
-     * @param rawUserInput Raw user input.
-     * @param ui           UI.
-     * @param timerLogic Logic class to handle timer functions
-     */
-    public static void parseStudyMode(Ui ui, Storage storage, String rawUserInput,
-                                      TimerLogic timerLogic) throws IOException {
-        String[] parsedInput = rawUserInput.trim().split(" ", 2);
-        switch (parsedInput[STUDY_COMMAND_INDEX].trim().toLowerCase()) {
-        case "start":
-            timerLogic.callStartTimer(parsedInput);
-            break;
-        case "pause":
-            timerLogic.callPauseTimer();
-            break;
-        case "resume":
-            timerLogic.callResumeTimer();
-            break;
-        case "stop":
-            timerLogic.callStopTimer();
-            break;
-        case "mark":
-            timerLogic.markTask(storage, parsedInput);
-            break;
-        case "show":
-            timerLogic.showTasks(storage, parsedInput);
-            break;
-        default:
-            ui.showToUser(ERROR_INVALID_STUDY_INPUT_MESSAGE);
-        }
-    }
-
-    public static String parseStudyParameter(String[] parsedInput) {
-        if (parsedInput[STUDY_PARAMETER_INDEX].equals("stopwatch")) {
-            return "stopwatch";
-        }
-        return "countdown";
     }
 }
