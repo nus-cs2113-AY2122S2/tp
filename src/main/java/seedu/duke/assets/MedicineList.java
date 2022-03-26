@@ -4,6 +4,7 @@ package seedu.duke.assets;
 import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
+import seedu.duke.helper.command.CommandLineTable;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -13,6 +14,15 @@ public class MedicineList extends List {
 
     public int getSize() {
         return medicines.size();
+    }
+
+    public Medicine getMedicine(String medicineId) {
+        for (Medicine medicine : medicines) {
+            if (medicine.getMedicineId().equals(medicineId)) {
+                return medicine;
+            }
+        }
+        return null;
     }
 
     public Medicine search(String medicineId) {
@@ -34,6 +44,9 @@ public class MedicineList extends List {
         medicines.add(newMedicine);
     }
 
+    public void find(String[] command){
+    }
+
     public String getMedicineInfo(Medicine medicine) {
         return (medicine.getMedicineId() + ": "
                 + medicine.getMedicineName() + ", "
@@ -41,37 +54,35 @@ public class MedicineList extends List {
                 + medicine.getSideEffects() + ", " + Integer.toString(medicine.getQuantity()));
     }
 
-    public void view() {
-        if (getSize() == 0) {
-            UI.printParagraph("There are no medicines currently.");
+
+    //view particular medicine
+    public void view(String medicineId) {
+        Medicine medicine = getMedicine(medicineId);
+        if (medicine == null) {
+            UI.printParagraph("Medicine doesn't exist please try again!");
             return;
         }
-        UI.printParagraph("Here is the list of medicines");
-        for (Medicine medicine : medicines) {
-            UI.printCont(getMedicineInfo(medicine));
-        }
-        UI.printCont("There are a total of " + Integer.toString(medicines.size())
-                + " in the system.");
+        CommandLineTable medicineTable = new CommandLineTable();
+        medicineTable.setShowVerticalLines(true);
+        medicineTable.setHeaders("MedicineId", "MedicineName","Dosage", "Expiry", "SideEffects", "Quantity");
+        medicineTable.addRow(medicine.getMedicineId(), medicine.getMedicineName(), String.valueOf(medicine.getDosage()),
+                medicine.getExpiry(), medicine.getSideEffects(), String.valueOf(medicine.getQuantity()));
+        medicineTable.print();
     }
 
-    //todo: please change logic
-    public void view(String parameters) {
-        if (getSize() == 0) {
-            UI.printParagraph("There are no medicines matching the given name.");
-            return;
+    public void view() {
+        CommandLineTable medicineTable = new CommandLineTable();
+        //st.setRightAlign(true);//if true then cell text is right aligned
+        medicineTable.setShowVerticalLines(true);
+        medicineTable.setHeaders("MedicineId", "MedicineName","Dosage", "Expiry", "SideEffects", "Quantity");
+
+        for(Medicine medicine: medicines){
+            medicineTable.addRow(medicine.getMedicineId(), medicine.getMedicineName(), String.valueOf(medicine.getDosage()),
+                    medicine.getExpiry(), medicine.getSideEffects(), String.valueOf(medicine.getQuantity()));
         }
-        UI.printParagraph("Here is the list of batches of " + parameters + ":");
-        boolean hasRecord = false;
-        for (Medicine medicine : medicines) {
-            if (medicine.getMedicineName().equals(parameters)) {
-                UI.printCont(getMedicineInfo(medicine));
-                hasRecord = true;
-            }
-        }
-        if (!hasRecord) {
-            UI.printCont("No matching medicine found!");
-        }
+        medicineTable.print();
     }
+
 
     public void remove(String medicineId) throws NotFoundException {
         for (int i = 0; i < getSize(); i++) {
