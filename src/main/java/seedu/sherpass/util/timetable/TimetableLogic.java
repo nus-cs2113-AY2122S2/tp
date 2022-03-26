@@ -84,7 +84,7 @@ public class TimetableLogic {
         }
     }
 
-    public static void showMonthlySchedule(TaskList taskList, Ui ui, Month month) {
+    protected static void showMonthlySchedule(TaskList taskList, Ui ui, Month month) {
         LocalDate firstDayOfMonth = TimetableLogic.getFirstDayOfMonth(month);
         ArrayList<Task> monthlySchedule = taskList.getFilteredTasksByMonth(firstDayOfMonth);
 
