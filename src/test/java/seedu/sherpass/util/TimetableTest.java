@@ -86,7 +86,7 @@ public class TimetableTest {
         System.setOut(new PrintStream(outContent));
         Ui ui = new Ui();
         TaskList taskList = new TaskList(new ArrayList<>());
-        LocalDate currentDate = TimetableLogic.resetDateToMonday(LocalDate.now().format(dayOnlyFormat), ui);
+        LocalDate currentDate = TimetableLogic.resetDateToMonday(LocalDate.now(), ui);
         assert (currentDate != null);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 7; i++) {
