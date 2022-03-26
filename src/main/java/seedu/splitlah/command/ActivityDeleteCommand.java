@@ -17,16 +17,7 @@ import java.util.logging.Level;
  */
 public class ActivityDeleteCommand extends Command {
 
-    public static final String COMMAND_TEXT = "activity /delete";
-
-    public static final String COMMAND_FORMAT = "Syntax: activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]";
-
     private static final String COMMAND_SUCCESS = "The activity was deleted successfully.";
-
-    public static final String[] COMMAND_DELIMITERS = {
-        ParserUtils.SESSION_ID_DELIMITER,
-        ParserUtils.ACTIVITY_ID_DELIMITER 
-    };
     
     private int sessionId;
     private int activityId;
