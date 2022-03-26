@@ -152,7 +152,6 @@ For example `addStaff(int staffId, String staffName, String position, double sal
 And `deleteStaff(int)` calls `remove(int)` to remove a `Staff` from `ArrayList<Staff>`:
 
 ![](diagrams/sqeuence/StaffManager_deleteStaff.png)
->>>>>>> 8472b6391bdb198b3c73a412bedad282438ac0c5
 
 
 ## Product scope
