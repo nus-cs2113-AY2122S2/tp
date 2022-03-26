@@ -14,6 +14,7 @@ import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
 
 /**
  * Container of hardcoded messages.
@@ -52,7 +53,7 @@ public abstract class Message {
                     + "        Syntax: " + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n"
                     + "                " + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND + "\n"
                     + "5.  Delete an existing activity\n"
-                    + "        " + ActivityDeleteCommand.COMMAND_FORMAT + "\n"
+                    + "        " + ActivityDeleteCommandParser.COMMAND_FORMAT + "\n"
                     + "6.  View an existing activity's details\n"
                     + "        " + ActivityViewCommand.COMMAND_FORMAT + "\n"
                     + "7.  List all existing activities\n"
