@@ -15,7 +15,7 @@ public class DishController extends Controller {
 
     public DishController() {
         super(CHOICES);
-        dishManager = new DishManager();
+        dishManager = DishManager.getInstance();
     }
 
     @Override
@@ -63,7 +63,7 @@ public class DishController extends Controller {
     private void listDishes() {
         MainLogger.logInfo(this, "User is listing dishes");
         System.out.println("Listing dishes...");
-        dishManager.printDishes();
+        System.out.println(dishManager.printDishes());
     }
 
     private void changeName() throws OperationTerminationException {
@@ -115,5 +115,9 @@ public class DishController extends Controller {
         } catch (IllegalArgumentException e) {
             System.out.println("Please make sure the name is not empty and price is positive");
         }
+    }
+
+    public DishManager getDishManager() {
+        return dishManager;
     }
 }

@@ -8,7 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StaffManagerTest {
     @Test
     void addDeleteStaff_test_addDeleteCorrectly() {
-        StaffManager staffManager = new StaffManager();
+        StaffManager.resetInstance();
+        StaffManager staffManager = StaffManager.getInstance();
         staffManager.addStaff(1, "August", "Chef", 5500);
         staffManager.addStaff(2, "Ben", "Chef", 6000);
         staffManager.addStaff(3, "Cathy", "Waiter", 5000);
@@ -21,7 +22,8 @@ public class StaffManagerTest {
 
     @Test
     void findStaff_test_findCorrectly() {
-        StaffManager staffManager = new StaffManager();
+        StaffManager.resetInstance();
+        StaffManager staffManager = StaffManager.getInstance();
         staffManager.addStaff(1, "August", "Chef", 5500);
         staffManager.addStaff(2, "Ben", "Chef", 6000);
         staffManager.addStaff(3, "Cathy", "Waiter", 5000);

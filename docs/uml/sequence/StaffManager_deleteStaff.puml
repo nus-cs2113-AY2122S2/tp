@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+hide footbox
+
+actor user
+participant "__:StaffController__" as staffcontroller
+participant "__:StaffManager__" as staffmanager
+
+
+user -> staffcontroller: deleteStaff()
+activate staffcontroller
+
+staffcontroller -> staffmanager: deleteByStaffId(int staffId)
+activate staffmanager
+
+staffmanager -> staffmanager : findStaff(int staffId)
+activate staffmanager
+staffmanager --> staffmanager
+deactivate staffmanager
+
+opt staff not found
+staffmanager --> staffcontroller : IllegalArgumentException
+end
+@enduml

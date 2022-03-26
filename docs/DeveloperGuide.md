@@ -88,7 +88,7 @@ Here is the typical design of a manager:
 
 ### Menu (dishes) Management
 
-The management of menu is functioned by `DishManager`, which implements following methods:
+The management of menu is handled by `DishManager`, which implements following methods:
 
 - `void printDishes()` -- print all dishes and their menu index in current menu.
 - `void addDish(Dish dish)` -- add a new dish.
@@ -96,21 +96,22 @@ The management of menu is functioned by `DishManager`, which implements followin
 - `void setPrice(int menuIndex, double newPrice)` -- change the price of a dish using its menu index.
 - `void setName(int menuIndex, String newName)` -- change the name of a dish using its menu index.
 
-These functions are "delegated" to `ArrayLise<Dish>`, which is associated with `DishManager`.
+These functions are "delegated" to `ArrayList<Dish>`, which is associated with `DishManager`.
 
 For example, `printDishes()`, iterates through `dishes` and calls `get(int)` method (`setPrice(int, double)`, `setName(int, String)` also call `get(int)`):
 
-![](Sequence/DishManager_printDishes.png)
+![](diagrams/sqeuence/DishManager_printDishes.png)
 
 `deleteDish(int)` calls `remove(int)`:
 
-![](Sequence/DishManager_deleteDish.png)
+![](diagrams/sqeuence/DishManager_deleteDish.png)
 
 `addDish(Dish)` calls `add(Dish)`:
 
-![](Sequence/DishManager_addDish.png)
+![](diagrams/sqeuence/DishManager_addDish.png)
 
 
+<<<<<<< HEAD
 ### Order Management
 
 The management of menu is functioned by `OrderManager`, which implements following methods:
@@ -131,6 +132,27 @@ For example, `getOrder(int)`, iterates through `orders` and calls `get(int)` met
 
 
 `getOrderPrice(int)` calls `getTotalPrice()` and method `getAllOrderValue()` also calls `getTotalPrice()`:
+=======
+### Staff Management
+
+The management of staff is handled by `StaffManager`, which implements following methods:
+
+- `void printStaff()` -- print all staffs.
+- `void addStaff(int staffId, String staffName, String position, double salary)` -- add a new staff with the arguments as its attributes.
+- `Staff findByStaffId(int staffId, boolean printMsg)` -- find a staff using staff id, and print message if boolean variable printMsg is true.
+- `void deleteByStaffId(int staffId)` -- delete a staff using staff id.
+- `int getNumOfStaffs(` -- change the name of a dish using its menu index.
+
+`StaffManager` manages `ArrayList<Staff>` and the above functions help to update the collection of `Staff`.
+
+For example `addStaff(int staffId, String staffName, String position, double salary)` calls `add(Staff)` to add a `Staff` from `ArrayList<Staff>`:
+
+![](diagrams/sqeuence/StaffManager_addStaff.png)
+
+And `deleteStaff(int)` calls `remove(int)` to remove a `Staff` from `ArrayList<Staff>`:
+
+![](diagrams/sqeuence/StaffManager_deleteStaff.png)
+>>>>>>> 8472b6391bdb198b3c73a412bedad282438ac0c5
 
 
 ## Product scope
