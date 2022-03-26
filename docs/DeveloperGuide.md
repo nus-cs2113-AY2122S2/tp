@@ -266,10 +266,10 @@ The general workflow of the `group /list` command is as follows:
 before the list of groups can be retrieved.
 5. To retrieve the groups from the profile retrieved, `Profile#getGroupList()` method is executed,
 where a list of `Group` objects are returned.
-6. Once the list is retrieved, `GroupListCommand` class checks if the list is empty.
+6. Once the list is retrieved, `GroupListCommand` object checks if the list is empty.
    1. If the list is empty, a message indicating that the list is empty is printed
    using the method `TextUi#printlnMessage()`.
-   2. If the list is not empty, `GroupListCommand` will loop from the first to the second last group, 
+   2. If the list is not empty, `GroupListCommand` object will loop from the first to the second last group, 
    calling `TextUi#printlnMessage()` to print out the summary of each group.
    Then, the last group is printed with a divider below it, using the method `TextUi#printlnMessageWithDivider()`.
 
