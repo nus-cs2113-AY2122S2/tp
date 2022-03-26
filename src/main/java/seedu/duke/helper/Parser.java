@@ -6,6 +6,7 @@ import seedu.duke.helper.command.AddMedicineCommand;
 import seedu.duke.helper.command.AddPatientCommand;
 import seedu.duke.helper.command.Command;
 import seedu.duke.helper.command.DeleteDoctorCommand;
+import seedu.duke.helper.command.DeleteMedicineCommand;
 import seedu.duke.helper.command.DeletePatientCommand;
 import seedu.duke.helper.command.EditMedicineCommand;
 import seedu.duke.helper.command.ViewDoctorCommand;
@@ -54,6 +55,7 @@ public class Parser {
             return new ViewPatientCommand(null);
         }
         String[] viewPatientParameters = minParameterCheck(parameters,1);
+        Validator.validateNric(viewPatientParameters[0]);
         return new ViewPatientCommand(viewPatientParameters);
     }
 
@@ -78,6 +80,7 @@ public class Parser {
             return new ViewDoctorCommand(null);
         }
         String[] viewDoctorParameters = minParameterCheck(parameters,1);
+        Validator.validateNric(viewDoctorParameters[0]);
         return new ViewDoctorCommand(viewDoctorParameters);
     }
 
@@ -94,7 +97,7 @@ public class Parser {
 
     public static Command parseDeleteMedicine(String parameters) throws HalpmiException {
         String[] deleteMedicineParameters = minParameterCheck(parameters,1);
-        return new DeletePatientCommand(deleteMedicineParameters);
+        return new DeleteMedicineCommand(deleteMedicineParameters);
     }
 
     public static Command parseViewMedicine(String parameters) throws HalpmiException {
