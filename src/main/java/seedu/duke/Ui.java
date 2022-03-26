@@ -102,7 +102,8 @@ public class Ui {
         System.out.printf("There are currently %d items within the inventory.\n", satisfactionList.getSize());
     }
 
-    public void printAddHousekeeperPerformanceAcknowledgementMessage(HousekeeperPerformanceList housekeeperPerformanceList,
+    public void printAddHousekeeperPerformanceAcknowledgementMessage(HousekeeperPerformanceList
+                                                                             housekeeperPerformanceList,
                                                                      HousekeeperPerformance housekeeperPerformance) {
         System.out.println("The HousekeeperPerformance instance " + housekeeperPerformance.getName() + ": "
             + housekeeperPerformance.getRating() + " has been added to the list of housekeeper performances.");

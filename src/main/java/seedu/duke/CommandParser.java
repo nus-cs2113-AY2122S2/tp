@@ -57,8 +57,7 @@ public class CommandParser {
         } else if (commandString.startsWith(ADD_PERFORMANCE_COMMAND)) {
             commandStringWithoutCommand = commandString.replace(ADD_PERFORMANCE_COMMAND, "");
             userCommand = new AddHousekeeperPerformanceCommand(commandStringWithoutCommand);
-        }
-        else if (commandString.startsWith(CHECK_IN)) {
+        } else if (commandString.startsWith(CHECK_IN)) {
             commandStringWithoutCommand = commandString.replace(CHECK_IN, "");
             userCommand = new CheckInCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(CHECK_OUT)) {

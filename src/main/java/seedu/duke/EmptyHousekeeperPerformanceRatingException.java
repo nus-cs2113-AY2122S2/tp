@@ -1,6 +1,6 @@
 package seedu.duke;
 
-public class EmptyHousekeeperPerformanceRatingException extends HotelLiteManagerException{
+public class EmptyHousekeeperPerformanceRatingException extends HotelLiteManagerException {
     private static final String ERROR_MESSAGE = "Error! Housekeeper performance cannot be empty.";
 
     @Override

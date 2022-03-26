@@ -16,9 +16,6 @@ public class AddHousekeeperPerformanceCommand extends Command {
     }
 
     public String extractHousekeeperName(String userInput) throws HotelLiteManagerException {
-//        if (userInput.isEmpty()) {
-//            throw new EmptyHousekeeperPerformanceNameException();
-//        }
         String[] splitInput = userInput.split("/");
         String housekeeperName = splitInput[0].trim();
         if (housekeeperName.isEmpty()) {
@@ -54,7 +51,7 @@ public class AddHousekeeperPerformanceCommand extends Command {
     @Override
     public void execute(HousekeeperList housekeeperList, HousekeeperPerformanceList housekeeperPerformanceList,
                         SatisfactionList satisfactionList, AssignmentMap assignmentMap, RoomList roomList,
-                        ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException{
+                        ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException {
         housekeeperPerformanceList.addHousekeeperPerformance(housekeeperPerformance);
         ui.printAddHousekeeperPerformanceAcknowledgementMessage(housekeeperPerformanceList, housekeeperPerformance);
         housekeeperPerformanceList.viewPerformances();
