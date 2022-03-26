@@ -6,17 +6,6 @@ public class AddHousekeeperPerformanceCommand extends Command {
     private HousekeeperPerformance housekeeperPerformance;
 
     public AddHousekeeperPerformanceCommand(String userInput) throws HotelLiteManagerException {
-//        userInput = userInput.toLowerCase();
-//        String housekeeperName = "";
-//        int housekeeperRating = 0;
-//        try {
-//            housekeeperName = extractHousekeeperName(userInput);
-//            housekeeperRating = extractHousekeeperRating(userInput);
-//        } catch (EmptyHousekeeperPerformanceNameException e) {
-//
-//        }
-//        HousekeeperPerformance housekeeperPerformance = new HousekeeperPerformance(housekeeperName, housekeeperRating);
-//        setHousekeeperPerformance(housekeeperPerformance);
         if (!userInput.contains("/")) {
             throw new InvalidCommandException();
         }
@@ -66,6 +55,9 @@ public class AddHousekeeperPerformanceCommand extends Command {
     public void execute(HousekeeperList housekeeperList, HousekeeperPerformanceList housekeeperPerformanceList,
                         SatisfactionList satisfactionList, AssignmentMap assignmentMap, RoomList roomList,
                         ItemList listOfItems, Ui ui) throws HotelLiteManagerException, WrongCommandException{
+        housekeeperPerformanceList.addHousekeeperPerformance(housekeeperPerformance);
+        ui.printAddHousekeeperPerformanceAcknowledgementMessage(housekeeperPerformanceList, housekeeperPerformance);
+        housekeeperPerformanceList.viewPerformances();
 
     }
 
