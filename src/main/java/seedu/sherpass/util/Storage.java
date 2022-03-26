@@ -154,7 +154,7 @@ public class Storage {
             wipeSaveData();
         } else {
             ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_3);
-            System.exit(1);
+            System.exit(0);
         }
     }
 
