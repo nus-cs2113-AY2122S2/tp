@@ -333,6 +333,40 @@ Expected outcome:
 
 The existing module has been edited to change the module code from CS2113 to CS3244.
 
+#### Finding a module: `find`
+
+Format: find `<query>`
+
+| Parameter      | Description                       |
+|----------------|-----------------------------------|
+| ```<query> ``` | Search query to find module |
+
+Example of usage:
+
+    find CS
+    find Wednesday
+    find 2pm
+
+
+Expected outcome:
+
+    list
+    Here are the modules in your schedule:
+    1: [Module] CS2113 Lecture: Thursday, 2pm-4pm
+    2: [Module] EE4204 Lecture: Wednesday, 2pm-4pm
+    find CS
+    Here are the matching modules in your list:
+    1: [Module] CS2113 Lecture: Thursday, 2pm-4pm
+    find Wednesday
+    Here are the matching modules in your list:
+    1: [Module] EE4204 Lecture: Wednesday, 2pm-4pm
+    find 2pm
+    Here are the matching modules in your list:
+    1: [Module] CS2113 Lecture: Thursday, 2pm-4pm
+    2: [Module] EE4204 Lecture: Wednesday, 2pm-4pm
+
+
+
 ### Contacts Tracker Features
 
 #### Adding a contact: `add`
@@ -416,7 +450,9 @@ Where `N` depends on the length of the current contacts list.
 |----------------|-----------------------------------------------------------------------------------------------------------------------------|
 | Add (Expense)  | `add d/DATE a/AMOUNT c/CATEGORY r/REMARK` <br> E.g. `add d/15/02/2022 a/500 c/Food r/At Supper Stretch`                     |
 | Add (Module)   | `add m/MODULE_CODE c/CATEGORY d/DAY t/TIME` <br> E.g. `add m/CS2113 c/lec d/Friday t/4pm-6pm`                               |
-| Add (Contact)  | `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION` <br> e.g., `add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215` |
+| Add (Contact)  | `add n/NAME f/FACULTY e/EMAIL d/DESCRIPTION` <br> E.g., `add n/Jane Doe f/SoC e/e0334987@u.nus.edu d/group mate for CS4215` |
+| Find (Module)  | `find <query>`                                                                                                              |
+| Edit (Module)  | `edit <index>` <br> E.g. <br> `edit 1` <br> `m/CS2113`                                                                                                                  |
 | Remove         | `rm INDEX`                                                                                                                  |
 | List           | `list`                                                                                                                      |
 | Return to Menu | `menu`                                                                                                                      |
