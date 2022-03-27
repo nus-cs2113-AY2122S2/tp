@@ -1,8 +1,9 @@
 package seedu.planitarium.commands;
 
 import seedu.planitarium.exceptions.PlanITariumException;
+import seedu.planitarium.exceptions.UnknownInputException;
 import seedu.planitarium.parser.Parser;
-import seedu.planitarium.person.PersonList;
+import seedu.planitarium.person.Family;
 import seedu.planitarium.ProjectLogger;
 
 import java.util.logging.Level;
@@ -30,37 +31,37 @@ public class CommandFactory {
     public CommandFactory() {
     }
 
-    public Command getCommand(String userInput, PersonList personList) throws PlanITariumException {
+    public Command getCommand(String userInput, Family family) throws PlanITariumException {
         try {
             Command newCommand;
             switch (Parser.parseKeyword(userInput)) {
             case ADD_PERSON_CMD:
-                newCommand = new AddPersonCommand(userInput, personList);
+                newCommand = new AddPersonCommand(userInput, family);
                 break;
             case DELETE_PERSON_CMD:
-                newCommand = new DeletePersonCommand(userInput, personList);
+                newCommand = new DeletePersonCommand(userInput, family);
                 break;
             case ADD_INCOME_CMD:
             case ADD_SPENT_CMD:
-                newCommand = new AddRecordCommand(userInput, personList);
+                newCommand = new AddRecordCommand(userInput, family);
                 break;
             case DELETE_INCOME_CMD:
             case DELETE_SPEND_CMD:
-                newCommand = new DeleteRecordCommand(userInput, personList);
+                newCommand = new DeleteRecordCommand(userInput, family);
                 break;
             case CALC_REMAIN:
-                newCommand = new RemainCommand(userInput, personList);
+                newCommand = new RemainCommand(userInput, family);
                 break;
             case LIST:
-                newCommand = new ListCommand(userInput, personList);
+                newCommand = new ListCommand(userInput, family);
                 break;
             case EXIT:
-                newCommand = new ExitCommand(userInput, personList);
+                newCommand = new ExitCommand(userInput, family);
                 break;
             default:
-                throw new PlanITariumException(CommandFactory.class.getSimpleName());
+                throw new UnknownInputException(CommandFactory.class.getSimpleName());
             }
-            logger.getLogger().log(Level.INFO, String.format(LOG_EXECUTE_CMD, newCommand.getType()));
+            logger.log(Level.INFO, String.format(LOG_EXECUTE_CMD, newCommand.getType()));
             return newCommand;
         } catch (PlanITariumException e) {
             throw e;

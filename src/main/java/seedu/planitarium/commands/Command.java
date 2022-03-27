@@ -1,5 +1,6 @@
 package seedu.planitarium.commands;
 
+import seedu.planitarium.person.Family;
 import seedu.planitarium.person.PersonList;
 import seedu.planitarium.global.UI;
 
@@ -9,12 +10,12 @@ public class Command {
     protected String type;
     protected String userInput;
     protected UI ui = new UI();
-    protected PersonList personList;
+    protected Family family;
 
 
-    public Command(String userInput, PersonList personList) {
+    public Command(String userInput, Family family) {
         this.userInput = userInput;
-        this.personList = personList;
+        this.family = family;
     }
 
     /**
