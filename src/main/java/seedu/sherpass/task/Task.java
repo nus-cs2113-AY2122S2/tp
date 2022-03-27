@@ -4,8 +4,9 @@ import seedu.sherpass.enums.Frequency;
 
 import java.time.LocalDateTime;
 
-import static seedu.sherpass.constant.DateAndTimeFormat.dateOnlyFormat;
+import static seedu.sherpass.constant.DateAndTimeFormat.outputDateOnlyFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.outputWithTimeFormat;
+import static seedu.sherpass.constant.DateAndTimeFormat.outputWithoutTimeFormat;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 
 public class Task {
@@ -83,6 +84,10 @@ public class Task {
         isDone = false;
     }
 
+    public boolean getIsDone() {
+        return isDone;
+    }
+
     /**
      * Returns task date. Parent class is created
      * as a template for child classes to perform its own
@@ -107,7 +112,7 @@ public class Task {
      */
     public String getByDateString() {
         if (byDate != null) {
-            return byDate.format(outputWithTimeFormat);
+            return byDate.format(outputWithoutTimeFormat);
         }
         return EMPTY_STRING;
     }
@@ -120,7 +125,7 @@ public class Task {
      */
     public String getDoOnDateString(boolean isDateOnly) {
         if (doOnStartDateTime != null) {
-            return (isDateOnly) ? doOnStartDateTime.format(dateOnlyFormat)
+            return (isDateOnly) ? doOnStartDateTime.format(outputDateOnlyFormat)
                     : doOnStartDateTime.format(outputWithTimeFormat);
         }
         return EMPTY_STRING;
@@ -176,5 +181,36 @@ public class Task {
 
     public Frequency getRepeatFrequency() {
         return repeatFrequency;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Task)) {
+            return false;
+        }
+
+        Task t = (Task) o;
+        return description.equals(t.getDescription())
+                && doOnStartDateTime.equals(t.getDoOnStartDateTime())
+                && doOnEndDateTime.equals(t.getDoOnEndDateTime())
+                && repeatFrequency.equals(t.getRepeatFrequency())
+                && identifier == (t.getIdentifier())
+                && byDate.equals(t.getByDate());
+    }
+
+    public Task(Task task) {
+        description = task.getDescription();
+        identifier = task.getIdentifier();
+        isDone = task.getIsDone();
+        byDate = task.getByDate();
+        doOnStartDateTime = task.getDoOnStartDateTime();
+        doOnEndDateTime = task.getDoOnEndDateTime();
+        index = task.getIndex();
+        repeatFrequency = task.getRepeatFrequency();
     }
 }

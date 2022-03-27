@@ -16,6 +16,9 @@ public class DateAndTimeFormat {
             .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
             .toFormatter();
     public static final DateTimeFormatter outputWithTimeFormat = DateTimeFormatter.ofPattern("EEE, dd/MM/yyyy HH:mm");
-    public static final DateTimeFormatter dateOnlyFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static final DateTimeFormatter outputWithoutTimeFormat = DateTimeFormatter.ofPattern("EEE, dd/MM/yyyy");
+    public static final DateTimeFormatter inputDateOnlyFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
+    public static final DateTimeFormatter outputDateOnlyFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static final DateTimeFormatter dayOnlyFormat = DateTimeFormatter.ofPattern("EEE");
+    public static final DateTimeFormatter timeOnlyFormat = DateTimeFormatter.ofPattern("HH:mm");
 }

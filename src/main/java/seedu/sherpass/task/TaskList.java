@@ -10,8 +10,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 
+
+import static seedu.sherpass.constant.DateAndTimeFormat.outputDateOnlyFormat;
+import static seedu.sherpass.constant.Index.FIRST_REPEATED_TASK_INDEX;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
+
 
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -93,19 +97,21 @@ public class TaskList {
     }
 
 
-    private boolean hasDateTimeClash(Task newTask) {
-        for (Task task : tasks) {
+    private boolean hasDateTimeClash(ArrayList<Task> targetList,
+                                     LocalDateTime doOnStartDateTime,
+                                     LocalDateTime doOnEndDateTime) {
+        for (Task task : targetList) {
             boolean isOnSameDay = (task.getDoOnDateString(true)
-                    .equals(newTask.getDoOnDateString(true)));
-            boolean hasTimeClash = (newTask.getDoOnStartDateTime().isEqual(task.getDoOnStartDateTime())
-                    || (newTask.getDoOnEndDateTime().isAfter(task.getDoOnStartDateTime())
-                    && newTask.getDoOnStartDateTime().isBefore(task.getDoOnStartDateTime()))
-                    || (newTask.getDoOnStartDateTime().isBefore(task.getDoOnEndDateTime())
-                    && newTask.getDoOnEndDateTime().isAfter(task.getDoOnEndDateTime()))
-                    || (newTask.getDoOnStartDateTime().isAfter(task.getDoOnStartDateTime())
-                    && newTask.getDoOnEndDateTime().isBefore(task.getDoOnEndDateTime())))
-                    || (task.getDoOnStartDateTime().isAfter(newTask.getDoOnStartDateTime())
-                    && task.getDoOnEndDateTime().isBefore(newTask.getDoOnEndDateTime()));
+                    .equals(doOnStartDateTime.format(outputDateOnlyFormat)));
+            boolean hasTimeClash = (doOnStartDateTime.isEqual(task.getDoOnStartDateTime())
+                    || (doOnEndDateTime.isAfter(task.getDoOnStartDateTime())
+                    && doOnStartDateTime.isBefore(task.getDoOnStartDateTime()))
+                    || (doOnStartDateTime.isBefore(task.getDoOnEndDateTime())
+                    && doOnEndDateTime.isAfter(task.getDoOnEndDateTime()))
+                    || (doOnStartDateTime.isAfter(task.getDoOnStartDateTime())
+                    && doOnEndDateTime.isBefore(task.getDoOnEndDateTime())))
+                    || (task.getDoOnStartDateTime().isAfter(doOnStartDateTime)
+                    && task.getDoOnEndDateTime().isBefore(doOnEndDateTime));
             if (isOnSameDay && hasTimeClash) {
                 return true;
             }
@@ -125,13 +131,13 @@ public class TaskList {
     /**
      * Adds a new task to the current array of tasks.
      *
-     * @param newTask The new task to be added to the array.
+     * @param newTask  The new task to be added to the array.
      * @param isRepeat Checks if task repeats.
-     * @param ui User Interface.
+     * @param ui       User Interface.
      */
     public void addTask(Task newTask, boolean isRepeat, Ui ui) {
         String repeatKeyWord = EMPTY_STRING;
-        if (hasDateTimeClash(newTask)) {
+        if (hasDateTimeClash(tasks, newTask.getDoOnStartDateTime(), newTask.getDoOnEndDateTime())) {
             ui.showToUser(ERROR_SCHEDULE_CLASH_MESSAGE);
             return;
         }
@@ -143,14 +149,15 @@ public class TaskList {
             LocalDateTime lastRecurrenceDate = getEndDateForRecurrence(newTask.getDoOnStartDateTime(),
                     newTask.getRepeatFrequency());
             ArrayList<Task> taskListToAdd = new ArrayList<>();
+            Task tempTask = newTask;
             do {
-                if (hasDateTimeClash(newTask)) {
+                if (hasDateTimeClash(tasks, tempTask.getDoOnStartDateTime(), tempTask.getDoOnEndDateTime())) {
                     ui.showToUser(ERROR_SCHEDULE_CLASH_MESSAGE);
                     return;
                 }
-                taskListToAdd.add(newTask);
-                newTask = prepareNextTask(newTask);
-            } while (newTask.getDoOnStartDateTime().isBefore(lastRecurrenceDate));
+                taskListToAdd.add(tempTask);
+                tempTask = prepareNextTask(tempTask);
+            } while (tempTask.getDoOnStartDateTime().isBefore(lastRecurrenceDate));
             tasks.addAll(taskListToAdd);
         }
         tasks.sort(new TaskDateComparator());
@@ -158,6 +165,122 @@ public class TaskList {
         ui.showToUser("Got it! I've added this " + repeatKeyWord + " task:\n   "
                 + newTask + "\n"
                 + "Now you have " + tasks.size() + " task(s) in your schedule!");
+    }
+
+
+    private void editSingleTaskContent(Task taskToEdit, String taskDescription,
+                                       LocalDateTime currentDoOnStartDateTime,
+                                       LocalDateTime currentDoOnEndDateTime,
+                                       LocalDateTime byDate, Ui ui) {
+        if (!taskDescription.isBlank()) {
+            taskToEdit.setTaskDescription(taskDescription);
+        }
+        tasks.remove(taskToEdit);
+        if (byDate != null) {
+            taskToEdit.setByDate(byDate);
+        }
+        taskToEdit.setDoOnStartDateTime(currentDoOnStartDateTime);
+        taskToEdit.setDoOnEndDateTime(currentDoOnEndDateTime);
+        if (hasDateTimeClash(tasks, currentDoOnStartDateTime, currentDoOnEndDateTime)) {
+            ui.showToUser(ERROR_SCHEDULE_CLASH_MESSAGE);
+            return;
+        }
+        tasks.add(taskToEdit);
+        ui.showToUser("Okay! I've edited this task as such:\n"
+                + "\t" + taskToEdit);
+    }
+
+    private ArrayList<Task> createCopy() {
+        ArrayList<Task> copyArray = new ArrayList<>();
+        for (Task t : tasks) {
+            copyArray.add(new Task(t));
+        }
+        return copyArray;
+    }
+
+    private void deleteCurrentDateTimeTasks(ArrayList<Task> copyList, int identifier) {
+        copyList.removeIf(t -> t.getIdentifier() == identifier);
+    }
+
+    private ArrayList<Task> filterByIdentifier(int identifier,
+                                               String taskDescription,
+                                               LocalDateTime currentDoOnDateStartTime,
+                                               LocalDateTime currentDoOnDateEndTime) {
+        ArrayList<Task> newDateTimeArray = new ArrayList<>();
+        for (Task task : tasks) {
+            if (identifier == task.getIdentifier()) {
+                Task copyTask = new Task(task);
+                if (!taskDescription.isBlank()) {
+                    task.setTaskDescription(taskDescription);
+                }
+                copyTask.setDoOnStartDateTime(currentDoOnDateStartTime);
+                copyTask.setDoOnEndDateTime(currentDoOnDateEndTime);
+                newDateTimeArray.add(copyTask);
+                currentDoOnDateStartTime = incrementDate(currentDoOnDateStartTime, task.getRepeatFrequency());
+                currentDoOnDateEndTime = incrementDate(currentDoOnDateEndTime, task.getRepeatFrequency());
+            }
+        }
+        return newDateTimeArray;
+    }
+
+    private boolean hasRepeatedTasksTimetableClash(ArrayList<Task> copyList,
+                                                   ArrayList<Task> filteredList) {
+        for (Task filteredTask : filteredList) {
+            if (hasDateTimeClash(copyList, filteredTask.getDoOnStartDateTime(),
+                    filteredTask.getDoOnEndDateTime())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void editRepeatedTasks(Task taskToEdit, String taskDescription,
+                                   LocalDateTime currentDoOnDateStartTime,
+                                   LocalDateTime currentDoOnDateEndTime,
+                                   Ui ui) {
+        int identifier = taskToEdit.getIdentifier();
+
+        ArrayList<Task> copyList = createCopy();
+        deleteCurrentDateTimeTasks(copyList, taskToEdit.getIdentifier());
+
+        ArrayList<Task> newDateTimeArray = filterByIdentifier(identifier,
+                taskDescription, currentDoOnDateStartTime, currentDoOnDateEndTime);
+
+        if (hasRepeatedTasksTimetableClash(copyList, newDateTimeArray)) {
+            ui.showToUser(ERROR_SCHEDULE_CLASH_MESSAGE);
+            return;
+        }
+
+        Task tempTask = new Task(newDateTimeArray.get(FIRST_REPEATED_TASK_INDEX));
+        copyList.addAll(newDateTimeArray);
+        tasks = copyList;
+        ui.showToUser("Okay! I've edited this repeated task as such:\n"
+                + "\t" + tempTask);
+    }
+
+
+    /**
+     * Edit the task content.
+     *
+     * @param ui                       User interface.
+     * @param taskToEdit               The task being edited.
+     * @param taskDescription          The new task description for replacement.
+     * @param currentDoOnStartDateTime New do on date and start time to replace.
+     * @param currentDoOnEndDateTime   New do on date and end time to replace.
+     * @param byDate                   New by date to replace.
+     */
+    public void editTask(Ui ui, Task taskToEdit, String taskDescription,
+                         LocalDateTime currentDoOnStartDateTime,
+                         LocalDateTime currentDoOnEndDateTime, LocalDateTime byDate) {
+        if (TaskParser.isValidFreq(taskToEdit.getRepeatFrequency())) {
+            assert (byDate == null);
+            editRepeatedTasks(taskToEdit, taskDescription, currentDoOnStartDateTime, currentDoOnEndDateTime, ui);
+        } else {
+            editSingleTaskContent(taskToEdit, taskDescription,
+                    currentDoOnStartDateTime, currentDoOnEndDateTime, byDate, ui);
+        }
+        tasks.sort(new TaskDateComparator());
+        updateIndex();
     }
 
     /**
@@ -194,7 +317,7 @@ public class TaskList {
      * Index corresponds to its placement within the task array.
      *
      * @param markIndex Index of the task to mark as done.
-     * @param ui User Interface.
+     * @param ui        User Interface.
      */
     public void markTask(int markIndex, Ui ui) {
         tasks.get(markIndex).markAsDone();
@@ -207,7 +330,7 @@ public class TaskList {
      * Index corresponds to its placement within the task array.
      *
      * @param markIndex Index of the task to mark as undone.
-     * @param ui User Interface.
+     * @param ui        User Interface.
      */
     public void unmarkTask(int markIndex, Ui ui) {
         tasks.get(markIndex).markAsUndone();
@@ -238,7 +361,7 @@ public class TaskList {
      * in task array.
      *
      * @param deleteIndex Index of a task to search for.
-     * @param ui User Interface
+     * @param ui          User Interface
      */
     public void removeTask(int deleteIndex, Ui ui) {
         Task taskToBeRemoved = tasks.get(deleteIndex);
@@ -328,4 +451,6 @@ public class TaskList {
         }
         return count;
     }
+
+
 }

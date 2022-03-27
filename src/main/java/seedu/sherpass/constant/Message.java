@@ -40,13 +40,13 @@ public class Message {
             + "7) Mark task as done: mark <task_index>";
 
     public static final String ERROR_START_AFTER_END_TIME_MESSAGE = "Start time cannot be after end time!";
-    public static final String ERROR_EMPTY_DESCRIPTION_MESSAGE = "Description cannot be blank and must be after "
-            + "the add command.";
+    public static final String ERROR_EMPTY_DESCRIPTION_MESSAGE = "Description cannot be blank and must be before "
+            + "the date and time add commands";
     public static final String ERROR_EMPTY_TASK_LIST_MESSAGE = "The task list is empty!";
     public static final String ERROR_MISSING_EDIT_ARGUMENT_MESSAGE = "Missing task description or date argument!";
     public static final String ERROR_INVALID_FREQUENCY_MESSAGE = "Invalid frequency!";
     public static final String ERROR_INVALID_INDEX_MESSAGE = "Invalid index!";
-    public static final String ERROR_INVALID_DATETIME_MESSAGE = "Invalid date time format!";
+    public static final String ERROR_INVALID_DATETIME_MESSAGE = "Invalid date and/or time format!";
     public static final String ERROR_SCHEDULE_CLASH_MESSAGE = "Oops! I am unable to add this task as "
             + "it has some clashes\nwith your schedule :(";
     public static final String ERROR_EMPTY_ADD_COMMANDS_MESSAGE = "Add command is missing "

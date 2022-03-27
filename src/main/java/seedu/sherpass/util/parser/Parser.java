@@ -56,10 +56,7 @@ public class Parser {
         case AddCommand.COMMAND_WORD:
             return TaskParser.prepareAdd(argument, ui);
         case EditCommand.COMMAND_WORD:
-            if (argument.contains(FREQUENCY_DELIMITER)) {
-                return TaskParser.prepareEditRecurring(argument);
-            }
-            return TaskParser.prepareEdit(argument, ui);
+            return TaskParser.prepareEdit(argument, taskList, ui);
         case DeleteCommand.COMMAND_WORD:
             return TaskParser.prepareDelete(argument, taskList, ui);
         case ClearCommand.COMMAND_WORD:
