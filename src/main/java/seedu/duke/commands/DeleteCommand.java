@@ -72,9 +72,6 @@ public class DeleteCommand extends Command {
      */
     public void deleteModule(ModuleList moduleList) throws NoSuchModuleException, ParseException {
         Module targetModule = moduleList.getModule(moduleCode);
-        if (targetModule == null) {
-            throw new NoSuchModuleException();
-        }
         if (targetModule.getTaskList().size() > 0) {
             Boolean hasDeleteConfirmation = getUserConfirmation(targetModule);
             if (!hasDeleteConfirmation) {
