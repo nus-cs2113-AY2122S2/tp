@@ -83,3 +83,5 @@ Aim: Displays a list of all available commands that the user can refer to as a g
 
 ## Feature - Saved files
 Aim: Allows users to save and load up existing reservations and travel packages from a text file
+![](storage sequence diagram.png)
+
