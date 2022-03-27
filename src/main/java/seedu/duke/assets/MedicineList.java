@@ -152,33 +152,58 @@ public class MedicineList extends List {
     }
 
     public void findById(String[] parameters) {
-        this.returnedFinderArray = MedicineFinder.findMedicineById(medicines, parameters[1]);
-        createArrayOfFoundMedicines();
+        try {
+            this.returnedFinderArray = MedicineFinder.findMedicineById(medicines, parameters[1]);
+            createArrayOfFoundMedicines();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Medicine with given id doesn't exist. Please try again!");
+        }
     }
 
     public void findByDosage(String[] parameters) {
-        this.returnedFinderArray = MedicineFinder.findMedicineByDosage(medicines, Integer.parseInt(parameters[1]));
-        createArrayOfFoundMedicines();
+        try {
+            this.returnedFinderArray = MedicineFinder.findMedicineByDosage(medicines, Integer.parseInt(parameters[1]));
+            createArrayOfFoundMedicines();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Medicine with given dosage doesn't exist. Please try again!");
+        }
     }
 
     public void findByExpiry(String[] parameters) {
-        this.returnedFinderArray = MedicineFinder.findMedicineByExpiry(medicines, parameters[1]);
-        createArrayOfFoundMedicines();
+        try {
+            this.returnedFinderArray = MedicineFinder.findMedicineByExpiry(medicines, parameters[1]);
+            createArrayOfFoundMedicines();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Medicine with given expiry doesn't exist. Please try again!");
+        }
     }
 
     public void findBySideEffects(String[] parameters) {
-        this.returnedFinderArray = MedicineFinder.findMedicineBySideEffects(medicines, parameters[1]);
-        createArrayOfFoundMedicines();
+        try {
+            this.returnedFinderArray = MedicineFinder.findMedicineBySideEffects(medicines, parameters[1]);
+            createArrayOfFoundMedicines();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Medicine with given side effects doesn't exist. Please try again!");
+        }
     }
 
     public void findByQuantity(String[] parameters) {
-        this.returnedFinderArray = MedicineFinder.findMedicineByQuantity(medicines, Integer.parseInt(parameters[1]));
-        createArrayOfFoundMedicines();
+        try {
+            this.returnedFinderArray = MedicineFinder.findMedicineByQuantity(medicines,
+                    Integer.parseInt(parameters[1]));
+            createArrayOfFoundMedicines();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Medicine with given quantity doesn't exist. Please try again!");
+        }
     }
 
     public void findByName(String[] parameters) {
-        this.returnedFinderArray = MedicineFinder.findMedicineByName(medicines, parameters[1]);
-        createArrayOfFoundMedicines();
+        try {
+            this.returnedFinderArray = MedicineFinder.findMedicineByName(medicines, parameters[1]);
+            createArrayOfFoundMedicines();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Medicine with given name doesn't exist. Please try again!");
+        }
     }
 
 
@@ -200,34 +225,6 @@ public class MedicineList extends List {
             }
             findMedicineTable.print();
         }
-    }
-
-    public void findByNric(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByAge(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByGender(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByAddress(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByDob(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findBySpecialization(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByDateAdmission(String[] parameters) {
-        // Intentionally left blank
     }
 
 }
