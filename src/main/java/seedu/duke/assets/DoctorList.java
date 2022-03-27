@@ -3,6 +3,7 @@ package seedu.duke.assets;
 import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
+import seedu.duke.helper.command.CommandLineTable;
 
 import java.util.ArrayList;
 
@@ -20,13 +21,26 @@ public class DoctorList extends List {
         return null;
     }
 
+    public Doctor search(String nric) {
+        for (Doctor doctor : doctors) {
+            if (doctor.getNric().equals(nric)) {
+                return doctor;
+            }
+        }
+        return null;
+    }
+
+    public void find(String[] command){
+    }
+
     public void add(String[] addDoctorParameters) throws DuplicateEntryException {
         if (getDoctor(addDoctorParameters[0]) != null) {
             throw new DuplicateEntryException("Doctor with given NRIC already exists!");
         }
         Doctor newDoctor = new Doctor(addDoctorParameters[0],addDoctorParameters[1],
-                Integer.parseInt(addDoctorParameters[2]), addDoctorParameters[3].charAt(0),
-                addDoctorParameters[4],addDoctorParameters[5], addDoctorParameters[6]);
+                Integer.parseInt(addDoctorParameters[2]),
+                addDoctorParameters[3], addDoctorParameters[4].charAt(0),addDoctorParameters[5],
+                addDoctorParameters[6]);
         doctors.add(newDoctor);
     }
 
@@ -37,18 +51,39 @@ public class DoctorList extends List {
             UI.printParagraph("Doctor doesn't exist please try again!");
             return;
         }
-        UI.printParagraph(doctor.toString());
+        CommandLineTable doctorTable = new CommandLineTable();
+        doctorTable.setShowVerticalLines(true);
+        doctorTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
+                "Specialization");
+        doctorTable.addRow(doctor.getNric(), doctor.getFullName(), String.valueOf(doctor.getAge()),
+                doctor.getAddress(), String.valueOf(doctor.getGender()), doctor.getDob(),
+                doctor.getSpecialization());
+        doctorTable.print();
     }
 
     //view all doctor
     public void view() {
-        UI.printParagraph(toString());
+        CommandLineTable doctorTable = new CommandLineTable();
+        //st.setRightAlign(true);//if true then cell text is right aligned
+        doctorTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
+        doctorTable.setHeaders("Nric", "FullName","Age", "Address", "Gender", "Dob",
+                "Specialization");
+        for (Doctor doctor: doctors) {
+            doctorTable.addRow(doctor.getNric(), doctor.getFullName(), String.valueOf(doctor.getAge()),
+                    doctor.getAddress(), String.valueOf(doctor.getGender()), doctor.getDob(),
+                    doctor.getSpecialization());
+        }
+        doctorTable.print();
     }
 
-
-    @Override
-    public void edit(String[] parameters) throws NotFoundException {
-
+    public void edit(String[] parameterArray) throws NotFoundException {
+        if (search(parameterArray[0]) != null) {
+            Doctor doctor = search(parameterArray[0]);
+            doctor.edit(parameterArray[1], Integer.parseInt(parameterArray[2]), parameterArray[3],
+                    (parameterArray[4].charAt(0)), parameterArray[5], parameterArray[6]);
+            return;
+        }
+        throw new NotFoundException("There are no patients with given NRIC!");
     }
 
 

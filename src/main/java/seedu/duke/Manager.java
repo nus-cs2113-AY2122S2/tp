@@ -15,24 +15,26 @@ import seedu.duke.status.Status;
 public class Manager {
     UI ui = new UI();
     private boolean isTerminated = false;
-    private Storage storage = new Storage();
+    private final Storage storage = new Storage();
 
     /**
      * Main application loop that holds switch case statement.
      */
     public void runLoop() {
+        ui.printLogo();
         ui.printGreeting();
+
         while (!isTerminated) {
-            ui.printPrompt();
+            UI.printPrompt();
             String commandWord = ui.readCommand();
             String parameters = ui.readParameters();
             Status status = null;
             try {
-                status = executeCommand(commandWord,parameters);
+                status = executeCommand(commandWord, parameters);
             } catch (HalpmiException | NotFoundException | DuplicateEntryException e) {
-                ui.printParagraph(e.toString());
+                UI.printParagraph(e.toString());
             }
-            ui.print(status);
+            //ui.print(status);
             storage.saveData();
         }
     }
@@ -54,6 +56,15 @@ public class Manager {
             command = Parser.parseViewPatient(parameters);
             status = command.execute(storage.patients);
             break;
+        case "edit patient":
+            command = Parser.parseEditPatient(parameters);
+            status = command.execute(storage.patients);
+            break;
+        /*case "find patient":
+            command = Parser.parseFindPatient(parameters);
+            status = command.execute(storage.patients);
+            break;
+         */
         case "add doctor":
             command = Parser.parseAddDoctor(parameters);
             status = command.execute(storage.doctors);
@@ -64,6 +75,10 @@ public class Manager {
             break;
         case "view doctor":
             command = Parser.parseViewDoctor(parameters);
+            status = command.execute(storage.doctors);
+            break;
+        case "edit doctor":
+            command = Parser.parseEditDoctor(parameters);
             status = command.execute(storage.doctors);
             break;
         case "add medicine":
@@ -87,8 +102,8 @@ public class Manager {
             status = command.execute(storage.appointments);
             break;
         case "view appointment":
-            command = Parser.parseViewAppointment(parameters);
-            status = command.execute(storage.appointments);
+            //command = Parser.parseViewAppointment(parameters);
+            //status = command.execute(storage.appointments);
             break;
         case "help":
             status = Status.PRINT_HELP;
