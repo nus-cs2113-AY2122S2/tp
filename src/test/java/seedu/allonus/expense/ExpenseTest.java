@@ -7,22 +7,22 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class ExpenseTest {
 
-    Expense test1 = new Expense("24/3/2022", "18.00", "Movie", "This is a movie");
-    Expense test2 = new Expense("25/3/2022", "0", "Food", "This is a food");
-    Expense test3 = new Expense("26/3/2022", "1", "Others", "This is an others");
-    Expense test4 = new Expense("27/3/2022", "2", "School", "This is a school");
+    Expense test1 = new Expense("2022-03-24", "18.00", "Movie", "This is a movie");
+    Expense test2 = new Expense("2022-03-25", "0", "Food", "This is a food");
+    Expense test3 = new Expense("2022-03-26", "1", "Others", "This is an others");
+    Expense test4 = new Expense("2022-03-27", "2", "School", "This is a school");
 
     @Test
     void getDate() {
-        assertEquals("24/3/2022", test1.getDate());
-        assertEquals("25/3/2022", test2.getDate());
-        assertEquals("26/3/2022", test3.getDate());
-        assertEquals("27/3/2022", test4.getDate());
+        assertEquals("2022-03-24", test1.getDate());
+        assertEquals("2022-03-25", test2.getDate());
+        assertEquals("2022-03-26", test3.getDate());
+        assertEquals("2022-03-27", test4.getDate());
 
-        assertNotEquals("26/3/2022", test1.getDate());
-        assertNotEquals("27/3/2022", test2.getDate());
-        assertNotEquals("24/3/2022", test3.getDate());
-        assertNotEquals("25/3/2022", test4.getDate());
+        assertNotEquals("2022-03-25", test1.getDate());
+        assertNotEquals("2022-03-26", test2.getDate());
+        assertNotEquals("2022-03-27", test3.getDate());
+        assertNotEquals("2022-03-24", test4.getDate());
     }
 
     @Test
@@ -86,5 +86,24 @@ class ExpenseTest {
     void setRemark() {
         test4.setRemark("Test Remark");
         assertEquals("Test Remark", test4.getRemark());
+    }
+
+    @Test
+    void testToString() {
+        
+        assertEquals("2022-03-24 | $18.00 | Movie | This is a movie",
+                test1.toString());
+    }
+
+    @Test
+    void setNoOfItems() {
+        Expense.setNoOfItems(1);
+        assertEquals(1, Expense.getNoOfItems());
+    }
+
+    @Test
+    void getNoOfItems() {
+        Expense.setNoOfItems(1);
+        assertEquals(1, Expense.getNoOfItems());
     }
 }

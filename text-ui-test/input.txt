@@ -24,14 +24,18 @@ list
 menu
 goto m/Expense_Tracker
 list
-add d/Date a/18.00 c/Category r/This is a remark
-add d/24/3/2022 a/9.50 c/Movie r/Jujutsu Kaisen
+add d/2022-03-25 a/18.00 c/Category r/This is a remark
+add d/2022-03-24 a/9.50 c/Movie r/Jujutsu Kaisen
+add d/Invalid Date Field a/9.50 c/Movie r/Jujutsu Kaisen
+add d/2022-03-24 a/Invalid Amount Field c/Movie r/Jujutsu Kaisen
 add d/ a/ c/ r/
 add m/
 list
 rm -1
 edit 1
 amount 20.00
+amount -5
+date INVALID DATE
 done
 list
 find juju

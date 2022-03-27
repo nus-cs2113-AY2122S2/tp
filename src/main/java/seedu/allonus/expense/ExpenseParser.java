@@ -1,5 +1,13 @@
 package seedu.allonus.expense;
 
+import seedu.allonus.expense.exceptions.ExpenseAmountException;
+import seedu.allonus.expense.exceptions.ExpenseEmptyFieldException;
+import seedu.allonus.expense.exceptions.ExpenseMissingFieldException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class ExpenseParser {
     public static final String DATE_DELIMITER = "d/";
     public static final String AMOUNT_DELIMITER = "a/";
@@ -17,6 +25,32 @@ public class ExpenseParser {
     public static final int INDEX_TO_BE_PARSED = 1;
 
     /**
+     * Reformats the date field into a valid date object.
+     *
+     * @param rawDate the date of the expense record entered by the user
+     * @return a string of the reformatted date entered by the user
+     * @throws DateTimeParseException if user did not enter a valid date format
+     */
+    public static String reformatDate(String rawDate) throws DateTimeParseException {
+        LocalDate dateOfExpense = LocalDate.parse(rawDate);
+        String parsedDate = dateOfExpense.format(DateTimeFormatter.ofPattern("dd-MMM-YYYY"));
+        return parsedDate;
+    }
+
+    /**
+     * Checks if the specified expense amount is a valid number/float and is non-negative.
+     *
+     * @param amount the expense amount entered by the user
+     * @throws ExpenseAmountException if amount is negative
+     */
+    public static void isAmountValid(String amount) throws ExpenseAmountException {
+        float parsedAmount = Float.parseFloat(amount);
+        if (parsedAmount < 0) {
+            throw new ExpenseAmountException("Amount cannot be negative!");
+        }
+    }
+
+    /**
      * Determines the content of the user input by splitting it into fields depending on the delimiters
      * provided.
      *
@@ -24,25 +58,22 @@ public class ExpenseParser {
      * @return list of parameters representing the date, amount, category and remarks
      * @throws IndexOutOfBoundsException if some fields are missing, or wrong delimiters are used
      */
-    public static String[] parseNewExpense(String userInput) throws IndexOutOfBoundsException {
+    public static String[] parseNewExpense(String userInput) throws IndexOutOfBoundsException,
+            DateTimeParseException, NumberFormatException, ExpenseAmountException, ExpenseMissingFieldException,
+            ExpenseEmptyFieldException {
         String rawInput = userInput.split(" ", SPLIT_IN_HALF)[EXPENSE_FIELDS].trim();
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;
         if (!rawInput.contains(DATE_DELIMITER) || !rawInput.contains(AMOUNT_DELIMITER)
                 || !rawInput.contains(CATEGORY_DELIMITER) || !rawInput.contains(REMARKS_DELIMITER)) {
-            throw new IndexOutOfBoundsException();
+            throw new ExpenseMissingFieldException("Some fields are missing!");
         }
-        try {
-            String date = parseKeywordExpense(rawInput, DATE_DELIMITER, ALL_DELIMITERS);
-            String amount = parseKeywordExpense(rawInput, AMOUNT_DELIMITER, ALL_DELIMITERS);
-            String category = parseKeywordExpense(rawInput, CATEGORY_DELIMITER, ALL_DELIMITERS);
-            String remarks = parseKeywordExpense(rawInput, REMARKS_DELIMITER, ALL_DELIMITERS);
-            String[] result = {date, amount, category, remarks};
-            return result;
-        } catch (ExpenseException e) {
-            System.out.println(e.getMessage());
-        }
-        String[] wrongResult = {};
-        return wrongResult;
+        String date = parseKeywordExpense(rawInput, DATE_DELIMITER, ALL_DELIMITERS);
+        date = reformatDate(date);
+        String amount = parseKeywordExpense(rawInput, AMOUNT_DELIMITER, ALL_DELIMITERS);
+        String category = parseKeywordExpense(rawInput, CATEGORY_DELIMITER, ALL_DELIMITERS);
+        String remarks = parseKeywordExpense(rawInput, REMARKS_DELIMITER, ALL_DELIMITERS);
+        String[] result = {date, amount, category, remarks};
+        return result;
     }
 
     /**
@@ -55,7 +86,7 @@ public class ExpenseParser {
      * @throws IndexOutOfBoundsException if contents supplied is missing
      */
     public static String parseKeywordExpense(String userInput, String leftDelimiter, String rightDelimiter)
-            throws IndexOutOfBoundsException, ExpenseException {
+            throws ExpenseEmptyFieldException, ExpenseAmountException {
         assert userInput != null : ASSERT_INPUT_NOT_NULL;
         assert leftDelimiter != null : ASSERT_DELIMITER_NOT_NULL;
         assert rightDelimiter != null : ASSERT_DELIMITER_NOT_NULL;
@@ -71,12 +102,12 @@ public class ExpenseParser {
         if (leftDelimiter.equals(AMOUNT_DELIMITER)) {
             float amountCheck = Float.parseFloat(result);
             if (amountCheck < 0) {
-                throw new ExpenseException("Amount cannot be negative!");
+                throw new ExpenseAmountException("Amount cannot be negative!");
             }
         }
         assert result != null : ASSERT_RESULT_NOT_NULL;
         if (result.length() == ZERO) {
-            throw new IndexOutOfBoundsException();
+            throw new ExpenseEmptyFieldException("Fields cannot be empty!");
         }
         return result;
     }
