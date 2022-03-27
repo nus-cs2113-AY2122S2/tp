@@ -7,8 +7,14 @@ import seedu.meetingjio.exceptions.OverlappingEventException;
 import java.util.ArrayList;
 
 public class Timetable {
+
     private final String name;
     private ArrayList<Event> list;
+
+    public static final int HOUR_PARAMETER_IN_24_HOURS = 100;
+    public static final int OFFSET = 480;
+    public static final int MINS_IN_1_HOUR = 60;
+    public static final int BUSY = 1;
 
     public Timetable(String name) {
         this.name = name;
@@ -132,15 +138,17 @@ public class Timetable {
             int numericStartTime = convertTimeToMins(event.startTime);
             int numericEndTime = convertTimeToMins(event.endTime);
             for (int j = numericStartTime; j < numericEndTime; j++) {
-                busySlots[numericDay - 1][j] = 1;
+                busySlots[numericDay - 1][j] = BUSY;
             }
         }
     }
 
     private int convertTimeToMins(int time) {
-        int hours = time / 100;
-        int minutes = time % 100;
-        return hours * 60 + minutes - 480;
+        int hours = time / HOUR_PARAMETER_IN_24_HOURS;
+        int minutes = time % HOUR_PARAMETER_IN_24_HOURS;
+        int timeInMinutes = hours * MINS_IN_1_HOUR + minutes;
+        timeInMinutes -= OFFSET;
+        return timeInMinutes;
     }
 
 }
