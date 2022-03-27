@@ -69,39 +69,41 @@ and `ExpenditureList`.
 
 ### Parser Component
 
-**Class:** [`Parser.java`](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/Parser.java)
+**Class:** [`Parser.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/parser/Parser.java)
 
 ![ParserClassDiagram](images/ParserClassDiagram.png)
 
-The `Parser` component consists of the `Parser` class, `ParserUtility` class and several
-`Exception` classes.
+The `Parser` component consists of the `Parser` class, `ParserUtility` class and several `Exception` classes.
 
-The `Parser` class provides methods which helps to parse the user input into its respective terms
-(i.e. name) and returns them as a string, and also methods which helps to validate the terms and returns the
-appropriately typed object to the `Commands` component. The `Parser` class interacts the `ParserUtility` class which
-provides supporting methods for parsing and validating. Both classes interacts and throws exceptions as required.
+The `Parser` class provides the `parseXYZ()` and `getValidXYZ()` methods where `XYZ` is a placeholder for the type of
+term (e.g. `parseKeyword()` and `getValidUserIndex`). The methods prepended by **parse** assists in parsing the user
+input into its respective terms and the method prepended by **getValid** assists in validating the parsed terms and
+returning an appropriately typed object to the `Commands` component. The `Parser` class interacts with the
+`ParserUtility` class which provides supporting methods for parsing and validating. Both classes throws exceptions as
+required.
+
+The following Sequence Diagram shows how the classes of the `Parser` component interacts for each user command.
+
+![ParserOverviewSequenceDiagram](images/ParserSequenceDiagram0.png)
 
 How the `Parser` component is used:
 
-1. When the `Commands` component receives a user input, the `Parser` is called upon to parse the type of command to be
-   executed.
+1. When the `Commands` component receives a user input, `parseKeyword()` is called upon to parse the type of command to
+   be executed.
 2. This will result in the keyword of the command to be returned as a string.
-3. When necessary, the `Parser` will be called upon to parse more terms for the `Commands` component to obtain the
-   details required for the command execution (i.e. `parseGroupIndex("add /n Alice /g 2")`
-   to get group 2). The `ParserUtility` assists the parsing during this process.
-4. The parser will also be called upon thereafter to check and return a valid typecasted object to be used for the
-   command execution (i.e. `getValidGroupIndex(indexString)` to check that the index provided corresponds to an existing
-   group). The `ParserUtility` is also called here to assist with the validation process.
+3. When necessary, the `parseXYZ()` methods will be called upon to parse more terms for the `Commands`
+   component to obtain the details required for the command execution (e.g. `parseGroupIndex("add /n Alice /g 2")`
+   to get group 2). The `ParserUtility` assists the parsing during this process by providing utility methods.
+4. The `getValidXYZ()` methods will also be called upon thereafter to check and return valid typecasted objects to be
+   used for the command execution (e.g. `getValidGroupIndex(indexString)` to check that the index provided corresponds
+   to an existing group). The `ParserUtility` is also called here to assist with the validation process.
 
 The Sequence Diagram below illustrates the interactions in the `Parser` component for a command execution.
-Let `userInput` be the command string `deletein /u 1 /g 2 /r 1` and the minimum index
-`minIdx` that is supported by PlanITarium be `1`.
+Let `userInput` be the command string `deletein /u 1 /g 2 /r 1` and the minimum index `MIN_INDEX` be the constant that
+is supported by PlanITarium to be `1`.
 
-![ParserSequenceDiagram](images/ParserSequenceDiagram.png)
-
-> :information_source: **Note:** Several alternate paths and optional paths have been omitted from the above
-> Sequence Diagram. All paths that can be taken but not shown are undesirable outcomes which would
-> result in an exception thrown.
+![ParserSequenceDiagramExecute](images/ParserSequenceDiagram1.png)
 
 ### Family Component
 
