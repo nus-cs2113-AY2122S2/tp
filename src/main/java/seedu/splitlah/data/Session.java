@@ -132,8 +132,8 @@ public class Session implements Serializable {
      *
      * @param activityId An integer that uniquely identifies an activity.
      * @return An Activity object in the Session class specified by activityId
-     * @throws InvalidDataException if activityList is empty or activityList does not contain an Activity object
-     *                              with the specified activityId
+     * @throws InvalidDataException If activityList is empty or
+     *                              if activityList does not contain an Activity object with the specified activityId
      */
     public Activity getActivity(int activityId) throws InvalidDataException {
         if (activityList.isEmpty()) {
@@ -154,8 +154,8 @@ public class Session implements Serializable {
      * objects involved in the activity.
      *
      * @param activityId An integer that uniquely identifies an activity.
-     * @throws InvalidDataException if activityList is empty or activityList does not contain an Activity object
-     *                              with the specified activityId
+     * @throws InvalidDataException If activityList is empty or
+     *                              if activityList does not contain an Activity object with the specified activityId
      */
     public void removeActivity(int activityId) throws InvalidDataException {
         if (activityList.isEmpty()) {
@@ -197,8 +197,7 @@ public class Session implements Serializable {
      *
      * @param name A String object that represents a query name used to search for a Person object.
      * @return A Person object in the Session class that has a matching name.
-     * @throws InvalidDataException If personList is empty or 
-     *                              if no Person object in personList matches queried name.
+     * @throws InvalidDataException If no Person object in personList matches queried name.
      */
     public Person getPersonByName(String name) throws InvalidDataException {
         if (personList.isEmpty()) {
@@ -218,8 +217,7 @@ public class Session implements Serializable {
      *
      * @param nameList An array of String objects that represent names of people in the session.
      * @return An ArrayList object containing Person objects with matching names.
-     * @throws InvalidDataException if personList is empty or
-     *                              if any name in nameList does not match a Person object in personList.
+     * @throws InvalidDataException If any name in nameList does not match a Person object in personList.
      */
     public ArrayList<Person> getPersonListByName(String[] nameList) throws InvalidDataException {
         ArrayList<Person> personList = new ArrayList<>();
@@ -242,7 +240,7 @@ public class Session implements Serializable {
     /**
      * Returns a String object containing a summary of the state of the member attribute activityList.
      *
-     * @return A String object containing a summary of all Activity objects in activityList, or
+     * @return A String object containing a summary of all Activity objects in activityList or
      *         a message stating that the activityList is empty if there are no Activity objects within.
      */
     private String getActivityListSummaryString() {
@@ -260,7 +258,7 @@ public class Session implements Serializable {
     /**
      * Returns a String object containing a summary of the state of the member attribute personList.
      *
-     * @return A String object containing a summary of all Person objects in personList, or
+     * @return A String object containing a summary of all Person objects in personList or
      *         a message stating that the personList is empty if there are no Person objects within.
      */
     private String getPersonListSummaryString() {
@@ -279,8 +277,8 @@ public class Session implements Serializable {
     /**
      * Returns a String object containing a summary of the state of the member attribute group.
      *
-     * @return A String object containing the name of the Group object if group is not null, or
-     *         a message stating that there is no group in the session, if group is null.
+     * @return A String object containing the name of the Group object if group is not null or
+     *         a message stating that there is no group in the session if group is null.
      */
     private String getGroupSummaryString() {
         if (group == null) {
