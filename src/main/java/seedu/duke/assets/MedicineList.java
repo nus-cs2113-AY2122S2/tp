@@ -109,15 +109,18 @@ public class MedicineList extends List {
     }
 
     public void viewExpired() {
-        if (expiredMedicines.size() == 0) {
-            UI.printParagraph("There are no expired medicines as of today!");
-            return;
+        CommandLineTable medicineTable = new CommandLineTable();
+        //st.setRightAlign(true);//if true then cell text is right aligned
+        medicineTable.setShowVerticalLines(true);
+        medicineTable.setHeaders("MedicineId", "MedicineName", "Dosage", "Expiry", "SideEffects", "Quantity");
+
+        for (Medicine medicine : expiredMedicines) {
+            medicineTable.addRow(medicine.getMedicineId(), medicine.getMedicineName(),
+                    String.valueOf(medicine.getDosage()),
+                    medicine.getExpiry(), medicine.getSideEffects(),
+                    String.valueOf(medicine.getQuantity()));
         }
-        UI.printParagraph("Here is the list of medicines that have expired and\n"
-                + "have been moved to the expired list!\nThis list will be cleared upon exit of app!");
-        for (Medicine medicine: expiredMedicines) {
-            UI.printCont(getMedicineInfo(medicine));
-        }
+        medicineTable.print();
     }
 
     public void updateStock() {
