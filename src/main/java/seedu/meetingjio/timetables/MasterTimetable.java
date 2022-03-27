@@ -160,6 +160,15 @@ public class MasterTimetable {
         }
     }
 
+    /**
+     * Initialise a 7 x 960 array, with the 7 rows indicating each day of the week and the 960 columns indicating the
+     * minutes starting from 0800 to 2359 (Constraint here is that free timeslots from 0000 to 0759 are not included).
+     * For the last minute (2359) of each day, it will be initialised to 1 (BUSY).
+     * For each timetable stored, the method populateBusySlots will be called.
+     *
+     * @param duration Integer representing the minimum number of hours to filter the free time slots
+     * @return freeSlotsString String containing the common timeslots when everyone is free
+     */
     public String listFree(int duration) {
         int[][] busySlots = new int[NUM_DAYS][NUM_MINS];
         for (int i = 0; i < NUM_DAYS; i++) {
@@ -168,9 +177,28 @@ public class MasterTimetable {
         for (Timetable timetable : timetables) {
             timetable.populateBusySlots(busySlots);
         }
-        return showOutput(busySlots, duration);
+        String freeSlotsString = showOutput(busySlots, duration);
+        return freeSlotsString;
     }
 
+    /**
+     * Given the finalised busySlots array and the minimum duration, find the timeslots where everyone is free and the
+     * duration meets the minimum duration.
+     * Each row in busySlots contains 960 0s and 1s, where free timeslots are represented by consecutive 0s.
+     * 2 strings are initialised: freeSlotsString to store free slots and newEntry to store each new entry.
+     * An integer count and a boolean isStart is also initialised as 0 and true respectively.
+     * For each day, iterating from left to right, when a 0 (FREE) is encountered, the respective day and time is added
+     * to newEntry, and count will be incremented.
+     * For each subsequent 0 (FREE), count will keep incrementing.
+     * When a 1 (BUSY) is encountered, the count is checked to determine if the free timeslot exceeds the minimum
+     * duration. If it does, the time is added to newEntry, and newEntry is added to freeSlotsString.
+     * Subsequently, newEntry and count will reset until the next 0 is encountered, and the process repeats itself.
+     *
+     * @param busySlots 7 x 960 array representing the timeframe from 0800 to 2359 for each day. 1 indicates BUSY and 0
+     *                  indicates FREE
+     * @param duration Minimum time required for the free time slot
+     * @return truncateString(freeSlotsString) freeSlotsString but truncated without the last newline character
+     */
     private String showOutput(int[][] busySlots, int duration) {
         String freeSlotsString = "";
         String newEntry = "";
@@ -203,35 +231,64 @@ public class MasterTimetable {
         return truncateString(freeSlotsString);
     }
 
+    /**
+     * Remove the last newline character from the string. If the string is empty, return an error message informing the
+     * user that there is no free time slot that matches the given requirements.
+     *
+     * @param freeSlotsString String containing the common timeslots where everyone is free
+     * @return truncatedFreeSlotsString freeSlotsString but truncated without the last newline character
+     */
     private String truncateString(String freeSlotsString) {
         if (freeSlotsString.length() == 0) {
             return ERROR_NO_FREE_TIMESLOT;
         }
-        String filteredFreeSlotsString = freeSlotsString.substring(0, freeSlotsString.length() - 1);
-        return filteredFreeSlotsString;
+        String truncatedFreeSlotsString = freeSlotsString.substring(0, freeSlotsString.length() - 1);
+        return truncatedFreeSlotsString;
     }
 
+    /**
+     * Converts an integer (1-7) into its corresponding day, with 1 as Monday and 7 as Sunday.
+     *
+     * @param numericDay Integer to be converted into a day
+     * @return day String indicating the actual day
+     */
     private String convertDayIntToString(int numericDay) {
+        String day;
         switch (numericDay) {
         case 1:
-            return "Monday";
+            day = "Monday";
+            break;
         case 2:
-            return "Tuesday";
+            day = "Tuesday";
+            break;
         case 3:
-            return "Wednesday";
+            day = "Wednesday";
+            break;
         case 4:
-            return "Thursday";
+            day = "Thursday";
+            break;
         case 5:
-            return "Friday";
+            day = "Friday";
+            break;
         case 6:
-            return "Saturday";
+            day = "Saturday";
+            break;
         case 7:
-            return "Sunday";
+            day = "Sunday";
+            break;
         default:
-            return "";
+            day = "";
+            break;
         }
+        return day;
     }
 
+    /**
+     * Convert the number of minutes starting from 0800 to 24-hour format.
+     *
+     * @param mins The number of minutes starting from 0800
+     * @return timeIn24Hour The corresponding time in 24-hour format
+     */
     private String convertMinsToTime(int mins) {
         mins += OFFSET;
         int hours = mins / MINS_IN_1_HOUR;

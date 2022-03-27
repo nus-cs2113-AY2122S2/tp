@@ -139,6 +139,13 @@ public class Timetable {
         this.list = list;
     }
 
+    /**
+     * For each event in the timetable, obtain its corresponding day, start time and end time in the appropriate format.
+     * Indicate 1 (BUSY) for every minute that the user is attending an event.
+     *
+     * @param busySlots 7 x 960 array representing the timeframe from 0800 to 2359 for each day. 1 indicates BUSY and 0
+     *                  indicates FREE
+     */
     public void populateBusySlots(int[][] busySlots) {
         for (int i = 0; i < list.size(); i++) {
             Event event = list.get(i);
@@ -151,6 +158,12 @@ public class Timetable {
         }
     }
 
+    /**
+     * This helper method takes in a time in 24-hour format, and convert it to the number of minutes starting from 0800.
+     *
+     * @param time Time to be converted
+     * @return timeInMinutes The number of minutes converted from time
+     */
     private int convertTimeToMins(int time) {
         int hours = time / HOUR_PARAMETER_IN_24_HOURS;
         int minutes = time % HOUR_PARAMETER_IN_24_HOURS;
