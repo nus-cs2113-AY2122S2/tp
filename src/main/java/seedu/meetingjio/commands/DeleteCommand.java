@@ -44,12 +44,12 @@ public class DeleteCommand extends Command {
         try {
             Event event = timetable.get(index - 1);
             if (event instanceof Meeting) {
-                masterTimetable.deleteMeetingFromEveryoneTimetable((Meeting) event);
+                return masterTimetable.deleteMeetingFromEveryoneTimetable((Meeting) event);
             } else {
                 timetable.remove(index - 1);
                 //assert (timetable.size() == size - 1) : ERROR_DELETE_COMMAND_FAILED;
+                return deleteConfirmation(event);
             }
-            return deleteConfirmation(event);
         } catch (IndexOutOfBoundsException ie) {
             return ERROR_INDEX_OUT_OF_BOUND;
         }

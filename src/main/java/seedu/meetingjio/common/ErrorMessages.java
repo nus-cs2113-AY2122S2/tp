@@ -54,5 +54,9 @@ public class ErrorMessages {
             + "some of the members cannot make it";
     public static final String ERROR_DUPLICATE_MEETING = "This meeting already exists. "
             + "This meeting will not be not added to the timetable.";
-    public static final String ERROR_MEETING_DOES_NOT_EXIST = "This meeting does exist";
+    public static final String ERROR_MEETING_DOES_NOT_EXIST = "This meeting does not exist";
+
+    public static final String ERROR_FREE_INPUT_INVALID = "Please specify the minimum duration for everyone to be free "
+            + "where duration is an integer indicating the minimum number of hours: free [duration]\n"
+            + "If there is no such constraint for the duration, just input 'free'.";
 }

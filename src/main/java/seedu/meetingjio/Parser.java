@@ -6,6 +6,7 @@ import seedu.meetingjio.commands.ListCommand;
 import seedu.meetingjio.commands.DeleteCommand;
 import seedu.meetingjio.commands.ClearCommand;
 import seedu.meetingjio.commands.AddMeetingCommand;
+import seedu.meetingjio.commands.FreeCommand;
 import seedu.meetingjio.commands.CommandResult;
 import seedu.meetingjio.commands.HelpCommand;
 
@@ -53,11 +54,13 @@ public class Parser {
         case AddLessonCommand.COMMAND_WORD:
             return prepareAddLesson();
         case ListCommand.COMMAND_WORD:
-            return new ListCommand(arguments.trim());
+            return new ListCommand(arguments);
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete();
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand(arguments.trim());
+            return new ClearCommand(arguments);
+        case FreeCommand.COMMAND_WORD:
+            return new FreeCommand(arguments);
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         case AddMeetingCommand.COMMAND_WORD:

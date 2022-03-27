@@ -9,14 +9,22 @@ import seedu.meetingjio.exceptions.OverlappingEventException;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.commands.ListCommand;
 
-import java.sql.Time;
 import java.util.ArrayList;
 
 import static seedu.meetingjio.common.ErrorMessages.*;
 
 public class MasterTimetable {
+
     private final ArrayList<Timetable> timetables;
     private final ArrayList<Meeting> meetingList;
+
+    public static final int NUM_DAYS = 7;
+    public static final int NUM_MINS = 960;
+    public static final int OFFSET = 480;
+    public static final int MINS_IN_1_HOUR = 60;
+    public static final int HOUR_IN_24_HOUR = 100;
+    public static final int BUSY = 1;
+    public static final int FREE = 0;
 
     public MasterTimetable() {
         this.timetables = new ArrayList<>();
@@ -150,4 +158,69 @@ public class MasterTimetable {
             }
         }
     }
+
+    public String listFree(int duration) {
+        int[][] busySlots = new int[NUM_DAYS][NUM_MINS];
+        for (int i = 0; i < NUM_DAYS; i++) {
+            busySlots[i][NUM_MINS - 1] = BUSY;
+        }
+        for (Timetable timetable : timetables) {
+            timetable.populateBusySlots(busySlots);
+        }
+        return showOutput(busySlots);
+    }
+
+    private String showOutput(int[][] busySlots) {
+        String freeSlotsString = "";
+        boolean isStart = true;
+        for (int i = 0; i < NUM_DAYS; i++) {
+            for (int j = 0; j < NUM_MINS; j++) {
+                if (busySlots[i][j] == FREE && isStart) {
+                    freeSlotsString += convertDayIntToString(i + 1);
+                    freeSlotsString += " ";
+                    freeSlotsString += convertMinsToTime(j);
+                    isStart = false;
+                }
+                if (busySlots[i][j] == BUSY && !isStart) {
+                    freeSlotsString += " ";
+                    freeSlotsString += convertMinsToTime(j);
+                    freeSlotsString += "\n";
+                    isStart = true;
+                }
+            }
+        }
+        String truncatedFreeSlotsString = freeSlotsString.substring(0, freeSlotsString.length() - 1);
+        return truncatedFreeSlotsString;
+    }
+
+    private String convertDayIntToString(int numericDay) {
+        switch (numericDay) {
+        case 1:
+            return "Monday";
+        case 2:
+            return "Tuesday";
+        case 3:
+            return "Wednesday";
+        case 4:
+            return "Thursday";
+        case 5:
+            return "Friday";
+        case 6:
+            return "Saturday";
+        case 7:
+            return "Sunday";
+        default:
+            return "";
+        }
+    }
+
+    private String convertMinsToTime(int mins) {
+        mins += OFFSET;
+        int hours = mins / MINS_IN_1_HOUR;
+        int minutes = mins % MINS_IN_1_HOUR;
+        int timeInt = hours * HOUR_IN_24_HOUR + minutes;
+        String timeIn24Hour = String.format("%04d", timeInt);
+        return timeIn24Hour;
+    }
+
 }
