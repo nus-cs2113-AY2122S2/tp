@@ -8,10 +8,12 @@ import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.parser.commandparser.ActivityEditCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
+import seedu.splitlah.parser.commandparser.SessionEditCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
@@ -404,6 +406,9 @@ public class ParserUtils {
         case ActivityDeleteCommand.COMMAND_TEXT:
             delimiterList = ActivityDeleteCommand.COMMAND_DELIMITERS;
             break;
+        case ActivityEditCommandParser.COMMAND_TEXT:
+            delimiterList = ActivityEditCommandParser.COMMAND_DELIMITERS;
+            break;
         case ActivityListCommand.COMMAND_TEXT:
             delimiterList = ActivityListCommand.COMMAND_DELIMITERS;
             break;
@@ -415,6 +420,9 @@ public class ParserUtils {
             break;
         case SessionDeleteCommandParser.COMMAND_TEXT:
             delimiterList = SessionDeleteCommandParser.COMMAND_DELIMITERS;
+            break;
+        case SessionEditCommandParser.COMMAND_TEXT:
+            delimiterList = SessionEditCommandParser.COMMAND_DELIMITERS;
             break;
         case SessionSummaryCommandParser.COMMAND_TEXT:
             delimiterList = SessionSummaryCommandParser.COMMAND_DELIMITERS;
@@ -457,6 +465,8 @@ public class ParserUtils {
             // Fallthrough
         case SessionDeleteCommandParser.COMMAND_TEXT:
             // Fallthrough
+        case SessionEditCommandParser.COMMAND_TEXT:
+            // Fallthrough
         case SessionSummaryCommandParser.COMMAND_TEXT:
             // Fallthrough
         case SessionListCommandParser.COMMAND_TEXT:
@@ -464,6 +474,8 @@ public class ParserUtils {
         case ActivityCreateCommandParser.COMMAND_TEXT:
             // Fallthrough
         case ActivityDeleteCommand.COMMAND_TEXT:
+            // Fallthrough
+        case ActivityEditCommandParser.COMMAND_TEXT:
             // Fallthrough
         case ActivityListCommand.COMMAND_TEXT:
             // Fallthrough
