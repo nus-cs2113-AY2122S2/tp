@@ -41,10 +41,10 @@ public class AddHousekeeperPerformanceCommand extends Command {
         try {
             ratingValue = Integer.parseInt(ratingString);
         } catch (NumberFormatException e) {
-            throw new InvalidSatisfactionValueException();
+            throw new InvalidHousekeeperPerformanceRatingException();
         }
         if (ratingValue < 1 || ratingValue > 5) {
-            throw new InvalidSatisfactionValueException();
+            throw new InvalidHousekeeperPerformanceRatingException();
         }
         return ratingValue;
     }
@@ -61,9 +61,15 @@ public class AddHousekeeperPerformanceCommand extends Command {
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, WrongCommandException {
         HousekeeperPerformanceList housekeeperPerformanceList = listContainer.getHousekeeperPerformanceList();
+        HousekeeperList housekeeperList = listContainer.getHousekeeperList();
+        // Checks if the user tries to add a housekeeper performance for a housekeeper not the HousekeeperList records
+        if (!housekeeperList.hasNameAdded(housekeeperPerformance.getName())) {
+            throw new NonexistentHousekeeperException();
+        } else if (housekeeperPerformanceList.isHousekeeperInPerformanceList(housekeeperPerformance.getName())) {
+            throw new RepeatHousekeeperPerformanceNameException();
+        }
         housekeeperPerformanceList.addHousekeeperPerformance(housekeeperPerformance);
         ui.printAddHousekeeperPerformanceAcknowledgementMessage(housekeeperPerformanceList, housekeeperPerformance);
-        housekeeperPerformanceList.viewPerformances();
 
     }
 
