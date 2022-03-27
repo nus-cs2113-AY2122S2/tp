@@ -7,7 +7,8 @@ import seedu.duke.helper.command.AddAppointmentCommand;
 import seedu.duke.helper.command.Command;
 import seedu.duke.helper.command.ViewAppointmentCommand;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 class ParserTest {
@@ -349,7 +350,7 @@ class ParserTest {
             assert true;
         }
     }
-    
+
     /*
     @Test
     void parseAddAppointmentTest_CorrectFormatInput_returnCommand() {
