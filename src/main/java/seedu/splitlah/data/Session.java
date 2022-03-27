@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author Warren
  */
-public class Session implements Serializable {
+public class Session implements Serializable, Comparable<Session> {
 
     private String sessionName;
     private int sessionId;
@@ -299,6 +299,21 @@ public class Session implements Serializable {
                 + SUMMARY_STRING_SEPARATOR + getGroupSummaryString();
     }
 
+    /**
+     * Returns an integer to identify whether this Session object should be ordered
+     * before or after another Session object when sorted.
+     *
+     * @param session The specified Session object that this Session object is compared against.
+     * @return An integer less than 0 if this Session object's sessionId is smaller than the specified
+     *         Session object's sessionId,
+     *         an integer greater than 0 if this object's sessionId is larger,
+     *         and 0 if both Session objects' sessionIds are numerically equal.
+     */
+    @Override
+    public int compareTo(Session session) {
+        return Integer.compare(sessionId, session.getSessionId());
+    }
+    
     /**
      * Returns a String object describing the state of the Session object.
      *
