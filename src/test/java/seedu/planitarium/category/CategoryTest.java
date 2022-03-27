@@ -1,7 +1,10 @@
+//@@author 1szheng
 package seedu.planitarium.category;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,6 +17,15 @@ class CategoryTest {
     private static final String LABEL_HEALTH_AND_MEDICAL = "Health and Medical";
     private static final String LABEL_TRANSPORT = "Transportation";
     private static final String LABEL_ENTERTAINMENT = "Fun and Entertainment";
+
+    private static final String NAME_OTHERS = "OTHERS";
+    private static final String NAME_FOOD_AND_DRINKS = "FOOD_AND_DRINKS";
+    private static final String NAME_HOME_AND_UTIL = "HOME_AND_UTIL";
+    private static final String NAME_HEALTH_AND_MEDICAL = "HEALTH_AND_MEDICAL";
+    private static final String NAME_TRANSPORT = "TRANSPORT";
+    private static final String NAME_ENTERTAINMENT = "ENTERTAINMENT";
+
+    private static final PrintStream ORIGINAL_OUT = System.out;
 
     @Test
     void getLabel_enumLabelExists_success() {
@@ -70,21 +82,41 @@ class CategoryTest {
     void values_isExpectedEnumList_success() {
         Category[] allEnums = Category.values();
 
-        assertEquals("OTHERS", allEnums[0].name());
-        assertEquals("FOOD_AND_DRINKS", allEnums[1].name());
-        assertEquals("HOME_AND_UTIL", allEnums[2].name());
-        assertEquals("HEALTH_AND_MEDICAL", allEnums[3].name());
-        assertEquals("TRANSPORT", allEnums[4].name());
-        assertEquals("ENTERTAINMENT", allEnums[5].name());
+        assertEquals(NAME_OTHERS, allEnums[0].name());
+        assertEquals(NAME_FOOD_AND_DRINKS, allEnums[1].name());
+        assertEquals(NAME_HOME_AND_UTIL, allEnums[2].name());
+        assertEquals(NAME_HEALTH_AND_MEDICAL, allEnums[3].name());
+        assertEquals(NAME_TRANSPORT, allEnums[4].name());
+        assertEquals(NAME_ENTERTAINMENT, allEnums[5].name());
     }
 
     @Test
     void valueOf_isExpectedEnumName_success() {
-        assertEquals(Category.OTHERS, Category.valueOf("OTHERS"));
-        assertEquals(Category.FOOD_AND_DRINKS, Category.valueOf("FOOD_AND_DRINKS"));
-        assertEquals(Category.HOME_AND_UTIL, Category.valueOf("HOME_AND_UTIL"));
-        assertEquals(Category.HEALTH_AND_MEDICAL, Category.valueOf("HEALTH_AND_MEDICAL"));
-        assertEquals(Category.TRANSPORT, Category.valueOf("TRANSPORT"));
-        assertEquals(Category.ENTERTAINMENT, Category.valueOf("ENTERTAINMENT"));
+        assertEquals(Category.OTHERS, Category.valueOf(NAME_OTHERS));
+        assertEquals(Category.FOOD_AND_DRINKS, Category.valueOf(NAME_FOOD_AND_DRINKS));
+        assertEquals(Category.HOME_AND_UTIL, Category.valueOf(NAME_HOME_AND_UTIL));
+        assertEquals(Category.HEALTH_AND_MEDICAL, Category.valueOf(NAME_HEALTH_AND_MEDICAL));
+        assertEquals(Category.TRANSPORT, Category.valueOf(NAME_TRANSPORT));
+        assertEquals(Category.ENTERTAINMENT, Category.valueOf(NAME_ENTERTAINMENT));
+    }
+
+    @Test
+    void getNumOfCategories_isExpectedNum_success() {
+        assertEquals(6, Category.getNumberOfCategories());
+    }
+
+    @Test
+    void listCategories() {
+        ByteArrayOutputStream newOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOut));
+
+        String expected = "1. Others" + System.lineSeparator() + "2. Food and Drinks" + System.lineSeparator()
+                + "3. Home and Utilities" + System.lineSeparator() + "4. Health and Medical" + System.lineSeparator()
+                + "5. Transportation" + System.lineSeparator() + "6. Fun and Entertainment" + System.lineSeparator();
+
+        Category.listCategories();
+        assertEquals(expected, newOut.toString());
+
+        System.setOut(ORIGINAL_OUT);
     }
 }

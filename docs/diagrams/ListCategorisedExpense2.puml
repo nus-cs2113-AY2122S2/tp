@@ -8,35 +8,35 @@ hide empty members
 title After iterating Alice's ExpenditureList
 
 package " " {
-    class temp as "__tempList:MoneyList(temp)__"
+    class temp as "__tempList:ExpenditureList__"
     class Fam as "__family:Family__"
     class MyGen as "__myGen:PersonList__"
     class Parent as "__parent:PersonList__"
     class Alice as "__Alice:Person__"
     class Bob as "__Bob:Person__"
-    class List as "__ExpenditureList:MoneyList(temp)__"
-    class List2 as "__ExpenditureList:MoneyList(temp)__"
-    class Exp0 as "__Expenditure0:Money(temp)__" #LIGHTGREEN {
+    class List as "__:ExpenditureList__"
+    class List2 as "__:ExpenditureList__"
+    class Exp0 as "__:Expenditure__" #LIGHTGREEN {
         description = "Lunch"
         category = 1
     }
-    class Exp1 as "__Expenditure1:Money(temp)__" #LIGHTGREEN {
+    class Exp1 as "__:Expenditure__" #LIGHTGREEN {
         description = "Dinner"
         category = 1
     }
-    class Exp2 as "__Expenditure2:Money(temp)__" #LIGHTGREEN {
+    class Exp2 as "__:Expenditure__" #LIGHTGREEN {
         description = "Movies"
         category = 5
     }
-    class Exp3 as "__Expenditure3:Money(temp)__" #LIGHTGREEN {
+    class Exp3 as "__:Expenditure__" #LIGHTGREEN {
         description = "Electric Bills"
         category = 2
     }
-    class Exp4 as "__Expenditure0:Money(temp)__" #LIGHTGREEN {
+    class Exp4 as "__:Expenditure__" #LIGHTGREEN {
         description = "Lunch"
         category = 1
     }
-    class Exp5 as "__Expenditure1:Money(temp)__" #LIGHTGREEN {
+    class Exp5 as "__:Expenditure__" #LIGHTGREEN {
         description = "Dinner"
         category = 1
     }

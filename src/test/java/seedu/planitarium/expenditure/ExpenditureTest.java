@@ -6,6 +6,7 @@ import seedu.planitarium.money.Expenditure;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class ExpenditureTest {
@@ -14,7 +15,7 @@ class ExpenditureTest {
 
     @BeforeEach
     public void setUp() {
-        testItem = new Expenditure("food", 24);
+        testItem = new Expenditure("food", 24, false);
     }
 
     @Test
@@ -32,9 +33,15 @@ class ExpenditureTest {
     }
 
     @Test
+    public void getPermanent_validExpenditure_expectedPermanent() {
+        boolean isPermanent = testItem.isPermanent();
+        assertFalse(isPermanent);
+    }
+
+    @Test
     public void addExpenditure_nullDescription_expectAssertionError() {
         try {
-            Expenditure testNullDescription = new Expenditure(null, 24);
+            Expenditure testNullDescription = new Expenditure(null, 24, false);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());

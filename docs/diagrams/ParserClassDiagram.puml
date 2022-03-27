@@ -1,0 +1,23 @@
+@startuml
+
+!include style.puml
+skinparam arrowColor LOGIC_COLOR_T3
+
+Package "Parser" as P {
+    Class Parser LOGIC_COLOR_T4
+    Class ParserUtility LOGIC_COLOR_T2
+    Class Exceptions #7aa6c2
+}
+
+package Commands as "**Commands**\n**Component**" {
+'Class HiddenModel as " " #TRANSPARENT
+}
+
+
+Commands .L.> Parser : Parses input >
+
+Parser -U.> Exceptions : <color: red><<throws>>
+Parser -L.> ParserUtility : Uses >
+ParserUtility -r.> Exceptions : <color: red><<throws>>
+
+@enduml

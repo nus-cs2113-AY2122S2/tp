@@ -1,3 +1,4 @@
+//@@author 1szheng
 package seedu.planitarium.category;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public enum Category {
             .map(Category::getLabel)
             .collect(Collectors.toList())
     );
+    private static final int NumOfCategories = LABELS.size();
     private final String label;
 
     /**
@@ -54,5 +56,24 @@ public enum Category {
      */
     public static String getLabelForIndex(int index) {
         return LABELS.get(index);
+    }
+
+    /**
+     * Returns the number of categories present in the enum.
+     *
+     * @return The number of categories.
+     */
+    public static int getNumberOfCategories() {
+        return NumOfCategories;
+    }
+
+    /**
+     * Prints all the expense categories and their indexes.
+     */
+    public static void listCategories() {
+        int index = 1;
+        for (String label : LABELS) {
+            System.out.println(index++ + ". " + label);
+        }
     }
 }

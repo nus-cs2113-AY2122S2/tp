@@ -1,15 +1,20 @@
-//@@author Teanweijun
+//@@author teanweijun
 
 package seedu.planitarium.person;
 
+import seedu.planitarium.ProjectLogger;
+import seedu.planitarium.category.Category;
+import seedu.planitarium.global.Constants;
 import seedu.planitarium.money.IncomeList;
 import seedu.planitarium.money.ExpenditureList;
 
+import java.util.logging.Level;
+
 public class Person {
-    protected String name;
-    protected IncomeList incomeList;
-    protected ExpenditureList expenditureList;
-    protected static int SINGULAR = 1;
+    private String name;
+    private IncomeList incomeList;
+    private ExpenditureList expenditureList;
+    private static ProjectLogger logger = new ProjectLogger(Person.class.getName(), "Person.log");
 
     /**
      * Constructs a new Person object.
@@ -21,6 +26,8 @@ public class Person {
         this.name = name;
         incomeList = new IncomeList();
         expenditureList = new ExpenditureList();
+        String infoString = "New Person constructed";
+        logger.log(Level.INFO, infoString);
     }
 
     /**
@@ -37,11 +44,21 @@ public class Person {
      *
      * @param description The source of the income
      * @param amount The value of the income
+     * @param isPermanent Whether the income is recurring
+     * @param isSilent Whether to print confirmation
      */
-    public void addIncome(String description, double amount) {
+    public void addIncome(String description, double amount, boolean isPermanent, boolean isSilent) {
         assert (description != null);
-        this.incomeList.addIncome(description, amount);
-        System.out.println("An income of " + amount + " from " + description + " has been added to " + this.name);
+        this.incomeList.addIncome(description, amount, isPermanent);
+        if (isSilent) {
+            return;
+        }
+        if (isPermanent) {
+            System.out.println("A recurring income of " + amount + " from " + description + " has been added to "
+                    + this.name);
+        } else {
+            System.out.println("An income of " + amount + " from " + description + " has been added to " + this.name);
+        }
     }
 
     /**
@@ -50,7 +67,7 @@ public class Person {
      * @param index The index of the income to be removed
      */
     public void deleteIncome(int index) {
-        assert (index >= SINGULAR);
+        assert (index >= Constants.SINGULAR);
         assert (index <= getNumberOfIncomes());
         String description = incomeList.getDescription(index);
         double value = incomeList.getIncomeValue(index);
@@ -63,11 +80,23 @@ public class Person {
      *
      * @param description The reason for the expenditure
      * @param amount The value of the expenditure
+     * @param isPermanent Whether the expenditure is recurring
+     * @param isSilent Whether to print confirmation
+     * @param category The category of the expenditure
      */
-    public void addExpend(String description, double amount) {
+    public void addExpend(String description, double amount, boolean isPermanent, boolean isSilent, Category category) {
         assert (description != null);
-        expenditureList.addExpenditure(description, amount);
-        System.out.println("An expenditure of " + amount + " for " + description + " has been added to " + this.name);
+        expenditureList.addExpenditure(description, amount, isPermanent, category);
+        if (isSilent) {
+            return;
+        }
+        if (isPermanent) {
+            System.out.println("A recurring expenditure of " + amount + " for " + description + " has been added to "
+                    + this.name);
+        } else {
+            System.out.println("An expenditure of " + amount + " for " + description + " has been added to "
+                    + this.name);
+        }
     }
 
     /**
@@ -76,7 +105,7 @@ public class Person {
      * @param index The index of the expenditure to be removed.
      */
     public void deleteExpend(int index) {
-        assert (index >= SINGULAR);
+        assert (index >= Constants.SINGULAR);
         assert (index <= getNumberOfExpenditures());
         String description = expenditureList.getDescription(index);
         double value = expenditureList.getExpenditureValue(index);
@@ -106,7 +135,7 @@ public class Person {
      *
      * @return Total value of expenditures
      */
-    private double getTotalExpenditure() {
+    public double getTotalExpenditure() {
         return expenditureList.getTotalExpenditure();
     }
 
@@ -115,7 +144,7 @@ public class Person {
      *
      * @return Total value of incomes
      */
-    private double getTotalIncome() {
+    public double getTotalIncome() {
         return incomeList.getTotalIncome();
     }
 
@@ -144,5 +173,39 @@ public class Person {
      */
     public int getNumberOfExpenditures() {
         return expenditureList.getNumberOfExpenditures();
+    }
+
+    /**
+     * Returns the name in a format suitable for saving.
+     *
+     * @return The name with delimiter
+     */
+    public String saveName() {
+        return "u " + name;
+    }
+
+    /**
+     *  Edits an income in the list of incomes.
+     *
+     * @param incomeIndex The index of the income
+     * @param description The source of the income
+     * @param amount The value of the income
+     * @param isPermanent Whether the income is recurring
+     */
+    public void editIncome(int incomeIndex, String description, double amount, boolean isPermanent) {
+        incomeList.editIncome(incomeIndex, description, amount, isPermanent);
+    }
+
+    /**
+     *  Edits an expenditure in the list of expenditures of the specified person.
+     *
+     * @param expendIndex The index of the expenditure
+     * @param description The reason for the expenditure
+     * @param amount The value of the expenditure
+     * @param category The category of the expenditure
+     * @param isPermanent Whether the expenditure is recurring
+     */
+    public void editExpend(int expendIndex, String description, double amount, Category category, boolean isPermanent) {
+        incomeList.exitExpend(expendIndex, description, amount, category, isPermanent);
     }
 }

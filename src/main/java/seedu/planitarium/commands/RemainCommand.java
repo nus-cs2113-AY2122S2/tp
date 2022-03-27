@@ -18,6 +18,6 @@ public class RemainCommand extends Command {
     @Override
     public void execute() {
         assert (personList != null) : PERSONLIST_NOT_NULL;
-        personList.printRemain();
+        // personList.printRemain();
     }
 }

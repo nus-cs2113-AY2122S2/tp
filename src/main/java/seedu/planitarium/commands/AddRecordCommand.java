@@ -21,6 +21,7 @@ public class AddRecordCommand extends Command {
     protected String keyword;
     protected String description;
     protected Double amount;
+    protected boolean isPermanent;
     protected int uid;
     protected Person newPerson;
 
@@ -29,6 +30,7 @@ public class AddRecordCommand extends Command {
         this.type = "AddRecordCMD";
         keyword = Parser.parseKeyword(userInput);
         description = Parser.parseDescription(userInput);
+        isPermanent = Parser.parseRecurringStatus(userInput);
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), personList);
         assert (uid < 1) : USER_INDEX_NOT_VALID;
         newPerson = personList.getPerson(uid);
@@ -45,11 +47,11 @@ public class AddRecordCommand extends Command {
         switch (keyword) {
         case ADD_INCOME_CMD:
             amount = Parser.getValidMoney(Parser.parseIncome(userInput));
-            newPerson.addIncome(description, amount);
+            newPerson.addIncome(description, amount, isPermanent);
             break;
         case ADD_SPENT_CMD:
             amount = Parser.getValidMoney(Parser.parseExpenditure(userInput));
-            newPerson.addExpend(description, amount);
+            newPerson.addExpend(description, amount, isPermanent);
             break;
         default:
             throw new PlanITariumException(AddRecordCommand.class.getSimpleName());
