@@ -186,9 +186,9 @@ public class PatientList extends List {
         if (returnedFinderArray.isEmpty()) {
             UI.printParagraph("Patient doesn't exist please try again!");
         } else {
-            ArrayList<String> stringArrayLists = new ArrayList<>();
+            CommandLineTable findPatientTable = new CommandLineTable();
             for (int i = 0; i < returnedFinderArray.size(); i++) {
-                CommandLineTable findPatientTable = new CommandLineTable();
+
                 findPatientTable.setShowVerticalLines(true);
                 findPatientTable.setHeaders("Nric", "FullName","Age", "Address", "Gender", "Dob",
                         "DateAdmission");
@@ -199,9 +199,8 @@ public class PatientList extends List {
                         String.valueOf(returnedFinderArray.get(i).getGender()),
                         returnedFinderArray.get(i).getDob(),
                         returnedFinderArray.get(i).getDateAdmission());
-                findPatientTable.print();
             }
-
+            findPatientTable.print();
             }
         }
 
