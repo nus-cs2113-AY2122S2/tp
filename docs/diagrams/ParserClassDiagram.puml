@@ -12,18 +12,9 @@ Package "Parser" as P {
 package Commands as "**Commands**\n**Component**" {
 'Class HiddenModel as " " #TRANSPARENT
 }
-package Family as "**Family**\n**Component**" {
-'Class HiddenModel2 as " " #TRANSPARENT
-}
-
-package MoneyList as "**MoneyList**\n**Component**" {
-'Class HiddenModel3 as " " #TRANSPARENT
-}
 
 
 Commands .L.> Parser : Parses input >
-Parser -.> Family
-Parser -.> MoneyList
 
 Parser -U.> Exceptions : <color: red><<throws>>
 Parser -L.> ParserUtility : Uses >
