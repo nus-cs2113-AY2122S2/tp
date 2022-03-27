@@ -2,6 +2,7 @@ package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Session;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TableFormatter;
 
@@ -35,7 +36,7 @@ public class SessionListCommand extends Command {
         for (Session session : sessionsToBePrinted) {
             String rowId = Integer.toString(session.getSessionId());
             String rowName = session.getSessionName();
-            String rowDate = session.getDateString();
+            String rowDate = session.getDateCreated().format(ParserUtils.DATE_FORMAT);
             String rowNumParticipants = Integer.toString(session.getPersonList().size());
             String rowNumActivities = Integer.toString(session.getActivityList().size());
             tableFormatter.addRow(rowId, rowName, rowDate, rowNumParticipants, rowNumActivities);
