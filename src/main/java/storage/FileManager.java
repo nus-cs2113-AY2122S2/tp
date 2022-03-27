@@ -3,6 +3,7 @@ package storage;
 import commands.WorkoutCommand;
 import data.exercises.ExerciseList;
 import data.exercises.InvalidExerciseException;
+import data.plans.InvalidPlanException;
 import data.plans.Plan;
 import data.plans.PlanList;
 import data.schedule.Day;
@@ -61,19 +62,23 @@ public class FileManager {
     private boolean wasPlansFileAlreadyMade = false;
     private boolean wasScheduleFileAlreadyMade = false;
 
+    private PlanList planList;
+
     private static Logger logger = Logger.getLogger(FileManager.class.getName());
 
     /**
      * Constructs a FileManager object. While instantiating, Paths objects of the various URIs
      * are also instantiated.
      */
-    public FileManager() {
+    public FileManager(PlanList planList) {
         String workingDirectory = System.getProperty(USER_WORKING_DIRECTORY_PROPERTY);
         this.directoryPath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME);
         this.exerciseFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, EXERCISE_FILENAME);
         this.workoutFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, WORKOUT_FILENAME);
         this.planFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, PLAN_FILENAME);
         this.scheduleFilePath = Paths.get(workingDirectory, DATA_DIRECTORY_NAME, SCHEDULE_FILENAME);
+
+        this.planList = planList;
 
         LogHandler.linkToFileLogger(logger);
     }
@@ -207,6 +212,15 @@ public class FileManager {
      */
     public void setWasScheduleFileAlreadyMade(boolean wasScheduleFileAlreadyMade) {
         this.wasScheduleFileAlreadyMade = wasScheduleFileAlreadyMade;
+    }
+
+    /**
+     * Gets the PlanList object stored in this instance of FileManager.
+     *
+     * @return The PlanList object.
+     */
+    public PlanList getPlanList() {
+        return this.planList;
     }
 
     /**
@@ -463,7 +477,7 @@ public class FileManager {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("File data error: insufficient parameters in plan data.");
                 hasNoErrorsDuringLoad = false;
-            } catch (InvalidScheduleException e) {
+            } catch (InvalidScheduleException | InvalidPlanException e) {
                 System.out.println("File data error: " + e.getMessage());
                 hasNoErrorsDuringLoad = false;
             }
@@ -486,6 +500,11 @@ public class FileManager {
      */
     public String[] parseFileDataLine(String fileDataLine) {
         String[] parsedFileDataLine = fileDataLine.split(FILE_DATA_DELIMITER_REGEX);
+
+        for (int i = 0; i < parsedFileDataLine.length; i += 1) {
+            parsedFileDataLine[i] = parsedFileDataLine[i].trim();
+        }
+
         return parsedFileDataLine;
     }
 
@@ -532,13 +551,15 @@ public class FileManager {
      * @param scheduleFileDataLine An array of the parsed day schedule data read from the resource file.
      * @throws ArrayIndexOutOfBoundsException If the parsed data contains insufficient information.
      * @throws InvalidScheduleException       If the parsed data contains invalid day schedule data or format.
+     * @throws InvalidPlanException           If the plan name could not be found in this session's list of plans.
      */
     public void addFileScheduleToList(DayList dayList, String[] scheduleFileDataLine)
-            throws ArrayIndexOutOfBoundsException, InvalidScheduleException {
+            throws ArrayIndexOutOfBoundsException, InvalidScheduleException, InvalidPlanException {
         String dayNumber = scheduleFileDataLine[0];
         String planName = scheduleFileDataLine[1];
+        int planNameIndexNum = getPlanList().getIndexNumFromPlanName(planName);
 
-        String userArguments = dayNumber + " " + planName;
+        String userArguments = dayNumber + " " + planNameIndexNum;
         dayList.updateDay(userArguments);
     }
 

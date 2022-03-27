@@ -42,8 +42,8 @@ public class WerkIt {
         this.ui = new UI();
         this.exerciseList = new ExerciseList();
         this.workoutList = new WorkoutList(getExerciseList());
-        this.fileManager = new FileManager();
         this.planList = new PlanList(getWorkoutList());
+        this.fileManager = new FileManager(getPlanList());
         this.dayList = new DayList(getPlanList());
         this.parser = new Parser(getUI(), getExerciseList(), getWorkoutList(),
                 getFileManager(), getPlanList(), getDayList());
