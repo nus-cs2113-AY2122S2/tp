@@ -99,6 +99,7 @@ public class MedicineList extends List {
         for (int i = 0; i < getSize(); i++) {
             if (medicines.get(i).getMedicineId().equals(medicineId)) {
                 medicines.remove(i);
+                UI.printParagraph("Medicine has been removed");
                 return;
             }
         }

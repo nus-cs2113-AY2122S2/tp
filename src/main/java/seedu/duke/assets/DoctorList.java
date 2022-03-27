@@ -104,6 +104,7 @@ public class DoctorList extends List {
         for (int i = 0; i < getSize(); i++) {
             if (doctors.get(i).getNric().equals(nric)) {
                 doctors.remove(i);
+                UI.printParagraph("Doctor has been removed");
                 return;
             }
         }

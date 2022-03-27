@@ -108,6 +108,7 @@ public class PatientList extends List {
         for (int i = 0; i < getSize(); i++) {
             if (patients.get(i).getNric().equals(nric)) {
                 patients.remove(i);
+                UI.printParagraph("Patient has been removed");
                 assert patients.size() == numberOfPatientsBefore - 1;
                 return;
             }
