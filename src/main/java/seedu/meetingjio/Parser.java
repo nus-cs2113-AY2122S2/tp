@@ -24,6 +24,7 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
 
 import static seedu.meetingjio.common.Messages.MESSAGE_HELP;
 
@@ -40,6 +41,7 @@ public class Parser {
     private static final int MODE_INDEX = 5;
     private static final String[] HEADINGS_ADD_LESSON = {"n/", "t/", "d/", "st/", "et/", "m/"};
     private static final String[] HEADINGS_ADD_MEETING = {"t/", "d/", "st/", "et/", "m/"};
+    private static final String[] HEADINGS_DELETE_EVENT = {"n/", "i/"};
 
     public Parser(String input) {
         this.command = getCommandFromInput(input);
@@ -77,7 +79,7 @@ public class Parser {
     public Command prepareAddLesson() {
         try {
             String[] eventDescription = splitArgumentsAddLesson();
-            checkNonNullValues(eventDescription);
+            checkNonNullValues(eventDescription,HEADINGS_ADD_LESSON.length - 1);
 
             String day = eventDescription[DAY_INDEX].toLowerCase();
             int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX]);
@@ -133,8 +135,8 @@ public class Parser {
      * @param eventDescription Array of user's input
      * @throws MissingValueException If at least one parameter has no value
      */
-    private void checkNonNullValues(String[] eventDescription) throws MissingValueException {
-        for (int i = 0; i < MODE_INDEX; i++) {
+    private void checkNonNullValues(String[] eventDescription,int last_element_index) throws MissingValueException {
+        for (int i = 0; i < last_element_index; i++) {
             if (eventDescription[i].length() == 0) {
                 throw new MissingValueException();
             }
@@ -180,6 +182,45 @@ public class Parser {
      * Try to parse the delete command to see if index has been done.
      */
     public Command prepareDelete() {
+        try {
+            String[] eventDescription = splitArgumentsDeleteCommand();
+            checkNonNullValues(eventDescription,HEADINGS_DELETE_EVENT.length);
+
+            String name = eventDescription[0];
+            int index = Integer.parseInt(eventDescription[1]);
+            return new DeleteCommand(name,index);
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
+            return new CommandResult(ERROR_MISSING_PARAMETERS);
+        } catch (MissingValueException mve) {
+            return new CommandResult(ERROR_MISSING_VALUES);
+        } catch (NumberFormatException nfe) {
+            return new CommandResult(ERROR_INDEX_OUT_OF_BOUND);
+        } catch (AssertionError ae) {
+            logger.log(Level.INFO, "Assertion Error");
+            return new CommandResult(ae.getMessage());
+        }
+    }
+
+    private String[] splitArgumentsDeleteCommand() {
+        String[] eventDescription = new String[2];
+        String[] splitArguments = arguments.split(" ");
+        int index = -1;
+        for (String str : splitArguments) {
+            if (containHeadings(str, HEADINGS_DELETE_EVENT) == -1) {
+                eventDescription[index] += " " + str;
+                eventDescription[index] = eventDescription[index].trim();
+            } else {
+                index = containHeadings(str, HEADINGS_DELETE_EVENT);
+                eventDescription[index] = str.substring(str.indexOf("/") + 1);
+            }
+        }
+        return eventDescription;
+    }
+
+    /**
+     * Try to parse the delete command to see if index has been done.
+     */
+    public Command prepareDeleteCommand() {
         try {
             String name = getParametersByIndexFromInput(0, arguments);
             int index = Integer.parseInt(getParametersByIndexFromInput(1, arguments));
@@ -255,7 +296,7 @@ public class Parser {
     public Command prepareAddMeeting() {
         try {
             String[] eventDescription = splitArgumentsAddMeeting();
-            checkNonNullValues(eventDescription);
+            checkNonNullValues(eventDescription,HEADINGS_ADD_MEETING.length - 1);
 
             //there is no name for meeting because meeting applies to everyone
             String day = eventDescription[DAY_INDEX - 1].toLowerCase();
