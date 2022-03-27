@@ -68,4 +68,67 @@ public class MasterTimetable {
         return timetables.size();
     }
 
+    public String listFree(int duration) {
+        int[][] busySlots = new int[7][960];
+        for (int i = 0; i < 7; i++) {
+            busySlots[i][959] = 1;
+        }
+        for (Timetable timetable : timetables) {
+            timetable.populateBusySlots(busySlots);
+        }
+        return showOutput(busySlots);
+    }
+
+    private String showOutput(int[][] busySlots) {
+        String freeSlotsString = "";
+        boolean isStart = true;
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 960; j++) {
+                if (busySlots[i][j] == 0 && isStart) {
+                    freeSlotsString += convertDayIntToString(i + 1);
+                    freeSlotsString += " ";
+                    freeSlotsString += convertMinsToTime(j);
+                    isStart = false;
+                }
+                if (busySlots[i][j] == 1 && !isStart) {
+                    freeSlotsString += " ";
+                    freeSlotsString += convertMinsToTime(j);
+                    freeSlotsString += "\n";
+                    isStart = true;
+                }
+            }
+        }
+        String truncatedFreeSlotsString = freeSlotsString.substring(0, freeSlotsString.length() - 1);
+        return truncatedFreeSlotsString;
+    }
+
+    private String convertDayIntToString(int numericDay) {
+        switch (numericDay) {
+        case 1:
+            return "Monday";
+        case 2:
+            return "Tuesday";
+        case 3:
+            return "Wednesday";
+        case 4:
+            return "Thursday";
+        case 5:
+            return "Friday";
+        case 6:
+            return "Saturday";
+        case 7:
+            return "Sunday";
+        default:
+            return "";
+        }
+    }
+
+    private String convertMinsToTime(int mins) {
+        mins += 480;
+        int hours = mins / 60;
+        int minutes = mins % 60;
+        int timeInt = hours * 100 + minutes;
+        return String.format("%04d", timeInt);
+    }
+
 }

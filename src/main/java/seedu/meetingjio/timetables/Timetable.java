@@ -125,4 +125,22 @@ public class Timetable {
         list = tempList;
     }
 
+    public void populateBusySlots(int[][] busySlots) {
+        for (int i = 0; i < list.size(); i++) {
+            Event event = list.get(i);
+            int numericDay = event.getDay();
+            int numericStartTime = convertTimeToMins(event.startTime);
+            int numericEndTime = convertTimeToMins(event.endTime);
+            for (int j = numericStartTime; j < numericEndTime; j++) {
+                busySlots[numericDay - 1][j] = 1;
+            }
+        }
+    }
+
+    private int convertTimeToMins(int time) {
+        int hours = time / 100;
+        int minutes = time % 100;
+        return hours * 60 + minutes - 480;
+    }
+
 }

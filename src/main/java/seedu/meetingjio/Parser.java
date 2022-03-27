@@ -6,6 +6,7 @@ import seedu.meetingjio.commands.HelpCommand;
 import seedu.meetingjio.commands.ListCommand;
 import seedu.meetingjio.commands.DeleteCommand;
 import seedu.meetingjio.commands.ClearCommand;
+import seedu.meetingjio.commands.FreeCommand;
 import seedu.meetingjio.commands.CommandResult;
 
 import seedu.meetingjio.exceptions.InvalidDayException;
@@ -53,6 +54,8 @@ public class Parser {
             return prepareDelete();
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand(arguments.trim());
+        case FreeCommand.COMMAND_WORD:
+            return new FreeCommand(arguments.trim());
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         default:
