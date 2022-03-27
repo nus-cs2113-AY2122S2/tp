@@ -192,6 +192,11 @@ class SessionTest {
 
     // getPersonListByName()
 
+    /**
+     * Checks if an InvalidDataException with the correct message is properly thrown 
+     * when the getPersonListByName method is called with a String array object containing a single name
+     * and no Person objects with the specified name exists in the Session object.
+     */
     @Test
     void getPersonListByName_singleInvalidName_InvalidDataExceptionThrown() {
         try {
@@ -203,6 +208,11 @@ class SessionTest {
         }
     }
 
+    /**
+     * Checks if an InvalidDataException with the correct message is properly thrown 
+     * when the getPersonListByName method is called with a String array object containing multiple names
+     * and no Person objects were found for one of the specified names in the Session object.
+     */
     @Test
     void getPersonListByName_multipleNamesWithOneInvalidName_InvalidDataExceptionThrown() {
         try {
@@ -214,6 +224,11 @@ class SessionTest {
         }
     }
 
+    /**
+     * Checks if an ArrayList object containing a Person object corresponding to the only specified name is returned 
+     * when the getPersonListByName method is called with a String array object containing a single name
+     * and a Person object with the only specified name exists in the Session object.
+     */
     @Test
     void getPersonListByName_singleValidName_ArrayListReturned() {
         try {
@@ -225,6 +240,11 @@ class SessionTest {
         }
     }
 
+    /**
+     * Checks if an ArrayList object containing Person objects corresponding to the given names is returned 
+     * when the getPersonListByName method is called with a String array object containing multiple names
+     * and a Person object with a matching name was found in the Session object for each of the given names.
+     */
     @Test
     void getPersonListByName_multipleValidNames_ArrayListReturned() {
         ArrayList<Person> personList;
