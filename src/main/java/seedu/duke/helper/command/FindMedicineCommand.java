@@ -13,22 +13,22 @@ public class FindMedicineCommand extends Command {
     public Status execute(List medicineList) throws HalpmiException {
         switch (parameterArray[0]) {
         case "id":
-            medicineList.findByNric(parameterArray);
+            medicineList.findById(parameterArray);
             break;
         case "name":
             medicineList.findByName(parameterArray);
             break;
         case "dosage":
-            medicineList.findByAge(parameterArray);
+            medicineList.findByDosage(parameterArray);
             break;
         case "expiry":
-            medicineList.findByGender(parameterArray);
+            medicineList.findByExpiry(parameterArray);
             break;
         case "sideeffects":
-            medicineList.findByAddress(parameterArray);
+            medicineList.findBySideEffects(parameterArray);
             break;
         case "quantity":
-            medicineList.findByDob(parameterArray);
+            medicineList.findByQuantity(parameterArray);
             break;
         default:
             throw new HalpmiException("Input must be an attribute of Medicine");

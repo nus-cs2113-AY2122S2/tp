@@ -105,13 +105,14 @@ public class Validator {
         validateDob(parameters[5]);
     }
 
-    private static void validateSpecialization(String fullName) throws HalpmiException {
+    private static void validateSpecialization(String specialization) throws HalpmiException {
         Pattern fullNamePattern = Pattern.compile("[a-zA-Z ]*");
-        Matcher fullNameMatcher = fullNamePattern.matcher(fullName);
+        Matcher fullNameMatcher = fullNamePattern.matcher(specialization);
         if (!fullNameMatcher.matches()) {
             throw new HalpmiException("Specialization must contain only alphabets and no special characters.");
         }
     }
+
 
     static void validateAddDoctor(String[] parameters) throws HalpmiException {
         validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
@@ -156,6 +157,21 @@ public class Validator {
             return quantityInt > 0;
         } catch (NumberFormatException numberFormatException) {
             return false;
+        }
+    }
+    private static void validateMedicineId(String medicineId) throws HalpmiException {
+        Pattern fullNamePattern = Pattern.compile("[A-Z][0-9][3}]");
+        Matcher fullNameMatcher = fullNamePattern.matcher(medicineId);
+        if (!fullNameMatcher.matches()) {
+            throw new HalpmiException("Medicine must contain only alphabets and Numbers.");
+        }
+    }
+
+    private static void validateMedicineSideEffects(String sideEffects) throws HalpmiException {
+        Pattern fullNamePattern = Pattern.compile("[a-zA-Z ]*");
+        Matcher fullNameMatcher = fullNamePattern.matcher(sideEffects);
+        if (!fullNameMatcher.matches()) {
+            throw new HalpmiException("Specialization must contain only alphabets and no special characters.");
         }
     }
 
@@ -283,25 +299,25 @@ public class Validator {
     public static void validateFindMedicine(String[] parameters) throws HalpmiException {
         switch (parameters[0]) {
         case "id":
-            validateNric(parameters[1]);
+            //validateMedicineId(parameters[1]);
             break;
         case "name":
-            validateFullName(parameters[1]);
+            validateMedicineName(parameters[1]);
             break;
         case "dosage":
-            validateAge(parameters[1]);
+            validateDosage(parameters[1]);
             break;
         case "expiry":
-            validateGender(parameters[1]);
+            validateExpiry(parameters[1]);
             break;
         case "sideeffects":
-            validateAddress(parameters[1]);
+            validateMedicineSideEffects(parameters[1]);
             break;
         case "quantity":
-            validateDob(parameters[1]);
+            validateQuantity(parameters[1]);
             break;
         default:
-            throw new HalpmiException("Input must be an attribute of Patient");
+            throw new HalpmiException("Input must be an attribute of Medicine");
         }
     }
 }
