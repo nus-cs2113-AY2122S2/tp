@@ -34,7 +34,7 @@ public class SessionEditCommand extends Command {
      * @param date        A LocalDate object that represents the date of the session.
      */
     public SessionEditCommand(int sessionId, String sessionName, String[] personNames, LocalDate date) {
-        assert sessionId > 0;
+        assert sessionId > 0 : Message.ASSERT_SESSIONEDIT_SESSION_ID_INVALID;
         this.sessionId = sessionId;
         this.sessionName = sessionName;
         this.personNames = personNames;
@@ -56,7 +56,7 @@ public class SessionEditCommand extends Command {
             ui.printlnMessageWithDivider(invalidDataException.getMessage());
             return;
         }
-        assert session != null;
+        assert session != null : Message.ASSERT_SESSIONEDIT_SESSION_IS_NULL;
 
         if (personNames != null) {
             boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);

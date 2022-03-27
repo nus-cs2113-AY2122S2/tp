@@ -232,6 +232,10 @@ public abstract class Message {
                    + "created in the session. Please rectify and try again.";
     public static final String LOGGER_SESSIONEDIT_SESSION_EDITED =
             "A session was edited from the list of session with Id: ";
+    public static final String ASSERT_SESSIONEDIT_SESSION_IS_NULL =
+            "The session is null.";
+    public static final String ASSERT_SESSIONEDIT_SESSION_ID_INVALID =
+            "Session ID is less than or equals to zero.";
 
     // Session Summary Command
     public static final String MESSAGE_SESSIONSUMMARY_NO_PAYMENTS_REQUIRED =
