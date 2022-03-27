@@ -107,9 +107,15 @@ is supported by PlanITarium to be `1`.
 
 ### Family Component
 
-The **Class** of this component is specified in `Family.java`, `PersonList.java` and `Person.java`.
+The **Class** of this component is specified in [`Family.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/Family.java)
+, [`PersonList.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/PersonList.java)
+and [`Person.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/Person.java)
+)
 
-![PersonsComponent](images/PersonsComponent.png)
+![FamilyComponent](images/FamilyComponent.png)
 
 The list of persons consists of a `Family` that is made up of generational `PersonList`s. Each `PersonList` holds a  
 list of `Person`s who belong to that generation.
