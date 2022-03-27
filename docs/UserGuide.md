@@ -173,7 +173,7 @@ If there are 20 workouts in the list, all the 20 workouts will be displayed toge
 ### Show specific number of Workouts: `workout /list`
 Lists down a specific number of workouts that have been created and stored in the workout list at a time.
 The maximum number of workouts that will be displayed at a time is 10 workouts. If there are more
-workouts in the list, you will be prompt to give permission to continue the printing.
+workouts in the list, you will be prompted on whether you wish to display the next 10 (or fewer) workouts in the list.
 
 Format: `workout /list`
 
