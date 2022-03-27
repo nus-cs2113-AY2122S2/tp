@@ -20,7 +20,6 @@ import static seedu.mindmymoney.constants.Flags.FLAG_OF_CASHBACK;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CATEGORY;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_DESCRIPTION;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENDITURE;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_TIME;
 
 import static seedu.mindmymoney.helper.AddCommandInputTests.testAmount;
