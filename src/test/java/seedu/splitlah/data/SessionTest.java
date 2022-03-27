@@ -247,10 +247,9 @@ class SessionTest {
      */
     @Test
     void getPersonListByName_multipleValidNames_ArrayListReturned() {
-        ArrayList<Person> personList;
         try {
             String[] nameList = { "Alice", "Bob", "Charlie" };
-            personList = session.getPersonListByName(nameList);
+            ArrayList<Person> personList = session.getPersonListByName(nameList);
             assertEquals(3, personList.size());
             assertEquals("Alice", personList.get(0).getName());
             assertEquals("Bob", personList.get(1).getName());
