@@ -6,13 +6,17 @@ import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Locale;
+
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM_IN_STRING;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM_IN_STRING;
 
 /**
  * Container for general functions used throughout the program.
  */
 public class GeneralFunctions {
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     /**
      * Separates the user input into the command and description for easy reference.
@@ -31,16 +35,20 @@ public class GeneralFunctions {
      */
     public static String parseInputWithCommandFlag(String input, String startingFlag, String endingFlag)
         throws MindMyMoneyException {
-        if (!(input.contains(startingFlag) && input.contains(endingFlag))) {
-            throw new MindMyMoneyException("You are missing a flag!");
+        if (!(input.contains(startingFlag + " ") && input.contains(" " + endingFlag))) {
+            throw new MindMyMoneyException("You are missing a flag or lack the spacing between the flags!");
         }
         startingFlag = startingFlag + " ";
-
-        input = input.substring(input.indexOf(startingFlag) + 3);
-        if (!endingFlag.equals(" ")) {
-            endingFlag = " " + endingFlag;
-            input = input.substring(0, input.indexOf(endingFlag));
+        try {
+            input = input.substring(input.indexOf(startingFlag) + 3);
+            if (!endingFlag.equals("")) {
+                endingFlag = " " + endingFlag;
+                input = input.substring(0, input.indexOf(endingFlag));
+            }
+        } catch (NumberFormatException e) {
+            throw new MindMyMoneyException("Flag not found!");
         }
+
         return input;
     }
 
@@ -180,11 +188,17 @@ public class GeneralFunctions {
 
     /**
      * Sets the string to lower case and then capitalise the first character in string
+     *
      * @param str String to be capitalised
      * @return Capitalised string
      */
     public static String capitalise(String str) {
         str = str.toLowerCase();
-        return str.substring(0, 1).toUpperCase() + str.substring(1);
+        return str.substring(INDEX_OF_FIRST_ITEM_IN_STRING, INDEX_OF_SECOND_ITEM_IN_STRING).toUpperCase()
+            + str.substring(INDEX_OF_SECOND_ITEM_IN_STRING);
+    }
+
+    public static float formatFloat(Float number) {
+        return Float.parseFloat(df.format(number));
     }
 }

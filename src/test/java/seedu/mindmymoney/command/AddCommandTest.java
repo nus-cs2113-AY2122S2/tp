@@ -171,6 +171,78 @@ class AddCommandTest {
             () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
     }
 
+    /**
+     * Asserts if user is able to add an empty expenditure method.
+     */
+    @Test
+    void addCommand_nullExpenditureMethod_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        String inputString = "/e  /c Person /d Nike Shoes /a 500 /t 2022-01";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+    }
+
+    /**
+     * Asserts if user is able to add an empty category.
+     */
+    @Test
+    void addCommand_nullCategory_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        String inputString = "/e Cash /c  /d Nike Shoes /a 500 /t 2022-01";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+    }
+
+    /**
+     * Asserts if user is able to add an empty description.
+     */
+    @Test
+    void addCommand_nullDescription_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        String inputString = "/e Cash /c Food /d  /a 500 /t 2022-01";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+    }
+
+    /**
+     * Asserts if user is able to add an empty amount.
+     */
+    @Test
+    void addCommand_nullAmount_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        String inputString = "/e Cash /c Food /d Shoes /a  /t 2022-01";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+    }
+
+    /**
+     * Asserts if user is able to add empty time.
+     */
+    @Test
+    void addCommand_nullDate_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        String inputString = "/e Cash /c Food /d Shoes /a 500 /t";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+    }
+
+    /**
+     * Asserts if user is able to add a field with no spaces between flags.
+     */
+    @Test
+    void addCommand_lackSpacingBetweenFlags_expectException() {
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        String inputString = "/e/c Person /d Nike Shoes /a 500 /t 2022-01";
+        assertThrows(MindMyMoneyException.class,
+            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+    }
+
 
     /**
      * Forms a string from the description and the amount of the last element of the list.
