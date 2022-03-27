@@ -3,9 +3,9 @@ package seedu.duke.assets;
 public class Patient extends Person {
     String dateAdmission;
 
-    public Patient(String nric, String fullName, int age, String address, char gender, String dob,
+    public Patient(String nric, String fullName, int age, char gender, String address, String dob,
                    String dateAdmission) {
-        super(nric, fullName, age, address, gender, dob);
+        super(nric, fullName, age, gender, address, dob);
         this.dateAdmission = dateAdmission;
     }
 

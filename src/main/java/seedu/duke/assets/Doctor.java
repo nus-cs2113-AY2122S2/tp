@@ -3,9 +3,9 @@ package seedu.duke.assets;
 public class Doctor extends Person {
     private String specialization;
 
-    public Doctor(String nric, String fullName, int age, String address, char gender,
+    public Doctor(String nric, String fullName, int age, char gender, String address,
                   String dob, String specialization) {
-        super(nric, fullName, age, address, gender, dob);
+        super(nric, fullName, age, gender, address, dob);
         this.specialization = specialization;
     }
 
