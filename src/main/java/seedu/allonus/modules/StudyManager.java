@@ -144,7 +144,10 @@ public class StudyManager {
     private void openIcsFile(TextUi ui, ModuleCalendarReader icsParser) {
         printMessage("Please enter the name of your .ics file from nusmods: ");
         String input = ui.getUserInput();
-        icsParser.readIcsFile(input);
+        ArrayList<Module> icsModulesList = icsParser.readIcsFile(input);
+        if(icsModulesList!=null) {
+            modulesList.addAll(icsModulesList);
+        }
         printMessage("Exiting read ics mode");
     }
 
