@@ -922,6 +922,13 @@ with the WerkIt! JAR file inside it, and run the application from the directory.
 When you launch WerkIt! in subsequent sessions, please ensure that you run it from the same directory
 that you did when starting WerkIt! for the first time.
 
+**Warning:** It is highly recommended that you do not directly modify these files on your own as it may lead to
+instabilities in the application. If you do decide to modify the files, **please make a backup of the `werkItResources`
+directory** before modifying the files. 
+
+In the event that your application becomes unstable due to accidental file modifications, please replace the
+`werkItResources` directory with your backup copy.
+
 ---
 
 ## Frequently Asked Questions (FAQ)
