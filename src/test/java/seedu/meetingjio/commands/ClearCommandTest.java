@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import seedu.meetingjio.timetables.MasterTimetable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.meetingjio.common.ErrorMessages.*;
 
 public class ClearCommandTest {
@@ -93,5 +94,17 @@ public class ClearCommandTest {
         assertEquals(successClearAll,  clearCommand.execute(masterTimetable));
         ListCommand listCommand = new ListCommand("all");
         assertEquals(ListSuccessPostClearAll, listCommand.execute(masterTimetable));
+    }
+
+    @Test
+    public void clearCommandTestNullPointerExceptionPointerThrown() {
+        addCommand.execute(masterTimetable);
+        addCommandSameUser.execute(masterTimetable);
+        addCommandDifferentUser.execute(masterTimetable);
+        String test = null;
+        ClearCommand clearCommand = new ClearCommand(test);
+        assertThrows(NullPointerException.class,()->{
+            clearCommand.execute(masterTimetable);
+        });
     }
 }
