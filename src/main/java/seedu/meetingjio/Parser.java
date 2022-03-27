@@ -70,15 +70,7 @@ public class Parser {
             return new CommandResult(feedback);
         }
     }
-
-    /**
-     * Collate the user's input and verify the validity of the input value of each parameter.
-     * Invalid inputs will be identified.
-     * If input is valid, AddLessonCommand class is returned.
-     *
-     * @return AddLessonCommand if input is valid
-     * CommandResult if input is invalid, with the error description as a parameter
-     */
+    
     public Command prepareAddLesson() {
         try {
             String[] eventDescription = splitArgumentsAddLesson();
@@ -138,8 +130,8 @@ public class Parser {
      * @param eventDescription Array of user's input
      * @throws MissingValueException If at least one parameter has no value
      */
-    private void checkNonNullValues(String[] eventDescription,int last_element_index) throws MissingValueException {
-        for (int i = 0; i < last_element_index; i++) {
+    private void checkNonNullValues(String[] eventDescription,int lastElementIndex) throws MissingValueException {
+        for (int i = 0; i < lastElementIndex; i++) {
             if (eventDescription[i].length() == 0) {
                 throw new MissingValueException();
             }

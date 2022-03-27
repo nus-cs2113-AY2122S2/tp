@@ -11,7 +11,8 @@ import seedu.meetingjio.commands.ListCommand;
 
 import java.util.ArrayList;
 
-import static seedu.meetingjio.common.ErrorMessages.*;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
 
 public class MasterTimetable {
 
@@ -133,7 +134,7 @@ public class MasterTimetable {
         return AddMeetingCommand.addMeetingConfirmation(meeting);
     }
 
-    public String deleteMeetingFromEveryoneTimetable(Meeting meeting){
+    public String deleteMeetingFromEveryoneTimetable(Meeting meeting) {
         for (Timetable timetable : timetables) {
             deleteMeetingFromTimetable(timetable,meeting);
         }
@@ -141,14 +142,12 @@ public class MasterTimetable {
         return DeleteCommand.deleteFromAllTimetableConfirmation(meeting);
     }
 
-    public void deleteMeetingFromTimetable(Timetable timetable,Meeting meeting){
-        int initial_size = timetable.size();
+    public void deleteMeetingFromTimetable(Timetable timetable,Meeting meeting) {
         for (int i = 0; i < timetable.size(); i++) {
             if (meeting.equals(timetable.get(i))) {
                 timetable.remove(i);
             }
         }
-        //assert timetable.size() == initial_size + 1 : "Meeting did not exist in timetable/did not get deleted";
     }
 
     public void deleteMeetingFromMeetingList(Meeting meeting) {
