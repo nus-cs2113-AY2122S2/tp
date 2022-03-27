@@ -6,18 +6,88 @@ Box " "#WHITE
     participant Main LOGIC_COLOR_T1
     participant ":CommandFactory" as CommandFactory LOGIC_COLOR_T2
     participant ":Parser" as Parser LOGIC_COLOR_T3
+    participant ":AddPersonCommand" as AddPersonCommand LOGIC_COLOR_T4
+    participant ":DeletePersonCommand" as DeletePersonCommand LOGIC_COLOR_T4
+    participant ":AddRecordCommand" as AddRecordCommand LOGIC_COLOR_T4
+    participant ":DeleteREcordCommand" as DeleteRecordCommand LOGIC_COLOR_T4
+    participant ":EditRecordCommand" as EditRecordCommand LOGIC_COLOR_T4
+    participant ":RemainCommand" as RemainCommand LOGIC_COLOR_T4
+    participant ":ListCommand" as ListCommand LOGIC_COLOR_T4
+    participant ":ListCategoriesCommand" as ListCategoriesCommand LOGIC_COLOR_T4
+    participant ":SearchCommand" as SearchCommand LOGIC_COLOR_T4
+    participant ":ExitCommand" as ExitCommand LOGIC_COLOR_T4
     participant ":Command" as Command LOGIC_COLOR_T4
-
 end Box
 
 -> Main: userInput
 activate Main
-Main -> CommandFactory: getCommand(userInput, PersonList)
+Main -> CommandFactory: getCommand(userInput, family)
 activate CommandFactory
 CommandFactory -> Parser: parseKeywords(userInput)
 activate Parser
 Parser --> CommandFactory: return
 deactivate Parser
+alt Add Person
+    create AddPersonCommand
+    CommandFactory -> AddPersonCommand: new(userInput, family)
+    activate AddPersonCommand
+    AddPersonCommand --> CommandFactory: :AddPersonCommand
+    deactivate AddPersonCommand
+else Delete Person
+     create DeletePersonCommand
+     CommandFactory -> DeletePersonCommand: new(userInput, family)
+     activate DeletePersonCommand
+     DeletePersonCommand --> CommandFactory: :DeletePersonCommand
+     deactivate DeletePersonCommand
+else Add Record
+    create AddRecordCommand
+    CommandFactory -> AddRecordCommand: new(userInput, family)
+    activate AddRecordCommand
+    AddRecordCommand --> CommandFactory: :AddRecordCommand
+    deactivate AddRecordCommand
+else Delete Record
+    create DeleteRecordCommand
+    CommandFactory -> DeleteRecordCommand: new(userInput, family)
+    activate DeleteRecordCommand
+    DeleteRecordCommand --> CommandFactory: :DeleteRecordCommand
+    deactivate DeleteRecordCommand
+else Edit Record
+    create EditRecordCommand
+    CommandFactory -> EditRecordCommand: new(userInput, family)
+    activate EditRecordCommand
+    EditRecordCommand --> CommandFactory: :EditRecordCommand
+    deactivate EditRecordCommand
+else Remain
+    create RemainCommand
+    CommandFactory -> RemainCommand: new(userInput, family)
+    activate RemainCommand
+    RemainCommand --> CommandFactory: :RemainCommand
+    deactivate RemainCommand
+else List
+    create ListCommand
+    CommandFactory -> ListCommand: new(userInput, family)
+    activate ListCommand
+    ListCommand --> CommandFactory: :ListCommand
+    deactivate ListCommand
+else List Categories
+    create ListCategoriesCommand
+    CommandFactory -> ListCategoriesCommand: new(userInput, family)
+    activate ListCategoriesCommand
+    ListCategoriesCommand --> CommandFactory: :ListCategoriesCommand
+    deactivate ListCategoriesCommand
+else List
+    create SearchCommand
+    CommandFactory -> SearchCommand: new(userInput, family)
+    activate SearchCommand
+    SearchCommand --> CommandFactory: :SearchCommand
+    deactivate SearchCommand
+else List
+    create ExitCommand
+    CommandFactory -> ExitCommand: new(userInput, family)
+    activate ExitCommand
+    ExitCommand --> CommandFactory: :ExitCommand
+    deactivate ExitCommand
+end
 CommandFactory --> Main: return
 deactivate CommandFactory
 Main -> Command: execute()

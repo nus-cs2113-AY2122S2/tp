@@ -40,7 +40,8 @@ public class DeleteRecordCommand extends Command {
         switch (keyword) {
         case DELETE_INCOME_CMD:
             try {
-                index = Parser.getValidIncomeIndex(Parser.parseRecordIndex(userInput), family.getNumberOfIncomes(uid, group));
+                index = Parser.getValidIncomeIndex(Parser.parseRecordIndex(userInput),
+                        family.getNumberOfIncomes(uid, group));
                 family.deleteIncome(uid, group, index);
             } catch (PlanITariumException e) {
                 throw e;
@@ -48,7 +49,8 @@ public class DeleteRecordCommand extends Command {
             break;
         case DELETE_SPEND_CMD:
             try {
-                index = Parser.getValidExpenditureIndex(Parser.parseRecordIndex(userInput), family.getNumberOfIncomes(uid, group));
+                index = Parser.getValidExpenditureIndex(Parser.parseRecordIndex(userInput),
+                        family.getNumberOfExpenditures(uid, group));
                 family.deleteExpend(uid, group, index);
             } catch (PlanITariumException e) {
                 throw e;
