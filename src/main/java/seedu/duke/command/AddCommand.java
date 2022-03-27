@@ -9,10 +9,14 @@ import seedu.duke.TravelPackage;
 public class AddCommand extends Command {
     private TravelPackage newPackage;
 
-    public AddCommand(String name, int date1, int date2, String hotel, double price, String country,
+    public AddCommand(String name, String date1, String date2, String hotel, double price, String country,
             int maxVacancies) {
-        this.newPackage = new TravelPackage(name, new Date(date1), new Date(date2), hotel, price, country,
+        this.newPackage = new TravelPackage(name, date1, date2, hotel, price, country,
                 maxVacancies);
+    }
+
+    public TravelPackage getPackage() {
+        return this.newPackage;
     }
 
     public void execute(Packages packages, Reservations r) {
