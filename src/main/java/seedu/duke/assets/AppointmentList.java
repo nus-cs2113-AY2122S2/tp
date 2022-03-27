@@ -31,6 +31,7 @@ public class AppointmentList extends List {
                 addAppointmentParameters[2], addAppointmentParameters[3], addAppointmentParameters[4],
                 addAppointmentParameters[5], addAppointmentParameters[6]);
         appointments.add(newAppointment);
+        UI.printParagraph("Appointment has been added");
         assert appointments.size() == numberOfAppointmentsBefore + 1;
     }
 
