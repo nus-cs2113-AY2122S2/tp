@@ -160,7 +160,7 @@ public class Validator {
     }
 
     /* Validate medicine */
-    public static void validateMedicine(String[] parameters) throws HalpmiException{
+    public static void validateMedicine(String[] parameters) throws HalpmiException {
         assert parameters.length == 6 : "Validate failed to check parameter length";
         boolean check = true;
         for (int i = 0; i < 5; i++) {
@@ -216,12 +216,11 @@ public class Validator {
     }
 
     public static void validateAddAppointment(String[] parameters) throws HalpmiException {
-        validateNric(parameters[0]);
-        validateFullName(parameters[1]);
-        validateNric(parameters[2]);
-        validateFullName(parameters[3]);
-        validateDate(parameters[4], "appointment");
-        validateAppointmentDetails(parameters[5]);
-
+        validateNric(parameters[1]);
+        validateFullName(parameters[2]);
+        validateNric(parameters[3]);
+        validateFullName(parameters[4]);
+        validateDate(parameters[5], "appointment");
+        validateAppointmentDetails(parameters[6]);
     }
 }
