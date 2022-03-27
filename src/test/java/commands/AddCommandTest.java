@@ -4,6 +4,7 @@ import manager.ExpenseManager;
 import manager.LimitManager;
 import manager.RecordManager;
 
+import manager.Storage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +37,7 @@ class AddCommandTest {
 
     @Test
     void execute_productTypeRecord_success() throws Exception {
-        RecordManager recordManager = new RecordManager();
+        RecordManager recordManager = new RecordManager(new Storage("data/records.txt"));
         LimitManager limitManager = LimitManager.getLimitManagerInstance();
 
         AddCommand addCommandTest = new AddCommand();
@@ -53,7 +54,7 @@ class AddCommandTest {
 
     @Test
     void execute_subscriptionTypeRecord_success() throws Exception {
-        RecordManager recordManager = new RecordManager();
+        RecordManager recordManager = new RecordManager(new Storage("data/records.txt"));
         LimitManager limitManager = LimitManager.getLimitManagerInstance();
 
         AddCommand addCommandTest = new AddCommand();
@@ -70,7 +71,7 @@ class AddCommandTest {
 
     @Test
     void execute_newRecordExceedsLimit_warningMessageReturned() throws Exception {
-        RecordManager recordManager = new RecordManager();
+        RecordManager recordManager = new RecordManager(new Storage("data/records.txt"));
         LimitManager limitManager = LimitManager.getLimitManagerInstance();
 
         AddCommand addCommandTest = new AddCommand();
@@ -88,7 +89,7 @@ class AddCommandTest {
 
     @Test
     void execute_newRecordDoesNotExceedLimit_noWarningMessageReturned() throws Exception {
-        RecordManager recordManager = new RecordManager();
+        RecordManager recordManager = new RecordManager(new Storage("data/records.txt"));
         LimitManager limitManager = LimitManager.getLimitManagerInstance();
 
         limitManager.setLimit(50);

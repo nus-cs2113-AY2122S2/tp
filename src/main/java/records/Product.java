@@ -26,7 +26,7 @@ public class Product extends Record {
      */
     @Override
     public String toString(){
-        return productType + ": " + super.toString() + "";
+        return "Product" + ": " + super.toString() + ", type = " + productType + "";
     }
 
     @Override
