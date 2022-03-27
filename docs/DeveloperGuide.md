@@ -212,9 +212,9 @@ and return this object to `PlanITarium`.
 Step 4. `PlanITarium` will then execute this command by calling `execute()`. Alice will then be added to the
 `personList`.
 
-### \[Proposed] Logical grouping for different generation of person added
+### Logical grouping for different generation of person added
 
-#### Proposed implementation
+#### Implementation
 
 The proposed logical grouping of persons added is facilitated by `Family`. It holds 3 lists of `PersonList`, each one
 for a different generation. Additionally, it implements the following operations:
@@ -225,6 +225,7 @@ for a different generation. Additionally, it implements the following operations
 * `Family#addParent()` -- Adds a person into the `parents` list.
 * `Family#addMyGen()` -- Adds a person into the `myGen` list.
 * `Family#addChild()` -- Adds a person into the `children` list.
+* `Family#XYZCommand()` -- Passes relevant parameters down to lower level class.
 
 Given below is an example usage scenario and how a generation's high level finance overview is calculated.
 
@@ -241,7 +242,9 @@ Step 2. The user wishes to add a person, say `John Doe`, to the `children` list.
 Step 3. The user executes `addin /g 3 /u 1 /i ...` to add a new income to index 1 of the `children` list, who is 
 `John Doe`. This causes an income object to be added to the `IncomeList` of `John Doe`.
 
-![PersonStep3](images/PersonStep3.png)
+![PersonStep3.1](images/PersonStep3_1.png)
+
+![PersonStep3.2](images/PersonStep3_2.png)
 
 Step 4. The user now decides to have an overview of his family's finances by executing the `list` command. The `list` 
 command will call `Family#list()`, which will go through each generation to sum up their incomes and expenditures and 
