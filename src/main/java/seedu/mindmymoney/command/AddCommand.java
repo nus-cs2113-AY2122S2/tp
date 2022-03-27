@@ -66,7 +66,7 @@ public class AddCommand extends Command {
      *
      * @throws MindMyMoneyException when inputs are invalid or flags are missing.
      */
-    public void executeCommand() throws MindMyMoneyException {
+    public void addExpenditure() throws MindMyMoneyException {
         String paymentMethod = parseInputWithCommandFlag(addInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_CATEGORY);
         testPaymentMethod(paymentMethod, creditCardList);
         if (capitalise(paymentMethod).equals("Cash")) {
