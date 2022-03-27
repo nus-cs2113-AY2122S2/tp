@@ -398,6 +398,7 @@ public class FileManager {
     /**
      * Reads the exercises from local exercise file and stores them into an ArrayList named exercises.
      *
+     * @param exerciseList List to store all exercises.
      * @throws IOException when the local file is missing.
      */
     public void loadExercisesFromFile(ExerciseList exerciseList) throws IOException {

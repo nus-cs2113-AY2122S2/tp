@@ -30,8 +30,7 @@ public class WorkoutCommandTest {
         PlanList pl = new PlanList(wl);
         FileManager fm = new FileManager(pl);
 
-
-        WorkoutCommand commandTest = new WorkoutCommand(userInput, fm, wl, userAction, userArguments);
+        WorkoutCommand commandTest = new WorkoutCommand(userInput, fm, wl, pl, userAction, userArguments);
 
         assertEquals("workout /new russian twist /reps 1000", commandTest.getUserInput());
         assertEquals("/new", commandTest.getUserAction());
@@ -54,8 +53,8 @@ public class WorkoutCommandTest {
         FileManager fm = new FileManager(pl);
 
         assertThrows(InvalidCommandException.class,
-            () -> new WorkoutCommand(userInput1, fm, wl, userAction1, userArguments1));
+            () -> new WorkoutCommand(userInput1, fm, wl, pl, userAction1, userArguments1));
         assertThrows(InvalidCommandException.class,
-            () -> new WorkoutCommand(userInput2, fm, wl, userAction2, userArguments2));
+            () -> new WorkoutCommand(userInput2, fm, wl, pl, userAction2, userArguments2));
     }
 }
