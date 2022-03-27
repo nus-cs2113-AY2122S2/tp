@@ -30,7 +30,8 @@ public class Parser {
     private static final int STARTTIME_INDEX = 3;
     private static final int ENDTIME_INDEX = 4;
     private static final int MODE_INDEX = 5;
-    private static final String[] HEADINGS = {"n/", "t/", "d/", "st/", "et/", "m/"};
+    private static final String[] HEADINGS_ADD_LESSON = {"n/", "t/", "d/", "st/", "et/", "m/"};
+    private static final String[] HEADINGS_ADD_MEETING = {"t/", "d/", "st/", "et/", "m/"};
 
     public Parser(String input) {
         this.command = getCommandFromInput(input);
@@ -68,7 +69,7 @@ public class Parser {
      */
     public Command prepareAdd() {
         try {
-            String[] eventDescription = splitArguments();
+            String[] eventDescription = splitArgumentsAddLesson();
             checkNonNullValues(eventDescription);
 
             String day = eventDescription[DAY_INDEX].toLowerCase();
@@ -200,23 +201,38 @@ public class Parser {
         return str;
     }
 
-    private String[] splitArguments() {
+    private String[] splitArgumentsAddLesson() {
         String[] eventDescription = new String[6];
         String[] splitArguments = arguments.split(" ");
         int index = -1;
         for (String str : splitArguments) {
-            if (containHeadings(str) == -1) {
+            if (containHeadings(str,HEADINGS_ADD_LESSON) == -1) {
                 eventDescription[index] += " " + str;
                 eventDescription[index] = eventDescription[index].trim();
             } else {
-                index = containHeadings(str);
+                index = containHeadings(str,HEADINGS_ADD_LESSON);
+                eventDescription[index] = str.substring(str.indexOf("/") + 1);
+            }
+        }
+        return eventDescription;
+    }
+    private String[] splitArgumentsAddMeeting() {
+        String[] eventDescription = new String[5];
+        String[] splitArguments = arguments.split(" ");
+        int index = -1;
+        for (String str : splitArguments) {
+            if (containHeadings(str,HEADINGS_ADD_MEETING) == -1) {
+                eventDescription[index] += " " + str;
+                eventDescription[index] = eventDescription[index].trim();
+            } else {
+                index = containHeadings(str,HEADINGS_ADD_MEETING);
                 eventDescription[index] = str.substring(str.indexOf("/") + 1);
             }
         }
         return eventDescription;
     }
 
-    private int containHeadings(String str) {
+    private int containHeadings(String str,String[] HEADINGS) {
         for (int i = 0; i < HEADINGS.length; i++) {
             if (str.contains(HEADINGS[i])) {
                 int headingLength = HEADINGS[i].length();
@@ -225,27 +241,25 @@ public class Parser {
                     return i;
                 }
             }
-            //assert !str.contains(HEADINGS[i]) :
-            //        String.format("String contains %s", HEADINGS[i]);
         }
         return -1;
     }
 
     public Command prepareAddMeeting() {
         try {
-            String[] eventDescription = splitArguments();
+            String[] eventDescription = splitArgumentsAddMeeting();
             checkNonNullValues(eventDescription);
 
-            String day = eventDescription[DAY_INDEX].toLowerCase();
-            int startTime = Integer.parseInt(eventDescription[STARTTIME_INDEX]);
-            int endTime = Integer.parseInt(eventDescription[ENDTIME_INDEX]);
-            String mode = eventDescription[MODE_INDEX].toLowerCase();
+            //there is no name for meeting because meeting applies to everyone
+            String day = eventDescription[DAY_INDEX - 1].toLowerCase();
+            int startTime = Integer.parseInt(eventDescription[STARTTIME_INDEX - 1]);
+            int endTime = Integer.parseInt(eventDescription[ENDTIME_INDEX - 1]);
+            String mode = eventDescription[MODE_INDEX - 1].toLowerCase();
 
             checkDay(day);
             checkTime(startTime, endTime);
             checkMode(mode);
 
-            //String name = eventDescription[NAME_INDEX];
             String title = eventDescription[TITLE_INDEX];
             return new AddMeetingCommand(title, day, startTime, endTime, mode);
 
@@ -264,4 +278,5 @@ public class Parser {
             return new CommandResult(ae.getMessage());
         }
     }
+
 }

@@ -1,11 +1,17 @@
 package seedu.meetingjio.timetables;
 
+import seedu.meetingjio.commands.AddMeetingCommand;
 import seedu.meetingjio.events.Event;
 import seedu.meetingjio.events.Meeting;
+import seedu.meetingjio.exceptions.DuplicateEventException;
+import seedu.meetingjio.exceptions.OverlappingEventException;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.commands.ListCommand;
 
 import java.util.ArrayList;
+
+import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
 
 public class MasterTimetable {
     private final ArrayList<Timetable> timetables;
@@ -72,20 +78,49 @@ public class MasterTimetable {
         return timetables.size();
     }
 
-    public boolean checkIfEveryoneFree(MasterTimetable masterTimetable, Meeting meeting) {
-        for (Timetable timetable : timetables) {
-            if (checkIfMeetingClashesWithTimetable(timetable,meeting)){
-                return false;
-            }
-        }
-        return true;
+    public ArrayList<Meeting> getMeetingList() {
+        return meetingList;
     }
-    private boolean checkIfMeetingClashesWithTimetable(Timetable timetable,Meeting meeting){
-        for (Event event : timetable.getList()){
-            if (meeting.overlaps(event)){
-                return false;
+
+    public boolean checkIfClash(Meeting meeting) {
+        for (Timetable timetable : timetables) {
+            if (checkMeetingOverlap(timetable, meeting)) {
+                return true;
             }
         }
-        return true;
+        return false;
+    }
+
+    private boolean checkMeetingOverlap(Timetable timetable, Meeting meeting) {
+        for (Event event : timetable.getList()) {
+            if (meeting.overlaps(event)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkIfMeetingExistsAlready(Meeting meeting) {
+        for (Event event : meetingList) {
+            if (meeting.equals(event)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String addMeetingToEveryoneTimetable(Meeting meeting) {
+        for (Timetable timetable : timetables) {
+            try {
+                timetable.add(meeting);
+            } catch (DuplicateEventException dee) {
+                return ERROR_DUPLICATE_EVENT;
+            } catch (OverlappingEventException oee) {
+                return ERROR_OVERLAPPING_EVENT;
+            } catch (Exception e){
+                return "ERROR DETECTED";
+            }
+        }
+        return AddMeetingCommand.addMeetingConfirmation(meeting);
     }
 }

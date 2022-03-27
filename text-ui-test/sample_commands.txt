@@ -2,3 +2,7 @@ add_lesson n/ibra t/CS2113 d/Friday st/1230 et/1330 m/online
 add_lesson n/ibra t/CS2113 d/Friday st/1430 et/1530 m/online
 add_lesson n/ym t/CS2113 d/Friday st/1430 et/1530 m/online
 add_lesson n/ym t/CS2113 d/Friday st/1230 et/1330 m/online
+add_meeting t/meeting d/Friday st/1230 et/1330 m/online
+add_meeting t/meeting d/Thursday st/1230 et/1330 m/online
+add_meeting t/meeting d/Friday st/1230 et/1330 m/online
+add_meeting t/meeting d/Wednesday st/1230 et/1330 m/online

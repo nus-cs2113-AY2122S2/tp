@@ -5,6 +5,9 @@ import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
 
+import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_MEETING;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_MEETING;
+
 public class AddMeetingCommand extends Command {
         public static final String COMMAND_WORD = "add_meeting";
 
@@ -22,21 +25,29 @@ public class AddMeetingCommand extends Command {
                 this.mode = mode;
         }
 
-
         @Override
         public String execute(MasterTimetable masterTimetable) {
                 // check all timetables, see if start or end time of each event/lesson is equal to each other
-                Meeting meeting = new Meeting(title,day,startTime,endTime,mode);
-                if (masterTimetable.checkIfEveryoneFree(masterTimetable,meeting)) {
-                        return addMeetingConfirmation(meeting);
+                try {
+                        Meeting meeting = new Meeting(title, day, startTime, endTime, mode);
+                        if (masterTimetable.checkIfClash(meeting)) {
+                                return ERROR_OVERLAPPING_MEETING;
+                        }
+                        else if (masterTimetable.checkIfMeetingExistsAlready(meeting)) {
+                                return ERROR_DUPLICATE_MEETING;
+                        }
+                        else{
+                                return masterTimetable.addMeetingToEveryoneTimetable(meeting);
+                        }
+                } catch (Exception e){
+                        return "ERROR DETECTED";
                 }
-                return null;
+
         }
 
-        private String addMeetingConfirmation(Meeting meeting) {
-                return String.format("The following meeting has been added:\n%s",
+        public static String addMeetingConfirmation(Meeting meeting) {
+                return String.format("The following meeting has been added to everyone's timetable:\n%s",
                         meeting);
         }
-
 
 }
