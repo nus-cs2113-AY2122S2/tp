@@ -42,7 +42,7 @@ Click on the hyperlinks in the content page above to quick navigation on the pag
     * **`list`** : Lists all tasks.
     * **`add`**`/pm cash /c Food /d Porridge /a 3 /t 2022-03` :
       Adds $3 porridge that was paid by cash on March 2022 to the list.
-    * **`calculate`**`/epm Mar` : Calculates total expenditure in the month of March.  
+    * **`calculate`**`/epm Mar 2022` : Calculates total expenditure in the month of March 2022.  
     * **`update`**`1 /pm cash /c Food /d Porridge /a 3 /t 2022-03` :
       Updates index 1 to reflect $3 porridge that was paid by cash on March 2022 to the list.
     * **`delete`**`2` : Deletes the 2nd expenditure shown in the expenditure list.
@@ -51,14 +51,14 @@ Click on the hyperlinks in the content page above to quick navigation on the pag
 6. Refer to the [Features](#features) below for details of each command.  
 ## Command Summary  
 
-| Command | Format, examples                                                            |
-|---------|-----------------------------------------------------------------------------|
-| Help    | `help` <br/> Prints a list of available commands                            |
-| Add     | `add /pm [PAYMENT_METHOD] [DESCRIPTION] [AMOUNT]`<br/>e.g `add biscuits 3`  |
-| List    | `list`<br/> Displays the current list of expenditures stored by the user    |
-| Delete  | `delete [INDEX]`<br/>e.g `delete 1`                                         | 
-| Update  | `update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]`<br/>e.g `update 2 snacks 5` |
-| Exit    | `bye`<br/> Shuts down `MindMyMoney` application                             |
+| Command | Format, examples                                                                                                                           |
+|---------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| Help    | `help` <br/> Prints a list of available commands                                                                                           |
+| Add     | `add /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`<br/>e.g `add /pm cash /c Food /d Porridge /a 3 /t 2022-03` |
+| List    | `list`<br/> Displays the current list of expenditures stored by the user                                                                   |
+| Delete  | `delete [INDEX]`<br/>e.g `delete 1`                                                                                                        | 
+| Update  | `update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]`<br/>e.g `update 2 snacks 5`                                                                |
+| Exit    | `bye`<br/> Shuts down `MindMyMoney` application                                                                                            |
 |
 
 ## Features  
@@ -96,6 +96,8 @@ Example:`add /pm cash /c Food /d Porridge /a 3 /t 2022-03`
   
 > **⚠️Warning:**
 >- Input realistic values, any unrealistic values can crash the system and harm your save file! 
+>- All flags are compulsory! Input the flags in the order given, else the application will not be able to read your 
+   > input.
 
 
 ### Display current list of expenditures: `list`   
