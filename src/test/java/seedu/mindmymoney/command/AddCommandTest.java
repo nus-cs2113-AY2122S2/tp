@@ -6,6 +6,7 @@ import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.CreditCard;
 import seedu.mindmymoney.userfinancial.Expenditure;
+import seedu.mindmymoney.userfinancial.User;
 
 import java.util.ArrayList;
 
@@ -21,8 +22,10 @@ class AddCommandTest {
     void addCommand_oneInput_expectListUpdated() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
-        new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand();
+
+        new AddCommand(inputString, user).executeCommand();
         ArrayList<Expenditure> testList = new ArrayList<>();
         testList.add(new Expenditure("Cash", "Personal", "Nike Shoes",
             300, "Mar 2022"));
@@ -39,8 +42,10 @@ class AddCommandTest {
     void addCommand_caseInsensitiveInput_expectListUpdated() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "/e cASh /c PerSONal /d Nike Shoes /a 300 /t 2022-03";
-        new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand();
+
+        new AddCommand(inputString, user).executeCommand();
         ArrayList<Expenditure> testList = new ArrayList<>();
         testList.add(new Expenditure("Cash", "Personal", "Nike Shoes",
             300, "Mar 2022"));
@@ -57,8 +62,10 @@ class AddCommandTest {
     void addCommand_wrongDecimalPlace_expectListUpdated() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "/e Cash /c Personal /d Nike Shoes /a 300.1299786222834 /t 2022-03";
-        new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand();
+
+        new AddCommand(inputString, user).executeCommand();
         ArrayList<Expenditure> testList = new ArrayList<>();
         testList.add(new Expenditure("Cash", "Personal", "Nike Shoes",
             (float) 300.13, "Mar 2022"));
@@ -76,8 +83,10 @@ class AddCommandTest {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
         creditCardTestList.add(new CreditCard("posb",0.05,500,500));
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "/e posb /c Personal /d Nike Shoes /a 300 /t 2022-03";
-        new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand();
+
+        new AddCommand(inputString, user).executeCommand();
         ArrayList<Expenditure> testList = new ArrayList<>();
         testList.add(new Expenditure("posb", "Personal", "Nike Shoes",
             300, "Mar 2022"));
@@ -94,9 +103,11 @@ class AddCommandTest {
     void addCommand_missingInput_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "";
+
         assertThrows(MindMyMoneyException.class,
-            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+            () -> new AddCommand(inputString, user).executeCommand());
     }
 
     /**
@@ -106,9 +117,11 @@ class AddCommandTest {
     void addCommand_nonNumberAmount_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "/e cash /c Personal /d Nike Shoes /a abcd /t 2022-03";
+
         assertThrows(MindMyMoneyException.class,
-            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+            () -> new AddCommand(inputString, user).executeCommand());
     }
 
     /**
@@ -118,9 +131,11 @@ class AddCommandTest {
     void addCommand_incorrectFlags_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "/e cash /z Personal /d Nike Shoes /a 500 /t 2022-03";
+
         assertThrows(MindMyMoneyException.class,
-            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+            () -> new AddCommand(inputString, user).executeCommand());
     }
 
     /**
@@ -130,9 +145,11 @@ class AddCommandTest {
     void addCommand_incorrectOrderOfFlags_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "/e cash /d Nike Shoes /a 500 /t 2022-03 /c Personal";
+
         assertThrows(MindMyMoneyException.class,
-            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+            () -> new AddCommand(inputString, user).executeCommand());
     }
 
     /**
@@ -142,9 +159,11 @@ class AddCommandTest {
     void addCommand_incorrectExpenditureMethod_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "/e casssh /c Personal /d Nike Shoes /a 500 /t 2022-03 ";
+
         assertThrows(MindMyMoneyException.class,
-            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+            () -> new AddCommand(inputString, user).executeCommand());
     }
 
     /**
@@ -154,9 +173,11 @@ class AddCommandTest {
     void addCommand_incorrectCategory_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "/e cash /c Person /d Nike Shoes /a 500 /t 2022-03";
+
         assertThrows(MindMyMoneyException.class,
-            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+            () -> new AddCommand(inputString, user).executeCommand());
     }
 
     /**
@@ -166,9 +187,11 @@ class AddCommandTest {
     void addCommand_incorrectDate_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "/e cash /c Person /d Nike Shoes /a 500 /t 2022-99";
+
         assertThrows(MindMyMoneyException.class,
-            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+            () -> new AddCommand(inputString, user).executeCommand());
     }
 
     /**
@@ -178,9 +201,11 @@ class AddCommandTest {
     void addCommand_nullExpenditureMethod_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "/e  /c Person /d Nike Shoes /a 500 /t 2022-01";
+
         assertThrows(MindMyMoneyException.class,
-            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+            () -> new AddCommand(inputString, user).executeCommand());
     }
 
     /**
@@ -190,9 +215,11 @@ class AddCommandTest {
     void addCommand_nullCategory_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "/e Cash /c  /d Nike Shoes /a 500 /t 2022-01";
+
         assertThrows(MindMyMoneyException.class,
-            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+            () -> new AddCommand(inputString, user).executeCommand());
     }
 
     /**
@@ -202,9 +229,11 @@ class AddCommandTest {
     void addCommand_nullDescription_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "/e Cash /c Food /d  /a 500 /t 2022-01";
+
         assertThrows(MindMyMoneyException.class,
-            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+            () -> new AddCommand(inputString, user).executeCommand());
     }
 
     /**
@@ -214,9 +243,11 @@ class AddCommandTest {
     void addCommand_nullAmount_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "/e Cash /c Food /d Shoes /a  /t 2022-01";
+
         assertThrows(MindMyMoneyException.class,
-            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+            () -> new AddCommand(inputString, user).executeCommand());
     }
 
     /**
@@ -226,9 +257,11 @@ class AddCommandTest {
     void addCommand_nullDate_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "/e Cash /c Food /d Shoes /a 500 /t";
+
         assertThrows(MindMyMoneyException.class,
-            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+            () -> new AddCommand(inputString, user).executeCommand());
     }
 
     /**
@@ -238,9 +271,11 @@ class AddCommandTest {
     void addCommand_lackSpacingBetweenFlags_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        User user = new User(expenditureTestList, creditCardTestList);
         String inputString = "/e/c Person /d Nike Shoes /a 500 /t 2022-01";
+
         assertThrows(MindMyMoneyException.class,
-            () -> new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand());
+            () -> new AddCommand(inputString, user).executeCommand());
     }
 
 
