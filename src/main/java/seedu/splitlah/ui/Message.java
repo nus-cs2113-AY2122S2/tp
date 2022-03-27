@@ -1,19 +1,19 @@
 package seedu.splitlah.ui;
 
-import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
+import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
-import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 
 /**
  * Container of hardcoded messages.
@@ -52,7 +52,7 @@ public abstract class Message {
                     + "        Syntax: " + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n"
                     + "                " + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND + "\n"
                     + "5.  Delete an existing activity\n"
-                    + "        " + ActivityDeleteCommand.COMMAND_FORMAT + "\n"
+                    + "        " + ActivityDeleteCommandParser.COMMAND_FORMAT + "\n"
                     + "6.  View an existing activity's details\n"
                     + "        " + ActivityViewCommand.COMMAND_FORMAT + "\n"
                     + "7.  List all existing activities\n"
@@ -155,18 +155,20 @@ public abstract class Message {
             "Invalid name. Names must contain only alphabetical characters.";
 
     // Session
-    public static final String ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST =
-            "Please enter a number from 1 to ";
     public static final String ERROR_SESSION_EMPTY_ACTIVITY_LIST =
             "The list of activities in the session is currently empty.";
     public static final String ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST =
             "The activity that you have specified was not found in this session.";
-    public static final String ERROR_SESSION_EMPTY_PERSON_LIST =
-            "The list of participants in the session is currently empty.";
     public static final String ERROR_SESSION_PERSON_NOT_IN_LIST =
             "The person that you have specified was not found in this session.";
     public static final String ASSERT_SESSION_PERSON_LIST_EMPTY =
             "Session object cannot be constructed with a null or empty person list.";
+    public static final String ASSERT_SESSION_ACTIVITY_NULL =
+            "The activity to be added to a Session object cannot be null.";
+    public static final String ASSERT_SESSION_NAME_NULL =
+            "The String object to be used to search for Person objects by name cannot be null.";
+    public static final String ASSERT_SESSION_NAME_LIST_EMPTY =
+            "The String array object to be used to search for Person objects by name cannot be null or empty.";
 
     // Profile
     public static final String ERROR_PROFILE_DUPLICATE_SESSION =
@@ -237,6 +239,12 @@ public abstract class Message {
             "A session summary was not produced as a Session object with the following Id was not found: ";
     public static final String LOGGER_SESSIONSUMMARY_SESSION_SUMMARY_PRINTED =
             "A session summary has been successful produced for the Session object with the following Id: ";
+
+    // Session View Command
+    public static final String LOGGER_SESSIONVIEW_SESSION_VIEW_FAILED =
+            "A session could not be viewed.";
+    public static final String LOGGER_SESSIONVIEW_SESSION_VIEWED =
+            "A session with the following Id was viewed: ";
 
     // Activity Create Command
     public static final String ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH =
