@@ -117,33 +117,19 @@ public class PlanList {
     public Plan createAndAddPlan(String userArgument) throws ArrayIndexOutOfBoundsException,
             NumberFormatException, InvalidPlanException {
         String userPlanNameInput = userArgument.split(PlanCommand.CREATE_ACTION_WORKOUTS_KEYWORD)[0].trim();
-
-        String className = this.getClass().getSimpleName();
-        boolean hasValidPlanName = checkPlanNameValidity(userPlanNameInput);
-        if (!hasValidPlanName) {
-            logger.log(Level.WARNING, "Plan name is invalid.");
-            throw new InvalidPlanException(className, InvalidPlanException.INVALID_PLAN_NAME_ERROR_MSG);
-        }
-
         String userWorkoutNumbersString = userArgument.split(PlanCommand.CREATE_ACTION_WORKOUTS_KEYWORD)[1].trim();
+        String className = this.getClass().getSimpleName();
+        checkPlanNameValidity(userPlanNameInput, className);
 
         int numberOfWorkoutsInAPlan = userWorkoutNumbersString.split(",").length;
-        boolean isAppropriateNumberOfWorkouts = checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan);
-        if (!isAppropriateNumberOfWorkouts) {
-            logger.log(Level.WARNING, "Number of workouts to add in a plan is invalid.");
-            throw new InvalidPlanException(className, InvalidPlanException.MIN_MAX_WORKOUTS_IN_A_PLAN);
-        }
+        checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan, className);
         assert (numberOfWorkoutsInAPlan > 0 && numberOfWorkoutsInAPlan <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN);
 
         ArrayList<Workout> workoutsToAddInAPlanList = new ArrayList<Workout>();
         for (int i = 0; i < numberOfWorkoutsInAPlan; i += 1) {
             int workoutNumberInteger = Integer.parseInt(userWorkoutNumbersString.split(",")[i].trim());
 
-            boolean isWithinWorkoutListRange = checkWorkoutNumberWithinRange(workoutNumberInteger);
-            if (!isWithinWorkoutListRange) {
-                logger.log(Level.WARNING, "Workout number to add in the plan is invalid.");
-                throw new InvalidPlanException(className, InvalidPlanException.WORKOUT_NUMBER_OUT_OF_RANGE);
-            }
+            checkWorkoutNumberWithinRange(workoutNumberInteger, className);
             assert (workoutNumberInteger > 0) && (workoutNumberInteger <= workoutList.getWorkoutsDisplayList().size());
 
             String workoutToAddKey = workoutList.getWorkoutsDisplayList().get(workoutNumberInteger - 1);
@@ -151,6 +137,7 @@ public class PlanList {
             workoutsToAddInAPlanList.add(workoutToAddObject);
         }
 
+        checkPlanWithSameWorkoutSequence(workoutsToAddInAPlanList, className);
         Plan newPlan = new Plan(userPlanNameInput, workoutsToAddInAPlanList);
         logger.log(Level.INFO, "New plan created.");
 
@@ -167,23 +154,30 @@ public class PlanList {
      * If it is, do not allow a plan called "rest day" as it is used in the schedule feature.
      *
      * @param userPlanNameInput The plan name entered by user to check.
-     * @return True if an existing plan with the same plan name exists in the plans list.
-     *         Otherwise, returns false.
+     * @param className The class name used for exception throwing.
+     * @throws InvalidPlanException If the name of the plan to be created is invalid.
      */
-    public boolean checkPlanNameValidity(String userPlanNameInput) {
+    public void checkPlanNameValidity(String userPlanNameInput, String className) throws
+            InvalidPlanException {
+        boolean hasValidPlanName = true;
         String userPlanNameInputLowerCase = userPlanNameInput.toLowerCase();
-        if (userPlanNameInputLowerCase.equals(RESERVED_PLAN_NAME)) {
-            return false;
-        }
 
         for (int i = 0; i < plansDisplayList.size(); i += 1) {
             String getPlanName = plansDisplayList.get(i).toLowerCase();
 
             if (userPlanNameInputLowerCase.equals(getPlanName)) {
-                return false;
+                hasValidPlanName = false;
             }
         }
-        return true;
+
+        if (userPlanNameInputLowerCase.equals(RESERVED_PLAN_NAME)) {
+            hasValidPlanName = false;
+        }
+
+        if (!hasValidPlanName) {
+            logger.log(Level.WARNING, "Plan name is invalid.");
+            throw new InvalidPlanException(className, InvalidPlanException.INVALID_PLAN_NAME_ERROR_MSG);
+        }
     }
 
     /**
@@ -192,11 +186,21 @@ public class PlanList {
      * The range is 1 - 10 workouts.
      *
      * @param numberOfWorkouts The number of workouts to be added in a plan.
-     * @return True if the number of workouts to be added is within the min
-     *         and max range, else false.
+     * @param className The class name used for exception throwing.
+     * @throws InvalidPlanException If the number of workouts to add in a plan is not
+     *                              within the min max range stated.
      */
-    public boolean checkMinMaxNumberOfWorkouts(int numberOfWorkouts) {
-        return numberOfWorkouts > 0 && numberOfWorkouts <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN;
+    public void checkMinMaxNumberOfWorkouts(int numberOfWorkouts, String className) throws
+            InvalidPlanException {
+        boolean isAppropriateNumberOfWorkouts = false;
+        if (numberOfWorkouts > 0 && numberOfWorkouts <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN) {
+            isAppropriateNumberOfWorkouts = true;
+        }
+
+        if (!isAppropriateNumberOfWorkouts) {
+            logger.log(Level.WARNING, "Number of workouts to add in a plan is invalid.");
+            throw new InvalidPlanException(className, InvalidPlanException.MIN_MAX_WORKOUTS_IN_A_PLAN);
+        }
     }
 
     /**
@@ -204,11 +208,87 @@ public class PlanList {
      * is within the range of the current workout list (in workout /list).
      *
      * @param workoutNumber The workout number to check.
-     * @return True if workout number is within the range of the workout list,
-     *         else false if out of range.
+     * @param className The class name used for exception throwing.
+     * @throws InvalidPlanException If the workout number is not within the range of
+     *                              the workout list.
      */
-    public boolean checkWorkoutNumberWithinRange(int workoutNumber) {
-        return workoutNumber > 0 && workoutNumber <= workoutList.getWorkoutsDisplayList().size();
+    public void checkWorkoutNumberWithinRange(int workoutNumber, String className) throws
+            InvalidPlanException {
+        boolean isWithinWorkoutListRange = false;
+
+        if (workoutNumber > 0 && workoutNumber <= workoutList.getWorkoutsDisplayList().size()) {
+            isWithinWorkoutListRange = true;
+        }
+
+        if (!isWithinWorkoutListRange) {
+            logger.log(Level.WARNING, "Workout number to add in the plan is invalid.");
+            throw new InvalidPlanException(className, InvalidPlanException.WORKOUT_NUMBER_OUT_OF_RANGE);
+        }
+    }
+
+    /**
+     * This method checks whether the new plan to be created has the same workout
+     * sequence/order as any other existing plans in the application's plan list.
+     *
+     * @param workoutsToAddInNewPlanList The workouts to be added into the plan to be created.
+     * @param className The class name used for exception throwing.
+     * @throws InvalidPlanException If the plan has the same sequence as existing plans.
+     */
+    public void checkPlanWithSameWorkoutSequence(ArrayList<Workout> workoutsToAddInNewPlanList, String className)
+            throws InvalidPlanException {
+        boolean hasSameSequence = false;
+        for (int i = 0; i < plansDisplayList.size(); i += 1) {
+            String getPlanKey = plansDisplayList.get(i);
+            Plan getPlan = plansHashMapList.get(getPlanKey);
+            ArrayList<Workout> workoutsListToCheck = getPlan.getWorkoutsInPlanList();
+
+            if (workoutsToAddInNewPlanList.size() == workoutsListToCheck.size()) {
+                assert (workoutsToAddInNewPlanList.size() == workoutsListToCheck.size());
+                int matchCount = countNumberOfWorkoutMatches(workoutsListToCheck, workoutsToAddInNewPlanList);
+                hasSameSequence = determineSameSequence(matchCount, workoutsListToCheck);
+            }
+
+            if (hasSameSequence) {
+                System.out.println("Plan [" + getPlanKey + "]"
+                        + " has same workout sequence as the plan to be created.");
+                logger.log(Level.WARNING, "Invalid plan to add as an existing plan with same workout sequence exists.");
+                throw new InvalidPlanException(className, InvalidPlanException.PLAN_SAME_WORKOUT_SEQUENCE);
+            }
+        }
+    }
+
+    /**
+     * This method counts the number of exact matches between two workout ArrayList.
+     *
+     * @param workoutsListToCheck The workout list of an existing plan in the application.
+     * @param workoutsToAddInNewPlanList The workout list of the plan to be created.
+     * @return The number of exact matches.
+     */
+    public int countNumberOfWorkoutMatches(ArrayList<Workout> workoutsListToCheck,
+            ArrayList<Workout> workoutsToAddInNewPlanList) {
+        int matchCount = 0;
+        for (int k = 0; k < workoutsListToCheck.size(); k += 1) {
+            String compareWorkoutsStringNewPlan = workoutsToAddInNewPlanList.get(k).toString();
+            if (compareWorkoutsStringNewPlan.equals(workoutsListToCheck.get(k).toString())) {
+                matchCount += 1;
+            }
+        }
+        return matchCount;
+    }
+
+    /**
+     * This method determines whether two workout lists have the same sequence
+     * by comparing the number of matches to the size of the workouts list of an existing plan.
+     * If the number of matches is more or equal to the size of that workout list,
+     * it means that the workout sequence is a duplicate.
+     *
+     * @param matchCount The number of matches.
+     * @param workoutsListToCheck The workout list of an existing plan.
+     * @return True if the number of matches is more or equal to the size of the workouts list
+     *         Or else, false.
+     */
+    public boolean determineSameSequence(int matchCount, ArrayList<Workout> workoutsListToCheck) {
+        return matchCount >= workoutsListToCheck.size();
     }
 
     public void insertPlanIntoList(String planKey, Plan plan) throws InvalidWorkoutException {

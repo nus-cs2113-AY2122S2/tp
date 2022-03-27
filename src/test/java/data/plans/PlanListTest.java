@@ -114,4 +114,11 @@ class PlanListTest {
             () -> planList.createAndAddPlan("Plan 2 /workouts 9"));
     }
 
+    @Test
+    void createAndAddPlan_workoutWithSameSequence_expectInvalidPlanException() throws InvalidPlanException {
+        planList.createAndAddPlan("Plan 1 /workouts 1,2,3");
+        assertThrows(InvalidPlanException.class,
+            () -> planList.createAndAddPlan("Duplicate Sequence /workouts 1,2,3"));
+    }
+
 }
