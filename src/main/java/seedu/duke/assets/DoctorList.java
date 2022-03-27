@@ -21,6 +21,15 @@ public class DoctorList extends List {
         return null;
     }
 
+    public Doctor search(String nric) {
+        for (Doctor doctor : doctors) {
+            if (doctor.getNric().equals(nric)) {
+                return doctor;
+            }
+        }
+        return null;
+    }
+
     public void find(String[] command){
     }
 
@@ -67,10 +76,14 @@ public class DoctorList extends List {
         doctorTable.print();
     }
 
-
-    @Override
-    public void edit(String[] parameters) throws NotFoundException {
-
+    public void edit(String[] parameterArray) throws NotFoundException {
+        if (search(parameterArray[0]) != null) {
+            Doctor doctor = search(parameterArray[0]);
+            doctor.edit(parameterArray[1], Integer.parseInt(parameterArray[2]), parameterArray[3],
+                    (parameterArray[4].charAt(0)), parameterArray[5], parameterArray[6]);
+            return;
+        }
+        throw new NotFoundException("There are no patients with given NRIC!");
     }
 
 
