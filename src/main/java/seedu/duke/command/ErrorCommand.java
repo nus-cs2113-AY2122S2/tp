@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.Packages;
+import seedu.duke.Reservations;
 
 public class ErrorCommand extends Command {
     private String input;
@@ -9,7 +10,7 @@ public class ErrorCommand extends Command {
         this.input = input;
     }
 
-    public void execute(Packages packages) {
+    public void execute(Packages packages, Reservations r) {
         System.out.println("Input not recognized: " + this.input);
         System.out.println("Use the help command to find out the valid commands.");
 

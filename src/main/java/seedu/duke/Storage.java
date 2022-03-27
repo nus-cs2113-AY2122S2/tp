@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
-
 /**
- * Represents the controller to parse and write to a save file for packages and reservations
+ * Represents the controller to parse and write to a save file for packages and
+ * reservations
  */
 public class Storage {
     private String packages_filePath;
@@ -19,7 +19,8 @@ public class Storage {
     /**
      * String representation of the file path to the save file
      *
-     * @param package_path, reservations_path
+     * @param package_path,
+     *            reservations_path
      */
     public Storage(String package_path, String reservations_path) {
         this.packages_filePath = package_path;
@@ -30,7 +31,7 @@ public class Storage {
      * Writes the tasks in task list to the save file
      *
      */
-    public void convertListToFile(Packages p) {
+    public void convertListToFile(Packages p, Reservations r) {
         String text = "";
         for (int i = 0; i < p.getSize(); i++) {
             TravelPackage currentPackage = p.getPackage(i);
@@ -45,8 +46,8 @@ public class Storage {
         }
 
         String resText = "";
-        for (int i = 0; i < p.getReservationSize(); i++) {
-            Reservation currentReservation = p.getReservation(i);
+        for (int i = 0; i < r.getReservationSize(); i++) {
+            Reservation currentReservation = r.getReservation(i);
             resText = resText + currentReservation.toSave() + System.lineSeparator();
         }
         try {
@@ -58,17 +59,21 @@ public class Storage {
         }
     }
 
-
     /**
      * Calls the functions to read packages and reservations saved files
      *
      * @return Packages object for Control class
      */
     public Packages createPackages() {
-        ArrayList<Reservation> r = parseReservationFile();
         ArrayList<TravelPackage> t = parseTravelPackageFile();
-        Packages p = new Packages(t, r);
+        Packages p = new Packages(t);
         return p;
+    }
+
+    public Reservations createReservatons() {
+        ArrayList<Reservation> r = parseReservationFile();
+        Reservations reservations = new Reservations(r);
+        return reservations;
     }
 
     /**
@@ -76,7 +81,7 @@ public class Storage {
      *
      * @return Arraylist of Reservations
      */
-    public ArrayList<Reservation> parseReservationFile(){
+    public ArrayList<Reservation> parseReservationFile() {
         File rFile = new File(reservations_filePath);
         ArrayList<Reservation> r = new ArrayList<>();
         try {
@@ -89,7 +94,8 @@ public class Storage {
                 String customerName = arrayElements[2].trim();
                 String customerNum = arrayElements[3].trim();
                 int numPax = Integer.parseInt(arrayElements[4].trim());
-                Reservation newReservation = new Reservation(reservationID, packageID, customerName, customerNum, numPax);
+                Reservation newReservation = new Reservation(reservationID, packageID, customerName, customerNum,
+                        numPax);
                 r.add(newReservation);
             }
         } catch (FileNotFoundException e) {
@@ -118,7 +124,8 @@ public class Storage {
                 double price = Double.parseDouble(arrayElements[4].trim());
                 String country = arrayElements[5].trim();
                 int vacancies = Integer.parseInt(arrayElements[6].trim());
-                TravelPackage newPackage = new TravelPackage(name, new Date(start), new Date(end), hotel, price, country, vacancies);
+                TravelPackage newPackage = new TravelPackage(name, new Date(start), new Date(end), hotel, price,
+                        country, vacancies);
                 t.add(newPackage);
             }
         } catch (FileNotFoundException e) {
@@ -127,4 +134,3 @@ public class Storage {
         return t;
     }
 }
-
