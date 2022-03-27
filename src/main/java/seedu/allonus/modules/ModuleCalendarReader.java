@@ -96,7 +96,6 @@ public class ModuleCalendarReader {
 
             for (final Object componentObject : calendar.getComponents()) {
                 Component calendarComponent = (Component)componentObject;
-                // System.out.println("\n");
                 timeSlot = new StringBuilder();
                 // read through the components of ics file and only take the necessary properties
                 for (final Object propertyObject : calendarComponent.getProperties()) {
