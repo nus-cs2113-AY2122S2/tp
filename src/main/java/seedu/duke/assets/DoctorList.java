@@ -165,23 +165,24 @@ public class DoctorList extends List {
         if (returnedFinderArray.isEmpty()) {
             UI.printParagraph("Doctor doesn't exist please try again!");
         } else {
-            ArrayList<String> stringArrayLists = new ArrayList<>();
+            CommandLineTable findPatientTable = new CommandLineTable();
             for (int i = 0; i < returnedFinderArray.size(); i++) {
-                String outputString = "";
-                outputString += String.valueOf(i) + ": ";
-                outputString += returnedFinderArray.get(i).getNric() + "\n";
-                outputString += returnedFinderArray.get(i).getFullName() + "\n";
-                outputString += returnedFinderArray.get(i).getAge() + "\n";
-                outputString += returnedFinderArray.get(i).getGender() + "\n";
-                outputString += returnedFinderArray.get(i).getAddress() + "\n";
-                outputString += returnedFinderArray.get(i).getSpecialization() + "\n";
-                stringArrayLists.add(outputString);
+
+                findPatientTable.setShowVerticalLines(true);
+                findPatientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
+                        "Specilization");
+                findPatientTable.addRow(returnedFinderArray.get(i).getNric(),
+                        returnedFinderArray.get(i).getFullName(),
+                        String.valueOf(returnedFinderArray.get(i).getAge()),
+                        returnedFinderArray.get(i).getAddress(),
+                        String.valueOf(returnedFinderArray.get(i).getGender()),
+                        returnedFinderArray.get(i).getDob(),
+                        returnedFinderArray.get(i).getSpecialization());
             }
-            for (String stringArrayList : stringArrayLists) {
-                UI.printParagraph(stringArrayList);
-            }
+            findPatientTable.print();
         }
     }
+
 
     public void findByDateAdmission(String[] parameters) {
         // Intentionally left blank

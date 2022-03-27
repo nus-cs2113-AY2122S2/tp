@@ -10,7 +10,7 @@ public class FindPatientCommand extends Command {
         super(parameterArray);
     }
 
-    public Status execute(List patientList) throws HalpmiException {
+    public Status execute(List patientList) {
         switch (parameterArray[0]) {
         case "nric":
             patientList.findByNric(parameterArray);
@@ -34,7 +34,7 @@ public class FindPatientCommand extends Command {
             patientList.findByDateAdmission(parameterArray);
             break;
         default:
-            throw new HalpmiException("Input must be an attribute of Doctor");
+            break;
         }
         return Status.FIND_PATIENT_SUCCESS;
     }

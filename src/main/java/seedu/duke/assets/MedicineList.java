@@ -153,26 +153,53 @@ public class MedicineList extends List {
 
     public void findById(String[] parameters) {
         this.returnedFinderArray = MedicineFinder.findMedicineById(medicines, parameters[1]);
+        createArrayOfFoundMedicines();
     }
 
     public void findByDosage(String[] parameters) {
         this.returnedFinderArray = MedicineFinder.findMedicineByDosage(medicines, Integer.parseInt(parameters[1]));
+        createArrayOfFoundMedicines();
     }
 
     public void findByExpiry(String[] parameters) {
         this.returnedFinderArray = MedicineFinder.findMedicineByExpiry(medicines, parameters[1]);
+        createArrayOfFoundMedicines();
     }
 
     public void findBySideEffects(String[] parameters) {
         this.returnedFinderArray = MedicineFinder.findMedicineBySideEffects(medicines, parameters[1]);
+        createArrayOfFoundMedicines();
     }
 
     public void findByQuantity(String[] parameters) {
         this.returnedFinderArray = MedicineFinder.findMedicineByQuantity(medicines, Integer.parseInt(parameters[1]));
+        createArrayOfFoundMedicines();
     }
 
     public void findByName(String[] parameters) {
         this.returnedFinderArray = MedicineFinder.findMedicineByName(medicines, parameters[1]);
+        createArrayOfFoundMedicines();
+    }
+
+
+    private void createArrayOfFoundMedicines() {
+        if (returnedFinderArray.isEmpty()) {
+            UI.printParagraph("Medicine doesn't exist please try again!");
+        } else {
+            CommandLineTable findMedicineTable = new CommandLineTable();
+            for (int i = 0; i < returnedFinderArray.size(); i++) {
+                findMedicineTable.setShowVerticalLines(true);
+                findMedicineTable.setHeaders("MedicineId", "MedicineName", "Dosage", "Expiry",
+                        "SideEffects", "Quantity");
+                findMedicineTable.addRow(returnedFinderArray.get(i).getMedicineId(),
+                        returnedFinderArray.get(i).getMedicineName(),
+                        String.valueOf(returnedFinderArray.get(i).getDosage()),
+                        returnedFinderArray.get(i).getExpiry(), returnedFinderArray.get(i).getSideEffects(),
+                        String.valueOf(returnedFinderArray.get(i).getQuantity()));
+
+            }
+            findMedicineTable.print();
+        }
     }
 
     public void findByNric(String[] parameters) {

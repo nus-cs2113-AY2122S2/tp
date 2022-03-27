@@ -10,7 +10,7 @@ public class FindDoctorCommand extends Command {
         super(parameterArray);
     }
 
-    public Status execute(List doctorList) throws HalpmiException {
+    public Status execute(List doctorList) {
         switch (parameterArray[0]) {
         case "nric":
             doctorList.findByNric(parameterArray);
@@ -34,7 +34,7 @@ public class FindDoctorCommand extends Command {
             doctorList.findBySpecialization(parameterArray);
             break;
         default:
-            throw new HalpmiException("Input must be an attribute of Doctor");
+            break;
         }
         return Status.FIND_DOCTOR_SUCCESS;
     }

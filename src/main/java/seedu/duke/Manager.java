@@ -60,11 +60,6 @@ public class Manager {
             command = Parser.parseEditPatient(parameters);
             status = command.execute(storage.patients);
             break;
-        /*case "find patient":
-            command = Parser.parseFindPatient(parameters);
-            status = command.execute(storage.patients);
-            break;
-         */
         case "add doctor":
             command = Parser.parseAddDoctor(parameters);
             status = command.execute(storage.doctors);

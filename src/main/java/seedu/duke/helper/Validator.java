@@ -105,13 +105,14 @@ public class Validator {
         validateDob(parameters[5]);
     }
 
-    private static void validateSpecialization(String fullName) throws HalpmiException {
+    private static void validateSpecialization(String specialization) throws HalpmiException {
         Pattern fullNamePattern = Pattern.compile("[a-zA-Z ]*");
-        Matcher fullNameMatcher = fullNamePattern.matcher(fullName);
+        Matcher fullNameMatcher = fullNamePattern.matcher(specialization);
         if (!fullNameMatcher.matches()) {
             throw new HalpmiException("Specialization must contain only alphabets and no special characters.");
         }
     }
+
 
     static void validateAddDoctor(String[] parameters) throws HalpmiException {
         validateAddPerson(Arrays.copyOfRange(parameters, 0, 6));
@@ -123,39 +124,61 @@ public class Validator {
         validateAdmissionDate(parameters[6]);
     }
 
+
     /* Validate medicine attributes */
-    private static boolean validateMedicineName(String medicineName) {
-        return medicineName.matches("[a-zA-z]+");
+    private static boolean validateMedicineName(String medicineName) throws HalpmiException {
+        boolean isValid = medicineName.matches("[a-zA-z]+");
+        if (!isValid) {
+            throw new HalpmiException("Invalid Medicine name");
+        }
+        return true;
+
     }
 
-    private static boolean validateDosage(String dosage) {
+    private static boolean validateDosage(String dosage) throws HalpmiException {
         try {
             int dosageInt = Integer.parseInt(dosage);
             return dosageInt > 0;
         } catch (NumberFormatException numberFormatException) {
-            return false;
+            throw new HalpmiException("Invalid Medicine dosage");
         }
     }
 
-    private static boolean validateExpiry(String expiry) {
+    private static boolean validateExpiry(String expiry) throws HalpmiException {
         try {
             LocalDate expiryDate = LocalDate.parse(expiry);
             LocalDate minimumDate = LocalDate.now();
             if (expiryDate.isBefore(minimumDate)) {
-                return false;
+                throw new HalpmiException("Medicine expiry date is before today");
             }
             return true;
         } catch (DateTimeParseException dateTimeParseException) {
-            return false;
+            throw new HalpmiException("Invalid Medicine Expiry");
         }
     }
 
-    private static boolean validateQuantity(String quantity) {
+    private static boolean validateQuantity(String quantity) throws HalpmiException {
         try {
             int quantityInt = Integer.parseInt(quantity);
             return quantityInt > 0;
         } catch (NumberFormatException numberFormatException) {
-            return false;
+            throw new HalpmiException("Invalid Medicine Quantity");
+        }
+    }
+
+    private static void validateMedicineId(String medicineId) throws HalpmiException {
+        Pattern fullNamePattern = Pattern.compile("[A-Z][0-9][3}]");
+        Matcher fullNameMatcher = fullNamePattern.matcher(medicineId);
+        if (!fullNameMatcher.matches()) {
+            throw new HalpmiException("Medicine must contain only alphabets and Numbers.");
+        }
+    }
+
+    private static void validateMedicineSideEffects(String sideEffects) throws HalpmiException {
+        Pattern fullNamePattern = Pattern.compile("[a-zA-Z ]*");
+        Matcher fullNameMatcher = fullNamePattern.matcher(sideEffects);
+        if (!fullNameMatcher.matches()) {
+            throw new HalpmiException("Specialization must contain only alphabets and no special characters.");
         }
     }
 
@@ -212,6 +235,15 @@ public class Validator {
         if (!isTrue) {
             throw new HalpmiException("Date must be in YYYY-MM-DD format. "
                     + "It cannot be before 1900-01-01 or be today and after.");
+        }
+    }
+
+    private static boolean validateDate(String expiry) throws HalpmiException {
+        try {
+            LocalDate expiryDate = LocalDate.parse(expiry);
+            return true;
+        } catch (DateTimeParseException dateTimeParseException) {
+            throw new HalpmiException("Invalid Medicine Expiry");
         }
     }
 
@@ -281,27 +313,26 @@ public class Validator {
     }
 
     public static void validateFindMedicine(String[] parameters) throws HalpmiException {
+
+        boolean check = true;
         switch (parameters[0]) {
-        case "id":
-            validateNric(parameters[1]);
-            break;
+
         case "name":
-            validateFullName(parameters[1]);
+            check = validateMedicineName(parameters[1]);
             break;
         case "dosage":
-            validateAge(parameters[1]);
+            check = check && validateDosage(parameters[1]);
             break;
         case "expiry":
-            validateGender(parameters[1]);
-            break;
-        case "sideeffects":
-            validateAddress(parameters[1]);
+            check = check && validateDate(parameters[1]);
             break;
         case "quantity":
-            validateDob(parameters[1]);
+            check = check && validateQuantity(parameters[1]);
             break;
+        case "id":
+        case "side effects":
         default:
-            throw new HalpmiException("Input must be an attribute of Patient");
+            break;
         }
     }
 }
