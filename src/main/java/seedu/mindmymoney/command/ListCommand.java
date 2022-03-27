@@ -59,7 +59,7 @@ public class ListCommand extends Command {
      * Prints user's current list of expenditures.
      */
     public void printExpenditureList() throws MindMyMoneyException {
-        if (expenditureList.size() == 0) {
+        if (expenditureList.isEmpty()) {
             throw new MindMyMoneyException(
                     "Your expenditure list is currently empty! Please add some expenditures to your list first");
         } else {
@@ -85,7 +85,7 @@ public class ListCommand extends Command {
      * Prints user's current list of credit cards.
      */
     public void printCreditCardList() throws MindMyMoneyException {
-        if (creditCardList.size() == 0) {
+        if (creditCardList.isEmpty()) {
             throw new MindMyMoneyException(
                     "Your credit card list is currently empty! Please add some credit cards to your account first");
         } else {

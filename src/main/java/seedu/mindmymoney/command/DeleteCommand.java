@@ -5,6 +5,10 @@ import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.CreditCardList;
 
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_THIRD_ITEM_IN_STRING;
+import static seedu.mindmymoney.constants.Indexes.LIST_INDEX_CORRECTION;
+import static seedu.mindmymoney.constants.Indexes.MINIMUM_CREDIT_CARD_COMMAND_LENGTH;
+import static seedu.mindmymoney.constants.Indexes.MINIMUM_INDEX;
 
 /**
  * Represents the Delete command.
@@ -39,8 +43,8 @@ public class DeleteCommand extends Command {
      * @param positionToDelete position of index to delete.
      * @return true if position is within the bounds, false otherwise.
      */
-    public boolean checkOutOfBounds(int positionToDelete) {
-        return (positionToDelete + 1 <= 0 || positionToDelete + 1 > expenditureList.size());
+    public boolean isOutOfExpenditureListBounds(int positionToDelete) {
+        return (positionToDelete <= MINIMUM_INDEX || positionToDelete + 1 > expenditureList.size());
     }
 
     /**
@@ -48,7 +52,7 @@ public class DeleteCommand extends Command {
      * @param positionToDelete position of index to delete.
      * @return true if position is within the bounds, false otherwise.
      */
-    public boolean checkCreditCardListBounds(int positionToDelete) {
+    public boolean isOutOfCreditCardListBounds(int positionToDelete) {
         return (positionToDelete + 1 <= 0 || positionToDelete + 1 > creditCardList.size());
     }
 
@@ -69,7 +73,7 @@ public class DeleteCommand extends Command {
             }
             String getNumber = splitMessage[1];
             int positionToDelete = Integer.parseInt(getNumber) - 1;
-            if (checkOutOfBounds(positionToDelete)) {
+            if (isOutOfExpenditureListBounds(positionToDelete)) {
                 throw new MindMyMoneyException("Please input a valid index");
             } else {
                 assert positionToDelete >= 0 : "Index should always be >= 0";
@@ -95,13 +99,13 @@ public class DeleteCommand extends Command {
                         + System.lineSeparator());
             }
             String[] splitMessage = input.split(" ");
-            if (splitMessage.length != 3) {
+            if (splitMessage.length != MINIMUM_CREDIT_CARD_COMMAND_LENGTH) {
                 throw new MindMyMoneyException(System.lineSeparator() + "Please input a number\n"
                         + "For eg. 'delete /cc 2' to remove the second credit card on your list.\n");
             }
-            String getNumber = splitMessage[2];
-            int positionToDelete = Integer.parseInt(getNumber) - 1;
-            if (checkCreditCardListBounds(positionToDelete)) {
+            String getNumber = splitMessage[INDEX_OF_THIRD_ITEM_IN_STRING];
+            int positionToDelete = Integer.parseInt(getNumber) + LIST_INDEX_CORRECTION;
+            if (isOutOfCreditCardListBounds(positionToDelete)) {
                 throw new MindMyMoneyException("Please input a valid index");
             } else {
                 assert positionToDelete >= 0 : "Index should always be >= 0";
