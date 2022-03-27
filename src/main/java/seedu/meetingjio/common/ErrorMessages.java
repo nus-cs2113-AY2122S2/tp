@@ -49,4 +49,6 @@ public class ErrorMessages {
     public static final String ERROR_EMPTY_MASTER_TIMETABLE = "The Master Timetable has no populated timetables!";
     public static final String ERROR_TIMETABLE_NOT_FOUND_TO_DELETE = "User and his Timetable not found";
     public static final String ERROR_EXCEPTION_NOT_HANDLED = "New exception found that is not handled. Logged this";
+    public static final String ERROR_FREE_INPUT_INVALID = "Please specify the minimum duration for everyone to be free."
+            + " If there is no such constraint for the duration, just input 'free'.";
 }

@@ -49,13 +49,13 @@ public class Parser {
         case AddLessonCommand.COMMAND_WORD:
             return prepareAdd();
         case ListCommand.COMMAND_WORD:
-            return new ListCommand(arguments.trim());
+            return new ListCommand(arguments);
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete();
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand(arguments.trim());
+            return new ClearCommand(arguments);
         case FreeCommand.COMMAND_WORD:
-            return new FreeCommand(arguments.trim());
+            return new FreeCommand(arguments);
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         default:
