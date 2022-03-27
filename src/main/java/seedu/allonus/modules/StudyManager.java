@@ -114,6 +114,7 @@ public class StudyManager {
      * @param ui Contains the input by the user.
      */
     public void studyManagerRunner(TextUi ui) {
+        ModuleCalendarReader icsParser = new ModuleCalendarReader();
         logger.setLevel(Level.WARNING);
         printWelcomeMessage();
         String userInput;
@@ -132,10 +133,19 @@ public class StudyManager {
                 editModule(userInput,ui);
             } else if (userInput.startsWith(FIND_COMMAND)) {
                 findModule(userInput);
+            } else if (userInput.startsWith("read ics")) {
+                openIcsFile(ui, icsParser);
             } else {
                 printMessage(UNKNOWN_INPUT_MESSAGE);
             }
         }
+    }
+
+    private void openIcsFile(TextUi ui, ModuleCalendarReader icsParser) {
+        printMessage("Please enter the name of your .ics file from nusmods: ");
+        String input = ui.getUserInput();
+        icsParser.readIcsFile(input);
+        printMessage("Exiting read ics mode");
     }
 
     /**
