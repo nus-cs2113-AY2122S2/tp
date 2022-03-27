@@ -103,7 +103,9 @@ public class StudyManager {
     private static final String MISSING_MODULE_CODE_MESSAGE = "Please enter the code for your module";
     private static final String WRONG_CATEGORY_FORMAT_MESSAGE = "Category has to be one of lec,tut or exam";
 
-    private static Logger logger = Logger.getLogger("mylogger");
+    public static final String LOGGER_IDENTIFIER = "mylogger";
+
+    private static Logger logger = Logger.getLogger(LOGGER_IDENTIFIER);
 
     public ArrayList<Module> getModulesList() {
         return modulesList;
