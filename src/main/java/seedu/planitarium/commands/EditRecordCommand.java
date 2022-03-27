@@ -1,9 +1,39 @@
 package seedu.planitarium.commands;
 
+import seedu.planitarium.exceptions.PlanITariumException;
+import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.Family;
 
 public class EditRecordCommand extends Command{
-    public EditRecordCommand(String userInput, Family family) {
+    protected static final String ADD_INCOME_CMD = "editin";
+    protected static final String ADD_SPENT_CMD = "editout";
+    protected static final String DESCRIPTION_NOT_NULL = "Description should not be empty";
+    protected static final String INPUT_NOT_NULL = "Input should not be empty";
+    protected static final String KEYWORD_NOT_NULL = "Keywords should not be empty";
+    protected static final String FAMILY_NOT_NULL = "Family should not be null";
+    protected static final String USER_INDEX_NOT_VALID = "User index should be valid";
+
+    protected String keyword;
+    protected int uid;
+    protected int group;
+    protected int index;
+    protected String description;
+    protected double amount;
+    protected boolean isPermanent;
+    public EditRecordCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
+        this.type = "EditRecordCMD";
+        group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
+        keyword = Parser.parseKeyword(userInput);
+        uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
+        description = Parser.parseDescription(userInput);
+        isPermanent = Parser.parseRecurringStatus(userInput);
+        //amount = Parser.getValidMoney(Parser.parseIncome(userInput));
+        assert (uid < 1) : USER_INDEX_NOT_VALID;
+    }
+
+    @Override
+    public void execute() {
+
     }
 }
