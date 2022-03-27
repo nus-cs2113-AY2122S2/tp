@@ -148,6 +148,6 @@ There is no need to save manually.
 
 **Q**: Why is my data not saved when I run Mindmymoney in different folders?
 
-**A**: Mindmymoney saves data in the current directory. To ensure all data is saved properly,
+**A**: Mindmymoney saves data in the current directory. To ensure all the data is saved properly,
 run Mindmymoney only in the _home folder_. 
 
