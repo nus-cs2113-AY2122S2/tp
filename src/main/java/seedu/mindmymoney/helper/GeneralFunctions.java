@@ -35,7 +35,7 @@ public class GeneralFunctions {
         }
         startingFlag = startingFlag + " ";
 
-        input = input.substring(input.indexOf(startingFlag) + 3);
+        input = input.substring(input.indexOf(startingFlag) + startingFlag.length());
         if (!endingFlag.equals(" ")) {
             endingFlag = " " + endingFlag;
             input = input.substring(0, input.indexOf(endingFlag));
