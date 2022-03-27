@@ -25,6 +25,15 @@ public class SessionEditCommand extends Command {
     private final LocalDate sessionDate;
     private final int groupId;
 
+    /**
+     * Initializes a SessionEditCommand object.
+     *
+     * @param sessionId   An integer that uniquely identifies a session.
+     * @param sessionName A String object that represents the session name.
+     * @param personNames An array of String objects that represents the involved persons for the session.
+     * @param date        A LocalDate object that represents the date of the session.
+     * @param groupId     An integer that represents the group unique identifier.
+     */
     public SessionEditCommand(int sessionId, String sessionName, String[] personNames, LocalDate date, int groupId) {
         this.sessionId = sessionId;
         this.sessionName = sessionName;
