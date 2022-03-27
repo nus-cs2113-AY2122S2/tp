@@ -30,6 +30,15 @@ public class HousekeeperPerformanceList {
         return housekeeperPerformanceList.size();
     }
 
+    public boolean isHousekeeperInPerformanceList(String housekeeperName) {
+        for (HousekeeperPerformance housekeeperPerformance : housekeeperPerformanceList) {
+            if (housekeeperName.equals(housekeeperPerformance.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void viewPerformances() {
         if (getSize() == 0) {
             System.out.println("There have not been any housekeeper performances recorded yet.");
