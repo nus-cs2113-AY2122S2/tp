@@ -11,6 +11,7 @@ public class ListCommand extends Command {
 
     public ListCommand(String userInput, PersonList personList) {
         super(userInput, personList);
+        this.type = "ListCMD";
     }
 
     @Override

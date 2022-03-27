@@ -1,13 +1,20 @@
 package seedu.planitarium.commands;
 
-import seedu.planitarium.exceptions.UnknownException;
+import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.PersonList;
+import seedu.planitarium.ProjectLogger;
+
+import java.util.logging.Level;
 
 /**
  * Generates different command classes for execution according to user instruction.
  */
 public class CommandFactory {
+    private static final String className = CommandFactory.class.getSimpleName();
+    private static final String fileName = className + ".log";
+    private static final ProjectLogger logger = new ProjectLogger(className, fileName);
+
     protected static final String ADD_PERSON_CMD = "add";
     protected static final String DELETE_PERSON_CMD = "delete";
     protected static final String ADD_INCOME_CMD = "addin";
@@ -18,10 +25,12 @@ public class CommandFactory {
     protected static final String LIST = "list";
     protected static final String EXIT = "bye";
 
+    protected static final String LOG_EXECUTE_CMD = "'%s' command is returned";
+
     public CommandFactory() {
     }
 
-    public Command getCommand(String userInput, PersonList personList) throws UnknownException {
+    public Command getCommand(String userInput, PersonList personList) throws PlanITariumException {
         try {
             Command newCommand;
             switch (Parser.parseKeyword(userInput)) {
@@ -49,11 +58,12 @@ public class CommandFactory {
                 newCommand = new ExitCommand(userInput, personList);
                 break;
             default:
-                throw new UnknownException();
+                throw new PlanITariumException(CommandFactory.class.getSimpleName());
             }
+            logger.getLogger().log(Level.INFO, String.format(LOG_EXECUTE_CMD, newCommand.getType()));
             return newCommand;
-        } catch (Exception e) {
-            throw new UnknownException();
+        } catch (PlanITariumException e) {
+            throw e;
         }
     }
 

@@ -1,6 +1,6 @@
 package seedu.planitarium.commands;
 
-import seedu.planitarium.exceptions.UnknownException;
+import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.PersonList;
 
@@ -13,13 +13,14 @@ public class DeletePersonCommand extends Command {
 
     protected int uid;
 
-    public DeletePersonCommand(String userInput, PersonList personList) throws Exception {
+    public DeletePersonCommand(String userInput, PersonList personList) throws PlanITariumException {
         super(userInput, personList);
+        this.type = "DeletePersonCMD";
         this.uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), personList);
     }
 
     @Override
-    public void execute() throws UnknownException {
+    public void execute() throws PlanITariumException {
         assert (uid < 1) : USER_INDEX_NOT_VALID;
         assert (personList != null) : PERSONLIST_NOT_NULL;
         personList.removePerson(uid);

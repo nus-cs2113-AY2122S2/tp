@@ -151,7 +151,7 @@ Format:	`listcat`
 ### Exit: `bye`
 Exits the program.
 
-Format: 	bye
+Format: `bye`
 
 ## FAQ
 

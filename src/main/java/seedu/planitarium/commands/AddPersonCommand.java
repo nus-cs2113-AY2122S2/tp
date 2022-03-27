@@ -16,6 +16,7 @@ public class AddPersonCommand extends Command {
     public AddPersonCommand(String userInput, PersonList personList)
                 throws MissingDelimiterException, DuplicateDelimiterException {
         super(userInput, personList);
+        this.type = "AddPersonCMD";
         this.name = Parser.parseName(userInput);
     }
 
@@ -25,5 +26,6 @@ public class AddPersonCommand extends Command {
         assert (personList != null) : PERSONLIST_NOT_NULL;
         personList.addPerson(name);
     }
+
 
 }

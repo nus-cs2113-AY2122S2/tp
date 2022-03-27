@@ -12,6 +12,7 @@ public class RemainCommand extends Command {
 
     public RemainCommand(String userInput, PersonList personList) {
         super(userInput, personList);
+        this.type = "RemainCMD";
     }
 
     @Override

@@ -1,6 +1,6 @@
 package seedu.planitarium.commands;
 
-import seedu.planitarium.exceptions.UnknownException;
+import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.Person;
 import seedu.planitarium.person.PersonList;
@@ -22,8 +22,9 @@ public class DeleteRecordCommand extends Command {
     protected int uid;
     protected Person newPerson;
 
-    public DeleteRecordCommand(String userInput, PersonList personList) throws Exception {
+    public DeleteRecordCommand(String userInput, PersonList personList) throws PlanITariumException {
         super(userInput, personList);
+        this.type = "DeleteRecordCMD";
         keyword = Parser.parseKeyword(userInput);
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), personList);
         assert (uid < 1) : USER_INDEX_NOT_VALID;
@@ -31,7 +32,7 @@ public class DeleteRecordCommand extends Command {
     }
 
     @Override
-    public void execute() throws Exception {
+    public void execute() throws PlanITariumException {
         assert (keyword != null) : KEYWORD_NOT_NULL;
         assert (userInput != null) : INPUT_NOT_NULL;
         assert (newPerson != null) : PERSON_NOT_NULL;
@@ -46,7 +47,7 @@ public class DeleteRecordCommand extends Command {
             newPerson.deleteExpend(index);
             break;
         default:
-            throw new UnknownException();
+            throw new PlanITariumException(DeleteRecordCommand.class.getSimpleName());
         }
     }
 }

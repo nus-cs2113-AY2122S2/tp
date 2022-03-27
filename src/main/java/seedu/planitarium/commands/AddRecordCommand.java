@@ -1,6 +1,6 @@
 package seedu.planitarium.commands;
 
-import seedu.planitarium.exceptions.UnknownException;
+import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.Person;
 import seedu.planitarium.person.PersonList;
@@ -24,8 +24,9 @@ public class AddRecordCommand extends Command {
     protected int uid;
     protected Person newPerson;
 
-    public AddRecordCommand(String userInput, PersonList personList) throws Exception {
+    public AddRecordCommand(String userInput, PersonList personList) throws PlanITariumException {
         super(userInput, personList);
+        this.type = "AddRecordCMD";
         keyword = Parser.parseKeyword(userInput);
         description = Parser.parseDescription(userInput);
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), personList);
@@ -51,7 +52,7 @@ public class AddRecordCommand extends Command {
             newPerson.addExpend(description, amount);
             break;
         default:
-            throw new UnknownException();
+            throw new PlanITariumException(AddRecordCommand.class.getSimpleName());
         }
 
     }

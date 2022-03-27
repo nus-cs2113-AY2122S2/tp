@@ -6,6 +6,7 @@ import seedu.planitarium.ui.UI;
 public class Command {
 
     protected static final String INPUT_NOT_NULL = "Input should not be empty";
+    protected String type;
     protected String userInput;
     protected UI ui = new UI();
     protected PersonList personList;
@@ -21,6 +22,10 @@ public class Command {
      * @throws Exception if the instruction cannot be executed.
     */
     public void execute() throws Exception {
+    }
+
+    public String getType() {
+        return type;
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import seedu.planitarium.commands.Command;
 import seedu.planitarium.commands.CommandFactory;
+import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.person.PersonList;
 import seedu.planitarium.ui.UI;
 
@@ -14,6 +15,7 @@ public class PlanITarium {
     protected PersonList personList = new PersonList();
     protected CommandFactory commandFactory = new CommandFactory();
     protected static ProjectLogger logger;
+    protected UI ui = new UI();
 
     public static void main(String[] args) {
         initialisePlanitarium();
@@ -33,7 +35,7 @@ public class PlanITarium {
                 command.execute();
                 System.out.println(UI.HORI_LINE);
             } catch (Exception e) {
-                e.printStackTrace();
+                ui.printMsg(e.toString());
             }
         }
     }
