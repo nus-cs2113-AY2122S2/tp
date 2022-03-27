@@ -1,6 +1,7 @@
 package seedu.duke.assets;
 
 import seedu.duke.exception.DuplicateEntryException;
+import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
 import seedu.duke.helper.command.CommandLineTable;
@@ -62,11 +63,10 @@ public class PatientList extends List {
     }
 
     //view particular patient
-    public void view(String nric) {
+    public void view(String nric) throws HalpmiException {
         Patient patient = getPatient(nric);
         if (patient == null) {
-            UI.printParagraph("Patient doesn't exist please try again!");
-            return;
+            throw new HalpmiException("Patient doesn't exist please try again!");
         }
         CommandLineTable patientTable = new CommandLineTable();
         patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
@@ -83,18 +83,21 @@ public class PatientList extends List {
 
 
     //view all patients
-    public void view() {
+    public void view() throws HalpmiException {
         CommandLineTable patientTable = new CommandLineTable();
         //st.setRightAlign(true);//if true then cell text is right aligned
         patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
         patientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
                 "DateAdmission");
+        if (patients.size() == 0) {
+            throw new HalpmiException("Patient list is empty, please add patient");
+        }
         for (Patient patient : patients) {
             patientTable.addRow(patient.getPatientNric(), patient.getPatientName(),
-                    String.valueOf(patient.getPatientAge()),
-                    patient.getPatientAddress(), String.valueOf(patient.getPatientGender()),
-                    patient.getPatientDob(),
-                    patient.getDateOfAdmission());
+                   String.valueOf(patient.getPatientAge()),
+                        patient.getPatientAddress(), String.valueOf(patient.getPatientGender()),
+                        patient.getPatientDob(),
+                        patient.getDateOfAdmission());
         }
         patientTable.print();
     }
