@@ -183,4 +183,8 @@ public class Person {
     public String saveName() {
         return "u " + name;
     }
+
+    public void editIncome(int incomeIndex, String description, double amount, Category category, boolean isPermanent) {
+        incomeList.editIncome(incomeIndex, description, amount, category, isPermanent);
+    }
 }

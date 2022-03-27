@@ -230,8 +230,11 @@ public class PersonList {
         logger.log(Level.INFO, infoString);
         return getPerson(personIndex).getNumberOfExpenditures();
     }
+
+    public void editIncome(int personIndex, int incomeIndex, String description, double amount, Category category,
+                           boolean isPermanent) {
+        String infoString = "Method editIncome() called";
         logger.log(Level.INFO, infoString);
-        int listIndex = personIndex - 1;
-        return personList.get(listIndex).getNumberOfExpenditures();
+        getPerson(personIndex).editIncome(incomeIndex, description, amount, category, isPermanent);
     }
 }

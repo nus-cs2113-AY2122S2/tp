@@ -240,4 +240,11 @@ public class Family {
         logger.log(Level.INFO, infoString);
         return getList(group).getNumberOfExpenditures(personIndex);
     }
+
+    public void editIncome(int personIndex, int group, int incomeIndex, String description, double amount,
+                           Category category, boolean isPermanent) {
+        String infoString = "Method editIncome() called";
+        logger.log(Level.INFO, infoString);
+        getList(group).editIncome(personIndex, incomeIndex, description, amount, category, isPermanent);
+    }
 }
