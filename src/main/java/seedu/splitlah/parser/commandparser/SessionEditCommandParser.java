@@ -39,6 +39,32 @@ public class SessionEditCommandParser implements CommandParser<SessionEditComman
     public SessionEditCommand getCommand(String commandArgs) throws InvalidFormatException {
         assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
 
+        boolean hasSessionNameDelimiter = false;
+        String parsedSessionName = null;
+        try {
+            parsedSessionName = Parser.parseName(commandArgs);
+            hasSessionNameDelimiter = true;
+        } catch (InvalidFormatException formatException) {
+            if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
+                    + ParserUtils.NAME_DELIMITER)) {
+                String invalidCommandMessage = formatException.getMessage() + "\n" +  COMMAND_FORMAT;
+                throw new InvalidFormatException(invalidCommandMessage);
+            }
+        }
+
+        boolean hasSessionDateDelimiter = false;
+        LocalDate parsedSessionDate = null;
+        try {
+            parsedSessionDate = Parser.parseLocalDate(commandArgs);
+            hasSessionDateDelimiter = true;
+        } catch (InvalidFormatException formatException) {
+            if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
+                    + ParserUtils.DATE_DELIMITER)) {
+                String invalidCommandMessage = formatException.getMessage() + "\n" +  COMMAND_FORMAT;
+                throw new InvalidFormatException(invalidCommandMessage);
+            }
+        }
+
         boolean hasPersonListDelimiter = false;
         String [] parsedNames = null;
         try {
@@ -52,31 +78,16 @@ public class SessionEditCommandParser implements CommandParser<SessionEditComman
             }
         }
 
-        boolean hasGroupIdDelimiter = false;
-        int groupId = -1;
-        try {
-            groupId = Parser.parseGroupId(commandArgs);
-            hasGroupIdDelimiter = true;
-        } catch (InvalidFormatException formatException) {
-            if (!formatException.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                    + ParserUtils.GROUP_ID_DELIMITER)) {
-                String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
-                throw new InvalidFormatException(invalidCommandMessage);
-            }
-        }
+        boolean hasNoEdit = !hasSessionNameDelimiter && !hasSessionDateDelimiter && !hasPersonListDelimiter;
 
-        boolean isMissingBothDelimiters = !hasPersonListDelimiter && !hasGroupIdDelimiter;
-        if (isMissingBothDelimiters) {
-            String invalidCommandMessage = Message.ERROR_SESSIONCREATE_MISSING_PERSONLIST_AND_GROUP_DELIMITERS + "\n"
-                    + COMMAND_FORMAT;
+        if (hasNoEdit) {
+            String invalidCommandMessage = Message.ERROR_SESSIONEDIT_NO_EDIT_DELIMITERS_FOUND + "\n" + COMMAND_FORMAT;
             throw new InvalidFormatException(invalidCommandMessage);
         }
 
         try {
             int parsedSessionId = Parser.parseSessionId(commandArgs);
-            String parsedSessionName = Parser.parseName(commandArgs);
-            LocalDate parsedSessionDate = Parser.parseLocalDate(commandArgs);
-            return new SessionEditCommand(parsedSessionId,parsedSessionName, parsedNames, parsedSessionDate, groupId);
+            return new SessionEditCommand(parsedSessionId,parsedSessionName, parsedNames, parsedSessionDate);
         } catch (InvalidFormatException formatException) {
             String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
             throw new InvalidFormatException(invalidCommandMessage);

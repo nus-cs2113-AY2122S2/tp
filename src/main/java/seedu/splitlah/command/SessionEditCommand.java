@@ -1,7 +1,7 @@
 package seedu.splitlah.command;
 
-import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Person;
 import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
@@ -23,7 +23,6 @@ public class SessionEditCommand extends Command {
     private final String sessionName;
     private final String[] personNames;
     private final LocalDate sessionDate;
-    private final int groupId;
 
     /**
      * Initializes a SessionEditCommand object.
@@ -32,14 +31,13 @@ public class SessionEditCommand extends Command {
      * @param sessionName A String object that represents the session name.
      * @param personNames An array of String objects that represents the involved persons for the session.
      * @param date        A LocalDate object that represents the date of the session.
-     * @param groupId     An integer that represents the group unique identifier.
      */
-    public SessionEditCommand(int sessionId, String sessionName, String[] personNames, LocalDate date, int groupId) {
+    public SessionEditCommand(int sessionId, String sessionName, String[] personNames, LocalDate date) {
+        assert sessionId > 0;
         this.sessionId = sessionId;
         this.sessionName = sessionName;
         this.personNames = personNames;
         this.sessionDate = date;
-        this.groupId = groupId;
     }
 
     /**
@@ -49,40 +47,41 @@ public class SessionEditCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        boolean isSessionExist = manager.getProfile().hasSessionId(sessionId);
-        if (!isSessionExist) {
-            manager.getUi().printlnMessage(Message.ERROR_PROFILE_SESSION_NOT_IN_LIST);
+        Session session = null;
+        try {
+            session = manager.getProfile().getSession(sessionId);
+        } catch (InvalidDataException invalidDataException) {
+            manager.getUi().printlnMessageWithDivider(invalidDataException.getMessage());
             return;
         }
+        assert session != null;
 
-        PersonList personList = new PersonList();
         if (personNames != null) {
             boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
             if (hasDuplicates) {
                 manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
                 return;
             }
-            personList.convertToPersonList(personNames);
-        }
-        Group group = null;
-        if (groupId != -1) {
-            try {
-                group = manager.getProfile().getGroup(groupId);
-                personList.mergeListOfPersons(group.getPersonList());
-            } catch (InvalidDataException dataException) {
-                manager.getUi().printlnMessage(dataException.getMessage());
+            PersonList newPersonList = new PersonList();
+            newPersonList.convertToPersonList(personNames);
+            if (!newPersonList.isValidList(session.getPersonList())) {
+                manager.getUi().printlnMessageWithDivider(Message.ERROR_SESSIONEDIT_INVALID_PERSONLIST);
                 return;
+            } else {
+                newPersonList.setNewPersonList(session.getPersonList());
+                for (Person person : newPersonList.getPersonList()) {
+                    session.addPerson(person);
+                }
             }
         }
-        try {
-            manager.getProfile().removeSession(sessionId);
-            Session newSession = new Session(sessionName, sessionId, sessionDate, personList, group);
-            manager.getProfile().addSession(newSession);
-            manager.saveProfile();
-            manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + newSession);
-            Manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONEDIT_SESSION_EDITED + sessionId);
-        } catch (InvalidDataException invalidDataException) {
-            manager.getUi().printlnMessage(invalidDataException.getMessage());
+        if (sessionName != null) {
+            session.setSessionName(sessionName);
         }
+        if (sessionDate != null) {
+            session.setDateCreated(sessionDate);
+        }
+        manager.saveProfile();
+        manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
+        Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONEDIT_SESSION_EDITED);
     }
 }
