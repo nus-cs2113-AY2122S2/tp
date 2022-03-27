@@ -1,9 +1,6 @@
 package seedu.duke.helper;
 
 import seedu.duke.exception.HalpmiException;
-
-import seedu.duke.helper.command.*;
-
 import seedu.duke.helper.command.AddAppointmentCommand;
 import seedu.duke.helper.command.AddDoctorCommand;
 import seedu.duke.helper.command.AddMedicineCommand;
@@ -136,15 +133,14 @@ public class Parser {
     }
 
 
+    public static Command parseViewAppointment(String parameters) throws HalpmiException {
+        String[] viewAppointmentParameters = minParameterCheck(parameters, 2);
+        return new ViewAppointmentCommand(viewAppointmentParameters);
+}
  */
     public static String[] parseFindAppointment(String parameters) throws HalpmiException {
         String[] findAppointmentParameters = minParameterCheck(parameters, 2);
         return findAppointmentParameters;
-    }
-
-    public static Command parseViewAppointment(String parameters) throws HalpmiException {
-        String[] viewAppointmentParameters = minParameterCheck(parameters, 2);
-        return new ViewAppointmentCommand(viewAppointmentParameters);
 
     }
 }
