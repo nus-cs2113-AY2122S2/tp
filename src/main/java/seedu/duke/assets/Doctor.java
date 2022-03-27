@@ -3,9 +3,9 @@ package seedu.duke.assets;
 public class Doctor extends Person {
     private String specialization;
 
-    public Doctor(String nric, String fullName, int age, char gender, String address,
+    public Doctor(String nric, String fullName, int age, String address, char gender,
                   String dob, String specialization) {
-        super(nric, fullName, age, gender, address, dob);
+        super(nric, fullName, age, address, gender, dob);
         this.specialization = specialization;
     }
 
@@ -15,18 +15,29 @@ public class Doctor extends Person {
 
     // @override toString()
 
+    public void edit(String fullName, int age, String address, char gender, String dob,
+                     String specialization) {
+        //this.nric = nric;
+        this.fullName = fullName;
+        this.age = age;
+        this.gender = gender;
+        this.address = address;
+        this.dob = dob;
+        this.specialization = specialization;
+    }
+
     public String saveString() {
-        return nric + "," + fullName + "," + age + "," + gender
-                + "," + address + "," + dob + "," + specialization;
+        return nric + "," + fullName + "," + age + "," + address + "," + gender
+                + "," + dob + "," + specialization;
     }
 
     @Override
     public String toString() {
-        return  "Nric='" + getNric() + '\''
+        return "Nric='" + getNric() + '\''
                 + ", Full Name='" + getFullName() + '\''
                 + ", Age=" + getAge()
-                + ", Gender=" + getGender()
                 + ", Address='" + getAddress()
+                + ", Gender=" + getGender()
                 + '\'' + ", DOB='" + getDob() + '\''
                 + ", Specialization='" + getSpecialization() + '\'';
     }
