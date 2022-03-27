@@ -225,6 +225,11 @@ public abstract class Message {
             "A session was removed from the list of session with Id: ";
 
     // Session Edit Command
+    public static final String ERROR_SESSIONEDIT_NO_EDIT_DELIMITERS_FOUND =
+            "No delimiters were found. Please rectify and try again.";
+    public static final String ERROR_SESSIONEDIT_INVALID_PERSONLIST =
+            "The specified person list does not contain all existing persons that was previously "
+                   + "created in the session. Please rectify and try again.";
     public static final String LOGGER_SESSIONEDIT_SESSION_EDITED =
             "A session was edited from the list of session with Id: ";
 
