@@ -162,6 +162,10 @@ class SessionTest {
 
     // getPersonByName()
 
+    /**
+     * Checks if an InvalidDataException with the correct message is properly thrown when the getPersonByName method is
+     * called and no Person objects with the specified name exists in the Session object.
+     */
     @Test
     void getPersonByName_personWithSpecifiedNameDoesNotExist_InvalidDataExceptionThrown() {
         try {
@@ -172,6 +176,10 @@ class SessionTest {
         }
     }
 
+    /**
+     * Checks if a Person object is correctly returned when the getPersonByName method is
+     * called and a Person object with the specified name exists in the Session object.
+     */
     @Test
     void getPersonByName_personWithSpecifiedNameExists_PersonObjectReturned() {
         try {
