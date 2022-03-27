@@ -41,10 +41,10 @@ public class AddHousekeeperPerformanceCommand extends Command {
         try {
             ratingValue = Integer.parseInt(ratingString);
         } catch (NumberFormatException e) {
-            throw new InvalidSatisfactionValueException();
+            throw new InvalidHousekeeperPerformanceRatingException();
         }
         if (ratingValue < 1 || ratingValue > 5) {
-            throw new InvalidSatisfactionValueException();
+            throw new InvalidHousekeeperPerformanceRatingException();
         }
         return ratingValue;
     }
@@ -63,7 +63,6 @@ public class AddHousekeeperPerformanceCommand extends Command {
         HousekeeperPerformanceList housekeeperPerformanceList = listContainer.getHousekeeperPerformanceList();
         housekeeperPerformanceList.addHousekeeperPerformance(housekeeperPerformance);
         ui.printAddHousekeeperPerformanceAcknowledgementMessage(housekeeperPerformanceList, housekeeperPerformance);
-        housekeeperPerformanceList.viewPerformances();
 
     }
 

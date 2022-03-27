@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Represents a data structure containing all housekeeper performance ratings.
@@ -30,17 +31,21 @@ public class HousekeeperPerformanceList {
     }
 
     public void viewPerformances() {
-        int number = 1;
         if (getSize() == 0) {
-            System.out.println("There are no recorded satisfactions.");
-        }
-        for (HousekeeperPerformance housekeeperPerformance : housekeeperPerformanceList) {
-            System.out.println(Integer.toString(number) + ". " + housekeeperPerformance.getName() + " - "
-                    + housekeeperPerformance.getRating());
-            number += 1;
+            System.out.println("There have not been any housekeeper performances recorded yet.");
+        } else {
+            System.out.println("======== Housekeeper Performance List ========");
+            int number = 1;
+            for (HousekeeperPerformance housekeeperPerformance : housekeeperPerformanceList) {
+                System.out.println(Integer.toString(number) + ".  [ " + housekeeperPerformance.getName()
+                        + " ]: Performance Rating: " + housekeeperPerformance.getRating());
+                number += 1;
+            }
+            System.out.println("======== End of the list ========");
         }
     }
 
-    // Method for sorting
-    // Method for displaying
+    public void sortHousekeeperPerformances() {
+        //Collections.sort(housekeeperPerformanceList, (firstPerformance, secondPerformance) -> firstPerformance.getRating() > secondPerformance.getRating());
+    }
 }
