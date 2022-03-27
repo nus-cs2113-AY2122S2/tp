@@ -25,10 +25,10 @@ public class WorkoutCommandTest {
         String userInput = "workout /new russian twist /reps 1000";
         String userAction = "/new";
         String userArguments = "russian twist /reps 1000";
-        FileManager fm = new FileManager();
         ExerciseList el = new ExerciseList();
         WorkoutList wl = new WorkoutList(el);
         PlanList pl = new PlanList(wl);
+        FileManager fm = new FileManager(pl);
 
         WorkoutCommand commandTest = new WorkoutCommand(userInput, fm, wl, pl, userAction, userArguments);
 
@@ -47,10 +47,10 @@ public class WorkoutCommandTest {
         String userAction2 = "/create";
         String userArguments2 = "running /reps 20";
 
-        FileManager fm = new FileManager();
         ExerciseList el = new ExerciseList();
         WorkoutList wl = new WorkoutList(el);
         PlanList pl = new PlanList(wl);
+        FileManager fm = new FileManager(pl);
 
         assertThrows(InvalidCommandException.class,
             () -> new WorkoutCommand(userInput1, fm, wl, pl, userAction1, userArguments1));
