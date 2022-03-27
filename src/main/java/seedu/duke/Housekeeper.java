@@ -11,8 +11,8 @@ public class Housekeeper {
     private String availability;
     private ArrayList<Integer> availableList = new ArrayList<>();
     private static final String[] daysList = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
-            "Sunday"};
-    
+        "Sunday"};
+
     public Housekeeper(String name, int age) {
         this.name = name;
         this.age = age;
