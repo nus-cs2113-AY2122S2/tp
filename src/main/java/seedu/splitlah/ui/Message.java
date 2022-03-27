@@ -250,8 +250,6 @@ public abstract class Message {
     public static final String ERROR_ACTIVITYCREATE_DUPLICATE_NAME =
             "There are duplicate names in the persons involved for the activity you are trying to create. "
                     + "Please rectify and try again.";
-    public static final String ASSERT_ACTIVITYCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
-            "Name duplicates exists but not detected.";
     public static final String ASSERT_ACTIVITYCREATE_SESSION_ID_LESS_THAN_ONE =
             "Session ID is less than or equals to zero.";
     public static final String ASSERT_ACTIVITYCREATE_ACTIVITY_NAME_MISSING =
@@ -356,8 +354,6 @@ public abstract class Message {
             "Group Id is not initialized.";
 
     // Group List Command
-    public static final String ASSERT_GROUPLIST_GROUP_SIZE_NOT_ZERO =
-            "The list of groups to be printed is not empty.";
     public static final String ASSERT_GROUPLIST_GROUP_SIZE_LESS_THAN_ONE =
             "The size of the list of groups to be printed is less than one.";
     public static final String LOGGER_GROUPLIST_GROUPS_NOT_LISTED =
