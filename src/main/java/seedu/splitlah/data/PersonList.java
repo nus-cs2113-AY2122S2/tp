@@ -126,13 +126,13 @@ public class PersonList implements Serializable {
     }
 
     /**
-     * Checks if the ArrayList object that is supplied contains persons that are in personList attribute.
-     * Assumption: Function is only called by SessionEditCommand class to verify if new list of Person objects contains
-     *             previously stored persons.
+     * Checks if the personList attribute is a superset of the ArrayList object of Person objects supplied.
+     * Assumption: Function is only called by SessionEditCommand class to verify if new list of Person objects
+     *             is superset of the ArrayList object supplied.
      *
      * @param oldList An ArrayList object of Person objects.
-     * @return true if the new list of Person objects has all persons in the ArrayList that is supplied,
-     *         false, otherwise.
+     * @return true if the new list of Person objects is a superset of the ArrayList object of Person objects supplied,
+     *         false otherwise.
      */
     public boolean isSuperset(ArrayList<Person> oldList) {
         int existCount = 0;
@@ -142,16 +142,5 @@ public class PersonList implements Serializable {
             }
         }
         return existCount == oldList.size();
-    }
-
-    /**
-     * Removes existing persons in the list of Person objects.
-     * Assumption: Function is only called by SessionEditCommand class to add new persons into the existing
-     *             list of persons within the Session object.
-     *
-     * @param oldPersonList An ArrayList object of Person objects.
-     */
-    public void setNewPersonList(ArrayList<Person> oldPersonList) {
-        personList.removeAll(oldPersonList);
     }
 }

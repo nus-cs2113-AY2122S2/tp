@@ -70,7 +70,6 @@ public class SessionEditCommand extends Command {
                 ui.printlnMessageWithDivider(Message.ERROR_SESSIONEDIT_INVALID_PERSONLIST);
                 return;
             } else {
-                newPersonList.setNewPersonList(session.getPersonList());
                 for (Person person : newPersonList.getPersonList()) {
                     session.addPerson(person);
                 }
@@ -83,7 +82,7 @@ public class SessionEditCommand extends Command {
             session.setDateCreated(sessionDate);
         }
         manager.saveProfile();
-        ui.printlnMessageWithDivider(COMMAND_SUCCESS);
+        ui.printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + session);
         Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONEDIT_SESSION_EDITED);
     }
 }
