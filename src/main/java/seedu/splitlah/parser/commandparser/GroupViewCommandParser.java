@@ -6,6 +6,11 @@ import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
+/**
+ * Represents a command parser that is able to parse user arguments into an ActivityCreateCommand object.
+ *
+ * @author Ivan
+ */
 public class GroupViewCommandParser implements CommandParser<GroupViewCommand> {
 
     public static final String COMMAND_TEXT = "group /view";
@@ -16,6 +21,13 @@ public class GroupViewCommandParser implements CommandParser<GroupViewCommand> {
         ParserUtils.GROUP_ID_DELIMITER
     };
 
+    /**
+     * Returns a GroupViewCommand object after parsing the input arguments from the user.
+     *
+     * @param commandArgs A String object representing arguments provided by the user.
+     * @return An GroupViewCommand object if all necessary parameters required are found in the input arguments.
+     * @throws InvalidFormatException
+     */
     @Override
     public GroupViewCommand getCommand(String commandArgs) throws InvalidFormatException {
         try {
