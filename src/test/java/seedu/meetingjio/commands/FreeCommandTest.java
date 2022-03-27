@@ -104,6 +104,7 @@ public class FreeCommandTest {
         FreeCommand freeCommand = new FreeCommand("20");
         assertEquals(ERROR_NO_FREE_TIMESLOT, freeCommand.execute(masterTimetable));
     }
+
     /**
      * Test method to ensure that the programme informs user and continues running as intended when the user's input is
      * invalid.
