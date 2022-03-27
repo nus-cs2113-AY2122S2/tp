@@ -45,6 +45,7 @@ public class DoctorList extends List {
                 addDoctorParameters[3].charAt(0), addDoctorParameters[4],addDoctorParameters[5],
                 addDoctorParameters[6]);
         doctors.add(newDoctor);
+        UI.printParagraph("Doctor has been added");
     }
 
     //view particular doctor

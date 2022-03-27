@@ -47,6 +47,7 @@ public class PatientList extends List {
                 addPatientParameters[3].charAt(0), addPatientParameters[4], addPatientParameters[5],
                 addPatientParameters[6]);
         patients.add(newPatient);
+        UI.printParagraph("Patient has been added");
         assert patients.size() == numberOfPatientsBefore + 1;
     }
 

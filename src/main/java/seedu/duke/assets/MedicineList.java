@@ -47,6 +47,7 @@ public class MedicineList extends List {
                 Integer.parseInt(parameterArray[2]), parameterArray[3], parameterArray[4],
                 Integer.parseInt(parameterArray[5]));
         medicines.add(newMedicine);
+        UI.printParagraph("Medicine has been added");
     }
 
     public void find(String[] command) {
