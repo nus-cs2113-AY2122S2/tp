@@ -189,4 +189,54 @@ class SessionTest {
             fail();
         }
     }
+
+    // getPersonListByName()
+
+    @Test
+    void getPersonListByName_singleInvalidName_InvalidDataExceptionThrown() {
+        try {
+            String[] nameList = { "David" };
+            ArrayList<Person> personList = session.getPersonListByName(nameList);
+            fail();
+        } catch (InvalidDataException exception) {
+            assertEquals(Message.ERROR_SESSION_PERSON_NOT_IN_LIST, exception.getMessage());
+        }
+    }
+
+    @Test
+    void getPersonListByName_multipleNamesWithOneInvalidName_InvalidDataExceptionThrown() {
+        try {
+            String[] nameList = { "Alice", "Bob", "David" };
+            ArrayList<Person> personList = session.getPersonListByName(nameList);
+            fail();
+        } catch (InvalidDataException exception) {
+            assertEquals(Message.ERROR_SESSION_PERSON_NOT_IN_LIST, exception.getMessage());
+        }
+    }
+
+    @Test
+    void getPersonListByName_singleValidName_ArrayListReturned() {
+        try {
+            String[] nameList = { "Alice" };
+            ArrayList<Person> personList = session.getPersonListByName(nameList);
+            assertEquals("Alice", personList.get(0).getName());
+        } catch (InvalidDataException exception) {
+            fail();
+        }
+    }
+
+    @Test
+    void getPersonListByName_multipleValidNames_ArrayListReturned() {
+        ArrayList<Person> personList;
+        try {
+            String[] nameList = { "Alice", "Bob", "Charlie" };
+            personList = session.getPersonListByName(nameList);
+            assertEquals(3, personList.size());
+            assertEquals("Alice", personList.get(0).getName());
+            assertEquals("Bob", personList.get(1).getName());
+            assertEquals("Charlie", personList.get(2).getName());
+        } catch (InvalidDataException exception) {
+            fail();
+        }
+    }
 }
