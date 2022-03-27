@@ -9,7 +9,7 @@ import static java.util.stream.Collectors.toList;
  */
 public class HousekeeperList {
     private ArrayList<Housekeeper> housekeeperList;
-    private Ui ui = new Ui();
+    private static final int ONE_HOUSEKEEPER = 1;
 
     public HousekeeperList() {
         ArrayList<Housekeeper> housekeeperList = new ArrayList<>();
@@ -35,7 +35,7 @@ public class HousekeeperList {
         ArrayList<Housekeeper> housekeeperFound = (ArrayList<Housekeeper>) housekeeperList.stream()
                 .filter((t) -> t.getName().toLowerCase().equals(convertNameToLowerCase))
                 .collect(toList());
-        if (housekeeperFound.size() >= 1) {
+        if (housekeeperFound.size() >= ONE_HOUSEKEEPER) {
             return true;
         }
         return false;
@@ -51,6 +51,22 @@ public class HousekeeperList {
 
     public ArrayList<Housekeeper> getHousekeeperList() {
         return housekeeperList;
+    }
+
+    /**
+     * Store a list of Housekeeper valid on day user is querying.
+     *
+     * @param day Input day user is interested to view.
+     * @return List of found housekeeper.
+     */
+    public ArrayList<Housekeeper> getAvailableHousekeeperByDay(int day) {
+        ArrayList<Housekeeper> foundList = new ArrayList<>();
+        for (Housekeeper housekeeper : housekeeperList) {
+            if (housekeeper.isAvailableOn(day)) {
+                foundList.add(housekeeper);
+            }
+        }
+        return foundList;
     }
 
     /**

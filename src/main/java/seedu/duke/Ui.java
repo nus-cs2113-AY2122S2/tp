@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -79,7 +80,52 @@ public class Ui {
         for (int i = 0; i < housekeeperList.getTotalHousekeeper(); i++) {
             System.out.println((i + 1) + ". " + housekeeperList.getHousekeeper(i));
         }
-        System.out.println("======== End of the list ========");
+        printMessage("======== End of the list ========");
+    }
+
+    public void printFoundHousekeeperList(ArrayList<Housekeeper> housekeeperPrintList, int dayInteger) {
+        String day = getDayInString(dayInteger);
+
+        printMessage("======== " + day + " List ========");
+        if (housekeeperPrintList.isEmpty()){
+            printMessage("TAKE NOTE! NO ONE IS AVAILABLE!!");
+        }
+        int i = 1;
+        for (Housekeeper housekeeper : housekeeperPrintList) {
+            System.out.println(i + ". " + housekeeper.getName());
+            i += 1;
+        }
+        printMessage("======== End of the list ========");
+    }
+
+    private String getDayInString(int dayInteger) {
+        String day;
+        switch (dayInteger) {
+        case 1:
+            day = "Monday";
+            break;
+        case 2:
+            day = "Tuesday";
+            break;
+        case 3:
+            day = "Wednesday";
+            break;
+        case 4:
+            day = "Thursday";
+            break;
+        case 5:
+            day = "Friday";
+            break;
+        case 6:
+            day = "Saturday";
+            break;
+        case 7:
+            day = "Sunday";
+            break;
+        default:
+            day = "None of Day";
+        }
+        return day;
     }
 
     /**
