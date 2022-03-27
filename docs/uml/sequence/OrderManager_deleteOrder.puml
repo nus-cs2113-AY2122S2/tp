@@ -5,9 +5,9 @@ autonumber
 hide footbox
 
 actor user
-participant "__:OrderController__" as ordercontroller
-participant "__:OrderManager__" as ordermanager
-participant "__:Order__" as order
+participant ":OrderController" as ordercontroller
+participant ":OrderManager" as ordermanager
+participant ":Order" as order
 
 activate ordercontroller
 activate ordermanager
