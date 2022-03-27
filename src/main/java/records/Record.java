@@ -39,4 +39,9 @@ public abstract class Record {
     public String toString(){
         return name + ", price = " + price + ", date = " + date;
     }
+
+    public String saveRecords() {
+        int isMarked = 0;
+        return "| " + this.name + " | " + this.price + " | " + this.date;
+    }
 }

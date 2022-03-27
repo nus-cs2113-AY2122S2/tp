@@ -28,4 +28,9 @@ public class Product extends Record {
     public String toString(){
         return productType + ": " + super.toString() + "";
     }
+
+    @Override
+    public String saveRecords() {
+        return "P " + super.saveRecords() + " | " + this.productType + System.lineSeparator();
+    }
 }
