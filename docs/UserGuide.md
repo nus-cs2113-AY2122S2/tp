@@ -1,5 +1,7 @@
 # User Guide
 
+-----------------------------------------------
+
 ##Contents
 * [Introduction](#introduction)
     * [Purpose](#purpose)
@@ -11,15 +13,17 @@
   * [Adding](#adding-add)
   * [Viewing](#viewing-view)
   * [Deleting](#deleting-delete)
-  * [Editing]()
-  * [Finding]()
-  * [Saving]()
-    * [Saved Data]()
-    * [Corrupt Files]()
-* [Future Versions]()
-* [Errors]()
+  * [Editing](#editing-edit)
+  * [Finding](#findingfind)
+  * [Saving](#saving)
+    * [Saved Data](#saving)
+    * [Corrupt Files](#corrupt-files)
+* [Future Versions](#future-versions)
+* [Errors](#errors)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
+
+-----------------------------------------------
 
 ## Introduction
 
@@ -42,6 +46,8 @@ Before reading, it is noteworthy to understand some formats and keywords used in
 * Command - Command refers to the text input that you will be providing on the CLI as and when prompted by HALPMI.
 * `Word` - Certain words or sentences in this Guide are often found in this format. These refer to commands that you as a User
 can use in the CLI application.
+
+-----------------------------------------------
 
 ## Quick Start
 
@@ -66,6 +72,9 @@ please head to the respective help links.
 If you are not ready to handle the intricacies of the Command Prompt, you can use the `.bat` file located in our repository
 to launch HALPMI as well. However do note that you will have to change the PATH name included on the bat file to the PATH name
 at which Halpmi.jar is located.
+
+-----------------------------------------------
+
 ## Features
 
 ### Adding: `add`
@@ -174,17 +183,37 @@ Format: `delete medicine /info [Batch ID]`
 
 Example: `delete medicine /info S234`
 
+### Editing: `edit`
+
+### Finding:`find`
+
 #### `find doctor "by parameter"` (to be updated)
 
 #### `find patient "by parameter"` (to be updated)
 
 #### `find medicine "by parameter"` (to be updated)
 
+### Saving
+#### Saved Data
+#### Corrupt Files
+
+-----------------------------------------------
+
+## Future Versions
+
+-----------------------------------------------
+
+## Errors
+
+-----------------------------------------------
+
 ## FAQ
 
 **Question**: How do I transfer my data to another computer?
 
 **Answer**: {your answer here}
+
+-----------------------------------------------
 
 ## Command Summary
 
