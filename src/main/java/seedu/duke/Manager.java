@@ -93,16 +93,19 @@ public class Manager {
             status = command.execute(storage.medicines);
             break;
         case "add appointment":
-            //command.addAppointment(storage.appointments, storage.patients, storage.doctors, parameters);
+            command = Parser.parseAddAppointment(parameters);
+            status = command.execute(storage.appointments);
             break;
-        case "find appointment":
-            //command.findAppointment(storage.appointments, parameters);
+        case "view appointment":
+            command = Parser.parseViewAppointment(parameters);
+            status = command.execute(storage.appointments);
             break;
         case "help":
             status = Status.PRINT_HELP;
             break;
         case "bye":
             status = Status.END_APP;
+            System.out.println("Terminated");
             isTerminated = true;
             break;
         default:
