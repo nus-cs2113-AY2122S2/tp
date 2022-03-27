@@ -224,6 +224,19 @@ public abstract class Message {
     public static final String LOGGER_SESSIONDELETE_SESSION_REMOVED =
             "A session was removed from the list of session with Id: ";
 
+    // Session Edit Command
+    public static final String ERROR_SESSIONEDIT_NO_EDIT_DELIMITERS_FOUND =
+            "No delimiters were found. Please rectify and try again.";
+    public static final String ERROR_SESSIONEDIT_INVALID_PERSONLIST =
+            "The specified person list does not contain all existing persons that was previously "
+                   + "created in the session. Please rectify and try again.";
+    public static final String LOGGER_SESSIONEDIT_SESSION_EDITED =
+            "A session was edited from the list of session with Id: ";
+    public static final String ASSERT_SESSIONEDIT_SESSION_IS_NULL =
+            "The session is null.";
+    public static final String ASSERT_SESSIONEDIT_SESSION_ID_INVALID =
+            "Session ID is less than or equals to zero.";
+
     // Session Summary Command
     public static final String MESSAGE_SESSIONSUMMARY_NO_PAYMENTS_REQUIRED =
             "There are no payments to be made.";
@@ -307,7 +320,6 @@ public abstract class Message {
             "Total cost is less than or equals to zero.";
     public static final String LOGGER_ACTIVITYEDIT_ACTIVITY_EDITED =
             "An Activity object was succesfully edited in the list of activities with Id: ";
-
 
     // Activity Delete Command
     public static final String ASSERT_ACTIVITYDELETE_SESSION_IS_NULL =

@@ -16,6 +16,7 @@ import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
+import seedu.splitlah.parser.commandparser.SessionEditCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 import seedu.splitlah.parser.commandparser.SessionViewCommandParser;
@@ -344,6 +345,8 @@ public class Parser {
                 return new SessionCreateCommandParser().getCommand(remainingArgs);
             case SessionDeleteCommandParser.COMMAND_TEXT:
                 return new SessionDeleteCommandParser().getCommand(remainingArgs);
+            case SessionEditCommandParser.COMMAND_TEXT:
+                return new SessionEditCommandParser().getCommand(remainingArgs);
             case SessionSummaryCommandParser.COMMAND_TEXT:
                 return new SessionSummaryCommandParser().getCommand(remainingArgs);
             case SessionListCommandParser.COMMAND_TEXT:

@@ -9,12 +9,15 @@ import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityEditCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
+import seedu.splitlah.parser.commandparser.SessionEditCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
+import seedu.splitlah.parser.commandparser.SessionViewCommandParser;
 import seedu.splitlah.ui.Message;
 
 import java.time.format.DateTimeFormatter;
@@ -404,6 +407,9 @@ public class ParserUtils {
         case ActivityDeleteCommandParser.COMMAND_TEXT:
             delimiterList = ActivityDeleteCommandParser.COMMAND_DELIMITERS;
             break;
+        case ActivityEditCommandParser.COMMAND_TEXT:
+            delimiterList = ActivityEditCommandParser.COMMAND_DELIMITERS;
+            break;
         case ActivityListCommand.COMMAND_TEXT:
             delimiterList = ActivityListCommand.COMMAND_DELIMITERS;
             break;
@@ -415,6 +421,12 @@ public class ParserUtils {
             break;
         case SessionDeleteCommandParser.COMMAND_TEXT:
             delimiterList = SessionDeleteCommandParser.COMMAND_DELIMITERS;
+            break;
+        case SessionEditCommandParser.COMMAND_TEXT:
+            delimiterList = SessionEditCommandParser.COMMAND_DELIMITERS;
+            break;
+        case SessionViewCommandParser.COMMAND_TEXT:
+            delimiterList = SessionViewCommandParser.COMMAND_DELIMITERS;
             break;
         case SessionSummaryCommandParser.COMMAND_TEXT:
             delimiterList = SessionSummaryCommandParser.COMMAND_DELIMITERS;
@@ -457,13 +469,19 @@ public class ParserUtils {
             // Fallthrough
         case SessionDeleteCommandParser.COMMAND_TEXT:
             // Fallthrough
+        case SessionEditCommandParser.COMMAND_TEXT:
+            // Fallthrough
         case SessionSummaryCommandParser.COMMAND_TEXT:
             // Fallthrough
         case SessionListCommandParser.COMMAND_TEXT:
             // Fallthrough
+        case SessionViewCommandParser.COMMAND_TEXT:
+            // Fallthrough
         case ActivityCreateCommandParser.COMMAND_TEXT:
             // Fallthrough
         case ActivityDeleteCommandParser.COMMAND_TEXT:
+            // Fallthrough
+        case ActivityEditCommandParser.COMMAND_TEXT:
             // Fallthrough
         case ActivityListCommand.COMMAND_TEXT:
             // Fallthrough

@@ -4,6 +4,7 @@ import seedu.splitlah.command.SessionSummaryCommand;
 import seedu.splitlah.command.SessionViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 /**
@@ -16,6 +17,10 @@ public class SessionViewCommandParser implements CommandParser<SessionViewComman
     public static final String COMMAND_TEXT = "session /view";
 
     public static final String COMMAND_FORMAT = "Syntax: session /view /sid [SESSION_ID]";
+
+    public static final String[] COMMAND_DELIMITERS = {
+        ParserUtils.SESSION_ID_DELIMITER
+    };
 
     /**
      * Returns a SessionViewCommand object after parsing the input arguments from the user.

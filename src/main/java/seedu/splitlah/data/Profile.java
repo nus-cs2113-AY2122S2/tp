@@ -101,9 +101,10 @@ public class Profile implements Serializable {
     /**
      * Removes a Session object from the list of sessions.
      *
-     * @param sessionToBeRemoved A Session Object to be deleted.
+     * @param sessionId An integer that uniquely identifies a Session object to be removed.
      */
-    public void removeSession(Session sessionToBeRemoved) {
+    public void removeSession(int sessionId) throws InvalidDataException {
+        Session sessionToBeRemoved = getSession(sessionId);
         sessionList.remove(sessionToBeRemoved);
     }
 
@@ -186,7 +187,7 @@ public class Profile implements Serializable {
     /**
      * Removes a Group object with the specified group unique identifier from the list of groups.
      *
-     * @param groupId An integer that uniquely identifies a Group object.
+     * @param groupId An integer that uniquely identifies a Group object to be removed.
      */
     public void removeGroup(int groupId) throws InvalidDataException {
         Group groupToBeRemoved = getGroup(groupId);

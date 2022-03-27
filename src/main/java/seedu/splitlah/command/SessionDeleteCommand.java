@@ -35,8 +35,7 @@ public class SessionDeleteCommand extends Command {
     @Override
     public void run(Manager manager) {
         try {
-            Session session = manager.getProfile().getSession(sessionId);
-            manager.getProfile().removeSession(session);
+            manager.getProfile().removeSession(sessionId);
             manager.saveProfile();
             manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
