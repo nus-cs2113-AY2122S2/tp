@@ -3,6 +3,7 @@ package seedu.duke.assets;
 import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
+import seedu.duke.helper.command.CommandLineTable;
 
 import java.util.ArrayList;
 
@@ -53,7 +54,16 @@ public class AppointmentList extends List {
 
     @Override
     public void view() {
-        UI.printParagraph(toString());
+        CommandLineTable appointmentTable = new CommandLineTable();
+        appointmentTable.setShowVerticalLines(true);
+        appointmentTable.setHeaders("Appointment Id", "Patient Name","Patient NRIC","Doctor Name","Doctor NRIC",
+                "Appointment Date", "Appointment Details");
+        for (Appointment appointment: appointments) {
+            appointmentTable.addRow(appointment.getAppointmentId(), appointment.getPatientName(),
+                    appointment.getPatientNric(), appointment.getDoctorName(), appointment.getDoctorNric(),
+                    appointment.getAppointmentDate(), appointment.getAppointmentDetails());
+        }
+        appointmentTable.print();
     }
 
     @Override
@@ -112,27 +122,36 @@ public class AppointmentList extends List {
                     + "nric\n"
                     + "Please try again!");
             assert foundAppointments.size() == 0;
-            break;
+            return;
         }
-        UI.printParagraph(toString(foundAppointments));
+        CommandLineTable appointmentTable = new CommandLineTable();
+        appointmentTable.setShowVerticalLines(true);
+        appointmentTable.setHeaders("Appointment Id", "Patient Name","Patient NRIC","Doctor Name","Doctor NRIC",
+                "Appointment Date", "Appointment Details");
+        for (Appointment appointment: foundAppointments) {
+            appointmentTable.addRow(appointment.getAppointmentId(), appointment.getPatientName(),
+                    appointment.getPatientNric(), appointment.getDoctorName(), appointment.getDoctorNric(),
+                    appointment.getAppointmentDate(), appointment.getAppointmentDetails());
+        }
+        appointmentTable.print();
     }
 
-    public String toString(ArrayList<Appointment> appointments) {
-        if (appointments.size() == 0) {
-            return "There are no appointments.";
-        }
-        String appointmentsString = "";
-        int index = 1;
-        for (Appointment appointment : appointments) {
-            appointmentsString += String.format("%d. %s", index, appointment.toString());
-            if (index != appointments.size()) {
-                appointmentsString += "\n";
-            }
-            index++;
-        }
-        assert !appointmentsString.isEmpty();
-        return appointmentsString;
-    }
+//    public String toString(ArrayList<Appointment> appointments) {
+//        if (appointments.size() == 0) {
+//            return "There are no appointments.";
+//        }
+//        String appointmentsString = "";
+//        int index = 1;
+//        for (Appointment appointment : appointments) {
+//            appointmentsString += String.format("%d. %s", index, appointment.toString());
+//            if (index != appointments.size()) {
+//                appointmentsString += "\n";
+//            }
+//            index++;
+//        }
+//        assert !appointmentsString.isEmpty();
+//        return appointmentsString;
+//    }
 
     public void findByNric(String[] parameters) {
         // Intentionally left blank

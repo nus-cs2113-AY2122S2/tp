@@ -147,22 +147,10 @@ public class Parser {
         Validator.validateAddAppointment(addAppointmentParameters);
         return new AddAppointmentCommand(addAppointmentParameters);
     }
-    /*
-    public static Command parseFindPatient(String parameters) throws HalpmiException {
-        String[] findPatientParameters = minParameterCheck(parameters, 2);
-        return new FindPatientCommand(findPatientParameters);
-    }
-
 
     public static Command parseViewAppointment(String parameters) throws HalpmiException {
         String[] viewAppointmentParameters = minParameterCheck(parameters, 2);
         return new ViewAppointmentCommand(viewAppointmentParameters);
-}
-    */
-    public static String[] parseFindAppointment(String parameters) throws HalpmiException {
-        String[] findAppointmentParameters = minParameterCheck(parameters, 2);
-        return findAppointmentParameters;
-
     }
 
     public static Command parseFindDoctor(String parameters) throws HalpmiException {
