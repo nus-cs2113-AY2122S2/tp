@@ -42,6 +42,10 @@ class SessionTest {
 
     // getActivity()
 
+    /**
+     * Checks if an InvalidDataException with the correct message is properly thrown when the getActivity method is
+     * called and no Activity objects exists in the Session object.
+     */
     @Test
     void getActivity_noActivityExists_InvalidDataExceptionThrown() {
         try {
@@ -52,6 +56,10 @@ class SessionTest {
         }
     }
 
+    /**
+     * Checks if an InvalidDataException with the correct message is properly thrown when the getActivity method is
+     * called and no Activity objects with the specified activity unique identifier exists in the Session object.
+     */
     @Test
     void getActivity_activityWithSpecifiedIdDoesNotExist_InvalidDataExceptionThrown() {
         Command createActivityCommand = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_ONE);
@@ -65,6 +73,10 @@ class SessionTest {
         }
     }
 
+    /**
+     * Checks if an Activity object is correctly returned when the getActivity method is
+     * called and an Activity with the specified activity unique identifier exists in the Session object.
+     */
     @Test
     void getActivity_activityExists_ActivityObjectReturned() {
         Command createActivityCommand = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_ONE);
