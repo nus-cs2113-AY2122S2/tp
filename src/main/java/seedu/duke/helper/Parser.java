@@ -1,27 +1,7 @@
 package seedu.duke.helper;
 
 import seedu.duke.exception.HalpmiException;
-import seedu.duke.helper.command.AddAppointmentCommand;
-import seedu.duke.helper.command.AddDoctorCommand;
-import seedu.duke.helper.command.AddMedicineCommand;
-import seedu.duke.helper.command.AddPatientCommand;
-import seedu.duke.helper.command.ClearExpiredMedicineCommand;
-import seedu.duke.helper.command.Command;
-import seedu.duke.helper.command.DeleteDoctorCommand;
-import seedu.duke.helper.command.DeleteMedicineCommand;
-import seedu.duke.helper.command.DeletePatientCommand;
-import seedu.duke.helper.command.EditMedicineCommand;
-import seedu.duke.helper.command.UpdateMedicineInventoryCommand;
-import seedu.duke.helper.command.EditDoctorCommand;
-import seedu.duke.helper.command.EditPatientCommand;
-import seedu.duke.helper.command.ViewAppointmentCommand;
-import seedu.duke.helper.command.ViewDoctorCommand;
-import seedu.duke.helper.command.ViewMedicineCommand;
-import seedu.duke.helper.command.ViewPatientCommand;
-import seedu.duke.helper.command.FindDoctorCommand;
-import seedu.duke.helper.command.FindMedicineCommand;
-import seedu.duke.helper.command.FindPatientCommand;
-
+import seedu.duke.helper.command.*;
 
 
 public class Parser {
@@ -172,5 +152,10 @@ public class Parser {
         String[] findMedicineParameters = minParameterCheck(parameters, 2);
         Validator.validateFindMedicine(findMedicineParameters);
         return new FindMedicineCommand(findMedicineParameters);
+    }
+
+    public static Command parseDeleteAppointment(String parameters) throws HalpmiException {
+        String[] deleteAppointmentParameters = minParameterCheck(parameters, 1);
+        return new DeleteAppointmentCommand(deleteAppointmentParameters);
     }
 }

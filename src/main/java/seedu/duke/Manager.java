@@ -108,6 +108,10 @@ public class Manager {
             command = Parser.parseViewAppointment(parameters);
             status = command.execute(storage.appointments);
             break;
+        case "delete appointment":
+            command = Parser.parseDeleteAppointment(parameters);
+            status = command.execute(storage.appointments);
+            break;
         case "find doctor":
             command = Parser.parseFindDoctor(parameters);
             status = command.execute(storage.doctors);
