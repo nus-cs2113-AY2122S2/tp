@@ -180,8 +180,8 @@ public class DoctorList extends List {
                         returnedFinderArray.get(i).getSpecialization());
             }
             findPatientTable.print();
-            }
         }
+    }
 
 
     public void findByDateAdmission(String[] parameters) {

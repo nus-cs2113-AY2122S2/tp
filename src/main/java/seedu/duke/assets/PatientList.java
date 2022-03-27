@@ -201,8 +201,8 @@ public class PatientList extends List {
                         returnedFinderArray.get(i).getDateAdmission());
             }
             findPatientTable.print();
-            }
         }
+    }
 
     public void findById(String[] parameters) {
         // Intentionally left blank

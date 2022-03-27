@@ -128,7 +128,7 @@ public class Validator {
     /* Validate medicine attributes */
     private static boolean validateMedicineName(String medicineName) throws HalpmiException {
         boolean isValid = medicineName.matches("[a-zA-z]+");
-        if(!isValid){
+        if (!isValid) {
             throw new HalpmiException("Invalid Medicine name");
         }
         return true;
@@ -144,7 +144,7 @@ public class Validator {
         }
     }
 
-    private static boolean validateExpiry(String expiry) throws HalpmiException{
+    private static boolean validateExpiry(String expiry) throws HalpmiException {
         try {
             LocalDate expiryDate = LocalDate.parse(expiry);
             LocalDate minimumDate = LocalDate.now();
@@ -157,7 +157,7 @@ public class Validator {
         }
     }
 
-    private static boolean validateQuantity(String quantity) throws HalpmiException{
+    private static boolean validateQuantity(String quantity) throws HalpmiException {
         try {
             int quantityInt = Integer.parseInt(quantity);
             return quantityInt > 0;
@@ -165,20 +165,12 @@ public class Validator {
             throw new HalpmiException("Invalid Medicine Quantity");
         }
     }
+
     private static void validateMedicineId(String medicineId) throws HalpmiException {
         Pattern fullNamePattern = Pattern.compile("[A-Z][0-9][3}]");
         Matcher fullNameMatcher = fullNamePattern.matcher(medicineId);
         if (!fullNameMatcher.matches()) {
             throw new HalpmiException("Medicine must contain only alphabets and Numbers.");
-        }
-    }
-
-    private static boolean validateDate(String expiry) throws HalpmiException{
-        try {
-            LocalDate expiryDate = LocalDate.parse(expiry);
-            return true;
-        } catch (DateTimeParseException dateTimeParseException) {
-            throw new HalpmiException("Invalid Medicine Expiry");
         }
     }
 
@@ -243,6 +235,15 @@ public class Validator {
         if (!isTrue) {
             throw new HalpmiException("Date must be in YYYY-MM-DD format. "
                     + "It cannot be before 1900-01-01 or be today and after.");
+        }
+    }
+
+    private static boolean validateDate(String expiry) throws HalpmiException {
+        try {
+            LocalDate expiryDate = LocalDate.parse(expiry);
+            return true;
+        } catch (DateTimeParseException dateTimeParseException) {
+            throw new HalpmiException("Invalid Medicine Expiry");
         }
     }
 
@@ -316,22 +317,22 @@ public class Validator {
         boolean check = true;
         switch (parameters[0]) {
 
-            case "name":
-                check = validateMedicineName(parameters[1]);
-                break;
-            case "dosage":
-                check = check && validateDosage(parameters[1]);
-                break;
-            case "expiry":
-                check = check && validateDate(parameters[1]);
-                break;
-            case "quantity":
-                check = check && validateQuantity(parameters[1]);
-                break;
-            case "id":
-            case "side effects":
-            default:
-                break;
-            }
+        case "name":
+            check = validateMedicineName(parameters[1]);
+            break;
+        case "dosage":
+            check = check && validateDosage(parameters[1]);
+            break;
+        case "expiry":
+            check = check && validateDate(parameters[1]);
+            break;
+        case "quantity":
+            check = check && validateQuantity(parameters[1]);
+            break;
+        case "id":
+        case "side effects":
+        default:
+            break;
+        }
     }
 }
