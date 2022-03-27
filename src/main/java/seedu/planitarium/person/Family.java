@@ -32,7 +32,7 @@ public class Family {
      * @param group The index of the group to return
      * @return The array list specified by the group index
      */
-    private PersonList getList(int group) {
+    public PersonList getList(int group) {
         String infoString = "Entering getList()";
         logger.log(Level.INFO, infoString);
         assert (group >= Constants.SINGULAR);
