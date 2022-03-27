@@ -18,11 +18,9 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = "Add: Adds a task into the task list.\n"
             + "Usage: add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME /repeat FREQUENCY\n"
             + "       add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME [/by DEADLINE]\n\n"
-            + "DATE must be given in the format: d/M/yyyy, where\n"
-            + "year is in 4 digits, month and day in one or two digits.\n"
-            + "TIME must be given in the format: HH:mm.\n"
-            + "FREQUENCY can either be daily, weekly, or a monthly repeat of the task.\n"
-            + "DEADLINE is in the format d/M/yyyy [TIME_TO_COMPLETE_BY]";
+            + "DATE & DEADLINE format: d/M/yyyy\n"
+            + "START_TIME & END_TIME format: HH:mm\n"
+            + "FREQUENCY: daily, weekly, or monthly";
 
     private String taskDescription;
     private LocalDateTime doOnStartDateTime;
