@@ -4,18 +4,21 @@ package seedu.duke.assets;
 import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
+import seedu.duke.helper.finder.MedicineFinder;
 
 import java.util.ArrayList;
 
 public class MedicineList extends List {
+
     private ArrayList<Medicine> medicines = new ArrayList<>();
+    private ArrayList<Medicine> returnedFinderArray = new ArrayList<>();
 
     public int getSize() {
         return medicines.size();
     }
 
     public Medicine search(String medicineId) {
-        for (Medicine medicine: medicines) {
+        for (Medicine medicine : medicines) {
             if (medicine.getMedicineId().equals(medicineId)) {
                 return medicine;
             }
@@ -95,4 +98,59 @@ public class MedicineList extends List {
     public ArrayList<Medicine> getList() {
         return medicines;
     }
+
+    public void findById(String[] parameters) {
+        this.returnedFinderArray = MedicineFinder.findMedicineById(medicines, parameters[1]);
+    }
+
+    public void findByDosage(String[] parameters) {
+        this.returnedFinderArray = MedicineFinder.findMedicineByDosage(medicines, Integer.parseInt(parameters[1]));
+    }
+
+    public void findByExpiry(String[] parameters) {
+        this.returnedFinderArray = MedicineFinder.findMedicineByExpiry(medicines, parameters[1]);
+    }
+
+    public void findBySideEffects(String[] parameters) {
+        this.returnedFinderArray = MedicineFinder.findMedicineBySideEffects(medicines, parameters[1]);
+    }
+
+    public void findByQuantity(String[] parameters) {
+        this.returnedFinderArray = MedicineFinder.findMedicineByQuantity(medicines, Integer.parseInt(parameters[1]));
+    }
+
+    public void findByName(String[] parameters) {
+        this.returnedFinderArray = MedicineFinder.findMedicineByName(medicines, parameters[1]);
+    }
+
+    public void findByNric(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByAge(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByGender(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByAddress(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByDob(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findBySpecialization(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByDateAdmission(String[] parameters) {
+        // Intentionally left blank
+    }
+
 }
+
+

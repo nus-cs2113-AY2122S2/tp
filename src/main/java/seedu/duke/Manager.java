@@ -3,10 +3,10 @@ package seedu.duke;
 import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
-import seedu.duke.helper.command.Command;
 import seedu.duke.helper.Parser;
 import seedu.duke.helper.Storage;
 import seedu.duke.helper.UI;
+import seedu.duke.helper.command.Command;
 import seedu.duke.status.Status;
 
 /**
@@ -28,7 +28,7 @@ public class Manager {
             String parameters = ui.readParameters();
             Status status = null;
             try {
-                status = executeCommand(commandWord,parameters);
+                status = executeCommand(commandWord, parameters);
             } catch (HalpmiException | NotFoundException | DuplicateEntryException e) {
                 ui.printParagraph(e.toString());
             }
@@ -89,6 +89,18 @@ public class Manager {
         case "view appointment":
             command = Parser.parseViewAppointment(parameters);
             status = command.execute(storage.appointments);
+            break;
+        case "find doctor":
+            command = Parser.parseFindDoctor(parameters);
+            status = command.execute(storage.doctors);
+            break;
+        case "find patient":
+            command = Parser.parseFindPatient(parameters);
+            status = command.execute(storage.patients);
+            break;
+        case "find medicine":
+            command = Parser.parseFindMedicine(parameters);
+            status = command.execute(storage.medicines);
             break;
         case "help":
             status = Status.PRINT_HELP;

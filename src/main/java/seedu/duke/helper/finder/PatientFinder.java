@@ -1,79 +1,87 @@
 package seedu.duke.helper.finder;
 
 import seedu.duke.assets.Patient;
-import seedu.duke.assets.PatientList;
+
+import java.util.ArrayList;
 
 public class PatientFinder {
 
-    public static Patient findPatientByNric(PatientList patientLists, String requiredNric) {
-        for (Patient patient : patientLists.getList()) {
+    public static ArrayList<Patient> findPatientByNric(ArrayList<Patient> patients, String requiredNric) {
+        ArrayList<Patient> patientArrayList = new ArrayList<>();
+        for (Patient patient : patients) {
             if (patient.getNric().equals(requiredNric)) {
-                System.out.println("Index of NRIC in list base 0 = " + patientLists.getList().indexOf(patient));
-                return patient;
+                patientArrayList.add(patient);
             }
         }
-        return null;
+        return getPatients(patientArrayList);
     }
 
-    public static Patient findPatientByName(PatientList patientLists, String requiredName) {
-        for (Patient patient : patientLists.getList()) {
+    public static ArrayList<Patient> findPatientByName(ArrayList<Patient> patients, String requiredName) {
+        ArrayList<Patient> patientArrayList = new ArrayList<>();
+        for (Patient patient : patients) {
             if (patient.getFullName().contains(requiredName)) {
-                System.out.println("Index of name in list base 0 = " + patientLists.getList().indexOf(patient));
-                return patient;
+                patientArrayList.add(patient);
             }
         }
-        return null;
+        return getPatients(patientArrayList);
     }
 
-    public static Patient findPatientByAge(PatientList patientLists, int requiredAge) {
-        for (Patient patient : patientLists.getList()) {
+    public static ArrayList<Patient> findPatientByAge(ArrayList<Patient> patients, int requiredAge) {
+        ArrayList<Patient> patientArrayList = new ArrayList<>();
+        for (Patient patient : patients) {
             if (patient.getAge() == requiredAge) {
-                System.out.println("Index of age in list base 0 = " + patientLists.getList().indexOf(patient));
-                return patient;
+                patientArrayList.add(patient);
             }
         }
-        return null;
+        return getPatients(patientArrayList);
     }
 
-    public static Patient findPatientByGender(PatientList patientLists, char requiredGender) {
-        for (Patient patient : patientLists.getList()) {
+    public static ArrayList<Patient> findPatientByGender(ArrayList<Patient> patients, char requiredGender) {
+        ArrayList<Patient> patientArrayList = new ArrayList<>();
+        for (Patient patient : patients) {
             if (patient.getGender() == requiredGender) {
-                System.out.println("Index of Gender in list base 0 = " + patientLists.getList().indexOf(patient));
-                return patient;
+                patientArrayList.add(patient);
             }
         }
-        return null;
+        return getPatients(patientArrayList);
     }
 
-    public static Patient findPatientByAddress(PatientList patientLists, String requiredAddress) {
-        for (Patient patient : patientLists.getList()) {
+    public static ArrayList<Patient> findPatientByAddress(ArrayList<Patient> patients, String requiredAddress) {
+        ArrayList<Patient> patientArrayList = new ArrayList<>();
+        for (Patient patient : patients) {
             if (patient.getAddress().contains(requiredAddress)) {
-                System.out.println("Index of Address in list base 0 = " + patientLists.getList().indexOf(patient));
-                return patient;
+                patientArrayList.add(patient);
             }
         }
-        return null;
+        return getPatients(patientArrayList);
     }
 
-    public static Patient findPatientByDob(PatientList patientLists, String requiredDob) {
-        for (Patient patient : patientLists.getList()) {
+    public static ArrayList<Patient> findPatientByDob(ArrayList<Patient> patients, String requiredDob) {
+        ArrayList<Patient> patientArrayList = new ArrayList<>();
+        for (Patient patient : patients) {
             if (patient.getDob().contains(requiredDob)) {
-                System.out.println("Index of DOB in list base 0 = " + patientLists.getList().indexOf(patient));
-                return patient;
+                patientArrayList.add(patient);
             }
         }
-        return null;
+        return getPatients(patientArrayList);
     }
 
-    public static Patient findPatientByDateAdmission(PatientList patientLists, String requiredDob) {
-        for (Patient patient : patientLists.getList()) {
+    public static ArrayList<Patient> findPatientByDateAdmission(ArrayList<Patient> patients, String requiredDob) {
+        ArrayList<Patient> patientArrayList = new ArrayList<>();
+        for (Patient patient : patients) {
             if (patient.getDateAdmission().contains(requiredDob)) {
-                System.out.println("Index of Date Admission in list base 0 = "
-                        + patientLists.getList().indexOf(patient));
-                return patient;
+                patientArrayList.add(patient);
             }
         }
-        return null;
+        return getPatients(patientArrayList);
+    }
+
+    private static ArrayList<Patient> getPatients(ArrayList<Patient> patientArrayList) {
+        if (patientArrayList.isEmpty()) {
+            return null;
+        } else {
+            return patientArrayList;
+        }
     }
 
 }

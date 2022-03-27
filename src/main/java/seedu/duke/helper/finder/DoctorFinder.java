@@ -1,79 +1,90 @@
 package seedu.duke.helper.finder;
 
 import seedu.duke.assets.Doctor;
-import seedu.duke.assets.DoctorList;
+
+import java.util.ArrayList;
 
 public class DoctorFinder {
 
-    public static Doctor findDoctorByNric(DoctorList doctorLists, String requiredNric) {
-        for (Doctor doctor : doctorLists.getList()) {
+    public static ArrayList<Doctor> findDoctorByNric(ArrayList<Doctor> doctors, String requiredNric) {
+        ArrayList<Doctor> doctorArrayList = new ArrayList<>();
+        for (Doctor doctor : doctors) {
             if (doctor.getNric().equals(requiredNric)) {
-                System.out.println("Index of NRIC in list base 0 = " + doctorLists.getList().indexOf(doctor));
-                return doctor;
+                doctorArrayList.add(doctor);
             }
         }
-        return null;
+        return getDoctors(doctorArrayList);
     }
 
-    public static Doctor findDoctorByName(DoctorList doctorLists, String requiredName) {
-        for (Doctor doctor : doctorLists.getList()) {
+    public static ArrayList<Doctor> findDoctorByName(ArrayList<Doctor> doctors, String requiredName) {
+        ArrayList<Doctor> doctorArrayList = new ArrayList<>();
+        for (Doctor doctor : doctors) {
             if (doctor.getFullName().contains(requiredName)) {
-                System.out.println("Index of name in list base 0 = " + doctorLists.getList().indexOf(doctor));
-                return doctor;
+                doctorArrayList.add(doctor);
             }
         }
-        return null;
+        return getDoctors(doctorArrayList);
     }
 
-    public static Doctor findDoctorByAge(DoctorList doctorLists, int requiredAge) {
-        for (Doctor doctor : doctorLists.getList()) {
+    public static ArrayList<Doctor> findDoctorByAge(ArrayList<Doctor> doctors, int requiredAge) {
+        ArrayList<Doctor> doctorArrayList = new ArrayList<>();
+        for (Doctor doctor : doctors) {
             if (doctor.getAge() == requiredAge) {
-                System.out.println("Index of age in list base 0 = " + doctorLists.getList().indexOf(doctor));
-                return doctor;
+                doctorArrayList.add(doctor);
             }
         }
-        return null;
+        return getDoctors(doctorArrayList);
     }
 
-    public static Doctor findDoctorByGender(DoctorList doctorLists, char requiredGender) {
-        for (Doctor doctor : doctorLists.getList()) {
+    public static ArrayList<Doctor> findDoctorByGender(ArrayList<Doctor> doctors, char requiredGender) {
+        ArrayList<Doctor> doctorArrayList = new ArrayList<>();
+        for (Doctor doctor : doctors) {
             if (doctor.getGender() == requiredGender) {
-                System.out.println("Index of Gender in list base 0 = " + doctorLists.getList().indexOf(doctor));
-                return doctor;
+                doctorArrayList.add(doctor);
             }
         }
-        return null;
+        return getDoctors(doctorArrayList);
     }
 
-    public static Doctor findDoctorByAddress(DoctorList doctorLists, String requiredAddress) {
-        for (Doctor doctor : doctorLists.getList()) {
+    public static ArrayList<Doctor> findDoctorByAddress(ArrayList<Doctor> doctors, String requiredAddress) {
+        ArrayList<Doctor> doctorArrayList = new ArrayList<>();
+        for (Doctor doctor : doctors) {
             if (doctor.getAddress().contains(requiredAddress)) {
-                System.out.println("Index of Address in list base 0 = " + doctorLists.getList().indexOf(doctor));
-                return doctor;
+                doctorArrayList.add(doctor);
             }
         }
-        return null;
+        return getDoctors(doctorArrayList);
     }
 
-    public static Doctor findDoctorByDob(DoctorList doctorLists, String requiredDob) {
-        for (Doctor doctor : doctorLists.getList()) {
+    public static ArrayList<Doctor> findDoctorByDob(ArrayList<Doctor> doctors, String requiredDob) {
+        ArrayList<Doctor> doctorArrayList = new ArrayList<>();
+        for (Doctor doctor : doctors) {
             if (doctor.getDob().contains(requiredDob)) {
-                System.out.println("Index of DOB in list base 0 = " + doctorLists.getList().indexOf(doctor));
-                return doctor;
+                doctorArrayList.add(doctor);
             }
         }
-        return null;
+        return getDoctors(doctorArrayList);
     }
 
-    public static Doctor findDoctorBySpecialization(DoctorList doctorLists, String requiredSpecialization) {
-        for (Doctor doctor : doctorLists.getList()) {
+    public static ArrayList<Doctor> findDoctorBySpecialization(ArrayList<Doctor> doctors,
+                                                               String requiredSpecialization) {
+        ArrayList<Doctor> doctorArrayList = new ArrayList<>();
+        for (Doctor doctor : doctors) {
             if (doctor.getSpecialization().contains(requiredSpecialization)) {
-                System.out.println("Index of Specialization in list base 0 = "
-                        + doctorLists.getList().indexOf(doctor));
-                return doctor;
+                doctorArrayList.add(doctor);
             }
         }
-        return null;
+        return getDoctors(doctorArrayList);
+    }
+
+    private static ArrayList<Doctor> getDoctors(ArrayList<Doctor> doctorArrayList) {
+        if (doctorArrayList.isEmpty()) {
+            return null;
+        } else {
+            return doctorArrayList;
+        }
     }
 
 }
+
+

@@ -118,6 +118,58 @@ public class AppointmentList extends List {
         }
         return appointmentsString;
     }
+
+    public void findByNric(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByName(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByAge(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByGender(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByAddress(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByDob(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findBySpecialization(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByDateAdmission(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findById(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByDosage(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByExpiry(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findBySideEffects(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByQuantity(String[] parameters) {
+        // Intentionally left blank
+    }
 }
 
 
