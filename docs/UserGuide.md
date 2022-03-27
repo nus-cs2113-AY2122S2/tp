@@ -73,9 +73,10 @@ contains two types of formatting.
 | Format         | Parameters                                                                                                                               |
 |----------------|------------------------------------------------------------------------------------------------------------------------------------------|
 | `<condition>`  | Contents enclosed between "<>" are the parameters needed for the command to be valid. <br /> Not all commands have conditions to be met. |
-| `/commandType` | Content after "/" is to classify the command type. <br/> Such as classifying it to be a workout/ plan/ schedule/ search command          |
+| `/commandType` | Content after "/" is to classify the command type. <br/> Such as classifying it to be a workout / plan / schedule / search command       |
 
-> :exclamation: **Heads up!** Your inputs cannot contain the pipe character `|`!
+**_Heads Up!_**<br/>
+_Your inputs cannot contain the pipe character `|`!_
 
 ---
 ## Exercise And Workout Features
