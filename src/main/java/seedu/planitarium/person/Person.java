@@ -40,6 +40,24 @@ public class Person {
     }
 
     /**
+     * Returns the list of incomes.
+     *
+     * @return The person's list of incomes
+     */
+    public IncomeList getIncomeList() {
+        return incomeList;
+    }
+
+    /**
+     * Returns the list of expenditures.
+     *
+     * @return The person's list of expenditures
+     */
+    public ExpenditureList getExpenditureList() {
+        return expenditureList;
+    }
+
+    /**
      * Adds an income to the list of incomes.
      *
      * @param description The source of the income
