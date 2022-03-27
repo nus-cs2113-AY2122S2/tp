@@ -101,8 +101,7 @@ public class CommandParser {
             userCommand = new GetAvailableHousekeeper(commandStringWithoutCommand);
         } else if (commandString.startsWith(RESET_AVAILABILITY)) {
             userCommand = new ResetAvailabilityCommand();
-        }
-        else if (commandString.startsWith(DELETE_PROFILE)) {
+        } else if (commandString.startsWith(DELETE_PROFILE)) {
             commandStringWithoutCommand = commandString.replace(DELETE_PROFILE, "");
             userCommand = new DeleteHousekeeperCommand(commandStringWithoutCommand);
         } else {
