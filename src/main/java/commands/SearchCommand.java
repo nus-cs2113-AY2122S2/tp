@@ -276,6 +276,8 @@ public class SearchCommand extends Command {
     /**
      * Prints all the matching exercises if there exist at least one matching exercise, prints
      * "Sorry, no matching exercise found." if no matching exercise could be found.
+     *
+     * @throws InvalidCommandException If the action specified by the user is invalid.
      */
     public void searchExercise() throws InvalidCommandException {
         ArrayList<String> exerciseListToSearch = exerciseList.getExerciseList();
@@ -314,6 +316,8 @@ public class SearchCommand extends Command {
     /**
      * Prints all the matching plans if there exist at least one matching plan, prints
      * "Sorry, no matching plan found." if no matching plan could be found.
+     *
+     * @throws InvalidCommandException If the action specified by the user is invalid.
      */
     public void searchPlan() throws InvalidCommandException {
         var planListToSearch = planList.getPlansDisplayList();
@@ -358,6 +362,8 @@ public class SearchCommand extends Command {
     /**
      * Prints all the matching workouts if there exist at least one matching workout, prints
      * "Sorry, no matching workout found." if no matching workout could be found.
+     *
+     * @throws InvalidCommandException If the action specified by the user is invalid.
      */
     public void searchWorkout() throws InvalidCommandException {
         var workoutListToSearch = workoutList.getWorkoutsDisplayList();

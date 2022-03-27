@@ -57,6 +57,8 @@ public class Parser {
      * @param ui           An instance of the UI class.
      * @param exerciseList An instance of the ExerciseList class.
      * @param workoutList  An instance of the WorkoutList class.
+     * @param planList An instance of the PlanList class.
+     * @param dayList An instance of the DayList class.
      * @param fileManager  An instance of the FileManager class.
      */
     public Parser(UI ui, ExerciseList exerciseList, WorkoutList workoutList,
