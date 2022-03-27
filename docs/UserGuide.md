@@ -37,6 +37,15 @@ Example of usage:
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
+| Command | Syntax |
+| --- | ----------- |
+| packages | packages |
+| info | info {num} |
+| add | add {package_name} {country} {duration} {price} {vacancies} |
+| delete | delete {num} |
+| reserve  | reserve {package_number} {contact_name} {contact_number} {number_pax} |
+| remove | remove {reservation_id} |
+| reservations | reservations {package_number} |
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+
+
