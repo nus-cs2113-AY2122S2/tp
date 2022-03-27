@@ -18,14 +18,6 @@ import java.util.logging.Level;
  */
 public class GroupViewCommand extends Command {
 
-    public static final String COMMAND_TEXT = "group /view";
-
-    public static final String COMMAND_FORMAT = "Syntax: group /view /gid [GROUP_ID]";
-
-    public static final String[] COMMAND_DELIMITERS = {
-        ParserUtils.GROUP_ID_DELIMITER
-    };
-
     private int groupId;
 
     /**
