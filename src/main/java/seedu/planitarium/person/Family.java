@@ -35,8 +35,8 @@ public class Family {
     private PersonList getList(int group) {
         String infoString = "Entering getList()";
         logger.log(Level.INFO, infoString);
-        assert (group >= 1);
-        assert (group <= 3);
+        assert (group >= Constants.SINGULAR);
+        assert (group <= Constants.NUM_GROUPS);
         infoString = "Index assertions passed in getList()";
         logger.log(Level.INFO, infoString);
         PersonList toReturn = null;
@@ -65,8 +65,8 @@ public class Family {
     private String getGenerationName(int group) {
         String infoString = "Entering getGenerationName()";
         logger.log(Level.INFO, infoString);
-        assert (group >= 1);
-        assert (group <= 3);
+        assert (group >= Constants.SINGULAR);
+        assert (group <= Constants.NUM_GROUPS);
         infoString = "Index assertions passed in getGenerationName()";
         logger.log(Level.INFO, infoString);
         String toReturn = null;
