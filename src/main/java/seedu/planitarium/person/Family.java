@@ -91,11 +91,12 @@ public class Family {
      *
      * @param name The name of the person to be added
      * @param group The index of the group to add to
+     * @param isSilent Whether to print confirmation
      */
-    public void addPerson(String name, int group) {
+    public void addPerson(String name, int group, boolean isSilent) {
         String infoString = "Method addPerson() called";
         logger.log(Level.INFO, infoString);
-        getList(group).addPerson(name, Constants.FOR_USER);
+        getList(group).addPerson(name, isSilent);
     }
 
     /**
@@ -118,11 +119,13 @@ public class Family {
      * @param description The source of the income
      * @param amount The value of the income
      * @param isPermanent Whether the income is recurring
+     * @param isSilent Whether to print confirmation
      */
-    public void addIncome(int personIndex, int group, String description, double amount, boolean isPermanent) {
+    public void addIncome(int personIndex, int group, String description, double amount, boolean isPermanent,
+                          boolean isSilent) {
         String infoString = "Method addIncome() called";
         logger.log(Level.INFO, infoString);
-        getList(group).addIncome(personIndex, description, amount, isPermanent);
+        getList(group).addIncome(personIndex, description, amount, isPermanent, isSilent);
     }
 
     /**
@@ -147,9 +150,10 @@ public class Family {
      * @param amount The value of the expenditure
      * @param isPermanent Whether the expenditure is recurring
      * @param category The category of the expenditure
+     * @param isSilent Whether to print confirmation
      */
     public void addExpend(int personIndex, int group, String description, double amount, boolean isPermanent,
-                          Category category) {
+                          Category category, boolean isSilent) {
         String infoString = "Method addExpend() called";
         logger.log(Level.INFO, infoString);
         getList(group).addExpend(personIndex, description, amount, isPermanent, category);
