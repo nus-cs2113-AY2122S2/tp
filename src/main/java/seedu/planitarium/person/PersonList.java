@@ -36,6 +36,15 @@ public class PersonList {
         return personList;
     }
 
+    public int getListIndex(int personIndex) {
+        String infoString = "Entering getListIndex()";
+        logger.log(Level.INFO, infoString);
+        assert (personIndex >= SINGULAR);
+        assert (personIndex <= numberOfMembers);
+        infoString = "Index assertions passed in getListIndex()";
+        return personIndex - 1;
+    }
+
     /**
      * Returns the person specified by the given index.
      *
@@ -43,13 +52,9 @@ public class PersonList {
      * @return The person with the index
      */
     public Person getPerson(int personIndex) {
-        String infoString = "Entering getPerson()";
+        String infoString = "Method getPerson() called";
         logger.log(Level.INFO, infoString);
-        assert (personIndex >= SINGULAR);
-        assert (personIndex <= numberOfMembers);
-        infoString = "Index assertions passed in getPerson()";
-        logger.log(Level.INFO, infoString);
-        int listIndex = personIndex - 1;
+        int listIndex = getListIndex(personIndex);
         return personList.get(listIndex);
     }
 
@@ -91,14 +96,10 @@ public class PersonList {
      * @param personIndex The index of the person to be removed
      */
     public void deletePerson(int personIndex) {
-        String infoString = "Entering removePerson()";
+        String infoString = "Method deletePerson() called";
         logger.log(Level.INFO, infoString);
-        assert (personIndex >= SINGULAR);
-        assert (personIndex <= numberOfMembers);
-        infoString = "Index assertions passed in removePerson()";
-        logger.log(Level.INFO, infoString);
-        int listIndex = personIndex - 1;
-        String name = personList.get(listIndex).getName();
+        String name = getPerson(personIndex).getName();
+        int listIndex = getListIndex(personIndex);
         personList.remove(listIndex);
         numberOfMembers--;
         System.out.println(name + " has been successfully removed");
@@ -113,7 +114,7 @@ public class PersonList {
         String infoString = "Method getRemain() called";
         logger.log(Level.INFO, infoString);
         double sum = 0;
-        for (Person person: this.getPersonList()) {
+        for (Person person: getPersonList()) {
             sum += person.getDisposable();
         }
         return sum;
@@ -123,7 +124,7 @@ public class PersonList {
         String infoString = "Method getTotalIncome() called";
         logger.log(Level.INFO, infoString);
         double sum = 0;
-        for (Person person: this.getPersonList()) {
+        for (Person person: getPersonList()) {
             sum += person.getTotalIncome();
         }
         return sum;
@@ -133,7 +134,7 @@ public class PersonList {
         String infoString = "Method getTotalExpend() called";
         logger.log(Level.INFO, infoString);
         double sum = 0;
-        for (Person person: this.getPersonList()) {
+        for (Person person: getPersonList()) {
             sum += person.getTotalExpenditure();
         }
         return sum;
@@ -145,9 +146,9 @@ public class PersonList {
     public void list() {
         String infoString = "Method list() called";
         logger.log(Level.INFO, infoString);
-        for (int i = 0; i < numberOfMembers; i++) {
-            Person person = personList.get(i);
-            System.out.println((i + 1) + ". " + person.getName());
+        for (int i = 1; i <= numberOfMembers; i++) {
+            Person person = getPerson(i);
+            System.out.println(i + ". " + person.getName());
             person.listIncome();
             person.listExpenditure();
         }
@@ -213,14 +214,9 @@ public class PersonList {
      * @return The number of incomes of the person
      */
     public int getNumberOfIncomes(int personIndex) {
-        String infoString = "Entering getNumberOfIncomes()";
+        String infoString = "Method getNumberOfIncomes() called";
         logger.log(Level.INFO, infoString);
-        assert (personIndex >= SINGULAR);
-        assert (personIndex <= numberOfMembers);
-        infoString = "Index assertions passed in getNumberOfIncomes()";
-        logger.log(Level.INFO, infoString);
-        int listIndex = personIndex - 1;
-        return personList.get(listIndex).getNumberOfIncomes();
+        return getPerson(personIndex).getNumberOfIncomes();
     }
 
     /**
@@ -230,11 +226,10 @@ public class PersonList {
      * @return The number of incomes of the person
      */
     public int getNumberOfExpenditures(int personIndex) {
-        String infoString = "Entering getNumberOfExpenditures()";
+        String infoString = "Method deleteIncome() called";
         logger.log(Level.INFO, infoString);
-        assert (personIndex >= SINGULAR);
-        assert (personIndex <= numberOfMembers);
-        infoString = "Index assertions passed in getNumberOfExpenditures()";
+        return getPerson(personIndex).getNumberOfExpenditures();
+    }
         logger.log(Level.INFO, infoString);
         int listIndex = personIndex - 1;
         return personList.get(listIndex).getNumberOfExpenditures();
