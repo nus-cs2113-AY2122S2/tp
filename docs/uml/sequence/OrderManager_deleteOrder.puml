@@ -1,7 +1,30 @@
 @startuml
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+'https://plantuml.com/sequence-diagram
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+autonumber
+hide footbox
+
+actor user
+participant "__:OrderController__" as ordercontroller
+participant "__:OrderManager__" as ordermanager
+participant "__:Order__" as order
+
+activate ordercontroller
+activate ordermanager
+activate order
+user -> ordercontroller: deleteOrder()
+
+ordercontroller -> ordermanager: deleteOrder(int orderIdx)
+
+
+ordermanager -> ordermanager: getOrderCount()
+
+opt orderIdx >= number of existing orders
+ordermanager --> ordercontroller : IndexOutOfBoundsException
+end
+
+deactivate order
+destroy order
+
+ordermanager --> ordercontroller
 @enduml

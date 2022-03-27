@@ -1,7 +1,24 @@
 @startuml
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+'https://plantuml.com/sequence-diagram
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+autonumber
+hide footbox
+
+actor user
+participant "__:OrderController__" as ordercontroller
+participant "__:OrderManager__" as ordermanager
+participant "__:Order__" as order_
+
+activate ordercontroller
+activate ordermanager
+
+user -> ordercontroller: addNewOrder()
+
+ordercontroller -> ordermanager: addDishToOrder(Dish dish, int orderIdx)
+
+activate order_
+ordermanager -> order_  : addDish(Dish dish)
+
+order_ --> ordermanager
+
 @enduml
