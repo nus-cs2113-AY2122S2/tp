@@ -6,15 +6,17 @@ import seedu.meetingjio.timetables.MasterTimetable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.meetingjio.common.ErrorMessages.*;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST_CLEAR;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_TIMETABLE_NOT_FOUND_TO_DELETE;
+
 
 public class ClearCommandTest {
 
     private MasterTimetable masterTimetable;
-    private String ListSuccessPostClearJohn;
+    private String listSuccessPostClearJohn;
     private String successClearJohn;
     private String successClearAll;
-    private String ListSuccessPostClearAll;
+    private String listSuccessPostClearAll;
     private Command addCommand;
     private Command addCommandSameUser;
     private Command addCommandDifferentUser;
@@ -38,15 +40,15 @@ public class ClearCommandTest {
                 1200, 1300, "online"
         );
         successClearAll = "All records of everyone's timetable has been cleared";
-        ListSuccessPostClearAll = "John\n" +
-                "There are no lessons in your timetable yet!\n" +
-                "Peter\n" +
-                "There are no lessons in your timetable yet!";
+        listSuccessPostClearAll = "John\n"
+                + "There are no lessons in your timetable yet!\n"
+                + "Peter\n"
+                + "There are no lessons in your timetable yet!";
         successClearJohn = "john's timetable has been cleared";
-        ListSuccessPostClearJohn = "John\n" +
-                "There are no lessons in your timetable yet!\n" +
-                "Peter\n" +
-                "1.[L] TITLE: CS2113\t\tDAY: Monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
+        listSuccessPostClearJohn = "John\n"
+                + "There are no lessons in your timetable yet!\n"
+                + "Peter\n"
+                + "1.[L] TITLE: CS2113\t\tDAY: Monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
     }
 
     @Test
@@ -58,7 +60,7 @@ public class ClearCommandTest {
     @Test
     public void clearCommandClearAllEmpty() {
         ClearCommand clearCommand = new ClearCommand("all");
-        assertEquals(ERROR_UNSPECIFIED_LIST_CLEAR,  clearCommand.execute(masterTimetable));
+        assertEquals(successClearAll,  clearCommand.execute(masterTimetable));
     }
 
     @Test
@@ -69,7 +71,7 @@ public class ClearCommandTest {
 
     @Test
     public void clearCommandUnknownUser() {
-        ClearCommand clearCommand = new ClearCommand("clear ibrahim");
+        ClearCommand clearCommand = new ClearCommand("ibrahim");
         assertEquals(ERROR_TIMETABLE_NOT_FOUND_TO_DELETE,  clearCommand.execute(masterTimetable));
     }
 
@@ -81,7 +83,7 @@ public class ClearCommandTest {
         ClearCommand clearCommand = new ClearCommand("john");
         assertEquals(successClearJohn,  clearCommand.execute(masterTimetable));
         ListCommand listCommand = new ListCommand("all");
-        assertEquals(ListSuccessPostClearJohn, listCommand.execute(masterTimetable));
+        assertEquals(listSuccessPostClearJohn, listCommand.execute(masterTimetable));
 
     }
 
@@ -93,7 +95,7 @@ public class ClearCommandTest {
         ClearCommand clearCommand = new ClearCommand("all");
         assertEquals(successClearAll,  clearCommand.execute(masterTimetable));
         ListCommand listCommand = new ListCommand("all");
-        assertEquals(ListSuccessPostClearAll, listCommand.execute(masterTimetable));
+        assertEquals(listSuccessPostClearAll, listCommand.execute(masterTimetable));
     }
 
     @Test
@@ -103,7 +105,7 @@ public class ClearCommandTest {
         addCommandDifferentUser.execute(masterTimetable);
         String test = null;
         ClearCommand clearCommand = new ClearCommand(test);
-        assertThrows(NullPointerException.class,()->{
+        assertThrows(NullPointerException.class,() -> {
             clearCommand.execute(masterTimetable);
         });
     }

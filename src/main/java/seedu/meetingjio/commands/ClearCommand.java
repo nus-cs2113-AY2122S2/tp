@@ -9,7 +9,10 @@ import seedu.meetingjio.timetables.Timetable;
 
 import java.util.logging.Level;
 
-import static seedu.meetingjio.common.ErrorMessages.*;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST_CLEAR;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_EXCEPTION_NOT_HANDLED;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_NON_EMPTY_LIST;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_TIMETABLE_NOT_FOUND_TO_DELETE;
 
 public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
