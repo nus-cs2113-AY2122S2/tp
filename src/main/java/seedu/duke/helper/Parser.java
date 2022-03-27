@@ -10,6 +10,8 @@ import seedu.duke.helper.command.DeleteDoctorCommand;
 import seedu.duke.helper.command.DeleteMedicineCommand;
 import seedu.duke.helper.command.DeletePatientCommand;
 import seedu.duke.helper.command.EditMedicineCommand;
+import seedu.duke.helper.command.EditDoctorCommand;
+import seedu.duke.helper.command.EditPatientCommand;
 import seedu.duke.helper.command.ViewAppointmentCommand;
 import seedu.duke.helper.command.ViewDoctorCommand;
 import seedu.duke.helper.command.ViewMedicineCommand;
