@@ -1,6 +1,5 @@
 package seedu.splitlah.parser;
 
-import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.GroupCreateCommand;
@@ -8,13 +7,14 @@ import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
+import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
-import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.ui.Message;
 
 import java.time.format.DateTimeFormatter;
@@ -401,8 +401,8 @@ public class ParserUtils {
         case ActivityCreateCommandParser.COMMAND_TEXT:
             delimiterList = ActivityCreateCommandParser.COMMAND_DELIMITERS;
             break;
-        case ActivityDeleteCommand.COMMAND_TEXT:
-            delimiterList = ActivityDeleteCommand.COMMAND_DELIMITERS;
+        case ActivityDeleteCommandParser.COMMAND_TEXT:
+            delimiterList = ActivityDeleteCommandParser.COMMAND_DELIMITERS;
             break;
         case ActivityListCommand.COMMAND_TEXT:
             delimiterList = ActivityListCommand.COMMAND_DELIMITERS;
@@ -463,7 +463,7 @@ public class ParserUtils {
             // Fallthrough
         case ActivityCreateCommandParser.COMMAND_TEXT:
             // Fallthrough
-        case ActivityDeleteCommand.COMMAND_TEXT:
+        case ActivityDeleteCommandParser.COMMAND_TEXT:
             // Fallthrough
         case ActivityListCommand.COMMAND_TEXT:
             // Fallthrough

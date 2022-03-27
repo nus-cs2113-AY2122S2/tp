@@ -8,6 +8,8 @@ import seedu.splitlah.ui.Message;
 
 /**
  * Represents a command parser that is able to parse user arguments into an ActivityCreateCommand object.
+ *
+ * @author Ivan
  */
 public class ActivityCreateCommandParser implements CommandParser<ActivityCreateCommand> {
 
