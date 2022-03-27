@@ -944,7 +944,8 @@ instabilities in the application. If you do decide to modify the files, **please
 directory** before modifying the files. 
 
 In the event that your application becomes unstable due to accidental file modifications, please replace the
-`werkItResources` directory with your backup copy.
+`werkItResources` directory with your backup copy. In a worst case scenario (i.e. if you don't have a proper backup
+copy), delete the `werkItResources` directory and restart WerkIt! to recreate the directory and files from fresh.
 
 ---
 
