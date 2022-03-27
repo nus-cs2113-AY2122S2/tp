@@ -3,6 +3,7 @@
 package seedu.planitarium.person;
 
 import seedu.planitarium.ProjectLogger;
+import seedu.planitarium.category.Category;
 import seedu.planitarium.global.Constants;
 
 import java.util.logging.Level;
@@ -94,7 +95,7 @@ public class Family {
     public void addPerson(String name, int group) {
         String infoString = "Method addPerson() called";
         logger.log(Level.INFO, infoString);
-        getList(group).addPerson(name);
+        getList(group).addPerson(name, Constants.FOR_USER);
     }
 
     /**
@@ -145,11 +146,13 @@ public class Family {
      * @param description The reason for the expenditure
      * @param amount The value of the expenditure
      * @param isPermanent Whether the expenditure is recurring
+     * @param category The category of the expenditure
      */
-    public void addExpend(int personIndex, int group, String description, double amount, boolean isPermanent) {
+    public void addExpend(int personIndex, int group, String description, double amount, boolean isPermanent,
+                          Category category) {
         String infoString = "Method addExpend() called";
         logger.log(Level.INFO, infoString);
-        getList(group).addExpend(personIndex, description, amount, isPermanent);
+        getList(group).addExpend(personIndex, description, amount, isPermanent, category);
     }
 
     /**
@@ -168,8 +171,8 @@ public class Family {
     /**
      * Lists the disposable incomes of each generation.
      */
-    public void list() {
-        String infoString = "Method list() called";
+    public void overview() {
+        String infoString = "Method overview() called";
         logger.log(Level.INFO, infoString);
         System.out.println("Here are your disposable incomes by group:");
         for (int i = 0; i < Constants.NUM_GROUPS; i++) {
@@ -191,12 +194,85 @@ public class Family {
      *
      * @param group The index of the group to print
      */
-    public void detailList(int group) {
-        String infoString = "Method detailList() called";
+    public void list(int group) {
+        String infoString = "Method list() called";
         logger.log(Level.INFO, infoString);
-        PersonList personList = getList(group);
         String generation = getGenerationName(group);
         System.out.println("For " + generation + ":");
+        PersonList personList = getList(group);
         personList.list();
+    }
+
+    /**
+     * Returns the number of members in the array list specified by the group index.
+     *
+     * @param group The index of the group
+     * @return The number of members in the array list specified
+     */
+    public int getNumberOfMembers(int group) {
+        String infoString = "Method getNumberOfMembers() called";
+        logger.log(Level.INFO, infoString);
+        return getList(group).getNumberOfMembers();
+    }
+
+    /**
+     * Returns the number of incomes of a person in the array list specified by the group index.
+     *
+     * @param personIndex The index of the person
+     * @param group The index of the group
+     * @return The number of incomes of the person in the array list specified
+     */
+    public int getNumberOfIncomes(int personIndex, int group) {
+        String infoString = "Method getNumberOfIncomes() called";
+        logger.log(Level.INFO, infoString);
+        return getList(group).getNumberOfIncomes(personIndex);
+    }
+
+    /**
+     * Returns the number of expenditures of a person in the array list specified by the group index.
+     *
+     * @param personIndex The index of the person
+     * @param group The index of the group
+     * @return The number of expenditures of the person in the array list specified
+     */
+    public int getNumberOfExpenditures(int personIndex, int group) {
+        String infoString = "Method getNumberOfExpenditures() called";
+        logger.log(Level.INFO, infoString);
+        return getList(group).getNumberOfExpenditures(personIndex);
+    }
+
+    /**
+     *  Edits an income of a person in the array list specified by the group index.
+     *
+     * @param personIndex The index of the person
+     * @param group The index of the group
+     * @param incomeIndex The index of the income
+     * @param description The source of the income
+     * @param amount The value of the income
+     * @param isPermanent Whether the income is recurring
+     */
+    public void editIncome(int personIndex, int group, int incomeIndex, String description, double amount,
+                           boolean isPermanent) {
+        String infoString = "Method editIncome() called";
+        logger.log(Level.INFO, infoString);
+        getList(group).editIncome(personIndex, incomeIndex, description, amount, isPermanent);
+    }
+
+    /**
+     *  Edits an expenditure of a person in the array list specified by the group index.
+     *
+     * @param personIndex The index of the person
+     * @param group The index of the group
+     * @param expendIndex The index of the expenditure
+     * @param description The reason for the expenditure
+     * @param amount The value of the expenditure
+     * @param category The category of the expenditure
+     * @param isPermanent Whether the expenditure is recurring
+     */
+    public void editExpend(int personIndex, int group, int expendIndex, String description, double amount,
+                           Category category, boolean isPermanent) {
+        String infoString = "Method editExpend() called";
+        logger.log(Level.INFO, infoString);
+        getList(group).editExpend(personIndex, expendIndex, description, amount, category, isPermanent);
     }
 }
