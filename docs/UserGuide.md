@@ -7,7 +7,7 @@ optimized for use via a Command Line Interface (CLI). This application is for yo
 have an application to keep track of your workouts and have a system to store your workout routines.
 
 You will be able to create, view, update and delete the workouts and plans you have created and store them in the application.
-You will also be able to schedule your workout plans for a week (7 days).
+You will also be able to schedule your workout plans for a week (7 days). 
 
 ### Terminology 
 Please take note of these few terms. It is explained as below:
@@ -18,7 +18,6 @@ Please take note of these few terms. It is explained as below:
 | Workout  | An exercise with a quantity/number of repetitions. <br/>Example: "5 push up", "5 pull up", "10 sit up"                   |
 | Plan     | A set of workouts. <br/>Example: A plan named "Arms" will contains "5 push ups, 5 pull ups"                              |
 | Schedule | Plan schedule for a day. The schedule is set for a week. <br/>Example: Arms plan will be added to Monday in the schedule |
-
 
 ---
 
