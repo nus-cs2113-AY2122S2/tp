@@ -13,8 +13,13 @@ public class AppointmentList extends List {
         return appointments;
     }
 
+    public int getSize() {
+        return appointments.size();
+    }
+
     @Override
     public void add(String[] addAppointmentParameters) throws DuplicateEntryException {
+        int numberOfAppointmentsBefore = appointments.size();
         for (Appointment appointment : appointments) {
             if (appointment.getAppointmentId().equals(addAppointmentParameters[0])) {
                 throw new DuplicateEntryException("Appointment with given appointment ID already exist!");
@@ -24,13 +29,16 @@ public class AppointmentList extends List {
                 addAppointmentParameters[2], addAppointmentParameters[3], addAppointmentParameters[4],
                 addAppointmentParameters[5], addAppointmentParameters[6]);
         appointments.add(newAppointment);
+        assert appointments.size() == numberOfAppointmentsBefore + 1;
     }
 
     @Override
     public void remove(String appointmentId) throws NotFoundException {
+        int numberOfAppointmentsBefore = appointments.size();
         for (int i = 0; i < appointments.size(); i++) {
             if (appointments.get(i).getAppointmentId().equals(appointmentId)) {
                 appointments.remove(i);
+                assert appointments.size() == numberOfAppointmentsBefore - 1;
                 return;
             }
         }
@@ -61,6 +69,7 @@ public class AppointmentList extends List {
                     foundAppointments.add(appointments.get(i));
                 }
             }
+            assert foundAppointments.size() != 0;
             break;
         case "patient name":
             for (int i = 0; i < appointments.size(); i++) {
@@ -68,6 +77,7 @@ public class AppointmentList extends List {
                     foundAppointments.add(appointments.get(i));
                 }
             }
+            assert foundAppointments.size() != 0;
             break;
         case "doctor name":
             for (int i = 0; i < appointments.size(); i++) {
@@ -75,6 +85,7 @@ public class AppointmentList extends List {
                     foundAppointments.add(appointments.get(i));
                 }
             }
+            assert foundAppointments.size() != 0;
             break;
         case "date":
             for (int i = 0; i < appointments.size(); i++) {
@@ -82,6 +93,7 @@ public class AppointmentList extends List {
                     foundAppointments.add(appointments.get(i));
                 }
             }
+            assert foundAppointments.size() != 0;
             break;
         case "nric":
             for (int i = 0; i < appointments.size(); i++) {
@@ -89,6 +101,7 @@ public class AppointmentList extends List {
                     foundAppointments.add(appointments.get(i));
                 }
             }
+            assert foundAppointments.size() != 0;
             break;
         default:
             UI.printParagraph("Invalid search criteria! The valid criteria are:\n"
@@ -98,6 +111,7 @@ public class AppointmentList extends List {
                     + "date\n"
                     + "nric\n"
                     + "Please try again!");
+            assert foundAppointments.size() == 0;
             break;
         }
         UI.printParagraph(toString(foundAppointments));
@@ -116,6 +130,7 @@ public class AppointmentList extends List {
             }
             index++;
         }
+        assert !appointmentsString.isEmpty();
         return appointmentsString;
     }
 

@@ -7,6 +7,8 @@ import seedu.duke.exception.NotFoundException;
 import seedu.duke.status.Status;
 
 
+
+
 public abstract class Command {
     public String[] parameterArray;
 
@@ -14,5 +16,9 @@ public abstract class Command {
         this.parameterArray = parameterArray;
     }
 
-    public abstract Status execute(List list) throws DuplicateEntryException, NotFoundException, HalpmiException;
+    public abstract Status execute(List list) throws DuplicateEntryException, NotFoundException;
+
+
 }
+
+

@@ -2,13 +2,15 @@ package seedu.duke.helper;
 
 import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
+import seedu.duke.assets.Patient;
 import seedu.duke.assets.PatientList;
-import seedu.duke.status.Status;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UI {
     private String userInput;
+    private ArrayList<Patient> patients = new ArrayList<>();
     private Scanner reader = new Scanner(System.in);
     private Parser parser = new Parser();
 
@@ -20,6 +22,7 @@ public class UI {
         readInput();
         return parser.commandParser(userInput)[0].trim();
     }
+
 
     public String readParameters() {
         String[] userInputArray = parser.commandParser(userInput);
@@ -39,6 +42,13 @@ public class UI {
                 + "Please type in your input");
     }
 
+    public void printLogo() {
+        String logo = "------------------------------\n"
+                + "HALPMI";
+
+        System.out.println(logo);
+    }
+
     public void printHelp() {
         printNewLineSeparator();
         printParagraph("Here are the commands and examples:\n"
@@ -55,6 +65,10 @@ public class UI {
                 + "8. delete medicine\nExample: delete medicine /info 1\n"
                 + "9. view medicine\nExample: view medicine [/info id]\n"
                 + "10. bye\nExample: bye");
+    }
+
+    public int getSize() {
+        return patients.size();
     }
 
     public void printWrongInput() {
@@ -162,8 +176,5 @@ public class UI {
     public void printDeleteMedicineExampleMessage(MedicineList medicineList) {
         printParagraph("Please input a positive number up to " + medicineList.getSize() + " only.\n"
                 + "Here is an example:\ndelete patient /info 1");
-    }
-
-    public void print(Status status) {
     }
 }
