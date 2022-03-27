@@ -1,6 +1,8 @@
 package commands;
 
 import data.exercises.InvalidExerciseException;
+import data.plans.InvalidPlanException;
+import data.plans.PlanList;
 import data.workouts.InvalidWorkoutException;
 import data.workouts.Workout;
 import data.workouts.WorkoutList;
@@ -27,6 +29,7 @@ public class WorkoutCommand extends Command {
     private FileManager fileManager;
     private UI ui = new UI();
     private WorkoutList workoutList;
+    private PlanList planList;
 
     private String userAction;
     private String userArguments;
@@ -40,15 +43,17 @@ public class WorkoutCommand extends Command {
      * @param userInput     The user's full original input.
      * @param fileManager   An instance of the FileManager class.
      * @param workoutList   An instance of the WorkoutList class.
+     * @param planList      An instance of the PlanList class.
      * @param userAction    The action that was parsed from the user's input.
      * @param userArguments The arguments that are accompanied by the user action.
      * @throws InvalidCommandException If the command entered by the user is incorrect.
      */
     public WorkoutCommand(String userInput, FileManager fileManager, WorkoutList workoutList,
-            String userAction, String userArguments) throws InvalidCommandException {
+            PlanList planList, String userAction, String userArguments) throws InvalidCommandException {
         super(userInput);
         this.fileManager = fileManager;
         this.workoutList = workoutList;
+        this.planList = planList;
         setUserAction(userAction);
         this.userArguments = userArguments;
 
@@ -80,6 +85,15 @@ public class WorkoutCommand extends Command {
      */
     public WorkoutList getWorkoutList() {
         return this.workoutList;
+    }
+
+    /**
+     * Gets the instance of the PlanList class.
+     *
+     * @return An instance of the PlanList class.
+     */
+    public PlanList getPlanList() {
+        return planList;
     }
 
     /**
@@ -149,7 +163,9 @@ public class WorkoutCommand extends Command {
             case DELETE_ACTION_KEYWORD:
                 Workout deletedWorkout = getWorkoutList().deleteWorkout(getUserArguments());
                 getUI().printDeleteWorkoutMessage(deletedWorkout);
+                planList.deletePlanContainsDeletedWorkout(deletedWorkout.toString());
                 getFileManager().rewriteAllWorkoutsToFile(getWorkoutList());
+                getFileManager().rewriteAllPlansToFile(getPlanList());
                 break;
             case UPDATE_ACTION_KEYWORD:
                 Workout updatedWorkout = getWorkoutList().updateWorkout(getUserArguments());
@@ -192,6 +208,11 @@ public class WorkoutCommand extends Command {
         } catch (NullPointerException e) {
             System.out.println(e.getMessage());
             System.out.println("Please try again.");
+
+        } catch (InvalidPlanException e) {
+            System.out.println(e.getMessage());
+            System.out.println("Please try again.");
+
         }
     }
 }
