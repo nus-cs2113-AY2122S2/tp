@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,6 +11,8 @@ public class AddAvailabilityCommand extends Command {
     private String name;
     private String availability;
     private static final String AVAILABILITY_INDICATE = "@";
+    private static final int MONDAY_INDICATE = 1;
+    private static final int SUNDAY_INDICATE = 7;
     private static Logger logger = Logger.getLogger("housekeeperLogger");
 
     public AddAvailabilityCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
@@ -30,11 +31,57 @@ public class AddAvailabilityCommand extends Command {
             throw new InvalidAvailabilityException();
         }
         String name = checkValidExtract(inputName);
-        String availability = checkValidExtract(inputAvailability);
+        String availability = checkValidAvailability(inputAvailability);
         assert (!name.isEmpty()) : "Name of Housekeeper should not be empty.";
         assert (!availability.isEmpty()) : "Availability should not be empty";
-        setName(inputName);
-        setAvailability(inputAvailability);
+        setName(name);
+        setAvailability(availability);
+    }
+
+    /**
+     * This method checks if the availability given by the user is valid. It is valid if any of the days in week given
+     * is within 1 to 7 where 1 represents Monday and 7 represents Sunday.
+     *
+     * @param inputAvailability Availability given by the user.
+     * @return A valid availability.
+     * @throws InvalidDayException When the given availability is not integer and between 1 and 7.
+     */
+    private String checkValidAvailability(String inputAvailability) throws InvalidDayException,
+            InvalidAvailabilityException {
+        String availability = checkValidExtract(inputAvailability);
+        try {
+            String[] splitDays = availability.split(",");
+            for (String day : splitDays) {
+                String validDay = checkLengthInput(day);
+                int availableDay = Integer.parseInt(validDay);
+                if (availableDay < MONDAY_INDICATE || availableDay > SUNDAY_INDICATE) {
+                    logger.log(Level.WARNING, "Days given were not valid.");
+                    throw new InvalidDayException();
+                }
+            }
+        } catch (NumberFormatException numberError) {
+            logger.log(Level.WARNING, "Number given not Integer.");
+            throw new InvalidDayException();
+        }
+        return availability;
+    }
+
+    /**
+     * This method ensures that the derive day has a length of one as the user only can key in a single integer
+     * number.
+     *
+     * @param day Number used to indicate the day in the week.
+     * @return Valid day.
+     * @throws InvalidDayException When the day given has length more than1. Eg (12,2DF)
+     */
+    private String checkLengthInput(String day) throws InvalidDayException {
+        String trimmedDay = day.trim();
+        if (trimmedDay.length() > 1) {
+            logger.log(Level.WARNING, "Length given was more than 1.");
+            throw new InvalidDayException();
+        }
+        assert (trimmedDay.length() == 1) : "Day mention has more than length of 1";
+        return trimmedDay;
     }
 
     /**
@@ -88,7 +135,7 @@ public class AddAvailabilityCommand extends Command {
      * Get the Name of the housekeeper and verify that housekeeper is in records. If in records, add
      * his/her availability into housekeeper list.
      *
-     * @param ui               The user interface for this execution method.
+     * @param ui The user interface for this execution method.
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws UserExistException {

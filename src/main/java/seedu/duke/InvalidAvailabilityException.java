@@ -5,7 +5,7 @@ package seedu.duke;
  * This exception is thrown if the add housekeeper availability command has empty days available.
  */
 public class InvalidAvailabilityException extends HotelLiteManagerException {
-    private static final String ERROR_MESSAGE = "Error! Invalid Command -> Availability NAME @ M,T,W,T,F,S,S";
+    private static final String ERROR_MESSAGE = "Error! Invalid Command -> Availability NAME @ 1,2";
 
     @Override
     public String getErrorMessage() {
