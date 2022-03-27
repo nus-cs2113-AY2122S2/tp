@@ -1,6 +1,7 @@
 package seedu.duke.helper.command;
 
 import seedu.duke.assets.List;
+import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.status.Status;
 
@@ -9,7 +10,7 @@ public class ViewAppointmentCommand extends Command {
         super(parameterArray);
     }
 
-    public Status execute(List appointmentList) throws NotFoundException {
+    public Status execute(List appointmentList) throws HalpmiException {
         if (parameterArray == null) {
             appointmentList.view();
         } else {
