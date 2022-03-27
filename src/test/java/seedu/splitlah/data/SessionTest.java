@@ -159,4 +159,26 @@ class SessionTest {
             }
         }
     }
+
+    // getPersonByName()
+
+    @Test
+    void getPersonByName_personWithSpecifiedNameDoesNotExist_InvalidDataExceptionThrown() {
+        try {
+            Person person = session.getPersonByName("David");
+            fail();
+        } catch (InvalidDataException exception) {
+            assertEquals(Message.ERROR_SESSION_PERSON_NOT_IN_LIST, exception.getMessage());
+        }
+    }
+
+    @Test
+    void getPersonByName_personWithSpecifiedNameExists_PersonObjectReturned() {
+        try {
+            Person person = session.getPersonByName("Alice");
+            assertEquals("Alice", person.getName());
+        } catch (InvalidDataException exception) {
+            fail();
+        }
+    }
 }
