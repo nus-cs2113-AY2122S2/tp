@@ -320,19 +320,6 @@ public class Session implements Serializable {
     }
 
     /**
-     * Returns a String object summarising the state of the Session object.
-     * 
-     * @return A String object containing a summary of the Session object.
-     */
-    public String getSessionSimplifiedString() {
-        return sessionId + SUMMARY_STRING_SEPARATOR + sessionName + "\n "
-                + SUMMARY_STRING_SEPARATOR + dateCreated.format(ParserUtils.DATE_FORMAT)
-                + SUMMARY_STRING_SEPARATOR + personList.getSize() + " participants"
-                + SUMMARY_STRING_SEPARATOR + activityList.size() + " activities"
-                + SUMMARY_STRING_SEPARATOR + getGroupSummaryString();
-    }
-
-    /**
      * Returns a String object describing the state of the Session object.
      *
      * @return A String object containing a description of the Session object and its member attributes.
