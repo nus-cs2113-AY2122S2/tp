@@ -14,6 +14,7 @@
    * [Exiting MindMyMoney application: `bye`](#exiting-mindmymoney-application-bye)
    * [Saving the data](#saving-the-data)
 * [FAQ](#faq)
+  
 ## Introduction
 ### MindMyMoney
 `MindMyMoney` (M<sup>3</sup>) is a desktop app for managing your financials, optimized for use via a 
@@ -48,7 +49,8 @@ Click on the hyperlinks in the content page above to quick navigation on the pag
     * **`delete`**`2` : Deletes the 2nd expenditure shown in the expenditure list.
     * **`bye`** : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.  
+6. Refer to the [Features](#features) below for details of each command.
+  
 ## Command Summary  
 
 | Command | Format, examples                                                                                                                           |

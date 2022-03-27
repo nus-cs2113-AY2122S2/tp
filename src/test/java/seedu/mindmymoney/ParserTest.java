@@ -29,13 +29,13 @@ class ParserTest {
         assert testParser.parseCommand(testInput, testList, cardList)
                 instanceof HelpCommand : "testParser should return an " + "instance of HelpCommand";
 
-        testInput = "add description " + TEST_PRICE;
+        testInput = "add /pm cash /c Food /d Porridge /a 3 /t 2022-03";
         assertTrue(testParser.parseCommand(testInput, testList, cardList) instanceof AddCommand);
 
         testInput = "update " + TEST_INDEX + " description " + TEST_PRICE;
         assertTrue(testParser.parseCommand(testInput, testList, cardList) instanceof UpdateCommand);
 
-        testInput = "list";
+        testInput = "list /expenses";
         assertTrue(testParser.parseCommand(testInput, testList, cardList) instanceof ListCommand);
 
         testInput = "delete " + TEST_INDEX;
