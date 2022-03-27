@@ -175,13 +175,13 @@ public class Family {
         String infoString = "Method overview() called";
         logger.log(Level.INFO, infoString);
         System.out.println("Here are your disposable incomes by group:");
-        for (int i = 0; i < Constants.NUM_GROUPS; i++) {
+        for (int i = 1; i <= Constants.NUM_GROUPS; i++) {
             PersonList personList = getList(i);
             double income = personList.getTotalIncome();
             double expenditure = personList.getTotalExpenditure();
             double disposable = personList.getRemain();
             String generation = getGenerationName(i);
-            System.out.println((i + 1) + ". " + generation + ":" + System.lineSeparator()
+            System.out.println(i + ". " + generation + ":" + System.lineSeparator()
                     + "Income: $" + income + System.lineSeparator()
                     + "Expenditure: $" + expenditure + System.lineSeparator()
                     + "Disposable: $" + disposable);
