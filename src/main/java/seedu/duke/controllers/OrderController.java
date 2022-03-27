@@ -2,6 +2,7 @@ package seedu.duke.controllers;
 
 import seedu.duke.entities.Dish;
 import seedu.duke.exceptions.OperationTerminationException;
+import seedu.duke.loggers.MainLogger;
 import seedu.duke.manager.DishManager;
 import seedu.duke.manager.OrderManager;
 
@@ -23,6 +24,12 @@ public class OrderController extends Controller {
         switch (choice) {
         case 0:
             System.out.println("Exiting menu...");
+            try {
+                orderManager.saveData();
+            } catch (Exception e) {
+                System.out.println("There was an error saving Order data!\n");
+                MainLogger.logWarning(this, "Error saving Order data!");
+            }
             return true;
         case 1:
             dishManager.printDishes();
