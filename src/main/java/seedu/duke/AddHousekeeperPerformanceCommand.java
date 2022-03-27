@@ -1,12 +1,17 @@
 package seedu.duke;
 
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AddHousekeeperPerformanceCommand extends Command {
     private HousekeeperPerformance housekeeperPerformance;
+    private static Logger logger = Logger.getLogger("housekeeperPerformanceLogger");
 
     public AddHousekeeperPerformanceCommand(String userInput) throws HotelLiteManagerException {
         if (!userInput.contains("/")) {
+            logger.log(Level.WARNING, "A '/' character is needed to separate the housekeeper's name "
+                    + "from their rating.");
             throw new InvalidCommandException();
         }
         String housekeeperName = extractHousekeeperName(userInput);
@@ -17,8 +22,13 @@ public class AddHousekeeperPerformanceCommand extends Command {
 
     public String extractHousekeeperName(String userInput) throws HotelLiteManagerException {
         String[] splitInput = userInput.split("/");
-        String housekeeperName = splitInput[0].trim();
-        if (housekeeperName.isEmpty()) {
+        String housekeeperName = "";
+        try {
+            housekeeperName = splitInput[0].trim();
+            if (housekeeperName.isEmpty()) {
+                throw new EmptyHousekeeperPerformanceNameException();
+            }
+        } catch (IndexOutOfBoundsException e) {
             throw new EmptyHousekeeperPerformanceNameException();
         }
         return housekeeperName;
