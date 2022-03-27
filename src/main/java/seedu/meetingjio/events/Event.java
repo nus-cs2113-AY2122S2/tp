@@ -1,5 +1,7 @@
 package seedu.meetingjio.events;
 
+import java.util.Locale;
+
 public abstract class Event {
     private String title;
     public String day;
@@ -82,7 +84,7 @@ public abstract class Event {
      */
     public int getDay() {
         int numericDay = 0;
-        switch (day) {
+        switch (day.toLowerCase()) {
         case "monday":
             numericDay = 1;
             break;
