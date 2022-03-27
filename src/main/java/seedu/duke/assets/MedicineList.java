@@ -227,34 +227,6 @@ public class MedicineList extends List {
         }
     }
 
-    public void findByNric(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByAge(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByGender(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByAddress(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByDob(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findBySpecialization(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByDateAdmission(String[] parameters) {
-        // Intentionally left blank
-    }
-
 }
 
 

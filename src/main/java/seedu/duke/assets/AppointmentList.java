@@ -56,9 +56,9 @@ public class AppointmentList extends List {
     public void view() {
         CommandLineTable appointmentTable = new CommandLineTable();
         appointmentTable.setShowVerticalLines(true);
-        appointmentTable.setHeaders("Appointment Id", "Patient Name","Patient NRIC","Doctor Name","Doctor NRIC",
+        appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
                 "Appointment Date", "Appointment Details");
-        for (Appointment appointment: appointments) {
+        for (Appointment appointment : appointments) {
             appointmentTable.addRow(appointment.getAppointmentId(), appointment.getPatientName(),
                     appointment.getPatientNric(), appointment.getDoctorName(), appointment.getDoctorNric(),
                     appointment.getAppointmentDate(), appointment.getAppointmentDetails());
@@ -134,9 +134,9 @@ public class AppointmentList extends List {
         }
         CommandLineTable appointmentTable = new CommandLineTable();
         appointmentTable.setShowVerticalLines(true);
-        appointmentTable.setHeaders("Appointment Id", "Patient Name","Patient NRIC","Doctor Name","Doctor NRIC",
+        appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
                 "Appointment Date", "Appointment Details");
-        for (Appointment appointment: foundAppointments) {
+        for (Appointment appointment : foundAppointments) {
             appointmentTable.addRow(appointment.getAppointmentId(), appointment.getPatientName(),
                     appointment.getPatientNric(), appointment.getDoctorName(), appointment.getDoctorNric(),
                     appointment.getAppointmentDate(), appointment.getAppointmentDetails());
@@ -144,57 +144,6 @@ public class AppointmentList extends List {
         appointmentTable.print();
     }
 
-    public void findByNric(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByName(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByAge(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByGender(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByAddress(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByDob(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findBySpecialization(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByDateAdmission(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findById(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByDosage(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByExpiry(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findBySideEffects(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByQuantity(String[] parameters) {
-        // Intentionally left blank
-    }
 }
 
 

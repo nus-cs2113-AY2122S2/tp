@@ -211,29 +211,5 @@ public class DoctorList extends List {
         }
     }
 
-
-    public void findByDateAdmission(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findById(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByDosage(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByExpiry(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findBySideEffects(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByQuantity(String[] parameters) {
-        // Intentionally left blank
-    }
 }
 
