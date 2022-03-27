@@ -807,19 +807,6 @@ public class ModHappyParserTest {
     }
 
     @Test
-    public void parse_helpCommand_invalidCommandWord_throwsParseException() {
-        final String testString = "help invalidCommandWord";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
     public void parse_helpCommand_unnecessaryArgs() {
         final String testString = "help add blahblah";
         try {
@@ -984,34 +971,8 @@ public class ModHappyParserTest {
     }
 
     @Test
-    public void parse_optionCommand_invalidNewValue() {
-        final String testString = "option COMPLETED_TASKS_SHOWN = invalidNewValue";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
     public void parse_optionCommand_noEqualSign() {
         final String testString = "option COMPLETED_TASKS_SHOWN false";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void parse_optionCommand_unnecessaryArgs() {
-        final String testString = "option COMPLETED_TASKS_SHOWN = false blahblah";
         try {
             parser.parseCommand(testString);
             fail();
