@@ -23,7 +23,7 @@ public class PatientList extends List {
         return null;
     }
 
-    public void find(String[] command){
+    public void find(String[] command) {
     }
 
 
@@ -70,7 +70,7 @@ public class PatientList extends List {
         }
         CommandLineTable patientTable = new CommandLineTable();
         patientTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
-        patientTable.setHeaders("Nric", "FullName","Age", "Address", "Gender", "Dob",
+        patientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
                 "DateAdmission");
         patientTable.addRow(patient.getPatientNric(), patient.getPatientName(),
                 String.valueOf(patient.getPatientAge()),
@@ -79,7 +79,6 @@ public class PatientList extends List {
                 patient.getDateOfAdmission());
         patientTable.print();
     }
-
 
 
     //view all patients
@@ -144,42 +143,66 @@ public class PatientList extends List {
     }
 
     public void findByNric(String[] parameters) {
-        this.returnedFinderArray = PatientFinder.findPatientByNric(patients, parameters[1]);
-        createArrayOfFoundPatients();
+        try {
+            this.returnedFinderArray = PatientFinder.findPatientByNric(patients, parameters[1]);
+            createArrayOfFoundPatients();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Patient with given NRIC doesn't exist. Please try again!");
+        }
     }
 
     public void findByName(String[] parameters) {
-        this.returnedFinderArray = PatientFinder.findPatientByName(patients, parameters[1]);
-        createArrayOfFoundPatients();
+        try {
+            this.returnedFinderArray = PatientFinder.findPatientByName(patients, parameters[1]);
+            createArrayOfFoundPatients();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Patient with given name doesn't exist. Please try again!");
+        }
     }
 
     public void findByAge(String[] parameters) {
-        this.returnedFinderArray = PatientFinder.findPatientByAge(patients, Integer.parseInt(parameters[1]));
-        createArrayOfFoundPatients();
+        try {
+            this.returnedFinderArray = PatientFinder.findPatientByAge(patients, Integer.parseInt(parameters[1]));
+            createArrayOfFoundPatients();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Patient with given age doesn't exist. Please try again!");
+        }
     }
 
     public void findByGender(String[] parameters) {
-        this.returnedFinderArray = PatientFinder.findPatientByGender(patients, parameters[1].charAt(0));
-        createArrayOfFoundPatients();
+        try {
+            this.returnedFinderArray = PatientFinder.findPatientByGender(patients, parameters[1].charAt(0));
+            createArrayOfFoundPatients();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Patient with given gender doesn't exist. Please try again!");
+        }
     }
 
     public void findByAddress(String[] parameters) {
-        this.returnedFinderArray = PatientFinder.findPatientByAddress(patients, parameters[1]);
-        createArrayOfFoundPatients();
+        try {
+            this.returnedFinderArray = PatientFinder.findPatientByAddress(patients, parameters[1]);
+            createArrayOfFoundPatients();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Patient with given address doesn't exist. Please try again!");
+        }
     }
 
     public void findByDob(String[] parameters) {
-        this.returnedFinderArray = PatientFinder.findPatientByDob(patients, parameters[1]);
-        createArrayOfFoundPatients();
-    }
-
-    public void findBySpecialization(String[] parameters) {
-        // Intentionally left blank
+        try {
+            this.returnedFinderArray = PatientFinder.findPatientByDob(patients, parameters[1]);
+            createArrayOfFoundPatients();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Patient with given DOB doesn't exist. Please try again!");
+        }
     }
 
     public void findByDateAdmission(String[] parameters) {
-        this.returnedFinderArray = PatientFinder.findPatientByDateAdmission(patients, parameters[1]);
-        createArrayOfFoundPatients();
+        try {
+            this.returnedFinderArray = PatientFinder.findPatientByDateAdmission(patients, parameters[1]);
+            createArrayOfFoundPatients();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Patient with given admission date doesn't exist. Please try again!");
+        }
     }
 
     private void createArrayOfFoundPatients() {
@@ -190,7 +213,7 @@ public class PatientList extends List {
             for (int i = 0; i < returnedFinderArray.size(); i++) {
 
                 findPatientTable.setShowVerticalLines(true);
-                findPatientTable.setHeaders("Nric", "FullName","Age", "Address", "Gender", "Dob",
+                findPatientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
                         "DateAdmission");
                 findPatientTable.addRow(returnedFinderArray.get(i).getNric(),
                         returnedFinderArray.get(i).getFullName(),
@@ -202,26 +225,6 @@ public class PatientList extends List {
             }
             findPatientTable.print();
         }
-    }
-
-    public void findById(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByDosage(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByExpiry(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findBySideEffects(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByQuantity(String[] parameters) {
-        // Intentionally left blank
     }
 
 }
