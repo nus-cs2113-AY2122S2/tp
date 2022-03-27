@@ -92,6 +92,10 @@ class SessionTest {
 
     // removeActivity()
 
+    /**
+     * Checks if an InvalidDataException with the correct message is properly thrown when the removeActivity method is
+     * called and no Activity objects exists in the Session object.
+     */
     @Test
     void removeActivity_noActivityExists_InvalidDataExceptionThrown() {
         try {
@@ -102,6 +106,10 @@ class SessionTest {
         }
     }
 
+    /**
+     * Checks if an InvalidDataException with the correct message is properly thrown when the removeActivity method is
+     * called and no Activity objects with the specified activity unique identifier exists in the Session object.
+     */
     @Test
     void removeActivity_activityWithSpecifiedIdDoesNotExist_InvalidDataExceptionThrown() {
         Command createActivityCommand = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_ONE);
@@ -115,6 +123,11 @@ class SessionTest {
         }
     }
 
+    /**
+     * Checks if an Activity object and all ActivityCost objects related it are correctly removed from the
+     * Session object when the removeActivity method is called and an Activity object with the specified
+     * activity unique identifier exists in the Session object.
+     */
     @Test
     void removeActivity_activityExists_activityAndActivityCostRemoved() {
         Command createActivityCommandOne = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_ONE);
