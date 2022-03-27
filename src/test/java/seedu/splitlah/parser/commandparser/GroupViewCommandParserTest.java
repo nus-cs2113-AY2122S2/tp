@@ -37,4 +37,28 @@ class GroupViewCommandParserTest {
         }
     }
 
+    /**
+     * Checks if an InvalidFormatException with the correct message is thrown
+     * when missing group argument is detected in the user input.
+     */
+    @Test
+    public void getCommand_hasMissingGroupIdArgument_InvalidFormatExceptionThrown() {
+        String inputMissingGroupIdArgument = "group /view /gid";
+        String argsMissingGroupIdArgument = Parser.getRemainingArgument(inputMissingGroupIdArgument);
+        String errorMessageOne = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingGroupIdArgument);
+        if (!errorMessageOne.isEmpty()) {
+            fail();
+        }
+
+        GroupViewCommandParser groupViewCommandParser = new GroupViewCommandParser();
+        try {
+            groupViewCommandParser.getCommand(argsMissingGroupIdArgument);
+            fail();
+        } catch (InvalidFormatException e) {
+            String messageToTest = Message.ERROR_PARSER_MISSING_ARGUMENT + "/gid"
+                    + "\n" + GroupViewCommandParser.COMMAND_FORMAT;
+            assertEquals(messageToTest, e.getMessage());
+        }
+    }
+
 }
