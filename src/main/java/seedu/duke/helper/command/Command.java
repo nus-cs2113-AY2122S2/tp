@@ -16,7 +16,7 @@ public abstract class Command {
         this.parameterArray = parameterArray;
     }
 
-    public abstract Status execute(List list) throws DuplicateEntryException, NotFoundException;
+    public abstract Status execute(List list) throws DuplicateEntryException, NotFoundException, HalpmiException;
 
 
 }
