@@ -3,6 +3,7 @@
 package seedu.planitarium.person;
 
 import seedu.planitarium.ProjectLogger;
+import seedu.planitarium.category.Category;
 import seedu.planitarium.global.Constants;
 import seedu.planitarium.money.IncomeList;
 import seedu.planitarium.money.ExpenditureList;
@@ -44,10 +45,14 @@ public class Person {
      * @param description The source of the income
      * @param amount The value of the income
      * @param isPermanent Whether the income is recurring
+     * @param isSilent Whether to print confirmation
      */
-    public void addIncome(String description, double amount, boolean isPermanent) {
+    public void addIncome(String description, double amount, boolean isPermanent, boolean isSilent) {
         assert (description != null);
         this.incomeList.addIncome(description, amount, isPermanent);
+        if (isSilent) {
+            return;
+        }
         if (isPermanent) {
             System.out.println("A recurring income of " + amount + " from " + description + " has been added to "
                     + this.name);
@@ -76,10 +81,15 @@ public class Person {
      * @param description The reason for the expenditure
      * @param amount The value of the expenditure
      * @param isPermanent Whether the expenditure is recurring
+     * @param isSilent Whether to print confirmation
+     * @param category The category of the expenditure
      */
-    public void addExpend(String description, double amount, boolean isPermanent) {
+    public void addExpend(String description, double amount, boolean isPermanent, boolean isSilent, Category category) {
         assert (description != null);
-        expenditureList.addExpenditure(description, amount, isPermanent);
+        expenditureList.addExpenditure(description, amount, isPermanent, category);
+        if (isSilent) {
+            return;
+        }
         if (isPermanent) {
             System.out.println("A recurring expenditure of " + amount + " for " + description + " has been added to "
                     + this.name);
@@ -163,5 +173,39 @@ public class Person {
      */
     public int getNumberOfExpenditures() {
         return expenditureList.getNumberOfExpenditures();
+    }
+
+    /**
+     * Returns the name in a format suitable for saving.
+     *
+     * @return The name with delimiter
+     */
+    public String saveName() {
+        return "u " + name;
+    }
+
+    /**
+     *  Edits an income in the list of incomes.
+     *
+     * @param incomeIndex The index of the income
+     * @param description The source of the income
+     * @param amount The value of the income
+     * @param isPermanent Whether the income is recurring
+     */
+    public void editIncome(int incomeIndex, String description, double amount, boolean isPermanent) {
+        incomeList.editIncome(incomeIndex, description, amount, isPermanent);
+    }
+
+    /**
+     *  Edits an expenditure in the list of expenditures of the specified person.
+     *
+     * @param expendIndex The index of the expenditure
+     * @param description The reason for the expenditure
+     * @param amount The value of the expenditure
+     * @param category The category of the expenditure
+     * @param isPermanent Whether the expenditure is recurring
+     */
+    public void editExpend(int expendIndex, String description, double amount, Category category, boolean isPermanent) {
+        incomeList.exitExpend(expendIndex, description, amount, category, isPermanent);
     }
 }
