@@ -62,8 +62,8 @@ Click on the hyperlinks in the content page above to quick navigation on the pag
 |
 
 ## Features  
-The following are features of the `MindMyMoney` application. Please ensure that the your input follows the 
-format of commands given is accurately.  
+The following are features of the `MindMyMoney` application. 
+Please ensure that the format of commands given is accurate.  
 Words in `[SQUARE_BRACKETS]` are the parameters.  
 
 ### Display list of currently available commands: `help`  
