@@ -51,7 +51,10 @@ public class Housekeeper {
         availableList.clear();
         String[] days = availability.split(",");
         for (String day : days) {
-            availableList.add(Integer.parseInt(day) - 1);
+            int convertToCorrectDay = Integer.parseInt(day) - 1;
+            if (!(availableList.contains(convertToCorrectDay))) {
+                availableList.add(convertToCorrectDay);
+            }
         }
     }
 
