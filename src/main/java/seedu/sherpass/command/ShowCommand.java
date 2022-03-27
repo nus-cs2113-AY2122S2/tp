@@ -13,12 +13,33 @@ import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_TWO;
 
 public class ShowCommand extends Command {
     public static final String COMMAND_WORD = "show";
+    /*
     public static final String MESSAGE_USAGE = "Show: shows the array of tasks in a list format\n"
             + "or in a timetable format.\n\nTo generate the timetable, use \n1) `show today`,\n"
             + "2) `show week`\n3) `show <date>`, where date is in the format d/M/YYYY.\n"
             + "E.g. show 23/5/2022 to show timetable for 23th May 2022.\n\n"
             + "To generate a list of all tasks, use 4) `show all`.\n"
             + "To generate a list of pending tasks, use 5) `show todo`.";
+
+     */
+
+    public static final String MESSAGE_USAGE = String.format("Show: shows the array of tasks in a list format%n"
+            + "or in a timetable format.%n%n"
+            + ""
+            + "To generate the timetable or a list of monthly schedule, use %n"
+            + "1) `show today`%n"
+            + "2) `show week`%n"
+            + "3) `show <date>`, where date is in the format d/M/YYYY.%n"
+            + "4) `show month`%n"
+            + "5) `show <month>`, where month can be the full spelling or%n"
+            + "                   the abrreviation of the specfic months%n"
+            + "                   E.g. `show sep` or `show september`%n"
+            + "E.g. show 23/5/2022 to show timetable for 23th May 2022.%n%n"
+            + ""
+            + "To generate a list of all tasks, use%n"
+            + "6) `show all`.%n"
+            + "To generate a list of pending tasks, use%n"
+            + "7) `show todo`.");
 
     LocalDate dayInput;
     String selection;
