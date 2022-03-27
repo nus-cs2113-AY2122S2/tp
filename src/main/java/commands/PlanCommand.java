@@ -140,6 +140,7 @@ public class PlanCommand extends Command {
                 getPlanList().listAllPlan();
                 break;
             case DETAILS_ACTION_KEYWORD:
+                getPlanList().listPlanDetails(getUserArguments(), ui);
                 break;
             case DELETE_ACTION_KEYWORD:
                 Plan deletedPlan = getPlanList().deletePlan(getUserArguments());

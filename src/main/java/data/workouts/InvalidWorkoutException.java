@@ -10,6 +10,8 @@ public class InvalidWorkoutException extends Exception {
     public static final String DUPLICATE_WORKOUT_ERROR_MSG = "Uh oh, there already is an existing workout with "
             + "an identical\nexercise name and number of repetitions.";
     public static final String INVALID_WORKOUT_ERROR_MSG = "The workout given does not exist.";
+    public static final String INDEX_VALUE_OUT_OF_RANGE = "Uh oh, the index specified is out of range.\n"
+            + "(Index specified needs to be within the number of workouts)";
 
     private String throwingClass;
 
