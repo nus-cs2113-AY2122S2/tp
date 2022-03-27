@@ -1,6 +1,7 @@
 package seedu.duke.assets;
 
 import seedu.duke.exception.DuplicateEntryException;
+import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
 import seedu.duke.helper.command.CommandLineTable;
@@ -47,11 +48,10 @@ public class DoctorList extends List {
     }
 
     //view particular doctor
-    public void view(String nric) {
+    public void view(String nric) throws HalpmiException {
         Doctor doctor = getDoctor(nric);
         if (doctor == null) {
-            UI.printParagraph("Doctor doesn't exist please try again!");
-            return;
+            throw new HalpmiException("Doctor doesn't exist please try again!");
         }
         CommandLineTable doctorTable = new CommandLineTable();
         doctorTable.setShowVerticalLines(true);
@@ -64,16 +64,20 @@ public class DoctorList extends List {
     }
 
     //view all doctor
-    public void view() {
+    public void view() throws HalpmiException {
         CommandLineTable doctorTable = new CommandLineTable();
         //st.setRightAlign(true);//if true then cell text is right aligned
         doctorTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
-        doctorTable.setHeaders("Nric", "FullName","Age", "Address", "Gender", "Dob",
+        doctorTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
                 "Specialization");
-        for (Doctor doctor: doctors) {
+
+        if (doctors.size() == 0) {
+            throw new HalpmiException("Doctor list is empty, please add doctor");
+        }
+        for (Doctor doctor : doctors) {
             doctorTable.addRow(doctor.getNric(), doctor.getFullName(), String.valueOf(doctor.getAge()),
-                    doctor.getAddress(), String.valueOf(doctor.getGender()), doctor.getDob(),
-                    doctor.getSpecialization());
+                  doctor.getAddress(), String.valueOf(doctor.getGender()), doctor.getDob(),
+                  doctor.getSpecialization());
         }
         doctorTable.print();
     }
