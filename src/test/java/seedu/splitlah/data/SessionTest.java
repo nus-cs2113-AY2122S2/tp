@@ -84,7 +84,7 @@ class SessionTest {
 
         try {
             Activity activity = session.getActivity(1);
-            assertEquals("Lunch", activity.getActivityName());
+            assertEquals(1, activity.getActivityId());
         } catch (InvalidDataException exception) {
             fail();
         }
