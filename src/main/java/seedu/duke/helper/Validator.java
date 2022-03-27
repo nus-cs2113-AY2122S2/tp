@@ -124,39 +124,45 @@ public class Validator {
         validateAdmissionDate(parameters[6]);
     }
 
+
     /* Validate medicine attributes */
-    private static boolean validateMedicineName(String medicineName) {
-        return medicineName.matches("[a-zA-z]+");
+    private static boolean validateMedicineName(String medicineName) throws HalpmiException {
+        boolean isValid = medicineName.matches("[a-zA-z]+");
+        if(!isValid){
+            throw new HalpmiException("Invalid Medicine name");
+        }
+        return true;
+
     }
 
-    private static boolean validateDosage(String dosage) {
+    private static boolean validateDosage(String dosage) throws HalpmiException {
         try {
             int dosageInt = Integer.parseInt(dosage);
             return dosageInt > 0;
         } catch (NumberFormatException numberFormatException) {
-            return false;
+            throw new HalpmiException("Invalid Medicine dosage");
         }
     }
 
-    private static boolean validateExpiry(String expiry) {
+    private static boolean validateExpiry(String expiry) throws HalpmiException{
         try {
             LocalDate expiryDate = LocalDate.parse(expiry);
             LocalDate minimumDate = LocalDate.now();
             if (expiryDate.isBefore(minimumDate)) {
-                return false;
+                throw new HalpmiException("Medicine expiry date is before today");
             }
             return true;
         } catch (DateTimeParseException dateTimeParseException) {
-            return false;
+            throw new HalpmiException("Invalid Medicine Expiry");
         }
     }
 
-    private static boolean validateQuantity(String quantity) {
+    private static boolean validateQuantity(String quantity) throws HalpmiException{
         try {
             int quantityInt = Integer.parseInt(quantity);
             return quantityInt > 0;
         } catch (NumberFormatException numberFormatException) {
-            return false;
+            throw new HalpmiException("Invalid Medicine Quantity");
         }
     }
     private static void validateMedicineId(String medicineId) throws HalpmiException {
@@ -164,6 +170,15 @@ public class Validator {
         Matcher fullNameMatcher = fullNamePattern.matcher(medicineId);
         if (!fullNameMatcher.matches()) {
             throw new HalpmiException("Medicine must contain only alphabets and Numbers.");
+        }
+    }
+
+    private static boolean validateDate(String expiry) throws HalpmiException{
+        try {
+            LocalDate expiryDate = LocalDate.parse(expiry);
+            return true;
+        } catch (DateTimeParseException dateTimeParseException) {
+            throw new HalpmiException("Invalid Medicine Expiry");
         }
     }
 
@@ -297,27 +312,26 @@ public class Validator {
     }
 
     public static void validateFindMedicine(String[] parameters) throws HalpmiException {
+
+        boolean check = true;
         switch (parameters[0]) {
-        case "id":
-            //validateMedicineId(parameters[1]);
-            break;
-        case "name":
-            validateMedicineName(parameters[1]);
-            break;
-        case "dosage":
-            validateDosage(parameters[1]);
-            break;
-        case "expiry":
-            validateExpiry(parameters[1]);
-            break;
-        case "sideeffects":
-            validateMedicineSideEffects(parameters[1]);
-            break;
-        case "quantity":
-            validateQuantity(parameters[1]);
-            break;
-        default:
-            throw new HalpmiException("Input must be an attribute of Medicine");
-        }
+
+            case "name":
+                check = validateMedicineName(parameters[1]);
+                break;
+            case "dosage":
+                check = check && validateDosage(parameters[1]);
+                break;
+            case "expiry":
+                check = check && validateDate(parameters[1]);
+                break;
+            case "quantity":
+                check = check && validateQuantity(parameters[1]);
+                break;
+            case "id":
+            case "side effects":
+            default:
+                break;
+            }
     }
 }
