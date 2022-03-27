@@ -18,19 +18,17 @@ public class CheckRoomByLevelCommand extends Command {
         level = Integer.parseInt(commandStringWithoutCommand.trim());
     }
 
-    @Override
+
     /**
      * Override of execute command in Command class.
      * Print out all room information with corresponding level
      * including the information of:
      * type, room number, level and status.
-     * @param satisfactionList The given list of Satisfaction objects.
-     * @param roomList The given list of Room objects.
-     * @param itemList The given list of Item objects.
+     * @param listContainer
      * @param ui The user interface for this execution method.
      * @throws InvalidLevelException if the level is invalid.
      */
-
+    @Override
     public void execute(ListContainer listContainer, Ui ui)
             throws InvalidLevelException {
         RoomList roomList = listContainer.getRoomList();

@@ -20,17 +20,16 @@ public class CheckRoomCommand extends Command {
         roomId = Integer.parseInt(command);
     }
 
-    @Override
+
     /**
      * Override of execute command in Command class.
      * Print out the room information with corresponding room number
      * including information of:
      * type, room number, level and status.
-     * @param satisfactionList The given list of Satisfaction objects.
-     * @param roomList The given list of Room objects.
-     * @param itemList The given list of Item objects.
+     * @param listContainer
      * @param ui The user interface for this execution method.
      */
+    @Override
     public void execute(ListContainer listContainer, Ui ui) throws InvalidRoomNumberException {
         RoomList roomList = listContainer.getRoomList();
         for (Room room : roomList.getRoomList()) {
