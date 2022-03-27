@@ -19,18 +19,20 @@ public class ShowCommand extends Command {
             + ""
             + "To generate the timetable or a list of monthly schedule, use %n"
             + "1) `show today`%n"
-            + "2) `show week`%n"
-            + "3) `show <date>`, where date is in the format d/M/YYYY.%n"
-            + "4) `show month`%n"
-            + "5) `show <month>`, where month can be the full spelling or%n"
+            + "2) `show tomorrow`, where `tomorrow can be shorten to `tmr`%n"
+            + "3) `show week`%n"
+            + "4) `show next week`, where `next week` can be shorten to `nextweek`%n"
+            + "5) `show <date>`, where date is in the format d/M/YYYY.%n"
+            + "6) `show month`%n"
+            + "7) `show <month>`, where month can be the full spelling or%n"
             + "                   the abrreviation of the specfic months%n"
             + "                   E.g. `show sep` or `show september`%n"
             + "E.g. show 23/5/2022 to show timetable for 23th May 2022.%n%n"
             + ""
             + "To generate a list of all tasks, use%n"
-            + "6) `show all`.%n"
+            + "8) `show all`.%n"
             + "To generate a list of pending tasks, use%n"
-            + "7) `show todo`.");
+            + "9) `show todo`.");
 
     LocalDate dayInput;
     String selection;
