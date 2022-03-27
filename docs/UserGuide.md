@@ -155,6 +155,8 @@ Format:
 
 Below is an example of the monthly schedule displayed:
 
+![monthlySchedule](images/monthlySchedule.PNG)
+
 ### Getting a detailed list: `show all` / `show todo`
 
 Other than getting a timetable, Sherpass also allows you
