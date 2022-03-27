@@ -97,6 +97,14 @@ public class Manager {
             command = Parser.parseEditMedicine(parameters);
             status = command.execute(storage.medicines);
             break;
+        case "update medicines":
+            command = Parser.parseUpdateMedicineStock(parameters);
+            status = command.execute(storage.medicines);
+            break;
+        case "clear old medicines":
+            command = Parser.parseClearExpiredMedicine(parameters);
+            status = command.execute(storage.medicines);
+            break;
         case "add appointment":
             command = Parser.parseAddAppointment(parameters);
             status = command.execute(storage.appointments);

@@ -39,7 +39,7 @@ public class DoctorList extends List {
         }
         Doctor newDoctor = new Doctor(addDoctorParameters[0],addDoctorParameters[1],
                 Integer.parseInt(addDoctorParameters[2]),
-                addDoctorParameters[3], addDoctorParameters[4].charAt(0),addDoctorParameters[5],
+                addDoctorParameters[3].charAt(0), addDoctorParameters[4],addDoctorParameters[5],
                 addDoctorParameters[6]);
         doctors.add(newDoctor);
     }

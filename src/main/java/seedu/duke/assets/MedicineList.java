@@ -6,10 +6,12 @@ import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
 import seedu.duke.helper.command.CommandLineTable;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MedicineList extends List {
     private ArrayList<Medicine> medicines = new ArrayList<>();
+    private ArrayList<Medicine> expiredMedicines = new ArrayList<>();
 
     public int getSize() {
         return medicines.size();
@@ -104,6 +106,42 @@ public class MedicineList extends List {
             return;
         }
         throw new NotFoundException("There are no medicines with given Batch ID!");
+    }
+
+    public void viewExpired() {
+        CommandLineTable medicineTable = new CommandLineTable();
+        //st.setRightAlign(true);//if true then cell text is right aligned
+        medicineTable.setShowVerticalLines(true);
+        medicineTable.setHeaders("MedicineId", "MedicineName", "Dosage", "Expiry", "SideEffects", "Quantity");
+
+        for (Medicine medicine : expiredMedicines) {
+            medicineTable.addRow(medicine.getMedicineId(), medicine.getMedicineName(),
+                    String.valueOf(medicine.getDosage()),
+                    medicine.getExpiry(), medicine.getSideEffects(),
+                    String.valueOf(medicine.getQuantity()));
+        }
+        medicineTable.print();
+    }
+
+    public void updateStock() {
+        for (int i = 0; i < medicines.size(); i++) {
+            LocalDate date = LocalDate.parse(medicines.get(i).getExpiry());
+            LocalDate today = LocalDate.now();
+            if (date.isBefore(today)) {
+                expiredMedicines.add(medicines.get(i));
+                medicines.remove(i);
+            }
+        }
+        viewExpired();
+    }
+
+    public void clearStock() {
+        if (expiredMedicines.size() == 0) {
+            UI.printParagraph("There are no expired medicines in the expired list!");
+            return;
+        }
+        expiredMedicines.clear();
+        UI.printParagraph("Expired medicines in the expired list has been cleared!");
     }
 
     public ArrayList<Medicine> getList() {

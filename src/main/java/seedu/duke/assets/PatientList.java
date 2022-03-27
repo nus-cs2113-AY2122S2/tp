@@ -41,7 +41,7 @@ public class PatientList extends List {
         }
         Patient newPatient = new Patient(addPatientParameters[0], addPatientParameters[1],
                 Integer.parseInt(addPatientParameters[2]),
-                addPatientParameters[3], addPatientParameters[4].charAt(0), addPatientParameters[5],
+                addPatientParameters[3].charAt(0), addPatientParameters[4], addPatientParameters[5],
                 addPatientParameters[6]);
         patients.add(newPatient);
         assert patients.size() == numberOfPatientsBefore + 1;

@@ -9,6 +9,7 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppointmentListTest {
+    /*
     @Test
     void checkEmpty_viewByCriteria_expectNoAppointmentsFound() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -18,6 +19,7 @@ public class AppointmentListTest {
         testAppointmentList.view("patient name, dummy");
         assertEquals(expectedOutput, outContent.toString());
     }
+     */
 
     @Test
     void checkFind_viewByCriteria_expectFoundAppointment() {

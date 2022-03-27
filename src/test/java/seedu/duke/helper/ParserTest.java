@@ -7,9 +7,10 @@ import seedu.duke.helper.command.AddAppointmentCommand;
 import seedu.duke.helper.command.Command;
 import seedu.duke.helper.command.ViewAppointmentCommand;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
-/*
+
 class ParserTest {
 
     @Test
@@ -311,6 +312,47 @@ class ParserTest {
     }
 
     @Test
+    void parseUpdateMedicineStockTest() {
+        try {
+            Parser.parseUpdateMedicineStock(null);
+            assert true;
+        } catch (HalpmiException e) {
+            fail("Should not be throwing exception!");
+        }
+    }
+
+    @Test
+    void parseUpdateMedicineStockInvalidParamTest() {
+        try {
+            Parser.parseUpdateMedicineStock("");
+            fail("Should be throwing exception!");
+        } catch (HalpmiException e) {
+            assert true;
+        }
+    }
+
+    @Test
+    void parseClearExpiredMedicineTest() {
+        try {
+            Parser.parseClearExpiredMedicine(null);
+            assert true;
+        } catch (HalpmiException e) {
+            fail("Should not be throwing exception!");
+        }
+    }
+
+    @Test
+    void parseClearExpiredMedicineInvalidParamTest() {
+        try {
+            Parser.parseClearExpiredMedicine("");
+            fail("Should be throwing exception!");
+        } catch (HalpmiException e) {
+            assert true;
+        }
+    }
+
+    /*
+    @Test
     void parseAddAppointmentTest_CorrectFormatInput_returnCommand() {
         String parameters = "ID1,S1234567A,Thomas,S7654321A,Anderson,2023-01-01,Headache";
         Command testCommand = null;
@@ -321,6 +363,7 @@ class ParserTest {
         }
         assertTrue(testCommand instanceof AddAppointmentCommand);
     }
+
 
     @Test
     void parseViewAppointmentTest_CorrectFormatInput_returnCommand() {
@@ -333,5 +376,6 @@ class ParserTest {
         }
         assertTrue(testCommand instanceof ViewAppointmentCommand);
     }
+    */
+
 }
-*/
