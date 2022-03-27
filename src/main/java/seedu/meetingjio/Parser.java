@@ -1,23 +1,31 @@
 package seedu.meetingjio;
 
-import seedu.meetingjio.commands.*;
+import seedu.meetingjio.commands.AddLessonCommand;
+import seedu.meetingjio.commands.Command;
+import seedu.meetingjio.commands.ListCommand;
+import seedu.meetingjio.commands.DeleteCommand;
+import seedu.meetingjio.commands.ClearCommand;
+import seedu.meetingjio.commands.AddMeetingCommand;
+import seedu.meetingjio.commands.CommandResult;
+import seedu.meetingjio.commands.HelpCommand;
 
 import seedu.meetingjio.exceptions.InvalidDayException;
-import seedu.meetingjio.exceptions.MissingValueException;
-import seedu.meetingjio.exceptions.InvalidTimeException;
 import seedu.meetingjio.exceptions.InvalidModeException;
+import seedu.meetingjio.exceptions.InvalidTimeException;
+import seedu.meetingjio.exceptions.MissingValueException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static seedu.meetingjio.common.Messages.MESSAGE_HELP;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_COMMAND;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
+
+import static seedu.meetingjio.common.Messages.MESSAGE_HELP;
 
 public class Parser {
     private final String command;
@@ -27,8 +35,8 @@ public class Parser {
     private static final int NAME_INDEX = 0;
     private static final int TITLE_INDEX = 1;
     private static final int DAY_INDEX = 2;
-    private static final int STARTTIME_INDEX = 3;
-    private static final int ENDTIME_INDEX = 4;
+    private static final int START_TIME_INDEX = 3;
+    private static final int END_TIME_INDEX = 4;
     private static final int MODE_INDEX = 5;
     private static final String[] HEADINGS_ADD_LESSON = {"n/", "t/", "d/", "st/", "et/", "m/"};
     private static final String[] HEADINGS_ADD_MEETING = {"t/", "d/", "st/", "et/", "m/"};
@@ -41,7 +49,7 @@ public class Parser {
     public Command parseCommand() {
         switch (command) {
         case AddLessonCommand.COMMAND_WORD:
-            return prepareAdd();
+            return prepareAddLesson();
         case ListCommand.COMMAND_WORD:
             return new ListCommand(arguments.trim());
         case DeleteCommand.COMMAND_WORD:
@@ -58,23 +66,22 @@ public class Parser {
         }
     }
 
-
     /**
      * Collate the user's input and verify the validity of the input value of each parameter.
      * Invalid inputs will be identified.
      * If input is valid, AddLessonCommand class is returned.
      *
      * @return AddLessonCommand if input is valid
-     *         CommandResult if input is invalid, with the error description as a parameter
+     * CommandResult if input is invalid, with the error description as a parameter
      */
-    public Command prepareAdd() {
+    public Command prepareAddLesson() {
         try {
             String[] eventDescription = splitArgumentsAddLesson();
             checkNonNullValues(eventDescription);
 
             String day = eventDescription[DAY_INDEX].toLowerCase();
-            int startTime = Integer.parseInt(eventDescription[STARTTIME_INDEX]);
-            int endTime = Integer.parseInt(eventDescription[ENDTIME_INDEX]);
+            int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX]);
+            int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX]);
             String mode = eventDescription[MODE_INDEX].toLowerCase();
 
             checkDay(day);
@@ -105,7 +112,7 @@ public class Parser {
      * Checks the validity of the user's given startTime and endTime.
      *
      * @param startTime Time at which the event begins
-     * @param endTime Time at which the event ends
+     * @param endTime   Time at which the event ends
      * @throws InvalidTimeException If the given hours and minutes are invalid, or if startTime is later than endTime
      */
     private void checkTime(int startTime, int endTime) throws InvalidTimeException {
@@ -171,13 +178,12 @@ public class Parser {
 
     /**
      * Try to parse the delete command to see if index has been done.
-     *
      */
     public Command prepareDelete() {
         try {
-            String name = getParametersByIndexFromInput(0,arguments);
-            int index = Integer.parseInt(getParametersByIndexFromInput(1,arguments));
-            return new DeleteCommand(name,index);
+            String name = getParametersByIndexFromInput(0, arguments);
+            int index = Integer.parseInt(getParametersByIndexFromInput(1, arguments));
+            return new DeleteCommand(name, index);
         } catch (NumberFormatException nfe) {
             logger.log(Level.INFO, "Invalid index to delete Error detected.");
             return new CommandResult(ERROR_INVALID_INDEX_FORMAT);
@@ -188,7 +194,7 @@ public class Parser {
         return input.split(" ")[0].trim().toLowerCase();
     }
 
-    private String getParametersByIndexFromInput(int index,String input) {
+    private String getParametersByIndexFromInput(int index, String input) {
         return input.split(" ")[index].trim().toLowerCase();
     }
 
@@ -206,38 +212,39 @@ public class Parser {
         String[] splitArguments = arguments.split(" ");
         int index = -1;
         for (String str : splitArguments) {
-            if (containHeadings(str,HEADINGS_ADD_LESSON) == -1) {
+            if (containHeadings(str, HEADINGS_ADD_LESSON) == -1) {
                 eventDescription[index] += " " + str;
                 eventDescription[index] = eventDescription[index].trim();
             } else {
-                index = containHeadings(str,HEADINGS_ADD_LESSON);
-                eventDescription[index] = str.substring(str.indexOf("/") + 1);
-            }
-        }
-        return eventDescription;
-    }
-    private String[] splitArgumentsAddMeeting() {
-        String[] eventDescription = new String[5];
-        String[] splitArguments = arguments.split(" ");
-        int index = -1;
-        for (String str : splitArguments) {
-            if (containHeadings(str,HEADINGS_ADD_MEETING) == -1) {
-                eventDescription[index] += " " + str;
-                eventDescription[index] = eventDescription[index].trim();
-            } else {
-                index = containHeadings(str,HEADINGS_ADD_MEETING);
+                index = containHeadings(str, HEADINGS_ADD_LESSON);
                 eventDescription[index] = str.substring(str.indexOf("/") + 1);
             }
         }
         return eventDescription;
     }
 
-    private int containHeadings(String str,String[] HEADINGS) {
-        for (int i = 0; i < HEADINGS.length; i++) {
-            if (str.contains(HEADINGS[i])) {
-                int headingLength = HEADINGS[i].length();
+    private String[] splitArgumentsAddMeeting() {
+        String[] eventDescription = new String[5];
+        String[] splitArguments = arguments.split(" ");
+        int index = -1;
+        for (String str : splitArguments) {
+            if (containHeadings(str, HEADINGS_ADD_MEETING) == -1) {
+                eventDescription[index] += " " + str;
+                eventDescription[index] = eventDescription[index].trim();
+            } else {
+                index = containHeadings(str, HEADINGS_ADD_MEETING);
+                eventDescription[index] = str.substring(str.indexOf("/") + 1);
+            }
+        }
+        return eventDescription;
+    }
+
+    private int containHeadings(String str, String[] headings) {
+        for (int i = 0; i < headings.length; i++) {
+            if (str.contains(headings[i])) {
+                int headingLength = headings[i].length();
                 String subStr = str.substring(0, headingLength);
-                if (subStr.equals(HEADINGS[i])) {
+                if (subStr.equals(headings[i])) {
                     return i;
                 }
             }
@@ -252,8 +259,8 @@ public class Parser {
 
             //there is no name for meeting because meeting applies to everyone
             String day = eventDescription[DAY_INDEX - 1].toLowerCase();
-            int startTime = Integer.parseInt(eventDescription[STARTTIME_INDEX - 1]);
-            int endTime = Integer.parseInt(eventDescription[ENDTIME_INDEX - 1]);
+            int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX - 1]);
+            int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX - 1]);
             String mode = eventDescription[MODE_INDEX - 1].toLowerCase();
 
             checkDay(day);

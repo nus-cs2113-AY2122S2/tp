@@ -117,7 +117,7 @@ public class MasterTimetable {
                 return ERROR_DUPLICATE_EVENT;
             } catch (OverlappingEventException oee) {
                 return ERROR_OVERLAPPING_EVENT;
-            } catch (Exception e){
+            } catch (Exception e) {
                 return "ERROR DETECTED";
             }
         }
