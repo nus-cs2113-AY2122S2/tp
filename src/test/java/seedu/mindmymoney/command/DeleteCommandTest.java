@@ -28,7 +28,8 @@ class DeleteCommandTest {
         String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
         ArrayList<Expenditure> testList = new ArrayList<>();
         new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand();
-        testList.add(new Expenditure("cash", "Personal", "Nike Shoes", 300, "2022-03"));
+        testList.add(new Expenditure("cash", "Personal", "Nike Shoes", 300,
+            "2022-03"));
         String deleteInputString = "delete 1";
         new DeleteCommand(deleteInputString, expenditureTestList, creditCardTestList).executeCommand();
         testList.remove(0);
