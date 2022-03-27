@@ -121,10 +121,10 @@ Creates a new workout.
 
 Format: `workout /new <exercise name> /reps <number of repetitions>`
 
-| Parameters | Description                                                                                                                                                            |
-| --- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<exercise name>` | The name of the exercise. <br/><ul><li>Exercise name must be from the pre-defined list of exercises.</li><li>Type `exercise /list` for the list of exercises</li></ul> |
-| `<number of repetitions>` | The number of repetitions that should be carried out for `<exercise name>`.                                                                                            |
+| Parameters | Description                                                                                                                                           |
+| --- |-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `<exercise name>` | The name of the exercise. <br/>- Exercise name must be from the pre-defined list of exercises.<br/>- Type `exercise /list` for the list of exercises. |
+| `<number of repetitions>` | The number of repetitions that should be carried out for `<exercise name>`.                                                                           |
 
 **Example**
 ```
