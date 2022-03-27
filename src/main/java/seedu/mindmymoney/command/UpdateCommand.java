@@ -5,6 +5,7 @@ import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.CreditCard;
 import seedu.mindmymoney.userfinancial.Expenditure;
+import seedu.mindmymoney.userfinancial.User;
 
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_NAME;
@@ -26,10 +27,10 @@ public class UpdateCommand extends Command {
     public ExpenditureList itemList;
     public CreditCardList creditCardList;
 
-    public UpdateCommand(String updateInput, ExpenditureList expenditureList, CreditCardList creditCardList) {
+    public UpdateCommand(String updateInput, User user) {
         this.updateInput = updateInput;
-        this.itemList = expenditureList;
-        this.creditCardList = creditCardList;
+        this.itemList = user.getExpenditureListArray();
+        this.creditCardList = user.getCreditCardListArray();
     }
 
     private boolean hasCreditCardFlag() {

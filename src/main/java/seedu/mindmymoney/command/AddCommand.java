@@ -5,6 +5,7 @@ import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.CreditCard;
+import seedu.mindmymoney.userfinancial.User;
 
 
 import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
@@ -36,10 +37,10 @@ public class AddCommand extends Command {
     public ExpenditureList expenditureList;
     public CreditCardList creditCardList;
 
-    public AddCommand(String addInput, ExpenditureList expenditureList, CreditCardList creditCardList) {
+    public AddCommand(String addInput, User user) {
         this.addInput = addInput;
-        this.expenditureList = expenditureList;
-        this.creditCardList = creditCardList;
+        this.expenditureList = user.getExpenditureListArray();
+        this.creditCardList = user.getCreditCardListArray();
     }
 
     /**
@@ -71,17 +72,22 @@ public class AddCommand extends Command {
         if (capitalise(paymentMethod).equals("Cash")) {
             paymentMethod = capitalise(paymentMethod);
         }
-        String category = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
-        testCategory(category);
-        category = capitalise(category);
+
+        String inputCategory = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
+        testCategory(inputCategory);
+        String category = capitalise(inputCategory);
+
         String description = parseInputWithCommandFlag(addInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT);
         testDescription(description);
-        String amount = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
-        testAmount(amount);
-        float amountInt = Float.parseFloat(amount);
-        amountInt = formatFloat(amountInt);
-        String time = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
-        time = convertTime(time);
+
+        String amountAsString = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
+        testAmount(amountAsString);
+
+        float amountAsFloat = Float.parseFloat(amountAsString);
+        float amountInt = formatFloat(amountAsFloat);
+
+        String inputTime = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
+        String time = convertTime(inputTime);
 
         expenditureList.add(new Expenditure(paymentMethod, category, description, amountInt, time));
         System.out.println("Successfully added: \n\n"

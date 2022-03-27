@@ -3,6 +3,7 @@ package seedu.mindmymoney.command;
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.CreditCardList;
+import seedu.mindmymoney.userfinancial.User;
 
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_THIRD_ITEM_IN_STRING;
@@ -18,10 +19,10 @@ public class DeleteCommand extends Command {
     public ExpenditureList expenditureList;
     public CreditCardList creditCardList;
 
-    public DeleteCommand(String input, ExpenditureList expenditureList, CreditCardList creditCardList) {
+    public DeleteCommand(String input, User user) {
         this.input = input;
-        this.expenditureList = expenditureList;
-        this.creditCardList = creditCardList;
+        this.expenditureList = user.getExpenditureListArray();
+        this.creditCardList = user.getCreditCardListArray();
     }
 
     /**
@@ -73,18 +74,18 @@ public class DeleteCommand extends Command {
             }
             String getNumber = splitMessage[1];
             int positionToDelete = Integer.parseInt(getNumber) - 1;
-            if (isOutOfExpenditureListBounds(positionToDelete)) {
-                throw new MindMyMoneyException("Please input a valid index");
-            } else {
-                assert positionToDelete >= 0 : "Index should always be >= 0";
-                System.out.println("I have removed "
-                        + expenditureList.get(positionToDelete).getDescription()
-                        + " of $" + expenditureList.get(positionToDelete).getAmount()
-                        + " from the account" + System.lineSeparator());
-                expenditureList.delete(positionToDelete);
-            }
+
+            System.out.println("I have removed "
+                    + expenditureList.get(positionToDelete).getDescription()
+                    + " of $" + expenditureList.get(positionToDelete).getAmount()
+                    + " from the account" + System.lineSeparator());
+            expenditureList.delete(positionToDelete);
         } catch (NumberFormatException e) {
             throw new MindMyMoneyException("INDEX must be a number");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new MindMyMoneyException("Please input a valid index");
+        } catch (IndexOutOfBoundsException e) {
+            throw new MindMyMoneyException("Please input a valid index");
         }
     }
 

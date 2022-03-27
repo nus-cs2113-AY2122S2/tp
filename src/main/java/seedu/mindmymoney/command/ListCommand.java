@@ -6,6 +6,7 @@ import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.CreditCard;
 import seedu.mindmymoney.userfinancial.Expenditure;
+import seedu.mindmymoney.userfinancial.User;
 
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
@@ -15,9 +16,9 @@ public class ListCommand extends Command {
     public CreditCardList creditCardList;
     private String listInput;
 
-    public ListCommand(String listInput, ExpenditureList expenditureList, CreditCardList creditCardList) {
-        this.expenditureList = expenditureList;
-        this.creditCardList = creditCardList;
+    public ListCommand(String listInput, User user) {
+        this.expenditureList = user.getExpenditureListArray();
+        this.creditCardList = user.getCreditCardListArray();
         this.listInput = listInput;
     }
 

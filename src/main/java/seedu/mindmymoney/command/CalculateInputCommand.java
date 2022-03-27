@@ -3,6 +3,7 @@ package seedu.mindmymoney.command;
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.helper.GeneralFunctions;
+import seedu.mindmymoney.userfinancial.User;
 
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM_IN_STRING;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENDITURE_PER_MONTH;
@@ -16,9 +17,9 @@ public class CalculateInputCommand extends Command {
     private String calculateInput;
     public ExpenditureList expenditureList;
 
-    public CalculateInputCommand(String calculateInput, ExpenditureList expenditureList) {
+    public CalculateInputCommand(String calculateInput, User user) {
         this.calculateInput = calculateInput;
-        this.expenditureList = expenditureList;
+        this.expenditureList = user.getExpenditureListArray();
     }
 
     /**
