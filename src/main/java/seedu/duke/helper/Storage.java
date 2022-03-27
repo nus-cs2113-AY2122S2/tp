@@ -121,7 +121,6 @@ public class Storage {
         } catch (IOException e) {
             UI.printParagraph("Unable to save data...");
         }
-        assert medicineFile.length() != 0;
     }
 
     private void savePatientData() {
@@ -143,7 +142,6 @@ public class Storage {
         } catch (IOException e) {
             UI.printParagraph("Unable to save data...");
         }
-        assert patientFile.length() != 0;
     }
 
     private void saveAppointmentData() {
@@ -165,7 +163,6 @@ public class Storage {
         } catch (IOException e) {
             UI.printParagraph("Unable to save data...");
         }
-        assert appointmentFile.length() != 0;
     }
 
     private void saveDoctorData() {
@@ -187,7 +184,6 @@ public class Storage {
         } catch (IOException e) {
             UI.printParagraph("Unable to save data...");
         }
-        assert doctorFile.length() != 0;
     }
 
     public void saveData() {

@@ -16,6 +16,6 @@ public class ViewAppointmentCommand extends Command {
             String parameters = String.join(",",parameterArray);
             appointmentList.view(parameters);
         }
-        return Status.FIND_APPOINTMENT_SUCCESS;
+        return Status.VIEW_SUCCESS;
     }
 }
