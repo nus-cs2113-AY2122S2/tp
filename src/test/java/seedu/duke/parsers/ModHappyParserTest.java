@@ -539,7 +539,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_deleteCommand_invalidFlag() {
-        final String testString = "del /a 1";
+        final String testString = "del a 1";
         try {
             parser.parseCommand(testString);
             fail();
@@ -616,19 +616,6 @@ public class ModHappyParserTest {
     }
 
     @Test
-    public void parse_editCommand_task_unnecessaryArgs() {
-        final String testString = "edit task 1 blahblah";
-        try {
-            parser.parseCommand(testString);
-            fail();
-        } catch (ParseException e) {
-            return;
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
     public void parse_editCommand_task_parsedCorrectly() {
         final String testString = "edit task 1 -m cs2113t -n \"changed\" ";
         try {
@@ -637,6 +624,19 @@ public class ModHappyParserTest {
             assertEquals(0, ((EditCommand) c).getTaskIndex()); // zero-indexed
             assertNull(((EditCommand) c).getModuleCode());
             assertEquals("cs2113t", ((EditCommand) c).getTaskModule());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_editCommand_task_unnecessaryArgs() {
+        final String testString = "edit task 1 blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
         } catch (Exception e) {
             fail();
         }
@@ -782,6 +782,91 @@ public class ModHappyParserTest {
     }
 
     @Test
+    public void parse_helpCommand_parsedCorrectly() {
+        final String testString = "help";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof HelpCommand);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_helpCommand_withCommandWord_parsedCorrectly() {
+        final String testString = "help add";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof HelpCommand);
+            assertEquals("add", ((HelpCommand) c).getCommand());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_helpCommand_invalidCommandWord_throwsParseException() {
+        final String testString = "help invalidCommandWord";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_helpCommand_unnecessaryArgs() {
+        final String testString = "help add blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_listCommand_parsedCorrectly() {
+        final String testString = "list";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof ListCommand);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_listCommandwithArgument_noExeceptionThrown() {
+        final String testString = "list \"test\"";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof ListCommand);
+            assertEquals("test", ((ListCommand) c).getArgument());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_listCommand_unnecessaryArgs() {
+        final String testString = "list \"test\" blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
     public void parse_markCommand_noModule_parsedCorrectly() {
         final String testString = "mark c 3";
         try {
@@ -873,31 +958,19 @@ public class ModHappyParserTest {
     }
 
     @Test
-    public void parse_listCommand_parsedCorrectly() {
-        final String testString = "list";
+    public void parse_optionCommand_parsedCorrectly() {
+        final String testString = "option";
         try {
             Command c = parser.parseCommand(testString);
-            assertTrue(c instanceof ListCommand);
+            assertTrue(c instanceof OptionCommand);
         } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void parse_listCommandwithArgument_noExeceptionThrown() {
-        final String testString = "list \"test\"";
-        try {
-            Command c = parser.parseCommand(testString);
-            assertTrue(c instanceof ListCommand);
-            assertEquals("test", ((ListCommand) c).getArgument());
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void parse_listCommand_unnecessaryArgs() {
-        final String testString = "list \"test\" blahblah";
+    public void parse_optionCommand_invalidConfigName() {
+        final String testString = "option invalidConfigName";
         try {
             parser.parseCommand(testString);
             fail();
@@ -909,42 +982,34 @@ public class ModHappyParserTest {
     }
 
     @Test
-    public void parse_tagCommand_addTag_withTargetModule_parsedCorrectly() {
-        final String testString = "tag add 1 -m cs2113t \"tag\"";
+    public void parse_optionCommand_invalidNewValue() {
+        final String testString = "option COMPLETED_TASKS_SHOWN = invalidNewValue";
         try {
-            Command c = parser.parseCommand(testString);
-            assertTrue(c instanceof TagCommand);
-            assertEquals("add", ((TagCommand) c).getTagOperation());
-            assertEquals("cs2113t", ((TagCommand) c).getTaskModule());
-            assertEquals("tag", ((TagCommand) c).getTagDescription());
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
         } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void parse_tagCommand_invalidTagOperation_throwsParseException() {
-        final String testString = "tag invalidOp 1 \"tag\"";
-        AtomicReference<Command> c = null;
-        assertThrows(ParseException.class, () -> {
-            c.set(parser.parseCommand(testString));
-        });
-    }
-
-    @Test
-    public void parse_saveCommand_parsedCorrectly() {
-        final String testString = "save";
+    public void parse_optionCommand_noEqualSign() {
+        final String testString = "option COMPLETED_TASKS_SHOWN false";
         try {
-            Command c = parser.parseCommand(testString);
-            assertTrue(c instanceof SaveCommand);
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
         } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void parse_saveCommand_unnecessaryArgs() {
-        final String testString = "save blahblah";
+    public void parse_optionCommand_unnecessaryArgs() {
+        final String testString = "option COMPLETED_TASKS_SHOWN = false blahblah";
         try {
             parser.parseCommand(testString);
             fail();
@@ -977,5 +1042,52 @@ public class ModHappyParserTest {
         } catch (Exception e) {
             fail();
         }
+    }
+
+    @Test
+    public void parse_saveCommand_parsedCorrectly() {
+        final String testString = "save";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof SaveCommand);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_saveCommand_unnecessaryArgs() {
+        final String testString = "save blahblah";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_tagCommand_addTag_withTargetModule_parsedCorrectly() {
+        final String testString = "tag add 1 -m cs2113t \"tag\"";
+        try {
+            Command c = parser.parseCommand(testString);
+            assertTrue(c instanceof TagCommand);
+            assertEquals("add", ((TagCommand) c).getTagOperation());
+            assertEquals("cs2113t", ((TagCommand) c).getTaskModule());
+            assertEquals("tag", ((TagCommand) c).getTagDescription());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_tagCommand_invalidTagOperation_throwsParseException() {
+        final String testString = "tag invalidOp 1 \"tag\"";
+        AtomicReference<Command> c = null;
+        assertThrows(ParseException.class, () -> {
+            c.set(parser.parseCommand(testString));
+        });
     }
 }
