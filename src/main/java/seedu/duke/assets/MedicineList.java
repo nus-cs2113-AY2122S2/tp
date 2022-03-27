@@ -152,33 +152,58 @@ public class MedicineList extends List {
     }
 
     public void findById(String[] parameters) {
-        this.returnedFinderArray = MedicineFinder.findMedicineById(medicines, parameters[1]);
-        createArrayOfFoundMedicines();
+        try {
+            this.returnedFinderArray = MedicineFinder.findMedicineById(medicines, parameters[1]);
+            createArrayOfFoundMedicines();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Doctor doesn't exist please try again!");
+        }
     }
 
     public void findByDosage(String[] parameters) {
-        this.returnedFinderArray = MedicineFinder.findMedicineByDosage(medicines, Integer.parseInt(parameters[1]));
-        createArrayOfFoundMedicines();
+        try {
+            this.returnedFinderArray = MedicineFinder.findMedicineByDosage(medicines, Integer.parseInt(parameters[1]));
+            createArrayOfFoundMedicines();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Doctor doesn't exist please try again!");
+        }
     }
 
     public void findByExpiry(String[] parameters) {
-        this.returnedFinderArray = MedicineFinder.findMedicineByExpiry(medicines, parameters[1]);
-        createArrayOfFoundMedicines();
+        try {
+            this.returnedFinderArray = MedicineFinder.findMedicineByExpiry(medicines, parameters[1]);
+            createArrayOfFoundMedicines();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Doctor doesn't exist please try again!");
+        }
     }
 
     public void findBySideEffects(String[] parameters) {
-        this.returnedFinderArray = MedicineFinder.findMedicineBySideEffects(medicines, parameters[1]);
-        createArrayOfFoundMedicines();
+        try {
+            this.returnedFinderArray = MedicineFinder.findMedicineBySideEffects(medicines, parameters[1]);
+            createArrayOfFoundMedicines();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Doctor doesn't exist please try again!");
+        }
     }
 
     public void findByQuantity(String[] parameters) {
-        this.returnedFinderArray = MedicineFinder.findMedicineByQuantity(medicines, Integer.parseInt(parameters[1]));
-        createArrayOfFoundMedicines();
+        try {
+            this.returnedFinderArray = MedicineFinder.findMedicineByQuantity(medicines,
+                    Integer.parseInt(parameters[1]));
+            createArrayOfFoundMedicines();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Doctor doesn't exist please try again!");
+        }
     }
 
     public void findByName(String[] parameters) {
-        this.returnedFinderArray = MedicineFinder.findMedicineByName(medicines, parameters[1]);
-        createArrayOfFoundMedicines();
+        try {
+            this.returnedFinderArray = MedicineFinder.findMedicineByName(medicines, parameters[1]);
+            createArrayOfFoundMedicines();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Doctor doesn't exist please try again!");
+        }
     }
 
 
