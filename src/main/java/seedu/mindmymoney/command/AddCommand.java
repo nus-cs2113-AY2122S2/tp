@@ -6,6 +6,11 @@ import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.CreditCard;
 
+
+import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
+import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
+import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_PAYMENT_METHOD;
 import static seedu.mindmymoney.constants.Flags.FLAG_END_VALUE;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_AMOUNT;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_BALANCE;
@@ -15,12 +20,10 @@ import static seedu.mindmymoney.constants.Flags.FLAG_OF_CASHBACK;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CATEGORY;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_DESCRIPTION;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENDITURE;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_TIME;
-import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
 
 import static seedu.mindmymoney.helper.AddCommandInputTests.testAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditure;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testPaymentMethod;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testCategory;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testDescription;
 import static seedu.mindmymoney.helper.TimeFunctions.convertTime;
@@ -63,27 +66,31 @@ public class AddCommand extends Command {
      * @throws MindMyMoneyException when inputs are invalid or flags are missing.
      */
     public void addExpenditure() throws MindMyMoneyException {
-        //Parse data from input
-        String expenditure = parseInputWithCommandFlag(addInput, FLAG_OF_EXPENDITURE, FLAG_OF_CATEGORY);
-        testExpenditure(expenditure, creditCardList);
+        String paymentMethod = parseInputWithCommandFlag(addInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_CATEGORY);
+        testPaymentMethod(paymentMethod, creditCardList);
+        if (capitalise(paymentMethod).equals("Cash")) {
+            paymentMethod = capitalise(paymentMethod);
+        }
         String category = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
         testCategory(category);
+        category = capitalise(category);
         String description = parseInputWithCommandFlag(addInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT);
         testDescription(description);
         String amount = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
         testAmount(amount);
         float amountInt = Float.parseFloat(amount);
+        amountInt = formatFloat(amountInt);
         String time = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
         time = convertTime(time);
 
-        expenditureList.add(new Expenditure(expenditure, category, description, amountInt, time));
+        expenditureList.add(new Expenditure(paymentMethod, category, description, amountInt, time));
         System.out.println("Successfully added: \n\n"
-                + "Description: " + description + "\n"
-                + "Amount: $" + amount + "\n"
-                + "Category: " + category + "\n"
-                + "Payment method: " + expenditure + "\n"
-                + "Date: " + time + "\n\n"
-                + "into the account");
+            + "Description: " + description + "\n"
+            + "Amount: $" + amountInt + "\n"
+            + "Category: " + category + "\n"
+            + "Payment method: " + paymentMethod + "\n"
+            + "Date: " + time + "\n\n"
+            + "into the account");
         System.out.print(System.lineSeparator());
     }
 
