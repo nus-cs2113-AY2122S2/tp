@@ -7,6 +7,8 @@
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Basic Class Diagram 
+![image](https://user-images.githubusercontent.com/53790951/160271319-4a351f51-afd7-4e04-9451-f04143146551.png)
 
 
 ## Product scope
