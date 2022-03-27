@@ -13,6 +13,7 @@ import java.util.Set;
  * @author Roy
  */
 public class PersonList implements Serializable {
+
     private ArrayList<Person> personList;
 
     /**
@@ -69,9 +70,7 @@ public class PersonList implements Serializable {
      * @param person A Person object to be removed.
      */
     public void removePerson(Person person) {
-        if (personList.contains(person)) {
-            personList.remove(person);
-        }
+        personList.remove(person);
     }
 
     /**
@@ -124,5 +123,35 @@ public class PersonList implements Serializable {
         assert nameSet.size() == personNames.length :
                 Message.ASSERT_PERSONLIST_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED;
         return false;
+    }
+
+    /**
+     * Checks if the ArrayList object that is supplied contains persons that are in personList attribute.
+     * Assumption: Function is only called by SessionEditCommand class to verify if new list of Person objects contains
+     *             previously stored persons.
+     *
+     * @param oldList An ArrayList object of Person objects.
+     * @return true if the new list of Person objects has all persons in the ArrayList that is supplied,
+     *         false, otherwise.
+     */
+    public boolean isValidList(ArrayList<Person> oldList) {
+        int existCount = 0;
+        for (Person person : personList) {
+            if (oldList.contains(person)) {
+                existCount++;
+            }
+        }
+        return existCount == oldList.size();
+    }
+
+    /**
+     * Removes existing persons in the list of Person objects.
+     * Assumption: Function is only called by SessionEditCommand class to add new persons into the existing
+     *             list of persons within the Session object.
+     *
+     * @param oldPersonList An ArrayList object of Person objects.
+     */
+    public void setNewPersonList(ArrayList<Person> oldPersonList) {
+        personList.removeAll(oldPersonList);
     }
 }
