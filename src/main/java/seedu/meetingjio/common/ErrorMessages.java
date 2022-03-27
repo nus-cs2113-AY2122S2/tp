@@ -54,4 +54,5 @@ public class ErrorMessages {
             + "some of the members cannot make it";
     public static final String ERROR_DUPLICATE_MEETING = "This meeting already exists. "
             + "This meeting will not be not added to the timetable.";
+    public static final String ERROR_MEETING_DOES_NOT_EXIST = "This meeting does exist";
 }

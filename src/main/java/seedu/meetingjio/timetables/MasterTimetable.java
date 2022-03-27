@@ -1,6 +1,7 @@
 package seedu.meetingjio.timetables;
 
 import seedu.meetingjio.commands.AddMeetingCommand;
+import seedu.meetingjio.commands.DeleteCommand;
 import seedu.meetingjio.events.Event;
 import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.exceptions.DuplicateEventException;
@@ -8,10 +9,10 @@ import seedu.meetingjio.exceptions.OverlappingEventException;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.commands.ListCommand;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
-import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.*;
 
 public class MasterTimetable {
     private final ArrayList<Timetable> timetables;
@@ -122,5 +123,31 @@ public class MasterTimetable {
             }
         }
         return AddMeetingCommand.addMeetingConfirmation(meeting);
+    }
+
+    public String deleteMeetingFromEveryoneTimetable(Meeting meeting){
+        for (Timetable timetable : timetables) {
+            deleteMeetingFromTimetable(timetable,meeting);
+        }
+        deleteMeetingFromMeetingList(meeting);
+        return DeleteCommand.deleteFromAllTimetableConfirmation(meeting);
+    }
+
+    public void deleteMeetingFromTimetable(Timetable timetable,Meeting meeting){
+        int initial_size = timetable.size();
+        for (int i = 0; i < timetable.size(); i++) {
+            if (meeting.equals(timetable.get(i))) {
+                timetable.remove(i);
+            }
+        }
+        //assert timetable.size() == initial_size + 1 : "Meeting did not exist in timetable/did not get deleted";
+    }
+
+    public void deleteMeetingFromMeetingList(Meeting meeting) {
+        for (int i = 0; i < meetingList.size(); i++) {
+            if (meeting.equals(meetingList.get(i))) {
+                meetingList.remove(i);
+            }
+        }
     }
 }
