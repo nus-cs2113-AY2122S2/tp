@@ -47,10 +47,7 @@ public class Order implements Serializable {
     }
 
     public int getDishCount() {
-        if (this.dishes.size() > 0) {
-            return this.dishes.size();
-        }
-        return -1;
-
+        assert (this.dishes.size() > 0);
+        return this.dishes.size();
     }
 }
