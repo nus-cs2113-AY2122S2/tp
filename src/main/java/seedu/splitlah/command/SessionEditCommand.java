@@ -40,6 +40,40 @@ public class SessionEditCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
+        boolean isSessionExist = manager.getProfile().hasSessionId(sessionId);
+        if (!isSessionExist) {
+            manager.getUi().printlnMessage(Message.ERROR_PROFILE_SESSION_NOT_IN_LIST);
+            return;
+        }
 
+        PersonList personList = new PersonList();
+        if (personNames != null) {
+            boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
+            if (hasDuplicates) {
+                manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
+                return;
+            }
+            personList.convertToPersonList(personNames);
+        }
+        Group group = null;
+        if (groupId != -1) {
+            try {
+                group = manager.getProfile().getGroup(groupId);
+                personList.mergeListOfPersons(group.getPersonList());
+            } catch (InvalidDataException dataException) {
+                manager.getUi().printlnMessage(dataException.getMessage());
+                return;
+            }
+        }
+        try {
+            manager.getProfile().removeSession(sessionId);
+            Session newSession = new Session(sessionName, sessionId, sessionDate, personList, group);
+            manager.getProfile().addSession(newSession);
+            manager.saveProfile();
+            manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + newSession);
+            Manager.getLogger().log(Level.FINEST,Message.LOGGER_SESSIONEDIT_SESSION_EDITED + sessionId);
+        } catch (InvalidDataException invalidDataException) {
+            manager.getUi().printlnMessage(invalidDataException.getMessage());
+        }
     }
 }
