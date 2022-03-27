@@ -189,6 +189,7 @@ public class Session implements Serializable {
      * @param activity An Activity object representing an activity that happened in the session.
      */
     public void addActivity(Activity activity) {
+        assert activity != null : Message.ASSERT_SESSION_ACTIVITY_NULL;
         activityList.add(activity);
     }
 
@@ -200,10 +201,7 @@ public class Session implements Serializable {
      * @throws InvalidDataException If no Person object in personList matches queried name.
      */
     public Person getPersonByName(String name) throws InvalidDataException {
-        if (personList.isEmpty()) {
-            throw new InvalidDataException(Message.ERROR_SESSION_EMPTY_PERSON_LIST);
-        }
-
+        assert name != null : Message.ASSERT_SESSION_NAME_NULL;
         for (Person person : personList.getPersonList()) {
             if (person.getName().equalsIgnoreCase(name)) {
                 return person;
@@ -220,6 +218,7 @@ public class Session implements Serializable {
      * @throws InvalidDataException If any name in nameList does not match a Person object in personList.
      */
     public ArrayList<Person> getPersonListByName(String[] nameList) throws InvalidDataException {
+        assert nameList != null && nameList.length != 0 : Message.ASSERT_SESSION_NAME_LIST_EMPTY;
         ArrayList<Person> personList = new ArrayList<>();
         for (String name : nameList) {
             Person newPerson = getPersonByName(name);
@@ -262,9 +261,8 @@ public class Session implements Serializable {
      *         a message stating that the personList is empty if there are no Person objects within.
      */
     private String getPersonListSummaryString() {
-        if (personList.isEmpty()) {
-            return Message.ERROR_SESSION_EMPTY_PERSON_LIST;
-        }
+        assert personList != null : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
+        assert personList.getSize() != 0 : Message.ASSERT_SESSION_PERSON_LIST_EMPTY;
 
         StringBuilder summaryString = new StringBuilder(PERSON_LIST_HEADER);
         for (int i = 0; i < personList.getSize(); i++) {
