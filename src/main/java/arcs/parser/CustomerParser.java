@@ -59,4 +59,5 @@ public class CustomerParser {
 
         return result;
     }
+
 }

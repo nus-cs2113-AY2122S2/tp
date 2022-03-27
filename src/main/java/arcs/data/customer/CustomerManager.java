@@ -48,5 +48,18 @@ public class CustomerManager {
         return deleted;
     }
 
+    public Customer findCustomer(String ic) throws ArcsException {
+        assert ic != null : "IC is null";
+        if (!Customer.isValidIc(ic)) {
+            throw new ArcsException("IC number is invalid.");
+        }
+        for (Customer customer: customers) {
+            if (ic.equals(customer.getIc())) {
+                return customer;
+            }
+        }
+        return null;
+    }
+
 
 }

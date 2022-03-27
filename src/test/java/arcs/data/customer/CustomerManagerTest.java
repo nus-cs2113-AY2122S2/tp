@@ -1,4 +1,4 @@
-package arcs.data;
+package arcs.data.customer;
 
 
 import arcs.data.customer.Customer;
