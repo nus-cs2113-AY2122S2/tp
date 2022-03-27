@@ -126,6 +126,35 @@ public class UI {
                 + "edit medicine /info s231, Paracetamol,500,2023-12-12,Headaches,10");
     }
 
+    public void printFindDoctorExampleMessage() {
+        printParagraph("find doctor /info name, Bruce Lee\n"
+                + "find doctor /info nric, S1234567X\n"
+                + "find doctor /info age, 23\n"
+                + "find doctor /info gender, M\n"
+                + "find doctor /info address, 15 King's Avenue\n"
+                + "find doctor /info dob, 1999-12-31\n"
+                + "find doctor /info specialization, Dermatology\n");
+    }
+
+    public void printFindPatientExampleMessage() {
+        printParagraph("find patient /info name, Bruce Lee\n"
+                + "find patient /info nric, S1234567X\n"
+                + "find patient /info age, 23\n"
+                + "find patient /info gender, M\n"
+                + "find patient /info address, 15 King's Avenue\n"
+                + "find patient /info dob, 1999-12-31\n"
+                + "find patient /info admissiondate, 2021-02-15\n");
+    }
+
+    public void printFindMedicinetExampleMessage() {
+        printParagraph("find medicine /info id, S123\n"
+                + "find medicine /info name, Paracetamol\n"
+                + "find medicine /info dosage, 500\n"
+                + "find medicine /info expiry, 2023-06-11\n"
+                + "find medicine /info sideeffects, headache\n"
+                + "find medicine /info quantity, 10\n");
+    }
+
     public static void printPrompt() {
         System.out.print("You: ");
     }

@@ -4,6 +4,7 @@ import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
 import seedu.duke.helper.command.CommandLineTable;
+import seedu.duke.helper.finder.PatientFinder;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 public class PatientList extends List {
 
     private ArrayList<Patient> patients = new ArrayList<>();
+    private ArrayList<Patient> returnedFinderArray = new ArrayList<>();
 
     public Patient getPatient(String nric) {
         for (Patient patient : patients) {
@@ -140,5 +142,87 @@ public class PatientList extends List {
         assert !output.isEmpty();
         return output;
     }
+
+    public void findByNric(String[] parameters) {
+        this.returnedFinderArray = PatientFinder.findPatientByNric(patients, parameters[1]);
+        createArrayOfFoundPatients();
+    }
+
+    public void findByName(String[] parameters) {
+        this.returnedFinderArray = PatientFinder.findPatientByName(patients, parameters[1]);
+        createArrayOfFoundPatients();
+    }
+
+    public void findByAge(String[] parameters) {
+        this.returnedFinderArray = PatientFinder.findPatientByAge(patients, Integer.parseInt(parameters[1]));
+        createArrayOfFoundPatients();
+    }
+
+    public void findByGender(String[] parameters) {
+        this.returnedFinderArray = PatientFinder.findPatientByGender(patients, parameters[1].charAt(0));
+        createArrayOfFoundPatients();
+    }
+
+    public void findByAddress(String[] parameters) {
+        this.returnedFinderArray = PatientFinder.findPatientByAddress(patients, parameters[1]);
+        createArrayOfFoundPatients();
+    }
+
+    public void findByDob(String[] parameters) {
+        this.returnedFinderArray = PatientFinder.findPatientByDob(patients, parameters[1]);
+        createArrayOfFoundPatients();
+    }
+
+    public void findBySpecialization(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByDateAdmission(String[] parameters) {
+        this.returnedFinderArray = PatientFinder.findPatientByDateAdmission(patients, parameters[1]);
+        createArrayOfFoundPatients();
+    }
+
+    private void createArrayOfFoundPatients() {
+        if (returnedFinderArray.isEmpty()) {
+            UI.printParagraph("Patient doesn't exist please try again!");
+        } else {
+            ArrayList<String> stringArrayLists = new ArrayList<>();
+            for (int i = 0; i < returnedFinderArray.size(); i++) {
+                String outputString = "";
+                outputString += String.valueOf(i) + ": ";
+                outputString += returnedFinderArray.get(i).getNric() + "\n";
+                outputString += returnedFinderArray.get(i).getFullName() + "\n";
+                outputString += returnedFinderArray.get(i).getAge() + "\n";
+                outputString += returnedFinderArray.get(i).getGender() + "\n";
+                outputString += returnedFinderArray.get(i).getAddress() + "\n";
+                outputString += returnedFinderArray.get(i).getDateAdmission() + "\n";
+                stringArrayLists.add(outputString);
+            }
+            for (String stringArrayList : stringArrayLists) {
+                UI.printParagraph(stringArrayList);
+            }
+        }
+    }
+
+    public void findById(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByDosage(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByExpiry(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findBySideEffects(String[] parameters) {
+        // Intentionally left blank
+    }
+
+    public void findByQuantity(String[] parameters) {
+        // Intentionally left blank
+    }
+
 }
 
