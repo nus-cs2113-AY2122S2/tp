@@ -15,6 +15,12 @@ If you can type fast, MeetingJio can get your meeting management tasks done fast
 
 ## Features
 
+### Add Lessons to your own timetable and others timetable
+
+### See slots for possible meetings based on duration
+
+### Book meetings based on availability of all users
+
 ### Viewing help: `help`
 Shows a list of commands available.
 
@@ -57,16 +63,17 @@ NAME: John Doe		TITLE: CS2113		DAY: friday		START: 1230		END: 1330		MODE: online
 ```
 
 ### Deleting a lesson: `delete`
-Deletes a lesson from the list.
+Deletes an event from the user's specified timetable
 
-Format: ` delete INDEX`
+Format: ` delete n/NAME i/INDEX`
 
+* Deletes from the timetable of user 
 * Deletes the lesson at the specified `INDEX`.
 * The `INDEX` refers to the index number shown in the displayed lesson list.
 
 Example of usage:
 
-`delete 2`
+`delete n/John Joe i/1`
 
 Expected outcome:
 ```
@@ -88,17 +95,29 @@ Expected outcome:
 1.NAME: John Doe		TITLE: CS2113		DAY: friday		START: 1230		END: 1330		MODE: online
 ```
 ### Clearing all lessons: `clear`
-Deletes all the lessons from the list.
+Deletes all the lessons from specified user if any.
 
-Format: `clear`
+Format: `clear USER`
 
 Example of usage:
 
-`clear`
+`clear john`
 
 Expected outcome:
 ```
-Your whole timetable has been cleared
+john's timetable has been cleared
+```
+Alternatively you can clear all the events from everyone's timetable
+
+Format: `clear all`
+
+Example of usage:
+
+`clear all`
+
+Expected outcome:
+```
+All records of everyone's timetable has been cleared
 ```
 
 ### Exiting the application: `exit`
