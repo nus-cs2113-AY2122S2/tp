@@ -954,7 +954,7 @@ In the event that your application becomes unstable due to accidental file modif
 
 **A**: Locate your `werkItResources` directory and WerkIt! JAR file, copy and paste it in your other 
 computer's desired location. Thereafter, you can run WerkIt! as per normal. 
-- (Please see 'WerkIt's Local Storage Information' for recommended location).
+(Please see [WerkIt's Local Storage Information](#werkits-local-storage-information) for recommended location).
 
 <br/>
 
@@ -964,6 +964,16 @@ computer's desired location. Thereafter, you can run WerkIt! as per normal.
 first time. Your saved data should be in that directory.
 
 <br/>
+
+**Q**: I keep getting file loading errors whenever I start WerkIt!
+
+**A**: It is possible that your local file data is corrupted. If you have a backup copy of the `werkItResources`
+directory, replace your existing `werkItResources` directory with the backup copy. Otherwise, you will need to
+reset your local file data by deleting the `werkItResources` directory and starting up WerkIt! to recreate the
+necessary files in their default numberings.
+
+Do note that these suggestions will lead to a **loss of your saved application data** and you may need to re-enter the lost
+data.
 
 ---
 
