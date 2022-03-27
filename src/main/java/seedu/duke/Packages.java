@@ -5,16 +5,13 @@ import java.util.ArrayList;
 
 public class Packages {
     private ArrayList<TravelPackage> packages;
-    private ArrayList<Reservation> reservations;
 
     public Packages() {
         this.packages = new ArrayList<>();
-        this.reservations = new ArrayList<>();
     }
 
-    public Packages(ArrayList<TravelPackage> t, ArrayList<Reservation> r){
+    public Packages(ArrayList<TravelPackage> t) {
         this.packages = t;
-        this.reservations = r;
     }
 
     public int getSize() {
@@ -33,21 +30,4 @@ public class Packages {
         packages.remove(index);
     }
 
-    public Reservation getReservation(int index) {
-        return reservations.get(index);
-    }
-
-    public int getReservationSize() {
-        return reservations.size();
-    }
-
-    public void addReservation(Reservation newReservation) {
-        reservations.add(newReservation);
-        System.out.println("RESERVATION ADDED");
-
-    }
-
-    public void removeReservation(int index) {
-        reservations.remove(index);
-    }
 }

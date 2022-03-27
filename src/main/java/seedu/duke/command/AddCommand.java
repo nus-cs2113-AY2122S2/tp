@@ -3,6 +3,7 @@ package seedu.duke.command;
 import java.util.Date;
 
 import seedu.duke.Packages;
+import seedu.duke.Reservations;
 import seedu.duke.TravelPackage;
 
 public class AddCommand extends Command {
@@ -14,7 +15,7 @@ public class AddCommand extends Command {
                 maxVacancies);
     }
 
-    public void execute(Packages packages) {
+    public void execute(Packages packages, Reservations r) {
         packages.addPackage(newPackage);
     }
 }
