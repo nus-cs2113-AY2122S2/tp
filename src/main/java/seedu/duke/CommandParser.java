@@ -27,6 +27,7 @@ public class CommandParser {
     private static final String CHECK_BY_CATEGORY = "check category";
     private static final String ASSIGN_HOUSEKEEPER = "Assign";
     private static final String VIEW_HOUSEKEEPER_COMMAND = "View Recorded Housekeeper";
+    private static final String VIEW_AVAILABLE_HOUSEKEEPER_DAY = "get available on ";
 
     /**
      * Parses the user-provided command and creates the relevant Command object.
@@ -93,6 +94,9 @@ public class CommandParser {
         } else if (commandString.startsWith(ASSIGN_HOUSEKEEPER)) {
             commandStringWithoutCommand = commandString.replace(ASSIGN_HOUSEKEEPER, "");
             userCommand = new AssignHousekeeperCommand(commandStringWithoutCommand);
+        } else if (commandString.startsWith(VIEW_AVAILABLE_HOUSEKEEPER_DAY)) {
+            commandStringWithoutCommand = commandString.replace(VIEW_AVAILABLE_HOUSEKEEPER_DAY, "");
+            userCommand = new GetAvailableHousekeeper(commandStringWithoutCommand);
         } else {
             throw new WrongCommandException("Error! Invalid Command.");
         }

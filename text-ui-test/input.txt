@@ -21,12 +21,12 @@ Availability jane @ M
 Availability tom @ T
 Availability sally @
 View Recorded Housekeeper
-Update Item Pax /Name:Toilet Roll /New Pax:5
-Update Item Pax /Name:Toilet Roll /New Pax:-1
-Update Item Pax /Name:Toilet Roll /New Pax:
-Update Item Pax /Name: /New Pax:5
+Update Item Pax Toilet Roll / 5
+Update Item Pax Toilet Roll / -1
+Update Item Pax Toilet Roll /
+Update Item Pax / 5
 Update Item Pax
-Update Item Pax /Name:Swimming Pool /New Pax:5
+Update Item Pax Swimming Pool /5
 Add Housekeeper ~
 Add Housekeeper KO  13
 Availability @
@@ -34,4 +34,21 @@ Availability lucy M
 Delete Item Toilet Roll
 Delete Item Table
 Delete Item
+Add Housekeeper Sall ~ 33
+Availability Sall @ 1,2,3
+Add Housekeeper joh ~ 43
+Availability joh @ 1,2
+Add Housekeeper sis ~ 43
+Add Housekeeper Lucy ~ 34
+Availability Lucy @ 12F,3,
+View Recorded Housekeeper
+Add Housekeeper JANE ~ 34
+Add Housekeeper JANEy ~ 36
+Availability Jane @ 5,6
+View Recorded Housekeeper
+get available on 2
+get available on 3
+get available on 4
+get available on 5
+View Recorded Housekeeper
 bye

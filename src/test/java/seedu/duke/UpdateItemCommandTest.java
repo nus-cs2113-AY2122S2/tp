@@ -10,7 +10,7 @@ public class UpdateItemCommandTest {
     public void commandParser_updateCommandWithNonEmptyItemNameAndItemPax_success()
             throws Exception {
         CommandParser parser = new CommandParser();
-        Command command = parser.parse("Update Item Pax /Name:Toilet Roll /New Pax:5");
+        Command command = parser.parse("Update Item Pax Toilet Roll / 5");
         UpdateItemPaxCommand updateItemPaxCommand = (UpdateItemPaxCommand) command;
         Item item = updateItemPaxCommand.getItem();
         assertEquals("Toilet Roll", item.getName());
@@ -19,14 +19,13 @@ public class UpdateItemCommandTest {
 
     @Test
     public void commandParser_updateItemPaxCommandWithEmptyItemName_exceptionThrown() {
-        assertThrows(EmptyItemNameException.class, () -> new CommandParser().parse("Update Item Pax "
-                + "/Name: /New Pax:5"));
+        assertThrows(EmptyItemNameException.class, () -> new CommandParser().parse("Update Item Pax / 5"));
     }
 
     @Test
     public void commandParser_updateItemPaxCommandWithEmptyItemPax_exceptionThrown() {
         assertThrows(EmptyItemPaxException.class, () -> new CommandParser().parse("Update Item Pax "
-                + "/Name:Toilet Roll /New Pax:"));
+                + "Toilet Roll /"));
     }
 
     @Test
@@ -37,7 +36,7 @@ public class UpdateItemCommandTest {
     @Test
     public void commandParser_updateItemPaxCommandWithInvalidItemPax_exceptionThrown() {
         assertThrows(InvalidItemPaxException.class, () -> new CommandParser().parse("Update Item Pax "
-                + "/Name:Toilet Roll /New Pax:-1"));
+                + "Toilet Roll /-1"));
     }
 
 }
