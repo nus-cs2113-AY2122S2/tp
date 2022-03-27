@@ -161,7 +161,7 @@ public class Ui {
                                                                      HousekeeperPerformance housekeeperPerformance) {
         System.out.println("The HousekeeperPerformance instance " + housekeeperPerformance.getName() + ": "
                 + housekeeperPerformance.getRating() + " has been added to the list of housekeeper performances.");
-        System.out.printf("There are currently %d items within the inventory.\n", housekeeperPerformanceList.getSize());
+        System.out.printf("There are currently %d recorded performances.\n", housekeeperPerformanceList.getSize());
     }
 }
 

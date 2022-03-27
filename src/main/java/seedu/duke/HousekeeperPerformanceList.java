@@ -2,6 +2,7 @@ package seedu.duke;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Represents a data structure containing all housekeeper performance ratings.
@@ -16,6 +17,7 @@ public class HousekeeperPerformanceList {
 
     public void addHousekeeperPerformance(HousekeeperPerformance newHousekeeperPerformance) {
         getHousekeeperPerformanceList().add(newHousekeeperPerformance);
+        sortHousekeeperPerformances();
     }
 
     public ArrayList<HousekeeperPerformance> getHousekeeperPerformanceList() {
@@ -55,6 +57,11 @@ public class HousekeeperPerformanceList {
     }
 
     public void sortHousekeeperPerformances() {
-        //Collections.sort(housekeeperPerformanceList, (firstPerformance, secondPerformance) -> firstPerformance.getRating() > secondPerformance.getRating());
+        Collections.sort(housekeeperPerformanceList,new Comparator<HousekeeperPerformance>() {
+            @Override
+            public int compare(HousekeeperPerformance a, HousekeeperPerformance b) {
+                return a.getRating() > b.getRating() ? -1 : (a.getRating() > b.getRating() ? 1 : 0);
+            }
+        });
     }
 }

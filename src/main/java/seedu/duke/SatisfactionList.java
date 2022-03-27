@@ -41,8 +41,7 @@ public class SatisfactionList {
         int number = 1;
         if (getSize() == 0) {
             System.out.println("There are no recorded satisfactions.");
-        }
-        else {
+        } else {
             System.out.println("======== Customer Satisfaction List ========");
             for (Satisfaction satisfaction : satisfactionList) {
                 System.out.println(Integer.toString(number) + ". [ " + satisfaction.getCustomerName()
