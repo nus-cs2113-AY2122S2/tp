@@ -51,7 +51,7 @@ public class ModuleCalendarReader {
     private static final String THURSDAY = "Thursday";
     private static final String FRIDAY = "Friday";
     private static final String SATURDAY = "Saturday";
-    private static final String MODULE_CATGEGORY_EXAM = "Exam";
+    private static final String MODULE_CATEGORY_EXAM = "Exam";
     private static Logger logger = Logger.getLogger(LOGGER_IDENTIFIER);
 
     static String icsFilePath;
@@ -98,6 +98,7 @@ public class ModuleCalendarReader {
                 Component calendarComponent = (Component)componentObject;
                 // System.out.println("\n");
                 timeSlot = new StringBuilder();
+                // read through the components of ics file and only take the necessary properties
                 for (final Object propertyObject : calendarComponent.getProperties()) {
                     Property property = (Property)propertyObject;
                     switch (property.getName()) {
@@ -153,7 +154,7 @@ public class ModuleCalendarReader {
     }
 
     private void getExamDate() {
-        if (moduleCategory.startsWith(MODULE_CATGEGORY_EXAM)) {
+        if (moduleCategory.startsWith(MODULE_CATEGORY_EXAM)) {
             //If category = exam then we also add the exam date to the module day.
             assert (dateStart != null) : DATE_WAS_NULL_MESSAGE;
             moduleDay += " " + new SimpleDateFormat(STANDARD_DATE_FORMAT).format(dateStart);
