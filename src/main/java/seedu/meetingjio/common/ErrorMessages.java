@@ -50,7 +50,7 @@ public class ErrorMessages {
     public static final String ERROR_TIMETABLE_NOT_FOUND_TO_DELETE = "User and his Timetable not found";
     public static final String ERROR_EXCEPTION_NOT_HANDLED = "New exception found that is not handled. Logged this";
 
-    public static final String ERROR_OVERLAPPING_MEETING = "This meeting cannot be added as"
+    public static final String ERROR_OVERLAPPING_MEETING = "This meeting cannot be added as "
             + "some of the members cannot make it";
     public static final String ERROR_DUPLICATE_MEETING = "This meeting already exists. "
             + "This meeting will not be not added to the timetable.";
