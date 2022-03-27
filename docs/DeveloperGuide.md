@@ -117,14 +117,14 @@ https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/pla
 
 ![FamilyComponent](images/FamilyComponent.png)
 
-The list of persons consists of a `Family` that is made up of generational `PersonList`s. Each `PersonList` holds a  
+The list of persons consists of a `Family` that is made up of generational `PersonList`s. Each `PersonList` holds a 
 list of `Person`s who belong to that generation.
 
 The `Person` component,
 
 * Stores the logical grouping of persons added i.e., all `Person` objects must belong to one of the `PersonList`s.
 * Stores the total number of `Person`s in the `Family`, as well as each of the generational `PersonList`s.
-* Depends on the `Money` component to help keep track of each `Person`'s income and expenditure as each `Person`   
+* Depends on the `Money` component to help keep track of each `Person`'s income and expenditure as each `Person` 
   contains an `IncomeList` and `ExpenditureList`.
 
 ### MoneyList Component
@@ -228,23 +228,23 @@ for a different generation. Additionally, it implements the following operations
 
 Given below is an example usage scenario and how a generation's high level finance overview is calculated.
 
-Step 1. The user launches the application. A `Family` object will be initialised with its 3 generational   
+Step 1. The user launches the application. A `Family` object will be initialised with its 3 generational 
 `PersonList`s. They are `parents`, `myGen`, and `children`.
 
 ![PersonStep1](images/PersonStep1.png)
 
-Step 2. The user wishes to add a person, say `John Doe`, to the `children` list. The user executes   
+Step 2. The user wishes to add a person, say `John Doe`, to the `children` list. The user executes 
 `add /n John Doe /g 3` command, adding a `Person` with `name` as `John Doe` to group 3, which is the `children`.
 
 ![PersonStep2](images/PersonStep2.png)
 
-Step 3. The user executes `addin /g 3 /u 1 /i ...` to add a new income to index 1 of the `children` list, who is   
+Step 3. The user executes `addin /g 3 /u 1 /i ...` to add a new income to index 1 of the `children` list, who is 
 `John Doe`. This causes an income object to be added to the `IncomeList` of `John Doe`.
 
 ![PersonStep3](images/PersonStep3.png)
 
-Step 4. The user now decides to have an overview of his family's finances by executing the `list` command. The `list`  
-command will call `Family#list()`, which will go through each generation to sum up their incomes and expenditures and  
+Step 4. The user now decides to have an overview of his family's finances by executing the `list` command. The `list` 
+command will call `Family#list()`, which will go through each generation to sum up their incomes and expenditures and 
 print that out.
 
 ![PersonStep4](images/PersonStep4.png)
@@ -255,7 +255,7 @@ print that out.
 
 * **Alternative 1 \(current choice):** Have a `Family` object hold 3 `PersonList`s, one for each generation.
     * Pros: Only requires storage of one instance of each income and expenditure.
-    * Cons: May have performance issues related to operations which work on every income and expenditure as it makes  
+    * Cons: May have performance issues related to operations which work on every income and expenditure as it makes 
       them deeply nested.
 * **Alternative 2:** Maintain the single `PersonList` with everyone inside, but give a tag to each `Person` to indicate
   which generation they belong to
@@ -265,11 +265,11 @@ print that out.
 
 **Aspect: How many levels of information to show**
 
-* **Alternative 1 \(current choice):** Each class shows information suiting their level i.e., `Family#list()` shows  
+* **Alternative 1 \(current choice):** Each class shows information suiting their level i.e., `Family#list()` shows 
   an overview of each `PersonList`'s total income and expenditure.
     * Pros: Users will be able to choose how much information they want to see.
     * Cons: The user would be unable to view all the information with a single command.
-* **Alternative 2:** Only have a single `Family#list()` which gives detailed information of each `Person`'s income   
+* **Alternative 2:** Only have a single `Family#list()` which gives detailed information of each `Person`'s income 
   and expenditures.
     * Pros: Only 1 command is required to show all information.
     * Cons: If the user only wants a high level overview, the user could be hit with information overload.
