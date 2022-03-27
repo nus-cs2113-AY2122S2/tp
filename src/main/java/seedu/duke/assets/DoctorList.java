@@ -32,16 +32,16 @@ public class DoctorList extends List {
         return null;
     }
 
-    public void find(String[] command){
+    public void find(String[] command) {
     }
 
     public void add(String[] addDoctorParameters) throws DuplicateEntryException {
         if (getDoctor(addDoctorParameters[0]) != null) {
             throw new DuplicateEntryException("Doctor with given NRIC already exists!");
         }
-        Doctor newDoctor = new Doctor(addDoctorParameters[0],addDoctorParameters[1],
+        Doctor newDoctor = new Doctor(addDoctorParameters[0], addDoctorParameters[1],
                 Integer.parseInt(addDoctorParameters[2]),
-                addDoctorParameters[3].charAt(0), addDoctorParameters[4],addDoctorParameters[5],
+                addDoctorParameters[3].charAt(0), addDoctorParameters[4], addDoctorParameters[5],
                 addDoctorParameters[6]);
         doctors.add(newDoctor);
     }
@@ -68,9 +68,9 @@ public class DoctorList extends List {
         CommandLineTable doctorTable = new CommandLineTable();
         //st.setRightAlign(true);//if true then cell text is right aligned
         doctorTable.setShowVerticalLines(true);//if false (default) then no vertical lines are shown
-        doctorTable.setHeaders("Nric", "FullName","Age", "Address", "Gender", "Dob",
+        doctorTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
                 "Specialization");
-        for (Doctor doctor: doctors) {
+        for (Doctor doctor : doctors) {
             doctorTable.addRow(doctor.getNric(), doctor.getFullName(), String.valueOf(doctor.getAge()),
                     doctor.getAddress(), String.valueOf(doctor.getGender()), doctor.getDob(),
                     doctor.getSpecialization());
@@ -127,38 +127,66 @@ public class DoctorList extends List {
     }
 
     public void findByNric(String[] parameterArray) {
-        this.returnedFinderArray = DoctorFinder.findDoctorByNric(doctors, parameterArray[1]);
-        createArrayOfFoundDoctors();
+        try {
+            this.returnedFinderArray = DoctorFinder.findDoctorByNric(doctors, parameterArray[1]);
+            createArrayOfFoundDoctors();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Doctor with given NRIC doesn't exist. Please try again!");
+        }
     }
 
     public void findByName(String[] parameterArray) {
-        this.returnedFinderArray = DoctorFinder.findDoctorByName(doctors, parameterArray[1]);
-        createArrayOfFoundDoctors();
+        try {
+            this.returnedFinderArray = DoctorFinder.findDoctorByName(doctors, parameterArray[1]);
+            createArrayOfFoundDoctors();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Doctor with given name doesn't exist. Please try again!");
+        }
     }
 
     public void findByAge(String[] parameterArray) {
-        this.returnedFinderArray = DoctorFinder.findDoctorByAge(doctors, Integer.parseInt(parameterArray[1]));
-        createArrayOfFoundDoctors();
+        try {
+            this.returnedFinderArray = DoctorFinder.findDoctorByAge(doctors, Integer.parseInt(parameterArray[1]));
+            createArrayOfFoundDoctors();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Doctor with given age doesn't exist. Please try again!");
+        }
     }
 
     public void findByGender(String[] parameterArray) {
-        this.returnedFinderArray = DoctorFinder.findDoctorByGender(doctors, parameterArray[1].charAt(0));
-        createArrayOfFoundDoctors();
+        try {
+            this.returnedFinderArray = DoctorFinder.findDoctorByGender(doctors, parameterArray[1].charAt(0));
+            createArrayOfFoundDoctors();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Doctor with given gender doesn't exist. Please try again!");
+        }
     }
 
     public void findByAddress(String[] parameterArray) {
-        this.returnedFinderArray = DoctorFinder.findDoctorByAddress(doctors, parameterArray[1]);
-        createArrayOfFoundDoctors();
+        try {
+            this.returnedFinderArray = DoctorFinder.findDoctorByAddress(doctors, parameterArray[1]);
+            createArrayOfFoundDoctors();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Doctor with given address doesn't exist. Please try again!");
+        }
     }
 
     public void findByDob(String[] parameterArray) {
-        this.returnedFinderArray = DoctorFinder.findDoctorByDob(doctors, parameterArray[1]);
-        createArrayOfFoundDoctors();
+        try {
+            this.returnedFinderArray = DoctorFinder.findDoctorByDob(doctors, parameterArray[1]);
+            createArrayOfFoundDoctors();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Doctor doesn't exist please try again!");
+        }
     }
 
     public void findBySpecialization(String[] parameterArray) {
-        this.returnedFinderArray = DoctorFinder.findDoctorBySpecialization(doctors, parameterArray[1]);
-        createArrayOfFoundDoctors();
+        try {
+            this.returnedFinderArray = DoctorFinder.findDoctorBySpecialization(doctors, parameterArray[1]);
+            createArrayOfFoundDoctors();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Doctor with given specialization doesn't exist. Please try again!");
+        }
     }
 
     private void createArrayOfFoundDoctors() {
@@ -183,29 +211,5 @@ public class DoctorList extends List {
         }
     }
 
-
-    public void findByDateAdmission(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findById(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByDosage(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByExpiry(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findBySideEffects(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByQuantity(String[] parameters) {
-        // Intentionally left blank
-    }
 }
 
