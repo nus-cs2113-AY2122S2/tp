@@ -30,7 +30,7 @@ class DeleteCommandTest {
         new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand();
         testList.add(new Expenditure("cash", "Personal", "Nike Shoes", 300, "2022-03"));
         String deleteInputString = "delete 1";
-        new DeleteCommand(deleteInputString, expenditureTestList).executeCommand();
+        new DeleteCommand(deleteInputString, expenditureTestList, creditCardTestList).executeCommand();
         testList.remove(0);
         assertEquals(testList.size(), expenditureTestList.size());
     }
@@ -46,10 +46,10 @@ class DeleteCommandTest {
         new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand();
         String deleteInputString = "delete 0";
         assertThrows(MindMyMoneyException.class,
-            () -> new DeleteCommand(deleteInputString, expenditureTestList).executeCommand());
+            () -> new DeleteCommand(deleteInputString, expenditureTestList, creditCardTestList).executeCommand());
         String delInputString2 = "delete 5";
         assertThrows(MindMyMoneyException.class,
-            () -> new DeleteCommand(delInputString2, expenditureTestList).executeCommand());
+            () -> new DeleteCommand(delInputString2, expenditureTestList, creditCardTestList).executeCommand());
     }
 
     /**
@@ -58,9 +58,10 @@ class DeleteCommandTest {
     @Test
     void deleteCommand_wrongInputFormat_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
         String delInputString = "delete ONE";
         assertThrows(MindMyMoneyException.class,
-            () -> new DeleteCommand(delInputString, expenditureTestList).executeCommand());
+            () -> new DeleteCommand(delInputString, expenditureTestList, creditCardTestList).executeCommand());
     }
 
     /**
@@ -69,12 +70,13 @@ class DeleteCommandTest {
     @Test
     void deleteCommand_missingInput_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
         String deleteInputString = "delete";
         String delInputString2 = "delete ";
         assertThrows(MindMyMoneyException.class,
-            () -> new DeleteCommand(deleteInputString, expenditureTestList).executeCommand());
+            () -> new DeleteCommand(deleteInputString, expenditureTestList, creditCardTestList).executeCommand());
         assertThrows(MindMyMoneyException.class,
-            () -> new DeleteCommand(delInputString2, expenditureTestList).executeCommand());
+            () -> new DeleteCommand(delInputString2, expenditureTestList, creditCardTestList).executeCommand());
     }
 
     /**
@@ -83,8 +85,9 @@ class DeleteCommandTest {
     @Test
     void deleteCommand_addToEmptyList_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
         String deleteInputString = "delete 1";
         assertThrows(MindMyMoneyException.class,
-            () -> new DeleteCommand(deleteInputString, expenditureTestList).executeCommand());
+            () -> new DeleteCommand(deleteInputString, expenditureTestList, creditCardTestList).executeCommand());
     }
 }
