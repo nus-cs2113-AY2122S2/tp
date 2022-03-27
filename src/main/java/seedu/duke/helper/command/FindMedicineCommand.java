@@ -10,7 +10,7 @@ public class FindMedicineCommand extends Command {
         super(parameterArray);
     }
 
-    public Status execute(List medicineList) throws HalpmiException {
+    public Status execute(List medicineList) {
         switch (parameterArray[0]) {
         case "id":
             medicineList.findById(parameterArray);
@@ -31,7 +31,7 @@ public class FindMedicineCommand extends Command {
             medicineList.findByQuantity(parameterArray);
             break;
         default:
-            throw new HalpmiException("Input must be an attribute of Medicine");
+            break;
         }
         return Status.FIND_MEDICINE_SUCCESS;
     }
