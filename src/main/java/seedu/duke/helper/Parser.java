@@ -149,6 +149,9 @@ public class Parser {
     }
 
     public static Command parseViewAppointment(String parameters) throws HalpmiException {
+        if (isNull(parameters)) {
+            return new ViewMedicineCommand(null);
+        }
         String[] viewAppointmentParameters = minParameterCheck(parameters, 2);
         return new ViewAppointmentCommand(viewAppointmentParameters);
     }
