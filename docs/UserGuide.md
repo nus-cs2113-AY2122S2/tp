@@ -6,9 +6,25 @@ HALPMI is a Command Line Interface (CLI) Application that allows administrators 
 administrative tasks. More specifically, using HALPMI the user is able to insert new information regarding Doctors, Patients
 and Medication. Users can also schedule appointment for Patients with Doctors. Users are also able to track stocks of medications.
 
+###Purpose
+The purpose of this User Guide is to get new users of HALPMI to get started with the application and learn the features
+that it entails. This User Guide can also be referred to as and when needed when unclear about certain features and commands.
+
+Persons with greater technical knowledge can refer to the [Developer Guide](DeveloperGuide.md) for in-depth explanations on the
+workings behind HALPMI.
+
+###How to read the Guide?
+The User Guide is structured in a way that it is straight-forward and has a logical flow. Hence it should be easy for any User
+like you to get started with HALPMI immediately. 
+
+Before reading, it is noteworthy to understand some formats and keywords used in this Guide for better clarity.
+* Command - Command refers to the text input that you will be providing on the CLI as and when prompted by HALPMI.
+* `Word` - Certain words or sentences in this Guide are often found in this format. These refer to commands that you as a User
+can use in the CLI application.
+
 ## Quick Start
 
-Setting up HALPMI is a rather simple task.
+###Setting Up Java
 
 Firstly you need to have Java 11 or above installed in your computer. If you are not sure on how to check if you have
 Java 11 installed on your computer, you can refer to [Check Java](https://www.howtogeek.com/717330/how-to-check-your-java-version-on-windows-10/).
