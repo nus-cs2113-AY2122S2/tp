@@ -5,7 +5,7 @@ import seedu.mindmymoney.constants.CategoryTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.userfinancial.CreditCard;
 
-import static seedu.mindmymoney.constants.Payment_Method.CASH;
+import static seedu.mindmymoney.constants.PaymentMethod.CASH;
 
 /**
  * Input validation for Add Command.

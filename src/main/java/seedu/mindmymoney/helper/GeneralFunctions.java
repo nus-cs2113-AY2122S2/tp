@@ -187,10 +187,10 @@ public class GeneralFunctions {
     }
 
     /**
-     * Sets the string to lower case and then capitalise the first character in string
+     * Sets the string to lower case and then capitalise the first character in string.
      *
-     * @param str String to be capitalised
-     * @return Capitalised string
+     * @param str String to be capitalised.
+     * @return Capitalised string.
      */
     public static String capitalise(String str) {
         str = str.toLowerCase();
@@ -198,6 +198,11 @@ public class GeneralFunctions {
             + str.substring(INDEX_OF_SECOND_ITEM_IN_STRING);
     }
 
+    /**
+     * Round off float to 2dp.
+     * @param number float to be rounded off.
+     * @return float rounded off to 2dp.
+     */
     public static float formatFloat(Float number) {
         return Float.parseFloat(df.format(number));
     }
