@@ -77,41 +77,49 @@ public class AppointmentList extends List {
             for (int i = 0; i < appointments.size(); i++) {
                 if (appointments.get(i).getAppointmentId().equals(input)) {
                     foundAppointments.add(appointments.get(i));
+                    assert foundAppointments.size() != 0;
                 }
             }
-            assert foundAppointments.size() != 0;
             break;
         case "patient name":
             for (int i = 0; i < appointments.size(); i++) {
                 if (appointments.get(i).getPatientName().equals(input)) {
                     foundAppointments.add(appointments.get(i));
+                    assert foundAppointments.size() != 0;
                 }
             }
-            assert foundAppointments.size() != 0;
             break;
         case "doctor name":
             for (int i = 0; i < appointments.size(); i++) {
                 if (appointments.get(i).getDoctorName().equals(input)) {
                     foundAppointments.add(appointments.get(i));
+                    assert foundAppointments.size() != 0;
                 }
             }
-            assert foundAppointments.size() != 0;
             break;
         case "date":
             for (int i = 0; i < appointments.size(); i++) {
                 if (appointments.get(i).getAppointmentDate().equals(input)) {
                     foundAppointments.add(appointments.get(i));
+                    assert foundAppointments.size() != 0;
                 }
             }
-            assert foundAppointments.size() != 0;
             break;
-        case "nric":
+        case "patient nric":
             for (int i = 0; i < appointments.size(); i++) {
                 if (appointments.get(i).getPatientNric().equals(input)) {
                     foundAppointments.add(appointments.get(i));
+                    assert foundAppointments.size() != 0;
                 }
             }
-            assert foundAppointments.size() != 0;
+            break;
+        case "doctor nric":
+            for (int i = 0; i < appointments.size(); i++) {
+                if (appointments.get(i).getDoctorNric().equals(input)) {
+                    foundAppointments.add(appointments.get(i));
+                    assert foundAppointments.size() != 0;
+                }
+            }
             break;
         default:
             UI.printParagraph("Invalid search criteria! The valid criteria are:\n"
@@ -135,23 +143,6 @@ public class AppointmentList extends List {
         }
         appointmentTable.print();
     }
-
-//    public String toString(ArrayList<Appointment> appointments) {
-//        if (appointments.size() == 0) {
-//            return "There are no appointments.";
-//        }
-//        String appointmentsString = "";
-//        int index = 1;
-//        for (Appointment appointment : appointments) {
-//            appointmentsString += String.format("%d. %s", index, appointment.toString());
-//            if (index != appointments.size()) {
-//                appointmentsString += "\n";
-//            }
-//            index++;
-//        }
-//        assert !appointmentsString.isEmpty();
-//        return appointmentsString;
-//    }
 
     public void findByNric(String[] parameters) {
         // Intentionally left blank
