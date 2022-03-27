@@ -39,16 +39,11 @@ public class GeneralFunctions {
             throw new MindMyMoneyException("You are missing a flag or lack the spacing between the flags!");
         }
         startingFlag = startingFlag + " ";
-        try {
-            input = input.substring(input.indexOf(startingFlag) + 3);
-            if (!endingFlag.equals("")) {
-                endingFlag = " " + endingFlag;
-                input = input.substring(0, input.indexOf(endingFlag));
-            }
-        } catch (NumberFormatException e) {
-            throw new MindMyMoneyException("Flag not found!");
+        input = input.substring(input.indexOf(startingFlag) + startingFlag.length());
+        if (!endingFlag.equals("")) {
+            endingFlag = " " + endingFlag;
+            input = input.substring(0, input.indexOf(endingFlag));
         }
-
         return input;
     }
 
