@@ -1,5 +1,26 @@
 # User Guide
 
+##Contents
+* [Introduction](#introduction)
+    * [Purpose](#purpose)
+    * [How to read the Guide](#how-to-read-the-guide)
+* [Quick Start](#quick-start)
+  * [Setting up Java](#setting-up-java)
+  * [Starting up HALPMI](#starting-up-halpmi)
+* [Features](#features)
+  * [Adding](#adding-add)
+  * [Viewing](#viewing-view)
+  * [Deleting](#deleting-delete)
+  * [Editing]()
+  * [Finding]()
+  * [Saving]()
+    * [Saved Data]()
+    * [Corrupt Files]()
+* [Future Versions]()
+* [Errors]()
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
+
 ## Introduction
 
 HALPMI is a Command Line Interface (CLI) Application that allows administrators in clinics to manage the clinic's day-to-day
