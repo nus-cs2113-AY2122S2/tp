@@ -9,12 +9,9 @@ import java.util.Scanner;
  * as well as reading in the user inputs .
  */
 public class Ui {
-    private Scanner in;
+    private Scanner in = new Scanner(System.in);
     private static final int ARRAY_INDEX_OFFSET = 1;
 
-    public Ui() {
-        in = new Scanner(System.in);
-    }
 
     /**
      * Returns a string containing the user input.
