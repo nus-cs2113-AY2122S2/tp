@@ -145,7 +145,7 @@ public class StudyManager {
         printMessage("Please enter the name of your .ics file from nusmods: ");
         String input = ui.getUserInput();
         ArrayList<Module> icsModulesList = icsParser.readIcsFile(input);
-        if(icsModulesList!=null) {
+        if (icsModulesList != null) {
             modulesList.addAll(icsModulesList);
         }
         printMessage("Exiting read ics mode");

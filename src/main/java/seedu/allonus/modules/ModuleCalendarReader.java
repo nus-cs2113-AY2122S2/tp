@@ -65,7 +65,7 @@ public class ModuleCalendarReader {
 
             for (final Object componentObject : calendar.getComponents()) {
                 Component calendarComponent = (Component)componentObject;
-//                System.out.println("\n");
+                // System.out.println("\n");
                 timeSlot = new StringBuilder();
                 for (final Object propertyObject : calendarComponent.getProperties()) {
                     Property property = (Property)propertyObject;
@@ -122,14 +122,14 @@ public class ModuleCalendarReader {
                 System.out.println("Please ensure you have the correct name and the .ics file is in the home"
                         + " directory of the application.");
             } else {
-                System.out.println("Could not be parsed from the given ics file. \n" +
-                        "Please ensure that the ics from nusmods.com has not been edited.");
+                System.out.println("Could not be parsed from the given ics file. \n"
+                        + "Please ensure that the ics from nusmods.com has not been edited.");
             }
         } catch (FileNotFoundException e) {
             System.out.printf("File %s was not found\n",ics);
         } catch (IOException e) {
-            System.out.println("Could not be parsed from the given ics file. \n" +
-                    "Please ensure that the ics from nusmods.com has not been edited.");
+            System.out.println("Could not be parsed from the given ics file. \n"
+                    + "Please ensure that the ics from nusmods.com has not been edited.");
         }
         return modulesList;
     }
