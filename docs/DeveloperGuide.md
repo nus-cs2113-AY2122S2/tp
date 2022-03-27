@@ -81,7 +81,13 @@
 ## Feature - Help Command 
 Aim: Displays a list of all available commands that the user can refer to as a guide
 
-## Feature - Saved files
-Aim: Allows users to save and load up existing reservations and travel packages from a text file <br/>
+## Feature - Storage
+#### Initialisation (Loading Data)
+The sequence diagram that shows how `Storage` is created and the data is loaded from the saved files when the program is initialised is shown below:
 ![](StorageSeqDiag.png)
 
+1. `Duke` creates a Storage object with the relevant file names.
+2. `Duke` then calls the `createPackages()` method of the Storage class
+3. `storage` will then load the contents of the file in the `Reservation` and `TravelPackages` file calling the different `parse` methods. The exact implementation is not shown in the diagram.
+4. A new `Package` object is constructed with the relevant data.
+5. `storage` returns `package` object to `Duke`. 
