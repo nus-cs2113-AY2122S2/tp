@@ -23,13 +23,13 @@ Main -right[#grey]->Commands
 Main -down[#grey]->Storage
 
 Commands -up[#blue]->UI
-Commands -left[#blue].->Family
+Commands -left[#blue]->Family
 Commands -down[#blue].>Storage
 Commands -down[#blue].>Parser
 
 Family -down[MODEL_COLOR]->MoneyList
 
-Storage -left[STORAGE_COLOR].>Family
+Storage -left[STORAGE_COLOR]>Family
 Storage .down[STORAGE_COLOR].>File
 
 User ..> Main
