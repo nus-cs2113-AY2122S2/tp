@@ -99,6 +99,30 @@ class DishController {
     +takeControl(): void
 }
 
+class MainLogger {
+    -{static}instance
+    -logger: Logger
+    -MainLogger()
+    -{static}getInstance: MainLogger
+    +{static}logInfo(o: Object, msg : String)
+    +{static}logWarning(o: Object, msg : String)
+}
+
+class OperationTerminationException {
+    +OperationTerminationException()
+}
+
+'Exception
+OperationTerminationException ---|> Java.lang.Exception
+InputParser ..> OperationTerminationException
+Controller ..> OperationTerminationException
+StaffController ..> OperationTerminationException
+DishController ..> OperationTerminationException
+
+'Logger
+DishController ..> MainLogger
+StaffController ..> MainLogger
+
 class Order {
     +Order(List<Dish>)
     +Order()

@@ -5,9 +5,9 @@ autonumber
 hide footbox
 
 actor user
-participant "__:StaffController__" as staffcontroller
-participant "__:StaffManager__" as staffmanager
-participant "__:Staff__" as staff
+participant ":StaffController" as staffcontroller
+participant ":StaffManager" as staffmanager
+participant ":Staff" as staff
 
 
 user -> staffcontroller: addStaff()

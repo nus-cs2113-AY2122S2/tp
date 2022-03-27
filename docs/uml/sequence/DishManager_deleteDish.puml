@@ -5,32 +5,31 @@ autonumber
 hide footbox
 
 actor user
-participant "__:DishManager__" as dishmanager
-participant "__dishes:ArrayList<Dish>__" as dishes
-participant "__:Dish__" as dish
+participant ":DishManager" as dishmanager
+participant "dishes:ArrayList<Dish>" as dishes
+participant ":Dish" as dish
 
-activate dishmanager
-activate dishes
-activate dish
 
 user -> dishmanager: deleteDish(index)
+activate dishmanager
 
 dishmanager -> dishmanager: throwIfIndexNotValid(index)
 activate dishmanager
 
 dishmanager -> dishes: size()
+activate dishes
 dishes --> dishmanager
-
-group alt [index > size]
+deactivate dishes
+group opt [index > size]
 dishmanager --> user: IndexOutOfBoundsException
 end
 
-dishmanager -> dishmanager
 deactivate dishmanager
 
 dishmanager -> dishes: remove(index)
-dishes --> dishmanager: dish
+activate dishes
+dishes --> dishmanager
+deactivate dishes
 deactivate dish
 destroy dish
-dishmanager --> user
 @enduml
