@@ -14,4 +14,8 @@ public class ExpenseManager {
     public static double getTotalExpense() {
         return totalExpense;
     }
+
+    public static void resetExpenses() {
+        totalExpense = 0;
+    }
 }

@@ -51,7 +51,6 @@ public class AddCommand extends Command {
     public void AddSubscriptionCommand(String name, double price,
                              String date, String renewal) throws IllegalValueException {
         this.toAdd = new Subscription(name, price, date, renewal);
-        ExpenseManager.addToExpense(price);
     }
 
     /**
