@@ -45,7 +45,7 @@ public class DeleteCommand extends Command {
      * @return true if position is within the bounds, false otherwise.
      */
     public boolean isOutOfExpenditureListBounds(int positionToDelete) {
-        return (positionToDelete <= MINIMUM_INDEX || positionToDelete + 1 > expenditureList.size());
+        return (positionToDelete < 0 || positionToDelete + 1 > expenditureList.size());
     }
 
     /**
