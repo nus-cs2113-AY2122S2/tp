@@ -155,18 +155,20 @@ public abstract class Message {
             "Invalid name. Names must contain only alphabetical characters.";
 
     // Session
-    public static final String ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST =
-            "Please enter a number from 1 to ";
     public static final String ERROR_SESSION_EMPTY_ACTIVITY_LIST =
             "The list of activities in the session is currently empty.";
     public static final String ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST =
             "The activity that you have specified was not found in this session.";
-    public static final String ERROR_SESSION_EMPTY_PERSON_LIST =
-            "The list of participants in the session is currently empty.";
     public static final String ERROR_SESSION_PERSON_NOT_IN_LIST =
             "The person that you have specified was not found in this session.";
     public static final String ASSERT_SESSION_PERSON_LIST_EMPTY =
             "Session object cannot be constructed with a null or empty person list.";
+    public static final String ASSERT_SESSION_ACTIVITY_NULL =
+            "The activity to be added to a Session object cannot be null.";
+    public static final String ASSERT_SESSION_NAME_NULL =
+            "The String object to be used to search for Person objects by name cannot be null.";
+    public static final String ASSERT_SESSION_NAME_LIST_EMPTY =
+            "The String array object to be used to search for Person objects by name cannot be null or empty.";
 
     // Profile
     public static final String ERROR_PROFILE_DUPLICATE_SESSION =
