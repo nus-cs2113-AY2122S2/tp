@@ -82,6 +82,26 @@ public class PlanList {
     }
 
     /**
+     * Retrieves the index number of a plan based on its position in the plansDisplayList
+     * ArrayList.
+     *
+     * @param planName The name of the plan whose index number this method has to find.
+     * @return An integer representing the index number the plan is listed in the plansDisplayList
+     *         ArrayList.
+     * @throws InvalidPlanException If the given plan name was not found in plansDisplayList.
+     */
+    public int getIndexNumFromPlanName(String planName) throws InvalidPlanException {
+        for (int i = 0; i < getPlansDisplayList().size(); i += 1) {
+            if (getPlansDisplayList().get(i).equals(planName)) {
+                return (i + 1);
+            }
+        }
+
+        String className = this.getClass().getSimpleName();
+        throw new InvalidPlanException(className, InvalidPlanException.UNKNOWN_PLAN_NAME_ERROR_MSG);
+    }
+
+    /**
      * Parses the given user argument to identify the details of the new plan to be added.
      * Thereafter, the details will be checked for their validity. If all checks pass, a new
      * Plan object is instantiated before adding it to the ArrayList of plans.
