@@ -96,4 +96,24 @@ TAKE NOTE! NO ONE IS AVAILABLE!!
 6. [ JANE ]: 34, ( Friday Saturday )
 7. [ JANEy ]: 36, <Enter Availability>
 ======== End of the list ========
+Housekeeper's availability has been reset!
+======== Housekeeper List ========
+1. [ Tom ]: 33, <Enter Availability>
+2. [ Sall ]: 33, <Enter Availability>
+3. [ joh ]: 43, <Enter Availability>
+4. [ sis ]: 43, <Enter Availability>
+5. [ Lucy ]: 34, <Enter Availability>
+6. [ JANE ]: 34, <Enter Availability>
+7. [ JANEy ]: 36, <Enter Availability>
+======== End of the list ========
+Added Jane availability into records
+======== Housekeeper List ========
+1. [ Tom ]: 33, <Enter Availability>
+2. [ Sall ]: 33, <Enter Availability>
+3. [ joh ]: 43, <Enter Availability>
+4. [ sis ]: 43, <Enter Availability>
+5. [ Lucy ]: 34, <Enter Availability>
+6. [ JANE ]: 34, ( Friday Saturday )
+7. [ JANEy ]: 36, <Enter Availability>
+======== End of the list ========
 see u again!
