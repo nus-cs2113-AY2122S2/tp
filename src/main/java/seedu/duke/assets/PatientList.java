@@ -143,8 +143,12 @@ public class PatientList extends List {
     }
 
     public void findByNric(String[] parameters) {
-        this.returnedFinderArray = PatientFinder.findPatientByNric(patients, parameters[1]);
-        createArrayOfFoundPatients();
+        try {
+            this.returnedFinderArray = PatientFinder.findPatientByNric(patients, parameters[1]);
+            createArrayOfFoundPatients();
+        } catch (NullPointerException e) {
+            UI.printParagraph("Patient with given NRIC doesn't exist. Please try again!");
+        }
     }
 
     public void findByName(String[] parameters) {
@@ -152,7 +156,7 @@ public class PatientList extends List {
             this.returnedFinderArray = PatientFinder.findPatientByName(patients, parameters[1]);
             createArrayOfFoundPatients();
         } catch (NullPointerException e) {
-            UI.printParagraph("Doctor doesn't exist please try again!");
+            UI.printParagraph("Patient with given name doesn't exist. Please try again!");
         }
     }
 
@@ -161,7 +165,7 @@ public class PatientList extends List {
             this.returnedFinderArray = PatientFinder.findPatientByAge(patients, Integer.parseInt(parameters[1]));
             createArrayOfFoundPatients();
         } catch (NullPointerException e) {
-            UI.printParagraph("Doctor doesn't exist please try again!");
+            UI.printParagraph("Patient with given age doesn't exist. Please try again!");
         }
     }
 
@@ -170,7 +174,7 @@ public class PatientList extends List {
             this.returnedFinderArray = PatientFinder.findPatientByGender(patients, parameters[1].charAt(0));
             createArrayOfFoundPatients();
         } catch (NullPointerException e) {
-            UI.printParagraph("Doctor doesn't exist please try again!");
+            UI.printParagraph("Patient with given gender doesn't exist. Please try again!");
         }
     }
 
@@ -179,7 +183,7 @@ public class PatientList extends List {
             this.returnedFinderArray = PatientFinder.findPatientByAddress(patients, parameters[1]);
             createArrayOfFoundPatients();
         } catch (NullPointerException e) {
-            UI.printParagraph("Doctor doesn't exist please try again!");
+            UI.printParagraph("Patient with given address doesn't exist. Please try again!");
         }
     }
 
@@ -188,12 +192,8 @@ public class PatientList extends List {
             this.returnedFinderArray = PatientFinder.findPatientByDob(patients, parameters[1]);
             createArrayOfFoundPatients();
         } catch (NullPointerException e) {
-            UI.printParagraph("Doctor doesn't exist please try again!");
+            UI.printParagraph("Patient with given DOB doesn't exist. Please try again!");
         }
-    }
-
-    public void findBySpecialization(String[] parameters) {
-        // Intentionally left blank
     }
 
     public void findByDateAdmission(String[] parameters) {
@@ -201,7 +201,7 @@ public class PatientList extends List {
             this.returnedFinderArray = PatientFinder.findPatientByDateAdmission(patients, parameters[1]);
             createArrayOfFoundPatients();
         } catch (NullPointerException e) {
-            UI.printParagraph("Doctor doesn't exist please try again!");
+            UI.printParagraph("Patient with given admission date doesn't exist. Please try again!");
         }
     }
 

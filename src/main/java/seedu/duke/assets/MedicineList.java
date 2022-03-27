@@ -156,7 +156,7 @@ public class MedicineList extends List {
             this.returnedFinderArray = MedicineFinder.findMedicineById(medicines, parameters[1]);
             createArrayOfFoundMedicines();
         } catch (NullPointerException e) {
-            UI.printParagraph("Doctor doesn't exist please try again!");
+            UI.printParagraph("Medicine with given id doesn't exist. Please try again!");
         }
     }
 
@@ -165,7 +165,7 @@ public class MedicineList extends List {
             this.returnedFinderArray = MedicineFinder.findMedicineByDosage(medicines, Integer.parseInt(parameters[1]));
             createArrayOfFoundMedicines();
         } catch (NullPointerException e) {
-            UI.printParagraph("Doctor doesn't exist please try again!");
+            UI.printParagraph("Medicine with given dosage doesn't exist. Please try again!");
         }
     }
 
@@ -174,7 +174,7 @@ public class MedicineList extends List {
             this.returnedFinderArray = MedicineFinder.findMedicineByExpiry(medicines, parameters[1]);
             createArrayOfFoundMedicines();
         } catch (NullPointerException e) {
-            UI.printParagraph("Doctor doesn't exist please try again!");
+            UI.printParagraph("Medicine with given expiry doesn't exist. Please try again!");
         }
     }
 
@@ -183,7 +183,7 @@ public class MedicineList extends List {
             this.returnedFinderArray = MedicineFinder.findMedicineBySideEffects(medicines, parameters[1]);
             createArrayOfFoundMedicines();
         } catch (NullPointerException e) {
-            UI.printParagraph("Doctor doesn't exist please try again!");
+            UI.printParagraph("Medicine with given side effects doesn't exist. Please try again!");
         }
     }
 
@@ -193,7 +193,7 @@ public class MedicineList extends List {
                     Integer.parseInt(parameters[1]));
             createArrayOfFoundMedicines();
         } catch (NullPointerException e) {
-            UI.printParagraph("Doctor doesn't exist please try again!");
+            UI.printParagraph("Medicine with given quantity doesn't exist. Please try again!");
         }
     }
 
@@ -202,7 +202,7 @@ public class MedicineList extends List {
             this.returnedFinderArray = MedicineFinder.findMedicineByName(medicines, parameters[1]);
             createArrayOfFoundMedicines();
         } catch (NullPointerException e) {
-            UI.printParagraph("Doctor doesn't exist please try again!");
+            UI.printParagraph("Medicine with given name doesn't exist. Please try again!");
         }
     }
 
