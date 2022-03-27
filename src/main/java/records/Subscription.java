@@ -29,4 +29,9 @@ public class Subscription extends Record {
     public String toString() {
         return "Subscription : " + super.toString() + ", renewal = " + renewal;
     }
+
+    @Override
+    public String saveRecords() {
+        return "S " + super.saveRecords() + " | " + this.renewal + System.lineSeparator();
+    }
 }
