@@ -691,7 +691,6 @@ Format: `search /all <keyword>`
 |-------------|---------------------------------------------------------------------|
 | `<keyword>` | The keyword to be matched when searching through the all the lists. |
 
-
 **Example**
 
 Assume, the exercise list contains the following exercises:
