@@ -37,11 +37,11 @@ public class HousekeeperPerformanceList {
             System.out.println("======== Housekeeper Performance List ========");
             int number = 1;
             for (HousekeeperPerformance housekeeperPerformance : housekeeperPerformanceList) {
-                System.out.println(Integer.toString(number) + ".  [ " + housekeeperPerformance.getName()
-                        + " ]: Performance Rating: " + housekeeperPerformance.getRating());
+                System.out.println(Integer.toString(number) + ". [ " + housekeeperPerformance.getName()
+                        + " ]: " + housekeeperPerformance.getRating());
                 number += 1;
             }
-            System.out.println("======== End of the list ========");
+            System.out.println("============= End of the list =============");
         }
     }
 
