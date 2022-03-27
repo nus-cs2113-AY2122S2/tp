@@ -81,16 +81,6 @@ public class Session implements Serializable {
     }
 
     /**
-     * Returns a String object containing a human-readable version of the date of creation of the session.
-     * Format: DD Month YYYY, e.g. 04 March 2022
-     *
-     * @return A String object containing a human-readable version of the date of creation.
-     */
-    public String getDateString() {
-        return dateCreated.getDayOfMonth() + " " + dateCreated.getMonth() + " " + dateCreated.getYear();
-    }
-
-    /**
      * Returns a list of Activity objects representing the activities that occurred in that session.
      *
      * @return An ArrayList object containing Activity objects that are part of the session.
@@ -200,25 +190,6 @@ public class Session implements Serializable {
      */
     public void addActivity(Activity activity) {
         activityList.add(activity);
-    }
-
-    /**
-     * Returns a Person object specified by a numerical index that identifies the Person.
-     *
-     * @param index An integer that represents a numerical index that identifies a Person object in the session.
-     * @return A Person object in the Session class specified by index.
-     * @throws InvalidDataException if personList is empty or index is not in [1, personList.size()].
-     */
-    public Person getPersonByIndex(int index) throws InvalidDataException {
-        if (personList.isEmpty()) {
-            throw new InvalidDataException(Message.ERROR_SESSION_EMPTY_PERSON_LIST);
-        }
-
-        try {
-            return personList.getPerson(index - ZERO_INDEXING_OFFSET);
-        } catch (IndexOutOfBoundsException exception) {
-            throw new InvalidDataException(Message.ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST + personList.getSize());
-        }
     }
 
     /**
