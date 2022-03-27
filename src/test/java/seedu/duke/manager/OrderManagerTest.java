@@ -3,7 +3,7 @@ package seedu.duke.manager;
 import org.junit.jupiter.api.Test;
 import seedu.duke.entities.Dish;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OrderManagerTest {
     @Test
