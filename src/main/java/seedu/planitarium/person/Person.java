@@ -184,7 +184,28 @@ public class Person {
         return "u " + name;
     }
 
-    public void editIncome(int incomeIndex, String description, double amount, Category category, boolean isPermanent) {
-        incomeList.editIncome(incomeIndex, description, amount, category, isPermanent);
+    /**
+     *  Edits an income in the list of incomes.
+     *
+     * @param incomeIndex The index of the income
+     * @param description The source of the income
+     * @param amount The value of the income
+     * @param isPermanent Whether the income is recurring
+     */
+    public void editIncome(int incomeIndex, String description, double amount, boolean isPermanent) {
+        incomeList.editIncome(incomeIndex, description, amount, isPermanent);
+    }
+
+    /**
+     *  Edits an expenditure in the list of expenditures of the specified person.
+     *
+     * @param expendIndex The index of the expenditure
+     * @param description The reason for the expenditure
+     * @param amount The value of the expenditure
+     * @param category The category of the expenditure
+     * @param isPermanent Whether the expenditure is recurring
+     */
+    public void editExpend(int expendIndex, String description, double amount, Category category, boolean isPermanent) {
+        incomeList.exitExpend(expendIndex, description, amount, category, isPermanent);
     }
 }

@@ -231,10 +231,35 @@ public class PersonList {
         return getPerson(personIndex).getNumberOfExpenditures();
     }
 
-    public void editIncome(int personIndex, int incomeIndex, String description, double amount, Category category,
-                           boolean isPermanent) {
+    /**
+     *  Edits an income in the list of incomes of the specified person.
+     *
+     * @param personIndex The index of the person
+     * @param incomeIndex The index of the income
+     * @param description The source of the income
+     * @param amount The value of the income
+     * @param isPermanent Whether the income is recurring
+     */
+    public void editIncome(int personIndex, int incomeIndex, String description, double amount, boolean isPermanent) {
         String infoString = "Method editIncome() called";
         logger.log(Level.INFO, infoString);
-        getPerson(personIndex).editIncome(incomeIndex, description, amount, category, isPermanent);
+        getPerson(personIndex).editIncome(incomeIndex, description, amount, isPermanent);
+    }
+
+    /**
+     *  Edits an expenditure in the list of expenditures of the specified person.
+     *
+     * @param personIndex The index of the person
+     * @param expendIndex The index of the expenditure
+     * @param description The reason for the expenditure
+     * @param amount The value of the expenditure
+     * @param category The category of the expenditure
+     * @param isPermanent Whether the expenditure is recurring
+     */
+    public void editExpend(int personIndex, int expendIndex, String description, double amount, Category category,
+                           boolean isPermanent) {
+        String infoString = "Method editExpend() called";
+        logger.log(Level.INFO, infoString);
+        getPerson(personIndex).editExpend(expendIndex, description, amount, category, isPermanent);
     }
 }
