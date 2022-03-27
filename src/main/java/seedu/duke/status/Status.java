@@ -20,4 +20,5 @@ public enum Status {
     END_APP,
     FIND_DOCTOR_SUCCESS,
     FIND_MEDICINE_SUCCESS,
+    FIND_PATIENT_SUCCESS,
 }
