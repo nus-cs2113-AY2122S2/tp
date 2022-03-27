@@ -222,6 +222,10 @@ public abstract class Message {
     public static final String LOGGER_SESSIONDELETE_SESSION_REMOVED =
             "A session was removed from the list of session with Id: ";
 
+    // Session Edit Command
+    public static final String LOGGER_SESSIONEDIT_SESSION_EDITED =
+            "A session was edited from the list of session with Id: ";
+
     // Session Summary Command
     public static final String MESSAGE_SESSIONSUMMARY_NO_PAYMENTS_REQUIRED =
             "There are no payments to be made.";
@@ -299,7 +303,6 @@ public abstract class Message {
             "Total cost is less than or equals to zero.";
     public static final String LOGGER_ACTIVITYEDIT_ACTIVITY_EDITED =
             "An Activity object was succesfully edited in the list of activities with Id: ";
-
 
     // Activity Delete Command
     public static final String ASSERT_ACTIVITYDELETE_SESSION_IS_NULL =
