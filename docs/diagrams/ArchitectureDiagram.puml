@@ -23,8 +23,8 @@ Main -right[#grey]->Commands
 Main -down[#grey]->Storage
 
 Commands -up[#blue]->UI
-Commands -left[#blue]->Family
-Commands -down[#blue]->Storage
+Commands -left[#blue].->Family
+Commands -down[#blue].>Storage
 Commands -down[#blue].>Parser
 
 Family -down[MODEL_COLOR]->MoneyList
