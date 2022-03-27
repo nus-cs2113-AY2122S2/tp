@@ -167,21 +167,22 @@ public class DoctorList extends List {
         } else {
             ArrayList<String> stringArrayLists = new ArrayList<>();
             for (int i = 0; i < returnedFinderArray.size(); i++) {
-                String outputString = "";
-                outputString += String.valueOf(i) + ": ";
-                outputString += returnedFinderArray.get(i).getNric() + "\n";
-                outputString += returnedFinderArray.get(i).getFullName() + "\n";
-                outputString += returnedFinderArray.get(i).getAge() + "\n";
-                outputString += returnedFinderArray.get(i).getGender() + "\n";
-                outputString += returnedFinderArray.get(i).getAddress() + "\n";
-                outputString += returnedFinderArray.get(i).getSpecialization() + "\n";
-                stringArrayLists.add(outputString);
+                CommandLineTable findPatientTable = new CommandLineTable();
+                findPatientTable.setShowVerticalLines(true);
+                findPatientTable.setHeaders("Nric", "FullName", "Age", "Address", "Gender", "Dob",
+                        "Specilization");
+                findPatientTable.addRow(returnedFinderArray.get(i).getNric(),
+                        returnedFinderArray.get(i).getFullName(),
+                        String.valueOf(returnedFinderArray.get(i).getAge()),
+                        returnedFinderArray.get(i).getAddress(),
+                        String.valueOf(returnedFinderArray.get(i).getGender()),
+                        returnedFinderArray.get(i).getDob(),
+                        returnedFinderArray.get(i).getSpecialization());
+                findPatientTable.print();
             }
-            for (String stringArrayList : stringArrayLists) {
-                UI.printParagraph(stringArrayList);
             }
         }
-    }
+
 
     public void findByDateAdmission(String[] parameters) {
         // Intentionally left blank
