@@ -35,6 +35,16 @@ If you do not have Java already installed...
 
 Once you are sure that you have Java installed, you can download the latest version of HALPMI from the releases.
 
+###Starting up HALPMI
+You can launch HALPMI directly from your Command Prompt/Terminal. Change directory to the location where you have saved the
+JAR file you have downloaded from our releases. Following which you can type in `java -jar Halpmi.jar` in the command prompt to launch HALPMI.
+To learn more about [Command Prompt](https://www.makeuseof.com/tag/a-beginners-guide-to-the-windows-command-line/)
+, [Linux Terminal](https://ubuntu.com/tutorials/command-line-for-beginners#1-overview) and [Mac Terminal](https://macpaw.com/how-to/use-terminal-on-mac)
+please head to the respective help links.
+
+If you are not ready to handle the intricacies of the Command Prompt, you can use the `.bat` file located in our repository
+to launch HALPMI as well. However do note that you will have to change the PATH name included on the bat file to the PATH name
+at which Halpmi.jar is located.
 ## Features
 
 ### Adding: `add`
