@@ -17,14 +17,15 @@ public class DeletePersonCommand extends Command {
     public DeletePersonCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
         this.type = "DeletePersonCMD";
-        this.uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), personList);
+        this.group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
+        this.uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
     }
 
     @Override
     public void execute() throws PlanITariumException {
         assert (uid < 1) : USER_INDEX_NOT_VALID;
-        assert (personList != null) : PERSONLIST_NOT_NULL;
-        personList.deletePerson(uid);
+        assert (family != null) : PERSONLIST_NOT_NULL;
+        family.deletePerson(uid,group);
     }
 
 }

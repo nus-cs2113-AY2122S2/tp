@@ -20,11 +20,15 @@ public class CommandFactory {
     protected static final String DELETE_PERSON_CMD = "delete";
     protected static final String ADD_INCOME_CMD = "addin";
     protected static final String DELETE_INCOME_CMD = "deletein";
+    protected static final String EDIT_INCOME_CMD = "editin";
     protected static final String ADD_SPENT_CMD = "addout";
     protected static final String DELETE_SPEND_CMD = "deleteout";
+    protected static final String EDIT_SPEND_CMD = "editout";
     protected static final String CALC_REMAIN = "remain";
     protected static final String LIST = "list";
+    protected static final String LIST_CAT_CMD = "listcat";
     protected static final String EXIT = "bye";
+    protected Command newCommand;
 
     protected static final String LOG_EXECUTE_CMD = "'%s' command is returned";
 
@@ -33,7 +37,6 @@ public class CommandFactory {
 
     public Command getCommand(String userInput, Family family) throws PlanITariumException {
         try {
-            Command newCommand;
             switch (Parser.parseKeyword(userInput)) {
             case ADD_PERSON_CMD:
                 newCommand = new AddPersonCommand(userInput, family);
@@ -55,6 +58,11 @@ public class CommandFactory {
             case LIST:
                 newCommand = new ListCommand(userInput, family);
                 break;
+            case EDIT_INCOME_CMD:
+            case EDIT_SPEND_CMD:
+                newCommand = new EditRecordCommand(userInput, family);
+            case LIST_CAT_CMD:
+                newCommand = new ListCategoriesCommand(userInput, family);
             case EXIT:
                 newCommand = new ExitCommand(userInput, family);
                 break;

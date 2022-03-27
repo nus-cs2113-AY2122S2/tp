@@ -1,5 +1,6 @@
 package seedu.planitarium.commands;
 
+import seedu.planitarium.person.Family;
 import seedu.planitarium.person.PersonList;
 
 /**
@@ -10,14 +11,14 @@ public class RemainCommand extends Command {
 
     protected static final String PERSONLIST_NOT_NULL = "Personlist should not be null";
 
-    public RemainCommand(String userInput, PersonList personList) {
-        super(userInput, personList);
+    public RemainCommand(String userInput, Family family) {
+        super(userInput, family);
         this.type = "RemainCMD";
     }
 
     @Override
     public void execute() {
-        assert (personList != null) : PERSONLIST_NOT_NULL;
+        assert (family != null) : PERSONLIST_NOT_NULL;
         // personList.printRemain();
     }
 }

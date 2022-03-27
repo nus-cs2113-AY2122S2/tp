@@ -1,15 +1,15 @@
 package seedu.planitarium.commands;
 
-import seedu.planitarium.person.PersonList;
-import seedu.planitarium.ui.UI;
+import seedu.planitarium.global.UI;
+import seedu.planitarium.person.Family;
 
 /**
  * Executes exit command and exit the program.
  */
 public class ExitCommand extends Command {
 
-    public ExitCommand(String userInput, PersonList personList) {
-        super(userInput, personList);
+    public ExitCommand(String userInput, Family family) {
+        super(userInput, family);
         this.type = "ExitCMD";
     }
 

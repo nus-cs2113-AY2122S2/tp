@@ -1,5 +1,8 @@
 package seedu.planitarium.commands;
 
+import seedu.planitarium.exceptions.PlanITariumException;
+import seedu.planitarium.parser.Parser;
+import seedu.planitarium.person.Family;
 import seedu.planitarium.person.PersonList;
 
 /**
@@ -7,16 +10,28 @@ import seedu.planitarium.person.PersonList;
  */
 public class ListCommand extends Command {
 
-    protected static final String PERSONLIST_NOT_NULL = "Personlist should not be null";
+    protected static final String FAMILY_NOT_NULL = "Family should not be null";
+    protected boolean LIST_WITH_GROUP = true;
+    protected int group;
 
-    public ListCommand(String userInput, PersonList personList) {
-        super(userInput, personList);
+    public ListCommand(String userInput, Family family) throws PlanITariumException {
+        super(userInput, family);
         this.type = "ListCMD";
+        try {
+            group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
+        } catch (PlanITariumException e) {
+            group = -1; //list without group
+            LIST_WITH_GROUP = false;
+        }
     }
 
     @Override
     public void execute() {
-        assert (personList != null) : PERSONLIST_NOT_NULL;
-        personList.list();
+        assert (family != null) : FAMILY_NOT_NULL;
+        if(LIST_WITH_GROUP) {
+            family.list(group);
+        } else {
+            family.overview();
+        }
     }
 }
