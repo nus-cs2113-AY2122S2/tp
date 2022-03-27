@@ -1,7 +1,7 @@
 package seedu.sherpass.util;
 
 
-import org.junit.jupiter.api.Disabled;
+
 import org.junit.jupiter.api.Test;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
@@ -14,7 +14,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.sherpass.constant.DateAndTimeFormat.dateOnlyFormat;
+import static seedu.sherpass.constant.DateAndTimeFormat.outputDateOnlyFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.dayOnlyFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputTimeIndependentFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
@@ -30,23 +30,23 @@ public class TimetableTest {
 
         Task testTask = new Task(-1,"submit DG",
                 LocalDateTime.parse("29/3/2022", inputTimeIndependentFormat),
-                LocalDateTime.parse(LocalDate.now().format(dateOnlyFormat) + " 09:00", inputWithTimeFormat),
-                LocalDateTime.parse(LocalDate.now().format(dateOnlyFormat) + " 11:00", inputWithTimeFormat),
+                LocalDateTime.parse(LocalDate.now().format(outputDateOnlyFormat) + " 09:00", inputWithTimeFormat),
+                LocalDateTime.parse(LocalDate.now().format(outputDateOnlyFormat) + " 11:00", inputWithTimeFormat),
                 null, 1);
 
         String expectedOutput = "------------------------------------------------"
-                + "----------------------------------------------" + System.lineSeparator()
-                + "|  Day       |  Time         |  Mark Status |  Task Description    |  To complete by         |"
+                + "---------------------------------------" + System.lineSeparator()
+                + "|  Day       |  Time         |  Mark Status |  Task Description    |  To complete by  |"
                 + System.lineSeparator()
                 + "|  " + LocalDate.now().format(dayOnlyFormat)
                 + "       | " + testTask.getTimePeriod() + " |              |  1. submit DG        "
-                + "|  Tue, 29/03/2022 00:00  |"
+                + "|  Tue, 29/03/2022 |"
                 + System.lineSeparator()
-                + "| " + LocalDate.now().format(dateOnlyFormat)
-                + " |               |              |                      |                         |"
+                + "| " + LocalDate.now().format(outputDateOnlyFormat)
+                + " |               |              |                      |                  |"
                 + System.lineSeparator()
                 + "------------------------------------------------------"
-                + "----------------------------------------"
+                + "---------------------------------"
                 + System.lineSeparator();
 
         dummyList.add(testTask);
@@ -74,7 +74,7 @@ public class TimetableTest {
                     .append(currentDate.plus(i, ChronoUnit.DAYS).format(dayOnlyFormat))
                     .append("       |             Your schedule is empty for the day!                        |")
                     .append(System.lineSeparator()).append("| ")
-                    .append(currentDate.plus(i, ChronoUnit.DAYS).format(dateOnlyFormat))
+                    .append(currentDate.plus(i, ChronoUnit.DAYS).format(outputDateOnlyFormat))
                     .append(" |                                                                        |")
                     .append(System.lineSeparator())
                     .append("---------------------------------------------------------------------------------------")
@@ -90,44 +90,47 @@ public class TimetableTest {
         System.setOut(new PrintStream(outContent));
         System.setOut(new PrintStream(outContent));
         ArrayList<Task> dummyList =  new  ArrayList<>();
+        String currentDate = LocalDate.now().format(outputDateOnlyFormat);
         dummyList.add(new Task(1,"A significantly long task description",
-                null, LocalDateTime.parse("26/3/2022 09:00", inputWithTimeFormat),
-                LocalDateTime.parse("26/3/2022 10:00", inputWithTimeFormat), null, 1));
+                null, LocalDateTime.parse(currentDate + " 09:00", inputWithTimeFormat),
+                LocalDateTime.parse(currentDate + " 10:00", inputWithTimeFormat), null, 1));
         dummyList.add(new Task(2, "A somewhat long description",
-                null, LocalDateTime.parse("26/3/2022 10:00", inputWithTimeFormat),
-                LocalDateTime.parse("26/3/2022 11:00", inputWithTimeFormat),
+                null, LocalDateTime.parse(currentDate + " 10:00", inputWithTimeFormat),
+                LocalDateTime.parse(currentDate + " 11:00", inputWithTimeFormat),
                 null, 2));
         dummyList.add(new Task(3, "break time!",
-                null, LocalDateTime.parse("26/3/2022 11:00", inputWithTimeFormat),
-                LocalDateTime.parse("26/3/2022 13:00", inputWithTimeFormat),
+                null, LocalDateTime.parse(currentDate + " 11:00", inputWithTimeFormat),
+                LocalDateTime.parse(currentDate + " 13:00", inputWithTimeFormat),
                 null, 3));
         dummyList.add(new Task(4,"One more task to add",
-                null, LocalDateTime.parse("26/3/2022 13:00", inputWithTimeFormat),
-                LocalDateTime.parse("26/3/2022 15:00", inputWithTimeFormat),
+                null, LocalDateTime.parse(currentDate + " 13:00", inputWithTimeFormat),
+                LocalDateTime.parse(currentDate + " 15:00", inputWithTimeFormat),
                 null, 4));
-        Ui ui = new Ui();
-        Timetable.showTodaySchedule(new TaskList(dummyList), ui);
+        String currentDay = LocalDate.now().format(dayOnlyFormat);
         String expectedOutput = "------------------------------------------------------------"
                 + "-------------------------------------------------" + System.lineSeparator()
                 + "|  Day       |  Time         |  Mark Status |  Task Description              "
                 + "            |  To complete by  |" + System.lineSeparator()
-                + "|  " + "Sat"
+                + "|  " + currentDay
                 + "       | " + dummyList.get(0).getTimePeriod() + " |              |"
                 + "  1. A significantly long task description  |"
                 + "                  |" + System.lineSeparator()
-                + "| 26/03/2022"
+                + "| " + currentDate
                 + " | " + dummyList.get(1).getTimePeriod()
                 + " |              |  2. A somewhat long description            |"
                 + "                  |" + System.lineSeparator()
                 + "|            | " + dummyList.get(2).getTimePeriod() + " |              |  3. break time!"
                 + "                            |"
                 + "                  |" + System.lineSeparator()
-                + "|            | " + dummyList.get(3).getTimePeriod() +" |              | "
+                + "|            | " + dummyList.get(3).getTimePeriod() + " |              | "
                 + " 4. One more task to add                   |"
                 + "                  |" + System.lineSeparator()
                 + "---------------------------------------"
                 + "----------------------------------------------------------------------"
                 + System.lineSeparator();
+        Ui ui = new Ui();
+        Timetable.showTodaySchedule(new TaskList(dummyList), ui);
+
         assertEquals(expectedOutput, outContent.toString());
     }
 }

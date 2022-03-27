@@ -14,7 +14,7 @@ import static seedu.sherpass.Main.LOGGER;
 import java.util.logging.Level;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.dayOnlyFormat;
-import static seedu.sherpass.constant.DateAndTimeFormat.dateOnlyFormat;
+import static seedu.sherpass.constant.DateAndTimeFormat.outputDateOnlyFormat;
 import static seedu.sherpass.constant.TimetableConstant.BLANK_MARK_STATUS;
 import static seedu.sherpass.constant.TimetableConstant.BLANK_TIME_PERIOD;
 import static seedu.sherpass.constant.TimetableConstant.DATE_SPACE_FULL_LENGTH;
@@ -23,7 +23,6 @@ import static seedu.sherpass.constant.TimetableConstant.EMPTY_TIMETABLE_SIZE;
 import static seedu.sherpass.constant.TimetableConstant.PARTITION_PIPE_LINE_LENGTH;
 import static seedu.sherpass.constant.TimetableConstant.PARTITION_SPACE_OFFSET_LENGTH;
 import static seedu.sherpass.constant.TimetableConstant.STRING_COMPARE_OFFSET;
-import static seedu.sherpass.constant.TimetableConstant.TASK_DATE_SPACE_COMPARE_OFFSET_LENGTH;
 import static seedu.sherpass.constant.TimetableConstant.TASK_SPACE_COMPARE_LENGTH;
 import static seedu.sherpass.constant.TimetableConstant.TASK_SPACE_FULL_LENGTH;
 import static seedu.sherpass.constant.TimetableConstant.TASK_SPACE_COMPARE_OFFSET_LENGTH;
@@ -33,11 +32,10 @@ import static seedu.sherpass.constant.TimetableConstant.WHITE_SPACE_FRONT_OFFSET
 
 public class Timetable {
 
-    private static int findMaxTaskContentLength(ArrayList<Task> filteredTasks, boolean isGetTask) {
+    private static int findMaxTaskContentLength(ArrayList<Task> filteredTasks) {
         int max = 0;
         for (Task task : filteredTasks) {
-            int taskLength = (isGetTask) ? task.getDescription().length()
-                    : task.getByDateString().length();
+            int taskLength = task.getDescription().length();
             if (taskLength > max) {
                 max = taskLength;
             }
@@ -46,7 +44,7 @@ public class Timetable {
     }
 
     private static int findTaskLength(ArrayList<Task> filteredTasks) {
-        int descriptionLength = findMaxTaskContentLength(filteredTasks, true);
+        int descriptionLength = findMaxTaskContentLength(filteredTasks);
         if (descriptionLength > TASK_SPACE_COMPARE_LENGTH) {
             return descriptionLength + TASK_SPACE_COMPARE_OFFSET_LENGTH;
         }
@@ -133,19 +131,11 @@ public class Timetable {
         ui.showToUser(ui.getRepeatedCharacters("-", partitionLength));
     }
 
-    private static long findDateLength(ArrayList<Task> filteredTasks) {
-        int dateLength = findMaxTaskContentLength(filteredTasks, false);
-        if (dateLength > DATE_SPACE_FULL_LENGTH) {
-            return dateLength + TASK_DATE_SPACE_COMPARE_OFFSET_LENGTH;
-        }
-        return DATE_SPACE_FULL_LENGTH;
-    }
-
     private static void prepareTimetable(LocalDate dateInput, ArrayList<Task> filteredTasks, Ui ui) {
         String day = dateInput.format(dayOnlyFormat);
-        String date = dateInput.format(dateOnlyFormat);
+        String date = dateInput.format(outputDateOnlyFormat);
         long taskLength = findTaskLength(filteredTasks);
-        long byDateLength = findDateLength(filteredTasks);
+        long byDateLength = DATE_SPACE_FULL_LENGTH;
         long partitionLength = calcPartitionLength(taskLength, byDateLength);
         if (filteredTasks.isEmpty()) {
             printEmptyTimetable(ui, day, date, partitionLength);
