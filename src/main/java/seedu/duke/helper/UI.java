@@ -2,13 +2,15 @@ package seedu.duke.helper;
 
 import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
+import seedu.duke.assets.Patient;
 import seedu.duke.assets.PatientList;
-import seedu.duke.status.Status;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UI {
     private String userInput;
+    private ArrayList<Patient> patients = new ArrayList<>();
     private Scanner reader = new Scanner(System.in);
     private Parser parser = new Parser();
 
@@ -20,6 +22,7 @@ public class UI {
         readInput();
         return parser.commandParser(userInput)[0].trim();
     }
+
 
     public String readParameters() {
         String[] userInputArray = parser.commandParser(userInput);
@@ -39,6 +42,13 @@ public class UI {
                 + "Please type in your input");
     }
 
+    public void printLogo() {
+        String logo = "------------------------------\n"
+                + "HALPMI";
+
+        System.out.println(logo);
+    }
+
     public void printHelp() {
         printNewLineSeparator();
         printParagraph("Here are the commands and examples:\n"
@@ -55,6 +65,10 @@ public class UI {
                 + "8. delete medicine\nExample: delete medicine /info 1\n"
                 + "9. view medicine\nExample: view medicine [/info id]\n"
                 + "10. bye\nExample: bye");
+    }
+
+    public int getSize() {
+        return patients.size();
     }
 
     public void printWrongInput() {
@@ -112,6 +126,35 @@ public class UI {
                 + "edit medicine /info s231, Paracetamol,500,2023-12-12,Headaches,10");
     }
 
+    public void printFindDoctorExampleMessage() {
+        printParagraph("find doctor /info name, Bruce Lee\n"
+                + "find doctor /info nric, S1234567X\n"
+                + "find doctor /info age, 23\n"
+                + "find doctor /info gender, M\n"
+                + "find doctor /info address, 15 King's Avenue\n"
+                + "find doctor /info dob, 1999-12-31\n"
+                + "find doctor /info specialization, Dermatology\n");
+    }
+
+    public void printFindPatientExampleMessage() {
+        printParagraph("find patient /info name, Bruce Lee\n"
+                + "find patient /info nric, S1234567X\n"
+                + "find patient /info age, 23\n"
+                + "find patient /info gender, M\n"
+                + "find patient /info address, 15 King's Avenue\n"
+                + "find patient /info dob, 1999-12-31\n"
+                + "find patient /info admissiondate, 2021-02-15\n");
+    }
+
+    public void printFindMedicinetExampleMessage() {
+        printParagraph("find medicine /info id, S123\n"
+                + "find medicine /info name, Paracetamol\n"
+                + "find medicine /info dosage, 500\n"
+                + "find medicine /info expiry, 2023-06-11\n"
+                + "find medicine /info sideeffects, headache\n"
+                + "find medicine /info quantity, 10\n");
+    }
+
     public static void printPrompt() {
         System.out.print("You: ");
     }
@@ -133,8 +176,5 @@ public class UI {
     public void printDeleteMedicineExampleMessage(MedicineList medicineList) {
         printParagraph("Please input a positive number up to " + medicineList.getSize() + " only.\n"
                 + "Here is an example:\ndelete patient /info 1");
-    }
-
-    public void print(Status status) {
     }
 }

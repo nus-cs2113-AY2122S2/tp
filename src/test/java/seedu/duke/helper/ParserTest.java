@@ -2,10 +2,10 @@ package seedu.duke.helper;
 
 
 import org.junit.jupiter.api.Test;
-
 import seedu.duke.exception.HalpmiException;
-
-
+import seedu.duke.helper.command.AddAppointmentCommand;
+import seedu.duke.helper.command.Command;
+import seedu.duke.helper.command.ViewAppointmentCommand;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -310,5 +310,72 @@ class ParserTest {
             }
         }
     }
+
+    @Test
+    void parseUpdateMedicineStockTest() {
+        try {
+            Parser.parseUpdateMedicineStock(null);
+            assert true;
+        } catch (HalpmiException e) {
+            fail("Should not be throwing exception!");
+        }
+    }
+
+    @Test
+    void parseUpdateMedicineStockInvalidParamTest() {
+        try {
+            Parser.parseUpdateMedicineStock("");
+            fail("Should be throwing exception!");
+        } catch (HalpmiException e) {
+            assert true;
+        }
+    }
+
+    @Test
+    void parseClearExpiredMedicineTest() {
+        try {
+            Parser.parseClearExpiredMedicine(null);
+            assert true;
+        } catch (HalpmiException e) {
+            fail("Should not be throwing exception!");
+        }
+    }
+
+    @Test
+    void parseClearExpiredMedicineInvalidParamTest() {
+        try {
+            Parser.parseClearExpiredMedicine("");
+            fail("Should be throwing exception!");
+        } catch (HalpmiException e) {
+            assert true;
+        }
+    }
+
+    /*
+    @Test
+    void parseAddAppointmentTest_CorrectFormatInput_returnCommand() {
+        String parameters = "ID1,S1234567A,Thomas,S7654321A,Anderson,2023-01-01,Headache";
+        Command testCommand = null;
+        try {
+            testCommand = Parser.parseAddAppointment(parameters);
+        } catch (HalpmiException e) {
+            e.toString();
+        }
+        assertTrue(testCommand instanceof AddAppointmentCommand);
+    }
+
+
+    @Test
+    void parseViewAppointmentTest_CorrectFormatInput_returnCommand() {
+        String viewParameters = "nric,S1234567A";
+        Command testCommand = null;
+        try {
+            testCommand = Parser.parseViewAppointment(viewParameters);
+        } catch (HalpmiException e) {
+            e.toString();
+        }
+        assertTrue(testCommand instanceof ViewAppointmentCommand);
+    }
+    */
 
 }
