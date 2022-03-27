@@ -37,4 +37,17 @@ public class AddHousekeeperTest {
     public void commandParser_addCommandOverage_exceptionThrown() {
         assertThrows(OverAgeException.class, () -> new CommandParser().parse("Add Housekeeper Sally ~ 81"));
     }
+
+    @Test
+    public void commandParser_nameCorrect() throws Exception {
+        CommandParser parser = new CommandParser();
+        Command command = parser.parse("Add Housekeeper Susan ~ 23");
+        AddHousekeeperCommand addHousekeeperCommand = (AddHousekeeperCommand) command;
+        assertEquals("Susan", addHousekeeperCommand.getHousekeeper().getName());
+        assertEquals(23, addHousekeeperCommand.getHousekeeper().getAge());
+        command = parser.parse("delete housekeeper susan");
+        DeleteHousekeeperCommand deleteHousekeeperCommand = (DeleteHousekeeperCommand) command;
+        assertEquals("susan", deleteHousekeeperCommand.getName());
+    }
+
 }

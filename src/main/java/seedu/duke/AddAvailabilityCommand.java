@@ -138,7 +138,7 @@ public class AddAvailabilityCommand extends Command {
      * @param ui The user interface for this execution method.
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws UserExistException {
+    public void execute(ListContainer listContainer, Ui ui) throws UserDoesNotExistException {
         String availability = getAvailability();
         String name = getName();
         ui.printMessage("Added " + name + " availability into records");

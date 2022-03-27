@@ -29,6 +29,7 @@ public class CommandParser {
     private static final String VIEW_HOUSEKEEPER_COMMAND = "View Recorded Housekeeper";
     private static final String VIEW_AVAILABLE_HOUSEKEEPER_DAY = "get available on ";
     private static final String RESET_AVAILABILITY = "is a new week";
+    private static final String DELETE_PROFILE = "delete housekeeper ";
 
     /**
      * Parses the user-provided command and creates the relevant Command object.
@@ -100,6 +101,9 @@ public class CommandParser {
             userCommand = new GetAvailableHousekeeper(commandStringWithoutCommand);
         } else if (commandString.startsWith(RESET_AVAILABILITY)) {
             userCommand = new ResetAvailabilityCommand();
+        } else if (commandString.startsWith(DELETE_PROFILE)) {
+            commandStringWithoutCommand = commandString.replace(DELETE_PROFILE, "");
+            userCommand = new DeleteHousekeeperCommand(commandStringWithoutCommand);
         } else {
             throw new WrongCommandException("Error! Invalid Command.");
         }
