@@ -50,6 +50,8 @@ Please take note of these few terms. It is explained as below:
 * [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
 * [Command Summary](#command-summary)
 
+---
+
 ## Quick Start Guide
 
 1. Ensure that you have [Java 11](https://www.oracle.com/java/technologies/downloads/) or above installed.
@@ -57,6 +59,20 @@ Please take note of these few terms. It is explained as below:
 3. (Recommended) Create a new directory and move the WerkIt! JAR file to that directory.
 4. (Recommended) Set your current working directory to the new directory.
 5. Run the WerkIt! application with the command: `java -jar WerkIt.jar`.
+
+**Recommended Terminals** <br/>
+
+| Operating System  | Recommended Terminal |
+|-------------------| --- |
+| Microsoft Windows | [Windows Powershell](https://www.digitalcitizen.life/simple-questions-what-powershell-what-can-you-do-it/) |
+| Apple MacOS       | [Terminal](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac) |
+| (Ubuntu) Linux    | [Bash Terminal](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal)
+
+
+> For Microsoft Windows operating systems, the Command Prompt (CMD) is **not** recommended for use with WerkIt!
+> as some texts in the application will not be displayed correctly.
+
+> For Linux operating systems, our application is tested on Ubuntu Linux using the default Bash shell.
 
 ---
 ## Features 
@@ -73,9 +89,10 @@ contains two types of formatting.
 | Format         | Parameters                                                                                                                               |
 |----------------|------------------------------------------------------------------------------------------------------------------------------------------|
 | `<condition>`  | Contents enclosed between "<>" are the parameters needed for the command to be valid. <br /> Not all commands have conditions to be met. |
-| `/commandType` | Content after "/" is to classify the command type. <br/> Such as classifying it to be a workout/ plan/ schedule/ search command          |
+| `/commandType` | Content after "/" is to classify the command type. <br/> Such as classifying it to be a workout / plan / schedule / search command       |
 
-> :exclamation: **Heads up!** Your inputs cannot contain the pipe character `|`!
+**_Heads Up!_**<br/>
+_Your inputs cannot contain the pipe character `|`!_
 
 ---
 ## Exercise And Workout Features
@@ -922,6 +939,14 @@ with the WerkIt! JAR file inside it, and run the application from the directory.
 When you launch WerkIt! in subsequent sessions, please ensure that you run it from the same directory
 that you did when starting WerkIt! for the first time.
 
+**Warning:** It is highly recommended that you do not directly modify these files on your own as it may lead to
+instabilities in the application. If you do decide to modify the files, **please make a backup of the `werkItResources`
+directory** before modifying the files. 
+
+In the event that your application becomes unstable due to accidental file modifications, please replace the
+`werkItResources` directory with your backup copy. In a worst case scenario (i.e. if you don't have a proper backup
+copy), delete the `werkItResources` directory and restart WerkIt! to recreate the directory and files from fresh.
+
 ---
 
 ## Frequently Asked Questions (FAQ)
@@ -930,7 +955,7 @@ that you did when starting WerkIt! for the first time.
 
 **A**: Locate your `werkItResources` directory and WerkIt! JAR file, copy and paste it in your other 
 computer's desired location. Thereafter, you can run WerkIt! as per normal. 
-- (Please see 'WerkIt's Local Storage Information' for recommended location).
+(Please see [WerkIt's Local Storage Information](#werkits-local-storage-information) for recommended location).
 
 <br/>
 
@@ -940,6 +965,16 @@ computer's desired location. Thereafter, you can run WerkIt! as per normal.
 first time. Your saved data should be in that directory.
 
 <br/>
+
+**Q**: I keep getting file loading errors whenever I start WerkIt!
+
+**A**: It is possible that your local file data is corrupted. If you have a backup copy of the `werkItResources`
+directory, replace your existing `werkItResources` directory with the backup copy. Otherwise, you will need to
+reset your local file data by deleting the `werkItResources` directory and starting up WerkIt! to recreate the
+necessary files in their default numberings.
+
+Do note that these suggestions will lead to a **loss of your saved application data** and you may need to re-enter the lost
+data.
 
 ---
 
