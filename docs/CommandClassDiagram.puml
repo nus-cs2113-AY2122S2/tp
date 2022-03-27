@@ -1,15 +1,18 @@
 @startuml
 'https://plantuml.com/class-diagram
+
+!include Style.puml
+
 package command {
-    abstract class Command
+    class "{abstract}\n Command "
     class DeleteCommand
 
-    Command <|-- DeleteCommand
-    Command <|-- ExitCommand
+    "{abstract}\n Command " <|-- DeleteCommand
+    "{abstract}\n Command " <|-- ExitCommand
     DeleteCommand ..> CommandResult :creates >
     ExitCommand ..> CommandResult :creates >
 
-    abstract class Command {
+    class "{abstract}\n Command " {
         +execute(): CommandResult {abstract}
     }
 

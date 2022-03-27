@@ -4,6 +4,7 @@
 skinparam shadowing false
 participant ":TagCommand" as TagCommand
 participant ":ModuleList" as ModuleList
+hide footbox
 
 mainframe **sd** Get Module
 
@@ -19,7 +20,7 @@ else else
     activate ModuleList
 
     alt Objects.isNull(taskMod)
-        [<-- ModuleList:   throw NoSuchModuleException
+        [<-- ModuleList: throw NoSuchModuleException
 
     else else
     return targetModule
