@@ -38,7 +38,7 @@ Example of usage:
 ## Command Summary
 
 | Command | Syntax |
-| --- | ----------- |
+| --- | :---  |
 | packages | packages |
 | info | info {num} |
 | add | add {package_name} {country} {duration} {price} {vacancies} |
