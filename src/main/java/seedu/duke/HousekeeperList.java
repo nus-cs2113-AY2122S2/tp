@@ -75,7 +75,7 @@ public class HousekeeperList {
      * @param name         Housekeeper Name.
      * @param availability Housekeeper's availability to be added in records.
      */
-    public void searchAvailability(String name, String availability) throws UserExistException {
+    public void searchAvailability(String name, String availability) throws UserDoesNotExistException {
         boolean isExist = false;
         String nameConvertLowerCase = name.toLowerCase();
         for (int i = 0; i < housekeeperList.size(); i++) {
@@ -87,7 +87,7 @@ public class HousekeeperList {
             }
         }
         if (!isExist) {
-            throw new UserExistException();
+            throw new UserDoesNotExistException();
         }
     }
 
@@ -98,5 +98,29 @@ public class HousekeeperList {
         for (Housekeeper housekeeper : housekeeperList) {
             housekeeper.setNullAvailability();
         }
+    }
+
+    /**
+     * Finds the housekeeper's index in the list.
+     *
+     * @param name Housekeeper to be remove.
+     * @return Index of the housekeeper to be remove in the list.
+     */
+    public int getHousekeeperRemove(String name) {
+        int index = 0;
+        int i = 0;
+        String nameLowerCase = name.trim().toLowerCase();
+        for (Housekeeper housekeeper : housekeeperList) {
+            String nameForCompare = housekeeper.getName().toLowerCase();
+            if (nameForCompare.equals(nameLowerCase)) {
+                index = i;
+            }
+            i += 1;
+        }
+        return index;
+    }
+
+    public void removeHousekeeper(int housekeeperToRemoveIndex) {
+        getHousekeeperList().remove(housekeeperToRemoveIndex);
     }
 }
