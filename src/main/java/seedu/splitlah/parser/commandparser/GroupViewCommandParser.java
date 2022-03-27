@@ -26,7 +26,8 @@ public class GroupViewCommandParser implements CommandParser<GroupViewCommand> {
      *
      * @param commandArgs A String object representing arguments provided by the user.
      * @return An GroupViewCommand object if all necessary parameters required are found in the input arguments.
-     * @throws InvalidFormatException
+     * @throws InvalidFormatException If at least one of the necessary parameters cannot be found
+     *                                in the input arguments.
      */
     @Override
     public GroupViewCommand getCommand(String commandArgs) throws InvalidFormatException {
