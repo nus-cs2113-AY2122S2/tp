@@ -11,7 +11,8 @@ import seedu.splitlah.ui.Message;
 import java.util.logging.Level;
 
 /**
- * Represents a command that displays the full details of a Group object specified by the user.
+ * Represents a command which displays the full details of a Group object in the list of groups
+ * managed by the Profile object.
  *
  * @author Ivan
  */
@@ -58,7 +59,7 @@ public class GroupViewCommand extends Command {
      * Runs the command with the group unique identifier as provided by the user input and
      * prints the details of the group.
      *
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {

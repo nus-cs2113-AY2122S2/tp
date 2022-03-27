@@ -3,17 +3,15 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
+import seedu.splitlah.data.Profile;
 import seedu.splitlah.data.Session;
+import seedu.splitlah.data.PersonList;
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
-import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TextUI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -22,56 +20,36 @@ import java.util.logging.Level;
  * @author Ivan
  */
 public class ActivityCreateCommand extends Command {
-
-    public static final String COMMAND_TEXT = "activity /create";
-
-    private static final String COMMAND_FORMAT = "Syntax:\n\t";
-
-    public static final String COMMAND_FORMAT_FIRST =
-            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
-                    + "/co <TOTAL_COST> [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
-
-    public static final String COMMAND_FORMAT_SECOND =
-            "activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2…] "
-                    + "/cl [COST1 COST2…] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
-
+  
     private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
-    
-    public static final String[] COMMAND_DELIMITERS = { 
-        ParserUtils.SESSION_ID_DELIMITER, 
-        ParserUtils.NAME_DELIMITER, 
-        ParserUtils.PAYER_DELIMITER, 
-        ParserUtils.INVOLVED_DELIMITER, 
-        ParserUtils.TOTAL_COST_DELIMITER, 
-        ParserUtils.COST_LIST_DELIMITER,
-        ParserUtils.GST_DELIMITER,
-        ParserUtils.SERVICE_CHARGE_DELIMITER 
-    };
 
-    private int sessionId;
-    private String activityName;
+    private int activityId;
+    private final int sessionId;
+    private final String activityName;
     private double totalCost;
-    private String payer;
-    private String[] involvedList;
+    private final String payer;
+    private final String[] involvedList;
     private double[] costList;
-    private double gst;
-    private double serviceCharge;
+    private final double gst;
+    private final double serviceCharge;
 
     private static final double ZERO_COST_PAID = 0;
     public static final double ZERO_COST_OWED = 0;
     private static final int NO_COST = 0;
 
     /**
-     * Constructor to create a ActivityCreateCommand object.
+     * Initializes an ActivityCreateCommand object.
      *
      * @param sessionId     An integer that uniquely identifies a session.
      * @param activityName  A String object that represents the Activity object's name.
      * @param totalCost     A double that represents total cost of the activity.
-     * @param payer         The name of the person who paid for the activity.
-     * @param involvedList  The names of the persons who are involved in the activity.
-     * @param costList      The respective costs of each person involved in the activity.
-     * @param gst           The gst to be included for the cost of the activity.
-     * @param serviceCharge The service charge to be included for the cost of the activity.
+     * @param payer         A String object that represents the name of the person who paid for the activity.
+     * @param involvedList  An array of String objects that represents the names of the persons
+     *                      who are involved in the activity.
+     * @param costList      A double array object that represents the respective costs of
+     *                      each person involved in the activity.
+     * @param gst           A double that represents the GST percentage to be included for the cost of the activity.
+     * @param serviceCharge A double that represents the service charge to be included for the cost of the activity.
      */
     public ActivityCreateCommand(int sessionId, String activityName, double totalCost, String payer,
                                  String[] involvedList, double[] costList, double gst, double serviceCharge) {
@@ -87,110 +65,6 @@ public class ActivityCreateCommand extends Command {
         this.costList = costList;
         this.gst = gst;
         this.serviceCharge = serviceCharge;
-    }
-
-    /**
-     * Prepares user arguments for activity create command.
-     *
-     * @param commandArgs A String object representing the user's arguments.
-     * @return An ActivityCreateCommand object if necessary parameters were found in user arguments,
-     *         an InvalidCommand object otherwise.
-     */
-    public static Command prepare(String commandArgs) {
-        int sessionId;
-        String activityName;
-        String payer;
-        String[] involvedList;
-        double totalCost = 0;
-        double[] costList = null;
-        double gst;
-        double serviceCharge;
-
-        try {
-            sessionId = Parser.parseSessionId(commandArgs);
-            activityName = Parser.parseName(commandArgs);
-            payer = Parser.parsePayer(commandArgs);
-            involvedList = Parser.parseInvolved(commandArgs);
-        } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t"
-                    + COMMAND_FORMAT_SECOND);
-        }
-
-        boolean isMissingCost = false;
-        boolean isMissingCostList = false;
-        boolean hasDifferentLength = false;
-
-        try {
-            totalCost = Parser.parseTotalCost(commandArgs);
-        } catch (InvalidFormatException e) {
-            if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                    + ParserUtils.TOTAL_COST_DELIMITER)) {
-                return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
-                        + "\n\t" + COMMAND_FORMAT_SECOND);
-            }
-            isMissingCost = true;
-        }
-
-        try {
-            costList = Parser.parseCostList(commandArgs);
-        } catch (InvalidFormatException e) {
-            if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
-                    + ParserUtils.COST_LIST_DELIMITER)) {
-                return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
-                        + "\n\t" + COMMAND_FORMAT_SECOND);
-            }
-            isMissingCostList = true;
-        }
-
-        boolean hasMissingCostAndMissingCostList = isMissingCostList && isMissingCost;
-        if (hasMissingCostAndMissingCostList) {
-            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
-                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
-        }
-
-        boolean hasBothCostAndCostList = !isMissingCostList && !isMissingCost;
-        if (hasBothCostAndCostList) {
-            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
-                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
-        }
-
-        if (isMissingCost) {
-            hasDifferentLength = involvedList.length != costList.length;
-        }
-        if (hasDifferentLength) {
-            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
-                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
-        }
-
-        try {
-            gst = Parser.parseGst(commandArgs);
-            serviceCharge = Parser.parseServiceCharge(commandArgs);
-        } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
-                    + "\n\t" + COMMAND_FORMAT_SECOND);
-        }
-
-        return new ActivityCreateCommand(sessionId, activityName, totalCost, payer, involvedList, costList, gst,
-                serviceCharge);
-    }
-
-    /**
-     * Checks if String object array of names has duplicated names.
-     *
-     * @return true if it contains duplicates,
-     *         false otherwise.
-     */
-    private boolean hasNameDuplicates() {
-        Set<String> nameSet = new HashSet<>();
-        for (String name : involvedList) {
-            String nameToBeAdded = name.toLowerCase();
-            if (!nameSet.add(nameToBeAdded)) {
-                return true;
-            }
-        }
-        assert nameSet.size() == involvedList.length :
-                Message.ASSERT_ACTIVITYCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED;
-        return false;
     }
 
     /**
@@ -275,8 +149,8 @@ public class ActivityCreateCommand extends Command {
 
     /**
      * Updates cost list by including the extra charges.
-     * Extra charges may include gst and service charge.
-     * Assumption: gst and service charge are non-negative values.
+     * Extra charges may include GST and service charge.
+     * Assumption: GST and service charge are non-negative values.
      */
     private void updateCostListWithExtraCharges() {
         double extraCharges = getExtraCharges();
@@ -296,8 +170,8 @@ public class ActivityCreateCommand extends Command {
 
     /**
      * Updates total cost by including the extra charges.
-     * Extra charges may include gst and service charge.
-     * Assumption: gst and service charge are non-negative values.
+     * Extra charges may include GST and service charge.
+     * Assumption: GST and service charge are non-negative values.
      */
     private void updateCostWithExtraCharges() {
         double extraCharges = getExtraCharges();
@@ -331,35 +205,38 @@ public class ActivityCreateCommand extends Command {
     }
 
     /**
-     * Runs the command to create an activity.
+     * Runs the command to create an Activity object to be stored in a Session object managed by the Profile object.
      * Gets relevant parameters to create an Activity object.
      * If no errors getting parameters, an Activity object is created and added to the session.
      *
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {
-        boolean hasDuplicates = hasNameDuplicates();
+        boolean hasDuplicates = PersonList.hasNameDuplicates(involvedList);
         if (hasDuplicates) {
             manager.getUi().printlnMessage(Message.ERROR_ACTIVITYCREATE_DUPLICATE_NAME);
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST);
             return;
         }
+        TextUI ui = manager.getUi();
         try {
             updateCostAndCostList();
             assert costList != null : Message.ASSERT_ACTIVITYCREATE_COST_LIST_ARRAY_NULL;
             assert totalCost > 0 : Message.ASSERT_ACTIVITYCREATE_TOTAL_COST_LESS_THAN_ONE;
-            Session session = manager.getProfile().getSession(sessionId);
+            Profile profile = manager.getProfile();
+            Session session = profile.getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
-            int activityId = manager.getProfile().getNewActivityId();
+            activityId = profile.getNewActivityId();
             addAllActivityCost(involvedPersonList, personPaid, activityId);
             Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(activity);
-            manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS + activity);
+            manager.saveProfile();
+            ui.printlnMessageWithDivider(COMMAND_SUCCESS + activity);
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_ACTIVITY_ADDED + activityId);
         } catch (InvalidDataException e) {
-            manager.getUi().printlnMessage(e.getMessage());
+            ui.printlnMessage(e.getMessage());
             Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_FAILED_ADDING_ACTIVITY
                     + "\n" + e.getMessage());
         }

@@ -3,6 +3,7 @@ package seedu.splitlah.data;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Tianle
  */
-public class Group {
+public class Group implements Serializable {
 
     private PersonList personList;
     private String groupName;
@@ -20,7 +21,7 @@ public class Group {
     private static final String SEPARATOR = " | ";
 
     /**
-     * Constructs a Group object.
+     * Initializes a Group object.
      *
      * @param groupName  A String object that represents the group's name.
      * @param groupId    An integer that uniquely identifies a group.
@@ -44,7 +45,7 @@ public class Group {
     /**
      * Returns the group's unique identifier.
      *
-     * @return An integer object containing the id of the group.
+     * @return An integer representing the group's identifier.
      */
     public int getGroupId() {
         return groupId;
@@ -72,7 +73,7 @@ public class Group {
     /**
      * Adds a Person object to the group.
      *
-     * @param person A Person object.
+     * @param person A Person object to be added into the group.
      */
     public void addPerson(Person person) {
         personList.addPerson(person);

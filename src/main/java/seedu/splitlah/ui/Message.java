@@ -1,15 +1,19 @@
 package seedu.splitlah.ui;
 
-import seedu.splitlah.command.ActivityCreateCommand;
-import seedu.splitlah.command.ActivityDeleteCommand;
 import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
-import seedu.splitlah.command.ExitCommand;
-import seedu.splitlah.command.HelpCommand;
-import seedu.splitlah.command.SessionCreateCommand;
-import seedu.splitlah.command.SessionDeleteCommand;
-import seedu.splitlah.command.SessionListCommand;
-import seedu.splitlah.command.SessionSummaryCommand;
+import seedu.splitlah.command.GroupCreateCommand;
+import seedu.splitlah.command.GroupDeleteCommand;
+import seedu.splitlah.command.GroupListCommand;
+import seedu.splitlah.command.GroupViewCommand;
+import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
+import seedu.splitlah.parser.commandparser.ExitCommandParser;
+import seedu.splitlah.parser.commandparser.HelpCommandParser;
+import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
+import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
+import seedu.splitlah.parser.commandparser.SessionListCommandParser;
+import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
 
 /**
  * Container of hardcoded messages.
@@ -39,30 +43,34 @@ public abstract class Message {
     public static final String MESSAGE_TEXTUI_HELP_MENU =
             "HELP MENU --\n"
                     + "1.  Create a new session\n"
-                    + "        " + SessionCreateCommand.COMMAND_FORMAT + "\n"
+                    + "        " + SessionCreateCommandParser.COMMAND_FORMAT + "\n"
                     + "2.  Delete an existing session\n"
-                    + "        " + SessionDeleteCommand.COMMAND_FORMAT + "\n"
+                    + "        " + SessionDeleteCommandParser.COMMAND_FORMAT + "\n"
                     + "3.  List all existing sessions\n"
-                    + "        " + SessionListCommand.COMMAND_FORMAT + "\n"
+                    + "        " + SessionListCommandParser.COMMAND_FORMAT + "\n"
                     + "4.  Create a new activity\n"
-                    + "        Syntax: " + ActivityCreateCommand.COMMAND_FORMAT_FIRST + "\n"
-                    + "                " + ActivityCreateCommand.COMMAND_FORMAT_SECOND + "\n"
+                    + "        Syntax: " + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n"
+                    + "                " + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND + "\n"
                     + "5.  Delete an existing activity\n"
-                    + "        " + ActivityDeleteCommand.COMMAND_FORMAT + "\n"
-                    + "6.  List all existing activities\n"
-                    + "        " + ActivityListCommand.COMMAND_FORMAT + "\n"
-                    + "7.  View an existing activity's details\n"
+                    + "        " + ActivityDeleteCommandParser.COMMAND_FORMAT + "\n"
+                    + "6.  View an existing activity's details\n"
                     + "        " + ActivityViewCommand.COMMAND_FORMAT + "\n"
+                    + "7.  List all existing activities\n"
+                    + "        " + ActivityListCommand.COMMAND_FORMAT + "\n"
                     + "8.  Show the summary of an existing session\n"
-                    + "        " + SessionSummaryCommand.COMMAND_FORMAT + "\n"
-                    + "9.  Show this help menu\n"
-                    + "        " + HelpCommand.COMMAND_FORMAT + "\n"
-                    + "10. Exit the program\n"
-                    + "        " + ExitCommand.COMMAND_FORMAT;
-    public static final String PROMPT_TEXTUI_REQUEST_CONFIRMATION =
-            "Please enter Y/y/yes to confirm, or N/n/no otherwise.";
-    public static final String ERROR_TEXTUI_REENTER_INPUT =
-            "Invalid input. Please re-enter.";
+                    + "        " + SessionSummaryCommandParser.COMMAND_FORMAT + "\n"
+                    + "9.  Create a new group\n"
+                    + "        " + GroupCreateCommand.COMMAND_FORMAT + "\n"
+                    + "10. Delete an existing group\n"
+                    + "        " + GroupDeleteCommand.COMMAND_FORMAT + "\n"
+                    + "11. View an existing group's details\n"
+                    + "        " + GroupViewCommand.COMMAND_FORMAT + "\n"
+                    + "12. List all existing groups\n"
+                    + "        " + GroupListCommand.COMMAND_FORMAT + "\n"
+                    + "13.  Show this help menu\n"
+                    + "        " + HelpCommandParser.COMMAND_FORMAT + "\n"
+                    + "14. Exit the program\n"
+                    + "        " + ExitCommandParser.COMMAND_FORMAT;
     public static final String PROMPT_TEXTUI_AWAITING_INPUT =
             "> ";
 
@@ -121,6 +129,8 @@ public abstract class Message {
             "The input parameters cannot be null.";
     public static final String ASSERT_PARSER_PLACES_NEGATIVE =
             "A number cannot have less than 0 digits before the integer position.";
+    public static final String ASSERT_PARSER_PERCENTAGE_NEGATIVE =
+            "A parsed percentage value cannot be negative.";
 
     // ActivityCost
     public static final String LOGGER_ACTIVITYCOST_CONSTRUCT_WITH_DEFAULT_PARAMS =
@@ -173,6 +183,20 @@ public abstract class Message {
     public static final String ERROR_PROFILE_GROUP_NOT_IN_LIST =
             "The group that you have specified was not found.";
 
+    // Storage
+    public static final String ERROR_STORAGE_FILE_NOT_FOUND =
+            "The data file was not found or has been corrupted. No saves were loaded into SplitLah.";
+    public static final String ERROR_STORAGE_PATH_LOCATION_CREATION_FAILED =
+            "A new data file could not be created. No data would be saved while using SplitLah.";
+    public static final String ERROR_STORAGE_DATA_NOT_SAVED =
+            "An error occurred while saving. No data was saved.";
+    public static final String ERROR_STORAGE_CLASS_EXCEPTION_ISSUE =
+            "It seems that something went wrong internally. No saves were loaded into SplitLah.";
+    public static final String LOGGER_STORAGE_CLASS_NOT_FOUND =
+            "An internal error of ClassNotFoundException has occurred.";
+    public static final String LOGGER_STORAGE_FILE_ERROR =
+            "There was an error in retrieving data from save file.";
+
     // Activity
     public static final String ERROR_ACTIVITY_INACCURATE_INVOLVED_LIST =
             "The list of involved persons list is inaccurate "
@@ -206,9 +230,15 @@ public abstract class Message {
     public static final String ASSERT_SESSIONSUMMARY_PAYER_EXPECTS_FROM_RECEIVER =
             "Payer has a greater total cost than receiver.";
     public static final String LOGGER_SESSIONSUMMARY_SESSION_ID_NOT_FOUND =
-            "A session summary was not produced as a Session object with the following Id was not found :";
+            "A session summary was not produced as a Session object with the following Id was not found: ";
     public static final String LOGGER_SESSIONSUMMARY_SESSION_SUMMARY_PRINTED =
             "A session summary has been successful produced for the Session object with the following Id: ";
+
+    // Session View Command
+    public static final String LOGGER_SESSIONVIEW_SESSION_VIEW_FAILED =
+            "A session could not be viewed.";
+    public static final String LOGGER_SESSIONVIEW_SESSION_VIEWED =
+            "A session with the following Id was viewed: ";
 
     // Activity Create Command
     public static final String ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH =
@@ -241,6 +271,41 @@ public abstract class Message {
     public static final String LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST =
             "An Activity object failed to be added into the list of activities because there are duplicate names in"
                     + "the involved list.";
+
+    // Activity Edit Command
+    public static final String LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY =
+            "An Activity object failed to be edited.";
+    public static final String LOGGER_ACTIVITYEDIT_SESSION_ID_NOT_FOUND =
+            "Session was not found with unique identifier of:";
+    public static final String ASSERT_ACTIVITYEDIT_COMMAND_ARGS_NULL =
+            "The command arguments cannot be null.";
+    public static final String ASSERT_ACTIVITYEDIT_MANAGER_DOES_NOT_EXIST =
+            "Manager does not exist.";
+    public static final String ASSERT_ACTIVITYEDIT_SESSIONID_MISSING =
+            "Session Id missing.";
+    public static final String ASSERT_ACTIVITYEDIT_ACTIVITYID_MISSING =
+            "Activity Id missing.";
+    public static final String ASSERT_ACTIVITYEDIT_SESSIONID_LESS_THAN_ONE =
+            "Session ID is less than or equals to zero.";
+    public static final String ASSERT_ACTIVITYEDIT_ACTIVITY_NAME_MISSING =
+            "Activity name is missing.";
+    public static final String ASSERT_ACTIVITYEDIT_PAYER_NAME_MISSING =
+            "Payer's name is missing.";
+    public static final String ASSERT_ACTIVITYEDIT_INVOLVED_LIST_ARRAY_NULL =
+            "Involved list array does not contain the list of names of the persons involved in the activity.";
+    public static final String ACTIVITYEDIT_DUPLICATE_NAME =
+            "There are duplicate names in the persons involved for the activity you are trying to create. "
+                    + "Please rectify and try again.";
+    public static final String LOGGER_ACTIVITYEDIT_DUPLICATE_NAMES_IN_INVOLVED_LIST =
+            "An Activity object failed to be added into the list of activities because there are duplicate names in"
+                    + "the involved list.";
+    public static final String ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL =
+            "Cost list array does not contain the respective costs of the persons involved in the activity.";
+    public static final String ASSERT_ACTIVITYEDIT_TOTAL_COST_LESS_THAN_ONE =
+            "Total cost is less than or equals to zero.";
+    public static final String LOGGER_ACTIVITYEDIT_ACTIVITY_EDITED =
+            "An Activity object was succesfully edited in the list of activities with Id: ";
+
 
     // Activity Delete Command
     public static final String ASSERT_ACTIVITYDELETE_SESSION_IS_NULL =

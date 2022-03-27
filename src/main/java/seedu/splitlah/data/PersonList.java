@@ -2,6 +2,7 @@ package seedu.splitlah.data;
 
 import seedu.splitlah.ui.Message;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,9 +12,12 @@ import java.util.Set;
  *
  * @author Roy
  */
-public class PersonList {
+public class PersonList implements Serializable {
     private ArrayList<Person> personList;
 
+    /**
+     * Initializes a PersonList object.
+     */
     public PersonList() {
         this.personList = new ArrayList<>();
     }
@@ -82,7 +86,7 @@ public class PersonList {
     /**
      * Converts a String array object of names to a list of Person objects.
      *
-     * @param personNames A String array object of names.
+     * @param personNames An array of String objects of names.
      */
     public void convertToPersonList(String[] personNames) {
         for (String name : personNames) {
@@ -105,6 +109,7 @@ public class PersonList {
     /**
      * Checks if String array object of names has duplicated names.
      *
+     * @param personNames An array of String objects of names.
      * @return true if it contains duplicates,
      *         false otherwise.
      */
