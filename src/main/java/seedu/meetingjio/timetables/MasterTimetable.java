@@ -8,8 +8,7 @@ import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.commands.ListCommand;
-
-import static seedu.meetingjio.common.ErrorMessages.ERROR_NO_FREE_TIMESLOT;
+import seedu.meetingjio.commands.FreeCommand;
 
 import java.util.ArrayList;
 
@@ -23,11 +22,7 @@ public class MasterTimetable {
 
     public static final int NUM_DAYS = 7;
     public static final int NUM_MINS = 960;
-    public static final int OFFSET = 480;
-    public static final int MINS_IN_1_HOUR = 60;
-    public static final int HOUR_IN_24_HOUR = 100;
     public static final int BUSY = 1;
-    public static final int FREE = 0;
 
     public MasterTimetable() {
         this.timetables = new ArrayList<>();
@@ -166,10 +161,9 @@ public class MasterTimetable {
      * For the last minute (2359) of each day, it will be initialised to 1 (BUSY).
      * For each timetable stored, the method populateBusySlots will be called.
      *
-     * @param duration Integer representing the minimum number of hours to filter the free time slots
-     * @return freeSlotsString String containing the common timeslots when everyone is free
+     * @return busySlots A 7 x 960 array containing 0s and 1s whereby 0 indicates a time when all users are free
      */
-    public String listFree(int duration) {
+    public int[][] listBusy() {
         int[][] busySlots = new int[NUM_DAYS][NUM_MINS];
         for (int i = 0; i < NUM_DAYS; i++) {
             busySlots[i][NUM_MINS - 1] = BUSY;
@@ -177,125 +171,7 @@ public class MasterTimetable {
         for (Timetable timetable : timetables) {
             timetable.populateBusySlots(busySlots);
         }
-        String freeSlotsString = showOutput(busySlots, duration);
-        return freeSlotsString;
-    }
-
-    /**
-     * Given the finalised busySlots array and the minimum duration, find the timeslots where everyone is free and the
-     * duration meets the minimum duration.
-     * Each row in busySlots contains 960 0s and 1s, where free timeslots are represented by consecutive 0s.
-     * 2 strings are initialised: freeSlotsString to store free slots and newEntry to store each new entry.
-     * An integer count and a boolean isStart is also initialised as 0 and true respectively.
-     * For each day, iterating from left to right, when a 0 (FREE) is encountered, the respective day and time is added
-     * to newEntry, and count will be incremented.
-     * For each subsequent 0 (FREE), count will keep incrementing.
-     * When a 1 (BUSY) is encountered, the count is checked to determine if the free timeslot exceeds the minimum
-     * duration. If it does, the time is added to newEntry, and newEntry is added to freeSlotsString.
-     * Subsequently, newEntry and count will reset until the next 0 is encountered, and the process repeats itself.
-     *
-     * @param busySlots 7 x 960 array representing the timeframe from 0800 to 2359 for each day. 1 indicates BUSY and 0
-     *                  indicates FREE
-     * @param duration Minimum time required for the free time slot
-     * @return truncateString(freeSlotsString) freeSlotsString but truncated without the last newline character
-     */
-    private String showOutput(int[][] busySlots, int duration) {
-        String freeSlotsString = "";
-        String newEntry = "";
-        boolean isStart = true;
-        int count = 0;
-        for (int i = 0; i < NUM_DAYS; i++) {
-            for (int j = 0; j < NUM_MINS; j++) {
-                if (busySlots[i][j] == FREE) {
-                    if (isStart) {
-                        newEntry += convertDayIntToString(i + 1);
-                        newEntry += " ";
-                        newEntry += convertMinsToTime(j);
-                        isStart = false;
-                    }
-                    count++;
-                }
-                if (busySlots[i][j] == BUSY && !isStart) {
-                    if (count >= duration * MINS_IN_1_HOUR) {
-                        newEntry += " ";
-                        newEntry += convertMinsToTime(j);
-                        newEntry += "\n";
-                        freeSlotsString += newEntry;
-                    }
-                    count = 0;
-                    newEntry = "";
-                    isStart = true;
-                }
-            }
-        }
-        return truncateString(freeSlotsString);
-    }
-
-    /**
-     * Remove the last newline character from the string. If the string is empty, return an error message informing the
-     * user that there is no free time slot that matches the given requirements.
-     *
-     * @param freeSlotsString String containing the common timeslots where everyone is free
-     * @return truncatedFreeSlotsString freeSlotsString but truncated without the last newline character
-     */
-    private String truncateString(String freeSlotsString) {
-        if (freeSlotsString.length() == 0) {
-            return ERROR_NO_FREE_TIMESLOT;
-        }
-        String truncatedFreeSlotsString = freeSlotsString.substring(0, freeSlotsString.length() - 1);
-        return truncatedFreeSlotsString;
-    }
-
-    /**
-     * Converts an integer (1-7) into its corresponding day, with 1 as Monday and 7 as Sunday.
-     *
-     * @param numericDay Integer to be converted into a day
-     * @return day String indicating the actual day
-     */
-    private String convertDayIntToString(int numericDay) {
-        String day;
-        switch (numericDay) {
-        case 1:
-            day = "Monday";
-            break;
-        case 2:
-            day = "Tuesday";
-            break;
-        case 3:
-            day = "Wednesday";
-            break;
-        case 4:
-            day = "Thursday";
-            break;
-        case 5:
-            day = "Friday";
-            break;
-        case 6:
-            day = "Saturday";
-            break;
-        case 7:
-            day = "Sunday";
-            break;
-        default:
-            day = "";
-            break;
-        }
-        return day;
-    }
-
-    /**
-     * Convert the number of minutes starting from 0800 to 24-hour format.
-     *
-     * @param mins The number of minutes starting from 0800
-     * @return timeIn24Hour The corresponding time in 24-hour format
-     */
-    private String convertMinsToTime(int mins) {
-        mins += OFFSET;
-        int hours = mins / MINS_IN_1_HOUR;
-        int minutes = mins % MINS_IN_1_HOUR;
-        int timeInt = hours * HOUR_IN_24_HOUR + minutes;
-        String timeIn24Hour = String.format("%04d", timeInt);
-        return timeIn24Hour;
+        return busySlots;
     }
 
 }

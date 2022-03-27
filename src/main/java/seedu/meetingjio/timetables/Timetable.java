@@ -4,6 +4,8 @@ import seedu.meetingjio.events.Event;
 import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
 
+import seedu.meetingjio.commands.FreeCommand;
+
 import java.util.ArrayList;
 
 public class Timetable {
@@ -11,9 +13,6 @@ public class Timetable {
     private final String name;
     private ArrayList<Event> list;
 
-    public static final int HOUR_PARAMETER_IN_24_HOURS = 100;
-    public static final int OFFSET = 480;
-    public static final int MINS_IN_1_HOUR = 60;
     public static final int BUSY = 1;
 
     public Timetable(String name) {
@@ -150,27 +149,12 @@ public class Timetable {
         for (int i = 0; i < list.size(); i++) {
             Event event = list.get(i);
             int numericDay = event.getDay();
-            int numericStartTime = convertTimeToMins(event.startTime);
-            int numericEndTime = convertTimeToMins(event.endTime);
+            int numericStartTime = FreeCommand.convertTimeToFreeArrayIndex(event.startTime);
+            int numericEndTime = FreeCommand.convertTimeToFreeArrayIndex(event.endTime);
             for (int j = numericStartTime; j < numericEndTime; j++) {
                 busySlots[numericDay - 1][j] = BUSY;
             }
         }
     }
-
-    /**
-     * This helper method takes in a time in 24-hour format, and convert it to the number of minutes starting from 0800.
-     *
-     * @param time Time to be converted
-     * @return timeInMinutes The number of minutes converted from time
-     */
-    private int convertTimeToMins(int time) {
-        int hours = time / HOUR_PARAMETER_IN_24_HOURS;
-        int minutes = time % HOUR_PARAMETER_IN_24_HOURS;
-        int timeInMinutes = hours * MINS_IN_1_HOUR + minutes;
-        timeInMinutes -= OFFSET;
-        return timeInMinutes;
-    }
-
 
 }
