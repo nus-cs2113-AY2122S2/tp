@@ -82,7 +82,11 @@ public class Storage {
         while (reader.hasNext()) {
             String line = reader.nextLine();
             String[] parameters = line.split(",");
-            appointments.add(parameters);
+            try {
+                appointments.add(parameters);
+            } catch (DuplicateEntryException e) {
+                continue;
+            }
         }
     }
 

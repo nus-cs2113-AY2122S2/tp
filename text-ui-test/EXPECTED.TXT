@@ -2,5 +2,5 @@ HalpMi: No saved data found!
 -------------------------
 HalpMi: Welcome! This is the Hospital Management System.
         Please type in your input
-You: -------------------------
-HalpMi: Goodbye! Exiting the programme.
+You: hi
+You: Terminated

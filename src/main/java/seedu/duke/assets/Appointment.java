@@ -1,8 +1,7 @@
 package seedu.duke.assets;
 
-import seedu.duke.helper.UI;
-
 public class Appointment {
+    protected String appointmentId;
     protected String patientNric;
     protected String patientName;
     protected String doctorNric;
@@ -10,8 +9,9 @@ public class Appointment {
     protected String appointmentDate;
     protected String appointmentDetails;
 
-    public Appointment(String patientName, String patientNric, String doctorName, String doctorNric,
-                       String appointmentDate, String appointmentDetails) {
+    public Appointment(String appointmentId, String patientNric, String patientName, String doctorNric,
+                       String doctorName, String appointmentDate, String appointmentDetails) {
+        this.appointmentId = appointmentId;
         this.patientName = patientName;
         this.patientNric = patientNric;
         this.doctorName = doctorName;
@@ -20,12 +20,16 @@ public class Appointment {
         this.appointmentDetails = appointmentDetails;
     }
 
-    public void show() {
-        UI.printParagraph("Patient: " + patientName + " (" + patientNric + ")\n"
+    @Override
+    public String toString() {
+        return "Patient: " + patientName + " (" + patientNric + ")\n"
                 + "Doctor: " + doctorName + " (" + doctorNric + ")\n"
                 + "Appointment date: " + appointmentDate + "\n"
-                + "Appointment details: " + appointmentDetails);
-        UI.printNewLineSeparator();
+                + "Appointment details: " + appointmentDetails + "\n";
+    }
+
+    public String getAppointmentId() {
+        return appointmentId;
     }
 
     public String getPatientNric() {
@@ -53,7 +57,7 @@ public class Appointment {
     }
 
     public String saveString() {
-        return patientNric + "," + patientName + "," + doctorNric + "," + doctorName + ","
+        return appointmentId + "," + patientNric + "," + patientName + "," + doctorNric + "," + doctorName + ","
                 + appointmentDate + "," + appointmentDetails;
     }
 }
