@@ -20,7 +20,7 @@ public class ViewAppointmentCommandTest {
         } catch (NotFoundException e) {
             e.toString();
         }
-        Status expectedStatus = Status.FIND_APPOINTMENT_SUCCESS;
+        Status expectedStatus = Status.VIEW_SUCCESS;
         assertEquals(expectedStatus,returnStatus);
     }
 }

@@ -221,20 +221,17 @@ public class Validator {
         try {
             newDate = LocalDate.parse(inputDate);
         } catch (DateTimeParseException dateTimeParseException) {
-            throw new HalpmiException("Date must be in YYYY-MM-DD format. "
-                    + "It cannot be before 1900-01-01 or be today and after.");
+            throw new HalpmiException("Date must be in YYYY-MM-DD format. ");
         }
         LocalDate today = LocalDate.now();
         LocalDate admissionDateLimit = LocalDate.parse("1980-01-01");
-        boolean isTrue = false;
-        if (type.equals("appointment") && newDate.isAfter(today)) {
-            isTrue = true;
-        } else if (type.equals("patient") && newDate.isAfter(admissionDateLimit) && newDate.isBefore(today)) {
-            isTrue = true;
-        }
-        if (!isTrue) {
+        if (type.equals("appointment") && newDate.isBefore(today)) {
             throw new HalpmiException("Date must be in YYYY-MM-DD format. "
-                    + "It cannot be before 1900-01-01 or be today and after.");
+                    + "New appointments date must be today and after.");
+        } else if (type.equals("patient") && newDate.isAfter(admissionDateLimit)
+                && newDate.isBefore(today)) {
+            throw new HalpmiException("Date must be in YYYY-MM-DD format. "
+                    + "Patient admission date must be after 1980-01-01 and today or before.");
         }
     }
 
