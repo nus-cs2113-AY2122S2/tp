@@ -7,6 +7,7 @@ import java.util.Comparator;
 /**
  * Represents a data structure containing all housekeeper performance ratings.
  */
+
 public class HousekeeperPerformanceList {
     private ArrayList<HousekeeperPerformance> housekeeperPerformanceList;
 
@@ -32,6 +33,11 @@ public class HousekeeperPerformanceList {
         return housekeeperPerformanceList.size();
     }
 
+    /**
+     * Checks if the housekeeper with the specified name already has a recorded performance rating.
+     * @param housekeeperName The name of the specified housekeeper.
+     * @return true if the Housekeeper already has a recorded performance rating, false otherwise.
+     */
     public boolean isHousekeeperInPerformanceList(String housekeeperName) {
         for (HousekeeperPerformance housekeeperPerformance : housekeeperPerformanceList) {
             if (housekeeperName.equals(housekeeperPerformance.getName())) {
@@ -41,6 +47,10 @@ public class HousekeeperPerformanceList {
         return false;
     }
 
+    /**
+     * Pretty-prints the list of HousekeeperPerformance objects. Displays the name and rating associated with
+     * each HousekeeperPerformance object.
+     */
     public void viewPerformances() {
         if (getSize() == 0) {
             System.out.println("There have not been any housekeeper performances recorded yet.");
@@ -56,6 +66,9 @@ public class HousekeeperPerformanceList {
         }
     }
 
+    /**
+     * Sorts the HousekeeperPerformance objects based on rating in descending order.
+     */
     public void sortHousekeeperPerformances() {
         Collections.sort(housekeeperPerformanceList,new Comparator<HousekeeperPerformance>() {
             @Override
