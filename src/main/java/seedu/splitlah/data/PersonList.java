@@ -134,7 +134,7 @@ public class PersonList implements Serializable {
      * @return true if the new list of Person objects has all persons in the ArrayList that is supplied,
      *         false, otherwise.
      */
-    public boolean isValidList(ArrayList<Person> oldList) {
+    public boolean isSubset(ArrayList<Person> oldList) {
         int existCount = 0;
         for (Person person : personList) {
             if (oldList.contains(person)) {

@@ -6,6 +6,7 @@ import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TextUI;
 
 import java.time.LocalDate;
 import java.util.logging.Level;
@@ -47,11 +48,12 @@ public class SessionEditCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
+        TextUI ui = manager.getUi();
         Session session = null;
         try {
             session = manager.getProfile().getSession(sessionId);
         } catch (InvalidDataException invalidDataException) {
-            manager.getUi().printlnMessageWithDivider(invalidDataException.getMessage());
+            ui.printlnMessageWithDivider(invalidDataException.getMessage());
             return;
         }
         assert session != null;
@@ -59,13 +61,13 @@ public class SessionEditCommand extends Command {
         if (personNames != null) {
             boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
             if (hasDuplicates) {
-                manager.getUi().printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
+                ui.printlnMessage(Message.ERROR_PROFILE_DUPLICATE_NAME);
                 return;
             }
             PersonList newPersonList = new PersonList();
             newPersonList.convertToPersonList(personNames);
-            if (!newPersonList.isValidList(session.getPersonList())) {
-                manager.getUi().printlnMessageWithDivider(Message.ERROR_SESSIONEDIT_INVALID_PERSONLIST);
+            if (!newPersonList.isSubset(session.getPersonList())) {
+                ui.printlnMessageWithDivider(Message.ERROR_SESSIONEDIT_INVALID_PERSONLIST);
                 return;
             } else {
                 newPersonList.setNewPersonList(session.getPersonList());
@@ -81,7 +83,7 @@ public class SessionEditCommand extends Command {
             session.setDateCreated(sessionDate);
         }
         manager.saveProfile();
-        manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
+        ui.printlnMessageWithDivider(COMMAND_SUCCESS);
         Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONEDIT_SESSION_EDITED);
     }
 }

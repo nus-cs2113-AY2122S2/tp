@@ -38,6 +38,14 @@ public class SessionEditCommandParser implements CommandParser<SessionEditComman
     @Override
     public SessionEditCommand getCommand(String commandArgs) throws InvalidFormatException {
         assert commandArgs != null : Message.ASSERT_PARSER_COMMAND_ARGUMENTS_NULL;
+        int parsedSessionId = 0;
+        try {
+            parsedSessionId = Parser.parseSessionId(commandArgs);
+        } catch (InvalidFormatException formatException) {
+            String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
+            throw new InvalidFormatException(invalidCommandMessage);
+        }
+        assert parsedSessionId > 0;
 
         boolean hasSessionNameDelimiter = false;
         String parsedSessionName = null;
@@ -79,18 +87,11 @@ public class SessionEditCommandParser implements CommandParser<SessionEditComman
         }
 
         boolean hasNoEdit = !hasSessionNameDelimiter && !hasSessionDateDelimiter && !hasPersonListDelimiter;
-
         if (hasNoEdit) {
             String invalidCommandMessage = Message.ERROR_SESSIONEDIT_NO_EDIT_DELIMITERS_FOUND + "\n" + COMMAND_FORMAT;
             throw new InvalidFormatException(invalidCommandMessage);
         }
 
-        try {
-            int parsedSessionId = Parser.parseSessionId(commandArgs);
-            return new SessionEditCommand(parsedSessionId,parsedSessionName, parsedNames, parsedSessionDate);
-        } catch (InvalidFormatException formatException) {
-            String invalidCommandMessage = formatException.getMessage() + "\n" + COMMAND_FORMAT;
-            throw new InvalidFormatException(invalidCommandMessage);
-        }
+        return new SessionEditCommand(parsedSessionId,parsedSessionName, parsedNames, parsedSessionDate);
     }
 }
