@@ -118,13 +118,13 @@ public class Storage {
                 String currentLine = s.nextLine();
                 String[] arrayElements = currentLine.split("\\|");
                 String name = arrayElements[0].trim();
-                int start = Integer.parseInt(arrayElements[1].trim());
-                int end = Integer.parseInt(arrayElements[2].trim());
+                String start = arrayElements[1].trim();
+                String end = arrayElements[2].trim();
                 String hotel = arrayElements[3].trim();
                 double price = Double.parseDouble(arrayElements[4].trim());
                 String country = arrayElements[5].trim();
                 int vacancies = Integer.parseInt(arrayElements[6].trim());
-                TravelPackage newPackage = new TravelPackage(name, new Date(start), new Date(end), hotel, price,
+                TravelPackage newPackage = new TravelPackage(name, start, end, hotel, price,
                         country, vacancies);
                 t.add(newPackage);
             }

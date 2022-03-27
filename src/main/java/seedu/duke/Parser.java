@@ -16,8 +16,8 @@ public class Parser {
         String commandType = inputArray[0];
 
         String id;
-        int start;
-        int end;
+        String start;
+        String end;
         int vacancies;
         double price;
         String name;
@@ -29,11 +29,10 @@ public class Parser {
             return new ByeCommand();
         case "help":
             return new HelpCommand();
-        case "add": //only can have spaces between variables - what if hotel has 2 words?
-            if (inputArray.length != 8){
+        case "add": // only can have spaces between variables - what if hotel has 2 words?
+            if (inputArray.length != 8) {
                 return new WrongFormatCommand(input);
-            }
-            else{
+            } else {
                 final int nameIndex = 1;
                 final int startIndex = 2;
                 final int endIndex = 3;
@@ -42,8 +41,8 @@ public class Parser {
                 final int countryIndex = 6;
                 final int vacanciesIndex = 7;
                 name = inputArray[nameIndex];
-                start = Integer.parseInt(inputArray[startIndex]);
-                end = Integer.parseInt(inputArray[endIndex]);
+                start = inputArray[startIndex];
+                end = inputArray[endIndex];
                 hotel = inputArray[hotelIndex];
                 price = Double.parseDouble(inputArray[priceIndex]);
                 country = inputArray[countryIndex];
