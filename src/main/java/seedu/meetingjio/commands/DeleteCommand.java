@@ -1,6 +1,7 @@
 package seedu.meetingjio.commands;
 
 import seedu.meetingjio.events.Event;
+import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
@@ -42,9 +43,13 @@ public class DeleteCommand extends Command {
         int size = timetable.size();
         try {
             Event event = timetable.get(index - 1);
-            timetable.remove(index - 1);
-            assert (timetable.size() == size - 1) : ERROR_DELETE_COMMAND_FAILED;
-            return deleteConfirmation(event);
+            if (event instanceof Meeting) {
+                return masterTimetable.deleteMeetingFromEveryoneTimetable((Meeting) event);
+            } else {
+                timetable.remove(index - 1);
+                //assert (timetable.size() == size - 1) : ERROR_DELETE_COMMAND_FAILED;
+                return deleteConfirmation(event);
+            }
         } catch (IndexOutOfBoundsException ie) {
             return ERROR_INDEX_OUT_OF_BOUND;
         }
@@ -58,6 +63,11 @@ public class DeleteCommand extends Command {
      */
     private String deleteConfirmation(Event event) {
         return "The following event has been deleted from your timetable:\n"
+                + event;
+    }
+
+    public static String deleteFromAllTimetableConfirmation(Meeting event) {
+        return "The following event has been deleted from everyone's timetable:\n"
                 + event;
     }
 }

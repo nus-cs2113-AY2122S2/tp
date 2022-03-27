@@ -131,6 +131,14 @@ public class Timetable {
         list = tempList;
     }
 
+    public ArrayList<Event> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<Event> list) {
+        this.list = list;
+    }
+
     public void populateBusySlots(int[][] busySlots) {
         for (int i = 0; i < list.size(); i++) {
             Event event = list.get(i);
@@ -150,5 +158,6 @@ public class Timetable {
         timeInMinutes -= OFFSET;
         return timeInMinutes;
     }
+
 
 }
