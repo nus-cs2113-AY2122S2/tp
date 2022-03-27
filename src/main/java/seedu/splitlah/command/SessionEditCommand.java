@@ -66,7 +66,7 @@ public class SessionEditCommand extends Command {
             }
             PersonList newPersonList = new PersonList();
             newPersonList.convertToPersonList(personNames);
-            if (!newPersonList.isSubset(session.getPersonList())) {
+            if (!newPersonList.isSuperset(session.getPersonList())) {
                 ui.printlnMessageWithDivider(Message.ERROR_SESSIONEDIT_INVALID_PERSONLIST);
                 return;
             } else {
