@@ -83,6 +83,11 @@ public class Ui {
         printMessage("======== End of the list ========");
     }
 
+    public void printHousekeeperListReset(HousekeeperList housekeeperList) {
+        printMessage("Housekeeper's availability has been reset!");
+        printHousekeeperList(housekeeperList);
+    }
+
     public void printFoundHousekeeperList(ArrayList<Housekeeper> housekeeperPrintList, int dayInteger) {
         String day = getDayInString(dayInteger);
 

@@ -72,8 +72,8 @@ public class HousekeeperList {
     /**
      * Method to find the housekeeper name in the records and add their availability into the records.
      *
-     * @param name         Housekeeper Name
-     * @param availability Housekeeper's availability to be added in records
+     * @param name         Housekeeper Name.
+     * @param availability Housekeeper's availability to be added in records.
      */
     public void searchAvailability(String name, String availability) throws UserExistException {
         boolean isExist = false;
@@ -88,6 +88,15 @@ public class HousekeeperList {
         }
         if (!isExist) {
             throw new UserExistException();
+        }
+    }
+
+    /**
+     * This method calls housekeeper's method to set each housekeeper availability as false.
+     */
+    public void resetAvailability() {
+        for (Housekeeper housekeeper : housekeeperList) {
+            housekeeper.setNullAvailability();
         }
     }
 }

@@ -76,4 +76,7 @@ public class Housekeeper {
         return "[ " + getName() + " ]: " + getAge() + ", " + getAvailability();
     }
 
+    public void setNullAvailability() {
+        this.availability = null;
+    }
 }
