@@ -108,6 +108,24 @@ public class Session implements Serializable, Comparable<Session> {
     }
 
     /**
+     * Updates the date of this Session object to the specified date.
+     * 
+     * @param dateCreated A LocalDate object representing the updated date of the session.
+     */
+    public void setDateCreated(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    /**
+     * Updates the name of this Session object to the specified name.
+     * 
+     * @param sessionName A String object representing the updated name of the session.
+     */
+    public void setSessionName(String sessionName) {
+        this.sessionName = sessionName;
+    }
+
+    /**
      * Checks whether the Session object has an Activity object with the queried unique identifier.
      * 
      * @param activityId An integer that uniquely identifies an activity.
