@@ -144,12 +144,13 @@ See you again!
 
 ## Command summary
 
-| Action | Format                                                               |
-|--------|----------------------------------------------------------------------|
-| Help   | `help`                                                               |
+| Action | Format                                                              |
+|--------|---------------------------------------------------------------------|
+| Help   | `help`                                                              |
 | Add    | `add n/NAME l/LESSON d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE` |
-| Delete | `delete INDEX`                                                       |
-| List   | `list`                                                               |
-| Clear  | `clear`                                                              |
-| Exit   | `exit`                                                               |
+| Delete | `delete INDEX`                                                      |
+| List   | `list`                                                              |
+| Free   | `free`                                                               |
+| Clear  | `clear`                                                             |
+| Exit   | `exit`                                                              |
 
