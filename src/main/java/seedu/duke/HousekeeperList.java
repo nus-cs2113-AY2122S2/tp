@@ -10,6 +10,9 @@ import static java.util.stream.Collectors.toList;
 public class HousekeeperList {
     private ArrayList<Housekeeper> housekeeperList;
     private static final int ONE_HOUSEKEEPER = 1;
+    private ArrayList<Housekeeper> housekeeperExceedValidAgeList = new ArrayList<>();
+    private static final int ONE_YEAR = 1;
+    private static final int MAX_AGE_ACCEPTED = 60;
 
     public HousekeeperList() {
         ArrayList<Housekeeper> housekeeperList = new ArrayList<>();
@@ -123,4 +126,31 @@ public class HousekeeperList {
     public void removeHousekeeper(int housekeeperToRemoveIndex) {
         getHousekeeperList().remove(housekeeperToRemoveIndex);
     }
+
+    /**
+     * Increases each housekeeper's age by one and records housekeeper who are over the age limit into another list.
+     */
+    public void increaseAllAgeByOne() {
+        housekeeperExceedValidAgeList.clear();
+        for (Housekeeper housekeeper : housekeeperList) {
+            int increasedAge = housekeeper.getAge() + ONE_YEAR;
+            if (increasedAge > MAX_AGE_ACCEPTED) {
+                housekeeperExceedValidAgeList.add(housekeeper);
+            } else {
+                housekeeper.setAge(increasedAge);
+            }
+        }
+    }
+
+    public ArrayList<Housekeeper> getHousekeeperExceedValidAgeList() {
+        return housekeeperExceedValidAgeList;
+    }
+
+    public void deleteOverAgeHousekeeper() {
+        for (Housekeeper housekeeper : housekeeperExceedValidAgeList) {
+            int indexToRemove = getHousekeeperRemove(housekeeper.getName());
+            removeHousekeeper(indexToRemove);
+        }
+    }
+
 }

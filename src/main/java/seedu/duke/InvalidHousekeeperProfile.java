@@ -1,7 +1,7 @@
 package seedu.duke;
 
 public class InvalidHousekeeperProfile extends HotelLiteManagerException {
-    private static final String ERROR_MESSAGE = "Error! Invalid Command -> Availability NAME @ INT AGE";
+    private static final String ERROR_MESSAGE = "Error! Invalid Command -> Add Housekeeper NAME @ INT AGE";
 
     @Override
     public String getErrorMessage() {
