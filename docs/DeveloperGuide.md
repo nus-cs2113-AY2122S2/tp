@@ -93,3 +93,11 @@ The sequence diagram that shows how `Storage` is created and the data is loaded 
 3. `storage` will then load the contents of the file in the `Reservation` and `TravelPackages` file calling the different `parse` methods. The exact implementation is not shown in the diagram.
 4. A new `Package` object is constructed with the relevant data.
 5. `storage` returns `package` object to `TARBS`. 
+
+## Feature - Parser
+The sequence diagram shows an example of how a user input is parsed and returns a new `Command`.
+
+For simplicity, `ByeCommand` is shown here:
+
+![image](https://user-images.githubusercontent.com/53790951/160289728-5a17b2ea-0599-48f4-a18b-cadfbbcbfb11.png)
+
