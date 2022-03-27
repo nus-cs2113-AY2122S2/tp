@@ -39,4 +39,42 @@ class SessionTest {
             fail();
         }
     }
+
+    // getActivity()
+
+    @Test
+    void getActivity_noActivityExists_InvalidDataExceptionThrown() {
+        try {
+            Activity activity = session.getActivity(1);
+            fail();
+        } catch (InvalidDataException exception) {
+            assertEquals(Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST, exception.getMessage());
+        }
+    }
+
+    @Test
+    void getActivity_activityWithSpecifiedIdDoesNotExist_InvalidDataExceptionThrown() {
+        Command createActivityCommand = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_ONE);
+        createActivityCommand.run(manager);
+
+        try {
+            Activity activity = session.getActivity(2);
+            fail();
+        } catch (InvalidDataException exception) {
+            assertEquals(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST, exception.getMessage());
+        }
+    }
+
+    @Test
+    void getActivity_activityExists_ActivityObjectReturned() {
+        Command createActivityCommand = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_ONE);
+        createActivityCommand.run(manager);
+
+        try {
+            Activity activity = session.getActivity(1);
+            assertEquals("Lunch", activity.getActivityName());
+        } catch (InvalidDataException exception) {
+            fail();
+        }
+    }
 }
