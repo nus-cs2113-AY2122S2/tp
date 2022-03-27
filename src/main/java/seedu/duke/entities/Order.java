@@ -15,16 +15,8 @@ public class Order implements Serializable {
         this.dishes = new ArrayList<Dish>();
     }
 
-    public void addDishToOrder(Dish dish) {
-        this.dishes.add(dish);
-    }
-
     public void removeDishFromOrderByIndex(int i) {
         this.dishes.remove(i);
-    }
-
-    public int getOrderLength() {
-        return this.dishes.size();
     }
 
     public double getTotalPrice() {
@@ -33,6 +25,17 @@ public class Order implements Serializable {
             totalPrice += this.dishes.get(i).getPrice();
         }
         return totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        String orderString = null;
+        assert this.dishes.size() != 0 : "No orders!";
+        for (Dish dish : dishes) {
+            orderString += dish.toString() + "\n";
+        }
+        orderString = orderString + "Total Price" + this.getTotalPrice();
+        return orderString;
     }
 
     public List<Dish> getDishes() {
