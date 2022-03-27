@@ -3,6 +3,7 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TableFormatter;
 
 import java.util.ArrayList;
 
@@ -23,17 +24,22 @@ public class SessionListCommand extends Command {
     @Override
     public void run(Manager manager) {
         ArrayList<Session> sessionsToBePrinted = manager.getProfile().getSessionList();
-        int sessionListSize = sessionsToBePrinted.size();
         if (sessionsToBePrinted.isEmpty()) {
             manager.getUi().printlnMessage(Message.ERROR_PROFILE_SESSION_LIST_EMPTY);
             return;
         }
-        manager.getUi().printlnMessageWithDashDivider(SESSION_LIST_HEADER);
-        for (int i = 0; i < sessionListSize - 1; i++) {
-            manager.getUi().printlnMessage(sessionsToBePrinted.get(i).getSessionSimplifiedString());
-            manager.getUi().printDashDivider();
+        TableFormatter tableFormatter =
+                new TableFormatter("#","Name", "Date","# of Participants","# of Activities");
+        tableFormatter.addTableName(SESSION_LIST_HEADER);
+
+        for (Session session : sessionsToBePrinted) {
+            String rowId = Integer.toString(session.getSessionId());
+            String rowName = session.getSessionName();
+            String rowDate = session.getDateString();
+            String rowNumParticipants = Integer.toString(session.getPersonList().size());
+            String rowNumActivities = Integer.toString(session.getActivityList().size());
+            tableFormatter.addRow(rowId, rowName, rowDate, rowNumParticipants, rowNumActivities);
         }
-        String lastSessionToPrint = sessionsToBePrinted.get(sessionListSize - 1).getSessionSimplifiedString();
-        manager.getUi().printlnMessageWithDivider(lastSessionToPrint);
+        manager.getUi().printlnMessage(tableFormatter.toString());
     }
 }
