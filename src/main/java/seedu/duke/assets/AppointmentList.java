@@ -21,7 +21,7 @@ public class AppointmentList extends List {
 
     @Override
     public void add(String[] addAppointmentParameters) throws DuplicateEntryException {
-        int numberOfAppointmentsBefore = appointments.size();
+        final int numberOfAppointmentsBefore = appointments.size();
         for (Appointment appointment : appointments) {
             if (appointment.getAppointmentId().equals(addAppointmentParameters[0])) {
                 throw new DuplicateEntryException("Appointment with given appointment ID already exist!");

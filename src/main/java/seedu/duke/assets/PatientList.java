@@ -38,7 +38,7 @@ public class PatientList extends List {
     }
 
     public void add(String[] addPatientParameters) throws DuplicateEntryException {
-        int numberOfPatientsBefore = patients.size();
+        final int numberOfPatientsBefore = patients.size();
         if (getPatient(addPatientParameters[0]) != null) {
             throw new DuplicateEntryException("Patient with given NRIC already exists!");
         }
