@@ -87,7 +87,7 @@ public class Ui {
         String day = getDayInString(dayInteger);
 
         printMessage("======== " + day + " List ========");
-        if (housekeeperPrintList.isEmpty()){
+        if (housekeeperPrintList.isEmpty()) {
             printMessage("TAKE NOTE! NO ONE IS AVAILABLE!!");
         }
         int i = 1;

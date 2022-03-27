@@ -9,10 +9,10 @@ public class Housekeeper {
     private String name;
     private int age;
     private String availability;
-    private final static String[] daysList = {"Monday", "Tuesday", "Wednesday",
-            "Thursday", "Friday", "Saturday", "Sunday"};
     private ArrayList<Integer> availableList = new ArrayList<>();
-
+    private static final String[] daysList = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
+            "Sunday"};
+    
     public Housekeeper(String name, int age) {
         this.name = name;
         this.age = age;
