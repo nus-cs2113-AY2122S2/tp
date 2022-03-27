@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import seedu.duke.command.Command;
 
-public class Duke {
+public class TARBS {
     public static void main(String[] args) {
         run();
     }
