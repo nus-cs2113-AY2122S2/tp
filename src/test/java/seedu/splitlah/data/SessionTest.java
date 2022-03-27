@@ -89,4 +89,61 @@ class SessionTest {
             fail();
         }
     }
+
+    // removeActivity()
+
+    @Test
+    void removeActivity_noActivityExists_InvalidDataExceptionThrown() {
+        try {
+            session.removeActivity(1);
+            fail();
+        } catch (InvalidDataException exception) {
+            assertEquals(Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST, exception.getMessage());
+        }
+    }
+
+    @Test
+    void removeActivity_activityWithSpecifiedIdDoesNotExist_InvalidDataExceptionThrown() {
+        Command createActivityCommand = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_ONE);
+        createActivityCommand.run(manager);
+
+        try {
+            session.removeActivity(2);
+            fail();
+        } catch (InvalidDataException exception) {
+            assertEquals(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST, exception.getMessage());
+        }
+    }
+
+    @Test
+    void removeActivity_activityExists_activityAndActivityCostRemoved() {
+        Command createActivityCommandOne = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_ONE);
+        Command createActivityCommandTwo = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_TWO);
+        createActivityCommandOne.run(manager);
+        createActivityCommandTwo.run(manager);
+
+        try {
+            session.removeActivity(1);
+        } catch (InvalidDataException exception) {
+            fail();
+        }
+
+        // Check if Activity object still exists
+        try {
+            session.getActivity(1);
+            fail();
+        } catch (InvalidDataException exception) {
+            assertEquals(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST, exception.getMessage());
+        }
+
+        // Check if ActivityCost objects still exists
+        ArrayList<Person> personList = session.getPersonList();
+        for (Person person : personList) {
+            try {
+                person.removeActivityCost(1);
+            } catch (InvalidDataException exception) {
+                assertEquals(Message.ERROR_PERSON_ACTIVITY_NOT_FOUND + 1, exception.getMessage());
+            }
+        }
+    }
 }
