@@ -134,7 +134,26 @@ Format:
 - To see the schedule for the week you are in: `show week`
 - To see the schedule for the week after: "show next week" or `show nextweek`
 
-Below is an example of the weekly schedule displayed
+Below is an example of the weekly schedule displayed:
+
+![weeklyTimetablePart1](images/weeklyTimetablePart1.PNG)
+![weeklyTimetablePart2](images/weeklyTimetablePart2.PNG)
+
+### Display Monthly Schedule: `show month` / `show <month>`
+
+Display your schedule for the current month or any specific month
+
+Format:
+- To see the schedule for the current month: `show month`
+- To see the schedule for any specific month: `show <month>`, where 
+  month can be the abbreviation of the specific month. 
+
+
+  E.g. `show sep` or `show september` is the same command 
+
+  E.g. `show september` to display the schedule for **September**
+
+Below is an example of the monthly schedule displayed:
 
 ### Getting a detailed list: `show all` / `show todo`
 
