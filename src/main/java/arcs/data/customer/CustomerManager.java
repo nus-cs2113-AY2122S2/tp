@@ -1,5 +1,6 @@
 package arcs.data.customer;
 
+import arcs.data.exception.ArcsException;
 import arcs.data.exception.DuplicateDataException;
 
 import java.util.ArrayList;
@@ -35,6 +36,16 @@ public class CustomerManager {
 
     public ArrayList<Customer> getAllCustomers() {
         return customers;
+    }
+
+    public Customer deleteCustomer(int index) throws ArcsException {
+        assert customers != null : "Customer list is null";
+        if (index <= 0 || index > customers.size()) {
+            throw new ArcsException("Index out of bound.");
+        }
+        Customer deleted = customers.get(index - 1);
+        customers.remove(index - 1);
+        return deleted;
     }
 
 

@@ -2,6 +2,7 @@ package arcs.parser;
 
 
 import arcs.commands.customer.AddCustomerCommand;
+import arcs.commands.customer.DeleteCustomerCommand;
 import arcs.commands.customer.ListCustomerCommand;
 import arcs.commands.menuitem.FindMenuItemTypeCommand;
 import arcs.commands.menuitem.FindMenuItemNameCommand;
@@ -61,6 +62,9 @@ public class Parser {
             break;
         case ListCustomerCommand.COMMAND_WORD:
             command = new ListCustomerCommand();
+            break;
+        case DeleteCustomerCommand.COMMAND_WORD:
+            command = CustomerParser.prepareDeleteCustomerCommand(argumentLine);
             break;
         case ExitCommand.COMMAND_WORD:
             command = new ExitCommand();

@@ -1,7 +1,9 @@
 package arcs.parser;
 
 import arcs.commands.Command;
+import arcs.commands.UndefinedCommand;
 import arcs.commands.customer.AddCustomerCommand;
+import arcs.commands.customer.DeleteCustomerCommand;
 
 public class CustomerParser {
     public static Command prepareAddCustomerCommand(String argumentLine) {
@@ -40,5 +42,21 @@ public class CustomerParser {
             value = value.trim();
         }
         return value;
+    }
+
+
+    public static Command prepareDeleteCustomerCommand(String argumentLine) {
+        if (argumentLine == null || argumentLine.isEmpty()) {
+            return new UndefinedCommand("Index is not specified");
+        }
+        Command result;
+        try {
+            int index = Integer.parseInt(argumentLine);
+            result = new DeleteCustomerCommand(index);
+        } catch (NumberFormatException e) {
+            result = new UndefinedCommand("Index should be an integer.");
+        }
+
+        return result;
     }
 }
