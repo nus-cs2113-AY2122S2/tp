@@ -124,7 +124,7 @@ public class StringConstants {
             + "Completed tasks may or may not be shown depending on current user preferences.\n"
             + "If tag name is provided, list will only display tasks containing the tag name.\n"
             + "Format to list all tasks: list\n"
-            + "Format to list task containing a tag: list \"TAG_NAME\"";
+            + "Format to list task containing a tag: list TAG_NAME";
     public static final String MARK_HELP = "Mark a task with the given task number from the specified module."
             + "If no module code is given, the task to be marked will be drawn from the \"general tasks\" list.\n"
             + "Format to mark a task as completed:   mark c TASK_NUMBER [-m MODULE_CODE]\n"
@@ -137,8 +137,8 @@ public class StringConstants {
             + "Format to display help for specific command: help COMMAND\n"
             + "Available commands: exit, add, del, edit, grade, list, mark, save, help, reset, tag";
     public static final String TAG_HELP = "Set a custom tag for your tasks. The tag cannot contain whitespace.\n"
-            + "Format to add a tag: tag add TASK_INDEX [-m MODULE_CODE] \"TAG_NAME\"\n"
-            + "Format to delete a tag: tag del TASK_INDEX [-m MODULE_CODE] \"TAG_NAME\"";
+            + "Format to add a tag: tag add TASK_INDEX [-m MODULE_CODE] TAG_NAME\n"
+            + "Format to delete a tag: tag del TASK_INDEX [-m MODULE_CODE] TAG_NAME";
     public static final String HELP_EXCEPTION = "Sorry, but no help exists for that command.";
     public static final String HELP_COMMAND_ARGUMENT = "command";
     public static final String OPTION_HELP = "View and edit program configuration options.\n"

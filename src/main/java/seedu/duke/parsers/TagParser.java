@@ -18,9 +18,9 @@ public class TagParser extends Parser {
 
     //Unescaped Regex for testing:
     //((?<taskOperation>\b(add|del)\b)?)(\s+(?<taskNumber>\d+))((\s+-m\s+(?<taskModule>\w+))?)
-    //(\s+\"(?<tagDescription>\w+)\")
+    //(\s+(?<tagDescription>\w+))
     private static final String TAG_FORMAT = "((?<tagOperation>\\b(add|del)\\b)?)(\\s+(?<taskNumber>\\d+))"
-            + "((\\s+-m\\s+(?<taskModule>\\w+))?)(\\s+\\\"(?<tagName>\\w+)\\\")";
+            + "((\\s+-m\\s+(?<taskModule>\\w+))?)(\\s+(?<tagName>\\w+))";
 
     public TagParser() {
         super();
