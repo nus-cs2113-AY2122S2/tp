@@ -130,6 +130,19 @@ public class Ui {
         return day;
     }
 
+    public void printOverAgeList(ArrayList<Housekeeper> housekeeperPrintList) {
+        printMessage("======== Age Limit Exceed List ========");
+        if (housekeeperPrintList.isEmpty()) {
+            printMessage("Everyone is within age limit");
+        }
+        int i = 1;
+        for (Housekeeper housekeeper : housekeeperPrintList) {
+            System.out.println(i + ". " + housekeeper);
+            i += 1;
+        }
+        printMessage("======== End of the list ========");
+    }
+
     /**
      * Prints an acknowledgement message informing the user that the pax of the item was successfully updated.
      *

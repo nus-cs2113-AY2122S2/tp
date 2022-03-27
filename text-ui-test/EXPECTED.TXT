@@ -1,10 +1,10 @@
 Error! Invalid Command.
 Error! Invalid Command.
 Error! Invalid Command.
-Error! Invalid Command -> Availability NAME @ INT AGE
+Error! Invalid Command -> Add Housekeeper NAME @ INT AGE
 Error! The user is underage(<21) and not allowed to work.
 Error! AGE must be integer.
-Error! Invalid Command -> Availability NAME @ INT AGE
+Error! Invalid Command -> Add Housekeeper NAME @ INT AGE
 ======== Housekeeper List ========
 ======== End of the list ========
 The item and its pax has been added to the list of items in the inventory.
@@ -34,8 +34,8 @@ Error! Item Pax cannot be empty.
 Error! Item Name cannot be empty.
 Error! Invalid Command.
 Error! Item not found in inventory.
-Error! Invalid Command -> Availability NAME @ INT AGE
-Error! Invalid Command -> Availability NAME @ INT AGE
+Error! Invalid Command -> Add Housekeeper NAME @ INT AGE
+Error! Invalid Command -> Add Housekeeper NAME @ INT AGE
 Error! Invalid Command -> Availability NAME @ 1,2
 Error! Invalid Command -> Availability NAME @ 1,2
 Toilet Roll has been removed from the Item List.
