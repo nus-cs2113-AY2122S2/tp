@@ -358,7 +358,7 @@ class AddCommandTest {
 
         String inputString = "/i /a three-thousand /c Salary";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString, user).executeCommand());
+            () -> new AddCommand(inputString, user).executeCommand());
     }
 
     /**
@@ -373,7 +373,7 @@ class AddCommandTest {
 
         String inputString = "/i /a 3000 /c notAnIncomeCategory";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString, user).executeCommand());
+            () -> new AddCommand(inputString, user).executeCommand());
     }
 
     /**

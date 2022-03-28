@@ -48,7 +48,7 @@ class DeleteCommandTest {
     /**
      * Asserts that the correct income entry is deleted.
      *
-     * @throws MindMyMoneyException
+     * @throws MindMyMoneyException when an invalid command is received.
      */
     @Test
     void deleteCommand_oneIncomeInput_expectListUpdated() throws MindMyMoneyException {
