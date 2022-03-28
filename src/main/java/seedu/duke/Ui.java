@@ -159,6 +159,10 @@ public class Ui {
         System.out.printf("The pax of %s has been updated to %d.\n", updatedItemName, updatedItemNewPax);
     }
 
+    public void printUpdateItemNameAcknowledgementMessage(String oldItemName, String newItemName) {
+        System.out.printf("The name of %s has been updated to %s.\n", oldItemName, newItemName);
+    }
+
     public void printAddSatisfactionAcknowledgementMessage(SatisfactionList satisfactionList,
                                                            Satisfaction recentSatisfaction) {
         System.out.println("The Satisfaction instance " + recentSatisfaction.getCustomerName() + ": "

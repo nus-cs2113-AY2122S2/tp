@@ -116,4 +116,7 @@ Added Jane availability into records
 6. [ JANE ]: 34, ( Friday Saturday )
 7. [ JANEy ]: 36, <Enter Availability>
 ======== End of the list ========
+Error! Item Name cannot be empty.
+Error! Item Name cannot be empty.
+The name of Spoon has been updated to Premium Spoon.
 see u again!

@@ -54,4 +54,7 @@ View Recorded Housekeeper
 is a new week
 Availability Jane @ 5,6
 View Recorded Housekeeper
+Update Item Name Swimming Pool /
+Update Item Name / Premium Swimming Pool
+Update Item Name Spoon / Premium Spoon
 bye
