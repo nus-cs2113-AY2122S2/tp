@@ -159,7 +159,7 @@ class PlanListTest {
 
         String planNumber = "5";
         assertThrows(InvalidPlanException.class,
-                () -> planList.listPlanDetails(planNumber, ui));
+            () -> planList.listPlanDetails(planNumber, ui));
 
     }
 
@@ -171,7 +171,7 @@ class PlanListTest {
 
         String invalidArgument = "3a";
         assertThrows(NumberFormatException.class,
-                () -> planList.listPlanDetails(invalidArgument, ui));
+            () -> planList.listPlanDetails(invalidArgument, ui));
 
     }
 
@@ -196,7 +196,7 @@ class PlanListTest {
 
         String planNumberToDelete = "5";
         assertThrows(InvalidPlanException.class,
-                () -> planList.deletePlan(planNumberToDelete));
+            () -> planList.deletePlan(planNumberToDelete));
 
     }
 
@@ -208,7 +208,7 @@ class PlanListTest {
 
         String invalidArgument = "3a";
         assertThrows(NumberFormatException.class,
-                () -> planList.deletePlan(invalidArgument));
+            () -> planList.deletePlan(invalidArgument));
 
     }
 }
