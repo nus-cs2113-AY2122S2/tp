@@ -8,8 +8,7 @@ import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.commands.ListCommand;
-
-import static seedu.meetingjio.common.ErrorMessages.ERROR_NO_FREE_TIMESLOT;
+import seedu.meetingjio.commands.FreeCommand;
 
 import java.util.ArrayList;
 
@@ -23,11 +22,7 @@ public class MasterTimetable {
 
     public static final int NUM_DAYS = 7;
     public static final int NUM_MINS = 960;
-    public static final int OFFSET = 480;
-    public static final int MINS_IN_1_HOUR = 60;
-    public static final int HOUR_IN_24_HOUR = 100;
     public static final int BUSY = 1;
-    public static final int FREE = 0;
 
     public MasterTimetable() {
         this.timetables = new ArrayList<>();
@@ -160,7 +155,15 @@ public class MasterTimetable {
         }
     }
 
-    public String listFree(int duration) {
+    /**
+     * Initialise a 7 x 960 array, with the 7 rows indicating each day of the week and the 960 columns indicating the
+     * minutes starting from 0800 to 2359 (Constraint here is that free timeslots from 0000 to 0759 are not included).
+     * For the last minute (2359) of each day, it will be initialised to 1 (BUSY).
+     * For each timetable stored, the method populateBusySlots will be called.
+     *
+     * @return busySlots A 7 x 960 array containing 0s and 1s whereby 0 indicates a time when all users are free
+     */
+    public int[][] listBusy() {
         int[][] busySlots = new int[NUM_DAYS][NUM_MINS];
         for (int i = 0; i < NUM_DAYS; i++) {
             busySlots[i][NUM_MINS - 1] = BUSY;
@@ -168,77 +171,7 @@ public class MasterTimetable {
         for (Timetable timetable : timetables) {
             timetable.populateBusySlots(busySlots);
         }
-        return showOutput(busySlots, duration);
-    }
-
-    private String showOutput(int[][] busySlots, int duration) {
-        String freeSlotsString = "";
-        String newEntry = "";
-        boolean isStart = true;
-        int count = 0;
-        for (int i = 0; i < NUM_DAYS; i++) {
-            for (int j = 0; j < NUM_MINS; j++) {
-                if (busySlots[i][j] == FREE) {
-                    if (isStart) {
-                        newEntry += convertDayIntToString(i + 1);
-                        newEntry += " ";
-                        newEntry += convertMinsToTime(j);
-                        isStart = false;
-                    }
-                    count++;
-                }
-                if (busySlots[i][j] == BUSY && !isStart) {
-                    if (count >= duration * MINS_IN_1_HOUR) {
-                        newEntry += " ";
-                        newEntry += convertMinsToTime(j);
-                        newEntry += "\n";
-                        freeSlotsString += newEntry;
-                    }
-                    count = 0;
-                    newEntry = "";
-                    isStart = true;
-                }
-            }
-        }
-        return truncateString(freeSlotsString);
-    }
-
-    private String truncateString(String freeSlotsString) {
-        if (freeSlotsString.length() == 0) {
-            return ERROR_NO_FREE_TIMESLOT;
-        }
-        String filteredFreeSlotsString = freeSlotsString.substring(0, freeSlotsString.length() - 1);
-        return filteredFreeSlotsString;
-    }
-
-    private String convertDayIntToString(int numericDay) {
-        switch (numericDay) {
-        case 1:
-            return "Monday";
-        case 2:
-            return "Tuesday";
-        case 3:
-            return "Wednesday";
-        case 4:
-            return "Thursday";
-        case 5:
-            return "Friday";
-        case 6:
-            return "Saturday";
-        case 7:
-            return "Sunday";
-        default:
-            return "";
-        }
-    }
-
-    private String convertMinsToTime(int mins) {
-        mins += OFFSET;
-        int hours = mins / MINS_IN_1_HOUR;
-        int minutes = mins % MINS_IN_1_HOUR;
-        int timeInt = hours * HOUR_IN_24_HOUR + minutes;
-        String timeIn24Hour = String.format("%04d", timeInt);
-        return timeIn24Hour;
+        return busySlots;
     }
 
 }
