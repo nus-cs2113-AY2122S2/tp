@@ -86,11 +86,13 @@ The validator ensures that the parameters entered are correct. It checks the num
 they are of the correct format. It throws a `HalpmiException` if the parameters
 entered are invalid.
 
-For example, validateAddPatient validates the parameter of `add patient` command, 
-ensuring there are 7 parameters, and each of them follow the format. 
+For example, validateAddPatient validates the parameter of `add patient` command, ensuring each parameter is in correct
+format.
+
 
 #### `Parser`
-The parser parses the description of the command. It first calls the validator class to validate the parameters, and then returns a command if the validation is successful. 
+The parser parses the description of the command. It first checks the number of parameters entered is correct and 
+calls the validator class to validate the parameters, and then returns a command if the validation is successful.
 
 #### `Storage`
 
