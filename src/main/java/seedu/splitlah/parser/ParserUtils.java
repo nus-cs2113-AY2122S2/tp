@@ -5,12 +5,12 @@ import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.command.GroupListCommand;
-import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityEditCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
+import seedu.splitlah.parser.commandparser.GroupViewCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
@@ -437,8 +437,8 @@ public class ParserUtils {
         case GroupDeleteCommand.COMMAND_TEXT:
             delimiterList = GroupDeleteCommand.COMMAND_DELIMITERS;
             break;
-        case GroupViewCommand.COMMAND_TEXT:
-            delimiterList = GroupViewCommand.COMMAND_DELIMITERS;
+        case GroupViewCommandParser.COMMAND_TEXT:
+            delimiterList = GroupViewCommandParser.COMMAND_DELIMITERS;
             break;
         default:
             return !remainingArgs.isEmpty();
@@ -493,7 +493,7 @@ public class ParserUtils {
             // Fallthrough
         case GroupListCommand.COMMAND_TEXT:
             // Fallthrough
-        case GroupViewCommand.COMMAND_TEXT:
+        case GroupViewCommandParser.COMMAND_TEXT:
             // Fallthrough
         case HelpCommandParser.COMMAND_TEXT:
             // Fallthrough

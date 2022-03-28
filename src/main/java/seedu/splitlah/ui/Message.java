@@ -5,10 +5,10 @@ import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.command.GroupListCommand;
-import seedu.splitlah.command.GroupViewCommand;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
+import seedu.splitlah.parser.commandparser.GroupViewCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
@@ -64,7 +64,7 @@ public abstract class Message {
                     + "10. Delete an existing group\n"
                     + "        " + GroupDeleteCommand.COMMAND_FORMAT + "\n"
                     + "11. View an existing group's details\n"
-                    + "        " + GroupViewCommand.COMMAND_FORMAT + "\n"
+                    + "        " + GroupViewCommandParser.COMMAND_FORMAT + "\n"
                     + "12. List all existing groups\n"
                     + "        " + GroupListCommand.COMMAND_FORMAT + "\n"
                     + "13.  Show this help menu\n"
@@ -265,8 +265,6 @@ public abstract class Message {
     public static final String ERROR_ACTIVITYCREATE_DUPLICATE_NAME =
             "There are duplicate names in the persons involved for the activity you are trying to create. "
                     + "Please rectify and try again.";
-    public static final String ASSERT_ACTIVITYCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
-            "Name duplicates exists but not detected.";
     public static final String ASSERT_ACTIVITYCREATE_SESSION_ID_LESS_THAN_ONE =
             "Session ID is less than or equals to zero.";
     public static final String ASSERT_ACTIVITYCREATE_ACTIVITY_NAME_MISSING =
@@ -356,8 +354,6 @@ public abstract class Message {
              "Name duplicates exists but not detected.";
 
     // Group View Command
-    public static final String ASSERT_GROUPVIEW_GROUP_ID_NOT_INITIALIZED =
-            "Group Id is not initialized.";
     public static final String ASSERT_GROUPVIEW_INCORRECT_GROUP =
             "The group returned is incorrect.";
     public static final String ASSERT_GROUPVIEW_GROUP_ID_LESS_THAN_ONE =
@@ -367,9 +363,11 @@ public abstract class Message {
     public static final String LOGGER_GROUPVIEW_GROUP_NOT_VIEWED =
             "A Group object was unable to be viewed from the list of groups with Id: ";
 
+    // Group View Command Parser
+    public static final String ASSERT_GROUPVIEWPARSER_GROUP_ID_NOT_INITIALIZED =
+            "Group Id is not initialized.";
+
     // Group List Command
-    public static final String ASSERT_GROUPLIST_GROUP_SIZE_NOT_ZERO =
-            "The list of groups to be printed is not empty.";
     public static final String ASSERT_GROUPLIST_GROUP_SIZE_LESS_THAN_ONE =
             "The size of the list of groups to be printed is less than one.";
     public static final String LOGGER_GROUPLIST_GROUPS_NOT_LISTED =
