@@ -9,13 +9,13 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 /**
- * Lists all records in the RecordManager to the user.
+ * filter all records by name in the RecordManager that contains keyword to the user.
  */
 public class FindCommand extends Command {
-    /** Keyword to trigger list command. */
+    /** Keyword to trigger find command. */
     public static final String COMMAND_WORD = "find";
 
-    /** Help message for list command. */
+    /** Help message for find command. */
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays all records in the RecordManager that contains keyword."
             + "\nExample: " + COMMAND_WORD + "<keyword>";
