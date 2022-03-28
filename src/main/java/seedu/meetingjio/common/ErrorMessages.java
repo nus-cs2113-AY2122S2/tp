@@ -50,7 +50,7 @@ public class ErrorMessages {
     public static final String ERROR_TIMETABLE_NOT_FOUND_TO_DELETE = "User and his Timetable not found";
     public static final String ERROR_EXCEPTION_NOT_HANDLED = "New exception found that is not handled. Logged this";
 
-    public static final String ERROR_OVERLAPPING_MEETING = "This meeting cannot be added as"
+    public static final String ERROR_OVERLAPPING_MEETING = "This meeting cannot be added as "
             + "some of the members cannot make it";
     public static final String ERROR_DUPLICATE_MEETING = "This meeting already exists. "
             + "This meeting will not be not added to the timetable.";
@@ -60,4 +60,5 @@ public class ErrorMessages {
             + "where duration is an integer indicating the minimum number of hours: free [duration]\n"
             + "If there is no such constraint for the duration, just input 'free'.";
     public static final String ERROR_NO_FREE_TIMESLOT = "Sorry, there is no timeslot that fits your requirement.";
+    public static final String ERROR_UNSPECIFIED_LIST_CLEAR = "Please specify which timetable to Clear";
 }
