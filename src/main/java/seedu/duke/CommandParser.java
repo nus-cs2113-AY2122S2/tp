@@ -17,9 +17,9 @@ public class CommandParser {
     private static final String ADD_PERFORMANCE_COMMAND = "add housekeeper performance";
     private static final String VIEW_PERFORMANCES_COMMAND = "view housekeeper performances";
     private static final String ADD_AVAILABILITY_COMMAND = "Availability ";
-    public static final String ADD_SATISFACTION_COMMAND = "add satisfaction";
-    public static final String VIEW_SATISFACTIONS_COMMAND = "view satisfactions";
-    public static final String AVERAGE_SATISFACTION_COMMAND = "average satisfaction";
+    private static final String ADD_SATISFACTION_COMMAND = "add satisfaction";
+    private static final String VIEW_SATISFACTIONS_COMMAND = "view satisfactions";
+    private static final String AVERAGE_SATISFACTION_COMMAND = "average satisfaction";
     private static final String CHECK_IN = "check in";
     private static final String CHECK_OUT = "check out";
     private static final String CHECK_ROOM = "check room";
