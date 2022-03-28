@@ -27,18 +27,18 @@ public class Constants {
     // For Help component
     public static final String ADD_PERSON = "Add a person: add /n NAME /g GROUP_INDEX";
     public static final String DELETE_PERSON = "Delete a person: delete /u USER_INDEX /g GROUP_INDEX";
-    public static final String ADD_INCOME = "Add an income addin /u USER_INDEX /g GROUP_INDEX " +
-            "/i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>";
-    public static final String DELETE_INCOME = "Delete an income: deletein " +
-            "/u USER_INDEX /g GROUP_INDEX /r INCOME_INDEX";
-    public static final String EDIT_INCOME = "Edit an income: editin /u USER_INDEX /g GROUP_INDEX " +
-            "/r INCOME_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>";
-    public static final String ADD_EXPEND = "Add an expenditure: addout /u USER_INDEX /g GROUP_INDEX " +
-            "/e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>";
-    public static final String DELETE_EXPEND = "Delete an expenditure: deleteout /u USER_INDEX " +
-            "/g GROUP_INDEX /r EXPENDITURE_INDEX";
-    public static final String EDIT_EXPEND = "Edit an expenditure: editout /u USER_INDEX /g GROUP_INDEX " +
-            "/r EXPENDITURE_INDEX /i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>";
+    public static final String ADD_INCOME = "Add an income addin /u USER_INDEX /g GROUP_INDEX "
+            + "/i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>";
+    public static final String DELETE_INCOME = "Delete an income: deletein "
+            + "/u USER_INDEX /g GROUP_INDEX /r INCOME_INDEX";
+    public static final String EDIT_INCOME = "Edit an income: editin /u USER_INDEX /g GROUP_INDEX "
+            + "/r INCOME_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>";
+    public static final String ADD_EXPEND = "Add an expenditure: addout /u USER_INDEX /g GROUP_INDEX "
+            + "/e EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>";
+    public static final String DELETE_EXPEND = "Delete an expenditure: deleteout /u USER_INDEX "
+            + "/g GROUP_INDEX /r EXPENDITURE_INDEX";
+    public static final String EDIT_EXPEND = "Edit an expenditure: editout /u USER_INDEX /g GROUP_INDEX "
+            + "/r EXPENDITURE_INDEX /i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>";
     public static final String LIST = "List records by person: list";
     public static final String LIST_BY_GROUP = "List records by group: list /g GROUP_INDEX";
     public static final String LISTCAT = "List categories: listcat";

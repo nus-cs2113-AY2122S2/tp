@@ -9,12 +9,14 @@ import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.global.Help;
 import seedu.planitarium.person.Family;
 import seedu.planitarium.global.UI;
+import seedu.planitarium.storage.Storage;
 
 public class PlanITarium {
-    protected Scanner userInput;
+    protected Scanner in;
     protected Command command;
-    protected Family family = new Family();
+    protected static Family family = new Family();
     protected CommandFactory commandFactory = new CommandFactory();
+    protected static Storage storage = new Storage();
     protected static ProjectLogger logger = new ProjectLogger(PlanITarium.class.getName(), "PlanITarium.log");
     protected UI ui = new UI();
 
@@ -27,10 +29,11 @@ public class PlanITarium {
      * Runs the entire program.
      */
     public void run() {
-        userInput = new Scanner(System.in);
+        in = new Scanner(System.in);
         while (true) {
             try {
-                command = commandFactory.getCommand(userInput.nextLine(), family);
+                String userInput = in.nextLine();
+                command = commandFactory.getCommand(userInput, family);
                 logger.log(Level.INFO, "Next line has been read");
                 UI.printHoriLine();
                 command.execute();
@@ -48,5 +51,6 @@ public class PlanITarium {
         logger.log(Level.INFO, "Logger initialised");
         Help.initialiseHelp();
         UI.printWelcomeMessage();
+        family = storage.loadData();
     }
 }

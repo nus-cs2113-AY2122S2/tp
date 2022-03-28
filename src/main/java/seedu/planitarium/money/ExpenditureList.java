@@ -167,25 +167,25 @@ public class ExpenditureList extends MoneyList {
     }
 
     private void editExpPerm(int index, Boolean isPermanent) {
-        if (isPermanent != null){
+        if (isPermanent != null) {
             expenditureArrayList.get(index - 1).setPermanent(isPermanent);
         }
     }
 
     private void editExpCat(int index, Integer category) {
-        if (category != null){
+        if (category != null) {
             expenditureArrayList.get(index - 1).setCategory(category);
         }
     }
 
     private void editExpAmount(int index, Double amount) {
-        if (amount != null){
+        if (amount != null) {
             expenditureArrayList.get(index - 1).setAmount(amount);
         }
     }
 
     private void editExpDesc(int index, String description) {
-        if (description != null){
+        if (description != null) {
             expenditureArrayList.get(index - 1).setDescription(description);
         }
     }

@@ -33,7 +33,7 @@ public class AddRecordCommand extends Command {
     protected String description;
     protected double amount;
     protected boolean isPermanent;
-    protected boolean isSilent;
+    protected boolean isSilent = Constants.FOR_USER;
     protected int group;
     protected int uid;
     protected int category;
@@ -61,7 +61,7 @@ public class AddRecordCommand extends Command {
         switch (keyword) {
         case ADD_INCOME_CMD:
             amount = Parser.getValidMoney(Parser.parseIncome(userInput));
-            family.addIncome(uid, group, description, amount, category, isPermanent, isSilent);
+            family.addIncome(group, uid, description, amount, isPermanent, isSilent);
             logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, INCOME, description, amount, category,
                     uid, group));
             break;
