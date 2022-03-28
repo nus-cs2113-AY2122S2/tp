@@ -198,8 +198,7 @@ public class UpdateCommand extends Command {
     /**
      * Updates either an Expenditure, Credit Card or Income entry based on the user's input.
      *
-     * @throws MindMyMoneyException when an invalid command is received, along with its corresponding
-     * error message.
+     * @throws MindMyMoneyException when an invalid command is received, along with its corresponding error message.
      */
     @Override
     public void executeCommand() throws MindMyMoneyException {

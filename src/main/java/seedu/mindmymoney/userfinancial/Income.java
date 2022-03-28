@@ -1,7 +1,7 @@
 package seedu.mindmymoney.userfinancial;
 
 /**
- * Represents the income entry
+ * Represents the income entry.
  */
 public class Income {
     private int amount;

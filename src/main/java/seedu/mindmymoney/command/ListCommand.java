@@ -177,8 +177,7 @@ public class ListCommand extends Command {
     /**
      * Prints either a list of expenditure(s), credit card(s) or income(s) based on the user's input.
      *
-     * @throws MindMyMoneyException when an invalid command is received, along with its corresponding
-     * error message.
+     * @throws MindMyMoneyException when an invalid command is received, along with its corresponding error message.
      */
     @Override
     public void executeCommand() throws MindMyMoneyException {
@@ -188,8 +187,7 @@ public class ListCommand extends Command {
             printCreditCardList();
         } else if (hasIncomeListFlag()) {
             printIncomeList();
-        }
-        else {
+        } else {
             throw new MindMyMoneyException("Please ensure that you have entered a valid list command.\n"
                     + "Use 'list /expenses' to view your current list of expenses\n"
                     + "Use 'list /cc' to view your current list of stored credit cards"

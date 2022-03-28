@@ -177,8 +177,7 @@ public class DeleteCommand extends Command {
     /**
      * Removes an expenditure, credit card or income from the user's list based on the input.
      *
-     * @throws MindMyMoneyException when an invalid command is received, along with its corresponding
-     * error message.
+     * @throws MindMyMoneyException when an invalid command is received, along with its corresponding error message.
      */
     @Override
     public void executeCommand() throws MindMyMoneyException {
