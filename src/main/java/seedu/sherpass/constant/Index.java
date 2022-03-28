@@ -29,5 +29,4 @@ public class Index {
     public static final int EDIT_INDEX = 0;
     public static final int EDIT_TASK_CONTENT = 1;
     public static final int INDEX_OFFSET = 1;
-    public static final int FIRST_REPEATED_TASK_INDEX = 0;
 }
