@@ -9,7 +9,9 @@ import storage.LogHandler;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class WorkoutListTest {
@@ -47,6 +49,30 @@ class WorkoutListTest {
         assertEquals(outputWorkout2.getExerciseName(), "crunch");
         assertEquals(outputWorkout2.getRepetitions(), 2359);
         assertTrue(wl.checkForExistingWorkout("crunch", 2359));
+    }
+
+    @Test
+    void createAndAddWorkout_invalidExerciseName_expectInvalidExcerciseException() {
+        String invalidWorkout = "weeeeeee /reps 500";
+        assertThrows(InvalidExerciseException.class, () -> wl.createAndAddWorkout(invalidWorkout));
+    }
+
+    @Test
+    void createAndAddWorkout_invalidRepCount_expectInvalidWorkoutException() {
+        String invalidWorkout1 = "push up /reps -12345";
+        assertThrows(InvalidWorkoutException.class, () -> wl.createAndAddWorkout(invalidWorkout1));
+
+        String invalidWorkout2 = "sit up /reps 0";
+        assertThrows(InvalidWorkoutException.class, () -> wl.createAndAddWorkout(invalidWorkout2));
+    }
+
+    @Test
+    void createAndAddWorkout_addExistingWorkout_expectInvalidWorkoutException() throws InvalidExerciseException,
+            InvalidWorkoutException {
+        String workout = "burpee /reps 100";
+        wl.createAndAddWorkout(workout);
+
+        assertThrows(InvalidWorkoutException.class, () -> wl.createAndAddWorkout(workout));
     }
 
     @Test
