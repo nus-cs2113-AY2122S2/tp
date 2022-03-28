@@ -49,7 +49,18 @@ public class AppointmentList extends List {
 
     @Override
     public void edit(String[] parameters) throws NotFoundException {
-        System.out.println("CURRENTLY APPOINTMENT EDIT DOES NOTHING.");
+        for (int i = 0; i < appointments.size(); i++) {
+            if (appointments.get(i).getAppointmentId().equals(parameters[0])) {
+                appointments.remove(i);
+                Appointment editAppointment = new Appointment(parameters[0], parameters[1],
+                        parameters[2], parameters[3], parameters[4],
+                        parameters[5], parameters[6]);
+                appointments.add(editAppointment);
+                return;
+            }
+        }
+        throw new NotFoundException("There is no appointment with the given appointment id.\n"
+                + "Please search by patient's nric or doctor's nric to find out the correct id if needed.");
     }
 
     @Override

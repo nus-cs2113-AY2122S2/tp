@@ -31,10 +31,10 @@ public class Manager {
             Status status = null;
             try {
                 status = executeCommand(commandWord, parameters);
+                ui.print(status);
             } catch (HalpmiException | NotFoundException | DuplicateEntryException e) {
                 UI.printParagraph(e.toString());
             }
-            //ui.print(status);
             storage.saveData();
         }
     }
@@ -112,6 +112,10 @@ public class Manager {
             command = Parser.parseDeleteAppointment(parameters);
             status = command.execute(storage.appointments);
             break;
+        case "edit appointment":
+            command = Parser.parseEditAppointment(parameters);
+            status = command.execute(storage.appointments);
+            break;
         case "find doctor":
             command = Parser.parseFindDoctor(parameters);
             status = command.execute(storage.doctors);
@@ -133,8 +137,7 @@ public class Manager {
             isTerminated = true;
             break;
         default:
-            System.out.println(commandWord);
-            break;
+            throw new HalpmiException("Invalid Command given!");
         }
         return status;
     }

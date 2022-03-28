@@ -11,6 +11,7 @@ import seedu.duke.helper.command.DeleteAppointmentCommand;
 import seedu.duke.helper.command.DeleteDoctorCommand;
 import seedu.duke.helper.command.DeleteMedicineCommand;
 import seedu.duke.helper.command.DeletePatientCommand;
+import seedu.duke.helper.command.EditAppointmentCommand;
 import seedu.duke.helper.command.EditDoctorCommand;
 import seedu.duke.helper.command.EditMedicineCommand;
 import seedu.duke.helper.command.EditPatientCommand;
@@ -154,6 +155,12 @@ public class Parser {
         }
         String[] viewAppointmentParameters = minParameterCheck(parameters, 2);
         return new ViewAppointmentCommand(viewAppointmentParameters);
+    }
+
+    public static Command parseEditAppointment(String parameters) throws HalpmiException {
+        String[] editAppointmentParameters = minParameterCheck(parameters, 7);
+        Validator.validateEditAppointment(editAppointmentParameters);
+        return new EditAppointmentCommand(editAppointmentParameters);
     }
 
     public static Command parseFindDoctor(String parameters) throws HalpmiException {
