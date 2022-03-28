@@ -218,8 +218,9 @@ public class UI {
         case EDIT_APPOINTMENT_SUCCESS:
             printParagraph("Appointment has been edited successfully!");
             break;
-            case PRINT_HELP:
-                UI.printHelp();
+        case PRINT_HELP:
+            UI.printHelp();
+            break;
         default:
             break;
         }

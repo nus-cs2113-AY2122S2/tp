@@ -5,7 +5,7 @@ import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
-import seedu.duke.helper.command.CommandLineTable;
+import seedu.duke.helper.CommandLineTable;
 import seedu.duke.helper.finder.MedicineFinder;
 
 import java.time.LocalDate;
