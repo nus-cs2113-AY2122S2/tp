@@ -82,7 +82,7 @@ class WorkoutListTest {
     }
 
     @Test
-    void deleteWorkout_indexOutOfRange_expectWorkoutOutOfRangeException() throws InvalidWorkoutException,
+    void deleteWorkout_indexOutOfRange_expectInvalidWorkoutException() throws InvalidWorkoutException,
             InvalidExerciseException {
 
         wl.createAndAddWorkout("push up /reps 11");
