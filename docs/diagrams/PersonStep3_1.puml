@@ -1,0 +1,37 @@
+@startuml
+autonumber
+hide footbox
+
+title When user calls "addin"
+
+box
+participant ":Command" as Command
+participant ":Family" as Family
+participant ":PersonList" as PersonList
+participant ":Person" as Person
+participant ":IncomeList" as IncomeList
+
+[-> Command : execute(addin)
+activate Command
+Command -> Family : addin(group, personIndex, incomeInfo)
+activate Family
+Family -> PersonList : addin(personIndex, incomeInfo)
+activate PersonList
+PersonList -> Person : addin(incomeInfo)
+activate Person
+Person -> IncomeList : addin(incomeInfo)
+activate IncomeList
+Person <-- IncomeList
+deactivate IncomeList
+PersonList <-- Person
+deactivate Person
+Family <-- PersonList
+deactivate PersonList
+Command <-- Family
+deactivate Family
+[<--Command
+deactivate Command
+
+end box
+
+@enduml

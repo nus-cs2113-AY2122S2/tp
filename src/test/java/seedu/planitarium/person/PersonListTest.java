@@ -3,6 +3,7 @@
 package seedu.planitarium.person;
 
 import org.junit.jupiter.api.Test;
+import seedu.planitarium.global.Constants;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -22,14 +23,14 @@ class PersonListTest {
     @Test
     public void getNumberOfMembers_addPerson_returnOne() {
         PersonList list = new PersonList();
-        list.addPerson(VALID_NAME);
+        list.addPerson(VALID_NAME, Constants.FOR_USER);
         assertEquals(1, list.getNumberOfMembers());
     }
     
     @Test
     public void getNumberOfMembers_addAndDeletePerson_returnZero() {
         PersonList list = new PersonList();
-        list.addPerson(VALID_NAME);
+        list.addPerson(VALID_NAME, Constants.FOR_USER);
         list.deletePerson(1);
         assertEquals(0, list.getNumberOfMembers());
     }
@@ -38,7 +39,7 @@ class PersonListTest {
     public void addPerson_nullName_assertionError() {
         PersonList list = new PersonList();
         try {
-            list.addPerson(null);
+            list.addPerson(null, Constants.FOR_USER);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());
@@ -48,7 +49,7 @@ class PersonListTest {
     @Test
     public void removePerson_validIndex_success() {
         PersonList list = new PersonList();
-        list.addPerson(VALID_NAME);
+        list.addPerson(VALID_NAME, Constants.FOR_USER);
         list.deletePerson(1);
         assertTrue(list.getPersonList().isEmpty());
     }
