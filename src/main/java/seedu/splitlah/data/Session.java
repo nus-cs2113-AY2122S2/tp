@@ -3,6 +3,7 @@ package seedu.splitlah.data;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TableFormatter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
