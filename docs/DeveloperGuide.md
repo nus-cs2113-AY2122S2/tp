@@ -45,12 +45,12 @@ Timetable component consists of `Timer`, `Stopwatch`, `Countdown`, `TimerParser`
 
 The study session consists of 4 main components:
 
-- Parser class
+- TimerParser class
 - StudyCommand class
 - TimerLogic class
 - Timer class
 
-The `Parser` component
+The `TimerParser` component
 - Parses user inputs in the main session and the study session
 - Ensures the input adheres to the allowed command inputs, 
 i.e. program will ask the user to key in a new input if it does not recognise the inputs given.
@@ -71,7 +71,7 @@ The `Timer` component
 - Prints to standard output the time remaining in regular intervals
 - Thread is automatically interrupted when time runs out
 
-#### `Timer` implementation
+#### Timer implementation
 
 Sherpass’ implementation of the timer function in the study session is through the `Timer` class, which inherits 
 from Java’s `Thread` class. When the timer is started by the user, the `Timer` class starts a thread which keeps 
