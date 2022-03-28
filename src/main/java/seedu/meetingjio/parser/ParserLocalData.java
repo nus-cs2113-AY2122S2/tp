@@ -111,7 +111,7 @@ public class ParserLocalData {
     private static boolean checkHeadings(String data) {
         boolean isFound = false;
         for (String str : HEADINGS) {
-            isFound = data.indexOf(str) !=-1? true: false;
+            isFound = data.contains(str);
             if (isFound == false) {
                 missing_key_word = str;
                 break;

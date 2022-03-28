@@ -1,8 +1,13 @@
 package seedu.meetingjio.storage;
-import java.io.*;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.parser.ParserLocalData;
@@ -25,8 +30,8 @@ public class StorageFile {
         try {
             File dataFile = new File(DATA_FILE_PATH);
             dataFile.createNewFile();
-            FileOutputStream oFile = new FileOutputStream(dataFile, false);
-            FileWriter dataWriter =  new FileWriter(dataFile);
+            FileOutputStream outFile = new FileOutputStream(dataFile, false);
+            FileWriter dataWriter = new FileWriter(dataFile);
             String str = masterTimetable.collateAll(masterTimetable);
             String truncatedString = str.substring(0, str.length() - 1);
             dataWriter.write(truncatedString);
@@ -46,25 +51,21 @@ public class StorageFile {
             String eventType;
             boolean hasMeeting = false;
             List<String> meetingList = new ArrayList<>();
-            int person_count = 0;
-            while(dataReader.hasNextLine()) {
+            int personCount = 0;
+            while (dataReader.hasNextLine()) {
                 String data = dataReader.nextLine();
                 if (isName(data)) {
                     name = data;
                     listNum = 1;
-                    person_count++;
-                }
-                else {
-                   if (checkIndex(data, listNum)) {
+                    personCount++;
+                } else {
+                    if (checkIndex(data, listNum)) {
                         eventType = ParserLocalData.getEventType(data);
                         if (eventType.equals("L")) {
                             ParserLocalData.prepareLoadLesson(name, data, masterTimetable);
-                        }
-                        else if (eventType.equals("M") && person_count == 1) {
+                        } else if (eventType.equals("M") && personCount == 1) {
                             meetingList.add(data);
                             hasMeeting = true;
-                        }
-                        else {
                         }
                         listNum++;
                     }
@@ -76,6 +77,7 @@ public class StorageFile {
                 }
             }
         } catch (FileNotFoundException ffe) {
+            System.out.println("");
         }
     }
 
@@ -101,9 +103,11 @@ public class StorageFile {
         return false;
     }
 
-    /** StringIndexOutOfBoundsException for no record found*/
+    /**
+     * StringIndexOutOfBoundsException for no record found.
+     */
     private static String getFirstChar(String data) {
-        String firstChar = data.substring(0,1);
+        String firstChar = data.substring(0, 1);
         return firstChar;
     }
 
