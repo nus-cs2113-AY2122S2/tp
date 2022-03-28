@@ -11,8 +11,7 @@ import seedu.planitarium.person.Family;
  * Executes the add command and add a person to the list.
  */
 public class AddPersonCommand extends Command {
-    protected static final String NAME_NOT_NULL = "Name should not be null";
-    protected static final String PERSONLIST_NOT_NULL = "Personlist should not be null";
+
     protected String name;
     protected int group;
     protected boolean isSilent;
@@ -26,9 +25,9 @@ public class AddPersonCommand extends Command {
     }
 
     @Override
-    public void execute() throws Exception {
-        assert (name != null) : NAME_NOT_NULL;
-        assert (family != null) : PERSONLIST_NOT_NULL;
+    public void execute() throws PlanITariumException {
+        assert (name != null) : Constants.NAME_NOT_NULL;
+        assert (family != null) : Constants.PERSONLIST_NOT_NULL;
         family.addPerson(group, name, isSilent);
     }
 
