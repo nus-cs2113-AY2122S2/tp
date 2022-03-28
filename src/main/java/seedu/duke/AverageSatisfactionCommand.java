@@ -15,10 +15,10 @@ public class AverageSatisfactionCommand extends Command {
      * Calculates the average customer satisfaction rating of the
      * given satisfactionList.
      *
-     * @param ui               The user interface for this execution method.
+     * @param ui The user interface for this execution method.
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, WrongCommandException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         SatisfactionList satisfactionList = listContainer.getSatisfactionList();
         System.out.println("Average customer satisfaction: " + satisfactionList.calculateAverageSatisfaction());
     }

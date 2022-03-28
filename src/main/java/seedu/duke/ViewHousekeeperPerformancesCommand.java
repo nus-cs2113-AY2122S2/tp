@@ -8,7 +8,7 @@ package seedu.duke;
 public class ViewHousekeeperPerformancesCommand extends Command {
 
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, WrongCommandException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         HousekeeperPerformanceList housekeeperPerformanceList = listContainer.getHousekeeperPerformanceList();
         housekeeperPerformanceList.viewPerformances();
     }

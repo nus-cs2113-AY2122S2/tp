@@ -44,7 +44,7 @@ public class CommandParser {
      * @throws HotelLiteManagerException If there is an error in user input that prevents it from being parsed into
      *                                   the relevant Command object.
      */
-    public Command parse(String commandString) throws WrongCommandException, HotelLiteManagerException {
+    public Command parse(String commandString) throws HotelLiteManagerException {
         Command userCommand = null;
         String commandStringWithoutCommand;
         if (commandString.equals(BYE)) {
@@ -117,7 +117,7 @@ public class CommandParser {
             commandStringWithoutCommand = commandString.replace(SEARCH_ITEM_COMMAND, "");
             userCommand = new SearchItemCommand(commandStringWithoutCommand);
         } else {
-            throw new WrongCommandException("Error! Invalid Command.");
+            throw new InvalidCommandException();
         }
         return userCommand;
     }

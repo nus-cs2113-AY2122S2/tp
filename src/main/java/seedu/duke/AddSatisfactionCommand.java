@@ -103,7 +103,7 @@ public class AddSatisfactionCommand extends Command {
      *                 must be included for the execution override.
      * @param ui The user interface for this execution method.
      */
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, WrongCommandException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         SatisfactionList satisfactionList = listContainer.getSatisfactionList();
         if (satisfactionList.isCustomerInSatisfactionList(satisfaction.getCustomerName())) {
             throw new RepeatCustomerException();
