@@ -10,9 +10,9 @@ users who can type fast will be able to plan out their tasks in a much quicker f
 - [Quick Start](#quick-start)
 - [Features](#features)
 - [Command Guide](#command-guide)
-  - Add tasks: [`add`]() or [`addrecurring`](#adding-a-recurring-task-addrecurring)
-  - Delete tasks: [`delete`]() or [`deleterecurring`](#deleting-a-recurring-task-deleterecurring)
-  - Edit tasks: [`edit`]() or [`editrecurring`](#editing-a-recurring-task-editrecurring)
+  - Add tasks: [`add`](#adding-your-tasks-add)
+  - Delete tasks: [`delete`](#deleting-your-tasks-delete)
+  - Edit tasks: [`edit`](#editing-your-tasks-edit)
   - Show tasks: [`show`](#generating-a-timetable-show-today--show-date--show-week)
   - Clear all tasks: [`clear`](#clearing-all-tasks-clear)
   - Study session
@@ -65,46 +65,111 @@ certain tasks, feel free to start another productive session!
 - Items in square brackets are optional
 - Extraneous parameters for commands that do not take in parameters (such as show, stop, exit) will be ignored
 
-### Adding a recurring task: `addrecurring`
-Adds a recurring task to your list of tasks.
+### Adding your tasks: `add` 
+**_Note: When adding tasks, TASK_DESCRIPTION must be the first parameter provided.
+Order of other parameters can be switched._**
+#### Adding a single task
+
+Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/by DEADLINE]`
+
+|    Parameters    | Description                     | Accepted inputs                                   | Optional |
+|:----------------:|---------------------------------|---------------------------------------------------|----------|
+| TASK_DESCRIPTION | Description for the task        | Any sentence without the character '/'            | No       |
+|     DO_DATE      | Date to work on the task        | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022) | No       |
+|    START_TIME    | Time to start working on a task | HH:mm format (e.g 18:00), must be before END_TIME | No       |
+|     END_TIME     | Time to stop working on a task  | HH:mm format (e.g 19:00)                          | No       |
+|     DEADLINE     | Due date for the task           | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022) | Yes      |
+
+Examples: 
+- `add write final essay /do 25/3/2022 /start 20:00 /end 22:00 /by 27/3/2022`
+- `add revise chapter 3 /do 25/3/2022 /start 20:00 /end 22:00`
+
+#### Adding a recurring task
 - All tasks will have the same task description.
 - For a **daily** recurring task, a **month's** worth of task will be added.
 - For a **weekly** recurring task, **2 months'** worth of task will be added.
 - For a **monthly** recurring task, a **year's** worth of task will be added.
 
-Format: `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME /repeat FREQUENCY`
+Format: `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME /repeat FREQUENCY`
 
-- `DATE` format is in `dd/MM/yyyy` - e.g. 3/10/2022 for 3 Oct 2022
-- `TIME` format is in `HH:mm` - e.g. 23:00 for 11pm
-- `FREQUENCY` can be either `DAILY`, `WEEKLY` or `MONTHLY`
-- `START_TIME` must be after `END_TIME`
+|    Parameters    | Description                     | Accepted inputs                              | Optional |
+|:----------------:|---------------------------------|----------------------------------------------|----------|
+| TASK_DESCRIPTION | Description for the task        | Any sentence without the character '/'       | No       |
+|     DO_DATE      | Date to work on the task        | dd/MM/yyyy (e.g 25/3/2022 for 25 March 2022) | No       |
+|    START_TIME    | Time to start working on a task | HH:mm (e.g 18:00), must be before END_TIME   | No       |
+|     END_TIME     | Time to stop working on a task  | HH:mm (e.g 19:00)                            | No       |
+|    FREQUENCY     | How often does the task repeat  | DAILY, WEEKLY, MONTHLY                       | No       |
 
-Example: `addrecurring attend cs2113t lecture /do 25/2/2022 /start 16:00 /end 18:00 /repeat WEEKLY`
+Examples: 
+- `add attend cs2113t lecture /do 25/3/2022 /start 16:00 /end 18:00 /repeat WEEKLY`
+- `add browse internship offers /do 27/3/2022 /start 21:00 /end 21:30 /repeat DAILY`
 
-### Deleting a recurring task: `deleterecurring`
-Deletes a recurring task from your list of tasks.
+### Deleting your tasks: `delete`
+
+#### Deleting a single task
+
+Format: `delete TASK_NUMBER`
+
+| Parameters  | Description                                         | Accepted inputs       | Optional |
+|:-----------:|-----------------------------------------------------|-----------------------|----------|
+| TASK_NUMBER | The index of the task as seen in the `show` command | Any valid task number | No       |
+
+Example:
+- `delete 1`
+
+#### Deleting a recurring task
 - The specified task and all its future occurrence will be deleted.
 
-Format: `deleterecurring TASK_NUMBER`
+Format: `delete TASK_NUMBER /repeat`
 
-### Editing a recurring task: `editrecurring`
-Edit a recurring task in your list of tasks.
+| Parameters  | Description                                         | Accepted inputs       | Optional |
+|:-----------:|-----------------------------------------------------|-----------------------|----------|
+| TASK_NUMBER | The index of the task as seen in the `show` command | Any valid task number | No       |
 
+Example:
+- `delete 1 /repeat`
+
+
+### Editing your tasks: `edit`
+
+#### Editing a single task
+
+Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE /start START_TIME /end END_TIME] [/by DEADLINE]`
+
+|    Parameters    | Description                                         | Accepted inputs                                   | Optional               |
+|:----------------:|-----------------------------------------------------|---------------------------------------------------|------------------------|
+|   TASK_NUMBER    | The index of the task as seen in the `show` command | Any valid task number                             | No                     |
+| TASK_DESCRIPTION | Description for the task                            | Any sentence without the character '/'	           | Yes                    |
+|     DO_DATE      | Date to work on the task                            | dd/MM/yyyy (e.g 25/3/2022 for 25 March 2022)      | Yes                    |
+|    START_TIME    | Time to start working on a task                     | HH:mm (e.g 18:00), must be before END_TIME        | No if DO_DATE is given |
+|     END_TIME     | Time to start working on a task                     | HH:mm (e.g 19:00)                                 | No if DO_DATE is given |
+|     DEADLINE     | Due date for the task                               | d/M/yyyy format (e.g 25/3/2022 for 25 March 2022) | Yes                    |
+
+Examples:
+- `edit 2 write draft essay`
+- `edit 3 submit draft essay /do 26/3/2022 /start 10:00 /end 13:00`
+
+#### Editing a recurring task
 - The specified task and all its future occurrence will be edited.
+- Occurrences earlier than the specified task will not be affected.
+- To change frequency, delete and add the recurring task with the new frequency using the `delete` and `add` command respectively.
 
-Format: `editrecurring TASK_NUMBER [TASK_DESCRIPTION] [/do DATE /start TIME /end TIME]`
+Format: `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE /start START_TIME /end END_TIME]`
 
-- To change the **frequency** of a recurring task, please delete and add the recurring task with the correct
-frequency using the `deleterecurring `and `addrecurring` command respectively.
-- At least one of the optional fields must be provided
+|    Parameters    | Description                                         | Accepted inputs                                   | Optional               |
+|:----------------:|-----------------------------------------------------|---------------------------------------------------|------------------------|
+|   TASK_NUMBER    | The index of the task as seen in the `show` command | Any valid task number                             | No                     |
+| TASK_DESCRIPTION | Description for the task                            | Any sentence without the character '/'	           | Yes                    |
+|     DO_DATE      | Date to work on the task                            | dd/MM/yyyy (e.g 25/3/2022 for 25 March 2022)      | Yes                    |
+|    START_TIME    | Time to start working on a task                     | HH:mm (e.g 18:00), must be before END_TIME        | No if DO_DATE is given |
+|     END_TIME     | Time to start working on a task                     | HH:mm (e.g 19:00)                                 | No if DO_DATE is given |
 
-Example: 
 
 Before edit command:
 
 ![beforeedit](images/beforeedit.png)
 
-After command: `editrecurring 1 /do 25/3/2022 /start 18:00 /end 20:00`
+After command: `edit 1 /do 25/3/2022 /start 18:00 /end 20:00`
 
 ![afteredit](images/afteredit.png)
 
@@ -248,26 +313,26 @@ rectify the problem or allow Sherpass to create a new save file
 
 ## Command Summary
 
-| Action                 | Format,Examples                                                                                                                                                                                |
-|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Generate timetable     | `show today` / `show <date>` / `show week`                                                                                                                                                     |
-| List all tasks         | `show all`                                                                                                                                                                                     |
-| List all pending tasks | `show todo`                                                                                                                                                                                    |
-| Clear all tasks        | `clear`                                                                                                                                                                                        |
-| Add recurring task     | `addrecurring TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME /repeat FREQUENCY`<br/>e.g. `addrecurring attend cs2113t lecture /do 25/2/2022 /start 16:00 /end 18:00 /repeat WEEKLY` |
-| Delete recurring task  | `deleterecurring TASK_NUMBER`                                                                                                                                                                  |
-| Edit recurring task    | `editrecurring TASK_NUMBER [TASK_DESCRIPTION] [/do DATE /start TIME /end TIME]`<br/>e.g.`editrecurring 1 /do 25/3/2022 /start 18:00 /end 20:00`                                                |
-| Add recurring task     | `addrecurring TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME /repeat FREQUENCY`<br/>e.g. `addrecurring attend cs2113t lecture /do 25/2/2022 /start 16:00 /end 18:00 /repeat WEEKLY` |
-| Delete recurring task  | `deleterecurring TASK_NUMBER`                                                                                                                                                                  |
-| Edit recurring task    | `editrecurring TASK_NUMBER [TASK_DESCRIPTION] [/do DATE /start TIME /end TIME]`<br/>e.g.`editrecurring 1 /do 25/3/2022 /start 18:00 /end 20:00`                                                |
-| Enter study session    | `study`                                                                                                                                                                                        |
-| Start default timer    | `start MODE_NUMBER`                                                                                                                                                                            |
-| Start custom timer     | `start /custom DURATION`                                                                                                                                                                       |
-| Start stopwatch        | `start stopwatch`                                                                                                                                                                              |
-| Pause timer/stopwatch  | `pause`                                                                                                                                                                                        |
-| Resume timer/stopwatch | `resume`                                                                                                                                                                                       |
-| Stop timer/stopwatch   | `stop`                                                                                                                                                                                         |
-| Show tasks             | `show all`                                                                                                                                                                                     |
-| Mark task as done      | `mark TASK_INDEX`                                                                                                                                                                              |
-| Leave study session    | `leave`                                                                                                                                                                                        |
+| Action                 | Format,Examples                                                                                                                                                              |
+|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Generate timetable     | `show today` / `show <date>` / `show week`                                                                                                                                   |
+| List all tasks         | `show all`                                                                                                                                                                   |
+| List all pending tasks | `show todo`                                                                                                                                                                  |
+| Clear all tasks        | `clear`                                                                                                                                                                      |
+| Add single task        | `add TASK_DESCRIPTION /do DO_DATE /start START_TIME /end END_TIME [/by DEADLINE]`<br/>e.g. `add write final essay /do 25/3/2022 /start 20:00 /end 22:00 /by 27/3/2022`       |
+| Delete single task     | `delete TASK_NUMBER`                                                                                                                                                         |
+| Edit single task       | `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DO_DATE /start START_TIME /end END_TIME] [/by DEADLINE]`<br/>e.g.`edit 3 submit draft essay /do 26/3/2022 /start 10:00 /end 13:00` |
+| Add recurring task     | `add TASK_DESCRIPTION /do DATE /start START_TIME /end END_TIME /repeat FREQUENCY`<br/>e.g. `add attend cs2113t lecture /do 25/3/2022 /start 16:00 /end 18:00 /repeat WEEKLY` |
+| Delete recurring task  | `delete TASK_NUMBER /repeat`                                                                                                                                                 |
+| Edit recurring task    | `edit TASK_NUMBER [TASK_DESCRIPTION] [/do DATE /start TIME /end TIME] /repeat`<br/>e.g.`edit 1 /do 25/3/2022 /start 18:00 /end 20:00 /repeat`                                |
+| Enter study session    | `study`                                                                                                                                                                      |
+| Start default timer    | `start MODE_NUMBER`                                                                                                                                                          |
+| Start custom timer     | `start /custom DURATION`                                                                                                                                                     |
+| Start stopwatch        | `start stopwatch`                                                                                                                                                            |
+| Pause timer/stopwatch  | `pause`                                                                                                                                                                      |
+| Resume timer/stopwatch | `resume`                                                                                                                                                                     |
+| Stop timer/stopwatch   | `stop`                                                                                                                                                                       |
+| Show tasks             | `show all`                                                                                                                                                                   |
+| Mark task as done      | `mark TASK_INDEX`                                                                                                                                                            |
+| Leave study session    | `leave`                                                                                                                                                                      |
 
