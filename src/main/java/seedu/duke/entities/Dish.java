@@ -7,7 +7,7 @@ public class Dish implements Serializable {
     private double price;
 
     public Dish(String name, double price) throws IllegalArgumentException {
-        if (!isValidName(name)) {
+        if (name.isEmpty()) {
             throw new IllegalArgumentException("New name cannot be null.");
         }
         if (price < 0) {
@@ -18,7 +18,7 @@ public class Dish implements Serializable {
     }
 
     private static String toTitleCase(String givenString) {
-        assert (isValidName(givenString));
+        assert (!(givenString.isEmpty()));
         String[] arr = givenString.split(" ");
         StringBuffer stringBuffer = new StringBuffer();
         for (int i = 0; i < arr.length; i++) {
@@ -28,17 +28,13 @@ public class Dish implements Serializable {
         return stringBuffer.toString().trim();
     }
 
-    private static boolean isValidName(String name) {
-        return !(name == null || name.length() == 0);
-    }
-
     public String getName() {
-        assert (isValidName(name));
+        assert (!(name.isEmpty()));
         return name;
     }
 
     public void setName(String newName) throws IllegalArgumentException {
-        if (!isValidName(newName)) {
+        if (newName.isEmpty()) {
             throw new IllegalArgumentException("New name cannot be null.");
         }
         this.name = newName;
@@ -61,6 +57,6 @@ public class Dish implements Serializable {
     }
 
     public boolean isValid() {
-        return isValidName(name) && price > 0;
+        return !(name.isEmpty()) && price > 0;
     }
 }
