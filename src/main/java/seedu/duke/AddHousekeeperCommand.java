@@ -8,7 +8,7 @@ import java.util.logging.Level;
  */
 public class AddHousekeeperCommand extends Command {
     private Housekeeper housekeeper;
-    private static final String AGE_INDICATE = "~";
+    private static final String AGE_INDICATE = "/";
     private static final int MIN_AGE_ACCEPTED = 21;
     private static final int MAX_AGE_ACCEPTED = 60;
     private static Logger logger = Logger.getLogger("housekeeperLogger");

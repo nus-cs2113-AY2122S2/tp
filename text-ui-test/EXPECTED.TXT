@@ -1,12 +1,5 @@
 Error! Invalid Command.
 Error! Invalid Command.
-Error! Invalid Command.
-Error! Invalid Command -> Add Housekeeper NAME @ INT AGE
-Error! The user is underage(<21) and not allowed to work.
-Error! AGE must be integer.
-Error! Invalid Command -> Add Housekeeper NAME @ INT AGE
-======== Housekeeper List ========
-======== End of the list ========
 The item and its pax has been added to the list of items in the inventory.
 There are currently 1 items within the inventory.
 Error! Item Name cannot be empty.
@@ -15,108 +8,117 @@ Error! Item Pax is invalid.
 Error! Item Pax is invalid.
 The item and its pax has been added to the list of items in the inventory.
 There are currently 2 items within the inventory.
-Noted!
-[ Tom ]: 33, <Enter Availability>
-Error! This person has already been recorded.
-Error! The user is underage(<21) and not allowed to work.
 1. Item Name: Toilet Roll Item Pax: 15
 2. Item Name: Spoon Item Pax: 2
-Error! Day give must be an Integer between 1 and 7.
-Error! Day give must be an Integer between 1 and 7.
-Error! Day give must be an Integer between 1 and 7.
-Error! Invalid Command -> Availability NAME @ 1,2
-======== Housekeeper List ========
-1. [ Tom ]: 33, <Enter Availability>
-======== End of the list ========
+Error! Invalid Command.
 The pax of Toilet Roll has been updated to 5.
 Error! Item Pax is invalid.
 Error! Item Pax cannot be empty.
 Error! Item Name cannot be empty.
 Error! Invalid Command.
 Error! Item not found in inventory.
-Error! Invalid Command -> Add Housekeeper NAME @ INT AGE
-Error! Invalid Command -> Add Housekeeper NAME @ INT AGE
-Error! Invalid Command -> Availability NAME @ 1,2
-Error! Invalid Command -> Availability NAME @ 1,2
+Error! Invalid Command.
+Error! Invalid Command.
 Toilet Roll has been removed from the Item List.
 There are currently 1 items within the Item List.
 Error! Item not found in inventory.
 Error! Invalid Command.
-Noted!
-[ Sall ]: 33, <Enter Availability>
-Added Sall availability into records
-Noted!
-[ joh ]: 43, <Enter Availability>
-Added joh availability into records
-Noted!
-[ sis ]: 43, <Enter Availability>
-Noted!
-[ Lucy ]: 34, <Enter Availability>
-Error! Day give must be an Integer between 1 and 7.
-======== Housekeeper List ========
-1. [ Tom ]: 33, <Enter Availability>
-2. [ Sall ]: 33, ( Monday Tuesday Wednesday )
-3. [ joh ]: 43, ( Monday Tuesday )
-4. [ sis ]: 43, <Enter Availability>
-5. [ Lucy ]: 34, <Enter Availability>
-======== End of the list ========
-Noted!
-[ JANE ]: 34, <Enter Availability>
-Noted!
-[ JANEy ]: 36, <Enter Availability>
-Added Jane availability into records
-======== Housekeeper List ========
-1. [ Tom ]: 33, <Enter Availability>
-2. [ Sall ]: 33, ( Monday Tuesday Wednesday )
-3. [ joh ]: 43, ( Monday Tuesday )
-4. [ sis ]: 43, <Enter Availability>
-5. [ Lucy ]: 34, <Enter Availability>
-6. [ JANE ]: 34, ( Friday Saturday )
-7. [ JANEy ]: 36, <Enter Availability>
-======== End of the list ========
-======== Tuesday List ========
-1. Sall
-2. joh
-======== End of the list ========
-======== Wednesday List ========
-1. Sall
-======== End of the list ========
-======== Thursday List ========
-TAKE NOTE! NO ONE IS AVAILABLE!!
-======== End of the list ========
-======== Friday List ========
-1. JANE
-======== End of the list ========
-======== Housekeeper List ========
-1. [ Tom ]: 33, <Enter Availability>
-2. [ Sall ]: 33, ( Monday Tuesday Wednesday )
-3. [ joh ]: 43, ( Monday Tuesday )
-4. [ sis ]: 43, <Enter Availability>
-5. [ Lucy ]: 34, <Enter Availability>
-6. [ JANE ]: 34, ( Friday Saturday )
-7. [ JANEy ]: 36, <Enter Availability>
-======== End of the list ========
-Housekeeper's availability has been reset!
-======== Housekeeper List ========
-1. [ Tom ]: 33, <Enter Availability>
-2. [ Sall ]: 33, <Enter Availability>
-3. [ joh ]: 43, <Enter Availability>
-4. [ sis ]: 43, <Enter Availability>
-5. [ Lucy ]: 34, <Enter Availability>
-6. [ JANE ]: 34, <Enter Availability>
-7. [ JANEy ]: 36, <Enter Availability>
-======== End of the list ========
-Added Jane availability into records
-======== Housekeeper List ========
-1. [ Tom ]: 33, <Enter Availability>
-2. [ Sall ]: 33, <Enter Availability>
-3. [ joh ]: 43, <Enter Availability>
-4. [ sis ]: 43, <Enter Availability>
-5. [ Lucy ]: 34, <Enter Availability>
-6. [ JANE ]: 34, ( Friday Saturday )
-7. [ JANEy ]: 36, <Enter Availability>
-======== End of the list ========
 Error! Item Name cannot be empty.
 Error! Item Name cannot be empty.
 The name of Spoon has been updated to Premium Spoon.
+========== Noted ! ==========
+[JANE]: Age: 33, Availability: <Enter Availability>
+=============================
+========== Noted ! ==========
+[SUSAN]: Age: 43, Availability: <Enter Availability>
+=============================
+Error! Unable to accept housekeeper age 61 and above.
+========== Noted ! ==========
+[MICH]: Age: 60, Availability: <Enter Availability>
+=============================
+========== Noted ! ==========
+[MASSY]: Age: 59, Availability: <Enter Availability>
+=============================
+======== Housekeeper List ========
+1. [JANE]: Age: 33, Availability: <Enter Availability>
+2. [SUSAN]: Age: 43, Availability: <Enter Availability>
+3. [MICH]: Age: 60, Availability: <Enter Availability>
+4. [MASSY]: Age: 59, Availability: <Enter Availability>
+======== End of the list ========
+Added jane availability into records
+Added zac availability into records
+Error! User does not exist.
+Added mich availability into records
+Added massy availability into records
+======== Housekeeper List ========
+1. [JANE]: Age: 33, Availability: ( Monday Tuesday Sunday )
+2. [SUSAN]: Age: 43, Availability: <Enter Availability>
+3. [MICH]: Age: 60, Availability: ( Monday Tuesday Wednesday Thursday Friday Saturday Sunday )
+4. [MASSY]: Age: 59, Availability: ( Monday Friday )
+======== End of the list ========
+Deleted susan from the list of profile
+Take note! Total pax of housekeeper:  3
+Error! User does not exist.
+======== Housekeeper List ========
+1. [JANE]: Age: 33, Availability: ( Monday Tuesday Sunday )
+2. [MICH]: Age: 60, Availability: ( Monday Tuesday Wednesday Thursday Friday Saturday Sunday )
+3. [MASSY]: Age: 59, Availability: ( Monday Friday )
+======== End of the list ========
+======== Monday List ========
+1. jane
+2. mich
+3. massy
+======== End of the list ========
+======== Tuesday List ========
+1. jane
+2. mich
+======== End of the list ========
+======== Wednesday List ========
+1. mich
+======== End of the list ========
+======== Thursday List ========
+1. mich
+======== End of the list ========
+======== Friday List ========
+1. mich
+2. massy
+======== End of the list ========
+======== Saturday List ========
+1. mich
+======== End of the list ========
+======== Sunday List ========
+1. jane
+2. mich
+======== End of the list ========
+======== Housekeeper List ========
+1. [JANE]: Age: 33, Availability: ( Monday Tuesday Sunday )
+2. [MICH]: Age: 60, Availability: ( Monday Tuesday Wednesday Thursday Friday Saturday Sunday )
+3. [MASSY]: Age: 59, Availability: ( Monday Friday )
+======== End of the list ========
+Everyone age has increased by one
+**Over age limit housekeeper will be removed from list**
+======== Age Limit Exceed List ========
+1. [MICH]: Age: 60, Availability: ( Monday Tuesday Wednesday Thursday Friday Saturday Sunday )
+======== End of the list ========
+======== Housekeeper List ========
+1. [JANE]: Age: 34, Availability: ( Monday Tuesday Sunday )
+2. [MASSY]: Age: 60, Availability: ( Monday Friday )
+======== End of the list ========
+Housekeeper's availability has been reset!
+======== Housekeeper List ========
+1. [JANE]: Age: 34, Availability: <Enter Availability>
+2. [MASSY]: Age: 60, Availability: <Enter Availability>
+======== End of the list ========
+======== Housekeeper List ========
+1. [JANE]: Age: 34, Availability: <Enter Availability>
+2. [MASSY]: Age: 60, Availability: <Enter Availability>
+======== End of the list ========
+Everyone age has increased by one
+**Over age limit housekeeper will be removed from list**
+======== Age Limit Exceed List ========
+1. [MASSY]: Age: 60, Availability: <Enter Availability>
+======== End of the list ========
+======== Housekeeper List ========
+1. [JANE]: Age: 35, Availability: <Enter Availability>
+======== End of the list ========
 see u again!

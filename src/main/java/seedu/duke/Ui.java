@@ -36,9 +36,9 @@ public class Ui {
     }
 
     public void printHousekeeperNoted(Housekeeper housekeeper) {
-        System.out.println("Noted!");
+        System.out.println("========== Noted ! ==========");
         System.out.println(housekeeper);
-
+        System.out.println("=============================");
     }
 
     /**

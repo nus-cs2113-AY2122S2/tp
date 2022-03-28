@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class AddAvailabilityCommand extends Command {
     private String name;
     private String availability;
-    private static final String AVAILABILITY_INDICATE = "@";
+    private static final String AVAILABILITY_INDICATE = "/";
     private static final int MONDAY_INDICATE = 1;
     private static final int SUNDAY_INDICATE = 7;
     private static Logger logger = Logger.getLogger("housekeeperLogger");
