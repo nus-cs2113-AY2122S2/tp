@@ -15,6 +15,8 @@
 
 {Give detailed description of each feature}
 
+## Customer Satisfaction Related Commands
+
 ### Adding a customer satisfaction: `add satifaction`
 Adds a new customer satisfaction (name of customer and their satisfaction rating from 1-5) to the list of 
 customer satisfactions.
@@ -125,22 +127,6 @@ There are currently 3 recorded housekeeper performances.
 ```
 
 
-
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
-
-Format: `todo n/TODO_NAME d/DEADLINE`
-
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
-
-Example of usage: 
-
-`todo n/Write the rest of the User Guide d/next week`
-
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
-
-
 ## Housekeeper Related Commands
 
 ### Adding Housekeeper Profile : `add housekeeper`
@@ -159,7 +145,7 @@ Example of usage:
 
 `add housekeeper jane / 33`
 
-Output:
+Expected output:
 ```
 ========== Noted ! ==========
 [SUSAN]: Age: 46, Availability: <Enter Availability>
@@ -173,7 +159,7 @@ have not entered it yet.
 
 Format: `view recorded housekeeper`
 
-Output:
+Expected output:
 ```
 ======== Housekeeper List ========
 1. [SUSAN]: Age: 46, Availability: <Enter Availability>
@@ -204,7 +190,7 @@ Example of usage:
 
 `availability jane / 1,3,5,7`
 
-Output:
+Expected output:
 
 `Added sally availability into records`
 
@@ -222,7 +208,7 @@ Example of usage:
 delete housekeeper sally
 ```
 
-Output:
+Expected output:
 ```
 Deleted sally from the list of profile
 Take note! Total pax of housekeeper:  2
@@ -253,7 +239,7 @@ Example of usage:
 
 `get available on 7`
 
-Output:
+Expected output:
 
 If there exist any housekeeper on Monday:
 ```
@@ -275,7 +261,7 @@ command will also print out the list with all availabilities being reset.
 
 Format: `is a new week`
 
-Output:
+Expected output:
 ```
 Housekeeper's availability has been reset!
 ======== Housekeeper List ========
@@ -292,7 +278,7 @@ housekeeper exceeding age limit will be shown when removing.
 
 Format: `is a new year`
 
-Output:
+Expected output:
 
 If list of housekeeper has housekeeper which exceed age limit:
 ```
