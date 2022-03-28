@@ -5,7 +5,7 @@ import seedu.mindmymoney.MindMyMoneyException;
 import java.util.Objects;
 
 /**
- * Represents user's expenditure.
+ * Represents the expenditure entry.
  */
 public class Expenditure {
     private String description;

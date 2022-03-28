@@ -1,7 +1,7 @@
 package seedu.mindmymoney.userfinancial;
 
 /**
- * Represents a user credit card.
+ * Represents the credit card entry.
  */
 public class CreditCard {
     private float monthlyCardLimit;
