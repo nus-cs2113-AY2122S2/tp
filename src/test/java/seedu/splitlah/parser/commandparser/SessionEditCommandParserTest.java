@@ -66,7 +66,7 @@ public class SessionEditCommandParserTest {
         }
 
         // Case 4: Edit a session with /n, /d, /pl delimiters.
-        String validUserInput = "session /edit /sid 1 /pl Alice Bob";
+        String validUserInput = "session /edit /sid 1 /n Class outing /d 20-04-2022 /pl Alice Bob";
         String validArguments = Parser.getRemainingArgument(validUserInput);
         String errorMessageFour = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, validArguments);
         if (!errorMessageFour.isEmpty()) {
@@ -112,7 +112,7 @@ public class SessionEditCommandParserTest {
     public void getCommand_hasMissingArguments_InvalidFormatExceptionThrown() {
         SessionEditCommandParser sessionEditCommandParser = new SessionEditCommandParser();
 
-        // Case 1: Missing Session unique identifier.
+        // Case 1: Missing argument when /sid delimiter is provided
         String inputMissingIdArgument = "session /edit /sid";
         String argsMissingIdArgument = Parser.getRemainingArgument(inputMissingIdArgument);
         String errorIdMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingIdArgument);
@@ -128,7 +128,7 @@ public class SessionEditCommandParserTest {
             assertEquals(messageToTest, invalidFormatException.getMessage());
         }
 
-        // Case 2: Missing Session name.
+        // Case 2: Missing argument when /n delimiter is provided
         String inputMissingNameArgument = "session /edit /sid 1 /n";
         String argsMissingNameArgument = Parser.getRemainingArgument(inputMissingNameArgument);
         String errorNameMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingNameArgument);
@@ -144,7 +144,7 @@ public class SessionEditCommandParserTest {
             assertEquals(messageToTest, invalidFormatException.getMessage());
         }
 
-        // Case 3: Missing Session Date.
+        // Case 3: Missing argument when /d delimiter is provided
         String inputMissingDateArgument = "session /edit /sid 1 /d";
         String argsMissingDateArgument = Parser.getRemainingArgument(inputMissingDateArgument);
         String errorDateMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingDateArgument);
@@ -160,7 +160,7 @@ public class SessionEditCommandParserTest {
             assertEquals(messageToTest, invalidFormatException.getMessage());
         }
 
-        // Case 4: Missing List of persons.
+        // Case 4: Missing argument when /pl delimiter is provided
         String inputMissingPersonListArgument = "session /edit /sid 1 /pl";
         String argsMissingPersonListArgument = Parser.getRemainingArgument(inputMissingPersonListArgument);
         String errorPersonListMessage = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, argsMissingPersonListArgument);
