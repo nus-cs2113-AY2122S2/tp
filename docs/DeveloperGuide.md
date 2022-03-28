@@ -12,6 +12,7 @@
     * [Command Component](#command)
     * [Parser Component](#parser)
     * [Storage Component](#storage)
+    * [Validator Component](#validator)
   * [Common Classes](#common-classes)
 * [Implementation](#implementation)
   * [Design Considerations](#design-considerations)
@@ -80,10 +81,16 @@ How the Command class works:
 * The `Manager` class calls specific methods in `Command` class
 * Each method in the `Command` class would call on an `asset` class method which will manipulate the attributes inside it
 
+#### `Validator`
+The validator ensures that the parameters entered are correct. It checks the number of parameters entered, and ensure
+they are of the correct format. It throws a `HalpmiException` if the parameters
+entered are invalid.
+
+For example, validateAddPatient validates the parameter of `add patient` command, 
+ensuring there are 7 parameters, and each of them follow the format. 
+
 #### `Parser`
-The parser parses the description of the command. It first calls the validator class to validate the parameters and then returns a command.
-
-
+The parser parses the description of the command. It first calls the validator class to validate the parameters, and then returns a command if the validation is successful. 
 
 #### `Storage`
 

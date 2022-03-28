@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+Parser -> Parser: minCheckParameters
+Parser -> Validator: validate[CommandName]
+Validator -> Parser
+Parser -> Command: Command()
+
+@enduml

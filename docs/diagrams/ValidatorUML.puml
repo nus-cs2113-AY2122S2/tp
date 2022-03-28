@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+Validator -> Validator : validateNric(parameters[0])
+Validator -> Validator : validateFullName(parameters[1]);
+Validator -> Validator :  validateAge(parameters[2]);
+Validator -> Validator :   validateGender(parameters[3]);
+Validator -> Validator : validateAddress(parameters[4]);
+Validator -> Validator : validateDob(parameters[5]);
+
+@enduml
+
