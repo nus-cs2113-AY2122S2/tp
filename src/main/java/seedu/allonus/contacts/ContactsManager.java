@@ -1,8 +1,10 @@
 package seedu.allonus.contacts;
 
 import seedu.allonus.contacts.entry.Contact;
+import seedu.allonus.storage.StorageFile;
 import seedu.allonus.ui.TextUi;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,6 +48,9 @@ public class ContactsManager {
     private static final int CONTACTS_LIST_MAX_SIZE = 100;
     private static final ArrayList<Contact> contactsList = new ArrayList<>(CONTACTS_LIST_MAX_SIZE);
 
+    private static StorageFile storageFile = new StorageFile();
+    private static boolean isModified = false;
+
     /**
      * Prints a message following a defined format.
      *
@@ -74,6 +79,24 @@ public class ContactsManager {
         printFormat(CONTACTS_LIST_SUCCESS_MESSAGE + listAsString);
     }
 
+    /**
+     * Returns current number of items in contacts list.
+     *
+     * @return number of items in contacts list.
+     */
+    public int getContactsCount() {
+        return contactsList.size();
+    }
+
+    /**
+     * Returns current contacts list.
+     *
+     * @return contacts list.
+     */
+    public ArrayList<Contact> getContactsList() {
+        return contactsList;
+    }
+
     private static void deleteContact(String userInput) {
         Contact curr;
         try {
@@ -89,6 +112,7 @@ public class ContactsManager {
         }
         printFormat(CONTACTS_REMOVE_SUCCESS_MESSAGE + curr
                 + String.format(CONTACTS_UPDATED_LIST_SIZE_MESSAGE, contactsList.size()));
+        isModified = true;
     }
 
     private static void addContact(String userInput) {
@@ -102,6 +126,16 @@ public class ContactsManager {
         contactsList.add(contact);
         printFormat(CONTACTS_ADD_SUCCESS_MESSAGE + contact
                 + String.format(CONTACTS_UPDATED_LIST_SIZE_MESSAGE, contactsList.size()));
+        isModified = true;
+    }
+
+    /**
+     * Executes <code>addContact</code> method with saved contact entry from data file.
+     *
+     * @param savedContact the saved contact entry
+     */
+    public void loadAdd(String savedContact) {
+        addContact(savedContact);
     }
 
     /**
@@ -156,12 +190,14 @@ public class ContactsManager {
             printFormat(e.getMessage());
         }
         printFormat(CONTACTS_EDIT_SUCCESS_MESSAGE + curr);
+        isModified = true;
     }
 
     public static void contactsRunner(TextUi ui) {
         contactsWelcome();
         String userInput;
         while (true) {
+            isModified = false;
             userInput = ui.getUserInput();
             if (userInput.equals("menu")) {
                 logger.log(Level.FINER, "Exiting Contacts Manager");
@@ -179,6 +215,9 @@ public class ContactsManager {
             } else {
                 printFormat(CONTACTS_INVALID_COMMAND_MESSAGE);
                 logger.log(Level.FINER, String.format("Invalid command to Contacts Manager: %s", userInput));
+            }
+            if (isModified) {
+                storageFile.saveData();
             }
         }
     }

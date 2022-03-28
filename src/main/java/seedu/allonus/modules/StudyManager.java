@@ -5,6 +5,7 @@ import seedu.allonus.modules.exceptions.ModuleCategoryException;
 import seedu.allonus.modules.exceptions.ModuleCodeException;
 import seedu.allonus.modules.exceptions.ModuleDayException;
 import seedu.allonus.modules.exceptions.ModuleTimeException;
+import seedu.allonus.storage.StorageFile;
 import seedu.allonus.ui.TextUi;
 
 import java.util.ArrayList;
@@ -95,6 +96,9 @@ public class StudyManager {
 
     private static Logger logger = Logger.getLogger("mylogger");
 
+    private static StorageFile storageFile = new StorageFile();
+    private static boolean isModified = false;
+
     public ArrayList<Module> getModulesList() {
         return modulesList;
     }
@@ -109,6 +113,7 @@ public class StudyManager {
         String userInput;
         boolean isRunning = true;
         while (isRunning) {
+            isModified = false;
             userInput = ui.getUserInput();
             if (userInput.equals(MENU_COMMAND)) {
                 isRunning = false;
@@ -124,6 +129,9 @@ public class StudyManager {
                 findModule(userInput);
             } else {
                 printMessage(UNKNOWN_INPUT_MESSAGE);
+            }
+            if (isModified) {
+                storageFile.saveData();
             }
         }
     }
@@ -156,6 +164,19 @@ public class StudyManager {
     }
 
     /**
+     * Returns current number of items in module list.
+     *
+     * @return number of items in module list.
+     */
+    public int getModuleCount() {
+        int count = 0;
+        for (Module m: modulesList) {
+            count++;
+        }
+        return count;
+    }
+
+    /**
      * Deletes an existing module denoted by its index from the module list.
      * @param userInput Input string that contains the rm command and the module index
      *                  that is to be deleted.
@@ -169,6 +190,7 @@ public class StudyManager {
                 modulesList.remove(moduleIndex);
                 printMessage(DELETE_MODULE_SUCCESS_MESSAGE);
                 printMessage(removedModule.toString());
+                isModified = true;
             }
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOGGER_WRONG_INDEX_DELETE);
@@ -230,6 +252,7 @@ public class StudyManager {
                 printMessage(EDIT_MODULE_SUCCESS_MESSAGE);
                 printMessage(moduleToEdit.toString());
                 isEditFinished = true;
+                isModified = true;
             }
         }
         printMessage(EDIT_MODULE_EXIT_MESSAGE);
@@ -278,7 +301,17 @@ public class StudyManager {
         modulesList.add(newModule);
         printMessage(ADD_MODULE_SUCCESS_MESSAGE);
         printMessage(newModule.toString());
+        isModified = true;
 
+    }
+
+    /**
+     * Executes <code>addModule</code> method with saved module entry from data file.
+     *
+     * @param savedModule the saved module entry
+     */
+    public void loadAdd(String savedModule) {
+        addModule(savedModule);
     }
 
     /**
