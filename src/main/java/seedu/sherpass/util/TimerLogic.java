@@ -206,41 +206,81 @@ public class TimerLogic implements WindowListener {
         return timer.isTimerRunning;
     }
 
+    /**
+     * Destroy the jframe that was created.
+     */
     public void destroyFrame() {
         jframe.dispose();
     }
 
 
+    /**
+     * Call method when window is opened.
+     *
+     * @param e Event signifying the change in status of the window.
+     */
     @Override
     public void windowOpened(WindowEvent e) {
 
     }
 
+    /**
+     * Call method as window is closing.
+     *
+     * @param e Event signifying the change in status of the window.
+     */
     @Override
     public void windowClosing(WindowEvent e) {
         callStopTimer();
         ui.showLine();
     }
 
+    /**
+     * Call method when window is closed.
+     *
+     * @param e Event signifying the change in status of the window.
+     */
     @Override
     public void windowClosed(WindowEvent e) {
     }
 
+
+    /**
+     * Call method when window is minimised.
+     *
+     * @param e Event signifying the change in status of the window.
+     */
     @Override
     public void windowIconified(WindowEvent e) {
 
     }
 
+    /**
+     * Call method when window is set from minimised to normal size.
+     *
+     * @param e Event signifying the change in status of the window.
+     */
     @Override
     public void windowDeiconified(WindowEvent e) {
 
     }
 
+    /**
+     * Call method when window is set to be the active (current viewing) window.
+     *
+     * @param e Event signifying the change in status of the window.
+     */
     @Override
     public void windowActivated(WindowEvent e) {
 
     }
 
+
+    /**
+     * Call method when window is not set to be the active (current viewing) window.
+     *
+     * @param e Event signifying the change in status of the window.
+     */
     @Override
     public void windowDeactivated(WindowEvent e) {
 
