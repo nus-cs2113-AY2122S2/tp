@@ -1,7 +1,10 @@
 package arcs.parser;
 
 import arcs.commands.Command;
+import arcs.commands.UndefinedCommand;
+import arcs.commands.customer.DeleteCustomerCommand;
 import arcs.commands.flightbooking.BookCommand;
+import arcs.commands.flightbooking.DeleteBookingCommand;
 
 public class FlightBookingParser {
     public static Command prepareBookCommand(String argumentLine) {
@@ -32,5 +35,20 @@ public class FlightBookingParser {
         }
 
         return argumentLine.substring(startIdx + field.length(), endIdx);
+    }
+
+    public static Command prepareDeleteBookingCommand(String argumentLine) {
+        if (argumentLine == null || argumentLine.isEmpty()) {
+            return new UndefinedCommand("Index is not specified");
+        }
+        Command result;
+        try {
+            int index = Integer.parseInt(argumentLine);
+            result = new DeleteBookingCommand(index);
+        } catch (NumberFormatException e) {
+            result = new UndefinedCommand("Index should be an integer.");
+        }
+
+        return result;
     }
 }

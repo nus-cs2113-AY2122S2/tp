@@ -6,6 +6,7 @@ import arcs.commands.customer.DeleteCustomerCommand;
 import arcs.commands.customer.FindCustomerCommand;
 import arcs.commands.customer.ListCustomerCommand;
 import arcs.commands.flightbooking.BookCommand;
+import arcs.commands.flightbooking.DeleteBookingCommand;
 import arcs.commands.flightbooking.ListBookingCommand;
 import arcs.commands.menuitem.FindMenuItemTypeCommand;
 import arcs.commands.menuitem.FindMenuItemNameCommand;
@@ -80,6 +81,9 @@ public class Parser {
             break;
         case ListBookingCommand.COMMAND_WORD:
             command = new ListBookingCommand();
+            break;
+        case DeleteBookingCommand.COMMAND_WORD:
+            command = FlightBookingParser.prepareDeleteBookingCommand(argumentLine);
             break;
         default:
             command = new UndefinedCommand();

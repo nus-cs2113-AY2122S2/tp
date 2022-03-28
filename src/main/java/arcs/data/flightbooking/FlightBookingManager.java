@@ -35,6 +35,16 @@ public class FlightBookingManager {
         route.incrementSold();
     }
 
+    public FlightBooking deleteBooking(int index) throws ArcsException {
+        assert flightBookings != null : "Flight booking list is null.";
+        if (index <= 0 || index > flightBookings.size()) {
+            throw new ArcsException("Index out of bound");
+        }
+        FlightBooking deleted = flightBookings.get(index - 1);
+        flightBookings.remove(index - 1);
+        return deleted;
+    }
+
     public boolean hasTimeClash(String ic, String date, String time) {
         for (FlightBooking flightBooking: flightBookings) {
             Customer customer = flightBooking.getCustomer();
