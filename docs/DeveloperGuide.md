@@ -159,7 +159,7 @@ for subsequent prompts.
 #### List Exercise
 
 
-User's command. If the user's command type is to list the exercises available, i.e. `exercise /list`, the
+If the user's command type is to list the exercises available, i.e. `exercise /list`, the
 `Parser#parseUserInput(String userInput)` method will parse the 'exercise' base word and proceed to create exercise related
 command using `Parser#createExerciseCommand(String userInput)` method. This method will further evaluate the
 exercise action, in this case, `/list` and call the constructor of `ExerciseCommand` class by passing relevant parameters related to the
