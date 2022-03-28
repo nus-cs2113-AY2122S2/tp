@@ -6,6 +6,7 @@ import arcs.data.route.RouteManager;
 import arcs.data.flightbooking.FlightBookingManager;
 import arcs.data.menuitems.MenuItemManager;
 import arcs.parser.Parser;
+import arcs.storage.CustomerFileManager;
 import arcs.storage.RouteFileManager;
 import arcs.commands.Command;
 import arcs.ui.MainUi;
@@ -21,6 +22,7 @@ public class Main {
     private RouteFileManager routeFileManager;
     private FlightBookingManager flightBookingManager;
     private CustomerManager customerManager;
+    private CustomerFileManager customerFileManager;
     /**
      * Parser object.
      */
@@ -38,9 +40,9 @@ public class Main {
         mainUi = new MainUi();
         parser = new Parser();
         routeFileManager = new RouteFileManager();
+        customerFileManager = new CustomerFileManager();
         loadData();
         flightBookingManager = new FlightBookingManager();
-        customerManager = new CustomerManager();
     }
 
     public void run() {
@@ -67,15 +69,18 @@ public class Main {
         try {
             routeManager = new RouteManager(routeFileManager.loadData());
             menuItemManager = new MenuItemManager();
+            customerManager = new CustomerManager(customerFileManager.loadData());
         } catch (IOException e) {
             mainUi.displayMessages(e.getMessage());
             routeManager = new RouteManager();
+            customerManager = new CustomerManager();
         }
     }
 
     public void saveData() {
         try {
             routeFileManager.saveData(routeManager.getAllRoutes());
+            customerFileManager.saveData(customerManager.getAllCustomers());
         } catch (IOException e) {
             mainUi.displayMessages(e.getMessage());
         }
