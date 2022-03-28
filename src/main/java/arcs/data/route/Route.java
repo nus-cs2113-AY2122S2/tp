@@ -45,6 +45,14 @@ public class Route {
         return capacity;
     }
 
+    public int getSold() {
+        return sold;
+    }
+
+    public void setSold(int sold) {
+        this.sold = sold;
+    }
+
     public int getEmptySeats() {
         return capacity - sold;
     }
@@ -53,7 +61,7 @@ public class Route {
         if (getEmptySeats() <= 0) {
             throw new ArcsException("No empty seats available. Error in incrementing seats.");
         }
-        sold ++;
+        sold++;
     }
 
     public String getFlightInfo() {

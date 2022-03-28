@@ -44,7 +44,7 @@ public class BookCommand extends Command {
         }
         // Find the route
         Route route;
-        route = routeManager.FindRoute(fid);
+        route = routeManager.findRoute(fid);
         if (route == null) {
             return new CommandResult(NO_ROUTE_MESSAGE);
         }
@@ -64,7 +64,7 @@ public class BookCommand extends Command {
         if (ic == null || ic.isEmpty()) {
             emptyFields.add("IC");
         }
-        if(fid == null || fid.isEmpty()) {
+        if (fid == null || fid.isEmpty()) {
             emptyFields.add("Flight ID");
         }
     }

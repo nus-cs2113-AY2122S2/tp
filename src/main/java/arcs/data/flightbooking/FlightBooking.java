@@ -29,4 +29,17 @@ public class FlightBooking {
                 + "Date: " + route.getDate() + "\t Time: " + route.getTime();
         return info;
     }
+
+    @Override
+    public String toString() {
+        assert customer != null : "Customer is null.";
+        assert route != null : "Route is null.";
+        String str = customer.getIc() + "/" + customer.getName() + "/"
+                + customer.getPhone() + "/" + customer.getEmail() + "/"
+                + route.getFlightID() + "/" + route.getDate() + "/"
+                + route.getTime() + "/" + route.getFrom() + "/"
+                + route.getTo() + "/" + route.getCapacity() + "/"
+                + route.getSold();
+        return str;
+    }
 }
