@@ -4,21 +4,31 @@
 hide footbox
 autonumber
 autoactivate on
+
 loop
 |||
 ref over Spendvelope, TextUi: getUserInput
+
 Spendvelope -> Parser: parseCommand(fullUserInput)
 Parser -> Command**:
 Parser <-- Command
 Spendvelope <-- Parser: command
+
 Spendvelope -> Spendvelope: executeCommand(command)
 Spendvelope -> Command: execute()
-Command -> CommandResult**:
+Command -> CommandResult**
 Command <-- CommandResult:result
 Spendvelope <-- Command: result
 destroy Command
 Spendvelope <-- Spendvelope: result
+
 Spendvelope -> TextUi: showResultToUser(result)
+TextUi -> CommandResult: getRelevantRecords()
+TextUi <-- CommandResult
+TextUi -> CommandResult: getFeedbackToUser()
+TextUi <-- CommandResult
+destroy CommandResult
+Spendvelope <-- TextUi
 end
 
 @enduml
