@@ -21,9 +21,19 @@ public class Duke {
     private static PatientList patientList = new PatientList();
     private static DoctorList doctorList = new DoctorList();
     private static AppointmentList appointmentList = new AppointmentList();
-    private static Storage storage = new Storage();
+    private static Storage storage;
+
+    static {
+        try {
+            storage = new Storage();
+        } catch (IHospitalException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) throws IHospitalException {
+        assert false : "dummy assertion set to fail";
+
         ui.sayHello();
         String fullCommand = parser.getCommand();
         while (!fullCommand.equals("bye")) {
