@@ -1,0 +1,58 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../Style.puml
+
+autonumber
+
+title Sequence Diagram of `search /all` Command
+
+actor   User
+participant "werkIt:WerkIt" AS WerkIt
+participant "ui:UI" AS UI1
+participant "parser:Parser" AS Parser
+participant "newCommand\n:SearchCommand" AS newCommand
+participant "planList\n:PlanList" AS PlanList
+participant "exerciseList\n:PlanList" AS ExerciseList
+participant "WorkoutList\n:PlanList" AS WorkoutList
+
+activate WerkIt
+WerkIt -> UI1 : getUserInput()
+activate UI1
+User -> UI1 : `search /all` command
+WerkIt <-- UI1 : userInputTrimmed:String
+deactivate UI1
+
+WerkIt -> Parser : parseUserInput(userInput)
+activate Parser
+WerkIt <-- Parser : :Command
+deactivate Parser
+
+WerkIt -> newCommand : execute()
+activate newCommand
+newCommand -> PlanList : getPlansDisplayList()
+activate PlanList
+
+newCommand <-- PlanList : "planList:ArrayList<String>"
+deactivate PlanList
+
+newCommand -> ExerciseList : getExerciseList()
+activate ExerciseList
+
+newCommand <-- ExerciseList : "exerciseList:ArrayList<String>"
+deactivate ExerciseList
+
+newCommand -> WorkoutList : getWorkoutsDisplayList()
+activate WorkoutList
+
+newCommand <-- WorkoutList : "workoutList:ArrayList<String>"
+deactivate WorkoutList
+
+newCommand -> newCommand : searchPlan()
+newCommand -> newCommand : searchExercise()
+newCommand -> newCommand : searchWorkout()
+User <-- newCommand : search outcome
+
+deactivate newCommand
+
+destroy newCommand
+@enduml
