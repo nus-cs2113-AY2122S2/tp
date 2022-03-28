@@ -13,6 +13,7 @@ public class CommandParser {
     private static final String DELETE_ITEM_COMMAND = "Delete Item ";
     private static final String UPDATE_ITEM_PAX_COMMAND = "Update Item Pax ";
     private static final String UPDATE_ITEM_NAME_COMMAND = "Update Item Name ";
+    private static final String SEARCH_ITEM_COMMAND = "Search Item ";
     private static final String ADD_HOUSEKEEPER_COMMAND = "Add Housekeeper ";
     private static final String ADD_PERFORMANCE_COMMAND = "add housekeeper performance";
     private static final String VIEW_PERFORMANCES_COMMAND = "view housekeeper performances";
@@ -112,6 +113,9 @@ public class CommandParser {
             userCommand = new DeleteHousekeeperCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(UPDATE_AGE_BY_ONE)) {
             userCommand = new AgeIncreaseCommand();
+        } else if (commandString.startsWith(SEARCH_ITEM_COMMAND)) {
+            commandStringWithoutCommand = commandString.replace(SEARCH_ITEM_COMMAND, "");
+            userCommand = new SearchItemCommand(commandStringWithoutCommand);
         } else {
             throw new WrongCommandException("Error! Invalid Command.");
         }

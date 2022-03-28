@@ -15,12 +15,15 @@ Error! Item Pax is invalid.
 Error! Item Pax is invalid.
 The item and its pax has been added to the list of items in the inventory.
 There are currently 2 items within the inventory.
+The item and its pax has been added to the list of items in the inventory.
+There are currently 3 items within the inventory.
 Noted!
 [ Tom ]: 33, <Enter Availability>
 Error! This person has already been recorded.
 Error! The user is underage(<21) and not allowed to work.
 1. Item Name: Toilet Roll Item Pax: 15
-2. Item Name: Spoon Item Pax: 2
+2. Item Name: Fork Item Pax: 15
+3. Item Name: Spoon Item Pax: 2
 Error! Day give must be an Integer between 1 and 7.
 Error! Day give must be an Integer between 1 and 7.
 Error! Day give must be an Integer between 1 and 7.
@@ -39,7 +42,7 @@ Error! Invalid Command -> Add Housekeeper NAME @ INT AGE
 Error! Invalid Command -> Availability NAME @ 1,2
 Error! Invalid Command -> Availability NAME @ 1,2
 Toilet Roll has been removed from the Item List.
-There are currently 1 items within the Item List.
+There are currently 2 items within the Item List.
 Error! Item not found in inventory.
 Error! Invalid Command.
 Noted!
@@ -119,4 +122,7 @@ Added Jane availability into records
 Error! Item Name cannot be empty.
 Error! Item Name cannot be empty.
 The name of Spoon has been updated to Premium Spoon.
+Error! Invalid Command.
+1. Item Name: Fork Item Pax: 15
+2. Item Name: Premium Spoon Item Pax: 2
 see u again!
