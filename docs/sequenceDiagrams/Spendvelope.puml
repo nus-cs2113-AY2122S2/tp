@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+autoactivate on
+loop
+Spendvolope -> TextUi: getUserInput()
+Spendvolope <-- TextUi: fullUserInput
+Spendvolope -> Parser: parseCommand(fullUserInput)
+Parser -> Command**:
+Parser <-- Command
+Spendvolope <-- Parser: command
+Spendvolope -> Spendvolope: executeCommand(command)
+Spendvolope -> Command: execute()
+Command -> CommandResult**:
+Command <-- CommandResult:result
+Spendvolope <-- Command: result
+Spendvolope <-- Spendvolope: result
+Spendvolope -> TextUi: showResultToUser(result)
+end
+
+@enduml

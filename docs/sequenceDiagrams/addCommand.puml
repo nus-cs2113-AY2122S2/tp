@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+Spendvelope -> TextUi:
+TextUi -> Parser:
+Parser -> AddCommand:
+
+loop shouldIgnore
+    TextUi -> TextUi: shouldIgnore()
+end
+
+TextUi -> TextUi: showToUser()
+TextUi -> Spendvelope: fullInputLine
+@enduml
