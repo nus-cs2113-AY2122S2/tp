@@ -1,9 +1,8 @@
 package seedu.sherpass.util;
 
-import seedu.sherpass.command.MarkCommand;
+
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
-import seedu.sherpass.util.parser.TaskParser;
 
 import java.util.ArrayList;
 
@@ -15,7 +14,8 @@ import static seedu.sherpass.Main.LOGGER;
 import java.util.logging.Level;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.dayOnlyFormat;
-import static seedu.sherpass.constant.DateAndTimeFormat.dateOnlyFormat;
+import static seedu.sherpass.constant.DateAndTimeFormat.outputDateOnlyFormat;
+import static seedu.sherpass.constant.DateAndTimeFormat.outputWithoutTimeFormat;
 import static seedu.sherpass.constant.TimetableConstant.BLANK_MARK_STATUS;
 import static seedu.sherpass.constant.TimetableConstant.BLANK_TIME_PERIOD;
 import static seedu.sherpass.constant.TimetableConstant.DATE_SPACE_FULL_LENGTH;
@@ -43,7 +43,7 @@ public class Timetable {
         this.ui = ui;
     }
 
-    private static int findTaskDescriptionLength(ArrayList<Task> filteredTasks) {
+    private static int findMaxTaskContentLength(ArrayList<Task> filteredTasks) {
         int max = 0;
         for (Task task : filteredTasks) {
             int taskLength = task.getDescription().length();
@@ -55,7 +55,7 @@ public class Timetable {
     }
 
     private static int findTaskLength(ArrayList<Task> filteredTasks) {
-        int descriptionLength = findTaskDescriptionLength(filteredTasks);
+        int descriptionLength = findMaxTaskContentLength(filteredTasks);
         if (descriptionLength > TASK_SPACE_COMPARE_LENGTH) {
             return descriptionLength + TASK_SPACE_COMPARE_OFFSET_LENGTH;
         }
@@ -75,7 +75,7 @@ public class Timetable {
         String doOnDateColumnBackWhiteSpace = ui.getRepeatedCharacters(" ",
                 calculateColBackWhiteSpace(doOnDateLength, colFive));
         if (rowNumber == 1) {
-            ui.showToUser("|  " + colOne + "       |  " + colTwo + "       |  "
+            ui.showToUser("|  " + colOne + "       |  " + colTwo + "         |  "
                     + colThree + " |  " + colFour + taskColumnBackWhiteSpace
                     + "|  " + colFive + doOnDateColumnBackWhiteSpace + "|");
         } else if (rowNumber == 2) {
@@ -118,7 +118,7 @@ public class Timetable {
                 colFour = (j < filteredTasks.size())
                         ? (filteredTasks.get(j).getIndex() + ". " + filteredTasks.get(j).getDescription())
                         : ui.getRepeatedCharacters(" ", taskLength - STRING_COMPARE_OFFSET);
-                colFive = (j < filteredTasks.size()) ? filteredTasks.get(j).getByDateWithoutTimeString()
+                colFive = (j < filteredTasks.size()) ? filteredTasks.get(j).getByDateString()
                         : ui.getRepeatedCharacters(" ", byDateLength - STRING_COMPARE_OFFSET);
                 j++;
             }
@@ -132,7 +132,7 @@ public class Timetable {
 
     private static void printEmptyTimetable(Ui ui, String day, String date, long partitionLength) {
         ui.showToUser(ui.getRepeatedCharacters("-", partitionLength));
-        ui.showToUser("|  Day       |  Time       |  Mark status |  Task Description    |  To complete by  |");
+        ui.showToUser("|  Day       |  Time         |  Mark status |  Task Description    |  To complete by  |");
         String thirdRow = "|  " + day + "       |             Your schedule is empty for the day!";
         ui.showToUser(thirdRow + ui.getRepeatedCharacters(" ",
                 partitionLength - thirdRow.length() - 1) + "|");
@@ -151,7 +151,7 @@ public class Timetable {
     private void printSchedule() {
         // assert localDate != null;
         String day = localDate.format(dayOnlyFormat);
-        String date = localDate.format(dateOnlyFormat);
+        String date = localDate.format(outputDateOnlyFormat);
         long taskLength = findTaskLength(tasks);
         long doOnDateLength = DATE_SPACE_FULL_LENGTH;
         long partitionLength = calcPartitionLength(taskLength, doOnDateLength);
@@ -172,6 +172,12 @@ public class Timetable {
         return timetable;
     }
 
+    /**
+     * Prints the schedule for today to the user.
+     *
+     * @param taskList Array representation of tasks.
+     * @param ui User inferface.
+     */
     public static void showTodaySchedule(TaskList taskList, Ui ui) {
         ArrayList<Task> filteredTasks = taskList.getFilteredTasksByDate(LocalDate.now());
         Timetable timetable = prepareTimetable(LocalDate.now(), filteredTasks, ui);
@@ -220,8 +226,9 @@ public class Timetable {
                     + "while running the system.\n"
                     + "Please contact the developers for help.\n");
             LOGGER.log(Level.WARNING, "Input that caused the error: " + currentDate);
-            return null;
+            System.exit(0);
         }
+        return null;
     }
 
     /**
