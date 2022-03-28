@@ -13,6 +13,7 @@ public class ErrorMessages {
             + "st/[StartTime]\n"
             + "et/[EndTime]\n"
             + "m/[Mode]";
+
     public static final String ERROR_MISSING_VALUES = "Hi 1 or more parameters have missing values\n"
             + "The parameters that require values are:\n"
             + "n/[Name]\n"
@@ -50,7 +51,7 @@ public class ErrorMessages {
     public static final String ERROR_TIMETABLE_NOT_FOUND_TO_DELETE = "User and his Timetable not found";
     public static final String ERROR_EXCEPTION_NOT_HANDLED = "New exception found that is not handled. Logged this";
 
-    public static final String ERROR_OVERLAPPING_MEETING = "This meeting cannot be added as"
+    public static final String ERROR_OVERLAPPING_MEETING = "This meeting cannot be added as "
             + "some of the members cannot make it";
     public static final String ERROR_DUPLICATE_MEETING = "This meeting already exists. "
             + "This meeting will not be not added to the timetable.";
@@ -62,4 +63,31 @@ public class ErrorMessages {
     public static final String ERROR_NO_FREE_TIMESLOT = "Sorry, there is no timeslot that fits your requirement.";
 
     public static final String ERROR_DATA_SAVE_FAILED = "Error writing to file: MeetingJio.txt";
+
+    public static final String ERROR_UNSPECIFIED_LIST_CLEAR = "Please specify which timetable to Clear";
+    public static final String ERROR_MISSING_PARAMETERS_DELETE = "Hi 1 or more parameters are missing\n"
+            + "The required parameters are:\n"
+            + "n/[Name]\n"
+            + "i/[INDEX]\n";
+    public static final String ERROR_MISSING_VALUES_DELETE = "Hi 1 or more parameters are missing\n"
+            + "The required parameters are:\n"
+            + "n/[Name]\n"
+            + "i/[INDEX]\n";
+
+    public static final String ERROR_MISSING_PARAMETERS_ADD_MEETING = "Hi 1 or more parameters are missing\n"
+            + "The required parameters are:\n"
+            + "t/[Title]\n"
+            + "d/[Day]\n"
+            + "st/[StartTime]\n"
+            + "et/[EndTime]\n"
+            + "m/[Mode]";
+
+    public static final String ERROR_MISSING_VALUES_ADD_MEETING = "Hi 1 or more parameters have missing values\n"
+            + "The parameters that require values are:\n"
+            + "t/[Title]\n"
+            + "d/[Day]\n"
+            + "st/[StartTime]\n"
+            + "et/[EndTime]\n"
+            + "m/[Mode]";
+
 }

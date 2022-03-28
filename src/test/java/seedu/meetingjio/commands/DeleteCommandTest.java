@@ -20,10 +20,7 @@
 //     */
 //    @BeforeEach
 //    void setUp() throws DuplicateEventException, OverlappingEventException {
-//        Lesson lesson1 = new Lesson("John","CS2113","Friday",1230,1330,"online");
-//        Lesson lesson2 = new Lesson("John","CS2113","Friday",1400,1600,"physical");
-//        timetable.add(lesson1);
-//        timetable.add(lesson2);
+//
 //    }
 //
 //    /**

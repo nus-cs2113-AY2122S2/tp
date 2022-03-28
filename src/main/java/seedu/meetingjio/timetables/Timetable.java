@@ -4,6 +4,8 @@ import seedu.meetingjio.events.Event;
 import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
 
+import seedu.meetingjio.commands.FreeCommand;
+
 import java.util.ArrayList;
 
 public class Timetable {
@@ -11,9 +13,6 @@ public class Timetable {
     private final String name;
     private ArrayList<Event> list;
 
-    public static final int HOUR_PARAMETER_IN_24_HOURS = 100;
-    public static final int OFFSET = 480;
-    public static final int MINS_IN_1_HOUR = 60;
     public static final int BUSY = 1;
 
     public Timetable(String name) {
@@ -139,25 +138,23 @@ public class Timetable {
         this.list = list;
     }
 
+    /**
+     * For each event in the timetable, obtain its corresponding day, start time and end time in the appropriate format.
+     * Indicate 1 (BUSY) for every minute that the user is attending an event.
+     *
+     * @param busySlots 7 x 960 array representing the timeframe from 0800 to 2359 for each day. 1 indicates BUSY and 0
+     *                  indicates FREE
+     */
     public void populateBusySlots(int[][] busySlots) {
         for (int i = 0; i < list.size(); i++) {
             Event event = list.get(i);
             int numericDay = event.getDay();
-            int numericStartTime = convertTimeToMins(event.startTime);
-            int numericEndTime = convertTimeToMins(event.endTime);
+            int numericStartTime = FreeCommand.convertTimeToFreeArrayIndex(event.startTime);
+            int numericEndTime = FreeCommand.convertTimeToFreeArrayIndex(event.endTime);
             for (int j = numericStartTime; j < numericEndTime; j++) {
                 busySlots[numericDay - 1][j] = BUSY;
             }
         }
     }
-
-    private int convertTimeToMins(int time) {
-        int hours = time / HOUR_PARAMETER_IN_24_HOURS;
-        int minutes = time % HOUR_PARAMETER_IN_24_HOURS;
-        int timeInMinutes = hours * MINS_IN_1_HOUR + minutes;
-        timeInMinutes -= OFFSET;
-        return timeInMinutes;
-    }
-
 
 }

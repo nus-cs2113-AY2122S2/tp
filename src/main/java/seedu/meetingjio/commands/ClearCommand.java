@@ -8,11 +8,12 @@ import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
 
 import java.util.logging.Level;
+import static seedu.meetingjio.parser.Parser.logger;
 
-import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_TIMETABLE_NOT_FOUND_TO_DELETE;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST_CLEAR;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EXCEPTION_NOT_HANDLED;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_NON_EMPTY_LIST;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_TIMETABLE_NOT_FOUND_TO_DELETE;
 
 public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
@@ -40,7 +41,7 @@ public class ClearCommand extends Command {
                 return clearTimetableUser(user, masterTimetable);
             }
         } catch (MissingValueException mve) {
-            return ERROR_UNSPECIFIED_LIST;
+            return ERROR_UNSPECIFIED_LIST_CLEAR;
         }
 
     }
