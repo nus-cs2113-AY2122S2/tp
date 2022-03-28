@@ -24,6 +24,7 @@ public class HelpCommand extends Command {
                 + ListCommand.MESSAGE_USAGE + "\n\n"
                 + LimitCommand.MESSAGE_USAGE + "\n\n"
                 + HelpCommand.MESSAGE_USAGE + "\n\n"
+                + SummaryCommand.MESSAGE_USAGE + "\n\n"
                 + ExitCommand.MESSAGE_USAGE
         );
     }

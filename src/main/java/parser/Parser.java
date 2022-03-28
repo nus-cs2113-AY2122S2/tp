@@ -1,13 +1,6 @@
 package parser;
 
-import commands.AddCommand;
-import commands.Command;
-import commands.DeleteCommand;
-import commands.ExitCommand;
-import commands.HelpCommand;
-import commands.IncorrectCommand;
-import commands.ListCommand;
-import commands.LimitCommand;
+import commands.*;
 
 import exception.IllegalValueException;
 import exception.ParseException;
@@ -82,6 +75,9 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case SummaryCommand.COMMAND_WORD:
+            return new SummaryCommand();
 
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -160,8 +156,10 @@ public class Parser {
                 assert price != null : "price cannot be null";
                 assert date != null : "date cannot be null";
                 assert productType != null : "productType cannot be null";
-
-                addCmd.AddProductCommand(name, price, date, productType);
+                //if (productType=="fashion" || productType=="food" || productType == "accessory")
+                    addCmd.AddProductCommand(name, price, date, productType);
+               // else
+                    //return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             } catch (IllegalValueException e) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
