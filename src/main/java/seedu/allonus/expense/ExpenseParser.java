@@ -38,7 +38,7 @@ public class ExpenseParser {
     }
 
     /**
-     * Checks if the specified expense amount is a valid number/float and is non-negative.
+     * Checks if the specified expense amount is a valid integer/float and is non-negative.
      *
      * @param amount the expense amount entered by the user
      * @throws ExpenseAmountException if amount is negative
