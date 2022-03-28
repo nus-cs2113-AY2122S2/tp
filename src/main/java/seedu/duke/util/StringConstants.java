@@ -145,8 +145,7 @@ public class StringConstants {
             + "Format to view all available configs: option\n"
             + "Format to view details for a specific config option: option CONFIG_NAME\n"
             + "Format to set a config option: option CONFIG_NAME = NEW_VALUE\n\n"
-            + "Available configs:\n"
-            + Configuration.getAllConfigurationExplanations();
+            + "Available configs:\n";
 
     /**
      * For SaveCommand.
