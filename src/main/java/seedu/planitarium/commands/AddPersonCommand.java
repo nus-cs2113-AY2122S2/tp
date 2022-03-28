@@ -3,6 +3,7 @@
 package seedu.planitarium.commands;
 
 import seedu.planitarium.exceptions.PlanITariumException;
+import seedu.planitarium.global.Constants;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.Family;
 
@@ -14,19 +15,21 @@ public class AddPersonCommand extends Command {
     protected static final String PERSONLIST_NOT_NULL = "Personlist should not be null";
     protected String name;
     protected int group;
+    protected boolean isSilent;
 
     public AddPersonCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
         this.type = "AddPersonCMD";
         this.name = Parser.parseName(userInput);
         this.group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
+        this.isSilent = Constants.FOR_USER;
     }
 
     @Override
     public void execute() throws Exception {
         assert (name != null) : NAME_NOT_NULL;
         assert (family != null) : PERSONLIST_NOT_NULL;
-        family.addPerson(name, group);
+        family.addPerson(group, name, isSilent);
     }
 
 

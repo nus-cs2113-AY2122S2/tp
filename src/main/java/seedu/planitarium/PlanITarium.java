@@ -6,6 +6,7 @@ import java.util.Scanner;
 import seedu.planitarium.commands.Command;
 import seedu.planitarium.commands.CommandFactory;
 import seedu.planitarium.exceptions.PlanITariumException;
+import seedu.planitarium.global.Help;
 import seedu.planitarium.person.Family;
 import seedu.planitarium.global.UI;
 
@@ -16,7 +17,6 @@ public class PlanITarium {
     protected CommandFactory commandFactory = new CommandFactory();
     protected static ProjectLogger logger = new ProjectLogger(PlanITarium.class.getName(), "PlanITarium.log");
     protected UI ui = new UI();
-   
 
     public static void main(String[] args) {
         initialisePlanitarium();
@@ -46,6 +46,7 @@ public class PlanITarium {
      */
     private static void initialisePlanitarium() {
         logger.log(Level.INFO, "Logger initialised");
+        Help.initialiseHelp();
         UI.printWelcomeMessage();
     }
 }

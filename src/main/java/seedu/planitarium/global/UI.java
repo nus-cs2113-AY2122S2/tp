@@ -38,4 +38,13 @@ public class UI {
         System.out.println(WELCOME_MSG);
         System.out.println(HORI_LINE);
     }
+
+    public static void printHelpMsg() {
+        System.out.println(HORI_LINE);
+        for(String Commands: Help.CommandSummary) {
+            System.out.println(Commands);
+            System.out.println("\n");
+        }
+        System.out.println(HORI_LINE);
+    }
 }

@@ -25,7 +25,8 @@ public class CommandFactory {
     protected static final String DELETE_SPEND_CMD = "deleteout";
     protected static final String EDIT_SPEND_CMD = "editout";
     protected static final String CALC_REMAIN = "remain";
-    protected static final String LIST = "list";
+    protected static final String LIST_CMD = "list";
+    protected static final String HELP_CMD = "help";
     protected static final String LIST_CAT_CMD = "listcat";
     protected static final String EXIT = "bye";
     protected Command newCommand;
@@ -36,44 +37,41 @@ public class CommandFactory {
     }
 
     public Command getCommand(String userInput, Family family) throws PlanITariumException {
-        try {
-            switch (Parser.parseKeyword(userInput)) {
-            case ADD_PERSON_CMD:
-                newCommand = new AddPersonCommand(userInput, family);
-                break;
-            case DELETE_PERSON_CMD:
-                newCommand = new DeletePersonCommand(userInput, family);
-                break;
-            case ADD_INCOME_CMD:
-            case ADD_SPENT_CMD:
-                newCommand = new AddRecordCommand(userInput, family);
-                break;
-            case DELETE_INCOME_CMD:
-            case DELETE_SPEND_CMD:
-                newCommand = new DeleteRecordCommand(userInput, family);
-                break;
-            case CALC_REMAIN:
-                newCommand = new RemainCommand(userInput, family);
-                break;
-            case LIST:
-                newCommand = new ListCommand(userInput, family);
-                break;
-            case EDIT_INCOME_CMD:
-            case EDIT_SPEND_CMD:
-                newCommand = new EditRecordCommand(userInput, family);
-            case LIST_CAT_CMD:
-                newCommand = new ListCategoriesCommand(userInput, family);
-            case EXIT:
-                newCommand = new ExitCommand(userInput, family);
-                break;
-            default:
-                throw new UnknownInputException(CommandFactory.class.getSimpleName());
-            }
-            logger.log(Level.INFO, String.format(LOG_EXECUTE_CMD, newCommand.getType()));
-            return newCommand;
-        } catch (PlanITariumException e) {
-            throw e;
+        switch (Parser.parseKeyword(userInput)) {
+        case ADD_PERSON_CMD:
+            newCommand = new AddPersonCommand(userInput, family);
+            break;
+        case DELETE_PERSON_CMD:
+            newCommand = new DeletePersonCommand(userInput, family);
+            break;
+        case ADD_INCOME_CMD:
+        case ADD_SPENT_CMD:
+            newCommand = new AddRecordCommand(userInput, family);
+            break;
+        case DELETE_INCOME_CMD:
+        case DELETE_SPEND_CMD:
+            newCommand = new DeleteRecordCommand(userInput, family);
+            break;
+        case LIST_CMD:
+            newCommand = new ListCommand(userInput, family);
+            break;
+        case EDIT_INCOME_CMD:
+        case EDIT_SPEND_CMD:
+            newCommand = new EditRecordCommand(userInput, family);
+            break;
+        case LIST_CAT_CMD:
+            newCommand = new ListCategoriesCommand(userInput, family);
+            break;
+        case HELP_CMD:
+            newCommand = new HelpCommand(userInput, family);
+        case EXIT:
+            newCommand = new ExitCommand(userInput, family);
+            break;
+        default:
+            throw new UnknownInputException(CommandFactory.class.getSimpleName());
         }
+        logger.log(Level.INFO, String.format(LOG_EXECUTE_CMD, newCommand.getType()));
+        return newCommand;
     }
 
 }
