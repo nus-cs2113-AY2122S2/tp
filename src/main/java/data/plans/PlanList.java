@@ -230,6 +230,9 @@ public class PlanList {
 
     /**
      * Prints the plan details, workouts in the plan.
+     *
+     * @param userArgument The argument entered by user, that is, the index of plan to view details.
+     * @param ui An instance of the UI class.
      * @throws NumberFormatException If index of plan that user entered is not an integer.
      * @throws InvalidPlanException If index of plan is out of range.
      */
