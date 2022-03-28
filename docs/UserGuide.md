@@ -314,10 +314,10 @@ Creates a new plan, which consists of a plan name and the workout(s) added.
 
 Format: `plan /new <plan name> /workouts <workout number(s) separated by comma>`
 
-| Parameters                               | Description                                                                                                                                                                                              |
-|------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<plan name>`                            | The name of the plan. Plan name must be unique.                                                                                                                                                          |
-| `<workout number(s) separated by comma>` | The workout(s) that will be added in this new plan. <ul><li>Maximum number of workouts per plan is 10.</li><li>Workouts to be added can be repeated.</li><li>`workout /list` to view workouts.</li></ul> |
+| Parameters                               | Description                                                                                                                                                                              |
+|------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `<plan name>`                            | The name of the plan. Plan name must be unique.                                                                                                                                          |
+| `<workout number(s) separated by comma>` | The workout(s) that will be added in this new plan. <br>- Maximum number of workouts per plan is 10.<br>- Workouts to be added can be repeated.<br>- `workout /list` to view workouts.   |
 
 **Example**<br>
 The workout list upon entering `workout /list`, contains the following workouts:
