@@ -137,8 +137,7 @@ public class Manager {
             isTerminated = true;
             break;
         default:
-            System.out.println(commandWord);
-            break;
+            throw new HalpmiException("Invalid Command given!");
         }
         return status;
     }
