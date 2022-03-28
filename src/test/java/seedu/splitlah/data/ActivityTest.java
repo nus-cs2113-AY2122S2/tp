@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class ActivityTest {
-    
+
     Manager manager = new Manager();
     Session session;
     Activity activityOne;
@@ -61,18 +61,29 @@ class ActivityTest {
         }
     }
 
+    /**
+     * Checks if -1 is returned when an Activity object with a smaller unique activity identifier
+     * is compared against an Activity object with a larger unique activity identifier.
+     */
     @Test
     void compareTo_smallerActivityIdInput_returnsNegativeOne() {
         int compareResults = activityOne.compareTo(activityTwo);
         assertEquals(-1, compareResults);
     }
 
+    /**
+     * Checks if 1 is returned when an Activity object with a smaller unique activity identifier
+     * is compared against an Activity object with a larger unique activity identifier.
+     */
     @Test
     void compareTo_smallerActivityIdInput_returnsOne() {
-        int compareResults = activityOne.compareTo(activityTwo);
-        assertEquals(-1, compareResults);
+        int compareResults = activityTwo.compareTo(activityOne);
+        assertEquals(1, compareResults);
     }
 
+    /**
+     * Checks if the correct format of the String representing the Activity object is returned.
+     */
     @Test
     void toString_activityOne_returnsCorrectFormat() {
         String activityString = activityOne.toString();
