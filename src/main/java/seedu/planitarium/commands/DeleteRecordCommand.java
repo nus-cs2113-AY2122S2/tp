@@ -1,5 +1,6 @@
 package seedu.planitarium.commands;
 
+import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.global.Constants;
 import seedu.planitarium.parser.Parser;
@@ -12,6 +13,10 @@ import seedu.planitarium.person.PersonList;
  * person in the list.
  */
 public class DeleteRecordCommand extends Command {
+    private static final String className = CommandFactory.class.getSimpleName();
+    private static final String fileName = className + ".log";
+    private static final ProjectLogger logger = new ProjectLogger(className, fileName);
+
     protected static final String DELETE_INCOME_CMD = "deletein";
     protected static final String DELETE_SPEND_CMD = "deleteout";
     protected String keyword;

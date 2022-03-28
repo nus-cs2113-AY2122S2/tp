@@ -2,23 +2,33 @@
 
 package seedu.planitarium.commands;
 
+import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.global.Constants;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.Family;
+
+import java.util.logging.Level;
 
 /**
  * Executes the add command and add an income or an expenditure record to a particular
  * person in the list.
  */
 public class AddRecordCommand extends Command {
+    private static final String className = CommandFactory.class.getSimpleName();
+    private static final String fileName = className + ".log";
+    private static final ProjectLogger logger = new ProjectLogger(className, fileName);
+
     protected static final String ADD_INCOME_CMD = "addin";
     protected static final String ADD_SPENT_CMD = "addout";
-    protected static final String DESCRIPTION_NOT_NULL = "Description should not be empty";
-    protected static final String INPUT_NOT_NULL = "Input should not be empty";
-    protected static final String KEYWORD_NOT_NULL = "Keywords should not be empty";
-    protected static final String FAMILY_NOT_NULL = "Family should not be null";
-    protected static final String USER_INDEX_NOT_VALID = "User index should be valid";
+
+    protected static final String EXPEND = "expenditure";
+    protected static final String INCOME = "income";
+    protected static final String LOG_ADDRECORD_INFO = "A record of '%s' in category '%d' is going to " +
+            "be added to someone with uid '%d' in group '%d'";
+    protected static final String LOG_EXECUTE_INFO = "An '%s' record of '%s' with $'%.2f' in category '%d' " +
+            "is going to be added to someone with uid '%d' in group '%d'";
+
     protected String keyword;
     protected String description;
     protected double amount;
@@ -39,7 +49,7 @@ public class AddRecordCommand extends Command {
         category = Parser.getValidCategoryIndex(Parser.parseCategoryIndex(userInput));
         this.isSilent = Constants.FOR_USER;
         assert (uid < 1) : Constants.USER_INDEX_NOT_VALID;
-
+        logger.log(Level.INFO, String.format(LOG_ADDRECORD_INFO, description, category, uid, group));
     }
 
     @Override
@@ -52,12 +62,17 @@ public class AddRecordCommand extends Command {
         case ADD_INCOME_CMD:
             amount = Parser.getValidMoney(Parser.parseIncome(userInput));
             family.addIncome(uid, group, description, amount, category, isPermanent, isSilent);
+            logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, INCOME, description, amount, category,
+                    uid, group));
             break;
         case ADD_SPENT_CMD:
             amount = Parser.getValidMoney(Parser.parseExpenditure(userInput));
             family.addExpend(uid, group, description, amount, category, isPermanent, isSilent);
+            logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, EXPEND, description, amount, category,
+                    uid, group));
             break;
         default:
+            logger.log(Level.WARNING, Constants.LOG_ERROR_INFO);
             throw new PlanITariumException(AddRecordCommand.class.getSimpleName());
         }
 

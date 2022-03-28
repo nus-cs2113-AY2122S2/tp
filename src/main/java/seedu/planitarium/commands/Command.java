@@ -13,7 +13,6 @@ public class Command {
     protected UI ui = new UI();
     protected Family family;
 
-
     public Command(String userInput, Family family) {
         this.userInput = userInput;
         this.family = family;

@@ -30,7 +30,8 @@ public class CommandFactory {
     protected static final String EXIT = "bye";
     protected Command newCommand;
 
-    protected static final String LOG_EXECUTE_CMD = "'%s' command is returned";
+    protected static final String LOG_RETURN_CMD = "'%s' command is returned.";
+    protected static final String LOG_ERROR_MSG = "Invalid input: '%s'.";
 
     public CommandFactory() {
     }
@@ -67,9 +68,10 @@ public class CommandFactory {
             newCommand = new ExitCommand(userInput, family);
             break;
         default:
+            logger.log(Level.WARNING, String.format(LOG_ERROR_MSG, userInput));
             throw new UnknownInputException(CommandFactory.class.getSimpleName());
         }
-        logger.log(Level.INFO, String.format(LOG_EXECUTE_CMD, newCommand.getType()));
+        logger.log(Level.INFO, String.format(LOG_RETURN_CMD, newCommand.getType()));
         return newCommand;
     }
 

@@ -54,4 +54,6 @@ public class Constants {
     public static final String FAMILY_NOT_NULL = "Family should not be null";
     public static final String USER_INDEX_NOT_VALID = "User index should be valid";
 
+    // For Command logging
+    public static final String LOG_ERROR_INFO = "Unknown error occurred in execution";
 }

@@ -1,10 +1,15 @@
 package seedu.planitarium.commands;
 
+import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.Family;
 
 public class EditRecordCommand extends Command{
+    private static final String className = CommandFactory.class.getSimpleName();
+    private static final String fileName = className + ".log";
+    private static final ProjectLogger logger = new ProjectLogger(className, fileName);
+
     protected static final String EDIT_INCOME_CMD = "editin";
     protected static final String EDIT_SPENT_CMD = "editout";
     protected static final String DESCRIPTION_NOT_NULL = "Description should not be empty";

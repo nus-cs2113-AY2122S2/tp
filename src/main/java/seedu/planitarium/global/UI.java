@@ -40,11 +40,13 @@ public class UI {
     }
 
     public static void printHelpMsg() {
-        System.out.println(HORI_LINE);
         for(String Commands: Help.CommandSummary) {
             System.out.println(Commands);
             System.out.println("\n");
         }
+    }
+
+    public static void printHoriLine() {
         System.out.println(HORI_LINE);
     }
 }

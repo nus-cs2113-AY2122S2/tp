@@ -11,7 +11,6 @@ Box " "#WHITE
     participant ":AddRecordCommand" as AddRecordCommand LOGIC_COLOR_T4
     participant ":DeleteREcordCommand" as DeleteRecordCommand LOGIC_COLOR_T4
     participant ":EditRecordCommand" as EditRecordCommand LOGIC_COLOR_T4
-    participant ":RemainCommand" as RemainCommand LOGIC_COLOR_T4
     participant ":ListCommand" as ListCommand LOGIC_COLOR_T4
     participant ":ListCategoriesCommand" as ListCategoriesCommand LOGIC_COLOR_T4
     participant ":SearchCommand" as SearchCommand LOGIC_COLOR_T4
@@ -57,12 +56,6 @@ else Edit Record
     activate EditRecordCommand
     EditRecordCommand --> CommandFactory: :EditRecordCommand
     deactivate EditRecordCommand
-else Remain
-    create RemainCommand
-    CommandFactory -> RemainCommand: new(userInput, family)
-    activate RemainCommand
-    RemainCommand --> CommandFactory: :RemainCommand
-    deactivate RemainCommand
 else List
     create ListCommand
     CommandFactory -> ListCommand: new(userInput, family)

@@ -11,7 +11,7 @@ public class Help {
     /**
      * Initialize an array to print help message
      */
-    public static void initialiseHelp(){
+    public static void initialiseHelp() {
         CommandSummary = new ArrayList<String>();
         CommandSummary.add(Constants.ADD_PERSON);
         CommandSummary.add(Constants.DELETE_PERSON);
