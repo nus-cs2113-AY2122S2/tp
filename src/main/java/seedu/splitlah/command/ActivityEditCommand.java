@@ -230,7 +230,8 @@ public class ActivityEditCommand extends Command {
             ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
             addAllActivityCost(involvedPersonList, personPaid, activityId);
             Activity editedActivity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
-            session.removeActivity(activityId);
+            Command activityDeleteCommand = new ActivityDeleteCommand(sessionId, activityId);
+            activityDeleteCommand.run(manager);
             session.addActivity(editedActivity);
             manager.saveProfile();
             ui.printlnMessageWithDivider(COMMAND_SUCCESS + editedActivity);
