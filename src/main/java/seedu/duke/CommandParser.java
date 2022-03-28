@@ -14,9 +14,10 @@ public class CommandParser {
     private static final String UPDATE_ITEM_PAX_COMMAND = "Update Item Pax ";
     private static final String ADD_HOUSEKEEPER_COMMAND = "Add Housekeeper ";
     private static final String ADD_PERFORMANCE_COMMAND = "add housekeeper performance";
+    private static final String VIEW_PERFORMANCES_COMMAND = "view housekeeper performances";
     private static final String ADD_AVAILABILITY_COMMAND = "Availability ";
-    public static final String ADD_SATISFACTION_COMMAND = "Add Satisfaction";
-    public static final String VIEW_SATISFACTIONS_COMMAND = "View Satisfactions";
+    public static final String ADD_SATISFACTION_COMMAND = "add satisfaction";
+    public static final String VIEW_SATISFACTIONS_COMMAND = "view satisfactions";
     public static final String AVERAGE_SATISFACTION_COMMAND = "average satisfaction";
     private static final String CHECK_IN = "check in";
     private static final String CHECK_OUT = "check out";
@@ -26,6 +27,10 @@ public class CommandParser {
     private static final String CHECK_BY_CATEGORY = "check category";
     private static final String ASSIGN_HOUSEKEEPER = "Assign";
     private static final String VIEW_HOUSEKEEPER_COMMAND = "View Recorded Housekeeper";
+    private static final String VIEW_AVAILABLE_HOUSEKEEPER_DAY = "get available on ";
+    private static final String RESET_AVAILABILITY = "is a new week";
+    private static final String DELETE_PROFILE = "delete housekeeper ";
+    private static final String UPDATE_AGE_BY_ONE = "is a new year";
 
 
     /**
@@ -63,6 +68,8 @@ public class CommandParser {
         } else if (commandString.startsWith(ADD_PERFORMANCE_COMMAND)) {
             commandStringWithoutCommand = commandString.replace(ADD_PERFORMANCE_COMMAND, "");
             userCommand = new AddHousekeeperPerformanceCommand(commandStringWithoutCommand);
+        } else if (commandString.startsWith(VIEW_PERFORMANCES_COMMAND)) {
+            userCommand = new ViewHousekeeperPerformancesCommand();
         } else if (commandString.startsWith(CHECK_IN)) {
             commandStringWithoutCommand = commandString.replace(CHECK_IN, "");
             userCommand = new CheckInCommand(commandStringWithoutCommand);
@@ -91,6 +98,16 @@ public class CommandParser {
         } else if (commandString.startsWith(ASSIGN_HOUSEKEEPER)) {
             commandStringWithoutCommand = commandString.replace(ASSIGN_HOUSEKEEPER, "");
             userCommand = new AssignHousekeeperCommand(commandStringWithoutCommand);
+        } else if (commandString.startsWith(VIEW_AVAILABLE_HOUSEKEEPER_DAY)) {
+            commandStringWithoutCommand = commandString.replace(VIEW_AVAILABLE_HOUSEKEEPER_DAY, "");
+            userCommand = new GetAvailableHousekeeper(commandStringWithoutCommand);
+        } else if (commandString.startsWith(RESET_AVAILABILITY)) {
+            userCommand = new ResetAvailabilityCommand();
+        } else if (commandString.startsWith(DELETE_PROFILE)) {
+            commandStringWithoutCommand = commandString.replace(DELETE_PROFILE, "");
+            userCommand = new DeleteHousekeeperCommand(commandStringWithoutCommand);
+        } else if (commandString.startsWith(UPDATE_AGE_BY_ONE)) {
+            userCommand = new AgeIncreaseCommand();
         } else {
             throw new WrongCommandException("Error! Invalid Command.");
         }

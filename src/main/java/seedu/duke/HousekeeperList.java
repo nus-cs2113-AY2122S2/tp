@@ -9,7 +9,10 @@ import static java.util.stream.Collectors.toList;
  */
 public class HousekeeperList {
     private ArrayList<Housekeeper> housekeeperList;
-    private Ui ui = new Ui();
+    private static final int ONE_HOUSEKEEPER = 1;
+    private ArrayList<Housekeeper> housekeeperExceedValidAgeList = new ArrayList<>();
+    private static final int ONE_YEAR = 1;
+    private static final int MAX_AGE_ACCEPTED = 60;
 
     public HousekeeperList() {
         ArrayList<Housekeeper> housekeeperList = new ArrayList<>();
@@ -35,7 +38,7 @@ public class HousekeeperList {
         ArrayList<Housekeeper> housekeeperFound = (ArrayList<Housekeeper>) housekeeperList.stream()
                 .filter((t) -> t.getName().toLowerCase().equals(convertNameToLowerCase))
                 .collect(toList());
-        if (housekeeperFound.size() >= 1) {
+        if (housekeeperFound.size() >= ONE_HOUSEKEEPER) {
             return true;
         }
         return false;
@@ -54,12 +57,28 @@ public class HousekeeperList {
     }
 
     /**
+     * Store a list of Housekeeper valid on day user is querying.
+     *
+     * @param day Input day user is interested to view.
+     * @return List of found housekeeper.
+     */
+    public ArrayList<Housekeeper> getAvailableHousekeeperByDay(int day) {
+        ArrayList<Housekeeper> foundList = new ArrayList<>();
+        for (Housekeeper housekeeper : housekeeperList) {
+            if (housekeeper.isAvailableOn(day)) {
+                foundList.add(housekeeper);
+            }
+        }
+        return foundList;
+    }
+
+    /**
      * Method to find the housekeeper name in the records and add their availability into the records.
      *
-     * @param name         Housekeeper Name
-     * @param availability Housekeeper's availability to be added in records
+     * @param name         Housekeeper Name.
+     * @param availability Housekeeper's availability to be added in records.
      */
-    public void searchAvailability(String name, String availability) throws UserExistException {
+    public void searchAvailability(String name, String availability) throws UserDoesNotExistException {
         boolean isExist = false;
         String nameConvertLowerCase = name.toLowerCase();
         for (int i = 0; i < housekeeperList.size(); i++) {
@@ -71,7 +90,67 @@ public class HousekeeperList {
             }
         }
         if (!isExist) {
-            throw new UserExistException();
+            throw new UserDoesNotExistException();
         }
     }
+
+    /**
+     * This method calls housekeeper's method to set each housekeeper availability as false.
+     */
+    public void resetAvailability() {
+        for (Housekeeper housekeeper : housekeeperList) {
+            housekeeper.setNullAvailability();
+        }
+    }
+
+    /**
+     * Finds the housekeeper's index in the list.
+     *
+     * @param name Housekeeper to be remove.
+     * @return Index of the housekeeper to be remove in the list.
+     */
+    public int getHousekeeperRemove(String name) {
+        int index = 0;
+        int i = 0;
+        String nameLowerCase = name.trim().toLowerCase();
+        for (Housekeeper housekeeper : housekeeperList) {
+            String nameForCompare = housekeeper.getName().toLowerCase();
+            if (nameForCompare.equals(nameLowerCase)) {
+                index = i;
+            }
+            i += 1;
+        }
+        return index;
+    }
+
+    public void removeHousekeeper(int housekeeperToRemoveIndex) {
+        getHousekeeperList().remove(housekeeperToRemoveIndex);
+    }
+
+    /**
+     * Increases each housekeeper's age by one and records housekeeper who are over the age limit into another list.
+     */
+    public void increaseAllAgeByOne() {
+        housekeeperExceedValidAgeList.clear();
+        for (Housekeeper housekeeper : housekeeperList) {
+            int increasedAge = housekeeper.getAge() + ONE_YEAR;
+            if (increasedAge > MAX_AGE_ACCEPTED) {
+                housekeeperExceedValidAgeList.add(housekeeper);
+            } else {
+                housekeeper.setAge(increasedAge);
+            }
+        }
+    }
+
+    public ArrayList<Housekeeper> getHousekeeperExceedValidAgeList() {
+        return housekeeperExceedValidAgeList;
+    }
+
+    public void deleteOverAgeHousekeeper() {
+        for (Housekeeper housekeeper : housekeeperExceedValidAgeList) {
+            int indexToRemove = getHousekeeperRemove(housekeeper.getName());
+            removeHousekeeper(indexToRemove);
+        }
+    }
+
 }

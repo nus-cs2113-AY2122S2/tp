@@ -1,10 +1,10 @@
 Error! Invalid Command.
 Error! Invalid Command.
 Error! Invalid Command.
-Error! Invalid Command -> Availability NAME @ INT AGE
+Error! Invalid Command -> Add Housekeeper NAME @ INT AGE
 Error! The user is underage(<21) and not allowed to work.
 Error! AGE must be integer.
-Error! Invalid Command -> Availability NAME @ INT AGE
+Error! Invalid Command -> Add Housekeeper NAME @ INT AGE
 ======== Housekeeper List ========
 ======== End of the list ========
 The item and its pax has been added to the list of items in the inventory.
@@ -21,14 +21,12 @@ Error! This person has already been recorded.
 Error! The user is underage(<21) and not allowed to work.
 1. Item Name: Toilet Roll Item Pax: 15
 2. Item Name: Spoon Item Pax: 2
-Added sus availability into records
-Error! User does not exist.
-Added jane availability into records
-Error! User does not exist.
-Added tom availability into records
-Error! Invalid Command -> Availability NAME @ M,T,W,T,F,S,S
+Error! Day give must be an Integer between 1 and 7.
+Error! Day give must be an Integer between 1 and 7.
+Error! Day give must be an Integer between 1 and 7.
+Error! Invalid Command -> Availability NAME @ 1,2
 ======== Housekeeper List ========
-1. [ Tom ]: 33, T
+1. [ Tom ]: 33, <Enter Availability>
 ======== End of the list ========
 The pax of Toilet Roll has been updated to 5.
 Error! Item Pax is invalid.
@@ -36,12 +34,86 @@ Error! Item Pax cannot be empty.
 Error! Item Name cannot be empty.
 Error! Invalid Command.
 Error! Item not found in inventory.
-Error! Invalid Command -> Availability NAME @ INT AGE
-Error! Invalid Command -> Availability NAME @ INT AGE
-Error! Invalid Command -> Availability NAME @ M,T,W,T,F,S,S
-Error! Invalid Command -> Availability NAME @ M,T,W,T,F,S,S
+Error! Invalid Command -> Add Housekeeper NAME @ INT AGE
+Error! Invalid Command -> Add Housekeeper NAME @ INT AGE
+Error! Invalid Command -> Availability NAME @ 1,2
+Error! Invalid Command -> Availability NAME @ 1,2
 Toilet Roll has been removed from the Item List.
 There are currently 1 items within the Item List.
 Error! Item not found in inventory.
 Error! Invalid Command.
+Noted!
+[ Sall ]: 33, <Enter Availability>
+Added Sall availability into records
+Noted!
+[ joh ]: 43, <Enter Availability>
+Added joh availability into records
+Noted!
+[ sis ]: 43, <Enter Availability>
+Noted!
+[ Lucy ]: 34, <Enter Availability>
+Error! Day give must be an Integer between 1 and 7.
+======== Housekeeper List ========
+1. [ Tom ]: 33, <Enter Availability>
+2. [ Sall ]: 33, ( Monday Tuesday Wednesday )
+3. [ joh ]: 43, ( Monday Tuesday )
+4. [ sis ]: 43, <Enter Availability>
+5. [ Lucy ]: 34, <Enter Availability>
+======== End of the list ========
+Noted!
+[ JANE ]: 34, <Enter Availability>
+Noted!
+[ JANEy ]: 36, <Enter Availability>
+Added Jane availability into records
+======== Housekeeper List ========
+1. [ Tom ]: 33, <Enter Availability>
+2. [ Sall ]: 33, ( Monday Tuesday Wednesday )
+3. [ joh ]: 43, ( Monday Tuesday )
+4. [ sis ]: 43, <Enter Availability>
+5. [ Lucy ]: 34, <Enter Availability>
+6. [ JANE ]: 34, ( Friday Saturday )
+7. [ JANEy ]: 36, <Enter Availability>
+======== End of the list ========
+======== Tuesday List ========
+1. Sall
+2. joh
+======== End of the list ========
+======== Wednesday List ========
+1. Sall
+======== End of the list ========
+======== Thursday List ========
+TAKE NOTE! NO ONE IS AVAILABLE!!
+======== End of the list ========
+======== Friday List ========
+1. JANE
+======== End of the list ========
+======== Housekeeper List ========
+1. [ Tom ]: 33, <Enter Availability>
+2. [ Sall ]: 33, ( Monday Tuesday Wednesday )
+3. [ joh ]: 43, ( Monday Tuesday )
+4. [ sis ]: 43, <Enter Availability>
+5. [ Lucy ]: 34, <Enter Availability>
+6. [ JANE ]: 34, ( Friday Saturday )
+7. [ JANEy ]: 36, <Enter Availability>
+======== End of the list ========
+Housekeeper's availability has been reset!
+======== Housekeeper List ========
+1. [ Tom ]: 33, <Enter Availability>
+2. [ Sall ]: 33, <Enter Availability>
+3. [ joh ]: 43, <Enter Availability>
+4. [ sis ]: 43, <Enter Availability>
+5. [ Lucy ]: 34, <Enter Availability>
+6. [ JANE ]: 34, <Enter Availability>
+7. [ JANEy ]: 36, <Enter Availability>
+======== End of the list ========
+Added Jane availability into records
+======== Housekeeper List ========
+1. [ Tom ]: 33, <Enter Availability>
+2. [ Sall ]: 33, <Enter Availability>
+3. [ joh ]: 43, <Enter Availability>
+4. [ sis ]: 43, <Enter Availability>
+5. [ Lucy ]: 34, <Enter Availability>
+6. [ JANE ]: 34, ( Friday Saturday )
+7. [ JANEy ]: 36, <Enter Availability>
+======== End of the list ========
 see u again!

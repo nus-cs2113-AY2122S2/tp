@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -8,12 +9,9 @@ import java.util.Scanner;
  * as well as reading in the user inputs .
  */
 public class Ui {
-    private Scanner in;
+    private Scanner in = new Scanner(System.in);
     private static final int ARRAY_INDEX_OFFSET = 1;
 
-    public Ui() {
-        in = new Scanner(System.in);
-    }
 
     /**
      * Returns a string containing the user input.
@@ -79,7 +77,70 @@ public class Ui {
         for (int i = 0; i < housekeeperList.getTotalHousekeeper(); i++) {
             System.out.println((i + 1) + ". " + housekeeperList.getHousekeeper(i));
         }
-        System.out.println("======== End of the list ========");
+        printMessage("======== End of the list ========");
+    }
+
+    public void printHousekeeperListReset(HousekeeperList housekeeperList) {
+        printMessage("Housekeeper's availability has been reset!");
+        printHousekeeperList(housekeeperList);
+    }
+
+    public void printFoundHousekeeperList(ArrayList<Housekeeper> housekeeperPrintList, int dayInteger) {
+        String day = getDayInString(dayInteger);
+
+        printMessage("======== " + day + " List ========");
+        if (housekeeperPrintList.isEmpty()) {
+            printMessage("TAKE NOTE! NO ONE IS AVAILABLE!!");
+        }
+        int i = 1;
+        for (Housekeeper housekeeper : housekeeperPrintList) {
+            System.out.println(i + ". " + housekeeper.getName());
+            i += 1;
+        }
+        printMessage("======== End of the list ========");
+    }
+
+    private String getDayInString(int dayInteger) {
+        String day;
+        switch (dayInteger) {
+        case 1:
+            day = "Monday";
+            break;
+        case 2:
+            day = "Tuesday";
+            break;
+        case 3:
+            day = "Wednesday";
+            break;
+        case 4:
+            day = "Thursday";
+            break;
+        case 5:
+            day = "Friday";
+            break;
+        case 6:
+            day = "Saturday";
+            break;
+        case 7:
+            day = "Sunday";
+            break;
+        default:
+            day = "None of Day";
+        }
+        return day;
+    }
+
+    public void printOverAgeList(ArrayList<Housekeeper> housekeeperPrintList) {
+        printMessage("======== Age Limit Exceed List ========");
+        if (housekeeperPrintList.isEmpty()) {
+            printMessage("Everyone is within age limit");
+        }
+        int i = 1;
+        for (Housekeeper housekeeper : housekeeperPrintList) {
+            System.out.println(i + ". " + housekeeper);
+            i += 1;
+        }
+        printMessage("======== End of the list ========");
     }
 
     /**
@@ -115,7 +176,7 @@ public class Ui {
                                                                      HousekeeperPerformance housekeeperPerformance) {
         System.out.println("The HousekeeperPerformance instance " + housekeeperPerformance.getName() + ": "
                 + housekeeperPerformance.getRating() + " has been added to the list of housekeeper performances.");
-        System.out.printf("There are currently %d items within the inventory.\n", housekeeperPerformanceList.getSize());
+        System.out.printf("There are currently %d recorded performances.\n", housekeeperPerformanceList.getSize());
     }
 }
 

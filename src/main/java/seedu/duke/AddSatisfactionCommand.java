@@ -28,7 +28,7 @@ public class AddSatisfactionCommand extends Command {
     public AddSatisfactionCommand(String userInput) throws HotelLiteManagerException {
         userInput = userInput.toLowerCase();
         if (!userInput.contains("/")) {
-            logger.log(Level.WARNING, "A '/' character is needed to separate the housekeeper's name "
+            logger.log(Level.WARNING, "A '/' character is needed to separate the customer's name "
                     + "from their rating.");
             throw new InvalidCommandException();
         }
@@ -51,9 +51,14 @@ public class AddSatisfactionCommand extends Command {
      */
     private String extractCustomerName(String userInput) throws HotelLiteManagerException {
         String[] splitInput = userInput.split("/");
-        String customerName = splitInput[0].trim();
-        if (customerName.isEmpty()) {
-            throw new EmptySatisfactionCustomerException();
+        String customerName = "";
+        try {
+            customerName = splitInput[0].trim();
+            if (customerName.isEmpty()) {
+                throw new EmptySatisfactionCustomerException();
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new EmptySatisfactionValueException();
         }
         return customerName;
     }
