@@ -133,4 +133,18 @@ public class ItemList {
         }
         return listOfMatchingItems;
     }
+
+    public ItemList findItemsWithZeroPaxInList() {
+        ItemList listOfMatchingItems = new ItemList();
+        Item item;
+        int itemPax;
+        for (int itemIndex = 0; itemIndex < listOfItems.size(); itemIndex++) {
+            item = listOfItems.get(itemIndex);
+            itemPax = item.getPax();
+            if (itemPax == 0) {
+                listOfMatchingItems.addItemToList(item);
+            }
+        }
+        return listOfMatchingItems;
+    }
 }

@@ -20,6 +20,7 @@ Error! Item Pax cannot be empty.
 Error! Item Name cannot be empty.
 Error! Invalid Command.
 Error! Item not found in inventory.
+The pax of Spoon has been updated to 0.
 Error! Invalid Command.
 Error! Invalid Command.
 Toilet Roll has been removed from the Item List.
@@ -132,5 +133,7 @@ Error! Item Name cannot be empty.
 Error! Item not found in inventory.
 Error! Invalid Command.
 1. Item Name: Fork Item Pax: 15
-2. Item Name: Premium Spoon Item Pax: 2
+2. Item Name: Premium Spoon Item Pax: 0
+1. Item Name: Premium Spoon Item Pax: 0
+Error! Invalid Command.
 see u again!
