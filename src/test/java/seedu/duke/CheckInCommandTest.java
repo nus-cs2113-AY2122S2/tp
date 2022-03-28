@@ -29,7 +29,7 @@ class CheckInCommandTest {
                 expectedRoom = room;
             }
         }
-        assertEquals("Queen\t\t301\t\t\t\t3\t\tOccupied", expectedRoom.toString());
+        assertEquals("Queen\t\t301\t\t\t 3\t\t\tOccupied", expectedRoom.toString());
 
     }
 
