@@ -70,4 +70,13 @@ public class RouteManager {
         }
         return false;
     }
+
+    public Route FindRoute(String fid) {
+        for (Route route: routes) {
+            if (route.getFlightID().equals(fid)) {
+                return route;
+            }
+        }
+        return null;
+    }
 }
