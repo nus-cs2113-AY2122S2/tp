@@ -8,6 +8,7 @@ import commands.ExitCommand;
 import commands.HelpCommand;
 import commands.ExerciseCommand;
 import commands.PlanCommand;
+import commands.ScheduleCommand;
 import data.exercises.ExerciseList;
 import data.plans.PlanList;
 import data.schedule.DayList;
@@ -89,6 +90,19 @@ class ParserTest {
         assertTrue(parser.parseUserInput(planCommand2) instanceof PlanCommand);
         assertTrue(parser.parseUserInput(planCommand3) instanceof PlanCommand);
         assertTrue(parser.parseUserInput(planCommand4) instanceof PlanCommand);
+    }
+
+    @Test
+    void parseUserInput_validScheduleCommand_expectSuccess() throws InvalidCommandException {
+        String scheduleCommand1 = "schedule /update 1 2";
+        String scheduleCommand2 = "schedule /list";
+        String scheduleCommand3 = "schedule /clear 1";
+        String scheduleCommand4 = "schedule /clearall";
+
+        assertTrue(parser.parseUserInput(scheduleCommand1) instanceof ScheduleCommand);
+        assertTrue(parser.parseUserInput(scheduleCommand2) instanceof ScheduleCommand);
+        assertTrue(parser.parseUserInput(scheduleCommand3) instanceof ScheduleCommand);
+        assertTrue(parser.parseUserInput(scheduleCommand4) instanceof ScheduleCommand);
     }
 
     @Test
