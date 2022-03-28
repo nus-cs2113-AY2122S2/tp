@@ -47,7 +47,7 @@ class CalculateInputCommandTest {
                 + "PERSONAL:      ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 100.0%" + System.lineSeparator()
                 + "ENTERTAINMENT:  0.0%" + System.lineSeparator()
                 + "OTHERS:         0.0%" + System.lineSeparator()
-                +"-----------------------------------------------"
+                + "-----------------------------------------------"
                 ;
         assertEquals(expectedOutput, capturedOut.toString().trim());
     }
@@ -75,7 +75,7 @@ class CalculateInputCommandTest {
                 + "PERSONAL:      ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 100.0%" + System.lineSeparator()
                 + "ENTERTAINMENT:  0.0%" + System.lineSeparator()
                 + "OTHERS:         0.0%" + System.lineSeparator()
-                +"-----------------------------------------------"
+                + "-----------------------------------------------"
                 ;
         assertEquals(expectedOutput, capturedOut.toString().trim());
     }
