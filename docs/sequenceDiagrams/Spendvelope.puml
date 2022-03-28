@@ -5,22 +5,26 @@ hide footbox
 autonumber
 autoactivate on
 
-loop
+loop while not exit command
 |||
 ref over Spendvelope, TextUi: getUserInput
 
 Spendvelope -> Parser: parseCommand(fullUserInput)
-Parser -> Command**:
-Parser <-- Command
+alt add command
+    |||
+    ref over Parser, Command: addCommand
+    note right: Command object is created and returned to \nParser in each of the command references
+end
 Spendvelope <-- Parser: command
 
 Spendvelope -> Spendvelope: executeCommand(command)
 Spendvelope -> Command: execute()
 Command -> CommandResult**
+Activate CommandResult
 Command <-- CommandResult:result
 Spendvelope <-- Command: result
 destroy Command
-Spendvelope <-- Spendvelope: result
+Spendvelope --> Spendvelope: result
 
 Spendvelope -> TextUi: showResultToUser(result)
 TextUi -> CommandResult: getRelevantRecords()
