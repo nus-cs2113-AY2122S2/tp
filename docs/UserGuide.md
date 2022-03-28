@@ -117,6 +117,7 @@ Example: `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12
 #### `add medicine`
 To add a new medicine into your application you can use the `add medicine` command when prompted by HALPMI for your input.
 To add a medicine there are some parameters that you would have to provide:
+1. Batch ID
 1. Medicine Name
 2. Dosage
 3. Expiry Date
@@ -125,9 +126,27 @@ To add a medicine there are some parameters that you would have to provide:
 
 You will have to follow the formatting given below when calling the command.
 
-Format: `add medicine /info [name],[dosage],[expiry date],[side effects],[quantity]`
+Format: `add medicine /info [batch id],[name],[dosage],[expiry date],[side effects],[quantity]`
 
-Example: `add medicine /info Paracetamol, 500, 2023-06-11, Slight headache, 10`
+Example: `add medicine /info A123,Paracetamol, 500, 2023-06-11, Slight headache, 10`
+
+#### `add appointment`
+To add a new appointment into your application you can use the `add appointment` command when prompted by HALPMI for your input.
+To add an appointment there are some parameters that you would have to provide:
+1. Appointment ID
+2. Patient name
+3. Patient NRIC
+4. Doctor name
+5. Doctor NRIC
+6. Appointment Date
+7. Appointment Details
+
+You will have to follow the formatting given below when calling the command.
+
+Format: `add appointment /info [appointment id],[patient nric],[patient name],[doctor nric],[doctor name],
+        [appointment date], [appointment details]`
+
+Example: `add appointment /info A123,S1234567A,Don,S7654321A,John,2022-10-15,Regular knee checkup`
 
 ### Viewing: `view`
 Allows user to view existing records of doctors, patients and medicine.
@@ -156,6 +175,18 @@ Format: `view medicine` or `view medicine /info [name]`
 
 Example: `view medicine /info Paracetamol`
 
+#### `view appointment`
+To view the records of all appointments in the application, you can simply call `view appointment` without any
+additional parameters. You could also give a specific criteria as listed below and the input value if you want to
+search and view by a specific criteria.
+
+Format: `view appointment` or `view appointment /info [criteria],[input value]`
+
+Accepted Criteria: `appointment id`,`patient nric`,`patient name`,`doctor name`,`doctor nric`,`date`
+
+Examples: `view appointment /info appointment id,A123`, `view appointment /info patient nric,S1234567A`,
+          `view appointment /info doctor name,John`, `view appointment /info date,2023-01-01`
+
 ### Deleting: `delete`
 Allows user to delete existing records of doctors, patients and medicine.
 
@@ -177,9 +208,17 @@ Example: `delete patient /info S1234567A`
 
 #### `delete medicine`
 To delete an existing medicine in the application, you can use the `delete medicine` command. This command requires an
-additional parameter which is the Batch ID of the medicine.
+additional parameter which is the batch id of the medicine.
 
-Format: `delete medicine /info [Batch ID]`
+Format: `delete medicine /info [batch id]`
+
+Example: `delete medicine /info S234`
+
+#### `delete appointment`
+To delete an existing appointment in the application, you can use the `delete appointment` command.
+This command requires an additional parameter which is the appointment id of the medicine.
+
+Format: `delete appointment /info [appointment id]`
 
 Example: `delete medicine /info S234`
 
@@ -225,9 +264,9 @@ Example: `delete medicine /info S234`
 | `view doctor`      | `view medicine` or `view medicine /info [name]`<br />e.g. `view medicine /info Paracetamol`|
 | `view patient`     | `view patient` or `view patient /info [nric]`<br />e.g. `view doctor /info S1234567A`|
 | `view medicine`    | `view medicine` or `view medicine /info [name]`<br />e.g. `view medicine /info Paracetamol`|
+| `view appointment` | `view appointment` or `view appointment /info [criteria],[input value]`<br />e.g. `view appointment /info patient nric,S1234567A`|
 | `delete doctor`    | `delete doctor /info [nric]`<br />e.g. `delete doctor /info S1234567A` |
 | `delete patient`   | `delete patient /info [nric]`<br />e.g. `delete patient /info S1234567A`|
-| `delete medicine`  | `delete medicine /info [Batch ID]`<br />e.g. `delete medicine /info S234` |
+| `delete medicine`  | `delete medicine /info [batch id]`<br />e.g. `delete medicine /info S234` |
+| `delete appointment`| `delete appointment /info [appointment id]`<br />e.g. `delete appointment /info A123` |
 | `to be updated`    | `to be updated` |
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`

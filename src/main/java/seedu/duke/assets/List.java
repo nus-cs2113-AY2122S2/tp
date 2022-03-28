@@ -16,29 +16,4 @@ public abstract class List {
 
     public abstract void edit(String[] parameters) throws NotFoundException;
 
-    public abstract void findByNric(String[] parameters);
-
-    public abstract void findByName(String[] parameters);
-
-    public abstract void findByAge(String[] parameters);
-
-    public abstract void findByGender(String[] parameters);
-
-    public abstract void findByAddress(String[] parameters);
-
-    public abstract void findByDob(String[] parameters);
-
-    public abstract void findBySpecialization(String[] parameters);
-
-    public abstract void findByDateAdmission(String[] parameters);
-
-    public abstract void findById(String[] parameters);
-
-    public abstract void findByDosage(String[] parameters);
-
-    public abstract void findByExpiry(String[] parameters);
-
-    public abstract void findBySideEffects(String[] parameters);
-
-    public abstract void findByQuantity(String[] parameters);
 }

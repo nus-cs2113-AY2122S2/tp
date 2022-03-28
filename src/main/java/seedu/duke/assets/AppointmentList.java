@@ -45,25 +45,36 @@ public class AppointmentList extends List {
                 return;
             }
         }
-        throw new NotFoundException("There is no appointments with the given appointment id.\n"
+        throw new NotFoundException("There is no appointment with the given appointment id.\n"
                 + "Please search by patient's nric or doctor's nric to find out the correct id if needed.");
     }
 
     @Override
     public void edit(String[] parameters) throws NotFoundException {
-        System.out.println("CURRENTLY APPOINTMENT EDIT DOES NOTHING.");
+        for (int i = 0; i < appointments.size(); i++) {
+            if (appointments.get(i).getAppointmentId().equals(parameters[0])) {
+                appointments.remove(i);
+                Appointment editAppointment = new Appointment(parameters[0], parameters[1],
+                        parameters[2], parameters[3], parameters[4],
+                        parameters[5], parameters[6]);
+                appointments.add(editAppointment);
+                return;
+            }
+        }
+        throw new NotFoundException("There is no appointment with the given appointment id.\n"
+                + "Please search by patient's nric or doctor's nric to find out the correct id if needed.");
     }
 
     @Override
     public void view() throws HalpmiException {
         CommandLineTable appointmentTable = new CommandLineTable();
         appointmentTable.setShowVerticalLines(true);
-        appointmentTable.setHeaders("Appointment Id", "Patient Name","Patient NRIC","Doctor Name","Doctor NRIC",
+        appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
                 "Appointment Date", "Appointment Details");
         if (appointments.size() == 0) {
             throw new HalpmiException("Doctor list is empty, please add doctor");
         }
-        for (Appointment appointment: appointments) {
+        for (Appointment appointment : appointments) {
             appointmentTable.addRow(appointment.getAppointmentId(), appointment.getPatientName(),
                         appointment.getPatientNric(), appointment.getDoctorName(), appointment.getDoctorNric(),
                         appointment.getAppointmentDate(), appointment.getAppointmentDetails());
@@ -152,7 +163,7 @@ public class AppointmentList extends List {
         }
         CommandLineTable appointmentTable = new CommandLineTable();
         appointmentTable.setShowVerticalLines(true);
-        appointmentTable.setHeaders("Appointment Id", "Patient Name","Patient NRIC","Doctor Name","Doctor NRIC",
+        appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
                 "Appointment Date", "Appointment Details");
         for (Appointment appointment: foundAppointments) {
             if (appointmentTable == null) {
@@ -165,57 +176,6 @@ public class AppointmentList extends List {
         throw new HalpmiException("Appointment List is empty, please add appointment");
     }
 
-    public void findByNric(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByName(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByAge(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByGender(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByAddress(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByDob(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findBySpecialization(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByDateAdmission(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findById(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByDosage(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByExpiry(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findBySideEffects(String[] parameters) {
-        // Intentionally left blank
-    }
-
-    public void findByQuantity(String[] parameters) {
-        // Intentionally left blank
-    }
 }
 
 

@@ -96,17 +96,21 @@ The parser parses the description of the command. It first calls the validator c
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Find appointments with selected criteria
+### View appointments with selected criteria
 This feature is a method within `AppointmentList`. `AppointmentList` contains an arraylist
 of `Appointment` as a private element. `AppointmentList` methods invoked interacts with this
 list, possibly making changes in the process.
 
 Currently, `AppointmentList` has the following methods:
 * `AppointmentList#add` -- Appends a new `Appointment` to the list.
-* `AppointmentList#showAll` -- Text display of all appointments in the list.
+* `AppointmentList#remove` -- Removes an entry from the list by appointment id.
+* `AppointmentList#edit` -- Edits a existing entry from the list by.
+* `AppointmentList#view` -- Text display of all or selected appointments in the list.
 * `AppointmentList#find` -- Find selected appointments using the criteria given.
 
-The methods are exposed in the `Manager#runLoop` method where user input is parsed.
+The methods are exposed in the `Manager#runLoop` method where user input is parsed. A `ViewAppointmentCommand` will
+be returned if the user input passes the validation by `Validator`. Else, a `HalpmiException` will be thrown
+indicating missing parameters.
 
 Below is an example describing the behaviour of the `find` feature.
 
@@ -117,7 +121,7 @@ Below is an example describing the behaviour of the `find` feature.
 
 ###Target user profile:
 
-* lightweight appli
+* administrator in clinic(s)
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -126,6 +130,9 @@ Below is an example describing the behaviour of the `find` feature.
 ###Value proposition:
 Manage contacts faster than a typical mouse/GUI driven app
 Streamlines the updating of data and records
+
+Manage core clinic related data faster than using mouse or GUI.
+Ensure each data type conforms to certain standards with in-built validations.
 
 ### User stories
 
@@ -176,6 +183,8 @@ Device Environment:
 * *EXPIRY* - Standard form for expiry of medicine is a String value with no spaces
 * *SIDEEFFECTS* - Standard form for side effects of medicine is a String value with no spaces
 * *QUANTITY* - Standard form for quantity of medicine is an int value 
+* *APPOINTMENTID* - Standard form for appointment id is a String value with no spaces
+* *APPOINTMENTDETAILS* - Standard form for appointment details is a String value
 
 
 --------------------------------------------------------------------------------------------------------------------
