@@ -31,14 +31,14 @@ HALPMI is a Command Line Interface (CLI) Application that allows administrators 
 administrative tasks. More specifically, using HALPMI the user is able to insert new information regarding Doctors, Patients
 and Medication. Users can also schedule appointment for Patients with Doctors. Users are also able to track stocks of medications.
 
-###Purpose
+### Purpose
 The purpose of this User Guide is to get new users of HALPMI to get started with the application and learn the features
 that it entails. This User Guide can also be referred to as and when needed when unclear about certain features and commands.
 
 Persons with greater technical knowledge can refer to the [Developer Guide](DeveloperGuide.md) for in-depth explanations on the
 workings behind HALPMI.
 
-###How to read the Guide?
+### How to read the Guide?
 The User Guide is structured in a way that it is straight-forward and has a logical flow. Hence it should be easy for any User
 like you to get started with HALPMI immediately. 
 
@@ -46,12 +46,14 @@ Before reading, it is noteworthy to understand some formats and keywords used in
 * Command - Command refers to the text input that you will be providing on the CLI as and when prompted by HALPMI.
 * `Word` - Certain words or sentences in this Guide are often found in this format. These refer to commands that you as a User
 can use in the CLI application.
+* `[Word]` - Certain words that are found inside brackets refer to compulsory parameters you have to include following the
+command.
 
 -----------------------------------------------
 
 ## Quick Start
 
-###Setting Up Java
+### Setting Up Java
 
 Firstly you need to have Java 11 or above installed in your computer. If you are not sure on how to check if you have
 Java 11 installed on your computer, you can refer to [Check Java](https://www.howtogeek.com/717330/how-to-check-your-java-version-on-windows-10/).
@@ -62,7 +64,7 @@ If you do not have Java already installed...
 
 Once you are sure that you have Java installed, you can download the latest version of HALPMI from the releases.
 
-###Starting up HALPMI
+### Starting up HALPMI
 You can launch HALPMI directly from your Command Prompt/Terminal. Change directory to the location where you have saved the
 JAR file you have downloaded from our releases. Following which you can type in `java -jar Halpmi.jar` in the command prompt to launch HALPMI.
 To learn more about [Command Prompt](https://www.makeuseof.com/tag/a-beginners-guide-to-the-windows-command-line/)
@@ -80,7 +82,7 @@ at which Halpmi.jar is located.
 ### Adding: `add`
 Adds a new entry into the app. This entry can be either a doctor, patient or medicine.
 
-#### `add doctor`
+    ADD DOCTOR
 To add a new doctor into your application you can use the `add doctor` command when prompted by HALPMI for your input.
 To add a doctor there are some parameters that you would have to provide:
 1. NRIC
@@ -97,7 +99,7 @@ Format: `add doctor /info [nric],[name],[age],[gender],[address],[DOB],[Speciali
 
 Example: `add doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`
 
-#### `add patient`
+    ADD PATIENT
 To add a new patient into your application you can use the `add patient` command when prompted by HALPMI for your input.
 To add a patient there are some parameters that you would have to provide:
 1. NRIC
@@ -114,7 +116,7 @@ Format: `add patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`
 
 Example: `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`
 
-#### `add medicine`
+    ADD MEDICINE
 To add a new medicine into your application you can use the `add medicine` command when prompted by HALPMI for your input.
 To add a medicine there are some parameters that you would have to provide:
 1. Batch ID
@@ -130,7 +132,7 @@ Format: `add medicine /info [batch id],[name],[dosage],[expiry date],[side effec
 
 Example: `add medicine /info A123,Paracetamol, 500, 2023-06-11, Slight headache, 10`
 
-#### `add appointment`
+    ADD APPOINTMENT
 To add a new appointment into your application you can use the `add appointment` command when prompted by HALPMI for your input.
 To add an appointment there are some parameters that you would have to provide:
 1. Appointment ID
@@ -151,7 +153,7 @@ Example: `add appointment /info A123,S1234567A,Don,S7654321A,John,2022-10-15,Reg
 ### Viewing: `view`
 Allows user to view existing records of doctors, patients and medicine.
 
-#### `view doctor`
+    VIEW DOCTOR
 To view the records of all doctors in the application, you can simply call `view doctor` without any additional
 parameters. You could also give the NRIC as an additional parameter if you want to view a single doctor only.
 
@@ -159,7 +161,7 @@ Format: `view doctor` or `view doctor /info [nric]`
 
 Example: `view doctor /info S1234567A`
 
-#### `view patient`
+    VIEW PATIENT
 To view the records of all patients in the application, you can simply call `view patient` without any additional
 parameters. You could also give the NRIC as an additional parameter if you want to view a single patient only.
 
@@ -167,7 +169,7 @@ Format: `view patient` or `view patient /info [nric]`
 
 Example: `view doctor /info S1234567A`
 
-#### `view medicine`
+    VIEW MEDICINE
 To view the records of all medicines in the application, you can simply call `view medicine` without any additional
 parameters. You could also give the Name as an additional parameter if you want to view a single type of Medicine only.
 
@@ -175,7 +177,7 @@ Format: `view medicine` or `view medicine /info [name]`
 
 Example: `view medicine /info Paracetamol`
 
-#### `view appointment`
+    VIEW APPOINTMENT
 To view the records of all appointments in the application, you can simply call `view appointment` without any
 additional parameters. You could also give a specific criteria as listed below and the input value if you want to
 search and view by a specific criteria.
@@ -190,7 +192,7 @@ Examples: `view appointment /info appointment id,A123`, `view appointment /info 
 ### Deleting: `delete`
 Allows user to delete existing records of doctors, patients and medicine.
 
-#### `delete doctor`
+    DELETE DOCTOR
 To delete an existing doctor in the application, you can use the `delete doctor` command. This command requires an
 additional parameter which is the NRIC of the doctor.
 
@@ -198,7 +200,7 @@ Format: `delete doctor /info [nric]`
 
 Example: `delete doctor /info S1234567A`
 
-#### `delete patient`
+    DELETE PATIENT
 To delete an existing patient in the application, you can use the `delete patient` command. This command requires an
 additional parameter which is the NRIC of the patient.
 
@@ -206,7 +208,7 @@ Format: `delete patient /info [nric]`
 
 Example: `delete patient /info S1234567A`
 
-#### `delete medicine`
+    DELETE MEDICINE
 To delete an existing medicine in the application, you can use the `delete medicine` command. This command requires an
 additional parameter which is the batch id of the medicine.
 
@@ -214,7 +216,7 @@ Format: `delete medicine /info [batch id]`
 
 Example: `delete medicine /info S234`
 
-#### `delete appointment`
+    DELETE APPOINTMENT
 To delete an existing appointment in the application, you can use the `delete appointment` command.
 This command requires an additional parameter which is the appointment id of the medicine.
 
@@ -224,25 +226,162 @@ Example: `delete medicine /info S234`
 
 ### Editing: `edit`
 
-### Finding:`find`
+    EDIT DOCTOR
+To edit an existing doctor in your application you can use the `edit doctor` command when prompted by HALPMI for your input.
+To edit a doctor there are some parameters that you would have to provide:
+1. NRIC (Must be already in the list)
+2. Name
+3. Age
+4. Gender
+5. Address
+6. Date Of Birth (DOB)
+7. Specialisation
 
-#### `find doctor "by parameter"` (to be updated)
+You will have to follow the formatting given below when calling the command.
 
-#### `find patient "by parameter"` (to be updated)
+Format: `edit doctor /info [nric],[name],[age],[gender],[address],[DOB],[Specialisation]`
 
-#### `find medicine "by parameter"` (to be updated)
+Example: `edit doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`
+
+    EDIT PATIENT
+To edit an existing patient in your application you can use the `edit patient` command when prompted by HALPMI for your input.
+To edit a patient there are some parameters that you would have to provide:
+1. NRIC (Must be already in the list)
+2. Name
+3. Age
+4. Gender
+5. Address
+6. Date Of Birth (DOB)
+7. Date Of Admission (DOA)
+
+You will have to follow the formatting given below when calling the command.
+
+Format: `edit patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`
+
+Example: `edit patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`
+
+    EDIT MEDICINE
+To edit an existing medicine in your application you can use the `edit medicine` command when prompted by HALPMI for your input.
+To edit a medicine there are some parameters that you would have to provide:
+1. Batch ID (Must be already on the list)
+1. Medicine Name
+2. Dosage
+3. Expiry Date
+4. Side Effects
+5. Quantity
+
+You will have to follow the formatting given below when calling the command.
+
+Format: `edit medicine /info [batch id],[name],[dosage],[expiry date],[side effects],[quantity]`
+
+Example: `edit medicine /info A123,Paracetamol, 500, 2023-06-11, Slight headache, 10`
+
+    EDIT APPOINTMENT
+
+To edit an existing appointment in your application you can use the `add appointment` command when prompted by HALPMI for your input.
+To edit an appointment there are some parameters that you would have to provide:
+1. Appointment ID (Must be already on the list)
+2. Patient name
+3. Patient NRIC
+4. Doctor name
+5. Doctor NRIC
+6. Appointment Date
+7. Appointment Details
+
+You will have to follow the formatting given below when calling the command.
+
+Format: `edit appointment /info [appointment id],[patient nric],[patient name],[doctor nric],[doctor name],
+[appointment date], [appointment details]`
+
+Example: `edit appointment /info A123,S1234567A,Don,S7654321A,John,2022-10-15,Regular knee checkup`
+
+
+### Finding: `find`
+Allows user to find existing records of doctors, patients and medicine.
+
+    FIND DOCTOR
+To find an existing doctor in the application, you can use the `find doctor` command. This command requires an
+additional parameter which can be any of the parameters of doctor.
+To find a doctor you would have to provide one of these parameters:
+1. NRIC: `nric`
+2. Name: `name`
+3. Age: `age`
+4. Gender: `gender`
+5. Address: `address`
+6. Date Of Birth (DOB): `dob`
+7. Specialisation: `specialization`
+
+Format:`find doctor /info [parameter], [parameter of doctor]`
+
+Example: `find doctor /info name, Jimmy`
+
+
+    FIND PATIENT
+To find an existing patient in the application, you can use the `find patient` command. This command requires an
+additional parameter which can be any of the parameters of patient.
+To find a patient you would have to provide one of these parameters using the given keywords:
+
+1. NRIC: `nric`
+2. Name: `name`
+3. Age: `age`
+4. Gender: `gender`
+5. Address: `address`
+6. Date Of Birth (DOB): `dob`
+7. Date Of Admission (DOA): `admissiondate`
+
+Format:`find patient /info [parameter], [parameter of patient]`
+
+Example: `find patient /info nric, S7682373L`
+
+    FIND MEDICINE
+To find an existing medicine in the application, you can use the `find medicine` command. This command requires an
+additional parameter which can be any of the parameters of medicine.
+To find a medicine you would have to provide one of these parameters using the given keywords:
+
+1. Medicine Name: `name`
+2. Dosage: `dosage`
+3. Expiry Date: `expiry`
+4. Side Effects: `sideeffects`
+5. Quantity: `quantity`
+
+Format:`find medicine /info [parameter], [parameter of medicine]`
+
+Example: `find medicine /info name, Paracetamol`
 
 ### Saving
+
 #### Saved Data
+
+When you start HalpMi for the first time, the following directory and files would be created:
+```
+data/        // Primary resource directory for HalpMi
+    ├── doctor.txt   // Text file containing doctor list
+    ├── patient.txt    // Text file containing patient list 
+    ├── medicine.txt       // Text file containing medcine list 
+    └── appointment.txt    // Text file containing appointment list 
+```
+Do note that the directory (and by extension, the files) will be created in your terminal's
+**current working directory**. Thus, it is highly recommended for you to create a new directory
+with the HalpMi JAR file inside it, and run the application from the directory.
+
+When you launch HalpMi in subsequent sessions, please ensure that you run it from the same directory
+that you did when starting HalpMi for the first time.
+
 #### Corrupt Files
+
+TO BE UPDATED
 
 -----------------------------------------------
 
 ## Future Versions
 
+TO BE UPDATED
+
 -----------------------------------------------
 
 ## Errors
+
+TO BE UPDATED
 
 -----------------------------------------------
 
