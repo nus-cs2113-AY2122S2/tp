@@ -4,6 +4,7 @@ import seedu.duke.command.Command;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.ItemList;
+
 /**
  * Represents a command to view all the items currently within the item list.
  */
