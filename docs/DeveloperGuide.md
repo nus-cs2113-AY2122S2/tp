@@ -111,6 +111,28 @@ For example, `printDishes()`, iterates through `dishes` and calls `get(int)` met
 ![](diagrams/sqeuence/DishManager_addDish.png)
 
 
+
+### Order Management
+
+The management of menu is functioned by `OrderManager`, which implements following methods:
+
+- `void addOrder(Order order)` -- add a new order.
+- `int addDishToOrder(Object inputObj)` -- add dishes in to an order.
+- `void deleteOrder(int orderIndex)` -- delete an order using its order index.
+- `Order getOrder(int orderIndex)` -- get an order using its order index.
+- `double getOrderPrice(int orderIndex)` -- get the total price of an order using its order index.
+- `double getAllOrderValue()` -- get the total price of all orders.
+
+These functions are "delegated" to `ArrayLise<Order>`, which is associated with `OrderManager`.
+
+For example, `getOrder(int)`, iterates through `orders` and calls `get(int)` method (`getOrderPrice(int)`, `getAllOrderValue()` also call `get(int)`):
+
+
+`deleteOrder(int)` calls `remove(int)`:
+
+
+`getOrderPrice(int)` calls `getTotalPrice()` and method `getAllOrderValue()` also calls `getTotalPrice()`:
+
 ### Staff Management
 
 The management of staff is handled by `StaffManager`, which implements following methods:
@@ -143,10 +165,14 @@ And `deleteStaff(int)` calls `remove(int)` to remove a `Staff` from `ArrayList<S
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
+
+|Version| As a ... | I want to ...                                  | So that I can ...          |
+|--------|----------|------------------------------------------------|----------------------------|
+|v1.0|staff| modify the order (add, delete, or check price) | keep the order up to date  |
 |v1.0|staff|modify the menu (add, delete, or modify dishes)|keep the menu up to date|
+|v2.0|staff| print out the order receipt                    | refer to the order anytime |
 |v2.0|staff|store the menu|refer to the menu anytime|
+
 
 ## Non-Functional Requirements
 

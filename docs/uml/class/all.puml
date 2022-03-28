@@ -99,6 +99,67 @@ class DishController {
     +takeControl(): void
 }
 
+class MainLogger {
+    -{static}instance
+    -logger: Logger
+    -MainLogger()
+    -{static}getInstance: MainLogger
+    +{static}logInfo(o: Object, msg : String)
+    +{static}logWarning(o: Object, msg : String)
+}
+
+class OperationTerminationException {
+    +OperationTerminationException()
+}
+
+'Exception
+OperationTerminationException ---|> Java.lang.Exception
+InputParser ..> OperationTerminationException
+Controller ..> OperationTerminationException
+StaffController ..> OperationTerminationException
+DishController ..> OperationTerminationException
+
+'Logger
+DishController ..> MainLogger
+StaffController ..> MainLogger
+
+class Order {
+    +Order(List<Dish>)
+    +Order()
+    +removeDishFromOrderByIndex(int): void
+    +getTotalPrice(): double
+    +getDishes(): List<Dish>
+    +addDish(Dish): void
+    +getDishCount(): int
+}
+
+class OrderManager {
+    -orders: List<Order>
+    +OrderManager()
+    +addDishToOrder(Dish, int): void
+    +deleteOrder(int): void
+    +getOrderPrice(int): double
+    +getAllOrderValue(): double
+    +printReceipt(): void
+    +getOrders(): ArrayList<Order>
+    +getDishesFromOrder(int): ArrayList<Dish>
+    +getOrderCount(): int
+}
+
+class OrderController {
+    -{static}CHOICES: String[]
+    -orderManager: OrderManager
+    -dishManager: DishManager
+    +OrderController()
+    -addNewOrder(): void
+    -deleteOrder(): void
+    -displayOrderPrice(): void
+    -displayAllOrderPrice(): void
+    -printReceipt(): void
+    #optionSwicher(int): boolean
+    +takeControl(): void
+}
+
 'Staff relations
 Manager <|--- StaffManager
 StaffManager <--* StaffController
@@ -112,4 +173,13 @@ Controller <|-- DishController
 Dish "0..*\ndishes" <-- DishManager: manages <
 DishManager "1\ndishManager" <--* DishController
 DishController .-> Dish
+
+'Order relations
+Manager <|-- OrderManager
+Controller <|-- OrderController
+Order "0..*\norders" <-- OrderManager: manages <
+OrderManager "1\norderManager" <--* OrderController
+OrderManager .. DishManager
+Order .. Dish
+
 @enduml

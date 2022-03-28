@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+hide footbox
+
+actor user
+participant ":OrderController" as ordercontroller
+participant ":OrderManager" as ordermanager
+participant ":Order" as order
+
+activate ordercontroller
+activate ordermanager
+activate order
+
+user -> ordercontroller: displayAllOrderPrice()
+
+ordercontroller -> ordermanager: getAllOrderValue()
+
+ordermanager -> order : getTotalPrice()
+
+order --> ordermanager : double
+ordermanager --> ordercontroller : double
+ordercontroller --> user
+
+@enduml

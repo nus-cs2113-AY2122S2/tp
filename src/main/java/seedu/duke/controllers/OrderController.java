@@ -1,6 +1,8 @@
 package seedu.duke.controllers;
 
+import seedu.duke.entities.Dish;
 import seedu.duke.exceptions.OperationTerminationException;
+import seedu.duke.loggers.MainLogger;
 import seedu.duke.manager.DishManager;
 import seedu.duke.manager.OrderManager;
 
@@ -22,6 +24,12 @@ public class OrderController extends Controller {
         switch (choice) {
         case 0:
             System.out.println("Exiting menu...");
+            try {
+                orderManager.saveData();
+            } catch (Exception e) {
+                System.out.println("There was an error saving Order data!\n");
+                MainLogger.logWarning(this, "Error saving Order data!");
+            }
             return true;
         case 1:
             dishManager.printDishes();
@@ -33,13 +41,13 @@ public class OrderController extends Controller {
             deleteOrder();
             break;
         case 4:
-            getOrderPrice();
+            displayOrderPrice();
             break;
         case 5:
-            getAllOrderPrice();
+            displayAllOrderPrice();
             break;
         case 6:
-            printReceipt();
+            printOrder();
             break;
         default:
             System.out.println("Unknown choice!");
@@ -54,7 +62,8 @@ public class OrderController extends Controller {
         int createdOrderIdx = orderManager.getOrderCount();
         try {
             while (index >= 0) {
-                orderManager.addDishToOrder(index, createdOrderIdx, dishManager);
+                Dish dish = dishManager.getDishes().get(index);
+                orderManager.addDishToOrder(dish, createdOrderIdx);
                 index = InputParser.getInteger("You have "
                         + orderManager.getOrders().get(createdOrderIdx).getDishCount()
                         + " dish(es), some more: \n");
@@ -74,7 +83,7 @@ public class OrderController extends Controller {
         }
     }
 
-    private void getOrderPrice() throws OperationTerminationException {
+    private void displayOrderPrice() throws OperationTerminationException {
         try {
             int userInputInt = InputParser.getInteger("Enter the order you want to get price: ");
             System.out.printf("Total value of this order: %f. \n", orderManager.getOrderPrice(userInputInt));
@@ -83,13 +92,17 @@ public class OrderController extends Controller {
         }
     }
 
-    private void getAllOrderPrice() {
+    private void displayAllOrderPrice() {
         System.out.printf("Total value of all orders: %f. \n", orderManager.getAllOrderValue());
     }
 
-    private void printReceipt() {
-        System.out.println("These are all your orders receipts. \n");
-        orderManager.printReceipt();
+    private void printOrder() throws OperationTerminationException {
+        try {
+            int userInputInt = InputParser.getInteger("Enter the order you want to display: ");
+            System.out.println("These is your order. \n" + orderManager.getOrder(userInputInt));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Invalid order index");
+        }
     }
 
     @Override
