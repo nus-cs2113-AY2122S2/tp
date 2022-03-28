@@ -43,7 +43,7 @@ public class AppointmentList extends List {
                 return;
             }
         }
-        throw new NotFoundException("There is no appointments with the given appointment id.\n"
+        throw new NotFoundException("There is no appointment with the given appointment id.\n"
                 + "Please search by patient's nric or doctor's nric to find out the correct id if needed.");
     }
 
