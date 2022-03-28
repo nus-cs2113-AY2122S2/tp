@@ -340,7 +340,7 @@ public class PlanList {
         int indexOfPlan = Integer.parseInt(userArgument.trim());
         String className = this.getClass().getSimpleName();
 
-        boolean isIndexValid = checkIndexIsWithinRange(indexOfPlan);
+        boolean isIndexValid = checkPlanIndexIsWithinRange(indexOfPlan);
 
         if (!isIndexValid) {
             throw new InvalidPlanException(className, InvalidPlanException.PLAN_INDEX_OUT_OF_RANGE);
