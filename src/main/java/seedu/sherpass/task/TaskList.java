@@ -179,12 +179,16 @@ public class TaskList {
         if (byDate != null) {
             taskToEdit.setByDate(byDate);
         }
+        LocalDateTime prevDoOnStartDateTime = taskToEdit.getDoOnStartDateTime();
+        LocalDateTime prevDoOnEndDateTime = taskToEdit.getDoOnEndDateTime();
         taskToEdit.setDoOnStartDateTime(currentDoOnStartDateTime);
         taskToEdit.setDoOnEndDateTime(currentDoOnEndDateTime);
         if (hasDateTimeClash(tasks, currentDoOnStartDateTime, currentDoOnEndDateTime)) {
             ui.showToUser(ERROR_SCHEDULE_CLASH_MESSAGE);
             return;
         }
+        taskToEdit.setDoOnStartDateTime(prevDoOnStartDateTime);
+        taskToEdit.setDoOnEndDateTime(prevDoOnEndDateTime);
         tasks.add(taskToEdit);
         ui.showToUser("Okay! I've edited this task as such:\n"
                 + "\t" + taskToEdit);
