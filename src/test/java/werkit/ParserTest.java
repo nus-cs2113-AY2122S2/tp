@@ -121,12 +121,14 @@ class ParserTest {
         assertTrue(parser.createWorkoutCommand("workout /update 1 15") instanceof WorkoutCommand);
         assertTrue(parser.createWorkoutCommand("workout /delete 1") instanceof WorkoutCommand);
         assertTrue(parser.createWorkoutCommand("workout /list") instanceof WorkoutCommand);
+        assertTrue(parser.createWorkoutCommand("workout /listall") instanceof WorkoutCommand);
     }
 
     @Test
     void createWorkoutCommand_invalidWorkoutCommand_exceptionThrown() {
         assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /new"));
         assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /list extra"));
+        assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /listall hmm?"));
         assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /delete"));
         assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /update"));
         assertThrows(InvalidCommandException.class, () -> parser.createWorkoutCommand("workout /test"));
