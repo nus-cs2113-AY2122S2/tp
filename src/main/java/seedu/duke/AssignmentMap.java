@@ -35,4 +35,8 @@ public class AssignmentMap {
         }
         return false;
     }
+
+    private String getHouseKeeperNameByRoom(Room room) {
+        return map.get(room).getName();
+    }
 }
