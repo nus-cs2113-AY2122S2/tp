@@ -41,7 +41,7 @@ public class AddHousekeeperTest {
     @Test
     public void commandParser_nameCorrect() throws Exception {
         CommandParser parser = new CommandParser();
-        Command command = parser.parse("add housekeeper Susan ~ 23");
+        Command command = parser.parse("add housekeeper Susan / 23");
         AddHousekeeperCommand addHousekeeperCommand = (AddHousekeeperCommand) command;
         assertEquals("Susan", addHousekeeperCommand.getHousekeeper().getName());
         assertEquals(23, addHousekeeperCommand.getHousekeeper().getAge());
