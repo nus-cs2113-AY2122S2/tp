@@ -13,8 +13,8 @@ public class InvalidPlanException extends Exception {
             + "(A plan should minimally have 1 workout and 10 workouts at most.)";
     public static final String PLAN_INDEX_OUT_OF_RANGE = "Uh oh, the index specified is out of range.\n"
             + "(Index specified needs to be within the number of plans)";
-    public static final String PLAN_SAME_WORKOUT_SEQUENCE = "The plan to create is invalid as an\n"
-            + "existing plan with the same workout sequence exists.";
+    public static final String PLAN_SAME_WORKOUT_SEQUENCE = "Uh oh, an existing plan with the same\n"
+            + "workout sequence already exists.";
 
     private String throwingClass;
 

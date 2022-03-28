@@ -123,7 +123,7 @@ public class PlanList {
 
         int numberOfWorkoutsInAPlan = userWorkoutNumbersString.split(",").length;
         checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan, className);
-        assert (numberOfWorkoutsInAPlan > 0 && numberOfWorkoutsInAPlan <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN);
+        assert (numberOfWorkoutsInAPlan > 0) && (numberOfWorkoutsInAPlan <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN);
 
         ArrayList<Workout> workoutsToAddInAPlanList = new ArrayList<Workout>();
         for (int i = 0; i < numberOfWorkoutsInAPlan; i += 1) {
