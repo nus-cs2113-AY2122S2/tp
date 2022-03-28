@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Duke {
@@ -9,7 +10,12 @@ public class Duke {
 
     private void run() {
         CommandParser commandParser = new CommandParser();
-        ListContainer listContainer = new ListContainer();
+        ListContainer listContainer = null;
+        try {
+            listContainer = new ListContainer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         boolean shouldExitProgram = false;
         Ui ui = new Ui();
         String userInput;
@@ -21,6 +27,8 @@ public class Duke {
                 shouldExitProgram = command.isExit();
             } catch (HotelLiteManagerException e) {
                 ui.printErrorMessage(e);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
