@@ -173,21 +173,54 @@ After command: `edit 1 /do 25/3/2022 /start 18:00 /end 20:00`
 
 ![afteredit](images/afteredit.png)
 
-### Generating a timetable: `show today` / `show <date>` / `show week`
-Creates a schedule listing out your tasks for the day or the week.
+### Display Daily Schedule: `show today` / `show tomorrow` / `show <date>`
+
+Display your schedule for today, tomorrow or any specific date.
 
 Upon startup, Sherpass also shows your schedule for the day.
 
 Format:
-- To see the timetable for the day: `show today`
-- To see the timetable for a specific day: `show <date>`, where the date is in the format `d/M/YYYY`.
-  E.g. `show 25/3/2022` shows the schedule for 25th March 2022
-- To see the timetable for the week you are in: `show week`
+- To see the schedule for the day: `show today`
+- To see the schedule for tomorrow: `show today` or `show tmr`
+- To see the schedule for a specific day: `show <date>`, where the date is in the format `d/M/YYYY`.
+  
+   E.g. `show 25/3/2022` shows the schedule for 25th March 2022
 
-Below is an example of the timetable that is being generated from the given date
+Below is an example of the schedule that is being displayed from the given date
 25/3/2022:
 
 ![ShowDateTimetableFormat](images/showDateTimetableFormat.PNG)
+
+### Display Weekly Schedule: `show week` / `show next week`
+
+Display your schedule for the week or the week after.
+
+Format:
+- To see the schedule for the week you are in: `show week`
+- To see the schedule for the week after: "show next week" or `show nextweek`
+
+Below is an example of the weekly schedule displayed:
+
+![weeklyTimetablePart1](images/weeklyTimetablePart1.PNG)
+![weeklyTimetablePart2](images/weeklyTimetablePart2.PNG)
+
+### Display Monthly Schedule: `show month` / `show <month>`
+
+Display your schedule for the current month or any specific month
+
+Format:
+- To see the schedule for the current month: `show month`
+- To see the schedule for any specific month: `show <month>`, where 
+  month can be the abbreviation of the specific month. 
+
+
+  E.g. `show sep` or `show september` is the same command 
+
+  E.g. `show september` to display the schedule for **September**
+
+Below is an example of the monthly schedule displayed:
+
+![monthlySchedule](images/monthlySchedule.PNG)
 
 ### Getting a detailed list: `show all` / `show todo`
 
