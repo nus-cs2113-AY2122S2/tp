@@ -1,10 +1,8 @@
 package seedu.meetingjio;
 
 import java.util.Scanner;
-import seedu.meetingjio.commands.Command;
 import seedu.meetingjio.timetables.MasterTimetable;
-import seedu.meetingjio.timetables.Timetable;
-import seedu.meetingjio.ui.TextUi;
+import seedu.meetingjio.ui.Ui;
 import static seedu.meetingjio.common.Messages.MESSAGE_DIVIDER;
 
 /**
@@ -22,21 +20,21 @@ public class MeetingJio {
         String name = in.nextLine().trim();
         System.out.println(MESSAGE_DIVIDER);
         System.out.println("Hello! " + name);
-        TextUi.showHelpHint();
+        Ui.showHelpHint();
         System.out.println(MESSAGE_DIVIDER);
 
         MasterTimetable masterTimetable = new MasterTimetable();
         String userInput = in.nextLine().trim();
-        Command.executeCommand(userInput, masterTimetable, in);
-        TextUi.showGoodByeMessage();
+        Ui.executeCommand(userInput, masterTimetable, in);
+        Ui.showGoodByeMessage();
     }
 
     /** Initializes the application. */
     private static void start() {
         try {
-            TextUi.showWelcomeMessage();
+            Ui.showWelcomeMessage();
         } catch (RuntimeException e) {
-            TextUi.showInitFailedMessage();
+            Ui.showInitFailedMessage();
         }
     }
 }
