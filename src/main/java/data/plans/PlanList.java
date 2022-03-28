@@ -230,9 +230,19 @@ public class PlanList {
 
     /**
      * Prints the plan details, workouts in the plan.
+     * @throws NumberFormatException If index of plan that user entered is not an integer.
+     * @throws InvalidPlanException If index of plan is out of range.
      */
-    public void listPlanDetails(String userArgument, UI ui) throws NumberFormatException {
+    public void listPlanDetails(String userArgument, UI ui) throws NumberFormatException, InvalidPlanException {
         int indexOfPlan = Integer.parseInt(userArgument.trim());
+        String className = this.getClass().getSimpleName();
+
+        boolean isIndexValid = checkIndexIsWithinRange(indexOfPlan);
+
+        if (!isIndexValid) {
+            throw new InvalidPlanException(className, InvalidPlanException.PLAN_INDEX_OUT_OF_RANGE);
+        }
+
         Plan planToViewDetails = getPlanFromIndexNum(indexOfPlan);
         String planName = getPlansDisplayList().get(indexOfPlan - 1);
 
