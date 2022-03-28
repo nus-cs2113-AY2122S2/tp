@@ -10,6 +10,7 @@ public class CommandParser {
     private static final String BYE = "bye";
     private static final String ADD_ITEM_COMMAND = "Add Item ";
     private static final String VIEW_ITEM_LIST_COMMAND = "View Item In Inventory";
+    private static final String VIEW_ITEM_WITH_ZERO_PAX_IN_LIST_COMMAND = "View Item With Zero Pax";
     private static final String DELETE_ITEM_COMMAND = "Delete Item ";
     private static final String UPDATE_ITEM_PAX_COMMAND = "Update Item Pax ";
     private static final String UPDATE_ITEM_NAME_COMMAND = "Update Item Name ";
@@ -60,6 +61,8 @@ public class CommandParser {
             userCommand = new AddItemCommand(commandStringWithoutCommand);
         } else if (commandString.equals(VIEW_ITEM_LIST_COMMAND)) {
             userCommand = new ViewItemListCommand();
+        } else if (commandString.equals(VIEW_ITEM_WITH_ZERO_PAX_IN_LIST_COMMAND)) {
+            userCommand = new ViewItemWithZeroPaxCommand();
         } else if (commandString.startsWith(DELETE_ITEM_COMMAND)) {
             commandStringWithoutCommand = commandString.replace(DELETE_ITEM_COMMAND, "");
             userCommand = new DeleteItemCommand(commandStringWithoutCommand);

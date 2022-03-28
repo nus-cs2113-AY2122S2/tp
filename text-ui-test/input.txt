@@ -28,6 +28,7 @@ Update Item Pax Toilet Roll /
 Update Item Pax / 5
 Update Item Pax
 Update Item Pax Swimming Pool /5
+Update Item Pax Spoon / 0
 Add Housekeeper ~
 Add Housekeeper KO  13
 Availability @
@@ -60,4 +61,6 @@ Update Item Name / Premium Swimming Pool
 Update Item Name Spoon / Premium Spoon
 Search Item
 Search Item o
+View Item With Zero Pax
+View Item With Zero
 bye

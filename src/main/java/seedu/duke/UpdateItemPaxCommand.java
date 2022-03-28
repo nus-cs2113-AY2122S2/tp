@@ -89,7 +89,7 @@ public class UpdateItemPaxCommand extends Command {
                     + "Exception thrown.");
             throw new InvalidItemPaxException();
         }
-        if (itemPax <= 0) {
+        if (itemPax < 0) {
             itemLogger.log(Level.WARNING, "Detected an invalid item pax for UpdateItemPaxCommand. "
                     + "Exception thrown.");
             throw new InvalidItemPaxException();

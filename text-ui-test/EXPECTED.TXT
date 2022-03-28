@@ -37,6 +37,7 @@ Error! Item Pax cannot be empty.
 Error! Item Name cannot be empty.
 Error! Invalid Command.
 Error! Item not found in inventory.
+The pax of Spoon has been updated to 0.
 Error! Invalid Command -> Add Housekeeper NAME @ INT AGE
 Error! Invalid Command -> Add Housekeeper NAME @ INT AGE
 Error! Invalid Command -> Availability NAME @ 1,2
@@ -124,5 +125,7 @@ Error! Item Name cannot be empty.
 The name of Spoon has been updated to Premium Spoon.
 Error! Invalid Command.
 1. Item Name: Fork Item Pax: 15
-2. Item Name: Premium Spoon Item Pax: 2
+2. Item Name: Premium Spoon Item Pax: 0
+1. Item Name: Premium Spoon Item Pax: 0
+Error! Invalid Command.
 see u again!
