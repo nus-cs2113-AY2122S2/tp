@@ -21,7 +21,8 @@ customer satisfactions.
 
 Format: `add satisfaction CUSTOMER_NAME / SATISFACTION_RATING`
 
-* The `CUSTOMER_NAME` can be in a natural language format.
+* The `CUSTOMER_NAME` can be in a natural language format. It must not be 
+the name of a customer whose satisfaction rating was already recorded. 
 * The `SATISFACTION_RATING` must be an integer from 1 to 5, inclusive. 
 
 Example of usage:
@@ -76,8 +77,8 @@ housekeeper performances.
 Format: `add housekeeper performance HOUSEKEEPER_NAME / PERFORMANCE_RATING`
 
 * The `HOUSEKEEPER_NAME` can be in a natural language format. It must not be the name of a 
-* housekeeper who already has a recorded performance rating, and it must be the name of a 
-* housekeeper who has a corresponding record in the list of housekeepers. 
+housekeeper who already has a recorded performance rating, and it must be the name of a 
+housekeeper who has a corresponding record in the list of housekeepers. 
 * The `PERFORMANCE_RATING` must be an integer from 1-5, inclusive. 
 
 Example of usage:
