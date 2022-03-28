@@ -64,6 +64,7 @@ public class CommandFactory {
             break;
         case HELP_CMD:
             newCommand = new HelpCommand(userInput, family);
+            break;
         case EXIT:
             newCommand = new ExitCommand(userInput, family);
             break;
