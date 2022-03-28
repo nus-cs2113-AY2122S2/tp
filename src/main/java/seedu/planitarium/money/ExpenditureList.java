@@ -23,6 +23,7 @@ public class ExpenditureList extends MoneyList {
     private static final String LOG_GET_NUM_EXP = "getNumberOfExpenditures()";
     private static final String LOG_GET_TOTAL_EXP = "getTotalExpenditure()";
     private static final String LOG_PRINT_LIST = "printExpenditureList()";
+    private static final String LOG_GET_CAT = "getCategory()";
 
     /**
      * Creates a new ExpenditureList object.
@@ -143,5 +144,13 @@ public class ExpenditureList extends MoneyList {
         assert (index <= numberOfExpenditures);
         logger.log(Level.INFO, LOG_ASSERT_PASSED);
         return expenditureArrayList.get(index - 1).isPermanent();
+    }
+
+    public String getCategory(int index) {
+        logger.log(Level.INFO, LOG_GET_CAT);
+        assert (index > ARRAY_INDEX);
+        assert (index <= numberOfExpenditures);
+        logger.log(Level.INFO, LOG_ASSERT_PASSED);
+        return expenditureArrayList.get(index - 1).getCategory();
     }
 }
