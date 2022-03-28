@@ -66,6 +66,24 @@ class ParserTest {
     }
 
     @Test
+    void parseUserInput_validSearchCommand_expectSuccess() throws InvalidCommandException {
+        String searchCommand1 = "search /exercise up";
+        String searchCommand2 = "search /workout 1000";
+        String searchCommand3 = "search /plan biceps";
+        String searchCommand4 = "search /all weeee";
+
+        assertTrue(parser.parseUserInput(searchCommand1) instanceof SearchCommand);
+        assertTrue(parser.parseUserInput(searchCommand2) instanceof SearchCommand);
+        assertTrue(parser.parseUserInput(searchCommand3) instanceof SearchCommand);
+        assertTrue(parser.parseUserInput(searchCommand4) instanceof SearchCommand);
+    }
+
+    @Test
+    void parseUserInput_validPlanCommand_expectSuccess() throws InvalidCommandException {
+        
+    }
+
+    @Test
     void parseUserInput_invalidGeneralCommand_exceptionThrown() {
         assertThrows(InvalidCommandException.class, () -> parser.parseUserInput("exitt"));
         assertThrows(InvalidCommandException.class, () -> parser.parseUserInput("helpp"));
