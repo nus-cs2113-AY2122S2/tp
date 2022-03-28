@@ -294,8 +294,8 @@ Alright, the following workout has been updated:
 
 ----------------------------------------------------------------------
 ```
-Now the workout number 1 (push up with 10 reps) is updated to push up with 15 reps.
-Now running the `workout /list` command again will show the workout list as follows:
+Workout number 1 (push up with 10 reps) is updated to push up with 15 reps.
+Running the `workout /list` command again will show the workout list as follows:
 ```
 ----------------------------------------------------------------------
 Showing workouts 1-3 of 3:
@@ -404,6 +404,8 @@ Here are the 4 workouts in [Grow My Muscles].
 4. push up (10 reps)
 ----------------------------------------------------------------------
 ```
+All workouts in the [Grow My Muscles] plan will be displayed.
+
 ---
 ### Delete a Plan: `plan /delete`
 Removes an existing plan from the plan list.
@@ -440,7 +442,7 @@ Grow My Muscles
 
 ----------------------------------------------------------------------
 ```
-Now plan number 3 (Grow My Muscles) is removed from the plan list.
+Now, plan number 3 (Grow My Muscles) is removed from the plan list.
 Running the `plan /list` command will show the plan list as follows:
 ```
 ----------------------------------------------------------------------
