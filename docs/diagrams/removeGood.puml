@@ -5,7 +5,7 @@ Actor ":User" as user
 participant ":UserInterface" as ui
 participant ":Regex" as regex
 participant ":Command" as command
-participant ":Good" as good
+participant ":Goods" as good
 
 user -> ui ++ : "remove id/id q/quantity"
 
@@ -16,7 +16,7 @@ ui -> command ++ : removeGood(id, quantity, userGoods)
 alt quantity input <= existing quantity
     command -> good ++ : reduce quantity of goods
     opt quantity input = existing quantity
-        command ->x good : delete the goods
+        command -> good : delete the goods
     end
 else quantity input > existing quantity
     command -> good : do nothing
