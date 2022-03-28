@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.io.IOException;
+import seedu.duke.command.Command;
 
 /**
  * Class that checks out a room with corresponding room number

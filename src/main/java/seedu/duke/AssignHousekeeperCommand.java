@@ -2,6 +2,7 @@ package seedu.duke;
 
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import seedu.duke.command.Command;
 
 /**
  * Identifies the name of the housekeeper and assign to room id

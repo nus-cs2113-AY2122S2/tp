@@ -2,6 +2,7 @@ package seedu.duke;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import seedu.duke.command.Command;
 
 /**
  * Represents a command to add a new HousekeeperPerformance object to the HousekeeperPerformanceList.

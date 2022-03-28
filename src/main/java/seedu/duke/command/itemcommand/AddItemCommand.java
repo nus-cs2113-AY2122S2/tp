@@ -1,9 +1,17 @@
-package seedu.duke;
-
+package seedu.duke.command.itemcommand;
+import seedu.duke.command.Command;
+import seedu.duke.HotelLiteManagerException;
+import seedu.duke.EmptyItemPaxException;
+import seedu.duke.EmptyItemNameException;
+import seedu.duke.InvalidCommandException;
+import seedu.duke.Item;
+import seedu.duke.ItemList;
+import seedu.duke.Ui;
+import seedu.duke.ListContainer;
+import seedu.duke.InvalidItemPaxException;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 import java.util.logging.Level;
-
 /**
  * Represents a command to add a new item to the item list. An AddItemCommand object consists of the name of the item
  * to add as well as its pax.

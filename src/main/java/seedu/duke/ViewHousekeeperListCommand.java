@@ -1,4 +1,5 @@
 package seedu.duke;
+import seedu.duke.command.Command;
 
 public class ViewHousekeeperListCommand extends Command {
 

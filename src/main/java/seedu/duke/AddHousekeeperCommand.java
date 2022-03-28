@@ -2,6 +2,7 @@ package seedu.duke;
 
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import seedu.duke.command.Command;
 
 /**
  * Extract name and age of housekeeper from user input and record it into the housekeeper list.

@@ -1,7 +1,7 @@
 package seedu.duke;
 
 import java.io.IOException;
-import java.util.List;
+import seedu.duke.command.Command;
 
 public class Duke {
     /**

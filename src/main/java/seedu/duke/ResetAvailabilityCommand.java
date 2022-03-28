@@ -1,4 +1,5 @@
 package seedu.duke;
+import seedu.duke.command.Command;
 
 /**
  * Reset availability of each housekeeper when needed such as a start of a new week.

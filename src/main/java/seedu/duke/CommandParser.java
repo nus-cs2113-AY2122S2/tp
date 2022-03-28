@@ -1,5 +1,13 @@
 package seedu.duke;
 
+import seedu.duke.command.Command;
+import seedu.duke.command.itemcommand.AddItemCommand;
+import seedu.duke.command.itemcommand.ViewItemWithZeroPaxCommand;
+import seedu.duke.command.itemcommand.SearchItemCommand;
+import seedu.duke.command.itemcommand.UpdateItemPaxCommand;
+import seedu.duke.command.itemcommand.DeleteItemCommand;
+import seedu.duke.command.itemcommand.UpdateItemNameCommand;
+import seedu.duke.command.itemcommand.ViewItemListCommand;
 /**
  * Class that implements behavior of parsing user input and linking
  * that user input to a Command class.
