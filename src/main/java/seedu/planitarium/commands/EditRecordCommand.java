@@ -44,9 +44,16 @@ public class EditRecordCommand extends Command{
         group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
         keyword = Parser.parseKeyword(userInput);
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
-        description = Parser.parseDescription(userInput);
-        isPermanent = Parser.parseRecurringStatus(userInput);
-        //amount = Parser.getValidMoney(Parser.parseIncome(userInput));
+        try {
+            isPermanent = Parser.parseRecurringStatus(userInput);
+        } catch (PlanITariumException e) {
+            isPermanent = Boolean.parseBoolean(null);
+        }
+        try {
+            description = Parser.parseDescription(userInput);
+        } catch (PlanITariumException e) {
+            description = null;
+        }
         assert (uid < 1) : USER_INDEX_NOT_VALID;
         logger.log(Level.INFO, String.format(LOG_EDITREC_INFO,description, uid,group));
     }
@@ -54,19 +61,33 @@ public class EditRecordCommand extends Command{
     @Override
     public void execute() throws PlanITariumException{
         assert (keyword != null) : KEYWORD_NOT_NULL;
-        assert (userInput != null) : INPUT_NOT_NULL;
         assert (family != null) : FAMILY_NOT_NULL;
-        assert (description != null) : DESCRIPTION_NOT_NULL;
         switch (keyword) {
         case EDIT_INCOME_CMD:
-            amount = Parser.getValidMoney(Parser.parseIncome(userInput));
+            try {
+                amount = Parser.getValidMoney(Parser.parseIncome(userInput));
+            } catch (PlanITariumException e) {
+                amount = Double.parseDouble(null);
+            }
+            index = Parser.getValidIncomeIndex(Parser.parseRecordIndex(userInput),
+                    family.getNumberOfIncomes(group, uid));
             family.editIncome(uid, group, index, description, amount, isPermanent);
             logger.log(Level.INFO, String.format(
                     LOG_EXECUTE_INFO, INCOME, description, index, amount, category, uid, group));
             break;
         case EDIT_SPENT_CMD:
-            amount = Parser.getValidMoney(Parser.parseExpenditure(userInput));
-            category = Parser.getValidCategoryIndex(Parser.parseCategoryIndex(userInput));
+            index = Parser.getValidExpenditureIndex(Parser.parseRecordIndex(userInput),
+                    family.getNumberOfExpenditures(uid, group));
+            try {
+                amount = Parser.getValidMoney(Parser.parseExpenditure(userInput));
+            } catch (PlanITariumException e) {
+                amount = Double.parseDouble(null);
+            }
+            try {
+                category = Parser.getValidCategoryIndex(Parser.parseCategoryIndex(userInput));
+            } catch (PlanITariumException e) {
+                category = Integer.parseInt(null);
+            }
             family.editExpend(group, uid, index, description, amount, category, isPermanent);
             logger.log(Level.INFO, String.format(
                     LOG_EXECUTE_INFO, EXPEND, description, index, amount, category, uid, group));
