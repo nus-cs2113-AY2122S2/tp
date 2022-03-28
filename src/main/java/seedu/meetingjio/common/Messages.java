@@ -45,4 +45,6 @@ public class Messages {
             + "7. " + MESSAGE_CLEAR_FORMAT
             + "8. " + MESSAGE_EXIT_FORMAT
             + MESSAGE_DIVIDER;
+
+    public static final String SAVE_DATA_MESSAGE = "Data saved to local successfully";
 }

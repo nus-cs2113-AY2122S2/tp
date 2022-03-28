@@ -1,6 +1,7 @@
 package seedu.meetingjio.commands;
 
 import seedu.meetingjio.Parser;
+import seedu.meetingjio.storage.StorageFile;
 import seedu.meetingjio.timetables.MasterTimetable;
 import java.util.Scanner;
 
