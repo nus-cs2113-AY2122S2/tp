@@ -100,4 +100,15 @@ public class Configuration {
     public String getConfigurationValue(ConfigurationGroup group) {
         return configurationGroupHashMap.get(group);
     }
+
+    /**
+     * Returns a list of all config settings and their descriptions.
+     */
+    public static String getAllConfigurationExplanations() {
+        String result = "";
+        for (String s : EXPLAIN_CONFIGURE_GROUP) {
+            result += s + LS;
+        }
+        return result;
+    }
 }
