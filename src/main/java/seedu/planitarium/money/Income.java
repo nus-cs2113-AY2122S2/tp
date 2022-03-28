@@ -1,6 +1,6 @@
-package seedu.planitarium.money;
+//@@author tjiarong
 
-import java.time.LocalDate;
+package seedu.planitarium.money;
 
 public class Income extends Money {
     /**

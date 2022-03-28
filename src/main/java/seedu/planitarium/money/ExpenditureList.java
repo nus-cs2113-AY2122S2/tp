@@ -1,3 +1,5 @@
+//@@author HansHengGit
+
 package seedu.planitarium.money;
 
 import seedu.planitarium.ProjectLogger;
@@ -122,6 +124,11 @@ public class ExpenditureList extends MoneyList {
         return expenditureArrayList.get(index - 1).getDescription();
     }
 
+    public ArrayList<Expenditure> getExpenditureArrayList() {
+        return expenditureArrayList;
+    }
+
+    //@@author tjiarong
     public LocalDate getInitDate(int index) {
         logger.log(Level.INFO, LOG_DATE);
         assert (index > ARRAY_INDEX);
@@ -136,9 +143,5 @@ public class ExpenditureList extends MoneyList {
         assert (index <= numberOfExpenditures);
         logger.log(Level.INFO, LOG_ASSERT_PASSED);
         return expenditureArrayList.get(index - 1).isPermanent();
-    }
-
-    public ArrayList<Expenditure> getExpenditureArrayList() {
-        return expenditureArrayList;
     }
 }
