@@ -8,12 +8,12 @@ import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.commands.ListCommand;
-import seedu.meetingjio.commands.FreeCommand;
 
 import java.util.ArrayList;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
+import static seedu.meetingjio.common.Messages.NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
 
 public class MasterTimetable {
 
@@ -151,6 +151,26 @@ public class MasterTimetable {
         for (int i = 0; i < meetingList.size(); i++) {
             if (meeting.equals(meetingList.get(i))) {
                 meetingList.remove(i);
+            }
+        }
+    }
+
+    public String deleteAllMeetings() {
+        for (Timetable timetable : timetables) {
+            deleteMeetingsFromTimetable(timetable);
+        }
+        for (int i = 0; i < meetingList.size(); i++) {
+            meetingList.remove(0);
+        }
+
+        return NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
+    }
+
+    public void deleteMeetingsFromTimetable(Timetable timetable) {
+        for (int i = 0; i < timetable.size(); i++) {
+            Event event = timetable.get(i);
+            if (event instanceof Meeting) {
+                timetable.remove(i);
             }
         }
     }
