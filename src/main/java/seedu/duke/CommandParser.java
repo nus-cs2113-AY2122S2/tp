@@ -13,11 +13,11 @@ public class CommandParser {
     private static final String DELETE_ITEM_COMMAND = "Delete Item ";
     private static final String UPDATE_ITEM_PAX_COMMAND = "Update Item Pax ";
     private static final String UPDATE_ITEM_NAME_COMMAND = "Update Item Name ";
+    private static final String ADD_HOUSEKEEPER_COMMAND = "add housekeeper ";
     private static final String SEARCH_ITEM_COMMAND = "Search Item ";
-    private static final String ADD_HOUSEKEEPER_COMMAND = "Add Housekeeper ";
     private static final String ADD_PERFORMANCE_COMMAND = "add housekeeper performance";
     private static final String VIEW_PERFORMANCES_COMMAND = "view housekeeper performances";
-    private static final String ADD_AVAILABILITY_COMMAND = "Availability ";
+    private static final String ADD_AVAILABILITY_COMMAND = "availability ";
     private static final String ADD_SATISFACTION_COMMAND = "add satisfaction";
     private static final String VIEW_SATISFACTIONS_COMMAND = "view satisfactions";
     private static final String AVERAGE_SATISFACTION_COMMAND = "average satisfaction";
@@ -28,7 +28,7 @@ public class CommandParser {
     private static final String CHECK_ROOM_BY_LEVEL = "check level";
     private static final String CHECK_BY_CATEGORY = "check category";
     private static final String ASSIGN_HOUSEKEEPER = "Assign";
-    private static final String VIEW_HOUSEKEEPER_COMMAND = "View Recorded Housekeeper";
+    private static final String VIEW_HOUSEKEEPER_COMMAND = "view recorded housekeeper";
     private static final String VIEW_AVAILABLE_HOUSEKEEPER_DAY = "get available on ";
     private static final String RESET_AVAILABILITY = "is a new week";
     private static final String DELETE_PROFILE = "delete housekeeper ";

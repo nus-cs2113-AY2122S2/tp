@@ -24,7 +24,7 @@ public class AssignHousekeeperTest {
         }
 
         CommandParser parser = new CommandParser();
-        Command command1 = parser.parse("Add Housekeeper Susan ~ 23");
+        Command command1 = parser.parse("add housekeeper Susan / 23");
         AddHousekeeperCommand addHousekeeperCommand = (AddHousekeeperCommand) command1;
 
 
