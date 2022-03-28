@@ -15,7 +15,6 @@ import seedu.sherpass.command.UnmarkCommand;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Ui;
 
-import static seedu.sherpass.constant.CommandParameter.FREQUENCY_DELIMITER;
 import static seedu.sherpass.constant.Index.COMMAND_CONTENT_INDEX;
 import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
 import static seedu.sherpass.constant.Index.OPTIONS_INDEX;
@@ -64,7 +63,7 @@ public class Parser {
         case StudyCommand.COMMAND_WORD:
             return new StudyCommand();
         case ShowCommand.COMMAND_WORD:
-            return TaskParser.prepareShow(splitInput);
+            return TimetableParser.prepareShow(splitInput);
         case HelpCommand.COMMAND_WORD:
             return prepareHelp(userInput);
         case ExitCommand.COMMAND_WORD:

@@ -8,8 +8,11 @@ import seedu.sherpass.util.parser.TaskParser;
 import seedu.sherpass.util.parser.TimerParser;
 
 import seedu.sherpass.task.TaskList;
+
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
+
+import seedu.sherpass.util.parser.TimetableParser;
 
 import static seedu.sherpass.constant.Index.STUDY_PARAMETER_INDEX;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_TIMER_INPUT_MESSAGE;
@@ -73,7 +76,7 @@ public class TimerLogic {
     }
 
     private void executeShow(Storage storage, String[] parsedInput) {
-        Command c = TaskParser.prepareShow(parsedInput);
+        Command c = TimetableParser.prepareShow(parsedInput);
         if (c != null) {
             c.execute(taskList, ui, storage);
             printAvailableCommands();
