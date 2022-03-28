@@ -333,9 +333,19 @@ public class PlanList {
      *
      * @param userArgument The argument entered by user, that is, the index of plan to view details.
      * @param ui An instance of the UI class.
+     * @throws NumberFormatException If index of plan that user entered is not an integer.
+     * @throws InvalidPlanException If index of plan is out of range.
      */
-    public void listPlanDetails(String userArgument, UI ui) throws NumberFormatException {
+    public void listPlanDetails(String userArgument, UI ui) throws NumberFormatException, InvalidPlanException {
         int indexOfPlan = Integer.parseInt(userArgument.trim());
+        String className = this.getClass().getSimpleName();
+
+        boolean isIndexValid = checkPlanIndexIsWithinRange(indexOfPlan);
+
+        if (!isIndexValid) {
+            throw new InvalidPlanException(className, InvalidPlanException.PLAN_INDEX_OUT_OF_RANGE);
+        }
+
         Plan planToViewDetails = getPlanFromIndexNum(indexOfPlan);
         String planName = getPlansDisplayList().get(indexOfPlan - 1);
 
