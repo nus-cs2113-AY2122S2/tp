@@ -43,9 +43,16 @@ public class ClearCommand extends Command {
         } catch (MissingValueException mve) {
             return ERROR_UNSPECIFIED_LIST_CLEAR;
         }
-
     }
 
+    /**
+     * Clear timetable of user specified from the masterTimetable list by
+     * first removing all the events in that timetable.
+     *
+     * @param user user to timetable to clear
+     * @param masterTimetable masterTimetable is the timetable list initialised
+     *
+     */
     private String clearTimetableUser(String user, MasterTimetable masterTimetable) {
         Timetable timetable;
         try {
@@ -61,14 +68,28 @@ public class ClearCommand extends Command {
         return printClearConfirmation(user);
     }
 
+    /**
+     * This method clears all timetables (from all users) from the masterTimetable List.
+     *
+     * @param masterTimetable The Master Timetable containing everyone's timetables
+     * @return printAllClearConfirmation() A confirmation string that all records have been cleared
+     */
     private String clearAll(MasterTimetable masterTimetable) {
         int numTimetables = masterTimetable.getSize();
+        Timetable timetable;
         for (int i = 0; i < numTimetables; i++) {
+            timetable = masterTimetable.getByIndex(0);
+            clearTimetable(timetable);
             masterTimetable.removeByIndex(0);
         }
         return printAllClearConfirmation();
     }
 
+    /**
+     * This method clears all the events in the timetable specified.
+     *
+     * @param timetable The timetable containing multiple events
+     */
     private void clearTimetable(Timetable timetable) {
         int numEntries = timetable.size();
         for (int i = 0; i < numEntries; i++) {
@@ -77,10 +98,19 @@ public class ClearCommand extends Command {
         assert (timetable.size() == 0) : ERROR_NON_EMPTY_LIST;
     }
 
+    /**
+     * This method informs the user that the specified user they tried to clear has been successfully cleared.
+     *
+     * @param user The user's timetable that has been cleared.
+     */
     public static String printClearConfirmation(String user) {
         return user + "'s timetable has been cleared";
     }
 
+    /**
+     * This method informs the user that all the timetables have been cleared.
+     *
+     */
     public static String printAllClearConfirmation() {
         return "All records of everyone's timetable has been cleared";
     }

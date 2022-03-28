@@ -39,7 +39,7 @@ public class MasterTimetable {
     }
 
     public void removeByName(String name) {
-        for (int i = 0; i < timetables.size(); i++){
+        for (int i = 0; i < timetables.size(); i++) {
             if (name.equalsIgnoreCase(timetables.get(i).getName())) {
                 timetables.remove(i);
             }
