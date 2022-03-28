@@ -153,7 +153,7 @@ public class Family {
      * @param isSilent Whether to print confirmation
      */
     public void addExpend(int personIndex, int group, String description, double amount, boolean isPermanent,
-                          Category category, boolean isSilent) {
+                          int category, boolean isSilent) {
         String infoString = "Method addExpend() called";
         logger.log(Level.INFO, infoString);
         getList(group).addExpend(personIndex, description, amount, isPermanent, category);
@@ -274,7 +274,7 @@ public class Family {
      * @param isPermanent Whether the expenditure is recurring
      */
     public void editExpend(int personIndex, int group, int expendIndex, String description, double amount,
-                           Category category, boolean isPermanent) {
+                           int category, boolean isPermanent) {
         String infoString = "Method editExpend() called";
         logger.log(Level.INFO, infoString);
         getList(group).editExpend(personIndex, expendIndex, description, amount, category, isPermanent);

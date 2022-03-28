@@ -102,7 +102,7 @@ public class Person {
      * @param category The category of the expenditure
      * @param isSilent Whether to print confirmation
      */
-    public void addExpend(String description, double amount, boolean isPermanent, Category category, boolean isSilent) {
+    public void addExpend(String description, double amount, boolean isPermanent, int category, boolean isSilent) {
         assert (description != null);
         expenditureList.addExpenditure(description, amount, isPermanent, category);
         if (isSilent) {
@@ -223,7 +223,7 @@ public class Person {
      * @param category The category of the expenditure
      * @param isPermanent Whether the expenditure is recurring
      */
-    public void editExpend(int expendIndex, String description, double amount, Category category, boolean isPermanent) {
+    public void editExpend(int expendIndex, String description, double amount, int category, boolean isPermanent) {
         incomeList.exitExpend(expendIndex, description, amount, category, isPermanent);
     }
 }

@@ -191,7 +191,7 @@ public class PersonList {
      * @param category The category of the expenditure
      * @param isSilent Whether to print confirmation
      */
-    public void addExpend(int personIndex, String description, double amount, boolean isPermanent, Category category,
+    public void addExpend(int personIndex, String description, double amount, boolean isPermanent, int category,
                           boolean isSilent) {
         String infoString = "Method addExpend() called";
         logger.log(Level.INFO, infoString);
@@ -259,7 +259,7 @@ public class PersonList {
      * @param category The category of the expenditure
      * @param isPermanent Whether the expenditure is recurring
      */
-    public void editExpend(int personIndex, int expendIndex, String description, double amount, Category category,
+    public void editExpend(int personIndex, int expendIndex, String description, double amount, int category,
                            boolean isPermanent) {
         String infoString = "Method editExpend() called";
         logger.log(Level.INFO, infoString);
