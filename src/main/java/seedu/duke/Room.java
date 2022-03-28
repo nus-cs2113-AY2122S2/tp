@@ -42,7 +42,7 @@ public class Room {
     }
 
     public String toString() {
-        return getType() + "\t\t" + getRoomId() + "\t\t\t\t"
-                + getLevel() + "\t\t" + (getIsVacant() ? "Vacant" : "Occupied");
+        return getType() + "\t\t" + getRoomId() + "\t\t\t "
+                + getLevel() + "\t\t\t" + (getIsVacant() ? "Vacant  " : "Occupied");
     }
 }
