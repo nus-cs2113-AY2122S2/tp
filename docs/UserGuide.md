@@ -389,7 +389,7 @@ To view each plan in detail, enter
 3. Grow My Muscles
 ----------------------------------------------------------------------
 ```
-To view details of plan number 3 from the list, enter the following command:
+To view details of plan number 3 from the list, enter the following command:<br/>
 *Plan number 3 is created by the command in [Create A Plan](#create-a-plan-plan-new).*
 ```
 > plan /details 3
