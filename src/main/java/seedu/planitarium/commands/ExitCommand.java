@@ -3,6 +3,7 @@ package seedu.planitarium.commands;
 import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.global.UI;
 import seedu.planitarium.person.Family;
+import seedu.planitarium.storage.Storage;
 
 import java.util.logging.Level;
 
@@ -25,6 +26,7 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute() {
+        Storage.saveData(family);
         UI.exit();
         System.out.println(UI.HORI_LINE);
         logger.log(Level.INFO, LOG_EXECUTE_INFO);

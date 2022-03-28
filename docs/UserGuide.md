@@ -225,11 +225,11 @@ Example of usage:
 
 <br/>
 
-### Listing all records by group: `list`
+### Listing all records by group: `overview`
 
 > Shows a list of the total incomes, expenditures and remaining of each group
 
-Format: `list`
+Format: `overview`
 
 Example of usage:
 
@@ -306,7 +306,7 @@ the [features](#features) section.
 | [Add an expenditure](#adding-an-expenditure-addout)           | addout /u__ /g __ /e __ /d __ /c __ /p __          |
 | [Delete an expenditure](#deleting-an-expenditure-deleteout)   | deleteout /u __ /g __ /r __                        |
 | [Edit an expenditure](#editing-an-expenditure-editout)        | editout /u __ /g __ /r __ /e __ /d __ /c __  /p __ |
-| [List records by group](#listing-all-records-by-group-list)   | list                                               |
+| [List records by group](#listing-all-records-by-group-list)   | overview                                           |
 | [List records by person](#listing-all-records-by-person-list) | list /g __                                         |
 | [Search](#searching-find)                                     | find /d __ /c __                                   | 
 | [List categories](#listing-categories-listcat)                | listcat                                            |
@@ -324,7 +324,7 @@ the [features](#features) section.
 * Edit an
   expenditure `editout /u USER_INDEX /g GROUP_INDEX /r EXPENDITURE_INDEX /i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>`
 * Show remain `remain`
-* List records by person `list`
+* List records by person `overview`
 * List records by group `list /g GROUP_INDEX`
 * List categories `listcat`
 * Exit `bye`

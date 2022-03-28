@@ -9,7 +9,7 @@ public class Help {
     }
 
     /**
-     * Initialize an array to print help message
+     * Initialize an array to print help message.
      */
     public static void initialiseHelp() {
         CommandSummary = new ArrayList<String>();

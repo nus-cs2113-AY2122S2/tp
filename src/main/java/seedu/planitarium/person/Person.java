@@ -5,9 +5,12 @@ package seedu.planitarium.person;
 import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.category.Category;
 import seedu.planitarium.global.Constants;
+import seedu.planitarium.money.Expenditure;
+import seedu.planitarium.money.Income;
 import seedu.planitarium.money.IncomeList;
 import seedu.planitarium.money.ExpenditureList;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 public class Person {
@@ -44,8 +47,8 @@ public class Person {
      *
      * @return The person's list of incomes
      */
-    public IncomeList getIncomeList() {
-        return incomeList;
+    public ArrayList<Income> getIncomeList() {
+        return incomeList.getIncomeArrayList();
     }
 
     /**
@@ -53,8 +56,8 @@ public class Person {
      *
      * @return The person's list of expenditures
      */
-    public ExpenditureList getExpenditureList() {
-        return expenditureList;
+    public ArrayList<Expenditure> getExpenditureList() {
+        return expenditureList.getExpenditureArrayList();
     }
 
     /**
@@ -223,6 +226,6 @@ public class Person {
      * @param isPermanent Whether the expenditure is recurring
      */
     public void editExpend(int expendIndex, String description, double amount, int category, boolean isPermanent) {
-        incomeList.exitExpend(expendIndex, description, amount, category, isPermanent);
+        expenditureList.editExpenditure(expendIndex, description, amount, category, isPermanent);
     }
 }

@@ -33,7 +33,7 @@ public class AddRecordCommand extends Command {
     protected String description;
     protected double amount;
     protected boolean isPermanent;
-    protected boolean isSilent;
+    protected boolean isSilent = Constants.FOR_USER;
     protected int group;
     protected int uid;
     protected int category = -1;

@@ -40,8 +40,8 @@ public class UI {
     }
 
     public static void printHelpMsg() {
-        for(String Commands: Help.CommandSummary) {
-            System.out.println(Commands + System.lineSeparator());
+        for (String commands: Help.CommandSummary) {
+            System.out.println(commands);
         }
     }
 
