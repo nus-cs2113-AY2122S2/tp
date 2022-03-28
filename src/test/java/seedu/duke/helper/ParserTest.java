@@ -176,8 +176,8 @@ class ParserTest {
 
     @Test
     void parseViewDoctorWithParamTest() {
-        String parameter = "S1234567A";
-        String[] parameterArray = {"S1234567A"};
+        String parameter = "nric, S1234567A";
+        String[] parameterArray = {"nric", "S1234567A"};
         try {
             assertArrayEquals(parameterArray,Parser.parseViewDoctor(parameter).parameterArray);
         } catch (HalpmiException e) {
@@ -212,8 +212,8 @@ class ParserTest {
 
     @Test
     void parseViewPatientWithParamTest() {
-        String parameter = "S1234567A";
-        String[] parameterArray = {"S1234567A"};
+        String parameter = "nric, S1234567A";
+        String[] parameterArray = {"nric", "S1234567A"};
         try {
             assertArrayEquals(parameterArray,Parser.parseViewPatient(parameter).parameterArray);
         } catch (HalpmiException e) {
@@ -248,8 +248,8 @@ class ParserTest {
 
     @Test
     void parseViewMedicineWithParamTest() {
-        String parameter = "S1234";
-        String[] parameterArray = {"S1234"};
+        String parameter = "id, S1234";
+        String[] parameterArray = {"id","S1234"};
         try {
             assertArrayEquals(parameterArray,Parser.parseViewMedicine(parameter).parameterArray);
         } catch (HalpmiException e) {
@@ -270,7 +270,7 @@ class ParserTest {
 
     @Test
     void parseViewMedicineInvalidParamTest() {
-        String[] parameters = {"S1234567A,S1235467A"};
+        String[] parameters = {"S1234567A"};
 
         for (String s : parameters) {
             try {

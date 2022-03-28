@@ -5,7 +5,7 @@ import seedu.duke.exception.DuplicateEntryException;
 import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
-import seedu.duke.helper.command.CommandLineTable;
+import seedu.duke.helper.CommandLineTable;
 import seedu.duke.helper.finder.MedicineFinder;
 
 import java.time.LocalDate;
@@ -47,7 +47,6 @@ public class MedicineList extends List {
                 Integer.parseInt(parameterArray[2]), parameterArray[3], parameterArray[4],
                 Integer.parseInt(parameterArray[5]));
         medicines.add(newMedicine);
-        UI.printParagraph("Medicine has been added");
     }
 
     public void find(String[] command) {
@@ -99,7 +98,6 @@ public class MedicineList extends List {
         for (int i = 0; i < getSize(); i++) {
             if (medicines.get(i).getMedicineId().equals(medicineId)) {
                 medicines.remove(i);
-                UI.printParagraph("Medicine has been removed");
                 return;
             }
         }
