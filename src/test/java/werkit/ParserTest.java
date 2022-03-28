@@ -38,12 +38,23 @@ class ParserTest {
     }
 
     @Test
-    void parseUserInput_validHelpCommand_expectSuccess() throws InvalidCommandException, IOException {
+    void parseUserInput_validWorkoutCommand_expectSuccess() throws InvalidCommandException {
+        String workoutCommand1 = "workout /new russian twist /reps 1000";
+        String workoutCommand2 = "workout /list";
+        String workoutCommand3 = "workout /delete 1";
+
+        assertTrue(parser.parseUserInput(workoutCommand1) instanceof WorkoutCommand);
+        assertTrue(parser.parseUserInput(workoutCommand2) instanceof WorkoutCommand);
+        assertTrue(parser.parseUserInput(workoutCommand3) instanceof WorkoutCommand);
+    }
+
+    @Test
+    void parseUserInput_validHelpCommand_expectSuccess() throws InvalidCommandException {
         assertTrue(parser.parseUserInput("help") instanceof HelpCommand);
     }
 
     @Test
-    void parseUserInput_validExitCommand_expectSuccess() throws InvalidCommandException, IOException {
+    void parseUserInput_validExitCommand_expectSuccess() throws InvalidCommandException {
         assertTrue(parser.parseUserInput("exit") instanceof ExitCommand);
     }
 
