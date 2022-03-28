@@ -27,7 +27,7 @@ public class HelpCommandTest {
      */
     @Test
     void helpCommand_fromUser_expectHelpPage() throws MindMyMoneyException {
-        String helpPage = "---------------------------------------Help Page---------------------------------------\n"
+        String helpPage = "---------------------------------------Expenditure Help Page---------------------------------------\n"
                 + "1. Listing all Expenditures: list /expenses\n"
                 + "2. Adding an Expenditure entry: add /e [EXPENDITURE] /c [CATEGORY] "
                 + "/d [DESCRIPTION] /a [AMOUNT] /t [TIME]\n"
