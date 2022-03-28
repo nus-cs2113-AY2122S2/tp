@@ -1,3 +1,5 @@
+//@@author tjiarong
+
 package seedu.planitarium.money;
 
 import seedu.planitarium.ProjectLogger;
@@ -21,6 +23,7 @@ public class IncomeList extends MoneyList {
     private static final String LOG_GET_NUM_INC = "getNumberOfIncomes()";
     private static final String LOG_GET_TOTAL_INC = "getTotalIncome()";
     private static final String LOG_PRINT_LIST = "printIncomeList()";
+    private static final String LOG_EDIT_INC = "editIncome()";
 
     /**
      * Creates a new Income Object.
@@ -135,5 +138,33 @@ public class IncomeList extends MoneyList {
 
     public ArrayList<Income> getIncomeArrayList() {
         return incomeArrayList;
+    }
+
+    public void editIncome(int index, String description, double amount, Boolean isPermanent) {
+        logger.log(Level.INFO, LOG_EDIT_INC);
+        assert (index > ARRAY_INDEX);
+        assert (index <= numberOfIncomes);
+        logger.log(Level.INFO, LOG_ASSERT_PASSED);
+        editIncDesc(index, description);
+        editIncAmount(index, amount);
+        editIncPerm(index, isPermanent);
+    }
+
+    private void editIncPerm(int index, Boolean isPermanent) {
+        if (isPermanent != null){
+            incomeArrayList.get(index - 1).setPermanent(isPermanent);
+        }
+    }
+
+    private void editIncAmount(int index, Double amount) {
+        if (amount != null){
+            incomeArrayList.get(index - 1).setAmount(amount);
+        }
+    }
+
+    private void editIncDesc(int index, String description) {
+        if (description != null){
+            incomeArrayList.get(index - 1).setDescription(description);
+        }
     }
 }

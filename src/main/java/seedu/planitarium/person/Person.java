@@ -223,6 +223,6 @@ public class Person {
      * @param isPermanent Whether the expenditure is recurring
      */
     public void editExpend(int expendIndex, String description, double amount, int category, boolean isPermanent) {
-        incomeList.exitExpend(expendIndex, description, amount, category, isPermanent);
+        expenditureList.editExpend(expendIndex, description, amount, category, isPermanent);
     }
 }
