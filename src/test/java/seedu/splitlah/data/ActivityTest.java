@@ -10,8 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class ActivityTest {
-
-
+    
     Manager manager = new Manager();
     Session session;
     Activity activityOne;
@@ -26,6 +25,20 @@ class ActivityTest {
             "activity /create /sid 1 /n Lunch /p Alice /i Alice Bob Charlie /co 15";
     private static final String CREATE_TEST_ACTIVITY_INPUT_TWO =
             "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30";
+    private static final String ACTIVITY_ONE_STRING =
+            "Activity Id #1 --\n"
+                    + "Name:  Lunch\n"
+                    + "Id:    1\n"
+                    + "Payer: Alice\n"
+                    + "Cost:  $15.00\n"
+                    + "Involved: \n"
+                    + "-------------------------\n"
+                    + "# | Name    | Cost Owed \n"
+                    + "-------------------------\n"
+                    + "1 | Alice   | 5.00      \n"
+                    + "2 | Bob     | 5.00      \n"
+                    + "3 | Charlie | 5.00      \n"
+                    + "=========================";
 
     /**
      * Creates a session and an activity that are stored and managed by the Manager object.
@@ -58,5 +71,11 @@ class ActivityTest {
     void compareTo_smallerActivityIdInput_returnsOne() {
         int compareResults = activityOne.compareTo(activityTwo);
         assertEquals(-1, compareResults);
+    }
+
+    @Test
+    void toString_activityOne_returnsCorrectFormat() {
+        String activityString = activityOne.toString();
+        assertEquals(ACTIVITY_ONE_STRING, activityString);
     }
 }
