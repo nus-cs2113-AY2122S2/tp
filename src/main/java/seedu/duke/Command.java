@@ -19,10 +19,9 @@ public abstract class Command {
      *
      * @param ui The instance of the Ui class (used for printing additional messages when a command is executed.
      * @throws HotelLiteManagerException If there is any error with user input.
-     * @throws WrongCommandException     If the command is not recognized.
      */
     public abstract void execute(ListContainer listContainer, Ui ui)
-            throws HotelLiteManagerException, WrongCommandException;
+            throws HotelLiteManagerException;
 
     public boolean isExit() {
         return this.isExit;

@@ -75,6 +75,10 @@ public class Ui {
         }
     }
 
+    public void printNoItemsFoundInListAcknowledgementMessage() {
+        System.out.println("No Item matching the keyword has been found.");
+    }
+
     public void printHousekeeperList(HousekeeperList housekeeperList) {
         printMessage("======== Housekeeper List ========");
         for (int i = 0; i < housekeeperList.getTotalHousekeeper(); i++) {

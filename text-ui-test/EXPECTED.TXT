@@ -8,8 +8,11 @@ Error! Item Pax is invalid.
 Error! Item Pax is invalid.
 The item and its pax has been added to the list of items in the inventory.
 There are currently 2 items within the inventory.
+The item and its pax has been added to the list of items in the inventory.
+There are currently 3 items within the inventory.
 1. Item Name: Toilet Roll Item Pax: 15
-2. Item Name: Spoon Item Pax: 2
+2. Item Name: Fork Item Pax: 15
+3. Item Name: Spoon Item Pax: 2
 Error! Invalid Command.
 The pax of Toilet Roll has been updated to 5.
 Error! Item Pax is invalid.
@@ -20,7 +23,7 @@ Error! Item not found in inventory.
 Error! Invalid Command.
 Error! Invalid Command.
 Toilet Roll has been removed from the Item List.
-There are currently 1 items within the Item List.
+There are currently 2 items within the Item List.
 Error! Item not found in inventory.
 Error! Invalid Command.
 Error! Item Name cannot be empty.
@@ -121,4 +124,13 @@ Everyone age has increased by one
 ======== Housekeeper List ========
 1. [JANE]: Age: 35, Availability: <Enter Availability>
 ======== End of the list ========
+Error! Invalid Command.
+Error! Invalid Command.
+Error! Invalid Command.
+Error! Item Name cannot be empty.
+Error! Item Name cannot be empty.
+Error! Item not found in inventory.
+Error! Invalid Command.
+1. Item Name: Fork Item Pax: 15
+2. Item Name: Premium Spoon Item Pax: 2
 see u again!

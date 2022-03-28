@@ -6,7 +6,7 @@ public class ExitCommand extends Command {
         isExit = true;
     }
 
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, WrongCommandException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         System.out.println("see u again!");
     }
 }
