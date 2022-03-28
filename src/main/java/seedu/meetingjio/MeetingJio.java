@@ -3,7 +3,7 @@ package seedu.meetingjio;
 import java.util.Scanner;
 import seedu.meetingjio.commands.Command;
 import seedu.meetingjio.timetables.MasterTimetable;
-import seedu.meetingjio.timetables.Timetable;
+import seedu.meetingjio.storage.StorageFile;
 import seedu.meetingjio.ui.TextUi;
 import static seedu.meetingjio.common.Messages.MESSAGE_DIVIDER;
 
@@ -16,6 +16,8 @@ public class MeetingJio {
 
     private static Scanner in = new Scanner(System.in);
 
+    private static MasterTimetable masterTimetable = new MasterTimetable();
+
     /** Starts the interaction with the user. */
     public static void main(String[] args) {
         start();
@@ -25,18 +27,20 @@ public class MeetingJio {
         TextUi.showHelpHint();
         System.out.println(MESSAGE_DIVIDER);
 
-        MasterTimetable masterTimetable = new MasterTimetable();
         String userInput = in.nextLine().trim();
         Command.executeCommand(userInput, masterTimetable, in);
+        StorageFile.saveData(masterTimetable);
         TextUi.showGoodByeMessage();
     }
 
     /** Initializes the application. */
     private static void start() {
         try {
+            StorageFile.loadData(masterTimetable);
             TextUi.showWelcomeMessage();
         } catch (RuntimeException e) {
-            TextUi.showInitFailedMessage();
+            /**TextUi.showInitFailedMessage();*/
+            e.printStackTrace();
         }
     }
 }
