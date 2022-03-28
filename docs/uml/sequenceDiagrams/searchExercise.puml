@@ -1,11 +1,42 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!include ../Style.puml
 
 autonumber
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+title Sequence Diagram of `search /exercise` Command
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+actor   User
+participant "werkIt:WerkIt" AS WerkIt
+participant "ui:UI" AS UI1
+participant "parser:Parser" AS Parser
+participant "newCommand\n:SearchCommand" AS newCommand
+participant "exerciseList\n:ExerciseList" AS ExerciseList
+
+activate WerkIt
+WerkIt -> UI1 : getUserInput()
+activate UI1
+User -> UI1 : `search /exercise` command
+WerkIt <-- UI1 : userInputTrimmed:String
+deactivate UI1
+
+WerkIt -> Parser : parseUserInput(userInput)
+activate Parser
+WerkIt <-- Parser : :Command
+deactivate Parser
+
+WerkIt -> newCommand : execute()
+activate newCommand
+newCommand -> ExerciseList : getExerciseList()
+activate ExerciseList
+
+newCommand <-- ExerciseList : "exerciseList:ArrayList<String>"
+deactivate ExerciseList
+
+newCommand -> newCommand : searchExercise()
+User <-- newCommand : search outcome
+
+deactivate newCommand
+
+destroy newCommand
 @enduml
