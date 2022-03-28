@@ -8,6 +8,7 @@ import seedu.mindmymoney.command.UpdateCommand;
 import seedu.mindmymoney.command.HelpCommand;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
+import seedu.mindmymoney.data.IncomeList;
 import seedu.mindmymoney.userfinancial.User;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,9 +24,10 @@ class ParserTest {
     @Test
     void parseCommand_normalInput_expectCorrectCommandObject() {
         String testInput = "help";
-        ExpenditureList testList = new ExpenditureList();
-        CreditCardList cardList = new CreditCardList();
-        User user = new User(testList, cardList);
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeTestList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeTestList);
         Parser testParser = new Parser();
 
         assertTrue(testParser.parseCommand(testInput, user) instanceof HelpCommand);
@@ -52,9 +54,11 @@ class ParserTest {
     @Test
     void parseCommand_invalidInput_expectHelpCommand() {
         Parser testParser = new Parser();
-        ExpenditureList testList = new ExpenditureList();
-        CreditCardList cardList = new CreditCardList();
-        User user = new User(testList, cardList);
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeTestList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeTestList);
+
         assertTrue(testParser.parseCommand("", user) instanceof HelpCommand);
     }
 }
