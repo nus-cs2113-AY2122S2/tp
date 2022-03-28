@@ -1,13 +1,6 @@
 package parser;
 
-import commands.AddCommand;
-import commands.Command;
-import commands.DeleteCommand;
-import commands.ExitCommand;
-import commands.HelpCommand;
-import commands.IncorrectCommand;
-import commands.ListCommand;
-import commands.LimitCommand;
+import commands.*;
 
 import exception.IllegalValueException;
 import exception.ParseException;
@@ -82,6 +75,10 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case FindCommand.COMMAND_WORD:
+            return new FindCommand(arguments);
+
 
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -232,6 +229,7 @@ public class Parser {
             return new IncorrectCommand(MESSAGE_INVALID_RECORD_DISPLAYED_INDEX);
         }
     }
+
 
     /**
      * Parses arguments in the context of the set limit command.
