@@ -16,19 +16,19 @@ public class Countdown extends Timer  {
     private boolean hasTimeLeft = false;
     protected int timeLeft;
 
-    private final JFrame jFrame;
-    private final JLabel jLabel;
+    private final JFrame jframe;
+    private final JLabel jlabel;
 
     /**
      * Creates a constructor for timer. Initialises the parameters needed for the countdown timer.
      *
      * @param ui UI
      */
-    public Countdown(TaskList taskList, Ui ui, JFrame jFrame, JLabel jLabel) {
+    public Countdown(TaskList taskList, Ui ui, JFrame jframe, JLabel jlabel) {
         super(taskList, ui);
         timeLeft = NO_TIME_LEFT;
-        this.jFrame = jFrame;
-        this.jLabel = jLabel;
+        this.jframe = jframe;
+        this.jlabel = jlabel;
     }
 
     private String convertTimeToString() {
@@ -65,15 +65,15 @@ public class Countdown extends Timer  {
     public void run() {
         isTimerRunning = true;
         printTimerStart();
-        jFrame.setVisible(true);
+        jframe.setVisible(true);
         while (hasTimeLeft) {
             assert timeLeft > NO_TIME_LEFT;
             String timeShownToUser = convertTimeToString();
-            jLabel.setText("Time left: " + timeShownToUser);
+            jlabel.setText("Time left: " + timeShownToUser);
             update();
         }
         if (timerRanOutOfTime()) {
-            jFrame.setVisible(false);
+            jframe.setVisible(false);
             assert timeLeft <= NO_TIME_LEFT;
             isTimerRunning = false;
             ui.showToUser("Time is up! Would you like to mark any tasks as done?");
@@ -105,7 +105,7 @@ public class Countdown extends Timer  {
      */
     public void stopTimer() {
         if (isTimerRunning) {
-            jFrame.setVisible(false);
+            jframe.setVisible(false);
             ui.showToUser("Alright, I've stopped the timer.");
             isTimerRunning = false;
             forcedStop = true;

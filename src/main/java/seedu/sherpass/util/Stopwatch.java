@@ -13,14 +13,14 @@ public class Stopwatch extends Timer {
 
     private int timeElapsed;
 
-    private final JFrame jFrame;
-    private final JLabel jLabel;
+    private final JFrame jframe;
+    private final JLabel jlabel;
 
-    public Stopwatch(TaskList taskList, Ui ui, JFrame jFrame, JLabel jLabel) {
+    public Stopwatch(TaskList taskList, Ui ui, JFrame jframe, JLabel jlabel) {
         super(taskList, ui);
         timeElapsed = 0;
-        this.jFrame = jFrame;
-        this.jLabel = jLabel;
+        this.jframe = jframe;
+        this.jlabel = jlabel;
     }
 
     /**
@@ -30,7 +30,7 @@ public class Stopwatch extends Timer {
     public void run() {
         isTimerRunning = true;
         printTimerStart();
-        jFrame.setVisible(true);
+        jframe.setVisible(true);
         while (!forcedStop) {
             update();
         }
@@ -71,7 +71,7 @@ public class Stopwatch extends Timer {
             Thread.sleep(1000);
             timeElapsed += 1;
             String timeShownToUser = convertTimeToString();
-            jLabel.setText("Elapsed time: " + timeShownToUser);
+            jlabel.setText("Elapsed time: " + timeShownToUser);
             if (isTimerPaused) {
                 waitForTimerToResume();
             }
@@ -85,7 +85,7 @@ public class Stopwatch extends Timer {
      */
     public void stopTimer() {
         if (isTimerRunning) {
-            jFrame.setVisible(false);
+            jframe.setVisible(false);
             ui.showToUser("Alright, I've stopped the timer.");
             isTimerRunning = false;
             forcedStop = true;

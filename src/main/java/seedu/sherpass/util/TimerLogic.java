@@ -28,8 +28,8 @@ public class TimerLogic implements WindowListener {
     private static Timer timer;
     private static TaskList taskList;
     protected boolean isTimerInitialised = false;
-    private final JFrame jFrame;
-    private final JLabel jLabel;
+    private final JFrame jframe;
+    private final JLabel jlabel;
     ActionListener actionListener = actionEvent -> {
         AbstractButton abstractButton =
                 (AbstractButton) actionEvent.getSource();
@@ -50,15 +50,15 @@ public class TimerLogic implements WindowListener {
     public TimerLogic(TaskList taskList, Ui ui) {
         TimerLogic.taskList = taskList;
         TimerLogic.ui = ui;
-        jFrame = new JFrame();
-        jLabel = new JLabel(EMPTY_STRING, SwingConstants.CENTER);
-        jFrame.setLayout(new BorderLayout());
-        jFrame.setBounds(500, 300, 300, 100);
-        jFrame.add(jLabel, BorderLayout.NORTH);
-        jFrame.addWindowListener(this);
+        jframe = new JFrame();
+        jlabel = new JLabel(EMPTY_STRING, SwingConstants.CENTER);
+        jframe.setLayout(new BorderLayout());
+        jframe.setBounds(500, 300, 300, 100);
+        jframe.add(jlabel, BorderLayout.NORTH);
+        jframe.addWindowListener(this);
         JToggleButton pauseResumeButton = new JToggleButton("Pause/Resume");
         pauseResumeButton.addActionListener(actionListener);
-        jFrame.add(pauseResumeButton, BorderLayout.CENTER);
+        jframe.add(pauseResumeButton, BorderLayout.CENTER);
     }
 
     /**
@@ -186,10 +186,10 @@ public class TimerLogic implements WindowListener {
     public void callResetTimer(String[] parsedInput) {
         String parameter = TimerParser.parseStudyParameter(parsedInput);
         if (parameter.equals("stopwatch")) {
-            timer = new Stopwatch(taskList, ui, jFrame, jLabel);
+            timer = new Stopwatch(taskList, ui, jframe, jlabel);
             return;
         }
-        timer = new Countdown(taskList, ui, jFrame, jLabel);
+        timer = new Countdown(taskList, ui, jframe, jlabel);
     }
 
     private boolean isTimerPausedOrStopped() {
@@ -207,12 +207,14 @@ public class TimerLogic implements WindowListener {
     }
 
     public void destroyFrame() {
-        jFrame.dispose();
+        jframe.dispose();
     }
 
 
     @Override
-    public void windowOpened(WindowEvent e) { }
+    public void windowOpened(WindowEvent e) {
+
+    }
 
     @Override
     public void windowClosing(WindowEvent e) {
@@ -225,14 +227,22 @@ public class TimerLogic implements WindowListener {
     }
 
     @Override
-    public void windowIconified(WindowEvent e) { }
+    public void windowIconified(WindowEvent e) {
+
+    }
 
     @Override
-    public void windowDeiconified(WindowEvent e) { }
+    public void windowDeiconified(WindowEvent e) {
+
+    }
 
     @Override
-    public void windowActivated(WindowEvent e) { }
+    public void windowActivated(WindowEvent e) {
+
+    }
 
     @Override
-    public void windowDeactivated(WindowEvent e) { }
+    public void windowDeactivated(WindowEvent e) {
+
+    }
 }
