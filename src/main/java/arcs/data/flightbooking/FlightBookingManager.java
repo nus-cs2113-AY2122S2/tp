@@ -1,9 +1,16 @@
 package arcs.data.flightbooking;
 
+import arcs.data.customer.Customer;
+import arcs.data.exception.ArcsException;
+import arcs.data.route.Route;
+
 import java.util.ArrayList;
 
 public class FlightBookingManager {
     private ArrayList<FlightBooking> flightBookings;
+    private static final String TIME_CLASH_MESSAGE = "There is time clash of this customer. "
+            + "The flight cannot be booked for this customer.";
+    private static final String SOLD_OUT_MESSAGE = "There is no empty seat for this flight.";
 
     public FlightBookingManager() {
         flightBookings = new ArrayList<>();
@@ -17,12 +24,31 @@ public class FlightBookingManager {
         return flightBookings;
     }
 
-    public boolean hasDuplicateIc(String ic) {
-        for (FlightBooking booking: flightBookings) {
-            if (ic.equals(booking.getIc())) {
+    public void bookFlight(Customer customer, Route route) throws ArcsException {
+        if (!hasEmptySeats(route)) {
+            throw new ArcsException(SOLD_OUT_MESSAGE);
+        }
+        if (hasTimeClash(customer.getIc(), route.getDate(), route.getTime())) {
+            throw new ArcsException(TIME_CLASH_MESSAGE);
+        }
+        flightBookings.add(new FlightBooking(customer, route));
+        route.incrementSold();
+    }
+
+    public boolean hasTimeClash(String ic, String date, String time) {
+        for (FlightBooking flightBooking: flightBookings) {
+            Customer customer = flightBooking.getCustomer();
+            Route route = flightBooking.getRoute();
+            if (customer.getIc().equals(ic) && route.getDate().equals(date)
+                && route.getTime().equals(time)) {
                 return true;
             }
         }
         return false;
     }
+
+    public boolean hasEmptySeats(Route route) {
+        return route.getEmptySeats() > 0;
+    }
+
 }

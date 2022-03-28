@@ -1,5 +1,7 @@
 package arcs.data.route;
 
+import arcs.data.exception.ArcsException;
+
 public class Route {
     private String flightID;
     private String date;
@@ -41,6 +43,17 @@ public class Route {
 
     public int getCapacity() {
         return capacity;
+    }
+
+    public int getEmptySeats() {
+        return capacity - sold;
+    }
+
+    public void incrementSold() throws ArcsException {
+        if (getEmptySeats() <= 0) {
+            throw new ArcsException("No empty seats available. Error in incrementing seats.");
+        }
+        sold ++;
     }
 
     public String getFlightInfo() {
