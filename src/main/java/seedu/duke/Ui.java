@@ -3,6 +3,8 @@ package seedu.duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static javax.swing.plaf.synth.Region.TABLE_HEADER;
+
 /**
  * Represents the User Interface component of the program.
  * The Ui object handles all interactions with the user such as printing the outputs to the user
@@ -11,7 +13,8 @@ import java.util.Scanner;
 public class Ui {
     private Scanner in = new Scanner(System.in);
     private static final int ARRAY_INDEX_OFFSET = 1;
-
+    private static final String LINE = "-------------------------------------------------------------------";
+    private static final String TABLE_HEADER = "Type\t\tRoom Id\t\tlevel\t\tStatus\t\t\tHousekeeper Name";
 
     /**
      * Returns a string containing the user input.
@@ -156,6 +159,10 @@ public class Ui {
         System.out.printf("The pax of %s has been updated to %d.\n", updatedItemName, updatedItemNewPax);
     }
 
+    public void printUpdateItemNameAcknowledgementMessage(String oldItemName, String newItemName) {
+        System.out.printf("The name of %s has been updated to %s.\n", oldItemName, newItemName);
+    }
+
     public void printAddSatisfactionAcknowledgementMessage(SatisfactionList satisfactionList,
                                                            Satisfaction recentSatisfaction) {
         System.out.println("The Satisfaction instance " + recentSatisfaction.getCustomerName() + ": "
@@ -177,6 +184,12 @@ public class Ui {
         System.out.println("The HousekeeperPerformance instance " + housekeeperPerformance.getName() + ": "
                 + housekeeperPerformance.getRating() + " has been added to the list of housekeeper performances.");
         System.out.printf("There are currently %d recorded performances.\n", housekeeperPerformanceList.getSize());
+    }
+
+    public void printTableHeader() {
+        System.out.println(LINE);
+        System.out.println(TABLE_HEADER);
+        System.out.println(LINE);
     }
 }
 

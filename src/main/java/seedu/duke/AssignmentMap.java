@@ -35,4 +35,11 @@ public class AssignmentMap {
         }
         return false;
     }
+
+    public String getHouseKeeperNameByRoom(Room room) {
+        if (!map.containsKey(room)) {
+            return "NA";
+        }
+        return map.get(room).getName();
+    }
 }
