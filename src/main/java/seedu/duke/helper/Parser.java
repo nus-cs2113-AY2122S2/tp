@@ -65,9 +65,7 @@ public class Parser {
         if (isNull(parameters)) {
             return new ViewPatientCommand(null);
         }
-        String[] viewPatientParameters = minParameterCheck(parameters, 1);
-        Validator.validateNric(viewPatientParameters[0]);
-        return new ViewPatientCommand(viewPatientParameters);
+        return parseFindPatient(parameters);
     }
 
     public static Command parseEditPatient(String parameters) throws HalpmiException {
@@ -92,9 +90,7 @@ public class Parser {
         if (isNull(parameters)) {
             return new ViewDoctorCommand(null);
         }
-        String[] viewDoctorParameters = minParameterCheck(parameters, 1);
-        Validator.validateNric(viewDoctorParameters[0]);
-        return new ViewDoctorCommand(viewDoctorParameters);
+        return parseFindDoctor(parameters);
     }
 
     public static Command parseEditDoctor(String parameters) throws HalpmiException {
@@ -119,8 +115,7 @@ public class Parser {
         if (isNull(parameters)) {
             return new ViewMedicineCommand(null);
         }
-        String[] viewMedicineParameters = minParameterCheck(parameters, 1);
-        return new ViewMedicineCommand(viewMedicineParameters);
+        return parseFindMedicine(parameters);
     }
 
     public static Command parseEditMedicine(String parameters) throws HalpmiException {
