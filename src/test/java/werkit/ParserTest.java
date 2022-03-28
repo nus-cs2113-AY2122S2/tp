@@ -59,6 +59,13 @@ class ParserTest {
     }
 
     @Test
+    void parseUserInput_validExerciseCommand_expectSuccess() throws InvalidCommandException {
+        String exerciseCommand = "exercise /list";
+
+        assertTrue(parser.parseUserInput(exerciseCommand) instanceof ExerciseCommand);
+    }
+
+    @Test
     void parseUserInput_invalidGeneralCommand_exceptionThrown() {
         assertThrows(InvalidCommandException.class, () -> parser.parseUserInput("exitt"));
         assertThrows(InvalidCommandException.class, () -> parser.parseUserInput("helpp"));
