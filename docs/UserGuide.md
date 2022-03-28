@@ -235,7 +235,6 @@ Example:
 ### Starting a default timer: `start`
 _Note: To be improved with study and rest timers - similar to pomodoro sessions._
 
-
 Start a study timer from our list of default timers.
 - Only 1 timer can be running at any 1 time.
 - Timer keeps track of time remaining and prints time remaining at regular intervals.
@@ -252,6 +251,11 @@ Format: `start MODE_NUMBER`
 - `MODE_NUMBER` 1 starts a 30 minutes timer
 - `MODE_NUMBER` 2 starts a 1 hour timer
 - `MODE_NUMBER` 3 starts a 1.5 hour timer
+
+_Important Note: 
+When the timer prints out the remaining time while you are typing in a command
+(e.g. `pause`/`stop`), Sherpass might have trouble processing your command. Don't worry if your
+command was not processed correctly, simply type in it again._
 
 Examples:
 
