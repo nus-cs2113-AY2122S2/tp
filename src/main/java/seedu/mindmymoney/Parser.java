@@ -12,8 +12,8 @@ import seedu.mindmymoney.helper.GeneralFunctions;
 import seedu.mindmymoney.userfinancial.User;
 
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
-import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM_IN_STRING;
-import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM_IN_STRING;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
 
 /**
  * Represents the input parser and deals with making sense of user commands.
@@ -31,23 +31,23 @@ public class Parser {
     public static Command parseCommand(String input, User user) {
         try {
             String[] parsedInput = GeneralFunctions.parseInput(input);
-            assert parsedInput[INDEX_OF_FIRST_ITEM_IN_STRING] != null : "First element in parsedInput is null";
+            assert parsedInput[INDEX_OF_FIRST_ITEM] != null : "First element in parsedInput is null";
 
-            switch (parsedInput[INDEX_OF_FIRST_ITEM_IN_STRING].toLowerCase()) {
+            switch (parsedInput[INDEX_OF_FIRST_ITEM].toLowerCase()) {
             case "help":
-                return new HelpCommand(true, parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING]);
+                return new HelpCommand(true, parsedInput[INDEX_OF_SECOND_ITEM]);
             case "bye":
                 return new ByeCommand();
             case "add":
-                return new AddCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING], user);
+                return new AddCommand(parsedInput[INDEX_OF_SECOND_ITEM], user);
             case "update":
-                return new UpdateCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING], user);
+                return new UpdateCommand(parsedInput[INDEX_OF_SECOND_ITEM], user);
             case "list":
-                return new ListCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING], user);
+                return new ListCommand(parsedInput[INDEX_OF_SECOND_ITEM], user);
             case "delete":
                 return new DeleteCommand(input, user);
             case "calculate":
-                return new CalculateInputCommand(parsedInput[INDEX_OF_SECOND_ITEM_IN_STRING], user);
+                return new CalculateInputCommand(parsedInput[INDEX_OF_SECOND_ITEM], user);
             default:
                 return new HelpCommand(false, FLAG_OF_EXPENSES);
             }

@@ -1,6 +1,10 @@
 package seedu.mindmymoney.command;
 
+/**
+ * Represents the Bye command.
+ */
 public class ByeCommand extends Command {
+
     /**
      * Indicates whether the program should exit.
      *
@@ -14,8 +18,9 @@ public class ByeCommand extends Command {
     /**
      * Prints the bye message.
      */
+    @Override
     public void executeCommand() {
-        System.out.print("Bye!! Hope to see you again when you have more expenditures to add!!"
+        System.out.print("Bye, hope to see you again!"
                 + System.lineSeparator());
     }
 }
