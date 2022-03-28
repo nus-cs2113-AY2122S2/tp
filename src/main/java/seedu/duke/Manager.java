@@ -31,10 +31,10 @@ public class Manager {
             Status status = null;
             try {
                 status = executeCommand(commandWord, parameters);
+                ui.print(status);
             } catch (HalpmiException | NotFoundException | DuplicateEntryException e) {
                 UI.printParagraph(e.toString());
             }
-            //ui.print(status);
             storage.saveData();
         }
     }

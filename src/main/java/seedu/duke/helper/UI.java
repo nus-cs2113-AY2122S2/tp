@@ -4,6 +4,7 @@ import seedu.duke.assets.DoctorList;
 import seedu.duke.assets.MedicineList;
 import seedu.duke.assets.Patient;
 import seedu.duke.assets.PatientList;
+import seedu.duke.status.Status;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -176,5 +177,48 @@ public class UI {
     public void printDeleteMedicineExampleMessage(MedicineList medicineList) {
         printParagraph("Please input a positive number up to " + medicineList.getSize() + " only.\n"
                 + "Here is an example:\ndelete patient /info 1");
+    }
+
+    public void print(Status status) {
+        switch (status) {
+        case ADD_PATIENT_SUCCESS:
+            printParagraph("Patient has been added successfully!");
+            break;
+        case ADD_DOCTOR_SUCCESS:
+            printParagraph("Doctor has been added successfully!");
+            break;
+        case ADD_MEDICINE_SUCCESS:
+            printParagraph("Medicine has been added successfully!");
+            break;
+        case ADD_APPOINTMENT_SUCCESS:
+            printParagraph("Appointment has been added successfully!");
+            break;
+        case DELETE_PATIENT_SUCCESS:
+            printParagraph("Patient has been deleted successfully!");
+            break;
+        case DELETE_DOCTOR_SUCCESS:
+            printParagraph("Doctor has been deleted successfully!");
+            break;
+        case DELETE_MEDICINE_SUCCESS:
+            printParagraph("Medicine has been deleted successfully!");
+            break;
+        case DELETE_APPOINTMENT_SUCCESS:
+            printParagraph("Appointment has been deleted successfully!");
+            break;
+        case EDIT_DOCTOR_SUCCESS:
+            printParagraph("Doctor has been edited successfully!");
+            break;
+        case EDIT_PATIENT_SUCCESS:
+            printParagraph("Patient has been edited successfully!");
+            break;
+        case EDIT_MEDICINE_SUCCESS:
+            printParagraph("Medicine has been edited successfully!");
+            break;
+        case EDIT_APPOINTMENT_SUCCESS:
+            printParagraph("Appointment has been edited successfully!");
+            break;
+        default:
+            break;
+        }
     }
 }
