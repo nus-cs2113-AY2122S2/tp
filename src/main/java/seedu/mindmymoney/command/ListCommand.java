@@ -35,10 +35,10 @@ public class ListCommand extends Command {
         for (Expenditure i : expenditureList.expenditureListArray) {
             if (i.getCategory() == null) {
                 listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription()
-                        + " [" + i.getTime()+ "]" +"\n";
+                        + " [" + i.getTime() + "]" + "\n";
             } else {
                 listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription() + " from "
-                        + i.getCategory() + " [" + i.getTime()+ "]" + "\n";
+                        + i.getCategory() + " [" + i.getTime() + "]" + "\n";
             }
             indexOfList++;
         }

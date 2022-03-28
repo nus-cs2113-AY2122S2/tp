@@ -78,7 +78,7 @@ public class DeleteCommand extends Command {
                 throw new MindMyMoneyException("Please input a valid index");
             } else {
                 assert positionToDelete >= 0 : "Index should always be >= 0";
-                System.out.println( PrintStrings.LINE + "I have removed "
+                System.out.println(PrintStrings.LINE + "I have removed "
                         + expenditureList.get(positionToDelete).getDescription()
                         + " of $" + expenditureList.get(positionToDelete).getAmount()
                         + " from the account" + System.lineSeparator() + PrintStrings.LINE);

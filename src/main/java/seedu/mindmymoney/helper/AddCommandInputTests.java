@@ -74,8 +74,8 @@ public class AddCommandInputTests {
         }
 
         if (!isCategoryInList(inputCategory)) {
-            throw new MindMyMoneyException("Input Food, Transport, Utilities, Personal, Entertainment or Others after" +
-                    " the /c field!");
+            throw new MindMyMoneyException("Input Food, Transport, Utilities, Personal, Entertainment or Others after"
+                    + " the /c field!");
         }
     }
 

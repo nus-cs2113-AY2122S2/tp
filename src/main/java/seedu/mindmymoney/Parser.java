@@ -53,7 +53,7 @@ public class Parser {
                 return new HelpCommand(false, FLAG_OF_EXPENSES);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-//            System.out.println("Missing input after command!");
+
         }
         return new HelpCommand(false, FLAG_OF_EXPENSES);
     }

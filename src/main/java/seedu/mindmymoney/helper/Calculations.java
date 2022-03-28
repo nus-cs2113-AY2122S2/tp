@@ -55,7 +55,7 @@ public class Calculations {
      * @param foundItems The list containing all the expenses in the month.
      * @param sumOfExpenditure Total sum of expenses in the month.
      */
-    public static void displayExpenditureBreakdown (ArrayList<Expenditure> foundItems, float sumOfExpenditure) {
+    public static void displayExpenditureBreakdown(ArrayList<Expenditure> foundItems, float sumOfExpenditure) {
         float foodPercentage = calculatePercentage(FOOD, foundItems, sumOfExpenditure);
         float transportPercentage = calculatePercentage(TRANSPORT, foundItems, sumOfExpenditure);
         float utilitiesPercentage = calculatePercentage(UTILITIES, foundItems, sumOfExpenditure);
@@ -80,9 +80,9 @@ public class Calculations {
      * @param percentage Percentage of each category type that is part of the expenses.
      * @return The 'bar' chart to be output for the category type.
      */
-    public static String printBar (float percentage) {
+    public static String printBar(float percentage) {
         String output = "";
-        for (float i = 0; i < percentage/10; i+=0.5) {
+        for(float i = 0; i < percentage / 10; i += 0.5) {
             output += "▇▇";
         }
         return output;
@@ -96,7 +96,7 @@ public class Calculations {
      * @param sumOfExpenditure Total sum of expenses in the month.
      * @return Percentage of expenses for that particular category type.
      */
-    public static float calculatePercentage (CategoryTypes categoryType, ArrayList<Expenditure> foundItems,
+    public static float calculatePercentage(CategoryTypes categoryType, ArrayList<Expenditure> foundItems,
                                              float sumOfExpenditure) {
         ArrayList<Expenditure> foundCategoryTypeItems = new ArrayList<>();
         foundCategoryTypeItems = findMatchingCategoryInArraylist(categoryType, foundItems, foundCategoryTypeItems);

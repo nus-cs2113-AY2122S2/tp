@@ -37,8 +37,8 @@ public class GeneralFunctions {
     public static String parseInputWithCommandFlag(String input, String startingFlag, String endingFlag)
         throws MindMyMoneyException {
         if (!(input.contains(startingFlag + " ") && input.contains(endingFlag + " "))) {
-            throw new MindMyMoneyException("You are missing a flag or lack the spacing between the flags!\n" +
-                    "For eg. \"add /e cash /c Food /d Porridge /a 4.50 /t 2022-03\"");
+            throw new MindMyMoneyException("You are missing a flag or lack the spacing between the flags!\n"
+                    + "For eg. \"add /e cash /c Food /d Porridge /a 4.50 /t 2022-03\"");
         }
         startingFlag = startingFlag + " ";
         input = input.substring(input.indexOf(startingFlag) + startingFlag.length());
