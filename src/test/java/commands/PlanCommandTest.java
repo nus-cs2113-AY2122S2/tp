@@ -91,7 +91,7 @@ class PlanCommandTest {
     }
 
     @Test
-    void execute_invalidCreatePlan_expectArrayIndexOutOfBoundsException() throws InvalidCommandException {
+    void execute_invalidCreatePlan_expectCatchArrayIndexOutOfBoundsException() throws InvalidCommandException {
         PlanCommand createInvalidPlanCommand = parser.createPlanCommand("plan /new hh /workouts");
         String expectedOutput =
                 "Uh oh, it seems like too few arguments were entered.\n"
