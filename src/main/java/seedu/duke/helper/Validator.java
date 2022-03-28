@@ -253,6 +253,15 @@ public class Validator {
         validateAppointmentDetails(parameters[6]);
     }
 
+    public static void validateEditAppointment(String[] parameters) throws HalpmiException {
+        validateNric(parameters[1]);
+        validateFullName(parameters[2]);
+        validateNric(parameters[3]);
+        validateFullName(parameters[4]);
+        validateDate(parameters[5], "appointment");
+        validateAppointmentDetails(parameters[6]);
+    }
+
     public static void validateFindDoctor(String[] parameters) throws HalpmiException {
         switch (parameters[0]) {
         case "nric":
