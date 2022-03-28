@@ -343,8 +343,8 @@ public class Session implements Serializable, Comparable<Session> {
         return "Session Id #" + sessionId + " --\n"
                 + "Name: " + sessionName + '\n'
                 + "Date: " + dateCreated.format(ParserUtils.DATE_FORMAT) + '\n'
-                + getActivityListSummaryString() + '\n'
+                + getGroupSummaryString() + '\n'
                 + getPersonListSummaryString() + '\n'
-                + getGroupSummaryString();
+                + getActivityListSummaryString();
     }
 }
