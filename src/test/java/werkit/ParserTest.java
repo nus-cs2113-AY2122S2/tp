@@ -69,39 +69,45 @@ class ParserTest {
     @Test
     void parseUserInput_validSearchCommand_expectSuccess() throws InvalidCommandException {
         String searchCommand1 = "search /exercise up";
-        String searchCommand2 = "search /workout 1000";
-        String searchCommand3 = "search /plan biceps";
-        String searchCommand4 = "search /all weeee";
-
         assertTrue(parser.parseUserInput(searchCommand1) instanceof SearchCommand);
+
+        String searchCommand2 = "search /workout 1000";
         assertTrue(parser.parseUserInput(searchCommand2) instanceof SearchCommand);
+
+        String searchCommand3 = "search /plan biceps";
         assertTrue(parser.parseUserInput(searchCommand3) instanceof SearchCommand);
+
+        String searchCommand4 = "search /all weeee";
         assertTrue(parser.parseUserInput(searchCommand4) instanceof SearchCommand);
     }
 
     @Test
     void parseUserInput_validPlanCommand_expectSuccess() throws InvalidCommandException {
         String planCommand1 = "plan /new plan 1 /workouts 1, 2, 3, 4";
-        String planCommand2 = "plan /list";
-        String planCommand3 = "plan /details 1";
-        String planCommand4 = "plan /delete 1";
-
         assertTrue(parser.parseUserInput(planCommand1) instanceof PlanCommand);
+
+        String planCommand2 = "plan /list";
         assertTrue(parser.parseUserInput(planCommand2) instanceof PlanCommand);
+
+        String planCommand3 = "plan /details 1";
         assertTrue(parser.parseUserInput(planCommand3) instanceof PlanCommand);
+
+        String planCommand4 = "plan /delete 1";
         assertTrue(parser.parseUserInput(planCommand4) instanceof PlanCommand);
     }
 
     @Test
     void parseUserInput_validScheduleCommand_expectSuccess() throws InvalidCommandException {
         String scheduleCommand1 = "schedule /update 1 2";
-        String scheduleCommand2 = "schedule /list";
-        String scheduleCommand3 = "schedule /clear 1";
-        String scheduleCommand4 = "schedule /clearall";
-
         assertTrue(parser.parseUserInput(scheduleCommand1) instanceof ScheduleCommand);
+
+        String scheduleCommand2 = "schedule /list";
         assertTrue(parser.parseUserInput(scheduleCommand2) instanceof ScheduleCommand);
+
+        String scheduleCommand3 = "schedule /clear 1";
         assertTrue(parser.parseUserInput(scheduleCommand3) instanceof ScheduleCommand);
+
+        String scheduleCommand4 = "schedule /clearall";
         assertTrue(parser.parseUserInput(scheduleCommand4) instanceof ScheduleCommand);
     }
 
