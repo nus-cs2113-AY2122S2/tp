@@ -40,6 +40,10 @@ public class Ui {
         return in.nextLine().trim();
     }
 
+    public boolean hasInput() {
+        return in.hasNext();
+    }
+
     /**
      * Prints a partition line.
      */

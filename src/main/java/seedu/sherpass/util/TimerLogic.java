@@ -14,7 +14,6 @@ import static seedu.sherpass.constant.Message.ERROR_INVALID_TIMER_INPUT_MESSAGE;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.AbstractButton;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
@@ -30,21 +29,39 @@ public class TimerLogic implements WindowListener {
     protected boolean isTimerInitialised = false;
     private final JFrame jframe;
     private final JLabel jlabel;
-    ActionListener actionListener = actionEvent -> {
-        AbstractButton abstractButton =
-                (AbstractButton) actionEvent.getSource();
-        boolean selected = abstractButton.getModel().isSelected();
-        if (selected) {
-            callPauseTimer();
-        } else {
-            callResumeTimer();
-        }
+    private final ActionListener actionListenerPause = actionEvent -> {
+        callPauseTimer();
+        ui.showLine();
     };
+    private final ActionListener actionListenerResume = actionEvent -> {
+        callResumeTimer();
+        ui.showLine();
+    };
+    private final ActionListener actionListenerStop = actionEvent -> {
+        callStopTimer();
+        ui.showLine();
+    };
+
+    private void setWindowParameters() {
+        jframe.setLayout(new BorderLayout());
+        jframe.setBounds(500, 300, 300, 100);
+        jframe.add(jlabel, BorderLayout.NORTH);
+        jframe.addWindowListener(this);
+        JToggleButton pauseButton = new JToggleButton("Pause");
+        pauseButton.addActionListener(actionListenerPause);
+        jframe.add(pauseButton, BorderLayout.WEST);
+        JToggleButton resumeButton = new JToggleButton("Resume");
+        resumeButton.addActionListener(actionListenerResume);
+        jframe.add(resumeButton, BorderLayout.EAST);
+        JToggleButton stopButton = new JToggleButton("stop");
+        stopButton.addActionListener(actionListenerStop);
+        jframe.add(stopButton, BorderLayout.CENTER);
+    }
 
     /**
      * Creates a constructor for TimerLogic.
      *
-     * @param ui UI
+     * @param ui       UI
      * @param taskList taskList
      */
     public TimerLogic(TaskList taskList, Ui ui) {
@@ -52,18 +69,13 @@ public class TimerLogic implements WindowListener {
         TimerLogic.ui = ui;
         jframe = new JFrame();
         jlabel = new JLabel(EMPTY_STRING, SwingConstants.CENTER);
-        jframe.setLayout(new BorderLayout());
-        jframe.setBounds(500, 300, 300, 100);
-        jframe.add(jlabel, BorderLayout.NORTH);
-        jframe.addWindowListener(this);
-        JToggleButton pauseResumeButton = new JToggleButton("Pause/Resume");
-        pauseResumeButton.addActionListener(actionListener);
-        jframe.add(pauseResumeButton, BorderLayout.CENTER);
+        setWindowParameters();
     }
 
     /**
      * Marks a task as done, as specified in parsedInput.
-     * @param storage Storage.
+     *
+     * @param storage     Storage.
      * @param parsedInput parsedInput.
      */
     public void markTask(Storage storage, String[] parsedInput) {
@@ -181,7 +193,6 @@ public class TimerLogic implements WindowListener {
 
     /**
      * Resets the timer by creating a new timer object, which can then be started by the user.
-     *
      */
     public void callResetTimer(String[] parsedInput) {
         String parameter = TimerParser.parseStudyParameter(parsedInput);

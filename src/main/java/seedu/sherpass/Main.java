@@ -76,7 +76,7 @@ public class Main {
         ui.showWelcomeMessage(taskList, ui);
 
         boolean isExit = false;
-        while (!isExit) {
+        while (!isExit && ui.hasInput()) {
             String fullCommand = ui.readCommand();
             ui.showLine();
 
