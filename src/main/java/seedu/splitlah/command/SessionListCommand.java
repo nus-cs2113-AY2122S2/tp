@@ -25,6 +25,7 @@ public class SessionListCommand extends Command {
     @Override
     public void run(Manager manager) {
         ArrayList<Session> sessionsToBePrinted = manager.getProfile().getSessionList();
+        sessionsToBePrinted.sort(Session::compareTo);
         if (sessionsToBePrinted.isEmpty()) {
             manager.getUi().printlnMessage(Message.ERROR_PROFILE_SESSION_LIST_EMPTY);
             return;
