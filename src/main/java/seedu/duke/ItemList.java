@@ -118,4 +118,19 @@ public class ItemList {
             throw new ItemNotFoundException();
         }
     }
+
+    public ItemList FindItemsInList(String keyword) {
+        ItemList listOfMatchingItems = new ItemList();
+        ArrayList<Item> listOfItems = getListOfItems();
+        Item item;
+        String itemName;
+        for (int itemIndex = 0; itemIndex < listOfItems.size(); itemIndex++) {
+            item = listOfItems.get(itemIndex);
+            itemName = item.getName();
+            if (itemName.contains(keyword)) {
+                listOfMatchingItems.addItemToList(item);
+            }
+        }
+        return listOfMatchingItems;
+    }
 }
