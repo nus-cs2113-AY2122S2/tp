@@ -26,7 +26,7 @@ public class Person {
         this.name = name;
         incomeList = new IncomeList();
         expenditureList = new ExpenditureList();
-        String infoString = "New Person constructed";
+        String infoString = "New Person initialised";
         logger.log(Level.INFO, infoString);
     }
 
@@ -37,6 +37,24 @@ public class Person {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Returns the list of incomes.
+     *
+     * @return The person's list of incomes
+     */
+    public IncomeList getIncomeList() {
+        return incomeList;
+    }
+
+    /**
+     * Returns the list of expenditures.
+     *
+     * @return The person's list of expenditures
+     */
+    public ExpenditureList getExpenditureList() {
+        return expenditureList;
     }
 
     /**
@@ -55,24 +73,24 @@ public class Person {
         }
         if (isPermanent) {
             System.out.println("A recurring income of " + amount + " from " + description + " has been added to "
-                    + this.name);
+                    + name);
         } else {
-            System.out.println("An income of " + amount + " from " + description + " has been added to " + this.name);
+            System.out.println("An income of " + amount + " from " + description + " has been added to " + name);
         }
     }
 
     /**
      * Removes an income from the list of incomes.
      *
-     * @param index The index of the income to be removed
+     * @param incomeIndex The index of the income to be removed
      */
-    public void deleteIncome(int index) {
-        assert (index >= Constants.SINGULAR);
-        assert (index <= getNumberOfIncomes());
-        String description = incomeList.getDescription(index);
-        double value = incomeList.getIncomeValue(index);
-        incomeList.remove(index);
-        System.out.println("An income of " + value + " for " + description + " has been removed from " + this.name);
+    public void deleteIncome(int incomeIndex) {
+        assert (incomeIndex >= Constants.SINGULAR);
+        assert (incomeIndex <= getNumberOfIncomes());
+        String description = incomeList.getDescription(incomeIndex);
+        double value = incomeList.getIncomeValue(incomeIndex);
+        incomeList.remove(incomeIndex);
+        System.out.println("An income of " + value + " for " + description + " has been removed from " + name);
     }
 
     /**
@@ -80,22 +98,21 @@ public class Person {
      *
      * @param description The reason for the expenditure
      * @param amount The value of the expenditure
+     * @param category The category of the expenditure
      * @param isPermanent Whether the expenditure is recurring
      * @param isSilent Whether to print confirmation
-     * @param category The category of the expenditure
      */
-    public void addExpend(String description, double amount, boolean isPermanent, boolean isSilent, Category category) {
+    public void addExpend(String description, double amount, int category, boolean isPermanent, boolean isSilent) {
         assert (description != null);
-        expenditureList.addExpenditure(description, amount, isPermanent, category);
+        expenditureList.addExpenditure(description, amount, category, isPermanent);
         if (isSilent) {
             return;
         }
         if (isPermanent) {
             System.out.println("A recurring expenditure of " + amount + " for " + description + " has been added to "
-                    + this.name);
+                    + name);
         } else {
-            System.out.println("An expenditure of " + amount + " for " + description + " has been added to "
-                    + this.name);
+            System.out.println("An expenditure of " + amount + " for " + description + " has been added to " + name);
         }
     }
 
@@ -111,7 +128,7 @@ public class Person {
         double value = expenditureList.getExpenditureValue(index);
         expenditureList.remove(index);
         System.out.println("An expenditure of " + value + " for " + description
-                + " has been removed from " + this.name);
+                + " has been removed from " + name);
     }
 
     /**
@@ -205,7 +222,7 @@ public class Person {
      * @param category The category of the expenditure
      * @param isPermanent Whether the expenditure is recurring
      */
-    public void editExpend(int expendIndex, String description, double amount, Category category, boolean isPermanent) {
+    public void editExpend(int expendIndex, String description, double amount, int category, boolean isPermanent) {
         incomeList.exitExpend(expendIndex, description, amount, category, isPermanent);
     }
 }
