@@ -3,7 +3,6 @@
 package seedu.planitarium.person;
 
 import seedu.planitarium.ProjectLogger;
-import seedu.planitarium.category.Category;
 import seedu.planitarium.global.Constants;
 
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ public class PersonList {
     private ArrayList<Person> personList;
     private int numberOfMembers;
     private static ProjectLogger logger = new ProjectLogger(PersonList.class.getName(), "PersonList.log");
-    private static final int SINGULAR = 1;
 
     /**
      * Constructs a new PersonList object.
@@ -39,7 +37,7 @@ public class PersonList {
     public int getListIndex(int personIndex) {
         String infoString = "Entering getListIndex()";
         logger.log(Level.INFO, infoString);
-        assert (personIndex >= SINGULAR);
+        assert (personIndex >= Constants.SINGULAR);
         assert (personIndex <= numberOfMembers);
         infoString = "Index assertions passed in getListIndex()";
         return personIndex - 1;
@@ -187,15 +185,15 @@ public class PersonList {
      * @param personIndex The index of the person
      * @param description The reason for the expenditure
      * @param amount The value of the expenditure
-     * @param isPermanent Whether the expenditure is recurring
      * @param category The category of the expenditure
+     * @param isPermanent Whether the expenditure is recurring
      * @param isSilent Whether to print confirmation
      */
-    public void addExpend(int personIndex, String description, double amount, boolean isPermanent, int category,
+    public void addExpend(int personIndex, String description, double amount, int category, boolean isPermanent,
                           boolean isSilent) {
         String infoString = "Method addExpend() called";
         logger.log(Level.INFO, infoString);
-        getPerson(personIndex).addExpend(description, amount, isPermanent, category, isSilent);
+        getPerson(personIndex).addExpend(description, amount, category, isPermanent, isSilent);
     }
 
     /**
