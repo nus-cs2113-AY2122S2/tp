@@ -18,6 +18,10 @@ public class SessionEditCommandTest {
 
     Manager manager = new Manager();
 
+    private static final String ORIGINAL_SESSION_NAME = "Class outing";
+    private static final String ORIGINAL_SESSION_DATE = "15-02-2022";
+    private static final int ORIGINAL_SESSION_PERSONLIST_SIZE = 2;
+
     /**
      * Creates a session that is stored and managed by the Manager object.
      */
@@ -46,7 +50,12 @@ public class SessionEditCommandTest {
         command.run(manager);
 
         String newNameInSession = manager.getProfile().getSession(1).getSessionName();
+        String dateInSession =
+                manager.getProfile().getSession(1).getDateCreated().format(ParserUtils.DATE_FORMAT);
+        int personListSizeInSession = manager.getProfile().getSession(1).getPersonList().size();
         assertEquals(newName, newNameInSession);
+        assertEquals(ORIGINAL_SESSION_DATE, dateInSession);
+        assertEquals(ORIGINAL_SESSION_PERSONLIST_SIZE, personListSizeInSession);
     }
 
     /**
@@ -66,9 +75,13 @@ public class SessionEditCommandTest {
         assertEquals(SessionEditCommand.class, command.getClass());
         command.run(manager);
 
+        String nameInSession = manager.getProfile().getSession(1).getSessionName();
         String newDateInSession =
                 manager.getProfile().getSession(1).getDateCreated().format(ParserUtils.DATE_FORMAT);
+        int personListSizeInSession = manager.getProfile().getSession(1).getPersonList().size();
+        assertEquals(ORIGINAL_SESSION_NAME, nameInSession);
         assertEquals(newDate, newDateInSession);
+        assertEquals(ORIGINAL_SESSION_PERSONLIST_SIZE, personListSizeInSession);
     }
 
     /**
@@ -79,10 +92,10 @@ public class SessionEditCommandTest {
      */
     @Test
     public void run_validCommand_sessionPersonListEdited() throws InvalidDataException {
-        ArrayList<Person> personArrayList = new ArrayList<>();
-        personArrayList.add(new Person("alice"));
-        personArrayList.add(new Person("bob"));
-        personArrayList.add(new Person("charlie"));
+        ArrayList<Person> originalPersonList = new ArrayList<>();
+        originalPersonList.add(new Person("alice"));
+        originalPersonList.add(new Person("bob"));
+        originalPersonList.add(new Person("charlie"));
 
         String userInput  = "session /edit /sid 1 /pl Alice Bob Charlie";
         Command command = Parser.getCommand(userInput);
@@ -96,12 +109,14 @@ public class SessionEditCommandTest {
         // Checks if newly edited person list in session has size of 3.
         assertEquals(3, editedSession.getPersonList().size());
 
-        personArrayList.removeAll(editedSession.getPersonList());
-        assertEquals(0, personArrayList.size());
+        // Check if Person objects in session before edit is still in session after edit
+        originalPersonList.removeAll(editedSession.getPersonList());
+        assertEquals(0, originalPersonList.size());
     }
 
     /**
-     * Checks if session is not edited when Person list delimiter does not contain original list of persons involved.
+     * Checks if session is not edited when list of persons provided after Person list delimiter
+     * does not contain all persons that were originally in the session
      *
      * @throws InvalidDataException If there are no sessions stored or
      *                              if the session unique identifier specified was not found.
@@ -138,7 +153,7 @@ public class SessionEditCommandTest {
     }
 
     /**
-     * Checks if session is not edited when an invalid session unique identifier does not exist.
+     * Checks if session is not edited when an invalid session unique identifier is provided.
      *
      * @throws InvalidDataException If there are no sessions stored or
      *                              if the session unique identifier specified was not found.
