@@ -148,7 +148,7 @@ public class Parser {
 
             // extracts product type
             extractedParameters = extractParameter(parameters, PARAMETER_PATTERN_PRODUCT_TYPE);
-            String productType = extractedParameters[0].replace("t/","");
+            String productType = extractedParameters[0].replace("t/","").trim();
 
             addCmd = new AddCommand();
             try {
@@ -156,10 +156,11 @@ public class Parser {
                 assert price != null : "price cannot be null";
                 assert date != null : "date cannot be null";
                 assert productType != null : "productType cannot be null";
-                //if (productType=="fashion" || productType=="food" || productType == "accessory")
+                if (productType.equals("fashion") || productType.equals("food") ||
+                        productType.equals("accessory") || productType.equals("others"))
                     addCmd.AddProductCommand(name, price, date, productType);
-               // else
-                    //return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                else
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             } catch (IllegalValueException e) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
