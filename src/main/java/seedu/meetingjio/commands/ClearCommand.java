@@ -8,6 +8,7 @@ import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
 
 import java.util.logging.Level;
+import static seedu.meetingjio.parser.Parser.logger;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST_CLEAR;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EXCEPTION_NOT_HANDLED;

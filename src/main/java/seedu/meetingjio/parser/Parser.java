@@ -1,4 +1,4 @@
-package seedu.meetingjio;
+package seedu.meetingjio.parser;
 
 import seedu.meetingjio.commands.AddLessonCommand;
 import seedu.meetingjio.commands.Command;
@@ -24,8 +24,11 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_INDEX_FORMAT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_DELETE;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_DELETE;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_ADD_MEETING;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_MEETING;
 
 import static seedu.meetingjio.common.Messages.MESSAGE_HELP;
 
@@ -33,6 +36,7 @@ public class Parser {
     private final String command;
     private final String arguments;
     public static Logger logger = Logger.getLogger(Parser.class.getName());
+    private ParserHelperMethods parserHelperMethods = new ParserHelperMethods();
 
     private static final int NAME_INDEX = 0;
     private static final int TITLE_INDEX = 1;
@@ -74,16 +78,16 @@ public class Parser {
     public Command prepareAddLesson() {
         try {
             String[] eventDescription = splitArgumentsAddLesson();
-            checkNonNullValues(eventDescription,HEADINGS_ADD_LESSON.length - 1);
+            parserHelperMethods.checkNonNullValues(eventDescription,HEADINGS_ADD_LESSON.length - 1);
 
             String day = eventDescription[DAY_INDEX].toLowerCase();
             int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX]);
             int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX]);
             String mode = eventDescription[MODE_INDEX].toLowerCase();
 
-            checkDay(day);
-            checkTime(startTime, endTime);
-            checkMode(mode);
+            parserHelperMethods.checkDay(day);
+            parserHelperMethods.checkTime(startTime, endTime);
+            parserHelperMethods.checkMode(mode);
 
             String name = eventDescription[NAME_INDEX];
             String title = eventDescription[TITLE_INDEX];
@@ -105,73 +109,7 @@ public class Parser {
         }
     }
 
-    /**
-     * Checks the validity of the user's given startTime and endTime.
-     *
-     * @param startTime Time at which the event begins
-     * @param endTime   Time at which the event ends
-     * @throws InvalidTimeException If the given hours and minutes are invalid, or if startTime is later than endTime
-     */
-    private void checkTime(int startTime, int endTime) throws InvalidTimeException {
-        int startMinutes = startTime % 100;
-        int endMinutes = endTime % 100;
-        boolean invalidMinutes = startMinutes >= 60 || endMinutes >= 60;
-        int startHours = startTime / 100;
-        int endHours = endTime / 100;
-        boolean invalidHours = startHours >= 24 || endHours >= 24;
-        if (invalidMinutes || invalidHours || startTime > endTime) {
-            throw new InvalidTimeException();
-        }
-    }
 
-    /**
-     * Checks that all parameters have a non-null value.
-     *
-     * @param eventDescription Array of user's input
-     * @throws MissingValueException If at least one parameter has no value
-     */
-    private void checkNonNullValues(String[] eventDescription,int lastElementIndex) throws MissingValueException {
-        for (int i = 0; i < lastElementIndex; i++) {
-            if (eventDescription[i].length() == 0) {
-                throw new MissingValueException();
-            }
-            assert (eventDescription[i].length() != 0) : "The parameters have non-null values";
-        }
-    }
-
-    /**
-     * Checks that the mode given by the user is either online or physical.
-     *
-     * @param mode String given by user
-     * @throws InvalidModeException If mode is neither online nor physical
-     */
-    private void checkMode(String mode) throws InvalidModeException {
-        if (mode.equals("online") || mode.equals("physical")) {
-            return;
-        }
-        throw new InvalidModeException();
-    }
-
-    /**
-     * Ensures that the 'day' parameter in user's input is a valid day.
-     *
-     * @param day String given by user
-     * @throws InvalidDayException If value of 'day' does not correspond to an actual day
-     */
-    private void checkDay(String day) throws InvalidDayException {
-        switch (day) {
-        case "monday":
-        case "tuesday":
-        case "wednesday":
-        case "thursday":
-        case "friday":
-        case "saturday":
-        case "sunday":
-            break;
-        default:
-            throw new InvalidDayException();
-        }
-    }
 
     /**
      * Try to parse the delete command to see if index has been done.
@@ -179,15 +117,15 @@ public class Parser {
     public Command prepareDelete() {
         try {
             String[] eventDescription = splitArgumentsDeleteCommand();
-            checkNonNullValues(eventDescription,HEADINGS_DELETE_EVENT.length);
+            parserHelperMethods.checkNonNullValues(eventDescription,HEADINGS_DELETE_EVENT.length);
 
             String name = eventDescription[0];
             int index = Integer.parseInt(eventDescription[1]);
             return new DeleteCommand(name,index);
         } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
-            return new CommandResult(ERROR_MISSING_PARAMETERS);
+            return new CommandResult(ERROR_MISSING_PARAMETERS_DELETE);
         } catch (MissingValueException mve) {
-            return new CommandResult(ERROR_MISSING_VALUES);
+            return new CommandResult(ERROR_MISSING_VALUES_DELETE);
         } catch (NumberFormatException nfe) {
             return new CommandResult(ERROR_INDEX_OUT_OF_BOUND);
         } catch (AssertionError ae) {
@@ -212,26 +150,8 @@ public class Parser {
         return eventDescription;
     }
 
-    /**
-     * Try to parse the delete command to see if index has been done.
-     */
-    public Command prepareDeleteCommand() {
-        try {
-            String name = getParametersByIndexFromInput(0, arguments);
-            int index = Integer.parseInt(getParametersByIndexFromInput(1, arguments));
-            return new DeleteCommand(name, index);
-        } catch (NumberFormatException nfe) {
-            logger.log(Level.INFO, "Invalid index to delete Error detected.");
-            return new CommandResult(ERROR_INVALID_INDEX_FORMAT);
-        }
-    }
-
     private String getCommandFromInput(String input) {
         return input.split(" ")[0].trim().toLowerCase();
-    }
-
-    private String getParametersByIndexFromInput(int index, String input) {
-        return input.split(" ")[index].trim().toLowerCase();
     }
 
     private String getArgumentsFromInput(String input) {
@@ -291,7 +211,7 @@ public class Parser {
     public Command prepareAddMeeting() {
         try {
             String[] eventDescription = splitArgumentsAddMeeting();
-            checkNonNullValues(eventDescription,HEADINGS_ADD_MEETING.length - 1);
+            parserHelperMethods.checkNonNullValues(eventDescription,HEADINGS_ADD_MEETING.length - 1);
 
             //there is no name for meeting because meeting applies to everyone
             String day = eventDescription[DAY_INDEX - 1].toLowerCase();
@@ -299,17 +219,17 @@ public class Parser {
             int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX - 1]);
             String mode = eventDescription[MODE_INDEX - 1].toLowerCase();
 
-            checkDay(day);
-            checkTime(startTime, endTime);
-            checkMode(mode);
+            parserHelperMethods.checkDay(day);
+            parserHelperMethods.checkTime(startTime, endTime);
+            parserHelperMethods.checkMode(mode);
 
             String title = eventDescription[TITLE_INDEX - 1];
             return new AddMeetingCommand(title, day, startTime, endTime, mode);
 
         } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
-            return new CommandResult(ERROR_MISSING_PARAMETERS);
+            return new CommandResult(ERROR_MISSING_PARAMETERS_ADD_MEETING);
         } catch (MissingValueException mve) {
-            return new CommandResult(ERROR_MISSING_VALUES);
+            return new CommandResult(ERROR_MISSING_VALUES_ADD_MEETING);
         } catch (InvalidTimeException | NumberFormatException ite) {
             return new CommandResult(ERROR_INVALID_TIME);
         } catch (InvalidDayException ide) {
