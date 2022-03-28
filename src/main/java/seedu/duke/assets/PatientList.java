@@ -47,7 +47,6 @@ public class PatientList extends List {
                 addPatientParameters[3].charAt(0), addPatientParameters[4], addPatientParameters[5],
                 addPatientParameters[6]);
         patients.add(newPatient);
-        UI.printParagraph("Patient has been added");
         assert patients.size() == numberOfPatientsBefore + 1;
     }
 
@@ -107,7 +106,6 @@ public class PatientList extends List {
         for (int i = 0; i < getSize(); i++) {
             if (patients.get(i).getNric().equals(nric)) {
                 patients.remove(i);
-                UI.printParagraph("Patient has been removed");
                 assert patients.size() == numberOfPatientsBefore - 1;
                 return;
             }
