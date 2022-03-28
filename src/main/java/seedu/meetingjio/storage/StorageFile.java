@@ -33,7 +33,10 @@ public class StorageFile {
             FileOutputStream outFile = new FileOutputStream(dataFile, false);
             FileWriter dataWriter = new FileWriter(dataFile);
             String str = masterTimetable.collateAll(masterTimetable);
-            String truncatedString = str.substring(0, str.length() - 1);
+            String truncatedString = "";
+            if (str != "") {
+                truncatedString = str.substring(0, str.length() - 1);
+            }
             dataWriter.write(truncatedString);
             dataWriter.close();
             System.out.println(SAVE_DATA_MESSAGE);
