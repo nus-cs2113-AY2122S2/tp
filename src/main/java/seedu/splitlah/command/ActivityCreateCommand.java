@@ -3,56 +3,60 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
+import seedu.splitlah.data.Profile;
 import seedu.splitlah.data.Session;
+import seedu.splitlah.data.PersonList;
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TextUI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
 
 /**
  * Represents a command that creates an Activity object from user input and stores it in the Session object.
+ *
+ * @author Ivan
  */
 public class ActivityCreateCommand extends Command {
+  
+    private static final String COMMAND_SUCCESS = "The activity was created successfully.\n";
 
-    public static final String COMMAND_TEXT = "activity /create";
-
-    private static final String COMMAND_FORMAT = "Syntax:\n"
-            + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /c <OVERALLCOST> "
-            + "[<OPTIONAL ARGS>]\n"
-            + "activity /create /sid <SESSIONID> /n <ACTIVITYNAME> /p <PAYER> /i <NAME1 NAME2…> /cl <COST1 COST2…> "
-            + "[<OPTIONAL ARGS>]";
-
-    private static final String COMMAND_SUCCESS = "The activity was created successfully with activity id of: ";
+    private int activityId;
+    private final int sessionId;
+    private final String activityName;
+    private double totalCost;
+    private final String payer;
+    private final String[] involvedList;
+    private double[] costList;
+    private final double gst;
+    private final double serviceCharge;
 
     private static final double ZERO_COST_PAID = 0;
-    public static final int NO_COST = 0;
-
-    private int sessionId;
-    private String activityName;
-    private double totalCost;
-    private String payer;
-    private String[] involvedList;
-    private double[] costList;
-    private int gst;
-    private int serviceCharge;
+    public static final double ZERO_COST_OWED = 0;
+    private static final int NO_COST = 0;
 
     /**
-     * Constructor to create a ActivityCreateCommand object.
+     * Initializes an ActivityCreateCommand object.
      *
      * @param sessionId     An integer that uniquely identifies a session.
      * @param activityName  A String object that represents the Activity object's name.
      * @param totalCost     A double that represents total cost of the activity.
-     * @param payer         The name of the person who paid for the activity.
-     * @param involvedList  The names of the persons who are involved in the activity.
-     * @param costList      The respective costs of each person involved in the activity.
-     * @param gst           The gst to be included for the cost of the activity.
-     * @param serviceCharge The service charge to be included for the cost of the activity.
+     * @param payer         A String object that represents the name of the person who paid for the activity.
+     * @param involvedList  An array of String objects that represents the names of the persons
+     *                      who are involved in the activity.
+     * @param costList      A double array object that represents the respective costs of
+     *                      each person involved in the activity.
+     * @param gst           A double that represents the GST percentage to be included for the cost of the activity.
+     * @param serviceCharge A double that represents the service charge to be included for the cost of the activity.
      */
     public ActivityCreateCommand(int sessionId, String activityName, double totalCost, String payer,
-                                 String[] involvedList, double[] costList, int gst, int serviceCharge) {
+                                 String[] involvedList, double[] costList, double gst, double serviceCharge) {
+        assert sessionId > 0 : Message.ASSERT_ACTIVITYCREATE_SESSION_ID_LESS_THAN_ONE;
+        assert activityName != null : Message.ASSERT_ACTIVITYCREATE_ACTIVITY_NAME_MISSING;
+        assert payer != null : Message.ASSERT_ACTIVITYCREATE_PAYER_NAME_MISSING;
+        assert involvedList != null : Message.ASSERT_ACTIVITYCREATE_INVOLVED_LIST_ARRAY_NULL;
         this.sessionId = sessionId;
         this.activityName = activityName;
         this.totalCost = totalCost;
@@ -64,105 +68,43 @@ public class ActivityCreateCommand extends Command {
     }
 
     /**
-     * Prepares user arguments for activity create command.
-     *
-     * @param commandArgs The user's arguments.
-     * @return An ActivityCreateCommand object if necessary parameters were found in user arguments,
-     *         an InvalidCommand object otherwise.
-     */
-    public static Command prepare(String commandArgs) {
-        boolean isMissingCost = false;
-        boolean isMissingCostList = false;
-        double totalCost = 0;
-        double[] costList = null;
-
-        try {
-            totalCost = Parser.parseTotalCost(commandArgs);
-        } catch (InvalidFormatException e) {
-            isMissingCost = true;
-        }
-
-        try {
-            costList = Parser.parseCostList(commandArgs);
-        } catch (InvalidFormatException e) {
-            isMissingCostList = true;
-        }
-
-        boolean hasMissingCostAndMissingCostList = isMissingCostList && isMissingCost;
-        if (hasMissingCostAndMissingCostList) {
-            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
-                    + COMMAND_FORMAT);
-        }
-
-        boolean hasBothCostAndCostList = !isMissingCostList && !isMissingCost;
-        if (hasBothCostAndCostList) {
-            return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
-                    + COMMAND_FORMAT);
-        }
-
-        try {
-            int sessionId = Parser.parseSessionId(commandArgs);
-            String activityName = Parser.parseName(commandArgs);
-            String payer = Parser.parsePayer(commandArgs);
-            String[] involvedList = Parser.parseInvolved(commandArgs);
-            int gst = Parser.parseGst(commandArgs);
-            int serviceCharge = Parser.parseServiceCharge(commandArgs);
-            boolean hasDifferentLength = false;
-            if (isMissingCost) {
-                hasDifferentLength = involvedList.length != costList.length;
-            }
-            if (hasDifferentLength) {
-                return new InvalidCommand(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
-                        + COMMAND_FORMAT);
-            }
-            return new ActivityCreateCommand(sessionId, activityName, totalCost, payer, involvedList, costList, gst,
-                    serviceCharge);
-        } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT);
-        }
-    }
-
-    /**
-     * Runs the command to create an activity.
-     * Gets relevant parameters to create an Activity object.
-     * If no errors getting parameters, an Activity object is created and added to the session.
-     *
-     * @param manager A Manager object that manages the TextUI and Profile object.
-     */
-    @Override
-    public void run(Manager manager) {
-        try {
-            int activityId = manager.getProfile().getNewActivityId();
-            updateCostAndCostList();
-            Session session = manager.getProfile().getSession(sessionId);
-            Person personPaid = session.getPersonByName(payer);
-            ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
-            addAllActivityCost(involvedPersonList, personPaid, totalCost, costList, activityId);
-            Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
-            session.addActivity(activity);
-            manager.getUi().printlnMessage(COMMAND_SUCCESS + activityId);
-        } catch (InvalidDataException e) {
-            manager.getUi().printlnMessage(e.getMessage());
-        }
-    }
-
-    /**
      * Adds all relevant activity costs to each involved person's list of activity costs.
      *
-     * @param involvedPersonList The list of persons involved in the activity.
-     * @param personPaid         The person who paid for the activity.
-     * @param totalCost          The total cost of the activity.
-     * @param costList           The costs owed by each person involved in the activity.
-     * @param activityId         The id of the activity.
+     * @param involvedPersonList An ArrayList object containing Person objects
+     *                           each representing a person involved in the activity.
+     * @param personPaid         A Person object representing the person who paid for the activity.
+     * @param activityId         An integer that uniquely identifies an activity.
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
-     * @see InvalidDataException
      */
-    private static void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, double totalCost,
-                                           double[] costList, int activityId) throws InvalidDataException {
+    private void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, int activityId)
+            throws InvalidDataException {
+        boolean hasAddedForPersonPaid = false;
         for (int i = 0; i < involvedPersonList.size(); i++) {
             Person person = involvedPersonList.get(i);
-            addCostOwedAndCostPaid(personPaid, totalCost, costList, activityId, i, person);
+            addCostOwedAndCostPaid(personPaid, activityId, i, person);
+            hasAddedForPersonPaid = isPersonPaid(personPaid, hasAddedForPersonPaid, person);
         }
+        if (!hasAddedForPersonPaid) {
+            personPaid.addActivityCost(activityId, totalCost, ZERO_COST_OWED);
+        }
+    }
+
+    /**
+     * Checks if the Person object currently referred to represents the person who paid for the activity.
+     *
+     * @param personPaid            A Person object representing the person who paid for the activity.
+     * @param hasAddedForPersonPaid A boolean representing whether the activity cost has been added for the person who
+     *                              paid for the activity.
+     * @param person                A Person object representing the person currently referred to
+     *                              among the persons involved.
+     * @return true if the Person object currently referred to represents the person who paid for the activity,
+     *         hasAddedForPersonPaid otherwise.
+     */
+    private boolean isPersonPaid(Person personPaid, boolean hasAddedForPersonPaid, Person person) {
+        if (person == personPaid) {
+            hasAddedForPersonPaid = true;
+        }
+        return hasAddedForPersonPaid;
     }
 
     /**
@@ -171,17 +113,15 @@ public class ActivityCreateCommand extends Command {
      * If it is, the cost paid is set to the total cost of the activity.
      * Else, the cost paid is set to 0.
      *
-     * @param personPaid      The person who paid for the activity.
-     * @param totalCost       The total cost of the activity.
-     * @param costList        The costs owed by each person involved in the activity.
-     * @param activityId      The id of the activity.
-     * @param indexOfCostOwed The index of the cost owed in the list of costs.
-     * @param person          The current person whose costs are added to the list of activity costs.
+     * @param personPaid      A Person object representing the person who paid for the activity.
+     * @param activityId      An integer that uniquely identifies an activity.
+     * @param indexOfCostOwed An integer representing the index of the cost owed in the list of costs.
+     * @param person          A person object representing the person whose costs are added to the
+     *                        list of activity costs.
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
-     * @see InvalidDataException
      */
-    private static void addCostOwedAndCostPaid(Person personPaid, double totalCost, double[] costList, int activityId,
-                                               int indexOfCostOwed, Person person) throws InvalidDataException {
+    private void addCostOwedAndCostPaid(Person personPaid, int activityId, int indexOfCostOwed, Person person)
+            throws InvalidDataException {
         if (person == personPaid) {
             person.addActivityCost(activityId, totalCost, costList[indexOfCostOwed]);
         } else {
@@ -198,70 +138,54 @@ public class ActivityCreateCommand extends Command {
     private void updateCostAndCostList() {
         boolean isZeroCost = totalCost == NO_COST;
         if (isZeroCost) {
-            updateCostListWithExtraCharges(costList, gst, serviceCharge);
-            totalCost = calculateTotalCost(costList);
+            updateCostListWithExtraCharges();
+            calculateTotalCost();
         } else {
-            totalCost = updateCostWithExtraCharges(totalCost, gst, serviceCharge);
+            updateCostWithExtraCharges();
             int numberOfPeopleInvolved = involvedList.length;
-            costList = distributeCostEvenly(totalCost, numberOfPeopleInvolved);
+            costList = distributeCostEvenly(numberOfPeopleInvolved);
         }
     }
 
     /**
      * Updates cost list by including the extra charges.
-     * Extra charges may include gst and service charge.
-     *
-     * @param costList      The costs owed by each person involved in the activity.
-     * @param gst           The gst to be added to the costs for the activity.
-     * @param serviceCharge The service charge to be added to the costs for the activity.
+     * Extra charges may include GST and service charge.
+     * Assumption: GST and service charge are non-negative values.
      */
-    private static void updateCostListWithExtraCharges(double[] costList, int gst, int serviceCharge) {
-        double extraCharges = getExtraCharges(gst, serviceCharge);
+    private void updateCostListWithExtraCharges() {
+        double extraCharges = getExtraCharges();
         for (int i = 0; i < costList.length; i++) {
             costList[i] *= extraCharges;
         }
     }
 
     /**
-     * Returns a double representing the total cost of the activity
-     * by summing up the costs owed by each person involved in the activity.
-     *
-     * @param costList The costs owed by each person involved in the activity.
-     * @return A double representing the total cost of the activity.
+     * Updates the total cost of the activity by summing up the costs in the list of costs.
      */
-    private static double calculateTotalCost(double[] costList) {
-        double totalCost = 0;
-        for (int i = 0; i < costList.length; i++) {
-            totalCost += costList[i];
+    private void calculateTotalCost() {
+        for (double cost : costList) {
+            totalCost += cost;
         }
-        return totalCost;
     }
 
     /**
-     * Returns a double representing the total cost by including the extra charges.
-     * Extra charges may include gst and service charge.
-     * Assumption: gst and service charge are non-negative integers.
-     *
-     * @param totalCost     The total cost of the activity excluding extra charges.
-     * @param gst           The gst to be included in the total cost of the activity.
-     * @param serviceCharge The service charge to be included in the total cost of the activity.
-     * @return A double representing the total cost of the activity.
+     * Updates total cost by including the extra charges.
+     * Extra charges may include GST and service charge.
+     * Assumption: GST and service charge are non-negative values.
      */
-    private static double updateCostWithExtraCharges(double totalCost, int gst, int serviceCharge) {
-        double extraCharges = getExtraCharges(gst, serviceCharge);
-        return totalCost * extraCharges;
+    private void updateCostWithExtraCharges() {
+        double extraCharges = getExtraCharges();
+        totalCost *= extraCharges;
     }
 
     /**
      * Returns a double representing the extra charges that is to be included in costs of the activity.
      *
-     * @param gst           The gst to be included in the costs of the activity.
-     * @param serviceCharge The service charge to be included in the costs of the activity.
      * @return A double representing the extra charges.
      */
-    private static double getExtraCharges(int gst, int serviceCharge) {
-        double gstMultiplier = 1 + (double) gst / 100;
-        double serviceChargeMultiplier = 1 + (double) serviceCharge / 100;
+    private double getExtraCharges() {
+        double gstMultiplier = 1 + gst / 100;
+        double serviceChargeMultiplier = 1 + serviceCharge / 100;
         return gstMultiplier * serviceChargeMultiplier;
     }
 
@@ -270,15 +194,52 @@ public class ActivityCreateCommand extends Command {
      * among the persons involved in the activity.
      * Divides the total cost by the number of people involved in the activity.
      *
-     * @param totalCost              The total cost of the activity.
-     * @param numberOfPeopleInvolved The number of people involved in the activity.
+     * @param numberOfPeopleInvolved An integer representing the number of people involved in the activity.
      * @return An array of doubles representing the costs of each person involved in the activity.
      */
-    private static double[] distributeCostEvenly(double totalCost, int numberOfPeopleInvolved) {
+    private double[] distributeCostEvenly(int numberOfPeopleInvolved) {
         double dividedCost = totalCost / numberOfPeopleInvolved;
         double[] costList = new double[numberOfPeopleInvolved];
         Arrays.fill(costList, dividedCost);
         return costList;
+    }
+
+    /**
+     * Runs the command to create an Activity object to be stored in a Session object managed by the Profile object.
+     * Gets relevant parameters to create an Activity object.
+     * If no errors getting parameters, an Activity object is created and added to the session.
+     *
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
+     */
+    @Override
+    public void run(Manager manager) {
+        boolean hasDuplicates = PersonList.hasNameDuplicates(involvedList);
+        if (hasDuplicates) {
+            manager.getUi().printlnMessage(Message.ERROR_ACTIVITYCREATE_DUPLICATE_NAME);
+            Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST);
+            return;
+        }
+        TextUI ui = manager.getUi();
+        try {
+            updateCostAndCostList();
+            assert costList != null : Message.ASSERT_ACTIVITYCREATE_COST_LIST_ARRAY_NULL;
+            assert totalCost > 0 : Message.ASSERT_ACTIVITYCREATE_TOTAL_COST_LESS_THAN_ONE;
+            Profile profile = manager.getProfile();
+            Session session = profile.getSession(sessionId);
+            Person personPaid = session.getPersonByName(payer);
+            ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
+            activityId = profile.getNewActivityId();
+            addAllActivityCost(involvedPersonList, personPaid, activityId);
+            Activity activity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
+            session.addActivity(activity);
+            manager.saveProfile();
+            ui.printlnMessageWithDivider(COMMAND_SUCCESS + activity);
+            Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_ACTIVITY_ADDED + activityId);
+        } catch (InvalidDataException e) {
+            ui.printlnMessage(e.getMessage());
+            Manager.getLogger().log(Level.FINEST,Message.LOGGER_ACTIVITYCREATE_FAILED_ADDING_ACTIVITY
+                    + "\n" + e.getMessage());
+        }
     }
 
 }

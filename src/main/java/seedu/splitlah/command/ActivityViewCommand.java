@@ -6,10 +6,11 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.parser.ParserUtils;
 
 
 /**
- * Represents a command which displays the details of an Activity object specified by user input in a Session object.
+ * Represents a command which displays the full details of an Activity object in a Session object.
  * 
  * @author Tianle
  */
@@ -17,7 +18,12 @@ public class ActivityViewCommand extends Command {
 
     public static final String COMMAND_TEXT = "activity /view";
 
-    private static final String COMMAND_FORMAT = "Syntax: activity /view /sid <SESSIONID> /aid <ACTIVITYID>";
+    public static final String COMMAND_FORMAT = "Syntax: activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]";
+
+    public static final String[] COMMAND_DELIMITERS = { 
+        ParserUtils.SESSION_ID_DELIMITER,
+        ParserUtils.ACTIVITY_ID_DELIMITER
+    };
 
     private int sessionId;
     private int activityId;
@@ -25,15 +31,22 @@ public class ActivityViewCommand extends Command {
     private static final String SESSION_ID_HEADER = "Session Id #";
     private static final String SEPARATOR = " | ";
 
+    /**
+     * Initializes an ActivityViewCommand object.
+     *
+     * @param sessionId  An integer that uniquely identifies a session.
+     * @param activityId An integer that uniquely identifies an activity.
+     */
     public ActivityViewCommand(int sessionId, int activityId) {
         this.sessionId = sessionId;
         this.activityId = activityId;
     }
 
     /**
-     * Runs the command.
+     * Runs the command with the session and activity unique identifier as provided by the user input and
+     * prints the details of the activity.
      * 
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {

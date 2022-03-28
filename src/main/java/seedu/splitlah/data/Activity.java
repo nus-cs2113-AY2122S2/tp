@@ -3,12 +3,15 @@ package seedu.splitlah.data;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Represents an activity that was done during a group outing session.
+ *
+ * @author Ivan
  */
-public class Activity {
+public class Activity implements Serializable {
 
     private int activityId;
     private String activityName;
@@ -20,7 +23,7 @@ public class Activity {
     private static final int ZERO_INDEXING_OFFSET = 1;
 
     /**
-     * Constructs an Activity object that stores the relevant information required for an Activity.
+     * Initializes an Activity object.
      *
      * @param activityId         An integer that uniquely identifies an activity.
      * @param activityName       A String object that represents the activity's name.
@@ -121,7 +124,7 @@ public class Activity {
      * Returns a String object representing the name of the persons involved in the activity and the cost that each
      * person owed for the activity in a proper format.
      *
-     * @return a String object that representing the name and costs of each person involved in the activity.
+     * @return A String object that representing the name and costs of each person involved in the activity.
      * @throws InvalidDataException If there is no activity found or if the person in the involvedPersonsList
      *                              did not participate in the activity.
      */

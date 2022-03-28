@@ -24,6 +24,10 @@ public class TextUI {
         out = new PrintStream(System.out);
     }
 
+    public void printMessage(String message) {
+        out.print(message);
+    }
+
     public void printlnMessage(String message) {
         out.println(message);
     }
@@ -33,40 +37,14 @@ public class TextUI {
         printDivider();
     }
 
-    public String readNextLine() {
-        printlnMessage(Message.PROMPT_TEXTUI_AWAITING_INPUT);
-        return in.nextLine();
+    public void printlnMessageWithDashDivider(String message) {
+        out.println(message);
+        printDashDivider();
     }
 
-    /**
-     * Requests confirmation from the user via the user interface.
-     * The user may confirm by inputting Y/y/yes to the interface.
-     * The user may reject by inputting N/n/no to the interface.
-     *
-     * @param message A message to be printed initially to the user interface.
-     * @return true if the user confirms
-     */
-    public boolean getUserConfirmation(String message) {
-        printDivider();
-        printlnMessage(message);
-        String confirmation = readNextLine().toLowerCase();
-        printDivider();
-        while (true) {
-            switch (confirmation) {
-            case ("yes"):
-                // fallthrough
-            case ("y"):
-                return true;
-            case ("no"):
-                // fallthrough
-            case ("n"):
-                printlnMessage(Message.ERROR_TEXTUI_USER_DID_NOT_CONFIRM);
-                return false;
-            default:
-                printlnMessage(Message.ERROR_TEXTUI_REENTER_INPUT);
-                confirmation = readNextLine().toLowerCase();
-            }
-        }
+    public String readNextLine() {
+        printMessage(Message.PROMPT_TEXTUI_AWAITING_INPUT);
+        return in.nextLine();
     }
 
     public void printWelcome() {
@@ -79,9 +57,13 @@ public class TextUI {
     private void printDivider() {
         out.println("============================================================");
     }
+
+    public void printDashDivider() {
+        out.println("------------------------------------------------------------");
+    }
     
     public void printHelpMenu() {
-        out.println(Message.MESSAGE_TEXTUI_HELP_MENU);
+        printlnMessageWithDivider(Message.MESSAGE_TEXTUI_HELP_MENU);
     }
 
     public void printFarewell() {
