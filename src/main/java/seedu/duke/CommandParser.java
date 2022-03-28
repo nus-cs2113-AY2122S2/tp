@@ -113,7 +113,7 @@ public class CommandParser {
             userCommand = new DeleteHousekeeperCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(UPDATE_AGE_BY_ONE)) {
             userCommand = new AgeIncreaseCommand();
-        } else if (commandString.startsWith(SEARCH_ITEM_COMMAND)){
+        } else if (commandString.startsWith(SEARCH_ITEM_COMMAND)) {
             commandStringWithoutCommand = commandString.replace(SEARCH_ITEM_COMMAND, "");
             userCommand = new SearchItemCommand(commandStringWithoutCommand);
         } else {

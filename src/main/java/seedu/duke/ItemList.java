@@ -119,7 +119,7 @@ public class ItemList {
         }
     }
 
-    public ItemList FindItemsInList(String keyword) {
+    public ItemList findItemsInList(String keyword) {
         ItemList listOfMatchingItems = new ItemList();
         ArrayList<Item> listOfItems = getListOfItems();
         Item item;

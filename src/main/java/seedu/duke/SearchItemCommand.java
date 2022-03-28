@@ -15,7 +15,7 @@ public class SearchItemCommand extends Command {
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, WrongCommandException {
         ItemList listOfItems = listContainer.getItemList();
         String keyword = getKeyword();
-        ItemList listOfMatchingItems = listOfItems.FindItemsInList(keyword);
+        ItemList listOfMatchingItems = listOfItems.findItemsInList(keyword);
         int numberOfItemsFound = listOfMatchingItems.getSize();
         if (numberOfItemsFound == 0) {
             ui.printNoItemsFoundInListAcknowledgementMessage();
