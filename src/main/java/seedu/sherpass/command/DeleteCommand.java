@@ -17,7 +17,8 @@ public class DeleteCommand extends Command {
      *
      * @param deleteIndex Contains task description to search for
      * @param taskList    Task array.
-     * @throws InvalidInputException If input task description is empty.
+     * @throws InvalidInputException If there is no task present in task list
+     *                               that corresponds to given delete index.
      */
     public DeleteCommand(int deleteIndex, TaskList taskList) throws InvalidInputException {
         if (taskList.isTaskNotExist(deleteIndex)) {

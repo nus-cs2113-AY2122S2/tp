@@ -1,5 +1,6 @@
 package seedu.sherpass.command;
 
+import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
 
@@ -35,6 +36,15 @@ public class EditCommand extends Command {
     private LocalTime endTime;
     private LocalDateTime byDate;
 
+
+    /**
+     * Accepts a index to edit a task. Checks if index is valid
+     * and corresponds to a task in the task list.
+     *
+     * @param editIndex Index of a task to edit.
+     * @param taskList Array representation of tasks.
+     * @throws NumberFormatException if index does not correspond to any task in the task list.
+     */
     public void setEditIndex(int editIndex, TaskList taskList) throws NumberFormatException {
         if (taskList.isTaskNotExist(editIndex)) {
             throw new NumberFormatException(ERROR_INVALID_INDEX_MESSAGE);
@@ -42,6 +52,15 @@ public class EditCommand extends Command {
         this.editIndex = editIndex;
     }
 
+    /**
+     * Accept parsed user input (in proper format) for preparation of editing task.
+     *
+     * @param taskDescription parsed task description.
+     * @param doOnDate parsed doOnStartDateTime.
+     * @param startTime parsed startTime.
+     * @param endTime parsed endTime.
+     * @param byDate parsed byDate
+     */
     public void setTaskContent(String taskDescription, LocalDate doOnDate,
                                LocalTime startTime,
                                LocalTime endTime, LocalDateTime byDate) {
@@ -52,6 +71,13 @@ public class EditCommand extends Command {
         this.byDate = byDate;
     }
 
+    /**
+     * Executes the editing of a task or multiple tasks.
+     *
+     * @param taskList Array representation of tasks.
+     * @param ui User Interface.
+     * @param storage Overwrites the save file data.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task taskToEdit = taskList.getTask(editIndex);
         if (byDate != null && TaskParser.isValidFreq(taskToEdit.getRepeatFrequency())) {

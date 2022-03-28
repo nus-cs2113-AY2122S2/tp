@@ -28,6 +28,15 @@ public class AddCommand extends Command {
     private LocalDateTime byDate;
     private Frequency frequency;
 
+
+    /**
+     * Accept parsed user input (in proper format) for preparation of adding task.
+     *
+     * @param taskDescription parsed task description.
+     * @param doOnStartDateTime parsed doOnStartDateTime.
+     * @param doOnEndDateTime parsed doOnEndDateTime.
+     * @throws InvalidInputException of start time is after end time.
+     */
     public void setTaskContent(String taskDescription, LocalDateTime doOnStartDateTime,
                                LocalDateTime doOnEndDateTime) throws
             InvalidInputException {
@@ -39,14 +48,33 @@ public class AddCommand extends Command {
         this.doOnEndDateTime = doOnEndDateTime;
     }
 
+    /**
+     * Accept parsed user input for by date, in proper format.
+     *
+     * @param byDate parsed by date.
+     */
     public void setTaskByDate(LocalDateTime byDate) {
         this.byDate = byDate;
     }
 
+    /**
+     * Accept parsed user input for frequency.
+     * Does not check if frequency is valid or not.
+     *
+     * @param frequency parsed frequency.
+     */
     public void setFrequency(Frequency frequency) {
         this.frequency = frequency;
     }
 
+
+    /**
+     * Executes the adding of a task or multiple tasks.
+     *
+     * @param taskList Array representation of tasks.
+     * @param ui User Interface.
+     * @param storage Overwrites the save file data.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask;

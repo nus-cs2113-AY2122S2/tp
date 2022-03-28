@@ -144,6 +144,12 @@ public class Timetable {
         printTimetable(day, date, filteredTasks, ui, taskLength, byDateLength, partitionLength);
     }
 
+    /**
+     * Prints the schedule for today to the user.
+     *
+     * @param taskList Array representation of tasks.
+     * @param ui User inferface.
+     */
     public static void showTodaySchedule(TaskList taskList, Ui ui) {
         ArrayList<Task> filteredTasks = taskList.getFilteredTasksByDate(LocalDate.now());
         prepareTimetable(LocalDate.now(), filteredTasks, ui);

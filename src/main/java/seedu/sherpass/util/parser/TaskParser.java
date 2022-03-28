@@ -85,6 +85,14 @@ public class TaskParser {
     }
 
 
+    /**
+     * Returns the index of a Command nearest to the task description.
+     * Command is in the format of "/by" "/do" "/start" "/end".
+     * Checks if any of these commands are present.
+     *
+     * @param fullArgument Full argument from user input.
+     * @return Index > 0 if command exists. -1 otherwise.
+     */
     private static int findCommandDelimiterIndex(String fullArgument) {
         int byDelimiterIndex = fullArgument.indexOf(BY_DATE_DELIMITER);
         int doDelimiterIndex = fullArgument.indexOf(DO_DATE_DELIMITER);
@@ -114,7 +122,7 @@ public class TaskParser {
         String taskDescription;
         int commandDelimiterIndex = findCommandDelimiterIndex(fullArgument);
         try {
-            taskDescription = fullArgument.substring(START_OF_STRING, commandDelimiterIndex - SLASH_OFFSET);
+            taskDescription = fullArgument.substring(START_OF_STRING, commandDelimiterIndex);
         } catch (IndexOutOfBoundsException e) {
             taskDescription = (commandDelimiterIndex == START_OF_STRING) ? EMPTY_STRING : fullArgument;
         }
@@ -131,6 +139,15 @@ public class TaskParser {
     }
 
 
+    /**
+     * Returns a boolean value checking if the frequency attribute
+     * of a task is valid or not. Verifies if a task is recurring or
+     * non-recurring.
+     *
+     * @param frequency The frequency of a task, i.e. daily, weekly, monthly
+     * @return Returns true if frequency is of type daily, weekly, or monthly,
+     *         and is also not null. False otherwise.
+     */
     public static boolean isValidFreq(Frequency frequency) {
         return (frequency != null)
                 && (frequency.equals(Frequency.DAILY)
@@ -177,6 +194,15 @@ public class TaskParser {
         newCommand.setFrequency(null);
     }
 
+    /**
+     * Returns an AddCommand containing parsed user inputs ready for adding a task.
+     * Parse and prepare user inputs for adding of a task.
+     *
+     *
+     * @param argument The argument from the user input, excluding the input command "add".
+     * @param ui User interface.
+     * @return AddCommand containing parsed user inputs in proper format.
+     */
     public static Command prepareAdd(String argument, Ui ui) {
         AddCommand newCommand = new AddCommand();
         try {
@@ -201,6 +227,14 @@ public class TaskParser {
     }
 
 
+    /**
+     * Returns a MarkCommand/UnmarkCommand containing parsed user inputs in proper format.
+     *
+     * @param argument Argument parsed from user input. Excludes the input command "mark" / "unmark".
+     * @param commandWord The input command, i.e. "mark" or "unmark".
+     * @param taskList Array representation of the tasks.
+     * @return A MarkCommand/UnmarkCommand depending on user input.
+     */
     public static Command prepareMarkOrUnmark(String argument, String commandWord, TaskList taskList) {
         try {
             int markIndex = Integer.parseInt(argument) - 1;
@@ -293,6 +327,15 @@ public class TaskParser {
         newCommand.setTaskContent(taskDescription, doOnDate, startTime, endTime, byDate);
     }
 
+    /**
+     * Returns a EditCommand containing parsed user inputs ready for
+     * editing the content of a task.
+     *
+     * @param argument Argument from the user input. Excludes the input command "edit".
+     * @param taskList Array representation of tasks.
+     * @param ui User Interface.
+     * @return EditCommand with parsed inputs in proper format
+     */
     public static Command prepareEdit(String argument, TaskList taskList, Ui ui) {
         if (argument.isBlank()) {
             return new HelpCommand(EditCommand.COMMAND_WORD);
@@ -318,6 +361,14 @@ public class TaskParser {
         return null;
     }
 
+    /**
+     * Return ShowCommand containing parsed user inputs.
+     * Inputs are in proper format for executing the command.
+     *
+     * @param splitInput User input split into two, one containing
+     *                   command "show", the other the argument accompanying the command.
+     * @return ShowCommand with parsed user inputs in proper format.
+     */
     public static Command prepareShow(String[] splitInput) {
         try {
             String selection = splitInput[SHOW_OPTION_INDEX].trim();
