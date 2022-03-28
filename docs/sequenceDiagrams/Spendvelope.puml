@@ -1,22 +1,24 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+hide footbox
 autonumber
 autoactivate on
 loop
-Spendvolope -> TextUi: getUserInput()
-Spendvolope <-- TextUi: fullUserInput
-Spendvolope -> Parser: parseCommand(fullUserInput)
+|||
+ref over Spendvelope, TextUi: getUserInput
+Spendvelope -> Parser: parseCommand(fullUserInput)
 Parser -> Command**:
 Parser <-- Command
-Spendvolope <-- Parser: command
-Spendvolope -> Spendvolope: executeCommand(command)
-Spendvolope -> Command: execute()
+Spendvelope <-- Parser: command
+Spendvelope -> Spendvelope: executeCommand(command)
+Spendvelope -> Command: execute()
 Command -> CommandResult**:
 Command <-- CommandResult:result
-Spendvolope <-- Command: result
-Spendvolope <-- Spendvolope: result
-Spendvolope -> TextUi: showResultToUser(result)
+Spendvelope <-- Command: result
+destroy Command
+Spendvelope <-- Spendvelope: result
+Spendvelope -> TextUi: showResultToUser(result)
 end
 
 @enduml
