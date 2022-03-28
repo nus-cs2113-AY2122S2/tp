@@ -1,9 +1,9 @@
 package seedu.mindmymoney.constants;
 
 /**
- * Container for Category types.
+ * Container for Expenditure Category types.
  */
-public enum CategoryTypes {
+public enum ExpenditureCategoryTypes {
     FOOD,
     TRANSPORT,
     UTILITIES,
