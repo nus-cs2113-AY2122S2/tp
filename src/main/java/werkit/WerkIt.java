@@ -34,14 +34,16 @@ public class WerkIt {
     /**
      * Initialises the components of the WerkIt! application, greets the user, and loads the
      * various files stored in the system's local disk into this instance of WerkIt! (if applicable).
+     *
+     * @throws IOException If the application is unable to load the required directory and/or file(s).
      */
     public WerkIt() throws IOException {
         // Initialise Components
         this.ui = new UI();
         this.exerciseList = new ExerciseList();
         this.workoutList = new WorkoutList(getExerciseList());
-        this.fileManager = new FileManager();
         this.planList = new PlanList(getWorkoutList());
+        this.fileManager = new FileManager(getPlanList());
         this.dayList = new DayList(getPlanList());
         this.parser = new Parser(getUI(), getExerciseList(), getWorkoutList(),
                 getFileManager(), getPlanList(), getDayList());
@@ -148,6 +150,8 @@ public class WerkIt {
      * actions) until the exit command is entered.
      * Method adapted from Team Member Alan Low's iP codebase.
      * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/Sora.java
+     *
+     * @throws IOException If the application is unable to process the user input.
      */
     public void startContinuousUserPrompt() throws IOException {
         boolean userWantsToExit = false;

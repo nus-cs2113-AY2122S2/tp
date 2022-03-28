@@ -1,7 +1,10 @@
 package storage;
 
+import data.exercises.ExerciseList;
+import data.plans.PlanList;
 import data.workouts.Workout;
 import data.plans.Plan;
+import data.workouts.WorkoutList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,10 +14,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FileManagerTest {
+    ExerciseList el;
+    WorkoutList wl;
+    PlanList pl;
 
     @BeforeEach
     public void setUp() {
         LogHandler.startLogHandler();
+        el = new ExerciseList();
+        wl = new WorkoutList(el);
+        pl = new PlanList(wl);
     }
 
     @Test
@@ -27,7 +36,7 @@ public class FileManagerTest {
         String expectedOutput2 = "russian twist | 1000";
         String expectedOutput3 = "swimming | 20";
 
-        FileManager fm = new FileManager();
+        FileManager fm = new FileManager(pl);
 
         assertEquals(expectedOutput1, fm.convertWorkoutToFileDataFormat(testWorkoutSample1));
         assertEquals(expectedOutput2, fm.convertWorkoutToFileDataFormat(testWorkoutSample2));
@@ -50,7 +59,7 @@ public class FileManagerTest {
         Plan testPlanSample2 = new Plan("hotMan", listOfWorkouts2);
         String expectedOutput1 = "coolMan | push up | 1,russian twist | 1000,swimming | 20";
         String expectedOutput2 = "hotMan | push up | 1,swimming | 20";
-        FileManager fm = new FileManager();
+        FileManager fm = new FileManager(pl);
 
         assertEquals(expectedOutput1, fm.convertPlanToFileDataFormat(testPlanSample1));
         assertEquals(expectedOutput2, fm.convertPlanToFileDataFormat(testPlanSample2));
@@ -60,7 +69,7 @@ public class FileManagerTest {
     public void convertWorkoutToFileDataFormat_nullWorkoutInput_exceptionThrown() {
         Workout testWorkoutSample1 = null;
 
-        FileManager fm = new FileManager();
+        FileManager fm = new FileManager(pl);
 
         assertThrows(NullPointerException.class,
             () -> fm.convertWorkoutToFileDataFormat(testWorkoutSample1));
@@ -70,7 +79,7 @@ public class FileManagerTest {
     public void convertPlanToFileDataFormat_nullPlanInput_exceptionThrown() {
         Plan testPlanSample1 = null;
 
-        FileManager fm = new FileManager();
+        FileManager fm = new FileManager(pl);
 
         assertThrows(NullPointerException.class,
             () -> fm.convertPlanToFileDataFormat(testPlanSample1));

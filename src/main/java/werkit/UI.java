@@ -135,6 +135,8 @@ public class UI {
      * Prints a message that prompts the user to enter a command
      * Method adapted from Team Member Alan Low's iP codebase.
      * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/SoraUI.java
+     *
+     * @param isFirstPrompt state whether the input taken from the console is the first command given by user.
      */
     public void printUserInputPrompt(boolean isFirstPrompt) {
         printLine();
@@ -153,6 +155,8 @@ public class UI {
      * Reads in a line of the user from the standard input, trims the input, and returns it as a String.
      * Method adapted from Team Member Alan Low's iP codebase.
      * Link: https://github.com/alanlowzies/ip/blob/8556dd6a5106d190f5ac0458c6d2c34f98737a91/src/main/java/sora/SoraParser.java
+     *
+     * @return userInputTrimmed user input with no spaces at the back of the input.
      */
     protected String getUserInput() {
         String userInput = inputReader.nextLine();
