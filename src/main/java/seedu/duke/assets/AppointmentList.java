@@ -1,6 +1,7 @@
 package seedu.duke.assets;
 
 import seedu.duke.exception.DuplicateEntryException;
+import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
 import seedu.duke.helper.command.CommandLineTable;
@@ -20,7 +21,7 @@ public class AppointmentList extends List {
 
     @Override
     public void add(String[] addAppointmentParameters) throws DuplicateEntryException {
-        int numberOfAppointmentsBefore = appointments.size();
+        final int numberOfAppointmentsBefore = appointments.size();
         for (Appointment appointment : appointments) {
             if (appointment.getAppointmentId().equals(addAppointmentParameters[0])) {
                 throw new DuplicateEntryException("Appointment with given appointment ID already exist!");
@@ -30,6 +31,7 @@ public class AppointmentList extends List {
                 addAppointmentParameters[2], addAppointmentParameters[3], addAppointmentParameters[4],
                 addAppointmentParameters[5], addAppointmentParameters[6]);
         appointments.add(newAppointment);
+        UI.printParagraph("Appointment has been added");
         assert appointments.size() == numberOfAppointmentsBefore + 1;
     }
 
@@ -64,21 +66,24 @@ public class AppointmentList extends List {
     }
 
     @Override
-    public void view() {
+    public void view() throws HalpmiException {
         CommandLineTable appointmentTable = new CommandLineTable();
         appointmentTable.setShowVerticalLines(true);
         appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
                 "Appointment Date", "Appointment Details");
+        if (appointments.size() == 0) {
+            throw new HalpmiException("Doctor list is empty, please add doctor");
+        }
         for (Appointment appointment : appointments) {
             appointmentTable.addRow(appointment.getAppointmentId(), appointment.getPatientName(),
-                    appointment.getPatientNric(), appointment.getDoctorName(), appointment.getDoctorNric(),
-                    appointment.getAppointmentDate(), appointment.getAppointmentDetails());
+                        appointment.getPatientNric(), appointment.getDoctorName(), appointment.getDoctorNric(),
+                        appointment.getAppointmentDate(), appointment.getAppointmentDetails());
         }
         appointmentTable.print();
     }
 
     @Override
-    public void view(String parameters) {
+    public void view(String parameters) throws HalpmiException {
         String[] parametersArray = parameters.split(",");
         String criteria = parametersArray[0].trim();
         String input = parametersArray[1].trim();
@@ -89,6 +94,8 @@ public class AppointmentList extends List {
                 if (appointments.get(i).getAppointmentId().equals(input)) {
                     foundAppointments.add(appointments.get(i));
                     assert foundAppointments.size() != 0;
+                } else {
+                    throw new HalpmiException("Appointment Id doesnt exist, please try again");
                 }
             }
             break;
@@ -97,6 +104,8 @@ public class AppointmentList extends List {
                 if (appointments.get(i).getPatientName().equals(input)) {
                     foundAppointments.add(appointments.get(i));
                     assert foundAppointments.size() != 0;
+                } else {
+                    throw new HalpmiException("Appointment Id doesnt exist, please try again");
                 }
             }
             break;
@@ -105,6 +114,8 @@ public class AppointmentList extends List {
                 if (appointments.get(i).getDoctorName().equals(input)) {
                     foundAppointments.add(appointments.get(i));
                     assert foundAppointments.size() != 0;
+                } else {
+                    throw new HalpmiException("Doctor name doesnt exist, please try again");
                 }
             }
             break;
@@ -113,6 +124,8 @@ public class AppointmentList extends List {
                 if (appointments.get(i).getAppointmentDate().equals(input)) {
                     foundAppointments.add(appointments.get(i));
                     assert foundAppointments.size() != 0;
+                } else {
+                    throw new HalpmiException("Date doesnt exist, please try again");
                 }
             }
             break;
@@ -121,6 +134,8 @@ public class AppointmentList extends List {
                 if (appointments.get(i).getPatientNric().equals(input)) {
                     foundAppointments.add(appointments.get(i));
                     assert foundAppointments.size() != 0;
+                } else {
+                    throw new HalpmiException("Patient nric doesnt exist, please try again");
                 }
             }
             break;
@@ -129,6 +144,9 @@ public class AppointmentList extends List {
                 if (appointments.get(i).getDoctorNric().equals(input)) {
                     foundAppointments.add(appointments.get(i));
                     assert foundAppointments.size() != 0;
+                } else {
+
+                    throw new HalpmiException("Doctor doesnt exist, please try again");
                 }
             }
             break;
@@ -147,12 +165,15 @@ public class AppointmentList extends List {
         appointmentTable.setShowVerticalLines(true);
         appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
                 "Appointment Date", "Appointment Details");
-        for (Appointment appointment : foundAppointments) {
-            appointmentTable.addRow(appointment.getAppointmentId(), appointment.getPatientName(),
-                    appointment.getPatientNric(), appointment.getDoctorName(), appointment.getDoctorNric(),
-                    appointment.getAppointmentDate(), appointment.getAppointmentDetails());
+        for (Appointment appointment: foundAppointments) {
+            if (appointmentTable == null) {
+                appointmentTable.addRow(appointment.getAppointmentId(), appointment.getPatientName(),
+                        appointment.getPatientNric(), appointment.getDoctorName(), appointment.getDoctorNric(),
+                        appointment.getAppointmentDate(), appointment.getAppointmentDetails());
+            }
+            appointmentTable.print();
         }
-        appointmentTable.print();
+        throw new HalpmiException("Appointment List is empty, please add appointment");
     }
 
 }

@@ -2,6 +2,7 @@ package seedu.duke.assets;
 
 
 import seedu.duke.exception.DuplicateEntryException;
+import seedu.duke.exception.HalpmiException;
 import seedu.duke.exception.NotFoundException;
 import seedu.duke.helper.UI;
 import seedu.duke.helper.command.CommandLineTable;
@@ -46,6 +47,7 @@ public class MedicineList extends List {
                 Integer.parseInt(parameterArray[2]), parameterArray[3], parameterArray[4],
                 Integer.parseInt(parameterArray[5]));
         medicines.add(newMedicine);
+        UI.printParagraph("Medicine has been added");
     }
 
     public void find(String[] command) {
@@ -60,11 +62,10 @@ public class MedicineList extends List {
 
 
     //view particular medicine
-    public void view(String medicineId) {
+    public void view(String medicineId) throws HalpmiException {
         Medicine medicine = getMedicine(medicineId);
         if (medicine == null) {
-            UI.printParagraph("Medicine doesn't exist please try again!");
-            return;
+            throw new HalpmiException("Medicine doesn't exist please try again!");
         }
         CommandLineTable medicineTable = new CommandLineTable();
         medicineTable.setShowVerticalLines(true);
@@ -75,12 +76,15 @@ public class MedicineList extends List {
         medicineTable.print();
     }
 
-    public void view() {
+    public void view() throws HalpmiException {
         CommandLineTable medicineTable = new CommandLineTable();
         //st.setRightAlign(true);//if true then cell text is right aligned
         medicineTable.setShowVerticalLines(true);
         medicineTable.setHeaders("MedicineId", "MedicineName", "Dosage", "Expiry", "SideEffects", "Quantity");
 
+        if (medicines.size() == 0) {
+            throw new HalpmiException("Medicine list is empty, please add medicine");
+        }
         for (Medicine medicine : medicines) {
             medicineTable.addRow(medicine.getMedicineId(), medicine.getMedicineName(),
                     String.valueOf(medicine.getDosage()),
@@ -95,6 +99,7 @@ public class MedicineList extends List {
         for (int i = 0; i < getSize(); i++) {
             if (medicines.get(i).getMedicineId().equals(medicineId)) {
                 medicines.remove(i);
+                UI.printParagraph("Medicine has been removed");
                 return;
             }
         }
