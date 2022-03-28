@@ -76,9 +76,12 @@ public class Parser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+
+        case SummaryCommand.COMMAND_WORD:
+            return new SummaryCommand();
+
         case FindCommand.COMMAND_WORD:
             return new FindCommand(arguments);
-
 
         default:
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -149,7 +152,7 @@ public class Parser {
 
             // extracts product type
             extractedParameters = extractParameter(parameters, PARAMETER_PATTERN_PRODUCT_TYPE);
-            String productType = extractedParameters[0].replace("t/","");
+            String productType = extractedParameters[0].replace("t/","").trim();
 
             addCmd = new AddCommand();
             try {
@@ -157,8 +160,11 @@ public class Parser {
                 assert price != null : "price cannot be null";
                 assert date != null : "date cannot be null";
                 assert productType != null : "productType cannot be null";
-
-                addCmd.AddProductCommand(name, price, date, productType);
+                if (productType.equals("fashion") || productType.equals("food") ||
+                        productType.equals("accessory") || productType.equals("others"))
+                    addCmd.AddProductCommand(name, price, date, productType);
+                else
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             } catch (IllegalValueException e) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }

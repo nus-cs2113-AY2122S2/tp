@@ -1,4 +1,13 @@
-P | handphone cover | 10.0 | 14022022 | accessory 
-P | handphone cover | 10.0 | 14022022 | accessory 
-P | pen | 10.0 | 14022022 | accessory 
-P | shirt | 10.0 | 14022022 | accessory 
+P | handphone cover | 10.0 | 14022022 | fashion
+S | Netflips | 10.0 | 14022022 | 14032022
+P | handphone cover | 10.0 | 14022022 | others
+P | handphone cover | 10.0 | 14022022 | food
+P | cloth1 | 200.0 | 14022022 | fashion
+P | food1 | 3000.0 | 14022022 | food
+P | cloth2 | 10.0 | 14022022 | fashion
+P | handphone cover | 10.0 | 14022022 | others
+P | handphone1 cover | 10.0 | 14022022 | accessory
+P | handphone2 cover | 200.0 | 14022022 | accessory
+S | abcd | 50000.0 | 14022022 | 14032022
+S | HAHAHA | 4000.0 | 14022022 | 14032022
+P | handphone8 cover | 2000.0 | 14022022 | accessory
