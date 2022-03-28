@@ -76,7 +76,7 @@ public class Housekeeper {
 
     @Override
     public String toString() {
-        return "[ " + getName() + " ]: " + getAge() + ", " + getAvailability();
+        return "[" + getName().toUpperCase() + "]: " + "Age: " + getAge() + ", Availability: " + getAvailability();
     }
 
     public void setNullAvailability() {

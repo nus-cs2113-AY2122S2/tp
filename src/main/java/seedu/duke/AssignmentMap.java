@@ -6,7 +6,7 @@ import java.util.Map;
 public class AssignmentMap {
 
     Map<Room, Housekeeper> map = new HashMap<>();
-
+    //   Map<Integer,String> eMap = new HashMap<>();
     Room room;
     Housekeeper housekeeper;
 
@@ -15,6 +15,21 @@ public class AssignmentMap {
             throws InvalidHousekeeperProfile, InvalidRoomNumberException {
         for (Room r : roomList.getRoomList()) {
             if (r.getRoomId() == Integer.parseInt(roomID)) {
+                room = r;
+                if (housekeeperExists(name, housekeeperList)) {
+                    return;
+                }
+                throw new InvalidHousekeeperProfile();
+            }
+        }
+        throw new InvalidRoomNumberException();
+    }
+
+    public void addAssignmentNew(String name, String roomId,
+                                 HousekeeperList housekeeperList, RoomList roomList)
+            throws InvalidHousekeeperProfile, InvalidRoomNumberException {
+        for (Room r : roomList.getRoomList()) {
+            if (r.getRoomId() == Integer.parseInt(roomId)) {
                 room = r;
                 if (housekeeperExists(name, housekeeperList)) {
                     return;

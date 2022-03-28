@@ -1,10 +1,4 @@
 James Gosling
-Add Housekeeper
-Add Housekeeper
-Add Housekeeper sus ~
-Add Housekeeper sgg ~ 17
-Add Housekeeper hello ~ joo
-Add Housekeeper sus ~
 View Recorded Housekeeper
 Add Item Toilet Roll / 15
 Add Item  / 20
@@ -13,14 +7,7 @@ Add Item Toilet Roll / -1
 Add Item Toilet Roll / 0
 Add Item Fork / 15
 Add Item Spoon /2
-Add Housekeeper Tom ~ 33
-Add Housekeeper tOm ~ 33
-Add Housekeeper sally ~ 17
 View Item In Inventory
-Availability sus @ M,T
-Availability jane @ M
-Availability tom @ T
-Availability sally @
 View Recorded Housekeeper
 Update Item Pax Toilet Roll / 5
 Update Item Pax Toilet Roll / -1
@@ -29,31 +16,43 @@ Update Item Pax / 5
 Update Item Pax
 Update Item Pax Swimming Pool /5
 Update Item Pax Spoon / 0
-Add Housekeeper ~
-Add Housekeeper KO  13
 Availability @
 Availability lucy M
 Delete Item Toilet Roll
 Delete Item Table
 Delete Item
-Add Housekeeper Sall ~ 33
-Availability Sall @ 1,2,3
-Add Housekeeper joh ~ 43
-Availability joh @ 1,2
-Add Housekeeper sis ~ 43
-Add Housekeeper Lucy ~ 34
-Availability Lucy @ 12F,3,
-View Recorded Housekeeper
-Add Housekeeper JANE ~ 34
-Add Housekeeper JANEy ~ 36
-Availability Jane @ 5,6
-View Recorded Housekeeper
+Update Item Name Swimming Pool /
+Update Item Name / Premium Swimming Pool
+Update Item Name Spoon / Premium Spoon
+add housekeeper jane / 33
+add housekeeper susan / 43
+add housekeeper mich /88
+add housekeeper mich/60
+add housekeeper massy/59
+view recorded housekeeper
+availability jane /1,2,7
+availability zac / 1
+availability mich / 1,2,3,4,5,6,7,
+availability massy/1,5
+view recorded housekeeper
+delete housekeeper susan
+delete housekeeper happy
+view recorded housekeeper
+get available on 1
 get available on 2
 get available on 3
 get available on 4
 get available on 5
-View Recorded Housekeeper
+get available on 6
+get available on 7
+view recorded housekeeper
+is a new year
+view recorded housekeeper
 is a new week
+view recorded housekeeper
+is a new year
+view recorded housekeeper
+=======
 Availability Jane @ 5,6
 View Recorded Housekeeper
 Update Item Name Swimming Pool /

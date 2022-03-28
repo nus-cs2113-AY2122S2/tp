@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.io.IOException;
+
 /**
  * Abstract class that generalizes all Commands.
  * Contains an abstract "execute" method and keeps track of
@@ -21,7 +23,8 @@ public abstract class Command {
      * @throws HotelLiteManagerException If there is any error with user input.
      */
     public abstract void execute(ListContainer listContainer, Ui ui)
-            throws HotelLiteManagerException;
+            throws HotelLiteManagerException, IOException;
+
 
     public boolean isExit() {
         return this.isExit;
