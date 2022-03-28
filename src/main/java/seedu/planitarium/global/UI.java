@@ -40,9 +40,8 @@ public class UI {
     }
 
     public static void printHelpMsg() {
-        for(String Commands: Help.CommandSummary) {
-            System.out.println(Commands);
-            System.out.println("\n");
+        for (String commands: Help.CommandSummary) {
+            System.out.println(commands);
         }
     }
 

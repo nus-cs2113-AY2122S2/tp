@@ -151,19 +151,19 @@ public class IncomeList extends MoneyList {
     }
 
     private void editIncPerm(int index, Boolean isPermanent) {
-        if (isPermanent != null){
+        if (isPermanent != null) {
             incomeArrayList.get(index - 1).setPermanent(isPermanent);
         }
     }
 
     private void editIncAmount(int index, Double amount) {
-        if (amount != null){
+        if (amount != null) {
             incomeArrayList.get(index - 1).setAmount(amount);
         }
     }
 
     private void editIncDesc(int index, String description) {
-        if (description != null){
+        if (description != null) {
             incomeArrayList.get(index - 1).setDescription(description);
         }
     }

@@ -1,14 +1,17 @@
+//@@author HansHengGit
+
 package seedu.planitarium.storage;
 
+import seedu.planitarium.global.Constants;
 import seedu.planitarium.money.Expenditure;
 import seedu.planitarium.money.Income;
+import seedu.planitarium.person.Family;
 import seedu.planitarium.person.Person;
 import seedu.planitarium.person.PersonList;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
@@ -23,10 +26,12 @@ public class Storage {
     private static final int END_OF_TYPE = 1;
     private static final int DELIMIT_COUNT = 3;
 
+    private static int groupNumber = 1;
     private static File saveFile;
     private static int numberOfPerson = 0;
     private static String filePath;
     private static PersonList personDataList = new PersonList();
+    private static Family familyData = new Family();
 
     /**
      * Constructs a new storage object.
@@ -99,26 +104,36 @@ public class Storage {
         String description;
         Double amount;
         boolean isPermanent;
+        int category;
         switch (type) {
         case ADD_USER:
-            personDataList.addPerson(info);
+            personDataList.addPerson(info, Constants.FOR_STORAGE);
+            familyData.addPerson(groupNumber, info, Constants.FOR_STORAGE);
             numberOfPerson++;
             break;
         case ADD_INCOME:
             description = parseInfoGetDescription(info);
             amount = parseInfoGetAmount(info);
             isPermanent = parseInfoGetPermanent(info);
-            personDataList.getPerson(numberOfPerson).addIncome(description, amount, isPermanent);
+            familyData.addIncome(numberOfPerson, groupNumber, description, amount, isPermanent, Constants.FOR_STORAGE);
             break;
         case ADD_EXPENDITURE:
             description = parseInfoGetDescription(info);
             amount = parseInfoGetAmount(info);
             isPermanent = parseInfoGetPermanent(info);
-            personDataList.getPerson(numberOfPerson).addExpend(description, amount, isPermanent);
+            category = parseInfoGetCategory(info);
+            familyData.addExpend(numberOfPerson, groupNumber, description, amount,
+                    category, Constants.FOR_STORAGE, isPermanent);
             break;
         default:
-            break;
+            numberOfPerson = 0;
+            groupNumber++;
         }
+    }
+
+    private static int parseInfoGetCategory(String info) {
+        String[] inputInfo = info.split(INFO_DELIMITER, DELIMIT_COUNT);
+        return Integer.parseInt(inputInfo[3].trim());
     }
 
     /**
@@ -157,21 +172,29 @@ public class Storage {
         return Boolean.valueOf(inputInfo[2].trim());
     }
 
-    /**
-    public static void saveData(PersonList dataToBeSavedList) throws IOException {
-        FileWriter writeToFile = new FileWriter(filePath);
-        for (Person person : dataToBeSavedList.getPersonList()) {
-            writeToFile.write(String.valueOf(person.saveName()) + System.lineSeparator());
-            for (Income income : person.getIncomeList()) {
-                writeToFile.write(String.valueOf(income.saveString()) + System.lineSeparator());
+
+    public static void saveData(Family familyDataToSave) {
+        try {
+            FileWriter writeToFile = new FileWriter(filePath);
+            for (int i = 1; i <= 3; i++) {
+                writeToFile.write(String.valueOf(i) + System.lineSeparator());
+                for (Person person : familyDataToSave.getList(i).getPersonList()) {
+                    writeToFile.write(String.valueOf(person.saveName()) + System.lineSeparator());
+                    for (Income income : person.getIncomeList()) {
+                        writeToFile.write(String.valueOf(income.saveString()) + System.lineSeparator());
+                    }
+                    for (Expenditure expenditure : person.getExpenditureList()) {
+                        writeToFile.write(String.valueOf(expenditure.saveString()) + System.lineSeparator());
+                    }
+                }
             }
-            for (Expenditure expenditure : person.getExpenditureList()) {
-                writeToFile.write(String.valueOf(expenditure.saveString()) + System.lineSeparator());
-            }
+            writeToFile.close();
+        } catch (IOException e) {
+            System.out.println("fail");
         }
-        writeToFile.close();
     }
-    */
+
+
 
     /**
      * Drives the loading of data process by calling checkFileExists()
@@ -181,10 +204,10 @@ public class Storage {
      *
      * @return The PersonList of the data loaded from the local file
      */
-    public static PersonList loadData() {
+    public static Family loadData() {
         checkFileExists();
         readSaveFile();
-        return personDataList;
+        return familyData;
     }
 
 }

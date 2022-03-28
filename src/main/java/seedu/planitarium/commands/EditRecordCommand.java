@@ -49,7 +49,7 @@ public class EditRecordCommand extends Command{
         switch (keyword) {
         case EDIT_INCOME_CMD:
             amount = Parser.getValidMoney(Parser.parseIncome(userInput));
-            family.editIncome(uid, group, index, description, amount, category, isPermanent);
+            family.editIncome(group, uid, index, description, amount, isPermanent);
             break;
         case EDIT_SPENT_CMD:
             amount = Parser.getValidMoney(Parser.parseExpenditure(userInput));

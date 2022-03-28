@@ -3,6 +3,7 @@ package seedu.planitarium.commands;
 import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.global.UI;
 import seedu.planitarium.person.Family;
+import seedu.planitarium.storage.Storage;
 
 /**
  * Executes exit command and exit the program.
@@ -19,6 +20,7 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute() {
+        Storage.saveData(family);
         UI.exit();
         System.out.println(UI.HORI_LINE);
         System.exit(0);

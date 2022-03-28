@@ -16,7 +16,6 @@ public abstract class Money {
      * @param description - Money's description
      * @param amount - The amount of money
      * @param isPermanent - Money's recurrence
-     * @param initDate - This money object's creation date
      */
     public Money(String description, double amount, boolean isPermanent) {
         assert (description != null);
