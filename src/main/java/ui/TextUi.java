@@ -51,19 +51,6 @@ public class TextUi {
     }
 
     /**
-     * Returns the instance of <code>TextUi</code> if it has been created. Else, creates and returns an instance of
-     * <code>TextUi</code> using the specified Input Stream and Output Stream.
-     *
-     * @return TextUi object
-     */
-    public static TextUi getTextUiInstance (InputStream in, PrintStream out) {
-        if (textUiInstance == null) {
-            textUiInstance = new TextUi(in, out);
-        }
-        return textUiInstance;
-    }
-
-    /**
      * Returns true if the user input line should be ignored.
      * Input should be ignored if it is parsed as a comment, is only whitespace, or is empty.
      *
