@@ -29,8 +29,6 @@ public class Spendvelope {
         new Spendvelope().run();
     }
 
-
-
     /** Runs the program until termination. */
     public void run() throws IOException {
         start();
