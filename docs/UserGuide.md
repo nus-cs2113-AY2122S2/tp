@@ -2,7 +2,7 @@
 
 -----------------------------------------------
 
-##Contents
+## Contents
 * [Introduction](#introduction)
     * [Purpose](#purpose)
     * [How to read the Guide](#how-to-read-the-guide)
@@ -82,7 +82,8 @@ at which Halpmi.jar is located.
 ### Adding: `add`
 Adds a new entry into the app. This entry can be either a doctor, patient or medicine.
 
-    ADD DOCTOR
+#### ADD DOCTOR
+
 To add a new doctor into your application you can use the `add doctor` command when prompted by HALPMI for your input.
 To add a doctor there are some parameters that you would have to provide:
 1. NRIC
@@ -99,7 +100,8 @@ Format: `add doctor /info [nric],[name],[age],[gender],[address],[DOB],[Speciali
 
 Example: `add doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`
 
-    ADD PATIENT
+#### ADD PATIENT
+
 To add a new patient into your application you can use the `add patient` command when prompted by HALPMI for your input.
 To add a patient there are some parameters that you would have to provide:
 1. NRIC
@@ -116,7 +118,8 @@ Format: `add patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`
 
 Example: `add patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`
 
-    ADD MEDICINE
+#### ADD MEDICINE
+
 To add a new medicine into your application you can use the `add medicine` command when prompted by HALPMI for your input.
 To add a medicine there are some parameters that you would have to provide:
 1. Batch ID
@@ -132,7 +135,8 @@ Format: `add medicine /info [batch id],[name],[dosage],[expiry date],[side effec
 
 Example: `add medicine /info A123,Paracetamol, 500, 2023-06-11, Slight headache, 10`
 
-    ADD APPOINTMENT
+#### ADD APPOINTMENT
+
 To add a new appointment into your application you can use the `add appointment` command when prompted by HALPMI for your input.
 To add an appointment there are some parameters that you would have to provide:
 1. Appointment ID
@@ -153,7 +157,8 @@ Example: `add appointment /info A123,S1234567A,Don,S7654321A,John,2022-10-15,Reg
 ### Viewing: `view`
 Allows user to view existing records of doctors, patients and medicine.
 
-    VIEW DOCTOR
+#### VIEW DOCTOR
+
 To view the records of all doctors in the application, you can simply call `view doctor` without any additional
 parameters. You could also give the NRIC as an additional parameter if you want to view a single doctor only.
 
@@ -161,7 +166,8 @@ Format: `view doctor` or `view doctor /info [nric]`
 
 Example: `view doctor /info S1234567A`
 
-    VIEW PATIENT
+#### VIEW PATIENT
+
 To view the records of all patients in the application, you can simply call `view patient` without any additional
 parameters. You could also give the NRIC as an additional parameter if you want to view a single patient only.
 
@@ -169,7 +175,8 @@ Format: `view patient` or `view patient /info [nric]`
 
 Example: `view doctor /info S1234567A`
 
-    VIEW MEDICINE
+#### VIEW MEDICINE
+
 To view the records of all medicines in the application, you can simply call `view medicine` without any additional
 parameters. You could also give the Name as an additional parameter if you want to view a single type of Medicine only.
 
@@ -177,7 +184,8 @@ Format: `view medicine` or `view medicine /info [name]`
 
 Example: `view medicine /info Paracetamol`
 
-    VIEW APPOINTMENT
+#### VIEW APPOINTMENT
+
 To view the records of all appointments in the application, you can simply call `view appointment` without any
 additional parameters. You could also give a specific criteria as listed below and the input value if you want to
 search and view by a specific criteria.
@@ -192,7 +200,8 @@ Examples: `view appointment /info appointment id,A123`, `view appointment /info 
 ### Deleting: `delete`
 Allows user to delete existing records of doctors, patients and medicine.
 
-    DELETE DOCTOR
+#### DELETE DOCTOR
+
 To delete an existing doctor in the application, you can use the `delete doctor` command. This command requires an
 additional parameter which is the NRIC of the doctor.
 
@@ -200,7 +209,8 @@ Format: `delete doctor /info [nric]`
 
 Example: `delete doctor /info S1234567A`
 
-    DELETE PATIENT
+#### DELETE PATIENT
+
 To delete an existing patient in the application, you can use the `delete patient` command. This command requires an
 additional parameter which is the NRIC of the patient.
 
@@ -208,7 +218,8 @@ Format: `delete patient /info [nric]`
 
 Example: `delete patient /info S1234567A`
 
-    DELETE MEDICINE
+#### DELETE MEDICINE
+
 To delete an existing medicine in the application, you can use the `delete medicine` command. This command requires an
 additional parameter which is the batch id of the medicine.
 
@@ -216,7 +227,8 @@ Format: `delete medicine /info [batch id]`
 
 Example: `delete medicine /info S234`
 
-    DELETE APPOINTMENT
+#### DELETE APPOINTMENT
+
 To delete an existing appointment in the application, you can use the `delete appointment` command.
 This command requires an additional parameter which is the appointment id of the medicine.
 
@@ -226,7 +238,8 @@ Example: `delete medicine /info S234`
 
 ### Editing: `edit`
 
-    EDIT DOCTOR
+#### EDIT DOCTOR
+
 To edit an existing doctor in your application you can use the `edit doctor` command when prompted by HALPMI for your input.
 To edit a doctor there are some parameters that you would have to provide:
 1. NRIC (Must be already in the list)
@@ -243,7 +256,8 @@ Format: `edit doctor /info [nric],[name],[age],[gender],[address],[DOB],[Special
 
 Example: `edit doctor /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, Urinology`
 
-    EDIT PATIENT
+#### EDIT PATIENT
+
 To edit an existing patient in your application you can use the `edit patient` command when prompted by HALPMI for your input.
 To edit a patient there are some parameters that you would have to provide:
 1. NRIC (Must be already in the list)
@@ -260,7 +274,8 @@ Format: `edit patient /info [nric],[name],[age],[gender],[address],[DOB],[DOA]`
 
 Example: `edit patient /info S1234567A, John Doe, 23, M, 10 Baker Street, 1999-12-31, 2021-02-15`
 
-    EDIT MEDICINE
+#### EDIT MEDICINE
+
 To edit an existing medicine in your application you can use the `edit medicine` command when prompted by HALPMI for your input.
 To edit a medicine there are some parameters that you would have to provide:
 1. Batch ID (Must be already on the list)
@@ -276,7 +291,7 @@ Format: `edit medicine /info [batch id],[name],[dosage],[expiry date],[side effe
 
 Example: `edit medicine /info A123,Paracetamol, 500, 2023-06-11, Slight headache, 10`
 
-    EDIT APPOINTMENT
+#### EDIT APPOINTMENT
 
 To edit an existing appointment in your application you can use the `add appointment` command when prompted by HALPMI for your input.
 To edit an appointment there are some parameters that you would have to provide:
@@ -299,7 +314,8 @@ Example: `edit appointment /info A123,S1234567A,Don,S7654321A,John,2022-10-15,Re
 ### Finding: `find`
 Allows user to find existing records of doctors, patients and medicine.
 
-    FIND DOCTOR
+#### FIND DOCTOR
+
 To find an existing doctor in the application, you can use the `find doctor` command. This command requires an
 additional parameter which can be any of the parameters of doctor.
 To find a doctor you would have to provide one of these parameters:
@@ -316,7 +332,8 @@ Format:`find doctor /info [parameter], [parameter of doctor]`
 Example: `find doctor /info name, Jimmy`
 
 
-    FIND PATIENT
+#### FIND PATIENT
+
 To find an existing patient in the application, you can use the `find patient` command. This command requires an
 additional parameter which can be any of the parameters of patient.
 To find a patient you would have to provide one of these parameters using the given keywords:
@@ -333,7 +350,8 @@ Format:`find patient /info [parameter], [parameter of patient]`
 
 Example: `find patient /info nric, S7682373L`
 
-    FIND MEDICINE
+#### FIND MEDICINE
+
 To find an existing medicine in the application, you can use the `find medicine` command. This command requires an
 additional parameter which can be any of the parameters of medicine.
 To find a medicine you would have to provide one of these parameters using the given keywords:
