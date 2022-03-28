@@ -228,23 +228,36 @@ Enter the study session where you can start timers to help finish your tasks.
 
 Format: `study`
 
+Example:
+
+![image](https://user-images.githubusercontent.com/69501969/160329257-cf6fcbf7-9b2a-4c2a-bdfe-17b6c7517f9d.png)
+
 ### Starting a default timer: `start`
 _Note: To be improved with study and rest timers - similar to pomodoro sessions._
 
-![image](https://user-images.githubusercontent.com/69501969/159914348-9bced87d-c89e-4cba-9a86-fb8388a5fd9e.png)
 
 Start a study timer from our list of default timers.
 - Only 1 timer can be running at any 1 time.
 - Timer keeps track of time remaining and prints time remaining at regular intervals.
-- All our timers can be paused, resumed and stopped.
+- All our timers can be paused, resumed and stopped while the timer is running.
 
 Format: `start MODE_NUMBER`
+
+|      Parameters      | Description                                             | Accepted inputs               | Optional  |
+|:--------------------:|---------------------------------------------------------|-------------------------------|-----------|
+|     MODE_NUMBER      | The default mode number of the study timer chosen (0-4) | Any valid default mode number | No        |
 
 - You can choose from 3 default timers.
 - `MODE_NUMBER` 0 starts a 30 second timer for testing purposes.
 - `MODE_NUMBER` 1 starts a 30 minutes timer
 - `MODE_NUMBER` 2 starts a 1 hour timer
 - `MODE_NUMBER` 3 starts a 1.5 hour timer
+
+Examples:
+
+- `start 1`
+
+![image](https://user-images.githubusercontent.com/69501969/160329447-9c4ed321-8ea4-4dfd-85b6-03ca90f7d7f0.png)
 
 ### Starting a custom timer: `start`
 Start a custom study timer.
@@ -253,8 +266,18 @@ Start a custom study timer.
 
 Format: `start /custom DURATION`
 
+|    Parameters    | Description                                               | Accepted inputs   | Optional |
+|:----------------:|-----------------------------------------------------------|-------------------|----------|
+|     DURATION     | Duration of the timer (in seconds) that you wish to start | Any valid integer | No       |
+
 - Timer `DURATION` is in seconds (To be improved to provide more options)
 - `/custom` flag is mandatory to start a custom timer
+
+Example:
+
+- `start /custom 60`
+
+![image](https://user-images.githubusercontent.com/69501969/160330031-9a2c456d-059d-4849-a4c5-18972b1f72d1.png)
 
 ### Starting a stopwatch: `start`
 Start a stopwatch to track how long you've been studying.
@@ -263,20 +286,36 @@ Start a stopwatch to track how long you've been studying.
 
 Format: `start stopwatch`
 
+Example:
+
+![image](https://user-images.githubusercontent.com/69501969/160330116-886c03a2-b3c8-4e9c-a879-8fba990c2668.png)
+
 ### Pausing a timer/stopwatch: `pause`
 Pauses a study timer/stopwatch that is currently running.
 
 Format: `pause`
+
+Example:
+
+![image](https://user-images.githubusercontent.com/69501969/160329512-3a74d513-d95c-4aa2-9d88-a29ca3f93459.png)
 
 ### Resuming a timer/stopwatch: `resume`
 Resume a timer/stopwatch that has been paused.
 
 Format: `resume`
 
+Example:
+
+![image](https://user-images.githubusercontent.com/69501969/160329950-48c20933-84aa-46ef-9f7d-e58154c3270a.png)
+
 ### Stopping a timer/stopwatch: `stop`
 Stop a timer/stopwatch that has been started.
 
 Format: `stop`
+
+Example:
+
+![image](https://user-images.githubusercontent.com/69501969/160329869-2696b661-585b-4fae-9ebd-149b79316dd2.png)
 
 ### Show your tasks: `show`
 Shows your list of tasks that you have planned to do for the day.
@@ -284,19 +323,33 @@ Shows your list of tasks that you have planned to do for the day.
 
 Format: `show all`
 
+Example:
+
+![image](https://user-images.githubusercontent.com/69501969/160330233-43da64f3-4ccb-4780-a790-3f02c09052de.png)
+
 ### Mark your tasks as done: `mark`
 Mark the tasks that you've done in the session with `mark`.
 - `mark` can only be called when timer is paused or stopped.
+- You can only mark 1 task as done at a time.
 
 Format: `mark TASK_INDEX`
-- `TASK_INDEX` corresponds to the index of the task when `show` is called.
-- You can only mark 1 task as done at a time.
+
+| Parameters  | Description                                         | Accepted inputs       | Optional |
+|:-----------:|-----------------------------------------------------|-----------------------|----------|
+| TASK_NUMBER | The index of the task as seen in the `show` command | Any valid task number | No       |
+
+Example:
+
+![image](https://user-images.githubusercontent.com/69501969/160330280-f0cae4ae-0561-4c09-bc1f-8f89c6136aa6.png)
 
 ### Leave the study session: `leave`
 Leave the study session to go back to the main session.
 
 Format: `leave`
 
+Example:
+
+![image](https://user-images.githubusercontent.com/69501969/160330328-f3981868-6bcc-4e29-989c-90356cf15c10.png)
 
 ## FAQ
 
