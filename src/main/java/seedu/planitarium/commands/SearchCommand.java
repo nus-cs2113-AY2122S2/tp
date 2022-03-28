@@ -5,7 +5,7 @@ import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.Family;
 
-public class SearchCommand extends Command{
+public class SearchCommand extends Command {
     private static final String className = CommandFactory.class.getSimpleName();
     private static final String fileName = className + ".log";
     private static final ProjectLogger logger = new ProjectLogger(className, fileName);
@@ -20,7 +20,7 @@ public class SearchCommand extends Command{
     }
 
     @Override
-    public void execute(){
+    public void execute() {
 
     }
 }

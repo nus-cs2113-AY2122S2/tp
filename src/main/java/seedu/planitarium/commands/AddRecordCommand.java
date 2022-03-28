@@ -24,10 +24,10 @@ public class AddRecordCommand extends Command {
 
     protected static final String EXPEND = "expenditure";
     protected static final String INCOME = "income";
-    protected static final String LOG_ADDRECORD_INFO = "A record of '%s' is going to " +
-            "be added to someone with uid '%d' in group '%d'";
-    protected static final String LOG_EXECUTE_INFO = "An '%s' record of '%s' with $'%.2f' in category '%d' " +
-            "is going to be added to someone with uid '%d' in group '%d'";
+    protected static final String LOG_ADDRECORD_INFO = "A record of '%s' is going to "
+            + "be added to someone with uid '%d' in group '%d'";
+    protected static final String LOG_EXECUTE_INFO = "An '%s' record of '%s' with $'%.2f' in category '%d' "
+            + "is going to be added to someone with uid '%d' in group '%d'";
 
     protected String keyword;
     protected String description;

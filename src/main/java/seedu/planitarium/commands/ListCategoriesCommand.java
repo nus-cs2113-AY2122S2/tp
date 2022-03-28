@@ -7,7 +7,7 @@ import seedu.planitarium.person.Family;
 
 import java.util.logging.Level;
 
-public class ListCategoriesCommand extends Command{
+public class ListCategoriesCommand extends Command {
     private static final String className = CommandFactory.class.getSimpleName();
     private static final String fileName = className + ".log";
     private static final ProjectLogger logger = new ProjectLogger(className, fileName);

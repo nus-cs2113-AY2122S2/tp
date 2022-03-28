@@ -8,7 +8,7 @@ import seedu.planitarium.person.Family;
 
 import java.util.logging.Level;
 
-public class EditRecordCommand extends Command{
+public class EditRecordCommand extends Command {
     private static final String className = CommandFactory.class.getSimpleName();
     private static final String fileName = className + ".log";
     private static final ProjectLogger logger = new ProjectLogger(className, fileName);
@@ -18,8 +18,8 @@ public class EditRecordCommand extends Command{
     protected static final String LOG_EDITREC_INFO =
             "A record named '%s' from a person with uid '%d' in group '%d' is going to be edited";
     protected static final String LOG_EXECUTE_INFO =
-            "A '%s' named '%s' which index is '%d' with $'%.2f' in category '%d' from " +
-                    "a person with uid '%d' in group '%d' is edited";
+            "A '%s' named '%s' which index is '%d' with $'%.2f' in category '%d' from "
+                    + "a person with uid '%d' in group '%d' is edited";
 
     protected static final String EDIT_INCOME_CMD = "editin";
     protected static final String EDIT_SPENT_CMD = "editout";
@@ -59,7 +59,7 @@ public class EditRecordCommand extends Command{
     }
 
     @Override
-    public void execute() throws PlanITariumException{
+    public void execute() throws PlanITariumException {
         assert (keyword != null) : KEYWORD_NOT_NULL;
         assert (family != null) : FAMILY_NOT_NULL;
         switch (keyword) {
