@@ -102,6 +102,8 @@ public class ClearCommand extends Command {
      * This method informs the user that the specified user they tried to clear has been successfully cleared.
      *
      * @param user The user's timetable that has been cleared.
+     *
+     * @return user user's string been cleared
      */
     public static String printClearConfirmation(String user) {
         return user + "'s timetable has been cleared";

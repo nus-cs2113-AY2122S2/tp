@@ -135,7 +135,19 @@ public class MasterTimetable {
             deleteMeetingFromTimetable(timetable,meeting);
         }
         deleteMeetingFromMeetingList(meeting);
-        return DeleteCommand.deleteFromAllTimetableConfirmation(meeting);
+        return deleteMeetingFromAllTimetableConfirmation(meeting);
+    }
+
+    /**
+     * Inform user that delete has happened.
+     *
+     * @param meeting Event to inform user that said event has been deleted
+     *
+     *
+     */
+    public String deleteMeetingFromAllTimetableConfirmation(Meeting meeting) {
+        return "The following meeting event has been deleted from everyone's timetable:\n"
+                + meeting;
     }
 
     public void deleteMeetingFromTimetable(Timetable timetable,Meeting meeting) {
