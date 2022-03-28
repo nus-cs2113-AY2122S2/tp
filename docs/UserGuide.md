@@ -31,6 +31,7 @@ Format: `add n/ITEM_NAME sn/SERIAL_NUMBER t/TYPE c/COST pf/PURCHASED_FROM pd/PUR
 Example of usage and output: 
 
 `add n/SpeakerB s/S1404115ASF t/Speaker c/1000 pf/Loud_Technologies pd/2022-02-23`
+
 output: `Equipment successfully added: SpeakerB, serial number S1404115ASF`
 
 ### Checking an equipment: `check`
@@ -43,7 +44,9 @@ Format: `check n/ITEM_NAME`
 Example of usage and output:
 
 `check n/SpeakerB`
+
 output: 
+
 `Here are the equipment matching to 'SpeakerB':`
 
 `1. serialNumber=S1404115ASF,itemName=SpeakerB,type=SPEAKER,cost=1000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-02-23`
@@ -56,10 +59,13 @@ Format: `list`
 Example of usage and output:
 
 `list`
+
 output:
+
 `TOTAL QUANTITY OF EQUIPMENT: 2`
 
 `1. serialNumber=S89347971ASF,itemName=MixerC,type=MICROPHONE,cost=2000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-01-21`
+
 `2. serialNumber=S1404115ASF,itemName=SpeakerB,type=SPEAKER,cost=1000.0,purchasedFrom=Loud_Technologies,purchasedDate=2022-02-23`
 
 ### Listing equipment by type
