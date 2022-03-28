@@ -1,6 +1,0 @@
-ym
-1.[M] TITLE: Thursday		DAY: thursday		START: 1230		END: 1330		MODE: online
-2.[L] TITLE: CS2113		DAY: friday		START: 1430		END: 1530		MODE: online
-ibra
-1.[M] TITLE: Thursday		DAY: thursday		START: 1230		END: 1330		MODE: online
-2.[L] TITLE: CS2113		DAY: friday		START: 1430		END: 1530		MODE: online
