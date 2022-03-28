@@ -155,7 +155,7 @@ public class ExpenditureList extends MoneyList {
         return expenditureArrayList.get(index - 1).getCategory();
     }
 
-    public void editExpenditure(int index, String description, double amount, int category, boolean isPermanent) {
+    public void editExpenditure(int index, String description, double amount, int category, Boolean isPermanent) {
         logger.log(Level.INFO, LOG_EDIT_EXP);
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfExpenditures);
@@ -166,15 +166,27 @@ public class ExpenditureList extends MoneyList {
         editExpPerm(index, isPermanent);
     }
 
-    private void editExpPerm(int index, boolean isPermanent) {
+    private void editExpPerm(int index, Boolean isPermanent) {
+        if (isPermanent != null){
+            expenditureArrayList.get(index - 1).setPermanent(isPermanent);
+        }
     }
 
-    private void editExpCat(int index, int category) {
+    private void editExpCat(int index, Integer category) {
+        if (category != null){
+            expenditureArrayList.get(index - 1).setCategory(category);
+        }
     }
 
-    private void editExpAmount(int index, double amount) {
+    private void editExpAmount(int index, Double amount) {
+        if (amount != null){
+            expenditureArrayList.get(index - 1).setAmount(amount);
+        }
     }
 
     private void editExpDesc(int index, String description) {
+        if (description != null){
+            expenditureArrayList.get(index - 1).setDescription(description);
+        }
     }
 }
