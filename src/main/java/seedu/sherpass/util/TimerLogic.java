@@ -52,10 +52,10 @@ public class TimerLogic implements WindowListener {
         jframe.add(pauseButton, BorderLayout.WEST);
         JToggleButton resumeButton = new JToggleButton("Resume");
         resumeButton.addActionListener(actionListenerResume);
-        jframe.add(resumeButton, BorderLayout.EAST);
+        jframe.add(resumeButton, BorderLayout.CENTER);
         JToggleButton stopButton = new JToggleButton("stop");
         stopButton.addActionListener(actionListenerStop);
-        jframe.add(stopButton, BorderLayout.CENTER);
+        jframe.add(stopButton, BorderLayout.EAST);
     }
 
     /**
