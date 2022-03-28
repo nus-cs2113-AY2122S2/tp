@@ -18,16 +18,101 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
 
+    // error messages
+    private static final String ERROR_MSG = "Unknown error is detected from '%s', please check again.";
+    private static final String USER_INPUT_NOT_NULL = "User input should not be null";
+    private static final String MONEY_INPUT_SHOULD_NOT_BE_NULL = "Money input should not be null";
+    private static final String USER_INDEX_SHOULD_NOT_BE_NULL = "User index should not be null";
+    private static final String CATEGORY_INDEX_SHOULD_NOT_BE_NULL = "Category index should not be null";
+    private static final String EXPENDITURE_INDEX_SHOULD_NOT_BE_NULL = "Expenditure index should not be null";
+    private static final String INCOME_INDEX_SHOULD_NOT_BE_NULL = "Income index should not be null";
+    private static final String GROUP_INDEX_SHOULD_NOT_BE_NULL = "Group index should not be null";
+
+    private static final String TOO_MANY_DELIMITER_N = "Too many delimiter `/n`";
+    private static final String TOO_MANY_DELIMITER_U = "Too many delimiter `/u`";
+    private static final String TOO_MANY_DELIMITER_D = "Too many delimiter `/d`";
+    private static final String TOO_MANY_DELIMITER_I = "Too many delimiter `/i`";
+    private static final String TOO_MANY_DELIMITER_E = "Too many delimiter `/e`";
+    private static final String TOO_MANY_DELIMITER_R = "Too many delimiter `/r`";
+    private static final String TOO_MANY_DELIMITER_P = "Too many delimiter `/p`";
+    private static final String TOO_MANY_DELIMITER_C = "Too many delimiter `/c`";
+    private static final String TOO_MANY_DELIMITER_G = "Too many delimiter `/g`";
+
+    private static final String MISSING_DELIMITER_N = "Missing delimiter `/n`";
+    private static final String MISSING_DELIMITER_U = "Missing delimiter `/u`";
+    private static final String MISSING_DELIMITER_D = "Missing delimiter `/d`";
+    private static final String MISSING_DELIMITER_I = "Missing delimiter `/i`";
+    private static final String MISSING_DELIMITER_E = "Missing delimiter `/e`";
+    private static final String MISSING_DELIMITER_R = "Missing delimiter `/r`";
+    private static final String MISSING_DELIMITER_P = "Missing delimiter `/p`";
+    private static final String MISSING_DELIMITER_C = "Missing delimiter `/c`";
+    private static final String MISSING_DELIMITER_G = "Missing delimiter `/g`";
+
+    private static final String INVALID_MONEY_NEGATIVE_VALUE = "Invalid money value `-10.50`";
+    private static final String INVALID_MONEY_NOT_DOUBLE = "Invalid money value `hundred`";
+    private static final String INVALID_INDEX_TOO_LOW = "Invalid index `0`";
+    private static final String INVALID_INDEX_TOO_HIGH = "Invalid index `7`";
+    private static final String INVALID_INDEX_NOT_NUMBER = "Invalid index `Alice`";
+
+    // misc values
+    private static final String EMPTY_INPUT = "";
+    private static final String ONE = "1";
+    private static final String TWO = "2";
+    private static final String ALICE = "Alice";
+    private static final String TOO_LOW_INDEX = "0";
+    private static final String TOO_HIGH_INDEX = "7";
+    private static final int INT_ONE = 1;
+    private static final String TEN_FIFTY_STRING = "10.50";
+    private static final double TEN_FIFTY_DOUBLE = 10.50;
+    private static final String TEN_FIFTY_NEGATIVE = "-10.50";
+    private static final String HUNDRED = "hundred";
+    private static final String FOOD = "Food";
+    private static final String GIFT = "Gift";
+    private static final String INCOME_HUNDRED = "100";
+    
+    // method test cases
+    private static final String ADD_N_ALICE = "add /n Alice";
+    private static final String ADD = "add";
+    private static final String ADD_NO_DELIMITER = "add alice";
+    private static final String ADD_MANY_DELIMITER = "add /n alice /n alice";
+    
+    private static final String ADDIN_U_1_D_GIFT_I_100 = "addin /u 1 /d Gift /i 100";
+    private static final String ADDIN_U_NO_DELIMITER = "addin 1 /d Gift /i 100";
+    private static final String ADDIN_U_MANY_DELIMITER = "addin /u 1 /u 2 /d Gift /i 100";
+    private static final String ADDIN_D_NO_DELIMITER = "addin /u 1 Gift /i 100";
+    private static final String ADDIN_D_MANY_DELIMITER = "addin /u 1 /d Gift /d Something /i 100";
+    private static final String ADDIN_I_NO_DELIMITER = "addin /u 1 /d Gift 100";
+    private static final String ADDIN_I_MANY_DELIMITER = "addin /u 1 /d Gift /i 100 /i";
+
+    private static final String ADDOUT_U_1_D_FOOD_E_10_50 = "addout /u 1 /d Food /e 10.50";
+    private static final String ADDIN_E_NO_DELIMITER = "addout /u 1 /d Food 10.50";
+    private static final String ADDIN_E_MANY_DELIMITER = "addout /u 1 /d Food /e 10.50 /e";
+
+    private static final String DELETEIN_U_1_R_2 = "deletein /u 1 /r 2";
+    private static final String DELETEIN_R_NO_DELIMITER = "deletein /u 1 2";
+    private static final String DELETEIN_R_MANY_DELIMITER = "deletein /u 1 /r 2 /r 1";
+
+    private static final String ADDOUT_P_SMALL_TRUE = "addout /u 1 /e 10 /d Dinner /p t";
+    private static final String ADDOUT_P_CAPITAL_TRUE = "addout /u 1 /e 10 /d Dinner /p T";
+    private static final String ADDOUT_P_EXPLICIT_FALSE = "addout /u 1 /e 10 /d Dinner /p F";
+    private static final String ADDOUT_P_DEFAULT_FALSE = "addout /u 1 /e 10 /d Dinner /p abc123";
+    private static final String ADDOUT_P_NO_DELIMITER = "addout /u 1 /e 10 /d Dinner t";
+    private static final String ADDOUT_P_MANY_DELIMITER = "addout /u 1 /e 10 /d Dinner /p t /p f";
+
+    private static final String ADDOUT_U_1_E_10_D_DINNER_P_T_C_2 = "addout /u 1 /e 10 /d Dinner /p t /c 2";
+    private static final String ADDOUT_C_NO_DELIMITER = "addout /u 1 /e 10 /d Dinner /p t";
+    private static final String ADDOUT_C_MANY_DELIMITER = "addout /u 1 /e 10 /d Dinner /p t /c 2 /c 6";
+
+    private static final String ADD_N_ALICE_G_2 = "add /n Alice /g 2";
+    private static final String ADD_N_MANY_DELIMITER = "add /n Alice /g 2 /g 3";
+
     @Test
     void parseKeyword_keywordExist_success() {
-        String input1 = "";
-        String input2 = "add /n bill";
+        String output1 = Parser.parseKeyword(EMPTY_INPUT);
+        assertEquals(EMPTY_INPUT, output1);
 
-        String output1 = Parser.parseKeyword(input1);
-        assertEquals(input1, output1);
-
-        String output2 = Parser.parseKeyword(input2);
-        assertEquals("add", output2);
+        String output2 = Parser.parseKeyword(ADD_N_ALICE);
+        assertEquals(ADD, output2);
     }
 
     @Test
@@ -36,7 +121,7 @@ class ParserTest {
             Parser.parseKeyword(null);
             fail();
         } catch (AssertionError e) {
-            assertEquals("User input should not be null", e.getMessage());
+            assertEquals(USER_INPUT_NOT_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -45,9 +130,8 @@ class ParserTest {
     @Test
     void parseName_delimiterExist_success()
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
-        String input = "add /n bill";
-        String output = Parser.parseName(input);
-        assertEquals("bill", output);
+        String output = Parser.parseName(ADD_N_ALICE);
+        assertEquals(ALICE, output);
     }
 
     @Test
@@ -56,7 +140,7 @@ class ParserTest {
             Parser.parseName(null);
             fail();
         } catch (AssertionError e) {
-            assertEquals("User input should not be null", e.getMessage());
+            assertEquals(USER_INPUT_NOT_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -65,20 +149,18 @@ class ParserTest {
     @Test
     void parseName_delimiterIssues_exceptionThrown() {
         try {
-            String noDelimiter = "add bill";
-            Parser.parseName(noDelimiter);
+            Parser.parseName(ADD_NO_DELIMITER);
             fail();
         } catch (MissingDelimiterException e) {
-            assertEquals("Missing delimiter `/n`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, MISSING_DELIMITER_N), e.toString());
         } catch (Exception e) {
             fail();
         }
         try {
-            String tooManyDelimiter = "add /n bill /n alice";
-            Parser.parseName(tooManyDelimiter);
+            Parser.parseName(ADD_MANY_DELIMITER);
             fail();
         } catch (DuplicateDelimiterException e) {
-            assertEquals("Too many delimiter `/n`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, TOO_MANY_DELIMITER_N), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -87,9 +169,8 @@ class ParserTest {
     @Test
     void parseUserIndex_delimiterExist_success()
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
-        String input = "addin /u 1 /d Gift /i 100";
-        String output = Parser.parseUserIndex(input);
-        assertEquals("1", output);
+        String output = Parser.parseUserIndex(ADDIN_U_1_D_GIFT_I_100);
+        assertEquals(ONE, output);
     }
 
     @Test
@@ -98,7 +179,7 @@ class ParserTest {
             Parser.parseUserIndex(null);
             fail();
         } catch (AssertionError e) {
-            assertEquals("User input should not be null", e.getMessage());
+            assertEquals(USER_INPUT_NOT_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -107,20 +188,18 @@ class ParserTest {
     @Test
     void parseUserIndex_delimiterIssues_exceptionThrown() {
         try {
-            String noDelimiter = "addin 1 /d Gift /i 100";
-            Parser.parseUserIndex(noDelimiter);
+            Parser.parseUserIndex(ADDIN_U_NO_DELIMITER);
             fail();
         } catch (MissingDelimiterException e) {
-            assertEquals("Missing delimiter `/u`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, MISSING_DELIMITER_U), e.toString());
         } catch (Exception e) {
             fail();
         }
         try {
-            String tooManyDelimiter = "addin /u 1 /u 2 /d Gift /i 100";
-            Parser.parseUserIndex(tooManyDelimiter);
+            Parser.parseUserIndex(ADDIN_U_MANY_DELIMITER);
             fail();
         } catch (DuplicateDelimiterException e) {
-            assertEquals("Too many delimiter `/u`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, TOO_MANY_DELIMITER_U), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -129,9 +208,8 @@ class ParserTest {
     @Test
     void parseDescription_delimiterExist_success()
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
-        String input = "addin /u 1 /d Gift /i 100";
-        String output = Parser.parseDescription(input);
-        assertEquals("Gift", output);
+        String output = Parser.parseDescription(ADDIN_U_1_D_GIFT_I_100);
+        assertEquals(GIFT, output);
     }
 
     @Test
@@ -140,7 +218,7 @@ class ParserTest {
             Parser.parseDescription(null);
             fail();
         } catch (AssertionError e) {
-            assertEquals("User input should not be null", e.getMessage());
+            assertEquals(USER_INPUT_NOT_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -149,20 +227,18 @@ class ParserTest {
     @Test
     void parseDescription_delimiterIssues_exceptionThrown() {
         try {
-            String noDelimiter = "addin /u 1 Gift /i 100";
-            Parser.parseDescription(noDelimiter);
+            Parser.parseDescription(ADDIN_D_NO_DELIMITER);
             fail();
         } catch (MissingDelimiterException e) {
-            assertEquals("Missing delimiter `/d`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, MISSING_DELIMITER_D), e.toString());
         } catch (Exception e) {
             fail();
         }
         try {
-            String tooManyDelimiter = "addin /u 1 /d Gift /d Something /i 100";
-            Parser.parseDescription(tooManyDelimiter);
+            Parser.parseDescription(ADDIN_D_MANY_DELIMITER);
             fail();
         } catch (DuplicateDelimiterException e) {
-            assertEquals("Too many delimiter `/d`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, TOO_MANY_DELIMITER_D), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -171,9 +247,8 @@ class ParserTest {
     @Test
     void parseIncome_delimiterExist_success()
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
-        String input = "addin /u 1 /d Gift /i 100";
-        String output = Parser.parseIncome(input);
-        assertEquals("100", output);
+        String output = Parser.parseIncome(ADDIN_U_1_D_GIFT_I_100);
+        assertEquals(INCOME_HUNDRED, output);
     }
 
     @Test
@@ -182,7 +257,7 @@ class ParserTest {
             Parser.parseIncome(null);
             fail();
         } catch (AssertionError e) {
-            assertEquals("User input should not be null", e.getMessage());
+            assertEquals(USER_INPUT_NOT_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -191,20 +266,18 @@ class ParserTest {
     @Test
     void parseIncome_delimiterIssues_exceptionThrown() {
         try {
-            String noDelimiter = "addin /u 1 /d Gift 100";
-            Parser.parseIncome(noDelimiter);
+            Parser.parseIncome(ADDIN_I_NO_DELIMITER);
             fail();
         } catch (MissingDelimiterException e) {
-            assertEquals("Missing delimiter `/i`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, MISSING_DELIMITER_I), e.toString());
         } catch (Exception e) {
             fail();
         }
         try {
-            String tooManyDelimiter = "addin /u 1 /d Gift /i 100 /i";
-            Parser.parseIncome(tooManyDelimiter);
+            Parser.parseIncome(ADDIN_I_MANY_DELIMITER);
             fail();
         } catch (DuplicateDelimiterException e) {
-            assertEquals("Too many delimiter `/i`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, TOO_MANY_DELIMITER_I), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -213,9 +286,8 @@ class ParserTest {
     @Test
     void parseExpenditure_delimiterExist_success()
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
-        String input = "addout /u 1 /d Food /e 10.50";
-        String output = Parser.parseExpenditure(input);
-        assertEquals("10.50", output);
+        String output = Parser.parseExpenditure(ADDOUT_U_1_D_FOOD_E_10_50);
+        assertEquals(TEN_FIFTY_STRING, output);
     }
 
     @Test
@@ -224,7 +296,7 @@ class ParserTest {
             Parser.parseExpenditure(null);
             fail();
         } catch (AssertionError e) {
-            assertEquals("User input should not be null", e.getMessage());
+            assertEquals(USER_INPUT_NOT_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -233,20 +305,18 @@ class ParserTest {
     @Test
     void parseExpenditure_delimiterIssues_exceptionThrown() {
         try {
-            String noDelimiter = "addout /u 1 /d Food 10.50";
-            Parser.parseExpenditure(noDelimiter);
+            Parser.parseExpenditure(ADDIN_E_NO_DELIMITER);
             fail();
         } catch (MissingDelimiterException e) {
-            assertEquals("Missing delimiter `/e`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, MISSING_DELIMITER_E), e.toString());
         } catch (Exception e) {
             fail();
         }
         try {
-            String tooManyDelimiter = "addout /u 1 /d Food /e 10.50 /e";
-            Parser.parseExpenditure(tooManyDelimiter);
+            Parser.parseExpenditure(ADDIN_E_MANY_DELIMITER);
             fail();
         } catch (DuplicateDelimiterException e) {
-            assertEquals("Too many delimiter `/e`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, TOO_MANY_DELIMITER_E), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -255,9 +325,8 @@ class ParserTest {
     @Test
     void parseRecordIndex_delimiterExist_success()
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
-        String input = "deletein /u 1 /r 2";
-        String output = Parser.parseRecordIndex(input);
-        assertEquals("2", output);
+        String output = Parser.parseRecordIndex(DELETEIN_U_1_R_2);
+        assertEquals(TWO, output);
     }
 
     @Test
@@ -266,7 +335,7 @@ class ParserTest {
             Parser.parseRecordIndex(null);
             fail();
         } catch (AssertionError e) {
-            assertEquals("User input should not be null", e.getMessage());
+            assertEquals(USER_INPUT_NOT_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -275,20 +344,18 @@ class ParserTest {
     @Test
     void parseRecordIndex_delimiterIssues_exceptionThrown() {
         try {
-            String noDelimiter = "deletein /u 1 2";
-            Parser.parseRecordIndex(noDelimiter);
+            Parser.parseRecordIndex(DELETEIN_R_NO_DELIMITER);
             fail();
         } catch (MissingDelimiterException e) {
-            assertEquals("Missing delimiter `/r`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, MISSING_DELIMITER_R), e.toString());
         } catch (Exception e) {
             fail();
         }
         try {
-            String tooManyDelimiter = "deletein /u 1 /r 2 /r 1";
-            Parser.parseRecordIndex(tooManyDelimiter);
+            Parser.parseRecordIndex(DELETEIN_R_MANY_DELIMITER);
             fail();
         } catch (DuplicateDelimiterException e) {
-            assertEquals("Too many delimiter `/r`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, TOO_MANY_DELIMITER_R), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -297,17 +364,10 @@ class ParserTest {
     @Test
     void parseRecurringStatus_delimiterExist_success()
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
-        String input1 = "addout /u 1 /e 10 /d Dinner /p t";
-        assertTrue(Parser.parseRecurringStatus(input1));
-
-        String input2 = "addout /u 1 /e 10 /d Dinner /p T";
-        assertTrue(Parser.parseRecurringStatus(input2));
-
-        String input3 = "addout /u 1 /e 10 /d Dinner /p F";
-        assertFalse(Parser.parseRecurringStatus(input3));
-
-        String input4 = "addout /u 1 /e 10 /d Dinner /p abc123";
-        assertFalse(Parser.parseRecurringStatus(input4));
+        assertTrue(Parser.parseRecurringStatus(ADDOUT_P_SMALL_TRUE));
+        assertTrue(Parser.parseRecurringStatus(ADDOUT_P_CAPITAL_TRUE));
+        assertFalse(Parser.parseRecurringStatus(ADDOUT_P_EXPLICIT_FALSE));
+        assertFalse(Parser.parseRecurringStatus(ADDOUT_P_DEFAULT_FALSE));
     }
 
     @Test
@@ -316,7 +376,7 @@ class ParserTest {
             Parser.parseRecurringStatus(null);
             fail();
         } catch (AssertionError e) {
-            assertEquals("User input should not be null", e.getMessage());
+            assertEquals(USER_INPUT_NOT_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -325,20 +385,18 @@ class ParserTest {
     @Test
     void parseRecurringStatus_delimiterIssues_exceptionThrown() {
         try {
-            String noDelimiter = "addout /u 1 /e 10 /d Dinner t";
-            Parser.parseRecurringStatus(noDelimiter);
+            Parser.parseRecurringStatus(ADDOUT_P_NO_DELIMITER);
             fail();
         } catch (MissingDelimiterException e) {
-            assertEquals("Missing delimiter `/p`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, MISSING_DELIMITER_P), e.toString());
         } catch (Exception e) {
             fail();
         }
         try {
-            String tooManyDelimiter = "addout /u 1 /e 10 /d Dinner /p t /p f";
-            Parser.parseRecurringStatus(tooManyDelimiter);
+            Parser.parseRecurringStatus(ADDOUT_P_MANY_DELIMITER);
             fail();
         } catch (DuplicateDelimiterException e) {
-            assertEquals("Too many delimiter `/p`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, TOO_MANY_DELIMITER_P), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -347,9 +405,8 @@ class ParserTest {
     @Test
     void parseCategoryIndex_delimiterExist_success()
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
-        String input = "addout /u 1 /e 10 /d Dinner /p t /c 2";
-        String output = Parser.parseCategoryIndex(input);
-        assertEquals("2", output);
+        String output = Parser.parseCategoryIndex(ADDOUT_U_1_E_10_D_DINNER_P_T_C_2);
+        assertEquals(TWO, output);
     }
 
     @Test
@@ -358,7 +415,7 @@ class ParserTest {
             Parser.parseCategoryIndex(null);
             fail();
         } catch (AssertionError e) {
-            assertEquals("User input should not be null", e.getMessage());
+            assertEquals(USER_INPUT_NOT_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -367,20 +424,18 @@ class ParserTest {
     @Test
     void parseCategoryIndex_delimiterIssues_exceptionThrown() {
         try {
-            String noDelimiter = "addout /u 1 /e 10 /d Dinner /p t";
-            Parser.parseCategoryIndex(noDelimiter);
+            Parser.parseCategoryIndex(ADDOUT_C_NO_DELIMITER);
             fail();
         } catch (MissingDelimiterException e) {
-            assertEquals("Missing delimiter `/c`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, MISSING_DELIMITER_C), e.toString());
         } catch (Exception e) {
             fail();
         }
         try {
-            String tooManyDelimiter = "addout /u 1 /e 10 /d Dinner /p t /c 2 /c 6";
-            Parser.parseCategoryIndex(tooManyDelimiter);
+            Parser.parseCategoryIndex(ADDOUT_C_MANY_DELIMITER);
             fail();
         } catch (DuplicateDelimiterException e) {
-            assertEquals("Too many delimiter `/c`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, TOO_MANY_DELIMITER_C), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -389,9 +444,8 @@ class ParserTest {
     @Test
     void parseGroupIndex_delimiterExist_success()
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
-        String input = "add /n Alice /g 2";
-        String output = Parser.parseGroupIndex(input);
-        assertEquals("2", output);
+        String output = Parser.parseGroupIndex(ADD_N_ALICE_G_2);
+        assertEquals(TWO, output);
     }
 
     @Test
@@ -400,7 +454,7 @@ class ParserTest {
             Parser.parseGroupIndex(null);
             fail();
         } catch (AssertionError e) {
-            assertEquals("User input should not be null", e.getMessage());
+            assertEquals(USER_INPUT_NOT_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -409,20 +463,18 @@ class ParserTest {
     @Test
     void parseGroupIndex_delimiterIssues_exceptionThrown() {
         try {
-            String noDelimiter = "add /n Alice";
-            Parser.parseGroupIndex(noDelimiter);
+            Parser.parseGroupIndex(ADD_N_ALICE);
             fail();
         } catch (MissingDelimiterException e) {
-            assertEquals("Missing delimiter `/g`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, MISSING_DELIMITER_G), e.toString());
         } catch (Exception e) {
             fail();
         }
         try {
-            String tooManyDelimiter = "add /n Alice /g 2 /g 3";
-            Parser.parseGroupIndex(tooManyDelimiter);
+            Parser.parseGroupIndex(ADD_N_MANY_DELIMITER);
             fail();
         } catch (DuplicateDelimiterException e) {
-            assertEquals("Too many delimiter `/g`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, TOO_MANY_DELIMITER_G), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -430,9 +482,8 @@ class ParserTest {
 
     @Test
     void getValidMoney_positiveDouble_success() throws InvalidMoneyException {
-        String input = "10.50";
-        Double output = Parser.getValidMoney(input);
-        assertEquals(10.50, output);
+        Double output = Parser.getValidMoney(TEN_FIFTY_STRING);
+        assertEquals(TEN_FIFTY_DOUBLE, output);
     }
 
     @Test
@@ -441,7 +492,7 @@ class ParserTest {
             Parser.getValidMoney(null);
             fail();
         } catch (AssertionError e) {
-            assertEquals("Money input should not be null", e.getMessage());
+            assertEquals(MONEY_INPUT_SHOULD_NOT_BE_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -450,11 +501,11 @@ class ParserTest {
     @Test
     void getValidMoney_negativeDouble_exceptionThrown() {
         try {
-            String input = "-10.50";
-            Parser.getValidMoney(input);
+            Parser.getValidMoney(TEN_FIFTY_NEGATIVE);
             fail();
         } catch (InvalidMoneyException e) {
-            assertEquals("Invalid money value: `-10.50`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_MONEY_NEGATIVE_VALUE),
+                    e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -463,11 +514,11 @@ class ParserTest {
     @Test
     void getValidMoney_notNumber_exceptionThrown() {
         try {
-            String input = "hundred";
-            Parser.getValidMoney(input);
+            Parser.getValidMoney(HUNDRED);
             fail();
         } catch (InvalidMoneyException e) {
-            assertEquals("Invalid money value: `hundred`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_MONEY_NOT_DOUBLE),
+                    e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -476,11 +527,10 @@ class ParserTest {
     @Test
     void getValidUserIndex_validUserIndex_success() throws InvalidIndexException {
         PersonList personList = new PersonList();
-        personList.addPerson("Alice", false);
+        personList.addPerson(ALICE, false);
 
-        String input = "1";
-        int output = Parser.getValidUserIndex(input, personList.getNumberOfMembers());
-        assertEquals(1, output);
+        int output = Parser.getValidUserIndex(ONE, personList.getNumberOfMembers());
+        assertEquals(INT_ONE, output);
     }
 
     @Test
@@ -490,7 +540,7 @@ class ParserTest {
             Parser.getValidUserIndex(null, personList.getNumberOfMembers());
             fail();
         } catch (AssertionError e) {
-            assertEquals("User index should not be null", e.getMessage());
+            assertEquals(USER_INDEX_SHOULD_NOT_BE_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -500,11 +550,10 @@ class ParserTest {
     void getValidUserIndex_notNumber_exceptionThrown() {
         try {
             PersonList personList = new PersonList();
-            String input = "Alice";
-            Parser.getValidUserIndex(input, personList.getNumberOfMembers());
+            Parser.getValidUserIndex(ALICE, personList.getNumberOfMembers());
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals("Invalid index: `Alice`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_NOT_NUMBER), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -513,22 +562,20 @@ class ParserTest {
     @Test
     void getValidUserIndex_indexOutOfRange_exceptionThrown() {
         PersonList personList = new PersonList();
-        personList.addPerson("Alice", false);
+        personList.addPerson(ALICE, false);
         try {
-            String tooLow = "0";
-            Parser.getValidUserIndex(tooLow, personList.getNumberOfMembers());
+            Parser.getValidUserIndex(TOO_LOW_INDEX, personList.getNumberOfMembers());
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals("Invalid index: `0`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_LOW), e.toString());
         } catch (Exception e) {
             fail();
         }
         try {
-            String tooLow = "2";
-            Parser.getValidUserIndex(tooLow, personList.getNumberOfMembers());
+            Parser.getValidUserIndex(TOO_HIGH_INDEX, personList.getNumberOfMembers());
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals("Invalid index: `2`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_HIGH), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -537,25 +584,24 @@ class ParserTest {
     @Test
     void getValidExpenditureIndex_validExpenditureIndex_success() throws InvalidIndexException {
         PersonList personList = new PersonList();
-        personList.addPerson("Alice", false);
-        Person person = personList.getPerson(1);
-        person.addExpend("Food", 10.5, 1, false, false);
+        personList.addPerson(ALICE, false);
+        Person person = personList.getPerson(INT_ONE);
+        person.addExpend(FOOD, TEN_FIFTY_DOUBLE, INT_ONE, false, false);
 
-        String input = "1";
-        int output = Parser.getValidExpenditureIndex(input, person.getNumberOfExpenditures());
-        assertEquals(1, output);
+        int output = Parser.getValidExpenditureIndex(ONE, person.getNumberOfExpenditures());
+        assertEquals(INT_ONE, output);
     }
 
     @Test
     void getValidExpenditureIndex_nullInput_assertThrown() {
         try {
             PersonList personList = new PersonList();
-            personList.addPerson("Alice", false);
-            Person person = personList.getPerson(1);
+            personList.addPerson(ALICE, false);
+            Person person = personList.getPerson(INT_ONE);
             Parser.getValidExpenditureIndex(null, person.getNumberOfExpenditures());
             fail();
         } catch (AssertionError e) {
-            assertEquals("Expenditure index should not be null", e.getMessage());
+            assertEquals(EXPENDITURE_INDEX_SHOULD_NOT_BE_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -565,14 +611,13 @@ class ParserTest {
     void getValidExpenditureIndex_notNumber_exceptionThrown() {
         try {
             PersonList personList = new PersonList();
-            personList.addPerson("Alice", false);
-            Person person = personList.getPerson(1);
+            personList.addPerson(ALICE, false);
+            Person person = personList.getPerson(INT_ONE);
 
-            String input = "Alice";
-            Parser.getValidExpenditureIndex(input, person.getNumberOfExpenditures());
+            Parser.getValidExpenditureIndex(ALICE, person.getNumberOfExpenditures());
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals("Invalid index: `Alice`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_NOT_NUMBER), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -581,24 +626,22 @@ class ParserTest {
     @Test
     void getValidExpenditureIndex_indexOutOfRange_exceptionThrown() {
         PersonList personList = new PersonList();
-        personList.addPerson("Alice", false);
-        Person person = personList.getPerson(1);
-        person.addExpend("Food", 10.5, 1, false, false);
+        personList.addPerson(ALICE, false);
+        Person person = personList.getPerson(INT_ONE);
+        person.addExpend(FOOD, TEN_FIFTY_DOUBLE, INT_ONE, false, false);
         try {
-            String tooLow = "0";
-            Parser.getValidExpenditureIndex(tooLow, person.getNumberOfExpenditures());
+            Parser.getValidExpenditureIndex(TOO_LOW_INDEX, person.getNumberOfExpenditures());
 
         } catch (InvalidIndexException e) {
-            assertEquals("Invalid index: `0`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_LOW), e.toString());
         } catch (Exception e) {
             fail();
         }
         try {
-            String tooLow = "2";
-            Parser.getValidExpenditureIndex(tooLow, person.getNumberOfExpenditures());
+            Parser.getValidExpenditureIndex(TOO_HIGH_INDEX, person.getNumberOfExpenditures());
 
         } catch (InvalidIndexException e) {
-            assertEquals("Invalid index: `2`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_HIGH), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -607,25 +650,24 @@ class ParserTest {
     @Test
     void getValidIncomeIndex_validIncomeIndex_success() throws InvalidIndexException {
         PersonList personList = new PersonList();
-        personList.addPerson("Alice", false);
-        Person person = personList.getPerson(1);
-        person.addIncome("Gift", 100.0, false,false);
+        personList.addPerson(ALICE, false);
+        Person person = personList.getPerson(INT_ONE);
+        person.addIncome(GIFT, TEN_FIFTY_DOUBLE, false, false);
 
-        String input = "1";
-        int output = Parser.getValidIncomeIndex(input, person.getNumberOfIncomes());
-        assertEquals(1, output);
+        int output = Parser.getValidIncomeIndex(ONE, person.getNumberOfIncomes());
+        assertEquals(INT_ONE, output);
     }
 
     @Test
     void getValidIncomeIndex_nullInput_assertThrown() {
         try {
             PersonList personList = new PersonList();
-            personList.addPerson("Alice", false);
-            Person person = personList.getPerson(1);
+            personList.addPerson(ALICE, false);
+            Person person = personList.getPerson(INT_ONE);
             Parser.getValidIncomeIndex(null, person.getNumberOfIncomes());
             fail();
         } catch (AssertionError e) {
-            assertEquals("Income index should not be null", e.getMessage());
+            assertEquals(INCOME_INDEX_SHOULD_NOT_BE_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -635,14 +677,13 @@ class ParserTest {
     void getValidIncomeIndex_notNumber_exceptionThrown() {
         try {
             PersonList personList = new PersonList();
-            personList.addPerson("Alice", false);
-            Person person = personList.getPerson(1);
+            personList.addPerson(ALICE, false);
+            Person person = personList.getPerson(INT_ONE);
 
-            String input = "Alice";
-            Parser.getValidIncomeIndex(input, person.getNumberOfIncomes());
+            Parser.getValidIncomeIndex(ALICE, person.getNumberOfIncomes());
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals("Invalid index: `Alice`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_NOT_NUMBER), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -651,24 +692,22 @@ class ParserTest {
     @Test
     void getValidIncomeIndex_indexOutOfRange_exceptionThrown() {
         PersonList personList = new PersonList();
-        personList.addPerson("Alice", false);
-        Person person = personList.getPerson(1);
-        person.addIncome("Gift", 100.0, false,false);
+        personList.addPerson(ALICE, false);
+        Person person = personList.getPerson(INT_ONE);
+        person.addIncome(GIFT, TEN_FIFTY_DOUBLE, false, false);
         try {
-            String tooLow = "0";
-            Parser.getValidIncomeIndex(tooLow, person.getNumberOfIncomes());
+            Parser.getValidIncomeIndex(TOO_LOW_INDEX, person.getNumberOfIncomes());
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals("Invalid index: `0`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_LOW), e.toString());
         } catch (Exception e) {
             fail();
         }
         try {
-            String tooLow = "2";
-            Parser.getValidIncomeIndex(tooLow, person.getNumberOfIncomes());
+            Parser.getValidIncomeIndex(TOO_HIGH_INDEX, person.getNumberOfIncomes());
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals("Invalid index: `2`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_HIGH), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -676,9 +715,8 @@ class ParserTest {
 
     @Test
     void getValidCategoryIndex_validCategoryIndex_success() throws InvalidIndexException {
-        String input = "1";
-        int output = Parser.getValidCategoryIndex(input);
-        assertEquals(1, output);
+        int output = Parser.getValidCategoryIndex(ONE);
+        assertEquals(INT_ONE, output);
     }
 
     @Test
@@ -687,7 +725,7 @@ class ParserTest {
             Parser.getValidCategoryIndex(null);
             fail();
         } catch (AssertionError e) {
-            assertEquals("Category index should not be null", e.getMessage());
+            assertEquals(CATEGORY_INDEX_SHOULD_NOT_BE_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -696,11 +734,10 @@ class ParserTest {
     @Test
     void getValidCategoryIndex_notNumber_exceptionThrown() {
         try {
-            String input = "Others";
-            Parser.getValidCategoryIndex(input);
+            Parser.getValidCategoryIndex(ALICE);
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals("Invalid index: `Others`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_NOT_NUMBER), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -709,20 +746,18 @@ class ParserTest {
     @Test
     void getValidCategoryIndex_indexOutOfRange_exceptionThrown() {
         try {
-            String tooLow = "0";
-            Parser.getValidCategoryIndex(tooLow);
+            Parser.getValidCategoryIndex(TOO_LOW_INDEX);
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals("Invalid index: `0`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_LOW), e.toString());
         } catch (Exception e) {
             fail();
         }
         try {
-            String tooLow = "7";
-            Parser.getValidCategoryIndex(tooLow);
+            Parser.getValidCategoryIndex(TOO_HIGH_INDEX);
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals("Invalid index: `7`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_HIGH), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -730,9 +765,8 @@ class ParserTest {
 
     @Test
     void getValidGroupIndex_validGroupIndex_success() throws InvalidIndexException {
-        String input = "1";
-        int output = Parser.getValidGroupIndex(input);
-        assertEquals(1, output);
+        int output = Parser.getValidGroupIndex(ONE);
+        assertEquals(INT_ONE, output);
     }
 
     @Test
@@ -741,7 +775,7 @@ class ParserTest {
             Parser.getValidGroupIndex(null);
             fail();
         } catch (AssertionError e) {
-            assertEquals("Group index should not be null", e.getMessage());
+            assertEquals(GROUP_INDEX_SHOULD_NOT_BE_NULL, e.getMessage());
         } catch (Exception e) {
             fail();
         }
@@ -750,11 +784,10 @@ class ParserTest {
     @Test
     void getValidGroupIndex_notNumber_exceptionThrown() {
         try {
-            String input = "myGen";
-            Parser.getValidGroupIndex(input);
+            Parser.getValidGroupIndex(ALICE);
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals("Invalid index: `myGen`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_NOT_NUMBER), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -763,20 +796,18 @@ class ParserTest {
     @Test
     void getValidGroupIndex_indexOutOfRange_exceptionThrown() {
         try {
-            String tooLow = "0";
-            Parser.getValidGroupIndex(tooLow);
+            Parser.getValidGroupIndex(TOO_LOW_INDEX);
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals("Invalid index: `0`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_LOW), e.toString());
         } catch (Exception e) {
             fail();
         }
         try {
-            String tooLow = "4";
-            Parser.getValidGroupIndex(tooLow);
+            Parser.getValidGroupIndex(TOO_HIGH_INDEX);
             fail();
         } catch (InvalidIndexException e) {
-            assertEquals("Invalid index: `4`", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, INVALID_INDEX_TOO_HIGH), e.toString());
         } catch (Exception e) {
             fail();
         }
