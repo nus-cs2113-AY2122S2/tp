@@ -33,10 +33,12 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_MEE
 import static seedu.meetingjio.common.Messages.MESSAGE_HELP;
 
 public class Parser {
+
     private final String command;
     private final String arguments;
     public static Logger logger = Logger.getLogger(Parser.class.getName());
     private ParserHelperMethods parserHelperMethods = new ParserHelperMethods();
+    private ParserArguments parserArguments = new ParserArguments();
 
     private static final int NAME_INDEX = 0;
     private static final int TITLE_INDEX = 1;
@@ -44,13 +46,18 @@ public class Parser {
     private static final int START_TIME_INDEX = 3;
     private static final int END_TIME_INDEX = 4;
     private static final int MODE_INDEX = 5;
-    private static final String[] HEADINGS_ADD_LESSON = {"n/", "t/", "d/", "st/", "et/", "m/"};
-    private static final String[] HEADINGS_ADD_MEETING = {"t/", "d/", "st/", "et/", "m/"};
-    private static final String[] HEADINGS_DELETE_EVENT = {"n/", "i/"};
+
+    protected static final String[] HEADINGS_ADD_LESSON = {"n/", "t/", "d/", "st/", "et/", "m/"};
+    protected static final String[] HEADINGS_ADD_MEETING = {"t/", "d/", "st/", "et/", "m/"};
+    protected static final String[] HEADINGS_DELETE_EVENT = {"n/", "i/"};
 
     public Parser(String input) {
-        this.command = getCommandFromInput(input);
-        this.arguments = getArgumentsFromInput(input);
+        this.command = parserArguments.getCommandFromInput(input);
+        this.arguments = parserArguments.getArgumentsFromInput(input);
+    }
+
+    public String getArguments() {
+        return arguments;
     }
 
     public Command parseCommand() {
@@ -77,7 +84,7 @@ public class Parser {
     
     public Command prepareAddLesson() {
         try {
-            String[] eventDescription = splitArgumentsAddLesson();
+            String[] eventDescription = parserArguments.splitArgumentsAddLesson(this.getArguments());
             parserHelperMethods.checkNonNullValues(eventDescription,HEADINGS_ADD_LESSON.length - 1);
 
             String day = eventDescription[DAY_INDEX].toLowerCase();
@@ -109,14 +116,12 @@ public class Parser {
         }
     }
 
-
-
     /**
      * Try to parse the delete command to see if index has been done.
      */
     public Command prepareDelete() {
         try {
-            String[] eventDescription = splitArgumentsDeleteCommand();
+            String[] eventDescription = parserArguments.splitArgumentsDeleteCommand(this.getArguments());
             parserHelperMethods.checkNonNullValues(eventDescription,HEADINGS_DELETE_EVENT.length);
 
             String name = eventDescription[0];
@@ -134,83 +139,9 @@ public class Parser {
         }
     }
 
-    private String[] splitArgumentsDeleteCommand() {
-        String[] eventDescription = new String[2];
-        String[] splitArguments = arguments.split(" ");
-        int index = -1;
-        for (String str : splitArguments) {
-            if (containHeadings(str, HEADINGS_DELETE_EVENT) == -1) {
-                eventDescription[index] += " " + str;
-                eventDescription[index] = eventDescription[index].trim();
-            } else {
-                index = containHeadings(str, HEADINGS_DELETE_EVENT);
-                eventDescription[index] = str.substring(str.indexOf("/") + 1);
-            }
-        }
-        return eventDescription;
-    }
-
-    private String getCommandFromInput(String input) {
-        return input.split(" ")[0].trim().toLowerCase();
-    }
-
-    private String getArgumentsFromInput(String input) {
-        String str = "";
-        int spaceIndex = input.trim().indexOf(" ");
-        if (spaceIndex != -1) {
-            str = input.substring(spaceIndex + 1).trim();
-        }
-        return str;
-    }
-
-    private String[] splitArgumentsAddLesson() {
-        String[] eventDescription = new String[6];
-        String[] splitArguments = arguments.split(" ");
-        int index = -1;
-        for (String str : splitArguments) {
-            if (containHeadings(str, HEADINGS_ADD_LESSON) == -1) {
-                eventDescription[index] += " " + str;
-                eventDescription[index] = eventDescription[index].trim();
-            } else {
-                index = containHeadings(str, HEADINGS_ADD_LESSON);
-                eventDescription[index] = str.substring(str.indexOf("/") + 1);
-            }
-        }
-        return eventDescription;
-    }
-
-    private String[] splitArgumentsAddMeeting() {
-        String[] eventDescription = new String[5];
-        String[] splitArguments = arguments.split(" ");
-        int index = -1;
-        for (String str : splitArguments) {
-            if (containHeadings(str, HEADINGS_ADD_MEETING) == -1) {
-                eventDescription[index] += " " + str;
-                eventDescription[index] = eventDescription[index].trim();
-            } else {
-                index = containHeadings(str, HEADINGS_ADD_MEETING);
-                eventDescription[index] = str.substring(str.indexOf("/") + 1);
-            }
-        }
-        return eventDescription;
-    }
-
-    private int containHeadings(String str, String[] headings) {
-        for (int i = 0; i < headings.length; i++) {
-            if (str.contains(headings[i])) {
-                int headingLength = headings[i].length();
-                String subStr = str.substring(0, headingLength);
-                if (subStr.equals(headings[i])) {
-                    return i;
-                }
-            }
-        }
-        return -1;
-    }
-
     public Command prepareAddMeeting() {
         try {
-            String[] eventDescription = splitArgumentsAddMeeting();
+            String[] eventDescription = parserArguments.splitArgumentsAddMeeting(this.getArguments());
             parserHelperMethods.checkNonNullValues(eventDescription,HEADINGS_ADD_MEETING.length - 1);
 
             //there is no name for meeting because meeting applies to everyone
@@ -241,5 +172,6 @@ public class Parser {
             return new CommandResult(ae.getMessage());
         }
     }
+
 
 }
