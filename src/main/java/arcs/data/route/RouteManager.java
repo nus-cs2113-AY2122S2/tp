@@ -61,6 +61,15 @@ public class RouteManager {
         return result;
     }
 
+    public Route findRoute(String fid) {
+        for (Route route: routes) {
+            if (route.getFlightID().equals(fid)) {
+                return route;
+            }
+        }
+        return null;
+    }
+
     public boolean hasDuplicateFlightId(Route newRoute) {
         String newId = newRoute.getFlightID();
         for (Route route: routes) {
@@ -70,4 +79,5 @@ public class RouteManager {
         }
         return false;
     }
+
 }
