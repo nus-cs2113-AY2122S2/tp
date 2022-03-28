@@ -134,7 +134,33 @@ Expected outcome:
 ```
 john's timetable has been cleared
 ```
+
 Alternatively you can clear all the events from everyone's timetable
+
+### Finding common timeslots: `free`
+Shows a list of timeslots where everyone is free. 
+
+Format: `free [DURATION]`
+- If `DURATION` is specified, only timeslots which are longer than the duration will be shown.
+- Else, all common timeslots will be shown.
+- Common timeslots are kept from 0800 to 2359.
+
+Example of usage:
+
+`free 3`
+
+Expected outcome:
+```
+Monday 1100 2359
+Tuesday 0800 2359
+Wednesday 0800 2359
+Thursday 0800 2359
+Friday 0800 1600
+Friday 1800 2359
+Saturday 0800 2359
+Sunday 0800 2359
+```
+
 
 Format: `clear all`
 
@@ -165,13 +191,16 @@ See you again!
 
 ## Command summary
 
+
 | Action       | Format                                                                     |
 |--------------|----------------------------------------------------------------------------|
 | Help         | `help`                                                                     |
 | Add lesson   | `add_lesson n/NAME t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE` |
 | Add Meeting  | `add_meeting t/title d/DAY_OF_WEEK st/START_TIME et/END_TIME m/MODE`       |
 | Delete Event | `delete n/NAME i/INDEX`                                                    |
+| Free         | `free`                                                               |
 | List         | `list`                                                                     |
 | Clear        | `clear`                                                                    |
 | Exit         | `exit`                                                                     |
+
 
