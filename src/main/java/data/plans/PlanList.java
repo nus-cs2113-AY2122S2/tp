@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 public class PlanList {
     public static final int MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN = 10;
     public static final String RESERVED_PLAN_NAME = "rest day";
+    public static final int PLAN_NAME_CHARACTER_LIMIT = 30;
     private WorkoutList workoutList;
     private HashMap<String, Plan> plansHashMapList = new HashMap<>();
     private ArrayList<String> plansDisplayList = new ArrayList<>();
@@ -148,10 +149,10 @@ public class PlanList {
     }
 
     /**
-     * Checks if the provided plan details already exists in the ArrayList of plans. A plan
-     * is considered to already exist in the list if the plan name matches an existing plan
-     * name in the ArrayList. Additionally, checks if the plan name is called "rest day".
-     * If it is, do not allow a plan called "rest day" as it is used in the schedule feature.
+     * Checks if the plan name exceeds the 30 characters limit, if it only consists of
+     * whitespaces and also checks if the provided plan name already exists in the ArrayList of plans.
+     * Additionally, checks if the plan name is called "rest day". If it is,
+     * do not allow a plan called "rest day" to be created as it is used in the schedule feature.
      *
      * @param userPlanNameInput The plan name entered by user to check.
      * @param className The class name used for exception throwing.
@@ -159,24 +160,31 @@ public class PlanList {
      */
     public void checkPlanNameValidity(String userPlanNameInput, String className) throws
             InvalidPlanException {
-        boolean hasValidPlanName = true;
         String userPlanNameInputLowerCase = userPlanNameInput.toLowerCase();
+
+        int characterCount = userPlanNameInput.length();
+        if (characterCount > PLAN_NAME_CHARACTER_LIMIT) {
+            logger.log(Level.WARNING, "Plan name exceeds character limit.");
+            throw new InvalidPlanException(className, InvalidPlanException.PLAN_NAME_EXCEED_LIMIT);
+        }
+
+        if (userPlanNameInput.trim().equals("")) {
+            logger.log(Level.WARNING, "Plan name is just whitespaces.");
+            throw new InvalidPlanException(className, InvalidPlanException.PLAN_NAME_WHITESPACES_ONLY);
+        }
 
         for (int i = 0; i < plansDisplayList.size(); i += 1) {
             String getPlanName = plansDisplayList.get(i).toLowerCase();
 
             if (userPlanNameInputLowerCase.equals(getPlanName)) {
-                hasValidPlanName = false;
+                logger.log(Level.WARNING, "Plan name already exists.");
+                throw new InvalidPlanException(className, InvalidPlanException.DUPLICATE_PLAN_NAME_ERROR_MSG);
             }
         }
 
-        if (userPlanNameInputLowerCase.equals(RESERVED_PLAN_NAME)) {
-            hasValidPlanName = false;
-        }
-
-        if (!hasValidPlanName) {
-            logger.log(Level.WARNING, "Plan name is invalid.");
-            throw new InvalidPlanException(className, InvalidPlanException.INVALID_PLAN_NAME_ERROR_MSG);
+        if (userPlanNameInputLowerCase.trim().equals(RESERVED_PLAN_NAME)) {
+            logger.log(Level.WARNING, "Plan name cannot be 'rest day'.");
+            throw new InvalidPlanException(className, InvalidPlanException.RESERVED_PLAN_NAME);
         }
     }
 

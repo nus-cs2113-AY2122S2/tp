@@ -96,6 +96,12 @@ class PlanListTest {
             () -> planList.createAndAddPlan("Plan 1 /workouts 2,2,2"));
         assertThrows(InvalidPlanException.class,
             () -> planList.createAndAddPlan("rest day /workouts 3,2,3"));
+        assertThrows(InvalidPlanException.class,
+            () -> planList.createAndAddPlan("REST DAY       /workouts 3,2,3,1"));
+        assertThrows(InvalidPlanException.class,
+            () -> planList.createAndAddPlan("        /workouts 3,2,3,1,1"));
+        assertThrows(InvalidPlanException.class,
+            () -> planList.createAndAddPlan("Exceed the 30 characters limit yes /workouts 1,2,1"));
     }
 
     @Test
