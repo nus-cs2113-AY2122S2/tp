@@ -19,9 +19,12 @@ outings faster than apps using a Graphical User Interface (GUI).
     * [Features](#features)
         * [Creating a session: `session /create`](#creating-a-session-session-create)
         * [Deleting a session: `session /delete`](#deleting-a-session-session-delete)
+        * [Editing a session: `session /edit`](#editing-a-session-session-edit)
         * [Viewing a session: `session /view`](#viewing-a-session--session-view)
         * [Listing all sessions: `session /list`](#listing-all-sessions-session-list)
         * [Creating an activity: `activity /create`](#creating-an-activity-activity-create)
+        * [Deleting an activity: `activity /delete`](#deleting-an-activity-activity-delete)
+        * [Editing an activity: `activity /edit`](#editing-an-activity-activity-edit)
         * [Viewing an activity: `activity /view`](#viewing-an-activity-activity-view)
         * [Listing all activities in a session: `activity /list`](#listing-all-activities-in-a-session-activity-list)
         * [Settling all transactions for a session: `session /summary`](#settling-all-transactions-for-a-session-session-summary)
@@ -159,6 +162,8 @@ Example of usage:
 <br>
 <br>
 
+### Editing a session: `session /edit`
+
 ### Viewing a session : `session /view`
 
 ### Listing all sessions: `session /list`
@@ -250,6 +255,8 @@ Example of usage:
    ![Activity delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityDeleteCommand.png)
 <br>
 <br>
+
+### Editing an activity: `activity /edit`
 
 ### Viewing an activity: `activity /view`
 
