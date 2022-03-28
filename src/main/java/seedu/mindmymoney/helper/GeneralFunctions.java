@@ -9,8 +9,8 @@ import seedu.mindmymoney.userfinancial.Expenditure;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM_IN_STRING;
-import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM_IN_STRING;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
 
 /**
  * Container for general functions used throughout the program.
@@ -35,14 +35,18 @@ public class GeneralFunctions {
      */
     public static String parseInputWithCommandFlag(String input, String startingFlag, String endingFlag)
         throws MindMyMoneyException {
-        if (!(input.contains(startingFlag + " ") && input.contains(" " + endingFlag))) {
-            throw new MindMyMoneyException("You are missing a flag or lack the spacing between the flags!");
-        }
-        startingFlag = startingFlag + " ";
-        input = input.substring(input.indexOf(startingFlag) + startingFlag.length());
-        if (!endingFlag.equals("")) {
-            endingFlag = " " + endingFlag;
-            input = input.substring(0, input.indexOf(endingFlag));
+        try {
+            if (!(input.contains(startingFlag + " ") && input.contains(" " + endingFlag))) {
+                throw new MindMyMoneyException("You are missing a flag or lack the spacing between the flags!");
+            }
+            startingFlag = startingFlag + " ";
+            input = input.substring(input.indexOf(startingFlag) + startingFlag.length());
+            if (!endingFlag.equals("")) {
+                endingFlag = " " + endingFlag;
+                input = input.substring(0, input.indexOf(endingFlag));
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new MindMyMoneyException("You are missing the corresponding [PARAMETERS]");
         }
         return input;
     }
@@ -189,8 +193,8 @@ public class GeneralFunctions {
      */
     public static String capitalise(String str) {
         str = str.toLowerCase();
-        return str.substring(INDEX_OF_FIRST_ITEM_IN_STRING, INDEX_OF_SECOND_ITEM_IN_STRING).toUpperCase()
-            + str.substring(INDEX_OF_SECOND_ITEM_IN_STRING);
+        return str.substring(INDEX_OF_FIRST_ITEM, INDEX_OF_SECOND_ITEM).toUpperCase()
+            + str.substring(INDEX_OF_SECOND_ITEM);
     }
 
     /**
