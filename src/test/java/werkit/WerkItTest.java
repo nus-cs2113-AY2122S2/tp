@@ -6,7 +6,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import storage.LogHandler;
 
-import java.io.*;
+import java.io.InputStream;
+import java.io.IOException;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 class WerkItTest {
     private static final InputStream DEFAULT_STDIN = System.in;
