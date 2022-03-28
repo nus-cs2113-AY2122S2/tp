@@ -303,7 +303,7 @@ public class Parser {
             checkTime(startTime, endTime);
             checkMode(mode);
 
-            String title = eventDescription[TITLE_INDEX];
+            String title = eventDescription[TITLE_INDEX - 1];
             return new AddMeetingCommand(title, day, startTime, endTime, mode);
 
         } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {

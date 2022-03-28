@@ -6,8 +6,8 @@ add_meeting t/meeting d/Thursday st/1230 et/1330 m/online
 list ibra
 delete n/ibra i/1
 list ibra
-add_meeting t/meeting d/Friday st/1230 et/1330 m/online
-add_meeting t/meeting d/Wednesday st/1230 et/1330 m/online
+add_meeting t/meeting1 d/Friday st/1230 et/1330 m/online
+add_meeting t/meeting2 d/Wednesday st/1230 et/1330 m/online
 
 delete n/ibra i/1
 delete n/ym i/1
