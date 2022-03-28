@@ -5,6 +5,7 @@ import seedu.splitlah.data.Session;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TableFormatter;
+import seedu.splitlah.ui.TextUI;
 
 import java.util.ArrayList;
 
@@ -23,11 +24,12 @@ public class SessionListCommand extends Command {
      * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
-    public void run(Manager manager) {
+    public void run(Manager manager) { 
+        TextUI ui = manager.getUi();
         ArrayList<Session> sessionsToBePrinted = manager.getProfile().getSessionList();
         sessionsToBePrinted.sort(Session::compareTo);
         if (sessionsToBePrinted.isEmpty()) {
-            manager.getUi().printlnMessage(Message.ERROR_PROFILE_SESSION_LIST_EMPTY);
+            ui.printlnMessage(Message.ERROR_PROFILE_SESSION_LIST_EMPTY);
             return;
         }
         TableFormatter tableFormatter =
@@ -42,6 +44,6 @@ public class SessionListCommand extends Command {
             String rowNumActivities = Integer.toString(session.getActivityList().size());
             tableFormatter.addRow(rowId, rowName, rowDate, rowNumParticipants, rowNumActivities);
         }
-        manager.getUi().printlnMessage(tableFormatter.toString());
+        ui.printlnMessage(tableFormatter.toString());
     }
 }
