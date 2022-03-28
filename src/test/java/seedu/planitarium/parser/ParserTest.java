@@ -476,7 +476,7 @@ class ParserTest {
     @Test
     void getValidUserIndex_validUserIndex_success() throws InvalidIndexException {
         PersonList personList = new PersonList();
-        personList.addPerson("Alice");
+        personList.addPerson("Alice", false);
 
         String input = "1";
         int output = Parser.getValidUserIndex(input, personList.getNumberOfMembers());
@@ -513,7 +513,7 @@ class ParserTest {
     @Test
     void getValidUserIndex_indexOutOfRange_exceptionThrown() {
         PersonList personList = new PersonList();
-        personList.addPerson("Alice");
+        personList.addPerson("Alice", false);
         try {
             String tooLow = "0";
             Parser.getValidUserIndex(tooLow, personList.getNumberOfMembers());
@@ -537,9 +537,9 @@ class ParserTest {
     @Test
     void getValidExpenditureIndex_validExpenditureIndex_success() throws InvalidIndexException {
         PersonList personList = new PersonList();
-        personList.addPerson("Alice");
+        personList.addPerson("Alice", false);
         Person person = personList.getPerson(1);
-        person.addExpend("Food", 10.5, false);
+        person.addExpend("Food", 10.5, 1, false, false);
 
         String input = "1";
         int output = Parser.getValidExpenditureIndex(input, person.getNumberOfExpenditures());
@@ -550,7 +550,7 @@ class ParserTest {
     void getValidExpenditureIndex_nullInput_assertThrown() {
         try {
             PersonList personList = new PersonList();
-            personList.addPerson("Alice");
+            personList.addPerson("Alice", false);
             Person person = personList.getPerson(1);
             Parser.getValidExpenditureIndex(null, person.getNumberOfExpenditures());
             fail();
@@ -565,7 +565,7 @@ class ParserTest {
     void getValidExpenditureIndex_notNumber_exceptionThrown() {
         try {
             PersonList personList = new PersonList();
-            personList.addPerson("Alice");
+            personList.addPerson("Alice", false);
             Person person = personList.getPerson(1);
 
             String input = "Alice";
@@ -581,9 +581,9 @@ class ParserTest {
     @Test
     void getValidExpenditureIndex_indexOutOfRange_exceptionThrown() {
         PersonList personList = new PersonList();
-        personList.addPerson("Alice");
+        personList.addPerson("Alice", false);
         Person person = personList.getPerson(1);
-        person.addExpend("Food", 10.5, false);
+        person.addExpend("Food", 10.5, 1, false, false);
         try {
             String tooLow = "0";
             Parser.getValidExpenditureIndex(tooLow, person.getNumberOfExpenditures());
@@ -607,9 +607,9 @@ class ParserTest {
     @Test
     void getValidIncomeIndex_validIncomeIndex_success() throws InvalidIndexException {
         PersonList personList = new PersonList();
-        personList.addPerson("Alice");
+        personList.addPerson("Alice", false);
         Person person = personList.getPerson(1);
-        person.addIncome("Gift", 100, false);
+        person.addIncome("Gift", 100.0, false,false);
 
         String input = "1";
         int output = Parser.getValidIncomeIndex(input, person.getNumberOfIncomes());
@@ -620,7 +620,7 @@ class ParserTest {
     void getValidIncomeIndex_nullInput_assertThrown() {
         try {
             PersonList personList = new PersonList();
-            personList.addPerson("Alice");
+            personList.addPerson("Alice", false);
             Person person = personList.getPerson(1);
             Parser.getValidIncomeIndex(null, person.getNumberOfIncomes());
             fail();
@@ -635,7 +635,7 @@ class ParserTest {
     void getValidIncomeIndex_notNumber_exceptionThrown() {
         try {
             PersonList personList = new PersonList();
-            personList.addPerson("Alice");
+            personList.addPerson("Alice", false);
             Person person = personList.getPerson(1);
 
             String input = "Alice";
@@ -651,9 +651,9 @@ class ParserTest {
     @Test
     void getValidIncomeIndex_indexOutOfRange_exceptionThrown() {
         PersonList personList = new PersonList();
-        personList.addPerson("Alice");
+        personList.addPerson("Alice", false);
         Person person = personList.getPerson(1);
-        person.addIncome("Gift", 100, false);
+        person.addIncome("Gift", 100.0, false,false);
         try {
             String tooLow = "0";
             Parser.getValidIncomeIndex(tooLow, person.getNumberOfIncomes());

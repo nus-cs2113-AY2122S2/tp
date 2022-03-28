@@ -14,6 +14,8 @@ public class AddPersonCommandTest {
     public static final String ADD_PERSON = "add /n Alice";
     public static PersonList personList = new PersonList();
 
+    // Shift to family
+    /*
     @Test
     public void addPerson_getPerson_success() {
         try {
@@ -25,4 +27,5 @@ public class AddPersonCommandTest {
         int uid = personList.getNumberOfMembers();
         Assertions.assertEquals("Alice", personList.getPerson(uid).getName());
     }
+     */
 }
