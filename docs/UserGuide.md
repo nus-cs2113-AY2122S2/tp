@@ -37,6 +37,8 @@ Mod Happy is a command line application designed to help you manage your academi
 
 ## About this user guide
 
+This section details the various terminologies and notation used throughout the guide.
+
 ### Explanation of notation
 
 - User-supplied input parameters are indicated by fully capitalised field names. For instance, in `del mod MODULE_CODE`, you would replace `MODULE_CODE` with the module code of the module you wish to delete (e.g. `del mod CS2113T`).
@@ -64,6 +66,8 @@ Many commands require you to specify a task for it to act on. This is done by pr
 Displays help for the indicated command. If no command word is supplied, a generic help message is shown.
 
 Format: `help [COMMAND_WORD]`
+
+---
 
 ### Accessing options: `option`
 
@@ -93,6 +97,7 @@ The following configuration options currently exist:
 |----------------------|-------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
 | SHOW_COMPLETED_TASKS | Determines whether tasks marked as completed are shown by the `list` command.<br>**Default value: `false`** | `true`: **All** tasks are shown.<br>`false`: Only uncompleted tasks are shown. |  
 
+---
 
 ### Adding a task/module: `add`
 
@@ -121,6 +126,8 @@ Adds an object as indicated by the command argument.
   Example (general task without any parameters): `add task "Review PR"`<br>
   Example (module task with parameters): `add task "iP Level-0" -m CS2113T -d "Greet user and exit" -t "1 hour" `
 
+---
+
 ### Deleting a task/module: `del`
 
 Deletes an object as indicated by the command argument.
@@ -136,6 +143,8 @@ Deletes an object as indicated by the command argument.
   Format: `del task TASK_NUMBER [-m MODULE_CODE]`<br><br>
   Example (general task): `del task 1`<br>
   Example (module task): `del task 1 -m CS2113T`<br><br>
+
+---
 
 ### Editing a task/module: `edit`
 
@@ -158,6 +167,8 @@ Edits an object's parameter as indicated by the command arguments.<br>
   >
   > `edit task 2 -m CS2113T -n "CS2113T Tutorial 1" -d "Draw class diagram"`
 
+---
+
 ### Marking a task: `mark`
 
 Marks the [specified task](#specifying-tasks) as completed or uncompleted.
@@ -167,6 +178,8 @@ The `c` flag indicates that the task will be marked as completed, while the `u` 
 Format: `mark (c | u) TASK_INDEX [-m MODULE_CODE]`<br><br>
 Example (mark general task as completed): `mark c 1`<br>
 Example (mark module task as uncompleted): `mark u 1 -m CS2113T`
+
+---
 
 ### Managing custom tags: `tag`
 
@@ -180,6 +193,8 @@ Format: `tag (add | del) TASK_INDEX [-m MODULE_CODE] "TAG_NAME"`
 
 Example: `tag add 1 -m CS2113T "project"`
 
+---
+
 ### Listing all tasks/modules: `list`
 
 Displays a list of tasks, grouped by module code. General tasks are displayed separately.
@@ -191,6 +206,8 @@ If a tag name is provided, only tasks with the associated tag will be shown.
 > If the `SHOW_COMPLETED_TASKS` option is set to `false`, any tasks marked as completed will be omitted from the displayed list. The number of hidden tasks is given at the bottom of each group.
 
 Format: `list ["TAG_NAME"]`
+
+---
 
 ### Setting a module's grade: `grade`
 
@@ -205,17 +222,23 @@ Format: `grade MODULE_CODE MODULE_GRADE`
 
 Example: `grade CS2113T A+`
 
+---
+
 ### Viewing GPA: `gpa`
 
 Computes and displays the GPA based the inputted grades of all currently stored modules. Modules without any assigned grade are omitted from the calculation.
 
 Format: `gpa`
 
+---
+
 ### Resetting the program: `reset`
 
 Removes all tasks and modules.
 
 Format: `reset`
+
+---
 
 ### Saving your data: `save`
 
@@ -226,6 +249,8 @@ Format: `save`
 > ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
 >
 > Mod Happy does **not** auto-save your changes! Do remember to save your work at regular intervals, or before exiting the program.
+
+---
 
 ## FAQ
 
