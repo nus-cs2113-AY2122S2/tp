@@ -58,7 +58,7 @@ class ParserTest {
 
     //Workout tests
     @Test
-    void createWorkoutCommand_validWorkoutCommand_expectSuccess() throws InvalidCommandException, IOException {
+    void createWorkoutCommand_validWorkoutCommand_expectSuccess() throws InvalidCommandException {
         assertTrue(parser.createWorkoutCommand("workout /new push up /reps 20") instanceof WorkoutCommand);
         assertTrue(parser.createWorkoutCommand("workout /update 1 15") instanceof WorkoutCommand);
         assertTrue(parser.createWorkoutCommand("workout /delete 1") instanceof WorkoutCommand);
@@ -77,7 +77,7 @@ class ParserTest {
 
     //Search tests
     @Test
-    void createSearchCommand_validSearchCommand_expectSuccess() throws InvalidCommandException, IOException {
+    void createSearchCommand_validSearchCommand_expectSuccess() throws InvalidCommandException {
         assertTrue(parser.createSearchCommand("search /exercise up") instanceof SearchCommand);
         assertTrue(parser.createSearchCommand("search /exercise asdaskd") instanceof SearchCommand);
         assertTrue(parser.createSearchCommand("search /plan cool") instanceof SearchCommand);
