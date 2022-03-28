@@ -49,8 +49,9 @@ public class ClearCommand extends Command {
     private String clearTimetableUser(String user, MasterTimetable masterTimetable) {
         Timetable timetable;
         try {
-            timetable  = masterTimetable.getByName(this.name);
+            timetable  = masterTimetable.getByName(user);
             clearTimetable(timetable);
+            masterTimetable.removeByName(user);
         } catch (TimetableNotFoundException tnfe) {
             return ERROR_TIMETABLE_NOT_FOUND_TO_DELETE;
         } catch (Exception e) {
@@ -63,8 +64,7 @@ public class ClearCommand extends Command {
     private String clearAll(MasterTimetable masterTimetable) {
         int numTimetables = masterTimetable.getSize();
         for (int i = 0; i < numTimetables; i++) {
-            Timetable timetable = masterTimetable.getByIndex(i);
-            clearTimetable(timetable);
+            masterTimetable.removeByIndex(0);
         }
         return printAllClearConfirmation();
     }

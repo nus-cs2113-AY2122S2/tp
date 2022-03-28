@@ -38,13 +38,12 @@ public class MasterTimetable {
         throw new TimetableNotFoundException();
     }
 
-    public void removeByName(String name) throws TimetableNotFoundException {
-        for (Timetable timetable : timetables) {
-            if (name.equalsIgnoreCase(timetable.getName())) {
-                timetables.remove(timetable);
+    public void removeByName(String name) {
+        for (int i = 0; i < timetables.size(); i++){
+            if (name.equalsIgnoreCase(timetables.get(i).getName())) {
+                timetables.remove(i);
             }
         }
-        throw new TimetableNotFoundException();
     }
 
     public Timetable getByIndex(int index) {
