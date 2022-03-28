@@ -72,7 +72,7 @@ public class AppointmentList extends List {
         appointmentTable.setHeaders("Appointment Id", "Patient Name", "Patient NRIC", "Doctor Name", "Doctor NRIC",
                 "Appointment Date", "Appointment Details");
         if (appointments.size() == 0) {
-            throw new HalpmiException("Doctor list is empty, please add doctor");
+            throw new HalpmiException("Appointment list is empty, please add appointment");
         }
         for (Appointment appointment : appointments) {
             appointmentTable.addRow(appointment.getAppointmentId(), appointment.getPatientName(),
@@ -105,7 +105,7 @@ public class AppointmentList extends List {
                     foundAppointments.add(appointments.get(i));
                     assert foundAppointments.size() != 0;
                 } else {
-                    throw new HalpmiException("Appointment Id doesnt exist, please try again");
+                    throw new HalpmiException("Patient doesnt exist, please try again");
                 }
             }
             break;
@@ -115,7 +115,7 @@ public class AppointmentList extends List {
                     foundAppointments.add(appointments.get(i));
                     assert foundAppointments.size() != 0;
                 } else {
-                    throw new HalpmiException("Doctor name doesnt exist, please try again");
+                    throw new HalpmiException("Doctor doesnt exist, please try again");
                 }
             }
             break;
