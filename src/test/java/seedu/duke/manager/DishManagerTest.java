@@ -59,7 +59,6 @@ class DishManagerTest {
         assertDoesNotThrow(() -> dishManager.setName(1, "AAAAA"));
         assertDoesNotThrow(() -> dishManager.setName(2, "BBBBB"));
         assertThrows(IllegalArgumentException.class, () -> dishManager.setName(1, ""));
-        assertThrows(IllegalArgumentException.class, () -> dishManager.setName(1, null));
         assertThrows(IndexOutOfBoundsException.class, () -> dishManager.setName(0, "CCCCC"));
         assertThrows(IndexOutOfBoundsException.class, () -> dishManager.setName(-1, "DDDDD"));
         assertThrows(IndexOutOfBoundsException.class, () -> dishManager.setName(6, "EEEEE"));
