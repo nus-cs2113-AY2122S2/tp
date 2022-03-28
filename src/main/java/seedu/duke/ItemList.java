@@ -97,4 +97,40 @@ public class ItemList {
             throw new ItemNotFoundException();
         }
     }
+
+    public void updateItemNameInList(String currentItemName, String newItemName) throws ItemNotFoundException {
+        boolean isItemFound = false;
+        ArrayList<Item> listOfItems = getListOfItems();
+        Item item;
+        String itemName;
+        for (int itemIndex = 0; itemIndex < listOfItems.size(); itemIndex++) {
+            item = listOfItems.get(itemIndex);
+            itemName = item.getName();
+            if (itemName.equals(currentItemName)) {
+                item.setName(newItemName);
+                isItemFound = true;
+                break;
+            }
+        }
+        if (isItemFound == false) {
+            itemLogger.log(Level.WARNING, "The item whose name we want to update cannot be found within the "
+                    + "Item List. Exception thrown.");
+            throw new ItemNotFoundException();
+        }
+    }
+
+    public ItemList findItemsInList(String keyword) {
+        ItemList listOfMatchingItems = new ItemList();
+        ArrayList<Item> listOfItems = getListOfItems();
+        Item item;
+        String itemName;
+        for (int itemIndex = 0; itemIndex < listOfItems.size(); itemIndex++) {
+            item = listOfItems.get(itemIndex);
+            itemName = item.getName();
+            if (itemName.contains(keyword)) {
+                listOfMatchingItems.addItemToList(item);
+            }
+        }
+        return listOfMatchingItems;
+    }
 }

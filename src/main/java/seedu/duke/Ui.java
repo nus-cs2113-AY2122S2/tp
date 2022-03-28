@@ -75,6 +75,10 @@ public class Ui {
         }
     }
 
+    public void printNoItemsFoundInListAcknowledgementMessage() {
+        System.out.println("No Item matching the keyword has been found.");
+    }
+
     public void printHousekeeperList(HousekeeperList housekeeperList) {
         printMessage("======== Housekeeper List ========");
         for (int i = 0; i < housekeeperList.getTotalHousekeeper(); i++) {
@@ -157,6 +161,10 @@ public class Ui {
         assert (!updatedItemName.isEmpty()) : "Assertion Failed! Updated item has an empty item name.";
         assert (updatedItemNewPax >= 0) : "Assertion Failed! Updated item has a pax that is less than 0.";
         System.out.printf("The pax of %s has been updated to %d.\n", updatedItemName, updatedItemNewPax);
+    }
+
+    public void printUpdateItemNameAcknowledgementMessage(String oldItemName, String newItemName) {
+        System.out.printf("The name of %s has been updated to %s.\n", oldItemName, newItemName);
     }
 
     public void printAddSatisfactionAcknowledgementMessage(SatisfactionList satisfactionList,

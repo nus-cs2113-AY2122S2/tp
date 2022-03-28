@@ -12,13 +12,15 @@ public class CommandParser {
     private static final String VIEW_ITEM_LIST_COMMAND = "View Item In Inventory";
     private static final String DELETE_ITEM_COMMAND = "Delete Item ";
     private static final String UPDATE_ITEM_PAX_COMMAND = "Update Item Pax ";
+    private static final String UPDATE_ITEM_NAME_COMMAND = "Update Item Name ";
+    private static final String SEARCH_ITEM_COMMAND = "Search Item ";
     private static final String ADD_HOUSEKEEPER_COMMAND = "Add Housekeeper ";
     private static final String ADD_PERFORMANCE_COMMAND = "add housekeeper performance";
     private static final String VIEW_PERFORMANCES_COMMAND = "view housekeeper performances";
     private static final String ADD_AVAILABILITY_COMMAND = "Availability ";
-    public static final String ADD_SATISFACTION_COMMAND = "add satisfaction";
-    public static final String VIEW_SATISFACTIONS_COMMAND = "view satisfactions";
-    public static final String AVERAGE_SATISFACTION_COMMAND = "average satisfaction";
+    private static final String ADD_SATISFACTION_COMMAND = "add satisfaction";
+    private static final String VIEW_SATISFACTIONS_COMMAND = "view satisfactions";
+    private static final String AVERAGE_SATISFACTION_COMMAND = "average satisfaction";
     private static final String CHECK_IN = "check in";
     private static final String CHECK_OUT = "check out";
     private static final String CHECK_ROOM = "check room";
@@ -38,11 +40,10 @@ public class CommandParser {
      *
      * @param commandString User input to be parsed and turned into a Command object.
      * @return The relevant Command object created based on the user input.
-     * @throws WrongCommandException     If the user input cannot be recognized as a Command object.
      * @throws HotelLiteManagerException If there is an error in user input that prevents it from being parsed into
      *                                   the relevant Command object.
      */
-    public Command parse(String commandString) throws WrongCommandException, HotelLiteManagerException {
+    public Command parse(String commandString) throws HotelLiteManagerException {
         Command userCommand = null;
         String commandStringWithoutCommand;
         if (commandString.equals(BYE)) {
@@ -90,6 +91,9 @@ public class CommandParser {
         } else if (commandString.startsWith(UPDATE_ITEM_PAX_COMMAND)) {
             commandStringWithoutCommand = commandString.replace(UPDATE_ITEM_PAX_COMMAND, "");
             userCommand = new UpdateItemPaxCommand(commandStringWithoutCommand);
+        } else if (commandString.startsWith(UPDATE_ITEM_NAME_COMMAND)) {
+            commandStringWithoutCommand = commandString.replace(UPDATE_ITEM_NAME_COMMAND, "");
+            userCommand = new UpdateItemNameCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(ADD_AVAILABILITY_COMMAND)) {
             commandStringWithoutCommand = commandString.replace(ADD_AVAILABILITY_COMMAND, "");
             userCommand = new AddAvailabilityCommand(commandStringWithoutCommand);
@@ -108,8 +112,11 @@ public class CommandParser {
             userCommand = new DeleteHousekeeperCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(UPDATE_AGE_BY_ONE)) {
             userCommand = new AgeIncreaseCommand();
+        } else if (commandString.startsWith(SEARCH_ITEM_COMMAND)) {
+            commandStringWithoutCommand = commandString.replace(SEARCH_ITEM_COMMAND, "");
+            userCommand = new SearchItemCommand(commandStringWithoutCommand);
         } else {
-            throw new WrongCommandException("Error! Invalid Command.");
+            throw new InvalidCommandException();
         }
         return userCommand;
     }

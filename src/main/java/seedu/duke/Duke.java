@@ -25,8 +25,6 @@ public class Duke {
                 Command command = commandParser.parse(userInput);
                 command.execute(listContainer, ui);
                 shouldExitProgram = command.isExit();
-            } catch (WrongCommandException error) {
-                System.out.println(error.getMessage());
             } catch (HotelLiteManagerException e) {
                 ui.printErrorMessage(e);
             } catch (IOException e) {
