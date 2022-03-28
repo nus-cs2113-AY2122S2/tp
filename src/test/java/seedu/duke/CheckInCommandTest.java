@@ -3,6 +3,7 @@ package seedu.duke;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,12 +18,21 @@ class CheckInCommandTest {
     //Happy path
     @Test
     void execute_validRoomNumber_expectRoomBeingOccupied() throws HotelLiteManagerException {
-        ListContainer listContainer = new ListContainer();
+        ListContainer listContainer = null;
+        try {
+            listContainer = new ListContainer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         RoomList inputRoomList = listContainer.getRoomList();
         Ui ui = new Ui();
         String inputCommand = "301";
         CheckInCommand checkInCommand = new CheckInCommand(inputCommand);
-        checkInCommand.execute(listContainer, ui);
+        try {
+            checkInCommand.execute(listContainer, ui);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Room expectedRoom = null;
         for (Room room : inputRoomList.getRoomList()) {
             if (room.getRoomId() == 301) {
@@ -35,7 +45,7 @@ class CheckInCommandTest {
 
     //unhappy
     @Test
-    void execute_inValidRoomNumber_throwException() {
+    void execute_inValidRoomNumber_throwException() throws IOException {
         ListContainer listContainer = new ListContainer();
         Ui ui = new Ui();
         String inputCommand = "601";

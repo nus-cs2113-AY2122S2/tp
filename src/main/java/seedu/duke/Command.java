@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.io.IOException;
+
 /**
  * Abstract class that generalizes all Commands.
  * Contains an abstract "execute" method and keeps track of
@@ -22,7 +24,7 @@ public abstract class Command {
      * @throws WrongCommandException     If the command is not recognized.
      */
     public abstract void execute(ListContainer listContainer, Ui ui)
-            throws HotelLiteManagerException, WrongCommandException;
+            throws HotelLiteManagerException, WrongCommandException, IOException;
 
     public boolean isExit() {
         return this.isExit;

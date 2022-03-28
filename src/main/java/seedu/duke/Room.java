@@ -17,6 +17,13 @@ public class Room {
         isVacant = true;
     }
 
+    public Room(int roomId, int level, RoomType type, String status) {
+        this.roomId = roomId;
+        this.level = level;
+        this.type = type;
+        isVacant = (status.equals("Vacant")) ? true : false;
+    }
+
     public int getRoomId() {
         return roomId;
     }
@@ -44,5 +51,9 @@ public class Room {
     public String toString() {
         return getType() + "\t\t" + getRoomId() + "\t\t\t "
                 + getLevel() + "\t\t\t" + (getIsVacant() ? "Vacant  " : "Occupied");
+    }
+
+    public String toFileString() {
+        return getType() + " | " + getRoomId() + " | " + getLevel() + " | " + (getIsVacant() ? "Vacant" : "Occupied");
     }
 }

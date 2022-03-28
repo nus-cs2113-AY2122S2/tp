@@ -1,5 +1,9 @@
 package seedu.duke;
 
+import seedu.duke.storage.RoomFileManager;
+
+import java.io.IOException;
+
 /**
  * Class that checks in a room and changes the status
  * of the room to be occupied.
@@ -20,7 +24,7 @@ public class CheckInCommand extends Command {
      * @throws InvalidRoomNumberException if the room number is not in the room list.
      */
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws InvalidRoomNumberException {
+    public void execute(ListContainer listContainer, Ui ui) throws InvalidRoomNumberException, IOException {
         this.roomList = listContainer.getRoomList();
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         for (Room room : roomList.getRoomList()) {
@@ -29,6 +33,7 @@ public class CheckInCommand extends Command {
                 ui.printTableHeader();
                 System.out.println(room + "\t\t\t"
                         + assignmentMap.getHouseKeeperNameByRoom(room));
+                roomList.save();
                 return;
             }
         }
