@@ -7,7 +7,6 @@ package seedu.duke;
  */
 public class CheckAllRoomCommand extends Command {
     private RoomList roomList;
-    private static String TABLE_HEAD = "Type\t\tRoom Id\t\tlevel\t\tStatus";
 
     public CheckAllRoomCommand() {
     }
@@ -16,15 +15,18 @@ public class CheckAllRoomCommand extends Command {
      * Override of execute command in Command class.
      * Print out all room information including:
      * type, room number, level and status.
-     * @param listContainer
-     * @param ui The user interface for this execution method.
+     *
+     * @param listContainer dfajdfkfl
+     * @param ui            The user interface for this execution method.
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) {
         this.roomList = listContainer.getRoomList();
-        System.out.println(TABLE_HEAD);
+        AssignmentMap assignmentMap = listContainer.getAssignmentMap();
+        ui.printTableHeader();
         for (Room room : roomList.getRoomList()) {
-            System.out.println(room.toString());
+            System.out.println(room.toString() + "\t\t\t"
+                    + assignmentMap.getHouseKeeperNameByRoom(room));
         }
     }
 

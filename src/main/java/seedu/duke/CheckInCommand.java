@@ -14,17 +14,21 @@ public class CheckInCommand extends Command {
      * Check in room with corresponding room number.
      * The room status will be changed to occupied.
      * After check in, it will print out corresponding room information.
-     * @param listContainer
-     * @param ui The user interface for this execution method.
+     *
+     * @param listContainer asd
+     * @param ui            The user interface for this execution method.
      * @throws InvalidRoomNumberException if the room number is not in the room list.
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws InvalidRoomNumberException {
         this.roomList = listContainer.getRoomList();
+        AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         for (Room room : roomList.getRoomList()) {
             if (room.getRoomId() == roomId) {
                 room.checkIn();
-                System.out.println(room);
+                ui.printTableHeader();
+                System.out.println(room + "\t\t\t"
+                        + assignmentMap.getHouseKeeperNameByRoom(room));
                 return;
             }
         }

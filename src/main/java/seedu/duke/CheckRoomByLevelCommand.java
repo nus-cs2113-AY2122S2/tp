@@ -7,7 +7,7 @@ package seedu.duke;
  */
 public class CheckRoomByLevelCommand extends Command {
     private int level;
-    private static String TABLE_HEAD = "Type\t\tRoom Id\t\tlevel\t\tStatus";
+    private static String TABLE_HEAD = "Type\t\tRoom Id\t\tlevel\t\tStatus\t\t\tHouse Keeper Name";
 
     /**
      * Extracts the room level from user input.
@@ -24,26 +24,29 @@ public class CheckRoomByLevelCommand extends Command {
      * Print out all room information with corresponding level
      * including the information of:
      * type, room number, level and status.
-     * @param listContainer
-     * @param ui The user interface for this execution method.
+     *
+     * @param listContainer asdd
+     * @param ui            The user interface for this execution method.
      * @throws InvalidLevelException if the level is invalid.
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui)
             throws InvalidLevelException {
         RoomList roomList = listContainer.getRoomList();
-        boolean isValidLevel = isValidLevel(level,roomList);
+        AssignmentMap assignmentMap = listContainer.getAssignmentMap();
+        boolean isValidLevel = isValidLevel(level, roomList);
         if (!isValidLevel) {
             throw new InvalidLevelException();
         }
-        printRoom(level, roomList);
+        printRoom(level, roomList, assignmentMap);
     }
 
-    private void printRoom(int level, RoomList roomList) {
+    private void printRoom(int level, RoomList roomList, AssignmentMap assignmentMap) {
         System.out.println(TABLE_HEAD);
         for (Room room : roomList.getRoomList()) {
             if (room.getLevel() == level) {
-                System.out.println(room);
+                System.out.println(room.toString() + "\t\t\t"
+                        + assignmentMap.getHouseKeeperNameByRoom(room));
             }
         }
     }
