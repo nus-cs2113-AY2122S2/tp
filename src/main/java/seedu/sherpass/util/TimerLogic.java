@@ -9,14 +9,37 @@ import seedu.sherpass.util.parser.TimerParser;
 
 import seedu.sherpass.task.TaskList;
 
+import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_TIMER_INPUT_MESSAGE;
 
-public class TimerLogic {
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.AbstractButton;
+import javax.swing.JToggleButton;
+import javax.swing.SwingConstants;
+import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+public class TimerLogic implements WindowListener {
 
     private static Ui ui;
     private static Timer timer;
     private static TaskList taskList;
     protected boolean isTimerInitialised = false;
+    private final JFrame jFrame;
+    private final JLabel jLabel;
+    ActionListener actionListener = actionEvent -> {
+        AbstractButton abstractButton =
+                (AbstractButton) actionEvent.getSource();
+        boolean selected = abstractButton.getModel().isSelected();
+        if (selected) {
+            callPauseTimer();
+        } else {
+            callResumeTimer();
+        }
+    };
 
     /**
      * Creates a constructor for TimerLogic.
@@ -27,6 +50,15 @@ public class TimerLogic {
     public TimerLogic(TaskList taskList, Ui ui) {
         TimerLogic.taskList = taskList;
         TimerLogic.ui = ui;
+        jFrame = new JFrame();
+        jLabel = new JLabel(EMPTY_STRING, SwingConstants.CENTER);
+        jFrame.setLayout(new BorderLayout());
+        jFrame.setBounds(500, 300, 300, 100);
+        jFrame.add(jLabel, BorderLayout.NORTH);
+        jFrame.addWindowListener(this);
+        JToggleButton pauseResumeButton = new JToggleButton("Pause/Resume");
+        pauseResumeButton.addActionListener(actionListener);
+        jFrame.add(pauseResumeButton, BorderLayout.CENTER);
     }
 
     /**
@@ -154,29 +186,53 @@ public class TimerLogic {
     public void callResetTimer(String[] parsedInput) {
         String parameter = TimerParser.parseStudyParameter(parsedInput);
         if (parameter.equals("stopwatch")) {
-            timer = new Stopwatch(taskList, ui);
+            timer = new Stopwatch(taskList, ui, jFrame, jLabel);
             return;
         }
-        timer = new Countdown(taskList, ui);
+        timer = new Countdown(taskList, ui, jFrame, jLabel);
     }
 
     private boolean isTimerPausedOrStopped() {
         if (!isTimerInitialised) {
             return true;
         }
-        if (timer.isTimerPaused()) {
-            return true;
-        }
-        return false;
+        return timer.isTimerPaused();
     }
 
     public boolean getIsTimerRunning() {
         if (!isTimerInitialised) {
             return false;
         }
-        if (timer.isTimerRunning) {
-            return true;
-        }
-        return false;
+        return timer.isTimerRunning;
     }
+
+    public void destroyFrame() {
+        jFrame.dispose();
+    }
+
+
+    @Override
+    public void windowOpened(WindowEvent e) { }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        callStopTimer();
+        ui.showLine();
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) { }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) { }
+
+    @Override
+    public void windowActivated(WindowEvent e) { }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) { }
 }

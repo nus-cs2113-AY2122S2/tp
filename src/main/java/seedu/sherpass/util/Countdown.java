@@ -2,24 +2,59 @@ package seedu.sherpass.util;
 
 import seedu.sherpass.task.TaskList;
 
-import static seedu.sherpass.constant.TimerConstant.TIME_INTERVAL;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+
+import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.TimerConstant.NO_TIME_LEFT;
 import static seedu.sherpass.constant.TimerConstant.ONE_MINUTE;
 import static seedu.sherpass.constant.TimerConstant.ONE_HOUR;
 
-public class Countdown extends Timer {
+public class Countdown extends Timer  {
 
     private boolean hasTimeLeft = false;
     protected int timeLeft;
+
+    private final JFrame jFrame;
+    private final JLabel jLabel;
 
     /**
      * Creates a constructor for timer. Initialises the parameters needed for the countdown timer.
      *
      * @param ui UI
      */
-    public Countdown(TaskList taskList, Ui ui) {
+    public Countdown(TaskList taskList, Ui ui, JFrame jFrame, JLabel jLabel) {
         super(taskList, ui);
         timeLeft = NO_TIME_LEFT;
+        this.jFrame = jFrame;
+        this.jLabel = jLabel;
+    }
+
+    private String convertTimeToString() {
+        long hour;
+        long minute;
+        long second;
+        if ((timeLeft / ONE_HOUR) > 0) {
+            hour = timeLeft / ONE_HOUR;
+            minute = (long) ((timeLeft * 1.0) / ONE_HOUR) * 60;
+            second = timeLeft - (hour * ONE_HOUR) - (minute * ONE_MINUTE);
+            String zeroStringHour = (hour > 9) ? EMPTY_STRING : "0";
+            String zeroStringMinute = (minute > 9) ? EMPTY_STRING : "0";
+            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
+            return zeroStringHour + hour + " hour(s) " + zeroStringMinute + minute
+                    + " minute(s) " + zeroStringSecond + second + " second(s)";
+        } else if ((timeLeft / ONE_MINUTE) > 0) {
+            minute = timeLeft / ONE_MINUTE;
+            second = timeLeft - (minute * ONE_MINUTE);
+            String zeroStringMinute = (minute > 9) ? EMPTY_STRING : "0";
+            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
+            return zeroStringMinute + minute + " minute(s) " + zeroStringSecond + second + " second(s)";
+        } else {
+            second = timeLeft;
+            String zeroStringSecond = (second > 9) ? EMPTY_STRING : "0";
+            return zeroStringSecond + second + " second(s)";
+        }
     }
 
     /**
@@ -30,12 +65,15 @@ public class Countdown extends Timer {
     public void run() {
         isTimerRunning = true;
         printTimerStart();
+        jFrame.setVisible(true);
         while (hasTimeLeft) {
             assert timeLeft > NO_TIME_LEFT;
-            printTimeLeft();
+            String timeShownToUser = convertTimeToString();
+            jLabel.setText("Time left: " + timeShownToUser);
             update();
         }
         if (timerRanOutOfTime()) {
+            jFrame.setVisible(false);
             assert timeLeft <= NO_TIME_LEFT;
             isTimerRunning = false;
             ui.showToUser("Time is up! Would you like to mark any tasks as done?");
@@ -67,6 +105,7 @@ public class Countdown extends Timer {
      */
     public void stopTimer() {
         if (isTimerRunning) {
+            jFrame.setVisible(false);
             ui.showToUser("Alright, I've stopped the timer.");
             isTimerRunning = false;
             forcedStop = true;
@@ -91,24 +130,6 @@ public class Countdown extends Timer {
      */
     private boolean timerRanOutOfTime() {
         return (!hasTimeLeft && !forcedStop);
-    }
-
-    /**
-     * Prints the time left on the timer at certain intervals.
-     * When timer has more than a minute remaining, it prints time remaining every minute (X min:00s).
-     * It will print out the time remaining every TIME_INTERVAL seconds when less than a minute remains.
-     */
-    public void printTimeLeft() {
-        if (timeLeft > ONE_MINUTE) {
-            if (timeLeft % ONE_MINUTE == 0) {
-                int minutesLeft = timeLeft / ONE_MINUTE;
-                ui.showToUser(minutesLeft + " minutes left.");
-            }
-            return;
-        }
-        if (timeLeft % TIME_INTERVAL == 0) {
-            ui.showToUser(timeLeft + " seconds left.");
-        }
     }
 
     /**
@@ -154,5 +175,4 @@ public class Countdown extends Timer {
         }
         ui.showToUser("Okay! I've resumed the timer. You have " + timeLeft + " seconds left.");
     }
-
 }
