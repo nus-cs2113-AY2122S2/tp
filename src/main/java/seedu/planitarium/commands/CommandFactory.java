@@ -25,6 +25,7 @@ public class CommandFactory {
     protected static final String DELETE_SPEND_CMD = "deleteout";
     protected static final String EDIT_SPEND_CMD = "editout";
     protected static final String LIST_CMD = "list";
+    protected static final String OVERVIEW_CMD = "overview";
     protected static final String HELP_CMD = "help";
     protected static final String LIST_CAT_CMD = "listcat";
     protected static final String EXIT = "bye";
@@ -62,6 +63,8 @@ public class CommandFactory {
         case LIST_CAT_CMD:
             newCommand = new ListCategoriesCommand(userInput, family);
             break;
+        case OVERVIEW_CMD:
+            newCommand = new OverviewCommand(userInput, family);
         case HELP_CMD:
             newCommand = new HelpCommand(userInput, family);
         case EXIT:

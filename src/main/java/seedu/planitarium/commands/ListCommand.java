@@ -19,31 +19,19 @@ public class ListCommand extends Command {
     protected static final String LOG_LIST_INFO = "List with group '%d' is going to be executed";
     protected static final String LOG_EXECUTE_INFO = "List with group '%d' is executed";
 
-    protected boolean LIST_WITH_GROUP = true;
     protected int group;
 
     public ListCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
         this.type = "ListCMD";
-        try {
-            group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
-        } catch (PlanITariumException e) {
-            group = -1; //list without group
-            LIST_WITH_GROUP = false;
-        } finally {
-            logger.log(Level.INFO, String.format(LOG_LIST_INFO, group));
-        }
+        group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
+        logger.log(Level.INFO, String.format(LOG_LIST_INFO, group));
     }
 
     @Override
     public void execute() {
         assert (family != null) : Constants.FAMILY_NOT_NULL;
-        if(LIST_WITH_GROUP) {
-            family.list(group);
-            logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, group));
-        } else {
-            family.overview();
-            logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, group));
-        }
+        family.list(group);
+        logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, group));
     }
 }
