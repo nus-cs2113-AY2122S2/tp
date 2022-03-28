@@ -99,7 +99,7 @@ public class AddItemCommand extends Command {
      * @param ui The object that deals with user interface for the program.
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      */
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, WrongCommandException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         ItemList listOfItems = listContainer.getItemList();
         Item item = getItem();
         assert (item != null) : "Assertion Failed! There is no item within the AddItemCommand object.";

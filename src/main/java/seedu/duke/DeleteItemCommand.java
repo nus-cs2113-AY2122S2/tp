@@ -24,8 +24,7 @@ public class DeleteItemCommand extends Command {
     }
 
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException,
-            WrongCommandException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         Item itemToDelete = getItem();
         ItemList listOfItems = listContainer.getItemList();
         listOfItems.deleteItemInList(itemToDelete);

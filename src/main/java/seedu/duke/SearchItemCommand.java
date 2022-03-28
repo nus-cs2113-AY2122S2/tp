@@ -12,7 +12,7 @@ public class SearchItemCommand extends Command {
     }
 
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, WrongCommandException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
         ItemList listOfItems = listContainer.getItemList();
         String keyword = getKeyword();
         ItemList listOfMatchingItems = listOfItems.findItemsInList(keyword);

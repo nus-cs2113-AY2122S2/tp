@@ -41,6 +41,6 @@ class DukeTest {
 
     @Test
     public void commandParser_addCommandInvalidView_exceptionThrown() {
-        assertThrows(WrongCommandException.class, () -> new CommandParser().parse("ViewRecorded Housekeeper"));
+        assertThrows(InvalidCommandException.class, () -> new CommandParser().parse("ViewRecorded Housekeeper"));
     }
 }
