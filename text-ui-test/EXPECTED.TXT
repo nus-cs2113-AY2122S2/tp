@@ -14,8 +14,6 @@ ________________________________________________________________________________
 Hello! James Gosling
 If you are unfamiliar with MeetingJio, you can view the list of commands available using the command 'help'
 __________________________________________________________________________________________________________
-The following event has been added to ym's timetable:
-[L] TITLE: CS2113		DAY: friday		START: 1430		END: 1530		MODE: online
 __________________________________________________________________________________________________________
 Data saved to local successfully
 __________________________________________________________________________________________________________
