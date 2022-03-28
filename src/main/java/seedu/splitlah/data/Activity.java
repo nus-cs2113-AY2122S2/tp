@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Ivan
  */
-public class Activity implements Serializable {
+public class Activity implements Serializable, Comparable<Activity> {
 
     private int activityId;
     private String activityName;
@@ -157,6 +157,11 @@ public class Activity implements Serializable {
      */
     private String formString(int index, String personName, Double costOwed) {
         return " " + index + ". " + personName + ", $" + String.format("%.2f", costOwed);
+    }
+
+    @Override
+    public int compareTo(Activity activity) {
+        return Integer.compare(activityId, activity.getActivityId());
     }
 
     /**
