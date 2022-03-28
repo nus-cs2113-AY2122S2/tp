@@ -7,7 +7,7 @@ import seedu.sherpass.command.ExitCommand;
 
 import seedu.sherpass.exception.InvalidInputException;
 
-import seedu.sherpass.util.Parser;
+import seedu.sherpass.util.parser.Parser;
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
