@@ -98,7 +98,7 @@ public class ItemList {
         }
     }
 
-    public void updateItemNameInList(String currentItemName, String newItemName) throws ItemNotFoundException{
+    public void updateItemNameInList(String currentItemName, String newItemName) throws ItemNotFoundException {
         boolean isItemFound = false;
         ArrayList<Item> listOfItems = getListOfItems();
         Item item;
