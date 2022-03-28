@@ -41,8 +41,7 @@ public class UI {
 
     public static void printHelpMsg() {
         for(String Commands: Help.CommandSummary) {
-            System.out.println(Commands);
-            System.out.println("\n");
+            System.out.println(Commands + System.lineSeparator());
         }
     }
 

@@ -2,13 +2,24 @@ package seedu.planitarium.commands;
 
 import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.exceptions.PlanITariumException;
+import seedu.planitarium.global.Constants;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.Family;
+
+import java.util.logging.Level;
 
 public class EditRecordCommand extends Command{
     private static final String className = CommandFactory.class.getSimpleName();
     private static final String fileName = className + ".log";
     private static final ProjectLogger logger = new ProjectLogger(className, fileName);
+
+    protected static final String EXPEND = "expenditure";
+    protected static final String INCOME = "income";
+    protected static final String LOG_EDITREC_INFO =
+            "A record named '%s' from a person with uid '%d' in group '%d' is going to be edited";
+    protected static final String LOG_EXECUTE_INFO =
+            "A '%s' named '%s' which index is '%d' with $'%.2f' in category '%d' from " +
+                    "a person with uid '%d' in group '%d' is edited";
 
     protected static final String EDIT_INCOME_CMD = "editin";
     protected static final String EDIT_SPENT_CMD = "editout";
@@ -34,10 +45,10 @@ public class EditRecordCommand extends Command{
         keyword = Parser.parseKeyword(userInput);
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
         description = Parser.parseDescription(userInput);
-        category = Parser.getValidCategoryIndex(Parser.parseCategoryIndex(userInput));
         isPermanent = Parser.parseRecurringStatus(userInput);
         //amount = Parser.getValidMoney(Parser.parseIncome(userInput));
         assert (uid < 1) : USER_INDEX_NOT_VALID;
+        logger.log(Level.INFO, String.format(LOG_EDITREC_INFO,description, uid,group));
     }
 
     @Override
@@ -49,13 +60,19 @@ public class EditRecordCommand extends Command{
         switch (keyword) {
         case EDIT_INCOME_CMD:
             amount = Parser.getValidMoney(Parser.parseIncome(userInput));
-            family.editIncome(uid, group, index, description, amount, category, isPermanent);
+            family.editIncome(uid, group, index, description, amount, isPermanent);
+            logger.log(Level.INFO, String.format(
+                    LOG_EXECUTE_INFO, INCOME, description, index, amount, category, uid, group));
             break;
         case EDIT_SPENT_CMD:
             amount = Parser.getValidMoney(Parser.parseExpenditure(userInput));
-            family.editExpend(uid, group, index, description, amount, category, isPermanent);
+            category = Parser.getValidCategoryIndex(Parser.parseCategoryIndex(userInput));
+            family.editExpend(group, uid, index, description, amount, category, isPermanent);
+            logger.log(Level.INFO, String.format(
+                    LOG_EXECUTE_INFO, EXPEND, description, index, amount, category, uid, group));
             break;
         default:
+            logger.log(Level.WARNING, Constants.LOG_ERROR_INFO);
             throw new PlanITariumException(AddRecordCommand.class.getSimpleName());
         }
 
