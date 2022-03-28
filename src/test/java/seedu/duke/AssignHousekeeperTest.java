@@ -3,7 +3,7 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import seedu.duke.command.Command;
 
 
 public class AssignHousekeeperTest {

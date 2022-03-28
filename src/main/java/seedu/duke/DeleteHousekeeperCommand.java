@@ -2,6 +2,7 @@ package seedu.duke;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import seedu.duke.command.Command;
 
 public class DeleteHousekeeperCommand extends Command {
     private String name;

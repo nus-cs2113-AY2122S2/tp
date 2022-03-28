@@ -1,5 +1,15 @@
-package seedu.duke;
+package seedu.duke.command.itemcommand;
 
+import seedu.duke.command.Command;
+import seedu.duke.HotelLiteManagerException;
+import seedu.duke.EmptyItemPaxException;
+import seedu.duke.EmptyItemNameException;
+import seedu.duke.InvalidCommandException;
+import seedu.duke.Item;
+import seedu.duke.ItemList;
+import seedu.duke.Ui;
+import seedu.duke.ListContainer;
+import seedu.duke.InvalidItemPaxException;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 import java.util.logging.Level;

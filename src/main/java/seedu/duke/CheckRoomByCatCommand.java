@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.command.Command;
+
 /**
  * Class that implements execution behavior for listing the information
  * of all rooms with corresponding category.

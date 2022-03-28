@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.command.Command;
+
 /**
  * Represents a command to view the list of housekeeper performances.
  * The user command is "view housekeeper performances."

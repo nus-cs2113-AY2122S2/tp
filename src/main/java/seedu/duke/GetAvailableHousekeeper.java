@@ -3,6 +3,7 @@ package seedu.duke;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import seedu.duke.command.Command;
 
 /**
  * Number given from user to view list of housekeeper available on any day from Monday to Sunday.

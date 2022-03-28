@@ -1,4 +1,11 @@
-package seedu.duke;
+package seedu.duke.command.itemcommand;
+
+import seedu.duke.command.Command;
+import seedu.duke.HotelLiteManagerException;
+import seedu.duke.EmptyKeywordException;
+import seedu.duke.ListContainer;
+import seedu.duke.Ui;
+import seedu.duke.ItemList;
 
 public class SearchItemCommand extends Command {
     private String keyword;

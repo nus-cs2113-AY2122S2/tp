@@ -2,6 +2,8 @@ package seedu.duke;
 
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import seedu.duke.command.Command;
+
 
 /**
  * Class that implements execution behavior for adding a Satisfaction

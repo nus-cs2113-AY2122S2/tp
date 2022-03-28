@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.command.Command;
+
 /**
  * Class that implements execution behavior for user command
  * "average satisfaction." Contains override of execution

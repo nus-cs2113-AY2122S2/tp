@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.storage.RoomFileManager;
+import seedu.duke.command.Command;
 
 import java.io.IOException;
 

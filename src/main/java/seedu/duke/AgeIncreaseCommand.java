@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import seedu.duke.command.Command;
 
 public class AgeIncreaseCommand extends Command {
 
