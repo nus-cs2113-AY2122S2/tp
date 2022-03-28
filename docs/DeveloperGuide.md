@@ -88,6 +88,7 @@ You are now ready to begin developing!
 * [Getting User Input Continuously](#getting-user-input-continuously)
 * [Parsing User Input and Getting the Right Command](#parsing-user-input-and-getting-the-right-command)
 * [Exercise](#exercise)
+  * [List Exercise](#list-exercise)
 * [Workout](#workout)
   * [Create New Workout](#create-new-workout)
     * [Design Considerations](#design-considerations-for-creating-a-new-workout) 
@@ -101,7 +102,9 @@ You are now ready to begin developing!
 * [Schedule](#schedule)
 * [Search](#search)
   * [Search for Exercise](#search-for-exercise)
+  * [Search for Workout](#search-for-workout)
   * [Search for Plan](#search-for-plan)
+  * [Search for All](#search-for-all)
 
 ---
 
@@ -153,6 +156,20 @@ for subsequent prompts.
 ---
 
 ### Exercise
+#### List Exercise
+
+
+User's command. If the user's command type is to list the exercises available, i.e. `exercise /list`, the
+`Parser#parseUserInput(String userInput)` method will parse the 'exercise' base word and proceed to create exercise related
+command using `Parser#createExerciseCommand(String userInput)` method. This method will further evaluate the
+exercise action, in this case, `/list` and call the constructor of `ExerciseCommand` class by passing relevant parameters related to the
+ExerciseCommand constructor. If the exercise action is null or incorrect, an InvalidCommandException will be thrown. Once the exercise command is created,
+this exercise command is executed via the `ExerciseCommand#execute()` method. As it is executed, the method will check the
+type of action to be executed, in this case, list. It will then list the exercises available for selection from the exerciseList using the `ExerciseList#printExerciseList()`.
+
+The following sequence illustrates how the `exercise /list` command works in greater detail:
+
+![List Exercise Sequence Diagram](uml/sequenceDiagrams/images/viewExercise.png)
 
 ---
 
@@ -505,7 +522,7 @@ command using `Parser#createSearchCommand(String userInput)` method. This method
 constructor. If the `<userAction>` is null or incorrect, an InvalidCommandException will be thrown. If the `<keywords>`
 is not specified, an InvalidCommandException will be thrown.
 
-#### Search for exercise
+#### Search For Exercise
 Format: `search /exercise <keywords>`
 
 The `Parser#createSearchCommand(String userInput)` method will further evaluate the user input
@@ -517,7 +534,27 @@ be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords
 will either be a list of matching exercises or 'Sorry, no matching exercise found' if the user has entered the command
 correctly.
 
-#### Search for plan
+The following sequence illustrates how the `search /exercise` command works in greater detail:
+
+![Search Exercise Sequence Diagram](uml/sequenceDiagrams/images/searchExercise.png)
+
+#### Search For Workout
+Format: `search /workout <keywords>`
+
+The `Parser#createSearchCommand(String userInput)` method will further evaluate the user input
+`/workout` and call the constructor of `SearchCommand` class by passing relevant parameters to the constructor.
+The created `SearchCommand` object is returned by the `Parser#createSearchCommand(String userInput)`
+method to `Parser#parseUserInput(String userInput)` method, and finally returned by
+`Parser#parseUserInput(String userInput)` method to `WerkIt#startContinuousUserPrompt()` method. The search command will
+be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output
+will either be a list of matching names of workout or 'Sorry, no matching workout found' if the user has entered the command
+correctly.
+
+The following sequence illustrates how the `search /workout` command works in greater detail:
+
+![Search Exercise Sequence Diagram](uml/sequenceDiagrams/images/searchWorkout.png)
+
+#### Search For Plan
 Format: `search /plan <keywords>`
 
 The `Parser#createSearchCommand(String userInput)` method will further evaluate the user input
@@ -528,6 +565,25 @@ method to `Parser#parseUserInput(String userInput)` method, and finally returned
 be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output
 will either be a list of matching names of plan or 'Sorry, no matching plan found' if the user has entered the command
 correctly.
+
+The following sequence illustrates how the `search /plan` command works in greater detail:
+
+![Search Exercise Sequence Diagram](uml/sequenceDiagrams/images/searchPlan.png)
+
+#### Search For All
+Format: `search /all <keywords>`
+
+The `Parser#createSearchCommand(String userInput)` method will further evaluate the user input
+`/all` and call the constructor of `SearchCommand` class by passing relevant parameters to the constructor.
+The created `SearchCommand` object is returned by the `Parser#createSearchCommand(String userInput)`
+method to `Parser#parseUserInput(String userInput)` method, and finally returned by
+`Parser#parseUserInput(String userInput)` method to `WerkIt#startContinuousUserPrompt()` method. The search command will
+be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output
+will either be a list of matching names of exercise, workout and plan or not found messages if the user has entered the command correctly.
+
+The following sequence illustrates how the `search /all` command works in greater detail:
+
+![Search Exercise Sequence Diagram](uml/sequenceDiagrams/images/searchAll.png)
 
 ---
 
