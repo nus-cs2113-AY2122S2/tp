@@ -5,8 +5,6 @@ import util.exceptions.WrongCommandException;
 
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class RegexTest {
 
     @Test
