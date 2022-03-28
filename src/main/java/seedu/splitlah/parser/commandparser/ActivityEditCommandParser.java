@@ -17,11 +17,11 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
 
     private static final String COMMAND_FORMAT = "Syntax:\n\t";
 
-    private static final String COMMAND_FORMAT_FIRST =
+    public static final String COMMAND_FORMAT_FIRST =
             "activity /edit /sid [SESSION_ID] /aid [ACTIVITY_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] "
                     + "/co <TOTAL_COST> [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 
-    private static final String COMMAND_FORMAT_SECOND =
+    public static final String COMMAND_FORMAT_SECOND =
             "activity /edit /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2...] "
                     + "/cl [COST1 COST2...] [</gst GST_PERCENT /sc SERVICE_CHARGE>]";
 

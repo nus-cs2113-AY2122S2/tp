@@ -1,13 +1,16 @@
 # User Guide
 
-SplitLah is a desktop app with a Command Line Interface (CLI) for splitting bills amongst users after a group outing.
-Your group outings can consist of several activities with different people paying the bill for each activity; SplitLah
-does the work of calculating how much each participant owes and whom they must pay at the end of the activity. You will
-no longer have to waste time doing these calculations by hand, leaving you with more time to spend with your friends.
-SplitLah consolidates all debts intelligently so they can be paid off with the fewest number of transactions possible,
-so you spend less time making pointless transactions. SplitLah remembers this information by saving all activities and
-transactions to the disk, so you can look up past activities anytime. If you can type fast, SplitLah can manage your
-outings faster than apps using a Graphical User Interface (GUI).
+SplitLah is a desktop app with a Command Line Interface (CLI) for splitting bills amongst users after a group outing,
+where each group outings can consist of several activities with different people paying the bill for each activity.
+SplitLah does the work of calculating how much each participant owes and whom they must pay at the end of the activity.
+You will no longer have to waste time doing these calculations by hand, leaving you with more time to spend with your
+friends.
+
+SplitLah also consolidates all debts intelligently so that they can be paid off with the fewest number of transactions 
+possible, helping you to reduce time spent on making pointless transactions. 
+To help you look up past activities at any time, SplitLah remembers your information by saving all your sessions and
+activities to a save file.
+If you can type fast, SplitLah can manage your outings faster than apps using a Graphical User Interface (GUI).
 
 ## Contents
 * [User Guide](#user-guide)
@@ -19,9 +22,12 @@ outings faster than apps using a Graphical User Interface (GUI).
     * [Features](#features)
         * [Creating a session: `session /create`](#creating-a-session-session-create)
         * [Deleting a session: `session /delete`](#deleting-a-session-session-delete)
+        * [Editing a session: `session /edit`](#editing-a-session-session-edit)
         * [Viewing a session: `session /view`](#viewing-a-session--session-view)
         * [Listing all sessions: `session /list`](#listing-all-sessions-session-list)
         * [Creating an activity: `activity /create`](#creating-an-activity-activity-create)
+        * [Deleting an activity: `activity /delete`](#deleting-an-activity-activity-delete)
+        * [Editing an activity: `activity /edit`](#editing-an-activity-activity-edit)
         * [Viewing an activity: `activity /view`](#viewing-an-activity-activity-view)
         * [Listing all activities in a session: `activity /list`](#listing-all-activities-in-a-session-activity-list)
         * [Settling all transactions for a session: `session /summary`](#settling-all-transactions-for-a-session-session-summary)
@@ -159,6 +165,8 @@ Example of usage:
 <br>
 <br>
 
+### Editing a session: `session /edit`
+
 ### Viewing a session : `session /view`
 
 ### Listing all sessions: `session /list`
@@ -250,6 +258,8 @@ Example of usage:
    ![Activity delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityDeleteCommand.png)
 <br>
 <br>
+
+### Editing an activity: `activity /edit`
 
 ### Viewing an activity: `activity /view`
 
@@ -430,11 +440,14 @@ Format: `exit`
 |------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Create a new session                     | Format: `session /create /n [SESSION_NAME] /d [DATE] /pl [NAME1 NAME2 …] [</gid [GROUP_ID]>]`<br><br> Example: `session /create /n Outing /d 15-03-2022 /pl Warren Ivan Roy`                                       |
 | Delete an existing session               | Format: `session /delete /sid [SESSION_ID]`<br><br>Example: `session /delete /sid 1`                                                                                                                               |
+| Edit an existing session                 | Format: ` `                                                                                                                                                                                                        |
 | View an existing session                 | Format: `session /view /sid [SESSION_ID]`<br><br>Example: `session /view /sid 1`                                                                                                                                   |
 | List all sessions                        | Format: `session /list`                                                                                                                                                                                            |
 | Create activity and split costs evenly   | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2 …] /co [TOTAL_COST]`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /co 7.5`           |
 | Create activity and split costs manually | Format: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PAYER] /i [NAME1 NAME2 …] /cl [COST1] [COST2]...`<br><br>Example: `activity /create /sid 1 /n Lunch /p Warren /i Warren, Ivan, Roy /cl 1 1 5.5` |
 | Delete an existing activity              | Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`<br><br>Example: `activity /delete /sid 2 /aid 1`                                                                                                   |
+| Edit an activity (split costs evenly)    | Format: ` `                                                                                                                                                                                                        |
+| Edit an activity (split costs manually)  | Format: ` `                                                                                                                                                                                                        |
 | View an existing activity                | Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]` <br><br>Example: `activity /view /sid 1 /aid 1`                                                                                                      |
 | List all activities                      | Format: `activity /list /sid [SESSION_ID]` <br><br>Example: `activity /list /sid 1`                                                                                                                                |
 | Show session summary                     | Format: `session /summary /sid [SESSION_ID]`<br><br>Example: `session /summary /sid 1`                                                                                                                             |
