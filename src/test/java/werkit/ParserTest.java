@@ -80,7 +80,15 @@ class ParserTest {
 
     @Test
     void parseUserInput_validPlanCommand_expectSuccess() throws InvalidCommandException {
-        
+        String planCommand1 = "plan /new plan 1 /workouts 1, 2, 3, 4";
+        String planCommand2 = "plan /list";
+        String planCommand3 = "plan /details 1";
+        String planCommand4 = "plan /delete 1";
+
+        assertTrue(parser.parseUserInput(planCommand1) instanceof PlanCommand);
+        assertTrue(parser.parseUserInput(planCommand2) instanceof PlanCommand);
+        assertTrue(parser.parseUserInput(planCommand3) instanceof PlanCommand);
+        assertTrue(parser.parseUserInput(planCommand4) instanceof PlanCommand);
     }
 
     @Test
