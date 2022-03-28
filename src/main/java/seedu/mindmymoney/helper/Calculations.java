@@ -82,7 +82,7 @@ public class Calculations {
      */
     public static String printBar(float percentage) {
         String output = "";
-        for(float i = 0; i < percentage / 10; i += 0.5) {
+        for (float i = 0; i < percentage / 10; i += 0.5) {
             output += "▇▇";
         }
         return output;
