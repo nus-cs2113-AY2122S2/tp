@@ -186,11 +186,18 @@ public class Profile implements Serializable {
 
     /**
      * Removes a Group object with the specified group unique identifier from the list of groups.
+     * At the same time, loops through existing sessions to update their group attribute to null
+     * if the group attribute is the group to be removed.
      *
      * @param groupId An integer that uniquely identifies a Group object to be removed.
      */
     public void removeGroup(int groupId) throws InvalidDataException {
         Group groupToBeRemoved = getGroup(groupId);
+        for (Session session : sessionList) {
+            if (session.getGroup().getGroupId() == groupId) {
+                session.setGroup(null);
+            }
+        }
         groupList.remove(groupToBeRemoved);
     }
 

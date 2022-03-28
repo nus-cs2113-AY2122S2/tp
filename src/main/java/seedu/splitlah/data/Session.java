@@ -108,6 +108,15 @@ public class Session implements Serializable, Comparable<Session> {
     }
 
     /**
+     * Updates the group of this Session object to the specified group.
+     *
+     * @param group A Group object representing the updated group of the session.
+     */
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    /**
      * Updates the date of this Session object to the specified date.
      * 
      * @param dateCreated A LocalDate object representing the updated date of the session.

@@ -21,15 +21,15 @@ public class SessionEditCommandParserTest {
     @Test
     public void getCommand_validUserInput_SessionEditCommand() {
         // Case 1: Edit a session with /n delimiter only.
-        String validUserInputWithName = "session /edit /sid 1 /n Class Outing";
-        String validArgumentsWithName = Parser.getRemainingArgument(validUserInputWithName);
-        String errorMessageOne = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, validArgumentsWithName);
+        String validUserInputName = "session /edit /sid 1 /n Class Outing";
+        String validArgumentsName = Parser.getRemainingArgument(validUserInputName);
+        String errorMessageOne = ParserUtils.checkIfCommandIsValid(COMMAND_TYPE, validArgumentsName);
         if (!errorMessageOne.isEmpty()) {
             fail();
         }
         try {
             SessionEditCommandParser sessionEditCommandParser = new SessionEditCommandParser();
-            Command sessionEditCommand = sessionEditCommandParser.getCommand(validArgumentsWithName);
+            Command sessionEditCommand = sessionEditCommandParser.getCommand(validArgumentsName);
             assertEquals(sessionEditCommand.getClass(), SessionEditCommand.class);
         } catch (InvalidFormatException invalidFormatException) {
             fail();
