@@ -45,5 +45,13 @@ public class Constants {
     public static final String HELP = "Show all commands: help";
     public static final String EXIT = "Exit program: bye";
 
-    // For ...
+    // For Command assertion
+    public static final String NAME_NOT_NULL = "Name should not be null";
+    public static final String PERSONLIST_NOT_NULL = "Personlist should not be null";
+    public static final String DESCRIPTION_NOT_NULL = "Description should not be empty";
+    public static final String INPUT_NOT_NULL = "Input should not be empty";
+    public static final String KEYWORD_NOT_NULL = "Keywords should not be empty";
+    public static final String FAMILY_NOT_NULL = "Family should not be null";
+    public static final String USER_INDEX_NOT_VALID = "User index should be valid";
+
 }

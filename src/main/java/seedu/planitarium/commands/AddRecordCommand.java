@@ -38,16 +38,16 @@ public class AddRecordCommand extends Command {
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
         category = Parser.getValidCategoryIndex(Parser.parseCategoryIndex(userInput));
         this.isSilent = Constants.FOR_USER;
-        assert (uid < 1) : USER_INDEX_NOT_VALID;
+        assert (uid < 1) : Constants.USER_INDEX_NOT_VALID;
 
     }
 
     @Override
     public void execute() throws PlanITariumException {
-        assert (keyword != null) : KEYWORD_NOT_NULL;
-        assert (userInput != null) : INPUT_NOT_NULL;
-        assert (family != null) : FAMILY_NOT_NULL;
-        assert (description != null) : DESCRIPTION_NOT_NULL;
+        assert (keyword != null) : Constants.KEYWORD_NOT_NULL;
+        assert (userInput != null) : Constants.INPUT_NOT_NULL;
+        assert (family != null) : Constants.FAMILY_NOT_NULL;
+        assert (description != null) : Constants.DESCRIPTION_NOT_NULL;
         switch (keyword) {
         case ADD_INCOME_CMD:
             amount = Parser.getValidMoney(Parser.parseIncome(userInput));

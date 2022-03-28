@@ -8,7 +8,6 @@ public class SearchCommand extends Command{
 
     protected String description;
     protected int category;
-    protected
 
     public SearchCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
@@ -18,6 +17,6 @@ public class SearchCommand extends Command{
 
     @Override
     public void execute(){
-        family.;
+
     }
 }

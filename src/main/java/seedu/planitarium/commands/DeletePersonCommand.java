@@ -1,6 +1,7 @@
 package seedu.planitarium.commands;
 
 import seedu.planitarium.exceptions.PlanITariumException;
+import seedu.planitarium.global.Constants;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.Family;
 import seedu.planitarium.person.PersonList;
@@ -9,8 +10,7 @@ import seedu.planitarium.person.PersonList;
  * Executes the delete command and delete a person from the list.
  */
 public class DeletePersonCommand extends Command {
-    protected static final String USER_INDEX_NOT_VALID = "User index should be valid";
-    protected static final String PERSONLIST_NOT_NULL = "Personlist should not be null";
+
     protected int uid;
     protected int group;
 
@@ -23,8 +23,8 @@ public class DeletePersonCommand extends Command {
 
     @Override
     public void execute() throws PlanITariumException {
-        assert (uid < 1) : USER_INDEX_NOT_VALID;
-        assert (family != null) : PERSONLIST_NOT_NULL;
+        assert (uid < 1) : Constants.USER_INDEX_NOT_VALID;
+        assert (family != null) : Constants.FAMILY_NOT_NULL;
         family.deletePerson(uid,group);
     }
 

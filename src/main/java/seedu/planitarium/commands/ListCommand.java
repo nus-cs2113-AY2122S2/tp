@@ -1,6 +1,7 @@
 package seedu.planitarium.commands;
 
 import seedu.planitarium.exceptions.PlanITariumException;
+import seedu.planitarium.global.Constants;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.Family;
 import seedu.planitarium.person.PersonList;
@@ -10,7 +11,6 @@ import seedu.planitarium.person.PersonList;
  */
 public class ListCommand extends Command {
 
-    protected static final String FAMILY_NOT_NULL = "Family should not be null";
     protected boolean LIST_WITH_GROUP = true;
     protected int group;
 
@@ -27,7 +27,7 @@ public class ListCommand extends Command {
 
     @Override
     public void execute() {
-        assert (family != null) : FAMILY_NOT_NULL;
+        assert (family != null) : Constants.FAMILY_NOT_NULL;
         if(LIST_WITH_GROUP) {
             family.list(group);
         } else {
