@@ -7,13 +7,16 @@ import seedu.splitlah.command.GroupDeleteCommand;
 import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityEditCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
 import seedu.splitlah.parser.commandparser.GroupViewCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
+import seedu.splitlah.parser.commandparser.SessionEditCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
+import seedu.splitlah.parser.commandparser.SessionViewCommandParser;
 
 /**
  * Container of hardcoded messages.
@@ -46,30 +49,37 @@ public abstract class Message {
                     + "        " + SessionCreateCommandParser.COMMAND_FORMAT + "\n"
                     + "2.  Delete an existing session\n"
                     + "        " + SessionDeleteCommandParser.COMMAND_FORMAT + "\n"
-                    + "3.  List all existing sessions\n"
+                    + "3.  Edit an existing session\n"
+                    + "        " + SessionEditCommandParser.COMMAND_FORMAT + "\n"
+                    + "4.  View an existing session's details\n"
+                    + "        " + SessionViewCommandParser.COMMAND_FORMAT + "\n"
+                    + "5.  List all existing sessions\n"
                     + "        " + SessionListCommandParser.COMMAND_FORMAT + "\n"
-                    + "4.  Create a new activity\n"
+                    + "6.  Create a new activity\n"
                     + "        Syntax: " + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n"
                     + "                " + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND + "\n"
-                    + "5.  Delete an existing activity\n"
+                    + "7.  Delete an existing activity\n"
                     + "        " + ActivityDeleteCommandParser.COMMAND_FORMAT + "\n"
-                    + "6.  View an existing activity's details\n"
+                    + "8.  Edit an existing activity\n"
+                    + "        Syntax: " + ActivityEditCommandParser.COMMAND_FORMAT_FIRST + "\n"
+                    + "        Syntax: " + ActivityEditCommandParser.COMMAND_FORMAT_SECOND + "\n"
+                    + "9.  View an existing activity's details\n"
                     + "        " + ActivityViewCommand.COMMAND_FORMAT + "\n"
-                    + "7.  List all existing activities\n"
+                    + "10.  List all existing activities\n"
                     + "        " + ActivityListCommand.COMMAND_FORMAT + "\n"
-                    + "8.  Show the summary of an existing session\n"
+                    + "11.  Show the summary of an existing session\n"
                     + "        " + SessionSummaryCommandParser.COMMAND_FORMAT + "\n"
-                    + "9.  Create a new group\n"
+                    + "12.  Create a new group\n"
                     + "        " + GroupCreateCommand.COMMAND_FORMAT + "\n"
-                    + "10. Delete an existing group\n"
+                    + "13. Delete an existing group\n"
                     + "        " + GroupDeleteCommand.COMMAND_FORMAT + "\n"
-                    + "11. View an existing group's details\n"
+                    + "14. View an existing group's details\n"
                     + "        " + GroupViewCommandParser.COMMAND_FORMAT + "\n"
-                    + "12. List all existing groups\n"
+                    + "15. List all existing groups\n"
                     + "        " + GroupListCommand.COMMAND_FORMAT + "\n"
-                    + "13.  Show this help menu\n"
+                    + "16.  Show this help menu\n"
                     + "        " + HelpCommandParser.COMMAND_FORMAT + "\n"
-                    + "14. Exit the program\n"
+                    + "17. Exit the program\n"
                     + "        " + ExitCommandParser.COMMAND_FORMAT;
     public static final String PROMPT_TEXTUI_AWAITING_INPUT =
             "> ";
