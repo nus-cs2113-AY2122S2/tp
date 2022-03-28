@@ -1,2 +1,3 @@
 James Gosling
+add_lesson n/ym t/CS2113 d/Friday st/1430 et/1530 m/online
 exit
