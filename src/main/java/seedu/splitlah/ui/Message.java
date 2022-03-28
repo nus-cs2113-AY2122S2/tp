@@ -338,6 +338,8 @@ public abstract class Message {
             "Session Id not initialized.";
     public static final String ASSERT_ACTIVITYDELETE_ACTIVITY_ID_NOT_INITIALIZED =
             "Activity Id not initialized.";
+    public static final String ASSERT_ACTIVITYDELETE_ACTIVITY_NOT_DELETED =
+            "The activity was not deleted.";
     public static final String LOGGER_ACTIVITYDELETE_ACTIVITY_REMOVED =
             "An Activity object was successfully deleted from the list of activities with Id: ";
 
