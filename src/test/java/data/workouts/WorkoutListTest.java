@@ -9,8 +9,7 @@ import storage.LogHandler;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class WorkoutListTest {
@@ -32,6 +31,22 @@ class WorkoutListTest {
         exerciseList.addExerciseToList("crunch");
         exerciseList.addExerciseToList("russian twist");
         exerciseList.addExerciseToList("jumping jack");
+    }
+
+    @Test
+    void createAndAddWorkout_normalCreation_expectSuccess() throws InvalidExerciseException,
+            InvalidWorkoutException {
+        String newWorkout1 = "russian twist /reps 1000";
+        Workout outputWorkout1 = wl.createAndAddWorkout(newWorkout1);
+        assertEquals(outputWorkout1.getExerciseName(), "russian twist");
+        assertEquals(outputWorkout1.getRepetitions(), 1000);
+        assertTrue(wl.checkForExistingWorkout("russian twist", 1000));
+
+        String newWorkout2 = "crunch /reps 2359";
+        Workout outputWorkout2 = wl.createAndAddWorkout(newWorkout2);
+        assertEquals(outputWorkout2.getExerciseName(), "crunch");
+        assertEquals(outputWorkout2.getRepetitions(), 2359);
+        assertTrue(wl.checkForExistingWorkout("crunch", 2359));
     }
 
     @Test
