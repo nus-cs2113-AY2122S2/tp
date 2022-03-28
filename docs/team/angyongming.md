@@ -1,9 +1,21 @@
 # Ang Yong Ming - Project Portfolio Page
 
 ## Overview
-Testing
+- Functional code
+
+- Documentation
+
+- Code Quality
 
 ### Summary of Contributions
-Documentation
+**Functional code:**
+- List Command (Sorting Algorithm)
+- Find Command (Searching Algorithm)
 
-Code Quality
+**Documentation:**
+
+Ensure that non-trivial segments of the code are documented properly.
+
+**Code Quality:**
+
+Ensure that the coding style is up to standard.
