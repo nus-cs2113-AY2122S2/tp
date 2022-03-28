@@ -130,6 +130,16 @@ public class Activity implements Serializable, Comparable<Activity> {
         return summaryTable.toString();
     }
 
+    /**
+     * Returns an integer to identify whether this Activity object should be ordered
+     * before or after another Activity object when sorted.
+     *
+     * @param activity The specified Activity object that this Activity object is compared against.
+     * @return An integer less than 0 if this Activity object's activityId is smaller than the specified
+     *         Activity object's sessionId,
+     *         an integer greater than 0 if this object's activityId is larger,
+     *         and 0 if both Activity objects' activityIds are numerically equal.
+     */
     @Override
     public int compareTo(Activity activity) {
         return Integer.compare(activityId, activity.getActivityId());
