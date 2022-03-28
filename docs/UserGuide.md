@@ -2,17 +2,25 @@
 
 * [Introduction](#introduction)
 * [Quick start](#quick-start)
-* [Command summary](#command-summary)
+* [Command summary (Expenses)](#command-summary-expenses)
+* [Command summary (Credit Card)](#command-summary-credit-card)
 * [Features](#features)
-   * [Display list of currently available commands: `help`](#display-list-of-currently-available-commands-help)
-   * [Add an expenditure to your program: `add`](#add-an-expenditure-to-your-program-add)
-   * [Display current list of expenditures: `list` ](#display-current-list-of-expenditures-list)
-   * [Modify an expenditure on your list: `update`](#modify-an-expenditure-on-your-list-update)
-   * [Removing an expenditure on your list: `delete`](#removing-an-expenditure-on-your-list-delete)
-   * [Calculations that Mindmymoney provide: `calculate`](#calculations-that-mindmymoney-provide-calculate)
-      * [Expenditure per month: `calculate /epm`](#expenditure-per-month-calculate-epm)
-   * [Exiting MindMyMoney application: `bye`](#exiting-mindmymoney-application-bye)
-   * [Saving the data](#saving-the-data)
+  * [Expenses](#expenses)
+     * [Display list of currently available commands for expenses: `help`](#display-list-of-currently-available-commands-for-expenses-help)
+     * [Add an expenditure to your program: `add`](#add-an-expenditure-to-your-program-add)
+     * [Display current list of expenditures: `list` ](#display-current-list-of-expenditures-list)
+     * [Modify an expenditure on your list: `update`](#modify-an-expenditure-on-your-list-update)
+     * [Removing an expenditure on your list: `delete`](#removing-an-expenditure-on-your-list-delete)
+     * [Calculations that Mindmymoney provide: `calculate`](#calculations-that-mindmymoney-provide-calculate)
+        * [Expenditure per month: `calculate /epm`](#expenditure-per-month-calculate-epm)
+     * [Exiting MindMyMoney application: `bye`](#exiting-mindmymoney-application-bye)
+  * [Credit Card](#credit-card)
+    * [Display list of currently available commands for credit card: `help`](#display-list-of-currently-available-commands-for-credit-card-help)
+    * [Add a credit card to your program: `add`](#add-a-credit-card-to-your-program-add)
+    * [Display current list of credit cards: `list` ](#display-current-list-of-expenditures-list)
+    * [Modify a credit card on your list: `update`](#modify-a-credit-card-on-your-list-update)
+    * [Removing a credit card on your list: `delete`](#removing-a-credit-card-on-your-list-delete)
+  * [Saving the data](#saving-the-data)
 * [FAQ](#faq)
   
 ## Introduction
@@ -41,7 +49,7 @@ Click on the hyperlinks in the content page above to quick navigation on the pag
    Some example commands you can try:
 
     * **`list`** : Lists all tasks.
-    * **`add`**`/pm cash /c Food /d Porridge /a 3 /t 2022-03` :
+    * **`add`**`/e cash /c Food /d Porridge /a 3 /t 2022-03` :
       Adds $3 porridge that was paid by cash on March 2022 to the list.
     * **`calculate`**`/epm Mar 2022` : Calculates total expenditure in the month of March 2022.  
     * **`update`**`1 /pm cash /c Food /d Porridge /a 3 /t 2022-03` :
@@ -51,36 +59,52 @@ Click on the hyperlinks in the content page above to quick navigation on the pag
 
 6. Refer to the [Features](#features) below for details of each command.
   
-## Command Summary  
+## Command Summary (Expenses)
 
-| Command | Format, examples                                                                                                                           |
-|---------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| Help    | `help` <br/> Prints a list of available commands                                                                                           |
-| Add     | `add /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`<br/>e.g `add /pm cash /c Food /d Porridge /a 3 /t 2022-03` |
-| List    | `list`<br/> Displays the current list of expenditures stored by the user                                                                   |
-| Delete  | `delete [INDEX]`<br/>e.g `delete 1`                                                                                                        | 
-| Update  | `update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]`<br/>e.g `update 2 snacks 5`                                                                |
-| Exit    | `bye`<br/> Shuts down `MindMyMoney` application                                                                                            |
+| Command   | Format, examples                                                                                                                                                            |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Help      | `help /expenses` <br/> Prints a list of expenses commands.                                                                                                                  |
+| Add       | `add /e [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`<br/>e.g `add /pm cash /c Food /d Porridge /a 3 /t 2022-03` <br/> Adds an expense to the list |
+| List      | `list /expenses`<br/> Displays the current list of expenditures stored by the user.                                                                                         |
+| Calculate | `calculate /epm mm yyyy` <br/> e.g `calculate /epm Mar 2022` <br/> Calculates the total expenses and shows a percentage of expenses bases on different category.            |
+| Delete    | `delete [INDEX]`<br/>e.g `delete 1` <br/> Deletes an expense item from the list.                                                                                            | 
+| Update    | `update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]`<br/>e.g `update 2 snacks 5` <br/> Updates an expense item in the list.                                                      |
+| Exit      | `bye`<br/> Ends the `MindMyMoney` application                                                                                                                               |
 |
 
-## Features  
+## Command Summary (Credit Card)
+
+| Command   | Format, examples                                                                                                                                                                                   |
+|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Help      | `help /cc` <br/> Prints a list of credit card commands.                                                                                                                                            |
+| Add       | `add /cc /n [NAME] /cb [CASH_BACK_AMOUNT] /cl [CASH_LIMIT_AMOUNT] /bal [CARD_BALANCE]`<br/>e.g `add /cc /n dbs /cb 2 /cl 1000 /bal 1000` <br/> Adds a credit card detail.                          |
+| List      | `list /cc`<br/> Displays the current list of credit cards stored by the user.                                                                                                                      |
+| Delete    | `delete /cc [INDEX]`<br/>e.g `delete /cc 1` <br/> Deletes an credit card from the list.                                                                                                            | 
+| Update    | `update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] /cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]`<br/>e.g `update /cc 2 /n DBS /cb 3 /cl 10000 /bal 10000` <br/> Updates an credit card in the list. |
+| Exit      | `bye`<br/> Ends the `MindMyMoney` application                                                                                                                                                      |
+
+
+# Features 
 The following are features of the `MindMyMoney` application. 
 Please ensure that the format of commands given is accurate.  
 Words in `[SQUARE_BRACKETS]` are the parameters.  
 
-### Display list of currently available commands: `help`  
+## Expenses
+
+### Display list of currently available commands for expenses: `help`  
 Prints a list of currently available commands.   
-Format:`help`   
-![help screenshot](./images/help.PNG)  
+Format:`help /expenses`for expenses commands
+![help_expenses screenshot](./images/help_expenses.PNG) 
+
 
 ### Add an expenditure to your program: `add`  
 Adds an expenditure to your program. Only **one** expenditure can only be added per command.  
-Format:`add /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`   
+Format:`add /e [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`   
 * `[PAYMENT_METHOD]` refers to the method of payment used.
   * Enter `cash` or the name of a credit card you have saved.  
 * `[CATEGORY]` refers to the category of the expenditure
   * Enter `Food`, `Transport`, `Utilities`, `Personal`, `Entertainment` or `Others`. Any input outside this list is rejected.  
-* `[DESCRIPTION]` refers to the name of the expenditure. 
+* `[DESCRIPTION]` refers to the description of the expenditure. 
   * For example `Nike shoes`.
 * `[AMOUNT]` refers to the cost of the expenditure.
   * Enter the amount in dollars rounded off to the nearest cent.
@@ -89,10 +113,11 @@ Format:`add /pm [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [
   * Format of the date is YYYY-MM.
   * For example `March 2022` will be entered as `2022-03`
   
-Example:`add /pm cash /c Food /d Porridge /a 3 /t 2022-03`  
-![add screenshot](./images/add.PNG)
+Example:`add /e cash /c Food /d Porridge /a 4.50 /t 2022-03`  
+![add_expense screenshot](./images/add_expense.PNG)
 > **💡 Note:**
->- `[CATEGORY]` and `[PAYMENT_METHOD]` are **case-insensitive**.  
+>- `[CATEGORY]` and `[PAYMENT_METHOD]` are **case-insensitive**.
+>- `[PAYMENT_METHOD]` credit card has to be added first before using the field `/e [CARD_NAME]`.
 >- `[AMOUNT]` only excepts numbers with 2 decimal places. Any more decimal places will be rounded or ignored 
 >- `[DATE]` does not require any day input.
   
@@ -104,34 +129,36 @@ Example:`add /pm cash /c Food /d Porridge /a 3 /t 2022-03`
 
 ### Display current list of expenditures: `list`   
 Prints in the terminal the current list of expenditures that you have logged so far   
-Format:`list`  
-![list screenshot](./images/list.PNG)  
+Format:`list /expenses` lists the expenses in the list.
+![list_expenses screenshot](./images/list_expenses.PNG)  
 
 ### Modify an expenditure on your list: `update`   
 Modify an expenditure on your list, by specifying the expenditure's index.   
-Use the `list` command to view the current indices of your expenditures.   
+Use the `list /expenses` command to view the current indices of your expenditures.   
 Format:`update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]`  
 For example: `update 1 drinks 2`  
 ![update screenshot](./images/update.PNG)  
 
 ### Removing an expenditure on your list: `delete`  
 Delete an expenditure from your list, by specifying the expenditure's index.  
-Use the `list` command to view the current indices of your expenditures.   
+Use the `list /expenses` command to view the current indices of your expenditures.   
 Format:`delete`  
 For example: `delete 1`
-![delete screenshot](./images/delete.PNG)  
+![delete screenshot](./images/delete_eg.PNG)  
 
 ### Calculations that Mindmymoney provide: `calculate`
-Mindmymoney provides a large suite of calculating features. See below for more details of each feature.
+Mindmymoney provides a calculating feature. See below for more details of the feature.
 
 #### Expenditure per month: `calculate /epm`
-Shows the sum of the amounts of expenditures you have made in a month of a certain year.  
+Shows the sum of the amounts of expenditures you have made in a month of a certain year. <br>
+Shows the percentage spent on each category of expenditure, displayed in a horizontal bar chart.
+
 Format:`calculate /epm MMM YYYY`  
 * Enter Month in `MMM` format, with first letter capitalised. For example `Jan`.
 * Enter Year in `YYYY` format. For example `2022`
 * Enter Month and Year seperated by a space, `MMM YYYY`. For example `Dec 2021`
 For example: `calculate /epm Mar 2022`  
-![epm screenshot](./images/epm_screenshot.png)  
+![epm screenshot](./images/calculate_epm.png)  
 > **💡 Note:**
 > - If you want to search for exact month in year, enter both month and year.
 >  - Month is **case-sensitive**.
@@ -140,7 +167,68 @@ For example: `calculate /epm Mar 2022`
 ### Exiting MindMyMoney application: `bye`  
 Shuts down the MindMyMoney application.  
 Format:`bye`  
-![bye screenshot](./images/bye.PNG)  
+![bye screenshot](./images/bye_eg.PNG)  
+
+## Credit Card
+
+### Display list of currently available commands for credit card: `help`
+Prints a list of currently available commands.
+Format 1:`help /cc` for credit card commands
+![help_cc screenshot](./images/help_cc.PNG)
+
+### Add a credit card to your program: `add`
+Adds a credit card to your program. Only **one** credit card can only be added per command.  
+Format:`add /cc /n [CREDIT_CARD_NAME] /cb [CASH_BACK] /cl [CARD_LIMIT] /bal [CARD_BALANCE]`
+* `[PAYMENT_METHOD]` refers to the method of payment used.
+    * Enter `cash` or the name of a credit card you have saved.
+* `[CATEGORY]` refers to the category of the expenditure
+    * Enter `Food`, `Transport`, `Utilities`, `Personal`, `Entertainment` or `Others`. Any input outside this list is rejected.
+* `[DESCRIPTION]` refers to the description of the expenditure.
+    * For example `Nike shoes`.
+* `[AMOUNT]` refers to the cost of the expenditure.
+    * Enter the amount in dollars rounded off to the nearest cent.
+    * For example an item that cost $420 and 69 cents will be entered as `420.69`.
+* `[DATE]` refers to the date of the purchase of the expenditure.
+    * Format of the date is YYYY-MM.
+    * For example `March 2022` will be entered as `2022-03`
+
+Example:`add /cc /n dbs /cb 2 /cl 1000 /bal 1000`  
+![add_cc screenshot](./images/add_cc.PNG)
+> **💡 Note:**
+>- `[CATEGORY]` and `[PAYMENT_METHOD]` are **case-insensitive**.
+>- `[PAYMENT_METHOD]` credit card has to be added first before using the field `/e [CARD_NAME]`.
+>- `[AMOUNT]` only excepts numbers with 2 decimal places. Any more decimal places will be rounded or ignored
+>- `[DATE]` does not require any day input.
+
+> **⚠️Warning:**
+>- Input realistic values, any unrealistic values can crash the system and harm your save file!
+>- All flags are compulsory! Input the flags in the order given, else the application will not be able to read your
+   > input.
+
+
+### Display current list of credit cards: `list`
+Prints in the terminal the current list of credit cards that you have logged so far   
+Format:`list /cc` lists the credit cards in the list.
+![list_cc screenshot](./images/list_cc.PNG)
+
+### Modify a credit card on your list: `update`
+Modify a credit card on your list, by specifying the credit card's index.   
+Use the `list /cc` command to view the current indices of your credit cards.   
+Format:`update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]`  
+For example: `update 1 drinks 2`  
+![update screenshot](./images/update.PNG)
+
+### Removing a credit card on your list: `delete`
+Delete a credit card from your list, by specifying the credit card's index.  
+Use the `list /cc` command to view the current indices of your credit cards.   
+Format:`delete /cc [INDEX]`  
+For example: `delete /cc 1`
+![delete_cc screenshot](./images/delete_cc.PNG)
+
+### Exiting MindMyMoney application: `bye`
+Shuts down the MindMyMoney application.  
+Format:`bye`  
+![bye screenshot](./images/bye_eg.PNG)
 
 ### Saving the data:
 Mindmymoney data are saved in the hard disk automatically after any command that changes the data. 

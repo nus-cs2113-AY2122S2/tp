@@ -58,7 +58,7 @@ public class AddCommandInputTests {
         }
 
         if (!isExpenditureInList(inputPaymentMethod, creditCardList)) {
-            throw new MindMyMoneyException("Input Cash or a Credit Card!");
+            throw new MindMyMoneyException("Input Cash or a Credit Card after the /e field!");
         }
     }
 
@@ -74,7 +74,8 @@ public class AddCommandInputTests {
         }
 
         if (!isCategoryInList(inputCategory)) {
-            throw new MindMyMoneyException("Input Food, Transport, Utilities, Personal, Entertainment or Others!");
+            throw new MindMyMoneyException("Input Food, Transport, Utilities, Personal, Entertainment or Others after" +
+                    " the /c field!");
         }
     }
 

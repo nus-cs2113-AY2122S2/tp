@@ -108,21 +108,19 @@ public class AddCommand extends Command {
                 FLAG_OF_CARD_BALANCE);
         String cardBalance = parseInputWithCommandFlag(addInput, FLAG_OF_CARD_BALANCE,
                 FLAG_END_VALUE);
-
         creditCardList.add(new CreditCard(cardName, Double.parseDouble(cashBack), Float.parseFloat(cardLimit),
                 Float.parseFloat(cardBalance)));
         System.out.println("Successfully added: \n\n"
                 + "Credit card: " + cardName + "\n"
                 + "Cash back: " + cashBack + "%\n"
                 + "Card limit: $" + cardLimit + "\n"
-                + "Card balance: $" + cardBalance + "\n"
+                + "Card balance: $" + cardBalance + "\n\n"
                 + "into the account");
         System.out.print(System.lineSeparator());
     }
 
     public void executeCommand() throws MindMyMoneyException {
         if (hasCreditCardFlag()) {
-            System.out.println(hasCreditCardFlag());
             addCreditCard();
         } else {
             addExpenditure();
