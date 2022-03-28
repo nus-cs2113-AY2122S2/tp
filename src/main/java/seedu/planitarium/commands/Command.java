@@ -16,7 +16,7 @@ public class Command {
     public Command(String userInput, Family family) {
         this.userInput = userInput;
         this.family = family;
-        assert (userInput != null): Constants.INPUT_NOT_NULL;
+        assert (userInput != null) : Constants.INPUT_NOT_NULL;
     }
 
     /**

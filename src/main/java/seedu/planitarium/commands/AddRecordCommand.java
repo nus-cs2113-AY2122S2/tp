@@ -24,10 +24,10 @@ public class AddRecordCommand extends Command {
 
     protected static final String EXPEND = "expenditure";
     protected static final String INCOME = "income";
-    protected static final String LOG_ADDRECORD_INFO = "A record of '%s' in category '%d' is going to " +
-            "be added to someone with uid '%d' in group '%d'";
-    protected static final String LOG_EXECUTE_INFO = "An '%s' record of '%s' with $'%.2f' in category '%d' " +
-            "is going to be added to someone with uid '%d' in group '%d'";
+    protected static final String LOG_ADDRECORD_INFO = "A record of '%s' is going to "
+            + "be added to someone with uid '%d' in group '%d'";
+    protected static final String LOG_EXECUTE_INFO = "An '%s' record of '%s' with $'%.2f' in category '%d' "
+            + "is going to be added to someone with uid '%d' in group '%d'";
 
     protected String keyword;
     protected String description;
@@ -36,7 +36,7 @@ public class AddRecordCommand extends Command {
     protected boolean isSilent = Constants.FOR_USER;
     protected int group;
     protected int uid;
-    protected int category;
+    protected int category = -1;
 
     public AddRecordCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
@@ -46,10 +46,9 @@ public class AddRecordCommand extends Command {
         isPermanent = Parser.parseRecurringStatus(userInput);
         group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
-        category = Parser.getValidCategoryIndex(Parser.parseCategoryIndex(userInput));
         this.isSilent = Constants.FOR_USER;
         assert (uid < 1) : Constants.USER_INDEX_NOT_VALID;
-        logger.log(Level.INFO, String.format(LOG_ADDRECORD_INFO, description, category, uid, group));
+        logger.log(Level.INFO, String.format(LOG_ADDRECORD_INFO, description, uid, group));
     }
 
     @Override
@@ -67,6 +66,7 @@ public class AddRecordCommand extends Command {
             break;
         case ADD_SPENT_CMD:
             amount = Parser.getValidMoney(Parser.parseExpenditure(userInput));
+            category = Parser.getValidCategoryIndex(Parser.parseCategoryIndex(userInput));
             family.addExpend(uid, group, description, amount, category, isPermanent, isSilent);
             logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, EXPEND, description, amount, category,
                     uid, group));
