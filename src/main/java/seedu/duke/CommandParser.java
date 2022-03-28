@@ -40,7 +40,6 @@ public class CommandParser {
      *
      * @param commandString User input to be parsed and turned into a Command object.
      * @return The relevant Command object created based on the user input.
-     * @throws WrongCommandException     If the user input cannot be recognized as a Command object.
      * @throws HotelLiteManagerException If there is an error in user input that prevents it from being parsed into
      *                                   the relevant Command object.
      */
