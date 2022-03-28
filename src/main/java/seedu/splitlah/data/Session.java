@@ -3,6 +3,7 @@ package seedu.splitlah.data;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TableFormatter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -23,11 +24,11 @@ public class Session implements Serializable, Comparable<Session> {
     private Group group;
 
     // CONSTANTS
-    private static final String ACTIVITY_LIST_HEADER =
-            "Id | Activity Name | Cost | Payee";
-    private static final String PERSON_LIST_HEADER =
-            "Participants";
+    private static final String[] ACTIVITY_LIST_COLS = { "#", "Activities", "Cost", "Payer" };
+    private static final String PERSON_LIST_HEADER = "Participants:";
     private static final String SUMMARY_STRING_SEPARATOR = " | ";
+    private static final String COST_FORMATTING = "%.2f";
+    private static final String COST_PREPEND = "$";
     private static final int ZERO_INDEXING_OFFSET = 1;
 
     /**
@@ -265,11 +266,17 @@ public class Session implements Serializable, Comparable<Session> {
             return Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST;
         }
 
-        StringBuilder summaryString = new StringBuilder(ACTIVITY_LIST_HEADER);
+        TableFormatter summaryTable = new TableFormatter(
+                ACTIVITY_LIST_COLS[0], ACTIVITY_LIST_COLS[1], ACTIVITY_LIST_COLS[2], ACTIVITY_LIST_COLS[3]
+        );
         for (Activity activity : activityList) {
-            summaryString.append("\n > ").append(activity.getActivitySummaryString());
+            String id = Integer.toString(activity.getActivityId());
+            String name = activity.getActivityName();
+            String cost = COST_PREPEND + String.format(COST_FORMATTING, activity.getTotalCost());
+            String payer = activity.getPersonPaid().getName();
+            summaryTable.addRow(id, name, cost, payer);
         }
-        return summaryString.toString();
+        return summaryTable.toString();
     }
 
     /**
@@ -342,8 +349,8 @@ public class Session implements Serializable, Comparable<Session> {
         return "Session Id #" + sessionId + " --\n"
                 + "Name: " + sessionName + '\n'
                 + "Date: " + dateCreated.format(ParserUtils.DATE_FORMAT) + '\n'
-                + getActivityListSummaryString() + '\n'
+                + getGroupSummaryString() + '\n'
                 + getPersonListSummaryString() + '\n'
-                + getGroupSummaryString();
+                + getActivityListSummaryString();
     }
 }
