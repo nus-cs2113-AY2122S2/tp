@@ -1,26 +1,21 @@
 package seedu.planitarium.commands;
 
 import seedu.planitarium.ProjectLogger;
-import seedu.planitarium.global.UI;
+import seedu.planitarium.category.Category;
 import seedu.planitarium.person.Family;
+import seedu.planitarium.person.PersonList;
 
-/**
- * Executes exit command and exit the program.
- */
-public class ExitCommand extends Command {
+public class ListCategoriesCommand extends Command{
     private static final String className = CommandFactory.class.getSimpleName();
     private static final String fileName = className + ".log";
     private static final ProjectLogger logger = new ProjectLogger(className, fileName);
 
-    public ExitCommand(String userInput, Family family) {
+    public ListCategoriesCommand(String userInput, Family family) {
         super(userInput, family);
-        this.type = "ExitCMD";
     }
 
     @Override
     public void execute() {
-        UI.exit();
-        System.out.println(UI.HORI_LINE);
-        System.exit(0);
+        Category.listCategories();
     }
 }

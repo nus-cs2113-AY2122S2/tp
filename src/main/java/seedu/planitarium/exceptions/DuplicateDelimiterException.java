@@ -3,7 +3,7 @@ package seedu.planitarium.exceptions;
 /**
  * Thrown to indicate that a string has too many of a given delimiter (character sequence).
  */
-public class DuplicateDelimiterException extends Exception {
+public class DuplicateDelimiterException extends PlanITariumException {
     protected static final String ERROR_MSG = "Too many delimiter `%s`";
 
     /**

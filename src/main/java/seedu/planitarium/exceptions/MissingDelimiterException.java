@@ -3,7 +3,7 @@ package seedu.planitarium.exceptions;
 /**
  * Thrown to indicate that a string is missing a given delimiter (character sequence).
  */
-public class MissingDelimiterException extends Exception {
+public class MissingDelimiterException extends PlanITariumException {
     protected static final String ERROR_MSG = "Missing delimiter `%s`";
 
     /**

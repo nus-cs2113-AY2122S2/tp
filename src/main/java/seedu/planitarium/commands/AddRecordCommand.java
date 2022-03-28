@@ -1,59 +1,79 @@
+//@@author hlwang56
+
 package seedu.planitarium.commands;
 
-import seedu.planitarium.exceptions.UnknownException;
+import seedu.planitarium.ProjectLogger;
+import seedu.planitarium.exceptions.PlanITariumException;
+import seedu.planitarium.global.Constants;
 import seedu.planitarium.parser.Parser;
-import seedu.planitarium.person.Person;
-import seedu.planitarium.person.PersonList;
+import seedu.planitarium.person.Family;
+
+import java.util.logging.Level;
 
 /**
  * Executes the add command and add an income or an expenditure record to a particular
  * person in the list.
  */
 public class AddRecordCommand extends Command {
+    private static final String className = CommandFactory.class.getSimpleName();
+    private static final String fileName = className + ".log";
+    private static final ProjectLogger logger = new ProjectLogger(className, fileName);
+
     protected static final String ADD_INCOME_CMD = "addin";
     protected static final String ADD_SPENT_CMD = "addout";
-    protected static final String DESCRIPTION_NOT_NULL = "Description should not be empty";
-    protected static final String INPUT_NOT_NULL = "Input should not be empty";
-    protected static final String KEYWORD_NOT_NULL = "Keywords should not be empty";
-    protected static final String PERSON_NOT_NULL = "The person is not found";
-    protected static final String PERSONLIST_NOT_NULL = "Personlist should not be null";
-    protected static final String USER_INDEX_NOT_VALID = "User index should be valid";
+
+    protected static final String EXPEND = "expenditure";
+    protected static final String INCOME = "income";
+    protected static final String LOG_ADDRECORD_INFO = "A record of '%s' in category '%d' is going to " +
+            "be added to someone with uid '%d' in group '%d'";
+    protected static final String LOG_EXECUTE_INFO = "An '%s' record of '%s' with $'%.2f' in category '%d' " +
+            "is going to be added to someone with uid '%d' in group '%d'";
+
     protected String keyword;
     protected String description;
-    protected Double amount;
+    protected double amount;
     protected boolean isPermanent;
+    protected boolean isSilent;
+    protected int group;
     protected int uid;
-    protected Person newPerson;
+    protected int category;
 
-    public AddRecordCommand(String userInput, PersonList personList) throws Exception {
-        super(userInput, personList);
+    public AddRecordCommand(String userInput, Family family) throws PlanITariumException {
+        super(userInput, family);
+        this.type = "AddRecordCMD";
         keyword = Parser.parseKeyword(userInput);
         description = Parser.parseDescription(userInput);
         isPermanent = Parser.parseRecurringStatus(userInput);
-        uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), personList);
-        assert (uid < 1) : USER_INDEX_NOT_VALID;
-        newPerson = personList.getPerson(uid);
-
+        group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
+        uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
+        category = Parser.getValidCategoryIndex(Parser.parseCategoryIndex(userInput));
+        this.isSilent = Constants.FOR_USER;
+        assert (uid < 1) : Constants.USER_INDEX_NOT_VALID;
+        logger.log(Level.INFO, String.format(LOG_ADDRECORD_INFO, description, category, uid, group));
     }
 
     @Override
-    public void execute() throws Exception {
-        assert (keyword != null) : KEYWORD_NOT_NULL;
-        assert (userInput != null) : INPUT_NOT_NULL;
-        assert (newPerson != null) : PERSON_NOT_NULL;
-        assert (personList != null) : PERSONLIST_NOT_NULL;
-        assert (description != null) : DESCRIPTION_NOT_NULL;
+    public void execute() throws PlanITariumException {
+        assert (keyword != null) : Constants.KEYWORD_NOT_NULL;
+        assert (userInput != null) : Constants.INPUT_NOT_NULL;
+        assert (family != null) : Constants.FAMILY_NOT_NULL;
+        assert (description != null) : Constants.DESCRIPTION_NOT_NULL;
         switch (keyword) {
         case ADD_INCOME_CMD:
             amount = Parser.getValidMoney(Parser.parseIncome(userInput));
-            newPerson.addIncome(description, amount, isPermanent);
+            family.addIncome(uid, group, description, amount, category, isPermanent, isSilent);
+            logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, INCOME, description, amount, category,
+                    uid, group));
             break;
         case ADD_SPENT_CMD:
             amount = Parser.getValidMoney(Parser.parseExpenditure(userInput));
-            newPerson.addExpend(description, amount, isPermanent);
+            family.addExpend(uid, group, description, amount, category, isPermanent, isSilent);
+            logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, EXPEND, description, amount, category,
+                    uid, group));
             break;
         default:
-            throw new UnknownException();
+            logger.log(Level.WARNING, Constants.LOG_ERROR_INFO);
+            throw new PlanITariumException(AddRecordCommand.class.getSimpleName());
         }
 
     }

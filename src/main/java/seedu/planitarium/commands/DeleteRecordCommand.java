@@ -1,7 +1,10 @@
 package seedu.planitarium.commands;
 
-import seedu.planitarium.exceptions.UnknownException;
+import seedu.planitarium.ProjectLogger;
+import seedu.planitarium.exceptions.PlanITariumException;
+import seedu.planitarium.global.Constants;
 import seedu.planitarium.parser.Parser;
+import seedu.planitarium.person.Family;
 import seedu.planitarium.person.Person;
 import seedu.planitarium.person.PersonList;
 
@@ -10,43 +13,44 @@ import seedu.planitarium.person.PersonList;
  * person in the list.
  */
 public class DeleteRecordCommand extends Command {
+    private static final String className = CommandFactory.class.getSimpleName();
+    private static final String fileName = className + ".log";
+    private static final ProjectLogger logger = new ProjectLogger(className, fileName);
+
     protected static final String DELETE_INCOME_CMD = "deletein";
     protected static final String DELETE_SPEND_CMD = "deleteout";
-    protected static final String INPUT_NOT_NULL = "Input should not be empty";
-    protected static final String KEYWORD_NOT_NULL = "Keywords should not be empty";
-    protected static final String USER_INDEX_NOT_VALID = "User index should be valid";
-    protected static final String PERSON_NOT_NULL = "The person is not found";
-    protected static final String PERSONLIST_NOT_NULL = "Personlist should not be null";
     protected String keyword;
     protected int index;
     protected int uid;
-    protected Person newPerson;
+    protected int group;
 
-    public DeleteRecordCommand(String userInput, PersonList personList) throws Exception {
-        super(userInput, personList);
+    public DeleteRecordCommand(String userInput, Family family) throws PlanITariumException {
+        super(userInput, family);
+        this.type = "DeleteRecordCMD";
+        group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
         keyword = Parser.parseKeyword(userInput);
-        uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), personList);
-        assert (uid < 1) : USER_INDEX_NOT_VALID;
-        newPerson = personList.getPerson(uid);
+        uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
+        assert (uid < 1) : Constants.USER_INDEX_NOT_VALID;
     }
 
     @Override
-    public void execute() throws Exception {
-        assert (keyword != null) : KEYWORD_NOT_NULL;
-        assert (userInput != null) : INPUT_NOT_NULL;
-        assert (newPerson != null) : PERSON_NOT_NULL;
-        assert (personList != null) : PERSONLIST_NOT_NULL;
+    public void execute() throws PlanITariumException {
+        assert (keyword != null) : Constants.KEYWORD_NOT_NULL;
+        assert (userInput != null) : Constants.INPUT_NOT_NULL;
+        assert (family != null) : Constants.FAMILY_NOT_NULL;
         switch (keyword) {
         case DELETE_INCOME_CMD:
-            index = Parser.getValidIncomeIndex(Parser.parseRecordIndex(userInput), newPerson);
-            newPerson.deleteIncome(index);
+            index = Parser.getValidIncomeIndex(Parser.parseRecordIndex(userInput),
+                    family.getNumberOfIncomes(uid, group));
+            family.deleteIncome(uid, group, index);
             break;
         case DELETE_SPEND_CMD:
-            index = Parser.getValidExpenditureIndex(Parser.parseRecordIndex(userInput), newPerson);
-            newPerson.deleteExpend(index);
+            index = Parser.getValidExpenditureIndex(Parser.parseRecordIndex(userInput),
+                    family.getNumberOfExpenditures(uid, group));
+            family.deleteExpend(uid, group, index);
             break;
         default:
-            throw new UnknownException();
+            throw new PlanITariumException(DeleteRecordCommand.class.getSimpleName());
         }
     }
 }

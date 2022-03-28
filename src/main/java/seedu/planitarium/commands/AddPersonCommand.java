@@ -1,30 +1,46 @@
+//@@author hlwang56
+
 package seedu.planitarium.commands;
 
-import seedu.planitarium.exceptions.DuplicateDelimiterException;
-import seedu.planitarium.exceptions.EmptyStringException;
-import seedu.planitarium.exceptions.MissingDelimiterException;
+import seedu.planitarium.ProjectLogger;
+import seedu.planitarium.exceptions.PlanITariumException;
+import seedu.planitarium.global.Constants;
 import seedu.planitarium.parser.Parser;
-import seedu.planitarium.person.PersonList;
+import seedu.planitarium.person.Family;
+
+import java.util.logging.Level;
 
 /**
  * Executes the add command and add a person to the list.
  */
 public class AddPersonCommand extends Command {
-    protected static final String NAME_NOT_NULL = "Name should not be null";
-    protected static final String PERSONLIST_NOT_NULL = "Personlist should not be null";
-    protected String name;
+    private static final String className = CommandFactory.class.getSimpleName();
+    private static final String fileName = className + ".log";
+    private static final ProjectLogger logger = new ProjectLogger(className, fileName);
 
-    public AddPersonCommand(String userInput, PersonList personList)
-            throws MissingDelimiterException, DuplicateDelimiterException, EmptyStringException {
-        super(userInput, personList);
+    protected static final String LOG_ADDPERSONCMD_INFO = "'%s' is going to be added to group '%d'";
+    protected static final String LOG_EXECUTE_INFO = "'%s' is added to group '%d'";
+
+    protected String name;
+    protected int group;
+    protected boolean isSilent;
+
+    public AddPersonCommand(String userInput, Family family) throws PlanITariumException {
+        super(userInput, family);
+        this.type = "AddPersonCMD";
         this.name = Parser.parseName(userInput);
+        this.group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
+        this.isSilent = Constants.FOR_USER;
+        logger.log(Level.INFO, String.format(LOG_ADDPERSONCMD_INFO, name, group));
     }
 
     @Override
-    public void execute() throws Exception {
-        assert (name != null) : NAME_NOT_NULL;
-        assert (personList != null) : PERSONLIST_NOT_NULL;
-        personList.addPerson(name);
+    public void execute() throws PlanITariumException {
+        assert (name != null) : Constants.NAME_NOT_NULL;
+        assert (family != null) : Constants.PERSONLIST_NOT_NULL;
+        family.addPerson(group, name, isSilent);
+        logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, name, group));
     }
+
 
 }
