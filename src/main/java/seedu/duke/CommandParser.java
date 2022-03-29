@@ -116,7 +116,7 @@ public class CommandParser {
             userCommand = new AssignHousekeeperCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(VIEW_AVAILABLE_HOUSEKEEPER_DAY)) {
             commandStringWithoutCommand = commandString.replace(VIEW_AVAILABLE_HOUSEKEEPER_DAY, "");
-            userCommand = new GetAvailableHousekeeper(commandStringWithoutCommand);
+            userCommand = new GetAvailableHousekeeperCommand(commandStringWithoutCommand);
         } else if (commandString.startsWith(RESET_AVAILABILITY)) {
             userCommand = new ResetAvailabilityCommand();
         } else if (commandString.startsWith(DELETE_PROFILE)) {

@@ -8,13 +8,13 @@ import seedu.duke.command.Command;
 /**
  * Number given from user to view list of housekeeper available on any day from Monday to Sunday.
  */
-public class GetAvailableHousekeeper extends Command {
+public class GetAvailableHousekeeperCommand extends Command {
     private int searchDay;
     private static Logger logger = Logger.getLogger("housekeeperLogger");
     private static final int MONDAY_INDICATE = 1;
     private static final int SUNDAY_INDICATE = 7;
 
-    public GetAvailableHousekeeper(String commandStringWithoutCommand) throws HotelLiteManagerException {
+    public GetAvailableHousekeeperCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
         if (commandStringWithoutCommand.isEmpty()) {
             logger.log(Level.WARNING, "Empty Day.");
             throw new EmptyDayException();

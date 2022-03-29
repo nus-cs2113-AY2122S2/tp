@@ -33,15 +33,8 @@ public class DeleteHousekeeperCommand extends Command {
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws UserDoesNotExistException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
-        boolean isRecorded = housekeeperList.hasNameAdded(name);
-        if (isRecorded) {
-            int housekeeperToRemoveIndex = housekeeperList.getHousekeeperRemove(name);
-            housekeeperList.removeHousekeeper(housekeeperToRemoveIndex);
-            ui.printMessage("Deleted " + name + " from the list of profile");
-            ui.printMessage("Take note! Total pax of housekeeper:  " + housekeeperList.getTotalHousekeeper());
-        } else {
-            logger.log(Level.WARNING, "Housekeeper to be deleted was not in the list.");
-            throw new UserDoesNotExistException();
-        }
+        housekeeperList.removeHousekeeperInList(name);
+        ui.printMessage("Deleted " + name + " from the list of profile");
+        ui.printMessage("Take note! Total pax of housekeeper:  " + housekeeperList.getTotalHousekeeper());
     }
 }
