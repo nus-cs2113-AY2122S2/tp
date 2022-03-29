@@ -1,9 +1,11 @@
 package seedu.meetingjio;
 
 import java.util.Scanner;
+
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.storage.StorageFile;
 import seedu.meetingjio.ui.Ui;
+
 import static seedu.meetingjio.common.Messages.MESSAGE_DIVIDER;
 
 /**
@@ -39,8 +41,9 @@ public class MeetingJio {
             StorageFile.loadData(masterTimetable);
             Ui.showWelcomeMessage();
         } catch (RuntimeException e) {
-            /**TextUi.showInitFailedMessage();*/
-            e.printStackTrace();
+            Ui.showInitFailedMessage();
+            /**e.printStackTrace();*/
+            System.out.println(e.getMessage());
         }
     }
 }
