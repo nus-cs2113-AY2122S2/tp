@@ -1,6 +1,7 @@
-package seedu.sherpass.util;
+package seedu.sherpass.timer;
 
 import seedu.sherpass.task.TaskList;
+import seedu.sherpass.util.Ui;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;

@@ -1,4 +1,4 @@
-package seedu.sherpass.util;
+package seedu.sherpass.timer;
 
 import seedu.sherpass.command.Command;
 import seedu.sherpass.command.MarkCommand;
@@ -9,8 +9,15 @@ import seedu.sherpass.util.parser.TimerParser;
 
 import seedu.sherpass.task.TaskList;
 
-import static seedu.sherpass.constant.Message.EMPTY_STRING;
+
+import seedu.sherpass.util.Storage;
+import seedu.sherpass.util.Ui;
+
+import seedu.sherpass.util.parser.TimetableParser;
+
+import static seedu.sherpass.constant.Index.STUDY_PARAMETER_INDEX;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_TIMER_INPUT_MESSAGE;
+import static seedu.sherpass.constant.Message.EMPTY_STRING;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -78,7 +85,7 @@ public class TimerLogic implements WindowListener {
      * @param storage     Storage.
      * @param parsedInput parsedInput.
      */
-    public void markTask(Storage storage, String[] parsedInput) {
+    public void markTask(Storage storage, String parsedInput) {
         if (isTimerPausedOrStopped()) {
             executeMark(storage, parsedInput);
         } else {
@@ -86,7 +93,8 @@ public class TimerLogic implements WindowListener {
         }
     }
 
-    private void executeMark(Storage storage, String[] parsedInput) {
+
+    private void executeMark(Storage storage, String parsedInput) {
         Command c = TaskParser.prepareMarkOrUnmark(parsedInput, MarkCommand.COMMAND_WORD, taskList);
         if (c != null) {
             c.execute(taskList, ui, storage);
@@ -113,7 +121,7 @@ public class TimerLogic implements WindowListener {
     }
 
     private void executeShow(Storage storage, String[] parsedInput) {
-        Command c = TaskParser.prepareShow(parsedInput);
+        Command c = TimetableParser.prepareShow(parsedInput);
         if (c != null) {
             c.execute(taskList, ui, storage);
             printAvailableCommands();
@@ -191,17 +199,27 @@ public class TimerLogic implements WindowListener {
         return timer.isTimerRunning();
     }
 
+
+    private String selectStudyTimer(String[] parsedInput) {
+        if (parsedInput[STUDY_PARAMETER_INDEX].trim().equals("stopwatch")) {
+            return "stopwatch";
+        }
+        return "countdown";
+    }
+
     /**
      * Resets the timer by creating a new timer object, which can then be started by the user.
      */
     public void callResetTimer(String[] parsedInput) {
-        String parameter = TimerParser.parseStudyParameter(parsedInput);
+        String parameter = selectStudyTimer(parsedInput);
         if (parameter.equals("stopwatch")) {
             timer = new Stopwatch(taskList, ui, jframe, jlabel);
             return;
         }
         timer = new Countdown(taskList, ui, jframe, jlabel);
     }
+
+
 
     private boolean isTimerPausedOrStopped() {
         if (!isTimerInitialised) {
