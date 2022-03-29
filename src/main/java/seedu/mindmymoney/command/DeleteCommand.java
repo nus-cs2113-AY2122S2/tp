@@ -1,6 +1,7 @@
 package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
+import seedu.mindmymoney.constants.PrintStrings;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.IncomeList;

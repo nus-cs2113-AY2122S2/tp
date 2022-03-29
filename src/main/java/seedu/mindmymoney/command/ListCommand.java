@@ -79,10 +79,11 @@ public class ListCommand extends Command {
 
         for (Expenditure i : expenditureList.expenditureListArray) {
             if (i.getCategory() == null) {
-                listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription() + "\n";
+                listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription()
+                        + " [" + i.getTime() + "]" + "\n";
             } else {
                 listInString += indexOfList + ". $" + i.getAmount() + " on " + i.getDescription() + " from "
-                        + i.getCategory() + "\n";
+                        + i.getCategory() + " [" + i.getTime() + "]" + "\n";
             }
             indexOfList++;
         }
@@ -116,8 +117,8 @@ public class ListCommand extends Command {
         int indexOfList = 1;
         String listInString = "";
         for (CreditCard i : creditCardList.creditCardListArray) {
-            listInString += indexOfList + ". Name:" + i.getNameOfCard() + ". Cashback:" + i.getCashback()
-                    +  "%. Card limit: $" + i.getMonthlyCardLimit() + ". Card balance: $" + i.getBalance() + "\n";
+            listInString += indexOfList + ". Name: " + i.getNameOfCard() + " Cashback: " + i.getCashback()
+                    +  "% Card limit: $" + i.getMonthlyCardLimit() + " Card balance: $" + i.getBalance() + "\n";
             indexOfList++;
         }
 

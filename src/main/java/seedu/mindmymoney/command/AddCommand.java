@@ -131,7 +131,6 @@ public class AddCommand extends Command {
                 FLAG_OF_CARD_BALANCE);
         String cardBalance = parseInputWithCommandFlag(addInput, FLAG_OF_CARD_BALANCE,
                 FLAG_END_VALUE);
-
         creditCardList.add(new CreditCard(cardName, Double.parseDouble(cashBack), Float.parseFloat(cardLimit),
                 Float.parseFloat(cardBalance)));
 
@@ -180,7 +179,6 @@ public class AddCommand extends Command {
     @Override
     public void executeCommand() throws MindMyMoneyException {
         if (hasCreditCardFlag()) {
-            System.out.println(hasCreditCardFlag());
             addCreditCard();
         } else if (hasIncomeFlag()) {
             addIncome();

@@ -44,8 +44,17 @@ class CalculateInputCommandTest {
         setUp();
         new CalculateInputCommand("/epm Mar 2022", user).executeCommand();
         tearDown();
-
-        String expectedOutput = "Total expenditure in the month of Mar 2022 is 3300.0";
+        String expectedOutput = "Total expenditure in the month of Mar 2022 is $3300.0." + System.lineSeparator()
+                + System.lineSeparator() + "BREAKDOWN OF EXPENSES:" + System.lineSeparator()
+                + "-----------------------------------------------" + System.lineSeparator()
+                + "FOOD:           0.0%" + System.lineSeparator()
+                + "TRANSPORT:      0.0%" + System.lineSeparator()
+                + "UTILITIES:      0.0%" + System.lineSeparator()
+                + "PERSONAL:      ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 100.0%" + System.lineSeparator()
+                + "ENTERTAINMENT:  0.0%" + System.lineSeparator()
+                + "OTHERS:         0.0%" + System.lineSeparator()
+                + "-----------------------------------------------"
+                ;
         assertEquals(expectedOutput, capturedOut.toString().trim());
     }
 
@@ -67,8 +76,17 @@ class CalculateInputCommandTest {
         setUp();
         new CalculateInputCommand("/epm mAr 2022", user).executeCommand();
         tearDown();
-
-        String expectedOutput = "Total expenditure in the month of Mar 2022 is 0.6";
+        String expectedOutput = "Total expenditure in the month of Mar 2022 is $0.6." + System.lineSeparator()
+                + System.lineSeparator() + "BREAKDOWN OF EXPENSES:" + System.lineSeparator()
+                + "-----------------------------------------------" + System.lineSeparator()
+                + "FOOD:           0.0%" + System.lineSeparator()
+                + "TRANSPORT:      0.0%" + System.lineSeparator()
+                + "UTILITIES:      0.0%" + System.lineSeparator()
+                + "PERSONAL:      ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇ 100.0%" + System.lineSeparator()
+                + "ENTERTAINMENT:  0.0%" + System.lineSeparator()
+                + "OTHERS:         0.0%" + System.lineSeparator()
+                + "-----------------------------------------------"
+                ;
         assertEquals(expectedOutput, capturedOut.toString().trim());
     }
 

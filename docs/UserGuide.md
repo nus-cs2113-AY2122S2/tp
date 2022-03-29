@@ -58,8 +58,8 @@ Click on the hyperlinks in the content page above to quick navigation on the pag
       Updates index 1 to reflect $3 porridge that was paid by cash on March 2022 to the list.
     * **`delete`**`2` : Deletes the 2nd expenditure shown in the expenditure list.
     * **`bye`** : Exits the app.
-
-7. Refer to the [Features](#features) below for details of each command.
+    
+6. Refer to the [Features](#features) below for details of each command.
 
 ## Command Summary (Expenses)
 
@@ -99,7 +99,7 @@ Format:`help /expenses`for expenses commands <br>
 
 
 ### Add an expenditure to your program: `add`
-Adds an expenditure to your program. Only **one** expenditure can only be added per command.  
+Adds an expenditure to your program. Only **one** expenditure can only be added per command.
 Format:`add /e [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`
 * `[PAYMENT_METHOD]` refers to the method of payment used.
     * Enter `cash` or the name of a credit card you have saved.
@@ -131,7 +131,7 @@ Example:`add /e cash /c Food /d Porridge /a 4.50 /t 2022-03`<br>
    > input.
 
 ### Display current list of expenditures: `list`
-Prints in the terminal the current list of expenditures that you have logged so far   
+Prints in the terminal the current list of expenditures that you have logged so far
 Format:`list /expenses` lists the expenses in the list. <br>
 ![list_expenses screenshot](./images/list_expenses.PNG)
 
@@ -172,7 +172,7 @@ Format:`calculate /epm MMM YYYY`
 
 
 ### Exiting MindMyMoney application: `bye`
-Shuts down the MindMyMoney application.  
+Shuts down the MindMyMoney application.
 Format:`bye`  <br>
 ![bye screenshot](./images/bye_eg.PNG)
 
@@ -226,22 +226,18 @@ For example: `update /cc 1 /n OCBC /cb 1.5 /cl 500 /bal 1000`  <br>
 ### Removing a credit card on your list: `delete`
 Delete a credit card from your list, by specifying the credit card's index.  
 Use the `list /cc` command to view the current indices of your credit cards.   
-Format:`delete /cc [INDEX]`  
+Format:`delete /cc [INDEX]`
 For example: `delete /cc 1` <br>
 ![delete_cc screenshot](./images/delete_cc.PNG)
 
-### Exiting MindMyMoney application: `bye`
-Shuts down the MindMyMoney application.  
-Format:`bye`  <br>
-![bye screenshot](./images/bye_eg.PNG)
 
 ### Saving the data:
-Mindmymoney data are saved in the hard disk automatically after any command that changes the data.
+MindMyMoney data are saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
 ## FAQ
 
-**Q**: Why is my data not saved when I run Mindmymoney in different folders?
+**Q**: Why is my data not saved when I run MindMyMoney in different folders?
 
-**A**: Mindmymoney saves data in the current directory. To ensure all the data is saved properly,
-run Mindmymoney only in the _home folder_. 
+**A**: MindMyMoney saves data in the current directory. To ensure all the data is saved properly,
+run MindMyMoney only in the _home folder_. 

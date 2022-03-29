@@ -77,9 +77,9 @@ public class HelpCommand extends Command {
 
             System.out.println(helpPage);
         } else {
-            System.out.println("Invalid command!\n"
-                    + "Type \"help /expenses\" to see the list of supported expenditure commands\n"
-                    + "Use \"help /cc\" to view list of all supported Credit Card commands"
+            System.out.println("Invalid command! \n"
+                    + "Type \"help /expenses\" to view the list of supported expenditure commands\n"
+                    + "Type \"help /cc\" to view the list of supported Credit Card commands"
                     + System.lineSeparator());
         }
     }
@@ -132,8 +132,8 @@ public class HelpCommand extends Command {
             printIncomeHelpPage();
         } else {
             throw new MindMyMoneyException("Please ensure that you have entered a valid list command.\n"
-                    + "Use 'list /expenses' to view your current list of expenses\n"
-                    + "Use 'list /cc' to view your current list of stored credit cards");
+                    + "Type 'list /expenses' to view your current list of expenses\n"
+                    + "Type 'list /cc' to view your current list of stored credit cards");
         }
     }
 }

@@ -1,6 +1,7 @@
 package seedu.mindmymoney.helper;
 
 import seedu.mindmymoney.MindMyMoneyException;
+import seedu.mindmymoney.constants.ExpenditureCategoryTypes;
 import seedu.mindmymoney.constants.ExpenditureFields;
 import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.data.ExpenditureList;
@@ -58,7 +59,8 @@ public class GeneralFunctions {
         throws MindMyMoneyException {
         try {
             if (!hasCorrectFlagFormat(input, startingFlag, endingFlag)) {
-                throw new MindMyMoneyException("You are missing a flag or lack the spacing between the flags!");
+                throw new MindMyMoneyException("You are missing a flag or lack the spacing between the flags!\n"
+                        + "For eg. \"add /e cash /c Food /d Porridge /a 4.50 /t 2022-03\"");
             }
 
             startingFlag = startingFlag + " ";
@@ -151,6 +153,25 @@ public class GeneralFunctions {
             }
         }
         return foundItems;
+    }
+
+    /**
+     * Searches for matching items in Category field from an arraylist and returns a list of found items.
+     *
+     * @param categoryType Category type to search for
+     * @param foundItems List of expense items.
+     * @param foundCategoryTypeList List to store items found.
+     * @return The list that stores the expense items found.
+     */
+    public static ArrayList<Expenditure> findMatchingCategoryInArraylist(ExpenditureCategoryTypes categoryType,
+                                                                  ArrayList<Expenditure> foundItems,
+                                                                  ArrayList<Expenditure> foundCategoryTypeList) {
+        for (Expenditure item : foundItems) {
+            if (item.getCategory().contains(capitalise(categoryType.toString()))) {
+                foundCategoryTypeList.add(item);
+            }
+        }
+        return foundCategoryTypeList;
     }
 
     /**
