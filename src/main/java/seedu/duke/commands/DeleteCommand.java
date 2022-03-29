@@ -1,13 +1,13 @@
 package seedu.duke.commands;
 
 import java.util.Objects;
-import java.util.Scanner;
 
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.data.TaskList;
+import seedu.duke.ui.TextUi;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 import seedu.duke.util.NumberConstants;
@@ -99,18 +99,18 @@ public class DeleteCommand extends Command {
      * @return Returns true if user input is "yes", false if "no".
      */
     public Boolean getUserConfirmation(Module module) {
-        Scanner scanner = new Scanner(System.in);
+        TextUi ui = new TextUi();
         String prompt = String.format(DELETE_CONFIRMATION, module);
-        System.out.println(prompt);
+        ui.showMessage(prompt);
         String userConfirmation;
         while (true) {
-            userConfirmation = scanner.nextLine().toLowerCase();
+            userConfirmation = ui.getUserCommand();
             if (userConfirmation.equals("yes")) {
                 return true;
             } else if (userConfirmation.equals("no")) {
                 return false;
             } else {
-                System.out.println(DELETE_CONFIRMATION_INPUT_ERROR);
+                ui.showMessage(DELETE_CONFIRMATION_INPUT_ERROR);
             }
         }
     }
