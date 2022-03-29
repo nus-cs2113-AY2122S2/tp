@@ -7,6 +7,7 @@ import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class ActivityTest {
@@ -62,23 +63,23 @@ class ActivityTest {
     }
 
     /**
-     * Checks if -1 is returned when an Activity object with a smaller unique activity identifier
+     * Checks if a negative integer is returned when an Activity object with a smaller unique activity identifier
      * is compared against an Activity object with a larger unique activity identifier.
      */
     @Test
-    void compareTo_smallerActivityIdInput_returnsNegativeOne() {
+    void compareTo_smallerActivityIdInput_returnsNegative() {
         int compareResults = activityOne.compareTo(activityTwo);
-        assertEquals(-1, compareResults);
+        assertTrue(compareResults < 0);
     }
 
     /**
-     * Checks if 1 is returned when an Activity object with a smaller unique activity identifier
+     * Checks if a positive integer is returned when an Activity object with a smaller unique activity identifier
      * is compared against an Activity object with a larger unique activity identifier.
      */
     @Test
-    void compareTo_smallerActivityIdInput_returnsOne() {
+    void compareTo_smallerActivityIdInput_returnsPositive() {
         int compareResults = activityTwo.compareTo(activityOne);
-        assertEquals(1, compareResults);
+        assertTrue(compareResults > 0);
     }
 
     /**

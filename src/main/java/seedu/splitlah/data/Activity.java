@@ -107,12 +107,11 @@ public class Activity implements Serializable, Comparable<Activity> {
      * Returns a String object of the persons involved in the activity and their respective costs for the activity.
      *
      * @return A String object representing persons involved and their respective costs owed.
-     * @throws InvalidDataException If the person in the involvedPersonsList did not participate in the activity.
+     * @throws InvalidDataException If there is a mismatch between the activity cost owed and the person involved
+     *                              in the activity.
      */
     private String getInvolvedListString() throws InvalidDataException {
-        if (involvedPersonList.isEmpty()) {
-            return Message.ERROR_ACTIVITY_EMPTY_INVOLVED_PERSON_LIST;
-        }
+        assert !involvedPersonList.isEmpty() : Message.ASSERT_ACTIVITY_EMPTY_INVOLVED_PERSON_LIST;
 
         TableFormatter summaryTable = new TableFormatter(
                 INVOLVED_PERSON_LIST_COLS[0],
