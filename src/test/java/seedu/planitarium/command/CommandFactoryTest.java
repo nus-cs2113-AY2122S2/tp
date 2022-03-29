@@ -175,7 +175,7 @@ public class CommandFactoryTest {
             factory.getCommand(CommandsForTesting.DELETEEXPEND, family1).execute();
             factory.getCommand(CommandsForTesting.OVERVIEW, family1).execute();
             factory.getCommand(CommandsForTesting.DELETEPERSON, family1).execute();
-            factory.getCommand(CommandsForTesting.HELP, family1);
+            factory.getCommand(CommandsForTesting.HELP, family1).execute();
         } catch (Exception e) {
             fail();
         }
