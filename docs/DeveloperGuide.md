@@ -1,8 +1,8 @@
 # WerkIt! Developer Guide
 
 ## Table of Contents
-* [Acknowledgements](#acknowledgements)
 * [About this Guide](#about-this-guide)
+* [Acknowledgements](#acknowledgements)
 * [Setting Up your Development Environment](#setting-up-your-development-environment)
 * [Design](#design)
 * [Implementation](#implementation)
@@ -12,19 +12,19 @@
 * [Glossary](#glossary)
 * [Instructions for Manual Testing](#instructions-for-manual-testing)
 
+## About this Guide
+This developer guide serves a documentation of the development of WerkIt!, an application that was created to help
+prospective users to plan their exercise routines.
+
+This technical document is meant for current and future developers of WerkIt! as a reference point on the design,
+implementation, and other technical and non-technical aspects of the application.
+
 ## Acknowledgements
 The following websites and codebases were referenced and adapted for our project:
 
 * AddressBook-Level2 project ([Website](https://se-education.org/addressbook-level2/) | 
 [GitHub](https://github.com/se-edu/addressbook-level2))
 * Team Member Alan Low's individual project (iP) codebase ([GitHub](https://github.com/alanlowzies/ip))
-
-## About this Guide
-This developer guide serves a documentation of the development of WerkIt!, an application that was created to help
-prospective users to plan their exercise routines.
-
-This technical document is meant for current and future developers of WerkIt! as a reference point on the design,
-implementation, and other technical and non-technical aspects of the application. 
 
 ## Setting Up your Development Environment
 ### Requirements
