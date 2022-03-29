@@ -57,4 +57,6 @@ View Items With Zero Pax
 View Items With Zero
 Add Item Premium Spoon / 500
 Add Item Table / 2000
+Update Item Pax Table / 100000000
+Add Item Swiss Watch / 100000000
 bye

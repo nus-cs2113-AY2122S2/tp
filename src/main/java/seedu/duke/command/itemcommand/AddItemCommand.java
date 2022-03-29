@@ -94,7 +94,7 @@ public class AddItemCommand extends Command {
             itemLogger.log(Level.WARNING, "Detected an invalid item pax for AddItemCommand. Exception thrown.");
             throw new InvalidItemPaxException();
         }
-        if (itemPax <= 0) {
+        if (itemPax <= 0 || itemPax > 1000000) {
             itemLogger.log(Level.WARNING, "Detected an invalid item pax for AddItemCommand. Exception thrown.");
             throw new InvalidItemPaxException();
         }
