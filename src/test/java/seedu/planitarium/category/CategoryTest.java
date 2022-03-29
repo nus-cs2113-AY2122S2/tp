@@ -27,6 +27,10 @@ class CategoryTest {
     private static final String NAME_ENTERTAINMENT = "ENTERTAINMENT";
 
     private static final PrintStream ORIGINAL_OUT = System.out;
+    private static final String EXPECTED_LABELS = "1. Others" + System.lineSeparator()
+            + "2. Food and Drinks" + System.lineSeparator() + "3. Home and Utilities" + System.lineSeparator()
+            + "4. Health and Medical" + System.lineSeparator() + "5. Transportation" + System.lineSeparator()
+            + "6. Fun and Entertainment" + System.lineSeparator();
 
     @Test
     void getLabel_enumLabelExists_success() {
@@ -111,12 +115,8 @@ class CategoryTest {
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOut));
 
-        String expected = "1. Others" + System.lineSeparator() + "2. Food and Drinks" + System.lineSeparator()
-                + "3. Home and Utilities" + System.lineSeparator() + "4. Health and Medical" + System.lineSeparator()
-                + "5. Transportation" + System.lineSeparator() + "6. Fun and Entertainment" + System.lineSeparator();
-
         Category.listCategories();
-        assertEquals(expected, newOut.toString());
+        assertEquals(EXPECTED_LABELS, newOut.toString());
 
         System.setOut(ORIGINAL_OUT);
     }
