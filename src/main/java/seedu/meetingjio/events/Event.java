@@ -1,12 +1,10 @@
 package seedu.meetingjio.events;
 
-import java.util.Locale;
-
 public abstract class Event {
     private String title;
-    public String day;
-    public int startTime;
-    public int endTime;
+    private String day;
+    private int startTime;
+    private int endTime;
     private String mode;
 
     public Event(String title, String day, int startTime, int endTime, String mode) {
@@ -14,6 +12,46 @@ public abstract class Event {
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.mode = mode;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public int getStartTime() {
+        return startTime;
+    }
+
+    public int getEndTime() {
+        return endTime;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public void setStartTime(int startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(int endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setMode(String mode) {
         this.mode = mode;
     }
 
@@ -82,7 +120,7 @@ public abstract class Event {
      *
      * @return numericDay Integer that corresponds to the day of the event
      */
-    public int getDay() {
+    public int getDayInInt() {
         int numericDay = 0;
         switch (day.toLowerCase()) {
         case "monday":

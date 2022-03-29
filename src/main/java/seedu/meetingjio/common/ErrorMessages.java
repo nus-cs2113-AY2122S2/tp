@@ -5,7 +5,7 @@ package seedu.meetingjio.common;
  */
 public class ErrorMessages {
 
-    public static final String ERROR_INDEX_OUT_OF_BOUND = "Hi I need a valid index in the list so I can delete";
+    public static final String ERROR_INDEX_OUT_OF_BOUND = "Hi I need a valid index in the list";
     public static final String ERROR_INVALID_INDEX_FORMAT = "Hi I did not receive a proper "
             + "integer that I can parse";
     public static final String ERROR_MISSING_PARAMETERS_ADD_EVENT = "Hi 1 or more parameters are missing\n"
@@ -59,6 +59,7 @@ public class ErrorMessages {
     public static final String ERROR_TIMETABLE_NOT_FOUND_TO_DELETE = "User and his Timetable not found";
     public static final String ERROR_EXCEPTION_NOT_HANDLED = "New exception found that is not handled. Logged this";
     public static final String ERROR_DUPLICATE_USER = "This user already exists. New timetable will not be created.";
+    public static final String ERROR_INVALID_ATTRIBUTE_VALUE = "Invalid attribute value.";
 
     // Meeting
     public static final String ERROR_OVERLAPPING_MEETING = "This meeting cannot be added as "

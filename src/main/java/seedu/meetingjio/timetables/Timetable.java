@@ -64,7 +64,7 @@ public class Timetable {
      * @param newEvent Event to be added
      * @return true if there is identical event, otherwise false
      */
-    private boolean isDuplicate(Event newEvent) {
+    public boolean isDuplicate(Event newEvent) {
         for (int i = 0; i < list.size(); i++) {
             Event event = list.get(i);
             if (event.equals(newEvent)) {
@@ -81,7 +81,7 @@ public class Timetable {
      * @param newEvent Event to be added
      * @return true if there is overlap, otherwise false
      */
-    private boolean isOverlap(Event newEvent) {
+    public boolean isOverlap(Event newEvent) {
         for (int i = 0; i < list.size(); i++) {
             Event event = list.get(i);
             if (event.overlaps(newEvent)) {
@@ -102,9 +102,9 @@ public class Timetable {
      * @return true if Event E1 comes earlier than Event E2, false otherwise
      */
     private boolean isEarlier(Event event1, Event event2) {
-        if (event1.getDay() < event2.getDay()) {
+        if (event1.getDayInInt() < event2.getDayInInt()) {
             return true;
-        } else if (event1.getDay() == event2.getDay() && event1.startTime < event2.startTime) {
+        } else if (event1.getDayInInt() == event2.getDayInInt() && event1.getStartTime() < event2.getEndTime()) {
             return true;
         }
         return false;
@@ -155,9 +155,9 @@ public class Timetable {
     public void populateBusySlots(int[][] busySlots) {
         for (int i = 0; i < list.size(); i++) {
             Event event = list.get(i);
-            int numericDay = event.getDay();
-            int numericStartTime = FreeCommand.convertTimeToFreeArrayIndex(event.startTime);
-            int numericEndTime = FreeCommand.convertTimeToFreeArrayIndex(event.endTime);
+            int numericDay = event.getDayInInt();
+            int numericStartTime = FreeCommand.convertTimeToFreeArrayIndex(event.getStartTime());
+            int numericEndTime = FreeCommand.convertTimeToFreeArrayIndex(event.getEndTime());
             for (int j = numericStartTime; j < numericEndTime; j++) {
                 busySlots[numericDay - 1][j] = BUSY;
             }
