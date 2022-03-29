@@ -206,4 +206,27 @@ public class IncomeList extends MoneyList {
             incomeArrayList.get(index - 1).setDescription(description);
         }
     }
+
+    /**
+     * Search through income list for matching description or amount.
+     * @param description The user's search string.
+     */
+    public void find(String description) {
+        logger.log(Level.INFO, LOG_FIND);
+        for (Income item : incomeArrayList) {
+            matchString(description, item);
+        }
+    }
+
+    /**
+     * Check if income's description or amount contains input string
+     * @param description The user's search string.
+     * @param item The income object
+     */
+    private void matchString(String description, Income item) {
+        if (item.getDescription().contains(description) ||
+                Double.toString(item.getAmount()).contains(description)){
+            System.out.println(item);
+        }
+    }
 }

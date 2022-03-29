@@ -3,6 +3,7 @@
 package seedu.planitarium.money;
 
 import seedu.planitarium.ProjectLogger;
+import seedu.planitarium.category.Category;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -217,7 +218,7 @@ public class ExpenditureList extends MoneyList {
     /**
      * Edits the expenditure's amount.
      * @param index The expenditure's index in the list
-     * @param isPermanent The expenditure's amount
+     * @param amount The expenditure's amount
      */
     private void editExpAmount(int index, Double amount) {
         if (amount != null) {
@@ -228,11 +229,55 @@ public class ExpenditureList extends MoneyList {
     /**
      * Edits the expenditure's description.
      * @param index The expenditure's index in the list
-     * @param isPermanent The expenditure's description
+     * @param description The expenditure's description
      */
     private void editExpDesc(int index, String description) {
         if (description != null) {
             expenditureArrayList.get(index - 1).setDescription(description);
+        }
+    }
+
+    /**
+     * Search through expenditure list for matching description or amount.
+     * @param description The user's search string.
+     * @param category The user's specified category
+     */
+    public void find(String description, int category) {
+        logger.log(Level.INFO, LOG_FIND);
+        if (category == 0){
+            matchString(description);
+        } else {
+            matchString(description, category);
+        }
+    }
+
+    /**
+     * Check the expenditure list for expenditure where its description or amount
+     * contains input string.
+     * @param description The user's search string.
+     */
+    private void matchString(String description) {
+        for (Expenditure item : expenditureArrayList) {
+            if (item.getDescription().contains(description) ||
+                    Double.toString(item.getAmount()).contains(description)){
+                System.out.println(item);
+            }
+        }
+    }
+
+    /**
+     * Check the expenditure list for expenditure where its description or amount
+     * contains input string and is the specified category.
+     * @param description The user's search string.
+     * @param category The user's specified category
+     */
+    private void matchString(String description, int category) {
+        for (Expenditure item : expenditureArrayList) {
+            if (item.getCategory().equals(Category.getLabelForIndex(category)) &&
+                    (item.getDescription().contains(description) ||
+                    Double.toString(item.getAmount()).contains(description))){
+                System.out.println(item);
+            }
         }
     }
 }
