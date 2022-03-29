@@ -3,7 +3,6 @@
 package seedu.planitarium.person;
 
 import seedu.planitarium.ProjectLogger;
-import seedu.planitarium.category.Category;
 import seedu.planitarium.global.Constants;
 import seedu.planitarium.money.Expenditure;
 import seedu.planitarium.money.Income;
