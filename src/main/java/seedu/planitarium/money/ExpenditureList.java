@@ -175,7 +175,7 @@ public class ExpenditureList extends MoneyList {
     }
 
     /**
-     * Edits the expenditure object's attribute based on the user's input values
+     * Edits the expenditure object's attribute based on the user's input values.
      * @param index The expenditure object to be updated
      * @param description The new description, if any
      * @param amount The new amount, if any
@@ -244,7 +244,7 @@ public class ExpenditureList extends MoneyList {
      */
     public void find(String description, int category) {
         logger.log(Level.INFO, LOG_FIND);
-        if (category == 0){
+        if (category == 0) {
             matchString(description);
         } else {
             matchString(description, category);
@@ -258,8 +258,8 @@ public class ExpenditureList extends MoneyList {
      */
     private void matchString(String description) {
         for (Expenditure item : expenditureArrayList) {
-            if (item.getDescription().contains(description) ||
-                    Double.toString(item.getAmount()).contains(description)){
+            if (item.getDescription().contains(description)
+                    || Double.toString(item.getAmount()).contains(description)) {
                 System.out.println(item);
             }
         }
@@ -273,11 +273,33 @@ public class ExpenditureList extends MoneyList {
      */
     private void matchString(String description, int category) {
         for (Expenditure item : expenditureArrayList) {
-            if (item.getCategory().equals(Category.getLabelForIndex(category)) &&
-                    (item.getDescription().contains(description) ||
-                    Double.toString(item.getAmount()).contains(description))){
+            if (item.getCategory().equals(Category.getLabelForIndex(category))
+                    && (item.getDescription().contains(description)
+                    || Double.toString(item.getAmount()).contains(description))) {
                 System.out.println(item);
             }
+        }
+    }
+
+    /**
+     * Iterates through expenditure list and removes all expired expenditure.
+     */
+    public void updateList() {
+        for (Expenditure item : expenditureArrayList) {
+            checkExpenditureDate(item);
+        }
+    }
+
+    /**
+     * Check and remove expenditure if expenditure is expired. In this case, it is
+     * defined as any expenditure not created this month.
+     * @param item The expenditure object
+     */
+    private void checkExpenditureDate(Expenditure item) {
+        LocalDate itemDate = item.getInitDate();
+        if (itemDate.getYear() <= LocalDate.now().getYear()
+                && itemDate.getMonthValue() < LocalDate.now().getMonthValue()) {
+            expenditureArrayList.remove(item);
         }
     }
 }

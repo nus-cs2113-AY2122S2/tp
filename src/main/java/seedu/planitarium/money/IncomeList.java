@@ -158,7 +158,7 @@ public class IncomeList extends MoneyList {
     }
 
     /**
-     * Edits the income object's attribute based on the user's input values
+     * Edits the income object's attribute based on the user's input values.
      * @param index The income object to be updated
      * @param description The new description, if any
      * @param amount The new amount, if any
@@ -219,14 +219,36 @@ public class IncomeList extends MoneyList {
     }
 
     /**
-     * Check if income's description or amount contains input string
+     * Check if income's description or amount contains input string.
      * @param description The user's search string.
      * @param item The income object
      */
     private void matchString(String description, Income item) {
-        if (item.getDescription().contains(description) ||
-                Double.toString(item.getAmount()).contains(description)){
+        if (item.getDescription().contains(description)
+                || Double.toString(item.getAmount()).contains(description)) {
             System.out.println(item);
+        }
+    }
+
+    /**
+     * Iterates through income list and removes all expired income.
+     */
+    public void updateList() {
+        for (Income item : incomeArrayList) {
+            checkIncomeDate(item);
+        }
+    }
+
+    /**
+     * Check and remove income if income is expired. In this case, it is
+     * defined as any income not created this month.
+     * @param item The income object
+     */
+    private void checkIncomeDate(Income item) {
+        LocalDate itemDate = item.getInitDate();
+        if (itemDate.getYear() <= LocalDate.now().getYear()
+                && itemDate.getMonthValue() < LocalDate.now().getMonthValue()) {
+            incomeArrayList.remove(item);
         }
     }
 }
