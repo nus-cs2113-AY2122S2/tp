@@ -12,16 +12,25 @@ import static seedu.allonus.contacts.ContactParser.parseContact;
 import static seedu.allonus.contacts.ContactParser.setContactFields;
 import static seedu.allonus.ui.TextUi.showToUser;
 
+/**
+ * The Contacts Manager and associated methods
+ */
 public class ContactsManager {
 
+    public static final String CONTACTS_ENTER_LOG_MESSAGE =
+            "Entering Contacts Manager";
     private static final String CONTACTS_WELCOME_MESSAGE =
             "Welcome to Contacts Manager";
+    public static final String CONTACTS_EXIT_LOG_MESSAGE =
+            "Exiting Contacts Manager";
+
+    public static final String CONTACTS_INVALID_COMMAND_LOG_MESSAGE =
+            "Invalid command to Contacts Manager: %s";
     private static final String CONTACTS_INVALID_COMMAND_MESSAGE =
             "Please enter a valid command for the Contacts Manager!\n"
                     + "You can try \"list\", \"add\", or \"rm\"";
-    private static final String CONTACTS_UPDATED_LIST_SIZE_MESSAGE =
-            "\nNow you have %d contacts in the list.";
 
+    public static final String CONTACTS_ENUMERATE_HEADER = " %d. %s\n";
     private static final String CONTACTS_EMPTY_LIST_MESSAGE =
             "You haven't added any contacts to your list yet!";
     private static final String CONTACTS_LIST_SUCCESS_MESSAGE =
@@ -31,9 +40,17 @@ public class ContactsManager {
             "Noted. I've removed this contact:\n  ";
     private static final String CONTACTS_REMOVE_INVALID_INDEX_MESSAGE =
             "You can only delete with a valid number that's in the list :')";
-
     private static final String CONTACTS_ADD_SUCCESS_MESSAGE =
             "Got it. I've added this contact:\n  ";
+    private static final String CONTACTS_UPDATED_LIST_SIZE_MESSAGE =
+            "\nNow you have %d contacts in the list.";
+
+    public static final String CONTACTS_FIND_MULTIPLE_KEYWORDS_MESSAGE =
+            "Please only enter one keyword!";
+    public static final String CONTACTS_FIND_NO_MATCHES_MESSAGE =
+            "There are no contacts matching this keyword!";
+    public static final String CONTACTS_FIND_SUCCESS_MESSAGE =
+            "Here are the matching contacts in your list:\n";
 
     private static final String CONTACTS_EDIT_INVALID_INDEX_MESSAGE =
             "You can only edit with a valid number that's in the list :')";
@@ -57,7 +74,7 @@ public class ContactsManager {
 
     private static void contactsWelcome() {
         printFormat(CONTACTS_WELCOME_MESSAGE);
-        logger.log(Level.FINER, "Entering Contacts Manager");
+        logger.log(Level.FINER, CONTACTS_ENTER_LOG_MESSAGE);
     }
 
     private static void listContacts() {
@@ -69,7 +86,8 @@ public class ContactsManager {
         String listAsString = "";
         for (int i = 0; i < contactsList.size(); i++) {
             Contact curr = contactsList.get(i);
-            listAsString = listAsString.concat(String.format(" %d. %s\n", i + 1, curr));
+            String currEntry = String.format(CONTACTS_ENUMERATE_HEADER, i + 1, curr);
+            listAsString = listAsString.concat(currEntry);
         }
         printFormat(CONTACTS_LIST_SUCCESS_MESSAGE + listAsString);
     }
@@ -112,7 +130,7 @@ public class ContactsManager {
     private static void findContacts(String userInput) {
         String[] commands = userInput.split(" ");
         if (commands.length > 2) {
-            printFormat("Please only enter one keyword!");
+            printFormat(CONTACTS_FIND_MULTIPLE_KEYWORDS_MESSAGE);
             return;
         }
         String keyword = commands[1];
@@ -122,13 +140,14 @@ public class ContactsManager {
             Contact curr = contactsList.get(i);
             String contactName = curr.getName().toString();
             if (contactName.contains(keyword)) {
-                listAsString = listAsString.concat(String.format(" %d. %s\n", i + 1, curr));
+                String currEntry = String.format(CONTACTS_ENUMERATE_HEADER, i + 1, curr);
+                listAsString = listAsString.concat(currEntry);
             }
         }
         if (!listAsString.equals("")) {
-            printFormat("Here are the matching contacts in your list:\n" + listAsString);
+            printFormat(CONTACTS_FIND_SUCCESS_MESSAGE + listAsString);
         } else {
-            printFormat("There are no contacts matching this keyword!");
+            printFormat(CONTACTS_FIND_NO_MATCHES_MESSAGE);
         }
     }
 
@@ -158,13 +177,19 @@ public class ContactsManager {
         printFormat(CONTACTS_EDIT_SUCCESS_MESSAGE + curr);
     }
 
+    /**
+     * Handles user inputs and calls methods corresponding
+     * to the relevant commands.
+     *
+     * @param ui An TextUi object for getting user input.
+     */
     public static void contactsRunner(TextUi ui) {
         contactsWelcome();
         String userInput;
         while (true) {
             userInput = ui.getUserInput();
             if (userInput.equals("menu")) {
-                logger.log(Level.FINER, "Exiting Contacts Manager");
+                logger.log(Level.FINER, CONTACTS_EXIT_LOG_MESSAGE);
                 return;
             } else if (userInput.equals("list")) {
                 listContacts();
@@ -178,7 +203,7 @@ public class ContactsManager {
                 editContact(userInput);
             } else {
                 printFormat(CONTACTS_INVALID_COMMAND_MESSAGE);
-                logger.log(Level.FINER, String.format("Invalid command to Contacts Manager: %s", userInput));
+                logger.log(Level.FINER, String.format(CONTACTS_INVALID_COMMAND_LOG_MESSAGE, userInput));
             }
         }
     }
