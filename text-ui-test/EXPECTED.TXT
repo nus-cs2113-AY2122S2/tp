@@ -26,9 +26,9 @@ There are currently 3 items within the item list.
 3. Item Name: SPOON Item Pax: 2
 ======== End of the list ========
 The pax of TOILET ROLL has been updated to 5.
-Error! Item Pax is invalid.
-Error! Item Pax cannot be empty.
-Error! Item Name cannot be empty.
+Error! Invalid Command -> Update Item Pax ITEM NAME / NEW PAX
+Error! Invalid Command -> Update Item Pax ITEM NAME / NEW PAX
+Error! Invalid Command -> Update Item Pax ITEM NAME / NEW PAX
 Error! Invalid Command.
 Error! Item not found in inventory.
 The pax of SPOON has been updated to 0.
@@ -38,8 +38,8 @@ TOILET ROLL has been removed from the Item List.
 There are currently 2 items within the Item List.
 Error! Item not found in inventory.
 Error! Invalid Command.
-Error! Item Name cannot be empty.
-Error! Item Name cannot be empty.
+Error! Invalid Command -> Update Item Name OLD NAME / NEW NAME
+Error! Invalid Command -> Update Item Name OLD NAME / NEW NAME
 The name of SPOON has been updated to PREMIUM SPOON.
 ========== Noted ! ==========
 [JANE]: Age: 33, Availability: <Enter Availability>
@@ -139,9 +139,6 @@ Everyone age has increased by one
 ======== Housekeeper List ========
 1. [JANE]: Age: 35, Availability: <Enter Availability>
 ======== End of the list ========
-Error! Item Name cannot be empty.
-Error! Item Name cannot be empty.
-Error! Item not found in inventory.
 Error! Invalid Command.
 =========== Item List ===========
 1. Item Name: FORK Item Pax: 15

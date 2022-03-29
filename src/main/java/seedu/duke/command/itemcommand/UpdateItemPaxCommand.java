@@ -3,13 +3,11 @@ package seedu.duke.command.itemcommand;
 import seedu.duke.command.Command;
 import seedu.duke.Item;
 import seedu.duke.HotelLiteManagerException;
-import seedu.duke.EmptyItemNameException;
-import seedu.duke.EmptyItemPaxException;
-import seedu.duke.InvalidCommandException;
-import seedu.duke.InvalidItemPaxException;
+import seedu.duke.InvalidUpdateItemPaxCommandException;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.ItemList;
+
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -38,18 +36,18 @@ public class UpdateItemPaxCommand extends Command {
         if (userInput.startsWith(DELIMITER)) {
             itemLogger.log(Level.WARNING, "Detected an empty item name for UpdateItemCommand. "
                     + "Exception thrown.");
-            throw new EmptyItemNameException();
+            throw new InvalidUpdateItemPaxCommandException();
         }
         if (userInput.endsWith(DELIMITER)) {
             itemLogger.log(Level.WARNING, "Detected an empty item name for UpdateItemCommand. "
                     + "Exception thrown.");
-            throw new EmptyItemPaxException();
+            throw new InvalidUpdateItemPaxCommandException();
         }
         StringTokenizer tokens = new StringTokenizer(userInput, DELIMITER);
         if (tokens.countTokens() != NUMBER_OF_PARTS_IN_COMMAND) {
             itemLogger.log(Level.WARNING, "Invalid formatting for UpdateItemCommand detected."
                     + " Exception thrown.");
-            throw new InvalidCommandException();
+            throw new InvalidUpdateItemPaxCommandException();
         }
         String itemName = extractItemName(tokens);
         int itemPax = extractItemPax(tokens);
@@ -70,7 +68,7 @@ public class UpdateItemPaxCommand extends Command {
         if (itemName.isEmpty()) {
             itemLogger.log(Level.WARNING, "Detected an empty item name for UpdateItemPaxCommand. "
                     + "Exception thrown.");
-            throw new EmptyItemNameException();
+            throw new InvalidUpdateItemPaxCommandException();
         }
         return itemName;
     }
@@ -90,19 +88,19 @@ public class UpdateItemPaxCommand extends Command {
         if (itemPaxStringVersion.isEmpty()) {
             itemLogger.log(Level.WARNING, "Detected an empty item name for UpdateItemPaxCommand. "
                     + "Exception thrown.");
-            throw new EmptyItemPaxException();
+            throw new InvalidUpdateItemPaxCommandException();
         }
         try {
             itemPax = Integer.parseInt(itemPaxStringVersion);
         } catch (NumberFormatException e) {
             itemLogger.log(Level.WARNING, "Detected an invalid item pax for UpdateItemPaxCommand. "
                     + "Exception thrown.");
-            throw new InvalidItemPaxException();
+            throw new InvalidUpdateItemPaxCommandException();
         }
         if (itemPax < 0) {
             itemLogger.log(Level.WARNING, "Detected an invalid item pax for UpdateItemPaxCommand. "
                     + "Exception thrown.");
-            throw new InvalidItemPaxException();
+            throw new InvalidUpdateItemPaxCommandException();
         }
         return itemPax;
     }
