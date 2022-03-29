@@ -13,6 +13,7 @@ import seedu.meetingjio.exceptions.IncorrectIndexException;
 import seedu.meetingjio.exceptions.InvalidEventTypeException;
 import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.parser.ParserLocalData;
+
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_EVENT_TYPE_LOADING;
 
 import static seedu.meetingjio.common.Messages.MESSAGE_DIVIDER;
@@ -81,8 +82,7 @@ public class StorageFile {
                                 hasMeeting = true;
                             }
                             listNum++;
-                        }
-                        else {
+                        } else {
                             throw new IncorrectIndexException();
                         }
                     }

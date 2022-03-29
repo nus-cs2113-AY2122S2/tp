@@ -37,21 +37,16 @@ public class ParserLocalData {
     public static String prepareLoadLesson(String name, String data, MasterTimetable masterTimetable) {
         try {
             checkHeadings(data);
-
             String[] eventDescription = splitArguments(data);
-
             parserHelperMethods.checkNonNullValues(eventDescription, HEADINGS.length - 1);
-
             String day = eventDescription[DAY_INDEX].toLowerCase();
             int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX]);
             int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX]);
             String mode = eventDescription[MODE_INDEX].toLowerCase();
-            String title = eventDescription[TITLE_INDEX];
-
             parserHelperMethods.checkDay(day);
             parserHelperMethods.checkTime(startTime, endTime);
             parserHelperMethods.checkMode(mode);
-
+            String title = eventDescription[TITLE_INDEX];
             return new AddLessonCommand(name, title, day, startTime, endTime, mode).execute(masterTimetable);
 
         } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
@@ -73,21 +68,16 @@ public class ParserLocalData {
 
         try {
             checkHeadings(data);
-
             String[] eventDescription = splitArguments(data);
-
             parserHelperMethods.checkNonNullValues(eventDescription, HEADINGS.length - 1);
-
             String day = eventDescription[DAY_INDEX].toLowerCase();
             int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX]);
             int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX]);
             String mode = eventDescription[MODE_INDEX].toLowerCase();
-            String title = eventDescription[TITLE_INDEX];
-
             parserHelperMethods.checkDay(day);
             parserHelperMethods.checkTime(startTime, endTime);
             parserHelperMethods.checkMode(mode);
-
+            String title = eventDescription[TITLE_INDEX];
             return new AddMeetingCommand(title, day, startTime, endTime, mode).execute(masterTimetable);
         } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
             throw new RuntimeException(ERROR_MISSING_PARAMETERS_LOAD_MEETING);
@@ -165,7 +155,7 @@ public class ParserLocalData {
     }
 
 
-    private static void checkHeadings(String data) throws MissingParameterException{
+    private static void checkHeadings(String data) throws MissingParameterException {
         boolean isFound = false;
         for (String str : HEADINGS) {
             isFound = data.contains(str);
