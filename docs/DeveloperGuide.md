@@ -24,6 +24,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ## 3.1 Add Feature
 `add_lesson` allows users to create a new lesson and add it to their own timetables
+
 `add_meeting` allows users to create a new meeting and add it to all the existing timetables
 
 The following sequence diagram shows how the `add_lesson` operation generally works.
@@ -53,6 +54,32 @@ Step 4: A message will be shown to the user, informing him that the data has bee
 The following sequence diagram shows how the save operation works:
 
 ![SaveSequenceDiagram](diagrams/SaveSequenceDiagram.png)
+
+## 3.3 Listing Events Feature
+The `list` command is a command that the user can input in order to list out the events he has in his timetable.
+
+`list [user]` displays the timetable for the particular user.
+
+`list all` displays the timetable for all users.
+
+In essence, the `list all` command repeatedly calls `list [user]` for all users.
+
+Before the timetable is listed out, it will also be sorted according to day and time for easy reading.
+
+The following sequence diagram shows how the command `` is executed.
+![ListCommandSequenceDiagram](diagrams/ListCommandSequenceDiagram.png)
+
+## 3.4 Finding Common Free Timeslots Feature
+The `free` command is a command that the user can input in order to find timeslots where all users are free.
+
+For greater customisation, `free [duration]` displays all common timeslots which has a duration longer than specified.
+
+The searching algorithm works by marking the busy slots of each timetable first.
+Timings that are not marked 'busy' are then identified as free time slots.
+
+The following sequence diagram shows how the command `free` is executed.
+![FreeCommandSequenceDiagram](diagrams/FreeCommandSequenceDiagram.png)
+
 
 ## Product scope
 ### Target user profile
@@ -91,11 +118,6 @@ NUS Students who wish to meet as a group (be it for project meetings or to eat t
 ## Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
-
-##List Command
-The list command is a command that the user can input in order the list out the lessons he has in his timetable.
-![ListCommandSequenceDiagram](diagrams/ListCommandSequenceDiagram.png)
-This is the sequence diagram when the command `list` is executed.
 
 ##Clear Command
 The clear command is one of the commands the user can execute to clear the whole list. 
