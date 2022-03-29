@@ -8,7 +8,7 @@ import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.Housekeeper;
 import seedu.duke.InvalidRoomNumberException;
-import seedu.duke.InvalidHousekeeperProfile;
+import seedu.duke.InvalidHousekeeperProfileException;
 import seedu.duke.RoomList;
 import seedu.duke.AssignmentMap;
 import seedu.duke.HousekeeperList;
@@ -89,7 +89,7 @@ public class AssignHousekeeperCommand extends Command {
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui)
-            throws InvalidRoomNumberException, InvalidHousekeeperProfile, IOException, InvalidHousekeeperNameException {
+            throws InvalidRoomNumberException, InvalidHousekeeperProfileException, IOException, InvalidHousekeeperNameException {
 
         final AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         final HousekeeperList housekeeperList = listContainer.getHousekeeperList();

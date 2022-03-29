@@ -7,7 +7,7 @@ import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.EventList;
 import seedu.duke.InvalidRoomNumberException;
-import seedu.duke.InvalidHousekeeperProfile;
+import seedu.duke.InvalidHousekeeperProfileException;
 import seedu.duke.InvalidEventException;
 import seedu.duke.InvalidDateException;
 
@@ -66,7 +66,7 @@ public class DeleteEventCommand extends Command {
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui)
-            throws InvalidRoomNumberException, InvalidHousekeeperProfile, IOException, InvalidDateException {
+            throws InvalidRoomNumberException, InvalidHousekeeperProfileException, IOException, InvalidDateException {
 
         final EventList eventList = listContainer.getEventList();
         String n = getIndex();

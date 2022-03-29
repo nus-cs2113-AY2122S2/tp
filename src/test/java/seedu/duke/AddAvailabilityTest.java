@@ -23,4 +23,9 @@ public class AddAvailabilityTest {
     public void commandParser_addCommandInvalidAvailability_exceptionThrown() {
         assertThrows(InvalidAvailabilityException.class, () -> new CommandParser().parse("availability Susan / "));
     }
+
+    @Test
+    public void commandParser_addCommandExtraSlash_exceptionThrown() {
+        assertThrows(InvalidAvailabilityException.class, () -> new CommandParser().parse("availability Susan /3/"));
+    }
 }
