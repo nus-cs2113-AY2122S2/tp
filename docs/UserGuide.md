@@ -23,20 +23,6 @@
         * [Removing a credit card on your list: `delete`](#removing-a-credit-card-on-your-list-delete)
     * [Saving the data](#saving-the-data)
 * [FAQ](#faq)
-* [Introduction](#introduction)
-* [Quick start](#quick-start)
-* [Command summary](#command-summary)
-* [Features](#features)
-   * [Display list of currently available commands: `help`](#display-list-of-currently-available-commands-help)
-   * [Add an expenditure to your program: `add`](#add-an-expenditure-to-your-program-add)
-   * [Display current list of expenditures: `list` ](#display-current-list-of-expenditures-list)
-   * [Modify an expenditure on your list: `update`](#modify-an-expenditure-on-your-list-update)
-   * [Removing an expenditure on your list: `delete`](#removing-an-expenditure-on-your-list-delete)
-   * [Calculations that Mindmymoney provide: `calculate`](#calculations-that-mindmymoney-provide-calculate)
-      * [Expenditure per month: `calculate /epm`](#expenditure-per-month-calculate-epm)
-   * [Exiting MindMyMoney application: `bye`](#exiting-mindmymoney-application-bye)
-   * [Saving the data](#saving-the-data)
-* [FAQ](#faq)
   
 ## Introduction
 ### MindMyMoney
