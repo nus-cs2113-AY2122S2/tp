@@ -6,7 +6,7 @@ import seedu.planitarium.category.Category;
 
 public class Expenditure extends Money {
 
-    private String category;
+    private int category;
 
     /**
      * Initialise a new Expenditure object.
@@ -18,15 +18,15 @@ public class Expenditure extends Money {
      */
     public Expenditure(String description, double amount, int category, boolean isPermanent) {
         super(description, amount, isPermanent);
-        this.category = Category.getLabelForIndex(category);
+        this.category = category;
     }
-
+    
     public String getCategory() {
-        return category;
+        return Category.getLabelForIndex(category);
     }
 
     public void setCategory(int category) {
-        this.category =  Category.getLabelForIndex(category);
+        this.category =  category;
     }
 
     public String saveString() {
@@ -34,5 +34,12 @@ public class Expenditure extends Money {
                 + amount + " - "
                 + isPermanent + " - "
                 + category;
+    }
+
+    @Override
+    public String toString() {
+        return  description + ": $" + String.format("%.2f", amount)
+                + " - Recurring: " + isPermanent
+                + " - Category: " + getCategory();
     }
 }
