@@ -127,7 +127,7 @@ class ActivityEditCommandTest {
      * Checks if an activity is not edited when an activity has duplicate names in the involved list.
      */
     @Test
-    public void run_hasNameDuplicatesInInvolvedList_activityListSizeRemainsOne() {
+    public void run_hasNameDuplicatesInInvolvedList_invalidCommandGenerated() {
         String userInput = "activity /edit /sid 1 /n Dinner /p Alice /i Alice Alice Charlie /co 30";
         Command command = Parser.getCommand(userInput);
         assertEquals(InvalidCommand.class, command.getClass());
