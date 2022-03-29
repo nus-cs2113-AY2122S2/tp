@@ -1,2 +1,5 @@
-package seedu.duke.command;public class AddEventCommand {
+package seedu.duke.command.eventcommands;
+
+public class AddEventCommand {
+    
 }

@@ -3,8 +3,16 @@ package seedu.duke.command.assigncommand;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-import seedu.duke.*;
 import seedu.duke.command.Command;
+import seedu.duke.HotelLiteManagerException;
+import seedu.duke.InvalidAvailabilityException;
+import seedu.duke.InvalidRoomNumberException;
+import seedu.duke.ListContainer;
+import seedu.duke.Ui;
+import seedu.duke.InvalidHousekeeperProfile;
+import seedu.duke.AssignmentMap;
+import seedu.duke.HousekeeperList;
+import seedu.duke.RoomList;
 
 /**
  * Identifies the name of the housekeeper and assign to room id
@@ -83,7 +91,7 @@ public class AssignHousekeeperCommand extends Command {
         String name = getName();
         assert !name.isEmpty() : "name should not be empty";
         assignmentMap.addAssignment(name, roomID, housekeeperList, roomList);
-        ui.printMessage("Assigned " + name + " to room#" + roomID + ".");
+        ui.printMessage("Assigned " + name + " to room no. " + roomID + ".");
         logger.log(Level.INFO, "end of processing");
     }
 }
