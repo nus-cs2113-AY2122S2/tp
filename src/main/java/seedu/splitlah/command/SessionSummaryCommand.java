@@ -175,7 +175,7 @@ public class SessionSummaryCommand extends Command {
         while (payerIndex < receiverIndex) {
             PersonCostPair payer = personCostPairList.get(payerIndex);
             PersonCostPair receiver = personCostPairList.get(receiverIndex);
-            assert payer.getCost() > receiver.getCost() : 
+            assert payer.getCost() < receiver.getCost() :
                     Message.ASSERT_SESSIONSUMMARY_PAYER_EXPECTS_FROM_RECEIVER;
             String output = processTransaction(payer, receiver);
             
