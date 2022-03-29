@@ -108,7 +108,7 @@ class WarehouseTest {
         //test 1, remove goods normally, success
         try {
             warehouse.removeGoods("1", "5");
-            assertEquals(3, warehouse.totalGoods());
+            assertEquals(3, warehouse.totalInventoryVol());
         } catch (WrongCommandException e1) {
             fail();
         } catch (NullException e2) {
@@ -118,7 +118,7 @@ class WarehouseTest {
         //test 2, remove all goods, success
         try {
             warehouse.removeGoods("1", "1");
-            assertEquals(2, warehouse.totalGoods());
+            assertEquals(2, warehouse.totalInventoryVol());
         } catch (WrongCommandException e1) {
             fail();
         } catch (NullException e2) {
@@ -128,7 +128,7 @@ class WarehouseTest {
         //test 3, remove quantity larger than expected, cannot remove
         try {
             warehouse.removeGoods("2", "2");
-            assertEquals(2, warehouse.totalGoods());
+            assertEquals(2, warehouse.totalInventoryVol());
         } catch (WrongCommandException e1) {
             fail();
         } catch (NullException e2) {
@@ -138,7 +138,7 @@ class WarehouseTest {
         //test 4, remove an item that does not exist, cannot remove
         try {
             warehouse.removeGoods("4", "2");
-            assertEquals(2, warehouse.totalGoods());
+            assertEquals(2, warehouse.totalInventoryVol());
         } catch (WrongCommandException e1) {
             fail();
         } catch (NullException e2) {

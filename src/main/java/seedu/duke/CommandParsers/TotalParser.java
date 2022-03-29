@@ -10,21 +10,21 @@ public class TotalParser extends CommandParser{
         super(warehouse);
     }
 
-    protected void extract_params(){
+    protected void init_extract_params(){
         Regex regexMatch;
         String regex;
         regex = "(?<flag>[og])/ id/(?<id>\\d*)";
         regexMatch = new Regex(this.userInput, regex);
         this.matches = regexMatch.getGroupValues();
     };
-    protected void execute() throws WrongCommandException, NullException {
+    protected void extract_params() throws WrongCommandException, NullException {
         if (matches.get("flag").equals("o")) {
             // get total orders with flag "o/"
             int totalOrders = warehouse.totalOrder();
             System.out.printf("There are %d goods in total.\n", totalOrders);
         } else if (matches.get("flag").equals("g")) {
             // get total goods with flag "g/"
-            warehouse.totalGoods();
+            warehouse.totalInventoryVol();
         } else {
             // wrong command exception
             throw new WrongCommandException("total", true);

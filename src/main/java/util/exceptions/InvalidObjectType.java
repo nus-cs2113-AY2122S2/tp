@@ -1,19 +1,9 @@
 package util.exceptions;
 
 public class InvalidObjectType extends Exception {
-    String command;
-    boolean isCommand;
 
-    public InvalidObjectType(String command, boolean isCommand) {
-        this.command = command;
-        this.isCommand = isCommand;
+    public InvalidObjectType(String errorStr) {
+        System.out.println(errorStr);
     }
 
-    public boolean isCommand() {
-        return isCommand;
-    }
-
-    public String getCommand() {
-        return command;
-    }
 }

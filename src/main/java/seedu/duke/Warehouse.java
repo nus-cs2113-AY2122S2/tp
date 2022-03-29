@@ -7,7 +7,6 @@ import util.exceptions.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class Warehouse {
@@ -17,15 +16,28 @@ public class Warehouse {
     private Map<String, Good> inventory = new HashMap<String, Good>();
     private int inventoryTypeCount = 0;
 
+
+    public Warehouse(Integer capacity) {
+        this.totalCapacity = (float)capacity;
+    }
+
     public Warehouse(Float capacity) {
         this.totalCapacity = capacity;
+    }
+
+    public boolean isSKUInInventory(String SKU){
+        return inventory.containsKey(SKU);
+    }
+
+    private Good getInventoryGoodBySKU(String SKU){
+        return inventory.get(SKU);
     }
 
     public Float getCapacityOccupied() {
         return capacityOccupied;
     }
 
-    public void viewOrder(String orderId) {
+    public void viewOrderById(String orderId) {
         try {
             Integer idToBeViewed = Integer.parseInt(orderId);
             for (Order order : orderLists) {
@@ -50,21 +62,31 @@ public class Warehouse {
         }
     }
 
-    public void viewGood(String goodId) {
+    public void viewGoodBySKU(String SKU) {
         try {
-            Integer idToBeViewed = Integer.parseInt(goodId);
-            for (Order order : orderLists) {
-                for (Orderline orderline : order.getOrderlines()) {
-                    if (idToBeViewed.equals(orderline.getId())) {
-                        System.out.println("Viewing item with id " + orderline.getId());
-                        System.out.println("Item name: " + orderline.getName());
-                        System.out.println("Item description: " + orderline.getDescription());
-                        System.out.println("Item quantity: " + orderline.getQuantity());
-                        return;
-                    }
-                }
+//            Integer idToBeViewed = Integer.parseInt(SKU);
+//            for (Order order : orderLists) {
+//                for (Orderline orderline : order.getOrderlines()) {
+//                    if (idToBeViewed.equals(orderline.getId())) {
+//                        System.out.println("Viewing item with id " + orderline.getId());
+//                        System.out.println("Item name: " + orderline.getName());
+//                        System.out.println("Item description: " + orderline.getDescription());
+//                        System.out.println("Item quantity: " + orderline.getQuantity());
+//                        return;
+//                    }
+//                }
+//            }
+            if (isSKUInInventory(SKU)){
+                Good curGood = getInventoryGoodBySKU(SKU);
+                UnitGood curUG = curGood.getUnitGood();
+                System.out.println("Viewing item with SKU " + SKU);
+                System.out.println("Item name: " + curUG.getName());
+                System.out.println("Item description: " + curUG.getDescription());
+                System.out.println("Item quantity: " + curGood.getQuantity());
+            } else {
+                System.out.println("Could not find item with given id!");
             }
-            System.out.println("Could not find item with given id!");
+
         } catch (NumberFormatException e) {
             System.out.println("Invalid format entered! Check format and try again!");
         }
@@ -102,7 +124,7 @@ public class Warehouse {
         }
     }
 
-    public int totalGoods() throws NullException {
+    public int totalInventoryVol() throws NullException {   //should be float
         if (orderLists == null) {
             throw new NullException("userGoods");
         }
@@ -115,6 +137,14 @@ public class Warehouse {
         return total;
     }
 
+    public Float inventoryVolLeft(){
+        return 0f;
+    }
+
+    public Float percentageInvVolLeft(){
+        return 0f;
+    }
+
     public int totalOrder() {
         return orderLists.size();
     }
@@ -124,7 +154,7 @@ public class Warehouse {
             Float capacity = Float.parseFloat(input);//Integer.parseInt(input);
             assert capacity > 0;
 
-            if (capacity < totalGoods()) {
+            if (capacity < totalInventoryVol()) {
                 throw new LargeQuantityException();
             }
             this.capacityOccupied = capacity;
@@ -185,26 +215,28 @@ public class Warehouse {
 
     }
     // In the case where they want add single/multiple of new/existing type of good
-    public void addGoodToInventory(String unitGoodId, String name, String qty, String desc) throws WrongCommandException {
-        if (unitGoodId.isBlank()) {
+    public void addGoodToInventory(String sku, String name, String desc, String up, String ui, String isWholeUnit, String ba, String v, String ip, String qty) throws WrongCommandException {
+        if (sku.isBlank()) {
             throw new WrongCommandException("add", true);
         }
         try {
-            if (inventory.containsKey(unitGoodId)){
-                inventory.
+            if (inventory.containsKey(sku)){
+                Good curGood = inventory.get(sku);
+                Float curQty = curGood.getQuantity();
+                curGood.setQuantity(curQty + Float.parseFloat(qty)); // might overflow
             } else {
                 Good newGood = new Good();
                 newGood.setQuantity(Float.parseFloat(qty));
                 newGood.assignUnitGood(
-                        "MIAO"
+                        sku,
                         name,
-                        desc,
-                        0F,
-                        "",
-                        0f,
-                        0f,
-                        false);
-                inventory.put(unitGoodId, newGood);
+                        desc, Float.parseFloat(up),
+                        ui,
+                        Boolean.parseBoolean(isWholeUnit),
+                        Float.parseFloat(ba),
+                        Float.parseFloat(v),
+                        Boolean.parseBoolean(ip));
+                inventory.put(sku, newGood);
             }
         } catch (NumberFormatException e1) {
             throw new WrongCommandException("add", true);
@@ -260,7 +292,7 @@ public class Warehouse {
         }
     }
 
-    private void addOrder(int id, Object orderObject) throws WrongCommandException, InvalidFileException {
+    private void addOrder(int id, Object orderObject) throws WrongCommandException, InvalidFileException, InvalidObjectType {
         String receiver = null;
         String shippingAddress = null;
         String toFulfilBy = null;
@@ -270,7 +302,7 @@ public class Warehouse {
         } else if (orderObject instanceof Map) {
             Map orderMap = (Map)orderObject;
         } else {
-            throw new InvalidFileException("add", true);
+            throw new InvalidObjectType("Order should either be JSONObject or Map type");
         }
 
         try {
@@ -282,7 +314,7 @@ public class Warehouse {
         }
     }
 
-    public void batchSetOrders(String filePath) throws WrongCommandException {
+    public void batchSetOrders(String filePath) throws WrongCommandException, InvalidFileException, InvalidObjectType {
         String saveStr = LocalStorage.readSaveFile(filePath);
         // READ JSON FILE
         JSONArray json_orders = (JSONArray) JSONValue.parse(saveStr);

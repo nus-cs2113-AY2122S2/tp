@@ -14,15 +14,14 @@ public class Good {
     }
 
     public UnitGood assignUnitGood(
-                String SKU,
-            String name,
-                               String description,
-                               Float unitPrice,
-                               String unitItem,
-                               Boolean isUnitWhole,
-                               Float baseArea,
-                               Float volume,
-                               Boolean isPerishable){
+            String SKU, String name,
+           String description,
+           Float unitPrice,
+           String unitItem,
+           Boolean isUnitWhole,
+           Float baseArea,
+           Float volume,
+           Boolean isPerishable){
         UnitGood newUnitGood = new UnitGood( SKU,
                 name, description, unitPrice, unitItem, isUnitWhole,baseArea, volume, isPerishable
         );

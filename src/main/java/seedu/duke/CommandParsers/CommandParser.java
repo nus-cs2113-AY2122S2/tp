@@ -2,6 +2,7 @@ package seedu.duke.CommandParsers;
 
 import seedu.duke.Warehouse;
 import util.exceptions.InvalidFileException;
+import util.exceptions.InvalidObjectType;
 import util.exceptions.NullException;
 import util.exceptions.WrongCommandException;
 
@@ -16,13 +17,14 @@ public abstract class CommandParser {
         this.warehouse = warehouse;
     }
 
-    protected abstract void extract_params();
-    protected abstract void execute() throws WrongCommandException, NullException, InvalidFileException;
+    protected abstract void init_extract_params();
+    protected abstract void extract_params() throws WrongCommandException, NullException, InvalidFileException, InvalidObjectType;
+//    protected abstract void validate_params();   // They need implement their own validate commands
 
     public void parse(String userInput) throws WrongCommandException, NullException, InvalidFileException {
         this.userInput = userInput;
+        this.init_extract_params();
         this.extract_params();
-        this.execute();
     }
 
     public void paramRegexFormer(){

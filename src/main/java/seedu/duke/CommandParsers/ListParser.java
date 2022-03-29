@@ -9,14 +9,14 @@ public class ListParser extends CommandParser{
         super(warehouse);
     }
 
-    protected void extract_params(){
+    protected void init_extract_params(){
         Regex regexMatch;
         String regex;
         regex = "(?<flag>[og])/";
         regexMatch = new Regex(this.userInput, regex);
         this.matches = regexMatch.getGroupValues();
     };
-    protected void execute() throws WrongCommandException {
+    protected void extract_params() throws WrongCommandException {
         if (matches.get("flag").equals("o")) {
             // list orders with flag "o/"
             this.warehouse.listOrders();

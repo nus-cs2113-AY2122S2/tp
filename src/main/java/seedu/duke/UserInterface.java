@@ -5,7 +5,6 @@ import util.exceptions.InvalidFileException;
 import util.exceptions.NullException;
 import util.exceptions.WrongCommandException;
 
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -91,7 +90,7 @@ public class UserInterface {
     }
 
     private void userInputIsStorageCapacity() throws NullException {
-        int totalGoods = warehouse.totalGoods();
+        int totalGoods = warehouse.totalInventoryVol();
         Float warehouseCapacity = warehouse.getCapacityOccupied();
         Commands.storageCapacity(totalGoods, warehouseCapacity);
     }

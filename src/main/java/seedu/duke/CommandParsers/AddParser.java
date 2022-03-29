@@ -3,6 +3,7 @@ package seedu.duke.CommandParsers;
 import seedu.duke.Regex;
 import seedu.duke.Warehouse;
 import util.exceptions.InvalidFileException;
+import util.exceptions.InvalidObjectType;
 import util.exceptions.WrongCommandException;
 
 import java.util.HashMap;
@@ -12,21 +13,22 @@ public class AddParser extends CommandParser{
         super(warehouse);
     }
 
-    protected void extract_params(){
+    protected void init_extract_params(){
         Regex regexMatch;
         String regex;
         regex = "(?<flag>[og])/";
         regexMatch = new Regex(this.userInput, regex);
         this.matches = regexMatch.getGroupValues();
     };
-    protected void execute() throws WrongCommandException, InvalidFileException {
+    protected void extract_params() throws WrongCommandException, InvalidFileException, InvalidObjectType {
         if (matches.get("flag").equals("g")) {
-            String regexGood = "oid/(?<oid>\\d*) gid/(?<gid>\\d*)"
-                    + " n/(?<name>.*) q/(?<qty>\\d*) d/(?<desc>.*)";
+            String regexGood = "sku/(?<sku>.*) n/(?<name>.*) d/(?<desc>.*) up/(?<up>.*) ui/(?<ui>.*) wu/(?<isWholeUnit>.*) ba/(?<ba>.*)" +
+                    " v/(?<v>.*) ip/(?<ip>.*) qty/(?<qty>.*)";
             HashMap<String,String> regexGoodMatch = new
                     Regex(userInput, regexGood).getGroupValues();
-            warehouse.addGoods(regexGoodMatch.get("oid"), regexGoodMatch.get("gid"),
-                    regexGoodMatch.get("name"), regexGoodMatch.get("qty"), regexGoodMatch.get("desc"));
+            warehouse.addGoodToInventory(regexGoodMatch.get("sku"),regexGoodMatch.get("name"), regexGoodMatch.get("desc"),
+                    regexGoodMatch.get("up"), regexGoodMatch.get("ui"), regexGoodMatch.get("isWholeUnit"),regexGoodMatch.get("ba"),
+                    regexGoodMatch.get("v"), regexGoodMatch.get("ip"), regexGoodMatch.get("qty"));
         } else if (matches.get("flag").equals("ug")){
             String regexUnitGood = "sku/(?<sku>.*) n/(?<name>.*) d/(?<desc>.*) up/(?<up>.*) ui/(?<ui>.*) wu/(?<isWholeUnit>.*) ba/(?<ba>.*)" +
                     " v/(?<v>.*) ip/(?<ip>.*)";
@@ -53,12 +55,7 @@ public class AddParser extends CommandParser{
             throw new WrongCommandException("add", true);
         }
 
-//        if (matches.get("flag").equals("o")) {
-//            String regexOrder = "oid/(?<oid>\\d*) r/(?<recv>.*) a/(?<address>.*)";
-//            HashMap<String,String> regexOrderMatches = new
-//                    Regex(userInput, regexOrder).getGroupValues();
-//            warehouse.addOrder(regexOrderMatches.get("oid"), regexOrderMatches.get("recv"),
-//                    regexOrderMatches.get("address"));
-//        } else
     };
+
+
 }
