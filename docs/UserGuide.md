@@ -81,8 +81,8 @@ Allows you to view and change user preferences. This command has three different
 - **Editing a specific configuration option**
 
   Sets the value of the specified configuration option to the one you specify (if it is valid).<br><br>
-  Format: `option CONFIG_NAME = NEW_VALUE`<br><br>
-  Example: `option SHOW_COMPLETED_TASKS = false`
+  Format: `option CONFIG_NAME=NEW_VALUE`<br><br>
+  Example: `option SHOW_COMPLETED_TASKS=false`
   > 📔 <span style="color:#00bb00">**NOTE:**</span>
   >
   > The whitespace around the `=` is optional. In other words, `option SHOW_COMPLETED_TASKS=false` is also a valid command input.
@@ -246,5 +246,6 @@ Format: `save`
 |  list   | `list ["TAG_NAME"]`                                                                                                                                                                      |
 |  grade  | `grade MODULE_CODE MODULE_GRADE`                                                                                                                                                         |
 |   gpa   | `gpa`                                                                                                                                                                                    |
-|  reset  | `reset`                                                                                                                                                                                  |
+|  reset  | `reset`          
+|  option | `option CONFIG_NAME=NEW_VALUE`
 |  save   | `save`                                                                                                                                                                                   |
