@@ -37,7 +37,7 @@ public class Ui {
         System.out.println(LINE);
         System.out.println("Here are all the events in your list:");
         int j = 0;
-        for (Event event : events){
+        for (Event event : events) {
             j = j + 1;
             System.out.println("\t" + j + ". " + event.toString());
         }
