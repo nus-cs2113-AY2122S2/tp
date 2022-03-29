@@ -134,7 +134,8 @@ public class CommandParser {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_AVAILABILITY_COMMAND, "");
             userCommand = new AddAvailabilityCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.contains((VIEW_HOUSEKEEPER_COMMAND))) {
-            userCommand = new ViewHousekeeperListCommand();
+            userInputLowerCaseWithoutCommand = userInputLowerCase.trim();
+            userCommand = new ViewHousekeeperListCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(ASSIGN_HOUSEKEEPER)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ASSIGN_HOUSEKEEPER, "");
             userCommand = new AssignHousekeeperCommand(userInputLowerCaseWithoutCommand);
@@ -142,12 +143,14 @@ public class CommandParser {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(VIEW_AVAILABLE_HOUSEKEEPER_DAY, "");
             userCommand = new GetAvailableHousekeeperCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(RESET_AVAILABILITY)) {
-            userCommand = new ResetAvailabilityCommand();
+            userInputLowerCaseWithoutCommand = userInputLowerCase.trim();
+            userCommand = new ResetAvailabilityCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(DELETE_PROFILE)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(DELETE_PROFILE, "");
             userCommand = new DeleteHousekeeperCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(UPDATE_AGE_BY_ONE)) {
-            userCommand = new AgeIncreaseCommand();
+            userInputLowerCaseWithoutCommand = userInputLowerCase.trim();
+            userCommand = new AgeIncreaseCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(SEARCH_ITEM_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(SEARCH_ITEM_COMMAND, "");
             userCommand = new SearchItemCommand(userInputLowerCaseWithoutCommand);

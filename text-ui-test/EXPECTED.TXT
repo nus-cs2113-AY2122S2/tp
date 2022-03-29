@@ -114,7 +114,7 @@ Everyone age has increased by one
 **Over age limit housekeeper will be removed from list**
 ======== Age Limit Exceed List ========
 1. [MICH]: Age: 60, Availability: ( Monday Tuesday Wednesday Thursday Friday Saturday Sunday )
-======== End of the list ========
+=========== End of the list ===========
 ======== Housekeeper List ========
 1. [JANE]: Age: 34, Availability: ( Monday Tuesday Sunday )
 2. [MASSY]: Age: 60, Availability: ( Monday Friday )
@@ -132,7 +132,7 @@ Everyone age has increased by one
 **Over age limit housekeeper will be removed from list**
 ======== Age Limit Exceed List ========
 1. [MASSY]: Age: 60, Availability: <Enter Availability>
-======== End of the list ========
+=========== End of the list ===========
 ======== Housekeeper List ========
 1. [JANE]: Age: 35, Availability: <Enter Availability>
 ======== End of the list ========
