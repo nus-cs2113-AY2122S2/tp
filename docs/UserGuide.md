@@ -182,6 +182,9 @@ Example of usage:
 <br>
 <br>
 
+<hr>
+
+##_Activity Management_
 ### Creating an activity: `activity /create`
 
 > Creates a new activity and assigns it to a session. <br>
@@ -306,6 +309,9 @@ Example of usage:
 <br>     
 <br>
 
+<hr>
+
+## _Transaction Management_
 ### Settling all transactions for a session: `session /summary`
 
 > Displays a summary of a session that details how much each person must pay and to whom for all debts to be resolved.<br>
@@ -330,6 +336,10 @@ Example of usage:
 <br>
 <br>
 
+
+<hr>
+
+## _Group Management_
 ### Creating a group: `group /create`
 
 > Creates a new group. <br>
@@ -376,6 +386,10 @@ Example of usage:
 <br>
 <br>
 
+### Editing a group: `group /edit`
+
+<br>
+<br>
 
 ### Viewing a group: `group /view`
 
@@ -412,6 +426,9 @@ Example of usage:
 <br>
 <br>
 
+<hr>
+
+##_Miscellaneous_
 ### Listing all available commands: `help`
 > Displays all available SplitLah commands and their syntax.
 
