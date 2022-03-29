@@ -30,58 +30,6 @@ class SessionCreateCommandTest {
     }
 
     /**
-     * Checks if session is created with missing delimiters.
-     */
-    @Test
-    public void prepare_hasMissingDelimiter_InvalidCommand() {
-        // Case 1: Missing /n delimiter.
-        String argsMissingNameDelimiter = "session /create /d 15-02-2022 /pl Alice Bob";
-        Command sessionWithMissingNameDelimiter = Parser.getCommand(argsMissingNameDelimiter);
-        assertEquals(InvalidCommand.class, sessionWithMissingNameDelimiter.getClass());
-
-        // Case 2: Missing /d delimiter.
-        String argsMissingDateDelimiter = "session /create /n Class gathering /pl Alice Bob";
-        Command sessionWithMissingDateDelimiter = Parser.getCommand(argsMissingDateDelimiter);
-        assertEquals(InvalidCommand.class, sessionWithMissingDateDelimiter.getClass());
-    }
-
-    /**
-     * Checks if session is created when Person List and Group unique identifier delimiters are missing.
-     */
-    @Test
-    public void prepare_hasMissingPersonListAndGidDelimiter_InvalidCommand() {
-        String argsMissingPersonListAndGidDelimiters = "session /create /n Class gathering /d 15-02-2022";
-        Command sessionWithMissingPersonListAndGidDelimiter = Parser.getCommand(argsMissingPersonListAndGidDelimiters);
-        assertEquals(InvalidCommand.class,sessionWithMissingPersonListAndGidDelimiter.getClass());
-    }
-
-    /**
-     * Checks if session is created with missing arguments.
-     */
-    @Test
-    public void prepare_hasMissingArguments_InvalidCommand() {
-        // Case 1: Missing Session name.
-        String argsMissingNameArgument = "session /create /n /d 15-02-2022 /pl Alice Bob";
-        Command sessionWithMissingNameArgument = Parser.getCommand(argsMissingNameArgument);
-        assertEquals(InvalidCommand.class, sessionWithMissingNameArgument.getClass());
-
-        // Case 2: Missing Session Date.
-        String argsMissingDateArgument = "session /create /n Class gathering /d /pl Alice Bob";
-        Command sessionWithMissingDateArgument = Parser.getCommand(argsMissingDateArgument);
-        assertEquals(InvalidCommand.class, sessionWithMissingDateArgument.getClass());
-
-        // Case 3: Missing List of persons.
-        String argsMissingPersonListArgument = "session /create /n Class gathering /d 15-02-2022 /pl";
-        Command sessionWithMissingPersonListArgument = Parser.getCommand(argsMissingPersonListArgument);
-        assertEquals(InvalidCommand.class, sessionWithMissingPersonListArgument.getClass());
-
-        // Case 4: Missing Group unique identifier.
-        String argsMissingGidArgument = "session /create /n Class gathering /d 15-02-2022 /gid";
-        Command sessionWithMissingGidArgument = Parser.getCommand(argsMissingGidArgument);
-        assertEquals(InvalidCommand.class, sessionWithMissingGidArgument.getClass());
-    }
-
-    /**
      * Checks if session is created successfully with Person List delimiter
      * and added into list of sessions.
      */
