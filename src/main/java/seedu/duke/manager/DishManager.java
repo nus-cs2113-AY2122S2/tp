@@ -55,6 +55,9 @@ public class DishManager extends Manager {
      * Print all the dishes/menu.
      */
     public String printDishes() {
+        if (dishes.isEmpty()) {
+            return "You haven't got a dish in menu!";
+        }
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < dishes.size(); i++) {
             builder.append(String.format("%d. %s\n", i + 1, dishes.get(i)));
