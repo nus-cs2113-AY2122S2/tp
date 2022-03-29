@@ -8,6 +8,8 @@ import seedu.mindmymoney.command.UpdateCommand;
 import seedu.mindmymoney.command.HelpCommand;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
+import seedu.mindmymoney.data.IncomeList;
+import seedu.mindmymoney.userfinancial.User;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -22,24 +24,27 @@ class ParserTest {
     @Test
     void parseCommand_normalInput_expectCorrectCommandObject() {
         String testInput = "help";
-        ExpenditureList testList = new ExpenditureList();
-        CreditCardList cardList = new CreditCardList();
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeTestList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeTestList);
         Parser testParser = new Parser();
-        assertTrue(testParser.parseCommand(testInput, testList, cardList) instanceof HelpCommand);
-        assert testParser.parseCommand(testInput, testList, cardList)
+
+        assertTrue(testParser.parseCommand(testInput, user) instanceof HelpCommand);
+        assert testParser.parseCommand(testInput, user)
                 instanceof HelpCommand : "testParser should return an " + "instance of HelpCommand";
 
-        testInput = "add /pm cash /c Food /d Porridge /a 3 /t 2022-03";
-        assertTrue(testParser.parseCommand(testInput, testList, cardList) instanceof AddCommand);
+        testInput = "add description " + TEST_PRICE;
+        assertTrue(testParser.parseCommand(testInput, user) instanceof AddCommand);
 
         testInput = "update " + TEST_INDEX + " description " + TEST_PRICE;
-        assertTrue(testParser.parseCommand(testInput, testList, cardList) instanceof UpdateCommand);
+        assertTrue(testParser.parseCommand(testInput, user) instanceof UpdateCommand);
 
         testInput = "list /expenses";
-        assertTrue(testParser.parseCommand(testInput, testList, cardList) instanceof ListCommand);
+        assertTrue(testParser.parseCommand(testInput, user) instanceof ListCommand);
 
         testInput = "delete " + TEST_INDEX;
-        assertTrue(testParser.parseCommand(testInput, testList, cardList) instanceof DeleteCommand);
+        assertTrue(testParser.parseCommand(testInput, user) instanceof DeleteCommand);
     }
 
     /**
@@ -49,8 +54,11 @@ class ParserTest {
     @Test
     void parseCommand_invalidInput_expectHelpCommand() {
         Parser testParser = new Parser();
-        ExpenditureList testList = new ExpenditureList();
-        CreditCardList cardList = new CreditCardList();
-        assertTrue(testParser.parseCommand("", testList, cardList) instanceof HelpCommand);
+        ExpenditureList expenditureTestList = new ExpenditureList();
+        CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeTestList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeTestList);
+
+        assertTrue(testParser.parseCommand("", user) instanceof HelpCommand);
     }
 }

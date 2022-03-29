@@ -1,10 +1,13 @@
 package seedu.mindmymoney.helper;
 
 import seedu.mindmymoney.MindMyMoneyException;
-import seedu.mindmymoney.constants.CategoryTypes;
+import seedu.mindmymoney.constants.ExpenditureCategoryTypes;
+import seedu.mindmymoney.constants.IncomeCategoryTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.userfinancial.CreditCard;
 
+import static seedu.mindmymoney.constants.Indexes.MAX_STUDENT_INCOME;
+import static seedu.mindmymoney.constants.Indexes.MIN_STUDENT_INCOME;
 import static seedu.mindmymoney.constants.PaymentMethod.CASH;
 
 /**
@@ -31,13 +34,28 @@ public class AddCommandInputTests {
     }
 
     /**
-     * Checks if input is in Category Types.
+     * Checks if input is in Expenditure Category Types.
      *
      * @param input the item to be checked.
      * @return true if item is in the list, false otherwise.
      */
-    public static boolean isCategoryInList(String input) {
-        for (CategoryTypes str : CategoryTypes.values()) {
+    public static boolean isExpenditureCategoryInList(String input) {
+        for (ExpenditureCategoryTypes str : ExpenditureCategoryTypes.values()) {
+            if (str.name().equalsIgnoreCase(input)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if input is in Income Category Types.
+     *
+     * @param input the item to be checked.
+     * @return true if item is in the list, false otherwise.
+     */
+    public static boolean isIncomeCategoryInList(String input) {
+        for (IncomeCategoryTypes str : IncomeCategoryTypes.values()) {
             if (str.name().equalsIgnoreCase(input)) {
                 return true;
             }
@@ -68,12 +86,12 @@ public class AddCommandInputTests {
      * @param inputCategory User input of Category.
      * @throws MindMyMoneyException when input is null or not a type of category.
      */
-    public static void testCategory(String inputCategory) throws MindMyMoneyException {
+    public static void testExpenditureCategory(String inputCategory) throws MindMyMoneyException {
         if (inputCategory.equals("")) {
             throw new MindMyMoneyException("Category cannot be null!");
         }
 
-        if (!isCategoryInList(inputCategory)) {
+        if (!isExpenditureCategoryInList(inputCategory)) {
             throw new MindMyMoneyException("Input Food, Transport, Utilities, Personal, Entertainment or Others!");
         }
     }
@@ -96,7 +114,7 @@ public class AddCommandInputTests {
      * @param inputAmount User input of Amount.
      * @throws MindMyMoneyException when input is less than or equal to 0 or null.
      */
-    public static void testAmount(String inputAmount) throws MindMyMoneyException {
+    public static void testExpenditureAmount(String inputAmount) throws MindMyMoneyException {
         float inputAmountAsInteger;
 
         if (inputAmount == null) {
@@ -113,5 +131,23 @@ public class AddCommandInputTests {
             throw new MindMyMoneyException("Amount must be more than 0");
         }
         assert inputAmountAsInteger > 0 : "Amount should have a positive value";
+    }
+
+    public static void testIncomeAmount(int inputAmount) throws MindMyMoneyException {
+        if (inputAmount < MIN_STUDENT_INCOME) {
+            throw new MindMyMoneyException("Amount cannot be negative!");
+        } else if (inputAmount > MAX_STUDENT_INCOME) {
+            throw new MindMyMoneyException("Amount too high!");
+        }
+    }
+
+    public static void testIncomeCategory(String inputCategory) throws MindMyMoneyException {
+        if (inputCategory.equals("")) {
+            throw new MindMyMoneyException("Category cannot be null!");
+        }
+
+        if (!isIncomeCategoryInList(inputCategory)) {
+            throw new MindMyMoneyException("Input Salary, Allowance, Investment or Others!");
+        }
     }
 }

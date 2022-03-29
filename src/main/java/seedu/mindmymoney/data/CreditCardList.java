@@ -37,19 +37,19 @@ public class CreditCardList {
     }
 
     /**
-     * Represents the CreditCard item.
+     * Retrieves the CreditCard entry at the given index.
      *
-     * @param index Index of the CreditCard item.
-     * @return The CreditCard item.
+     * @param index Index of the CreditCard entry.
+     * @return The CreditCard object.
      */
     public CreditCard get(int index) {
         return creditCardListArray.get(index);
     }
 
     /**
-     * Deletes the CreditCard item from the list.
+     * Deletes the CreditCard entry from the list.
      *
-     * @param index Index of the item to delete.
+     * @param index Index of the CreditCard entry to delete.
      */
     public void delete(int index) {
         creditCardListArray.remove(index);
@@ -65,12 +65,12 @@ public class CreditCardList {
     }
 
     /**
-     * Updates the item at a particular index.
+     * Updates the credit card entry at the given index.
      *
-     * @param index Index of the item to be updated.
-     * @param item  The expenditure item to be updated.
+     * @param index Index of the entry to be updated.
+     * @param creditCard The new CreditCard entry.
      */
-    public void set(int index, CreditCard item) {
-        creditCardListArray.set(index, item);
+    public void set(int index, CreditCard creditCard) {
+        creditCardListArray.set(index, creditCard);
     }
 }

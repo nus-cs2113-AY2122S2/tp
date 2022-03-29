@@ -3,14 +3,12 @@ package seedu.mindmymoney.command;
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
+import seedu.mindmymoney.data.IncomeList;
 import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.CreditCard;
+import seedu.mindmymoney.userfinancial.Income;
+import seedu.mindmymoney.userfinancial.User;
 
-
-import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
-import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
-import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_PAYMENT_METHOD;
 import static seedu.mindmymoney.constants.Flags.FLAG_END_VALUE;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_AMOUNT;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CARD_BALANCE;
@@ -20,12 +18,19 @@ import static seedu.mindmymoney.constants.Flags.FLAG_OF_CASHBACK;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CATEGORY;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_DESCRIPTION;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
+import static seedu.mindmymoney.constants.Flags.FLAG_OF_PAYMENT_METHOD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_TIME;
 
-import static seedu.mindmymoney.helper.AddCommandInputTests.testAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testPaymentMethod;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testCategory;
 import static seedu.mindmymoney.helper.AddCommandInputTests.testDescription;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureAmount;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureCategory;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeAmount;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeCategory;
+import static seedu.mindmymoney.helper.AddCommandInputTests.testPaymentMethod;
+import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
+import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
+import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
 import static seedu.mindmymoney.helper.TimeFunctions.convertTime;
 
 /**
@@ -35,24 +40,19 @@ public class AddCommand extends Command {
     private String addInput;
     public ExpenditureList expenditureList;
     public CreditCardList creditCardList;
+    public IncomeList incomeList;
 
-    public AddCommand(String addInput, ExpenditureList expenditureList, CreditCardList creditCardList) {
+    public AddCommand(String addInput, User user) {
         this.addInput = addInput;
-        this.expenditureList = expenditureList;
-        this.creditCardList = creditCardList;
-    }
-
-    /**
-     * Finds addInput string if it contains CREDIT_CARD flag.
-     */
-    private boolean hasCreditCardFlag() {
-        return addInput.contains(FLAG_OF_CREDIT_CARD);
+        this.expenditureList = user.getExpenditureListArray();
+        this.creditCardList = user.getCreditCardListArray();
+        this.incomeList = user.getIncomeListArray();
     }
 
     /**
      * Indicates whether the program should exit.
      *
-     * @return Indication on whether the program should exit.
+     * @return true if the program should exit, false otherwise.
      */
     @Override
     public boolean isExit() {
@@ -60,8 +60,25 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Sets the EXPENDITURE, CATEGORY, DESCRIPTION, AMOUNT and TIME fields in the users' expenditure
-     * and adds it into the list.
+     * Indicates whether the add command is to add a credit card by looking for the /cc flag.
+     *
+     * @return true if the /cc flag is present, false otherwise.
+     */
+    private boolean hasCreditCardFlag() {
+        return addInput.contains(FLAG_OF_CREDIT_CARD);
+    }
+
+    /**
+     * Indicates whether the add command is to add an income by looking for the /i flag.
+     *
+     * @return true if the /i flag is present, false otherwise.
+     */
+    private boolean hasIncomeFlag() {
+        return addInput.contains(FLAG_OF_INCOME);
+    }
+
+    /**
+     * Inserts an Expenditure object into user's list of expenditure(s).
      *
      * @throws MindMyMoneyException when inputs are invalid or flags are missing.
      */
@@ -71,17 +88,22 @@ public class AddCommand extends Command {
         if (capitalise(paymentMethod).equals("Cash")) {
             paymentMethod = capitalise(paymentMethod);
         }
-        String category = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
-        testCategory(category);
-        category = capitalise(category);
+
+        String inputCategory = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
+        testExpenditureCategory(inputCategory);
+        String category = capitalise(inputCategory);
+
         String description = parseInputWithCommandFlag(addInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT);
         testDescription(description);
-        String amount = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
-        testAmount(amount);
-        float amountInt = Float.parseFloat(amount);
-        amountInt = formatFloat(amountInt);
-        String time = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
-        time = convertTime(time);
+
+        String amountAsString = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
+        testExpenditureAmount(amountAsString);
+
+        float amountAsFloat = Float.parseFloat(amountAsString);
+        float amountInt = formatFloat(amountAsFloat);
+
+        String inputTime = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
+        String time = convertTime(inputTime);
 
         expenditureList.add(new Expenditure(paymentMethod, category, description, amountInt, time));
         System.out.println("Successfully added: \n\n"
@@ -96,6 +118,7 @@ public class AddCommand extends Command {
 
     /**
      * Inserts a CreditCard object into user's list of credit card(s).
+     *
      * @throws MindMyMoneyException Exception thrown when input is invalid
      */
     public void addCreditCard() throws MindMyMoneyException {
@@ -111,19 +134,56 @@ public class AddCommand extends Command {
 
         creditCardList.add(new CreditCard(cardName, Double.parseDouble(cashBack), Float.parseFloat(cardLimit),
                 Float.parseFloat(cardBalance)));
+
         System.out.println("Successfully added: \n\n"
                 + "Credit card: " + cardName + "\n"
                 + "Cash back: " + cashBack + "%\n"
                 + "Card limit: $" + cardLimit + "\n"
-                + "Card balance: $" + cardBalance + "\n"
+                + "Card balance: $" + cardBalance + "\n\n"
                 + "into the account");
         System.out.print(System.lineSeparator());
     }
 
+    /**
+     * Inserts an Income object into user's list of income(s).
+     *
+     * @throws MindMyMoneyException when the input amount is not a number.
+     */
+    public void addIncome() throws MindMyMoneyException {
+        String amountAsString = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_CATEGORY);
+
+        try {
+            int amountAsInt = Integer.parseInt(amountAsString);
+            testIncomeAmount(amountAsInt);
+
+            String inputCategory = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_END_VALUE);
+            testIncomeCategory(inputCategory);
+            String category = capitalise(inputCategory);
+
+            incomeList.add(new Income(amountAsInt, category));
+
+            System.out.print("Successfully added: \n\n"
+                    + "Amount: " + amountAsInt + "\n"
+                    + "Category: " + category + "\n\n"
+                    + "into the account");
+            System.out.println(System.lineSeparator());
+        } catch (NumberFormatException e) {
+            throw new MindMyMoneyException("Amount must be a whole number!");
+        }
+    }
+
+    /**
+     * Inserts either an Expenditure, CreditCard or Income object into the user's list based on the input.
+     *
+     * @throws MindMyMoneyException when an invalid command is received, along with its corresponding error message.
+     */
+    @Override
     public void executeCommand() throws MindMyMoneyException {
         if (hasCreditCardFlag()) {
             System.out.println(hasCreditCardFlag());
             addCreditCard();
+        } else if (hasIncomeFlag()) {
+            addIncome();
         } else {
             addExpenditure();
         }
