@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.StringTokenizer;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import seedu.duke.command.Command;
@@ -16,8 +17,12 @@ import seedu.duke.command.Command;
  */
 
 public class AddSatisfactionCommand extends Command {
+    private static final String DELIMITER = "/";
+    private static final int NUMBER_OF_PARTS_IN_COMMAND = 2;
     private Satisfaction satisfaction;
     private static Logger logger = Logger.getLogger("satisfactionLogger");
+
+
 
     /**
      * Extracts the customer name and satisfaction value from user input,
@@ -29,9 +34,18 @@ public class AddSatisfactionCommand extends Command {
      */
     public AddSatisfactionCommand(String userInput) throws HotelLiteManagerException {
         userInput = userInput.toLowerCase();
-        if (!userInput.contains("/")) {
+        if (!userInput.contains(DELIMITER)) {
             logger.log(Level.WARNING, "A '/' character is needed to separate the customer's name "
                     + "from their rating.");
+            throw new InvalidCommandException();
+        }
+        if (countSlashes(userInput) > 1) {
+            logger.log(Level.WARNING, "More than one '/' character detected. There should only be a single '/'"
+                    + " that separates the customer's name from their rating.");
+            throw new InvalidCommandException();
+        }
+        if (userInput.trim().equals(DELIMITER)) {
+            logger.log(Level.WARNING, "Customer name and satisfaction value were both found to be empty.");
             throw new InvalidCommandException();
         }
         String customerName = extractCustomerName(userInput);
@@ -43,6 +57,17 @@ public class AddSatisfactionCommand extends Command {
         setSatisfaction(satisfaction);
     }
 
+    private int countSlashes(String userInput) {
+        int slashCount = 0;
+        for (int i = 0; i < userInput.length(); i++) {
+            String curChar = Character.toString(userInput.charAt(i));
+            if (curChar.equals(DELIMITER)) {
+                slashCount += 1;
+            }
+        }
+        return slashCount;
+    }
+
     /**
      * Helper method for AddSatisfactionCommand. Extracts the customer's name
      * from the user input.
@@ -52,7 +77,7 @@ public class AddSatisfactionCommand extends Command {
      * @throws HotelLiteManagerException If there is an error in user input (the customer's name is empty).
      */
     private String extractCustomerName(String userInput) throws HotelLiteManagerException {
-        String[] splitInput = userInput.split("/");
+        String[] splitInput = userInput.split(DELIMITER);
         String customerName = "";
         try {
             customerName = splitInput[0].trim();
@@ -75,7 +100,7 @@ public class AddSatisfactionCommand extends Command {
      *                                   empty or is not an integer between 1 and 5).
      */
     private int extractSatisfactionValue(String userInput) throws HotelLiteManagerException {
-        String[] splitInput = userInput.split("/");
+        String[] splitInput = userInput.split(DELIMITER);
         if (splitInput.length < 2) {
             throw new EmptySatisfactionValueException();
         }
