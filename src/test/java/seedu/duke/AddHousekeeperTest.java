@@ -43,6 +43,18 @@ public class AddHousekeeperTest {
     }
 
     @Test
+    public void commandParser_addCommandInvalidName_exceptionThrown() {
+        assertThrows(NameNotStringException.class, () ->
+                new CommandParser().parse("add housekeeper Susan12 / fifty"));
+    }
+
+    @Test
+    public void commandParser_addCommandInvalidNameSymbol_exceptionThrown() {
+        assertThrows(NameNotStringException.class, () ->
+                new CommandParser().parse("add housekeeper @@@@$S / fifty"));
+    }
+
+    @Test
     public void commandParser_nameCorrect() throws Exception {
         CommandParser parser = new CommandParser();
         Command command = parser.parse("add housekeeper Susan / 23");

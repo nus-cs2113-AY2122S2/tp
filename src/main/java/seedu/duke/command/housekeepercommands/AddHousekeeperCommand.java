@@ -3,6 +3,7 @@ package seedu.duke.command.housekeepercommands;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+import seedu.duke.command.Command;
 import seedu.duke.ListContainer;
 import seedu.duke.HotelLiteManagerException;
 import seedu.duke.Ui;
@@ -13,7 +14,7 @@ import seedu.duke.InvalidUserException;
 import seedu.duke.OverAgeException;
 import seedu.duke.UnderAgeException;
 import seedu.duke.InvalidAgeException;
-import seedu.duke.command.Command;
+import seedu.duke.NameNotStringException;
 
 /**
  * Extract name and age of housekeeper from user input and record it into the housekeeper list.
@@ -50,7 +51,8 @@ public class AddHousekeeperCommand extends Command {
      * @throws InvalidHousekeeperProfile Command enter regarding the housekeeper profile is wrong.
      */
     private Housekeeper extractDetails(String commandStringWithoutCommand)
-            throws InvalidAgeException, InvalidHousekeeperProfile, UnderAgeException, OverAgeException {
+            throws InvalidAgeException, InvalidHousekeeperProfile, UnderAgeException, OverAgeException,
+            NameNotStringException {
         boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(AGE_INDICATE);
         if (isSymbolIncorrect) {
             logger.log(Level.WARNING, "Housekeeper command usage is found to be wrong.");
@@ -108,13 +110,15 @@ public class AddHousekeeperCommand extends Command {
     }
 
     /**
-     * This method extracts the name of the housekeeper from the user input.
+     * This method extracts the name of the housekeeper from the user input. It checks if there exist any digits
+     * or symbol in the name.
      *
      * @param inputName Input name give by user.
      * @return Valid name.
-     * @throws InvalidHousekeeperProfile When name given is empty
+     * @throws InvalidHousekeeperProfile When name given is empty.
+     * @throws NameNotStringException When name has symbols and digits.
      */
-    private String extractName(String inputName) throws InvalidHousekeeperProfile {
+    private String extractName(String inputName) throws InvalidHousekeeperProfile, NameNotStringException {
         String name;
         try {
             name = inputName.trim();
@@ -123,6 +127,9 @@ public class AddHousekeeperCommand extends Command {
         }
         if (name.isEmpty()) {
             throw new InvalidHousekeeperProfile();
+        }
+        if (!name.matches("^([a-z]|\\s|[A-Z])+$")) {
+            throw new NameNotStringException();
         }
         return name;
     }
