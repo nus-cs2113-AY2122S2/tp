@@ -16,7 +16,10 @@ public class Person {
     private String name;
     private IncomeList incomeList;
     private ExpenditureList expenditureList;
-    private static ProjectLogger logger = new ProjectLogger(Person.class.getName(), "Person.log");
+
+    private static final String LOG_CLASS_NAME = Person.class.getSimpleName();
+    private static final String LOG_FILE_PATH = LOG_CLASS_NAME + ".log";
+    private static ProjectLogger logger = new ProjectLogger(LOG_CLASS_NAME, LOG_FILE_PATH);
 
     /**
      * Constructs a new Person object.

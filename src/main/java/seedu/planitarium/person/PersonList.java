@@ -11,7 +11,10 @@ import java.util.logging.Level;
 public class PersonList {
     private ArrayList<Person> personList;
     private int numberOfMembers;
-    private static ProjectLogger logger = new ProjectLogger(PersonList.class.getName(), "PersonList.log");
+
+    private static final String LOG_CLASS_NAME = PersonList.class.getSimpleName();
+    private static final String LOG_FILE_PATH = LOG_CLASS_NAME + ".log";
+    private static ProjectLogger logger = new ProjectLogger(LOG_CLASS_NAME, LOG_FILE_PATH);
 
     /**
      * Constructs a new PersonList object.

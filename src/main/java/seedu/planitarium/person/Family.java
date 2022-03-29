@@ -4,6 +4,7 @@ package seedu.planitarium.person;
 
 import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.global.Constants;
+import seedu.planitarium.money.ExpenditureList;
 
 import java.util.logging.Level;
 
@@ -11,7 +12,10 @@ public class Family {
     private PersonList parents;
     private PersonList myGen;
     private PersonList children;
-    private static ProjectLogger logger = new ProjectLogger(Family.class.getName(), "Family.log");
+
+    private static final String LOG_CLASS_NAME = Family.class.getSimpleName();
+    private static final String LOG_FILE_PATH = LOG_CLASS_NAME + ".log";
+    private static ProjectLogger logger = new ProjectLogger(LOG_CLASS_NAME, LOG_FILE_PATH);
     private static final String INDEX_ERROR_MESSAGE = "Invalid index passed in";
 
     /**
