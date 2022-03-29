@@ -1,10 +1,7 @@
 package seedu.duke;
 
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
-
-import static javax.swing.plaf.synth.Region.TABLE_HEADER;
 
 /**
  * Represents the User Interface component of the program.
@@ -51,10 +48,10 @@ public class Ui {
      * @param listOfItems The item list containing all the items in the inventory.
      */
     public void printAddItemAcknowledgementMessage(ItemList listOfItems) {
-        System.out.println("The item and its pax has been added to the list of items in the inventory.");
+        System.out.println("The item and its pax has been added to the item list.");
         assert (listOfItems.getSize() > 0) : "Assertion Failed! Number of items in the item list is 0 after an item "
                 + "was added to it.";
-        System.out.printf("There are currently %d items within the inventory.\n", listOfItems.getSize());
+        System.out.printf("There are currently %d items within the item list.\n", listOfItems.getSize());
     }
 
     public void printItemAlreadyInTheListErrorMessage(String nameOfItemToAdd) {
@@ -163,7 +160,7 @@ public class Ui {
     /**
      * Prints an acknowledgement message informing the user that the pax of the item was successfully updated.
      *
-     * @param updatedItem The item within the inventory whose pax has been updated by the user.
+     * @param updatedItem The item within the item list whose pax has been updated by the user.
      */
     public void printUpdateItemPaxAcknowledgementMessage(Item updatedItem) {
         String updatedItemName = updatedItem.getName();

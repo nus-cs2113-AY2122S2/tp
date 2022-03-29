@@ -1,6 +1,8 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.eventcommands.AddEventCommand;
+import seedu.duke.command.eventcommands.ViewEventsCommand;
 import seedu.duke.command.itemcommand.AddItemCommand;
 import seedu.duke.command.itemcommand.ViewItemWithZeroPaxCommand;
 import seedu.duke.command.itemcommand.SearchItemCommand;
@@ -25,8 +27,8 @@ public class CommandParser {
 
     private static final String BYE = "bye";
     private static final String ADD_ITEM_COMMAND = "add item ";
-    private static final String VIEW_ITEM_LIST_COMMAND = "view item in inventory";
-    private static final String VIEW_ITEM_WITH_ZERO_PAX_IN_LIST_COMMAND = "view item with zero pax";
+    private static final String VIEW_ITEM_LIST_COMMAND = "view all items";
+    private static final String VIEW_ITEMS_WITH_ZERO_PAX_COMMAND = "view items with zero pax";
     private static final String DELETE_ITEM_COMMAND = "delete item ";
     private static final String UPDATE_ITEM_PAX_COMMAND = "update item pax ";
     private static final String UPDATE_ITEM_NAME_COMMAND = "update item name ";
@@ -50,6 +52,8 @@ public class CommandParser {
     private static final String RESET_AVAILABILITY = "is a new week";
     private static final String DELETE_PROFILE = "delete housekeeper ";
     private static final String UPDATE_AGE_BY_ONE = "is a new year";
+    private static final String ADD_EVENT = "event ";
+    private static final String VIEW_EVENTS = "view events";
 
 
     /**
@@ -78,7 +82,7 @@ public class CommandParser {
             userCommand = new AddItemCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.equals(VIEW_ITEM_LIST_COMMAND)) {
             userCommand = new ViewItemListCommand();
-        } else if (userInputLowerCase.equals(VIEW_ITEM_WITH_ZERO_PAX_IN_LIST_COMMAND)) {
+        } else if (userInputLowerCase.equals(VIEW_ITEMS_WITH_ZERO_PAX_COMMAND)) {
             userCommand = new ViewItemWithZeroPaxCommand();
         } else if (userInputLowerCase.startsWith(DELETE_ITEM_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(DELETE_ITEM_COMMAND, "");
@@ -135,6 +139,12 @@ public class CommandParser {
         } else if (userInputLowerCase.startsWith(SEARCH_ITEM_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(SEARCH_ITEM_COMMAND, "");
             userCommand = new SearchItemCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.startsWith(ADD_EVENT)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_EVENT, "");
+            userCommand = new AddEventCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.startsWith(VIEW_EVENTS)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(VIEW_EVENTS, "");
+            userCommand = new ViewEventsCommand(userInputLowerCaseWithoutCommand);
         } else {
             throw new InvalidCommandException();
         }

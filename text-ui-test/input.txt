@@ -6,7 +6,7 @@ Add Item Toilet Roll / -1
 Add Item Toilet Roll / 0
 Add Item Fork / 15
 Add Item Spoon /2
-View Item In Inventory
+View All Items
 Update Item Pax Toilet Roll / 5
 Update Item Pax Toilet Roll / -1
 Update Item Pax Toilet Roll /
@@ -56,8 +56,8 @@ Update Item Name / Premium Swimming Pool
 Update Item Name Spoon / Premium Spoon
 Search Item
 Search Item o
-View Item With Zero Pax
-View Item With Zero
+View Items With Zero Pax
+View Items With Zero
 Add Item Premium Spoon / 500
 Add Item Table / 2000
 bye
