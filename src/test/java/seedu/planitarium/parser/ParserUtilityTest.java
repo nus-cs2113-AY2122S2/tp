@@ -10,31 +10,36 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserUtilityTest {
 
+    private static final String ERROR_MSG = "Unknown error is detected from '%s', please check again.";
+    private static final String ADD = "add";
+    private static final String DELIMITER_N = "/n";
+    private static final String ADD_N_BILL = "add /n bill";
+    private static final String ADD_N_BILL_G_1 = "add /n bill /g 1";
+    private static final String BILL = "bill";
+    private static final String EMPTY_AFTER_DELIMITER = "add /n  /e";
+    private static final String EMPTY_STRING_AFTER_N = "Empty string after `/n`";
+    private static final double POSITIVE_MONEY = 1.0;
+    private static final int NEGATIVE_MONEY = -1;
+    private static final String MONEY_IS_NEGATIVE = "Money is negative";
+
     @Test
     void parseDelimitedTerm_delimitedTerm_success() throws EmptyStringException {
-        String input1 = "add";
-        String delimiter1 = "/n";
-        String output1 = ParserUtility.parseDelimitedTerm(input1, delimiter1);
-        assertEquals(input1, output1);
+        String output1 = ParserUtility.parseDelimitedTerm(ADD, DELIMITER_N);
+        assertEquals(ADD, output1);
 
-        String input2 = "add /n bill";
-        String output2 = ParserUtility.parseDelimitedTerm(input2, delimiter1);
-        assertEquals("bill", output2);
+        String output2 = ParserUtility.parseDelimitedTerm(ADD_N_BILL, DELIMITER_N);
+        assertEquals(BILL, output2);
 
-        String input3 = "add /n bill /g 1";
-        String output3 = ParserUtility.parseDelimitedTerm(input3, delimiter1);
-        assertEquals("bill", output3);
+        String output3 = ParserUtility.parseDelimitedTerm(ADD_N_BILL_G_1, DELIMITER_N);
+        assertEquals(BILL, output3);
     }
 
     @Test
     void parseDelimitedTerm_emptyTerm_exceptionThrown() {
         try {
-            String input = "add /n  /e";
-            String delimiter = "/n";
-
-            ParserUtility.parseDelimitedTerm(input, delimiter);
+            ParserUtility.parseDelimitedTerm(EMPTY_AFTER_DELIMITER, DELIMITER_N);
         } catch (EmptyStringException e) {
-            assertEquals("Empty string after `/n` detected", e.getMessage());
+            assertEquals(String.format(ERROR_MSG, EMPTY_STRING_AFTER_N), e.toString());
         } catch (Exception e) {
             fail();
         }
@@ -42,15 +47,15 @@ class ParserUtilityTest {
 
     @Test
     void checkNegativeMoney_positiveMoney_success() {
-        ParserUtility.checkNegativeMoney(1.0);
+        ParserUtility.checkNegativeMoney(POSITIVE_MONEY);
     }
 
     @Test
     void checkNegativeMoney_negativeMoney_exceptionThrown() {
         try {
-            ParserUtility.checkNegativeMoney(-1);
+            ParserUtility.checkNegativeMoney(NEGATIVE_MONEY);
         } catch (NumberFormatException e) {
-            assertEquals("Money is negative", e.getMessage());
+            assertEquals(MONEY_IS_NEGATIVE, e.getMessage());
         }
     }
 }

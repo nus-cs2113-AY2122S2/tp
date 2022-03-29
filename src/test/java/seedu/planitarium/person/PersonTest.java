@@ -5,12 +5,14 @@ package seedu.planitarium.person;
 import org.junit.jupiter.api.Test;
 import seedu.planitarium.global.Constants;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class PersonTest {
     private static final String VALID_NAME = "Alice";
     private static final String VALID_DESCRIPTION = "Test";
-    private static final int VALID_AMOUNT = 1000;
+    private static final double VALID_AMOUNT = 1000.0;
     private static final int INVALID_INDEX = -10;
 
     @Test
@@ -54,7 +56,7 @@ class PersonTest {
     public void addExpend_invalidDescription_assertionError() {
         Person person = new Person(VALID_NAME);
         try {
-            person.addExpend(null, VALID_AMOUNT, false, Constants.FOR_USER);
+            person.addExpend(null, VALID_AMOUNT, 1, false, Constants.FOR_USER);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());

@@ -4,7 +4,7 @@ package seedu.planitarium.exceptions;
  * Thrown to indicate that a string after a delimiter is empty.
  */
 public class EmptyStringException extends PlanITariumException {
-    protected static final String ERROR_MSG = "Empty string after `%s` detected";
+    protected static final String ERROR_MSG = "Empty string after `%s`";
 
     /**
      * Constructs a new exception with the specified detail message.

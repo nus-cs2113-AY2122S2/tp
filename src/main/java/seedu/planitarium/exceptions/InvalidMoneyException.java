@@ -4,7 +4,7 @@ package seedu.planitarium.exceptions;
  * Thrown to indicate that a string cannot be converted into a valid monetary value in double.
  */
 public class InvalidMoneyException extends PlanITariumException {
-    protected static final String ERROR_MSG = "Invalid money value: `%s`";
+    protected static final String ERROR_MSG = "Invalid money value `%s`";
 
     /**
      * Constructs a new exception with the specified detail message.
