@@ -23,4 +23,9 @@ public class SearchCommand extends Command {
     public void execute() {
 
     }
+
+    @Override
+    public String getType() {
+        return type;
+    }
 }

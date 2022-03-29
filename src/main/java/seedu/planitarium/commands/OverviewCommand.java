@@ -22,4 +22,9 @@ public class OverviewCommand extends Command {
         family.overview();
         logger.log(Level.INFO, LOG_EXECUTE_INFO);
     }
+
+    @Override
+    public String getType() {
+        return type;
+    }
 }

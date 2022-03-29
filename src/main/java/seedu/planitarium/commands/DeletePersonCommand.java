@@ -40,4 +40,9 @@ public class DeletePersonCommand extends Command {
         logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, uid, group));
     }
 
+    @Override
+    public String getType() {
+        return type;
+    }
+
 }

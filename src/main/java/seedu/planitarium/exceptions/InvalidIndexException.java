@@ -12,6 +12,7 @@ public class InvalidIndexException extends PlanITariumException {
      * @param text the invalid index text.
      */
     public InvalidIndexException(String text) {
-        super(String.format(ERROR_MSG, text));
+        super(text);
+        error = String.format(ERROR_MSG, text);
     }
 }

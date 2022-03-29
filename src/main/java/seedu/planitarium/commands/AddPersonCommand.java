@@ -42,5 +42,10 @@ public class AddPersonCommand extends Command {
         logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, name, group));
     }
 
+    @Override
+    public String getType() {
+        return type;
+    }
+
 
 }

@@ -24,4 +24,9 @@ public class HelpCommand extends Command {
         UI.printHelpMsg();
         logger.log(Level.INFO, LOG_EXECUTE_INFO);
     }
+
+    @Override
+    public String getType() {
+        return type;
+    }
 }

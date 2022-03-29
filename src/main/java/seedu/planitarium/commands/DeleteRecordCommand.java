@@ -65,4 +65,8 @@ public class DeleteRecordCommand extends Command {
             throw new PlanITariumException(DeleteRecordCommand.class.getSimpleName());
         }
     }
+    @Override
+    public String getType() {
+        return type;
+    }
 }

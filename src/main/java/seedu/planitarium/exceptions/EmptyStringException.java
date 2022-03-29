@@ -12,6 +12,7 @@ public class EmptyStringException extends PlanITariumException {
      * @param delimiter the delimiter where string is empty.
      */
     public EmptyStringException(String delimiter) {
-        super(String.format(ERROR_MSG, delimiter));
+        super(delimiter);
+        error = String.format(ERROR_MSG, delimiter);
     }
 }

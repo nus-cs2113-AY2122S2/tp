@@ -25,4 +25,9 @@ public class ListCategoriesCommand extends Command {
         Category.listCategories();
         logger.log(Level.INFO, LOG_EXECUTE_INFO);
     }
+
+    @Override
+    public String getType() {
+        return type;
+    }
 }

@@ -32,4 +32,9 @@ public class ExitCommand extends Command {
         logger.log(Level.INFO, LOG_EXECUTE_INFO);
         System.exit(0);
     }
+
+    @Override
+    public String getType() {
+        return type;
+    }
 }
