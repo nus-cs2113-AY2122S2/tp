@@ -31,6 +31,7 @@ public class Constants {
     public static final String GET_REMAIN_CALL_MESSAGE = "Method getRemain() called";
     public static final String GET_TOTAL_INCOME_CALL_MESSAGE = "Method getTotalIncome() called";
     public static final String GET_TOTAL_EXPEND_CALL_MESSAGE = "Method getTotalExpend() called";
+    public static final String PERSON_INIT_MESSAGE = "New Person initialised";
     public static final String GET_NAME_CALL_MESSAGE = "Method getName() called";
     public static final String GET_INCOME_LIST_CALL_MESSAGE = "Method getIncomeList() called";
     public static final String GET_EXPEND_LIST_CALL_MESSAGE = "Method getExpenditureList() called";

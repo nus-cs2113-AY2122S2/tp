@@ -35,8 +35,7 @@ public class Person {
         logger.log(Level.INFO, infoString);
         incomeList = new IncomeList();
         expenditureList = new ExpenditureList();
-        String infoString = "New Person initialised";
-        logger.log(Level.INFO, infoString);
+        logger.log(Level.INFO, Constants.PERSON_INIT_MESSAGE);
     }
 
     /**
