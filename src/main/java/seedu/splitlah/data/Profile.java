@@ -221,7 +221,7 @@ public class Profile implements Serializable {
      */
     public String getGroupListSummaryString() {
         if (groupList.isEmpty()) {
-            return Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST;
+            return Message.ERROR_PROFILE_GROUP_LIST_EMPTY;
         }
 
         TableFormatter summaryTable = new TableFormatter(
