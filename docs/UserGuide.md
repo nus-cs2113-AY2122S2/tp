@@ -172,6 +172,35 @@ Example of usage:
 
 ### Editing a session: `session /edit`
 
+> Edits an existing session. <br>
+> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
+
+Format: `session /edit /sid [SESSION_ID] [</n [SESSION_NAME]>] [</d [SESSION_DATE]>] [</pl [NAME1 NAME2...]>]`
+
+* `[SESSION_ID]` refers to the unique identifier of the session.
+    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+
+> **💡 Notes**
+> - A session with a unique identifier of `[SESSION_ID]` has to exist before it can be edited.
+> - Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
+> - There are 3 editable fields, session name, session date and the people involved in the session.
+> - When editing the people involved, existing participants must be included in the command.
+>  - Example: If the session previously created had Alice and Bob with session ID of 1, 
+>  and you wish to edit it to include charlie a valid edit command would be `session /edit /sid /pl Alice Bob Charlie`. 
+
+> **⚠️Warning:**
+> - This action is irreversible, once the command has been entered, the session would be edited.
+    
+Examples of usage:
+- A session with a unique identifier of 1 was previously created named Class Outing with Alice and Bob involved on 15-03-2022.
+1. Edit the session name to Class gathering and date to 16-03-2022.
+    - `session /edit /sid 1 /n Class gathering /d 16-03-2022` <br>
+      ![Session Edit command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[1].png)
+2. Edit the session to include charlie.
+    - `session /edit /sid 1 /pl Alice Bob Charlie` <br>
+      ![Session Edit command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[2].png)
+
+
 ### Viewing a session : `session /view`
 
 ### Listing all sessions: `session /list`
