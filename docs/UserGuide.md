@@ -351,17 +351,60 @@ Format: `rm INDEX`
 
 Example of usage:
 
-`rm 1`
+`rm 2`
 
 Expected outcome:
 
 ```
 Noted. I've removed this contact:
-  Name: Jane Doe, Faculty: SoC, Email: e0334987@u.nus.edu, Description: group mate for CS4215
+  Name: Lucy, Faculty: SoC, Email: email@u.nus.edu, Description: group mate from cs2113
 Now you have N contacts in the list.
 ```
 Where `N` depends on the length of the current contacts list.
 
+#### Editing a contact: `edit`
+Edits an existing contact from the current list of contacts. 
+
+Format: `edit INDEX [n/NAME] [f/FACULTY] [e/EMAIL] [d/DESCRIPTION]`
+
+* You can use the `list` command to see what index a contact corresponds to
+* `INDEX` must be a valid index number within the list
+* You can edit multiple fields at once, though it is optional
+  * However, you must edit at least one field at a time
+  * This means that the Contacts Manager will prompt you for a field 
+if you only enter `edit INDEX` without any fields supplied
+
+Example of usage:
+
+`edit 1 f/FASS n/Jane Not Doe`
+
+Expected outcome:
+
+```
+Okay, I've updated the information of this contact:
+  Name: Jane Not Doe, Faculty: FASS, Email: e0334987@u.nus.edu, Description: group mate for CS4215
+```
+
+#### Finding a contact: `find`
+Finds an existing contact from the current list of contacts. 
+Only the Name field will be considered when looking for a contact record.
+
+Format: `find KEYWORD`
+
+* The keyword is case-sensitive
+* Partial matches on the keyword are also returned
+* You can only search for one keyword at a time
+
+Example of usage:
+
+`find Doe`
+
+Expected outcome:
+
+```
+Here are the matching contacts in your list:
+ 1. Name: Jane Not Doe, Faculty: FASS, Email: e0334987@u.nus.edu, Description: group mate for CS4215
+```
 
 ## FAQ
 

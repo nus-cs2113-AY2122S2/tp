@@ -13,7 +13,7 @@ import static seedu.allonus.contacts.ContactParser.setContactFields;
 import static seedu.allonus.ui.TextUi.showToUser;
 
 /**
- * The Contacts Manager and associated methods
+ * The Contacts Manager and associated methods.
  */
 public class ContactsManager {
 
