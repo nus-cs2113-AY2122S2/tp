@@ -168,9 +168,12 @@ public class WorkoutCommand extends Command {
                 getFileManager().rewriteAllPlansToFile(getPlanList());
                 break;
             case UPDATE_ACTION_KEYWORD:
+                String oldWorkout = getWorkoutList().getTargetWorkout(getUserArguments());
                 Workout updatedWorkout = getWorkoutList().updateWorkout(getUserArguments());
                 getUI().printUpdateWorkoutMessage(updatedWorkout);
+                planList.updatePlanContainsUpdatedWorkout(oldWorkout, updatedWorkout);
                 getFileManager().rewriteAllWorkoutsToFile(getWorkoutList());
+                getFileManager().rewriteAllPlansToFile(getPlanList());
                 break;
             default:
                 String className = this.getClass().getSimpleName();
