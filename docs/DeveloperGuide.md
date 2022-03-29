@@ -276,14 +276,10 @@ The general workflow of the `activity /list` command is as follows:
 2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `ActivityListCommand` object.
 3. `ActivityListCommand#run` method is then invoked to run the `activity /list` command.
 4. The list of activities are stored in a `Profile` object, hence `Manager#getProfile` is called.
-5. To retrieve the activities from profile, `Profile#getActivityList` is executed,
-   where a list of `Activity` objects are returned.
-6. Once the list is retrieved, `ActivityListCommand` class checks if the list is empty.
-1. If the list is empty, a message indicating that the list is empty is printed
-   using `TextUi#printlnMessage`.
-2. If the list is not empty, `ActivityListCommand` will loop from the first to the second last activity,
-   calling `TextUi#printlnMessage()` to print out a brief overview of each session.
-   Then, the last group is printed with a divider below it, using the method `TextUi#printlnMessageWithDivider()`.
+5. To retrieve the session containing the activity list from the `Profile` object, `Profile#getSession` is executed, returning a session containing all the activities to be listed.
+6. Once the session is retrieved, `ActivityListCommand` class will run call `Session#getActivityListSummaryString` and the 
+Session class will return a String containing either an error message if the activity list in the session is empty, 
+or a table summarising the list of activities in the session.
 
 ### Add a group
 **API reference:** [`GroupCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupCreateCommand.java)
