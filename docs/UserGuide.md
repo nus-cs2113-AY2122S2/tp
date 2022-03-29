@@ -298,6 +298,97 @@ Everyone is within age limit
 ======== End of the list ========
 ```
 
+### Assign housekeeper to a room `assign housekeeper `
+A housekeeper can be assigned to be responsible for a room. The room may or may not have a houskeeper assigned to it.
+
+Format: `assign housekeeper NAME / ROOMID`
+
+The `NAME` should be of a housekeeper already added in the system. The `ROOMID` should represent a room number of a room that is present in the system.
+
+Sample input: 
+
+```
+assign susan / 301
+```
+
+Expected output:
+
+```
+======================================================================
+I have assigned susan to room number 301.
+======================================================================
+```
+
+## Event Related Commands
+
+### Add an event: `add event`
+Adds an event inside the list on a given date. 
+
+Format: `add event DESCRIPTION / DATE`
+
+The date has to strictly be in the format `yyyy-mm-dd` or the command wound not run.
+
+Sample input:
+
+```
+add event cry / 2022-03-30
+```
+
+Expected output:
+
+```
+======================================================================
+I have added the following event in your list:
+Event cry (at: Mar 30 2022)
+======================================================================
+```
+
+### View the list of events: `list events`
+
+Lists all the events present in the system in order. No additional argument is required. The list of events inside the system will not change; the existing events will merely be displayed.
+
+This command helps us know which index each event is added in. The index from this list can be referenced when the `delete` function (described below) is called.
+
+Format: `list events`
+
+Expected output:
+
+```
+======================================================================
+Here are all the events in your list:
+	1. Event something (at: Feb 2 2022)
+	2. Event cry (at: Mar 30 2022)
+======================================================================
+```
+
+### Delete an event: `delete event `
+
+Deletes an event at a particular position in the list. The event will disappear from the system forever. It will not only get deleted from the list, it will vanish from the computer memory as well. 
+
+Format: `delete event INDEX`
+
+Make sure that you put the correct index for the event to be removed. Indexes can be seen when the list of events is printed.
+
+Sample input: `delete event 2`
+
+Expected output:
+
+```
+======================================================================
+I have deleted the following event from your list:
+	Event cry (at: Mar 30 2022)
+======================================================================
+```
+
+The list after deleting this event:
+```
+======================================================================
+Here are all the events in your list:
+	1. Event something (at: Feb 2 2022)
+======================================================================
+```
+
+
 ## Room Related Commands
 
 ### Check in a room: `check in`
