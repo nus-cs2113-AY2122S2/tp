@@ -14,7 +14,11 @@ import seedu.duke.commands.GradeCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.MarkCommand;
 import seedu.duke.commands.TagCommand;
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.AdditionalParameterException;
+import seedu.duke.exceptions.GeneralParseException;
+import seedu.duke.exceptions.InvalidCompulsoryParameterException;
+import seedu.duke.exceptions.InvalidInputException;
+import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.data.Module;
 import seedu.duke.data.Task;
 

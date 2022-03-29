@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import seedu.duke.commands.Command;
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.GeneralParseException;
+import seedu.duke.exceptions.UnknownConfigurationGroupWord;
+import seedu.duke.exceptions.ModHappyException;
+import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.util.StringConstants;
 
 /**
