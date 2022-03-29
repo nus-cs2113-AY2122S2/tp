@@ -15,13 +15,17 @@ class ProfileTest {
 
     Manager manager = new Manager();
 
+    private static final String CREATE_TEST_SESSION_INPUT =
+            "session /create /n Class outing /d 15-02-2022 /pl Alice Bob";
+    private static final String CREATE_TEST_GROUP_INPUT =
+            "group /create /n Project members /pl Alice Bob Charlie";
+
     /**
      * Checks if the hasSessionName method returns true when a Session object with the specified session name is found.
      */
     @Test
     public void hasSessionName_inputContainsExistingSessionName_true() {
-        String sessionOneArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob";
-        Command createSessionOne = Parser.getCommand(sessionOneArgs);
+        Command createSessionOne = Parser.getCommand(CREATE_TEST_SESSION_INPUT);
         createSessionOne.run(manager);
 
         String sessionNameToTest = "Class outing";
@@ -35,8 +39,7 @@ class ProfileTest {
      */
     @Test
     public void hasSessionName_inputContainsNonExistingSessionName_false() {
-        String sessionOneArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob";
-        Command createSessionOne = Parser.getCommand(sessionOneArgs);
+        Command createSessionOne = Parser.getCommand(CREATE_TEST_SESSION_INPUT);
         createSessionOne.run(manager);
 
         String sessionNameToTest = "School gathering";
@@ -60,8 +63,7 @@ class ProfileTest {
      */
     @Test
     public void hasSessionId_inputContainsExistingSessionId_true() {
-        String sessionArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob";
-        Command createSession = Parser.getCommand(sessionArgs);
+        Command createSession = Parser.getCommand(CREATE_TEST_SESSION_INPUT);
         createSession.run(manager);
 
         int sessionIdToTest = 1;
@@ -75,8 +77,7 @@ class ProfileTest {
      */
     @Test
     public void hasSessionId_inputContainsNonExistingSessionId_false() {
-        String sessionArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob";
-        Command createSession = Parser.getCommand(sessionArgs);
+        Command createSession = Parser.getCommand(CREATE_TEST_SESSION_INPUT);
         createSession.run(manager);
 
         int sessionIdToTest = 10;
@@ -100,8 +101,7 @@ class ProfileTest {
      */
     @Test
     public void getSession_validSessionId_sessionReturned() {
-        String sessionArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob";
-        Command createSession = Parser.getCommand(sessionArgs);
+        Command createSession = Parser.getCommand(CREATE_TEST_SESSION_INPUT);
         createSession.run(manager);
 
         int sessionIdToTest = 1;
@@ -119,8 +119,7 @@ class ProfileTest {
      */
     @Test
     public void getSession_invalidSessionId_InvalidDataExceptionThrown() {
-        String sessionArgs = "session /create /n Class outing /d 15-02-2022 /pl Alice Bob";
-        Command createSession = Parser.getCommand(sessionArgs);
+        Command createSession = Parser.getCommand(CREATE_TEST_SESSION_INPUT);
         createSession.run(manager);
 
         int sessionIdToTest = 10;
@@ -147,12 +146,40 @@ class ProfileTest {
     }
 
     /**
+     * Checks if a String with the correct error message is properly returned when list of session is empty.
+     */
+    @Test
+    public void getSessionListSummaryString_sessionListEmpty_emptySessionMessageReturned() {
+        String retrievedSessionListSummary = manager.getProfile().getSessionListSummaryString();
+        String expectedMessage = Message.ERROR_PROFILE_SESSION_LIST_EMPTY;
+        assertEquals(expectedMessage, retrievedSessionListSummary);
+    }
+
+    /**
+     * Checks if a String with the correct message is properly returned when list of session is not empty.
+     */
+    @Test
+    public void getSessionListSummaryString_sessionListNotEmpty_correctFormatReturned() {
+        Command createSession = Parser.getCommand(CREATE_TEST_SESSION_INPUT);
+        createSession.run(manager);
+
+        String retrievedSessionListSummary = manager.getProfile().getSessionListSummaryString();
+        String expectedOutput =
+                "List of Sessions\n"
+                        + "-------------------------------------------------------------------\n"
+                        + "# | Name         | Date       | # of Participants | # of Activities \n"
+                        + "-------------------------------------------------------------------\n"
+                        + "1 | Class outing | 15-02-2022 | 2                 | 0               \n"
+                        + "===================================================================";
+        assertEquals(expectedOutput, retrievedSessionListSummary);
+    }
+
+    /**
      * Checks if the hasGroupName method returns true when a Group object with the specified group name is found.
      */
     @Test
     public void hasGroupName_inputContainsExistingGroupName_true() {
-        String groupArgs = "group /create /n Project members /pl Alice Bob Charlie";
-        Command createGroup = Parser.getCommand(groupArgs);
+        Command createGroup = Parser.getCommand(CREATE_TEST_GROUP_INPUT);
         createGroup.run(manager);
 
         String groupNameToTest = "Project members";
@@ -165,8 +192,7 @@ class ProfileTest {
      */
     @Test
     public void hasGroupName_inputContainsNonExistingGroupName_false() {
-        String groupArgs = "group /create /n Project members /pl Alice Bob Charlie";
-        Command createGroup = Parser.getCommand(groupArgs);
+        Command createGroup = Parser.getCommand(CREATE_TEST_GROUP_INPUT);
         createGroup.run(manager);
 
         String groupNameToTest = "High school Friends";
@@ -190,8 +216,7 @@ class ProfileTest {
      */
     @Test
     public void hasGroupId_inputContainsExistingGroupId_true() {
-        String groupArgs = "group /create /n Project members /pl Alice Bob Charlie";
-        Command createGroup = Parser.getCommand(groupArgs);
+        Command createGroup = Parser.getCommand(CREATE_TEST_GROUP_INPUT);
         createGroup.run(manager);
 
         int groupIdToTest = 1;
@@ -205,8 +230,7 @@ class ProfileTest {
      */
     @Test
     public void hasGroupId_inputContainsNonExistingGroupId_false() {
-        String groupArgs = "group /create /n Project members /pl Alice Bob Charlie";
-        Command createGroup = Parser.getCommand(groupArgs);
+        Command createGroup = Parser.getCommand(CREATE_TEST_GROUP_INPUT);
         createGroup.run(manager);
 
         int groupIdToTest = 10;
@@ -230,8 +254,7 @@ class ProfileTest {
      */
     @Test
     public void getGroup_validGroupId_groupReturned() {
-        String groupArgs = "group /create /n Project members /pl Alice Bob Charlie";
-        Command createGroup = Parser.getCommand(groupArgs);
+        Command createGroup = Parser.getCommand(CREATE_TEST_GROUP_INPUT);
         createGroup.run(manager);
 
         int groupIdToTest = 1;
@@ -249,8 +272,7 @@ class ProfileTest {
      */
     @Test
     public void getGroup_invalidGroupId_InvalidDataExceptionThrown() {
-        String groupArgs = "group /create /n Project members /pl Alice Bob Charlie";
-        Command createGroup = Parser.getCommand(groupArgs);
+        Command createGroup = Parser.getCommand(CREATE_TEST_GROUP_INPUT);
         createGroup.run(manager);
 
         int groupIdToTest = 10;
@@ -291,13 +313,13 @@ class ProfileTest {
      */
     @Test
     public void getGroupListSummaryString_groupListNotEmpty_correctFormatReturned() {
-        String groupArgs = "group /create /n Project members /pl Alice Bob Charlie";
-        Command createGroup = Parser.getCommand(groupArgs);
+        Command createGroup = Parser.getCommand(CREATE_TEST_GROUP_INPUT);
         createGroup.run(manager);
 
         String retrievedGroupListSummary = manager.getProfile().getGroupListSummaryString();
         String expectedOutput =
-                "-----------------------------------------\n"
+                "List of Groups\n"
+                + "-----------------------------------------\n"
                         + "# | Name            | Number of persons \n"
                         + "-----------------------------------------\n"
                         + "1 | Project members | 3                 \n"
