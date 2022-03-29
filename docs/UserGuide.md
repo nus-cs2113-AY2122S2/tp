@@ -464,14 +464,11 @@ Example of usage:
 ## _Miscellaneous_
 
 ### Listing all available commands: `help`
-> Displays all available SplitLah commands and their syntax.
+Displays all available SplitLah commands and their syntax so that you can get assistance when using SplitLah.<br>
+You can also refer to the [Command Summary](#command-summary) for  a summary of all available commands in SplitLah.
 
-Format: `help`
+> Format: `help`
 
-Example of usage:
-
-![Help command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/HelpCommand.png)
-<br>
 <br>
 
 ### Exit
