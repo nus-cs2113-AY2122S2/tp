@@ -1,6 +1,7 @@
 package seedu.sherpass.util;
 
 import seedu.sherpass.task.TaskList;
+import seedu.sherpass.util.timetable.Timetable;
 
 import java.util.Scanner;
 
