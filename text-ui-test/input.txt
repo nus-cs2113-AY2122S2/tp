@@ -1,4 +1,23 @@
-add /n alice /g 1
-addin /u 1 /g 1 /i 300 /d salary /p T
-addout /u 1 /g 1 /e 200 /d food /c 1 /p F
+add /n Alpha /g 1
+add /n Beta /g 2
+add /n Charlie /g 3
+add /n Delta /g 1
+add /n Echo /g 2
+add /n Foxtrot /g 3
+addin /g 1 /u 1 /i 2000.20 /d CPF payout /p t
+addin /g 1 /u 2 /i 1500.75 /d CPF payout /p t
+addin /g 2 /u 1 /i 8000.97 /d Lawyer pay /p t
+addin /g 2 /u 2 /i 5000.14 /d Info sec pay /p t
+addin /g 3 /u 1 /i 10.72 /d Sell eraser in school /p f
+addin /g 3 /u 2 /i 5.16 /d Help friend massage /p f
+addout /g 1 /u 1 /e 5000.90 /d Gambling /c 6 /p f
+addout /g 1 /u 2 /e 3000.74 /d Daily ramen /c 1 /p t
+addout /g 2 /u 1 /e 1000.66 /d Utility bills /c 3 /p t
+addout /g 2 /u 2 /e 4000.48 /d Monthly subscription to Netflix /c 6 /p t
+addout /g 3 /u 1 /e 100.10 /d Pokemon gacha /c 6 /p f
+addout /g 3 /u 2 /e 500.47 /d Back pain medicine /c 4 /p t
+overview
+list /g 1
+list /g 2
+list /g 3
 bye

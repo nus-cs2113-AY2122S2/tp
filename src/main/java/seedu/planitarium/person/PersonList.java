@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 public class PersonList {
-    private ArrayList<Person> personList;
+    private final ArrayList<Person> personList;
     private int numberOfMembers;
-    private static ProjectLogger logger = new ProjectLogger(PersonList.class.getName(), "PersonList.log");
+
+    private static final String LOG_CLASS_NAME = PersonList.class.getSimpleName();
+    private static final String LOG_FILE_PATH = LOG_CLASS_NAME + ".log";
+    private static final ProjectLogger LOGGER = new ProjectLogger(LOG_CLASS_NAME, LOG_FILE_PATH);
 
     /**
      * Constructs a new PersonList object.
@@ -19,8 +22,7 @@ public class PersonList {
     public PersonList() {
         personList = new ArrayList<>();
         numberOfMembers = 0;
-        String infoString = "New PersonList constructed";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.PERSON_LIST_INIT_MESSAGE);
     }
 
     /**
@@ -29,17 +31,17 @@ public class PersonList {
      * @return The array list
      */
     public ArrayList<Person> getPersonList() {
-        String infoString = "Method getPersonList() called";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.GET_PERSON_LIST_CALL_MESSAGE);
         return personList;
     }
 
     public int getListIndex(int personIndex) {
         String infoString = "Entering getListIndex()";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, infoString);
         assert (personIndex >= Constants.SINGULAR);
         assert (personIndex <= numberOfMembers);
         infoString = "Index assertions passed in getListIndex()";
+        LOGGER.log(Level.INFO, infoString);
         return personIndex - 1;
     }
 
@@ -50,8 +52,7 @@ public class PersonList {
      * @return The person with the index
      */
     public Person getPerson(int personIndex) {
-        String infoString = "Method getPerson() called";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.GET_PERSON_CALL_MESSAGE);
         int listIndex = getListIndex(personIndex);
         return personList.get(listIndex);
     }
@@ -62,8 +63,7 @@ public class PersonList {
      * @return The number of person objects present in the array list
      */
     public int getNumberOfMembers() {
-        String infoString = "Method getNumberOfMembers() called";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.NUM_MEMBERS_CALL_MESSAGE);
         return numberOfMembers;
     }
 
@@ -71,21 +71,16 @@ public class PersonList {
      * Adds a person to the array list.
      *
      * @param name The name of the person to be added
-     * @param isSilent Whether to print confirmation
      */
-    public void addPerson(String name, boolean isSilent) {
+    public void addPerson(String name) {
         String infoString = "Entering addPerson()";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, infoString);
         assert (name != null);
         infoString = "Non-null assertion passed in addPerson()";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, infoString);
         Person person = new Person(name);
         personList.add(person);
         numberOfMembers++;
-        if (isSilent) {
-            return;
-        }
-        System.out.println(name + " has been successfully added");
     }
 
     /**
@@ -94,8 +89,7 @@ public class PersonList {
      * @param personIndex The index of the person to be removed
      */
     public void deletePerson(int personIndex) {
-        String infoString = "Method deletePerson() called";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.DELETE_PERSON_CALL_MESSAGE);
         String name = getPerson(personIndex).getName();
         int listIndex = getListIndex(personIndex);
         personList.remove(listIndex);
@@ -109,8 +103,7 @@ public class PersonList {
      * @return The total disposable income
      */
     public double getRemain() {
-        String infoString = "Method getRemain() called";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.GET_REMAIN_CALL_MESSAGE);
         double sum = 0;
         for (Person person: getPersonList()) {
             sum += person.getDisposable();
@@ -119,8 +112,7 @@ public class PersonList {
     }
 
     public double getTotalIncome() {
-        String infoString = "Method getTotalIncome() called";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.GET_TOTAL_INCOME_CALL_MESSAGE);
         double sum = 0;
         for (Person person: getPersonList()) {
             sum += person.getTotalIncome();
@@ -129,8 +121,7 @@ public class PersonList {
     }
 
     public double getTotalExpenditure() {
-        String infoString = "Method getTotalExpend() called";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.GET_TOTAL_EXPEND_CALL_MESSAGE);
         double sum = 0;
         for (Person person: getPersonList()) {
             sum += person.getTotalExpenditure();
@@ -142,8 +133,7 @@ public class PersonList {
      * Lists the names of everyone in the array list and their list of income and expenditure.
      */
     public void list() {
-        String infoString = "Method list() called";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.LIST_CALL_MESSAGE);
         for (int i = 1; i <= numberOfMembers; i++) {
             Person person = getPerson(i);
             System.out.println(i + ". " + person.getName());
@@ -162,8 +152,7 @@ public class PersonList {
      * @param isSilent Whether to print confirmation
      */
     public void addIncome(int personIndex, String description, double amount, boolean isPermanent, boolean isSilent) {
-        String infoString = "Method addIncome() called";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.ADD_INCOME_CALL_MESSAGE);
         getPerson(personIndex).addIncome(description, amount, isPermanent, isSilent);
     }
 
@@ -174,8 +163,7 @@ public class PersonList {
      * @param incomeIndex The index of the income to be removed
      */
     public void deleteIncome(int personIndex, int incomeIndex) {
-        String infoString = "Method deleteIncome() called";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.DELETE_PERSON_CALL_MESSAGE);
         getPerson(personIndex).deleteIncome(incomeIndex);
     }
 
@@ -191,8 +179,7 @@ public class PersonList {
      */
     public void addExpend(int personIndex, String description, double amount, int category, boolean isPermanent,
                           boolean isSilent) {
-        String infoString = "Method addExpend() called";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.ADD_EXPEND_CALL_MESSAGE);
         getPerson(personIndex).addExpend(description, amount, category, isPermanent, isSilent);
     }
 
@@ -203,8 +190,7 @@ public class PersonList {
      * @param expendIndex The index of the income to be removed
      */
     public void deleteExpend(int personIndex, int expendIndex) {
-        String infoString = "Method deleteIncome() called";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.DELETE_EXPEND_CALL_MESSAGE);
         getPerson(personIndex).deleteIncome(expendIndex);
     }
 
@@ -215,8 +201,7 @@ public class PersonList {
      * @return The number of incomes of the person
      */
     public int getNumberOfIncomes(int personIndex) {
-        String infoString = "Method getNumberOfIncomes() called";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.NUM_INCOMES_CALL_MESSAGE);
         return getPerson(personIndex).getNumberOfIncomes();
     }
 
@@ -227,8 +212,7 @@ public class PersonList {
      * @return The number of incomes of the person
      */
     public int getNumberOfExpenditures(int personIndex) {
-        String infoString = "Method deleteIncome() called";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.NUM_EXPENDS_CALL_MESSAGE);
         return getPerson(personIndex).getNumberOfExpenditures();
     }
 
@@ -242,8 +226,7 @@ public class PersonList {
      * @param isPermanent Whether the income is recurring
      */
     public void editIncome(int personIndex, int incomeIndex, String description, double amount, boolean isPermanent) {
-        String infoString = "Method editIncome() called";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.EDIT_INCOME_CALL_MESSAGE);
         getPerson(personIndex).editIncome(incomeIndex, description, amount, isPermanent);
     }
 
@@ -259,8 +242,20 @@ public class PersonList {
      */
     public void editExpend(int personIndex, int expendIndex, String description, double amount, int category,
                            boolean isPermanent) {
-        String infoString = "Method editExpend() called";
-        logger.log(Level.INFO, infoString);
+        LOGGER.log(Level.INFO, Constants.EDIT_EXPEND_CALL_MESSAGE);
         getPerson(personIndex).editExpend(expendIndex, description, amount, category, isPermanent);
+    }
+
+    /**
+     * Prints entries found in the category provided containing the stated description.
+     *
+     * @param description The string to look for
+     * @param category The category of the entry
+     */
+    public void find(String description, int category) {
+        LOGGER.log(Level.INFO, Constants.FIND_CALL_MESSAGE);
+        for (Person person : personList) {
+            person.find(description, category);
+        }
     }
 }
