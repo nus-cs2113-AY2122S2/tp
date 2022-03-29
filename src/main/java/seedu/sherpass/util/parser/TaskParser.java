@@ -42,6 +42,7 @@ import static seedu.sherpass.constant.Index.SPLIT_TWO_PART_LIMIT;
 import static seedu.sherpass.constant.Index.START_OF_STRING;
 import static seedu.sherpass.constant.Index.WHITESPACE_OFFSET;
 
+import static seedu.sherpass.constant.Index.ZERO_INDEX_OFFSET;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_EMPTY_ADD_COMMANDS_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_EMPTY_DESCRIPTION_MESSAGE;
@@ -290,7 +291,13 @@ public class TaskParser {
         if (argument.isBlank()) {
             return new HelpCommand(EditCommand.COMMAND_WORD);
         }
+        boolean isRepeat = false;
+        if (argument.contains(FREQUENCY_DELIMITER)) {
+            isRepeat = true;
+            argument = argument.replace(FREQUENCY_DELIMITER, EMPTY_STRING).trim();
+        }
         EditCommand newCommand = new EditCommand();
+        newCommand.setIsRepeat(isRepeat);
         try {
             prepareEditTaskContent(newCommand, taskList, argument);
         } catch (NumberFormatException | InvalidInputException | IndexOutOfBoundsException e) {
@@ -303,8 +310,13 @@ public class TaskParser {
 
     protected static Command prepareDelete(String argument, TaskList taskList, Ui ui) {
         try {
-            int deleteIndex = Integer.parseInt(argument) - 1;
-            return new DeleteCommand(deleteIndex, taskList);
+            boolean isRepeat = false;
+            if (argument.contains(FREQUENCY_DELIMITER)) {
+                isRepeat = true;
+                argument = argument.replace(FREQUENCY_DELIMITER, EMPTY_STRING).trim();
+            }
+            int deleteIndex = Integer.parseInt(argument) - ZERO_INDEX_OFFSET;
+            return new DeleteCommand(deleteIndex, taskList, isRepeat);
         } catch (IndexOutOfBoundsException | InvalidInputException | NumberFormatException e) {
             ui.showToUser(ERROR_INVALID_DELETE_INDEX_MESSAGE + HELP_MESSAGE_SPECIFIC_COMMAND);
         }

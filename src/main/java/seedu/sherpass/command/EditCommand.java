@@ -35,10 +35,11 @@ public class EditCommand extends Command {
     private LocalTime startTime;
     private LocalTime endTime;
     private LocalDateTime byDate;
+    private boolean isRepeat;
 
 
     /**
-     * Accepts a index to edit a task. Checks if index is valid
+     * Accepts an index to edit a task. Checks if index is valid
      * and corresponds to a task in the task list.
      *
      * @param editIndex Index of a task to edit.
@@ -50,6 +51,16 @@ public class EditCommand extends Command {
             throw new NumberFormatException(ERROR_INVALID_INDEX_MESSAGE);
         }
         this.editIndex = editIndex;
+    }
+
+    /**
+     * Sets the boolean attribute isRepeat to true if user inputs includes
+     * "/repeat". False otherwise.
+     *
+     * @param isRepeat
+     */
+    public void setIsRepeat(boolean isRepeat) {
+        this.isRepeat = isRepeat;
     }
 
     /**
@@ -100,7 +111,8 @@ public class EditCommand extends Command {
         LocalDateTime currentDoOnEndDateTime =
                 LocalDateTime.parse(currentTaskDate.format(inputDateOnlyFormat) + WHITESPACE
                         + currentEndTime.format(timeOnlyFormat), inputWithTimeFormat);
-        taskList.editTask(ui, taskToEdit, taskDescription, currentDoOnStartDateTime, currentDoOnEndDateTime, byDate);
+        taskList.editTask(ui, taskToEdit, taskDescription, currentDoOnStartDateTime,
+                currentDoOnEndDateTime, byDate, isRepeat);
         storage.writeSaveData(taskList);
     }
 }

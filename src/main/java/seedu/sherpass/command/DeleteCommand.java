@@ -7,6 +7,7 @@ import seedu.sherpass.exception.InvalidInputException;
 
 public class DeleteCommand extends Command {
     private int deleteIndex;
+    private boolean isRepeat;
 
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_USAGE = "Delete: Deletes a task in the task list.\n"
@@ -20,11 +21,12 @@ public class DeleteCommand extends Command {
      * @throws InvalidInputException If there is no task present in task list
      *                               that corresponds to given delete index.
      */
-    public DeleteCommand(int deleteIndex, TaskList taskList) throws InvalidInputException {
+    public DeleteCommand(int deleteIndex, TaskList taskList, boolean isRepeat) throws InvalidInputException {
         if (taskList.isTaskNotExist(deleteIndex)) {
             throw new InvalidInputException();
         }
         this.deleteIndex = deleteIndex;
+        this.isRepeat = isRepeat;
     }
 
     /**
@@ -36,7 +38,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.removeTask(deleteIndex, ui);
+        taskList.removeTask(deleteIndex, ui, isRepeat);
         storage.writeSaveData(taskList);
     }
 }

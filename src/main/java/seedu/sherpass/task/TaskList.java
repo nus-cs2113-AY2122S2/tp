@@ -2,7 +2,6 @@ package seedu.sherpass.task;
 
 import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.util.Ui;
-import seedu.sherpass.util.parser.TaskParser;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -249,9 +248,10 @@ public class TaskList {
      */
     public void editTask(Ui ui, Task taskToEdit, String taskDescription,
                          LocalDateTime currentDoOnStartDateTime,
-                         LocalDateTime currentDoOnEndDateTime, LocalDateTime byDate) {
+                         LocalDateTime currentDoOnEndDateTime,
+                         LocalDateTime byDate, boolean isRepeat) {
         boolean hasEdit;
-        if (TaskParser.isValidFreq(taskToEdit.getRepeatFrequency())) {
+        if (isRepeat) {
             assert (byDate == null);
             editRepeatedTasks(taskToEdit, taskDescription, currentDoOnStartDateTime, currentDoOnEndDateTime, ui);
             hasEdit = true;
@@ -349,10 +349,10 @@ public class TaskList {
      * @param deleteIndex Index of a task to search for.
      * @param ui          User Interface
      */
-    public void removeTask(int deleteIndex, Ui ui) {
+    public void removeTask(int deleteIndex, Ui ui, boolean isRepeat) {
         Task taskToBeRemoved = tasks.get(deleteIndex);
-        String repeatKeyWord = "";
-        if (!TaskParser.isValidFreq(taskToBeRemoved.getRepeatFrequency())) {
+        String repeatKeyWord = EMPTY_STRING;
+        if (!isRepeat) {
             tasks.remove(deleteIndex);
         } else {
             repeatKeyWord = "repeated";
