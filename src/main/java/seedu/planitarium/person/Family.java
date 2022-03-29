@@ -283,4 +283,18 @@ public class Family {
         logger.log(Level.INFO, infoString);
         getList(group).editExpend(personIndex, expendIndex, description, amount, category, isPermanent);
     }
+
+    /**
+     * Prints entries found in the category provided containing the stated description.
+     *
+     * @param description The string to look for
+     * @param category The category of the entry
+     */
+    public void find(String description, int category) {
+        String infoString = "Method find() called";
+        logger.log(Level.INFO, infoString);
+        for (int i = Constants.SINGULAR; i <= Constants.NUM_GROUPS; i++) {
+            getList(i).find(description, category);
+        }
+    }
 }

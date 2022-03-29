@@ -258,4 +258,18 @@ public class PersonList {
         logger.log(Level.INFO, infoString);
         getPerson(personIndex).editExpend(expendIndex, description, amount, category, isPermanent);
     }
+
+    /**
+     * Prints entries found in the category provided containing the stated description.
+     *
+     * @param description The string to look for
+     * @param category The category of the entry
+     */
+    public void find(String description, int category) {
+        String infoString = "Method find() called";
+        logger.log(Level.INFO, infoString);
+        for (Person person : personList) {
+            person.find(description, category);
+        }
+    }
 }
