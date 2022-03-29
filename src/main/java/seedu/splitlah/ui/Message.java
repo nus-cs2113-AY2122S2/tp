@@ -382,10 +382,6 @@ public abstract class Message {
             "Group Id is not initialized.";
 
     // Group List Command
-    public static final String ASSERT_GROUPLIST_GROUP_SIZE_LESS_THAN_ONE =
-            "The size of the list of groups to be printed is less than one.";
-    public static final String LOGGER_GROUPLIST_GROUPS_NOT_LISTED =
-            "There are no groups to be listed.";
     public static final String LOGGER_GROUPLIST_GROUPS_LISTED =
             "All the groups have been listed.";
 }
