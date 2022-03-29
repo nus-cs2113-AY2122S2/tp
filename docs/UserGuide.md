@@ -1,6 +1,4 @@
-<p style="align:center"><img src="https://raw.githubusercontent.com/froststein/tp/master/docs/images/userguide/pngLogo.png"></p>
-<br>
-
+<p align="center"><img src="https://raw.githubusercontent.com/froststein/tp/master/docs/images/userguide/pngLogo.png"></p>
 # SplitLah
 SplitLah is a desktop app with a Command Line Interface (CLI) for **splitting bills** amongst you and your friends after a group outing,
 where each group outing can consist of several activities with **different people paying the bill** for each activity.
@@ -14,7 +12,7 @@ You can **look up past activities** anytime you want. SplitLah remembers your in
 activities.
 If you can type fast, SplitLah can manage your outings faster than apps using a Graphical User Interface (GUI).
 
-###Who SplitLah is for:
+### Who SplitLah is for:
 - People who go on group outings often and love to split bills.
 - People who dislike manually calculating how much people owe across several activities.
 - People who go on group outings where different people pay for different activities, making bill-splitting harder.
@@ -51,7 +49,7 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
-##How to use this user guide
+## How to use this user guide
 - For each feature that SplitLah supports, we refer it as commands.
 - We classify each command under 5 sections, [Session Management](#_session-management_), [Activity Management](#_activity-management_), 
 [Transaction Management](#_transaction-management_), [Group Management](#_group-management_) and [Miscellaneous](#_miscellaneous_).
@@ -86,7 +84,7 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 5. Type in a command and press Enter to execute it.
 6. Refer to Features for a more in-depth explanation of all commands available.
 
-##How SplitLah works
+## How SplitLah works
 - An activity represents a single group activity, paid for by one person. An activity stores a list of its participants,
 the payer and how much each participant owes.
   - Example: `Lunch at a restaurant`
@@ -130,7 +128,8 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
 >- The `[SESSION_NAME]` should be unique across all active sessions.
 >- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
 > 
-> **⚠️```diff - Warning:```**
+> **⚠️```diff 
+- Warning:```**
 > - When using `/pl` and `/gid` delimiters together, if there is a duplicated name in `/pl` and 
 > specified group with `/gid`. The duplicate name would be removed, storing only 1 instance of it.
 >  - Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
