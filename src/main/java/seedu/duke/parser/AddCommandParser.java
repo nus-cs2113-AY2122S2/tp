@@ -12,7 +12,7 @@ import seedu.duke.data.Item;
 import seedu.duke.exceptions.InvMgrException;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddCommand object.
  */
 public class AddCommandParser implements Parser<AddCommand> {
 

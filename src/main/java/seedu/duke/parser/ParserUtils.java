@@ -13,7 +13,7 @@ public class ParserUtils {
         String trimmedIndex = oneBasedIndex.trim();
         try {
             int value = Integer.parseInt(trimmedIndex);
-            if (!(value>0)) {
+            if (!(value > 0)) {
                 throw new InvMgrException(Messages.INVALID_INDEX);
             }
             return value;
@@ -31,7 +31,7 @@ public class ParserUtils {
         String trimmedQuantity = quantity.trim();
         try {
             int value = Integer.parseInt(trimmedQuantity);
-            if (!(value>=0)) {
+            if (!(value >= 0)) {
                 throw new InvMgrException(Messages.INVALID_INDEX);
             }
             return value;

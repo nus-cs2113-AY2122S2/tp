@@ -11,7 +11,7 @@ public class DescCommandParser {
      * @throws InvMgrException if the user input does not conform to the expected format
      */
     public DescCommand parse(String args) throws InvMgrException {
-        int index = ParserUtils.parseIndex(args)-1;
+        int index = ParserUtils.parseIndex(args) - 1;
         return new DescCommand(index);
     }
 

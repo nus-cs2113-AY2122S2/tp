@@ -2,7 +2,6 @@ package seedu.duke.commands;
 
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
-import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.ui.Ui;
 
 public class DescCommand extends Command {
