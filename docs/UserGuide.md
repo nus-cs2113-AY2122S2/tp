@@ -336,7 +336,7 @@ command.
   Edits the activity's name, payer, overall cost, GST percentage and service charge. List of participants remains
   unchanged.<br>
   `activity /edit /sid 1 /aid 1 /n Dinner /p Bob /i Alice Bob /co 30 /gst 7 /sc 10`<br>
-  ![Activity edit command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityEditCommand.png)
+  ![Activity edit command Screenshot](https://raw.githubusercontent.com/matheril/tp/master/docs/images/userguide/ActivityEditCommand.png)
   <br>
   <br>
 ### Viewing an activity: `activity /view`
