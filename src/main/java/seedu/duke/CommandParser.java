@@ -18,6 +18,13 @@ import seedu.duke.command.roomcommand.CheckOutCommand;
 import seedu.duke.command.roomcommand.CheckRoomCommand;
 import seedu.duke.command.roomcommand.CheckRoomByLevelCommand;
 import seedu.duke.command.roomcommand.CheckRoomByCatCommand;
+import seedu.duke.command.housekeepercommands.AddAvailabilityCommand;
+import seedu.duke.command.housekeepercommands.AddHousekeeperCommand;
+import seedu.duke.command.housekeepercommands.AgeIncreaseCommand;
+import seedu.duke.command.housekeepercommands.DeleteHousekeeperCommand;
+import seedu.duke.command.housekeepercommands.GetAvailableHousekeeperCommand;
+import seedu.duke.command.housekeepercommands.ResetAvailabilityCommand;
+import seedu.duke.command.housekeepercommands.ViewHousekeeperListCommand;
 
 /**
  * Class that implements behavior of parsing user input and linking

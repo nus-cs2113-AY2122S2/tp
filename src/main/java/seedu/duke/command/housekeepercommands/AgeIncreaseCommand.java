@@ -1,6 +1,11 @@
-package seedu.duke;
+package seedu.duke.command.housekeepercommands;
 
 import java.util.ArrayList;
+
+import seedu.duke.Housekeeper;
+import seedu.duke.HousekeeperList;
+import seedu.duke.ListContainer;
+import seedu.duke.Ui;
 import seedu.duke.command.Command;
 
 public class AgeIncreaseCommand extends Command {
