@@ -1,7 +1,9 @@
 package seedu.duke;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+
 import seedu.duke.command.Command;
 
 /**
@@ -68,11 +70,12 @@ public class AssignHousekeeperCommand extends Command {
     /**
      * Get the Name of the housekeeper and verify that housekeeper is in records. If in records, add
      * his/her availability into housekeeper list.
-     * @param ui               The user interface for this execution method.
+     *
+     * @param ui The user interface for this execution method.
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui)
-            throws InvalidRoomNumberException, InvalidHousekeeperProfile {
+            throws InvalidRoomNumberException, InvalidHousekeeperProfile, IOException {
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         RoomList roomList = listContainer.getRoomList();
@@ -80,8 +83,35 @@ public class AssignHousekeeperCommand extends Command {
         assert !roomID.isEmpty() : "ID should not be empty";
         String name = getName();
         assert !name.isEmpty() : "name should not be empty";
-        assignmentMap.addAssignment(name, roomID, housekeeperList, roomList);
+
+
+        if (!isNameExist(name, housekeeperList)) {
+            throw new InvalidHousekeeperProfile();
+        }
+
+        int roomIdNumber = Integer.parseInt(roomID);
+        if (!isRoomIdValid(roomIdNumber, roomList)) {
+            throw new InvalidRoomNumberException();
+        }
+
+
+        assignmentMap.addAssignment(name, roomIdNumber);
+        assignmentMap.save();
         ui.printMessage("Assigned " + name + " to room#" + roomID + ".");
         logger.log(Level.INFO, "end of processing");
+    }
+
+    private boolean isRoomIdValid(int roomIdNumber, RoomList roomList) {
+        for (Room room : roomList.getRoomList()) {
+            if (room.getRoomId() == roomIdNumber) return true;
+        }
+        return false;
+    }
+
+    private boolean isNameExist(String name, HousekeeperList housekeeperList) {
+        for (Housekeeper housekeeper : housekeeperList.getHousekeeperList()) {
+            if (housekeeper.getName().equals(name)) return true;
+        }
+        return false;
     }
 }

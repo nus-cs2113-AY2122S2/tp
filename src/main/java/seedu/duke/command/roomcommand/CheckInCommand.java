@@ -1,5 +1,6 @@
-package seedu.duke;
+package seedu.duke.command.roomcommand;
 
+import seedu.duke.*;
 import seedu.duke.storage.RoomFileManager;
 import seedu.duke.command.Command;
 
@@ -33,7 +34,7 @@ public class CheckInCommand extends Command {
                 room.checkIn();
                 ui.printTableHeader();
                 System.out.println(room + "\t\t\t"
-                        + assignmentMap.getHouseKeeperNameByRoom(room));
+                        + assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()));
                 roomList.save();
                 return;
             }

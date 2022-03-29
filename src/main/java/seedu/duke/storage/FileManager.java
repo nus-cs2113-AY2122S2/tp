@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class FileManager {
-    public static final String FILE_SEPARATOR = " \\| ";
+    public static final String FILE_SEPARATOR = "\\|";
 
     public File getFile(String filePath) throws IOException {
         File file = new File(filePath);

@@ -1,5 +1,6 @@
-package seedu.duke;
+package seedu.duke.command.roomcommand;
 
+import seedu.duke.*;
 import seedu.duke.command.Command;
 
 /**
@@ -59,7 +60,7 @@ public class CheckRoomByCatCommand extends Command {
         for (Room room : roomList.getRoomList()) {
             if (room.getType() == type) {
                 System.out.println(room.toString() + "\t\t\t"
-                        + assignmentMap.getHouseKeeperNameByRoom(room));
+                        + assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()));
             }
         }
     }

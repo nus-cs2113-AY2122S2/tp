@@ -8,6 +8,9 @@ import seedu.duke.command.itemcommand.UpdateItemPaxCommand;
 import seedu.duke.command.itemcommand.DeleteItemCommand;
 import seedu.duke.command.itemcommand.UpdateItemNameCommand;
 import seedu.duke.command.itemcommand.ViewItemListCommand;
+import seedu.duke.command.roomcommand.*;
+
+
 /**
  * Class that implements behavior of parsing user input and linking
  * that user input to a Command class.
