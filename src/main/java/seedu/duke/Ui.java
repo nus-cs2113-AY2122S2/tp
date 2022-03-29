@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 import static javax.swing.plaf.synth.Region.TABLE_HEADER;
@@ -74,6 +75,7 @@ public class Ui {
         for (int i = 0; i < listOfItems.getSize(); i++) {
             currentItem = listOfItems.getItem(i);
             itemName = currentItem.getName();
+            itemName = itemName.toUpperCase();
             itemPax = currentItem.getPax();
             assert (itemPax >= 0) : "Assertion Failed! Pax of an item within the listOfItems is less than 0 !";
             assert (!itemName.isEmpty()) : "Assertion Failed! The name of the item within the listOfItems is empty !";
@@ -165,6 +167,7 @@ public class Ui {
      */
     public void printUpdateItemPaxAcknowledgementMessage(Item updatedItem) {
         String updatedItemName = updatedItem.getName();
+        updatedItemName = updatedItemName.toUpperCase();
         int updatedItemNewPax = updatedItem.getPax();
         assert (!updatedItemName.isEmpty()) : "Assertion Failed! Updated item has an empty item name.";
         assert (updatedItemNewPax >= 0) : "Assertion Failed! Updated item has a pax that is less than 0.";
@@ -185,6 +188,7 @@ public class Ui {
 
     public void printDeleteItemAcknowledgementMessage(Item updatedItem, ItemList listOfItems) {
         String itemName = updatedItem.getName();
+        itemName = itemName.toUpperCase();
         assert (!itemName.isEmpty()) : "Assertion Failed! Updated item has an empty item name.";
         System.out.printf("%s has been removed from the Item List.\n", itemName);
         System.out.printf("There are currently %d items within the Item List.\n", listOfItems.getSize());

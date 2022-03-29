@@ -15,7 +15,7 @@ public class UpdateItemCommandTest {
         Command command = parser.parse("Update Item Pax Toilet Roll / 5");
         UpdateItemPaxCommand updateItemPaxCommand = (UpdateItemPaxCommand) command;
         Item item = updateItemPaxCommand.getItem();
-        assertEquals("Toilet Roll", item.getName());
+        assertEquals("toilet roll", item.getName());
         assertEquals(5, item.getPax());
     }
 

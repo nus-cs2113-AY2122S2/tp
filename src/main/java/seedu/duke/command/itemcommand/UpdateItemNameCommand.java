@@ -7,6 +7,8 @@ import seedu.duke.InvalidCommandException;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.ItemList;
+
+import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -84,6 +86,8 @@ public class UpdateItemNameCommand extends Command {
         String oldItemName = getOldItemName();
         String newItemName = getNewItemName();
         listOfItems.updateItemNameInList(oldItemName, newItemName);
+        oldItemName = oldItemName.toUpperCase();
+        newItemName = newItemName.toUpperCase();
         ui.printUpdateItemNameAcknowledgementMessage(oldItemName, newItemName);
     }
 }

@@ -1,5 +1,4 @@
 Error! Invalid Command.
-Error! Invalid Command.
 The item and its pax has been added to the list of items in the inventory.
 There are currently 1 items within the inventory.
 Error! Item Name cannot be empty.
@@ -11,27 +10,26 @@ There are currently 2 items within the inventory.
 The item and its pax has been added to the list of items in the inventory.
 There are currently 3 items within the inventory.
 =========== Item List ===========
-1. Item Name: Toilet Roll Item Pax: 15
-2. Item Name: Fork Item Pax: 15
-3. Item Name: Spoon Item Pax: 2
+1. Item Name: TOILET ROLL Item Pax: 15
+2. Item Name: FORK Item Pax: 15
+3. Item Name: SPOON Item Pax: 2
 ======== End of the list ========
-Error! Invalid Command.
-The pax of Toilet Roll has been updated to 5.
+The pax of TOILET ROLL has been updated to 5.
 Error! Item Pax is invalid.
 Error! Item Pax cannot be empty.
 Error! Item Name cannot be empty.
 Error! Invalid Command.
 Error! Item not found in inventory.
-The pax of Spoon has been updated to 0.
-Error! Invalid Command.
-Error! Invalid Command.
-Toilet Roll has been removed from the Item List.
+The pax of SPOON has been updated to 0.
+Error! Invalid Command -> Availability NAME @ 1,2
+Error! Invalid Command -> Availability NAME @ 1,2
+TOILET ROLL has been removed from the Item List.
 There are currently 2 items within the Item List.
 Error! Item not found in inventory.
 Error! Invalid Command.
 Error! Item Name cannot be empty.
 Error! Item Name cannot be empty.
-The name of Spoon has been updated to Premium Spoon.
+The name of SPOON has been updated to PREMIUM SPOON.
 ========== Noted ! ==========
 [JANE]: Age: 33, Availability: <Enter Availability>
 =============================
@@ -127,22 +125,22 @@ Everyone age has increased by one
 ======== Housekeeper List ========
 1. [JANE]: Age: 35, Availability: <Enter Availability>
 ======== End of the list ========
-Error! Invalid Command.
-Error! Invalid Command.
-Error! Invalid Command.
+======== Housekeeper List ========
+1. [JANE]: Age: 35, Availability: <Enter Availability>
+======== End of the list ========
 Error! Item Name cannot be empty.
 Error! Item Name cannot be empty.
 Error! Item not found in inventory.
 Error! Invalid Command.
 =========== Item List ===========
-1. Item Name: Fork Item Pax: 15
-2. Item Name: Premium Spoon Item Pax: 0
+1. Item Name: FORK Item Pax: 15
+2. Item Name: PREMIUM SPOON Item Pax: 0
 ======== End of the list ========
 =========== Item List ===========
-1. Item Name: Premium Spoon Item Pax: 0
+1. Item Name: PREMIUM SPOON Item Pax: 0
 ======== End of the list ========
 Error! Invalid Command.
-Error! Premium Spoon has already been added to the item list.
+Error! PREMIUM SPOON has already been added to the item list.
 The item and its pax has been added to the list of items in the inventory.
 There are currently 3 items within the inventory.
 see u again!
