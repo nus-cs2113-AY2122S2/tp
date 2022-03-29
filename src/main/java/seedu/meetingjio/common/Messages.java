@@ -33,6 +33,8 @@ public class Messages {
     public static final String MESSAGE_FREE_GENERIC_FORMAT = "To find free timeslots: free\n";
     public static final String MESSAGE_FREE_SPECIFIC_FORMAT = "To find free timeslots given a minimum duration: free "
             + "[duration]\n";
+    public static final String NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED = "New user added so all meetings "
+            + "added so far will be deleted";
     public static final String MESSAGE_EXIT_FORMAT = "To exit the application: exit\n";
     public static final String MESSAGE_HELP = "Here is the list of commands available:\n"
             + MESSAGE_DIVIDER + "\n"
@@ -45,4 +47,6 @@ public class Messages {
             + "7. " + MESSAGE_CLEAR_FORMAT
             + "8. " + MESSAGE_EXIT_FORMAT
             + MESSAGE_DIVIDER;
+
+    public static final String SAVE_DATA_MESSAGE = "Data saved to local successfully";
 }

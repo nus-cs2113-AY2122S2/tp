@@ -1,3 +1,5 @@
+//@@author ibrahimisramos
+
 package seedu.meetingjio.commands;
 
 import seedu.meetingjio.events.Event;
@@ -7,13 +9,13 @@ import seedu.meetingjio.timetables.MasterTimetable;
 import seedu.meetingjio.timetables.Timetable;
 
 import java.util.logging.Level;
+import static seedu.meetingjio.parser.Parser.logger;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_TIMETABLE_NOT_FOUND_TO_DELETE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EXCEPTION_NOT_HANDLED;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_DELETE_COMMAND_FAILED;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
 
-//@@author ibrahimisramos
+
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     private final int index;
@@ -60,14 +62,11 @@ public class DeleteCommand extends Command {
      *
      * @param event Event to inform user that said event has been deleted
      *
+     * @return String confirmation of event being deleted
      */
     private String deleteConfirmation(Event event) {
         return "The following event has been deleted from your timetable:\n"
                 + event;
     }
 
-    public static String deleteFromAllTimetableConfirmation(Meeting event) {
-        return "The following event has been deleted from everyone's timetable:\n"
-                + event;
-    }
 }

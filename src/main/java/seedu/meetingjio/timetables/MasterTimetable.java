@@ -9,12 +9,11 @@ import seedu.meetingjio.exceptions.OverlappingEventException;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.commands.ListCommand;
 
-import static seedu.meetingjio.common.ErrorMessages.ERROR_NO_FREE_TIMESLOT;
-
 import java.util.ArrayList;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
+import static seedu.meetingjio.common.Messages.NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
 
 public class MasterTimetable {
 
@@ -23,11 +22,7 @@ public class MasterTimetable {
 
     public static final int NUM_DAYS = 7;
     public static final int NUM_MINS = 960;
-    public static final int OFFSET = 480;
-    public static final int MINS_IN_1_HOUR = 60;
-    public static final int HOUR_IN_24_HOUR = 100;
     public static final int BUSY = 1;
-    public static final int FREE = 0;
 
     public MasterTimetable() {
         this.timetables = new ArrayList<>();
@@ -43,13 +38,12 @@ public class MasterTimetable {
         throw new TimetableNotFoundException();
     }
 
-    public void removeByName(String name) throws TimetableNotFoundException {
-        for (Timetable timetable : timetables) {
-            if (name.equalsIgnoreCase(timetable.getName())) {
-                timetables.remove(timetable);
+    public void removeByName(String name) {
+        for (int i = 0; i < timetables.size(); i++) {
+            if (name.equalsIgnoreCase(timetables.get(i).getName())) {
+                timetables.remove(i);
             }
         }
-        throw new TimetableNotFoundException();
     }
 
     public Timetable getByIndex(int index) {
@@ -94,6 +88,13 @@ public class MasterTimetable {
         return meetingList;
     }
 
+    /**
+     * Does check if the meeting clashes any other events/lessons with any user across all timetables.
+     *
+     * @param meeting The meeting event that is to be checked
+     *
+     * @return boolean true if there is another event at the same time as the meeting
+     */
     public boolean checkIfClash(Meeting meeting) {
         for (Timetable timetable : timetables) {
             if (checkMeetingOverlap(timetable, meeting)) {
@@ -103,6 +104,14 @@ public class MasterTimetable {
         return false;
     }
 
+    /**
+     * Does check if the meeting clashes with any event in the specified user's timetable.
+     *
+     * @param timetable The timetable to check clash
+     * @param meeting The meeting event that is to be checked
+     *
+     * @return boolean True false if there is another event at the same time as the meeting
+     */
     private boolean checkMeetingOverlap(Timetable timetable, Meeting meeting) {
         for (Event event : timetable.getList()) {
             if (meeting.overlaps(event)) {
@@ -112,6 +121,13 @@ public class MasterTimetable {
         return false;
     }
 
+    /**
+     * Does check if the meeting already exists,as added before.
+     *
+     * @param meeting The meeting event that is to be checked
+     *
+     * @return boolean True false if there meeting already exists
+     */
     public boolean checkIfMeetingExistsAlready(Meeting meeting) {
         for (Event event : meetingList) {
             if (meeting.equals(event)) {
@@ -121,6 +137,13 @@ public class MasterTimetable {
         return false;
     }
 
+    /**
+     * Add meeting to everyone's timetable so that everyone has a record on it.
+     *
+     * @param meeting The meeting event that is to be added
+     *
+     * @return String Confirmation of meeting being added to everyone's timetable
+     */
     public String addMeetingToEveryoneTimetable(Meeting meeting) {
         for (Timetable timetable : timetables) {
             try {
@@ -133,17 +156,55 @@ public class MasterTimetable {
                 return "ERROR DETECTED";
             }
         }
-        return AddMeetingCommand.addMeetingConfirmation(meeting);
+        return addMeetingConfirmation(meeting);
     }
 
+    /**
+     * Inform user that meeting has been added.
+     *
+     * @param meeting The meeting event that has just been added
+     *
+     * @return String confirmation of meeting added to everyone's timetable
+     */
+    private String addMeetingConfirmation(Meeting meeting) {
+        return String.format("The following meeting has been added to everyone's timetable:\n%s",
+                meeting);
+    }
+
+    /**
+     * Inform user that meeting has been deleted from everyone's timetable.
+     *
+     * @param meeting The meeting event that is to be deleted
+     *
+     * @return String confirmation of meeting added to everyone's timetable
+     */
     public String deleteMeetingFromEveryoneTimetable(Meeting meeting) {
         for (Timetable timetable : timetables) {
             deleteMeetingFromTimetable(timetable,meeting);
         }
         deleteMeetingFromMeetingList(meeting);
-        return DeleteCommand.deleteFromAllTimetableConfirmation(meeting);
+        return deleteMeetingFromAllTimetableConfirmation(meeting);
     }
 
+    /**
+     * Inform user that delete has happened.
+     *
+     * @param meeting Event to inform user that said event has been deleted
+     *
+     *
+     */
+    public String deleteMeetingFromAllTimetableConfirmation(Meeting meeting) {
+        return "The following meeting event has been deleted from everyone's timetable:\n"
+                + meeting;
+    }
+
+    /**
+     * Deletes meeting from specified user's timetable.
+     *
+     * @param timetable The timetable to delete from
+     * @param meeting The meeting event that is to be deleted
+     *
+     */
     public void deleteMeetingFromTimetable(Timetable timetable,Meeting meeting) {
         for (int i = 0; i < timetable.size(); i++) {
             if (meeting.equals(timetable.get(i))) {
@@ -152,6 +213,12 @@ public class MasterTimetable {
         }
     }
 
+    /**
+     * Deletes meeting from meetingList.
+     *
+     * @param meeting The meeting event that is to be deleted
+     *
+     */
     public void deleteMeetingFromMeetingList(Meeting meeting) {
         for (int i = 0; i < meetingList.size(); i++) {
             if (meeting.equals(meetingList.get(i))) {
@@ -160,7 +227,47 @@ public class MasterTimetable {
         }
     }
 
-    public String listFree(int duration) {
+    /**
+     * Deletes all meetings that exist.
+     *
+     * @return String Message that all meetings were deleted as new user was added
+     *
+     */
+    public String deleteAllMeetings() {
+        for (Timetable timetable : timetables) {
+            deleteMeetingsFromTimetable(timetable);
+        }
+        for (int i = 0; i < meetingList.size(); i++) {
+            meetingList.remove(0);
+        }
+
+        return NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
+    }
+
+    /**
+     * Deletes all meetings from specified timetable.
+     *
+     * @param timetable Specific timetable to perform delete on
+     *
+     */
+    public void deleteMeetingsFromTimetable(Timetable timetable) {
+        for (int i = 0; i < timetable.size(); i++) {
+            Event event = timetable.get(i);
+            if (event instanceof Meeting) {
+                timetable.remove(i);
+            }
+        }
+    }
+
+    /**
+     * Initialise a 7 x 960 array, with the 7 rows indicating each day of the week and the 960 columns indicating the
+     * minutes starting from 0800 to 2359 (Constraint here is that free timeslots from 0000 to 0759 are not included).
+     * For the last minute (2359) of each day, it will be initialised to 1 (BUSY).
+     * For each timetable stored, the method populateBusySlots will be called.
+     *
+     * @return busySlots A 7 x 960 array containing 0s and 1s whereby 0 indicates a time when all users are free
+     */
+    public int[][] listBusy() {
         int[][] busySlots = new int[NUM_DAYS][NUM_MINS];
         for (int i = 0; i < NUM_DAYS; i++) {
             busySlots[i][NUM_MINS - 1] = BUSY;
@@ -168,77 +275,7 @@ public class MasterTimetable {
         for (Timetable timetable : timetables) {
             timetable.populateBusySlots(busySlots);
         }
-        return showOutput(busySlots, duration);
-    }
-
-    private String showOutput(int[][] busySlots, int duration) {
-        String freeSlotsString = "";
-        String newEntry = "";
-        boolean isStart = true;
-        int count = 0;
-        for (int i = 0; i < NUM_DAYS; i++) {
-            for (int j = 0; j < NUM_MINS; j++) {
-                if (busySlots[i][j] == FREE) {
-                    if (isStart) {
-                        newEntry += convertDayIntToString(i + 1);
-                        newEntry += " ";
-                        newEntry += convertMinsToTime(j);
-                        isStart = false;
-                    }
-                    count++;
-                }
-                if (busySlots[i][j] == BUSY && !isStart) {
-                    if (count >= duration * MINS_IN_1_HOUR) {
-                        newEntry += " ";
-                        newEntry += convertMinsToTime(j);
-                        newEntry += "\n";
-                        freeSlotsString += newEntry;
-                    }
-                    count = 0;
-                    newEntry = "";
-                    isStart = true;
-                }
-            }
-        }
-        return truncateString(freeSlotsString);
-    }
-
-    private String truncateString(String freeSlotsString) {
-        if (freeSlotsString.length() == 0) {
-            return ERROR_NO_FREE_TIMESLOT;
-        }
-        String filteredFreeSlotsString = freeSlotsString.substring(0, freeSlotsString.length() - 1);
-        return filteredFreeSlotsString;
-    }
-
-    private String convertDayIntToString(int numericDay) {
-        switch (numericDay) {
-        case 1:
-            return "Monday";
-        case 2:
-            return "Tuesday";
-        case 3:
-            return "Wednesday";
-        case 4:
-            return "Thursday";
-        case 5:
-            return "Friday";
-        case 6:
-            return "Saturday";
-        case 7:
-            return "Sunday";
-        default:
-            return "";
-        }
-    }
-
-    private String convertMinsToTime(int mins) {
-        mins += OFFSET;
-        int hours = mins / MINS_IN_1_HOUR;
-        int minutes = mins % MINS_IN_1_HOUR;
-        int timeInt = hours * HOUR_IN_24_HOUR + minutes;
-        String timeIn24Hour = String.format("%04d", timeInt);
-        return timeIn24Hour;
+        return busySlots;
     }
 
 }
