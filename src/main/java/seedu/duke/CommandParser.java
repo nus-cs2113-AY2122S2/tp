@@ -55,14 +55,14 @@ public class CommandParser {
     private static final String CHECK_ALL_ROOM = "check all room";
     private static final String CHECK_ROOM_BY_LEVEL = "check level ";
     private static final String CHECK_BY_CATEGORY = "check category ";
-    private static final String ASSIGN_HOUSEKEEPER = "assign";
+    private static final String ASSIGN_HOUSEKEEPER = "assign ";
     private static final String VIEW_HOUSEKEEPER_COMMAND = "view recorded housekeeper";
     private static final String VIEW_AVAILABLE_HOUSEKEEPER_DAY = "get available on ";
     private static final String RESET_AVAILABILITY = "is a new week";
     private static final String DELETE_PROFILE = "delete housekeeper ";
     private static final String UPDATE_AGE_BY_ONE = "is a new year";
-    private static final String ADD_EVENT = "event ";
-    private static final String VIEW_EVENTS = "view events";
+    private static final String ADD_EVENT = "add event ";
+    private static final String VIEW_EVENTS = "list events";
     private static final String DELETE_EVENT = "delete event ";
 
 

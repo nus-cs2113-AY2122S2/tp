@@ -26,6 +26,70 @@ public class Ui {
         return userInput;
     }
 
+    public void printEventAdded(Event event) {
+        System.out.println(LINE);
+        System.out.println("I have added the following event in your list:");
+        System.out.println("\t" + event.toString());
+        System.out.println(LINE);
+    }
+
+    public void printAllEvents(ArrayList<Event> events) {
+        System.out.println(LINE);
+        System.out.println("Here are all the events in your list:");
+        int j = 0;
+        for (Event event : events) {
+            j = j + 1;
+            System.out.println("\t" + j + ". " + event.toString());
+        }
+        System.out.println(LINE);
+    }
+
+    public void printGreeting() {
+        int row = 5;
+        int i;
+        int j;
+        int space = row - 1;
+        for (j = 1; j <= row; j++) {
+            for (i = 1; i <= space; i++) {
+                System.out.print(" ");
+            }
+            space--;
+            for (i = 1; i <= 2 * j - 1; i++) {
+                System.out.print("*");
+            }
+            System.out.println("");
+        }
+        space = 1;
+        for (j = 1; j <= row - 1; j++) {
+            for (i = 1; i <= space; i++) {
+                System.out.print(" ");
+            }
+            space++;
+            for (i = 1; i <= 2 * (row - j) - 1; i++) {
+                System.out.print("*");
+            }
+            System.out.println("");
+        }
+        System.out.println("Hi, I am Hotel Lite, and "
+                + "I will do the managing for you.");
+        System.out.println("How can I help you today?");
+    }
+
+
+    public void printEventDeleted(Event event) {
+        System.out.println(LINE);
+        System.out.println("I have deleted the following event from your list:");
+        System.out.println("\t" + event.toString());
+        System.out.println(LINE);
+    }
+
+    public void printAssignedHousekeeper(String roomID, String name) {
+        System.out.println(LINE);
+        System.out.println("I have assigned " + name
+               + "to room number " + roomID + ".");
+        System.out.println(LINE);
+    }
+
 
     public void printErrorMessage(HotelLiteManagerException exception) {
         System.out.println(exception.getErrorMessage());

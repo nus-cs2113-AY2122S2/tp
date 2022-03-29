@@ -1,21 +1,23 @@
 package seedu.duke.command.assigncommand;
 
-import java.io.IOException;
-import java.util.logging.Logger;
-import java.util.logging.Level;
-
 import seedu.duke.HotelLiteManagerException;
-import seedu.duke.InvalidAvailabilityException;
+import seedu.duke.InvalidAssignmentException;
+import seedu.duke.command.Command;
+
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
-import seedu.duke.command.Command;
-import seedu.duke.Room;
-import seedu.duke.AssignmentMap;
-import seedu.duke.RoomList;
-import seedu.duke.HousekeeperList;
 import seedu.duke.Housekeeper;
 import seedu.duke.InvalidRoomNumberException;
 import seedu.duke.InvalidHousekeeperProfile;
+import seedu.duke.RoomList;
+import seedu.duke.AssignmentMap;
+import seedu.duke.HousekeeperList;
+import seedu.duke.Room;
+import seedu.duke.InvalidHousekeeperNameException;
+
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -25,22 +27,22 @@ import seedu.duke.InvalidHousekeeperProfile;
 public class AssignHousekeeperCommand extends Command {
     private String name;
     private String roomID;
-    private static final String ASSIGNMENT_INDICATE = "##";
+    private static final String ASSIGNMENT_INDICATE = "/";
     private static final int ONLY_ONE_FIELD_ENTERED = 1;
     private static Logger logger = Logger.getLogger("Assign Housekeeper");
 
     public AssignHousekeeperCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
         if (commandStringWithoutCommand.isEmpty()) {
-            throw new InvalidAvailabilityException();
+            throw new InvalidAssignmentException();
         }
         String[] input = extractInput(commandStringWithoutCommand);
         String name = input[0].trim();
         if (input.length == ONLY_ONE_FIELD_ENTERED) {
-            throw new InvalidAvailabilityException();
+            throw new InvalidAssignmentException();
         }
         String id = input[1].trim();
         if (id.isEmpty()) {
-            throw new InvalidAvailabilityException();
+            throw new InvalidAssignmentException();
         }
         setName(name);
         setRoomID(id);
@@ -57,7 +59,7 @@ public class AssignHousekeeperCommand extends Command {
     private String[] extractInput(String commandStringWithoutCommand) throws HotelLiteManagerException {
         boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(ASSIGNMENT_INDICATE);
         if (isSymbolIncorrect) {
-            throw new InvalidAvailabilityException();
+            throw new InvalidAssignmentException();
         }
         String[] input = commandStringWithoutCommand.split(ASSIGNMENT_INDICATE);
         return input;
@@ -87,7 +89,7 @@ public class AssignHousekeeperCommand extends Command {
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui)
-            throws InvalidRoomNumberException, InvalidHousekeeperProfile, IOException {
+            throws InvalidRoomNumberException, InvalidHousekeeperProfile, IOException, InvalidHousekeeperNameException {
 
         final AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         final HousekeeperList housekeeperList = listContainer.getHousekeeperList();
@@ -99,7 +101,7 @@ public class AssignHousekeeperCommand extends Command {
 
 
         if (!isNameExist(name, housekeeperList)) {
-            throw new InvalidHousekeeperProfile();
+            throw new InvalidHousekeeperNameException();
         }
 
         int roomIdNumber = Integer.parseInt(roomID);
@@ -110,6 +112,7 @@ public class AssignHousekeeperCommand extends Command {
 
         assignmentMap.addAssignment(name, roomIdNumber);
         assignmentMap.save();
+        ui.printAssignedHousekeeper(roomID, name);
         ui.printMessage("Assigned " + name + " to room no. " + roomID + ".");
         logger.log(Level.INFO, "end of processing");
     }
