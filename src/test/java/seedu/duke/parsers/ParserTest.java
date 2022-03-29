@@ -10,18 +10,18 @@ import seedu.duke.commands.Command;
 public class ParserTest extends Parser {
     public ParserTest() {
         // This can be replaced to any regex you want to test
-        commandFormat = "\\s*(?<configurationGroupWord>[A-Z_]+)=(?<newValue>.*)";
+        commandFormat = "(\\s*(?<configurationGroupWord>[A-Z_]+)($|\\b=\\s*(?<newValue>.*)\\b))?";
         groupNames.add("configurationGroupWord");
         groupNames.add("newValue");
     }
 
     @Test
     public void checkRegex() {
-        final String testString = "COMPLETED_TASK_SHOWN=true";
+        final String testString = "";
         try {
             parsedCommand = parseString(testString);
-            assertEquals("COMPLETED_TASK_SHOWN", parsedCommand.get("configurationGroupWord"));
-            assertEquals("true", parsedCommand.get("newValue"));
+            assertEquals(null, parsedCommand.get("configurationGroupWord"));
+            assertEquals(null, parsedCommand.get("newValue"));
 
         } catch (Exception e) {
             fail();
