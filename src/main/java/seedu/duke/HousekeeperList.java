@@ -1,6 +1,8 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static java.util.stream.Collectors.toList;
 
@@ -13,6 +15,7 @@ public class HousekeeperList {
     private ArrayList<Housekeeper> housekeeperExceedValidAgeList = new ArrayList<>();
     private static final int ONE_YEAR = 1;
     private static final int MAX_AGE_ACCEPTED = 60;
+    private static Logger logger = Logger.getLogger("housekeeperListLogger");
 
     public HousekeeperList() {
         ArrayList<Housekeeper> housekeeperList = new ArrayList<>();
@@ -78,7 +81,7 @@ public class HousekeeperList {
      * @param name         Housekeeper Name.
      * @param availability Housekeeper's availability to be added in records.
      */
-    public void searchAvailability(String name, String availability) throws UserDoesNotExistException {
+    public void addAvailabilityInList(String name, String availability) throws UserDoesNotExistException {
         boolean isExist = false;
         String nameConvertLowerCase = name.toLowerCase();
         for (int i = 0; i < housekeeperList.size(); i++) {
@@ -153,4 +156,24 @@ public class HousekeeperList {
         }
     }
 
+    public void addHousekeeperInList(Housekeeper housekeeper) throws InvalidUserException {
+        boolean isRecorded = hasNameAdded(housekeeper.getName());
+        if (!isRecorded) {
+            addHousekeeper(housekeeper);
+        } else {
+            throw new InvalidUserException();
+        }
+    }
+
+
+    public void removeHousekeeperInList(String name) throws UserDoesNotExistException {
+        boolean isRecorded = hasNameAdded(name);
+        if (isRecorded) {
+            int housekeeperToRemoveIndex = getHousekeeperRemove(name);
+            removeHousekeeper(housekeeperToRemoveIndex);
+        } else {
+            logger.log(Level.WARNING, "Housekeeper to be deleted was not in the list.");
+            throw new UserDoesNotExistException();
+        }
+    }
 }

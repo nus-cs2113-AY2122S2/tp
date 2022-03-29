@@ -132,13 +132,7 @@ public class AddHousekeeperCommand extends Command {
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws InvalidUserException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
-        boolean isRecorded = housekeeperList.hasNameAdded(getHousekeeper().getName());
-        if (!isRecorded) {
-            housekeeperList.addHousekeeper(getHousekeeper());
-            ui.printHousekeeperNoted(housekeeper);
-        } else {
-            throw new InvalidUserException();
-        }
-
+        housekeeperList.addHousekeeperInList(getHousekeeper());
+        ui.printHousekeeperNoted(housekeeper);
     }
 }
