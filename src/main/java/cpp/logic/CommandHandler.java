@@ -14,19 +14,11 @@ import cpp.logic.parser.ViewProjectCommandParser;
 
 import cpp.model.ProjectList;
 import cpp.response.Response;
+import cpp.storage.Storage;
 
 import java.util.Arrays;
 
 public class CommandHandler {
-
-    /**
-     * Constructs new CommandHandler object.
-     *
-     */
-    public CommandHandler() {
-
-    }
-
     /**
      * Handles all non-exit commands given to program by user.
      *
