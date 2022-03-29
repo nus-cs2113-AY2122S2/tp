@@ -18,6 +18,8 @@ class SessionTest {
     Session session;
 
     private static final int TEST_SESSION = 1;
+    private static final int TEST_ACTIVITY_ONE = 1;
+    private static final int TEST_ACTIVITY_TWO = 2;
     private static final String CREATE_TEST_SESSION_INPUT =
             "session /create /n Class outing /d 15-02-2022 /pl Alice Bob Charlie";
     private static final String CREATE_TEST_ACTIVITY_INPUT_ONE =
@@ -49,7 +51,7 @@ class SessionTest {
     @Test
     void getActivity_noActivityExists_InvalidDataExceptionThrown() {
         try {
-            Activity activity = session.getActivity(1);
+            Activity activity = session.getActivity(TEST_ACTIVITY_ONE);
             fail();
         } catch (InvalidDataException exception) {
             assertEquals(Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST, exception.getMessage());
@@ -66,7 +68,7 @@ class SessionTest {
         createActivityCommand.run(manager);
 
         try {
-            Activity activity = session.getActivity(2);
+            Activity activity = session.getActivity(TEST_ACTIVITY_TWO);
             fail();
         } catch (InvalidDataException exception) {
             assertEquals(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST, exception.getMessage());
@@ -83,8 +85,8 @@ class SessionTest {
         createActivityCommand.run(manager);
 
         try {
-            Activity activity = session.getActivity(1);
-            assertEquals(1, activity.getActivityId());
+            Activity activity = session.getActivity(TEST_ACTIVITY_ONE);
+            assertEquals(TEST_ACTIVITY_ONE, activity.getActivityId());
         } catch (InvalidDataException exception) {
             fail();
         }
@@ -99,7 +101,7 @@ class SessionTest {
     @Test
     void removeActivity_noActivityExists_InvalidDataExceptionThrown() {
         try {
-            session.removeActivity(1);
+            session.removeActivity(TEST_ACTIVITY_ONE);
             fail();
         } catch (InvalidDataException exception) {
             assertEquals(Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST, exception.getMessage());
@@ -116,7 +118,7 @@ class SessionTest {
         createActivityCommand.run(manager);
 
         try {
-            session.removeActivity(2);
+            session.removeActivity(TEST_ACTIVITY_TWO);
             fail();
         } catch (InvalidDataException exception) {
             assertEquals(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST, exception.getMessage());
@@ -136,14 +138,14 @@ class SessionTest {
         createActivityCommandTwo.run(manager);
 
         try {
-            session.removeActivity(1);
+            session.removeActivity(TEST_ACTIVITY_ONE);
         } catch (InvalidDataException exception) {
             fail();
         }
 
         // Check if Activity object still exists
         try {
-            session.getActivity(1);
+            session.getActivity(TEST_ACTIVITY_ONE);
             fail();
         } catch (InvalidDataException exception) {
             assertEquals(Message.ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST, exception.getMessage());
@@ -153,9 +155,10 @@ class SessionTest {
         ArrayList<Person> personList = session.getPersonList();
         for (Person person : personList) {
             try {
-                person.removeActivityCost(1);
+                person.removeActivityCost(TEST_ACTIVITY_ONE);
             } catch (InvalidDataException exception) {
-                assertEquals(Message.ERROR_PERSON_ACTIVITY_NOT_FOUND + 1, exception.getMessage());
+                String errorMessage = Message.ERROR_PERSON_ACTIVITY_NOT_FOUND + TEST_ACTIVITY_ONE;
+                assertEquals(errorMessage, exception.getMessage());
             }
         }
     }
