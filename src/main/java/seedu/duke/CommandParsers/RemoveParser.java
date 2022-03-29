@@ -25,7 +25,15 @@ public class RemoveParser extends CommandParser{
             String regexGood = "id/(?<id>\\d*) q/(?<qty>\\d*)";
             HashMap<String,String> regexGoodMatch = new
                     Regex(userInput, regexGood).getGroupValues();
-            warehouse.removeGoods(regexGoodMatch.get("id"), regexGoodMatch.get("qty"));
+
+            String id = regexGoodMatch.get("id");
+            if (regexGoodMatch.containsKey("qty")){
+                warehouse.removeGoods(id, regexGoodMatch.get("qty"));
+            } else {
+                warehouse.removeGoods(id);
+            }
+
+
         } else {
             throw new WrongCommandException("remove", true);
         }

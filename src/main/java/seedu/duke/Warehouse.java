@@ -1,23 +1,25 @@
 package seedu.duke;
 
-import util.exceptions.ItemDoesNotExistException;
-import util.exceptions.LargeQuantityException;
-import util.exceptions.NullException;
-import util.exceptions.WrongCommandException;
+import org.json.simple.JSONObject;
+import util.exceptions.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Warehouse {
-    private int capacity;
+    private Float capacityOccupied = 0F;
+    private Float totalCapacity; // volume
     private static ArrayList<Order> orderLists = new ArrayList<>();
+    private Map<String, Good> inventory = new HashMap<String, Good>();
+    private int inventoryTypeCount = 0;
 
-
-    public Warehouse(int capacity) {
-        this.capacity = capacity;
+    public Warehouse(Float capacity) {
+        this.totalCapacity = capacity;
     }
 
-    public int getCapacity() {
-        return capacity;
+    public Float getCapacityOccupied() {
+        return capacityOccupied;
     }
 
     public void viewOrder(String orderId) {
@@ -30,10 +32,10 @@ public class Warehouse {
                     System.out.println("Shipping address:" + order.getShippingAddress());
                     System.out.println("Items in the order:");
 
-                    ArrayList<Good> userGoods = order.getGoods();
+                    ArrayList<Orderline> userOrderlines = order.getOrderlines();
                     int i = 1;
-                    for (Good good : userGoods) {
-                        System.out.println("\t" + i + ". " + good);
+                    for (Orderline orderline : userOrderlines) {
+                        System.out.println("\t" + i + ". " + orderline);
                         i++;
                     }
                     return;
@@ -49,12 +51,12 @@ public class Warehouse {
         try {
             Integer idToBeViewed = Integer.parseInt(goodId);
             for (Order order : orderLists) {
-                for (Good good : order.getGoods()) {
-                    if (idToBeViewed.equals(good.getId())) {
-                        System.out.println("Viewing item with id " + good.getId());
-                        System.out.println("Item name: " + good.getName());
-                        System.out.println("Item description: " + good.getDescription());
-                        System.out.println("Item quantity: " + good.getQuantity());
+                for (Orderline orderline : order.getOrderlines()) {
+                    if (idToBeViewed.equals(orderline.getId())) {
+                        System.out.println("Viewing item with id " + orderline.getId());
+                        System.out.println("Item name: " + orderline.getName());
+                        System.out.println("Item description: " + orderline.getDescription());
+                        System.out.println("Item quantity: " + orderline.getQuantity());
                         return;
                     }
                 }
@@ -90,8 +92,8 @@ public class Warehouse {
         System.out.println("id | name");
         int counter = 0;
         for (Order order: orderLists) {
-            for (Good good : order.getGoods()) {
-                System.out.println("\t" + (counter + 1) + ". " + good);
+            for (Orderline orderline : order.getOrderlines()) {
+                System.out.println("\t" + (counter + 1) + ". " + orderline);
                 counter++;
             }
         }
@@ -103,8 +105,8 @@ public class Warehouse {
         }
         int total = 0;
         for (Order order: orderLists) {
-            for (Good good: order.getGoods()) {
-                total += good.getQuantity();
+            for (Orderline orderline : order.getOrderlines()) {
+                total += orderline.getQuantity();
             }
         }
         return total;
@@ -116,13 +118,13 @@ public class Warehouse {
 
     public boolean setCapacity(String input) {
         try {
-            int capacity = Integer.parseInt(input);
+            Float capacity = Float.parseFloat(input);//Integer.parseInt(input);
             assert capacity > 0;
 
             if (capacity < totalGoods()) {
                 throw new LargeQuantityException();
             }
-            this.capacity = capacity;
+            this.capacityOccupied = capacity;
             System.out.printf("Current Warehouse capacity is %d\n", capacity);
             return true;
         } catch (NullException nullException) {
@@ -165,7 +167,7 @@ public class Warehouse {
 
         try {
             Order order = findOrder(Integer.parseInt(orderId));
-            order.addGood(goodId, name, qty, desc);
+            order.addOrderline(goodId, name, qty, desc);
         } catch (NumberFormatException e1) {
             throw new WrongCommandException("add", true);
         } catch (ItemDoesNotExistException e2) {
@@ -174,15 +176,84 @@ public class Warehouse {
         }
     }
 
-    public void removeGoods(String goodId, String qty) throws WrongCommandException {
+    // In the case where they want to mass add a bunch of goods as part of setup
+    public void addUnitGoodToInventory(String name,
+                                       String description,
+                                       String unitPrice,
+                                       String unitItem,
+                                       String baseArea,
+                                       String volume,
+                                       String isPerishable){
+        Good newGood = new Good();
+        newGood.assignUnitGood(name, description, Float.parseFloat(unitPrice), unitItem,
+                Float.parseFloat(baseArea), Float.parseFloat(volume), Boolean.parseBoolean(isPerishable));
+        inventory.put(Integer.toString(inventoryTypeCount),newGood);
+        inventoryTypeCount += 1;
+    }
+
+    public void addGoodToInventory(String unitGoodId, String name, String qty, String desc) throws WrongCommandException {
+        if (unitGoodId.isBlank()) {
+            throw new WrongCommandException("add", true);
+        }
         try {
-            Order order = findOrderContainsGood(Integer.parseInt(goodId));
-            order.removeGood(goodId, qty);
+            if (inventory.containsKey(unitGoodId)){
+                inventory.
+            } else {
+                Good newGood = new Good();
+                newGood.setQuantity(Float.parseFloat(qty));
+                newGood.assignUnitGood(name,
+                        desc,
+                        0F,
+                        "",
+                        0f,
+                        0f,
+                        false);
+                inventory.put(unitGoodId, newGood);
+            }
+        } catch (NumberFormatException e1) {
+            throw new WrongCommandException("add", true);
+        }
+    }
+
+    /**
+     * Adds all stuff in a csv or json (it's either one)
+     * @param filePath
+     * @throws InvalidFileException
+     */
+    public void batchAddGoodsToInventory(String filePath) throws InvalidFileException {
+        return;
+    }
+
+
+
+    public void removeGoodFromInventory(String unitGoodId) throws ItemDoesNotExistException {
+        if (!inventory.containsKey(unitGoodId)) throw new ItemDoesNotExistException();
+        inventory.remove(unitGoodId);
+    }
+
+    public void removeQtyGoodFromInventory(String unitGoodId, String qty) throws ItemDoesNotExistException {
+        if (!inventory.containsKey(unitGoodId)) throw new ItemDoesNotExistException();
+        Float qty_num = Float.parseFloat(qty);
+        inventory.get(unitGoodId).removeQuantity(qty_num);
+    }
+
+    public void removeGoods(String unitGoodId){
+        try {
+            this.removeGoodFromInventory(unitGoodId);
+        } catch (ItemDoesNotExistException e2) {
+            System.out.println("This type of Good you are trying to remove does not exist.\n"
+                    + "Please type a valid id.");
+        }
+    }
+    public void removeGoods(String unitGoodId, String qty) throws WrongCommandException {
+        try {
+            this.removeQtyGoodFromInventory(unitGoodId, qty);
         } catch (NumberFormatException e1) {
             throw new WrongCommandException("remove", true);
         } catch (ItemDoesNotExistException e2) {
-            System.out.println("The order you are trying to remove the goods from is not on the current list. "
-                    + "Please try removing goods from an existing order.");
+            System.out.println("This type of Good you are trying to remove does not exist.\n"
+                + "Please type a valid id."
+            );
         }
     }
 
@@ -198,6 +269,10 @@ public class Warehouse {
         } catch (NumberFormatException e) {
             throw new WrongCommandException("add", true);
         }
+    }
+
+    public void batchAddOrders(String filePath){
+
     }
 
     public void removeOrder(String id) throws WrongCommandException {
@@ -216,6 +291,18 @@ public class Warehouse {
             throw new WrongCommandException("remove", true);
         }
     }
+
+//    public void addOrderLine(){
+//
+//    }
+
+    private JSONObject serialize(){
+        JSONObject warehouse = new JSONObject();
+
+
+        return warehouse;
+    }
+
 }
 
 

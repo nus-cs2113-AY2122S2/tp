@@ -8,13 +8,13 @@ Another command?
 Another command?
 list command was used wrongly. Type help to see examples
 * Add order `add o/ id/ID r/RECEIVER a/SHIPPING_ADDRESS`
-* Add good `add g/ oid/ORDER_ID gid/GOOD_ID n/NAME q/QUANTITY d/DESCRIPTION`
+* Add orderline `add g/ oid/ORDER_ID gid/GOOD_ID n/NAME q/QUANTITY d/DESCRIPTION`
 * Remove order: `remove o/ i/ID`
-* Remove good: `remove g/ i/ID q/QUANTITY`
+* Remove orderline: `remove g/ i/ID q/QUANTITY`
 * List all orders: `list o/`
 * List all goods: `list g/`
 * View order: `view o/ id/ORDER_ID`
-* View good: `view g/ id/GOOD_ID`
+* View orderline: `view g/ id/GOOD_ID`
 * Total quantity of goods: `total`
 Another command?
 Viewing order with id 1

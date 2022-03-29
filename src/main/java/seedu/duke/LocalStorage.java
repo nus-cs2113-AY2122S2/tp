@@ -16,7 +16,7 @@ import java.nio.file.Paths;
  */
 public class LocalStorage {
     private static final String OUT_DIR = "output";    // Honestly create a config file or smth
-    private static final String SAVE_PATH = String.format("%s/%s", OUT_DIR, "SAVE.json");
+    private static final String SAVE_PATH = String.format("%s/%s", OUT_DIR, "STORAGE.json");
 
     /**
      * Opens and reads file at SAVE_PATH

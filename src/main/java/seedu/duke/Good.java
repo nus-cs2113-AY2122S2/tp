@@ -1,53 +1,56 @@
 package seedu.duke;
 
-/*
- * Class to handle the Goods information
- *
- * FOR NOW id we can manually input?
- * Ideas - id can track and give to the goods we add automatically
- */
 public class Good {
     private int id;
-
-    private String name;
-    private int quantity;
-    private String description;
+    private Float quantity = 0f;
     private UnitGood unitGood;
-
-    public Good(int id, String name, int quantity, String description) {
-        this.id = id;
-        this.quantity = quantity;
-        this.description = description;
-        this.unitGood = new UnitGood(name,
-                description,
-                0.0F,
-                "piece",
-                -1.0F,
-                -1.0F,
-                false);
-    }
 
     public int getId() {
         return id;
     }
 
-    public int getQuantity() {
+    public UnitGood getUnitGood(){
+        return this.unitGood;
+    }
+
+    public UnitGood assignUnitGood(String name,
+                               String description,
+                               Float unitPrice,
+                               String unitItem,
+                               Float baseArea,
+                               Float volume,
+                               Boolean isPerishable){
+        UnitGood newUnitGood = new UnitGood(
+                name, description, unitPrice, unitItem, baseArea, volume, isPerishable
+        );
+        setUnitGood(newUnitGood);
+        return newUnitGood;
+    }
+
+    public void setUnitGood(UnitGood unitGood){
+        this.unitGood = unitGood;
+    }
+
+    public float getQuantity() {
         return quantity;
     }
 
     public void setQuantity(int quantity) {
+        this.quantity = (float)quantity;
+    }
+    public void setQuantity(Float quantity) {
         this.quantity = quantity;
     }
 
-    public String getDescription() {
-        return unitGood.getDescription();
+    public void removeQuantity(Float quantity){
+        this.quantity -= quantity;
     }
 
-    public String getName() {
-        return unitGood.getName();
+    public void removeQuantity(int quantity){
+        this.quantity -= quantity;
     }
 
-    public String toString() {
-        return String.format("%d - %s (%s)",id, name, description);
+    public void addQuantity(int quantity){
+        this.quantity += quantity;
     }
 }

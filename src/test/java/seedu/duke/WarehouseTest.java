@@ -25,11 +25,11 @@ class WarehouseTest {
         //test 1, adding good normally - success
         try {
             warehouse.addGoods("101", "102", "chairs", "15", "they are chairs");
-            Good goodAdded = (warehouse.findOrder(101)).getGoods().get(0);
-            assertEquals(102, goodAdded.getId());
-            assertEquals("chairs", goodAdded.getName());
-            assertEquals(15, goodAdded.getQuantity());
-            assertEquals("they are chairs", goodAdded.getDescription());
+            Orderline orderlineAdded = (warehouse.findOrder(101)).getOrderlines().get(0);
+            assertEquals(102, orderlineAdded.getId());
+            assertEquals("chairs", orderlineAdded.getName());
+            assertEquals(15, orderlineAdded.getQuantity());
+            assertEquals("they are chairs", orderlineAdded.getDescription());
         } catch (WrongCommandException e1) {
             fail();
         } catch (ItemDoesNotExistException e2) {
@@ -39,11 +39,11 @@ class WarehouseTest {
         //test 2, adding good normally - success
         try {
             warehouse.addGoods("101", "102", "chairs", "1", "still chairs");
-            Good goodAdded = (warehouse.findOrder(101)).getGoods().get(0);
-            assertEquals(102, goodAdded.getId());
-            assertEquals("chairs", goodAdded.getName());
-            assertEquals(16, goodAdded.getQuantity());
-            assertEquals("they are chairs", goodAdded.getDescription());
+            Orderline orderlineAdded = (warehouse.findOrder(101)).getOrderlines().get(0);
+            assertEquals(102, orderlineAdded.getId());
+            assertEquals("chairs", orderlineAdded.getName());
+            assertEquals(16, orderlineAdded.getQuantity());
+            assertEquals("they are chairs", orderlineAdded.getDescription());
         } catch (WrongCommandException e1) {
             fail();
         } catch (ItemDoesNotExistException e2) {

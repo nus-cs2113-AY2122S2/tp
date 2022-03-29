@@ -10,12 +10,20 @@ public class Order {
     private int orderId;
     private String receiver;
     private String shippingAddress;
-    private ArrayList<Good> userGoods = new ArrayList<>();
+    private ArrayList<Orderline> orderlines = new ArrayList<>();
+    private Float totalCost = 0F;
+    private String toFulfilBy;
+    private String fulfilledBy;
+    private Boolean isFulfilled = false;
+    private String comments;
 
-    public Order(int orderId, String receiver, String shippingAddress) {
+    public Order(int orderId, String receiver, String shippingAddress, String toFulfilBy, String fulfilledBy, String comments) {
         this.orderId = orderId;
         this.receiver = receiver;
         this.shippingAddress = shippingAddress;
+        this.toFulfilBy = toFulfilBy;
+        this.fulfilledBy = fulfilledBy;
+        this.comments = comments;
     }
 
     public int getId() {
@@ -30,12 +38,22 @@ public class Order {
         return shippingAddress;
     }
 
-    public ArrayList<Good> getGoods() {
-        return userGoods;
+    public ArrayList<Orderline> getOrderlines() {
+        return orderlines;
     }
 
-    public void addGood(String idStr, String name, String qtyStr,
-                               String desc) throws WrongCommandException {
+    public Orderline getOrderline(int orderlineId){
+//        Orderline toRet = null;
+        for (Orderline ol : orderlines){
+            if (orderlineId == ol.getId()){
+                return ol;
+            };
+        }
+        return null;
+    }
+
+    public void addOrderline(String idStr, String name, String qtyStr,
+                             String desc) throws WrongCommandException {
         if (idStr.isBlank() || name.isBlank() || qtyStr.isBlank()) {
             throw new WrongCommandException("add", true);
         }
@@ -48,10 +66,10 @@ public class Order {
                 return;
             }
 
-            Good good = new Good(id, name, qty, desc);
-            userGoods.add(good);
-            System.out.printf("%d %s %s added\n", good.getQuantity(), good.getName(),
-                    checkPlural(good.getQuantity()));
+            Orderline orderline = new Orderline(id, name, qty, desc);
+            orderlines.add(orderline);
+            System.out.printf("%d %s %s added\n", orderline.getQuantity(), orderline.getName(),
+                    checkPlural(orderline.getQuantity()));
         } catch (NumberFormatException e) {
             throw new WrongCommandException("add", true);
         } catch (ItemDoesNotExistException itemDoesNotExistException) {
@@ -60,54 +78,17 @@ public class Order {
         }
     }
 
-    // Function to print grammar for statements to print
-    private String checkPlural(int numberOfGoods) {
-        if (numberOfGoods <= 1) {
-            return "is ";
-        } else {
-            return "are ";
-        }
-    }
-
-    private void remove(int id, int qty)
-            throws LargeQuantityException, ItemDoesNotExistException {
-
-        for (Good good : userGoods) {
-            if (good.getId() == id) {
-                if (qty > good.getQuantity()) {
-                    throw new LargeQuantityException();
-                }
-
-                good.setQuantity(good.getQuantity() - qty);
-
-                if (qty < 2) {
-                    System.out.println(qty + " " + good.getName() + " has been removed.");
-                } else {
-                    System.out.println(qty + " " + good.getName() + " have been removed.");
-                }
-
-                if (good.getQuantity() == 0) {
-                    userGoods.remove(good);
-                }
-
-                return;
-            }
-        }
-
-        throw new ItemDoesNotExistException();
-    }
-
-    public void removeGood(String id, String qty)
+    public void removeOrderlineByQty(int id, String qty)
             throws WrongCommandException {
-        if (id.isBlank() || qty.isBlank()) {
+        if (qty.isBlank()) {
             throw new WrongCommandException("remove", true);
         }
 
         try {
-            int goodsId = Integer.parseInt(id);
+            int goodsId = id;//Integer.parseInt(id);
             int goodsQty = Integer.parseInt(qty);
 
-            remove(goodsId, goodsQty);
+            removeOrderlineByQtyHelper(goodsId, goodsQty);
 
         } catch (NumberFormatException e1) {
             throw new WrongCommandException("remove", true);
@@ -120,9 +101,64 @@ public class Order {
         }
     }
 
+    public void removeOrderline(int orderlineId){
+        for (int idx = 0; idx < orderlines.size(); i++){
+            if (orderlineId == orderlines.get(idx).getId()){
+                orderlines.remove(idx);
+                return;
+            }
+        }
+    }
+
+    public void checkOffOrderline(int orderlineId){
+        Orderline curOrderline = getOrderline(orderlineId);
+        if (curOrderline == null) return;
+        curOrderline.checkOff();
+    }
+
+
+
+    // Function to print grammar for statements to print
+    private String checkPlural(int numberOfGoods) {
+        if (numberOfGoods <= 1) {
+            return "is ";
+        } else {
+            return "are ";
+        }
+    }
+
+    private void removeOrderlineByQtyHelper(int id, int qty)
+            throws LargeQuantityException, ItemDoesNotExistException {
+
+        for (Orderline orderline : orderlines) {
+            if (orderline.getId() == id) {
+                if (qty > orderline.getQuantity()) {
+                    throw new LargeQuantityException();
+                }
+
+                orderline.setQuantity(orderline.getQuantity() - qty);
+                UnitGood orderlineUnit = orderline.getUnitGood();
+                if (qty < 2) {
+                    System.out.println(qty + " " + orderlineUnit.getName() + " has been removed.");
+                } else {
+                    System.out.println(qty + " " + orderlineUnit.getName() + " have been removed.");
+                }
+
+                if (orderline.getQuantity() == 0) {
+                    orderlines.remove(orderline);
+                }
+
+                return;
+            }
+        }
+
+        throw new ItemDoesNotExistException();
+    }
+
+
     public boolean doesGoodExist(int goodId) {
-        for (Good good : userGoods) {
-            if (good.getId() == goodId) {
+        for (Orderline orderline : orderlines) {
+            if (orderline.getId() == goodId) {
                 return true;
             }
         }
@@ -130,10 +166,10 @@ public class Order {
         return false;
     }
 
-    private Good findGood(int goodId) {
-        for (Good good : userGoods) {
-            if (good.getId() == goodId) {
-                return good;
+    private Orderline findGood(int goodId) {
+        for (Orderline orderline : orderlines) {
+            if (orderline.getId() == goodId) {
+                return orderline;
             }
         }
 
@@ -141,16 +177,16 @@ public class Order {
     }
 
     private void addExistingGood(int gid, String name, int qty) throws ItemDoesNotExistException {
-        Good good = findGood(gid);
-        if (good != null) {
-            if (!good.getName().equals(name)) {
+        Orderline orderline = findGood(gid);
+        if (orderline != null) {
+            if (!orderline.getName().equals(name)) {
                 throw new ItemDoesNotExistException();
             }
-            int oldQty = good.getQuantity();
-            good.setQuantity(oldQty + qty);
+            int oldQty = orderline.getQuantity();
+            orderline.setQuantity(oldQty + qty);
             System.out.printf("%d more %s added, total quantity of %s is now %d\n",
-                    qty, good.getName(),
-                    good.getName(), good.getQuantity());
+                    qty, orderline.getName(),
+                    orderline.getName(), orderline.getQuantity());
         }
     }
 

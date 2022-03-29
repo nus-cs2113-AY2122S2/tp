@@ -2,6 +2,7 @@ package seedu.duke.CommandParsers;
 
 import seedu.duke.Regex;
 import seedu.duke.Warehouse;
+import util.exceptions.InvalidFileException;
 import util.exceptions.WrongCommandException;
 
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class AddParser extends CommandParser{
         regexMatch = new Regex(this.userInput, regex);
         this.matches = regexMatch.getGroupValues();
     };
-    protected void execute() throws WrongCommandException {
+    protected void execute() throws WrongCommandException, InvalidFileException {
         if (matches.get("flag").equals("o")) {
             String regexOrder = "oid/(?<oid>\\d*) r/(?<recv>.*) a/(?<address>.*)";
             HashMap<String,String> regexOrderMatches = new
@@ -32,7 +33,29 @@ public class AddParser extends CommandParser{
                     Regex(userInput, regexGood).getGroupValues();
             warehouse.addGoods(regexGoodMatch.get("oid"), regexGoodMatch.get("gid"),
                     regexGoodMatch.get("name"), regexGoodMatch.get("qty"), regexGoodMatch.get("desc"));
-        } else {
+        } else if (matches.get("flag").equals("ug")){
+            String regexUnitGood = "n/(?<name>.*) d/(?<desc>.*) up/(?<up>.*) ui/(?<ui>.*) ba/(?<ba>.*)" +
+                    " v/(?<v>.*) ip/(?<ip>.*)";
+            HashMap<String,String> regexUnitGoodMatch = new
+                    Regex(userInput, regexUnitGood).getGroupValues();
+            warehouse.addUnitGoodToInventory(regexUnitGoodMatch.get("name"), regexUnitGoodMatch.get("desc"),
+                    regexUnitGoodMatch.get("up"), regexUnitGoodMatch.get("ui"), regexUnitGoodMatch.get("ba"),
+                    regexUnitGoodMatch.get("v"), regexUnitGoodMatch.get("ip"));
+        } else if (matches.get("flag").equals("bg")){
+            // batch goods
+            String regexBatchGoods = "fp/(?<filepath>.*)";
+            HashMap<String,String> regexBatchGoodsMatch = new
+                    Regex(userInput, regexBatchGoods).getGroupValues();
+            warehouse.batchAddGoodsToInventory(regexBatchGoodsMatch.get("filepath"));
+        } else if (matches.get("flag").equals("bo")){
+            // batch goods
+            String regexBatchGoods = "fp/(?<filepath>.*)";
+            HashMap<String,String> regexBatchGoodsMatch = new
+                    Regex(userInput, regexBatchGoods).getGroupValues();
+            warehouse.batchAddGoodsToInventory(regexBatchGoodsMatch.get("filepath"));
+        }
+
+        else {
             throw new WrongCommandException("add", true);
         }
     };

@@ -4,12 +4,12 @@
 
 class Commands {
     + addGood(id, name, qty)
-    + removeGood(id, qty, userGoods)
-    + listGoods(userGoods)
-    + viewGood(id, userGoods)
-    + totalGoods((userGoods)
+    + removeGood(id, qty, userOrderlines)
+    + listGoods(userOrderlines)
+    + viewGood(id, userOrderlines)
+    + totalGoods((userOrderlines)
     + checkPlural(numberOfGoods)
-    - remove(id, qty, userGoods)
+    - remove(id, qty, userOrderlines)
 }
 
 @enduml

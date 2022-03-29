@@ -42,5 +42,9 @@ public class UnitGood {
         return name;
     }
 
+    public String toString() {
+        return String.format("%d - %s (%s)",id, name, description);
+    }
+
 
 }

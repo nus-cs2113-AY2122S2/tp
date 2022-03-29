@@ -4,7 +4,7 @@
 Actor User as user USER_COLOR
 Participant ":UI" as ui UI_COLOR
 Participant ":Command" as command COMMANDS_COLOR
-Participant ":GOOD" as good GOOD_COLOR
+Participant ":GOOD" as orderline GOOD_COLOR
 
 user -[USER_COLOR]> ui : "remove id/1"
 activate ui UI_COLOR
