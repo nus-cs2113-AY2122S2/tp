@@ -97,7 +97,7 @@ Example of usage:
 Expected outcome:
 ```
 The following meeting has been added to everyone's timetable:
-[M] TITLE: Wednesday		DAY: wednesday		START: 1230		END: 1330		MODE: online
+[M] TITLE: meeting		DAY: thursday		START: 1230		END: 1330		MODE: online
 ```
 
 
@@ -113,29 +113,13 @@ Deletes an event from the user's specified timetable
 
 Example of usage:
 
-`delete n/John Joe i/1`
+`delete n/John i/1`
 
 Expected outcome:
 ```
 The following event has been deleted from your timetable:
-NAME: John Doe		TITLE: CS2102		DAY: monday		START: 1230		END: 1330		MODE: online
+[L] TITLE: CS2113		DAY: friday		START: 1230		END: 1330		MODE: online
 ```
-
-### Clearing all lessons: `clear`
-Deletes all the lessons from specified user if any.
-
-Format: `clear USER`
-
-Example of usage:
-
-`clear john`
-
-Expected outcome:
-```
-john's timetable has been cleared
-```
-
-Alternatively you can clear all the events from everyone's timetable
 
 ### Finding common timeslots: `free`
 Shows a list of timeslots where everyone is free. 
@@ -160,7 +144,23 @@ Friday 1800 2359
 Saturday 0800 2359
 Sunday 0800 2359
 ```
+### Clearing all lessons from user: `clear`
+Deletes all the lessons from specified user if any.
 
+Format: `clear USER`
+
+Example of usage:
+
+`clear john`
+
+Expected outcome:
+```
+john's timetable has been cleared
+```
+
+Alternatively you can clear all the events from everyone's timetable
+
+### Clearing all lessons from all users: `clear all`
 
 Format: `clear all`
 

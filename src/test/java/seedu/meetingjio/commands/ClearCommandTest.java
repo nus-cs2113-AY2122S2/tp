@@ -40,21 +40,16 @@ public class ClearCommandTest {
                 1200, 1300, "online"
         );
         successClearAll = "All records of everyone's timetable has been cleared";
-        listSuccessPostClearAll = "John\n"
-                + "There are no lessons in your timetable yet!\n"
-                + "Peter\n"
-                + "There are no lessons in your timetable yet!";
+        listSuccessPostClearAll = "The Master Timetable has no populated timetables!";
         successClearJohn = "john's timetable has been cleared";
-        listSuccessPostClearJohn = "John\n"
-                + "There are no lessons in your timetable yet!\n"
-                + "Peter\n"
+        listSuccessPostClearJohn = "Peter\n"
                 + "1.[L] TITLE: CS2113\t\tDAY: Monday\t\tSTART: 1200\t\tEND: 1300\t\tMODE: online";
     }
 
     @Test
     public void clearCommandNoValue() {
         ClearCommand clearCommand = new ClearCommand("");
-        assertEquals(ERROR_UNSPECIFIED_LIST_CLEAR,  clearCommand.execute(masterTimetable));
+        assertEquals(ERROR_UNSPECIFIED_LIST_CLEAR, clearCommand.execute(masterTimetable));
     }
 
     @Test
