@@ -1,6 +1,12 @@
-package seedu.duke;
+package seedu.duke.command.roomcommand;
 
+import seedu.duke.ListContainer;
+import seedu.duke.Ui;
 import seedu.duke.command.Command;
+import seedu.duke.Room;
+import seedu.duke.AssignmentMap;
+import seedu.duke.RoomList;
+import seedu.duke.InvalidRoomNumberException;
 
 import java.io.IOException;
 

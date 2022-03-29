@@ -1,5 +1,12 @@
-package seedu.duke;
+package seedu.duke.command.roomcommand;
 
+import seedu.duke.AssignmentMap;
+import seedu.duke.HotelLiteManagerException;
+import seedu.duke.InvalidRoomNumberException;
+import seedu.duke.ListContainer;
+import seedu.duke.Room;
+import seedu.duke.RoomList;
+import seedu.duke.Ui;
 import seedu.duke.command.Command;
 
 /**

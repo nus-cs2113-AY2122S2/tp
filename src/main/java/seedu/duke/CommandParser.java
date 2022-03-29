@@ -9,8 +9,12 @@ import seedu.duke.command.itemcommand.DeleteItemCommand;
 import seedu.duke.command.itemcommand.UpdateItemNameCommand;
 import seedu.duke.command.itemcommand.ViewItemListCommand;
 import seedu.duke.command.assigncommand.AssignHousekeeperCommand;
-
-import java.util.Locale;
+import seedu.duke.command.roomcommand.CheckAllRoomCommand;
+import seedu.duke.command.roomcommand.CheckInCommand;
+import seedu.duke.command.roomcommand.CheckOutCommand;
+import seedu.duke.command.roomcommand.CheckRoomCommand;
+import seedu.duke.command.roomcommand.CheckRoomByLevelCommand;
+import seedu.duke.command.roomcommand.CheckRoomByCatCommand;
 
 /**
  * Class that implements behavior of parsing user input and linking

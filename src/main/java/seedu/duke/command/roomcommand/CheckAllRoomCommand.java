@@ -1,6 +1,12 @@
-package seedu.duke;
+package seedu.duke.command.roomcommand;
 
+import seedu.duke.AssignmentMap;
+import seedu.duke.RoomList;
 import seedu.duke.command.Command;
+import seedu.duke.Ui;
+import seedu.duke.Room;
+import seedu.duke.ListContainer;
+
 
 /**
  * Class that implements execution behavior for listing all room.
