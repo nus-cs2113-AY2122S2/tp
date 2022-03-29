@@ -27,15 +27,16 @@ public class MeetingJio {
         System.out.println("Hello! " + name);
         Ui.showHelpHint();
         System.out.println(MESSAGE_DIVIDER);
-
         String userInput = in.nextLine().trim();
-
         Ui.executeCommand(userInput, masterTimetable, in);
-        StorageFile.saveData(masterTimetable);
-        Ui.showGoodByeMessage();
+        exit();
     }
 
-    /** Initializes the application. */
+    /** Initializes the application.
+     *  Loads the local data if any.
+     *  If IOException is caught, the application has failed to start up.
+     *  A corresponding error message will be shown to the user.
+     */
     private static void start() {
         try {
             StorageFile.loadData(masterTimetable);
@@ -45,5 +46,11 @@ public class MeetingJio {
             /**e.printStackTrace();*/
             System.out.println(e.getMessage());
         }
+    }
+
+    /** Saves data and shows the goodbye message when user exits the application.*/
+    private static void exit() {
+        StorageFile.saveData(masterTimetable);
+        Ui.showGoodByeMessage();
     }
 }
