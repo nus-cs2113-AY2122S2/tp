@@ -27,13 +27,19 @@ import static seedu.meetingjio.parser.ParserLocalData.checkEventType;
 /**
  * Represents the file used to store timetable data.
  */
-
 public class StorageFile {
 
     public static final String DATA_FILE_PATH = "MeetingJio.txt";
 
     private static final String NO_TIMETABLE = "There are no lessons in your timetable yet!";
 
+    /**
+     * Saves all the timetables in a readable format as MeetingJio.txt.
+     * If IOException is caught, the save process has failed.
+     * It will print a corresponding error message to the exception caught.
+     *
+     * @param masterTimetable Array of timetables
+     */
     public static void saveData(MasterTimetable masterTimetable) {
         System.out.println(MESSAGE_DIVIDER);
         try {
@@ -54,6 +60,13 @@ public class StorageFile {
         }
     }
 
+    /**
+     * Loads the data stored in the MeetingJio.txt into the masterTimetable.
+     *
+     * @param masterTimetable Array of timetables
+     * @throws IncorrectIndexException If the sequence of the index is incorrect.
+     * @throws RuntimeException If InvalidEventTypeException or IncorrectIndexException is caught
+     */
     public static void loadData(MasterTimetable masterTimetable) {
         try {
             File dataFile = new File(DATA_FILE_PATH);
@@ -102,6 +115,13 @@ public class StorageFile {
         }
     }
 
+    /**
+     * Checks if the index is in the correct sequence.
+     *
+     * @param data a row of data in the data file
+     * @param expectedIndex the expected number
+     * @return true if the index is in correct sequence and false otherwise
+     */
     private static boolean checkIndex(String data, int expectedIndex) {
         String index = getFirstChar(data);
         int i = Integer.parseInt(index);
@@ -111,6 +131,12 @@ public class StorageFile {
         return false;
     }
 
+    /**
+     * Checks if the row of the data is a name or not.
+     *
+     * @param data a row of data in the data file
+     * @return true if the first character is an alphabet and false otherwise
+     */
     private static boolean isName(String data) {
         String firstChar = getFirstChar(data);
         if (firstChar == null || isNoTimetableMessage(data) == true) {
@@ -124,6 +150,12 @@ public class StorageFile {
         return false;
     }
 
+    /**
+     * Checks if a row data is a no timetable message.
+     *
+     * @param data a row of data in the data file
+     * @return true if it is the no timetable message and false otherwise
+     */
     private static boolean isNoTimetableMessage(String data) {
         if (NO_TIMETABLE.equalsIgnoreCase(data)) {
             return true;
@@ -131,6 +163,13 @@ public class StorageFile {
         return false;
     }
 
+    /**
+     * Gets the first character of a row data.
+     *
+     * @param data a row of data in the data file
+     * @return firstChar the first character in the row of the data
+     * @throws StringIndexOutOfBoundsException if the value of data is empty
+     */
     private static String getFirstChar(String data) throws StringIndexOutOfBoundsException {
         try {
             data = data.trim();
