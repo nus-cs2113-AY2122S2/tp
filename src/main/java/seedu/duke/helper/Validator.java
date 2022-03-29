@@ -318,6 +318,26 @@ public class Validator {
         }
     }
 
+    public static void validateFindAppointment(String[] parameters) throws HalpmiException {
+        switch (parameters[0]) {
+        case "id":
+            break;
+        case "patient name":
+        case "doctor name":
+            validateFullName(parameters[1]);
+            break;
+        case "patient nric":
+        case "doctor nric":
+            validateNric(parameters[1]);
+            break;
+        case "date":
+            validateDate(parameters[1],"find appointment");
+            break;
+        default:
+            throw new HalpmiException("Input must be an attribute of Appointment");
+        }
+    }
+
     public static void validateFindMedicine(String[] parameters) throws HalpmiException {
 
         boolean check = true;
