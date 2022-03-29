@@ -360,11 +360,10 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
 
 **Example**
-* A [session](#creating-a-session-session-create) was previously created with session named Class Outing with Alice 
-  and Bob involved on 15-03-2022.<br> 
-  An [activity](#creating-an-activity-activity-create) was created with activity named Class Lunch, where Alice paid for both
-  Bob and herself with a total cost of $10.<br>
-  Get a session summary for the session above which has a session unique identifier of 1.<br>
+* Displays a session summary that summarises the [session that has been created](#creating-a-session-session-create)
+  with session unique identifier of 1 to help Alice and Bob calculate what transactions they have to make to
+  resolve all their debts to each other.<br>
+
   `session /summary /sid 1`<br>
   ![Session summary command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionSummaryCommand.png)
   <br>
