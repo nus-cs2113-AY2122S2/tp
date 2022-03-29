@@ -4,7 +4,9 @@ package seedu.allonus;
 
 import seedu.allonus.contacts.ContactsManager;
 import seedu.allonus.expense.ExpenseTracker;
+
 import seedu.allonus.storage.StorageFile;
+
 import seedu.allonus.ui.TextUi;
 
 import static seedu.allonus.expense.ExpenseTracker.expenseRunner;
@@ -134,6 +136,7 @@ public class AllOnUs {
         ContactsManager contactsManager = new ContactsManager();
         StudyManager studyManager = new StudyManager();
         ExpenseTracker expenseTracker = new ExpenseTracker();
+
 
         StorageFile.setFields(contactsManager, expenseTracker, studyManager);
         StorageFile storageFile = new StorageFile();

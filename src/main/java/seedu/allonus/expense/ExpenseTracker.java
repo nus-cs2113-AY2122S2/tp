@@ -1,18 +1,25 @@
 package seedu.allonus.expense;
 
 
-import seedu.allonus.storage.StorageFile;
-import seedu.allonus.ui.TextUi;
 
-import java.lang.reflect.Executable;
+import seedu.allonus.storage.StorageFile;
+
+import seedu.allonus.expense.exceptions.ExpenseAmountException;
+import seedu.allonus.expense.exceptions.ExpenseEmptyFieldException;
+import seedu.allonus.expense.exceptions.ExpenseMissingFieldException;
+
+import seedu.allonus.ui.TextUi;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+import static seedu.allonus.expense.ExpenseParser.reformatDate;
+import static seedu.allonus.expense.ExpenseParser.isAmountValid;
 import static seedu.allonus.expense.ExpenseParser.parseDeleteExpense;
+import static seedu.allonus.expense.ExpenseParser.parseFindExpense;
 import static seedu.allonus.expense.ExpenseParser.parseEditExpense;
 import static seedu.allonus.expense.ExpenseParser.parseNewExpense;
-import static seedu.allonus.expense.ExpenseParser.parseFindExpense;
 
 /**
  * The core function of the expense tracker, which executes user commands based on keywords.
@@ -63,6 +70,12 @@ public class ExpenseTracker {
     public static final String NO_TASKS_FOUND = "No tasks found!";
     public static final String MSG_MATCHING_EXPENSES = "Here are the matching expense records:\n";
     public static final String MENU_STRING = "menu";
+    public static final String MSG_INCORRECT_DATE_FORMAT = "Date field is of incorrect format! Type in YYYY-MM-DD";
+    public static final String LOG_INCORRECT_DATE_FIELD = "User entered invalid date format";
+    public static final String LOG_INVALID_AMOUNT = "User tried entering invalid amount";
+    public static final String MSG_NUMBERS_ONLY_AMOUNT = "Please enter only numbers for the Amount field!";
+    public static final String LOG_NEGATIVE_AMOUNT = "User tried entering negative amount";
+    private static final String LOG_FIELDS_BECAME_EMPTY = "User tampered with some fields, making them blank";
 
     private static void expenseWelcome() {
         System.out.println(EXPENSE_WELCOME_MESSAGE);
@@ -192,13 +205,25 @@ public class ExpenseTracker {
         } else {
             switch (field) {
             case ("date"):
-                toBeEdited.setDate(newFields[1]);
-                System.out.println(NEW_DATE_VALUE_SET);
-                break;
+                try {
+                    String newDate = reformatDate(newFields[1]);
+                    toBeEdited.setDate(newDate);
+                    System.out.println(NEW_DATE_VALUE_SET);
+                    break;
+                } catch (DateTimeParseException e) {
+                    System.out.println(MSG_INCORRECT_DATE_FORMAT);
+                    break;
+                }
             case ("amount"):
-                toBeEdited.setAmount(newFields[1]);
-                System.out.println(NEW_AMOUNT_VALUE_SET);
-                break;
+                try {
+                    isAmountValid(newFields[1]);
+                    toBeEdited.setAmount(newFields[1]);
+                    System.out.println(NEW_AMOUNT_VALUE_SET);
+                    break;
+                } catch (ExpenseAmountException e) {
+                    System.out.println(e.getMessage());
+                    break;
+                }
             case ("category"):
                 toBeEdited.setCategory(newFields[1]);
                 System.out.println(NEW_CATEGORY_VALUE_SET);
@@ -270,6 +295,7 @@ public class ExpenseTracker {
      * @param rawInput the user's input itself
      */
     private static void executeAdd(String rawInput) {
+
         try {
             String[] newExpense = parseNewExpense(rawInput);
             assert newExpense != null : ASSERT_EXPENSE_OBJECT_NOT_NULL;
@@ -279,7 +305,19 @@ public class ExpenseTracker {
         } catch (IndexOutOfBoundsException e) {
             logger.log(Level.WARNING, LOG_EMPTY_FIELDS);
             System.out.println(MSG_EMPTY_FIELDS);
+        } catch (DateTimeParseException e) {
+            logger.log(Level.WARNING, LOG_INCORRECT_DATE_FIELD);
+            System.out.println(MSG_INCORRECT_DATE_FORMAT);
+        } catch (NumberFormatException e) {
+            logger.log(Level.WARNING, LOG_INVALID_AMOUNT);
+            System.out.println(MSG_NUMBERS_ONLY_AMOUNT);
+        } catch (ExpenseAmountException | ExpenseMissingFieldException e) {
+            logger.log(Level.WARNING, LOG_NEGATIVE_AMOUNT);
+            System.out.println(e.getMessage());
+        } catch (ExpenseEmptyFieldException e) {
+            System.out.println(e.getMessage());
         }
+
     }
 
     /**
@@ -337,7 +375,6 @@ public class ExpenseTracker {
      * Determines which command to execute depending on the keyword supplied.
      *
      * @param ui ui object to collect user's inputs
-     * @throws ExpenseException if an invalid keyword is supplied
      */
     public static void expenseRunner(TextUi ui) {
         logger.setLevel(Level.SEVERE);
@@ -362,6 +399,8 @@ public class ExpenseTracker {
                 break;
             case ("find"):
                 executeFind(rawInput);
+                break;
+            case (""):
                 break;
             default:
                 logger.log(Level.WARNING, LOG_INVALID_COMMANDS);
