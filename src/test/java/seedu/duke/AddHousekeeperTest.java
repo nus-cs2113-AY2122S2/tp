@@ -44,7 +44,8 @@ public class AddHousekeeperTest {
 
     @Test
     public void commandParser_extraSlash_exceptionThrown() {
-        assertThrows(InvalidHousekeeperProfileException.class, () -> new CommandParser().parse("add housekeeper Sally / 81/"));
+        assertThrows(InvalidHousekeeperProfileException.class,
+                () -> new CommandParser().parse("add housekeeper Sally / 81/"));
     }
 
     @Test
