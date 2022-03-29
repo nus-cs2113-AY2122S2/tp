@@ -45,6 +45,7 @@ public class AddLessonCommand extends Command {
         } catch (TimetableNotFoundException tnfe) {
             timetable = new Timetable(name);
             masterTimetable.add(timetable);
+            masterTimetable.deleteAllMeetings();
         }
         try {
             Event newEvent = new Lesson(title, day, startTime, endTime, mode);

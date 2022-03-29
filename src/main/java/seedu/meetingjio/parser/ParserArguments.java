@@ -6,7 +6,7 @@ import static seedu.meetingjio.parser.Parser.HEADINGS_DELETE_EVENT;
 
 public class ParserArguments {
 
-    protected String[] splitArgumentsAddLesson(String arguments) {
+    protected static String[] splitArgumentsAddLesson(String arguments) {
         String[] eventDescription = new String[6];
         String[] splitArguments = arguments.split(" ");
         int index = -1;
@@ -22,7 +22,7 @@ public class ParserArguments {
         return eventDescription;
     }
 
-    protected String[] splitArgumentsDeleteCommand(String arguments) {
+    protected static String[] splitArgumentsDeleteCommand(String arguments) {
         String[] eventDescription = new String[2];
         String[] splitArguments = arguments.split(" ");
         int index = -1;
@@ -38,7 +38,7 @@ public class ParserArguments {
         return eventDescription;
     }
 
-    protected String[] splitArgumentsAddMeeting(String arguments) {
+    protected static String[] splitArgumentsAddMeeting(String arguments) {
         String[] eventDescription = new String[5];
         String[] splitArguments = arguments.split(" ");
         int index = -1;
@@ -54,7 +54,7 @@ public class ParserArguments {
         return eventDescription;
     }
 
-    protected String getArgumentsFromInput(String input) {
+    protected static String getArgumentsFromInput(String input) {
         String str = "";
         int spaceIndex = input.trim().indexOf(" ");
         if (spaceIndex != -1) {
@@ -63,11 +63,11 @@ public class ParserArguments {
         return str;
     }
 
-    protected String getCommandFromInput(String input) {
+    protected static String getCommandFromInput(String input) {
         return input.split(" ")[0].trim().toLowerCase();
     }
 
-    protected int containHeadings(String str, String[] headings) {
+    protected static int containHeadings(String str, String[] headings) {
         for (int i = 0; i < headings.length; i++) {
             if (str.contains(headings[i])) {
                 int headingLength = headings[i].length();
