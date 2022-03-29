@@ -11,8 +11,13 @@ public class Warehouse {
     private int capacity;
     private static ArrayList<Order> orderLists = new ArrayList<>();
 
+
     public Warehouse(int capacity) {
         this.capacity = capacity;
+    }
+
+    public int getCapacity() {
+        return capacity;
     }
 
     public void viewOrder(String orderId) {
