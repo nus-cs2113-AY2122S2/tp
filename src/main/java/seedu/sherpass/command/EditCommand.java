@@ -57,7 +57,7 @@ public class EditCommand extends Command {
      * Sets the boolean attribute isRepeat to true if user inputs includes
      * "/repeat". False otherwise.
      *
-     * @param isRepeat
+     * @param isRepeat boolean value checking if task to edit involves recurring tasks
      */
     public void setIsRepeat(boolean isRepeat) {
         this.isRepeat = isRepeat;
