@@ -283,6 +283,22 @@ class ProfileTest {
         assertEquals(expectedMessage, retrievedGroupListSummary);
     }
 
+    @Test
+    public void getGroupListSummaryString_groupListNotEmpty_correctFormatReturned() {
+        String groupArgs = "group /create /n Project members /pl Alice Bob Charlie";
+        Command createGroup = Parser.getCommand(groupArgs);
+        createGroup.run(manager);
+
+        String retrievedGroupListSummary = manager.getProfile().getGroupListSummaryString();
+        String expectedOutput =
+                "-----------------------------------------\n"
+                        + "# | Name            | Number of persons \n"
+                        + "-----------------------------------------\n"
+                        + "1 | Project members | 3                 \n"
+                        + "=========================================";
+        assertEquals(expectedOutput, retrievedGroupListSummary);
+    }
+
     /**
      * Checks if sessionId is incremented when getNewSessionId method is called.
      */
