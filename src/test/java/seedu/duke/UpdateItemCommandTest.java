@@ -21,24 +21,26 @@ public class UpdateItemCommandTest {
 
     @Test
     public void commandParser_updateItemPaxCommandWithEmptyItemName_exceptionThrown() {
-        assertThrows(EmptyItemNameException.class, () -> new CommandParser().parse("Update Item Pax / 5"));
+        assertThrows(InvalidUpdateItemPaxCommandException.class, () -> new CommandParser().parse("Update Item "
+                + "Pax / 5"));
     }
 
     @Test
     public void commandParser_updateItemPaxCommandWithEmptyItemPax_exceptionThrown() {
-        assertThrows(EmptyItemPaxException.class, () -> new CommandParser().parse("Update Item Pax "
-                + "Toilet Roll /"));
+        assertThrows(InvalidUpdateItemPaxCommandException.class, () -> new CommandParser().parse("Update Item "
+                + "Pax Toilet Roll /"));
     }
 
     @Test
     public void commandParser_updateItemPaxCommandWithEmptyItemNameAndPax_exceptionThrown() {
-        assertThrows(InvalidCommandException.class, () -> new CommandParser().parse("Update Item Pax "));
+        assertThrows(InvalidUpdateItemPaxCommandException.class, () -> new CommandParser().parse("Update Item "
+                + "Pax "));
     }
 
     @Test
     public void commandParser_updateItemPaxCommandWithInvalidItemPax_exceptionThrown() {
-        assertThrows(InvalidItemPaxException.class, () -> new CommandParser().parse("Update Item Pax "
-                + "Toilet Roll /-1"));
+        assertThrows(InvalidUpdateItemPaxCommandException.class, () -> new CommandParser().parse("Update Item "
+                + "Pax Toilet Roll /-1"));
     }
 
 }
