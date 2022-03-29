@@ -9,6 +9,7 @@ import seedu.duke.Room;
 import seedu.duke.RoomList;
 import seedu.duke.Ui;
 import seedu.duke.command.Command;
+import seedu.duke.command.RoomHelper;
 
 /**
  * Class that checks out a room with corresponding room number
@@ -23,8 +24,9 @@ public class CheckOutCommand extends Command {
      * Check out room with corresponding room number.
      * The room status will be changed to vacant
      * After check in, it will print out corresponding room information.
+     *
      * @param listContainer The object containing the necessary data structure.
-     * @param ui The object that deals with user interface for the program.
+     * @param ui            The object that deals with user interface for the program.
      * @throws InvalidRoomNumberException if the room number is not inside the room list.
      */
     @Override
@@ -49,7 +51,10 @@ public class CheckOutCommand extends Command {
      *
      * @param command contains the roomId.
      */
-    public CheckOutCommand(String command) {
+    public CheckOutCommand(String command) throws InvalidRoomNumberException {
+        if (!RoomHelper.isValidIntNumber(command.trim())) {
+            throw new InvalidRoomNumberException();
+        }
         roomId = Integer.parseInt(command.trim());
     }
 }

@@ -56,4 +56,5 @@ public class Room {
     public String toFileString() {
         return getType() + " | " + getRoomId() + " | " + getLevel() + " | " + (getIsVacant() ? "Vacant" : "Occupied");
     }
+
 }
