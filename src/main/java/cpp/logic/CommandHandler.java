@@ -4,9 +4,14 @@ import cpp.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.exceptions.NegativeIndexException;
 import cpp.logic.commands.Command;
-import cpp.logic.parser.AddProjectCommandParser;
+import cpp.logic.commands.DeleteProjectCommand;
+import cpp.logic.commands.ListProjectCommand;
 import cpp.logic.parser.AddTodoCommandParser;
+import cpp.logic.parser.AddProjectCommandParser;
+import cpp.logic.parser.DeleteProjectCommandParser;
 import cpp.logic.parser.MarkCommandParser;
+import cpp.logic.parser.ViewProjectCommandParser;
+
 import cpp.model.ProjectList;
 import cpp.response.Response;
 
@@ -28,23 +33,21 @@ public class CommandHandler {
      * @param projectList ProjectList for commands to work with
      * @param userInput Command entered by user
      */
-    public void handleUserInput(ProjectList projectList, String userInput) throws IllegalCommandException {
+    public String handleUserInput(ProjectList projectList, String userInput) throws IllegalCommandException {
         String[] commands = userInput.split(" ");
         String projectName;
-        String executeResult;
+        String executeResult = "Default Result";
 
         switch (commands[0].toLowerCase()) {
         case "addproject": //add a project into list
-            projectName = getProjectName(commands);
-            projectList.addProject(projectName);
+            executeResult = executeCommand(projectList, new AddProjectCommandParser().parse(commands));
             break;
         case "deleteproject": //delete a project based on its name
-            projectName = getProjectName(commands);
-            projectList.deleteProject(projectName);
+            executeResult = executeCommand(projectList, new DeleteProjectCommandParser().parse(commands));
             break;
         case "listprojects":
         case "listproject": //view all project(s) by name
-            listProjects(projectList);
+            executeResult = executeCommand(projectList, new ListProjectCommand());
             break;
         case "todo":
             executeResult = executeCommand(projectList, new AddTodoCommandParser().parse(commands));
@@ -56,7 +59,7 @@ public class CommandHandler {
             addDeadline(projectList, commands);
             break;
         case "view":
-            view(projectList, commands);
+            executeResult = executeCommand(projectList, new ViewProjectCommandParser().parse(commands));
             break;
         case "help":
             Response.printHelp();
@@ -64,7 +67,7 @@ public class CommandHandler {
         default:
             throw new IllegalCommandException(Constants.UNKNOWN_COMMAND);
         }
-
+        return executeResult;
         //System.out.println("Execute result: ", executeResult);
 
     }
