@@ -220,6 +220,7 @@ Displays details about a session.<br>
 Example of usage:
 1. Views a session with a unique identifier of 1.
     - `session /view /sid 1` <br>
+    - TODO CHANGE SCREENSHOT
       ![Activity view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityViewCommand.png)
       <br>     
       <br>
