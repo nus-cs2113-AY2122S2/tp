@@ -264,7 +264,7 @@ public class Person {
     public void find(String description, int category) {
         LOGGER.log(Level.INFO, Constants.FIND_CALL_MESSAGE);
         System.out.println("Entries found for " + name + ":");
-        // incomeList.find(description);
-        // expenditureList.find(description, category);
+        incomeList.find(description);
+        expenditureList.find(description, category);
     }
 }

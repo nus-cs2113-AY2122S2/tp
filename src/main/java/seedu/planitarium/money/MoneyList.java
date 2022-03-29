@@ -10,6 +10,7 @@ public abstract class MoneyList {
     protected static final String LOG_DESC = "getDescription()";
     protected static final String LOG_DATE = "getInitDate()";
     protected static final String LOG_PERM = "getPermanent()";
+    protected static final String LOG_FIND = "find()";
 
     /**
      * Creates a new Money Object.
