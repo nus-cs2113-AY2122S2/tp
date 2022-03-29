@@ -3,15 +3,27 @@
 
 hide footbox
 actor User
-participant ":MeetingJio"
-participant ":Storage"
-participant ":TextUi"
 
-User -> ":MeetingJio" : exit
-":MeetingJio" -> ":Storage"
-":Storage" -> ":Storage" : SaveData()
-":Storage" -> ":TextUi"
-":TextUi" --> ":Storage" : Save_DATA_MESSAGE
-":Storage" -> ":MeetingJio": Print(Save_DATA_MESSAGE)
+User -> ":Ui" ++: "exit"
+create ":MeetingJio"
+":Ui" -> ":MeetingJio" --: executeCommand("exit", masterTimetable)
+":MeetingJio" -> ":MeetingJio" ++: exit()
+create ":StorageFile"
+":MeetingJio" -> ":StorageFile" ++: saveData(masterTimetable)
+":StorageFile" -> ":StorageFile" ++: saveData(masterTimetable)
+":StorageFile" -> ":MasterTimetable" ++: collateAll()
+loop for each user
+":MasterTimetable" -> ":StorageFile" ++: listUser(user, masterTimetable)
+":StorageFile" -> ":Timetable" ++: sort()
+":Timetable" --> ":StorageFile" --
+":StorageFile" --> ":MasterTimetable" --
+end
+deactivate ":MasterTimetable"
+":StorageFile" --> ":MeetingJio" --:
+deactivate ":StorageFile"
+destroy ":StorageFile"
+":MeetingJio" --> ":Ui" ++: showGoodByeMessage()
+deactivate ":MeetingJio"
+":Ui" --> User--: GoodBye Message
 
 @enduml

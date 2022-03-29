@@ -30,7 +30,7 @@ public class MasterTimetable {
     }
 
     /**
-     * Get timetable by the specified name
+     * Get timetable by the specified name.
      *
      * @param name Name
      * @return timetable Timetable that matches the name
@@ -46,8 +46,8 @@ public class MasterTimetable {
     }
 
     /**
-     * Remove timetable by the specified name
-     * No exception will be thrown if there's no timetable that matches the name
+     * Remove timetable by the specified name.
+     * No exception will be thrown if there's no timetable that matches the name.
      *
      * @param name Name
      */
@@ -60,7 +60,7 @@ public class MasterTimetable {
     }
 
     /**
-     * Get timetable at the specified index
+     * Get timetable at the specified index.
      *
      * @param index Index
      * @return timetable Timetable at the index
@@ -70,7 +70,7 @@ public class MasterTimetable {
     }
 
     /**
-     * Remove timetable at the specified index
+     * Remove timetable at the specified index.
      *
      * @param index Index
      */
@@ -79,7 +79,7 @@ public class MasterTimetable {
     }
 
     /**
-     * Add timetable to the MasterTimetable
+     * Add timetable to the MasterTimetable.
      *
      * @param timetable Timetable to be added
      */
@@ -91,10 +91,10 @@ public class MasterTimetable {
     }
 
     /**
-     * Add lesson to the timetable that belongs to the user
+     * Add lesson to the timetable that belongs to the user.
      *
-     * @param lesson Lesson to be
-     * @param name User
+     * @param lesson Lesson to be added
+     * @param name Name of the user
      * @throws TimetableNotFoundException If user's timetable doesn't exist
      * @throws DuplicateEventException If identical event has already been added
      * @throws OverlappingEventException If another existing event has a timetable clash
