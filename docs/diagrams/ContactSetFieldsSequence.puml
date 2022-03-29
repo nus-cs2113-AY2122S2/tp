@@ -1,10 +1,16 @@
 @startuml
 !include Style.puml
 
-participant "contactsManager:ContactsManager"
-participant  "ContactParser" <<class>>
-participant "contact:Contact"
-participant ":Field"
+box LOGIC_COLOR_T1
+participant "contactsManager:ContactsManager" LOGIC_COLOR
+participant ":Field" LOGIC_COLOR
+participant "contact:Contact" LOGIC_COLOR
+end box
+
+
+box  MODEL_COLOR_T1
+participant  "ContactParser" <<class>> MODEL_COLOR
+end box
 
 "contactsManager:ContactsManager" -> "ContactParser" : setContactFields(contact, fieldStrings)
 activate "ContactParser"

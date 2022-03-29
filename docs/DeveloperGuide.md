@@ -106,7 +106,7 @@ is returned to the OS.
 
 ### Expense Component
 
-<img src = "images/ExpenseClassDiagram.png">
+![](images/ExpenseClassDiagram.png)
 
 How the Expense Tracker component works:
 1. From the Main Menu, if the user decides to run `goto m/Expense_Tracker`, the `ExpenseTracker` class takes over.
@@ -140,29 +140,42 @@ Given below is an example usage scenario on how the Budgeting Reminder Feature w
 
 Step 1: The user navigates to the Expense Tracker for the first time, and decides to set a budget of $300.
 
-<img src="images/BudgetingReminder0.png">;
+![](images/BudgetingReminder0.png)
 
 Step 2: The user proceeds to add 2 expense records, each with an amount of $100.
 
-<image src ="images/BudgetingReminder1.png">;
+![](images/BudgetingReminder1.png)
 
 Step 3: The user now tries to add 1 more expense record with an amount of $200. This exceeds the budget and hence the 
 addition will not be processed.
 
-<img src="images/BudgetingReminder2.png">;
+![](images/BudgetingReminder2.png)
 
 The following sequence diagram shows how the budget is checked upon every new addition of expense records:
 
-<img src="images/BudgetingReminderSequenceDiagram.png">;
+![](images/BudgetingReminderSequenceDiagram.png)
+
+
 
 ### Contacts
 
+#### Contacts Manager Component
 
-### Load and Store
-Coming soon.
+**API:** `ContactsManager.java`
 
-#### Contacts Parser Component
-**API:** `ContactsParser.java`
+![](images/ContactClassDiagram.png)
+
+The `ContactsManager` component:
+* stores the Contacts Manager data, i.e. all `Contact` objects are
+contained in the contacts list, stored as a private class variable 
+within a `ContactsManager` instance.
+* each `Contact` object has four fields, `Name`, `Faculty`, `Email`,
+and `Description`. These four classes inherit from the abstract class `Field`.
+* calls methods in the `ContactParser` class to parse user inputs and
+make the relevant edits to the contacts list
+
+#### Contact Parser Component
+**API:** `ContactParser.java`
 
 The Sequence Diagram below illustrates interactions between classes of objects
 for the static `setContactFields(contact, fieldStrings)` API call.
@@ -170,11 +183,14 @@ for the static `setContactFields(contact, fieldStrings)` API call.
 ![](images/ContactSetFieldsSequence.png)
 
 For each string in the array `fieldStrings`, the method identifies
-which contact field the string corresponds to, get a reference to the 
+which contact field the string corresponds to, get a reference to the
 Field object from `contact`, and then uses the polymorphic `setField()`
 call to update the value of the corresponding field of `contact`.
 
 ![](images/ContactSetFieldsSequenceSubdiagram.png)
+
+### Load and Store
+Coming soon.
 
 
 ## Non-Functional Requirements

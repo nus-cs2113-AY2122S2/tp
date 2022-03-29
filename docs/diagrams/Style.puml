@@ -54,6 +54,21 @@ skinparam Sequence {
     FontName Arial
 }
 
+<style>
+  sequenceDiagram {
+    reference {
+      LineColor black
+      BackGroundColor #00000000
+      LineThickness 2.0
+    }
+    referenceHeader {
+      LineColor black
+      FontStyle bold
+      LineThickness 1.0
+    }
+}
+</style>
+
 skinparam Participant {
     FontColor #FFFFFFF
     Padding 20
