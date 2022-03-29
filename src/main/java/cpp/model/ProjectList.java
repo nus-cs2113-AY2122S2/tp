@@ -193,12 +193,13 @@ public class ProjectList {
     }
 
     /**
-     * Gets certain project based on given index
+     * Gets certain project based on given index.
      *
+     * @param index index of a given project
      * @return target project with given index
      */
-    public Project getProject(int index){
-        assert (index>=0 && index<projectList.size()) : "Index out of range!";
+    public Project getProject(int index) {
+        assert (index >= 0 && index < projectList.size()) : "Index out of range!";
         return projectList.get(index);
     }
 

@@ -54,6 +54,6 @@ public class Todo {
      * @return todo status isDone as String
      */
     public String getDone() {
-        return isDone?"true":"false";
+        return isDone ? "true" : "false";
     }
 }
