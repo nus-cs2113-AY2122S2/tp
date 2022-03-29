@@ -70,17 +70,17 @@ public class ClearCommandTest {
         assertEquals(ERROR_TIMETABLE_NOT_FOUND_TO_DELETE,  clearCommand.execute(masterTimetable));
     }
 
-    @Test
-    public void clearCommandOnUserWorksProperlyAndList() {
-        addCommand.execute(masterTimetable);
-        addCommandSameUser.execute(masterTimetable);
-        addCommandDifferentUser.execute(masterTimetable);
-        ClearCommand clearCommand = new ClearCommand("john");
-        assertEquals(successClearJohn,  clearCommand.execute(masterTimetable));
-        ListCommand listCommand = new ListCommand("all");
-        assertEquals(listSuccessPostClearJohn, listCommand.execute(masterTimetable));
+    //     @Test
+    //     public void clearCommandOnUserWorksProperlyAndList() {
+    //         addCommand.execute(masterTimetable);
+    //         addCommandSameUser.execute(masterTimetable);
+    //         addCommandDifferentUser.execute(masterTimetable);
+    //         ClearCommand clearCommand = new ClearCommand("john");
+    //         assertEquals(successClearJohn,  clearCommand.execute(masterTimetable));
+    //         ListCommand listCommand = new ListCommand("all");
+    //         assertEquals(listSuccessPostClearJohn, listCommand.execute(masterTimetable));
 
-    }
+    //     }
 
     @Test
     public void clearCommandClearAllWorksProperlyAndList() {

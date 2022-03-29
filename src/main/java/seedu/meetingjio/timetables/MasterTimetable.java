@@ -1,8 +1,7 @@
 package seedu.meetingjio.timetables;
 
-import seedu.meetingjio.commands.AddMeetingCommand;
-import seedu.meetingjio.commands.DeleteCommand;
 import seedu.meetingjio.events.Event;
+import seedu.meetingjio.events.Lesson;
 import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
@@ -29,6 +28,13 @@ public class MasterTimetable {
         this.meetingList = new ArrayList<>();
     }
 
+    /**
+     * Get timetable by the specified name.
+     *
+     * @param name Name
+     * @return timetable Timetable that matches the name
+     * @throws TimetableNotFoundException if there's no timetable that matches the name
+     */
     public Timetable getByName(String name) throws TimetableNotFoundException {
         for (Timetable timetable : timetables) {
             if (name.equalsIgnoreCase(timetable.getName())) {
@@ -38,6 +44,12 @@ public class MasterTimetable {
         throw new TimetableNotFoundException();
     }
 
+    /**
+     * Remove timetable by the specified name.
+     * No exception will be thrown if there's no timetable that matches the name.
+     *
+     * @param name Name
+     */
     public void removeByName(String name) {
         for (int i = 0; i < timetables.size(); i++) {
             if (name.equalsIgnoreCase(timetables.get(i).getName())) {
@@ -46,16 +58,47 @@ public class MasterTimetable {
         }
     }
 
+    /**
+     * Get timetable at the specified index.
+     *
+     * @param index Index
+     * @return timetable Timetable at the index
+     */
     public Timetable getByIndex(int index) {
         return timetables.get(index);
     }
 
+    /**
+     * Remove timetable at the specified index.
+     *
+     * @param index Index
+     */
     public void removeByIndex(int index) {
         timetables.remove(index);
     }
 
-    public void add(Timetable timetable) {
+    /**
+     * Add timetable to the MasterTimetable.
+     *
+     * @param timetable Timetable to be added
+     */
+    public void addTimetable(Timetable timetable) {
         timetables.add(timetable);
+    }
+
+    /**
+     * Add lesson to the timetable that belongs to the user.
+     *
+     * @param lesson Lesson to be added
+     * @param name Name of the user
+     * @throws TimetableNotFoundException If user's timetable doesn't exist
+     * @throws DuplicateEventException If identical event has already been added
+     * @throws OverlappingEventException If another existing event has a timetable clash
+     */
+    public void addLesson(Lesson lesson, String name)
+            throws TimetableNotFoundException, DuplicateEventException, OverlappingEventException {
+        Timetable timetable = getByName(name);
+        timetable.add(lesson);
     }
 
     /**

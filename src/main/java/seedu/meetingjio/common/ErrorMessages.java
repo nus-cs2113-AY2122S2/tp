@@ -39,11 +39,16 @@ public class ErrorMessages {
             + "sunday";
     public static final String ERROR_INVALID_MODE = "Hi please input a valid mode\n"
             + "Accepted inputs are: online or physical";
+
+    // List Command
     public static final String ERROR_EMPTY_LIST = "There are no lessons in your timetable yet!";
+
+    // Event
     public static final String ERROR_DUPLICATE_EVENT = "This event already exists. "
             + "This event will not be not added to the timetable.";
     public static final String ERROR_OVERLAPPING_EVENT = "This event coincides with another event. "
             + "This event will not be added to the timetable.";
+
     public static final String ERROR_INIT_FAILED = "Failed to initialise MeetingJio application. Exiting...";
     public static final String ERROR_INVALID_COMMAND = "Hi please input a valid command.";
     public static final String ERROR_NON_EMPTY_LIST = "Failed to clear whole list";
@@ -54,6 +59,7 @@ public class ErrorMessages {
     public static final String ERROR_TIMETABLE_NOT_FOUND_TO_DELETE = "User and his Timetable not found";
     public static final String ERROR_EXCEPTION_NOT_HANDLED = "New exception found that is not handled. Logged this";
 
+    // Meeting
     public static final String ERROR_OVERLAPPING_MEETING = "This meeting cannot be added as "
             + "some of the members cannot make it";
     public static final String ERROR_DUPLICATE_MEETING = "This meeting already exists. "
