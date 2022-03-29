@@ -6,7 +6,6 @@ import seedu.mindmymoney.constants.PrintStrings;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 import static seedu.mindmymoney.constants.CategoryTypes.FOOD;
@@ -25,6 +24,7 @@ import static seedu.mindmymoney.helper.GeneralFunctions.findMatchingCategoryInAr
  * Container for functions that help do calculations.
  */
 public class Calculations {
+    public static final double INTERVEL_OF_INCREMENT = 5;
 
     /**
      * Calculates the total expenditure in a given month.
@@ -82,7 +82,7 @@ public class Calculations {
      */
     public static String printBar(float percentage) {
         String output = "";
-        for (float i = 0; i < percentage / 10; i += 0.5) {
+        for (float i = 0; i < percentage; i += INTERVEL_OF_INCREMENT) {
             output += "▇▇";
         }
         return output;
