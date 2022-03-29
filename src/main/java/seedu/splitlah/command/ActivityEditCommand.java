@@ -22,7 +22,6 @@ import seedu.splitlah.ui.TextUI;
 public class ActivityEditCommand extends Command {
 
     private static final String COMMAND_SUCCESS = "The activity was edited successfully.\n";
-    private static final int TEMPORARY_ACTIVITYID = -1;
 
     private int activityId;
     private final int sessionId;
@@ -122,10 +121,8 @@ public class ActivityEditCommand extends Command {
      * @param indexOfCostOwed An integer representing the index of the cost owed in the list of costs.
      * @param person          A person object representing the person whose costs are added to the
      *                        list of activity costs.
-     * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      */
-    private void addCostOwedAndCostPaid(Person personPaid, int activityId, int indexOfCostOwed, Person person)
-            throws InvalidDataException {
+    private void addCostOwedAndCostPaid(Person personPaid, int activityId, int indexOfCostOwed, Person person) {
         if (person == personPaid) {
             person.addActivityCost(activityId, totalCost, costList[indexOfCostOwed]);
         } else {
