@@ -8,8 +8,8 @@ import seedu.sherpass.task.TaskList;
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
     public static final String MESSAGE_USAGE = "Mark: Marks a task as done. "
-            + "\nTo mark a specific task, enter 'mark <list_index>'.\n\n Here, "
-            + "'list_index' denotes the index of a task \n based on the task list under the command 'list'.\n"
+            + "\nTo mark a specific task, enter 'mark <task_number>'.\n\n Here, "
+            + "'task_number' denotes the index of a task \n based on the task list under the command 'show all'.\n"
             + "\nE.g., 'mark 1' marks the first task in the task list as done.\n\n"
             + "Note: You can only mark one task per command input.";
 
