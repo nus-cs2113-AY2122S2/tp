@@ -88,7 +88,8 @@ and logic of user commands during the study session, while the `StudyCommand` ac
 user is in the study session.
 
 Sequence diagram for `Timer` when user starts and stops a timer:
-![TimerUML](https://user-images.githubusercontent.com/69501969/159708222-a01e9885-1f6e-4e16-8e82-97e9529ab412.png)
+
+![TimerUML](https://user-images.githubusercontent.com/69501969/160651297-5d150566-83b6-43a9-8535-052973f513b9.png)
 
 The diagram above depicts the process when user calls start and stop (in step 2 and 3 below). All the methods
 called by Timer are in parallel with other commands, since `Timer` is in a separate thread. For simplicity’s
