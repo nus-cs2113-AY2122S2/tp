@@ -199,7 +199,6 @@ public class TimerLogic implements WindowListener {
         return timer.isTimerRunning();
     }
 
-
     private String selectStudyTimer(String[] parsedInput) {
         if (parsedInput[STUDY_PARAMETER_INDEX].trim().equals("stopwatch")) {
             return "stopwatch";
@@ -219,20 +218,18 @@ public class TimerLogic implements WindowListener {
         timer = new Countdown(taskList, ui, jframe, jlabel);
     }
 
-
-
-    private boolean isTimerPausedOrStopped() {
+    /**
+     * Returns if a timer is paused or stopped, so that mark or show command can be called.
+     * It first checks if timer is initialised. If initialised, it then calls the isTimerPaused() method to check the
+     * static variable isTimerPaused in abstract class Timer.
+     *
+     * @return Returns if timer is paused or stopped.
+     */
+    public boolean isTimerPausedOrStopped() {
         if (!isTimerInitialised) {
             return true;
         }
         return timer.isTimerPaused();
-    }
-
-    public boolean getIsTimerRunning() {
-        if (!isTimerInitialised) {
-            return false;
-        }
-        return timer.isTimerRunning;
     }
 
     /**

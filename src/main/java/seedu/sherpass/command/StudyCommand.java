@@ -42,7 +42,7 @@ public class StudyCommand extends Command {
 
 
     public void leaveStudyMode(Ui ui, TimerLogic timerLogic) {
-        if (timerLogic.getIsTimerRunning()) {
+        if (!timerLogic.isTimerPausedOrStopped()) {
             timerLogic.callStopTimer();
         }
         timerLogic.destroyFrame();
