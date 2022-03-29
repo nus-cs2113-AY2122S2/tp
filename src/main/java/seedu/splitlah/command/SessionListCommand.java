@@ -1,13 +1,7 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
-import seedu.splitlah.data.Session;
-import seedu.splitlah.parser.ParserUtils;
-import seedu.splitlah.ui.Message;
-import seedu.splitlah.ui.TableFormatter;
 import seedu.splitlah.ui.TextUI;
-
-import java.util.ArrayList;
 
 /**
  * Represents a command that displays the details of each Session object within a Profile object.
