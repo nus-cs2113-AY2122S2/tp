@@ -6,6 +6,7 @@ import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
+import seedu.meetingjio.exceptions.DuplicateTimetableException;
 import seedu.meetingjio.commands.ListCommand;
 
 import java.util.ArrayList;
@@ -82,7 +83,10 @@ public class MasterTimetable {
      *
      * @param timetable Timetable to be added
      */
-    public void addTimetable(Timetable timetable) {
+    public void addTimetable(Timetable timetable) throws DuplicateTimetableException {
+        if (isDuplicate(timetable)) {
+            throw new DuplicateTimetableException();
+        }
         timetables.add(timetable);
     }
 
@@ -319,6 +323,23 @@ public class MasterTimetable {
             timetable.populateBusySlots(busySlots);
         }
         return busySlots;
+    }
+
+    /**
+     * Checks through all existing timetable to the timetable to be added
+     * to ensure that a user will not have more than one entry.
+     *
+     * @param newTimetable Timetable to be added
+     * @return true if there is identical timetable, otherwise false
+     */
+    private boolean isDuplicate(Timetable newTimetable) {
+        for (int i = 0; i < timetables.size(); i++) {
+            Timetable timetable = timetables.get(i);
+            if (timetable.equals(newTimetable)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

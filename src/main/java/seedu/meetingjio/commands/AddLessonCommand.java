@@ -32,7 +32,7 @@ public class AddLessonCommand extends Command {
     }
 
     /**
-     * Execute Add command using the timetable provided.
+     * Execute AddLesson command using the timetable provided.
      *
      * @param masterTimetable MasterTimetable
      *
@@ -53,13 +53,13 @@ public class AddLessonCommand extends Command {
     }
 
     /**
-     * Inform user that add has happened.
+     * Inform user that lesson has been added.
      *
-     * @param event Event that inform user that said event has been event
+     * @param lesson that was added
      *
      */
-    private String addConfirmation(Event event, String name) {
+    private String addConfirmation(Lesson lesson, String name) {
         return String.format("The following event has been added to %s's timetable:\n%s",
-                name, event);
+                name, lesson);
     }
 }
