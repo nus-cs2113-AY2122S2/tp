@@ -466,7 +466,7 @@ Example of usage:
 
 ### Listing all available commands: `help`
 Displays all available SplitLah commands and their syntax so that you can get assistance when using SplitLah.<br>
-You can also refer to the [Command Summary](#command-summary) for  a summary of all available commands in SplitLah.
+You can also refer to the [Command Summary](#command-summary) for a summary of all available commands in SplitLah.
 
 > Format: `help`
 
