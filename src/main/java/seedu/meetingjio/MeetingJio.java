@@ -19,7 +19,9 @@ public class MeetingJio {
 
     private static MasterTimetable masterTimetable = new MasterTimetable();
 
-    /** Starts the interaction with the user. */
+    /** Starts the interaction with the user.
+     *  Saves data when user exits the application.
+     */
     public static void main(String[] args) {
         start();
         String name = in.nextLine().trim();
@@ -35,7 +37,11 @@ public class MeetingJio {
         Ui.showGoodByeMessage();
     }
 
-    /** Initializes the application. */
+    /** Initializes the application.
+     *  Loads the local data if any.
+     *  If IOException is caught, the application has failed to start up.
+     *  A corresponding error message will be shown to the user.
+     */
     private static void start() {
         try {
             StorageFile.loadData(masterTimetable);
