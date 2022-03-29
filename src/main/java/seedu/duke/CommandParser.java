@@ -26,6 +26,7 @@ import seedu.duke.command.roomcommand.CheckRoomByCatCommand;
 
 public class CommandParser {
 
+    private static final String SPACE = " ";
     private static final String BYE = "bye";
     private static final String ADD_ITEM_COMMAND = "add item ";
     private static final String VIEW_ITEM_LIST_COMMAND = "view all items";
@@ -35,8 +36,8 @@ public class CommandParser {
     private static final String UPDATE_ITEM_NAME_COMMAND = "update item name ";
     private static final String ADD_HOUSEKEEPER_COMMAND = "add housekeeper ";
     private static final String SEARCH_ITEM_COMMAND = "search item ";
-    private static final String ADD_PERFORMANCE_COMMAND = "add housekeeper performance ";
-    private static final String VIEW_PERFORMANCES_COMMAND = "view housekeeper performances";
+    private static final String ADD_PERFORMANCE_COMMAND = "add performance ";
+    private static final String VIEW_PERFORMANCES_COMMAND = "view performances";
     private static final String ADD_AVAILABILITY_COMMAND = "availability ";
     private static final String ADD_SATISFACTION_COMMAND = "add satisfaction ";
     private static final String VIEW_SATISFACTIONS_COMMAND = "view satisfactions";
@@ -70,12 +71,14 @@ public class CommandParser {
         String userInputLowerCase = userInput.toLowerCase();
         Command userCommand = null;
         String userInputLowerCaseWithoutCommand;
-        if (userInputLowerCase.equals(BYE)) {
+        if (userInputLowerCase.startsWith(SPACE)) {
+            throw new InvalidCommandException();
+        } else if (userInputLowerCase.equals(BYE)) {
             userCommand = new ExitCommand();
         } else if (userInputLowerCase.startsWith(ADD_SATISFACTION_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_SATISFACTION_COMMAND, "").trim();
             userCommand = new AddSatisfactionCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.equals(VIEW_SATISFACTIONS_COMMAND)) {
+        } else if (userInputLowerCase.trim().equals(VIEW_SATISFACTIONS_COMMAND)) {
             userCommand = new ViewSatisfactionsCommand();
         } else if (userInputLowerCase.equals(AVERAGE_SATISFACTION_COMMAND)) {
             userCommand = new AverageSatisfactionCommand();
@@ -95,7 +98,7 @@ public class CommandParser {
         } else if (userInputLowerCase.startsWith(ADD_PERFORMANCE_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_PERFORMANCE_COMMAND, "");
             userCommand = new AddHousekeeperPerformanceCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.equals(VIEW_PERFORMANCES_COMMAND)) {
+        } else if (userInputLowerCase.trim().equals(VIEW_PERFORMANCES_COMMAND)) {
             userCommand = new ViewHousekeeperPerformancesCommand();
         } else if (userInputLowerCase.startsWith(CHECK_IN)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_IN, "");
