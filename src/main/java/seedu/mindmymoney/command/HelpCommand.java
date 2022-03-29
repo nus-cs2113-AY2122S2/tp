@@ -22,7 +22,7 @@ public class HelpCommand extends Command {
     /**
      * Indicates whether the program should exit.
      *
-     * @return Indication on whether the program should exit.
+     * @return true if the program should exit, false otherwise.
      */
     @Override
     public boolean isExit() {

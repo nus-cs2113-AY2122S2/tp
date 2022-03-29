@@ -47,7 +47,7 @@ public class UpdateCommand extends Command {
     /**
      * Indicates whether the program should exit.
      *
-     * @return Indication on whether the program should exit.
+     * @return true if the program should exit, false otherwise.
      */
     @Override
     public boolean isExit() {
@@ -127,7 +127,7 @@ public class UpdateCommand extends Command {
             String[] parseUpdateInput = updateInput.split(" ");
 
             //Get index to update
-            String indexString = parseUpdateInput[INDEX_OF_SECOND_ITEM];
+            String indexAsString = parseUpdateInput[INDEX_OF_SECOND_ITEM];
 
             //Parse data from input
             String newCardName = parseInputWithCommandFlag(updateInput, FLAG_OF_CARD_NAME,
@@ -138,7 +138,7 @@ public class UpdateCommand extends Command {
                     FLAG_OF_CARD_BALANCE);
             String newCardBalance = parseInputWithCommandFlag(updateInput, FLAG_OF_CARD_BALANCE,
                     FLAG_END_VALUE);
-            int indexToUpdate = Integer.parseInt(indexString) + LIST_INDEX_CORRECTION;
+            int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
 
             //to edit to fit new add command
             CreditCard newCreditCard = new CreditCard(newCardName, Double.parseDouble(newCashBack),
@@ -166,8 +166,8 @@ public class UpdateCommand extends Command {
             String[] parseUpdateInput = updateInput.split(" ");
 
             //Get index to update
-            String indexString = parseUpdateInput[INDEX_OF_SECOND_ITEM];
-            int indexToUpdate = Integer.parseInt(indexString) + LIST_INDEX_CORRECTION;
+            String indexAsString = parseUpdateInput[INDEX_OF_SECOND_ITEM];
+            int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
 
             //Parse data from input
             String newAmountAsString = parseInputWithCommandFlag(updateInput, FLAG_OF_AMOUNT,

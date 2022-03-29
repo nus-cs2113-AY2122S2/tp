@@ -6,6 +6,8 @@ import seedu.mindmymoney.constants.IncomeCategoryTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.userfinancial.CreditCard;
 
+import static seedu.mindmymoney.constants.Indexes.MAX_STUDENT_INCOME;
+import static seedu.mindmymoney.constants.Indexes.MIN_STUDENT_INCOME;
 import static seedu.mindmymoney.constants.PaymentMethod.CASH;
 
 /**
@@ -132,9 +134,9 @@ public class AddCommandInputTests {
     }
 
     public static void testIncomeAmount(int inputAmount) throws MindMyMoneyException {
-        if (inputAmount < 0) {
+        if (inputAmount < MIN_STUDENT_INCOME) {
             throw new MindMyMoneyException("Amount cannot be negative!");
-        } else if (inputAmount > 1000000) {  // Students typically would not have an income greater than 1,000,000
+        } else if (inputAmount > MAX_STUDENT_INCOME) {
             throw new MindMyMoneyException("Amount too high!");
         }
     }

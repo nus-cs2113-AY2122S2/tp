@@ -29,16 +29,38 @@ public class GeneralFunctions {
     }
 
     /**
-     * Separates the user input into the command and description for easy reference.
+     * Checks if user's input contains the correct flag formats.
      *
-     * @return String array of user input.
+     * @param input user's input.
+     * @param startingFlag the flag before the interested parameter.
+     * @param endingFlag the flag after the interested parameter.
+     * @return true if the input contains the correct flag formats, false otherwise.
+     */
+    public static boolean hasCorrectFlagFormat(String input, String startingFlag, String endingFlag) {
+        if (input.contains(startingFlag + " ") && input.contains(" " + endingFlag)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Extracts out the interested parameter from the user's input based on the given flags.
+     * For example, if user's input was: "add /i /a 3000 /c salary", this method extracts out "3000" or "salary"
+     * based on the flags given.
+     *
+     * @param input user's input.
+     * @param startingFlag the flag before the interested parameter.
+     * @param endingFlag the flag after the interested parameter.
+     * @return the interested parameter.
+     * @throws MindMyMoneyException when an invalid command is received, along with the corresponding error message.
      */
     public static String parseInputWithCommandFlag(String input, String startingFlag, String endingFlag)
         throws MindMyMoneyException {
         try {
-            if (!(input.contains(startingFlag + " ") && input.contains(" " + endingFlag))) {
+            if (!hasCorrectFlagFormat(input, startingFlag, endingFlag)) {
                 throw new MindMyMoneyException("You are missing a flag or lack the spacing between the flags!");
             }
+
             startingFlag = startingFlag + " ";
             input = input.substring(input.indexOf(startingFlag) + startingFlag.length());
             if (!endingFlag.equals("")) {
