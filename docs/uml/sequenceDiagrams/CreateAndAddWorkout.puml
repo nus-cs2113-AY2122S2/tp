@@ -17,8 +17,8 @@ the exercise name and repetition count.
 end
 
 ref over wl
-Calls to check validity of exercise name
-and repetition count.
+Check the validity of
+exercise name and repetition count.
 end
 
 opt !isExerciseValid
@@ -35,9 +35,11 @@ activate iwe
 return
 end
 
-wl -> wl : checkForExistingWorkout(userExerciseInput, userRepsInput)
-activate wl
-return :boolean
+ref over wl
+Check if an existing workout
+with same parameters already exists.
+end
+
 
 opt hasSameExerciseNameAndReps
 create ":InvalidWorkoutException" AS iwe2
