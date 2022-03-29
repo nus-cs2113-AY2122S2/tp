@@ -446,18 +446,13 @@ public class PlanList {
              ArrayIndexOutOfBoundsException {
         Plan planObject;
         boolean isWorkoutInPlan = false;
-        boolean isWorkoutFound = false;
         ArrayList<Integer> planWithTargetWorkout = new ArrayList<Integer>();
         for (int i = 1; i <= getPlansDisplayList().size(); i++) {
             planObject = getPlanFromIndexNum(i);
             isWorkoutInPlan = checkWorkoutInPlan(workoutToCheck, planObject);
             if (isWorkoutInPlan) {
                 planWithTargetWorkout.add(i);
-                isWorkoutFound = true;
             }
-        }
-        if (isWorkoutFound) {
-            System.out.println(workoutToCheck + " is found in:\n");
         }
         return planWithTargetWorkout;
     }
@@ -475,6 +470,11 @@ public class PlanList {
         if (planWithDeletedWorkout.size() <= 0) {
             return;
         }
+
+        if (planWithDeletedWorkout.size() > 0) {
+            System.out.println(workoutToCheck + " is found in:\n");
+        }
+
         for (int planNumber : planWithDeletedWorkout) {
             assert (checkPlanIndexIsWithinRange(planNumber)) : "Plan number is out of range.";
             System.out.println("\t" + getPlansDisplayList().get(planNumber - 1));
@@ -496,9 +496,13 @@ public class PlanList {
             return;
         }
 
+        if (planWithUpdatedWorkout.size() > 0) {
+            System.out.println(workoutToCheck + " is found in:\n");
+        }
+
         for (int planNumber : planWithUpdatedWorkout) {
-            System.out.println("\t" + getPlansDisplayList().get(planNumber - 1));
             assert (checkPlanIndexIsWithinRange(planNumber)) : "Plan number is out of range.";
+            System.out.println("\t" + getPlansDisplayList().get(planNumber - 1));
         }
 
         int totalNumberOfPlanToUpdate = planWithUpdatedWorkout.size();
