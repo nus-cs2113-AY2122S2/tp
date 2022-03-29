@@ -5,7 +5,7 @@ import seedu.duke.command.eventcommands.AddEventCommand;
 import seedu.duke.command.eventcommands.DeleteEventCommand;
 import seedu.duke.command.eventcommands.ViewEventsCommand;
 import seedu.duke.command.itemcommand.AddItemCommand;
-import seedu.duke.command.itemcommand.ViewItemWithZeroPaxCommand;
+import seedu.duke.command.itemcommand.ViewItemsWithZeroPaxCommand;
 import seedu.duke.command.itemcommand.SearchItemCommand;
 import seedu.duke.command.itemcommand.UpdateItemPaxCommand;
 import seedu.duke.command.itemcommand.DeleteItemCommand;
@@ -92,10 +92,14 @@ public class CommandParser {
         } else if (userInputLowerCase.startsWith(ADD_ITEM_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_ITEM_COMMAND, "");
             userCommand = new AddItemCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.equals(VIEW_ITEM_LIST_COMMAND)) {
-            userCommand = new ViewItemListCommand();
-        } else if (userInputLowerCase.equals(VIEW_ITEMS_WITH_ZERO_PAX_COMMAND)) {
-            userCommand = new ViewItemWithZeroPaxCommand();
+        } else if (userInputLowerCase.startsWith(VIEW_ITEM_LIST_COMMAND)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(VIEW_ITEM_LIST_COMMAND, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCaseWithoutCommand.trim();
+            userCommand = new ViewItemListCommand(userInputLowerCaseWithoutCommand);
+        } else if (userInputLowerCase.startsWith(VIEW_ITEMS_WITH_ZERO_PAX_COMMAND)) {
+            userInputLowerCaseWithoutCommand = userInputLowerCase.replace(VIEW_ITEMS_WITH_ZERO_PAX_COMMAND, "");
+            userInputLowerCaseWithoutCommand = userInputLowerCaseWithoutCommand.trim();
+            userCommand = new ViewItemsWithZeroPaxCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.startsWith(DELETE_ITEM_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(DELETE_ITEM_COMMAND, "");
             userCommand = new DeleteItemCommand(userInputLowerCaseWithoutCommand);
