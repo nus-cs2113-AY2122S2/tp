@@ -47,7 +47,7 @@ public class AddRecordCommand extends Command {
         group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
         this.isSilent = Constants.FOR_USER;
-        assert (uid < 1) : Constants.USER_INDEX_NOT_VALID;
+        assert (uid >= 1) : Constants.USER_INDEX_NOT_VALID;
         logger.log(Level.INFO, String.format(LOG_ADDRECORD_INFO, description, uid, group));
     }
 
@@ -67,7 +67,7 @@ public class AddRecordCommand extends Command {
         case ADD_SPENT_CMD:
             amount = Parser.getValidMoney(Parser.parseExpenditure(userInput));
             category = Parser.getValidCategoryIndex(Parser.parseCategoryIndex(userInput));
-            family.addExpend(uid, group, description, amount, category, isPermanent, isSilent);
+            family.addExpend(group, uid, description, amount, category, isPermanent, isSilent);
             logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, EXPEND, description, amount, category,
                     uid, group));
             break;
