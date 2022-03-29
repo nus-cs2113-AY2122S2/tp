@@ -90,4 +90,72 @@ public class ErrorMessages {
             + "et/[EndTime]\n"
             + "m/[Mode]";
 
+    public static final String ERROR_MISSING_VALUES_LOAD_LESSON = "Hi 1 or more parameters have missing values "
+            + "in the MeetingJio.txt\n"
+            + "Please ensure that the following parameters are not empty:\n"
+            + "TITLE: [Title]\n"
+            + "DAY: [Day]\n"
+            + "START: [StartTime]\n"
+            + "END: [EndTime]\n"
+            + "MODE: [Mode]";
+
+    public static final String ERROR_MISSING_PARAMETERS_LOAD_LESSON = "Hi 1 or more parameters are "
+            + "missing in the MeetingJio.txt\n"
+            + "Please ensure that the following parameters are present:\n"
+            + "TITLE: [Title] "
+            + "DAY: [Day] "
+            + "START: [StartTime] "
+            + "END: [EndTime] "
+            + "MODE: [Mode]\n"
+            + "Example:\n"
+            + "1.[L] TITLE: CS2113\t\tDAY: friday\t\tSTART: 1430\t\tEND: 1530\t\tMODE: online";
+
+    public static final String ERROR_INVALID_TIME_LOADING = "Hi invalid time found in the START or END field "
+            + "in the MeetingJio.txt\n"
+            + "Please ensure that StartTime must be before EndTime\n"
+            + "Accepted inputs are: 0000 - 2359";
+
+    public static final String ERROR_INVALID_DAY_LOADING = "Hi invalid day found in the DAY field "
+            + "in the MeetingJio.txt\n"
+            + "Accepted inputs are:\n"
+            + "monday\n"
+            + "tuesday\n"
+            + "wednesday\n"
+            + "thursday\n"
+            + "friday\n"
+            + "saturday\n"
+            + "sunday";
+
+    public static final String ERROR_INVALID_MODE_LOADING = "Hi invalid day found in the MODE field"
+            + "in the MeetingJio.txt\n"
+            + "Accepted inputs are: online or physical";
+
+    public static final String ERROR_INVALID_EVENT_TYPE_LOADING = "Hi invalid event type found "
+            + "in the MeetingJio.txt\n"
+            + "Accepted inputs are: [M] or [L]"
+            + "Please ensure that it follows the correct format:\n"
+            + "1.[L] "
+            + "TITLE: [Title] "
+            + "DAY: [Day] "
+            + "START: [StartTime] "
+            + "END: [EndTime] "
+            + "MODE: [Mode]\n"
+            + "Example:\n"
+            + "1.[L] TITLE: CS2113\t\tDAY: friday\t\tSTART: 1430\t\tEND: 1530\t\tMODE: online";
+
+    public static final String ERROR_MISSING_PARAMETERS_LOAD_MEETING = "Hi 1 or more parameters are "
+            + "missing for the meeting in the MeetingJio.txt\n"
+            + "Please ensure that the following parameters are present:\n"
+            + "TITLE: [Title] "
+            + "DAY: [Day] "
+            + "START: [StartTime] "
+            + "END: [EndTime] "
+            + "MODE: [Mode]\n"
+            + "Example:\n"
+            + "1.[M] TITLE: CS2113\t\tDAY: friday\t\tSTART: 1430\t\tEND: 1530\t\tMODE: online";
+
+    public static final String ERROR_EMPTY_ROW = "A row cannot be empty in the MeetingJio.txt";
+
+    public static final String ERROR_INCORRECT_INDEX = "Hi, please ensure that the index is in correct sequence\n"
+            + "1, 2, 3, 4, ...";
 }
