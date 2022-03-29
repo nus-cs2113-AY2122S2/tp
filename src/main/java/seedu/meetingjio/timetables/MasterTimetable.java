@@ -8,12 +8,12 @@ import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.commands.ListCommand;
-import seedu.meetingjio.commands.FreeCommand;
 
 import java.util.ArrayList;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
+import static seedu.meetingjio.common.Messages.NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
 
 public class MasterTimetable {
 
@@ -38,13 +38,12 @@ public class MasterTimetable {
         throw new TimetableNotFoundException();
     }
 
-    public void removeByName(String name) throws TimetableNotFoundException {
-        for (Timetable timetable : timetables) {
-            if (name.equalsIgnoreCase(timetable.getName())) {
-                timetables.remove(timetable);
+    public void removeByName(String name) {
+        for (int i = 0; i < timetables.size(); i++) {
+            if (name.equalsIgnoreCase(timetables.get(i).getName())) {
+                timetables.remove(i);
             }
         }
-        throw new TimetableNotFoundException();
     }
 
     public Timetable getByIndex(int index) {
@@ -89,6 +88,13 @@ public class MasterTimetable {
         return meetingList;
     }
 
+    /**
+     * Does check if the meeting clashes any other events/lessons with any user across all timetables.
+     *
+     * @param meeting The meeting event that is to be checked
+     *
+     * @return boolean true if there is another event at the same time as the meeting
+     */
     public boolean checkIfClash(Meeting meeting) {
         for (Timetable timetable : timetables) {
             if (checkMeetingOverlap(timetable, meeting)) {
@@ -98,6 +104,14 @@ public class MasterTimetable {
         return false;
     }
 
+    /**
+     * Does check if the meeting clashes with any event in the specified user's timetable.
+     *
+     * @param timetable The timetable to check clash
+     * @param meeting The meeting event that is to be checked
+     *
+     * @return boolean True false if there is another event at the same time as the meeting
+     */
     private boolean checkMeetingOverlap(Timetable timetable, Meeting meeting) {
         for (Event event : timetable.getList()) {
             if (meeting.overlaps(event)) {
@@ -107,6 +121,13 @@ public class MasterTimetable {
         return false;
     }
 
+    /**
+     * Does check if the meeting already exists,as added before.
+     *
+     * @param meeting The meeting event that is to be checked
+     *
+     * @return boolean True false if there meeting already exists
+     */
     public boolean checkIfMeetingExistsAlready(Meeting meeting) {
         for (Event event : meetingList) {
             if (meeting.equals(event)) {
@@ -116,6 +137,13 @@ public class MasterTimetable {
         return false;
     }
 
+    /**
+     * Add meeting to everyone's timetable so that everyone has a record on it.
+     *
+     * @param meeting The meeting event that is to be added
+     *
+     * @return String Confirmation of meeting being added to everyone's timetable
+     */
     public String addMeetingToEveryoneTimetable(Meeting meeting) {
         for (Timetable timetable : timetables) {
             try {
@@ -128,17 +156,55 @@ public class MasterTimetable {
                 return "ERROR DETECTED";
             }
         }
-        return AddMeetingCommand.addMeetingConfirmation(meeting);
+        return addMeetingConfirmation(meeting);
     }
 
+    /**
+     * Inform user that meeting has been added.
+     *
+     * @param meeting The meeting event that has just been added
+     *
+     * @return String confirmation of meeting added to everyone's timetable
+     */
+    private String addMeetingConfirmation(Meeting meeting) {
+        return String.format("The following meeting has been added to everyone's timetable:\n%s",
+                meeting);
+    }
+
+    /**
+     * Inform user that meeting has been deleted from everyone's timetable.
+     *
+     * @param meeting The meeting event that is to be deleted
+     *
+     * @return String confirmation of meeting added to everyone's timetable
+     */
     public String deleteMeetingFromEveryoneTimetable(Meeting meeting) {
         for (Timetable timetable : timetables) {
             deleteMeetingFromTimetable(timetable,meeting);
         }
         deleteMeetingFromMeetingList(meeting);
-        return DeleteCommand.deleteFromAllTimetableConfirmation(meeting);
+        return deleteMeetingFromAllTimetableConfirmation(meeting);
     }
 
+    /**
+     * Inform user that delete has happened.
+     *
+     * @param meeting Event to inform user that said event has been deleted
+     *
+     *
+     */
+    public String deleteMeetingFromAllTimetableConfirmation(Meeting meeting) {
+        return "The following meeting event has been deleted from everyone's timetable:\n"
+                + meeting;
+    }
+
+    /**
+     * Deletes meeting from specified user's timetable.
+     *
+     * @param timetable The timetable to delete from
+     * @param meeting The meeting event that is to be deleted
+     *
+     */
     public void deleteMeetingFromTimetable(Timetable timetable,Meeting meeting) {
         for (int i = 0; i < timetable.size(); i++) {
             if (meeting.equals(timetable.get(i))) {
@@ -147,10 +213,48 @@ public class MasterTimetable {
         }
     }
 
+    /**
+     * Deletes meeting from meetingList.
+     *
+     * @param meeting The meeting event that is to be deleted
+     *
+     */
     public void deleteMeetingFromMeetingList(Meeting meeting) {
         for (int i = 0; i < meetingList.size(); i++) {
             if (meeting.equals(meetingList.get(i))) {
                 meetingList.remove(i);
+            }
+        }
+    }
+
+    /**
+     * Deletes all meetings that exist.
+     *
+     * @return String Message that all meetings were deleted as new user was added
+     *
+     */
+    public String deleteAllMeetings() {
+        for (Timetable timetable : timetables) {
+            deleteMeetingsFromTimetable(timetable);
+        }
+        for (int i = 0; i < meetingList.size(); i++) {
+            meetingList.remove(0);
+        }
+
+        return NEW_USER_ADDED_SO_ALL_MEETINGS_DELETED;
+    }
+
+    /**
+     * Deletes all meetings from specified timetable.
+     *
+     * @param timetable Specific timetable to perform delete on
+     *
+     */
+    public void deleteMeetingsFromTimetable(Timetable timetable) {
+        for (int i = 0; i < timetable.size(); i++) {
+            Event event = timetable.get(i);
+            if (event instanceof Meeting) {
+                timetable.remove(i);
             }
         }
     }

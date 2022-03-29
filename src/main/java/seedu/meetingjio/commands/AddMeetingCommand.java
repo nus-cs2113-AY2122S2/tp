@@ -23,6 +23,12 @@ public class AddMeetingCommand extends Command {
         this.mode = mode;
     }
 
+    /**
+     * Execute AddMeeting command using the timetable provided.
+     *
+     * @param masterTimetable MasterTimetable
+     *
+     */
     @Override
     public String execute(MasterTimetable masterTimetable) {
         // check all timetables, see if start or end time of each event/lesson is equal to each other
@@ -39,11 +45,6 @@ public class AddMeetingCommand extends Command {
             return "ERROR DETECTED";
         }
 
-    }
-
-    public static String addMeetingConfirmation(Meeting meeting) {
-        return String.format("The following meeting has been added to everyone's timetable:\n%s",
-                meeting);
     }
 
 }
