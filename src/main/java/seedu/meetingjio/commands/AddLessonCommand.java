@@ -2,15 +2,15 @@ package seedu.meetingjio.commands;
 
 import seedu.meetingjio.events.Event;
 import seedu.meetingjio.events.Lesson;
-import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.timetables.MasterTimetable;
 
 import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
-import seedu.meetingjio.timetables.Timetable;
+import seedu.meetingjio.exceptions.TimetableNotFoundException;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
 
 public class AddLessonCommand extends Command {
     public static final String COMMAND_WORD = "add_lesson";
@@ -39,18 +39,12 @@ public class AddLessonCommand extends Command {
      */
     @Override
     public String execute(MasterTimetable masterTimetable) {
-        Timetable timetable;
         try {
-            timetable  = masterTimetable.getByName(name);
+            Lesson newLesson = new Lesson(title, day, startTime, endTime, mode);
+            masterTimetable.addLesson(newLesson, name);
+            return addConfirmation(newLesson, name);
         } catch (TimetableNotFoundException tnfe) {
-            timetable = new Timetable(name);
-            masterTimetable.add(timetable);
-            masterTimetable.deleteAllMeetings();
-        }
-        try {
-            Event newEvent = new Lesson(title, day, startTime, endTime, mode);
-            timetable.add(newEvent);
-            return addConfirmation(newEvent, name);
+            return ERROR_INVALID_USER;
         } catch (DuplicateEventException dee) {
             return ERROR_DUPLICATE_EVENT;
         } catch (OverlappingEventException oee) {
