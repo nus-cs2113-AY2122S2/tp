@@ -110,7 +110,7 @@ public class AssignHousekeeperCommand extends Command {
 
         assignmentMap.addAssignment(name, roomIdNumber);
         assignmentMap.save();
-        ui.printMessage("Assigned " + name + " to room#" + roomID + ".");
+        ui.printMessage("Assigned " + name + " to room no. " + roomID + ".");
         logger.log(Level.INFO, "end of processing");
     }
 
