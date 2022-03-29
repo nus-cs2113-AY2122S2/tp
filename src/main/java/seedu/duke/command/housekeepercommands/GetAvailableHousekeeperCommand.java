@@ -27,8 +27,8 @@ public class GetAvailableHousekeeperCommand extends Command {
             logger.log(Level.WARNING, "Empty Day.");
             throw new EmptyDayException();
         }
-        searchDay = checkCorrectDayGiven(commandStringWithoutCommand);
         assert (searchDay >= MONDAY_INDICATE & searchDay <= SUNDAY_INDICATE) : "Input day incorrect range.";
+        searchDay = checkCorrectDayGiven(commandStringWithoutCommand);
     }
 
     /**
@@ -41,7 +41,8 @@ public class GetAvailableHousekeeperCommand extends Command {
     private int checkCorrectDayGiven(String commandStringWithoutCommand) throws InvalidDayException {
         int day;
         try {
-            day = Integer.parseInt(commandStringWithoutCommand);
+            String trimmedInput = commandStringWithoutCommand.trim();
+            day = Integer.parseInt(trimmedInput);
         } catch (NumberFormatException numberError) {
             logger.log(Level.WARNING, "Day is not an integer.");
             throw new InvalidDayException();
