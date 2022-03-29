@@ -333,7 +333,8 @@ command.
 **Example**
 - An [activity](#creating-an-activity-activity-create) was previously created with an `ACTIVITY_ID` of 1, part of 
   a session with a `SESSION_ID` of 1. It was named *Lunch* with Alice and Bob.<br>
-  Edits the activity's name, payer, overall cost, GST percentage and service charge.<br>
+  Edits the activity's name, payer, overall cost, GST percentage and service charge. List of participants remains
+  unchanged.<br>
   `activity /edit /sid 1 /aid 1 /n Dinner /p Bob /i Alice Bob /co 30 /gst 7 /sc 10`<br>
   ![Activity edit command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityEditCommand.png)
   <br>
