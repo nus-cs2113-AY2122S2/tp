@@ -276,6 +276,13 @@ class ProfileTest {
         }
     }
 
+    @Test
+    public void getGroupListSummaryString_groupListEmpty_emptyGroupMessageReturned() {
+        String retrievedGroupListSummary = manager.getProfile().getGroupListSummaryString();
+        String expectedMessage = Message.ERROR_PROFILE_GROUP_LIST_EMPTY;
+        assertEquals(expectedMessage, retrievedGroupListSummary);
+    }
+
     /**
      * Checks if sessionId is incremented when getNewSessionId method is called.
      */
