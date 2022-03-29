@@ -89,7 +89,8 @@ public class AssignHousekeeperCommand extends Command {
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui)
-            throws InvalidRoomNumberException, InvalidHousekeeperProfileException, IOException, InvalidHousekeeperNameException {
+            throws InvalidRoomNumberException, InvalidHousekeeperProfileException, IOException,
+            InvalidHousekeeperNameException {
 
         final AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         final HousekeeperList housekeeperList = listContainer.getHousekeeperList();
