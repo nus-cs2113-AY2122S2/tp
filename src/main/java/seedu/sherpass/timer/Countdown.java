@@ -1,6 +1,7 @@
-package seedu.sherpass.util;
+package seedu.sherpass.timer;
 
 import seedu.sherpass.task.TaskList;
+import seedu.sherpass.util.Ui;
 
 import static seedu.sherpass.constant.TimerConstant.TIME_INTERVAL;
 import static seedu.sherpass.constant.TimerConstant.NO_TIME_LEFT;

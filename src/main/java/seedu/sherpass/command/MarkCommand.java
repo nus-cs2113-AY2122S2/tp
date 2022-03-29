@@ -22,10 +22,11 @@ public class MarkCommand extends Command {
      * @param markIndex Task index to mark.
      * @param taskList  Task array.
      */
-    public MarkCommand(int markIndex, TaskList taskList) {
-        if (taskList.isTaskExist(markIndex)) {
-            this.markIndex = markIndex;
+    public MarkCommand(int markIndex, TaskList taskList) throws IndexOutOfBoundsException {
+        if (taskList.isTaskNotExist(markIndex)) {
+            throw new IndexOutOfBoundsException();
         }
+        this.markIndex = markIndex;
     }
 
 
@@ -39,10 +40,10 @@ public class MarkCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (taskList.isTaskDone(markIndex)) {
-            System.out.println("This task has already been marked!");
+            ui.showToUser("This task has already been marked!");
             return;
         }
-        taskList.markTask(markIndex);
+        taskList.markTask(markIndex, ui);
         storage.writeSaveData(taskList);
     }
 }

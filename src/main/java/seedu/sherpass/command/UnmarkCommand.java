@@ -22,10 +22,11 @@ public class UnmarkCommand extends Command {
      * @param markIndex Task index to mark.
      * @param taskList  Task array.
      */
-    public UnmarkCommand(int markIndex, TaskList taskList) {
-        if (taskList.isTaskExist(markIndex)) {
-            this.markIndex = markIndex;
+    public UnmarkCommand(int markIndex, TaskList taskList) throws IndexOutOfBoundsException {
+        if (taskList.isTaskNotExist(markIndex)) {
+            throw new IndexOutOfBoundsException();
         }
+        this.markIndex = markIndex;
     }
 
     /**
@@ -38,10 +39,10 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (!taskList.isTaskDone(markIndex)) {
-            System.out.println("This task was already unmarked!");
+            ui.showToUser("This task was already unmarked!");
             return;
         }
-        taskList.unmarkTask(markIndex);
+        taskList.unmarkTask(markIndex, ui);
         storage.writeSaveData(taskList);
     }
 }
