@@ -128,8 +128,7 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
 >- The `[SESSION_NAME]` should be unique across all active sessions.
 >- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
 > 
-> **⚠️```diff 
-- Warning:```**
+> ⚠️```diff - Warning:```
 > - When using `/pl` and `/gid` delimiters together, if there is a duplicated name in `/pl` and 
 > specified group with `/gid`. The duplicate name would be removed, storing only 1 instance of it.
 >  - Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
