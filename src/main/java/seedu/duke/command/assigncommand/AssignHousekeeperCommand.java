@@ -1,7 +1,9 @@
-package seedu.duke;
+package seedu.duke.command.assigncommand;
 
 import java.util.logging.Logger;
 import java.util.logging.Level;
+
+import seedu.duke.*;
 import seedu.duke.command.Command;
 
 /**
