@@ -3,6 +3,7 @@
 package seedu.allonus;
 
 import seedu.allonus.contacts.ContactsManager;
+import seedu.allonus.expense.ExpenseTracker;
 import seedu.allonus.ui.TextUi;
 
 import static seedu.allonus.expense.ExpenseTracker.expenseRunner;
@@ -131,7 +132,7 @@ public class AllOnUs {
 
         ContactsManager contactsManager = new ContactsManager();
         StudyManager studyManager = new StudyManager();
-
+        ExpenseTracker expenseTracker = new ExpenseTracker();
         while (true) {
             System.out.println("Menu:");
             try {
@@ -166,7 +167,7 @@ public class AllOnUs {
                 printMainMenuMessage();
             } else if (isExpenseTrackerCommand(userInput)) {
                 logger.log(Level.INFO, "User entered command to navigate to Expense Tracker.");
-                expenseRunner(ui);
+                expenseTracker.expenseRunner(ui);
 
                 logger.log(Level.INFO, "User back in Menu.");
                 printMainMenuMessage();
