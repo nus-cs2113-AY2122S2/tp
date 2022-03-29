@@ -65,7 +65,6 @@ public class ExpenditureList extends MoneyList {
 
     /**
      * Returns the total cost of all expenditure in the person's list.
-     *
      * @return The total cost of all expenditure in the list
      */
     public double getTotalExpenditure() {
@@ -131,6 +130,13 @@ public class ExpenditureList extends MoneyList {
     }
 
     //@@author tjiarong
+
+    /**
+     * Returns the date of an expenditure object from a
+     * person's Expenditure list.
+     * @param index The index of the expenditure on the list
+     * @return The date of the expenditure
+     */
     public LocalDate getInitDate(int index) {
         logger.log(Level.INFO, LOG_DATE);
         assert (index > ARRAY_INDEX);
@@ -139,6 +145,12 @@ public class ExpenditureList extends MoneyList {
         return expenditureArrayList.get(index - 1).getInitDate();
     }
 
+    /**
+     * Returns the recurring status of an expenditure object from a
+     * person's Expenditure list.
+     * @param index The index of the expenditure on the list
+     * @return The recurring of the expenditure
+     */
     public boolean isPermanent(int index) {
         logger.log(Level.INFO, LOG_PERM);
         assert (index > ARRAY_INDEX);
@@ -147,6 +159,12 @@ public class ExpenditureList extends MoneyList {
         return expenditureArrayList.get(index - 1).isPermanent();
     }
 
+    /**
+     * Returns the category of an expenditure object from a
+     * person's Expenditure list.
+     * @param index The index of the expenditure on the list
+     * @return The category of the expenditure
+     */
     public String getCategory(int index) {
         logger.log(Level.INFO, LOG_GET_CAT);
         assert (index > ARRAY_INDEX);
@@ -155,6 +173,14 @@ public class ExpenditureList extends MoneyList {
         return expenditureArrayList.get(index - 1).getCategory();
     }
 
+    /**
+     * Edits the expenditure object's attribute based on the user's input values
+     * @param index The expenditure object to be updated
+     * @param description The new description, if any
+     * @param amount The new amount, if any
+     * @param category The new category, if any
+     * @param isPermanent The new recurring status, if any
+     */
     public void editExpenditure(int index, String description, double amount, int category, Boolean isPermanent) {
         logger.log(Level.INFO, LOG_EDIT_EXP);
         assert (index > ARRAY_INDEX);
@@ -166,24 +192,44 @@ public class ExpenditureList extends MoneyList {
         editExpPerm(index, isPermanent);
     }
 
+    /**
+     * Edits the expenditure's recurring status.
+     * @param index The expenditure's index in the list
+     * @param isPermanent The expenditure's recurring status
+     */
     private void editExpPerm(int index, Boolean isPermanent) {
         if (isPermanent != null) {
             expenditureArrayList.get(index - 1).setPermanent(isPermanent);
         }
     }
 
+    /**
+     * Edits the expenditure's description.
+     * @param index The expenditure's index in the list
+     * @param category The expenditure's category
+     */
     private void editExpCat(int index, Integer category) {
         if (category != null) {
             expenditureArrayList.get(index - 1).setCategory(category);
         }
     }
 
+    /**
+     * Edits the expenditure's amount.
+     * @param index The expenditure's index in the list
+     * @param isPermanent The expenditure's amount
+     */
     private void editExpAmount(int index, Double amount) {
         if (amount != null) {
             expenditureArrayList.get(index - 1).setAmount(amount);
         }
     }
 
+    /**
+     * Edits the expenditure's description.
+     * @param index The expenditure's index in the list
+     * @param isPermanent The expenditure's description
+     */
     private void editExpDesc(int index, String description) {
         if (description != null) {
             expenditureArrayList.get(index - 1).setDescription(description);

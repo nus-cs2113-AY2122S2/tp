@@ -37,6 +37,7 @@ public class IncomeList extends MoneyList {
      * Creates and add a new income object to the income list.
      * @param description The description of the user's income
      * @param amount The income amount
+     * @param isPermanent The recurring status of the income
      */
     public void addIncome(String description, double amount, boolean isPermanent) {
         logger.log(Level.INFO, LOG_ADD_INC);
@@ -120,6 +121,12 @@ public class IncomeList extends MoneyList {
         return incomeArrayList.get(index - 1).getDescription();
     }
 
+    /**
+     * Returns the date of an income object from a
+     * person's Income list.
+     * @param index The index of the income on the list
+     * @return The date of the income
+     */
     public LocalDate getInitDate(int index) {
         logger.log(Level.INFO, LOG_DATE);
         assert (index > ARRAY_INDEX);
@@ -128,6 +135,12 @@ public class IncomeList extends MoneyList {
         return incomeArrayList.get(index - 1).getInitDate();
     }
 
+    /**
+     * Returns the recurring status of an income object from a
+     * person's Income list.
+     * @param index The index of the income on the list
+     * @return The recurring status of the income
+     */
     public boolean isPermanent(int index) {
         logger.log(Level.INFO, LOG_PERM);
         assert (index > ARRAY_INDEX);
@@ -136,10 +149,21 @@ public class IncomeList extends MoneyList {
         return incomeArrayList.get(index - 1).isPermanent();
     }
 
+    /**
+     * Returns the current income list.
+     * @return The current income list
+     */
     public ArrayList<Income> getIncomeArrayList() {
         return incomeArrayList;
     }
 
+    /**
+     * Edits the income object's attribute based on the user's input values
+     * @param index The income object to be updated
+     * @param description The new description, if any
+     * @param amount The new amount, if any
+     * @param isPermanent The new recurring status, if any
+     */
     public void editIncome(int index, String description, double amount, Boolean isPermanent) {
         logger.log(Level.INFO, LOG_EDIT_INC);
         assert (index > ARRAY_INDEX);
@@ -150,18 +174,33 @@ public class IncomeList extends MoneyList {
         editIncPerm(index, isPermanent);
     }
 
+    /**
+     * Edits the income's recurring status.
+     * @param index The income's index in the list
+     * @param isPermanent The income's recurring status
+     */
     private void editIncPerm(int index, Boolean isPermanent) {
         if (isPermanent != null) {
             incomeArrayList.get(index - 1).setPermanent(isPermanent);
         }
     }
 
+    /**
+     * Edits the income's amount.
+     * @param index The income's index in the list
+     * @param isPermanent The income's amount
+     */
     private void editIncAmount(int index, Double amount) {
         if (amount != null) {
             incomeArrayList.get(index - 1).setAmount(amount);
         }
     }
 
+    /**
+     * Edits the income's description.
+     * @param index The income's index in the list
+     * @param isPermanent The income's description.
+     */
     private void editIncDesc(int index, String description) {
         if (description != null) {
             incomeArrayList.get(index - 1).setDescription(description);
