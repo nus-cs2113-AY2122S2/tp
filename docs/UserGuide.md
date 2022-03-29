@@ -1,4 +1,5 @@
 <p align="center"><img alt="logo" src="https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/pngLogo.png"></p>
+
 # SplitLah
 SplitLah is a desktop app with a Command Line Interface (CLI) for **splitting bills** amongst you and your friends after a group outing,
 where each group outing can consist of several activities with **different people paying the bill** for each activity.
