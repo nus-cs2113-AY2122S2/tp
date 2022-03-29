@@ -47,7 +47,7 @@ public class ParserLocalData {
         try {
             checkHeadings(data);
             String[] eventDescription = splitArguments(data);
-            parserHelperMethods.checkNonNullValues(eventDescription, HEADINGS.length - 1);
+            parserHelperMethods.checkNonNullValues(eventDescription);
             String day = eventDescription[DAY_INDEX].toLowerCase();
             int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX]);
             int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX]);
@@ -86,7 +86,7 @@ public class ParserLocalData {
         try {
             checkHeadings(data);
             String[] eventDescription = splitArguments(data);
-            parserHelperMethods.checkNonNullValues(eventDescription, HEADINGS.length - 1);
+            parserHelperMethods.checkNonNullValues(eventDescription);
             String day = eventDescription[DAY_INDEX].toLowerCase();
             int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX]);
             int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX]);

@@ -164,4 +164,15 @@ public class Timetable {
         }
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Timetable)) {
+            return false;
+        }
+        Timetable timetable = (Timetable) obj;
+        if (!name.equalsIgnoreCase(timetable.name)) {
+            return false;
+        }
+        return true;
+    }
 }

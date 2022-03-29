@@ -8,7 +8,7 @@ public class ErrorMessages {
     public static final String ERROR_INDEX_OUT_OF_BOUND = "Hi I need a valid index in the list so I can delete";
     public static final String ERROR_INVALID_INDEX_FORMAT = "Hi I did not receive a proper "
             + "integer that I can parse";
-    public static final String ERROR_MISSING_PARAMETERS = "Hi 1 or more parameters are missing\n"
+    public static final String ERROR_MISSING_PARAMETERS_ADD_EVENT = "Hi 1 or more parameters are missing\n"
             + "The required parameters are:\n"
             + "n/[Name]\n"
             + "t/[Title]\n"
@@ -17,7 +17,7 @@ public class ErrorMessages {
             + "et/[EndTime]\n"
             + "m/[Mode]";
 
-    public static final String ERROR_MISSING_VALUES = "Hi 1 or more parameters have missing values\n"
+    public static final String ERROR_MISSING_VALUES_ADD_EVENT = "Hi 1 or more parameters have missing values\n"
             + "The parameters that require values are:\n"
             + "n/[Name]\n"
             + "t/[Title]\n"
@@ -58,6 +58,7 @@ public class ErrorMessages {
     public static final String ERROR_EMPTY_MASTER_TIMETABLE = "The Master Timetable has no populated timetables!";
     public static final String ERROR_TIMETABLE_NOT_FOUND_TO_DELETE = "User and his Timetable not found";
     public static final String ERROR_EXCEPTION_NOT_HANDLED = "New exception found that is not handled. Logged this";
+    public static final String ERROR_DUPLICATE_USER = "This user already exists. New timetable will not be created.";
 
     // Meeting
     public static final String ERROR_OVERLAPPING_MEETING = "This meeting cannot be added as "
@@ -73,13 +74,14 @@ public class ErrorMessages {
 
     public static final String ERROR_DATA_SAVE_FAILED = "Error writing to file: MeetingJio.txt";
 
+    public static final String ERROR_MISSING_VALUES_ADD_USER = "Please provide a name to add";
     public static final String ERROR_UNSPECIFIED_LIST_CLEAR = "Please specify which timetable to Clear";
     public static final String ERROR_MISSING_PARAMETERS_DELETE = "Hi 1 or more parameters are missing\n"
             + "The required parameters are:\n"
             + "n/[Name]\n"
             + "i/[INDEX]\n";
-    public static final String ERROR_MISSING_VALUES_DELETE = "Hi 1 or more parameters are missing\n"
-            + "The required parameters are:\n"
+    public static final String ERROR_MISSING_VALUES_DELETE = "Hi 1 or more parameters have missing values\n"
+            + "The parameters that require values are:\n"
             + "n/[Name]\n"
             + "i/[INDEX]\n";
 

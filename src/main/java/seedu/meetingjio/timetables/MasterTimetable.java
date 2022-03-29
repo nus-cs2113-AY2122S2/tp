@@ -94,7 +94,7 @@ public class MasterTimetable {
      * Add lesson to the timetable that belongs to the user
      *
      * @param lesson Lesson to be
-     * @param name Name of the user
+     * @param name User
      * @throws TimetableNotFoundException If user's timetable doesn't exist
      * @throws DuplicateEventException If identical event has already been added
      * @throws OverlappingEventException If another existing event has a timetable clash

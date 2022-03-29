@@ -1,10 +1,11 @@
 package seedu.meetingjio.parser;
 
-import seedu.meetingjio.commands.AddLessonCommand;
 import seedu.meetingjio.commands.Command;
 import seedu.meetingjio.commands.ListCommand;
 import seedu.meetingjio.commands.DeleteCommand;
 import seedu.meetingjio.commands.ClearCommand;
+import seedu.meetingjio.commands.AddUserCommand;
+import seedu.meetingjio.commands.AddLessonCommand;
 import seedu.meetingjio.commands.AddMeetingCommand;
 import seedu.meetingjio.commands.FreeCommand;
 import seedu.meetingjio.commands.CommandResult;
@@ -15,12 +16,13 @@ import seedu.meetingjio.exceptions.InvalidModeException;
 import seedu.meetingjio.exceptions.InvalidTimeException;
 import seedu.meetingjio.exceptions.MissingValueException;
 
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_COMMAND;
-import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_ADD_EVENT;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE;
@@ -29,6 +31,8 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_DEL
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_DELETE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_ADD_MEETING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_MEETING;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_USER;
+
 
 import static seedu.meetingjio.common.Messages.MESSAGE_HELP;
 
@@ -62,6 +66,8 @@ public class Parser {
 
     public Command parseCommand() {
         switch (command) {
+        case AddUserCommand.COMMAND_WORD:
+            return prepareAddUser();
         case AddLessonCommand.COMMAND_WORD:
             return prepareAddLesson();
         case ListCommand.COMMAND_WORD:
@@ -81,16 +87,24 @@ public class Parser {
             return new CommandResult(feedback);
         }
     }
+
+    private Command prepareAddUser() {
+        String name = arguments.trim();
+        if (name.isEmpty()) {
+            return new CommandResult(ERROR_MISSING_VALUES_ADD_USER);
+        }
+        return new AddUserCommand(name);
+    }
     
-    public Command prepareAddLesson() {
+    private Command prepareAddLesson() {
         try {
             String[] eventDescription = parserArguments.splitArgumentsAddLesson(this.getArguments());
-            parserHelperMethods.checkNonNullValues(eventDescription,HEADINGS_ADD_LESSON.length - 1);
+            parserHelperMethods.checkNonNullValues(eventDescription);
 
-            String day = eventDescription[DAY_INDEX].toLowerCase();
+            String day = eventDescription[DAY_INDEX];
             int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX]);
             int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX]);
-            String mode = eventDescription[MODE_INDEX].toLowerCase();
+            String mode = eventDescription[MODE_INDEX];
 
             parserHelperMethods.checkDay(day);
             parserHelperMethods.checkTime(startTime, endTime);
@@ -101,9 +115,9 @@ public class Parser {
             return new AddLessonCommand(name, title, day, startTime, endTime, mode);
 
         } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
-            return new CommandResult(ERROR_MISSING_PARAMETERS);
+            return new CommandResult(ERROR_MISSING_PARAMETERS_ADD_EVENT);
         } catch (MissingValueException mve) {
-            return new CommandResult(ERROR_MISSING_VALUES);
+            return new CommandResult(ERROR_MISSING_VALUES_ADD_EVENT);
         } catch (InvalidTimeException | NumberFormatException ite) {
             return new CommandResult(ERROR_INVALID_TIME);
         } catch (InvalidDayException ide) {
@@ -119,10 +133,10 @@ public class Parser {
     /**
      * Try to parse the delete command to see if index has been done.
      */
-    public Command prepareDelete() {
+    private Command prepareDelete() {
         try {
             String[] eventDescription = parserArguments.splitArgumentsDeleteCommand(this.getArguments());
-            parserHelperMethods.checkNonNullValues(eventDescription,HEADINGS_DELETE_EVENT.length);
+            parserHelperMethods.checkNonNullValues(eventDescription);
 
             String name = eventDescription[0];
             int index = Integer.parseInt(eventDescription[1]);
@@ -139,16 +153,16 @@ public class Parser {
         }
     }
 
-    public Command prepareAddMeeting() {
+    private Command prepareAddMeeting() {
         try {
             String[] eventDescription = parserArguments.splitArgumentsAddMeeting(this.getArguments());
-            parserHelperMethods.checkNonNullValues(eventDescription,HEADINGS_ADD_MEETING.length - 1);
+            parserHelperMethods.checkNonNullValues(eventDescription);
 
             //there is no name for meeting because meeting applies to everyone
-            String day = eventDescription[DAY_INDEX - 1].toLowerCase();
+            String day = eventDescription[DAY_INDEX - 1];
             int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX - 1]);
             int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX - 1]);
-            String mode = eventDescription[MODE_INDEX - 1].toLowerCase();
+            String mode = eventDescription[MODE_INDEX - 1];
 
             parserHelperMethods.checkDay(day);
             parserHelperMethods.checkTime(startTime, endTime);

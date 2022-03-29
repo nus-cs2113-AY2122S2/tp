@@ -55,8 +55,8 @@ public class AddLessonCommand extends Command {
     /**
      * Inform user that lesson has been added.
      *
-     * @param lesson that was added
-     *
+     * @param lesson Lesson that was added
+     * @param name User
      */
     private String addConfirmation(Lesson lesson, String name) {
         return String.format("The following event has been added to %s's timetable:\n%s",
