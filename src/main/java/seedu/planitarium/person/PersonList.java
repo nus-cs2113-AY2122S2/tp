@@ -71,9 +71,8 @@ public class PersonList {
      * Adds a person to the array list.
      *
      * @param name The name of the person to be added
-     * @param isSilent Whether to print confirmation
      */
-    public void addPerson(String name, boolean isSilent) {
+    public void addPerson(String name) {
         String infoString = "Entering addPerson()";
         logger.log(Level.INFO, infoString);
         assert (name != null);
@@ -82,10 +81,6 @@ public class PersonList {
         Person person = new Person(name);
         personList.add(person);
         numberOfMembers++;
-        if (isSilent) {
-            return;
-        }
-        System.out.println(name + " has been successfully added");
     }
 
     /**

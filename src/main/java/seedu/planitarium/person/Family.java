@@ -95,7 +95,12 @@ public class Family {
     public void addPerson(int group, String name, boolean isSilent) {
         String infoString = "Method addPerson() called";
         logger.log(Level.INFO, infoString);
-        getList(group).addPerson(name, isSilent);
+        getList(group).addPerson(name);
+        if (isSilent) {
+            return;
+        }
+        String generation = getGenerationName(group);
+        System.out.println(name + " has been added successfully to " + generation);
     }
 
     /**
