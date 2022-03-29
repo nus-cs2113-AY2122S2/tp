@@ -76,7 +76,7 @@ public abstract class Money {
 
     /**
      * Sets the recurring status of the money object.
-     * @param isPermanent Recurring status of the money object
+     * @param permanent Recurring status of the money object
      */
     public void setPermanent(boolean permanent) {
         isPermanent = permanent;

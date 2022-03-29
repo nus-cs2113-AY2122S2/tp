@@ -22,7 +22,7 @@ public class Expenditure extends Money {
     }
 
     /**
-     * Return the string label of the category from its integer attribute
+     * Return the string label of the category from its integer attribute.
      * @return Category label
      */
     public String getCategory() {
@@ -30,7 +30,7 @@ public class Expenditure extends Money {
     }
 
     /**
-     * Set category attribute of expenditure object
+     * Set category attribute of expenditure object.
      * @param category integer of the category label
      */
     public void setCategory(int category) {
@@ -38,7 +38,7 @@ public class Expenditure extends Money {
     }
 
     /**
-     * Return object's string representation for storage purposes
+     * Return object's string representation for storage purposes.
      * @return Object attributes as string
      */
     public String saveString() {

@@ -15,7 +15,7 @@ public class Income extends Money {
     }
 
     /**
-     * Return object's string representation for storage purposes
+     * Return object's string representation for storage purposes.
      * @return Object attributes as string
      */
     public String saveString() {
