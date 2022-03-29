@@ -10,6 +10,8 @@ import seedu.splitlah.ui.Message;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class SessionTest {
@@ -42,6 +44,43 @@ class SessionTest {
         }
     }
 
+    // hasActivity()
+    
+    @Test
+    void hasActivity_noActivityExists_false() {
+        boolean hasActivity = session.hasActivity(TEST_ACTIVITY_ONE);
+        assertFalse(hasActivity);
+    }
+    
+    @Test
+    void hasActivity_activityWithSpecifiedIdDoesNotExist_false() {
+        Command createActivityCommand = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_ONE);
+        createActivityCommand.run(manager);
+        boolean hasActivity = session.hasActivity(TEST_ACTIVITY_TWO);
+        assertFalse(hasActivity);
+    }
+    
+    @Test
+    void hasActivity_activityExists_true() {
+        // Pretesting
+        boolean hasActivityOne = session.hasActivity(TEST_ACTIVITY_ONE);
+        boolean hasActivityTwo = session.hasActivity(TEST_ACTIVITY_TWO);
+        assertFalse(hasActivityOne);
+        assertFalse(hasActivityTwo);
+        
+        // 1 activity only
+        Command createActivityCommandOne = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_ONE);
+        createActivityCommandOne.run(manager);
+        hasActivityOne = session.hasActivity(TEST_ACTIVITY_ONE);
+        assertTrue(hasActivityOne);
+        
+        // 2 activities
+        Command createActivityCommandTwo = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_TWO);
+        createActivityCommandTwo.run(manager);
+        hasActivityTwo = session.hasActivity(TEST_ACTIVITY_TWO);
+        assertTrue(hasActivityTwo);
+    }
+    
     // getActivity()
 
     /**
