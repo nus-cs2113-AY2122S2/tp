@@ -2,10 +2,11 @@
 'https://plantuml.com/sequence-diagram
 !include ../Style.puml
 
+title Sequence Diagram of `WorkoutList#createAndAddWorkout()` (Part 1)
+
 autonumber 7.1
 
 participant "workoutList\n:WorkoutList" AS wl
-participant "exerciseList\n:ExerciseList" AS el
 
 activate wl
 
@@ -14,11 +15,13 @@ group sd Write new Workout data into file on user's system.
 ref over wl
 Parse the user input to obtain
 the exercise name and repetition count.
+(Method calls not shown)
 end
 
 ref over wl
 Check the validity of
 exercise name and repetition count.
+(Method calls not shown)
 end
 
 opt !isExerciseValid
@@ -38,6 +41,7 @@ end
 ref over wl
 Check if an existing workout
 with same parameters already exists.
+(Method calls not shown)
 end
 
 
@@ -48,18 +52,12 @@ activate iwe2
 return
 end
 
-create "newWorkout:Workout" AS newWorkout
-wl -> newWorkout : new Workout(userExerciseInput, userRepsInput)
-activate newWorkout
-return newWorkout:Workout
+ref over wl
+Create new Workout and add it
+to respective lists in WorkoutList.
+end
 
-wl -> "workoutsHashMapList\n:HashMap" : put(newWorkoutKey, newWorkout)
-activate "workoutsHashMapList\n:HashMap"
-return
 
-wl -> "workoutDisplayList\n:ArrayList<String>" : add(newWorkoutKey)
-activate "workoutDisplayList\n:ArrayList<String>"
-return
 
 end
 @enduml

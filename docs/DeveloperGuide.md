@@ -183,9 +183,9 @@ A summary of the general procedure of a new workout being inputted and stored in
 4. The new `Workout` object data is written to the resource file `workouts.txt`.
 
 The following sequence illustrates how the `workout /new` command works in greater detail:
-> To simplify the sequence diagram, some method invocations that deemed to be trivial 
-> have been removed from the sequence diagram. Reference frames will be elaborated further 
-> down this section.
+> To simplify the sequence diagram, some method invocations that are deemed to be trivial 
+> have been removed from the sequence diagram. Some reference frames will be elaborated further 
+> down this section. Reference frames that will not be elaborated on will be made known.
 
 ![Create Workout Sequence Diagram](uml/sequenceDiagrams/images/CreateWorkout.png)
 
@@ -196,19 +196,21 @@ and returns the user input in a `String` object to `WerkIt#startContinuousUserPr
 to a `Command` object on return to `WerkIt#startContinuousUserPrompt()`. In Step 6, `WorkoutCommand#execute()` is called
 and because this is a `workout /new` command, the method will call `WorkoutList#createAndAddWorkout()`.
 
-The following sequence diagram is the detailed procedure for Step 7's `WorkoutList#createAndAddWorkout()`:
-![createAndAddWorkout() Sequence Diagram](uml/sequenceDiagrams/images/CreateAndAddWorkout.png)
+The following 2 sequence diagrams are the detailed procedures for Step 7's `WorkoutList#createAndAddWorkout()`:
+![createAndAddWorkout() Sequence Diagram (Part 1)](uml/sequenceDiagrams/images/CreateAndAddWorkout-Part1.png)
 
-> Note: Logging-related method calls in `WorkoutList#createAndAddWorkout()` have been omitted in an effort to simplify 
-> the sequence diagram.
+> Note: To improve the diagram's readability, logging-related and input-checking method calls in 
+> `WorkoutList#createAndAddWorkout()` have been omitted. 
 
-(Steps 7.1 to 7.6) The `String#split()`, `String#trim()`, and `Integer#parseInt()` methods are used to parse the 
-argument given to `WorkoutList#createAndAddWorkout()` to obtain the following information required to create the 
+Firstly, methods from the `String` and `Integer` classes are called to parse the
+argument given to `WorkoutList#createAndAddWorkout()` to obtain the following information required to create the
 `Workout` object:
 1. Name of the exercise
 2. Number of repetitions associated with the exercise in (1).
 
-(Steps 7.7 to 7.20) Validity checks of the user input are carried out to ensure that the data entered is valid as a
+Note that these methods are not shown in the sequence diagram to improve the readability of the sequence diagram.
+
+(Steps 7.1 to 7.6) Next, validity checks of the user input are carried out to ensure that the data entered is valid as a
 new `Workout` object. The requirements for a valid new `Workout` object is as follows:
 - [x] The exercise name must exist in `ExerciseList`'s `exerciseList`, which is an `ArrayList<String>` of exercise 
 names.
@@ -220,13 +222,18 @@ it cannot be created again.
 If any of the three requirements are not met, either an `InvalidExerciseException` or an
 `InvalidWorkoutException` is thrown, and the entire workout creation process is aborted.
 
-If the above checks pass, Step 7.21 will create the new `Workout` object with the user-specified exercise name and 
-repetition value. Once that is done, Step 7.23 will generate the key of the `Workout` object (see the 
+Again, note that the actual method calls to check for the validity of the user input are not shown in the sequence
+diagram for the same reason as mentioned above.
+
+![creatAndAddWorkout() Sequence Diagram (Part 2)](uml/sequenceDiagrams/images/CreateAndAddWorkout-Part2.png)
+
+If the above checks pass, Step 7.7 will create the new `Workout` object with the user-specified exercise name and
+repetition value. Once that is done, a key of the `Workout` object will be generated in Step 7.9 (see the 
 [Design Considerations](#design-considerations-for-creating-a-new-workout) section for more details of the `HashMap`
-implementation), before storing the key-`Workout` pair in `workoutsHashMapList` stored in `WorkoutList` in Step 7.25.
-In Step 7.27, the key of the newly-created `Workout` object is added to the `workoutsDisplayList` `ArrayList<String>`
-stored in `WorkoutList`. This ArrayList will be used for displaying the workouts when the command `workout /list` is 
-entered by the user. This is the final step of the `WorkoutList#createAndAddWorkout()`.
+implementation), before storing the key-`Workout` pair in `workoutsHashMapList` which in turn is stored in `WorkoutList` 
+in Step 7.11. In Step 7.13, the key of the newly-created `Workout` object is added to the `workoutsDisplayList`, an 
+`ArrayList<String>` object stored in `WorkoutList`. This ArrayList will be used for displaying the workouts when the 
+command `workout /list` is entered by the user. This is the final step of `WorkoutList#createAndAddWorkout()`.
 
 (Step 9) Upon returning to `WorkoutCommand`, `UI#printNewWorkoutCreatedMessage()` is called to display a response to
 the user via the terminal. The following is an example of a response after the user entered `workout /new russian twist 
