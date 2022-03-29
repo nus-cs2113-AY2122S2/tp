@@ -17,6 +17,8 @@ import seedu.meetingjio.exceptions.InvalidModeException;
 import seedu.meetingjio.exceptions.InvalidTimeException;
 import seedu.meetingjio.exceptions.MissingValueException;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,6 +34,8 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_DELETE;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_ADD_MEETING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_MEETING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_ADD_USER;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_EDIT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_EDIT;
 
 
 import static seedu.meetingjio.common.Messages.MESSAGE_HELP;
@@ -49,17 +53,14 @@ public class Parser {
     private static final int END_TIME_INDEX = 4;
     private static final int MODE_INDEX = 5;
 
-    protected static final String[] HEADINGS_ADD_LESSON = {"n/", "t/", "d/", "st/", "et/", "m/"};
-    protected static final String[] HEADINGS_ADD_MEETING = {"t/", "d/", "st/", "et/", "m/"};
-    protected static final String[] HEADINGS_DELETE_EVENT = {"n/", "i/"};
+    protected static final String[] HEADINGS_ALL = {"n", "t", "d", "st", "et", "m"};
+    protected static final String[] HEADINGS_WITHOUT_NAME = {"t", "d", "st", "et", "m"};
+    protected static final String[] HEADINGS_NAME_INDEX = {"n", "i"};
+    protected static final String[] HEADINGS_ALL_WITH_INDEX = {"n", "i", "t", "d", "st", "et", "m"};
 
     public Parser(String input) {
         this.command = ParserArguments.getCommandFromInput(input);
         this.arguments = ParserArguments.getArgumentsFromInput(input);
-    }
-
-    public String getArguments() {
-        return arguments;
     }
 
     public Command parseCommand() {
@@ -97,7 +98,7 @@ public class Parser {
     
     private Command prepareAddLesson() {
         try {
-            String[] eventDescription = ParserArguments.splitArgumentsAllParams(this.getArguments());
+            String[] eventDescription = ParserArguments.splitArgumentsAll(arguments);
             ParserHelperMethods.checkNonNullValues(eventDescription);
 
             String day = eventDescription[DAY_INDEX];
@@ -130,7 +131,29 @@ public class Parser {
     }
 
     private Command prepareEdit() {
-        return new CommandResult("");
+        try {
+            Map<String, String> newValues = ParserArguments.getAttributesMap(arguments);
+
+            String name = newValues.get("n");
+            String indexStr = newValues.get("n");
+            int index = Integer.parseInt(indexStr);
+            if (newValues.isEmpty()) {
+                System.out.println("is empty");
+                return new CommandResult(ERROR_MISSING_PARAMETERS_EDIT);
+            }
+            System.out.println(3);
+
+            return new EditCommand(name, index, newValues);
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
+            System.out.println(npe.getMessage());
+            return new CommandResult(ERROR_MISSING_PARAMETERS_EDIT);
+        } catch (NumberFormatException nfe) {
+            System.out.println(nfe.getMessage());
+            return new CommandResult(ERROR_INDEX_OUT_OF_BOUND);
+        } catch (AssertionError ae) {
+            logger.log(Level.INFO, "Assertion Error");
+            return new CommandResult(ae.getMessage());
+        }
     }
 
     /**
@@ -138,12 +161,12 @@ public class Parser {
      */
     private Command prepareDelete() {
         try {
-            String[] eventDescription = ParserArguments.splitArgumentsDeleteCommand(this.getArguments());
+            String[] eventDescription = ParserArguments.splitArgumentsNameIndex(arguments);
             ParserHelperMethods.checkNonNullValues(eventDescription);
 
             String name = eventDescription[0];
             int index = Integer.parseInt(eventDescription[1]);
-            return new DeleteCommand(name,index);
+            return new DeleteCommand(name, index);
         } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
             return new CommandResult(ERROR_MISSING_PARAMETERS_DELETE);
         } catch (MissingValueException mve) {
@@ -158,7 +181,7 @@ public class Parser {
 
     private Command prepareAddMeeting() {
         try {
-            String[] eventDescription = ParserArguments.splitArgumentsWithoutName(this.getArguments());
+            String[] eventDescription = ParserArguments.splitArgumentsWithoutName(arguments);
             ParserHelperMethods.checkNonNullValues(eventDescription);
 
             //there is no name for meeting because meeting applies to everyone

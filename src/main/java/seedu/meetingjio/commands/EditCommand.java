@@ -8,9 +8,17 @@ import seedu.meetingjio.timetables.Timetable;
 
 import seedu.meetingjio.parser.ParserHelperMethods;
 
-import seedu.meetingjio.exceptions.*;
+import seedu.meetingjio.exceptions.TimetableNotFoundException;
+import seedu.meetingjio.exceptions.InvalidAttributeValueException;
+import seedu.meetingjio.exceptions.InvalidModeException;
+import seedu.meetingjio.exceptions.InvalidDayException;
+import seedu.meetingjio.exceptions.InvalidTimeException;
 
-import static seedu.meetingjio.common.ErrorMessages.*;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_ATTRIBUTE_VALUE;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,11 +26,11 @@ import java.util.Map;
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
-    private static final String TITLE = "/t";
-    private static final String DAY = "d/";
-    private static final String START_TIME = "st/";
-    private static final String END_TIME = "et/";
-    private static final String MODE = "m/";
+    private static final String TITLE = "t";
+    private static final String DAY = "d";
+    private static final String START_TIME = "st";
+    private static final String END_TIME = "et";
+    private static final String MODE = "m";
 
     private final String name;
     private final int index;
@@ -45,7 +53,7 @@ public class EditCommand extends Command {
     public String execute(MasterTimetable masterTimetable) {
         try {
             Timetable timetable = masterTimetable.getByName(name);
-            Event event = timetable.get(index);
+            Event event = timetable.get(index - 1);
             Map<String, String> originalValues = getEventInfo(event);
 
             Boolean isValidInput = editEvent(event, newValues);
@@ -87,6 +95,7 @@ public class EditCommand extends Command {
         switch (attribute) {
         case TITLE:
             event.setTitle(value);
+            break;
         case MODE:
             try {
                 ParserHelperMethods.checkMode(value);
@@ -121,6 +130,8 @@ public class EditCommand extends Command {
                 throw new InvalidAttributeValueException();
             }
             break;
+        default:
+            return;
         }
     }
 
