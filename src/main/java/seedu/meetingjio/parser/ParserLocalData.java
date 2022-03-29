@@ -2,12 +2,20 @@ package seedu.meetingjio.parser;
 
 import seedu.meetingjio.commands.AddLessonCommand;
 import seedu.meetingjio.commands.AddMeetingCommand;
-import seedu.meetingjio.commands.Command;
+import seedu.meetingjio.exceptions.InvalidDayException;
+import seedu.meetingjio.exceptions.InvalidModeException;
+import seedu.meetingjio.exceptions.InvalidTimeException;
+import seedu.meetingjio.exceptions.MissingValueException;
+import seedu.meetingjio.exceptions.MissingParameterException;
 import seedu.meetingjio.exceptions.InvalidEventTypeException;
 import seedu.meetingjio.timetables.MasterTimetable;
 
-import java.io.FileNotFoundException;
-import java.util.Locale;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_LOAD_LESSON;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_LOAD_LESSON;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME_LOADING;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY_LOADING;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE_LOADING;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_LOAD_MEETING;
 
 public class ParserLocalData {
 
@@ -24,29 +32,78 @@ public class ParserLocalData {
     private static final int MODE_CHAR_COUNT = 5;
     private static final String EVENT_TYPE_DELIMITER_FRONT = "[";
     private static final String EVENT_TYPE_DELIMITER_BACK = "]";
-
-    private static String missing_key_word;
+    private static ParserHelperMethods parserHelperMethods = new ParserHelperMethods();
 
     public static String prepareLoadLesson(String name, String data, MasterTimetable masterTimetable) {
+        try {
+            checkHeadings(data);
 
-        String[] eventDescription = splitArguments(data);
-        String day = eventDescription[DAY_INDEX].toLowerCase();
-        int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX]);
-        int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX]);
-        String mode = eventDescription[MODE_INDEX].toLowerCase();
-        String title = eventDescription[TITLE_INDEX];
-        return new AddLessonCommand(name, title, day, startTime, endTime, mode).execute(masterTimetable);
+            String[] eventDescription = splitArguments(data);
+
+            parserHelperMethods.checkNonNullValues(eventDescription, HEADINGS.length - 1);
+
+            String day = eventDescription[DAY_INDEX].toLowerCase();
+            int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX]);
+            int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX]);
+            String mode = eventDescription[MODE_INDEX].toLowerCase();
+            String title = eventDescription[TITLE_INDEX];
+
+            parserHelperMethods.checkDay(day);
+            parserHelperMethods.checkTime(startTime, endTime);
+            parserHelperMethods.checkMode(mode);
+
+            return new AddLessonCommand(name, title, day, startTime, endTime, mode).execute(masterTimetable);
+
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
+            throw new RuntimeException(ERROR_MISSING_PARAMETERS_LOAD_LESSON);
+        } catch (MissingValueException mve) {
+            throw new RuntimeException(ERROR_MISSING_VALUES_LOAD_LESSON);
+        } catch (InvalidTimeException | NumberFormatException ite) {
+            throw new RuntimeException(ERROR_INVALID_TIME_LOADING);
+        } catch (InvalidDayException ide) {
+            throw new RuntimeException(ERROR_INVALID_DAY_LOADING);
+        } catch (InvalidModeException ime) {
+            throw new RuntimeException(ERROR_INVALID_MODE_LOADING);
+        } catch (MissingParameterException mpe) {
+            throw new RuntimeException(ERROR_MISSING_PARAMETERS_LOAD_LESSON);
+        }
     }
 
     public static String prepareLoadMeeting(String data, MasterTimetable masterTimetable) {
 
-        String[] eventDescription = splitArguments(data);
-        String day = eventDescription[DAY_INDEX].toLowerCase();
-        int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX]);
-        int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX]);
-        String mode = eventDescription[MODE_INDEX].toLowerCase();
-        String title = eventDescription[TITLE_INDEX];
-        return new AddMeetingCommand(title, day, startTime, endTime, mode).execute(masterTimetable);
+        try {
+            checkHeadings(data);
+
+            String[] eventDescription = splitArguments(data);
+
+            parserHelperMethods.checkNonNullValues(eventDescription, HEADINGS.length - 1);
+
+            String day = eventDescription[DAY_INDEX].toLowerCase();
+            int startTime = Integer.parseInt(eventDescription[START_TIME_INDEX]);
+            int endTime = Integer.parseInt(eventDescription[END_TIME_INDEX]);
+            String mode = eventDescription[MODE_INDEX].toLowerCase();
+            String title = eventDescription[TITLE_INDEX];
+
+            parserHelperMethods.checkDay(day);
+            parserHelperMethods.checkTime(startTime, endTime);
+            parserHelperMethods.checkMode(mode);
+
+            return new AddMeetingCommand(title, day, startTime, endTime, mode).execute(masterTimetable);
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException npe) {
+            throw new RuntimeException(ERROR_MISSING_PARAMETERS_LOAD_MEETING);
+        } catch (MissingValueException mve) {
+            throw new RuntimeException(ERROR_MISSING_VALUES_LOAD_LESSON);
+        } catch (InvalidTimeException | NumberFormatException ite) {
+            throw new RuntimeException(ERROR_INVALID_TIME_LOADING);
+        } catch (InvalidDayException ide) {
+            throw new RuntimeException(ERROR_INVALID_DAY_LOADING);
+        } catch (InvalidModeException ime) {
+            throw new RuntimeException(ERROR_INVALID_MODE_LOADING);
+        } catch (MissingParameterException mpe) {
+            throw new RuntimeException(ERROR_MISSING_PARAMETERS_LOAD_LESSON);
+        }
+
+
     }
 
     private static String[] splitArguments(String data) {
@@ -66,7 +123,7 @@ public class ParserLocalData {
         return trimmedEventType;
     }
 
-    private static void checkEventType(String event) throws InvalidEventTypeException {
+    public static void checkEventType(String event) throws InvalidEventTypeException {
         if (event.equals("M") || event.equals("L")) {
             return;
         }
@@ -108,15 +165,14 @@ public class ParserLocalData {
     }
 
 
-    private static boolean checkHeadings(String data) {
+    private static void checkHeadings(String data) throws MissingParameterException{
         boolean isFound = false;
         for (String str : HEADINGS) {
             isFound = data.contains(str);
             if (isFound == false) {
-                missing_key_word = str;
-                break;
+                throw new MissingParameterException();
             }
         }
-        return isFound;
+        return;
     }
 }
