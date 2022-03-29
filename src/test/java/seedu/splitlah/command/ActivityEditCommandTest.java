@@ -38,7 +38,7 @@ class ActivityEditCommandTest {
     }
 
     /**
-     * Checks if an activity's name is edited.
+     * Checks if an activity's name is edited when a valid activity name is supplied.
      *
      * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
      */
@@ -53,7 +53,8 @@ class ActivityEditCommandTest {
     }
 
     /**
-     * Checks if an activity's payer is changed to one of the other participants.
+     * Checks if an activity's payer is changed to one of the other participants when a valid payer name is supplied
+     * that exists in the list of participants.
      *
      * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
      */
@@ -68,7 +69,7 @@ class ActivityEditCommandTest {
     }
 
     /**
-     * Checks if an activity's payer remains unchanged when trying to change the payer to a nonexistent participant.
+     * Checks if an activity's payer remains unchanged when trying to change the payer to a nonexistent participant
      *
      * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
      */
@@ -83,7 +84,8 @@ class ActivityEditCommandTest {
     }
 
     /**
-     * Checks if a participant is removed from the activity.
+     * Checks if a participant is removed from the activity when the participant list supplied no longer includes
+     * the removed participant.
      *
      * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
      */
@@ -101,8 +103,8 @@ class ActivityEditCommandTest {
     }
 
     /**
-     * Checks if the participants remain unchanged when trying to change the participants to include a nonexistent
-     * participant.
+     * Checks if the participants remain unchanged when the participant list supplied includes a person who is not part
+     * of the session.
      *
      * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
      */
@@ -121,7 +123,7 @@ class ActivityEditCommandTest {
     }
 
     /**
-     * Checks if the total cost of the activity is changed.
+     * Checks if the overall cost of the activity updates correctly when a valid cost is supplied.
      *
      * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
      */
@@ -135,7 +137,7 @@ class ActivityEditCommandTest {
     }
 
     /**
-     * Checks if the total cost of the activity is unchanged when an invalid number is supplied.
+     * Checks if the overall cost of the activity is unchanged when an invalid overall cost is supplied.
      *
      */
     @Test
@@ -146,7 +148,7 @@ class ActivityEditCommandTest {
     }
 
     /**
-     * Checks if the total cost of an activity updates to reflect a new gst value.
+     * Checks if the overall cost of an activity updates correctly when a valid gst value is supplied.
      *
      * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
      */
@@ -161,7 +163,7 @@ class ActivityEditCommandTest {
     }
 
     /**
-     * Checks if the total cost of an activity does not update when an invalid gst value is provided.
+     * Checks if the overall cost of an activity does not update when an invalid gst value is supplied.
      *
      */
     @Test
@@ -172,7 +174,7 @@ class ActivityEditCommandTest {
     }
 
     /**
-     * Checks if the total cost of an activity updates to reflect a new service charge value.
+     * Checks if the overall cost of an activity updates correctly when a valid service charge is supplied.
      *
      * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
      */
@@ -187,7 +189,7 @@ class ActivityEditCommandTest {
     }
 
     /**
-     * Checks if the total cost of an activity remains unchanged when an invalid service charge is supplied.
+     * Checks if the overall cost of an activity remains unchanged when an invalid service charge is supplied.
      *
      */
     @Test
@@ -198,7 +200,7 @@ class ActivityEditCommandTest {
     }
 
     /**
-     * Checks if the cost list of an activity reflects to update a new cost list.
+     * Checks if the cost list of an activity updates correctly when a new cost list is supplied.
      *
      * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
      */
@@ -240,7 +242,7 @@ class ActivityEditCommandTest {
     }
 
     /**
-     * Checks if all fields of an activity are changed when trying to change all fields.
+     * Checks if all fields of an activity are changed correctly when trying to change all fields.
      *
      * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
      */
