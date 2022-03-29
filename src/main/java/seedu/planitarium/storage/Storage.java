@@ -161,7 +161,7 @@ public class Storage {
         int category;
         category = parseInfoGetCategory(info);
         isPermanent = parseInfoGetPermanent(info);
-        familyData.addExpend(numberOfPerson, groupNumber, description, amount,
+        familyData.addExpend(groupNumber, numberOfPerson, description, amount,
                 category, isPermanent, Constants.FOR_STORAGE);
     }
 
@@ -180,7 +180,7 @@ public class Storage {
         amount = parseInfoGetAmount(info);
         boolean isPermanent;
         isPermanent = parseInfoGetPermanent(info);
-        familyData.addIncome(numberOfPerson, groupNumber, description, amount, isPermanent, Constants.FOR_STORAGE);
+        familyData.addIncome(groupNumber, numberOfPerson, description, amount, isPermanent, Constants.FOR_STORAGE);
     }
 
     /**
