@@ -33,29 +33,7 @@ The following sequence diagram shows how the `add_lesson` operation generally wo
 The following sequence diagram shows how the `add_lesson` operation works in detail.
 ![AddLessonCommandSequenceDiagram](diagrams/AddLessonCommandSequenceDiagram.png)
 
-## 3.2 Data Saving Feature
-
-The save mechanism is facilitated by Storage. It creates a text file in the local machine and writes all the elements 
-in the MasterTimetable and Timetable to the text file in human-readable format.
-
-Given below is the steps on how the save operation works.
-
-Step 1: When the user exits the application. The Storage.SaveData will be initialized. 
-
-Step 2: It will check for the existence of the data file. If the file is not found, it will create the file.
-        Else do nothing.
-
-Step 3: After creating the file, a for loop will be called to iterate through all elements in the MasterTimetable and Timetable list,
-        and write them into the data file.
-
-Step 4: A message will be shown to the user, informing him that the data has been saved successfully. For any exception
-        encountered along the way, an error message will be displayed.
-
-The following sequence diagram shows how the save operation works:
-
-![SaveSequenceDiagram](diagrams/SaveSequenceDiagram.png)
-
-## 3.3 Listing Events Feature
+## 3.2 Listing Events Feature
 The `list` command is a command that the user can input in order to list out the events he has in his timetable.
 
 `list [user]` displays the timetable for the particular user.
@@ -69,7 +47,7 @@ Before the timetable is listed out, it will also be sorted according to day and 
 The following sequence diagram shows how the command `` is executed.
 ![ListCommandSequenceDiagram](diagrams/ListCommandSequenceDiagram.png)
 
-## 3.4 Finding Common Free Timeslots Feature
+## 3.3 Finding Common Free Timeslots Feature
 The `free` command is a command that the user can input in order to find timeslots where all users are free.
 
 For greater customisation, `free [duration]` displays all common timeslots which has a duration longer than specified.
@@ -80,6 +58,47 @@ Timings that are not marked 'busy' are then identified as free time slots.
 The following sequence diagram shows how the command `free` is executed.
 ![FreeCommandSequenceDiagram](diagrams/FreeCommandSequenceDiagram.png)
 
+## 3.4 Data Saving Feature
+
+The save mechanism is facilitated by StorageFile. It creates a text file in the local machine and writes all the elements
+in the MasterTimetable and Timetable to the text file in human-readable format.
+
+Given below is the steps on how the save operation works.
+
+Step 1: When the user exits the application. The StorageFile.saveData will be initialized.
+
+Step 2: It will check for the existence of the data file. If the file is not found, it will create the file.
+Else do nothing.
+
+Step 3: After creating the file, collateAll method will be called to consolidate all elements in the MasterTimetable and Timetable list,
+and write them into the data file.
+
+Step 4: A message will be shown to the user, informing him that the data has been saved successfully. For any exception
+encountered along the way, an error message will be shown.
+
+The following sequence diagram shows how the save operation works:
+![SaveSequenceDiagram](diagrams/SaveSequenceDiagram.png)
+
+## 3.5 Loading Data Feature
+
+The save mechanism is facilitated by StorageFile. It reads the data specified in the local machine and stores all 
+the records back into the MasterTimetable and Timetable list.
+
+Given below is the steps on how the load operation works.
+
+Step 1: When the user starts the application. The StorageFile.LoadData will be initialized.
+
+Step 2: It will check for the existence of the data file. If the file is not found, do nothing.
+Else it will open the file and extract the record line by line.
+
+Step 3: If a record is a lesson type, then it will call ParserLocalData.prepareLoadLesson method.
+Else if the record is a meeting type, then it will add the record into the meetingList.
+
+Step 4: If there is no record left, the program will check if the previous record contain a meeting.
+If yes, it will call for ParserLocalData.prepareLoadMeeting method to add all the meetings into the list.
+
+The following sequence diagram shows how the load operation works:
+![LoadSequenceDiagram](diagrams/LoadSequenceDiagram.png)
 
 ## Product scope
 ### Target user profile
