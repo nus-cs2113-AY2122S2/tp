@@ -1,6 +1,5 @@
 # MindMyMoney User Guide
-<<<<<<< HEAD
-=======
+
 
 * [Introduction](#introduction)
 * [Quick start](#quick-start)
@@ -24,8 +23,6 @@
         * [Removing a credit card on your list: `delete`](#removing-a-credit-card-on-your-list-delete)
     * [Saving the data](#saving-the-data)
 * [FAQ](#faq)
->>>>>>> branch-Glendon-CreditCards
-
 * [Introduction](#introduction)
 * [Quick start](#quick-start)
 * [Command summary](#command-summary)
@@ -66,10 +63,7 @@ Click on the hyperlinks in the content page above to quick navigation on the pag
    The startup interface similar to the one below should appear in a few seconds.  
    ![M3_Start_Screen](images/start.PNG)
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
-   show a help page.
-    <details>
-    <summary> Some example commands you can try: </summary>
-
+   show a help page. <br> Some example commands you can try: <br>
     * **`list`** : Lists all tasks.
     * **`add`**`/e cash /c Food /d Porridge /a 3 /t 2022-03` :
       Adds $3 porridge that was paid by cash on March 2022 to the list.
@@ -78,7 +72,6 @@ Click on the hyperlinks in the content page above to quick navigation on the pag
       Updates index 1 to reflect $3 porridge that was paid by cash on March 2022 to the list.
     * **`delete`**`2` : Deletes the 2nd expenditure shown in the expenditure list.
     * **`bye`** : Exits the app.
-    </details>
 
 7. Refer to the [Features](#features) below for details of each command.
 
@@ -92,8 +85,7 @@ Click on the hyperlinks in the content page above to quick navigation on the pag
 | Calculate | `calculate /epm mm yyyy` <br/> e.g `calculate /epm Mar 2022` <br/> Calculates the total expenses and shows the percentage of expenses grouped by different categories.      |
 | Delete    | `delete [INDEX]`<br/>e.g `delete 1` <br/> Deletes an expense item from the list.                                                                                            | 
 | Update    | `update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]`<br/>e.g `update 2 snacks 5` <br/> Updates an expense item in the list.                                                      |
-| Exit      | `bye`<br/> Ends the `MindMyMoney` application                                                                                                                               |
-|
+
 
 ## Command Summary (Credit Card)
 
@@ -123,9 +115,6 @@ Format:`help /expenses`for expenses commands <br>
 ### Add an expenditure to your program: `add`
 Adds an expenditure to your program. Only **one** expenditure can only be added per command.  
 Format:`add /e [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [DATE]`
-<details>
-<summary>💡</summary>
-
 * `[PAYMENT_METHOD]` refers to the method of payment used.
     * Enter `cash` or the name of a credit card you have saved.
 * `[CATEGORY]` refers to the category of the expenditure
@@ -138,28 +127,22 @@ Format:`add /e [PAYMENT_METHOD] /c [CATEGORY] /d [DESCRIPTION] /a [AMOUNT] /t [D
 * `[DATE]` refers to the date of the purchase of the expenditure.
     * Format of the date is YYYY-MM.
     * For example `March 2022` will be entered as `2022-03`
-</details>
+
 
 Example:`add /e cash /c Food /d Porridge /a 4.50 /t 2022-03`<br>
 ![add_expense screenshot](./images/add_expense.PNG)
-<details>
-<summary> 💡 </summary>
 
-**💡 Note:**
+> **💡 Note:**
 >- `[CATEGORY]` and `[PAYMENT_METHOD]` are **case-insensitive**.
 >- `[PAYMENT_METHOD]` credit card has to be added first before using the field `/e [CARD_NAME]`.
 >- `[AMOUNT]` only excepts numbers with 2 decimal places. Any more decimal places will be rounded or ignored
 >- `[DATE]` does not require any day input.
-</details>
 
-<details> 
-<summary> ⚠️</summary>
 
-**⚠️Warning⚠️**
+> **⚠️Warning⚠️**
 >- Input realistic values, any unrealistic values can crash the system and damage your saved file!
 >- All flags are compulsory! Input the flags in the order given, else the application will not be able to read your
    > input.
-</details>
 
 ### Display current list of expenditures: `list`
 Prints in the terminal the current list of expenditures that you have logged so far   
@@ -167,24 +150,16 @@ Format:`list /expenses` lists the expenses in the list. <br>
 ![list_expenses screenshot](./images/list_expenses.PNG)
 
 ### Modify an expenditure on your list: `update`
-Modify an expenditure on your list, by specifying the expenditure's index.   
-<details> 
-<summary> 💡 </summary>
-
->- Use the `list /expenses` command to view the current indices of your expenditures.   
-</details>
+Modify an expenditure on your list, by specifying the expenditure's index. <br>
+Use the `list /expenses` command to view the current indices of your expenditures.   
 
 Format:`update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]`  
 For example: `update 1 drinks 2`  <br>
 ![update screenshot](./images/update.PNG)
 
 ### Removing an expenditure on your list: `delete`
-Delete an expenditure from your list, by specifying the expenditure's index.  
-<details> 
-<summary> 💡 </summary>
-
->- Use the `list /expenses` command to view the current indices of your expenditures.   
-</details>
+Delete an expenditure from your list, by specifying the expenditure's index. <br>
+Use the `list /expenses` command to view the current indices of your expenditures.   
 
 Format:`delete`  
 For example: `delete 1` <br>
@@ -204,14 +179,11 @@ Format:`calculate /epm MMM YYYY`
   For example: `calculate /epm Mar 2022`  <br>
   ![epm screenshot](./images/calculate_epm.PNG) <br>
 
-<details> 
-<summary> 💡 </summary>
-
-**💡 Note**
+> **💡 Note**
 > - If you want to search for exact month in year, enter both month and year.
 > - Month is **case-sensitive**.
 > - However, you can also use this function to search for expenditures in the year by typing `calculate /epm 2022`.
-</details>
+
 
 ### Exiting MindMyMoney application: `bye`
 Shuts down the MindMyMoney application.  
@@ -228,17 +200,9 @@ Format 1:`help /cc` for credit card commands <br>
 ### Add a credit card to your program: `add`
 Adds a credit card to your program. Only **one** credit card can only be added per command.  <br>
 Format:`add /cc /n [CREDIT_CARD_NAME] /cb [CASH_BACK] /cl [CARD_LIMIT] /bal [CARD_BALANCE]`
-
-<details>
-<summary>💡</summary>
-
 * `[CREDIT_CARD_NAME]` refers to the name your Credit Card will be saved as
-    <details>
-        <summary>Tips</summary>
-
-        Use abbreviations for ease of adding expenditures to this credit card
-        For example, storing `DBS Live Fresh Credit Card` as `DBS LV`
-    </details>
+  * Use abbreviations for ease of adding expenditures to this credit card
+      For example, storing `DBS Live Fresh Credit Card` as `DBS LV`
 * `[CASH_BACK]` refers to the amount of cash back received when spending on the credit card
   * Enter the amount of cashback in percentage
   * For example, a credit card with `2% cashback` can be stored as `/cb 2`
@@ -246,27 +210,18 @@ Format:`add /cc /n [CREDIT_CARD_NAME] /cb [CASH_BACK] /cl [CARD_LIMIT] /bal [CAR
     * Enter the maximum amount that can be spent on the credit card in dollars
 * `[CARD_BALANCE]` refers to the amount of money left to be spent on the credit card
     * Enter the amount that is left in this card in dollars
-</details>
+
 
 Example:`add /cc /n dbs /cb 2 /cl 1000 /bal 1000`  <br>
 ![add_cc screenshot](./images/add_cc.PNG)
-
-<details> 
-<summary>💡 </summary>
-
-**💡 Note**
+> **💡 Note**
 >- `[CREDIT_CARD_NAME]` is **case-insensitive**.
-</details>
 
 
-<details> 
-<summary>⚠️</summary>
-
-**⚠️Warning⚠️**
+> **⚠️Warning⚠️**
 >- Input realistic values, any unrealistic values can crash the system and harm your save file!
 >- All flags are compulsory! Input the flags in the order given, or the application will not be able to read your
    > input.
-</details>
 
 ### Display current list of credit cards: `list`
 Prints in the terminal the current list of credit cards that you have registered so far   
@@ -276,11 +231,8 @@ Format:`list /cc` lists the credit cards in the list. <br>
 
 ### Modify a credit card on your list: `update`
 Modify a credit card on your list, by specifying the credit card's index. <br>
-<details>
-<summary>💡 </summary>
+Use the `list /cc` command to view the current indices of your credit cards.   
 
->- Use the `list /cc` command to view the current indices of your credit cards.   
-</details>
 
 Format:`update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]`  
 For example: `update 1 drinks 2`  <br>
