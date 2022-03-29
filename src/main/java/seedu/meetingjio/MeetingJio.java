@@ -19,9 +19,7 @@ public class MeetingJio {
 
     private static MasterTimetable masterTimetable = new MasterTimetable();
 
-    /** Starts the interaction with the user.
-     *  Saves data when user exits the application.
-     */
+    /** Starts the interaction with the user. */
     public static void main(String[] args) {
         start();
         String name = in.nextLine().trim();
@@ -29,12 +27,9 @@ public class MeetingJio {
         System.out.println("Hello! " + name);
         Ui.showHelpHint();
         System.out.println(MESSAGE_DIVIDER);
-
         String userInput = in.nextLine().trim();
-
         Ui.executeCommand(userInput, masterTimetable, in);
-        StorageFile.saveData(masterTimetable);
-        Ui.showGoodByeMessage();
+        exit();
     }
 
     /** Initializes the application.
@@ -51,5 +46,11 @@ public class MeetingJio {
             /**e.printStackTrace();*/
             System.out.println(e.getMessage());
         }
+    }
+
+    /** Saves data and shows the goodbye message when user exits the application.*/
+    private static void exit() {
+        StorageFile.saveData(masterTimetable);
+        Ui.showGoodByeMessage();
     }
 }
