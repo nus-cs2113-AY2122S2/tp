@@ -14,7 +14,7 @@ public class SaveCommand extends Command {
 
     /**
      * Saves the current state of application into JSON file.
-     * @return CommandResult successful save message.
+     * @return CommandResult with successful save message.
      */
     public CommandResult execute() {
         storage.saveData(equipmentManager);
