@@ -45,13 +45,20 @@ class SessionTest {
     }
 
     // hasActivity()
-    
+
+    /**
+     * Checks if false is returned when hasActivity method is run and no Activity objects exists in the Session object.
+     */
     @Test
     void hasActivity_noActivityExists_false() {
         boolean hasActivity = session.hasActivity(TEST_ACTIVITY_ONE);
         assertFalse(hasActivity);
     }
-    
+
+    /**
+     * Checks if false is returned when hasActivity method is run and no Activity object with an activity unique
+     * identifier matching the provided identifier is found in the Session object.
+     */
     @Test
     void hasActivity_activityWithSpecifiedIdDoesNotExist_false() {
         Command createActivityCommand = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_ONE);
@@ -59,7 +66,11 @@ class SessionTest {
         boolean hasActivity = session.hasActivity(TEST_ACTIVITY_TWO);
         assertFalse(hasActivity);
     }
-    
+
+    /**
+     * Checks if true is returned when hasActivity method is run and Activity objects with activity unique identifiers
+     * matching the provided identifiers are found in the Session object.
+     */
     @Test
     void hasActivity_activityExists_true() {
         // Pretesting
@@ -73,11 +84,13 @@ class SessionTest {
         createActivityCommandOne.run(manager);
         hasActivityOne = session.hasActivity(TEST_ACTIVITY_ONE);
         assertTrue(hasActivityOne);
+        assertFalse(hasActivityTwo);
         
         // 2 activities
         Command createActivityCommandTwo = Parser.getCommand(CREATE_TEST_ACTIVITY_INPUT_TWO);
         createActivityCommandTwo.run(manager);
         hasActivityTwo = session.hasActivity(TEST_ACTIVITY_TWO);
+        assertTrue(hasActivityOne);
         assertTrue(hasActivityTwo);
     }
     
