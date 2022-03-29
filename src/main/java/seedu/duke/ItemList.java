@@ -25,12 +25,36 @@ public class ItemList {
         this.listOfItems = listOfItems;
     }
 
-    public void addItemToList(Item item) {
+    public boolean addItemToList(Item item) {
+        boolean isItemAlreadyInTheList = checkForItemDuplicates(item.getName());
+        if (isItemAlreadyInTheList == true) {
+            return isItemAlreadyInTheList;
+        }
         listOfItems.add(item);
+        return isItemAlreadyInTheList;
     }
 
     public int getSize() {
         return listOfItems.size();
+    }
+
+    public boolean checkForItemDuplicates(String nameOfItemToAdd) {
+        boolean isItemAlreadyInTheList = false;
+        int numberOfItemsInItemList = listOfItems.size();
+        if (numberOfItemsInItemList == 0) {
+            return isItemAlreadyInTheList;
+        }
+        String itemName;
+        Item item;
+        for (int itemIndex = 0; itemIndex < numberOfItemsInItemList; itemIndex++) {
+            item = listOfItems.get(itemIndex);
+            itemName = item.getName();
+            if (itemName.equals(nameOfItemToAdd)) {
+                isItemAlreadyInTheList = true;
+                break;
+            }
+        }
+        return isItemAlreadyInTheList;
     }
 
     /**

@@ -10,6 +10,7 @@ import seedu.duke.ItemList;
 import seedu.duke.Ui;
 import seedu.duke.ListContainer;
 import seedu.duke.InvalidItemPaxException;
+
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -113,7 +114,12 @@ public class AddItemCommand extends Command {
         ItemList listOfItems = listContainer.getItemList();
         Item item = getItem();
         assert (item != null) : "Assertion Failed! There is no item within the AddItemCommand object.";
-        listOfItems.addItemToList(item);
+        boolean isItemAlreadyInTheList = listOfItems.addItemToList(item);
+        if (isItemAlreadyInTheList == true) {
+            String nameOfItemToAdd = item.getName();
+            ui.printItemAlreadyInTheListErrorMessage(nameOfItemToAdd);
+            return;
+        }
         ui.printAddItemAcknowledgementMessage(listOfItems);
     }
 
