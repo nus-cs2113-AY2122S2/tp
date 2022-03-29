@@ -15,6 +15,7 @@ public class ListContainer {
     private AssignmentMap assignmentMap;
     private RoomList roomList;
     private ItemList itemList;
+    private EventList eventList;
 
     public ListContainer() throws IOException {
         satisfactionList = new SatisfactionList();
