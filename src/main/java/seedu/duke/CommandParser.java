@@ -35,18 +35,18 @@ public class CommandParser {
     private static final String UPDATE_ITEM_NAME_COMMAND = "update item name ";
     private static final String ADD_HOUSEKEEPER_COMMAND = "add housekeeper ";
     private static final String SEARCH_ITEM_COMMAND = "search item ";
-    private static final String ADD_PERFORMANCE_COMMAND = "add housekeeper performance";
+    private static final String ADD_PERFORMANCE_COMMAND = "add housekeeper performance ";
     private static final String VIEW_PERFORMANCES_COMMAND = "view housekeeper performances";
     private static final String ADD_AVAILABILITY_COMMAND = "availability ";
-    private static final String ADD_SATISFACTION_COMMAND = "add satisfaction";
+    private static final String ADD_SATISFACTION_COMMAND = "add satisfaction ";
     private static final String VIEW_SATISFACTIONS_COMMAND = "view satisfactions";
     private static final String AVERAGE_SATISFACTION_COMMAND = "average satisfaction";
-    private static final String CHECK_IN = "check in";
-    private static final String CHECK_OUT = "check out";
-    private static final String CHECK_ROOM = "check room";
-    private static final String CHECK_ALL_ROOM = "check all";
-    private static final String CHECK_ROOM_BY_LEVEL = "check level";
-    private static final String CHECK_BY_CATEGORY = "check category";
+    private static final String CHECK_IN = "check in ";
+    private static final String CHECK_OUT = "check out ";
+    private static final String CHECK_ROOM = "check room ";
+    private static final String CHECK_ALL_ROOM = "check all room";
+    private static final String CHECK_ROOM_BY_LEVEL = "check level ";
+    private static final String CHECK_BY_CATEGORY = "check category ";
     private static final String ASSIGN_HOUSEKEEPER = "assign ";
     private static final String VIEW_HOUSEKEEPER_COMMAND = "view recorded housekeeper";
     private static final String VIEW_AVAILABLE_HOUSEKEEPER_DAY = "get available on ";
@@ -75,9 +75,9 @@ public class CommandParser {
         } else if (userInputLowerCase.startsWith(ADD_SATISFACTION_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_SATISFACTION_COMMAND, "").trim();
             userCommand = new AddSatisfactionCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(VIEW_SATISFACTIONS_COMMAND)) {
+        } else if (userInputLowerCase.equals(VIEW_SATISFACTIONS_COMMAND)) {
             userCommand = new ViewSatisfactionsCommand();
-        } else if (userInputLowerCase.startsWith(AVERAGE_SATISFACTION_COMMAND)) {
+        } else if (userInputLowerCase.equals(AVERAGE_SATISFACTION_COMMAND)) {
             userCommand = new AverageSatisfactionCommand();
         } else if (userInputLowerCase.startsWith(ADD_ITEM_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_ITEM_COMMAND, "");
@@ -95,7 +95,7 @@ public class CommandParser {
         } else if (userInputLowerCase.startsWith(ADD_PERFORMANCE_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(ADD_PERFORMANCE_COMMAND, "");
             userCommand = new AddHousekeeperPerformanceCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(VIEW_PERFORMANCES_COMMAND)) {
+        } else if (userInputLowerCase.equals(VIEW_PERFORMANCES_COMMAND)) {
             userCommand = new ViewHousekeeperPerformancesCommand();
         } else if (userInputLowerCase.startsWith(CHECK_IN)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_IN, "");
@@ -109,7 +109,7 @@ public class CommandParser {
         } else if (userInputLowerCase.startsWith(CHECK_ROOM)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_ROOM, "");
             userCommand = new CheckRoomCommand(userInputLowerCaseWithoutCommand);
-        } else if (userInputLowerCase.startsWith(CHECK_ALL_ROOM)) {
+        } else if (userInputLowerCase.trim().equals(CHECK_ALL_ROOM)) {
             userCommand = new CheckAllRoomCommand();
         } else if (userInputLowerCase.startsWith(CHECK_ROOM_BY_LEVEL)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(CHECK_ROOM_BY_LEVEL, "");
