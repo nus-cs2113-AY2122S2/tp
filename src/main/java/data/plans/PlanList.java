@@ -507,11 +507,11 @@ public class PlanList {
                 System.out.println("\nThe following plan has been updated:\n");
             }
             System.out.println((i + 1) + ". " + getPlansDisplayList().get(planWithUpdatedWorkout.get(i) - 1));
-            updatePlan((planWithUpdatedWorkout.get(i)), workoutToCheck, updatedWorkout);
+            updatePlanDetails((planWithUpdatedWorkout.get(i)), workoutToCheck, updatedWorkout);
         }
     }
 
-    public void updatePlan(int planIndexToUpdate, String workoutToCheck, Workout updatedWorkout) throws
+    public void updatePlanDetails(int planIndexToUpdate, String workoutToCheck, Workout updatedWorkout) throws
             NumberFormatException, InvalidPlanException {
         String className = this.getClass().getSimpleName();
 
