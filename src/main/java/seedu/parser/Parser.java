@@ -120,6 +120,8 @@ public class Parser {
             }
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommand();
 
         default:
             return new IncorrectCommand(INCORRECT_COMMAND_FORMAT);
@@ -140,18 +142,25 @@ public class Parser {
     public ArrayList<String> splitCommandTerm(String userInput) throws IncompleteCommandException {
         ArrayList<String> resultArrayList = new ArrayList<>();
         userInput = userInput.trim();
-        // Checks for "list" command word first
-        if (userInput.toLowerCase(Locale.ROOT).equals(ListCommand.COMMAND_WORD)) {
+
+        // Checks for list/help/save command word first
+        switch (userInput.toLowerCase(Locale.ROOT)) {
+        case ListCommand.COMMAND_WORD:
             resultArrayList.add(ListCommand.COMMAND_WORD);
             resultArrayList.add(null);
             return resultArrayList;
-        }
-        // Checks for "help" command word next
-        if (userInput.toLowerCase(Locale.ROOT).equals(HelpCommand.COMMAND_WORD)) {
+        case HelpCommand.COMMAND_WORD:
             resultArrayList.add(HelpCommand.COMMAND_WORD);
             resultArrayList.add(null);
             return resultArrayList;
+        case SaveCommand.COMMAND_WORD:
+            resultArrayList.add(SaveCommand.COMMAND_WORD);
+            resultArrayList.add(null);
+            return resultArrayList;
+        default:
+            break;
         }
+
         // Match terms against syntax
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput);
         // Guard against no match
