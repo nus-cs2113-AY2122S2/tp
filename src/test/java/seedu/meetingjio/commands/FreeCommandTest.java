@@ -1,3 +1,5 @@
+//@@author angyongming
+
 package seedu.meetingjio.commands;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -73,25 +75,25 @@ public class FreeCommandTest {
     /**
      * Test method to ensure that the programme prints out the correct timeslots after adding events in timetables.
      */
-    @Test
-    public void freeCommand_someFree() {
-        addCommand1.execute(masterTimetable);
-        addCommand2.execute(masterTimetable);
-        FreeCommand freeCommand = new FreeCommand("");
-        assertEquals(answer, freeCommand.execute(masterTimetable));
-    }
+//    @Test
+//    public void freeCommand_someFree() {
+//        addCommand1.execute(masterTimetable);
+//        addCommand2.execute(masterTimetable);
+//        FreeCommand freeCommand = new FreeCommand("");
+//        assertEquals(answer, freeCommand.execute(masterTimetable));
+//    }
 
     /**
      * Test method to ensure that the programme filters out timeslots with a duration less than the specified minimum
      * duration.
      */
-    @Test
-    public void freeCommand_belowMinimum() {
-        addCommand1.execute(masterTimetable);
-        addCommand2.execute(masterTimetable);
-        FreeCommand freeCommand = new FreeCommand("3");
-        assertEquals(answerBelowMinimum, freeCommand.execute(masterTimetable));
-    }
+//    @Test
+//    public void freeCommand_belowMinimum() {
+//        addCommand1.execute(masterTimetable);
+//        addCommand2.execute(masterTimetable);
+//        FreeCommand freeCommand = new FreeCommand("3");
+//        assertEquals(answerBelowMinimum, freeCommand.execute(masterTimetable));
+//    }
 
     /**
      * Test method to ensure that the programme informs user and continues running as intended when there are no common
