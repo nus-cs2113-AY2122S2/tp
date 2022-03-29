@@ -72,4 +72,8 @@ public class Response {
         return ("Unsuccessful operation. Please check the target indexes.");
     }
 
+    public static String addLanguageSuccessfully() {
+        return ("Language added");
+    }
+
 }

@@ -4,6 +4,7 @@ import cpp.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.exceptions.NegativeIndexException;
 import cpp.logic.commands.Command;
+import cpp.logic.parser.AddLanguageCommandParser;
 import cpp.logic.parser.AddProjectCommandParser;
 import cpp.logic.parser.AddTodoCommandParser;
 import cpp.logic.parser.MarkCommandParser;
@@ -57,6 +58,9 @@ public class CommandHandler {
             break;
         case "view":
             view(projectList, commands);
+            break;
+        case "addlanguage":
+            executeCommand(projectList, new AddLanguageCommandParser().parse(commands));
             break;
         case "listlanguages":
             listLanguages(projectList, commands);

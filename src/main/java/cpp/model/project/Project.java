@@ -10,7 +10,7 @@ public class Project {
 
     public Project() {
         todos = new ArrayList<Todo>();
-        languages = new ArrayList<>();
+        languages = new ArrayList<String>();
     }
 
     /**
@@ -21,6 +21,7 @@ public class Project {
     public Project(String title) {
         this.title = title;
         todos = new ArrayList<Todo>();
+        languages = new ArrayList<String>();
     }
 
     /**
@@ -107,11 +108,16 @@ public class Project {
      * Displays all programming languages of the project.
      */
     public void printLanguages() {
-        System.out.print("Project Name: " + getTitle() + "\n");
+        System.out.print("Programming languages for " + getTitle() + ":\n");
         int count = 1;
         for (String language: getLanguages()) {
             System.out.print("\t" + "[" + count + "]. " + language + "\n");
             count++;
         }
+    }
+
+    public void addLanguage(String language) {
+        assert (languages != null) : "Cannot add languages to this project.";
+        languages.add(language);
     }
 }

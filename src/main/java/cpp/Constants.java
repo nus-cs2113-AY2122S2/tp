@@ -22,7 +22,7 @@ public class Constants {
     public static final String MESSAGE_INVALID_DELETEPROJECT_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
             + "deleteproject [project_title]";
-
+    public static final String INVALID_PROJECT_NAME = "Sorry! There was no project with that name.";
 
 
     public static final int PROJECT_NOT_FOUND = -1;

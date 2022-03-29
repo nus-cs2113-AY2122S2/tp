@@ -241,4 +241,18 @@ public class ProjectList {
         }
         System.out.println(Constants.SEPARATOR);
     }
+
+    public void addLanguages(String projectName, String language) {
+        System.out.println(Constants.SEPARATOR);
+        int index = findProjectIndex(projectName);
+        if (index == Constants.PROJECT_NOT_FOUND) {
+            System.out.println(Constants.INVALID_PROJECT_NAME);
+        } else {
+            Project project = projectList.get(index);
+            project.addLanguage(language);
+            System.out.println(language + " language added.");
+        }
+        System.out.println(Constants.SEPARATOR);
+    }
+
 }
