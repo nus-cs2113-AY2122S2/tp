@@ -277,6 +277,35 @@ class ProfileTest {
     }
 
     /**
+     * Checks if a String with the correct error message is properly returned when list of group is empty.
+     */
+    @Test
+    public void getGroupListSummaryString_groupListEmpty_emptyGroupMessageReturned() {
+        String retrievedGroupListSummary = manager.getProfile().getGroupListSummaryString();
+        String expectedMessage = Message.ERROR_PROFILE_GROUP_LIST_EMPTY;
+        assertEquals(expectedMessage, retrievedGroupListSummary);
+    }
+
+    /**
+     * Checks if a String with the correct message is properly returned when list of group is not empty.
+     */
+    @Test
+    public void getGroupListSummaryString_groupListNotEmpty_correctFormatReturned() {
+        String groupArgs = "group /create /n Project members /pl Alice Bob Charlie";
+        Command createGroup = Parser.getCommand(groupArgs);
+        createGroup.run(manager);
+
+        String retrievedGroupListSummary = manager.getProfile().getGroupListSummaryString();
+        String expectedOutput =
+                "-----------------------------------------\n"
+                        + "# | Name            | Number of persons \n"
+                        + "-----------------------------------------\n"
+                        + "1 | Project members | 3                 \n"
+                        + "=========================================";
+        assertEquals(expectedOutput, retrievedGroupListSummary);
+    }
+
+    /**
      * Checks if sessionId is incremented when getNewSessionId method is called.
      */
     @Test
