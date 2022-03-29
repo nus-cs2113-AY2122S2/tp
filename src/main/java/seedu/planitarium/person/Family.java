@@ -110,7 +110,7 @@ public class Family {
      * @param personIndex The index of the person to be removed
      */
     public void deletePerson(int group, int personIndex) {
-        logger.log(Level.INFO, Constants.REMOVE_PERSON_CALL_MESSAGE);
+        logger.log(Level.INFO, Constants.DELETE_PERSON_CALL_MESSAGE);
         getList(group).deletePerson(personIndex);
     }
 
