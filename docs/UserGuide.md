@@ -24,26 +24,26 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 * [Quick Notes](#quick-notes)
 * [Quick Start](#quick-start)
 * [Features](#features)
-  * Session Management
+  * [Session Management](#_session-management_)
       * [Creating a session: `session /create`](#creating-a-session-session-create)
       * [Deleting a session: `session /delete`](#deleting-a-session-session-delete)
       * [Editing a session: `session /edit`](#editing-a-session-session-edit)
       * [Viewing a session: `session /view`](#viewing-a-session--session-view)
       * [Listing all sessions: `session /list`](#listing-all-sessions-session-list)
-  * Activity Management
+  * [Activity Management](#_activity-management_)
     * [Creating an activity: `activity /create`](#creating-an-activity-activity-create)
     * [Deleting an activity: `activity /delete`](#deleting-an-activity-activity-delete)
     * [Editing an activity: `activity /edit`](#editing-an-activity-activity-edit)
     * [Viewing an activity: `activity /view`](#viewing-an-activity-activity-view)
     * [Listing all activities in a session: `activity /list`](#listing-all-activities-in-a-session-activity-list)
-  * Transaction Management
+  * [Transaction Management](#_transaction-management_)
     * [Settling all transactions for a session: `session /summary`](#settling-all-transactions-for-a-session-session-summary)
-  * Group Management
+  * [Group Management](#_group-management_)
     * [Creating a group: `group /create`](#creating-a-group-group-create)
     * [Deleting a group: `group /delete`](#deleting-a-group-group-delete)
     * [Viewing a group: `group /view`](#viewing-a-group-group-view)
     * [Listing all groups: `group /list`](#listing-all-groups-group-list)
-  * Miscellaneous
+  * [Miscellaneous](#_miscellaneous_)
     * [Listing all available commands: `help`](#listing-all-available-commands-help)
     * [Exit](#exit)
 * [FAQ](#faq)
@@ -128,55 +128,55 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
 >- The `[SESSION_NAME]` should be unique across all active sessions.
 >- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
 > 
-> ⚠️```diff - Warning:```
+> **⚠️Warning:**
 > - When using `/pl` and `/gid` delimiters together, if there is a duplicated name in `/pl` and 
 > specified group with `/gid`. The duplicate name would be removed, storing only 1 instance of it.
 >  - Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
      includes Alice, only two names, Alice and Bob, would be saved.
 
-Examples of usage:
-1. Adds a new session named Class Outing with Alice and Bob involved on 15-03-2022.
-   - `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob` <br>
-   ![Session create command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[1].png)
-2. A [group](#creating-a-group-group-create) was previously created with group named *Friends* with Charlie and Mike. <br>
-   Adds a new session named Class Gathering consisting of a group named *Friends* and Alice, on 16-04-2022.
-   - `session /create /n Glass Gathering /d 16-04-2022 /gid 1 /pl Alice` <br>
-   ![Session create command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[2].png)
+**Example 1** 
+- Adds a new session named Class Outing with Alice and Bob involved on 15-03-2022.<br> 
+`session /create /n Class Outing /d 15-03-2022 /pl Alice Bob` <br>
+![Session create command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[1].png)
+
+**Example 2** 
+- A [group](#creating-a-group-group-create) was previously created with group named *Friends* with Charlie and Mike. <br>
+   Adds a new session named Class Gathering consisting of a group named *Friends* and Alice, on 16-04-2022.<br>
+`session /create /n Glass Gathering /d 16-04-2022 /gid 1 /pl Alice` <br>
+![Session create command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[2].png)
 <br>
 <br>
 
 ### Deleting a session: `session /delete`
+Deletes an existing session so that you can remove sessions that you don't need.<br>
 
-> Deletes an existing session.<br>
-> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
+>Format: `session /delete /sid [SESSION_ID]`
+>* `[SESSION_ID]` refers to the unique identifier of the session.
+>    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 
-Format: `session /delete /sid [SESSION_ID]`
-
-* `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+<br>
 
 > **💡 Note:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be removed.
-
+> 
 > **⚠️Warning:**
 > - This action is irreversible, once the command has been entered, the session would be immediately deleted.
 
-Example of usage:
-1. Remove an existing session with a unique identifier of 1.
-   - `session /delete /sid 1` <br>
-   ![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
+**Example 1** 
+- Remove an existing session with a unique identifier of 1.<br>
+`session /delete /sid 1` <br>
+![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
 <br>
 <br>
 
 ### Editing a session: `session /edit`
+Edits an existing session so that you can change details of a session.<br>
 
-> Edits an existing session. <br>
-> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
+>Format: `session /edit /sid [SESSION_ID] [</n [SESSION_NAME]>] [</d [SESSION_DATE]>] [</pl [NAME1 NAME2...]>]`
+>* `[SESSION_ID]` refers to the unique identifier of the session.
+>    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 
-Format: `session /edit /sid [SESSION_ID] [</n [SESSION_NAME]>] [</d [SESSION_DATE]>] [</pl [NAME1 NAME2...]>]`
-
-* `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+<br>
 
 > **💡 Notes**
 > - A session with a unique identifier of `[SESSION_ID]` has to exist before it can be edited.
@@ -184,44 +184,49 @@ Format: `session /edit /sid [SESSION_ID] [</n [SESSION_NAME]>] [</d [SESSION_DAT
 > - There are 3 editable fields, session name, session date and the people involved in the session.
 > - When editing the people involved, existing participants must be included in the command.
 >  - Example: If the session previously created had Alice and Bob with session ID of 1, 
->  and you wish to edit it to include charlie a valid edit command would be `session /edit /sid /pl Alice Bob Charlie`. 
-
+>  and you wish to edit it to include charlie a valid edit command would be `session /edit /sid /pl Alice Bob Charlie`.
+> 
 > **⚠️Warning:**
 > - This action is irreversible, once the command has been entered, the session would be edited.
     
 Examples of usage:
 - A session with a unique identifier of 1 was previously created named Class Outing with Alice and Bob involved on 15-03-2022.
-1. Edit the session name to Class gathering and date to 16-03-2022.
-    - `session /edit /sid 1 /n Class gathering /d 16-03-2022` <br>
-      ![Session Edit command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[1].png)
-2. Edit the session to include charlie.
-    - `session /edit /sid 1 /pl Alice Bob Charlie` <br>
-      ![Session Edit command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[2].png)
+
+**Example 1** 
+- Edit the session name to Class gathering and date to 16-03-2022. <br>
+  `session /edit /sid 1 /n Class gathering /d 16-03-2022` <br>
+![Session Edit command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[1].png)
+
+**Example 2** 
+- Edit the session to include charlie. <br>
+  `session /edit /sid 1 /pl Alice Bob Charlie` <br>
+![Session Edit command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[2].png)
 
 
 ### Viewing a session : `session /view`
 
 ### Listing all sessions: `session /list`
+Displays all existing sessions so that you can have an overview of previously created sessions. 
+However, deleted sessions will not be listed.
 
-> Displays all active sessions. Deleted sessions will not be listed.<br>
-> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
+> Format: `session /list`
 
-Format: `session /list`
-
-Example of usage:
-
+**Example 1**
+- To list all existing sessions <br>
+  `session /list`
 ![Session list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionListCommand.png)
 <br>
 <br>
 
 <hr>
 
-##_Activity Management_
+## _Activity Management_
+> An activity represents a single group activity and stores its name, costs and the name of the payer.
+ 
 ### Creating an activity: `activity /create`
 
 > Creates a new activity and assigns it to a session. <br>
-> An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
-> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
+
 
 Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
 /co [TOTAL_COST] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
@@ -269,8 +274,6 @@ Examples of usage:
 ### Deleting an activity: `activity /delete`
 
 > Deletes an existing activity from a particular session.<br>
-> An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
-> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `activity /delete /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 
@@ -299,7 +302,6 @@ Example of usage:
 ### Viewing an activity: `activity /view`
 
 > Display details about an activity.<br>
-> An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
 
 Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
 
@@ -323,8 +325,6 @@ Example of usage:
 ### Listing all activities in a session: `activity /list`
 
 > Displays all existing activities in a particular session.<br>
-> An activity represents a single group activity and stores its name, costs and the name of the payer.<br>
-> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `activity /list /sid [SESSION_ID]`
 * `[SESSION_ID]` refers to the unique identifier of the session.
@@ -347,7 +347,6 @@ Example of usage:
 ### Settling all transactions for a session: `session /summary`
 
 > Displays a summary of a session that details how much each person must pay and to whom for all debts to be resolved.<br>
-> A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
 Format: `session /summary /sid [SESSION_ID]`
 
@@ -372,10 +371,11 @@ Example of usage:
 <hr>
 
 ## _Group Management_
+> A group represents one or more individuals. It is used as a shortcut in several commands for identifying a group of individual persons.
+
 ### Creating a group: `group /create`
 
 > Creates a new group. <br>
-> A group represents one or more individuals. It is used as a shortcut in several commands for identifying a group of individual persons.<br>
 
 Format : `group /create /n [GROUP_NAME] /pl [NAME1 NAME2 ...]`
 
@@ -398,7 +398,6 @@ Example of usage:
 
 ### Deleting a group: `group /delete`
 > Deletes a existing group.<br>
-> A group represents one or more individuals. It is used as a shortcut in several commands for identifying a group of individual persons.<br>
 
 Format: `group /delete /gid [GROUP_ID]`
 
@@ -460,7 +459,8 @@ Example of usage:
 
 <hr>
 
-##_Miscellaneous_
+## _Miscellaneous_
+
 ### Listing all available commands: `help`
 > Displays all available SplitLah commands and their syntax.
 
