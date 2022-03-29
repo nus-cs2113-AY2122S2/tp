@@ -9,6 +9,10 @@ public class ViewItemWithZeroPaxCommand extends Command {
     public void execute(ListContainer listContainer, Ui ui) {
         ItemList listOfItems = listContainer.getItemList();
         ItemList listOfItemsWithZeroPax = listOfItems.findItemsWithZeroPaxInList();
+        if (listOfItems.getSize() == 0){
+            ui.printNoItemsFoundInListAcknowledgementMessage();
+            return;
+        }
         ui.printItemList(listOfItemsWithZeroPax);
     }
 }
