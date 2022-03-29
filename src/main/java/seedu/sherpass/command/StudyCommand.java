@@ -45,6 +45,7 @@ public class StudyCommand extends Command {
         if (timerLogic.getIsTimerRunning()) {
             timerLogic.callStopTimer();
         }
+        timerLogic.destroyFrame();
         ui.showLine();
         ui.showToUser(GOODBYE_MESSAGE_STUDY);
     }

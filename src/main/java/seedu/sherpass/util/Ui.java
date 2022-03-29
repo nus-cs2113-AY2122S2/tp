@@ -42,6 +42,18 @@ public class Ui {
     }
 
     /**
+     * Returns a boolean value to see if there is any more
+     * user inputs.
+     *
+     * @return Returns true if there is still user inputs. Method may
+     *         be blocked while waiting for user inputs and scanner does
+     *         not continue scanning for inputs when it is waiting.
+     */
+    public boolean hasInput() {
+        return in.hasNext();
+    }
+
+    /**
      * Prints a partition line.
      */
     public void showLine() {

@@ -6,7 +6,6 @@ import seedu.sherpass.command.DeleteCommand;
 import seedu.sherpass.command.EditCommand;
 import seedu.sherpass.command.HelpCommand;
 import seedu.sherpass.command.MarkCommand;
-import seedu.sherpass.command.ShowCommand;
 import seedu.sherpass.command.UnmarkCommand;
 
 import seedu.sherpass.enums.Frequency;
@@ -31,28 +30,25 @@ import static seedu.sherpass.constant.CommandParameter.START_TIME_DELIMITER;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputDateOnlyFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputTimeIndependentFormat;
 import static seedu.sherpass.constant.DateAndTimeFormat.inputWithTimeFormat;
-import static seedu.sherpass.constant.DateAndTimeFormat.inputWithoutTimeFormat;
 
 import static seedu.sherpass.constant.DateAndTimeFormat.timeOnlyFormat;
 import static seedu.sherpass.constant.Index.EDIT_INDEX;
 import static seedu.sherpass.constant.Index.EDIT_TASK_CONTENT;
 import static seedu.sherpass.constant.Index.INDEX_OFFSET;
-import static seedu.sherpass.constant.Index.SHOW_OPTION_INDEX;
 
 
-import static seedu.sherpass.constant.Index.SLASH_OFFSET;
 import static seedu.sherpass.constant.Index.SPLIT_FIRST_PART_INDEX;
 import static seedu.sherpass.constant.Index.SPLIT_TWO_PART_LIMIT;
 import static seedu.sherpass.constant.Index.START_OF_STRING;
 import static seedu.sherpass.constant.Index.WHITESPACE_OFFSET;
 
+import static seedu.sherpass.constant.Index.ZERO_INDEX_OFFSET;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_EMPTY_ADD_COMMANDS_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_EMPTY_DESCRIPTION_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_DATETIME_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_DELETE_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_FREQUENCY_MESSAGE;
-import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_MARKING_INDEX_MESSAGE;
 import static seedu.sherpass.constant.Message.ERROR_MULTIPLE_ARGS_MESSAGE;
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_SPECIFIC_COMMAND;
@@ -248,51 +244,6 @@ public class TaskParser {
         return null;
     }
 
-    /*
-    public static String removeRecurringDelimiter(String argument) {
-        if (!argument.contains(FREQUENCY_DELIMITER)) {
-            return argument;
-        }
-        String[] splitStrings = argument.split(FREQUENCY_DELIMITER);
-        return String.join(WHITESPACE, splitStrings).trim();
-    }
-
-
-    public static Command prepareEditRecurring(String argument) {
-        if (argument.isBlank()) {
-            return new HelpCommand(AddCommand.COMMAND_WORD);
-        }
-        String argumentWithoutRepeat = removeRecurringDelimiter(argument);
-        String[] splitIndexAndOthers = argumentWithoutRepeat.split(WHITESPACE, SPLIT_TWO_PART_LIMIT);
-
-        if (splitIndexAndOthers.length < EXPECTED_EDIT_RECURRING_ARG_LENGTH) {
-            return new HelpCommand(EditCommand.COMMAND_WORD);
-        }
-
-        String indexString = splitIndexAndOthers[SPLIT_FIRST_PART_INDEX];
-        String descAndDateString = splitIndexAndOthers[SPLIT_SECOND_PART_INDEX];
-
-        EditRecurringCommand newCommand = new EditRecurringCommand();
-        try {
-            newCommand.setTaskDescription(parseDescription(descAndDateString));
-            String doOnDateString = parseArgument(DO_DATE_DELIMITER, descAndDateString);
-            String startTimeString = parseArgument(START_TIME_DELIMITER, descAndDateString);
-            String endTimeString = parseArgument(END_TIME_DELIMITER, descAndDateString);
-            newCommand.setIndex(Integer.parseInt(indexString) - ZERO_INDEX_OFFSET);
-            newCommand.setDoOnStartDateTime(
-                    prepareTaskDateTime(doOnDateString + WHITESPACE, startTimeString, inputWithTimeFormat));
-            newCommand.setDoOnEndDateTime(
-                    prepareTaskDateTime(doOnDateString + WHITESPACE, endTimeString, inputWithTimeFormat));
-        } catch (NumberFormatException notNumberException) {
-            newCommand.setIndex(INVALID_INDEX);
-        } catch (InvalidInputException e) {
-            return new HelpCommand(EditCommand.COMMAND_WORD);
-        }
-
-        return newCommand;
-    }
-
-  */
 
     private static LocalDate prepareTaskDate(String taskDate) throws InvalidInputException {
         try {
@@ -340,7 +291,13 @@ public class TaskParser {
         if (argument.isBlank()) {
             return new HelpCommand(EditCommand.COMMAND_WORD);
         }
+        boolean isRepeat = false;
+        if (argument.contains(FREQUENCY_DELIMITER)) {
+            isRepeat = true;
+            argument = argument.replace(FREQUENCY_DELIMITER, EMPTY_STRING).trim();
+        }
         EditCommand newCommand = new EditCommand();
+        newCommand.setIsRepeat(isRepeat);
         try {
             prepareEditTaskContent(newCommand, taskList, argument);
         } catch (NumberFormatException | InvalidInputException | IndexOutOfBoundsException e) {
@@ -353,8 +310,13 @@ public class TaskParser {
 
     protected static Command prepareDelete(String argument, TaskList taskList, Ui ui) {
         try {
-            int deleteIndex = Integer.parseInt(argument) - 1;
-            return new DeleteCommand(deleteIndex, taskList);
+            boolean isRepeat = false;
+            if (argument.contains(FREQUENCY_DELIMITER)) {
+                isRepeat = true;
+                argument = argument.replace(FREQUENCY_DELIMITER, EMPTY_STRING).trim();
+            }
+            int deleteIndex = Integer.parseInt(argument) - ZERO_INDEX_OFFSET;
+            return new DeleteCommand(deleteIndex, taskList, isRepeat);
         } catch (IndexOutOfBoundsException | InvalidInputException | NumberFormatException e) {
             ui.showToUser(ERROR_INVALID_DELETE_INDEX_MESSAGE + HELP_MESSAGE_SPECIFIC_COMMAND);
         }
