@@ -14,6 +14,8 @@ public class Ui {
     private Scanner in = new Scanner(System.in);
     private static final int ARRAY_INDEX_OFFSET = 1;
     private static final String LINE = "-------------------------------------------------------------------";
+    private static final String ITEM_LIST_HEADER = "=========== Item List ===========";
+    private static final String END_OF_LIST_LINE = "======== End of the list ========";
     private static final String TABLE_HEADER = "Type\t\tRoom Id\t\tlevel\t\tStatus\t\t\tHousekeeper Name";
 
     /**
@@ -64,6 +66,7 @@ public class Ui {
         int itemPax;
         Item currentItem;
         int currentListIndex;
+        System.out.println(ITEM_LIST_HEADER);
         for (int i = 0; i < listOfItems.getSize(); i++) {
             currentItem = listOfItems.getItem(i);
             itemName = currentItem.getName();
@@ -73,6 +76,7 @@ public class Ui {
             currentListIndex = i + ARRAY_INDEX_OFFSET;
             System.out.printf("%d. Item Name: %s Item Pax: %d\n", currentListIndex, itemName, itemPax);
         }
+        System.out.println(END_OF_LIST_LINE);
     }
 
     public void printNoItemsFoundInListAcknowledgementMessage() {

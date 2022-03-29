@@ -1,10 +1,22 @@
-package seedu.duke;
+package seedu.duke.command.assigncommand;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+import seedu.duke.HotelLiteManagerException;
+import seedu.duke.InvalidAvailabilityException;
+import seedu.duke.ListContainer;
+import seedu.duke.Ui;
 import seedu.duke.command.Command;
+import seedu.duke.Room;
+import seedu.duke.AssignmentMap;
+import seedu.duke.RoomList;
+import seedu.duke.HousekeeperList;
+import seedu.duke.Housekeeper;
+import seedu.duke.InvalidRoomNumberException;
+import seedu.duke.InvalidHousekeeperProfile;
+
 
 /**
  * Identifies the name of the housekeeper and assign to room id
