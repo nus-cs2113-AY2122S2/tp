@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import seedu.duke.command.Command;
+import seedu.duke.command.assigncommand.AssignHousekeeperCommand;
 
 
 public class AssignHousekeeperTest {
