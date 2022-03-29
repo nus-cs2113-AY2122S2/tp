@@ -22,7 +22,9 @@ public class Profile implements Serializable {
     private int activityIdTracker;
     private int groupIdTracker;
 
+    private static final String SESSION_LIST_HEADER = "List of Sessions";
     private static final String[] SESSION_LIST_COLS = {"#","Name", "Date","# of Participants","# of Activities"};
+    private static final String GROUP_LIST_HEADER = "List of Groups";
     private static final String[] GROUP_LIST_COLS = { "#", "Name", "Number of persons" };
 
     /**
@@ -137,6 +139,7 @@ public class Profile implements Serializable {
                 SESSION_LIST_COLS[0], SESSION_LIST_COLS[1], SESSION_LIST_COLS[2],
                 SESSION_LIST_COLS[3], SESSION_LIST_COLS[4]
         );
+        summaryTable.addTableName(SESSION_LIST_HEADER);
         sessionList.sort(Session::compareTo);
 
         for (Session session : sessionList) {
@@ -257,6 +260,7 @@ public class Profile implements Serializable {
         TableFormatter summaryTable = new TableFormatter(
                 GROUP_LIST_COLS[0], GROUP_LIST_COLS[1], GROUP_LIST_COLS[2]
         );
+        summaryTable.addTableName(GROUP_LIST_HEADER);
         for (Group group : groupList) {
             String id = Integer.toString(group.getGroupId());
             String name = group.getGroupName();

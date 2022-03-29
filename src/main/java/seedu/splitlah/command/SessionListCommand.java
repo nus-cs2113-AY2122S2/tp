@@ -16,8 +16,6 @@ import java.util.ArrayList;
  */
 public class SessionListCommand extends Command {
 
-    private static final String SESSION_LIST_HEADER = "List of Sessions";
-
     /**
      * Runs the command to list all existing sessions managed by the Profile Object.
      *
