@@ -7,8 +7,10 @@ import seedu.sherpass.util.parser.TaskParser;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 
 import static seedu.sherpass.constant.DateAndTimeFormat.outputDateOnlyFormat;
@@ -436,5 +438,26 @@ public class TaskList {
         return count;
     }
 
+    public ArrayList<Task> getFilteredTasksByMonth(LocalDate firstDayOfMonth) {
+        LocalDate firstDayOfNextMonth = firstDayOfMonth.plusMonths(1);
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (hasDoOnDate(task) && task.getDoOnStartDateTime().toLocalDate().isEqual(firstDayOfMonth)) {
+                filteredTasks.add(task);
+            } else if (hasDoOnDate(task)
+                    && (task.getDoOnStartDateTime().toLocalDate().isAfter(firstDayOfMonth)
+                    && task.getDoOnStartDateTime().toLocalDate().isBefore(firstDayOfNextMonth))) {
+                filteredTasks.add(task);
+            }
+        }
+        return (ArrayList<Task>) filteredTasks.stream()
+                .sorted(Comparator.comparing(Task::getDoOnStartDateTime))
+                .collect(Collectors.toList());
+    }
 
+    public void printTaskList(ArrayList<Task> taskList, Ui ui) {
+        for (Task task : taskList) {
+            ui.showToUser(task.toString());
+        }
+    }
 }

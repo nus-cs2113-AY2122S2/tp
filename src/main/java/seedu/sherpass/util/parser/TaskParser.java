@@ -361,35 +361,6 @@ public class TaskParser {
         return null;
     }
 
-    /**
-     * Return ShowCommand containing parsed user inputs.
-     * Inputs are in proper format for executing the command.
-     *
-     * @param splitInput User input split into two, one containing
-     *                   command "show", the other the argument accompanying the command.
-     * @return ShowCommand with parsed user inputs in proper format.
-     */
-    public static Command prepareShow(String[] splitInput) {
-        try {
-            String selection = splitInput[SHOW_OPTION_INDEX].trim();
-            return parseShowCommandOptions(selection.toLowerCase());
-        } catch (ArrayIndexOutOfBoundsException | InvalidInputException e) {
-            System.out.println(ERROR_INVALID_INPUT_MESSAGE);
-        }
-        return null;
-    }
-
-    private static Command parseShowCommandOptions(String selection) throws InvalidInputException {
-        if (selection.isBlank()) {
-            throw new InvalidInputException();
-        }
-        try {
-            LocalDate dayInput = LocalDate.parse(selection, inputWithoutTimeFormat);
-            return new ShowCommand(dayInput, null);
-        } catch (DateTimeParseException e) {
-            return new ShowCommand(null, selection);
-        }
-    }
 
     /*
     private static void checkCorrectEditInfoFormat(String fullEditInfo) throws WrongEditInfoFormatException {
@@ -447,6 +418,4 @@ public class TaskParser {
 
         return null;
     }*/
-
-
 }

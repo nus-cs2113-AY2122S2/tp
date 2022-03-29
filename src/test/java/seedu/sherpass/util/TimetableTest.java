@@ -3,6 +3,8 @@ package seedu.sherpass.util;
 import org.junit.jupiter.api.Test;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
+import seedu.sherpass.util.timetable.Timetable;
+import seedu.sherpass.util.timetable.TimetableLogic;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -92,7 +94,7 @@ public class TimetableTest {
         System.setOut(new PrintStream(outContent));
         Ui ui = new Ui();
         TaskList taskList = new TaskList(new ArrayList<>());
-        LocalDate currentDate = Timetable.resetDateToMonday(LocalDate.now().format(dayOnlyFormat), ui);
+        LocalDate currentDate = TimetableLogic.resetDateToMonday(LocalDate.now(), ui);
         assert (currentDate != null);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 7; i++) {
