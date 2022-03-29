@@ -286,6 +286,16 @@ The general workflow of the `group /create` command is as follows:
 
 ### Remove a group
 ### View a group
+**API reference:** [`GroupViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupViewCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `group /view` command.
+<br>
+<br>
+![View Groups Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupViewCommand.drawio.png)
+<br>
+<br>
+
 ### List groups
 **API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
 
