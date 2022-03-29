@@ -7,6 +7,9 @@ import seedu.duke.commands.ListCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.util.StringConstants;
 
+/**
+ * This Parser supports the "list" command.
+ */
 public class ListParser extends Parser {
     private static final String LIST_ARGUMENT = StringConstants.LIST_ARGUMENT;
     //Unescaped Regex for testing:

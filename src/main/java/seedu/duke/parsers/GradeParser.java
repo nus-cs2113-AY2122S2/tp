@@ -9,7 +9,9 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.util.StringConstants;
 
-
+/**
+ * This Parser supports the "grade" command.
+ */
 public class GradeParser extends Parser {
     public static final String MODULE_CODE = StringConstants.MODULE_CODE;
     public static final String MODULE_GRADE = StringConstants.MODULE_GRADE;

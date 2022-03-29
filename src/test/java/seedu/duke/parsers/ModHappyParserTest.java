@@ -633,7 +633,7 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_editCommand_task_unnecessaryArgs() {
-        final String testString = "edit task 1 blahblah";
+        final String testString = "edit task 1 -m cs2113t -n \"changed\" blahblah";
         try {
             parser.parseCommand(testString);
             fail();
@@ -697,6 +697,19 @@ public class ModHappyParserTest {
     }
 
     @Test
+    public void parse_editCommand_withTaskOnly_integerOverflow() {
+        final String testString = "edit task 2147483648 -m cs2113t -n \"changed\" ";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
     public void parse_exitCommand_parsedCorrectly() {
         final String testString = "exit";
         try {
@@ -736,6 +749,19 @@ public class ModHappyParserTest {
     @Test
     public void parse_gradeCommand_invalidGrade() {
         final String testString = "grade CS2113T F-";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_editCommand_task_tooManyGrades() {
+        final String testString = "grade CS2113T A+ B+ B-";
         try {
             parser.parseCommand(testString);
             fail();
@@ -934,6 +960,19 @@ public class ModHappyParserTest {
     }
 
     @Test
+    public void parse_markCommand_withTaskOnly_integerOverflow() {
+        final String testString = "mark c 2147483648";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
     public void parse_markCommand_unnecessaryArgs() {
         final String testString = "mark c 1 blahblah";
         try {
@@ -1040,6 +1079,19 @@ public class ModHappyParserTest {
             assertEquals("add", ((TagCommand) c).getTagOperation());
             assertEquals("cs2113t", ((TagCommand) c).getTaskModule());
             assertEquals("tag", ((TagCommand) c).getTagDescription());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_tagCommand_withTaskOnly_integerOverflow() {
+        final String testString = "tag add 2147483648 -m cs2113t \"tag\"";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (ParseException e) {
+            return;
         } catch (Exception e) {
             fail();
         }

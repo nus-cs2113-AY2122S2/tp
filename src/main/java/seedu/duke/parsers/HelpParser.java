@@ -7,6 +7,9 @@ import seedu.duke.commands.HelpCommand;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.util.StringConstants;
 
+/**
+ * This Parser supports the "help" command.
+ */
 public class HelpParser extends Parser {
     private static final String COMMAND_AS_HELP_ARGUMENT = StringConstants.HELP_COMMAND_ARGUMENT;
 

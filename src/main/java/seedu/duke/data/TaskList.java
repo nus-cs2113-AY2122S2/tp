@@ -36,7 +36,7 @@ public class TaskList {
 
     /**
      * Removes the specified task from the task list.
-     * @param index The task number to be removed.
+     * @param index The task number to be removed
      */
     public Task removeTask(int index) throws NoSuchTaskException {
         if (index >= taskList.size() || index < 0) {
@@ -47,6 +47,13 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Adds tag to the task list
+     *
+     * @param tagDescription The description of tag that is inputted by user
+     * @param index The task number to be added with tag
+     * @throws NoSuchTaskException if the user-supplied index is out of bounds
+     */
     public Task addTag(String tagDescription, int index) throws NoSuchTaskException {
         if (index >= taskList.size() || index < 0) {
             throw new NoSuchTaskException();
@@ -57,6 +64,14 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Removes tag from the task list
+     *
+     * @param tagDescription The description of tag that is inputted by user
+     * @param index The task number to remove the tag
+     * @throws NoSuchTaskException if the user-supplied index is out of bounds
+     * @throws NoSuchTagException if the user-supplied tag to be removed does not exist
+     */
     public Task removeTag(String tagDescription, int index) throws NoSuchTaskException, NoSuchTagException {
         if (index >= taskList.size() || index < 0) {
             throw new NoSuchTaskException();

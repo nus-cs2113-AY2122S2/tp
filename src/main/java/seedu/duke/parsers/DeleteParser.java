@@ -9,6 +9,9 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.util.StringConstants;
 
+/**
+ * This Parser supports the "del" command.
+ */
 public class DeleteParser extends Parser {
     public static final String TASK_NUMBER = StringConstants.TASK_NUMBER;
     public static final String TASK_MODULE = StringConstants.TASK_MODULE;

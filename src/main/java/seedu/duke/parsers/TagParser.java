@@ -9,7 +9,9 @@ import seedu.duke.exceptions.ParseException;
 import seedu.duke.util.StringConstants;
 
 
-
+/**
+ * This Parser supports the "tag" command.
+ */
 public class TagParser extends Parser {
     public static final String TAG_OPERATION = StringConstants.TAG_OPERATION;
     public static final String TASK_NUMBER = StringConstants.TASK_NUMBER;

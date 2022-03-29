@@ -19,6 +19,11 @@ public class SaveCommand extends Command {
 
     private Storage storage;
 
+    /**
+     * Save the existing list of general tasks and modules.
+     * @param moduleList List to be saved and loaded.
+     */
+
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
         // Even if there is an error writing to one file, we should still try to write to the others.

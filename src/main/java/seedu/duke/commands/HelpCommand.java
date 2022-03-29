@@ -46,6 +46,9 @@ public class HelpCommand extends Command {
         this.command = command;
     }
 
+    /**
+     * Display help messages for different commands
+     */
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) throws ModHappyException {
         if (command.isBlank()) {

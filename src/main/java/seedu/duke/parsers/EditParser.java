@@ -9,6 +9,9 @@ import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.ParseException;
 import seedu.duke.util.StringConstants;
 
+/**
+ * This Parser supports the "edit" command.
+ */
 public class EditParser extends Parser {
 
     private static final String MODULE_CODE = StringConstants.MODULE_CODE;

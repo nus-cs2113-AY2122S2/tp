@@ -6,6 +6,9 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.OptionCommand;
 import seedu.duke.exceptions.ModHappyException;
 
+/**
+ * This Parser supports the "option" command.
+ */
 public class OptionParser extends Parser {
 
     private static final String OPTION_FORMAT = "(\\s*(?<configurationGroupWord>[A-Z_]+)(\\s*=\\s*(?<newValue>.*))?)?";
