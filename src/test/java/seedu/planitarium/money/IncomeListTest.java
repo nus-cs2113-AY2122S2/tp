@@ -104,4 +104,12 @@ class IncomeListTest {
         }
     }
 
+    @Test
+    public void editIncome_ValidParam_Success() {
+        personOne.editIncome(1, "Dabao", 1000.0, true);
+        assertEquals(personOne.getDescription(1), "Dabao");
+        assertEquals(personOne.getIncomeValue(1), 1000.0);
+        assertEquals(personOne.isPermanent(1), true);
+    }
+
 }

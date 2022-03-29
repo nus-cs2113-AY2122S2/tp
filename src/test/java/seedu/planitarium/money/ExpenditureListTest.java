@@ -1,9 +1,10 @@
-//@@author tjiarong
+//@@author HansHengGit
 
 package seedu.planitarium.money;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.planitarium.category.Category;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -102,6 +103,22 @@ class ExpenditureListTest {
         } catch (AssertionError e) {
             assertNull(e.getMessage());
         }
+    }
+
+    //@@author tjiarong
+
+    @Test
+    public void editExpenditure_ValidParam_Success() {
+        personOne.editExpenditure(1, "Dabao", 1000.0, 2, true);
+        assertEquals(personOne.getDescription(1), "Dabao");
+        assertEquals(personOne.getExpenditureValue(1), 1000.0);
+        assertEquals(personOne.getCategory(1), Category.getLabelForIndex(2));
+        assertEquals(personOne.isPermanent(1), true);
+    }
+
+    @Test
+    public void findExpenditure_ValidParam_Success() {
+
     }
 
 }
