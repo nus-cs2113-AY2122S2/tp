@@ -5,8 +5,9 @@ import java.util.Objects;
 
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
+import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.ParseException;
+import seedu.duke.exceptions.GeneralParseException;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -20,11 +21,12 @@ public class AddParser extends Parser {
     private static final String MODULE_CODE = StringConstants.MODULE_CODE;
     private static final String MODULE_DESCRIPTION = StringConstants.MODULE_DESCRIPTION;
     private static final String MODULAR_CREDIT = StringConstants.MODULAR_CREDIT;
+    private static final String MODULAR_CREDIT_STR = StringConstants.ERROR_MODULAR_CREDITS_FAILED;
 
     // Unescaped regex for testing (split across a few lines):
     // (task\s+\"(?<taskName>[^\"]+)\"(\s+-m\s+(?<taskModule>\w+))?(\s+-d\s+\"(?<taskDescription>[^\"]+)\")?(\s+-t\s+\"
-    // (?<estimatedWorkingTime>[^\"]+)\")?|mod\s+(?<moduleCode>\w+?)(\s+(?<modularCredit>\d+)(?=(\s+-d\s+\"[^\"]+\")|$))
-    // (\s+(-d\s+\"(?<moduleDescription>[^\"]+)\"))?)
+    // (?<estimatedWorkingTime>[^\"]+)\")?|mod\s+(?<moduleCode>\w+?)(\s+(?<modularCredit>\d+)
+    // (?=(\s+-d\s+\"[^\"]+\")|.*$))(\s+(-d\s+\"(?<moduleDescription>[^\"]+)\"))?)(?<invalid>.*)
 
     /* Explanation for regex:
      * (task\s+\"(?<taskName>[^\"]+)\"                   -- matches [task "taskName"].
@@ -35,7 +37,7 @@ public class AddParser extends Parser {
      * (\s+-t\s+\"(?<estimatedWorkingTime>[^\"]+)\")?    -- matches [-t "estimatedWorkingTime"] if present. Optional
      *                                                   -- None of the above fields accept " as a valid character.
      *
-     * mod\s+(?<moduleCode>\w+?)                          -- matches [mod moduleCode]
+     * mod\s+(?<moduleCode>\w+?)                         -- matches [mod moduleCode]
      *                                                      Same as above, note that moduleCode does not require "",
      *                                                      but must also be a single word composed of [a-zA-Z0-9_].
      *
@@ -44,12 +46,15 @@ public class AddParser extends Parser {
      *
      * (\s+(-d\s+\"(?<moduleDescription>[^\"]+)\"))?)    -- matches [-d "moduleDescription"] if present. Optional
      *                                                      Does not accept " as a valid character.
+     *
+     * (?<invalid>.*)                                    -- matches [invalid]
+     *                                                      Any other input which do not fit in any of the above
      */
 
     private static final String ADD_FORMAT = "(task\\s+\\\"(?<taskName>[^\\\"]+)\\\"(\\s+-m\\s+(?<taskModule>\\w+))?"
             + "(\\s+-d\\s+\\\"(?<taskDescription>[^\\\"]+)\\\")?(\\s+-t\\s+\\\"(?<estimatedWorkingTime>[^\\\"]+)\\\")?"
-            + "|mod\\s+(?<moduleCode>\\w+?)(\\s+(?<modularCredit>\\d+)(?=(\\s+-d\\s+\\\"[^\\\"]+\\\")|$))"
-            + "(\\s+(-d\\s+\\\"(?<moduleDescription>[^\\\"]+)\\\"))?)";
+            + "|mod\\s+(?<moduleCode>\\w+?)(\\s+(?<modularCredit>\\d+)(?=(\\s+-d\\s+\\\"[^\\\"]+\\\")|.*$))"
+            + "(\\s+(-d\\s+\\\"(?<moduleDescription>[^\\\"]+)\\\"))?)(?<invalid>.*)";
 
     public AddParser() {
         super();
@@ -62,6 +67,7 @@ public class AddParser extends Parser {
         groupNames.add(MODULE_CODE);
         groupNames.add(MODULE_DESCRIPTION);
         groupNames.add(MODULAR_CREDIT);
+        groupNames.add(INVALID);
     }
 
     @Override
@@ -83,10 +89,10 @@ public class AddParser extends Parser {
             try {
                 modularCredit = Integer.parseInt(modularCreditStr);
             } catch (NumberFormatException e) {
-                throw new ParseException();
+                throw new InvalidNumberException(MODULAR_CREDIT_STR);
             }
             return new AddCommand(AddCommand.AddObjectType.MODULE, moduleCode, moduleDescription, modularCredit);
         }
-        throw new ParseException();
+        throw new GeneralParseException();
     }
 }

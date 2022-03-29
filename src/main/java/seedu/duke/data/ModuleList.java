@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import seedu.duke.exceptions.NoSuchModuleException;
-import seedu.duke.exceptions.ParseException;
+import seedu.duke.exceptions.GeneralParseException;
 import seedu.duke.util.StringConstants;
 
 public class ModuleList {
@@ -32,7 +32,7 @@ public class ModuleList {
      *
      * @param moduleCode the module code to be removed
      */
-    public Module removeModule(String moduleCode) throws NoSuchModuleException, ParseException {
+    public Module removeModule(String moduleCode) throws NoSuchModuleException, GeneralParseException {
         Module module = getModule(moduleCode);
         if (module == null) {
             throw new NoSuchModuleException();
@@ -50,7 +50,7 @@ public class ModuleList {
         } else if (userConfirmation.equals("no")) {
             return null;
         }
-        throw new ParseException();
+        throw new GeneralParseException();
     }
 
     /**

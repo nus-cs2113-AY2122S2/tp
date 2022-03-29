@@ -186,6 +186,10 @@ public class StringConstants {
     public static final String ERROR_NO_SUCH_MODULE = "Sorry, no such module exists ._.";
     public static final String ERROR_NO_SUCH_TASK = "Sorry, no such task exists ._.";
     public static final String ERROR_PARSE_FAILED = "This parse failed 0_0";
+    public static final String ERROR_PARSE_INVALID_PARAM = "\nInvalid compulsory parameters. "
+            + "Please check and try again.";
+    public static final String ERROR_ADDITIONAL_PARAMETER = "Sorry, this command should have no parameters.";
+    public static final String ERROR_PARSE_STRING = "\nError at \"%s\".\nPlease check and try again.";
     public static final String ERROR_UNKNOWN_COMMAND = "Sorry, I don't understand the following command:";
     public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, I don't understand the result format:";
     public static final String ERROR_WRITE_FILE = "Error writing to file...";
@@ -196,6 +200,9 @@ public class StringConstants {
             + "View all available config settings with \"option\".";
     public static final String ERROR_MODULE_LIST_EMPTY = "Sorry, you have 0 MCs counted towards your GPA ._.\n"
             + "Please add some modules or grades!";
+    public static final String ERROR_PARSE_INT_FAILED = "\nInvalid %s. Please check and try again.";
+    public static final String ERROR_MODULAR_CREDITS_FAILED = "modular credits";
+    public static final String ERROR_TASK_NUMBER_FAILED = "task number";
 
 
     /**
@@ -217,6 +224,7 @@ public class StringConstants {
     public static final String ARGUMENT = "arguments";
     public static final String TAG_NAME = "tagName";
     public static final String TAG_OPERATION = "tagOperation";
+    public static final String INVALID = "invalid";
     public static final String COMMAND_WORD = "commandWord";
     public static final String EXIT_COMMAND_WORD = "exit";
     public static final String ADD_COMMAND_WORD = "add";
@@ -231,6 +239,7 @@ public class StringConstants {
     public static final String SAVE_COMMAND_WORD = "save";
     public static final String TAG_COMMAND_WORD = "tag";
     public static final String OPTION_COMMAND_WORD = "option";
+
 
     /**
      * For grades.

@@ -5,8 +5,9 @@ import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.GpaCommand;
 import seedu.duke.commands.ResetCommand;
 import seedu.duke.commands.SaveCommand;
+import seedu.duke.exceptions.AdditionalParameterException;
 import seedu.duke.exceptions.ModHappyException;
-import seedu.duke.exceptions.ParseException;
+import seedu.duke.exceptions.GeneralParseException;
 
 /**
  * This Parser supports all commands which do not accept any additional arguments or parameters.
@@ -22,7 +23,7 @@ public class NoArgumentParser extends Parser {
     public Command parseCommand(String userInput) throws ModHappyException {
         // NoArgumentParser commands strictly take no input.
         if (userInput.length() != 0) {
-            throw new ParseException();
+            throw new AdditionalParameterException();
         }
         switch (myCommandWord) {
         case (EXIT_COMMAND_WORD):
@@ -34,7 +35,7 @@ public class NoArgumentParser extends Parser {
         case (SAVE_COMMAND_WORD):
             return new SaveCommand();
         default:
-            throw new ParseException();
+            throw new GeneralParseException();
         }
     }
 }

@@ -14,8 +14,7 @@ import seedu.duke.commands.GradeCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.MarkCommand;
 import seedu.duke.commands.TagCommand;
-import seedu.duke.exceptions.ParseException;
-import seedu.duke.exceptions.UnknownCommandException;
+import seedu.duke.exceptions.*;
 import seedu.duke.data.Module;
 import seedu.duke.data.Task;
 
@@ -129,7 +128,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidInputException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -163,7 +162,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidInputException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -195,7 +194,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidInputException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -226,7 +225,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidInputException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -259,7 +258,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidInputException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -273,7 +272,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidInputException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -287,7 +286,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidInputException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -296,11 +295,11 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_duplicateTaskDescription() {
-        final String testString = "add task 000 -d \"123\" -t \"456\" -d \"789\"";
+        final String testString = "add task \"000\" -d \"123\" -t \"456\" -d \"789\"";
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidInputException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -309,11 +308,11 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_duplicateWorkingTime() {
-        final String testString = "add task 000 -t \"123\" -d \"456\" -t \"789\"";
+        final String testString = "add task \"000\" -t \"123\" -d \"456\" -t \"789\"";
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidInputException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -322,11 +321,11 @@ public class ModHappyParserTest {
 
     @Test
     public void parse_addCommand_task_invalidInput() {
-        final String testString = "add task 000 -d \"123\" -t \"456\" invalid";
+        final String testString = "add task \"000\" -d \"123\" -t \"456\" invalid";
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidInputException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -356,7 +355,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -369,7 +368,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -399,7 +398,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -412,7 +411,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidInputException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -425,7 +424,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -438,7 +437,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -451,7 +450,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -464,7 +463,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -489,7 +488,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (GeneralParseException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -527,7 +526,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidInputException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -540,7 +539,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -553,7 +552,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -566,7 +565,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -579,7 +578,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -592,7 +591,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -605,7 +604,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidInputException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -618,7 +617,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -645,7 +644,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -658,7 +657,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -671,7 +670,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -684,7 +683,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidInputException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -705,12 +704,25 @@ public class ModHappyParserTest {
     }
 
     @Test
-    public void parse_gradeCommand_invalidGrade() {
+    public void parse_gradeCommand_invalidGrade1() {
         final String testString = "grade CS2113T F-";
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidInputException e) {
+            return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_gradeCommand_invalidGrade2() {
+        final String testString = "grade CS2113T G";
+        try {
+            parser.parseCommand(testString);
+            fail();
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -723,7 +735,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -762,7 +774,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -775,7 +787,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -788,7 +800,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -801,7 +813,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidCompulsoryParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -814,7 +826,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (InvalidInputException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -861,7 +873,7 @@ public class ModHappyParserTest {
         try {
             parser.parseCommand(testString);
             fail();
-        } catch (ParseException e) {
+        } catch (AdditionalParameterException e) {
             return;
         } catch (Exception e) {
             fail();
@@ -886,7 +898,7 @@ public class ModHappyParserTest {
     public void parse_tagCommand_invalidTagOperation_throwsParseException() {
         final String testString = "tag invalidOp 1 \"tag\"";
         AtomicReference<Command> c = null;
-        assertThrows(ParseException.class, () -> {
+        assertThrows(InvalidCompulsoryParameterException.class, () -> {
             c.set(parser.parseCommand(testString));
         });
     }
