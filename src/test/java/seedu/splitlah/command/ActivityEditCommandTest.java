@@ -69,7 +69,7 @@ class ActivityEditCommandTest {
     }
 
     /**
-     * Checks if an activity's payer remains unchanged when trying to change the payer to a nonexistent participant
+     * Checks if an activity's payer remains unchanged when trying to change the payer to a nonexistent participant.
      *
      * @throws InvalidDataException if the Activity object cannot be retrieved from the Session object.
      */
@@ -258,6 +258,8 @@ class ActivityEditCommandTest {
         assertEquals("editedLunch", editedActivity.getActivityName());
         assertEquals("Bob", editedActivity.getPersonPaid().getName());
         assertEquals(2, editedActivity.getInvolvedPersonList().size());
+        assertEquals("Alice", editedActivity.getInvolvedPersonList().get(0).getName());
+        assertEquals("Bob", editedActivity.getInvolvedPersonList().get(1).getName());
         double newCost = editedActivity.getTotalCost();
         assertTrue(newCost - (20 * 1.07 * 1.1) < 0.001);
     }
