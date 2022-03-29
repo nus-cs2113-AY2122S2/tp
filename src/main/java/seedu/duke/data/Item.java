@@ -23,6 +23,18 @@ public class Item {
         return quantity;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     /**
      * Returns a boolean indicating if an Item contains the search term in the item name.
      *
