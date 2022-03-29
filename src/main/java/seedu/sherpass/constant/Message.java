@@ -13,7 +13,8 @@ public class Message {
             + "3) 1.5 hours\n\n"
             + "For testing purposes, you may start a 30s timer\nwith mode number 0.\n"
             + "Feel free to choose your own timer with\n'start /custom <timer_duration>'.\n"
-            + "Otherwise, you can start a stopwatch with 'start stopwatch'.";
+            + "Otherwise, you can start a stopwatch with 'start stopwatch'.\n"
+            + "You can also use the \"show today\" command to\nsee what tasks you have planned to complete.";
     public static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon! :)";
     public static final String GOODBYE_MESSAGE_STUDY = "Leaving study session...\n"
             + "Welcome back to the main session! How can I help you?";
@@ -73,8 +74,7 @@ public class Message {
             + "Please refer to the troubleshooting section in the user guide "
             + "or contact the developers for help.";
     public static final String ERROR_INVALID_MARKING_INDEX_MESSAGE = "Bzzt!\nPlease"
-            + " key in a valid task number to mark/unmark your task."
-            + HELP_MESSAGE_SPECIFIC_COMMAND;
+            + " key in a valid task number to mark/unmark your task.";
     public static final String ERROR_INVALID_TIMER_INPUT_MESSAGE = "Oops! Your timer input "
             + "does not seem to be correct.\n\n"
             + "Please select one of the three default modes with\n"

@@ -9,11 +9,11 @@ import seedu.sherpass.util.parser.TimerParser;
 
 import seedu.sherpass.task.TaskList;
 
-
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
 import seedu.sherpass.util.parser.TimetableParser;
+import seedu.sherpass.util.timetable.Timetable;
 
 import static seedu.sherpass.constant.Index.STUDY_PARAMETER_INDEX;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_TIMER_INPUT_MESSAGE;
@@ -33,7 +33,7 @@ public class TimerLogic implements WindowListener {
     private static Ui ui;
     private static Timer timer;
     private static TaskList taskList;
-    protected boolean isTimerInitialised = false;
+    protected volatile boolean isTimerInitialised = false;
     private final JFrame jframe;
     private final JLabel jlabel;
     private final ActionListener actionListenerPause = actionEvent -> {
@@ -187,7 +187,7 @@ public class TimerLogic implements WindowListener {
         if (isTimerInitialised) {
             timer.stopTimer();
             isTimerInitialised = updateIsTimerRunning();
-            taskList.printAllTasks(ui);
+            Timetable.showTodaySchedule(taskList, ui);
             ui.showToUser("Would you like to start another timer, mark a task as done, "
                     + "or leave the study session?");
             return;
