@@ -346,26 +346,28 @@ Example of usage:
 ## _Transaction Management_
 ### Settling all transactions for a session: `session /summary`
 
-> Displays a summary of a session that details how much each person must pay and to whom for all debts to be resolved.<br>
+Displays a transaction summary for a session and helps you calculate how much each person in the session
+must pay and to whom they should pay for all debts to be resolved.<br>
 
-Format: `session /summary /sid [SESSION_ID]`
+> Format: `session /summary /sid [SESSION_ID]`
+> * `[SESSION_ID]` refers to the unique identifier of the session.
+>    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 
-* `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+<br>
 
 > **💡 Note:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
 
-Example of usage:
-1. A [session](#creating-a-session-session-create) was previously created with session named Class Outing with Alice 
-   and Bob involved on 15-03-2022.
-2. An [activity](#creating-an-activity-activity-create) was created with activity named Class Lunch, where Alice paid for both
-   Bob and herself with a total cost of $10.
-3. Get a session summary for an active session with a session unique identifier of 2.
-   - `session /summary /sid 1` <br>
-   ![Session summary command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionSummaryCommand.png)
-<br>
-<br>
+**Example**
+* A [session](#creating-a-session-session-create) was previously created with session named Class Outing with Alice 
+  and Bob involved on 15-03-2022.<br> 
+  An [activity](#creating-an-activity-activity-create) was created with activity named Class Lunch, where Alice paid for both
+  Bob and herself with a total cost of $10.<br>
+  Get a session summary for the session above which has a session unique identifier of 1.<br>
+  `session /summary /sid 1`<br>
+  ![Session summary command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionSummaryCommand.png)
+  <br>
+  <br>
 
 
 <hr>
