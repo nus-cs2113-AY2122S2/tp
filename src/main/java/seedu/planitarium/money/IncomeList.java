@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 public class IncomeList extends MoneyList {
-    
+
     private ArrayList<Income> incomeArrayList;
     private int numberOfIncomes;
 
