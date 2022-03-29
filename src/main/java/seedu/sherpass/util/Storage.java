@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import seedu.sherpass.exception.InvalidInputException;
 import seedu.sherpass.task.Task;
 import seedu.sherpass.task.TaskList;
+import seedu.sherpass.util.parser.StorageParser;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -70,6 +71,7 @@ public class Storage {
         JSONArray tasks = new JSONArray();
         for (Task t : taskList.getTasks()) {
             JSONObject taskToStore = new JSONObject();
+            taskToStore.put("index", t.getIndex());
             taskToStore.put("identifier", t.getIdentifier());
             taskToStore.put("status", t.getStatusIcon());
             taskToStore.put("by_date",
@@ -122,7 +124,7 @@ public class Storage {
 
             for (int i = 0; i < taskArray.length(); i++) {
                 JSONObject taskData = taskArray.getJSONObject(i);
-                taskList.add(Parser.parseSaveData(taskData));
+                taskList.add(StorageParser.parseSaveData(taskData));
             }
         }
         return taskList;
@@ -152,7 +154,7 @@ public class Storage {
             wipeSaveData();
         } else {
             ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_3);
-            System.exit(1);
+            System.exit(0);
         }
     }
 

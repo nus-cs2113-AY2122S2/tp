@@ -2,22 +2,55 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- Team member Jun Lim's individual project codebase - [Github](#https://github.com/jltha/ip)
 
 ##Architecture
 
+![image](https://user-images.githubusercontent.com/69501969/160375887-d6da7278-5259-4458-83c7-f53d89fef640.png)
+
+The above diagram provides a general overview of Sherpass and its major components. The four key areas are:
+
+- User Interface (UI)
+- Storage
+- Timetable
+- Study session
+
+### UI
+
+UI component consists the `Ui` class which manages interaction (receiving inputs and showing outputs) between the user 
+and the application.
+
+### Storage
+
+Storage component consists `Storage` and `StorageParser` classes.
+`Storage` class handles loading, writing and saving
+data to and from a JSON file, such that users' data will be saved automatically.
+`StorageParser` class handles the
+parsing of JSON from the saved data file.
+
+### Timetable
+
+For components with more complicated use-cases (`Task` and `Timer`), we separate an extra Logic class to achieve better
+modularity, such that each class addresses a separate concern.
+
+Timetable component consists of `Timetable`, `Task`, `TaskList`, `TaskParser`, `TaskLogic` and various commands.
+
+### Study session
+
+Timetable component consists of `Timer`, `Stopwatch`, `Countdown`, `TimerParser`, `TimerLogic` and various commands.
+
 ## Design & implementation
 
-### Study session implementation
+### Study Session Implementation
 
 The study session consists of 4 main components:
 
-- Parser class
+- TimerParser class
 - StudyCommand class
 - TimerLogic class
 - Timer class
 
-The `Parser` component
+The `TimerParser` component
 - Parses user inputs in the main session and the study session
 - Ensures the input adheres to the allowed command inputs, 
 i.e. program will ask the user to key in a new input if it does not recognise the inputs given.
@@ -38,7 +71,7 @@ The `Timer` component
 - Prints to standard output the time remaining in regular intervals
 - Thread is automatically interrupted when time runs out
 
-#### `Timer` implementation
+#### Timer implementation
 
 Sherpass’ implementation of the timer function in the study session is through the `Timer` class, which inherits 
 from Java’s `Thread` class. When the timer is started by the user, the `Timer` class starts a thread which keeps 

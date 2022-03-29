@@ -3,7 +3,7 @@ package seedu.sherpass.command;
 import seedu.sherpass.task.TaskList;
 
 import seedu.sherpass.util.Storage;
-import seedu.sherpass.util.TimerLogic;
+import seedu.sherpass.timer.TimerLogic;
 import seedu.sherpass.util.Ui;
 
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.io.IOException;
 import static seedu.sherpass.constant.Message.GOODBYE_MESSAGE_STUDY;
 import static seedu.sherpass.constant.Message.HELP_MESSAGE_STUDY;
 import static seedu.sherpass.constant.Message.WELCOME_MESSAGE_STUDY;
-import static seedu.sherpass.util.Parser.parseStudyMode;
+import static seedu.sherpass.util.parser.TimerParser.parseStudyMode;
 
 public class StudyCommand extends Command {
     public static final String COMMAND_WORD = "study";
@@ -40,10 +40,12 @@ public class StudyCommand extends Command {
         }
     }
 
+
     public void leaveStudyMode(Ui ui, TimerLogic timerLogic) {
         if (timerLogic.getIsTimerRunning()) {
             timerLogic.callStopTimer();
         }
+        timerLogic.destroyFrame();
         ui.showLine();
         ui.showToUser(GOODBYE_MESSAGE_STUDY);
     }
