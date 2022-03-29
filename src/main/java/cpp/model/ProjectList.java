@@ -35,6 +35,7 @@ public class ProjectList {
         System.out.println(Constants.SEPARATOR);
     }
 
+    /*
     public void addProject(Project project) {
         System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(project.getTitle());
@@ -46,6 +47,7 @@ public class ProjectList {
         }
         System.out.println(Constants.SEPARATOR);
     }
+     */
 
     /**
      * Deletes a Project from projectList.
@@ -185,9 +187,19 @@ public class ProjectList {
      *
      * @return total number of projects in the list
      */
-
     public int getProjectNo() {
         return projectList.size();
+    }
+
+    /**
+     * Gets certain project based on given index.
+     *
+     * @param index index of a given project
+     * @return target project with given index
+     */
+    public Project getProject(int index) {
+        assert (index >= 0 && index < projectList.size()) : "Index out of range!";
+        return projectList.get(index);
     }
 
     private int findProjectIndex(String name) {

@@ -39,5 +39,21 @@ public class Todo {
         this.isDone = false;
     }
 
+    /**
+     * Gets the description of a todo.
+     *
+     * @return description
+     */
+    public String getDescription() {
+        return description;
+    }
 
+    /**
+     * Gets the done status of a todo.
+     *
+     * @return todo status isDone as String
+     */
+    public String getDone() {
+        return isDone ? "true" : "false";
+    }
 }
