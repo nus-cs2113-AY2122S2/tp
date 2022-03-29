@@ -438,7 +438,7 @@ To remove plan number 3 from the list, enter the following command:
 ----------------------------------------------------------------------
 Alright, the following plan has been removed:
 
-Grow My Muscles
+	Grow My Muscles
 
 ----------------------------------------------------------------------
 ```
