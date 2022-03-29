@@ -219,10 +219,9 @@ Format:`list /cc` lists the credit cards in the list. <br>
 Modify a credit card on your list, by specifying the credit card's index. <br>
 Use the `list /cc` command to view the current indices of your credit cards.   
 
-
-Format:`update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]`  
-For example: `update 1 drinks 2`  <br>
-![update screenshot](./images/update.PNG)
+Format:`update /cc [INDEX] /n [NEW_NAME] /cb [NEW_CASHBACK] /cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]`  
+For example: `update /cc 1 /n OCBC /cb 1.5 /cl 500 /bal 1000`  <br>
+![update screenshot](./images/update_cc.PNG)
 
 ### Removing a credit card on your list: `delete`
 Delete a credit card from your list, by specifying the credit card's index.  
