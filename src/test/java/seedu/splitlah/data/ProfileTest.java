@@ -276,6 +276,9 @@ class ProfileTest {
         }
     }
 
+    /**
+     * Checks if a String with the correct error message is properly returned when list of group is empty.
+     */
     @Test
     public void getGroupListSummaryString_groupListEmpty_emptyGroupMessageReturned() {
         String retrievedGroupListSummary = manager.getProfile().getGroupListSummaryString();
@@ -283,6 +286,9 @@ class ProfileTest {
         assertEquals(expectedMessage, retrievedGroupListSummary);
     }
 
+    /**
+     * Checks if a String with the correct message is properly returned when list of group is not empty.
+     */
     @Test
     public void getGroupListSummaryString_groupListNotEmpty_correctFormatReturned() {
         String groupArgs = "group /create /n Project members /pl Alice Bob Charlie";
