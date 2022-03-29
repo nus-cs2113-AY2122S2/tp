@@ -1,6 +1,6 @@
 package seedu.command;
 
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
     public static final String COMMAND_WORD = "bye";
     public static final String COMMAND_DESCRIPTION = ": Exits the application. "
             + System.lineSeparator()
