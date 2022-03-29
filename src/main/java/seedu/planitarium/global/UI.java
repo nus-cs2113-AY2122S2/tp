@@ -1,10 +1,12 @@
 package seedu.planitarium.global;
 
+import java.util.Collections;
+
 /**
  * Prints messages with horizontal lines.
  */
 public class UI {
-    public static final String HORI_LINE = "------------------------------------------------------";
+    public static final String HORI_LINE = String.join("", Collections.nCopies(79, "-"));
     protected static final String WELCOME_MSG = "Welcome to PlanITarium, your personal expenditure manager.";
     protected static final String EXIT_MSG = "Goodbye. Hope to see you again.";
     protected static final String LOGO =
