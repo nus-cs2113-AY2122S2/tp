@@ -2,6 +2,7 @@ package seedu.splitlah.data;
 
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TableFormatter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,12 +14,14 @@ import java.util.ArrayList;
  * @author Roy
  */
 public class Profile implements Serializable {
-    
+
     private ArrayList<Session> sessionList;
     private ArrayList<Group> groupList;
     private int sessionIdTracker;
     private int activityIdTracker;
     private int groupIdTracker;
+
+    private static final String[] GROUP_LIST_COLS = { "#", "Name", "Number of persons" };
 
     /**
      * Initializes a Profile object.
@@ -208,6 +211,23 @@ public class Profile implements Serializable {
      */
     public ArrayList<Group> getGroupList() {
         return groupList;
+    }
+
+    public String getGroupListSummaryString() {
+        if (groupList.isEmpty()) {
+            return Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST;
+        }
+
+        TableFormatter summaryTable = new TableFormatter(
+                GROUP_LIST_COLS[0], GROUP_LIST_COLS[1], GROUP_LIST_COLS[2]
+        );
+        for (Group group : groupList) {
+            String id = Integer.toString(group.getGroupId());
+            String name = group.getGroupName();
+            String count = Integer.toString(group.getPersonCount());
+            summaryTable.addRow(id, name, count);
+        }
+        return summaryTable.toString();
     }
 
     /**
