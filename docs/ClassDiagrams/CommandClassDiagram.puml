@@ -53,9 +53,8 @@ end note
 
 note left of DeleteCommand
 Note:
-getUserConfirmation() is intentionally
-omitted as the dependency of DeleteCommand
-on TextUi is a unique case in Commands.
+Dependency on TextUi is
+unique to DeleteCommand.
 end note
 
 @enduml
