@@ -6,9 +6,11 @@ public class Project {
     private String title;
     private ArrayList<Todo> todos;
     private String deadline;
+    private ArrayList<String> languages;
 
     public Project() {
         todos = new ArrayList<Todo>();
+        languages = new ArrayList<>();
     }
 
     /**
@@ -84,6 +86,10 @@ public class Project {
         return this.todos;
     }
 
+    public ArrayList<String> getLanguages() {
+        return this.languages;
+    }
+
     /**
      * Displays all details of the project.
      */
@@ -93,6 +99,18 @@ public class Project {
         int count = 1;
         for (Todo todo: getTodos()) {
             System.out.print("\t" + "[" + count + "]. " + todo.toString() + "\n");
+            count++;
+        }
+    }
+
+    /**
+     * Displays all programming languages of the project.
+     */
+    public void printLanguages() {
+        System.out.print("Project Name: " + getTitle() + "\n");
+        int count = 1;
+        for (String language: getLanguages()) {
+            System.out.print("\t" + "[" + count + "]. " + language + "\n");
             count++;
         }
     }

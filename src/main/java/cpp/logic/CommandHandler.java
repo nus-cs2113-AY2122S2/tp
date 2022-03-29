@@ -58,6 +58,9 @@ public class CommandHandler {
         case "view":
             view(projectList, commands);
             break;
+        case "listlanguages":
+            listLanguages(projectList, commands);
+            break;
         case "help":
             Response.printHelp();
             break;
@@ -102,6 +105,14 @@ public class CommandHandler {
             throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
         }
         projectList.view(commands[1]);
+    }
+
+    private void listLanguages(ProjectList projectList, String[] commands) throws IllegalCommandException {
+        assert (projectList != null && commands != null) : "Cannot list languages for this project.";
+        if (commands.length < Constants.TWO_ARGUMENTS) {
+            throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
+        }
+        projectList.listLanguages(commands[1]);
     }
 
     private String parseTodoString(String[] strings) {
