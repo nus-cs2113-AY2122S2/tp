@@ -45,6 +45,8 @@ public class ContactsManager {
     private static final String CONTACTS_UPDATED_LIST_SIZE_MESSAGE =
             "\nNow you have %d contacts in the list.";
 
+    public static final String CONTACTS_FIND_EMPTY_KEYWORD_MESSAGE =
+            "You need to specify the keyword you want to find!";
     public static final String CONTACTS_FIND_MULTIPLE_KEYWORDS_MESSAGE =
             "Please only enter one keyword!";
     public static final String CONTACTS_FIND_NO_MATCHES_MESSAGE =
@@ -129,6 +131,10 @@ public class ContactsManager {
      */
     private static void findContacts(String userInput) {
         String[] commands = userInput.split(" ");
+        if (commands.length == 1) {
+            printFormat(CONTACTS_FIND_EMPTY_KEYWORD_MESSAGE);
+            return;
+        }
         if (commands.length > 2) {
             printFormat(CONTACTS_FIND_MULTIPLE_KEYWORDS_MESSAGE);
             return;
