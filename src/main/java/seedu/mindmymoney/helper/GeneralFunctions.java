@@ -1,7 +1,7 @@
 package seedu.mindmymoney.helper;
 
 import seedu.mindmymoney.MindMyMoneyException;
-import seedu.mindmymoney.constants.CategoryTypes;
+import seedu.mindmymoney.constants.ExpenditureCategoryTypes;
 import seedu.mindmymoney.constants.ExpenditureFields;
 import seedu.mindmymoney.constants.Indexes;
 import seedu.mindmymoney.data.ExpenditureList;
@@ -10,8 +10,8 @@ import seedu.mindmymoney.userfinancial.Expenditure;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM_IN_STRING;
-import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM_IN_STRING;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
 
 /**
  * Container for general functions used throughout the program.
@@ -30,21 +30,47 @@ public class GeneralFunctions {
     }
 
     /**
-     * Separates the user input into the command and description for easy reference.
+     * Checks if user's input contains the correct flag formats.
      *
-     * @return String array of user input.
+     * @param input user's input.
+     * @param startingFlag the flag before the interested parameter.
+     * @param endingFlag the flag after the interested parameter.
+     * @return true if the input contains the correct flag formats, false otherwise.
+     */
+    public static boolean hasCorrectFlagFormat(String input, String startingFlag, String endingFlag) {
+        if (input.contains(startingFlag + " ") && input.contains(" " + endingFlag)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Extracts out the interested parameter from the user's input based on the given flags.
+     * For example, if user's input was: "add /i /a 3000 /c salary", this method extracts out "3000" or "salary"
+     * based on the flags given.
+     *
+     * @param input user's input.
+     * @param startingFlag the flag before the interested parameter.
+     * @param endingFlag the flag after the interested parameter.
+     * @return the interested parameter.
+     * @throws MindMyMoneyException when an invalid command is received, along with the corresponding error message.
      */
     public static String parseInputWithCommandFlag(String input, String startingFlag, String endingFlag)
         throws MindMyMoneyException {
-        if (!(input.contains(startingFlag + " ") && input.contains(" " + endingFlag))) {
-            throw new MindMyMoneyException("You are missing a flag or lack the spacing between the flags!\n"
-                    + "For eg. \"add /e cash /c Food /d Porridge /a 4.50 /t 2022-03\"");
-        }
-        startingFlag = startingFlag + " ";
-        input = input.substring(input.indexOf(startingFlag) + startingFlag.length());
-        if (!endingFlag.equals("")) {
-            endingFlag = " " + endingFlag;
-            input = input.substring(0, input.indexOf(endingFlag));
+        try {
+            if (!hasCorrectFlagFormat(input, startingFlag, endingFlag)) {
+                throw new MindMyMoneyException("You are missing a flag or lack the spacing between the flags!\n"
+                        + "For eg. \"add /e cash /c Food /d Porridge /a 4.50 /t 2022-03\"");
+            }
+
+            startingFlag = startingFlag + " ";
+            input = input.substring(input.indexOf(startingFlag) + startingFlag.length());
+            if (!endingFlag.equals("")) {
+                endingFlag = " " + endingFlag;
+                input = input.substring(0, input.indexOf(endingFlag));
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new MindMyMoneyException("You are missing the corresponding [PARAMETERS]");
         }
         return input;
     }
@@ -137,7 +163,7 @@ public class GeneralFunctions {
      * @param foundCategoryTypeList List to store items found.
      * @return The list that stores the expense items found.
      */
-    public static ArrayList<Expenditure> findMatchingCategoryInArraylist(CategoryTypes categoryType,
+    public static ArrayList<Expenditure> findMatchingCategoryInArraylist(ExpenditureCategoryTypes categoryType,
                                                                   ArrayList<Expenditure> foundItems,
                                                                   ArrayList<Expenditure> foundCategoryTypeList) {
         for (Expenditure item : foundItems) {
@@ -210,8 +236,8 @@ public class GeneralFunctions {
      */
     public static String capitalise(String str) {
         str = str.toLowerCase();
-        return str.substring(INDEX_OF_FIRST_ITEM_IN_STRING, INDEX_OF_SECOND_ITEM_IN_STRING).toUpperCase()
-            + str.substring(INDEX_OF_SECOND_ITEM_IN_STRING);
+        return str.substring(INDEX_OF_FIRST_ITEM, INDEX_OF_SECOND_ITEM).toUpperCase()
+            + str.substring(INDEX_OF_SECOND_ITEM);
     }
 
     /**

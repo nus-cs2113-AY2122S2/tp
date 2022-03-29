@@ -1,19 +1,19 @@
 package seedu.mindmymoney.helper;
 
 import seedu.mindmymoney.MindMyMoneyException;
-import seedu.mindmymoney.constants.CategoryTypes;
+import seedu.mindmymoney.constants.ExpenditureCategoryTypes;
 import seedu.mindmymoney.constants.PrintStrings;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.userfinancial.Expenditure;
 
 import java.util.ArrayList;
 
-import static seedu.mindmymoney.constants.CategoryTypes.FOOD;
-import static seedu.mindmymoney.constants.CategoryTypes.UTILITIES;
-import static seedu.mindmymoney.constants.CategoryTypes.TRANSPORT;
-import static seedu.mindmymoney.constants.CategoryTypes.PERSONAL;
-import static seedu.mindmymoney.constants.CategoryTypes.ENTERTAINMENT;
-import static seedu.mindmymoney.constants.CategoryTypes.OTHERS;
+import static seedu.mindmymoney.constants.ExpenditureCategoryTypes.FOOD;
+import static seedu.mindmymoney.constants.ExpenditureCategoryTypes.UTILITIES;
+import static seedu.mindmymoney.constants.ExpenditureCategoryTypes.TRANSPORT;
+import static seedu.mindmymoney.constants.ExpenditureCategoryTypes.PERSONAL;
+import static seedu.mindmymoney.constants.ExpenditureCategoryTypes.ENTERTAINMENT;
+import static seedu.mindmymoney.constants.ExpenditureCategoryTypes.OTHERS;
 import static seedu.mindmymoney.constants.ExpenditureFields.TIME;
 import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
 import static seedu.mindmymoney.helper.GeneralFunctions.findItemsInList;
@@ -96,8 +96,8 @@ public class Calculations {
      * @param sumOfExpenditure Total sum of expenses in the month.
      * @return Percentage of expenses for that particular category type.
      */
-    public static float calculatePercentage(CategoryTypes categoryType, ArrayList<Expenditure> foundItems,
-                                             float sumOfExpenditure) {
+    public static float calculatePercentage(ExpenditureCategoryTypes categoryType, ArrayList<Expenditure> foundItems,
+                                            float sumOfExpenditure) {
         ArrayList<Expenditure> foundCategoryTypeItems = new ArrayList<>();
         foundCategoryTypeItems = findMatchingCategoryInArraylist(categoryType, foundItems, foundCategoryTypeItems);
         float sumOfCategoryType = 0;

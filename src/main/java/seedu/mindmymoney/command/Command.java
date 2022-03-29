@@ -13,5 +13,10 @@ public abstract class Command {
      */
     public abstract void executeCommand() throws MindMyMoneyException;
 
+    /**
+     * Indicates whether the program should exit.
+     *
+     * @return true if the program should exit, false otherwise.
+     */
     public abstract boolean isExit();
 }

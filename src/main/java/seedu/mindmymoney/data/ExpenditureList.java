@@ -37,36 +37,38 @@ public class ExpenditureList {
     }
 
     /**
-     * Represents the expenditure item.
+     * Retrieves the Expenditure entry at the given index.
      *
-     * @param index Index of the expenditure item.
-     * @return The expenditure item.
+     * @param index Index of the Expenditure entry.
+     * @return The Expenditure object.
      */
     public Expenditure get(int index) {
         return expenditureListArray.get(index);
     }
 
     /**
-     * Deletes the expenditure item from the list.
+     * Deletes the Expenditure entry from the list.
      *
-     * @param index Index of the item to delete.
+     * @param index Index of the Expenditure entry to delete.
      */
     public void delete(int index) {
         expenditureListArray.remove(index);
     }
 
     /**
-     * Adds an expenditure item to the list.
-     * @param item The expenditure item to be added.
+     * Adds an Expenditure entry to the list.
+     *
+     * @param item The Expenditure entry to be added.
      */
     public void add(Expenditure item) {
         expenditureListArray.add(item);
     }
 
     /**
-     * Updates the item at a particular index.
-     * @param index Index of the item to be updated.
-     * @param item  The expenditure item to be updated.
+     * Updates the Expenditure entry at the given index.
+     *
+     * @param index Index of the entry to be updated.
+     * @param item The new Expenditure entry.
      */
     public void set(int index, Expenditure item) {
         expenditureListArray.set(index,item);

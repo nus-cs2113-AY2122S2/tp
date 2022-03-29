@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import seedu.mindmymoney.MindMyMoneyException;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
+import seedu.mindmymoney.data.IncomeList;
+import seedu.mindmymoney.userfinancial.User;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -17,16 +19,17 @@ class ListCommandTest {
     void listToString_normalInputs_expectString() throws MindMyMoneyException {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+
         String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
-        new AddCommand(inputString, expenditureTestList, creditCardTestList).executeCommand();
-        String listInString = new ListCommand("/expenses", expenditureTestList,
-            creditCardTestList).expenditureListToString();
+        new AddCommand(inputString, user).executeCommand();
+        String listInString = new ListCommand("/expenses", user).expenditureListToString();
         assertEquals("1. $300.0 on Nike Shoes from Personal [Mar 2022]\n", listInString);
 
         String inputString2 = "/e cash /c Food /d Cream Pie /a 69 /t 2022-03";
-        new AddCommand(inputString2, expenditureTestList, creditCardTestList).executeCommand();
-        listInString = new ListCommand("/expenses", expenditureTestList,
-            creditCardTestList).expenditureListToString();
+        new AddCommand(inputString2, user).executeCommand();
+        listInString = new ListCommand("/expenses", user).expenditureListToString();
         assertEquals("1. $300.0 on Nike Shoes from Personal [Mar 2022]\n"
                 + "2. $69.0 on Cream Pie from Food [Mar 2022]\n", listInString);
     }
@@ -38,7 +41,10 @@ class ListCommandTest {
     void listCommand_emptyList_expectException() {
         ExpenditureList expenditureTestList = new ExpenditureList();
         CreditCardList creditCardTestList = new CreditCardList();
-        ListCommand listCommandTest = new ListCommand("/expenses", expenditureTestList, creditCardTestList);
+        IncomeList incomeList = new IncomeList();
+        User user = new User(expenditureTestList, creditCardTestList, incomeList);
+        ListCommand listCommandTest = new ListCommand("/expenses", user);
+
         assertThrows(MindMyMoneyException.class, () -> listCommandTest.executeCommand());
     }
 }
