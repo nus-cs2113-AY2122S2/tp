@@ -78,7 +78,8 @@ public class Ui {
                 itemName = itemName.toUpperCase();
                 itemPax = currentItem.getPax();
                 assert (itemPax >= 0) : "Assertion Failed! Pax of an item within the listOfItems is less than 0 !";
-                assert (!itemName.isEmpty()) : "Assertion Failed! The name of the item within the listOfItems is empty !";
+                assert (!itemName.isEmpty()) : "Assertion Failed! The name of the item within the listOfItems is empty "
+                        + "!";
                 currentListIndex = i + ARRAY_INDEX_OFFSET;
                 System.out.printf("%d. Item Name: %s Item Pax: %d\n", currentListIndex, itemName, itemPax);
             }
