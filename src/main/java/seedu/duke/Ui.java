@@ -69,21 +69,26 @@ public class Ui {
         Item currentItem;
         int currentListIndex;
         System.out.println(ITEM_LIST_HEADER);
-        for (int i = 0; i < listOfItems.getSize(); i++) {
-            currentItem = listOfItems.getItem(i);
-            itemName = currentItem.getName();
-            itemName = itemName.toUpperCase();
-            itemPax = currentItem.getPax();
-            assert (itemPax >= 0) : "Assertion Failed! Pax of an item within the listOfItems is less than 0 !";
-            assert (!itemName.isEmpty()) : "Assertion Failed! The name of the item within the listOfItems is empty !";
-            currentListIndex = i + ARRAY_INDEX_OFFSET;
-            System.out.printf("%d. Item Name: %s Item Pax: %d\n", currentListIndex, itemName, itemPax);
+        if (listOfItems.getSize() == 0) {
+            System.out.println("No item found within the item list.");
+        } else {
+            for (int i = 0; i < listOfItems.getSize(); i++) {
+                currentItem = listOfItems.getItem(i);
+                itemName = currentItem.getName();
+                itemName = itemName.toUpperCase();
+                itemPax = currentItem.getPax();
+                assert (itemPax >= 0) : "Assertion Failed! Pax of an item within the listOfItems is less than 0 !";
+                assert (!itemName.isEmpty()) : "Assertion Failed! The name of the item within the listOfItems is empty "
+                        + "!";
+                currentListIndex = i + ARRAY_INDEX_OFFSET;
+                System.out.printf("%d. Item Name: %s Item Pax: %d\n", currentListIndex, itemName, itemPax);
+            }
         }
         System.out.println(END_OF_LIST_LINE);
     }
 
     public void printNoItemsFoundInListAcknowledgementMessage() {
-        System.out.println("No Item matching the keyword has been found.");
+        System.out.println("No Item matching the criteria has been found.");
     }
 
     public void printHousekeeperList(HousekeeperList housekeeperList) {
