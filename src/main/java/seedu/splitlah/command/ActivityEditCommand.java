@@ -1,18 +1,18 @@
 package seedu.splitlah.command;
 
-import seedu.splitlah.data.PersonList;
-import seedu.splitlah.data.Profile;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.logging.Level;
+
 import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
+import seedu.splitlah.data.PersonList;
+import seedu.splitlah.data.Profile;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.logging.Level;
 
 /**
  * Represents a command object that edits an Activity object.
