@@ -1,4 +1,4 @@
-package seedu.duke.command.itemcommand;
+package seedu.duke.command.itemcommands;
 
 import seedu.duke.command.Command;
 import seedu.duke.ListContainer;
