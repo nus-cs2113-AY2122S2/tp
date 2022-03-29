@@ -114,12 +114,14 @@ public class MedicineList extends List {
         throw new NotFoundException("There are no medicines with given Batch ID!");
     }
 
-    public void viewExpired() {
+    public void viewExpired() throws HalpmiException {
         CommandLineTable medicineTable = new CommandLineTable();
         //st.setRightAlign(true);//if true then cell text is right aligned
         medicineTable.setShowVerticalLines(true);
         medicineTable.setHeaders("MedicineId", "MedicineName", "Dosage", "Expiry", "SideEffects", "Quantity");
-
+        if (expiredMedicines.size() == 0) {
+            throw new HalpmiException("There are no expired medicines.");
+        }
         for (Medicine medicine : expiredMedicines) {
             medicineTable.addRow(medicine.getMedicineId(), medicine.getMedicineName(),
                     String.valueOf(medicine.getDosage()),
@@ -129,7 +131,7 @@ public class MedicineList extends List {
         medicineTable.print();
     }
 
-    public void updateStock() {
+    public void updateStock() throws HalpmiException {
         for (int i = 0; i < medicines.size(); i++) {
             LocalDate date = LocalDate.parse(medicines.get(i).getExpiry());
             LocalDate today = LocalDate.now();
