@@ -205,23 +205,21 @@ Examples of usage:
 
 
 ### Viewing a session : `session /view`
-> Display details about an activity.<br>
+Displays details about a session.<br>
 
-Format: `activity /view /sid [SESSION_ID] /aid [ACTIVITY_ID]`
-
-
-* `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
-* `[ACTIVITY_ID]` refers to the unique identifier of the activity.
-    * The unique identifier for an activity can be retrieved with [`activity /list`](#listing-all-activities-in-a-session-activity-list) command.
+>Format: `session /view /sid [SESSION_ID]`
+>
+>
+>* `[SESSION_ID]` refers to the unique identifier of the session.
+>    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 
 > **💡 Note:**
->- The session with a unique identifier of `[SESSION_ID]` and the activity with a unique identifier of `[ACTIVITY_ID]` have to exist before the activity can be viewed.
+>- The session with a unique identifier of `[SESSION_ID]` has to exist before the activity can be viewed.
 
 
 Example of usage:
-1. Views an activity with a unique identifier of 2 in a session with a session unique identifier of 2.
-    - `activity /view /sid 2 /aid 2` <br>
+1. Views a session with a unique identifier of 1.
+    - `session /view /sid 1` <br>
       ![Activity view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityViewCommand.png)
       <br>     
       <br>
