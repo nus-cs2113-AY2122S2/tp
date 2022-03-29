@@ -1,8 +1,13 @@
 package seedu.allonus.expense;
 
+
+
+import seedu.allonus.storage.StorageFile;
+
 import seedu.allonus.expense.exceptions.ExpenseAmountException;
 import seedu.allonus.expense.exceptions.ExpenseEmptyFieldException;
 import seedu.allonus.expense.exceptions.ExpenseMissingFieldException;
+
 import seedu.allonus.ui.TextUi;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -78,6 +83,9 @@ public class ExpenseTracker {
 
     private static Logger logger = Logger.getLogger("expenseLogger");
 
+    private static StorageFile storageFile = new StorageFile();
+    private static boolean isModified = false;
+
 
     /**
      * List out all current records in the expense list.
@@ -101,6 +109,24 @@ public class ExpenseTracker {
     }
 
     /**
+     * Returns current number of items in expense list.
+     *
+     * @return number of items in expense list.
+     */
+    public int getExpenseCount() {
+        return Expense.getNoOfItems();
+    }
+
+    /**
+     * Returns current expense list.
+     *
+     * @return expense list.
+     */
+    public ArrayList<Expense> getExpenseList() {
+        return expenseList;
+    }
+
+    /**
      * Deletes a record from the list of expenses.
      *
      * @param list  list of expenses itself
@@ -113,6 +139,7 @@ public class ExpenseTracker {
         list.remove(index - EXPENSE_INDEX);
         Expense.setNoOfItems(Expense.getNoOfItems() - 1);
         System.out.println("Deleted entry: " + toBeDeleted);
+        isModified = true;
     }
 
     /**
@@ -127,6 +154,7 @@ public class ExpenseTracker {
         list.add(e);
         System.out.println("Added " + e);
         Expense.setNoOfItems(Expense.getNoOfItems() + EXPENSE_INDEX);
+        isModified = true;
     }
 
     /**
@@ -156,6 +184,7 @@ public class ExpenseTracker {
                 }
             }
         }
+        isModified = true;
     }
 
 
@@ -292,6 +321,15 @@ public class ExpenseTracker {
     }
 
     /**
+     * Executes <code>executeAdd</code> method with saved expense entry from data file.
+     *
+     * @param savedExpense the saved expense entry
+     */
+    public static void loadAdd(String savedExpense) {
+        executeAdd(savedExpense);
+    }
+
+    /**
      * Begins executing the Find method invoked due to user's input.
      *
      * @param rawInput the user's input itself
@@ -345,6 +383,7 @@ public class ExpenseTracker {
         assert rawInput != null : ASSERT_INPUT_NOT_NULL;
         String keyWord = rawInput.split(" ", SPLIT_INTO_HALF)[KEYWORD_INDEX].trim().toLowerCase();
         while (!(keyWord.equals(MENU_STRING))) {
+            isModified = false;
             switch (keyWord) {
             case ("list"):
                 listExpenses();
@@ -369,6 +408,9 @@ public class ExpenseTracker {
             }
             rawInput = ui.getUserInput();
             keyWord = rawInput.split(" ", SPLIT_INTO_HALF)[KEYWORD_INDEX].trim();
+            if (isModified) {
+                storageFile.saveData();
+            }
         }
         logger.log(Level.INFO, LOG_RETURN_TO_MENU_INTENT);
         return;

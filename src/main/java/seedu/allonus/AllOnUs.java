@@ -4,6 +4,9 @@ package seedu.allonus;
 
 import seedu.allonus.contacts.ContactsManager;
 import seedu.allonus.expense.ExpenseTracker;
+
+import seedu.allonus.storage.StorageFile;
+
 import seedu.allonus.ui.TextUi;
 
 import static seedu.allonus.expense.ExpenseTracker.expenseRunner;
@@ -133,6 +136,12 @@ public class AllOnUs {
         ContactsManager contactsManager = new ContactsManager();
         StudyManager studyManager = new StudyManager();
         ExpenseTracker expenseTracker = new ExpenseTracker();
+
+
+        StorageFile.setFields(contactsManager, expenseTracker, studyManager);
+        StorageFile storageFile = new StorageFile();
+        storageFile.loadData();
+
         while (true) {
             System.out.println("Menu:");
             try {
@@ -201,6 +210,7 @@ public class AllOnUs {
      * Main entry-point for the seedu.allonus.AllOnUs application.
      */
     public static void main(String[] args) {
+
         logger.setLevel(Level.WARNING);
         greet();
 
