@@ -18,6 +18,7 @@ public class Duke {
         }
         boolean shouldExitProgram = false;
         Ui ui = new Ui();
+        ui.printGreeting();
         String userInput;
         while (!shouldExitProgram) {
             try {

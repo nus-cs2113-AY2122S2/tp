@@ -30,7 +30,7 @@ public class AssignHousekeeperTest {
         AddHousekeeperCommand addHousekeeperCommand = (AddHousekeeperCommand) command1;
 
 
-        Command command = parser.parse("Assign Susan ## 301");
+        Command command = parser.parse("Assign Susan / 301");
         AssignHousekeeperCommand assignHousekeeperCommand = (AssignHousekeeperCommand) command;
         assertEquals("301", assignHousekeeperCommand.getroomID());
         assertEquals("susan", assignHousekeeperCommand.getName());

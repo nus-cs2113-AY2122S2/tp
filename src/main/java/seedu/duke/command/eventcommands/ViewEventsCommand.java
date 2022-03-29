@@ -36,12 +36,7 @@ public class ViewEventsCommand extends Command {
     public void execute(ListContainer listContainer, Ui ui)
             throws InvalidRoomNumberException, InvalidHousekeeperProfile, IOException {
         final EventList eventList = listContainer.getEventList();
-        ui.printMessage("Here are the events you have added so far: \n");
-        int j = 0;
-        for (Event e: eventList.getEventList()) {
-            j = j + 1;
-            ui.printMessage("\t \t" + j + ". " + e.toString() + "\n");
-        }
+        ui.printAllEvents(eventList.getEventList());
         logger.log(Level.INFO, "log: all events displayed");
     }
 

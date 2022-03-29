@@ -75,7 +75,7 @@ public class DeleteEventCommand extends Command {
         eventList.delete(n);
         logger.log(Level.INFO, "about to update file.");
         eventList.save();
-        logger.log(Level.INFO, "end of deletomg event.");
+        logger.log(Level.INFO, "end of deleting event.");
     }
 
 }
