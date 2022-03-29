@@ -18,7 +18,7 @@ public abstract class CommandParser {
     protected abstract void extract_params();
     protected abstract void execute() throws WrongCommandException, NullException;
 
-    public void parse(String userInput) throws WrongCommandException  {
+    public void parse(String userInput) throws WrongCommandException, NullException {
         this.userInput = userInput;
         this.extract_params();
         this.execute();

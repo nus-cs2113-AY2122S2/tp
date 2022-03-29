@@ -12,9 +12,9 @@ class Order{
 
 class Warehouse{
     - List<Order> orders
-    - List<Item> inventory
-    - Float totalCapacity
-    - Float capacityLevel
+    - HashMap<String,Item> inventory
+    - Float totalCapacity //volume
+    - Float capacityLevel //volume
     + Warehouse()
     + getOrderById()
     + addItem()

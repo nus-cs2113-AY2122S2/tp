@@ -12,12 +12,19 @@ public class Good {
     private String name;
     private int quantity;
     private String description;
+    private UnitGood unitGood;
 
     public Good(int id, String name, int quantity, String description) {
         this.id = id;
-        this.name = name;
         this.quantity = quantity;
         this.description = description;
+        this.unitGood = new UnitGood(name,
+                description,
+                0.0F,
+                "piece",
+                -1.0F,
+                -1.0F,
+                false);
     }
 
     public int getId() {
@@ -33,11 +40,11 @@ public class Good {
     }
 
     public String getDescription() {
-        return description;
+        return unitGood.getDescription();
     }
 
     public String getName() {
-        return name;
+        return unitGood.getName();
     }
 
     public String toString() {
