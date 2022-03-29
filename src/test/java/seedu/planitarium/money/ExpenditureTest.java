@@ -7,12 +7,15 @@ import org.junit.jupiter.api.Test;
 import seedu.planitarium.category.Category;
 import seedu.planitarium.global.Constants;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class ExpenditureTest {
+
+    public static final double VALID_AMOUNT = 1000.00;
 
     private Expenditure testItem;
 
@@ -48,9 +51,16 @@ class ExpenditureTest {
     //@@author tjiarong
 
     @Test
-    public void getPermanent_validExpenditure_success() {
+    public void getStatus_validExpenditure_success() {
         boolean isPermanent = testItem.isPermanent();
         assertFalse(isPermanent);
+    }
+
+    @Test
+    public void setStatus_validStatus_success() {
+        testItem.setPermanent(true);
+        boolean actualStatus = testItem.isPermanent();
+        assertTrue(actualStatus);
     }
 
     @Test
@@ -66,6 +76,13 @@ class ExpenditureTest {
         String inputCat = Category.getLabelForIndex(Constants.LIMIT_TWO_TOKENS);
         String actualCat = testItem.getCategory();
         assertEquals(inputCat, actualCat);
+    }
+
+    @Test
+    public void setAmount_validAmount_success() {
+        testItem.setAmount(VALID_AMOUNT);
+        double actualAmount = testItem.getAmount();
+        assertEquals(VALID_AMOUNT, actualAmount);
     }
 
     @Test
