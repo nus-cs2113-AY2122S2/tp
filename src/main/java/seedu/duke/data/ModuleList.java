@@ -37,21 +37,20 @@ public class ModuleList {
         if (module == null) {
             throw new NoSuchModuleException();
         }
+        String userConfirmation = "";
         if (module.getTaskList().size() > 0) {
             Scanner scanner = new Scanner(System.in);
             String reply = String.format(DELETE_CONFIRMATION, module);
             System.out.println(reply);
-            String userConfirmation = scanner.nextLine().toLowerCase();
-            if (userConfirmation.equals("yes")) {
-                list.remove(module);
-                return module;
-            } else if (userConfirmation.equals("no")) {
-                return null;
-            }
-            throw new ParseException();
+            userConfirmation = scanner.nextLine().toLowerCase();
         }
-        list.remove(module);
-        return module;
+        if (userConfirmation.equals("yes")) {
+            list.remove(module);
+            return module;
+        } else if (userConfirmation.equals("no")) {
+            return null;
+        }
+        throw new ParseException();
     }
 
     /**
