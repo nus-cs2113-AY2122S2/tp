@@ -213,6 +213,8 @@ public abstract class Message {
     public static final String ERROR_ACTIVITY_INACCURATE_INVOLVED_LIST =
             "The list of involved persons list is inaccurate "
                     + "as at least one person did not participate in the activity.";
+    public static final String ASSERT_ACTIVITY_EMPTY_INVOLVED_PERSON_LIST =
+            "The list of persons in the activity is currently empty.";
 
     // Invalid Command
     public static final String ASSERT_INVALIDCOMMAND_MANAGER_DOES_NOT_EXIST =
@@ -336,6 +338,8 @@ public abstract class Message {
             "Session Id not initialized.";
     public static final String ASSERT_ACTIVITYDELETE_ACTIVITY_ID_NOT_INITIALIZED =
             "Activity Id not initialized.";
+    public static final String ASSERT_ACTIVITYDELETE_ACTIVITY_NOT_DELETED =
+            "The activity was not deleted.";
     public static final String LOGGER_ACTIVITYDELETE_ACTIVITY_REMOVED =
             "An Activity object was successfully deleted from the list of activities with Id: ";
 

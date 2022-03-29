@@ -48,6 +48,7 @@ public class ActivityDeleteCommand extends Command {
             Session session = manager.getProfile().getSession(sessionId);
             assert session != null : Message.ASSERT_ACTIVITYDELETE_SESSION_IS_NULL;
             session.removeActivity(activityId);
+            assert !session.hasActivity(activityId) : Message.ASSERT_ACTIVITYDELETE_ACTIVITY_NOT_DELETED;
             manager.saveProfile();
             manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYDELETE_ACTIVITY_REMOVED + activityId);
