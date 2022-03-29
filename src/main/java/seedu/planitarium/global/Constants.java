@@ -47,7 +47,7 @@ public class Constants {
 
     // For Command assertion
     public static final String NAME_NOT_NULL = "Name should not be null";
-    public static final String PERSONLIST_NOT_NULL = "Personlist should not be null";
+    public static final String GROUP_NOT_NULL = "Group should not be null";
     public static final String DESCRIPTION_NOT_NULL = "Description should not be empty";
     public static final String INPUT_NOT_NULL = "Input should not be empty";
     public static final String KEYWORD_NOT_NULL = "Keywords should not be empty";
