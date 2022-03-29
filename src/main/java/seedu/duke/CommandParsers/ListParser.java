@@ -22,7 +22,7 @@ public class ListParser extends CommandParser{
             this.warehouse.listOrders();
         } else if (matches.get("flag").equals("g")) {
             // list goods with flag "g/"
-            this.warehouse.listGoods();
+            this.warehouse.listGoods(); // refers to inventory goods
         } else {
             // wrong command exception
             throw new WrongCommandException("list", true);

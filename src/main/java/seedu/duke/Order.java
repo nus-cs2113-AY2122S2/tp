@@ -17,12 +17,11 @@ public class Order {
     private Boolean isFulfilled = false;
     private String comments;
 
-    public Order(int orderId, String receiver, String shippingAddress, String toFulfilBy, String fulfilledBy, String comments) {
+    public Order(int orderId, String receiver, String shippingAddress, String toFulfilBy,  String comments) {
         this.orderId = orderId;
         this.receiver = receiver;
         this.shippingAddress = shippingAddress;
         this.toFulfilBy = toFulfilBy;
-        this.fulfilledBy = fulfilledBy;
         this.comments = comments;
     }
 
@@ -186,18 +185,49 @@ public class Order {
         return null;
     }
 
-    private void addExistingGood(int gid, String name, int qty) throws ItemDoesNotExistException {
-        Orderline orderline = findGood(gid);
-        if (orderline != null) {
-            if (!orderline.getName().equals(name)) {
-                throw new ItemDoesNotExistException();
-            }
-            int oldQty = orderline.getQuantity();
-            orderline.setQuantity(oldQty + qty);
-            System.out.printf("%d more %s added, total quantity of %s is now %d\n",
-                    qty, orderline.getName(),
-                    orderline.getName(), orderline.getQuantity());
-        }
+//    private void addExistingGood(int gid, String name, int qty) throws ItemDoesNotExistException {
+//        Orderline orderline = findGood(gid);
+//        if (orderline != null) {
+//            if (!orderline.getName().equals(name)) {
+//                throw new ItemDoesNotExistException();
+//            }
+//            int oldQty = orderline.getQuantity();
+//            orderline.setQuantity(oldQty + qty);
+//            System.out.printf("%d more %s added, total quantity of %s is now %d\n",
+//                    qty, orderline.getName(),
+//                    orderline.getName(), orderline.getQuantity());
+//        }
+//    }
+
+
+    public String getToFulfilBy(){
+        return this.toFulfilBy;
+    }
+
+
+    public String getFulfilledBy(){
+        return this.fulfilledBy;
+    }
+
+    public void setFulfilledBy(String fulfilledBy){
+        this.fulfilledBy = fulfilledBy;
+    }
+
+    public String getComments(){
+        return this.comments;
+    }
+
+    public void setComments(String comments){
+        this.comments = comments;
+    }
+
+    public void addToComments(String comments){
+        this.comments += '\n';
+        this.comments += comments;
+    }
+
+    public Float getTotalCost(){
+        return this.totalCost;
     }
 
     public String toString() {

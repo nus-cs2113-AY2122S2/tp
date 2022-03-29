@@ -180,10 +180,11 @@ public class Warehouse {
         inventoryTypeCount += 1;
     }
 
+    // Meant for batch adding goods, could be used with UI if i create a param map.
     public void addGoodToInventory(int id, Object goodObject){
 
     }
-
+    // In the case where they want add single/multiple of new/existing type of good
     public void addGoodToInventory(String unitGoodId, String name, String qty, String desc) throws WrongCommandException {
         if (unitGoodId.isBlank()) {
             throw new WrongCommandException("add", true);
@@ -194,7 +195,9 @@ public class Warehouse {
             } else {
                 Good newGood = new Good();
                 newGood.setQuantity(Float.parseFloat(qty));
-                newGood.assignUnitGood(name,
+                newGood.assignUnitGood(
+                        "MIAO"
+                        name,
                         desc,
                         0F,
                         "",
@@ -258,14 +261,20 @@ public class Warehouse {
     }
 
     private void addOrder(int id, Object orderObject) throws WrongCommandException, InvalidFileException {
+        String receiver = null;
+        String shippingAddress = null;
+        String toFulfilBy = null;
+        String comments = null;
         if ( orderObject instanceof JSONObject) {
             JSONObject jOrderObject = (JSONObject) orderObject;
+        } else if (orderObject instanceof Map) {
+            Map orderMap = (Map)orderObject;
         } else {
             throw new InvalidFileException("add", true);
         }
 
         try {
-            Order order = new Order(id, receiver, shippingAddress);
+            Order order = new Order(id, receiver, shippingAddress, toFulfilBy, comments);
             orderLists.add(order);
             System.out.println("Order " + id + " is added");
         } catch (NumberFormatException e) {

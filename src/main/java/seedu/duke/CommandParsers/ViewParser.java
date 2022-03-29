@@ -23,7 +23,7 @@ public class ViewParser extends CommandParser{
             // view order with flag "o/"
             warehouse.viewOrder(matches.get("id"));
         } else if (matches.get("flag").equals("g")) {
-            // view good with flag "g/"
+            // view inventory good with flag "g/"
             warehouse.viewGood(matches.get("id"));
         } else {
             // wrong command exception
