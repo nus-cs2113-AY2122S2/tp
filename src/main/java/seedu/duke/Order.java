@@ -52,31 +52,35 @@ public class Order {
         return null;
     }
 
-    public void addOrderline(String idStr, String name, String qtyStr,
-                             String desc) throws WrongCommandException {
-        if (idStr.isBlank() || name.isBlank() || qtyStr.isBlank()) {
-            throw new WrongCommandException("add", true);
-        }
-        try {
-            int id = Integer.parseInt(idStr);
-            int qty = Integer.parseInt(qtyStr);
+    public void addOrderline(){
 
-            if (doesGoodExist(id)) {
-                addExistingGood(id, name, qty);
-                return;
-            }
-
-            Orderline orderline = new Orderline(id, name, qty, desc);
-            orderlines.add(orderline);
-            System.out.printf("%d %s %s added\n", orderline.getQuantity(), orderline.getName(),
-                    checkPlural(orderline.getQuantity()));
-        } catch (NumberFormatException e) {
-            throw new WrongCommandException("add", true);
-        } catch (ItemDoesNotExistException itemDoesNotExistException) {
-            System.out.println("ID has been used but with a different name");
-            throw new WrongCommandException("add", true);
-        }
     }
+
+//    public void addOrderline(String idStr, String name, String qtyStr,
+//                             String desc) throws WrongCommandException {
+//        if (idStr.isBlank() || name.isBlank() || qtyStr.isBlank()) {
+//            throw new WrongCommandException("add", true);
+//        }
+//        try {
+//            int id = Integer.parseInt(idStr);
+//            int qty = Integer.parseInt(qtyStr);
+//
+//            if (doesGoodExist(id)) {
+//                addExistingGood(id, name, qty);
+//                return;
+//            }
+//
+//            Orderline orderline = new Orderline(id, name, qty, desc);
+//            orderlines.add(orderline);
+//            System.out.printf("%d %s %s added\n", orderline.getQuantity(), orderline.getName(),
+//                    checkPlural(orderline.getQuantity()));
+//        } catch (NumberFormatException e) {
+//            throw new WrongCommandException("add", true);
+//        } catch (ItemDoesNotExistException itemDoesNotExistException) {
+//            System.out.println("ID has been used but with a different name");
+//            throw new WrongCommandException("add", true);
+//        }
+//    }
 
     public void removeOrderlineByQty(int id, String qty)
             throws WrongCommandException {
@@ -101,8 +105,12 @@ public class Order {
         }
     }
 
+    /**
+     * FOR DEV ONLY
+     * @param orderlineId
+     */
     public void removeOrderline(int orderlineId){
-        for (int idx = 0; idx < orderlines.size(); i++){
+        for (int idx = 0; idx < orderlines.size(); idx++){
             if (orderlineId == orderlines.get(idx).getId()){
                 orderlines.remove(idx);
                 return;
@@ -126,6 +134,8 @@ public class Order {
             return "are ";
         }
     }
+
+
 
     private void removeOrderlineByQtyHelper(int id, int qty)
             throws LargeQuantityException, ItemDoesNotExistException {

@@ -13,15 +13,18 @@ public class Good {
         return this.unitGood;
     }
 
-    public UnitGood assignUnitGood(String name,
+    public UnitGood assignUnitGood(
+                String SKU,
+            String name,
                                String description,
                                Float unitPrice,
                                String unitItem,
+                               Boolean isUnitWhole,
                                Float baseArea,
                                Float volume,
                                Boolean isPerishable){
-        UnitGood newUnitGood = new UnitGood(
-                name, description, unitPrice, unitItem, baseArea, volume, isPerishable
+        UnitGood newUnitGood = new UnitGood( SKU,
+                name, description, unitPrice, unitItem, isUnitWhole,baseArea, volume, isPerishable
         );
         setUnitGood(newUnitGood);
         return newUnitGood;

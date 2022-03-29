@@ -7,25 +7,10 @@ package seedu.duke;
  * Ideas - id can track and give to the goods we add automatically
  */
 public class Orderline extends Good {
-
-
-    private String name;
-    private int quantity;
-    private String description;
-    private UnitGood unitGood;
+    private int quantityFulfilled = 0;
     private Boolean isCheckedOff = false;
 
     public Orderline() {
-//        this.id = id;
-//        this.quantity = quantity;
-//        this.description = description;
-//        this.unitGood = new UnitGood(name,
-//                description,
-//                0.0F,
-//                "piece",
-//                -1.0F,
-//                -1.0F,
-//                false);
     }
 
 
@@ -33,10 +18,15 @@ public class Orderline extends Good {
         this.isCheckedOff = true;
     }
 
+    public int getQuantityFulfilled(){
+        return quantityFulfilled;
+    }
 
+    public void setQuantityFulfilled(int quantityFulfilled) {
+        this.quantityFulfilled = quantityFulfilled;
+    }
 
-
-//    public void setUnitGoodByName(String name){
+    //    public void setUnitGoodByName(String name){
 //
 //    }
 

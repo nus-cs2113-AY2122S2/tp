@@ -38,6 +38,22 @@ public class LocalStorage {
         return saveStr;
     }
 
+    public static String readSaveFile(String filePath){
+        String saveStr = null;
+        try {
+            FileReader fr = new FileReader(filePath);
+            int i;
+            while ((i=fr.read()) != -1){
+                saveStr += ((char)i);
+            }
+//            System.out.println(saveStr);
+            fr.close();
+        } catch (IOException e){
+            System.err.println("Failed to open save file!" + e.getMessage() + "\n");
+        }
+        return saveStr;
+    }
+
     /**
      * Opens and writes serialised string versino of tasklist to file at SAVE_PATH
      */

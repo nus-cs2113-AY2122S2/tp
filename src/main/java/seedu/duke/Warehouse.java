@@ -1,10 +1,13 @@
 package seedu.duke;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import util.exceptions.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Warehouse {
@@ -159,36 +162,26 @@ public class Warehouse {
         throw new ItemDoesNotExistException();
     }
 
-    public void addGoods(String orderId, String goodId, String name, String qty, String desc)
-            throws WrongCommandException {
-        if (orderId.isBlank()) {
-            throw new WrongCommandException("add", true);
-        }
-
-        try {
-            Order order = findOrder(Integer.parseInt(orderId));
-            order.addOrderline(goodId, name, qty, desc);
-        } catch (NumberFormatException e1) {
-            throw new WrongCommandException("add", true);
-        } catch (ItemDoesNotExistException e2) {
-            System.out.println("The order you are trying to add the goods to is not on the current list. "
-                    + "Please try adding goods to an existing order or creating a new one.");
-        }
-    }
-
     // In the case where they want to mass add a bunch of goods as part of setup
-    public void addUnitGoodToInventory(String name,
+    public void addUnitGoodToInventory(
+            String SKU,
+            String name,
                                        String description,
                                        String unitPrice,
                                        String unitItem,
+                                       String isWholeUnit,
                                        String baseArea,
                                        String volume,
                                        String isPerishable){
         Good newGood = new Good();
-        newGood.assignUnitGood(name, description, Float.parseFloat(unitPrice), unitItem,
+        newGood.assignUnitGood(SKU,name, description, Float.parseFloat(unitPrice), unitItem, Boolean.parseBoolean(isWholeUnit),
                 Float.parseFloat(baseArea), Float.parseFloat(volume), Boolean.parseBoolean(isPerishable));
         inventory.put(Integer.toString(inventoryTypeCount),newGood);
         inventoryTypeCount += 1;
+    }
+
+    public void addGoodToInventory(int id, Object goodObject){
+
     }
 
     public void addGoodToInventory(String unitGoodId, String name, String qty, String desc) throws WrongCommandException {
@@ -220,8 +213,15 @@ public class Warehouse {
      * @param filePath
      * @throws InvalidFileException
      */
-    public void batchAddGoodsToInventory(String filePath) throws InvalidFileException {
-        return;
+    public void batchSetGoodsToInventory(String filePath) throws InvalidFileException {
+        // READ JSON FILE
+
+        JSONArray json_goods = new JSONArray();
+        int idx = 0;
+        for (Object goodObject : json_goods){
+            addGoodToInventory(idx, goodObject);
+            idx += 1;
+        }
     }
 
 
@@ -257,13 +257,15 @@ public class Warehouse {
         }
     }
 
-    public void addOrder(String id, String receiver, String shippingAddress) throws WrongCommandException {
-        if (id.isBlank() || receiver.isBlank() || shippingAddress.isBlank()) {
-            throw new WrongCommandException("add", true);
+    private void addOrder(int id, Object orderObject) throws WrongCommandException, InvalidFileException {
+        if ( orderObject instanceof JSONObject) {
+            JSONObject jOrderObject = (JSONObject) orderObject;
+        } else {
+            throw new InvalidFileException("add", true);
         }
 
         try {
-            Order order = new Order(Integer.parseInt(id), receiver, shippingAddress);
+            Order order = new Order(id, receiver, shippingAddress);
             orderLists.add(order);
             System.out.println("Order " + id + " is added");
         } catch (NumberFormatException e) {
@@ -271,8 +273,15 @@ public class Warehouse {
         }
     }
 
-    public void batchAddOrders(String filePath){
-
+    public void batchSetOrders(String filePath) throws WrongCommandException {
+        String saveStr = LocalStorage.readSaveFile(filePath);
+        // READ JSON FILE
+        JSONArray json_orders = (JSONArray) JSONValue.parse(saveStr);
+        int idx = 0;
+        for (Object orderObject : json_orders){
+            addOrder(idx, orderObject);
+            idx += 1;
+        }
     }
 
     public void removeOrder(String id) throws WrongCommandException {

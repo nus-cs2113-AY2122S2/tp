@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.CommandParsers.*;
+import util.exceptions.InvalidFileException;
 import util.exceptions.NullException;
 import util.exceptions.WrongCommandException;
 
@@ -81,6 +82,8 @@ public class UserInterface {
             } catch (NullException nullException) {
                 //catch null exception here
                 System.out.println("Please enter the command again.");
+            } catch (InvalidFileException e) {
+                e.printStackTrace();
             }
             System.out.println("Another command?");
             userInput = input.nextLine();
