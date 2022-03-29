@@ -10,8 +10,8 @@ import seedu.duke.util.StringConstants;
 public class ListParser extends Parser {
     private static final String LIST_ARGUMENT = StringConstants.LIST_ARGUMENT;
     //Unescaped Regex for testing:
-    //\s*((?<listArgument>\w*))*\s*
-    private static final String LIST_FORMAT = "\\s*((?<listArgument>\\w+))*\\s*";
+    //((?<listArgument>\w*))*
+    private static final String LIST_FORMAT = "((?<listArgument>\\w+))*";
 
     public ListParser() {
         super();
