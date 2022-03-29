@@ -4,16 +4,16 @@ import seedu.duke.Packages;
 import seedu.duke.Reservations;
 
 public class DeleteCommand extends Command {
-    private final String id;
+    private final int id;
 
-    public DeleteCommand(String id) {
+    public DeleteCommand(int id) {
         this.id = id;
     }
 
-    public void execute(Packages packages, Reservations r) {
+    public void execute(Packages packages) {
         int numberOfPackages = packages.getSize();
         for (int i = 0; i < numberOfPackages; i++) {
-            if (packages.getPackage(i).getID().equals(id)) {
+            if (packages.getPackage(i).getID() == (id)) {
                 packages.removePackage(i);
                 break;
             }

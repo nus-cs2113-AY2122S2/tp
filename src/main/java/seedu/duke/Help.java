@@ -14,9 +14,9 @@ public class Help {
         desc.add(add);
         String[] delete = {"Delete a package", "delete {num}"};
         desc.add(delete);
-        String[] reserve = {"Create a reservation for a package", "reserve {package_number} {contact_name} {contact_number} {number_pax}"};
+        String[] reserve = {"Create a reservation for a package", "reserve {package_number},{contact_name},{contact_number},{number_pax}"};
         desc.add(reserve);
-        String[] remove = {"Remove a reservation", "remove {reservation_id}"};
+        String[] remove = {"Remove a reservation","remove {travelpackageID},{contact_number}"};
         desc.add(remove);
         String[] reservations = {"Shows all reservations for a package", "reservations {package_number}"};
         desc.add(reservations);

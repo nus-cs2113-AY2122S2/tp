@@ -6,7 +6,7 @@ import seedu.duke.Reservations;
 public class HelpCommand extends Command {
 
     @Override
-    public void execute(Packages packages, Reservations r) {
+    public void execute(Packages packages) {
         final String SEPARATOR = "---------------------------------------------" +
                 "--------------------------\n";
         System.out.println(SEPARATOR + "SHOW ALL PACKAGES\nView a list of all available packages\n" +

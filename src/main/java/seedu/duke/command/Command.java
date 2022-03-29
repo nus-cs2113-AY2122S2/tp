@@ -14,5 +14,7 @@ public abstract class Command {
         this.isExit = isExit;
     }
 
-    public abstract void execute(Packages packages, Reservations reservations);
+    public abstract void execute(Packages packages);
+
+//    public abstract void execute(Packages packages, Reservations reservations);
 }
