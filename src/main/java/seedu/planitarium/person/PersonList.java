@@ -41,6 +41,7 @@ public class PersonList {
         assert (personIndex >= Constants.SINGULAR);
         assert (personIndex <= numberOfMembers);
         infoString = "Index assertions passed in getListIndex()";
+        logger.log(Level.INFO, infoString);
         return personIndex - 1;
     }
 
