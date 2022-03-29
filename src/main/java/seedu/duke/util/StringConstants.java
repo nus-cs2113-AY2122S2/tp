@@ -249,7 +249,7 @@ public class StringConstants {
     public static final String TRUE = "true";
     public static final String FALSE = "false";
 
-    public static final String COMPLETED_TASKS_SHOWN_NAME = "COMPLETED_TASKS_SHOWN";
+    public static final String COMPLETED_TASKS_SHOWN_NAME = "SHOW_COMPLETED_TASKS";
     public static final String COMPLETED_TASKS_SHOWN_EXPLAIN = "Whether or not completed tasks should be displayed"
             + " by \"list\".";
     public static final String COMPLETED_TASKS_SHOWN_TRUE = "Show completed tasks";

@@ -26,7 +26,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(ModuleList moduleList, Configuration configuration) {
         boolean showCompletedTasks = Boolean.parseBoolean(configuration.getConfigurationValue(
-                Configuration.ConfigurationGroup.COMPLETED_TASKS_SHOWN));
+                Configuration.ConfigurationGroup.SHOW_COMPLETED_TASKS));
         StringBuilder res = new StringBuilder();
         if (Objects.isNull(argument)) {
             for (Module m : moduleList.getModuleList()) {

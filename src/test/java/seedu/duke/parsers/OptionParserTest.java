@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import seedu.duke.exceptions.UnknownConfigurationGroupWord;
 import seedu.duke.util.Configuration;
+import seedu.duke.util.StringConstants;
 
 public class OptionParserTest {
     private OptionParser optionParser;
@@ -16,7 +17,6 @@ public class OptionParserTest {
     @BeforeEach
     public void setUp() {
         optionParser = new OptionParser();
-        configuration = new Configuration();
     }
 
     @Test
@@ -33,10 +33,10 @@ public class OptionParserTest {
 
     @Test
     public void parse_configName() {
-        final String testString = "COMPLETED_TASKS_SHOWN";
+        final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME;
         try {
             optionParser.parseCommand(testString);
-            assertEquals("COMPLETED_TASKS_SHOWN", optionParser.parsedCommand.get("configurationGroupWord"));
+            assertEquals(StringConstants.COMPLETED_TASKS_SHOWN_NAME, optionParser.parsedCommand.get("configurationGroupWord"));
             assertNull(optionParser.parsedCommand.get("newValue"));
         } catch (Exception e) {
             fail();
@@ -45,11 +45,11 @@ public class OptionParserTest {
 
     @Test
     public void parse_configNameAndValue() {
-        final String testString = "COMPLETED_TASKS_SHOWN=true";
+        final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME + "=" + StringConstants.TRUE;
         try {
             optionParser.parseCommand(testString);
-            assertEquals("COMPLETED_TASKS_SHOWN", optionParser.parsedCommand.get("configurationGroupWord"));
-            assertEquals("true", optionParser.parsedCommand.get("newValue"));
+            assertEquals(StringConstants.COMPLETED_TASKS_SHOWN_NAME, optionParser.parsedCommand.get("configurationGroupWord"));
+            assertEquals(StringConstants.TRUE, optionParser.parsedCommand.get("newValue"));
         } catch (Exception e) {
             fail();
         }
