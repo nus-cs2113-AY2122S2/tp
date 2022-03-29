@@ -4,6 +4,8 @@ import cpp.exceptions.IllegalCommandException;
 import cpp.logic.CommandHandler;
 import cpp.model.ProjectList;
 import cpp.response.Response;
+import cpp.storage.Storage;
+
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +21,8 @@ public class CsProjPlanner {
      * Main entry-point for the CSProjPlanner application.
      */
     public static void main(String[] args) {
-        assert (0 == 1) : "dummy assertion set to fail";
+        //read data from hard disk
+        projectList = Storage.read();
 
         logger.log(Level.INFO, "going to receive user input");
         String input;
@@ -40,7 +43,8 @@ public class CsProjPlanner {
             Response.displayNext();
             input = in.nextLine(); //fetch next input from the user
         }
-
+        //automatically save data here
+        Storage.save(projectList);
         Response.displayExit();
         logger.log(Level.INFO, "Exiting the system...");
 

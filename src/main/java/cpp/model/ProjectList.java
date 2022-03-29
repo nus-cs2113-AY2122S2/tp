@@ -188,9 +188,18 @@ public class ProjectList {
      *
      * @return total number of projects in the list
      */
-
     public int getProjectNo() {
         return projectList.size();
+    }
+
+    /**
+     * Gets certain project based on given index
+     *
+     * @return target project with given index
+     */
+    public Project getProject(int index){
+        assert (index>=0 && index<projectList.size()) : "Index out of range!";
+        return projectList.get(index);
     }
 
     private int findProjectIndex(String name) {
