@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 public class PersonList {
-    private final ArrayList<Person> PERSON_LIST;
+    private final ArrayList<Person> personList;
     private int numberOfMembers;
 
     private static final String LOG_CLASS_NAME = PersonList.class.getSimpleName();
@@ -20,7 +20,7 @@ public class PersonList {
      * Constructs a new PersonList object.
      */
     public PersonList() {
-        PERSON_LIST = new ArrayList<>();
+        personList = new ArrayList<>();
         numberOfMembers = 0;
         LOGGER.log(Level.INFO, Constants.PERSON_LIST_INIT_MESSAGE);
     }
@@ -32,7 +32,7 @@ public class PersonList {
      */
     public ArrayList<Person> getPersonList() {
         LOGGER.log(Level.INFO, Constants.GET_PERSON_LIST_CALL_MESSAGE);
-        return PERSON_LIST;
+        return personList;
     }
 
     public int getListIndex(int personIndex) {
@@ -54,7 +54,7 @@ public class PersonList {
     public Person getPerson(int personIndex) {
         LOGGER.log(Level.INFO, Constants.GET_PERSON_CALL_MESSAGE);
         int listIndex = getListIndex(personIndex);
-        return PERSON_LIST.get(listIndex);
+        return personList.get(listIndex);
     }
 
     /**
@@ -79,7 +79,7 @@ public class PersonList {
         infoString = "Non-null assertion passed in addPerson()";
         LOGGER.log(Level.INFO, infoString);
         Person person = new Person(name);
-        PERSON_LIST.add(person);
+        personList.add(person);
         numberOfMembers++;
     }
 
@@ -92,7 +92,7 @@ public class PersonList {
         LOGGER.log(Level.INFO, Constants.DELETE_PERSON_CALL_MESSAGE);
         String name = getPerson(personIndex).getName();
         int listIndex = getListIndex(personIndex);
-        PERSON_LIST.remove(listIndex);
+        personList.remove(listIndex);
         numberOfMembers--;
         System.out.println(name + " has been successfully removed");
     }
@@ -254,7 +254,7 @@ public class PersonList {
      */
     public void find(String description, int category) {
         LOGGER.log(Level.INFO, Constants.FIND_CALL_MESSAGE);
-        for (Person person : PERSON_LIST) {
+        for (Person person : personList) {
             person.find(description, category);
         }
     }

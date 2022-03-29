@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 public class Person {
-    private final String NAME;
-    private final IncomeList INCOME_LIST;
-    private final ExpenditureList EXPENDITURE_LIST;
+    private final String name;
+    private final IncomeList incomeList;
+    private final ExpenditureList expenditureList;
 
     private static final String LOG_CLASS_NAME = Person.class.getSimpleName();
     private static final String LOG_FILE_PATH = LOG_CLASS_NAME + ".log";
@@ -30,11 +30,11 @@ public class Person {
         String infoString = "Entering Person()";
         LOGGER.log(Level.INFO, infoString);
         assert (name != null);
-        NAME = name;
+        this.name = name;
         infoString = "Non-null assertion passed in Person()";
         LOGGER.log(Level.INFO, infoString);
-        INCOME_LIST = new IncomeList();
-        EXPENDITURE_LIST = new ExpenditureList();
+        incomeList = new IncomeList();
+        expenditureList = new ExpenditureList();
         LOGGER.log(Level.INFO, Constants.PERSON_INIT_MESSAGE);
     }
 
@@ -45,7 +45,7 @@ public class Person {
      */
     public String getName() {
         LOGGER.log(Level.INFO, Constants.GET_NAME_CALL_MESSAGE);
-        return NAME;
+        return name;
     }
 
     /**
@@ -55,7 +55,7 @@ public class Person {
      */
     public ArrayList<Income> getIncomeList() {
         LOGGER.log(Level.INFO, Constants.GET_INCOME_LIST_CALL_MESSAGE);
-        return INCOME_LIST.getIncomeArrayList();
+        return incomeList.getIncomeArrayList();
     }
 
     /**
@@ -65,7 +65,7 @@ public class Person {
      */
     public ArrayList<Expenditure> getExpenditureList() {
         LOGGER.log(Level.INFO, Constants.GET_EXPEND_LIST_CALL_MESSAGE);
-        return EXPENDITURE_LIST.getExpenditureArrayList();
+        return expenditureList.getExpenditureArrayList();
     }
 
     /**
@@ -78,15 +78,15 @@ public class Person {
      */
     public void addIncome(String description, double amount, boolean isPermanent, boolean isSilent) {
         LOGGER.log(Level.INFO, Constants.ADD_INCOME_CALL_MESSAGE);
-        INCOME_LIST.addIncome(description, amount, isPermanent);
+        incomeList.addIncome(description, amount, isPermanent);
         if (isSilent) {
             return;
         }
         if (isPermanent) {
             System.out.println("A recurring income of " + amount + " from " + description + " has been added to "
-                    + NAME);
+                    + name);
         } else {
-            System.out.println("An income of " + amount + " from " + description + " has been added to " + NAME);
+            System.out.println("An income of " + amount + " from " + description + " has been added to " + name);
         }
     }
 
@@ -102,10 +102,10 @@ public class Person {
         assert (incomeIndex <= getNumberOfIncomes());
         infoString = "Index assertions passed in deleteIncome()";
         LOGGER.log(Level.INFO, infoString);
-        String description = INCOME_LIST.getDescription(incomeIndex);
-        double value = INCOME_LIST.getIncomeValue(incomeIndex);
-        INCOME_LIST.remove(incomeIndex);
-        System.out.println("An income of " + value + " for " + description + " has been removed from " + NAME);
+        String description = incomeList.getDescription(incomeIndex);
+        double value = incomeList.getIncomeValue(incomeIndex);
+        incomeList.remove(incomeIndex);
+        System.out.println("An income of " + value + " for " + description + " has been removed from " + name);
     }
 
     /**
@@ -119,15 +119,15 @@ public class Person {
      */
     public void addExpend(String description, double amount, int category, boolean isPermanent, boolean isSilent) {
         LOGGER.log(Level.INFO, Constants.ADD_EXPEND_CALL_MESSAGE);
-        EXPENDITURE_LIST.addExpenditure(description, amount, category, isPermanent);
+        expenditureList.addExpenditure(description, amount, category, isPermanent);
         if (isSilent) {
             return;
         }
         if (isPermanent) {
             System.out.println("A recurring expenditure of " + amount + " for " + description + " has been added to "
-                    + NAME);
+                    + name);
         } else {
-            System.out.println("An expenditure of " + amount + " for " + description + " has been added to " + NAME);
+            System.out.println("An expenditure of " + amount + " for " + description + " has been added to " + name);
         }
     }
 
@@ -143,11 +143,11 @@ public class Person {
         assert (expendIndex <= getNumberOfExpenditures());
         infoString = "Index assertions passed in deleteExpend()";
         LOGGER.log(Level.INFO, infoString);
-        String description = EXPENDITURE_LIST.getDescription(expendIndex);
-        double value = EXPENDITURE_LIST.getExpenditureValue(expendIndex);
-        EXPENDITURE_LIST.remove(expendIndex);
+        String description = expenditureList.getDescription(expendIndex);
+        double value = expenditureList.getExpenditureValue(expendIndex);
+        expenditureList.remove(expendIndex);
         System.out.println("An expenditure of " + value + " for " + description
-                + " has been removed from " + NAME);
+                + " has been removed from " + name);
     }
 
     /**
@@ -155,8 +155,8 @@ public class Person {
      */
     public void listExpenditure() {
         LOGGER.log(Level.INFO, Constants.LIST_EXPEND_CALL_MESSAGE);
-        System.out.println("Here is the expenditure list for " + NAME + ":");
-        EXPENDITURE_LIST.printExpenditureList();
+        System.out.println("Here is the expenditure list for " + name + ":");
+        expenditureList.printExpenditureList();
     }
 
     /**
@@ -164,8 +164,8 @@ public class Person {
      */
     public void listIncome() {
         LOGGER.log(Level.INFO, Constants.LIST_INCOME_CALL_MESSAGE);
-        System.out.println("Here is the income list for " + NAME + ":");
-        INCOME_LIST.printIncomeList();
+        System.out.println("Here is the income list for " + name + ":");
+        incomeList.printIncomeList();
     }
 
     /**
@@ -175,7 +175,7 @@ public class Person {
      */
     public double getTotalExpenditure() {
         LOGGER.log(Level.INFO, Constants.GET_TOTAL_EXPEND_CALL_MESSAGE);
-        return EXPENDITURE_LIST.getTotalExpenditure();
+        return expenditureList.getTotalExpenditure();
     }
 
     /**
@@ -185,7 +185,7 @@ public class Person {
      */
     public double getTotalIncome() {
         LOGGER.log(Level.INFO, Constants.GET_TOTAL_INCOME_CALL_MESSAGE);
-        return INCOME_LIST.getTotalIncome();
+        return incomeList.getTotalIncome();
     }
 
     /**
@@ -205,7 +205,7 @@ public class Person {
      */
     public int getNumberOfIncomes() {
         LOGGER.log(Level.INFO, Constants.NUM_INCOMES_CALL_MESSAGE);
-        return INCOME_LIST.getNumberOfIncomes();
+        return incomeList.getNumberOfIncomes();
     }
 
     /**
@@ -215,7 +215,7 @@ public class Person {
      */
     public int getNumberOfExpenditures() {
         LOGGER.log(Level.INFO, Constants.NUM_EXPENDS_CALL_MESSAGE);
-        return EXPENDITURE_LIST.getNumberOfExpenditures();
+        return expenditureList.getNumberOfExpenditures();
     }
 
     /**
@@ -225,7 +225,7 @@ public class Person {
      */
     public String saveName() {
         LOGGER.log(Level.INFO, Constants.SAVE_NAME_CALL_MESSAGE);
-        return "u " + NAME;
+        return "u " + name;
     }
 
     /**
@@ -238,7 +238,7 @@ public class Person {
      */
     public void editIncome(int incomeIndex, String description, double amount, boolean isPermanent) {
         LOGGER.log(Level.INFO, Constants.EDIT_INCOME_CALL_MESSAGE);
-        INCOME_LIST.editIncome(incomeIndex, description, amount, isPermanent);
+        incomeList.editIncome(incomeIndex, description, amount, isPermanent);
     }
 
     /**
@@ -252,7 +252,7 @@ public class Person {
      */
     public void editExpend(int expendIndex, String description, double amount, int category, boolean isPermanent) {
         LOGGER.log(Level.INFO, Constants.EDIT_EXPEND_CALL_MESSAGE);
-        EXPENDITURE_LIST.editExpenditure(expendIndex, description, amount, category, isPermanent);
+        expenditureList.editExpenditure(expendIndex, description, amount, category, isPermanent);
     }
 
     /**
@@ -263,7 +263,7 @@ public class Person {
      */
     public void find(String description, int category) {
         LOGGER.log(Level.INFO, Constants.FIND_CALL_MESSAGE);
-        System.out.println("Entries found for " + NAME + ":");
+        System.out.println("Entries found for " + name + ":");
         // incomeList.find(description);
         // expenditureList.find(description, category);
     }

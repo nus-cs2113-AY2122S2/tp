@@ -8,9 +8,9 @@ import seedu.planitarium.global.Constants;
 import java.util.logging.Level;
 
 public class Family {
-    private final PersonList PARENTS;
-    private final PersonList MY_GEN;
-    private final PersonList CHILDREN;
+    private final PersonList parents;
+    private final PersonList myGen;
+    private final PersonList children;
 
     private static final String LOG_CLASS_NAME = Family.class.getSimpleName();
     private static final String LOG_FILE_PATH = LOG_CLASS_NAME + ".log";
@@ -20,9 +20,9 @@ public class Family {
      * Constructs a new Family object.
      */
     public Family() {
-        PARENTS = new PersonList();
-        MY_GEN = new PersonList();
-        CHILDREN = new PersonList();
+        parents = new PersonList();
+        myGen = new PersonList();
+        children = new PersonList();
         LOGGER.log(Level.INFO, Constants.FAMILY_INIT_MESSAGE);
     }
 
@@ -42,13 +42,13 @@ public class Family {
         PersonList toReturn = null;
         switch (group) {
         case Constants.PARENTS:
-            toReturn = PARENTS;
+            toReturn = parents;
             break;
         case Constants.MY_GEN:
-            toReturn = MY_GEN;
+            toReturn = myGen;
             break;
         case Constants.CHILDREN:
-            toReturn = CHILDREN;
+            toReturn = children;
             break;
         default:
             LOGGER.log(Level.SEVERE, Constants.INDEX_ERROR_MESSAGE);
