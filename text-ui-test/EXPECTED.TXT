@@ -10,9 +10,11 @@ The item and its pax has been added to the list of items in the inventory.
 There are currently 2 items within the inventory.
 The item and its pax has been added to the list of items in the inventory.
 There are currently 3 items within the inventory.
+=========== Item List ===========
 1. Item Name: Toilet Roll Item Pax: 15
 2. Item Name: Fork Item Pax: 15
 3. Item Name: Spoon Item Pax: 2
+======== End of the list ========
 Error! Invalid Command.
 The pax of Toilet Roll has been updated to 5.
 Error! Item Pax is invalid.
@@ -132,8 +134,12 @@ Error! Item Name cannot be empty.
 Error! Item Name cannot be empty.
 Error! Item not found in inventory.
 Error! Invalid Command.
+=========== Item List ===========
 1. Item Name: Fork Item Pax: 15
 2. Item Name: Premium Spoon Item Pax: 0
+======== End of the list ========
+=========== Item List ===========
 1. Item Name: Premium Spoon Item Pax: 0
+======== End of the list ========
 Error! Invalid Command.
 see u again!
