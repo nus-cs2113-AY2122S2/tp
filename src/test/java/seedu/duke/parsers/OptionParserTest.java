@@ -7,12 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import seedu.duke.exceptions.UnknownConfigurationGroupWord;
-import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
 public class OptionParserTest {
     private OptionParser optionParser;
-    private Configuration configuration;
 
     @BeforeEach
     public void setUp() {
@@ -36,7 +34,8 @@ public class OptionParserTest {
         final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME;
         try {
             optionParser.parseCommand(testString);
-            assertEquals(StringConstants.COMPLETED_TASKS_SHOWN_NAME, optionParser.parsedCommand.get("configurationGroupWord"));
+            assertEquals(StringConstants.COMPLETED_TASKS_SHOWN_NAME,
+                    optionParser.parsedCommand.get("configurationGroupWord"));
             assertNull(optionParser.parsedCommand.get("newValue"));
         } catch (Exception e) {
             fail();
@@ -48,7 +47,8 @@ public class OptionParserTest {
         final String testString = StringConstants.COMPLETED_TASKS_SHOWN_NAME + "=" + StringConstants.TRUE;
         try {
             optionParser.parseCommand(testString);
-            assertEquals(StringConstants.COMPLETED_TASKS_SHOWN_NAME, optionParser.parsedCommand.get("configurationGroupWord"));
+            assertEquals(StringConstants.COMPLETED_TASKS_SHOWN_NAME,
+                    optionParser.parsedCommand.get("configurationGroupWord"));
             assertEquals(StringConstants.TRUE, optionParser.parsedCommand.get("newValue"));
         } catch (Exception e) {
             fail();
