@@ -91,12 +91,12 @@ public class DeleteCommand extends Command {
 
             String getNumber = splitMessage[INDEX_OF_SECOND_ITEM];
             int positionToDelete = Integer.parseInt(getNumber) + LIST_INDEX_CORRECTION;
-            assert positionToDelete >= 0 : "Index should always be >= 0";
             System.out.println("I have removed "
                     + expenditureList.get(positionToDelete).getDescription()
                     + " of $" + expenditureList.get(positionToDelete).getAmount()
                     + " from the account" + System.lineSeparator());
             expenditureList.delete(positionToDelete);
+            assert positionToDelete >= 0 : "Index should always be >= 0";
 
         } catch (NumberFormatException e) {
             throw new MindMyMoneyException("INDEX must be a number");
