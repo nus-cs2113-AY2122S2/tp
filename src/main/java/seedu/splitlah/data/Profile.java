@@ -213,6 +213,12 @@ public class Profile implements Serializable {
         return groupList;
     }
 
+    /**
+     * Returns a String object containing a summary of the state of the member attribute groupList.
+     *
+     * @return A String object containing a summary of all Group objects in groupList or
+     *         a message stating that the groupList is empty if there are no Group objects within.
+     */
     public String getGroupListSummaryString() {
         if (groupList.isEmpty()) {
             return Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST;
