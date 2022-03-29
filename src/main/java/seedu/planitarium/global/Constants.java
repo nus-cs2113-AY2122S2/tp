@@ -9,6 +9,22 @@ public class Constants {
     public static final int SINGULAR = 1;
     public static final boolean FOR_USER = false;
     public static final boolean FOR_STORAGE = true;
+    public static final String INDEX_ERROR_MESSAGE = "Invalid index passed in";
+    public static final String FAMILY_INIT_MESSAGE = "New Family initialised";
+    public static final String ADD_PERSON_CALL_MESSAGE = "Method addPerson() called";
+    public static final String REMOVE_PERSON_CALL_MESSAGE = "Method removePerson() called";
+    public static final String ADD_INCOME_CALL_MESSAGE = "Method addIncome() called";
+    public static final String DELETE_INCOME_CALL_MESSAGE = "Method deleteIncome() called";
+    public static final String EDIT_INCOME_CALL_MESSAGE = "Method editIncome() called";
+    public static final String ADD_EXPEND_CALL_MESSAGE = "Method addExpend() called";
+    public static final String DELETE_EXPEND_CALL_MESSAGE = "Method deleteExpend() called";
+    public static final String EDIT_EXPEND_CALL_MESSAGE = "Method editExpend() called";
+    public static final String OVERVIEW_CALL_MESSAGE = "Method overview() called";
+    public static final String LIST_CALL_MESSAGE = "Method list() called";
+    public static final String NUM_MEMBERS_CALL_MESSAGE = "Method getNumberOfMembers() called";
+    public static final String NUM_INCOMES_CALL_MESSAGE = "Method getNumberOfIncomes() called";
+    public static final String NUM_EXPENDS_CALL_MESSAGE = "Method getNumberOfExpenditures() called";
+    public static final String FIND_CALL_MESSAGE = "Method find() called";
 
     // For Parser component
     public static final int INDEX_KEYWORD = 0;

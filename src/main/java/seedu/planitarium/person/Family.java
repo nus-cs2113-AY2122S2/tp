@@ -4,7 +4,6 @@ package seedu.planitarium.person;
 
 import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.global.Constants;
-import seedu.planitarium.money.ExpenditureList;
 
 import java.util.logging.Level;
 
@@ -16,7 +15,6 @@ public class Family {
     private static final String LOG_CLASS_NAME = Family.class.getSimpleName();
     private static final String LOG_FILE_PATH = LOG_CLASS_NAME + ".log";
     private static ProjectLogger logger = new ProjectLogger(LOG_CLASS_NAME, LOG_FILE_PATH);
-    private static final String INDEX_ERROR_MESSAGE = "Invalid index passed in";
 
     /**
      * Constructs a new Family object.
@@ -25,8 +23,7 @@ public class Family {
         parents = new PersonList();
         myGen = new PersonList();
         children = new PersonList();
-        String infoString = "New Family initialised";
-        logger.log(Level.INFO, infoString);
+        logger.log(Level.INFO, Constants.FAMILY_INIT_MESSAGE);
     }
 
     /**
@@ -54,7 +51,7 @@ public class Family {
             toReturn = children;
             break;
         default:
-            logger.log(Level.SEVERE, INDEX_ERROR_MESSAGE);
+            logger.log(Level.SEVERE, Constants.INDEX_ERROR_MESSAGE);
         }
         return toReturn;
     }
@@ -84,7 +81,7 @@ public class Family {
             toReturn = "Children";
             break;
         default:
-            logger.log(Level.SEVERE, INDEX_ERROR_MESSAGE);
+            logger.log(Level.SEVERE, Constants.INDEX_ERROR_MESSAGE);
         }
         return toReturn;
     }
@@ -97,8 +94,7 @@ public class Family {
      * @param isSilent Whether to print confirmation
      */
     public void addPerson(int group, String name, boolean isSilent) {
-        String infoString = "Method addPerson() called";
-        logger.log(Level.INFO, infoString);
+        logger.log(Level.INFO, Constants.ADD_PERSON_CALL_MESSAGE);
         getList(group).addPerson(name);
         if (isSilent) {
             return;
@@ -114,8 +110,7 @@ public class Family {
      * @param personIndex The index of the person to be removed
      */
     public void deletePerson(int group, int personIndex) {
-        String infoString = "Method removePerson() called";
-        logger.log(Level.INFO, infoString);
+        logger.log(Level.INFO, Constants.REMOVE_PERSON_CALL_MESSAGE);
         getList(group).deletePerson(personIndex);
     }
 
@@ -131,8 +126,7 @@ public class Family {
      */
     public void addIncome(int group, int personIndex, String description, double amount, boolean isPermanent,
                           boolean isSilent) {
-        String infoString = "Method addIncome() called";
-        logger.log(Level.INFO, infoString);
+        logger.log(Level.INFO, Constants.ADD_INCOME_CALL_MESSAGE);
         getList(group).addIncome(personIndex, description, amount, isPermanent, isSilent);
     }
 
@@ -144,8 +138,7 @@ public class Family {
      * @param incomeIndex The index of the income to be removed
      */
     public void deleteIncome(int group, int personIndex, int incomeIndex) {
-        String infoString = "Method deleteIncome() called";
-        logger.log(Level.INFO, infoString);
+        logger.log(Level.INFO, Constants.DELETE_INCOME_CALL_MESSAGE);
         getList(group).deleteIncome(personIndex, incomeIndex);
     }
 
@@ -162,8 +155,7 @@ public class Family {
      */
     public void addExpend(int group, int personIndex, String description, double amount, int category,
                           boolean isPermanent, boolean isSilent) {
-        String infoString = "Method addExpend() called";
-        logger.log(Level.INFO, infoString);
+        logger.log(Level.INFO, Constants.ADD_EXPEND_CALL_MESSAGE);
         getList(group).addExpend(personIndex, description, amount, category, isPermanent, isSilent);
     }
 
@@ -175,8 +167,7 @@ public class Family {
      * @param expendIndex The index of the expenditure to be removed
      */
     public void deleteExpend(int group, int personIndex, int expendIndex) {
-        String infoString = "Method deleteExpend() called";
-        logger.log(Level.INFO, infoString);
+        logger.log(Level.INFO, Constants.DELETE_EXPEND_CALL_MESSAGE);
         getList(group).deleteExpend(personIndex, expendIndex);
     }
 
@@ -184,8 +175,7 @@ public class Family {
      * Lists the disposable incomes of each generation.
      */
     public void overview() {
-        String infoString = "Method overview() called";
-        logger.log(Level.INFO, infoString);
+        logger.log(Level.INFO, Constants.OVERVIEW_CALL_MESSAGE);
         System.out.println("Here are your disposable incomes by group:");
         for (int i = Constants.SINGULAR; i <= Constants.NUM_GROUPS; i++) {
             PersonList personList = getList(i);
@@ -207,8 +197,7 @@ public class Family {
      * @param group The index of the group to print
      */
     public void list(int group) {
-        String infoString = "Method list() called";
-        logger.log(Level.INFO, infoString);
+        logger.log(Level.INFO, Constants.LIST_CALL_MESSAGE);
         String generation = getGenerationName(group);
         System.out.println("For " + generation + ":");
         PersonList personList = getList(group);
@@ -222,8 +211,7 @@ public class Family {
      * @return The number of members in the array list specified
      */
     public int getNumberOfMembers(int group) {
-        String infoString = "Method getNumberOfMembers() called";
-        logger.log(Level.INFO, infoString);
+        logger.log(Level.INFO, Constants.NUM_MEMBERS_CALL_MESSAGE);
         return getList(group).getNumberOfMembers();
     }
 
@@ -235,8 +223,7 @@ public class Family {
      * @return The number of incomes of the person in the array list specified
      */
     public int getNumberOfIncomes(int group, int personIndex) {
-        String infoString = "Method getNumberOfIncomes() called";
-        logger.log(Level.INFO, infoString);
+        logger.log(Level.INFO, Constants.NUM_INCOMES_CALL_MESSAGE);
         return getList(group).getNumberOfIncomes(personIndex);
     }
 
@@ -248,8 +235,7 @@ public class Family {
      * @return The number of expenditures of the person in the array list specified
      */
     public int getNumberOfExpenditures(int group, int personIndex) {
-        String infoString = "Method getNumberOfExpenditures() called";
-        logger.log(Level.INFO, infoString);
+        logger.log(Level.INFO, Constants.NUM_EXPENDS_CALL_MESSAGE);
         return getList(group).getNumberOfExpenditures(personIndex);
     }
 
@@ -265,8 +251,7 @@ public class Family {
      */
     public void editIncome(int group, int personIndex, int incomeIndex, String description, double amount,
                            boolean isPermanent) {
-        String infoString = "Method editIncome() called";
-        logger.log(Level.INFO, infoString);
+        logger.log(Level.INFO, Constants.EDIT_INCOME_CALL_MESSAGE);
         getList(group).editIncome(personIndex, incomeIndex, description, amount, isPermanent);
     }
 
@@ -283,8 +268,7 @@ public class Family {
      */
     public void editExpend(int group, int personIndex, int expendIndex, String description, double amount,
                            int category, boolean isPermanent) {
-        String infoString = "Method editExpend() called";
-        logger.log(Level.INFO, infoString);
+        logger.log(Level.INFO, Constants.EDIT_EXPEND_CALL_MESSAGE);
         getList(group).editExpend(personIndex, expendIndex, description, amount, category, isPermanent);
     }
 
@@ -295,8 +279,7 @@ public class Family {
      * @param category The category of the entry
      */
     public void find(String description, int category) {
-        String infoString = "Method find() called";
-        logger.log(Level.INFO, infoString);
+        logger.log(Level.INFO, Constants.FIND_CALL_MESSAGE);
         for (int i = Constants.SINGULAR; i <= Constants.NUM_GROUPS; i++) {
             getList(i).find(description, category);
         }
