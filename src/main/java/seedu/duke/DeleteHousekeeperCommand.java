@@ -34,6 +34,8 @@ public class DeleteHousekeeperCommand extends Command {
     public void execute(ListContainer listContainer, Ui ui) throws UserDoesNotExistException {
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         housekeeperList.removeHousekeeperInList(name);
+        AssignmentMap assignmentMap = listContainer.getAssignmentMap();
+        assignmentMap.removeAssignment(name);
         ui.printMessage("Deleted " + name + " from the list of profile");
         ui.printMessage("Take note! Total pax of housekeeper:  " + housekeeperList.getTotalHousekeeper());
     }
