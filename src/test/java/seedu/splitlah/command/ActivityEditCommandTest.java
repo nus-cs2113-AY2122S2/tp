@@ -109,70 +109,27 @@ class ActivityEditCommandTest {
 
     @Test
     public void run_editWholeActivity_wholeActivityIsEdited() throws InvalidDataException {
-        String userInput = "activity /edit /sid 1 /aid 1 /n editedLunch /p Bob /i Alice Bob /co 20 /gst 7";
+        String userInput = "activity /edit /sid 1 /aid 1 /n editedLunch /p Bob /i Alice Bob /co 20 /gst 7 /sc 10";
         Command command = Parser.getCommand(userInput);
         assertEquals(ActivityEditCommand.class, command.getClass());
         command.run(manager);
-        double newCost = manager.getProfile().getSession(1).getActivity(1).getTotalCost();
-        assertTrue(Math.abs(newCost - 20) < 0.1);
+        Activity editedActivity = manager.getProfile().getSession(1).getActivity(1);
+        assertEquals(1, editedActivity.getActivityId());
+        assertEquals(1, manager.getProfile().getSession(1).getSessionId());
+        assertEquals("editedLunch", editedActivity.getActivityName());
+        assertEquals("Bob", editedActivity.getPersonPaid().getName());
+        assertEquals(2, editedActivity.getInvolvedPersonList().size());
+        double newCost = editedActivity.getTotalCost();
+        assertTrue(newCost - (20 * 1.07 * 1.1) < 0.001);
     }
 
     /**
      * Checks if an activity is not edited when an activity has duplicate names in the involved list.
-     *
-     * @throws InvalidDataException If there are no sessions stored or
-     *                              if the session unique identifier specified was not found.
      */
     @Test
-    public void run_hasNameDuplicatesInInvolvedList_activityListSizeRemainsOne() throws InvalidDataException {
-        String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Alice Charlie /co 30";
+    public void run_hasNameDuplicatesInInvolvedList_activityListSizeRemainsOne() {
+        String userInput = "activity /edit /sid 1 /n Dinner /p Alice /i Alice Alice Charlie /co 30";
         Command command = Parser.getCommand(userInput);
-        assertEquals(ActivityCreateCommand.class, command.getClass());
-        command.run(manager);
-        assertEquals(1, manager.getProfile().getSession(1).getActivityList().size());
-    }
-
-    /**
-     * Checks if activity unique identifier is not incremented if an activity fails
-     * to be created due to duplicate names in involved list.
-     */
-    @Test
-    public void run_hasNameDuplicatesInInvolvedList_activityIdNotIncremented() {
-        int currentActivityId = manager.getProfile().getActivityIdTracker();
-        String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Alice Charlie /co 30";
-        Command command = Parser.getCommand(userInput);
-        assertEquals(ActivityCreateCommand.class, command.getClass());
-        command.run(manager);
-        int testActivityId = manager.getProfile().getActivityIdTracker();
-        assertEquals(currentActivityId, testActivityId);
-    }
-
-    /**
-     * Checks if activity is created successfully and added into list of activities.
-     *
-     * @throws InvalidDataException If there are no sessions stored or
-     *                              if the session unique identifier specified was not found.
-     */
-    @Test
-    public void run_validCommand_activityListSizeBecomesTwo() throws InvalidDataException {
-        String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30";
-        Command command = Parser.getCommand(userInput);
-        assertEquals(ActivityCreateCommand.class, command.getClass());
-        command.run(manager);
-        assertEquals(2, manager.getProfile().getSession(1).getActivityList().size());
-    }
-
-    /**
-     * Checks if activity is created successfully and activity unique identifier is incremented.
-     */
-    @Test
-    public void run_validCommand_activityIdIncremented() {
-        int currentActivityId = manager.getProfile().getActivityIdTracker();
-        String userInput = "activity /create /sid 1 /n Dinner /p Alice /i Alice Bob Charlie /co 30";
-        Command command = Parser.getCommand(userInput);
-        assertEquals(ActivityCreateCommand.class, command.getClass());
-        command.run(manager);
-        int testActivityId = manager.getProfile().getActivityIdTracker();
-        assertEquals(currentActivityId + 1, testActivityId);
+        assertEquals(InvalidCommand.class, command.getClass());
     }
 }
