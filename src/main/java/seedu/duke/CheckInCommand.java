@@ -1,7 +1,5 @@
-package seedu.duke.command.roomcommand;
+package seedu.duke;
 
-import seedu.duke.*;
-import seedu.duke.storage.RoomFileManager;
 import seedu.duke.command.Command;
 
 import java.io.IOException;

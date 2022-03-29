@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.command.roomcommand.CheckInCommand;
 
 import java.io.IOException;
 

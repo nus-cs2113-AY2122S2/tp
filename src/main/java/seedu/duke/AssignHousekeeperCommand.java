@@ -76,9 +76,10 @@ public class AssignHousekeeperCommand extends Command {
     @Override
     public void execute(ListContainer listContainer, Ui ui)
             throws InvalidRoomNumberException, InvalidHousekeeperProfile, IOException {
-        AssignmentMap assignmentMap = listContainer.getAssignmentMap();
-        HousekeeperList housekeeperList = listContainer.getHousekeeperList();
-        RoomList roomList = listContainer.getRoomList();
+
+        final AssignmentMap assignmentMap = listContainer.getAssignmentMap();
+        final HousekeeperList housekeeperList = listContainer.getHousekeeperList();
+        final RoomList roomList = listContainer.getRoomList();
         String roomID = getroomID();
         assert !roomID.isEmpty() : "ID should not be empty";
         String name = getName();
@@ -103,14 +104,18 @@ public class AssignHousekeeperCommand extends Command {
 
     private boolean isRoomIdValid(int roomIdNumber, RoomList roomList) {
         for (Room room : roomList.getRoomList()) {
-            if (room.getRoomId() == roomIdNumber) return true;
+            if (room.getRoomId() == roomIdNumber) {
+                return true;
+            }
         }
         return false;
     }
 
     private boolean isNameExist(String name, HousekeeperList housekeeperList) {
         for (Housekeeper housekeeper : housekeeperList.getHousekeeperList()) {
-            if (housekeeper.getName().equals(name)) return true;
+            if (housekeeper.getName().equals(name)) {
+                return true;
+            }
         }
         return false;
     }

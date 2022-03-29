@@ -1,6 +1,5 @@
-package seedu.duke.command.roomcommand;
+package seedu.duke;
 
-import seedu.duke.*;
 import seedu.duke.command.Command;
 
 /**
