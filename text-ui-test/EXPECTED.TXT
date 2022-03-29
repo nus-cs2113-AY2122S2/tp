@@ -21,8 +21,8 @@ Error! Item Name cannot be empty.
 Error! Invalid Command.
 Error! Item not found in inventory.
 The pax of SPOON has been updated to 0.
-Error! Invalid Command -> Availability NAME @ 1,2
-Error! Invalid Command -> Availability NAME @ 1,2
+Error! Invalid Command -> Availability NAME / 1,2
+Error! Invalid Command -> Availability NAME / 1,2
 TOILET ROLL has been removed from the Item List.
 There are currently 2 items within the Item List.
 Error! Item not found in inventory.
