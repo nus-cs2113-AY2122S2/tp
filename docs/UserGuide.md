@@ -472,15 +472,16 @@ You can also refer to the [Command Summary](#command-summary) for  a summary of 
 <br>
 
 ### Exit
-> Exits the application.
+Exits the application.<br>
 
-Format: `exit`
+> Format: `exit`
  
 ## FAQ
 
 **Q**: Is data saved to the disk upon exit?
 
-**A**: SplitLah 1.0 does not currently support saving data to the disk.
+**A**: SplitLah 2.0 will create a save file in a folder named `data` that will be created in the same directory as
+`SplitLah.jar`. All changes will be saved to the save file upon exit.
 
 ## Command Summary
 
