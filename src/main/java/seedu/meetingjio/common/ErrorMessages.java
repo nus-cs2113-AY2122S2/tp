@@ -1,5 +1,8 @@
 package seedu.meetingjio.common;
 
+/**
+ *  Container for user visible error messages.
+ */
 public class ErrorMessages {
 
     public static final String ERROR_INDEX_OUT_OF_BOUND = "Hi I need a valid index in the list so I can delete";
