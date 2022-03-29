@@ -32,6 +32,7 @@ public class CommandFactory {
     protected static final String HELP_CMD = "help";
     protected static final String LIST_CAT_CMD = "listcat";
     protected static final String EXIT = "bye";
+    protected static final String SEARCH_CMD = "find";
     protected Command newCommand = null;
 
     protected static final String LOG_RETURN_CMD = "'%s' command is returned.";
@@ -73,6 +74,9 @@ public class CommandFactory {
             break;
         case HELP_CMD:
             newCommand = new HelpCommand(userInput, family);
+            break;
+        case SEARCH_CMD:
+            newCommand = new SearchCommand(userInput,family);
             break;
         case EXIT:
             newCommand = new ExitCommand(userInput, family);

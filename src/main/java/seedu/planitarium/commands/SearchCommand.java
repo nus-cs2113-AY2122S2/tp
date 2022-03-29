@@ -21,7 +21,7 @@ public class SearchCommand extends Command {
 
     @Override
     public void execute() {
-
+        family.find(description, category);
     }
 
     @Override
