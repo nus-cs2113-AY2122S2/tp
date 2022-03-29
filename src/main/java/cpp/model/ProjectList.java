@@ -35,6 +35,7 @@ public class ProjectList {
         System.out.println(Constants.SEPARATOR);
     }
 
+    /*
     public void addProject(Project project) {
         System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(project.getTitle());
@@ -46,6 +47,7 @@ public class ProjectList {
         }
         System.out.println(Constants.SEPARATOR);
     }
+     */
 
     /**
      * Deletes a Project from projectList.

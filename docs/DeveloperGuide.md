@@ -8,6 +8,37 @@
 
 ### Implemented Features
 
+#### Add a Project
+![image info](./UmlDiagrams/addProject.png)
+
+**Step1.** When `CommandHandler` receives a user input starting with string "addproject", it will call `getProjectName`, which will return the project name. If the user did not provide at least 2 arguments, they will recieve a message and this command won't execute.
+
+**Step2.** Once this project name is returned, `CommandHandler` will call the `addProject` method from `ProjectList` with the project Name as a parameter
+
+**Step3.** `ProjectList` will self-call the `add` method, using a constructor to a new `Project` object as a parameter
+
+**Step4.** This new `Project` object is returned to the ProjectList, added, and the output "[projectName] added." is given to the user.
+
+#### Delete a Project
+![image info](./UmlDiagrams/deleteProject.png)
+
+Deleting a project functions very similarly to Adding a project.
+
+**Step1.** When `CommandHandler` receives a user input starting with string "addproject", it will call `getProjectName`, which will return the project name. If the user did not provide at least 2 arguments, they will recieve a message and this command won't execute.
+
+**Step2.** Once this project name is returned, `CommandHandler` will call the `deleteProject` method from `ProjectList` with the project Name as a parameter.
+
+**Step3.** `ProjectList` will self-call the findProjectIndex method, which will take the project name as a parameter.
+
+**Step4.** The findProjectIndex method will call `getTitle` with the project name as a parameter.
+
+**Step5.** the `findProjectIndex` method is called on every Project in the ProjectList until it finds the correct one. If it doesn't, the user is given an according error message.
+
+**Step6.** The index of the project is returned, and `ProjectList` will self-call the remove(index) method, removing the project from the planner.
+
+
+
+
 #### Todo feature
 ![image info](./UmlDiagrams/Todo.png)  
 
@@ -48,14 +79,33 @@ Given below is an example usage scenario and how the command parser behaves at e
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+CSProjPlanner provides a project management and scheduling system geared toward Computer Science students and utilises a text UI interface. 
+While providing CS students a convenient way to keep track and store all relevant information, links, and deadlines for their projects, 
+the program also allows for faster searching and editing than a GUI design once the user is familiar with the commands—a concept CS students are far too familiar with.
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ...                    | I want to ...                                             | So that I can ...                                                                 |
+|---------|-----------------------------|-----------------------------------------------------------|-----------------------------------------------------------------------------------|
+| v1.0    | new or experienced user     | add a task to the planner                                 | better organize my project                                                        |
+| v1.0    | user with existing projects | delete a project from the planner                         | remove projects that are already completed                                        |
+| v1.0    | user with existing projects | add a to-do to a project                                  | get a clear outline of what needs to be done                                      |
+| v1.0    | student user                | add  a deadline for my project                            | keep track of due dates                                                           | 
+| v1.0    | student user                | view the details (to-do list and deadlines) of my project | see what needs to be done and when to do it                                       |
+| v1.0    | student user                | mark a to-do as done                                      | keep track of already completed tasks                                             |
+| v1.0    | student user                | mark a to-do as not done                                  | fix mistakes of marking unfinished tasks                                          |
+| v1.0    | new user                    | access a help command                                     | familiarize myself with using the planner                                         |
+| v1.0    | student user                | exit the application                                      | close my planner when I am finished                                               |
+| ------  |                             |                                                           |                                                                                   |
+| v2.0    | student user                | add any web links/URLs                                    | keep track of relevant resources online                                           |
+| v2.0    | student user                | have quick access to my project's Github repo             | best keep track of my project lifecycle                                           |
+| v2.0    | student user                | list the programming languages/frameworks my project uses | know what languages/frameworks focus on and study                                 |
+| v2.0    | student user                | check what needs to be done within 24 hours               | focus on the most time-sensitive tasks                                            |
+| v2.0    | user with group projects    | assign tasks to members in a group                        | keep track of who is responsible for which part of the project                    |
+| v2.0    | user with group projects    | add members to a project                                  | remember who my group members are                                                 |
+| v2.0    | student user                | add a deadline to a to-do                                 | know the deadlines for each individual to-do                                      |
+| v2.0    | student user                | view my to-dos in order of due date                       | so that I know what I may need to work on first                                   |
+| v2.0    | student user                | save my project information in a file                     | keep a backup and also save my projects/schedules for the next time I use the app |
 
 ## Non-Functional Requirements
 
