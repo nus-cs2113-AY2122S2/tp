@@ -260,7 +260,31 @@ The general workflow of the `session /summary` command is as follows:
 ### Add an activity
 ### Remove an activity
 ### View an activity
+
 ### List activities
+**API reference:** [`ActivityListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/ActivityListCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `activity /list` command.
+<br>
+<br>
+![List Activity Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ActivityListCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `activity /list` command is as follows:
+1. The user input provided is passed to `Splitlah`.
+2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `ActivityListCommand` object.
+3. `ActivityListCommand#run` method is then invoked to run the `activity /list` command.
+4. The list of activities are stored in a `Profile` object, hence `Manager#getProfile` is called.
+5. To retrieve the activities from profile, `Profile#getActivityList` is executed,
+   where a list of `Activity` objects are returned.
+6. Once the list is retrieved, `ActivityListCommand` class checks if the list is empty.
+1. If the list is empty, a message indicating that the list is empty is printed
+   using `TextUi#printlnMessage`.
+2. If the list is not empty, `ActivityListCommand` will loop from the first to the second last activity,
+   calling `TextUi#printlnMessage()` to print out a brief overview of each session.
+   Then, the last group is printed with a divider below it, using the method `TextUi#printlnMessageWithDivider()`.
+
 ### Add a group
 **API reference:** [`GroupCreateCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupCreateCommand.java)
 
