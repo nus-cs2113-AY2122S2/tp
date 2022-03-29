@@ -272,8 +272,8 @@ when the user invokes the `group /create` command.
 <br>
 <br>
 The general workflow of the `group /create` command is as follows:
-1. The user input provided is passed to `Splitlah`.
-2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `GroupCreateCommand` object.
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupCreateCommand` object.
 3. A `GroupCreateCommand#run` method is then invoked to run the `group /create` command.
 4. Once the command starts to run, `GroupCreateCommand` class checks if there are duplicates in the name list.
 5. If there are duplicates, a message indicating that name list contains duplicates is printed using `TextUi#printlnMessage`. 
@@ -295,6 +295,9 @@ when the user invokes the `group /view` command.
 ![View Groups Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupViewCommand.drawio.png)
 <br>
 <br>
+The general workflow of the `group /view` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. 
 
 ### List groups
 **API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
@@ -307,14 +310,14 @@ when the user invokes the `group /list` command.
 <br>
 <br>
 The general workflow of the `group /list` command is as follows:
-1. The user input provided is passed to `Splitlah`.
-2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `GroupListCommand` object.
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupListCommand` object.
 3. `GroupListCommand#run()` method is then invoked to run the `group /list` command.
 4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile()` is called
 before the list of groups can be retrieved.
 5. The `GroupListCommand` object will then run `Profile#getGroupListSummaryString()` method to retrieve the string
 representing the summaries of the groups stored.
-6. The string retrieved will then be printed and the control is given back to `Splitlah`, which waits for the next user
+6. The string retrieved will then be printed and the control is given back to `SplitLah`, which waits for the next user
 input.
 
 ## Product scope
