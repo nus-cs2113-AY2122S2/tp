@@ -1,16 +1,25 @@
-# User Guide
+<p style="align:center"><img src="https://raw.githubusercontent.com/froststein/tp/master/docs/images/userguide/pngLogo.png"></p>
+<br>
 
-SplitLah is a desktop app with a Command Line Interface (CLI) for splitting bills amongst users after a group outing,
-where each group outings can consist of several activities with different people paying the bill for each activity.
-SplitLah does the work of calculating how much each participant owes and whom they must pay at the end of the activity.
+# SplitLah
+SplitLah is a desktop app with a Command Line Interface (CLI) for **splitting bills** amongst you and your friends after a group outing,
+where each group outing can consist of several activities with **different people paying the bill** for each activity.
+SplitLah does the work of **calculating how much each participant owes** and whom they must pay at the end of the activity.
 You will no longer have to waste time doing these calculations by hand, leaving you with more time to spend with your
 friends.
 
-SplitLah also consolidates all debts intelligently so that they can be paid off with the fewest number of transactions 
-possible, helping you to reduce time spent on making pointless transactions. 
-To help you look up past activities at any time, SplitLah remembers your information by saving all your sessions and
-activities to a save file.
+SplitLah also **consolidates all debts intelligently** so that they can be paid off with the fewest number of transactions 
+possible, helping you to **reduce time spent on making pointless transactions**. 
+You can **look up past activities** anytime you want. SplitLah remembers your information by saving your outings and
+activities.
 If you can type fast, SplitLah can manage your outings faster than apps using a Graphical User Interface (GUI).
+
+###Who SplitLah is for:
+- People who go on group outings often and love to split bills.
+- People who dislike manually calculating how much people owe across several activities.
+- People who go on group outings where different people pay for different activities, making bill-splitting harder.
+- People who want to manage outings with multiple social circles in one application.
+- People who can type fast.
 
 ## Contents
 * [How SplitLah works](#how-splitlah-works)
@@ -42,23 +51,42 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
-- Keeps track of several activities and their participants.
-- Keeps track of several sessions independently, each with their own activities and participants.
-- Keeps track of who paid the bill for each activity.
-- Splits costs evenly or independently depending on what the user requires.
-- Consolidates debts intelligently so they can be settled with as few transactions as possible.
-- Can be operated quickly by an experienced typist.
-- Command format is consistent, intuitive and flexible in the order of arguments supplied by the user, making SplitLah
-easy to use.
+##How to use this user guide
+- For each feature that SplitLah supports, we refer it as commands.
+- We classify each command under 5 sections, [Session Management](#_session-management_), [Activity Management](#_activity-management_), 
+[Transaction Management](#_transaction-management_), [Group Management](#_group-management_) and [Miscellaneous](#_miscellaneous_).
+- Each command is explained in greater detail in each command section.
+- The format for each command and examples are encased within a `code block`, so that they can be copied directly into SplitLah if needed.
+  - Example: `help`
+- In each command: 
+  - The blocks indicated with 💡 are important things to take note of when using the command.
+  - The blocks indicated with ⚠️are warnings that you should pay attention to when using the command.
 
-Target users:
+## Quick Notes
+- Allowed characters for values:
+    - Alphanumeric characters: `A-Z`, `a-z`, `0-9`
+    - Decimals: `3.5`
+    - Whitespace: `Birthday party`
+- A forward slash `/` indicates a delimiter and is used to separate commands into parts.
+  Each command's documentation specifies the required delimiters and their purpose.
+    - Example: `/n`, `/sid`
+- Parameters enclosed in `[ ]` must be supplied by the user.
+    - Example: `[SESSION_ID]`
+- Parameters with an ellipsis `...` indicate that the user can supply multiple values.
+    - Example: `[COST1 COST2 ...]`
+- Parameters enclosed within `[<` and `>]` indicates that the arguments are optional.
+    - Example: `[</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
 
-- People who go on group outings often and split bills.
-- People who dislike manually calculating how much people owe across several activities.
-- People who go on group outings where different people pay for different activities, making bill-splitting harder.
-- People who want to manage outings with multiple social circles in one app.
+## Quick Start
 
-## How SplitLah works
+1. Ensure that you have Java 11 or above installed.
+2. Download the latest .jar version of SplitLah from [here](https://github.com/AY2122S2-CS2113T-T10-1/tp/releases)
+3. Copy the file to the folder you wish to use as a home folder for SplitLah.
+4. Start SplitLah by executing `java -jar SplitLah.jar` in the terminal.
+5. Type in a command and press Enter to execute it.
+6. Refer to Features for a more in-depth explanation of all commands available.
+
+##How SplitLah works
 - An activity represents a single group activity, paid for by one person. An activity stores a list of its participants,
 the payer and how much each participant owes.
   - Example: `Lunch at a restaurant`
@@ -77,60 +105,38 @@ activity could have a different payer.
 - At the end of a session, SplitLah calculates how much each person owes and who they need to pay. This information is
 displayed in an easy-to-read summary.
 
-## Quick Notes
-- Allowed characters for values:
-    - Alphanumeric characters: `A-Z`, `a-z`, `0-9`
-    - Decimals: `3.5`
-    - Whitespace: `Birthday party`
-- A forward slash `/` indicates a delimiter and is used to separate commands into parts.
-  Each command's documentation specifies the required delimiters and their purpose.
-  - Example: `/n`, `/sid`
-- Parameters enclosed in `[ ]` must be supplied by the user. 
-  - Example: `[SESSION_ID]`
-- Parameters with an ellipsis `...` indicate that the user can supply multiple values.
-  - Example: `[COST1 COST2 ...]`
-- Parameters enclosed within `[<` and `>]` indicates that the arguments are optional.
-  - Example: `[</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
-
-## Quick Start
-
-1. Ensure that you have Java 11 or above installed.
-2. Download the latest .jar version of SplitLah from [here](https://github.com/AY2122S2-CS2113T-T10-1/tp/releases)
-3. Copy the file to the folder you wish to use as a home folder for SplitLah.
-4. Start SplitLah by executing `java -jar SplitLah.jar` in the terminal.
-5. Type in a command and press Enter to execute it.
-6. Refer to Features for a more in-depth explanation of all commands available.
 
 <hr>
 
 ## Features 
 
-
-### Creating a session: `session /create`
-
-> Creates a new session.<br>
+## _Session Management_
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
-Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ...] [</gid [GROUD_ID]>]`
+### Creating a session: `session /create`
+Creates a session so that you can manage your group outings using SplitLah. <br>
 
-* `[SESSION_NAME]` refers to the name of the session.
-  * The session name is **case-insensitive**.
-* `[SESSION_DATE]` refers to the date of the session.
-  * The format of the date must be in `DD-MM-YYYY`.
-* `[NAME1 NAME2 ...]` refers to a list of persons involved in the session.
-  * Each individual name is **case-insensitive**.
+> Format: `session /create /n [SESSION_NAME] /d [SESSION_DATE] /pl [NAME1 NAME2 ...] [</gid [GROUD_ID]>]`
+>* `[SESSION_NAME]` refers to the name of the session.
+>  * The session name is **case-insensitive**.
+>* `[SESSION_DATE]` refers to the date of the session.
+>  * The format of the date must be in `DD-MM-YYYY`.
+>* `[NAME1 NAME2 ...]` refers to a list of persons involved in the session.
+>  * Each individual name is **case-insensitive**.
+ 
+<br>
 
-> **💡 Notes:**
+>  **💡 Notes:**
 >- The `[SESSION_NAME]` should be unique across all active sessions.
 >- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
-
-> **⚠️Warning:**
+> 
+> **⚠️```diff - Warning:```**
 > - When using `/pl` and `/gid` delimiters together, if there is a duplicated name in `/pl` and 
 > specified group with `/gid`. The duplicate name would be removed, storing only 1 instance of it.
 >  - Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
      includes Alice, only two names, Alice and Bob, would be saved.
 
-Example of usage:
+Examples of usage:
 1. Adds a new session named Class Outing with Alice and Bob involved on 15-03-2022.
    - `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob` <br>
    ![Session create command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[1].png)
@@ -145,7 +151,7 @@ Example of usage:
 
 > Deletes an existing session.<br>
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
-> 
+
 Format: `session /delete /sid [SESSION_ID]`
 
 * `[SESSION_ID]` refers to the unique identifier of the session.
