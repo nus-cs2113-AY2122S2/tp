@@ -12,8 +12,6 @@ import seedu.duke.command.itemcommand.UpdateItemNameCommand;
 import seedu.duke.command.itemcommand.ViewItemListCommand;
 import seedu.duke.command.assigncommand.AssignHousekeeperCommand;
 
-import java.util.Locale;
-
 /**
  * Class that implements behavior of parsing user input and linking
  * that user input to a Command class.
@@ -23,8 +21,8 @@ public class CommandParser {
 
     private static final String BYE = "bye";
     private static final String ADD_ITEM_COMMAND = "add item ";
-    private static final String VIEW_ITEM_LIST_COMMAND = "view item in inventory";
-    private static final String VIEW_ITEM_WITH_ZERO_PAX_IN_LIST_COMMAND = "view item with zero pax";
+    private static final String VIEW_ITEM_LIST_COMMAND = "view all items";
+    private static final String VIEW_ITEMS_WITH_ZERO_PAX_COMMAND = "view items with zero pax";
     private static final String DELETE_ITEM_COMMAND = "delete item ";
     private static final String UPDATE_ITEM_PAX_COMMAND = "update item pax ";
     private static final String UPDATE_ITEM_NAME_COMMAND = "update item name ";
@@ -78,7 +76,7 @@ public class CommandParser {
             userCommand = new AddItemCommand(userInputLowerCaseWithoutCommand);
         } else if (userInputLowerCase.equals(VIEW_ITEM_LIST_COMMAND)) {
             userCommand = new ViewItemListCommand();
-        } else if (userInputLowerCase.equals(VIEW_ITEM_WITH_ZERO_PAX_IN_LIST_COMMAND)) {
+        } else if (userInputLowerCase.equals(VIEW_ITEMS_WITH_ZERO_PAX_COMMAND)) {
             userCommand = new ViewItemWithZeroPaxCommand();
         } else if (userInputLowerCase.startsWith(DELETE_ITEM_COMMAND)) {
             userInputLowerCaseWithoutCommand = userInputLowerCase.replace(DELETE_ITEM_COMMAND, "");

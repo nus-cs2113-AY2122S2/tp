@@ -1,14 +1,14 @@
 Error! Invalid Command.
-The item and its pax has been added to the list of items in the inventory.
-There are currently 1 items within the inventory.
+The item and its pax has been added to the item list.
+There are currently 1 items within the item list.
 Error! Item Name cannot be empty.
 Error! Item Pax cannot be empty.
 Error! Item Pax is invalid.
 Error! Item Pax is invalid.
-The item and its pax has been added to the list of items in the inventory.
-There are currently 2 items within the inventory.
-The item and its pax has been added to the list of items in the inventory.
-There are currently 3 items within the inventory.
+The item and its pax has been added to the item list.
+There are currently 2 items within the item list.
+The item and its pax has been added to the item list.
+There are currently 3 items within the item list.
 =========== Item List ===========
 1. Item Name: TOILET ROLL Item Pax: 15
 2. Item Name: FORK Item Pax: 15
@@ -141,6 +141,6 @@ Error! Invalid Command.
 ======== End of the list ========
 Error! Invalid Command.
 Error! PREMIUM SPOON has already been added to the item list.
-The item and its pax has been added to the list of items in the inventory.
-There are currently 3 items within the inventory.
+The item and its pax has been added to the item list.
+There are currently 3 items within the item list.
 see u again!
