@@ -15,11 +15,13 @@ import seedu.sherpass.command.UnmarkCommand;
 import seedu.sherpass.task.TaskList;
 import seedu.sherpass.util.Ui;
 
-import static seedu.sherpass.constant.CommandParameters.FREQUENCY_DELIMITER;
+import static seedu.sherpass.constant.Index.COMMAND_CONTENT_INDEX;
 import static seedu.sherpass.constant.Index.HELP_OPTIONS_INDEX;
 import static seedu.sherpass.constant.Index.OPTIONS_INDEX;
 
+import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_INPUT_MESSAGE;
+import static seedu.sherpass.constant.Message.WHITESPACE;
 
 
 public class Parser {
@@ -38,42 +40,30 @@ public class Parser {
      *
      * @param userInput User command.
      * @param taskList  Array of tasks.
-     * @param ui User interface which interacts with user
      * @return Command type matching the user command.
      */
     public static Command parseCommand(String userInput, TaskList taskList, Ui ui) {
-        String[] splitInput = userInput.split(" ", 2);
+        String[] splitInput = userInput.split(WHITESPACE, 2);
         String commandWord = splitInput[OPTIONS_INDEX].toLowerCase().trim();
-        String commandArg = "";
-        if (splitInput.length > 1) {
-            commandArg = splitInput[1];
-        }
+        String argument = (splitInput.length > 1)
+                ? splitInput[COMMAND_CONTENT_INDEX].trim() : EMPTY_STRING;
         switch (commandWord) {
         case MarkCommand.COMMAND_WORD:
-            return TaskParser.prepareMarkOrUnmark(splitInput, MarkCommand.COMMAND_WORD, taskList);
+            return TaskParser.prepareMarkOrUnmark(argument, MarkCommand.COMMAND_WORD, taskList);
         case UnmarkCommand.COMMAND_WORD:
-            return TaskParser.prepareMarkOrUnmark(splitInput, UnmarkCommand.COMMAND_WORD, taskList);
+            return TaskParser.prepareMarkOrUnmark(argument, UnmarkCommand.COMMAND_WORD, taskList);
         case AddCommand.COMMAND_WORD:
-            if (commandArg.contains(FREQUENCY_DELIMITER)) {
-                return TaskParser.prepareAddRecurring(commandArg);
-            }
-            return TaskParser.prepareAdd(splitInput, taskList);
+            return TaskParser.prepareAdd(argument, ui);
         case EditCommand.COMMAND_WORD:
-            if (commandArg.contains(FREQUENCY_DELIMITER)) {
-                return TaskParser.prepareEditRecurring(commandArg);
-            }
-            return TaskParser.prepareEdit(splitInput);
+            return TaskParser.prepareEdit(argument, taskList, ui);
         case DeleteCommand.COMMAND_WORD:
-            if (commandArg.contains(FREQUENCY_DELIMITER)) {
-                return TaskParser.prepareDeleteRecurring(commandArg);
-            }
-            return TaskParser.prepareDelete(splitInput, taskList);
+            return TaskParser.prepareDelete(argument, taskList, ui);
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
         case StudyCommand.COMMAND_WORD:
             return new StudyCommand();
         case ShowCommand.COMMAND_WORD:
-            return TaskParser.prepareShow(splitInput);
+            return TimetableParser.prepareShow(splitInput);
         case HelpCommand.COMMAND_WORD:
             return prepareHelp(userInput);
         case ExitCommand.COMMAND_WORD:

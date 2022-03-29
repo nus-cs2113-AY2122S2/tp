@@ -71,6 +71,7 @@ public class Storage {
         JSONArray tasks = new JSONArray();
         for (Task t : taskList.getTasks()) {
             JSONObject taskToStore = new JSONObject();
+            taskToStore.put("index", t.getIndex());
             taskToStore.put("identifier", t.getIdentifier());
             taskToStore.put("status", t.getStatusIcon());
             taskToStore.put("by_date",
@@ -153,7 +154,7 @@ public class Storage {
             wipeSaveData();
         } else {
             ui.showToUser(ERROR_CORRUPT_SAVED_FILE_MESSAGE_3);
-            System.exit(1);
+            System.exit(0);
         }
     }
 
