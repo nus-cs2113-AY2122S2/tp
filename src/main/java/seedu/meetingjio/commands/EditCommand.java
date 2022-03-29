@@ -8,9 +8,17 @@ import seedu.meetingjio.timetables.Timetable;
 
 import seedu.meetingjio.parser.ParserHelperMethods;
 
-import seedu.meetingjio.exceptions.*;
+import seedu.meetingjio.exceptions.TimetableNotFoundException;
+import seedu.meetingjio.exceptions.InvalidAttributeValueException;
+import seedu.meetingjio.exceptions.InvalidModeException;
+import seedu.meetingjio.exceptions.InvalidDayException;
+import seedu.meetingjio.exceptions.InvalidTimeException;
 
-import static seedu.meetingjio.common.ErrorMessages.*;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_ATTRIBUTE_VALUE;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_OVERLAPPING_EVENT;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_INDEX_OUT_OF_BOUND;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -87,6 +95,7 @@ public class EditCommand extends Command {
         switch (attribute) {
         case TITLE:
             event.setTitle(value);
+            break;
         case MODE:
             try {
                 ParserHelperMethods.checkMode(value);
@@ -121,6 +130,8 @@ public class EditCommand extends Command {
                 throw new InvalidAttributeValueException();
             }
             break;
+        default:
+            return;
         }
     }
 
