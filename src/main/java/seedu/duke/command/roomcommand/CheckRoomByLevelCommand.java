@@ -33,10 +33,9 @@ public class CheckRoomByLevelCommand extends Command {
      * Override of execute command in Command class.
      * Print out all room information with corresponding level
      * including the information of:
-     * type, room number, level and status.
-     *
-     * @param listContainer asdd
-     * @param ui            The user interface for this execution method.
+     * type, room number, level, status and assigned housekeeper.
+     * @param listContainer The object containing the necessary data structure.
+     * @param ui The object that deals with user interface for the program.
      * @throws InvalidLevelException if the level is invalid.
      */
     @Override

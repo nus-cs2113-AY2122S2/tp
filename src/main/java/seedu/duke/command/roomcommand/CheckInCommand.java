@@ -1,12 +1,12 @@
 package seedu.duke.command.roomcommand;
 
+import seedu.duke.AssignmentMap;
+import seedu.duke.InvalidRoomNumberException;
 import seedu.duke.ListContainer;
+import seedu.duke.Room;
+import seedu.duke.RoomList;
 import seedu.duke.Ui;
 import seedu.duke.command.Command;
-import seedu.duke.Room;
-import seedu.duke.AssignmentMap;
-import seedu.duke.RoomList;
-import seedu.duke.InvalidRoomNumberException;
 
 import java.io.IOException;
 
@@ -25,8 +25,8 @@ public class CheckInCommand extends Command {
      * The room status will be changed to occupied.
      * After check in, it will print out corresponding room information.
      *
-     * @param listContainer asd
-     * @param ui            The user interface for this execution method.
+     * @param listContainer The object containing the necessary data structure.
+     * @param ui The object that deals with user interface for the program.
      * @throws InvalidRoomNumberException if the room number is not in the room list.
      */
     @Override

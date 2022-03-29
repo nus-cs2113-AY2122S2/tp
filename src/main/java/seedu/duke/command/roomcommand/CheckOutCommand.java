@@ -23,10 +23,9 @@ public class CheckOutCommand extends Command {
      * Check out room with corresponding room number.
      * The room status will be changed to vacant
      * After check in, it will print out corresponding room information.
-     *
-     * @param listContainer asd
-     * @param ui            The user interface for this execution method.
-     * @throws InvalidRoomNumberException if the room number is not in the room list.
+     * @param listContainer The object containing the necessary data structure.
+     * @param ui The object that deals with user interface for the program.
+     * @throws InvalidRoomNumberException if the room number is not inside the room list.
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws InvalidRoomNumberException, IOException {

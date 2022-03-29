@@ -1,11 +1,11 @@
 package seedu.duke.command.roomcommand;
 
 import seedu.duke.AssignmentMap;
-import seedu.duke.RoomList;
-import seedu.duke.command.Command;
-import seedu.duke.Ui;
-import seedu.duke.Room;
 import seedu.duke.ListContainer;
+import seedu.duke.Room;
+import seedu.duke.RoomList;
+import seedu.duke.Ui;
+import seedu.duke.command.Command;
 
 
 /**
@@ -21,10 +21,9 @@ public class CheckAllRoomCommand extends Command {
     /**
      * Override of execute command in Command class.
      * Print out all room information including:
-     * type, room number, level and status.
-     *
-     * @param listContainer dfajdfkfl
-     * @param ui            The user interface for this execution method.
+     * type, room number, level, status and assigned housekeeper.
+     * @param listContainer The object containing the necessary data structure.
+     * @param ui The object that deals with user interface for the program.
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) {
