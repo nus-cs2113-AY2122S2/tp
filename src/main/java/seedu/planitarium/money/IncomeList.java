@@ -35,8 +35,9 @@ public class IncomeList extends MoneyList {
 
     /**
      * Creates and add a new income object to the income list.
+     *
      * @param description The description of the user's income
-     * @param amount The income amount
+     * @param amount      The income amount
      * @param isPermanent The recurring status of the income
      */
     public void addIncome(String description, double amount, boolean isPermanent) {
@@ -50,6 +51,7 @@ public class IncomeList extends MoneyList {
 
     /**
      * Removes an income object from list of income.
+     *
      * @param index The index of the income on the person's income list
      */
     public void remove(int index) {
@@ -63,6 +65,7 @@ public class IncomeList extends MoneyList {
 
     /**
      * Returns the total income amount in the person's list.
+     *
      * @return The total amount of all income in the list
      */
     public double getTotalIncome() {
@@ -87,6 +90,7 @@ public class IncomeList extends MoneyList {
 
     /**
      * Returns the number of income in the person's income list.
+     *
      * @return The number of income
      */
     public int getNumberOfIncomes() {
@@ -96,6 +100,7 @@ public class IncomeList extends MoneyList {
 
     /**
      * Returns the amount of an income object in the list.
+     *
      * @param index The index of the income on the person's income list
      * @return The income amount
      */
@@ -110,6 +115,7 @@ public class IncomeList extends MoneyList {
     /**
      * Returns the description of an income object from a
      * person's Income list.
+     *
      * @param index The index of the income on the list
      * @return The description of the income
      */
@@ -124,6 +130,7 @@ public class IncomeList extends MoneyList {
     /**
      * Returns the date of an income object from a
      * person's Income list.
+     *
      * @param index The index of the income on the list
      * @return The date of the income
      */
@@ -138,6 +145,7 @@ public class IncomeList extends MoneyList {
     /**
      * Returns the recurring status of an income object from a
      * person's Income list.
+     *
      * @param index The index of the income on the list
      * @return The recurring status of the income
      */
@@ -151,6 +159,7 @@ public class IncomeList extends MoneyList {
 
     /**
      * Returns the current income list.
+     *
      * @return The current income list
      */
     public ArrayList<Income> getIncomeArrayList() {
@@ -159,9 +168,10 @@ public class IncomeList extends MoneyList {
 
     /**
      * Edits the income object's attribute based on the user's input values.
-     * @param index The income object to be updated
+     *
+     * @param index       The income object to be updated
      * @param description The new description, if any
-     * @param amount The new amount, if any
+     * @param amount      The new amount, if any
      * @param isPermanent The new recurring status, if any
      */
     public void editIncome(int index, String description, double amount, Boolean isPermanent) {
@@ -176,7 +186,8 @@ public class IncomeList extends MoneyList {
 
     /**
      * Edits the income's recurring status.
-     * @param index The income's index in the list
+     *
+     * @param index       The income's index in the list
      * @param isPermanent The income's recurring status
      */
     private void editIncPerm(int index, Boolean isPermanent) {
@@ -187,7 +198,8 @@ public class IncomeList extends MoneyList {
 
     /**
      * Edits the income's amount.
-     * @param index The income's index in the list
+     *
+     * @param index       The income's index in the list
      * @param isPermanent The income's amount
      */
     private void editIncAmount(int index, Double amount) {
@@ -198,7 +210,8 @@ public class IncomeList extends MoneyList {
 
     /**
      * Edits the income's description.
-     * @param index The income's index in the list
+     *
+     * @param index       The income's index in the list
      * @param isPermanent The income's description.
      */
     private void editIncDesc(int index, String description) {
@@ -209,6 +222,7 @@ public class IncomeList extends MoneyList {
 
     /**
      * Search through income list for matching description or amount.
+     *
      * @param description The user's search string.
      */
     public void find(String description) {
@@ -220,12 +234,14 @@ public class IncomeList extends MoneyList {
 
     /**
      * Check if income's description or amount contains input string.
+     *
      * @param description The user's search string.
-     * @param item The income object
+     * @param item        The income object
      */
     private void matchString(String description, Income item) {
-        if (item.getDescription().contains(description)
-                || Double.toString(item.getAmount()).contains(description)) {
+        boolean hasDescription = item.getDescription().contains(description);
+        boolean hasAmount = Double.toString(item.getAmount()).contains(description);
+        if (hasDescription || hasAmount) {
             System.out.println(item);
         }
     }
@@ -242,6 +258,7 @@ public class IncomeList extends MoneyList {
     /**
      * Check and remove income if income is expired. In this case, it is
      * defined as any income not created this month.
+     *
      * @param item The income object
      */
     private void checkIncomeDate(Income item) {

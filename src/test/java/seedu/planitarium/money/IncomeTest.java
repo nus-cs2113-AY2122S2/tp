@@ -25,16 +25,17 @@ class IncomeTest {
 
     @Test
     public void getDescription_validIncome_expectedDescription() {
-        String inputDescription = "food";
+        String expectedDescription = "food";
         String actualDescription = testItem.getDescription();
-        assertEquals(inputDescription, actualDescription);
+        assertEquals(expectedDescription, actualDescription);
     }
 
     @Test
     public void setDescription_validIncome_success() {
-        String inputDescription = "food";
+        String expectedDescription = "Food";
+        testItem.setDescription("Food");
         String actualDescription = testItem.getDescription();
-        assertEquals(inputDescription, actualDescription);
+        assertEquals(expectedDescription, actualDescription);
     }
 
     @Test
@@ -68,14 +69,14 @@ class IncomeTest {
 
     @Test
     public void saveString_getString_success() {
-        String result = "i food - 1000.0 - false";
-        String actual = testItem.saveString();
-        assertEquals(result, actual);
+        String expectedString = "i food - 1000.0 - false";
+        String actualString = testItem.saveString();
+        assertEquals(expectedString, actualString);
     }
 
     @Test
     public void toString_getString_success() {
-        String result = "food: $1000.00 - Recurring: false";
-        assertEquals(result, testItem.toString());
+        String expectedString = "food: $1000.00 - Recurring: false";
+        assertEquals(expectedString, testItem.toString());
     }
 }

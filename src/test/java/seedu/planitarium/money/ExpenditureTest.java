@@ -21,27 +21,27 @@ class ExpenditureTest {
 
     @BeforeEach
     public void setUp() {
-        testItem = new Expenditure("food", 24, 1,false);
+        testItem = new Expenditure("food", 24, 1, false);
     }
 
     @Test
     public void getDescription_validExpenditure_success() {
-        String inputDescription = "food";
+        String expectedDescription = "food";
         String actualDescription = testItem.getDescription();
-        assertEquals(inputDescription, actualDescription);
+        assertEquals(expectedDescription, actualDescription);
     }
 
     @Test
     public void getAmount_validExpenditure_success() {
-        double inputAmount = 24;
+        double expectedAmount = 24;
         double actualAmount = testItem.getAmount();
-        assertEquals(inputAmount, actualAmount);
+        assertEquals(expectedAmount, actualAmount);
     }
 
     @Test
     public void addExpenditure_nullDescription_expectAssertionError() {
         try {
-            Expenditure testNullDescription = new Expenditure(null, 24, 1,false);
+            Expenditure testNullDescription = new Expenditure(null, 24, 1, false);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());
@@ -65,17 +65,17 @@ class ExpenditureTest {
 
     @Test
     public void getCategory_validCategory_success() {
-        String inputCat = Category.getLabelForIndex(Constants.MIN_CATEGORY_INDEX);
+        String expectedCat = Category.getLabelForIndex(Constants.MIN_CATEGORY_INDEX);
         String actualCat = testItem.getCategory();
-        assertEquals(inputCat, actualCat);
+        assertEquals(expectedCat, actualCat);
     }
 
     @Test
     public void setCategory_validCategory_success() {
         testItem.setCategory(Constants.LIMIT_TWO_TOKENS);
-        String inputCat = Category.getLabelForIndex(Constants.LIMIT_TWO_TOKENS);
+        String expectedCat = Category.getLabelForIndex(Constants.LIMIT_TWO_TOKENS);
         String actualCat = testItem.getCategory();
-        assertEquals(inputCat, actualCat);
+        assertEquals(expectedCat, actualCat);
     }
 
     @Test
@@ -87,14 +87,14 @@ class ExpenditureTest {
 
     @Test
     public void saveString_getString_success() {
-        String result = "e food - 24.0 - false - 1";
-        String actual = testItem.saveString();
-        assertEquals(result, actual);
+        String expectedString = "e food - 24.0 - false - 1";
+        String actualString = testItem.saveString();
+        assertEquals(expectedString, actualString);
     }
 
     @Test
     public void toString_getString_success() {
-        String result = "food: $24.00 - Recurring: false - Category: Food and Drinks";
-        assertEquals(result, testItem.toString());
+        String expectedResult = "food: $24.00 - Recurring: false - Category: Food and Drinks";
+        assertEquals(expectedResult, testItem.toString());
     }
 }

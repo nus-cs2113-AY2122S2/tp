@@ -39,8 +39,8 @@ public class ExpenditureList extends MoneyList {
      * Adds an expenditure record to the expenditure list.
      *
      * @param description The description of what the user had spent on
-     * @param amount The cost for this expenditure
-     * @param category The integer label of the category
+     * @param amount      The cost for this expenditure
+     * @param category    The integer label of the category
      * @param isPermanent The recurring status of the expenditure
      */
     public void addExpenditure(String description, double amount, int category, boolean isPermanent) {
@@ -68,6 +68,7 @@ public class ExpenditureList extends MoneyList {
 
     /**
      * Returns the total cost of all expenditure in the person's list.
+     *
      * @return The total cost of all expenditure in the list
      */
     public double getTotalExpenditure() {
@@ -92,6 +93,7 @@ public class ExpenditureList extends MoneyList {
 
     /**
      * Returns the number of entries in the person's expenditure list.
+     *
      * @return The number of expenditure entries
      */
     public int getNumberOfExpenditures() {
@@ -137,6 +139,7 @@ public class ExpenditureList extends MoneyList {
     /**
      * Returns the date of an expenditure object from a
      * person's Expenditure list.
+     *
      * @param index The index of the expenditure on the list
      * @return The date of the expenditure
      */
@@ -151,6 +154,7 @@ public class ExpenditureList extends MoneyList {
     /**
      * Returns the recurring status of an expenditure object from a
      * person's Expenditure list.
+     *
      * @param index The index of the expenditure on the list
      * @return The recurring of the expenditure
      */
@@ -165,6 +169,7 @@ public class ExpenditureList extends MoneyList {
     /**
      * Returns the category of an expenditure object from a
      * person's Expenditure list.
+     *
      * @param index The index of the expenditure on the list
      * @return The category of the expenditure
      */
@@ -178,10 +183,11 @@ public class ExpenditureList extends MoneyList {
 
     /**
      * Edits the expenditure object's attribute based on the user's input values.
-     * @param index The expenditure object to be updated
+     *
+     * @param index       The expenditure object to be updated
      * @param description The new description, if any
-     * @param amount The new amount, if any
-     * @param category The new category, if any
+     * @param amount      The new amount, if any
+     * @param category    The new category, if any
      * @param isPermanent The new recurring status, if any
      */
     public void editExpenditure(int index, String description, double amount, int category, Boolean isPermanent) {
@@ -197,7 +203,8 @@ public class ExpenditureList extends MoneyList {
 
     /**
      * Edits the expenditure's recurring status.
-     * @param index The expenditure's index in the list
+     *
+     * @param index       The expenditure's index in the list
      * @param isPermanent The expenditure's recurring status
      */
     private void editExpPerm(int index, Boolean isPermanent) {
@@ -208,7 +215,8 @@ public class ExpenditureList extends MoneyList {
 
     /**
      * Edits the expenditure's description.
-     * @param index The expenditure's index in the list
+     *
+     * @param index    The expenditure's index in the list
      * @param category The expenditure's category
      */
     private void editExpCat(int index, Integer category) {
@@ -219,7 +227,8 @@ public class ExpenditureList extends MoneyList {
 
     /**
      * Edits the expenditure's amount.
-     * @param index The expenditure's index in the list
+     *
+     * @param index  The expenditure's index in the list
      * @param amount The expenditure's amount
      */
     private void editExpAmount(int index, Double amount) {
@@ -230,7 +239,8 @@ public class ExpenditureList extends MoneyList {
 
     /**
      * Edits the expenditure's description.
-     * @param index The expenditure's index in the list
+     *
+     * @param index       The expenditure's index in the list
      * @param description The expenditure's description
      */
     private void editExpDesc(int index, String description) {
@@ -241,8 +251,9 @@ public class ExpenditureList extends MoneyList {
 
     /**
      * Search through expenditure list for matching description or amount.
+     *
      * @param description The user's search string.
-     * @param category The user's specified category
+     * @param category    The user's specified category
      */
     public void find(String description, int category) {
         logger.log(Level.INFO, LOG_FIND);
@@ -256,12 +267,14 @@ public class ExpenditureList extends MoneyList {
     /**
      * Check the expenditure list for expenditure where its description or amount
      * contains input string.
+     *
      * @param description The user's search string.
      */
     private void matchString(String description) {
         for (Expenditure item : expenditureArrayList) {
-            if (item.getDescription().contains(description)
-                    || Double.toString(item.getAmount()).contains(description)) {
+            boolean hasDescription = item.getDescription().contains(description);
+            boolean hasAmount = Double.toString(item.getAmount()).contains(description);
+            if (hasDescription || hasAmount) {
                 System.out.println(item);
             }
         }
@@ -270,14 +283,16 @@ public class ExpenditureList extends MoneyList {
     /**
      * Check the expenditure list for expenditure where its description or amount
      * contains input string and is the specified category.
+     *
      * @param description The user's search string.
-     * @param category The user's specified category
+     * @param category    The user's specified category
      */
     private void matchString(String description, int category) {
         for (Expenditure item : expenditureArrayList) {
-            if (item.getCategory().equals(Category.getLabelForIndex(category))
-                    && (item.getDescription().contains(description)
-                    || Double.toString(item.getAmount()).contains(description))) {
+            boolean inCategory = item.getCategory().equals(Category.getLabelForIndex(category));
+            boolean hasDescription = item.getDescription().contains(description);
+            boolean hasAmount = Double.toString(item.getAmount()).contains(description);
+            if (inCategory && (hasDescription || hasAmount)) {
                 System.out.println(item);
             }
         }
@@ -295,6 +310,7 @@ public class ExpenditureList extends MoneyList {
     /**
      * Check and remove expenditure if expenditure is expired. In this case, it is
      * defined as any expenditure not created this month.
+     *
      * @param item The expenditure object
      */
     private void checkExpenditureDate(Expenditure item) {

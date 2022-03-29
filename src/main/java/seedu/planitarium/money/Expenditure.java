@@ -14,7 +14,7 @@ public class Expenditure extends Money {
      * @param description Expenditure's description
      * @param amount      Expenditure's amount
      * @param isPermanent Boolean var to indicate if expenditure is recurring
-     * @param category Expenditure's category
+     * @param category    Expenditure's category
      */
     public Expenditure(String description, double amount, int category, boolean isPermanent) {
         super(description, amount, isPermanent);
@@ -23,6 +23,7 @@ public class Expenditure extends Money {
 
     /**
      * Return the string label of the category from its integer attribute.
+     *
      * @return Category label
      */
     public String getCategory() {
@@ -31,14 +32,16 @@ public class Expenditure extends Money {
 
     /**
      * Set category attribute of expenditure object.
+     *
      * @param category integer of the category label
      */
     public void setCategory(int category) {
-        this.category =  category;
+        this.category = category;
     }
 
     /**
      * Return object's string representation for storage purposes.
+     *
      * @return Object attributes as string
      */
     public String saveString() {
@@ -51,11 +54,12 @@ public class Expenditure extends Money {
     /**
      * Returns the expenditure object string representation, which includes its
      * description, its amount in two decimal place, it's recurring status and its category.
+     *
      * @return The object's string representation.
      */
     @Override
     public String toString() {
-        return  description + ": $" + String.format("%.2f", amount)
+        return description + ": $" + String.format("%.2f", amount)
                 + " - Recurring: " + isPermanent
                 + " - Category: " + getCategory();
     }
