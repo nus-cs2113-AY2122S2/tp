@@ -1,6 +1,15 @@
-package seedu.duke;
+package seedu.duke.command.roomcommand;
 
+import seedu.duke.AssignmentMap;
+import seedu.duke.InvalidLevelException;
+import seedu.duke.InvalidRoomNumberException;
+import seedu.duke.ListContainer;
+import seedu.duke.Room;
+import seedu.duke.RoomList;
+import seedu.duke.Ui;
 import seedu.duke.command.Command;
+import seedu.duke.command.RoomHelper;
+
 
 /**
  * Class that implements execution behavior for listing the information
@@ -16,7 +25,10 @@ public class CheckRoomByLevelCommand extends Command {
      *
      * @param commandStringWithoutCommand contains the information of the level.
      */
-    public CheckRoomByLevelCommand(String commandStringWithoutCommand) {
+    public CheckRoomByLevelCommand(String commandStringWithoutCommand) throws InvalidRoomNumberException {
+        if (!RoomHelper.isValidIntNumber(commandStringWithoutCommand.trim())) {
+            throw new InvalidRoomNumberException();
+        }
         level = Integer.parseInt(commandStringWithoutCommand.trim());
     }
 
@@ -25,10 +37,10 @@ public class CheckRoomByLevelCommand extends Command {
      * Override of execute command in Command class.
      * Print out all room information with corresponding level
      * including the information of:
-     * type, room number, level and status.
+     * type, room number, level, status and assigned housekeeper.
      *
-     * @param listContainer asdd
-     * @param ui            The user interface for this execution method.
+     * @param listContainer The object containing the necessary data structure.
+     * @param ui            The object that deals with user interface for the program.
      * @throws InvalidLevelException if the level is invalid.
      */
     @Override

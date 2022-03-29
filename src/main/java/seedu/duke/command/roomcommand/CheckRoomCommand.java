@@ -1,6 +1,14 @@
-package seedu.duke;
+package seedu.duke.command.roomcommand;
 
+import seedu.duke.AssignmentMap;
+import seedu.duke.HotelLiteManagerException;
+import seedu.duke.InvalidRoomNumberException;
+import seedu.duke.ListContainer;
+import seedu.duke.Room;
+import seedu.duke.RoomList;
+import seedu.duke.Ui;
 import seedu.duke.command.Command;
+import seedu.duke.command.RoomHelper;
 
 /**
  * Class that implements execution behavior to list room with corresponding
@@ -16,11 +24,10 @@ public class CheckRoomCommand extends Command {
      * @param commandStringWithoutCommand contains the information of room number.
      */
     public CheckRoomCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
-        String command = commandStringWithoutCommand.trim();
-        if (command.isEmpty()) {
+        if (!RoomHelper.isValidIntNumber(commandStringWithoutCommand.trim())) {
             throw new InvalidRoomNumberException();
         }
-        roomId = Integer.parseInt(command);
+        roomId = Integer.parseInt(commandStringWithoutCommand.trim());
     }
 
 
@@ -28,10 +35,10 @@ public class CheckRoomCommand extends Command {
      * Override of execute command in Command class.
      * Print out the room information with corresponding room number
      * including information of:
-     * type, room number, level and status.
+     * type, room number, level, status and assigned housekeeper.
      *
-     * @param listContainer asd
-     * @param ui            The user interface for this execution method.
+     * @param listContainer The object containing the necessary data structure.
+     * @param ui            The object that deals with user interface for the program.
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) throws InvalidRoomNumberException {

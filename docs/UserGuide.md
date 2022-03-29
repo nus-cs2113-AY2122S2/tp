@@ -298,6 +298,147 @@ Everyone is within age limit
 ======== End of the list ========
 ```
 
+## Room Related Commands
+
+### Check in a room: `check in`
+Checks in a room according to the room number. The status of room will change to 
+Occupied
+
+Format: `check in ROOM_NUMBMR`
+
+* The `ROOM_NUMBER` must be inside the room list.
+
+Example of usage:
+
+`check in 203`
+
+Expected output:
+
+```
+======================================================================
+Type		Room Id		level		Status			Housekeeper Name
+======================================================================
+Triple		203			 2			Occupied			NA
+```
+
+
+### Check out a room: `check out`
+Checks out a room according to the room number. The status of room will change to
+Vaccant
+
+Format: `check out ROOM_NUMBMR`
+
+* The `ROOM_NUMBER` must be inside the room list.
+
+Example of usage:
+
+`check out 203`
+
+Expected output:
+
+```
+======================================================================
+Type		Room Id		level		Status			Housekeeper Name
+======================================================================
+Triple		203			 2			Vaccant			NA
+```
+
+
+### Check room information: `check room`
+Checks the information of the room
+
+Format: `check room ROOM_NUMBMR`
+
+* The `ROOM_NUMBER` must be inside the room list.
+
+Example of usage:
+
+`check room 203`
+
+Expected output:
+
+```
+======================================================================
+Type		Room Id		level		Status			Housekeeper Name
+======================================================================
+Triple		203			 2			Vaccant			NA
+```
+
+### Check room information by level: `check level`
+Checks information of all room at target level
+
+Format: `check level LEVEL_NUMBER`
+
+* The `LEVEL_NUMBER` must has at least one room.
+
+Example of usage:
+
+`check level 2`
+
+Expected output:
+
+```
+Type		Room Id		level		Status			House Keeper Name
+Double		201			 2			Vacant  			jane
+Triple		202			 2			Vacant  			jane
+Triple		203			 2			Occupied			NA
+Queen		204			 2			Vacant  			NA
+```
+
+### Check room information by category: `check category`
+Checks information of all room at target category
+
+Format: `check category CATEGORY`
+
+* The `LEVEL_NUMBER` must has at least one room.
+
+Example of usage:
+
+`check category Queen`
+
+Expected output:
+
+```
+======================================================================
+Type		Room Id		level		Status			Housekeeper Name
+======================================================================
+Queen		204			 2			Vacant  			NA
+Queen		301			 3			Occupied			jane
+```
+
+### Check all room information: `check all room`
+Checks information of all room at target category
+
+Format: `check all room`
+
+
+Example of usage:
+
+`check all room`
+
+Expected output:
+
+```
+======================================================================
+Type		Room Id		level		Status			Housekeeper Name
+======================================================================
+Single		101			 1			Occupied			NA
+Single		102			 1			Vacant  			NA
+Double		103			 1			Vacant  			NA
+Double		201			 2			Vacant  			jane
+Triple		202			 2			Vacant  			jane
+Triple		203			 2			Occupied			NA
+Queen		204			 2			Vacant  			NA
+Queen		301			 3			Occupied			jane
+King		302			 3			Occupied			NA
+King		303			 3			Vacant  			NA
+Twin		401			 4			Vacant  			susan
+Twin		402			 4			Occupied			NA
+```
+
+
+
+
 
 ## FAQ
 

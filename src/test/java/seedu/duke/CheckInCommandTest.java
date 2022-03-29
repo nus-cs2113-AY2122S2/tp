@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.command.roomcommand.CheckInCommand;
 
 import java.io.IOException;
 
@@ -43,7 +44,7 @@ class CheckInCommandTest {
 
     //unhappy
     @Test
-    void execute_inValidRoomNumber_throwException() throws IOException {
+    void execute_inValidRoomNumber_throwException() throws IOException, InvalidRoomNumberException {
         ListContainer listContainer = new ListContainer();
         Ui ui = new Ui();
         String inputCommand = "601";

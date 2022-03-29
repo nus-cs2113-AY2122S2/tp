@@ -31,6 +31,15 @@ public class EventList {
         }
     }
 
+    public void delete(String n) throws InvalidDateException {
+        try {
+            int j = Integer.parseInt(n) - 1;
+            eventList.remove(j);
+        } catch (Exception e) {
+            throw new InvalidDateException();
+        }
+    }
+
     public void save() throws IOException {
         EventListFileManager eventFileManager = new EventListFileManager();
         eventFileManager.save(eventList);

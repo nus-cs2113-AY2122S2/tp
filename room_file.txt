@@ -1,9 +1,9 @@
 Single | 101 | 1 | Occupied
-Single | 102 | 1 | Vacant
+Single | 102 | 1 | Occupied
 Double | 103 | 1 | Vacant
 Double | 201 | 2 | Vacant
 Triple | 202 | 2 | Vacant
-Triple | 203 | 2 | Vacant
+Triple | 203 | 2 | Occupied
 Queen | 204 | 2 | Vacant
 Queen | 301 | 3 | Occupied
 King | 302 | 3 | Occupied

@@ -1,25 +1,33 @@
-package seedu.duke;
+package seedu.duke.command.roomcommand;
+
+import seedu.duke.AssignmentMap;
+import seedu.duke.InvalidRoomNumberException;
+import seedu.duke.ListContainer;
+import seedu.duke.Room;
+import seedu.duke.RoomList;
+import seedu.duke.Ui;
+import seedu.duke.command.Command;
+import seedu.duke.command.RoomHelper;
 
 import java.io.IOException;
 
-import seedu.duke.command.Command;
-
 /**
- * Class that checks out a room with corresponding room number
- * and changes its status to be vacant.
+ * Class that checks in a room and changes the status
+ * of the room to be occupied.
  */
-public class CheckOutCommand extends Command {
+
+public class CheckInCommand extends Command {
     RoomList roomList;
     int roomId;
 
     /**
      * Override of execute command in Command class.
-     * Check out room with corresponding room number.
-     * The room status will be changed to vacant
+     * Check in room with corresponding room number.
+     * The room status will be changed to occupied.
      * After check in, it will print out corresponding room information.
      *
-     * @param listContainer asd
-     * @param ui            The user interface for this execution method.
+     * @param listContainer The object containing the necessary data structure.
+     * @param ui            The object that deals with user interface for the program.
      * @throws InvalidRoomNumberException if the room number is not in the room list.
      */
     @Override
@@ -28,7 +36,7 @@ public class CheckOutCommand extends Command {
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         for (Room room : roomList.getRoomList()) {
             if (room.getRoomId() == roomId) {
-                room.checkOut();
+                room.checkIn();
                 ui.printTableHeader();
                 System.out.println(room + "\t\t\t"
                         + assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()));
@@ -36,6 +44,7 @@ public class CheckOutCommand extends Command {
                 return;
             }
         }
+
         throw new InvalidRoomNumberException();
     }
 
@@ -44,7 +53,11 @@ public class CheckOutCommand extends Command {
      *
      * @param command contains the roomId.
      */
-    public CheckOutCommand(String command) {
+    public CheckInCommand(String command) throws InvalidRoomNumberException {
+        if (!RoomHelper.isValidIntNumber(command.trim())) {
+            throw new InvalidRoomNumberException();
+        }
         roomId = Integer.parseInt(command.trim());
     }
+
 }
