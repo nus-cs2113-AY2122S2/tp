@@ -14,11 +14,11 @@ deactivate ":Integer"
 
 wl -> wl :checkIndexIsWithinRange(indexToDelete)
 activate wl
-return :boolean
+return isIndexToDeleteValid:boolean
 
 opt !isIndexToDeleteValid
-create ":WorkoutOutOfRangeException" AS wre
-wl -> wre : throw new WorkoutOutOfRangeException
+create ":InvalidWorkoutException" AS wre
+wl -> wre : throw new InvalidWorkoutException
 activate wre
 return
 end

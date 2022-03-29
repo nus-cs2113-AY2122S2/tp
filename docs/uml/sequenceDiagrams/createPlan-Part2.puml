@@ -1,0 +1,73 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../Style.puml
+
+autonumber 7.1
+
+participant "planList\n:PlanList" AS pl
+participant "workoutList\n:WorkoutList" AS wl
+
+activate pl
+group sd Write new Plan data into file on user's system.
+pl -> ":String" : userArgument.split("/workouts")[0].trim()
+activate ":String"
+return userPlanNameInput:String
+deactivate ":String"
+
+pl -> ":String" : userArgument.split("/workouts")[1].trim()
+activate ":String"
+return userWorkoutIndexNumbersString:String
+deactivate ":String"
+
+pl -> pl : checkPlanNameValidity(userPlanNameInput, className)
+activate pl
+return
+
+pl -> ":Integer" : userWorkoutIndexNumbersString.split(",").length
+activate ":Integer"
+return numberOfWorkoutsInAPlan:Integer
+deactivate ":Integer"
+
+pl -> pl : checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan, className)
+activate pl
+return
+
+create "workoutsToAddInAPlanList:ArrayList<Workout>" AS wtoadd
+pl -> wtoadd : new
+activate wtoadd
+return
+
+loop until all workouts to be added in a plan is added (numberOfWorkoutsInAPlan)
+pl -> ":Integer" : parseInt(userWorkoutIndexNumbersString.split(",")[i].trim())
+activate ":Integer"
+return workoutIndexNumberInteger:Integer
+deactivate ":Integer"
+
+pl -> pl : checkWorkoutNumberWithinRange(workoutIndexNumberInteger, className)
+activate pl
+return
+
+pl -> wtoadd : add(workoutToAddObject)
+activate wtoadd
+return
+end
+
+pl -> pl : checkPlanWithSameWorkoutSequence(workoutsToAddInAPlanList, className)
+activate pl
+return
+
+create "newPlan:Plan" AS newPlan
+pl -> newPlan : new Plan(userPlanNameInput, workoutsToAddInAPlanList)
+activate newPlan
+return newPlan:Plan
+
+pl -> "plansHashMapList\n:HashMap" : put(newPlanKey, newPlan)
+activate "plansHashMapList\n:HashMap"
+return
+
+pl -> "plansDisplayList\n:ArrayList<String>" : add(newPlanKey)
+activate "plansDisplayList\n:ArrayList<String>"
+return
+
+end
+@enduml
