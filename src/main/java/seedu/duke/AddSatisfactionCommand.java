@@ -18,11 +18,8 @@ import seedu.duke.command.Command;
 
 public class AddSatisfactionCommand extends Command {
     private static final String DELIMITER = "/";
-    private static final int NUMBER_OF_PARTS_IN_COMMAND = 2;
     private Satisfaction satisfaction;
     private static Logger logger = Logger.getLogger("satisfactionLogger");
-
-
 
     /**
      * Extracts the customer name and satisfaction value from user input,
