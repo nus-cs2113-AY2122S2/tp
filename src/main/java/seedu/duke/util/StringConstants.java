@@ -50,6 +50,7 @@ public class StringConstants {
     public static final String DELETE_ABORT = "Deletion has been cancelled.";
     public static final String DELETE_CONFIRMATION = "%s contains task(s).\n"
             + "Are you sure you want to delete this? (yes/no)";
+    public static final String DELETE_CONFIRMATION_INPUT_ERROR = "Invalid Input. Please enter yes or no.";
 
     /**
      * For EditCommand.

@@ -8,7 +8,6 @@ import seedu.duke.exceptions.NoSuchModuleException;
 import seedu.duke.data.Module;
 import seedu.duke.data.ModuleList;
 import seedu.duke.data.TaskList;
-import seedu.duke.exceptions.ParseException;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 import seedu.duke.util.NumberConstants;
@@ -18,7 +17,7 @@ public class DeleteCommand extends Command {
     private static final String DELETE_MESSAGE = StringConstants.DELETE_MESSAGE;
     private static final String DELETE_ABORT = StringConstants.DELETE_ABORT;
     private static final String DELETE_CONFIRMATION = StringConstants.DELETE_CONFIRMATION;
-
+    private static final String DELETE_CONFIRMATION_INPUT_ERROR = StringConstants.DELETE_CONFIRMATION_INPUT_ERROR;
 
     private String moduleCode;
     private int taskIndex = NumberConstants.INVALID_TASK_INDEX;
@@ -70,7 +69,7 @@ public class DeleteCommand extends Command {
      *
      * @param moduleList List from which the module is to be deleted from.
      */
-    public void deleteModule(ModuleList moduleList) throws NoSuchModuleException, ParseException {
+    public void deleteModule(ModuleList moduleList) throws NoSuchModuleException {
         Module targetModule = moduleList.getModule(moduleCode);
         if (targetModule.getTaskList().size() > 0) {
             Boolean hasDeleteConfirmation = getUserConfirmation(targetModule);
@@ -98,19 +97,21 @@ public class DeleteCommand extends Command {
      *
      * @param module Module to be deleted.
      * @return Returns true if user input is "yes", false if "no".
-     * @throws ParseException Throws an exception if user input is not "yes" or "no".
      */
-    public Boolean getUserConfirmation(Module module) throws ParseException {
+    public Boolean getUserConfirmation(Module module) {
         Scanner scanner = new Scanner(System.in);
         String prompt = String.format(DELETE_CONFIRMATION, module);
         System.out.println(prompt);
-        String userConfirmation = scanner.nextLine().toLowerCase();
-        if (userConfirmation.equals("yes")) {
-            return true;
+        String userConfirmation;
+        while (true) {
+            userConfirmation = scanner.nextLine().toLowerCase();
+            if (userConfirmation.equals("yes")) {
+                return true;
+            } else if (userConfirmation.equals("no")) {
+                return false;
+            } else {
+                System.out.println(DELETE_CONFIRMATION_INPUT_ERROR);
+            }
         }
-        if (userConfirmation.equals("no")) {
-            return false;
-        }
-        throw new ParseException();
     }
 }
