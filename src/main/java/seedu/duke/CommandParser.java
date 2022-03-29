@@ -34,8 +34,8 @@ public class CommandParser {
     private static final String UPDATE_ITEM_NAME_COMMAND = "update item name ";
     private static final String ADD_HOUSEKEEPER_COMMAND = "add housekeeper ";
     private static final String SEARCH_ITEM_COMMAND = "search item ";
-    private static final String ADD_PERFORMANCE_COMMAND = "add housekeeper performance ";
-    private static final String VIEW_PERFORMANCES_COMMAND = "view housekeeper performances";
+    private static final String ADD_PERFORMANCE_COMMAND = "add performance ";
+    private static final String VIEW_PERFORMANCES_COMMAND = "view performances";
     private static final String ADD_AVAILABILITY_COMMAND = "availability ";
     private static final String ADD_SATISFACTION_COMMAND = "add satisfaction ";
     private static final String VIEW_SATISFACTIONS_COMMAND = "view satisfactions";
