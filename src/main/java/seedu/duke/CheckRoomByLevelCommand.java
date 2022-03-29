@@ -48,7 +48,7 @@ public class CheckRoomByLevelCommand extends Command {
         for (Room room : roomList.getRoomList()) {
             if (room.getLevel() == level) {
                 System.out.println(room.toString() + "\t\t\t"
-                        + assignmentMap.getHouseKeeperNameByRoom(room));
+                        + assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()));
             }
         }
     }

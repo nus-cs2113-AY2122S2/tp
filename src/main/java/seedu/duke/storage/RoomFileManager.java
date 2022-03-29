@@ -1,6 +1,5 @@
 package seedu.duke.storage;
 
-import seedu.duke.AssignmentMap;
 import seedu.duke.Room;
 import seedu.duke.RoomType;
 
@@ -29,11 +28,8 @@ public class RoomFileManager extends FileManager {
             int id = Integer.parseInt(splitData[1].trim());
             int level = Integer.parseInt(splitData[2].trim());
             String status = splitData[3].trim();
-            //String housekeeperName = splitData[4].trim();
             Room room = new Room(id, level, roomType, status);
             roomList.add(room);
-            /*  housekeeper assignment map ... */
-
         }
     }
 

@@ -1,18 +1,22 @@
 package seedu.duke.command.assigncommand;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-import seedu.duke.command.Command;
 import seedu.duke.HotelLiteManagerException;
 import seedu.duke.InvalidAvailabilityException;
-import seedu.duke.InvalidRoomNumberException;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
-import seedu.duke.InvalidHousekeeperProfile;
+import seedu.duke.command.Command;
+import seedu.duke.Room;
 import seedu.duke.AssignmentMap;
-import seedu.duke.HousekeeperList;
 import seedu.duke.RoomList;
+import seedu.duke.HousekeeperList;
+import seedu.duke.Housekeeper;
+import seedu.duke.InvalidRoomNumberException;
+import seedu.duke.InvalidHousekeeperProfile;
+
 
 /**
  * Identifies the name of the housekeeper and assign to room id
@@ -78,20 +82,53 @@ public class AssignHousekeeperCommand extends Command {
     /**
      * Get the Name of the housekeeper and verify that housekeeper is in records. If in records, add
      * his/her availability into housekeeper list.
-     * @param ui               The user interface for this execution method.
+     *
+     * @param ui The user interface for this execution method.
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui)
-            throws InvalidRoomNumberException, InvalidHousekeeperProfile {
-        AssignmentMap assignmentMap = listContainer.getAssignmentMap();
-        HousekeeperList housekeeperList = listContainer.getHousekeeperList();
-        RoomList roomList = listContainer.getRoomList();
+            throws InvalidRoomNumberException, InvalidHousekeeperProfile, IOException {
+
+        final AssignmentMap assignmentMap = listContainer.getAssignmentMap();
+        final HousekeeperList housekeeperList = listContainer.getHousekeeperList();
+        final RoomList roomList = listContainer.getRoomList();
         String roomID = getroomID();
         assert !roomID.isEmpty() : "ID should not be empty";
         String name = getName();
         assert !name.isEmpty() : "name should not be empty";
-        assignmentMap.addAssignment(name, roomID, housekeeperList, roomList);
-        ui.printMessage("Assigned " + name + " to room no. " + roomID + ".");
+
+
+        if (!isNameExist(name, housekeeperList)) {
+            throw new InvalidHousekeeperProfile();
+        }
+
+        int roomIdNumber = Integer.parseInt(roomID);
+        if (!isRoomIdValid(roomIdNumber, roomList)) {
+            throw new InvalidRoomNumberException();
+        }
+
+
+        assignmentMap.addAssignment(name, roomIdNumber);
+        assignmentMap.save();
+        ui.printMessage("Assigned " + name + " to room#" + roomID + ".");
         logger.log(Level.INFO, "end of processing");
+    }
+
+    private boolean isRoomIdValid(int roomIdNumber, RoomList roomList) {
+        for (Room room : roomList.getRoomList()) {
+            if (room.getRoomId() == roomIdNumber) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isNameExist(String name, HousekeeperList housekeeperList) {
+        for (Housekeeper housekeeper : housekeeperList.getHousekeeperList()) {
+            if (housekeeper.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

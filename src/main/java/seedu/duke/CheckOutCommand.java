@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.io.IOException;
+
 import seedu.duke.command.Command;
 
 /**
@@ -16,8 +17,9 @@ public class CheckOutCommand extends Command {
      * Check out room with corresponding room number.
      * The room status will be changed to vacant
      * After check in, it will print out corresponding room information.
+     *
      * @param listContainer asd
-     * @param ui The user interface for this execution method.
+     * @param ui            The user interface for this execution method.
      * @throws InvalidRoomNumberException if the room number is not in the room list.
      */
     @Override
@@ -29,7 +31,7 @@ public class CheckOutCommand extends Command {
                 room.checkOut();
                 ui.printTableHeader();
                 System.out.println(room + "\t\t\t"
-                        + assignmentMap.getHouseKeeperNameByRoom(room));
+                        + assignmentMap.getHouseKeeperNameByRoom(room.getRoomId()));
                 roomList.save();
                 return;
             }

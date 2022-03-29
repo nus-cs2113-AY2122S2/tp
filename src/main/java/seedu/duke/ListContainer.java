@@ -1,10 +1,12 @@
 package seedu.duke;
 
 
+import seedu.duke.storage.AssignmentListFileManager;
 import seedu.duke.storage.RoomFileManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ListContainer {
     private HousekeeperList housekeeperList;
@@ -18,11 +20,17 @@ public class ListContainer {
         satisfactionList = new SatisfactionList();
         housekeeperList = new HousekeeperList();
         housekeeperPerformanceList = new HousekeeperPerformanceList();
-        assignmentMap = new AssignmentMap();
+
+        AssignmentListFileManager assignmentListFileManager = new AssignmentListFileManager();
+        HashMap<Integer,String> map = new HashMap<>();
+        assignmentListFileManager.load(map);
+        assignmentMap = new AssignmentMap(map);
+
         RoomFileManager roomFileManager = new RoomFileManager();
         ArrayList<Room> roomArrayList = new ArrayList<>();
         roomFileManager.load(roomArrayList);
         roomList = new RoomList(roomArrayList);
+
         itemList = new ItemList();
     }
 
