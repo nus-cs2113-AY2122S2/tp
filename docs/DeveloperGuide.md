@@ -1,4 +1,4 @@
-# Developer Guide
+# Mod Happy: Developer Guide
 
 Mod Happy is a command-line-based application that helps students manage their academics.
 
