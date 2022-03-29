@@ -9,19 +9,11 @@ import cpp.logic.parser.AddTodoCommandParser;
 import cpp.logic.parser.MarkCommandParser;
 import cpp.model.ProjectList;
 import cpp.response.Response;
+import cpp.storage.Storage;
 
 import java.util.Arrays;
 
 public class CommandHandler {
-
-    /**
-     * Constructs new CommandHandler object.
-     *
-     */
-    public CommandHandler() {
-
-    }
-
     /**
      * Handles all non-exit commands given to program by user.
      *
