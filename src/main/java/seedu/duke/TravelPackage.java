@@ -1,9 +1,10 @@
 package seedu.duke;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 public class TravelPackage {
     public static final String EXAMPLENAME = "Switzerland - Conquer Summits";
+    public static final int EXAMPLEID = 999;
     public static final String EXAMPLESTART = "";
     public static final String EXAMPLEEND = "";
     public static final String EXAMPLEHOTEL = "EXAMPLE HOTEL";
@@ -12,20 +13,21 @@ public class TravelPackage {
     public static final int EXAMPLEMAX = 10;
 
     private final String name;
-    private static int nextId = 1;
     private final int id;
-    private Date[] period; // [startDate,endDate]
     private final String startDate;
     private final String endDate;
     private final String hotel;
     private final double price;
     private final String country;
     private final int maxParticipants;
-    private final int numParticipants;
+    private int numParticipants;
+    private Reservations reservationList;
 
-    public TravelPackage(String name, String startDate, String endDate,
+
+    public TravelPackage(String name,int id, String startDate, String endDate,
             String hotel, double price, String country, int maxParticipants) {
         this.name = name;
+        this.id = id;
         // this.period = [startDate,endDate];
         this.startDate = startDate;
         this.endDate = endDate;
@@ -34,15 +36,15 @@ public class TravelPackage {
         this.country = country;
         this.maxParticipants = maxParticipants;
         this.numParticipants = 0;
-        id = nextId++;
+        this.reservationList = new Reservations();
     }
 
     public boolean isFull() {
         return this.numParticipants >= maxParticipants;
     }
 
-    public String getID() {
-        return "P" + this.id;
+    public int getID() {
+        return this.id;
     }
 
     public String getName() {
@@ -73,6 +75,14 @@ public class TravelPackage {
         return this.maxParticipants;
     }
 
+    public Reservations getReservationList() {
+        return this.reservationList;
+    };
+
+    public void setReservationList(Reservations r) {
+        this.reservationList = r;
+    }
+
     public String toString() {
         return "Here are the details for "
                 + this.name + ", Travel Package ID of "
@@ -82,10 +92,19 @@ public class TravelPackage {
                 + this.hotel;
     }
 
-    public String toSave() {
-        return name + " | " + Integer.toString(nextId) + " | " + Integer.toString(id) + " | " + // startDate, endDate
-                hotel + " | " + Double.toString(price) + " | " + country + " | " + Integer.toString(maxParticipants)
-                + " | " + Integer.toString(numParticipants);
-    }
+
+
+
+//    public String toSave() {
+//        return name + " | " + Integer.toString(nextId) + " | " + Integer.toString(id) + " | " + // startDate, endDate
+//                hotel + " | " + Double.toString(price) + " | " + country + " | " + Integer.toString(maxParticipants)
+//                + " | " + Integer.toString(numParticipants);
+//    }
+
+
+
+
+
+
 
 }

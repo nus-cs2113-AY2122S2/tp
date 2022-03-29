@@ -40,6 +40,7 @@ public class ParserTest {
         try {
             return new TravelPackage(
                     TravelPackage.EXAMPLENAME,
+                    TravelPackage.EXAMPLEID,
                     TravelPackage.EXAMPLESTART,
                     TravelPackage.EXAMPLEEND,
                     TravelPackage.EXAMPLEHOTEL,

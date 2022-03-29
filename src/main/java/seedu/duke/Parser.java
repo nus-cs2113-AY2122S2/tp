@@ -1,21 +1,13 @@
 package seedu.duke;
 
-import seedu.duke.command.AddCommand;
-import seedu.duke.command.ByeCommand;
-import seedu.duke.command.Command;
-import seedu.duke.command.DeleteCommand;
-import seedu.duke.command.PackagesCommand;
-import seedu.duke.command.ErrorCommand;
-import seedu.duke.command.ReservationCommand;
-import seedu.duke.command.WrongFormatCommand;
-import seedu.duke.command.HelpCommand;
+import seedu.duke.command.*;
 
 public class Parser {
     public static Command parse(String input) {
         String[] inputArray = input.split(" ");
         String commandType = inputArray[0];
-
-        String id;
+        System.out.println(commandType);
+        int id;
         String start;
         String end;
         int vacancies;
@@ -29,33 +21,53 @@ public class Parser {
             return new ByeCommand();
         case "help":
             return new HelpCommand();
-        case "add": // only can have spaces between variables - what if hotel has 2 words?
-            if (inputArray.length != 8) {
+        case "add":
+            String[] temp = input.split(" ", 2); //remove add from string
+            String[] temp1 = temp[1].split(","); //process the rest and split by comma
+
+            System.out.println(temp.length);
+            if (temp1.length != 8) {
                 return new WrongFormatCommand(input);
             } else {
-                final int nameIndex = 1;
+                final int nameIndex = 0;
+                final int idIndex = 1;
                 final int startIndex = 2;
                 final int endIndex = 3;
                 final int hotelIndex = 4;
                 final int priceIndex = 5;
                 final int countryIndex = 6;
                 final int vacanciesIndex = 7;
-                name = inputArray[nameIndex];
-                start = inputArray[startIndex];
-                end = inputArray[endIndex];
-                hotel = inputArray[hotelIndex];
-                price = Double.parseDouble(inputArray[priceIndex]);
-                country = inputArray[countryIndex];
-                vacancies = Integer.parseInt(inputArray[vacanciesIndex]);
-                return new AddCommand(name, start, end, hotel, price, country, vacancies);
+                name = temp1[nameIndex];
+                id = Integer.parseInt(temp1[idIndex]);
+                start = temp1[startIndex];
+                end = temp1[endIndex];
+                hotel = temp1[hotelIndex];
+                price = Double.parseDouble(temp1[priceIndex]);
+                country = temp1[countryIndex];
+                vacancies = Integer.parseInt(temp1[vacanciesIndex]);
+                return new AddCommand(name, id , start, end, hotel, price, country, vacancies);
             }
-        case "delete":
-            id = inputArray[1];
+        case "delete": //delete TravelPackage by its ID
+            id = Integer.parseInt(inputArray[1]);
             return new DeleteCommand(id);
         case "packages":
             return new PackagesCommand();
-        case "reservation":
-            return new ReservationCommand();
+        case "reserve":
+            temp = input.split(" ", 2); //remove reserve from string
+            temp1 = temp[1].split(","); //process the rest and split by comma
+            int packageID = Integer.parseInt(temp1[0]);
+            name = temp1[1];
+            String number = temp1[2];
+            int pax = Integer.parseInt(temp1[3]);
+
+            return new ReservationCommand(packageID,name,number,pax);
+
+        case "remove": //delete reservation by giving travelpackage ID and contact number.
+            temp = input.split(" ", 2);
+            temp1 = temp[1].split(",");
+            packageID = Integer.parseInt(temp1[0]);
+            number = temp1[1];
+            return new RemoveReservationCommand(packageID,number);
         default:
             return new ErrorCommand(input);
         }

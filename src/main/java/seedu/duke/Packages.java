@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Packages {
     private ArrayList<TravelPackage> packages;
-
     public Packages() {
         this.packages = new ArrayList<>();
     }
@@ -28,6 +27,18 @@ public class Packages {
 
     public void removePackage(int index) {
         packages.remove(index);
+    }
+
+
+    //check if packageID already exists. return true if already exists - unique IDs only!
+    public boolean idExists(int id) {
+        for (int i =0; i<packages.size();i++) {
+            if (packages.get(i).getID() == id) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }

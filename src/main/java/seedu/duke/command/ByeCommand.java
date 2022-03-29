@@ -8,7 +8,7 @@ public class ByeCommand extends Command {
         setIsExit(true);
     }
 
-    public void execute(Packages packages, Reservations r) {
+    public void execute(Packages packages) {
         System.out.println("Thank you for using TARBS. See you again!");
     }
 }
