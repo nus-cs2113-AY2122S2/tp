@@ -26,7 +26,6 @@ public class Session implements Serializable, Comparable<Session> {
     // CONSTANTS
     private static final String[] ACTIVITY_LIST_COLS = { "#", "Activities", "Cost", "Payer" };
     private static final String PERSON_LIST_HEADER = "Participants:";
-    private static final String SUMMARY_STRING_SEPARATOR = " | ";
     private static final String COST_FORMATTING = "%.2f";
     private static final String COST_PREPEND = "$";
     private static final int ZERO_INDEXING_OFFSET = 1;
@@ -212,13 +211,14 @@ public class Session implements Serializable, Comparable<Session> {
     }
 
     /**
-     * Adds an Activity object to the session.
+     * Adds an Activity object to the session, then sorts the activity list by ascending activity unique identifier.
      *
      * @param activity An Activity object representing an activity that happened in the session.
      */
     public void addActivity(Activity activity) {
         assert activity != null : Message.ASSERT_SESSION_ACTIVITY_NULL;
         activityList.add(activity);
+        activityList.sort(Activity::compareTo);
     }
 
     /**
@@ -270,7 +270,7 @@ public class Session implements Serializable, Comparable<Session> {
      * @return A String object containing a summary of all Activity objects in activityList or
      *         a message stating that the activityList is empty if there are no Activity objects within.
      */
-    private String getActivityListSummaryString() {
+    public String getActivityListSummaryString() {
         if (activityList.isEmpty()) {
             return Message.ERROR_SESSION_EMPTY_ACTIVITY_LIST;
         }
