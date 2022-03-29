@@ -15,19 +15,77 @@
 
 {Give detailed description of each feature}
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### Dish Management
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+## Introduction
+`Dish Management` feature is consist of several sub-features:
+> `List Dish`, `Add Dish`, `Delete Dish`, `Dish info modification`, and `Storage`.
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+## Usage
+When using `Dish Management`, the program pops up a select panel to ask for action:
+```aidl
+(0) Exit Menu
+(1) List Dish
+(2) Add Dish
+(3) Delete Dish
+(4) Change the price of a dish
+(5) Change the name of a dish
+******************************
+Enter choice: 
+```
+Enter corresponding index to use the feature.
 
-Example of usage: 
+## Enter Dish Menu
+In `Main Menu`, when the select panel is shown:
+```
+Welcome to Restaurant Information Programme!
+(0) Exit Application
+(1) Enter Dish Menu
+(2) Enter Order Menu
+(3) Enter Staff Menu
+******************************
+Enter choice: 
+```
+> Enter 1 to use order management function (Dish menu)
 
-`todo n/Write the rest of the User Guide d/next week`
+## List dish (indexed as 1)
+When using `List dish`, there is no need for input, the program will print the order and index.
+> Add some dish: Chicken Rice($3.5), Mala hotpot Set A($10), Soup (Along with Chicken Rice)($0), Chilli Crab($30)
+> Enter 1 to list dishes
+```aidl
+Listing dishes...
+1. Chicken Rice ---- $3.5
+2. Mala Hotpot Set A ---- $10.0
+3. Soup (Along With Chicken Rice) ---- free
+4. Chilli Crab ---- $30.0
+```
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+### Notice
+If there is no dish in the menu. The output will be
+```aidl
+Listing dishes...
+You haven't got a dish in menu!
+```
+
+## Add dish (indexed as 2)
+When using `Add dish`, the program pops up an input panel.
+```aidl
+Adding new dish...
+The name of dish: 
+```
+> Enter the name of the new dish
+```aidl
+Enter choice: 2
+Adding new dish...
+The name of dish: some dish
+The price of dish: 
+```
+> Enter the price of the new dish
+
+### Notice
+`Name` of the dish cannot be empty, and `price` of the dish cannot be negative (`price` being 0 means this dish is free to serve).
+
+
 
 ## FAQ
 
