@@ -18,8 +18,6 @@ public class GroupListCommand extends Command {
 
     public static final String COMMAND_FORMAT = "Syntax: group /list";
 
-    private static final String GROUP_LIST_HEADER = "List of Groups";
-
     /**
      * Runs the command to list all existing groups managed by the Profile Object.
      *
@@ -27,7 +25,6 @@ public class GroupListCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        manager.getUi().printlnMessage(GROUP_LIST_HEADER);
         String groupListSummary = manager.getProfile().getGroupListSummaryString();
         manager.getUi().printlnMessage(groupListSummary);
         Manager.getLogger().log(Level.FINEST, Message.LOGGER_GROUPLIST_GROUPS_LISTED);
