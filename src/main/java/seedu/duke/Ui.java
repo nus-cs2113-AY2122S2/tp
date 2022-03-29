@@ -14,7 +14,7 @@ import static javax.swing.plaf.synth.Region.TABLE_HEADER;
 public class Ui {
     private Scanner in = new Scanner(System.in);
     private static final int ARRAY_INDEX_OFFSET = 1;
-    private static final String LINE = "-------------------------------------------------------------------";
+    private static final String LINE = "======================================================================";
     private static final String ITEM_LIST_HEADER = "=========== Item List ===========";
     private static final String END_OF_LIST_LINE = "======== End of the list ========";
     private static final String TABLE_HEADER = "Type\t\tRoom Id\t\tlevel\t\tStatus\t\t\tHousekeeper Name";
