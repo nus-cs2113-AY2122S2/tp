@@ -5,6 +5,9 @@ package seedu.planitarium.money;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -12,9 +15,15 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class IncomeListTest {
 
+    private static final PrintStream ORIGINAL_OUT = System.out;
     private static int INVALID_INDEX = -1;
     private static int VALID_INDEX = 1;
     private IncomeList personOne;
+    private static final String EXPECTED_LABEL_NUMBERED = "1. Food: $20.00 - Recurring: false"
+            + System.lineSeparator();
+    private static final String EXPECTED_LABEL = "Food: $20.00 - Recurring: false"
+            + System.lineSeparator();
+    private static final int NUM_OF_INC = 2;
 
     @BeforeEach
     public void setUp() {
@@ -105,11 +114,43 @@ class IncomeListTest {
     }
 
     @Test
-    public void editIncome_ValidParam_Success() {
+    public void editIncome_validParam_Success() {
         personOne.editIncome(1, "Dabao", 1000.0, true);
         assertEquals(personOne.getDescription(1), "Dabao");
         assertEquals(personOne.getIncomeValue(1), 1000.0);
         assertEquals(personOne.isPermanent(1), true);
     }
 
+    @Test
+    public void findIncome_validParam_Success() {
+        ByteArrayOutputStream newOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOut));
+        personOne.find("Food");
+        assertEquals(EXPECTED_LABEL, newOut.toString());
+        System.setOut(ORIGINAL_OUT);
+    }
+
+    @Test
+    public void getNumOfInc_success() {
+        int numOfInc = personOne.getNumberOfIncomes();
+        assertEquals(NUM_OF_INC, numOfInc);
+    }
+
+    @Test
+    public void updateList_noChange_success() {
+        ByteArrayOutputStream newOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOut));
+        IncomeList personTwo = new IncomeList();
+        personTwo.addIncome("Food", 20, false);
+        personTwo.printIncomeList();
+        assertEquals(EXPECTED_LABEL_NUMBERED, newOut.toString());
+        System.setOut(ORIGINAL_OUT);
+    }
+
+    @Test
+    public void getTotalInc_success() {
+        double totalIncome = personOne.getTotalIncome();
+        double expectedIncome = 25.0;
+        assertEquals(expectedIncome, totalIncome);
+    }
 }

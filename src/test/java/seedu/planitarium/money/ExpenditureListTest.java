@@ -6,6 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.planitarium.category.Category;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,6 +18,13 @@ class ExpenditureListTest {
 
     private static int INVALID_INDEX = -1;
     private static int VALID_INDEX = 1;
+    private static final PrintStream ORIGINAL_OUT = System.out;
+    private static final String EXPECTED_LABELS = "Food: $20.00 - Recurring: false - "
+            + "Category: Food and Drinks" + System.lineSeparator();
+    private static final String EXPECTED_LABEL_NUMBERED = "1. Food: $20.00 - Recurring: false "
+            + "- Category: Food and Drinks" + System.lineSeparator();
+    private static final int NUM_OF_EXP = 2;
+
     private ExpenditureList personOne;
 
     @BeforeEach
@@ -108,7 +118,7 @@ class ExpenditureListTest {
     //@@author tjiarong
 
     @Test
-    public void editExpenditure_ValidParam_Success() {
+    public void editExpenditure_validParam_Success() {
         personOne.editExpenditure(1, "Dabao", 1000.0, 2, true);
         assertEquals(personOne.getDescription(1), "Dabao");
         assertEquals(personOne.getExpenditureValue(1), 1000.0);
@@ -117,8 +127,45 @@ class ExpenditureListTest {
     }
 
     @Test
-    public void findExpenditure_ValidParam_Success() {
+    public void findExpenditure_validParam_Success() {
+        ByteArrayOutputStream newOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOut));
+        personOne.find("Food", 1);
+        assertEquals(EXPECTED_LABELS, newOut.toString());
+        System.setOut(ORIGINAL_OUT);
+    }
 
+    @Test
+    public void findExpenditure_allCat_Success() {
+        ByteArrayOutputStream newOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOut));
+        personOne.find("Food", 0);
+        assertEquals(EXPECTED_LABELS, newOut.toString());
+        System.setOut(ORIGINAL_OUT);
+    }
+
+    @Test
+    public void getNumOfExp_success() {
+        int numOfExp = personOne.getNumberOfExpenditures();
+        assertEquals(NUM_OF_EXP, numOfExp);
+    }
+
+    @Test
+    public void updateList_noChange_success() {
+        ByteArrayOutputStream newOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newOut));
+        ExpenditureList personTwo = new ExpenditureList();
+        personTwo.addExpenditure("Food", 20, 1, false);
+        personTwo.printExpenditureList();
+        assertEquals(EXPECTED_LABEL_NUMBERED, newOut.toString());
+        System.setOut(ORIGINAL_OUT);
+    }
+
+    @Test
+    public void getTotalExp_success() {
+        double totalExp = personOne.getTotalExpenditure();
+        double expectedExp = 25.0;
+        assertEquals(expectedExp, totalExp);
     }
 
 }
