@@ -2,7 +2,10 @@ package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Session;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TableFormatter;
+import seedu.splitlah.ui.TextUI;
 
 import java.util.ArrayList;
 
@@ -13,31 +16,34 @@ import java.util.ArrayList;
  */
 public class SessionListCommand extends Command {
 
-    public static final String COMMAND_TEXT = "session /list";
-
-    public static final String COMMAND_FORMAT = "Syntax: session /list";
-
     private static final String SESSION_LIST_HEADER = "List of Sessions";
 
     /**
-     * Prints the list of sessions previously created by the user.
+     * Runs the command to list all existing sessions managed by the Profile Object.
      *
-     * @param manager A manager object that gets the TextUI and Profile object to print the list of sessions.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
-    public void run(Manager manager) {
+    public void run(Manager manager) { 
+        TextUI ui = manager.getUi();
         ArrayList<Session> sessionsToBePrinted = manager.getProfile().getSessionList();
-        int sessionListSize = sessionsToBePrinted.size();
+        sessionsToBePrinted.sort(Session::compareTo);
         if (sessionsToBePrinted.isEmpty()) {
-            manager.getUi().printlnMessage(Message.ERROR_PROFILE_SESSION_LIST_EMPTY);
+            ui.printlnMessage(Message.ERROR_PROFILE_SESSION_LIST_EMPTY);
             return;
         }
-        manager.getUi().printlnMessageWithDashDivider(SESSION_LIST_HEADER);
-        for (int i = 0; i < sessionListSize - 1; i++) {
-            manager.getUi().printlnMessage(sessionsToBePrinted.get(i).getSessionSimplifiedString());
-            manager.getUi().printDashDivider();
+        TableFormatter tableFormatter =
+                new TableFormatter("#","Name", "Date","# of Participants","# of Activities");
+        tableFormatter.addTableName(SESSION_LIST_HEADER);
+
+        for (Session session : sessionsToBePrinted) {
+            String rowId = Integer.toString(session.getSessionId());
+            String rowName = session.getSessionName();
+            String rowDate = session.getDateCreated().format(ParserUtils.DATE_FORMAT);
+            String rowNumParticipants = Integer.toString(session.getPersonList().size());
+            String rowNumActivities = Integer.toString(session.getActivityList().size());
+            tableFormatter.addRow(rowId, rowName, rowDate, rowNumParticipants, rowNumActivities);
         }
-        String lastSessionToPrint = sessionsToBePrinted.get(sessionListSize - 1).getSessionSimplifiedString();
-        manager.getUi().printlnMessageWithDivider(lastSessionToPrint);
+        ui.printlnMessage(tableFormatter.toString());
     }
 }

@@ -11,7 +11,7 @@ public class ParserErrors {
      * @param delimiter A String object that represents a demarcation of a specific argument in the command. 
      * @return A String object representing an error message for missing a specified delimiter in the input command.
      */
-    static String getMissingDelimiterErrorMessage(String delimiter) {
+    public static String getMissingDelimiterErrorMessage(String delimiter) {
         return Message.ERROR_PARSER_DELIMITER_NOT_FOUND + delimiter;
     }
 
@@ -22,7 +22,7 @@ public class ParserErrors {
      * @param delimiter A String object that represents a demarcation of a specific argument in the command.
      * @return A String object representing an error message for missing an argument in the input command.
      */
-    static String getMissingArgumentErrorMessage(String delimiter) {
+    public static String getMissingArgumentErrorMessage(String delimiter) {
         return Message.ERROR_PARSER_MISSING_ARGUMENT + delimiter;
     }
 
@@ -33,19 +33,30 @@ public class ParserErrors {
      * @param delimiter A String object that represents a demarcation of a specific argument in the command.
      * @return A String object representing an error message for a non-integer input.
      */
-    static String getNonIntegerErrorMessage(String delimiter) {
+    public static String getNonIntegerErrorMessage(String delimiter) {
         return Message.ERROR_PARSER_NON_INTEGER_ARGUMENT + delimiter;
     }
 
     /**
      * Returns a String object containing an error message when the parser is not able to read an input String object
-     * as a double.
+     * as a double to be used as a monetary value.
      *
      * @param delimiter A String object that represents a demarcation of a specific argument in the command.
      * @return A String object representing an error message for a non-double input.
      */
-    static String getNonMonetaryErrorMessage(String delimiter) {
+    public static String getNonMonetaryErrorMessage(String delimiter) {
         return Message.ERROR_PARSER_NON_MONETARY_VALUE_ARGUMENT + delimiter;
+    }
+
+    /**
+     * Returns a String object containing an error message when the parser is not able to read an input String object
+     * as a double to be used as a percentage value.
+     *
+     * @param delimiter A String object that represents a demarcation of a specific argument in the command.
+     * @return A String object representing an error message for a non-double input.
+     */
+    public static String getNonPercentageErrorMessage(String delimiter) {
+        return Message.ERROR_PARSER_NON_PERCENTAGE_ARGUMENT + delimiter;
     }
 
     /**
@@ -54,7 +65,7 @@ public class ParserErrors {
      *
      * @return A String object representing an error message for an invalid GST input.
      */
-    static String getInvalidGstErrorMessage() {
+    public static String getInvalidGstErrorMessage() {
         return Message.ERROR_PARSER_INVALID_GST_SURCHARGE + ParserUtils.GST_DELIMITER;
     }
 
@@ -64,7 +75,7 @@ public class ParserErrors {
      *
      * @return A String object representing an error message for an invalid service charge input.
      */
-    static String getInvalidServiceChargeErrorMessage() {
+    public static String getInvalidServiceChargeErrorMessage() {
         return Message.ERROR_PARSER_INVALID_SERVICE_CHARGE + ParserUtils.SERVICE_CHARGE_DELIMITER;
     }
 }

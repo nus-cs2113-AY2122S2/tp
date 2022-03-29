@@ -3,16 +3,19 @@ package seedu.splitlah.command;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.splitlah.data.Manager;
+import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.parser.Parser;
+import seedu.splitlah.ui.Message;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class SessionDeleteCommandTest {
 
     Manager manager = new Manager();
 
     /**
-     * Creates 2 sessions that is stored and managed by the Manager object.
+     * Creates two sessions that is stored and managed by the Manager object.
      */
     @BeforeEach
     void setUp() {
@@ -22,26 +25,6 @@ class SessionDeleteCommandTest {
         createSessionOne.run(manager);
         Command createSessionTwo = Parser.getCommand(sessionTwoArgs);
         createSessionTwo.run(manager);
-    }
-
-    /**
-     * Checks if session is not deleted with a missing delimiter.
-     */
-    @Test
-    public void prepare_hasMissingDelimiter_InvalidCommand() {
-        String argsMissingSidDelimiter = "session /delete sid 1";
-        Command sessionWithMissingSidDelimiter = Parser.getCommand(argsMissingSidDelimiter);
-        assertEquals(InvalidCommand.class, sessionWithMissingSidDelimiter.getClass());
-    }
-
-    /**
-     * Checks if session is not deleted with a missing argument.
-     */
-    @Test
-    public void prepare_hasMissingArgument_InvalidCommand() {
-        String argsMissingSidDelimiter = "session /delete /sid";
-        Command sessionWithMissingSidDelimiter = Parser.getCommand(argsMissingSidDelimiter);
-        assertEquals(InvalidCommand.class, sessionWithMissingSidDelimiter.getClass());
     }
 
     /**
@@ -58,6 +41,14 @@ class SessionDeleteCommandTest {
 
         // Check if session was successfully removed from the list of sessions.
         assertEquals(1, manager.getProfile().getSessionList().size());
+
+        // Check if session still exists.
+        try {
+            manager.getProfile().getSession(1);
+            fail();
+        } catch (InvalidDataException invalidDataException) {
+            assertEquals(Message.ERROR_PROFILE_SESSION_NOT_IN_LIST, invalidDataException.getMessage());
+        }
     }
 
     /**

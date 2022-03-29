@@ -3,6 +3,7 @@ package seedu.splitlah.data;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -10,9 +11,9 @@ import java.util.ArrayList;
  *
  * @author Tianle
  */
-public class Group {
+public class Group implements Serializable {
 
-    private ArrayList<Person> personList;
+    private PersonList personList;
     private String groupName;
     private int groupId;
 
@@ -20,13 +21,13 @@ public class Group {
     private static final String SEPARATOR = " | ";
 
     /**
-     * Constructs a Group object.
+     * Initializes a Group object.
      *
      * @param groupName  A String object that represents the group's name.
      * @param groupId    An integer that uniquely identifies a group.
      * @param personList An ArrayList object containing Person objects
      */
-    public Group(String groupName, int groupId, ArrayList<Person> personList) {
+    public Group(String groupName, int groupId, PersonList personList) {
         this.groupName = groupName;
         this.groupId = groupId;
         this.personList = personList;
@@ -44,7 +45,7 @@ public class Group {
     /**
      * Returns the group's unique identifier.
      *
-     * @return An integer object containing the id of the group.
+     * @return An integer representing the group's identifier.
      */
     public int getGroupId() {
         return groupId;
@@ -56,7 +57,7 @@ public class Group {
      * @return An ArrayList object containing Person objects in the group.
      */
     public ArrayList<Person> getPersonList() {
-        return personList;
+        return personList.getPersonList();
     }
 
     /**
@@ -72,10 +73,10 @@ public class Group {
     /**
      * Adds a Person object to the group.
      *
-     * @param person A Person object.
+     * @param person A Person object to be added into the group.
      */
     public void addPerson(Person person) {
-        personList.add(person);
+        personList.addPerson(person);
     }
 
     /**
@@ -90,7 +91,7 @@ public class Group {
             return false;
         }
 
-        for (Person personInGroup : personList) {
+        for (Person personInGroup : personList.getPersonList()) {
             if (personInGroup.getName().equalsIgnoreCase(person.getName())) {
                 return true;
             }
@@ -109,7 +110,7 @@ public class Group {
         if (personList.isEmpty()) {
             throw new InvalidDataException(Message.ERROR_GROUP_EMPTY_PERSON_LIST);
         }
-        for (Person personInGroup : personList) {
+        for (Person personInGroup : personList.getPersonList()) {
             if (personInGroup.getName().equalsIgnoreCase(personName)) {
                 return personInGroup;
             }
@@ -125,7 +126,7 @@ public class Group {
      */
     public void removePerson(String personName) throws InvalidDataException {
         Person personToBeRemoved = getPersonFromGroup(personName);
-        personList.remove(personToBeRemoved);
+        personList.removePerson(personToBeRemoved);
     }
 
     /**
@@ -134,7 +135,7 @@ public class Group {
      * @return An integer object that represents that total number of participants in the group.
      */
     public int getPersonCount() {
-        return personList.size();
+        return personList.getSize();
     }
 
     /**
@@ -160,8 +161,8 @@ public class Group {
 
         StringBuilder outputString = new StringBuilder("Group Id ");
         outputString.append("#").append(groupId).append("  --").append("\n").append("Participants: ");
-        for (int i = 0; i < personList.size(); i++) {
-            String personName = personList.get(i).getName();
+        for (int i = 0; i < personList.getSize(); i++) {
+            String personName = personList.getPerson(i).getName();
             outputString.append("\n ").append(i + OFFSET).append(". ").append(personName);
         }
         return outputString.toString();

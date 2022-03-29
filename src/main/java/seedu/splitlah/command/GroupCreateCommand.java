@@ -2,15 +2,11 @@ package seedu.splitlah.command;
 
 import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
-import seedu.splitlah.data.Person;
+import seedu.splitlah.data.PersonList;
 import seedu.splitlah.exceptions.InvalidFormatException;
 import seedu.splitlah.parser.Parser;
 import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Represents a command that creates a Group object from user input and stores it in the Profile object.
@@ -22,7 +18,7 @@ public class GroupCreateCommand extends Command {
     public static final String COMMAND_TEXT = "group /create";
 
     public static final String COMMAND_FORMAT =
-        "Syntax: group /create /n [GROUP_NAME] /pl [NAME1 NAME2 …]";
+        "Syntax: group /create /n [GROUP_NAME] /pl [NAME1 NAME2...]";
 
     private static final String SUCCESS_MESSAGE =
         "The group was created successfully.\n";
@@ -36,47 +32,14 @@ public class GroupCreateCommand extends Command {
     private String[] personNames;
 
     /**
-     * Initializes a GroupCreateCommand.
+     * Initializes a GroupCreateCommand object.
      *
      * @param groupName   A String object that represents the group name.
-     * @param personNames A String object array that represents the involved persons for the group.
+     * @param personNames An array of String objects that represents the involved persons for the group.
      */
     public GroupCreateCommand(String groupName, String[] personNames) {
         this.groupName = groupName;
         this.personNames = personNames;
-    }
-
-    /**
-     * Converts a String object array of names to a list of Person objects.
-     *
-     * @return An ArrayList of Person objects.
-     */
-    private ArrayList<Person> convertToListOfPerson() {
-        ArrayList<Person> personList = new ArrayList<>();
-        for (String name : personNames) {
-            Person newPerson = new Person(name);
-            personList.add(newPerson);
-        }
-        return personList;
-    }
-
-    /**
-     * Checks if String object array of names has duplicated names.
-     *
-     * @return true if it contains duplicates,
-     *         false otherwise.
-     */
-    private boolean hasNameDuplicates() {
-        Set<String> nameSet = new HashSet<>();
-        for (String name : personNames) {
-            String nameToBeAdded = name.toLowerCase();
-            if (!nameSet.add(nameToBeAdded)) {
-                return true;
-            }
-        }
-        assert nameSet.size() == personNames.length :
-            Message.ASSERT_GROUPCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED;
-        return false;
     }
 
     /**
@@ -103,17 +66,18 @@ public class GroupCreateCommand extends Command {
      * If check fails, no group will be created and prints error message.
      * Else a group is created and prints success message.
      *
-     * @param manager A Manager object that manages the TextUI and Profile object.
+     * @param manager A Manager object that manages the TextUI, Profile and Storage object.
      */
     @Override
     public void run(Manager manager) {
-        boolean hasDuplicates = hasNameDuplicates();
+        boolean hasDuplicates = PersonList.hasNameDuplicates(personNames);
         if (hasDuplicates) {
             manager.getUi().printlnMessage(Message.ERROR_GROUPCREATE_DUPLICATE_NAMES);
             return;
         }
 
-        ArrayList<Person> personList = convertToListOfPerson();
+        PersonList personList = new PersonList();
+        personList.convertToPersonList(personNames);
 
         boolean isGroupExists = manager.getProfile().hasGroupName(groupName);
 
@@ -125,6 +89,7 @@ public class GroupCreateCommand extends Command {
 
         Group newGroup = new Group(groupName, newGroupId, personList);
         manager.getProfile().addGroup(newGroup);
+        manager.saveProfile();
         manager.getUi().printlnMessageWithDivider(SUCCESS_MESSAGE + newGroup);
     }
 }
