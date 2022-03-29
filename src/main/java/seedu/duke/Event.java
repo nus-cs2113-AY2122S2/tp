@@ -13,7 +13,7 @@ public class Event {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String message = "Event " + description
                 + " (at: " + getAt() + ")";
         return message;
@@ -30,6 +30,8 @@ public class Event {
     public String getAt() {
         return at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
+
+
     public String getDescription() {
         return description;
     }
