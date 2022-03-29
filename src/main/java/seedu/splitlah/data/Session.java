@@ -26,7 +26,6 @@ public class Session implements Serializable, Comparable<Session> {
     // CONSTANTS
     private static final String[] ACTIVITY_LIST_COLS = { "#", "Activities", "Cost", "Payer" };
     private static final String PERSON_LIST_HEADER = "Participants:";
-    private static final String SUMMARY_STRING_SEPARATOR = " | ";
     private static final String COST_FORMATTING = "%.2f";
     private static final String COST_PREPEND = "$";
     private static final int ZERO_INDEXING_OFFSET = 1;
