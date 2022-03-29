@@ -59,7 +59,7 @@ public class Person implements Serializable {
      * @param costOwed   A double that represents the cost owed by a Person.
      * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      */
-    public void addActivityCost(int activityId, double costPaid, double costOwed) throws InvalidDataException {
+    public void addActivityCost(int activityId, double costPaid, double costOwed) {
         ActivityCost activityCost = new ActivityCost(activityId, costPaid, costOwed);
         activityCostList.add(activityCost);
     }

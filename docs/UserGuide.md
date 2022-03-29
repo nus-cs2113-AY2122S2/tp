@@ -1,4 +1,5 @@
 <p align="center"><img alt="logo" src="https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/pngLogo.png"></p>
+
 # SplitLah
 SplitLah is a desktop app with a Command Line Interface (CLI) for **splitting bills** amongst you and your friends after a group outing,
 where each group outing can consist of several activities with **different people paying the bill** for each activity.
@@ -204,6 +205,24 @@ Examples of usage:
 
 
 ### Viewing a session : `session /view`
+Displays details about a session.<br>
+
+>Format: `session /view /sid [SESSION_ID]`
+>
+>
+>* `[SESSION_ID]` refers to the unique identifier of the session.
+>    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+
+> **💡 Note:**
+>- The session with a unique identifier of `[SESSION_ID]` has to exist before the activity can be viewed.
+
+
+Example of usage:
+1. Views a session with a unique identifier of 1.
+    - `session /view /sid 1` <br>
+      ![Activity view command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityViewCommand.png)
+      <br>     
+      <br>
 
 ### Listing all sessions: `session /list`
 Displays all existing sessions so that you can have an overview of previously created sessions. 
@@ -386,26 +405,27 @@ Example of usage:
 ## _Transaction Management_
 ### Settling all transactions for a session: `session /summary`
 
-> Displays a summary of a session that details how much each person must pay and to whom for all debts to be resolved.<br>
+Displays a transaction summary for a session and helps you calculate how much each person in the session
+must pay and to whom they should pay for all debts to be resolved.<br>
 
-Format: `session /summary /sid [SESSION_ID]`
+> Format: `session /summary /sid [SESSION_ID]`
+> * `[SESSION_ID]` refers to the unique identifier of the session.
+>    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 
-* `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+<br>
 
 > **💡 Note:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its summary can be generated.
 
-Example of usage:
-1. A [session](#creating-a-session-session-create) was previously created with session named Class Outing with Alice 
-   and Bob involved on 15-03-2022.
-2. An [activity](#creating-an-activity-activity-create) was created with activity named Class Lunch, where Alice paid for both
-   Bob and herself with a total cost of $10.
-3. Get a session summary for an active session with a session unique identifier of 2.
-   - `session /summary /sid 1` <br>
-   ![Session summary command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionSummaryCommand.png)
-<br>
-<br>
+**Example**
+* Displays a session summary that summarises the [session that has been created](#creating-a-session-session-create)
+  with session unique identifier of 1 to help Alice and Bob calculate what transactions they have to make to
+  resolve all their debts to each other.<br>
+
+  `session /summary /sid 1`<br>
+  ![Session summary command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionSummaryCommand.png)
+  <br>
+  <br>
 
 
 <hr>
@@ -502,26 +522,24 @@ Example of usage:
 ## _Miscellaneous_
 
 ### Listing all available commands: `help`
-> Displays all available SplitLah commands and their syntax.
+Displays all available SplitLah commands and their syntax so that you can get assistance when using SplitLah.<br>
+You can also refer to the [Command Summary](#command-summary) for a summary of all available commands in SplitLah.
 
-Format: `help`
+> Format: `help`
 
-Example of usage:
-
-![Help command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/HelpCommand.png)
-<br>
 <br>
 
 ### Exit
-> Exits the application.
+Exits the application.<br>
 
-Format: `exit`
+> Format: `exit`
  
 ## FAQ
 
 **Q**: Is data saved to the disk upon exit?
 
-**A**: SplitLah 1.0 does not currently support saving data to the disk.
+**A**: SplitLah 2.0 will create a save file in a folder named `data` that will be created in the same directory as
+`SplitLah.jar`. All changes will be saved to the save file upon exit.
 
 ## Command Summary
 

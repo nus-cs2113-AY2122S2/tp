@@ -1,18 +1,18 @@
 package seedu.splitlah.command;
 
-import seedu.splitlah.data.Activity;
-import seedu.splitlah.data.Manager;
-import seedu.splitlah.data.Person;
-import seedu.splitlah.data.Profile;
-import seedu.splitlah.data.Session;
-import seedu.splitlah.data.PersonList;
-import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.ui.Message;
-import seedu.splitlah.ui.TextUI;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
+
+import seedu.splitlah.data.Activity;
+import seedu.splitlah.data.Manager;
+import seedu.splitlah.data.Person;
+import seedu.splitlah.data.PersonList;
+import seedu.splitlah.data.Profile;
+import seedu.splitlah.data.Session;
+import seedu.splitlah.exceptions.InvalidDataException;
+import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TextUI;
 
 /**
  * Represents a command object that edits an Activity object.
@@ -22,6 +22,7 @@ import java.util.logging.Level;
 public class ActivityEditCommand extends Command {
 
     private static final String COMMAND_SUCCESS = "The activity was edited successfully.\n";
+
     private int activityId;
     private final int sessionId;
     private final String activityName;
@@ -61,9 +62,9 @@ public class ActivityEditCommand extends Command {
         this.activityId = activityId;
         this.sessionId = sessionId;
         this.activityName = activityName;
+        this.totalCost = totalCost;
         this.payer = payer;
         this.involvedList = involvedList;
-        this.totalCost = totalCost;
         this.costList = costList;
         this.gst = gst;
         this.serviceCharge = serviceCharge;
@@ -120,10 +121,8 @@ public class ActivityEditCommand extends Command {
      * @param indexOfCostOwed An integer representing the index of the cost owed in the list of costs.
      * @param person          A person object representing the person whose costs are added to the
      *                        list of activity costs.
-     * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      */
-    private void addCostOwedAndCostPaid(Person personPaid, int activityId, int indexOfCostOwed, Person person)
-            throws InvalidDataException {
+    private void addCostOwedAndCostPaid(Person personPaid, int activityId, int indexOfCostOwed, Person person) {
         if (person == personPaid) {
             person.addActivityCost(activityId, totalCost, costList[indexOfCostOwed]);
         } else {
@@ -229,8 +228,9 @@ public class ActivityEditCommand extends Command {
             Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
             addAllActivityCost(involvedPersonList, personPaid, activityId);
-            Activity editedActivity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.removeActivity(activityId);
+            addAllActivityCost(involvedPersonList, personPaid, activityId);
+            Activity editedActivity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(editedActivity);
             manager.saveProfile();
             ui.printlnMessageWithDivider(COMMAND_SUCCESS + editedActivity);

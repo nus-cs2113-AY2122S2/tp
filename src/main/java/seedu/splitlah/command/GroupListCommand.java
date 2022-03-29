@@ -18,10 +18,6 @@ public class GroupListCommand extends Command {
 
     public static final String COMMAND_FORMAT = "Syntax: group /list";
 
-    private static final String GROUP_LIST_HEADER = "List of Groups";
-
-    private static final String GROUP_LIST_TITLE = "# | Name | Number of Persons";
-
     /**
      * Runs the command to list all existing groups managed by the Profile Object.
      *
@@ -29,22 +25,8 @@ public class GroupListCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
-        ArrayList<Group> groupsToBePrinted = manager.getProfile().getGroupList();
-        if (groupsToBePrinted.isEmpty()) {
-            manager.getUi().printlnMessage(Message.ERROR_PROFILE_GROUP_LIST_EMPTY);
-            Manager.getLogger().log(Level.FINEST, Message.LOGGER_GROUPLIST_GROUPS_NOT_LISTED);
-            return;
-        }
-
-        manager.getUi().printlnMessageWithDashDivider(GROUP_LIST_HEADER);
-        manager.getUi().printlnMessage(GROUP_LIST_TITLE);
-        int groupListSize = groupsToBePrinted.size();
-        assert groupListSize > 0 : Message.ASSERT_GROUPLIST_GROUP_SIZE_LESS_THAN_ONE;
-        for (int i = 0; i < groupListSize - 1; i++) {
-            manager.getUi().printlnMessage(groupsToBePrinted.get(i).getGroupSummary());
-        }
-        String lastGroupToPrint = groupsToBePrinted.get(groupListSize - 1).getGroupSummary();
-        manager.getUi().printlnMessageWithDivider(lastGroupToPrint);
+        String groupListSummary = manager.getProfile().getGroupListSummaryString();
+        manager.getUi().printlnMessage(groupListSummary);
         Manager.getLogger().log(Level.FINEST, Message.LOGGER_GROUPLIST_GROUPS_LISTED);
     }
 }

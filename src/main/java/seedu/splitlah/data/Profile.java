@@ -1,7 +1,9 @@
 package seedu.splitlah.data;
 
 import seedu.splitlah.exceptions.InvalidDataException;
+import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TableFormatter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,12 +15,17 @@ import java.util.ArrayList;
  * @author Roy
  */
 public class Profile implements Serializable {
-    
+
     private ArrayList<Session> sessionList;
     private ArrayList<Group> groupList;
     private int sessionIdTracker;
     private int activityIdTracker;
     private int groupIdTracker;
+
+    private static final String SESSION_LIST_HEADER = "List of Sessions";
+    private static final String[] SESSION_LIST_COLS = {"#","Name", "Date","# of Participants","# of Activities"};
+    private static final String GROUP_LIST_HEADER = "List of Groups";
+    private static final String[] GROUP_LIST_COLS = { "#", "Name", "Number of persons" };
 
     /**
      * Initializes a Profile object.
@@ -118,6 +125,35 @@ public class Profile implements Serializable {
     }
 
     /**
+     * Returns a String object containing a summary of the state of the member attribute sessionList.
+     *
+     * @return A String object containing a summary of all Session objects in sessionList or
+     *         a message stating that the sessionList is empty if there are no Session objects within.
+     */
+    public String getSessionListSummaryString() {
+        if (sessionList.isEmpty()) {
+            return Message.ERROR_PROFILE_SESSION_LIST_EMPTY;
+        }
+
+        TableFormatter summaryTable = new TableFormatter(
+                SESSION_LIST_COLS[0], SESSION_LIST_COLS[1], SESSION_LIST_COLS[2],
+                SESSION_LIST_COLS[3], SESSION_LIST_COLS[4]
+        );
+        summaryTable.addTableName(SESSION_LIST_HEADER);
+        sessionList.sort(Session::compareTo);
+
+        for (Session session : sessionList) {
+            String id = Integer.toString(session.getSessionId());
+            String name = session.getSessionName();
+            String date = session.getDateCreated().format(ParserUtils.DATE_FORMAT);
+            String numParticipants = Integer.toString(session.getPersonList().size());
+            String numActivities = Integer.toString(session.getActivityList().size());
+            summaryTable.addRow(id, name, date, numParticipants, numActivities);
+        }
+        return summaryTable.toString();
+    }
+
+    /**
      * Checks if there is a Group object that exists with the same name.
      *
      * @param groupName A String object that represents the group name.
@@ -208,6 +244,30 @@ public class Profile implements Serializable {
      */
     public ArrayList<Group> getGroupList() {
         return groupList;
+    }
+
+    /**
+     * Returns a String object containing a summary of the state of the member attribute groupList.
+     *
+     * @return A String object containing a summary of all Group objects in groupList or
+     *         a message stating that the groupList is empty if there are no Group objects within.
+     */
+    public String getGroupListSummaryString() {
+        if (groupList.isEmpty()) {
+            return Message.ERROR_PROFILE_GROUP_LIST_EMPTY;
+        }
+
+        TableFormatter summaryTable = new TableFormatter(
+                GROUP_LIST_COLS[0], GROUP_LIST_COLS[1], GROUP_LIST_COLS[2]
+        );
+        summaryTable.addTableName(GROUP_LIST_HEADER);
+        for (Group group : groupList) {
+            String id = Integer.toString(group.getGroupId());
+            String name = group.getGroupName();
+            String count = Integer.toString(group.getPersonCount());
+            summaryTable.addRow(id, name, count);
+        }
+        return summaryTable.toString();
     }
 
     /**
