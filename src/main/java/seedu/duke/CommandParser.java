@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.command.Command;
 import seedu.duke.command.eventcommands.AddEventCommand;
 import seedu.duke.command.eventcommands.ViewEventsCommand;
+import seedu.duke.command.housekeepercommands.*;
 import seedu.duke.command.itemcommand.AddItemCommand;
 import seedu.duke.command.itemcommand.ViewItemWithZeroPaxCommand;
 import seedu.duke.command.itemcommand.SearchItemCommand;
