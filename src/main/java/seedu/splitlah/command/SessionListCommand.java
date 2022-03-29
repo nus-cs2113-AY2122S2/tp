@@ -26,24 +26,7 @@ public class SessionListCommand extends Command {
     @Override
     public void run(Manager manager) { 
         TextUI ui = manager.getUi();
-        ArrayList<Session> sessionsToBePrinted = manager.getProfile().getSessionList();
-        sessionsToBePrinted.sort(Session::compareTo);
-        if (sessionsToBePrinted.isEmpty()) {
-            ui.printlnMessage(Message.ERROR_PROFILE_SESSION_LIST_EMPTY);
-            return;
-        }
-        TableFormatter tableFormatter =
-                new TableFormatter("#","Name", "Date","# of Participants","# of Activities");
-        tableFormatter.addTableName(SESSION_LIST_HEADER);
-
-        for (Session session : sessionsToBePrinted) {
-            String rowId = Integer.toString(session.getSessionId());
-            String rowName = session.getSessionName();
-            String rowDate = session.getDateCreated().format(ParserUtils.DATE_FORMAT);
-            String rowNumParticipants = Integer.toString(session.getPersonList().size());
-            String rowNumActivities = Integer.toString(session.getActivityList().size());
-            tableFormatter.addRow(rowId, rowName, rowDate, rowNumParticipants, rowNumActivities);
-        }
-        ui.printlnMessage(tableFormatter.toString());
+        String sessionListSummary = manager.getProfile().getSessionListSummaryString();
+        ui.printlnMessage(sessionListSummary);
     }
 }
