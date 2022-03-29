@@ -11,6 +11,7 @@ import seedu.duke.Ui;
 import seedu.duke.ListContainer;
 import seedu.duke.InvalidItemPaxException;
 
+import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -117,6 +118,7 @@ public class AddItemCommand extends Command {
         boolean isItemAlreadyInTheList = listOfItems.addItemToList(item);
         if (isItemAlreadyInTheList == true) {
             String nameOfItemToAdd = item.getName();
+            nameOfItemToAdd = nameOfItemToAdd.toUpperCase();
             ui.printItemAlreadyInTheListErrorMessage(nameOfItemToAdd);
             return;
         }

@@ -15,7 +15,7 @@ public class AddAvailabilityTest {
         Command command = parser.parse("availability Susan / 1,3");
         AddAvailabilityCommand addAvailabilityCommand = (AddAvailabilityCommand) command;
         assertEquals("1,3", addAvailabilityCommand.getAvailability());
-        assertEquals("Susan", addAvailabilityCommand.getName());
+        assertEquals("susan", addAvailabilityCommand.getName());
     }
 
     @Test

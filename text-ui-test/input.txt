@@ -1,5 +1,4 @@
 James Gosling
-View Recorded Housekeeper
 Add Item Toilet Roll / 15
 Add Item  / 20
 Add Item Toilet Roll /
@@ -8,7 +7,6 @@ Add Item Toilet Roll / 0
 Add Item Fork / 15
 Add Item Spoon /2
 View Item In Inventory
-View Recorded Housekeeper
 Update Item Pax Toilet Roll / 5
 Update Item Pax Toilet Roll / -1
 Update Item Pax Toilet Roll /
@@ -52,8 +50,6 @@ is a new week
 view recorded housekeeper
 is a new year
 view recorded housekeeper
-=======
-Availability Jane @ 5,6
 View Recorded Housekeeper
 Update Item Name Swimming Pool /
 Update Item Name / Premium Swimming Pool

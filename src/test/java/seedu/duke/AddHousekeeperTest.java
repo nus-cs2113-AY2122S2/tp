@@ -14,7 +14,7 @@ public class AddHousekeeperTest {
         CommandParser parser = new CommandParser();
         Command command = parser.parse("add housekeeper Susan / 23");
         AddHousekeeperCommand addHousekeeperCommand = (AddHousekeeperCommand) command;
-        assertEquals("Susan", addHousekeeperCommand.getHousekeeper().getName());
+        assertEquals("susan", addHousekeeperCommand.getHousekeeper().getName());
         assertEquals(23, addHousekeeperCommand.getHousekeeper().getAge());
     }
 
@@ -45,7 +45,7 @@ public class AddHousekeeperTest {
         CommandParser parser = new CommandParser();
         Command command = parser.parse("add housekeeper Susan / 23");
         AddHousekeeperCommand addHousekeeperCommand = (AddHousekeeperCommand) command;
-        assertEquals("Susan", addHousekeeperCommand.getHousekeeper().getName());
+        assertEquals("susan", addHousekeeperCommand.getHousekeeper().getName());
         assertEquals(23, addHousekeeperCommand.getHousekeeper().getAge());
         command = parser.parse("delete housekeeper susan");
         DeleteHousekeeperCommand deleteHousekeeperCommand = (DeleteHousekeeperCommand) command;
