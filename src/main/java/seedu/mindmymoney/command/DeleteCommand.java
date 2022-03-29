@@ -1,7 +1,7 @@
 package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
-import seedu.mindmymoney.constants.PrintStrings;
+
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.IncomeList;
@@ -91,7 +91,7 @@ public class DeleteCommand extends Command {
 
             String getNumber = splitMessage[INDEX_OF_SECOND_ITEM];
             int positionToDelete = Integer.parseInt(getNumber) + LIST_INDEX_CORRECTION;
-
+            assert positionToDelete >= 0 : "Index should always be >= 0";
             System.out.println("I have removed "
                     + expenditureList.get(positionToDelete).getDescription()
                     + " of $" + expenditureList.get(positionToDelete).getAmount()
