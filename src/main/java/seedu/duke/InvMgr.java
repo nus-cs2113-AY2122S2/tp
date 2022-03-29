@@ -4,7 +4,7 @@ import seedu.duke.commands.Command;
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
 import seedu.duke.exceptions.InvMgrException;
-import seedu.duke.parser.Parser;
+import seedu.duke.parser.InputParser;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 import seedu.duke.common.Messages;
@@ -42,7 +42,7 @@ public class InvMgr {
         while (!isExit) {
             try {
                 String command = ui.getRawUserInput();
-                Command inputCommand = Parser.parse(command);
+                Command inputCommand = InputParser.parse(command);
                 inputCommand.execute(itemList, ui);
                 isExit = inputCommand.isExit();
                 storage.save(itemList.getItemArrayList());

@@ -8,7 +8,7 @@ participant "storage:Storage" as Storage
 participant "gson:Gson" as Gson
 
 activate InvMgr
-    InvMgr -> Storage : save(itemList: ItemList)
+    InvMgr -> Storage : save(itemList: ArrayList<Item>)
     activate Storage
 
         create Gson
