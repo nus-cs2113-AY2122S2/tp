@@ -142,4 +142,7 @@ Error! Invalid Command.
 1. Item Name: Premium Spoon Item Pax: 0
 ======== End of the list ========
 Error! Invalid Command.
+Error! Premium Spoon has already been added to the item list.
+The item and its pax has been added to the list of items in the inventory.
+There are currently 3 items within the inventory.
 see u again!

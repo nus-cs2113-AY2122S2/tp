@@ -56,6 +56,10 @@ public class Ui {
         System.out.printf("There are currently %d items within the inventory.\n", listOfItems.getSize());
     }
 
+    public void printItemAlreadyInTheListErrorMessage(String nameOfItemToAdd) {
+        System.out.printf("Error! %s has already been added to the item list.\n", nameOfItemToAdd);
+    }
+
     /**
      * Prints out the item name ,pax as well as index for each item that is found within the item list.
      *

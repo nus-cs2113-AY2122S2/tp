@@ -62,4 +62,6 @@ Search Item
 Search Item o
 View Item With Zero Pax
 View Item With Zero
+Add Item Premium Spoon / 500
+Add Item Table / 2000
 bye
