@@ -30,8 +30,8 @@ This section describes some noteworthy details on how certain features are imple
 The following sequence diagram shows how the `add_lesson` operation generally works.
 ![AddLessonSequenceDiagram](diagrams/AddLessonSequenceDiagram.png)
 
-The following sequence diagram shows how the `add_lesson` operation works in detail.
-![AddLessonCommandSequenceDiagram](diagrams/AddLessonCommandSequenceDiagram.png)
+The following sequence diagram shows how the `add_meeting` operation works in detail.
+![AddMeetingCommandSequence](diagrams/AddMeetingCommandSequence.png)
 
 ## 3.2 Listing Events Feature
 The `list` command is a command that the user can input in order to list out the events he has in his timetable.
@@ -57,6 +57,26 @@ Timings that are not marked 'busy' are then identified as free time slots.
 
 The following sequence diagram shows how the command `free` is executed.
 ![FreeCommandSequenceDiagram](diagrams/FreeCommandSequenceDiagram.png)
+
+## 3.4 Delete events `delete`
+Deletes an event from the user's specified timetable
+
+**Format:** ` delete n/NAME i/INDEX`
+
+* Deletes from the timetable of user
+* Deletes the lesson at the specified `INDEX`.
+* The `INDEX` refers to the index number shown in the displayed lesson list.
+
+Example of usage:
+
+`delete n/John i/1`
+
+If the event is a meeting, it will delete this event from all users
+
+The following sequence diagram shows how the `delete` command works:
+![DeleteCommandSequenceDiagram](diagrams/DeleteCommandSequenceDiagram.png)
+
+Before the timetable is listed out, it will also be sorted according to day and time for easy reading.
 
 ## 3.4 Data Saving Feature
 
@@ -100,6 +120,19 @@ If yes, it will call for ParserLocalData.prepareLoadMeeting method to add all th
 The following sequence diagram shows how the load operation works:
 ![LoadSequenceDiagram](diagrams/LoadSequenceDiagram.png)
 
+## 3.6 Clear events `clear`
+The `clear` command is a command that the user can clear a certain user's timetable or everyone's timetable.
+
+`clear [user]` clears the timetable for the particular user.
+
+`clear all` clearss the timetable for all users.
+
+
+No record of the user will persist when the clear is executed on a user.
+
+The following sequence diagram shows how the `clear` command works:
+![ClearCommandSequenceDiagram](diagrams/ClearCommandSequenceDiagram.png)
+
 ## Product scope
 ### Target user profile
 
@@ -141,5 +174,5 @@ NUS Students who wish to meet as a group (be it for project meetings or to eat t
 ##Clear Command
 The clear command is one of the commands the user can execute to clear the whole list. 
 
-![ClearCommandSequenceDiagram](diagrams/ClearCommandSequenceDiagram.png)
+
 Here is the sequence when the command `clear` is executed.
