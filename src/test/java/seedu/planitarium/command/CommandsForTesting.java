@@ -16,18 +16,13 @@ public class CommandsForTesting {
     public static final String DELETEINCOME = "deletein /u 1 /g 1 /r 1";
     public static final String EDITINCOME = "editin /u 1 /g 1 /r 1 /i 2000 /d income /p t ";
     public static final String ADDEXPEND = "addout /u 1 /g 1 /i 1999.99 /d spend /c 1 /p f ";
-    public static final String DE
-    public static final String
-    public static final String
+    public static final String DELETEEXPEND = "deleteout /u 1 /g 1 /r 1";
+    public static final String EDITEXPEND = "editout /u 1 /g 1 /i 999.99 /d spent /c 3 /p f ";
+    public static final String OVERVIEW = "overview";
+    public static final String LISTBYGROUP = "list /g 1";
+    public static final String LISTCAT = "listcat";
+    public static final String FIND = "find /d s /c 1";
+    public static final String EXIT = "bye";
+    public static final String HELP = "help";
 
-
-        addout /u__ /g __ /e __ /d __ /c __ /p __
-        deleteout /u __ /g __ /r __
-        editout /u __ /g __ /r __ /e __ /d __ /c __  /p __
-        overview
-    list /g __
-        find /d __ /c __
-        listcat
-    bye
-        help
 }
