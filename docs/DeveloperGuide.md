@@ -71,6 +71,20 @@ Given below is an example usage scenario and how View Project behaves at each st
 
 ![image info](./UmlDiagrams/ViewProject.jpg)
 
+#### Add a Deadline to a Project
+
+**Step 1.** When `CommandHandler` receives a user input starting with string “adddeadline”, it will call the `addDeadline()` method
+
+**Step 2.** It will first check if the number of arguments provided matches what is required. If it is less, it will throw an `IllegalCommandException` and return.
+
+**Step 3.** If the number of arguments is valid, call the projectList’s `addDeadline()` method, with the arguments of title and deadline.
+
+**Step 4.** We call the `findProjectIndex()` method to find the given project that matches the title provided. If the value indicates that the project does not exist, return immediately and indicate no deadline was added.
+
+**Step 5.** If the index of the project was found, call that specific Project’s `setDeadline()` method and update the deadline.
+
+![image info](./UmlDiagrams/AddDeadline.jpg)
+
 ### Proposed Features
 
 ![image info](./UmlDiagrams/CommandParser.png)  
@@ -111,7 +125,11 @@ The Tasks Due Soon feature makes use of `ProjectList` and `CommandHandler` class
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+* computer science university students
+* has a need to manage a significant number of projects and tasks
+* can type fast
+* prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
 
 ### Value proposition
 
