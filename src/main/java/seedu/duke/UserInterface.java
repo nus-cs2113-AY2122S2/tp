@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.CommandParsers.*;
 import util.exceptions.NullException;
 import util.exceptions.WrongCommandException;
 
@@ -9,8 +10,16 @@ import java.util.Scanner;
 public class UserInterface {
     private Warehouse warehouse;
 
+    private ListParser listParser;
+    private ViewParser viewParser;
+    private AddParser addParser;
+    private RemoveParser removeParser;
+    private TotalParser totalParser;
+
+
     public UserInterface(Warehouse warehouse) {
         this.warehouse = warehouse;
+        this.listParser = new ListParser(warehouse);
     }
 
     public void run() {
@@ -35,22 +44,22 @@ public class UserInterface {
                 switch (command) {
                 case "view":
                     //using flags here to distinguish between different views????
-                    userInputIsView(userInput);
+                    viewParser.parse(userInput);
                     break;
                 case "list":
-                    userInputIsList(userInput);
+                    listParser.parse(userInput);
                     break;
                 case "add":
-                    userInputIsAdd(userInput);
+                    addParser.parse(userInput);
                     break;
                 case "remove":
-                    userInputIsRemove(userInput);
+                    removeParser.parse(userInput);
                     break;
                 case "total":
-                    userInputIsTotal(userInput);
+                    totalParser.parse(userInput);
                     break;
                 case "help":
-                    userInputIsHelp();
+                    displayHelp();
                     break;
                 case "storage-capacity":
                     userInputIsStorageCapacity();
@@ -64,10 +73,10 @@ public class UserInterface {
                     String wrongCommand = wrongCommandException.getCommand();
                     System.out.printf("%s command was used wrongly. Type help to see examples\n",
                             wrongCommand);
-                    userInputIsHelp();
+                    displayHelp();
                 } else {
                     System.out.println("No such command. Type help to see examples");
-                    userInputIsHelp();
+                    displayHelp();
                 }
             } catch (NullException nullException) {
                 //catch null exception here
@@ -84,7 +93,7 @@ public class UserInterface {
         Commands.storageCapacity(totalGoods, warehouseCapacity);
     }
 
-    private void userInputIsHelp() {
+    private void displayHelp() {
         Commands.help();
     }
 

@@ -1,4 +1,4 @@
-@startuml random
+ @startuml random
 
 class Order{
     - String ShipToName
