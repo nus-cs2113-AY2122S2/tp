@@ -1,9 +1,9 @@
 package seedu.duke;
 
 import seedu.duke.storage.EventListFileManager;
-import seedu.duke.storage.RoomFileManager;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +19,16 @@ public class EventList {
 
     public ArrayList<Event> getEventList() {
         return this.eventList;
+    }
+
+    public void add(String description, String atString) throws InvalidDateException {
+        try {
+            LocalDate at = LocalDate.parse(atString);
+            Event event = new Event(description, at);
+            eventList.add(event);
+        } catch (Exception e) {
+            throw new InvalidDateException();
+        }
     }
 
     public void save() throws IOException {

@@ -2,6 +2,7 @@ package seedu.duke;
 
 
 import seedu.duke.storage.AssignmentListFileManager;
+import seedu.duke.storage.EventListFileManager;
 import seedu.duke.storage.RoomFileManager;
 
 import java.io.IOException;
@@ -32,6 +33,11 @@ public class ListContainer {
         roomFileManager.load(roomArrayList);
         roomList = new RoomList(roomArrayList);
 
+        EventListFileManager eventFileManager = new EventListFileManager();
+        ArrayList<Event> eventArrayList = new ArrayList<>();
+        eventFileManager.load(eventArrayList);
+        eventList = new EventList(eventArrayList);
+
         itemList = new ItemList();
     }
 
@@ -59,4 +65,9 @@ public class ListContainer {
     public ItemList getItemList() {
         return itemList;
     }
+
+    public EventList getEventList() {
+        return eventList;
+    }
+
 }

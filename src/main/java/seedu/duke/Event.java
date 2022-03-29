@@ -7,7 +7,7 @@ public class Event {
     protected LocalDate at;
     public String description;
 
-    public Event(String description, LocalDate by) {
+    public Event(String description, LocalDate at) {
         this.description = description;
         this.at = at;
     }
@@ -20,7 +20,7 @@ public class Event {
     }
 
     public String toFileString() {
-        return getDescription() + " | " + getAt();
+        return getDescription() + " | " + at.toString();
     }
 
     public void setAt(String at) {
