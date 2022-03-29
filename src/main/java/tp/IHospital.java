@@ -14,7 +14,7 @@ public class IHospital {
     public void run() {
         ui.sayHello();
         String fullCommand = Parser.getCommand();
-        Storage storage;
+        DoctorStorage storage;
 
         while (!fullCommand.equals("bye")) {
             try {

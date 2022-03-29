@@ -16,6 +16,18 @@ public class Appointment {
         this.time = time;
     }
 
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
     @Override
     public String toString() {
         return "Doctor: " + doctor.getName() + " || Patient: "

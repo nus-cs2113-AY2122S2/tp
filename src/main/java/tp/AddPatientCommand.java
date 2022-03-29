@@ -1,6 +1,5 @@
 package tp;
 
-import tp.person.Doctor;
 import tp.person.Patient;
 
 public class AddPatientCommand extends Command {
@@ -21,7 +20,7 @@ public class AddPatientCommand extends Command {
 
     @Override
     public void execute(DoctorList doctorList, PatientList patientList,
-                        AppointmentList appointmentList, Ui ui, Storage storage) throws IHospitalException {
+                        AppointmentList appointmentList, Ui ui, DoctorStorage storage) throws IHospitalException {
         Patient patient = new Patient(id, name, phoneNumber, email);
         patientList.addPatient(patient);
     }

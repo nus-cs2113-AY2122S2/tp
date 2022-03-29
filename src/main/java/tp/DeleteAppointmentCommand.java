@@ -13,7 +13,7 @@ public class DeleteAppointmentCommand extends Command {
 
     @Override
     public void execute(DoctorList doctorList, PatientList patientList,
-                        AppointmentList appointmentList, Ui ui, Storage storage) throws IHospitalException {
+                        AppointmentList appointmentList, Ui ui, DoctorStorage storage) throws IHospitalException {
         appointmentList.deleteAppointment(index);
     }
 }

@@ -22,7 +22,7 @@ public class AddDoctorCommand extends Command {
 
     @Override
     public void execute(DoctorList doctorList, PatientList patientList,
-                        AppointmentList appointmentList, Ui ui, Storage storage) throws IHospitalException {
+                        AppointmentList appointmentList, Ui ui, DoctorStorage storage) throws IHospitalException {
         Doctor doctor = new Doctor(id, name, phoneNumber, email);
         doctorList.addDoctor(doctor);
     }

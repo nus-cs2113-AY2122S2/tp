@@ -5,12 +5,8 @@ import tp.Parser;
 import tp.PatientList;
 import tp.Ui;
 import tp.AppointmentList;
-import tp.Storage;
 import tp.IHospitalException;
 import tp.Command;
-import tp.person.Patient;
-
-import java.util.Scanner;
 
 public class Duke {
     /**
