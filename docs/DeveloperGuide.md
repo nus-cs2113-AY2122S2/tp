@@ -206,7 +206,7 @@ when the user invokes the `session /view` command.
 The general workflow of the `session /create` command is as follows:
 1. The user input provided is passed to `Splitlah`.
 2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `SessionViewCommand` object.
-3. `SessionListCommand#run` method is then invoked to run the `session /view` command.
+3. `SessionViewCommand#run` method is then invoked to run the `session /view` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called.
 5. To retrieve the sessions from profile, `Profile#getSession` is executed,
    returning the session with the matching session Id. If no session is found, a message indicating that the session was
