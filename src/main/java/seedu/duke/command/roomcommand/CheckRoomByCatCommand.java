@@ -1,6 +1,14 @@
-package seedu.duke;
+package seedu.duke.command.roomcommand;
 
+import seedu.duke.AssignmentMap;
+import seedu.duke.InvalidCategoryException;
+import seedu.duke.ListContainer;
+import seedu.duke.Room;
+import seedu.duke.RoomList;
+import seedu.duke.RoomType;
+import seedu.duke.Ui;
 import seedu.duke.command.Command;
+
 
 /**
  * Class that implements execution behavior for listing the information
@@ -46,10 +54,9 @@ public class CheckRoomByCatCommand extends Command {
      * Override of execute command in Command class.
      * Print out all room information with corresponding room type
      * including the information of:
-     * type, room number, level and status.
-     *
-     * @param listContainer asd
-     * @param ui            The user interface for this execution method.
+     * type, room number, level, status and assigned housekeeper.
+     * @param listContainer The object containing the necessary data structure.
+     * @param ui The object that deals with user interface for the program.
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) {
