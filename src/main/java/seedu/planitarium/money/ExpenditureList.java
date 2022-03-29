@@ -40,6 +40,8 @@ public class ExpenditureList extends MoneyList {
      *
      * @param description The description of what the user had spent on
      * @param amount The cost for this expenditure
+     * @param category The integer label of the category
+     * @param isPermanent The recurring status of the expenditure
      */
     public void addExpenditure(String description, double amount, int category, boolean isPermanent) {
         logger.log(Level.INFO, LOG_ADD_EXP);

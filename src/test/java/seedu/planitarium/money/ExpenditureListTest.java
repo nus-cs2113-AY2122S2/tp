@@ -1,35 +1,36 @@
-package seedu.planitarium.income;
+//@@author tjiarong
+
+package seedu.planitarium.money;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.planitarium.money.IncomeList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
-class IncomeListTest {
+class ExpenditureListTest {
 
     private static int INVALID_INDEX = -1;
     private static int VALID_INDEX = 1;
-    private IncomeList personOne;
+    private ExpenditureList personOne;
 
     @BeforeEach
     public void setUp() {
-        personOne = new IncomeList();
-        personOne.addIncome("Food", 20, false);
-        personOne.addIncome("Transport", 5, false);
+        personOne = new ExpenditureList();
+        personOne.addExpenditure("Food", 20,1, false);
+        personOne.addExpenditure("Transport", 5, 1,false);
     }
 
     @Test
-    public void addIncome_newIncome_existsInIncome() {
-        IncomeList personTwo = new IncomeList();
-        personTwo.addIncome("clothes", 30, false);
+    public void addExpenditure_newExpenditure_existsInExpenditure() {
+        ExpenditureList personTwo = new ExpenditureList();
+        personTwo.addExpenditure("clothes", 30, 1,false);
         String description = "clothes";
         double amount = 30;
         assertEquals(description, personTwo.getDescription(VALID_INDEX));
-        assertEquals(amount, personTwo.getIncomeValue(VALID_INDEX));
+        assertEquals(amount, personTwo.getExpenditureValue(VALID_INDEX));
 
     }
 
@@ -41,9 +42,9 @@ class IncomeListTest {
     }
 
     @Test
-    public void getIncomeValue_validIndex_expectSameDescription() {
+    public void getExpenditureValue_validIndex_expectSameDescription() {
         double inputAmount = 20;
-        double getAmount = personOne.getIncomeValue(VALID_INDEX);
+        double getAmount = personOne.getExpenditureValue(VALID_INDEX);
         assertEquals(inputAmount, getAmount);
     }
 
@@ -55,11 +56,11 @@ class IncomeListTest {
 
 
     @Test
-    public void remove_incomeExists_removesNormally() {
-        int numberOfIncomeBeforeRemoval = personOne.getNumberOfIncomes();
+    public void remove_expenditureExists_removesNormally() {
+        int numberOfExpenditureBeforeRemoval = personOne.getNumberOfExpenditures();
         personOne.remove(VALID_INDEX);
-        int numberOfIncomeAfterRemoval = personOne.getNumberOfIncomes();
-        assertEquals(numberOfIncomeBeforeRemoval - 1, numberOfIncomeAfterRemoval);
+        int numberOfExpenditureAfterRemoval = personOne.getNumberOfExpenditures();
+        assertEquals(numberOfExpenditureBeforeRemoval - 1, numberOfExpenditureAfterRemoval);
     }
 
     @Test
@@ -83,9 +84,9 @@ class IncomeListTest {
     }
 
     @Test
-    public void getIncomeValue_invalidIndex_expectAssertionError() {
+    public void getExpenditureValue_invalidIndex_expectAssertionError() {
         try {
-            personOne.getIncomeValue(INVALID_INDEX);
+            personOne.getExpenditureValue(INVALID_INDEX);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());
@@ -93,10 +94,10 @@ class IncomeListTest {
     }
 
     @Test
-    public void addIncome_nullDescription_expectAssertionError() {
-        IncomeList testList = new IncomeList();
+    public void addExpenditure_nullDescription_expectAssertionError() {
+        ExpenditureList testList = new ExpenditureList();
         try {
-            testList.addIncome(null, 24, false);
+            testList.addExpenditure(null, 24, 1,false);
             fail();
         } catch (AssertionError e) {
             assertNull(e.getMessage());
