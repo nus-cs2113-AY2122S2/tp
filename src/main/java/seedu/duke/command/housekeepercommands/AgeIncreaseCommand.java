@@ -24,7 +24,8 @@ public class AgeIncreaseCommand extends Command {
      * age limit will be removed from the list.
      *
      * @param listContainer The list of information.
-     * @param ui            The instance of the Ui class used for printing additional messages when a command is executed.
+     * @param ui            The instance of the Ui class used for printing additional messages when a command is
+     *                      executed.
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui) {
