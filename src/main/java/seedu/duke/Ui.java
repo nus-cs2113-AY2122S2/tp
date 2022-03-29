@@ -86,7 +86,7 @@ public class Ui {
     public void printAssignedHousekeeper(String roomID, String name) {
         System.out.println(LINE);
         System.out.println("I have assigned " + name
-               + "to room number " + roomID + ".");
+               + " to room number " + roomID + ".");
         System.out.println(LINE);
     }
 

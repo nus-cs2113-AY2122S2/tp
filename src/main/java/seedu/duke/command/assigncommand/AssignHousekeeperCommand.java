@@ -104,7 +104,14 @@ public class AssignHousekeeperCommand extends Command {
             throw new InvalidHousekeeperNameException();
         }
 
-        int roomIdNumber = Integer.parseInt(roomID);
+        int roomIdNumber = 0;
+
+        try {
+            roomIdNumber = Integer.parseInt(roomID);
+        } catch (Exception e) {
+            throw new InvalidRoomNumberException();
+        }
+
         if (!isRoomIdValid(roomIdNumber, roomList)) {
             throw new InvalidRoomNumberException();
         }
