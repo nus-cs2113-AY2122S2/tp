@@ -1,7 +1,6 @@
 package seedu.duke.command.eventcommands;
 
 import seedu.duke.HotelLiteManagerException;
-import seedu.duke.InvalidAvailabilityException;
 import seedu.duke.command.Command;
 
 import seedu.duke.ListContainer;
@@ -17,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DeleteEventCommand extends Command {
-    private String n;
+    private String index;
     private static final String EVENT_INDICATE = "/";
     private static final int ONLY_ONE_FIELD_ENTERED = 1;
     private static Logger logger = Logger.getLogger("Add Event");
@@ -34,7 +33,7 @@ public class DeleteEventCommand extends Command {
             throw new InvalidEventException();
         }
 
-        setN(n);
+        setIndex(n);
         logger.log(Level.INFO, "Event command parsed");
     }
 
@@ -50,12 +49,12 @@ public class DeleteEventCommand extends Command {
         return input;
     }
 
-    public String getN() {
-        return this.n;
+    public String getIndex() {
+        return this.index;
     }
 
-    public void setN(String n) {
-        this.n = n;
+    public void setIndex(String index) {
+        this.index = index;
     }
 
 
@@ -70,7 +69,7 @@ public class DeleteEventCommand extends Command {
             throws InvalidRoomNumberException, InvalidHousekeeperProfile, IOException, InvalidDateException {
 
         final EventList eventList = listContainer.getEventList();
-        String n = getN();
+        String n = getIndex();
         assert !n.isEmpty() : "event number should not be empty";
 
         eventList.delete(n);
