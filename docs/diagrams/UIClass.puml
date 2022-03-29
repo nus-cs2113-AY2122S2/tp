@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class UI {
+-userInput: String
+-patients: ArrayList<Patients> = new ArrayList<>
+-reader: Scanner = new Scanner
+-parser: Parser = new Parser
+-readInput() : void
++readCommand() : String
++readParameters() : String
++printStatus(status: Status) : void
+}
+
+@enduml
