@@ -354,7 +354,7 @@ public class WorkoutList {
         String oldWorkoutKey = workoutToUpdate.toString();
         workoutToUpdate.setRepetitions(newRepsValue);
         updateWorkoutsHashMapList(oldWorkoutKey, workoutToUpdate);
-        logger.exiting(getClass().getName(), "Finished updating workout.");
+        logger.exiting(getClass().getName(), "updateWorkout");
         return workoutToUpdate;
     }
 
@@ -381,5 +381,21 @@ public class WorkoutList {
         }
 
         return false;
+    }
+
+    public String getTargetWorkout(String userArgument) throws InvalidWorkoutException {
+        String[] updateDetails = userArgument.split(" ", 2);
+        String indexToUpdateString = updateDetails[0].trim();
+        int indexToUpdate = Integer.parseInt(indexToUpdateString);
+
+        boolean isIndexToUpdateValid = checkIndexIsWithinRange(indexToUpdate);
+        String className = this.getClass().getSimpleName();
+
+        if (!isIndexToUpdateValid) {
+            throw new InvalidWorkoutException(className, InvalidWorkoutException.INDEX_VALUE_OUT_OF_RANGE);
+        }
+
+        String targetWorkout = workoutsDisplayList.get(indexToUpdate - 1);
+        return targetWorkout;
     }
 }
