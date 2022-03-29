@@ -1,11 +1,11 @@
 package seedu.splitlah.command;
 
+import seedu.splitlah.data.PersonList;
+import seedu.splitlah.data.Profile;
 import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
-import seedu.splitlah.data.Profile;
 import seedu.splitlah.data.Session;
-import seedu.splitlah.data.PersonList;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
@@ -22,6 +22,8 @@ import java.util.logging.Level;
 public class ActivityEditCommand extends Command {
 
     private static final String COMMAND_SUCCESS = "The activity was edited successfully.\n";
+    private static final int TEMPORARY_ACTIVITYID = -1;
+
     private int activityId;
     private final int sessionId;
     private final String activityName;
@@ -61,9 +63,9 @@ public class ActivityEditCommand extends Command {
         this.activityId = activityId;
         this.sessionId = sessionId;
         this.activityName = activityName;
+        this.totalCost = totalCost;
         this.payer = payer;
         this.involvedList = involvedList;
-        this.totalCost = totalCost;
         this.costList = costList;
         this.gst = gst;
         this.serviceCharge = serviceCharge;
@@ -229,9 +231,9 @@ public class ActivityEditCommand extends Command {
             Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
             addAllActivityCost(involvedPersonList, personPaid, activityId);
+            session.removeActivity(activityId);
+            addAllActivityCost(involvedPersonList, personPaid, activityId);
             Activity editedActivity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
-            Command activityDeleteCommand = new ActivityDeleteCommand(sessionId, activityId);
-            activityDeleteCommand.run(manager);
             session.addActivity(editedActivity);
             manager.saveProfile();
             ui.printlnMessageWithDivider(COMMAND_SUCCESS + editedActivity);
