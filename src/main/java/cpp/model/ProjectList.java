@@ -54,17 +54,16 @@ public class ProjectList {
      *
      * @param title Name of the project
      */
-    public void deleteProject(String title) {
+    public void deleteProject(String title) throws IndexOutOfBoundsException {
         System.out.println(Constants.SEPARATOR);
         int index = findProjectIndex(title);
-        try {
-            projectList.remove(index);
-            System.out.println(title + " deleted.");
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("There is no such project named " + title + ".");
-        } finally {
-            System.out.println(Constants.SEPARATOR);
+        if (index > projectList.size() || index < 0) {
+            throw new IndexOutOfBoundsException(Constants.INDEX_OUT_OF_RANGE);
         }
+        projectList.remove(index);
+        System.out.println(title + " deleted.");
+        System.out.println(Constants.SEPARATOR);
+
     }
 
     /**
@@ -188,9 +187,19 @@ public class ProjectList {
      *
      * @return total number of projects in the list
      */
-
     public int getProjectNo() {
         return projectList.size();
+    }
+
+    /**
+     * Gets certain project based on given index.
+     *
+     * @param index index of a given project
+     * @return target project with given index
+     */
+    public Project getProject(int index) {
+        assert (index >= 0 && index < projectList.size()) : "Index out of range!";
+        return projectList.get(index);
     }
 
     private int findProjectIndex(String name) {
@@ -223,4 +232,5 @@ public class ProjectList {
         }
         System.out.println(Constants.SEPARATOR);
     }
+
 }

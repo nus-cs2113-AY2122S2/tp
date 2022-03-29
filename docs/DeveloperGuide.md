@@ -36,8 +36,18 @@ Deleting a project functions very similarly to Adding a project.
 
 **Step6.** The index of the project is returned, and `ProjectList` will self-call the remove(index) method, removing the project from the planner.
 
+#### Print Project List
+![image info](./UmlDiagrams/printProject.png)
 
+**Step1.** When `CommandHandler` receives a user input starting with string "listproject" or "listprojects", it will call `listProjects`. This method ensure that `projectList` has been initialized before the next step.
 
+**Step2.** Once the first step is done, `listProjects` will call the `printProject` method from `ProjectList` with no parameter.
+
+**Step3.** `printList` will first check if the size of the private ArrayList named `projectList` is 0, which means that the arraylist is empty. If yes, it will print "You have not added any projects yet!" and return.
+
+**Step4.** It will then iterate over `projectList`, which type is `Project`. It will call `getTitle` and `getDeadline` from each array element in`the `Project` class.
+
+**Step5.** the general information of a project, i.e., its title and deadline, will be displayed.
 
 #### Todo feature
 ![image info](./UmlDiagrams/Todo.png)  
@@ -119,7 +129,6 @@ The Tasks Due Soon feature makes use of `ProjectList` and `CommandHandler` class
 
 
 
-
 #### Parse Command Feature
 
 ## Product scope
@@ -143,6 +152,7 @@ the program also allows for faster searching and editing than a GUI design once 
 |---------|-----------------------------|-----------------------------------------------------------|-----------------------------------------------------------------------------------|
 | v1.0    | new or experienced user     | add a task to the planner                                 | better organize my project                                                        |
 | v1.0    | user with existing projects | delete a project from the planner                         | remove projects that are already completed                                        |
+| v1.0    | user with existing projects | print all projects I have saved from the planner          | see what projects I have had so far                                               |
 | v1.0    | user with existing projects | add a to-do to a project                                  | get a clear outline of what needs to be done                                      |
 | v1.0    | student user                | add  a deadline for my project                            | keep track of due dates                                                           | 
 | v1.0    | student user                | view the details (to-do list and deadlines) of my project | see what needs to be done and when to do it                                       |
@@ -150,7 +160,7 @@ the program also allows for faster searching and editing than a GUI design once 
 | v1.0    | student user                | mark a to-do as not done                                  | fix mistakes of marking unfinished tasks                                          |
 | v1.0    | new user                    | access a help command                                     | familiarize myself with using the planner                                         |
 | v1.0    | student user                | exit the application                                      | close my planner when I am finished                                               |
-| ------  |                             |                                                           |                                                                                   |
+| ------  | --------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | v2.0    | student user                | add any web links/URLs                                    | keep track of relevant resources online                                           |
 | v2.0    | student user                | have quick access to my project's Github repo             | best keep track of my project lifecycle                                           |
 | v2.0    | student user                | list the programming languages/frameworks my project uses | know what languages/frameworks focus on and study                                 |

@@ -23,6 +23,7 @@ public class AddTodoCommandParser implements CommandParser<AddTodoCommand> {
     }
 
     private String parseTodoString(String[] strings) {
+
         String todoString = "";
         if (strings.length == Constants.THREE_ARGUMENTS) {
             todoString = strings[2];

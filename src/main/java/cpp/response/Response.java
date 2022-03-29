@@ -72,4 +72,24 @@ public class Response {
         return ("Unsuccessful operation. Please check the target indexes.");
     }
 
+    public static String addMemberSuccessfully(String memberName) {
+        return ("Member " + memberName + "has been added successfully.");
+    }
+
+    public static String deleteProjectSuccessfully(String projectTitle) {
+        return (projectTitle + " deleted successfully.");
+    }
+
+    public static String deleteProjectUnsuccessfully(String projectTitle) {
+        return ("Unsuccessful deletion of project " + projectTitle);
+    }
+
+    public static String listProjectsSuccessfully() {
+        return ("Projects have been listed successfully.");
+    }
+
+    public static String viewCommandExecuted() {
+        return ("View command has been executed successfully.");
+    }
+
 }
