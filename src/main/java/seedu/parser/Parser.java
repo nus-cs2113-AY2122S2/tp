@@ -11,6 +11,7 @@ import seedu.command.CheckCommand;
 import seedu.command.DeleteCommand;
 import seedu.command.HelpCommand;
 import seedu.command.Command;
+import seedu.command.SaveCommand;
 
 import java.util.Collections;
 import java.util.Locale;
