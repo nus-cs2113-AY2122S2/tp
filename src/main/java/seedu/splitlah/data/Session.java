@@ -211,13 +211,14 @@ public class Session implements Serializable, Comparable<Session> {
     }
 
     /**
-     * Adds an Activity object to the session.
+     * Adds an Activity object to the session, then sorts the activity list by ascending activity unique identifier.
      *
      * @param activity An Activity object representing an activity that happened in the session.
      */
     public void addActivity(Activity activity) {
         assert activity != null : Message.ASSERT_SESSION_ACTIVITY_NULL;
         activityList.add(activity);
+        activityList.sort(Activity::compareTo);
     }
 
     /**
