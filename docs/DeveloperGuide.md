@@ -52,10 +52,41 @@ Deleting a project functions very similarly to Adding a project.
 
 **Step5.** The `Project` object will create a `Todo` object and add it to the `ArrayList<Todo>` in `Project` class.  
 
+#### View a Project
+
+The view function makes use of ```ProjectList``` and ```CommandHandler``` classes. It is facilitated by methods within the ```Todo``` and ```Project``` classes, stored within ```ProjectList```.
+Given below is an example usage scenario and how View Project behaves at each step
+
+**Step 1.** The user executes ```view cs2113``` to view the project titled cs2113. The command is retrieved and parsed by ```handleUserInput()``` in ```CommandHandler```, which calls ```view()``` in ```CommandHandler```
+
+**Step 2.** The ```view()``` method ensures that ```ProjectList``` has been correctly initialised and the command is valid, before calling ```view()``` in ```ProjectList```
+
+**Step 3.** ```view()``` in ```ProjectList``` calls ```findProjectIndex()``` in ```ProjectList```
+
+**Step 4.** ```findProjectIndex()``` loops through all ```Project``` objects in projectList until a ```Project``` with the same title as the one entered by the user is found. The ```Project```’s index is returned to ```CommandHandler```'s implementation of ```view()```
+
+**Step 5.** ```view()``` calls the ```printDetails()``` method of the ```Project``` at the given index
+
+**Step 6.** ```printDetails()``` displays project title and deadline to the user. It iterates through the ```Todo```s in the ```todos``` attribute and prints each `Todo` by calling `Todo`’s `toString()` function
+
+![image info](./UmlDiagrams/ViewProject.jpg)
+
+#### Add a Deadline to a Project
+
+**Step 1.** When `CommandHandler` receives a user input starting with string “adddeadline”, it will call the `addDeadline()` method
+
+**Step 2.** It will first check if the number of arguments provided matches what is required. If it is less, it will throw an `IllegalCommandException` and return.
+
+**Step 3.** If the number of arguments is valid, call the projectList’s `addDeadline()` method, with the arguments of title and deadline.
+
+**Step 4.** We call the `findProjectIndex()` method to find the given project that matches the title provided. If the value indicates that the project does not exist, return immediately and indicate no deadline was added.
+
+**Step 5.** If the index of the project was found, call that specific Project’s `setDeadline()` method and update the deadline.
+
+![image info](./UmlDiagrams/AddDeadline.jpg)
 
 ### Proposed Features
 
-#### Parse Command Feature
 ![image info](./UmlDiagrams/CommandParser.png)  
 
 The proposed parse command feature makes use of CommandParser and its subclasses, and Command and its subclasses.  
@@ -69,13 +100,36 @@ Given below is an example usage scenario and how the command parser behaves at e
 
 **Step 3.** `CommandParser` will check if the input can be parsed into a valid command. If it fails, it will throw exceptions. After parsing the user’s input, `CommandParser` will create a new `Command` object and return it back to `CommandHandler`.  
 
-**Step 4.** `CommandHandler` will call `executeCommand()` in its own class to execute the returned command.
+**Step 4.** `CommandHandler` will call `executeCommand()` in its own class to execute the returned command.  
 
+#### Tasks Due Soon Feature
+The Tasks Due Soon feature makes use of `ProjectList` and `CommandHandler` classes. It is facilitated by methods within the `Todo` and `Project` classes, stored within `ProjectList`.
+
+**Step 1.** The user executes `duesoon`. The command is retrieved and parsed by `handleUserInput()` in `CommandHandler`, which executes a self-call to `duesoon()`
+
+**Step 2.** `duesoon()` ensures that `ProjectList` has been correctly initialised before calling `printDueSoon()` in `ProjectList`
+
+**Step 3.** `printDueSoon()` in `ProjectList` initialises `tasksDue` as an empty list of `Todo`s
+
+**Step 4.** The method iterates through all `Project`s in `projectList`. For each `Project`, it then iterates through all `Todo`s in the `todos` attribute. The task deadline of each `Todo` is retrieved and compared against the current time. If the deadline is within the next 24 hours, the `Todo` is added to `tasksDue`
+
+**Step 5.** `printDueSoon()` then calls `printTodos()` in `ProjectList` and passes in `tasksDue`.
+
+**Step 6.** `printTodos()` iterates through all `Todo`s in `tasksDue` and prints each of them using `Todo`’s `toString()` method.
+
+
+
+
+#### Parse Command Feature
 
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+* computer science university students
+* has a need to manage a significant number of projects and tasks
+* can type fast
+* prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
 
 ### Value proposition
 
@@ -115,7 +169,8 @@ the program also allows for faster searching and editing than a GUI design once 
 
 ## Glossary
 
-* *glossary item* - Definition
+* *Project* - Within CS ProjPlanner, a project is embarked on by Computer Science students for their university classes. As such, on top of typical project elements like titles, deadlines and tasks, projects include programming languages and GitHub repository links.
+* *Mainstream OS* - Windows, MacOS and Linux (Ubuntu) are all able to run CS ProjPlanner
 
 ## Instructions for manual testing
 
