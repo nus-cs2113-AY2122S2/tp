@@ -13,35 +13,34 @@ activities to a save file.
 If you can type fast, SplitLah can manage your outings faster than apps using a Graphical User Interface (GUI).
 
 ## Contents
-* [User Guide](#user-guide)
-* [Contents](#contents)
-    * [Introduction](#introduction)
-    * [How SplitLah works](#how-splitlah-works)
-    * [Quick Notes](#quick-notes)
-    * [Quick Start](#quick-start)
-    * [Features](#features)
-        * [Creating a session: `session /create`](#creating-a-session-session-create)
-        * [Deleting a session: `session /delete`](#deleting-a-session-session-delete)
-        * [Editing a session: `session /edit`](#editing-a-session-session-edit)
-        * [Viewing a session: `session /view`](#viewing-a-session--session-view)
-        * [Listing all sessions: `session /list`](#listing-all-sessions-session-list)
-        * [Creating an activity: `activity /create`](#creating-an-activity-activity-create)
-        * [Deleting an activity: `activity /delete`](#deleting-an-activity-activity-delete)
-        * [Editing an activity: `activity /edit`](#editing-an-activity-activity-edit)
-        * [Viewing an activity: `activity /view`](#viewing-an-activity-activity-view)
-        * [Listing all activities in a session: `activity /list`](#listing-all-activities-in-a-session-activity-list)
-        * [Settling all transactions for a session: `session /summary`](#settling-all-transactions-for-a-session-session-summary)
-        * [Creating a group: `group /create`](#creating-a-group-group-create)
-        * [Deleting a group: `group /delete`](#deleting-a-group-group-delete)
-        * [Viewing a group: `group /view`](#viewing-a-group-group-view)
-        * [Listing all groups: `group /list`](#listing-all-groups-group-list)
-        * [Listing all available commands: `help`](#listing-all-available-commands-help)
-        * [Exit](#exit)
-    * [FAQ](#faq)
-    * [Command Summary](#command-summary)
-    
-## Introduction
-Value proposition:
+* [How SplitLah works](#how-splitlah-works)
+* [Quick Notes](#quick-notes)
+* [Quick Start](#quick-start)
+* [Features](#features)
+  * Session Management
+      * [Creating a session: `session /create`](#creating-a-session-session-create)
+      * [Deleting a session: `session /delete`](#deleting-a-session-session-delete)
+      * [Editing a session: `session /edit`](#editing-a-session-session-edit)
+      * [Viewing a session: `session /view`](#viewing-a-session--session-view)
+      * [Listing all sessions: `session /list`](#listing-all-sessions-session-list)
+  * Activity Management
+    * [Creating an activity: `activity /create`](#creating-an-activity-activity-create)
+    * [Deleting an activity: `activity /delete`](#deleting-an-activity-activity-delete)
+    * [Editing an activity: `activity /edit`](#editing-an-activity-activity-edit)
+    * [Viewing an activity: `activity /view`](#viewing-an-activity-activity-view)
+    * [Listing all activities in a session: `activity /list`](#listing-all-activities-in-a-session-activity-list)
+  * Transaction Management
+    * [Settling all transactions for a session: `session /summary`](#settling-all-transactions-for-a-session-session-summary)
+  * Group Management
+    * [Creating a group: `group /create`](#creating-a-group-group-create)
+    * [Deleting a group: `group /delete`](#deleting-a-group-group-delete)
+    * [Viewing a group: `group /view`](#viewing-a-group-group-view)
+    * [Listing all groups: `group /list`](#listing-all-groups-group-list)
+  * Miscellaneous
+    * [Listing all available commands: `help`](#listing-all-available-commands-help)
+    * [Exit](#exit)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 
 - Keeps track of several activities and their participants.
 - Keeps track of several sessions independently, each with their own activities and participants.
