@@ -98,10 +98,6 @@ public class Parser {
         // splits the Record type from the rest of the input
         String[] words = args.trim().split(" ", 2), extractedParameters;
 
-        if (words.length == 0) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }
-
         // category will have value of either "product" or "subscription"
         final String category = words[0].toLowerCase(Locale.ENGLISH);
 
@@ -160,6 +156,7 @@ public class Parser {
                 assert price != null : "price cannot be null";
                 assert date != null : "date cannot be null";
                 assert productType != null : "productType cannot be null";
+
                 if (productType.equals("fashion") || productType.equals("food") ||
                         productType.equals("accessory") || productType.equals("others"))
                     addCmd.AddProductCommand(name, price, date, productType);
