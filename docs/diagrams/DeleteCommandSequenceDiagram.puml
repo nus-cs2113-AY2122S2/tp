@@ -1,11 +1,30 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+actor user
 
-autonumber
-
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
-
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+user -> ":Ui" ++ : "delete n/John i/1"
+create ":Parser"
+":Ui" -> ":Parser" ++: new Parser("delete n/John i/1")
+":Parser" --> ":Ui" --: parser:Parser
+":Ui" -> ":Parser" ++: parseCommand("delete n/John i/1")
+create ":DeleteCommand"
+":Parser" -> ":DeleteCommand" ++: new DeleteCommand("John": String,1:int)
+":DeleteCommand" --> ":Parser" --: deleteCommand:DeleteCommand
+":Parser" --> ":Ui" --: deleteCommand:DeleteCommand
+":Ui" -> ":DeleteCommand" ++: execute(masterTimetable)
+":DeleteCommand" -> ":MasterTimetable" ++: getByName("John")
+":MasterTimetable" --> ":DeleteCommand" ++ : timetable: Timetable
+":DeleteCommand" -> ":Timetable" ++: get(index - 1)
+":Timetable" --> ":DeleteCommand" -- : event: Event
+alt event is type meeting
+":MasterTimetable" -> ":MasterTimetable" ++: deleteMeetingFromTimetable(timetable:Timetable,meeting:Meeting)
+":MasterTimetable" -> ":MasterTimetable" --: deleteMeetingFromMeetingList(meeting:Meeting)
+":MasterTimetable" -> ":DeleteCommand" --: deleteMeetingFromAllTimetableConfirmation(meeting:Meeting)
+":DeleteCommand" --> ":Ui" --: deleteMeetingFromEveryoneTimetable(): String
+else non-meeting types
+":DeleteCommand" -> ":Timetable" ++: remove(index - 1)
+":Timetable" --> ":DeleteCommand" ++:
+":DeleteCommand" -> ":DeleteCommand" ++: deleteConfirmation(event: Event )
+":DeleteCommand" --> ":Ui" --: deleteConfirmation(): String
+end
+":Ui" -->  user
 @enduml
