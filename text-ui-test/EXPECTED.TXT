@@ -1,3 +1,14 @@
+    *
+   ***
+  *****
+ *******
+*********
+ *******
+  *****
+   ***
+    *
+Hi, I am Hotel Lite, and I will do the managing for you.
+How can I help you today?
 Error! Invalid Command.
 The item and its pax has been added to the item list.
 There are currently 1 items within the item list.
