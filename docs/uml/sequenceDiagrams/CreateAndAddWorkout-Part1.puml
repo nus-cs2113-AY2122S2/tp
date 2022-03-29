@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../Style.puml
+
+title Sequence Diagram of `WorkoutList#createAndAddWorkout()` (Part 1)
+
+autonumber 7.1
+
+participant "workoutList\n:WorkoutList" AS wl
+
+activate wl
+
+group sd Write new Workout data into file on user's system.
+
+ref over wl
+Parse the user input to obtain
+the exercise name and repetition count.
+(Method calls not shown)
+end
+
+ref over wl
+Check the validity of
+exercise name and repetition count.
+(Method calls not shown)
+end
+
+opt !isExerciseValid
+create ":InvalidExerciseException" AS iee
+wl -> iee : throw new InvalidExerciseException
+activate iee
+return
+end
+
+opt !isRepsValueValid
+create ":InvalidWorkoutException" AS iwe
+wl -> iwe : throw new InvalidWorkoutException
+activate iwe
+return
+end
+
+ref over wl
+Check if an existing workout
+with same parameters already exists.
+(Method calls not shown)
+end
+
+
+opt hasSameExerciseNameAndReps
+create ":InvalidWorkoutException" AS iwe2
+wl -> iwe2 : throw new InvalidWorkoutException
+activate iwe2
+return
+end
+
+ref over wl
+Create new Workout and add it
+to respective lists in WorkoutList.
+end
+
+
+
+end
+@enduml
