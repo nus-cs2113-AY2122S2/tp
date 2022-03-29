@@ -2,6 +2,7 @@ package seedu.splitlah.data;
 
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TableFormatter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Ivan
  */
-public class Activity implements Serializable {
+public class Activity implements Serializable, Comparable<Activity> {
 
     private int activityId;
     private String activityName;
@@ -21,6 +22,7 @@ public class Activity implements Serializable {
 
     private static final String SUMMARY_STRING_SEPARATOR = " | ";
     private static final int ZERO_INDEXING_OFFSET = 1;
+    private static final String[] INVOLVED_PERSON_LIST_COLS = { "#", "Name", "Cost Owed" };
 
     /**
      * Initializes an Activity object.
@@ -102,61 +104,44 @@ public class Activity implements Serializable {
     }
 
     /**
-     * Returns a String object of the persons involved in the activity and their respective costs for the activity,
-     * if the unique identifier of the activity exists and the persons involved indeed participated in the activity.
-     * Else, the method returns an error message.
+     * Returns a String object of the persons involved in the activity and their respective costs for the activity.
      *
-     * @return A String object representing persons involved and their respective costs.
-     * @throws InvalidDataException If there is no activity found or if the person in the involvedPersonsList
-     *                              did not participate in the activity.
+     * @return A String object representing persons involved and their respective costs owed.
+     * @throws InvalidDataException If there is a mismatch between the activity cost owed and the person involved
+     *                              in the activity.
      */
-    private String getInvolvedListString() {
-        String involvedListString;
-        try {
-            involvedListString = convertInvolvedListToString();
-        } catch (InvalidDataException e) {
-            return Message.ERROR_ACTIVITY_INACCURATE_INVOLVED_LIST;
-        }
-        return involvedListString;
-    }
+    private String getInvolvedListString() throws InvalidDataException {
+        assert !involvedPersonList.isEmpty() : Message.ASSERT_ACTIVITY_EMPTY_INVOLVED_PERSON_LIST;
 
-    /**
-     * Returns a String object representing the name of the persons involved in the activity and the cost that each
-     * person owed for the activity in a proper format.
-     *
-     * @return A String object that representing the name and costs of each person involved in the activity.
-     * @throws InvalidDataException If there is no activity found or if the person in the involvedPersonsList
-     *                              did not participate in the activity.
-     */
-    private String convertInvolvedListToString() throws InvalidDataException {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 1; i < involvedPersonList.size(); i++) {
+        TableFormatter summaryTable = new TableFormatter(
+                INVOLVED_PERSON_LIST_COLS[0],
+                INVOLVED_PERSON_LIST_COLS[1],
+                INVOLVED_PERSON_LIST_COLS[2]
+        );
+        for (int i = 1; i <= involvedPersonList.size(); i++) {
+            String index = Integer.toString(i);
             Person person = involvedPersonList.get(i - ZERO_INDEXING_OFFSET);
             String personName = person.getName();
-            Double costOwed = person.getActivityCostOwed(activityId);
-            String nextLineToAppend = formString(i, personName, costOwed);
-            sb.append(nextLineToAppend + "\n");
+            Double cost = person.getActivityCostOwed(activityId);
+            String costOwed = String.format("%.2f", cost);
+            summaryTable.addRow(index, personName, costOwed);
         }
-        Person person = involvedPersonList.get(involvedPersonList.size() - ZERO_INDEXING_OFFSET);
-        String personName = person.getName();
-        Double costOwed = person.getActivityCostOwed(activityId);
-        String nextLineToAppend = formString(involvedPersonList.size(), personName, costOwed);
-        sb.append(nextLineToAppend);
-        return sb.toString();
+        return summaryTable.toString();
     }
 
     /**
-     * Returns a String object with the correct format for the persons involved int the activity
-     * and their respective costs for the activity.
-     * Format: <[INDEX]. [PERSON_NAME], $[COST_OWED]>, e.g. <1. Bob, $5.00>
+     * Returns an integer to identify whether this Activity object should be ordered
+     * before or after another Activity object when sorted.
      *
-     * @param index      An integer representing index of the Person object involved in the activity.
-     * @param personName A String object representing the name of the person involved in the activity.
-     * @param costOwed   A double representing the cost that is owed by the person involved in the activity.
-     * @return A String object with the correct format representing involved persons and costs.
+     * @param activity The specified Activity object that this Activity object is compared against.
+     * @return An integer less than 0 if this Activity object's activityId is smaller than the specified
+     *         Activity object's sessionId,
+     *         an integer greater than 0 if this object's activityId is larger,
+     *         and 0 if both Activity objects' activityIds are numerically equal.
      */
-    private String formString(int index, String personName, Double costOwed) {
-        return " " + index + ". " + personName + ", $" + String.format("%.2f", costOwed);
+    @Override
+    public int compareTo(Activity activity) {
+        return Integer.compare(activityId, activity.getActivityId());
     }
 
     /**
@@ -169,13 +154,16 @@ public class Activity implements Serializable {
      */
     @Override
     public String toString() {
-        return "Activity Id #" + activityId + " --\n"
-                + "Name:  " + activityName + '\n'
-                + "Id:    " + activityId + '\n'
-                + "Payer: " + personPaid.getName() + '\n'
-                + "Cost:  $" + String.format("%.2f", totalCost) + '\n'
-                + "Involved: \n"
-                + getInvolvedListString();
+        try {
+            return "Activity Id #" + activityId + " --\n"
+                    + "Name:  " + activityName + '\n'
+                    + "Id:    " + activityId + '\n'
+                    + "Payer: " + personPaid.getName() + '\n'
+                    + "Cost:  $" + String.format("%.2f", totalCost) + '\n'
+                    + "Involved: \n"
+                    + getInvolvedListString();
+        } catch (InvalidDataException e) {
+            return Message.ERROR_ACTIVITY_INACCURATE_INVOLVED_LIST;
+        }
     }
-
 }

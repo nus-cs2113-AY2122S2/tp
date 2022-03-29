@@ -3,9 +3,6 @@ package seedu.splitlah.command;
 import seedu.splitlah.data.Group;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.exceptions.InvalidDataException;
-import seedu.splitlah.exceptions.InvalidFormatException;
-import seedu.splitlah.parser.Parser;
-import seedu.splitlah.parser.ParserUtils;
 import seedu.splitlah.ui.Message;
 
 import java.util.logging.Level;
@@ -18,14 +15,6 @@ import java.util.logging.Level;
  */
 public class GroupViewCommand extends Command {
 
-    public static final String COMMAND_TEXT = "group /view";
-
-    public static final String COMMAND_FORMAT = "Syntax: group /view /gid [GROUP_ID]";
-
-    public static final String[] COMMAND_DELIMITERS = {
-        ParserUtils.GROUP_ID_DELIMITER
-    };
-
     private int groupId;
 
     /**
@@ -36,23 +25,6 @@ public class GroupViewCommand extends Command {
     public GroupViewCommand(int groupId) {
         assert groupId > 0 : Message.ASSERT_GROUPVIEW_GROUP_ID_LESS_THAN_ONE;
         this.groupId = groupId;
-    }
-
-    /**
-     * Prepares user arguments for the creation of a GroupViewCommand object.
-     *
-     * @param commandArgs A String object that represents the user's arguments.
-     * @return A GroupViewCommand object if group unique identifier was found in user arguments,
-     *         an InvalidCommand object otherwise.
-     */
-    public static Command prepare(String commandArgs) {
-        try {
-            int groupId = Parser.parseGroupId(commandArgs);
-            assert groupId > 0 : Message.ASSERT_GROUPVIEW_GROUP_ID_NOT_INITIALIZED;
-            return new GroupViewCommand(groupId);
-        } catch (InvalidFormatException e) {
-            return new InvalidCommand(e.getMessage() + "\n" + COMMAND_FORMAT);
-        }
     }
 
     /**
