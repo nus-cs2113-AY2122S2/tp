@@ -1,5 +1,9 @@
-package seedu.duke;
+package seedu.duke.command.housekeepercommands;
 
+import seedu.duke.HotelLiteManagerException;
+import seedu.duke.HousekeeperList;
+import seedu.duke.ListContainer;
+import seedu.duke.Ui;
 import seedu.duke.command.Command;
 
 public class ViewHousekeeperListCommand extends Command {

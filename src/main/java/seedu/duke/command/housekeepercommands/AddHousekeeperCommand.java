@@ -1,7 +1,18 @@
-package seedu.duke;
+package seedu.duke.command.housekeepercommands;
 
 import java.util.logging.Logger;
 import java.util.logging.Level;
+
+import seedu.duke.ListContainer;
+import seedu.duke.HotelLiteManagerException;
+import seedu.duke.Ui;
+import seedu.duke.Housekeeper;
+import seedu.duke.InvalidHousekeeperProfile;
+import seedu.duke.HousekeeperList;
+import seedu.duke.InvalidUserException;
+import seedu.duke.OverAgeException;
+import seedu.duke.UnderAgeException;
+import seedu.duke.InvalidAgeException;
 import seedu.duke.command.Command;
 
 /**
