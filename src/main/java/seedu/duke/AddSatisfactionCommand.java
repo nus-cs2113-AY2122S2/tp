@@ -54,7 +54,7 @@ public class AddSatisfactionCommand extends Command {
         setSatisfaction(satisfaction);
     }
 
-    public int countSlashes(String userInput) {
+    private int countSlashes(String userInput) {
         int slashCount = 0;
         for (int i = 0; i < userInput.length(); i++) {
             String curChar = Character.toString(userInput.charAt(i));
