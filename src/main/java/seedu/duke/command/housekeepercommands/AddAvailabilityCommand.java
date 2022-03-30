@@ -1,6 +1,15 @@
-package seedu.duke;
+package seedu.duke.command.housekeepercommands;
 
+
+import seedu.duke.ListContainer;
+import seedu.duke.HotelLiteManagerException;
+import seedu.duke.InvalidAvailabilityException;
+import seedu.duke.InvalidDayException;
+import seedu.duke.Ui;
+import seedu.duke.UserDoesNotExistException;
+import seedu.duke.HousekeeperList;
 import seedu.duke.command.Command;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,8 +21,10 @@ public class AddAvailabilityCommand extends Command {
     private String name;
     private String availability;
     private static final String AVAILABILITY_INDICATE = "/";
+    private static final char AVAILABILITY_INDICATE_CHARACTER = '/';
     private static final int MONDAY_INDICATE = 1;
     private static final int SUNDAY_INDICATE = 7;
+    private static final int CONTAIN_ONE_SLASH_ONLY = 1;
     private static Logger logger = Logger.getLogger("housekeeperLogger");
 
     public AddAvailabilityCommand(String commandStringWithoutCommand) throws HotelLiteManagerException {
@@ -100,13 +111,21 @@ public class AddAvailabilityCommand extends Command {
     }
 
     /**
-     * Method used to extract the name and availability of the housekeeper.
+     * Method used to extract the name and availability of the housekeeper. Ensure slash given is only one and
+     * is of correct delimiter.
      *
      * @param commandStringWithoutCommand Input entered by the user.
      * @return Input consisting of housekeeper name and availability.
      * @throws HotelLiteManagerException When description of availability is invalid.
      */
     private String[] extractInput(String commandStringWithoutCommand) throws HotelLiteManagerException {
+        long slashCounts = commandStringWithoutCommand.codePoints()
+                .filter(ch -> ch == AVAILABILITY_INDICATE_CHARACTER)
+                .count();
+        if (!(slashCounts == CONTAIN_ONE_SLASH_ONLY)) {
+            logger.log(Level.WARNING, "Contains more than one slash.");
+            throw new InvalidAvailabilityException();
+        }
         boolean isSymbolIncorrect = !commandStringWithoutCommand.contains(AVAILABILITY_INDICATE);
         if (isSymbolIncorrect) {
             logger.log(Level.WARNING, "Availability Housekeeper command usage is wrong.");

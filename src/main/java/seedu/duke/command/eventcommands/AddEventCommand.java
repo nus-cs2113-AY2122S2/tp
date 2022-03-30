@@ -8,7 +8,7 @@ import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.EventList;
 import seedu.duke.InvalidRoomNumberException;
-import seedu.duke.InvalidHousekeeperProfile;
+import seedu.duke.InvalidHousekeeperProfileException;
 import seedu.duke.InvalidEventException;
 import seedu.duke.InvalidDateException;
 
@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class AddEventCommand extends Command {
     private String description;
     private String at;
-    private static final String EVENT_INDICATE = "@@";
+    private static final String EVENT_INDICATE = "/";
     private static final int ONLY_ONE_FIELD_ENTERED = 1;
     private static Logger logger = Logger.getLogger("Add Event");
 
@@ -83,7 +83,7 @@ public class AddEventCommand extends Command {
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui)
-            throws InvalidRoomNumberException, InvalidHousekeeperProfile, IOException, InvalidDateException {
+            throws InvalidRoomNumberException, InvalidHousekeeperProfileException, IOException, InvalidDateException {
 
         final EventList eventList = listContainer.getEventList();
         String description = getDescription();
@@ -94,7 +94,6 @@ public class AddEventCommand extends Command {
         eventList.add(description, at);
         logger.log(Level.INFO, "about to add to file.");
         eventList.save();
-        ui.printMessage("Added event: " + description + " at " + at + ".");
         logger.log(Level.INFO, "end of adding event.");
     }
 

@@ -1,14 +1,12 @@
-package seedu.duke.command.itemcommand;
+package seedu.duke.command.itemcommands;
 
 import seedu.duke.command.Command;
 import seedu.duke.HotelLiteManagerException;
-import seedu.duke.EmptyItemNameException;
-import seedu.duke.InvalidCommandException;
+import seedu.duke.InvalidUpdateItemNameCommandException;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.ItemList;
 
-import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,18 +22,18 @@ public class UpdateItemNameCommand extends Command {
         if (userInput.startsWith(DELIMITER)) {
             itemLogger.log(Level.WARNING, "The item name of the item to update is empty for the Update Item Name "
                     + "Command. Exception thrown.");
-            throw new EmptyItemNameException();
+            throw new InvalidUpdateItemNameCommandException();
         }
         if (userInput.endsWith(DELIMITER)) {
             itemLogger.log(Level.WARNING, "The new item name of the item to update is empty for the Update Item "
                     + "Name Command. Exception thrown");
-            throw new EmptyItemNameException();
+            throw new InvalidUpdateItemNameCommandException();
         }
         StringTokenizer tokens = new StringTokenizer(userInput, DELIMITER);
         if (tokens.countTokens() != NUMBER_OF_PARTS_IN_COMMAND) {
             itemLogger.log(Level.WARNING, "Invalid formatting for the Update Item Name Command detected."
                     + " Exception thrown.");
-            throw new InvalidCommandException();
+            throw new InvalidUpdateItemNameCommandException();
         }
         String oldItemName = extractCurrentItemName(tokens);
         String newItemName = extractNewItemName(tokens);
@@ -49,7 +47,7 @@ public class UpdateItemNameCommand extends Command {
         if (currentItemName.isEmpty()) {
             itemLogger.log(Level.WARNING, "Detected an empty item name for the item whose name we want to update"
                     + "in the Update Item Name Command. Exception thrown.");
-            throw new EmptyItemNameException();
+            throw new InvalidUpdateItemNameCommandException();
         }
         return currentItemName;
     }
@@ -60,7 +58,7 @@ public class UpdateItemNameCommand extends Command {
         if (newItemName.isEmpty()) {
             itemLogger.log(Level.WARNING, "The new name of the item whose name we want to update is empty"
                     + "in the Update Item Name Command. Exception thrown.");
-            throw new EmptyItemNameException();
+            throw new InvalidUpdateItemNameCommandException();
         }
         return newItemName;
     }

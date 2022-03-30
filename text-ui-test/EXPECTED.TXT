@@ -1,3 +1,14 @@
+    *
+   ***
+  *****
+ *******
+*********
+ *******
+  *****
+   ***
+    *
+Hi, I am Hotel Lite, and I will do the managing for you.
+How can I help you today?
 Error! Invalid Command.
 The item and its pax has been added to the item list.
 There are currently 1 items within the item list.
@@ -16,7 +27,7 @@ There are currently 3 items within the item list.
 ======== End of the list ========
 The pax of TOILET ROLL has been updated to 5.
 Error! Item Pax is invalid.
-Error! Item Pax cannot be empty.
+Error! Item Name cannot be empty.
 Error! Item Name cannot be empty.
 Error! Invalid Command.
 Error! Item not found in inventory.
@@ -27,8 +38,8 @@ TOILET ROLL has been removed from the Item List.
 There are currently 2 items within the Item List.
 Error! Item not found in inventory.
 Error! Invalid Command.
-Error! Item Name cannot be empty.
-Error! Item Name cannot be empty.
+Error! Invalid Command -> Update Item Name OLD NAME / NEW NAME
+Error! Invalid Command -> Update Item Name OLD NAME / NEW NAME
 The name of SPOON has been updated to PREMIUM SPOON.
 ========== Noted ! ==========
 [JANE]: Age: 33, Availability: <Enter Availability>
@@ -103,7 +114,7 @@ Everyone age has increased by one
 **Over age limit housekeeper will be removed from list**
 ======== Age Limit Exceed List ========
 1. [MICH]: Age: 60, Availability: ( Monday Tuesday Wednesday Thursday Friday Saturday Sunday )
-======== End of the list ========
+=========== End of the list ===========
 ======== Housekeeper List ========
 1. [JANE]: Age: 34, Availability: ( Monday Tuesday Sunday )
 2. [MASSY]: Age: 60, Availability: ( Monday Friday )
@@ -121,16 +132,13 @@ Everyone age has increased by one
 **Over age limit housekeeper will be removed from list**
 ======== Age Limit Exceed List ========
 1. [MASSY]: Age: 60, Availability: <Enter Availability>
-======== End of the list ========
+=========== End of the list ===========
 ======== Housekeeper List ========
 1. [JANE]: Age: 35, Availability: <Enter Availability>
 ======== End of the list ========
 ======== Housekeeper List ========
 1. [JANE]: Age: 35, Availability: <Enter Availability>
 ======== End of the list ========
-Error! Item Name cannot be empty.
-Error! Item Name cannot be empty.
-Error! Item not found in inventory.
 Error! Invalid Command.
 =========== Item List ===========
 1. Item Name: FORK Item Pax: 15
@@ -143,4 +151,6 @@ Error! Invalid Command.
 Error! PREMIUM SPOON has already been added to the item list.
 The item and its pax has been added to the item list.
 There are currently 3 items within the item list.
+Error! Item Pax is invalid.
+Error! Item Pax is invalid.
 see u again!

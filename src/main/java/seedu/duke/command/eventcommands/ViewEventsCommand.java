@@ -8,8 +8,7 @@ import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.EventList;
 import seedu.duke.InvalidRoomNumberException;
-import seedu.duke.InvalidHousekeeperProfile;
-import seedu.duke.Event;
+import seedu.duke.InvalidHousekeeperProfileException;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -34,14 +33,9 @@ public class ViewEventsCommand extends Command {
      */
     @Override
     public void execute(ListContainer listContainer, Ui ui)
-            throws InvalidRoomNumberException, InvalidHousekeeperProfile, IOException {
+            throws InvalidRoomNumberException, InvalidHousekeeperProfileException, IOException {
         final EventList eventList = listContainer.getEventList();
-        ui.printMessage("Here are the events you have added so far: \n");
-        int j = 0;
-        for (Event e: eventList.getEventList()) {
-            j = j + 1;
-            ui.printMessage("\t \t" + j + ". " + e.toString() + "\n");
-        }
+        ui.printAllEvents(eventList.getEventList());
         logger.log(Level.INFO, "log: all events displayed");
     }
 

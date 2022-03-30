@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import seedu.duke.command.Command;
 import seedu.duke.command.assigncommand.AssignHousekeeperCommand;
+import seedu.duke.command.housekeepercommands.AddHousekeeperCommand;
 import seedu.duke.command.roomcommand.CheckInCommand;
+
 
 
 public class AssignHousekeeperTest {
@@ -30,7 +32,7 @@ public class AssignHousekeeperTest {
         AddHousekeeperCommand addHousekeeperCommand = (AddHousekeeperCommand) command1;
 
 
-        Command command = parser.parse("Assign Susan ## 301");
+        Command command = parser.parse("Assign Susan / 301");
         AssignHousekeeperCommand assignHousekeeperCommand = (AssignHousekeeperCommand) command;
         assertEquals("301", assignHousekeeperCommand.getroomID());
         assertEquals("susan", assignHousekeeperCommand.getName());

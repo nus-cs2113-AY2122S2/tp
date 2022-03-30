@@ -1,4 +1,4 @@
-package seedu.duke.command.itemcommand;
+package seedu.duke.command.itemcommands;
 
 import seedu.duke.command.Command;
 import seedu.duke.HotelLiteManagerException;
@@ -11,7 +11,6 @@ import seedu.duke.Ui;
 import seedu.duke.ListContainer;
 import seedu.duke.InvalidItemPaxException;
 
-import java.util.Locale;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -95,7 +94,7 @@ public class AddItemCommand extends Command {
             itemLogger.log(Level.WARNING, "Detected an invalid item pax for AddItemCommand. Exception thrown.");
             throw new InvalidItemPaxException();
         }
-        if (itemPax <= 0) {
+        if (itemPax <= 0 || itemPax > 1000000) {
             itemLogger.log(Level.WARNING, "Detected an invalid item pax for AddItemCommand. Exception thrown.");
             throw new InvalidItemPaxException();
         }
