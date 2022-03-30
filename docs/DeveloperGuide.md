@@ -1,9 +1,11 @@
 # Developer Guide
 
 ## Content Page
-
+* [Content Page](#Content-Page)
 * [Introduction](#introduction)
-    * 
+    * [Purpose](#purpose)
+    * [Acknowledgements](#Acknowledgements)
+    * [Using the Developer Guide](#Using-the-Developer-Guide)
 * [Quick start](#quick-start)
 * [Command summary (Expenses)](#command-summary-expenses)
 * [Command summary (Credit Card)](#command-summary-credit-card)
@@ -59,7 +61,7 @@ Data stored in the application is saved into text files locally on the user's de
 
 ### Architecture Overview
 ![architecture diagram](images/architecture_diagram.png)  
-Fig 1 - Architecture Diagram
+Fig 1 - Architecture Diagram for MindMyMoney
 
 The Architecture Diagram above shows the high-level design of the application. The **main components**
 consist of:
@@ -78,7 +80,7 @@ The Sequence Diagram below shows an example of how the components interact with 
 where the user issues the command`add shoes 100`.
 
 ![sequence_diagram](images/sequence_diagram.png)
-<br/> Fig 2 - Sequence Diagram  
+<br/> Fig 2 - Sequence Diagram for MindMyMoney
 
 ### Component Overview 
 The major code is broken down into components for better abstraction. 
@@ -88,7 +90,7 @@ The sections below give more details for each component.
 The source code can be found in [Ui.java](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/MindMyMoney/Ui.java)
 
 ![ui_diagram](images/ui_diagram.png)
-<br/> Fig 3 - Ui Diagram
+<br/> Fig 3 - Ui Class Diagram
 
 The UI component consists of a`Ui`and`PrintStrings`class.
 
@@ -104,7 +106,7 @@ application.
 The source code can be found in [Parser.java](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/MindMyMoney/Parser.java)
 
 ![parser_diagram](images/parser_diagram.png)
-<br/> Fig 4 - Parser Diagram
+<br/> Fig 4 - Parser Class Diagram
 
 The Parser component consists of a`Parser`, `Functions`, `ExpenditureList` and `Expenditure`class
 
@@ -119,8 +121,8 @@ add, delete and update`Expenditure`entries in a new`itemList`during testing with
 ### Command component 
 The source can be found in [command](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/MindMyMoney/command)
 
-![command_diagram](images/command_diagram.png)
-<br/> Fig 5 - Command Diagram
+![command_diagram](images/command_diagram.png)  
+Fig 5 - Command Class Diagram
 
 The Command component consists of `Command` abstract class, `AddCommand`, `ByeCommand`, `DeleteCommand`, `HelpCommand`
 , `ListCommand`and `UpdateCommand` that extends the `Command` class.
@@ -134,8 +136,8 @@ exceptions if an error is encountered. The error is then handled.
 ### Storage component 
 The source can be found in [Storage.java](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/MindMyMoney/Storage.java)
 
-![storage_diagram](images/storage_diagram.png)
-<br/> Fig 6 - Storage Diagram
+![storage_diagram](images/storage_diagram.png)  
+Fig 6 - Storage Class Diagram
 
 The Storage component consists of `Storage` class.
 
@@ -161,8 +163,10 @@ The Add Command component consists of 3 subcomponents. These features are differ
 - Add credit card component.
 - Add income component.
 
-The sequence diagram below shows the interactions of when an `AddCommand` is parsed.
-![add_command_sequence_diagram](images/Add_Command_Sequence_Diagram.png)
+The sequence diagram below shows the interactions of when an `AddCommand` is parsed.  
+
+![add_command_sequence_diagram](images/Add_Command_Sequence_Diagram.png)  
+Fig 7 - Add Command Sequence Diagram  
 
 Below is an example scenario showing how the AddCommand behaves at each step.
 1. The `Parser` component parses user input and returns the new `AddCommand` object to the
@@ -181,7 +185,9 @@ MindMyMoney allow users to track their different credit cards. A user can add a 
 #### Current Implementation
 The sequence diagram below shows the interactions of different subcomponents of the system when adding a credit card
 to the list.
-![add_credit_card_command_sequence_diagram](images/Add_Credit_Card_Command_Sequence_Diagram.png)  
+
+![add_credit_card_command_sequence_diagram](images/Add_Credit_Card_Command_Sequence_Diagram.png)   
+Fig 8 - Add Credit Card Command Sequence Diagram  
 
 The `addCreditCard()` command is facilitated by the `AddCommand`. By running the command `add` with its relevant flags,
 `Parser` will construct a new `AddCommand` which will be used to execute users input.
@@ -201,8 +207,10 @@ purchase.
 #### Current Implementation
 The sequence diagram below shows the interactions of different subcomponents of the system when adding an expenditure
 to the list.  
+
 ![add_expenditure_command_sequence_diagram](images/Add_Expenditure_Command_Sequence_Diagram.png)  
-  
+Fig 8 - Add Expenditure Command Sequence Diagram  
+
 The `addExpenditure()` command is facilitated by the `AddCommand`. By running the command `add` with its relevant flags, 
 `Parser` will construct a new `AddCommand` which will be used to execute users input.
 
