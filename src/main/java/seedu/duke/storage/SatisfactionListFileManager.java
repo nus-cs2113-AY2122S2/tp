@@ -1,20 +1,70 @@
 package seedu.duke.storage;
 
-import seedu.duke.AssignmentMap;
-import seedu.duke.HotelLiteManagerException;
-import seedu.duke.Room;
 import seedu.duke.Satisfaction;
-
+import seedu.duke.SatisfactionList;
+import seedu.duke.HotelLiteManagerException;
+import seedu.duke.SatisfactionFileNotFoundException;
+import seedu.duke.InvalidItemPaxException;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Scanner;
 
 public class SatisfactionListFileManager extends FileManager {
     private static final String FILE_PATH = "ListFolder/satisfaction_list.txt";
 
-    public void save(ArrayList<Satisfaction> satisfactions) throws IOException, HotelLiteManagerException {
+    private void clearFileContents() throws IOException {
+        FileWriter fw = new FileWriter(FILE_PATH);
+        fw.close();
+    }
+
+    public SatisfactionList load() throws HotelLiteManagerException {
+        SatisfactionList satisfactionList = new SatisfactionList();
+        Satisfaction satisfaction;
         File file = getFile(FILE_PATH);
-        FileWriter fileWriter = new FileWriter(FILE_PATH);
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            throw new SatisfactionFileNotFoundException();
+        }
+
+        while (scan.hasNext()) {
+            String line = scan.nextLine();
+            String[] splitData = line.split(FILE_SEPARATOR);
+            String customerName = splitData[0].trim();
+            String satisfactionString = splitData[1].trim();
+            int satisfactionValue;
+            try {
+                satisfactionValue = Integer.parseInt(satisfactionString);
+            } catch (NumberFormatException e) {
+                throw new InvalidItemPaxException();
+            }
+            satisfaction = new Satisfaction(customerName, satisfactionValue);
+            satisfactionList.addSatisfaction(satisfaction);
+        }
+        return satisfactionList;
+    }
+
+    public void writeSatisfactionListToFile(SatisfactionList satisfactionList) throws IOException {
+        clearFileContents();
+        FileWriter fw = new FileWriter(FILE_PATH, true);
+        int lastIndexOfArrayList = satisfactionList.getSize() - 1;
+        String customerName;
+        int satisfactionValue;
+        Satisfaction satisfaction;
+        String satisfactionDetails;
+        for (int i = 0; i < satisfactionList.getSize(); i++) {
+            satisfaction = satisfactionList.getSatisfaction(i);
+            customerName = satisfaction.getCustomerName();
+            satisfactionValue = satisfaction.getSatisfactionValue();
+            satisfactionDetails = customerName + '|' + satisfactionValue;
+            if (i != lastIndexOfArrayList) {
+                satisfactionDetails = satisfactionDetails + System.lineSeparator();
+            }
+            fw.write(satisfactionDetails);
+        }
+        fw.close();
     }
 }

@@ -58,10 +58,10 @@ public class ItemList {
     }
 
     /**
-     * Returns a specific item within the item list based on the index passed in.
+     * Returns a specific satisfaction within the satisfaction list.
      *
-     * @param index The index of the item within the list that would be returned.
-     * @return The item specified by the index passed into the function.
+     * @param index The index of the satisfaction within the list that would be returned.
+     * @return The satisfaction at the given index in the satisfaction list.
      */
     public Item getItem(int index) {
         ArrayList<Item> listOfItems = getListOfItems();
