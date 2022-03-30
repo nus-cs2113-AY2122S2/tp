@@ -33,7 +33,7 @@ public class TimerLogic implements WindowListener {
     private static Ui ui;
     private static Timer timer;
     private static TaskList taskList;
-    protected volatile boolean isTimerInitialised = false;
+    protected static volatile boolean isTimerInitialised = false;
     private final JFrame jframe;
     private final JLabel jlabel;
     private final ActionListener actionListenerPause = actionEvent -> {
@@ -113,7 +113,7 @@ public class TimerLogic implements WindowListener {
     }
 
     public void showTasks(Storage storage, String[] parsedInput) {
-        if (!isTimerInitialised) {
+        if (isTimerPausedOrStopped()) {
             executeShow(storage, parsedInput);
         } else {
             ui.showToUser("You can't show tasks while timer is running!");
@@ -195,8 +195,12 @@ public class TimerLogic implements WindowListener {
         ui.showToUser("You don't have a timer running!");
     }
 
-    private boolean updateIsTimerRunning() {
+    private static boolean updateIsTimerRunning() {
         return timer.isTimerRunning();
+    }
+
+    public static void resetIsTimerInitialised() {
+        isTimerInitialised = false;
     }
 
     private String selectStudyTimer(String[] parsedInput) {
@@ -229,7 +233,13 @@ public class TimerLogic implements WindowListener {
         if (!isTimerInitialised) {
             return true;
         }
-        return timer.isTimerPaused();
+        if (!timer.isTimerRunning()) {
+            return true;
+        }
+        if (timer.isTimerPaused()) {
+            return true;
+        }
+        return false;
     }
 
     /**
