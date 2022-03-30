@@ -16,7 +16,7 @@ public class AddParser extends CommandParser{
     protected void init_extract_params(){
         Regex regexMatch;
         String regex;
-        regex = "(?<flag>[og])/";
+        regex = "(?<flag>[ugbo]{1,2})/";
         regexMatch = new Regex(this.userInput, regex);
         this.matches = regexMatch.getGroupValues();
     };
