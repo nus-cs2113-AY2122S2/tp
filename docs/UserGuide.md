@@ -52,7 +52,7 @@ Name of Item: JBLFlip5
 Name of Borrower: Sally
 Borrow Duration: 2021-03-29 to 2021-04-01
 ```
-If there are no items have been borrowed from the inventory. The `list -cb` command will return:
+If there are no items have been borrowed from the inventory, the `list -cb` command will return:
 ```
 > list -cb
 There are no items in the inventory being borrowed.
@@ -72,6 +72,98 @@ If the person does not exist in the borrowings, the `list -cb p/BORROWER_NAME` w
 ```
 > list -cb p/David
 There are no items currently borrowed by David.
+```
+
+
+### List Future Borrowings: `list -fb`
+List all items that will be borrowed in the future. You can narrow down the list by entering an optional argument of the borrower's name. Results of borrowings ordered by earliest borrowing start date.
+
+Format:   
+`list -fb`: List all future borrowings.  
+`list -fb p/BORROWER_NAME`: List all future borrowings for Sally
+* `BORROWER_NAME` must not contain punctuations.
+
+Examples of usage (Assuming today's date is **18-03-2021**):
+```
+> list -fb
+Name of Item: Trolley
+Name of Borrower: Sally
+Borrow Duration: 19-03-2021 to 30-03-2021
+
+Name of Item: JBLFlip5
+Name of Borrower: John Smith
+Borrow Duration: 21-03-2021 to 23-03-2021
+
+Name of Item: JBLFlip5
+Name of Borrower: Sally
+Borrow Duration: 29-03-2021 to 01-04-2021
+```
+If there are no future borrowings, the `list -fb` command will return:
+```
+> list -fb
+There are no future borrowings.
+```
+
+```
+> list -fb p/Sally
+Name of Item: Trolley
+Name of Borrower: Sally
+Borrow Duration: 19-03-2021 to 30-03-2021
+
+Name of Item: JBLFlip5
+Name of Borrower: Sally
+Borrow Duration: 29-03-2021 to 01-04-2021
+```
+If the person does not exist in the borrowings, the `list -fb p/BORROWER_NAME` will return:
+```
+> list -fb p/David
+There are no future borrowings for David.
+```
+
+
+### List Overdue Borrowings: `list -ob`
+List all items should have been returned but have yet to be. You can narrow down the list by entering an optional argument of the borrower's name. Results of borrowings ordered by earliest borrowing start date.
+
+Format:   
+`list -ob`: List all overdue borrowings.  
+`list -fb p/BORROWER_NAME`: List all overdue borrowings by Sally
+* `BORROWER_NAME` must not contain punctuations.
+
+Examples of usage (Assuming today's date is **31-03-2021**):
+```
+> list -ob
+Name of Item: Trolley
+Name of Borrower: Sally
+Borrow Duration: 19-03-2021 to 30-03-2021
+
+Name of Item: JBLFlip5
+Name of Borrower: John Smith
+Borrow Duration: 21-03-2021 to 23-03-2021
+
+Name of Item: JBLFlip5
+Name of Borrower: Sally
+Borrow Duration: 29-03-2021 to 01-04-2021
+```
+If there are no overdue borrowings, the `list -ob` command will return:
+```
+> list -ob
+There are no overdue borrowings.
+```
+
+```
+> list -ob p/Sally
+Name of Item: Trolley
+Name of Borrower: Sally
+Borrow Duration: 19-03-2021 to 30-03-2021
+
+Name of Item: JBLFlip5
+Name of Borrower: Sally
+Borrow Duration: 29-03-2021 to 01-04-2021
+```
+If the person does not exist in the borrowings, the `list -ob p/BORROWER_NAME` will return:
+```
+> list -ob p/David
+There are no overdue borrowings for David.
 ```
 
 
