@@ -5,6 +5,7 @@ import java.util.Objects;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.UnknownConfigurationGroupWord;
 import seedu.duke.data.ModuleList;
+import seedu.duke.exceptions.UnsupportedResultTypeException;
 import seedu.duke.util.Configuration;
 import seedu.duke.util.StringConstants;
 
@@ -19,17 +20,18 @@ public class OptionCommand extends Command {
         if (!Objects.isNull(configurationGroupWord)) {
             try {
                 configurationGroup = Configuration.ConfigurationGroup.valueOf(configurationGroupWord);
-                // Checks whether the configurationGroupWord and newValue are legal.
-                if (!Objects.isNull(newValue)) {
-                    if (Configuration.LEGAL_VALUES.containsKey(configurationGroup)
-                            && Configuration.LEGAL_VALUES.get(configurationGroup).contains(newValue)) {
-                        this.newValue = newValue;
-                    } else {
-                        throw new UnknownConfigurationGroupWord(configurationGroupWord + " " + newValue);
-                    }
-                }
-            } catch (Exception e) {
+            } catch (IllegalArgumentException e) {
                 throw new UnknownConfigurationGroupWord(configurationGroupWord);
+            }
+            if (!Configuration.LEGAL_VALUES.containsKey(configurationGroup)) {
+                throw new UnknownConfigurationGroupWord(configurationGroupWord);
+            }
+        }
+        if (!Objects.isNull(newValue)) {
+            if (Configuration.LEGAL_VALUES.get(configurationGroup).contains(newValue)) {
+                this.newValue = newValue;
+            } else {
+                throw new UnsupportedResultTypeException(newValue, configurationGroupWord);
             }
         }
     }

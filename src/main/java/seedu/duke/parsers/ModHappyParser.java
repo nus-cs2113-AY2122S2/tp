@@ -8,6 +8,7 @@ import seedu.duke.exceptions.GeneralParseException;
 import seedu.duke.exceptions.UnknownConfigurationGroupWord;
 import seedu.duke.exceptions.ModHappyException;
 import seedu.duke.exceptions.UnknownCommandException;
+import seedu.duke.exceptions.UnsupportedResultTypeException;
 import seedu.duke.util.StringConstants;
 
 /**
@@ -41,9 +42,7 @@ public class ModHappyParser extends Parser {
             HashMap<String, String> parsedCommand = parseString(userInput);
             Parser commandParser = getCommandParser(parsedCommand.get(COMMAND_WORD));
             return commandParser.parseCommand(parsedCommand.get(ARGUMENT));
-        } catch (GeneralParseException e) {
-            throw e;
-        } catch (UnknownConfigurationGroupWord e) {
+        } catch (GeneralParseException | UnknownConfigurationGroupWord | UnsupportedResultTypeException e) {
             throw e;
         } catch (ModHappyException e) {
             throw new UnknownCommandException(userInput);

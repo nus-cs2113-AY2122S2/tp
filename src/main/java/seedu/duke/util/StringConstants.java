@@ -191,7 +191,8 @@ public class StringConstants {
     public static final String ERROR_ADDITIONAL_PARAMETER = "Sorry, this command should have no parameters.";
     public static final String ERROR_PARSE_STRING = "\nError at \"%s\".\nPlease check and try again.";
     public static final String ERROR_UNKNOWN_COMMAND = "Sorry, I don't understand the following command:";
-    public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, I don't understand the result format:";
+    public static final String ERROR_UNSUPPORTED_RESULT_TYPE = "Sorry, the value \"%s\" is not supported for "
+            + "configuration \"%s\".";
     public static final String ERROR_WRITE_FILE = "Error writing to file...";
     public static final String ERROR_READ_FILE = "Error reading from file...";
     public static final String ERROR_FILE_CREATE_FAIL = "Sorry, file creation failed...";
@@ -218,7 +219,8 @@ public class StringConstants {
     public static final String MODULE_GRADE = "moduleGrade";
     public static final String TASK_NUMBER = "taskNumber";
     public static final String FLAG = "flag";
-    public static final String TASK_INDEX = "taskIndex";
+    public static final String CONFIGURATION_GROUP_WORD = "configurationGroupWord";
+    public static final String NEW_VALUE = "newValue";
     public static final String COMPLETED_FLAG = "c";
     public static final String UNCOMPLETED_FLAG = "u";
     public static final String ARGUMENT = "arguments";
@@ -257,11 +259,11 @@ public class StringConstants {
     public static final String TRUE = "true";
     public static final String FALSE = "false";
 
-    public static final String COMPLETED_TASKS_SHOWN_NAME = "COMPLETED_TASKS_SHOWN";
-    public static final String COMPLETED_TASKS_SHOWN_EXPLAIN = "Whether or not completed tasks should be displayed"
+    public static final String SHOW_COMPLETED_TASKS_NAME = "SHOW_COMPLETED_TASKS";
+    public static final String SHOW_COMPLETED_TASKS_EXPLAIN = "Whether or not completed tasks should be displayed"
             + " by \"list\".";
-    public static final String COMPLETED_TASKS_SHOWN_TRUE = "Show completed tasks";
-    public static final String COMPLETED_TASKS_SHOWN_FALSE = "Hide completed tasks";
+    public static final String SHOW_COMPLETED_TASKS_TRUE = "Show completed tasks";
+    public static final String SHOW_COMPLETED_TASKS_FALSE = "Hide completed tasks";
 
     /**
      * General strings.
