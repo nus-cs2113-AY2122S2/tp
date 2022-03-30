@@ -1,12 +1,13 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
-import seedu.splitlah.data.Person;
 import seedu.splitlah.data.PersonList;
 import seedu.splitlah.data.Group;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
 import seedu.splitlah.ui.TextUI;
+
+import java.util.logging.Level;
 
 /**
  * Represents a command object that edits a Group object.
@@ -15,17 +16,21 @@ import seedu.splitlah.ui.TextUI;
  */
 public class GroupEditCommand extends Command {
 
-    public static final String COMMAND_TEXT = "group /edit";
-
-    public static final String COMMAND_FORMAT = "Syntax: group /edit";
-
     private static final String COMMAND_SUCCESS = "The group was edited successfully.\n";
 
-    private String groupName;
+    private final String groupName;
     private final String[] involvedList;
-    private int groupId;
+    private final int groupId;
 
+    /**
+     * Initializes a GroupEditCommand object.
+     *
+     * @param involvedList  An array of String objects that represents the involved persons for the group.
+     * @param groupName     A String object that represents the group name.
+     * @param groupId       An integer that represents the group unique identifier for the group to be edited.
+     */
     public GroupEditCommand(String[] involvedList, String groupName, int groupId) {
+        assert groupId > 0 : Message.ASSERT_GROUPEDIT_GROUP_ID_INVALID;
         this.involvedList = involvedList;
         this.groupName = groupName;
         this.groupId = groupId;
@@ -39,30 +44,25 @@ public class GroupEditCommand extends Command {
     @Override
     public void run(Manager manager) {
         TextUI ui = manager.getUi();
-        Group group = null;
+        Group group;
         try {
             group = manager.getProfile().getGroup(groupId);
         } catch (InvalidDataException invalidDataException) {
             ui.printlnMessageWithDivider(invalidDataException.getMessage());
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_PROFILE_GROUP_NOT_IN_LIST);
             return;
         }
 
         if (involvedList != null) {
             boolean hasDuplicates = PersonList.hasNameDuplicates(involvedList);
             if (hasDuplicates) {
-                ui.printlnMessage(Message.ERROR_GROUPEDIT_DUPLICATE_NAME);
+                ui.printlnMessage(Message.ERROR_PERSONLIST_DUPLICATE_NAME_IN_GROUP);
+                Manager.getLogger().log(Level.FINEST, Message.LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITGROUP);
                 return;
             }
             PersonList newPersonList = new PersonList();
             newPersonList.convertToPersonList(involvedList);
-            if (!newPersonList.isSuperset(group.getPersonList())) {
-                ui.printlnMessageWithDivider(Message.ERROR_GROUPEDIT_INVALID_PERSONLIST);
-                return;
-            } else {
-                for (Person person : newPersonList.getPersonList()) {
-                    group.addPerson(person);
-                }
-            }
+            group.setPersonList(newPersonList);
         }
         if (groupName != null) {
             group.setGroupName(groupName);
@@ -71,4 +71,3 @@ public class GroupEditCommand extends Command {
         ui.printlnMessageWithDivider(COMMAND_SUCCESS + "\n" + group);
     }
 }
-

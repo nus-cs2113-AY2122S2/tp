@@ -37,7 +37,7 @@ public class SplitLah {
 
     /** Exits the program.  */
     private void exitApplication() {
-        manager.getLogger().log(Level.INFO, Message.LOGGER_SPLITLAH_APPLICATION_EXIT);
+        Manager.getLogger().log(Level.INFO, Message.LOGGER_SPLITLAH_APPLICATION_EXIT);
         System.exit(0);
     }
 
@@ -48,7 +48,7 @@ public class SplitLah {
             String userInput = manager.getUi().readNextLine();
             command = Parser.getCommand(userInput);
             command.run(manager);
-        } while (!Command.isExitCommand(command));
+        } while (!command.isExitCommand());
         manager.saveProfile();
     }
 }

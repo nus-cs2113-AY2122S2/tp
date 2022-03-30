@@ -39,5 +39,4 @@ public class ActivityDeleteCommandParser implements CommandParser<ActivityDelete
             throw new InvalidFormatException(e.getMessage() + "\n" + COMMAND_FORMAT);
         }
     }
-
 }

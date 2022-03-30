@@ -8,7 +8,6 @@ import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
 import seedu.splitlah.data.PersonList;
-import seedu.splitlah.data.Profile;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
@@ -23,7 +22,7 @@ public class ActivityEditCommand extends Command {
 
     private static final String COMMAND_SUCCESS = "The activity was edited successfully.\n";
 
-    private int activityId;
+    private final int activityId;
     private final int sessionId;
     private final String activityName;
     private double totalCost;
@@ -77,10 +76,8 @@ public class ActivityEditCommand extends Command {
      *                           each representing a person involved in the activity.
      * @param personPaid         A Person object representing the person who paid for the activity.
      * @param activityId         An integer that uniquely identifies an activity.
-     * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      */
-    private void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, int activityId)
-            throws InvalidDataException {
+    private void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, int activityId) {
         boolean hasAddedForPersonPaid = false;
         for (int i = 0; i < involvedPersonList.size(); i++) {
             Person person = involvedPersonList.get(i);
@@ -137,7 +134,7 @@ public class ActivityEditCommand extends Command {
      * Else, the total cost is distributed evenly.
      */
     private void updateCostAndCostList() {
-        boolean isZeroCost = totalCost == NO_COST;
+        boolean isZeroCost = (totalCost == NO_COST);
         if (isZeroCost) {
             updateCostListWithExtraCharges();
             calculateTotalCost();
@@ -223,17 +220,15 @@ public class ActivityEditCommand extends Command {
             updateCostAndCostList();
             assert costList != null : Message.ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL;
             assert totalCost > 0 : Message.ASSERT_ACTIVITYEDIT_TOTAL_COST_LESS_THAN_ONE;
-            Profile profile = manager.getProfile();
-            Session session = profile.getSession(sessionId);
+            Session session = manager.getProfile().getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
-            addAllActivityCost(involvedPersonList, personPaid, activityId);
             session.removeActivity(activityId);
             addAllActivityCost(involvedPersonList, personPaid, activityId);
             Activity editedActivity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(editedActivity);
             manager.saveProfile();
-            ui.printlnMessageWithDivider(COMMAND_SUCCESS + editedActivity);
+            ui.printlnMessage(COMMAND_SUCCESS + editedActivity);
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_ACTIVITY_EDITED  + activityId);
         } catch (InvalidDataException e) {
             ui.printlnMessage(e.getMessage());
@@ -242,5 +237,3 @@ public class ActivityEditCommand extends Command {
         }
     }
 }
-
-

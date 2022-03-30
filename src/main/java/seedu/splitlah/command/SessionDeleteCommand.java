@@ -1,9 +1,9 @@
 package seedu.splitlah.command;
 
 import seedu.splitlah.data.Manager;
-import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
+import seedu.splitlah.ui.TextUI;
 
 import java.util.logging.Level;
 
@@ -16,7 +16,7 @@ public class SessionDeleteCommand extends Command {
 
     private static final String COMMAND_SUCCESS = "The session was deleted successfully.";
 
-    private int sessionId;
+    private final int sessionId;
 
     /**
      * Initializes a SessionDeleteCommand object.
@@ -24,6 +24,7 @@ public class SessionDeleteCommand extends Command {
      * @param sessionId An integer that uniquely identifies a session.
      */
     public SessionDeleteCommand(int sessionId) {
+        assert sessionId > 0 : Message.ASSERT_SESSIONDELETE_SESSION_ID_NOT_INITIALIZED;
         this.sessionId = sessionId;
     }
 
@@ -34,13 +35,15 @@ public class SessionDeleteCommand extends Command {
      */
     @Override
     public void run(Manager manager) {
+        TextUI ui = manager.getUi();
         try {
             manager.getProfile().removeSession(sessionId);
             manager.saveProfile();
-            manager.getUi().printlnMessageWithDivider(COMMAND_SUCCESS);
+            ui.printlnMessageWithDivider(COMMAND_SUCCESS);
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
         } catch (InvalidDataException dataException) {
-            manager.getUi().printlnMessage(dataException.getMessage());
+            ui.printlnMessage(dataException.getMessage());
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED_FAILED + sessionId);
         }
     }
 }
