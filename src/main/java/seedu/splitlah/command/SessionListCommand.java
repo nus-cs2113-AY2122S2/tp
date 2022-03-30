@@ -21,6 +21,6 @@ public class SessionListCommand extends Command {
     public void run(Manager manager) {
         String sessionListSummary = manager.getProfile().getSessionListSummaryString();
         manager.getUi().printlnMessage(sessionListSummary);
-        Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONLIST_SESSIONSS_LISTED);
+        Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONLIST_SESSIONS_LISTED);
     }
 }

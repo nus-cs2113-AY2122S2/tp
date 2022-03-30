@@ -43,7 +43,7 @@ public class SessionDeleteCommand extends Command {
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED + sessionId);
         } catch (InvalidDataException dataException) {
             ui.printlnMessage(dataException.getMessage());
-            Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_GROUP_REMOVED_FAILED + sessionId);
+            Manager.getLogger().log(Level.FINEST, Message.LOGGER_SESSIONDELETE_SESSION_REMOVED_FAILED + sessionId);
         }
     }
 }

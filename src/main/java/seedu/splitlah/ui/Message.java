@@ -266,7 +266,7 @@ public abstract class Message {
             "Session Id not initialized.";
     public static final String LOGGER_SESSIONDELETE_SESSION_REMOVED =
             "A session was removed from the list of sessions with Id: ";
-    public static final String LOGGER_SESSIONDELETE_GROUP_REMOVED_FAILED =
+    public static final String LOGGER_SESSIONDELETE_SESSION_REMOVED_FAILED =
             "A session was not removed from the list of sessions with Id: ";
 
     // Session Edit Command
@@ -295,7 +295,7 @@ public abstract class Message {
             "A session summary has been successful produced for the Session object with the following Id: ";
 
     // Session List Command
-    public static final String LOGGER_SESSIONLIST_SESSIONSS_LISTED =
+    public static final String LOGGER_SESSIONLIST_SESSIONS_LISTED =
             "All the sessions have been listed.";
 
     // Session View Command
