@@ -132,7 +132,8 @@ The `Person` component,
 
 ### Storage Component
 
-**Class:**
+**Class:** [`Storage.java`
+](https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/storage/Storage.java)
 
 ![StorageDiagram](images/StorageDiagram.png)
 
@@ -529,6 +530,8 @@ tasks, and users will be able to neatly categorise their family members as well 
 |---------|----------|---------------------------|-------------------------------------------------------------|
 | v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
 | v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
+
+ 
 
 ---
 
