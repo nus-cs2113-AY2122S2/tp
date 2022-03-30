@@ -1,3 +1,5 @@
+//@@author yanjie1017
+
 package seedu.meetingjio.commands;
 
 import seedu.meetingjio.events.Lesson;

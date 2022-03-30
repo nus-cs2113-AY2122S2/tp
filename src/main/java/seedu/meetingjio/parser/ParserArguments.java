@@ -9,10 +9,13 @@ import static seedu.meetingjio.parser.Parser.HEADINGS_WITHOUT_NAME;
 import static seedu.meetingjio.parser.Parser.HEADINGS_NAME_INDEX;
 import static seedu.meetingjio.parser.Parser.HEADINGS_ALL_WITH_INDEX;
 
+import seedu.meetingjio.exceptions.MissingParameterException;
+
 public class ParserArguments {
 
-    protected static String[] splitArgumentsAll(String arguments) {
-        String[] eventDescription = new String[6];
+    protected static String[] splitArgumentsAll(String arguments) throws MissingParameterException {
+        int count = HEADINGS_ALL.length;
+        String[] eventDescription = new String[count];
         Arrays.fill(eventDescription, "");
         String[] splitArguments = arguments.split("[ /]");
         int index = -1;
@@ -22,13 +25,18 @@ public class ParserArguments {
                 eventDescription[index] = eventDescription[index].trim();
             } else {
                 index = isHeadings(str, HEADINGS_ALL);
+                count--;
             }
+        }
+        if (count > 0) {
+            throw new MissingParameterException();
         }
         return eventDescription;
     }
 
-    protected static String[] splitArgumentsNameIndex(String arguments) {
-        String[] eventDescription = new String[2];
+    protected static String[] splitArgumentsNameIndex(String arguments) throws MissingParameterException {
+        int count = HEADINGS_NAME_INDEX.length;
+        String[] eventDescription = new String[count];
         Arrays.fill(eventDescription, "");
         String[] splitArguments = arguments.split("[ /]");
         int index = -1;
@@ -38,13 +46,18 @@ public class ParserArguments {
                 eventDescription[index] = eventDescription[index].trim();
             } else {
                 index = isHeadings(str, HEADINGS_NAME_INDEX);
+                count--;
             }
+        }
+        if (count > 0) {
+            throw new MissingParameterException();
         }
         return eventDescription;
     }
 
-    protected static String[] splitArgumentsWithoutName(String arguments) {
-        String[] eventDescription = new String[5];
+    protected static String[] splitArgumentsWithoutName(String arguments) throws MissingParameterException {
+        int count = HEADINGS_WITHOUT_NAME.length;
+        String[] eventDescription = new String[count];
         Arrays.fill(eventDescription, "");
         String[] splitArguments = arguments.split("[ /]");
         int index = -1;
@@ -54,7 +67,11 @@ public class ParserArguments {
                 eventDescription[index] = eventDescription[index].trim();
             } else {
                 index = isHeadings(str, HEADINGS_WITHOUT_NAME);
+                count--;
             }
+        }
+        if (count > 0) {
+            throw new MissingParameterException();
         }
         return eventDescription;
     }
