@@ -8,6 +8,7 @@ import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityEditCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
+import seedu.splitlah.parser.commandparser.GroupEditCommandParser;
 import seedu.splitlah.parser.commandparser.GroupListCommandParser;
 import seedu.splitlah.parser.commandparser.GroupViewCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
@@ -73,13 +74,15 @@ public abstract class Message {
                     + "        " + GroupCreateCommand.COMMAND_FORMAT + "\n"
                     + "13. Delete an existing group\n"
                     + "        " + GroupDeleteCommand.COMMAND_FORMAT + "\n"
-                    + "14. View an existing group's details\n"
+                    + "14.  Edit an existing group\n"
+                    + "         " + GroupEditCommandParser.COMMAND_FORMAT + "\n"
+                    + "15. View an existing group's details\n"
                     + "        " + GroupViewCommandParser.COMMAND_FORMAT + "\n"
-                    + "15. List all existing groups\n"
+                    + "16. List all existing groups\n"
                     + "        " + GroupListCommandParser.COMMAND_FORMAT + "\n"
-                    + "16.  Show this help menu\n"
+                    + "17.  Show this help menu\n"
                     + "        " + HelpCommandParser.COMMAND_FORMAT + "\n"
-                    + "17. Exit the program\n"
+                    + "18. Exit the program\n"
                     + "        " + ExitCommandParser.COMMAND_FORMAT;
     public static final String PROMPT_TEXTUI_AWAITING_INPUT =
             "> ";
