@@ -1,4 +1,6 @@
-package seedu.duke;
+package seedu.duke.exceptions;
+
+import seedu.duke.HotelLiteManagerException;
 
 /**
  * Represents an exception which would be thrown when the user enters an empty item name in the Add Item or Update Item

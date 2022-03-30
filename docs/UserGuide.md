@@ -11,7 +11,19 @@
 1. Ensure that you have Java 11 or above installed.
 1. Down the latest version of `Duke` from [here](http://link.to/duke).
 
-## Features 
+## Features
+1. [Customer Satisfaction Related Commands](#Customer-Satisfaction-Related-Commands)
+2. [Housekeeper Related Commands](#Housekeeper-Related-Commands)
+   * Add Adding Housekeeper Profile
+   * Add/Update Availability of Housekeeper
+   * View Recorded Housekeeper List
+   * Delete Housekeeper
+   * Obtain Housekeepers on Days of Interest
+   * Reset Housekeeper Availability
+   * Increase Age of All Housekeepers
+3. [Event Related Commands](#Event-Related-Commands)
+4. [Room Related Commands](#Room-Related-Commands)
+5. [Item Related Commands](#Item-Related-Commands)
 
 {Give detailed description of each feature}
 
@@ -132,11 +144,13 @@ There are currently 3 recorded housekeeper performances.
 ### Adding Housekeeper Profile : `add housekeeper`
 
 Adds a new housekeeper profile into the list of housekeepers. The add profile command includes the name and age of the
-new housekeeper to be added.
+new housekeeper to be added. As housekeeper is being added for the first time, availability shown will be empty ("N/A").
+
 
 Format: `add housekeeper NAME / AGE`
 
-* The `NAME` can be in any format. For example, Susan1@.
+* The `NAME` cannot have digits and symbols.
+* The `NAME` given must not exist in the housekeeper list.
 * The `AGE` must be between 21 and 60.
 
 Example of usage:
@@ -146,30 +160,22 @@ Example of usage:
 `add housekeeper jane / 33`
 
 Expected output:
+
+If housekeeper has not been recorded:
 ```
-========== Noted ! ==========
-[SUSAN]: Age: 46, Availability: <Enter Availability>
-=============================
-```
-
-### View housekeeper list : `view recorded housekeeper`
-
-View all housekeeper in the list with their name, age and availability. Availability will not be shown if user
-have not entered it yet.
-
-Format: `view recorded housekeeper`
-
-Expected output:
-```
-======== Housekeeper List ========
-1. [SUSAN]: Age: 46, Availability: <Enter Availability>
-2. [JANE]: Age: 33, Availability: <Enter Availability>
-3. [SALLY]: Age: 60, Availability: ( Monday Tuesday )
-======== End of the list ========
+=============== Noted ! ================
+[SUSAN]: Age: 46, Availability: N/A
+========================================
 ```
 
-### Add Availability of Housekeeper : `availability`
+If housekeeper has been recorded:
+```
+Error! This person has already been recorded.
+```
+
+### Add/Update Availability of Housekeeper : `availability`
 Declare housekeeper's availability in the week using numbers from 1 to 7 where each number represents a day in a week.
+User can update availability by calling the command again.
 
 Numbers from 1 to 7 are map to a day in a week by: <br/>
 `1`: Monday <br/>
@@ -180,9 +186,9 @@ Numbers from 1 to 7 are map to a day in a week by: <br/>
 `6`: Saturday <br/>
 `7`: Sunday <br/>
 
-Format: `availability NAME / DAYS`
+Format: `availability NAME / DAY(S)`
 * `NAME` given must be in the records of housekeeper list to be eligible to add availability.
-* `DAYS` given must be between 1 and 7. Multiple days can be represented using commas.
+* `DAY(S)` given must be between 1 and 7. Multiple days can be represented using commas.
 
 Example of usage:
 
@@ -190,13 +196,60 @@ Example of usage:
 
 `availability jane / 1,3,5,7`
 
+`availability susan / 1,3,5,`
+
 Expected output:
+```
+================ Noted! ===================
+Added sally availability into records
+===========================================
+```
 
-`Added sally availability into records`
 
-### Delete Housekeeper: `delete housekeeper `
-When a housekeeper resigns, calling delete housekeeper command will remove housekeeper that resign from 
-the list of housekeepers. This command will also show number of housekeeper left in the list of housekeeper.
+### View Recorded Housekeeper List : `view recorded housekeeper`
+
+View all housekeeper in the list with their name, age and availability. Availability will not be shown if user
+have not entered it yet.
+
+Format: `view recorded housekeeper`
+
+Example of usage:
+```
+add housekeeper susan / 46
+add housekeeper jane / 33
+add housekeeper sally / 33
+availability sally / 1,7,
+view recorded housekeeper
+```
+
+Expected output:
+```
+=============== Noted ! ================
+[SUSAN]: Age: 46, Availability: N/A
+========================================
+
+=============== Noted ! ================
+[JANE]: Age: 33, Availability: N/A
+========================================
+
+=============== Noted ! ================
+[SALLY]: Age: 33, Availability: N/A
+========================================
+
+================ Noted! ===================
+Added sally availability into records
+===========================================
+
+=============== Housekeeper List ================
+1. [SUSAN]: Age: 46, Availability: N/A
+2. [JANE]: Age: 33, Availability: N/A
+3. [SALLY]: Age: 33, Availability: Monday Sunday 
+=============== End of the list =================
+```
+
+### Delete Housekeeper : `delete housekeeper `
+When a housekeeper resigns, the delete housekeeper command removes the resigning housekeeper from the list of 
+housekeepers. This command will also display the number of housekeepers remaining in the housekeeper list.
 
 
 Format: `delete housekeeper NAME`
@@ -209,12 +262,21 @@ delete housekeeper sally
 ```
 
 Expected output:
+
+If housekeeper to be deleted exists in the list for deletion:
 ```
+================ Noted! ===================
 Deleted sally from the list of profile
 Take note! Total pax of housekeeper:  2
+===========================================
 ```
 
-### Get Housekeepers Available on Interested Days : `get available on `
+If housekeeper to be deleted does not exist in the list for deletion:
+```
+Error! User does not exist.
+```
+
+### Obtain Housekeepers on Days of Interest : `get available on `
 Derive a list of housekeeper available from any day in a week. If command is used on days with no housekeeper 
 available, list printed will indicate that no housekeeper is available on that day.
 
@@ -234,62 +296,94 @@ Format:
 * Only one day can be enquired at a time.
 
 Example of usage:
-
-`get available on 1`
-
-`get available on 7`
-
+```
+add housekeeper sally / 33
+availability sally / 1,7,
+get available on 1
+```
 Expected output:
 
 If there exist any housekeeper on Monday:
 ```
-======== Monday List ========
+=========== Monday List ===========
 1. sally
-======== End of the list ========
+========= End of the list =========
 ```
 
 If there is no housekeeper available on Monday:
 ```
-======== Monday List ========
+=========== Monday List ===========
 TAKE NOTE! NO ONE IS AVAILABLE!!
-======== End of the list ========
+========= End of the list =========
 ```
 
-### Reset Housekeeper Availability: `is a new week`
+### Reset Housekeeper Availability : `is a new week`
 When a new week begins, all housekeeper availabilities can be reset by calling this command. For verification,
 command will also print out the list with all availabilities being reset.
 
 Format: `is a new week`
 
 Expected output:
+
+Initial Housekeeper List Recorded:
 ```
-Housekeeper's availability has been reset!
-======== Housekeeper List ========
-1. [SUSAN]: Age: 46, Availability: <Enter Availability>
-2. [JANE]: Age: 33, Availability: <Enter Availability>
-======== End of the list ========mand Sum
+=============== Housekeeper List ================
+1. [SUSAN]: Age: 46, Availability: Monday Wednesday Thursday Friday 
+2. [JANE]: Age: 33, Availability: Monday Wednesday Friday Saturday 
+=============== End of the list =================
 ```
 
-### Increase Age of All Housekeepers: `is a new year`
-When a new year begins, all housekeeper age can be increase by one through this command.
-As the age limit of working as a housekeeper in the hotel is 21 to 60 years old, housekeeper
-that exceed age limit of 60 after increment will be removed from the list of housekeeper. A list of
-housekeeper exceeding age limit will be shown when removing.
+After calling new week command:
+```
+Housekeeper's availability has been reset!
+=============== Housekeeper List ================
+1. [SUSAN]: Age: 46, Availability: N/A
+2. [JANE]: Age: 33, Availability: N/A
+=============== End of the list =================
+```
+
+### Increase Age of All Housekeepers : `is a new year`
+This command can be used to increase the age of all housekeepers by one when a new year begins.
+Housekeepers who exceed the age restriction of 60 after increment will be removed from the list of 
+housekeepers, as the age limit for working as a housekeeper at the hotel is 21 to 60 years old. When the 
+housekeepers are removed, a list of those who are over the age restriction will be displayed.
 
 Format: `is a new year`
 
 Expected output:
 
 If list of housekeeper has housekeeper which exceed age limit:
+
+Initial Recorded Housekeeper List:
+```
+=============== Housekeeper List ================
+1. [SUSAN]: Age: 46, Availability: N/A
+2. [JANE]: Age: 33, Availability: N/A
+3. [LUCY]: Age: 60, Availability: N/A
+4. [JON]: Age: 60, Availability: N/A
+5. [CALLY]: Age: 59, Availability: N/A
+=============== End of the list =================
+```
+
+After calling new year command:
 ```
 Everyone age has increased by one
 **Over age limit housekeeper will be removed from list**
 ======== Age Limit Exceed List ========
-1. [LUCY]: Age: 60, Availability: <Enter Availability>
-2. [JON]: Age: 60, Availability: <Enter Availability>
-======== End of the list ========
+1. [LUCY]: Age: 60, Availability: N/A
+2. [JON]: Age: 60, Availability: N/A
+=========== End of the list ===========
 ```
-If none of the housekeeper exceed age limit:
+Recorded Housekeeper List after command:
+```
+=============== Housekeeper List ================
+1. [SUSAN]: Age: 47, Availability: N/A
+2. [JANE]: Age: 34, Availability: N/A
+3. [CALLY]: Age: 60, Availability: N/A
+=============== End of the list =================
+```
+
+However, If none of the housekeeper exceed age limit:
 ```
 Everyone age has increased by one
 **Over age limit housekeeper will be removed from list**
@@ -686,6 +780,16 @@ Expected output:
 
 ## Commary
 
-{Give a 'cheat sheet' of commands here}
+| General Command | Format, Example |
+| --- | --- |
+| bye | ```bye``` |
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+| Housekeeper Command | Format, Example |
+| --- | --- |
+| add housekeeper | ```add housekeeper NAME / AGE```<br/>eg. ```add housekeeper susan / 46```|
+| availability | ```availability NAME / DAY(S)```<br/>eg.```availability jane / 1,3,5,7```|
+| view recorded housekeeper | ```view recorded housekeeper```|
+| delete | ```delete housekeeper NAME``` <br/>eg. ```delete housekeeper sally```|
+| get available on | ```get available on DAY ```<br/>eg.```get available on 1``` |
+| is a new week | ```is a new week ```|
+| is a new year | ```is a new year ``` |
