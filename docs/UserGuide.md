@@ -39,7 +39,7 @@ Enter choice:
 
 ### Usage
 When using `Dish Management`, the program pops up a select panel to ask for action:
-```aidl
+```
 (0) Exit Menu
 (1) List Dish
 (2) Add Dish
@@ -55,7 +55,7 @@ Enter corresponding index to use the feature.
 When using `List dish`, there is no need for input, the program will print the order and index.
 > Add some dish: Chicken Rice($3.5), Mala Hotpot Set A($10), Soup (Along with Chicken Rice)($0), Chilli Crab($30)
 > Enter 1 to list dishes
-```aidl
+```
 Listing dishes...
 1. Chicken Rice ---- $3.5
 2. Mala Hotpot Set A ---- $10.0
@@ -65,19 +65,19 @@ Listing dishes...
 
 #### Notice
 If there is no dish in the menu. The output will be
-```aidl
+```
 Listing dishes...
 You haven't got a dish in menu!
 ```
 
 ### Add dish (indexed as 2)
 When using `Add dish`, the program pops up an input panel.
-```aidl
+```
 Adding new dish...
 The name of dish: 
 ```
 > Enter the name of the new dish
-```aidl
+```
 Enter choice: 2
 Adding new dish...
 The name of dish: some dish
@@ -96,7 +96,7 @@ The price of dish:
 
 ### Usage
 When using `Staff Management`, the program pops up a select panel to ask for action:
-```aidl
+```
 (0) Exit Staff Menu
 (1) Print Staff
 (2) Find Staff
@@ -111,7 +111,7 @@ Enter corresponding index to use the feature.
 When using `Print staff`, there is no need for input, the program will print the order and index.
 > Add some staff: (100, John, Waiter, 2000), (101, Anna, Chef, 2500)
 > Enter 1 to print staff
-```aidl
+```
 Printing staff...
 1. 100     | John            | Waiter
 2. 101     | Anna            | Chef
@@ -121,14 +121,14 @@ Details of all staff will be printed.
 
 #### Notice
 If there is no dish in the menu. The output will be
-```aidl
+```
 Printing staff...
 There is no staff.
 ```
 
 ### Find staff (indexed as 2)
 When using `Find staff`, the program pops up an input panel.
-```aidl
+```
 Finding staff...
 ID of staff: 
 ```
@@ -142,25 +142,25 @@ Staff with the `ID` being inputted should exist.
 ### Add staff (indexed as 3)
 When using `Add staff`, the program pops up an input panel.
 >
-```aidl
+```
 Adding new staff...
 ID of staff: 
 ```
 > Enter the ID of the new staff
-```aidl
+```
 Adding new staff...
 ID of staff: 
 Name of staff:
 ```
 > Enter the name of the new staff
-```aidl
+```
 Adding new staff...
 ID of staff: 
 Name of staff:
 Position of staff
 ```
 > Enter the position of the new staff
-```aidl
+```
 Adding new staff...
 ID of staff: 
 Name of staff:
@@ -175,7 +175,7 @@ Staff with the ID, name, position and salary being inputted will be created.
 
 ### Delete staff (indexed as 4)
 When using `Delete staff`, the program pops up an input panel.
-```aidl
+```
 Deleting staff...
 ID of staff: 
 ```
