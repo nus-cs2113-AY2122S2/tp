@@ -96,6 +96,8 @@ Todo has been marked as done successfully:
 Adds a deadline date to a project
 
 Format: `adddeadline [project_name] [deadline]`
+* deadline must be entered in the following format "yyyy-mm-dd"
+* Alternatively, entering a day of the week also works (i.e. Thursday)
 
 #### Example of usage
 `addDeadline nextProject Friday`

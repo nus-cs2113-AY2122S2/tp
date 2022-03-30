@@ -164,7 +164,7 @@ public class ProjectList {
                 project.setDeadline(deadline);
                 System.out.println("Deadline added to " + title + ": " + deadline);
             } catch (DateTimeParseException e) {
-                System.out.println("Improper format. Please look the valid format for dates");
+                System.out.println("Improper format. Please type it in yyyy-mm-dd format.");
             }
         } else {
             System.out.println("Sorry! There was no project with that name.");
