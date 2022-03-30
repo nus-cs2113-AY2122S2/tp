@@ -33,7 +33,10 @@ destroy GradeParser
 
 [->GradeCommand:execute(moduleList, configuration)
 activate GradeCommand
-ref over GradeCommand, ModuleList: Get Module
+GradeCommand -> ModuleList: getModule(moduleCode)
+activate ModuleList
+return
+
 GradeCommand -> GradeCommand: addGradeToModule(m)
 activate GradeCommand
 GradeCommand -> Module: setModuleGrade(moduleGrade)

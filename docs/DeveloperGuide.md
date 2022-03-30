@@ -178,6 +178,14 @@ This section describes some details on how some features are implemented.
 
 The edit feature allows the user to change a parameter of a task/module. The parameters of a module is its module description while the parameters of a task are its task name, task description and estimated working time. 
 
+The following sequence diagram illustrates the process:
+
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/EditSeqDiagrams/Edit.puml)
+
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/EditSeqDiagrams/GetModule.puml)
+
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/EditSeqDiagrams/GetTask.puml)
+
 Here is an example of editing the description of a task (First task of the module CS2113T):
 
 1. User inputs `edit task 1 -m CS2113T -d "Changed"`.
@@ -186,10 +194,6 @@ Here is an example of editing the description of a task (First task of the modul
 4. `Main` calls the `execute()` method of the `EditCommand` instance.
 5. `EditCommand` first gets the relevant `Module` and invokes `editTaskFromModule(targetModule)`.
 6. `editTaskFromModule(targetModule)` retrieves the task `targetTask` specified by the index and invokes `targetTask.setTaskDescription(description)` to change the description.
-
-Below is the sequence diagram of how the Grade feature works:
-*<br>UPDATE AFTER MERGE*
-![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/Edit.puml)
 
 <br>
 
@@ -231,7 +235,7 @@ Here is an example on how to assign a grade to a module:
 6. `addGradeToModule(m)` then invokes `m.setModuleGrade(moduleGrade)` to assign the input grade to the specified module.
 
 Below is the sequence diagram of how the Grade feature works:
-*<br>UPDATE AFTER MERGE*
+
 ![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/Grade.puml)
 
 <br>
@@ -291,6 +295,7 @@ Below is the sequence diagram of how the GPA feature works:
 
 ## 9. Glossary
 
+* *CLI* - Command-line interface
 * *Mainstream OS* - Windows, Linux, Unix, OS-X
 
 <br><br><br>
