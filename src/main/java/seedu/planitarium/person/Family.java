@@ -100,7 +100,7 @@ public class Family {
             return;
         }
         String generation = getGenerationName(group);
-        System.out.println(name + " has been added successfully to " + generation);
+        System.out.println(name + " has been successfully added to " + generation);
     }
 
     /**
