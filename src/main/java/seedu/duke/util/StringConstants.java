@@ -146,6 +146,7 @@ public class StringConstants {
             + "Format to view details for a specific config option: option CONFIG_NAME\n"
             + "Format to set a config option: option CONFIG_NAME = NEW_VALUE";
 
+
     /**
      * For SaveCommand.
      */
@@ -196,6 +197,7 @@ public class StringConstants {
             + "View all available config settings with \"option\".";
     public static final String ERROR_MODULE_LIST_EMPTY = "Sorry, you have 0 MCs counted towards your GPA ._.\n"
             + "Please add some modules or grades!";
+    public static final String ERROR_WRONG_DURATION_FORMAT = "Sorry, the estimated time is in wrong format Lol";
 
 
     /**
