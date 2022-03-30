@@ -1,7 +1,7 @@
 package tp;
 
-import tp.person.Doctor;
-import tp.person.Person;
+import java.person.Doctor;
+import java.person.Person;
 
 import javax.print.Doc;
 import java.util.ArrayList;

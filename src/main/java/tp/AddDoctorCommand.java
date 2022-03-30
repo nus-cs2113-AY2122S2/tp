@@ -1,6 +1,6 @@
 package tp;
 
-import tp.person.Doctor;
+import java.person.Doctor;
 
 public class AddDoctorCommand extends Command {
     protected String id;
