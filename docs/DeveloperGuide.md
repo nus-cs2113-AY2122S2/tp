@@ -321,20 +321,42 @@ when the user invokes the `group /create` command.
 <br>
 <br>
 The general workflow of the `group /create` command is as follows:
-1. The user input provided is passed to `Splitlah`.
-2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `GroupCreateCommand` object.
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupCreateCommand` object.
 3. A `GroupCreateCommand#run` method is then invoked to run the `group /create` command.
 4. Once the command starts to run, `GroupCreateCommand` class checks if there are duplicates in the name list.
 5. If there are duplicates, a message indicating that name list contains duplicates is printed using `TextUi#printlnMessage`. 
 6. If there are no duplicates, `GroupCreateCommand` class converts each of the names into a `Person` object.
 7. `GroupCreateCommand` class then checks if there is an existing group with the same group name. 
 8. If existing groups with the group name are found, a message indicating that another group with the same name is printed using `TextUi#printlnMessage`.
-9. `GroupCreateCommand` class create a new `Group` object using the group name, name list, and groupId. 
-10. The list of `Group` objects are managed by a `Profile` object, hence `Manager#getProfile#addGroup` is called to store the new Group object in the Profile.
+9. `GroupCreateCommand` class create a new `Group` object using the group name, name list, and group unique identifier. 
+10. The list of `Group` objects are managed by a `Profile` object, hence `Manager#getProfile#addGroup` is called to store the new `Group` object in the `Profile` object.
 11. The `GroupCreateCommand` class then prints a message indicating that a group has been successfully created.
 
 ### Remove a group
 ### View a group
+**API reference:** [`GroupViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupViewCommand.java)
+
+The sequence diagram below models the interactions between various entities in SplitLah
+when the user invokes the `group /view` command.
+<br>
+<br>
+![View Groups Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/GroupViewCommand.drawio.png)
+<br>
+<br>
+The general workflow of the `group /view` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupViewCommand` object.
+3. `GroupViewCommand#run` method is then invoked to run the `group /view` command.
+4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile` is called before a group within 
+the list of groups can be retrieved.
+5. The `GroupViewCommand` object runs the `Profile#getGroup` method to retrieve the group represented by the
+group unique identifier provided.
+   1. If the group with requested group unique identifier does not exist, an error message is printed out with
+   `TextUI#printlnMessage`.
+   2. Else, the `String` object representing the details of the requested group is retrieved using the `Group#toString`
+   method. The `String` object is then printed out with `TextUI#printlnMessageWithDivider`.
+
 ### List groups
 **API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
 
@@ -346,19 +368,19 @@ when the user invokes the `group /list` command.
 <br>
 <br>
 The general workflow of the `group /list` command is as follows:
-1. The user input provided is passed to `Splitlah`.
-2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `GroupListCommand` object.
-3. `GroupListCommand#run()` method is then invoked to run the `group /list` command.
-4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile()` is called
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupListCommand` object.
+3. `GroupListCommand#run` method is then invoked to run the `group /list` command.
+4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile` is called
 before the list of groups can be retrieved.
-5. To retrieve the groups from the profile retrieved, `Profile#getGroupList()` method is executed,
-where a list of `Group` objects are returned.
-6. Once the list is retrieved, `GroupListCommand` object checks if the list is empty.
-   1. If the list is empty, a message indicating that the list is empty is printed
-   using the method `TextUi#printlnMessage()`.
-   2. If the list is not empty, `GroupListCommand` object will loop from the first to the second last group, 
-   calling `TextUi#printlnMessage()` to print out the summary of each group.
-   Then, the last group is printed with a divider below it, using the method `TextUi#printlnMessageWithDivider()`.
+5. The `GroupListCommand` object runs the `Profile#getGroupListSummaryString` method to retrieve a `String` object
+representing the summaries of the groups stored.
+   1. If there are no groups stored in the `Profile` object, a `String` object representing an empty list of groups is
+   returned.
+   2. Else, the `Profile` objects instantiates a new `TableFormatter` object and loops through the list of groups,
+   calling `TableFormatter#addRow` for each group to create a table with the summary of each group. A `String` object
+   representing the table is then returned.
+6. The `String` object retrieved is printed out with `TextUI#printlnMessage`.
 
 ## Product scope
 ### Target user profile
