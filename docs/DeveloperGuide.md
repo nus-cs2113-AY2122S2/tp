@@ -406,7 +406,9 @@ Alright, the following workout has been removed:
 **(Steps 12 to 13)** The `FileManager#rewriteAllWorkoutsToFile(workoutList)` is called to rewrite
 the `workouts.txt` file according to the newly modified application's workout list.
 <br><br>
-This completes the process of deleting an existing workout in WerkIt!
+This completes the process of deleting an existing workout in WerkIt! 
+Click the user guide [here](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html#delete-a-workout-workout-delete)
+to view how you can run the `workout /delete` feature in the application.
 
 ##### Design Considerations for Deleting Existing Workout
 ###### Rewrite All Workout To File
@@ -483,39 +485,38 @@ The following sequence diagram is the detailed procedure for Step 7's `PlanList#
 ![Create And Add Plan Detailed Sequence Diagram](uml/sequenceDiagrams/images/createPlan-Part2.png)
 
 <br><br>
-**(Steps 7.1 to 7.4)** The user argument of the `PlanList#createAndAddPlan(userArgument)` method is split to obtain
-the following information required to create the `Plan` object:
+**(Steps 7.1 to 7.2)** Before calling the `PlanList#checkPlanNameValidity(userPlanNameInput, className)` method,
+the following information required to create the `Plan` object is obtained:
 1. Name of the plan.
-2. Workout index numbers in the workout list separated by comma.
+2. Workout index numbers in the workout list separated by comma.<br><br>
 
-**(Steps 7.5 to 7.6)** The name of the plan to be created will be validated via calling the
+Once, those information are obtained, the name of the plan to be created will be validated via calling the
 `PlanList#checkPlanNameValidity(userPlanNameInput, className)`.
 This is to ensure all plan names are acceptable and unique in the application.
 If the plan name is invalid, an `InvalidPlanException` exception will be thrown.
 <br><br>
-**(Steps 7.7 to 7.10)** The `PlanList` object will then find out the number of workouts
-to be added into the new plan (by calling `.split(",").length`)
-Subsequently, it will call the `PlanList#checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan, className)` to ensure
+**(Steps 7.3 to 7.4)** The `PlanList` object will then find out the number of workouts
+to be added into the new plan. Subsequently, it will call the `PlanList#checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan, className)` to ensure
 that the number of workouts to be added into the new plan does not exceed 10 workouts, and there should minimally
 be 1 workout in a plan. If the new plan does not meet the minimum and maximum workout number requirement,
 an `InvalidPlanException` will be thrown.
 <br><br>
-**(Steps 7.11 to 7.12)** An ArrayList of Workout object is created to store the workouts to be added into the new plan.
+**(Steps 7.5 to 7.6)** An ArrayList of Workout object is created to store the workouts to be added into the new plan.
 <br><br>
-**(Steps 7.13 to 7.18)** As the workout index numbers in the user argument (e.g. "1, 2, 3") is of type `String`, 
+**(Steps 7.7 to 7.10)** As the workout index numbers in the user input (e.g. "1, 2, 3") is of type `String`, 
 the loop will split (by comma) and convert each number string into an `Integer`. 
 Subsequently, the `PlanList#checkWorkoutNumberWithinRange(workoutIndexNumberInteger, className)` method
-will be called to ensure that each workout index is within the application's workout list range. 
+is called to ensure that each workout index is within the application's workout list range. 
 Once the check is done, the valid `Workout` object is fetched from the application's workout list based 
-on the workout index and then added into the `ArrayList` that was created in the previous step (Steps 7.11 to 7.12).
+on the workout index and then added into the `ArrayList` that was created in the previous step (Steps 7.5 to 7.6).
 The loop will continue until all workouts to be added in the new plan is added into that `ArrayList`.
 <br><br>
-**(Steps 7.19 to 7.20)** Before adding this new plan, the 
+**(Steps 7.11 to 7.12)** Before adding this new plan, the 
 `PlanList#checkPlanWithSameWorkoutSequence(workoutsToAddInAPlanList, className)` is called to ensure that
 the new plan to be created does not contain the same workout order as any existing plans. If it does contain
 the same workout order as an existing plan, an `InvalidPlanException` exception will be thrown.
 <br><br>
-**(Steps 7.21 to 7.26)** With the valid plan name and the `ArrayList` containing the workouts to be added into 
+**(Steps 7.13 to 7.18)** With the valid plan name and the `ArrayList` containing the workouts to be added into 
 the new plan, a new `Plan` object is created. This new `Plan` object is then added to the application's plan list.
 <br><br>
 **(Step 8)** The `PlanList#createAndAddPlan(userArgument)` method returns the new `Plan` object to `PlanCommand`.
@@ -535,6 +536,8 @@ Alright, the following plan has been created:
 object's data into `plans.txt`, which is stored on the user's local filesystem.
 <br><br>
 This completes the process of adding a new plan to WerkIt!.
+Click the user guide [here](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html#create-a-plan-plan-new)
+to view how you can run the `plan /new` feature in the application.
 
 ---
 
@@ -583,6 +586,8 @@ To view each plan in detail, enter
 and the `PlanCommand` object returns to the `WerkIt` object.
 <br><br>
 This completes the process of displaying all plans in WerkIt!.
+Click the user guide [here](https://ay2122s2-cs2113t-t09-2.github.io/tp/UserGuide.html#list-a-plan-plan-list)
+to view how you can run the `plan /list` feature in the application.
 
 ---
 ### Schedule

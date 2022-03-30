@@ -4,6 +4,8 @@
 
 autonumber 7.1
 
+title Sequence Diagram of `WorkoutList#deleteWorkout()`
+
 participant "workoutList\n:WorkoutList" AS wl
 
 activate wl
