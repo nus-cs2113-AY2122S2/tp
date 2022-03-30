@@ -78,4 +78,9 @@ public class AddRecordCommand extends Command {
 
     }
 
+    @Override
+    public String getType() {
+        return type;
+    }
+
 }

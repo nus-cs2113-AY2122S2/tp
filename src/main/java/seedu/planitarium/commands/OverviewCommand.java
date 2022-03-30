@@ -15,11 +15,18 @@ public class OverviewCommand extends Command {
 
     public OverviewCommand(String userInput, Family family) {
         super(userInput, family);
+        this.type = "OverviewCMD";
         logger.log(Level.INFO, LOG_CMD_INFO);
     }
 
+    @Override
     public void execute() {
         family.overview();
         logger.log(Level.INFO, LOG_EXECUTE_INFO);
+    }
+
+    @Override
+    public String getType() {
+        return type;
     }
 }

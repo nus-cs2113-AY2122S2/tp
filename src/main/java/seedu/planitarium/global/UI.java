@@ -42,8 +42,8 @@ public class UI {
     }
 
     public static void printHelpMsg() {
-        for (String commands: Help.CommandSummary) {
-            System.out.println(commands);
+        for (int i = 0;i < Help.CommandSummary.size(); i++) {
+            System.out.println(Help.CommandSummary.get(i));
         }
     }
 

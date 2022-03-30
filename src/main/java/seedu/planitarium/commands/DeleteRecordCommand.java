@@ -38,7 +38,7 @@ public class DeleteRecordCommand extends Command {
         group = Parser.getValidGroupIndex(Parser.parseGroupIndex(userInput));
         keyword = Parser.parseKeyword(userInput);
         uid = Parser.getValidUserIndex(Parser.parseUserIndex(userInput), family.getNumberOfMembers(group));
-        assert (uid < 1) : Constants.USER_INDEX_NOT_VALID;
+        assert (uid > 0) : Constants.USER_INDEX_NOT_VALID;
         logger.log(Level.INFO, String.format(LOG_DELETEREC_INFO, uid, group));
     }
 
@@ -64,5 +64,10 @@ public class DeleteRecordCommand extends Command {
             logger.log(Level.WARNING, Constants.LOG_ERROR_INFO);
             throw new PlanITariumException(DeleteRecordCommand.class.getSimpleName());
         }
+    }
+
+    @Override
+    public String getType() {
+        return type;
     }
 }

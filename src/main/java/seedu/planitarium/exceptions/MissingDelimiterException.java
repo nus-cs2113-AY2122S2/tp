@@ -12,6 +12,6 @@ public class MissingDelimiterException extends PlanITariumException {
      * @param delimiter the missing delimiter.
      */
     public MissingDelimiterException(String delimiter) {
-        super(String.format(ERROR_MSG, delimiter));
+        super(String.format(ERROR_MSG,delimiter));
     }
 }
