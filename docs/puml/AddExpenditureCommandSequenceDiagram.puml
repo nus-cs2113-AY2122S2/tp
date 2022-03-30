@@ -1,7 +1,7 @@
 @startuml
 !include Style.puml
 
-box AddCommand
+box addExpenditure()
 participant ":Parser" as Parser LOGIC_COLOR_T1
 participant "Command:AddCommand" as AddCommand LOGIC_COLOR_T1
 participant ":GeneralFunctions" as GeneralFunctions LOGIC_COLOR_T1

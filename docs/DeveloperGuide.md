@@ -178,14 +178,27 @@ Below is an example scenario showing how the AddCommand behaves at each step.
 7. The application then returns to the Parser component.
 
 ### Add Credit Card Command
-MindMyMoney allow users to track their different payment methods, A user can add and track user expenditure. A user can add in a new expenditure
-by specifying the payment method, the category, the description of the item, the cost of the item and the date of
-purchase.
+MindMyMoney allow users to track their different credit cards. A user can add a new credit card through the 
+`addCreditCard()` command by specifying the credit card name, cash back, card limit and balance.
 
+#### Current Implementation
+The sequence diagram below shows the interactions of different subcomponents of the system when adding a credit card
+to the list.
+![add_credit_card_command_sequence_diagram](images/Add_Credit_Card_Command_Sequence_Diagram.png)  
+
+The `addCreditCard()` command is facilitated by the `AddCommand`. By running the command `add` with its relevant flags,
+`Parser` will construct a new `AddCommand` which will be used to execute users input.
+
+1. During the execution, `addCreditCard()` will parse through user input to obtain the `CREDIT_CARD_NAME`, `CATEGORY`,
+   `CASH_BACK`, `CARD_LIMIT` and `CARD_BALANCE` fields.
+2. Once all the fields are obtained, `addCreditCard()` object instantiates a new `CreditCard` 
+   object with the aforementioned 5 fields and adds them into the `CreditCardList`.
+3. The `addCreditCard()` object prints a list to show the user what it has saved.
+4. The `addCreditCard()` returns to `AddCommand`.
 
 ### Add Expenditure Command
 A key functionality of MindMyMoney is the ability to add and track user expenditure. A user can add in a new expenditure
-by specifying the payment method, the category, the description of the item, the cost of the item and the date of 
+through the `addExpenditure()` command by specifying the payment method, the category, the description of the item, the cost of the item and the date of 
 purchase.
 
 #### Current Implementation
@@ -193,7 +206,7 @@ The sequence diagram below shows the interactions of different subcomponents of 
 to the list.  
 ![add_expenditure_command_sequence_diagram](images/Add_Expenditure_Command_Sequence_Diagram.png)  
   
-The add expenditure command is facilitated by the `AddCommand`. By running the command `add` with its relevant flags, 
+The `addExpenditure()` command is facilitated by the `AddCommand`. By running the command `add` with its relevant flags, 
 `Parser` will construct a new `AddCommand` which will be used to execute users input.
 
 1. During the execution, `addExpenditure()` will parse through user input to obtain the `PAYMENT_METHOD`, `CATEGORY`,
@@ -205,13 +218,13 @@ The add expenditure command is facilitated by the `AddCommand`. By running the c
 4. The `addExpenditure()` object prints a list to show the user what it has saved.
 5. The `addExpenditure()` returns to `AddCommand`.
 
-#### Design considerations
-Aspect: How to ask user for the 5 fields of input
-* Alternative 1 (current choice): User is asked to put in all 5 fields at once, separated using flags.
+### Add Command Design Considerations
+Aspect: How to ask user for the fields of input
+* Alternative 1 (current choice): User is asked to put in all fields at once, separated using flags.
     * Pros: Faster input, user can enter an expenditure using a single input.
     * Cons: User must be able to remember all the flags and its sequence.
 
-* Alternative 2: User is asked iteratively to put in all 5 fields, prompted by a message after each input.
+* Alternative 2: User is asked iteratively to put in all fields, prompted by a message after each input.
     * Pros: Beginner friendly, easily understandable, no need to remember flags.
     * Cons: Slower, implementation when user is familiar with the application.
 

@@ -167,7 +167,7 @@ public class AddCommand extends Command {
                     + "into the account");
             System.out.println(System.lineSeparator());
         } catch (NumberFormatException e) {
-            throw new MindMyMoneyException("Amount must be a whole number!");
+            throw new MindMyMoneyException("Income must be a whole number!");
         }
     }
 

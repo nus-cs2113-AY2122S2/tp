@@ -1,0 +1,53 @@
+@startuml
+!include Style.puml
+
+box addCreditCard()
+participant ":Parser" as Parser LOGIC_COLOR_T1
+participant "Command:AddCommand" as AddCommand LOGIC_COLOR_T1
+participant ":GeneralFunctions" as GeneralFunctions LOGIC_COLOR_T1
+'participant ":AddCommandInputTest" as AddCommandInputTest LOGIC_COLOR_T1
+participant ":CreditCard" as CreditCard LOGIC_COLOR_T1
+participant ":creditCardList" as CreditCardList LOGIC_COLOR_T1
+end box
+
+Parser -> AddCommand: AddCommand.executeCommand()
+activate AddCommand
+
+AddCommand -> AddCommand: addCreditCard()
+activate AddCommand
+
+
+
+AddCommand -> GeneralFunctions: parseInputWithCommandFlag()
+activate GeneralFunctions
+GeneralFunctions --> AddCommand: cardName, cashBack, cardLimit, cardBalance
+deactivate GeneralFunctions
+
+'AddCommand -> AddCommandInputTest: test(paymentMethod, category, description, amount)
+'activate AddCommandInputTest
+'AddCommandInputTest --> AddCommand
+'deactivate AddCommandInputTest
+
+'AddCommand -> GeneralFunctions: capitalise(paymentMethod, category)
+'activate GeneralFunctions
+'GeneralFunctions --> AddCommand: Capitalised paymentMethod and category
+'deactivate GeneralFunctions
+
+create CreditCard
+AddCommand -> CreditCard: new CreditCard(cardName, cashBack, cardLimit, cardBalance)
+activate CreditCard
+CreditCard --> AddCommand
+deactivate CreditCard
+
+AddCommand -> CreditCardList: creditCardList.add(new CreditCard)
+activate CreditCardList
+CreditCardList --> AddCommand
+deactivate CreditCardList
+
+AddCommand -> AddCommand: print added credit card
+
+AddCommand --> AddCommand:
+deactivate AddCommand
+AddCommand --> Parser:
+deactivate AddCommand
+@enduml
