@@ -30,6 +30,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new InvMgrException(Messages.INVALID_COMMAND);
         }
 
+        if (argMultimap.getValue(PREFIX_RELATIVE).isPresent() && !argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
+            throw new InvMgrException(Messages.INVALID_RELATIVE_WITHOUT_QUANTITY);
+        }
+
         String name = null;
         Optional<String> optionalName = argMultimap.getValue(PREFIX_NAME);
         if (optionalName.isPresent()) {
