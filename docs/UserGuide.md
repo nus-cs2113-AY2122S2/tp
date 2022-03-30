@@ -145,7 +145,7 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
 ![Session create command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[1].png)
 
 **Example 2** 
-- A [group](#creating-a-group-group-create) was previously created with group named *Friends* with Charlie and Mike. <br>
+- A [group has been created](#creating-a-group-group-create) with group named *Friends* with Charlie and Mike. <br>
    Adds a new session named Class Gathering consisting of a group named *Friends* and Alice, on 16-04-2022.<br>
 `session /create /n Glass Gathering /d 16-04-2022 /gid 1 /pl Alice` <br>
 ![Session create command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionCreateCommand[2].png)
@@ -170,7 +170,7 @@ Deletes an existing session so that you can remove sessions that you do not need
 <br>
 
 **Example** 
-- Remove an existing session with a unique identifier of 1.<br>
+- Removes an existing session with a unique identifier of 1.<br>
 `session /delete /sid 1` <br>
 ![Session delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionDeleteCommand.png)
 <br>
@@ -199,15 +199,16 @@ Edits an existing session so that you can change details of a session.<br>
 <br>
 
 Examples of usage:
-- A session with a unique identifier of 1 was previously created named Class Outing with Alice and Bob involved on 15-03-2022.
+- A [session has been created](#creating-a-session-session-create) with a unique identifier of 1,
+named Class Outing with Alice and Bob involved on 15-03-2022.
 
 **Example 1** 
-- Edit the session name to Class gathering and date to 16-03-2022. <br>
+- Edits the session name to Class gathering and date to 16-03-2022. <br>
   `session /edit /sid 1 /n Class gathering /d 16-03-2022` <br>
 ![Session Edit command Screenshot 1](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[1].png)
 
 **Example 2** 
-- Edit the session to include charlie. <br>
+- Edits the session to include charlie. <br>
   `session /edit /sid 1 /pl Alice Bob Charlie` <br>
 ![Session Edit command Screenshot 2](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionEditCommand[2].png)
 
@@ -244,7 +245,7 @@ However, deleted sessions will not be listed.
 <br>
 
 **Example**
-- To list all existing sessions <br>
+- Lists all existing sessions <br>
   `session /list`
 ![Session list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/SessionListCommand.png)
 <br>
@@ -259,6 +260,7 @@ However, deleted sessions will not be listed.
 
 ### Creating an activity: `activity /create`
 Creates an activity so that you can record the relevant details, and then assigns it to a session. <br>
+
 There are two ways that you can create an activity:
 1. Record the total cost to be split amongst everyone involved
 2. Record each person's individual cost
@@ -334,7 +336,7 @@ Deletes an existing activity from a particular session so that you can remove ac
 <br>
 
 **Example**:
-- Remove an existing activity with a unique identifier of 1 from a session with a unique identifier of 2. <br>
+- Removes an existing activity with a unique identifier of 1 from a session with a unique identifier of 2. <br>
 `activity /delete /sid 2 /aid 1` <br>
 ![Activity delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityDeleteCommand.png)
 <br>
@@ -367,7 +369,7 @@ to a cost list:
 >- All fields must be supplied in the command, not just the ones you wish to edit.
 
 **Example**
-- An [activity](#creating-an-activity-activity-create) was previously created with an `ACTIVITY_ID` of 1, part of 
+- An [activity has been created](#creating-an-activity-activity-create) with an `ACTIVITY_ID` of 1, part of 
   a session with a `SESSION_ID` of 1. It was named *Lunch* with Alice and Bob.<br>
   Edits the activity's name, payer, overall cost, GST percentage and service charge. List of participants remains
   unchanged.<br>
@@ -500,7 +502,7 @@ Format: `group /delete /gid [GROUP_ID]`
 <br>
 
 Example of usage:
-1. Remove an existing group with a unique identifier of 1.
+1. Removes an existing group with a unique identifier of 1.
     - `group /delete /gid 1` <br>
       ![Group delete command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupDeleteCommand.png)
 <br>
@@ -542,7 +544,7 @@ However, deleted groups will not be listed.
 <br>
 
 **Example**:
-- To list all existing groups.<br>
+- Lists all existing groups.<br>
 `group /list`
 ![Group list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/GroupListCommand.png)
 <br>
