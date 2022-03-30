@@ -22,14 +22,14 @@ class ListCommandTest {
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
 
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
         new AddCommand(inputString, user).executeCommand();
-        String listInString = new ListCommand("/expenses", user).expenditureListToString();
+        String listInString = new ListCommand("/e", user).expenditureListToString();
         assertEquals("1. $300.0 on Nike Shoes from Personal [Mar 2022]\n", listInString);
 
-        String inputString2 = "/e cash /c Food /d Cream Pie /a 69 /t 2022-03";
+        String inputString2 = "/pm cash /c Food /d Cream Pie /a 69 /t 2022-03";
         new AddCommand(inputString2, user).executeCommand();
-        listInString = new ListCommand("/expenses", user).expenditureListToString();
+        listInString = new ListCommand("/e", user).expenditureListToString();
         assertEquals("1. $300.0 on Nike Shoes from Personal [Mar 2022]\n"
                 + "2. $69.0 on Cream Pie from Food [Mar 2022]\n", listInString);
     }

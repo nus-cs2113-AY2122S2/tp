@@ -32,7 +32,7 @@ class DeleteCommandTest {
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
 
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
         new AddCommand(inputString, user).executeCommand();
 
         ArrayList<Expenditure> testList = new ArrayList<>();
@@ -79,7 +79,7 @@ class DeleteCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
 
         new AddCommand(inputString, user).executeCommand();
         String deleteInputString = "delete 0";

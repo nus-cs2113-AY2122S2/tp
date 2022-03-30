@@ -45,13 +45,13 @@ import static seedu.mindmymoney.helper.TimeFunctions.convertTime;
  */
 public class UpdateCommand extends Command {
     private final String updateInput;
-    public ExpenditureList itemList;
+    public ExpenditureList expenditureList;
     public CreditCardList creditCardList;
     public IncomeList incomeList;
 
     public UpdateCommand(String updateInput, User user) {
         this.updateInput = updateInput;
-        this.itemList = user.getExpenditureListArray();
+        this.expenditureList = user.getExpenditureListArray();
         this.creditCardList = user.getCreditCardListArray();
         this.incomeList = user.getIncomeListArray();
     }
@@ -84,10 +84,6 @@ public class UpdateCommand extends Command {
         return updateInput.contains(FLAG_OF_INCOME);
     }
 
-    private boolean hasCategoryFlag() {
-        return updateInput.contains(FLAG_OF_CATEGORY);
-    }
-
     /**
      * Updates an Expenditure entry in user's expenditure list.
      *
@@ -95,24 +91,16 @@ public class UpdateCommand extends Command {
      */
     public void updateExpenditure() throws MindMyMoneyException {
         try {
-            String newCategory = null;
             String[] parseUpdateInput = updateInput.split(" ", SPLIT_LIMIT);
             String indexAsString = parseUpdateInput[INDEX_OF_FIRST_ITEM];
             int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
-            String newPaymentMethod = null;
 
-            // Parse data from user's input
-            if (hasCategoryFlag()) {
-                newPaymentMethod = parseInputWithCommandFlag(updateInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_CATEGORY);
+            String newPaymentMethod = parseInputWithCommandFlag(updateInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_CATEGORY);
+            String inputCategory = parseInputWithCommandFlag(updateInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
 
-                String inputCategory = parseInputWithCommandFlag(updateInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
-                testExpenditureCategory(inputCategory);
-                newCategory = capitalise(inputCategory);
-            } else {
-                newPaymentMethod = parseInputWithCommandFlag(updateInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_DESCRIPTION);
-                // Take previous expenditure's category
-                newCategory = itemList.get(indexToUpdate).getCategory();
-            }
+            testExpenditureCategory(inputCategory);
+            String newCategory = capitalise(inputCategory);
+
             testPaymentMethod(newPaymentMethod, creditCardList);
             if (capitalise(newPaymentMethod).equals("Cash")) {
                 newPaymentMethod = capitalise(newPaymentMethod);
@@ -131,7 +119,7 @@ public class UpdateCommand extends Command {
             //Create new expenditure object to substitute in
             Expenditure newExpenditure = new Expenditure(newPaymentMethod, newCategory, newDescription,
                     newAmountAsFloat, newTime);
-            itemList.set(indexToUpdate, newExpenditure);
+            expenditureList.set(indexToUpdate, newExpenditure);
             System.out.println(PrintStrings.LINE
                     + "Successfully set expenditure " + indexAsString + " to:\n"
                     + newExpenditure.toString() + "\n" + PrintStrings.LINE);
