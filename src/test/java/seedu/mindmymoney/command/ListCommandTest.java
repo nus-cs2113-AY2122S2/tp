@@ -25,13 +25,13 @@ class ListCommandTest {
         String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 2022-03";
         new AddCommand(inputString, user).executeCommand();
         String listInString = new ListCommand("/e", user).expenditureListToString();
-        assertEquals("1. $300.0 on Nike Shoes from Personal [Mar 2022]\n", listInString);
+        assertEquals("1. $300.0 on Nike Shoes. Paid using Cash [Personal] [Mar 2022]\n", listInString);
 
         String inputString2 = "/pm cash /c Food /d Cream Pie /a 69 /t 2022-03";
         new AddCommand(inputString2, user).executeCommand();
         listInString = new ListCommand("/e", user).expenditureListToString();
-        assertEquals("1. $300.0 on Nike Shoes from Personal [Mar 2022]\n"
-                + "2. $69.0 on Cream Pie from Food [Mar 2022]\n", listInString);
+        assertEquals("1. $300.0 on Nike Shoes. Paid using Cash [Personal] [Mar 2022]\n"
+                + "2. $69.0 on Cream Pie. Paid using Cash [Food] [Mar 2022]\n", listInString);
     }
 
     /**
