@@ -8,7 +8,6 @@ import seedu.splitlah.data.Activity;
 import seedu.splitlah.data.Manager;
 import seedu.splitlah.data.Person;
 import seedu.splitlah.data.PersonList;
-import seedu.splitlah.data.Profile;
 import seedu.splitlah.data.Session;
 import seedu.splitlah.exceptions.InvalidDataException;
 import seedu.splitlah.ui.Message;
@@ -23,7 +22,7 @@ public class ActivityEditCommand extends Command {
 
     private static final String COMMAND_SUCCESS = "The activity was edited successfully.\n";
 
-    private int activityId;
+    private final int activityId;
     private final int sessionId;
     private final String activityName;
     private double totalCost;
@@ -137,7 +136,7 @@ public class ActivityEditCommand extends Command {
      * Else, the total cost is distributed evenly.
      */
     private void updateCostAndCostList() {
-        boolean isZeroCost = totalCost == NO_COST;
+        boolean isZeroCost = (totalCost == NO_COST);
         if (isZeroCost) {
             updateCostListWithExtraCharges();
             calculateTotalCost();
@@ -223,8 +222,7 @@ public class ActivityEditCommand extends Command {
             updateCostAndCostList();
             assert costList != null : Message.ASSERT_ACTIVITYEDIT_COST_LIST_ARRAY_NULL;
             assert totalCost > 0 : Message.ASSERT_ACTIVITYEDIT_TOTAL_COST_LESS_THAN_ONE;
-            Profile profile = manager.getProfile();
-            Session session = profile.getSession(sessionId);
+            Session session = manager.getProfile().getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
             addAllActivityCost(involvedPersonList, personPaid, activityId);
@@ -242,5 +240,3 @@ public class ActivityEditCommand extends Command {
         }
     }
 }
-
-
