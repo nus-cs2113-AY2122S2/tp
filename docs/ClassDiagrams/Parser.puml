@@ -35,13 +35,13 @@ hide Main attributes
 
 Parser <|-- XYZParser
 
-abstract class Command {
+class "{abstract}\n Command " {
 }
-hide Command methods
-hide Command attributes
+hide "{abstract}\n Command " methods
+hide "{abstract}\n Command " attributes
 
 XYZCommand <.u. ModHappyParser: returns <
-Command <|-- XYZCommand
+"{abstract}\n Command " <|-- XYZCommand
 
 hide XYZCommand methods
 hide XYZCommand attributes

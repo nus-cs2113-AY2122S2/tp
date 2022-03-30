@@ -1,5 +1,7 @@
 @startuml
 
+!define ABSTRACT &#123;abstract&#125;
+
 skinparam classAttributeIconSize 0
 skinparam shadowing false
 skinparam classFontSize 12

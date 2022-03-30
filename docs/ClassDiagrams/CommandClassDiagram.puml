@@ -4,19 +4,19 @@
 !include Style.puml
 
 package command {
-    class "{abstract}\n Command "
+    class "ABSTRACT\n Command "
     class DeleteCommand
     class TextUi
     class ExitCommand
 
-    "{abstract}\n Command " <|-- DeleteCommand
-    "{abstract}\n Command " <|-- ExitCommand
+    "ABSTRACT\n Command " <|-- DeleteCommand
+    "ABSTRACT\n Command " <|-- ExitCommand
     DeleteCommand ..> CommandResult :creates >
     ExitCommand ..> CommandResult :creates >
 
     DeleteCommand ..> TextUi :uses >
 
-    class "{abstract}\n Command " {
+    class "ABSTRACT\n Command " {
         +execute(): CommandResult { abstract }
     }
 

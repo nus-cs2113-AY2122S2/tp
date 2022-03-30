@@ -4,48 +4,53 @@
 skinparam arrowThickness 1.1
 'I wasn't able to find a consistent standard for bound elements, so I just picked one
 package storage {
-    interface Storage <T extends Object> {
+    class "<<interface>>\n Storage" <T extends Object> {
         --
         + writeData(object: T, path: String): void
         + loadData(path: String): T
         + createTargetFile(path: String): void
-
     }
 
-    abstract class JsonStorage <T extends Object> implements Storage {
+    "ABSTRACT\n JsonStorage" ..|> "<<interface>>\n Storage"
+    class "ABSTRACT\n JsonStorage" <T extends Object> {
        --
        + writeData(object: T, path: String): void
-       + {abstract} loadData(path: String): T
+       + loadData(path: String): T ABSTRACT
        + createTargetFile(path: String): void
     }
 
-    abstract class ListStorage <ModHappyT extends Object> extends JsonStorage {
+    "ABSTRACT\n ListStorage" --|> "ABSTRACT\n JsonStorage"
+    class "ABSTRACT\n ListStorage" <ModHappyT extends Object> {
        --
-       + {abstract} loadData(path: String): ArrayList<ModHappyT>
+       + loadData(path: String): ArrayList<ModHappyT> ABSTRACT
     }
 
-    ListStorage ..> JsonStorage : <<bind>>\nT -> ArrayList<ModHappyT>
+    "ABSTRACT\n ListStorage" ...> "ABSTRACT\n JsonStorage" : <<bind>>\nT -> ArrayList<ModHappyT>
 
-    class ConfigurationStorage extends JsonStorage {
+    ConfigurationStorage --|> "ABSTRACT\n JsonStorage"
+    class ConfigurationStorage {
        --
        + loadData(path: String): Configuration
     }
 
-    ConfigurationStorage ..> JsonStorage : <<bind>>\nT -> Configuration
+    ConfigurationStorage ..> "ABSTRACT\n JsonStorage" : <<bind>>\nT -> Configuration
 
-    class ModuleListStorage extends ListStorage {
+    ModuleListStorage --|> "ABSTRACT\n ListStorage"
+    class ModuleListStorage {
        --
        + loadData(path: String): ArrayList<Module>
     }
 
-    ModuleListStorage ..> ListStorage : <<bind>>\nModHappyT -> Module
+    ModuleListStorage ..> "ABSTRACT\n ListStorage" : <<bind>>\nModHappyT -> Module
 
-    class TaskListStorage extends ListStorage {
+
+    TaskListStorage --|> "ABSTRACT\n ListStorage"
+    class TaskListStorage {
        --
        + loadData(path: String):ArrayList<Task>
     }
 
-    TaskListStorage ..> ListStorage : <<bind>>\nModHappyT -> Task
+    TaskListStorage ...> "ABSTRACT\n ListStorage" : <<bind>>\nModHappyT -> Task
 }
 
 note top of storage
@@ -63,7 +68,7 @@ hide SaveCommand circle
 hide SaveCommand attributes
 hide SaveCommand methods
 
-Main--> Storage
-SaveCommand --> Storage
+Main--> "<<interface>>\n Storage"
+SaveCommand --> "<<interface>>\n Storage"
 
 @enduml
