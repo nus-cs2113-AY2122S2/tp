@@ -191,10 +191,12 @@ Edits an existing session so that you can change details of a session.<br>
 <br>
 
 > **💡 Notes**
-> - A session with a unique identifier of `[SESSION_ID]` has to exist before it can be edited.
-> - Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
-> - There are 3 editable fields, session name, session date and the people involved in the session.
-> - When editing the people involved, existing participants must be included in the command.
+>- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be edited.
+>- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
+>- There are 3 editable fields, session name, session date and the people involved in the session.
+>  - At least 1 field has to be edited for the command to run.
+>  - More than 1 field can be edited at a single run of the command.
+>- When editing the people involved, existing participants must be included in the command.
 >  - Example: If the session previously created had Alice and Bob with session ID of 1, 
 >    and you wish to edit it to include charlie a valid edit command would be `session /edit /sid /pl Alice Bob Charlie`.
 > 
