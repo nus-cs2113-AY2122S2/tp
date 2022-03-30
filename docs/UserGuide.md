@@ -281,7 +281,9 @@ There are two ways that you can create an activity:
 >    * Each individual name is **case-insensitive**.
 >* `[TOTAL_COST]` refers to the total cost of the activity.
 >* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
->  * Example: `/i Alice Bob /cl 10 20` means that Alice's portion cost $10 while Bob's portion cost $20.
+>    * Example: `/i Alice Bob /cl 10 20` means that Alice's portion cost $10 while Bob's portion cost $20.
+>* `[GST_PERCENTAGE]` refers to the additional percentage gst that may be charged during your activity.
+>* `[SERVICE_CHARGE]` refers to the additional percentage service charge that may be charged during your activity.
 
 <br>
 
@@ -294,8 +296,10 @@ There are two ways that you can create an activity:
    `[SESSION_ID]`.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also only be a single word without whitespaces.
 >   - Example: `Alice Tan` is not allowed.
->- The values that follow the delimiters `/co` and `/cl` can only have a maximum of 12 digits before
-   and 2 digits after the decimal point, if any.
+>- The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` can only have a maximum of 12 digits before
+  and 2 digits after the decimal point, if any.
+>- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` can only range from 0 to 100,
+  with a maximum of 3 digits before and 2 after the decimal point, if any.
 
 <br>
 
@@ -367,7 +371,9 @@ There are two ways that you can edit an activity:
 >    * Each individual name is **case-insensitive**.
 >* `[TOTAL_COST]` refers to the total cost of the activity.
 >* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
->  * Example: `/i Alice Bob /cl 10 20` means that Alice's portion cost $10 while Bob's portion cost $20.
+>    * Example: `/i Alice Bob /cl 10 20` means that Alice's portion cost $10 while Bob's portion cost $20.
+>* `[GST_PERCENTAGE]` refers to the additional percentage gst that may be charged during your activity.
+>* `[SERVICE_CHARGE]` refers to the additional percentage service charge that may be charged during your activity.
 
 <br>
 
@@ -381,8 +387,10 @@ There are two ways that you can edit an activity:
    `[SESSION_ID]`.
 >- The names in `[PERSON_PAID]` and `[NAME1 NAME2 ...]` must also only be a single word without whitespaces.
    >   - Example: `Alice Tan` is not allowed.
->- The values that follow the delimiters `/co` and `/cl` can only have a maximum of 12 digits before
+>- The values in `[TOTAL_COST]` and `[COST1 COST2 ...]` can only have a maximum of 12 digits before
    and 2 digits after the decimal point, if any.
+>- The values in `[GST_PERCENTAGE]` and `[SERVICE_CHARGE]` can only range from 0 to 100,
+   with a maximum of 3 digits before and 2 after the decimal point, if any.
 >
 > **⚠️Warning:**
 >- All fields must be supplied in the command, not just the ones you wish to edit.
@@ -422,22 +430,25 @@ Displays details about an activity so that you can review the activity's details
 <br>
 
 ### Listing all activities in a session: `activity /list`
+Displays all existing activities so that you can have an overview of previously created activities.
+However, deleted activities will not be listed.
 
-> Displays all existing activities in a particular session.<br>
+>Format: `activity /list /sid [SESSION_ID]`
+> 
+>* `[SESSION_ID]` refers to the unique identifier of the session.
+>    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
 
-Format: `activity /list /sid [SESSION_ID]`
-* `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+<br>
 
 > **💡 Note:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before its activities can be listed.
 
 <br>
 
-Example of usage:
-1. Lists all activities in a session with a unique identifier of 2.
-    - `activity /list /sid 2` <br>
-      ![Activity list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityListCommand.png)
+**Example**:
+- Lists all activities in a session with a unique identifier of 2.<br>
+`activity /list /sid 2` <br>
+![Activity list command Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityListCommand.png)
 <br>     
 <br>
 
