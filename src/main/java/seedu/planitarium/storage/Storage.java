@@ -223,6 +223,13 @@ public class Storage {
         incomeNumber = 1;
     }
 
+    /**
+     * Takes in a string of details from the input and parses
+     * the string to get the category index of the expenditure being loaded.
+     *
+     * @param info A string consisting of the details to be added
+     * @return The category index of an expenditure input
+     */
     private static int parseInfoGetCategory(String info) {
         String loggerString = "Method parseInfoGetCategory() called";
         logger.log(Level.INFO, loggerString);
