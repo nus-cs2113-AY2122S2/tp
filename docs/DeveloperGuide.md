@@ -223,11 +223,11 @@ The general workflow of the `session /create` command is as follows:
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionCreateCommand` object.
 3. `SessionCreateCommand#run` method is then invoked to run the `session /create` command.
 4. Once the command starts to run, `SessionCreateCommand` class checks if there is an existing session with the same session name.
-5. If an existing session with the specified session name is found, a message indicating that another session exists with the same name is printed using `TextUi#printlnMessage`.
+5. If an existing session with the specified session name is found, a message indicating that another session with the same name exists is printed using `TextUi#printlnMessage`.
 6. The `SessionCreateCommand` class creates a new `Session` object using the session name, session date, and person list.
 7. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile#addSession` is called to store the new `Session` object in the `Profile` object.
 8. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
-9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created.
+9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created with TextUi#printlnMessage`.
 
 ### Remove a session
 **API reference:** [`SessionDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionDeleteCommand.java)
@@ -276,7 +276,7 @@ The general workflow of the `session /list` command is as follows:
     1. If there are no sessions stored in the `Profile` object, a `String` object representing an empty list of sessions is
        returned.
     2. Else, the `Profile` objects instantiates a new `TableFormatter` object and loops through the list of sessions,
-       calling `TableFormatter#addRow` for each group to create a table with the summary of each session. A `String` object
+       calling `TableFormatter#addRow` for each session to create a table with the summary of each session. A `String` object
        representing the table is then returned.
 6. The `String` object retrieved is printed out with `TextUI#printlnMessage`.
 
