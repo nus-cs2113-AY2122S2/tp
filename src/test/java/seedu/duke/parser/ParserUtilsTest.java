@@ -25,7 +25,7 @@ public class ParserUtilsTest {
         String testInput = "1";
         int expectedOutput = 1;
         int actualOutput = ParserUtils.parseIndex(testInput);
-        assertEquals(actualOutput, expectedOutput);
+        assertEquals(expectedOutput, actualOutput);
     }
 
     // Implementation of parseQuantity() is mostly similar to parseIndex. invalidStringQuantity is skipped.
@@ -41,7 +41,7 @@ public class ParserUtilsTest {
         String testInput = "1";
         int expectedOutput = 1;
         int actualOutput = ParserUtils.parseQuantity(testInput);
-        assertEquals(actualOutput, expectedOutput);
+        assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -55,6 +55,6 @@ public class ParserUtilsTest {
         String testInput = "-";
         int expectedOutput = -1;
         int actualOutput = ParserUtils.parseRelative(testInput);
-        assertEquals(actualOutput, expectedOutput);
+        assertEquals(expectedOutput, actualOutput);
     }
 }
