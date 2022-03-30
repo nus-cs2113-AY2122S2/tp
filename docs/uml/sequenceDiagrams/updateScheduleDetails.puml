@@ -1,0 +1,72 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../Style.puml
+
+autonumber 7.1
+
+participant "dayList\n:DayList" AS DayList
+participant ":String" AS string
+
+
+activate DayList
+
+group sd Add/update a plan for a Day.
+
+
+DayList -> string : userArgument.split(" ")
+activate string
+return userArgumentArray:String[]
+
+
+opt userArgumentArray. length > 2
+create ":ArrayOutOfBoundException" AS iee
+DayList -> iee : throw new ArrayOutOfBoundException
+activate iee
+return
+deactivate iee
+end
+create "Integer" AS int
+DayList -> int: parseInt(userArgument[0])
+return dayNumber:Int
+DayList -> int: parseInt(userArgument[1])
+return planNumber:Int
+
+opt !isDayValid
+create ":InvalidScheduleException" AS ise
+DayList -> ise : throw new InvalidScheduleException
+activate ise
+return
+deactivate ise
+end
+
+opt !isPlanValid
+DayList -> ise : throw new InvalidScheduleException
+activate ise
+return
+deactivate ise
+end
+
+participant "planList\n:PlanList" AS PlanList
+DayList -> PlanList : getPlanDisplayList().get(planNumber - 1)
+activate PlanList
+return planToAddKey:String
+
+DayList -> PlanList : getPlanFromKey(planToAddKey)
+activate PlanList
+return planToAdd:Plan
+
+create "Day" AS newDay
+alt scheduleList[dayNumber - 1] == null
+DayList -> newDay : new Day(dayNumber, planToAdd)
+activate newDay
+return newDay:Day
+else
+DayList -> newDay :setNewPlanForThisDay(newDay, planToAdd)
+activate newDay
+return
+deactivate newDay
+end
+end
+
+
+@enduml

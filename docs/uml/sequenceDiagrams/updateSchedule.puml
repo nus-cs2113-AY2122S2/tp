@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../Style.puml
+
+autonumber
+
+title Sequence Diagram of `schedule /update` Command
+
+actor   User
+participant "werkIt:WerkIt" AS WerkIt
+participant "ui:UI" AS UI1
+participant "parser:Parser" AS Parser
+participant "newCommand\n:ScheduleCommand" AS newCommand
+participant "dayList\n:DayList" AS DayList
+participant "ui:UI" AS UI2
+participant "fileManager:FileManager" as FileManager
+
+activate WerkIt
+WerkIt -> UI1 : getUserInput()
+activate UI1
+User -> UI1 : `schedule /update` command
+WerkIt <-- UI1 : userInputTrimmed:String
+deactivate UI1
+
+WerkIt -> Parser : parseUserInput(userInput)
+activate Parser
+WerkIt <-- Parser : :Command
+deactivate Parser
+
+WerkIt -> newCommand : execute()
+activate newCommand
+newCommand -> DayList : updateDay(userArgument)
+activate DayList
+ref over DayList
+Add/update a
+plan for a Day.
+end
+newCommand <-- DayList : "newDay:Day"
+deactivate DayList
+
+newCommand -> UI2 : printNewScheduleCreatedMessage(newDay)
+activate UI2
+User <-- UI2 : Plan successfully added/updated message
+deactivate UI2
+
+newCommand -> FileManager : rewriteAllDaysScheduleToFile(newDay)
+activate FileManager
+ref over FileManager
+Write the plans scheduled
+for the week into 'schedule.txt'
+file on user's system.
+end
+newCommand <-- FileManager
+deactivate FileManager
+
+WerkIt <-- newCommand
+deactivate newCommand
+
+destroy newCommand
+@enduml
