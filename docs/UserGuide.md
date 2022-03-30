@@ -30,27 +30,79 @@ Description: Waterproof up to 3m, fully charged batteries can last for 5 hours, 
 ### Borrow an item: `borrow`
 Borrow the item that you want for the duration between the start datte and end date.
 
-Format: `borrow INDEX s/START_DATE e/END_DATE`  
+Format: `borrow INDEX s/START_DATE e/END_DATE p/BORROWER_NAME`  
 
 
 Examples of usage:
 ```
-> borrow 23 s/21-03-2021 e/23-03-2021 
+> borrow 23 s/21-03-2021 e/23-03-2021 p/John Smith
+You have successfully borrowed the following item:
 Name of Item: JBLFlip5
-Description: Waterproof up to 3m, fully charged batteries can last for 5 hours, bluetooth enabled.
+Name of Borrower: John Smith
+Borrow Duration: 21-03-2021 to 23-03-2021
 ```
 
-### View present borrowings of a person: `view`
-View the borrowings of a particular person
+```
+> borrow 12 s/21-03-2021 e/23-03-2021 p/John Smith
+Sorry. The item is not avaiable for borrowing during this duration.
+```
 
-Format: `borrow INDEX s/START_DATE e/END_DATE`
+### List all items: `list`
+List all items in the inventory.
+
+Format: `list`
 
 Examples of usage:
 ```
-> borrow 23 s/21-03-2021 e/23-03-2021 
+> list
+Name | Quantity	|
+VGA Cable | 1 
+HDMI Cable | 2
+```
+
+
+### List current borrowings: `list -cb`
+List all current items that are borrowed. Ordered by earliest borrowing start date.
+
+Format:   
+`list -cb`  
+`list -cb p/Sally`: List all items that are currently being borrowed by Sally
+
+Examples of usage:
+```
+> list -cb
+Name of Item: Trolley
+Name of Borrower: Sally
+Borrow Duration: 19-03-2021 to 30-03-2021
+
 Name of Item: JBLFlip5
-Duration: From 21-03-2021 to 23-03-2021
-Description: Waterproof up to 3m, fully charged batteries can last for 5 hours, bluetooth enabled.
+Name of Borrower: John Smith
+Borrow Duration: 21-03-2021 to 23-03-2021
+
+Name of Item: JBLFlip5
+Name of Borrower: Sally
+Borrow Duration: 29-03-2021 to 01-04-2021
+```
+
+```
+> list -cb p/Sally
+Name of Item: Trolley
+Name of Borrower: Sally
+Borrow Duration: 19-03-2021 to 30-03-2021
+
+Name of Item: JBLFlip5
+Name of Borrower: Sally
+Borrow Duration: 29-03-2021 to 01-04-2021
+```
+
+```
+> list -cb p/David
+There are no items currently borrowed by David.
+```
+
+```
+> list -cb
+There are no items in the inventory being borrowed.
 ```
 
 
