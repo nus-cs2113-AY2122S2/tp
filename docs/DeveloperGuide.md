@@ -323,10 +323,14 @@ The general workflow of the `group /list` command is as follows:
 3. `GroupListCommand#run()` method is then invoked to run the `group /list` command.
 4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile()` is called
 before the list of groups can be retrieved.
-5. The `GroupListCommand` object will then run `Profile#getGroupListSummaryString()` method to retrieve the string
+5. The `GroupListCommand` object will then run `Profile#getGroupListSummaryString()` method to retrieve a string
 representing the summaries of the groups stored.
-6. The string retrieved will then be printed and the control is given back to `SplitLah`, which waits for the next user
-input.
+   1. If there are no groups stored in the `Profile` object, a string representing an empty list of groups will be
+   returned.
+   2. Else, the `Profile` objects instantiates a new `TableFormatter` object and loops through the list of groups,
+   calling `TableFormatter#addRow()` for each group to create a table with the summary of each group. A string
+   representing the table will then be returned.
+6. The string retrieved will be printed and the control is given back to `SplitLah`.
 
 ## Product scope
 ### Target user profile
