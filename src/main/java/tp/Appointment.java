@@ -1,7 +1,7 @@
 package tp;
 
-import tp.person.Doctor;
-import tp.person.Patient;
+import java.person.Doctor;
+import java.person.Patient;
 
 import java.time.LocalDateTime;
 
