@@ -1,1 +1,0 @@
-cs2100; add function1,false, add function2,true, add function3,false;No deadline specified
