@@ -3,6 +3,8 @@ package seedu.sherpass.task;
 import seedu.sherpass.enums.Frequency;
 import seedu.sherpass.util.Ui;
 
+import static seedu.sherpass.util.parser.TaskParser.isValidFreq;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,10 +13,10 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-
 import static seedu.sherpass.constant.DateAndTimeFormat.outputDateOnlyFormat;
 import static seedu.sherpass.constant.Message.EMPTY_STRING;
 import static seedu.sherpass.constant.Message.ERROR_SCHEDULE_CLASH_MESSAGE;
+
 
 
 public class TaskList {
@@ -251,7 +253,7 @@ public class TaskList {
                          LocalDateTime currentDoOnEndDateTime,
                          LocalDateTime byDate, boolean isRepeat) {
         boolean hasEdit;
-        if (isRepeat) {
+        if (isRepeat && isValidFreq(taskToEdit.getRepeatFrequency())) {
             assert (byDate == null);
             editRepeatedTasks(taskToEdit, taskDescription, currentDoOnStartDateTime, currentDoOnEndDateTime, ui);
             hasEdit = true;
@@ -354,10 +356,13 @@ public class TaskList {
         String repeatKeyWord = EMPTY_STRING;
         if (!isRepeat) {
             tasks.remove(deleteIndex);
-        } else {
+        } else if (isValidFreq(taskToBeRemoved.getRepeatFrequency())) {
             repeatKeyWord = "repeated";
             int identifier = taskToBeRemoved.getIdentifier();
             tasks.removeIf(task -> task.getIdentifier() == identifier);
+        } else {
+            ui.showToUser("The task is not a recurring task!");
+            return;
         }
         updateIndex();
         ui.showToUser("Okay. I've removed this " + repeatKeyWord + " task:\n  "

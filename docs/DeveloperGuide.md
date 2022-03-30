@@ -48,7 +48,7 @@ The study session consists of 4 main components:
 - TimerParser class
 - StudyCommand class
 - TimerLogic class
-- Timer class
+- Abstract Timer class, Countdown class and Stopwatch class 
 
 The `TimerParser` component
 - Parses user inputs in the main session and the study session
@@ -65,44 +65,57 @@ The `TimerLogic` component
 - Calls made to Timer component methods are made through this method
 
 The `Timer` component
-- Inherits from `Thread` class
-- Keeps track of time left when user calls for a timer
-- Can be paused, resumed and stopped
-- Prints to standard output the time remaining in regular intervals
-- Thread is automatically interrupted when time runs out
+
+![image](https://user-images.githubusercontent.com/69501969/160758578-39b9b3f3-d1ca-429d-8319-9f28e9c199c3.png)
+
+- Consists of abstract `Timer` class, `Countdown` class and `Stopwatch` class as depicted in the class diagram above
+- `Timer` inherits from Java's `Thread` class
+- `Countdown` and `Stopwatch` inherit from `Timer`
+- `Countdown` and `Stopwatch` keep track of time remaining and elapsed respectively
+- `Countdown` and `Stopwatch` can be paused, resumed and stopped
+- `Countdown` and `Stopwatch` prints to standard output the time remaining and elapsed respectively at regular intervals
 
 #### Timer implementation
 
-Sherpass’ implementation of the timer function in the study session is through the `Timer` class, which inherits 
-from Java’s `Thread` class. When the timer is started by the user, the `Timer` class starts a thread which keeps 
-track of time by sleeping for 1 second, then updating the time left, until the time left in the timer reaches 
-zero, which then interrupts the thread. Starting the timer as a thread allows us to accept user commands like 
-pause and stop for the timer through `StudyCommand` and `TimerLogic`, while `Timer` executes in the background and 
-prints the time remaining at regular intervals.
+Sherpass’ implementation of the timer function in the study session is mainly through `Timer`, `Countdown` and 
+`Stopwatch` class. Depending on the type of timer selected by the user, either `Countdown` or `Stopwatch` will be
+instantiated. 
 
-Given below is an example usage scenario when the user enters the study timer, starts and stops the timer.
+When a countdown timer is started by the user, the `Countdown` class starts a thread which keeps track of time through
+a method called update(), where the thread sleeps for 1 second, then updates the time left, until the time left in the 
+timer reaches zero, which then interrupts the thread. Starting the timer as a thread allows us to accept user commands 
+like pause and stop for the timer through `StudyCommand` and `TimerLogic`, while the thread executes in the background 
+and prints the time remaining at regular intervals. A similar process is followed in `Stopwatch`, except that the class
+keeps track of time elapsed rather than time remaining.
 
-Step 1. The user executes the `study` command and enters the study session through the `Parser` component, which 
+#### Study session usage scenario
+
+Given below is an example usage scenario when the user enters the study session, starts a countdown timer, then stops 
+the timer.
+
+Step 1. The user executes the `study` command and enters the study session through the main `Parser` component, which 
 executes the `StudyCommand`. `StudyCommand` then initialises an instance of `TimerLogic`, which handles the execution
 and logic of user commands during the study session, while the `StudyCommand` accepts the user’s input when the 
-user is in the study session.
+user is in the study session. `TimerParser` parses user inputs (commands) related to `Timer`.
 
 Sequence diagram for `Timer` when user starts and stops a timer:
-![TimerUML](https://user-images.githubusercontent.com/69501969/159708222-a01e9885-1f6e-4e16-8e82-97e9529ab412.png)
+
+![TimerClassSD](https://user-images.githubusercontent.com/69501969/160768104-fa7e06e3-1be8-4387-b75d-ae4e79bca5b7.png)
 
 The diagram above depicts the process when user calls start and stop (in step 2 and 3 below). All the methods
 called by Timer are in parallel with other commands, since `Timer` is in a separate thread. For simplicity’s
 sake, parallel frames for the remainder of methods called by `Timer` are omitted.
 
-Step 2. The user executes `start 1` command to start a 45 minute timer. The input goes through `StudyCommand`, 
-where the Parser is called to parse the command. After parsing, `Parser` calls the method corresponding to 
+Step 2. The user executes `start 1` command to start a 30 minute timer. The input goes through `StudyCommand`, 
+where the `TimerParser` is called to parse the command. After parsing, `TimerParser` calls the method corresponding to 
 the user’s command (`start`) in `TimerLogic`. `TimerLogic` then handles the logic and initialises an instance of
-`Timer` (spawn a thread). `Timer` then automatically updates itself while waiting for the user to issue commands.
-
-Step 3. The user executes the `stop` command to stop the timer. The same process is followed by using `Parser` to
-parse the command in the study mode, which calls on the respective `callStopTimer` method in `TimerLogic`. Within the
-`callStopTimer` method is a call to a method in `Timer` to stop the timer. Control goes back to the user for further 
+`Countdown` (spawn a thread). `Countdown` then automatically updates itself while waiting for the user to issue 
 commands.
+
+Step 3. The user executes the `stop` command to stop the timer. The same process is followed by using `TimerParser` to
+parse the command in the study mode, which calls on the respective `callStopTimer` method in `TimerLogic`. Within the
+`callStopTimer` method is a call to a method in `Countdown` to stop the timer. Control goes back to the user for 
+further commands.
 
 #### Design considerations for Timer class
 - Current implementation: Create `Timer` from scratch, using the sleep function of threads to keep 
