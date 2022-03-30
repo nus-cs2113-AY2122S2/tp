@@ -127,7 +127,7 @@ The `Person` component,
 * Depends on the `Money` component to help keep track of each `Person`'s income and expenditure as each `Person` 
   contains an `IncomeList` and `ExpenditureList`.
 
-### MoneyList Component
+### Money Component
 
 <!-- {For Jiarong} -->
 
