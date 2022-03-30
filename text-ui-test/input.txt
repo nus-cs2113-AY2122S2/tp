@@ -22,35 +22,6 @@ Delete Item
 Update Item Name Swimming Pool /
 Update Item Name / Premium Swimming Pool
 Update Item Name Spoon / Premium Spoon
-add housekeeper jane / 33
-add housekeeper susan / 43
-add housekeeper mich /88
-add housekeeper mich/60
-add housekeeper massy/59
-view recorded housekeeper
-availability jane /1,2,7
-availability zac / 1
-availability mich / 1,2,3,4,5,6,7,
-availability massy/1,5
-view recorded housekeeper
-delete housekeeper susan
-delete housekeeper happy
-view recorded housekeeper
-get available on 1
-get available on 2
-get available on 3
-get available on 4
-get available on 5
-get available on 6
-get available on 7
-view recorded housekeeper
-is a new year
-view recorded housekeeper
-is a new week
-view recorded housekeeper
-is a new year
-view recorded housekeeper
-View Recorded Housekeeper
 Search Item
 Search Item o
 View Items With Zero Pax
