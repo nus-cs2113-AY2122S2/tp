@@ -39,7 +39,7 @@ public class SearchCommand extends Command {
         List<Item> results = new ArrayList<>();
             for (int i = 0; i < itemList.getSize(); i++) {
             Item searchItem = itemList.getItem(i);
-            if (this.name.isPresent() && !caseInsensitiveComparison(searchItem.getDescription(), this.name.get())) {
+            if (this.name.isPresent() && !caseInsensitiveComparison(searchItem.getName(), this.name.get())) {
                 continue;
             }
             if (this.description.isPresent() && !caseInsensitiveComparison(searchItem.getDescription(),
