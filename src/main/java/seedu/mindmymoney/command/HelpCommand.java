@@ -5,6 +5,7 @@ import seedu.mindmymoney.MindMyMoneyException;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
+import static seedu.mindmymoney.constants.Flags.EMPTY_PARAMETER;
 
 /**
  * Represents the Help command. This class also serves as a dummy class to return when an invalid command is
@@ -69,16 +70,17 @@ public class HelpCommand extends Command {
                     + "/d [DESCRIPTION] /a [AMOUNT] /t [TIME]\n"
                     + "3. Calculating the total expenditure in a month: calculate /epm [MONTH]\n"
                     + "4. Updating an Expenditure entry: update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]\n"
-                    + "5. Updating an Expenditure entry with category: update [INDEX] [NEW_DESCRIPTION] -c "
-                    + "[NEW_CATEGORY] [NEW_AMOUNT]\n"
+                    + "5. Updating an Expenditure entry with category: update [INDEX] /c [CATEGORY] "
+                    + "/d [DESCRIPTION] /a [NEW_AMOUNT] /t [TIME]\n"
                     + "6. Removing an Expenditure entry: delete [INDEX]\n"
                     + "7. Exiting the program: bye\n"
-                    + "---------------------------------------------------------------------------------------\n";
+                    + "----------------------------------------------------------------------------------------------"
+                    + "-----\n";
 
             System.out.println(helpPage);
         } else {
             System.out.println("Invalid command! \n"
-                    + "Type \"help /expenses\" to view the list of supported expenditure commands\n"
+                    + "Type \"help /e\" to view the list of supported expenditure commands\n"
                     + "Type \"help /cc\" to view the list of supported Credit Card commands"
                     + System.lineSeparator());
         }
@@ -98,7 +100,8 @@ public class HelpCommand extends Command {
                 + "/cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]\n"
                 + "4. Removing a credit card: delete /cc [INDEX]\n"
                 + "5. Exiting the program: bye\n"
-                + "---------------------------------------------------------------------------------------\n";
+                + "-----------------------------------------------------------------------------------------------"
+                + "----\n";
 
         System.out.println(helpPage);
     }
@@ -124,7 +127,11 @@ public class HelpCommand extends Command {
      * @throws MindMyMoneyException when an invalid command is received.
      */
     public void executeCommand() throws MindMyMoneyException {
-        if (hasExpensesFlag()) {
+        if (helpInput.equals(EMPTY_PARAMETER)) {
+            printExpenditureHelpPage();
+            printCreditCardHelpPage();
+            printIncomeHelpPage();
+        } else if (hasExpensesFlag()) {
             printExpenditureHelpPage();
         } else if (hasCreditCardListFlag()) {
             printCreditCardHelpPage();
@@ -132,7 +139,7 @@ public class HelpCommand extends Command {
             printIncomeHelpPage();
         } else {
             throw new MindMyMoneyException("Please ensure that you have entered a valid list command.\n"
-                    + "Type 'list /expenses' to view your current list of expenses\n"
+                    + "Type 'list /e' to view your current list of expenses\n"
                     + "Type 'list /cc' to view your current list of stored credit cards");
         }
     }

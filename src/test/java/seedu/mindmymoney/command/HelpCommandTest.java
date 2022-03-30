@@ -27,20 +27,21 @@ public class HelpCommandTest {
      */
     @Test
     void helpCommand_fromUser_expectHelpPage() throws MindMyMoneyException {
-        String helpPage = "---------------------------------------Expenditure Help Page---------------------------"
-                + "------------\n"
+        String helpPage = "---------------------------------------Expenditure Help Page------------------------"
+                + "---------------\n"
                 + "1. Listing all Expenditures: list /expenses\n"
                 + "2. Adding an Expenditure entry: add /e [EXPENDITURE] /c [CATEGORY] "
                 + "/d [DESCRIPTION] /a [AMOUNT] /t [TIME]\n"
                 + "3. Calculating the total expenditure in a month: calculate /epm [MONTH]\n"
                 + "4. Updating an Expenditure entry: update [INDEX] [NEW_DESCRIPTION] [NEW_AMOUNT]\n"
-                + "5. Updating an Expenditure entry with category: update [INDEX] [NEW_DESCRIPTION] -c "
-                + "[NEW_CATEGORY] [NEW_AMOUNT]\n"
+                + "5. Updating an Expenditure entry with category: update [INDEX] /c [CATEGORY] "
+                + "/d [DESCRIPTION] /a [NEW_AMOUNT] /t [TIME]\n"
                 + "6. Removing an Expenditure entry: delete [INDEX]\n"
                 + "7. Exiting the program: bye\n"
-                + "---------------------------------------------------------------------------------------\n";
+                + "----------------------------------------------------------------------------------------------"
+                + "-----\n";
 
-        new HelpCommand(true, "/expenses").executeCommand();
+        new HelpCommand(true, "/e").executeCommand();
         assertEquals(helpPage.trim(), capturedOut.toString().trim());
     }
 
@@ -50,11 +51,11 @@ public class HelpCommandTest {
     @Test
     void helpCommand_notFromUser_expectErrorMessage() throws MindMyMoneyException {
         String errorMessage = "Invalid command! \n"
-                + "Type \"help /expenses\" to view the list of supported expenditure commands\n"
+                + "Type \"help /e\" to view the list of supported expenditure commands\n"
                 + "Type \"help /cc\" to view the list of supported Credit Card commands"
                 + System.lineSeparator();
 
-        new HelpCommand(false, "/expenses").executeCommand();
+        new HelpCommand(false, "/e").executeCommand();
         assertEquals(errorMessage.trim(), capturedOut.toString().trim());
     }
 
