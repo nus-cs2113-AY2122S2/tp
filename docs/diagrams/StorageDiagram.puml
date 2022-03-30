@@ -11,7 +11,6 @@ Package " "<<Rectangle>>{
     Class Family MODEL_COLOR_T2
     Class PersonList MODEL_COLOR
     Class Person MODEL_COLOR
-    Class Money MODEL_COLOR_T3
     Class IncomeList MODEL_COLOR_T3
     Class ExpenditureList MODEL_COLOR_T3
 
@@ -19,11 +18,10 @@ Package " "<<Rectangle>>{
 
 Class "<$documents>" as File UI_COLOR_T1
 Storage -right[STORAGE_COLOR].> File
-Storage "1" -down[STORAGE_COLOR].> "1" Family
+Storage "1" -down[STORAGE_COLOR]-> "1" Family
 Family "1" -down[MODEL_COLOR]-> "3" PersonList
 PersonList "1" -down[MODEL_COLOR]-> "*" Person
-Person -down[MODEL_COLOR]->Money
-Money -down[MODEL_COLOR]->IncomeList
-Money -down[MODEL_COLOR]->ExpenditureList
+Person "1" -down[MODEL_COLOR]-> "1" IncomeList
+Person "1" -down[MODEL_COLOR]-> "1" ExpenditureList
 
 @enduml
