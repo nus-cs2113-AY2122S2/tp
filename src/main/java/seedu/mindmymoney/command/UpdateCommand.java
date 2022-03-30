@@ -93,13 +93,13 @@ public class UpdateCommand extends Command {
         try {
             String[] parseUpdateInput = updateInput.split(" ", SPLIT_LIMIT);
             String indexAsString = parseUpdateInput[INDEX_OF_FIRST_ITEM];
-            int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
+            final int indexToUpdate = Integer.parseInt(indexAsString) + LIST_INDEX_CORRECTION;
 
             String newPaymentMethod = parseInputWithCommandFlag(updateInput, FLAG_OF_PAYMENT_METHOD, FLAG_OF_CATEGORY);
             String inputCategory = parseInputWithCommandFlag(updateInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
 
             testExpenditureCategory(inputCategory);
-            String newCategory = capitalise(inputCategory);
+            final String newCategory = capitalise(inputCategory);
 
             testPaymentMethod(newPaymentMethod, creditCardList);
             if (capitalise(newPaymentMethod).equals("Cash")) {
