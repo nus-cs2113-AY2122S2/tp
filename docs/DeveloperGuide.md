@@ -65,7 +65,7 @@ The rest of the App consists of these components.
     * [**`Parser`**](#parser): Breaks down user input into parameters accepted by the app and creates a Command Object.
     * [**`Validator`**](): Checks if the input provided by the User is Valid.
     * [**`Storage`**](#storage): Reads data from data files and writes data to data files, also stores in app memory.
-  
+
 The Sequence Diagram below showcases the general Logic and Flow of the program from Launch till Exit.
 
 ![Sequence Diagram](diagrams/SequenceDiagram.png)
@@ -81,7 +81,7 @@ How the UI class works:
 
 ### Manager component
 
-![ManagerUML](diagrams/ManagerClassUML.png)
+![ManagerUML](diagrams/ManagerClass.png)
 <br>
 How the Manager class works:
 * When `Duke` class instantiates a `Manager` object and calls runLoop method, the program will execute a while loop.
@@ -117,7 +117,7 @@ format. Please refer to the below sequence diagram for a clearer understanding.
 
 ![ParserClassUML](diagrams/ParserClassUML.png)
 
-The parser parses the description of the command. It first checks the number of parameters entered is correct and 
+The parser parses the description of the command. It first checks the number of parameters entered is correct and
 calls the validator class to validate the parameters, and then returns a command if the validation is successful.
 
 ![ParserUML](diagrams/ParserUML.png)
@@ -155,7 +155,7 @@ Appointment by selected criteria.
 ![MedicineUML](diagrams/MedicineUML.png)
 
 The Medicine class holds several attributes that are exposed via getter methods. To instantiate the class, all the
-attributes must be given to the constructor method. There is a method to edit the attribute data that can be called 
+attributes must be given to the constructor method. There is a method to edit the attribute data that can be called
 whenever user types in the correct command.
 
 #### `Medicine List`
@@ -168,7 +168,7 @@ Medicine by selected criteria.
 
 ##### `Patient`
 
-![PatientUML](diagrams/PatientUML.png)
+![PatientUML](diagrams/Patient.png)
 
 The Patient class holds several attributes that are exposed via getter methods. To instantiate the class, all the
 attributes must be given to the constructor method. There is a method to edit the attribute data that can be called
@@ -176,7 +176,7 @@ whenever user types in the correct command.
 
 #### `Patient List`
 
-![PatientListUML](diagrams/PatientListUML.png)
+![PatientListUML](diagrams/PatientList.png)
 
 The PatientList class contains private lists of Patients and one list for searching. It has several
 public methods that allows the user to get information regarding the list, view the list as well as search for specific
@@ -184,7 +184,7 @@ Patients by selected criteria.
 
 #### `Doctor`
 
-![DoctorUML](diagrams/DoctorUML.png)
+![DoctorUML](diagrams/Doctor.png)
 
 The Doctor class holds several attributes that are exposed via getter methods. To instantiate the class, all the
 attributes must be given to the constructor method. There is a method to edit the attribute data that can be called
@@ -192,7 +192,7 @@ whenever user types in the correct command.
 
 #### `Doctor List`
 
-![DoctorListUML](diagrams/DoctorListUML.png)
+![DoctorListUML](diagrams/DoctorList.png)
 
 The DoctorList class contains private lists of Doctors and one list for searching. It has several
 public methods that allows the user to get information regarding the list, view the list as well as search for specific
