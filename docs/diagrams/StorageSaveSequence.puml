@@ -18,45 +18,47 @@ Storage -> PersonList: getPersonList()
 activate PersonList
 PersonList --> Storage: :PersonList
 deactivate PersonList
-    loop until all items
+    loop until all person in PersonList
         Storage -> PersonList: getSaveName()
         activate PersonList
         PersonList --> Storage: Name:Person
         deactivate PersonList
         Storage -> Storage: writeToFile()
         activate Storage
-        Storage -> PlanITarium.txt
+        Storage -> PlanITarium.txt : write(name:String)
         activate PlanITarium.txt
         PlanITarium.txt --> Storage
         deactivate PlanITarium.txt
         Storage --> Storage
         deactivate Storage
         Storage -> PersonList: getIncomeList()
-        activate Storage
+
         activate PersonList
         PersonList --> Storage: :IncomeList
         deactivate PersonList
-        deactivate Storage
+
         Storage -> Storage: writeToFile()
         activate Storage
-        Storage -> PlanITarium.txt
+        loop until all income in IncomeList
+        Storage -> PlanITarium.txt : write(income:String)
         activate PlanITarium.txt
         PlanITarium.txt --> Storage
         deactivate PlanITarium.txt
+        end
         Storage --> Storage
         deactivate Storage
         Storage -> PersonList: getExpenditureList()
-        activate Storage
         activate PersonList
         PersonList --> Storage: :ExpenditureList
         deactivate PersonList
-        deactivate Storage
         Storage -> Storage: writeToFile()
         activate Storage
-        Storage -> PlanITarium.txt
+        loop until all expenditure in ExpenditureList
+        Storage -> PlanITarium.txt : write(expenditure:String)
         activate PlanITarium.txt
         PlanITarium.txt --> Storage
         deactivate PlanITarium.txt
+        end
         Storage --> Storage
         deactivate Storage
     end
