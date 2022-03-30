@@ -9,11 +9,11 @@ import seedu.sherpass.util.parser.TimerParser;
 
 import seedu.sherpass.task.TaskList;
 
-
 import seedu.sherpass.util.Storage;
 import seedu.sherpass.util.Ui;
 
 import seedu.sherpass.util.parser.TimetableParser;
+import seedu.sherpass.util.timetable.Timetable;
 
 import static seedu.sherpass.constant.Index.STUDY_PARAMETER_INDEX;
 import static seedu.sherpass.constant.Message.ERROR_INVALID_TIMER_INPUT_MESSAGE;
@@ -33,7 +33,7 @@ public class TimerLogic implements WindowListener {
     private static Ui ui;
     private static Timer timer;
     private static TaskList taskList;
-    protected boolean isTimerInitialised = false;
+    protected volatile boolean isTimerInitialised = false;
     private final JFrame jframe;
     private final JLabel jlabel;
     private final ActionListener actionListenerPause = actionEvent -> {
@@ -187,7 +187,7 @@ public class TimerLogic implements WindowListener {
         if (isTimerInitialised) {
             timer.stopTimer();
             isTimerInitialised = updateIsTimerRunning();
-            taskList.printAllTasks(ui);
+            Timetable.showTodaySchedule(taskList, ui);
             ui.showToUser("Would you like to start another timer, mark a task as done, "
                     + "or leave the study session?");
             return;
@@ -198,7 +198,6 @@ public class TimerLogic implements WindowListener {
     private boolean updateIsTimerRunning() {
         return timer.isTimerRunning();
     }
-
 
     private String selectStudyTimer(String[] parsedInput) {
         if (parsedInput[STUDY_PARAMETER_INDEX].trim().equals("stopwatch")) {
@@ -219,20 +218,18 @@ public class TimerLogic implements WindowListener {
         timer = new Countdown(taskList, ui, jframe, jlabel);
     }
 
-
-
-    private boolean isTimerPausedOrStopped() {
+    /**
+     * Returns if a timer is paused or stopped, so that mark or show command can be called.
+     * It first checks if timer is initialised. If initialised, it then calls the isTimerPaused() method to check the
+     * static variable isTimerPaused in abstract class Timer.
+     *
+     * @return Returns if timer is paused or stopped.
+     */
+    public boolean isTimerPausedOrStopped() {
         if (!isTimerInitialised) {
             return true;
         }
         return timer.isTimerPaused();
-    }
-
-    public boolean getIsTimerRunning() {
-        if (!isTimerInitialised) {
-            return false;
-        }
-        return timer.isTimerRunning;
     }
 
     /**

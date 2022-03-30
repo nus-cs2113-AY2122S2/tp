@@ -8,8 +8,8 @@ import seedu.sherpass.task.TaskList;
 public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
     public static final String MESSAGE_USAGE = "Unmark: Marks a task as undone."
-            + "\nTo unmark a specific task, enter 'unmark <list_index>'.\n\n Here, "
-            + "'list_index' denotes the index of a task \n based on the task list under the command 'list'.\n"
+            + "\nTo unmark a specific task, enter 'unmark <task_number>'.\n\n Here, "
+            + "'task_number' denotes the index of a task \n based on the task list under the command 'show all'.\n"
             + "\nE.g., 'unmark 3' unmarks the third task in the task list.\n\n"
             + "Note: You can only unmark one task per command input.";
 
