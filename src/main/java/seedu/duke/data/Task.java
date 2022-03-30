@@ -53,7 +53,12 @@ public class Task {
     }
 
     public String getWorkingTime() {
-        return workingTime.toString();
+        if (Objects.isNull(workingTime)) {
+            return null;
+        } else {
+            return workingTime.toString();
+        }
+
     }
 
     public void setTaskDescription(String description) {
@@ -61,7 +66,7 @@ public class Task {
         taskParameters = getTaskParameterStatus();
     }
 
-    public void setWorkingTime(String workingTime) throws ModHappyException{
+    public void setWorkingTime(String workingTime) throws ModHappyException {
         try {
             this.workingTime = new TaskDuration(workingTime);
         } catch (ModHappyException e) {

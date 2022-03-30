@@ -29,7 +29,7 @@ public class AddCommand extends Command {
      * Constructor for use with commands involving adding tasks.
      */
     public AddCommand(AddObjectType type, String taskName, String taskDescription, String estimatedWorkingTime,
-                      String taskModule) throws ModHappyException{
+                      String taskModule) throws ModHappyException {
         try {
             assert type == AddObjectType.TASK;
             typeToAdd = type;

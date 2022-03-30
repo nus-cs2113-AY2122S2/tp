@@ -7,6 +7,7 @@ import seedu.duke.data.TaskDuration;
 
 class TextUiTest {
     TaskDuration taskDuration;
+
     @Test
     public void sampleTest() {
         assertTrue(true);
