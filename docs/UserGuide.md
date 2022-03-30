@@ -190,7 +190,7 @@ Edits an existing session so that you can change details of a session.<br>
 
 <br>
 
-> **💡 Notes**
+> **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before it can be edited.
 >- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
 >- There are 3 editable fields, session name, session date and the people involved in the session.
@@ -384,7 +384,7 @@ There are two ways that you can edit an activity:
 
 <br>
 
-> **💡 Notes**
+> **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to
      it.
 >- An activity with a unique identifier of `[ACTIVITY_ID]` has to exist before it can be edited.
@@ -560,7 +560,7 @@ Edits an existing group so that you can change details of a group.<br>
 
 <br>
 
-> **💡 Notes**
+> **💡 Notes:**
 > - A group with a unique identifier of `[GROUP_ID]` has to exist before it can be edited.
 > - Each name in `[NAME1 NAME2 ...]` for a particular group should be unique.
 > - There are 2 editable fields, group name and the people involved in the session.
