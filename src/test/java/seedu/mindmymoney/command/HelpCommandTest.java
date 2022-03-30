@@ -52,8 +52,8 @@ public class HelpCommandTest {
     void helpCommand_notFromUser_expectErrorMessage() throws MindMyMoneyException {
         String errorMessage = "Invalid command! \n"
                 + "Type \"help /e\" to view the list of supported expenditure commands\n"
-                + "Type \"help /cc\" to view the list of supported Credit Card commands"
-                + System.lineSeparator();
+                + "Type \"help /cc\" to view the list of supported Credit Card commands\n"
+                + "Type \"help /i\" to view the list of supported income commands\n";
 
         new HelpCommand(false, "/e").executeCommand();
         assertEquals(errorMessage.trim(), capturedOut.toString().trim());
