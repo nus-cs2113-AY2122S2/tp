@@ -76,10 +76,8 @@ public class ActivityEditCommand extends Command {
      *                           each representing a person involved in the activity.
      * @param personPaid         A Person object representing the person who paid for the activity.
      * @param activityId         An integer that uniquely identifies an activity.
-     * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      */
-    private void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, int activityId)
-            throws InvalidDataException {
+    private void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, int activityId) {
         boolean hasAddedForPersonPaid = false;
         for (int i = 0; i < involvedPersonList.size(); i++) {
             Person person = involvedPersonList.get(i);
@@ -225,13 +223,12 @@ public class ActivityEditCommand extends Command {
             Session session = manager.getProfile().getSession(sessionId);
             Person personPaid = session.getPersonByName(payer);
             ArrayList<Person> involvedPersonList = session.getPersonListByName(involvedList);
-            addAllActivityCost(involvedPersonList, personPaid, activityId);
             session.removeActivity(activityId);
             addAllActivityCost(involvedPersonList, personPaid, activityId);
             Activity editedActivity = new Activity(activityId, activityName, totalCost, personPaid, involvedPersonList);
             session.addActivity(editedActivity);
             manager.saveProfile();
-            ui.printlnMessageWithDivider(COMMAND_SUCCESS + editedActivity);
+            ui.printlnMessage(COMMAND_SUCCESS + editedActivity);
             Manager.getLogger().log(Level.FINEST, Message.LOGGER_ACTIVITYEDIT_ACTIVITY_EDITED  + activityId);
         } catch (InvalidDataException e) {
             ui.printlnMessage(e.getMessage());

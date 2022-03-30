@@ -49,7 +49,7 @@ public class ActivityEditCommandParser implements CommandParser<ActivityEditComm
     public ActivityEditCommand getCommand(String commandArgs) throws InvalidFormatException {
         assert commandArgs != null : Message.ASSERT_ACTIVITYEDIT_COMMAND_ARGS_NULL;
         int sessionId;
-        int activityId = -1;
+        int activityId;
         String activityName;
         String payer;
         String[] involvedList;

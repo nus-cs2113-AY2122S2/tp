@@ -73,10 +73,8 @@ public class ActivityCreateCommand extends Command {
      *                           each representing a person involved in the activity.
      * @param personPaid         A Person object representing the person who paid for the activity.
      * @param activityId         An integer that uniquely identifies an activity.
-     * @throws InvalidDataException If the activityCost cannot be created from the given parameters.
      */
-    private void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, int activityId)
-            throws InvalidDataException {
+    private void addAllActivityCost(ArrayList<Person> involvedPersonList, Person personPaid, int activityId) {
         boolean hasAddedForPersonPaid = false;
         for (int i = 0; i < involvedPersonList.size(); i++) {
             Person person = involvedPersonList.get(i);
