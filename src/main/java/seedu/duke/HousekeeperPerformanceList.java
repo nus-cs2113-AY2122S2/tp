@@ -34,6 +34,18 @@ public class HousekeeperPerformanceList {
     }
 
     /**
+     * Returns a performance within the list of housekeeper performances at the given index.
+     *
+     * @param index The index of the item within the list that would be returned.
+     * @return The index returned by the .
+     */
+    public HousekeeperPerformance getPerformance(int index) {
+        ArrayList<HousekeeperPerformance> performanceList = getHousekeeperPerformanceList();
+        HousekeeperPerformance performance = performanceList.get(index);
+        return performance;
+    }
+
+    /**
      * Checks if the housekeeper with the specified name already has a recorded performance rating.
      * @param housekeeperName The name of the specified housekeeper.
      * @return true if the Housekeeper already has a recorded performance rating, false otherwise.

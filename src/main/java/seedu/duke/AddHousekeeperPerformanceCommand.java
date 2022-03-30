@@ -1,8 +1,10 @@
 package seedu.duke;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import seedu.duke.command.Command;
+import seedu.duke.storage.HousekeeperPerformanceFileManager;
 
 /**
  * Represents a command to add a new HousekeeperPerformance object to the HousekeeperPerformanceList.
@@ -122,7 +124,7 @@ public class AddHousekeeperPerformanceCommand extends Command {
      * @param ui The object that deals with user interface for the program.
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      */
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         HousekeeperPerformanceList housekeeperPerformanceList = listContainer.getHousekeeperPerformanceList();
         HousekeeperList housekeeperList = listContainer.getHousekeeperList();
         // Checks if the user tries to add a housekeeper performance for a housekeeper not the HousekeeperList records
@@ -133,6 +135,8 @@ public class AddHousekeeperPerformanceCommand extends Command {
         }
         housekeeperPerformanceList.addHousekeeperPerformance(housekeeperPerformance);
         ui.printAddHousekeeperPerformanceAcknowledgementMessage(housekeeperPerformanceList, housekeeperPerformance);
+        HousekeeperPerformanceFileManager housekeeperPerformanceFileManager = new HousekeeperPerformanceFileManager();
+        housekeeperPerformanceFileManager.writePerformanceListToFile(housekeeperPerformanceList);
 
     }
 

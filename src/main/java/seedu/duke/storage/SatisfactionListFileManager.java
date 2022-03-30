@@ -1,10 +1,7 @@
 package seedu.duke.storage;
 
-import seedu.duke.Satisfaction;
-import seedu.duke.SatisfactionList;
-import seedu.duke.HotelLiteManagerException;
-import seedu.duke.SatisfactionFileNotFoundException;
-import seedu.duke.InvalidItemPaxException;
+import seedu.duke.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -39,7 +36,7 @@ public class SatisfactionListFileManager extends FileManager {
             try {
                 satisfactionValue = Integer.parseInt(satisfactionString);
             } catch (NumberFormatException e) {
-                throw new InvalidItemPaxException();
+                throw new InvalidSatisfactionValueException();
             }
             satisfaction = new Satisfaction(customerName, satisfactionValue);
             satisfactionList.addSatisfaction(satisfaction);
