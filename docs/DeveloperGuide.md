@@ -24,8 +24,9 @@ The following websites and codebases were referenced and adapted for our project
 
 * AddressBook-Level2 project ([Website](https://se-education.org/addressbook-level2/) | 
 [GitHub](https://github.com/se-edu/addressbook-level2))
+* AddressBook-Level3 project ([Website](https://se-education.org/addressbook-level3/DeveloperGuide.html) |
+[GitHub](https://github.com/se-edu/addressbook-level3))
 * Team Member Alan Low's individual project (iP) codebase ([GitHub](https://github.com/alanlowzies/ip))
-* AddressBook-Level3 project([Website](https://se-education.org/addressbook-level3/DeveloperGuide.html))
 
 ## Setting Up your Development Environment
 ### Requirements
@@ -177,7 +178,7 @@ ExerciseCommand constructor. If the exercise action is null or incorrect, an Inv
 this exercise command is executed via the `ExerciseCommand#execute()` method. As it is executed, the method will check the
 type of action to be executed, in this case, list. It will then list the exercises available for selection from the exerciseList using the `ExerciseList#printExerciseList()`.
 
-The following sequence illustrates how the `exercise /list` command works in greater detail:
+The following sequence diagram illustrates how the `exercise /list` command works in greater detail:
 
 ![List Exercise Sequence Diagram](uml/sequenceDiagrams/images/viewExercise.png)
 
@@ -192,7 +193,7 @@ A summary of the general procedure of a new workout being inputted and stored in
 3. The success response is printed to the user through the terminal.
 4. The new `Workout` object data is written to the resource file `workouts.txt`.
 
-The following sequence illustrates how the `workout /new` command works in greater detail:
+The following sequence diagram illustrates how the `workout /new` command works in greater detail:
 > To simplify the sequence diagram, some method invocations that are deemed to be trivial 
 > have been removed from the sequence diagram. Some reference frames will be elaborated further 
 > down this section. Reference frames that will not be elaborated on will be made known.
@@ -342,7 +343,7 @@ A summary of the general procedure of an existing workout being removed from Wer
 3. The success response is printed to the user through the terminal.
 4. The resource file, `workouts.txt`, is rewritten according to the application's workout list that has been modified.
 
-The following sequence illustrates how the `workout /delete` command works in greater detail:
+The following sequence diagram illustrates how the `workout /delete` command works in greater detail:
 > To simplify the sequence diagram, some method invocations that deemed to be trivial
 > have been removed from the sequence diagram. Reference frames will be elaborated further
 > down this section.
@@ -405,11 +406,11 @@ function is executed. Such implementation may have performance issues as the pro
 file with the modified workout list whenever a workout is deleted in the application.
 <br><br>
 An alternative considered was to find the workout to be deleted in the resource file, and then
-remove that workout. This is a faster implementation, however, more complicated due to the way
-the workout data are formatted and stored in the `workouts.txt` file.
+remove that workout. While this is a more efficient implementation, it is more complex due to the
+way the workout data are formatted and stored in the `workouts.txt` file.
 <br><br>
-Hence, to simplify the implementation, the team decided to implement our current implementation - that
-is, to rewrite all workout to the resource file whenever a workout is deleted.
+Hence, to simplify the implementation, the team decided to simply
+rewrite all workouts to the resource file whenever a workout is deleted.
 
 ---
 
@@ -449,7 +450,7 @@ A summary of the general procedure of a new plan being created and stored in Wer
 3. The success response is printed to the user through the terminal.
 4. The new `Plan` object data is written to the resource file `plans.txt`.
 
-The following sequence illustrates how the `plan /new` command works in greater detail:
+The following sequence diagram illustrates how the `plan /new` command works in greater detail:
 > To simplify the sequence diagram, some method invocations that deemed to be trivial
 > have been removed from the sequence diagram. Reference frames will be elaborated further
 > down this section.
@@ -534,7 +535,7 @@ A summary of the general procedure of listing all plans in the application is as
 1. User enters the command `plan /list`.
 2. A list of plan names is displayed to the user via the terminal.
 
-The following sequence illustrates how the `plan /list` command works in greater detail:
+The following sequence diagram illustrates how the `plan /list` command works in greater detail:
 > To simplify the sequence diagram, some method invocations that deemed to be trivial
 > have been removed from the sequence diagram. Reference frames will be elaborated further
 > down this section.
@@ -604,7 +605,7 @@ be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords
 will either be a list of matching exercises or 'Sorry, no matching exercise found' if the user has entered the command
 correctly.
 
-The following sequence illustrates how the `search /exercise` command works in greater detail:
+The following sequence diagram illustrates how the `search /exercise` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/images/searchExercise.png)
 
@@ -620,7 +621,7 @@ be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords
 will either be a list of matching names of workout or 'Sorry, no matching workout found' if the user has entered the command
 correctly.
 
-The following sequence illustrates how the `search /workout` command works in greater detail:
+The following sequence diagram illustrates how the `search /workout` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/images/searchWorkout.png)
 
@@ -636,7 +637,7 @@ be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords
 will either be a list of matching names of plan or 'Sorry, no matching plan found' if the user has entered the command
 correctly.
 
-The following sequence illustrates how the `search /plan` command works in greater detail:
+The following sequence diagram illustrates how the `search /plan` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/images/searchPlan.png)
 
@@ -651,7 +652,7 @@ method to `Parser#parseUserInput(String userInput)` method, and finally returned
 be executed in `WerkIt#startContinuousUserPrompt()`. And based on the `<keywords>` specified by the user, the output
 will either be a list of matching names of exercise, workout and plan or not found messages if the user has entered the command correctly.
 
-The following sequence illustrates how the `search /all` command works in greater detail:
+The following sequence diagram illustrates how the `search /all` command works in greater detail:
 
 ![Search Exercise Sequence Diagram](uml/sequenceDiagrams/images/searchAll.png)
 
