@@ -83,6 +83,7 @@ public class StorageFile {
                     name = data;
                     listNum = 1;
                     personCount++;
+                    ParserLocalData.prepareLoadName(name, masterTimetable);
                 } else {
                     if (!isNoTimetableMessage(data)) {
                         if (checkIndex(data, listNum)) {

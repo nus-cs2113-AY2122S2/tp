@@ -2,13 +2,15 @@ package seedu.meetingjio.parser;
 
 import seedu.meetingjio.commands.AddLessonCommand;
 import seedu.meetingjio.commands.AddMeetingCommand;
+import seedu.meetingjio.timetables.MasterTimetable;
+import seedu.meetingjio.timetables.Timetable;
+import seedu.meetingjio.exceptions.DuplicateTimetableException;
 import seedu.meetingjio.exceptions.InvalidDayException;
 import seedu.meetingjio.exceptions.InvalidModeException;
 import seedu.meetingjio.exceptions.InvalidTimeException;
 import seedu.meetingjio.exceptions.MissingValueException;
 import seedu.meetingjio.exceptions.MissingParameterException;
 import seedu.meetingjio.exceptions.InvalidEventTypeException;
-import seedu.meetingjio.timetables.MasterTimetable;
 
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_LOAD_LESSON;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_VALUES_LOAD_LESSON;
@@ -16,6 +18,7 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_TIME_LOADING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_DAY_LOADING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_MODE_LOADING;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_MISSING_PARAMETERS_LOAD_MEETING;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_DUPLICATE_USER_LOAD_NAME;
 
 public class ParserLocalData {
 
@@ -33,6 +36,22 @@ public class ParserLocalData {
     private static final String EVENT_TYPE_DELIMITER_FRONT = "[";
     private static final String EVENT_TYPE_DELIMITER_BACK = "]";
     private static ParserHelperMethods parserHelperMethods = new ParserHelperMethods();
+
+    /**
+     * Creates a person's timetable.
+     *
+     * @param name name given in the data file
+     * @param masterTimetable Array of timetables
+     * @throws RuntimeException if there is duplicate name found in the data file
+     */
+    public static void prepareLoadName(String name, MasterTimetable masterTimetable) {
+        try {
+            Timetable timetable = new Timetable(name);
+            masterTimetable.addTimetable(timetable);
+        } catch (DuplicateTimetableException det) {
+            throw new RuntimeException("[" + name + "]" + ERROR_DUPLICATE_USER_LOAD_NAME);
+        }
+    }
 
     /**
      * Loads lesson into the masterTimetable.
@@ -82,7 +101,6 @@ public class ParserLocalData {
      * @throws RuntimeException if any of the specified exceptions is caught during the process
      */
     public static String prepareLoadMeeting(String data, MasterTimetable masterTimetable) {
-
         try {
             checkHeadings(data);
             String[] eventDescription = splitArguments(data);
