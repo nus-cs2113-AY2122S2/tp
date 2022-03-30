@@ -65,4 +65,24 @@ public class EditCommand extends Command {
         itemList.set(index, placeholderItem);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        EditCommand toCompare;
+        if (other==this) {
+            // return if same object
+            return true;
+        }
+        if (other instanceof EditCommand) {
+            // cast only if other is instance of EditCommand
+            toCompare = (EditCommand) other;
+            return (this.index == toCompare.index)
+                    && (this.name.equals(toCompare.name))
+                    && (this.quantity.equals(toCompare.quantity))
+                    && (this.description.equals(toCompare.description))
+                    && (this.relativeAdd.equals(toCompare.relativeAdd));
+        } else {
+            // null, or object not EditCommand
+            return false;
+        }
+    }
 }
