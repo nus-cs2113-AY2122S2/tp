@@ -112,6 +112,8 @@ displayed in an easy-to-read summary.
 ## _Session Management_
 > A session represents a group outing spanning an arbitrary period of time containing one or more activities.
 
+<br>
+
 ### Creating a session: `session /create`
 Creates a session so that you can manage your group outings using SplitLah. <br>
 
@@ -252,7 +254,9 @@ However, deleted sessions will not be listed.
 
 ## _Activity Management_
 > An activity represents a single group activity and stores its name, costs and the name of the payer.
- 
+
+<br>
+
 ### Creating an activity: `activity /create`
 Creates a new activity and assigns it to a session. <br>
 
@@ -414,6 +418,9 @@ Example of usage:
 <hr>
 
 ## _Transaction Management_
+
+<br>
+
 ### Settling all transactions for a session: `session /summary`
 
 Displays a transaction summary for a session and helps you calculate how much each person in the session
@@ -445,6 +452,8 @@ must pay and to whom they should pay for all debts to be resolved.<br>
 
 ## _Group Management_
 > A group represents one or more individuals. It is used as a shortcut in several commands for identifying a group of individual persons.
+
+<br>
 
 ### Creating a group: `group /create`
 
@@ -540,6 +549,8 @@ Example of usage:
 <hr>
 
 ## _Miscellaneous_
+
+<br>
 
 ### Listing all available commands: `help`
 Displays all available SplitLah commands and their syntax so that you can get assistance when using SplitLah.<br>
