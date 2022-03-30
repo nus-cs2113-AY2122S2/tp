@@ -12,9 +12,7 @@ import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.Income;
 import seedu.mindmymoney.userfinancial.User;
 
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
-import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
+import static seedu.mindmymoney.constants.Flags.*;
 
 /**
  * Represents the List command.
@@ -43,9 +41,9 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Indicates whether the list command is to list expenditure(s) by looking for the /expenses flag.
+     * Indicates whether the list command is to list expenditure(s) by looking for the /pm flag.
      *
-     * @return true if the /expenses flag is present, false otherwise.
+     * @return true if the /pm flag is present, false otherwise.
      */
     private boolean hasExpensesFlag() {
         return listInput.contains(FLAG_OF_EXPENSES);
@@ -89,7 +87,7 @@ public class ListCommand extends Command {
                 for (Expenditure i : expenditureList.expenditureListArray) {
                     if (i.getTime().contains(inputArray[1])) {
                         listInString += indexOfList + ". $" + i.getAmount() + " was spent on " + i.getDescription()
-                                + "(" + i.getCategory() + ") " + "using " + i.getExpenditure()
+                                + "(" + i.getCategory() + ") " + "using " + i.getPaymentMethod()
                                 + " [" + i.getTime() + "]" + "\n";
                         indexOfList++;
                     }
@@ -112,7 +110,7 @@ public class ListCommand extends Command {
     public String printListString(int index, String listInString) {
         for (Expenditure i : expenditureList.expenditureListArray) {
             listInString += index + ". $" + i.getAmount() + " was spent on " + i.getDescription() + "("
-                    + i.getCategory() + ") " + "using " + i.getExpenditure() + " [" + i.getTime() + "]" + "\n";
+                    + i.getCategory() + ") " + "using " + i.getPaymentMethod() + " [" + i.getTime() + "]" + "\n";
             index++;
         }
         return listInString;
@@ -159,8 +157,8 @@ public class ListCommand extends Command {
         int indexOfList = 1;
         String listInString = "";
         for (CreditCard i : creditCardList.creditCardListArray) {
-            listInString += indexOfList + ". Name: " + i.getNameOfCard() + " Cashback: " + i.getCashback()
-                    +  "% Card limit: $" + i.getMonthlyCardLimit() + " Card balance: $" + i.getBalance() + "\n";
+            listInString += indexOfList + ". Name: " + i.getNameOfCard() + " [Cashback: " + i.getCashback()
+                    +  "%] [Card limit: $" + i.getMonthlyCardLimit() + "] [Card balance: $" + i.getBalance() + "]\n";
             indexOfList++;
         }
 

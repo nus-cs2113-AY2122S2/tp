@@ -4,7 +4,7 @@ package seedu.mindmymoney.constants;
  * Container for flags used in commands.
  */
 public class Flags {
-    public static final String FLAG_OF_PAYMENT_METHOD = "/e";
+    public static final String FLAG_OF_PAYMENT_METHOD = "/pm";
     public static final String FLAG_OF_CATEGORY = "/c";
     public static final String FLAG_OF_DESCRIPTION = "/d";
     public static final String FLAG_OF_AMOUNT = "/a";
@@ -16,6 +16,7 @@ public class Flags {
     public static final String FLAG_OF_CARD_LIMIT = "/cl";
     public static final String FLAG_OF_CARD_BALANCE = "/bal";
     public static final String FLAG_OF_CREDIT_CARD = "/cc";
-    public static final String FLAG_OF_EXPENSES = "/expenses";
+    public static final String FLAG_OF_EXPENSES = "/e";
     public static final String FLAG_OF_INCOME = "/i";
+    public static final String EMPTY_PARAMETER = "";
 }

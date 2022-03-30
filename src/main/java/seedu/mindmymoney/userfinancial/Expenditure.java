@@ -11,14 +11,14 @@ public class Expenditure {
     private String description;
     private float amount;
     private String category;
-    private String expenditure;
+    private String paymentMethod;
     private String time;
 
-    public Expenditure(String expenditure, String category, String description, float amount, String time) {
+    public Expenditure(String paymentMethod, String category, String description, float amount, String time) {
         setDescription(description);
         setAmount(amount);
         setCategory(category);
-        setExpenditure(expenditure);
+        setPaymentMethod(paymentMethod);
         setTime(time);
     }
 
@@ -46,12 +46,12 @@ public class Expenditure {
         return category;
     }
 
-    public void setExpenditure(String expenditure) {
-        this.expenditure = expenditure;
+    public void setPaymentMethod(String expenditure) {
+        this.paymentMethod = expenditure;
     }
 
-    public String getExpenditure() {
-        return expenditure;
+    public String getPaymentMethod() {
+        return paymentMethod;
     }
 
     public void setTime(String time) {
@@ -64,8 +64,9 @@ public class Expenditure {
 
     @Override
     public String toString() {
-        return getDescription() + " of $" + getAmount() + " from " + getCategory() + " paid by "
-                + getExpenditure() + " at " + getTime();
+        return "$" + getAmount() + " on " + getDescription() + ". Paid using "
+                + getPaymentMethod() + " [" + getCategory() + "]" + " [" + getTime() + "]";
+
     }
 
     @Override

@@ -21,15 +21,14 @@ class ListCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        String listInString = new ListCommand("/expenses", user).expenditureListToString();
+        String listInString = new ListCommand("/e", user).expenditureListToString();
         assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n", listInString);
 
-        String inputString2 = "/e cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
+        String inputString2 = "/pm cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
         new AddCommand(inputString2, user).executeCommand();
-        listInString = new ListCommand("/expenses", user).expenditureListToString();
+        listInString = new ListCommand("/e ", user).expenditureListToString();
         assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
                 + "2. $69.0 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString);
         String listInString2 = new ListCommand("/expenses ", user).expenditureListToString();
@@ -48,15 +47,15 @@ class ListCommandTest {
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
 
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        String listInString = new ListCommand("/expenses", user).expenditureListToString();
+        String listInString = new ListCommand("/e 30/03/2022", user).expenditureListToString();
         assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n", listInString);
-        String inputString2 = "/e cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
+        String inputString2 = "/pm cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
         new AddCommand(inputString2, user).executeCommand();
-        String inputString3 = "/e cash /c Food /d Cream Pie /a 69 /t 30/04/2022";
+        String inputString3 = "/pm cash /c Food /d Cream Pie /a 69 /t 30/04/2022";
         new AddCommand(inputString3, user).executeCommand();
-        listInString = new ListCommand("/expenses 30/03/2022", user).expenditureListToString();
+        listInString = new ListCommand("/e 30/03/2022", user).expenditureListToString();
         assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
                 + "2. $69.0 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString);
     }
@@ -71,16 +70,15 @@ class ListCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        String listInString = new ListCommand("/expenses", user).expenditureListToString();
+        String listInString = new ListCommand("/e 03/2022", user).expenditureListToString();
         assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n", listInString);
-        String inputString2 = "/e cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
+        String inputString2 = "/pm cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
         new AddCommand(inputString2, user).executeCommand();
-        String inputString3 = "/e cash /c Food /d Cream Pie /a 69 /t 30/04/2022";
+        String inputString3 = "/pm cash /c Food /d Cream Pie /a 69 /t 30/04/2022";
         new AddCommand(inputString3, user).executeCommand();
-        listInString = new ListCommand("/expenses 03/2022", user).expenditureListToString();
+        listInString = new ListCommand("/e 03/2022", user).expenditureListToString();
         assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
                 + "2. $69.0 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString);
     }
@@ -96,15 +94,15 @@ class ListCommandTest {
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
 
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        String listInString = new ListCommand("/expenses", user).expenditureListToString();
+        String listInString = new ListCommand("/e 2022", user).expenditureListToString();
         assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n", listInString);
-        String inputString2 = "/e cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
+        String inputString2 = "/pm cash /c Food /d Cream Pie /a 69 /t 30/03/2022";
         new AddCommand(inputString2, user).executeCommand();
-        String inputString3 = "/e cash /c Food /d Cream Pie /a 69 /t 30/04/2021";
+        String inputString3 = "/pm cash /c Food /d Cream Pie /a 69 /t 30/04/2021";
         new AddCommand(inputString3, user).executeCommand();
-        listInString = new ListCommand("/expenses 2022", user).expenditureListToString();
+        listInString = new ListCommand("/e 2022", user).expenditureListToString();
         assertEquals("1. $300.0 was spent on Nike Shoes(Personal) using Cash [30/03/2022]\n"
                 + "2. $69.0 was spent on Cream Pie(Food) using Cash [30/03/2022]\n", listInString);
     }
@@ -118,7 +116,7 @@ class ListCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        ListCommand listCommandTest = new ListCommand("/expenses", user);
+        ListCommand listCommandTest = new ListCommand("/e", user);
 
         assertThrows(MindMyMoneyException.class, () -> listCommandTest.executeCommand());
     }
@@ -132,7 +130,7 @@ class ListCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        ListCommand listCommandTest = new ListCommand("/expenses 39/14/2022", user);
+        ListCommand listCommandTest = new ListCommand("/e 39/14/2022", user);
 
         assertThrows(MindMyMoneyException.class, () -> listCommandTest.executeCommand());
     }
@@ -146,7 +144,7 @@ class ListCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        ListCommand listCommandTest = new ListCommand("/expenses 4/2022", user);
+        ListCommand listCommandTest = new ListCommand("/e 4/2022", user);
 
         assertThrows(MindMyMoneyException.class, () -> listCommandTest.executeCommand());
     }
@@ -160,7 +158,7 @@ class ListCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-        ListCommand listCommandTest = new ListCommand("/expenses /2022/", user);
+        ListCommand listCommandTest = new ListCommand("/e /2022/", user);
 
         assertThrows(MindMyMoneyException.class, () -> listCommandTest.executeCommand());
     }

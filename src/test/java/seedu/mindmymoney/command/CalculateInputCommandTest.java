@@ -31,14 +31,13 @@ class CalculateInputCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/e cash /c Personal /d Nike Shoes /a 3000 /t 30/03/2022";
+        inputString = "/pm cash /c Personal /d Nike Shoes /a 3000 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/e cash /c Personal /d Nike Shoes /a 1000 /t 30/04/2022";
+        inputString = "/pm cash /c Personal /d Nike Shoes /a 1000 /t 30/04/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/e cash /c Personal /d Nike Shoes /a 200 /t 30/03/2021";
+        inputString = "/pm cash /c Personal /d Nike Shoes /a 200 /t 30/03/2021";
         new AddCommand(inputString, user).executeCommand();
 
         setUp();
@@ -67,10 +66,9 @@ class CalculateInputCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 0.5 /t 30/03/2022";
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a 0.5 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/e cash /c Personal /d Nike Shoes /a 0.10 /t 30/03/2022";
+        inputString = "/pm cash /c Personal /d Nike Shoes /a 0.10 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
 
         setUp();
@@ -99,10 +97,9 @@ class CalculateInputCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/e cash /c Personal /d Nike Shoes /a 3000 /t 30/03/2022";
+        inputString = "/pm cash /c Personal /d Nike Shoes /a 3000 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
 
         assertThrows(MindMyMoneyException.class,
@@ -118,10 +115,9 @@ class CalculateInputCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/e cash /c Personal /d Nike Shoes /a 3000 /t 30/03/2022";
+        inputString = "/pm cash /c Personal /d Nike Shoes /a 3000 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
 
         assertThrows(MindMyMoneyException.class,
@@ -137,10 +133,9 @@ class CalculateInputCommandTest {
         CreditCardList creditCardTestList = new CreditCardList();
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
-
-        String inputString = "/e cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
+        String inputString = "/pm cash /c Personal /d Nike Shoes /a 300 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
-        inputString = "/e cash /c Personal /d Nike Shoes /a 3000 /t 30/03/2022";
+        inputString = "/pm cash /c Personal /d Nike Shoes /a 3000 /t 30/03/2022";
         new AddCommand(inputString, user).executeCommand();
 
         assertThrows(MindMyMoneyException.class,

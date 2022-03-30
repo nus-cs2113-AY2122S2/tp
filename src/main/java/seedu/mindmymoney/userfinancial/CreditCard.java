@@ -50,8 +50,7 @@ public class CreditCard {
 
     @Override
     public String toString() {
-        return "Credit Card of name: " + getNameOfCard() + " has $" + getBalance()
-                + " left. This card has a monthly limit of " + getMonthlyCardLimit() + " and a cashback at a rate of "
-                + getCashback() + "%.";
+        return "Name: " + getNameOfCard() + " [Cashback: " + getCashback()
+                +  "%] [Card limit: $" + getMonthlyCardLimit() + "] [Card balance: $" + getBalance() + "]\n";
     }
 }

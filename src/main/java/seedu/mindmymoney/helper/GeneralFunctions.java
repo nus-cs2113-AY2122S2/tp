@@ -130,7 +130,7 @@ public class GeneralFunctions {
     public static ArrayList<Expenditure> findMatchingExpenditure(String searchTerm, ArrayList<Expenditure> foundItems,
                                                                  ExpenditureList itemList) {
         for (Expenditure item : itemList.expenditureListArray) {
-            if (item.getExpenditure().contains(searchTerm)) {
+            if (item.getPaymentMethod().contains(searchTerm)) {
                 foundItems.add(item);
             }
         }

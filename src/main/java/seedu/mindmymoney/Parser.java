@@ -11,6 +11,7 @@ import seedu.mindmymoney.command.ListCommand;
 import seedu.mindmymoney.helper.GeneralFunctions;
 import seedu.mindmymoney.userfinancial.User;
 
+import static seedu.mindmymoney.constants.Flags.EMPTY_PARAMETER;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_FIRST_ITEM;
 import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
@@ -35,7 +36,10 @@ public class Parser {
 
             switch (parsedInput[INDEX_OF_FIRST_ITEM].toLowerCase()) {
             case "help":
-                return new HelpCommand(true, parsedInput[INDEX_OF_SECOND_ITEM]);
+                if (hasAdditionalParameters(parsedInput)) {
+                    return new HelpCommand(true, parsedInput[INDEX_OF_SECOND_ITEM]);
+                }
+                return new HelpCommand(true, EMPTY_PARAMETER);
             case "bye":
                 return new ByeCommand();
             case "add":
@@ -55,5 +59,9 @@ public class Parser {
             System.out.println("");
         }
         return new HelpCommand(false, FLAG_OF_EXPENSES);
+    }
+
+    private static boolean hasAdditionalParameters(String[] input) {
+        return input.length > 1;
     }
 }
