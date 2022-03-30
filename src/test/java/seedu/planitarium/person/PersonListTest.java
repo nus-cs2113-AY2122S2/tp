@@ -236,5 +236,5 @@ class PersonListTest {
     //        assertEquals(EXPEND_LIST_VIEW + NEW_EXPEND_LIST_VIEW, newOut.toString());
     //
     //        System.setOut(ORIGINAL_OUT);
-    }
+    //    }
 }
