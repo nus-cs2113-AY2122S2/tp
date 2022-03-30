@@ -40,7 +40,7 @@ deactivate WorkoutList
 
 deleteCommand -> UI2 : printDeleteWorkoutMessage(deletedWorkout)
 activate UI2
-User <-- UI2 : Existing workout removed
+User <-- UI2 : Existing workout removed message
 deleteCommand <-- UI2
 deactivate UI2
 

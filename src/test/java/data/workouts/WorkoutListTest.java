@@ -10,6 +10,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
@@ -32,6 +33,46 @@ class WorkoutListTest {
         exerciseList.addExerciseToList("crunch");
         exerciseList.addExerciseToList("russian twist");
         exerciseList.addExerciseToList("jumping jack");
+    }
+
+    @Test
+    void createAndAddWorkout_normalCreation_expectSuccess() throws InvalidExerciseException,
+            InvalidWorkoutException {
+        String newWorkout1 = "russian twist /reps 1000";
+        Workout outputWorkout1 = wl.createAndAddWorkout(newWorkout1);
+        assertEquals(outputWorkout1.getExerciseName(), "russian twist");
+        assertEquals(outputWorkout1.getRepetitions(), 1000);
+        assertTrue(wl.checkForExistingWorkout("russian twist", 1000));
+
+        String newWorkout2 = "crunch /reps 2359";
+        Workout outputWorkout2 = wl.createAndAddWorkout(newWorkout2);
+        assertEquals(outputWorkout2.getExerciseName(), "crunch");
+        assertEquals(outputWorkout2.getRepetitions(), 2359);
+        assertTrue(wl.checkForExistingWorkout("crunch", 2359));
+    }
+
+    @Test
+    void createAndAddWorkout_invalidExerciseName_expectInvalidExcerciseException() {
+        String invalidWorkout = "weeeeeee /reps 500";
+        assertThrows(InvalidExerciseException.class, () -> wl.createAndAddWorkout(invalidWorkout));
+    }
+
+    @Test
+    void createAndAddWorkout_invalidRepCount_expectInvalidWorkoutException() {
+        String invalidWorkout1 = "push up /reps -12345";
+        assertThrows(InvalidWorkoutException.class, () -> wl.createAndAddWorkout(invalidWorkout1));
+
+        String invalidWorkout2 = "sit up /reps 0";
+        assertThrows(InvalidWorkoutException.class, () -> wl.createAndAddWorkout(invalidWorkout2));
+    }
+
+    @Test
+    void createAndAddWorkout_addExistingWorkout_expectInvalidWorkoutException() throws InvalidExerciseException,
+            InvalidWorkoutException {
+        String workout = "burpee /reps 100";
+        wl.createAndAddWorkout(workout);
+
+        assertThrows(InvalidWorkoutException.class, () -> wl.createAndAddWorkout(workout));
     }
 
     @Test
@@ -82,7 +123,7 @@ class WorkoutListTest {
     }
 
     @Test
-    void deleteWorkout_indexOutOfRange_expectWorkoutOutOfRangeException() throws InvalidWorkoutException,
+    void deleteWorkout_indexOutOfRange_expectInvalidWorkoutException() throws InvalidWorkoutException,
             InvalidExerciseException {
 
         wl.createAndAddWorkout("push up /reps 11");

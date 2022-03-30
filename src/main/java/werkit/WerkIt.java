@@ -5,7 +5,6 @@ import commands.ExitCommand;
 import commands.InvalidCommandException;
 import data.exercises.ExerciseList;
 import data.plans.PlanList;
-import data.schedule.Day;
 import data.schedule.DayList;
 import data.workouts.WorkoutList;
 import storage.FileManager;
