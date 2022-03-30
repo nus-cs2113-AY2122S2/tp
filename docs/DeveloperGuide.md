@@ -93,7 +93,7 @@ The command to add a project is one example of this structure:
 
 Deleting a project will follow nearly the exact same structure; the only difference is that the corresponding Parser and Command objects will be used (`DeleteProjectCommandParser` and `DeleteProjectCommand`)
 
-####Delete a Project
+#### sDelete a Project
 ![image info](./UmlDiagrams/deleteProjectNew.png)
 *The steps are omitted here as they are the exact same as adding a project, only with the differing class names previously mentioned.
 
