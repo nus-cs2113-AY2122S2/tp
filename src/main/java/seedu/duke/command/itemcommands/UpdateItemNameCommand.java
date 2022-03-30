@@ -132,7 +132,7 @@ public class UpdateItemNameCommand extends Command {
         listOfItems.updateItemNameInList(oldItemName, newItemName);
         oldItemName = oldItemName.toUpperCase();
         newItemName = newItemName.toUpperCase();
-        if(oldItemName.equals(newItemName)){
+        if (oldItemName.equals(newItemName)) {
             throw new DuplicateItemNameException();
         }
         ui.printUpdateItemNameAcknowledgementMessage(oldItemName, newItemName);
