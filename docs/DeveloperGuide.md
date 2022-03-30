@@ -101,12 +101,15 @@ As TextUI handles all input and output streams, these streams can be changed wit
 ### Parser Component
 ![Parser Component Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ParserComponent.drawio.png)
 <br>
-The `Parser` component consists of the `Parser` class, `ParserUtils` class as well as the `ParserErrors` class.<br>
-The `Parser` class provides utility methods to parse commands and arguments from the user and
-return a `Command` object representing an instruction that the user has for SplitLah.
-`Parser` class is the only class in the `Parser` component that other external classes interact with.<br>
-On the other hand, the `ParserUtils` class provide supporting methods for `Parser` class to properly run,
-and `ParserErrors` class provide methods to produce custom error messages for the `Parser` component.
+The `Parser` component consists of the `Parser` class, `ParserUtils` class, `ParserErrors` class
+  as well as the `CommandParser` class and its subclasses.<br>
+* The `Parser` class provides utility methods to parse commands and arguments from the user and
+  return a `Command` object representing an instruction that the user has for SplitLah.
+`Parser` class is the only class in the `Parser` component that other external classes actively interact with.<br>
+* The `ParserUtils` class provide supporting methods for `Parser` class to properly run,
+  and `ParserErrors` class provide methods to produce custom error messages for the `Parser` component.<br>
+* The subclasses of `CommandParser` then serve to parse all arguments of a user input to create an object of a specific
+  subclass of the `Command` class.
 
 The general workflow of the `Parser` component is as follows:
 1. When required to parse for a command, the running `SplitLah` object will pass a String object containing
@@ -116,8 +119,8 @@ The general workflow of the `Parser` component is as follows:
    (`XYZCommand` is a placeholder for specific subclass of the `Command` class, e.g. `SessionCreateCommand`)
 3. The `XYZCommandParser` object will then use parse methods from `Parser` class to extract all the
    arguments from the user input.
-   1. Each of these parse methods in `Parser` class then calls utility methods from `ParserUtils` class
-      to return a parsed value.
+   * Each of these parse methods in `Parser` class then calls utility methods from `ParserUtils` class 
+     to return a parsed value.
 4. All relevant arguments that are parsed will then be used to create a new `XYZCommand `object which is
    then returned to the `Parser` class.
 5. The created `XYZCommand` object is then returned to the `SplitLah` object to be run.
