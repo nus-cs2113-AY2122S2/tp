@@ -5,6 +5,7 @@ import seedu.planitarium.commands.Command;
 import seedu.planitarium.commands.CommandFactory;
 import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.global.Constants;
+import seedu.planitarium.global.UI;
 import seedu.planitarium.person.Family;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -64,9 +65,11 @@ public class CommandFactoryTest {
     @Test
     void getDeletePersonCommand_validDeletePersonCommand_success() {
         try {
+            factory.getCommand(CommandsForTesting.ADDPERSON, family1).execute();
             newCommand = factory.getCommand(CommandsForTesting.DELETEPERSON, family1);
             assertEquals(newCommand.getType(), "DeletePersonCMD");
         } catch (Exception e) {
+            e.printStackTrace();
             fail();
         }
     }
@@ -77,6 +80,7 @@ public class CommandFactoryTest {
             newCommand = factory.getCommand(CommandsForTesting.ADDINCOME, family1);
             assertEquals(newCommand.getType(), "AddRecordCMD");
         } catch (Exception e) {
+            e.printStackTrace();
             fail();
         }
     }
@@ -84,9 +88,11 @@ public class CommandFactoryTest {
     @Test
     void getDeleteRecordCommand_validDeleteRecordCommand_success() {
         try {
+            factory.getCommand(CommandsForTesting.ADDINCOME, family1).execute();
             newCommand = factory.getCommand(CommandsForTesting.DELETEINCOME, family1);
             assertEquals(newCommand.getType(), "DeleteRecordCMD");
         } catch (Exception e) {
+            e.printStackTrace();
             fail();
         }
     }
@@ -94,9 +100,12 @@ public class CommandFactoryTest {
     @Test
     void getEditRecordCommand_validEditRecordCommand_success() {
         try {
+            factory.getCommand(CommandsForTesting.ADDPERSON, family1).execute();
+            factory.getCommand(CommandsForTesting.ADDINCOME, family1).execute();
             newCommand = factory.getCommand(CommandsForTesting.EDITINCOME, family1);
             assertEquals(newCommand.getType(), "EditRecordCMD");
         } catch (Exception e) {
+            e.printStackTrace();
             fail();
         }
     }
@@ -134,7 +143,7 @@ public class CommandFactoryTest {
     @Test
     void getListcatCommand_validListcatCommand_success() {
         try {
-            newCommand = factory.getCommand(CommandsForTesting.HELP, family1);
+            newCommand = factory.getCommand(CommandsForTesting.LISTCAT, family1);
             assertEquals(newCommand.getType(), "ListcatCMD");
         } catch (Exception e) {
             fail();
@@ -164,20 +173,22 @@ public class CommandFactoryTest {
     @Test
     void executionTest() {
         try {
-            factory = new CommandFactory();
             factory.getCommand(CommandsForTesting.LISTCAT, family1).execute();
             factory.getCommand(CommandsForTesting.ADDPERSON, family1).execute();
             factory.getCommand(CommandsForTesting.ADDINCOME, family1).execute();
             factory.getCommand(CommandsForTesting.ADDEXPEND, family1).execute();
+            factory.getCommand(CommandsForTesting.LISTBYGROUP, family1).execute();
             factory.getCommand(CommandsForTesting.EDITINCOME, family1).execute();
             factory.getCommand(CommandsForTesting.LISTBYGROUP, family1).execute();
             factory.getCommand(CommandsForTesting.EDITEXPEND, family1).execute();
             factory.getCommand(CommandsForTesting.DELETEINCOME, family1).execute();
             factory.getCommand(CommandsForTesting.DELETEEXPEND, family1).execute();
             factory.getCommand(CommandsForTesting.OVERVIEW, family1).execute();
+            factory.getCommand(CommandsForTesting.FIND, family1).execute();
+            //factory.getCommand(CommandsForTesting.HELP, family1).execute();
             factory.getCommand(CommandsForTesting.DELETEPERSON, family1).execute();
-            factory.getCommand(CommandsForTesting.HELP, family1).execute();
         } catch (Exception e) {
+            e.printStackTrace();
             fail();
         }
     }
