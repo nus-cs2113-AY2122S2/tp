@@ -11,7 +11,7 @@ public class Housekeeper {
     private String availability;
     private ArrayList<Integer> availableList = new ArrayList<>();
     private static final String[] daysList = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
-        "Sunday"};
+            "Sunday"};
 
     public Housekeeper(String name, int age) {
         this.name = name;
@@ -39,8 +39,14 @@ public class Housekeeper {
             return "N/A";
         }
         String availableStr = "";
+        int reachEnd = 1;
         for (Integer i : availableList) {
-            availableStr += daysList[i] + " ";
+            if (availableList.size() <= reachEnd) {
+                availableStr += daysList[i];
+            } else {
+                availableStr += daysList[i] + " ";
+            }
+            reachEnd += 1;
         }
         return availableStr;
     }
