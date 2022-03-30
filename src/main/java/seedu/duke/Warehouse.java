@@ -3,6 +3,7 @@ package seedu.duke;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import seedu.duke.JsonKeyConstants.WarehouseKeys;
 import util.exceptions.*;
 
 import java.util.ArrayList;
@@ -16,13 +17,20 @@ public class Warehouse {
     private Map<String, Good> inventory = new HashMap<String, Good>();
     private int inventoryTypeCount = 0;
 
+//    // Map of constants for JSON keys
+//    private Map<String,String> JSONConstants = new HashMap<String,String>();
+//    private void setupJSONConstants(){
+//
+//    }
 
     public Warehouse(Integer capacity) {
         this.totalCapacity = (float)capacity;
+//        setupJSONConstants();
     }
 
     public Warehouse(Float capacity) {
         this.totalCapacity = capacity;
+//        setupJSONConstants();
     }
 
     public boolean isSKUInInventory(String SKU){
@@ -351,9 +359,42 @@ public class Warehouse {
         }
     }
 
+
+    // Related to saving state outside program
+
+    public Boolean saveWarehouseState(){
+        String fp = LocalStorage.WAREHOUSE_PATH;
+        // Create JSON Obj
+        JSONObject state = this.serialize();
+        // Save to file
+        LocalStorage.writeSaveFile(LocalStorage.json2str(state),fp);
+        Display.warehouseStateSaved(fp);
+        return true;
+    }
+
+    private JSONArray serializeOrders(){
+        JSONArray ja = new JSONArray();
+        for (Order o : orderLists){
+            try {
+                JSONObject jo = o.serialize();
+                ja.add(jo);
+            } catch (SerializeException e) {
+                Display.serializeException("Warehouse Orderlist");
+            }
+        }
+    }
+
     private JSONObject serialize(){
         JSONObject warehouse = new JSONObject();
 
+        warehouse.put(WarehouseKeys.capacityOccupied, this.capacityOccupied);
+        warehouse.put(WarehouseKeys.inventoryTypeCount, this.inventoryTypeCount);
+        warehouse.put(WarehouseKeys.totalCapacity, this.totalCapacity);
+        JSONArray s_ol = this.serializeOrders();
+        if (s_ol == null){
+            return null;
+        }
+        warehouse.put(WarehouseKeys.orderLists, s_ol);
 
         return warehouse;
     }
