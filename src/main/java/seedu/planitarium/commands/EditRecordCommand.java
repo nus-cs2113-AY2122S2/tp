@@ -9,9 +9,6 @@ import seedu.planitarium.person.Family;
 import java.util.logging.Level;
 
 public class EditRecordCommand extends Command {
-    private static final String className = CommandFactory.class.getSimpleName();
-    private static final String fileName = className + ".log";
-    private static final ProjectLogger logger = new ProjectLogger(className, fileName);
 
     protected static final String EXPEND = "expenditure";
     protected static final String INCOME = "income";
@@ -55,7 +52,7 @@ public class EditRecordCommand extends Command {
             description = null;
         }
         assert (uid > 0) : USER_INDEX_NOT_VALID;
-        logger.log(Level.INFO, String.format(LOG_EDITREC_INFO,description, uid,group));
+        CommandFactory.logger.log(Level.INFO, String.format(LOG_EDITREC_INFO,description, uid,group));
     }
 
     public void execute() throws PlanITariumException {
@@ -71,7 +68,7 @@ public class EditRecordCommand extends Command {
             index = Parser.getValidIncomeIndex(Parser.parseRecordIndex(userInput),
                     family.getNumberOfIncomes(group, uid));
             family.editIncome(uid, group, index, description, amount, isPermanent);
-            logger.log(Level.INFO, String.format(
+            CommandFactory.logger.log(Level.INFO, String.format(
                     LOG_EXECUTE_INFO, INCOME, description, index, amount, category, uid, group));
             break;
         case EDIT_SPENT_CMD:
@@ -88,11 +85,11 @@ public class EditRecordCommand extends Command {
                 category = null;
             }
             family.editExpend(group, uid, index, description, amount, category, isPermanent);
-            logger.log(Level.INFO, String.format(
+            CommandFactory.logger.log(Level.INFO, String.format(
                     LOG_EXECUTE_INFO, EXPEND, description, index, amount, category, uid, group));
             break;
         default:
-            logger.log(Level.WARNING, Constants.LOG_ERROR_INFO);
+            CommandFactory.logger.log(Level.WARNING, Constants.LOG_ERROR_INFO);
             throw new PlanITariumException(AddRecordCommand.class.getSimpleName());
         }
 

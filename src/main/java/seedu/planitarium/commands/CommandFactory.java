@@ -15,7 +15,7 @@ import java.util.logging.Level;
 public class CommandFactory {
     private static final String className = CommandFactory.class.getSimpleName();
     private static final String fileName = className + ".log";
-    private static final ProjectLogger logger = new ProjectLogger(className, fileName);
+    protected static final ProjectLogger logger = new ProjectLogger(className, fileName);
 
     protected static final String CMD_NOT_NULL = "Command should not be null";
 
