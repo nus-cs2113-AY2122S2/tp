@@ -1,20 +1,48 @@
 # Developer Guide
 
-Mod Happy is a command-line-based application that helps students manage their academics.
 ## Contents
 1. [Introduction](#introduction)
-2. [Purpose](#purpose)
-3. [Acknowledgements](#acknowledgements)
-4. [Design](#design)
+2. [Product Scope](#product-scope)
+3. [About this developer guide](#about-this-developer-guide)
+   <br>2.1. [Purpose](#purpose)
+   <br>2.2. [Explanation of Notation](#explanation-of-notation) 
+4. [Acknowledgements](#acknowledgements)
+5. [Design](#design)
    <br>4.1. [UI Component](#ui-component)
    <br>4.2. [Parser Component](#parser-component)
    <br>4.3. [Data Component](#data-component)
    <br>4.4. [Command Component](#command-component)
    <br>4.5. [Storage Component](#storage-component)
-5. [Implementation](#implementation)
+6. [Implementation](#implementation)
    <br>5.1. [Tag Feature](#tag-feature)
    <br>5.2. [GPA Feature](#gpa-feature) 
-6. [User Stories](#user-stories)
+
+
+## Introduction
+Mod Happy is a command-line-based application that helps students manage their academics. Users are able to add modules and tasks, and calculate their Grade Point Average (GPA).
+
+## Product Scope
+
+### Target User Profile
+
+- Undergraduate Students
+- Comfortable using CLI applications
+- Able to type relatively quickly
+
+### Value proposition
+This application seeks to help the target users to keep track of and manage their module components and deadlines, as it can be confusing to juggle so many deliverables at once.
+
+## About this developer guide
+### Purpose
+This developer guide aims to allow you to understand the design and implementation considerations for Mod Happy. With this guide, you will be able to add on or modify any existing implementation for your own usage.
+
+### Explanation of notation
+`Text` formatted as such represent the classes and functions implemented in the application. You can refer to the API provided to view the implementation directly.
+
+> 📔 <span style="color:#00bb00">**NOTE:**</span>
+>
+> Text enclosed in this "Note" block should be taken note of as it can contain important information about the Component/Implementation.
+
 ## Acknowledgements
 
 - Some foundational source code was adapted from [addressbook-level2](https://github.com/se-edu/addressbook-level2).
@@ -120,6 +148,23 @@ All write operations rely on the general purpose `writeData()` method of the abs
 
 This section describes some details on how some features are implemented.
 
+### Edit Feature
+
+The edit feature allows the user to change a parameter of a task/module. The parameters of a module is its module description while the parameters of a task are its task name, task description and estimated working time. 
+
+Here is an example of editing the description of a task (First task of the module CS2113T):
+
+1. User inputs `edit task 1 -m CS2113T -d "Changed"`.
+2. `ModHappyParser` identifies the command word as `edit` and passes `task 1 -m CS2113T -d "Changed"` to `EditParser`.
+3. `EditParser` instantiates a `EditCommand` with `taskModule = "CS2113T"`, `taskIndex = 0`, `description = "Changed"`, `workingTime = null`, `taskname = null`. This is returned to `Main`.
+4. `Main` calls the `execute()` method of the `EditCommand` instance.
+5. `EditCommand` first gets the relevant `Module` and invokes `editTaskFromModule(targetModule)`.
+6. `editTaskFromModule(targetModule)` retrieves the task `targetTask` specified by the index and invokes `targetTask.setTaskDescription(description)` to change the description.
+
+Below is the sequence diagram of how the Grade feature works:
+*<br>UPDATE AFTER MERGE*
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/Edit.puml)
+
 ### Tag Feature
 
 The tag feature allows the user to add user-created one-word tags to each task, so that tasks can be filtered for easily. Each task stores its tags in an `ArrayList<String>`.
@@ -134,13 +179,31 @@ The following sequence diagram illustrates the process:
 
 Here is an example on adding a tag to a general task:  
 
-1. User inputs `tag add 2 "testTag"`. 
+1. User inputs `tag add 2 testTag`.
 2. `ModHappyParser` identifies the command word as `tag` and passes `add 2 "testTag"` to `TagParser`.
 3. `TagParser` instantiates a `TagCommand` with `tagOperation = "add"`, `taskIndex = 2`, `tagDescription = "testTag"` and `taskModule = null`. This is returned to `Main`.
 4. `Main` calls the `execute()` method of the `TagCommand` instance.
 5. `TagCommand` first gets the relevant `Module`. Since `taskModule` is null, `getGeneralTasks()` is called and the General Tasks `Module` is retrieved.
 6. Next, `TagCommand` checks the `tagOperation`. As its value is `add`, `addTag(targetModule)` is called.
 7. Finally, command feedback is returned to `Main`, indicating that the operation was successful.
+
+### Grade Feature
+
+The Grade feature allows the user to input their predicted/actual grade, according to the official grades that NUS supports.
+
+Here is an example on how to assign a grade to a module:
+
+1. User inputs `grade CS2113T A+`
+2. `ModHappyParser` identifies the command word as `grade` and passes `CS2113T A+` to `GradeParser`.
+3. `GradeParser` instantiates a `GradeCommand` with `moduleCode = "CS2113T"`, `moduleGrade = "A+"`. This is returned to `Main`.
+4. `Main` calls the `execute()` method of the `GradeCommand` instance.
+5. `execute()` retrieves the `Module` instance of `CS2113T` if it exists and invokes `addGradeToModule(m)`.
+6. `addGradeToModule(m)` then invokes `m.setModuleGrade(moduleGrade)` to assign the input grade to the specified module.
+
+Below is the sequence diagram of how the Grade feature works:
+*<br>UPDATE AFTER MERGE*
+![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/Grade.puml) 
+
 
 ### GPA Feature
 
@@ -159,30 +222,47 @@ Below is the sequence diagram of how the GPA feature works:
 
 ![Sequence Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/SequenceDiagrams/GPASeqDiagram/GPA.puml)
 
-## Product scope
-
-### Target user profile
-
-{Describe the target user profile}
-
-### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ...                                                | So that ...                                                                 |
+|---------|----------|--------------------------------------------------------------|-----------------------------------------------------------------------------|
+| v1.0    | new user | see usage instructions                                       | I can refer to them when I forget how to use the application                |
+| v1.0    | user     | add a module                                                 | I can track the progress of the module                                      |
+| v1.0    | user     | remove a module in case I decide to drop the module          ||
+| v1.0    | new user | save and load tasks                                          | I can restore from backups                                                  |
+| v1.0    | user     | delete a task                                                | I can remove the task when I don't need it anymore                          |
+| v1.0    | user     | edit any existing task to suit my needs                      | I can update the information of tasks easily                                |
+| v1.0    | user     | add tasks                                                    | I can track the tasks later                                                 | 
+| v1.0    | user     | list all tasks                                               | I can check all tasks                                                       |
+| v1.0    | user     | add descriptions and notes to a task                         | I can reference them in the future                                          |                   
+| v1.0    | user     | edit descriptions and notes                                  | I can change them                                                           |                                             
+| v1.0    | user     | add expected working time for each task                      | I can estimate the amount of time I should put in                           ||
+| v1.0    | user     | mark a task as completed or uncompleted                      | I can manage the completeness of tasks easily                               |
+| v1.0    | user     | reset the program                                            | I can start from scratch in a new semester                                  |                     
+| v1.0    | new user | see what commands                                            | I can use in the app	I can use the app more easily                          |                
+| v1.0    | user     | list all modules                                             | I can view all modules that I have added                                    |                                  
+| v2.0    | user     | be prompted to confirm when deleting any task                | I won’t delete the wrong task accidentally                                  |
+| v2.0    | user     | show or hide completed tasks in the task list                | I can check the uncompleted tasks only                                      |
+| v2.0    | user     | create tags for tasks                                        | I can categorise them more easily (e.g. tutorial, project, assignment, etc) |
+| v2.0    | user     | mark tasks as important                                      | I can know what tasks to prioritise                                         |
+| v2.0    | user     | list tasks by tag                                            | I can filter tasks I’m looking for                                          |
+| v2.0    | user     | input my grades                                              | I can estimate my final grade                                               |
+| v2.0    | user     | sort modules by % grade                                      | I can know how well I am doing                                              |
+| v2.0    | user     | set a task as graded or ungraded                             | I can manage the grades of assessment easily                                |
+| v2.0    | user     | set the module weightage for each graded task in each module | I can check the progress of each module later                               |
+| v2.0    | user     | input my estimated/predicted grades for a task               | I can gauge my performance in the module thus far                           |
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any mainstream OS as long as it has Java 11 installed.
+2. Should be able to hold up to 1000 tasks and modules combined without a noticeable sluggishness in performance for typical usage.
+3. Should be able to save up to 1000 tasks and modules without taking up noticeable disk space.
+
 
 ## Glossary
 
-* *glossary item* - Definition
+* *Mainstream OS* - Windows, Linux, Unix, OS-X
 
 ## Instructions for manual testing
 
