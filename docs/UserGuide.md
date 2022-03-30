@@ -81,8 +81,8 @@ Allows you to view and change user preferences. This command has three different
 - **Editing a specific configuration option**
 
   Sets the value of the specified configuration option to the one you specify (if it is valid).<br><br>
-  Format: `option CONFIG_NAME = NEW_VALUE`<br><br>
-  Example: `option SHOW_COMPLETED_TASKS = false`
+  Format: `option CONFIG_NAME=NEW_VALUE`<br><br>
+  Example: `option SHOW_COMPLETED_TASKS=false`
   > 📔 <span style="color:#00bb00">**NOTE:**</span>
   >
   > The whitespace around the `=` is optional. In other words, `option SHOW_COMPLETED_TASKS=false` is also a valid command input.
@@ -120,6 +120,9 @@ Adds an object as indicated by the command argument.
   Format: `add task "TASK_NAME" [-m MODULE_CODE] [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”]`<br><br>
   Example (general task without any parameters): `add task "Review PR"`<br>
   Example (module task with parameters): `add task "iP Level-0" -m CS2113T -d "Greet user and exit" -t "1 hour" `
+  > 📔 <span style="color:#00bb00">**NOTE:**</span>
+  >
+  > ESTIMATED_WORKING_TIME is in task duration format, please check [task duration](#task-duration) to see the supporting format.
 
 ### Deleting a task/module: `del`
 
@@ -227,6 +230,28 @@ Format: `save`
 >
 > Mod Happy does **not** auto-save your changes! Do remember to save your work at regular intervals, or before exiting the program.
 
+### Task Duration
+The format of task duration:
+`DURATION_NUMBER DURATION_UNIT`
+- **Duration number:**
+Mod Happy supports any positive decimal and integer no bigger than 1000,000,000. 
+- **Duration unit: Mod Happy understands the following forms of duration units:**
+
+| `hour` | `minute`                                                                                                                                                                            |
+|:-------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  h  |       m                 |
+|  H   | M         |
+|   hour   | minute                                                                                                                      |
+|  Hour   | Hour |
+|  hours   |         minutes            |
+|   Hours |   Minutes                        |
+|   | min                                                                                                                                                                 |
+| - | Min                                                                                                                              |
+
+> ⚠ <span style="color:#ffa500">**IMPORTANT:**</span>
+>
+> User can only choose either hour or minute as the input of duration unit. For decimal hour, Mod Happy will convert the decimal part as minute offset. For decimal minute, Mod Happy will do rounding for the decimal part. 
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
@@ -246,5 +271,6 @@ Format: `save`
 |  list   | `list [TAG_NAME]`                                                                                                                                                                    |
 |  grade  | `grade MODULE_CODE MODULE_GRADE`                                                                                                                                                     |
 |   gpa   | `gpa`                                                                                                                                                                                |
-|  reset  | `reset`                                                                                                                                                                              |
+|  reset  | `reset`    
+|  option | `option CONFIG_NAME=NEW_VALUE`
 |  save   | `save`                                                                                                                                                                               |

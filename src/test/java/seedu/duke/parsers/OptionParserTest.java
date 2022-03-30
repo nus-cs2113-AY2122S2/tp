@@ -69,13 +69,25 @@ public class OptionParserTest {
     }
 
     @Test
-    public void parseIllegal_configNameAndBadValue() {
+    public void parseLegal_configNameAndBadValue() {
         final String testString = "COMPLETED_TASKS_SHOWN=true1";
         try {
             optionParser.parseCommand(testString);
             fail();
         } catch (UnknownConfigurationGroupWord e) {
             return;
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parseLegal_andLegalValueWithSpaceAtLast() {
+        final String testString = "COMPLETED_TASKS_SHOWN=true ";
+        try {
+            optionParser.parseCommand(testString);
+            assertEquals("COMPLETED_TASKS_SHOWN", optionParser.parsedCommand.get("configurationGroupWord"));
+            assertEquals("true", optionParser.parsedCommand.get("newValue"));
         } catch (Exception e) {
             fail();
         }
