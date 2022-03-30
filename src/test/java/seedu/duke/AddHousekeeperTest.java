@@ -28,7 +28,7 @@ public class AddHousekeeperTest {
 
     @Test
     public void commandParser_addCommandEmptyDescription_exceptionThrown() {
-        assertThrows(InvalidHousekeeperProfile.class, () ->
+        assertThrows(InvalidHousekeeperProfileException.class, () ->
                 new CommandParser().parse("add housekeeper / "));
     }
 
@@ -40,6 +40,12 @@ public class AddHousekeeperTest {
     @Test
     public void commandParser_addCommandOverage_exceptionThrown() {
         assertThrows(OverAgeException.class, () -> new CommandParser().parse("add housekeeper Sally / 81"));
+    }
+
+    @Test
+    public void commandParser_extraSlash_exceptionThrown() {
+        assertThrows(InvalidHousekeeperProfileException.class, () -> new CommandParser()
+                .parse("add housekeeper Sally / 81/"));
     }
 
     @Test
