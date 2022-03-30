@@ -8,8 +8,8 @@ public class Medicine {
     private String sideEffects;
     private int quantity;
 
-        public Medicine(String medicineId, String medicineName, int dosage, String expiry,
-                        String sideEffects, int quantity) {
+    public Medicine(String medicineId, String medicineName, int dosage, String expiry,
+            String sideEffects, int quantity) {
         this.medicineId = medicineId;
         this.medicineName = medicineName;
         this.dosage = dosage;
