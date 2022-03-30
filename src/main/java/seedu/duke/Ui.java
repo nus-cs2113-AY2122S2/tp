@@ -14,6 +14,8 @@ public class Ui {
     private static final String LINE = "======================================================================";
     private static final String ITEM_LIST_HEADER = "=========== Item List ===========";
     private static final String END_OF_LIST_LINE = "======== End of the list ========";
+    private static final String MESSAGE_HEADER = "========== Noted ! ==========";
+    private static final String END_OF_MESSAGE_LINE = "=============================";
     private static final String TABLE_HEADER = "Type\t\tRoom Id\t\tlevel\t\tStatus\t\t\tHousekeeper Name";
 
     /**
@@ -112,10 +114,12 @@ public class Ui {
      * @param listOfItems The item list containing all the items in the inventory.
      */
     public void printAddItemAcknowledgementMessage(ItemList listOfItems) {
+        System.out.println(MESSAGE_HEADER);
         System.out.println("The item and its pax has been added to the item list.");
         assert (listOfItems.getSize() > 0) : "Assertion Failed! Number of items in the item list is 0 after an item "
                 + "was added to it.";
         System.out.printf("There are currently %d items within the item list.\n", listOfItems.getSize());
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
     public void printItemAlreadyInTheListErrorMessage(String nameOfItemToAdd) {
@@ -152,7 +156,9 @@ public class Ui {
     }
 
     public void printNoItemsFoundInListAcknowledgementMessage() {
+        System.out.println(MESSAGE_HEADER);
         System.out.println("No Item matching the criteria has been found.");
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
     public void printHousekeeperList(HousekeeperList housekeeperList) {
@@ -237,11 +243,15 @@ public class Ui {
         int updatedItemNewPax = updatedItem.getPax();
         assert (!updatedItemName.isEmpty()) : "Assertion Failed! Updated item has an empty item name.";
         assert (updatedItemNewPax >= 0) : "Assertion Failed! Updated item has a pax that is less than 0.";
+        System.out.println(MESSAGE_HEADER);
         System.out.printf("The pax of %s has been updated to %d.\n", updatedItemName, updatedItemNewPax);
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
     public void printUpdateItemNameAcknowledgementMessage(String oldItemName, String newItemName) {
+        System.out.println(MESSAGE_HEADER);
         System.out.printf("The name of %s has been updated to %s.\n", oldItemName, newItemName);
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
     public void printAddSatisfactionAcknowledgementMessage(SatisfactionList satisfactionList,
@@ -258,8 +268,10 @@ public class Ui {
         String itemName = updatedItem.getName();
         itemName = itemName.toUpperCase();
         assert (!itemName.isEmpty()) : "Assertion Failed! Updated item has an empty item name.";
+        System.out.println(MESSAGE_HEADER);
         System.out.printf("%s has been removed from the Item List.\n", itemName);
         System.out.printf("There are currently %d items within the Item List.\n", listOfItems.getSize());
+        System.out.println(END_OF_MESSAGE_LINE);
     }
 
     public void printAddHousekeeperPerformanceAcknowledgementMessage(HousekeeperPerformanceList
