@@ -2,6 +2,7 @@ package seedu.duke;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import seedu.duke.command.Command;
 
 /**
@@ -59,6 +60,7 @@ public class AddHousekeeperPerformanceCommand extends Command {
 
     /**
      * Returns the housekeeper's name that is extracted from user input.
+     *
      * @param userInput The user's input.
      * @return The name of the housekeeper specified in the user input.
      * @throws HotelLiteManagerException if the name provided by the user is empty.
@@ -79,6 +81,7 @@ public class AddHousekeeperPerformanceCommand extends Command {
 
     /**
      * Returns the housekeeper's performance rating that is extracted from user input.
+     *
      * @param userInput The user's input.
      * @return The performance rating of the housekeeper specified in user input.
      * @throws HotelLiteManagerException if the performance rating provided by the user is empty.
@@ -119,7 +122,7 @@ public class AddHousekeeperPerformanceCommand extends Command {
      * @param listContainer The object containing the data structures necessary for recording a housekeeper's
      *                      performance. In this case, we are manipulating the housekeeperPerformanceList object
      *                      (adding to it), and we require information from the housekeeperList object.
-     * @param ui The object that deals with user interface for the program.
+     * @param ui            The object that deals with user interface for the program.
      * @throws HotelLiteManagerException if the item name within the item object does not exist in the item list.
      */
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {

@@ -25,6 +25,15 @@ public class ItemList {
         this.listOfItems = listOfItems;
     }
 
+    /**
+     * Adds a new item to the item list. If there exists an item within the item list that has the same name as the item
+     * the user wants to add, the item would not be added into the item list.
+     *
+     * @param item The item that the user wants to add into the item list.
+     * @return true if there is no items within the item list which has the same name as the name passed
+     * into the function. false otherwise.
+     */
+
     public boolean addItemToList(Item item) {
         boolean isItemAlreadyInTheList = checkForItemDuplicates(item.getName());
         if (isItemAlreadyInTheList == true) {
@@ -37,6 +46,15 @@ public class ItemList {
     public int getSize() {
         return listOfItems.size();
     }
+
+    /**
+     * Checks if there is another item within the item list which has the same name as the name passed
+     * into the function.
+     *
+     * @param nameOfItemToAdd Name of the item that the user wants to add into the item list.
+     * @return true if there is no items within the item list which has the same name as the name passed
+     * into the function. false otherwise.
+     */
 
     public boolean checkForItemDuplicates(String nameOfItemToAdd) {
         boolean isItemAlreadyInTheList = false;
@@ -100,6 +118,14 @@ public class ItemList {
         }
     }
 
+    /**
+     * Deletes the item within the item list which has the item name specified by the user.
+     *
+     * @param item The item within the inventory that the user wants to delete. The item object contains the item name
+     *             of the item to delete.
+     * @throws ItemNotFoundException if the item that the user wants to delete does not exist within the item list.
+     */
+
     public void deleteItemInList(Item item) throws ItemNotFoundException {
         String nameOfItemToDelete = item.getName();
         assert (!nameOfItemToDelete.isEmpty()) : "Assertion Failed! Name of the item to delete is empty.";
@@ -122,6 +148,13 @@ public class ItemList {
         }
     }
 
+    /**
+     * Updates the pax of a specific item within the item list.
+     *
+     * @param currentItemName The current name of the item within the item list that the user wants to update.
+     * @param newItemName     The new name of the item within the item list that the user wants to update.
+     * @throws ItemNotFoundException if the item that the user wants to update does not exist in the item list.
+     */
     public void updateItemNameInList(String currentItemName, String newItemName) throws ItemNotFoundException {
         boolean isItemFound = false;
         ArrayList<Item> listOfItems = getListOfItems();
@@ -143,6 +176,12 @@ public class ItemList {
         }
     }
 
+    /**
+     * Returns all the items in the item list whose name contains the keyword given by the user.
+     *
+     * @param keyword The keyword used to search the item list.
+     * @return An item list containing all the items whose names contain the keyword.
+     */
     public ItemList findItemsInList(String keyword) {
         ItemList listOfMatchingItems = new ItemList();
         ArrayList<Item> listOfItems = getListOfItems();
@@ -158,6 +197,11 @@ public class ItemList {
         return listOfMatchingItems;
     }
 
+    /**
+     * Returns all the items in the item list whose pax is zero.
+     *
+     * @return An item list containing all the items whose pax is zero.
+     */
     public ItemList findItemsWithZeroPaxInList() {
         ItemList listOfMatchingItems = new ItemList();
         Item item;
