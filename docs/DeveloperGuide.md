@@ -210,11 +210,23 @@ The path of the JSON file is provided as a parameter in the constructor of `Stor
 there is no need for any parameters in the `Storage#load()`. Since a save file will be created in the 
 constructor of `Storage` if no such file exists, there should not be any issue with a missing save file.
 
+The save file has the following fields:
+- `identifier`: A randomly generated number given to a task. Recurring tasks share the same identifier.
+- `index`: The index of the task in the array list
+- `description`: Description of the task
+- `status`: If the task is completed or not (`'X'` indicates completion, empty string otherwise)
+- `do_date_start`: The start date and time of the task (d/M/yyyy HH:mm format)
+- `do_date_end`: The end date and time of the task (d/M/yyyy HH:mm format)
+- `by_date`: The due date of the task (d/M/yyyy format)
+- `frequency`: How often the task repeats (`DAILY`,`WEEKLY`,`MONTHLY`,`NULL`)
+
 The sequence diagram of `Storage#load()` is shown here:
 ![](images/StorageLoadSD.png)
 
-In the event where the save file cannot be parsed by `JSONObject`, the function `Storage#handleCorruptedSave()`
-will be invoked. The user will get to choose to create a new save file or exit the program for manual inspection.
+In the event where the save file cannot be parsed by `JSONObject` (i.e. the format of the file is incorrect) 
+or if there are missing fields in a task, the function `Storage#handleCorruptedSave()`
+will be called. The user will get to choose to create a new save file or exit the program for manual inspection.
+The file error will also be displayed to the user.
 
 The sequence diagram of `Storage#handleCorruptedSave()` is shown here:
 
