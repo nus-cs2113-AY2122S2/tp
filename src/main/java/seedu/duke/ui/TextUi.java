@@ -6,23 +6,15 @@ import java.util.Scanner;
 import seedu.duke.util.StringConstants;
 
 public class TextUi {
-    protected final Scanner in;
-    protected final PrintStream out;
-
-    /**
-     * Creates an instance of TextUi.
-     */
-    public TextUi() {
-        this.in = new Scanner(System.in);
-        this.out = System.out;
-    }
+    protected static final Scanner in = new Scanner(System.in);
+    protected static final PrintStream out = System.out;
 
     /**
      * Formats the provided message.
      *
      * @param message the message to be printed
      */
-    public String formatMessage(String message) {
+    public static String formatMessage(String message) {
         return String.format("%s%s\n%s\n%s", StringConstants.LS, StringConstants.LINE, message, StringConstants.LINE);
     }
 
@@ -31,42 +23,42 @@ public class TextUi {
      *
      * @return user input
      */
-    public String getUserCommand() {
+    public static String getUserCommand() {
         return in.nextLine();
     }
 
     /**
      * Displays a message enclosed by horizontal lines.
      */
-    public void showMessage(Object message) {
+    public static void showMessage(Object message) {
         out.println(formatMessage(message.toString()));
     }
 
     /**
      * Displays a message without any special formatting.
      */
-    public void showUnformattedMessage(Object message) {
+    public static void showUnformattedMessage(Object message) {
         out.println(message.toString());
     }
 
     /**
      * Displays the welcome message.
      */
-    public void showHelloMessage() {
+    public static void showHelloMessage() {
         showMessage(StringConstants.HELLO_MESSAGE);
     }
 
     /**
      * Displays the goodbye message.
      */
-    public void showGoodByeMessage() {
+    public static void showGoodByeMessage() {
         showMessage(StringConstants.GOOD_BYE_MESSAGE);
     }
 
     /**
      * Displays the initialisation message.
      */
-    public void showInitFailedMessage() {
+    public static void showInitFailedMessage() {
         showMessage(StringConstants.INIT_FAILED_MESSAGE);
     }
 

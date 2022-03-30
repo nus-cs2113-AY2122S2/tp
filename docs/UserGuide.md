@@ -14,7 +14,7 @@
   - 4.5\. [Editing a task/module](#45-editing-a-taskmodule-edit)
   - 4.6\. [Marking a task](#46-marking-a-task-mark)
   - 4.7\. [Managing custom tags](#47-managing-custom-tags-tag)
-  - 4.8\. [Listing all tasks](#48-listing-all-tasksmodules-list)
+  - 4.8\. [Listing all tasks](#48-listing-all-tasks-list)
   - 4.9\. [Setting a module's grade](#49-setting-a-modules-grade-grade)
   - 4.10\. [Viewing GPA](#410-viewing-gpa-gpa)
   - 4.11\. [Resetting the program](#411-resetting-the-program-reset)
@@ -113,9 +113,9 @@ Allows you to view and change various user preferences which can affect other as
 <br>
 The following configuration options currently exist:
 
-| Config name          | Description                                                                                                                                   | Accepted values                                                                |
-|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| SHOW_COMPLETED_TASKS | Determines whether tasks marked as completed are shown when [listing tasks](#48-listing-all-tasksmodules-list).<br>**Default value: `false`** | `true`: **All** tasks are shown.<br>`false`: Only uncompleted tasks are shown. |  
+| Config name          | Description                                                                                                                            | Accepted values                                                                |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| SHOW_COMPLETED_TASKS | Determines whether tasks marked as completed are shown when [listing tasks](#48-listing-all-tasks-list).<br>**Default value: `false`** | `true`: **All** tasks are shown.<br>`false`: Only uncompleted tasks are shown. |  
 
 <br>
 
@@ -203,13 +203,13 @@ Allows you to add or delete a tag from the [specified task](#32-specifying-tasks
 >
 > The tag name must be a single word; it cannot contain whitespace.
 
-Format: `tag (add | del) TASK_INDEX [-m MODULE_CODE] "TAG_NAME"`
+Format: `tag (add | del) TASK_INDEX [-m MODULE_CODE] TAG_NAME`
 
-Example: `tag add 1 -m CS2113T "project"`
+Example: `tag add 1 -m CS2113T project`
 
 <br>
 
-### 4.8. Listing all tasks/modules: `list`
+### 4.8. Listing all tasks: `list`
 
 Shows you your tasks, grouped by module code. General tasks are displayed separately.
 
@@ -219,7 +219,7 @@ If a [tag name](#47-managing-custom-tags-tag) is provided, only tasks with the a
 > 
 > If the [`SHOW_COMPLETED_TASKS` option](#42-accessing-options-option) is set to `false`, you will only be shown your outstanding tasks. The number of tasks that were hidden will be indicated at the bottom of each group.
 
-Format: `list ["TAG_NAME"]`
+Format: `list [TAG_NAME]`
 
 <br>
 
@@ -274,16 +274,17 @@ Format: `save`
 
 ## 6: Command summary
 
-| Command | Format                                                                                                                                                                                   |
-|:-------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|  help   | `help [COMMAND_WORD]`                                                                                                                                                                    |
-|   add   | `add mod MODULE_CODE MODULAR_CREDITS [-d "MODULE_DESCRIPTION"]`<br>`add task "TASK_NAME" [-m MODULE_CODE] [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”]`                         |
-|   del   | `del mod MODULE_CODE`<br>`del task TASK_NUMBER [-m MODULE_CODE]`                                                                                                                         |
-|  edit   | <code>edit task TASK_NUMBER [-m MODULE_CODE] (-n "TASK_NAME" &#124; -d "TASK_DESCRIPTION" &#124; -t "ESTIMATED_WORKING_TIME")</code> <br> `edit mod MODULE_CODE -d "MODULE_DESCRIPTION"` |
-|  mark   | <code>mark (c &#124; u) TASK_NUMBER [-m MODULE_CODE]</code>                                                                                                                              |
-|   tag   | <code>tag (add &#124; del) [-m MODULE_CODE] "TAG_NAME"</code>                                                                                                                            |
-|  list   | `list ["TAG_NAME"]`                                                                                                                                                                      |
-|  grade  | `grade MODULE_CODE MODULE_GRADE`                                                                                                                                                         |
-|   gpa   | `gpa`                                                                                                                                                                                    |
-|  reset  | `reset`                                                                                                                                                                                  |
-|  save   | `save`                                                                                                                                                                                   |
+|                  Command                   | Format                                                                                                                                                                                   |
+|:------------------------------------------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|      [help](#41-accessing-help-help)       | `help [COMMAND_WORD]`                                                                                                                                                                    |
+|   [option](#42-accessing-options-option)   | `option`<br>`option CONFIG_NAME`<br>`option CONFIG_NAME = NEW_VALUE`                                                                                                                     |
+|     [add](#43-adding-a-taskmodule-add)     | `add mod MODULE_CODE MODULAR_CREDITS [-d "MODULE_DESCRIPTION"]`<br>`add task "TASK_NAME" [-m MODULE_CODE] [-d "TASK_DESCRIPTION"] [-t “ESTIMATED_WORKING_TIME”]`                         |
+|    [del](#44-deleting-a-taskmodule-del)    | `del mod MODULE_CODE`<br>`del task TASK_NUMBER [-m MODULE_CODE]`                                                                                                                         |
+|   [edit](#45-editing-a-taskmodule-edit)    | <code>edit task TASK_NUMBER [-m MODULE_CODE] (-n "TASK_NAME" &#124; -d "TASK_DESCRIPTION" &#124; -t "ESTIMATED_WORKING_TIME")</code> <br> `edit mod MODULE_CODE -d "MODULE_DESCRIPTION"` |
+|      [mark](#46-marking-a-task-mark)       | <code>mark (c &#124; u) TASK_NUMBER [-m MODULE_CODE]</code>                                                                                                                              |
+|    [tag](#47-managing-custom-tags-tag)     | <code>tag (add &#124; del) [-m MODULE_CODE] TAG_NAME</code>                                                                                                                              |
+|     [list](#48-listing-all-tasks-list)     | `list [TAG_NAME]`                                                                                                                                                                        |
+| [grade](#49-setting-a-modules-grade-grade) | `grade MODULE_CODE MODULE_GRADE`                                                                                                                                                         |
+|        [gpa](#410-viewing-gpa-gpa)         | `gpa`                                                                                                                                                                                    |
+| [reset](#411-resetting-the-program-reset)  | `reset`                                                                                                                                                                                  |
+|     [save](#412-saving-your-data-save)     | `save`                                                                                                                                                                                   |

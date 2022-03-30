@@ -1,4 +1,6 @@
 @startuml
+!include Style.puml
+
 actor user
 user --> [Ui]
 [Ui] --> [Main]

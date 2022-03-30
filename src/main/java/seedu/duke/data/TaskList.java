@@ -130,12 +130,13 @@ public class TaskList {
                     numHiddenTasks++;
                 }
             }
-            if (res.length() == 0) {
-                res.append(indent).append(EMPTY_LIST).append(LS);
-            }
-            if (!showCompletedTasks && numHiddenTasks > 0) {
-                res.append(indent).append(String.format(HIDDEN_TASKS_COUNT, numHiddenTasks)).append(LS);
-            }
+
+        }
+        if (res.length() == 0) {
+            res.append(indent).append(EMPTY_LIST).append(LS);
+        }
+        if (!showCompletedTasks && numHiddenTasks > 0) {
+            res.append(indent).append(String.format(HIDDEN_TASKS_COUNT, numHiddenTasks)).append(LS);
         }
         return res.toString();
     }
