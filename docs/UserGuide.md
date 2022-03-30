@@ -192,8 +192,7 @@ Format: `deletein /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX`
 * **INCOME_INDEX** refers to the index of the income you would like to delete.
 
 > :information_source: Notes:
-> * Entries in an income list which have an income index higher than the deleted one will be **decremented** after the 
-    deletion is completed.
+> * Entries in an income list which have an income index higher than the deleted one will be **decremented** after the deletion is completed.
 
 Example of usage:
 
@@ -247,8 +246,8 @@ Format: `addout /g GROUP_INDEX /u USER_INDEX /e EXPENDITURE /d DESCRIPTION /c CA
 
 Example of usage:
 
-* Add a monthly-recurrent expenditure on candies of $20 to Alice's expenditure. This expenditure
-  is tagged under the "Food and Drinks" category.
+* Add a monthly-recurrent expenditure on candies of $20 to Alice's expenditure. This expenditure is tagged under the "
+  Food and Drinks" category.
 
   `addout /u 1 /g 1 /e 20 /d candies /c 1 /p t`
 
@@ -381,11 +380,11 @@ Format: `bye`
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: After you exit the program, your application data will be automatically stored in a text file locally.
-You can transfer the data by transferring the text file to another computer and put it in the same
-directory as the application in the new computer. When the application starts up, it will automatically
-load the saved data in the text file. Do note that the application running in the new computer should
-be the same version as the application in your previous computer.
+**A**: After you exit the program, your application data will be automatically stored in a text file locally. You can
+transfer the data by transferring the text file to another computer and put it in the same directory as the application
+in the new computer. When the application starts up, it will automatically load the saved data in the text file. Do note
+that the application running in the new computer should be the same version as the application in your previous
+computer.
 
 <br/>
 
@@ -394,19 +393,19 @@ be the same version as the application in your previous computer.
 To keep things simple, we will omit the parameter description for you. To view each command in detail, refer to
 the [features](#features) section.
 
-| Command                                                             | Format                                             |
-|---------------------------------------------------------------------|----------------------------------------------------|
-| [View all commands](#viewing-all-commands-help)                     | help                                               |
-| [Add a person](#add-a-person-add)                                   | add /n __ /g __                                    |
-| [Delete a person](#delete-a-person-delete)                          | delete /u __ /g __                                 |
-| [Add an income](#add-an-income-addin)                               | addin /u__ /g __ /i __ /d __ /c __ /p __           |
-| [Delete an income](#delete-an-income-deletein)                      | deletein /u __ /g __ /r __                         |
-| [Edit an income](#edit-an-income-editin)                            | editin /u __ /g __ /r __ /i __ /d __ /c __  /p __  |
-| [Add an expenditure](#add-an-expenditure-addout)                    | addout /u__ /g __ /e __ /d __ /c __ /p __          |
-| [Delete an expenditure](#delete-an-expenditure-deleteout)           | deleteout /u __ /g __ /r __                        |
-| [Edit an expenditure](#edit-an-expenditure-editout)                 | editout /u __ /g __ /r __ /e __ /d __ /c __  /p __ |
-| [Show financial summary](#show-financial-summary-overview)          | overview                                           |
-| [Show all records by group](#show-all-records-by-group-list)        | list /g __                                         | 
-| [Show expenditure categories](#show-expenditure-categories-listcat) | listcat                                            |
-| [Searching for details](#searching-for-details-find)                | find /d __ /c __                                   |
-| [Exit the program](#exit-bye)                                       | bye                                                |
+| Command                                                             | Format                                            |
+|---------------------------------------------------------------------|---------------------------------------------------|
+| [View all commands](#viewing-all-commands-help)                     | help                                              |
+| [Add a person](#add-a-person-add)                                   | add /n __ /g __                                   |
+| [Delete a person](#delete-a-person-delete)                          | delete /u __ /g __                                |
+| [Add an income](#add-an-income-addin)                               | addin /u__ /g __ /i __ /d __ /p __                |
+| [Delete an income](#delete-an-income-deletein)                      | deletein /u __ /g __ /r __                        |
+| [Edit an income](#edit-an-income-editin)                            | editin /u __ /g __ /r __ /i __ /d __ /p __        |
+| [Add an expenditure](#add-an-expenditure-addout)                    | addout /u__ /g __ /e __ /d __ /c __ /p __         |
+| [Delete an expenditure](#delete-an-expenditure-deleteout)           | deleteout /u __ /g __ /r __                       |
+| [Edit an expenditure](#edit-an-expenditure-editout)                 | editout /u __ /g __ /r __ /e __ /d __ /c __ /p __ |
+| [Show financial summary](#show-financial-summary-overview)          | overview                                          |
+| [Show all records by group](#show-all-records-by-group-list)        | list /g __                                        | 
+| [Show expenditure categories](#show-expenditure-categories-listcat) | listcat                                           |
+| [Searching for details](#searching-for-details-find)                | find /d __ /c __                                  |
+| [Exit the program](#exit-bye)                                       | bye                                               |
