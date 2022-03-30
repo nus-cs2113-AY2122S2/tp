@@ -42,6 +42,8 @@ public class GroupCreateCommand extends Command {
      * @param personNames An array of String objects that represents the involved persons for the group.
      */
     public GroupCreateCommand(String groupName, String[] personNames) {
+        assert groupName != null : Message.ASSERT_GROUPCREATE_GROUP_NAME_NULL;
+        assert personNames != null : Message.ASSERT_GROUPCREATE_PERSONLIST_NULL;
         this.groupName = groupName;
         this.personNames = personNames;
     }

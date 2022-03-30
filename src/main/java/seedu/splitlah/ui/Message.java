@@ -382,6 +382,10 @@ public abstract class Message {
             "This person is not in the group.";
 
     // Group Create Command
+    public static final String ASSERT_GROUPCREATE_GROUP_NAME_NULL =
+            "Group name is empty but was not handled in prepare function.";
+    public static final String ASSERT_GROUPCREATE_PERSONLIST_NULL =
+            "The person list is empty but was not handled in prepare function.";
     public static final String LOGGER_GROUPCREATE_GROUP_ADDED =
             "A group was added into the list of groups with Id: ";
     public static final String LOGGER_GROUPCREATE_DUPLICATE_NAMES_IN_GROUP_LIST =
