@@ -262,14 +262,21 @@ Aspect: How to make the `ListCommand` easily tested using JUnit testing.
 
 
 
-## Product scope
-### Target user profile
+## Appendix Requirements
+  
+  
+### Product scope
 
-{Describe the target user profile}
+**Target user profile**
+- a student beginner who wants to start managing their finances
+- possess an income
+- prefer desktop application
+- is proficient in CLI
+- can type fast
+- prefers typing to mouse interactions
 
-### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
+**Value proposition**
+Manage finances containing multiple payment methods faster than a typical mouse/GUI driven app.
 
 ## User Stories
 
@@ -280,11 +287,14 @@ Aspect: How to make the `ListCommand` easily tested using JUnit testing.
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.   
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+   should be able to accomplish most of the tasks faster using commands than using the mouse.
+
 
 ## Glossary
 
-* *glossary item* - Definition
+* Mainstream OS: Windows, Linux, Unix, OS-X  
 
 ## Instructions for manual testing
 
