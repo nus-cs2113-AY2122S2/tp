@@ -53,11 +53,11 @@ public class Response {
     }
 
     public static String addProjectSuccessfully(String name) {
-        return ("The project " + name + "has been added successfully.");
+        return ("The project " + name + " has been added successfully.");
     }
 
     public static String addTodoSuccessfully(String todo) {
-        return ("Todo " + todo + "has been added successfully.");
+        return ("Todo " + todo + " has been added successfully.");
     }
 
     public static String addTodoUnsuccessfully(String todo) {
