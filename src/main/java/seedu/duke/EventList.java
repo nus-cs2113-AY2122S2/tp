@@ -45,7 +45,7 @@ public class EventList {
         }
     }
 
-    public void save() throws IOException {
+    public void save() throws IOException, HotelLiteManagerException {
         EventListFileManager eventFileManager = new EventListFileManager();
         eventFileManager.save(eventList);
     }

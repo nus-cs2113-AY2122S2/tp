@@ -7,7 +7,9 @@ import seedu.duke.EmptyItemNameException;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.ItemList;
+import seedu.duke.storage.ItemListFileManager;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 public class DeleteItemCommand extends Command {
@@ -32,10 +34,13 @@ public class DeleteItemCommand extends Command {
     }
 
     @Override
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         Item itemToDelete = getItem();
+        ItemListFileManager itemListFileManager = new ItemListFileManager();
         ItemList listOfItems = listContainer.getItemList();
         listOfItems.deleteItemInList(itemToDelete);
         ui.printDeleteItemAcknowledgementMessage(itemToDelete, listOfItems);
+        itemListFileManager.writeItemListToFile(listOfItems);
+
     }
 }

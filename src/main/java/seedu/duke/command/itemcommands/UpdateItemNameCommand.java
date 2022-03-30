@@ -6,7 +6,9 @@ import seedu.duke.InvalidUpdateItemNameCommandException;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.ItemList;
+import seedu.duke.storage.ItemListFileManager;
 
+import java.io.IOException;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -79,7 +81,7 @@ public class UpdateItemNameCommand extends Command {
         this.newItemName = newItemName;
     }
 
-    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException {
+    public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         ItemList listOfItems = listContainer.getItemList();
         String oldItemName = getOldItemName();
         String newItemName = getNewItemName();
@@ -87,5 +89,7 @@ public class UpdateItemNameCommand extends Command {
         oldItemName = oldItemName.toUpperCase();
         newItemName = newItemName.toUpperCase();
         ui.printUpdateItemNameAcknowledgementMessage(oldItemName, newItemName);
+        ItemListFileManager itemListFileManager = new ItemListFileManager();
+        itemListFileManager.writeItemListToFile(listOfItems);
     }
 }
