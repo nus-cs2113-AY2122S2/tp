@@ -41,9 +41,10 @@ deactivate Expenditure
 
 AddCommand -> expenditureList: expenditureList.add(new Expenditure)
 activate expenditureList
-
 expenditureList --> AddCommand
 deactivate expenditureList
+
+AddCommand -> AddCommand: print added expenditure
 
 AddCommand --> AddCommand:
 deactivate AddCommand

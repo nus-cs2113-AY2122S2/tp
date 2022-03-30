@@ -13,9 +13,9 @@
         * [Display current list of expenditures: `list` ](#display-current-list-of-expenditures-list)
         * [Modify an expenditure on your list: `update`](#modify-an-expenditure-on-your-list-update)
         * [Removing an expenditure on your list: `delete`](#removing-an-expenditure-on-your-list-delete)
-        * [Calculations that Mindmymoney provide: `calculate`](#calculations-that-mindmymoney-provide-calculate)
+        * [Calculations that MindMyMoney provide: `calculate`](#calculations-that-MindMyMoney-provide-calculate)
           * [Expenditure per month: `calculate /epm`](#expenditure-per-month-calculate-epm)
-        * [Exiting MindMyMoney application: `bye`](#exiting-mindmymoney-application-bye)
+        * [Exiting MindMyMoney application: `bye`](#exiting-MindMyMoney-application-bye)
     * [Credit Card](#credit-card)
         * [Display list of currently available commands for credit card: `help`](#display-list-of-currently-available-commands-for-credit-card-help)
         * [Add a credit card to your program: `add`](#add-a-credit-card-to-your-program-add)
@@ -50,7 +50,7 @@ when you are using the application.
 1. Ensure that you have Java 11 or above installed. Click
    [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html) for the link to the Java 11
    installer.
-2. Download the latest version of `MindMyMoney.jar` from [here](https://github.com/AY2122S2-CS2113T-T10-4/tp/releases)).
+2. Download the latest version of `**MindMyMoney**.jar` from [here](https://github.com/AY2122S2-CS2113T-T10-4/tp/releases)).
 3. Copy the file to the folder you want to use as the _home folder_ for your MindMyMoney.
 4. Open a command line terminal in your _home folder_ and run `java -jar MindMyMoney.jar`.
    The startup interface similar to the one below should appear in a few seconds.  

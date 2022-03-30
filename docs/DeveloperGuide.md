@@ -14,9 +14,9 @@
         * [Display current list of expenditures: `list` ](#display-current-list-of-expenditures-list)
         * [Modify an expenditure on your list: `update`](#modify-an-expenditure-on-your-list-update)
         * [Removing an expenditure on your list: `delete`](#removing-an-expenditure-on-your-list-delete)
-        * [Calculations that Mindmymoney provide: `calculate`](#calculations-that-mindmymoney-provide-calculate)
+        * [Calculations that MindMyMoney provide: `calculate`](#calculations-that-MindMyMoney-provide-calculate)
             * [Expenditure per month: `calculate /epm`](#expenditure-per-month-calculate-epm)
-        * [Exiting MindMyMoney application: `bye`](#exiting-mindmymoney-application-bye)
+        * [Exiting MindMyMoney application: `bye`](#exiting-MindMyMoney-application-bye)
     * [Credit Card](#credit-card)
         * [Display list of currently available commands for credit card: `help`](#display-list-of-currently-available-commands-for-credit-card-help)
         * [Add a credit card to your program: `add`](#add-a-credit-card-to-your-program-add)
@@ -35,14 +35,14 @@ calculate monthly expenditure, and set financial goals. The application is targe
 managing their personal finances.
 
 ### Purpose
-This document specified architecture and software design decisions for the application, Mindmymoney.
+This document specified architecture and software design decisions for the application, MindMyMoney.
 ### Scope
 This describes the software architecture and software design decisions for the implementation
-of Mindmymoney. The intended audience of this document is the developers, designers, and
-software testers of Mindmymoney.
+of MindMyMoney. The intended audience of this document is the developers, designers, and
+software testers of MindMyMoney.
 ### Acknowledgements
 We would like to thank [AddressBook-3](https://se-education.org/addressbook-level3/) for assisting us in developing
-Mindmymoney.
+MindMyMoney.
 ### Using the User Guide
 Along the guide you may encounter several icons. These icons will provide several useful information.
 > **💡 Note:**
@@ -88,7 +88,7 @@ The major code is broken down into components for better abstraction.
 The sections below give more details for each component.
 
 ### UI component
-The source code can be found in [Ui.java](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/Ui.java)
+The source code can be found in [Ui.java](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/MindMyMoney/Ui.java)
 
 ![ui_diagram](images/ui_diagram.png)
 <br/> Fig 3 - Ui Diagram
@@ -104,7 +104,7 @@ application.
 <br/>
 
 ### Parser component
-The source code can be found in [Parser.java](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/Parser.java)
+The source code can be found in [Parser.java](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/MindMyMoney/Parser.java)
 
 ![parser_diagram](images/parser_diagram.png)
 <br/> Fig 4 - Parser Diagram
@@ -120,7 +120,7 @@ We pass in the`itemList`to the`Command`object instead of using a global variable
 add, delete and update`Expenditure`entries in a new`itemList`during testing without affecting the actual`itemList`.
 
 ### Command component 
-The source can be found in [command](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/command)
+The source can be found in [command](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/MindMyMoney/command)
 
 ![command_diagram](images/command_diagram.png)
 <br/> Fig 5 - Command Diagram
@@ -135,7 +135,7 @@ executed. Only 1 Command object can be created.
 exceptions if an error is encountered. The error is then handled.
 
 ### Storage component 
-The source can be found in [Storage.java](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/Storage.java)
+The source can be found in [Storage.java](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/MindMyMoney/Storage.java)
 
 ![storage_diagram](images/storage_diagram.png)
 <br/> Fig 6 - Storage Diagram
@@ -150,7 +150,7 @@ The Storage component:
 
 
 ## Implementation
-This section describes some noteworthy details on how certain features of Mindmymoney are implemented.
+This section describes some noteworthy details on how certain features of MindMyMoney are implemented.
 
 ### Add Command Component
 **API Reference**: `AddCommand.java`  
@@ -172,8 +172,17 @@ Below is an example scenario showing how the AddCommand behaves at each step.
    `MindMyMoney`.
 2. `AddCommand` instantiates `addInput`, `expenditureList`, `creditCardList`, `incomeList`.
 3. The application invokes `Addcommand.executeCommand()` to execute user instruction.
-4. If user input contains credit card... blah blah im still typing
-  
+4. If user input contains credit card flag, the application executes `addCreditCard()`.
+5. Else if user input contains income flag, the application executes `addIncome()`.
+6. Else the application executes `addExpenditure()`.
+7. The application then returns to the Parser component.
+
+### Add Credit Card Command
+MindMyMoney allow users to track their different payment methods, A user can add and track user expenditure. A user can add in a new expenditure
+by specifying the payment method, the category, the description of the item, the cost of the item and the date of
+purchase.
+
+
 ### Add Expenditure Command
 A key functionality of MindMyMoney is the ability to add and track user expenditure. A user can add in a new expenditure
 by specifying the payment method, the category, the description of the item, the cost of the item and the date of 
@@ -187,15 +196,14 @@ to the list.
 The add expenditure command is facilitated by the `AddCommand`. By running the command `add` with its relevant flags, 
 `Parser` will construct a new `AddCommand` which will be used to execute users input.
 
-1. The `Parser` component parses user input and returns the new `AddCommand` object to the
-   `MindMyMoney`.
-2. `AddCommand` instantiates `addInput`, `expenditureList` and `creditCardList`.
-3. The application invokes `Addcommand.execute` to execute user instruction.
-4. During the execution, `Addcommand.execute` will parse through user input to obtain the `EXPENDITURE`, `CATEGORY`,
+1. During the execution, `addExpenditure()` will parse through user input to obtain the `PAYMENT_METHOD`, `CATEGORY`,
    `DESCRIPTION`, `AMOUNT` and `TIME` fields.
-5. The `Addcommand` object instantiates a new `Expenditure` object with the aforementioned 5 fields and adds them
+2. Once all the fields are obtained, `addExpenditure()` will run tests for its respective fields and capitalise the 
+   `PAYMENT_METHOD`, `CATEGORY` input.
+3. The `addExpenditure()` object instantiates a new `Expenditure` object with the aforementioned 5 fields and adds them
    into the `ExpenditureList`.
-6. The `Addcommand` object prints a list to show the user what it has saved.
+4. The `addExpenditure()` object prints a list to show the user what it has saved.
+5. The `addExpenditure()` returns to `AddCommand`.
 
 #### Design considerations
 Aspect: How to ask user for the 5 fields of input
