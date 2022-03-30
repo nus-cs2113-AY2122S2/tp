@@ -1,6 +1,6 @@
 package cpp.model;
 
-import cpp.Constants;
+import cpp.ui.Constants;
 import cpp.exceptions.NegativeIndexException;
 import cpp.model.project.Project;
 

@@ -1,8 +1,7 @@
 package cpp.logic.commands;
 
-import cpp.exceptions.IllegalCommandException;
 import cpp.model.ProjectList;
-import cpp.response.Response;
+import cpp.ui.Response;
 
 
 public class AddProjectCommand extends Command {

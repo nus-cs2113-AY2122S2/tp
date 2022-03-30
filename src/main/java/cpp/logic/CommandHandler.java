@@ -1,6 +1,6 @@
 package cpp.logic;
 
-import cpp.Constants;
+import cpp.ui.Constants;
 import cpp.exceptions.IllegalCommandException;
 import cpp.logic.commands.Command;
 import cpp.logic.commands.ListProjectCommand;
@@ -12,7 +12,7 @@ import cpp.logic.parser.DeleteProjectCommandParser;
 import cpp.logic.parser.MarkCommandParser;
 import cpp.logic.parser.ViewProjectCommandParser;
 import cpp.model.ProjectList;
-import cpp.response.Response;
+import cpp.ui.Response;
 
 public class CommandHandler {
     /**
