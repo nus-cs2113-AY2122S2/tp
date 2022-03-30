@@ -35,7 +35,7 @@ There are currently 3 items within the item list.
 The pax of TOILET ROLL has been updated to 5.
 ===========================================
 Error! Item Pax is invalid.
-Error! Item Name cannot be empty.
+Error! Item Pax cannot be empty.
 Error! Item Name cannot be empty.
 Error! Invalid Command.
 Error! Item not found in inventory.
