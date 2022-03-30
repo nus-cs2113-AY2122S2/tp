@@ -13,10 +13,10 @@ public class AddCommandParserTest {
 
     private AddCommandParser parser = new AddCommandParser();
 
-    // Not all permutations were tested. Should not be needed...
     @Test
     void parse_compulsoryFieldMissing_throwException() {
         String testInputFormat = " %s %s %s %s";
+        // Missing quantity prefix
         String testInput = String.format(testInputFormat,
                 CliSyntax.PREFIX_NAME.getPrefix(), ParserStubs.PAPERCUP_NAME,
                 CliSyntax.PREFIX_DESCRIPTION.getPrefix(), ParserStubs.PAPERCUP_DESCRIPTION);
