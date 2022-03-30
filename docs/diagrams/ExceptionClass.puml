@@ -5,13 +5,16 @@ class HalpmiException {
     +HalpmiException(String)
     +toString() : String
 }
-class DuplicateEntryException
+class DuplicateEntryException {
+    +DuplicateEntryException(String)
+    +toString() : String
+ }
 
-class UserInputErrorException
-
-class NotFoundException
-
-DuplicateEntryException --|> HalpmiException
-UserInputErrorException --|> HalpmiException
-NotFoundException --|> HalpmiException
+class NotFoundException {
+    +DuplicateEntryException(String)
+    +toString() : String
+}
+DuplicateEntryException --|> Exception
+HalpmiException --|> Exception
+NotFoundException --|> Exception
 @enduml
