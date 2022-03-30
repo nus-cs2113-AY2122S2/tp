@@ -2,6 +2,7 @@ package seedu.planitarium.commands;
 
 import seedu.planitarium.exceptions.PlanITariumException;
 import seedu.planitarium.exceptions.UnknownInputException;
+import seedu.planitarium.global.Constants;
 import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.Family;
 import seedu.planitarium.ProjectLogger;
@@ -16,6 +17,8 @@ public class CommandFactory {
     private static final String fileName = className + ".log";
     private static final ProjectLogger logger = new ProjectLogger(className, fileName);
 
+    protected static final String CMD_NOT_NULL = "Command should not be null";
+
     protected static final String ADD_PERSON_CMD = "add";
     protected static final String DELETE_PERSON_CMD = "delete";
     protected static final String ADD_INCOME_CMD = "addin";
@@ -29,7 +32,8 @@ public class CommandFactory {
     protected static final String HELP_CMD = "help";
     protected static final String LIST_CAT_CMD = "listcat";
     protected static final String EXIT = "bye";
-    protected Command newCommand;
+    protected static final String SEARCH_CMD = "find";
+    protected Command newCommand = null;
 
     protected static final String LOG_RETURN_CMD = "'%s' command is returned.";
     protected static final String LOG_ERROR_MSG = "Invalid input: '%s'.";
@@ -38,6 +42,8 @@ public class CommandFactory {
     }
 
     public Command getCommand(String userInput, Family family) throws PlanITariumException {
+        assert (userInput != null) : Constants.INPUT_NOT_NULL;
+        assert (family != null) : Constants.FAMILY_NOT_NULL;
         switch (Parser.parseKeyword(userInput)) {
         case ADD_PERSON_CMD:
             newCommand = new AddPersonCommand(userInput, family);
@@ -69,6 +75,9 @@ public class CommandFactory {
         case HELP_CMD:
             newCommand = new HelpCommand(userInput, family);
             break;
+        case SEARCH_CMD:
+            newCommand = new SearchCommand(userInput,family);
+            break;
         case EXIT:
             newCommand = new ExitCommand(userInput, family);
             break;
@@ -77,6 +86,7 @@ public class CommandFactory {
             throw new UnknownInputException(CommandFactory.class.getSimpleName());
         }
         logger.log(Level.INFO, String.format(LOG_RETURN_CMD, newCommand.getType()));
+        assert (newCommand != null) : CMD_NOT_NULL;
         return newCommand;
     }
 

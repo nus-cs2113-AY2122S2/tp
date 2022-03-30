@@ -9,6 +9,36 @@ public class Constants {
     public static final int SINGULAR = 1;
     public static final boolean FOR_USER = false;
     public static final boolean FOR_STORAGE = true;
+    public static final String INDEX_ERROR_MESSAGE = "Invalid index passed in";
+    public static final String FAMILY_INIT_MESSAGE = "New Family initialised";
+    public static final String ADD_PERSON_CALL_MESSAGE = "Method addPerson() called";
+    public static final String DELETE_PERSON_CALL_MESSAGE = "Method deletePerson() called";
+    public static final String ADD_INCOME_CALL_MESSAGE = "Method addIncome() called";
+    public static final String DELETE_INCOME_CALL_MESSAGE = "Method deleteIncome() called";
+    public static final String EDIT_INCOME_CALL_MESSAGE = "Method editIncome() called";
+    public static final String ADD_EXPEND_CALL_MESSAGE = "Method addExpend() called";
+    public static final String DELETE_EXPEND_CALL_MESSAGE = "Method deleteExpend() called";
+    public static final String EDIT_EXPEND_CALL_MESSAGE = "Method editExpend() called";
+    public static final String OVERVIEW_CALL_MESSAGE = "Method overview() called";
+    public static final String LIST_CALL_MESSAGE = "Method list() called";
+    public static final String NUM_MEMBERS_CALL_MESSAGE = "Method getNumberOfMembers() called";
+    public static final String NUM_INCOMES_CALL_MESSAGE = "Method getNumberOfIncomes() called";
+    public static final String NUM_EXPENDS_CALL_MESSAGE = "Method getNumberOfExpenditures() called";
+    public static final String FIND_CALL_MESSAGE = "Method find() called";
+    public static final String PERSON_LIST_INIT_MESSAGE = "New PersonList initialised";
+    public static final String GET_PERSON_LIST_CALL_MESSAGE = "Method getPersonList() called";
+    public static final String GET_PERSON_CALL_MESSAGE = "Method getPerson() called";
+    public static final String GET_REMAIN_CALL_MESSAGE = "Method getRemain() called";
+    public static final String GET_TOTAL_INCOME_CALL_MESSAGE = "Method getTotalIncome() called";
+    public static final String GET_TOTAL_EXPEND_CALL_MESSAGE = "Method getTotalExpend() called";
+    public static final String PERSON_INIT_MESSAGE = "New Person initialised";
+    public static final String GET_NAME_CALL_MESSAGE = "Method getName() called";
+    public static final String GET_INCOME_LIST_CALL_MESSAGE = "Method getIncomeList() called";
+    public static final String GET_EXPEND_LIST_CALL_MESSAGE = "Method getExpenditureList() called";
+    public static final String LIST_EXPEND_CALL_MESSAGE = "Method listExpenditure() called";
+    public static final String LIST_INCOME_CALL_MESSAGE = "Method listIncome() called";
+    public static final String GET_DISPOSABLE_CALL_MESSAGE = "Method getDisposable() called";
+    public static final String SAVE_NAME_CALL_MESSAGE = "Method saveName() called";
 
     // For Parser component
     public static final int INDEX_KEYWORD = 0;
@@ -47,7 +77,7 @@ public class Constants {
 
     // For Command assertion
     public static final String NAME_NOT_NULL = "Name should not be null";
-    public static final String PERSONLIST_NOT_NULL = "Personlist should not be null";
+    public static final String GROUP_NOT_NULL = "Group should not be null";
     public static final String DESCRIPTION_NOT_NULL = "Description should not be empty";
     public static final String INPUT_NOT_NULL = "Input should not be empty";
     public static final String KEYWORD_NOT_NULL = "Keywords should not be empty";

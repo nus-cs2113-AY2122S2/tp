@@ -17,6 +17,7 @@ public class ListCategoriesCommand extends Command {
 
     public ListCategoriesCommand(String userInput, Family family) {
         super(userInput, family);
+        this.type = "ListcatCMD";
         logger.log(Level.INFO, LOG_LISTCAT_INFO);
     }
 
@@ -24,5 +25,10 @@ public class ListCategoriesCommand extends Command {
     public void execute() {
         Category.listCategories();
         logger.log(Level.INFO, LOG_EXECUTE_INFO);
+    }
+
+    @Override
+    public String getType() {
+        return type;
     }
 }

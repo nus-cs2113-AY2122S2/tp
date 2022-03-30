@@ -6,11 +6,10 @@ import seedu.planitarium.person.Family;
 import seedu.planitarium.person.PersonList;
 import seedu.planitarium.global.UI;
 
-public class Command {
+public abstract class Command {
 
     protected String type;
     protected String userInput;
-    protected UI ui = new UI();
     protected Family family;
 
     public Command(String userInput, Family family) {
@@ -23,8 +22,7 @@ public class Command {
      * Executes the instruction according to the input after parsing.
      * @throws PlanITariumException if the instruction cannot be executed.
     */
-    public void execute() throws PlanITariumException {
-    }
+    public abstract void execute() throws PlanITariumException;
 
     public String getType() {
         return type;

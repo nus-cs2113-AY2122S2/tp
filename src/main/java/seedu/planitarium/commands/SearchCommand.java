@@ -15,12 +15,18 @@ public class SearchCommand extends Command {
 
     public SearchCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
+        this.type = "SearchCMD";
         this.description = Parser.parseDescription(userInput);
         this.category = Parser.getValidCategoryIndex(Parser.parseCategoryIndex(userInput));
     }
 
     @Override
     public void execute() {
+        family.find(description, category);
+    }
 
+    @Override
+    public String getType() {
+        return type;
     }
 }

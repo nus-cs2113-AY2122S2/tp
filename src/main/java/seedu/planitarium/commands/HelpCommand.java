@@ -16,6 +16,7 @@ public class HelpCommand extends Command {
 
     public HelpCommand(String userInput, Family family) {
         super(userInput, family);
+        this.type = "HelpCMD";
         logger.log(Level.INFO, LOG_HELP_INFO);
     }
 
@@ -23,5 +24,10 @@ public class HelpCommand extends Command {
     public void execute() {
         UI.printHelpMsg();
         logger.log(Level.INFO, LOG_EXECUTE_INFO);
+    }
+
+    @Override
+    public String getType() {
+        return type;
     }
 }

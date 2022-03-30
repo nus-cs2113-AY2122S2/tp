@@ -34,4 +34,9 @@ public class ListCommand extends Command {
         family.list(group);
         logger.log(Level.INFO, String.format(LOG_EXECUTE_INFO, group));
     }
+
+    @Override
+    public String getType() {
+        return type;
+    }
 }

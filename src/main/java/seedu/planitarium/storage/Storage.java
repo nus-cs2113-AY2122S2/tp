@@ -6,14 +6,13 @@ import seedu.planitarium.ProjectLogger;
 import seedu.planitarium.global.Constants;
 import seedu.planitarium.money.Expenditure;
 import seedu.planitarium.money.Income;
-import seedu.planitarium.parser.Parser;
 import seedu.planitarium.person.Family;
 import seedu.planitarium.person.Person;
-import seedu.planitarium.person.PersonList;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.logging.Level;
 
@@ -21,6 +20,15 @@ public class Storage {
     protected static final String className = Storage.class.getSimpleName();
     protected static final String fileName = className + ".log";
     protected static final ProjectLogger logger = new ProjectLogger(className, fileName);
+    protected static final String ASSERT_GROUP_ZERO = "Group number should be more than or equals to zero";
+    protected static final String ASSERT_GROUP_THREE = "Group number should be less than or equals to three";
+    protected static final String ASSERT_PATH_NOT_NULL = "File Path should not be null";
+    protected static final String ASSERT_LINE_NOT_NULL = "Input data line should not be null";
+    protected static final String ASSERT_TYPE_NOT_NULL = "Type should not be null";
+    protected static final String ASSERT_DIR_NOT_NULL = "Directory should not be null";
+    protected static final String ASSERT_INFO_NOT_NULL = "Info should not be null";
+    protected static final String ASSERT_NULL_PARAMETERS = "Info parameters should not be null";
+    protected static final String ASSERT_GROUP_MORE_THAN_ONE = "Group number should be more than or equals to one";
 
     private static final String FILE_DIR = "data";
     private static final String FILE_NAME = "PlanITarium.txt";
@@ -31,14 +39,22 @@ public class Storage {
     private static final String ADD_INCOME = "i";
     private static final int GET_TYPE = 0;
     private static final int END_OF_TYPE = 1;
-    private static final int DELIMIT_COUNT_INCOME = 3;
-    private static final int DELIMIT_COUNT_EXPEND = 4;
-    private static final int DELIMIT_COUNT = 3;
+    private static final int DELIMIT_COUNT_EXPEND = 5;
+    private static final int DELIMIT_COUNT = 4;
+    private static final int INIT_GROUP_NUMBER = 0;
+
     private static int groupNumber = 0;
+    private static int expendNumber = 1;
+    private static int incomeNumber = 1;
     private static File saveFile;
     private static int numberOfPerson = 0;
     private static String filePath;
     private static Family familyData = new Family();
+    private static String description;
+    private static double amount;
+    private static boolean isPermanent;
+    private static int category;
+    private static LocalDate dataDate;
 
     /**
      * Constructs a new storage object.
@@ -57,6 +73,7 @@ public class Storage {
     public static void checkFileExists() {
         String loggerString = "Method checkFileExists() called";
         logger.log(Level.INFO, loggerString);
+        assert (FILE_DIR != null) : ASSERT_DIR_NOT_NULL;
         File directory = new File(FILE_DIR);
         try {
             if (!directory.exists()) {
@@ -80,6 +97,7 @@ public class Storage {
     private static void readSaveFile() {
         String loggerString = "readSaveFile() called";
         logger.log(Level.INFO, loggerString);
+        assert (filePath != null) : ASSERT_PATH_NOT_NULL;
         try {
             File readFile = new File(filePath);
             Scanner in = new Scanner(readFile);
@@ -87,7 +105,8 @@ public class Storage {
                 processLine(in.nextLine());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            loggerString = "Error in reading file";
+            logger.log(Level.SEVERE, loggerString);
         }
     }
 
@@ -103,6 +122,7 @@ public class Storage {
     private static void processLine(String dataLine) {
         String loggerString = "Method processLine() called";
         logger.log(Level.INFO, loggerString);
+        assert (dataLine.length() > 0) : ASSERT_LINE_NOT_NULL;
         String objectType = dataLine.substring(GET_TYPE, END_OF_TYPE);
         String objectInfo = dataLine.substring(END_OF_TYPE);
         addCorrespondingInfo(objectType, objectInfo.trim());
@@ -118,6 +138,7 @@ public class Storage {
     private static void addCorrespondingInfo(String type, String info) {
         String loggerString = "Method addCorrespondingInfo() called";
         logger.log(Level.INFO, loggerString);
+        assert (type != null) : ASSERT_TYPE_NOT_NULL;
         switch (type) {
         case ADD_USER:
             addUserData(info);
@@ -140,6 +161,8 @@ public class Storage {
     private static void loadNextGroup() {
         String loggerString = "Method loadNextGroup() called";
         logger.log(Level.INFO, loggerString);
+        assert (groupNumber >= INIT_GROUP_NUMBER) : ASSERT_GROUP_ZERO;
+        assert (groupNumber <= Constants.NUM_GROUPS) : ASSERT_GROUP_THREE;
         numberOfPerson = 0;
         groupNumber++;
     }
@@ -153,16 +176,16 @@ public class Storage {
     private static void addExpenditureData(String info) {
         String loggerString = "Method addExpenditureData() called";
         logger.log(Level.INFO, loggerString);
-        String description;
+        assert (info != null) : ASSERT_INFO_NOT_NULL;
         description = parseInfoGetDescription(info);
-        boolean isPermanent;
-        Double amount;
         amount = parseInfoGetAmount(info);
-        int category;
         category = parseInfoGetCategory(info);
         isPermanent = parseInfoGetPermanent(info);
+        dataDate = parseInfoGetExpendDate(info);
         familyData.addExpend(groupNumber, numberOfPerson, description, amount,
                 category, isPermanent, Constants.FOR_STORAGE);
+        //familyData.getList(groupNumber).getPerson(numberOfPerson).setExpendDate(expendNumber, dataDate);
+        //expendNumber++;
     }
 
     /**
@@ -174,13 +197,14 @@ public class Storage {
     private static void addIncomeData(String info) {
         String loggerString = "Method addIncomeData() called";
         logger.log(Level.INFO, loggerString);
-        String description;
+        assert (info != null) : ASSERT_INFO_NOT_NULL;
         description = parseInfoGetDescription(info);
-        double amount;
         amount = parseInfoGetAmount(info);
-        boolean isPermanent;
         isPermanent = parseInfoGetPermanent(info);
+        dataDate = parseInfoGetIncomeDate(info);
         familyData.addIncome(groupNumber, numberOfPerson, description, amount, isPermanent, Constants.FOR_STORAGE);
+        //familyData.getList(groupNumber).getPerson(numberOfPerson).setIncomeDate(incomeNumber, dataDate);
+        //incomeNumber++;
     }
 
     /**
@@ -192,22 +216,56 @@ public class Storage {
     private static void addUserData(String info) {
         String loggerString = "Method addUserData() called";
         logger.log(Level.INFO, loggerString);
+        assert (info != null) : ASSERT_INFO_NOT_NULL;
         familyData.addPerson(groupNumber, info, Constants.FOR_STORAGE);
         numberOfPerson++;
+        expendNumber = 1;
+        incomeNumber = 1;
     }
 
     /**
      * Takes in a string of details from the input and parses
-     * the string to get the category of the expenditure being loaded.
+     * the string to get the category index of the expenditure being loaded.
      *
      * @param info A string consisting of the details to be added
-     * @return The category type of the expenditure
+     * @return The category index of an expenditure input
      */
     private static int parseInfoGetCategory(String info) {
         String loggerString = "Method parseInfoGetCategory() called";
         logger.log(Level.INFO, loggerString);
         String[] inputInfo = info.split(INFO_DELIMITER, DELIMIT_COUNT_EXPEND);
+        assert (inputInfo.length >= 4) : ASSERT_NULL_PARAMETERS;
         return Integer.parseInt(inputInfo[3].trim());
+    }
+
+    /**
+     * Takes in a string of details from the input and parses
+     * the string to get the date initialised of the expenditure being loaded.
+     *
+     * @param info A string consisting of the details to be added
+     * @return The date of the initialised expenditure
+     */
+    private static LocalDate parseInfoGetExpendDate(String info) {
+        String loggerString = "Method parseInfoGetExpendDate() called";
+        logger.log(Level.INFO, loggerString);
+        String[] inputInfo = info.split(INFO_DELIMITER, DELIMIT_COUNT_EXPEND);
+        assert (inputInfo.length >= 5) : ASSERT_NULL_PARAMETERS;
+        return LocalDate.parse(inputInfo[4].trim());
+    }
+
+    /**
+     * Takes in a string of details from the input and parses
+     * the string to get the date initialised of the income being loaded.
+     *
+     * @param info A string consisting of the details to be added
+     * @return The date of the initialised income
+     */
+    private static LocalDate parseInfoGetIncomeDate(String info) {
+        String loggerString = "Method parseInfoGetIncomeDate() called";
+        logger.log(Level.INFO, loggerString);
+        String[] inputInfo = info.split(INFO_DELIMITER, DELIMIT_COUNT);
+        assert (inputInfo.length >= 4) : ASSERT_NULL_PARAMETERS;
+        return LocalDate.parse(inputInfo[3].trim());
     }
 
     /**
@@ -221,6 +279,7 @@ public class Storage {
         String loggerString = "Method parseInfoGetDescription() called";
         logger.log(Level.INFO, loggerString);
         String[] inputInfo = info.split(INFO_DELIMITER, DELIMIT_COUNT);
+        assert (inputInfo.length >= 1) : ASSERT_NULL_PARAMETERS;
         return inputInfo[0];
     }
 
@@ -235,6 +294,7 @@ public class Storage {
         String loggerString = "Method parseInfoGetAmount() called";
         logger.log(Level.INFO, loggerString);
         String[] inputInfo = info.split(INFO_DELIMITER, DELIMIT_COUNT);
+        assert (inputInfo.length >= 2) : ASSERT_NULL_PARAMETERS;
         return Double.valueOf(inputInfo[1].trim());
     }
 
@@ -249,6 +309,7 @@ public class Storage {
         String loggerString = "Method parseInfoGetPermanent() called";
         logger.log(Level.INFO, loggerString);
         String[] inputInfo = info.split(INFO_DELIMITER, DELIMIT_COUNT);
+        assert (inputInfo.length >= 3) : ASSERT_NULL_PARAMETERS;
         return Boolean.valueOf(inputInfo[2].trim());
     }
 
@@ -262,6 +323,7 @@ public class Storage {
     public static void saveData(Family familyDataToSave) {
         String loggerString = "Method saveData() called";
         logger.log(Level.INFO, loggerString);
+        assert (filePath != null) : ASSERT_PATH_NOT_NULL;
         try {
             FileWriter writeToFile = new FileWriter(filePath);
             for (int i = Constants.SINGULAR; i <= Constants.NUM_GROUPS; i++) {
@@ -269,7 +331,8 @@ public class Storage {
             }
             writeToFile.close();
         } catch (IOException e) {
-            System.out.println("fail");
+            loggerString = "Error in writing file";
+            logger.log(Level.SEVERE, loggerString);
         }
     }
 
@@ -288,6 +351,8 @@ public class Storage {
                                        int currentGroupNumber) throws IOException {
         String loggerString = "Method storeGroupData() called";
         logger.log(Level.INFO, loggerString);
+        assert (currentGroupNumber >= 1) : ASSERT_GROUP_MORE_THAN_ONE;
+        assert (currentGroupNumber <= 3) : ASSERT_GROUP_THREE;
         writeToFile.write(String.valueOf(currentGroupNumber) + System.lineSeparator());
         for (Person person : familyDataToSave.getList(currentGroupNumber).getPersonList()) {
             storePersonListData(writeToFile, person);

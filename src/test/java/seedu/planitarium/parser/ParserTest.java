@@ -527,7 +527,7 @@ class ParserTest {
     @Test
     void getValidUserIndex_validUserIndex_success() throws InvalidIndexException {
         PersonList personList = new PersonList();
-        personList.addPerson(ALICE, false);
+        personList.addPerson(ALICE);
 
         int output = Parser.getValidUserIndex(ONE, personList.getNumberOfMembers());
         assertEquals(INT_ONE, output);
@@ -562,7 +562,7 @@ class ParserTest {
     @Test
     void getValidUserIndex_indexOutOfRange_exceptionThrown() {
         PersonList personList = new PersonList();
-        personList.addPerson(ALICE, false);
+        personList.addPerson(ALICE);
         try {
             Parser.getValidUserIndex(TOO_LOW_INDEX, personList.getNumberOfMembers());
             fail();
@@ -584,7 +584,7 @@ class ParserTest {
     @Test
     void getValidExpenditureIndex_validExpenditureIndex_success() throws InvalidIndexException {
         PersonList personList = new PersonList();
-        personList.addPerson(ALICE, false);
+        personList.addPerson(ALICE);
         Person person = personList.getPerson(INT_ONE);
         person.addExpend(FOOD, TEN_FIFTY_DOUBLE, INT_ONE, false, false);
 
@@ -596,7 +596,7 @@ class ParserTest {
     void getValidExpenditureIndex_nullInput_assertThrown() {
         try {
             PersonList personList = new PersonList();
-            personList.addPerson(ALICE, false);
+            personList.addPerson(ALICE);
             Person person = personList.getPerson(INT_ONE);
             Parser.getValidExpenditureIndex(null, person.getNumberOfExpenditures());
             fail();
@@ -611,7 +611,7 @@ class ParserTest {
     void getValidExpenditureIndex_notNumber_exceptionThrown() {
         try {
             PersonList personList = new PersonList();
-            personList.addPerson(ALICE, false);
+            personList.addPerson(ALICE);
             Person person = personList.getPerson(INT_ONE);
 
             Parser.getValidExpenditureIndex(ALICE, person.getNumberOfExpenditures());
@@ -626,7 +626,7 @@ class ParserTest {
     @Test
     void getValidExpenditureIndex_indexOutOfRange_exceptionThrown() {
         PersonList personList = new PersonList();
-        personList.addPerson(ALICE, false);
+        personList.addPerson(ALICE);
         Person person = personList.getPerson(INT_ONE);
         person.addExpend(FOOD, TEN_FIFTY_DOUBLE, INT_ONE, false, false);
         try {
@@ -650,7 +650,7 @@ class ParserTest {
     @Test
     void getValidIncomeIndex_validIncomeIndex_success() throws InvalidIndexException {
         PersonList personList = new PersonList();
-        personList.addPerson(ALICE, false);
+        personList.addPerson(ALICE);
         Person person = personList.getPerson(INT_ONE);
         person.addIncome(GIFT, TEN_FIFTY_DOUBLE, false, false);
 
@@ -662,7 +662,7 @@ class ParserTest {
     void getValidIncomeIndex_nullInput_assertThrown() {
         try {
             PersonList personList = new PersonList();
-            personList.addPerson(ALICE, false);
+            personList.addPerson(ALICE);
             Person person = personList.getPerson(INT_ONE);
             Parser.getValidIncomeIndex(null, person.getNumberOfIncomes());
             fail();
@@ -677,7 +677,7 @@ class ParserTest {
     void getValidIncomeIndex_notNumber_exceptionThrown() {
         try {
             PersonList personList = new PersonList();
-            personList.addPerson(ALICE, false);
+            personList.addPerson(ALICE);
             Person person = personList.getPerson(INT_ONE);
 
             Parser.getValidIncomeIndex(ALICE, person.getNumberOfIncomes());
@@ -692,7 +692,7 @@ class ParserTest {
     @Test
     void getValidIncomeIndex_indexOutOfRange_exceptionThrown() {
         PersonList personList = new PersonList();
-        personList.addPerson(ALICE, false);
+        personList.addPerson(ALICE);
         Person person = personList.getPerson(INT_ONE);
         person.addIncome(GIFT, TEN_FIFTY_DOUBLE, false, false);
         try {
