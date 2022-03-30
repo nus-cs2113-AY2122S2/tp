@@ -63,7 +63,7 @@ public class EditRecordCommand extends Command {
             try {
                 amount = Parser.getValidMoney(Parser.parseIncome(userInput));
             } catch (PlanITariumException e) {
-                amount = null;
+                amount = 0.0;
             }
             index = Parser.getValidIncomeIndex(Parser.parseRecordIndex(userInput),
                     family.getNumberOfIncomes(group, uid));

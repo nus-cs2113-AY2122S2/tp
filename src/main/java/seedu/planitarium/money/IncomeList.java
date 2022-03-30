@@ -40,7 +40,7 @@ public class IncomeList extends MoneyList {
      * @param amount      The income amount
      * @param isPermanent The recurring status of the income
      */
-    public void addIncome(String description, double amount, boolean isPermanent) {
+    public void addIncome(String description, Double amount, Boolean isPermanent) {
         logger.log(Level.INFO, LOG_ADD_INC);
         assert (description != null);
         assert (amount >= 0);
@@ -68,9 +68,9 @@ public class IncomeList extends MoneyList {
      *
      * @return The total amount of all income in the list
      */
-    public double getTotalIncome() {
+    public Double getTotalIncome() {
         logger.log(Level.INFO, LOG_GET_TOTAL_INC);
-        double totalAmount = 0;
+        Double totalAmount = 0.0;
         for (Income item : incomeArrayList) {
             totalAmount += item.amount;
         }
@@ -104,7 +104,7 @@ public class IncomeList extends MoneyList {
      * @param index The index of the income on the person's income list
      * @return The income amount
      */
-    public double getIncomeValue(int index) {
+    public Double getIncomeValue(int index) {
         logger.log(Level.INFO, LOG_GET_INC_VAL);
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfIncomes);
@@ -149,7 +149,7 @@ public class IncomeList extends MoneyList {
      * @param index The index of the income on the list
      * @return The recurring status of the income
      */
-    public boolean isPermanent(int index) {
+    public Boolean isPermanent(int index) {
         logger.log(Level.INFO, LOG_PERM);
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfIncomes);
@@ -174,7 +174,7 @@ public class IncomeList extends MoneyList {
      * @param amount      The new amount, if any
      * @param isPermanent The new recurring status, if any
      */
-    public void editIncome(int index, String description, double amount, Boolean isPermanent) {
+    public void editIncome(int index, String description, Double amount, Boolean isPermanent) {
         logger.log(Level.INFO, LOG_EDIT_INC);
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfIncomes);
@@ -182,6 +182,7 @@ public class IncomeList extends MoneyList {
         editIncDesc(index, description);
         editIncAmount(index, amount);
         editIncPerm(index, isPermanent);
+        System.out.println("Your Income have been edited");
     }
 
     /**
@@ -239,8 +240,8 @@ public class IncomeList extends MoneyList {
      * @param item        The income object
      */
     private void matchString(String description, Income item) {
-        boolean hasDescription = item.getDescription().contains(description);
-        boolean hasAmount = Double.toString(item.getAmount()).contains(description);
+        Boolean hasDescription = item.getDescription().contains(description);
+        Boolean hasAmount = Double.toString(item.getAmount()).contains(description);
         if (hasDescription || hasAmount) {
             System.out.println(item);
         }
