@@ -251,18 +251,17 @@ class AddCommandTest {
         IncomeList incomeList = new IncomeList();
         User user = new User(expenditureTestList, creditCardTestList, incomeList);
         String inputString1 = "/pm cash /c Person /d Nike Shoes /a 500 /t 30/4/2022";
-        String inputString2 = "/pm cash /c Person /d Nike Shoes /a 500 /t 04/2022";
-        String inputString3 = "/pm cash /c Person /d Nike Shoes /a 500 /t 2022";
-        String inputString4 = "/pm cash /c Person /d Nike Shoes /a 500 /t 38/14/2022";
-
         assertThrows(MindMyMoneyException.class,
             () -> new AddCommand(inputString1, user).executeCommand());
+        String inputString2 = "/pm cash /c Person /d Nike Shoes /a 500 /t 04/2022";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString2, user).executeCommand());
+            () -> new AddCommand(inputString2, user).executeCommand());
+        String inputString3 = "/pm cash /c Person /d Nike Shoes /a 500 /t 2022";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString3, user).executeCommand());
+            () -> new AddCommand(inputString3, user).executeCommand());
+        String inputString4 = "/pm cash /c Person /d Nike Shoes /a 500 /t 38/14/2022";
         assertThrows(MindMyMoneyException.class,
-                () -> new AddCommand(inputString4, user).executeCommand());
+            () -> new AddCommand(inputString4, user).executeCommand());
     }
 
     /**

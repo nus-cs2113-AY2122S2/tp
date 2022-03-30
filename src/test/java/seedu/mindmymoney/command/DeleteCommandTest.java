@@ -35,8 +35,8 @@ class DeleteCommandTest {
         new AddCommand(inputString, user).executeCommand();
 
         ArrayList<Expenditure> testList = new ArrayList<>();
-        testList.add(new Expenditure("cash", "Personal", "Nike Shoes"
-                , 300, "30/03/2022"));
+        testList.add(new Expenditure("cash", "Personal", "Nike Shoes",
+                300, "30/03/2022"));
 
         String deleteInputString = "delete 1";
         new DeleteCommand(deleteInputString, user).executeCommand();
