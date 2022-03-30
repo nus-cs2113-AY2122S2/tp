@@ -1,4 +1,4 @@
-package cpp.projects;
+package cpp.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
