@@ -174,7 +174,6 @@ Here is the module that you have chosen to edit:
 [Module] CS2113 Lecture: Thursday, 2pm-4pm
 Choose the part that you would like to edit:
 [Module] CS2113 Tutorial: Thursday, 2pm-4pm
-Category has to be one of lec, tut, lab or exam
 Please enter the category of your module
 Please enter the code for your module
 Please enter the day of your module
