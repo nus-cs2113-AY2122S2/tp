@@ -104,8 +104,8 @@ As TextUI handles all input and output streams, these streams can be changed wit
 The `Parser` component consists of the `Parser` class, `ParserUtils` class, `ParserErrors` class
   as well as the `CommandParser` class and its subclasses.<br>
 * The `Parser` class provides utility methods to parse commands and arguments from the user and
-  return a `Command` object representing an instruction that the user has for SplitLah.
-`Parser` class is the only class in the `Parser` component that other external classes actively interact with.<br>
+  return a `Command` object representing an instruction that the user has for SplitLah.<br>
+  `Parser` class is the only class in the `Parser` component that other external classes actively interact with.<br>
 * The `ParserUtils` class provide supporting methods for `Parser` class to properly run,
   and `ParserErrors` class provide methods to produce custom error messages for the `Parser` component.<br>
 * The subclasses of `CommandParser` then serve to parse all arguments of a user input to create an object of a specific
