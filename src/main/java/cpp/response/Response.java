@@ -92,4 +92,11 @@ public class Response {
         return ("View command has been executed successfully.");
     }
 
+    public static String addDeadlineSuccessfully(String projectTitle, String deadline) {
+        return "Deadline added to " + projectTitle + ": " + deadline;
+    }
+
+    public static String addDeadlineUnsuccessfully() {
+        return "Deadline addition was Unsuccessful.";
+    }
 }

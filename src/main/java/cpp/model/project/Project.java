@@ -1,11 +1,12 @@
 package cpp.model.project;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Project {
     private String title;
     private ArrayList<Todo> todos;
-    private String deadline;
+    private Deadline deadline;
 
     public Project() {
         todos = new ArrayList<Todo>();
@@ -57,10 +58,14 @@ public class Project {
     /**
      * Sets a deadline to the Project.
      *
-     * @param deadline Deadline of the project
+     * @param stringDeadline string representation of Deadline
      */
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
+    public void setDeadline(String stringDeadline) {
+        try {
+            this.deadline = new Deadline(stringDeadline);
+        } catch (DateTimeParseException e) {
+            throw e;
+        }
     }
 
     /**
@@ -72,7 +77,7 @@ public class Project {
         if (deadline == null) {
             return "No deadline specified";
         }
-        return deadline;
+        return deadline.toString();
     }
 
     /**
