@@ -24,4 +24,5 @@ public class NumberConstants {
      * For TaskDuration.
      */
     public static final long MINUTE_PER_HOUR = 60;
+    public static final long MAXIMUM_ALLOWED_DURATION_NUMBER = 1000000000;
 }

@@ -16,6 +16,7 @@ import seedu.duke.util.StringConstants;
 public class TaskDuration {
 
     private static final long MINUTE_PER_HOUR = NumberConstants.MINUTE_PER_HOUR;
+    private static final long MAXIMUM_ALLOWED_DURATION_NUMBER = NumberConstants.MAXIMUM_ALLOWED_DURATION_NUMBER;
     private static final String DURATION_GROUP_WORD = StringConstants.DURATION_GROUP_WORD;
     private static final String DURATION_UNIT_GROUP_WORD = StringConstants.DURATION_UNIT_GROUP_WORD;
     private static final String TO_STRING_FORMAT_WITH_HOUR_AND_MINUTE =
@@ -42,6 +43,10 @@ public class TaskDuration {
         // the input unit is hours
         if (Arrays.asList(HOUR_UNIT_WORD).contains(parsedDurationString.get(DURATION_UNIT_GROUP_WORD))) {
             double numberOfHoursDouble = Double.parseDouble(parsedDurationString.get(DURATION_GROUP_WORD));
+            if (numberOfHoursDouble > MAXIMUM_ALLOWED_DURATION_NUMBER) {
+                // Exceeds upperbound
+                throw new WrongDurationFormatException();
+            }
             long numberOfHoursInt = (long) numberOfHoursDouble;
             taskDuration = Duration.ofHours(numberOfHoursInt);
             long offSetMinute = Math.round(((numberOfHoursDouble - numberOfHoursInt) * MINUTE_PER_HOUR));
@@ -51,8 +56,13 @@ public class TaskDuration {
 
         // the input unit is minutes
         if (Arrays.asList(MINUTE_UNIT_WORD).contains(parsedDurationString.get(DURATION_UNIT_GROUP_WORD))) {
+            double numberOfMinutesDouble = Double.parseDouble(parsedDurationString.get(DURATION_GROUP_WORD));
+            if (numberOfMinutesDouble > MAXIMUM_ALLOWED_DURATION_NUMBER) {
+                // Exceeds upperbound
+                throw new WrongDurationFormatException();
+            }
             taskDuration = Duration.ofMinutes(
-                    Math.round(Double.parseDouble(parsedDurationString.get(DURATION_GROUP_WORD))));
+                    Math.round(numberOfMinutesDouble));
             return;
         }
 
