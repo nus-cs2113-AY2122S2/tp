@@ -118,22 +118,23 @@ public class PlanList {
     public Plan createAndAddPlan(String userArgument) throws ArrayIndexOutOfBoundsException,
             NumberFormatException, InvalidPlanException {
         String userPlanNameInput = userArgument.split(PlanCommand.CREATE_ACTION_WORKOUTS_KEYWORD)[0].trim();
-        String userWorkoutNumbersString = userArgument.split(PlanCommand.CREATE_ACTION_WORKOUTS_KEYWORD)[1].trim();
+        String userWorkoutIndexNumbersString = userArgument.split(PlanCommand.CREATE_ACTION_WORKOUTS_KEYWORD)[1].trim();
         String className = this.getClass().getSimpleName();
         checkPlanNameValidity(userPlanNameInput, className);
 
-        int numberOfWorkoutsInAPlan = userWorkoutNumbersString.split(",").length;
+        int numberOfWorkoutsInAPlan = userWorkoutIndexNumbersString.split(",").length;
         checkMinMaxNumberOfWorkouts(numberOfWorkoutsInAPlan, className);
         assert (numberOfWorkoutsInAPlan > 0) && (numberOfWorkoutsInAPlan <= MAX_NUMBER_OF_WORKOUTS_IN_A_PLAN);
 
         ArrayList<Workout> workoutsToAddInAPlanList = new ArrayList<Workout>();
         for (int i = 0; i < numberOfWorkoutsInAPlan; i += 1) {
-            int workoutNumberInteger = Integer.parseInt(userWorkoutNumbersString.split(",")[i].trim());
+            int workoutIndexNumberInteger = Integer.parseInt(userWorkoutIndexNumbersString.split(",")[i].trim());
 
-            checkWorkoutNumberWithinRange(workoutNumberInteger, className);
-            assert (workoutNumberInteger > 0) && (workoutNumberInteger <= workoutList.getWorkoutsDisplayList().size());
+            checkWorkoutNumberWithinRange(workoutIndexNumberInteger, className);
+            assert (workoutIndexNumberInteger > 0)
+                    && (workoutIndexNumberInteger <= workoutList.getWorkoutsDisplayList().size());
 
-            String workoutToAddKey = workoutList.getWorkoutsDisplayList().get(workoutNumberInteger - 1);
+            String workoutToAddKey = workoutList.getWorkoutsDisplayList().get(workoutIndexNumberInteger - 1);
             Workout workoutToAddObject = workoutList.getWorkoutFromKey(workoutToAddKey);
             workoutsToAddInAPlanList.add(workoutToAddObject);
         }

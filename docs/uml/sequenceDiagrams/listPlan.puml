@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../Style.puml
+
+autonumber
+
+title Sequence Diagram of `plan /list` Command
+
+actor   User
+participant "werkIt:WerkIt" AS WerkIt
+participant "ui:UI" AS UI1
+participant "parser:Parser" AS Parser
+participant "newCommand\n:PlanCommand" AS newCommand
+participant "planList\n:PlanList" AS PlanList
+
+activate WerkIt
+WerkIt -> UI1 : getUserInput()
+activate UI1
+User -> UI1 : `plan /list` command
+WerkIt <-- UI1 : userInputTrimmed:String
+deactivate UI1
+
+WerkIt -> Parser : parseUserInput(userInput)
+activate Parser
+WerkIt <-- Parser : :Command
+deactivate Parser
+
+WerkIt -> newCommand : execute()
+activate newCommand
+newCommand -> PlanList : listAllPlan()
+activate PlanList
+opt application plan list is empty
+User <-- PlanList : No plan created yet message
+end
+loop all plans in plan list
+User <-- PlanList : Show name of plans
+end
+newCommand <-- PlanList
+deactivate PlanList
+
+WerkIt <-- newCommand
+deactivate newCommand
+
+destroy newCommand
+@enduml
