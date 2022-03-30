@@ -136,6 +136,21 @@ The `Command` component consist of the Command class and all the subclasses of t
 * The subclasses also include _utility commands_ such as `HelpCommand`, `ExitCommand` and `InvalidCommand`
   (hereafter collectively referred to as UtilityCommand).
 
+The general workflow of the `Command` component is as follows:
+1. After a `XYZCommand` object is created by the [`Parser` Component](#parser-component),
+   it is passed back to the `SplitLah` object to be run.
+   * In the above process, all necessary information for the execution of the command is passed to and
+     saved by the `XYZCommand` constructor.
+2. Then, `XYZCommand#run` is executed by `SplitLah`. `XYZCommand#run` carries out the task
+   that `XYZCommand` is designed to do.
+   * In general, for _data related commands_, `SessionJKLCommand`, `ActivityJKLCommand` and `GroupJKLCommand`
+     obtains the relevant `Session`, `Activity` and `Group` objects before operating upon them with relevant methods.
+   * On the other hand, for _utility commands_, `UtilityCommand` works with and uses methods from the `TextUI` component
+     to print messages and carry out their tasks.
+   * The inner workings of each of the `XYZCommand` classes can be seen in greater detail under the [Implementation section](#implementation).
+3. After `XYZCommand#run` completes, control is returned to `SplitLah` and
+   the [lifecycle](#architecture) of an `XYZCommand` object ends.
+
 
 ## Implementation
 
