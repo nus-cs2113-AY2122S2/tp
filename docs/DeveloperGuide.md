@@ -85,9 +85,7 @@ where the user issues the command`add shoes 100`.
 
 ### Component Overview 
 The major code is broken down into components for better abstraction. 
-The sections below give more details for each component.  
-> **💡 Note:**
-> - 
+The sections below give more details for each component.
 
 ### UI component
 The source code can be found in [Ui.java](https://github.com/AY2122S2-CS2113T-T10-4/tp/blob/master/src/main/java/seedu/mindmymoney/Ui.java)
@@ -152,16 +150,42 @@ The Storage component:
 
 
 ## Implementation
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how certain features of Mindmymoney are implemented.
 
-### Add Command Feature
+### Add Command Component
+**API Reference**: `AddCommand.java`  
+
+The Add Command component allows users to add in an expenditure, a new credit card or their income using a single command. 
+This component provides speed and ease of use by only requiring a single line of input.
+
+### Subcomponents
+The Add Command component consists of 3 subcomponents. These features are differentiated by their flags.
+- Add expenditure component.
+- Add credit card component.
+- Add income component.
+
+The sequence diagram below shows the interactions of when an `AddCommand` is parsed.
+![add_command_sequence_diagram](images/Add_Command_Sequence_Diagram.png)
+
+Below is an example scenario showing how the AddCommand behaves at each step.
+1. The `Parser` component parses user input and returns the new `AddCommand` object to the
+   `MindMyMoney`.
+2. `AddCommand` instantiates `addInput`, `expenditureList`, `creditCardList`, `incomeList`.
+3. The application invokes `Addcommand.executeCommand()` to execute user instruction.
+4. If user input contains credit card... blah blah im still typing
+  
+### Add Expenditure Command
+A key functionality of MindMyMoney is the ability to add and track user expenditure. A user can add in a new expenditure
+by specifying the payment method, the category, the description of the item, the cost of the item and the date of 
+purchase.
+
 #### Current Implementation
 The sequence diagram below shows the interactions of different subcomponents of the system when adding an expenditure
 to the list.  
-![add_command_sequence_diagram](images/Add_Command_Sequence_Diagram.png)  
-A key functionality of MindMyMoney is the ability to add and track user expenditure. A user can add in a new expenditure
-by specifying the payment type, the category, the description of the item, the cost of the item and the date and the
-month purchased.
+![add_expenditure_command_sequence_diagram](images/Add_Expenditure_Command_Sequence_Diagram.png)  
+  
+The add expenditure command is facilitated by the `AddCommand`. By running the command `add` with its relevant flags, 
+`Parser` will construct a new `AddCommand` which will be used to execute users input.
 
 1. The `Parser` component parses user input and returns the new `AddCommand` object to the
    `MindMyMoney`.
