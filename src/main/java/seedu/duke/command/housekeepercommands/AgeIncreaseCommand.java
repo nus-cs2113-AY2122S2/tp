@@ -7,9 +7,9 @@ import seedu.duke.Housekeeper;
 import seedu.duke.HousekeeperList;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
-import seedu.duke.HotelLiteManagerException;
+import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.command.Command;
-import seedu.duke.InvalidNewYearException;
+import seedu.duke.exceptions.InvalidNewYearException;
 import seedu.duke.storage.HousekeeperFileManager;
 
 public class AgeIncreaseCommand extends Command {

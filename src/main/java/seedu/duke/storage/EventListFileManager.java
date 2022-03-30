@@ -1,7 +1,7 @@
 package seedu.duke.storage;
 
 import seedu.duke.Event;
-import seedu.duke.HotelLiteManagerException;
+import seedu.duke.exceptions.HotelLiteManagerException;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.command.Command;
 import seedu.duke.command.itemcommands.UpdateItemPaxCommand;
 import seedu.duke.exceptions.EmptyItemNameException;
+import seedu.duke.exceptions.InvalidItemPaxException;
+import seedu.duke.exceptions.InvalidUpdateItemPaxCommandException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

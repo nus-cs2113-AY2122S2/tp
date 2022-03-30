@@ -1,8 +1,8 @@
 package seedu.duke.command.roomcommand;
 
 import seedu.duke.AssignmentMap;
-import seedu.duke.InvalidLevelException;
-import seedu.duke.InvalidRoomNumberException;
+import seedu.duke.exceptions.InvalidLevelException;
+import seedu.duke.exceptions.InvalidRoomNumberException;
 import seedu.duke.ListContainer;
 import seedu.duke.Room;
 import seedu.duke.RoomList;

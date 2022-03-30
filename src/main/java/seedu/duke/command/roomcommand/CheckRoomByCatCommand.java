@@ -1,7 +1,7 @@
 package seedu.duke.command.roomcommand;
 
 import seedu.duke.AssignmentMap;
-import seedu.duke.InvalidCategoryException;
+import seedu.duke.exceptions.InvalidCategoryException;
 import seedu.duke.ListContainer;
 import seedu.duke.Room;
 import seedu.duke.RoomList;

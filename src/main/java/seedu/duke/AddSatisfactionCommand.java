@@ -4,6 +4,12 @@ import java.io.IOException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import seedu.duke.command.Command;
+import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.InvalidCommandException;
+import seedu.duke.exceptions.EmptySatisfactionCustomerException;
+import seedu.duke.exceptions.EmptySatisfactionValueException;
+import seedu.duke.exceptions.InvalidSatisfactionValueException;
+import seedu.duke.exceptions.RepeatCustomerException;
 import seedu.duke.storage.SatisfactionListFileManager;
 
 

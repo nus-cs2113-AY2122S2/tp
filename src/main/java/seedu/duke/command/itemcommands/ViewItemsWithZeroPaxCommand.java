@@ -1,11 +1,11 @@
 package seedu.duke.command.itemcommands;
 
-import seedu.duke.HotelLiteManagerException;
+import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.command.Command;
 import seedu.duke.ItemList;
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
-import seedu.duke.InvalidViewItemsWithZeroPaxCommandException;
+import seedu.duke.exceptions.InvalidViewItemsWithZeroPaxCommandException;
 
 /**
  * Represents a command to view all the items currently within the item list that have a pax of zero.

@@ -2,6 +2,8 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.roomcommand.CheckInCommand;
+import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.InvalidRoomNumberException;
 
 import java.io.IOException;
 

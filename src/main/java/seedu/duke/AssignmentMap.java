@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.storage.AssignmentListFileManager;
 
 import java.io.IOException;

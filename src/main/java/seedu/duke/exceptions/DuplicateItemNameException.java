@@ -1,7 +1,5 @@
 package seedu.duke.exceptions;
 
-import seedu.duke.HotelLiteManagerException;
-
 public class DuplicateItemNameException extends HotelLiteManagerException {
     private static final String ERROR_MESSAGE = "Error! The item names cannot be the same.";
 

@@ -5,16 +5,16 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import seedu.duke.ListContainer;
-import seedu.duke.HotelLiteManagerException;
+import seedu.duke.exceptions.HotelLiteManagerException;
 import seedu.duke.Ui;
 import seedu.duke.Housekeeper;
 import seedu.duke.exceptions.InvalidHousekeeperProfileException;
 import seedu.duke.HousekeeperList;
-import seedu.duke.InvalidUserException;
-import seedu.duke.OverAgeException;
-import seedu.duke.UnderAgeException;
-import seedu.duke.InvalidAgeException;
-import seedu.duke.NameNotStringException;
+import seedu.duke.exceptions.InvalidUserException;
+import seedu.duke.exceptions.OverAgeException;
+import seedu.duke.exceptions.UnderAgeException;
+import seedu.duke.exceptions.InvalidAgeException;
+import seedu.duke.exceptions.NameNotStringException;
 import seedu.duke.command.Command;
 import seedu.duke.storage.HousekeeperFileManager;
 

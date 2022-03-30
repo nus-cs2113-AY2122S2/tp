@@ -1,19 +1,18 @@
 package seedu.duke.command.assigncommand;
 
-import seedu.duke.HotelLiteManagerException;
-import seedu.duke.InvalidAssignmentException;
+import seedu.duke.exceptions.HotelLiteManagerException;
+import seedu.duke.exceptions.InvalidAssignmentException;
 import seedu.duke.command.Command;
 
 import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.Housekeeper;
-import seedu.duke.InvalidRoomNumberException;
-import seedu.duke.exceptions.InvalidHousekeeperProfileException;
+import seedu.duke.exceptions.InvalidRoomNumberException;
 import seedu.duke.RoomList;
 import seedu.duke.AssignmentMap;
 import seedu.duke.HousekeeperList;
 import seedu.duke.Room;
-import seedu.duke.InvalidHousekeeperNameException;
+import seedu.duke.exceptions.InvalidHousekeeperNameException;
 
 import java.io.IOException;
 import java.util.logging.Level;

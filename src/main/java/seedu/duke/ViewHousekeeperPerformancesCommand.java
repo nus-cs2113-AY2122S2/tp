@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.exceptions.HotelLiteManagerException;
 
 /**
  * Represents a command to view the list of housekeeper performances.
