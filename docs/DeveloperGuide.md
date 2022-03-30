@@ -298,15 +298,15 @@ when the user invokes the `group /view` command.
 The general workflow of the `group /view` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupViewCommand` object.
-3. `GroupViewCommand#run()` method is then invoked to run the `group /view` command.
-4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile()` is called before a group within 
+3. `GroupViewCommand#run` method is then invoked to run the `group /view` command.
+4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile` is called before a group within 
 the list of groups can be retrieved.
-5. The `GroupViewCommand` object will then run the `Profile#getGroup()` method to retrieve the group represented by the
+5. The `GroupViewCommand` object will then run the `Profile#getGroup` method to retrieve the group represented by the
 groupId provided.
    1. If the group with requested groupId does not exist, an error message will be printed out with
-   `TextUI#printlnMessage()`.
-   2. Else, the string representing the details of the requested group will be retrieved using the `Group#toString()`
-   method. The string will then be printed out with `TextUI#printlnMessageWithDivider()`.
+   `TextUI#printlnMessage`.
+   2. Else, the string representing the details of the requested group will be retrieved using the `Group#toString`
+   method. The string will then be printed out with `TextUI#printlnMessageWithDivider`.
 
 ### List groups
 **API reference:** [`GroupListCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/GroupListCommand.java)
@@ -321,17 +321,17 @@ when the user invokes the `group /list` command.
 The general workflow of the `group /list` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `GroupListCommand` object.
-3. `GroupListCommand#run()` method is then invoked to run the `group /list` command.
-4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile()` is called
+3. `GroupListCommand#run` method is then invoked to run the `group /list` command.
+4. The list of groups are stored in a `Profile` object, hence `Manager#getProfile` is called
 before the list of groups can be retrieved.
-5. The `GroupListCommand` object will then run `Profile#getGroupListSummaryString()` method to retrieve a string
+5. The `GroupListCommand` object will then run `Profile#getGroupListSummaryString` method to retrieve a string
 representing the summaries of the groups stored.
    1. If there are no groups stored in the `Profile` object, a string representing an empty list of groups will be
    returned.
    2. Else, the `Profile` objects instantiates a new `TableFormatter` object and loops through the list of groups,
-   calling `TableFormatter#addRow()` for each group to create a table with the summary of each group. A string
+   calling `TableFormatter#addRow` for each group to create a table with the summary of each group. A string
    representing the table will then be returned.
-6. The string retrieved will be printed out with `TextUI#printlnMessage()` and the control is given back to `SplitLah`.
+6. The string retrieved will be printed out with `TextUI#printlnMessage` and the control is given back to `SplitLah`.
 
 ## Product scope
 ### Target user profile
