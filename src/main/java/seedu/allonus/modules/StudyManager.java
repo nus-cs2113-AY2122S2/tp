@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 public class StudyManager {
 
 
+
     private static ArrayList<Module> modulesList = new ArrayList<>();
 
     /**
@@ -36,6 +37,7 @@ public class StudyManager {
     private static final String ADD_COMMAND = "add";
     private static final String EDIT_COMMAND = "edit";
     private static final String FIND_COMMAND = "find";
+    public static final String READ_ICS_COMMAND = "read ics";
     private static final String MODULE_TIME_DELIMITER = "t/";
     private static final String MODULE_DAY_DELIMITER = "d/";
     private static final String MODULE_CODE_DELIMITER = "m/";
@@ -145,7 +147,7 @@ public class StudyManager {
                 editModule(userInput,ui);
             } else if (userInput.startsWith(FIND_COMMAND)) {
                 findModule(userInput);
-            } else if (userInput.startsWith("read ics")) {
+            } else if (userInput.startsWith(READ_ICS_COMMAND)) {
                 openIcsFile(ui, icsParser);
             } else {
                 printMessage(UNKNOWN_INPUT_MESSAGE);
