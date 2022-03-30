@@ -16,6 +16,7 @@ import seedu.mindmymoney.userfinancial.User;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_EXPENSES;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_CREDIT_CARD;
+import static seedu.mindmymoney.constants.Indexes.INDEX_OF_SECOND_ITEM;
 
 /**
  * Represents the List command.
@@ -98,8 +99,8 @@ public class ListCommand extends Command {
      */
     public String outputListWithDate(int count, String listInString) throws MindMyMoneyException{
         String[] inputArray = GeneralFunctions.parseInput(listInput);
-        if (!inputArray[Indexes.INDEX_OF_SECOND_ITEM].equals("")) {
-            if (!isValidInput(inputArray[Indexes.INDEX_OF_SECOND_ITEM])) {
+        if (!inputArray[INDEX_OF_SECOND_ITEM].equals("")) {
+            if (!isValidInput(inputArray[INDEX_OF_SECOND_ITEM])) {
                 throw new MindMyMoneyException("Date has to be in \"dd/mm/yyyy\", \"mm/yyyy\" or \"yyyy\" format!");
             }
             return ListStringWithDate(count, listInString, inputArray);
@@ -117,7 +118,7 @@ public class ListCommand extends Command {
      */
     public String ListStringWithDate(int count, String listInString, String[] inputArray) {
         for (Expenditure i : expenditureList.expenditureListArray) {
-                    if (i.getTime().contains(inputArray[Indexes.INDEX_OF_SECOND_ITEM])) {
+                    if (i.getTime().contains(inputArray[INDEX_OF_SECOND_ITEM])) {
                         listInString += count + ". $" + i.getAmount() + " was spent on " + i.getDescription()
                                 + "(" + i.getCategory() + ") " + "using " + i.getPaymentMethod()
                                 + " [" + i.getTime() + "]" + "\n";

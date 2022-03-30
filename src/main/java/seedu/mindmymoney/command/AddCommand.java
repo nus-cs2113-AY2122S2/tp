@@ -1,11 +1,9 @@
 package seedu.mindmymoney.command;
 
 import seedu.mindmymoney.MindMyMoneyException;
-import seedu.mindmymoney.constants.ValidationRegexTypes;
 import seedu.mindmymoney.data.CreditCardList;
 import seedu.mindmymoney.data.ExpenditureList;
 import seedu.mindmymoney.data.IncomeList;
-import seedu.mindmymoney.helper.AddCommandInputTests;
 import seedu.mindmymoney.userfinancial.Expenditure;
 import seedu.mindmymoney.userfinancial.CreditCard;
 import seedu.mindmymoney.userfinancial.Income;
@@ -24,12 +22,7 @@ import static seedu.mindmymoney.constants.Flags.FLAG_OF_INCOME;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_PAYMENT_METHOD;
 import static seedu.mindmymoney.constants.Flags.FLAG_OF_TIME;
 
-import static seedu.mindmymoney.helper.AddCommandInputTests.testDescription;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testExpenditureCategory;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeAmount;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testIncomeCategory;
-import static seedu.mindmymoney.helper.AddCommandInputTests.testPaymentMethod;
+import static seedu.mindmymoney.helper.AddCommandInputTests.*;
 import static seedu.mindmymoney.helper.GeneralFunctions.capitalise;
 import static seedu.mindmymoney.helper.GeneralFunctions.parseInputWithCommandFlag;
 import static seedu.mindmymoney.helper.GeneralFunctions.formatFloat;
@@ -102,7 +95,7 @@ public class AddCommand extends Command {
         float amountAsFloat = Float.parseFloat(amountAsString);
         float amountInt = formatFloat(amountAsFloat);
         String inputTime = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
-        if (!AddCommandInputTests.isValidInput(inputTime)) {
+        if (!isValidInput(inputTime)) {
             throw new MindMyMoneyException("Date has to be in this format \"dd/mm/yyyy\"");
         }
         LocalDate date = LocalDate.parse(inputTime, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
