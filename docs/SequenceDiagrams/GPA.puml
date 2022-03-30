@@ -5,6 +5,7 @@ skinparam shadowing false
 participant ":ModHappyParser" as ModHappyParser
 participant ":NoArgumentParser" as NoArgumentParser
 participant ":GpaCommand" as GpaCommand
+hide footbox
 
 note right of ModHappyParser
 Some methods are omitted from this diagram.

@@ -6,6 +6,7 @@ participant ":ModHappyParser" as ModHappyParser
 participant ":TagParser" as TagParser
 participant ":TagCommand" as TagCommand
 participant ":ModuleList" as ModuleList
+hide footbox
 
 note right of ModHappyParser
 Some methods are omitted from this diagram.

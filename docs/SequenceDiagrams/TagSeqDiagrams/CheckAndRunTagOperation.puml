@@ -3,6 +3,7 @@
 
 skinparam shadowing false
 participant ":TagCommand" as TagCommand
+hide footbox
 
 mainframe **sd** Check and Run Tag Operation
 
