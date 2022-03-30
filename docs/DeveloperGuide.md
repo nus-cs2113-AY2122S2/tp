@@ -221,10 +221,10 @@ when the user invokes the `session /create` command.
 The general workflow of the `session /create` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionCreateCommand` object.
-3. A `SessionCreateCommand#run` method is then invoked to run the `session /create` command.
+3. `SessionCreateCommand#run` method is then invoked to run the `session /create` command.
 4. Once the command starts to run, `SessionCreateCommand` class checks if there is an existing session with the same session name.
 5. If an existing session with the specified session name is found, a message indicating that another session exists with the same name is printed using `TextUi#printlnMessage`.
-6. `SessionCreateCommand` class create a new `Session` object using the session name, session date, and person list.
+6. The `SessionCreateCommand` class creates a new `Session` object using the session name, session date, and person list.
 7. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile#addSession` is called to store the new `Session` object in the `Profile` object.
 8. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created.
@@ -242,15 +242,15 @@ when the user invokes the `session /delete` command.
 The general workflow of the `session /delete` command is as follows:
 1. The user input provided is passed to `SplitLah`.
 2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionDeleteCommand` object.
-3. `SessionDeleteCommand#run` method is then invoked to run the `session /delete` command.
+3. The `SessionDeleteCommand#run` method is then invoked to run the `session /delete` command.
 4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called
    before the list of sessions can be retrieved.
 5. Once the `Profile` object is returned, `Profile#getSession` is called to retrieve the session with the specified 
 session unique identifier from the list of sessions.
    1. If the specified session unique identifier cannot be found, a `String` object 
-   representing session could not be found is returned.
+   representing an error message is returned.
    2. Else the `Session` object with the specified session unique identifier is returned.
-6. With the `Session` object, it is removed from the list of sessions stored in `Profile` object.
+6. The returned `Session` object is then removed from the list of sessions stored in `Profile` object.
 7. After the session is removed from the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
 8. The `SessionDeleteCommand` class then prints a message indicating that a session has been successfully created.
 
