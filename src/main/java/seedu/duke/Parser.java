@@ -22,8 +22,8 @@ public class Parser {
         case "help":
             return new HelpCommand();
         case "add":
-            String[] temp = input.split(" ", 2); //remove add from string
-            String[] temp1 = temp[1].split(","); //process the rest and split by comma
+            String[] temp = input.split(" ", 2); // remove add from string
+            String[] temp1 = temp[1].split(","); // process the rest and split by comma
 
             System.out.println(temp.length);
             if (temp1.length != 8) {
@@ -45,29 +45,34 @@ public class Parser {
                 price = Double.parseDouble(temp1[priceIndex]);
                 country = temp1[countryIndex];
                 vacancies = Integer.parseInt(temp1[vacanciesIndex]);
-                return new AddCommand(name, id , start, end, hotel, price, country, vacancies);
+                return new AddCommand(name, id, start, end, hotel, price, country, vacancies);
             }
-        case "delete": //delete TravelPackage by its ID
+        case "delete": // delete TravelPackage by its ID
             id = Integer.parseInt(inputArray[1]);
             return new DeleteCommand(id);
         case "packages":
             return new PackagesCommand();
         case "reserve":
-            temp = input.split(" ", 2); //remove reserve from string
-            temp1 = temp[1].split(","); //process the rest and split by comma
+            temp = input.split(" ", 2); // remove reserve from string
+            temp1 = temp[1].split(","); // process the rest and split by comma
             int packageID = Integer.parseInt(temp1[0]);
             name = temp1[1];
             String number = temp1[2];
             int pax = Integer.parseInt(temp1[3]);
 
-            return new ReservationCommand(packageID,name,number,pax);
+            return new ReservationCommand(packageID, name, number, pax);
 
-        case "remove": //delete reservation by giving travelpackage ID and contact number.
+        case "remove": // delete reservation by giving travelpackage ID and contact number.
             temp = input.split(" ", 2);
             temp1 = temp[1].split(",");
             packageID = Integer.parseInt(temp1[0]);
             number = temp1[1];
-            return new RemoveReservationCommand(packageID,number);
+            return new RemoveReservationCommand(packageID, number);
+
+        case "reservations":
+            id = Integer.parseInt(inputArray[1]);
+            return new PrintReservationsCommand(id);
+
         default:
             return new ErrorCommand(input);
         }
