@@ -130,6 +130,9 @@ public class StorageFile {
         case "Tutorial":
             category = "tut";
             break;
+        case "Laboratory":
+            category = "lab";
+            break;
         default:
             System.out.println("Should not reach here.");
         }
