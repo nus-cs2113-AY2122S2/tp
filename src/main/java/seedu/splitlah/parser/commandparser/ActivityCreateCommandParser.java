@@ -61,8 +61,9 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
             payer = Parser.parsePayer(commandArgs);
             involvedList = Parser.parseInvolved(commandArgs);
         } catch (InvalidFormatException e) {
-            throw new InvalidFormatException(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t"
-                    + COMMAND_FORMAT_SECOND);
+            String invalidMessage = e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t"
+                    + COMMAND_FORMAT_SECOND;
+            throw new InvalidFormatException(invalidMessage);
         }
 
         boolean isMissingCost = false;
@@ -74,8 +75,9 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
         } catch (InvalidFormatException e) {
             if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
                     + ParserUtils.TOTAL_COST_DELIMITER)) {
-                throw new InvalidFormatException(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
-                        + "\n\t" + COMMAND_FORMAT_SECOND);
+                String invalidMessage = e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
+                        + "\n\t" + COMMAND_FORMAT_SECOND;
+                throw new InvalidFormatException(invalidMessage);
             }
             isMissingCost = true;
         }
@@ -85,38 +87,43 @@ public class ActivityCreateCommandParser implements CommandParser<ActivityCreate
         } catch (InvalidFormatException e) {
             if (!e.getMessage().equalsIgnoreCase(Message.ERROR_PARSER_DELIMITER_NOT_FOUND
                     + ParserUtils.COST_LIST_DELIMITER)) {
-                throw new InvalidFormatException(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
-                        + "\n\t" + COMMAND_FORMAT_SECOND);
+                String invalidMessage = e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
+                        + "\n\t" + COMMAND_FORMAT_SECOND;
+                throw new InvalidFormatException(invalidMessage);
             }
             isMissingCostList = true;
         }
 
         boolean hasMissingCostAndMissingCostList = isMissingCostList && isMissingCost;
         if (hasMissingCostAndMissingCostList) {
-            throw new InvalidFormatException(Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
-                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
+            String invalidMessage = Message.ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST
+                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND;
+            throw new InvalidFormatException(invalidMessage);
         }
 
         boolean hasBothCostAndCostList = !isMissingCostList && !isMissingCost;
         if (hasBothCostAndCostList) {
-            throw new InvalidFormatException(Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
-                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
+            String invalidMessage = Message.ERROR_ACTIVITYCREATE_HAS_BOTH_COST_AND_COST_LIST
+                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND;
+            throw new InvalidFormatException(invalidMessage);
         }
 
         if (isMissingCost) {
             hasDifferentLength = involvedList.length != costList.length;
         }
         if (hasDifferentLength) {
-            throw new InvalidFormatException(Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
-                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND);
+            String invalidMessage = Message.ERROR_ACTIVITYCREATE_INVOLVED_AND_COST_DIFFERENT_LENGTH
+                    + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST + "\n\t" + COMMAND_FORMAT_SECOND;
+            throw new InvalidFormatException(invalidMessage);
         }
 
         try {
             gst = Parser.parseGst(commandArgs);
             serviceCharge = Parser.parseServiceCharge(commandArgs);
         } catch (InvalidFormatException e) {
-            throw new InvalidFormatException(e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
-                    + "\n\t" + COMMAND_FORMAT_SECOND);
+            String invalidMessage = e.getMessage() + "\n" + COMMAND_FORMAT + COMMAND_FORMAT_FIRST
+                    + "\n\t" + COMMAND_FORMAT_SECOND;
+            throw new InvalidFormatException(invalidMessage);
         }
 
         return new ActivityCreateCommand(sessionId, activityName, totalCost, payer, involvedList, costList, gst,

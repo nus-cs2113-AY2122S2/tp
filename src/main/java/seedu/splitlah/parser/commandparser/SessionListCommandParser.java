@@ -5,6 +5,8 @@ import seedu.splitlah.exceptions.InvalidFormatException;
 
 /**
  * Represents a command parser that is able to parse user arguments into a SessionListCommand object.
+ *
+ * @author Roy
  */
 public class SessionListCommandParser implements CommandParser<SessionListCommand> {
 

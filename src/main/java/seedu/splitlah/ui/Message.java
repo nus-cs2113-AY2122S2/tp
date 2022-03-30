@@ -4,16 +4,20 @@ import seedu.splitlah.command.ActivityListCommand;
 import seedu.splitlah.command.ActivityViewCommand;
 import seedu.splitlah.command.GroupCreateCommand;
 import seedu.splitlah.command.GroupDeleteCommand;
-import seedu.splitlah.command.GroupListCommand;
 import seedu.splitlah.parser.commandparser.ActivityCreateCommandParser;
 import seedu.splitlah.parser.commandparser.ActivityDeleteCommandParser;
+import seedu.splitlah.parser.commandparser.ActivityEditCommandParser;
 import seedu.splitlah.parser.commandparser.ExitCommandParser;
+import seedu.splitlah.parser.commandparser.GroupEditCommandParser;
+import seedu.splitlah.parser.commandparser.GroupListCommandParser;
 import seedu.splitlah.parser.commandparser.GroupViewCommandParser;
 import seedu.splitlah.parser.commandparser.HelpCommandParser;
 import seedu.splitlah.parser.commandparser.SessionCreateCommandParser;
 import seedu.splitlah.parser.commandparser.SessionDeleteCommandParser;
+import seedu.splitlah.parser.commandparser.SessionEditCommandParser;
 import seedu.splitlah.parser.commandparser.SessionListCommandParser;
 import seedu.splitlah.parser.commandparser.SessionSummaryCommandParser;
+import seedu.splitlah.parser.commandparser.SessionViewCommandParser;
 
 /**
  * Container of hardcoded messages.
@@ -46,30 +50,39 @@ public abstract class Message {
                     + "        " + SessionCreateCommandParser.COMMAND_FORMAT + "\n"
                     + "2.  Delete an existing session\n"
                     + "        " + SessionDeleteCommandParser.COMMAND_FORMAT + "\n"
-                    + "3.  List all existing sessions\n"
+                    + "3.  Edit an existing session\n"
+                    + "        " + SessionEditCommandParser.COMMAND_FORMAT + "\n"
+                    + "4.  View an existing session's details\n"
+                    + "        " + SessionViewCommandParser.COMMAND_FORMAT + "\n"
+                    + "5.  List all existing sessions\n"
                     + "        " + SessionListCommandParser.COMMAND_FORMAT + "\n"
-                    + "4.  Create a new activity\n"
+                    + "6.  Create a new activity\n"
                     + "        Syntax: " + ActivityCreateCommandParser.COMMAND_FORMAT_FIRST + "\n"
                     + "                " + ActivityCreateCommandParser.COMMAND_FORMAT_SECOND + "\n"
-                    + "5.  Delete an existing activity\n"
+                    + "7.  Delete an existing activity\n"
                     + "        " + ActivityDeleteCommandParser.COMMAND_FORMAT + "\n"
-                    + "6.  View an existing activity's details\n"
+                    + "8.  Edit an existing activity\n"
+                    + "        Syntax: " + ActivityEditCommandParser.COMMAND_FORMAT_FIRST + "\n"
+                    + "        Syntax: " + ActivityEditCommandParser.COMMAND_FORMAT_SECOND + "\n"
+                    + "9.  View an existing activity's details\n"
                     + "        " + ActivityViewCommand.COMMAND_FORMAT + "\n"
-                    + "7.  List all existing activities\n"
+                    + "10.  List all existing activities\n"
                     + "        " + ActivityListCommand.COMMAND_FORMAT + "\n"
-                    + "8.  Show the summary of an existing session\n"
+                    + "11.  Show the summary of an existing session\n"
                     + "        " + SessionSummaryCommandParser.COMMAND_FORMAT + "\n"
-                    + "9.  Create a new group\n"
+                    + "12.  Create a new group\n"
                     + "        " + GroupCreateCommand.COMMAND_FORMAT + "\n"
-                    + "10. Delete an existing group\n"
+                    + "13. Delete an existing group\n"
                     + "        " + GroupDeleteCommand.COMMAND_FORMAT + "\n"
-                    + "11. View an existing group's details\n"
+                    + "14.  Edit an existing group\n"
+                    + "         " + GroupEditCommandParser.COMMAND_FORMAT + "\n"
+                    + "15. View an existing group's details\n"
                     + "        " + GroupViewCommandParser.COMMAND_FORMAT + "\n"
-                    + "12. List all existing groups\n"
-                    + "        " + GroupListCommand.COMMAND_FORMAT + "\n"
-                    + "13.  Show this help menu\n"
+                    + "16. List all existing groups\n"
+                    + "        " + GroupListCommandParser.COMMAND_FORMAT + "\n"
+                    + "17.  Show this help menu\n"
                     + "        " + HelpCommandParser.COMMAND_FORMAT + "\n"
-                    + "14. Exit the program\n"
+                    + "18. Exit the program\n"
                     + "        " + ExitCommandParser.COMMAND_FORMAT;
     public static final String PROMPT_TEXTUI_AWAITING_INPUT =
             "> ";
@@ -147,33 +160,54 @@ public abstract class Message {
             "This person is not participating in the activity with Id: ";
 
     // PersonList
+    public static final String ERROR_PERSONLIST_DUPLICATE_NAME_IN_SESSION =
+            "There are duplicate names in the person list for the session you are trying to create. "
+                    + "Please rectify and try again.";
+    public static final String ERROR_PERSONLIST_DUPLICATE_NAME_IN_GROUP =
+            "There are duplicate names in the person list for the group you are trying to create. "
+                    + "Please rectify and try again.";
+    public static final String ERROR_PERSONLIST_DUPLICATE_NAME_IN_ACTIVITY =
+            "There are duplicate names in the persons involved for the activity you are trying to create. "
+                    + "Please rectify and try again.";
     public static final String ASSERT_PERSONLIST_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
             "Name duplicates exist but not detected.";
-
-    // Name
-    public static final String ERROR_NAME_INVALID_NAME =
-            "Invalid name. Names must contain only alphabetical characters.";
+    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATESESSION =
+            "An Session object failed to be added into the list of sessions because there are duplicate names in"
+                    + "the person list.";
+    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATEGROUP =
+            "A Group object failed to be added into the list of groups because there are duplicate names in"
+                    + "the person list.";
+    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_CREATEACTIVITY =
+            "An Activity object failed to be added into the list of activities because there are duplicate names in"
+                    + "the involved list.";
+    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITSESSION =
+            "An Session object failed to be added into the list of sessions because there are duplicate names in"
+                    + "the person list.";
+    public static final String LOGGER_PERSONLIST_NAME_DUPLICATE_EXISTS_IN_EDITGROUP =
+            "A Group object failed to be added into the list of groups because there are duplicate names in"
+                    + "the person list.";
 
     // Session
-    public static final String ERROR_SESSION_INDEX_OUT_OF_RANGE_PERSON_LIST =
-            "Please enter a number from 1 to ";
     public static final String ERROR_SESSION_EMPTY_ACTIVITY_LIST =
             "The list of activities in the session is currently empty.";
     public static final String ERROR_SESSION_ACTIVITY_ID_NOT_IN_LIST =
             "The activity that you have specified was not found in this session.";
-    public static final String ERROR_SESSION_EMPTY_PERSON_LIST =
-            "The list of participants in the session is currently empty.";
     public static final String ERROR_SESSION_PERSON_NOT_IN_LIST =
             "The person that you have specified was not found in this session.";
     public static final String ASSERT_SESSION_PERSON_LIST_EMPTY =
             "Session object cannot be constructed with a null or empty person list.";
+    public static final String ASSERT_SESSION_ACTIVITY_NULL =
+            "The activity to be added to a Session object cannot be null.";
+    public static final String ASSERT_SESSION_NAME_NULL =
+            "The String object to be used to search for Person objects by name cannot be null.";
+    public static final String ASSERT_SESSION_NAME_LIST_EMPTY =
+            "The String array object to be used to search for Person objects by name cannot be null or empty.";
 
     // Profile
     public static final String ERROR_PROFILE_DUPLICATE_SESSION =
             "There is another session with the same name. Please rename and try again.";
-    public static final String ERROR_PROFILE_DUPLICATE_NAME =
-            "There are duplicate names in the person list for the session you are trying to create. "
-                    + "Please rectify and try again.";
+    public static final String ERROR_PROFILE_DUPLICATE_GROUP =
+            "There is another group with the same name. Please rename and try again.";
     public static final String ERROR_PROFILE_SESSION_LIST_EMPTY =
             "There are currently no sessions stored.";
     public static final String ERROR_PROFILE_SESSION_NOT_IN_LIST =
@@ -182,6 +216,10 @@ public abstract class Message {
             "There are currently no groups stored.";
     public static final String ERROR_PROFILE_GROUP_NOT_IN_LIST =
             "The group that you have specified was not found.";
+    public static final String LOGGER_PROFILE_SESSION_NOT_IN_LIST =
+            "The Session object was not found in the list";
+    public static final String LOGGER_PROFILE_GROUP_NOT_IN_LIST =
+            "The Group object was not found in the list";
 
     // Storage
     public static final String ERROR_STORAGE_FILE_NOT_FOUND =
@@ -201,6 +239,8 @@ public abstract class Message {
     public static final String ERROR_ACTIVITY_INACCURATE_INVOLVED_LIST =
             "The list of involved persons list is inaccurate "
                     + "as at least one person did not participate in the activity.";
+    public static final String ASSERT_ACTIVITY_EMPTY_INVOLVED_PERSON_LIST =
+            "The list of persons in the activity is currently empty.";
 
     // Invalid Command
     public static final String ASSERT_INVALIDCOMMAND_MANAGER_DOES_NOT_EXIST =
@@ -217,10 +257,30 @@ public abstract class Message {
             "The person list or group identifier delimiters are missing but was not handled in prepare function.";
     public static final String LOGGER_SESSIONCREATE_SESSION_ADDED =
             "A session was added into the list of sessions with Id: ";
+    public static final String LOGGER_SESSIONCREATE_DUPLICATE_NAMES_IN_SESSION_LIST =
+            "A Session object failed to be added into the list of sessions because there are duplicate names in"
+                    + "the session list.";
 
     // Session Delete Command
+    public static final String ASSERT_SESSIONDELETE_SESSION_ID_NOT_INITIALIZED =
+            "Session Id not initialized.";
     public static final String LOGGER_SESSIONDELETE_SESSION_REMOVED =
-            "A session was removed from the list of session with Id: ";
+            "A session was removed from the list of sessions with Id: ";
+    public static final String LOGGER_SESSIONDELETE_SESSION_REMOVED_FAILED =
+            "A session was not removed from the list of sessions with Id: ";
+
+    // Session Edit Command
+    public static final String ERROR_SESSIONEDIT_NO_EDIT_DELIMITERS_FOUND =
+            "No delimiters were found. Please rectify and try again.";
+    public static final String ERROR_SESSIONEDIT_INVALID_PERSONLIST =
+            "The specified person list does not contain all existing persons that was previously "
+                   + "created in the session. Please rectify and try again.";
+    public static final String LOGGER_SESSIONEDIT_SESSION_EDITED =
+            "A session was edited from the list of session with Id: ";
+    public static final String ASSERT_SESSIONEDIT_SESSION_IS_NULL =
+            "The session is null.";
+    public static final String ASSERT_SESSIONEDIT_SESSION_ID_INVALID =
+            "Session ID is less than or equals to zero.";
 
     // Session Summary Command
     public static final String MESSAGE_SESSIONSUMMARY_NO_PAYMENTS_REQUIRED =
@@ -234,9 +294,13 @@ public abstract class Message {
     public static final String LOGGER_SESSIONSUMMARY_SESSION_SUMMARY_PRINTED =
             "A session summary has been successful produced for the Session object with the following Id: ";
 
+    // Session List Command
+    public static final String LOGGER_SESSIONLIST_SESSIONS_LISTED =
+            "All the sessions have been listed.";
+
     // Session View Command
     public static final String LOGGER_SESSIONVIEW_SESSION_VIEW_FAILED =
-            "A session could not be viewed.";
+            "A Session object was unable to be viewed from the list of sessions with Id: ";
     public static final String LOGGER_SESSIONVIEW_SESSION_VIEWED =
             "A session with the following Id was viewed: ";
 
@@ -247,9 +311,6 @@ public abstract class Message {
             "Please only include either a total cost or a list of costs.";
     public static final String ERROR_ACTIVITYCREATE_MISSING_COST_AND_COST_LIST =
             "Please include either a cost or a list of costs.";
-    public static final String ERROR_ACTIVITYCREATE_DUPLICATE_NAME =
-            "There are duplicate names in the persons involved for the activity you are trying to create. "
-                    + "Please rectify and try again.";
     public static final String ASSERT_ACTIVITYCREATE_SESSION_ID_LESS_THAN_ONE =
             "Session ID is less than or equals to zero.";
     public static final String ASSERT_ACTIVITYCREATE_ACTIVITY_NAME_MISSING =
@@ -266,21 +327,13 @@ public abstract class Message {
             "An Activity object was succesfully added into the list of activities with Id: ";
     public static final String LOGGER_ACTIVITYCREATE_FAILED_ADDING_ACTIVITY =
             "An Activity object failed to be added into the list of activities due to the following error: ";
-    public static final String LOGGER_ACTIVITYCREATE_DUPLICATE_NAMES_IN_INVOLVED_LIST =
-            "An Activity object failed to be added into the list of activities because there are duplicate names in"
-                    + "the involved list.";
+
 
     // Activity Edit Command
     public static final String LOGGER_ACTIVITYEDIT_FAILED_EDITING_ACTIVITY =
             "An Activity object failed to be edited.";
-    public static final String LOGGER_ACTIVITYEDIT_SESSION_ID_NOT_FOUND =
-            "Session was not found with unique identifier of:";
     public static final String ASSERT_ACTIVITYEDIT_COMMAND_ARGS_NULL =
             "The command arguments cannot be null.";
-    public static final String ASSERT_ACTIVITYEDIT_MANAGER_DOES_NOT_EXIST =
-            "Manager does not exist.";
-    public static final String ASSERT_ACTIVITYEDIT_SESSIONID_MISSING =
-            "Session Id missing.";
     public static final String ASSERT_ACTIVITYEDIT_ACTIVITYID_MISSING =
             "Activity Id missing.";
     public static final String ASSERT_ACTIVITYEDIT_SESSIONID_LESS_THAN_ONE =
@@ -304,7 +357,6 @@ public abstract class Message {
     public static final String LOGGER_ACTIVITYEDIT_ACTIVITY_EDITED =
             "An Activity object was succesfully edited in the list of activities with Id: ";
 
-
     // Activity Delete Command
     public static final String ASSERT_ACTIVITYDELETE_SESSION_IS_NULL =
             "Session is still not initialized.";
@@ -312,16 +364,26 @@ public abstract class Message {
             "Session Id not initialized.";
     public static final String ASSERT_ACTIVITYDELETE_ACTIVITY_ID_NOT_INITIALIZED =
             "Activity Id not initialized.";
+    public static final String ASSERT_ACTIVITYDELETE_ACTIVITY_NOT_DELETED =
+            "The activity was not deleted.";
     public static final String LOGGER_ACTIVITYDELETE_ACTIVITY_REMOVED =
             "An Activity object was successfully deleted from the list of activities with Id: ";
+    public static final String LOGGER_ACTIVITYDELETE_ACTIVITY_REMOVE_FAILED =
+            "An activity was not removed from the list of activities in a session with Id: ";
 
     // Activity List Command
-    public static final String ERROR_ACTIVITYLIST_ACTIVITY_EMPTY =
-            "There are currently no activities in this session.";
     public static final String ASSERT_ACTIVITYLIST_SESSION_ID_LESS_THAN_ONE =
             "Session unique identifier is less than one";
     public static final String LOGGER_ACTIVITYLIST_SESSION_ID_NOT_FOUND =
             "Session was not found with unique identifier of:";
+    public static final String LOGGER_ACTIVITYLIST_ACTIVITIES_LISTED =
+            "All the activities have been listed with specified session Id: ";
+
+    // Activity View Command
+    public static final String LOGGER_ACTIVITYVIEW_ACTIVITY_VIEWED =
+            "An activity object was successfully viewed from activity Id: ";
+    public static final String LOGGER_ACTIVITYVIEW_ACTIVITY_NOT_VIEWED =
+            "An activity object was unable to be viewed from activity Id: ";
 
     // Group
     public static final String ERROR_GROUP_EMPTY_PERSON_LIST =
@@ -330,14 +392,24 @@ public abstract class Message {
             "This person is not in the group.";
 
     // Group Create Command
-    public static final String ERROR_GROUPCREATE_DUPLICATE_GROUP_NAME =
-            "There is another group with the same name.";
-    public static final String ERROR_GROUPCREATE_DUPLICATE_NAMES =
-            "There are duplicate names in the person list for the group you are trying to create.";
-    public static final String ERROR_GROUPCREATE_DUPLICATE_GROUP_ID =
-             "There is another group with the same Id.";
-    public static final String ASSERT_GROUPCREATE_NAME_DUPLICATE_EXISTS_BUT_NOT_DETECTED =
-             "Name duplicates exists but not detected.";
+    public static final String ASSERT_GROUPCREATE_GROUP_NAME_NULL =
+            "Group name is empty but was not handled in prepare function.";
+    public static final String ASSERT_GROUPCREATE_PERSONLIST_NULL =
+            "The person list is empty but was not handled in prepare function.";
+    public static final String LOGGER_GROUPCREATE_GROUP_ADDED =
+            "A group was added into the list of groups with Id: ";
+    public static final String LOGGER_GROUPCREATE_DUPLICATE_NAMES_IN_GROUP_LIST =
+            "A Group object failed to be added into the list of groups because there are duplicate names in"
+                    + "the group list.";
+
+    // Group Delete Command
+    public static final String ASSERT_GROUPDELETE_GROUP_ID_NOT_INITIALIZED =
+            "Group Id not initialized.";
+    public static final String LOGGER_GROUPDELETE_GROUP_REMOVED =
+            "A group was removed from the list of groups with Id: ";
+    public static final String LOGGER_GROUPDELETE_GROUP_REMOVED_FAILED =
+            "A group was not removed from the list of groups with Id: ";
+
 
     // Group View Command
     public static final String ASSERT_GROUPVIEW_INCORRECT_GROUP =
@@ -354,10 +426,14 @@ public abstract class Message {
             "Group Id is not initialized.";
 
     // Group List Command
-    public static final String ASSERT_GROUPLIST_GROUP_SIZE_LESS_THAN_ONE =
-            "The size of the list of groups to be printed is less than one.";
-    public static final String LOGGER_GROUPLIST_GROUPS_NOT_LISTED =
-            "There are no groups to be listed.";
     public static final String LOGGER_GROUPLIST_GROUPS_LISTED =
             "All the groups have been listed.";
+
+    // Group Edit Command
+    public static final String ASSERT_GROUPEDIT_GROUP_ID_INVALID =
+            "Group ID is less than or equals to zero.";
+
+    // Group Edit Command Parser
+    public static final String ERROR_GROUPEDIT_NO_EDIT_DELIMITERS_FOUND =
+        "No delimiters were found. Please rectify and try again.";
 }
