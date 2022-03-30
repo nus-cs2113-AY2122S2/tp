@@ -3,8 +3,10 @@
 ## Introduction
 
 Hotel Lite is a convenient tool for hotel owners to manage their businesses. 
-This application offers functionalities for keeping track of hotel inventory, 
+This application offers functionalities for keeping track of hotel inventory,
 managing housekeeper staff records, recording customer satisfaction ratings, 
+assigning housekeepers to rooms, 
+adding, deleting, viewing events happening in the hotel,
 and maintaining the state of checked-in/checked-out rooms. 
 
 ## Quick Start
@@ -28,7 +30,11 @@ and maintaining the state of checked-in/checked-out rooms.
    * Increase Age of All Housekeepers
    * Adding Housekeeper Performance Rating
    * View All Housekeeper Performances
+   * Assign a housekeeper to a room
 3. [Event Related Commands](#Event-Related-Commands)
+   * Add an event
+   * Delete an event
+   * View previously added events
 4. [Room Related Commands](#Room-Related-Commands)
    * Check in a room
    * Check out a room
@@ -454,7 +460,7 @@ The date has to strictly be in the format `yyyy-mm-dd` or the command wound not 
 Sample input:
 
 ```
-add event cry / 2022-03-30
+add event read / 2022-03-30
 ```
 
 Expected output:
@@ -462,7 +468,7 @@ Expected output:
 ```
 ======================================================================
 I have added the following event in your list:
-Event cry (at: Mar 30 2022)
+Event read (at: Mar 30 2022)
 ======================================================================
 ```
 
@@ -822,6 +828,7 @@ Expected output:
 | get available on | ```get available on DAY ```<br/>eg.```get available on 1``` |
 | is a new week | ```is a new week ```|
 | is a new year | ```is a new year ``` |
+| assign housekeeper | ```assign NAME / ROOM_NUMBER```<br/>eg.```assign susan / 301```|
 
 
 | Room Command | Format, Example |
@@ -832,3 +839,9 @@ Expected output:
 | check all room information | ```check all room``` <br/>eg. ```check all room```|
 | check room information by level | ```check level LEVEL_NUMBER ```<br/>eg.```check level 4``` |
 | check room information by category | ```check category CATEGORY ```<br/>eg.```check category single``` |
+
+| Event Command | Format, Example |
+| --- | --- |
+| add an event | ```add event DESCRIPTION / DATE```<br/>eg. ```check in 301```|
+| delete an event | ```delete event INDEX```<br/>eg. ```add event read / 2022-03-30```|
+| view all events | ```list events```|

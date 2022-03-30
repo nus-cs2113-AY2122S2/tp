@@ -7,6 +7,7 @@ import seedu.duke.ListContainer;
 import seedu.duke.Ui;
 import seedu.duke.ItemList;
 import seedu.duke.storage.ItemListFileManager;
+import seedu.duke.DuplicateItemNameException;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -131,6 +132,9 @@ public class UpdateItemNameCommand extends Command {
         listOfItems.updateItemNameInList(oldItemName, newItemName);
         oldItemName = oldItemName.toUpperCase();
         newItemName = newItemName.toUpperCase();
+        if (oldItemName.equals(newItemName)) {
+            throw new DuplicateItemNameException();
+        }
         ui.printUpdateItemNameAcknowledgementMessage(oldItemName, newItemName);
         ItemListFileManager itemListFileManager = new ItemListFileManager();
         itemListFileManager.writeItemListToFile(listOfItems);
