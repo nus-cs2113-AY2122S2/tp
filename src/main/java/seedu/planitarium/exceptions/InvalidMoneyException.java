@@ -12,7 +12,6 @@ public class InvalidMoneyException extends PlanITariumException {
      * @param text the invalid money text.
      */
     public InvalidMoneyException(String text) {
-        super(text);
-        error = String.format(ERROR_MSG, text);
+        super(String.format(ERROR_MSG, text));
     }
 }
