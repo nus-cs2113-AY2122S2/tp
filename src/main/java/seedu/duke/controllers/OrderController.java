@@ -56,7 +56,8 @@ public class OrderController extends Controller {
 
     private void addNewOrder() throws OperationTerminationException {
         System.out.println("Creating a new order...");
-        int index = InputParser.getInteger("Enter dishes you want to add to the order (enter negative number to exit): ");
+        int index = InputParser.getInteger("Enter dishes you want to add to the order 
+                                           (enter negative number to exit): ");
         int createdOrderIdx = orderManager.getOrderCount();
         try {
             while (index >= 0) {
