@@ -10,7 +10,7 @@ public class ProjectTest {
     private static final String TESTPROJNAME = "CS2113tP";
     private static final String TODO1 = "Set up the team repo.";
     private static final String TODO2 = "Complete user guide.";
-    private static final String DEADLINE1 = "12/12/2024";
+    private static final String DEADLINE1 = "2222-22-22";
     private Project testProj;
 
     @BeforeEach
@@ -25,8 +25,8 @@ public class ProjectTest {
 
     @Test
     public void testDeadline() {
-        testProj.setDeadline("Tomorrow");
-        assertEquals(testProj.getDeadline(), "Tomorrow");
+        testProj.setDeadline(DEADLINE1);
+        assertEquals(testProj.getDeadline(), DEADLINE1);
     }
 
     @Test
