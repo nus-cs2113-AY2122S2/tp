@@ -9,7 +9,7 @@ public class AddDeadlineCommandParser implements CommandParser<AddDeadlineComman
     @Override
     public AddDeadlineCommand parse(String[] userInput) throws IllegalCommandException {
         if (userInput.length < Constants.THREE_ARGUMENTS) {
-            throw new IllegalCommandException(Constants.MESSAGE_INVALID_COMMAND_FORMAT);
+            throw new IllegalCommandException(Constants.MESSAGE_INVALID_ADDDEADLINE_COMMAND_FORMAT);
         }
         return new AddDeadlineCommand(userInput[1], userInput[2]);
     }

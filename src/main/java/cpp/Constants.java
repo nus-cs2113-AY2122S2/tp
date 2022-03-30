@@ -26,6 +26,9 @@ public class Constants {
     public static final String MESSAGE_INVALID_DELETEPROJECT_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
             + "deleteproject [project_title]";
+    public static final String MESSAGE_INVALID_ADDDEADLINE_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
+            + "The correct format should be:\n"
+            + "adddeadline [project_title] [deadline]";
     public static final String MESSAGE_INVALID_ADD_MEMBER_COMMAND_FORMAT = MESSAGE_INVALID_COMMAND_FORMAT
             + "The correct format should be:\n"
             + "addmember [project_title] [member_name] /c[contact_number] /e[email]";
