@@ -10,6 +10,7 @@ public class Reservations {
     public Reservations() {
         this.reservations = new ArrayList<>();
     }
+
     public Reservations(ArrayList<Reservation> r) {
         this.reservations = r;
     }
@@ -22,21 +23,34 @@ public class Reservations {
         return reservations.size();
     }
 
-    public void printAllReservations(){
-        for (int i = 0; i<reservations.size();i++){
-            System.out.println(i+ ". " + reservations.get(i).toString());
+    public void printAllReservations() {
+        for (int i = 0; i < reservations.size(); i++) {
+            System.out.println(i + ". " + reservations.get(i).toString());
         }
     }
 
     public void addReservation(Reservation newReservation) {
-        reservations.add(newReservation);
-        System.out.println("RESERVATION ADDED");
+        if (sameContactExist(newReservation.getContactNumber())) {
+            System.out.println("Reservation under this number already exists! Please try again.");
+        } else {
+            reservations.add(newReservation);
+            System.out.println("RESERVATION ADDED");
+        }
     }
 
-    //remove reservation from list using index
+    // remove reservation from list using index
     public void removeReservation(int index) {
         reservations.remove(index);
         System.out.println("RESERVATION DELETED");
+    }
+
+    private boolean sameContactExist(String contactNumber) {
+        for (Reservation reservation : reservations) {
+            if (reservation.getContactNumber().equals(contactNumber)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
