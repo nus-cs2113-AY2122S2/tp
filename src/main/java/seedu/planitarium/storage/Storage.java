@@ -190,7 +190,7 @@ public class Storage {
         dataDate = parseInfoGetExpendDate(info);
         familyData.addExpend(groupNumber, numberOfPerson, description, amount,
                 category, isPermanent, Constants.FOR_STORAGE);
-        //familyData.getList(groupNumber).getPerson(numberOfPerson).setExpendDate(expendNumber, dataDate);
+        familyData.getList(groupNumber).getPerson(numberOfPerson).setExpenditureDate(expendNumber, dataDate);
         expendNumber++;
     }
 
@@ -209,7 +209,7 @@ public class Storage {
         isPermanent = parseInfoGetPermanent(info);
         dataDate = parseInfoGetIncomeDate(info);
         familyData.addIncome(groupNumber, numberOfPerson, description, amount, isPermanent, Constants.FOR_STORAGE);
-        //familyData.getList(groupNumber).getPerson(numberOfPerson).setIncomeDate(incomeNumber, dataDate);
+        familyData.getList(groupNumber).getPerson(numberOfPerson).setIncomeDate(incomeNumber, dataDate);
         incomeNumber++;
     }
 
