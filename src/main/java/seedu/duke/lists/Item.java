@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.lists;
 
 /**
  * Represents an item that is stored within the inventory. An item object consists of the item's name as well as its
