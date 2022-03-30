@@ -211,7 +211,7 @@ Example of usage:
 
 > Edit an income under a stated user
 
-Format: `editin /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX /i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>`
+Format: `editin /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX [/i INCOME /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>]`
 
 Example of usage:
 
@@ -268,7 +268,7 @@ Example of usage:
 
 > Edits an expenditure description, its value, its category index and its recurring status of a specific individual.
 
-Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX /i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>`
+Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX [/i EXPENDITURE /d DESCRIPTION /c CATEGORY_INDEX /p <T|F>]`
 
 * **USER_INDEX** refers to an index that is mapped to that individual.
 * **GROUP_INDEX** refers to an index that is mapped to the group that individual belongs to.
