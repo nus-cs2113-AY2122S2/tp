@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Patient {
+-dateAdmission : String
++Patient(nric, fullName, age, gender, address, dob, dateAdmission) : void
++getDateAdmission() : String
++edit(fullName, age, address, gender, dob, dateAdmission) : void
++getPatientNric() : String
++getPatientName() : String
++getPatientAge() : String
++getPatientGender() : String
++getPatientAddress() : String
++getPatientDob() : String
++getDateOfAdmission() : String
++saveString() : String
+}
+
+@enduml

@@ -12,7 +12,9 @@
     * [Command Component](#command)
     * [Parser Component](#parser)
     * [Storage Component](#storage)
+    * [Validator Component](#validator)
   * [Asset Classes](#asset-classes)
+
 * [Implementation](#implementation)
   * [Design Considerations](#design-considerations)
 * [Product Scope](#product-scope)
@@ -40,52 +42,87 @@ Refer to the [_User Guide_](UserGuide.md).
 
 ### Architecture
 
-The ***Architecture Diagram*** given above explains the high-level design ***HALPMI***.
+![Architecture Diagram](diagrams/OverallArch.png)
+
+The ***Architecture Diagram*** given above explains the high-level design ***HalpMi***.
 
 Given below is a quick overview of main components and how they interact with each other.
 
-**Main components of the architecture**
+#### **Main components of the architecture**
 
-**`Main`** has single method called `main` that initialises a new instance of a Manager class, and calls the `runLoop()`
+**`Duke`** has single method called `main` which is called upon launch. This initialises a new instance of a `Manager` class, and calls the `runLoop()`
 method belonging to the Manager object.
 
-[**`Assets`**](#asset-classes): Refers to a collection of classes that are the main assets of the application.
+[**`Assets`**](#asset-classes): Refers to a collection of classes that hold all the necessary data given by the User in
+current and past usages.
 
-The rest of the App consists of three components.
+The rest of the App consists of these components.
 
-* [**`UI`**](#ui-component): The UI of the App.
 * [**`Manager`**](#manager-component): The Brain.
-* [**`Helper`**](#helper-classes): Core Classes that help with operations.
-  * [**`Command`**](#command): Calls all the commands.
-  * [**`Parser`**](#parser): Breaks down user input into parameters accepted by the app, also checks if parameters are valid.
-  * [**`Storage`**](#storage): Reads data from data files anf writes data to data files, also stores in app memory.
+* [**`Helper`**](#helper-classes): A collection of core classes that aid with the Logical Operations performed by HalpMi.
+    * [**`Command`**](#command): Contains the changes or updates to be made.
+    * [**`UI`**](#ui-component): The UI of the App.
+    * [**`Parser`**](#parser): Breaks down user input into parameters accepted by the app and creates a Command Object.
+    * [**`Validator`**](): Checks if the input provided by the User is Valid.
+    * [**`Storage`**](#storage): Reads data from data files and writes data to data files, also stores in app memory.
+  
+The Sequence Diagram below showcases the general Logic and Flow of the program from Launch till Exit.
+
+![Sequence Diagram](diagrams/SequenceDiagram.png)
 
 ### UI component
 
+![UIClassUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/UIClassUML.png)
+<br>
+How the UI class works:
+* Based on the architecture sequence diagram, `Manager` class calls readCommand method in `UI` class and returns the UserInput
+* Afterwards, the `Manager` class calls readParameters method in `UI` class and returns another UserInput
+* Finally, the `Manager` class calls print method in `UI` class which in turn calls `Status` enum and returns the constant
+
 ### Manager component
 
-![ManagerUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ManagerUML.png)
+![ManagerUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ManagerClassUML.png)
 <br>
 How the Manager class works:
-* When `Duke` class instantiates a `Manager` object and calls `runLoop` method, the program will execute a while loop
-* The while loop only halts when `isTerminated` boolean becomes true. The programme exits
-* In the while loop, there is a switch statement. It calls a `Command/UI` method based on a commandWord
-* The commandWord determines which method is called
+* When `Duke` class instantiates a `Manager` object and calls runLoop method, the program will execute a while loop
+* In the while loop, there is a switch condition
+* Based on the parameter provided to the switch, it will call the respective methods in UI, Parser & Command classes
+* The while loop only halts when isTerminated boolean becomes true. Then, the programme exits
 
 ### Helper Classes
 #### `Command`
 
-![CommandUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/CommandUML.png)
+![CommandUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/CommandClassUML.png)
 How the Command class works:
-* The `Manager` class calls specific methods in `Command` class
-* Each method in the `Command` class would call on an `asset` class method which will manipulate the attributes inside it
+* Based on the architecture sequence diagram, the `Parser` class calls the `Validator` class to check if the inputs are valid
+* If it is valid, the `Command` subclass executes its method
+* The subclass is based on whether the user wants to access either the `Doctor`, `Patient`, `Medicine` or `Appointment` asset list class
+* The input parameters determine which of the `Command` subclass is used
+
+#### `Validator`
+![ValidatorClassUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ValidatorClassUML.puml)
+The validator has a series of methods to ensure that the parameters entered are correct.  It throws a `HalpmiException` if the parameters
+entered are invalid.
+For example, validateAddPatient validates the parameter of `add patient` command, ensuring each parameter is in correct
+format. Please refer to the below sequence diagram for a clearer understanding.
+![ValidatorUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ValidatorUML.puml)
+
 
 #### `Parser`
-The parser parses the description of the command. It first calls the validator class to validate the parameters and then returns a command.
-
-
+![ParserClassUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ParserClassUML.puml)
+The parser parses the description of the command. It first checks the number of parameters entered is correct and 
+calls the validator class to validate the parameters, and then returns a command if the validation is successful.
+![ParserUML](https://raw.githubusercontent.com/AY2122s2-cs2113t-t09-3/tp/master/docs/Diagrams/ParserUML.puml)
 
 #### `Storage`
+
+![StorageClassUML](diagrams/StorageClassUML.png)
+The Storage class holds 4 different Lists found in the Assets collection as seen in the Class Diagram shown above. Any edits made
+to these Lists must be made by accessing them from the Storage object. The Storage class also has 4 load functions for each type of Asset,
+namely Patient, Doctor, Medicine and Appointment. These methods read in the respective text files to load existing information
+into their respective lists. The Storage class has 4 save methods that save the information found in the 4 Lists into text files
+in the CSV format. The Directory of these text files is found in the DIR String variable, the PATH for each of the 4 text files
+can be found in the PATH_MED, PATH_PAT, PATH_DOC, PATH_APP String variables respectively.
 
 ### Asset classes
 #### `Appointment`
@@ -114,6 +151,36 @@ whenever user types in the correct command.
 The MedicineList class contains private lists of Medicine, expired Medicine and one list for searching. It has several
 public methods that allows the user to get information regarding the list, view the list as well as search for specific
 Medicine by selected criteria.
+
+#### `Patient`
+
+![PatientUML](diagrams/PatientUML.png)
+The Patient class holds several attributes that are exposed via getter methods. To instantiate the class, all the
+attributes must be given to the constructor method. There is a method to edit the attribute data that can be called
+whenever user types in the correct command.
+
+#### `Patient List`
+
+![PatientListUML](diagrams/PatientListUML.png)
+The PatientList class contains private lists of Patients and one list for searching. It has several
+public methods that allows the user to get information regarding the list, view the list as well as search for specific
+Patients by selected criteria.
+
+#### `Doctor`
+
+![DoctorUML](diagrams/DoctorUML.png)
+The Doctor class holds several attributes that are exposed via getter methods. To instantiate the class, all the
+attributes must be given to the constructor method. There is a method to edit the attribute data that can be called
+whenever user types in the correct command.
+
+#### `Doctor List`
+
+![DoctorListUML](diagrams/DoctorListUML.png)
+The DoctorList class contains private lists of Doctors and one list for searching. It has several
+public methods that allows the user to get information regarding the list, view the list as well as search for specific
+Doctors by selected criteria.
+
+--------------------------------------------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -153,8 +220,6 @@ Below is an example describing the behaviour of the `find` feature.
 * is reasonably comfortable using CLI apps
 
 ###Value proposition:
-Manage contacts faster than a typical mouse/GUI driven app
-Streamlines the updating of data and records
 
 Manage core clinic related data faster than using mouse or GUI.
 Ensure each data type conforms to certain standards with in-built validations.
@@ -197,7 +262,7 @@ Device Environment:
 ## Glossary
 * *FUllNAME* - Standard form for fullname of patients and doctors is a String value with no spaces
 * *NRIC* - Standard form for nric of patients and doctors is a String value with no spaces
-* *AGE* - Standard form for age is an int value more than 0 
+* *AGE* - Standard form for age is an int value more than 0
 * *GENDER* - Standard form for gender of patients and doctors is a char value of "M" or "F"
 * *ADDRESS* - Standard form for address is a String value with no spaces
 * *DOB* - Standard form for date-of-birth is a String value with no spaces
@@ -207,7 +272,7 @@ Device Environment:
 * *DOSAGE* - Standard form for dosage of medicine is an int value, standard unit milligrams
 * *EXPIRY* - Standard form for expiry of medicine is a String value with no spaces
 * *SIDEEFFECTS* - Standard form for side effects of medicine is a String value with no spaces
-* *QUANTITY* - Standard form for quantity of medicine is an int value 
+* *QUANTITY* - Standard form for quantity of medicine is an int value
 * *APPOINTMENTID* - Standard form for appointment id is a String value with no spaces
 * *APPOINTMENTDETAILS* - Standard form for appointment details is a String value
 

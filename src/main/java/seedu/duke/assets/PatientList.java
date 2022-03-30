@@ -24,9 +24,6 @@ public class PatientList extends List {
         return null;
     }
 
-    public void find(String[] command) {
-    }
-
 
     public Patient search(String nric) {
         for (Patient patient : patients) {
