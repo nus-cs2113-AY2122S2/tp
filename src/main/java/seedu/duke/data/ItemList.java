@@ -34,4 +34,14 @@ public class ItemList {
         return itemArrayList;
     }
 
+    /**
+     * Add a borrow record to a specific item in the itemArrayList as indicated
+     * by the itemIndex.
+     *
+     * @param itemIndex
+     * @param newRecord
+     */
+    public void addBorrowRecord(int itemIndex, BorrowRecord newRecord) {
+        this.itemArrayList.get(itemIndex).addBorrowRecord(newRecord);
+    }
 }

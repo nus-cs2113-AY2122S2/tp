@@ -1,7 +1,6 @@
 package seedu.duke.data;
 
-import seedu.duke.common.Messages;
-
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Item {
@@ -13,6 +12,7 @@ public class Item {
     private String name;
     private int quantity;
     private String description;
+    public ArrayList<BorrowRecord> borrowRecords;
 
     public Item(String name, int quantity, String description) {
         this.name = name;
@@ -61,6 +61,14 @@ public class Item {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Add a new borrow record to the item
+     * @param newRecord
+     */
+    public void addBorrowRecord(BorrowRecord newRecord) {
+        this.borrowRecords.add(newRecord);
     }
 
     /**
