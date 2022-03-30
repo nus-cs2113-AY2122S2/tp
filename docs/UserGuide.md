@@ -245,27 +245,27 @@ However, deleted sessions will not be listed.
 > An activity represents a single group activity and stores its name, costs and the name of the payer.
  
 ### Creating an activity: `activity /create`
+Creates a new activity and assigns it to a session. <br>
 
-> Creates a new activity and assigns it to a session. <br>
-
-
-Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
+> Format 1: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
 /co [TOTAL_COST] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
-
-Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
+> 
+> Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID] /i [NAME1 NAME2 ...]
 /cl [COST1 COST2 ...] [</gst [GST_PERCENTAGE]>] [</sc [SERVICE_CHARGE]>]`
+>
+>* `[SESSION_ID]` refers to the unique identifier of the session.
+>    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
+>* `[ACTIVITY_NAME]` refers to the name of the activity.
+>    * The activity name is **case-insensitive**.
+>* `[PERSON_PAID]` refers to the person who paid for the activity.
+>    * The person's name is **case-insensitive**.
+>* `[NAME1 NAME2 ...]` refers to a list of persons involved in the activity.
+>    * Each individual name is **case-insensitive**.
+>* `[TOTAL_COST]` refers to the total cost of the activity.
+>* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
+>  * Example: `/i Alice Bob /cl 10 20` means that Alice's portion cost $10 while Bob's portion cost $20.
 
-* `[SESSION_ID]` refers to the unique identifier of the session.
-    * The unique identifier for a session can be retrieved with [`session /list`](#listing-all-sessions-session-list) command.
-* `[ACTIVITY_NAME]` refers to the name of the activity.
-    * The activity name is **case-insensitive**.
-* `[PERSON_PAID]` refers to the person who paid for the activity.
-    * The person's name is **case-insensitive**.
-* `[NAME1 NAME2 ...]` refers to a list of persons involved in the activity.
-    * Each individual name is **case-insensitive**.
-* `[TOTAL_COST]` refers to the total cost of the activity.
-* `[COST1 COST2 ...]` refers to a list of costs respective to each person involved in the activity.
-  * Example: `/i Alice Bob /cl 10 20` means that Alice's portion cost $10 while Bob's portion cost $20.
+<br>
 
 > **💡 Notes:**
 >- A session with a unique identifier of `[SESSION_ID]` has to exist before an activity can be created and assigned to 
@@ -279,16 +279,19 @@ Format 2: `activity /create /sid [SESSION_ID] /n [ACTIVITY_NAME] /p [PERSON_PAID
 >- The values that follow the delimiters `/co` and `/cl` can only have a maximum of 12 digits before
    and 2 digits after the decimal point, if any.
 
+<br>
 
-Examples of usage:
-1. Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid a total of $10
-   for both Bob and herself which will be split equally between them later on.
-   - `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /co 10` <br>
-   ![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
-2. Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid for both
-   Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.
-   - `activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7` <br>
-   ![Activity create command [2] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[2].png)
+**Example 1**
+- Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid a total of $10
+for both Bob and herself which will be split equally between them later on.<br>
+`activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /co 10` <br>
+![Activity create command [1] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[1].png)
+
+**Example 2**
+- Adds a new activity to a session with a session unique identifier of 2 named Class Lunch. Alice paid for both
+Bob and herself. Alice's meal cost $3.50 while Bob's meal cost $7.<br>
+`activity /create /sid 2 /n Class Lunch /p Alice /i Alice Bob /cl 3.5 7` <br>
+![Activity create command [2] Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/userguide/ActivityCreateCommand[2].png)
 <br>
 <br>
 
