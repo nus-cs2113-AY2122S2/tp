@@ -39,7 +39,7 @@ is responsible for,
 
 [`Parser`](#Parser-Component) is responsible for parsing and validating user input.
 
-[`Family`](#Persons-Component) is responsible for holding the user data of PlanITarium in memory.
+[`Family`](#Family-Component) is responsible for holding the user data of PlanITarium in memory.
 
 [`Money`](#Money-Component) is responsible for holding the monetary information in memory.
 
@@ -47,7 +47,7 @@ is responsible for,
 
 **How the components interact with each other**
 
-The slightly simplified *Sequence Diagram* below shows how the components interact for the scenrio where the user issues
+The slightly simplified *Sequence Diagram* below shows how the components interact for the scenario where the user issues
 the command `add /n Alice /g 2`.
 
 ![ArchitectureSequenceDiagram](images/ArchitectureSequenceDiagram.png)
@@ -113,7 +113,6 @@ https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/pla
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/PersonList.java)
 and [`Person.java`](
 https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/person/Person.java)
-)
 
 ![FamilyComponent](images/FamilyComponent.png)
 
@@ -153,7 +152,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Command Execution
 
-In PlanITarium, a command usually have following format:
+In PlanITarium, a command usually has the following format:
 
 ```md
 [command type][indicator][description]
@@ -174,7 +173,7 @@ There may be several indicators for every input, such as
 addin \i 200 \d salary \u 1
 ```
 
-is to add a income for the person whose uid is 1, and the description of this income is salary.
+is to add an income for the person whose uid is 1, and the description of this income is salary.
 
 When `PlanITarium` receives such input, it will pass the input to `CommandFactory`. The `CommandFactory` will call
 `Parser` to parse the input into several components according to the indicator. The `Parser` will then return the type
@@ -421,7 +420,7 @@ command object has been created by [`CommandFactory`](#Command-Execution):
     * Pros: Easy to implement and less memory usage.
     * Cons: May have performance issues as it needs to iterate through every person's expenditure.
 
-* **Altertive 2:** Maintain an array list for each category and store a copy of expenses.
+* **Alternative 2:** Maintain an array list for each category and store a copy of expenses.
     * Pros: Fast to print expenses in a category, no unnecessary look-ups.
     * Cons: Poor memory management, needs to store twice as many expenditures.
 
@@ -483,11 +482,32 @@ Sequence diagram shows how the saving operation will work:
 
 ### Logging
 
-{Describe the usage of logging for the product.}
+The logging of this product is facilitated by [`ProjectLogger.java`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/main/java/seedu/planitarium/ProjectLogger.java).
+
+Each class contains a static `logger` which logs information and errors through all instances of the class in a single
+log file. The log files are named after the class, an example being `Family.log` for the `Family` class.
+
+Simple logging is used as it provides sufficient information for documentation and debugging purposes. The log files 
+are rewritten during every run of PlanITarium, so renaming of the old logs are necessary should it need to be saved.
 
 ### Testing
 
-{Describe the testing methods for the product.}
+PlanITarium is tested mainly in 2 ways:
+* JUnit testing
+* IO redirection testing
+
+#### JUnit testing
+
+JUnit testing can be performed by running the tests in the [`test`](
+https://github.com/AY2122S2-CS2113T-T10-2/tp/blob/master/src/test/java/seedu/planitarium) folder.
+
+#### IO redirection testing
+
+IO redirection testing can be performed via the following steps:
+1. Launch a terminal in `tp/text-ui-test`
+2. Edit the input file `input.txt`, and the expected output `EXPECTED.txt` if necessary
+3. Run the file `runtest.bat` in the terminal
 
 ---
 
@@ -495,11 +515,12 @@ Sequence diagram shows how the saving operation will work:
 
 ### Target user profile
 
-{Describe the target user profile}
+The target user profile for PlanITarium is young adults who have a family to support.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+PlanITarium offers ease of financial tracking for the entire family. It features a single input process for performing 
+tasks, and users will be able to neatly categorise their family members as well as expenditures.
 
 ---
 
@@ -528,4 +549,4 @@ Sequence diagram shows how the saving operation will work:
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+See [IO redirection testing](#IO-redirection-testing).
