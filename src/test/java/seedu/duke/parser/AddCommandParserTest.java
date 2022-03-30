@@ -13,6 +13,7 @@ public class AddCommandParserTest {
 
     private AddCommandParser parser = new AddCommandParser();
 
+    // Not all permutations were tested. Should not be needed...
     @Test
     void parse_compulsoryFieldMissing_throwException() {
         String testInputFormat = " %s %s %s %s";
