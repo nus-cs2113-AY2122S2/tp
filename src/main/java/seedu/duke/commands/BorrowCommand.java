@@ -6,7 +6,7 @@ import seedu.duke.ui.Ui;
 import java.time.LocalDate;
 
 /**
- * Borrow an item from the inventory for a specified duration
+ * Borrow an item from the inventory for a specified duration.
  */
 public class BorrowCommand extends Command {
     private final int itemIndex;

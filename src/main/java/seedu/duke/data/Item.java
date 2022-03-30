@@ -64,8 +64,8 @@ public class Item {
     }
 
     /**
-     * Add a new borrow record to the item
-     * @param newRecord
+     * Add a new borrow record to the item.
+     * @param newRecord A borrow record.
      */
     public void addBorrowRecord(BorrowRecord newRecord) {
         this.borrowRecords.add(newRecord);
