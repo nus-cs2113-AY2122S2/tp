@@ -212,5 +212,5 @@ class PlanListTest {
             () -> planList.deletePlan(invalidArgument));
 
     }
-    
+
 }

@@ -301,24 +301,24 @@ public class WorkoutList {
 
         String deletedWorkoutDetail = deletedWorkout.toString();
 
-        ArrayList<Integer> IndexOfPlanWithDeletedWorkout = findPlanContainsTargetWorkout(deletedWorkoutDetail, planList);
-        if (IndexOfPlanWithDeletedWorkout.size() > 0) {
+        ArrayList<Integer> planIndexWithDeletedWorkout = findPlanContainsTargetWorkout(deletedWorkoutDetail, planList);
+        if (planIndexWithDeletedWorkout.size() > 0) {
             System.out.println(deletedWorkoutDetail + " is found in:\n");
         }
 
-        for (int planNumber : IndexOfPlanWithDeletedWorkout) {
+        for (int planNumber : planIndexWithDeletedWorkout) {
             assert (planList.checkPlanIndexIsWithinRange(planNumber)) : "Plan number is out of range.";
             System.out.println("\t" + planList.getPlansDisplayList().get(planNumber - 1));
         }
 
-        int totalNumberOfPlanToDelete = IndexOfPlanWithDeletedWorkout.size();
+        int totalNumberOfPlanToDelete = planIndexWithDeletedWorkout.size();
         for (int i = 0; i < totalNumberOfPlanToDelete; i++) {
             if (i == 0) {
                 System.out.println("\nThe following plan has been removed:\n");
             }
             System.out.println((i + 1) + ". "
-                    + planList.getPlansDisplayList().get(IndexOfPlanWithDeletedWorkout.get(i) - i - 1));
-            planList.deletePlan(Integer.toString(IndexOfPlanWithDeletedWorkout.get(i) - i));
+                    + planList.getPlansDisplayList().get(planIndexWithDeletedWorkout.get(i) - i - 1));
+            planList.deletePlan(Integer.toString(planIndexWithDeletedWorkout.get(i) - i));
         }
 
         logger.exiting(getClass().getName(), "deleteWorkout");
