@@ -141,19 +141,19 @@ the Command component when any user input is provided to SplitLah.
 <br>
 1. When `SplitLah` reads a user input, `SplitLah` will call the `Parser#getCommand` method and pass the
    user input as the argument.
-2. Given the user input, `Parser` class first decomposes the user input into two separate components, the command type
-   and the remaining arguments.
+2. Given the user input, `Parser` class first decomposes the user input into two separate components, the _command type_
+   and the _remaining arguments_.
    This is done using the two methods `Parser#getCommandType` and `Parser#getRemainingArguments` respectively.<br>
-   Where the input is `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob`, the command type will be
-   `session /create` and the remaining arguments would be `/n Class Outing /d 15-03-2022 /pl Alice Bob`.
-   1. If the command type is of invalid syntax, the method `Parser#getCommandType` returns null.
-      If the command type is null, `Parser` class creates and returns an `InvalidCommand` object to `SplitLah`.
-   2. Next, to check whether the command type and remaining arguments are valid, `Parser` class calls the method
-      `Parser#checkIfCommandIsValid`. If either command type or remaining arguments are invalid, an error
+   Where the input is `session /create /n Class Outing /d 15-03-2022 /pl Alice Bob`, the _command type_ will be
+   `session /create` and the _remaining arguments_ would be `/n Class Outing /d 15-03-2022 /pl Alice Bob`.
+   1. If the _command type_ is of invalid syntax, the method `Parser#getCommandType` returns null.
+      When null is returned, `Parser` class creates and returns an `InvalidCommand` object to `SplitLah`.
+   2. Next, to check whether the _command type_ and _remaining arguments_ are valid, `Parser` class calls the method
+      `Parser#checkIfCommandIsValid`. If either the _command type_ or the _remaining arguments_ are invalid, an error
       message is returned by the method, which is then used to return an `InvalidCommand` object to `SplitLah`.
-3. Depending on the command type, `Parser` class instantiates an appropriate `XYZCommandParser` object. For example,
-   for a command type of `"session /create"` a `SessionCreateCommandParser` object is instantiated.
-   If `Parser` class does not recognise the command type, an `InvalidCommand` object is created and returned immediately.
+3. Depending on the _command type_, `Parser` class instantiates an appropriate `XYZCommandParser` object. For example,
+   for a _command type_ of `"session /create"`, a `SessionCreateCommandParser` object is instantiated.
+   If `Parser` class does not recognise the _command type_, an `InvalidCommand` object is created and returned immediately.
 4. With the corresponding `XYZCommandParser` object instantiated, `Parser` class will call the `getCommand` method
    of `XYZCommandParser`. This process will be explained in further detail in the sequence diagrams below.
 
@@ -164,7 +164,7 @@ the Command component when any user input is provided to SplitLah.
    ![Reference Frame InvalidCommand Instantiation Sequence Diagram](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/RefInvalidCommand.drawio.png)
 
 5. After `XYZCommandParser#getCommand` is called, `XYZCommandParser` will prepare to create a `XYZCommand` object. 
-   To begin with, it will parse all the remaining arguments using `ParseABC` methods from the `Parser` class.
+   To begin with, it will parse all the _remaining arguments_ using `ParseABC` methods from the `Parser` class.
    (`ParseABC` is a placeholder for specific methods in `Parser` class, 
    e.g. `Parser#parseName` and `Parser#parseSessionId`)
    * For example, `SessionCreateCommandParser` has to call `parsePersonList`, `parseGroupId`, `parseName` and
