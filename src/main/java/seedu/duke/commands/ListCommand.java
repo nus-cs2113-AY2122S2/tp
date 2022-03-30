@@ -6,6 +6,8 @@ import seedu.duke.ui.Ui;
 
 public class ListCommand extends Command {
 
+    public static final String COMMAND_WORD = "list";
+
     /**
      * Prints out the list of items in the itemList.
      */

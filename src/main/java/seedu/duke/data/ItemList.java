@@ -26,7 +26,12 @@ public class ItemList {
         return this.itemArrayList.size();
     }
 
+    public Item set(int index, Item item) {
+        return itemArrayList.set(index, item);
+    }
+
     public ArrayList<Item> getItemArrayList() {
         return itemArrayList;
     }
+
 }

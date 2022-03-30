@@ -21,7 +21,7 @@ public class StorageTest {
     @Test
     void loadData_emptyFile_loadEmptyList() throws InvMgrException {
         Storage testStorage = new Storage("test/data/load/empty.json");
-        ArrayList<Item> testItemList = testStorage.loadData();
+        ArrayList<Item> testItemList = testStorage.load();
         ArrayList<Item> expectedItemList = new ArrayList<Item>();
         assertEquals(expectedItemList, testItemList);
     }
@@ -29,7 +29,7 @@ public class StorageTest {
     @Test
     void loadData_invalidJsonFile_throwException() throws InvMgrException {
         Storage testStorage = new Storage("test/data/load/invalidData.json");
-        assertThrows(InvMgrException.class, () -> testStorage.loadData());
+        assertThrows(InvMgrException.class, () -> testStorage.load());
     }
 
     @Test
@@ -43,7 +43,7 @@ public class StorageTest {
         expectedItemList.add(item3);
 
         Storage testStorage = new Storage("test/data/load/validInputData.json");
-        ArrayList<Item> testItemList = testStorage.loadData();
+        ArrayList<Item> testItemList = testStorage.load();
 
         assertListEquals(expectedItemList, testItemList);
     }
@@ -51,7 +51,7 @@ public class StorageTest {
     @Test
     void writeData_nullList_throwException() throws InvMgrException {
         Storage testStorage = new Storage("test/data/read/actualData.json");
-        assertThrows(NullPointerException.class, () -> testStorage.writeData(null));
+        assertThrows(NullPointerException.class, () -> testStorage.save(null));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class StorageTest {
         itemList.add(item3);
 
         Storage testStorage = new Storage("test/data/read/actualData.json");
-        testStorage.writeData(itemList);
+        testStorage.save(itemList);
 
         Storage expectedStorage = new Storage("test/data/read/expectedData.json");
         assertStorageEquals(expectedStorage, testStorage);

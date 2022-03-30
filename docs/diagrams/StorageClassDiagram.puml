@@ -1,0 +1,40 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+hide empty members
+hide empty attributes
+
+package "Storage Component" <<Rectangle>> {
+    class Storage
+    class Gson
+}
+
+class InvMgr {
+    - storage: Storage
+    - itemList: ItemList
+    - ui: Ui
+    + main()
+    - run()
+}
+
+class Storage {
+    - filePath:String
+    - dataPath: Path
+    + load(): ArrayList<Item>
+    + save(itemList: ArrayList<Item>)
+    - validatePathExists(filePath: String)
+
+}
+
+class Gson {
+
+}
+
+class ArrayList<Item> {
+
+}
+
+InvMgr -right-> "1" Storage
+Storage -[dashed]right-> Gson: uses
+Gson -[dashed]-> ArrayList: serialises to & deserialises >
+@enduml

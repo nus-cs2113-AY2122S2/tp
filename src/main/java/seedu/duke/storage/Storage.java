@@ -37,10 +37,10 @@ public class Storage {
 
     public Storage(String filePath) throws InvMgrException {
         this.filePath = filePath;
-        this.dataPath = getAbsolutePath(filePath);
+        this.dataPath = validatePathExists(filePath);
     }
 
-    public ArrayList<Item> loadData() throws InvMgrException {
+    public ArrayList<Item> load() throws InvMgrException {
         ArrayList<Item> bufferTaskList;
 
         Gson gson = new Gson();
@@ -66,7 +66,7 @@ public class Storage {
      * @param itemList the ArrayList of items to write to the data file
      * @throws InvMgrException for any IO exceptions while writing
      */
-    public void writeData(ArrayList<Item> itemList) throws InvMgrException {
+    public void save(ArrayList<Item> itemList) throws InvMgrException {
         if (itemList == null) {
             throw new NullPointerException();
         }
@@ -100,7 +100,7 @@ public class Storage {
      * @param filePath the JSON data file to load
      * @return Path object pointing to JSON data file
      */
-    private Path getAbsolutePath(String filePath) throws InvMgrException {
+    private Path validatePathExists(String filePath) throws InvMgrException {
         assert filePath != null : "filePath is null";
         try {
             Path dataPath = Paths.get(filePath);
@@ -113,7 +113,7 @@ public class Storage {
         } catch (FileAlreadyExistsException e) {
             return Paths.get(filePath);
         } catch (NullPointerException e) {
-            return getAbsolutePath(DEFAULT_PATH);
+            return validatePathExists(DEFAULT_PATH);
         } catch (IllegalArgumentException e) {
             throw new InvMgrException(INVALID_PATH, e);
         } catch (IOException e) {
