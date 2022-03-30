@@ -48,7 +48,7 @@ class ExpenseParserTest {
     void testReformatDate() {
         String testDate = "2022-03-27";
         String parsedTestDate = reformatDate(testDate);
-        assertEquals("27-Mar-2022", parsedTestDate);
+        assertEquals("2022-03-27", parsedTestDate);
     }
 
     @Test

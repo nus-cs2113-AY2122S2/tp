@@ -33,7 +33,7 @@ public class ExpenseParser {
      */
     public static String reformatDate(String rawDate) throws DateTimeParseException {
         LocalDate dateOfExpense = LocalDate.parse(rawDate);
-        String parsedDate = dateOfExpense.format(DateTimeFormatter.ofPattern("dd-MMM-YYYY"));
+        String parsedDate = dateOfExpense.format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
         return parsedDate;
     }
 

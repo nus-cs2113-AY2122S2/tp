@@ -20,7 +20,7 @@ and contact management tasks done faster than traditional GUI apps.
 {Give detailed description of each feature}
 
 ### Main Menu Features
-####Navigating from menu to section of interest: `goto`
+#### Navigating from menu to section of interest: `goto`
 Allows access to subsections of the application, namely, to the expense tracker, contacts manager and task manager.
 
 Format: `goto m/SECTION`
@@ -46,7 +46,7 @@ For contacts manager,
 Welcome to Contacts Manager
 ```
 
-####Going back to menu: `menu`
+#### Going back to menu: `menu`
 Allows navigation back to the menu section of the application.
 
 Format: `menu`
@@ -60,7 +60,7 @@ Welcome back to the main menu
 Menu:
 ```
 
-####Getting guidance on the usage of the application: `help`
+#### Getting guidance on the usage of the application: `help`
 Displays user guide for menu.
 
 Format: `help`
@@ -117,7 +117,7 @@ Example:
 Menu:
 ```
 
-####Exiting the application: `exit`
+#### Exiting the application: `exit`
 Terminates the application.
 
 Format: `exit`
@@ -145,40 +145,59 @@ Format: `list`
 **Expected outcome:**
 ```
 Here are the expenses you have made so far:
- 1. 15/3/2022|9.50|Movie|Spiderman: No Way Home
- 2. 14/3/2022|4.30|Food|Chicken rice for lunch
+ 1. 15/3/2022 | 9.50 | Movie | Spiderman: No Way Home
+ 2. 14/3/2022 | 4.30 | Food | Chicken rice for lunch
 ```
 #### Adding an expense: `add`
 Adds a new expense to the list of expenses. The keyword `add` is used followed by the date, 
 amount, category and remarks of a given expense, using the delimiters of `d/` , `a/`,  `c/` and `r/`
 respectively.
+- The DATE field must be in the format of YYYY-MM-DD. All other formats would not be accepted.
+- The AMOUNT field must be a valid number (integer/float) and must be non-negative.
 
 Format: `add d/DATE a/AMOUNT c/CATEGORY r/REMARKS`
 
+| Parameter         | Description                            |
+|-------------------|----------------------------------------|
+| ```<DATE> ```     | Date of expense(YYYY-MM-DD)            |
+| ```<AMOUNT> ```   | Amount spent on the expense in $       |
+| ```<CATEGORY> ``` | Free-text on type of expense           |
+| ```<REMARKS> ```  | Any additional information (non-empty) |
 
 **Example of usage:**
 
-`add d/15/3/2022 a/9.50 c/Movie r/Spiderman: No Way Home`
+`add d/2022-03-15 a/9.50 c/Movie r/Spiderman: No Way Home`
 
 **Expected Outcome:**
 ```
-Added 15/3/2022|9.50|Movie|Spiderman: No Way Home
+Added 2022-03-15 | $9.50 | Movie | Spiderman: No Way Home
 ```
 #### Delete an expense: `rm`
 Deletes a specific expense record that currently exists in the list using its index. Users may choose
 to `list` out the expenses first before deleting to verify its index. After deleting an expense
 record, it will be shown before it is removed from the list.
+- ```<INDEX>``` refers to the actual number shown on the left of each expense record when `list` is used.
 
 Format: 
 `rm INDEX`
 
+| Parameter         | Description                               |
+|-------------------|-------------------------------------------|
+| ```<INDEX> ```    | Index of the expense record to be deleted |
+
 **Example of usage:**
 
+`list`
+```
+Here are the expenses you have made so far:
+ 1. 2022-03-15 | $9.50 | Movie | Spiderman: No Way Home
+ 2. 2022-03-14 | $4.30 | Food | Chicken rice for lunch
+```
 `rm 2`
 
 **Expected outcome:**
 ```
-Deleted entry: 14/3/2022|4.30|Food|Chicken rice for lunch
+Deleted entry: 2022-03-14 | $4.30 | Food | Chicken rice for lunch
 ```
 #### Editing an expense: `edit`
 Edits an existing expense in the list of expenses. Users may choose to `list` out the expenses first 
@@ -191,6 +210,10 @@ Format:
 
 `[FIELD] [NEW VALUE]`
 
+| Parameter         | Description                                                                                           |
+|-------------------|-------------------------------------------------------------------------------------------------------|
+| ```<FIELD> ```    | The field of a record to be edited.<br/>Valid fields: `<DATE>`, `<AMOUNT>`, `<CATEGORY>`, `<REMARKS>` |
+| ```<NEW VALUE>``` | The new value to be inserted at the specified field. <br>It must comply with the constraints specified by `add` section above.|
 **Example of usage:**
 
 `edit 1`
@@ -200,24 +223,28 @@ Format:
 **Expected Outcome:**
 ```
 Here is the expense record you have chosen to edit:
-Date | 18.00 | Category | This is a remark
+2022-03-22 | $18.00 | Category | This is a remark
 Which field would you like to edit? Enter [field] [newValue] or enter 'DONE' when you have finished editing:
-< category movie
+< category Movie
 New category value set!
 < done
 Editing complete!
 Here is the newly edited expense record:
-Date | 20.00 | Movie | This is a remark
+2022-03-22 | $20.00 | Movie | This is a remark
 ```
 
 #### Look for an expense: `find`
 Looks for a specific expense record by using a user-specified keyword.
-Only the Category, Date and Remarks fields will be considered when looking for an expense record.
-- The keyword is case-insensitive
-- Partial matches on the keyword are also returned
+- Only the `<CATEGORY>`, `<DATE>` and `<REMARKS>` fields will be considered when looking for an expense record.
+- The keyword is case-insensitive.
+- Partial matches on the keyword are also returned.
 
 Format:
 `find KEYWORD`
+
+| Parameter        | Description                          |
+|------------------|--------------------------------------|
+| ```<KEYWORD> ``` | The word to look for in each expense |
 
 **Example of usage:**
 
@@ -226,7 +253,7 @@ Format:
 **Expected outcome:**
 ```
 Here are the matching expense records:
-24/3/2022 | 9.50 | Movie | Jujutsu Kaisen
+2022-03-22 | $9.50 | Movie | Jujutsu Kaisen
 ```
 
 ### Study Manager Features

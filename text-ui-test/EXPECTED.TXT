@@ -120,35 +120,35 @@ Welcome back to the main menu
 Menu:
 Welcome to Expense Tracker
 You haven't added any expenses to your list yet!
-Added 25-Mar-2022 | $18.00 | Category | This is a remark
-Added 24-Mar-2022 | $9.50 | Movie | Jujutsu Kaisen
+Added 2022-03-25 | $18.00 | Category | This is a remark
+Added 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
 Date field is of incorrect format! Type in YYYY-MM-DD
 Please enter only numbers for the Amount field!
 Fields cannot be empty!
 Some fields are missing!
 Here are the expenses you have made so far:
- 1. 25-Mar-2022 | $18.00 | Category | This is a remark
- 2. 24-Mar-2022 | $9.50 | Movie | Jujutsu Kaisen
+ 1. 2022-03-25 | $18.00 | Category | This is a remark
+ 2. 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
 
 Selected item does not exist in the list
 Here is the expense record you have chosen to edit:
-25-Mar-2022 | $18.00 | Category | This is a remark
+2022-03-25 | $18.00 | Category | This is a remark
 Which field would you like to edit? Enter [field] [newValue] or enter 'DONE' when you have finished editing:
 New amount value set!
 Amount cannot be negative!
 Date field is of incorrect format! Type in YYYY-MM-DD
 Editing complete!
 Here is the newly edited expense record:
-25-Mar-2022 | $20.00 | Category | This is a remark
+2022-03-25 | $20.00 | Category | This is a remark
 Here are the expenses you have made so far:
- 1. 25-Mar-2022 | $20.00 | Category | This is a remark
- 2. 24-Mar-2022 | $9.50 | Movie | Jujutsu Kaisen
+ 1. 2022-03-25 | $20.00 | Category | This is a remark
+ 2. 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
 
 Here are the matching expense records:
-24-Mar-2022 | $9.50 | Movie | Jujutsu Kaisen
-Deleted entry: 25-Mar-2022 | $20.00 | Category | This is a remark
+2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
+Deleted entry: 2022-03-25 | $20.00 | Category | This is a remark
 Here are the expenses you have made so far:
- 1. 24-Mar-2022 | $9.50 | Movie | Jujutsu Kaisen
+ 1. 2022-03-24 | $9.50 | Movie | Jujutsu Kaisen
 
 Welcome back to the main menu
 Menu:
