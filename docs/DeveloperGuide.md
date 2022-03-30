@@ -93,7 +93,7 @@ The `Storage` component is responsible for the saving and loading of program dat
 
 ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T10-3/tp/master/docs/ClassDiagrams/Storage.puml)
 
-Storage is an API supporting write/read data to/from computer storage:
+Storage is an interface supporting write/read data to/from computer storage:
 * Storage interface is implemented by JsonStorage in Mod Happy, which will read and load data to and from json format.
 * ListStorage can save a ArrayList of any class that extends Object in json format, and read them back into corresponding objects. (E.g. ModuleListStorage, TaskListStorage inherit from ListStorage)
 * There are navigability to Storage from Main and SaveComand, which handles the load and write data to/from disk respectively.
