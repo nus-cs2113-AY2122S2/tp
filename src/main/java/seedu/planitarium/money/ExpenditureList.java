@@ -43,7 +43,7 @@ public class ExpenditureList extends MoneyList {
      * @param category    The integer label of the category
      * @param isPermanent The recurring status of the expenditure
      */
-    public void addExpenditure(String description, double amount, int category, boolean isPermanent) {
+    public void addExpenditure(String description, Double amount, int category, Boolean isPermanent) {
         logger.log(Level.INFO, LOG_ADD_EXP);
         assert (description != null);
         assert (amount >= 0);
@@ -71,9 +71,9 @@ public class ExpenditureList extends MoneyList {
      *
      * @return The total cost of all expenditure in the list
      */
-    public double getTotalExpenditure() {
+    public Double getTotalExpenditure() {
         logger.log(Level.INFO, LOG_GET_TOTAL_EXP);
-        double totalAmount = 0;
+        Double totalAmount = 0.0;
         for (Expenditure item : expenditureArrayList) {
             totalAmount += item.amount;
         }
@@ -107,7 +107,7 @@ public class ExpenditureList extends MoneyList {
      * @param index The index of the expenditure on the person's expenditure list
      * @return The cost of the expenditure
      */
-    public double getExpenditureValue(int index) {
+    public Double getExpenditureValue(int index) {
         logger.log(Level.INFO, LOG_GET_EXP_VAL);
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfExpenditures);
@@ -158,7 +158,7 @@ public class ExpenditureList extends MoneyList {
      * @param index The index of the expenditure on the list
      * @return The recurring of the expenditure
      */
-    public boolean isPermanent(int index) {
+    public Boolean isPermanent(int index) {
         logger.log(Level.INFO, LOG_PERM);
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfExpenditures);
@@ -190,7 +190,7 @@ public class ExpenditureList extends MoneyList {
      * @param category    The new category, if any
      * @param isPermanent The new recurring status, if any
      */
-    public void editExpenditure(int index, String description, double amount, int category, Boolean isPermanent) {
+    public void editExpenditure(int index, String description, Double amount, int category, Boolean isPermanent) {
         logger.log(Level.INFO, LOG_EDIT_EXP);
         assert (index > ARRAY_INDEX);
         assert (index <= numberOfExpenditures);
@@ -272,8 +272,8 @@ public class ExpenditureList extends MoneyList {
      */
     private void matchString(String description) {
         for (Expenditure item : expenditureArrayList) {
-            boolean hasDescription = item.getDescription().contains(description);
-            boolean hasAmount = Double.toString(item.getAmount()).contains(description);
+            Boolean hasDescription = item.getDescription().contains(description);
+            Boolean hasAmount = Double.toString(item.getAmount()).contains(description);
             if (hasDescription || hasAmount) {
                 System.out.println(item);
             }
@@ -289,9 +289,9 @@ public class ExpenditureList extends MoneyList {
      */
     private void matchString(String description, int category) {
         for (Expenditure item : expenditureArrayList) {
-            boolean inCategory = item.getCategory().equals(Category.getLabelForIndex(category));
-            boolean hasDescription = item.getDescription().contains(description);
-            boolean hasAmount = Double.toString(item.getAmount()).contains(description);
+            Boolean inCategory = item.getCategory().equals(Category.getLabelForIndex(category));
+            Boolean hasDescription = item.getDescription().contains(description);
+            Boolean hasAmount = Double.toString(item.getAmount()).contains(description);
             if (inCategory && (hasDescription || hasAmount)) {
                 System.out.println(item);
             }

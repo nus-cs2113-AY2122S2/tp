@@ -184,7 +184,7 @@ public class Parser {
      * @throws DuplicateDelimiterException if user input contains duplicate delimiters.
      * @throws EmptyStringException        if string after the delimiter is blank.
      */
-    public static boolean parseRecurringStatus(String userInput)
+    public static Boolean parseRecurringStatus(String userInput)
             throws DuplicateDelimiterException, MissingDelimiterException, EmptyStringException {
         assert (userInput != null) : ASSERT_INPUT_NOT_NULL;
         ParserUtility.checkContainsOnlyOneDelimiter(userInput, DELIMITER_RECURRING_STATUS);
@@ -236,10 +236,10 @@ public class Parser {
      * @return A valid double for monetary values.
      * @throws InvalidMoneyException if format of text is not a valid double, negative or more than 2 decimal places.
      */
-    public static double getValidMoney(String amount) throws InvalidMoneyException {
+    public static Double getValidMoney(String amount) throws InvalidMoneyException {
         assert (amount != null) : ASSERT_MONEY_NOT_NULL;
         try {
-            double checkMoney = Double.parseDouble(amount);
+            Double checkMoney = Double.parseDouble(amount);
             ParserUtility.checkNegativeMoney(checkMoney);
             //if (amount.contains(DELIMITER_MONEY)) {
             //    String decimalPlace = parseDelimitedTerm(amount, DELIMITER_MONEY, DELIMITER_BACK);
