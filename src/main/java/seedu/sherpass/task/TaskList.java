@@ -356,7 +356,7 @@ public class TaskList {
         String repeatKeyWord = EMPTY_STRING;
         if (!isRepeat) {
             tasks.remove(deleteIndex);
-        } else if (isValidFreq(taskToBeRemoved.getRepeatFrequency())){
+        } else if (isValidFreq(taskToBeRemoved.getRepeatFrequency())) {
             repeatKeyWord = "repeated";
             int identifier = taskToBeRemoved.getIdentifier();
             tasks.removeIf(task -> task.getIdentifier() == identifier);
