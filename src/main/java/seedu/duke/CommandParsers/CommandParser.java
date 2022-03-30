@@ -21,10 +21,15 @@ public abstract class CommandParser {
     protected abstract void extract_params() throws WrongCommandException, NullException, InvalidFileException, InvalidObjectType;
 //    protected abstract void validate_params();   // They need implement their own validate commands
 
-    public void parse(String userInput) throws WrongCommandException, NullException, InvalidFileException {
+    public void parse(String userInput) throws WrongCommandException, NullException, InvalidFileException, InvalidObjectType {
         this.userInput = userInput;
         this.init_extract_params();
-        this.extract_params();
+        try{
+            this.extract_params();
+        } catch (InvalidObjectType e1) {
+            return;
+        }
+
     }
 
     public void paramRegexFormer(){

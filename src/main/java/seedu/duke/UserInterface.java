@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.CommandParsers.*;
 import util.exceptions.InvalidFileException;
+import util.exceptions.InvalidObjectType;
 import util.exceptions.NullException;
 import util.exceptions.WrongCommandException;
 
@@ -59,10 +60,10 @@ public class UserInterface {
                     totalParser.parse(userInput);
                     break;
                 case "help":
-                    displayHelp();
+                    Display.help();
                     break;
                 case "storage-capacity":
-                    userInputIsStorageCapacity();
+                    warehouse.getPercentOccupied();
                     break;
                 default:
                     //error exception here
@@ -73,29 +74,22 @@ public class UserInterface {
                     String wrongCommand = wrongCommandException.getCommand();
                     System.out.printf("%s command was used wrongly. Type help to see examples\n",
                             wrongCommand);
-                    displayHelp();
+                    Display.help();
                 } else {
                     System.out.println("No such command. Type help to see examples");
-                    displayHelp();
+                    Display.help();
                 }
             } catch (NullException nullException) {
                 //catch null exception here
-                System.out.println("Please enter the command again.");
+                Display.tryCommandAgain();
             } catch (InvalidFileException e) {
                 e.printStackTrace();
+            } catch (InvalidObjectType e){
+                Display.tryCommandAgain();
             }
             System.out.println("Another command?");
             userInput = input.nextLine();
         }
     }
 
-    private void userInputIsStorageCapacity() throws NullException {
-        int totalGoods = warehouse.totalInventoryVol();
-        Float warehouseCapacity = warehouse.getCapacityOccupied();
-        Commands.storageCapacity(totalGoods, warehouseCapacity);
-    }
-
-    private void displayHelp() {
-        Commands.help();
-    }
 }
