@@ -41,4 +41,11 @@ public class DeleteCommand extends Command {
             ui.showMessages(ERROR_MESSAGE, INVALID_INDEX);
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeleteCommand // instanceof handles nulls
+                && (this.index == ((DeleteCommand) other).index));
+    }
 }

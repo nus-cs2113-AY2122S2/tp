@@ -85,4 +85,13 @@ public class Item {
     public String toString() {
         return String.format("%s | %d", name, quantity);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Item // instanceof handles nulls
+                && this.name.equals(((Item) other).name)
+                && this.description.equals(((Item) other).description)
+                && (this.quantity == ((Item) other).quantity));
+    }
 }
