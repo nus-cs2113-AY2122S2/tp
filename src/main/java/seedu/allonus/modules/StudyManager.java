@@ -43,9 +43,11 @@ public class StudyManager {
     private static final String MODULE_CATEGORY_LEC = "Lecture";
     private static final String MODULE_CATEGORY_TUT = "Tutorial";
     private static final String MODULE_CATEGORY_EXAM = "Exam";
+    private static final String MODULE_CATEGORY_LAB = "Laboratory";
     private static final String CATEGORY_LECTURE_SHORTHAND = "lec";
     private static final String CATEGORY_TUTORIAL_SHORTHAND = "tut";
     private static final String CATEGORY_EXAM_SHORTHAND = "exam";
+    private static final String CATEGORY_LAB_SHORTHAND = "lab";
     private static final String WELCOME_MESSAGE = "Welcome to Modules Tracker, where you can track all your "
             + "classes.";
     public static final String STRING_SPACE_CHARACTER = " ";
@@ -105,7 +107,7 @@ public class StudyManager {
     private static final String MISSING_MODULE_CATEGORY_MESSAGE = "Please enter the category of your module";
     private static final String MISSING_MODULE_TIME_MESSAGE = "Please enter the time of your module's class";
     private static final String MISSING_MODULE_CODE_MESSAGE = "Please enter the code for your module";
-    private static final String WRONG_CATEGORY_FORMAT_MESSAGE = "Category has to be one of lec,tut or exam";
+    private static final String WRONG_CATEGORY_FORMAT_MESSAGE = "Category has to be one of lec, tut, lab or exam";
 
     public static final String LOGGER_IDENTIFIER = "mylogger";
 
@@ -155,7 +157,7 @@ public class StudyManager {
     }
 
     private void openIcsFile(TextUi ui, ModuleCalendarReader icsParser) {
-        printMessage("Please enter the name of your .ics file from nusmods: ");
+        printMessage("Please enter the name of your .ics file from nusmods:");
         String input = ui.getUserInput();
         ArrayList<Module> icsModulesList = icsParser.readIcsFile(input);
         if (icsModulesList != null) {
@@ -544,7 +546,8 @@ public class StudyManager {
 
     private String validateModuleCategory(String category) throws ModuleCategoryException {
         assert (category.equals(CATEGORY_LECTURE_SHORTHAND) || category.equals(CATEGORY_TUTORIAL_SHORTHAND)
-                || category.equals(CATEGORY_EXAM_SHORTHAND)) : WRONG_CATEGORY_FORMAT_MESSAGE;
+                || category.equals(CATEGORY_EXAM_SHORTHAND) || category.equals(CATEGORY_LAB_SHORTHAND))
+                : WRONG_CATEGORY_FORMAT_MESSAGE;
         switch (category) {
         case CATEGORY_LECTURE_SHORTHAND:
             category = MODULE_CATEGORY_LEC;
@@ -554,6 +557,9 @@ public class StudyManager {
             break;
         case CATEGORY_EXAM_SHORTHAND:
             category = MODULE_CATEGORY_EXAM;
+            break;
+        case CATEGORY_LAB_SHORTHAND:
+            category = MODULE_CATEGORY_LAB;
             break;
         default:
             throw new ModuleCategoryException(WRONG_CATEGORY_FORMAT_MESSAGE);
