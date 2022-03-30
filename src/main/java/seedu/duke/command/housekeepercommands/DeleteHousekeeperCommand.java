@@ -44,7 +44,9 @@ public class DeleteHousekeeperCommand extends Command {
         housekeeperList.removeHousekeeperInList(name);
         AssignmentMap assignmentMap = listContainer.getAssignmentMap();
         assignmentMap.removeAssignment(name);
+        ui.printNotedLine();
         ui.printMessage("Deleted " + name + " from the list of profile");
         ui.printMessage("Take note! Total pax of housekeeper:  " + housekeeperList.getTotalHousekeeper());
+        ui.printBottomLine();
     }
 }
