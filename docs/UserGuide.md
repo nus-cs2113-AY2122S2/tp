@@ -43,6 +43,13 @@ and maintaining the state of checked-in/checked-out rooms.
    * Check room information by level
    * Check room information by category
 5. [Item Related Commands](#Item-Related-Commands)
+   * Add A New Item To The Item List
+   * Update The Pax Of An Item In The Item List
+   * Update The Name Of An Item In The Item List
+   * Delete An Item In The Item List
+   * View All Items
+   * View All Items Within The Item List With A Pax Of Zero
+   * Search For Items Within The Item List
 
 {Give detailed description of each feature}
 
@@ -656,6 +663,7 @@ Twin		401			 4			Vacant  			susan
 Twin		402			 4			Occupied			NA
 ```
 ## Item Related Commands
+
 ### Add A New Item To The Item List: `add item`
 Adds a new item (name of item and its pax) to the item list which represents all the items found within the inventory.
 
