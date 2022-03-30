@@ -185,7 +185,7 @@ Before edit command:
 
 ![beforeedit](images/beforeedit.png)
 
-After command: `edit 1 /do 25/3/2022 /start 18:00 /end 20:00`
+After command: `edit 1 /do 25/3/2022 /start 18:00 /end 20:00 /repeat`
 
 ![afteredit](images/afteredit.png)
 
