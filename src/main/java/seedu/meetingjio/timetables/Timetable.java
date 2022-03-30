@@ -1,5 +1,7 @@
 package seedu.meetingjio.timetables;
 
+import seedu.meetingjio.events.Lesson;
+import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.events.Event;
 import seedu.meetingjio.exceptions.DuplicateEventException;
 import seedu.meetingjio.exceptions.OverlappingEventException;
@@ -135,6 +137,20 @@ public class Timetable {
             }
         }
         list = tempList;
+    }
+
+    public String listTimetable(int constraint) {
+        String str = "";
+        for (int i = 0; i < list.size(); i++) {
+            if ((constraint == 1 && list.get(i) instanceof Meeting)
+                    || (constraint == 2 && list.get(i) instanceof Lesson)) {
+                continue;
+            }
+            int listIndex = i + 1;
+            str += listIndex + "." + list.get(i);
+            str += '\n';
+        }
+        return str;
     }
 
     public ArrayList<Event> getList() {

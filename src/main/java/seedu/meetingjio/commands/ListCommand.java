@@ -1,7 +1,5 @@
 package seedu.meetingjio.commands;
 
-import seedu.meetingjio.events.Lesson;
-import seedu.meetingjio.events.Meeting;
 import seedu.meetingjio.exceptions.MissingValueException;
 import seedu.meetingjio.exceptions.TimetableNotFoundException;
 import seedu.meetingjio.timetables.MasterTimetable;
@@ -11,6 +9,8 @@ import static seedu.meetingjio.common.ErrorMessages.ERROR_INVALID_USER;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EMPTY_LIST;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_UNSPECIFIED_LIST;
 import static seedu.meetingjio.common.ErrorMessages.ERROR_EMPTY_MASTER_TIMETABLE;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_NO_LESSONS;
+import static seedu.meetingjio.common.ErrorMessages.ERROR_NO_MEETINGS;
 
 public class ListCommand extends Command {
 
@@ -37,16 +37,13 @@ public class ListCommand extends Command {
     @Override
     public String execute(MasterTimetable masterTimetable) {
         String user = this.name;
-        try {
-            if (user.length() == 0) {
-                throw new MissingValueException(); // why dun return the error msg directly?
-            } else if (user.equalsIgnoreCase("all")) {
-                return listAll(masterTimetable, constraint);
-            } else {
-                return listUser(user, masterTimetable, constraint);
-            }
-        } catch (MissingValueException mve) {
+        
+        if (user.length() == 0) {
             return ERROR_UNSPECIFIED_LIST;
+        } else if (user.equalsIgnoreCase("all")) {
+            return listAll(masterTimetable, constraint);
+        } else {
+            return listUser(user, masterTimetable, constraint);
         }
 
     }
@@ -95,19 +92,19 @@ public class ListCommand extends Command {
         }
         assert timetable.size() > 0 : ERROR_EMPTY_LIST;
         timetable.sort();
-        String str = "";
-        for (int i = 0; i < timetable.size(); i++) {
-            if ((constraint == 1 && timetable.get(i) instanceof Meeting)
-                    || (constraint == 2 && timetable.get(i) instanceof Lesson)) {
-                continue;
-            }
-            int listIndex = i + 1;
-            str += listIndex + "." + timetable.get(i);
-            if (i != timetable.size() - 1) {
-                str += '\n';
+        String str = timetable.listTimetable(constraint);
+        if (str.length() == 0) {
+            switch (constraint) {
+            case 0:
+                return ERROR_EMPTY_LIST;
+            case 1:
+                return ERROR_NO_LESSONS;
+            case 2:
+                return ERROR_NO_MEETINGS;
             }
         }
-        return str;
+        String truncatedString = str.substring(0, str.length() - 1);
+        return truncatedString;
     }
 
 

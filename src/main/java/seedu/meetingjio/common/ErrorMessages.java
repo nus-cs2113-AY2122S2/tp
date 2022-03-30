@@ -47,7 +47,9 @@ public class ErrorMessages {
     public static final String ERROR_INVALID_ATTRIBUTE_VALUE = "Invalid attribute value.";
 
     // List Command
-    public static final String ERROR_EMPTY_LIST = "There are no lessons in your timetable yet!";
+    public static final String ERROR_EMPTY_LIST = "There are no events in your timetable yet!";
+    public static final String ERROR_NO_LESSONS = "There are no lessons in your timetable yet!";
+    public static final String ERROR_NO_MEETINGS = "There are no meetings in your timetable yet!";
 
     // Event
     public static final String ERROR_DUPLICATE_EVENT = "This event already exists. "
