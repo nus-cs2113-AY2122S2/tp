@@ -234,7 +234,7 @@ The general workflow of the `session /list` command is as follows:
 5. Once the profile is retrieved, `SessionListCommand` runs the `Profile#getSessionListSummaryString` method.
    1. If the session list in the profile is empty, the `Profile` class returns a `String` object containing an error 
       message.
-   2. If the session list is not empty, a `String` object representing a table summarising the list of sessions in the 
+   2. Otherwise, a `String` object representing a table summarising the list of sessions in the 
       profile is returned.
 
 ### Settle a session
