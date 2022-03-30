@@ -3,13 +3,13 @@ package seedu.duke.data;
 import java.time.LocalDate;
 
 public class BorrowRecord {
-    private final LocalDate sDate;
-    private final LocalDate eDate;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
     private final String borrowerName;
 
     public BorrowRecord(LocalDate sDate, LocalDate eDate, String borrowerName) {
-        this.sDate = sDate;
-        this.eDate = eDate;
+        this.startDate = sDate;
+        this.endDate = eDate;
         this.borrowerName = borrowerName;
     }
 }

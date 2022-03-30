@@ -10,20 +10,20 @@ import java.time.LocalDate;
  */
 public class BorrowCommand extends Command {
     private final int itemIndex;
-    private final LocalDate sDate;
-    private final LocalDate eDate;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
     private final String borrowerName;
 
     public BorrowCommand(int itemIndex, String sDate, String eDate, String borrowerName) {
         this.itemIndex = itemIndex;
-        this.sDate = LocalDate.parse(sDate);
-        this.eDate = LocalDate.parse(eDate);
+        this.startDate = LocalDate.parse(sDate);
+        this.endDate = LocalDate.parse(eDate);
         this.borrowerName = borrowerName;
     }
 
     @Override
     public void execute(ItemList itemList, Ui ui) {
-        BorrowRecord newRecord = new BorrowRecord(sDate, eDate, borrowerName);
+        BorrowRecord newRecord = new BorrowRecord(startDate, endDate, borrowerName);
         itemList.addBorrowRecord(itemIndex, newRecord);
         System.out.println("Successfully added borrow record!");
     }
