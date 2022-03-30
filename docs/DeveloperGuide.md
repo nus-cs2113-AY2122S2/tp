@@ -194,7 +194,7 @@ The general workflow of the `session /create` command is as follows:
 
 ### Remove a session
 ### View a session
-**API reference:** [`SessionViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionCreateCommand.java)
+**API reference:** [`SessionViewCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionViewCommand.java)
 
 The sequence diagram below models the interactions between various entities in SplitLah
 when the user invokes the `session /view` command.
@@ -203,7 +203,7 @@ when the user invokes the `session /view` command.
 ![View Session Sequence Diagram Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/SessionViewCommand.drawio.png))
 <br>
 <br>
-The general workflow of the `session /create` command is as follows:
+The general workflow of the `session /view` command is as follows:
 1. The user input provided is passed to `Splitlah`.
 2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `SessionViewCommand` object.
 3. `SessionViewCommand#run` method is then invoked to run the `session /view` command.
