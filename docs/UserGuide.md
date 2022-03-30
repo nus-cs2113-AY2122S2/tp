@@ -1,5 +1,20 @@
 # User Guide
 
+- [Introduction](#introduction)
+- [Quick Start](#quick-start)
+- [Features](#features)
+  - [Get help message](#get-help-message-help)
+  - [Add a record](#add-a-record-add)
+    - [Add product record](#adding-product-record-add-product)
+    - [Add subscription record](#adding-subscription-record-add-subscription)
+  - [Delete a record](#delete-a-record-delete)
+  - [Show record list](#show-record-list-list)
+  - [Setting limit](#setting-limit-set)
+  - [Showing summary](#showing-summary-summary)
+  - [Exit the program](#exit-the-program-exit)
+- [FAQ](#faq)
+- [Command Summary](#command-summary)
+
 ## Introduction
 
 As online shopping becomes more convenient and transactions become easier, people tend to overshoot their budget
@@ -11,33 +26,75 @@ Spendvelope is designed to regularly remind the buyer of their preset spending l
 
 {Give steps to get started quickly}
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Spendvelope` from [here](link to be added).
+1. Ensure that you are running Java 11.
+2. Download the latest version of `Spendvelope` from [here](https://github.com/AY2122S2-CS2113-F12-1/tp/releases/tag/v1.0).
+Place it in a folder of your choice.
+3. Using Cmd Prompt, navigate to the folder where the `jar` file is stored. Run `Spendvelope` with 
+`java -jar Spendvelope.jar`.
 
 ## Features 
-1. Add/delete record 
-2. View record history list
-3. Set spending limits and give warnings
-4. View order summary(classified by summary)
-5. Read/Store the data files
-6. Search for expenses by keyword
-7. Show help messages to users
+1. Get help message
+2. Add a record
+   1. Add product record
+   2. Add subscription record
+3. Delete a record
+4. Show record history list
+5. Set spending limits and give warnings
+6. View order summary(classified by summary)
+7. Read/Store the data files
+8. Search for expenses by keyword
+9. Closing the program
 
+### Get help message: `help`
+Shows program usage instructions.
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+Format: `help`
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+### Add a record: `add`
+Adds a record to the RecordManager.
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+#### Adding product record: `add product`
+Adds a product record to the record list.
 
-Example of usage: 
+Format: `add product i/ITEM_NAME p/PRICE d/DATE t/CATEGORY`
 
-`todo n/Write the rest of the User Guide d/next week`
+* The `ITEM_NAME`, `PRICE`, and `DATE` can be in a natural language format.
+* The `CATEGORY` should be of fashion, food, accessory, or others.  
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+Examples of usage: 
 
+`add product i/handphone cover p/$10 t/accessory d/14022022`
+
+`add product i/burger p/$5.25 t/food d/14/02/2022`
+
+#### Adding subscription record: `add subscription`
+Adds a subscription record to the record list.
+
+Format: `add subscription i/ITEM_NAME p/PRICE d/DATE r/RENEWAL`
+
+* The `ITEM_NAME`, `PRICE`, `DATE`, and `RENEWAL` can be in a natural language format.
+
+Examples of usage:
+
+`add subscription i/Netflips p/$10 d/14022022 r/14032022`
+
+`add subscription i/electricity p/$19.25 d/14/02/2022 r/Tomorrow`
+
+### Delete a record: `delete`
+Deletes the record identified by the record number used in the record list.
+
+Format: `delete INDEX`
+
+* `INDEX` is the record number in the record list. It may be obtained using [`list`](#show-record-list-list)
+
+Examples of usage:
+
+`delete 1` - deletes record #1
+
+### Show record list: `list`
+Displays all records in the RecordManager as a list with their index numbers.
+
+Format: `list`
 
 ### Setting limit: `set`
 Set a total spending limit for a month and display the warning
@@ -59,7 +116,10 @@ Example of usage: `summary`
 fashion, food, accessory, others, and subscription with detailed record information.
 * The summary table also shows expenses on each category and the overall expenses.
 
+### Exit the program: `exit`
+Closes the program.
 
+Format: `exit`
 
 ## FAQ
 
