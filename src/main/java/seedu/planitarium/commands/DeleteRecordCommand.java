@@ -28,9 +28,9 @@ public class DeleteRecordCommand extends Command {
     protected static final String DELETE_INCOME_CMD = "deletein";
     protected static final String DELETE_SPEND_CMD = "deleteout";
     protected String keyword;
-    protected int index;
-    protected int uid;
-    protected int group;
+    protected Integer index;
+    protected Integer uid;
+    protected Integer group;
 
     public DeleteRecordCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);

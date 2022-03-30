@@ -30,13 +30,13 @@ public class EditRecordCommand extends Command {
     protected static final String USER_INDEX_NOT_VALID = "User index should be valid";
 
     protected String keyword;
-    protected int uid;
-    protected int group;
-    protected int index;
-    protected int category;
+    protected Integer uid;
+    protected Integer group;
+    protected Integer index;
+    protected Integer category;
     protected String description;
-    protected double amount;
-    protected boolean isPermanent;
+    protected Double amount;
+    protected Boolean isPermanent;
 
     public EditRecordCommand(String userInput, Family family) throws PlanITariumException {
         super(userInput, family);
@@ -47,7 +47,7 @@ public class EditRecordCommand extends Command {
         try {
             isPermanent = Parser.parseRecurringStatus(userInput);
         } catch (PlanITariumException e) {
-            isPermanent = Boolean.parseBoolean(null);
+            isPermanent = null;
         }
         try {
             description = Parser.parseDescription(userInput);
@@ -67,7 +67,7 @@ public class EditRecordCommand extends Command {
             try {
                 amount = Parser.getValidMoney(Parser.parseIncome(userInput));
             } catch (PlanITariumException e) {
-                amount = Double.parseDouble(null);
+                amount = null;
             }
             index = Parser.getValidIncomeIndex(Parser.parseRecordIndex(userInput),
                     family.getNumberOfIncomes(group, uid));
@@ -81,12 +81,12 @@ public class EditRecordCommand extends Command {
             try {
                 amount = Parser.getValidMoney(Parser.parseExpenditure(userInput));
             } catch (PlanITariumException e) {
-                amount = Double.parseDouble(null);
+                amount = null;
             }
             try {
                 category = Parser.getValidCategoryIndex(Parser.parseCategoryIndex(userInput));
             } catch (PlanITariumException e) {
-                category = Integer.parseInt(null);
+                category = null;
             }
             family.editExpend(group, uid, index, description, amount, category, isPermanent);
             logger.log(Level.INFO, String.format(

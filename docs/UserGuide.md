@@ -22,8 +22,8 @@ you to:
 ## Table of Contents
 
 * [Quick Start](#quick-start)
-* [Quick Notes]()
-* [Features]()
+* [Quick Notes](#quick-notes)
+* [Features](#features)
     * [View all commands: `help`](#viewing-all-commands-help)
     * [Add a person: `add`](#add-a-person-add)
     * [Delete a person: `delete`](#delete-a-person-delete)
@@ -38,8 +38,8 @@ you to:
     * [Show expenditure categories: `listcat`](#show-expenditure-categories-listcat)
     * [Searching for details: `find`](#searching-for-details-find)
     * [Exit the program: `bye`](#exit-bye)
-* [Frequently Asked Questions]()
-* [Command Summary]()
+* [Frequently Asked Questions](#faq)
+* [Command Summary](#command-summary)
 
 <br/>
 
@@ -149,9 +149,14 @@ Format: `delete /g GROUP_INDEX /u USER_INDEX`
 
 Example of usage:
 
-`delete /u 1 /g 1`
+* Delete the person with uid = 1 from the Parents' group:
 
----
+  `delete /u 1 /g 1`
+
+*_Result_: The person with uid = 1 is deleted from the Parent's group 
+  
+<br/>
+
 
 ### Add an income: `addin`
 
@@ -218,6 +223,11 @@ Format: `editin /g GROUP_INDEX /u USER_INDEX /r INCOME_INDEX [/i INCOME /d DESCR
 * **INCOME** refers to the monetary value of your income.
 * **DESCRIPTION** refers to the name or description of your income.
 * **<T/(any)>** refers to whether your income is recurrent on a monthly-basis.
+  
+> **Note**
+>
+> **DESCRIPTION**, **EXPENDITURE**, **CATEGORY_INDEX** and recurring setting (**<T|F>**) is optional in this case. You
+> can just modify the part that you modify.
 
 Example of usage:
 
@@ -293,6 +303,11 @@ Format: `editout /g GROUP_INDEX /u USER_INDEX /r EXPENDITURE_INDEX [/i EXPENDITU
 * **CATEGORY_INDEX** refers to the category of your expenditure.
 * **<T/(any)>** refers to whether your expenditure is recurrent on a monthly-basis.
 
+> **Note**
+> 
+> **DESCRIPTION**, **EXPENDITURE**, **CATEGORY_INDEX** and recurring setting (**<T|F>**) is optional in this case. You
+> can just modify the part that you modify.
+
 Example of usage:
 
 * Edits the recurrent candies expenditure of $20 from Alice's expenditure to $25.
@@ -327,6 +342,8 @@ Format: `list /g GROUP_INDEX`
 
 Example of usage:
 
+* List all the members from Parents' group.
+
 `list /g 1`
 
 ![detail_list-command-screenshot]() <!-- this is a placeholder -->
@@ -358,7 +375,8 @@ Format: `find /d USER_STRING /c CATEGORY_INDEX`
 
 Example of usage:
 
-* Search for "candies" in all income and expenditure.
+
+* Find all the records which descriptions include _Candy_ from Category 1.
 
   `find /d candies /c 0`
 
