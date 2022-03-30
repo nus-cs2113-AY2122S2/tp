@@ -13,7 +13,7 @@ public class Messages {
     public static final String INVALID_INDEX = "The index you entered was invalid!\n";
     public static final String INVALID_SYNTAX = "The syntax you entered for the command is invalid!";
     public static final String INVALID_QUANTITY = "The quantity you entered was invalid!\n";
-    public static final String INVALID_RELATIVE_MESSAGE = "The relative multiplier you entered was invalid!\n";
+    public static final String INVALID_RELATIVE_MESSAGE = "The relative multiplier you entered was invalid! Only '+' and '-' is allowed.\n";
     public static final String INVALID_RELATIVE_WITHOUT_QUANTITY = "The relative multiplier must be used in conjunction with a quantity!";
 
     public static final String NEGATIVE_QUANTITY_MESSAGE = "Sorry, the resulting new quantity for the specified item "

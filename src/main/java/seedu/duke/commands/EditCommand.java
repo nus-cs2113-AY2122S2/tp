@@ -1,13 +1,12 @@
 package seedu.duke.commands;
 
-import seedu.duke.InvMgr;
 import seedu.duke.common.Messages;
 import seedu.duke.data.Item;
 import seedu.duke.data.ItemList;
 import seedu.duke.exceptions.InvMgrException;
 import seedu.duke.ui.Ui;
 
-import java.util.Objects;
+import java.util.Optional;
 
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
@@ -18,17 +17,17 @@ public class EditCommand extends Command {
             + "[Command Format] " + COMMAND_FORMAT + "\n";
 
     private final int index;
-    private final String name;
-    private final Integer quantity;
-    private final String description;
-    private final boolean relative;
+    private final Optional<String> name;
+    private final Optional<Integer> quantity;
+    private final Optional<String> description;
+    private final Optional<Boolean> relativeAdd;
 
-    public EditCommand(int index, String name, Integer quantity, String description, boolean relative) {
+    public EditCommand(int index, Optional<String> name, Optional<Integer> quantity, Optional<String> description, Optional<Boolean> relativeAdd) {
         this.index = index;
         this.name = name;
         this.quantity = quantity;
         this.description = description;
-        this.relative = relative;
+        this.relativeAdd = relativeAdd;
     }
 
     @Override
@@ -39,23 +38,31 @@ public class EditCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             throw new InvMgrException(Messages.INVALID_INDEX);
         }
+
         Item placeholderItem = new Item(targetedItem.getName(),
                 targetedItem.getQuantity(), targetedItem.getDescription());
-        if (this.name != null) {
-            placeholderItem.setName(this.name);
+
+        if (this.name.isPresent()) {
+            placeholderItem.setName(this.name.get());
         }
-        if (this.quantity != null) {
-            int currentQuantity = relative ? placeholderItem.getQuantity() : 0;
-            int newQuantity = currentQuantity + this.quantity;
+
+        if (this.quantity.isPresent() && this.relativeAdd.isPresent()) {
+            int currentQuantity = placeholderItem.getQuantity();
+            int multiplier = this.relativeAdd.get() ? 1 : -1;
+            int newQuantity = currentQuantity + multiplier * this.quantity.get();
             try {
                 placeholderItem.setQuantity(newQuantity);
             } catch (IllegalArgumentException e) {
                 throw new InvMgrException(Messages.NEGATIVE_QUANTITY_MESSAGE, e);
             }
+        } else if (this.quantity.isPresent() && !this.relativeAdd.isPresent()) {
+            placeholderItem.setQuantity(quantity.get());
         }
-        if (this.description != null) {
-            placeholderItem.setName(this.name);
+
+        if (this.description.isPresent()) {
+            placeholderItem.setName(this.description.get());
         }
         itemList.set(index, placeholderItem);
     }
+
 }

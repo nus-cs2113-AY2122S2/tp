@@ -45,12 +45,12 @@ public class ParserUtils {
      * The value returned represents a multiplier on the quantity, used to edit quantity relatively.
      * @throws InvMgrException if the given {@code relative} is invalid (not either of the two options)
      */
-    public static int parseRelative(String relative) throws InvMgrException {
-        String trimmedRelative = relative.trim();
-        if (trimmedRelative.equals("+")) {
-            return 1;
-        } else if (trimmedRelative.equals("-")) {
-            return -1;
+    public static boolean parseRelative(String relativeAdd) throws InvMgrException {
+        String trimmedRelativeAdd = relativeAdd.trim();
+        if (trimmedRelativeAdd.equals("+")) {
+            return true;
+        } else if (trimmedRelativeAdd.equals("-")) {
+            return false;
         }
         throw new InvMgrException(Messages.INVALID_RELATIVE_MESSAGE);
     }
