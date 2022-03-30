@@ -562,9 +562,6 @@ Edits an existing group so that you can change details of a group.<br>
 > - A group with a unique identifier of `[GROUP_ID]` has to exist before it can be edited.
 > - Each name in `[NAME1 NAME2 ...]` for a particular group should be unique.
 > - There are 2 editable fields, group name and the people involved in the session.
-> - When editing the people involved, existing participants must be included in the command.
->  - Example: If the group previously created had Alice and Bob with group ID of 1,
->  and you wish to edit it to include charlie a valid edit command would be `group /edit /sid /pl Alice Bob Charlie`.
 >
 > **⚠️Warning:**
 > - This action is irreversible, once the command has been entered, the group would be edited.
