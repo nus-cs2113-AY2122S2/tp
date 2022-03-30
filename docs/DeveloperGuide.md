@@ -257,18 +257,19 @@ when the user invokes the `session /list` command.
 <br>
 <br>
 The general workflow of the `session /list` command is as follows:
-1. The user input provided is passed to `Splitlah`.
-2. `Splitlah` then parses the input by using methods in the `Parser` class to obtain a `SessionListCommand` object.
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionListCommand` object.
 3. `SessionListCommand#run` method is then invoked to run the `session /list` command.
-4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called.
-5. To retrieve the sessions from profile, `Profile#getSessionList` is executed,
-   where a list of `Session` objects are returned.
-6. Once the list is retrieved, `SessionListCommand` class checks if the list is empty.
-  1. If the list is empty, a message indicating that the list is empty is printed
-     using `TextUi#printlnMessage`.
-  2. If the list is not empty, `SessionListCommand` will loop from the first to the second last session,
-     calling `TextUi#printlnMessage()` to print out a brief overview of each session.
-     Then, the last group is printed with a divider below it, using the method `TextUi#printlnMessageWithDivider()`.
+4. The list of sessions are stored in a `Profile` object, hence `Manager#getProfile` is called
+   before the list of sessions can be retrieved.
+5. The `SessionListCommand` object runs the `Profile#getSessionListSummaryString` method to retrieve a `String` object
+   representing the summaries of the sessions stored.
+    1. If there are no sessions stored in the `Profile` object, a `String` object representing an empty list of sessions is
+       returned.
+    2. Else, the `Profile` objects instantiates a new `TableFormatter` object and loops through the list of sessions,
+       calling `TableFormatter#addRow` for each group to create a table with the summary of each session. A `String` object
+       representing the table is then returned.
+6. The `String` object retrieved is printed out with `TextUI#printlnMessage`.
 
 ### Settle a session
 **API reference:** [`SessionSummaryCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionSummaryCommand.java)
