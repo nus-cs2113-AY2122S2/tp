@@ -44,7 +44,7 @@ public class SatisfactionList {
         } else {
             System.out.println("======== Customer Satisfaction List ========");
             for (Satisfaction satisfaction : satisfactionList) {
-                System.out.println(Integer.toString(number) + ". [ " + satisfaction.getCustomerName()
+                System.out.println(Integer.toString(number) + ". [ " + satisfaction.getCustomerName().toUpperCase()
                         + " ]: " + satisfaction.getSatisfactionValue());
                 number += 1;
             }
