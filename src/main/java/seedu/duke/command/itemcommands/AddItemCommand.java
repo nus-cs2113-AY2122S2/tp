@@ -114,7 +114,6 @@ public class AddItemCommand extends Command {
      */
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         ItemList listOfItems = listContainer.getItemList();
-        ItemListFileManager itemListFileManager = new ItemListFileManager();
         Item item = getItem();
         assert (item != null) : "Assertion Failed! There is no item within the AddItemCommand object.";
         boolean isItemAlreadyInTheList = listOfItems.addItemToList(item);
@@ -125,6 +124,7 @@ public class AddItemCommand extends Command {
             return;
         }
         ui.printAddItemAcknowledgementMessage(listOfItems);
+        ItemListFileManager itemListFileManager = new ItemListFileManager();
         itemListFileManager.writeItemListToFile(listOfItems);
     }
 

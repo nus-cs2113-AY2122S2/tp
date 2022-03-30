@@ -83,13 +83,13 @@ public class UpdateItemNameCommand extends Command {
 
     public void execute(ListContainer listContainer, Ui ui) throws HotelLiteManagerException, IOException {
         ItemList listOfItems = listContainer.getItemList();
-        ItemListFileManager itemListFileManager = new ItemListFileManager();
         String oldItemName = getOldItemName();
         String newItemName = getNewItemName();
         listOfItems.updateItemNameInList(oldItemName, newItemName);
         oldItemName = oldItemName.toUpperCase();
         newItemName = newItemName.toUpperCase();
         ui.printUpdateItemNameAcknowledgementMessage(oldItemName, newItemName);
+        ItemListFileManager itemListFileManager = new ItemListFileManager();
         itemListFileManager.writeItemListToFile(listOfItems);
     }
 }

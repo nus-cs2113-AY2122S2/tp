@@ -2,6 +2,7 @@ package seedu.duke.storage;
 
 import java.io.File;
 import java.io.IOException;
+
 import seedu.duke.FolderCreationFailException;
 import seedu.duke.HotelLiteManagerException;
 import seedu.duke.FileCreationFailException;
@@ -22,7 +23,7 @@ public abstract class FileManager {
         if (!file.exists()) {
             try {
                 file.createNewFile();
-            } catch (IOException e){
+            } catch (IOException e) {
                 throw new FileCreationFailException();
             }
         }

@@ -28,8 +28,7 @@ public class EventListFileManager extends FileManager {
     }
 
 
-
-    public void save(ArrayList<Event> eventList) throws IOException , HotelLiteManagerException{
+    public void save(ArrayList<Event> eventList) throws IOException, HotelLiteManagerException {
         File file = getFile(FILE_PATH);
         FileWriter fileWriter = new FileWriter(FILE_PATH);
         for (Event event : eventList) {

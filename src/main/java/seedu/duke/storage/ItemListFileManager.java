@@ -1,7 +1,11 @@
 package seedu.duke.storage;
 
-import seedu.duke.*;
 
+import seedu.duke.HotelLiteManagerException;
+import seedu.duke.ItemList;
+import seedu.duke.Item;
+import seedu.duke.ItemFileNotFoundException;
+import seedu.duke.InvalidItemPaxException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,10 +35,10 @@ public class ItemListFileManager extends FileManager {
             int itemPax;
             try {
                 itemPax = Integer.parseInt(itemPaxStringVersion);
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 throw new InvalidItemPaxException();
             }
-            item = new Item(itemName,itemPax);
+            item = new Item(itemName, itemPax);
             listOfItems.addItemToList(item);
         }
         return listOfItems;
@@ -48,7 +52,7 @@ public class ItemListFileManager extends FileManager {
     public void writeItemListToFile(ItemList listOfItems) throws IOException {
         clearFileContents();
         FileWriter fw = new FileWriter(FILE_PATH, true);
-        final int LAST_INDEX_OF_ARRAYLIST = listOfItems.getSize() - 1;
+        int lastIndexOfArrayList = listOfItems.getSize() - 1;
         String itemName;
         int itemPax;
         Item item;
@@ -58,7 +62,7 @@ public class ItemListFileManager extends FileManager {
             itemName = item.getName();
             itemPax = item.getPax();
             itemDetails = itemName + '|' + itemPax;
-            if (i != LAST_INDEX_OF_ARRAYLIST) {
+            if (i != lastIndexOfArrayList) {
                 itemDetails = itemDetails + System.lineSeparator();
             }
             fw.write(itemDetails);
