@@ -98,4 +98,9 @@ public class EditRecordCommand extends Command {
         }
 
     }
+
+    @Override
+    public String getType() {
+        return type;
+    }
 }

@@ -19,6 +19,7 @@ public class OverviewCommand extends Command {
         logger.log(Level.INFO, LOG_CMD_INFO);
     }
 
+    @Override
     public void execute() {
         family.overview();
         logger.log(Level.INFO, LOG_EXECUTE_INFO);
