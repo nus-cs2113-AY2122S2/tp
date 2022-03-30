@@ -1,4 +1,4 @@
-@startuml random
+ @startuml random
 
 class Order{
     - String ShipToName
@@ -6,15 +6,16 @@ class Order{
     - Float Amount
     - Date ToFulfilBy
     - Date FulfilledBy
-    - List<OrderItem> items 
+    - List<Orderline> orderlines
+    - String comments
 }
 
 
 class Warehouse{
     - List<Order> orders
-    - List<Item> inventory
-    - Float totalCapacity
-    - Float capacityLevel
+    - HashMap<String,Item> inventory
+    - Float totalCapacity //volume
+    - Float capacityLevel //volume
     + Warehouse()
     + getOrderById()
     + addItem()
@@ -27,7 +28,7 @@ class Warehouse{
 
 }
 
-class UnitItem{
+class UnitGood{
     - Review review
     - String name
     - String unit_price
@@ -38,19 +39,16 @@ class UnitItem{
     + void print()
 }
 
-class Item extends UnitItem{
+class Orderline extends UnitGood{
     - Float quantity
-    + Item()
-}
-' quantity here refers to how much 
-class OrderItem extends Item{
     - Bool isCheckedOff
-    + OrderItem()
+    + Orderline()
 }
+' quantity here refers to how much
 
 
 ' Billable <|-- Item
-Item "0..*"<-- Warehouse : contains
+UnitGood "0..*"<-- Warehouse : contains
 Warehouse "0..*"--> Order
-Order "1..*" --> OrderItem
+Order "1..*" --> Orderline
 @enduml

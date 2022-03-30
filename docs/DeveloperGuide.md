@@ -7,12 +7,12 @@
 ## Design
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 ### Good Class
-####Description
+#### Description
 The goods class keeps track of the various inventory that will be input into the system through the commands class.
-The diagram below shows the model component of the good class.
+The diagram below shows the model component of the orderline class.
 ![Good Class Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/Good.puml)
 
-The Goods class allows for the creation of good objects which has the following attributes: id, name, quantity and 
+The Goods class allows for the creation of orderline objects which has the following attributes: id, name, quantity and 
 description. Each attribute can be obtained using public get methods, and the attribute quantity can be set using the public set method.
 
 
@@ -58,12 +58,12 @@ View Good belongs as part of the Commands Class. It is used when a user would li
 #### Operation
 ![View Good Sequence Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/viewGood.puml)
 
-The above sequence diagram shows the operation of how the view good method will be called.
+The above sequence diagram shows the operation of how the view orderline method will be called.
 1. The User input will be read by the User Interface Class
 2. The User Interface Class will then match the command keyword `view`
 3. The Regex Class will then be call to match the rest of the user's input to find the id required for retrieving information of the inverntory.
 4. The User Interface Class will call the viewGood() method from the Commands Class
-5. This method will retrieve information of an inventory item by searching through the userGoods array list for the corresponding id.
+5. This method will retrieve information of an inventory item by searching through the userOrderlines array list for the corresponding id.
 6. The information retrieved will then be formatted and returned to screen for the user the see the information.
 
 ### Add Goods Method
@@ -99,13 +99,23 @@ to show that the operation is successful.
 
 For more examples of how a user can use a command, refer to the [UserGuide](/UserGuide.md)
 
-### List Goods Method
+### List Goods or List Orders Method
 #### Description
-The list method belongs to the Command Class. It is used to display the list of existing goods in the warehouse to the
-user.
+The list goods or list orders method belongs to the Warehouse Class. It is used to display the list of existing goods 
+or existing orders in the warehouse to the User.
 
 ![List sequence Diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/AY2122S2-CS2113T-T09-4/tp/master/docs/diagrams/List.puml)
 
+The above sequence diagram shows the operation of how the list goods method will be called.
+
+1. The User input will be read by the User Interface Class
+2. The User Interface Class will the match the command keyword `list`
+3. Together with the previous step, the User Interface Class will check the flag followed by `list`
+   3.1 If the flag is `o/`, the User Interface Class will call the listOrders() method in the Warehouse class
+      3.1.1 Lastly, the list of orders is printed to the command line.
+   3.2 Else, if the flag is `g/`, the User Interface Class will call the listGoods() method in the Warehouse class
+      3.2.1 Following that, the Warehouse class will call the getGoods() method on the Good class
+      3.2.2 Lastly, the list of goods is printed to the command line.
 ### Total Goods Method
 #### Description
 Total Goods belongs as part of the Commands Class. It is used to show the total quantity of Goods Objects currently in the Warehouse.
@@ -147,7 +157,7 @@ A cheap, user-friendly Warehouse Management System with intuitive commands to im
 |v1.0|Warehouse Worker|Get the total number of goods in the warehouse|its less tiring to have to count the total number of goods in the warehouse|
 |v1.0|Warehouse Worker|View the description of goods easily|it would be easier for stocktaking|
 |v1.0|Warehouse Worker|Add inventory items to the items list|so that I can keep track of goods entering the warehouse|
-|v1.0|Warehouse Worker|Remove inventory items from the items list|so that I can track whenever a good is not in the warehouse|
+|v1.0|Warehouse Worker|Remove inventory items from the items list|so that I can track whenever a orderline is not in the warehouse|
 |v1.0|Warehouse Worker|Get a list of all the inventory currently in the warehouse|so that I can see all the items we have in the warehouse|
 <!-- |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list| -->
 

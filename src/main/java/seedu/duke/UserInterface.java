@@ -1,24 +1,34 @@
 package seedu.duke;
 
+import seedu.duke.CommandParsers.*;
+import util.exceptions.InvalidFileException;
 import util.exceptions.NullException;
 import util.exceptions.WrongCommandException;
 
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class UserInterface {
     private Warehouse warehouse;
 
+    private ListParser listParser;
+    private ViewParser viewParser;
+    private AddParser addParser;
+    private RemoveParser removeParser;
+    private TotalParser totalParser;
+
+
     public UserInterface(Warehouse warehouse) {
         this.warehouse = warehouse;
+        this.listParser = new ListParser(warehouse);
     }
 
     public void run() {
         Scanner input = new Scanner(System.in);
         String userInput = input.nextLine();
 
-        /*
+
         // setting Warehouse capacity
+        /*
         boolean isSet = false;
         do {
             Regex capacity = new Regex(userInput, "(?<cap>\\d*)");
@@ -34,70 +44,25 @@ public class UserInterface {
                 switch (command) {
                 case "view":
                     //using flags here to distinguish between different views????
-                    String regex = "(?<flag>[og])/ id/(?<id>\\d*)";
-                    Regex regexMatch = new Regex(userInput, regex);
-                    HashMap<String, String> matches = regexMatch.getGroupValues();
-                    if (matches.get("flag").equals("o")) {
-                        // view order with flag "o/"
-                        warehouse.viewOrder(matches.get("id"));
-                    } else if (matches.get("flag").equals("g")) {
-                        // view good with flag "g/"
-                        warehouse.viewGood(matches.get("id"));
-                    } else {
-                        // wrong command exception
-                        throw new WrongCommandException("view", true);
-                    }
+                    viewParser.parse(userInput);
                     break;
                 case "list":
-                    regex = "(?<flag>[og])/";
-                    regexMatch = new Regex(userInput, regex);
-                    matches = regexMatch.getGroupValues();
-
-                    if (matches.get("flag").equals("o")) {
-                        // list orders with flag "o/"
-                        warehouse.listOrders();
-                    } else if (matches.get("flag").equals("g")) {
-                        // list goods with flag "g/"
-                        warehouse.listGoods();
-                    } else {
-                        // wrong command exception
-                        throw new WrongCommandException("list", true);
-                    }
+                    listParser.parse(userInput);
                     break;
                 case "add":
-                    regex = "(?<flag>[og])/ oid/(?<oid>\\d*) gid/(?<gid>\\d*) r/(?<r>.*) a/(?<address>.*)"
-                            + "n/(?<name>.*) q/(?<qty>\\d*) d/(?<desc>.*)";
-                    regexMatch = new Regex(userInput, regex);
-                    matches = regexMatch.getGroupValues();
-
-                    if (matches.get("flag").equals("o")) {
-                        warehouse.addOrder(matches.get("id"), matches.get("r"), matches.get("address"));
-                    } else if (matches.get("flag").equals("g")) {
-                        warehouse.addGoods(matches.get("oid"), matches.get("gid"), matches.get("name"),
-                                matches.get("qty"), matches.get("desc"));
-                    } else {
-                        throw new WrongCommandException("add", true);
-                    }
+                    addParser.parse(userInput);
                     break;
                 case "remove":
-                    regex = "(?<flag>[og])/ id/(?<id>\\d*) q/(?<qty>\\d*)";
-                    regexMatch = new Regex(userInput, regex);
-                    matches = regexMatch.getGroupValues();
-
-                    if (matches.get("flag").equals("o")) {
-                        warehouse.removeOrder(matches.get("id"));
-                    } else if (matches.get("flag").equals("g")) {
-                        warehouse.removeGoods(matches.get("id"), matches.get("qty"));
-                    } else {
-                        throw new WrongCommandException("remove", true);
-                    }
+                    removeParser.parse(userInput);
                     break;
                 case "total":
-                    int total = warehouse.totalGoods();
-                    System.out.printf("There are %d goods in total.\n", total);
+                    totalParser.parse(userInput);
                     break;
                 case "help":
-                    Commands.help();
+                    displayHelp();
+                    break;
+                case "storage-capacity":
+                    userInputIsStorageCapacity();
                     break;
                 default:
                     //error exception here
@@ -108,17 +73,29 @@ public class UserInterface {
                     String wrongCommand = wrongCommandException.getCommand();
                     System.out.printf("%s command was used wrongly. Type help to see examples\n",
                             wrongCommand);
-                    Commands.help();
+                    displayHelp();
                 } else {
                     System.out.println("No such command. Type help to see examples");
-                    Commands.help();
+                    displayHelp();
                 }
             } catch (NullException nullException) {
                 //catch null exception here
                 System.out.println("Please enter the command again.");
+            } catch (InvalidFileException e) {
+                e.printStackTrace();
             }
             System.out.println("Another command?");
             userInput = input.nextLine();
         }
+    }
+
+    private void userInputIsStorageCapacity() throws NullException {
+        int totalGoods = warehouse.totalInventoryVol();
+        Float warehouseCapacity = warehouse.getCapacityOccupied();
+        Commands.storageCapacity(totalGoods, warehouseCapacity);
+    }
+
+    private void displayHelp() {
+        Commands.help();
     }
 }

@@ -9,19 +9,19 @@ import java.util.ArrayList;
 public class Commands {
 
     public static void addGood(String id, String name, String qty,
-                               String desc, ArrayList<Good> userGoods) throws WrongCommandException {
+                               String desc, ArrayList<Orderline> userOrderlines) throws WrongCommandException {
         if (id.isBlank() || name.isBlank() || qty.isBlank()) {
             throw new WrongCommandException("add", true);
         }
         try {
-            Good good = new Good(
+            Orderline orderline = new Orderline(
                     Integer.parseInt(id),
                     name,
                     Integer.parseInt(qty),
                     desc);
-            userGoods.add(good);
-            System.out.printf("%d %s %s added\n", good.getQuantity(), good,
-                    checkPlural(good.getQuantity()));
+            userOrderlines.add(orderline);
+            System.out.printf("%d %s %s added\n", orderline.getQuantity(), orderline,
+                    checkPlural(orderline.getQuantity()));
         } catch (NumberFormatException e) {
             throw new WrongCommandException("add", true);
         }
@@ -36,25 +36,25 @@ public class Commands {
         }
     }
 
-    private static void remove(int id, int qty, ArrayList<Good> userGoods)
+    private static void remove(int id, int qty, ArrayList<Orderline> userOrderlines)
             throws LargeQuantityException, ItemDoesNotExistException {
 
-        for (Good good : userGoods) {
-            if (good.getId() == id) {
-                if (qty > good.getQuantity()) {
+        for (Orderline orderline : userOrderlines) {
+            if (orderline.getId() == id) {
+                if (qty > orderline.getQuantity()) {
                     throw new LargeQuantityException();
                 }
 
-                good.setQuantity(good.getQuantity() - qty);
+                orderline.setQuantity(orderline.getQuantity() - qty);
 
                 if (qty < 2) {
-                    System.out.println(qty + " " + good.getName() + " has been removed.");
+                    System.out.println(qty + " " + orderline.getName() + " has been removed.");
                 } else {
-                    System.out.println(qty + " " + good.getName() + " have been removed.");
+                    System.out.println(qty + " " + orderline.getName() + " have been removed.");
                 }
 
-                if (good.getQuantity() == 0) {
-                    userGoods.remove(good);
+                if (orderline.getQuantity() == 0) {
+                    userOrderlines.remove(orderline);
                 }
 
                 return;
@@ -64,7 +64,7 @@ public class Commands {
         throw new ItemDoesNotExistException();
     }
 
-    public static void removeGood(String id, String qty, ArrayList<Good> userGoods)
+    public static void removeGood(String id, String qty, ArrayList<Orderline> userOrderlines)
             throws WrongCommandException {
         if (id.isBlank() || qty.isBlank()) {
             throw new WrongCommandException("remove", true);
@@ -74,7 +74,7 @@ public class Commands {
             int goodsId = Integer.parseInt(id);
             int goodsQty = Integer.parseInt(qty);
 
-            remove(goodsId, goodsQty, userGoods);
+            remove(goodsId, goodsQty, userOrderlines);
 
         } catch (NumberFormatException e1) {
             throw new WrongCommandException("remove", true);
@@ -96,7 +96,14 @@ public class Commands {
                 + "* List all goods: `list g/`\n"
                 + "* View order: `view o/ id/ORDER_ID`\n"
                 + "* View good: `view g/ id/GOOD_ID`\n"
-                + "* Total quantity of goods: `total`");
+                + "* Total quantity of goods: `total g/`\n"
+                + "* Total quantity of orders: `total o/`\n"
+                + "* Storage capacity of warehouse: `storage-capacity`");
+    }
+
+    public static void storageCapacity(int totalGoods, Float warehouseCapacity) {
+        double percentageCapacity = (totalGoods / warehouseCapacity) * 100;
+        System.out.println("Storage capacity: " + percentageCapacity + '%');
     }
 
     /*

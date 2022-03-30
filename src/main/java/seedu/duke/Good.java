@@ -1,46 +1,58 @@
 package seedu.duke;
 
-/*
- * Class to handle the Goods information
- *
- * FOR NOW id we can manually input?
- * Ideas - id can track and give to the goods we add automatically
- */
 public class Good {
     private int id;
-
-    private String name;
-    private int quantity;
-    private String description;
-
-    public Good(int id, String name, int quantity, String description) {
-        this.id = id;
-        this.name = name;
-        this.quantity = quantity;
-        this.description = description;
-    }
+    private Float quantity = 0f;
+    private UnitGood unitGood;
 
     public int getId() {
         return id;
     }
 
-    public int getQuantity() {
+    public UnitGood getUnitGood(){
+        return this.unitGood;
+    }
+
+    public UnitGood assignUnitGood(
+            String SKU, String name,
+           String description,
+           Float unitPrice,
+           String unitItem,
+           Boolean isUnitWhole,
+           Float baseArea,
+           Float volume,
+           Boolean isPerishable){
+        UnitGood newUnitGood = new UnitGood( SKU,
+                name, description, unitPrice, unitItem, isUnitWhole,baseArea, volume, isPerishable
+        );
+        setUnitGood(newUnitGood);
+        return newUnitGood;
+    }
+
+    public void setUnitGood(UnitGood unitGood){
+        this.unitGood = unitGood;
+    }
+
+    public float getQuantity() {
         return quantity;
     }
 
     public void setQuantity(int quantity) {
+        this.quantity = (float)quantity;
+    }
+    public void setQuantity(Float quantity) {
         this.quantity = quantity;
     }
 
-    public String getDescription() {
-        return description;
+    public void removeQuantity(Float quantity){
+        this.quantity -= quantity;
     }
 
-    public String getName() {
-        return name;
+    public void removeQuantity(int quantity){
+        this.quantity -= quantity;
     }
 
-    public String toString() {
-        return String.format("%d - %s (%s)",id, name, description);
+    public void addQuantity(int quantity){
+        this.quantity += quantity;
     }
 }

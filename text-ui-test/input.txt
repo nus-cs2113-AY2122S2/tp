@@ -1,8 +1,16 @@
-add id/1 n/chairs q/100
+add o/ oid/1 r/Peter Pan a/NUS
+add g/ oid/1 gid/100 n/chairs q/100 d/this is a chair
 list
-view id/1
-remove id/1 q/14
-list
-view id/1
+view o/ id/1
+view g/ id/100
+list o/
+list g/
+remove g/ id/100 q/14
+view o/ id/1
+view g/ id/100
+total
+remove o/ id/1
+list o/
+list g/
 total
 bye
