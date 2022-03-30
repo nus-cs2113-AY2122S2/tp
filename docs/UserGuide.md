@@ -194,7 +194,7 @@ Upon startup, Sherpass also shows your schedule for the day.
 
 Format:
 - To see the schedule for the day: `show today`
-- To see the schedule for tomorrow: `show today` or `show tmr`
+- To see the schedule for tomorrow: `show tomorrow` or `show tmr`
 - To see the schedule for a specific day: `show DATE`, where the date is in the format `d/M/YYYY`.
   
    E.g. `show 25/3/2022` shows the schedule for 25th March 2022
