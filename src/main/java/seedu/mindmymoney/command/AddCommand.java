@@ -93,11 +93,11 @@ public class AddCommand extends Command {
         }
         String inputCategory = parseInputWithCommandFlag(addInput, FLAG_OF_CATEGORY, FLAG_OF_DESCRIPTION);
         testExpenditureCategory(inputCategory);
-        String category = capitalise(inputCategory);
         String description = parseInputWithCommandFlag(addInput, FLAG_OF_DESCRIPTION, FLAG_OF_AMOUNT);
         testDescription(description);
         String amountAsString = parseInputWithCommandFlag(addInput, FLAG_OF_AMOUNT, FLAG_OF_TIME);
         testExpenditureAmount(amountAsString);
+        String category = capitalise(inputCategory);
         float amountAsFloat = Float.parseFloat(amountAsString);
         float amountInt = formatFloat(amountAsFloat);
         String inputTime = parseInputWithCommandFlag(addInput, FLAG_OF_TIME, FLAG_END_VALUE);
