@@ -99,7 +99,8 @@ public class HelpCommand extends Command {
                 + "/cl [NEW_CREDIT_LIMIT] /bal [NEW_BALANCE]\n"
                 + "4. Removing a credit card: delete /cc [INDEX]\n"
                 + "5. Exiting the program: bye\n"
-                + "---------------------------------------------------------------------------------------------------\n";
+                + "-----------------------------------------------------------------------------------------------"
+                + "----\n";
 
         System.out.println(helpPage);
     }
