@@ -26,11 +26,11 @@ import java.util.Map;
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
-    private static final String TITLE = "/t";
-    private static final String DAY = "d/";
-    private static final String START_TIME = "st/";
-    private static final String END_TIME = "et/";
-    private static final String MODE = "m/";
+    private static final String TITLE = "t";
+    private static final String DAY = "d";
+    private static final String START_TIME = "st";
+    private static final String END_TIME = "et";
+    private static final String MODE = "m";
 
     private final String name;
     private final int index;
@@ -53,7 +53,7 @@ public class EditCommand extends Command {
     public String execute(MasterTimetable masterTimetable) {
         try {
             Timetable timetable = masterTimetable.getByName(name);
-            Event event = timetable.get(index);
+            Event event = timetable.get(index - 1);
             Map<String, String> originalValues = getEventInfo(event);
 
             Boolean isValidInput = editEvent(event, newValues);
