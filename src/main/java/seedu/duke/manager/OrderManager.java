@@ -81,8 +81,6 @@ public class OrderManager extends Manager {
             order.addDish(dish);
             this.orders.set(orderIdx, order);
         }
-        System.out.println("Added successfully!\n");
-
     }
 
     public Order getOrder(int orderIndex) throws IndexOutOfBoundsException {
