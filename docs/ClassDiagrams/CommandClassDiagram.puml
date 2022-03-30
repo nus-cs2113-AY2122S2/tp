@@ -14,7 +14,7 @@ package command {
     DeleteCommand ..> CommandResult :creates >
     ExitCommand ..> CommandResult :creates >
 
-    DeleteCommand ..> TextUi :creates >
+    DeleteCommand ..> TextUi :uses >
 
     class "{abstract}\n Command " {
         +execute(): CommandResult { abstract }
@@ -27,12 +27,12 @@ package command {
     +DeleteCommand(moduleCode: String)
     +DeleteCommand(taskModule: String, index: int)
     +execute(): CommandResult
-    +getUserConfirmation(): String
+    +getUserConfirmation(): String {static}
     }
 
     class TextUi {
-    +getUserCommand(): String
-    +showMessage(): void
+    +getUserCommand(): String {static}
+    +showMessage(): void {static}
     }
 
     class ExitCommand {

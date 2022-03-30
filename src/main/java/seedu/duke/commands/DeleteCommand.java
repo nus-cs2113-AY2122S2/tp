@@ -99,18 +99,17 @@ public class DeleteCommand extends Command {
      * @return Returns true if user input is "yes", false if "no".
      */
     public Boolean getUserConfirmation(Module module) {
-        TextUi ui = new TextUi();
         String prompt = String.format(DELETE_CONFIRMATION, module);
-        ui.showMessage(prompt);
+        TextUi.showMessage(prompt);
         String userConfirmation;
         while (true) {
-            userConfirmation = ui.getUserCommand();
+            userConfirmation = TextUi.getUserCommand();
             if (userConfirmation.equals("yes")) {
                 return true;
             } else if (userConfirmation.equals("no")) {
                 return false;
             } else {
-                ui.showMessage(DELETE_CONFIRMATION_INPUT_ERROR);
+                TextUi.showMessage(DELETE_CONFIRMATION_INPUT_ERROR);
             }
         }
     }
