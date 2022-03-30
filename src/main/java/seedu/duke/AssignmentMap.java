@@ -28,7 +28,7 @@ public class AssignmentMap {
         for (Map.Entry<Integer, String> entry: map.entrySet()) {
             if (entry.getValue().equals(name)) {
                 int k = entry.getKey();
-                map.remove(k);
+                //map.remove(k);
             }
         }
     }

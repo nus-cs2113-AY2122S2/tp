@@ -100,9 +100,9 @@ public class Ui {
     }
 
     public void printHousekeeperNoted(Housekeeper housekeeper) {
-        System.out.println("========== Noted ! ==========");
+        System.out.println("=============== Noted ! ================");
         System.out.println(housekeeper);
-        System.out.println("=============================");
+        System.out.println("========================================");
     }
 
     /**
@@ -246,9 +246,11 @@ public class Ui {
 
     public void printAddSatisfactionAcknowledgementMessage(SatisfactionList satisfactionList,
                                                            Satisfaction recentSatisfaction) {
-        System.out.println("The Satisfaction instance " + recentSatisfaction.getCustomerName() + ": "
+        System.out.println("========== Noted ! ==========");
+        System.out.println("The Satisfaction instance " + recentSatisfaction.getCustomerName().toUpperCase() + ": "
                 + recentSatisfaction.getSatisfactionValue() + " has been added to the list of Satisfactions.");
         System.out.printf("There are currently %d recorded customer satisfactions.\n", satisfactionList.getSize());
+        System.out.println("=============================");
     }
 
 
@@ -263,10 +265,13 @@ public class Ui {
     public void printAddHousekeeperPerformanceAcknowledgementMessage(HousekeeperPerformanceList
                                                                              housekeeperPerformanceList,
                                                                      HousekeeperPerformance housekeeperPerformance) {
-        System.out.println("The HousekeeperPerformance instance " + housekeeperPerformance.getName() + ": "
-                + housekeeperPerformance.getRating() + " has been added to the list of housekeeper performances.");
+        System.out.println("========== Noted ! ==========");
+        System.out.println("The HousekeeperPerformance instance " + housekeeperPerformance.getName().toUpperCase()
+                + ": " + housekeeperPerformance.getRating() + " has been added to the list "
+                + "of housekeeper performances.");
         System.out.printf("There are currently %d recorded housekeeper performances.\n",
                 housekeeperPerformanceList.getSize());
+        System.out.println("=============================");
     }
 
     public void printTableHeader() {
@@ -276,7 +281,15 @@ public class Ui {
     }
 
     public void printFileNotFoundMessage(String fileName) {
-        System.out.printf("File %s was not found and is unable to be created.\n",fileName);
+        System.out.printf("File %s was not found and is unable to be created.\n", fileName);
+    }
+
+    public void printNotedLine() {
+        System.out.println("================ Noted! ===================");
+    }
+
+    public void printBottomLine() {
+        System.out.println("===========================================");
     }
 }
 

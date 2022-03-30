@@ -36,13 +36,12 @@ public class Housekeeper {
 
     public String getAvailability() {
         if (availability == null) {
-            return "<Enter Availability>";
+            return "N/A";
         }
-        String availableStr = "( ";
+        String availableStr = "";
         for (Integer i : availableList) {
             availableStr += daysList[i] + " ";
         }
-        availableStr += ")";
         return availableStr;
     }
 
@@ -76,7 +75,8 @@ public class Housekeeper {
 
     @Override
     public String toString() {
-        return "[" + getName().toUpperCase() + "]: " + "Age: " + getAge() + ", Availability: " + getAvailability();
+        return "[" + getName().toUpperCase() + "]: " + "Age: " + getAge() + ", Availability: ( " + getAvailability()
+                + " )";
     }
 
     public void setNullAvailability() {
