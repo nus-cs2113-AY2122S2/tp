@@ -60,7 +60,7 @@ The *Architecture Diagram* shown above illustrates the high-level design of the 
 ![Component Interaction Screenshot](https://raw.githubusercontent.com/AY2122s2-cs2113t-t10-1/tp/master/docs/images/developerguide/ComponentInteraction.drawio.png)
 <br>
 The *Component Interaction Diagram* shows the inner workings of how each component in SplitLah interacts.
-The diagram depicts a scenario when a user attempts to create a session.
+The diagram depicts a scenario where a user attempts to create a session.
 
 
 
@@ -219,6 +219,15 @@ when the user invokes the `session /create` command.
 <br>
 <br>
 The general workflow of the `session /create` command is as follows:
+1. The user input provided is passed to `SplitLah`.
+2. `SplitLah` then parses the input by using methods in the `Parser` class to obtain a `SessionCreateCommand` object.
+3. A `SessionCreateCommand#run` method is then invoked to run the `session /create` command.
+4. Once the command starts to run, `SessionCreateCommand` class checks if there is an existing session with the same session name.
+5. If an existing session with the specified session name is found, a message indicating that another session exists with the same name is printed using `TextUi#printlnMessage`.
+6. `SessionCreateCommand` class create a new `Session` object using the session name, session date, and person list.
+7. The list of `Session` objects are managed by a `Profile` object, hence `Manager#getProfile#addSession` is called to store the new `Session` object in the `Profile` object.
+8. After the session is added to the `Profile` object, `Manager#saveProfile` is called to save the changes to the local storage file.
+9. The `SessionCreateCommand` class then prints a message indicating that a session has been successfully created.
 
 ### Remove a session
 **API reference:** [`SessionDeleteCommand.java`](https://github.com/AY2122S2-CS2113T-T10-1/tp/blob/master/src/main/java/seedu/splitlah/command/SessionDeleteCommand.java)
