@@ -57,11 +57,11 @@ If you can type fast, SplitLah can manage your outings faster than apps using a 
 <hr>
 
 ## How to use this user guide
-- For each feature that SplitLah supports, we refer it as commands.
-- We classify each command under 5 sections, [Session Management](#session-management), [Activity Management](#activity-management), 
+- Each feature that SplitLah supports is known as a command.
+- These commands are divided into five sections: [Session Management](#session-management), [Activity Management](#activity-management), 
 [Transaction Management](#transaction-management), [Group Management](#group-management) and [Miscellaneous](#miscellaneous).
-- Each command is explained in greater detail in each command section.
-- The format for each command and examples are encased within a `code block`, so that they can be copied directly into SplitLah if needed.
+- Each command has its own section in this guide explaining them in greater detail.
+- The format for each command is enclosed within a `code block`, so that they can be copied directly into SplitLah if needed.
   - Example: `help`
 - In each command: 
   - The blocks indicated with 💡 are important things to take note of when using the command.
@@ -137,8 +137,8 @@ Creates a session so that you can manage your group outings using SplitLah. <br>
 >- Each name in `[NAME1 NAME2 ...]` for a particular session should be unique.
 > 
 > **⚠️Warnings:**
->- When using `/pl` and `/gid` delimiters together, if there is a duplicated name in `/pl` and 
-   specified group with `/gid`. The duplicate name would be removed, storing only 1 instance of it.
+>- If you include a name in `[NAME1 NAME2 ...]` that already exists in the group specified by `[GROUP_ID]`,
+   only one instance of this person will be stored in the session.
 >- Example: Where the group specified by `/gid` consists of Alice and Bob and the arguments of `/pl` 
    includes Alice, only two names, Alice and Bob, would be saved.
 
