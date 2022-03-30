@@ -15,13 +15,13 @@ public class Good {
 
     public UnitGood assignUnitGood(
             String SKU, String name,
-           String description,
-           Float unitPrice,
-           String unitItem,
-           Boolean isUnitWhole,
-           Float baseArea,
-           Float volume,
-           Boolean isPerishable){
+            String description,
+            Float unitPrice,
+            String unitItem,
+            Boolean isUnitWhole,
+            Float baseArea,
+            Float volume,
+            Boolean isPerishable) {
         UnitGood newUnitGood = new UnitGood( SKU,
                 name, description, unitPrice, unitItem, isUnitWhole,baseArea, volume, isPerishable
         );
@@ -40,6 +40,7 @@ public class Good {
     public void setQuantity(int quantity) {
         this.quantity = (float)quantity;
     }
+
     public void setQuantity(Float quantity) {
         this.quantity = quantity;
     }
