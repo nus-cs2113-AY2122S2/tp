@@ -34,7 +34,6 @@ public class AddPersonCommand extends Command {
         logger.log(Level.INFO, String.format(LOG_ADDPERSONCMD_INFO, name, group));
     }
 
-    @Override
     public void execute() throws PlanITariumException {
         assert (name != null) : Constants.NAME_NOT_NULL;
         family.addPerson(group, name, isSilent);

@@ -56,7 +56,7 @@ public enum Category {
      * @return The string label for this enum category.
      */
     public static String getLabelForIndex(int index) {
-        return LABELS.get(index);
+        return LABELS.get(index - 1);
     }
 
     /**

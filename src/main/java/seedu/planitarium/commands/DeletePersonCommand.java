@@ -31,7 +31,6 @@ public class DeletePersonCommand extends Command {
         logger.log(Level.INFO, String.format(LOG_DELETEPERSONCMD_INFO, uid, group));
     }
 
-    @Override
     public void execute() throws PlanITariumException {
         assert (uid > 0) : Constants.USER_INDEX_NOT_VALID;
         assert (family != null) : Constants.FAMILY_NOT_NULL;

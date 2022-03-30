@@ -20,7 +20,6 @@ public class HelpCommand extends Command {
         logger.log(Level.INFO, LOG_HELP_INFO);
     }
 
-    @Override
     public void execute() {
         UI.printHelpMsg();
         logger.log(Level.INFO, LOG_EXECUTE_INFO);

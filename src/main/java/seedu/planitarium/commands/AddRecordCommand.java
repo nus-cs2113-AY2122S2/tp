@@ -51,7 +51,6 @@ public class AddRecordCommand extends Command {
         logger.log(Level.INFO, String.format(LOG_ADDRECORD_INFO, description, uid, group));
     }
 
-    @Override
     public void execute() throws PlanITariumException {
         assert (keyword != null) : Constants.KEYWORD_NOT_NULL;
         assert (userInput != null) : Constants.INPUT_NOT_NULL;

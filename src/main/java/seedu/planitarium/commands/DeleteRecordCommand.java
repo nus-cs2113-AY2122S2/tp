@@ -42,7 +42,6 @@ public class DeleteRecordCommand extends Command {
         logger.log(Level.INFO, String.format(LOG_DELETEREC_INFO, uid, group));
     }
 
-    @Override
     public void execute() throws PlanITariumException {
         assert (keyword != null) : Constants.KEYWORD_NOT_NULL;
         assert (userInput != null) : Constants.INPUT_NOT_NULL;
