@@ -16,7 +16,8 @@ import static seedu.duke.stubs.ItemStubs.ITEM_WHITEBOARD;
 
 public class CommandStubs {
 
-    public static final ItemList LIST_TO_SEARCH = generateStubSearchList(ITEM_PAPER_A4, ITEM_PAPER_A5, ITEM_MARKER, ITEM_WHITEBOARD);
+    public static final ItemList LIST_TO_SEARCH = generateStubSearchList(ITEM_PAPER_A4, ITEM_PAPER_A5, ITEM_MARKER,
+            ITEM_WHITEBOARD);
     public static final Set<String> RESULT_SEARCH_PAPER_NAME = generateSearchResult(ITEM_PAPER_A4, ITEM_PAPER_A5);
     public static final Set<String> RESULT_SEARCH_DRAW_DESCRIPTION = generateSearchResult(ITEM_MARKER, ITEM_WHITEBOARD);
     public static final Set<String> RESULT_SEARCH_PAPER_NAME_A4_DESCRIPTION = generateSearchResult(ITEM_PAPER_A4);

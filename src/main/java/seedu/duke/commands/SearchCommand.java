@@ -27,7 +27,7 @@ public class SearchCommand extends Command {
      * One of {@code name} or {@code description} must not be null.
      * @param name a name to search for
      * @param description a description to search for
-     * @throws
+     * @throws NullPointerException if the constructor is called when both name and description are null.
      */
     public SearchCommand(Optional<String> name, Optional<String> description) {
         this.name = name;
